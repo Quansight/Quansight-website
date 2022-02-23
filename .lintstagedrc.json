@@ -1,0 +1,4 @@
+{
+  "*.{ts,tsx}": ["prettier --write"],
+  "*.css": ["npm run affected:lint-styles"]
+}
