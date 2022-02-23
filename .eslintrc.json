@@ -30,6 +30,10 @@
       "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nrwl/nx/javascript"],
       "rules": {}
+    },
+    {
+      "files": ["*.css", "*.tsx", "*.jsx", ".html"],
+      "extends": ["plugin:tailwindcss/recommended"]
     }
   ]
 }

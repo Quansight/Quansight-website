@@ -48,6 +48,13 @@
       "options": {
         "lintFilePatterns": ["apps/consulting/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "stylelint": {
+      "executor": "nx-stylelint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/consulting/**/*.css"]
+      }
     }
   },
   "tags": []

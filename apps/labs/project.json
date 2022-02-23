@@ -48,6 +48,13 @@
       "options": {
         "lintFilePatterns": ["apps/labs/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "stylelint": {
+      "executor": "nx-stylelint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/labs/**/*.css"]
+      }
     }
   },
   "tags": []
