@@ -1,0 +1,18 @@
+query pageItems {
+  PageItems(per_page: 100) {
+      items {
+        content {
+          anchors
+        }
+        full_slug
+        first_published_at
+        is_startpage
+        name
+        path
+        position
+        parent_id
+        published_at
+        id
+      }
+  }
+}

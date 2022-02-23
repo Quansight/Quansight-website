@@ -1,0 +1,69 @@
+query pageItem($slug: ID!) {
+  PageItem(
+    id: $slug
+  ) {
+    alternates {
+      fullSlug
+      id
+      isFolder
+      name
+      parentId
+      published
+      slug
+    }
+    content {
+      _editable
+      _uid
+      body
+      component
+      title
+      background_image{
+            filename
+          }
+          background_video
+      gallery_images
+          heading
+          lead
+          title
+          meta_description
+          meta_keywords
+    }
+    created_at
+    default_full_slug
+    first_published_at
+    full_slug
+    group_id
+    id
+    is_startpage
+    lang
+    meta_data
+    name
+    parent_id
+    path
+    position
+    published_at
+    release_id
+    slug
+    sort_by_date
+    tag_list
+    translated_slugs {
+      lang
+      name
+      path
+    }
+    uuid
+  }
+  Links {
+    items {
+      id
+      isFolder
+      isStartpage
+      name
+      parentId
+      position
+      published
+      slug
+      uuid
+    }
+  }
+}
