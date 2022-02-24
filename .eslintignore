@@ -6,6 +6,3 @@ node_modules
 package.json
 package-lock.json
 .eslintcache
-tsconfig.base.json
-tsconfig.json
-eslintrc.json
