@@ -1,7 +1,5 @@
 query pageItem($slug: ID!) {
-  PageItem(
-    id: $slug
-  ) {
+  PageItem(id: $slug) {
     alternates {
       fullSlug
       id
@@ -17,16 +15,16 @@ query pageItem($slug: ID!) {
       body
       component
       title
-      background_image{
-            filename
-          }
-          background_video
+      background_image {
+        filename
+      }
+      background_video
       gallery_images
-          heading
-          lead
-          title
-          meta_description
-          meta_keywords
+      heading
+      lead
+      title
+      meta_description
+      meta_keywords
     }
     created_at
     default_full_slug

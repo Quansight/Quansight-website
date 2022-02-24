@@ -1,3 +1,6 @@
 {
-  "*.{ts,tsx}": ["prettier --write"]
+  "*.{js,json,css,scss,md,ts,html,graphql}": [
+    "nx format:write --uncommitted",
+    "nx affected:lint --base=develop --fix=true"
+  ]
 }

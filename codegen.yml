@@ -4,13 +4,13 @@ schema:
       headers:
         Token: '${STORYBLOK_PREVIEW_TOKEN}'
         Version: draft
-documents: "libs/shared/storyblok-sdk/src/api/**/*.graphql"
+documents: 'libs/shared/storyblok-sdk/src/api/**/*.graphql'
 generates:
   libs/shared/storyblok-sdk/src/api/types/graphql.ts:
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
   ./graphql.schema.json:
     plugins:
-      - "introspection"
+      - 'introspection'
