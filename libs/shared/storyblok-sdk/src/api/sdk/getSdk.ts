@@ -2,14 +2,16 @@ import {
   ApolloClient,
   ApolloQueryResult,
   NormalizedCacheObject,
-} from '@apollo/client'
-import * as Types from '../types/graphql'
+} from '@apollo/client';
+import * as Types from '../types/graphql';
+import { LinksQuery, PageItemQuery } from '../types/graphql';
 
 type SdkReturnType = {
   getPageItem: (
-    variables: Types.Exact<{ slug: string | string[] }>,
-  ) => Promise<ApolloQueryResult<any>>
-}
+    variables: Types.PageItemQueryVariables,
+  ) => Promise<ApolloQueryResult<PageItemQuery>>;
+  getLinks: () => Promise<ApolloQueryResult<LinksQuery>>;
+};
 
 export function getSdk(
   client: ApolloClient<NormalizedCacheObject>,
@@ -17,14 +19,20 @@ export function getSdk(
   return {
     getPageItem(
       variables: Types.PageItemQueryVariables,
-    ): Promise<ApolloQueryResult<any>> {
+    ): Promise<ApolloQueryResult<PageItemQuery>> {
       return client.query({
         fetchPolicy: 'cache-first',
         query: Types.PageItemDocument,
         variables,
-      })
+      });
     },
-  }
+    getLinks(): Promise<ApolloQueryResult<LinksQuery>> {
+      return client.query({
+        fetchPolicy: 'cache-first',
+        query: Types.LinksDocument,
+      });
+    },
+  };
 }
 
-export type Sdk = ReturnType<typeof getSdk>
+export type Sdk = ReturnType<typeof getSdk>;

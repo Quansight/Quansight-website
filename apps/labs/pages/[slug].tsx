@@ -1,23 +1,36 @@
-import React from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import React, { FC } from 'react';
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsResult,
+  InferGetStaticPropsType,
+} from 'next';
 import {
   apolloClient,
   getSdk,
+  PageItem,
   usePreviewMode,
   useStoryblok,
 } from '@quansight/shared/storyblok-sdk';
 
-import Page from '../components/Page';
+import Page from '../components/Page/Page';
+import { getPaths } from '../services/getPaths/getPaths';
+import { ISlugParams } from '../types/graphql/slug';
 
-const Container = ({ data, preview }) => {
+type TContainerProps = {
+  data: PageItem;
+  preview: boolean;
+};
+
+const Container: FC<TContainerProps> = ({ data, preview }) => {
   const previewMode = usePreviewMode(preview);
   console.log('previewMode:', previewMode);
 
   const story = useStoryblok(data, preview);
-
+  console.log('STORY', story);
   return (
     <>
-      {story?.content?.component === 'Page' && (
+      {story?.content?.component === 'page' && (
         <Page body={story?.content?.body} />
       )}
     </>
@@ -27,19 +40,23 @@ const Container = ({ data, preview }) => {
 const dataSdk = getSdk(apolloClient);
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // Just a sample link to existing page
-  return { paths: [{ params: { slug: 'kontakt' } }], fallback: false };
+  const result = await dataSdk.getLinks();
+
+  return {
+    paths: result ? getPaths(result?.data?.Links.items) : {},
+    fallback: false,
+  };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params: { slug },
-  preview = false,
-}) => {
+export const getStaticProps: GetStaticProps<
+  TContainerProps,
+  ISlugParams
+> = async ({ params: { slug }, preview = false }) => {
   const data = await dataSdk.getPageItem({ slug });
 
   return {
     props: {
-      data: data.data.PageItem,
+      data: data?.data.PageItem,
       preview,
     },
   };
