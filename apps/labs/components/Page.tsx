@@ -1,6 +1,6 @@
-import React from 'react'
-import SbEditable from 'storyblok-react'
-import Component from './blocks'
+import React from 'react';
+import SbEditable from 'storyblok-react';
+import Component from './blocks';
 
 const Page = ({ body = [] }) =>
   body ? (
@@ -9,6 +9,6 @@ const Page = ({ body = [] }) =>
         <Component blok={blok} key={blok._uid} />
       ))}
     </SbEditable>
-  ) : null
+  ) : null;
 
-export default Page
+export default Page;

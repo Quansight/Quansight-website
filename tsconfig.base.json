@@ -17,7 +17,7 @@
     "paths": {
       "@quansight/shared/storyblok-sdk": [
         "libs/shared/storyblok-sdk/src/index.ts"
-      ]      
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

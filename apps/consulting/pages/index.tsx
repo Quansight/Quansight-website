@@ -237,7 +237,7 @@ export function Index() {
             <div id="other-links">
               <a
                 id="nx-console"
-                className="button-pill rounded shadow"
+                className="rounded shadow button-pill"
                 href="https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console&utm_source=nx-project"
                 target="_blank"
                 rel="noreferrer"
@@ -293,7 +293,7 @@ export function Index() {
               </div>
               <a
                 id="nx-repo"
-                className="button-pill rounded shadow"
+                className="rounded shadow button-pill"
                 href="https://github.com/nrwl/nx?utm_source=nx-project"
                 target="_blank"
                 rel="noreferrer"
