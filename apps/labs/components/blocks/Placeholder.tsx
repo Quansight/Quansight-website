@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Placeholder = ({ componentName }) => (
   <div>
@@ -6,6 +6,6 @@ const Placeholder = ({ componentName }) => (
     {componentName}
     has not been created yet.
   </div>
-)
+);
 
-export default Placeholder
+export default Placeholder;
