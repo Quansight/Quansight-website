@@ -16,6 +16,7 @@ import {
 import Page from '../components/Page/Page';
 import { getPaths } from '../services/getPaths/getPaths';
 import { ISlugParams } from '../types/graphql/slug';
+import { isPageType } from '../services/contentTypes/isPageType';
 
 type TContainerProps = {
   data: PageItem;
@@ -23,14 +24,13 @@ type TContainerProps = {
 };
 
 const Container: FC<TContainerProps> = ({ data, preview }) => {
-  const previewMode = usePreviewMode(preview);
-  console.log('previewMode:', previewMode);
+  usePreviewMode(preview);
 
   const story = useStoryblok(data, preview);
-  console.log('STORY', story);
+
   return (
     <>
-      {story?.content?.component === 'page' && (
+      {isPageType(story?.content?.component) && (
         <Page body={story?.content?.body} />
       )}
     </>
@@ -40,10 +40,10 @@ const Container: FC<TContainerProps> = ({ data, preview }) => {
 const dataSdk = getSdk(apolloClient);
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const result = await dataSdk.getLinks();
+  const data = await dataSdk.getLinks();
 
   return {
-    paths: result ? getPaths(result?.data?.Links.items) : {},
+    paths: data ? getPaths(data?.data?.Links.items) : [],
     fallback: false,
   };
 };
@@ -53,7 +53,7 @@ export const getStaticProps: GetStaticProps<
   ISlugParams
 > = async ({ params: { slug }, preview = false }) => {
   const data = await dataSdk.getPageItem({ slug });
-
+  console.log(data)
   return {
     props: {
       data: data?.data.PageItem,

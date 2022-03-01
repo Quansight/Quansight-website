@@ -39,11 +39,8 @@ export const useStoryblok = (
     }
 
     if (event.storyId && !story) {
-      const page = await dataSdk.getPageItem({ slug: event.storyId });
-
-      const newStory = page;
-
-      setStory(newStory);
+      const newStory = await dataSdk.getPageItem({ slug: event.storyId });
+      setStory(newStory.data.PageItem);
     }
   };
 
@@ -67,7 +64,7 @@ export const useStoryblok = (
     }
   };
 
-  function addBridge(callback: unknown) {
+  function addBridge(callback: () => void) {
     const hasStoryblokBridgeScript = document.getElementById('storyblokBridge');
 
     if (!hasStoryblokBridgeScript) {
