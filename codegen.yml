@@ -11,6 +11,13 @@ generates:
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
+    config:
+      withResultType: true
+      avoidOptionals:
+        field: true
+        inputValue: true
+        object: true
+        defaultValue: true
   ./graphql.schema.json:
     plugins:
       - 'introspection'

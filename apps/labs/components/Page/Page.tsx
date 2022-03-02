@@ -7,6 +7,7 @@ type TPageProps = {
   body: TBlok[];
 };
 
+// @ts-ignore
 const Page: FC<TPageProps> = ({ body = [] }) => {
   return body.map((blok) => (
     <SbEditable content={blok} key={blok._uid}>

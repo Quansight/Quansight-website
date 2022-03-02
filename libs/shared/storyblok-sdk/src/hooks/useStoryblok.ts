@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { PageItem } from '../api/types/graphql';
-
-import { apolloClient } from '../api/sdk/clients/apolloClient';
-import { getSdk } from '../api/sdk/getSdk';
+import { Api } from '../api/sdk/api';
 
 import StoryblokClient from 'storyblok-js-client';
+import { StoryblokBridgeEvents } from '../types/storyblok';
 
 // @TODO fix types
 
@@ -16,36 +15,15 @@ const Storyblok = new StoryblokClient({
   },
 });
 
-export const dataSdk = getSdk(apolloClient);
-
 export const useStoryblok = (
   originalStory: PageItem,
   preview: boolean,
   locale?: string,
-): PageItem => {
-  const [story, setStory] = useState<PageItem>(originalStory);
+): PageItem | null => {
+  const [story, setStory] = useState<PageItem | null>(originalStory);
 
-  const handleInput = (event: any, callback: any) => {
-    callback(event);
-  };
-
-  const inputCallback = (event: any) => {
-    setStory(event.story);
-  };
-
-  const handleEnterEditMode = async (event: any) => {
-    if (!event.storyId) {
-      return;
-    }
-
-    if (event.storyId && !story) {
-      const newStory = await dataSdk.getPageItem({ slug: event.storyId });
-      setStory(newStory.data.PageItem);
-    }
-  };
-
-  const initEventListeners = () => {
-    const { StoryblokBridge } = window as any;
+  const initEventListeners = (): void => {
+    const { StoryblokBridge } = window as Window;
 
     if (typeof StoryblokBridge !== 'undefined') {
       const storyblokInstance = new StoryblokBridge({
@@ -53,18 +31,35 @@ export const useStoryblok = (
         language: locale,
       });
 
-      storyblokInstance.on(['change', 'published'], () => {
-        console.log('publish of change event');
-        window.location.reload();
-      });
-      storyblokInstance.on('input', (event: unknown) =>
-        handleInput(event, inputCallback),
+      storyblokInstance.on(
+        [StoryblokBridgeEvents.Change, StoryblokBridgeEvents.Published],
+        () => {
+          console.log('publish of change event');
+          window.location.reload();
+        },
       );
-      storyblokInstance.on('enterEditmode', handleEnterEditMode);
+
+      storyblokInstance.on(StoryblokBridgeEvents.Input, (event) => {
+        setStory(event.story as PageItem);
+      });
+
+      storyblokInstance.on(
+        StoryblokBridgeEvents.EnterEditmode,
+        async (event) => {
+          if (!event.storyId) {
+            return;
+          }
+
+          if (event.storyId && !story) {
+            const { data } = await Api.getPageItem({ slug: event.storyId });
+            setStory(data.PageItem);
+          }
+        },
+      );
     }
   };
 
-  function addBridge(callback: () => void) {
+  function addBridge(callback: () => void): void {
     const hasStoryblokBridgeScript = document.getElementById('storyblokBridge');
 
     if (!hasStoryblokBridgeScript) {
@@ -84,10 +79,12 @@ export const useStoryblok = (
     if (preview) {
       addBridge(initEventListeners);
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- TODO
 
   useEffect(() => {
-    !preview && setStory(originalStory);
+    if (!preview) {
+      setStory(originalStory);
+    }
   }, [originalStory, preview]);
 
   return story;

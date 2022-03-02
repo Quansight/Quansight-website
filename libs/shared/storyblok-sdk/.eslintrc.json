@@ -8,6 +8,9 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
+      "parserOptions": {
+        "project": ["libs/shared/storyblok-sdk/tsconfig.lib.json"]
+      },
       "rules": {}
     },
     {

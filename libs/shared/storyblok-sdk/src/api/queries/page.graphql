@@ -51,17 +51,17 @@ query pageItem($slug: ID!) {
     }
     uuid
   }
-  Links {
-    items {
-      id
-      isFolder
-      isStartpage
-      name
-      parentId
-      position
-      published
-      slug
-      uuid
-    }
-  }
+#  Links {
+#    items {
+#      id
+#      isFolder
+#      isStartpage
+#      name
+#      parentId
+#      position
+#      published
+#      slug
+#      uuid
+#    }
+#  }
 }

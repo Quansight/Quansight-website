@@ -1,16 +1,10 @@
 import React, { FC } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import {
-  GetStaticPaths,
-  GetStaticProps,
-  GetStaticPropsResult,
-  InferGetStaticPropsType,
-} from 'next';
-import {
-  apolloClient,
-  getSdk,
   PageItem,
   usePreviewMode,
   useStoryblok,
+  Api,
 } from '@quansight/shared/storyblok-sdk';
 
 import Page from '../components/Page/Page';
@@ -37,13 +31,10 @@ const Container: FC<TContainerProps> = ({ data, preview }) => {
   );
 };
 
-const dataSdk = getSdk(apolloClient);
-
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data = await dataSdk.getLinks();
-
+  const { data } = await Api.getLinks();
   return {
-    paths: data ? getPaths(data?.data?.Links.items) : [],
+    paths: getPaths(data?.Links.items),
     fallback: false,
   };
 };
@@ -52,11 +43,10 @@ export const getStaticProps: GetStaticProps<
   TContainerProps,
   ISlugParams
 > = async ({ params: { slug }, preview = false }) => {
-  const data = await dataSdk.getPageItem({ slug });
-  console.log(data)
+  const { data } = await Api.getPageItem({ slug });
   return {
     props: {
-      data: data?.data.PageItem,
+      data: data.PageItem,
       preview,
     },
   };

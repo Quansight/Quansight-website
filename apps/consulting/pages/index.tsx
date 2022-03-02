@@ -1,4 +1,4 @@
-export function Index() {
+export function Index(): JSX.Element {
   /*
    * Replace the elements below with your own.
    *
@@ -407,7 +407,7 @@ export function Index() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Index
+export default Index;
