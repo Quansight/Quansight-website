@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
@@ -11,7 +12,6 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>;
 };
-const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -428,42 +428,6 @@ export const LinksDocument = gql`
     }
   }
 `;
-
-/**
- * __useLinksQuery__
- *
- * To run a query within a React component, call `useLinksQuery` and pass it any options that fit your needs.
- * When your component renders, `useLinksQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useLinksQuery({
- *   variables: {
- *   },
- * });
- */
-export function useLinksQuery(
-  baseOptions?: Apollo.QueryHookOptions<LinksQuery, LinksQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<LinksQuery, LinksQueryVariables>(
-    LinksDocument,
-    options,
-  );
-}
-export function useLinksLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<LinksQuery, LinksQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<LinksQuery, LinksQueryVariables>(
-    LinksDocument,
-    options,
-  );
-}
-export type LinksQueryHookResult = ReturnType<typeof useLinksQuery>;
-export type LinksLazyQueryHookResult = ReturnType<typeof useLinksLazyQuery>;
 export type LinksQueryResult = Apollo.QueryResult<
   LinksQuery,
   LinksQueryVariables
@@ -514,48 +478,6 @@ export const PageItemDocument = gql`
     }
   }
 `;
-
-/**
- * __usePageItemQuery__
- *
- * To run a query within a React component, call `usePageItemQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageItemQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageItemQuery({
- *   variables: {
- *      slug: // value for 'slug'
- *   },
- * });
- */
-export function usePageItemQuery(
-  baseOptions: Apollo.QueryHookOptions<PageItemQuery, PageItemQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PageItemQuery, PageItemQueryVariables>(
-    PageItemDocument,
-    options,
-  );
-}
-export function usePageItemLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    PageItemQuery,
-    PageItemQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PageItemQuery, PageItemQueryVariables>(
-    PageItemDocument,
-    options,
-  );
-}
-export type PageItemQueryHookResult = ReturnType<typeof usePageItemQuery>;
-export type PageItemLazyQueryHookResult = ReturnType<
-  typeof usePageItemLazyQuery
->;
 export type PageItemQueryResult = Apollo.QueryResult<
   PageItemQuery,
   PageItemQueryVariables
@@ -577,50 +499,6 @@ export const PageItemsDocument = gql`
     }
   }
 `;
-
-/**
- * __usePageItemsQuery__
- *
- * To run a query within a React component, call `usePageItemsQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageItemsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageItemsQuery({
- *   variables: {
- *   },
- * });
- */
-export function usePageItemsQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    PageItemsQuery,
-    PageItemsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PageItemsQuery, PageItemsQueryVariables>(
-    PageItemsDocument,
-    options,
-  );
-}
-export function usePageItemsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    PageItemsQuery,
-    PageItemsQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PageItemsQuery, PageItemsQueryVariables>(
-    PageItemsDocument,
-    options,
-  );
-}
-export type PageItemsQueryHookResult = ReturnType<typeof usePageItemsQuery>;
-export type PageItemsLazyQueryHookResult = ReturnType<
-  typeof usePageItemsLazyQuery
->;
 export type PageItemsQueryResult = Apollo.QueryResult<
   PageItemsQuery,
   PageItemsQueryVariables

@@ -8,11 +8,14 @@ documents: 'libs/shared/storyblok-sdk/src/api/**/*.graphql'
 generates:
   libs/shared/storyblok-sdk/src/api/types/graphql.ts:
     plugins:
+      - add:
+          content: '/* eslint-disable @typescript-eslint/no-explicit-any */'
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
     config:
       withResultType: true
+      withHooks: false
       avoidOptionals:
         field: true
         inputValue: true
