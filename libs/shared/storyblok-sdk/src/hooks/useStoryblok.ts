@@ -3,9 +3,13 @@ import { PageItem } from '../api/types/graphql';
 import { Api } from '../api/sdk/api';
 
 import StoryblokClient from 'storyblok-js-client';
-import { StoryblokBridgeEvents } from '../types/storyblok';
+import { IStoryblokBridge, StoryblokBridgeEvents } from '../types/storyblok';
 
-// @TODO fix types
+interface CustomWindow extends Window {
+  StoryblokBridge: IStoryblokBridge;
+}
+
+declare const window: CustomWindow;
 
 const Storyblok = new StoryblokClient({
   accessToken: process.env['NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN'],
@@ -23,9 +27,9 @@ export const useStoryblok = (
   const [story, setStory] = useState<PageItem | null>(originalStory);
 
   const initEventListeners = (): void => {
-    const { StoryblokBridge } = window as Window;
+    const { StoryblokBridge } = window;
 
-    if (typeof StoryblokBridge !== 'undefined') {
+    if (StoryblokBridge) {
       const storyblokInstance = new StoryblokBridge({
         resolveRelations: [],
         language: locale,
