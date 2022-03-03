@@ -37,6 +37,7 @@ export function Index(): JSX.Element {
             </div>
             <div className="logo-container">
               <svg
+                aria-label="Logo"
                 fill="currentColor"
                 role="img"
                 viewBox="0 0 24 24"
