@@ -1,0 +1,32 @@
+version: 2
+mergeable:
+  - when: pull_request.*
+    validate:
+      - do: or
+        validate:
+          - do: title
+            must_include:
+              regex: '^(feat|docs|chore|fix|refactor|test|style|perf)(\(\w+\))?:.+$'
+              message: 'PR title needs to contain type'
+            must_exclude:
+              regex: "wip"
+          - do: title
+            must_include:
+              regex: 'Bump [^ ]* from [^ ]* to [^ ]*'
+              message: 'PR title needs to comply with dependency bump (dependabot)'
+      - do: commit
+        message:
+          regex: '^(feat|docs|chore|fix|refactor|test|style|perf)(\(\w+\))?:.+$'
+          message: 'Commit should match conventional commit convention'
+    pass:
+      - do: checks
+        status: 'success'
+        payload:
+          title: 'Mergeable Run have been Completed!'
+
+  - when: pull_request_review.*
+    validate:
+      - do: approvals
+        min:
+          count: 1
+          message: 'Pull request must have at least 1 approvals'
