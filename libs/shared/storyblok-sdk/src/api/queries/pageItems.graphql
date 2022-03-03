@@ -1,9 +1,6 @@
 query pageItems {
   PageItems(per_page: 100) {
     items {
-      content {
-        anchors
-      }
       full_slug
       first_published_at
       is_startpage

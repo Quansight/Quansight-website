@@ -1,29 +1,33 @@
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const isStoryblok =
-  typeof window !== 'undefined' && window.location.search.includes('_storyblok')
+  typeof window !== 'undefined' &&
+  window.location.search.includes('_storyblok');
 
-const isProduction = process.env['NODE_ENV'] === 'production'
+const isProduction = process.env['NODE_ENV'] === 'production';
 
-export const usePreviewMode = (isPreviewMode: boolean) => {
-  const { reload } = useRouter()
+export const usePreviewMode = (isPreviewMode: boolean): boolean => {
+  const { reload } = useRouter();
 
   useEffect(() => {
-    !isPreviewMode &&
+    if (
+      !isPreviewMode &&
       isStoryblok &&
       isProduction &&
-      process.env['NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN'] &&
+      process.env['NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN']
+    ) {
       fetch(
         `/api/enter-preview?token=${process.env['NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN']}`,
-      ).then(reload)
-  }, [])
+      ).then(reload);
+    }
+  }, [isPreviewMode, reload]);
 
   useEffect(() => {
     if (isPreviewMode && !isStoryblok) {
-      fetch('/api/exit-preview').then(reload)
+      fetch('/api/exit-preview').then(reload);
     }
-  })
+  });
 
-  return isPreviewMode
-}
+  return isPreviewMode;
+};

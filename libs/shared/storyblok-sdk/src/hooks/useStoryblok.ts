@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react'
-import { PageItem } from '../api/types/graphql'
+import { useEffect, useState } from 'react';
+import { PageItem } from '../api/types/graphql';
+import { Api } from '../api/sdk/api';
 
-import { apolloClient } from '../api/sdk/clients/apolloClient'
-import { getSdk } from '../api/sdk/getSdk'
+import StoryblokClient from 'storyblok-js-client';
+import { IStoryblokBridge, StoryblokBridgeEvents } from '../types/storyblok';
 
-import StoryblokClient from 'storyblok-js-client'
+interface CustomWindow extends Window {
+  StoryblokBridge: IStoryblokBridge;
+}
 
-// @TODO fix types
+declare const window: CustomWindow;
 
 const Storyblok = new StoryblokClient({
   accessToken: process.env['NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN'],
@@ -14,86 +17,81 @@ const Storyblok = new StoryblokClient({
     clear: 'auto',
     type: 'memory',
   },
-})
-
-export const dataSdk = getSdk(apolloClient)
+});
 
 export const useStoryblok = (
   originalStory: PageItem,
   preview: boolean,
   locale?: string,
-): any => {
-  const [story, setStory] = useState<PageItem>(originalStory)
+): PageItem | null => {
+  const [story, setStory] = useState<PageItem | null>(originalStory);
 
-  const handleInput = (event: any, callback: any) => {
-    callback(event)
-  }
+  const initEventListeners = (): void => {
+    const { StoryblokBridge } = window;
 
-  const inputCallback = (event: any) => {
-    setStory(event.story)
-  }
-
-  const handleEnterEditMode = async (event: any) => {
-    if (!event.storyId) {
-      return
-    }
-
-    if (event.storyId && !story) {
-      const page = await dataSdk.getPageItem({ slug: event.storyId })
-
-      const newStory = page
-
-      setStory(newStory)
-    }
-  }
-
-  const initEventListeners = () => {
-    const { StoryblokBridge } = window as any
-
-    if (typeof StoryblokBridge !== 'undefined') {
+    if (StoryblokBridge) {
       const storyblokInstance = new StoryblokBridge({
         resolveRelations: [],
         language: locale,
-      })
+      });
 
-      storyblokInstance.on(['change', 'published'], () => {
-        console.log('publish of change event')
-        window.location.reload()
-      })
-      storyblokInstance.on('input', (event: unknown) =>
-        handleInput(event, inputCallback),
-      )
-      storyblokInstance.on('enterEditmode', handleEnterEditMode)
+      storyblokInstance.on(
+        [StoryblokBridgeEvents.Change, StoryblokBridgeEvents.Published],
+        () => {
+          console.log('publish of change event');
+          window.location.reload();
+        },
+      );
+
+      storyblokInstance.on(StoryblokBridgeEvents.Input, (event) => {
+        setStory(event.story as PageItem);
+      });
+
+      storyblokInstance.on(
+        StoryblokBridgeEvents.EnterEditmode,
+        async (event) => {
+          if (!event.storyId) {
+            return;
+          }
+
+          if (event.storyId && !story) {
+            const { data } = await Api.getPageItem({ slug: event.storyId });
+            setStory(data.PageItem);
+          }
+        },
+      );
     }
-  }
+  };
 
-  function addBridge(callback: unknown) {
-    const hasStoryblokBridgeScript = document.getElementById('storyblokBridge')
+  function addBridge(callback: () => void): void {
+    const hasStoryblokBridgeScript = document.getElementById('storyblokBridge');
 
     if (!hasStoryblokBridgeScript) {
-      const script = document.createElement('script')
-      script.src = '//app.storyblok.com/f/storyblok-v2-latest.js'
-      script.id = 'storyblokBridge'
-      document.body.appendChild(script)
+      const script = document.createElement('script');
+      script.src = '//app.storyblok.com/f/storyblok-v2-latest.js';
+      script.id = 'storyblokBridge';
+      document.body.appendChild(script);
       script.onload = () => {
-        callback()
-      }
+        callback();
+      };
     } else {
-      callback()
+      callback();
     }
   }
 
   useEffect(() => {
     if (preview) {
-      addBridge(initEventListeners)
+      addBridge(initEventListeners);
     }
-  }, [])
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- TODO
 
   useEffect(() => {
-    !preview && setStory(originalStory)
-  }, [originalStory, preview])
+    if (!preview) {
+      setStory(originalStory);
+    }
+  }, [originalStory, preview]);
 
-  return story
-}
+  return story;
+};
 
-export default Storyblok
+export default Storyblok;
