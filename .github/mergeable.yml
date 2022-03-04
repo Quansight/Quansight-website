@@ -12,7 +12,7 @@ mergeable:
               regex: "wip"
           - do: title
             must_include:
-              regex: 'Bump [^ ]* from [^ ]* to [^ ]*'
+              regex: 'bump [^ ]* from [^ ]* to [^ ]*'
               message: 'PR title needs to comply with dependency bump (dependabot)'
       - do: commit
         message:
