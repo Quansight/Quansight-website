@@ -1,6 +1,7 @@
 version: 2
 mergeable:
-  - when: pull_request.*
+  - when: pull_request.*, pull_request_review.*
+    name: 'PR title check'
     validate:
       - do: or
         validate:
@@ -20,7 +21,8 @@ mergeable:
         payload:
           title: 'Mergeable Run have been Completed!'
 
-  - when: pull_request_review.*
+  - when: pull_request.*, pull_request_review.*
+    name: 'Approval check'
     validate:
       - do: approvals
         min:
