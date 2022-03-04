@@ -1,30 +1,28 @@
 version: 2
 mergeable:
-  - when: pull_request.*
+  - when: pull_request.*, pull_request_review.*
+    name: 'PR title check'
     validate:
       - do: or
         validate:
           - do: title
             must_include:
-              regex: '^(feat|docs|chore|fix|refactor|test|style|perf)(\(\w+\))?:.+$'
+              regex: '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z -]+\))?: [\w ]+$'
               message: 'PR title needs to contain type'
             must_exclude:
               regex: "wip"
           - do: title
             must_include:
-              regex: 'Bump [^ ]* from [^ ]* to [^ ]*'
+              regex: 'bump [^ ]* from [^ ]* to [^ ]*'
               message: 'PR title needs to comply with dependency bump (dependabot)'
-      - do: commit
-        message:
-          regex: '^(feat|docs|chore|fix|refactor|test|style|perf)(\(\w+\))?:.+$'
-          message: 'Commit should match conventional commit convention'
     pass:
       - do: checks
         status: 'success'
         payload:
           title: 'Mergeable Run have been Completed!'
 
-  - when: pull_request_review.*
+  - when: pull_request.*, pull_request_review.*
+    name: 'Approval check'
     validate:
       - do: approvals
         min:
