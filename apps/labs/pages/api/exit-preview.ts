@@ -1,6 +1,7 @@
-import { NextApiHandler } from 'next';
+import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
+import { ServerResponse } from 'http';
 
-const handler: NextApiHandler = (req, res) => {
+const handler = (req: NextApiRequest, res: NextApiResponse): ServerResponse => {
   res.clearPreviewData();
   return res.status(200).end();
 };
