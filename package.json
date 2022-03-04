@@ -46,7 +46,7 @@
     "@nrwl/react": "13.8.3",
     "@nrwl/tao": "13.8.3",
     "@nrwl/web": "13.8.3",
-    "@nrwl/workspace": "13.8.3",
+    "@nrwl/workspace": "13.8.4",
     "@testing-library/react": "12.1.2",
     "@testing-library/react-hooks": "7.0.2",
     "@types/jest": "27.0.2",
