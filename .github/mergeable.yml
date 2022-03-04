@@ -6,7 +6,7 @@ mergeable:
         validate:
           - do: title
             must_include:
-              regex: '^(feat|docs|chore|fix|refactor|test|style|perf)(\(\w+\))?:.+$'
+              regex: '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z -]+\))?: [\w ]+$'
               message: 'PR title needs to contain type'
             must_exclude:
               regex: "wip"
@@ -14,10 +14,6 @@ mergeable:
             must_include:
               regex: 'bump [^ ]* from [^ ]* to [^ ]*'
               message: 'PR title needs to comply with dependency bump (dependabot)'
-      - do: commit
-        message:
-          regex: '^(feat|docs|chore|fix|refactor|test|style|perf)(\(\w+\))?:.+$'
-          message: 'Commit should match conventional commit convention'
     pass:
       - do: checks
         status: 'success'
