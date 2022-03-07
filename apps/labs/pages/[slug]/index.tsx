@@ -7,10 +7,10 @@ import {
   Api,
 } from '@quansight/shared/storyblok-sdk';
 
-import Page from '../components/Page/Page';
-import { getPaths } from '../services/getPaths/getPaths';
-import { ISlugParams } from '../types/graphql/slug';
-import { isPageType } from '../services/contentTypes/isPageType';
+import Page from '../../components/Page/Page';
+import { getPaths } from '../../services/getPaths/getPaths';
+import { ISlugParams } from '../../types/graphql/slug';
+import { isPageType } from '../../services/contentTypes/isPageType';
 
 type TContainerProps = {
   data: PageItem;
@@ -33,6 +33,7 @@ const Container: FC<TContainerProps> = ({ data, preview }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await Api.getLinks();
+  console.log(getPaths(data?.Links.items));
   return {
     paths: getPaths(data?.Links.items),
     fallback: false,

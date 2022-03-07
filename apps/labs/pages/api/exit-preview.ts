@@ -1,4 +1,4 @@
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { ServerResponse } from 'http';
 
 const handler = (req: NextApiRequest, res: NextApiResponse): ServerResponse => {

@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 export function Index(): JSX.Element {
   /*
    * Replace the elements below with your own.
