@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Placeholder = ({ componentName }): JSX.Element => (
+const Placeholder = ({ componentName }: { componentName?: string }): JSX.Element => (
   <div>
     The component
     {componentName}
