@@ -19,7 +19,7 @@
   },
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.5.9",
+    "@apollo/client": "^3.5.10",
     "@nrwl/next": "13.8.3",
     "axios": "^0.21.4",
     "core-js": "^3.6.5",
