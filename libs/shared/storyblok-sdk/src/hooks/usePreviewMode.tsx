@@ -18,7 +18,7 @@ export const usePreviewMode = (isPreviewMode: boolean): boolean => {
       process.env['NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN']
     ) {
       fetch(
-        `/api/enter-preview?token=${process.env.NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN}`,
+        `/api/enter-preview?token=${process.env['NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN']}`,
       ).then(reload);
     }
   }, [isPreviewMode, reload]);

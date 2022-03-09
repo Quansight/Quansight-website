@@ -3,5 +3,5 @@
     "nx format:write --uncommitted",
     "nx affected:lint --base=develop --fix=true"
   ],
-  ".{css}": ["nx affected:stylelint --base=develop --fix=true"]
+  ".css": ["nx affected:stylelint --base=develop --fix=true"]
 }
