@@ -42,7 +42,7 @@
     "@graphql-codegen/typescript-react-apollo": "^3.2.8",
     "@nrwl/cli": "13.8.3",
     "@nrwl/cypress": "13.8.3",
-    "@nrwl/eslint-plugin-nx": "13.8.4",
+    "@nrwl/eslint-plugin-nx": "13.8.5",
     "@nrwl/jest": "13.8.3",
     "@nrwl/linter": "13.8.3",
     "@nrwl/react": "13.8.3",
