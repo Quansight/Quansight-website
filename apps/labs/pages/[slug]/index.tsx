@@ -7,10 +7,10 @@ import {
   Api,
 } from '@quansight/shared/storyblok-sdk';
 
-import Page from '../components/Page/Page';
-import { getPaths } from '../services/getPaths/getPaths';
-import { ISlugParams } from '../types/graphql/slug';
-import { isPageType } from '../services/contentTypes/isPageType';
+import Page from '../../components/Page/Page';
+import { getPaths } from '../../services/getPaths/getPaths';
+import { ISlugParams } from '../../types/graphql/slug';
+import { isPageType } from '../../services/contentTypes/isPageType';
 
 type TContainerProps = {
   data: PageItem;

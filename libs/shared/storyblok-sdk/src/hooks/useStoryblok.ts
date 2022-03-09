@@ -12,7 +12,7 @@ interface CustomWindow extends Window {
 declare const window: CustomWindow;
 
 const Storyblok = new StoryblokClient({
-  accessToken: process.env.NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN,
+  accessToken: process.env['NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN'],
   cache: {
     clear: 'auto',
     type: 'memory',
@@ -83,7 +83,7 @@ export const useStoryblok = (
     if (preview) {
       addBridge(initEventListeners);
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- TODO
+  }); // eslint-disable-line react-hooks/exhaustive-deps -- TODO
 
   useEffect(() => {
     if (!preview) {
