@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import SbEditable from 'storyblok-react';
 import { BlokProvider } from '../BlokProvider/BlokProvider';
-import { TBlok } from '../../types/storyblok/blok';
+import { TConsultingBlok } from '../BlokProvider/types';
 
 type TPageProps = {
-  body: TBlok[];
+  body: TConsultingBlok[];
 };
 
 // @ts-ignore
