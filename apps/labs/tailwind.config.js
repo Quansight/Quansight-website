@@ -1,5 +1,6 @@
-const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind')
-const { join } = require('path')
+const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind');
+const { join } = require('path');
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   content: [
@@ -10,4 +11,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+};
