@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 
 export type TButtonLinkProps = {
   type: 'bordered' | 'full',
