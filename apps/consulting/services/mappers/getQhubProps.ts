@@ -7,4 +7,6 @@ export const getQhubProps = (blok: TBlok<TQhubProps>): TQhubProps => ({
   image: blok.image,
   title: blok.title,
   text: blok.text,
+  btn: blok.btn,
+  url: blok.url,
 });
