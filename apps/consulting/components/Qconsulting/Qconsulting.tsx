@@ -9,7 +9,7 @@ import { TConsultingBlok } from '../BlokProvider/types';
 export type TQconsultingProps = {
   title: string;
   description: TConsultingBlok<TQconsultingParagraphProps>[];
-  grid: TConsultingBlok<TQconsultingBtnProps | TQconsultingItemProps>[];
+  grid: TConsultingBlok<TQconsultingItemProps | TQconsultingBtnProps>[];
 };
 
 export const Qconsulting: FC<TQconsultingProps> = ({
@@ -18,9 +18,9 @@ export const Qconsulting: FC<TQconsultingProps> = ({
   grid,
 }) => {
   return (
-    <section className="py-16 px-5 text-white bg-[#452393] lg:py-[12rem] lg:px-10">
-      <div className="relative mx-auto max-w-[144rem] lg:text-center">
-        <div className="hidden absolute top-[-5%] left-0 lg:block">
+    <section className="text-white bg-[#452393]">
+      <div className="relative py-24 px-[2.4rem] mx-auto max-w-[144rem] lg:py-48 lg:px-16 lg:text-center xl:px-48 xl:pt-[6.8rem] xl:pb-40">
+        {/* <div className="hidden absolute top-[-5%] left-0 lg:block xl:top-[10%] xl:left-[3%]">
           <Image
             src="/qconsulting/qconsulting-header-icon.svg"
             alt="header icon"
@@ -28,10 +28,18 @@ export const Qconsulting: FC<TQconsultingProps> = ({
             height={125}
           />
         </div>
+        <div className="hidden absolute top-[95%] right-0 lg:block xl:top-[85%] xl:right-[-5%]">
+          <Image
+            src="/qconsulting/qconsulting-btn-icon.svg"
+            alt="button icon"
+            width={371}
+            height={225}
+          />
+        </div> */}
         <h2 className="text-[4rem] font-extrabold tracking-[0.02em] leading-[5rem] lg:text-[4.8rem] font-heading">
           {title}
         </h2>
-        <div className="flex flex-col gap-8 mt-7 mr-[5.5rem] mb-[4.3rem] lg:gap-12 lg:mx-[13rem] lg:mt-[7rem] lg:mb-[4.8rem]">
+        <div className="flex flex-col gap-8 mt-[2.8rem] mr-[5.5rem] mb-[4.3rem] lg:gap-12 lg:mx-36 lg:mt-28 lg:mb-[6rem] xl:mt-[3.6rem] xl:mb-[11.6rem]">
           {description.map((blok) => (
             <BlokProvider blok={blok} key={blok._uid} />
           ))}
@@ -40,14 +48,6 @@ export const Qconsulting: FC<TQconsultingProps> = ({
           {grid.map((blok) => (
             <BlokProvider blok={blok} key={blok._uid} />
           ))}
-        </div>
-        <div className="hidden absolute top-[95%] right-0 lg:block">
-          <Image
-            src="/qconsulting/qconsulting-btn-icon.svg"
-            alt="button icon"
-            width={371}
-            height={225}
-          />
         </div>
       </div>
     </section>

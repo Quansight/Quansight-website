@@ -14,20 +14,20 @@ export const QconsultingBtn: FC<TQconsultingBtnProps> = ({
   link: { cached_url },
 }) => {
   return (
-    <div className="mx-auto mt-[6.5rem] lg:flex lg:justify-center lg:items-center lg:mx-0 lg:mt-0 lg:bg-[#99C941]">
-      <div className="flex gap-3 justify-center items-center py-4 px-10 border-2 lg:bg-[#452393] lg:border-none">
+    <div className="z-10 mx-auto mt-[6.5rem] lg:flex lg:justify-center lg:items-center lg:mx-0 lg:mt-0 lg:bg-[#99C941]">
+      <div className="border-2 lg:bg-[#452393] lg:border-none">
         <Link href={`/${cached_url}`}>
-          <a className="text-[1.6rem] font-bold leading-[3.7rem]">
+          <a className="flex gap-3 justify-center items-center py-4 px-10 text-[1.6rem] font-bold leading-[3.7rem] ">
             {link_title}
+            <Image
+              src="/qconsulting/qconsulting-btn-arrow.svg"
+              alt="arrow icon"
+              width={12}
+              height={17}
+              priority
+            />
           </a>
         </Link>
-        <Image
-          src="/qconsulting/qconsulting-btn-arrow.svg"
-          alt="arrow icon"
-          width={12}
-          height={17}
-          priority
-        />
       </div>
     </div>
   );
