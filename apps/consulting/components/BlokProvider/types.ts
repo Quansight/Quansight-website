@@ -3,7 +3,7 @@ import { TFeatureProps } from '../Feature/Feature';
 import { TTeaserProps } from '../Teaser/Teaser';
 
 export enum ComponentType {
-  Teaser = 'teaser',
+  Teaser = 'Teaser',
   Feature = 'feature',
   Grid = 'grid',
 }

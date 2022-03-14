@@ -1,10 +1,18 @@
 import { FC } from 'react';
 
+export type TStoryblokLinkProps = {
+  id: number,
+  url: string
+  linktype: 'url',
+  fieldtype: 'multilink',
+  cashed_url?: string
+}
+
 export type TButtonLinkProps = {
   type: 'bordered' | 'full',
   color: string,
   text: string,
-  link: string
+  link: TStoryblokLinkProps
 }
 
 const variantStyles = {
@@ -16,7 +24,7 @@ const variantStyles = {
 
 export const ButtonLink: FC<TButtonLinkProps> = ({ type, color, text, link }) => (
   <a 
-    href={link} 
+    href={link.url} 
     className={`
       flex items-center justify-start w-fit px-9 py-3 font-bold text-base
       ${variantStyles[type]} ${variantStyles[color]}

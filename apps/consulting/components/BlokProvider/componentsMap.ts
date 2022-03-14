@@ -1,4 +1,5 @@
 import { ComponentType } from './types';
+
 import { Feature } from '../Feature/Feature';
 import { Teaser } from '../Teaser/Teaser';
 
