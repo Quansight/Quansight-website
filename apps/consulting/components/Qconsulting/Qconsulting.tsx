@@ -44,7 +44,7 @@ export const Qconsulting: FC<TQconsultingProps> = ({
             <BlokProvider blok={blok} key={blok._uid} />
           ))}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-[0.5px] sm:bg-white">
+        <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-[0.5px] sm:bg-white xl:gap-[1px]">
           {grid.map((blok) => (
             <BlokProvider blok={blok} key={blok._uid} />
           ))}
