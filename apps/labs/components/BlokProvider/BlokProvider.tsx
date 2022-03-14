@@ -1,17 +1,16 @@
 import React, { FC } from 'react';
 import Placeholder from '../Placeholder/Placeholder';
-import { TBlok } from '../../types/storyblok/blok';
-import { blokMap } from '../../constants/blokMap';
-import { getPropsByType } from '../../services/getPropsByType/getPropsByType';
+import { getPropsByType } from './utils/getPropsByType';
+import { componentsMap } from './componentsMap';
+import { TLabsBlok } from './types';
 
 export type TBlokProviderProps = {
-  blok: TBlok;
+  blok: TLabsBlok;
 };
 
 export const BlokProvider: FC<TBlokProviderProps> = ({ blok }) => {
-  if (blokMap[blok.component]) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- TODO
-    const Component = blokMap[blok.component];
+  if (componentsMap[blok.component]) {
+    const Component = componentsMap[blok.component];
     const componentProps = getPropsByType(blok);
     return <Component {...componentProps} />;
   }
