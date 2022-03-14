@@ -3,10 +3,12 @@ import { getTeaserProps } from '../mappers/getTeaserProps';
 import { getFeatureProps } from '../mappers/getFeatureProps';
 import { getQconsultingProps } from '../mappers/getQconsultingProps';
 import { getQconsultingItemProps } from '../mappers/getQconsultingItemProps';
+import { getQconsultingBtnProps } from '../mappers/getQconsultingBtnProps';
 import { TTeaserProps } from '../../Teaser/Teaser';
 import { TFeatureProps } from '../../Feature/Feature';
 import { TQconsultingProps } from '../../Qconsulting/Qconsulting';
 import { TQconsultingItemProps } from '../../QconsultingItem/QconsultingItem';
+import { TQconsultingBtnProps } from '../../QconsultingBtn/QconsultingBtn';
 
 export const getPropsByType = (blok: TConsultingBlok): TBlokComponentProps => {
   return (
@@ -22,6 +24,9 @@ export const getPropsByType = (blok: TConsultingBlok): TBlokComponentProps => {
       ),
       [ComponentType.QconsultingItem]: getQconsultingItemProps(
         blok as TConsultingBlok<TQconsultingItemProps>,
+      ),
+      [ComponentType.QconsultingBtn]: getQconsultingBtnProps(
+        blok as TConsultingBlok<TQconsultingBtnProps>,
       ),
     }[blok.component] || null
   );

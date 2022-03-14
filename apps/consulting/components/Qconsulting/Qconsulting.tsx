@@ -1,12 +1,15 @@
 import { FC } from 'react';
 import { BlokProvider } from '../BlokProvider/BlokProvider';
 import { TQconsultingItemProps } from '../QconsultingItem/QconsultingItem';
+import { TQconsultingBtnProps } from '../QconsultingBtn/QconsultingBtn';
 import { TConsultingBlok } from '../BlokProvider/types';
 
 export type TQconsultingProps = {
   title: string;
   description: string;
-  grid: TConsultingBlok<TQconsultingItemProps>[];
+  grid:
+    | TConsultingBlok<TQconsultingItemProps>[]
+    | TConsultingBlok<TQconsultingBtnProps>[];
 };
 
 export const Qconsulting: FC<TQconsultingProps> = ({
