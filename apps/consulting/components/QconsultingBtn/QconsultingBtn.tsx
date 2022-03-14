@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { FC } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export type TQconsultingBtnProps = {
   link_title: string;
@@ -13,10 +14,17 @@ export const QconsultingBtn: FC<TQconsultingBtnProps> = ({
   link: { cached_url },
 }) => {
   return (
-    <div>
+    <div className="flex gap-3 justify-center items-center py-4 px-10 mx-auto mt-[6.5rem] border-2">
       <Link href={`/${cached_url}`}>
-        <a>{link_title}</a>
+        <a className="text-[1.6rem] font-bold leading-[3.7rem]">{link_title}</a>
       </Link>
+      <Image
+        src="/qconsulting/qconsultin-btn-arrow.svg"
+        alt="arrow icon"
+        width={12}
+        height={17}
+        priority
+      />
     </div>
   );
 };

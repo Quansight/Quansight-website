@@ -4,11 +4,13 @@ import { getFeatureProps } from '../mappers/getFeatureProps';
 import { getQconsultingProps } from '../mappers/getQconsultingProps';
 import { getQconsultingItemProps } from '../mappers/getQconsultingItemProps';
 import { getQconsultingBtnProps } from '../mappers/getQconsultingBtnProps';
+import { getQconsultingParagraphProps } from '../mappers/getQconsultingParagraphProps';
 import { TTeaserProps } from '../../Teaser/Teaser';
 import { TFeatureProps } from '../../Feature/Feature';
 import { TQconsultingProps } from '../../Qconsulting/Qconsulting';
 import { TQconsultingItemProps } from '../../QconsultingItem/QconsultingItem';
 import { TQconsultingBtnProps } from '../../QconsultingBtn/QconsultingBtn';
+import { TQconsultingParagraphProps } from '../../QconsultingParagraph/QconsultingParagraph';
 
 export const getPropsByType = (blok: TConsultingBlok): TBlokComponentProps => {
   return (
@@ -27,6 +29,9 @@ export const getPropsByType = (blok: TConsultingBlok): TBlokComponentProps => {
       ),
       [ComponentType.QconsultingBtn]: getQconsultingBtnProps(
         blok as TConsultingBlok<TQconsultingBtnProps>,
+      ),
+      [ComponentType.QconsultingParagraph]: getQconsultingParagraphProps(
+        blok as TConsultingBlok<TQconsultingParagraphProps>,
       ),
     }[blok.component] || null
   );
