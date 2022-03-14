@@ -6,4 +6,5 @@ export const getQconsultingProps = (
 ): TQconsultingProps => ({
   title: blok.title,
   description: blok.description,
+  grid: blok.grid,
 });
