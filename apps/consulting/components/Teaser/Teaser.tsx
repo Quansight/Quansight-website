@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import clsx from 'clsx';
 
-import { Picture } from '../Picture';
-import { ButtonLink } from '../ButtonLink';
+import { Picture } from '../Picture/Picture';
+import { ButtonLink } from '../ButtonLink/ButtonLink';
 
-import { TTeaserProps } from '../../types/components/Teaser';
+import { TTeaserProps } from './types';
 
 export const Teaser: FC<TTeaserProps> = ({ color, image, title, text, btn, link }) => (
   <div className={`relative max-w-layout mx-auto lg:my-20`}>

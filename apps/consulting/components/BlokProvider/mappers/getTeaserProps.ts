@@ -1,5 +1,5 @@
 import { TConsultingBlok } from '../types';
-import { TTeaserProps } from '../../../types/components/Teaser';
+import { TTeaserProps } from '../../Teaser/types';
 
 export const getTeaserProps = (
   blok: TConsultingBlok<TTeaserProps>,

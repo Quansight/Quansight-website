@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import clsx from 'clsx';
 
-import { TButtonLinkProps } from '../types/components/ButtonLink';
+import { TButtonLinkProps } from './types';
 
 export const ButtonLink: FC<TButtonLinkProps> = ({ isBordered, isTriangle, color, text, link }) => (
   <a 

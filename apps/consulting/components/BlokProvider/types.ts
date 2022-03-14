@@ -1,16 +1,18 @@
 import { TypeValuesUnion, TBlok } from '@quansight/shared/ui-components';
-import { TFeatureProps } from '../Feature/Feature';
-import { TTeaserProps } from '../Teaser/Teaser';
+
+import { TTeaserProps } from '../Teaser/types';
 
 export enum ComponentType {
   Teaser = 'Teaser',
-  Feature = 'feature',
   Grid = 'grid',
 }
 
 type TBlokComponentPropsMap = {
   [ComponentType.Teaser]: TTeaserProps;
-  [ComponentType.Feature]: TFeatureProps;
+};
+
+export type TBlokProviderProps = {
+  blok: TConsultingBlok;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

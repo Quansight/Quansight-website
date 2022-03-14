@@ -1,5 +1,5 @@
-import { TImageProps } from './Picture';
-import { TLinkProps } from './ButtonLink';
+import { TImageProps } from '../Picture/types';
+import { TLinkProps } from '../ButtonLink/types';
 
 export type TTeaserProps = {
   color: string;

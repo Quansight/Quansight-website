@@ -1,12 +1,10 @@
 import React, { FC } from 'react';
-import Placeholder from '../Placeholder/Placeholder';
 import { getPropsByType } from './utils/getPropsByType';
 import { componentsMap } from './componentsMap';
-import { TConsultingBlok } from './types';
 
-export type TBlokProviderProps = {
-  blok: TConsultingBlok;
-};
+import Placeholder from '../Placeholder/Placeholder';
+
+import { TBlokProviderProps } from './types';
 
 export const BlokProvider: FC<TBlokProviderProps> = ({ blok }) => {
   if (componentsMap[blok.component]) {
