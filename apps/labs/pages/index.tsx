@@ -1,8 +1,7 @@
-import React, { FC } from 'react';
-
+import { FC } from 'react';
 import { Layout } from '@quansight/shared/ui-components';
 
-export const Index: FC<TContainerProps> = () => {
+export const Index: FC = () => {
   return (
     <Layout>
       <div>
