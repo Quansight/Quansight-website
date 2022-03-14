@@ -9,9 +9,10 @@ import { TTeaserProps } from '../../types/components/Teaser';
 export const Teaser: FC<TTeaserProps> = ({ color, image, title, text, btn, link }) => (
   <div className={`relative max-w-layout mx-auto lg:my-20`}>
     <div className={clsx(
-      `px-8 py-20 md:pr-52 md:w-3/4 lg:pt-28 lg:pl-32 lg:pr-[340px] xl:pr-[420px]`,
-      `bg-${color}`,
-      color === 'green' ? 'text-black' : 'text-white',
+      'px-8 py-20 md:pr-52 md:w-3/4 lg:pt-28 lg:pl-32 lg:pr-[340px] xl:pr-[420px]',
+      color === 'green' && 'bg-green text-black',
+      color === 'violet' && 'bg-violet text-white',
+      color === 'pink' && 'bg-pink text-white'
     )}>
       <p className={`w-full max-w-[440px] mb-14 font-extrabold text-4xl md:mb-7`}>
         {title}
