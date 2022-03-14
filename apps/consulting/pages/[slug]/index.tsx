@@ -1,16 +1,13 @@
 import React, { FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import {
-  PageItem,
-  usePreviewMode,
-  useStoryblok,
-  Api,
-} from '@quansight/shared/storyblok-sdk';
+import { PageItem, Api } from '@quansight/shared/storyblok-sdk';
+import { Page } from '@quansight/shared/ui-components';
 
-import Page from '../components/Page/Page';
-import { getPaths } from '../services/getPaths/getPaths';
-import { ISlugParams } from '../types/graphql/slug';
-import { isPageType } from '../services/contentTypes/isPageType';
+import { getPaths } from '../../services/getPaths/getPaths';
+import { ISlugParams } from '../../types/graphql/slug';
+import { isPageType } from '../../services/contentTypes/isPageType';
+import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
+import { TConsultingBlok } from '../../components/BlokProvider/types';
 
 type TContainerProps = {
   data: PageItem;
@@ -18,14 +15,12 @@ type TContainerProps = {
 };
 
 const Container: FC<TContainerProps> = ({ data, preview }) => {
-  usePreviewMode(preview);
-
-  const story = useStoryblok(data, preview);
-
   return (
     <>
-      {isPageType(story?.content?.component) && (
-        <Page body={story?.content?.body} />
+      {isPageType(data?.content?.component) && (
+        <Page data={data} preview={preview}>
+          {(blok: TConsultingBlok) => <BlokProvider blok={blok} />}
+        </Page>
       )}
     </>
   );
