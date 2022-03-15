@@ -4,7 +4,7 @@ import { getFeatureProps } from '../mappers/getFeatureProps';
 import { TTeaserProps } from '../../Teaser/Teaser';
 import { TFeatureProps } from '../../Feature/Feature';
 import { getHeroProps } from '../mappers/getHeroProps';
-import { THeroProps } from '@quansight/shared/ui-components';
+import { THeroRawData } from '../../../types/storyblok/bloks/hero';
 
 export const getPropsByType = (blok: TConsultingBlok): TBlokComponentProps => {
   return (
@@ -15,7 +15,7 @@ export const getPropsByType = (blok: TConsultingBlok): TBlokComponentProps => {
       [ComponentType.Feature]: getFeatureProps(
         blok as TConsultingBlok<TFeatureProps>,
       ),
-      [ComponentType.Hero]: getHeroProps(blok as TConsultingBlok<THeroProps>),
+      [ComponentType.Hero]: getHeroProps(blok as TConsultingBlok<THeroRawData>),
     }[blok.component] || null
   );
 };
