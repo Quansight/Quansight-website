@@ -15,7 +15,6 @@ type TContainerProps = {
 };
 
 const Container: FC<TContainerProps> = ({ data, preview }) => {
-  console.log({ data, preview });
   return (
     <>
       {isPageType(data?.content?.component) && (
