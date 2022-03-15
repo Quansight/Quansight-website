@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        heading: ['Mukta', 'sans-serif'],
+      },
       colors: {
         transparent: 'transparent',
         violet: '#452393',
