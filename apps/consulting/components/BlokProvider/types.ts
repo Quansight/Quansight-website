@@ -4,7 +4,6 @@ import { TTeaserProps } from '../Teaser/Teaser';
 import { TQconsultingProps } from '../Qconsulting/Qconsulting';
 import { TQconsultingItemProps } from '../QconsultingItem/QconsultingItem';
 import { TQconsultingBtnProps } from '../QconsultingBtn/QconsultingBtn';
-import { TQconsultingParagraphProps } from '../QconsultingParagraph/QconsultingParagraph';
 
 export enum ComponentType {
   Teaser = 'teaser',
@@ -13,7 +12,6 @@ export enum ComponentType {
   Qconsulting = 'qconsulting',
   QconsultingItem = 'qconsulting-item',
   QconsultingBtn = 'qconsulting-btn',
-  QconsultingParagraph = 'qconsulting-paragraph',
 }
 
 type TBlokComponentPropsMap = {
@@ -22,7 +20,6 @@ type TBlokComponentPropsMap = {
   [ComponentType.Qconsulting]: TQconsultingProps;
   [ComponentType.QconsultingItem]: TQconsultingItemProps;
   [ComponentType.QconsultingBtn]: TQconsultingBtnProps;
-  [ComponentType.QconsultingParagraph]: TQconsultingParagraphProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

@@ -3,12 +3,13 @@ import { BlokProvider } from '../BlokProvider/BlokProvider';
 import Image from 'next/image';
 import { TQconsultingItemProps } from '../QconsultingItem/QconsultingItem';
 import { TQconsultingBtnProps } from '../QconsultingBtn/QconsultingBtn';
-import { TQconsultingParagraphProps } from '../QconsultingParagraph/QconsultingParagraph';
 import { TConsultingBlok } from '../BlokProvider/types';
+import { TRichText } from '../../types/storyblok/richTextTypes';
+import { createMarkup } from '../../services/createMarkup/createMarkup';
 
 export type TQconsultingProps = {
   title: string;
-  description: TConsultingBlok<TQconsultingParagraphProps>[];
+  description: TRichText;
   grid: TConsultingBlok<TQconsultingItemProps | TQconsultingBtnProps>[];
 };
 
@@ -39,11 +40,10 @@ export const Qconsulting: FC<TQconsultingProps> = ({
         <h2 className="text-[4rem] font-extrabold tracking-[0.02em] leading-[5rem] sm:text-[4.8rem] font-heading">
           {title}
         </h2>
-        <div className="flex flex-col gap-8 mt-[2.8rem] mr-[5.5rem] mb-[4.3rem] sm:gap-12 sm:mt-28 sm:mr-0 sm:mb-[6rem] lg:mx-36  xl:mt-[3.6rem]">
-          {description.map((blok) => (
-            <BlokProvider blok={blok} key={blok._uid} />
-          ))}
-        </div>
+        <div
+          className="flex flex-col gap-8 mt-[2.8rem] mr-[5.5rem] mb-[4.3rem] text-[1.8rem] leading-[2.2rem] sm:gap-12 sm:mt-28 sm:mr-0 sm:mb-[6rem] lg:mx-36  xl:mt-[3.6rem]"
+          dangerouslySetInnerHTML={createMarkup(description)}
+        />
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-[0.5px] sm:bg-white xl:gap-[1px]">
           {grid.map((blok) => (
             <BlokProvider blok={blok} key={blok._uid} />

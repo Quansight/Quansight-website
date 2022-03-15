@@ -7,7 +7,7 @@ type TPlaceholderProps = {
 export const Placeholder: FC<TPlaceholderProps> = ({ componentName }) => (
   <div>
     The component
-    {componentName}
+    {` ${componentName} `}
     has not been created yet.
   </div>
 );
