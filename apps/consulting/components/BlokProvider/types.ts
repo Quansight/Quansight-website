@@ -1,25 +1,19 @@
 import { TypeValuesUnion, TBlok } from '@quansight/shared/ui-components';
 import { TFeatureProps } from '../Feature/Feature';
 import { TTeaserProps } from '../Teaser/Teaser';
-import { TQconsultingProps } from '../Qconsulting/Qconsulting';
-import { TQconsultingItemProps } from '../QconsultingItem/QconsultingItem';
-import { TQconsultingBtnProps } from '../QconsultingBtn/QconsultingBtn';
+import { TBoardProps } from '../Board/Board';
 
 export enum ComponentType {
   Teaser = 'teaser',
   Feature = 'feature',
   Grid = 'grid',
-  Qconsulting = 'qconsulting',
-  QconsultingItem = 'qconsulting-item',
-  QconsultingBtn = 'qconsulting-btn',
+  Board = 'board',
 }
 
 type TBlokComponentPropsMap = {
   [ComponentType.Teaser]: TTeaserProps;
   [ComponentType.Feature]: TFeatureProps;
-  [ComponentType.Qconsulting]: TQconsultingProps;
-  [ComponentType.QconsultingItem]: TQconsultingItemProps;
-  [ComponentType.QconsultingBtn]: TQconsultingBtnProps;
+  [ComponentType.Board]: TBoardProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

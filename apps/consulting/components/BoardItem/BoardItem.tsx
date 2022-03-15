@@ -2,38 +2,36 @@ import { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export type TQconsultingItemProps = {
+export type TBoardItemProps = {
+  _uid?: string;
   title: string;
-  image: {
-    filename: string;
-    alt: string;
-  };
   link_title: string;
-  link: {
-    cached_url: string;
-  };
+  link_url: string;
+  image_src: string;
+  image_alt: string;
 };
 
-export const QconsultingItem: FC<TQconsultingItemProps> = ({
+const BoardItem: FC<TBoardItemProps> = ({
   title,
-  image: { filename, alt },
   link_title,
-  link: { cached_url },
+  link_url,
+  image_src,
+  image_alt,
 }) => {
   return (
     <div className="flex flex-col gap-[2.8rem] pt-[2.8rem] pb-[4.1rem] text-center border-t-[0.5px] first:border-t-0 border-t-white sm:gap-0 sm:pt-[4.2rem] sm:bg-[#452393] sm:border-t-0">
       <div className="relative h-32">
-        <Image src={filename} alt={alt} layout="fill" priority />
+        <Image src={image_src} alt={image_alt} layout="fill" priority />
       </div>
       <h3 className="text-[2.2rem] font-extrabold leading-[3rem] sm:mt-[2.8rem] sm:mb-[2.2rem] xl:mt-[3.6rem] xl:mb-[2.2rem] font-heading">
         {title}
       </h3>
       <div className="flex">
-        <Link href={`/${cached_url}`}>
+        <Link href={`/${link_url}`}>
           <a className="flex gap-3 justify-center items-center mx-auto w-auto text-[1.6rem] font-bold leading-[3.7rem]">
             {link_title}
             <Image
-              src="/qconsulting/qconsulting-btn-arrow.svg"
+              src="/board/board-btn-arrow.svg"
               alt="arrow icon"
               width={12}
               height={17}
@@ -45,3 +43,5 @@ export const QconsultingItem: FC<TQconsultingItemProps> = ({
     </div>
   );
 };
+
+export default BoardItem;
