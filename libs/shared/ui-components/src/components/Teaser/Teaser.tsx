@@ -23,7 +23,7 @@ export const Teaser: FC<TTeaserProps> = ({ color, image, title, text, buttonText
       <div className={`w-full md:absolute md:w-2/5 md:top-1/2 md:right-8 md:-translate-y-1/2 lg:right-32`}>
         <Picture image={image} width={563} height={379} />
       </div>
-      {link.url && (
+      {(buttonText && link) && (
         <ButtonLink
           isBordered
           isTriangle
@@ -35,3 +35,5 @@ export const Teaser: FC<TTeaserProps> = ({ color, image, title, text, buttonText
     </div>
   </div>
 );
+
+export default Teaser;

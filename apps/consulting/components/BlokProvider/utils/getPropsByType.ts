@@ -2,7 +2,7 @@ import { ComponentType, TBlokComponentProps, TConsultingBlok } from '../types';
 
 import { getTeaserProps } from '../mappers/getTeaserProps';
 
-import { TTeaserProps } from '../../Teaser/types';
+import { TTeaserProps } from '@quansight/shared/ui-components';
 
 export const getPropsByType = (blok: TConsultingBlok): TBlokComponentProps => {
   return (

@@ -21,3 +21,5 @@ export const ButtonLink: FC<TButtonLinkProps> = ({ isBordered, isTriangle, color
     )}
   </a>
 );
+
+export default ButtonLink;

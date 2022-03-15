@@ -9,3 +9,5 @@ export type TTeaserProps = {
   buttonText?: string;
   link?: TLinkProps;
 };
+
+export default TTeaserProps;

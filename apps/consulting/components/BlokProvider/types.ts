@@ -1,6 +1,5 @@
 import { TypeValuesUnion, TBlok } from '@quansight/shared/ui-components';
-
-import { TTeaserProps } from '../Teaser/types';
+import { TTeaserProps } from '@quansight/shared/ui-components';
 
 export enum ComponentType {
   Teaser = 'Teaser',

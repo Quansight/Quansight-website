@@ -1,5 +1,5 @@
 import { TConsultingBlok } from '../types';
-import { TTeaserProps } from '../../Teaser/types';
+import { TTeaserProps } from '@quansight/shared/ui-components';
 
 export const getTeaserProps = (
   blok: TConsultingBlok<TTeaserProps>,
