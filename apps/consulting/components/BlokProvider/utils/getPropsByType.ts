@@ -4,7 +4,7 @@ import { getFeatureProps } from '../mappers/getFeatureProps';
 import { getBoardProps } from '../mappers/getBoardProps';
 import { TTeaserProps } from '../../Teaser/Teaser';
 import { TFeatureProps } from '../../Feature/Feature';
-import { TBoardProps } from '../../Board/Board';
+import { TBoardRawData } from '../../../types/storyblok/bloks/board';
 
 export const getPropsByType = (blok: TConsultingBlok): TBlokComponentProps => {
   return (
@@ -16,7 +16,7 @@ export const getPropsByType = (blok: TConsultingBlok): TBlokComponentProps => {
         blok as TConsultingBlok<TFeatureProps>,
       ),
       [ComponentType.Board]: getBoardProps(
-        blok as TConsultingBlok<TBoardProps>,
+        blok as TConsultingBlok<TBoardRawData>,
       ),
     }[blok.component] || null
   );

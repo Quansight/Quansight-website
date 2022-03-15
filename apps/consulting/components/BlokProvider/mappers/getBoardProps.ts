@@ -1,8 +1,10 @@
 import { TBoardProps } from '../../Board/Board';
-import { TBoard } from '../../../types/storyblok/boardTypes';
+import { TBoardRawData } from '../../../types/storyblok/bloks/board';
 import { TConsultingBlok } from '../types';
 
-export const getBoardProps = (blok: TConsultingBlok<TBoard>): TBoardProps => ({
+export const getBoardProps = (
+  blok: TConsultingBlok<TBoardRawData>,
+): TBoardProps => ({
   title: blok.title,
   description: blok.description,
   grid: blok.grid.map(
@@ -21,4 +23,8 @@ export const getBoardProps = (blok: TConsultingBlok<TBoard>): TBoardProps => ({
       image_alt: alt,
     }),
   ),
+  button: {
+    button_title: blok.button_title,
+    button_url: blok.button_url.cached_url,
+  },
 });

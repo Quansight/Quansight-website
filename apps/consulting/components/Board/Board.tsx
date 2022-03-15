@@ -3,15 +3,21 @@ import BoardDecorations from '../BoardDecorations/BoardDecorations';
 import { TRichText } from '../../types/storyblok/richTextTypes';
 import { createMarkup } from '../../services/createMarkup/createMarkup';
 import BoardItem, { TBoardItemProps } from '../BoardItem/BoardItem';
-// import BoardButton from '../BoardButton/BoardButton';
+import BoardButton, { TBoardButtonProps } from '../BoardButton/BoardButton';
 
 export type TBoardProps = {
   title: string;
   description: TRichText;
   grid: TBoardItemProps[];
+  button: TBoardButtonProps;
 };
 
-export const Board: FC<TBoardProps> = ({ title, description, grid }) => {
+export const Board: FC<TBoardProps> = ({
+  title,
+  description,
+  grid,
+  button,
+}) => {
   return (
     <section className="text-white bg-[#452393]">
       <div className="relative py-24 px-[2.4rem] mx-auto max-w-[144rem] sm:text-center md:py-48 md:px-16 xl:px-48 xl:pt-[6.8rem] xl:pb-40">
@@ -28,6 +34,7 @@ export const Board: FC<TBoardProps> = ({ title, description, grid }) => {
           {grid.map((props) => (
             <BoardItem {...props} key={props._uid} />
           ))}
+          <BoardButton {...button} />
         </div>
       </div>
     </section>

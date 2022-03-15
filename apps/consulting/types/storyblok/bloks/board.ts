@@ -1,6 +1,7 @@
-import { TRichText } from './richTextTypes';
+import { TBaseBlok } from './base';
+import { TRichText } from '../richTextTypes';
 
-export type TBoard = {
+export type TBoardRawData = {
   title: string;
   description: TRichText;
   grid: {
@@ -15,4 +16,8 @@ export type TBoard = {
       filename: string;
     };
   }[];
-};
+  button_title: string;
+  button_url: {
+    cached_url: string;
+  };
+} & TBaseBlok;

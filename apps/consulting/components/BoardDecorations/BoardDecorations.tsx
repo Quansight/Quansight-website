@@ -8,23 +8,21 @@ type TBoardDecorationsProps = {
 const BoardDecorations: FC<TBoardDecorationsProps> = ({ decoration }) => {
   if (decoration === 'header')
     return (
-      <div className="hidden absolute top-[6%] left-[6%] lg:block xl:top-[15%] xl:left-[2%]">
+      <div className="hidden absolute top-[6%] left-[6%] w-[16.6rem] h-[12.5rem] lg:block xl:top-[15%] xl:left-[2%]">
         <Image
           src="/board/board-header-icon.svg"
           alt="header icon"
-          width={166}
-          height={125}
+          layout="fill"
         />
       </div>
     );
   if (decoration === 'button')
     return (
-      <div className="hidden absolute top-[85%] right-[5%] lg:block xl:top-[77%] xl:right-[2%]">
+      <div className="hidden absolute top-[85%] right-[5%] w-[37.1rem] h-[22.5rem] lg:block xl:top-[77%] xl:right-[2%]">
         <Image
           src="/board/board-btn-icon.svg"
           alt="button icon"
-          width={371}
-          height={225}
+          layout="fill"
         />
       </div>
     );
