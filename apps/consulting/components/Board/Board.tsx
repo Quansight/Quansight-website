@@ -22,7 +22,7 @@ export const Board: FC<TBoardProps> = ({
   button,
 }) => {
   return (
-    <section className="text-white bg-[#452393]">
+    <section className="text-white bg-violet">
       <div className="relative py-24 px-[2.4rem] mx-auto max-w-[144rem] sm:text-center md:py-48 md:px-16 xl:px-48 xl:pt-[6.8rem] xl:pb-40">
         <BoardHeaderDecoration />
         <BoardButtonDecoration />

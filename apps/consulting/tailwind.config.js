@@ -11,6 +11,10 @@ module.exports = {
       fontFamily: {
         heading: ['Mukta', 'sans-serif'],
       },
+      colors: {
+        violet: '#452393',
+        green: '#99C941',
+      },
     },
   },
   plugins: [],
