@@ -8,6 +8,6 @@ export const getTeaserProps = (
   image: blok.image,
   title: blok.title,
   text: blok.text,
-  btn: blok.btn,
+  buttonText: blok.buttonText,
   link: blok.link,
 });

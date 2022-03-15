@@ -1,11 +1,11 @@
-import { TImageProps } from '../Picture/types';
-import { TLinkProps } from '../ButtonLink/types';
+import { TImageProps } from '../../types/storyblok/imageProps';
+import { TLinkProps } from '../../types/storyblok/linkProps';
 
 export type TTeaserProps = {
   color: string;
   image: TImageProps;
   title: string;
   text: string;
-  btn?: string;
+  buttonText?: string;
   link?: TLinkProps;
-}
+};

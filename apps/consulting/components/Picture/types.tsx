@@ -1,15 +1,9 @@
-export type TImageProps = {
-  id: number;
-  alt: string;
-  name?: string;
-  title?: string;
-  filename: string;
-  copyright?: string;
-}
+import { ImageProps } from 'next/image';
+import { TImageProps } from '../../types/storyblok/imageProps';
 
 export type TPictureProps = {
   image: TImageProps;
-  width?: number;
-  height?: number;
-  layout?: 'fixed' | 'fill' | 'intrinsic' | 'responsive';
-}
+  width?: ImageProps['width'];
+  height?: ImageProps['height'];
+  layout?: ImageProps['layout'];
+};
