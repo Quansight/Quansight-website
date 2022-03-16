@@ -29,31 +29,16 @@ export const Hero: FC<THeroProps> = ({ title, subTitle, variant }) => {
       />
       <div
         className={clsx(
-          'relative',
-          'md:absolute',
-          'pt-[88px]',
-          'md:pt-0',
-          'px-[20px]',
-          'md:px-0',
-          ...(isLargeHero ? ['md:w-1/2', 'md:top-52', 'md:left-[14%]'] : []),
+          'relative px-[20px] placeholder:md:px-0 pt-[88px] md:absolute md:pt-0',
+          ...(isLargeHero ? 'md:w-1/2 md:top-52 md:left-[14%]' : ''),
           ...(isMediumHero
-            ? [
-                'h-full',
-                'w-full',
-                'flex',
-                'items-center',
-                'justify-center',
-                'flex-col',
-              ]
-            : []),
+            ? 'h-full w-full flex items-center justify-center flex-col'
+            : ''),
         )}
       >
         <h2
           className={clsx(
-            'text-white',
-            'text-[3.125rem]',
-            'leading-[3.75rem]',
-            'font-primary',
+            'text-[3.125rem] leading-[3.75rem] text-white font-primary',
             {
               'mb-12': isLargeHero,
               'text-center': !isLargeHero,
@@ -65,10 +50,7 @@ export const Hero: FC<THeroProps> = ({ title, subTitle, variant }) => {
         {subTitle && (
           <h3
             className={clsx(
-              'text-[2.5rem]',
-              'leading-[3rem]',
-              'text-white',
-              'font-primary',
+              'text-[2.5rem] leading-[3rem] text-white font-primary',
               {
                 'text-center': !isLargeHero,
               },

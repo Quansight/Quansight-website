@@ -4,8 +4,10 @@ import { PageItem, Api } from '@quansight/shared/storyblok-sdk';
 import { Page } from '@quansight/shared/ui-components';
 
 import { getPaths } from '../../services/getPaths/getPaths';
-import { ISlugParams } from '../../types/graphql/slug';
 import { isPageType } from '../../services/contentTypes/isPageType';
+
+import { ISlugParams } from '../../types/graphql/slug';
+
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { TConsultingBlok } from '../../components/BlokProvider/types';
 

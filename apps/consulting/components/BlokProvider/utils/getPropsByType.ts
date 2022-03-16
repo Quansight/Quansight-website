@@ -1,9 +1,10 @@
 import { ComponentType, TBlokComponentProps, TConsultingBlok } from '../types';
 import { getTeaserProps } from '../mappers/getTeaserProps';
 import { getFeatureProps } from '../mappers/getFeatureProps';
+import { getHeroProps } from '../mappers/getHeroProps';
+
 import { TTeaserProps } from '../../Teaser/Teaser';
 import { TFeatureProps } from '../../Feature/Feature';
-import { getHeroProps } from '../mappers/getHeroProps';
 import { THeroRawData } from '../../../types/storyblok/bloks/hero';
 
 export const getPropsByType = (blok: TConsultingBlok): TBlokComponentProps => {
