@@ -1,10 +1,7 @@
 import { FC } from 'react';
 import { TRichText } from '../../types/storyblok/richTextTypes';
 import { createMarkup } from '../../services/createMarkup/createMarkup';
-import {
-  BoardHeaderDecoration,
-  BoardButtonDecoration,
-} from '../BoardDecorations';
+import { HeaderDecoration, ButtonDecoration } from './decorations';
 import BoardItem, { TBoardItemProps } from '../BoardItem/BoardItem';
 import BoardButton, { TBoardButtonProps } from '../BoardButton/BoardButton';
 
@@ -24,8 +21,8 @@ export const Board: FC<TBoardProps> = ({
   return (
     <section className="text-white bg-violet">
       <div className="relative py-24 px-[2.4rem] mx-auto max-w-[144rem] sm:text-center md:py-48 md:px-16 xl:px-48 xl:pt-[6.8rem] xl:pb-40">
-        <BoardHeaderDecoration />
-        <BoardButtonDecoration />
+        <HeaderDecoration />
+        <ButtonDecoration />
         <h2 className="text-[4rem] font-extrabold tracking-[0.02em] leading-[5rem] sm:text-[4.8rem] font-heading">
           {title}
         </h2>
