@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TRichText } from '../../types/storyblok/richTextTypes';
+import { TRichText } from '../../types/storyblok/richText';
 import { createMarkup } from '../../services/createMarkup/createMarkup';
 import { HeaderDecoration, ButtonDecoration } from './decorations';
 import BoardItem, { TBoardItemProps } from '../BoardItem/BoardItem';

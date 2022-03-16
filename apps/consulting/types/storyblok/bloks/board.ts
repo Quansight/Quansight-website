@@ -1,5 +1,5 @@
 import { TBaseBlok } from './base';
-import { TRichText } from '../richTextTypes';
+import { TRichText } from '../richText';
 
 export type TBoardRawData = {
   title: string;
