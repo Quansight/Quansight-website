@@ -3,8 +3,10 @@ import Image from 'next/image';
 
 import { TPictureProps } from './types';
 
-export const Picture: FC<TPictureProps> = ({ image, ...props }) => (
-  <Image src={image.filename} alt={image.alt} {...props} />
-);
+export const Picture: FC<TPictureProps> = ({
+  imageSrc,
+  imageAlt,
+  ...props
+}) => <Image src={imageSrc} alt={imageAlt} {...props} />;
 
 export default Picture;

@@ -1,9 +1,10 @@
 import { ImageProps } from 'next/image';
-import { TImageProps } from '../../types/storyblok/imageProps';
 
 export type TPictureProps = {
-  image: TImageProps;
+  imageSrc: string;
+  imageAlt: string;
   width?: ImageProps['width'];
   height?: ImageProps['height'];
   layout?: ImageProps['layout'];
+  priority?: ImageProps['priority'];
 };

@@ -1,17 +1,15 @@
 import { TypeValuesUnion, TBlok } from '@quansight/shared/ui-components';
-import { TTeaserProps } from '@quansight/shared/ui-components';
+import { TBoardRawData } from '../../types/storyblok/bloks/board';
+import { TTeaserRawData } from '../../types/storyblok/bloks/teaser';
 
 export enum ComponentType {
-  Teaser = 'Teaser',
-  Grid = 'grid',
+  Teaser = 'teaser',
+  Board = 'board',
 }
 
 type TBlokComponentPropsMap = {
-  [ComponentType.Teaser]: TTeaserProps;
-};
-
-export type TBlokProviderProps = {
-  blok: TConsultingBlok;
+  [ComponentType.Teaser]: TTeaserRawData;
+  [ComponentType.Board]: TBoardRawData;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

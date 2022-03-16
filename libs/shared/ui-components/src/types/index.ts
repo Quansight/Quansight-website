@@ -1,5 +1,5 @@
 export * from './utils/TypeValuesUnion';
 export * from './blok/Blok';
 
-export * from './storyblok/imageProps';
-export * from './storyblok/linkProps';
+export * from './storyblok/image';
+export * from './storyblok/link';

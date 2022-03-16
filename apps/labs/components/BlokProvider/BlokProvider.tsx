@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import Placeholder from '../Placeholder/Placeholder';
+import { Placeholder } from '@quansight/shared/ui-components';
 import { getPropsByType } from './utils/getPropsByType';
 import { componentsMap } from './componentsMap';
 import { TLabsBlok } from './types';
