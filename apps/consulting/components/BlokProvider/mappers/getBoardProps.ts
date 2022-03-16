@@ -17,14 +17,14 @@ export const getBoardProps = (
     }) => ({
       _uid,
       title,
-      link_title,
-      link_url: cached_url,
-      image_src: filename,
-      image_alt: alt,
+      linkTitle: link_title,
+      linkUrl: cached_url,
+      imageSrc: filename,
+      imageAlt: alt,
     }),
   ),
   button: {
-    button_title: blok.button_title,
-    button_url: blok.button_url.cached_url,
+    buttonTitle: blok.button_title,
+    buttonUrl: blok.button_url.cached_url,
   },
 });
