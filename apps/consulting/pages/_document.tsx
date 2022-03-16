@@ -1,16 +1,10 @@
-import { FC } from 'react';
 import { Html, Head, Main, NextScript } from 'next/document';
+import { FC } from 'react';
 
 const Document: FC = () => {
   return (
-    <Html>
+    <Html lang="en" className="text-[62.5%]">
       <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="true"
-        />
         <link
           href="https://fonts.googleapis.com/css2?family=Mukta:wght@500;700;800&display=swap"
           rel="stylesheet"

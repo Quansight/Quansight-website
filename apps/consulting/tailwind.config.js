@@ -8,11 +8,13 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        white: '#FFF',
-      },
       fontFamily: {
-        primary: ['Mukta', 'sans-serif'],
+        heading: ['Mukta', 'sans-serif'],
+      },
+      colors: {
+        violet: '#452393',
+        green: '#99C941',
+        white: '#FFF',
       },
     },
   },
