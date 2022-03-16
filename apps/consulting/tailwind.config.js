@@ -21,7 +21,7 @@ module.exports = {
         white: '#ffffff',
       },
       maxWidth: {
-        layout: '1440px',
+        layout: '144rem',
       },
     },
   },
