@@ -24,11 +24,11 @@ export const Teaser: FC<TTeaserProps> = ({
         color === 'pink' && 'text-white bg-pink',
       )}
     >
-      <p
+      <h2
         className={`w-full max-w-[440px] mb-14 font-extrabold text-4xl leading-tight lg:mb-7`}
       >
         {title}
-      </p>
+      </h2>
       <p className={`w-full mb-14 text-base leading-7 md:mb-10`}>{text}</p>
       <div
         className={`w-full text-center lg:absolute lg:w-2/5 lg:top-1/2 lg:right-32 lg:-translate-y-1/2`}

@@ -1,9 +1,3 @@
-// TYPES
-export * from '../types/storyblok/image';
-export * from '../types/storyblok/link';
-export * from '../types/storyblok/richText';
-
-// COMPONENTS
 export * from './Layout/Layout';
 
 export * from './ButtonLink/ButtonLink';
