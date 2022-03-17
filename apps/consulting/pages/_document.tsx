@@ -6,7 +6,7 @@ const Document: FC = () => {
     <Html lang="en" className="text-[62.5%]">
       <Head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Mukta:wght@800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Mukta:wght@500;700;800&display=swap"
           rel="stylesheet"
         />
       </Head>

@@ -1,5 +1,5 @@
 {
-  "*.{js,json,css,scss,md,ts,html,graphql}": [
+  "*.{js,json,css,scss,md,ts,tsx,html,graphql}": [
     "nx format:write --uncommitted",
     "nx affected:lint --base=develop --fix=true"
   ],

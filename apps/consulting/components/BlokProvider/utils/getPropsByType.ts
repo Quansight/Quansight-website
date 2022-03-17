@@ -1,39 +1,22 @@
-import { ComponentType, TBlokComponentProps, TConsultingBlok } from '../types';
-
+import { ComponentType, TBlokComponentProps } from '../types';
 import { getTeaserProps } from '../mappers/getTeaserProps';
-import { TTeaserRawData } from '../../../types/storyblok/bloks/teaser';
-
 import { getBoardProps } from '../mappers/getBoardProps';
-import { TBoardRawData } from '../../../types/storyblok/bloks/board';
+import { getHeroProps } from '../mappers/getHeroProps';
 
-export const getPropsByType = (blok: TConsultingBlok): TBlokComponentProps => {
-  switch (blok.component.toString()) {
-    case 'teaser':
-      return (
-        {
-          [ComponentType.Teaser]: getTeaserProps(
-            blok as TConsultingBlok<TTeaserRawData>,
-          ),
-        }[blok.component] || null
-      );
-    case 'board':
-      return (
-        {
-          [ComponentType.Board]: getBoardProps(
-            blok as TConsultingBlok<TBoardRawData>,
-          ),
-        }[blok.component] || null
-      );
+import { TRawBlok } from '../../../types/storyblok/bloks/rawBlok';
+
+export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
+  switch (blok.component) {
+    case ComponentType.Hero: {
+      return getHeroProps(blok);
+    }
+    case ComponentType.Board: {
+      return getBoardProps(blok);
+    }
+    case ComponentType.Teaser: {
+      return getTeaserProps(blok);
+    }
+    default:
+      return null;
   }
-
-  // return (
-  //   {
-  //     [ComponentType.Teaser]: getTeaserProps(
-  //       blok as TConsultingBlok<TTeaserRawData>,
-  //     ),
-  //     [ComponentType.Board]: getBoardProps(
-  //       blok as TConsultingBlok<TBoardRawData>,
-  //     ),
-  //   }[blok.component] || null
-  // );
 };

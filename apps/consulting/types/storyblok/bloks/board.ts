@@ -1,7 +1,13 @@
-import { TBaseBlok } from './base';
-import { TRichText, TImage, TLink } from '@quansight/shared/ui-components';
+import {
+  TRichText,
+  TImage,
+  TLink,
+  TBlok,
+} from '@quansight/shared/ui-components';
+import { ComponentType } from '../../../components/BlokProvider/types';
 
 export type TBoardRawData = {
+  component: ComponentType.Board;
   title: string;
   description: TRichText;
   grid: {
@@ -13,4 +19,4 @@ export type TBoardRawData = {
   }[];
   button_title: string;
   button_url: TLink;
-} & TBaseBlok;
+} & TBlok;

@@ -86,7 +86,7 @@
       "files": ["*.css", "*.tsx", "*.jsx", ".html"],
       "extends": ["plugin:tailwindcss/recommended"],
       "rules": {
-        "tailwindcss/no-custom-classname": "off"
+        "tailwindcss/no-custom-classname": ["off"]
       }
     },
     {

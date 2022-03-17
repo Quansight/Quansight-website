@@ -1,20 +1,20 @@
-import { TypeValuesUnion, TBlok } from '@quansight/shared/ui-components';
-import { TBoardRawData } from '../../types/storyblok/bloks/board';
-import { TTeaserRawData } from '../../types/storyblok/bloks/teaser';
+import {
+  TypeValuesUnion,
+  THeroProps,
+  TTeaserProps,
+} from '@quansight/shared/ui-components';
+import { TBoardProps } from '../Board/Board';
 
 export enum ComponentType {
   Teaser = 'teaser',
   Board = 'board',
+  Hero = 'hero',
 }
 
 type TBlokComponentPropsMap = {
-  [ComponentType.Teaser]: TTeaserRawData;
-  [ComponentType.Board]: TBoardRawData;
+  [ComponentType.Teaser]: TTeaserProps;
+  [ComponentType.Board]: TBoardProps;
+  [ComponentType.Hero]: THeroProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;
-
-export type TConsultingBlok<T = TBlokComponentProps> = TBlok<
-  keyof typeof ComponentType,
-  T
->;
