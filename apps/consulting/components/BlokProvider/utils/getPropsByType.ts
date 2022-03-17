@@ -1,4 +1,5 @@
 import { ComponentType, TBlokComponentProps } from '../types';
+import { getTeaserProps } from '../mappers/getTeaserProps';
 import { getBoardProps } from '../mappers/getBoardProps';
 import { getHeroProps } from '../mappers/getHeroProps';
 
@@ -11,6 +12,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.Board: {
       return getBoardProps(blok);
+    }
+    case ComponentType.Teaser: {
+      return getTeaserProps(blok);
     }
     default:
       return null;

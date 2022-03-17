@@ -1,6 +1,9 @@
-import { TBlok } from '@quansight/shared/ui-components';
-
-import { TRichText } from '../richText';
+import {
+  TRichText,
+  TImage,
+  TLink,
+  TBlok,
+} from '@quansight/shared/ui-components';
 import { ComponentType } from '../../../components/BlokProvider/types';
 
 export type TBoardRawData = {
@@ -11,16 +14,9 @@ export type TBoardRawData = {
     _uid: string;
     title: string;
     link_title: string;
-    link: {
-      cached_url: string;
-    };
-    image: {
-      alt: string;
-      filename: string;
-    };
+    link: TLink;
+    image: TImage;
   }[];
   button_title: string;
-  button_url: {
-    cached_url: string;
-  };
+  button_url: TLink;
 } & TBlok;

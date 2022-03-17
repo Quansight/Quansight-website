@@ -2,6 +2,7 @@ const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind');
 const { join } = require('path');
 
 module.exports = {
+  mode: 'jit',
   content: [
     join(__dirname, '**/!(*.stories|*.spec).{ts,tsx,html}'),
     ...createGlobPatternsForDependencies(__dirname),
@@ -12,9 +13,15 @@ module.exports = {
         heading: ['Mukta', 'sans-serif'],
       },
       colors: {
+        transparent: 'transparent',
         violet: '#452393',
+        pink: '#A43A8F',
         green: '#99C941',
-        white: '#FFF',
+        black: '#191919',
+        white: '#ffffff',
+      },
+      maxWidth: {
+        layout: '144rem',
       },
     },
   },
