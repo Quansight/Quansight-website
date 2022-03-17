@@ -1,8 +1,9 @@
-import { ComponentType } from './types';
-
 import { Teaser } from '@quansight/shared/ui-components';
-import { Board } from '../Board/Board';
 import { Hero } from '@quansight/shared/ui-components';
+
+import { Board } from '../Board/Board';
+
+import { ComponentType } from './types';
 
 export const componentsMap = {
   [ComponentType.Teaser]: Teaser,
