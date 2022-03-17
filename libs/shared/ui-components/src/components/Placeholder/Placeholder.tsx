@@ -1,8 +1,5 @@
 import { FC } from 'react';
-
-type TPlaceholderProps = {
-  componentName: string;
-};
+import { TPlaceholderProps } from './types';
 
 export const Placeholder: FC<TPlaceholderProps> = ({ componentName }) => (
   <div>

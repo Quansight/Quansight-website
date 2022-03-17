@@ -1,5 +1,5 @@
 import { TBaseBlok } from './base';
-import { TRichText } from '../richText';
+import { TRichText, TImage, TLink } from '@quansight/shared/ui-components';
 
 export type TBoardRawData = {
   title: string;
@@ -8,16 +8,9 @@ export type TBoardRawData = {
     _uid: string;
     title: string;
     link_title: string;
-    link: {
-      cached_url: string;
-    };
-    image: {
-      alt: string;
-      filename: string;
-    };
+    link: TLink;
+    image: TImage;
   }[];
   button_title: string;
-  button_url: {
-    cached_url: string;
-  };
+  button_url: TLink;
 } & TBaseBlok;
