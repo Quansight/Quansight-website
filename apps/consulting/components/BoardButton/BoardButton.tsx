@@ -15,7 +15,7 @@ const BoardButton: FC<TBoardButtonProps> = ({ buttonTitle, buttonUrl }) => {
           <a className="flex gap-3 justify-center items-center py-4 px-10 text-[1.6rem] font-bold leading-[3.7rem]">
             {buttonTitle}
             <Image
-              src="/qconsulting/qconsulting-btn-arrow.svg"
+              src="/board/board-btn-arrow.svg"
               alt="arrow icon"
               width={12}
               height={17}

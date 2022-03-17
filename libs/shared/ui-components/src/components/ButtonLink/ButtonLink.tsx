@@ -14,7 +14,7 @@ export const ButtonLink: FC<TButtonLinkProps> = ({
   <Link href={url}>
     <a
       className={clsx(
-        'flex justify-start items-center py-3 px-9 w-fit text-base font-bold',
+        'flex justify-start items-center py-[1.1rem] px-[3.4rem] w-fit text-[1.6rem] font-bold',
         color === 'violet' ? 'text-violet' : 'text-white',
         isBordered &&
           `border-2 border-solid ${
