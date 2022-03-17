@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { TRichText } from '@quansight/shared/ui-components';
-import { createMarkup } from '../../services/createMarkup/createMarkup';
+import { createMarkup } from '@quansight/shared/ui-components';
 import { HeaderDecoration, ButtonDecoration } from './decorations';
 import BoardItem, { TBoardItemProps } from '../BoardItem/BoardItem';
 import BoardButton, { TBoardButtonProps } from '../BoardButton/BoardButton';

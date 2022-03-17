@@ -1,5 +1,5 @@
 import { Storyblok } from '@quansight/shared/storyblok-sdk';
-import { TRichText } from '@quansight/shared/ui-components';
+import { TRichText } from '../../types/storyblok/richText';
 
 export const createMarkup = (storyblokHTML: TRichText): { __html: string } => {
   return {
