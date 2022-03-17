@@ -1,5 +1,5 @@
 import { TConsultingBlok } from '../types';
-import { TTeaserProps } from '@quansight/shared/ui-components';
+import { TTeaserProps, getUrl } from '@quansight/shared/ui-components';
 import { TTeaserRawData } from '../../../types/storyblok/bloks/teaser';
 
 export const getTeaserProps = (
@@ -11,5 +11,5 @@ export const getTeaserProps = (
   imageSrc: blok.image.filename,
   imageAlt: blok.image.alt,
   buttonText: blok.buttonText,
-  buttonLink: `/${blok.link.cached_url}`,
+  buttonLink: getUrl(blok.link),
 });

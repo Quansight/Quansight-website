@@ -8,9 +8,7 @@ export type TBoardRawData = {
     _uid: string;
     title: string;
     link_title: string;
-    link: {
-      cached_url: string;
-    };
+    link: TLink;
     image: TImage;
   }[];
   button_title: string;

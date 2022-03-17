@@ -32,7 +32,7 @@ const BoardItem: FC<TBoardItemProps> = ({
         {title}
       </h3>
       <div className="flex">
-        <Link href={`/${linkUrl}`}>
+        <Link href={linkUrl}>
           <a className="flex gap-3 justify-center items-center mx-auto w-auto text-[1.6rem] font-bold leading-[3.7rem]">
             {linkTitle}
             <Picture
