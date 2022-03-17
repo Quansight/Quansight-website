@@ -30,9 +30,9 @@ export const Hero: FC<THeroProps> = ({ title, subTitle, variant }) => {
       <div
         className={clsx(
           'relative px-[20px] placeholder:md:px-0 pt-[88px] md:absolute md:pt-0',
-          ...(isLargeHero ? 'md:w-1/2 md:top-52 md:left-[14%]' : ''),
+          ...(isLargeHero ? ['md:w-1/2 md:top-52 md:left-[14%]'] : ''),
           ...(isMediumHero
-            ? 'h-full w-full flex items-center justify-center flex-col'
+            ? ['h-full w-full flex items-center justify-center flex-col']
             : ''),
         )}
       >

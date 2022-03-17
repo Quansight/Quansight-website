@@ -9,7 +9,7 @@ import { isPageType } from '../../services/contentTypes/isPageType';
 import { ISlugParams } from '../../types/graphql/slug';
 
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
-import { TConsultingBlok } from '../../components/BlokProvider/types';
+import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 
 type TContainerProps = {
   data: PageItem;
@@ -21,7 +21,7 @@ const Container: FC<TContainerProps> = ({ data, preview }) => {
     <>
       {isPageType(data?.content?.component) && (
         <Page data={data} preview={preview}>
-          {(blok: TConsultingBlok) => <BlokProvider blok={blok} />}
+          {(blok: TRawBlok) => <BlokProvider blok={blok} />}
         </Page>
       )}
     </>

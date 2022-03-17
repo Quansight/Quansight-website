@@ -1,7 +1,10 @@
-import { TBaseBlok } from './base';
+import { TBlok } from '@quansight/shared/ui-components';
+
 import { TRichText } from '../richText';
+import { ComponentType } from '../../../components/BlokProvider/types';
 
 export type TBoardRawData = {
+  component: ComponentType.Board;
   title: string;
   description: TRichText;
   grid: {
@@ -20,4 +23,4 @@ export type TBoardRawData = {
   button_url: {
     cached_url: string;
   };
-} & TBaseBlok;
+} & TBlok;

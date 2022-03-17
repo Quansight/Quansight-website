@@ -18,9 +18,8 @@ export const Page: FC<TPageProps> = ({ data, preview, children }) => {
   usePreviewMode(preview);
   const story = useStoryblok(data, preview);
 
-  return story?.content?.body.map((blok: TBlok<unknown>) => {
+  return story?.content?.body.map((blok: TBlok) => {
     return (
-      // @ts-expect-error Block here is unknown.
       <SbEditable content={blok} key={blok._uid}>
         {children(blok)}
       </SbEditable>

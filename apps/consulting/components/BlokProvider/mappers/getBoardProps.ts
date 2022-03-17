@@ -1,10 +1,7 @@
 import { TBoardProps } from '../../Board/Board';
 import { TBoardRawData } from '../../../types/storyblok/bloks/board';
-import { TConsultingBlok } from '../types';
 
-export const getBoardProps = (
-  blok: TConsultingBlok<TBoardRawData>,
-): TBoardProps => ({
+export const getBoardProps = (blok: TBoardRawData): TBoardProps => ({
   title: blok.title,
   description: blok.description,
   grid: blok.grid.map(
