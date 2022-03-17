@@ -15,23 +15,31 @@ export const Teaser: FC<TTeaserProps> = ({
   buttonText,
   buttonLink,
 }) => (
-  <div className={`relative max-w-layout mx-auto lg:my-20`}>
+  <div className={`relative max-w-layout mx-auto my-[6rem] lg:my-[7.6rem]`}>
     <div
       className={clsx(
-        'py-20 px-8 lg:pt-28 lg:pr-[340px] lg:pl-32 lg:w-3/4 xl:pr-[420px]',
+        'py-[9.2rem] px-[2.4rem] lg:pt-[11.8rem] lg:pr-[34rem] lg:pl-[13rem] lg:w-3/4 xl:pr-[38rem]',
         color === 'green' && 'text-black bg-green',
         color === 'violet' && 'text-white bg-violet',
         color === 'pink' && 'text-white bg-pink',
       )}
     >
-      <h2
-        className={`w-full max-w-[440px] mb-14 font-extrabold text-4xl leading-tight lg:mb-7`}
+      <h2 
+        className={`
+          w-full max-w-[440px] mb-[6.4rem] font-extrabold text-[4rem] leading-[4.9rem]
+          lg:mb-[2.6rem] lg:text-[4.8rem]
+        `}
       >
         {title}
       </h2>
-      <p className={`w-full mb-14 text-base leading-7 md:mb-10`}>{text}</p>
-      <div
-        className={`w-full text-center lg:absolute lg:w-2/5 lg:top-1/2 lg:right-32 lg:-translate-y-1/2`}
+      <p className={`w-full pb-[2.6rem] text-[1.6rem] leading-[2.7rem] md:pb-10`}>
+        {text}
+      </p>
+      <div 
+        className={`
+          w-full text-center
+          lg:absolute lg:w-2/5 lg:top-1/2 lg:right-32 lg:-translate-y-1/2
+        `}
       >
         <Picture
           imageSrc={imageSrc}
@@ -41,7 +49,7 @@ export const Teaser: FC<TTeaserProps> = ({
         />
       </div>
       {buttonText && buttonLink && (
-        <div className={`flex justify-center pt-6 lg:block lg:pt-0`}>
+        <div className={`flex justify-center pt-[3rem] lg:block lg:pt-0`}>
           <ButtonLink
             isBordered
             isTriangle
