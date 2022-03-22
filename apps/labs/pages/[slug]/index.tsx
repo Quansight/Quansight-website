@@ -1,13 +1,15 @@
 import React, { FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
+
 import { PageItem, Api } from '@quansight/shared/storyblok-sdk';
+import { Page } from '@quansight/shared/ui-components';
+import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 
 import { getPaths } from '../../services/getPaths/getPaths';
-import { ISlugParams } from '../../types/graphql/slug';
 import { isPageType } from '../../services/contentTypes/isPageType';
-import { TLabsBlok } from '../../components/BlokProvider/types';
-import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
-import { Page } from '@quansight/shared/ui-components';
+
+import { ISlugParams } from '../../types/graphql/slug';
+import { TRawBlok } from '../../types/storyblok/bloks/rawBlock';
 
 type TContainerProps = {
   data: PageItem;
@@ -19,7 +21,7 @@ const Container: FC<TContainerProps> = ({ data, preview }) => {
     <>
       {isPageType(data?.content?.component) && (
         <Page data={data} preview={preview}>
-          {(blok: TLabsBlok) => <BlokProvider blok={blok} />}
+          {(blok: TRawBlok) => <BlokProvider blok={blok} />}
         </Page>
       )}
     </>
