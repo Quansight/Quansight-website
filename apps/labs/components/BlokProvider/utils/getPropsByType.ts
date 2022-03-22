@@ -1,16 +1,15 @@
-import { ComponentType, TBlokComponentProps, TLabsBlok } from '../types';
-import { getTeaserProps } from '../mappers/getTeaserProps';
-import { getFeatureProps } from '../mappers/getFeatureProps';
-import { TTeaserProps } from '../../Teaser/Teaser';
-import { TFeatureProps } from '../../Feature/Feature';
+import { ComponentType, TBlokComponentProps } from '../types';
 
-export const getPropsByType = (blok: TLabsBlok): TBlokComponentProps => {
-  return (
-    {
-      [ComponentType.Teaser]: getTeaserProps(blok as TLabsBlok<TTeaserProps>),
-      [ComponentType.Feature]: getFeatureProps(
-        blok as TLabsBlok<TFeatureProps>,
-      ),
-    }[blok.component] || null
-  );
+import { getLogosProps } from '../mappers/getLogosProps';
+
+import { TRawBlok } from '../../../types/storyblok/bloks/rawBlock';
+
+export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
+  switch (blok.component) {
+    case ComponentType.Logos: {
+      return getLogosProps(blok);
+    }
+    default:
+      return null;
+  }
 };

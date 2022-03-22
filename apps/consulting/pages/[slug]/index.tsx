@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
+
 import { PageItem, Api } from '@quansight/shared/storyblok-sdk';
 import { Page } from '@quansight/shared/ui-components';
+import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 
 import { getPaths } from '../../services/getPaths/getPaths';
 import { isPageType } from '../../services/contentTypes/isPageType';
 
 import { ISlugParams } from '../../types/graphql/slug';
-
-import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 
 type TContainerProps = {

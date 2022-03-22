@@ -1,21 +1,13 @@
-import { TypeValuesUnion, TBlok } from '@quansight/shared/ui-components';
-import { TFeatureProps } from '../Feature/Feature';
-import { TTeaserProps } from '../Teaser/Teaser';
+import { TypeValuesUnion } from '@quansight/shared/ui-components';
+
+import { TLogosProps } from '../Logos/Logos';
 
 export enum ComponentType {
-  Teaser = 'teaser',
-  Feature = 'feature',
-  Grid = 'grid',
+  Logos = 'logos',
 }
 
 type TBlokComponentPropsMap = {
-  [ComponentType.Teaser]: TTeaserProps;
-  [ComponentType.Feature]: TFeatureProps;
+  [ComponentType.Logos]: TLogosProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;
-
-export type TLabsBlok<T = TBlokComponentProps> = TBlok<
-  keyof typeof ComponentType,
-  T
->;

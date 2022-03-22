@@ -1,4 +1,5 @@
 import { ComponentType, TBlokComponentProps } from '../types';
+
 import { getTeaserProps } from '../mappers/getTeaserProps';
 import { getBoardProps } from '../mappers/getBoardProps';
 import { getHeroProps } from '../mappers/getHeroProps';
