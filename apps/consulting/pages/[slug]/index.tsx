@@ -2,11 +2,7 @@ import React, { FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { PageItem, Api } from '@quansight/shared/storyblok-sdk';
-import {
-  Page,
-  StickyNoteColor,
-  StickyNotes,
-} from '@quansight/shared/ui-components';
+import { Page } from '@quansight/shared/ui-components';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 
 import { getPaths } from '../../services/getPaths/getPaths';
@@ -25,31 +21,7 @@ const Container: FC<TContainerProps> = ({ data, preview }) => {
     <>
       {isPageType(data?.content?.component) && (
         <Page data={data} preview={preview}>
-          {(blok: TRawBlok) => (
-            <>
-              <BlokProvider blok={blok} />
-              <StickyNotes
-                items={[
-                  {
-                    title: 'Consulting',
-                    description:
-                      'One downside of using open source software is that it doesn’t always come with the support you get from a commercial software vendor. Quansight is changing all that.',
-                    buttonText: 'Learn mode',
-                    buttonLink: '/sss',
-                    variant: StickyNoteColor.Green,
-                  },
-                  {
-                    title: 'Labs',
-                    description:
-                      'Quansight is committed to supporting the community-driven open source projects that are essential to the work we do: NumPy, Jupyter, Dask, scikit-learn, to name a few. We provide this support through our public benefit division, Quansight Labs.',
-                    buttonText: 'Learn mode',
-                    buttonLink: '/sss',
-                    variant: StickyNoteColor.Purple,
-                  },
-                ]}
-              />
-            </>
-          )}
+          {(blok: TRawBlok) => <BlokProvider blok={blok} />}
         </Page>
       )}
     </>
@@ -69,6 +41,8 @@ export const getStaticProps: GetStaticProps<
   ISlugParams
 > = async ({ params: { slug }, preview = false }) => {
   const { data } = await Api.getPageItem({ slug });
+  console.log(data.PageItem.content.body[2]);
+
   return {
     props: {
       data: data.PageItem,

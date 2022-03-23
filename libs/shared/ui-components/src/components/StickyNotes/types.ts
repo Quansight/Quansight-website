@@ -1,6 +1,6 @@
 export enum StickyNoteColor {
   Green = 'green',
-  Purple = 'purple',
+  Pink = 'pink',
 }
 
 export type TStickyNoteProps = {
