@@ -1,5 +1,4 @@
-import { StickyNotes, Teaser } from '@quansight/shared/ui-components';
-import { Hero } from '@quansight/shared/ui-components';
+import { StickyNotes, Teaser, Hero } from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
 
