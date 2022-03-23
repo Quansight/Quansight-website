@@ -1,5 +1,11 @@
+export enum TeaserColor {
+  Green = 'green',
+  Violet = 'violet',
+  Pink = 'pink',
+}
+
 export type TTeaserProps = {
-  color: string;
+  color: TeaserColor;
   title: string;
   text: string;
   imageSrc: string;

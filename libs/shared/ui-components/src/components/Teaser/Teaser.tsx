@@ -4,14 +4,15 @@ import clsx from 'clsx';
 import { Picture } from '../Picture/Picture';
 import { ButtonLink } from '../ButtonLink/ButtonLink';
 
-import { TTeaserProps } from './types';
+import { TeaserColor, TTeaserProps } from './types';
+import { ButtonColor } from '../ButtonLink/types';
 
 export const Teaser: FC<TTeaserProps> = ({
   color,
-  imageSrc,
-  imageAlt,
   title,
   text,
+  imageAlt,
+  imageSrc,
   buttonText,
   buttonLink,
 }) => (
@@ -19,12 +20,12 @@ export const Teaser: FC<TTeaserProps> = ({
     <div
       className={clsx(
         'py-[9.2rem] px-[2.4rem] lg:pt-[11.8rem] lg:pr-[34rem] lg:pl-[13rem] lg:w-3/4 xl:pr-[38rem]',
-        color === 'green' && 'text-black bg-green',
-        color === 'violet' && 'text-white bg-violet',
-        color === 'pink' && 'text-white bg-pink',
+        color === TeaserColor.Green && 'text-black bg-green',
+        color === TeaserColor.Violet && 'text-white bg-violet',
+        color === TeaserColor.Pink && 'text-white bg-pink',
       )}
     >
-      <h2 
+      <h2
         className={`
           w-full max-w-[440px] mb-[6.4rem] font-extrabold text-[4rem] leading-[4.9rem]
           lg:mb-[2.6rem] lg:text-[4.8rem]
@@ -32,10 +33,12 @@ export const Teaser: FC<TTeaserProps> = ({
       >
         {title}
       </h2>
-      <p className={`w-full pb-[2.6rem] text-[1.6rem] leading-[2.7rem] md:pb-10`}>
+      <p
+        className={`w-full pb-[2.6rem] text-[1.6rem] leading-[2.7rem] md:pb-10`}
+      >
         {text}
       </p>
-      <div 
+      <div
         className={`
           w-full text-center
           lg:absolute lg:w-2/5 lg:top-1/2 lg:right-32 lg:-translate-y-1/2
@@ -53,7 +56,7 @@ export const Teaser: FC<TTeaserProps> = ({
           <ButtonLink
             isBordered
             isTriangle
-            color={color === 'green' ? 'violet' : 'white'}
+            color={color === 'green' ? ButtonColor.Violet : ButtonColor.White}
             text={buttonText}
             url={buttonLink}
           />
