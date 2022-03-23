@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { ButtonLink } from '@quansight/shared/ui-components';
+import { ButtonColor, ButtonLink } from '@quansight/shared/ui-components';
 
 export type TBoardButtonProps = {
   buttonTitle: string;
@@ -9,11 +9,19 @@ export type TBoardButtonProps = {
 
 const BoardButton: FC<TBoardButtonProps> = ({ buttonTitle, buttonUrl }) => {
   return (
-    <div className="
+    <div
+      className="
       z-10 mx-auto mt-[6.5rem] 
       sm:flex sm:justify-center sm:items-center sm:mx-0 sm:mt-0 sm:bg-green
-    ">
-      <ButtonLink isFull isTriangle text={buttonTitle} url={buttonUrl} color='white' />
+    "
+    >
+      <ButtonLink
+        isFull
+        isTriangle
+        text={buttonTitle}
+        url={buttonUrl}
+        color={ButtonColor.White}
+      />
     </div>
   );
 };
