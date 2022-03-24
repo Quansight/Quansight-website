@@ -12,12 +12,17 @@ export type TListProps = {
 
 export const List: FC<TListProps> = ({ grid, linkTitle, linkUrl }) => {
   return (
-    <section>
-      Hello
+    <section
+      className="
+        flex flex-col items-center px-[3rem] mx-auto 4k:h-[75rem] 
+        md:px-[13rem]
+        lg:flex-wrap lg:items-start lg:h-[90rem] max-w-layout
+      "
+    >
       {grid.map((props) => (
         <ListItem {...props} key={props._uid} />
       ))}
-      <div>
+      <div className="w-[27rem] lg:mt-[6rem] lg:ml-[12rem]">
         <ButtonLink
           isFull
           isTriangle
