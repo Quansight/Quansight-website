@@ -8,6 +8,6 @@ export const getFeatureArticleProps = (
   description: blok.description,
   imageSrc: blok.image.filename,
   imageAlt: blok.image.alt,
-  decorationSrc: blok.decoration.filename,
-  decorationAlt: blok.decoration.alt,
+  decorationSrc: blok.decoration?.filename,
+  decorationAlt: blok.decoration?.alt,
 });
