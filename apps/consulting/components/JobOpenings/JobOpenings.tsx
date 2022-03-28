@@ -9,13 +9,15 @@ const JobOpenings: FC<TJobOpeningsProps> = ({ title, jobs }) => {
         {title}
       </h2>
       {jobs.length > 0 ? (
-        <ul className="flex flex-col text-center">
+        <ul className="flex flex-col gap-[4.3rem] text-center">
           {jobs.map(({ _uid, jobTitle, linkUrl, location, isRemote }) => (
             <li key={_uid}>
               <Link href={linkUrl}>
-                <a>{jobTitle}</a>
+                <a className="text-[2rem] font-bold leading-[2.7rem] text-violet">
+                  {jobTitle}
+                </a>
               </Link>
-              <div>
+              <div className="mt-8 text-[1.6rem] font-normal leading-[3rem]">
                 <p>{location}</p>
                 <p>Remote {isRemote ? 'OK' : 'NO'}</p>
               </div>
