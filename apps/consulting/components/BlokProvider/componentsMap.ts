@@ -6,7 +6,7 @@ import {
 } from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
-import JobOpenings from '../JobOpenings/JobOpenings';
+import { JobOpenings } from '../JobOpenings/JobOpenings';
 
 import { ComponentType } from './types';
 

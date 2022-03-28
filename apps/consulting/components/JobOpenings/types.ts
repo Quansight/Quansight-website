@@ -1,12 +1,6 @@
-type TJobItem = {
-  _uid: string;
-  jobTitle: string;
-  linkUrl: string;
-  location: string;
-  isRemote: boolean;
-};
+import { TJobListItem } from '../JobListItem/types';
 
 export type TJobOpeningsProps = {
   title: string;
-  jobs: TJobItem[];
+  jobs: TJobListItem[];
 };
