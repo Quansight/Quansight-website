@@ -1,8 +1,9 @@
 type TJobItem = {
+  _uid: string;
   jobTitle: string;
   linkUrl: string;
   location: string;
-  workType: string;
+  isRemote: boolean;
 };
 
 export type TJobOpeningsProps = {

@@ -4,6 +4,7 @@ import { getTeaserProps } from '../mappers/getTeaserProps';
 import { getBoardProps } from '../mappers/getBoardProps';
 import { getHeroProps } from '../mappers/getHeroProps';
 import { getStickyNotesProps } from '../mappers/getStickyNotesProps';
+import { getJobOpeningsProps } from '../mappers/getJobOpeningsProps';
 
 import { TRawBlok } from '../../../types/storyblok/bloks/rawBlok';
 
@@ -20,6 +21,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.StickyNotes: {
       return getStickyNotesProps(blok);
+    }
+    case ComponentType.JobOpenings: {
+      return getJobOpeningsProps(blok);
     }
     default:
       return null;

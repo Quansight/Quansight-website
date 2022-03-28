@@ -4,18 +4,20 @@ import Link from 'next/link';
 
 const JobOpenings: FC<TJobOpeningsProps> = ({ title, jobs }) => {
   return (
-    <section>
-      <h2>{title}</h2>
+    <section className="flex flex-col justify-center items-center my-24">
+      <h2 className="mb-[4.3rem] text-[4rem] font-extrabold leading-[4.9rem] text-violet font-heading">
+        {title}
+      </h2>
       {jobs.length > 0 ? (
-        <ul>
-          {jobs.map(({ jobTitle, linkUrl, location, workType }, index) => (
-            <li key={index}>
+        <ul className="flex flex-col text-center">
+          {jobs.map(({ _uid, jobTitle, linkUrl, location, isRemote }) => (
+            <li key={_uid}>
               <Link href={linkUrl}>
                 <a>{jobTitle}</a>
               </Link>
               <div>
                 <p>{location}</p>
-                <p>{workType}</p>
+                <p>Remote {isRemote ? 'OK' : 'NO'}</p>
               </div>
             </li>
           ))}
