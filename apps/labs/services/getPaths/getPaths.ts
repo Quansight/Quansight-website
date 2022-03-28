@@ -1,6 +1,5 @@
 import { GetStaticPathsResult } from 'next/types';
-import { ISlugParams } from '../../types/graphql/slug';
-import { TLinkEntry } from '../../types/graphql/links';
+import { ISlugParams, TLinkEntry } from '@quansight/shared/config';
 
 export const getPaths = (
   items: TLinkEntry[] = [],

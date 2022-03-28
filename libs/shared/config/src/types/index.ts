@@ -1,6 +1,11 @@
 export * from './utils/TypeValuesUnion';
-export * from './blok/Blok';
+export * from './utils/image';
+export * from './utils/link';
+export * from './utils/richText';
 
-export * from './storyblok/image';
-export * from './storyblok/link';
-export * from './storyblok/richText';
+export * from './bloks/Blok';
+
+export * from './storyblok/contentTypes';
+
+export * from './graphql/links';
+export * from './graphql/slug';
