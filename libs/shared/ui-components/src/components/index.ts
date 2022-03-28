@@ -18,3 +18,6 @@ export * from './Placeholder/types';
 
 export * from './StickyNotes/StickyNotes';
 export * from './StickyNotes/types';
+
+export * from './FeatureArticle/FeatureArticle';
+export * from './FeatureArticle/types';
