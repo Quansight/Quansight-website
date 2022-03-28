@@ -3,6 +3,7 @@
   "projects": {
     "consulting": "apps/consulting",
     "labs": "apps/labs",
+    "shared-config": "libs/shared/config",
     "shared-storyblok-sdk": "libs/shared/storyblok-sdk",
     "shared-ui-components": "libs/shared/ui-components"
   }
