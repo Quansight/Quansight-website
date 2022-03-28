@@ -1,4 +1,4 @@
-import { TBlok } from '@quansight/shared/ui-components';
+import { TBlok } from '@quansight/shared/config';
 import { ComponentType } from '../../../components/BlokProvider/types';
 
 export enum HeroVariant {

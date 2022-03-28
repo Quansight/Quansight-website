@@ -1,9 +1,9 @@
 import {
-  TypeValuesUnion,
   THeroProps,
   TTeaserProps,
   TStickyNotesProps,
 } from '@quansight/shared/ui-components';
+import { TypeValuesUnion } from '@quansight/shared/config';
 import { TBoardProps } from '../Board/Board';
 
 export enum ComponentType {

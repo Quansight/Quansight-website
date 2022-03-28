@@ -1,9 +1,4 @@
-import {
-  TRichText,
-  TImage,
-  TLink,
-  TBlok,
-} from '@quansight/shared/ui-components';
+import { TRichText, TImage, TLink, TBlok } from '@quansight/shared/config';
 import { ComponentType } from '../../../components/BlokProvider/types';
 
 export type TBoardRawData = {
