@@ -1,7 +1,7 @@
 import { TLink, TBlok } from '@quansight/shared/ui-components';
 import { ComponentType } from '../../../components/BlokProvider/types';
 
-type TJobRawData = {
+type TJobListItemRawData = {
   _uid: string;
   jobTitle: string;
   linkUrl: TLink;
@@ -9,8 +9,8 @@ type TJobRawData = {
   isRemote: boolean;
 };
 
-export type TJobOpeningsRawData = {
-  component: ComponentType.JobOpenings;
+export type TJobListRawData = {
+  component: ComponentType.JobList;
   title: string;
-  jobs: TJobRawData[];
+  jobs: TJobListItemRawData[];
 } & TBlok;

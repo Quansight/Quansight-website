@@ -1,10 +1,8 @@
-import { TJobOpeningsProps } from '../../JobOpenings/types';
-import { TJobOpeningsRawData } from '../../../types/storyblok/bloks/jobOpenings';
+import { TJobListProps } from '../../JobList/types';
+import { TJobListRawData } from '../../../types/storyblok/bloks/jobList';
 import { getUrl } from '@quansight/shared/ui-components';
 
-export const getJobOpeningsProps = (
-  blok: TJobOpeningsRawData,
-): TJobOpeningsProps => ({
+export const getJobListProps = (blok: TJobListRawData): TJobListProps => ({
   title: blok.title,
   jobs: blok.jobs.map(({ _uid, jobTitle, linkUrl, location, isRemote }) => ({
     _uid,

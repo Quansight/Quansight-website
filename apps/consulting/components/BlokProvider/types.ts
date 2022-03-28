@@ -6,14 +6,14 @@ import {
   TFeatureArticleProps,
 } from '@quansight/shared/ui-components';
 import { TBoardProps } from '../Board/Board';
-import { TJobOpeningsProps } from '../JobOpenings/types';
+import { TJobListProps } from '../JobList/types';
 
 export enum ComponentType {
   Teaser = 'teaser',
   Board = 'board',
   Hero = 'hero',
   StickyNotes = 'sticky-notes',
-  JobOpenings = 'job-openings',
+  JobList = 'job-list',
   FeatureArticle = 'feature-article',
 }
 
@@ -22,7 +22,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Board]: TBoardProps;
   [ComponentType.Hero]: THeroProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;
-  [ComponentType.JobOpenings]: TJobOpeningsProps;
+  [ComponentType.JobList]: TJobListProps;
   [ComponentType.FeatureArticle]: TFeatureArticleProps;
 };
 

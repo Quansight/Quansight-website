@@ -1,6 +1,6 @@
 import { TJobListItem } from '../JobListItem/types';
 
-export type TJobOpeningsProps = {
+export type TJobListProps = {
   title: string;
   jobs: TJobListItem[];
 };
