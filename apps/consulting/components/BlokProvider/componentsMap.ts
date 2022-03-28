@@ -1,4 +1,9 @@
-import { StickyNotes, Teaser, Hero } from '@quansight/shared/ui-components';
+import {
+  StickyNotes,
+  Teaser,
+  Hero,
+  FeatureArticle,
+} from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
 
@@ -9,4 +14,5 @@ export const componentsMap = {
   [ComponentType.Board]: Board,
   [ComponentType.Hero]: Hero,
   [ComponentType.StickyNotes]: StickyNotes,
+  [ComponentType.FeatureArticle]: FeatureArticle,
 };
