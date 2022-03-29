@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { TRichText } from '@quansight/shared/types';
 import { createMarkup } from '@quansight/shared/ui-components';
 
 import { HeaderDecoration, ButtonDecoration } from './decorations';

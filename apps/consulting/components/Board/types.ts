@@ -1,4 +1,4 @@
-import { TRichText } from '@quansight/shared/ui-components';
+import { TRichText } from '@quansight/shared/types';
 
 export type TBoardItemProps = {
   _uid?: string;
