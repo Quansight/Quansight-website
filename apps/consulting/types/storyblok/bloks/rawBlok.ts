@@ -1,14 +1,16 @@
 import { TBoardRawData } from './board';
+import { TBoardListRawData } from './boardList';
+import { TFeatureArticleRawData } from './featureArticle';
 import { THeroRawData } from './hero';
+import { TJobListRawData } from './jobList';
 import { TStickyNotesRawData } from './stickyNotes';
 import { TTeaserRawData } from './teaser';
-import { TJobListRawData } from './jobList';
-import { TFeatureArticleRawData } from './featureArticle';
 
 export type TRawBlok =
-  | THeroRawData
   | TBoardRawData
-  | TTeaserRawData
-  | TStickyNotesRawData
+  | TBoardListRawData
+  | TFeatureArticleRawData
+  | THeroRawData
   | TJobListRawData
-  | TFeatureArticleRawData;
+  | TStickyNotesRawData
+  | TTeaserRawData;

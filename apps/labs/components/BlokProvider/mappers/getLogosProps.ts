@@ -1,6 +1,7 @@
-import { TLogosProps } from '../../Logos/Logos';
-import { TLogosRawData } from '../../../types/storyblok/bloks/logos';
 import { getUrl } from '@quansight/shared/ui-components';
+
+import { TLogosProps } from '../../Logos/types';
+import { TLogosRawData } from '../../../types/storyblok/bloks/logos';
 
 export const getLogosProps = (blok: TLogosRawData): TLogosProps => ({
   title: blok.title,

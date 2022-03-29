@@ -1,15 +1,9 @@
 import { FC } from 'react';
 import Link from 'next/link';
+
 import { Picture } from '@quansight/shared/ui-components';
 
-export type TBoardItemProps = {
-  _uid?: string;
-  title: string;
-  linkTitle: string;
-  linkUrl: string;
-  imageSrc: string;
-  imageAlt: string;
-};
+import { TBoardItemProps } from './types';
 
 const BoardItem: FC<TBoardItemProps> = ({
   title,

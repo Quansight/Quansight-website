@@ -1,4 +1,5 @@
 export enum ButtonColor {
+  Pink = 'pink',
   Violet = 'violet',
   White = 'white',
 }

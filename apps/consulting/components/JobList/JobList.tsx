@@ -1,6 +1,8 @@
 import { FC } from 'react';
+
+import { JobListItem } from './JobListItem';
+
 import { TJobListProps } from './types';
-import { JobListItem } from '../JobListItem/JobListItem';
 
 export const JobList: FC<TJobListProps> = ({ title, jobs }) => (
   <section className="flex flex-col justify-center items-center my-24 mx-auto xl:mt-52 xl:mb-24 max-w-layout">

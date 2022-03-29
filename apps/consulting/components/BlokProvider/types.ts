@@ -1,26 +1,30 @@
 import { THeroProps, TTeaserProps } from '@quansight/shared/ui-components';
 import { TypeValuesUnion } from '@quansight/shared/types';
-import { TBoardProps } from '../Board/Board';
+
+import { TBoardProps } from '../Board/types';
+import { TBoardListProps } from '../BoardList/types';
 import { TFeatureArticleProps } from '../FeatureArticle/types';
 import { TJobListProps } from '../JobList/types';
 import { TStickyNotesProps } from '../StickyNotes/types';
 
 export enum ComponentType {
-  Teaser = 'teaser',
   Board = 'board',
-  Hero = 'hero',
-  StickyNotes = 'sticky-notes',
-  JobList = 'job-list',
+  BoardList = 'board-list',
   FeatureArticle = 'feature-article',
+  Hero = 'hero',
+  JobList = 'job-list',
+  StickyNotes = 'sticky-notes',
+  Teaser = 'teaser',
 }
 
 type TBlokComponentPropsMap = {
-  [ComponentType.Teaser]: TTeaserProps;
   [ComponentType.Board]: TBoardProps;
-  [ComponentType.Hero]: THeroProps;
-  [ComponentType.StickyNotes]: TStickyNotesProps;
-  [ComponentType.JobList]: TJobListProps;
+  [ComponentType.BoardList]: TBoardListProps;
   [ComponentType.FeatureArticle]: TFeatureArticleProps;
+  [ComponentType.Hero]: THeroProps;
+  [ComponentType.JobList]: TJobListProps;
+  [ComponentType.StickyNotes]: TStickyNotesProps;
+  [ComponentType.Teaser]: TTeaserProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

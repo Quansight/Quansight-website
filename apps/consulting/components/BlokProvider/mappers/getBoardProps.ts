@@ -1,6 +1,7 @@
-import { TBoardProps } from '../../Board/Board';
-import { TBoardRawData } from '../../../types/storyblok/bloks/board';
 import { getUrl } from '@quansight/shared/ui-components';
+
+import { TBoardProps } from '../../Board/types';
+import { TBoardRawData } from '../../../types/storyblok/bloks/board';
 
 export const getBoardProps = (blok: TBoardRawData): TBoardProps => ({
   title: blok.title,

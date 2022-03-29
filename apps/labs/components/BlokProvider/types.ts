@@ -1,6 +1,6 @@
 import { TypeValuesUnion } from '@quansight/shared/types';
 
-import { TLogosProps } from '../Logos/Logos';
+import { TLogosProps } from '../Logos/types';
 
 export enum ComponentType {
   Logos = 'logos',
