@@ -1,4 +1,4 @@
-import { TRichText } from '../../types';
+import { TRichText } from '@quansight/shared/config';
 
 export type TFeatureArticleProps = {
   title: string;

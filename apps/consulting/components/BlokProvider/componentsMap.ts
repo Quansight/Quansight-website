@@ -1,12 +1,9 @@
-import {
-  StickyNotes,
-  Teaser,
-  Hero,
-  FeatureArticle,
-} from '@quansight/shared/ui-components';
+import { Teaser, Hero } from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
+import { FeatureArticle } from '../FeatureArticle/FeatureArticle';
 import { JobList } from '../JobList/JobList';
+import { StickyNotes } from '../StickyNotes/StickyNotes';
 
 import { ComponentType } from './types';
 

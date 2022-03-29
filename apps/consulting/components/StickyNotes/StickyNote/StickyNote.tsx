@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import clsx from 'clsx';
-import ButtonLink from '../../ButtonLink/ButtonLink';
-import { ButtonColor } from '../../ButtonLink/types';
+import { ButtonLink, ButtonColor } from '@quansight/shared/ui-components';
 import { TStickyNoteProps } from '../types';
 import { getBackgroundColor, getTextColor } from './utils';
 

@@ -1,5 +1,5 @@
 import { TBlok, TLink } from '@quansight/shared/config';
-import { StickyNoteColor } from '@quansight/shared/ui-components';
+import { StickyNoteColor } from '../../../components/StickyNotes/types';
 import { ComponentType } from '../../../components/BlokProvider/types';
 
 type TStickyNotesItemRawData = {
