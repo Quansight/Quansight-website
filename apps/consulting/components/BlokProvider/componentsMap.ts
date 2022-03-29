@@ -15,4 +15,5 @@ export const componentsMap = {
   [ComponentType.Hero]: Hero,
   [ComponentType.JobList]: JobList,
   [ComponentType.StickyNotes]: StickyNotes,
+  [ComponentType.Teaser]: Teaser,
 };

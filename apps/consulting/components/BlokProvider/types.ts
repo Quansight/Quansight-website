@@ -14,6 +14,7 @@ export enum ComponentType {
   Hero = 'hero',
   JobList = 'job-list',
   StickyNotes = 'sticky-notes',
+  Teaser = 'teaser',
 }
 
 type TBlokComponentPropsMap = {
@@ -23,6 +24,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Hero]: THeroProps;
   [ComponentType.JobList]: TJobListProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;
+  [ComponentType.Teaser]: TTeaserProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;
