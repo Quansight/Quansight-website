@@ -19,9 +19,7 @@ export type TContactFormProps = {
   title: string;
 };
 
-export const ContactForm: FC<TContactFormProps> = ({
-  title = 'Say hello!',
-}) => {
+export const ContactForm: FC<TContactFormProps> = ({ title }) => {
   const { register, handleSubmit } = useForm<FormValues>();
 
   const onSubmit = handleSubmit((formValues): void => {
