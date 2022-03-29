@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TRichText } from '@quansight/shared/config';
+import { TRichText } from '@quansight/shared/types';
 import { createMarkup } from '@quansight/shared/ui-components';
 import { HeaderDecoration, ButtonDecoration } from './decorations';
 import BoardItem, { TBoardItemProps } from '../BoardItem/BoardItem';

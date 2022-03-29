@@ -15,10 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@quansight/shared/config": ["libs/shared/config/src/index.ts"],
       "@quansight/shared/storyblok-sdk": [
         "libs/shared/storyblok-sdk/src/index.ts"
       ],
+      "@quansight/shared/types": ["libs/shared/types/src/index.ts"],
       "@quansight/shared/ui-components": [
         "libs/shared/ui-components/src/index.ts"
       ]

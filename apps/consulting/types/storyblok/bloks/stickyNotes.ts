@@ -1,4 +1,4 @@
-import { TBlok, TLink } from '@quansight/shared/config';
+import { TBlok, TLink } from '@quansight/shared/types';
 import { StickyNoteColor } from '../../../components/StickyNotes/types';
 import { ComponentType } from '../../../components/BlokProvider/types';
 

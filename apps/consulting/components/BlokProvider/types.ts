@@ -1,5 +1,5 @@
 import { THeroProps, TTeaserProps } from '@quansight/shared/ui-components';
-import { TypeValuesUnion } from '@quansight/shared/config';
+import { TypeValuesUnion } from '@quansight/shared/types';
 import { TBoardProps } from '../Board/Board';
 import { TFeatureArticleProps } from '../FeatureArticle/types';
 import { TJobListProps } from '../JobList/types';

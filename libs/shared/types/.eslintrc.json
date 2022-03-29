@@ -9,7 +9,7 @@
     {
       "files": ["*.ts", "*.tsx"],
       "parserOptions": {
-        "project": ["libs/shared/config/tsconfig.lib.json"]
+        "project": ["libs/shared/types/tsconfig.lib.json"]
       }
     },
     {

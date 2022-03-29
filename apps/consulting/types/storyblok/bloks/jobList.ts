@@ -1,4 +1,4 @@
-import { TLink, TBlok } from '@quansight/shared/config';
+import { TLink, TBlok } from '@quansight/shared/types';
 import { ComponentType } from '../../../components/BlokProvider/types';
 
 type TJobListItemRawData = {

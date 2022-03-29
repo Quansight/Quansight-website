@@ -8,7 +8,7 @@ import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { getPaths } from '../../services/getPaths/getPaths';
 import { isPageType } from '../../services/contentTypes/isPageType';
 
-import { ISlugParams } from '@quansight/shared/config';
+import { ISlugParams } from '@quansight/shared/types';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlock';
 
 type TContainerProps = {

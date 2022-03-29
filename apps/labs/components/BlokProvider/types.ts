@@ -1,4 +1,4 @@
-import { TypeValuesUnion } from '@quansight/shared/config';
+import { TypeValuesUnion } from '@quansight/shared/types';
 
 import { TLogosProps } from '../Logos/Logos';
 

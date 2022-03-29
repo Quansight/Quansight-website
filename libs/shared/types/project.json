@@ -1,6 +1,6 @@
 {
-  "root": "libs/shared/config",
-  "sourceRoot": "libs/shared/config/src",
+  "root": "libs/shared/types",
+  "sourceRoot": "libs/shared/types/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -8,14 +8,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shared/config/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/shared/types/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/config"],
+      "outputs": ["coverage/libs/shared/types"],
       "options": {
-        "jestConfig": "libs/shared/config/jest.config.js",
+        "jestConfig": "libs/shared/types/jest.config.js",
         "passWithNoTests": true
       }
     }
