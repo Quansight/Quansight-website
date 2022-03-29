@@ -1,14 +1,9 @@
 import { FC } from 'react';
 
 import { ButtonColor, ButtonLink } from '@quansight/shared/ui-components';
+import BoardListItem from './BoardListItem';
 
-import BoardListItem, { TBoardListItemProps } from './BoardListItem';
-
-export type TBoardListProps = {
-  grid: TBoardListItemProps[];
-  linkTitle: string;
-  linkUrl: string;
-};
+import { TBoardListProps } from './types';
 
 export const BoardList: FC<TBoardListProps> = ({
   grid,

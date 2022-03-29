@@ -3,15 +3,10 @@ import { TRichText } from '@quansight/shared/types';
 import { createMarkup } from '@quansight/shared/ui-components';
 
 import { HeaderDecoration, ButtonDecoration } from './decorations';
-import BoardItem, { TBoardItemProps } from './BoardItem';
-import BoardButton, { TBoardButtonProps } from './BoardButton';
+import BoardItem from './BoardItem';
+import BoardButton from './BoardButton';
 
-export type TBoardProps = {
-  title: string;
-  description: TRichText;
-  grid: TBoardItemProps[];
-  button: TBoardButtonProps;
-};
+import { TBoardProps } from './types';
 
 export const Board: FC<TBoardProps> = ({
   title,

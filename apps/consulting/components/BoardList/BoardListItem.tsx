@@ -3,15 +3,7 @@ import { FC } from 'react';
 import { Picture } from '@quansight/shared/ui-components';
 import { ButtonColor, ButtonLink } from '@quansight/shared/ui-components';
 
-export type TBoardListItemProps = {
-  _uid?: string;
-  title: string;
-  text: string;
-  linkTitle: string;
-  linkUrl: string;
-  imageSrc: string;
-  imageAlt: string;
-};
+import { TBoardListItemProps } from './types';
 
 const BoardListItem: FC<TBoardListItemProps> = ({
   title,

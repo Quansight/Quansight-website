@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { TJobListItem } from './types';
 import Link from 'next/link';
+
+import { TJobListItem } from './types';
 
 export const JobListItem: FC<TJobListItem> = ({
   jobTitle,

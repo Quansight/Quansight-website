@@ -1,6 +1,7 @@
-import { TBoardListProps } from '../../BoardList/BoardList';
-import { TBoardListRawData } from '../../../types/storyblok/bloks/boardList';
 import { getUrl } from '@quansight/shared/ui-components';
+
+import { TBoardListProps } from '../../BoardList/types';
+import { TBoardListRawData } from '../../../types/storyblok/bloks/boardList';
 
 export const getBoardListProps = (
   blok: TBoardListRawData,
