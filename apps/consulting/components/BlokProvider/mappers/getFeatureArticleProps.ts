@@ -1,4 +1,4 @@
-import { TFeatureArticleProps } from '@quansight/shared/ui-components';
+import { TFeatureArticleProps } from '../../FeatureArticle/types';
 import { TFeatureArticleRawData } from '../../../types/storyblok/bloks/featureArticle';
 
 export const getFeatureArticleProps = (

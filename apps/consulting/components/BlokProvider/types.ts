@@ -1,12 +1,9 @@
-import {
-  TypeValuesUnion,
-  THeroProps,
-  TTeaserProps,
-  TStickyNotesProps,
-  TFeatureArticleProps,
-} from '@quansight/shared/ui-components';
+import { THeroProps, TTeaserProps } from '@quansight/shared/ui-components';
+import { TypeValuesUnion } from '@quansight/shared/types';
 import { TBoardProps } from '../Board/Board';
+import { TFeatureArticleProps } from '../FeatureArticle/types';
 import { TJobListProps } from '../JobList/types';
+import { TStickyNotesProps } from '../StickyNotes/types';
 
 export enum ComponentType {
   Teaser = 'teaser',

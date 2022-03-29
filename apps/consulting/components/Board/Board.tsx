@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TRichText } from '@quansight/shared/ui-components';
+import { TRichText } from '@quansight/shared/types';
 import { createMarkup } from '@quansight/shared/ui-components';
 import { HeaderDecoration, ButtonDecoration } from './decorations';
 import BoardItem, { TBoardItemProps } from '../BoardItem/BoardItem';
@@ -31,7 +31,9 @@ export const Board: FC<TBoardProps> = ({
           dangerouslySetInnerHTML={createMarkup(description)}
         />
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-[0.5px] sm:bg-white xl:gap-[1px]">
-          {grid.map((props) => <BoardItem {...props} key={props._uid} />)}
+          {grid.map((props) => (
+            <BoardItem {...props} key={props._uid} />
+          ))}
           <BoardButton {...button} />
         </div>
       </div>

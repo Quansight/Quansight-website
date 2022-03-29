@@ -6,7 +6,7 @@ import {
 } from '@quansight/shared/storyblok-sdk';
 import SbEditable from 'storyblok-react';
 
-import { TBlok } from '../../types';
+import { TBlok } from '@quansight/shared/types';
 
 export type TPageProps = {
   data: PageItem;
