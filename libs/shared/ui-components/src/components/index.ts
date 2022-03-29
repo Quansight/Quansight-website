@@ -22,3 +22,5 @@ export * from './StickyNotes/types';
 export * from './Input/Input';
 export * from './Textarea/Textarea';
 export * from './Button/Button';
+export * from './FeatureArticle/FeatureArticle';
+export * from './FeatureArticle/types';
