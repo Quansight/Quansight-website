@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Picture } from '@quansight/shared/ui-components';
 import { ButtonColor, ButtonLink } from '@quansight/shared/ui-components';
 
-export type TListItemProps = {
+export type TBoardListItemProps = {
   _uid?: string;
   title: string;
   text: string;
@@ -13,7 +13,7 @@ export type TListItemProps = {
   imageAlt: string;
 };
 
-const ListItem: FC<TListItemProps> = ({
+const BoardListItem: FC<TBoardListItemProps> = ({
   title,
   text,
   linkTitle,
@@ -63,4 +63,4 @@ const ListItem: FC<TListItemProps> = ({
   </div>
 );
 
-export default ListItem;
+export default BoardListItem;

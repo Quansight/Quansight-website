@@ -1,8 +1,10 @@
-import { TListProps } from '../../List/List';
-import { TListRawData } from '../../../types/storyblok/bloks/list';
+import { TBoardListProps } from '../../BoardList/BoardList';
+import { TBoardListRawData } from '../../../types/storyblok/bloks/boardList';
 import { getUrl } from '@quansight/shared/ui-components';
 
-export const getListProps = (blok: TListRawData): TListProps => ({
+export const getBoardListProps = (
+  blok: TBoardListRawData,
+): TBoardListProps => ({
   grid: blok.grid.map(
     ({ _uid, image: { alt, filename }, title, text, linkTitle, linkUrl }) => ({
       _uid,

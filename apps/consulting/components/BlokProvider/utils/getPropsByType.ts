@@ -1,10 +1,10 @@
 import { ComponentType, TBlokComponentProps } from '../types';
 
 import { getBoardProps } from '../mappers/getBoardProps';
+import { getBoardListProps } from '../mappers/getBoardListProps';
 import { getFeatureArticleProps } from '../mappers/getFeatureArticleProps';
 import { getHeroProps } from '../mappers/getHeroProps';
 import { getJobListProps } from '../mappers/getJobListProps';
-import { getListProps } from '../mappers/getListProps';
 import { getStickyNotesProps } from '../mappers/getStickyNotesProps';
 import { getTeaserProps } from '../mappers/getTeaserProps';
 
@@ -15,6 +15,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     case ComponentType.Board: {
       return getBoardProps(blok);
     }
+    case ComponentType.BoardList: {
+      return getBoardListProps(blok);
+    }
     case ComponentType.FeatureArticle: {
       return getFeatureArticleProps(blok);
     }
@@ -23,9 +26,6 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.JobList: {
       return getJobListProps(blok);
-    }
-    case ComponentType.List: {
-      return getListProps(blok);
     }
     case ComponentType.StickyNotes: {
       return getStickyNotesProps(blok);

@@ -2,15 +2,19 @@ import { FC } from 'react';
 
 import { ButtonColor, ButtonLink } from '@quansight/shared/ui-components';
 
-import ListItem, { TListItemProps } from './ListItem';
+import BoardListItem, { TBoardListItemProps } from './BoardListItem';
 
-export type TListProps = {
-  grid: TListItemProps[];
+export type TBoardListProps = {
+  grid: TBoardListItemProps[];
   linkTitle: string;
   linkUrl: string;
 };
 
-export const List: FC<TListProps> = ({ grid, linkTitle, linkUrl }) => {
+export const BoardList: FC<TBoardListProps> = ({
+  grid,
+  linkTitle,
+  linkUrl,
+}) => {
   return (
     <section
       className="
@@ -20,7 +24,7 @@ export const List: FC<TListProps> = ({ grid, linkTitle, linkUrl }) => {
       "
     >
       {grid.map((props) => (
-        <ListItem {...props} key={props._uid} />
+        <BoardListItem {...props} key={props._uid} />
       ))}
       <div className="w-[27rem] lg:mt-[6rem] lg:ml-[12rem]">
         <ButtonLink
