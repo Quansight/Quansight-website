@@ -2,10 +2,7 @@ import { FC } from 'react';
 
 import { ButtonColor, ButtonLink } from '@quansight/shared/ui-components';
 
-export type TBoardButtonProps = {
-  buttonTitle: string;
-  buttonUrl: string;
-};
+import { TBoardButtonProps } from './types';
 
 const BoardButton: FC<TBoardButtonProps> = ({ buttonTitle, buttonUrl }) => {
   return (

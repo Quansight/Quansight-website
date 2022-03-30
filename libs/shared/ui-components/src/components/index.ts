@@ -16,11 +16,6 @@ export * from './Page/Page';
 export * from './Placeholder/Placeholder';
 export * from './Placeholder/types';
 
-export * from './StickyNotes/StickyNotes';
-export * from './StickyNotes/types';
-
 export * from './Input/Input';
 export * from './Textarea/Textarea';
 export * from './Button/Button';
-export * from './FeatureArticle/FeatureArticle';
-export * from './FeatureArticle/types';

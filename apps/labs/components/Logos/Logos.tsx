@@ -2,14 +2,9 @@ import { FC } from 'react';
 import Link from 'next/link';
 import clsx from 'clsx';
 
-import { Picture, TPictureProps } from '@quansight/shared/ui-components';
+import { Picture } from '@quansight/shared/ui-components';
 
-export type TLogosProps = {
-  title: string;
-  grid: TPictureProps[];
-  linkTitle: string;
-  linkUrl: string;
-};
+import { TLogosProps } from './types';
 
 export const Logos: FC<TLogosProps> = ({ title, grid, linkTitle, linkUrl }) => {
   return (

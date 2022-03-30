@@ -4,6 +4,7 @@
     "consulting": "apps/consulting",
     "labs": "apps/labs",
     "shared-storyblok-sdk": "libs/shared/storyblok-sdk",
+    "shared-types": "libs/shared/types",
     "shared-ui-components": "libs/shared/ui-components"
   }
 }

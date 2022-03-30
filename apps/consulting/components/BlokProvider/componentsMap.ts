@@ -1,20 +1,19 @@
-import {
-  StickyNotes,
-  Teaser,
-  Hero,
-  FeatureArticle,
-} from '@quansight/shared/ui-components';
+import { Teaser, Hero } from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
+import { BoardList } from '../BoardList/BoardList';
+import { FeatureArticle } from '../FeatureArticle/FeatureArticle';
 import { JobList } from '../JobList/JobList';
+import { StickyNotes } from '../StickyNotes/StickyNotes';
 
 import { ComponentType } from './types';
 
 export const componentsMap = {
-  [ComponentType.Teaser]: Teaser,
   [ComponentType.Board]: Board,
-  [ComponentType.Hero]: Hero,
-  [ComponentType.StickyNotes]: StickyNotes,
-  [ComponentType.JobList]: JobList,
+  [ComponentType.BoardList]: BoardList,
   [ComponentType.FeatureArticle]: FeatureArticle,
+  [ComponentType.Hero]: Hero,
+  [ComponentType.JobList]: JobList,
+  [ComponentType.StickyNotes]: StickyNotes,
+  [ComponentType.Teaser]: Teaser,
 };

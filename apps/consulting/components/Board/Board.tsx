@@ -1,16 +1,11 @@
 import { FC } from 'react';
-import { TRichText } from '@quansight/shared/ui-components';
 import { createMarkup } from '@quansight/shared/ui-components';
-import { HeaderDecoration, ButtonDecoration } from './decorations';
-import BoardItem, { TBoardItemProps } from '../BoardItem/BoardItem';
-import BoardButton, { TBoardButtonProps } from '../BoardButton/BoardButton';
 
-export type TBoardProps = {
-  title: string;
-  description: TRichText;
-  grid: TBoardItemProps[];
-  button: TBoardButtonProps;
-};
+import { HeaderDecoration, ButtonDecoration } from './decorations';
+import BoardItem from './BoardItem';
+import BoardButton from './BoardButton';
+
+import { TBoardProps } from './types';
 
 export const Board: FC<TBoardProps> = ({
   title,
@@ -31,7 +26,9 @@ export const Board: FC<TBoardProps> = ({
           dangerouslySetInnerHTML={createMarkup(description)}
         />
         <div className="grid grid-cols-1 sm:grid-cols-3 sm:gap-[0.5px] sm:bg-white xl:gap-[1px]">
-          {grid.map((props) => <BoardItem {...props} key={props._uid} />)}
+          {grid.map((props) => (
+            <BoardItem {...props} key={props._uid} />
+          ))}
           <BoardButton {...button} />
         </div>
       </div>
