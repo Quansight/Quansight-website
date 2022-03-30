@@ -1,6 +1,6 @@
 import { TypeValuesUnion } from '@quansight/shared/types';
-import { TContactFormProps } from '../ContactForm/ContactForm';
 
+import { TContactFormProps } from '../ContactForm/ContactForm';
 import { TLogosProps } from '../Logos/types';
 
 export enum ComponentType {
@@ -9,8 +9,8 @@ export enum ComponentType {
 }
 
 type TBlokComponentPropsMap = {
-  [ComponentType.Logos]: TLogosProps;
   [ComponentType.ContactForm]: TContactFormProps;
+  [ComponentType.Logos]: TLogosProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

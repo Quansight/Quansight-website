@@ -1,8 +1,8 @@
 import { ComponentType } from './types';
-import { Logos } from '../Logos/Logos';
 import { ContactForm } from '../ContactForm/ContactForm';
+import { Logos } from '../Logos/Logos';
 
 export const componentsMap = {
-  [ComponentType.Logos]: Logos,
   [ComponentType.ContactForm]: ContactForm,
+  [ComponentType.Logos]: Logos,
 };

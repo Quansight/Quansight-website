@@ -15,7 +15,7 @@ export const Input: FC<TInputProps> = forwardRef<HTMLInputElement, TInputProps>(
         type={type}
         onChange={onChange}
         className={clsx(
-          'p-[15px] w-full text-[1.6rem] leading-[3rem] placeholder:text-black border border-solid border-gray',
+          'p-[15px] w-full text-[1.6rem] leading-[3rem] placeholder:text-black border border-gray-100 border-solid',
           className,
         )}
         {...inputProps}

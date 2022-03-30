@@ -10,6 +10,7 @@ import { isPageType } from '../../services/contentTypes/isPageType';
 
 import { ISlugParams } from '@quansight/shared/types';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlock';
+import { ContactForm } from '../../components/ContactForm/ContactForm';
 
 type TContainerProps = {
   data: PageItem;
@@ -19,6 +20,7 @@ type TContainerProps = {
 const Container: FC<TContainerProps> = ({ data, preview }) => {
   return (
     <>
+      <ContactForm title="SSSFFF" />
       {isPageType(data?.content?.component) && (
         <Page data={data} preview={preview}>
           {(blok: TRawBlok) => <BlokProvider blok={blok} />}

@@ -27,7 +27,7 @@ export const ContactForm: FC<TContactFormProps> = ({ title }) => {
   });
 
   return (
-    <div className="before:hidden relative before:absolute before:top-0 before:left-[calc(50%+10rem)] py-[6rem] px-[2rem] before:w-[10rem] before:h-[6rem] before:content-[''] md:before:block md:px-[4rem] before:bg-lightGray">
+    <div className="before:hidden relative before:absolute before:top-0 before:left-[calc(50%+10rem)] py-[6rem] px-[2rem] before:w-[10rem] before:h-[6rem] before:content-[''] before:bg-gray-200 md:before:block md:px-[4rem]">
       <h2 className="mb-[4rem] text-[4rem] font-extrabold leading-[4.9rem] text-center md:mb-[17rem] md:text-[4.8rem] md:text-left text-violet font-heading">
         {title}
       </h2>
