@@ -18,6 +18,10 @@ module.exports = {
         green: '#99C941',
         black: '#191919',
         white: '#ffffff',
+        gray: {
+          100: '#707070',
+          200: '#C4C4C4',
+        },
       },
       maxWidth: {
         layout: '144rem',
