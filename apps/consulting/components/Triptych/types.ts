@@ -7,6 +7,6 @@ export type TTriptychColumnProps = {
 };
 
 export type TTriptychProps = {
-  title: string;
+  title?: string;
   columns: TTriptychColumnProps[];
 };
