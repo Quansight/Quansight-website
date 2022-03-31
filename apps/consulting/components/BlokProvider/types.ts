@@ -4,30 +4,30 @@ import { TypeValuesUnion } from '@quansight/shared/types';
 import { TBoardProps } from '../Board/types';
 import { TBoardListProps } from '../BoardList/types';
 import { TFeatureArticleProps } from '../FeatureArticle/types';
+import { TFeaturesProps } from '../Features/types';
 import { TJobListProps } from '../JobList/types';
 import { TStickyNotesProps } from '../StickyNotes/types';
-import { TTriptychProps } from '../Triptych/types';
 
 export enum ComponentType {
   Board = 'board',
   BoardList = 'board-list',
   FeatureArticle = 'feature-article',
+  Features = 'features',
   Hero = 'hero',
   JobList = 'job-list',
   StickyNotes = 'sticky-notes',
   Teaser = 'teaser',
-  Triptych = 'triptych',
 }
 
 type TBlokComponentPropsMap = {
   [ComponentType.Board]: TBoardProps;
   [ComponentType.BoardList]: TBoardListProps;
   [ComponentType.FeatureArticle]: TFeatureArticleProps;
+  [ComponentType.Features]: TFeaturesProps;
   [ComponentType.Hero]: THeroProps;
   [ComponentType.JobList]: TJobListProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;
   [ComponentType.Teaser]: TTeaserProps;
-  [ComponentType.Triptych]: TTriptychProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

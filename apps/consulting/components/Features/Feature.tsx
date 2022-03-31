@@ -2,14 +2,9 @@ import { FC } from 'react';
 
 import { Picture } from '@quansight/shared/ui-components';
 
-import { TTriptychColumnProps } from './types';
+import { TFeatureProps } from './types';
 
-const TriptychColumn: FC<TTriptychColumnProps> = ({
-  title,
-  text,
-  imageSrc,
-  imageAlt,
-}) => (
+const Feature: FC<TFeatureProps> = ({ title, text, imageSrc, imageAlt }) => (
   <li
     className="
       pt-[2rem] pb-[5rem] text-center last:border-0 border-b
@@ -35,4 +30,4 @@ const TriptychColumn: FC<TTriptychColumnProps> = ({
   </li>
 );
 
-export default TriptychColumn;
+export default Feature;

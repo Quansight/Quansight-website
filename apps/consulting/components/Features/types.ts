@@ -1,4 +1,4 @@
-export type TTriptychColumnProps = {
+export type TFeatureProps = {
   _uid?: string;
   title: string;
   text: string;
@@ -6,7 +6,7 @@ export type TTriptychColumnProps = {
   imageAlt: string;
 };
 
-export type TTriptychProps = {
+export type TFeaturesProps = {
   title?: string;
-  columns: TTriptychColumnProps[];
+  columns: TFeatureProps[];
 };

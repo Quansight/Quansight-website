@@ -1,7 +1,7 @@
-import { TTriptychProps } from '../../Triptych/types';
-import { TTriptychRawData } from '../../../types/storyblok/bloks/triptych';
+import { TFeaturesProps } from '../../Features/types';
+import { TFeaturesRawData } from '../../../types/storyblok/bloks/features';
 
-export const getTriptychProps = (blok: TTriptychRawData): TTriptychProps => ({
+export const getFeaturesProps = (blok: TFeaturesRawData): TFeaturesProps => ({
   title: blok.title,
   columns: blok.columns.map(
     ({ _uid, image: { alt, filename }, title, text }) => ({

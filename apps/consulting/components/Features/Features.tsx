@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import TriptychColumn from './TriptychColumn';
+import Feature from './Feature';
 
-import { TTriptychProps } from './types';
+import { TFeaturesProps } from './types';
 
-export const Triptych: FC<TTriptychProps> = ({ title, columns }) => {
+export const Features: FC<TFeaturesProps> = ({ title, columns }) => {
   return (
     <section
       className="
@@ -25,7 +25,7 @@ export const Triptych: FC<TTriptychProps> = ({ title, columns }) => {
       )}
       <ul className="flex flex-col lg:flex-row">
         {columns.map((props) => (
-          <TriptychColumn {...props} key={props._uid} />
+          <Feature {...props} key={props._uid} />
         ))}
       </ul>
     </section>
