@@ -6,6 +6,7 @@ import { TBoardListProps } from '../BoardList/types';
 import { TFeatureArticleProps } from '../FeatureArticle/types';
 import { TJobListProps } from '../JobList/types';
 import { TStickyNotesProps } from '../StickyNotes/types';
+import { TTriptychProps } from '../Triptych/types';
 
 export enum ComponentType {
   Board = 'board',
@@ -15,6 +16,7 @@ export enum ComponentType {
   JobList = 'job-list',
   StickyNotes = 'sticky-notes',
   Teaser = 'teaser',
+  Triptych = 'triptych',
 }
 
 type TBlokComponentPropsMap = {
@@ -25,6 +27,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.JobList]: TJobListProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;
   [ComponentType.Teaser]: TTeaserProps;
+  [ComponentType.Triptych]: TTriptychProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

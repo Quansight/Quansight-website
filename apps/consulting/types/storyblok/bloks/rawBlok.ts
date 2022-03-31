@@ -5,6 +5,7 @@ import { THeroRawData } from './hero';
 import { TJobListRawData } from './jobList';
 import { TStickyNotesRawData } from './stickyNotes';
 import { TTeaserRawData } from './teaser';
+import { TTriptychRawData } from './triptych';
 
 export type TRawBlok =
   | TBoardRawData
@@ -13,4 +14,5 @@ export type TRawBlok =
   | THeroRawData
   | TJobListRawData
   | TStickyNotesRawData
-  | TTeaserRawData;
+  | TTeaserRawData
+  | TTriptychRawData;
