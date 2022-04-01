@@ -11,6 +11,7 @@ module.exports = {
     extend: {
       fontFamily: {
         heading: ['Mukta', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
       },
       colors: {
         transparent: 'transparent',

@@ -40,7 +40,7 @@ export const Hero: FC<THeroProps> = ({
         >
           <h2
             className={clsx(
-              'text-[5rem] leading-[6rem] text-white font-heading',
+              'text-[5rem] font-extrabold leading-[6rem] text-white font-heading',
               isLargeHero ? 'mb-12' : 'text-center',
             )}
           >
@@ -49,7 +49,7 @@ export const Hero: FC<THeroProps> = ({
           {subTitle && (
             <h3
               className={clsx(
-                'text-[4rem] leading-[4.8rem] text-white font-heading',
+                'text-[4rem] font-extrabold leading-[4.8rem] text-white font-heading',
                 isMediumHero && 'text-center',
               )}
             >
