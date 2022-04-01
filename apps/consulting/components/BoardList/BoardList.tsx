@@ -13,10 +13,10 @@ export const BoardList: FC<TBoardListProps> = ({
   return (
     <section
       className="
-        flex flex-col items-center px-[3rem] mx-auto md:px-[13rem]
+        flex flex-col items-center px-[3rem] mx-auto mt-[2.5rem] md:px-[13rem]
         lg:flex-wrap
-        lg:items-start lg:h-[90rem] 2xl:h-[75rem] 
-        max-w-layout
+        lg:items-start lg:mt-[5rem] lg:h-[90rem] 2xl:pr-[5rem]
+        2xl:pl-[15rem] 2xl:h-[75rem] max-w-layout
       "
     >
       {grid.map((props) => (

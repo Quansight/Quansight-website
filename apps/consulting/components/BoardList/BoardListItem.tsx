@@ -37,6 +37,7 @@ const BoardListItem: FC<TBoardListItemProps> = ({
           className="
           mb-[0.5rem] text-[1.6rem] leading-[2.7rem] text-center 
           lg:px-[3rem] lg:text-left
+          xl:pr-[10rem]
         "
         >
           {text}
