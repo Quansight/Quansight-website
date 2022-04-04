@@ -3,7 +3,7 @@ import { TIntertwinedArticleProps } from './types';
 import { createMarkup } from '@quansight/shared/ui-components';
 import { IntertwinedArticleItem } from './IntertwinedArticleItem';
 
-const IntertwinedArticle: FC<TIntertwinedArticleProps> = ({
+export const IntertwinedArticle: FC<TIntertwinedArticleProps> = ({
   title,
   sections,
   footer,
@@ -18,5 +18,3 @@ const IntertwinedArticle: FC<TIntertwinedArticleProps> = ({
     </article>
   );
 };
-
-export default IntertwinedArticle;
