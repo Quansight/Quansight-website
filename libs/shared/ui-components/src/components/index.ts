@@ -11,6 +11,8 @@ export * from './Teaser/types';
 
 export * from './Hero/Hero';
 
+export * from './Meta/Meta';
+
 export * from './Page/Page';
 
 export * from './Placeholder/Placeholder';
