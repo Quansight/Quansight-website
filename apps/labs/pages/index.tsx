@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps<
   TContainerProps,
   ISlugParams
 > = async () => {
-  const { data } = await Api.getPageItem({ slug: 'home' });
+  const { data } = await Api.getPageItem({ slug: 'labs' });
   return {
     props: {
       data: data.PageItem,
