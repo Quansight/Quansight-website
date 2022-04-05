@@ -4,6 +4,7 @@ import { Board } from '../Board/Board';
 import { BoardList } from '../BoardList/BoardList';
 import { FeatureArticle } from '../FeatureArticle/FeatureArticle';
 import { Features } from '../Features/Features';
+import { IntertwinedArticle } from '../IntertwinedArticle/IntertwinedArticle';
 import { JobList } from '../JobList/JobList';
 import { StickyNotes } from '../StickyNotes/StickyNotes';
 
@@ -15,6 +16,7 @@ export const componentsMap = {
   [ComponentType.FeatureArticle]: FeatureArticle,
   [ComponentType.Features]: Features,
   [ComponentType.Hero]: Hero,
+  [ComponentType.IntertwinedArticle]: IntertwinedArticle,
   [ComponentType.JobList]: JobList,
   [ComponentType.StickyNotes]: StickyNotes,
   [ComponentType.Teaser]: Teaser,

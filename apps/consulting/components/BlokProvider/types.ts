@@ -5,6 +5,7 @@ import { TBoardProps } from '../Board/types';
 import { TBoardListProps } from '../BoardList/types';
 import { TFeatureArticleProps } from '../FeatureArticle/types';
 import { TFeaturesProps } from '../Features/types';
+import { TIntertwinedArticleProps } from '../IntertwinedArticle/types';
 import { TJobListProps } from '../JobList/types';
 import { TStickyNotesProps } from '../StickyNotes/types';
 
@@ -17,6 +18,7 @@ export enum ComponentType {
   JobList = 'job-list',
   StickyNotes = 'sticky-notes',
   Teaser = 'teaser',
+  IntertwinedArticle = 'intertwined-article',
 }
 
 type TBlokComponentPropsMap = {
@@ -25,6 +27,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.FeatureArticle]: TFeatureArticleProps;
   [ComponentType.Features]: TFeaturesProps;
   [ComponentType.Hero]: THeroProps;
+  [ComponentType.IntertwinedArticle]: TIntertwinedArticleProps;
   [ComponentType.JobList]: TJobListProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;
   [ComponentType.Teaser]: TTeaserProps;
