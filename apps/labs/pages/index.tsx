@@ -1,17 +1,38 @@
-import { FC } from 'react';
-import { Layout } from '@quansight/shared/ui-components';
+import React, { FC } from 'react';
+import { GetStaticProps } from 'next';
 
-export const Index: FC = () => {
+import { Api } from '@quansight/shared/storyblok-sdk';
+import { Page, Layout } from '@quansight/shared/ui-components';
+import { BlokProvider } from '../components/BlokProvider/BlokProvider';
+
+import { isPageType } from '../services/contentTypes/isPageType';
+
+import { ISlugParams, TContainerProps } from '@quansight/shared/types';
+import { TRawBlok } from '../types/storyblok/bloks/rawBlock';
+
+export const Index: FC<TContainerProps> = ({ data, preview }) => {
   return (
     <Layout>
-      <div>
-        <h1>
-          <span> Hello there, </span>
-          Welcome labs 👋
-        </h1>
-      </div>
+      {isPageType(data?.content?.component) && (
+        <Page data={data} preview={preview}>
+          {(blok: TRawBlok) => <BlokProvider blok={blok} />}
+        </Page>
+      )}
     </Layout>
   );
+};
+
+export const getStaticProps: GetStaticProps<
+  TContainerProps,
+  ISlugParams
+> = async () => {
+  const { data } = await Api.getPageItem({ slug: 'home' });
+  return {
+    props: {
+      data: data.PageItem,
+      preview: false,
+    },
+  };
 };
 
 export default Index;
