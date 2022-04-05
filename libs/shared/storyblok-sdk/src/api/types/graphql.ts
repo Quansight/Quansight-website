@@ -148,6 +148,7 @@ export type PageComponent = {
   _uid: Maybe<Scalars['String']>;
   body: Maybe<Scalars['BlockScalar']>;
   component: Maybe<Scalars['String']>;
+  description: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
 };
 
@@ -385,6 +386,7 @@ export type PageItemQuery = {
       body: any | null;
       component: string | null;
       title: string | null;
+      description: string | null;
     } | null;
     translated_slugs: Array<{
       __typename?: 'TranslatedSlug';
@@ -450,6 +452,7 @@ export const PageItemDocument = gql`
         body
         component
         title
+        description
       }
       created_at
       default_full_slug

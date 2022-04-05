@@ -18,6 +18,9 @@ export * from './Page/Page';
 export * from './Placeholder/Placeholder';
 export * from './Placeholder/types';
 
+export * from './SEO/SEO';
+export * from './SEO/types';
+
 export * from './Input/Input';
 export * from './Textarea/Textarea';
 export * from './Button/Button';

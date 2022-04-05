@@ -2,7 +2,12 @@ import React, { FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { Api } from '@quansight/shared/storyblok-sdk';
-import { Page, Layout } from '@quansight/shared/ui-components';
+import {
+  Page,
+  Layout,
+  SEO,
+  DomainVariant,
+} from '@quansight/shared/ui-components';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 
 import { getPaths } from '../../services/getPaths/getPaths';
@@ -11,17 +16,20 @@ import { isPageType } from '../../services/contentTypes/isPageType';
 import { ISlugParams, TContainerProps } from '@quansight/shared/types';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 
-const Container: FC<TContainerProps> = ({ data, preview }) => {
-  return (
-    <Layout>
-      {isPageType(data?.content?.component) && (
-        <Page data={data} preview={preview}>
-          {(blok: TRawBlok) => <BlokProvider blok={blok} />}
-        </Page>
-      )}
-    </Layout>
-  );
-};
+const Container: FC<TContainerProps> = ({ data, preview }) => (
+  <Layout>
+    <SEO
+      title={data.content.title}
+      description={data.content.description}
+      variant={DomainVariant.Quansight}
+    />
+    {isPageType(data?.content?.component) && (
+      <Page data={data} preview={preview}>
+        {(blok: TRawBlok) => <BlokProvider blok={blok} />}
+      </Page>
+    )}
+  </Layout>
+);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await Api.getLinks();
