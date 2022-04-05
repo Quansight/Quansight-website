@@ -17,7 +17,7 @@ export const IntertwinedArticle: FC<TIntertwinedArticleProps> = ({
         <IntertwinedArticleItem {...props} key={props._uid} />
       ))}
       {footer && (
-        <footer
+        <div
           className="mx-auto mt-28 max-w-[87.3rem] text-[1.6rem] leading-[2.7rem] sm:text-center"
           dangerouslySetInnerHTML={createMarkup(footer)}
         />
