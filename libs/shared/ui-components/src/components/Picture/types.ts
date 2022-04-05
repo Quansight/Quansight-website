@@ -7,4 +7,5 @@ export type TPictureProps = {
   height?: ImageProps['height'];
   layout?: ImageProps['layout'];
   priority?: ImageProps['priority'];
+  onLoadingComplete?: ImageProps['onLoadingComplete'];
 };
