@@ -11,9 +11,9 @@ import {
   getLastNoteMargins,
 } from './utils';
 
-import { TStickyNoteProps } from './types';
+import { TStickyNoteComponentProps } from './types';
 
-export const StickyNote: FC<TStickyNoteProps> = ({
+export const StickyNote: FC<TStickyNoteComponentProps> = ({
   title,
   variant,
   buttonLink,

@@ -24,6 +24,15 @@ export type TStickyNoteProps = {
   buttonText?: string;
   buttonLink?: string;
   variant: StickyNoteColor;
+};
+
+export type TStickyNoteComponentProps = {
+  title?: TStickyNoteProps['title'];
+  description: TStickyNoteProps['description'];
+  descriptionSize: TStickyNoteProps['descriptionSize'];
+  buttonText?: TStickyNoteProps['buttonText'];
+  buttonLink?: TStickyNoteProps['buttonLink'];
+  variant: TStickyNoteProps['variant'];
   isFirst: boolean;
   isLast: boolean;
   notesVariant: StickyNotesVariant;
