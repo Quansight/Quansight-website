@@ -26,8 +26,8 @@ const BoardListItem: FC<TBoardListItemProps> = ({
     <div className="mt-[1.5rem] mb-[4.4rem] lg:mt-0">
       <h3
         className="
-        text-[2.2rem] font-extrabold leading-[3rem] text-center
-        lg:pl-[3rem] lg:mb-[2.5rem] lg:text-left
+        text-[2.2rem] font-extrabold leading-[3rem] text-center lg:pl-[3rem]
+        lg:mb-[2.5rem] lg:text-left font-heading
       "
       >
         {title}
@@ -35,8 +35,9 @@ const BoardListItem: FC<TBoardListItemProps> = ({
       {text && (
         <p
           className="
-          mb-[0.5rem] text-[1.6rem] leading-[2.7rem] text-center 
+          mb-[0.5rem] text-[1.6rem] leading-[2.7rem] text-center
           lg:px-[3rem] lg:text-left
+          xl:pr-[10rem]
         "
         >
           {text}

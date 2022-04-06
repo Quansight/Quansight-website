@@ -18,8 +18,8 @@ const Feature: FC<TFeatureProps> = ({ title, text, imageSrc, imageAlt }) => (
     </div>
     <h3
       className="
-        my-[1.5rem] text-[2.2rem] font-extrabold leading-[3rem] text-white uppercase
-        lg:mt-[4rem] lg:mb-[2rem]
+        my-[1.5rem] text-[2.2rem] font-extrabold leading-[3rem] text-white uppercase lg:mt-[4rem]
+        lg:mb-[2rem] font-heading
       "
     >
       {title}

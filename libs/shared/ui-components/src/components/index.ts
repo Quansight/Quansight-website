@@ -10,6 +10,7 @@ export * from './Teaser/Teaser';
 export * from './Teaser/types';
 
 export * from './Hero/Hero';
+export * from './Hero/types';
 
 export * from './Page/Page';
 
