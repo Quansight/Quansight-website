@@ -15,16 +15,17 @@ query pageItem($slug: ID!) {
       body
       component
       title
-#      background_image {
-#        filename
-#      }
-#      background_video
-#      gallery_images
-#      heading
-#      lead
-#      title
-#      meta_description
-#      meta_keywords
+      description
+      #      background_image {
+      #        filename
+      #      }
+      #      background_video
+      #      gallery_images
+      #      heading
+      #      lead
+      #      title
+      #      meta_description
+      #      meta_keywords
     }
     created_at
     default_full_slug
@@ -51,17 +52,17 @@ query pageItem($slug: ID!) {
     }
     uuid
   }
-#  Links {
-#    items {
-#      id
-#      isFolder
-#      isStartpage
-#      name
-#      parentId
-#      position
-#      published
-#      slug
-#      uuid
-#    }
-#  }
+  #  Links {
+  #    items {
+  #      id
+  #      isFolder
+  #      isStartpage
+  #      name
+  #      parentId
+  #      position
+  #      published
+  #      slug
+  #      uuid
+  #    }
+  #  }
 }

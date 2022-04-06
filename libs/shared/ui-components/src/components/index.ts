@@ -12,10 +12,15 @@ export * from './Teaser/types';
 export * from './Hero/Hero';
 export * from './Hero/types';
 
+export * from './Meta/Meta';
+
 export * from './Page/Page';
 
 export * from './Placeholder/Placeholder';
 export * from './Placeholder/types';
+
+export * from './SEO/SEO';
+export * from './SEO/types';
 
 export * from './Input/Input';
 export * from './Textarea/Textarea';
