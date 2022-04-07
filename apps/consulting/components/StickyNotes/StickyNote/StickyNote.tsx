@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import clsx from 'clsx';
 
-import { Header } from './StickyNoteHeader';
-import { Description } from './StickyNoteDescription';
-import { Button } from './StickyNoteButton';
+import { Header } from './Header';
+import { Description } from './Description';
+import { Button } from './Button';
 
 import {
   getBackgroundColor,

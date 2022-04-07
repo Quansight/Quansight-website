@@ -1,4 +1,5 @@
 import { TRichText } from '@quansight/shared/types';
+import { StickyNotesVariant } from '../types';
 
 export enum StickyNoteColor {
   Green = 'green',
@@ -12,11 +13,6 @@ export enum StickyNoteSize {
   Big = 'big',
 }
 
-export enum StickyNotesVariant {
-  Asymmetric = 'asymmetric',
-  Symmetric = 'symmetric',
-}
-
 export type TStickyNoteProps = {
   title?: string;
   description: TRichText;
@@ -27,13 +23,7 @@ export type TStickyNoteProps = {
 };
 
 export type TStickyNoteComponentProps = {
-  title?: TStickyNoteProps['title'];
-  description: TStickyNoteProps['description'];
-  descriptionSize: TStickyNoteProps['descriptionSize'];
-  buttonText?: TStickyNoteProps['buttonText'];
-  buttonLink?: TStickyNoteProps['buttonLink'];
-  variant: TStickyNoteProps['variant'];
   isFirst: boolean;
   isLast: boolean;
   notesVariant: StickyNotesVariant;
-};
+} & TStickyNoteProps;
