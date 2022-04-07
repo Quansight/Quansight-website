@@ -1,54 +1,49 @@
 import { FC } from 'react';
 import clsx from 'clsx';
-import { ButtonLink, ButtonColor } from '@quansight/shared/ui-components';
-import { TStickyNoteProps } from '../types';
-import { getBackgroundColor, getTextColor } from './utils';
 
-export const StickyNote: FC<TStickyNoteProps> = ({
+import { Header } from './Header';
+import { Description } from './Description';
+import { Button } from './Button';
+
+import {
+  getBackgroundColor,
+  getFirstNoteMargins,
+  getLastNoteMargins,
+} from './utils';
+
+import { TStickyNoteComponentProps } from './types';
+
+export const StickyNote: FC<TStickyNoteComponentProps> = ({
   title,
   variant,
   buttonLink,
   buttonText,
   description,
+  descriptionSize,
+  isFirst,
+  isLast,
+  notesVariant,
 }) => {
   const showButton = buttonLink && buttonText;
+  const noteStyle = clsx(
+    'basis-1/2 px-[2.5rem] pb-[3.9rem] h-full sm:px-[5.1rem] sm:pt-[4.1rem] sm:pb-[5.1rem] sm:mx-0',
+    isFirst && 'relative pt-[2.8rem] ml-[2rem] sm:ml-0 z-1',
+    isLast &&
+      'pt-[11.8rem] mt-[-9rem] mr-[2rem] sm:pt-[4.1rem] sm:mt-0 sm:mr-0',
+    isFirst && getFirstNoteMargins(notesVariant),
+    isLast && getLastNoteMargins(notesVariant),
+    getBackgroundColor(variant),
+  );
+
   return (
-    <div
-      className={clsx(
-        'px-[2.5rem] pt-[2.8rem] pb-[3.9rem] sm:px-[5.1rem] sm:pt-[4.1rem] sm:pb-[5.1rem]',
-        getBackgroundColor(variant),
-      )}
-    >
-      <h2
-        className={clsx(
-          'mb-[3.7rem] text-[4rem] font-extrabold leading-[4.9rem] sm:text-[4.8rem] font-heading',
-          getTextColor(variant),
-        )}
-      >
-        {title}
-      </h2>
-
-      <p
-        className={clsx(
-          'text-[2rem] font-bold leading-[2.8rem] sm:text-[2.5rem] sm:leading-[3.3rem] font-heading',
-          getTextColor(variant),
-          {
-            'mb-[1.4rem] sm:mb-[3.8rem]': showButton,
-          },
-        )}
-      >
-        {description}
-      </p>
-
-      {showButton && (
-        <ButtonLink
-          isFull
-          isTriangle
-          url={buttonLink}
-          text={buttonText}
-          color={ButtonColor.White}
-        />
-      )}
+    <div className={noteStyle}>
+      {title && <Header text={title} variant={variant} />}
+      <Description
+        text={description}
+        size={descriptionSize}
+        variant={variant}
+      />
+      {showButton && <Button text={buttonText} link={buttonLink} />}
     </div>
   );
 };

@@ -1,16 +1,11 @@
-export enum StickyNoteColor {
-  Green = 'green',
-  Pink = 'pink',
+import { TStickyNoteProps } from './StickyNote/types';
+
+export enum StickyNotesVariant {
+  Asymmetric = 'asymmetric',
+  Symmetric = 'symmetric',
 }
 
-export type TStickyNoteProps = {
-  title: string;
-  description: string;
-  buttonText?: string;
-  buttonLink?: string;
-  variant: StickyNoteColor;
-};
-
 export type TStickyNotesProps = {
+  variant: StickyNotesVariant;
   items: TStickyNoteProps[];
 };
