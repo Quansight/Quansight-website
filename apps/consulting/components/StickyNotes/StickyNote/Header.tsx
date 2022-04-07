@@ -5,12 +5,12 @@ import { getTextColor } from './utils';
 
 import { StickyNoteColor } from './types';
 
-type THeader = {
+type THeaderProps = {
   variant: StickyNoteColor;
   text: string;
 };
 
-export const Header: FC<THeader> = ({ variant, text }) => (
+export const Header: FC<THeaderProps> = ({ variant, text }) => (
   <h2
     className={clsx(
       'mb-[3.7rem] text-[4rem] font-extrabold leading-[4.9rem] font-heading',
