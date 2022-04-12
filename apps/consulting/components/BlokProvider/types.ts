@@ -3,6 +3,7 @@ import { TypeValuesUnion } from '@quansight/shared/types';
 
 import { TBoardProps } from '../Board/types';
 import { TBoardListProps } from '../BoardList/types';
+import { TColumnsProps } from '../Columns/types';
 import { TFeatureArticleProps } from '../FeatureArticle/types';
 import { TFeaturesProps } from '../Features/types';
 import { TIntertwinedArticleProps } from '../IntertwinedArticle/types';
@@ -12,6 +13,7 @@ import { TStickyNotesProps } from '../StickyNotes/types';
 export enum ComponentType {
   Board = 'board',
   BoardList = 'board-list',
+  Columns = 'columns',
   FeatureArticle = 'feature-article',
   Features = 'features',
   Hero = 'hero',
@@ -24,6 +26,7 @@ export enum ComponentType {
 type TBlokComponentPropsMap = {
   [ComponentType.Board]: TBoardProps;
   [ComponentType.BoardList]: TBoardListProps;
+  [ComponentType.Columns]: TColumnsProps;
   [ComponentType.FeatureArticle]: TFeatureArticleProps;
   [ComponentType.Features]: TFeaturesProps;
   [ComponentType.Hero]: THeroProps;
