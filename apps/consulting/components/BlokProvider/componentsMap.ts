@@ -1,4 +1,4 @@
-import { Teaser, Hero } from '@quansight/shared/ui-components';
+import { Teaser, Hero, Logos } from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
 import { BoardList } from '../BoardList/BoardList';
@@ -20,4 +20,5 @@ export const componentsMap = {
   [ComponentType.JobList]: JobList,
   [ComponentType.StickyNotes]: StickyNotes,
   [ComponentType.Teaser]: Teaser,
+  [ComponentType.Logos]: Logos,
 };

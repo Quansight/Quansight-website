@@ -44,6 +44,7 @@ export const getStaticProps: GetStaticProps<
   ISlugParams
 > = async ({ params: { slug }, preview = false }) => {
   const { data } = await Api.getPageItem({ slug });
+  console.log(data.PageItem.content.body);
   return {
     props: {
       data: data.PageItem,

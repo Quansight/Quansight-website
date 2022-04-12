@@ -1,7 +1,7 @@
 import { TypeValuesUnion } from '@quansight/shared/types';
 
 import { TContactFormProps } from '../ContactForm/ContactForm';
-import { TLogosProps } from '../Logos/types';
+import { TLogosProps } from '@quansight/shared/ui-components';
 
 export enum ComponentType {
   Logos = 'logos',

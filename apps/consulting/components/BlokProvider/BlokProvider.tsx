@@ -15,6 +15,7 @@ export const BlokProvider: FC<TBlokProviderProps> = ({ blok }) => {
   if (componentsMap[blok.component]) {
     const Component = componentsMap[blok.component];
     const componentProps = getPropsByType(blok);
+    console.log(blok.component, componentProps);
 
     // @ts-ignore TODO
     return <Component {...componentProps} />;

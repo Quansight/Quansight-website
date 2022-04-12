@@ -1,11 +1,12 @@
 import { ImageProps } from 'next/image';
 
+export type TOnLoadingComplete = {
+  naturalWidth: number;
+  naturalHeight: number;
+};
+
 export type TPictureProps = {
   imageSrc: string;
   imageAlt: string;
-  width?: ImageProps['width'];
-  height?: ImageProps['height'];
-  layout?: ImageProps['layout'];
-  priority?: ImageProps['priority'];
-  onLoadingComplete?: ImageProps['onLoadingComplete'];
-};
+  naturalDimensions?: boolean;
+} & Omit<ImageProps, 'src'>;

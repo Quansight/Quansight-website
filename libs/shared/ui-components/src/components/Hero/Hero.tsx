@@ -10,6 +10,7 @@ export const Hero: FC<THeroProps> = ({
   variant,
   imageSrc,
   imageAlt,
+  negativeMarginBottom,
 }) => {
   const isLargeHero = variant === HeroVariant.Large;
   const isMediumHero = variant === HeroVariant.Medium;
@@ -20,6 +21,7 @@ export const Hero: FC<THeroProps> = ({
         'overflow-hidden w-full h-[730px] bg-[#000000]',
         isLargeHero && 'md:h-[970px]',
         isMediumHero && 'md:h-[730px]',
+        negativeMarginBottom && 'mb-[-32rem]',
       )}
     >
       <div className="relative mx-auto h-full max-w-layout">
@@ -41,7 +43,7 @@ export const Hero: FC<THeroProps> = ({
           <h2
             className={clsx(
               'text-[5rem] font-extrabold leading-[6rem] text-white font-heading',
-              isLargeHero ? 'mb-12' : 'text-center',
+              isLargeHero && 'mb-12 text-left',
             )}
           >
             {title}
@@ -50,7 +52,7 @@ export const Hero: FC<THeroProps> = ({
             <h3
               className={clsx(
                 'text-[4rem] font-extrabold leading-[4.8rem] text-white font-heading',
-                isMediumHero && 'text-center',
+                isLargeHero && 'text-left',
               )}
             >
               {subTitle}

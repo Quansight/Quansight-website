@@ -7,4 +7,5 @@ export const getHeroProps = (blok: THeroRawData): THeroProps => ({
   title: blok.title,
   subTitle: blok.subTitle,
   variant: blok.variant,
+  negativeMarginBottom: blok.negativeBottomMargin,
 });

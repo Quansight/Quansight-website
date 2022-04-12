@@ -12,4 +12,5 @@ export type THeroRawData = {
   variant: HeroVariant;
   subTitle?: string;
   component: ComponentType.Hero;
+  negativeBottomMargin?: boolean;
 } & TBlok;

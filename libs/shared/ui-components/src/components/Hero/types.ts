@@ -9,6 +9,5 @@ export type THeroProps = {
   subTitle?: string;
   imageSrc: string;
   imageAlt: string;
+  negativeMarginBottom?: boolean;
 };
-
-export default THeroProps;
