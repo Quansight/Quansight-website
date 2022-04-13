@@ -16,8 +16,8 @@ import { isPageType } from '../../services/contentTypes/isPageType';
 import { ISlugParams, TContainerProps } from '@quansight/shared/types';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 
-const Container: FC<TContainerProps> = ({ data, preview }) => (
-  <Layout>
+const Container: FC<TContainerProps> = ({ data, layout, preview }) => (
+  <Layout layout={layout}>
     <SEO
       title={data.content.title}
       description={data.content.description}
@@ -44,9 +44,11 @@ export const getStaticProps: GetStaticProps<
   ISlugParams
 > = async ({ params: { slug }, preview = false }) => {
   const { data } = await Api.getPageItem({ slug });
+  const { data: layout } = await Api.getLayoutItem({ slug: 'layout/layout' });
   return {
     props: {
       data: data.PageItem,
+      layout: layout.LayoutItem,
       preview,
     },
   };
