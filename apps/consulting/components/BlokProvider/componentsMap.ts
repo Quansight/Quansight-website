@@ -8,6 +8,7 @@ import { Features } from '../Features/Features';
 import { IntertwinedArticle } from '../IntertwinedArticle/IntertwinedArticle';
 import { JobList } from '../JobList/JobList';
 import { StickyNotes } from '../StickyNotes/StickyNotes';
+import { Testimonial } from '../Testimonial/Testimonial';
 
 import { ComponentType } from './types';
 
@@ -22,4 +23,5 @@ export const componentsMap = {
   [ComponentType.JobList]: JobList,
   [ComponentType.StickyNotes]: StickyNotes,
   [ComponentType.Teaser]: Teaser,
+  [ComponentType.Testimonial]: Testimonial,
 };

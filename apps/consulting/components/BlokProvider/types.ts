@@ -9,6 +9,7 @@ import { TFeaturesProps } from '../Features/types';
 import { TIntertwinedArticleProps } from '../IntertwinedArticle/types';
 import { TJobListProps } from '../JobList/types';
 import { TStickyNotesProps } from '../StickyNotes/types';
+import { TTestimonialProps } from '../Testimonial/types';
 
 export enum ComponentType {
   Board = 'board',
@@ -17,10 +18,11 @@ export enum ComponentType {
   FeatureArticle = 'feature-article',
   Features = 'features',
   Hero = 'hero',
+  IntertwinedArticle = 'intertwined-article',
   JobList = 'job-list',
   StickyNotes = 'sticky-notes',
   Teaser = 'teaser',
-  IntertwinedArticle = 'intertwined-article',
+  Testimonial = 'testimonial',
 }
 
 type TBlokComponentPropsMap = {
@@ -34,6 +36,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.JobList]: TJobListProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;
   [ComponentType.Teaser]: TTeaserProps;
+  [ComponentType.Testimonial]: TTestimonialProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

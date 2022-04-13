@@ -10,6 +10,7 @@ import { getIntertwinedArticleProps } from '../mappers/getIntertwinedArticleProp
 import { getJobListProps } from '../mappers/getJobListProps';
 import { getStickyNotesProps } from '../mappers/getStickyNotesProps';
 import { getTeaserProps } from '../mappers/getTeaserProps';
+import { getTestimonialProps } from '../mappers/getTestimonialProps';
 
 import { TRawBlok } from '../../../types/storyblok/bloks/rawBlok';
 
@@ -44,6 +45,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.Teaser: {
       return getTeaserProps(blok);
+    }
+    case ComponentType.Testimonial: {
+      return getTestimonialProps(blok);
     }
     default:
       return null;
