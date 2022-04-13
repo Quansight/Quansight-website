@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { LayoutItem } from '@quansight/shared/storyblok-sdk';
-import { TBlok } from '@quansight/shared/types';
+import { getPropsByName } from './utils/getPropsByName';
+import Footer from '../Footer/Footer';
 
 export type TLayoutProps = {
   layout: LayoutItem;
@@ -8,15 +9,11 @@ export type TLayoutProps = {
 };
 
 export const Layout: FC<TLayoutProps> = ({ layout, children }) => {
-  const footerProps = layout?.content?.body.find(
-    (item: TBlok) => item.component === 'footer',
-  );
-
-  console.log(footerProps);
-
+  const footerProps = getPropsByName(layout?.content?.body, 'footer');
   return (
     <div>
       <main>{children}</main>
+      {footerProps && <Footer {...footerProps} />}
     </div>
   );
 };
