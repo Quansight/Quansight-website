@@ -6,17 +6,16 @@ import Link from 'next/link';
 export const FooterContact: FC<TFooterContactProps> = ({
   title,
   contact,
+  buttonText,
   buttonLink,
-}) => {
-  return (
-    <div>
-      <h2>{title}</h2>
-      <div dangerouslySetInnerHTML={createMarkup(contact)} />
-      <Link href="/">
-        <a>Link</a>
-      </Link>
-    </div>
-  );
-};
+}) => (
+  <div>
+    <h2>{title}</h2>
+    <div dangerouslySetInnerHTML={createMarkup(contact)} />
+    <Link href={`/${buttonLink.cached_url}`}>
+      <a>{buttonText}</a>
+    </Link>
+  </div>
+);
 
 export default FooterContact;

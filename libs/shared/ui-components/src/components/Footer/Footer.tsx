@@ -9,20 +9,18 @@ export const Footer: FC<TFooterProps> = ({
   columns,
   policyAndConditions,
   copyright,
-}) => {
-  return (
-    <footer>
-      <section>
-        {columns.map((column) => (
-          <FooterProvider data={column} key={column._uid} />
-        ))}
-      </section>
-      <FooterCopyright
-        policyAndConditions={policyAndConditions}
-        copyright={copyright}
-      />
-    </footer>
-  );
-};
+}) => (
+  <footer>
+    <section>
+      {columns.map((column) => (
+        <FooterProvider data={column} key={column._uid} />
+      ))}
+    </section>
+    <FooterCopyright
+      policyAndConditions={policyAndConditions}
+      copyright={copyright}
+    />
+  </footer>
+);
 
 export default Footer;

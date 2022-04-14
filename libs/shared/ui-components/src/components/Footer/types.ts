@@ -1,23 +1,30 @@
-import { TBlok, TRichText } from '@quansight/shared/types';
+import { TBlok, TImage, TLink, TRichText } from '@quansight/shared/types';
+
+type LinkItem = {
+  linkText?: string;
+  linkImage?: TImage;
+  linkUrl: TLink;
+} & TBlok;
 
 export type TFooterNavigationProps = {
   title: string;
-  links: [];
+  links: LinkItem[];
 } & TBlok;
 
 export type TFooterContactProps = {
   title: string;
   contact: TRichText;
-  buttonLink: {};
+  buttonText: string;
+  buttonLink: TLink;
 } & TBlok;
 
 export type TFooterSocialMediaProps = {
   title: string;
-  links: [];
+  links: LinkItem[];
 } & TBlok;
 
 export type TFooterCopyrightProps = {
-  policyAndConditions: [];
+  policyAndConditions: LinkItem[];
   copyright: string;
 };
 
@@ -31,6 +38,5 @@ export type TFooterProps = {
     | TFooterContactProps
     | TFooterSocialMediaProps
   )[];
-  policyAndConditions: [];
-  copyright: string;
-} & TBlok;
+} & TBlok &
+  TFooterCopyrightProps;
