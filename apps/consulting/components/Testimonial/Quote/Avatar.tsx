@@ -12,7 +12,7 @@ export const Avatar: FC<TAvatarProps> = ({ imageSrc, imageAlt }) => (
       xl:left-[-8rem]
     "
   >
-    <Picture src={imageSrc} alt={imageAlt} layout="fill" />
+    <Picture imageSrc={imageSrc} imageAlt={imageAlt} layout="fill" />
     <span
       className="
         hidden
