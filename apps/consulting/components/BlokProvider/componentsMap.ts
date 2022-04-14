@@ -2,6 +2,7 @@ import { Teaser, Hero } from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
 import { BoardList } from '../BoardList/BoardList';
+import { Columns } from '../Columns/Columns';
 import { FeatureArticle } from '../FeatureArticle/FeatureArticle';
 import { Features } from '../Features/Features';
 import { IntertwinedArticle } from '../IntertwinedArticle/IntertwinedArticle';
@@ -13,6 +14,7 @@ import { ComponentType } from './types';
 export const componentsMap = {
   [ComponentType.Board]: Board,
   [ComponentType.BoardList]: BoardList,
+  [ComponentType.Columns]: Columns,
   [ComponentType.FeatureArticle]: FeatureArticle,
   [ComponentType.Features]: Features,
   [ComponentType.Hero]: Hero,

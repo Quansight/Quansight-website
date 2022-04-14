@@ -2,6 +2,7 @@ import { ComponentType, TBlokComponentProps } from '../types';
 
 import { getBoardProps } from '../mappers/getBoardProps';
 import { getBoardListProps } from '../mappers/getBoardListProps';
+import { getColumnsProps } from '../mappers/getColumnsProps';
 import { getFeatureArticleProps } from '../mappers/getFeatureArticleProps';
 import { getFeaturesProps } from '../mappers/getFeaturesProps';
 import { getHeroProps } from '../mappers/getHeroProps';
@@ -19,6 +20,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.BoardList: {
       return getBoardListProps(blok);
+    }
+    case ComponentType.Columns: {
+      return getColumnsProps(blok);
     }
     case ComponentType.FeatureArticle: {
       return getFeatureArticleProps(blok);
