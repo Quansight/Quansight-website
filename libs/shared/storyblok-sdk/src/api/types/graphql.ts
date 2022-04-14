@@ -153,6 +153,7 @@ export type PageComponent = {
 };
 
 export type PageFilterQuery = {
+  description: InputMaybe<FilterQueryOperations>;
   title: InputMaybe<FilterQueryOperations>;
 };
 
