@@ -1,6 +1,6 @@
-import { TBlok } from '@quansight/shared/types';
+import { TFooterProps } from '../../Footer/types';
 
 export const getPropsByName = (
-  data: TBlok[],
+  data: TFooterProps[],
   slug: string,
-): TBlok | undefined => data.find((item: TBlok) => item.component === slug);
+): TFooterProps | undefined => data.find((item) => item.component === slug);

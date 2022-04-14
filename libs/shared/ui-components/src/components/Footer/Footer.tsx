@@ -1,16 +1,28 @@
 import { FC } from 'react';
+
 import { TFooterProps } from './types';
+
+import { FooterProvider } from './FooterProvider/FooterProvider';
+import { FooterCopyright } from './FooterCopyright';
 
 export const Footer: FC<TFooterProps> = ({
   columns,
   policyAndConditions,
   copyright,
 }) => {
-  console.log(columns);
-  console.log(policyAndConditions);
-  console.log(copyright);
-
-  return <footer>Footer</footer>;
+  return (
+    <footer>
+      <section>
+        {columns.map((column) => (
+          <FooterProvider data={column} key={column._uid} />
+        ))}
+      </section>
+      <FooterCopyright
+        policyAndConditions={policyAndConditions}
+        copyright={copyright}
+      />
+    </footer>
+  );
 };
 
 export default Footer;
