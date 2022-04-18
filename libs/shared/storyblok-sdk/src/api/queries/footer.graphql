@@ -1,5 +1,5 @@
-query LayoutItem($slug: ID!) {
-  LayoutItem(id: $slug) {
+query FooterItem($slug: ID!) {
+  FooterItem(id: $slug) {
     alternates {
       fullSlug
       id
@@ -12,8 +12,10 @@ query LayoutItem($slug: ID!) {
     content {
       _editable
       _uid
-      body
+      columns
       component
+      copyright
+      policyAndConditions
     }
     created_at
     default_full_slug

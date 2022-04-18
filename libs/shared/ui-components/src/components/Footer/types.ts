@@ -25,10 +25,10 @@ export type TFooterSocialMediaProps = {
 
 export type TFooterCopyrightProps = {
   policyAndConditions: LinkItem[];
-  copyright: string;
+  copyright: string | null;
 };
 
-export type TFooterProviderProps = {
+export type TFooterColumnProviderProps = {
   data: TFooterNavigationProps | TFooterContactProps | TFooterSocialMediaProps;
 };
 
@@ -38,5 +38,7 @@ export type TFooterProps = {
     | TFooterContactProps
     | TFooterSocialMediaProps
   )[];
-} & TBlok &
-  TFooterCopyrightProps;
+  _uid: string | null;
+  _editable: string | null;
+  component: string | null;
+} & TFooterCopyrightProps;

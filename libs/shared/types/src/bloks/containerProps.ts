@@ -1,7 +1,7 @@
-import { PageItem, LayoutItem } from '@quansight/shared/storyblok-sdk';
+import { PageItem, FooterItem } from '@quansight/shared/storyblok-sdk';
 
 export type TContainerProps = {
   data: PageItem;
-  layout: LayoutItem;
+  footer: FooterItem;
   preview: boolean;
 };
