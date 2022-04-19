@@ -1,8 +1,1 @@
-type TRestrictedSlugs = {
-  [key: string]: string;
-};
-
-export const restrictedSlugs: TRestrictedSlugs = {
-  homepage: 'homepage',
-  footer: 'layout/footer',
-};
+export const restrictedSlugs: string[] = ['homepage', 'layout/footer'];
