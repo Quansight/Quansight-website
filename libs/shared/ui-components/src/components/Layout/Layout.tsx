@@ -1,9 +1,17 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
+import { FooterItem } from '@quansight/shared/storyblok-sdk';
+import Footer from '../Footer/Footer';
 
-export const Layout: FC = ({ children }) => {
+export type TLayoutProps = {
+  footer: FooterItem;
+  children: ReactNode;
+};
+
+export const Layout: FC<TLayoutProps> = ({ footer, children }) => {
   return (
-    <div className="overflow-hidden">
+    <div>
       <main>{children}</main>
+      {footer.content && <Footer {...footer.content} />}
     </div>
   );
 };
