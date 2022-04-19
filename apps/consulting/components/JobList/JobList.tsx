@@ -18,7 +18,11 @@ export const JobList: FC<TJobListProps> = ({
   const { data, error } = useJobList(url);
 
   return (
-    <section className="flex flex-col justify-center items-center my-24 mx-auto xl:mt-52 xl:mb-24 max-w-layout">
+    <section
+      className="flex flex-col justify-center items-center my-24 mx-auto xl:mt-52 xl:mb-24 max-w-layout"
+      aria-live="polite"
+      aria-busy={!error && !data ? 'true' : 'false'}
+    >
       <h2 className="mb-[4.3rem] text-[4rem] font-extrabold leading-[4.9rem] sm:mb-32 sm:text-[4.8rem] text-violet font-heading">
         {title}
       </h2>

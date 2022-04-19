@@ -33,8 +33,6 @@ const Container: FC<TContainerProps> = ({ data, footer, preview }) => (
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await Api.getLinks();
-  console.log(getPaths(data?.Links.items));
-
   return {
     paths: getPaths(data?.Links.items),
     fallback: false,
