@@ -1,12 +1,16 @@
+type TLocation = {
+  [key: string]: string;
+};
+
 export type TJobListItem = {
-  _uid: string;
-  jobTitle: string;
-  linkUrl: string;
-  location: string;
-  isRemote: boolean;
+  absolute_url: string;
+  id: number;
+  location: TLocation;
+  title: string;
 };
 
 export type TJobListProps = {
   title: string;
-  jobs: TJobListItem[];
+  errorMessage: string;
+  noOpeningsMessage: string;
 };
