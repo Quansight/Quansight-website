@@ -1,14 +1,10 @@
-import { GetStaticPathsResult } from 'next/types';
-import { ISlugParams, TLinkEntry } from '@quansight/shared/types';
+import { TLinkEntry } from '@quansight/shared/types';
+import { isSlugRestricted } from './isSlugRestricted';
+import { TGetPaths } from './types';
 
-export const getPaths = (
-  items: TLinkEntry[] = [],
-): GetStaticPathsResult<ISlugParams>['paths'] =>
+export const getPaths = (items: TLinkEntry[]): TGetPaths[] =>
   items
-    .filter(
-      ({ isFolder, slug }) =>
-        !isFolder && slug !== 'home' && slug !== 'layout/footer',
-    )
+    .filter(({ isFolder, slug }) => slug && !isFolder && isSlugRestricted(slug))
     .map(({ slug }) => ({
       params: {
         slug,
