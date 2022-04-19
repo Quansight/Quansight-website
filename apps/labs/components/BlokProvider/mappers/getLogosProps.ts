@@ -1,4 +1,4 @@
-import { getUrl } from '@quansight/shared/ui-components';
+import { getUrl } from '@quansight/shared/utils';
 
 import { TLogosProps } from '../../Logos/types';
 import { TLogosRawData } from '../../../types/storyblok/bloks/logos';
