@@ -7,7 +7,7 @@ export const getPaths = (
   items
     .filter(
       ({ isFolder, slug }) =>
-        !isFolder && slug !== 'home' && slug !== 'layout/footer',
+        !isFolder && slug !== 'homepage' && slug !== 'layout/footer',
     )
     .map(({ slug }) => ({
       params: {
