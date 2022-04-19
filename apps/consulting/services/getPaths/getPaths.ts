@@ -5,7 +5,10 @@ export const getPaths = (
   items: TLinkEntry[] = [],
 ): GetStaticPathsResult<ISlugParams>['paths'] =>
   items
-    .filter(({ isFolder, slug }) => !isFolder && slug !== 'home')
+    .filter(
+      ({ isFolder, slug }) =>
+        !isFolder && slug !== 'home' && slug !== 'layout/footer',
+    )
     .map(({ slug }) => ({
       params: {
         slug,
