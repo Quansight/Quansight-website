@@ -16,9 +16,8 @@ export const JobListItem: FC<TJobListItem> = ({
     >
       {title}
     </a>
-    <div className="mt-8 text-[1.6rem] font-normal leading-[3rem] sm:mt-0 sm:text-left">
-      <p>Austin, TX</p>
-      <p>Remote {location.name === 'Remote' ? 'OK' : 'NO'}</p>
-    </div>
+    <p className="mt-8 text-[1.6rem] font-normal leading-[3rem] sm:mt-0 sm:text-left">
+      {location.name}
+    </p>
   </li>
 );

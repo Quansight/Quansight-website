@@ -23,11 +23,11 @@ export const JobList: FC<TJobListProps> = ({
         {title}
       </h2>
       {!error && !data && <Loading />}
-      {error && !data && <Message message={errorMessage} />}
+      {error && <Message message={errorMessage} />}
       {!error && data?.jobs?.length === 0 && (
         <Message message={noOpeningsMessage} />
       )}
-      <ul className="flex flex-col gap-[4.3rem] text-center sm:w-full sm:max-w-[60rem] lg:max-w-[70rem] xl:max-w-[80rem]">
+      <ul className="flex flex-col gap-[6rem] px-20 text-center sm:px-0 sm:w-full sm:max-w-[60rem] lg:max-w-[70rem] xl:max-w-[80rem]">
         {data?.jobs?.map((props) => (
           <JobListItem {...props} key={props.id} />
         ))}
