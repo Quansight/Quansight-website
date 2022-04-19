@@ -1,7 +1,7 @@
-import { TState, TAction } from './types';
+import { TState, TAction } from '../types';
 import { initialState } from './config';
 
-export const fetchReducer = (state: TState, action: TAction): TState => {
+export const jobsReducer = (state: TState, action: TAction): TState => {
   switch (action.type) {
     case 'loading':
       return { ...initialState };

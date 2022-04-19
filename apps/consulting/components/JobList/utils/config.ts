@@ -1,6 +1,6 @@
-import { TState } from './types';
+import { TState } from '../types';
 
-export const url = 'https://boards-api.greenhouse.io/v1/boards/quansight/jobs';
+export const url = process.env.NEXT_PUBLIC_GREENHOUSE_API_URL;
 
 export const initialState: TState = {
   data: null,

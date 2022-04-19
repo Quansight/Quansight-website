@@ -1,10 +1,10 @@
 import { useEffect, useReducer } from 'react';
-import { TState } from './types';
-import { fetchReducer } from './fetchReducer';
+import { TState } from '../types';
+import { jobsReducer } from './jobsReducer';
 import { initialState } from './config';
 
-export const useFetch = (url?: string): TState => {
-  const [state, dispatch] = useReducer(fetchReducer, initialState);
+export const useJobList = (url?: string): TState => {
+  const [state, dispatch] = useReducer(jobsReducer, initialState);
 
   useEffect(() => {
     if (!url) return;
