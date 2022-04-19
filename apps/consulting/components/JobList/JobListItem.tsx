@@ -12,11 +12,11 @@ export const JobListItem: FC<TJobListItem> = ({
       target="_blank"
       href={absolute_url}
       rel="noreferrer"
-      className="text-[2rem] font-bold leading-[2.7rem] text-violet"
+      className="text-[2rem] font-bold leading-[2.7rem] sm:text-left text-violet"
     >
       {title}
     </a>
-    <div className="mt-8 text-[1.6rem] font-normal leading-[3rem] text-left sm:mt-0">
+    <div className="mt-8 text-[1.6rem] font-normal leading-[3rem] sm:mt-0 sm:text-left">
       <p>Austin, TX</p>
       <p>Remote {location.name === 'Remote' ? 'OK' : 'NO'}</p>
     </div>
