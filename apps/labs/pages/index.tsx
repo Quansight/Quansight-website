@@ -10,7 +10,7 @@ import {
 } from '@quansight/shared/ui-components';
 import { BlokProvider } from '../components/BlokProvider/BlokProvider';
 
-import { isPageType } from '../services/contentTypes/isPageType';
+import { isPageType } from '@quansight/shared/utils';
 
 import { ISlugParams, TContainerProps } from '@quansight/shared/types';
 import { TRawBlok } from '../types/storyblok/bloks/rawBlock';
