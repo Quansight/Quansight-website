@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
+import { GetStaticProps } from 'next';
+
+import { ISlugParams } from '@quansight/shared/types';
 import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
 
 import { getAllPosts } from '../../services/api/posts/getAllPosts';
 import { TPost } from '../../types/storyblok/bloks/posts';
-import { GetStaticProps } from 'next';
-import { ISlugParams } from '@quansight/shared/types';
 
 export type TBlogListProps = {
   posts: TPost[];

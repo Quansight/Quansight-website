@@ -1,5 +1,8 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
 import React, { FC } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
+
+import path from 'path';
+import { readdir } from 'fs/promises';
 import { MDXRemote } from 'next-mdx-remote';
 import { ISlugParams } from '@quansight/shared/types';
 import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
@@ -7,12 +10,10 @@ import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
 import { getPost } from '../../services/api/posts/getPost';
 import { TPost } from '../../types/storyblok/bloks/posts';
 import { blogAllowedComponents } from '../../services/blogAllowedComponents';
-import { readdir } from 'fs/promises';
-import path from 'path';
 import { POSTS_DIRECTORY_PATH } from '../../services/api/posts/constants';
 
 export type TBlogPostProps = {
-  post: TPost;
+  post: TPost | null;
 };
 
 export const BlogPost: FC<TBlogPostProps> = ({ post }) => {
@@ -56,13 +57,22 @@ export const getStaticProps: GetStaticProps<
   TBlogPostProps,
   ISlugParams
 > = async ({ params: { slug } }) => {
-  const post = await getPost(slug);
+  try {
+    const post = await getPost(slug);
 
-  return {
-    props: {
-      post,
-    },
-  };
+    return {
+      props: {
+        post,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        post: null,
+      },
+    };
+  }
 };
 
 export default BlogPost;
