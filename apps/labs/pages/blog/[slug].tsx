@@ -17,17 +17,20 @@ export type TBlogPostProps = {
 };
 
 export const BlogPost: FC<TBlogPostProps> = ({ post }) => {
-  const { content, meta } = post;
+  if (!post) {
+    return null; // TODO we should do something when post is null
+  }
+
   return (
     <Layout>
       <SEO
-        title={meta.title}
-        description={meta.description}
+        title={post.meta.title}
+        description={post.meta.description}
         variant={DomainVariant.Labs}
       />
 
       <div className="prose">
-        <MDXRemote {...content} components={blogAllowedComponents} />
+        <MDXRemote {...post.content} components={blogAllowedComponents} />
       </div>
     </Layout>
   );
