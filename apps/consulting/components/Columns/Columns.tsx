@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import clsx from 'clsx';
 
-import Column from './Column/Column';
+import { Column } from './Column/Column';
 
 import { ColumnsVariant, TColumnsProps } from './types';
 
@@ -15,8 +15,8 @@ export const Columns: FC<TColumnsProps> = ({ variant, columns }) => (
       variant === ColumnsVariant.Tiles && 'lg:gap-[3.4rem]',
     )}
   >
-    {columns.map((props) => {
-      return <Column {...props} key={props._uid} variant={variant} />;
-    })}
+    {columns.map((props) => (
+      <Column {...props} key={props._uid} variant={variant} />
+    ))}
   </section>
 );

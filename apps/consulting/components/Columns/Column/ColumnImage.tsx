@@ -3,9 +3,14 @@ import clsx from 'clsx';
 
 import { Picture } from '@quansight/shared/ui-components';
 
-import { TImageComponentProps, ColumnsVariant } from '../types';
+import { ColumnsVariant } from '../types';
+import { TColumnImageComponentProps } from './types';
 
-const Image: FC<TImageComponentProps> = ({ variant, imageSrc, imageAlt }) => {
+export const ColumnImage: FC<TColumnImageComponentProps> = ({
+  variant,
+  imageSrc,
+  imageAlt,
+}) => {
   const isColumns = variant === ColumnsVariant.Columns;
   const imageSize = isColumns ? 90 : 70;
 
@@ -20,5 +25,3 @@ const Image: FC<TImageComponentProps> = ({ variant, imageSrc, imageAlt }) => {
     </div>
   );
 };
-
-export default Image;
