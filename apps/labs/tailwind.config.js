@@ -22,11 +22,20 @@ module.exports = {
         gray: {
           100: '#707070',
           200: '#C4C4C4',
+          300: '#C5C5C5',
+          400: '#EBEBEB',
         },
       },
       maxWidth: {
         layout: '144rem',
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            fontSize: '1.6rem',
+          },
+        },
+      }),
     },
   },
   plugins: [require('@tailwindcss/typography')],

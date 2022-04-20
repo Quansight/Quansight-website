@@ -12,12 +12,24 @@ export enum Categories {
   IDEs = 'IDEs',
 }
 
+export type TPostAuthor = {
+  nickName: string;
+  fullName: string;
+  avatarSrc: string;
+};
+
+export type TFeaturedImage = {
+  src: string;
+  alt: string;
+};
+
 export type TPostMeta = {
   title: string;
-  date: string;
+  published: string;
   description?: string;
-  author: string;
-  tags?: Categories[];
+  author: TPostAuthor;
+  category?: Categories;
+  featuredImage: TFeaturedImage;
 };
 
 export type TPost = {
