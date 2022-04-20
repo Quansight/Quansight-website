@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { createMarkup } from '@quansight/shared/ui-components';
+import { createMarkup } from '@quansight/shared/utils';
 
 import { HeaderDecoration, ButtonDecoration } from './decorations';
 import BoardItem from './BoardItem';

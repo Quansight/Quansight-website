@@ -10,13 +10,13 @@ import {
 } from '@quansight/shared/ui-components';
 import { BlokProvider } from '../components/BlokProvider/BlokProvider';
 
-import { isPageType } from '../services/contentTypes/isPageType';
+import { isPageType } from '@quansight/shared/utils';
 
 import { ISlugParams, TContainerProps } from '@quansight/shared/types';
 import { TRawBlok } from '../types/storyblok/bloks/rawBlock';
 
-export const Index: FC<TContainerProps> = ({ data, preview }) => (
-  <Layout>
+export const Index: FC<TContainerProps> = ({ data, footer, preview }) => (
+  <Layout footer={footer}>
     <SEO
       title={data.content.title}
       description={data.content.description}
@@ -35,9 +35,11 @@ export const getStaticProps: GetStaticProps<
   ISlugParams
 > = async () => {
   const { data } = await Api.getPageItem({ slug: 'labs' });
+  const { data: footer } = await Api.getFooterItem();
   return {
     props: {
       data: data.PageItem,
+      footer: footer.FooterItem,
       preview: false,
     },
   };

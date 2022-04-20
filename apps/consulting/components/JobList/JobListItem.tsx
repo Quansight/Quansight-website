@@ -1,23 +1,23 @@
 import { FC } from 'react';
-import Link from 'next/link';
 
 import { TJobListItem } from './types';
 
 export const JobListItem: FC<TJobListItem> = ({
-  jobTitle,
-  linkUrl,
+  absolute_url,
   location,
-  isRemote,
+  title,
 }) => (
   <li className="sm:flex sm:justify-between sm:items-center">
-    <Link href={linkUrl}>
-      <a className="text-[2rem] font-bold leading-[2.7rem] text-violet">
-        {jobTitle}
-      </a>
-    </Link>
-    <div className="mt-8 text-[1.6rem] font-normal leading-[3rem] sm:mt-0">
-      <p>{location}</p>
-      <p>Remote {isRemote ? 'OK' : 'NO'}</p>
-    </div>
+    <a
+      target="_blank"
+      href={absolute_url}
+      rel="noreferrer"
+      className="text-[2rem] font-bold leading-[2.7rem] sm:text-left text-violet"
+    >
+      {title}
+    </a>
+    <p className="mt-8 text-[1.6rem] font-normal leading-[3rem] sm:mt-0 sm:text-left">
+      {location.name}
+    </p>
   </li>
 );

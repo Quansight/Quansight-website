@@ -20,6 +20,7 @@ module.exports = {
         green: '#99C941',
         black: '#191919',
         white: '#ffffff',
+        lightgray: '#fafaff',
       },
       maxWidth: {
         layout: '144rem',

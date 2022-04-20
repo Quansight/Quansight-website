@@ -1,0 +1,45 @@
+query FooterItem($slug: ID!) {
+  FooterItem(id: $slug) {
+    alternates {
+      fullSlug
+      id
+      isFolder
+      name
+      parentId
+      published
+      slug
+    }
+    content {
+      _editable
+      _uid
+      columns
+      component
+      copyright
+      policyAndConditions
+    }
+    created_at
+    default_full_slug
+    first_published_at
+    full_slug
+    group_id
+    id
+    is_startpage
+    lang
+    meta_data
+    name
+    parent_id
+    path
+    position
+    published_at
+    release_id
+    slug
+    sort_by_date
+    tag_list
+    translated_slugs {
+      lang
+      name
+      path
+    }
+    uuid
+  }
+}

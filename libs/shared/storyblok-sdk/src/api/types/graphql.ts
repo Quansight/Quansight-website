@@ -124,6 +124,88 @@ export type FilterQueryOperations = {
   not_like: InputMaybe<Scalars['String']>;
 };
 
+export type FooterComponent = {
+  __typename?: 'FooterComponent';
+  _editable: Maybe<Scalars['String']>;
+  _uid: Maybe<Scalars['String']>;
+  columns: Maybe<Scalars['BlockScalar']>;
+  component: Maybe<Scalars['String']>;
+  copyright: Maybe<Scalars['String']>;
+  policyAndConditions: Maybe<Scalars['BlockScalar']>;
+};
+
+export type FooterItem = {
+  __typename?: 'FooterItem';
+  alternates: Maybe<Array<Maybe<Alternate>>>;
+  content: Maybe<FooterComponent>;
+  created_at: Maybe<Scalars['String']>;
+  default_full_slug: Maybe<Scalars['String']>;
+  first_published_at: Maybe<Scalars['String']>;
+  full_slug: Maybe<Scalars['String']>;
+  group_id: Maybe<Scalars['Int']>;
+  id: Maybe<Scalars['Int']>;
+  is_startpage: Maybe<Scalars['Boolean']>;
+  lang: Maybe<Scalars['String']>;
+  meta_data: Maybe<Scalars['JsonScalar']>;
+  name: Maybe<Scalars['String']>;
+  parent_id: Maybe<Scalars['Int']>;
+  path: Maybe<Scalars['String']>;
+  position: Maybe<Scalars['Int']>;
+  published_at: Maybe<Scalars['String']>;
+  release_id: Maybe<Scalars['Int']>;
+  slug: Maybe<Scalars['String']>;
+  sort_by_date: Maybe<Scalars['String']>;
+  tag_list: Maybe<Array<Maybe<Scalars['String']>>>;
+  translated_slugs: Maybe<Array<Maybe<TranslatedSlug>>>;
+  uuid: Maybe<Scalars['String']>;
+};
+
+export type FooterItems = {
+  __typename?: 'FooterItems';
+  items: Maybe<Array<Maybe<FooterItem>>>;
+  total: Maybe<Scalars['Int']>;
+};
+
+export type LayoutComponent = {
+  __typename?: 'LayoutComponent';
+  _editable: Maybe<Scalars['String']>;
+  _uid: Maybe<Scalars['String']>;
+  body: Maybe<Scalars['BlockScalar']>;
+  component: Maybe<Scalars['String']>;
+};
+
+export type LayoutItem = {
+  __typename?: 'LayoutItem';
+  alternates: Maybe<Array<Maybe<Alternate>>>;
+  content: Maybe<LayoutComponent>;
+  created_at: Maybe<Scalars['String']>;
+  default_full_slug: Maybe<Scalars['String']>;
+  first_published_at: Maybe<Scalars['String']>;
+  full_slug: Maybe<Scalars['String']>;
+  group_id: Maybe<Scalars['Int']>;
+  id: Maybe<Scalars['Int']>;
+  is_startpage: Maybe<Scalars['Boolean']>;
+  lang: Maybe<Scalars['String']>;
+  meta_data: Maybe<Scalars['JsonScalar']>;
+  name: Maybe<Scalars['String']>;
+  parent_id: Maybe<Scalars['Int']>;
+  path: Maybe<Scalars['String']>;
+  position: Maybe<Scalars['Int']>;
+  published_at: Maybe<Scalars['String']>;
+  release_id: Maybe<Scalars['Int']>;
+  slug: Maybe<Scalars['String']>;
+  sort_by_date: Maybe<Scalars['String']>;
+  tag_list: Maybe<Array<Maybe<Scalars['String']>>>;
+  translated_slugs: Maybe<Array<Maybe<TranslatedSlug>>>;
+  uuid: Maybe<Scalars['String']>;
+};
+
+export type LayoutItems = {
+  __typename?: 'LayoutItems';
+  items: Maybe<Array<Maybe<LayoutItem>>>;
+  total: Maybe<Scalars['Int']>;
+};
+
 export type LinkEntries = {
   __typename?: 'LinkEntries';
   items: Array<LinkEntry>;
@@ -194,6 +276,10 @@ export type QueryType = {
   ContentNodes: Maybe<ContentItems>;
   DatasourceEntries: Maybe<DatasourceEntries>;
   Datasources: Maybe<Datasources>;
+  FooterItem: Maybe<FooterItem>;
+  FooterItems: Maybe<FooterItems>;
+  LayoutItem: Maybe<LayoutItem>;
+  LayoutItems: Maybe<LayoutItems>;
   Links: Maybe<LinkEntries>;
   PageItem: Maybe<PageItem>;
   PageItems: Maybe<PageItems>;
@@ -247,6 +333,76 @@ export type QueryTypeDatasourceEntriesArgs = {
 export type QueryTypeDatasourcesArgs = {
   by_ids: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   search: InputMaybe<Scalars['String']>;
+};
+
+export type QueryTypeFooterItemArgs = {
+  find_by: InputMaybe<Scalars['String']>;
+  from_release: InputMaybe<Scalars['Int']>;
+  id: Scalars['ID'];
+  language: InputMaybe<Scalars['String']>;
+  resolve_links: InputMaybe<Scalars['String']>;
+  resolve_relations: InputMaybe<Scalars['String']>;
+};
+
+export type QueryTypeFooterItemsArgs = {
+  by_slugs: InputMaybe<Scalars['String']>;
+  by_uuids: InputMaybe<Scalars['String']>;
+  by_uuids_ordered: InputMaybe<Scalars['String']>;
+  excluding_fields: InputMaybe<Scalars['String']>;
+  excluding_ids: InputMaybe<Scalars['String']>;
+  excluding_slugs: InputMaybe<Scalars['String']>;
+  fallback_lang: InputMaybe<Scalars['String']>;
+  filter_query: InputMaybe<Scalars['JsonScalar']>;
+  first_published_at_gt: InputMaybe<Scalars['String']>;
+  first_published_at_lt: InputMaybe<Scalars['String']>;
+  from_release: InputMaybe<Scalars['String']>;
+  is_startpage: InputMaybe<Scalars['String']>;
+  language: InputMaybe<Scalars['String']>;
+  page: InputMaybe<Scalars['Int']>;
+  per_page: InputMaybe<Scalars['Int']>;
+  published_at_gt: InputMaybe<Scalars['String']>;
+  published_at_lt: InputMaybe<Scalars['String']>;
+  resolve_links: InputMaybe<Scalars['String']>;
+  resolve_relations: InputMaybe<Scalars['String']>;
+  search_term: InputMaybe<Scalars['String']>;
+  sort_by: InputMaybe<Scalars['String']>;
+  starts_with: InputMaybe<Scalars['String']>;
+  with_tag: InputMaybe<Scalars['String']>;
+};
+
+export type QueryTypeLayoutItemArgs = {
+  find_by: InputMaybe<Scalars['String']>;
+  from_release: InputMaybe<Scalars['Int']>;
+  id: Scalars['ID'];
+  language: InputMaybe<Scalars['String']>;
+  resolve_links: InputMaybe<Scalars['String']>;
+  resolve_relations: InputMaybe<Scalars['String']>;
+};
+
+export type QueryTypeLayoutItemsArgs = {
+  by_slugs: InputMaybe<Scalars['String']>;
+  by_uuids: InputMaybe<Scalars['String']>;
+  by_uuids_ordered: InputMaybe<Scalars['String']>;
+  excluding_fields: InputMaybe<Scalars['String']>;
+  excluding_ids: InputMaybe<Scalars['String']>;
+  excluding_slugs: InputMaybe<Scalars['String']>;
+  fallback_lang: InputMaybe<Scalars['String']>;
+  filter_query: InputMaybe<Scalars['JsonScalar']>;
+  first_published_at_gt: InputMaybe<Scalars['String']>;
+  first_published_at_lt: InputMaybe<Scalars['String']>;
+  from_release: InputMaybe<Scalars['String']>;
+  is_startpage: InputMaybe<Scalars['String']>;
+  language: InputMaybe<Scalars['String']>;
+  page: InputMaybe<Scalars['Int']>;
+  per_page: InputMaybe<Scalars['Int']>;
+  published_at_gt: InputMaybe<Scalars['String']>;
+  published_at_lt: InputMaybe<Scalars['String']>;
+  resolve_links: InputMaybe<Scalars['String']>;
+  resolve_relations: InputMaybe<Scalars['String']>;
+  search_term: InputMaybe<Scalars['String']>;
+  sort_by: InputMaybe<Scalars['String']>;
+  starts_with: InputMaybe<Scalars['String']>;
+  with_tag: InputMaybe<Scalars['String']>;
 };
 
 export type QueryTypeLinksArgs = {
@@ -324,6 +480,61 @@ export type TranslatedSlug = {
   lang: Scalars['String'];
   name: Maybe<Scalars['String']>;
   path: Maybe<Scalars['String']>;
+};
+
+export type FooterItemQueryVariables = Exact<{
+  slug: Scalars['ID'];
+}>;
+
+export type FooterItemQuery = {
+  __typename?: 'QueryType';
+  FooterItem: {
+    __typename?: 'FooterItem';
+    created_at: string | null;
+    default_full_slug: string | null;
+    first_published_at: string | null;
+    full_slug: string | null;
+    group_id: number | null;
+    id: number | null;
+    is_startpage: boolean | null;
+    lang: string | null;
+    meta_data: any | null;
+    name: string | null;
+    parent_id: number | null;
+    path: string | null;
+    position: number | null;
+    published_at: string | null;
+    release_id: number | null;
+    slug: string | null;
+    sort_by_date: string | null;
+    tag_list: Array<string | null> | null;
+    uuid: string | null;
+    alternates: Array<{
+      __typename?: 'Alternate';
+      fullSlug: string;
+      id: number;
+      isFolder: boolean | null;
+      name: string;
+      parentId: number | null;
+      published: boolean;
+      slug: string;
+    } | null> | null;
+    content: {
+      __typename?: 'FooterComponent';
+      _editable: string | null;
+      _uid: string | null;
+      columns: any | null;
+      component: string | null;
+      copyright: string | null;
+      policyAndConditions: any | null;
+    } | null;
+    translated_slugs: Array<{
+      __typename?: 'TranslatedSlug';
+      lang: string;
+      name: string | null;
+      path: string | null;
+    } | null> | null;
+  } | null;
 };
 
 export type LinksQueryVariables = Exact<{ [key: string]: never }>;
@@ -418,6 +629,57 @@ export type PageItemsQuery = {
   } | null;
 };
 
+export const FooterItemDocument = gql`
+  query FooterItem($slug: ID!) {
+    FooterItem(id: $slug) {
+      alternates {
+        fullSlug
+        id
+        isFolder
+        name
+        parentId
+        published
+        slug
+      }
+      content {
+        _editable
+        _uid
+        columns
+        component
+        copyright
+        policyAndConditions
+      }
+      created_at
+      default_full_slug
+      first_published_at
+      full_slug
+      group_id
+      id
+      is_startpage
+      lang
+      meta_data
+      name
+      parent_id
+      path
+      position
+      published_at
+      release_id
+      slug
+      sort_by_date
+      tag_list
+      translated_slugs {
+        lang
+        name
+        path
+      }
+      uuid
+    }
+  }
+`;
+export type FooterItemQueryResult = Apollo.QueryResult<
+  FooterItemQuery,
+  FooterItemQueryVariables
+>;
 export const LinksDocument = gql`
   query links {
     Links {

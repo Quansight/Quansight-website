@@ -1,4 +1,4 @@
-import { getUrl } from '@quansight/shared/ui-components';
+import { getUrl } from '@quansight/shared/utils';
 
 import { TBoardProps } from '../../Board/types';
 import { TBoardRawData } from '../../../types/storyblok/bloks/board';
