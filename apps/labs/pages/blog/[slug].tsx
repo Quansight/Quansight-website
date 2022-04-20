@@ -11,18 +11,20 @@ import { getPost } from '../../services/api/posts/getPost';
 import { TPost } from '../../types/storyblok/bloks/posts';
 import { blogAllowedComponents } from '../../services/blogAllowedComponents';
 import { POSTS_DIRECTORY_PATH } from '../../services/api/posts/constants';
+import { Api, FooterItem } from '@quansight/shared/storyblok-sdk';
 
 export type TBlogPostProps = {
   post: TPost | null;
+  footer?: FooterItem;
 };
 
-export const BlogPost: FC<TBlogPostProps> = ({ post }) => {
+export const BlogPost: FC<TBlogPostProps> = ({ post, footer }) => {
   if (!post) {
     return null; // TODO we should do something when post is null
   }
 
   return (
-    <Layout>
+    <Layout footer={footer}>
       <SEO
         title={post.meta.title}
         description={post.meta.description}
@@ -62,10 +64,12 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params: { slug } }) => {
   try {
     const post = await getPost(slug);
+    const { data: footer } = await Api.getFooterItem();
 
     return {
       props: {
         post,
+        footer: footer.FooterItem,
       },
     };
   } catch (error) {
@@ -73,6 +77,7 @@ export const getStaticProps: GetStaticProps<
     return {
       props: {
         post: null,
+        footer: null,
       },
     };
   }
