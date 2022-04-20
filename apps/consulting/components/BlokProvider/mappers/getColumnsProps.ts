@@ -1,14 +1,16 @@
 import { TColumnsProps } from '../../Columns/types';
 import { TColumnsRawData } from '../../../types/storyblok/bloks/columns';
+import { getUrl } from '@quansight/shared/ui-components';
 
 export const getColumnsProps = (blok: TColumnsRawData): TColumnsProps => ({
-  columns: blok.columns.map(
-    ({ _uid, image: { alt, filename }, title, text }) => ({
-      _uid,
-      imageSrc: filename,
-      imageAlt: alt,
-      title,
-      text,
-    }),
-  ),
+  variant: blok.variant,
+  columns: blok.columns.map((item) => ({
+    _uid: item._uid,
+    imageSrc: item.image.filename,
+    imageAlt: item.image.alt,
+    title: item.title,
+    text: item.text,
+    linkText: item.linkText,
+    linkUrl: item.linkUrl ? getUrl(item.linkUrl) : '',
+  })),
 });

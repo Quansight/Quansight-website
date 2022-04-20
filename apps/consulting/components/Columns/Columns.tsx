@@ -1,20 +1,22 @@
 import { FC } from 'react';
+import clsx from 'clsx';
 
-import Column from './Column';
+import { Column } from './Column/Column';
 
-import { TColumnsProps } from './types';
+import { ColumnsVariant, TColumnsProps } from './types';
 
-export const Columns: FC<TColumnsProps> = ({ columns }) => (
+export const Columns: FC<TColumnsProps> = ({ variant, columns }) => (
   <section
-    className="
-      px-[2.4rem] my-[2.4rem] mx-auto
-      md:flex md:gap-[2rem] 
-      lg:gap-[7.5rem] lg:px-[13rem]
-      max-w-layout
-    "
+    className={clsx(
+      'px-[3.5rem] my-[2.4rem] mx-auto max-w-layout',
+      'md:flex md:gap-[2rem]',
+      'lg:px-[13rem]',
+      variant === ColumnsVariant.Columns && 'lg:gap-[7.5rem]',
+      variant === ColumnsVariant.Tiles && 'lg:gap-[3.4rem]',
+    )}
   >
     {columns.map((props) => (
-      <Column {...props} key={props._uid} />
+      <Column {...props} key={props._uid} variant={variant} />
     ))}
   </section>
 );
