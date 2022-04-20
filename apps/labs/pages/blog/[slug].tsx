@@ -62,25 +62,15 @@ export const getStaticProps: GetStaticProps<
   TBlogPostProps,
   ISlugParams
 > = async ({ params: { slug } }) => {
-  try {
-    const post = await getPost(slug);
-    const { data: footer } = await Api.getFooterItem();
+  const post = await getPost(slug);
+  const { data: footer } = await Api.getFooterItem();
 
-    return {
-      props: {
-        post,
-        footer: footer.FooterItem,
-      },
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      props: {
-        post: null,
-        footer: null,
-      },
-    };
-  }
+  return {
+    props: {
+      post,
+      footer: footer.FooterItem,
+    },
+  };
 };
 
 export default BlogPost;
