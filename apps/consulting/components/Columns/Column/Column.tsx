@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import { ColumnImage } from './ColumnImage';
 import { ColumnLink } from './ColumnLink';
 
-import { TColumnComponentProps, ColumnsVariant } from '../types';
+import { ColumnsVariant } from '../types';
+import { TColumnComponentProps } from './types';
 
 export const Column: FC<TColumnComponentProps> = ({
   variant,
