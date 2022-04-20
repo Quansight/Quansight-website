@@ -11,6 +11,6 @@ export const getColumnsProps = (blok: TColumnsRawData): TColumnsProps => ({
     title: item.title,
     text: item.text,
     linkText: item.linkText,
-    linkUrl: getUrl(item.linkUrl),
+    linkUrl: item.linkUrl ? getUrl(item.linkUrl) : '',
   })),
 });
