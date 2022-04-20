@@ -1,11 +1,11 @@
-export type TColumnProps = {
-  _uid?: string;
-  title: string;
-  text: string;
-  imageSrc: string;
-  imageAlt: string;
-};
+import { TColumnProps } from './Column/types';
+
+export enum ColumnsVariant {
+  Columns = 'columns',
+  Tiles = 'tiles',
+}
 
 export type TColumnsProps = {
+  variant: ColumnsVariant;
   columns: TColumnProps[];
 };
