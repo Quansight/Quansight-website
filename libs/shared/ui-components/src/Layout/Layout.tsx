@@ -11,7 +11,7 @@ export const Layout: FC<TLayoutProps> = ({ footer, children }) => {
   return (
     <div>
       <main>{children}</main>
-      {footer.content && <Footer {...footer.content} />}
+      {footer?.content && <Footer {...footer.content} />}
     </div>
   );
 };
