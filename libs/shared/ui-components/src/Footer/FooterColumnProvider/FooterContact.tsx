@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { TFooterContactProps } from '../types';
-import { createMarkup } from '../../../utils';
+import { createMarkup } from '@quansight/shared/utils';
 import Link from 'next/link';
 
 export const FooterContact: FC<TFooterContactProps> = ({

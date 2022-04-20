@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { TFeatureArticleProps } from './types';
-import { Picture, createMarkup } from '@quansight/shared/ui-components';
+import { Picture } from '@quansight/shared/ui-components';
+import { createMarkup } from '@quansight/shared/utils';
 
 export const FeatureArticle: FC<TFeatureArticleProps> = ({
   title,

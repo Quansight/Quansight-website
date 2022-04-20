@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import clsx from 'clsx';
 
-import { createMarkup } from '@quansight/shared/ui-components';
+import { createMarkup } from '@quansight/shared/utils';
 
 import { getTextColor, getTextSize } from './utils';
 
