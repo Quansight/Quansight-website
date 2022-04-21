@@ -8,6 +8,7 @@ import { TFeatureArticleProps } from '../FeatureArticle/types';
 import { TFeaturesProps } from '../Features/types';
 import { TIntertwinedArticleProps } from '../IntertwinedArticle/types';
 import { TJobListProps } from '../JobList/types';
+import { TRelatedProps } from '../Related/types';
 import { TStickyNotesProps } from '../StickyNotes/types';
 import { TTestimonialProps } from '../Testimonial/types';
 
@@ -20,6 +21,7 @@ export enum ComponentType {
   Hero = 'hero',
   IntertwinedArticle = 'intertwined-article',
   JobList = 'job-list',
+  Related = 'related',
   StickyNotes = 'sticky-notes',
   Teaser = 'teaser',
   Testimonial = 'testimonial',
@@ -34,6 +36,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Hero]: THeroProps;
   [ComponentType.IntertwinedArticle]: TIntertwinedArticleProps;
   [ComponentType.JobList]: TJobListProps;
+  [ComponentType.Related]: TRelatedProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;
   [ComponentType.Teaser]: TTeaserProps;
   [ComponentType.Testimonial]: TTestimonialProps;
