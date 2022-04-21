@@ -10,4 +10,4 @@ export * from './bloks/articleProps';
 export * from './storyblok/contentTypes';
 
 export * from './graphql/links';
-export * from './graphql/slug';
+export * from './graphql/url';

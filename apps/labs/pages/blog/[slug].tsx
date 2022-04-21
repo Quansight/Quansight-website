@@ -80,7 +80,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       fallback: false,
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return {
       paths: [],

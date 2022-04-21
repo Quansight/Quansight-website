@@ -42,4 +42,5 @@ export type TPostsResponse = {
   items: TPost[];
   total: number;
   offset: number;
+  path?: string;
 };
