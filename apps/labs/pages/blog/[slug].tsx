@@ -1,22 +1,24 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-
 import clsx from 'clsx';
 import path from 'path';
 import { readdir } from 'fs/promises';
 import { MDXRemote } from 'next-mdx-remote';
+
 import { ISlugParams } from '@quansight/shared/types';
 import { Api, FooterItem } from '@quansight/shared/storyblok-sdk';
 import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
 
 import { getPost } from '../../services/api/posts/getPost';
-import { TPost } from '../../types/storyblok/bloks/posts';
 import { blogAllowedComponents } from '../../services/blogAllowedComponents';
 import { POSTS_DIRECTORY_PATH } from '../../services/api/posts/constants';
+import { getPostsByCategory } from '../../services/api/posts/getPostsByCateghory';
+
 import { LinkWithArrow } from '../../components/LinkWithArrow/LinkWithArrow';
 import { PostMetaSection } from '../../components/Post/PostMetaSection/PostMetaSection';
 import { FeaturedPosts } from '../../components/Post/PostMetaSection/FeaturedPosts/FeaturedPosts';
-import { getPostsByCategory } from '../../services/api/posts/getPostsByCateghory';
+
+import { TPost } from '../../types/storyblok/bloks/posts';
 
 export type TBlogPostProps = {
   post: TPost | null;

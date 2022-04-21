@@ -21,7 +21,6 @@ export const PostMetaSection: FC<PostMetaSectionProps> = ({
       <p className="pb-[3rem] text-[1.4rem] leading-[2.7rem] text-black text-sans">
         Published {published}
       </p>
-
       <div className="mb-[5rem]">
         <PostAuthor {...author} />
       </div>
