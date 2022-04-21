@@ -8,4 +8,4 @@ export type TTermsAndConditionsParagraphProps = {
 export type TTermsAndConditionsProps = {
   title: string;
   paragraphs: TTermsAndConditionsParagraphProps[];
-} & TBlok;
+};

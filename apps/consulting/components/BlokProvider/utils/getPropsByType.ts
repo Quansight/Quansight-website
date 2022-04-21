@@ -11,6 +11,7 @@ import { getJobListProps } from '../mappers/getJobListProps';
 import { getRelatedProps } from '../mappers/getRelatedProps';
 import { getStickyNotesProps } from '../mappers/getStickyNotesProps';
 import { getTeaserProps } from '../mappers/getTeaserProps';
+import { getTermsAndConditionsProps } from '../mappers/getTermsAndConditionsProps';
 import { getTestimonialProps } from '../mappers/getTestimonialProps';
 import { getTextArticleProps } from '../mappers/getTextArticleProps';
 
@@ -50,6 +51,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.Teaser: {
       return getTeaserProps(blok);
+    }
+    case ComponentType.TermsAndConditions: {
+      return getTermsAndConditionsProps(blok);
     }
     case ComponentType.Testimonial: {
       return getTestimonialProps(blok);

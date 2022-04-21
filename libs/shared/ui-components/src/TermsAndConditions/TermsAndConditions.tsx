@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { TTermsAndConditionsProps } from './types';
 import { TermsAndConditionsParagraph } from './TermsAndConditionsParagraph';
 
-const TermsAndConditions: FC<TTermsAndConditionsProps> = ({
+export const TermsAndConditions: FC<TTermsAndConditionsProps> = ({
   title,
   paragraphs,
 }) => (

@@ -9,6 +9,7 @@ import { TJobListRawData } from './jobList';
 import { TRelatedRawData } from './related';
 import { TStickyNotesRawData } from './stickyNotes';
 import { TTeaserRawData } from './teaser';
+import { TTermsAndConditionsRawData } from './termsAndConditions';
 import { TTestimonialRawData } from './testimonial';
 import { TTextArticleRawData } from './textArticle';
 
@@ -24,5 +25,6 @@ export type TRawBlok =
   | TRelatedRawData
   | TStickyNotesRawData
   | TTeaserRawData
+  | TTermsAndConditionsRawData
   | TTestimonialRawData
   | TTextArticleRawData;
