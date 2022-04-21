@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import Image from 'next/image';
+
+import { Picture } from '@quansight/shared/ui-components';
 
 import { TPost } from '../../../../types/storyblok/bloks/posts';
 
@@ -22,11 +23,11 @@ export const FeaturedPosts: FC<TFeaturedPostsProps> = ({ posts }) => {
           >
             {post.meta.featuredImage && (
               <div className="relative w-full h-[20rem]">
-                <Image
+                <Picture
                   layout="fill"
                   objectFit="cover"
-                  src={post.meta.featuredImage.src}
-                  alt={post.meta.featuredImage.alt}
+                  imageSrc={post.meta.featuredImage.src}
+                  imageAlt={post.meta.featuredImage.alt}
                 />
               </div>
             )}

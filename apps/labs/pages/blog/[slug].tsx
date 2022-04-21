@@ -42,7 +42,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
         description={post.meta.description}
         variant={DomainVariant.Labs}
       />
-      <div
+      <article
         className={clsx(
           'pt-[7.5rem] pb-[11.4rem] mx-auto w-[95%] max-w-[100.17rem] border-gray-300 border-solid md:w-[85%] xl:w-[70%]',
           {
@@ -58,7 +58,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
             <MDXRemote {...post.content} components={blogAllowedComponents} />
           </div>
         </div>
-      </div>
+      </article>
 
       {Boolean(featuredPosts.length) && (
         <div className="mx-auto w-[93%] max-w-[96rem] md:w-[83%] xl:w-[68%]">

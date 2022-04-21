@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import React, { FC } from 'react';
+import { Picture } from '@quansight/shared/ui-components';
 
 import { TPostMeta } from '../../../../types/storyblok/bloks/posts';
 
@@ -12,7 +12,12 @@ export const PostAuthor: FC<TPostAuthorProps> = ({
 }) => (
   <div className="flex">
     <div className="overflow-hidden mr-[0.8rem] w-[48px] h-[48px] rounded-[50%]">
-      <Image width={48} height={48} src={avatarSrc} alt={nickName} />
+      <Picture
+        width={48}
+        height={48}
+        imageSrc={avatarSrc}
+        imageAlt={nickName}
+      />
     </div>
     <div>
       <p className="text-[1.4rem] font-normal leading-[2.7rem] text-black text-sans">
