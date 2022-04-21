@@ -10,6 +10,7 @@ import { TRelatedRawData } from './related';
 import { TStickyNotesRawData } from './stickyNotes';
 import { TTeaserRawData } from './teaser';
 import { TTestimonialRawData } from './testimonial';
+import { TTextArticleRawData } from './textArticle';
 
 export type TRawBlok =
   | TBoardRawData
@@ -23,4 +24,5 @@ export type TRawBlok =
   | TRelatedRawData
   | TStickyNotesRawData
   | TTeaserRawData
-  | TTestimonialRawData;
+  | TTestimonialRawData
+  | TTextArticleRawData;

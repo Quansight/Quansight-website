@@ -11,6 +11,7 @@ import { TJobListProps } from '../JobList/types';
 import { TRelatedProps } from '../Related/types';
 import { TStickyNotesProps } from '../StickyNotes/types';
 import { TTestimonialProps } from '../Testimonial/types';
+import { TTextArticleProps } from '../TextArticle/types';
 
 export enum ComponentType {
   Board = 'board',
@@ -25,6 +26,7 @@ export enum ComponentType {
   StickyNotes = 'sticky-notes',
   Teaser = 'teaser',
   Testimonial = 'testimonial',
+  TextArticle = 'text-article',
 }
 
 type TBlokComponentPropsMap = {
@@ -40,6 +42,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.StickyNotes]: TStickyNotesProps;
   [ComponentType.Teaser]: TTeaserProps;
   [ComponentType.Testimonial]: TTestimonialProps;
+  [ComponentType.TextArticle]: TTextArticleProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

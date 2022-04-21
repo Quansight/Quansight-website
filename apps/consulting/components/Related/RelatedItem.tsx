@@ -20,7 +20,12 @@ export const RelatedItem: FC<TRelatedItemProps> = ({
           width={90}
           height={90}
         />
-        <h3 className="mt-[2.5rem] text-[2.2rem] font-extrabold leading-[3rem] md:mx-auto md:max-w-[15rem]">
+        <h3
+          className="
+            mt-[2.5rem] text-[2.2rem] font-extrabold leading-[3rem] md:mx-auto 
+            md:max-w-[15rem] font-heading
+          "
+        >
           {title}
         </h3>
       </a>

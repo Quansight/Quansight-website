@@ -10,6 +10,7 @@ import { JobList } from '../JobList/JobList';
 import { Related } from '../Related/Related';
 import { StickyNotes } from '../StickyNotes/StickyNotes';
 import { Testimonial } from '../Testimonial/Testimonial';
+import { TextArticle } from '../TextArticle/TextArticle';
 
 import { ComponentType } from './types';
 
@@ -26,4 +27,5 @@ export const componentsMap = {
   [ComponentType.StickyNotes]: StickyNotes,
   [ComponentType.Teaser]: Teaser,
   [ComponentType.Testimonial]: Testimonial,
+  [ComponentType.TextArticle]: TextArticle,
 };
