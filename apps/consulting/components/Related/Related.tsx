@@ -13,8 +13,9 @@ export const Related: FC<TRelatedProps> = ({ title, items }) => (
   >
     <h2
       className="
-        mb-[5rem] text-[4rem] font-extrabold leading-[4.9rem] text-center lg:mb-[8rem]
-        lg:text-[4.8rem] text-violet
+        mb-[5rem] text-[4rem] font-extrabold leading-[4.9rem] text-center lg:mb-[8rem] 
+        lg:text-[4.8rem] font-heading
+        text-violet
       "
     >
       {title}
