@@ -1,15 +1,15 @@
 ---
-title: This is hello world post!
+title: This is another hello world post!
 author:
   nickName: aniruth_dagar
   fullName: Anirudh Dagar
   avatarSrc: /authors/test-avatar.jpg
 published: October 13, 2022
 description: Lorem ipsum dolor sit amet
-category: [MachineLearning]
+category: [MachineLearning, ArrayAPI]
 featuredImage:
-  src: /posts/hello-world-post/featured.png
-  alt: Hello world post featured image
+  src: /posts/another-post/featured.png
+  alt: Another post featured image
 ---
 
 # An h1 header
