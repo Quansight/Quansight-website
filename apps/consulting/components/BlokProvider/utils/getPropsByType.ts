@@ -12,6 +12,7 @@ import { getRelatedProps } from '../mappers/getRelatedProps';
 import { getStickyNotesProps } from '../mappers/getStickyNotesProps';
 import { getTeaserProps } from '../mappers/getTeaserProps';
 import { getTestimonialProps } from '../mappers/getTestimonialProps';
+import { getTextArticleProps } from '../mappers/getTextArticleProps';
 
 import { TRawBlok } from '../../../types/storyblok/bloks/rawBlok';
 
@@ -52,6 +53,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.Testimonial: {
       return getTestimonialProps(blok);
+    }
+    case ComponentType.TextArticle: {
+      return getTextArticleProps(blok);
     }
     default:
       return null;
