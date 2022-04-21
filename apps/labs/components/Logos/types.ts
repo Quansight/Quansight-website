@@ -1,8 +1,11 @@
 import { TPictureProps } from '@quansight/shared/ui-components';
 
+export type TLogosGridProps = {
+  grid: TPictureProps[];
+};
+
 export type TLogosProps = {
   title: string;
-  grid: TPictureProps[];
   linkTitle: string;
   linkUrl: string;
-};
+} & TLogosGridProps;
