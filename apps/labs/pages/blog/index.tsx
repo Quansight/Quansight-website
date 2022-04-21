@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { GetStaticProps } from 'next';
 
 import { ISlugParams } from '@quansight/shared/types';
+import { Api, FooterItem } from '@quansight/shared/storyblok-sdk';
 import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
 
 import { getAllPosts } from '../../services/api/posts/getAllPosts';
 import { TPost } from '../../types/storyblok/bloks/posts';
-import { Api, FooterItem } from '@quansight/shared/storyblok-sdk';
 
 export type TBlogListProps = {
   posts: TPost[];

@@ -42,7 +42,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
       />
       <div
         className={clsx(
-          'pt-[7.5rem] pb-[11.4rem] mx-auto max-w-[1017px]  border-gray-300 border-solid',
+          'pt-[7.5rem] pb-[11.4rem] mx-auto w-[95%] max-w-[100.17rem] border-gray-300 border-solid md:w-[85%] xl:w-[70%]',
           {
             'border-b': featuredPosts.length,
           },
@@ -58,7 +58,11 @@ export const BlogPost: FC<TBlogPostProps> = ({
         </div>
       </div>
 
-      {Boolean(featuredPosts.length) && <FeaturedPosts posts={featuredPosts} />}
+      {Boolean(featuredPosts.length) && (
+        <div className="mx-auto w-[93%] max-w-[96rem] md:w-[83%] xl:w-[68%]">
+          <FeaturedPosts posts={featuredPosts} />
+        </div>
+      )}
     </Layout>
   );
 };
@@ -89,7 +93,11 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params: { slug } }) => {
   const post = await getPost(slug);
   const { data: footer } = await Api.getFooterItem();
-  const featuredPosts = await getPostsByCategory(post.meta.category, post.slug);
+  const featuredPosts = await getPostsByCategory(
+    post.meta.category,
+    post.slug,
+    2,
+  );
 
   return {
     props: {

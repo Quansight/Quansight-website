@@ -28,7 +28,7 @@ export type TPostMeta = {
   published: string;
   description?: string;
   author: TPostAuthor;
-  category?: Categories;
+  category?: string[];
   featuredImage: TFeaturedImage;
 };
 

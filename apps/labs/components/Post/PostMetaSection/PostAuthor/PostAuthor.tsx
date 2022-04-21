@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React, { FC } from 'react';
+
 import { TPostMeta } from '../../../../types/storyblok/bloks/posts';
 
 export type TPostAuthorProps = TPostMeta['author'];

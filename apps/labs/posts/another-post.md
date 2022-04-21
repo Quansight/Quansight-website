@@ -6,7 +6,10 @@ author:
   avatarSrc: /authors/test-avatar.jpg
 published: October 13, 2022
 description: Lorem ipsum dolor sit amet
-categories: [MachineLearning]
+category: [MachineLearning, ArrayAPI]
+featuredImage:
+  src: /posts/another-post/featured.png
+  alt: Another post featured image
 ---
 
 # An h1 header

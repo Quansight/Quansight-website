@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+
 import { TPostMeta } from '../../../types/storyblok/bloks/posts';
 import { PostAuthor } from './PostAuthor/PostAuthor';
 
