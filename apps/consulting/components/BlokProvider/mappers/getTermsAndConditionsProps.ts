@@ -5,5 +5,5 @@ export const getTermsAndConditionsProps = (
   blok: TTermsAndConditionsRawData,
 ): TTermsAndConditionsProps => ({
   title: blok.title,
-  paragraphs: blok.paragraphs,
+  sections: blok.sections,
 });

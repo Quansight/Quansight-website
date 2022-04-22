@@ -1,11 +1,11 @@
 import { TRichText, TBlok } from '@quansight/shared/types';
 
-export type TTermsAndConditionsParagraphProps = {
+export type TTermsAndConditionsSectionProps = {
   title: string;
   text: TRichText;
 } & TBlok;
 
 export type TTermsAndConditionsProps = {
   title: string;
-  paragraphs: TTermsAndConditionsParagraphProps[];
+  sections: TTermsAndConditionsSectionProps[];
 };

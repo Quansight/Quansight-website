@@ -27,5 +27,5 @@ export * from './Textarea/Textarea';
 export * from './Button/Button';
 
 export * from './TermsAndConditions/TermsAndConditions';
-export * from './TermsAndConditions/TermsAndConditionsParagraph';
+export * from './TermsAndConditions/TermsAndConditionsSection';
 export * from './TermsAndConditions/types';
