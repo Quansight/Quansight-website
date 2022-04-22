@@ -8,6 +8,7 @@ import { TFeatureArticleProps } from '../FeatureArticle/types';
 import { TFeaturesProps } from '../Features/types';
 import { TIntertwinedArticleProps } from '../IntertwinedArticle/types';
 import { TJobListProps } from '../JobList/types';
+import { TLibraryIntroProps } from '../LibraryIntro/types';
 import { TRelatedProps } from '../Related/types';
 import { TStickyNotesProps } from '../StickyNotes/types';
 import { TTestimonialProps } from '../Testimonial/types';
@@ -22,6 +23,7 @@ export enum ComponentType {
   Hero = 'hero',
   IntertwinedArticle = 'intertwined-article',
   JobList = 'job-list',
+  LibraryIntro = 'library-intro',
   Related = 'related',
   StickyNotes = 'sticky-notes',
   Teaser = 'teaser',
@@ -38,6 +40,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Hero]: THeroProps;
   [ComponentType.IntertwinedArticle]: TIntertwinedArticleProps;
   [ComponentType.JobList]: TJobListProps;
+  [ComponentType.LibraryIntro]: TLibraryIntroProps;
   [ComponentType.Related]: TRelatedProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;
   [ComponentType.Teaser]: TTeaserProps;

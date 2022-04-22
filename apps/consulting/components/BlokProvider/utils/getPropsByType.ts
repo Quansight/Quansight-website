@@ -8,6 +8,7 @@ import { getFeaturesProps } from '../mappers/getFeaturesProps';
 import { getHeroProps } from '../mappers/getHeroProps';
 import { getIntertwinedArticleProps } from '../mappers/getIntertwinedArticleProps';
 import { getJobListProps } from '../mappers/getJobListProps';
+import { getLibraryIntroProps } from '../mappers/getLibraryIntroProps';
 import { getRelatedProps } from '../mappers/getRelatedProps';
 import { getStickyNotesProps } from '../mappers/getStickyNotesProps';
 import { getTeaserProps } from '../mappers/getTeaserProps';
@@ -41,6 +42,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.JobList: {
       return getJobListProps(blok);
+    }
+    case ComponentType.LibraryIntro: {
+      return getLibraryIntroProps(blok);
     }
     case ComponentType.Related: {
       return getRelatedProps(blok);

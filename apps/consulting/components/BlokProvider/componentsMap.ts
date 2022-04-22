@@ -7,6 +7,7 @@ import { FeatureArticle } from '../FeatureArticle/FeatureArticle';
 import { Features } from '../Features/Features';
 import { IntertwinedArticle } from '../IntertwinedArticle/IntertwinedArticle';
 import { JobList } from '../JobList/JobList';
+import { LibraryIntro } from '../LibraryIntro/LibraryIntro';
 import { Related } from '../Related/Related';
 import { StickyNotes } from '../StickyNotes/StickyNotes';
 import { Testimonial } from '../Testimonial/Testimonial';
@@ -23,6 +24,7 @@ export const componentsMap = {
   [ComponentType.Hero]: Hero,
   [ComponentType.IntertwinedArticle]: IntertwinedArticle,
   [ComponentType.JobList]: JobList,
+  [ComponentType.LibraryIntro]: LibraryIntro,
   [ComponentType.Related]: Related,
   [ComponentType.StickyNotes]: StickyNotes,
   [ComponentType.Teaser]: Teaser,
