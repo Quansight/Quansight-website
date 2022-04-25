@@ -1,8 +1,4 @@
-import {
-  Teaser,
-  Hero,
-  TermsAndConditions,
-} from '@quansight/shared/ui-components';
+import { Teaser, Hero, Statute } from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
 import { BoardList } from '../BoardList/BoardList';
@@ -28,9 +24,9 @@ export const componentsMap = {
   [ComponentType.IntertwinedArticle]: IntertwinedArticle,
   [ComponentType.JobList]: JobList,
   [ComponentType.Related]: Related,
+  [ComponentType.Statute]: Statute,
   [ComponentType.StickyNotes]: StickyNotes,
   [ComponentType.Teaser]: Teaser,
-  [ComponentType.TermsAndConditions]: TermsAndConditions,
   [ComponentType.Testimonial]: Testimonial,
   [ComponentType.TextArticle]: TextArticle,
 };

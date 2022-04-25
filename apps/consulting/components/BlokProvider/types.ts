@@ -1,7 +1,7 @@
 import {
   THeroProps,
   TTeaserProps,
-  TTermsAndConditionsProps,
+  TStatuteProps,
 } from '@quansight/shared/ui-components';
 import { TypeValuesUnion } from '@quansight/shared/types';
 
@@ -29,7 +29,7 @@ export enum ComponentType {
   Related = 'related',
   StickyNotes = 'sticky-notes',
   Teaser = 'teaser',
-  TermsAndConditions = 'terms-and-conditions',
+  Statute = 'statute',
   Testimonial = 'testimonial',
   TextArticle = 'text-article',
 }
@@ -44,9 +44,9 @@ type TBlokComponentPropsMap = {
   [ComponentType.IntertwinedArticle]: TIntertwinedArticleProps;
   [ComponentType.JobList]: TJobListProps;
   [ComponentType.Related]: TRelatedProps;
+  [ComponentType.Statute]: TStatuteProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;
   [ComponentType.Teaser]: TTeaserProps;
-  [ComponentType.TermsAndConditions]: TTermsAndConditionsProps;
   [ComponentType.Testimonial]: TTestimonialProps;
   [ComponentType.TextArticle]: TTextArticleProps;
 };

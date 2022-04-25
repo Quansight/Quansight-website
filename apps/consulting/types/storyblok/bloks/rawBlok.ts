@@ -7,9 +7,9 @@ import { THeroRawData } from './hero';
 import { TIntertwinedArticleRawData } from './intertwinedArticle';
 import { TJobListRawData } from './jobList';
 import { TRelatedRawData } from './related';
+import { TStatuteRawData } from './statute';
 import { TStickyNotesRawData } from './stickyNotes';
 import { TTeaserRawData } from './teaser';
-import { TTermsAndConditionsRawData } from './termsAndConditions';
 import { TTestimonialRawData } from './testimonial';
 import { TTextArticleRawData } from './textArticle';
 
@@ -23,8 +23,8 @@ export type TRawBlok =
   | TIntertwinedArticleRawData
   | TJobListRawData
   | TRelatedRawData
+  | TStatuteRawData
   | TStickyNotesRawData
   | TTeaserRawData
-  | TTermsAndConditionsRawData
   | TTestimonialRawData
   | TTextArticleRawData;
