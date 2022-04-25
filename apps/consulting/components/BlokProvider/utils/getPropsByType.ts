@@ -2,13 +2,13 @@ import { ComponentType, TBlokComponentProps } from '../types';
 
 import { getBoardProps } from '../mappers/getBoardProps';
 import { getBoardListProps } from '../mappers/getBoardListProps';
+import { getCenteredIntroProps } from '../mappers/getCenteredIntroProps';
 import { getColumnsProps } from '../mappers/getColumnsProps';
 import { getFeatureArticleProps } from '../mappers/getFeatureArticleProps';
 import { getFeaturesProps } from '../mappers/getFeaturesProps';
 import { getHeroProps } from '../mappers/getHeroProps';
 import { getIntertwinedArticleProps } from '../mappers/getIntertwinedArticleProps';
 import { getJobListProps } from '../mappers/getJobListProps';
-import { getLibraryIntroProps } from '../mappers/getLibraryIntroProps';
 import { getRelatedProps } from '../mappers/getRelatedProps';
 import { getStickyNotesProps } from '../mappers/getStickyNotesProps';
 import { getTeaserProps } from '../mappers/getTeaserProps';
@@ -24,6 +24,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.BoardList: {
       return getBoardListProps(blok);
+    }
+    case ComponentType.CenteredIntro: {
+      return getCenteredIntroProps(blok);
     }
     case ComponentType.Columns: {
       return getColumnsProps(blok);
@@ -42,9 +45,6 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.JobList: {
       return getJobListProps(blok);
-    }
-    case ComponentType.LibraryIntro: {
-      return getLibraryIntroProps(blok);
     }
     case ComponentType.Related: {
       return getRelatedProps(blok);

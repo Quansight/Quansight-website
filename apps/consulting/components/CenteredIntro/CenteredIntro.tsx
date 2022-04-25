@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { TLibraryIntroProps } from './types';
+import { TCenteredIntroProps } from './types';
 
-export const LibraryIntro: FC<TLibraryIntroProps> = ({
+export const CenteredIntro: FC<TCenteredIntroProps> = ({
   title,
   description,
 }) => (
@@ -15,4 +15,4 @@ export const LibraryIntro: FC<TLibraryIntroProps> = ({
   </section>
 );
 
-export default LibraryIntro;
+export default CenteredIntro;
