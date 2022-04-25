@@ -10,6 +10,7 @@ import { IntertwinedArticle } from '../IntertwinedArticle/IntertwinedArticle';
 import { JobList } from '../JobList/JobList';
 import { Related } from '../Related/Related';
 import { StickyNotes } from '../StickyNotes/StickyNotes';
+import { Team } from '../Team/Team';
 import { Testimonial } from '../Testimonial/Testimonial';
 import { TextArticle } from '../TextArticle/TextArticle';
 import { ComponentType } from './types';
@@ -28,6 +29,7 @@ export const componentsMap = {
   [ComponentType.Related]: Related,
   [ComponentType.Statute]: Statute,
   [ComponentType.StickyNotes]: StickyNotes,
+  [ComponentType.Team]: Team,
   [ComponentType.Teaser]: Teaser,
   [ComponentType.Testimonial]: Testimonial,
   [ComponentType.TextArticle]: TextArticle,

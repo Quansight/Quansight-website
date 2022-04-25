@@ -16,6 +16,7 @@ import { TIntertwinedArticleProps } from '../IntertwinedArticle/types';
 import { TJobListProps } from '../JobList/types';
 import { TRelatedProps } from '../Related/types';
 import { TStickyNotesProps } from '../StickyNotes/types';
+import { TTeamProps } from '../Team/types';
 import { TTestimonialProps } from '../Testimonial/types';
 import { TTextArticleProps } from '../TextArticle/types';
 
@@ -33,6 +34,7 @@ export enum ComponentType {
   Related = 'related',
   Statute = 'statute',
   StickyNotes = 'sticky-notes',
+  Team = 'team',
   Teaser = 'teaser',
   Testimonial = 'testimonial',
   TextArticle = 'text-article',
@@ -52,6 +54,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Related]: TRelatedProps;
   [ComponentType.Statute]: TStatuteProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;
+  [ComponentType.Team]: TTeamProps;
   [ComponentType.Teaser]: TTeaserProps;
   [ComponentType.Testimonial]: TTestimonialProps;
   [ComponentType.TextArticle]: TTextArticleProps;
