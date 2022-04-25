@@ -50,7 +50,7 @@
     "@nrwl/cli": "13.8.3",
     "@nrwl/cypress": "13.8.3",
     "@nrwl/eslint-plugin-nx": "13.8.5",
-    "@nrwl/jest": "13.8.3",
+    "@nrwl/jest": "14.0.2",
     "@nrwl/linter": "13.8.3",
     "@nrwl/react": "13.8.3",
     "@nrwl/tao": "13.8.3",
