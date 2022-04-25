@@ -1,4 +1,4 @@
-import { Teaser, Hero, Statute } from '@quansight/shared/ui-components';
+import { Hero, Statute, Teaser } from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
 import { BoardList } from '../BoardList/BoardList';

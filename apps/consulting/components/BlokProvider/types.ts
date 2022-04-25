@@ -29,9 +29,9 @@ export enum ComponentType {
   IntertwinedArticle = 'intertwined-article',
   JobList = 'job-list',
   Related = 'related',
+  Statute = 'statute',
   StickyNotes = 'sticky-notes',
   Teaser = 'teaser',
-  Statute = 'statute',
   Testimonial = 'testimonial',
   TextArticle = 'text-article',
 }
