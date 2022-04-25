@@ -6,6 +6,7 @@ import { TFeaturesRawData } from './features';
 import { THeroRawData } from './hero';
 import { TIntertwinedArticleRawData } from './intertwinedArticle';
 import { TJobListRawData } from './jobList';
+import { TCenteredIntroRawData } from './centeredIntro';
 import { TRelatedRawData } from './related';
 import { TStickyNotesRawData } from './stickyNotes';
 import { TTeaserRawData } from './teaser';
@@ -15,6 +16,7 @@ import { TTextArticleRawData } from './textArticle';
 export type TRawBlok =
   | TBoardRawData
   | TBoardListRawData
+  | TCenteredIntroRawData
   | TColumnsRawData
   | TFeatureArticleRawData
   | TFeaturesRawData

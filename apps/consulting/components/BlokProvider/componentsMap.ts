@@ -2,6 +2,7 @@ import { Teaser, Hero } from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
 import { BoardList } from '../BoardList/BoardList';
+import { CenteredIntro } from '../CenteredIntro/CenteredIntro';
 import { Columns } from '../Columns/Columns';
 import { FeatureArticle } from '../FeatureArticle/FeatureArticle';
 import { Features } from '../Features/Features';
@@ -17,6 +18,7 @@ import { ComponentType } from './types';
 export const componentsMap = {
   [ComponentType.Board]: Board,
   [ComponentType.BoardList]: BoardList,
+  [ComponentType.CenteredIntro]: CenteredIntro,
   [ComponentType.Columns]: Columns,
   [ComponentType.FeatureArticle]: FeatureArticle,
   [ComponentType.Features]: Features,

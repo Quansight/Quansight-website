@@ -2,6 +2,7 @@ import { ComponentType, TBlokComponentProps } from '../types';
 
 import { getBoardProps } from '../mappers/getBoardProps';
 import { getBoardListProps } from '../mappers/getBoardListProps';
+import { getCenteredIntroProps } from '../mappers/getCenteredIntroProps';
 import { getColumnsProps } from '../mappers/getColumnsProps';
 import { getFeatureArticleProps } from '../mappers/getFeatureArticleProps';
 import { getFeaturesProps } from '../mappers/getFeaturesProps';
@@ -23,6 +24,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.BoardList: {
       return getBoardListProps(blok);
+    }
+    case ComponentType.CenteredIntro: {
+      return getCenteredIntroProps(blok);
     }
     case ComponentType.Columns: {
       return getColumnsProps(blok);
