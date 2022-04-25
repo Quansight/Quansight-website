@@ -8,6 +8,7 @@ import { TIntertwinedArticleRawData } from './intertwinedArticle';
 import { TJobListRawData } from './jobList';
 import { TCenteredIntroRawData } from './centeredIntro';
 import { TRelatedRawData } from './related';
+import { TStatuteRawData } from './statute';
 import { TStickyNotesRawData } from './stickyNotes';
 import { TTeaserRawData } from './teaser';
 import { TTestimonialRawData } from './testimonial';
@@ -24,6 +25,7 @@ export type TRawBlok =
   | TIntertwinedArticleRawData
   | TJobListRawData
   | TRelatedRawData
+  | TStatuteRawData
   | TStickyNotesRawData
   | TTeaserRawData
   | TTestimonialRawData

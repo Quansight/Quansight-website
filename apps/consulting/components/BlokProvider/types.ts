@@ -1,4 +1,8 @@
-import { THeroProps, TTeaserProps } from '@quansight/shared/ui-components';
+import {
+  THeroProps,
+  TTeaserProps,
+  TStatuteProps,
+} from '@quansight/shared/ui-components';
 import { TypeValuesUnion } from '@quansight/shared/types';
 
 import { TBoardProps } from '../Board/types';
@@ -25,6 +29,7 @@ export enum ComponentType {
   IntertwinedArticle = 'intertwined-article',
   JobList = 'job-list',
   Related = 'related',
+  Statute = 'statute',
   StickyNotes = 'sticky-notes',
   Teaser = 'teaser',
   Testimonial = 'testimonial',
@@ -42,6 +47,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.IntertwinedArticle]: TIntertwinedArticleProps;
   [ComponentType.JobList]: TJobListProps;
   [ComponentType.Related]: TRelatedProps;
+  [ComponentType.Statute]: TStatuteProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;
   [ComponentType.Teaser]: TTeaserProps;
   [ComponentType.Testimonial]: TTestimonialProps;

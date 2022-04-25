@@ -25,3 +25,7 @@ export * from './SEO/types';
 export * from './Input/Input';
 export * from './Textarea/Textarea';
 export * from './Button/Button';
+
+export * from './Statute/Statute';
+export * from './Statute/StatuteSection';
+export * from './Statute/types';

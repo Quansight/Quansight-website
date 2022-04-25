@@ -21,11 +21,12 @@ module.exports = {
         black: '#191919',
         white: '#ffffff',
         lightgray: '#fafaff',
+        gray: '#C5C5C5',
       },
       maxWidth: {
         layout: '144rem',
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };
