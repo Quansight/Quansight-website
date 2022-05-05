@@ -1,7 +1,7 @@
 import { getUrl } from '@quansight/shared/utils';
 
-import { TBoardProps } from '../../Board/types';
 import { TBoardRawData } from '../../../types/storyblok/bloks/board';
+import { TBoardProps } from '../../Board/types';
 
 export const getBoardProps = (blok: TBoardRawData): TBoardProps => ({
   title: blok.title,

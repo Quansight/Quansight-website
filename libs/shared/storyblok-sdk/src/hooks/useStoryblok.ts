@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { PageItem } from '../api/types/graphql';
-import { Api } from '../api/sdk/api';
 
 import StoryblokClient from 'storyblok-js-client';
+
+import { Api } from '../api/sdk/api';
+import { PageItem } from '../api/types/graphql';
 import { IStoryblokBridge, StoryblokBridgeEvents } from '../types/storyblok';
 
 interface CustomWindow extends Window {

@@ -1,6 +1,7 @@
 import { TImage, TLink, TBlok } from '@quansight/shared/types';
-import { ColumnsVariant } from '../../../components/Columns/types';
+
 import { ComponentType } from '../../../components/BlokProvider/types';
+import { ColumnsVariant } from '../../../components/Columns/types';
 
 type TColumn = {
   _uid: string;

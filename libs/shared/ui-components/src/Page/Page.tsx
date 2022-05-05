@@ -1,11 +1,12 @@
 import { FC, ReactNode } from 'react';
+
+import SbEditable from 'storyblok-react';
+
 import {
   PageItem,
   usePreviewMode,
   useStoryblok,
 } from '@quansight/shared/storyblok-sdk';
-import SbEditable from 'storyblok-react';
-
 import { TBlok } from '@quansight/shared/types';
 
 export type TPageProps = {

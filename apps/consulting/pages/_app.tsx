@@ -1,4 +1,5 @@
 import { AppProps } from 'next/app';
+
 import { Meta } from '@quansight/shared/ui-components';
 import './styles.css';
 

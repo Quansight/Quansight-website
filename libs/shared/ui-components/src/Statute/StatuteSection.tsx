@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import { TStatuteSectionProps } from './types';
+
 import { createMarkup } from '@quansight/shared/utils';
+
+import { TStatuteSectionProps } from './types';
 
 export const StatuteSection: FC<TStatuteSectionProps> = ({ title, text }) => {
   return (

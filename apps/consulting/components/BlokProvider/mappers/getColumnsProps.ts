@@ -1,6 +1,7 @@
-import { TColumnsProps } from '../../Columns/types';
-import { TColumnsRawData } from '../../../types/storyblok/bloks/columns';
 import { getUrl } from '@quansight/shared/utils';
+
+import { TColumnsRawData } from '../../../types/storyblok/bloks/columns';
+import { TColumnsProps } from '../../Columns/types';
 
 export const getColumnsProps = (blok: TColumnsRawData): TColumnsProps => ({
   variant: blok.variant,

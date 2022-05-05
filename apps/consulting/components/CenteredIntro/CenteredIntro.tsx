@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import { TCenteredIntroProps } from './types';
 
 export const CenteredIntro: FC<TCenteredIntroProps> = ({

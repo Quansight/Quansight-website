@@ -1,7 +1,8 @@
-import * as Types from '../types/graphql';
 import { ApolloQueryResult } from '@apollo/client';
-import { PageItemQuery } from '../types/graphql';
+
 import { apolloClient } from '../sdk/clients/apolloClient';
+import * as Types from '../types/graphql';
+import { PageItemQuery } from '../types/graphql';
 
 export const getPageItem = (
   variables: Types.PageItemQueryVariables,

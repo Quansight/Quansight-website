@@ -1,5 +1,5 @@
-import { TIntertwinedArticleProps } from '../../IntertwinedArticle/types';
 import { TIntertwinedArticleRawData } from '../../../types/storyblok/bloks/intertwinedArticle';
+import { TIntertwinedArticleProps } from '../../IntertwinedArticle/types';
 
 export const getIntertwinedArticleProps = (
   blok: TIntertwinedArticleRawData,

@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import { TFooterCopyrightProps } from './types';
+
 import Link from 'next/link';
+
+import { TFooterCopyrightProps } from './types';
 
 export const FooterCopyright: FC<TFooterCopyrightProps> = ({
   policyAndConditions,

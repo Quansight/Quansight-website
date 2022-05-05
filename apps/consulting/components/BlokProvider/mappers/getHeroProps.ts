@@ -1,4 +1,5 @@
 import { THeroProps } from '@quansight/shared/ui-components';
+
 import { THeroRawData } from '../../../types/storyblok/bloks/hero';
 
 export const getHeroProps = (blok: THeroRawData): THeroProps => ({

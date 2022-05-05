@@ -1,7 +1,8 @@
 import { useEffect, useReducer } from 'react';
+
 import { TState } from '../types';
-import { jobsReducer } from './jobsReducer';
 import { initialState } from './config';
+import { jobsReducer } from './jobsReducer';
 
 export const useJobList = (url?: string): TState => {
   const [state, dispatch] = useReducer(jobsReducer, initialState);

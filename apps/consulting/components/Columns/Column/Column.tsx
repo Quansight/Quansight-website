@@ -1,10 +1,10 @@
 import { FC } from 'react';
+
 import clsx from 'clsx';
 
+import { ColumnsVariant } from '../types';
 import { ColumnImage } from './ColumnImage';
 import { ColumnLink } from './ColumnLink';
-
-import { ColumnsVariant } from '../types';
 import { TColumnComponentProps } from './types';
 
 export const Column: FC<TColumnComponentProps> = ({

@@ -1,7 +1,9 @@
 import { FC } from 'react';
-import { TIntertwinedArticleProps } from './types';
+
 import { createMarkup } from '@quansight/shared/utils';
+
 import { IntertwinedArticleItem } from './IntertwinedArticleItem';
+import { TIntertwinedArticleProps } from './types';
 
 export const IntertwinedArticle: FC<TIntertwinedArticleProps> = ({
   title,

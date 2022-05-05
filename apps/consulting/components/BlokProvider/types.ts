@@ -1,9 +1,9 @@
+import { TypeValuesUnion } from '@quansight/shared/types';
 import {
   THeroProps,
   TTeaserProps,
   TStatuteProps,
 } from '@quansight/shared/ui-components';
-import { TypeValuesUnion } from '@quansight/shared/types';
 
 import { TBoardProps } from '../Board/types';
 import { TBoardListProps } from '../BoardList/types';

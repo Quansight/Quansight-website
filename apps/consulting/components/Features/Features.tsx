@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import Feature from './Feature';
-
 import { TFeaturesProps } from './types';
 
 export const Features: FC<TFeaturesProps> = ({ title, columns }) => {

@@ -1,10 +1,10 @@
 import { FC } from 'react';
+
 import { createMarkup } from '@quansight/shared/utils';
 
-import { HeaderDecoration, ButtonDecoration } from './decorations';
-import BoardItem from './BoardItem';
 import BoardButton from './BoardButton';
-
+import BoardItem from './BoardItem';
+import { HeaderDecoration, ButtonDecoration } from './decorations';
 import { TBoardProps } from './types';
 
 export const Board: FC<TBoardProps> = ({

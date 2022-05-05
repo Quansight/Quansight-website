@@ -1,7 +1,7 @@
 import { getUrl } from '@quansight/shared/utils';
 
-import { TStickyNotesProps } from '../../StickyNotes/types';
 import { TStickyNotesRawData } from '../../../types/storyblok/bloks/stickyNotes';
+import { TStickyNotesProps } from '../../StickyNotes/types';
 
 export const getStickyNotesProps = (
   data: TStickyNotesRawData,

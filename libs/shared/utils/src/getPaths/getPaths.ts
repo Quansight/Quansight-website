@@ -1,4 +1,5 @@
 import { TLinkEntry } from '@quansight/shared/types';
+
 import { isSlugRestricted } from './isSlugRestricted';
 import { TGetPaths } from './types';
 

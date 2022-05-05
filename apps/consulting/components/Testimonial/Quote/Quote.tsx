@@ -1,8 +1,7 @@
 import { FC } from 'react';
 
-import { Avatar } from './Avatar';
-
 import { TQuoteProps } from '../types';
+import { Avatar } from './Avatar';
 
 export const Quote: FC<TQuoteProps> = ({
   imageSrc,

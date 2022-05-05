@@ -1,11 +1,11 @@
 import { FC } from 'react';
+
 import clsx from 'clsx';
 
-import { Picture } from '../Picture/Picture';
 import { ButtonLink } from '../ButtonLink/ButtonLink';
-
-import { TeaserColor, TTeaserProps } from './types';
 import { ButtonColor } from '../ButtonLink/types';
+import { Picture } from '../Picture/Picture';
+import { TeaserColor, TTeaserProps } from './types';
 
 export const Teaser: FC<TTeaserProps> = ({
   color,
