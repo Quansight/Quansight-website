@@ -3,4 +3,5 @@ export const restrictedSlugs: string[] = [
   'layout',
   'library',
   'team',
+  'articles',
 ];

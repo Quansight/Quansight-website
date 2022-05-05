@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { Api, usePreviewMode } from '@quansight/shared/storyblok-sdk';
@@ -10,21 +10,23 @@ import {
   ARTICLES_DIRECTORY_SLUG,
 } from '@quansight/shared/utils';
 
-import { ISlugParams, TContainerProps } from '@quansight/shared/types';
+import { ISlugParams, TArticleProps } from '@quansight/shared/types';
 
-const Container: FC<TContainerProps> = ({ data, footer, preview }) => {
+const Article: FC<TArticleProps> = ({ data, footer, preview }) => {
   usePreviewMode(preview);
+  const { content } = data;
+
   return (
     <Layout footer={footer}>
       <SEO
-        title={data.content.title}
-        description={data.content.description}
+        title={content.title}
+        description={content.description}
         variant={DomainVariant.Quansight}
       />
-      <h1>Hello Article</h1>
       {/* TODO: hero */}
       {/* TODO: go back link */}
       {/* TODO: meta data */}
+      <h1>{content.postTitle}</h1>
       {/* TODO: article */}
       {/* TODO: read more */}
     </Layout>
@@ -39,21 +41,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+// @ts-ignore TODO
 export const getStaticProps: GetStaticProps<
-  TContainerProps,
+  TArticleProps,
   ISlugParams
 > = async ({ params: { slug }, preview = false }) => {
-  const { data } = await Api.getPageItem({
+  const { data } = await Api.getArticleItem({
     slug: `${ARTICLES_DIRECTORY_SLUG}${slug}`,
   });
   const { data: footer } = await Api.getFooterItem();
   return {
     props: {
-      data: data.PageItem,
+      data: data.ArticleItem,
       footer: footer.FooterItem,
       preview,
     },
   };
 };
 
-export default Container;
+export default Article;
