@@ -1,8 +1,8 @@
 import { FC } from 'react';
+
 import Link from 'next/link';
 
 import { LogosGrid } from './LogosGrid';
-
 import { TLogosProps } from './types';
 
 export const Logos: FC<TLogosProps> = ({ title, grid, linkTitle, linkUrl }) => {

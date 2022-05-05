@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
+
 import { GetStaticProps } from 'next';
 
-import { ISlugParams } from '@quansight/shared/types';
 import { Api, FooterItem } from '@quansight/shared/storyblok-sdk';
+import { ISlugParams } from '@quansight/shared/types';
 import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
 
 import { getAllPosts } from '../../services/api/posts/getAllPosts';

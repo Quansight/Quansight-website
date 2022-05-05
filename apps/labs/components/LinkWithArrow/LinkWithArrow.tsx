@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import Link, { LinkProps } from 'next/link';
+
 import Image from 'next/image';
+import Link, { LinkProps } from 'next/link';
 
 export type LinkWithArrowProps = LinkProps;
 

@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
 
-import { getPropsByType } from './utils/getPropsByType';
-import { componentsMap } from './componentsMap';
+import { Placeholder } from '@quansight/shared/ui-components';
 
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlock';
-
-import { Placeholder } from '@quansight/shared/ui-components';
+import { componentsMap } from './componentsMap';
+import { getPropsByType } from './utils/getPropsByType';
 
 export type TBlokProviderProps = {
   blok: TRawBlok;
