@@ -8,6 +8,6 @@ export const getArticlesPaths = (items: TLinkEntry[]): TGetArticlesPaths[] =>
     .filter(({ isFolder, slug }) => slug && !isFolder && isSlugRestricted(slug))
     .map(({ slug }) => ({
       params: {
-        slug: slug && formatSlugParam(slug),
+        slug: formatSlugParam(slug),
       },
     }));
