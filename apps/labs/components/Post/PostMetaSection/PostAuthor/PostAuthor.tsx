@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+
 import { Picture } from '@quansight/shared/ui-components';
 
 import { TPostMeta } from '../../../../types/storyblok/bloks/posts';

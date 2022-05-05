@@ -1,11 +1,13 @@
+import { FC } from 'react';
+
+import { useForm } from 'react-hook-form';
+
 import {
   Button,
   Input,
   Picture,
   Textarea,
 } from '@quansight/shared/ui-components';
-import { FC } from 'react';
-import { useForm } from 'react-hook-form';
 
 export type FormValues = {
   firstName: string;

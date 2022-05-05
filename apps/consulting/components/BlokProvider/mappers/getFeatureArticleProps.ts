@@ -1,5 +1,5 @@
-import { TFeatureArticleProps } from '../../FeatureArticle/types';
 import { TFeatureArticleRawData } from '../../../types/storyblok/bloks/featureArticle';
+import { TFeatureArticleProps } from '../../FeatureArticle/types';
 
 export const getFeatureArticleProps = (
   blok: TFeatureArticleRawData,

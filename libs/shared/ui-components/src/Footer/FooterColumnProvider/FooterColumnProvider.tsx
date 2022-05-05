@@ -1,15 +1,14 @@
 import { FC } from 'react';
 
+import { Placeholder } from '../../Placeholder/Placeholder';
 import {
   TFooterContactProps,
   TFooterNavigationProps,
   TFooterColumnProviderProps,
   TFooterSocialMediaProps,
 } from '../types';
-
-import { Placeholder } from '../../Placeholder/Placeholder';
-import FooterNavigation from './FooterNavigation';
 import FooterContact from './FooterContact';
+import FooterNavigation from './FooterNavigation';
 import FooterSocialMedia from './FooterSocialMedia';
 
 export const FooterColumnProvider: FC<TFooterColumnProviderProps> = ({

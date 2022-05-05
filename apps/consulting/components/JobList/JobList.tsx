@@ -1,14 +1,11 @@
 import { FC } from 'react';
 
 import { JobListItem } from './JobListItem';
-
-import { TJobListProps } from './types';
-
-import { useJobList } from './utils/useJobList';
-import { url } from './utils/config';
-
 import { Loading } from './StateIndicators/Loading';
 import { Message } from './StateIndicators/Message';
+import { TJobListProps } from './types';
+import { url } from './utils/config';
+import { useJobList } from './utils/useJobList';
 
 export const JobList: FC<TJobListProps> = ({
   title,

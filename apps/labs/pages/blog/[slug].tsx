@@ -1,23 +1,23 @@
-import { FC } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import clsx from 'clsx';
-import path from 'path';
 import { readdir } from 'fs/promises';
+import path from 'path';
+
+import { FC } from 'react';
+
+import clsx from 'clsx';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 
-import { ISlugParams } from '@quansight/shared/types';
 import { Api, FooterItem } from '@quansight/shared/storyblok-sdk';
+import { ISlugParams } from '@quansight/shared/types';
 import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
 
-import { getPost } from '../../services/api/posts/getPost';
-import { blogAllowedComponents } from '../../services/blogAllowedComponents';
-import { POSTS_DIRECTORY_PATH } from '../../services/api/posts/constants';
-import { getPostsByCategory } from '../../services/api/posts/getPostsByCateghory';
-
 import { LinkWithArrow } from '../../components/LinkWithArrow/LinkWithArrow';
-import { PostMetaSection } from '../../components/Post/PostMetaSection/PostMetaSection';
 import { FeaturedPosts } from '../../components/Post/PostMetaSection/FeaturedPosts/FeaturedPosts';
-
+import { PostMetaSection } from '../../components/Post/PostMetaSection/PostMetaSection';
+import { POSTS_DIRECTORY_PATH } from '../../services/api/posts/constants';
+import { getPost } from '../../services/api/posts/getPost';
+import { getPostsByCategory } from '../../services/api/posts/getPostsByCateghory';
+import { blogAllowedComponents } from '../../services/blogAllowedComponents';
 import { TPost } from '../../types/storyblok/bloks/posts';
 
 export type TBlogPostProps = {

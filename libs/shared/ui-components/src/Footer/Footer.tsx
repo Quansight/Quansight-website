@@ -1,9 +1,8 @@
 import { FC } from 'react';
 
-import { TFooterProps } from './types';
-
 import { FooterColumnProvider } from './FooterColumnProvider/FooterColumnProvider';
 import { FooterCopyright } from './FooterCopyright';
+import { TFooterProps } from './types';
 
 export const Footer: FC<TFooterProps> = ({
   columns,

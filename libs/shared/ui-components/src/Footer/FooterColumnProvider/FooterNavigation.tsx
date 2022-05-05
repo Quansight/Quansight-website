@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import { TFooterNavigationProps } from '../types';
+
 import Link from 'next/link';
+
+import { TFooterNavigationProps } from '../types';
 
 export const FooterNavigation: FC<TFooterNavigationProps> = ({
   title,

@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { TStatuteProps } from './types';
+
 import { StatuteSection } from './StatuteSection';
+import { TStatuteProps } from './types';
 
 export const Statute: FC<TStatuteProps> = ({ title, sections }) => (
   <article className="py-[5.4rem] px-[1.8rem] mx-auto sm:py-[6.4rem] sm:px-[4.4rem] xl:px-[21.2rem] xl:pt-[11.2rem] xl:pb-[8.6rem] max-w-layout">

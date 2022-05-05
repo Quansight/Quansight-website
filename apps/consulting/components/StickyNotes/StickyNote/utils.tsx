@@ -1,5 +1,5 @@
-import { StickyNoteColor, StickyNoteSize } from './types';
 import { StickyNotesVariant } from '../types';
+import { StickyNoteColor, StickyNoteSize } from './types';
 
 export const getFirstNoteMargins = (variant: StickyNotesVariant): string => {
   return {

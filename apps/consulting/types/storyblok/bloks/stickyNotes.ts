@@ -1,10 +1,11 @@
 import { TBlok, TLink, TRichText } from '@quansight/shared/types';
+
 import { ComponentType } from '../../../components/BlokProvider/types';
-import { StickyNotesVariant } from '../../../components/StickyNotes/types';
 import {
   StickyNoteColor,
   StickyNoteSize,
 } from '../../../components/StickyNotes/StickyNote/types';
+import { StickyNotesVariant } from '../../../components/StickyNotes/types';
 
 type TStickyNotesItemRawData = {
   title: string;

@@ -1,7 +1,8 @@
 import { readFile, readdir } from 'fs/promises';
+import path from 'path';
+
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
-import path from 'path';
 
 import { TPost } from '../../../types/storyblok/bloks/posts';
 import { getPostPathToFile } from './getPostPathToFile';

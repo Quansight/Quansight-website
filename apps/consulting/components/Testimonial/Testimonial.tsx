@@ -1,8 +1,7 @@
 import { FC } from 'react';
 
-import { Triangle } from './Triangle';
 import { Quote } from './Quote/Quote';
-
+import { Triangle } from './Triangle';
 import { TTestimonialProps } from './types';
 
 export const Testimonial: FC<TTestimonialProps> = ({

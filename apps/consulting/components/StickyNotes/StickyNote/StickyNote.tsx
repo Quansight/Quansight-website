@@ -1,17 +1,16 @@
 import { FC } from 'react';
+
 import clsx from 'clsx';
 
-import { Header } from './Header';
-import { Description } from './Description';
 import { Button } from './Button';
-
+import { Description } from './Description';
+import { Header } from './Header';
+import { TStickyNoteComponentProps } from './types';
 import {
   getBackgroundColor,
   getFirstNoteMargins,
   getLastNoteMargins,
 } from './utils';
-
-import { TStickyNoteComponentProps } from './types';
 
 export const StickyNote: FC<TStickyNoteComponentProps> = ({
   title,

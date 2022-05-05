@@ -1,6 +1,7 @@
-import { TRelatedProps } from '../../Related/types';
-import { TRelatedRawData } from '../../../types/storyblok/bloks/related';
 import { getUrl } from '@quansight/shared/utils';
+
+import { TRelatedRawData } from '../../../types/storyblok/bloks/related';
+import { TRelatedProps } from '../../Related/types';
 
 export const getRelatedProps = (blok: TRelatedRawData): TRelatedProps => ({
   title: blok.title,

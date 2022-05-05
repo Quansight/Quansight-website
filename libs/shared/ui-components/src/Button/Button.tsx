@@ -1,5 +1,6 @@
-import clsx from 'clsx';
 import { ButtonHTMLAttributes, FC, MouseEventHandler } from 'react';
+
+import clsx from 'clsx';
 
 export type TButtonProps = {
   title: string;

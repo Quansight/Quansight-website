@@ -1,4 +1,5 @@
 import { TImage, TBlok } from '@quansight/shared/types';
+
 import { ComponentType } from '../../../components/BlokProvider/types';
 
 type TFeature = {

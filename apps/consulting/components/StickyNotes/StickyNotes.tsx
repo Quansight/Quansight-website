@@ -2,7 +2,6 @@ import { FC } from 'react';
 
 import { StickyNote } from './StickyNote/StickyNote';
 import { StickyNotesDecor } from './StickyNotesDecor';
-
 import { TStickyNotesProps, StickyNotesVariant } from './types';
 
 export const StickyNotes: FC<TStickyNotesProps> = ({ variant, items }) => {
