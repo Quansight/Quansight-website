@@ -7,13 +7,13 @@ query articleItem($slug: ID!) {
       description
       postText
       postTitle
-      publishedDate
-      title
-      type
-      image {
+      postImage {
         filename
         alt
       }
+      publishedDate
+      title
+      type
       category
       author {
         content

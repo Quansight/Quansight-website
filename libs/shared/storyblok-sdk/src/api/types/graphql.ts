@@ -41,10 +41,10 @@ export type ArticleComponent = {
   _editable: Maybe<Scalars['String']>;
   _uid: Maybe<Scalars['String']>;
   author: Maybe<Story>;
-  category: Maybe<Scalars['String']>;
+  category: Maybe<Array<Maybe<Scalars['String']>>>;
   component: Maybe<Scalars['String']>;
   description: Maybe<Scalars['String']>;
-  image: Maybe<Asset>;
+  postImage: Maybe<Asset>;
   postText: Maybe<Scalars['JsonScalar']>;
   postTitle: Maybe<Scalars['String']>;
   publishedDate: Maybe<Scalars['String']>;
@@ -61,7 +61,6 @@ export type ArticleComponentAuthorArgs = {
 export type ArticleFilterQuery = {
   author: InputMaybe<FilterQueryOperations>;
   category: InputMaybe<FilterQueryOperations>;
-  description: InputMaybe<FilterQueryOperations>;
   postTitle: InputMaybe<FilterQueryOperations>;
   title: InputMaybe<FilterQueryOperations>;
   type: InputMaybe<FilterQueryOperations>;
@@ -240,6 +239,17 @@ export type FooterItems = {
   total: Maybe<Scalars['Int']>;
 };
 
+export type Link = {
+  __typename?: 'Link';
+  cachedUrl: Scalars['String'];
+  email: Maybe<Scalars['String']>;
+  fieldtype: Scalars['String'];
+  id: Scalars['String'];
+  linktype: Scalars['String'];
+  story: Maybe<Story>;
+  url: Scalars['String'];
+};
+
 export type LinkEntries = {
   __typename?: 'LinkEntries';
   items: Array<LinkEntry>;
@@ -310,6 +320,7 @@ export type PersonComponent = {
   _uid: Maybe<Scalars['String']>;
   component: Maybe<Scalars['String']>;
   firstName: Maybe<Scalars['String']>;
+  githubLink: Maybe<Link>;
   githubNick: Maybe<Scalars['String']>;
   image: Maybe<Asset>;
   lastName: Maybe<Scalars['String']>;
@@ -650,8 +661,8 @@ export type ArticleItemQuery = {
       publishedDate: string | null;
       title: string | null;
       type: string | null;
-      category: string | null;
-      image: {
+      category: Array<string | null> | null;
+      postImage: {
         __typename?: 'Asset';
         filename: string;
         alt: string | null;
@@ -818,13 +829,13 @@ export const ArticleItemDocument = gql`
         description
         postText
         postTitle
-        publishedDate
-        title
-        type
-        image {
+        postImage {
           filename
           alt
         }
+        publishedDate
+        title
+        type
         category
         author {
           content
