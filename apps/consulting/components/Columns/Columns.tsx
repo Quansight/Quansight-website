@@ -1,8 +1,8 @@
 import { FC } from 'react';
+
 import clsx from 'clsx';
 
 import { Column } from './Column/Column';
-
 import { ColumnsVariant, TColumnsProps } from './types';
 
 export const Columns: FC<TColumnsProps> = ({ variant, columns }) => (

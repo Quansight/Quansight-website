@@ -1,4 +1,5 @@
 import { TRichText } from '@quansight/shared/types';
+
 import { StickyNotesVariant } from '../types';
 
 export enum StickyNoteColor {

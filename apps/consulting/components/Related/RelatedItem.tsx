@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import Link from 'next/link';
 
 import { Picture } from '@quansight/shared/ui-components';

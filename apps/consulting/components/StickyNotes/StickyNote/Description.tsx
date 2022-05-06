@@ -1,12 +1,12 @@
 import { FC } from 'react';
+
 import clsx from 'clsx';
 
+import { TRichText } from '@quansight/shared/types';
 import { createMarkup } from '@quansight/shared/utils';
 
-import { getTextColor, getTextSize } from './utils';
-
 import { StickyNoteColor, StickyNoteSize } from './types';
-import { TRichText } from '@quansight/shared/types';
+import { getTextColor, getTextSize } from './utils';
 
 type TDescriptionProps = {
   text: TRichText;

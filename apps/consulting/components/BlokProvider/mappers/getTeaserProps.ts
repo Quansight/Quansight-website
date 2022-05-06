@@ -1,6 +1,6 @@
+import { TTeaserProps } from '@quansight/shared/ui-components';
 import { getUrl } from '@quansight/shared/utils';
 
-import { TTeaserProps } from '@quansight/shared/ui-components';
 import { TTeaserRawData } from '../../../types/storyblok/bloks/teaser';
 
 export const getTeaserProps = (blok: TTeaserRawData): TTeaserProps => ({

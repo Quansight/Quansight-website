@@ -1,7 +1,7 @@
 import { getArticleItem } from '../utils/getArticleItem';
+import { getFooterItem } from '../utils/getFooterItem';
 import { getLinks } from '../utils/getLinks';
 import { getPageItem } from '../utils/getPageItem';
-import { getFooterItem } from '../utils/getFooterItem';
 
 export const Api = {
   getArticleItem,

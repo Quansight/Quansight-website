@@ -1,5 +1,5 @@
-import { TFeaturesProps } from '../../Features/types';
 import { TFeaturesRawData } from '../../../types/storyblok/bloks/features';
+import { TFeaturesProps } from '../../Features/types';
 
 export const getFeaturesProps = (blok: TFeaturesRawData): TFeaturesProps => ({
   title: blok.title,

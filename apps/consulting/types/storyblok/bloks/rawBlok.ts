@@ -1,12 +1,12 @@
 import { TBoardRawData } from './board';
 import { TBoardListRawData } from './boardList';
+import { TCenteredIntroRawData } from './centeredIntro';
 import { TColumnsRawData } from './columns';
 import { TFeatureArticleRawData } from './featureArticle';
 import { TFeaturesRawData } from './features';
 import { THeroRawData } from './hero';
 import { TIntertwinedArticleRawData } from './intertwinedArticle';
 import { TJobListRawData } from './jobList';
-import { TCenteredIntroRawData } from './centeredIntro';
 import { TRelatedRawData } from './related';
 import { TStatuteRawData } from './statute';
 import { TStickyNotesRawData } from './stickyNotes';

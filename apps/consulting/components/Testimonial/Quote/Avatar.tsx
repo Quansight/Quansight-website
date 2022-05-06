@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import { Picture } from '@quansight/shared/ui-components';
 
 import { TAvatarProps } from '../types';

@@ -1,9 +1,9 @@
 import { FC } from 'react';
+
 import clsx from 'clsx';
 
-import { getTextColor } from './utils';
-
 import { StickyNoteColor } from './types';
+import { getTextColor } from './utils';
 
 type THeaderProps = {
   variant: StickyNoteColor;

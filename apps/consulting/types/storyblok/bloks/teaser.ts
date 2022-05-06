@@ -1,5 +1,6 @@
-import { TeaserColor } from '@quansight/shared/ui-components';
 import { TBlok, TImage, TLink } from '@quansight/shared/types';
+import { TeaserColor } from '@quansight/shared/ui-components';
+
 import { ComponentType } from '../../../components/BlokProvider/types';
 
 export type TTeaserRawData = {

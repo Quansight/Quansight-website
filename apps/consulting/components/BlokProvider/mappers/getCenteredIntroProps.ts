@@ -1,5 +1,5 @@
-import { TCenteredIntroProps } from '../../CenteredIntro/types';
 import { TCenteredIntroRawData } from '../../../types/storyblok/bloks/centeredIntro';
+import { TCenteredIntroProps } from '../../CenteredIntro/types';
 
 export const getCenteredIntroProps = (
   blok: TCenteredIntroRawData,

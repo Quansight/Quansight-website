@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { TFooterSocialMediaProps } from '../types';
+
 import Picture from '../../Picture/Picture';
+import { TFooterSocialMediaProps } from '../types';
 
 export const FooterSocialMedia: FC<TFooterSocialMediaProps> = ({
   title,

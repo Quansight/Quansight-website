@@ -1,5 +1,7 @@
 import { FC, ReactNode } from 'react';
+
 import { FooterItem } from '@quansight/shared/storyblok-sdk';
+
 import Footer from '../Footer/Footer';
 
 export type TLayoutProps = {

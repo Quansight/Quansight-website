@@ -1,11 +1,11 @@
-import intersection from 'lodash/intersection';
 import composeFp from 'lodash/fp/compose';
-import takeFp from 'lodash/fp/take';
 import filterFp from 'lodash/fp/filter';
+import takeFp from 'lodash/fp/take';
+import intersection from 'lodash/intersection';
 
 import { TPost } from '../../../types/storyblok/bloks/posts';
-import { getAllPosts } from './getAllPosts';
 import { DEFAULT_API_OFFSET } from './constants';
+import { getAllPosts } from './getAllPosts';
 
 export const getPostsByCategory = async (
   category: string[],

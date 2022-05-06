@@ -1,7 +1,6 @@
-import { ComponentType, TBlokComponentProps } from '../types';
-
-import { getBoardProps } from '../mappers/getBoardProps';
+import { TRawBlok } from '../../../types/storyblok/bloks/rawBlok';
 import { getBoardListProps } from '../mappers/getBoardListProps';
+import { getBoardProps } from '../mappers/getBoardProps';
 import { getCenteredIntroProps } from '../mappers/getCenteredIntroProps';
 import { getColumnsProps } from '../mappers/getColumnsProps';
 import { getFeatureArticleProps } from '../mappers/getFeatureArticleProps';
@@ -15,8 +14,7 @@ import { getStickyNotesProps } from '../mappers/getStickyNotesProps';
 import { getTeaserProps } from '../mappers/getTeaserProps';
 import { getTestimonialProps } from '../mappers/getTestimonialProps';
 import { getTextArticleProps } from '../mappers/getTextArticleProps';
-
-import { TRawBlok } from '../../../types/storyblok/bloks/rawBlok';
+import { ComponentType, TBlokComponentProps } from '../types';
 
 export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
   switch (blok.component) {

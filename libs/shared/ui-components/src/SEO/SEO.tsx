@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import { TSEOProps, DomainVariant } from './types';
+
 import Head from 'next/head';
+
+import { TSEOProps, DomainVariant } from './types';
 
 export const SEO: FC<TSEOProps> = ({ title, description, variant }) => (
   <Head>

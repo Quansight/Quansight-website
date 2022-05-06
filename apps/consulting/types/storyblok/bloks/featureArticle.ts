@@ -1,4 +1,5 @@
 import { TRichText, TImage, TBlok } from '@quansight/shared/types';
+
 import { ComponentType } from '../../../components/BlokProvider/types';
 
 export type TFeatureArticleRawData = {

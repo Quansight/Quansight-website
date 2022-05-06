@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import { RelatedItem } from './RelatedItem';
-
 import { TRelatedProps } from './types';
 
 export const Related: FC<TRelatedProps> = ({ title, items }) => (
