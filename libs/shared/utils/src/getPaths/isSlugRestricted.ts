@@ -1,4 +1,7 @@
 import { restrictedSlugs } from './restrictedSlugs';
 
-export const isSlugRestricted = (slug: string): boolean =>
-  !restrictedSlugs.includes(slug);
+export const isSlugRestricted = (slug: string): boolean => {
+  return !restrictedSlugs.some((restrictedSlug) =>
+    slug.includes(restrictedSlug),
+  );
+};

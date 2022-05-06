@@ -5,6 +5,7 @@ export * from './utils/richText';
 
 export * from './bloks/Blok';
 export * from './bloks/containerProps';
+export * from './bloks/articleProps';
 
 export * from './storyblok/contentTypes';
 

@@ -1,1 +1,7 @@
-export const restrictedSlugs: string[] = ['homepage', 'layout/footer'];
+export const restrictedSlugs: string[] = [
+  'homepage',
+  'layout',
+  'library',
+  'team',
+  'articles',
+];

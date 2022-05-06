@@ -1,0 +1,23 @@
+query articleItem($slug: ID!) {
+  ArticleItem(id: $slug) {
+    content {
+      _editable
+      _uid
+      component
+      description
+      postText
+      postTitle
+      postImage {
+        filename
+        alt
+      }
+      publishedDate
+      title
+      type
+      category
+      author {
+        content
+      }
+    }
+  }
+}

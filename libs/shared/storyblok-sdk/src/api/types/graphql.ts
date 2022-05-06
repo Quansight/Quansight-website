@@ -36,6 +36,79 @@ export type Alternate = {
   slug: Scalars['String'];
 };
 
+export type ArticleComponent = {
+  __typename?: 'ArticleComponent';
+  _editable: Maybe<Scalars['String']>;
+  _uid: Maybe<Scalars['String']>;
+  author: Maybe<Story>;
+  category: Maybe<Array<Maybe<Scalars['String']>>>;
+  component: Maybe<Scalars['String']>;
+  description: Maybe<Scalars['String']>;
+  postImage: Maybe<Asset>;
+  postText: Maybe<Scalars['JsonScalar']>;
+  postTitle: Maybe<Scalars['String']>;
+  publishedDate: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  type: Maybe<Scalars['String']>;
+};
+
+export type ArticleComponentAuthorArgs = {
+  fields: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  language: InputMaybe<Scalars['String']>;
+  resolve_relations: InputMaybe<Scalars['String']>;
+};
+
+export type ArticleFilterQuery = {
+  author: InputMaybe<FilterQueryOperations>;
+  category: InputMaybe<FilterQueryOperations>;
+  postTitle: InputMaybe<FilterQueryOperations>;
+  title: InputMaybe<FilterQueryOperations>;
+  type: InputMaybe<FilterQueryOperations>;
+};
+
+export type ArticleItem = {
+  __typename?: 'ArticleItem';
+  alternates: Maybe<Array<Maybe<Alternate>>>;
+  content: Maybe<ArticleComponent>;
+  created_at: Maybe<Scalars['String']>;
+  default_full_slug: Maybe<Scalars['String']>;
+  first_published_at: Maybe<Scalars['String']>;
+  full_slug: Maybe<Scalars['String']>;
+  group_id: Maybe<Scalars['Int']>;
+  id: Maybe<Scalars['Int']>;
+  is_startpage: Maybe<Scalars['Boolean']>;
+  lang: Maybe<Scalars['String']>;
+  meta_data: Maybe<Scalars['JsonScalar']>;
+  name: Maybe<Scalars['String']>;
+  parent_id: Maybe<Scalars['Int']>;
+  path: Maybe<Scalars['String']>;
+  position: Maybe<Scalars['Int']>;
+  published_at: Maybe<Scalars['String']>;
+  release_id: Maybe<Scalars['Int']>;
+  slug: Maybe<Scalars['String']>;
+  sort_by_date: Maybe<Scalars['String']>;
+  tag_list: Maybe<Array<Maybe<Scalars['String']>>>;
+  translated_slugs: Maybe<Array<Maybe<TranslatedSlug>>>;
+  uuid: Maybe<Scalars['String']>;
+};
+
+export type ArticleItems = {
+  __typename?: 'ArticleItems';
+  items: Maybe<Array<Maybe<ArticleItem>>>;
+  total: Maybe<Scalars['Int']>;
+};
+
+export type Asset = {
+  __typename?: 'Asset';
+  alt: Maybe<Scalars['String']>;
+  copyright: Maybe<Scalars['String']>;
+  filename: Scalars['String'];
+  focus: Maybe<Scalars['String']>;
+  id: Maybe<Scalars['Int']>;
+  name: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+};
+
 export type ContentItem = {
   __typename?: 'ContentItem';
   alternates: Maybe<Array<Maybe<Alternate>>>;
@@ -166,6 +239,17 @@ export type FooterItems = {
   total: Maybe<Scalars['Int']>;
 };
 
+export type Link = {
+  __typename?: 'Link';
+  cachedUrl: Scalars['String'];
+  email: Maybe<Scalars['String']>;
+  fieldtype: Scalars['String'];
+  id: Scalars['String'];
+  linktype: Scalars['String'];
+  story: Maybe<Story>;
+  url: Scalars['String'];
+};
+
 export type LinkEntries = {
   __typename?: 'LinkEntries';
   items: Array<LinkEntry>;
@@ -230,8 +314,62 @@ export type PageItems = {
   total: Maybe<Scalars['Int']>;
 };
 
+export type PersonComponent = {
+  __typename?: 'PersonComponent';
+  _editable: Maybe<Scalars['String']>;
+  _uid: Maybe<Scalars['String']>;
+  component: Maybe<Scalars['String']>;
+  firstName: Maybe<Scalars['String']>;
+  githubLink: Maybe<Link>;
+  githubNick: Maybe<Scalars['String']>;
+  image: Maybe<Asset>;
+  lastName: Maybe<Scalars['String']>;
+  role: Maybe<Scalars['String']>;
+};
+
+export type PersonFilterQuery = {
+  firstName: InputMaybe<FilterQueryOperations>;
+  githubNick: InputMaybe<FilterQueryOperations>;
+  lastName: InputMaybe<FilterQueryOperations>;
+  role: InputMaybe<FilterQueryOperations>;
+};
+
+export type PersonItem = {
+  __typename?: 'PersonItem';
+  alternates: Maybe<Array<Maybe<Alternate>>>;
+  content: Maybe<PersonComponent>;
+  created_at: Maybe<Scalars['String']>;
+  default_full_slug: Maybe<Scalars['String']>;
+  first_published_at: Maybe<Scalars['String']>;
+  full_slug: Maybe<Scalars['String']>;
+  group_id: Maybe<Scalars['Int']>;
+  id: Maybe<Scalars['Int']>;
+  is_startpage: Maybe<Scalars['Boolean']>;
+  lang: Maybe<Scalars['String']>;
+  meta_data: Maybe<Scalars['JsonScalar']>;
+  name: Maybe<Scalars['String']>;
+  parent_id: Maybe<Scalars['Int']>;
+  path: Maybe<Scalars['String']>;
+  position: Maybe<Scalars['Int']>;
+  published_at: Maybe<Scalars['String']>;
+  release_id: Maybe<Scalars['Int']>;
+  slug: Maybe<Scalars['String']>;
+  sort_by_date: Maybe<Scalars['String']>;
+  tag_list: Maybe<Array<Maybe<Scalars['String']>>>;
+  translated_slugs: Maybe<Array<Maybe<TranslatedSlug>>>;
+  uuid: Maybe<Scalars['String']>;
+};
+
+export type PersonItems = {
+  __typename?: 'PersonItems';
+  items: Maybe<Array<Maybe<PersonItem>>>;
+  total: Maybe<Scalars['Int']>;
+};
+
 export type QueryType = {
   __typename?: 'QueryType';
+  ArticleItem: Maybe<ArticleItem>;
+  ArticleItems: Maybe<ArticleItems>;
   ContentNode: Maybe<ContentItem>;
   ContentNodes: Maybe<ContentItems>;
   DatasourceEntries: Maybe<DatasourceEntries>;
@@ -241,9 +379,47 @@ export type QueryType = {
   Links: Maybe<LinkEntries>;
   PageItem: Maybe<PageItem>;
   PageItems: Maybe<PageItems>;
+  PersonItem: Maybe<PersonItem>;
+  PersonItems: Maybe<PersonItems>;
   RateLimit: Maybe<RateLimit>;
   Space: Maybe<Space>;
   Tags: Maybe<Tags>;
+};
+
+export type QueryTypeArticleItemArgs = {
+  find_by: InputMaybe<Scalars['String']>;
+  from_release: InputMaybe<Scalars['Int']>;
+  id: Scalars['ID'];
+  language: InputMaybe<Scalars['String']>;
+  resolve_links: InputMaybe<Scalars['String']>;
+  resolve_relations: InputMaybe<Scalars['String']>;
+};
+
+export type QueryTypeArticleItemsArgs = {
+  by_slugs: InputMaybe<Scalars['String']>;
+  by_uuids: InputMaybe<Scalars['String']>;
+  by_uuids_ordered: InputMaybe<Scalars['String']>;
+  excluding_fields: InputMaybe<Scalars['String']>;
+  excluding_ids: InputMaybe<Scalars['String']>;
+  excluding_slugs: InputMaybe<Scalars['String']>;
+  fallback_lang: InputMaybe<Scalars['String']>;
+  filter_query: InputMaybe<Scalars['JsonScalar']>;
+  filter_query_v2: InputMaybe<ArticleFilterQuery>;
+  first_published_at_gt: InputMaybe<Scalars['String']>;
+  first_published_at_lt: InputMaybe<Scalars['String']>;
+  from_release: InputMaybe<Scalars['String']>;
+  is_startpage: InputMaybe<Scalars['String']>;
+  language: InputMaybe<Scalars['String']>;
+  page: InputMaybe<Scalars['Int']>;
+  per_page: InputMaybe<Scalars['Int']>;
+  published_at_gt: InputMaybe<Scalars['String']>;
+  published_at_lt: InputMaybe<Scalars['String']>;
+  resolve_links: InputMaybe<Scalars['String']>;
+  resolve_relations: InputMaybe<Scalars['String']>;
+  search_term: InputMaybe<Scalars['String']>;
+  sort_by: InputMaybe<Scalars['String']>;
+  starts_with: InputMaybe<Scalars['String']>;
+  with_tag: InputMaybe<Scalars['String']>;
 };
 
 export type QueryTypeContentNodeArgs = {
@@ -369,6 +545,42 @@ export type QueryTypePageItemsArgs = {
   with_tag: InputMaybe<Scalars['String']>;
 };
 
+export type QueryTypePersonItemArgs = {
+  find_by: InputMaybe<Scalars['String']>;
+  from_release: InputMaybe<Scalars['Int']>;
+  id: Scalars['ID'];
+  language: InputMaybe<Scalars['String']>;
+  resolve_links: InputMaybe<Scalars['String']>;
+  resolve_relations: InputMaybe<Scalars['String']>;
+};
+
+export type QueryTypePersonItemsArgs = {
+  by_slugs: InputMaybe<Scalars['String']>;
+  by_uuids: InputMaybe<Scalars['String']>;
+  by_uuids_ordered: InputMaybe<Scalars['String']>;
+  excluding_fields: InputMaybe<Scalars['String']>;
+  excluding_ids: InputMaybe<Scalars['String']>;
+  excluding_slugs: InputMaybe<Scalars['String']>;
+  fallback_lang: InputMaybe<Scalars['String']>;
+  filter_query: InputMaybe<Scalars['JsonScalar']>;
+  filter_query_v2: InputMaybe<PersonFilterQuery>;
+  first_published_at_gt: InputMaybe<Scalars['String']>;
+  first_published_at_lt: InputMaybe<Scalars['String']>;
+  from_release: InputMaybe<Scalars['String']>;
+  is_startpage: InputMaybe<Scalars['String']>;
+  language: InputMaybe<Scalars['String']>;
+  page: InputMaybe<Scalars['Int']>;
+  per_page: InputMaybe<Scalars['Int']>;
+  published_at_gt: InputMaybe<Scalars['String']>;
+  published_at_lt: InputMaybe<Scalars['String']>;
+  resolve_links: InputMaybe<Scalars['String']>;
+  resolve_relations: InputMaybe<Scalars['String']>;
+  search_term: InputMaybe<Scalars['String']>;
+  sort_by: InputMaybe<Scalars['String']>;
+  starts_with: InputMaybe<Scalars['String']>;
+  with_tag: InputMaybe<Scalars['String']>;
+};
+
 export type QueryTypeTagsArgs = {
   starts_with: InputMaybe<Scalars['String']>;
 };
@@ -387,6 +599,31 @@ export type Space = {
   version: Scalars['Int'];
 };
 
+export type Story = {
+  __typename?: 'Story';
+  alternates: Maybe<Array<Maybe<Alternate>>>;
+  content: Maybe<Scalars['JsonScalar']>;
+  createdAt: Maybe<Scalars['String']>;
+  firstPublishedAt: Maybe<Scalars['String']>;
+  fullSlug: Maybe<Scalars['String']>;
+  groupId: Maybe<Scalars['Int']>;
+  id: Maybe<Scalars['Int']>;
+  isStartpage: Maybe<Scalars['Boolean']>;
+  lang: Maybe<Scalars['String']>;
+  metaData: Maybe<Scalars['JsonScalar']>;
+  name: Maybe<Scalars['String']>;
+  parentId: Maybe<Scalars['Int']>;
+  path: Maybe<Scalars['String']>;
+  position: Maybe<Scalars['Int']>;
+  publishedAt: Maybe<Scalars['String']>;
+  releaseId: Maybe<Scalars['Int']>;
+  slug: Maybe<Scalars['String']>;
+  sortByDate: Maybe<Scalars['String']>;
+  tagList: Maybe<Array<Maybe<Scalars['String']>>>;
+  translatedSlugs: Maybe<Array<Maybe<TranslatedSlug>>>;
+  uuid: Maybe<Scalars['String']>;
+};
+
 export type Tag = {
   __typename?: 'Tag';
   name: Scalars['String'];
@@ -403,6 +640,36 @@ export type TranslatedSlug = {
   lang: Scalars['String'];
   name: Maybe<Scalars['String']>;
   path: Maybe<Scalars['String']>;
+};
+
+export type ArticleItemQueryVariables = Exact<{
+  slug: Scalars['ID'];
+}>;
+
+export type ArticleItemQuery = {
+  __typename?: 'QueryType';
+  ArticleItem: {
+    __typename?: 'ArticleItem';
+    content: {
+      __typename?: 'ArticleComponent';
+      _editable: string | null;
+      _uid: string | null;
+      component: string | null;
+      description: string | null;
+      postText: any | null;
+      postTitle: string | null;
+      publishedDate: string | null;
+      title: string | null;
+      type: string | null;
+      category: Array<string | null> | null;
+      postImage: {
+        __typename?: 'Asset';
+        filename: string;
+        alt: string | null;
+      } | null;
+      author: { __typename?: 'Story'; content: any | null } | null;
+    } | null;
+  } | null;
 };
 
 export type FooterItemQueryVariables = Exact<{
@@ -552,6 +819,35 @@ export type PageItemsQuery = {
   } | null;
 };
 
+export const ArticleItemDocument = gql`
+  query articleItem($slug: ID!) {
+    ArticleItem(id: $slug) {
+      content {
+        _editable
+        _uid
+        component
+        description
+        postText
+        postTitle
+        postImage {
+          filename
+          alt
+        }
+        publishedDate
+        title
+        type
+        category
+        author {
+          content
+        }
+      }
+    }
+  }
+`;
+export type ArticleItemQueryResult = Apollo.QueryResult<
+  ArticleItemQuery,
+  ArticleItemQueryVariables
+>;
 export const FooterItemDocument = gql`
   query FooterItem($slug: ID!) {
     FooterItem(id: $slug) {
