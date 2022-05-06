@@ -1,7 +1,8 @@
+import { TLinkEntry } from '@quansight/shared/types';
+
 import { formatSlugParam } from './formatSlugParam';
 import { isSlugRestricted } from './isSlugRestricted';
 import { TGetArticlesPaths } from './types';
-import { TLinkEntry } from '@quansight/shared/types';
 
 export const getArticlesPaths = (items: TLinkEntry[]): TGetArticlesPaths[] =>
   items

@@ -1,18 +1,18 @@
 import React, { FC } from 'react';
+
 import { GetStaticProps } from 'next';
 
 import { Api } from '@quansight/shared/storyblok-sdk';
+import { ISlugParams, TContainerProps } from '@quansight/shared/types';
 import {
   Page,
   Layout,
   SEO,
   DomainVariant,
 } from '@quansight/shared/ui-components';
-import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
-
 import { isPageType } from '@quansight/shared/utils';
 
-import { ISlugParams, TContainerProps } from '@quansight/shared/types';
+import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 
 // 1. Fetch minimum blog-link / blog-article data to display links
