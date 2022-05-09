@@ -17,11 +17,15 @@ export type TFormImageProps = {
   imageAlt: string;
 };
 
+export type TFormSuccessProps = {
+  thanksMessage: TRichText;
+};
+
 export type TFormProps = {
   hookUrl: string;
   errorMessage: string;
-  thanksMessage: TRichText;
 } & TFormHeaderProps &
-  TFormImageProps;
+  TFormImageProps &
+  TFormSuccessProps;
 
 export default TFormProps;
