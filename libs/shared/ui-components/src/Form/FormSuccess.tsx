@@ -15,6 +15,7 @@ export const FormSuccess: FC<TFormSuccessProps> = ({ thanksMessage }) => (
       if (type === 'heading') {
         return (
           <h2
+            key={value}
             className="
               text-[4rem] font-extrabold leading-[5.9rem] text-center 
               md:text-[4.8rem] 
@@ -26,7 +27,10 @@ export const FormSuccess: FC<TFormSuccessProps> = ({ thanksMessage }) => (
         );
       } else {
         return (
-          <p className="text-[1.8rem] leading-[2.7rem] text-center text-black">
+          <p
+            key={value}
+            className="text-[1.8rem] leading-[2.7rem] text-center text-black"
+          >
             {value}
           </p>
         );

@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
 
-import axios from 'axios';
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 
@@ -32,18 +31,20 @@ export const Form: FC<TFormProps> = ({
     handleSubmit,
     formState: { errors, isSubmitted, isValid },
   } = useForm<FormValues>({
-    mode: 'onSubmit',
+    mode: 'onChange',
     reValidateMode: 'onChange',
   });
 
   const onSubmit = handleSubmit((formValues): void => {
     if (isValid) {
-      axios
-        .post<FormValues>(hookUrl, formValues)
-        .then(() => console.log('success'))
-        .catch((err) => console.log(err));
-      setSuccess(true);
-      console.log(formValues); // TODO temporary to see form values on submit
+      try {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', hookUrl);
+        xhr.send(JSON.stringify(formValues));
+        setSuccess(true);
+      } catch (e) {
+        console.error(e);
+      }
     }
   });
 

@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import { Picture } from '../Picture/Picture';
-
 import { TFormImageProps } from './types';
 
 export const FormImage: FC<TFormImageProps> = ({ imageSrc, imageAlt }) => (
