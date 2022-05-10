@@ -1,6 +1,6 @@
+import { TFormProps } from '@quansight/shared/ui-components';
 import { getUrl } from '@quansight/shared/utils';
 
-import { TFormProps } from '@quansight/shared/ui-components';
 import { TFormRawData } from '../../../types/storyblok/bloks/form';
 
 export const getFormProps = (blok: TFormRawData): TFormProps => ({
