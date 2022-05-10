@@ -8,5 +8,6 @@ export type TFormRawData = {
   image: TImage;
   title: string;
   errorMessage: string;
+  failureMessage: string;
   thanksMessage: TRichText;
 } & TBlok;

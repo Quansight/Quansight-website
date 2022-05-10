@@ -9,5 +9,6 @@ export const getFormProps = (blok: TFormRawData): TFormProps => ({
   imageAlt: blok.image.alt,
   title: blok.title,
   errorMessage: blok.errorMessage,
+  failureMessage: blok.failureMessage,
   thanksMessage: blok.thanksMessage,
 });

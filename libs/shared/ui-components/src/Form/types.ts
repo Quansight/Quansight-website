@@ -24,6 +24,7 @@ export type TFormSuccessProps = {
 export type TFormProps = {
   hookUrl: string;
   errorMessage: string;
+  failureMessage: string;
 } & TFormHeaderProps &
   TFormImageProps &
   TFormSuccessProps;
