@@ -4,6 +4,7 @@ import { TCenteredIntroRawData } from './centeredIntro';
 import { TColumnsRawData } from './columns';
 import { TFeatureArticleRawData } from './featureArticle';
 import { TFeaturesRawData } from './features';
+import { TFormRawData } from './form';
 import { THeroRawData } from './hero';
 import { TIntertwinedArticleRawData } from './intertwinedArticle';
 import { TJobListRawData } from './jobList';
@@ -21,6 +22,7 @@ export type TRawBlok =
   | TColumnsRawData
   | TFeatureArticleRawData
   | TFeaturesRawData
+  | TFormRawData
   | THeroRawData
   | TIntertwinedArticleRawData
   | TJobListRawData

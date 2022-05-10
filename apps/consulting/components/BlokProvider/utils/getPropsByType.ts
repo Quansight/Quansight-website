@@ -5,6 +5,7 @@ import { getCenteredIntroProps } from '../mappers/getCenteredIntroProps';
 import { getColumnsProps } from '../mappers/getColumnsProps';
 import { getFeatureArticleProps } from '../mappers/getFeatureArticleProps';
 import { getFeaturesProps } from '../mappers/getFeaturesProps';
+import { getFormProps } from '../mappers/getFormProps';
 import { getHeroProps } from '../mappers/getHeroProps';
 import { getIntertwinedArticleProps } from '../mappers/getIntertwinedArticleProps';
 import { getJobListProps } from '../mappers/getJobListProps';
@@ -35,6 +36,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.Features: {
       return getFeaturesProps(blok);
+    }
+    case ComponentType.Form: {
+      return getFormProps(blok);
     }
     case ComponentType.Hero: {
       return getHeroProps(blok);
