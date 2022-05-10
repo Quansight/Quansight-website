@@ -4,9 +4,9 @@ export const getFormHeader = (props: TFormProps, state: FormStates): string => {
   const { failureMessage, errorMessage, title } = props;
 
   switch (state) {
-    case 'failure':
+    case FormStates.Failure:
       return failureMessage;
-    case 'errors':
+    case FormStates.Errors:
       return errorMessage;
     default:
       return title;

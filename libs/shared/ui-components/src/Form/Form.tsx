@@ -20,7 +20,7 @@ export const backgroundStyles = `
 
 export const Form: FC<TFormProps> = (props) => {
   const { hookUrl, imageSrc, imageAlt, thanksMessage } = props;
-  const [formStatus, setFormStatus] = useState<FormStates>('default');
+  const [formStatus, setFormStatus] = useState<FormStates>(FormStates.Default);
   const {
     register,
     handleSubmit,
@@ -28,16 +28,16 @@ export const Form: FC<TFormProps> = (props) => {
   } = useForm<FormValues>({ mode: 'onChange' });
 
   const checkErrors = (): void => {
-    if (!isValid) setFormStatus('errors');
+    if (!isValid) setFormStatus(FormStates.Errors);
   };
 
   const onSubmit = handleSubmit((formValues): void => {
     sendFormData(hookUrl, formValues)
-      .then(() => setFormStatus('success'))
-      .catch(() => setFormStatus('failure'));
+      .then(() => setFormStatus(FormStates.Success))
+      .catch(() => setFormStatus(FormStates.Failure));
   });
 
-  if (formStatus === 'success')
+  if (formStatus === FormStates.Success)
     return <FormSuccess thanksMessage={thanksMessage} />;
 
   return (

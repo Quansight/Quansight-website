@@ -1,6 +1,11 @@
 import { TRichText } from '@quansight/shared/types';
 
-export type FormStates = 'success' | 'failure' | 'errors' | 'default';
+export enum FormStates {
+  Success = 'success',
+  Failure = 'failure',
+  Errors = 'errors',
+  Default = 'default',
+}
 
 export type FormValues = {
   name: string;
