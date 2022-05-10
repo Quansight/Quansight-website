@@ -1,5 +1,7 @@
 import { TRichText } from '@quansight/shared/types';
 
+export type FormStates = 'success' | 'failure' | 'errors' | 'default';
+
 export type FormValues = {
   name: string;
   email: string;

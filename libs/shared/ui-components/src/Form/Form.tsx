@@ -3,7 +3,6 @@ import { FC, useState } from 'react';
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 
-
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { Textarea } from '../Textarea/Textarea';
@@ -11,44 +10,35 @@ import { FormError } from './FormError';
 import { FormHeader } from './FormHeader';
 import { FormImage } from './FormImage';
 import { FormSuccess } from './FormSuccess';
-import { FormValues, TFormProps } from './types';
-import { sendFormData } from './utils';
+import { FormValues, FormStates, TFormProps } from './types';
+import { getFormHeader, sendFormData } from './utils';
 
 export const backgroundStyles = `
   before:absolute before:top-0 before:left-0 before:z-0 before:w-full before:h-full before:bg-lightgray
   md:before:w-2/3
 `;
 
-export const Form: FC<TFormProps> = ({
-  hookUrl,
-  title,
-  imageSrc,
-  imageAlt,
-  errorMessage,
-  failureMessage,
-  thanksMessage,
-}) => {
-  const [isFetched, setFetchStatus] = useState({
-    success: false,
-    failure: false,
-  });
+export const Form: FC<TFormProps> = (props) => {
+  const { hookUrl, imageSrc, imageAlt, thanksMessage } = props;
+  const [formStatus, setFormStatus] = useState<FormStates>('default');
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitted, isValid },
+    formState: { errors, isValid },
   } = useForm<FormValues>({ mode: 'onChange' });
 
+  const checkErrors = (): void => {
+    if (!isValid) setFormStatus('errors');
+  };
+
   const onSubmit = handleSubmit((formValues): void => {
-    sendFormData('POST', hookUrl, formValues)
-      .then(() => {
-        setFetchStatus({ ...isFetched, success: true });
-      })
-      .catch(() => {
-        setFetchStatus({ ...isFetched, failure: true });
-      });
+    sendFormData(hookUrl, formValues)
+      .then(() => setFormStatus('success'))
+      .catch(() => setFormStatus('failure'));
   });
 
-  if (isFetched.success) return <FormSuccess thanksMessage={thanksMessage} />;
+  if (formStatus === 'success')
+    return <FormSuccess thanksMessage={thanksMessage} />;
 
   return (
     <div
@@ -60,15 +50,7 @@ export const Form: FC<TFormProps> = ({
       )}
     >
       <div className="relative px-[2.2rem] md:w-1/2 lg:pl-[13rem]">
-        <FormHeader
-          title={
-            isFetched.failure
-              ? failureMessage
-              : isSubmitted && !isValid
-              ? errorMessage
-              : title
-          }
-        />
+        <FormHeader title={getFormHeader(props, formStatus)} />
         <form className="z-1" onSubmit={onSubmit}>
           <div className="mb-[2.5rem]">
             <Input
@@ -114,6 +96,7 @@ export const Form: FC<TFormProps> = ({
               className="py-[1.5rem] px-[5rem]"
               title="Submit"
               type="submit"
+              onClick={checkErrors}
             />
           </div>
         </form>

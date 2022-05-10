@@ -1,13 +1,25 @@
-import { FormValues } from './types';
+import { TFormProps, FormValues, FormStates } from './types';
+
+export const getFormHeader = (props: TFormProps, state: FormStates): string => {
+  const { failureMessage, errorMessage, title } = props;
+
+  switch (state) {
+    case 'failure':
+      return failureMessage;
+    case 'errors':
+      return errorMessage;
+    default:
+      return title;
+  }
+};
 
 export const sendFormData = (
-  method: string,
   url: string,
   data: FormValues,
 ): Promise<string> => {
   return new Promise<string>(function (resolve, reject) {
     const xhr = new XMLHttpRequest();
-    xhr.open(method, url);
+    xhr.open('POST', url);
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
         resolve(xhr.response);
