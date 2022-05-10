@@ -39,7 +39,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-// @ts-ignore TODO
 export const getStaticProps: GetStaticProps<
   TArticleProps,
   ISlugParams

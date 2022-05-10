@@ -1,9 +1,9 @@
 query links {
   Links {
     items {
-      id,
-      slug,
-      isFolder,
+      id
+      slug
+      isFolder
       name
     }
   }

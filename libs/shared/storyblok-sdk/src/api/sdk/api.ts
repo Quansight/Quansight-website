@@ -1,11 +1,15 @@
 import { getArticleItem } from '../utils/getArticleItem';
+import { getArticleItems } from '../utils/getArticleItems';
 import { getFooterItem } from '../utils/getFooterItem';
+import { getLibraryLinkItems } from '../utils/getLibrarylinkItems';
 import { getLinks } from '../utils/getLinks';
 import { getPageItem } from '../utils/getPageItem';
 
 export const Api = {
   getArticleItem,
-  getPageItem,
-  getLinks,
+  getArticleItems,
   getFooterItem,
+  getLibraryLinkItems,
+  getLinks,
+  getPageItem,
 };
