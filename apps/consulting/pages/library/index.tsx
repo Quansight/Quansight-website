@@ -2,32 +2,18 @@ import React, { FC } from 'react';
 
 import { GetStaticProps } from 'next';
 
-import {
-  Api,
-  PageItem,
-  FooterItem,
-  LibrarylinkItems,
-  ArticleItems,
-} from '@quansight/shared/storyblok-sdk';
-import { ISlugParams } from '@quansight/shared/types';
+import { Api } from '@quansight/shared/storyblok-sdk';
+import { ISlugParams, TLibraryProps } from '@quansight/shared/types';
 import {
   Page,
   Layout,
   SEO,
   DomainVariant,
 } from '@quansight/shared/ui-components';
-import { isPageType } from '@quansight/shared/utils';
+import { isPageType, getLibraryTiles } from '@quansight/shared/utils';
 
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
-
-export type TLibraryProps = {
-  data: PageItem;
-  footer: FooterItem;
-  articleItems: ArticleItems;
-  libraryLinks: LibrarylinkItems;
-  preview: boolean;
-};
 
 // 1. Fetch minimum blog-link / blog-article data to display links
 // [x] 1.1. Create Team entries
@@ -49,8 +35,10 @@ export const Library: FC<TLibraryProps> = ({
   libraryLinks,
   preview,
 }) => {
-  console.log(articleItems);
-  console.log(libraryLinks);
+  const sortedTiles = getLibraryTiles({
+    articleItems,
+    libraryLinks,
+  });
 
   return (
     <Layout footer={footer}>

@@ -3,9 +3,10 @@ export * from './utils/image';
 export * from './utils/link';
 export * from './utils/richText';
 
+export * from './bloks/articleProps';
 export * from './bloks/Blok';
 export * from './bloks/containerProps';
-export * from './bloks/articleProps';
+export * from './bloks/libraryProps';
 
 export * from './storyblok/contentTypes';
 
