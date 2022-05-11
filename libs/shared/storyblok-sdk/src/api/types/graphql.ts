@@ -1255,6 +1255,26 @@ export type PageItemsQuery = {
   } | null;
 };
 
+export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_1_Query = {
+  __typename?: 'QueryType';
+  PersonItems: {
+    __typename?: 'PersonItems';
+    items: Array<{
+      __typename?: 'PersonItem';
+      id: number | null;
+      position: number | null;
+      content: {
+        __typename?: 'PersonComponent';
+        _uid: string | null;
+        firstName: string | null;
+        role: string | null;
+      } | null;
+    } | null> | null;
+  } | null;
+};
+
 export const ArticleItemDocument = gql`
   query articleItem($slug: ID!) {
     ArticleItem(id: $slug) {
@@ -1737,3 +1757,19 @@ export type PageItemsQueryResult = Apollo.QueryResult<
   PageItemsQuery,
   PageItemsQueryVariables
 >;
+export const Document = gql`
+  {
+    PersonItems(starts_with: "team/", sort_by: "position") {
+      items {
+        id
+        position
+        content {
+          _uid
+          firstName
+          role
+        }
+      }
+    }
+  }
+`;
+export type QueryResult = Apollo.QueryResult<Query, QueryVariables>;

@@ -1,0 +1,13 @@
+query {
+  PersonItems(starts_with: "team/", sort_by: "position") {
+    items {
+      id
+      position
+      content {
+        _uid
+        firstName
+        role
+      }
+    }
+  }
+}

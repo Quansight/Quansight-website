@@ -1,16 +1,11 @@
-import { TImage, TBlok } from '@quansight/shared/types';
-import { TeamVariant } from '../../../components/Team/types';
-import { ComponentType } from '../../../components/BlokProvider/types';
+import { TBlok } from '@quansight/shared/types';
 
-type TTeamMember = {
-  _uid: string;
-  image: TImage;
-  name: string;
-};
+import { ComponentType } from '../../../components/BlokProvider/types';
+import { TeamVariant, TeamRole } from '../../../components/Team/types';
 
 export type TTeamRawData = {
   component: ComponentType.Team;
   variant: TeamVariant;
   header: string;
-  people: TTeamMember[];
+  role: TeamRole;
 } & TBlok;
