@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       data: data.PageItem,
       footer: footer.FooterItem,
-      team: team.PersonItems ? team.PersonItems : null,
+      team: team ? team.PersonItems : null,
       preview,
     },
   };

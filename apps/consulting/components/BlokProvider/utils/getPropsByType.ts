@@ -1,3 +1,5 @@
+import { PersonItems } from '@quansight/shared/storyblok-sdk';
+
 import { TRawBlok } from '../../../types/storyblok/bloks/rawBlok';
 import { getBoardListProps } from '../mappers/getBoardListProps';
 import { getBoardProps } from '../mappers/getBoardProps';
@@ -18,7 +20,10 @@ import { getTestimonialProps } from '../mappers/getTestimonialProps';
 import { getTextArticleProps } from '../mappers/getTextArticleProps';
 import { ComponentType, TBlokComponentProps } from '../types';
 
-export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
+export const getPropsByType = (
+  blok: TRawBlok,
+  team?: PersonItems,
+): TBlokComponentProps => {
   switch (blok.component) {
     case ComponentType.Board: {
       return getBoardProps(blok);
@@ -60,7 +65,7 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
       return getStickyNotesProps(blok);
     }
     case ComponentType.Team: {
-      return getTeamProps(blok);
+      return getTeamProps(blok, team);
     }
     case ComponentType.Teaser: {
       return getTeaserProps(blok);

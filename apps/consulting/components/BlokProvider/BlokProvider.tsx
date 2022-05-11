@@ -16,10 +16,8 @@ export type TBlokProviderProps = {
 export const BlokProvider: FC<TBlokProviderProps> = ({ blok, team }) => {
   if (componentsMap[blok.component]) {
     const Component = componentsMap[blok.component];
-    const blokProps = getPropsByType(blok);
-    const componentProps = isTeamComponent(blok.component)
-      ? { ...blokProps, team: team }
-      : blokProps;
+    const componentProps = getPropsByType(blok, team);
+
     // @ts-ignore TODO
     return <Component {...componentProps} />;
   }
