@@ -1,4 +1,4 @@
-query {
+query Team {
   PersonItems(starts_with: "team/", sort_by: "position") {
     items {
       id
@@ -9,5 +9,6 @@ query {
         role
       }
     }
+    total
   }
 }

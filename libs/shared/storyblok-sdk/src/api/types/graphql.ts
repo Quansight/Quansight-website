@@ -1255,12 +1255,13 @@ export type PageItemsQuery = {
   } | null;
 };
 
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never }>;
+export type TeamQueryVariables = Exact<{ [key: string]: never }>;
 
-export type Unnamed_1_Query = {
+export type TeamQuery = {
   __typename?: 'QueryType';
   PersonItems: {
     __typename?: 'PersonItems';
+    total: number | null;
     items: Array<{
       __typename?: 'PersonItem';
       id: number | null;
@@ -1757,8 +1758,8 @@ export type PageItemsQueryResult = Apollo.QueryResult<
   PageItemsQuery,
   PageItemsQueryVariables
 >;
-export const Document = gql`
-  {
+export const TeamDocument = gql`
+  query Team {
     PersonItems(starts_with: "team/", sort_by: "position") {
       items {
         id
@@ -1769,7 +1770,8 @@ export const Document = gql`
           role
         }
       }
+      total
     }
   }
 `;
-export type QueryResult = Apollo.QueryResult<Query, QueryVariables>;
+export type TeamQueryResult = Apollo.QueryResult<TeamQuery, TeamQueryVariables>;

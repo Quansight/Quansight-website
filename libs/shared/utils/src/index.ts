@@ -1,3 +1,5 @@
+export * from './containsTeam/containsTeam';
+
 export * from './contentTypes/isPageType';
 
 export * from './createMarkup/createMarkup';

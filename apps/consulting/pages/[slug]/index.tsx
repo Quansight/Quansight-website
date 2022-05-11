@@ -10,12 +10,12 @@ import {
   SEO,
   DomainVariant,
 } from '@quansight/shared/ui-components';
-import { isPageType, getPaths } from '@quansight/shared/utils';
+import { isPageType, getPaths, containsTeam } from '@quansight/shared/utils';
 
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 
-const Container: FC<TContainerProps> = ({ data, footer, preview }) => (
+const Container: FC<TContainerProps> = ({ data, footer, team, preview }) => (
   <Layout footer={footer}>
     <SEO
       title={data.content.title}
@@ -24,7 +24,7 @@ const Container: FC<TContainerProps> = ({ data, footer, preview }) => (
     />
     {isPageType(data?.content?.component) && (
       <Page data={data} preview={preview}>
-        {(blok: TRawBlok) => <BlokProvider blok={blok} />}
+        {(blok: TRawBlok) => <BlokProvider blok={blok} team={team} />}
       </Page>
     )}
   </Layout>
@@ -44,10 +44,15 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params: { slug }, preview = false }) => {
   const { data } = await Api.getPageItem({ slug });
   const { data: footer } = await Api.getFooterItem();
+  const { data: team } = containsTeam(slug)
+    ? await Api.getTeamItem()
+    : { data: null };
+
   return {
     props: {
       data: data.PageItem,
       footer: footer.FooterItem,
+      team: team.PersonItems ? team.PersonItems : null,
       preview,
     },
   };
