@@ -1,5 +1,6 @@
+import { TGetLibraryTilesProps, TLibraryTiles } from '@quansight/shared/types';
+
 import { sortLibraryTiles } from './sortLibraryTiles';
-import { TGetLibraryTilesProps, TLibraryTiles } from './types';
 
 export const getLibraryTiles = ({
   articleItems,

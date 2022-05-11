@@ -1,7 +1,14 @@
 import { FC } from 'react';
 
-const Tiles: FC = () => {
-  return <div>Tiles</div>;
-};
+import { Tile } from './Tile';
+import { TTilesProps } from './types';
 
-export default Tiles;
+export const Tiles: FC<TTilesProps> = ({ tiles }) => {
+  return (
+    <ul>
+      {tiles.map((tile) => (
+        <Tile tile={tile} key={tile.uuid} />
+      ))}
+    </ul>
+  );
+};

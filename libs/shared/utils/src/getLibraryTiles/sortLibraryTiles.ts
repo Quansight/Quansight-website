@@ -1,5 +1,6 @@
+import { TLibraryTiles } from '@quansight/shared/types';
+
 import { convertToDate } from './convertToDate';
-import { TLibraryTiles } from './types';
 
 export const sortLibraryTiles = (allTiles: TLibraryTiles): TLibraryTiles =>
   allTiles
