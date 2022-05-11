@@ -7,3 +7,12 @@ export type TTilesProps = {
 export type TTileProps = {
   tile: TLibraryTile;
 };
+
+export type TTileData = {
+  imageSrc: string;
+  imageAlt: string;
+  postType: string;
+  title: string;
+  author: string;
+  date: string;
+};
