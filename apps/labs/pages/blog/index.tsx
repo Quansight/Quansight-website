@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from 'react';
 
-import { getPostsByPage } from 'apps/labs/services/posts/getPostsByPage';
 import tail from 'lodash/tail';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
@@ -16,14 +15,13 @@ import { DEFAULT_API_OFFSET } from '../../services/api/posts/constants';
 import { getAllPosts } from '../../services/api/posts/getAllPosts';
 import { getCategories } from '../../services/api/posts/getCategories';
 import { filterPosts } from '../../services/posts/filterPosts';
+import { getPostsByPage } from '../../services/posts/getPostsByPage';
 import { TPost } from '../../types/storyblok/bloks/posts';
 
 export type BlogListPageProps = {
-  totalPosts: number;
   posts: TPost[];
   footer: FooterItem;
   categoryList: string[];
-  pages: number;
   category?: string;
 };
 
