@@ -35,14 +35,13 @@ export const Library: FC<TLibraryProps> = ({
           {(blok: TRawBlok) => <BlokProvider blok={blok} />}
         </Page>
       )}
-      {/* TODO: carousel */}
-      {/* TODO: types / categories */}
-
-      <Tiles tiles={tiles} />
-      {/* TODO: articles-section-1 */}
-      {/* TODO: newsletter */}
-      {/* TODO: articles-section-2 */}
-      {/* TODO: pagination */}
+      <div className="px-8 mx-auto lg:px-40 xl:px-[30rem] max-w-layout">
+        {/* TODO: carousel */}
+        {/* TODO: types / categories */}
+        <Tiles tiles={tiles} />
+        {/* TODO: newsletter */}
+        {/* TODO: pagination */}
+      </div>
     </Layout>
   );
 };

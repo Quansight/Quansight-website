@@ -12,17 +12,23 @@ export const Tile: FC<TTileProps> = ({ tile }) => {
   return (
     <li>
       <LibraryLink link={link}>
-        <div className="relative w-full min-h-[21.2rem]">
-          <Picture imageSrc={imageSrc} imageAlt={imageAlt} layout="fill" />
+        <div className="relative w-full h-[21.2rem] sm:h-[23rem] lg:h-[16.4rem]">
+          <Picture
+            imageSrc={imageSrc}
+            imageAlt={imageAlt}
+            layout="fill"
+            objectFit="cover"
+            objectPosition="center"
+          />
         </div>
-        <div className="w-1/2">
+        <div className="w-1/2 lg:w-full">
           <p className="pt-8 pb-5 text-[1.4rem] font-normal leading-[3rem] uppercase">
             {postType}
           </p>
-          <h3 className="text-[2.2rem] font-extrabold leading-[2.9rem] font-heading">
+          <h3 className="text-[2.2rem] font-extrabold leading-[2.9rem] text-black font-heading">
             {title}
           </h3>
-          <div className="flex gap-5 justify-start items-center text-[1.2rem] font-normal leading-[2.7rem]">
+          <div className="flex gap-5 justify-start items-center text-[1.2rem] font-normal leading-[2.7rem] text-black">
             <p>{author}</p>
             <p>{date}</p>
           </div>
