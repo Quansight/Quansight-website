@@ -16,6 +16,7 @@ export const Tile: FC<TTileProps> = ({ tile }) => {
           <Picture
             imageSrc={imageSrc}
             imageAlt={imageAlt}
+            priority
             layout="fill"
             objectFit="cover"
             objectPosition="center"
