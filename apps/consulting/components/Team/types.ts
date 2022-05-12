@@ -1,4 +1,5 @@
 import { PersonItems } from '@quansight/shared/storyblok-sdk';
+import { TImage } from '@quansight/shared/types';
 
 export enum TeamVariant {
   All = 'all',
@@ -10,6 +11,11 @@ export enum TeamRole {
   Team = 'team',
   Author = 'author',
 }
+
+export type TTeamMemberProps = {
+  image: TImage;
+  name: string;
+};
 
 export type TTeamProps = {
   variant: TeamVariant;

@@ -7,6 +7,10 @@ query Team {
         _uid
         firstName
         role
+        image {
+          filename
+          alt
+        }
       }
     }
     total

@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 
 import { PersonItems } from '@quansight/shared/storyblok-sdk';
 import { Placeholder } from '@quansight/shared/ui-components';
-import { isTeamComponent } from '@quansight/shared/utils';
 
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 import { componentsMap } from './componentsMap';

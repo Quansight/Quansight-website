@@ -1271,6 +1271,11 @@ export type TeamQuery = {
         _uid: string | null;
         firstName: string | null;
         role: string | null;
+        image: {
+          __typename?: 'Asset';
+          filename: string;
+          alt: string | null;
+        } | null;
       } | null;
     } | null> | null;
   } | null;
@@ -1768,6 +1773,10 @@ export const TeamDocument = gql`
           _uid
           firstName
           role
+          image {
+            filename
+            alt
+          }
         }
       }
       total

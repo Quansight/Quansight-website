@@ -10,4 +10,5 @@ export type TPictureProps = {
   objectPosition?: ImageProps['objectPosition'];
   priority?: ImageProps['priority'];
   onLoadingComplete?: ImageProps['onLoadingComplete'];
+  className?: string;
 };
