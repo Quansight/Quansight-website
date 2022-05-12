@@ -6,7 +6,7 @@ author:
   avatarSrc: /authors/test-avatar.jpg
 published: October 13, 2022
 description: Lorem ipsum dolor sit amet
-category: [MachineLearning]
+category: [Machine Learning]
 featuredImage:
   src: /posts/hello-world-post/featured.png
   alt: Hello world post featured image

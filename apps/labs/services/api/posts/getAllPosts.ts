@@ -1,23 +1,33 @@
-import { readdir } from 'fs/promises';
-import path from 'path';
-
 import { TPostsResponse } from '../../../types/storyblok/bloks/posts';
-import { DEFAULT_API_OFFSET, POSTS_DIRECTORY_PATH } from './constants';
-import { getPost } from './getPost';
+import { getPostsDirectory } from '../../posts/getPostsDirectory';
+import { serializePost } from '../../posts/serializePost';
+import { DEFAULT_API_OFFSET } from './constants';
 
 export const getAllPosts = async (): Promise<TPostsResponse> => {
   try {
-    const postsFileNames = await readdir(path.join(POSTS_DIRECTORY_PATH));
+    const postsFileNames = getPostsDirectory();
+    const postsFileNamesFiltered = postsFileNames.filter(
+      (fileName) => fileName !== 'categories.json',
+    );
+
     const posts = await Promise.all(
-      postsFileNames.map(async (fileName) => {
-        const slug = fileName.replace(/\.(md|mdx)$/, '');
-        return getPost(slug);
-      }),
+      postsFileNamesFiltered
+        .filter((fileName) => fileName !== 'categories.json')
+        .map(async (fileName) => {
+          const slug = fileName.replace(/\.(md|mdx)$/, '');
+          const { content, meta } = await serializePost(fileName);
+
+          return {
+            slug,
+            meta,
+            content,
+          };
+        }),
     );
 
     return {
       items: posts,
-      total: postsFileNames.length,
+      total: postsFileNamesFiltered.length,
       offset: DEFAULT_API_OFFSET,
     };
   } catch (error) {

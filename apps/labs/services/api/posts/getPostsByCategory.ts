@@ -1,7 +1,6 @@
-import composeFp from 'lodash/fp/compose';
-import filterFp from 'lodash/fp/filter';
-import takeFp from 'lodash/fp/take';
-import intersection from 'lodash/intersection';
+import compose from 'lodash/fp/compose';
+import filter from 'lodash/fp/filter';
+import take from 'lodash/fp/take';
 
 import { TPost } from '../../../types/storyblok/bloks/posts';
 import { DEFAULT_API_OFFSET } from './constants';
@@ -15,16 +14,16 @@ export const getPostsByCategory = async (
   try {
     const allPosts = await getAllPosts();
 
-    return composeFp(
-      takeFp(limit),
-      filterFp(
-        (post) =>
+    return compose(
+      take(limit),
+      filter(
+        (post: TPost) =>
           post.slug !== slug &&
-          Boolean(intersection(category, post.meta.category).length),
+          (category || []).some((e) => post.meta.category.includes(e)),
       ),
     )(allPosts.items);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return [];
   }
 };
