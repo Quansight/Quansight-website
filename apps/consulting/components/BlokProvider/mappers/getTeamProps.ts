@@ -1,7 +1,7 @@
 import { PersonItems } from '@quansight/shared/storyblok-sdk';
 
 import { TTeamRawData } from '../../../types/storyblok/bloks/team';
-import { TTeamProps } from '../../Team/types';
+import { TTeamProps } from '@quansight/shared/ui-components';
 
 export const getTeamProps = (
   blok: TTeamRawData,

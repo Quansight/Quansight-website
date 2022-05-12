@@ -1,4 +1,10 @@
-import { Form, Hero, Statute, Teaser } from '@quansight/shared/ui-components';
+import {
+  Form,
+  Hero,
+  Statute,
+  Teaser,
+  Team,
+} from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
 import { BoardList } from '../BoardList/BoardList';
@@ -10,7 +16,6 @@ import { IntertwinedArticle } from '../IntertwinedArticle/IntertwinedArticle';
 import { JobList } from '../JobList/JobList';
 import { Related } from '../Related/Related';
 import { StickyNotes } from '../StickyNotes/StickyNotes';
-import { Team } from '../Team/Team';
 import { Testimonial } from '../Testimonial/Testimonial';
 import { TextArticle } from '../TextArticle/TextArticle';
 import { ComponentType } from './types';

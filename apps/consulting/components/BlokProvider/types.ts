@@ -2,8 +2,9 @@ import { TypeValuesUnion } from '@quansight/shared/types';
 import {
   TFormProps,
   THeroProps,
-  TTeaserProps,
   TStatuteProps,
+  TTeaserProps,
+  TTeamProps,
 } from '@quansight/shared/ui-components';
 
 import { TBoardProps } from '../Board/types';
@@ -16,7 +17,6 @@ import { TIntertwinedArticleProps } from '../IntertwinedArticle/types';
 import { TJobListProps } from '../JobList/types';
 import { TRelatedProps } from '../Related/types';
 import { TStickyNotesProps } from '../StickyNotes/types';
-import { TTeamProps } from '../Team/types';
 import { TTestimonialProps } from '../Testimonial/types';
 import { TTextArticleProps } from '../TextArticle/types';
 
