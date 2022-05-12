@@ -5,8 +5,7 @@ import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 
-import { Api } from '@quansight/shared/storyblok-sdk';
-import { FooterItem } from '@quansight/shared/storyblok-sdk';
+import { FooterItem, Api } from '@quansight/shared/storyblok-sdk';
 import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
 
 import { CategoryList } from '../../components/Posts/CategoryList/CategoryList';

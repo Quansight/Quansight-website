@@ -16,7 +16,7 @@ import { FeaturedPosts } from '../../components/Post/PostMetaSection/FeaturedPos
 import { PostMetaSection } from '../../components/Post/PostMetaSection/PostMetaSection';
 import { POSTS_DIRECTORY_PATH } from '../../services/api/posts/constants';
 import { getPost } from '../../services/api/posts/getPost';
-import { getPostsByCategory } from '../../services/api/posts/getPostsByCateghory';
+import { getPostsByCategory } from '../../services/api/posts/getPostsByCategory';
 import { blogAllowedComponents } from '../../services/blogAllowedComponents';
 import { TPost } from '../../types/storyblok/bloks/posts';
 
