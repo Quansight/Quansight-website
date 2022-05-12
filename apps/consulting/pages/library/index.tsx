@@ -16,16 +16,6 @@ import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { Tiles } from '../../components/Tiles/Tiles';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 
-// 2. Create Blog links from data
-// [x] 2.1. Pass tiles to component
-// [ ] 2.2. Create Tile component
-// [ ] 2.3. Create base Tiles Component
-
-// 3. Create Content types from tags??
-// 4. Create categories from tags??
-// 5. Pass x most recent posts to carousel (SB - time to change slide, no. slides)
-// 6. Create Paginations from fetched posts
-
 export const Library: FC<TLibraryProps> = ({
   data,
   footer,
@@ -39,6 +29,7 @@ export const Library: FC<TLibraryProps> = ({
         description={data.content.description}
         variant={DomainVariant.Quansight}
       />
+
       {isPageType(data?.content?.component) && (
         <Page data={data} preview={preview}>
           {(blok: TRawBlok) => <BlokProvider blok={blok} />}

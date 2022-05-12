@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { TLibraryTiles, TLibraryTile } from '@quansight/shared/types';
 
 export type TTilesProps = {
@@ -15,4 +17,25 @@ export type TTileData = {
   title: string;
   author: string;
   date: string;
+  link: TLinkData;
+};
+
+export enum LinkType {
+  Article = 'article',
+  LibraryLink = 'library-link',
+}
+
+export enum LinkTarget {
+  Internal = 'internal',
+  External = 'external',
+}
+
+export type TLinkData = {
+  linkType: string;
+  linkUrl: string;
+};
+
+export type TLibraryLinkProps = {
+  children: ReactNode;
+  link: TLinkData;
 };
