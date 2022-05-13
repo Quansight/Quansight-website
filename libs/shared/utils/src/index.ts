@@ -1,10 +1,10 @@
-export * from './containsTeam/containsTeam';
-
 export * from './contentTypes/isPageType';
 
 export * from './createMarkup/createMarkup';
 
 export * from './getArticlesPaths';
+
+export * from './getAboutPageData/getAboutPageData';
 
 export * from './getPaths/getPaths';
 

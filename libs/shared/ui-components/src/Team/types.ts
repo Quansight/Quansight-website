@@ -1,4 +1,4 @@
-import { PersonItems, Maybe, Asset } from '@quansight/shared/storyblok-sdk';
+import { PersonItem, Maybe, Asset } from '@quansight/shared/storyblok-sdk';
 
 export enum TeamVariant {
   All = 'all',
@@ -20,5 +20,5 @@ export type TTeamProps = {
   variant: TeamVariant;
   header: string;
   role: TeamRole;
-  team: PersonItems;
+  team: PersonItem[];
 };

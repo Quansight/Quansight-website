@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 
-import { PersonItems } from '@quansight/shared/storyblok-sdk';
 import { Placeholder } from '@quansight/shared/ui-components';
 
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
@@ -9,13 +8,12 @@ import { getPropsByType } from './utils/getPropsByType';
 
 export type TBlokProviderProps = {
   blok: TRawBlok;
-  team?: PersonItems;
 };
 
-export const BlokProvider: FC<TBlokProviderProps> = ({ blok, team }) => {
+export const BlokProvider: FC<TBlokProviderProps> = ({ blok }) => {
   if (componentsMap[blok.component]) {
     const Component = componentsMap[blok.component];
-    const componentProps = getPropsByType(blok, team);
+    const componentProps = getPropsByType(blok);
 
     // @ts-ignore TODO
     return <Component {...componentProps} />;

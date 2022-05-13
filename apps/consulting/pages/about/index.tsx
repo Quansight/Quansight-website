@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticProps } from 'next';
 
 import { Api } from '@quansight/shared/storyblok-sdk';
 import { ISlugParams, TContainerProps } from '@quansight/shared/types';
@@ -10,12 +10,12 @@ import {
   SEO,
   DomainVariant,
 } from '@quansight/shared/ui-components';
-import { isPageType, getPaths } from '@quansight/shared/utils';
+import { isPageType, getAboutPageData } from '@quansight/shared/utils';
 
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 
-const Container: FC<TContainerProps> = ({ data, footer, preview }) => (
+export const About: FC<TContainerProps> = ({ data, footer, preview }) => (
   <Layout footer={footer}>
     <SEO
       title={data.content.title}
@@ -30,29 +30,27 @@ const Container: FC<TContainerProps> = ({ data, footer, preview }) => (
   </Layout>
 );
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await Api.getLinks();
-  return {
-    paths: getPaths(data?.Links.items),
-    fallback: false,
-  };
-};
-
-// @ts-ignore TODO
 export const getStaticProps: GetStaticProps<
   TContainerProps,
   ISlugParams
-> = async ({ params: { slug }, preview = false }) => {
-  const { data } = await Api.getPageItem({ slug });
+> = async () => {
+  const { data } = await Api.getPageItem({ slug: 'about' });
   const { data: footer } = await Api.getFooterItem();
+  const TeamItem = await Api.getTeamItem();
+
+  // @ts-ignore
+  const aboutPageData = getAboutPageData(
+    data.PageItem,
+    TeamItem.data.PersonItems.items,
+  );
 
   return {
     props: {
-      data: data.PageItem,
+      data: aboutPageData,
       footer: footer.FooterItem,
-      preview,
+      preview: false,
     },
   };
 };
 
-export default Container;
+export default About;
