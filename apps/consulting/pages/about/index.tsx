@@ -38,9 +38,9 @@ export const getStaticProps: GetStaticProps<
   const { data: footer } = await Api.getFooterItem();
   const TeamItem = await Api.getTeamItem();
 
-  // @ts-ignore
   const aboutPageData = getAboutPageData(
     data.PageItem,
+    // @ts-ignore
     TeamItem.data.PersonItems.items,
   );
 
