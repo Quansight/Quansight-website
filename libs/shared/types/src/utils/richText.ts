@@ -4,6 +4,7 @@ export interface TRichText {
 }
 
 export interface TContent {
+  attrs?: { level?: number };
   content: TContentItem[];
   type: string;
 }

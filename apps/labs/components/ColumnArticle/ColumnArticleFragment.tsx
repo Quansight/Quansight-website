@@ -11,7 +11,7 @@ export const ColumnArticleFragment: FC<TColumnArticleFragmentProps> = ({
     {content.map((item) => {
       const text = item.content[0].text;
 
-      if (item.type === 'heading') {
+      if (item.type === 'heading')
         return (
           <ColumnArticleHeader
             key={text}
@@ -19,7 +19,6 @@ export const ColumnArticleFragment: FC<TColumnArticleFragmentProps> = ({
             header={text}
           />
         );
-      }
 
       return (
         <p
