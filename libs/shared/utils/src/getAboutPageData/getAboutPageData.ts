@@ -25,10 +25,9 @@ export const getAboutPageData = (
     pageData?.content,
     teamData,
   );
-  const aboutPageContent = { ...pageData.content, body: aboutPageComponents };
-  const aboutPageData = Object.assign({}, pageData, {
-    content: aboutPageContent,
-  });
 
-  return aboutPageData;
+  return Object.assign({}, pageData, {
+    ...pageData.content,
+    body: aboutPageComponents,
+  });
 };
