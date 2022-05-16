@@ -1,4 +1,10 @@
-import { Form, Hero, Statute, Teaser } from '@quansight/shared/ui-components';
+import {
+  Form,
+  Hero,
+  Statute,
+  Teaser,
+  Team,
+} from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
 import { BoardList } from '../BoardList/BoardList';
@@ -28,6 +34,7 @@ export const componentsMap = {
   [ComponentType.Related]: Related,
   [ComponentType.Statute]: Statute,
   [ComponentType.StickyNotes]: StickyNotes,
+  [ComponentType.Team]: Team,
   [ComponentType.Teaser]: Teaser,
   [ComponentType.Testimonial]: Testimonial,
   [ComponentType.TextArticle]: TextArticle,

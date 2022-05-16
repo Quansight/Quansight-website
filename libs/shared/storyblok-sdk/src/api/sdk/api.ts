@@ -4,6 +4,7 @@ import { getFooterItem } from '../utils/getFooterItem';
 import { getLibraryLinkItems } from '../utils/getLibrarylinkItems';
 import { getLinks } from '../utils/getLinks';
 import { getPageItem } from '../utils/getPageItem';
+import { getTeamItem } from '../utils/getTeamItem';
 
 export const Api = {
   getArticleItem,
@@ -12,4 +13,5 @@ export const Api = {
   getLibraryLinkItems,
   getLinks,
   getPageItem,
+  getTeamItem,
 };
