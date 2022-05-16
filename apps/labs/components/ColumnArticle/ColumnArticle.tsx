@@ -21,7 +21,7 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
       {header && (
         <ColumnArticleHeader header={header} level={2} className="mb-[5rem]" />
       )}
-      <div className="md:flex">
+      <div className="md:flex md:gap-x-[7rem]">
         <div className="box-border md:w-1/2">
           <ColumnArticleFragment
             modifier={headerModifier}
@@ -35,15 +35,15 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
           />
         </div>
       </div>
-      <div className="md:flex">
+      <div className="md:flex md:gap-x-[7rem]">
         <div className="box-border md:w-1/2">
           <ColumnArticleFragment
             modifier={headerModifier}
             content={final.content}
           />
         </div>
-        <div className="box-border md:w-1/2">
-          <div className="flex relative justify-center w-full h-full">
+        <div className="box-border md:flex md:justify-center md:items-center md:w-1/2">
+          <div className="relative w-4/5 h-4/5">
             <Picture
               imageSrc={imageSrc}
               imageAlt={imageAlt}
