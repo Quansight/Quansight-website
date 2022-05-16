@@ -1,14 +1,13 @@
 import { FC } from 'react';
 
 import { ColumnArticleHeader } from './ColumnArticleHeader';
-import { ColumnArticleParagraph } from './ColumnArticleParagraph';
 import { TColumnArticleFragmentProps } from './types';
 
 export const ColumnArticleFragment: FC<TColumnArticleFragmentProps> = ({
   modifier,
   content,
 }) => (
-  <div>
+  <>
     {content.map((item) => {
       const text = item.content[0].text;
 
@@ -22,7 +21,14 @@ export const ColumnArticleFragment: FC<TColumnArticleFragmentProps> = ({
         );
       }
 
-      return <ColumnArticleParagraph key={text} text={text} />;
+      return (
+        <p
+          key={text}
+          className="my-[3rem] text-[1.6rem] leading-[2.7rem] text-black"
+        >
+          {text}
+        </p>
+      );
     })}
-  </div>
+  </>
 );

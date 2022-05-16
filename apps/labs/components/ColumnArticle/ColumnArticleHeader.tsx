@@ -4,7 +4,11 @@ import clsx from 'clsx';
 
 import { TColumnArticleHeaderProps } from './types';
 
-const commonHeaderStyles = `my-[2rem] font-extrabold text-violet font-heading`;
+const headerStyles = {
+  common: 'my-[2rem] font-extrabold text-violet font-heading',
+  small: 'text-[3rem] leading-[4rem]',
+  big: 'text-[4rem] leading-[4.9rem] md:text-[4.8rem]',
+};
 
 export const ColumnArticleHeader: FC<TColumnArticleHeaderProps> = ({
   header,
@@ -12,26 +16,19 @@ export const ColumnArticleHeader: FC<TColumnArticleHeaderProps> = ({
 }) => {
   if (level === 3)
     return (
-      <h3 className={clsx('text-[3rem] leading-[4rem]', commonHeaderStyles)}>
+      <h3 className={clsx(headerStyles.common, headerStyles.small)}>
         {header}
       </h3>
     );
 
   if (level === 4)
     return (
-      <h4 className={clsx('text-[3rem] leading-[4rem]', commonHeaderStyles)}>
+      <h4 className={clsx(headerStyles.common, headerStyles.small)}>
         {header}
       </h4>
     );
 
   return (
-    <h2
-      className={clsx(
-        'text-[4rem] leading-[4.9rem] md:text-[4.8rem]',
-        commonHeaderStyles,
-      )}
-    >
-      {header}
-    </h2>
+    <h2 className={clsx(headerStyles.common, headerStyles.big)}>{header}</h2>
   );
 };

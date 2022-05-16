@@ -8,11 +8,6 @@ export type TColumnArticleFragmentProps = {
 export type TColumnArticleHeaderProps = {
   header: string;
   level: number;
-  className?: string;
-};
-
-export type TColumnArticleParagraphProps = {
-  text: string;
 };
 
 export type TColumnArticleProps = {

@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import clsx from 'clsx';
+
 import { Picture } from '@quansight/shared/ui-components';
 
 import { ColumnArticleFragment } from './ColumnArticleFragment';
@@ -14,35 +16,41 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
   imageSrc,
   imageAlt,
 }) => {
+  const columnClass = 'box-border md:w-[47%]';
   const headerModifier = header ? 1 : 0;
 
   return (
     <article className="py-[8rem] mx-auto xl:px-[18rem] max-w-layout">
       {header && (
-        <ColumnArticleHeader header={header} level={2} className="mb-[5rem]" />
+        <header className="mb-[2.5rem]">
+          <ColumnArticleHeader header={header} level={2} />
+        </header>
       )}
-      <div className="md:flex md:gap-x-[7rem]">
-        <div className="box-border md:w-1/2">
+      <main className="md:flex md:flex-wrap md:justify-between">
+        <section className={columnClass}>
           <ColumnArticleFragment
             modifier={headerModifier}
             content={leftColumn.content}
           />
-        </div>
-        <div className="box-border md:w-1/2">
+        </section>
+        <section className={columnClass}>
           <ColumnArticleFragment
             modifier={headerModifier}
             content={rightColumn.content}
           />
-        </div>
-      </div>
-      <div className="md:flex md:gap-x-[7rem]">
-        <div className="box-border md:w-1/2">
+        </section>
+        <section className={columnClass}>
           <ColumnArticleFragment
             modifier={headerModifier}
             content={final.content}
           />
-        </div>
-        <div className="box-border md:flex md:justify-center md:items-center md:w-1/2">
+        </section>
+        <section
+          className={clsx(
+            columnClass,
+            'md:flex md:justify-center md:items-center',
+          )}
+        >
           <div className="relative w-4/5 h-4/5">
             <Picture
               imageSrc={imageSrc}
@@ -51,8 +59,8 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
               objectFit="contain"
             />
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </article>
   );
 };
