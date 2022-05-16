@@ -2636,7 +2636,11 @@
             "deprecationReason": null
           },
           {
+<<<<<<< HEAD
             "name": "id",
+=======
+            "name": "displayName",
+>>>>>>> 8afc779 (fix: cr)
             "description": null,
             "args": [],
             "type": {
@@ -2778,7 +2782,11 @@
             "deprecationReason": null
           },
           {
+<<<<<<< HEAD
             "name": "name",
+=======
+            "name": "displayName",
+>>>>>>> 8afc779 (fix: cr)
             "description": null,
             "args": [],
             "type": {

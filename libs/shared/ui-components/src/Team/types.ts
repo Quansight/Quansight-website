@@ -8,7 +8,7 @@ export enum TeamVariant {
 }
 
 export enum TeamDisplay {
-  FullName = 'full name',
+  Full = 'full',
   FirstName = 'first name',
 }
 

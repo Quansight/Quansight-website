@@ -7,7 +7,7 @@ query Team {
         _uid
         firstName
         lastName
-        display
+        displayName
         role
         image {
           filename

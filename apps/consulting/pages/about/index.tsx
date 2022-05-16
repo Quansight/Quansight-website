@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps<
 
   const aboutPageData = getAboutPageData(
     data.PageItem,
-    // @ts-ignore TODO
+    // @ts-ignore TODO missing unused query properties from sb
     TeamItem.data.PersonItems.items,
   );
 

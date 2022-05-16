@@ -378,7 +378,7 @@ export type PersonComponent = {
   _editable: Maybe<Scalars['String']>;
   _uid: Maybe<Scalars['String']>;
   component: Maybe<Scalars['String']>;
-  display: Maybe<Scalars['String']>;
+  displayName: Maybe<Scalars['String']>;
   firstName: Maybe<Scalars['String']>;
   githubLink: Maybe<Link>;
   githubNick: Maybe<Scalars['String']>;
@@ -389,7 +389,7 @@ export type PersonComponent = {
 };
 
 export type PersonFilterQuery = {
-  display: InputMaybe<FilterQueryOperations>;
+  displayName: InputMaybe<FilterQueryOperations>;
   firstName: InputMaybe<FilterQueryOperations>;
   githubNick: InputMaybe<FilterQueryOperations>;
   lastName: InputMaybe<FilterQueryOperations>;
@@ -1273,7 +1273,7 @@ export type TeamQuery = {
         _uid: string | null;
         firstName: string | null;
         lastName: string | null;
-        display: string | null;
+        displayName: string | null;
         role: string | null;
         projects: any | null;
         githubNick: string | null;
@@ -1780,7 +1780,7 @@ export const TeamDocument = gql`
           _uid
           firstName
           lastName
-          display
+          displayName
           role
           image {
             filename

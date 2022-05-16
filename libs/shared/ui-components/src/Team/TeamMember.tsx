@@ -5,8 +5,8 @@ import { TeamDisplay, TTeamMemberProps } from './types';
 
 export const TeamMember: FC<TTeamMemberProps> = ({ person }) => {
   const displayName =
-    person?.display === TeamDisplay.FullName
-      ? `${person?.firstName}${person?.lastName}`
+    person?.displayName === TeamDisplay.Full
+      ? `${person?.firstName} ${person?.lastName}`
       : `${person?.firstName}`;
 
   return (
