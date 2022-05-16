@@ -3,62 +3,71 @@ import React, { FC } from 'react';
 import { GetStaticProps } from 'next';
 
 import { Api } from '@quansight/shared/storyblok-sdk';
-import { ISlugParams, TContainerProps } from '@quansight/shared/types';
+import { ISlugParams, TLibraryProps } from '@quansight/shared/types';
 import {
   Page,
   Layout,
   SEO,
   DomainVariant,
 } from '@quansight/shared/ui-components';
-import { isPageType } from '@quansight/shared/utils';
+import { isPageType, getLibraryTiles } from '@quansight/shared/utils';
 
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
+import { Tiles } from '../../components/Tiles/Tiles';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 
-// 1. Fetch minimum blog-link / blog-article data to display links
-// [x] 1.1. Create Team entries
-// [x] 1.2. Create blog-link & blog-article entries ===== add off build for blog-link
-// [ ] 1.3. Fetch data
-// [ ] 1.4. Resolve author relationship / fetch given author
-// [ ] 1.5. Pass props to sections
+export const Library: FC<TLibraryProps> = ({
+  data,
+  footer,
+  tiles,
+  preview,
+}) => {
+  return (
+    <Layout footer={footer}>
+      <SEO
+        title={data.content.title}
+        description={data.content.description}
+        variant={DomainVariant.Quansight}
+      />
 
-// 2. Create Blog links from data
-// 3. Create Content types from tags??
-// 4. Create categories from tags??
-// 5. Pass x most recent posts to carousel (SB - time to change slide, no. slides)
-// 6. Create Paginations from fetched posts
-
-export const Library: FC<TContainerProps> = ({ data, footer, preview }) => (
-  <Layout footer={footer}>
-    <SEO
-      title={data.content.title}
-      description={data.content.description}
-      variant={DomainVariant.Quansight}
-    />
-    {isPageType(data?.content?.component) && (
-      <Page data={data} preview={preview}>
-        {(blok: TRawBlok) => <BlokProvider blok={blok} />}
-      </Page>
-    )}
-    {/* TODO: carousel */}
-    {/* TODO: types / categories */}
-    {/* TODO: articles-section-1 */}
-    {/* TODO: newsletter */}
-    {/* TODO: articles-section-2 */}
-    {/* TODO: pagination */}
-  </Layout>
-);
+      {isPageType(data?.content?.component) && (
+        <Page data={data} preview={preview}>
+          {(blok: TRawBlok) => <BlokProvider blok={blok} />}
+        </Page>
+      )}
+      <div className="px-8 mx-auto lg:px-40 xl:px-[30rem] max-w-layout">
+        {/* TODO: carousel */}
+        {/* TODO: types / categories */}
+        <Tiles tiles={tiles} />
+        {/* TODO: newsletter */}
+        {/* TODO: pagination */}
+      </div>
+    </Layout>
+  );
+};
 
 export const getStaticProps: GetStaticProps<
-  TContainerProps,
+  TLibraryProps,
   ISlugParams
 > = async () => {
   const { data } = await Api.getPageItem({ slug: 'library' });
   const { data: footer } = await Api.getFooterItem();
+  const {
+    data: { LibrarylinkItems: libraryLinks },
+  } = await Api.getLibraryLinkItems();
+  const {
+    data: { ArticleItems: articleItems },
+  } = await Api.getArticleItems();
+
   return {
     props: {
       data: data.PageItem,
       footer: footer.FooterItem,
+      tiles: getLibraryTiles({
+        articleItems,
+        libraryLinks,
+      }),
+
       preview: false,
     },
   };
