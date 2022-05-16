@@ -23,7 +23,7 @@ export type TTeamMemberProjectProps = {
 };
 
 export type TTeamMemberProps = {
-  person: Maybe<PersonComponent> | undefined;
+  person: Maybe<PersonComponent>;
 };
 
 export type TTeamProps = {
