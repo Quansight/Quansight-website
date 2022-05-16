@@ -14,10 +14,10 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
   imageSrc,
   imageAlt,
 }) => {
-  const headerModifier = header ? -1 : 0;
+  const headerModifier = header ? 1 : 0;
 
   return (
-    <article className="py-[10rem] mx-auto xl:px-[18rem] max-w-layout">
+    <article className="py-[8rem] mx-auto xl:px-[18rem] max-w-layout">
       {header && (
         <ColumnArticleHeader header={header} level={2} className="mb-[5rem]" />
       )}
@@ -25,7 +25,7 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
         <div className="box-border md:w-1/2">
           <ColumnArticleFragment
             modifier={headerModifier}
-            content={leftColumn}
+            content={leftColumn.content}
           />
         </div>
         <div className="box-border md:w-1/2">
