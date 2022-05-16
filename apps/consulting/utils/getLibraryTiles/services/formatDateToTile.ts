@@ -1,6 +1,6 @@
-import { TLibraryTile } from '@quansight/shared/types';
+import { TLibraryTileRawData } from '../types';
 
-export const formatDateToTile = (tile: TLibraryTile): string => {
+export const formatDateToTile = (tile: TLibraryTileRawData): string => {
   const rawDate = new Date(tile.content.publishedDate);
   const date = {
     day: rawDate.getDate(),

@@ -2,8 +2,9 @@ import { FC } from 'react';
 
 import Link from 'next/link';
 
+import { LinkTarget } from '@quansight/shared/types';
+
 import { TLibraryLinkProps } from './types';
-import { LinkTarget } from './types';
 
 export const LibraryLink: FC<TLibraryLinkProps> = ({ link, children }) => {
   if (link.linkType === LinkTarget.Internal) {
