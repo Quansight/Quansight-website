@@ -1,32 +1,31 @@
+import { Maybe } from 'graphql/jsutils/Maybe';
+
 import {
   PageComponent,
   PageItem,
   PersonItem,
 } from '@quansight/shared/storyblok-sdk';
 
+const mapAboutPageComponents = (
+  pageContent: Maybe<PageComponent>,
+  teamData: PersonItem,
+): PageComponent[] | [] => {
+  return pageContent?.body.map(
+    (item: PageComponent): PageComponent | { team: PersonItem } => {
+      return item.component === 'team' ? { ...item, team: teamData } : item;
+    },
+  );
+};
+
 export const getAboutPageData = (
   pageData: PageItem,
   teamData: PersonItem,
 ): PageItem => {
-  const mapAboutPageComponents = (): PageComponent[] | [] => {
-    const mappedAboutComponents = [];
-
-    if (pageData && pageData.content) {
-      pageData.content.body.map((item: PageComponent): void => {
-        const componentItem =
-          item.component === 'team' ? { ...item, team: teamData } : item;
-        mappedAboutComponents.push(componentItem);
-        return;
-      });
-    }
-
-    return mappedAboutComponents;
-  };
-
-  const aboutPageComponents = mapAboutPageComponents();
-  const aboutPageContent = Object.assign({}, pageData.content, {
-    body: aboutPageComponents,
-  });
+  const aboutPageComponents = mapAboutPageComponents(
+    pageData?.content,
+    teamData,
+  );
+  const aboutPageContent = { ...pageData.content, body: aboutPageComponents };
   const aboutPageData = Object.assign({}, pageData, {
     content: aboutPageContent,
   });
