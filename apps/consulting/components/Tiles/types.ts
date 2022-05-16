@@ -20,11 +20,6 @@ export type TTileData = {
   link: TLinkData;
 };
 
-export enum LinkType {
-  Article = 'article',
-  LibraryLink = 'library-link',
-}
-
 export enum LinkTarget {
   Internal = 'internal',
   External = 'external',
