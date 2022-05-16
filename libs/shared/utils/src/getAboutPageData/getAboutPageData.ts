@@ -28,6 +28,9 @@ export const getAboutPageData = (
 
   return Object.assign({}, pageData, {
     ...pageData.content,
-    body: aboutPageComponents,
+    content: {
+      ...pageData.content,
+      body: aboutPageComponents,
+    },
   });
 };
