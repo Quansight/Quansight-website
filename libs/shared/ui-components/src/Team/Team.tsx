@@ -5,11 +5,11 @@ import { TeamVariant, TTeamProps } from './types';
 import { filterTeam, getRandomMembers } from './utils';
 
 export const Team: FC<TTeamProps> = ({ variant, header, role, team }) => {
-  // const filteredTeam = filterTeam(team, role);
-  // const teamToDisplay =
-  //   variant === TeamVariant.Spotlight
-  //     ? getRandomMembers(filteredTeam, 3)
-  //     : filteredTeam;
+  const filteredTeam = filterTeam(team, role);
+  const teamToDisplay =
+    variant === TeamVariant.Spotlight
+      ? getRandomMembers(filteredTeam, 3)
+      : filteredTeam;
 
   return (
     <section className="px-[1.8rem] my-[6rem] mx-auto md:my-[8rem] lg:px-[3rem] xl:px-[18rem] max-w-layout">
@@ -23,18 +23,9 @@ export const Team: FC<TTeamProps> = ({ variant, header, role, team }) => {
         {header}
       </h2>
       <ul className="flex flex-wrap mt-[5rem] md:justify-center">
-        {JSON.stringify(team)}
-        {/* {teamToDisplay.map(
-          (item) =>
-            item &&
-            item.content && (
-              <TeamMember
-                key={item.content.firstName}
-                image={item.content.image}
-                name={item.content.firstName}
-              />
-            ),
-        )} */}
+        {teamToDisplay.map((item) => (
+          <TeamMember key={item?.content?.firstName} person={item?.content} />
+        ))}
       </ul>
     </section>
   );

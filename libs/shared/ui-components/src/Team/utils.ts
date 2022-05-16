@@ -7,14 +7,14 @@ import {
 import { TeamRole } from './types';
 
 export const filterTeam = (
-  team: PersonItems,
+  team: PersonItem[],
   role: TeamRole,
 ): Maybe<PersonItem>[] => {
   const isRoleMatching = (member: Maybe<PersonItem>): boolean => {
     return member && member.content ? member.content.role === role : false;
   };
 
-  return team.items ? team.items.filter(isRoleMatching) : [];
+  return team ? team.filter(isRoleMatching) : [];
 };
 
 export const getRandomMembers = (

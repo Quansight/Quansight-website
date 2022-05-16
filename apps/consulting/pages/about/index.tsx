@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps<
 
   const aboutPageData = getAboutPageData(
     data.PageItem,
-    // @ts-ignore
+    // @ts-ignore TODO
     TeamItem.data.PersonItems.items,
   );
 

@@ -6,13 +6,19 @@ query Team {
       content {
         _uid
         firstName
+        lastName
+        display
         role
         image {
           filename
           alt
         }
+        projects
+        githubLink {
+          url
+        }
+        githubNick
       }
     }
-    total
   }
 }
