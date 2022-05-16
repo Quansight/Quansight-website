@@ -13,7 +13,7 @@ import {
 import { isPageType } from '@quansight/shared/utils';
 
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
-import { Slider } from '../../components/Slider/Slider';
+import { Carousel } from '../../components/Carousel/Carousel';
 import { Tiles } from '../../components/Tiles/Tiles';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
@@ -38,7 +38,7 @@ export const Library: FC<TLibraryProps> = ({
         </Page>
       )}
       <div className="px-8 mx-auto lg:px-40 xl:px-[30rem] max-w-layout">
-        <Slider tiles={tiles} />
+        <Carousel tiles={tiles} />
         {/* TODO: types / categories */}
         <Tiles tiles={tiles} />
         {/* TODO: newsletter */}
