@@ -9,6 +9,7 @@ import { getTileProps } from './utils/getTileProps';
 export const Tile: FC<TTileProps> = ({ tile }) => {
   const { imageSrc, imageAlt, postType, title, author, date, link } =
     getTileProps(tile);
+
   return (
     <li>
       <LibraryLink link={link}>
