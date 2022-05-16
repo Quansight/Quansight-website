@@ -2636,11 +2636,7 @@
             "deprecationReason": null
           },
           {
-<<<<<<< HEAD
             "name": "id",
-=======
-            "name": "displayName",
->>>>>>> 8afc779 (fix: cr)
             "description": null,
             "args": [],
             "type": {
@@ -2782,11 +2778,7 @@
             "deprecationReason": null
           },
           {
-<<<<<<< HEAD
             "name": "name",
-=======
-            "name": "displayName",
->>>>>>> 8afc779 (fix: cr)
             "description": null,
             "args": [],
             "type": {
@@ -3337,6 +3329,18 @@
             "deprecationReason": null
           },
           {
+            "name": "displayName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "firstName",
             "description": null,
             "args": [],
@@ -3397,6 +3401,18 @@
             "deprecationReason": null
           },
           {
+            "name": "projects",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "BlockScalar",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "role",
             "description": null,
             "args": [],
@@ -3420,6 +3436,18 @@
         "description": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "displayName",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "FilterQueryOperations",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "firstName",
             "description": null,
