@@ -6,16 +6,20 @@ import { LinkTarget } from '@quansight/shared/types';
 
 import { TLibraryLinkProps } from './/types';
 
-export const LibraryLink: FC<TLibraryLinkProps> = ({ link, children }) => {
+export const LibraryLink: FC<TLibraryLinkProps> = ({
+  link,
+  children,
+  tabIndex = 0,
+}) => {
   if (link.linkType === LinkTarget.Internal) {
     return (
       <Link href={link.linkUrl}>
-        <a>{children}</a>
+        <a tabIndex={tabIndex}>{children}</a>
       </Link>
     );
   }
   return (
-    <a href={link.linkUrl} target="_blank" rel="noreferrer">
+    <a tabIndex={tabIndex} href={link.linkUrl} target="_blank" rel="noreferrer">
       {children}
     </a>
   );

@@ -5,3 +5,8 @@ export type TCarouselProps = {
 };
 
 export type TCarouselItemProps = TTile;
+
+export type TCarouselPaginationProps = {
+  currentSlide: number;
+  slidesLength: number;
+};
