@@ -26,6 +26,8 @@ export const Carousel: FC<TCarouselProps> = ({ tiles }) => {
         }}
         autoplay={{
           delay: 2000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
         }}
         keyboard={{
           enabled: true,
