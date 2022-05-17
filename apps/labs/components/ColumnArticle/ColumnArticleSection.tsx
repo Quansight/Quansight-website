@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
 import { ColumnArticleHeader } from './ColumnArticleHeader';
-import { TColumnArticleFragmentProps } from './types';
+import { TColumnArticleSectionProps } from './types';
 
-export const ColumnArticleFragment: FC<TColumnArticleFragmentProps> = ({
-  modifier,
+export const ColumnArticleSection: FC<TColumnArticleSectionProps> = ({
+  headerLevelModifier,
   content,
 }) => (
   <>
@@ -15,7 +15,7 @@ export const ColumnArticleFragment: FC<TColumnArticleFragmentProps> = ({
         return (
           <ColumnArticleHeader
             key={text}
-            level={item.attrs.level + modifier}
+            level={item.attrs.level + headerLevelModifier}
             header={text}
           />
         );

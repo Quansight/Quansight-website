@@ -4,8 +4,8 @@ import clsx from 'clsx';
 
 import { Picture } from '@quansight/shared/ui-components';
 
-import { ColumnArticleFragment } from './ColumnArticleFragment';
 import { ColumnArticleHeader } from './ColumnArticleHeader';
+import { ColumnArticleSection } from './ColumnArticleSection';
 import { TColumnArticleProps } from './types';
 
 export const ColumnArticle: FC<TColumnArticleProps> = ({
@@ -17,7 +17,7 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
   imageAlt,
 }) => {
   const columnClass = 'box-border md:w-[47%]';
-  const headerModifier = header ? 1 : 0;
+  const headerLevelModifier = header ? 1 : 0;
 
   return (
     <article className="py-[8rem] mx-auto xl:px-[18rem] max-w-layout">
@@ -28,20 +28,20 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
       )}
       <main className="md:flex md:flex-wrap md:justify-between">
         <section className={columnClass}>
-          <ColumnArticleFragment
-            modifier={headerModifier}
+          <ColumnArticleSection
+            headerLevelModifier={headerLevelModifier}
             content={leftColumn.content}
           />
         </section>
         <section className={columnClass}>
-          <ColumnArticleFragment
-            modifier={headerModifier}
+          <ColumnArticleSection
+            headerLevelModifier={headerLevelModifier}
             content={rightColumn.content}
           />
         </section>
         <section className={columnClass}>
-          <ColumnArticleFragment
-            modifier={headerModifier}
+          <ColumnArticleSection
+            headerLevelModifier={headerLevelModifier}
             content={final.content}
           />
         </section>

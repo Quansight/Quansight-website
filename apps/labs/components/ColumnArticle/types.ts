@@ -1,7 +1,7 @@
 import { TRichText, TContent } from '@quansight/shared/types';
 
-export type TColumnArticleFragmentProps = {
-  modifier: number;
+export type TColumnArticleSectionProps = {
+  headerLevelModifier: number;
   content: TContent[];
 };
 
