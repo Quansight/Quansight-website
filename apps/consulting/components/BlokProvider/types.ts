@@ -2,8 +2,9 @@ import { TypeValuesUnion } from '@quansight/shared/types';
 import {
   TFormProps,
   THeroProps,
-  TTeaserProps,
   TStatuteProps,
+  TTeaserProps,
+  TTeamProps,
 } from '@quansight/shared/ui-components';
 
 import { TBoardProps } from '../Board/types';
@@ -33,6 +34,7 @@ export enum ComponentType {
   Related = 'related',
   Statute = 'statute',
   StickyNotes = 'sticky-notes',
+  Team = 'team',
   Teaser = 'teaser',
   Testimonial = 'testimonial',
   TextArticle = 'text-article',
@@ -52,6 +54,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Related]: TRelatedProps;
   [ComponentType.Statute]: TStatuteProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;
+  [ComponentType.Team]: TTeamProps;
   [ComponentType.Teaser]: TTeaserProps;
   [ComponentType.Testimonial]: TTestimonialProps;
   [ComponentType.TextArticle]: TTextArticleProps;

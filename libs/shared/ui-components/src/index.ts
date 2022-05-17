@@ -30,3 +30,6 @@ export * from './Statute/types';
 
 export * from './Teaser/Teaser';
 export * from './Teaser/types';
+
+export * from './Team/Team';
+export * from './Team/types';

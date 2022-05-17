@@ -378,15 +378,18 @@ export type PersonComponent = {
   _editable: Maybe<Scalars['String']>;
   _uid: Maybe<Scalars['String']>;
   component: Maybe<Scalars['String']>;
+  displayName: Maybe<Scalars['String']>;
   firstName: Maybe<Scalars['String']>;
   githubLink: Maybe<Link>;
   githubNick: Maybe<Scalars['String']>;
   image: Maybe<Asset>;
   lastName: Maybe<Scalars['String']>;
+  projects: Maybe<Scalars['BlockScalar']>;
   role: Maybe<Scalars['String']>;
 };
 
 export type PersonFilterQuery = {
+  displayName: InputMaybe<FilterQueryOperations>;
   firstName: InputMaybe<FilterQueryOperations>;
   githubNick: InputMaybe<FilterQueryOperations>;
   lastName: InputMaybe<FilterQueryOperations>;
@@ -1255,6 +1258,36 @@ export type PageItemsQuery = {
   } | null;
 };
 
+export type TeamQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TeamQuery = {
+  __typename?: 'QueryType';
+  PersonItems: {
+    __typename?: 'PersonItems';
+    items: Array<{
+      __typename?: 'PersonItem';
+      id: number | null;
+      position: number | null;
+      content: {
+        __typename?: 'PersonComponent';
+        _uid: string | null;
+        firstName: string | null;
+        lastName: string | null;
+        displayName: string | null;
+        role: string | null;
+        projects: any | null;
+        githubNick: string | null;
+        image: {
+          __typename?: 'Asset';
+          filename: string;
+          alt: string | null;
+        } | null;
+        githubLink: { __typename?: 'Link'; url: string } | null;
+      } | null;
+    } | null> | null;
+  } | null;
+};
+
 export const ArticleItemDocument = gql`
   query articleItem($slug: ID!) {
     ArticleItem(id: $slug) {
@@ -1737,3 +1770,30 @@ export type PageItemsQueryResult = Apollo.QueryResult<
   PageItemsQuery,
   PageItemsQueryVariables
 >;
+export const TeamDocument = gql`
+  query Team {
+    PersonItems(starts_with: "team/", sort_by: "position") {
+      items {
+        id
+        position
+        content {
+          _uid
+          firstName
+          lastName
+          displayName
+          role
+          image {
+            filename
+            alt
+          }
+          projects
+          githubLink {
+            url
+          }
+          githubNick
+        }
+      }
+    }
+  }
+`;
+export type TeamQueryResult = Apollo.QueryResult<TeamQuery, TeamQueryVariables>;

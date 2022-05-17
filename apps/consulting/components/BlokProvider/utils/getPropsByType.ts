@@ -12,6 +12,7 @@ import { getJobListProps } from '../mappers/getJobListProps';
 import { getRelatedProps } from '../mappers/getRelatedProps';
 import { getStatuteProps } from '../mappers/getStatuteProps';
 import { getStickyNotesProps } from '../mappers/getStickyNotesProps';
+import { getTeamProps } from '../mappers/getTeamProps';
 import { getTeaserProps } from '../mappers/getTeaserProps';
 import { getTestimonialProps } from '../mappers/getTestimonialProps';
 import { getTextArticleProps } from '../mappers/getTextArticleProps';
@@ -57,6 +58,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.StickyNotes: {
       return getStickyNotesProps(blok);
+    }
+    case ComponentType.Team: {
+      return getTeamProps(blok);
     }
     case ComponentType.Teaser: {
       return getTeaserProps(blok);
