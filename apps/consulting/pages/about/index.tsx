@@ -15,8 +15,13 @@ import { isPageType, getAboutPageData } from '@quansight/shared/utils';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 
-export const About: FC<TContainerProps> = ({ data, footer, preview }) => (
-  <Layout footer={footer}>
+export const About: FC<TContainerProps> = ({
+  data,
+  footer,
+  header,
+  preview,
+}) => (
+  <Layout footer={footer} header={header}>
     <SEO
       title={data.content.title}
       description={data.content.description}
@@ -36,6 +41,7 @@ export const getStaticProps: GetStaticProps<
 > = async () => {
   const { data } = await Api.getPageItem({ slug: 'about' });
   const { data: footer } = await Api.getFooterItem();
+  const { data: header } = await Api.getHeaderItem();
   const TeamItem = await Api.getTeamItem();
 
   const aboutPageData = getAboutPageData(
@@ -48,6 +54,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       data: aboutPageData,
       footer: footer ? footer.FooterItem : null,
+      header: header ? header.HeaderItem : null,
       preview: false,
     },
   };

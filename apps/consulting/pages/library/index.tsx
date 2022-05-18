@@ -21,11 +21,12 @@ import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
 export const Library: FC<TLibraryProps> = ({
   data,
   footer,
+  header,
   tiles,
   preview,
 }) => {
   return (
-    <Layout footer={footer}>
+    <Layout footer={footer} header={header}>
       <SEO
         title={data.content.title}
         description={data.content.description}
@@ -54,6 +55,7 @@ export const getStaticProps: GetStaticProps<
 > = async () => {
   const { data } = await Api.getPageItem({ slug: 'library' });
   const { data: footer } = await Api.getFooterItem();
+  const { data: header } = await Api.getHeaderItem();
   const {
     data: { LibrarylinkItems: libraryLinks },
   } = await Api.getLibraryLinkItems();
@@ -65,6 +67,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       data: data.PageItem,
       footer: footer ? footer.FooterItem : null,
+      header: header ? header.HeaderItem : null,
       tiles: getLibraryTiles({
         articleItems,
         libraryLinks,

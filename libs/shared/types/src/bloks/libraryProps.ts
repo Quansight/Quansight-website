@@ -1,4 +1,8 @@
-import { FooterItem, PageItem } from '@quansight/shared/storyblok-sdk';
+import {
+  FooterItem,
+  HeaderItem,
+  PageItem,
+} from '@quansight/shared/storyblok-sdk';
 
 export enum LinkTarget {
   Internal = 'internal',
@@ -26,6 +30,7 @@ export type TTiles = TTile[];
 export type TLibraryProps = {
   data: PageItem;
   footer: FooterItem;
-  tiles: TTiles;
+  header: HeaderItem;
   preview: boolean;
+  tiles: TTiles;
 };

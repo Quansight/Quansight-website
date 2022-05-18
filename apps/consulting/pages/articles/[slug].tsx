@@ -9,12 +9,12 @@ import { Layout, SEO, DomainVariant } from '@quansight/shared/ui-components';
 import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
 import { getArticlesPaths } from '../../utils/getArticlesPaths/getArticlesPaths';
 
-const Article: FC<TArticleProps> = ({ data, footer, preview }) => {
+const Article: FC<TArticleProps> = ({ data, footer, header, preview }) => {
   usePreviewMode(preview);
   const { content } = data;
 
   return (
-    <Layout footer={footer}>
+    <Layout footer={footer} header={header}>
       <SEO
         title={content.title}
         description={content.description}
@@ -46,10 +46,13 @@ export const getStaticProps: GetStaticProps<
     slug: `${ARTICLES_DIRECTORY_SLUG}${slug}`,
   });
   const { data: footer } = await Api.getFooterItem();
+  const { data: header } = await Api.getHeaderItem();
+
   return {
     props: {
       data: data.ArticleItem,
       footer: footer ? footer.FooterItem : null,
+      header: header ? header.HeaderItem : null,
       preview,
     },
   };

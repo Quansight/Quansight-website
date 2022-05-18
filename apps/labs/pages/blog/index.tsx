@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 
-import { FooterItem, Api } from '@quansight/shared/storyblok-sdk';
+import { FooterItem, HeaderItem, Api } from '@quansight/shared/storyblok-sdk';
 import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
 
 import { CategoryList } from '../../components/Posts/CategoryList/CategoryList';
@@ -20,6 +20,7 @@ import { TPost } from '../../types/storyblok/bloks/posts';
 export type BlogListPageProps = {
   posts: TPost[];
   footer: FooterItem;
+  header: HeaderItem;
   categoryList: string[];
   category?: string;
 };
@@ -27,6 +28,7 @@ export type BlogListPageProps = {
 const BlogListPage: FC<BlogListPageProps> = ({
   posts,
   footer,
+  header,
   categoryList,
 }) => {
   const router = useRouter();
@@ -101,7 +103,7 @@ const BlogListPage: FC<BlogListPageProps> = ({
   }, [router.isReady]);
 
   return (
-    <Layout footer={footer}>
+    <Layout footer={footer} header={header}>
       <SEO
         title="Blog"
         description="This is a blog list page"
@@ -167,12 +169,14 @@ const BlogListPage: FC<BlogListPageProps> = ({
 
 export const getStaticProps: GetStaticProps = async () => {
   const { data: footer } = await Api.getFooterItem();
+  const { data: header } = await Api.getHeaderItem();
   const categories = await getCategories();
   const { items } = await getAllPosts();
 
   return {
     props: {
       footer: footer ? footer.FooterItem : null,
+      header: header ? header.HeaderItem : null,
       categoryList: categories,
       posts: items,
     },

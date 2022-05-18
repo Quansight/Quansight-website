@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 
-import { Api, FooterItem } from '@quansight/shared/storyblok-sdk';
+import { Api, FooterItem, HeaderItem } from '@quansight/shared/storyblok-sdk';
 import { ISlugParams } from '@quansight/shared/types';
 import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
 
@@ -23,12 +23,14 @@ import { TPost } from '../../types/storyblok/bloks/posts';
 export type TBlogPostProps = {
   post: TPost | null;
   footer?: FooterItem;
+  header?: HeaderItem;
   featuredPosts?: TPost[];
 };
 
 export const BlogPost: FC<TBlogPostProps> = ({
   post,
   footer,
+  header,
   featuredPosts,
 }) => {
   if (!post) {
@@ -36,7 +38,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
   }
 
   return (
-    <Layout footer={footer}>
+    <Layout footer={footer} header={header}>
       <SEO
         title={post.meta.title}
         description={post.meta.description}
@@ -95,6 +97,7 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params: { slug } }) => {
   const post = await getPost(slug);
   const { data: footer } = await Api.getFooterItem();
+  const { data: header } = await Api.getHeaderItem();
   const featuredPosts = await getPostsByCategory(
     post.meta.category,
     post.slug,
@@ -105,6 +108,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       post,
       footer: footer ? footer.FooterItem : null,
+      header: header ? header.HeaderItem : null,
       featuredPosts,
     },
   };

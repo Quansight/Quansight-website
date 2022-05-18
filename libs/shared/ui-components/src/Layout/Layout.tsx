@@ -1,19 +1,20 @@
 import { FC, ReactNode } from 'react';
 
-import { FooterItem } from '@quansight/shared/storyblok-sdk';
+import { FooterItem, HeaderItem } from '@quansight/shared/storyblok-sdk';
 
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 
 export type TLayoutProps = {
-  footer: FooterItem;
   children: ReactNode;
+  footer: FooterItem;
+  header: HeaderItem;
 };
 
-export const Layout: FC<TLayoutProps> = ({ footer, children }) => {
+export const Layout: FC<TLayoutProps> = ({ children, footer, header }) => {
   return (
     <div>
-      <Header />
+      {header?.content && <Header />}
       <main>{children}</main>
       {footer?.content && <Footer {...footer.content} />}
     </div>
