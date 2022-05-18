@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       data: data.PageItem,
-      footer: footer.FooterItem,
+      footer: footer ? footer.FooterItem : null,
       tiles: getLibraryTiles({
         articleItems,
         libraryLinks,

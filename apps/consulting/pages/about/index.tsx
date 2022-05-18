@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       data: aboutPageData,
-      footer: footer.FooterItem,
+      footer: footer ? footer.FooterItem : null,
       preview: false,
     },
   };

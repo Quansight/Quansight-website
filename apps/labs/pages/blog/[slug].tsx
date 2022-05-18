@@ -104,7 +104,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       post,
-      footer: footer.FooterItem,
+      footer: footer ? footer.FooterItem : null,
       featuredPosts,
     },
   };

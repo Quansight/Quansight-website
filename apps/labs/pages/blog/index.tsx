@@ -172,7 +172,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      footer: footer.FooterItem,
+      footer: footer ? footer.FooterItem : null,
       categoryList: categories,
       posts: items,
     },
