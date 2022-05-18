@@ -7,7 +7,7 @@ export const Tiles: FC<TTilesProps> = ({ tiles }) => {
   return tiles.length ? (
     <ul className="grid grid-cols-1 gap-[4.2rem] sm:grid-cols-2 sm:gap-x-[2.4rem] sm:gap-y-[3.6rem] lg:grid-cols-3">
       {tiles.map((tile) => (
-        <Tile tile={tile} key={tile.uuid} />
+        <Tile {...tile} key={tile.uuid} />
       ))}
     </ul>
   ) : (

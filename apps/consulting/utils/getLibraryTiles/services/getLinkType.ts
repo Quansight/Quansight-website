@@ -1,9 +1,9 @@
-import { TLibraryTile } from '@quansight/shared/types';
+import { TLinkData, LinkTarget } from '@quansight/shared/types';
 
-import { TLinkData, LinkTarget } from '../types';
+import { TLibraryTileRawData } from '../types';
 import { isLibraryLink, isArticle } from './determinateTileType';
 
-export const getLinkType = (tile: TLibraryTile): TLinkData => {
+export const getLinkType = (tile: TLibraryTileRawData): TLinkData => {
   if (isArticle(tile))
     return {
       linkType: LinkTarget.Internal,

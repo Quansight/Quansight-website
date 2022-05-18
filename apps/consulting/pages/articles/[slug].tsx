@@ -5,10 +5,9 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Api, usePreviewMode } from '@quansight/shared/storyblok-sdk';
 import { ISlugParams, TArticleProps } from '@quansight/shared/types';
 import { Layout, SEO, DomainVariant } from '@quansight/shared/ui-components';
-import {
-  getArticlesPaths,
-  ARTICLES_DIRECTORY_SLUG,
-} from '@quansight/shared/utils';
+
+import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
+import { getArticlesPaths } from '../../utils/getArticlesPaths/getArticlesPaths';
 
 const Article: FC<TArticleProps> = ({ data, footer, preview }) => {
   usePreviewMode(preview);
