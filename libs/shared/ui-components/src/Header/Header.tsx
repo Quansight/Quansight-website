@@ -1,27 +1,25 @@
 import { FC } from 'react';
 
-import Link from 'next/link';
-
+import { HeaderLogo } from './HeaderLogo';
+import { HeaderNavigation } from './HeaderNavigation';
+import { HeaderSkipLinks } from './HeaderSkipLinks';
 import { THeaderProps } from './types';
 
-export const Header: FC<THeaderProps> = () => {
+export const Header: FC<THeaderProps> = ({
+  logo,
+  skipLinksText,
+  navigation,
+}) => {
   return (
     <header>
-      <Link href="#main">
-        <a>Skip links</a>
-      </Link>
-      <div>LOGO</div>
-      <nav>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-        <Link href="/careers">
-          <a>careers</a>
-        </Link>
-        <Link href="/open-source">
-          <a>Open source</a>
-        </Link>
-      </nav>
+      {skipLinksText && <HeaderSkipLinks skipLinksText={skipLinksText} />}
+      {logo && (
+        <HeaderLogo
+          imageSrc={logo.filename}
+          imageAlt={logo.alt ? logo.alt : ''}
+        />
+      )}
+      {navigation && <HeaderNavigation navigation={navigation} />}
     </header>
   );
 };
