@@ -27,7 +27,6 @@ export const Index: FC<TContainerProps> = ({
       description={data.content.description}
       variant={DomainVariant.Quansight}
     />
-    <button>Hello world</button>
     {isPageType(data?.content?.component) && (
       <Page data={data} preview={preview}>
         {(blok: TRawBlok) => <BlokProvider blok={blok} />}
