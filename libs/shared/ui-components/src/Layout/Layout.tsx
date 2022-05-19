@@ -13,7 +13,7 @@ export type TLayoutProps = {
 
 export const Layout: FC<TLayoutProps> = ({ children, footer, header }) => {
   return (
-    <div>
+    <div className="relative">
       {header?.content && <Header {...header.content} />}
       <main id="maincontent">{children}</main>
       {footer?.content && <Footer {...footer.content} />}
