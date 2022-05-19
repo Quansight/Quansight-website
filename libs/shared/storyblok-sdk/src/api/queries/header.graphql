@@ -40,14 +40,15 @@ query HeaderItem($slug: ID!) {
       navigation
       skipLinksText
       logo {
+        focus
         alt
         copyright
         filename
-        focus
         id
         name
         title
       }
+      bookACallLinkText
     }
   }
 }

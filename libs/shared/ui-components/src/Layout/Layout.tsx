@@ -15,7 +15,7 @@ export const Layout: FC<TLayoutProps> = ({ children, footer, header }) => {
   return (
     <div>
       {header?.content && <Header {...header.content} />}
-      <main>{children}</main>
+      <main id="maincontent">{children}</main>
       {footer?.content && <Footer {...footer.content} />}
     </div>
   );

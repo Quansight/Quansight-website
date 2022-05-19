@@ -19,7 +19,6 @@ export const HeaderNavigationProvider: FC<THeaderNavigationProviderProps> = ({
       return (
         <NavigationDropdown {...(navigationItem as TNavigationDropdown)} />
       );
-
     default:
       return <Placeholder componentName={navigationItem.component} />;
   }

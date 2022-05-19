@@ -4,7 +4,7 @@ import { Picture } from '../Picture/Picture';
 import { THeaderLogoProps } from './types';
 
 export const HeaderLogo: FC<THeaderLogoProps> = ({ imageSrc, imageAlt }) => (
-  <div className="relative w-20 h-10 bg-black">
+  <div aria-hidden="true" className="relative w-[20.7rem] h-[6.8rem]">
     <Picture imageSrc={imageSrc} imageAlt={imageAlt} layout="fill" />
   </div>
 );

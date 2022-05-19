@@ -243,6 +243,7 @@ export type HeaderComponent = {
   __typename?: 'HeaderComponent';
   _editable: Maybe<Scalars['String']>;
   _uid: Maybe<Scalars['String']>;
+  bookACallLinkText: Maybe<Scalars['String']>;
   component: Maybe<Scalars['String']>;
   logo: Maybe<Asset>;
   navigation: Maybe<Scalars['BlockScalar']>;
@@ -250,6 +251,7 @@ export type HeaderComponent = {
 };
 
 export type HeaderFilterQuery = {
+  bookACallLinkText: InputMaybe<FilterQueryOperations>;
   skipLinksText: InputMaybe<FilterQueryOperations>;
 };
 
@@ -1147,12 +1149,13 @@ export type HeaderItemQuery = {
       component: string | null;
       navigation: any | null;
       skipLinksText: string | null;
+      bookACallLinkText: string | null;
       logo: {
         __typename?: 'Asset';
+        focus: string | null;
         alt: string | null;
         copyright: string | null;
         filename: string;
-        focus: string | null;
         id: number | null;
         name: string | null;
         title: string | null;
@@ -1731,14 +1734,15 @@ export const HeaderItemDocument = gql`
         navigation
         skipLinksText
         logo {
+          focus
           alt
           copyright
           filename
-          focus
           id
           name
           title
         }
+        bookACallLinkText
       }
     }
   }
