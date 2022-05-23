@@ -52,7 +52,10 @@ export type THeaderMenuButtonProps = {
   setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
 } & TIsNavigationOpen;
 
-export type THeaderMenuProps = { logo: Maybe<Asset> } & THeaderMenuButtonProps;
+export type THeaderMenuProps = {
+  logo: Maybe<Asset>;
+  setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
+} & TIsNavigationOpen;
 
 export type THeaderProps = {
   logo: Maybe<Asset>;

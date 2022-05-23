@@ -21,8 +21,10 @@ export const HeaderSkipLinks: FC<THeaderSkipLinksProps> = ({
   }, [router.asPath]);
 
   return (
-    <Link href="#maincontent">
-      <a> {skipLinksText}</a>
-    </Link>
+    <div className="absolute inset-x-0 top-0 z-50 py-[2rem] max-w-full text-[1.6rem] font-extrabold  text-center text-white transition-transform motion-reduce:transition-none duration-300 ease-in-out -translate-y-full focus-within:translate-y-0 bg-violet">
+      <Link href="#maincontent">
+        <a className="pb-2 border-b-2 ">{skipLinksText}</a>
+      </Link>
+    </div>
   );
 };

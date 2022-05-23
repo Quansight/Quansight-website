@@ -1,6 +1,7 @@
 import { FC, useEffect, useState, useRef } from 'react';
 
 import { HeaderNavigation } from './HeaderNavigation';
+import { HeaderSkipLinks } from './Links/HeaderSkipLinks';
 import { HeaderMenu } from './Menu/HeaderMenu';
 import { THeaderProps } from './types';
 
@@ -8,6 +9,7 @@ export const Header: FC<THeaderProps> = ({
   logo,
   navigation,
   bookACallLinkText,
+  skipLinksText,
 }) => {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
   const container = useRef<HTMLElement>(null);
@@ -41,6 +43,7 @@ export const Header: FC<THeaderProps> = ({
 
   return (
     <header ref={container} className="fixed inset-x-0 top-0 z-20 text-white">
+      <HeaderSkipLinks skipLinksText={skipLinksText} />
       <HeaderMenu
         logo={logo}
         isNavigationOpen={isNavigationOpen}

@@ -36,7 +36,7 @@ export const HeaderMenu: FC<THeaderMenuProps> = ({
       className={clsx(
         'flex absolute z-40 justify-between items-center px-[2rem] pb-1 w-full transition-all motion-reduce:transition-none duration-300 ease-in-out',
         menuBackground ? 'bg-black' : 'bg-transparent',
-        isMenuVisible ? 'translate-y-0' : 'translate-y-[-10rem]',
+        isMenuVisible ? 'translate-y-0' : '-translate-y-full',
       )}
     >
       {logo && (
