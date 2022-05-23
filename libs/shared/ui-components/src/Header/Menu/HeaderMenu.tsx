@@ -8,19 +8,17 @@ export const HeaderMenu: FC<THeaderMenuProps> = ({
   logo,
   isNavigationOpen,
   setIsNavigationOpen,
-}) => {
-  return (
-    <div className="flex absolute z-40 justify-between items-center px-[2rem] pb-1 w-full">
-      {logo && (
-        <HeaderLogo
-          imageSrc={logo.filename}
-          imageAlt={logo.alt ? logo.alt : ''}
-        />
-      )}
-      <HeaderMenuButton
-        isNavigationOpen={isNavigationOpen}
-        setIsNavigationOpen={setIsNavigationOpen}
+}) => (
+  <div className="flex absolute z-40 justify-between items-center px-[2rem] pb-1 w-full">
+    {logo && (
+      <HeaderLogo
+        imageSrc={logo.filename}
+        imageAlt={logo.alt ? logo.alt : ''}
       />
-    </div>
-  );
-};
+    )}
+    <HeaderMenuButton
+      isNavigationOpen={isNavigationOpen}
+      setIsNavigationOpen={setIsNavigationOpen}
+    />
+  </div>
+);

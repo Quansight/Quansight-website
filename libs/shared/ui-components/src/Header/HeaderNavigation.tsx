@@ -10,17 +10,31 @@ export const HeaderNavigation: FC<THeaderNavigationProps> = ({
   navigation,
   bookACallLinkText,
   isNavigationOpen,
-}) => {
-  return (
-    <nav className="absolute top-0 px-[2rem] pt-[9rem] w-screen h-screen bg-black">
-      <ul className="">
+}) => (
+  <nav
+    className={clsx(
+      'absolute inset-0 z-30 pt-[8rem] w-screen h-screen bg-black transition-transform duration-300 ease-in-out',
+      isNavigationOpen ? 'block' : 'hidden',
+    )}
+  >
+    <div className="overflow-y-auto pb-[5rem] h-full">
+      <ul
+        id="menu"
+        className="flex flex-col justify-start items-center px-[2rem] pt-[1.8rem]"
+      >
         {navigation.map((navigationItem) => (
-          <li className="border-b border-b-white" key={navigationItem._uid}>
-            <HeaderNavigationProvider navigationItem={navigationItem} />
+          <li
+            className="w-full border-b border-b-white"
+            key={navigationItem._uid}
+          >
+            <HeaderNavigationProvider
+              navigationItem={navigationItem}
+              isNavigationOpen={isNavigationOpen}
+            />
           </li>
         ))}
       </ul>
       <HeaderBookingLink bookACallLinkText={bookACallLinkText} />
-    </nav>
-  );
-};
+    </div>
+  </nav>
+);

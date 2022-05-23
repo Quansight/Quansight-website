@@ -11,8 +11,6 @@ export const HeaderSkipLinks: FC<THeaderSkipLinksProps> = ({
   const router = useRouter();
 
   useEffect(() => {
-    console.log('fire');
-
     if (router.asPath === '/#maincontent') {
       const mainContent = document.getElementById('maincontent');
       if (mainContent) {

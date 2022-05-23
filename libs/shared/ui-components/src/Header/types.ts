@@ -17,20 +17,22 @@ export type TNavigationLink = {
 export type TNavigationDropdown = {
   buttonText: string;
   links: TNavigationLink[];
-} & TBlok;
+} & TBlok &
+  TIsNavigationOpen;
 
-export type THeaderNavigationItem = TNavigationLink | TNavigationDropdown;
+type THeaderNavigationItem = TNavigationLink | TNavigationDropdown;
 
-export type THeaderNavigationItems = { navigation: THeaderNavigationItem[] };
+type THeaderNavigationItems = { navigation: THeaderNavigationItem[] };
+
+type TIsNavigationOpen = { isNavigationOpen: boolean };
 
 export type THeaderNavigationProviderProps = {
   navigationItem: THeaderNavigationItem;
-};
+} & TIsNavigationOpen;
 
-export type THeaderNavigationProps = {
-  isNavigationOpen: boolean;
-} & THeaderBookingLinkProps &
-  THeaderNavigationItems;
+export type THeaderNavigationProps = {} & THeaderBookingLinkProps &
+  THeaderNavigationItems &
+  TIsNavigationOpen;
 
 export type THeaderLogoProps = {
   imageSrc: string;
@@ -46,9 +48,8 @@ export type THeaderBookingLinkProps = {
 };
 
 export type THeaderMenuButtonProps = {
-  isNavigationOpen: boolean;
   setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
-};
+} & TIsNavigationOpen;
 
 export type THeaderMenuProps = { logo: Maybe<Asset> } & THeaderMenuButtonProps;
 
