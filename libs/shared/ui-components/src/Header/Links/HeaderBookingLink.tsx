@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import Link from 'next/link';
 
-import { TBookACallLinkLinkProps } from '../types';
+import { THeaderBookingLinkProps } from '../types';
 
-export const BookACallLink: FC<TBookACallLinkLinkProps> = ({
+export const HeaderBookingLink: FC<THeaderBookingLinkProps> = ({
   bookACallLinkText,
 }) => {
   return (

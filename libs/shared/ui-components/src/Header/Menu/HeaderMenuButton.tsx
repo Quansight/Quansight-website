@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { THeaderMenuButtonProps } from '../types';
 
-const HeaderMenuButton: FC<THeaderMenuButtonProps> = ({
+export const HeaderMenuButton: FC<THeaderMenuButtonProps> = ({
   isNavigationOpen,
   setIsNavigationOpen,
 }) => {
@@ -34,5 +34,3 @@ const HeaderMenuButton: FC<THeaderMenuButtonProps> = ({
     </button>
   );
 };
-
-export default HeaderMenuButton;

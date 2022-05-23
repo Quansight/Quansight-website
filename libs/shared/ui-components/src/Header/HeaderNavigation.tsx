@@ -2,8 +2,8 @@ import { FC } from 'react';
 
 import clsx from 'clsx';
 
-import { BookACallLink } from './Buttons/BookACallLink';
 import { HeaderNavigationProvider } from './HeaderNavigationProvider/HeaderNavigationProvider';
+import { HeaderBookingLink } from './Links/HeaderBookingLink';
 import { THeaderNavigationProps } from './types';
 
 export const HeaderNavigation: FC<THeaderNavigationProps> = ({
@@ -12,16 +12,15 @@ export const HeaderNavigation: FC<THeaderNavigationProps> = ({
   isNavigationOpen,
 }) => {
   return (
-    <nav className={clsx(isNavigationOpen ? 'block' : 'hidden')}>
+    <nav className="absolute top-0 px-[2rem] pt-[9rem] w-screen h-screen bg-black">
       <ul className="">
         {navigation.map((navigationItem) => (
-          <HeaderNavigationProvider
-            navigationItem={navigationItem}
-            key={navigationItem._uid}
-          />
+          <li className="border-b border-b-white" key={navigationItem._uid}>
+            <HeaderNavigationProvider navigationItem={navigationItem} />
+          </li>
         ))}
       </ul>
-      <BookACallLink bookACallLinkText={bookACallLinkText} />
+      <HeaderBookingLink bookACallLinkText={bookACallLinkText} />
     </nav>
   );
 };

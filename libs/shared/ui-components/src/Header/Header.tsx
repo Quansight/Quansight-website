@@ -2,15 +2,13 @@ import { FC, useEffect, useState } from 'react';
 
 import clsx from 'clsx';
 
-import HeaderMenuButton from './Buttons/HeaderMenuButton';
-import { HeaderLogo } from './HeaderLogo';
+import { Picture } from '../Picture/Picture';
 import { HeaderNavigation } from './HeaderNavigation';
-// import { HeaderSkipLinks } from './HeaderSkipLinks';
+import { HeaderMenu } from './Menu/HeaderMenu';
 import { THeaderProps } from './types';
 
 export const Header: FC<THeaderProps> = ({
   logo,
-  // skipLinksText,
   navigation,
   bookACallLinkText,
 }) => {
@@ -22,27 +20,46 @@ export const Header: FC<THeaderProps> = ({
   }, [isNavigationOpen]);
 
   return (
-    <header className="bg-red">
-      {/* {skipLinksText && <HeaderSkipLinks skipLinksText={skipLinksText} />} */}
-      {logo && (
-        <HeaderLogo
-          imageSrc={logo.filename}
-          imageAlt={logo.alt ? logo.alt : ''}
-        />
-      )}
-      <HeaderMenuButton
+    <header className="fixed inset-x-0 top-0 z-20 text-white">
+      <HeaderMenu
+        logo={logo}
         isNavigationOpen={isNavigationOpen}
         setIsNavigationOpen={setIsNavigationOpen}
       />
-      {navigation && (
-        <HeaderNavigation
-          navigation={navigation}
-          bookACallLinkText={bookACallLinkText}
-          isNavigationOpen={isNavigationOpen}
-        />
-      )}
     </header>
   );
 };
 
 export default Header;
+// <header className="fixed inset-x-0 top-0 z-20 text-white">
+//     <HeaderMenu
+//       logo={logo}
+//       isNavigationOpen={isNavigationOpen}
+//       setIsNavigationOpen={setIsNavigationOpen}
+//     />
+//     <div
+//       className={clsx(
+//         'absolute inset-0 z-30 px-[2rem] pt-[10rem] w-screen h-screen bg-black transition-transform duration-300 ease-in-out',
+//         isNavigationOpen ? 'block' : 'hidden',
+//       )}
+//     >
+//       <div className="overflow-y-auto pb-[10rem] h-full">
+//         <ul className="flex flex-col gap-[2rem] justify-start items-center">
+//           {[...Array(15).keys()].map((item) => (
+//             <li
+//               className="py-[1rem] w-full text-[1.6rem] text-center bg-blue-500"
+//               key={item}
+//             >
+//               <a href="/">{item}</a>
+//             </li>
+//           ))}
+//         </ul>
+//         <button
+//           className="py-[1rem] px-[2rem] mt-[6.2rem] bg-pink"
+//           onClick={() => console.log('CALL')}
+//         >
+//           BOOK A CALL
+//         </button>
+//       </div>
+//     </div>
+//   </header>
