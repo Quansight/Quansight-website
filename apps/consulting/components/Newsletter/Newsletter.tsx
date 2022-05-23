@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
 
+import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 
-import { FormStates } from '@quansight/shared/ui-components';
 import { sendFormData, SubscriberValues } from '@quansight/shared/utils';
 
 import { NewsletterButton } from './NewsletterButton';
@@ -22,6 +22,14 @@ export const Newsletter: FC = () => {
     NewsletterStates.Default,
   );
 
+  const subscribeNewsletter = handleSubmit(
+    (subscriberData: SubscriberValues): void => {
+      sendFormData(hookUrl, subscriberData)
+        .then(() => setNewsletterState(NewsletterStates.Subscribed))
+        .catch(() => setNewsletterState(NewsletterStates.Error));
+    },
+  );
+
   const newsletterMessage = errors.email
     ? 'Enter a valid e-mail'
     : newsletterState === NewsletterStates.Subscribed
@@ -29,29 +37,23 @@ export const Newsletter: FC = () => {
     : newsletterState === NewsletterStates.Error
     ? 'An error occured'
     : null;
-  const onSubscribe = handleSubmit((subscriberData: SubscriberValues): void => {
-    sendFormData(hookUrl, subscriberData)
-      .then(() => setNewsletterState(NewsletterStates.Subscribed))
-      .catch(() => setNewsletterState(NewsletterStates.Error));
-  });
 
   return (
     <section
-      className="
-        box-border py-[3rem] px-[1rem] my-[3rem]
-        md:py-[4rem] md:px-[10rem] md:my-[5rem]
-        max-w-layout bg-violet
-      "
+      className={clsx(
+        'box-border py-[3rem] px-[1rem] my-[3rem] max-w-layout bg-violet',
+        'md:py-[4rem] md:px-[10rem] md:my-[5rem]',
+      )}
     >
       <NewsletterHeader text="Stay informed with our newsletter" />
-      <form className="md:flex md:gap-[2.6rem]" onSubmit={onSubscribe}>
+      <form className="md:flex md:gap-[2.6rem]" onSubmit={subscribeNewsletter}>
         <div className="relative md:grow">
           <input
-            className="
-              p-[1.5rem] w-full text-[1.4rem] placeholder:text-[1.4rem]
-              text-black md:text-[1.6rem]
-              md:placeholder:text-[1.6rem] placeholder:text-grey
-            "
+            className={clsx(
+              'p-[1.5rem] w-full text-[1.4rem] text-black',
+              'placeholder:text-[1.4rem] placeholder:text-grey',
+              'md:text-[1.6rem] md:placeholder:text-[1.6rem]',
+            )}
             type="email"
             placeholder="Work email*"
             disabled={newsletterState === NewsletterStates.Subscribed && true}
