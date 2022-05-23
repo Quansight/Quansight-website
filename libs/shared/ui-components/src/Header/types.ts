@@ -48,6 +48,7 @@ export type THeaderBookingLinkProps = {
 };
 
 export type THeaderMenuButtonProps = {
+  isMenuVisible: boolean;
   setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
 } & TIsNavigationOpen;
 

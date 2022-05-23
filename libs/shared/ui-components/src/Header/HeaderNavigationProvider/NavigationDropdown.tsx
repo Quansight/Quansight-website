@@ -48,7 +48,7 @@ export const NavigationDropdown: FC<TNavigationDropdown> = ({
           aria-hidden="true"
           className={clsx(
             isNavbarItemOpen && '-rotate-180',
-            'inline-block ml-4 w-0 h-0 border-x-[0.7rem] border-t-[.7rem] border-x-transparent transition-transform duration-500 ease-in-out border-y-solid border-l-solid',
+            'inline-block ml-4 w-0 h-0 border-x-[0.7rem] border-t-[.7rem] border-x-transparent transition-transform motion-reduce:transition-none duration-500 ease-in-out border-y-solid border-l-solid',
           )}
         />
       </button>

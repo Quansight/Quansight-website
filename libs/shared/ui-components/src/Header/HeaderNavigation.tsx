@@ -13,7 +13,7 @@ export const HeaderNavigation: FC<THeaderNavigationProps> = ({
 }) => (
   <nav
     className={clsx(
-      'absolute inset-0 z-30 pt-[8rem] w-screen h-screen bg-black transition-transform duration-300 ease-in-out',
+      'absolute inset-0 z-30 pt-[8rem] w-screen h-screen bg-black transition-transform motion-reduce:transition-none duration-300 ease-in-out',
       isNavigationOpen ? 'block' : 'hidden',
     )}
   >
