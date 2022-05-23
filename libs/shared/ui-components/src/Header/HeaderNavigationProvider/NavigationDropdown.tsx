@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useRef } from 'react';
 
 import clsx from 'clsx';
 
@@ -11,12 +11,32 @@ export const NavigationDropdown: FC<TNavigationDropdown> = ({
   isNavigationOpen,
 }) => {
   const [isNavbarItemOpen, setIsNavbarItemOpen] = useState(false);
+  const container = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // @ts-ignore
+    const handleOutsideEvent = (event): void => {
+      if (container.current && !container.current.contains(event.target)) {
+        setIsNavbarItemOpen(false);
+      }
+    };
+
+    if (isNavbarItemOpen) {
+      document.addEventListener('focusin', handleOutsideEvent);
+      document.addEventListener('click', handleOutsideEvent);
+      return () => {
+        document.removeEventListener('focusin', handleOutsideEvent);
+        document.removeEventListener('click', handleOutsideEvent);
+      };
+    }
+    return;
+  }, [isNavbarItemOpen]);
 
   useEffect(() => {
     setIsNavbarItemOpen(false);
   }, [isNavigationOpen]);
   return (
-    <>
+    <div ref={container}>
       <button
         aria-expanded={isNavbarItemOpen ? 'true' : 'false'}
         aria-controls="options"
@@ -44,6 +64,6 @@ export const NavigationDropdown: FC<TNavigationDropdown> = ({
           />
         ))}
       </ul>
-    </>
+    </div>
   );
 };

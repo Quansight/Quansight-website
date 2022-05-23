@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useRef } from 'react';
 
 import { HeaderNavigation } from './HeaderNavigation';
 import { HeaderMenu } from './Menu/HeaderMenu';
@@ -10,31 +10,37 @@ export const Header: FC<THeaderProps> = ({
   bookACallLinkText,
 }) => {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
-
-  type KeyboardEvent = {
-    isComposing: boolean;
-    key: string;
-  };
+  const container = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const handleToggleNavigation = (kbdEvent: KeyboardEvent): void => {
-      if (kbdEvent.isComposing) return;
-      if (kbdEvent.key === 'Escape' || kbdEvent.key === 'Esc')
+    // @ts-ignore
+    const handleCloseNavigation = (event): void => {
+      if (event.isComposing) return;
+      if (container.current && !container.current.contains(event.target)) {
+        setIsNavigationOpen(false);
+      }
+      if (event.key === 'Escape' || event.key === 'Esc')
         setIsNavigationOpen(false);
     };
 
     if (isNavigationOpen) {
       document.body.classList.add('navbar-open');
-      window.addEventListener('keydown', handleToggleNavigation);
+      window.addEventListener('keydown', handleCloseNavigation);
+      document.addEventListener('focusin', handleCloseNavigation);
+      return () => {
+        window.removeEventListener('keydown', handleCloseNavigation);
+        document.removeEventListener('focusin', handleCloseNavigation);
+      };
     }
+
     if (!isNavigationOpen) {
       document.body.classList.remove('navbar-open');
-      window.removeEventListener('keydown', handleToggleNavigation);
     }
+    return;
   }, [isNavigationOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-20 text-white">
+    <header ref={container} className="fixed inset-x-0 top-0 z-20 text-white">
       <HeaderMenu
         logo={logo}
         isNavigationOpen={isNavigationOpen}
