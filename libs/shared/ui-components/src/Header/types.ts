@@ -9,6 +9,7 @@ export enum LinkVariant {
 }
 
 export type TNavigationLink = {
+  setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
   linkText: string;
   linkUrl: TLink;
   variant: string;
@@ -18,21 +19,24 @@ export type TNavigationDropdown = {
   buttonText: string;
   links: TNavigationLink[];
 } & TBlok &
-  TIsNavigationOpen;
+  TNavigationOpen;
 
 type THeaderNavigationItem = TNavigationLink | TNavigationDropdown;
 
 type THeaderNavigationItems = { navigation: THeaderNavigationItem[] };
 
-type TIsNavigationOpen = { isNavigationOpen: boolean };
+type TNavigationOpen = {
+  isNavigationOpen: boolean;
+  setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
+};
 
 export type THeaderNavigationProviderProps = {
   navigationItem: THeaderNavigationItem;
-} & TIsNavigationOpen;
+} & TNavigationOpen;
 
-export type THeaderNavigationProps = {} & THeaderBookingLinkProps &
+export type THeaderNavigationProps = THeaderBookingLinkProps &
   THeaderNavigationItems &
-  TIsNavigationOpen;
+  TNavigationOpen;
 
 export type THeaderLogoProps = {
   imageSrc: string;
@@ -49,13 +53,11 @@ export type THeaderBookingLinkProps = {
 
 export type THeaderMenuButtonProps = {
   isMenuVisible: boolean;
-  setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
-} & TIsNavigationOpen;
+} & TNavigationOpen;
 
 export type THeaderMenuProps = {
   logo: Maybe<Asset>;
-  setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
-} & TIsNavigationOpen;
+} & TNavigationOpen;
 
 export type THeaderProps = {
   logo: Maybe<Asset>;

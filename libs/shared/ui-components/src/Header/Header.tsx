@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useRef } from 'react';
+import React, { FC, useEffect, useState, useRef } from 'react';
 
 import { HeaderNavigation } from './HeaderNavigation';
 import { HeaderSkipLinks } from './Links/HeaderSkipLinks';
@@ -15,23 +15,26 @@ export const Header: FC<THeaderProps> = ({
   const container = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // @ts-ignore
-    const handleCloseNavigation = (event): void => {
+    const handleKeyboardClose = (event: KeyboardEvent): void => {
       if (event.isComposing) return;
-      if (container.current && !container.current.contains(event.target)) {
-        setIsNavigationOpen(false);
-      }
       if (event.key === 'Escape' || event.key === 'Esc')
         setIsNavigationOpen(false);
     };
 
+    const handleFocusClose = (event: FocusEvent): void => {
+      // @ts-ignore
+      if (container.current && !container.current.contains(event.target)) {
+        setIsNavigationOpen(false);
+      }
+    };
+
     if (isNavigationOpen) {
       document.body.classList.add('navbar-open');
-      window.addEventListener('keydown', handleCloseNavigation);
-      document.addEventListener('focusin', handleCloseNavigation);
+      window.addEventListener('keydown', handleKeyboardClose);
+      document.addEventListener('focusin', handleFocusClose);
       return () => {
-        window.removeEventListener('keydown', handleCloseNavigation);
-        document.removeEventListener('focusin', handleCloseNavigation);
+        window.removeEventListener('keydown', handleKeyboardClose);
+        document.removeEventListener('focusin', handleFocusClose);
       };
     }
 
@@ -51,6 +54,7 @@ export const Header: FC<THeaderProps> = ({
       />
       <HeaderNavigation
         isNavigationOpen={isNavigationOpen}
+        setIsNavigationOpen={setIsNavigationOpen}
         navigation={navigation}
         bookACallLinkText={bookACallLinkText}
       />

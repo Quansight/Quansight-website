@@ -10,6 +10,7 @@ export const HeaderNavigation: FC<THeaderNavigationProps> = ({
   navigation,
   bookACallLinkText,
   isNavigationOpen,
+  setIsNavigationOpen,
 }) => (
   <nav
     className={clsx(
@@ -30,6 +31,7 @@ export const HeaderNavigation: FC<THeaderNavigationProps> = ({
             <HeaderNavigationProvider
               navigationItem={navigationItem}
               isNavigationOpen={isNavigationOpen}
+              setIsNavigationOpen={setIsNavigationOpen}
             />
           </li>
         ))}

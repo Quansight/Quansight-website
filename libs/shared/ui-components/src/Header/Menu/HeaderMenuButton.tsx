@@ -5,12 +5,10 @@ import clsx from 'clsx';
 import { THeaderMenuButtonProps } from '../types';
 
 export const HeaderMenuButton: FC<THeaderMenuButtonProps> = ({
-  isMenuVisible,
   isNavigationOpen,
   setIsNavigationOpen,
 }) => (
   <button
-    tabIndex={isMenuVisible ? 0 : -1}
     aria-expanded={isNavigationOpen ? 'true' : 'false'}
     aria-controls="menu"
     onClick={() => setIsNavigationOpen(!isNavigationOpen)}

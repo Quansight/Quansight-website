@@ -20,8 +20,8 @@ export const HeaderMenu: FC<THeaderMenuProps> = ({
   useEffect(() => {
     const handleSetMenuBackground = (): void => {
       if (typeof window !== 'undefined') {
-        setIsMenuVidible(window.scrollY > menuVisibility ? false : true);
         const menuHeight = container.current?.clientHeight || 70;
+        setIsMenuVidible(window.scrollY > menuVisibility ? false : true);
         setMenuBackground(window.scrollY >= menuHeight ? true : false);
         setMenuVisibility(window.scrollY);
       }
