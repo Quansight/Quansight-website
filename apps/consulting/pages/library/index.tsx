@@ -14,6 +14,7 @@ import { isPageType } from '@quansight/shared/utils';
 
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { Carousel } from '../../components/Carousel/Carousel';
+import { Newsletter } from '../../components/Newsletter/Newsletter';
 import { Tiles } from '../../components/Tiles/Tiles';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
@@ -41,7 +42,7 @@ export const Library: FC<TLibraryProps> = ({
         <Carousel tiles={tiles} />
         {/* TODO: types / categories */}
         <Tiles tiles={tiles} />
-        {/* TODO: newsletter */}
+        <Newsletter />
         {/* TODO: pagination */}
       </div>
     </Layout>
