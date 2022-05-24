@@ -6,7 +6,7 @@ import { Picture } from '../Picture/Picture';
 import { TLogosGridProps } from './types';
 
 export const LogosGrid: FC<TLogosGridProps> = ({ grid }) => (
-  <ul className="flex flex-wrap gap-y-[3rem] justify-center w-full">
+  <ul className="flex flex-wrap gap-y-[2rem] justify-center w-full md:gap-y-[3rem]">
     {grid.map(({ imageSrc, imageAlt }) => (
       <li
         key={imageAlt}

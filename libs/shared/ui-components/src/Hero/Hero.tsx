@@ -12,8 +12,10 @@ export const Hero: FC<THeroProps> = ({
   imageSrc,
   imageAlt,
 }) => {
-  const isLargeHero = variant === HeroVariant.Large;
+  const isLargeHero =
+    variant === HeroVariant.Large || variant === HeroVariant.LargeOverlapping;
   const isMediumHero = variant === HeroVariant.Medium;
+  const isOverlappingHero = variant === HeroVariant.LargeOverlapping;
 
   return (
     <div
@@ -21,6 +23,7 @@ export const Hero: FC<THeroProps> = ({
         'overflow-hidden w-full h-[730px] bg-[#000000]',
         isLargeHero && 'md:h-[970px]',
         isMediumHero && 'md:h-[730px]',
+        isOverlappingHero && 'mb-[-31rem] md:mb-[-51rem]',
       )}
     >
       <div className="relative mx-auto h-full max-w-layout">
@@ -41,8 +44,10 @@ export const Hero: FC<THeroProps> = ({
         >
           <h2
             className={clsx(
-              'text-[5rem] font-extrabold leading-[6rem] text-white font-heading',
-              isLargeHero ? 'mb-12' : 'text-center',
+              'font-extrabold leading-[6rem] text-white font-heading',
+              isLargeHero
+                ? 'mb-[1.5rem] text-[4rem] md:mb-[4rem] md:text-[5rem]'
+                : 'text-[5rem] text-center',
             )}
           >
             {title}
@@ -51,6 +56,7 @@ export const Hero: FC<THeroProps> = ({
             <h3
               className={clsx(
                 'text-[4rem] font-extrabold leading-[4.8rem] text-white font-heading',
+                isLargeHero && 'text-[3rem] md:text-[4rem]',
                 isMediumHero && 'text-center',
               )}
             >
