@@ -2,11 +2,11 @@ import { FC } from 'react';
 
 import clsx from 'clsx';
 
-import { HeaderNavigationProvider } from './HeaderNavigationProvider/HeaderNavigationProvider';
-import { HeaderBookingLink } from './Links/HeaderBookingLink';
-import { THeaderNavigationProps } from './types';
+import { HeaderMobileBookingLink } from './HeaderMobileBookingLink';
+import { HeaderMobileNavigationProvider } from './HeaderMobileNavigationProvider/HeaderNavigationProvider';
+import { THeaderMobileNavigationProps } from './types';
 
-export const HeaderNavigation: FC<THeaderNavigationProps> = ({
+export const HeaderMobileNavigation: FC<THeaderMobileNavigationProps> = ({
   navigation,
   bookACallLinkText,
   isNavigationOpen,
@@ -28,7 +28,7 @@ export const HeaderNavigation: FC<THeaderNavigationProps> = ({
             className="w-full border-b border-b-white"
             key={navigationItem._uid}
           >
-            <HeaderNavigationProvider
+            <HeaderMobileNavigationProvider
               navigationItem={navigationItem}
               isNavigationOpen={isNavigationOpen}
               setIsNavigationOpen={setIsNavigationOpen}
@@ -36,7 +36,7 @@ export const HeaderNavigation: FC<THeaderNavigationProps> = ({
           </li>
         ))}
       </ul>
-      <HeaderBookingLink bookACallLinkText={bookACallLinkText} />
+      <HeaderMobileBookingLink bookACallLinkText={bookACallLinkText} />
     </div>
   </nav>
 );

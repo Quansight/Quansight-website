@@ -3,9 +3,10 @@ import { FC } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import { TNavigationLink, LinkVariant } from '../types';
+import { LinkVariant } from '../../Common/types';
+import { TNavigationMobileLink } from '../types';
 
-export const NavigationLink: FC<TNavigationLink> = ({
+export const NavigationMobileLink: FC<TNavigationMobileLink> = ({
   linkText,
   linkUrl,
   variant = LinkVariant.Navigation,

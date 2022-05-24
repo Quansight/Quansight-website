@@ -3,12 +3,9 @@ import { Dispatch, SetStateAction } from 'react';
 import { Asset, Maybe } from '@quansight/shared/storyblok-sdk';
 import { TBlok, TLink } from '@quansight/shared/types';
 
-export enum LinkVariant {
-  Navigation = 'navigation',
-  Dropdown = 'dropdown',
-}
+import { THeaderSkipLinksProps } from '../Common/types';
 
-export type TNavigationLink = {
+export type TNavigationMobileLink = {
   setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
   linkText: string;
   linkUrl: TLink;
@@ -17,11 +14,11 @@ export type TNavigationLink = {
 
 export type TNavigationDropdown = {
   buttonText: string;
-  links: TNavigationLink[];
+  links: TNavigationMobileLink[];
 } & TBlok &
   TNavigationOpen;
 
-type THeaderNavigationItem = TNavigationLink | TNavigationDropdown;
+type THeaderNavigationItem = TNavigationMobileLink | TNavigationDropdown;
 
 type THeaderNavigationItems = { navigation: THeaderNavigationItem[] };
 
@@ -30,37 +27,28 @@ type TNavigationOpen = {
   setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export type THeaderNavigationProviderProps = {
+export type THeaderMobileNavigationProviderProps = {
   navigationItem: THeaderNavigationItem;
 } & TNavigationOpen;
 
-export type THeaderNavigationProps = THeaderBookingLinkProps &
+export type THeaderMobileNavigationProps = THeaderMobileBookingLinkProps &
   THeaderNavigationItems &
   TNavigationOpen;
 
-export type THeaderLogoProps = {
-  imageSrc: string;
-  imageAlt: string;
-};
-
-export type THeaderSkipLinksProps = {
-  skipLinksText: Maybe<string>;
-};
-
-export type THeaderBookingLinkProps = {
+export type THeaderMobileBookingLinkProps = {
   bookACallLinkText: Maybe<string>;
 };
 
-export type THeaderMenuButtonProps = {
+export type THeaderMobileMenuButtonProps = {
   isMenuVisible: boolean;
 } & TNavigationOpen;
 
-export type THeaderMenuProps = {
+export type THeaderMobileMenuProps = {
   logo: Maybe<Asset>;
 } & TNavigationOpen;
 
-export type THeaderProps = {
+export type THeaderMobileProps = {
   logo: Maybe<Asset>;
 } & THeaderSkipLinksProps &
-  THeaderBookingLinkProps &
+  THeaderMobileBookingLinkProps &
   THeaderNavigationItems;

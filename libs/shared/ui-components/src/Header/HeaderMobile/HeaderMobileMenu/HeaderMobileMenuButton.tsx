@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import clsx from 'clsx';
 
-import { THeaderMenuButtonProps } from '../types';
+import { THeaderMobileMenuButtonProps } from '../types';
 
-export const HeaderMenuButton: FC<THeaderMenuButtonProps> = ({
+export const HeaderMobileMenuButton: FC<THeaderMobileMenuButtonProps> = ({
   isNavigationOpen,
   setIsNavigationOpen,
 }) => (

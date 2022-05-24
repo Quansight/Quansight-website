@@ -2,8 +2,9 @@ import { FC, useState, useEffect } from 'react';
 
 import clsx from 'clsx';
 
-import { TNavigationDropdown, LinkVariant } from '../types';
-import { NavigationLink } from './NavigationLink';
+import { LinkVariant } from '../../Common/types';
+import { TNavigationDropdown } from '../types';
+import { NavigationMobileLink } from './NavigationMobileLink';
 
 export const NavigationDropdown: FC<TNavigationDropdown> = ({
   buttonText,
@@ -38,7 +39,7 @@ export const NavigationDropdown: FC<TNavigationDropdown> = ({
         className={clsx('mb-[0.7rem]', isNavbarItemOpen ? 'block' : 'hidden')}
       >
         {links.map((link) => (
-          <NavigationLink
+          <NavigationMobileLink
             key={link._uid}
             {...link}
             variant={LinkVariant.Dropdown}

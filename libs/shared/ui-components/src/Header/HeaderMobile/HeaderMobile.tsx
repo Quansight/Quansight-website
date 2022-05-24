@@ -1,11 +1,11 @@
 import React, { FC, useEffect, useState, useRef } from 'react';
 
-import { HeaderNavigation } from './HeaderNavigation';
-import { HeaderSkipLinks } from './Links/HeaderSkipLinks';
-import { HeaderMenu } from './Menu/HeaderMenu';
-import { THeaderProps } from './types';
+import { HeaderSkipLinks } from '../Common/HeaderSkipLinks';
+import { HeaderMobileMenu } from './HeaderMobileMenu/HeaderMobileMenu';
+import { HeaderMobileNavigation } from './HeaderMobileNavigation';
+import { THeaderMobileProps } from './types';
 
-export const Header: FC<THeaderProps> = ({
+export const HeaderMobile: FC<THeaderMobileProps> = ({
   logo,
   navigation,
   bookACallLinkText,
@@ -45,14 +45,17 @@ export const Header: FC<THeaderProps> = ({
   }, [isNavigationOpen]);
 
   return (
-    <header ref={container} className="fixed inset-x-0 top-0 z-20 text-white">
+    <header
+      ref={container}
+      className="fixed inset-x-0 top-0 z-20 text-white sm:hidden"
+    >
       <HeaderSkipLinks skipLinksText={skipLinksText} />
-      <HeaderMenu
+      <HeaderMobileMenu
         logo={logo}
         isNavigationOpen={isNavigationOpen}
         setIsNavigationOpen={setIsNavigationOpen}
       />
-      <HeaderNavigation
+      <HeaderMobileNavigation
         isNavigationOpen={isNavigationOpen}
         setIsNavigationOpen={setIsNavigationOpen}
         navigation={navigation}

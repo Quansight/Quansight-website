@@ -2,11 +2,11 @@ import { FC, useState, useEffect, useRef } from 'react';
 
 import clsx from 'clsx';
 
-import { THeaderMenuProps } from '../types';
-import { HeaderLogo } from './HeaderLogo';
-import { HeaderMenuButton } from './HeaderMenuButton';
+import { HeaderLogo } from '../../Common/HeaderLogo';
+import { THeaderMobileMenuProps } from '../types';
+import { HeaderMobileMenuButton } from './HeaderMobileMenuButton';
 
-export const HeaderMenu: FC<THeaderMenuProps> = ({
+export const HeaderMobileMenu: FC<THeaderMobileMenuProps> = ({
   logo,
   isNavigationOpen,
   setIsNavigationOpen,
@@ -42,7 +42,7 @@ export const HeaderMenu: FC<THeaderMenuProps> = ({
       {logo && (
         <HeaderLogo imageSrc={logo.filename} imageAlt={logo.alt || ''} />
       )}
-      <HeaderMenuButton
+      <HeaderMobileMenuButton
         isMenuVisible={isMenuVisible}
         isNavigationOpen={isNavigationOpen}
         setIsNavigationOpen={setIsNavigationOpen}

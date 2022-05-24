@@ -12,9 +12,6 @@ export * from './Button/Button';
 export * from './Form/Form';
 export * from './Form/types';
 
-export * from './Header/Header';
-export * from './Header/types';
-
 export * from './Hero/Hero';
 export * from './Hero/types';
 
