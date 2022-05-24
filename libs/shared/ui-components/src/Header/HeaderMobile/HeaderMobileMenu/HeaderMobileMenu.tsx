@@ -2,8 +2,6 @@ import { FC, useState, useEffect, useRef } from 'react';
 
 import clsx from 'clsx';
 
-import { DomainVariant } from '@quansight/shared/types';
-
 import { HeaderLogo } from '../../Common/HeaderLogo';
 import { THeaderMobileMenuProps } from '../types';
 import { HeaderMobileMenuButton } from './HeaderMobileMenuButton';
@@ -49,7 +47,11 @@ export const HeaderMobileMenu: FC<THeaderMobileMenuProps> = ({
       )}
     >
       {logo && (
-        <HeaderLogo imageSrc={logo.filename} imageAlt={logo.alt || ''} />
+        <HeaderLogo
+          imageSrc={logo.filename}
+          imageAlt={logo.alt || ''}
+          variant={variant}
+        />
       )}
       <HeaderMobileMenuButton
         isMenuVisible={isMenuVisible}

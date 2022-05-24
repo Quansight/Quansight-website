@@ -4,7 +4,7 @@ import { DomainVariant } from '@quansight/shared/types';
 export type THeaderLogoProps = {
   imageSrc: string;
   imageAlt: string;
-};
+} & TVariant;
 
 export type THeaderSkipLinksProps = {
   skipLinksText: Maybe<string>;
