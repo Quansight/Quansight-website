@@ -1,0 +1,96 @@
+query articleItems {
+  ArticleItems {
+    total
+    items {
+      alternates {
+        fullSlug
+        id
+        isFolder
+        name
+        parentId
+        published
+        slug
+      }
+      content {
+        _editable
+        _uid
+        author {
+          alternates {
+            fullSlug
+            id
+            isFolder
+            name
+            parentId
+            published
+            slug
+          }
+          content
+          createdAt
+          firstPublishedAt
+          fullSlug
+          groupId
+          isStartpage
+          id
+          lang
+          metaData
+          name
+          parentId
+          path
+          position
+          publishedAt
+          releaseId
+          slug
+          sortByDate
+          tagList
+          translatedSlugs {
+            lang
+            name
+            path
+          }
+          uuid
+        }
+        category
+        component
+        description
+        postImage {
+          alt
+          copyright
+          filename
+          focus
+          id
+          name
+          title
+        }
+        postTitle
+        publishedDate
+        title
+        type
+        postText
+      }
+      created_at
+      default_full_slug
+      first_published_at
+      full_slug
+      group_id
+      id
+      is_startpage
+      lang
+      meta_data
+      name
+      parent_id
+      path
+      position
+      published_at
+      release_id
+      slug
+      sort_by_date
+      tag_list
+      translated_slugs {
+        lang
+        name
+        path
+      }
+      uuid
+    }
+  }
+}

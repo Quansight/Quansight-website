@@ -7,10 +7,11 @@ import clsx from 'clsx';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 
-import { Api, FooterItem } from '@quansight/shared/storyblok-sdk';
 import { ISlugParams } from '@quansight/shared/types';
 import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
 
+import { FooterItem } from '../../api/types/basic';
+import { getFooter } from '../../api/utils/getFooter';
 import { LinkWithArrow } from '../../components/LinkWithArrow/LinkWithArrow';
 import { FeaturedPosts } from '../../components/Post/PostMetaSection/FeaturedPosts/FeaturedPosts';
 import { PostMetaSection } from '../../components/Post/PostMetaSection/PostMetaSection';
@@ -94,7 +95,7 @@ export const getStaticProps: GetStaticProps<
   ISlugParams
 > = async ({ params: { slug } }) => {
   const post = await getPost(slug);
-  const { data: footer } = await Api.getFooterItem();
+  const footer = await getFooter();
   const featuredPosts = await getPostsByCategory(
     post.meta.category,
     post.slug,
@@ -104,7 +105,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       post,
-      footer: footer.FooterItem,
+      footer: footer,
       featuredPosts,
     },
   };

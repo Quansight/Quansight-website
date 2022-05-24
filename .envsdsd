@@ -1,0 +1,9 @@
+# # available on server side
+# # STORYBLOK_PREVIEW_TOKEN=apEnPrl5h6DyKtKSQ9VrLgtt
+# STORYBLOK_PREVIEW_TOKEN=yKNEZRZDg1BCdiFIxULZYwtt
+
+# # available on client side
+# # NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN=apEnPrl5h6DyKtKSQ9VrLgtt
+# NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN=yKNEZRZDg1BCdiFIxULZYwtt
+
+STORYBLOK_API_URL=https://gapi.storyblok.com/v1/api

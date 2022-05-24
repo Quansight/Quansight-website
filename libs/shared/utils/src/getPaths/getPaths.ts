@@ -1,9 +1,9 @@
-import { TLinkEntry } from '@quansight/shared/types';
-
 import { isSlugRestricted } from './isSlugRestricted';
 import { TGetPaths } from './types';
 
-export const getPaths = (items: TLinkEntry[]): TGetPaths[] =>
+export const getPaths = <LinkEntry extends { isFolder: boolean; slug: string }>(
+  items: LinkEntry[],
+): TGetPaths[] =>
   items
     .filter(({ isFolder, slug }) => slug && !isFolder && isSlugRestricted(slug))
     .map(({ slug }) => ({

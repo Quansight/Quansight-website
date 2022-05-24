@@ -5,9 +5,10 @@ import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 
-import { FooterItem, Api } from '@quansight/shared/storyblok-sdk';
+import { FooterItem } from '@quansight/shared/storyblok-sdk';
 import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
 
+import { getFooter } from '../../api';
 import { CategoryList } from '../../components/Posts/CategoryList/CategoryList';
 import { PostListItem } from '../../components/Posts/PostListItem/PostListItem';
 import { DEFAULT_API_OFFSET } from '../../services/api/posts/constants';
@@ -166,13 +167,13 @@ const BlogListPage: FC<BlogListPageProps> = ({
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data: footer } = await Api.getFooterItem();
+  const footer = await getFooter();
   const categories = await getCategories();
   const { items } = await getAllPosts();
 
   return {
     props: {
-      footer: footer.FooterItem,
+      footer,
       categoryList: categories,
       posts: items,
     },

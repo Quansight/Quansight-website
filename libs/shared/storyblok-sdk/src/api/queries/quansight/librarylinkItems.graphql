@@ -1,0 +1,136 @@
+query librarylinkItems {
+  LibrarylinkItems {
+    items {
+      content {
+        type
+        publishedDate
+        postTitle
+        postImage {
+          alt
+          filename
+          copyright
+          focus
+          id
+          name
+          title
+        }
+        category
+        _uid
+        component
+        author {
+          content
+          alternates {
+            fullSlug
+            id
+            name
+            parentId
+            isFolder
+            published
+            slug
+          }
+          createdAt
+          firstPublishedAt
+          fullSlug
+          groupId
+          id
+          isStartpage
+          lang
+          metaData
+          name
+          parentId
+          path
+          position
+          publishedAt
+          releaseId
+          slug
+          sortByDate
+          tagList
+          translatedSlugs {
+            lang
+            name
+            path
+          }
+          uuid
+        }
+        _editable
+        resourceLink {
+          cachedUrl
+          email
+          fieldtype
+          id
+          linktype
+          url
+          story {
+            uuid
+            translatedSlugs {
+              lang
+              name
+              path
+            }
+            tagList
+            sortByDate
+            slug
+            releaseId
+            publishedAt
+            position
+            path
+            parentId
+            name
+            metaData
+            lang
+            isStartpage
+            id
+            groupId
+            fullSlug
+            firstPublishedAt
+            createdAt
+            content
+            alternates {
+              fullSlug
+              id
+              isFolder
+              name
+              parentId
+              published
+              slug
+            }
+          }
+        }
+      }
+      alternates {
+        fullSlug
+        id
+        isFolder
+        name
+        parentId
+        published
+        slug
+      }
+      uuid
+      translated_slugs {
+        lang
+        name
+        path
+      }
+      tag_list
+      sort_by_date
+      slug
+      release_id
+      published_at
+      position
+      path
+      parent_id
+      name
+      meta_data
+      lang
+      is_startpage
+      id
+      group_id
+      full_slug
+      first_published_at
+      default_full_slug
+      created_at
+    }
+    total
+  }
+}

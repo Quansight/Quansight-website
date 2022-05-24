@@ -2,12 +2,16 @@ import { FC } from 'react';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { Api, usePreviewMode } from '@quansight/shared/storyblok-sdk';
+import { usePreviewMode } from '@quansight/shared/storyblok-sdk';
 import { ISlugParams, TArticleProps } from '@quansight/shared/types';
 import { Layout, SEO, DomainVariant } from '@quansight/shared/ui-components';
 
 import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
 import { getArticlesPaths } from '../../utils/getArticlesPaths/getArticlesPaths';
+
+import { getArticleItem } from '../../api/utils/getArticleItem';
+import { getFooter } from '../../api/utils/getFooter';
+import { getLinks } from '../../api/utils/getLinks';
 
 const Article: FC<TArticleProps> = ({ data, footer, preview }) => {
   usePreviewMode(preview);
@@ -31,9 +35,9 @@ const Article: FC<TArticleProps> = ({ data, footer, preview }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await Api.getLinks();
+  const links = await getLinks();
   return {
-    paths: getArticlesPaths(data?.Links.items),
+    paths: getArticlesPaths(links),
     fallback: false,
   };
 };
@@ -42,14 +46,14 @@ export const getStaticProps: GetStaticProps<
   TArticleProps,
   ISlugParams
 > = async ({ params: { slug }, preview = false }) => {
-  const { data } = await Api.getArticleItem({
+  const data = await getArticleItem({
     slug: `${ARTICLES_DIRECTORY_SLUG}${slug}`,
   });
-  const { data: footer } = await Api.getFooterItem();
+  const footer = await getFooter();
   return {
     props: {
-      data: data.ArticleItem,
-      footer: footer.FooterItem,
+      data,
+      footer,
       preview,
     },
   };

@@ -14,10 +14,10 @@ query Team {
           alt
         }
         projects
-        githubLink {
-          url
-        }
-        githubNick
+        # githubLink {
+        #   url
+        # }
+        # githubNick
       }
     }
   }

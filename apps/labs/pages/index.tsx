@@ -2,17 +2,14 @@ import React, { FC } from 'react';
 
 import { GetStaticProps } from 'next';
 
-import { Api } from '@quansight/shared/storyblok-sdk';
 import { ISlugParams, TContainerProps } from '@quansight/shared/types';
-import {
-  Page,
-  Layout,
-  SEO,
-  DomainVariant,
-} from '@quansight/shared/ui-components';
+import { Layout, SEO, DomainVariant } from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
+import { getFooter } from '../api';
+import { getPage } from '../api/utils/getPage';
 import { BlokProvider } from '../components/BlokProvider/BlokProvider';
+import { Page } from '../components/Page/Page';
 import { TRawBlok } from '../types/storyblok/bloks/rawBlock';
 
 export const Index: FC<TContainerProps> = ({ data, footer, preview }) => (
@@ -34,12 +31,12 @@ export const getStaticProps: GetStaticProps<
   TContainerProps,
   ISlugParams
 > = async () => {
-  const { data } = await Api.getPageItem({ slug: 'labs' });
-  const { data: footer } = await Api.getFooterItem();
+  const data = await getPage({ slug: 'labs' });
+  const footer = await getFooter();
   return {
     props: {
-      data: data.PageItem,
-      footer: footer.FooterItem,
+      data: data,
+      footer: footer,
       preview: false,
     },
   };
