@@ -2,8 +2,13 @@ import React, { FC } from 'react';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { ISlugParams, TContainerProps } from '@quansight/shared/types';
-import { Layout, SEO, DomainVariant } from '@quansight/shared/ui-components';
+import { ISlugParams } from '@quansight/shared/types';
+import {
+  Layout,
+  SEO,
+  DomainVariant,
+  Footer,
+} from '@quansight/shared/ui-components';
 import { isPageType, getPaths } from '@quansight/shared/utils';
 
 import { getFooter, LinkEntry } from '../../api';
@@ -11,10 +16,11 @@ import { getLinks } from '../../api/utils/getLinks';
 import { getPage } from '../../api/utils/getPage';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { Page } from '../../components/Page/Page';
+import { TContainerProps } from '../../types/containerProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlock';
 
 const Container: FC<TContainerProps> = ({ data, footer, preview }) => (
-  <Layout footer={footer}>
+  <Layout footer={<Footer {...footer.content} />}>
     <SEO
       title={data.content.title}
       description={data.content.description}

@@ -15,7 +15,6 @@
     "affected:lint-styles": "nx affected --target=stylelint",
     "affected:lint": "nx affected --target=lint",
     "lint-styles": "nx run-many --target=stylelint --all",
-    "codegen": "cross-env DOTENV_CONFIG_PATH=./.env graphql-codegen --config codegen.yml -r dotenv/config",
     "codegen:quansight": "cross-env DOTENV_CONFIG_PATH=./apps/consulting/.env graphql-codegen --config codegen-quansight.yml -r dotenv/config",
     "codegen:labs": "cross-env DOTENV_CONFIG_PATH=./apps/labs/.env graphql-codegen --config codegen-labs.yml -r dotenv/config"
   },

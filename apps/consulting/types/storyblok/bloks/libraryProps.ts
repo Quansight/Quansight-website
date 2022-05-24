@@ -1,4 +1,4 @@
-import { FooterItem, PageItem } from '@quansight/shared/storyblok-sdk';
+import { FooterItem, PageItem } from '../../../api/types/basic';
 
 export enum LinkTarget {
   Internal = 'internal',

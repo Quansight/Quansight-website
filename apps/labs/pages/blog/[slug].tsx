@@ -8,7 +8,12 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 
 import { ISlugParams } from '@quansight/shared/types';
-import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
+import {
+  DomainVariant,
+  Footer,
+  Layout,
+  SEO,
+} from '@quansight/shared/ui-components';
 
 import { FooterItem } from '../../api/types/basic';
 import { getFooter } from '../../api/utils/getFooter';
@@ -37,7 +42,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
   }
 
   return (
-    <Layout footer={footer}>
+    <Layout footer={<Footer {...footer.content} />}>
       <SEO
         title={post.meta.title}
         description={post.meta.description}

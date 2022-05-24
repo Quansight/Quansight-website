@@ -36,3 +36,6 @@ export * from './Teaser/types';
 
 export * from './Team/Team';
 export * from './Team/types';
+
+export * from './Footer/Footer';
+export * from './Footer/types';

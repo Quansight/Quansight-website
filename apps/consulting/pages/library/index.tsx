@@ -2,8 +2,13 @@ import React, { FC } from 'react';
 
 import { GetStaticProps } from 'next';
 
-import { ISlugParams, TLibraryProps } from '@quansight/shared/types';
-import { Layout, SEO, DomainVariant } from '@quansight/shared/ui-components';
+import { ISlugParams } from '@quansight/shared/types';
+import {
+  Layout,
+  SEO,
+  DomainVariant,
+  Footer,
+} from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
 import { getArticleItems } from '../../api/utils/getArticleItems';
@@ -15,6 +20,7 @@ import { Carousel } from '../../components/Carousel/Carousel';
 import { Newsletter } from '../../components/Newsletter/Newsletter';
 import { Page } from '../../components/Page/Page';
 import { Tiles } from '../../components/Tiles/Tiles';
+import { TLibraryProps } from '../../types/storyblok/bloks/libraryProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
 
@@ -25,7 +31,7 @@ export const Library: FC<TLibraryProps> = ({
   preview,
 }) => {
   return (
-    <Layout footer={footer}>
+    <Layout footer={<Footer {...footer.content} />}>
       <SEO
         title={data.content.title}
         description={data.content.description}

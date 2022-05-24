@@ -3,22 +3,27 @@ import { FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { usePreviewMode } from '@quansight/shared/storyblok-sdk';
-import { ISlugParams, TArticleProps } from '@quansight/shared/types';
-import { Layout, SEO, DomainVariant } from '@quansight/shared/ui-components';
-
-import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
-import { getArticlesPaths } from '../../utils/getArticlesPaths/getArticlesPaths';
+import { ISlugParams } from '@quansight/shared/types';
+import {
+  Layout,
+  SEO,
+  DomainVariant,
+  Footer,
+} from '@quansight/shared/ui-components';
 
 import { getArticleItem } from '../../api/utils/getArticleItem';
 import { getFooter } from '../../api/utils/getFooter';
 import { getLinks } from '../../api/utils/getLinks';
+import { TArticleProps } from '../../types/storyblok/bloks/articleProps';
+import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
+import { getArticlesPaths } from '../../utils/getArticlesPaths/getArticlesPaths';
 
 const Article: FC<TArticleProps> = ({ data, footer, preview }) => {
   usePreviewMode(preview);
   const { content } = data;
 
   return (
-    <Layout footer={footer}>
+    <Layout footer={<Footer {...footer.content} />}>
       <SEO
         title={content.title}
         description={content.description}
