@@ -2,6 +2,7 @@ import { TypeValuesUnion } from '@quansight/shared/types';
 import {
   TFormProps,
   THeroProps,
+  TLogosProps,
   TStatuteProps,
   TTeaserProps,
   TTeamProps,
@@ -31,6 +32,7 @@ export enum ComponentType {
   Hero = 'hero',
   IntertwinedArticle = 'intertwined-article',
   JobList = 'job-list',
+  Logos = 'logos',
   Related = 'related',
   Statute = 'statute',
   StickyNotes = 'sticky-notes',
@@ -51,6 +53,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Hero]: THeroProps;
   [ComponentType.IntertwinedArticle]: TIntertwinedArticleProps;
   [ComponentType.JobList]: TJobListProps;
+  [ComponentType.Logos]: TLogosProps;
   [ComponentType.Related]: TRelatedProps;
   [ComponentType.Statute]: TStatuteProps;
   [ComponentType.StickyNotes]: TStickyNotesProps;

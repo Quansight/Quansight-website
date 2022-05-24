@@ -1,6 +1,7 @@
 export enum HeroVariant {
   Medium = 'medium',
   Large = 'large',
+  LargeOverlapping = 'large-overlapping',
 }
 
 export type THeroProps = {

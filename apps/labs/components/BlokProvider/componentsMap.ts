@@ -1,5 +1,7 @@
+import { Logos } from '@quansight/shared/ui-components';
+
 import { ColumnArticle } from '../ColumnArticle/ColumnArticle';
-import { Logos } from '../Logos/Logos';
+
 import { ComponentType } from './types';
 
 export const componentsMap = {

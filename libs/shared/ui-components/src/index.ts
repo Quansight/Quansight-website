@@ -18,6 +18,9 @@ export * from './Header/types';
 export * from './Hero/Hero';
 export * from './Hero/types';
 
+export * from './Logos/Logos';
+export * from './Logos/types';
+
 export * from './Picture/Picture';
 export * from './Picture/types';
 

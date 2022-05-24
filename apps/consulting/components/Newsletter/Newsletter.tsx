@@ -16,7 +16,7 @@ export const Newsletter: FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitted },
+    formState: { errors },
   } = useForm<SubscriberValues>();
   const [newsletterState, setNewsletterState] = useState<NewsletterStates>(
     NewsletterStates.Default,
