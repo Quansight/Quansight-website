@@ -15,7 +15,7 @@ export const LogosGrid: FC<TLogosGridProps> = ({ grid }) => (
           grid.length === 6 ? 'lg:w-2/12' : 'lg:w-1/5',
         )}
       >
-        <div className="relative w-auto h-[5rem]">
+        <div className="relative w-auto h-[5.3rem]">
           <Picture
             imageSrc={imageSrc}
             imageAlt={imageAlt}
