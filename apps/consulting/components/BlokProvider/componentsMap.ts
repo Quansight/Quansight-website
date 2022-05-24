@@ -1,6 +1,7 @@
 import {
   Form,
   Hero,
+  Logos,
   Statute,
   Teaser,
   Team,
@@ -31,6 +32,7 @@ export const componentsMap = {
   [ComponentType.Hero]: Hero,
   [ComponentType.IntertwinedArticle]: IntertwinedArticle,
   [ComponentType.JobList]: JobList,
+  [ComponentType.Logos]: Logos,
   [ComponentType.Related]: Related,
   [ComponentType.Statute]: Statute,
   [ComponentType.StickyNotes]: StickyNotes,

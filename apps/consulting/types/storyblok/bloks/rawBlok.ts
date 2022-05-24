@@ -8,6 +8,7 @@ import { TFormRawData } from './form';
 import { THeroRawData } from './hero';
 import { TIntertwinedArticleRawData } from './intertwinedArticle';
 import { TJobListRawData } from './jobList';
+import { TLogosRawData } from './logos';
 import { TRelatedRawData } from './related';
 import { TStatuteRawData } from './statute';
 import { TStickyNotesRawData } from './stickyNotes';
@@ -27,6 +28,7 @@ export type TRawBlok =
   | THeroRawData
   | TIntertwinedArticleRawData
   | TJobListRawData
+  | TLogosRawData
   | TRelatedRawData
   | TStatuteRawData
   | TStickyNotesRawData
