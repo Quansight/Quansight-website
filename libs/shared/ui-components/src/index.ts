@@ -1,4 +1,6 @@
 export * from './Layout/Layout';
+export * from './Layout/types';
+
 export * from './Meta/Meta';
 export * from './Page/Page';
 

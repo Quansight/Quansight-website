@@ -3,13 +3,12 @@ import React, { FC } from 'react';
 import { GetStaticProps } from 'next';
 
 import { Api } from '@quansight/shared/storyblok-sdk';
-import { ISlugParams, TLibraryProps } from '@quansight/shared/types';
 import {
-  Page,
-  Layout,
-  SEO,
+  ISlugParams,
+  TLibraryProps,
   DomainVariant,
-} from '@quansight/shared/ui-components';
+} from '@quansight/shared/types';
+import { Page, Layout, SEO } from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
@@ -27,7 +26,7 @@ export const Library: FC<TLibraryProps> = ({
   preview,
 }) => {
   return (
-    <Layout footer={footer} header={header}>
+    <Layout footer={footer} header={header} variant={DomainVariant.Quansight}>
       <SEO
         title={data.content.title}
         description={data.content.description}

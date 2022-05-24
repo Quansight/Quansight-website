@@ -10,9 +10,10 @@ export const HeaderMobile: FC<THeaderMobileProps> = ({
   navigation,
   bookACallLinkText,
   skipLinksText,
+  variant,
 }) => {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
-  const container = useRef<HTMLElement>(null);
+  const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleKeyboardClose = (event: KeyboardEvent): void => {
@@ -45,22 +46,21 @@ export const HeaderMobile: FC<THeaderMobileProps> = ({
   }, [isNavigationOpen]);
 
   return (
-    <header
-      ref={container}
-      className="fixed inset-x-0 top-0 z-20 text-white sm:hidden"
-    >
+    <div ref={container} className="sm:hidden">
       <HeaderSkipLinks skipLinksText={skipLinksText} />
       <HeaderMobileMenu
         logo={logo}
         isNavigationOpen={isNavigationOpen}
         setIsNavigationOpen={setIsNavigationOpen}
+        variant={variant}
       />
       <HeaderMobileNavigation
         isNavigationOpen={isNavigationOpen}
         setIsNavigationOpen={setIsNavigationOpen}
         navigation={navigation}
         bookACallLinkText={bookACallLinkText}
+        variant={variant}
       />
-    </header>
+    </div>
   );
 };

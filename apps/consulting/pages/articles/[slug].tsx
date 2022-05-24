@@ -3,8 +3,12 @@ import { FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { Api, usePreviewMode } from '@quansight/shared/storyblok-sdk';
-import { ISlugParams, TArticleProps } from '@quansight/shared/types';
-import { Layout, SEO, DomainVariant } from '@quansight/shared/ui-components';
+import {
+  ISlugParams,
+  TArticleProps,
+  DomainVariant,
+} from '@quansight/shared/types';
+import { Layout, SEO } from '@quansight/shared/ui-components';
 
 import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
 import { getArticlesPaths } from '../../utils/getArticlesPaths/getArticlesPaths';
@@ -14,7 +18,7 @@ const Article: FC<TArticleProps> = ({ data, footer, header, preview }) => {
   const { content } = data;
 
   return (
-    <Layout footer={footer} header={header}>
+    <Layout footer={footer} header={header} variant={DomainVariant.Quansight}>
       <SEO
         title={content.title}
         description={content.description}

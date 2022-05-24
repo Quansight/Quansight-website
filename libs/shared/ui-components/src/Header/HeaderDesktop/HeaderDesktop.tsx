@@ -3,5 +3,5 @@ import { FC } from 'react';
 
 import { THeaderDesktopProps } from './types';
 export const HeaderDesktop: FC<THeaderDesktopProps> = () => {
-  return <header className="hidden sm:block">HeaderDesktop</header>;
+  return <div className="hidden sm:block">HeaderDesktop</div>;
 };

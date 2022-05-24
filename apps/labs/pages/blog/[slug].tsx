@@ -8,8 +8,8 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 
 import { Api, FooterItem, HeaderItem } from '@quansight/shared/storyblok-sdk';
-import { ISlugParams } from '@quansight/shared/types';
-import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
+import { ISlugParams, DomainVariant } from '@quansight/shared/types';
+import { Layout, SEO } from '@quansight/shared/ui-components';
 
 import { LinkWithArrow } from '../../components/LinkWithArrow/LinkWithArrow';
 import { FeaturedPosts } from '../../components/Post/PostMetaSection/FeaturedPosts/FeaturedPosts';
@@ -38,7 +38,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
   }
 
   return (
-    <Layout footer={footer} header={header}>
+    <Layout footer={footer} header={header} variant={DomainVariant.Labs}>
       <SEO
         title={post.meta.title}
         description={post.meta.description}

@@ -3,20 +3,19 @@ import React, { FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { Api } from '@quansight/shared/storyblok-sdk';
-import { ISlugParams, TContainerProps } from '@quansight/shared/types';
 import {
-  Page,
-  Layout,
-  SEO,
+  ISlugParams,
+  TContainerProps,
   DomainVariant,
-} from '@quansight/shared/ui-components';
+} from '@quansight/shared/types';
+import { Page, Layout, SEO } from '@quansight/shared/ui-components';
 import { isPageType, getPaths } from '@quansight/shared/utils';
 
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlock';
 
 const Container: FC<TContainerProps> = ({ data, footer, header, preview }) => (
-  <Layout footer={footer} header={header}>
+  <Layout footer={footer} header={header} variant={DomainVariant.Labs}>
     <SEO
       title={data.content.title}
       description={data.content.description}

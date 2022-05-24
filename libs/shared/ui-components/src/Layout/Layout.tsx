@@ -1,30 +1,27 @@
-import { FC, ReactNode } from 'react';
-
-import { FooterItem, HeaderItem } from '@quansight/shared/storyblok-sdk';
+import { FC } from 'react';
 
 import { Footer } from '../Footer/Footer';
-// import { HeaderDesktop } from '../Header/HeaderDesktop/HeaderDesktop';
+import { HeaderDesktop } from '../Header/HeaderDesktop/HeaderDesktop';
 import { HeaderMobile } from '../Header/HeaderMobile/HeaderMobile';
+import { TLayoutProps } from './types';
 
-export type TLayoutProps = {
-  children: ReactNode;
-  footer: FooterItem;
-  header: HeaderItem;
-};
-
-export const Layout: FC<TLayoutProps> = ({ children, footer, header }) => {
-  return (
-    <div>
-      {header?.content && <HeaderMobile {...header.content} />}
-      {/* @TODO */}
-      {/* {header?.content && <HeaderDesktop {...header.content} />} */}
-      <div className="flex justify-center items-center w-full h-screen text-white bg-[#000]">
-        <button onClick={() => console.log('Hello')}>Click Me</button>
-      </div>
-      <main id="maincontent">{children}</main>
-      {footer?.content && <Footer {...footer.content} />}
+export const Layout: FC<TLayoutProps> = ({
+  children,
+  footer,
+  header,
+  variant,
+}) => (
+  <div>
+    {header?.content && (
+      <header className="fixed inset-x-0 top-0 z-20 text-white ">
+        <HeaderMobile {...header.content} variant={variant} />
+        <HeaderDesktop />
+      </header>
+    )}
+    <div className="flex justify-center items-center w-full h-screen text-white bg-[#000]">
+      <button onClick={() => console.log('Hello')}>Click Me</button>
     </div>
-  );
-};
-
-export default Layout;
+    <main id="maincontent">{children}</main>
+    {footer?.content && <Footer {...footer.content} />}
+  </div>
+);

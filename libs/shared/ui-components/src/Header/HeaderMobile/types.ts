@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { Asset, Maybe } from '@quansight/shared/storyblok-sdk';
 import { TBlok, TLink } from '@quansight/shared/types';
 
-import { THeaderSkipLinksProps } from '../Common/types';
+import { THeaderSkipLinksProps, TVariant } from '../Common/types';
 
 export type TNavigationMobileLink = {
   setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
@@ -33,7 +33,8 @@ export type THeaderMobileNavigationProviderProps = {
 
 export type THeaderMobileNavigationProps = THeaderMobileBookingLinkProps &
   THeaderNavigationItems &
-  TNavigationOpen;
+  TNavigationOpen &
+  TVariant;
 
 export type THeaderMobileBookingLinkProps = {
   bookACallLinkText: Maybe<string>;
@@ -45,10 +46,12 @@ export type THeaderMobileMenuButtonProps = {
 
 export type THeaderMobileMenuProps = {
   logo: Maybe<Asset>;
-} & TNavigationOpen;
+} & TNavigationOpen &
+  TVariant;
 
 export type THeaderMobileProps = {
   logo: Maybe<Asset>;
 } & THeaderSkipLinksProps &
   THeaderMobileBookingLinkProps &
-  THeaderNavigationItems;
+  THeaderNavigationItems &
+  TVariant;

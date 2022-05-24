@@ -6,7 +6,8 @@ import { useRouter } from 'next/router';
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 
 import { FooterItem, HeaderItem, Api } from '@quansight/shared/storyblok-sdk';
-import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
+import { DomainVariant } from '@quansight/shared/types';
+import { Layout, SEO } from '@quansight/shared/ui-components';
 
 import { CategoryList } from '../../components/Posts/CategoryList/CategoryList';
 import { PostListItem } from '../../components/Posts/PostListItem/PostListItem';
@@ -103,7 +104,7 @@ const BlogListPage: FC<BlogListPageProps> = ({
   }, [router.isReady]);
 
   return (
-    <Layout footer={footer} header={header}>
+    <Layout footer={footer} header={header} variant={DomainVariant.Labs}>
       <SEO
         title="Blog"
         description="This is a blog list page"

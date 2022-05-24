@@ -2,6 +2,8 @@ import { FC, useState, useEffect, useRef } from 'react';
 
 import clsx from 'clsx';
 
+import { DomainVariant } from '@quansight/shared/types';
+
 import { HeaderLogo } from '../../Common/HeaderLogo';
 import { THeaderMobileMenuProps } from '../types';
 import { HeaderMobileMenuButton } from './HeaderMobileMenuButton';
@@ -10,6 +12,7 @@ export const HeaderMobileMenu: FC<THeaderMobileMenuProps> = ({
   logo,
   isNavigationOpen,
   setIsNavigationOpen,
+  variant,
 }) => {
   const [menuBackground, setMenuBackground] = useState(false);
   const [menuVisibility, setMenuVisibility] = useState(0);
@@ -30,12 +33,18 @@ export const HeaderMobileMenu: FC<THeaderMobileMenuProps> = ({
     window.addEventListener('scroll', handleSetMenuBackground);
     return () => window.removeEventListener('scroll', handleSetMenuBackground);
   }, [menuVisibility]);
+
   return (
     <div
       ref={container}
       className={clsx(
         'flex absolute z-40 justify-between items-center px-[2rem] pb-1 w-full transition-all motion-reduce:transition-none duration-300 ease-in-out',
-        menuBackground ? 'bg-black' : 'bg-transparent',
+
+        menuBackground
+          ? variant === 'Quansight'
+            ? 'bg-black'
+            : 'bg-violet'
+          : 'bg-transparent',
         isMenuVisible ? 'translate-y-0' : '-translate-y-full',
       )}
     >

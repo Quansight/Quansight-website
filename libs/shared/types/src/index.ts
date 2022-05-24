@@ -1,3 +1,4 @@
+export * from './utils/DomainVariant';
 export * from './utils/TypeValuesUnion';
 export * from './utils/image';
 export * from './utils/link';
