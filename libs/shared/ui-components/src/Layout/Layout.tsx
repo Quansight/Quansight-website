@@ -18,9 +18,6 @@ export const Layout: FC<TLayoutProps> = ({
         <HeaderDesktop />
       </header>
     )}
-    <div className="flex justify-center items-center w-full h-screen text-white bg-[#000]">
-      <button onClick={() => console.log('Hello')}>Click Me</button>
-    </div>
     <main id="maincontent">{children}</main>
     {footer?.content && <Footer {...footer.content} />}
   </div>
