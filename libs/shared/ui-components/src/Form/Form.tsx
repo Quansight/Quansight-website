@@ -3,6 +3,8 @@ import { FC, useState } from 'react';
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 
+import { sendFormData, FormValues } from '@quansight/shared/utils';
+
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { Textarea } from '../Textarea/Textarea';
@@ -10,8 +12,8 @@ import { FormError } from './FormError';
 import { FormHeader } from './FormHeader';
 import { FormImage } from './FormImage';
 import { FormSuccess } from './FormSuccess';
-import { FormValues, FormStates, TFormProps } from './types';
-import { getFormHeader, sendFormData } from './utils';
+import { FormStates, TFormProps } from './types';
+import { getFormHeader } from './utils';
 
 export const backgroundStyles = `
   before:absolute before:top-0 before:left-0 before:z-0 before:w-full before:h-full before:bg-lightgray
