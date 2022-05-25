@@ -16,6 +16,9 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
+      "parserOptions": {
+        "project": ["apps/labs/tsconfig.json"]
+      },
       "rules": {}
     },
     {

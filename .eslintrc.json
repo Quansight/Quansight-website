@@ -2,6 +2,22 @@
   "root": true,
   "ignorePatterns": ["**/*"],
   "plugins": ["@nrwl/nx"],
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "import/internal-regex": "^@quansight"
+  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -23,8 +39,72 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {}
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint"],
+      "extends": [
+        "airbnb-typescript",
+        "plugin:@typescript-eslint/recommended",
+        "prettier"
+      ],
+      "rules": {
+        "@typescript-eslint/ban-ts-comment": ["off"],
+        "@typescript-eslint/ban-ts-ignore": ["off"],
+        "@typescript-eslint/ban-types": [
+          "error",
+          {
+            "types": {
+              "Function": false,
+              "Object": false,
+              "object": false,
+              "{}": false
+            }
+          }
+        ],
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          { "allowTypedFunctionExpressions": true, "allowExpressions": true }
+        ],
+        "@typescript-eslint/indent": ["off"],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": ["enum", "enumMember"],
+            "format": ["PascalCase"]
+          }
+        ],
+        "@typescript-eslint/no-shadow": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/prefer-interface": ["off"],
+        "@typescript-eslint/no-explicit-any": ["error"],
+        "@typescript-eslint/explicit-module-boundary-types": ["warn"],
+        "@typescript-eslint/default-param-last": ["off"],
+        "no-multiple-empty-lines": "error",
+        "import/order": [
+          "error",
+          {
+            "groups": [
+              "builtin",
+              "external",
+              "internal",
+              ["sibling", "parent", "index"],
+              "unknown"
+            ],
+            "pathGroups": [
+              {
+                "pattern": "react",
+                "patternOptions": { "matchBase": true },
+                "group": "external",
+                "position": "before"
+              }
+            ],
+            "pathGroupsExcludedImportTypes": [],
+            "alphabetize": {
+              "order": "asc"
+            },
+            "newlines-between": "always"
+          }
+        ]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
@@ -33,7 +113,24 @@
     },
     {
       "files": ["*.css", "*.tsx", "*.jsx", ".html"],
-      "extends": ["plugin:tailwindcss/recommended"]
+      "extends": ["plugin:tailwindcss/recommended"],
+      "rules": {
+        "tailwindcss/no-custom-classname": ["off"]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:jsx-a11y/recommended"],
+      "rules": {
+        "jsx-a11y/anchor-is-valid": [
+          "error",
+          {
+            "components": ["Link"],
+            "specialLink": ["hrefLeft", "hrefRight"],
+            "aspects": ["invalidHref", "preferButton"]
+          }
+        ]
+      }
     }
   ]
 }

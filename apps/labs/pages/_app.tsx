@@ -1,18 +1,16 @@
-import { AppProps } from 'next/app'
-import Head from 'next/head'
-import './styles.css'
+import { AppProps } from 'next/app';
 
-function CustomApp({ Component, pageProps }: AppProps) {
+import { Meta } from '@quansight/shared/ui-components';
+import './styles.css';
+import '@code-hike/mdx/dist/index.css';
+
+function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <>
-      <Head>
-        <title>Welcome to labs!</title>
-      </Head>
-      <main>
-        <Component {...pageProps} />
-      </main>
+      <Meta />
+      <Component {...pageProps} />
     </>
-  )
+  );
 }
 
-export default CustomApp
+export default CustomApp;

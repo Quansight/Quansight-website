@@ -14,7 +14,16 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@quansight/shared/storyblok-sdk": [
+        "libs/shared/storyblok-sdk/src/index.ts"
+      ],
+      "@quansight/shared/types": ["libs/shared/types/src/index.ts"],
+      "@quansight/shared/ui-components": [
+        "libs/shared/ui-components/src/index.ts"
+      ],
+      "@quansight/shared/utils": ["libs/shared/utils/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

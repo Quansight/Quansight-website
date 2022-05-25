@@ -1,0 +1,10 @@
+query links {
+  Links {
+    items {
+      id
+      slug
+      isFolder
+      name
+    }
+  }
+}
