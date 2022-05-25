@@ -11,8 +11,8 @@ import {
 } from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
-import { getArticleItems } from '../../api/utils/getArticleItems';
 import { getFooter } from '../../api/utils/getFooter';
+import { getLibraryArticleItems } from '../../api/utils/getLibraryArticleItems';
 import { getLibraryLinkItems } from '../../api/utils/getLibraryLinkItems';
 import { getPage } from '../../api/utils/getPage';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
@@ -29,30 +29,28 @@ export const Library: FC<TLibraryProps> = ({
   footer,
   tiles,
   preview,
-}) => {
-  return (
-    <Layout footer={<Footer {...footer.content} />}>
-      <SEO
-        title={data.content.title}
-        description={data.content.description}
-        variant={DomainVariant.Quansight}
-      />
+}) => (
+  <Layout footer={<Footer {...footer.content} />}>
+    <SEO
+      title={data.content.title}
+      description={data.content.description}
+      variant={DomainVariant.Quansight}
+    />
 
-      {isPageType(data?.content?.component) && (
-        <Page data={data} preview={preview}>
-          {(blok: TRawBlok) => <BlokProvider blok={blok} />}
-        </Page>
-      )}
-      <div className="px-8 mx-auto lg:px-40 xl:px-[30rem] max-w-layout">
-        <Carousel tiles={tiles} />
-        {/* TODO: types / categories */}
-        <Tiles tiles={tiles} />
-        <Newsletter />
-        {/* TODO: pagination */}
-      </div>
-    </Layout>
-  );
-};
+    {isPageType(data?.content?.component) && (
+      <Page data={data} preview={preview}>
+        {(blok: TRawBlok) => <BlokProvider blok={blok} />}
+      </Page>
+    )}
+    <div className="px-8 mx-auto lg:px-40 xl:px-[30rem] max-w-layout">
+      <Carousel tiles={tiles} />
+      {/* TODO: types / categories */}
+      <Tiles tiles={tiles} />
+      <Newsletter />
+      {/* TODO: pagination */}
+    </div>
+  </Layout>
+);
 
 export const getStaticProps: GetStaticProps<
   TLibraryProps,
@@ -61,7 +59,7 @@ export const getStaticProps: GetStaticProps<
   const data = await getPage({ slug: 'library' });
   const footer = await getFooter();
   const libraryLinks = await getLibraryLinkItems();
-  const articleItems = await getArticleItems();
+  const articleItems = await getLibraryArticleItems();
 
   return {
     props: {

@@ -5,9 +5,9 @@ import * as Apollo from '@apollo/client';
 
 import * as Types from './operations';
 
-export const ArticleItemDocument = gql`
-  query articleItem($slug: ID!) {
-    ArticleItem(id: $slug) {
+export const LibraryArticleItemDocument = gql`
+  query libraryArticleItem($slug: ID!) {
+    LibraryarticleItem(id: $slug) {
       content {
         _editable
         _uid
@@ -100,13 +100,13 @@ export const ArticleItemDocument = gql`
     }
   }
 `;
-export type ArticleItemQueryResult = Apollo.QueryResult<
-  Types.ArticleItemQuery,
-  Types.ArticleItemQueryVariables
+export type LibraryArticleItemQueryResult = Apollo.QueryResult<
+  Types.LibraryArticleItemQuery,
+  Types.LibraryArticleItemQueryVariables
 >;
-export const ArticleItemsDocument = gql`
-  query articleItems {
-    ArticleItems {
+export const LibraryArticleItemsDocument = gql`
+  query libraryArticleItems {
+    LibraryarticleItems {
       total
       items {
         alternates {
@@ -202,9 +202,9 @@ export const ArticleItemsDocument = gql`
     }
   }
 `;
-export type ArticleItemsQueryResult = Apollo.QueryResult<
-  Types.ArticleItemsQuery,
-  Types.ArticleItemsQueryVariables
+export type LibraryArticleItemsQueryResult = Apollo.QueryResult<
+  Types.LibraryArticleItemsQuery,
+  Types.LibraryArticleItemsQueryVariables
 >;
 export const LibrarylinkItemsDocument = gql`
   query librarylinkItems {

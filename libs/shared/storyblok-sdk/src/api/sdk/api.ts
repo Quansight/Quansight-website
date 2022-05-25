@@ -1,14 +1,14 @@
-import { getArticleItem } from '../utils/getArticleItem';
-import { getArticleItems } from '../utils/getArticleItems';
 import { getFooterItem } from '../utils/getFooterItem';
+import { getLibraryArticleItem } from '../utils/getLibraryArticleItem';
+import { getLibraryArticleItems } from '../utils/getLibraryArticleItems';
 import { getLibraryLinkItems } from '../utils/getLibrarylinkItems';
 import { getLinks } from '../utils/getLinks';
 import { getPageItem } from '../utils/getPageItem';
 import { getTeamItem } from '../utils/getTeamItem';
 
 export const Api = {
-  getArticleItem,
-  getArticleItems,
+  getLibraryArticleItem,
+  getLibraryArticleItems,
   getFooterItem,
   getLibraryLinkItems,
   getLinks,

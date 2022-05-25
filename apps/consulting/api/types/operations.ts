@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Types from './basic';
 
-export type ArticleItemQueryVariables = Types.Exact<{
+export type LibraryArticleItemQueryVariables = Types.Exact<{
   slug: Types.Scalars['ID'];
 }>;
 
-export type ArticleItemQuery = {
+export type LibraryArticleItemQuery = {
   __typename?: 'QueryType';
-  ArticleItem: {
-    __typename?: 'ArticleItem';
+  LibraryarticleItem: {
+    __typename?: 'LibraryarticleItem';
     created_at: string | null;
     default_full_slug: string | null;
     first_published_at: string | null;
@@ -29,7 +29,7 @@ export type ArticleItemQuery = {
     meta_data: any | null;
     lang: string | null;
     content: {
-      __typename?: 'ArticleComponent';
+      __typename?: 'LibraryarticleComponent';
       _editable: string | null;
       _uid: string | null;
       component: string | null;
@@ -108,15 +108,17 @@ export type ArticleItemQuery = {
   } | null;
 };
 
-export type ArticleItemsQueryVariables = Types.Exact<{ [key: string]: never }>;
+export type LibraryArticleItemsQueryVariables = Types.Exact<{
+  [key: string]: never;
+}>;
 
-export type ArticleItemsQuery = {
+export type LibraryArticleItemsQuery = {
   __typename?: 'QueryType';
-  ArticleItems: {
-    __typename?: 'ArticleItems';
+  LibraryarticleItems: {
+    __typename?: 'LibraryarticleItems';
     total: number | null;
     items: Array<{
-      __typename?: 'ArticleItem';
+      __typename?: 'LibraryarticleItem';
       created_at: string | null;
       default_full_slug: string | null;
       first_published_at: string | null;
@@ -147,7 +149,7 @@ export type ArticleItemsQuery = {
         slug: string;
       } | null> | null;
       content: {
-        __typename?: 'ArticleComponent';
+        __typename?: 'LibraryarticleComponent';
         _editable: string | null;
         _uid: string | null;
         category: Array<string | null> | null;
