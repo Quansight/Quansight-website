@@ -1,4 +1,5 @@
 import {
+  CenteredIntro,
   Form,
   Hero,
   Logos,
@@ -9,7 +10,6 @@ import {
 
 import { Board } from '../Board/Board';
 import { BoardList } from '../BoardList/BoardList';
-import { CenteredIntro } from '../CenteredIntro/CenteredIntro';
 import { Columns } from '../Columns/Columns';
 import { FeatureArticle } from '../FeatureArticle/FeatureArticle';
 import { Features } from '../Features/Features';
