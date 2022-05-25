@@ -43,3 +43,5 @@ export type TPostsResponse = {
   total: number;
   offset: number;
 };
+
+export type TPostRaw = {};

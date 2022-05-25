@@ -5,6 +5,7 @@ import { getLibraryLinkItems } from '../utils/getLibrarylinkItems';
 import { getLinks } from '../utils/getLinks';
 import { getPageItem } from '../utils/getPageItem';
 import { getTeamItem } from '../utils/getTeamItem';
+import { getTeamMemberBySlug } from '../utils/getTeamMemberBySlug';
 
 export const Api = {
   getArticleItem,
@@ -14,4 +15,5 @@ export const Api = {
   getLinks,
   getPageItem,
   getTeamItem,
+  getTeamMemberBySlug,
 };

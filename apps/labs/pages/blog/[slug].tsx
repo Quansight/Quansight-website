@@ -80,9 +80,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const postsFileNames = await readdir(path.join(POSTS_DIRECTORY_PATH));
 
     return {
-      paths: postsFileNames.map(
-        (filename) => `/blog/${filename.replace(/\.(md|mdx)$/, '')}`,
-      ),
+      paths: postsFileNames
+        .filter((filename) => /\.(md|mdx)$/.test(filename))
+        .map((filename) => `/blog/${filename.replace(/\.(md|mdx)$/, '')}`),
       fallback: false,
     };
   } catch (error) {
@@ -110,7 +110,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       post,
-      footer: footer,
+      footer,
       featuredPosts,
     },
   };

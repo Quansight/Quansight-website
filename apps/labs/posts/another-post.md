@@ -1,9 +1,6 @@
 ---
 title: This is another hello world post!
-author:
-  nickName: aniruth_dagar
-  fullName: Anirudh Dagar
-  avatarSrc: /authors/test-avatar.jpg
+author: carlos-cordoba
 published: October 13, 2022
 description: Lorem ipsum dolor sit amet
 category: [Machine Learning, Array API]
