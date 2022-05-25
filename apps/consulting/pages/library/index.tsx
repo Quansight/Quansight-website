@@ -2,20 +2,25 @@ import React, { FC } from 'react';
 
 import { GetStaticProps } from 'next';
 
-import { Api } from '@quansight/shared/storyblok-sdk';
-import { ISlugParams, TLibraryProps } from '@quansight/shared/types';
+import { ISlugParams } from '@quansight/shared/types';
 import {
-  Page,
   Layout,
   SEO,
   DomainVariant,
+  Footer,
 } from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
+import { getArticleItems } from '../../api/utils/getArticleItems';
+import { getFooter } from '../../api/utils/getFooter';
+import { getLibraryLinkItems } from '../../api/utils/getLibraryLinkItems';
+import { getPage } from '../../api/utils/getPage';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { Carousel } from '../../components/Carousel/Carousel';
 import { Newsletter } from '../../components/Newsletter/Newsletter';
+import { Page } from '../../components/Page/Page';
 import { Tiles } from '../../components/Tiles/Tiles';
+import { TLibraryProps } from '../../types/storyblok/bloks/libraryProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
 
@@ -26,7 +31,7 @@ export const Library: FC<TLibraryProps> = ({
   preview,
 }) => {
   return (
-    <Layout footer={footer}>
+    <Layout footer={<Footer {...footer.content} />}>
       <SEO
         title={data.content.title}
         description={data.content.description}
@@ -53,19 +58,15 @@ export const getStaticProps: GetStaticProps<
   TLibraryProps,
   ISlugParams
 > = async () => {
-  const { data } = await Api.getPageItem({ slug: 'library' });
-  const { data: footer } = await Api.getFooterItem();
-  const {
-    data: { LibrarylinkItems: libraryLinks },
-  } = await Api.getLibraryLinkItems();
-  const {
-    data: { ArticleItems: articleItems },
-  } = await Api.getArticleItems();
+  const data = await getPage({ slug: 'library' });
+  const footer = await getFooter();
+  const libraryLinks = await getLibraryLinkItems();
+  const articleItems = await getArticleItems();
 
   return {
     props: {
-      data: data.PageItem,
-      footer: footer.FooterItem,
+      data,
+      footer,
       tiles: getLibraryTiles({
         articleItems,
         libraryLinks,

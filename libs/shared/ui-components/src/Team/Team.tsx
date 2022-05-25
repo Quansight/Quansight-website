@@ -23,9 +23,11 @@ export const Team: FC<TTeamProps> = ({ variant, header, role, team }) => {
         {header}
       </h2>
       <ul className="flex flex-wrap mt-[5rem] md:justify-center">
-        {teamToDisplay?.map((item) => (
-          <TeamMember key={item?.content?.firstName} person={item?.content} />
-        ))}
+        {teamToDisplay
+          ?.filter((item) => item)
+          .map((item) => (
+            <TeamMember key={item?.firstName} {...item} />
+          ))}
       </ul>
     </section>
   );

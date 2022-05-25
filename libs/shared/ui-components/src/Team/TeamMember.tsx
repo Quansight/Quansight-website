@@ -1,9 +1,14 @@
 import { FC } from 'react';
 
 import { Picture } from '../Picture/Picture';
-import { TeamDisplay, TTeamMemberProps } from './types';
+import { TeamDisplay, TTeamMember } from './types';
 
-export const TeamMember: FC<TTeamMemberProps> = ({ person }) => (
+export const TeamMember: FC<TTeamMember> = ({
+  firstName,
+  displayName,
+  lastName,
+  image,
+}) => (
   <li className="box-border px-[1.25rem] mb-[5rem] w-1/2 md:mb-[7rem] md:w-1/5">
     <h3
       className="
@@ -12,14 +17,14 @@ export const TeamMember: FC<TTeamMemberProps> = ({ person }) => (
           text-violet font-heading
         "
     >
-      {person?.firstName}
-      {person?.displayName === TeamDisplay.Full && ` ${person?.lastName}`}
+      {firstName}
+      {displayName === TeamDisplay.Full && ` ${lastName}`}
     </h3>
-    {person?.image && (
+    {image && (
       <div className="relative pb-[115%] w-full h-full">
         <Picture
-          imageSrc={person.image.filename}
-          imageAlt={person.image.alt ? person.image.alt : ''}
+          imageSrc={image.filename}
+          imageAlt={image.alt ? image.alt : ''}
           layout="fill"
           objectFit="cover"
           className="brightness-110 grayscale"

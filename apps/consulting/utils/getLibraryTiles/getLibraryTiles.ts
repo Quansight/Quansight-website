@@ -1,5 +1,4 @@
-import { TTiles } from '@quansight/shared/types';
-
+import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { getTileProps } from './getTileProps';
 import { sortLibraryTiles } from './sortLibraryTiles';
 import { TGetLibraryTilesProps, TLibraryTileRawData } from './types';

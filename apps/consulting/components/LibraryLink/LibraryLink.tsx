@@ -2,8 +2,7 @@ import { FC } from 'react';
 
 import Link from 'next/link';
 
-import { LinkTarget } from '@quansight/shared/types';
-
+import { LinkTarget } from '../../types/storyblok/bloks/libraryProps';
 import { TLibraryLinkProps } from './/types';
 
 export const LibraryLink: FC<TLibraryLinkProps> = ({

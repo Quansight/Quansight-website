@@ -1,15 +1,13 @@
-import { ApolloQueryResult } from '@apollo/client';
+import { ApolloQueryResult, DocumentNode } from '@apollo/client';
 
 import { apolloClient } from '../sdk/clients/apolloClient';
-import * as Types from '../types/graphql';
-import { FooterItemQuery } from '../types/graphql';
 
-export const getFooterItem = (): Promise<
-  ApolloQueryResult<FooterItemQuery>
-> => {
+export const getFooterItem = <ResultType>(
+  query: DocumentNode,
+): Promise<ApolloQueryResult<ResultType>> => {
   return apolloClient.query({
     fetchPolicy: 'cache-first',
-    query: Types.FooterItemDocument,
+    query,
     variables: {
       slug: 'layout/footer',
     },

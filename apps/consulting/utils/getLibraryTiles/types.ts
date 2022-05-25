@@ -3,7 +3,7 @@ import {
   ArticleItems,
   LibrarylinkItem,
   LibrarylinkItems,
-} from '@quansight/shared/storyblok-sdk';
+} from '../../api/types/basic';
 
 export type TLibraryTileRawData = LibrarylinkItem | ArticleItem | null;
 
