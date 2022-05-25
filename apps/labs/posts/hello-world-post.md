@@ -1,7 +1,7 @@
 ---
 title: This is hello world post!
 author: anirrudh-krishnan
-published: October 13, 2022
+published: October 14, 2022
 description: Lorem ipsum dolor sit amet
 category: [Machine Learning]
 featuredImage:
