@@ -1,13 +1,15 @@
-import { TImage, TRichText, TLink, TBlok } from '@quansight/shared/types';
+import { TRichText } from '@quansight/shared/types';
 
 export type TProjectItemProps = {
+  _uid: string;
   title: string;
-  image: TImage;
+  imageSrc: string;
+  imageAlt: string;
   shortDescription: TRichText;
   longDescription: TRichText;
   linkText: string;
-  projectLink: TLink;
-} & TBlok;
+  linkUrl: string;
+};
 
 export type TProjectsProps = {
   projects: TProjectItemProps[];

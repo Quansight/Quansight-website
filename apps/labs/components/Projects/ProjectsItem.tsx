@@ -4,11 +4,22 @@ import { TProjectItemProps } from './types';
 
 export const ProjectsItem: FC<TProjectItemProps> = ({
   title,
-  image,
+  imageSrc,
+  imageAlt,
   shortDescription,
   longDescription,
   linkText,
-  projectLink,
+  linkUrl,
 }) => {
-  return <li>ProjectsItem</li>;
+  console.log(
+    title,
+    imageSrc,
+    imageAlt,
+    shortDescription,
+    longDescription,
+    linkText,
+    linkUrl,
+  );
+
+  return <div>ProjectsItem</div>;
 };
