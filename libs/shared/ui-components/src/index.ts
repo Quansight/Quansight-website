@@ -5,9 +5,6 @@ export * from './Page/Page';
 export * from './ButtonLink/ButtonLink';
 export * from './ButtonLink/types';
 
-export * from './CenteredIntro/CenteredIntro';
-export * from './CenteredIntro/types';
-
 export * from './Input/Input';
 export * from './Textarea/Textarea';
 export * from './Button/Button';

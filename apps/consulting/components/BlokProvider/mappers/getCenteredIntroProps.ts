@@ -1,6 +1,5 @@
-import { TCenteredIntroProps } from '@quansight/shared/ui-components';
-
 import { TCenteredIntroRawData } from '../../../types/storyblok/bloks/centeredIntro';
+import { TCenteredIntroProps } from '../../CenteredIntro/types';
 
 export const getCenteredIntroProps = (
   blok: TCenteredIntroRawData,

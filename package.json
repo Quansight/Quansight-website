@@ -5,8 +5,6 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test-build-consulting": "npx nx build consulting --prod --verbose --runner=no-cloud",
-    "test-build-labs": "npx nx build labs --prod --verbose --runner=no-cloud",
     "test": "nx test",
     "prepare": "husky install",
     "lint-staged": "lint-staged",

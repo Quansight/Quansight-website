@@ -1,6 +1,5 @@
 import { TypeValuesUnion } from '@quansight/shared/types';
 import {
-  TCenteredIntroProps,
   TFormProps,
   THeroProps,
   TLogosProps,
@@ -11,6 +10,7 @@ import {
 
 import { TBoardProps } from '../Board/types';
 import { TBoardListProps } from '../BoardList/types';
+import { TCenteredIntroProps } from '../CenteredIntro/types';
 import { TColumnsProps } from '../Columns/types';
 import { TFeatureArticleProps } from '../FeatureArticle/types';
 import { TFeaturesProps } from '../Features/types';
