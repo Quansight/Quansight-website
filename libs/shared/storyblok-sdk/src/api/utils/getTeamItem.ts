@@ -9,7 +9,7 @@ export const getTeamItem = <ResultType>(
     fetchPolicy: 'cache-first',
     query,
     variables: {
-      slug: 'team',
+      slug: 'team-members',
     },
   });
 };
