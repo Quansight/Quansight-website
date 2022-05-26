@@ -2,9 +2,9 @@ import { FC, useState, useEffect, useRef } from 'react';
 
 import clsx from 'clsx';
 
+import { getFilterStartingValue } from '../../../utils/getFiltersStartingValue/getFilterStartingValue';
+import { FilterMenuVariant } from '../../../utils/getFiltersStartingValue/types';
 import { TFilterMenuProps } from '../types';
-import { FilterMenuVariant } from '../types';
-import { getFilterStartingValue } from '../utils/getFilterStartingValue';
 import { FilterMenuItem } from './FilterMenuItem';
 
 export const FilterMenu: FC<TFilterMenuProps> = ({

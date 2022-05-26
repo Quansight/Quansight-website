@@ -26,6 +26,7 @@ import { Tiles } from '../../components/Tiles/Tiles';
 import { TLibraryProps } from '../../types/storyblok/bloks/libraryProps';
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
+import { filterLibraryTiles } from '../../utils/filterLibraryTiles/filterLibraryTiles';
 import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
 
 export const Library: FC<TLibraryProps> = ({
@@ -38,12 +39,14 @@ export const Library: FC<TLibraryProps> = ({
 }) => {
   const [postType, setPostType] = useState<string>('all');
   const [postCategory, setPostCategory] = useState<string>('all categories');
-  const [libraryTiles, setLibraryTiles] = useState<TTiles>(tiles);
+  const [libraryTiles, setLibraryTiles] = useState<TTiles>([]);
 
   const router = useRouter();
 
   useEffect(() => {
-    console.log('CHANGE');
+    const filteredItems = filterLibraryTiles(tiles, postType, postCategory);
+    setLibraryTiles(filteredItems);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postCategory, postType]);
 
   useEffect(() => {
@@ -73,7 +76,7 @@ export const Library: FC<TLibraryProps> = ({
         </Page>
       )}
       <div className="px-8 mx-auto lg:px-40 xl:px-[30rem] max-w-layout">
-        <Carousel tiles={libraryTiles} />
+        <Carousel tiles={tiles} />
         <Filters
           postTypes={postTypes}
           postCategories={postCategories}

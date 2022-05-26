@@ -3,11 +3,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { Maybe } from 'graphql/jsutils/Maybe';
 
 import { DatasourceEntries } from '../../api/types/basic';
-
-export enum FilterMenuVariant {
-  Types = 'types',
-  Categories = 'categories',
-}
+import { FilterMenuVariant } from '../../utils/getFiltersStartingValue/types';
 
 export type TMenuItemData = {
   menuDataCurrent: Maybe<string>;

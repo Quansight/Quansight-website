@@ -2,10 +2,10 @@ import { FC } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { getFilterStartingValue } from '../../utils/getFiltersStartingValue/getFilterStartingValue';
+import { FilterMenuVariant } from '../../utils/getFiltersStartingValue/types';
 import { FilterMenu } from './FilterMenu/FilterMenu';
 import { TFiltersProps } from './types';
-import { FilterMenuVariant } from './types';
-import { getFilterStartingValue } from './utils/getFilterStartingValue';
 
 export const Filters: FC<TFiltersProps> = ({
   postType,

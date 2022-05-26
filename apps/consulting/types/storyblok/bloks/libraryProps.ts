@@ -18,6 +18,7 @@ export type TTile = {
   imageSrc: string;
   imageAlt: string;
   postType: string;
+  postCategory: string[];
   title: string;
   author: string;
   date: string;

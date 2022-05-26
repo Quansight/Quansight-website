@@ -1,4 +1,4 @@
-import { FilterMenuVariant } from '../types';
+import { FilterMenuVariant } from './types';
 
 const TYPES_STARTING_VALUE = 'all';
 const CATEGORIES_STARTING_VALUE = 'all categories';
