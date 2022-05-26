@@ -16,7 +16,7 @@ import { FormStates, TFormProps } from './types';
 import { getFormHeader } from './utils';
 
 export const backgroundStyles = `
-  before:absolute before:top-0 before:left-0 before:z-0 before:w-full before:h-full before:bg-lightgray
+  before:absolute before:top-0 before:left-0 before:z-0 before:w-full before:h-full before:bg-gray-50
   md:before:w-2/3
 `;
 
