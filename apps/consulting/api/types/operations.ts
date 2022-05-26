@@ -1,6 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Types from './basic';
 
+export type DatasourceEntriesQueryVariables = Types.Exact<{
+  slug: Types.Scalars['String'];
+}>;
+
+export type DatasourceEntriesQuery = {
+  __typename?: 'QueryType';
+  DatasourceEntries: {
+    __typename?: 'DatasourceEntries';
+    total: number;
+    items: Array<{
+      __typename?: 'DatasourceEntry';
+      name: string;
+      id: number;
+      value: string;
+      dimensionValue: string | null;
+    }>;
+  } | null;
+};
+
 export type LibraryArticleItemQueryVariables = Types.Exact<{
   slug: Types.Scalars['ID'];
 }>;

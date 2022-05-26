@@ -5,6 +5,23 @@ import * as Apollo from '@apollo/client';
 
 import * as Types from './operations';
 
+export const DatasourceEntriesDocument = gql`
+  query datasourceEntries($slug: String!) {
+    DatasourceEntries(datasource: $slug) {
+      items {
+        name
+        id
+        value
+        dimensionValue
+      }
+      total
+    }
+  }
+`;
+export type DatasourceEntriesQueryResult = Apollo.QueryResult<
+  Types.DatasourceEntriesQuery,
+  Types.DatasourceEntriesQueryVariables
+>;
 export const LibraryArticleItemDocument = gql`
   query libraryArticleItem($slug: ID!) {
     LibraryarticleItem(id: $slug) {
