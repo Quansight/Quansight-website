@@ -1,5 +1,7 @@
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
+import { THeroProps } from '@quansight/shared/ui-components';
+
 export enum Categories {
   MachineLearning = 'Machine Learning',
   DataVisualization = 'Data Visualization',
@@ -30,6 +32,7 @@ export type TPostMeta = {
   author: TPostAuthor;
   category?: string[];
   featuredImage: TFeaturedImage;
+  hero?: Pick<THeroProps, 'imageSrc' | 'imageAlt'>;
 };
 
 export type TPost = {

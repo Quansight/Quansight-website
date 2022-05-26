@@ -7,6 +7,9 @@ category: [Machine Learning]
 featuredImage:
   src: /posts/hello-world-post/featured.png
   alt: Hello world post featured image
+hero:
+  imageSrc: /posts/hello-world-post/hero.jpeg
+  imageAlt: Lorem ipsum dolor
 ---
 
 # An h1 header

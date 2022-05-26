@@ -11,6 +11,8 @@ import { ISlugParams } from '@quansight/shared/types';
 import {
   DomainVariant,
   Footer,
+  Hero,
+  HeroVariant,
   Layout,
   SEO,
 } from '@quansight/shared/ui-components';
@@ -48,6 +50,14 @@ export const BlogPost: FC<TBlogPostProps> = ({
         description={post.meta.description}
         variant={DomainVariant.Labs}
       />
+      {post.meta.hero && (
+        <Hero
+          {...post.meta.hero}
+          variant={HeroVariant.Small}
+          backgroundColor="transparent"
+          objectFit="cover"
+        />
+      )}
       <article
         className={clsx(
           'pt-[7.5rem] pb-[11.4rem] mx-auto w-[95%] max-w-[100.17rem] border-gray-300 border-solid md:w-[85%] xl:w-[70%]',

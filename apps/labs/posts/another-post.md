@@ -7,6 +7,9 @@ category: [Machine Learning, Array API]
 featuredImage:
   src: /posts/another-post/featured.png
   alt: Another post featured image
+hero:
+  imageSrc: '/posts/another-post/hero.jpeg'
+  imageAlt: Lorem ipsum dolor
 ---
 
 # An h1 header

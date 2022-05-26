@@ -8,6 +8,8 @@ import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 import {
   DomainVariant,
   Footer,
+  Hero,
+  HeroVariant,
   Layout,
   SEO,
 } from '@quansight/shared/ui-components';
@@ -112,7 +114,13 @@ const BlogListPage: FC<BlogListPageProps> = ({
         description="This is a blog list page"
         variant={DomainVariant.Labs}
       />
-
+      <Hero
+        variant={HeroVariant.Small}
+        imageSrc="/postList/post-list-hero.jpeg"
+        imageAlt="Blog post list hero image"
+        backgroundColor="transparent"
+        objectFit="cover"
+      />
       <div className="pt-[3rem] pb-[12.2rem] mx-auto w-[95%] max-w-[83rem] md:w-[85%] xl:w-[70%]">
         <h2 className="text-[2.4rem] font-extrabold leading-[4.9rem] text-heading text-violet">
           Posts, articles and tutorials
@@ -136,7 +144,7 @@ const BlogListPage: FC<BlogListPageProps> = ({
             return (
               <div
                 key={post.slug}
-                className="odd:mr-[4.1rem] mb-[3.7rem] w-1/2"
+                className="odd:mr-[4.1rem] mb-[3.7rem] w-full md:w-1/2"
               >
                 <PostListItem post={post} variant="vertical" />
               </div>
