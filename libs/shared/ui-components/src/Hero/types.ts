@@ -3,6 +3,7 @@ import { ImageProps } from 'next/image';
 export enum HeroVariant {
   Small = 'small',
   Medium = 'medium',
+  MediumOverlapping = 'medium-overlapping',
   Large = 'large',
   LargeOverlapping = 'large-overlapping',
 }

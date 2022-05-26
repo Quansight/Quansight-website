@@ -16,8 +16,10 @@ export const Hero: FC<THeroProps> = ({
 }) => {
   const isLargeHero =
     variant === HeroVariant.Large || variant === HeroVariant.LargeOverlapping;
-  const isMediumHero = variant === HeroVariant.Medium;
-  const isOverlappingHero = variant === HeroVariant.LargeOverlapping;
+  const isMediumHero =
+    variant === HeroVariant.Medium || variant === HeroVariant.MediumOverlapping;
+  const isLargeHeroOverlapping = variant === HeroVariant.LargeOverlapping;
+  const isMediumHeroOverlapping = variant === HeroVariant.MediumOverlapping;
   const isSmallHero = variant === HeroVariant.Small;
 
   return (
@@ -27,7 +29,8 @@ export const Hero: FC<THeroProps> = ({
         isSmallHero && 'md:h-[29.4rem]',
         isLargeHero && 'md:h-[970px]',
         isMediumHero && 'md:h-[730px]',
-        isOverlappingHero && 'mb-[-31rem] md:mb-[-51rem]',
+        isLargeHeroOverlapping && 'mb-[-31rem] md:mb-[-51rem]',
+        isMediumHeroOverlapping && 'mb-[-10rem] md:mb-[-20rem]',
         backgroundColor ? `bg-[${backgroundColor}]` : 'bg-[#000000]',
       )}
     >
