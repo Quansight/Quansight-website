@@ -1,4 +1,4 @@
-import { FooterItem, ArticleItem } from '@quansight/shared/storyblok-sdk';
+import { ArticleItem, FooterItem } from '../../../api/types/basic';
 
 export type TArticleProps = {
   data: ArticleItem;

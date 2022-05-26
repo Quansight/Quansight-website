@@ -6,5 +6,11 @@ export const getTeamProps = (blok: TTeamRawData): TTeamProps => ({
   variant: blok.variant,
   header: blok.header,
   role: blok.role,
-  team: blok.team,
+  team: blok.team.map((item) => ({
+    displayName: item.content.displayName,
+    firstName: item.content.firstName,
+    lastName: item.content.lastName,
+    image: item.content.image,
+    role: item.content.role,
+  })),
 });

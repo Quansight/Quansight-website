@@ -7,12 +7,20 @@ import clsx from 'clsx';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 
-import { Api, FooterItem } from '@quansight/shared/storyblok-sdk';
 import { ISlugParams } from '@quansight/shared/types';
-import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
+import {
+  DomainVariant,
+  Footer,
+  Hero,
+  HeroVariant,
+  Layout,
+  SEO,
+} from '@quansight/shared/ui-components';
 
+import { FooterItem } from '../../api/types/basic';
+import { getFooter } from '../../api/utils/getFooter';
 import { LinkWithArrow } from '../../components/LinkWithArrow/LinkWithArrow';
-import { FeaturedPosts } from '../../components/Post/PostMetaSection/FeaturedPosts/FeaturedPosts';
+import { FeaturedPosts } from '../../components/Post/FeaturedPosts/FeaturedPosts';
 import { PostMetaSection } from '../../components/Post/PostMetaSection/PostMetaSection';
 import { POSTS_DIRECTORY_PATH } from '../../services/api/posts/constants';
 import { getPost } from '../../services/api/posts/getPost';
@@ -36,12 +44,20 @@ export const BlogPost: FC<TBlogPostProps> = ({
   }
 
   return (
-    <Layout footer={footer}>
+    <Layout footer={<Footer {...footer.content} />}>
       <SEO
         title={post.meta.title}
         description={post.meta.description}
         variant={DomainVariant.Labs}
       />
+      {post.meta.hero && (
+        <Hero
+          {...post.meta.hero}
+          variant={HeroVariant.Small}
+          backgroundColor="transparent"
+          objectFit="cover"
+        />
+      )}
       <article
         className={clsx(
           'pt-[7.5rem] pb-[11.4rem] mx-auto w-[95%] max-w-[100.17rem] border-gray-300 border-solid md:w-[85%] xl:w-[70%]',
@@ -74,9 +90,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const postsFileNames = await readdir(path.join(POSTS_DIRECTORY_PATH));
 
     return {
-      paths: postsFileNames.map(
-        (filename) => `/blog/${filename.replace(/\.(md|mdx)$/, '')}`,
-      ),
+      paths: postsFileNames
+        .filter((filename) => /\.(md|mdx)$/.test(filename))
+        .map((filename) => `/blog/${filename.replace(/\.(md|mdx)$/, '')}`),
       fallback: false,
     };
   } catch (error) {
@@ -94,7 +110,7 @@ export const getStaticProps: GetStaticProps<
   ISlugParams
 > = async ({ params: { slug } }) => {
   const post = await getPost(slug);
-  const { data: footer } = await Api.getFooterItem();
+  const footer = await getFooter();
   const featuredPosts = await getPostsByCategory(
     post.meta.category,
     post.slug,
@@ -104,7 +120,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       post,
-      footer: footer.FooterItem,
+      footer,
       featuredPosts,
     },
   };

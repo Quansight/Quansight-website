@@ -1,6 +1,7 @@
 import { TPostsResponse } from '../../../types/storyblok/bloks/posts';
 import { getPostsDirectory } from '../../posts/getPostsDirectory';
 import { serializePost } from '../../posts/serializePost';
+import { sortPostsByDate } from '../../posts/sortPostsByDate';
 import { DEFAULT_API_OFFSET } from './constants';
 
 export const getAllPosts = async (): Promise<TPostsResponse> => {
@@ -11,23 +12,23 @@ export const getAllPosts = async (): Promise<TPostsResponse> => {
     );
 
     const posts = await Promise.all(
-      postsFileNamesFiltered
-        .filter((fileName) => fileName !== 'categories.json')
-        .map(async (fileName) => {
-          const slug = fileName.replace(/\.(md|mdx)$/, '');
-          const { content, meta } = await serializePost(fileName);
+      postsFileNamesFiltered.map(async (fileName) => {
+        const slug = fileName.replace(/\.(md|mdx)$/, '');
+        const { content, meta } = await serializePost(fileName);
 
-          return {
-            slug,
-            meta,
-            content,
-          };
-        }),
+        return {
+          slug,
+          meta,
+          content,
+        };
+      }),
     );
 
+    const sortedPosts = sortPostsByDate(posts);
+
     return {
-      items: posts,
-      total: postsFileNamesFiltered.length,
+      items: sortedPosts,
+      total: sortedPosts.length,
       offset: DEFAULT_API_OFFSET,
     };
   } catch (error) {

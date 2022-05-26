@@ -20,10 +20,12 @@ module.exports = {
         black: '#191919',
         white: '#ffffff',
         gray: {
+          50: '#FAFAFF',
           100: '#707070',
           200: '#C4C4C4',
           300: '#C5C5C5',
           400: '#EBEBEB',
+          500: '#CED0D4',
         },
       },
       maxWidth: {

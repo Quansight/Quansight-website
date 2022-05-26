@@ -1,6 +1,4 @@
-import { Maybe } from 'graphql/jsutils/Maybe';
-
-import { PersonItem, PersonComponent } from '@quansight/shared/storyblok-sdk';
+// import { PersonItem } from '@quansight/shared/storyblok-sdk';
 
 export enum TeamVariant {
   All = 'all',
@@ -22,13 +20,30 @@ export type TTeamMemberProjectProps = {
   name: string;
 };
 
-export type TTeamMemberProps = {
-  person: Maybe<PersonComponent>;
+export type TPersonItem = {
+  firstName: string;
+  lastName: string;
+  displayName: TeamDisplay;
+  image: {
+    filename: string;
+    alt?: string;
+  };
+};
+
+export type TTeamMember = {
+  firstName: string;
+  lastName: string;
+  displayName: string;
+  image?: {
+    filename: string;
+    alt?: string;
+  };
+  role: string;
 };
 
 export type TTeamProps = {
   variant: TeamVariant;
   header: string;
   role: TeamRole;
-  team: PersonItem[];
+  team: TTeamMember[];
 };

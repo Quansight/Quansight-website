@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 
 import StoryblokClient from 'storyblok-js-client';
 
-import { Api } from '../api/sdk/api';
-import { PageItem } from '../api/types/graphql';
 import { IStoryblokBridge, StoryblokBridgeEvents } from '../types/storyblok';
 
 interface CustomWindow extends Window {
@@ -20,9 +18,10 @@ export const Storyblok = new StoryblokClient({
   },
 });
 
-export const useStoryblok = (
+export const useStoryblok = <PageItem>(
   originalStory: PageItem,
   preview: boolean,
+  onLoadPageItem: (slug: string) => Promise<PageItem>,
   locale?: string,
 ): PageItem | null => {
   const [story, setStory] = useState<PageItem | null>(originalStory);
@@ -56,8 +55,14 @@ export const useStoryblok = (
           }
 
           if (event.storyId && !story) {
-            const { data } = await Api.getPageItem({ slug: event.storyId });
-            setStory(data.PageItem);
+            const pageItem = await onLoadPageItem(event.storyId);
+            // const { data } = await Api.getPageItem<
+            //   PageReturnType,
+            //   PageItemVariables
+            // >(pageQuery, {
+            //   slug: event.storyId,
+            // });
+            setStory(pageItem);
           }
         },
       );
