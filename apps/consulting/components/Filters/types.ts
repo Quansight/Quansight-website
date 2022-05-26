@@ -4,15 +4,30 @@ import { Maybe } from 'graphql/jsutils/Maybe';
 
 import { DatasourceEntries } from '../../api/types/basic';
 
-export type TFilterTypesProps = {
-  postTypes: DatasourceEntries;
-  postType: Maybe<string>;
-  setPostType: Dispatch<SetStateAction<string | undefined>>;
-};
-export type TFilterCategoriesProps = {
-  postCategories: DatasourceEntries;
-  postCategory: Maybe<string>;
-  setPostCategory: Dispatch<SetStateAction<string | undefined>>;
-};
+export enum FilterMenuVariant {
+  Types = 'types',
+  Categories = 'categories',
+}
 
-export type TFiltersProps = TFilterTypesProps & TFilterCategoriesProps;
+export type TMenuItemData = {
+  menuDataCurrent: Maybe<string>;
+};
+export type TFilterMenuItemProps = {
+  menuDataItem: string;
+  handleClick: (value: string) => void;
+} & TMenuItemData;
+
+export type TFilterMenuProps = {
+  menuData: DatasourceEntries;
+  filterMenuVariant: FilterMenuVariant;
+  setMenuItem: Dispatch<SetStateAction<string>>;
+} & TMenuItemData;
+
+export type TFiltersProps = {
+  postType: Maybe<string>;
+  setPostType: Dispatch<SetStateAction<string>>;
+  postTypes: DatasourceEntries;
+  postCategory: string;
+  setPostCategory: Dispatch<SetStateAction<string>>;
+  postCategories: DatasourceEntries;
+};

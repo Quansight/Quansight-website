@@ -34,8 +34,8 @@ export const Library: FC<TLibraryProps> = ({
   postTypes,
   postCategories,
 }) => {
-  const [postType, setPostType] = useState<string | undefined>();
-  const [postCategory, setPostCategory] = useState<string | undefined>();
+  const [postType, setPostType] = useState<string>('all');
+  const [postCategory, setPostCategory] = useState<string>('all categories');
 
   useEffect(() => {
     console.log('CHANGE');
