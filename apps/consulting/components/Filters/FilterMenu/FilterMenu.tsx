@@ -4,21 +4,17 @@ import clsx from 'clsx';
 
 import { TFilterMenuProps } from '../types';
 import { FilterMenuVariant } from '../types';
+import { getFilterStartingValue } from '../utils/getFilterStartingValue';
 import { FilterMenuItem } from './FilterMenuItem';
 
 export const FilterMenu: FC<TFilterMenuProps> = ({
   filterMenuVariant,
   menuData,
   menuDataCurrent,
-  setMenuItem,
+  handleFilter,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const container = useRef<HTMLDivElement>(null);
-
-  const handleClick = (value: string): void => {
-    setMenuItem(value);
-    setIsDropdownOpen(false);
-  };
 
   useEffect(() => {
     const handleFocusClose = (event: FocusEvent): void => {
@@ -29,7 +25,6 @@ export const FilterMenu: FC<TFilterMenuProps> = ({
     };
 
     if (isDropdownOpen) {
-      document.body.classList.add('navbar-open');
       document.addEventListener('focusin', handleFocusClose);
       return () => {
         document.removeEventListener('focusin', handleFocusClose);
@@ -87,20 +82,18 @@ export const FilterMenu: FC<TFilterMenuProps> = ({
           )}
         >
           <FilterMenuItem
-            menuDataItem={
-              filterMenuVariant === FilterMenuVariant.Types
-                ? 'all'
-                : 'all categories'
-            }
+            menuDataItem={getFilterStartingValue(filterMenuVariant)}
             menuDataCurrent={menuDataCurrent}
-            handleClick={handleClick}
+            setIsDropdownOpen={setIsDropdownOpen}
+            handleFilter={handleFilter}
           />
           {menuData.items.map(({ id, value }) => (
             <FilterMenuItem
               key={id}
               menuDataItem={value}
               menuDataCurrent={menuDataCurrent}
-              handleClick={handleClick}
+              setIsDropdownOpen={setIsDropdownOpen}
+              handleFilter={handleFilter}
             />
           ))}
         </ul>

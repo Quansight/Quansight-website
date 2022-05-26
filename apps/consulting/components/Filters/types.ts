@@ -11,16 +11,16 @@ export enum FilterMenuVariant {
 
 export type TMenuItemData = {
   menuDataCurrent: Maybe<string>;
+  handleFilter: (value: string) => void;
 };
 export type TFilterMenuItemProps = {
   menuDataItem: string;
-  handleClick: (value: string) => void;
+  setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
 } & TMenuItemData;
 
 export type TFilterMenuProps = {
   menuData: DatasourceEntries;
   filterMenuVariant: FilterMenuVariant;
-  setMenuItem: Dispatch<SetStateAction<string>>;
 } & TMenuItemData;
 
 export type TFiltersProps = {
