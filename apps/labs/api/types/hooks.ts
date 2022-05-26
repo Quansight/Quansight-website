@@ -146,7 +146,7 @@ export type PageItemsQueryResult = Apollo.QueryResult<
 >;
 export const TeamDocument = gql`
   query Team {
-    PersonItems(starts_with: "team/", sort_by: "position") {
+    PersonItems(starts_with: "team-members/", sort_by: "position") {
       items {
         id
         position
@@ -161,6 +161,7 @@ export const TeamDocument = gql`
             alt
           }
           projects
+          githubNick
         }
       }
     }
@@ -169,4 +170,27 @@ export const TeamDocument = gql`
 export type TeamQueryResult = Apollo.QueryResult<
   Types.TeamQuery,
   Types.TeamQueryVariables
+>;
+export const TeamMemberDocument = gql`
+  query TeamMember($slug: ID!) {
+    PersonItem(id: $slug) {
+      slug
+      id
+      content {
+        firstName
+        lastName
+        displayName
+        role
+        image {
+          filename
+          alt
+        }
+        githubNick
+      }
+    }
+  }
+`;
+export type TeamMemberQueryResult = Apollo.QueryResult<
+  Types.TeamMemberQuery,
+  Types.TeamMemberQueryVariables
 >;
