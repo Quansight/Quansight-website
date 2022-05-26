@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps<
   TContainerProps,
   ISlugParams
 > = async () => {
-  const data = await getPage({ slug: 'labs' });
+  const data = await getPage({ slug: 'home' });
   const footer = await getFooter();
   return {
     props: {
