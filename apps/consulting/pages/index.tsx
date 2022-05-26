@@ -36,14 +36,14 @@ export const Index: FC<TContainerProps> = ({ data, footer, preview }) => (
 export const getStaticProps: GetStaticProps<
   TContainerProps,
   ISlugParams
-> = async () => {
+> = async ({ preview = false }) => {
   const data = await getPage({ slug: 'homepage' });
   const footer = await getFooter();
   return {
     props: {
       data,
       footer,
-      preview: false,
+      preview,
     },
   };
 };
