@@ -5,9 +5,16 @@ import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 
-import { FooterItem, Api } from '@quansight/shared/storyblok-sdk';
-import { DomainVariant, Layout, SEO } from '@quansight/shared/ui-components';
+import {
+  DomainVariant,
+  Footer,
+  Hero,
+  HeroVariant,
+  Layout,
+  SEO,
+} from '@quansight/shared/ui-components';
 
+import { FooterItem, getFooter } from '../../api';
 import { CategoryList } from '../../components/Posts/CategoryList/CategoryList';
 import { PostListItem } from '../../components/Posts/PostListItem/PostListItem';
 import { DEFAULT_API_OFFSET } from '../../services/api/posts/constants';
@@ -101,13 +108,19 @@ const BlogListPage: FC<BlogListPageProps> = ({
   }, [router.isReady]);
 
   return (
-    <Layout footer={footer}>
+    <Layout footer={<Footer {...footer.content} />}>
       <SEO
         title="Blog"
         description="This is a blog list page"
         variant={DomainVariant.Labs}
       />
-
+      <Hero
+        variant={HeroVariant.Small}
+        imageSrc="/postList/post-list-hero.jpeg"
+        imageAlt="Blog post list hero image"
+        backgroundColor="transparent"
+        objectFit="cover"
+      />
       <div className="pt-[3rem] pb-[12.2rem] mx-auto w-[95%] max-w-[83rem] md:w-[85%] xl:w-[70%]">
         <h2 className="text-[2.4rem] font-extrabold leading-[4.9rem] text-heading text-violet">
           Posts, articles and tutorials
@@ -131,7 +144,7 @@ const BlogListPage: FC<BlogListPageProps> = ({
             return (
               <div
                 key={post.slug}
-                className="odd:mr-[4.1rem] mb-[3.7rem] w-1/2"
+                className="odd:mr-[4.1rem] mb-[3.7rem] w-full md:w-1/2"
               >
                 <PostListItem post={post} variant="vertical" />
               </div>
@@ -166,13 +179,13 @@ const BlogListPage: FC<BlogListPageProps> = ({
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data: footer } = await Api.getFooterItem();
+  const footer = await getFooter();
   const categories = await getCategories();
   const { items } = await getAllPosts();
 
   return {
     props: {
-      footer: footer.FooterItem,
+      footer,
       categoryList: categories,
       posts: items,
     },

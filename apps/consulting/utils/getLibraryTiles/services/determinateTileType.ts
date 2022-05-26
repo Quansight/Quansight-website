@@ -1,5 +1,4 @@
-import { LibrarylinkItem, ArticleItem } from '@quansight/shared/storyblok-sdk';
-
+import { ArticleItem, LibrarylinkItem } from '../../../api/types/basic';
 import { TLibraryTileRawData } from '../types';
 
 export const isLibraryLink = (

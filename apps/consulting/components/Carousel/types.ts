@@ -1,4 +1,4 @@
-import { TTiles, TTile } from '@quansight/shared/types';
+import { TTile, TTiles } from '../../types/storyblok/bloks/libraryProps';
 
 export type TCarouselProps = {
   tiles: TTiles;

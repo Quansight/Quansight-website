@@ -1,3 +1,8 @@
-import { LinkEntry } from '@quansight/shared/storyblok-sdk';
-
-export type TLinkEntry = Pick<LinkEntry, 'id' | 'isFolder' | 'name' | 'slug'>;
+export type TLinkEntry<
+  LinkEntry extends {
+    id: number;
+    isFolder: boolean;
+    name: string;
+    slug: string;
+  },
+> = Pick<LinkEntry, 'id' | 'isFolder' | 'name' | 'slug'>;

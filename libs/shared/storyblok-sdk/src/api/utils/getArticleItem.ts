@@ -1,15 +1,14 @@
-import { ApolloQueryResult } from '@apollo/client';
+import { ApolloQueryResult, DocumentNode } from '@apollo/client';
 
 import { apolloClient } from '../sdk/clients/apolloClient';
-import * as Types from '../types/graphql';
-import { ArticleItemQuery } from '../types/graphql';
 
-export const getArticleItem = (
-  variables: Types.ArticleItemQueryVariables,
-): Promise<ApolloQueryResult<ArticleItemQuery>> => {
+export const getArticleItem = <ReturnType, VariablesType>(
+  query: DocumentNode,
+  variables: VariablesType,
+): Promise<ApolloQueryResult<ReturnType>> => {
   return apolloClient.query({
     fetchPolicy: 'cache-first',
-    query: Types.ArticleItemDocument,
+    query,
     variables,
   });
 };

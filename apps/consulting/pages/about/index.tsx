@@ -2,21 +2,26 @@ import React, { FC } from 'react';
 
 import { GetStaticProps } from 'next';
 
-import { Api } from '@quansight/shared/storyblok-sdk';
-import { ISlugParams, TContainerProps } from '@quansight/shared/types';
+import { ISlugParams } from '@quansight/shared/types';
 import {
-  Page,
   Layout,
   SEO,
   DomainVariant,
+  Footer,
 } from '@quansight/shared/ui-components';
-import { isPageType, getAboutPageData } from '@quansight/shared/utils';
+import { isPageType } from '@quansight/shared/utils';
 
+import { PageComponent, PageItem } from '../../api/types/basic';
+import { getFooter } from '../../api/utils/getFooter';
+import { getPage } from '../../api/utils/getPage';
+import { getTeam } from '../../api/utils/getTeam';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
+import { Page } from '../../components/Page/Page';
+import { TContainerProps } from '../../types/containerProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 
 export const About: FC<TContainerProps> = ({ data, footer, preview }) => (
-  <Layout footer={footer}>
+  <Layout footer={<Footer {...footer.content} />}>
     <SEO
       title={data.content.title}
       description={data.content.description}
@@ -34,20 +39,26 @@ export const getStaticProps: GetStaticProps<
   TContainerProps,
   ISlugParams
 > = async () => {
-  const { data } = await Api.getPageItem({ slug: 'about' });
-  const { data: footer } = await Api.getFooterItem();
-  const TeamItem = await Api.getTeamItem();
+  const data = await getPage({ slug: 'about' });
+  const footer = await getFooter();
+  const TeamItem = await getTeam();
 
-  const aboutPageData = getAboutPageData(
-    data.PageItem,
-    // @ts-ignore TODO missing unused query properties from sb
-    TeamItem.data.PersonItems.items,
-  );
+  const pageData: PageItem = {
+    ...data,
+    content: {
+      ...data.content,
+      body: data.content.body.map((item: PageComponent) => {
+        return item.component === 'team'
+          ? { ...item, team: TeamItem.PersonItems.items }
+          : { ...item };
+      }),
+    },
+  };
 
   return {
     props: {
-      data: aboutPageData,
-      footer: footer.FooterItem,
+      data: pageData,
+      footer: footer,
       preview: false,
     },
   };

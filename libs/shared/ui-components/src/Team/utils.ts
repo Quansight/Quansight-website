@@ -1,22 +1,22 @@
-import { PersonItem, Maybe } from '@quansight/shared/storyblok-sdk';
+// import { PersonItem, Maybe } from '@quansight/shared/storyblok-sdk';
 
-import { TeamRole } from './types';
+import { TeamRole, TTeamMember } from './types';
 
 export const filterTeam = (
-  team: PersonItem[] = [],
+  team: TTeamMember[] = [],
   role: TeamRole,
-): Maybe<PersonItem[]> => {
-  const isRoleMatching = (member: Maybe<PersonItem>): boolean => {
-    return member?.content?.role === role;
+): TTeamMember[] | null => {
+  const isRoleMatching = (member: TTeamMember): boolean => {
+    return member?.role === role;
   };
 
   return team.filter(isRoleMatching);
 };
 
 export const getRandomMembers = (
-  team: Maybe<PersonItem[]>,
+  team: TTeamMember[] | null,
   num: number,
-): PersonItem[] | undefined => {
+): TTeamMember[] | undefined => {
   const randomlySortedTeam = team?.sort(() => 0.5 - Math.random());
 
   return randomlySortedTeam?.slice(0, num);

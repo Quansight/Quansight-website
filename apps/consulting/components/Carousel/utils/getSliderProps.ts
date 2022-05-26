@@ -1,5 +1,4 @@
-import { TTiles } from '@quansight/shared/types';
-
+import { TTiles } from '../../../types/storyblok/bloks/libraryProps';
 import { MAX_LIBRARY_SLIDES } from './constants';
 
 export const getCarouselProps = (tiles: TTiles): TTiles =>

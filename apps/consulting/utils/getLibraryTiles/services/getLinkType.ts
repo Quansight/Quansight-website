@@ -1,5 +1,7 @@
-import { TLinkData, LinkTarget } from '@quansight/shared/types';
-
+import {
+  LinkTarget,
+  TLinkData,
+} from '../../../types/storyblok/bloks/libraryProps';
 import { TLibraryTileRawData } from '../types';
 import { isLibraryLink, isArticle } from './determinateTileType';
 

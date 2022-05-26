@@ -1,6 +1,4 @@
-import { PageItem, FooterItem } from '@quansight/shared/storyblok-sdk';
-
-export type TContainerProps = {
+export type TContainerProps<PageItem, FooterItem> = {
   data: PageItem;
   footer: FooterItem;
   preview: boolean;
