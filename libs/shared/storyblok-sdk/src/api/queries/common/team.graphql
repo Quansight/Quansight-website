@@ -1,5 +1,5 @@
 query Team {
-  PersonItems(starts_with: "team/", sort_by: "position") {
+  PersonItems(starts_with: "team-members/", sort_by: "position") {
     items {
       id
       position
@@ -17,8 +17,26 @@ query Team {
         # githubLink {
         #   url
         # }
-        # githubNick
+        githubNick
       }
+    }
+  }
+}
+
+query TeamMember($slug: ID!) {
+  PersonItem(id: $slug) {
+    slug
+    id
+    content {
+      firstName
+      lastName
+      displayName
+      role
+      image {
+        filename
+        alt
+      }
+      githubNick
     }
   }
 }

@@ -20,6 +20,10 @@
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e", "stylelint"]
       }
+    },
+    "no-cloud": {
+      "runner": "@nrwl/workspace/src/tasks-runner/default-tasks-runner",
+      "options": {}
     }
   },
   "targetDependencies": {
@@ -43,5 +47,5 @@
       }
     }
   },
-  "defaultProject": "consulting"
+  "defaultProject": "labs"
 }

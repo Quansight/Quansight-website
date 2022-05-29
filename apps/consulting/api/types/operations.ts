@@ -558,6 +558,7 @@ export type TeamQuery = {
         displayName: string | null;
         role: string | null;
         projects: any | null;
+        githubNick: string | null;
         image: {
           __typename?: 'Asset';
           filename: string;
@@ -565,5 +566,31 @@ export type TeamQuery = {
         } | null;
       } | null;
     } | null> | null;
+  } | null;
+};
+
+export type TeamMemberQueryVariables = Types.Exact<{
+  slug: Types.Scalars['ID'];
+}>;
+
+export type TeamMemberQuery = {
+  __typename?: 'QueryType';
+  PersonItem: {
+    __typename?: 'PersonItem';
+    slug: string | null;
+    id: number | null;
+    content: {
+      __typename?: 'PersonComponent';
+      firstName: string | null;
+      lastName: string | null;
+      displayName: string | null;
+      role: string | null;
+      githubNick: string | null;
+      image: {
+        __typename?: 'Asset';
+        filename: string;
+        alt: string | null;
+      } | null;
+    } | null;
   } | null;
 };

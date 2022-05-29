@@ -38,7 +38,7 @@ export const About: FC<TContainerProps> = ({ data, footer, preview }) => (
 export const getStaticProps: GetStaticProps<
   TContainerProps,
   ISlugParams
-> = async () => {
+> = async ({ preview = false }) => {
   const data = await getPage({ slug: 'about' });
   const footer = await getFooter();
   const TeamItem = await getTeam();
@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       data: pageData,
       footer: footer,
-      preview: false,
+      preview,
     },
   };
 };

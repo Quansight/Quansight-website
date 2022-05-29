@@ -112,7 +112,7 @@ export const Library: FC<TLibraryProps> = ({
 export const getStaticProps: GetStaticProps<
   TLibraryProps,
   ISlugParams
-> = async () => {
+> = async ({ preview = false }) => {
   const data = await getPage({ slug: 'library' });
   const footer = await getFooter();
   const libraryLinks = await getLibraryLinkItems();
@@ -131,7 +131,7 @@ export const getStaticProps: GetStaticProps<
         libraryLinks,
       }),
 
-      preview: false,
+      preview,
     },
   };
 };
