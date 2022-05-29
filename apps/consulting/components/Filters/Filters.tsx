@@ -14,6 +14,7 @@ export const Filters: FC<TFiltersProps> = ({
   postCategory,
   postCategories,
   setPostCategory,
+  setCurrentPage,
 }) => {
   const router = useRouter();
 
@@ -21,12 +22,13 @@ export const Filters: FC<TFiltersProps> = ({
     const isTheSameCategory = category === postCategory;
     if (isTheSameCategory) return;
     setPostCategory(category);
-
+    setCurrentPage(1);
     router.push(
       {
         pathname: router.pathname,
         query: {
           ...router.query,
+          page: 1,
           category:
             category === getFilterStartingValue(FilterMenuVariant.Categories)
               ? ''
@@ -42,12 +44,13 @@ export const Filters: FC<TFiltersProps> = ({
     const isTheSameType = type === postType;
     if (isTheSameType) return;
     setPostType(type);
-
+    setCurrentPage(1);
     router.push(
       {
         pathname: router.pathname,
         query: {
           ...router.query,
+          page: 1,
           type:
             type === getFilterStartingValue(FilterMenuVariant.Types)
               ? ''

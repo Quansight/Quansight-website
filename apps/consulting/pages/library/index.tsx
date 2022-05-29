@@ -12,6 +12,8 @@ import {
 } from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
+import { PAGINATION_OFFSETT } from '../..//utils/paginateLibraryTiles/constants';
+import { paginateLibraryTiles } from '../..//utils/paginateLibraryTiles/paginateLibraryTiles';
 import { getDataSourceEntries } from '../../api/utils/getDataSourceEntries';
 import { getFooter } from '../../api/utils/getFooter';
 import { getLibraryArticleItems } from '../../api/utils/getLibraryArticleItems';
@@ -20,8 +22,8 @@ import { getPage } from '../../api/utils/getPage';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { Carousel } from '../../components/Carousel/Carousel';
 import { Filters } from '../../components/Filters/Filters';
-import { Newsletter } from '../../components/Newsletter/Newsletter';
 import { Page } from '../../components/Page/Page';
+import { Pagination } from '../../components/Pagination/Pagination';
 import { Tiles } from '../../components/Tiles/Tiles';
 import { TLibraryProps } from '../../types/storyblok/bloks/libraryProps';
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
@@ -40,14 +42,17 @@ export const Library: FC<TLibraryProps> = ({
   const [postType, setPostType] = useState<string>('all');
   const [postCategory, setPostCategory] = useState<string>('all categories');
   const [libraryTiles, setLibraryTiles] = useState<TTiles>([]);
+  const [paginationPages, serPaginationPages] = useState<number>();
+  const [currentPage, setCurrentPage] = useState<number>();
 
   const router = useRouter();
 
   useEffect(() => {
     const filteredItems = filterLibraryTiles(tiles, postType, postCategory);
-    setLibraryTiles(filteredItems);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [postCategory, postType]);
+    serPaginationPages(Math.ceil(filteredItems.length / PAGINATION_OFFSETT));
+    const filterPagination = paginateLibraryTiles(filteredItems, currentPage);
+    setLibraryTiles(filterPagination);
+  }, [postCategory, currentPage, postType, tiles]);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -59,6 +64,13 @@ export const Library: FC<TLibraryProps> = ({
     if (router.query.category) {
       setPostCategory(router.query.category as string);
     }
+
+    if (router.query.page) {
+      setCurrentPage(parseInt(router.query.page as string, 10));
+    }
+
+    if (!router.query.page) setCurrentPage(1);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
@@ -84,10 +96,14 @@ export const Library: FC<TLibraryProps> = ({
           setPostType={setPostType}
           postCategory={postCategory}
           setPostCategory={setPostCategory}
+          setCurrentPage={setCurrentPage}
         />
         <Tiles tiles={libraryTiles} />
-        <Newsletter />
-        {/* TODO: pagination */}
+        <Pagination
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+          paginationPages={paginationPages}
+        />
       </div>
     </Layout>
   );

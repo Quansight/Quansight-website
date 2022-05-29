@@ -26,4 +26,5 @@ export type TFiltersProps = {
   postCategory: string;
   setPostCategory: Dispatch<SetStateAction<string>>;
   postCategories: DatasourceEntries;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
 };
