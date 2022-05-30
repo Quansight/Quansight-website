@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import Link from 'next/link';
 
-import { THeaderMobileBookingLinkProps } from './types';
+import { TBookingLinkProps } from './types';
 
-export const HeaderMobileBookingLink: FC<THeaderMobileBookingLinkProps> = ({
+export const HeaderMobileBookingLink: FC<TBookingLinkProps> = ({
   bookACallLinkText,
 }) => (
   <Link href="/">

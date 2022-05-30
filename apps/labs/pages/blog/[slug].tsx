@@ -10,14 +10,16 @@ import { MDXRemote } from 'next-mdx-remote';
 import { ISlugParams, DomainVariant } from '@quansight/shared/types';
 import {
   Footer,
+  Header,
   Hero,
   HeroVariant,
   Layout,
   SEO,
 } from '@quansight/shared/ui-components';
 
-import { FooterItem } from '../../api/types/basic';
+import { FooterItem, HeaderItem } from '../../api/types/basic';
 import { getFooter } from '../../api/utils/getFooter';
+import { getHeader } from '../../api/utils/getHeader';
 import { LinkWithArrow } from '../../components/LinkWithArrow/LinkWithArrow';
 import { FeaturedPosts } from '../../components/Post/FeaturedPosts/FeaturedPosts';
 import { PostMetaSection } from '../../components/Post/PostMetaSection/PostMetaSection';
@@ -45,7 +47,12 @@ export const BlogPost: FC<TBlogPostProps> = ({
   }
 
   return (
-    <Layout footer={<Footer {...footer.content} />}>
+    <Layout
+      footer={<Footer {...footer.content} />}
+      header={
+        <Header {...header.content} domainVariant={DomainVariant.Quansight} />
+      }
+    >
       <SEO
         title={post.meta.title}
         description={post.meta.description}
@@ -111,6 +118,7 @@ export const getStaticProps: GetStaticProps<
   ISlugParams
 > = async ({ params: { slug } }) => {
   const post = await getPost(slug);
+  const header = await getHeader();
   const footer = await getFooter();
   const featuredPosts = await getPostsByCategory(
     post.meta.category,
@@ -121,6 +129,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       post,
+      header,
       footer,
       featuredPosts,
     },

@@ -9,14 +9,16 @@ import { THeaderMobileLinkProps } from '../types';
 export const HeaderMobileLink: FC<THeaderMobileLinkProps> = ({
   linkText,
   linkUrl,
+  queryParams,
   variant = LinkVariant.Navigation,
   setIsNavigationOpen,
 }) => {
   const router = useRouter();
 
   const onLinkClick = (): void => {
-    const url =
-      linkUrl.cached_url === 'homepage' ? '/' : `/${linkUrl.cached_url}`;
+    const url = queryParams
+      ? `/${linkUrl.cached_url}${queryParams}`
+      : `/${linkUrl.cached_url}`;
     router.push(url);
     setIsNavigationOpen(false);
   };

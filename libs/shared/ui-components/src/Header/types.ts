@@ -14,6 +14,7 @@ export type THeaderLink = {
   linkText: string;
   linkUrl: TLink;
   variant: string;
+  queryParams?: string;
 } & TBlok;
 
 export type THeaderDropdown = {

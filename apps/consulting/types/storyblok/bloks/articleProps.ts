@@ -1,7 +1,11 @@
-import { ArticleItem, FooterItem } from '../../../api/types/basic';
+import {
+  HeaderItem,
+  FooterItem,
+  LibraryarticleItem,
+} from '../../../api/types/basic';
 
 export type TArticleProps = {
-  data: ArticleItem;
+  data: LibraryarticleItem;
   footer: FooterItem;
   header: HeaderItem;
   preview: boolean;
