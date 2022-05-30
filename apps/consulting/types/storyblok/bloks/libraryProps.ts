@@ -1,4 +1,8 @@
-import { FooterItem, PageItem } from '../../../api/types/basic';
+import {
+  FooterItem,
+  PageItem,
+  DatasourceEntries,
+} from '../../../api/types/basic';
 
 export enum LinkTarget {
   Internal = 'internal',
@@ -14,6 +18,7 @@ export type TTile = {
   imageSrc: string;
   imageAlt: string;
   postType: string;
+  postCategory: string[];
   title: string;
   author: string;
   date: string;
@@ -24,9 +29,10 @@ export type TTile = {
 export type TTiles = TTile[];
 
 export type TLibraryProps = {
+  postTypes: DatasourceEntries;
+  postCategories: DatasourceEntries;
   data: PageItem;
   footer: FooterItem;
-  header: HeaderItem;
   preview: boolean;
   tiles: TTiles;
 };

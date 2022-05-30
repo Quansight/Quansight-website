@@ -8,6 +8,7 @@ export const getTileProps = (tile: TLibraryTileRawData): TTile => ({
   imageSrc: tile.content.postImage.filename,
   imageAlt: tile.content.postImage.alt,
   postType: tile.content.type,
+  postCategory: tile.content.category,
   title: tile.content.postTitle,
   author: getAuthorFullName(tile),
   date: formatDateToTile(tile),

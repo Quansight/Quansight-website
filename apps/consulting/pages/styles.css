@@ -11,3 +11,15 @@
 .navbar-open {
   @apply h-screen overflow-y-hidden;
 }
+
+.page-link-classname {
+  @apply text-center max-h-min inline-block w-[2rem] text-[1.6rem] font-medium font-heading leading-[2.9rem] transition-colors hover:border-b-violet;
+
+  border-bottom: 2px solid transparent;
+}
+
+.active-link-classname {
+  @apply text-violet;
+
+  border-bottom: 2px solid #452393;
+}
