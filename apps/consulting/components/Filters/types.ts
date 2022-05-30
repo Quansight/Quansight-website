@@ -7,16 +7,16 @@ import { FilterMenuVariant } from '../../utils/getFiltersStartingValue/types';
 
 export type TMenuItemData = {
   menuDataCurrent: Maybe<string>;
-  handleFilter: (value: string) => void;
 };
 export type TFilterMenuItemProps = {
+  handleClick: (menuDataItem: string) => void;
   menuDataItem: string;
-  setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
 } & TMenuItemData;
 
 export type TFilterMenuProps = {
   menuData: DatasourceEntries;
   filterMenuVariant: FilterMenuVariant;
+  handleFilter: (value: string) => void;
 } & TMenuItemData;
 
 export type TFiltersProps = {

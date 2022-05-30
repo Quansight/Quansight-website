@@ -10,7 +10,7 @@ export type TPaginationIconProps = {
 };
 
 export type TPaginationProps = {
-  setCurrentPage: Dispatch<SetStateAction<number>>;
+  onPageChange: Dispatch<SetStateAction<number>>;
   currentPage: number;
   paginationPages: number;
 };

@@ -16,10 +16,14 @@ export const FilterMenu: FC<TFilterMenuProps> = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const container = useRef<HTMLDivElement>(null);
 
+  const handleClick = (menuDataItem: string): void => {
+    setIsDropdownOpen(false);
+    handleFilter(menuDataItem);
+  };
+
   useEffect(() => {
-    const handleFocusClose = (event: FocusEvent): void => {
-      // @ts-ignore
-      if (container.current && !container.current.contains(event.target)) {
+    const handleFocusClose = ({ target }: MouseEvent): void => {
+      if (container.current && !container.current.contains(target as Node)) {
         setIsDropdownOpen(false);
       }
     };
@@ -84,16 +88,14 @@ export const FilterMenu: FC<TFilterMenuProps> = ({
           <FilterMenuItem
             menuDataItem={getFilterStartingValue(filterMenuVariant)}
             menuDataCurrent={menuDataCurrent}
-            setIsDropdownOpen={setIsDropdownOpen}
-            handleFilter={handleFilter}
+            handleClick={handleClick}
           />
           {menuData.items.map(({ id, value }) => (
             <FilterMenuItem
               key={id}
               menuDataItem={value}
               menuDataCurrent={menuDataCurrent}
-              setIsDropdownOpen={setIsDropdownOpen}
-              handleFilter={handleFilter}
+              handleClick={handleClick}
             />
           ))}
         </ul>
