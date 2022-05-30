@@ -15,8 +15,8 @@ export const HeaderMobileMenu: FC<THeaderMobileMenuProps> = ({
   domainVariant,
 }) => {
   const [menuBackground, setMenuBackground] = useState(false);
-  const [menuVisibility, setMenuVisibility] = useState(0);
-  const [isMenuVisible, setIsMenuVidible] = useState(true);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [isMenuVisible, setIsMenuVisible] = useState(true);
 
   const container = useRef<HTMLDivElement>(null);
 
@@ -24,15 +24,15 @@ export const HeaderMobileMenu: FC<THeaderMobileMenuProps> = ({
     const handleSetMenuBackground = (): void => {
       if (typeof window !== 'undefined') {
         const menuHeight = container.current?.clientHeight || 70;
-        setIsMenuVidible(window.scrollY > menuVisibility ? false : true);
+        setIsMenuVisible(window.scrollY > scrollPosition ? false : true);
         setMenuBackground(window.scrollY >= menuHeight ? true : false);
-        setMenuVisibility(window.scrollY);
+        setScrollPosition(window.scrollY);
       }
     };
 
     window.addEventListener('scroll', handleSetMenuBackground);
     return () => window.removeEventListener('scroll', handleSetMenuBackground);
-  }, [menuVisibility]);
+  }, [scrollPosition]);
 
   return (
     <div
