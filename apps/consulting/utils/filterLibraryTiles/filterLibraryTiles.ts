@@ -1,6 +1,6 @@
+import { getFilterStartingValue } from '../../components/Filters/utils/getFilterStartingValue';
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
-import { getFilterStartingValue } from '../getFiltersStartingValue/getFilterStartingValue';
-import { FilterMenuVariant } from '../getFiltersStartingValue/types';
+import { FilterMenuVariant } from '../../types/utils/FilterMenuVariant';
 
 export const filterLibraryTiles = (
   tiles: TTiles,
@@ -8,28 +8,33 @@ export const filterLibraryTiles = (
   postCategory: string,
 ): TTiles => {
   return tiles.filter((tile) => {
+    const categoriesFilterStartingValue = getFilterStartingValue(
+      FilterMenuVariant.Category,
+    );
+    const typesFilterStartingValue = getFilterStartingValue(
+      FilterMenuVariant.Type,
+    );
     if (
-      postCategory === getFilterStartingValue(FilterMenuVariant.Categories) &&
-      postType === getFilterStartingValue(FilterMenuVariant.Types)
+      postCategory === categoriesFilterStartingValue &&
+      postType === typesFilterStartingValue
     ) {
       return true;
     }
-
     if (
-      postType === getFilterStartingValue(FilterMenuVariant.Types) &&
-      postCategory !== getFilterStartingValue(FilterMenuVariant.Categories)
+      postType === typesFilterStartingValue &&
+      postCategory !== categoriesFilterStartingValue
     ) {
       return tile.postCategory.includes(postCategory);
     }
     if (
-      postType !== getFilterStartingValue(FilterMenuVariant.Types) &&
-      postCategory === getFilterStartingValue(FilterMenuVariant.Categories)
+      postType !== typesFilterStartingValue &&
+      postCategory === categoriesFilterStartingValue
     ) {
       return tile.postType === postType;
     }
     if (
-      postType !== getFilterStartingValue(FilterMenuVariant.Types) &&
-      postCategory !== getFilterStartingValue(FilterMenuVariant.Categories)
+      postType !== typesFilterStartingValue &&
+      postCategory !== categoriesFilterStartingValue
     ) {
       return (
         tile.postCategory.includes(postCategory) && tile.postType === postType
@@ -37,5 +42,4 @@ export const filterLibraryTiles = (
     }
     return false;
   });
-  return tiles;
 };

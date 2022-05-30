@@ -22,6 +22,10 @@ import { getPage } from '../../api/utils/getPage';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { Carousel } from '../../components/Carousel/Carousel';
 import { Filters } from '../../components/Filters/Filters';
+import {
+  TYPES_STARTING_VALUE,
+  CATEGORIES_STARTING_VALUE,
+} from '../../components/Filters/constants';
 import { Page } from '../../components/Page/Page';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { Tiles } from '../../components/Tiles/Tiles';
@@ -39,8 +43,10 @@ export const Library: FC<TLibraryProps> = ({
   postTypes,
   postCategories,
 }) => {
-  const [postType, setPostType] = useState<string>('all');
-  const [postCategory, setPostCategory] = useState<string>('all categories');
+  const [postFilters, setPostFilters] = useState({
+    type: TYPES_STARTING_VALUE,
+    category: CATEGORIES_STARTING_VALUE,
+  });
   const [libraryTiles, setLibraryTiles] = useState<TTiles>([]);
   const [paginationPages, serPaginationPages] = useState<number>();
   const [currentPage, setCurrentPage] = useState<number>();
@@ -48,28 +54,36 @@ export const Library: FC<TLibraryProps> = ({
   const router = useRouter();
 
   useEffect(() => {
-    const filteredItems = filterLibraryTiles(tiles, postType, postCategory);
+    const filteredItems = filterLibraryTiles(
+      tiles,
+      postFilters.type,
+      postFilters.category,
+    );
     serPaginationPages(Math.ceil(filteredItems.length / PAGINATION_OFFSETT));
     const filterPagination = paginateLibraryTiles(filteredItems, currentPage);
     setLibraryTiles(filterPagination);
-  }, [postCategory, currentPage, postType, tiles]);
+  }, [postFilters.category, currentPage, postFilters.type, tiles]);
 
   useEffect(() => {
     if (!router.isReady) return;
 
     if (router.query.type) {
-      setPostType(router.query.type as string);
+      setPostFilters((prevState) => ({
+        ...prevState,
+        type: router.query.type as string,
+      }));
     }
 
     if (router.query.category) {
-      setPostCategory(router.query.category as string);
+      setPostFilters((prevState) => ({
+        ...prevState,
+        category: router.query.category as string,
+      }));
     }
 
-    if (router.query.page) {
-      setCurrentPage(parseInt(router.query.page as string, 10));
-    }
-
-    if (!router.query.page) setCurrentPage(1);
+    setCurrentPage(
+      router.query.page ? parseInt(router.query.page as string, 10) : 1,
+    );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
@@ -92,15 +106,13 @@ export const Library: FC<TLibraryProps> = ({
         <Filters
           postTypes={postTypes}
           postCategories={postCategories}
-          postType={postType}
-          setPostType={setPostType}
-          postCategory={postCategory}
-          setPostCategory={setPostCategory}
-          setCurrentPage={setCurrentPage}
+          postFilters={postFilters}
+          onFiltersChange={setPostFilters}
+          onPageChange={setCurrentPage}
         />
         <Tiles tiles={libraryTiles} />
         <Pagination
-          setCurrentPage={setCurrentPage}
+          onPageChange={setCurrentPage}
           currentPage={currentPage}
           paginationPages={paginationPages}
         />
