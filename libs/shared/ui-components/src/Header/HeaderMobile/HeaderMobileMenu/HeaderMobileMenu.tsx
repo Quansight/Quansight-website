@@ -2,6 +2,8 @@ import { FC, useState, useEffect, useRef } from 'react';
 
 import clsx from 'clsx';
 
+import { DomainVariant } from '@quansight/shared/types';
+
 import { HeaderLogo } from '../../Common/HeaderLogo';
 import { THeaderMobileMenuProps } from '../types';
 import { HeaderMobileMenuButton } from './HeaderMobileMenuButton';
@@ -10,7 +12,7 @@ export const HeaderMobileMenu: FC<THeaderMobileMenuProps> = ({
   logo,
   isNavigationOpen,
   setIsNavigationOpen,
-  variant,
+  domainVariant,
 }) => {
   const [menuBackground, setMenuBackground] = useState(false);
   const [menuVisibility, setMenuVisibility] = useState(0);
@@ -36,25 +38,18 @@ export const HeaderMobileMenu: FC<THeaderMobileMenuProps> = ({
     <div
       ref={container}
       className={clsx(
-        'flex absolute z-40 justify-between items-center px-[2rem] pb-1 w-full transition-all motion-reduce:transition-none duration-300 ease-in-out',
+        'flex absolute z-40 justify-between items-center px-[2rem] pt-[0.5rem] pb-[4.5rem] w-full transition-all motion-reduce:transition-none duration-300 ease-in-out',
 
         menuBackground
-          ? variant === 'Quansight'
+          ? domainVariant === DomainVariant.Quansight
             ? 'bg-black'
             : 'bg-violet'
           : 'bg-transparent',
         isMenuVisible ? 'translate-y-0' : '-translate-y-full',
       )}
     >
-      {logo && (
-        <HeaderLogo
-          imageSrc={logo.filename}
-          imageAlt={logo.alt || ''}
-          variant={variant}
-        />
-      )}
+      <HeaderLogo logo={logo} domainVariant={domainVariant} />
       <HeaderMobileMenuButton
-        isMenuVisible={isMenuVisible}
         isNavigationOpen={isNavigationOpen}
         setIsNavigationOpen={setIsNavigationOpen}
       />

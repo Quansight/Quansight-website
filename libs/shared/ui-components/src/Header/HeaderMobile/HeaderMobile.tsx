@@ -1,6 +1,5 @@
-import React, { FC, useEffect, useState, useRef } from 'react';
+import { FC, useEffect, useState, useRef } from 'react';
 
-import { HeaderSkipLinks } from '../Common/HeaderSkipLinks';
 import { HeaderMobileMenu } from './HeaderMobileMenu/HeaderMobileMenu';
 import { HeaderMobileNavigation } from './HeaderMobileNavigation';
 import { THeaderMobileProps } from './types';
@@ -9,8 +8,7 @@ export const HeaderMobile: FC<THeaderMobileProps> = ({
   logo,
   navigation,
   bookACallLinkText,
-  skipLinksText,
-  variant,
+  domainVariant,
 }) => {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
   const container = useRef<HTMLDivElement>(null);
@@ -22,9 +20,8 @@ export const HeaderMobile: FC<THeaderMobileProps> = ({
         setIsNavigationOpen(false);
     };
 
-    const handleFocusClose = (event: FocusEvent): void => {
-      // @ts-ignore
-      if (container.current && !container.current.contains(event.target)) {
+    const handleFocusClose = ({ target }: FocusEvent): void => {
+      if (container.current && !container.current.contains(target as Node)) {
         setIsNavigationOpen(false);
       }
     };
@@ -47,19 +44,18 @@ export const HeaderMobile: FC<THeaderMobileProps> = ({
 
   return (
     <div ref={container} className="sm:hidden">
-      <HeaderSkipLinks skipLinksText={skipLinksText} />
       <HeaderMobileMenu
         logo={logo}
         isNavigationOpen={isNavigationOpen}
         setIsNavigationOpen={setIsNavigationOpen}
-        variant={variant}
+        domainVariant={domainVariant}
       />
       <HeaderMobileNavigation
         isNavigationOpen={isNavigationOpen}
         setIsNavigationOpen={setIsNavigationOpen}
         navigation={navigation}
         bookACallLinkText={bookACallLinkText}
-        variant={variant}
+        domainVariant={domainVariant}
       />
     </div>
   );

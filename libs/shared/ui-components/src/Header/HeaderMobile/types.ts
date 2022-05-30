@@ -1,57 +1,49 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { Asset, Maybe } from '@quansight/shared/storyblok-sdk';
-import { TBlok, TLink } from '@quansight/shared/types';
+import {
+  TDomainVariant,
+  THeaderLogoProps,
+  THeaderNavigation,
+  THeaderLink,
+  THeaderDropdown,
+} from '../types';
 
-import { THeaderSkipLinksProps, TVariant } from '../Common/types';
-
-export type TNavigationMobileLink = {
-  setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
-  linkText: string;
-  linkUrl: TLink;
-  variant: string;
-} & TBlok;
-
-export type TNavigationDropdown = {
-  buttonText: string;
-  links: TNavigationMobileLink[];
-} & TBlok &
-  TNavigationOpen;
-
-type THeaderNavigationItem = TNavigationMobileLink | TNavigationDropdown;
-
-type THeaderNavigationItems = { navigation: THeaderNavigationItem[] };
-
-type TNavigationOpen = {
+type TIsNavigationOpen = {
   isNavigationOpen: boolean;
+};
+
+type TSetIsNavigationOpen = {
   setIsNavigationOpen: Dispatch<SetStateAction<boolean>>;
 };
+
+export type THeaderMobileMenuButtonProps = TIsNavigationOpen &
+  TSetIsNavigationOpen;
+
+export type THeaderMobileMenuProps = THeaderMobileMenuButtonProps &
+  THeaderLogoProps &
+  TDomainVariant;
+
+export type THeaderMobileNavigationProps = TBookingLinkProps &
+  THeaderMobileMenuButtonProps &
+  TDomainVariant &
+  THeaderNavigation;
+
+export type THeaderMobileProps = THeaderLogoProps &
+  THeaderNavigation &
+  TBookingLinkProps &
+  TDomainVariant;
 
 export type THeaderMobileNavigationProviderProps = {
-  navigationItem: THeaderNavigationItem;
-} & TNavigationOpen;
+  navigationItem: THeaderLink | THeaderDropdown;
+} & TIsNavigationOpen &
+  TSetIsNavigationOpen;
 
-export type THeaderMobileNavigationProps = THeaderMobileBookingLinkProps &
-  THeaderNavigationItems &
-  TNavigationOpen &
-  TVariant;
+export type THeaderMobileLinkProps = THeaderLink & TSetIsNavigationOpen;
 
-export type THeaderMobileBookingLinkProps = {
-  bookACallLinkText: Maybe<string>;
+export type THeaderMobileDropdownProps = THeaderDropdown &
+  TIsNavigationOpen &
+  TSetIsNavigationOpen;
+
+export type TBookingLinkProps = {
+  bookACallLinkText: string;
 };
-
-export type THeaderMobileMenuButtonProps = {
-  isMenuVisible: boolean;
-} & TNavigationOpen;
-
-export type THeaderMobileMenuProps = {
-  logo: Maybe<Asset>;
-} & TNavigationOpen &
-  TVariant;
-
-export type THeaderMobileProps = {
-  logo: Maybe<Asset>;
-} & THeaderSkipLinksProps &
-  THeaderMobileBookingLinkProps &
-  THeaderNavigationItems &
-  TVariant;

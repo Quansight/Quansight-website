@@ -1,13 +1,10 @@
 import { FC } from 'react';
 
 import { Placeholder } from '../../../Placeholder/Placeholder';
-import {
-  THeaderMobileNavigationProviderProps,
-  TNavigationMobileLink,
-  TNavigationDropdown,
-} from '../types';
-import { NavigationDropdown } from './NavigationDropdown';
-import { NavigationMobileLink } from './NavigationMobileLink';
+import { THeaderLink, THeaderDropdown } from '../../types';
+import { THeaderMobileNavigationProviderProps } from '../types';
+import { HeaderMobileDropdown } from './HeaderMobileDropdown';
+import { HeaderMobileLink } from './HeaderMobileLink';
 
 export const HeaderMobileNavigationProvider: FC<
   THeaderMobileNavigationProviderProps
@@ -15,15 +12,15 @@ export const HeaderMobileNavigationProvider: FC<
   switch (navigationItem.component) {
     case 'navigation-link':
       return (
-        <NavigationMobileLink
-          {...(navigationItem as TNavigationMobileLink)}
+        <HeaderMobileLink
+          {...(navigationItem as THeaderLink)}
           setIsNavigationOpen={setIsNavigationOpen}
         />
       );
     case 'navigation-dropdown':
       return (
-        <NavigationDropdown
-          {...(navigationItem as TNavigationDropdown)}
+        <HeaderMobileDropdown
+          {...(navigationItem as THeaderDropdown)}
           isNavigationOpen={isNavigationOpen}
           setIsNavigationOpen={setIsNavigationOpen}
         />

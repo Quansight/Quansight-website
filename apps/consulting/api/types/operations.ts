@@ -448,6 +448,71 @@ export type FooterItemQuery = {
   } | null;
 };
 
+export type HeaderItemQueryVariables = Types.Exact<{
+  slug: Types.Scalars['ID'];
+}>;
+
+export type HeaderItemQuery = {
+  __typename?: 'QueryType';
+  HeaderItem: {
+    __typename?: 'HeaderItem';
+    created_at: string | null;
+    default_full_slug: string | null;
+    first_published_at: string | null;
+    full_slug: string | null;
+    group_id: number | null;
+    id: number | null;
+    is_startpage: boolean | null;
+    lang: string | null;
+    meta_data: any | null;
+    name: string | null;
+    parent_id: number | null;
+    path: string | null;
+    position: number | null;
+    published_at: string | null;
+    release_id: number | null;
+    slug: string | null;
+    sort_by_date: string | null;
+    tag_list: Array<string | null> | null;
+    uuid: string | null;
+    alternates: Array<{
+      __typename?: 'Alternate';
+      fullSlug: string;
+      id: number;
+      isFolder: boolean | null;
+      name: string;
+      parentId: number | null;
+      published: boolean;
+      slug: string;
+    } | null> | null;
+    translated_slugs: Array<{
+      __typename?: 'TranslatedSlug';
+      lang: string;
+      name: string | null;
+      path: string | null;
+    } | null> | null;
+    content: {
+      __typename?: 'HeaderComponent';
+      _editable: string | null;
+      _uid: string | null;
+      component: string | null;
+      navigation: any | null;
+      skipLinksText: string | null;
+      bookACallLinkText: string | null;
+      logo: {
+        __typename?: 'Asset';
+        focus: string | null;
+        alt: string | null;
+        copyright: string | null;
+        filename: string;
+        id: number | null;
+        name: string | null;
+        title: string | null;
+      } | null;
+    } | null;
+  } | null;
+};
+
 export type LinksQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type LinksQuery = {

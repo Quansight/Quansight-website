@@ -2,11 +2,11 @@ import { FC, useState, useEffect } from 'react';
 
 import clsx from 'clsx';
 
-import { LinkVariant } from '../../Common/types';
-import { TNavigationDropdown } from '../types';
-import { NavigationMobileLink } from './NavigationMobileLink';
+import { LinkVariant } from '../../types';
+import { THeaderMobileDropdownProps } from '../types';
+import { HeaderMobileLink } from './HeaderMobileLink';
 
-export const NavigationDropdown: FC<TNavigationDropdown> = ({
+export const HeaderMobileDropdown: FC<THeaderMobileDropdownProps> = ({
   buttonText,
   links,
   isNavigationOpen,
@@ -39,7 +39,7 @@ export const NavigationDropdown: FC<TNavigationDropdown> = ({
         className={clsx('mb-[0.7rem]', isNavbarItemOpen ? 'block' : 'hidden')}
       >
         {links.map((link) => (
-          <NavigationMobileLink
+          <HeaderMobileLink
             key={link._uid}
             {...link}
             variant={LinkVariant.Dropdown}
