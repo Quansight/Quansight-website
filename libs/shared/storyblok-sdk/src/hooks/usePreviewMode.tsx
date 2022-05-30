@@ -22,7 +22,7 @@ export const usePreviewMode = (isPreviewMode: boolean): boolean => {
         `/api/enter-preview?token=${process.env['NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN']}`,
       ).then(reload);
     }
-  }, [isPreviewMode, reload]);
+  }, [isPreviewMode]);
 
   useEffect(() => {
     if (isPreviewMode && !isStoryblok) {

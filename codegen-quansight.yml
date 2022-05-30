@@ -1,0 +1,57 @@
+overwrite: true
+schema:
+  - https://gapi.storyblok.com/v1/api:
+      headers:
+        Token: '${STORYBLOK_PREVIEW_TOKEN}'
+        Version: draft
+
+generates:
+  apps/consulting/api/types/basic.ts:
+    documents:
+      - 'libs/shared/storyblok-sdk/src/api/queries/common/*.graphql'
+      - 'apps/consulting/api/queries/*.graphql'
+    plugins:
+      - add:
+          content: '/* eslint-disable @typescript-eslint/no-explicit-any */'
+      - typescript
+    config:
+      avoidOptionals:
+        field: true
+        inputValue: true
+        object: true
+        defaultValue: true
+
+  apps/consulting/api/types/operations.ts:
+    documents:
+      - 'libs/shared/storyblok-sdk/src/api/queries/common/*.graphql'
+      - 'apps/consulting/api/queries/*.graphql'
+    preset: import-types
+    presetConfig:
+      typesPath: ./basic
+    plugins:
+      - add:
+          content: '/* eslint-disable @typescript-eslint/no-explicit-any */'
+      - typescript-operations
+    config:
+      avoidOptionals:
+        field: true
+        inputValue: true
+        object: true
+        defaultValue: true
+
+  apps/consulting/api/types/hooks.ts:
+    documents:
+      - 'libs/shared/storyblok-sdk/src/api/queries/common/*.graphql'
+      - 'apps/consulting/api/queries/*.graphql'
+    preset: import-types
+    presetConfig:
+      typesPath: ./operations
+    plugins:
+      - add:
+          content: '/* eslint-disable @typescript-eslint/no-explicit-any */'
+      - typescript-react-apollo
+    config:
+      withHOC: false
+      withComponent: false
+      withHooks: false
+      withResultType: true

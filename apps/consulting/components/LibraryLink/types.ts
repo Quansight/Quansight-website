@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { TLinkData } from '@quansight/shared/types';
+import { TLinkData } from '../../types/storyblok/bloks/libraryProps';
 
 export type TLibraryLinkProps = {
   children: ReactNode;

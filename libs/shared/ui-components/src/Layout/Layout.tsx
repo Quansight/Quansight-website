@@ -1,24 +1,17 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
-import { Footer } from '../Footer/Footer';
-import { HeaderDesktop } from '../Header/HeaderDesktop/HeaderDesktop';
-import { HeaderMobile } from '../Header/HeaderMobile/HeaderMobile';
-import { TLayoutProps } from './types';
+export type TLayoutProps = {
+  children: ReactNode;
+  footer: ReactNode;
+};
 
-export const Layout: FC<TLayoutProps> = ({
-  children,
-  footer,
-  header,
-  variant,
-}) => (
-  <div>
-    {header?.content && (
-      <header className="fixed inset-x-0 top-0 z-20 text-white ">
-        <HeaderMobile {...header.content} variant={variant} />
-        <HeaderDesktop />
-      </header>
-    )}
-    <main id="maincontent">{children}</main>
-    {footer?.content && <Footer {...footer.content} />}
-  </div>
-);
+export const Layout: FC<TLayoutProps> = ({ footer, children }) => {
+  return (
+    <div>
+      <main>{children}</main>
+      {footer}
+    </div>
+  );
+};
+
+export default Layout;

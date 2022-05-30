@@ -1,5 +1,4 @@
-import { TTile } from '@quansight/shared/types';
-
+import { TTile } from '../../types/storyblok/bloks/libraryProps';
 import { formatDateToTile } from './services/formatDateToTile';
 import { getAuthorFullName } from './services/getAuthorFullName';
 import { getLinkType } from './services/getLinkType';

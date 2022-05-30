@@ -2,20 +2,26 @@ import React, { FC } from 'react';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { Api } from '@quansight/shared/storyblok-sdk';
+import { ISlugParams } from '@quansight/shared/types';
 import {
-  ISlugParams,
-  TContainerProps,
+  Layout,
+  SEO,
   DomainVariant,
-} from '@quansight/shared/types';
-import { Page, Layout, SEO } from '@quansight/shared/ui-components';
+  Footer,
+} from '@quansight/shared/ui-components';
 import { isPageType, getPaths } from '@quansight/shared/utils';
 
+import { LinkEntry } from '../../api/types/basic';
+import { getFooter } from '../../api/utils/getFooter';
+import { getLinks } from '../../api/utils/getLinks';
+import { getPage } from '../../api/utils/getPage';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
+import { Page } from '../../components/Page/Page';
+import { TContainerProps } from '../../types/containerProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 
-const Container: FC<TContainerProps> = ({ data, footer, header, preview }) => (
-  <Layout footer={footer} header={header} variant={DomainVariant.Quansight}>
+const Container: FC<TContainerProps> = ({ data, footer, preview }) => (
+  <Layout footer={<Footer {...footer.content} />}>
     <SEO
       title={data.content.title}
       description={data.content.description}
@@ -30,9 +36,10 @@ const Container: FC<TContainerProps> = ({ data, footer, header, preview }) => (
 );
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await Api.getLinks();
+  const links = await getLinks();
   return {
-    paths: getPaths(data?.Links.items),
+    paths:
+      getPaths<Pick<LinkEntry, 'id' | 'isFolder' | 'name' | 'slug'>>(links),
     fallback: false,
   };
 };
@@ -41,15 +48,13 @@ export const getStaticProps: GetStaticProps<
   TContainerProps,
   ISlugParams
 > = async ({ params: { slug }, preview = false }) => {
-  const { data } = await Api.getPageItem({ slug });
-  const { data: footer } = await Api.getFooterItem();
-  const { data: header } = await Api.getHeaderItem();
+  const data = await getPage({ slug });
+  const footer = await getFooter();
 
   return {
     props: {
-      data: data.PageItem,
-      footer: footer ? footer.FooterItem : null,
-      header: header ? header.HeaderItem : null,
+      data,
+      footer,
       preview,
     },
   };
