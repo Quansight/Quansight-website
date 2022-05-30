@@ -16,7 +16,7 @@ export const FilterMenu: FC<TFilterMenuProps> = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const container = useRef<HTMLDivElement>(null);
 
-  const handleClick = (menuDataItem: string): void => {
+  const changeFilter = (menuDataItem: string): void => {
     setIsDropdownOpen(false);
     handleFilter(menuDataItem);
   };
@@ -88,14 +88,14 @@ export const FilterMenu: FC<TFilterMenuProps> = ({
           <FilterMenuItem
             menuDataItem={getFilterStartingValue(filterMenuVariant)}
             menuDataCurrent={menuDataCurrent}
-            handleClick={handleClick}
+            changeFilter={changeFilter}
           />
           {menuData.items.map(({ id, value }) => (
             <FilterMenuItem
               key={id}
               menuDataItem={value}
               menuDataCurrent={menuDataCurrent}
-              handleClick={handleClick}
+              changeFilter={changeFilter}
             />
           ))}
         </ul>

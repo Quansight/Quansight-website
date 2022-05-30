@@ -9,7 +9,7 @@ export type TMenuItemData = {
   menuDataCurrent: Maybe<string>;
 };
 export type TFilterMenuItemProps = {
-  handleClick: (menuDataItem: string) => void;
+  changeFilter: (menuDataItem: string) => void;
   menuDataItem: string;
 } & TMenuItemData;
 
