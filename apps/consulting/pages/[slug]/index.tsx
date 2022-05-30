@@ -2,13 +2,8 @@ import React, { FC } from 'react';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { ISlugParams } from '@quansight/shared/types';
-import {
-  Layout,
-  SEO,
-  DomainVariant,
-  Footer,
-} from '@quansight/shared/ui-components';
+import { ISlugParams, DomainVariant } from '@quansight/shared/types';
+import { Layout, SEO, Footer } from '@quansight/shared/ui-components';
 import { isPageType, getPaths } from '@quansight/shared/utils';
 
 import { LinkEntry } from '../../api/types/basic';

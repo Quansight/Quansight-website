@@ -2,13 +2,8 @@ import React, { FC } from 'react';
 
 import { GetStaticProps } from 'next';
 
-import { ISlugParams } from '@quansight/shared/types';
-import {
-  Layout,
-  SEO,
-  DomainVariant,
-  Footer,
-} from '@quansight/shared/ui-components';
+import { ISlugParams, DomainVariant } from '@quansight/shared/types';
+import { Layout, SEO, Footer } from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
 import { getArticleItems } from '../../api/utils/getArticleItems';

@@ -7,9 +7,8 @@ import clsx from 'clsx';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 
-import { ISlugParams } from '@quansight/shared/types';
+import { ISlugParams, DomainVariant } from '@quansight/shared/types';
 import {
-  DomainVariant,
   Footer,
   Hero,
   HeroVariant,

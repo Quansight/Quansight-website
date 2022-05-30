@@ -3,13 +3,8 @@ import { FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { usePreviewMode } from '@quansight/shared/storyblok-sdk';
-import { ISlugParams } from '@quansight/shared/types';
-import {
-  Layout,
-  SEO,
-  DomainVariant,
-  Footer,
-} from '@quansight/shared/ui-components';
+import { ISlugParams, DomainVariant } from '@quansight/shared/types';
+import { Layout, SEO, Footer } from '@quansight/shared/ui-components';
 
 import { getArticleItem } from '../../api/utils/getArticleItem';
 import { getFooter } from '../../api/utils/getFooter';

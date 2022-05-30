@@ -1,15 +1,13 @@
-import { ApolloQueryResult } from '@apollo/client';
+import { ApolloQueryResult, DocumentNode } from '@apollo/client';
 
 import { apolloClient } from '../sdk/clients/apolloClient';
-import * as Types from '../types/graphql';
-import { HeaderItemQuery } from '../types/graphql';
 
-export const getHeaderItem = (): Promise<
-  ApolloQueryResult<HeaderItemQuery>
-> => {
+export const getHeaderItem = <ResultType>(
+  query: DocumentNode,
+): Promise<ApolloQueryResult<ResultType>> => {
   return apolloClient.query({
     fetchPolicy: 'cache-first',
-    query: Types.HeaderItemDocument,
+    query,
     variables: {
       slug: 'layout/header',
     },

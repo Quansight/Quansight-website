@@ -5,8 +5,8 @@ import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 
+import { DomainVariant } from '@quansight/shared/types';
 import {
-  DomainVariant,
   Footer,
   Hero,
   HeroVariant,
