@@ -10,10 +10,17 @@ import {
   DomainVariant,
   Footer,
 } from '@quansight/shared/ui-components';
+import { Hero } from '@quansight/shared/ui-components';
+import { HeroVariant } from '@quansight/shared/ui-components';
 
 import { getFooter } from '../../../api/utils/getFooter';
 import { getLibraryArticleItem } from '../../../api/utils/getLibraryArticleItem';
+// import { getLibraryArticleItems } from '../../../api/utils/getLibraryArticleItems';
+// import { getLibraryLinkItems } from '../../../api/utils/getLibraryLinkItems';
 import { getLinks } from '../../../api/utils/getLinks';
+import { BlogHeader } from '../../../components/Blog/BlogHeader/BlogHeader';
+// import { BlogMoreArticles } from '../../../components/Blog/BlogMoreArticles/BlogMoreArticles';
+import { BlogPost } from '../../../components/Blog/BlogPost/BlogPost';
 import { TLibraryArticleProps } from '../../../types/storyblok/bloks/libraryArticleProps';
 import { ARTICLES_DIRECTORY_SLUG } from '../../../utils/getArticlesPaths/constants';
 import { getArticlesPaths } from '../../../utils/getArticlesPaths/getArticlesPaths';
@@ -21,6 +28,7 @@ import { getArticlesPaths } from '../../../utils/getArticlesPaths/getArticlesPat
 const Article: FC<TLibraryArticleProps> = ({ data, footer, preview }) => {
   usePreviewMode(preview);
   const { content } = data;
+  console.log(data);
 
   return (
     <Layout footer={<Footer {...footer.content} />}>
@@ -29,12 +37,24 @@ const Article: FC<TLibraryArticleProps> = ({ data, footer, preview }) => {
         description={content.description}
         variant={DomainVariant.Quansight}
       />
-      {/* TODO: hero */}
-      {/* TODO: go back link */}
-      {/* TODO: meta data */}
-      <h1>{content.postTitle}</h1>
-      {/* TODO: article */}
-      {/* TODO: read more */}
+      <Hero
+        imageSrc={content.postImage.filename}
+        imageAlt={content.postImage.alt}
+        variant={HeroVariant.Small}
+      />
+      <article>
+        <BlogHeader
+          postTitle={content.postTitle}
+          publishedDate={content.publishedDate}
+          firstName={content.author.content.firstName}
+          lastName={content.author.content.lastName}
+          githubNick={content.author.content.githubNick}
+          githubLink={content.author.content.githubLink}
+          authorImage={content.author.content.authorImage}
+        />
+        <BlogPost postText={content.postText} />
+      </article>
+      {/* <BlogMoreArticles category={content.category} /> */}
     </Layout>
   );
 };
@@ -54,6 +74,8 @@ export const getStaticProps: GetStaticProps<
   const data = await getLibraryArticleItem({
     slug: `${ARTICLES_DIRECTORY_SLUG}${slug}`,
   });
+  // const libraryLinks = await getLibraryLinkItems();
+  // const articleItems = await getLibraryArticleItems();
   const footer = await getFooter();
   return {
     props: {
