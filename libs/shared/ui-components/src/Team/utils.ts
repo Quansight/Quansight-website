@@ -1,5 +1,3 @@
-// import { PersonItem, Maybe } from '@quansight/shared/storyblok-sdk';
-
 import { TeamRole, TTeamMember } from './types';
 
 export const filterTeam = (
