@@ -1,5 +1,5 @@
 import { FC } from 'react';
 
 export const BlogMoreArticles: FC = () => {
-  return <div>BlogMoreArticles</div>;
+  return <footer>BlogMoreArticles</footer>;
 };

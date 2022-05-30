@@ -42,7 +42,7 @@ const Article: FC<TLibraryArticleProps> = ({ data, footer, preview }) => {
         imageAlt={content.postImage.alt}
         variant={HeroVariant.Small}
       />
-      <article>
+      <article className="px-8 mx-auto lg:px-40 xl:px-[25rem] max-w-layout">
         <BlogHeader
           postTitle={content.postTitle}
           publishedDate={content.publishedDate}
@@ -50,11 +50,11 @@ const Article: FC<TLibraryArticleProps> = ({ data, footer, preview }) => {
           lastName={content.author.content.lastName}
           githubNick={content.author.content.githubNick}
           githubLink={content.author.content.githubLink}
-          authorImage={content.author.content.authorImage}
+          authorImage={content.author.content.image}
         />
         <BlogPost postText={content.postText} />
+        {/* <BlogMoreArticles category={content.category} /> */}
       </article>
-      {/* <BlogMoreArticles category={content.category} /> */}
     </Layout>
   );
 };

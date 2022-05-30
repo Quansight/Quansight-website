@@ -1,6 +1,6 @@
 import { TTile } from '../../types/storyblok/bloks/libraryProps';
-import { formatDateToTile } from './services/formatDateToTile';
-import { getAuthorFullName } from './services/getAuthorFullName';
+import { formatArticleDate } from '../formatArticleDate/formatArticleDate';
+import { getAuthorName } from '../getAuthorName/getAuthorName';
 import { getLinkType } from './services/getLinkType';
 import { TLibraryTileRawData } from './types';
 
@@ -10,8 +10,11 @@ export const getTileProps = (tile: TLibraryTileRawData): TTile => ({
   postType: tile.content.type,
   postCategory: tile.content.category,
   title: tile.content.postTitle,
-  author: getAuthorFullName(tile),
-  date: formatDateToTile(tile),
+  author: getAuthorName(
+    tile.content.author.content.firstName,
+    tile.content.author.content.lastName,
+  ),
+  date: formatArticleDate(tile.content.publishedDate),
   link: getLinkType(tile),
   uuid: tile.uuid,
 });

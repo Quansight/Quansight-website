@@ -15,7 +15,7 @@ export const BlogHeader: FC<TBlogHeaderProps> = ({
   authorImage,
 }) => {
   return (
-    <section>
+    <header className="mt-[5.8rem] mb-[7rem]">
       <BlogHeaderLink />
       <BlogHeaderPostData postTitle={postTitle} publishedDate={publishedDate} />
       <BlogHeaderAuthor
@@ -25,6 +25,6 @@ export const BlogHeader: FC<TBlogHeaderProps> = ({
         githubLink={githubLink}
         authorImage={authorImage}
       />
-    </section>
+    </header>
   );
 };
