@@ -7,7 +7,7 @@ Run `npm run start:consulting` or `npm run start:labs` to start a corresponding 
 ## Adding new components
 
 1. Create the component with its schema in Storyblok components.
-2. Create the Next component. The components are located in `/apps/consulting/components` (LLC components), `/apps/labs/components` (labs components) or `/libs/shared/ui-components/src` (shared components).
+2. Create the React component. The components are located in `/apps/consulting/components` (LLC components), `/apps/labs/components` (labs components) or `/libs/shared/ui-components/src` (shared components). Name of the Storyblok component should be the same as the name of the React component.
 3. (Only if you're adding a shared component) Add a component and types imports in `/libs/shared/ui-components/src/index.ts` file to make it available in the apps.
 4. Add storyblok raw data types to `/apps/.../types/storyblok` folder.
 5. Import these raw data types to `/apps/.../types/storyblok/rawBlok.ts` file and add to the collective `TRawBlock` type.
