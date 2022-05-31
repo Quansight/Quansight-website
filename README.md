@@ -58,7 +58,7 @@ Every post is structured with two main sections - the `meta` and `content` secti
     	alt: Hello world post featured image
     hero:
     	imageSrc: /posts/hello-world-post/hero.jpeg
-    imageAlt: Lorem ipsum dolor
+      imageAlt: Lorem ipsum dolor
     ```
 
 ### Adding new blog post
