@@ -6,6 +6,7 @@ export const getPostsByPage = (
   page: number,
   offset = DEFAULT_API_OFFSET,
 ): TPost[] => {
-  const startingPoint = (page - 1) * offset;
-  return page ? posts.slice(startingPoint, startingPoint + offset) : posts;
+  const resultPage = page || 1;
+  const startingPoint = (resultPage - 1) * offset;
+  return posts.slice(startingPoint, startingPoint + offset);
 };
