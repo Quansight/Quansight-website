@@ -2,14 +2,9 @@ import { FC } from 'react';
 
 import clsx from 'clsx';
 
-import { TeamDisplay } from '../types';
 import { TTeamMemberName } from './types';
 
-export const TeamMemberName: FC<TTeamMemberName> = ({
-  firstName,
-  displayName,
-  lastName,
-}) => (
+export const TeamMemberName: FC<TTeamMemberName> = ({ name }) => (
   <h3 className="relative mb-[1rem] h-[5rem] md:h-[6rem]">
     <span
       className={clsx(
@@ -18,8 +13,7 @@ export const TeamMemberName: FC<TTeamMemberName> = ({
         'text-violet font-heading',
       )}
     >
-      {firstName}
-      {displayName === TeamDisplay.Full && ` ${lastName}`}
+      {name}
     </span>
   </h3>
 );

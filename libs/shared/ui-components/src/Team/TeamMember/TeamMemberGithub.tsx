@@ -4,9 +4,9 @@ import Link from 'next/link';
 
 import { TTeamMemberGithubNick } from './types';
 
-export const TeamMemberGithub: FC<TTeamMemberGithubNick> = ({ githubNick }) => (
-  <Link href={`https://github.com/${githubNick}`}>
-    <a>
+export const TeamMemberGithub: FC<TTeamMemberGithubNick> = ({ nick }) => (
+  <Link href={`https://github.com/${nick}`}>
+    <a rel="noreferrer" target="_blank">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="21"

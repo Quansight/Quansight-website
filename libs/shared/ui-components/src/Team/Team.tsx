@@ -22,7 +22,7 @@ export const Team: FC<TTeamProps> = ({
       <h2
         className="
           text-[4rem] font-extrabold leading-[4.9rem] text-center md:text-[4.8rem] 
-        text-violet font-heading
+          text-violet font-heading
         "
       >
         {header}

@@ -3,9 +3,7 @@ import { TImage } from '@quansight/shared/types';
 import { TeamShape } from '../types';
 
 export type TTeamMemberName = {
-  firstName: string;
-  lastName: string;
-  displayName: string;
+  name: string;
 };
 
 export type TTeamMemberImage = {
@@ -14,23 +12,26 @@ export type TTeamMemberImage = {
 };
 
 export type TTeamMemberGithubNick = {
-  githubNick?: string;
+  nick: string;
 };
 
-export type TTeamMemberProject = {
+type TTeamMemberProject = {
   name: string;
 };
 
 export type TTeamMemberProjects = {
-  projects?: TTeamMemberProject[];
+  projects: TTeamMemberProject[];
 };
 
 export type TTeamMember = {
-  image?: TImage;
+  firstName: string;
+  lastName: string;
+  displayName: string;
   role: string;
-} & TTeamMemberName &
-  TTeamMemberGithubNick &
-  TTeamMemberProjects;
+  image?: TImage;
+  githubNick?: string;
+  projects?: TTeamMemberProject[];
+};
 
 export type TTeamMemberComponent = {
   shape: TeamShape;
