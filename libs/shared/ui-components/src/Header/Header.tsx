@@ -16,7 +16,7 @@ export const Header: FC<THeaderProps> = ({
 }) => {
   const deviceSize = useDeviceSize();
   return (
-    <header className="fixed inset-x-0 top-0 z-20 text-white sm:absolute">
+    <header className="fixed inset-x-0 top-0 z-20 mx-auto text-white sm:absolute max-w-layout">
       <HeaderSkipLinks
         skipLinksText={skipLinksText}
         domainVariant={domainVariant}
@@ -29,7 +29,13 @@ export const Header: FC<THeaderProps> = ({
           domainVariant={domainVariant}
         />
       )}
-      {deviceSize !== DeviceSizeVariant.Mobile && <HeaderDesktop />}
+      {deviceSize !== DeviceSizeVariant.Mobile && (
+        <HeaderDesktop
+          logo={logo}
+          navigation={navigation}
+          domainVariant={domainVariant}
+        />
+      )}
     </header>
   );
 };

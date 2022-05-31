@@ -6,6 +6,7 @@ import {
   THeaderNavigation,
   THeaderLink,
   THeaderDropdown,
+  LinkVariant,
 } from '../types';
 
 type TIsNavigationOpen = {
@@ -38,7 +39,10 @@ export type THeaderMobileNavigationProviderProps = {
 } & TIsNavigationOpen &
   TSetIsNavigationOpen;
 
-export type THeaderMobileLinkProps = THeaderLink & TSetIsNavigationOpen;
+export type THeaderMobileLinkProps = {
+  linkVariant: LinkVariant;
+} & THeaderLink &
+  TSetIsNavigationOpen;
 
 export type THeaderMobileDropdownProps = THeaderDropdown &
   TIsNavigationOpen &

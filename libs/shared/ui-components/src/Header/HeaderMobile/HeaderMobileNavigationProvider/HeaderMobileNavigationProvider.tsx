@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { Placeholder } from '../../../Placeholder/Placeholder';
-import { THeaderLink, THeaderDropdown } from '../../types';
+import { THeaderLink, THeaderDropdown, LinkVariant } from '../../types';
 import { THeaderMobileNavigationProviderProps } from '../types';
 import { HeaderMobileDropdown } from './HeaderMobileDropdown';
 import { HeaderMobileLink } from './HeaderMobileLink';
@@ -14,6 +14,7 @@ export const HeaderMobileNavigationProvider: FC<
       return (
         <HeaderMobileLink
           {...(navigationItem as THeaderLink)}
+          linkVariant={LinkVariant.Navigation}
           setIsNavigationOpen={setIsNavigationOpen}
         />
       );

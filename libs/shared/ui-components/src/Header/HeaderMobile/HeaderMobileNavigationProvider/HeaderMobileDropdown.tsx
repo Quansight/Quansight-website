@@ -42,7 +42,7 @@ export const HeaderMobileDropdown: FC<THeaderMobileDropdownProps> = ({
           <HeaderMobileLink
             key={link._uid}
             {...link}
-            variant={LinkVariant.Dropdown}
+            linkVariant={LinkVariant.Dropdown}
             setIsNavigationOpen={setIsNavigationOpen}
           />
         ))}

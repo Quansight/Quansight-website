@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { DomainVariant } from '@quansight/shared/types';
 
 import { HeaderMobileBookingLink } from './HeaderMobileBookingLink';
-import { HeaderMobileNavigationProvider } from './HeaderMobileNavigationProvider/HeaderNavigationProvider';
+import { HeaderMobileNavigationProvider } from './HeaderMobileNavigationProvider/HeaderMobileNavigationProvider';
 import { THeaderMobileNavigationProps } from './types';
 
 export const HeaderMobileNavigation: FC<THeaderMobileNavigationProps> = ({

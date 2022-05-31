@@ -10,7 +10,7 @@ export const HeaderMobileLink: FC<THeaderMobileLinkProps> = ({
   linkText,
   linkUrl,
   queryParams,
-  variant = LinkVariant.Navigation,
+  linkVariant = LinkVariant.Navigation,
   setIsNavigationOpen,
 }) => {
   const router = useRouter();
@@ -27,7 +27,7 @@ export const HeaderMobileLink: FC<THeaderMobileLinkProps> = ({
       onClick={onLinkClick}
       className={clsx(
         'inline-block px-[2rem] w-full text-[1.7rem] leading-[2.825rem] text-left capitalize font-heading',
-        variant === LinkVariant.Dropdown
+        linkVariant === LinkVariant.Dropdown
           ? 'font-normal'
           : 'py-[1.6rem] font-extrabold',
       )}
