@@ -14,9 +14,6 @@ query Team {
           alt
         }
         projects
-        # githubLink {
-        #   url
-        # }
         githubNick
       }
     }

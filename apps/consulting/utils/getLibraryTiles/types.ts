@@ -1,15 +1,15 @@
 import {
-  ArticleItem,
-  ArticleItems,
+  LibraryarticleItem,
+  LibraryarticleItems,
   LibrarylinkItem,
   LibrarylinkItems,
 } from '../../api/types/basic';
 
-export type TLibraryTileRawData = LibrarylinkItem | ArticleItem | null;
+export type TLibraryTileRawData = LibrarylinkItem | LibraryarticleItem | null;
 
 export type TLibraryTilesTileRawData = TLibraryTileRawData[];
 
 export type TGetLibraryTilesProps = {
-  articleItems: ArticleItems;
+  articleItems: LibraryarticleItems;
   libraryLinks: LibrarylinkItems;
 };

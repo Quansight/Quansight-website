@@ -1,0 +1,11 @@
+query datasourceEntries($slug: String!) {
+  DatasourceEntries(datasource: $slug) {
+    items {
+      name
+      id
+      value
+      dimensionValue
+    }
+    total
+  }
+}
