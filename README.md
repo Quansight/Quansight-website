@@ -7,15 +7,20 @@ Run `npm run start:consulting` or `npm run start:labs` to start a corresponding 
 ## Adding new components
 
 1. Create the component with its schema in Storyblok components.
-2. Create the Next component. The components are located in `/apps/consulting/components` (LLC components), `/apps/labs/components` (labs components) or `/libs/shared/ui-components/src` (shared components). If you're adding a shared component, add a component and types imports in `/libs/shared/ui-components/src/index.ts` file to make it available in the apps.
-3. Add storyblok raw data types to `/apps/.../types/storyblok` folder. Import these types to `/apps/.../types/storyblok/rawBlok.ts` file and add to the collective `TRawBlock` type.
-4. Add storyblok props mapper to `/apps/.../components/BlokProvider/mappers` folder. Import this mapper to `/apps/.../components/BlockProvider/utils/getPropsByType.ts` file and add the case to the switch statement.
-5. Import the Next component to the `/apps/.../components/BlockProvider/componentsMap.ts` file and add to the `componentsMap` variable.
-6. Import the Next component types to the `/apps/.../components/BlockProvider/types.ts` file, add component name to the `ComponentType` enum and add props types to the `TBlokComponentPropsMap` type.
+2. Create the Next component. The components are located in `/apps/consulting/components` (LLC components), `/apps/labs/components` (labs components) or `/libs/shared/ui-components/src` (shared components).
+3. (Only if you're adding a shared component) Add a component and types imports in `/libs/shared/ui-components/src/index.ts` file to make it available in the apps.
+4. Add storyblok raw data types to `/apps/.../types/storyblok` folder.
+5. Import these raw data types to `/apps/.../types/storyblok/rawBlok.ts` file and add to the collective `TRawBlock` type.
+6. Add storyblok props mapper to `/apps/.../components/BlokProvider/mappers` folder.
+7. Import this props mapper to `/apps/.../components/BlockProvider/utils/getPropsByType.ts` file and add the case to the switch statement.
+8. Import the Next component to the `/apps/.../components/BlockProvider/componentsMap.ts` file and add to the `componentsMap` variable.
+9. Import the Next component types to the `/apps/.../components/BlockProvider/types.ts` file, add component name to the `ComponentType` enum and add props types to the `TBlokComponentPropsMap` type.
 
 ## Adding new queries
 
-1. You can fetch data from Storyblok directly using queries. To add the query start with adding the query schema .graphql file to `/apps/.../api/queries` folder.
+You can fetch data from Storyblok directly using queries. To add the query:
+
+1. Add the query schema .graphql file to `/apps/.../api/queries` folder.
 2. Run `npm run codegen:quansight` or `npm run codegen:labs` command, depending which site are you adding query to.
 3. Create the getting data function in `/apps/.../api/utils` folder using the function, type and hook created by the codegen script.
 
