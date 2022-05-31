@@ -20,7 +20,7 @@ export const FeaturedPosts: FC<TFeaturedPostsProps> = ({ posts }) => {
       <div className="flex flex-col justify-start sm:flex-row">
         {posts.map((post) => (
           <div
-            className="first:mb-[3.6rem] w-full border border-gray-400 border-solid sm:first:mr-[2.2rem] sm:first:mb-0 sm:w-1/2"
+            className="first:mb-[3.6rem] w-full border border-gray-300 border-solid sm:first:mr-[2.2rem] sm:first:mb-0 sm:w-1/2"
             key={post.slug}
           >
             {post.meta.featuredImage && (

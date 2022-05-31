@@ -2,6 +2,7 @@ import { TypeValuesUnion } from '@quansight/shared/types';
 import {
   TFormProps,
   TLogosProps,
+  TTeamProps,
   TTeaserProps,
 } from '@quansight/shared/ui-components';
 
@@ -15,6 +16,7 @@ export enum ComponentType {
   Form = 'form',
   Logos = 'logos',
   Projects = 'projects',
+  Team = 'team',
   Teaser = 'teaser',
 }
 
@@ -24,6 +26,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Form]: TFormProps;
   [ComponentType.Logos]: TLogosProps;
   [ComponentType.Projects]: TProjectsProps;
+  [ComponentType.Team]: TTeamProps;
   [ComponentType.Teaser]: TTeaserProps;
 };
 

@@ -68,7 +68,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
       )}
       <article
         className={clsx(
-          'pt-[7.5rem] pb-[11.4rem] mx-auto w-[95%] max-w-[100.17rem] border-gray-300 border-solid md:w-[85%] xl:w-[70%]',
+          'pt-[7.5rem] pb-[11.4rem] mx-auto w-[95%] max-w-[100.17rem] border-gray-100 border-solid md:w-[85%] xl:w-[70%]',
           {
             'border-b': featuredPosts.length,
           },
