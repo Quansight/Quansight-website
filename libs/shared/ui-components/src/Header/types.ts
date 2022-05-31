@@ -1,7 +1,6 @@
-import { DomainVariant, TImage, TLink } from '@quansight/shared/types';
-import { TBlok } from '@quansight/shared/types';
+import { DomainVariant, TImage, TLink, TBlok } from '@quansight/shared/types';
 
-import { TBookingLinkProps } from './HeaderMobile/types';
+import { TBookingLink } from './HeaderMobile/types';
 
 export type TDomainVariant = { domainVariant: DomainVariant };
 
@@ -34,7 +33,7 @@ export type THeaderSkipLinksProps = {
   skipLinksText: string;
 } & TDomainVariant;
 
-export type THeaderProps = TBookingLinkProps &
+export type THeaderProps = TBookingLink &
   TDomainVariant &
   THeaderLogoProps &
   THeaderNavigation &

@@ -20,6 +20,7 @@ export const HeaderMobileLink: FC<THeaderMobileLinkProps> = ({
     router.push(getLinkUrl(queryParams, linkUrl));
     setIsNavigationOpen(false);
   };
+
   return (
     <button
       onClick={onLinkClick}

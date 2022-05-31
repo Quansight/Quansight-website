@@ -22,9 +22,7 @@ export const Index: FC<TContainerProps> = ({
 }) => (
   <Layout
     footer={<Footer {...footer.content} />}
-    header={
-      <Header {...header.content} domainVariant={DomainVariant.Quansight} />
-    }
+    header={<Header {...header.content} domainVariant={DomainVariant.Labs} />}
   >
     <SEO
       title={data.content.title}
@@ -46,6 +44,7 @@ export const getStaticProps: GetStaticProps<
   const data = await getPage({ slug: 'home' });
   const footer = await getFooter();
   const header = await getHeader();
+
   return {
     props: {
       data: data,

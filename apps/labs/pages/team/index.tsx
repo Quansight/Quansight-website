@@ -24,14 +24,12 @@ export const Team: FC<TContainerProps> = ({
 }) => (
   <Layout
     footer={<Footer {...footer.content} />}
-    header={
-      <Header {...header.content} domainVariant={DomainVariant.Quansight} />
-    }
+    header={<Header {...header.content} domainVariant={DomainVariant.Labs} />}
   >
     <SEO
       title={data.content.title}
       description={data.content.description}
-      variant={DomainVariant.Quansight}
+      variant={DomainVariant.Labs}
     />
     {isPageType(data?.content?.component) && (
       <Page data={data} preview={preview}>

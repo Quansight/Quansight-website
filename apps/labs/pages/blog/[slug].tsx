@@ -49,9 +49,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
   return (
     <Layout
       footer={<Footer {...footer.content} />}
-      header={
-        <Header {...header.content} domainVariant={DomainVariant.Quansight} />
-      }
+      header={<Header {...header.content} domainVariant={DomainVariant.Labs} />}
     >
       <SEO
         title={post.meta.title}

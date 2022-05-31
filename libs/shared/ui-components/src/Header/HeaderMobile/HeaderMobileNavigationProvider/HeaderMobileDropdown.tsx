@@ -17,6 +17,7 @@ export const HeaderMobileDropdown: FC<THeaderMobileDropdownProps> = ({
   useEffect(() => {
     setIsNavbarItemOpen(false);
   }, [isNavigationOpen]);
+
   return (
     <div>
       <button

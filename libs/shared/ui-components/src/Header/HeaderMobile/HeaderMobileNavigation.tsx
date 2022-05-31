@@ -40,7 +40,11 @@ export const HeaderMobileNavigation: FC<THeaderMobileNavigationProps> = ({
           </li>
         ))}
       </ul>
-      <HeaderMobileBookingLink bookACallLinkText={bookACallLinkText} />
+      <HeaderMobileBookingLink
+        bookACallLinkText={bookACallLinkText}
+        domainVariant={domainVariant}
+        setIsNavigationOpen={setIsNavigationOpen}
+      />
     </div>
   </nav>
 );

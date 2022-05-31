@@ -31,7 +31,7 @@ export type THeaderMobileNavigationProps = TBookingLinkProps &
 
 export type THeaderMobileProps = THeaderLogoProps &
   THeaderNavigation &
-  TBookingLinkProps &
+  TBookingLink &
   TDomainVariant;
 
 export type THeaderMobileNavigationProviderProps = {
@@ -48,6 +48,8 @@ export type THeaderMobileDropdownProps = THeaderDropdown &
   TIsNavigationOpen &
   TSetIsNavigationOpen;
 
-export type TBookingLinkProps = {
-  bookACallLinkText: string;
-};
+export type TBookingLink = { bookACallLinkText: string };
+
+export type TBookingLinkProps = TDomainVariant &
+  TSetIsNavigationOpen &
+  TBookingLink;

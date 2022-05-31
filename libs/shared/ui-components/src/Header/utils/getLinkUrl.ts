@@ -5,7 +5,9 @@ import { TLink } from '@quansight/shared/types';
 export const getLinkUrl = (
   queryParams: Maybe<string>,
   linkUrl: TLink,
-): string =>
-  queryParams
-    ? `/${linkUrl.cached_url}${queryParams}`
-    : `/${linkUrl.cached_url}`;
+): string => {
+  const isHomePageSlug =
+    linkUrl.cached_url === 'homepage' || linkUrl.cached_url === 'home';
+  const baseUrl = isHomePageSlug ? '' : linkUrl.cached_url;
+  return queryParams ? `/${baseUrl}${queryParams}` : `/${baseUrl}`;
+};

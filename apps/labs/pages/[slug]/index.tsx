@@ -17,9 +17,7 @@ import { TRawBlok } from '../../types/storyblok/bloks/rawBlock';
 const Container: FC<TContainerProps> = ({ data, header, footer, preview }) => (
   <Layout
     footer={<Footer {...footer.content} />}
-    header={
-      <Header {...header.content} domainVariant={DomainVariant.Quansight} />
-    }
+    header={<Header {...header.content} domainVariant={DomainVariant.Labs} />}
   >
     <SEO
       title={data.content.title}

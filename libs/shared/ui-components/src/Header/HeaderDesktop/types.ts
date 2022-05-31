@@ -16,7 +16,7 @@ export type THeaderDesktopNavigationProviderProps = {
   navigationItem: THeaderLink | THeaderDropdown;
 };
 
-export type THeaderDesktopNavigationProps = THeaderNavigation;
+export type THeaderDesktopNavigationProps = THeaderNavigation & TDomainVariant;
 
 export type THeaderDesktopLinkProps = THeaderLink;
 

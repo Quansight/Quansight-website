@@ -113,9 +113,7 @@ const BlogListPage: FC<BlogListPageProps> = ({
   return (
     <Layout
       footer={<Footer {...footer.content} />}
-      header={
-        <Header {...header.content} domainVariant={DomainVariant.Quansight} />
-      }
+      header={<Header {...header.content} domainVariant={DomainVariant.Labs} />}
     >
       <SEO
         title="Blog"

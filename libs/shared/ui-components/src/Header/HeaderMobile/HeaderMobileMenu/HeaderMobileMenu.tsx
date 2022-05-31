@@ -24,8 +24,8 @@ export const HeaderMobileMenu: FC<THeaderMobileMenuProps> = ({
     const handleSetMenuBackground = (): void => {
       if (typeof window !== 'undefined') {
         const menuHeight = container.current?.clientHeight || 70;
-        setIsMenuVisible(window.scrollY > scrollPosition ? false : true);
-        setMenuBackground(window.scrollY >= menuHeight ? true : false);
+        setIsMenuVisible(window.scrollY < scrollPosition);
+        setMenuBackground(window.scrollY >= menuHeight);
         setScrollPosition(window.scrollY);
       }
     };
