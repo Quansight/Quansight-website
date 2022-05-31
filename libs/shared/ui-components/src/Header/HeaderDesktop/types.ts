@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import {
   THeaderLogoProps,
   THeaderNavigation,
@@ -19,3 +21,7 @@ export type THeaderDesktopNavigationProps = THeaderNavigation;
 export type THeaderDesktopLinkProps = THeaderLink;
 
 export type THeaderDesktopDropdownProps = THeaderDropdown;
+
+export type THeaderDesktopDropdownLinkProps = {
+  onDropdownClose: Dispatch<SetStateAction<boolean>>;
+} & THeaderLink;

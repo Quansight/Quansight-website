@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
 import { LinkVariant } from '../../types';
+import { getLinkUrl } from '../../utils/getLinkUrl';
 import { THeaderMobileLinkProps } from '../types';
 
 export const HeaderMobileLink: FC<THeaderMobileLinkProps> = ({
@@ -16,10 +17,7 @@ export const HeaderMobileLink: FC<THeaderMobileLinkProps> = ({
   const router = useRouter();
 
   const onLinkClick = (): void => {
-    const url = queryParams
-      ? `/${linkUrl.cached_url}${queryParams}`
-      : `/${linkUrl.cached_url}`;
-    router.push(url);
+    router.push(getLinkUrl(queryParams, linkUrl));
     setIsNavigationOpen(false);
   };
   return (
