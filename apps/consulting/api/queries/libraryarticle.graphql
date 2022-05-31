@@ -1,5 +1,5 @@
-query articleItem($slug: ID!) {
-  ArticleItem(id: $slug) {
+query libraryArticleItem($slug: ID!) {
+  LibraryarticleItem(id: $slug) {
     content {
       _editable
       _uid
