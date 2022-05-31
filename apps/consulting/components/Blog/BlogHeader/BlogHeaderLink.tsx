@@ -11,7 +11,7 @@ export const BlogHeaderLink: FC = () => {
 
   return (
     <button
-      className="flex gap-[1rem] justify-center items-center mb-[1.2rem]"
+      className="flex gap-[1rem] justify-center items-center mb-[1.2rem] sm:mt-[1.8rem]"
       type="button"
       onClick={() => router.back()}
     >

@@ -34,7 +34,6 @@ const Article: FC<TLibraryArticleProps> = ({
 }) => {
   usePreviewMode(preview);
   const { content } = data;
-  console.log(data);
 
   return (
     <Layout
@@ -53,7 +52,7 @@ const Article: FC<TLibraryArticleProps> = ({
         imageAlt={content.postImage.alt}
         variant={HeroVariant.Small}
       />
-      <article className="px-8 mx-auto lg:px-40 xl:px-[25rem] max-w-layout">
+      <article className="px-[2rem] mx-auto sm:px-[6rem] lg:px-[10rem] xl:px-[25rem] max-w-layout">
         <BlogHeader
           postTitle={content.postTitle}
           publishedDate={content.publishedDate}

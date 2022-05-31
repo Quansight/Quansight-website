@@ -15,7 +15,7 @@ export const BlogHeader: FC<TBlogHeaderProps> = ({
   authorImage,
 }) => {
   return (
-    <header className="mt-[5.8rem] mb-[7rem]">
+    <header className="mt-[5.8rem] mb-[7rem] sm:mt-[4.4rem] sm:mb-[4.1rem] xl:mt-[7.1rem]">
       <BlogHeaderLink />
       <BlogHeaderPostData postTitle={postTitle} publishedDate={publishedDate} />
       <BlogHeaderAuthor
