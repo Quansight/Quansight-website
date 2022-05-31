@@ -14,28 +14,33 @@ export const filterLibraryTiles = (
     const typesFilterStartingValue = getFilterStartingValue(
       FilterMenuVariant.Type,
     );
-    if (
+
+    const isNotFiltered =
       postCategory === categoriesFilterStartingValue &&
-      postType === typesFilterStartingValue
-    ) {
+      postType === typesFilterStartingValue;
+
+    const isFilteredByCategory =
+      postType === typesFilterStartingValue &&
+      postCategory !== categoriesFilterStartingValue;
+
+    const isFilteredByType =
+      postType !== typesFilterStartingValue &&
+      postCategory === categoriesFilterStartingValue;
+
+    const isFilteredByAll =
+      postType !== typesFilterStartingValue &&
+      postCategory !== categoriesFilterStartingValue;
+
+    if (isNotFiltered) {
       return true;
     }
-    if (
-      postType === typesFilterStartingValue &&
-      postCategory !== categoriesFilterStartingValue
-    ) {
+    if (isFilteredByCategory) {
       return tile.postCategory.includes(postCategory);
     }
-    if (
-      postType !== typesFilterStartingValue &&
-      postCategory === categoriesFilterStartingValue
-    ) {
+    if (isFilteredByType) {
       return tile.postType === postType;
     }
-    if (
-      postType !== typesFilterStartingValue &&
-      postCategory !== categoriesFilterStartingValue
-    ) {
+    if (isFilteredByAll) {
       return (
         tile.postCategory.includes(postCategory) && tile.postType === postType
       );
