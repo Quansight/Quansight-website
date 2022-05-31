@@ -1,4 +1,4 @@
-// import { PersonItem } from '@quansight/shared/storyblok-sdk';
+import { TTeamMember } from './TeamMember/types';
 
 export enum TeamVariant {
   All = 'all',
@@ -10,40 +10,20 @@ export enum TeamDisplay {
   FirstName = 'first name',
 }
 
-export enum TeamRole {
-  Leadership = 'leadership',
-  Team = 'team',
-  Author = 'author',
+export enum TeamShape {
+  Square = 'square',
+  Rectangle = 'rectangle',
 }
 
-export type TTeamMemberProjectProps = {
-  name: string;
-};
-
-export type TPersonItem = {
-  firstName: string;
-  lastName: string;
-  displayName: TeamDisplay;
-  image: {
-    filename: string;
-    alt?: string;
-  };
-};
-
-export type TTeamMember = {
-  firstName: string;
-  lastName: string;
-  displayName: string;
-  image?: {
-    filename: string;
-    alt?: string;
-  };
-  role: string;
+export type TTeamMembers = {
+  teamToDisplay: TTeamMember[] | null | undefined;
+  shape: TeamShape;
 };
 
 export type TTeamProps = {
   variant: TeamVariant;
   header: string;
-  role: TeamRole;
+  role: string;
   team: TTeamMember[];
+  imagesShape: TeamShape;
 };

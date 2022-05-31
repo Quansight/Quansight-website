@@ -2,16 +2,11 @@ import React, { FC } from 'react';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { ISlugParams } from '@quansight/shared/types';
-import {
-  Layout,
-  SEO,
-  DomainVariant,
-  Footer,
-} from '@quansight/shared/ui-components';
+import { ISlugParams, DomainVariant } from '@quansight/shared/types';
+import { Layout, SEO, Footer, Header } from '@quansight/shared/ui-components';
 import { isPageType, getPaths } from '@quansight/shared/utils';
 
-import { getFooter, LinkEntry } from '../../api';
+import { getFooter, LinkEntry, getHeader } from '../../api';
 import { getLinks } from '../../api/utils/getLinks';
 import { getPage } from '../../api/utils/getPage';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
@@ -19,8 +14,11 @@ import { Page } from '../../components/Page/Page';
 import { TContainerProps } from '../../types/containerProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlock';
 
-const Container: FC<TContainerProps> = ({ data, footer, preview }) => (
-  <Layout footer={<Footer {...footer.content} />}>
+const Container: FC<TContainerProps> = ({ data, header, footer, preview }) => (
+  <Layout
+    footer={<Footer {...footer.content} />}
+    header={<Header {...header.content} domainVariant={DomainVariant.Labs} />}
+  >
     <SEO
       title={data.content.title}
       description={data.content.description}
@@ -49,10 +47,12 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params: { slug }, preview = false }) => {
   const data = await getPage({ slug });
   const footer = await getFooter();
+  const header = await getHeader();
 
   return {
     props: {
       data,
+      header,
       footer,
       preview,
     },

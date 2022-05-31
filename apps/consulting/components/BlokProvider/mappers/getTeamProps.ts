@@ -12,5 +12,12 @@ export const getTeamProps = (blok: TTeamRawData): TTeamProps => ({
     lastName: item.content.lastName,
     image: item.content.image,
     role: item.content.role,
+    githubNick: item.content.githubNick,
+    projects: item.content.projects
+      ? item.content.projects.map((project) => ({
+          name: project.name,
+        }))
+      : null,
   })),
+  imagesShape: blok.imagesShape,
 });

@@ -1,4 +1,4 @@
-import { Form, Logos, Teaser } from '@quansight/shared/ui-components';
+import { Form, Logos, Team, Teaser } from '@quansight/shared/ui-components';
 
 import { ColumnArticle } from '../ColumnArticle/ColumnArticle';
 import { PageHeading } from '../PageHeading/PageHeading';
@@ -11,5 +11,6 @@ export const componentsMap = {
   [ComponentType.Form]: Form,
   [ComponentType.Logos]: Logos,
   [ComponentType.Projects]: Projects,
+  [ComponentType.Team]: Team,
   [ComponentType.Teaser]: Teaser,
 };

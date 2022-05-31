@@ -11,18 +11,18 @@ import PaginationDecorativeImage from './assets/library-decoration.svg';
 import { PaginationOrientation, TPaginationProps } from './types';
 
 export const Pagination: FC<TPaginationProps> = ({
-  setCurrentPage,
+  onPageChange,
   currentPage,
   paginationPages,
 }) => {
   const router = useRouter();
 
-  const shouldRenderPagination = currentPage && paginationPages ? true : false;
+  const shouldRenderPagination = currentPage && paginationPages;
 
   const handleChangePage: ReactPaginateProps['onPageChange'] = ({
     selected,
   }): void => {
-    setCurrentPage(selected + 1);
+    onPageChange(selected + 1);
     router.push(
       {
         pathname: router.pathname,
@@ -38,7 +38,7 @@ export const Pagination: FC<TPaginationProps> = ({
 
   return (
     <div className="flex relative justify-center items-center pb-[20rem] mt-[1.1rem] sm:pb-[31.8rem] sm:mt-[4.6rem]">
-      {shouldRenderPagination && (
+      {!!shouldRenderPagination && (
         <ReactPaginate
           breakLabel="..."
           nextLabel={

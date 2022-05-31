@@ -2,7 +2,9 @@ import { FC } from 'react';
 
 import Head from 'next/head';
 
-import { TSEOProps, DomainVariant } from './types';
+import { DomainVariant } from '@quansight/shared/types';
+
+import { TSEOProps } from './types';
 
 export const SEO: FC<TSEOProps> = ({ title, description, variant }) => (
   <Head>

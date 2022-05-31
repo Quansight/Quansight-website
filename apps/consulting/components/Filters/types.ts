@@ -3,28 +3,34 @@ import { Dispatch, SetStateAction } from 'react';
 import { Maybe } from 'graphql/jsutils/Maybe';
 
 import { DatasourceEntries } from '../../api/types/basic';
-import { FilterMenuVariant } from '../../utils/getFiltersStartingValue/types';
+import { FilterMenuVariant } from '../../types/utils/FilterMenuVariant';
 
-export type TMenuItemData = {
-  menuDataCurrent: Maybe<string>;
-  handleFilter: (value: string) => void;
-};
+export enum FilterMenuOption {
+  State = 'state',
+  Query = 'query',
+}
+
 export type TFilterMenuItemProps = {
   menuDataItem: string;
-  setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
-} & TMenuItemData;
+  menuDataCurrent: Maybe<string>;
+  onFilterChange: (filter: string) => void;
+};
 
 export type TFilterMenuProps = {
   menuData: DatasourceEntries;
+  menuDataCurrent: Maybe<string>;
   filterMenuVariant: FilterMenuVariant;
-} & TMenuItemData;
+  onFilterChange: (filter: string, filterVariant: FilterMenuVariant) => void;
+};
+
+type postFilters = {
+  [key: string]: string;
+};
 
 export type TFiltersProps = {
-  postType: Maybe<string>;
-  setPostType: Dispatch<SetStateAction<string>>;
   postTypes: DatasourceEntries;
-  postCategory: string;
-  setPostCategory: Dispatch<SetStateAction<string>>;
   postCategories: DatasourceEntries;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
+  postFilters: postFilters;
+  onFiltersChange: Dispatch<SetStateAction<postFilters>>;
+  onPageChange: Dispatch<SetStateAction<number>>;
 };

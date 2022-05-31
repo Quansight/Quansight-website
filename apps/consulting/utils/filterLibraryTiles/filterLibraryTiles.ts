@@ -1,6 +1,6 @@
+import { getFilterStartingValue } from '../../components/Filters/utils/getFilterStartingValue';
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
-import { getFilterStartingValue } from '../getFiltersStartingValue/getFilterStartingValue';
-import { FilterMenuVariant } from '../getFiltersStartingValue/types';
+import { FilterMenuVariant } from '../../types/utils/FilterMenuVariant';
 
 export const filterLibraryTiles = (
   tiles: TTiles,
@@ -8,34 +8,43 @@ export const filterLibraryTiles = (
   postCategory: string,
 ): TTiles => {
   return tiles.filter((tile) => {
-    if (
-      postCategory === getFilterStartingValue(FilterMenuVariant.Categories) &&
-      postType === getFilterStartingValue(FilterMenuVariant.Types)
-    ) {
+    const categoriesFilterStartingValue = getFilterStartingValue(
+      FilterMenuVariant.Category,
+    );
+    const typesFilterStartingValue = getFilterStartingValue(
+      FilterMenuVariant.Type,
+    );
+
+    const isNotFiltered =
+      postCategory === categoriesFilterStartingValue &&
+      postType === typesFilterStartingValue;
+
+    const isFilteredByCategory =
+      postType === typesFilterStartingValue &&
+      postCategory !== categoriesFilterStartingValue;
+
+    const isFilteredByType =
+      postType !== typesFilterStartingValue &&
+      postCategory === categoriesFilterStartingValue;
+
+    const isFilteredByAll =
+      postType !== typesFilterStartingValue &&
+      postCategory !== categoriesFilterStartingValue;
+
+    if (isNotFiltered) {
       return true;
     }
-
-    if (
-      postType === getFilterStartingValue(FilterMenuVariant.Types) &&
-      postCategory !== getFilterStartingValue(FilterMenuVariant.Categories)
-    ) {
+    if (isFilteredByCategory) {
       return tile.postCategory.includes(postCategory);
     }
-    if (
-      postType !== getFilterStartingValue(FilterMenuVariant.Types) &&
-      postCategory === getFilterStartingValue(FilterMenuVariant.Categories)
-    ) {
+    if (isFilteredByType) {
       return tile.postType === postType;
     }
-    if (
-      postType !== getFilterStartingValue(FilterMenuVariant.Types) &&
-      postCategory !== getFilterStartingValue(FilterMenuVariant.Categories)
-    ) {
+    if (isFilteredByAll) {
       return (
         tile.postCategory.includes(postCategory) && tile.postType === postType
       );
     }
     return false;
   });
-  return tiles;
 };

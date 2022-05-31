@@ -4,6 +4,7 @@ import { getFormProps } from '../mappers/getFormProps';
 import { getLogosProps } from '../mappers/getLogosProps';
 import { getPageHeadingProps } from '../mappers/getPageHeadingProps';
 import { getProjectsProps } from '../mappers/getProjectsProps';
+import { getTeamProps } from '../mappers/getTeamProps';
 import { getTeaserProps } from '../mappers/getTeaserProps';
 import { ComponentType, TBlokComponentProps } from '../types';
 
@@ -23,6 +24,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.Projects: {
       return getProjectsProps(blok);
+    }
+    case ComponentType.Team: {
+      return getTeamProps(blok);
     }
     case ComponentType.Teaser: {
       return getTeaserProps(blok);

@@ -1,14 +1,12 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 
-export type TLayoutProps = {
-  children: ReactNode;
-  footer: ReactNode;
-};
+import { TLayoutProps } from './types';
 
-export const Layout: FC<TLayoutProps> = ({ footer, children }) => {
+export const Layout: FC<TLayoutProps> = ({ footer, header, children }) => {
   return (
     <div>
-      <main>{children}</main>
+      {header}
+      <main id="maincontent">{children}</main>
       {footer}
     </div>
   );

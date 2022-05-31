@@ -3,6 +3,7 @@ import { TFormRawData } from './form';
 import { TLogosRawData } from './logos';
 import { TPageHeadingRawData } from './pageHeading';
 import { TProjectsRawData } from './projects';
+import { TTeamRawData } from './team';
 import { TTeaserRawData } from './teaser';
 
 export type TRawBlok =
@@ -11,4 +12,5 @@ export type TRawBlok =
   | TFormRawData
   | TLogosRawData
   | TProjectsRawData
+  | TTeamRawData
   | TTeaserRawData;

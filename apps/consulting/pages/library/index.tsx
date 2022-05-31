@@ -3,25 +3,25 @@ import React, { FC, useState, useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { ISlugParams } from '@quansight/shared/types';
-import {
-  Layout,
-  SEO,
-  DomainVariant,
-  Footer,
-} from '@quansight/shared/ui-components';
+import { ISlugParams, DomainVariant } from '@quansight/shared/types';
+import { Layout, SEO, Footer, Header } from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
 import { PAGINATION_OFFSETT } from '../..//utils/paginateLibraryTiles/constants';
 import { paginateLibraryTiles } from '../..//utils/paginateLibraryTiles/paginateLibraryTiles';
 import { getDataSourceEntries } from '../../api/utils/getDataSourceEntries';
 import { getFooter } from '../../api/utils/getFooter';
+import { getHeader } from '../../api/utils/getHeader';
 import { getLibraryArticleItems } from '../../api/utils/getLibraryArticleItems';
 import { getLibraryLinkItems } from '../../api/utils/getLibraryLinkItems';
 import { getPage } from '../../api/utils/getPage';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { Carousel } from '../../components/Carousel/Carousel';
 import { Filters } from '../../components/Filters/Filters';
+import {
+  TYPES_STARTING_VALUE,
+  CATEGORIES_STARTING_VALUE,
+} from '../../components/Filters/constants';
 import { Page } from '../../components/Page/Page';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { Tiles } from '../../components/Tiles/Tiles';
@@ -33,14 +33,17 @@ import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
 
 export const Library: FC<TLibraryProps> = ({
   data,
+  header,
   footer,
   tiles,
   preview,
   postTypes,
   postCategories,
 }) => {
-  const [postType, setPostType] = useState<string>('all');
-  const [postCategory, setPostCategory] = useState<string>('all categories');
+  const [postFilters, setPostFilters] = useState({
+    type: TYPES_STARTING_VALUE,
+    category: CATEGORIES_STARTING_VALUE,
+  });
   const [libraryTiles, setLibraryTiles] = useState<TTiles>([]);
   const [paginationPages, serPaginationPages] = useState<number>();
   const [currentPage, setCurrentPage] = useState<number>();
@@ -48,34 +51,47 @@ export const Library: FC<TLibraryProps> = ({
   const router = useRouter();
 
   useEffect(() => {
-    const filteredItems = filterLibraryTiles(tiles, postType, postCategory);
+    const filteredItems = filterLibraryTiles(
+      tiles,
+      postFilters.type,
+      postFilters.category,
+    );
     serPaginationPages(Math.ceil(filteredItems.length / PAGINATION_OFFSETT));
     const filterPagination = paginateLibraryTiles(filteredItems, currentPage);
     setLibraryTiles(filterPagination);
-  }, [postCategory, currentPage, postType, tiles]);
+  }, [postFilters.category, currentPage, postFilters.type, tiles]);
 
   useEffect(() => {
     if (!router.isReady) return;
 
     if (router.query.type) {
-      setPostType(router.query.type as string);
+      setPostFilters((prevState) => ({
+        ...prevState,
+        type: router.query.type as string,
+      }));
     }
 
     if (router.query.category) {
-      setPostCategory(router.query.category as string);
+      setPostFilters((prevState) => ({
+        ...prevState,
+        category: router.query.category as string,
+      }));
     }
 
-    if (router.query.page) {
-      setCurrentPage(parseInt(router.query.page as string, 10));
-    }
-
-    if (!router.query.page) setCurrentPage(1);
+    setCurrentPage(
+      router.query.page ? parseInt(router.query.page as string, 10) : 1,
+    );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady]);
 
   return (
-    <Layout footer={<Footer {...footer.content} />}>
+    <Layout
+      footer={<Footer {...footer.content} />}
+      header={
+        <Header {...header.content} domainVariant={DomainVariant.Quansight} />
+      }
+    >
       <SEO
         title={data.content.title}
         description={data.content.description}
@@ -92,15 +108,13 @@ export const Library: FC<TLibraryProps> = ({
         <Filters
           postTypes={postTypes}
           postCategories={postCategories}
-          postType={postType}
-          setPostType={setPostType}
-          postCategory={postCategory}
-          setPostCategory={setPostCategory}
-          setCurrentPage={setCurrentPage}
+          postFilters={postFilters}
+          onFiltersChange={setPostFilters}
+          onPageChange={setCurrentPage}
         />
         <Tiles tiles={libraryTiles} />
         <Pagination
-          setCurrentPage={setCurrentPage}
+          onPageChange={setCurrentPage}
           currentPage={currentPage}
           paginationPages={paginationPages}
         />
@@ -114,6 +128,7 @@ export const getStaticProps: GetStaticProps<
   ISlugParams
 > = async ({ preview = false }) => {
   const data = await getPage({ slug: 'library' });
+  const header = await getHeader();
   const footer = await getFooter();
   const libraryLinks = await getLibraryLinkItems();
   const articleItems = await getLibraryArticleItems();
@@ -123,6 +138,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       data,
+      header,
       footer,
       postTypes,
       postCategories,

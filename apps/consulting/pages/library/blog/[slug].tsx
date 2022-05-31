@@ -3,17 +3,18 @@ import { FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { usePreviewMode } from '@quansight/shared/storyblok-sdk';
-import { ISlugParams } from '@quansight/shared/types';
+import { ISlugParams, DomainVariant } from '@quansight/shared/types';
 import {
   Layout,
   SEO,
-  DomainVariant,
   Footer,
+  Header,
+  Hero,
+  HeroVariant,
 } from '@quansight/shared/ui-components';
-import { Hero } from '@quansight/shared/ui-components';
-import { HeroVariant } from '@quansight/shared/ui-components';
 
 import { getFooter } from '../../../api/utils/getFooter';
+import { getHeader } from '../../../api/utils/getHeader';
 import { getLibraryArticleItem } from '../../../api/utils/getLibraryArticleItem';
 // import { getLibraryArticleItems } from '../../../api/utils/getLibraryArticleItems';
 // import { getLibraryLinkItems } from '../../../api/utils/getLibraryLinkItems';
@@ -25,13 +26,23 @@ import { TLibraryArticleProps } from '../../../types/storyblok/bloks/libraryArti
 import { ARTICLES_DIRECTORY_SLUG } from '../../../utils/getArticlesPaths/constants';
 import { getArticlesPaths } from '../../../utils/getArticlesPaths/getArticlesPaths';
 
-const Article: FC<TLibraryArticleProps> = ({ data, footer, preview }) => {
+const Article: FC<TLibraryArticleProps> = ({
+  data,
+  header,
+  footer,
+  preview,
+}) => {
   usePreviewMode(preview);
   const { content } = data;
   console.log(data);
 
   return (
-    <Layout footer={<Footer {...footer.content} />}>
+    <Layout
+      footer={<Footer {...footer.content} />}
+      header={
+        <Header {...header.content} domainVariant={DomainVariant.Quansight} />
+      }
+    >
       <SEO
         title={content.title}
         description={content.description}
@@ -77,9 +88,11 @@ export const getStaticProps: GetStaticProps<
   // const libraryLinks = await getLibraryLinkItems();
   // const articleItems = await getLibraryArticleItems();
   const footer = await getFooter();
+  const header = await getHeader();
   return {
     props: {
       data,
+      header,
       footer,
       preview,
     },
