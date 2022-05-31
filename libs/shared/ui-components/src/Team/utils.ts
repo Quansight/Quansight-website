@@ -1,8 +1,8 @@
-import { TeamRole, TTeamMember } from './types';
+import { TTeamMember } from './TeamMember/types';
 
 export const filterTeam = (
   team: TTeamMember[] = [],
-  role: TeamRole,
+  role: string,
 ): TTeamMember[] | null => {
   const isRoleMatching = (member: TTeamMember): boolean => {
     return member?.role === role;
