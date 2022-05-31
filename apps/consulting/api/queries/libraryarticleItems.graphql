@@ -1,5 +1,5 @@
-query articleItems {
-  ArticleItems {
+query libraryArticleItems {
+  LibraryarticleItems {
     total
     items {
       alternates {

@@ -17,7 +17,6 @@ import {
 import { FooterItem, getFooter } from '../../api';
 import { CategoryList } from '../../components/Posts/CategoryList/CategoryList';
 import { PostListItem } from '../../components/Posts/PostListItem/PostListItem';
-import { DEFAULT_API_OFFSET } from '../../services/api/posts/constants';
 import { getAllPosts } from '../../services/api/posts/getAllPosts';
 import { getCategories } from '../../services/api/posts/getCategories';
 import { filterPosts } from '../../services/posts/filterPosts';
@@ -31,21 +30,21 @@ export type BlogListPageProps = {
   category?: string;
 };
 
+const POSTS_OFFSET = 9;
+
 const BlogListPage: FC<BlogListPageProps> = ({
   posts,
   footer,
   categoryList,
 }) => {
   const router = useRouter();
-  const [postItems, setPostItems] = useState<TPost[]>([]);
-
   const [selectedCategory, setSelectedCategory] = useState<
     string | undefined
   >();
-  const [currentPage, setCurrentPage] = useState<number>();
-
-  const pages = Math.ceil(postItems.length / DEFAULT_API_OFFSET);
-
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pages, setPages] = useState<number>();
+  const [filteredItems, setFilteredItems] = useState<TPost[]>([]);
+  const [itemsToShow, setItemsToShow] = useState<TPost[]>([]);
   const pageElementClassName =
     'text-[1.4rem] font-normal text-black leading-[2.7rem] font-sans hover:underline';
   const pageLinkClassName = 'p-[0.8rem]';
@@ -64,13 +63,16 @@ const BlogListPage: FC<BlogListPageProps> = ({
         },
       },
       undefined,
-      { shallow: true },
+      { shallow: true, scroll: true },
     );
   };
 
   const handleCategoryChange = (category: string): void => {
     const isTheSameCategory = category === selectedCategory;
+    const firstPage = 1;
+
     setSelectedCategory(isTheSameCategory ? '' : category);
+    setCurrentPage(firstPage);
 
     router.push(
       {
@@ -78,6 +80,7 @@ const BlogListPage: FC<BlogListPageProps> = ({
         query: {
           ...router.query,
           category: isTheSameCategory ? '' : category,
+          page: firstPage,
         },
       },
       undefined,
@@ -86,11 +89,16 @@ const BlogListPage: FC<BlogListPageProps> = ({
   };
 
   useEffect(() => {
-    const filteredItems = filterPosts(posts, selectedCategory);
-    const sliceItems = getPostsByPage(filteredItems, currentPage);
+    const filtered = filterPosts(posts, selectedCategory);
+    setFilteredItems(filtered);
+  }, [posts, selectedCategory]);
 
-    setPostItems(sliceItems);
-  }, [currentPage, posts, selectedCategory]);
+  useEffect(() => {
+    const sliceItems = getPostsByPage(filteredItems, currentPage, POSTS_OFFSET);
+    setItemsToShow(sliceItems);
+    const numberOfPages = Math.ceil(filteredItems.length / POSTS_OFFSET);
+    setPages(numberOfPages);
+  }, [currentPage, filteredItems]);
 
   // on start up
   useEffect(() => {
@@ -133,18 +141,18 @@ const BlogListPage: FC<BlogListPageProps> = ({
             selectedCategory={selectedCategory}
           />
         </div>
-        {postItems.length > 0 && (
+        {itemsToShow.length > 0 && (
           <div className="mb-[4.2rem]">
-            <PostListItem post={postItems[0]} variant="horizontal" />
+            <PostListItem post={itemsToShow[0]} variant="horizontal" />
           </div>
         )}
 
         <div className="flex flex-wrap">
-          {tail(postItems).map((post) => {
+          {tail(itemsToShow).map((post) => {
             return (
               <div
                 key={post.slug}
-                className="odd:mr-[4.1rem] mb-[3.7rem] w-full md:w-1/2"
+                className="odd:mr-[2%] mb-[3.7rem] w-full md:w-[49%]"
               >
                 <PostListItem post={post} variant="vertical" />
               </div>
@@ -161,7 +169,7 @@ const BlogListPage: FC<BlogListPageProps> = ({
             onPageChange={handleChangePage}
             renderOnZeroPageCount={() => null}
             pageCount={pages}
-            pageRangeDisplayed={DEFAULT_API_OFFSET}
+            pageRangeDisplayed={POSTS_OFFSET}
             className="flex"
             pageClassName={pageElementClassName}
             nextClassName={pageElementClassName}
@@ -171,6 +179,7 @@ const BlogListPage: FC<BlogListPageProps> = ({
             previousLinkClassName={pageLinkClassName}
             pageLinkClassName={pageLinkClassName}
             breakLinkClassName={pageLinkClassName}
+            forcePage={currentPage - 1}
           />
         </div>
       </div>

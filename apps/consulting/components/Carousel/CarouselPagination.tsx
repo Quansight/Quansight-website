@@ -15,7 +15,7 @@ export const CarouselPagination: FC<TCarouselPaginationProps> = ({
         <button
           aria-label={`Go to slide ${slideIndex + 1}`}
           className={`w-4 h-4 rounded-full ${
-            currentSlide === slideIndex ? 'bg-pink' : 'bg-gray'
+            currentSlide === slideIndex ? 'bg-pink' : 'bg-gray-100'
           }`}
           key={slideIndex}
           onClick={() => swiper.slideTo(slideIndex)}
