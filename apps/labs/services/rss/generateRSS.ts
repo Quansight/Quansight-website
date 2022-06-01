@@ -26,10 +26,5 @@ export const generateRSS = async (): Promise<void> => {
   });
 
   postsData.forEach((postData) => rssFeed.addItem(postData));
-
-  try {
-    fs.writeFileSync(rssPath, rssFeed.rss2());
-  } catch (err) {
-    console.log(err);
-  }
+  fs.writeFileSync(rssPath, rssFeed.rss2());
 };

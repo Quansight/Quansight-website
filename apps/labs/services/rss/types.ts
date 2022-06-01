@@ -1,4 +1,4 @@
-export const enum Props {
+export const enum PostProps {
   Title = 'title',
   Description = 'description',
   Date = 'date',

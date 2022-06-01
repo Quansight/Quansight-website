@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import { getPostProperty } from './getPostProperty';
-import { TPostsData, Props } from './types';
+import { TPostsData, PostProps } from './types';
 
 export const getPostsData = async (): Promise<TPostsData[]> => {
   const filesPath = path.join(process.cwd(), 'apps/labs/posts');
@@ -14,10 +14,10 @@ export const getPostsData = async (): Promise<TPostsData[]> => {
     const content = fs.readFileSync(path.join(filesPath, file), 'utf8');
 
     const postProperties = {
-      title: getPostProperty(content, Props.Title),
-      description: getPostProperty(content, Props.Description),
-      date: getPostProperty(content, Props.Date),
-      imageUrl: getPostProperty(content, Props.Image),
+      title: getPostProperty(content, PostProps.Title),
+      description: getPostProperty(content, PostProps.Description),
+      date: getPostProperty(content, PostProps.Date),
+      imageUrl: getPostProperty(content, PostProps.Image),
       slug: file.replace(/\.md?$/, ''),
     };
 

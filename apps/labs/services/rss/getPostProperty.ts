@@ -1,4 +1,4 @@
-import { Props } from './types';
+import { PostProps } from './types';
 
 const REG_EXP = {
   title: /title:.*/,
@@ -14,7 +14,7 @@ const TRIM = {
   image: 'featuredImage:\n  src: /',
 };
 
-export const getPostProperty = (content: string, prop: Props): string => {
+export const getPostProperty = (content: string, prop: PostProps): string => {
   const extractedProp = REG_EXP[prop].exec(content).toString();
 
   return extractedProp.replace(TRIM[prop], '');
