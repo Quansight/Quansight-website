@@ -1,26 +1,21 @@
-const getPropertyString = (contents: string, regex: RegExp): string => {
-  const extractedProperty = regex.exec(contents);
+import { Props } from './types';
 
-  return JSON.stringify(extractedProperty);
+const REG_EXP = {
+  title: /title:.*/,
+  description: /description:.*/,
+  date: /published:.*/,
+  image: /featuredImage:\n\s\ssrc:.*/,
 };
 
-export const getPostImageProperty = (
-  contents: string,
-  regex: RegExp,
-): string => {
-  const postImageroperty = getPropertyString(contents, regex);
-  const trimmedImageProperty = postImageroperty
-    .replace('["featuredImage:\\n  src: /', '')
-    .replace('"]', '');
-  return trimmedImageProperty;
+const TRIM = {
+  title: 'title: ',
+  description: 'description: ',
+  date: '["published: ',
+  image: 'featuredImage:\n  src: /',
 };
 
-export const getPostProperty = (
-  contents: string,
-  regex: RegExp,
-  trim: string,
-): string => {
-  const postProperty = getPropertyString(contents, regex);
+export const getPostProperty = (content: string, prop: Props): string => {
+  const extractedProp = REG_EXP[prop].exec(content).toString();
 
-  return postProperty.replace(`${trim}: `, '');
+  return extractedProp.replace(TRIM[prop], '');
 };
