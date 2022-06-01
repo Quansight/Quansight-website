@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "build": "nx build",
+    "build": "nx build labs",
     "test": "nx test",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
@@ -27,6 +27,7 @@
     "axios": "^0.21.4",
     "clsx": "^1.1.1",
     "core-js": "^3.6.5",
+    "feed": "^4.2.2",
     "graphql": "^16.3.0",
     "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",

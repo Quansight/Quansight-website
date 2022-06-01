@@ -24,6 +24,7 @@ import { getAllPosts } from '../../services/api/posts/getAllPosts';
 import { getCategories } from '../../services/api/posts/getCategories';
 import { filterPosts } from '../../services/posts/filterPosts';
 import { getPostsByPage } from '../../services/posts/getPostsByPage';
+import { generateRSS } from '../../services/rss/generateRSS';
 import { TContainerProps } from '../../types/containerProps';
 import { TPost } from '../../types/storyblok/bloks/posts';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlock';
@@ -204,6 +205,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const categories = await getCategories();
   const { items } = await getAllPosts();
   const data = await getPage({ slug: 'blog', relations: '' });
+
+  await generateRSS();
 
   return {
     props: {
