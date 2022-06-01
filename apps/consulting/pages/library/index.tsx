@@ -25,6 +25,7 @@ import {
 import { Page } from '../../components/Page/Page';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { Tiles } from '../../components/Tiles/Tiles';
+import { TileVariant } from '../../components/Tiles/types';
 import { TLibraryProps } from '../../types/storyblok/bloks/libraryProps';
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
@@ -112,7 +113,7 @@ export const Library: FC<TLibraryProps> = ({
           onFiltersChange={setPostFilters}
           onPageChange={setCurrentPage}
         />
-        <Tiles tiles={libraryTiles} />
+        <Tiles tiles={libraryTiles} tileVariant={TileVariant.Library} />
         <Pagination
           onPageChange={setCurrentPage}
           currentPage={currentPage}
