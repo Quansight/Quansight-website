@@ -13,18 +13,16 @@ export const BlogHeader: FC<TBlogHeaderProps> = ({
   githubNick,
   githubLink,
   authorImage,
-}) => {
-  return (
-    <header className="mt-[5.8rem] mb-[7rem] sm:mt-[4.4rem] sm:mb-[4.1rem] xl:mt-[7.1rem]">
-      <BlogHeaderLink />
-      <BlogHeaderPostData postTitle={postTitle} publishedDate={publishedDate} />
-      <BlogHeaderAuthor
-        firstName={firstName}
-        lastName={lastName}
-        githubNick={githubNick}
-        githubLink={githubLink}
-        authorImage={authorImage}
-      />
-    </header>
-  );
-};
+}) => (
+  <header className="mt-[5.8rem] mb-[7rem] sm:mt-[4.4rem] sm:mb-[4.1rem] xl:mt-[7.1rem]">
+    <BlogHeaderLink />
+    <BlogHeaderPostData postTitle={postTitle} publishedDate={publishedDate} />
+    <BlogHeaderAuthor
+      firstName={firstName}
+      lastName={lastName}
+      githubNick={githubNick}
+      githubLink={githubLink}
+      authorImage={authorImage}
+    />
+  </header>
+);

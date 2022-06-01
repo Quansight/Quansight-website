@@ -41,9 +41,9 @@ export const Tile: FC<TTileProps> = ({
       </div>
       <div
         className={clsx(
+          'w-full',
           tileVariant === TileVariant.Blog &&
             'px-[1.4rem] pt-[0.5rem] pb-[4.4rem] sm:px-[4rem] sm:pt-[1.5rem] sm:pb-[3.3rem]',
-          'w-full',
         )}
       >
         {tileVariant === TileVariant.Library && (
@@ -53,16 +53,16 @@ export const Tile: FC<TTileProps> = ({
         )}
         <h3
           className={clsx(
-            tileVariant === TileVariant.Blog && 'leading-[3.7rem]',
             'w-1/2 text-[2.2rem] font-extrabold leading-[2.9rem] text-black lg:w-full font-heading',
+            tileVariant === TileVariant.Blog && 'leading-[3.7rem]',
           )}
         >
           {title}
         </h3>
         <div
           className={clsx(
-            tileVariant === TileVariant.Blog && 'mt-[0.5rem] ml-[0.4rem]',
             'flex gap-5 justify-start items-center text-[1.2rem] font-normal leading-[2.7rem] text-black',
+            tileVariant === TileVariant.Blog && 'mt-[0.5rem] ml-[0.4rem]',
           )}
         >
           <p>By {author}</p>
