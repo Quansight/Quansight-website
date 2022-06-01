@@ -12,7 +12,7 @@ import { paginateLibraryTiles } from '../..//utils/paginateLibraryTiles/paginate
 import { getDataSourceEntries } from '../../api/utils/getDataSourceEntries';
 import { getFooter } from '../../api/utils/getFooter';
 import { getHeader } from '../../api/utils/getHeader';
-import { getLibraryArticleItems } from '../../api/utils/getLibraryArticleItems';
+// import { getLibraryArticleItems } from '../../api/utils/getLibraryArticleItems';
 import { getLibraryLinkItems } from '../../api/utils/getLibraryLinkItems';
 import { getPage } from '../../api/utils/getPage';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
@@ -132,7 +132,7 @@ export const getStaticProps: GetStaticProps<
   const header = await getHeader();
   const footer = await getFooter();
   const libraryLinks = await getLibraryLinkItems();
-  const articleItems = await getLibraryArticleItems();
+  const articleItems = undefined;
   const postTypes = await getDataSourceEntries({ slug: 'post-type' });
   const postCategories = await getDataSourceEntries({ slug: 'post-category' });
 

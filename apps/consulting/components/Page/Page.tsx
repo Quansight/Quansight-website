@@ -12,17 +12,28 @@ import { getPage } from '../../api/utils/getPage';
 type TPageProps = {
   preview: boolean;
   data: PageItem;
+  relations?: string;
 } & Pick<TPageUIComponentProps, 'children'>;
 
-export const Page: FC<TPageProps> = ({ data, preview, children }) => {
+export const Page: FC<TPageProps> = ({
+  data,
+  preview,
+  children,
+  relations = '',
+}) => {
   usePreviewMode(preview);
 
   const handlePageItemLoad = async (slug: string): Promise<PageItem> => {
-    const pageItem = getPage({ slug });
+    const pageItem = getPage({ slug, relations });
     return pageItem;
   };
 
-  const story = useStoryblok<PageItem>(data, preview, handlePageItemLoad);
+  const story = useStoryblok<PageItem>(
+    data,
+    preview,
+    handlePageItemLoad,
+    relations,
+  );
 
   return <PageUIComponent data={story}>{children}</PageUIComponent>;
 };
