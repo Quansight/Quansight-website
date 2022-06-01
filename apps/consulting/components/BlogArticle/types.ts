@@ -23,5 +23,8 @@ export type TBlogHeaderAuthorProps = {
   authorImage: TImage;
 };
 
-export type TBlogHeaderProps = TBlogHeaderAuthorProps &
-  TBlogHeaderPostDataProps;
+export type TBlogHeaderProps = {
+  author: TBlogHeaderAuthorProps;
+} & TBlogHeaderPostDataProps;
+
+export type TBlogArticleProps = TBlogHeaderProps & TBlogPostProps;

@@ -1,12 +1,8 @@
-import {
-  LibraryarticleItem,
-  FooterItem,
-  HeaderItem,
-} from '../../../api/types/basic';
+import { PageItem, FooterItem, HeaderItem } from '../../../api/types/basic';
 import { TTiles } from './libraryProps';
 
 export type TLibraryArticleProps = {
-  data: LibraryarticleItem;
+  data: PageItem;
   header: HeaderItem;
   footer: FooterItem;
   moreArticles: TTiles;

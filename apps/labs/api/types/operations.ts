@@ -139,6 +139,7 @@ export type LinksQuery = {
 
 export type PageItemQueryVariables = Types.Exact<{
   slug: Types.Scalars['ID'];
+  relations: Types.InputMaybe<Types.Scalars['String']>;
 }>;
 
 export type PageItemQuery = {

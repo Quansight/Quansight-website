@@ -5,7 +5,7 @@ import { TileVariant } from '../../Tiles/types';
 import { TBlogMoreArticlesProps } from '../types';
 
 export const BlogMoreArticles: FC<TBlogMoreArticlesProps> = ({ tiles }) => (
-  <footer className="pt-[10rem] mb-[2rem] border-t border-t-gray-100 sm:mb-[6rem] xl:mb-[18rem]">
+  <section className="px-[2rem] pt-[10rem] mx-auto mb-[2rem] border-t border-t-gray-100 sm:px-[6rem] sm:mb-[6rem] lg:px-[10rem] xl:px-[25rem] xl:mb-[18rem] max-w-layout">
     <h3 className="mb-[5rem] text-[1.9rem] font-bold leading-[2.7rem] text-center text-black">
       More articles from our Library
     </h3>
@@ -14,5 +14,5 @@ export const BlogMoreArticles: FC<TBlogMoreArticlesProps> = ({ tiles }) => (
         <Tile key={tile.uuid} {...tile} tileVariant={TileVariant.Blog} />
       ))}
     </ul>
-  </footer>
+  </section>
 );

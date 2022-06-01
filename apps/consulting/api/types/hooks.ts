@@ -493,8 +493,8 @@ export type LinksQueryResult = Apollo.QueryResult<
   Types.LinksQueryVariables
 >;
 export const PageItemDocument = gql`
-  query pageItem($slug: ID!) {
-    PageItem(id: $slug) {
+  query pageItem($slug: ID!, $relations: String) {
+    PageItem(id: $slug, resolve_relations: $relations) {
       alternates {
         fullSlug
         id

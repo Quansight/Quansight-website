@@ -1,1 +1,1 @@
-export const ARTICLES_DIRECTORY_SLUG = 'library/blog/';
+export const ARTICLES_DIRECTORY_SLUG = 'library/blogprev/';

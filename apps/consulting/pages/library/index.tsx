@@ -128,7 +128,7 @@ export const getStaticProps: GetStaticProps<
   TLibraryProps,
   ISlugParams
 > = async ({ preview = false }) => {
-  const data = await getPage({ slug: 'library' });
+  const data = await getPage({ slug: 'library', relations: '' });
   const header = await getHeader();
   const footer = await getFooter();
   const libraryLinks = await getLibraryLinkItems();
