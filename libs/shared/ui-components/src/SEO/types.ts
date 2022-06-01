@@ -1,7 +1,4 @@
-export enum DomainVariant {
-  Quansight = 'Quansight',
-  Labs = 'Labs',
-}
+import { DomainVariant } from '@quansight/shared/types';
 
 export type TSEOProps = {
   title: string;

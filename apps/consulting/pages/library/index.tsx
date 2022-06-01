@@ -3,19 +3,15 @@ import React, { FC, useState, useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { ISlugParams } from '@quansight/shared/types';
-import {
-  Layout,
-  SEO,
-  DomainVariant,
-  Footer,
-} from '@quansight/shared/ui-components';
+import { ISlugParams, DomainVariant } from '@quansight/shared/types';
+import { Layout, SEO, Footer, Header } from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
 import { PAGINATION_OFFSETT } from '../..//utils/paginateLibraryTiles/constants';
 import { paginateLibraryTiles } from '../..//utils/paginateLibraryTiles/paginateLibraryTiles';
 import { getDataSourceEntries } from '../../api/utils/getDataSourceEntries';
 import { getFooter } from '../../api/utils/getFooter';
+import { getHeader } from '../../api/utils/getHeader';
 import { getLibraryArticleItems } from '../../api/utils/getLibraryArticleItems';
 import { getLibraryLinkItems } from '../../api/utils/getLibraryLinkItems';
 import { getPage } from '../../api/utils/getPage';
@@ -37,6 +33,7 @@ import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
 
 export const Library: FC<TLibraryProps> = ({
   data,
+  header,
   footer,
   tiles,
   preview,
@@ -89,7 +86,12 @@ export const Library: FC<TLibraryProps> = ({
   }, [router.isReady]);
 
   return (
-    <Layout footer={<Footer {...footer.content} />}>
+    <Layout
+      footer={<Footer {...footer.content} />}
+      header={
+        <Header {...header.content} domainVariant={DomainVariant.Quansight} />
+      }
+    >
       <SEO
         title={data.content.title}
         description={data.content.description}
@@ -126,6 +128,7 @@ export const getStaticProps: GetStaticProps<
   ISlugParams
 > = async ({ preview = false }) => {
   const data = await getPage({ slug: 'library' });
+  const header = await getHeader();
   const footer = await getFooter();
   const libraryLinks = await getLibraryLinkItems();
   const articleItems = await getLibraryArticleItems();
@@ -135,6 +138,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       data,
+      header,
       footer,
       postTypes,
       postCategories,

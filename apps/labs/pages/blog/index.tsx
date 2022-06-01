@@ -5,16 +5,17 @@ import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 
+import { DomainVariant } from '@quansight/shared/types';
 import {
-  DomainVariant,
   Footer,
+  Header,
   Hero,
   HeroVariant,
   Layout,
   SEO,
 } from '@quansight/shared/ui-components';
 
-import { FooterItem, getFooter } from '../../api';
+import { FooterItem, getFooter, HeaderItem, getHeader } from '../../api';
 import { CategoryList } from '../../components/Posts/CategoryList/CategoryList';
 import { PostListItem } from '../../components/Posts/PostListItem/PostListItem';
 import { getAllPosts } from '../../services/api/posts/getAllPosts';
@@ -26,6 +27,7 @@ import { TPost } from '../../types/storyblok/bloks/posts';
 export type BlogListPageProps = {
   posts: TPost[];
   footer: FooterItem;
+  header: HeaderItem;
   categoryList: string[];
   category?: string;
 };
@@ -35,6 +37,7 @@ const POSTS_OFFSET = 9;
 const BlogListPage: FC<BlogListPageProps> = ({
   posts,
   footer,
+  header,
   categoryList,
 }) => {
   const router = useRouter();
@@ -116,7 +119,10 @@ const BlogListPage: FC<BlogListPageProps> = ({
   }, [router.isReady]);
 
   return (
-    <Layout footer={<Footer {...footer.content} />}>
+    <Layout
+      footer={<Footer {...footer.content} />}
+      header={<Header {...header.content} domainVariant={DomainVariant.Labs} />}
+    >
       <SEO
         title="Blog"
         description="This is a blog list page"
@@ -189,11 +195,13 @@ const BlogListPage: FC<BlogListPageProps> = ({
 
 export const getStaticProps: GetStaticProps = async () => {
   const footer = await getFooter();
+  const header = await getHeader();
   const categories = await getCategories();
   const { items } = await getAllPosts();
 
   return {
     props: {
+      header,
       footer,
       categoryList: categories,
       posts: items,

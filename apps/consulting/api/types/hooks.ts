@@ -416,6 +416,66 @@ export type FooterItemQueryResult = Apollo.QueryResult<
   Types.FooterItemQuery,
   Types.FooterItemQueryVariables
 >;
+export const HeaderItemDocument = gql`
+  query HeaderItem($slug: ID!) {
+    HeaderItem(id: $slug) {
+      alternates {
+        fullSlug
+        id
+        isFolder
+        name
+        parentId
+        published
+        slug
+      }
+      created_at
+      default_full_slug
+      first_published_at
+      full_slug
+      group_id
+      id
+      is_startpage
+      lang
+      meta_data
+      name
+      parent_id
+      path
+      position
+      published_at
+      release_id
+      slug
+      sort_by_date
+      tag_list
+      translated_slugs {
+        lang
+        name
+        path
+      }
+      uuid
+      content {
+        _editable
+        _uid
+        component
+        navigation
+        skipLinksText
+        logo {
+          focus
+          alt
+          copyright
+          filename
+          id
+          name
+          title
+        }
+        bookACallLinkText
+      }
+    }
+  }
+`;
+export type HeaderItemQueryResult = Apollo.QueryResult<
+  Types.HeaderItemQuery,
+  Types.HeaderItemQueryVariables
+>;
 export const LinksDocument = gql`
   query links {
     Links {
