@@ -1,5 +1,11 @@
 import { TLink, TImage, TRichText } from '@quansight/shared/types';
 
+import { TTiles } from '../../types/storyblok/bloks/libraryProps';
+
+export type TBlogMoreArticlesProps = {
+  tiles: TTiles;
+};
+
 export type TBlogPostProps = {
   postText: TRichText;
 };

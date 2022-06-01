@@ -1,9 +1,19 @@
 import { FC } from 'react';
 
-export const BlogMoreArticles: FC = () => {
+import { Tile } from '../../Tiles/Tile';
+import { TBlogMoreArticlesProps } from '../types';
+
+export const BlogMoreArticles: FC<TBlogMoreArticlesProps> = ({ tiles }) => {
   return (
-    <footer className="pt-[10rem] mt-[5rem] border-t border-t-gray-100">
-      BlogMoreArticles
+    <footer className="pt-[10rem] border-t border-t-gray-100">
+      <h3 className="mb-[5rem] text-[1.9rem] font-bold leading-[2.7rem] text-center text-black">
+        More articles from our Blog
+      </h3>
+      <ul className="flex flex-col gap-[3.6rem] justify-between items-center sm:flex-row sm:gap-[2rem]">
+        {tiles.map((tile) => (
+          <Tile key={tile.uuid} {...tile} />
+        ))}
+      </ul>
     </footer>
   );
 };

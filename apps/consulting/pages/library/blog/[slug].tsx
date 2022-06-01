@@ -16,21 +16,24 @@ import {
 import { getFooter } from '../../../api/utils/getFooter';
 import { getHeader } from '../../../api/utils/getHeader';
 import { getLibraryArticleItem } from '../../../api/utils/getLibraryArticleItem';
-// import { getLibraryArticleItems } from '../../../api/utils/getLibraryArticleItems';
-// import { getLibraryLinkItems } from '../../../api/utils/getLibraryLinkItems';
+import { getLibraryArticleItems } from '../../../api/utils/getLibraryArticleItems';
+import { getLibraryLinkItems } from '../../../api/utils/getLibraryLinkItems';
 import { getLinks } from '../../../api/utils/getLinks';
 import { BlogHeader } from '../../../components/Blog/BlogHeader/BlogHeader';
-// import { BlogMoreArticles } from '../../../components/Blog/BlogMoreArticles/BlogMoreArticles';
+import { BlogMoreArticles } from '../../../components/Blog/BlogMoreArticles/BlogMoreArticles';
 import { BlogPost } from '../../../components/Blog/BlogPost/BlogPost';
 import { TLibraryArticleProps } from '../../../types/storyblok/bloks/libraryArticleProps';
 import { ARTICLES_DIRECTORY_SLUG } from '../../../utils/getArticlesPaths/constants';
 import { getArticlesPaths } from '../../../utils/getArticlesPaths/getArticlesPaths';
+import { getLibraryTiles } from '../../../utils/getLibraryTiles/getLibraryTiles';
+import { getSameCategoryTiles } from '../../../utils/getSameCategoryTiles/getSameCategoryTiles';
 
 const Article: FC<TLibraryArticleProps> = ({
   data,
   header,
   footer,
   preview,
+  moreArticles,
 }) => {
   usePreviewMode(preview);
   const { content } = data;
@@ -63,7 +66,7 @@ const Article: FC<TLibraryArticleProps> = ({
           authorImage={content.author.content.image}
         />
         <BlogPost postText={content.postText} />
-        {/* <BlogMoreArticles category={content.category} /> */}
+        {moreArticles.length !== 0 && <BlogMoreArticles tiles={moreArticles} />}
       </article>
     </Layout>
   );
@@ -84,15 +87,22 @@ export const getStaticProps: GetStaticProps<
   const data = await getLibraryArticleItem({
     slug: `${ARTICLES_DIRECTORY_SLUG}${slug}`,
   });
-  // const libraryLinks = await getLibraryLinkItems();
-  // const articleItems = await getLibraryArticleItems();
   const footer = await getFooter();
   const header = await getHeader();
+  const libraryLinks = await getLibraryLinkItems();
+  const articleItems = await getLibraryArticleItems();
+  const libraryTiles = getLibraryTiles({
+    articleItems,
+    libraryLinks,
+  });
+  const currentPostCategories = data.content.category;
+
   return {
     props: {
       data,
       header,
       footer,
+      moreArticles: getSameCategoryTiles(libraryTiles, currentPostCategories),
       preview,
     },
   };

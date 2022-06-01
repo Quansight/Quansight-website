@@ -146,7 +146,6 @@ export const getStaticProps: GetStaticProps<
         articleItems,
         libraryLinks,
       }),
-
       preview,
     },
   };
