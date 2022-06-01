@@ -96,13 +96,18 @@ export const getStaticProps: GetStaticProps<
     libraryLinks,
   });
   const currentPostCategories = data.content.category;
+  const currentPostID = data.uuid;
 
   return {
     props: {
       data,
       header,
       footer,
-      moreArticles: getSameCategoryTiles(libraryTiles, currentPostCategories),
+      moreArticles: getSameCategoryTiles(
+        libraryTiles,
+        currentPostCategories,
+        currentPostID,
+      ),
       preview,
     },
   };
