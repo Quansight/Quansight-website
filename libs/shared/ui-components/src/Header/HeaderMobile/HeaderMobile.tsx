@@ -43,7 +43,7 @@ export const HeaderMobile: FC<THeaderMobileProps> = ({
   }, [isNavigationOpen]);
 
   return (
-    <div ref={container} className="sm:hidden">
+    <div ref={container} className="md:hidden">
       <HeaderMobileMenu
         logo={logo}
         isNavigationOpen={isNavigationOpen}

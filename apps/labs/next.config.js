@@ -13,6 +13,23 @@ const nextConfig = {
   images: {
     domains: ['a.storyblok.com'],
   },
+  async headers() {
+    return [
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: 'https://zapier.com/',
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'POST',
+          },
+        ],
+      },
+    ];
+  },
   async rewrites() {
     return [
       {
