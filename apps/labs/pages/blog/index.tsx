@@ -6,30 +6,33 @@ import { useRouter } from 'next/router';
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 
 import { DomainVariant } from '@quansight/shared/types';
-import {
-  Footer,
-  Header,
-  Hero,
-  HeroVariant,
-  Layout,
-  SEO,
-} from '@quansight/shared/ui-components';
+import { Footer, Header, Layout, SEO } from '@quansight/shared/ui-components';
+import { isPageType } from '@quansight/shared/utils';
 
-import { FooterItem, getFooter, HeaderItem, getHeader } from '../../api';
+import {
+  FooterItem,
+  getFooter,
+  HeaderItem,
+  getHeader,
+  getPage,
+} from '../../api';
+import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
+import { Page } from '../../components/Page/Page';
 import { CategoryList } from '../../components/Posts/CategoryList/CategoryList';
 import { PostListItem } from '../../components/Posts/PostListItem/PostListItem';
 import { getAllPosts } from '../../services/api/posts/getAllPosts';
 import { getCategories } from '../../services/api/posts/getCategories';
 import { filterPosts } from '../../services/posts/filterPosts';
 import { getPostsByPage } from '../../services/posts/getPostsByPage';
+import { TContainerProps } from '../../types/containerProps';
 import { TPost } from '../../types/storyblok/bloks/posts';
+import { TRawBlok } from '../../types/storyblok/bloks/rawBlock';
 
-export type BlogListPageProps = {
+export type BlogListPageProps = TContainerProps & {
   posts: TPost[];
   footer: FooterItem;
   header: HeaderItem;
   categoryList: string[];
-  category?: string;
 };
 
 const POSTS_OFFSET = 9;
@@ -39,6 +42,8 @@ const BlogListPage: FC<BlogListPageProps> = ({
   footer,
   header,
   categoryList,
+  data,
+  preview,
 }) => {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<
@@ -124,21 +129,21 @@ const BlogListPage: FC<BlogListPageProps> = ({
       header={<Header {...header.content} domainVariant={DomainVariant.Labs} />}
     >
       <SEO
-        title="Blog"
-        description="This is a blog list page"
+        title={data.content.title}
+        description={data.content.description}
         variant={DomainVariant.Labs}
       />
-      <Hero
-        variant={HeroVariant.Small}
-        imageSrc="/postList/post-list-hero.jpeg"
-        imageAlt="Blog post list hero image"
-        backgroundColor="transparent"
-        objectFit="cover"
-      />
+      {isPageType(data?.content?.component) && (
+        <Page data={data} preview={preview}>
+          {(blok: TRawBlok) => <BlokProvider blok={blok} />}
+        </Page>
+      )}
       <div className="pt-[3rem] pb-[12.2rem] mx-auto w-[95%] max-w-[83rem] md:w-[85%] xl:w-[70%]">
-        <h2 className="text-[2.4rem] font-extrabold leading-[4.9rem] text-heading text-violet">
-          Posts, articles and tutorials
-        </h2>
+        {data.content.title && (
+          <h2 className="text-[2.4rem] font-extrabold leading-[4.9rem] text-heading text-violet">
+            {data.content.title}
+          </h2>
+        )}
 
         <div className="mb-[3.5rem]">
           <CategoryList
@@ -198,10 +203,12 @@ export const getStaticProps: GetStaticProps = async () => {
   const header = await getHeader();
   const categories = await getCategories();
   const { items } = await getAllPosts();
+  const data = await getPage({ slug: 'blog-list' });
 
   return {
     props: {
       header,
+      data,
       footer,
       categoryList: categories,
       posts: items,

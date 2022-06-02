@@ -1,6 +1,7 @@
 import { TRawBlok } from '../../../types/storyblok/bloks/rawBlock';
 import { getColumnArticleProps } from '../mappers/getColumnArticleProps';
 import { getFormProps } from '../mappers/getFormProps';
+import { getHeroProps } from '../mappers/getHeroProps';
 import { getLogosProps } from '../mappers/getLogosProps';
 import { getPageHeadingProps } from '../mappers/getPageHeadingProps';
 import { getProjectsProps } from '../mappers/getProjectsProps';
@@ -30,6 +31,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.Teaser: {
       return getTeaserProps(blok);
+    }
+    case ComponentType.Hero: {
+      return getHeroProps(blok);
     }
     default:
       return null;
