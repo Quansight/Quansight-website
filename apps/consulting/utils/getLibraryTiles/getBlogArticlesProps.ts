@@ -5,27 +5,24 @@ import { getAuthorName } from '../getAuthorName/getAuthorName';
 import { getLinkType } from './services/getLinkType';
 
 export const getBlogArticlesProps = (blogArticles: PageItems): TTiles =>
-  blogArticles.items
-    .map((article) => ({
+  blogArticles.items.map((article) => {
+    const blogArticleBodyItem = {
+      ...article.content.body.find(
+        (bodyItem) => bodyItem.component === 'blog-article',
+      ),
+    };
+    return {
       uuid: article.uuid,
       link: getLinkType(article),
-      tileData: {
-        ...article.content.body.find(
-          (bodyItem) => bodyItem.component === 'blog-article',
-        ),
-      },
-    }))
-    .map((parsedItem) => ({
-      uuid: parsedItem.uuid,
-      link: parsedItem.link,
-      imageSrc: parsedItem.tileData.libraryImage.filename,
-      imageAlt: parsedItem.tileData.libraryImage.alt,
-      postType: parsedItem.tileData.type,
-      postCategory: parsedItem.tileData.category,
-      title: parsedItem.tileData.postTitle,
+      imageSrc: blogArticleBodyItem.libraryImage.filename,
+      imageAlt: blogArticleBodyItem.libraryImage.alt,
+      postType: blogArticleBodyItem.type,
+      postCategory: blogArticleBodyItem.category,
+      title: blogArticleBodyItem.postTitle,
       author: getAuthorName(
-        parsedItem.tileData.author.content.firstName,
-        parsedItem.tileData.author.content.lastName,
+        blogArticleBodyItem.author.content.firstName,
+        blogArticleBodyItem.author.content.lastName,
       ),
-      date: formatArticleDate(parsedItem.tileData.publishedDate),
-    }));
+      date: formatArticleDate(blogArticleBodyItem.publishedDate),
+    };
+  });
