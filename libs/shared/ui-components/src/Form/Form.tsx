@@ -4,9 +4,9 @@ import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 
 import { sendFormData, FormValues } from '@quansight/shared/utils';
+import { BOOK_A_CALL_FORM_ID } from '@quansight/shared/utils';
 
 import { Button } from '../Button/Button';
-import { BOOK_A_CALL_FORM_ID } from '../Header/constants';
 import { Input } from '../Input/Input';
 import { Textarea } from '../Textarea/Textarea';
 import { FormError } from './FormError';
