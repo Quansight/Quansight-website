@@ -46,16 +46,14 @@ export const getStaticProps: GetStaticProps<
   const data = await getPage({ slug: 'team', relations: '' });
   const footer = await getFooter();
   const header = await getHeader();
-  const TeamItem = await getTeam();
+  const team = await getTeam();
 
   const pageData: PageItem = {
     ...data,
     content: {
       ...data.content,
       body: data.content.body.map((item: PageComponent) => {
-        return item.component === 'team'
-          ? { ...item, team: TeamItem.PersonItems.items }
-          : { ...item };
+        return item.component === 'team' ? { ...item, team } : { ...item };
       }),
     },
   };

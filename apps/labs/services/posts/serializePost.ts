@@ -4,12 +4,15 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import theme from 'shiki/themes/solarized-dark.json';
 
-import { getTeamMember } from '../../api';
+import { ArrayElementType } from '@quansight/shared/types';
+
+import { TeamQuery } from '../../api';
 import { TPost } from '../../types/storyblok/bloks/posts';
 import { getFileContent } from '../api/posts/getFileContent';
 
 export const serializePost = async (
   fileName: string,
+  authors: Array<ArrayElementType<TeamQuery['PersonItems']['items']>> = [],
 ): Promise<{
   content: MDXRemoteSerializeResult<Record<string, unknown>>;
   meta: TPost['meta'];
@@ -28,7 +31,11 @@ export const serializePost = async (
     throw Error('You did not provide author slug');
   }
 
-  const postAuthor = await getTeamMember(data.author);
+  const postAuthor = authors.find((author) => author.slug === data.author);
+
+  if (!postAuthor) {
+    throw Error('There is not matching author in database');
+  }
 
   const meta: TPost['meta'] = {
     ...(data as TPost['meta']),
