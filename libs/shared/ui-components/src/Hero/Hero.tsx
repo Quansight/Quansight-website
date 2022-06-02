@@ -29,7 +29,7 @@ export const Hero: FC<THeroProps> = ({
         isSmallHero && 'md:h-[29.4rem]',
         isLargeHero && 'md:h-[970px]',
         isMediumHero && 'md:h-[730px]',
-        isLargeHeroOverlapping && 'mb-[-31rem] md:mb-[-51rem]',
+        isLargeHeroOverlapping && 'mb-[-31rem] md:mb-[-39rem]',
         isMediumHeroOverlapping && 'mb-[-10rem] md:mb-[-20rem]',
         backgroundColor ? `bg-[${backgroundColor}]` : 'bg-[#000000]',
       )}
@@ -45,10 +45,11 @@ export const Hero: FC<THeroProps> = ({
         {title && (
           <div
             className={clsx(
-              'relative px-[2rem] placeholder:md:px-0 pt-[8.8rem] md:absolute md:pt-0',
-              isLargeHero && 'md:top-52 md:left-[14%] md:w-1/2',
+              'relative px-[2rem] placeholder:md:px-0 pt-[13rem] md:absolute md:px-0 md:pt-0',
               isMediumHero &&
                 'flex flex-col justify-center items-center w-full h-full',
+              isLargeHero &&
+                'md:top-[28rem] md:left-[10%] md:w-[85%] lg:left-[14%] lg:w-1/2',
             )}
           >
             <h2
