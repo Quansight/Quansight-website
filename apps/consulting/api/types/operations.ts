@@ -20,224 +20,6 @@ export type DatasourceEntriesQuery = {
   } | null;
 };
 
-export type LibraryArticleItemQueryVariables = Types.Exact<{
-  slug: Types.Scalars['ID'];
-}>;
-
-export type LibraryArticleItemQuery = {
-  __typename?: 'QueryType';
-  LibraryarticleItem: {
-    __typename?: 'LibraryarticleItem';
-    created_at: string | null;
-    default_full_slug: string | null;
-    first_published_at: string | null;
-    full_slug: string | null;
-    group_id: number | null;
-    id: number | null;
-    is_startpage: boolean | null;
-    uuid: string | null;
-    tag_list: Array<string | null> | null;
-    sort_by_date: string | null;
-    slug: string | null;
-    release_id: number | null;
-    published_at: string | null;
-    position: number | null;
-    path: string | null;
-    parent_id: number | null;
-    name: string | null;
-    meta_data: any | null;
-    lang: string | null;
-    content: {
-      __typename?: 'LibraryarticleComponent';
-      _editable: string | null;
-      _uid: string | null;
-      component: string | null;
-      description: string | null;
-      postText: any | null;
-      postTitle: string | null;
-      publishedDate: string | null;
-      title: string | null;
-      type: string | null;
-      category: Array<string | null> | null;
-      postImage: {
-        __typename?: 'Asset';
-        filename: string;
-        alt: string | null;
-        copyright: string | null;
-        focus: string | null;
-        id: number | null;
-        name: string | null;
-        title: string | null;
-      } | null;
-      author: {
-        __typename?: 'Story';
-        content: any | null;
-        createdAt: string | null;
-        firstPublishedAt: string | null;
-        fullSlug: string | null;
-        groupId: number | null;
-        id: number | null;
-        isStartpage: boolean | null;
-        lang: string | null;
-        metaData: any | null;
-        name: string | null;
-        parentId: number | null;
-        path: string | null;
-        position: number | null;
-        publishedAt: string | null;
-        releaseId: number | null;
-        slug: string | null;
-        sortByDate: string | null;
-        tagList: Array<string | null> | null;
-        uuid: string | null;
-        alternates: Array<{
-          __typename?: 'Alternate';
-          fullSlug: string;
-          id: number;
-          isFolder: boolean | null;
-          name: string;
-          parentId: number | null;
-          published: boolean;
-          slug: string;
-        } | null> | null;
-        translatedSlugs: Array<{
-          __typename?: 'TranslatedSlug';
-          lang: string;
-          name: string | null;
-          path: string | null;
-        } | null> | null;
-      } | null;
-    } | null;
-    alternates: Array<{
-      __typename?: 'Alternate';
-      fullSlug: string;
-      id: number;
-      isFolder: boolean | null;
-      name: string;
-      parentId: number | null;
-      published: boolean;
-      slug: string;
-    } | null> | null;
-    translated_slugs: Array<{
-      __typename?: 'TranslatedSlug';
-      lang: string;
-      name: string | null;
-      path: string | null;
-    } | null> | null;
-  } | null;
-};
-
-export type LibraryArticleItemsQueryVariables = Types.Exact<{
-  [key: string]: never;
-}>;
-
-export type LibraryArticleItemsQuery = {
-  __typename?: 'QueryType';
-  LibraryarticleItems: {
-    __typename?: 'LibraryarticleItems';
-    total: number | null;
-    items: Array<{
-      __typename?: 'LibraryarticleItem';
-      created_at: string | null;
-      default_full_slug: string | null;
-      first_published_at: string | null;
-      full_slug: string | null;
-      group_id: number | null;
-      id: number | null;
-      is_startpage: boolean | null;
-      lang: string | null;
-      meta_data: any | null;
-      name: string | null;
-      parent_id: number | null;
-      path: string | null;
-      position: number | null;
-      published_at: string | null;
-      release_id: number | null;
-      slug: string | null;
-      sort_by_date: string | null;
-      tag_list: Array<string | null> | null;
-      uuid: string | null;
-      alternates: Array<{
-        __typename?: 'Alternate';
-        fullSlug: string;
-        id: number;
-        isFolder: boolean | null;
-        name: string;
-        parentId: number | null;
-        published: boolean;
-        slug: string;
-      } | null> | null;
-      content: {
-        __typename?: 'LibraryarticleComponent';
-        _editable: string | null;
-        _uid: string | null;
-        category: Array<string | null> | null;
-        component: string | null;
-        description: string | null;
-        postTitle: string | null;
-        publishedDate: string | null;
-        title: string | null;
-        type: string | null;
-        postText: any | null;
-        author: {
-          __typename?: 'Story';
-          content: any | null;
-          createdAt: string | null;
-          firstPublishedAt: string | null;
-          fullSlug: string | null;
-          groupId: number | null;
-          isStartpage: boolean | null;
-          id: number | null;
-          lang: string | null;
-          metaData: any | null;
-          name: string | null;
-          parentId: number | null;
-          path: string | null;
-          position: number | null;
-          publishedAt: string | null;
-          releaseId: number | null;
-          slug: string | null;
-          sortByDate: string | null;
-          tagList: Array<string | null> | null;
-          uuid: string | null;
-          alternates: Array<{
-            __typename?: 'Alternate';
-            fullSlug: string;
-            id: number;
-            isFolder: boolean | null;
-            name: string;
-            parentId: number | null;
-            published: boolean;
-            slug: string;
-          } | null> | null;
-          translatedSlugs: Array<{
-            __typename?: 'TranslatedSlug';
-            lang: string;
-            name: string | null;
-            path: string | null;
-          } | null> | null;
-        } | null;
-        postImage: {
-          __typename?: 'Asset';
-          alt: string | null;
-          copyright: string | null;
-          filename: string;
-          focus: string | null;
-          id: number | null;
-          name: string | null;
-          title: string | null;
-        } | null;
-      } | null;
-      translated_slugs: Array<{
-        __typename?: 'TranslatedSlug';
-        lang: string;
-        name: string | null;
-        path: string | null;
-      } | null> | null;
-    } | null> | null;
-  } | null;
-};
-
 export type LibrarylinkItemsQueryVariables = Types.Exact<{
   [key: string]: never;
 }>;
@@ -393,6 +175,66 @@ export type LibrarylinkItemsQuery = {
   } | null;
 };
 
+export type PageItemsQueryVariables = Types.Exact<{
+  relations: Types.InputMaybe<Types.Scalars['String']>;
+  prefix: Types.InputMaybe<Types.Scalars['String']>;
+}>;
+
+export type PageItemsQuery = {
+  __typename?: 'QueryType';
+  PageItems: {
+    __typename?: 'PageItems';
+    total: number | null;
+    items: Array<{
+      __typename?: 'PageItem';
+      created_at: string | null;
+      default_full_slug: string | null;
+      first_published_at: string | null;
+      full_slug: string | null;
+      group_id: number | null;
+      id: number | null;
+      is_startpage: boolean | null;
+      lang: string | null;
+      meta_data: any | null;
+      name: string | null;
+      parent_id: number | null;
+      path: string | null;
+      position: number | null;
+      published_at: string | null;
+      release_id: number | null;
+      slug: string | null;
+      sort_by_date: string | null;
+      tag_list: Array<string | null> | null;
+      uuid: string | null;
+      content: {
+        __typename?: 'PageComponent';
+        _uid: string | null;
+        title: string | null;
+        description: string | null;
+        component: string | null;
+        body: any | null;
+        _editable: string | null;
+      } | null;
+      alternates: Array<{
+        __typename?: 'Alternate';
+        fullSlug: string;
+        id: number;
+        isFolder: boolean | null;
+        name: string;
+        parentId: number | null;
+        published: boolean;
+        slug: string;
+      } | null> | null;
+      translated_slugs: Array<{
+        __typename?: 'TranslatedSlug';
+        lang: string;
+        name: string | null;
+        path: string | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+};
+
 export type FooterItemQueryVariables = Types.Exact<{
   slug: Types.Scalars['ID'];
 }>;
@@ -448,6 +290,71 @@ export type FooterItemQuery = {
   } | null;
 };
 
+export type HeaderItemQueryVariables = Types.Exact<{
+  slug: Types.Scalars['ID'];
+}>;
+
+export type HeaderItemQuery = {
+  __typename?: 'QueryType';
+  HeaderItem: {
+    __typename?: 'HeaderItem';
+    created_at: string | null;
+    default_full_slug: string | null;
+    first_published_at: string | null;
+    full_slug: string | null;
+    group_id: number | null;
+    id: number | null;
+    is_startpage: boolean | null;
+    lang: string | null;
+    meta_data: any | null;
+    name: string | null;
+    parent_id: number | null;
+    path: string | null;
+    position: number | null;
+    published_at: string | null;
+    release_id: number | null;
+    slug: string | null;
+    sort_by_date: string | null;
+    tag_list: Array<string | null> | null;
+    uuid: string | null;
+    alternates: Array<{
+      __typename?: 'Alternate';
+      fullSlug: string;
+      id: number;
+      isFolder: boolean | null;
+      name: string;
+      parentId: number | null;
+      published: boolean;
+      slug: string;
+    } | null> | null;
+    translated_slugs: Array<{
+      __typename?: 'TranslatedSlug';
+      lang: string;
+      name: string | null;
+      path: string | null;
+    } | null> | null;
+    content: {
+      __typename?: 'HeaderComponent';
+      _editable: string | null;
+      _uid: string | null;
+      component: string | null;
+      navigation: any | null;
+      skipLinksText: string | null;
+      bookACallLinkText: string | null;
+      logo: {
+        __typename?: 'Asset';
+        focus: string | null;
+        alt: string | null;
+        copyright: string | null;
+        filename: string;
+        id: number | null;
+        name: string | null;
+        title: string | null;
+      } | null;
+    } | null;
+  } | null;
+};
+
 export type LinksQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type LinksQuery = {
@@ -466,6 +373,7 @@ export type LinksQuery = {
 
 export type PageItemQueryVariables = Types.Exact<{
   slug: Types.Scalars['ID'];
+  relations: Types.InputMaybe<Types.Scalars['String']>;
 }>;
 
 export type PageItemQuery = {
@@ -519,27 +427,6 @@ export type PageItemQuery = {
   } | null;
 };
 
-export type PageItemsQueryVariables = Types.Exact<{ [key: string]: never }>;
-
-export type PageItemsQuery = {
-  __typename?: 'QueryType';
-  PageItems: {
-    __typename?: 'PageItems';
-    items: Array<{
-      __typename?: 'PageItem';
-      full_slug: string | null;
-      first_published_at: string | null;
-      is_startpage: boolean | null;
-      name: string | null;
-      path: string | null;
-      position: number | null;
-      parent_id: number | null;
-      published_at: string | null;
-      id: number | null;
-    } | null> | null;
-  } | null;
-};
-
 export type TeamQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type TeamQuery = {
@@ -550,6 +437,7 @@ export type TeamQuery = {
       __typename?: 'PersonItem';
       id: number | null;
       position: number | null;
+      slug: string | null;
       content: {
         __typename?: 'PersonComponent';
         _uid: string | null;

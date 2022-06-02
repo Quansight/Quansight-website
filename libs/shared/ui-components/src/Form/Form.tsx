@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 
 import { sendFormData, FormValues } from '@quansight/shared/utils';
+import { BOOK_A_CALL_FORM_ID } from '@quansight/shared/utils';
 
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
@@ -44,6 +45,7 @@ export const Form: FC<TFormProps> = (props) => {
 
   return (
     <div
+      id={BOOK_A_CALL_FORM_ID}
       className={clsx(
         'relative py-[4.1rem] my-[6rem] mx-auto max-w-layout',
         'md:flex md:items-center md:py-[6rem]',

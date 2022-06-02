@@ -23,5 +23,3 @@ export const FooterNavigation: FC<TFooterNavigationProps> = ({
     </nav>
   </div>
 );
-
-export default FooterNavigation;

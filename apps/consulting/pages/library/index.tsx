@@ -3,22 +3,18 @@ import React, { FC, useState, useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { ISlugParams } from '@quansight/shared/types';
-import {
-  Layout,
-  SEO,
-  DomainVariant,
-  Footer,
-} from '@quansight/shared/ui-components';
+import { ISlugParams, DomainVariant } from '@quansight/shared/types';
+import { Layout, SEO, Footer, Header } from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
 import { PAGINATION_OFFSETT } from '../..//utils/paginateLibraryTiles/constants';
-import { paginateLibraryTiles } from '../..//utils/paginateLibraryTiles/paginateLibraryTiles';
 import { getDataSourceEntries } from '../../api/utils/getDataSourceEntries';
 import { getFooter } from '../../api/utils/getFooter';
-import { getLibraryArticleItems } from '../../api/utils/getLibraryArticleItems';
+import { getHeader } from '../../api/utils/getHeader';
 import { getLibraryLinkItems } from '../../api/utils/getLibraryLinkItems';
 import { getPage } from '../../api/utils/getPage';
+import { getPageItems } from '../../api/utils/getPageItems';
+import { LIBRARY_AUTHOR_RELATION } from '../../components/BlogArticle/constants';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { Carousel } from '../../components/Carousel/Carousel';
 import { Filters } from '../../components/Filters/Filters';
@@ -29,14 +25,18 @@ import {
 import { Page } from '../../components/Page/Page';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { Tiles } from '../../components/Tiles/Tiles';
+import { TileVariant } from '../../components/Tiles/types';
 import { TLibraryProps } from '../../types/storyblok/bloks/libraryProps';
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 import { filterLibraryTiles } from '../../utils/filterLibraryTiles/filterLibraryTiles';
+import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
 import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
+import { paginateLibraryTiles } from '../../utils/paginateLibraryTiles/paginateLibraryTiles';
 
 export const Library: FC<TLibraryProps> = ({
   data,
+  header,
   footer,
   tiles,
   preview,
@@ -65,6 +65,29 @@ export const Library: FC<TLibraryProps> = ({
   }, [postFilters.category, currentPage, postFilters.type, tiles]);
 
   useEffect(() => {
+    const isTheSameFilter = router.query.type === postFilters.type;
+    if (isTheSameFilter || !router.query.type) return;
+    setCurrentPage(1);
+    setPostFilters((prevState) => ({
+      ...prevState,
+      type: router.query.type as string,
+    }));
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          type: router.query.type as string,
+        },
+      },
+      undefined,
+      { shallow: true },
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query.type]);
+
+  useEffect(() => {
     if (!router.isReady) return;
 
     if (router.query.type) {
@@ -89,7 +112,12 @@ export const Library: FC<TLibraryProps> = ({
   }, [router.isReady]);
 
   return (
-    <Layout footer={<Footer {...footer.content} />}>
+    <Layout
+      footer={<Footer {...footer.content} />}
+      header={
+        <Header {...header.content} domainVariant={DomainVariant.Quansight} />
+      }
+    >
       <SEO
         title={data.content.title}
         description={data.content.description}
@@ -97,7 +125,7 @@ export const Library: FC<TLibraryProps> = ({
       />
 
       {isPageType(data?.content?.component) && (
-        <Page data={data} preview={preview}>
+        <Page data={data} preview={preview} relations={LIBRARY_AUTHOR_RELATION}>
           {(blok: TRawBlok) => <BlokProvider blok={blok} />}
         </Page>
       )}
@@ -110,7 +138,7 @@ export const Library: FC<TLibraryProps> = ({
           onFiltersChange={setPostFilters}
           onPageChange={setCurrentPage}
         />
-        <Tiles tiles={libraryTiles} />
+        <Tiles tiles={libraryTiles} tileVariant={TileVariant.Library} />
         <Pagination
           onPageChange={setCurrentPage}
           currentPage={currentPage}
@@ -125,24 +153,28 @@ export const getStaticProps: GetStaticProps<
   TLibraryProps,
   ISlugParams
 > = async ({ preview = false }) => {
-  const data = await getPage({ slug: 'library' });
+  const data = await getPage({ slug: 'library', relations: '' });
+  const header = await getHeader();
   const footer = await getFooter();
+  const blogArticles = await getPageItems({
+    relations: LIBRARY_AUTHOR_RELATION,
+    prefix: ARTICLES_DIRECTORY_SLUG,
+  });
   const libraryLinks = await getLibraryLinkItems();
-  const articleItems = await getLibraryArticleItems();
   const postTypes = await getDataSourceEntries({ slug: 'post-type' });
   const postCategories = await getDataSourceEntries({ slug: 'post-category' });
 
   return {
     props: {
       data,
+      header,
       footer,
       postTypes,
       postCategories,
       tiles: getLibraryTiles({
-        articleItems,
+        blogArticles,
         libraryLinks,
       }),
-
       preview,
     },
   };

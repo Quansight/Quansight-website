@@ -6,7 +6,7 @@ import { Newsletter } from '../Newsletter/Newsletter';
 import { Tile } from './Tile';
 import { TTilesProps } from './types';
 
-export const Tiles: FC<TTilesProps> = ({ tiles }) => {
+export const Tiles: FC<TTilesProps> = ({ tiles, tileVariant }) => {
   const [slicedTiles, setSlicedTiles] = useState<{
     sectionTop: TTiles;
     sectionBottom: TTiles;
@@ -30,7 +30,7 @@ export const Tiles: FC<TTilesProps> = ({ tiles }) => {
       {slicedTiles.sectionTop.length !== 0 && (
         <ul className="grid grid-cols-1 gap-[4.2rem] sm:grid-cols-2 sm:gap-x-[2.4rem] sm:gap-y-[3.6rem] lg:grid-cols-3">
           {slicedTiles.sectionTop.map((tile) => (
-            <Tile {...tile} key={tile.uuid} />
+            <Tile {...tile} key={tile.uuid} tileVariant={tileVariant} />
           ))}
         </ul>
       )}
@@ -38,7 +38,7 @@ export const Tiles: FC<TTilesProps> = ({ tiles }) => {
       {slicedTiles.sectionBottom.length !== 0 && (
         <ul className="grid grid-cols-1 gap-[4.2rem] sm:grid-cols-2 sm:gap-x-[2.4rem] sm:gap-y-[3.6rem] lg:grid-cols-3">
           {slicedTiles.sectionBottom.map((tile) => (
-            <Tile {...tile} key={tile.uuid} />
+            <Tile {...tile} key={tile.uuid} tileVariant={tileVariant} />
           ))}
         </ul>
       )}

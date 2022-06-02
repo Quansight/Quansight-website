@@ -22,6 +22,7 @@ export const useStoryblok = <PageItem>(
   originalStory: PageItem,
   preview: boolean,
   onLoadPageItem: (slug: string) => Promise<PageItem>,
+  relations = '',
   locale?: string,
 ): PageItem | null => {
   const [story, setStory] = useState<PageItem | null>(originalStory);
@@ -31,7 +32,7 @@ export const useStoryblok = <PageItem>(
 
     if (StoryblokBridge) {
       const storyblokInstance = new StoryblokBridge({
-        resolveRelations: [],
+        resolveRelations: [relations],
         language: locale,
       });
 

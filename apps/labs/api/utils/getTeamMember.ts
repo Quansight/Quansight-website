@@ -14,5 +14,6 @@ export const getTeamMember = async (
     slug,
   );
 
+  // @ts-ignore type error
   return pick(data.PersonItem, ['id', 'slug', 'content']);
 };

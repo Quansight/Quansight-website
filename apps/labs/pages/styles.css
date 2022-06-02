@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.sr-only {
+  @apply overflow-hidden absolute p-0 w-[1px] h-[1px] whitespace-nowrap border-0;
+
+  clip-path: rect(0 0 0 0);
+}
+
+.navbar-open {
+  @apply h-screen overflow-y-hidden;
+}

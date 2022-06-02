@@ -56,6 +56,66 @@ export type FooterItemQueryResult = Apollo.QueryResult<
   Types.FooterItemQuery,
   Types.FooterItemQueryVariables
 >;
+export const HeaderItemDocument = gql`
+  query HeaderItem($slug: ID!) {
+    HeaderItem(id: $slug) {
+      alternates {
+        fullSlug
+        id
+        isFolder
+        name
+        parentId
+        published
+        slug
+      }
+      created_at
+      default_full_slug
+      first_published_at
+      full_slug
+      group_id
+      id
+      is_startpage
+      lang
+      meta_data
+      name
+      parent_id
+      path
+      position
+      published_at
+      release_id
+      slug
+      sort_by_date
+      tag_list
+      translated_slugs {
+        lang
+        name
+        path
+      }
+      uuid
+      content {
+        _editable
+        _uid
+        component
+        navigation
+        skipLinksText
+        logo {
+          focus
+          alt
+          copyright
+          filename
+          id
+          name
+          title
+        }
+        bookACallLinkText
+      }
+    }
+  }
+`;
+export type HeaderItemQueryResult = Apollo.QueryResult<
+  Types.HeaderItemQuery,
+  Types.HeaderItemQueryVariables
+>;
 export const LinksDocument = gql`
   query links {
     Links {
@@ -73,8 +133,8 @@ export type LinksQueryResult = Apollo.QueryResult<
   Types.LinksQueryVariables
 >;
 export const PageItemDocument = gql`
-  query pageItem($slug: ID!) {
-    PageItem(id: $slug) {
+  query pageItem($slug: ID!, $relations: String) {
+    PageItem(id: $slug, resolve_relations: $relations) {
       alternates {
         fullSlug
         id
@@ -124,19 +184,52 @@ export type PageItemQueryResult = Apollo.QueryResult<
   Types.PageItemQueryVariables
 >;
 export const PageItemsDocument = gql`
-  query pageItems {
-    PageItems(per_page: 100) {
+  query PageItems($relations: String, $prefix: String) {
+    PageItems(resolve_relations: $relations, starts_with: $prefix) {
       items {
-        full_slug
+        content {
+          _uid
+          title
+          description
+          component
+          body
+          _editable
+        }
+        alternates {
+          fullSlug
+          id
+          isFolder
+          name
+          parentId
+          published
+          slug
+        }
+        created_at
+        default_full_slug
         first_published_at
+        full_slug
+        group_id
+        id
         is_startpage
+        lang
+        meta_data
         name
+        parent_id
         path
         position
-        parent_id
         published_at
-        id
+        release_id
+        slug
+        sort_by_date
+        tag_list
+        translated_slugs {
+          lang
+          name
+          path
+        }
+        uuid
       }
+      total
     }
   }
 `;
@@ -146,10 +239,15 @@ export type PageItemsQueryResult = Apollo.QueryResult<
 >;
 export const TeamDocument = gql`
   query Team {
-    PersonItems(starts_with: "team-members/", sort_by: "position") {
+    PersonItems(
+      starts_with: "team-members/"
+      sort_by: "position"
+      per_page: 100
+    ) {
       items {
         id
         position
+        slug
         content {
           _uid
           firstName
