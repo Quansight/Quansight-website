@@ -2,25 +2,17 @@
 <rss version="2.0">
     <channel>
         <title>Quansight Labs</title>
-        <link>https://labs.quansight.org/</link>
+        <link>https://labs.quansight.org</link>
         <description>This is an RSS feed. To subscribe to it, copy its address and paste it when your feed reader asks for it. It will be updated periodically in your reader.</description>
-        <lastBuildDate>Wed, 01 Jun 2022 17:03:06 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 02 Jun 2022 09:38:04 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
             <title>Quansight Labs</title>
-            <url>https://labs.quansight.org//logo.jpeg</url>
-            <link>https://labs.quansight.org/</link>
+            <url>https://labs.quansight.org/logo.jpeg</url>
+            <link>https://labs.quansight.org</link>
         </image>
         <copyright>All rights reserved 2022, Quansight</copyright>
-        <item>
-            <title><![CDATA[This is another hello world post!]]></title>
-            <link>https://labs.quansight.org/blog/another-post</link>
-            <guid>https://labs.quansight.org/blog/another-post</guid>
-            <pubDate>Wed, 12 Oct 2022 22:00:00 GMT</pubDate>
-            <description><![CDATA[Lorem ipsum dolor sit amet]]></description>
-            <enclosure url="https://labs.quansight.org/posts/another-post/featured.png" length="0" type="image/png"/>
-        </item>
         <item>
             <title><![CDATA[This is hello world post!]]></title>
             <link>https://labs.quansight.org/blog/hello-world-post</link>
@@ -28,6 +20,14 @@
             <pubDate>Thu, 13 Oct 2022 22:00:00 GMT</pubDate>
             <description><![CDATA[Lorem ipsum dolor sit amet]]></description>
             <enclosure url="https://labs.quansight.org/posts/hello-world-post/featured.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[This is another hello world post!]]></title>
+            <link>https://labs.quansight.org/blog/another-post</link>
+            <guid>https://labs.quansight.org/blog/another-post</guid>
+            <pubDate>Wed, 12 Oct 2022 22:00:00 GMT</pubDate>
+            <description><![CDATA[Lorem ipsum dolor sit amet]]></description>
+            <enclosure url="https://labs.quansight.org/posts/another-post/featured.png" length="0" type="image/png"/>
         </item>
     </channel>
 </rss>
