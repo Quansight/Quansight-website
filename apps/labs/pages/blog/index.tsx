@@ -199,7 +199,7 @@ const BlogListPage: FC<BlogListPageProps> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ preview }) => {
+export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
   const footer = await getFooter();
   const header = await getHeader();
   const categories = await getCategories();
