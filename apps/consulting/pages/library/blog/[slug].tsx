@@ -11,6 +11,7 @@ import { getHeader } from '../../../api/utils/getHeader';
 import { getLibraryLinkItems } from '../../../api/utils/getLibraryLinkItems';
 import { getLinks } from '../../../api/utils/getLinks';
 import { getPage } from '../../../api/utils/getPage';
+import { getPageItems } from '../../../api/utils/getPageItems';
 import { BlogMoreArticles } from '../../../components/BlogArticle/BlogMoreArticles/BlogMoreArticles';
 import { LIBRARY_AUTHOR_RELATION } from '../../../components/BlogArticle/constants';
 import { BlokProvider } from '../../../components/BlokProvider/BlokProvider';
@@ -73,7 +74,10 @@ export const getStaticProps: GetStaticProps<
   const footer = await getFooter();
   const header = await getHeader();
   const libraryLinks = await getLibraryLinkItems();
-  const blogArticles = undefined;
+  const blogArticles = await getPageItems({
+    relations: LIBRARY_AUTHOR_RELATION,
+    prefix: ARTICLES_DIRECTORY_SLUG,
+  });
   const libraryTiles = getLibraryTiles({
     blogArticles,
     libraryLinks,
