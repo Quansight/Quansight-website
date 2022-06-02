@@ -1,4 +1,6 @@
 export * from './Layout/Layout';
+export * from './Layout/types';
+
 export * from './Meta/Meta';
 export * from './Page/Page';
 
@@ -36,6 +38,9 @@ export * from './Teaser/types';
 
 export * from './Team/Team';
 export * from './Team/types';
+
+export * from './Header/Header';
+export * from './Header/types';
 
 export * from './Footer/Footer';
 export * from './Footer/types';

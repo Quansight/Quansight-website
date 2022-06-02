@@ -1,5 +1,6 @@
 import {
   FooterItem,
+  HeaderItem,
   PageItem,
   DatasourceEntries,
 } from '../../../api/types/basic';
@@ -32,7 +33,8 @@ export type TLibraryProps = {
   postTypes: DatasourceEntries;
   postCategories: DatasourceEntries;
   data: PageItem;
+  header: HeaderItem;
   footer: FooterItem;
-  tiles: TTiles;
   preview: boolean;
+  tiles: TTiles;
 };

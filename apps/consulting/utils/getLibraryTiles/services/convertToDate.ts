@@ -1,6 +1,2 @@
-import { TLibraryTileRawData } from '../types';
-
-export const convertToDate = (tile: TLibraryTileRawData): number =>
-  tile?.content?.publishedDate
-    ? new Date(tile?.content?.publishedDate).getTime()
-    : new Date().getTime();
+export const convertToDate = (date: string): number =>
+  date ? new Date(date).getTime() : new Date().getTime();

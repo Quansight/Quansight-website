@@ -22,207 +22,6 @@ export type DatasourceEntriesQueryResult = Apollo.QueryResult<
   Types.DatasourceEntriesQuery,
   Types.DatasourceEntriesQueryVariables
 >;
-export const LibraryArticleItemDocument = gql`
-  query libraryArticleItem($slug: ID!) {
-    LibraryarticleItem(id: $slug) {
-      content {
-        _editable
-        _uid
-        component
-        description
-        postText
-        postTitle
-        postImage {
-          filename
-          alt
-          copyright
-          focus
-          id
-          name
-          title
-        }
-        publishedDate
-        title
-        type
-        author {
-          content
-          alternates {
-            fullSlug
-            id
-            isFolder
-            name
-            parentId
-            published
-            slug
-          }
-          createdAt
-          firstPublishedAt
-          fullSlug
-          groupId
-          id
-          isStartpage
-          lang
-          metaData
-          name
-          parentId
-          path
-          position
-          publishedAt
-          releaseId
-          slug
-          sortByDate
-          tagList
-          translatedSlugs {
-            lang
-            name
-            path
-          }
-          uuid
-        }
-        category
-      }
-      alternates {
-        fullSlug
-        id
-        isFolder
-        name
-        parentId
-        published
-        slug
-      }
-      created_at
-      default_full_slug
-      first_published_at
-      full_slug
-      group_id
-      id
-      is_startpage
-      uuid
-      translated_slugs {
-        lang
-        name
-        path
-      }
-      tag_list
-      sort_by_date
-      slug
-      release_id
-      published_at
-      position
-      path
-      parent_id
-      name
-      meta_data
-      lang
-    }
-  }
-`;
-export type LibraryArticleItemQueryResult = Apollo.QueryResult<
-  Types.LibraryArticleItemQuery,
-  Types.LibraryArticleItemQueryVariables
->;
-export const LibraryArticleItemsDocument = gql`
-  query libraryArticleItems {
-    LibraryarticleItems {
-      total
-      items {
-        alternates {
-          fullSlug
-          id
-          isFolder
-          name
-          parentId
-          published
-          slug
-        }
-        content {
-          _editable
-          _uid
-          author {
-            alternates {
-              fullSlug
-              id
-              isFolder
-              name
-              parentId
-              published
-              slug
-            }
-            content
-            createdAt
-            firstPublishedAt
-            fullSlug
-            groupId
-            isStartpage
-            id
-            lang
-            metaData
-            name
-            parentId
-            path
-            position
-            publishedAt
-            releaseId
-            slug
-            sortByDate
-            tagList
-            translatedSlugs {
-              lang
-              name
-              path
-            }
-            uuid
-          }
-          category
-          component
-          description
-          postImage {
-            alt
-            copyright
-            filename
-            focus
-            id
-            name
-            title
-          }
-          postTitle
-          publishedDate
-          title
-          type
-          postText
-        }
-        created_at
-        default_full_slug
-        first_published_at
-        full_slug
-        group_id
-        id
-        is_startpage
-        lang
-        meta_data
-        name
-        parent_id
-        path
-        position
-        published_at
-        release_id
-        slug
-        sort_by_date
-        tag_list
-        translated_slugs {
-          lang
-          name
-          path
-        }
-        uuid
-      }
-    }
-  }
-`;
-export type LibraryArticleItemsQueryResult = Apollo.QueryResult<
-  Types.LibraryArticleItemsQuery,
-  Types.LibraryArticleItemsQueryVariables
->;
 export const LibrarylinkItemsDocument = gql`
   query librarylinkItems {
     LibrarylinkItems {
@@ -365,6 +164,60 @@ export type LibrarylinkItemsQueryResult = Apollo.QueryResult<
   Types.LibrarylinkItemsQuery,
   Types.LibrarylinkItemsQueryVariables
 >;
+export const PageItemsDocument = gql`
+  query PageItems($relations: String, $prefix: String) {
+    PageItems(resolve_relations: $relations, starts_with: $prefix) {
+      items {
+        content {
+          _uid
+          title
+          description
+          component
+          body
+          _editable
+        }
+        alternates {
+          fullSlug
+          id
+          isFolder
+          name
+          parentId
+          published
+          slug
+        }
+        created_at
+        default_full_slug
+        first_published_at
+        full_slug
+        group_id
+        id
+        is_startpage
+        lang
+        meta_data
+        name
+        parent_id
+        path
+        position
+        published_at
+        release_id
+        slug
+        sort_by_date
+        tag_list
+        translated_slugs {
+          lang
+          name
+          path
+        }
+        uuid
+      }
+      total
+    }
+  }
+`;
+export type PageItemsQueryResult = Apollo.QueryResult<
+  Types.PageItemsQuery,
+  Types.PageItemsQueryVariables
+>;
 export const FooterItemDocument = gql`
   query FooterItem($slug: ID!) {
     FooterItem(id: $slug) {
@@ -416,6 +269,66 @@ export type FooterItemQueryResult = Apollo.QueryResult<
   Types.FooterItemQuery,
   Types.FooterItemQueryVariables
 >;
+export const HeaderItemDocument = gql`
+  query HeaderItem($slug: ID!) {
+    HeaderItem(id: $slug) {
+      alternates {
+        fullSlug
+        id
+        isFolder
+        name
+        parentId
+        published
+        slug
+      }
+      created_at
+      default_full_slug
+      first_published_at
+      full_slug
+      group_id
+      id
+      is_startpage
+      lang
+      meta_data
+      name
+      parent_id
+      path
+      position
+      published_at
+      release_id
+      slug
+      sort_by_date
+      tag_list
+      translated_slugs {
+        lang
+        name
+        path
+      }
+      uuid
+      content {
+        _editable
+        _uid
+        component
+        navigation
+        skipLinksText
+        logo {
+          focus
+          alt
+          copyright
+          filename
+          id
+          name
+          title
+        }
+        bookACallLinkText
+      }
+    }
+  }
+`;
+export type HeaderItemQueryResult = Apollo.QueryResult<
+  Types.HeaderItemQuery,
+  Types.HeaderItemQueryVariables
+>;
 export const LinksDocument = gql`
   query links {
     Links {
@@ -433,8 +346,8 @@ export type LinksQueryResult = Apollo.QueryResult<
   Types.LinksQueryVariables
 >;
 export const PageItemDocument = gql`
-  query pageItem($slug: ID!) {
-    PageItem(id: $slug) {
+  query pageItem($slug: ID!, $relations: String) {
+    PageItem(id: $slug, resolve_relations: $relations) {
       alternates {
         fullSlug
         id
@@ -483,33 +396,17 @@ export type PageItemQueryResult = Apollo.QueryResult<
   Types.PageItemQuery,
   Types.PageItemQueryVariables
 >;
-export const PageItemsDocument = gql`
-  query pageItems {
-    PageItems(per_page: 100) {
-      items {
-        full_slug
-        first_published_at
-        is_startpage
-        name
-        path
-        position
-        parent_id
-        published_at
-        id
-      }
-    }
-  }
-`;
-export type PageItemsQueryResult = Apollo.QueryResult<
-  Types.PageItemsQuery,
-  Types.PageItemsQueryVariables
->;
 export const TeamDocument = gql`
   query Team {
-    PersonItems(starts_with: "team-members/", sort_by: "position") {
+    PersonItems(
+      starts_with: "team-members/"
+      sort_by: "position"
+      per_page: 100
+    ) {
       items {
         id
         position
+        slug
         content {
           _uid
           firstName

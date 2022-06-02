@@ -6,6 +6,11 @@ type LinkItem = {
   linkUrl: TLink;
 } & TBlok;
 
+export type TFooterLogoProps = {
+  logoMobile: TImage;
+  logoDesktop: TImage;
+} & TBlok;
+
 export type TFooterNavigationProps = {
   title: string;
   links: LinkItem[];
@@ -28,16 +33,18 @@ export type TFooterCopyrightProps = {
   copyright: string | null;
 };
 
+type TColumn =
+  | TFooterNavigationProps
+  | TFooterContactProps
+  | TFooterSocialMediaProps
+  | TFooterLogoProps;
+
 export type TFooterColumnProviderProps = {
-  data: TFooterNavigationProps | TFooterContactProps | TFooterSocialMediaProps;
+  data: TColumn;
 };
 
 export type TFooterProps = {
-  columns: (
-    | TFooterNavigationProps
-    | TFooterContactProps
-    | TFooterSocialMediaProps
-  )[];
+  columns: TColumn[];
   _uid: string | null;
   _editable: string | null;
   component: string | null;

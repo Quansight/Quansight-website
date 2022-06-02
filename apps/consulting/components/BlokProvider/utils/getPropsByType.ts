@@ -1,4 +1,5 @@
 import { TRawBlok } from '../../../types/storyblok/bloks/rawBlok';
+import { getBlogArticleProps } from '../mappers/getBlogArticleProps';
 import { getBoardListProps } from '../mappers/getBoardListProps';
 import { getBoardProps } from '../mappers/getBoardProps';
 import { getCenteredIntroProps } from '../mappers/getCenteredIntroProps';
@@ -21,6 +22,9 @@ import { ComponentType, TBlokComponentProps } from '../types';
 
 export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
   switch (blok.component) {
+    case ComponentType.BlogArticle: {
+      return getBlogArticleProps(blok);
+    }
     case ComponentType.Board: {
       return getBoardProps(blok);
     }

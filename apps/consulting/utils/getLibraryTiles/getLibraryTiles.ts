@@ -1,20 +1,22 @@
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
-import { getTileProps } from './getTileProps';
+import { getBlogArticlesProps } from './getBlogArticlesProps';
+import { getLibraryLinksProps } from './getLibraryLinksProps';
 import { sortLibraryTiles } from './sortLibraryTiles';
-import { TGetLibraryTilesProps, TLibraryTileRawData } from './types';
+import { TGetLibraryTilesProps } from './types';
 
 const defaultValues = { items: [], total: 0 };
 
 export const getLibraryTiles = ({
-  articleItems = defaultValues,
+  blogArticles = defaultValues,
   libraryLinks = defaultValues,
 }: TGetLibraryTilesProps): TTiles => {
+  const blogArticlesProps = getBlogArticlesProps(blogArticles);
+  const libraryLinksProps = getLibraryLinksProps(libraryLinks);
+
   const allTiles =
-    articleItems.items && libraryLinks.items
-      ? [...articleItems.items, ...libraryLinks.items]
+    blogArticlesProps && libraryLinksProps
+      ? [...blogArticlesProps, ...libraryLinksProps]
       : [];
 
-  const sortedTiles = sortLibraryTiles(allTiles);
-
-  return sortedTiles.map((item: TLibraryTileRawData) => getTileProps(item));
+  return sortLibraryTiles(allTiles);
 };
