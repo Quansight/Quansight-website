@@ -5,6 +5,7 @@ import { getHeroProps } from '../mappers/getHeroProps';
 import { getLogosProps } from '../mappers/getLogosProps';
 import { getPageHeadingProps } from '../mappers/getPageHeadingProps';
 import { getProjectsProps } from '../mappers/getProjectsProps';
+import { getStatuteProps } from '../mappers/getStatuteProps';
 import { getTeamProps } from '../mappers/getTeamProps';
 import { getTeaserProps } from '../mappers/getTeaserProps';
 import { ComponentType, TBlokComponentProps } from '../types';
@@ -34,6 +35,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.Hero: {
       return getHeroProps(blok);
+    }
+    case ComponentType.Statute: {
+      return getStatuteProps(blok);
     }
     default:
       return null;
