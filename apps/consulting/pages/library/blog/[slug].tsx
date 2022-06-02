@@ -8,11 +8,11 @@ import { isPageType } from '@quansight/shared/utils';
 
 import { getFooter } from '../../../api/utils/getFooter';
 import { getHeader } from '../../../api/utils/getHeader';
-// import { getLibraryArticleItems } from '../../../api/utils/getLibraryArticleItems';
 import { getLibraryLinkItems } from '../../../api/utils/getLibraryLinkItems';
 import { getLinks } from '../../../api/utils/getLinks';
 import { getPage } from '../../../api/utils/getPage';
 import { BlogMoreArticles } from '../../../components/BlogArticle/BlogMoreArticles/BlogMoreArticles';
+import { LIBRARY_AUTHOR_RELATION } from '../../../components/BlogArticle/constants';
 import { BlokProvider } from '../../../components/BlokProvider/BlokProvider';
 import { Page } from '../../../components/Page/Page';
 import { TLibraryArticleProps } from '../../../types/storyblok/bloks/libraryArticleProps';
@@ -44,7 +44,7 @@ const Article: FC<TLibraryArticleProps> = ({
         variant={DomainVariant.Quansight}
       />
       {isPageType(data?.content?.component) && (
-        <Page data={data} preview={preview} relations="blog-article.author">
+        <Page data={data} preview={preview} relations={LIBRARY_AUTHOR_RELATION}>
           {(blok: TRawBlok) => <BlokProvider blok={blok} />}
         </Page>
       )}
@@ -68,14 +68,14 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params: { slug }, preview = false }) => {
   const data = await getPage({
     slug: `${ARTICLES_DIRECTORY_SLUG}${slug}`,
-    relations: 'blog-article.author',
+    relations: LIBRARY_AUTHOR_RELATION,
   });
   const footer = await getFooter();
   const header = await getHeader();
   const libraryLinks = await getLibraryLinkItems();
-  const articleItems = undefined;
+  const blogArticles = undefined;
   const libraryTiles = getLibraryTiles({
-    articleItems,
+    blogArticles,
     libraryLinks,
   });
 

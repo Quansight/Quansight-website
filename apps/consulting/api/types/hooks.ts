@@ -164,6 +164,60 @@ export type LibrarylinkItemsQueryResult = Apollo.QueryResult<
   Types.LibrarylinkItemsQuery,
   Types.LibrarylinkItemsQueryVariables
 >;
+export const PageItemsDocument = gql`
+  query PageItems($relations: String, $prefix: String) {
+    PageItems(resolve_relations: $relations, starts_with: $prefix) {
+      items {
+        content {
+          _uid
+          title
+          description
+          component
+          body
+          _editable
+        }
+        alternates {
+          fullSlug
+          id
+          isFolder
+          name
+          parentId
+          published
+          slug
+        }
+        created_at
+        default_full_slug
+        first_published_at
+        full_slug
+        group_id
+        id
+        is_startpage
+        lang
+        meta_data
+        name
+        parent_id
+        path
+        position
+        published_at
+        release_id
+        slug
+        sort_by_date
+        tag_list
+        translated_slugs {
+          lang
+          name
+          path
+        }
+        uuid
+      }
+      total
+    }
+  }
+`;
+export type PageItemsQueryResult = Apollo.QueryResult<
+  Types.PageItemsQuery,
+  Types.PageItemsQueryVariables
+>;
 export const FooterItemDocument = gql`
   query FooterItem($slug: ID!) {
     FooterItem(id: $slug) {
@@ -341,27 +395,6 @@ export const PageItemDocument = gql`
 export type PageItemQueryResult = Apollo.QueryResult<
   Types.PageItemQuery,
   Types.PageItemQueryVariables
->;
-export const PageItemsDocument = gql`
-  query pageItems {
-    PageItems(per_page: 100) {
-      items {
-        full_slug
-        first_published_at
-        is_startpage
-        name
-        path
-        position
-        parent_id
-        published_at
-        id
-      }
-    }
-  }
-`;
-export type PageItemsQueryResult = Apollo.QueryResult<
-  Types.PageItemsQuery,
-  Types.PageItemsQueryVariables
 >;
 export const TeamDocument = gql`
   query Team {

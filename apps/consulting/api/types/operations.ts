@@ -175,6 +175,66 @@ export type LibrarylinkItemsQuery = {
   } | null;
 };
 
+export type PageItemsQueryVariables = Types.Exact<{
+  relations: Types.InputMaybe<Types.Scalars['String']>;
+  prefix: Types.InputMaybe<Types.Scalars['String']>;
+}>;
+
+export type PageItemsQuery = {
+  __typename?: 'QueryType';
+  PageItems: {
+    __typename?: 'PageItems';
+    total: number | null;
+    items: Array<{
+      __typename?: 'PageItem';
+      created_at: string | null;
+      default_full_slug: string | null;
+      first_published_at: string | null;
+      full_slug: string | null;
+      group_id: number | null;
+      id: number | null;
+      is_startpage: boolean | null;
+      lang: string | null;
+      meta_data: any | null;
+      name: string | null;
+      parent_id: number | null;
+      path: string | null;
+      position: number | null;
+      published_at: string | null;
+      release_id: number | null;
+      slug: string | null;
+      sort_by_date: string | null;
+      tag_list: Array<string | null> | null;
+      uuid: string | null;
+      content: {
+        __typename?: 'PageComponent';
+        _uid: string | null;
+        title: string | null;
+        description: string | null;
+        component: string | null;
+        body: any | null;
+        _editable: string | null;
+      } | null;
+      alternates: Array<{
+        __typename?: 'Alternate';
+        fullSlug: string;
+        id: number;
+        isFolder: boolean | null;
+        name: string;
+        parentId: number | null;
+        published: boolean;
+        slug: string;
+      } | null> | null;
+      translated_slugs: Array<{
+        __typename?: 'TranslatedSlug';
+        lang: string;
+        name: string | null;
+        path: string | null;
+      } | null> | null;
+    } | null> | null;
+  } | null;
+};
+
 export type FooterItemQueryVariables = Types.Exact<{
   slug: Types.Scalars['ID'];
 }>;
@@ -363,27 +423,6 @@ export type PageItemQuery = {
       lang: string;
       name: string | null;
       path: string | null;
-    } | null> | null;
-  } | null;
-};
-
-export type PageItemsQueryVariables = Types.Exact<{ [key: string]: never }>;
-
-export type PageItemsQuery = {
-  __typename?: 'QueryType';
-  PageItems: {
-    __typename?: 'PageItems';
-    items: Array<{
-      __typename?: 'PageItem';
-      full_slug: string | null;
-      first_published_at: string | null;
-      is_startpage: boolean | null;
-      name: string | null;
-      path: string | null;
-      position: number | null;
-      parent_id: number | null;
-      published_at: string | null;
-      id: number | null;
     } | null> | null;
   } | null;
 };

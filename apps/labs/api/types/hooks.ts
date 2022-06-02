@@ -184,19 +184,52 @@ export type PageItemQueryResult = Apollo.QueryResult<
   Types.PageItemQueryVariables
 >;
 export const PageItemsDocument = gql`
-  query pageItems {
-    PageItems(per_page: 100) {
+  query PageItems($relations: String, $prefix: String) {
+    PageItems(resolve_relations: $relations, starts_with: $prefix) {
       items {
-        full_slug
+        content {
+          _uid
+          title
+          description
+          component
+          body
+          _editable
+        }
+        alternates {
+          fullSlug
+          id
+          isFolder
+          name
+          parentId
+          published
+          slug
+        }
+        created_at
+        default_full_slug
         first_published_at
+        full_slug
+        group_id
+        id
         is_startpage
+        lang
+        meta_data
         name
+        parent_id
         path
         position
-        parent_id
         published_at
-        id
+        release_id
+        slug
+        sort_by_date
+        tag_list
+        translated_slugs {
+          lang
+          name
+          path
+        }
+        uuid
       }
+      total
     }
   }
 `;
