@@ -65,6 +65,29 @@ export const Library: FC<TLibraryProps> = ({
   }, [postFilters.category, currentPage, postFilters.type, tiles]);
 
   useEffect(() => {
+    const isTheSameFilter = router.query.type === postFilters.type;
+    if (isTheSameFilter || !router.query.type) return;
+    setCurrentPage(1);
+    setPostFilters((prevState) => ({
+      ...prevState,
+      type: router.query.type as string,
+    }));
+    router.push(
+      {
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          page: 1,
+          type: router.query.type as string,
+        },
+      },
+      undefined,
+      { shallow: true },
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query.type]);
+
+  useEffect(() => {
     if (!router.isReady) return;
 
     if (router.query.type) {
