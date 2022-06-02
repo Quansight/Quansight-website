@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
+import { DeviceSizeVariant, useDeviceSize } from '@quansight/shared/utils';
+
 import { HeaderSkipLinks } from './Common/HeaderSkipLinks';
 import { HeaderDesktop } from './HeaderDesktop/HeaderDesktop';
 import { HeaderMobile } from './HeaderMobile/HeaderMobile';
-import { DeviceSizeVariant } from './hooks/useDeviceSize/types';
-import { useDeviceSize } from './hooks/useDeviceSize/useDeviceSize';
 import { THeaderProps } from './types';
 
 export const Header: FC<THeaderProps> = ({

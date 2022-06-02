@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { useRouter } from 'next/router';
 
 import { DomainVariant } from '@quansight/shared/types';
+import { BOOK_A_CALL_FORM_ID } from '@quansight/shared/utils';
 
-import { BOOK_A_CALL_FORM_ID } from '../constants';
 import { TBookingLinkProps } from './types';
 
 export const HeaderMobileBookingLink: FC<TBookingLinkProps> = ({

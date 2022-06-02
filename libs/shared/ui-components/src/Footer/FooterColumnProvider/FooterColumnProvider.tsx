@@ -6,15 +6,19 @@ import {
   TFooterNavigationProps,
   TFooterColumnProviderProps,
   TFooterSocialMediaProps,
+  TFooterLogoProps,
 } from '../types';
-import FooterContact from './FooterContact';
-import FooterNavigation from './FooterNavigation';
-import FooterSocialMedia from './FooterSocialMedia';
+import { FooterContact } from './FooterContact';
+import { FooterLogo } from './FooterLogo';
+import { FooterNavigation } from './FooterNavigation';
+import { FooterSocialMedia } from './FooterSocialMedia';
 
 export const FooterColumnProvider: FC<TFooterColumnProviderProps> = ({
   data,
 }) => {
   switch (data.component) {
+    case 'footer-logo':
+      return <FooterLogo {...(data as TFooterLogoProps)} />;
     case 'footer-navigation':
       return <FooterNavigation {...(data as TFooterNavigationProps)} />;
     case 'footer-contact':
