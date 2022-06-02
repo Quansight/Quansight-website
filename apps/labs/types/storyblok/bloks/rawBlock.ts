@@ -1,5 +1,6 @@
 import { TColumnArticleRawData } from './columnArticle';
 import { TFormRawData } from './form';
+import { THeroRawData } from './hero';
 import { TLogosRawData } from './logos';
 import { TPageHeadingRawData } from './pageHeading';
 import { TProjectsRawData } from './projects';
@@ -13,4 +14,5 @@ export type TRawBlok =
   | TLogosRawData
   | TProjectsRawData
   | TTeamRawData
-  | TTeaserRawData;
+  | TTeaserRawData
+  | THeroRawData;

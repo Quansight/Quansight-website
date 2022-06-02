@@ -4,6 +4,7 @@ import {
   TLogosProps,
   TTeamProps,
   TTeaserProps,
+  THeroProps,
 } from '@quansight/shared/ui-components';
 
 import { TColumnArticleProps } from '../ColumnArticle/types';
@@ -18,6 +19,7 @@ export enum ComponentType {
   Projects = 'projects',
   Team = 'team',
   Teaser = 'teaser',
+  Hero = 'hero',
 }
 
 type TBlokComponentPropsMap = {
@@ -28,6 +30,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Projects]: TProjectsProps;
   [ComponentType.Team]: TTeamProps;
   [ComponentType.Teaser]: TTeaserProps;
+  [ComponentType.Hero]: THeroProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;
