@@ -2,8 +2,8 @@ import { FC, useState, useEffect, useRef } from 'react';
 
 import clsx from 'clsx';
 
-import { DeviceSizeVariant } from '../../hooks/useDeviceSize/types';
-import { useDeviceSize } from '../../hooks/useDeviceSize/useDeviceSize';
+import { DeviceSizeVariant, useDeviceSize } from '@quansight/shared/utils';
+
 import { THeaderDesktopDropdownProps } from '../types';
 import { HeaderDesktopDropdownLink } from './HeaderDesktopDropdownLink';
 
