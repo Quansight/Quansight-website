@@ -56,8 +56,6 @@ export const useStoryblok = <PageItem>(
           }
 
           if (event.storyId && !story) {
-            console.log(event);
-
             const pageItem = await onLoadPageItem(event.storyId);
             // const { data } = await Api.getPageItem<
             //   PageReturnType,
