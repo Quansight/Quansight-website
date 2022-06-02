@@ -203,7 +203,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const header = await getHeader();
   const categories = await getCategories();
   const { items } = await getAllPosts();
-  const data = await getPage({ slug: 'blog-list' });
+  const data = await getPage({ slug: 'blog-list', relations: '' });
 
   return {
     props: {
