@@ -2,11 +2,13 @@ import { ApolloQueryResult, DocumentNode } from '@apollo/client';
 
 import { apolloClient } from '../sdk/clients/apolloClient';
 
-export const getLibraryArticleItems = <ReturnType>(
+export const getPageItems = <ResultType, VariablesType>(
   query: DocumentNode,
-): Promise<ApolloQueryResult<ReturnType>> => {
+  variables: VariablesType,
+): Promise<ApolloQueryResult<ResultType>> => {
   return apolloClient.query({
     fetchPolicy: 'cache-first',
     query,
+    variables,
   });
 };

@@ -1,10 +1,8 @@
+import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { convertToDate } from './services/convertToDate';
-import { TLibraryTilesTileRawData } from './types';
 
-export const sortLibraryTiles = (
-  allTiles: TLibraryTilesTileRawData = [],
-): TLibraryTilesTileRawData =>
+export const sortLibraryTiles = (allTiles: TTiles = []): TTiles =>
   allTiles.sort(
     (libraryTileOne, libraryTileTwo) =>
-      convertToDate(libraryTileTwo) - convertToDate(libraryTileOne),
+      convertToDate(libraryTileTwo.date) - convertToDate(libraryTileOne.date),
   );

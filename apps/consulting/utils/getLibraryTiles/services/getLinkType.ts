@@ -3,10 +3,10 @@ import {
   TLinkData,
 } from '../../../types/storyblok/bloks/libraryProps';
 import { TLibraryTileRawData } from '../types';
-import { isLibraryLink, isArticle } from './determinateTileType';
+import { isLibraryLink, isBlogArticle } from './determinateTileType';
 
 export const getLinkType = (tile: TLibraryTileRawData): TLinkData => {
-  if (isArticle(tile))
+  if (isBlogArticle(tile))
     return {
       linkType: LinkTarget.Internal,
       linkUrl: `/${tile.full_slug}`,
