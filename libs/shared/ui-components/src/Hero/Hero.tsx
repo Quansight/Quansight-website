@@ -46,7 +46,7 @@ export const Hero: FC<THeroProps> = ({
           <div
             className={clsx(
               'relative px-[2rem] placeholder:md:px-0 pt-[13rem] md:absolute md:px-0 md:pt-0',
-              isMediumHero &&
+              (isMediumHero || isSmallHero) &&
                 'flex flex-col justify-center items-center w-full h-full',
               isLargeHero &&
                 'md:top-[28rem] md:left-[10%] md:w-[85%] lg:left-[14%] lg:w-1/2',
@@ -67,7 +67,7 @@ export const Hero: FC<THeroProps> = ({
                 className={clsx(
                   'text-[4rem] font-extrabold leading-[4.8rem] text-white font-heading',
                   isLargeHero && 'text-[3rem] md:text-[4rem]',
-                  isMediumHero && 'text-center',
+                  (isMediumHero || isSmallHero) && 'text-center',
                 )}
               >
                 {subTitle}
