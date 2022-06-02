@@ -23,6 +23,7 @@ import { PostListItem } from '../../components/Posts/PostListItem/PostListItem';
 import { getAllPosts } from '../../services/api/posts/getAllPosts';
 import { getCategories } from '../../services/api/posts/getCategories';
 import { filterPosts } from '../../services/posts/filterPosts';
+import { generateRSS } from '../../services/posts/generateRSS';
 import { getPostsByPage } from '../../services/posts/getPostsByPage';
 import { TContainerProps } from '../../types/containerProps';
 import { TPost } from '../../types/storyblok/bloks/posts';
@@ -204,6 +205,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const categories = await getCategories();
   const { items } = await getAllPosts();
   const data = await getPage({ slug: 'blog', relations: '' });
+
+  await generateRSS(items);
 
   return {
     props: {
