@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "build": "nx build labs",
+    "build": "nx build",
     "test": "nx test",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
