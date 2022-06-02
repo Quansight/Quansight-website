@@ -2,6 +2,7 @@ import {
   Form,
   Hero,
   Logos,
+  Statute,
   Team,
   Teaser,
 } from '@quansight/shared/ui-components';
@@ -20,4 +21,5 @@ export const componentsMap = {
   [ComponentType.Team]: Team,
   [ComponentType.Teaser]: Teaser,
   [ComponentType.Hero]: Hero,
+  [ComponentType.Statute]: Statute,
 };
