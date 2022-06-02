@@ -398,10 +398,15 @@ export type PageItemQueryResult = Apollo.QueryResult<
 >;
 export const TeamDocument = gql`
   query Team {
-    PersonItems(starts_with: "team-members/", sort_by: "position") {
+    PersonItems(
+      starts_with: "team-members/"
+      sort_by: "position"
+      per_page: 100
+    ) {
       items {
         id
         position
+        slug
         content {
           _uid
           firstName

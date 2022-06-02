@@ -1,3 +1,4 @@
+import { getTeam } from '../../../api/utils/getTeam';
 import { TPostsResponse } from '../../../types/storyblok/bloks/posts';
 import { getPostsDirectory } from '../../posts/getPostsDirectory';
 import { serializePost } from '../../posts/serializePost';
@@ -6,6 +7,7 @@ import { DEFAULT_API_OFFSET } from './constants';
 
 export const getAllPosts = async (): Promise<TPostsResponse> => {
   try {
+    const team = await getTeam();
     const postsFileNames = getPostsDirectory();
     const postsFileNamesFiltered = postsFileNames.filter(
       (fileName) => fileName !== 'categories.json',
@@ -14,7 +16,7 @@ export const getAllPosts = async (): Promise<TPostsResponse> => {
     const posts = await Promise.all(
       postsFileNamesFiltered.map(async (fileName) => {
         const slug = fileName.replace(/\.(md|mdx)$/, '');
-        const { content, meta } = await serializePost(fileName);
+        const { content, meta } = await serializePost(fileName, team);
 
         return {
           slug,

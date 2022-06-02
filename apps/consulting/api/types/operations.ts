@@ -437,6 +437,7 @@ export type TeamQuery = {
       __typename?: 'PersonItem';
       id: number | null;
       position: number | null;
+      slug: string | null;
       content: {
         __typename?: 'PersonComponent';
         _uid: string | null;
