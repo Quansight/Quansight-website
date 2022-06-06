@@ -14,11 +14,11 @@ export const Board: FC<TBoardProps> = ({
   button,
 }) => {
   return (
-    <section className="text-white bg-violet">
+    <section className="text-black bg-white">
       <div className="relative py-24 px-[2.4rem] mx-auto sm:text-center md:py-48 md:px-16 xl:px-48 xl:pt-[6.8rem] xl:pb-40 max-w-layout">
         <HeaderDecoration />
         <ButtonDecoration />
-        <h2 className="text-[4rem] font-extrabold tracking-[0.02em] leading-[5rem] sm:text-[4.8rem] font-heading">
+        <h2 className="text-[4rem] font-extrabold tracking-[0.02em] leading-[5rem] sm:text-[4.8rem] text-violet font-heading">
           {title}
         </h2>
         <div
