@@ -38,13 +38,10 @@ export const HeaderMobileMenu: FC<THeaderMobileMenuProps> = ({
     <div
       ref={container}
       className={clsx(
-        'flex absolute z-40 justify-between items-center px-[2rem] pt-[0.5rem] pb-[4.5rem] w-full transition-all motion-reduce:transition-none duration-300 ease-in-out',
-
-        menuBackground
-          ? domainVariant === DomainVariant.Quansight
-            ? 'bg-black'
-            : 'bg-violet'
-          : 'bg-transparent',
+        'flex absolute z-40 justify-between items-center py-[0.5rem] px-[2rem] w-full transition-all motion-reduce:transition-none duration-300 ease-in-out',
+        !menuBackground && domainVariant === DomainVariant.Quansight
+          ? 'bg-transparent'
+          : 'bg-black',
         isMenuVisible ? 'translate-y-0' : '-translate-y-full',
       )}
     >

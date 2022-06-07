@@ -1,5 +1,6 @@
 import { TypeValuesUnion } from '@quansight/shared/types';
 import {
+  TColumnArticleProps,
   TFormProps,
   TLogosProps,
   TTeamProps,
@@ -8,7 +9,6 @@ import {
   THeroProps,
 } from '@quansight/shared/ui-components';
 
-import { TColumnArticleProps } from '../ColumnArticle/types';
 import { TPageHeadingProps } from '../PageHeading/types';
 import { TProjectsProps } from '../Projects/types';
 
