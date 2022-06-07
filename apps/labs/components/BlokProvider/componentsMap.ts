@@ -1,4 +1,5 @@
 import {
+  ColumnArticle,
   Form,
   Hero,
   Logos,
@@ -7,7 +8,6 @@ import {
   Teaser,
 } from '@quansight/shared/ui-components';
 
-import { ColumnArticle } from '../ColumnArticle/ColumnArticle';
 import { PageHeading } from '../PageHeading/PageHeading';
 import { Projects } from '../Projects/Projects';
 import { ComponentType } from './types';
