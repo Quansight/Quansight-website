@@ -2,6 +2,7 @@ import { TBlogArticleRawData } from './blogArticle';
 import { TBoardRawData } from './board';
 import { TBoardListRawData } from './boardList';
 import { TCenteredIntroRawData } from './centeredIntro';
+import { TColumnArticleRawData } from './columnArticle';
 import { TColumnsRawData } from './columns';
 import { TFeatureArticleRawData } from './featureArticle';
 import { TFeaturesRawData } from './features';
@@ -23,6 +24,7 @@ export type TRawBlok =
   | TBoardRawData
   | TBoardListRawData
   | TCenteredIntroRawData
+  | TColumnArticleRawData
   | TColumnsRawData
   | TFeatureArticleRawData
   | TFeaturesRawData

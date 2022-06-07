@@ -1,4 +1,5 @@
 import {
+  ColumnArticle,
   Form,
   Hero,
   Logos,
@@ -27,6 +28,7 @@ export const componentsMap = {
   [ComponentType.Board]: Board,
   [ComponentType.BoardList]: BoardList,
   [ComponentType.CenteredIntro]: CenteredIntro,
+  [ComponentType.ColumnArticle]: ColumnArticle,
   [ComponentType.Columns]: Columns,
   [ComponentType.FeatureArticle]: FeatureArticle,
   [ComponentType.Features]: Features,

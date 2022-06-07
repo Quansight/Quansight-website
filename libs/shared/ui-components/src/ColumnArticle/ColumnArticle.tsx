@@ -2,8 +2,7 @@ import { FC } from 'react';
 
 import clsx from 'clsx';
 
-import { Picture } from '@quansight/shared/ui-components';
-
+import { Picture } from '../Picture/Picture';
 import { ColumnArticleHeader } from './ColumnArticleHeader';
 import { ColumnArticleSection } from './ColumnArticleSection';
 import { TColumnArticleProps } from './types';
