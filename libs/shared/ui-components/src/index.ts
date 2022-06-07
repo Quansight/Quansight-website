@@ -11,6 +11,9 @@ export * from './Input/Input';
 export * from './Textarea/Textarea';
 export * from './Button/Button';
 
+export * from './ColumnArticle/ColumnArticle';
+export * from './ColumnArticle/types';
+
 export * from './Form/Form';
 export * from './Form/types';
 

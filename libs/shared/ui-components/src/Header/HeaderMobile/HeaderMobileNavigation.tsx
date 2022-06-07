@@ -2,8 +2,6 @@ import { FC } from 'react';
 
 import clsx from 'clsx';
 
-import { DomainVariant } from '@quansight/shared/types';
-
 import { HeaderMobileBookingLink } from './HeaderMobileBookingLink';
 import { HeaderMobileNavigationProvider } from './HeaderMobileNavigationProvider/HeaderMobileNavigationProvider';
 import { THeaderMobileNavigationProps } from './types';
@@ -17,8 +15,7 @@ export const HeaderMobileNavigation: FC<THeaderMobileNavigationProps> = ({
 }) => (
   <nav
     className={clsx(
-      'absolute inset-0 z-30 pt-[8rem] w-screen h-screen transition-transform motion-reduce:transition-none duration-300 ease-in-out',
-      domainVariant === DomainVariant.Quansight ? 'bg-black' : 'bg-violet',
+      'absolute inset-0 z-30 pt-[8rem] w-screen h-screen bg-black transition-transform motion-reduce:transition-none duration-300 ease-in-out',
       isNavigationOpen ? 'block' : 'hidden',
     )}
   >
