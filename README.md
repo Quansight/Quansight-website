@@ -2,11 +2,11 @@
 
 ## Running project locally
 
-Add the [consulting environment variables](https://vercel.com/quansight/quansight-consulting/settings/environment-variables) or the [labs environment variables](https://vercel.com/quansight/quansight-labs/settings/environment-variables) to your shell, depending on which one you want to work on.
+Add the [consulting environment variables](https://vercel.com/quansight/quansight-consulting/settings/environment-variables) or the [labs environment variables](https://vercel.com/quansight/quansight-labs/settings/environment-variables) to your shell, depending on which one you want to work on:
 
 ```sh
-export STORYBLOK_API_URL={value from Vercel admin above}
-export STORYBLOK_PREVIEW_TOKEN={value from Vercel admin above}
+export STORYBLOK_API_URL={value from Vercel admin}
+export STORYBLOK_PREVIEW_TOKEN={value from Vercel admin}
 ```
 
 Run `npm run start:consulting` or `npm run start:labs` to start a corresponding dev server. Navigate to http://localhost:4200/ or use localhost preview in Storyblok panel. On the localhost the app will automatically reload if you change any of the source files, in the Storyblok panel you need to refresh the page manually.
