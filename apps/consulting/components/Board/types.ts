@@ -7,11 +7,13 @@ export type TBoardItemProps = {
   linkUrl: string;
   imageSrc: string;
   imageAlt: string;
+  classNameBorder: string;
 };
 
 export type TBoardButtonProps = {
   buttonTitle: string;
   buttonUrl: string;
+  classNameBorder: string;
 };
 
 export type TBoardProps = {

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import clsx from 'clsx';
 import Link from 'next/link';
 
 import { Picture } from '@quansight/shared/ui-components';
@@ -12,9 +13,15 @@ const BoardItem: FC<TBoardItemProps> = ({
   linkUrl,
   imageSrc,
   imageAlt,
+  classNameBorder,
 }) => {
   return (
-    <div className="flex flex-col gap-[2.8rem] pt-[2.8rem] pb-[4.1rem] text-center border-t-[0.5px] first:border-t-0 border-t-white sm:gap-0 sm:pt-[4.2rem] sm:bg-white sm:border-t-0">
+    <div
+      className={clsx(
+        'flex flex-col pt-[2.8rem] pb-[4.1rem] text-center sm:pt-[4.2rem]',
+        classNameBorder,
+      )}
+    >
       <div className="relative h-32">
         <Picture
           imageSrc={imageSrc}
