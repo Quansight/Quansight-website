@@ -6,7 +6,7 @@ import { ButtonColor, ButtonLink } from '@quansight/shared/ui-components';
 
 import { TBoardButtonProps } from './types';
 
-const BoardButton: FC<TBoardButtonProps> = ({
+const BoardButton: FC<TBoardButtonProps & { classNameBorder: string }> = ({
   buttonTitle,
   buttonUrl,
   classNameBorder,

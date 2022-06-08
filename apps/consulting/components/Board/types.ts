@@ -12,7 +12,6 @@ export type TBoardItemProps = {
 export type TBoardButtonProps = {
   buttonTitle: string;
   buttonUrl: string;
-  classNameBorder: string;
 };
 
 export type TBoardProps = {
