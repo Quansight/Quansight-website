@@ -7,7 +7,7 @@ import { Picture } from '@quansight/shared/ui-components';
 
 import { TBoardItemProps } from './types';
 
-const BoardItem: FC<TBoardItemProps> = ({
+const BoardItem: FC<TBoardItemProps & { classNameBorder: string }> = ({
   title,
   linkTitle,
   linkUrl,

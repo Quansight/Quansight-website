@@ -7,7 +7,6 @@ export type TBoardItemProps = {
   linkUrl: string;
   imageSrc: string;
   imageAlt: string;
-  classNameBorder: string;
 };
 
 export type TBoardButtonProps = {
