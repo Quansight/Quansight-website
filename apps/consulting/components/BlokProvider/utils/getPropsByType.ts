@@ -3,6 +3,7 @@ import { getBlogArticleProps } from '../mappers/getBlogArticleProps';
 import { getBoardListProps } from '../mappers/getBoardListProps';
 import { getBoardProps } from '../mappers/getBoardProps';
 import { getCenteredIntroProps } from '../mappers/getCenteredIntroProps';
+import { getColumnArticleProps } from '../mappers/getColumnArticleProps';
 import { getColumnsProps } from '../mappers/getColumnsProps';
 import { getFeatureArticleProps } from '../mappers/getFeatureArticleProps';
 import { getFeaturesProps } from '../mappers/getFeaturesProps';
@@ -33,6 +34,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.CenteredIntro: {
       return getCenteredIntroProps(blok);
+    }
+    case ComponentType.ColumnArticle: {
+      return getColumnArticleProps(blok);
     }
     case ComponentType.Columns: {
       return getColumnsProps(blok);
