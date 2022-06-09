@@ -33,6 +33,20 @@ module.exports = {
       maxWidth: {
         layout: '144rem',
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            figure: {
+              '> img': {
+                padding: 0,
+                margin: 0,
+              },
+            },
+
+            // ...
+          },
+        },
+      }),
     },
   },
   plugins: [require('@tailwindcss/typography')],

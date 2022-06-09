@@ -7,8 +7,10 @@ export const RichTextFigure: FC<TRichTextFigureProps> = ({
   imageAlt,
   caption,
 }) => (
-  <figure>
+  <figure className="flex flex-col justify-center items-center">
     <img src={imageSrc} alt={imageAlt} />
-    <figcaption>{caption}</figcaption>
+    <figcaption className="text-[1.5rem] italic font-normal leading-[2.7rem] text-center">
+      {caption}
+    </figcaption>
   </figure>
 );
