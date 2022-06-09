@@ -42,8 +42,6 @@ module.exports = {
                 margin: 0,
               },
             },
-
-            // ...
           },
         },
       }),
