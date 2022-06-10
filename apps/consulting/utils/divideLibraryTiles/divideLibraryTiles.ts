@@ -9,6 +9,6 @@ export const divideLibraryTiles = (
   if (tiles.length <= half) return { sectionTop: tiles, sectionBottom: [] };
 
   const sectionTop = tiles.slice(0, half);
-  const sectionBottom = tiles.slice(half - 1, -1);
+  const sectionBottom = tiles.slice(half);
   return { sectionTop, sectionBottom };
 };
