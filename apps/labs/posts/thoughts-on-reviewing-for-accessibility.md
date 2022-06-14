@@ -7,7 +7,7 @@ featuredImage:
   src: /posts/thoughts-on-reviewing-for-accessibility/jlabaccess4.png
   alt: Illustration of checkboxes with ticks and checkmarks
 hero:
-  imageSrc: /posts/another-post/hero.jpeg
+  imageSrc: /posts/thoughts-on-reviewing-for-accessibility/hero.jpeg
   imageAlt: Lorem ipsum dolor
 ---
 
