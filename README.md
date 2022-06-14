@@ -2,14 +2,32 @@
 
 ## Running project locally
 
-Add the [consulting environment variables](https://vercel.com/quansight/quansight-consulting/settings/environment-variables) or the [labs environment variables](https://vercel.com/quansight/quansight-labs/settings/environment-variables) to your shell, depending on which one you want to work on:
+To run the website locally on your own machine, you must first create a `.env`
+file for each project. For example, for Quansight Consulting LLC, create
+`apps/consulting/.env`:
 
-```sh
-export STORYBLOK_API_URL={value from Vercel admin}
-export STORYBLOK_PREVIEW_TOKEN={value from Vercel admin}
+```
+STORYBLOK_API_URL=https://gapi.storyblok.com/v1/api
+STORYBLOK_PREVIEW_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
+DOMAIN=https://localhost:4200
+NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
 ```
 
-Run `npm run start:consulting` or `npm run start:labs` to start a corresponding dev server. Navigate to http://localhost:4200/ or use localhost preview in Storyblok panel. On the localhost the app will automatically reload if you change any of the source files, in the Storyblok panel you need to refresh the page manually.
+There are two secret values that you must get from the Vercel admin:
+
+- [consulting environment
+  variables](https://vercel.com/quansight/quansight-consulting/settings/environment-variables)
+- [labs environment
+  variables](https://vercel.com/quansight/quansight-labs/settings/environment-variables)
+
+If the example .env file above does not match what you read in the Vercel admin,
+use what's in Vercel.
+
+Run `npm run start:consulting` or `npm run start:labs` to start a corresponding
+dev server. Navigate to http://localhost:4200/ or use localhost preview in
+Storyblok panel. On the localhost the app will automatically reload if you
+change any of the source files, in the Storyblok panel you need to refresh the
+page manually.
 
 ## Adding new components
 
