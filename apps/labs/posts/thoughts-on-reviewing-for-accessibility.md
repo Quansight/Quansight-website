@@ -1,11 +1,11 @@
 ---
-title: Checking for accessibility: thoughts and a checklist!
-author: Isabela Presedo-Floyd
+title: 'Checking for accessibility: thoughts and a checklist!'
+author: isabela-presedo-floyd
 published: June 06, 2022
 category: [Accessibility, OSS Experience]
 featuredImage:
   src: /posts/thoughts-on-reviewing-for-accessibility/jlabaccess4.png
-  alt: Illustration of checkboxes with ticks and checkmarks 
+  alt: Illustration of checkboxes with ticks and checkmarks
 hero:
   imageSrc: /posts/another-post/hero.jpeg
   imageAlt: Lorem ipsum dolor
@@ -26,8 +26,6 @@ feedback about accessibility in the review process. This has prompted multiple
 people to ask me what it is I’m considering when I review for accessibility.
 Enough people have now asked that I’ve decided to write something down -- and
 it's turned into a checklist.
-
-<!-- TEASER_END -->
 
 I’d like to remind readers everywhere that other people have [written](https://tetralogical.com/blog/2022/01/18/quick-accessibility-tests-anyone-can-do/)
 [similar](https://www.a11yproject.com/checklist/)
