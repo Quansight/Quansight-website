@@ -47,19 +47,19 @@ Every post is structured with two main sections - the `meta` and `content` secti
 
 #### Example of blog post meta section
 
-    ```
-    title: This is hello world post!
-    author: anirrudh-krishnan
-    published: October 14, 2022
-    description: Lorem ipsum dolor sit amet
-    category: [Machine Learning]
-    featuredImage:
-    	src: /posts/hello-world-post/featured.png
-    	alt: Hello world post featured image
-    hero:
-    	imageSrc: /posts/hello-world-post/hero.jpeg
-      imageAlt: Lorem ipsum dolor
-    ```
+```yaml
+title: This is hello world post!
+author: anirrudh-krishnan
+published: October 14, 2022
+description: Lorem ipsum dolor sit amet
+category: [Machine Learning]
+featuredImage:
+  src: /posts/hello-world-post/featured.png
+  alt: Hello world post featured image
+hero:
+  imageSrc: /posts/hello-world-post/hero.jpeg
+  imageAlt: Lorem ipsum dolor
+```
 
 ### Adding new blog post
 
