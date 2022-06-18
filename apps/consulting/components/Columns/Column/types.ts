@@ -17,7 +17,7 @@ export type TColumnImageProps = {
 export type TColumnProps = {
   _uid?: string;
   title: string;
-  text: string;
+  text?: string;
 } & TColumnImageProps &
   TColumnLinkProps;
 
