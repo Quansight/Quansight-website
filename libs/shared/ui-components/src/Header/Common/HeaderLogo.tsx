@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import clsx from 'clsx';
+import Link from 'next/link';
 
 import { DomainVariant } from '@quansight/shared/types';
 
@@ -17,11 +18,15 @@ export const HeaderLogo: FC<THeaderLogoProps> = ({ logo, domainVariant }) => (
         : 'w-[27.3rem] h-[7.373rem] lg:w-[33.5rem] lg:h-[9.49rem]',
     )}
   >
-    <Picture
-      imageSrc={logo.filename}
-      imageAlt={logo.alt}
-      layout="fill"
-      priority
-    />
+    <Link href="/">
+      <a>
+        <Picture
+          imageSrc={logo.filename}
+          imageAlt={logo.alt}
+          layout="fill"
+          priority
+        />
+      </a>
+    </Link>
   </div>
 );
