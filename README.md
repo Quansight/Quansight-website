@@ -2,9 +2,14 @@
 
 ## Running project locally
 
-To run the website locally on your own machine, you must first create a `.env`
-file for each project. For example, for Quansight Consulting LLC, create
-`apps/consulting/.env`:
+Prerequisites: Node and npm.
+
+To run the website locally on your own machine, you must first clone this git
+repo, `cd` into the repo, then run `npm install`.
+
+This repo contains two projects (websites): Consulting and Labs. You must create
+a `.env` file for each project that you want to develop locally. For example,
+for Quansight Consulting LLC, create `apps/consulting/.env`:
 
 ```
 STORYBLOK_API_URL=https://gapi.storyblok.com/v1/api
