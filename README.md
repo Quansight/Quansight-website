@@ -89,3 +89,23 @@ hero:
 1.  Open `src/apps/labs/services/blogAllowedComponents.ts` file
 2.  Import component from the codebase
 3.  Add to new component to `blogAllowedComponents` object.
+
+## Updating dependencies
+
+Dependencies are defined in `package.json`. Most versions are specified with an
+initial caret, like so: `"foo": "^1.0.0"`. This states that any subversion of
+version 1 of foo is fine, for example 1.0.1 and 1.1.0 are both fine. If foo has
+an important update (a security update for example), you can run `npm update foo`,
+which will update the `package-lock.json` file. Be sure to commit the updated
+`package-lock.json` file and push to GitHub.
+
+For some dependencies, you may have to change the version string in
+`package.json` if you want to upgrade the package. For example, if package.json
+says `"foo": "1.0.0"` and you want to upgrade foo to 1.0.1, then you will need
+to change the version number in package.json. Then run `npm install`. That
+should cause the `package-lock.json` file to also update. You then check in both
+package and package-lock.
+
+Whenever `package-lock.json` is updated, if you develop the website locally, you
+should run `npm install` (or `npm ci`) so that your local environment's
+dependencies match the ones used on production.
