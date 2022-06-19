@@ -34,6 +34,11 @@ Storyblok panel. On the localhost the app will automatically reload if you
 change any of the source files, in the Storyblok panel you need to refresh the
 page manually.
 
+Important: whenever the website's dependencies change or are updated, the lock file
+`package-lock.json` will be updated. Whenever `package-lock.json` is updated,
+you should re-run `npm install` (or `npm cli`), so that your local environment's
+dependencies will match the production environment.
+
 ## Adding new components
 
 1. Create the component with its schema in Storyblok components.
