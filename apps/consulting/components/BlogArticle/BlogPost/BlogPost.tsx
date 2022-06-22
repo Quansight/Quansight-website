@@ -18,7 +18,7 @@ export const BlogPost: FC<TBlogPostProps> = ({ postText }) => {
 
   return (
     <div
-      className=" prose-code:px-0 prose-pre:px-0 prose-img:mx-auto mb-[5rem] min-w-full text-[1.8rem] leading-[2.7rem] text-black  prose-code:bg-transparent prose-pre:bg-transparent prose-code:rounded-lg prose"
+      className="prose-code:px-0 prose-pre:px-0 prose-img:mx-auto prose-figcaption:mt-[2rem] mb-[5rem] min-w-full text-[1.8rem] leading-[2.7rem] text-black prose-code:bg-transparent prose-pre:bg-transparent prose-code:rounded-lg prose sm:prose-figcaption:mt-0"
       dangerouslySetInnerHTML={createMarkup(postText)}
     />
   );
