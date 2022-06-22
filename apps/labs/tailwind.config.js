@@ -27,6 +27,7 @@ module.exports = {
           400: '#EBEBEB',
           500: '#CED0D4',
         },
+        red: '#F53126',
       },
       maxWidth: {
         layout: '144rem',
