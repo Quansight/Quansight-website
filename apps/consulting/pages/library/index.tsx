@@ -68,15 +68,14 @@ export const Library: FC<TLibraryProps> = ({
     const isTheSameFilter = router.query.type === postFilters.type;
     if (isTheSameFilter || !router.query.type) return;
     setCurrentPage(1);
-    setPostFilters((prevState) => ({
-      ...prevState,
+    setPostFilters({
+      category: CATEGORIES_STARTING_VALUE,
       type: router.query.type as string,
-    }));
+    });
     router.push(
       {
         pathname: router.pathname,
         query: {
-          ...router.query,
           page: 1,
           type: router.query.type as string,
         },
