@@ -35,6 +35,7 @@
     "next": "^12.1.5-canary.6",
     "next-mdx-remote": "^4.0.2",
     "next-sitemap": "^3.1.3",
+    "pa11y-ci": "^3.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.28.1",
