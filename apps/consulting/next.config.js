@@ -47,16 +47,28 @@ const nextConfig = {
     ];
   },
   async rewrites() {
-    return [
-      {
-        source: '/plausible/js/script.js',
-        destination: 'https://plausible.io/js/script.js',
-      },
-      {
-        source: '/plausible/api/event',
-        destination: 'https://plausible.io/api/event',
-      },
-    ];
+    // The conventions of this return value are described in the Next.js docs:
+    // https://nextjs.org/docs/api-reference/next.config.js/rewrites
+    return {
+      afterFiles: [
+        // Proxying Plausible through Vercel
+        // https://plausible.io/docs/proxy/guides/vercel
+        {
+          source: '/plausible/js/script.js',
+          destination: 'https://plausible.io/js/script.js',
+        },
+        {
+          source: '/plausible/api/event',
+          destination: 'https://plausible.io/api/event',
+        },
+      ],
+      fallback: [
+        {
+          source: '/:path*',
+          destination: 'https://quansight-consulting.wix.com/:path*',
+        },
+      ],
+    };
   },
 };
 
