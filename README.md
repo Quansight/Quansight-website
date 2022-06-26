@@ -2,7 +2,7 @@
 
 ## Running project locally
 
-Prerequisites: Node and npm.
+Prerequisites: [Node](https://nodejs.org/en/).
 
 To run the website locally on your own machine, you must first clone this git
 repo, `cd` into the repo, then run `npm install`.
@@ -29,7 +29,7 @@ If the example .env file above does not match what you read in the Vercel admin,
 use what's in Vercel.
 
 Run `npm run start:consulting` or `npm run start:labs` to start a corresponding
-dev server. Navigate to http://localhost:4200/ or use localhost preview in
+dev server. Navigate to <http://localhost:4200/> or use localhost preview in
 Storyblok panel. On the localhost the app will automatically reload if you
 change any of the source files, in the Storyblok panel you need to refresh the
 page manually.
