@@ -15,6 +15,13 @@
         "production": {}
       }
     },
+    "sitemap": {
+      "executor": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "next-sitemap --config apps/consulting/next-sitemap.config.js"
+      }
+    },
     "serve": {
       "executor": "@nrwl/next:server",
       "options": {
