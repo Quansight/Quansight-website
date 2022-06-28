@@ -1,0 +1,49 @@
+name: Run accessibility checks on Quansight Consulting and Labs websites
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  check-a11y:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        website: [consulting, labs]
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Install node
+      uses: actions/setup-node@v3
+      with:
+        node-version: "14.x"
+
+    - name: Install pa11y
+      run: npm ci
+
+    - name: Cache dependencies - Node
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-s
+
+    - name: Build website
+      run: npx nx build ${{ matrix.website }}
+
+    - name: Generate sitemap
+      run: npx nx sitemap ${{ matrix.website }}
+
+    - name: Serve website (with sitemap)
+      run: npx nx serve ${{ matrix.website }}
+
+    - name: Run pa11y against website
+      continue-on-error: true
+      run: npx pa11y-ci --sitemap=http://localhost:4200/sitemap.xml --sitemap-find=https --sitemap-replace=http
