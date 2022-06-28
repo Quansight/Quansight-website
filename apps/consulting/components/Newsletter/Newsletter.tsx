@@ -45,7 +45,7 @@ export const Newsletter: FC = () => {
         'md:py-[4rem] md:px-[10rem] md:my-[5rem]',
       )}
     >
-      <NewsletterHeader text="Subscribe for Updates & News" />
+      <NewsletterHeader text="Stay informed with our newsletter" />
       <form className="md:flex md:gap-[2.6rem]" onSubmit={subscribeNewsletter}>
         <div className="relative md:grow">
           <input
