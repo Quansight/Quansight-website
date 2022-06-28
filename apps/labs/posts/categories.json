@@ -1,11 +1,13 @@
 [
-  "Machine Learning",
-  "Data Visualization",
-  "Array API",
-  "PyData ecosystem",
   "Accessibility",
-  "Funding",
-  "Comunity",
+  "Array API",
+  "Beyond PyData",
+  "Community",
   "Developer workflows",
-  "IDEs"
+  "Funding",
+  "IDEs",
+  "Machine Learning",
+  "OSS Experience",
+  "Packaging",
+  "PyData ecosystem"
 ]
