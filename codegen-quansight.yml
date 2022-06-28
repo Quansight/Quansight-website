@@ -2,7 +2,7 @@ overwrite: true
 schema:
   - https://gapi.storyblok.com/v1/api:
       headers:
-        Token: '${STORYBLOK_PREVIEW_TOKEN}'
+        Token: '${STORYBLOK_TOKEN}'
         Version: draft
 
 generates:

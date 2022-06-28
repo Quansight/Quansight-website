@@ -13,9 +13,9 @@ for Quansight Consulting LLC, create `apps/consulting/.env`:
 
 ```
 STORYBLOK_API_URL=https://gapi.storyblok.com/v1/api
-STORYBLOK_PREVIEW_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
+STORYBLOK_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
 DOMAIN=https://localhost:4200
-NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
+NEXT_PUBLIC_STORYBLOK_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
 ```
 
 There are two secret values that you must get from the Vercel admin:
