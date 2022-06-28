@@ -1,20 +1,18 @@
-import { FC } from 'react';
-
 import clsx from 'clsx';
 
 import { TProjectHeadlineProps } from './types';
 
-export const ProjectHeadline: FC<TProjectHeadlineProps> = ({
+export const ProjectHeadline = ({
   isDroprownExpanded,
-  setIsDropdownExpanded,
+  toggleItemDropdown,
   title,
-}) => (
+}: TProjectHeadlineProps) => (
   <div className="flex justify-between items-center w-full sm:col-start-1 sm:col-end-2">
     <h3 className="text-[4rem] font-extrabold leading-[6.648rem] font-heading text-violet">
       {title}
     </h3>
     <button
-      onClick={() => setIsDropdownExpanded(!isDroprownExpanded)}
+      onClick={toggleItemDropdown}
       className="flex relative justify-center items-center w-[3rem] h-[3rem]"
       aria-expanded={isDroprownExpanded}
     >

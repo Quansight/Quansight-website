@@ -1,16 +1,14 @@
-import { FC } from 'react';
-
 import { createMarkup } from '@quansight/shared/utils';
 
 import { TProjectDescriptionProps } from './types';
 
-export const ProjectDescription: FC<TProjectDescriptionProps> = ({
+export const ProjectDescription = ({
   isDroprownExpanded,
   longDescription,
   title,
   linkUrl,
   linkText,
-}) => (
+}: TProjectDescriptionProps) => (
   <div className="pb-[2.8rem] border-b border-b-gray-500 sm:col-start-1 sm:col-end-2 ">
     {isDroprownExpanded && (
       <div className="w-full">

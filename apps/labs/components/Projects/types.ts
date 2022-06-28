@@ -1,13 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
-
 import { TRichText } from '@quansight/shared/types';
 
 type TIsDropdownExpanded = {
   isDroprownExpanded: boolean;
-};
-
-type TSetIsDropdownExpanded = {
-  setIsDropdownExpanded: Dispatch<SetStateAction<boolean>>;
 };
 
 type TProjectHeadline = {
@@ -43,9 +37,8 @@ export type TProjectsProps = {
 
 export type TProjectHeadlineProps = {
   title: string;
-} & TIsDropdownExpanded &
-  TSetIsDropdownExpanded;
-
+  toggleItemDropdown: () => void;
+} & TIsDropdownExpanded;
 export type TProjectLogoProps = TProjectLogo & TIsDropdownExpanded;
 
 export type TProjectDescriptionProps = TProjectDescription &

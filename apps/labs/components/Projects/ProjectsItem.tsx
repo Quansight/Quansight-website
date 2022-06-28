@@ -16,12 +16,16 @@ export const ProjectsItem: FC<TProjectItemProps> = ({
   linkUrl,
 }) => {
   const [isDroprownExpanded, setIsDropdownExpanded] = useState(false);
+
+  const toggleItemDropdown = (): void =>
+    setIsDropdownExpanded(!isDroprownExpanded);
+
   return (
     <div className="grid grid-rows-[auto,auto,auto,auto] sm:grid-cols-[1fr,auto] sm:grid-rows-[auto,auto,auto]">
       <ProjectHeadline
         title={title}
         isDroprownExpanded={isDroprownExpanded}
-        setIsDropdownExpanded={setIsDropdownExpanded}
+        toggleItemDropdown={toggleItemDropdown}
       />
       <ProjectLogo
         isDroprownExpanded={isDroprownExpanded}
