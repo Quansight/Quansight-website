@@ -16,10 +16,10 @@ export const usePreviewMode = (isPreviewMode: boolean): boolean => {
       !isPreviewMode &&
       isStoryblok &&
       isProduction &&
-      process.env['NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN']
+      process.env['NEXT_PUBLIC_STORYBLOK_TOKEN']
     ) {
       fetch(
-        `/api/enter-preview?token=${process.env['NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN']}`,
+        `/api/enter-preview?token=${process.env['NEXT_PUBLIC_STORYBLOK_TOKEN']}`,
       ).then(reload);
     }
   }, [isPreviewMode]);
