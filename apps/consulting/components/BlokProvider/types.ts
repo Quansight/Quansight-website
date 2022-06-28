@@ -1,5 +1,6 @@
 import { TypeValuesUnion } from '@quansight/shared/types';
 import {
+  TColumnArticleProps,
   TFormProps,
   THeroProps,
   TLogosProps,
@@ -27,6 +28,7 @@ export enum ComponentType {
   Board = 'board',
   BoardList = 'board-list',
   CenteredIntro = 'centered-intro',
+  ColumnArticle = 'column-article',
   Columns = 'columns',
   FeatureArticle = 'feature-article',
   Features = 'features',
@@ -49,6 +51,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Board]: TBoardProps;
   [ComponentType.BoardList]: TBoardListProps;
   [ComponentType.CenteredIntro]: TCenteredIntroProps;
+  [ComponentType.ColumnArticle]: TColumnArticleProps;
   [ComponentType.Columns]: TColumnsProps;
   [ComponentType.FeatureArticle]: TFeatureArticleProps;
   [ComponentType.Features]: TFeaturesProps;

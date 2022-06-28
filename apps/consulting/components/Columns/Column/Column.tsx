@@ -27,13 +27,15 @@ export const Column: FC<TColumnComponentProps> = ({
     <ColumnImage variant={variant} imageSrc={imageSrc} imageAlt={imageAlt} />
     <h3
       className="
-        my-[1.8rem] text-[2.7rem] font-extrabold leading-[3.5rem] text-black lg:mt-[2.6rem] 
+        my-[1.8rem] text-[2.7rem] font-extrabold leading-[3.5rem] text-black lg:mt-[2.6rem]
         font-heading
       "
     >
       {title}
     </h3>
-    <p className="text-[1.6rem] leading-[2.7rem] text-black">{text}</p>
+    {text && (
+      <p className="text-[1.6rem] leading-[2.7rem] text-black">{text}</p>
+    )}
     <ColumnLink linkText={linkText} linkUrl={linkUrl} />
   </div>
 );
