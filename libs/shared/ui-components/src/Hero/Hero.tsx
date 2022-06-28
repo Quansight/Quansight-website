@@ -12,7 +12,7 @@ export const Hero: FC<THeroProps> = ({
   imageSrc,
   imageAlt,
   backgroundColor,
-  objectFit = 'contain',
+  objectFit,
 }) => {
   const isLargeHero =
     variant === HeroVariant.Large || variant === HeroVariant.LargeOverlapping;
@@ -39,7 +39,7 @@ export const Hero: FC<THeroProps> = ({
           src={imageSrc}
           alt={imageAlt}
           layout="fill"
-          objectFit={objectFit}
+          objectFit={objectFit || 'cover'}
           objectPosition="center"
         />
         {title && (
