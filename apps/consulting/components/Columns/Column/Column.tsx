@@ -19,7 +19,7 @@ export const Column: FC<TColumnComponentProps> = ({
   variant === ColumnsVariant.Tiles ? (
     <div
       className={clsx(
-        'flex flex-col mb-[3.5rem] lg:w-1/3',
+        'flex flex-col mb-[3.5rem] md:w-1/3',
         variant === ColumnsVariant.Tiles &&
           `py-[3.5rem] px-[2rem] shadow-[0_4px_14px_rgba(0,0,0,.11)]
       lg:px-[3rem] lg:pt-[6.4rem]`,
