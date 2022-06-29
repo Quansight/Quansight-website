@@ -1,4 +1,5 @@
 import { TColumnArticleProps } from '@quansight/shared/ui-components';
+
 import { TColumnArticleRawData } from '../../../types/storyblok/bloks/columnArticle';
 
 export const getColumnArticleProps = (
