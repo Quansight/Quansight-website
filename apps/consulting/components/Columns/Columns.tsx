@@ -9,10 +9,10 @@ export const Columns: FC<TColumnsProps> = ({ variant, columns }) => (
   <section
     className={clsx(
       'px-[3.5rem] my-[2.4rem] mx-auto max-w-layout',
-      'md:flex md:gap-[2rem]',
+      'md:grid md:grid-rows-[repeat(3,_min-content)] md:grid-flow-col md:gap-x-[2rem]',
       'lg:px-[13rem]',
-      variant === ColumnsVariant.Columns && 'lg:gap-[7.5rem]',
-      variant === ColumnsVariant.Tiles && 'lg:gap-[3.4rem]',
+      variant === ColumnsVariant.Columns && 'lg:gap-x-[7.5rem]',
+      variant === ColumnsVariant.Tiles && 'lg:flex lg:gap-x-[3.4rem]',
     )}
   >
     {columns.map((props) => (

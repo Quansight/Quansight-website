@@ -13,9 +13,9 @@ for Quansight Consulting LLC, create `apps/consulting/.env`:
 
 ```
 STORYBLOK_API_URL=https://gapi.storyblok.com/v1/api
-STORYBLOK_PREVIEW_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
+STORYBLOK_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
 DOMAIN=https://localhost:4200
-NEXT_PUBLIC_STORYBLOK_PREVIEW_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
+NEXT_PUBLIC_STORYBLOK_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
 ```
 
 There are two secret values that you must get from the Vercel admin:
@@ -61,9 +61,9 @@ You can fetch data from Storyblok directly using queries. To add the query:
 
 ## Technical blog workflow
 
-All of the **Quansight Labs** blog posts are located inside `apps/labs/posts`, and there all new posts should be added. 
+All of the **Quansight Labs** blog posts are located inside `apps/labs/posts`, and there all new posts should be added.
 
-Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). The `posts` directory also contains a [`categories.json` file](./apps/labs/posts/categories.json) containing the posts categories. 
+Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). The `posts` directory also contains a [`categories.json` file](./apps/labs/posts/categories.json) containing the posts categories.
 
 The `categories.json` file is also used for displaying category filters on the `/blog` page so after adding a new category, it will also be visible on that page.
 
@@ -127,24 +127,4 @@ hero:
 
 1.  Open `apps/labs/services/blogAllowedComponents.ts` file
 2.  Import component from the codebase
-3.  Add to new component to `blogAllowedComponents` object.
-
-## Updating dependencies
-
-Dependencies are defined in `package.json`. Most versions are specified with an
-initial caret, like so: `"foo": "^1.0.0"`. This states that any subversion of
-version 1 of foo is fine, for example 1.0.1 and 1.1.0 are both fine. If foo has
-an important update (a security update for example), you can run `npm update foo`,
-which will update the `package-lock.json` file. Be sure to commit the updated
-`package-lock.json` file and push to GitHub.
-
-For some dependencies, you may have to change the version string in
-`package.json` if you want to upgrade the package. For example, if package.json
-says `"foo": "1.0.0"` and you want to upgrade foo to 1.0.1, then you will need
-to change the version number in package.json. Then run `npm install`. That
-should cause the `package-lock.json` file to also update. You then check in both
-package and package-lock.
-
-Whenever `package-lock.json` is updated, if you develop the website locally, you
-should run `npm install` (or `npm ci`) so that your local environment's
-dependencies match the ones used on production.
+3.  Add new component to `blogAllowedComponents` object.
