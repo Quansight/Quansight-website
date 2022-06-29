@@ -31,7 +31,7 @@ export const Hero: FC<THeroProps> = ({
         isMediumHero && 'md:h-[730px]',
         isLargeHeroOverlapping && 'mb-[-31rem] md:mb-[-39rem]',
         isMediumHeroOverlapping && 'mb-[-10rem] md:mb-[-20rem]',
-        backgroundColor ? `bg-[${backgroundColor}]` : 'bg-[#000000]',
+        backgroundColor ? `bg-[${backgroundColor}]` : 'bg-transparent',
       )}
     >
       <div className="relative mx-auto h-full max-w-layout">
