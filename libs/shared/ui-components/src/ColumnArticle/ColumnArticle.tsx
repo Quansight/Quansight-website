@@ -29,19 +29,19 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
         <section className={columnClass}>
           <ColumnArticleSection
             headerLevelModifier={headerLevelModifier}
-            content={leftColumn.content}
+            content={leftColumn?.content}
           />
         </section>
         <section className={columnClass}>
           <ColumnArticleSection
             headerLevelModifier={headerLevelModifier}
-            content={rightColumn.content}
+            content={rightColumn?.content}
           />
         </section>
         <section className={columnClass}>
           <ColumnArticleSection
             headerLevelModifier={headerLevelModifier}
-            content={final.content}
+            content={final?.content}
           />
         </section>
         <section
