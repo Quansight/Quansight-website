@@ -9,7 +9,6 @@ export const ColumnArticleSection: FC<TColumnArticleSectionProps> = ({
 }) => (
   <>
     {content.map((item) => {
-      console.log('ITEM', item);
       if (item?.content && Array.isArray(item.content)) {
         const firstItem = item?.content[0];
         const itemLevel = item?.attrs?.level || 0;

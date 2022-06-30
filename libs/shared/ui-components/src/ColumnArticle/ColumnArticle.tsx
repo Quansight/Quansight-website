@@ -33,16 +33,16 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
           />
         </section>
         <section className={columnClass}>
-          {/* <ColumnArticleSection
+          <ColumnArticleSection
             headerLevelModifier={headerLevelModifier}
             content={rightColumn?.content}
-          /> */}
+          />
         </section>
         <section className={columnClass}>
-          {/* <ColumnArticleSection
+          <ColumnArticleSection
             headerLevelModifier={headerLevelModifier}
             content={final?.content}
-          /> */}
+          />
         </section>
         <section
           className={clsx(
