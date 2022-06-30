@@ -2,6 +2,7 @@ import { remarkCodeHike } from '@code-hike/mdx';
 import matter from 'gray-matter';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
+import slug from 'rehype-slug-custom-id';
 import theme from 'shiki/themes/solarized-dark.json';
 
 import { ArrayElementType } from '@quansight/shared/types';
@@ -23,6 +24,7 @@ export const serializePost = async (
     scope: data,
     mdxOptions: {
       remarkPlugins: [[remarkCodeHike, { autoImport: false, theme }]],
+      rehypePlugins: [[slug, { enableCustomId: true, removeAccents: true }]],
       useDynamicImport: true,
     },
   });
