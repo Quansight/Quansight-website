@@ -27,10 +27,10 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
       )}
       <main className="md:flex md:flex-wrap md:justify-between">
         <section className={columnClass}>
-          {/* <ColumnArticleSection
+          <ColumnArticleSection
             headerLevelModifier={headerLevelModifier}
             content={leftColumn?.content}
-          /> */}
+          />
         </section>
         <section className={columnClass}>
           {/* <ColumnArticleSection
