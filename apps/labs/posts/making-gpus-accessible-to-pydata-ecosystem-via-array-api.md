@@ -61,7 +61,7 @@ to address this issue, by specifying an API for the most common ways arrays
 are constructed and used. At the time of writing this, NumPy (>=1.22.0) and
 CuPy (>=10.0.0) have adopted the Array API Standard.
 
-##### Note about using the Array API Standard
+#### Note about using the Array API Standard
 
 The definition of the Array API Standard and its usage may evolve over time.
 This blog post is only meant to illustrate how we can use it to make GPUs
@@ -102,7 +102,7 @@ clustering to it for segmenting coins.
 
 ## The process for making the code run on GPU
 
-#### `get_namespace` - getting the array API module
+### `get_namespace` - getting the array API module
 
 [NEP 47](https://numpy.org/neps/nep-0047-array-api-standard.html), "Adopting
 the array API standard", outlines a basic workflow for adopting the array API
@@ -325,7 +325,7 @@ with equivalent ones in the standard. There are still some rough edges though,
 which makes the process a bit harder. These are the three main issues we faced
 in the process:
 
-#### 1. Compiled code
+### 1. Compiled code
 
 There is a lot of functionality in SciPy and the Scikits that is not pure Python.
 Performance-critical parts are written using compiled code extensions. These
@@ -363,7 +363,7 @@ graph = coo_matrix(<input_arrays>)
 
 Note that this workaround is only valid for NumPy/CuPy arrays.
 
-#### 2. Not implemented functions
+### 2. Not implemented functions
 
 We encountered a number of NumPy functions used by our Greek coins demo which didn't
 have a direct equivalent in the Array API standard. This was mostly due to the
@@ -379,7 +379,7 @@ For some of these the solution was to reimplement an equivalent function, for
 the remaining ones the workaround was using the library-specific NumPy/CuPy
 APIs before converting back to the Array API standard-compliant `Array` object.
 
-#### 3. Inconsistencies between the NumPy API and the Array API standard
+### 3. Inconsistencies between the NumPy API and the Array API standard
 
 Although the standard has managed to get good coverage of the NumPy API, there
 are places where there are inconsistencies between the two. This may be either
