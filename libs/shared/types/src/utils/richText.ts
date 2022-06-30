@@ -10,6 +10,9 @@ export interface TContent {
 }
 
 export interface TContentItem {
+  attrs?: {
+    [key: string]: undefined;
+  };
   text: string;
   type: string;
 }

@@ -23,6 +23,7 @@
     "**/*.jsx",
     "**/*.ts",
     "**/*.tsx",
-    "../../../apps/consulting/types/storyblok/bloks/articleProps.ts"
+    "../../../apps/consulting/types/storyblok/bloks/articleProps.ts",
+    "../utils/src/hooks/useComponentValidator/NotificationVariant.ts"
   ]
 }

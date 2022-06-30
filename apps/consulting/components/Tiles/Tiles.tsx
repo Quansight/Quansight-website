@@ -1,22 +1,20 @@
 import { FC, useState, useEffect } from 'react';
 
-import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { divideLibraryTiles } from '../../utils/divideLibraryTiles/divideLibraryTiles';
 import { Newsletter } from '../Newsletter/Newsletter';
 import { Tile } from './Tile';
-import { TTilesProps } from './types';
+import { TTilesProps, TSlicedTiles } from './types';
+import { areValidSectionTiles } from './utils/areValidSectionTiles';
 
 export const Tiles: FC<TTilesProps> = ({ tiles, tileVariant }) => {
-  const [slicedTiles, setSlicedTiles] = useState<{
-    sectionTop: TTiles;
-    sectionBottom: TTiles;
-  }>({
+  const [slicedTiles, setSlicedTiles] = useState<TSlicedTiles>({
     sectionTop: [],
     sectionBottom: [],
   });
 
   useEffect(() => {
     const slicedTiles = divideLibraryTiles(tiles);
+
     setSlicedTiles(slicedTiles);
   }, [tiles]);
 
@@ -27,7 +25,7 @@ export const Tiles: FC<TTilesProps> = ({ tiles, tileVariant }) => {
           We don&apos;t have any posts yet. Please check back later.
         </p>
       )}
-      {slicedTiles.sectionTop.length !== 0 && (
+      {areValidSectionTiles(slicedTiles?.sectionTop) && (
         <ul className="grid grid-cols-1 gap-[4.2rem] sm:grid-cols-2 sm:gap-x-[2.4rem] sm:gap-y-[3.6rem] lg:grid-cols-3">
           {slicedTiles.sectionTop.map((tile) => (
             <Tile {...tile} key={tile.uuid} tileVariant={tileVariant} />
@@ -35,7 +33,7 @@ export const Tiles: FC<TTilesProps> = ({ tiles, tileVariant }) => {
         </ul>
       )}
       <Newsletter />
-      {slicedTiles.sectionBottom.length !== 0 && (
+      {areValidSectionTiles(slicedTiles?.sectionBottom) && (
         <ul className="grid grid-cols-1 gap-[4.2rem] sm:grid-cols-2 sm:gap-x-[2.4rem] sm:gap-y-[3.6rem] lg:grid-cols-3">
           {slicedTiles.sectionBottom.map((tile) => (
             <Tile {...tile} key={tile.uuid} tileVariant={tileVariant} />

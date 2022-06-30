@@ -5,6 +5,11 @@ export enum TileVariant {
   Blog = 'blog',
 }
 
+export type TSlicedTiles = {
+  sectionTop: TTiles;
+  sectionBottom: TTiles;
+};
+
 export type TTilesProps = {
   tileVariant: TileVariant;
   tiles: TTiles;

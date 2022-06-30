@@ -1,5 +1,8 @@
 import { FC } from 'react';
 
+import clsx from 'clsx';
+
+import { DomainVariant } from '@quansight/shared/types';
 import { DeviceSizeVariant, useDeviceSize } from '@quansight/shared/utils';
 
 import { HeaderSkipLinks } from './Common/HeaderSkipLinks';
@@ -16,7 +19,12 @@ export const Header: FC<THeaderProps> = ({
 }) => {
   const deviceSize = useDeviceSize();
   return (
-    <header className="fixed inset-x-0 top-0 z-20 mx-auto text-white sm:absolute max-w-layout">
+    <header
+      className={clsx(
+        'fixed inset-x-0 top-0 z-20 mx-auto text-white sm:absolute',
+        domainVariant === DomainVariant.Quansight && 'max-w-layout',
+      )}
+    >
       <HeaderSkipLinks
         skipLinksText={skipLinksText}
         domainVariant={domainVariant}
