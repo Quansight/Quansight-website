@@ -12,7 +12,7 @@ export const Hero: FC<THeroProps> = ({
   imageSrc,
   imageAlt,
   backgroundColor,
-  objectFit = 'contain',
+  objectFit,
 }) => {
   const isLargeHero =
     variant === HeroVariant.Large || variant === HeroVariant.LargeOverlapping;
@@ -31,7 +31,7 @@ export const Hero: FC<THeroProps> = ({
         isMediumHero && 'md:h-[730px]',
         isLargeHeroOverlapping && 'mb-[-31rem] md:mb-[-39rem]',
         isMediumHeroOverlapping && 'mb-[-10rem] md:mb-[-20rem]',
-        backgroundColor ? `bg-[${backgroundColor}]` : 'bg-[#000000]',
+        backgroundColor ? `bg-[${backgroundColor}]` : 'bg-transparent',
       )}
     >
       <div className="relative mx-auto h-full max-w-layout">
@@ -39,7 +39,7 @@ export const Hero: FC<THeroProps> = ({
           src={imageSrc}
           alt={imageAlt}
           layout="fill"
-          objectFit={objectFit}
+          objectFit={objectFit || 'cover'}
           objectPosition="center"
         />
         {title && (
