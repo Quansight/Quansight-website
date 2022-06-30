@@ -6,10 +6,10 @@ making GPUs accessible to the users of these libraries'
 author: amit-kumar
 category: [Array API, Machine Learning]
 featuredImage:
-  src: /posts/2022/03/making-gpus-accessible-to-pydata-ecosystem-via-array-api/blog_feature.svg
+  src: /posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/blog_feature.svg
   alt: 'A brown and a black comgin towards each other to pass a business card with the logo of Quansight Labs'
 hero:
-  imageSrc: /posts/2022/03/making-gpus-accessible-to-pydata-ecosystem-via-array-api/blog_hero.svg
+  imageSrc: /posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/blog_hero.svg
   imageAlt: 'An illustration of a white hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
 ---
 
@@ -86,10 +86,10 @@ connections.
 <p align="center">
     <img
      alt="Greek coins from Pompeii"
-     src="/posts/2022/03/making-gpus-accessible-to-pydata-ecosystem-via-array-api/greek_coins_original.jpeg">
+     src="/posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/greek_coins_original.jpeg" />
 </p>
 <p align="center">
-<i>Greek coins from Pompeii ("British Museum, London, England").<br>
+<i>Greek coins from Pompeii ("British Museum, London, England").<br />
 Source: <a href="https://www.brooklynmuseum.org/opencollection/archives/image/51611">www.brooklynmuseum.org/opencollection/archives/image/51611</a></i>
 </p>
 
@@ -200,7 +200,7 @@ supports the standard.
 <p align="center">
     <img
      alt="Array API Workflow"
-     src="/posts/2022/03/making-gpus-accessible-to-pydata-ecosystem-via-array-api/array_api_workflow.svg">
+     src="/posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/array_api_workflow.svg" />
     <i>Workflow for using the Array API Standard for writing code that works with multiple libraries</i>
 </p>
 
@@ -449,14 +449,14 @@ demo the rescaling factors were: 0.1, 0.2, 0.4, 0.6, 0.8 and 1.
 This was run on a server with a AMD Instinct MI50 GPU with 32 GB of memory, and
 a CPU with 64 physical cores.
 
-![NumPy cs CuPy AMD](/posts/2022/03/making-gpus-accessible-to-pydata-ecosystem-via-array-api/numpy_vs_cupy_amd.png)
+![NumPy cs CuPy AMD](/posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/numpy_vs_cupy_amd.png)
 
 **On NVIDIA GPU:**
 
 This was run on a NVIDIA TITAN RTX GPU with 24 GB of memory, and a CPU with 24
 phyiscal cores.
 
-![NumPy cs CuPy NVIDIA](/posts/2022/03/making-gpus-accessible-to-pydata-ecosystem-via-array-api/numpy_vs_cupy_nvidia.png)
+![NumPy cs CuPy NVIDIA](/posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/numpy_vs_cupy_nvidia.png)
 
 The GPU vs CPU plots show what you would expect: the computation is faster with
 CuPy (i.e. on GPU) compared to NumPy (i.e. on CPU) for larger image sizes. The
@@ -517,6 +517,6 @@ from AMD for a team at Quansight Labs.
     <img
      alt="AMD logo."
      src="/images/sponsors/AMD_E_Blk_RGB.png"
-     width="250">
+     width="250" />
     <i></i>
 </p>
