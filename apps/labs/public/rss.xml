@@ -4,7 +4,7 @@
         <title>Quansight Labs</title>
         <link>https://labs.quansight.org</link>
         <description>This is an RSS feed. To subscribe to it, copy its address and paste it when your feed reader asks for it. It will be updated periodically in your reader.</description>
-        <lastBuildDate>Wed, 22 Jun 2022 08:45:18 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 30 Jun 2022 00:07:12 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
@@ -28,6 +28,13 @@
             <pubDate>Wed, 12 Oct 2022 22:00:00 GMT</pubDate>
             <description><![CDATA[Lorem ipsum dolor sit amet]]></description>
             <enclosure url="https://labs.quansight.org/posts/another-post/featured.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Checking for accessibility: thoughts and a checklist!]]></title>
+            <link>https://labs.quansight.org/blog/thoughts-on-reviewing-for-accessibility</link>
+            <guid>https://labs.quansight.org/blog/thoughts-on-reviewing-for-accessibility</guid>
+            <pubDate>Sun, 05 Jun 2022 22:00:00 GMT</pubDate>
+            <enclosure url="https://labs.quansight.org/posts/thoughts-on-reviewing-for-accessibility/jlabaccess4.png" length="0" type="image/png"/>
         </item>
     </channel>
 </rss>
