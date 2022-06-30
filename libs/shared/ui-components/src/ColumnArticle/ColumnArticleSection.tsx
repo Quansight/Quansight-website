@@ -9,11 +9,11 @@ export const ColumnArticleSection: FC<TColumnArticleSectionProps> = ({
 }) => (
   <>
     {content.map((item) => {
-      if (Array.isArray(item.content)) {
+      if (item?.content && Array.isArray(item.content)) {
         const firstItem = item?.content[0];
         const itemLevel = item?.attrs?.level || 0;
         if (firstItem?.text) {
-          const text = firstItem.text;
+          const text = firstItem?.text;
           if (item.type === 'heading') {
             return (
               <ColumnArticleHeader
