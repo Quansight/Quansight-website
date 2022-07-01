@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/pydata-extensibility-vision/feature-image-scipy-ndimage-dispatcher.png
   alt: 'A schema using SciPy dispatcher to allow users to develop generic code that works with arrays from different libraries.'
 hero:
-  imageSrc:/posts/pydata-extensibility-vision/hero-image.png
+  imageSrc: /posts/pydata-extensibility-vision/hero-image.png
   imageAlt: 'Cropped diagram of proposed dispatch mechanism layers for enabling CuPy and Dask support.'
 ---
 
