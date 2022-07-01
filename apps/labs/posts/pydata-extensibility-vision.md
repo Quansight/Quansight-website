@@ -390,7 +390,7 @@ forward to making progress on this front!
 Adding dispatching support will take significant effort to implement across
 different projects. Fortunately, AMD recognized this as a problem worth solving
 and is willing to help to fix it by funding a team at Quansight Labs to do the
-initial heavy lifting.
+initial heavy lifting.array-lib]
 
 AMD's vision for the developer community is open, portable tools that enable the
 same source code to run on different hardware platforms. ROCm is an example of
@@ -402,7 +402,7 @@ all Python developers," says Terry Deem, AMD Product Manager for ROCm.
 <p align="left">
     <img
      alt="AMD logo."
-     src="/images/sponsors/AMD_E_Blk_RGB.png"
+     src="/posts/pydata-extensibility-vision/AMD_E_Blk_RGB.png"
      width="250">
     <i></i>
 </p>
