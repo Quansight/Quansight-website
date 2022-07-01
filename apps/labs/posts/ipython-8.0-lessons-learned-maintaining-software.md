@@ -7,10 +7,10 @@ description: 'This is a companion post from the Official release of IPython
 maintaining your projects, or helping other.'
 category: [Community, Developer workflows]
 featuredImage:
-  src: /posts/ipython-8.0-lessons-learned-maintaining-software/ipython-8.0-feature.png
+  src: ../public/posts/ipython-8.0-lessons-learned-maintaining-software/ipython-8.0-feature.png
   alt: 'Code snippets showing why always using stacklevel is important in ipython-8.0. Full code snipppets are in the blog post.'
 hero:
-  imageSrc: /posts/ipython-8.0-lessons-learned-maintaining-software/blog_hero_org.svg
+  imageSrc: ../public/posts/ipython-8.0-lessons-learned-maintaining-software/blog_hero_org.svg
   imageAlt: 'An illustration of a light brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
 ---
 
