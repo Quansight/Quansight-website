@@ -5,7 +5,7 @@ author: mahe-iram-khan
 description: 'Grayskull is an automatic conda recipe generator, with a focus on conda-forge.'
 category: [Packaging]
 featuredImage:
-  src: /posts/
+  src: \posts\conda-grayskull-packaging\package_name_feature.png
   alt: 'Lorem ipsum dolor'
 hero:
   imageSrc: /posts/
