@@ -5,10 +5,10 @@ author: ralf-gommers
 description: 'In this post, we aim to articulate that vision and suggest a path to making it concrete, focusing on three libraries at the core of the PyData ecosystem: SciPy, scikit-learn and scikit-image. '
 category: [Array API]
 featuredImage:
-  src: /posts/pydata-extensibility-vision/feature-image-scipy-ndimage-dispatcher.png
+  src: ../public/posts/pydata-extensibility-vision/feature-image-scipy-ndimage-dispatcher.png
   alt: 'A schema using SciPy dispatcher to allow users to develop generic code that works with arrays from different libraries.'
 hero:
-  imageSrc: /posts/pydata-extensibility-vision/hero-image.png
+  imageSrc: ../public/posts/pydata-extensibility-vision/hero-image.png
   imageAlt: 'Cropped diagram of proposed dispatch mechanism layers for enabling CuPy and Dask support.'
 ---
 
@@ -43,7 +43,7 @@ discussion spanning multiple projects.
 <p align="center">
     <img
      alt="A diagram showing possible interconnections that would be enabled by Array API."
-     src="/posts/pydata-extensibility-vision/nep-0047-library-dependencies.png">
+     src="../public/posts/pydata-extensibility-vision/nep-0047-library-dependencies.png">
     <i><br>Possible interconnections enabled in this design, via the Array API standard and Uarray.</i>
 </p>
 
@@ -102,7 +102,7 @@ Dispatcher is an abstract mechanism, concretely it could be an
 <p align="center">
     <img
      alt="A schema using NumPy dispatcher."
-     src="/posts/pydata-extensibility-vision/scipy-numpy-dispatch.png">
+     src="../public/posts/pydata-extensibility-vision/scipy-numpy-dispatch.png">
     <i><br>A SciPy module with NumPy "Dispatcher".</i>
 </p>
 
@@ -117,7 +117,7 @@ paths.
 <p align="center">
     <img
      alt="A schema using SciPy dispatcher."
-     src="/posts/pydata-extensibility-vision/scipy-ndimage-dispatcher.png">
+     src="../public/posts/pydata-extensibility-vision/scipy-ndimage-dispatcher.png">
     <i><br>A SciPy module with its own "Dispatcher".</i>
 </p>
 
@@ -190,7 +190,7 @@ module specific to CuPy (or any other array library) at runtime.
 <p align="center">
     <img
      alt="A diagram outlining CuPy support for SciPy and scikits."
-     src="/posts/pydata-extensibility-vision/CuPy_support_scipy_scikits_with_details.png">
+     src="../public/posts/pydata-extensibility-vision/CuPy_support_scipy_scikits_with_details.png">
     <i>
     <br>Proposed dispatch mechanism layers for enabling CuPy and Dask support.
     <br>This will also support any other array library with the same Array API standard support and uarray backends.
@@ -402,7 +402,7 @@ all Python developers," says Terry Deem, AMD Product Manager for ROCm.
 <p align="left">
     <img
      alt="AMD logo."
-     src="/posts/pydata-extensibility-vision/AMD_E_Blk_RGB.png"
+     src="../public/posts/pydata-extensibility-vision/AMD_E_Blk_RGB.png"
      width="250">
     <i></i>
 </p>
