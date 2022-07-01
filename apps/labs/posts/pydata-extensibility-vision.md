@@ -106,8 +106,6 @@ Dispatcher is an abstract mechanism, concretely it could be an
     <i><br>A SciPy module with NumPy "Dispatcher".</i>
 </p>
 
---- ![numpy dispatch schema](https://drive.google.com/uc?export=view&id=1-PySRskT3-76r_KiiKGfkC485dT6uKoV) ---
-
 For SciPy and similar libraries, we need to follow NumPy's example and add our
 own dispatching layer for the API to allow users to develop generic code that
 works with arrays from different libraries. Then it would be possible to
@@ -120,8 +118,6 @@ paths.
      src="../public/posts/pydata-extensibility-vision/scipy-ndimage-dispatcher.png">
     <i><br>A SciPy module with its own "Dispatcher".</i>
 </p>
-
---- ![scipy.ndimage dispatch schema](https://drive.google.com/uc?export=view&id=1-ZoVxenDufJuUwcONV_mFY0NFNY3wOCq) ---
 
 A careful reader may note that there's a gray area left: what if some SciPy
 function or submodule is mostly pure Python + NumPy, but relies on a small
