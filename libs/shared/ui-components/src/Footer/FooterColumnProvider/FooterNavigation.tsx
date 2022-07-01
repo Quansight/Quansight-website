@@ -15,8 +15,8 @@ export const FooterNavigation: FC<TFooterNavigationProps> = ({
     <nav className="flex flex-col">
       {links.map(({ linkText, linkUrl, _uid }) => (
         <Link href={`/${linkUrl.cached_url}`} key={_uid}>
-          <a className="text-[1.4rem] font-normal leading-[2.3rem]">
-            {linkText}<br />
+          <a className="text-[1.4rem] font-normal leading-[2.3rem] pb-5">
+            {linkText}
           </a>
         </Link>
       ))}
