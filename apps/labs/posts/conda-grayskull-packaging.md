@@ -6,10 +6,10 @@ description: 'Grayskull is an automatic conda recipe generator, with a focus on 
 category: [Packaging]
 featuredImage:
   src: /posts/conda-grayskull-packaging/package_name_feature.png
-  alt: 'Lorem ipsum dolor'
+  alt: 'A flow diagram of a 'package name' being fed into a gray colored skull which represents the tool Grayskull and being converted into a curled up piece of paper which represents a recipe.'
 hero:
-  imageSrc: /posts/
-  imageAlt: 'Lorem ipsum dolor'
+  imageSrc: /posts/conda-grayskull-packaging/blog_feature_var1.svg
+  imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
 ---
 
 Python might be the most popular snake out there, but most of us have also heard of that other serpent: Conda. And some of us have wondered what it really is. In this post we’ll learn about Conda, software packages and package recipes. Most importantly we’ll learn about Grayskull — a conda recipe generator.
