@@ -5,10 +5,10 @@ author: isabela-presedo-floyd
 description: 'The Chan Zuckerberg Initiative has funded efforts to make the Jupyter ecosystem, starting with JupyterLab, more accessible. As a part of these increased efforts, the team will be providing a periodically updated list of what is currently being worked on and what is coming soon.'
 category: [Access-centered]
 featuredImage:
-  src: /posts/jupyter-czi-accessibility-roadmap-announcement/roadmap_feature.png
+  src: ../public/posts/jupyter-czi-accessibility-roadmap-announcement/roadmap_feature.png
   alt: 'Screenshot of the Jupyter Accessibility Roadmap page. It is a list outlining the primary goals the team aims to achieve in two years. A link to the full roadmap can be found in the blog post.'
 hero:
-  imageSrc: /posts/jupyter-czi-accessibility-roadmap-announcement/blog_hero_var1.svg
+  imageSrc: ../public/posts/jupyter-czi-accessibility-roadmap-announcement/blog_hero_var1.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
