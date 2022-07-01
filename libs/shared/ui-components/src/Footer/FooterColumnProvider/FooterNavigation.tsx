@@ -16,8 +16,8 @@ export const FooterNavigation: FC<TFooterNavigationProps> = ({
       {links.map(({ linkText, linkUrl, _uid }) => (
         <Link href={`/${linkUrl.cached_url}`} key={_uid}>
           <a className="text-[1.4rem] font-normal leading-[2.3rem]">
-            {linkText}
-          </a><br />
+            {linkText}<br />
+          </a>
         </Link>
       ))}
     </nav>
