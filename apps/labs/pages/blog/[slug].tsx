@@ -59,7 +59,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
       {post.meta.hero && (
         <Hero
           {...post.meta.hero}
-          variant={HeroVariant.Small}
+          variant={HeroVariant.Medium}
           backgroundColor="transparent"
           objectFit="cover"
         />
