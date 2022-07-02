@@ -44,7 +44,7 @@ discussion spanning multiple projects.
     <img
      alt="A diagram showing possible interconnections that would be enabled by Array API."
      src="../public/posts/pydata-extensibility-vision/nep-0047-library-dependencies.png">
-    <i><br>Possible interconnections enabled in this design, via the Array API standard and Uarray.</i>
+    <br><i>Possible interconnections enabled in this design, via the Array API standard and Uarray.</i>
 </p>
 
 Today, SciPy, scikit-learn and scikit-image only work with NumPy arrays. SciPy
