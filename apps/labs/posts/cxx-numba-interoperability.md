@@ -6,7 +6,7 @@ description: 'An exploration of a method to call C++ libarary function from Numb
 category: [Beyond PyData, PyData Ecosystem]
 featuredImage:
   src: /posts/cxx-numba-interoperability/blog_feature_var2.svg
-  alt: 'An illustration of brown and a white coming towards each other to pass a business card with the logo of Quansight Labs'
+  alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/cxx-numba-interoperability/blog_hero_var2.svg
   imageAlt: 'An illustration of a black  hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
