@@ -5,10 +5,10 @@ author: sayantika-banik
 description: 'The development story of a developer command-line interface (CLI) for the SciPy project, with exmaples'
 category: [Developer workflows]
 featuredImage:
-  src: /posts/2022/05/the-evolution-of-the-scipy-developer-cli/scipy_cli_feature.png
+  src: /posts/the-evolution-of-the-scipy-developer-cli/scipy_cli_feature.png
   alt: 'A screenshot of the SciPy CLI, showing the "do.py" command and the various options implemented for the SciPy project'
 hero:
-  imageSrc: /posts/2022/05/the-evolution-of-the-scipy-developer-cli/blog_hero_var1.png
+  imageSrc: /posts/the-evolution-of-the-scipy-developer-cli/blog_hero_var1.png
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
 ---
 
