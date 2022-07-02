@@ -6,7 +6,7 @@ description: 'Grayskull is an automatic conda recipe generator, with a focus on 
 category: [Packaging]
 featuredImage:
   src: ../public/posts/conda-grayskull-packaging/package_name_feature.png
-  alt: 'A flow diagram of a ''package name'' being fed into a gray colored skull which represents the tool Grayskull and being converted into a curled up piece of paper which represents a recipe.'
+  alt: "A flow diagram of a 'package name' being fed into a gray colored skull which represents the tool Grayskull and being converted into a curled up piece of paper which represents a recipe."
 hero:
   imageSrc: ../public/posts/conda-grayskull-packaging/blog_hero_var1.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
