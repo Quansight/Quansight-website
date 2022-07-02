@@ -516,7 +516,7 @@ from AMD for a team at Quansight Labs.
 <p align="left">
     <img
      alt="AMD logo."
-     src="/images/sponsors/AMD_E_Blk_RGB.png"
+     src="/posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/AMD_E_Blk_RGB.png"
      width="250" />
     <i></i>
 </p>
