@@ -128,3 +128,13 @@ hero:
 1.  Open `apps/labs/services/blogAllowedComponents.ts` file
 2.  Import component from the codebase
 3.  Add new component to `blogAllowedComponents` object.
+
+### Specifications for Hero images
+
+There are two options to add images to Hero component. First one is to add image in General tab of Hero component - image will be used for all screen sizes. Second one is to add different images in tabs: Image Mobile, Image Tablet and Image Desktop. While choosing second one remember to add all three of them.
+
+By default, the images in the Hero component adjust their size to fill the full width of the container box (objectFit: cover). You can customize this behaviour by choosing different objectFit property:
+
+- Contain: image is scaled to maintain its aspect ratio while fitting within the element's content box (height).
+
+- Cover: image is sized to maintain its aspect ratio while filling the element's entire content box (width).
