@@ -27,6 +27,7 @@ const BoardItem: FC<TBoardItemProps & { classNameBorder: string }> = ({
           imageSrc={imageSrc}
           imageAlt={imageAlt}
           layout="fill"
+          objectFit="contain"
           priority
         />
       </div>
