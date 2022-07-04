@@ -18,7 +18,6 @@ module.exports = {
         violet: '#452393',
         pink: '#A43A8F',
         green: '#99C941',
-        darkgreen: '#558300',
         black: '#191919',
         white: '#ffffff',
         lightgray: '#fafaff',
