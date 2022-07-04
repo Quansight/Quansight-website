@@ -22,7 +22,12 @@ export const FooterLogo: FC<TFooterLogoProps> = ({
 
   return (
     <div className="relative top-0 w-[23.9rem] h-[6.455rem] sm:w-[22.6rem] sm:h-[6.104rem]">
-      <Picture imageSrc={logo.filename} imageAlt={logo.alt} layout="fill" />
+      <Picture
+        imageSrc={logo.filename}
+        imageAlt={logo.alt}
+        layout="fill"
+        objectFit="contain"
+      />
     </div>
   );
 };

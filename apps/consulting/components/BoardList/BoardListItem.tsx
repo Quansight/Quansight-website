@@ -20,8 +20,13 @@ const BoardListItem: FC<TBoardListItemProps> = ({
     2xl:h-[25rem]
   "
   >
-    <div className="lg:w-1/3 lg:min-w-[9rem] lg:text-right">
-      <Picture imageSrc={imageSrc} imageAlt={imageAlt} width={90} height={90} />
+    <div className="relative w-full h-[9rem] lg:w-1/3 lg:min-w-[9rem] lg:text-right">
+      <Picture
+        imageSrc={imageSrc}
+        imageAlt={imageAlt}
+        layout="fill"
+        objectFit="contain"
+      />
     </div>
     <div className="mt-[1.5rem] mb-[4.4rem] lg:mt-0">
       <h3
