@@ -3,7 +3,8 @@ import { FC } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 
-import { THeroProps, HeroVariant } from './types';
+import { HeroResponsiveImages } from './HeroResponsiveImages';
+import { THeroProps, HeroVariant, HeroBackgroundVariant } from './types';
 
 export const Hero: FC<THeroProps> = ({
   title,
@@ -13,6 +14,9 @@ export const Hero: FC<THeroProps> = ({
   imageAlt,
   backgroundColor,
   objectFit,
+  imageMobile,
+  imageTablet,
+  imageDesktop,
 }) => {
   const isLargeHero =
     variant === HeroVariant.Large || variant === HeroVariant.LargeOverlapping;
@@ -31,17 +35,29 @@ export const Hero: FC<THeroProps> = ({
         isMediumHero && 'md:h-[730px]',
         isLargeHeroOverlapping && 'mb-[-31rem] md:mb-[-39rem]',
         isMediumHeroOverlapping && 'mb-[-10rem] md:mb-[-20rem]',
-        backgroundColor ? `bg-[${backgroundColor}]` : 'bg-transparent',
+        backgroundColor === HeroBackgroundVariant.Black && 'bg-[#000000]',
+        backgroundColor === HeroBackgroundVariant.White && 'bg-[#ffffff]',
+        !backgroundColor && 'bg-transparent',
       )}
     >
       <div className="relative mx-auto h-full max-w-layout">
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          layout="fill"
-          objectFit={objectFit || 'cover'}
-          objectPosition="center"
-        />
+        {imageMobile?.imageSrc &&
+        imageTablet?.imageSrc &&
+        imageDesktop?.imageSrc ? (
+          <HeroResponsiveImages
+            imageMobile={imageMobile}
+            imageTablet={imageTablet}
+            imageDesktop={imageDesktop}
+          />
+        ) : (
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            layout="fill"
+            objectFit={objectFit || 'cover'}
+            objectPosition="center"
+          />
+        )}
         {title && (
           <div
             className={clsx(
