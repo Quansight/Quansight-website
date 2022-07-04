@@ -3,8 +3,8 @@ import { FC } from 'react';
 import clsx from 'clsx';
 
 import { TeamMember } from './TeamMember/TeamMember';
-import { TeamVariant, TTeamProps, TeamDisplay } from './types';
-import { filterTeam, getRandomMembers } from './utils';
+import { TeamVariant, TTeamProps } from './types';
+import { filterTeam, getRandomMembers, checkNamesOverflow } from './utils';
 
 export const Team: FC<TTeamProps> = ({
   variant,
@@ -19,17 +19,7 @@ export const Team: FC<TTeamProps> = ({
       ? getRandomMembers(filteredTeam, 3)
       : filteredTeam;
 
-  const needHeadingSpace = teamToDisplay?.reduce(
-    (prevValue, { displayName, firstName, lastName }) => {
-      const rawName =
-        displayName === TeamDisplay.Full
-          ? `${firstName} ${lastName}`
-          : firstName;
-
-      return rawName?.length <= 15 && prevValue === false ? false : true;
-    },
-    false,
-  );
+  const needHeadingSpace = checkNamesOverflow(teamToDisplay);
 
   return (
     <section className="px-[1.8rem] my-[6rem] mx-auto md:my-[8rem] lg:px-[3rem] xl:px-[18rem] max-w-layout">
