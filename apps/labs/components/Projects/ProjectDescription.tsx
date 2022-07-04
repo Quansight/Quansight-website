@@ -17,7 +17,7 @@ export const ProjectDescription = ({
           dangerouslySetInnerHTML={createMarkup(longDescription)}
         />
         <a
-          aria-label={`Go to the ${title} project's page`}
+          aria-label={`${title} project's page`}
           href={linkUrl}
           target="_blank"
           rel="noreferrer"
