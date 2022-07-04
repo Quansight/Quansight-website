@@ -12,7 +12,6 @@ const BoardItem: FC<TBoardItemProps & { classNameBorder: string }> = ({
   linkTitle,
   linkUrl,
   imageSrc,
-  imageAlt,
   classNameBorder,
 }) => {
   return (
@@ -22,16 +21,17 @@ const BoardItem: FC<TBoardItemProps & { classNameBorder: string }> = ({
         classNameBorder,
       )}
     >
-      <div className="relative h-32">
-        <Picture
-          imageSrc={imageSrc}
-          imageAlt={imageAlt}
-          layout="fill"
-          priority
-        />
-      </div>
       <Link href={linkUrl}>
         <a>
+          <div className="relative h-32">
+            <Picture
+              imageSrc={imageSrc}
+              // Alt text deliberately empty because the images used here are decorative.
+              imageAlt=""
+              layout="fill"
+              priority
+            />
+          </div>
           <div className="text-[2.2rem] font-extrabold leading-[3rem] sm:mt-[2.8rem] sm:mb-[2.2rem] xl:mt-[3.6rem] xl:mb-[2.2rem] font-heading">
             {title}
           </div>
