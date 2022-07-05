@@ -3,14 +3,14 @@ title: 'IPython 8.0, Lessons learned maintaining software'
 published: January 12, 2022
 author: matthias-bussonnier
 description: 'This is a companion post from the Official release of IPython
-8.0. We hope it will help you apply best practices, and have an easier time 
+8.0. We hope it will help you apply best practices, and have an easier time
 maintaining your projects, or helping other.'
 category: [Community, Developer workflows]
 featuredImage:
-  src: ../public/posts/ipython-8.0-lessons-learned-maintaining-software/ipython-8.0-feature.png
+  src: /posts/ipython-8.0-lessons-learned-maintaining-software/ipython-8.0-feature.png
   alt: 'Code snippets showing why always using stacklevel is important in ipython-8.0. Full code snipppets are in the blog post.'
 hero:
-  imageSrc: ../public/posts/ipython-8.0-lessons-learned-maintaining-software/blog_hero_org.svg
+  imageSrc: /posts/ipython-8.0-lessons-learned-maintaining-software/blog_hero_org.svg
   imageAlt: 'An illustration of a light brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
 ---
 
@@ -20,7 +20,6 @@ what we learned with this large new major IPython release. We hope it will help
 you apply best practices, and have an easier time maintaining your projects, or
 helping other. We'll focus on many patterns that made it easier for us to make
 IPython 8.0 what it is with minimal time involved.
-
 
 IPython 8.0 in addition to adding a number of improvements and make full use of
 newer Python features, it also removes support for a number of legacy API. It
@@ -39,7 +38,6 @@ to keep in mind.
 Seen it in another way, your software progressing both because it's leading edge
 is moving forward, as it does because the trailing end is also catching up. And
 for this release of IPython we focused on both.
-
 
 ## LBYL vs EAFP
 
@@ -87,16 +85,15 @@ Explicit is better than implicit.
 ...
 ```
 
-So my first tip: Always avoid catching  `ImportError`s when you can compare
+So my first tip: Always avoid catching `ImportError`s when you can compare
 version numbers.
 
- - having two import lines will not make import slower.
- - it's explicit.
- - it's easier to search for.
- - it's easier to remove.
+- having two import lines will not make import slower.
+- it's explicit.
+- it's easier to search for.
+- it's easier to remove.
 
-
- For example IPython used to contain
+For example IPython used to contain
 
 ```python
 try:
@@ -109,11 +106,10 @@ except ImportError:
         pass
 ```
 
-
 Which adds a fallback for [numpy version older than numpy 1.3 from
 2008](https://github.com/numpy/numpy/commit/ba9a02dcb2c3ca635076a75cc9eb0f406e00ceed).
 It took me ~30 minutes to find this informations, which could have been seconds
-would the author (which could have been me) had checked version.  A proper
+would the author (which could have been me) had checked version. A proper
 version check would also had this code removed years ago.
 
 Currently we do no check for numpy versions anymore as we are removing support
@@ -150,7 +146,6 @@ if tuple(int(x) for x in numpy.version.version.split(".")[:3]) < (1, 13):
    ValueError('Parsing version is more complicated that it looks like')
 ```
 
-
 While IPython has few dependencies beyond Python, we do so with Python version
 itself, and always compare with `sys.version_info` made it straightforward to
 find all dead code once we bumped or minimal version to 3.8+.
@@ -158,7 +153,6 @@ find all dead code once we bumped or minimal version to 3.8+.
 This has domino effects in IPython 8.0 as we were going to great length to
 support top level async which is since 3.8 native to Python. Many simplification
 leading do even more down the line up to complete method and class suppressions.
-
 
 # Don't be cheap on `DeprecationWarning`s
 
@@ -170,15 +164,13 @@ trains everybody to ignore them.
 
 Here is a quick tip/summary of what this section will expand upon.
 
- - Always set `warnings.warn(stacklevel=...)` to the right value (at least 2).
- - Be descriptive of what "deprecated" means.
- - Be descriptive of what the replacement is.
- - Always indicate since when it is deprecated / the replacement is available.
- - Don't be afraid to use multiple line strings.
-
+- Always set `warnings.warn(stacklevel=...)` to the right value (at least 2).
+- Be descriptive of what "deprecated" means.
+- Be descriptive of what the replacement is.
+- Always indicate since when it is deprecated / the replacement is available.
+- Don't be afraid to use multiple line strings.
 
 ## Always use `stacklevel=...`
-
 
 Setting the `stacklevel` ensure that python reports the right place where the
 deprecated feature is used.
@@ -220,13 +212,11 @@ your code.
 
 Individual Errors can be turned off.
 
-
 Moreover it is easy to make warnings into errors **only in the code you
 maintain**, assuming the libraries you call properly set their `stacklevel`,
 this allow you to make sure you do not use deprecated features directly.
 
-[napari](https://github.com/napari/napari/blob/79834ad8ed2191b44df5be4233f4b98a6bd33de9/pyproject.toml#L88-L108) for example uses the  following
-
+[napari](https://github.com/napari/napari/blob/79834ad8ed2191b44df5be4233f4b98a6bd33de9/pyproject.toml#L88-L108) for example uses the following
 
 ```toml
 # pyproject.toml
@@ -242,8 +232,7 @@ filterwarnings = [
 ]
 ```
 
-The syntax is `which action:pattern of message to match:class of warning:which
-module`. The `which module` requires the author to have set `stacklevel=`
+The syntax is `which action:pattern of message to match:class of warning:which module`. The `which module` requires the author to have set `stacklevel=`
 properly.
 
 Setting `stacklevel=` will make you much more confident that the users have seen
@@ -252,13 +241,11 @@ fix a warning if it take me 30 minutes to figure out where my code use
 deprecated features, though if I see where the error is I can at least open an
 issue with the right location to fix and go back to my previous task.
 
-
 ### Be clear what deprecated means, and what the replacements are
 
 While "deprecated" conveys the idea that something should not be used,
 there might be reasons why, or change in effects since the deprecation that
 you want to describe.
-
 
 ```python
 def publish_display_data(data, metadata=None, source=None, *, ...):
@@ -299,7 +286,6 @@ If there are replacement, or an option was deprecated as it was obviously wrong,
 you may want to say that as well. In particular if the alternative option are
 available before the deprecation as that can avoid conditional code.
 
-
 ### Indicate the time of the deprecation
 
 This one if a bit of a pet peeve of mine, I regularly come across a deprecation
@@ -309,11 +295,11 @@ my workflow as the `DeprecationWarning` could be in CI and I don't have the
 library installed locally.
 
 The version since a deprecation is critical as:
-  - it gives me the right info for a conditional
-  - it tells me whether I can maybe drop support for older version.
-  - It give me an idea of the time frame for me to fix the deprecation.
-  - Sometime the warning is added in the different version than the deprecation.
 
+- it gives me the right info for a conditional
+- it tells me whether I can maybe drop support for older version.
+- It give me an idea of the time frame for me to fix the deprecation.
+- Sometime the warning is added in the different version than the deprecation.
 
 The warning from the previous section should become:
 
@@ -326,17 +312,15 @@ The warning from the previous section should become:
                   stacklevel=2)
 ```
 
-
 Some authors also like to add in the deprecation the version where the
 functionality will be removed. I tend to avoid as:
 
- - I believe this gives users explicit authorisation to delay updating API.
-   Though you as a maintainer want to get rid of it as fast as possible.
- - I often came across deprecation that were reverted/delayed/not removed. This
-   becomes  confusing to users, and can lead to mistrust of deprecation warning.
+- I believe this gives users explicit authorisation to delay updating API.
+  Though you as a maintainer want to get rid of it as fast as possible.
+- I often came across deprecation that were reverted/delayed/not removed. This
+  becomes confusing to users, and can lead to mistrust of deprecation warning.
 
 I thus prefer to stay factual, and I don't claim to predict the future.
-
 
 ### Use multiline strings
 
@@ -353,9 +337,7 @@ Give them all the informations they need, and you will realise that it in the
 long term it is also less work for you, and you will have an easier time
 cleaning API.
 
-
 ## Communication and Explicitness are keys
-
 
 You want to be explicit to your users and future self. All the explicit
 informations will make it easier for you in the long term.
@@ -372,9 +354,3 @@ your contributions to make them better.
 
 We also hope the lessons we learned to remove old codepath from IPython will be
 of use to you, and simplify your work going forward.
-
-
-
-
-
-
