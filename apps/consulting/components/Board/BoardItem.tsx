@@ -29,6 +29,7 @@ const BoardItem: FC<TBoardItemProps & { classNameBorder: string }> = ({
               // Alt text deliberately empty because the images used here are decorative.
               imageAlt=""
               layout="fill"
+              objectFit="contain"
               priority
             />
           </div>

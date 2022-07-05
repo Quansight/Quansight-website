@@ -19,7 +19,12 @@ export const ProjectLogo = ({
               isDroprownExpanded ? 'sm:block' : 'sm:hidden',
             )}
           >
-            <Picture imageSrc={imageSrc} imageAlt={imageAlt} layout="fill" />
+            <Picture
+              imageSrc={imageSrc}
+              imageAlt={imageAlt}
+              layout="fill"
+              objectFit="contain"
+            />
           </div>
         )}
       </div>

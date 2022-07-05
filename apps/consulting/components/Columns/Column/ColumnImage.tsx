@@ -13,15 +13,20 @@ export const ColumnImage: FC<TColumnImageComponentProps> = ({
   imageAlt,
 }) => {
   const isColumns = variant === ColumnsVariant.Columns;
-  const imageSize = isColumns ? 90 : 70;
 
   return (
-    <div className={clsx(isColumns && 'text-center')}>
+    <div
+      className={clsx(
+        'relative',
+        isColumns ? 'h-[9rem]' : 'h-[7rem]',
+        isColumns && 'text-center',
+      )}
+    >
       <Picture
         imageSrc={imageSrc}
         imageAlt={imageAlt}
-        width={imageSize}
-        height={imageSize}
+        layout="fill"
+        objectFit="contain"
       />
     </div>
   );

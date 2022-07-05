@@ -27,6 +27,7 @@ import { POSTS_DIRECTORY_PATH } from '../../services/api/posts/constants';
 import { getPost } from '../../services/api/posts/getPost';
 import { getPostsByCategory } from '../../services/api/posts/getPostsByCategory';
 import { blogAllowedComponents } from '../../services/blogAllowedComponents';
+import { getAllPostFileNames } from '../../services/posts/getAllPostFileNames';
 import { TPost } from '../../types/storyblok/bloks/posts';
 
 export type TBlogPostProps = {
@@ -93,12 +94,12 @@ export const BlogPost: FC<TBlogPostProps> = ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   try {
-    const postsFileNames = await readdir(path.join(POSTS_DIRECTORY_PATH));
+    const postsFileNames = getAllPostFileNames();
 
     return {
-      paths: postsFileNames
-        .filter((filename) => /\.(md|mdx)$/.test(filename))
-        .map((filename) => `/blog/${filename.replace(/\.(md|mdx)$/, '')}`),
+      paths: postsFileNames.map(
+        (filename) => `/blog/${filename.replace(/\.(md|mdx)$/, '')}`,
+      ),
       fallback: false,
     };
   } catch (error) {
