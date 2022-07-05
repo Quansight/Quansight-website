@@ -24,6 +24,7 @@ export const HeaderLogo: FC<THeaderLogoProps> = ({ logo, domainVariant }) => (
         imageSrc={logo.filename}
         imageAlt={logo.alt}
         layout="fill"
+        objectFit="contain"
         priority
       />
     </a>

@@ -22,28 +22,28 @@ export const Header: FC<THeaderProps> = ({
     <header
       className={clsx(
         'fixed inset-x-0 top-0 z-20 mx-auto text-white sm:absolute',
-        domainVariant === DomainVariant.Quansight && 'max-w-layout',
+        domainVariant === DomainVariant.Quansight && 'bg-transparent',
+        domainVariant === DomainVariant.Labs && 'bg-black',
       )}
     >
-      <HeaderSkipLinks
-        skipLinksText={skipLinksText}
-        domainVariant={domainVariant}
-      />
-      {deviceSize === DeviceSizeVariant.Mobile && (
-        <HeaderMobile
-          logo={logo}
-          navigation={navigation}
-          bookACallLinkText={bookACallLinkText}
-          domainVariant={domainVariant}
-        />
-      )}
-      {deviceSize !== DeviceSizeVariant.Mobile && (
-        <HeaderDesktop
-          logo={logo}
-          navigation={navigation}
-          domainVariant={domainVariant}
-        />
-      )}
+      <div className="mx-auto max-w-layout">
+        <HeaderSkipLinks skipLinksText={skipLinksText} />
+        {deviceSize === DeviceSizeVariant.Mobile && (
+          <HeaderMobile
+            logo={logo}
+            navigation={navigation}
+            bookACallLinkText={bookACallLinkText}
+            domainVariant={domainVariant}
+          />
+        )}
+        {deviceSize !== DeviceSizeVariant.Mobile && (
+          <HeaderDesktop
+            logo={logo}
+            navigation={navigation}
+            domainVariant={domainVariant}
+          />
+        )}
+      </div>
     </header>
   );
 };

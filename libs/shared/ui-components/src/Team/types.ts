@@ -15,8 +15,10 @@ export enum TeamShape {
   Rectangle = 'rectangle',
 }
 
+export type TTeamToDisplay = TTeamMember[] | null | undefined;
+
 export type TTeamMembers = {
-  teamToDisplay: TTeamMember[] | null | undefined;
+  teamToDisplay: TTeamToDisplay;
   shape: TeamShape;
 };
 

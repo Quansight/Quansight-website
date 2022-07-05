@@ -1,5 +1,15 @@
 import { TBlok, TImage, TLink, TRichText } from '@quansight/shared/types';
 
+export enum LinkTargetType {
+  Story = 'story',
+  Url = 'url',
+}
+
+export type TLinkProps = {
+  linkText?: string;
+  linkUrl: TLink;
+};
+
 type LinkItem = {
   linkText?: string;
   linkImage?: TImage;
