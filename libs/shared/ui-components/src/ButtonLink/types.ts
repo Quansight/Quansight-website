@@ -11,4 +11,5 @@ export type TButtonLinkProps = {
   color: ButtonColor;
   text: string;
   url: string;
+  ariaLabel: string;
 };

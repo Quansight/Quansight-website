@@ -12,6 +12,7 @@ export const ButtonLink: FC<TButtonLinkProps> = ({
   color = ButtonColor.Violet,
   text,
   url,
+  ariaLabel,
 }) => (
   <Link href={url}>
     <a
@@ -26,6 +27,9 @@ export const ButtonLink: FC<TButtonLinkProps> = ({
             color === ButtonColor.Violet ? 'border-violet' : 'border-white'
           }`,
       )}
+      // When ariaLabel is null or undefined, then attribute aria-label is not
+      // put on the element in the rendered HTML.
+      aria-label={ariaLabel}
     >
       {text}
       {isTriangle && (

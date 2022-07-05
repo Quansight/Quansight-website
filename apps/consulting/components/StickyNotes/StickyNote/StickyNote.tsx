@@ -42,7 +42,13 @@ export const StickyNote: FC<TStickyNoteComponentProps> = ({
         size={descriptionSize}
         variant={variant}
       />
-      {showButton && <Button text={buttonText} link={buttonLink} />}
+      {showButton && (
+        <Button
+          text={buttonText}
+          linkAriaLabel={`${title} {buttonText}`}
+          link={buttonLink}
+        />
+      )}
     </div>
   );
 };
