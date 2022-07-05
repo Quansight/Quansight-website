@@ -7,10 +7,8 @@ import { A11y, Autoplay, Keyboard } from 'swiper';
 import { CarouselItem } from './CarouselItem';
 import { CarouselPagination } from './CarouselPagination';
 import { TCarouselProps } from './types';
-import { getCarouselProps } from './utils/getSliderProps';
 
-export const Carousel: FC<TCarouselProps> = ({ tiles }) => {
-  const data = getCarouselProps(tiles);
+export const Carousel: FC<TCarouselProps> = ({ carouselTiles }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
@@ -21,7 +19,7 @@ export const Carousel: FC<TCarouselProps> = ({ tiles }) => {
         modules={[A11y, Autoplay, Keyboard]}
         a11y={{
           enabled: true,
-          containerMessage: `Recent posts carousel with ${data.length} items`,
+          containerMessage: `Recent posts carousel with ${carouselTiles.length} items`,
           slideRole: 'group',
         }}
         autoplay={{
@@ -36,13 +34,13 @@ export const Carousel: FC<TCarouselProps> = ({ tiles }) => {
           setCurrentSlide(item.realIndex);
         }}
       >
-        {data.map((slide) => (
+        {carouselTiles.map((slide) => (
           <SwiperSlide key={slide.uuid}>
             <CarouselItem {...slide} />
           </SwiperSlide>
         ))}
         <CarouselPagination
-          slidesLength={data.length}
+          slidesLength={carouselTiles.length}
           currentSlide={currentSlide}
         />
       </Swiper>
