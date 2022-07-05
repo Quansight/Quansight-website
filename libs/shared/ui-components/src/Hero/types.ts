@@ -33,9 +33,9 @@ export type THeroProps = {
   imageAlt: string;
   backgroundColor?: string;
   objectFit?: ImageProps['objectFit'];
-  imageMobile: TCustomImage;
-  imageTablet: TCustomImage;
-  imageDesktop: TCustomImage;
+  imageMobile?: TCustomImage;
+  imageTablet?: TCustomImage;
+  imageDesktop?: TCustomImage;
 };
 
 export default THeroProps;
