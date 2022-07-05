@@ -6,22 +6,22 @@ import { ISlugParams, DomainVariant } from '@quansight/shared/types';
 import { Layout, SEO, Footer, Header } from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
-import { getFooter } from '../../../api/utils/getFooter';
-import { getHeader } from '../../../api/utils/getHeader';
-import { getLibraryLinkItems } from '../../../api/utils/getLibraryLinkItems';
-import { getLinks } from '../../../api/utils/getLinks';
-import { getPage } from '../../../api/utils/getPage';
-import { getPageItems } from '../../../api/utils/getPageItems';
-import { BlogMoreArticles } from '../../../components/BlogArticle/BlogMoreArticles/BlogMoreArticles';
-import { LIBRARY_AUTHOR_RELATION } from '../../../components/BlogArticle/constants';
-import { BlokProvider } from '../../../components/BlokProvider/BlokProvider';
-import { Page } from '../../../components/Page/Page';
-import { TLibraryArticleProps } from '../../../types/storyblok/bloks/libraryArticleProps';
-import { TRawBlok } from '../../../types/storyblok/bloks/rawBlok';
-import { ARTICLES_DIRECTORY_SLUG } from '../../../utils/getArticlesPaths/constants';
-import { getArticlesPaths } from '../../../utils/getArticlesPaths/getArticlesPaths';
-import { getLibraryTiles } from '../../../utils/getLibraryTiles/getLibraryTiles';
-import { getSameCategoryTiles } from '../../../utils/getSameCategoryTiles/getSameCategoryTiles';
+import { getFooter } from '../../api/utils/getFooter';
+import { getHeader } from '../../api/utils/getHeader';
+import { getLibraryLinkItems } from '../../api/utils/getLibraryLinkItems';
+import { getLinks } from '../../api/utils/getLinks';
+import { getPage } from '../../api/utils/getPage';
+import { getPageItems } from '../../api/utils/getPageItems';
+import { BlogMoreArticles } from '../../components/BlogArticle/BlogMoreArticles/BlogMoreArticles';
+import { LIBRARY_AUTHOR_RELATION } from '../../components/BlogArticle/constants';
+import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
+import { Page } from '../../components/Page/Page';
+import { TLibraryArticleProps } from '../../types/storyblok/bloks/libraryArticleProps';
+import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
+import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
+import { getArticlesPaths } from '../../utils/getArticlesPaths/getArticlesPaths';
+import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
+import { getSameCategoryTiles } from '../../utils/getSameCategoryTiles/getSameCategoryTiles';
 
 const Article: FC<TLibraryArticleProps> = ({
   data,

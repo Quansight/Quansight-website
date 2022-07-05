@@ -2,7 +2,42 @@
 
 ## Running project locally
 
-Run `npm run start:consulting` or `npm run start:labs` to start a corresponding dev server. Navigate to http://localhost:4200/ or use localhost preview in Storyblok panel. On the localhost the app will automatically reload if you change any of the source files, in the Storyblok panel you need to refresh the page manually.
+Prerequisites: [Node](https://nodejs.org/en/).
+
+To run the website locally on your own machine, you must first clone this git
+repo, `cd` into the repo, then run `npm install`.
+
+This repo contains two projects (websites): Consulting and Labs. You must create
+a `.env` file for each project that you want to develop locally. For example,
+for Quansight Consulting LLC, create `apps/consulting/.env`:
+
+```
+STORYBLOK_API_URL=https://gapi.storyblok.com/v1/api
+STORYBLOK_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
+DOMAIN=https://localhost:4200
+NEXT_PUBLIC_STORYBLOK_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
+```
+
+There are two secret values that you must get from the Vercel admin:
+
+- [consulting environment
+  variables](https://vercel.com/quansight/quansight-consulting/settings/environment-variables)
+- [labs environment
+  variables](https://vercel.com/quansight/quansight-labs/settings/environment-variables)
+
+If the example .env file above does not match what you read in the Vercel admin,
+use what's in Vercel.
+
+Run `npm run start:consulting` or `npm run start:labs` to start a corresponding
+dev server. Navigate to <http://localhost:4200/> or use localhost preview in
+Storyblok panel. On the localhost the app will automatically reload if you
+change any of the source files, in the Storyblok panel you need to refresh the
+page manually.
+
+Important: whenever the website's dependencies change or are updated, the lock file
+`package-lock.json` will be updated. Whenever `package-lock.json` is updated,
+you should re-run `npm install` (or `npm cli`), so that your local environment's
+dependencies will match the production environment.
 
 ## Adding new components
 
@@ -26,9 +61,9 @@ You can fetch data from Storyblok directly using queries. To add the query:
 
 ## Technical blog workflow
 
-All of the **Quansight Labs** blog posts are located inside `apps/labs/posts`, and there all new posts should be added. 
+All of the **Quansight Labs** blog posts are located inside `apps/labs/posts`, and there all new posts should be added.
 
-Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). The `posts` directory also contains a [`categories.json` file](./apps/labs/posts/categories.json) containing the posts categories. 
+Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). The `posts` directory also contains a [`categories.json` file](./apps/labs/posts/categories.json) containing the posts categories.
 
 The `categories.json` file is also used for displaying category filters on the `/blog` page so after adding a new category, it will also be visible on that page.
 
@@ -93,3 +128,13 @@ hero:
 1.  Open `apps/labs/services/blogAllowedComponents.ts` file
 2.  Import component from the codebase
 3.  Add new component to `blogAllowedComponents` object.
+
+### Specifications for Hero images
+
+There are two options to add images to Hero component. First one is to add image in General tab of Hero component - image will be used for all screen sizes. Second one is to add different images in tabs: Image Mobile, Image Tablet and Image Desktop. While choosing second one remember to add all three of them.
+
+By default, the images in the Hero component adjust their size to fill the full width of the container box (objectFit: cover). You can customize this behaviour by choosing different objectFit property:
+
+- Contain: image is scaled to maintain its aspect ratio while fitting within the element's content box (height).
+
+- Cover: image is sized to maintain its aspect ratio while filling the element's entire content box (width).
