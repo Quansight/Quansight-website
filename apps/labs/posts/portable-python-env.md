@@ -39,12 +39,13 @@ as a rudimentary "package".
 
 If you want to create some example files, run the following commands:
 
-`mkdir -p ./test_package`
-`echo "import scipy" >> ./test_package/first_file.py`
-`echo "import numpy" >> ./test_package/first_file.py`
-
-`echo "import pandas" >> ./test_package/second_file.py`
-`echo "import sklearn" >> ./test_package/second_file.py`
+```sh
+mkdir -p ./test_package
+echo "import scipy" >> ./test_package/first_file.py
+echo "import numpy" >> ./test_package/first_file.py
+echo "import pandas" >> ./test_package/second_file.py
+echo "import sklearn" >> ./test_package/second_file.py
+```
 
 Each file has a few import statements - nothing fancy.
 
