@@ -2,8 +2,9 @@
 title: 'Creating a Portable Python Environment from Imports'
 published: June 30, 2020
 author: kim-pevey
-description: A demonstration of a method to create a copy an exact dev environment on
-one machine, and transfering it to a another machine. 
+description: |
+  A demonstration of a method to create a copy an exact dev environment on
+  one machine, and transfering it to a another machine.
 category: [Developer workflows]
 featuredImage:
   src: /posts/portable-python-env/blog_feature_var1.svg
