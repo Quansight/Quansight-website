@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps<
 
   return {
     props: {
-      data: data,
+      data,
       header,
       footer,
       preview,

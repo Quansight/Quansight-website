@@ -37,4 +37,5 @@ export type TLibraryProps = {
   footer: FooterItem;
   preview: boolean;
   tiles: TTiles;
+  carouselTiles: TTiles;
 };
