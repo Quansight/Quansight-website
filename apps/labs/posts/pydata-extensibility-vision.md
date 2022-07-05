@@ -5,10 +5,10 @@ author: ralf-gommers
 description: 'In this post, we aim to articulate that vision and suggest a path to making it concrete, focusing on three libraries at the core of the PyData ecosystem: SciPy, scikit-learn and scikit-image. '
 category: [Array API]
 featuredImage:
-  src: ../public/posts/pydata-extensibility-vision/feature-image-scipy-ndimage-dispatcher.png
+  src: /posts/pydata-extensibility-vision/feature-image-scipy-ndimage-dispatcher.png
   alt: 'A schema using SciPy dispatcher to allow users to develop generic code that works with arrays from different libraries.'
 hero:
-  imageSrc: ../public/posts/pydata-extensibility-vision/hero-image.png
+  imageSrc: /posts/pydata-extensibility-vision/hero-image.png
   imageAlt: 'Cropped diagram of proposed dispatch mechanism layers for enabling CuPy and Dask support.'
 ---
 
@@ -39,12 +39,11 @@ design, using the same tools applicable across SciPy, scikit-learn,
 scikit-image and other libraries. In this situation, it's best to have a design
 discussion spanning multiple projects.
 
-
 <p align="center">
     <img
      alt="A diagram showing possible interconnections that would be enabled by Array API."
-     src="../public/posts/pydata-extensibility-vision/nep-0047-library-dependencies.png">
-    <br><i>Possible interconnections enabled in this design, via the Array API standard and Uarray.</i>
+     src="/posts/pydata-extensibility-vision/nep-0047-library-dependencies.png" />
+    <br /><i>Possible interconnections enabled in this design, via the Array API standard and Uarray.</i>
 </p>
 
 Today, SciPy, scikit-learn and scikit-image only work with NumPy arrays. SciPy
@@ -102,8 +101,8 @@ Dispatcher is an abstract mechanism, concretely it could be an
 <p align="center">
     <img
      alt="A schema using NumPy dispatcher."
-     src="../public/posts/pydata-extensibility-vision/scipy-numpy-dispatch.png">
-    <i><br>A SciPy module with NumPy "Dispatcher".</i>
+     src="/posts/pydata-extensibility-vision/scipy-numpy-dispatch.png" />
+    <i><br />A SciPy module with NumPy "Dispatcher".</i>
 </p>
 
 For SciPy and similar libraries, we need to follow NumPy's example and add our
@@ -115,8 +114,8 @@ paths.
 <p align="center">
     <img
      alt="A schema using SciPy dispatcher."
-     src="../public/posts/pydata-extensibility-vision/scipy-ndimage-dispatcher.png">
-    <i><br>A SciPy module with its own "Dispatcher".</i>
+     src="/posts/pydata-extensibility-vision/scipy-ndimage-dispatcher.png" />
+    <i><br />A SciPy module with its own "Dispatcher".</i>
 </p>
 
 A careful reader may note that there's a gray area left: what if some SciPy
@@ -135,22 +134,22 @@ with different kinds of arrays.
 
 The new dispatching system implemented for SciPy and scikits should:
 
-* add the possibility to support alternative array libraries, not just NumPy
-* provide a way to select a different backend for the same array type (examples:
+- add the possibility to support alternative array libraries, not just NumPy
+- provide a way to select a different backend for the same array type (examples:
   `scipy.fft` + alternative CPU FFT libraries like [pyFFTW](https://github.com/pyFFTW/pyFFTW),
   or scikit-learn + [an Intel optimized
   implementation](https://github.com/intel/scikit-learn-intelex))
-* support "array duck types", i.e. custom array objects that are compatible
+- support "array duck types", i.e. custom array objects that are compatible
   with a particular array library via (for example) `__array_function__` or
   `__torch_function__`.
-* be able to extend function signatures in a backward-compatible way on the
+- be able to extend function signatures in a backward-compatible way on the
   base library side (all alternative implementations should not break after the
   change)
-* have a performance overhead that is as low as possible
-* have a reasonably low maintenance overhead (e.g., scikit-learn has [explicitly
+- have a performance overhead that is as low as possible
+- have a reasonably low maintenance overhead (e.g., scikit-learn has [explicitly
   stated](https://scikit-learn.org/stable/faq.html#will-you-add-gpu-support) that
   they cannot afford GPU-specific code in their codebase).
-* ideally be adoptable also for libraries that now default to another array
+- ideally be adoptable also for libraries that now default to another array
   library than NumPy (e.g., PyTorch, JAX, TensorFlow, CuPy, and Dask - they all
   have growing and thriving ecosystem of their own).
 
@@ -160,9 +159,9 @@ are outlined in [the appendix of NumPy Enhancement Proposal (NEP)
 37](https://numpy.org/neps/nep-0037-array-module.html#appendix-design-choices-for-api-overrides);
 they are also applicable outside of NumPy:
 
-* Opt-in vs. opt-out for users
-* Explicit vs. implicit choice of implementation
-* Local vs. non-local vs. global control.
+- Opt-in vs. opt-out for users
+- Explicit vs. implicit choice of implementation
+- Local vs. non-local vs. global control.
 
 ## A concrete design proposal
 
@@ -178,18 +177,18 @@ portions, and one for pure Python code.
 The first dispatching mechanism is based on the [`uarray`
 project](https://uarray.org/), which is a backend dispatcher that allows us to
 choose the relevant function implementation at runtime. The second dispatching
-mechanism is based on the ``__array_namespace__`` method from the Array API
+mechanism is based on the `__array_namespace__` method from the Array API
 standard, which is a method that allows us to get the Array API implementation
 module specific to CuPy (or any other array library) at runtime.
-``__array_namespace__`` will be available in NumPy 1.22 and CuPy v10.0.
+`__array_namespace__` will be available in NumPy 1.22 and CuPy v10.0.
 
 <p align="center">
     <img
      alt="A diagram outlining CuPy support for SciPy and scikits."
-     src="../public/posts/pydata-extensibility-vision/CuPy_support_scipy_scikits_with_details.png">
+     src="/posts/pydata-extensibility-vision/CuPy_support_scipy_scikits_with_details.png" />
     <i>
-    <br>Proposed dispatch mechanism layers for enabling CuPy and Dask support.
-    <br>This will also support any other array library with the same Array API standard support and uarray backends.
+    <br />Proposed dispatch mechanism layers for enabling CuPy and Dask support.
+    <br />This will also support any other array library with the same Array API standard support and uarray backends.
     </i>
 </p>
 
@@ -324,14 +323,14 @@ too simple for our purposes - so let's look at multiple dispatch methods.
 The Python stdlib doesn't provide tools for multiple dispatch, however there
 are several dedicated libraries:
 
-* [multimethod](https://github.com/coady/multimethod) - pure Python
+- [multimethod](https://github.com/coady/multimethod) - pure Python
   implementation of multiple dispatch with caching of argument types
-* [Plum](https://github.com/wesselb/plum) - implementation of multiple
+- [Plum](https://github.com/wesselb/plum) - implementation of multiple
   dispatch that follows the ideas from Julia
-* [multipledispatch](https://github.com/mrocklin/multipledispatch) - similar
+- [multipledispatch](https://github.com/mrocklin/multipledispatch) - similar
   to Plum, only with slightly fewer features and no longer developed; vendored
   in SymPy
-* [uarray](https://github.com/Quansight-Labs/uarray) is a generic
+- [uarray](https://github.com/Quansight-Labs/uarray) is a generic
   backend/multiple dispatch library similar to NumPy's dispatch functionality
   except that the implementation doesn't need to be baked into the array type;
   used in SciPy's `fft` module.
@@ -398,7 +397,7 @@ all Python developers," says Terry Deem, AMD Product Manager for ROCm.
 <p align="left">
     <img
      alt="AMD logo."
-     src="../public/posts/pydata-extensibility-vision/AMD_E_Blk_RGB.png"
-     width="250">
+     src="/posts/pydata-extensibility-vision/AMD_E_Blk_RGB.png"
+     width="250" />
     <i></i>
 </p>
