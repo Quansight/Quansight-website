@@ -31,7 +31,7 @@ export type THeaderLogoProps = {
 
 export type THeaderSkipLinksProps = {
   skipLinksText: string;
-} & TDomainVariant;
+};
 
 export type THeaderProps = TBookingLink &
   TDomainVariant &
