@@ -25,7 +25,7 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
           <ColumnArticleHeader header={header} level={2} />
         </header>
       )}
-      <main className="md:flex md:flex-wrap md:justify-between">
+      <div className="md:flex md:flex-wrap md:justify-between">
         <section className={columnClass}>
           <ColumnArticleSection
             headerLevelModifier={headerLevelModifier}
@@ -59,7 +59,7 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
             />
           </div>
         </section>
-      </main>
+      </div>
     </article>
   );
 };

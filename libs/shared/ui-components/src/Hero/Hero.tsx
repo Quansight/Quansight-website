@@ -68,7 +68,7 @@ export const Hero: FC<THeroProps> = ({
                 'md:top-[28rem] md:left-[10%] md:w-[85%] lg:left-[14%] lg:w-1/2',
             )}
           >
-            <h2
+            <h1
               className={clsx(
                 'font-extrabold leading-[6rem] text-white font-heading',
                 isLargeHero
@@ -77,9 +77,9 @@ export const Hero: FC<THeroProps> = ({
               )}
             >
               {title}
-            </h2>
+            </h1>
             {subTitle && (
-              <h3
+              <div
                 className={clsx(
                   'text-[4rem] font-extrabold leading-[4.8rem] text-white font-heading',
                   isLargeHero && 'text-[3rem] md:text-[4rem]',
@@ -87,7 +87,7 @@ export const Hero: FC<THeroProps> = ({
                 )}
               >
                 {subTitle}
-              </h3>
+              </div>
             )}
           </div>
         )}
