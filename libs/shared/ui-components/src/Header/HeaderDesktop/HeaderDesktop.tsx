@@ -14,14 +14,7 @@ export const HeaderDesktop: FC<THeaderDesktopProps> = ({
   domainVariant,
 }) => {
   return (
-    <div
-      className={clsx(
-        'hidden gap-[4.7rem] justify-between items-center sm:flex sm:px-[3.4rem] lg:gap-[13.7rem] xl:gap-[15.1rem] xl:px-[11.5rem]',
-        domainVariant === DomainVariant.Quansight
-          ? 'bg-transparent'
-          : 'bg-black',
-      )}
-    >
+    <div className="hidden gap-[4.7rem] justify-between items-center sm:flex sm:px-[3.4rem] lg:gap-[13.7rem] xl:gap-[15.1rem] xl:px-[11.5rem]">
       <HeaderLogo logo={logo} domainVariant={domainVariant} />
       <HeaderDesktopNavigation
         navigation={navigation}
