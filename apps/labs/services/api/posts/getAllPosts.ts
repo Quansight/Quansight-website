@@ -1,6 +1,9 @@
 import { getTeam } from '../../../api/utils/getTeam';
 import { TPostsResponse } from '../../../types/storyblok/bloks/posts';
-import { getPostsDirectory } from '../../posts/getPostsDirectory';
+import {
+  getAllPostFileNames,
+  postFileExtensionRegExp,
+} from '../../posts/getAllPostFileNames';
 import { serializePost } from '../../posts/serializePost';
 import { sortPostsByDate } from '../../posts/sortPostsByDate';
 import { DEFAULT_API_OFFSET } from './constants';
@@ -8,14 +11,11 @@ import { DEFAULT_API_OFFSET } from './constants';
 export const getAllPosts = async (): Promise<TPostsResponse> => {
   try {
     const team = await getTeam();
-    const postsFileNames = getPostsDirectory();
-    const postsFileNamesFiltered = postsFileNames.filter(
-      (fileName) => fileName !== 'categories.json',
-    );
+    const postsFileNames = getAllPostFileNames();
 
     const posts = await Promise.all(
-      postsFileNamesFiltered.map(async (fileName) => {
-        const slug = fileName.replace(/\.(md|mdx)$/, '');
+      postsFileNames.map(async (fileName) => {
+        const slug = fileName.replace(postFileExtensionRegExp, '');
         const { content, meta } = await serializePost(fileName, team);
 
         return {
