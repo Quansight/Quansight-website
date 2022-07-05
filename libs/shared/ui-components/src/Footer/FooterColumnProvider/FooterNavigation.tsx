@@ -14,12 +14,11 @@ export const FooterNavigation: FC<TFooterNavigationProps> = ({
     <div className="flex flex-col">
       <ul>
         {links.map(({ linkText, linkUrl, _uid }) => (
-          <li key={_uid}>
-            <FooterLink
-              className="pb-5 text-[1.4rem] font-normal leading-[2.3rem]"
-              linkText={linkText}
-              linkUrl={linkUrl}
-            />
+          <li
+            key={_uid}
+            className="pb-5 text-[1.4rem] font-normal leading-[2.3rem]"
+          >
+            <FooterLink linkText={linkText} linkUrl={linkUrl} />
           </li>
         ))}
       </ul>

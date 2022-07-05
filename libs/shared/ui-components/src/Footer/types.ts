@@ -6,7 +6,6 @@ export enum LinkTargetType {
 }
 
 export type TLinkProps = {
-  className: string;
   linkText?: string;
   linkUrl: TLink;
 };
