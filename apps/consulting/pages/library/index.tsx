@@ -31,6 +31,7 @@ import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 import { filterLibraryTiles } from '../../utils/filterLibraryTiles/filterLibraryTiles';
 import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
+import { getCarouselTiles } from '../../utils/getLibraryTiles/getCarouselTiles';
 import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
 import { paginateLibraryTiles } from '../../utils/paginateLibraryTiles/paginateLibraryTiles';
 
@@ -39,6 +40,7 @@ export const Library: FC<TLibraryProps> = ({
   header,
   footer,
   tiles,
+  carouselTiles,
   preview,
   postTypes,
   postCategories,
@@ -129,7 +131,9 @@ export const Library: FC<TLibraryProps> = ({
         </Page>
       )}
       <div className="px-8 mx-auto lg:px-40 xl:px-[30rem] max-w-layout">
-        <Carousel tiles={tiles} />
+        {carouselTiles?.length > 0 && (
+          <Carousel carouselTiles={carouselTiles} />
+        )}
         <Filters
           postTypes={postTypes}
           postCategories={postCategories}
@@ -170,6 +174,7 @@ export const getStaticProps: GetStaticProps<
       footer,
       postTypes,
       postCategories,
+      carouselTiles: getCarouselTiles(blogArticles),
       tiles: getLibraryTiles({
         blogArticles,
         libraryLinks,

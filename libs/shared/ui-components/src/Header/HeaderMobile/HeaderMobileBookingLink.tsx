@@ -18,7 +18,7 @@ export const HeaderMobileBookingLink: FC<TBookingLinkProps> = ({
     setIsNavigationOpen(false);
     const url =
       domainVariant === DomainVariant.Quansight
-        ? `/about#${BOOK_A_CALL_FORM_ID}`
+        ? `/about-us#${BOOK_A_CALL_FORM_ID}`
         : `/#${BOOK_A_CALL_FORM_ID}`;
 
     router.push(url);

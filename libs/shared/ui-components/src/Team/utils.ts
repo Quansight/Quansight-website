@@ -1,4 +1,5 @@
 import { TTeamMember } from './TeamMember/types';
+import { TTeamToDisplay, TeamDisplay } from './types';
 
 export const filterTeam = (
   team: TTeamMember[] = [],
@@ -19,3 +20,11 @@ export const getRandomMembers = (
 
   return randomlySortedTeam?.slice(0, num);
 };
+
+export const checkNamesOverflow = (team: TTeamToDisplay): boolean | undefined =>
+  team?.reduce((prevValue, { displayName, firstName, lastName }) => {
+    const rawName =
+      displayName === TeamDisplay.Full ? `${firstName} ${lastName}` : firstName;
+
+    return rawName?.length <= 15 && prevValue === false ? false : true;
+  }, false);
