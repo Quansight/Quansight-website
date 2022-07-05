@@ -25,6 +25,7 @@ export const FooterSocialMedia: FC<TFooterSocialMediaProps> = ({
                 imageSrc={linkImage.filename}
                 imageAlt={linkImage.alt}
                 layout="fill"
+                objectFit="contain"
               />
             ) : null}
           </a>
