@@ -1,9 +1,5 @@
 import { FC } from 'react';
 
-import clsx from 'clsx';
-
-import { DomainVariant } from '@quansight/shared/types';
-
 import { HeaderLogo } from '../Common/HeaderLogo';
 import { HeaderDesktopNavigation } from './HeaderDesktopNavigation';
 import { THeaderDesktopProps } from './types';

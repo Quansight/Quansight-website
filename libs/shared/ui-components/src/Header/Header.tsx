@@ -26,11 +26,8 @@ export const Header: FC<THeaderProps> = ({
         domainVariant === DomainVariant.Labs && 'bg-black',
       )}
     >
-      <div className="relative mx-auto max-w-layout">
-        <HeaderSkipLinks
-          skipLinksText={skipLinksText}
-          domainVariant={domainVariant}
-        />
+      <div className="mx-auto max-w-layout">
+        <HeaderSkipLinks skipLinksText={skipLinksText} />
         {deviceSize === DeviceSizeVariant.Mobile && (
           <HeaderMobile
             logo={logo}
