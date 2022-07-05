@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/the-evolution-of-the-scipy-developer-cli/scipy_cli_feature.png
   alt: 'A screenshot of the SciPy CLI, showing the "do.py" command and the various options implemented for the SciPy project'
 hero:
-  imageSrc: /posts/the-evolution-of-the-scipy-developer-cli/blog_hero_var1.png
+  imageSrc: /posts/the-evolution-of-the-scipy-developer-cli/blog_hero_var1.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
 ---
 
