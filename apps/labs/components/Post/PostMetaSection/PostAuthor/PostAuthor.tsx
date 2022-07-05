@@ -16,6 +16,7 @@ export const PostAuthor: FC<TPostAuthorProps> = ({
       <Picture
         width={48}
         height={48}
+        objectFit="cover"
         imageSrc={avatarSrc}
         imageAlt={nickName}
       />
