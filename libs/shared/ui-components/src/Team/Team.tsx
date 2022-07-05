@@ -19,14 +19,14 @@ export const Team: FC<TTeamProps> = ({
 
   return (
     <section className="px-[1.8rem] my-[6rem] mx-auto md:my-[8rem] lg:px-[3rem] xl:px-[18rem] max-w-layout">
-      <h1
+      <h2
         className="
           text-[4rem] font-extrabold leading-[4.9rem] text-center
           md:text-[4.8rem] text-violet font-heading
         "
       >
         {header}
-      </h1>
+      </h2>
       <ul className="flex flex-wrap mt-[1.5rem] md:justify-center">
         {teamToDisplay
           ?.filter((item) => item)
