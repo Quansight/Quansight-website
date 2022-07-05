@@ -9,4 +9,20 @@ export const getHeroProps = (blok: THeroRawData): THeroProps => ({
   subTitle: blok.subTitle,
   variant: blok.variant,
   objectFit: blok.objectFit,
+  backgroundColor: blok?.backgroundColor,
+  imageMobile: {
+    imageSrc: blok?.imageMobile?.filename,
+    imageAlt: blok?.imageMobile?.alt,
+    objectFit: blok?.objectFitMobile,
+  },
+  imageTablet: {
+    imageSrc: blok?.imageTablet?.filename,
+    imageAlt: blok?.imageTablet?.alt,
+    objectFit: blok?.objectFitTablet,
+  },
+  imageDesktop: {
+    imageSrc: blok?.imageDesktop?.filename,
+    imageAlt: blok?.imageDesktop?.alt,
+    objectFit: blok?.objectFitDesktop,
+  },
 });

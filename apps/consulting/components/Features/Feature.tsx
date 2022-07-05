@@ -13,8 +13,13 @@ const Feature: FC<TFeatureProps> = ({ title, text, imageSrc, imageAlt }) => (
       xl:px-[11rem]
     "
   >
-    <div className="">
-      <Picture imageSrc={imageSrc} imageAlt={imageAlt} width={90} height={90} />
+    <div className="relative h-[9rem]">
+      <Picture
+        imageSrc={imageSrc}
+        imageAlt={imageAlt}
+        layout="fill"
+        objectFit="contain"
+      />
     </div>
     <h3
       className="
