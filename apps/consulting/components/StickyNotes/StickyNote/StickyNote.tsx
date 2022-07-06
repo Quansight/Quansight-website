@@ -45,7 +45,7 @@ export const StickyNote: FC<TStickyNoteComponentProps> = ({
       {showButton && (
         <Button
           text={buttonText}
-          linkAriaLabel={`${title} {buttonText}`}
+          linkAriaLabel={`${title} ${buttonText}`}
           link={buttonLink}
         />
       )}
