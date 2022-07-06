@@ -30,6 +30,15 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/about',
+        destination: '/',
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     // The conventions of this return value are described in the Next.js docs:
     // https://nextjs.org/docs/api-reference/next.config.js/rewrites
@@ -49,7 +58,7 @@ const nextConfig = {
       fallback: [
         {
           source: '/:path*',
-          destination: 'https://labs2021.quansight.org/:path*',
+          destination: 'https://quansight-labs.netlify.app/:path*',
         },
       ],
     };

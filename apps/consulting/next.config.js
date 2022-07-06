@@ -64,8 +64,8 @@ const nextConfig = {
       ],
       fallback: [
         {
-          source: '/:path*',
-          destination: 'https://quansight-consulting.wix.com/:path*',
+          source: '/post/:slug',
+          destination: '/page-unavailable',
         },
       ],
     };
