@@ -2,31 +2,44 @@
 
 ## Running project locally
 
-Prerequisites: [Node](https://nodejs.org/en/).
+Prerequisites: 
+
+- [Node](https://nodejs.org/en/)
+- To add the needed environment variables to your local environment, you will
+  need admin access to the [Quansight org in
+  Vercel](https://vercel.com/quansight), or you will need to work with a dev who
+  has this access. 
+- (Optional) [Vercel CLI](https://vercel.com/cli)
 
 To run the website locally on your own machine, you must first clone this git
 repo, `cd` into the repo, then run `npm install`.
 
 This repo contains two projects (websites): Consulting and Labs. You must create
 a `.env` file for each project that you want to develop locally. For example,
-for Quansight Consulting LLC, create `apps/consulting/.env`:
+for Quansight Consulting LLC, you will need to create `apps/consulting/.env`.
 
-```
-STORYBLOK_API_URL=https://gapi.storyblok.com/v1/api
-STORYBLOK_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
-DOMAIN=https://localhost:4200
-NEXT_PUBLIC_STORYBLOK_TOKEN="Secret string that you must get from the Vercel admin portal (link is below)"
+The easiest way to create this file is with the [Vercel command line
+interface](https://vercel.com/cli). For example, this is the command you would
+run to create the `.env` file for Consulting:
+
+```sh
+cd apps/consulting
+vercel env pull .env
 ```
 
-There are two secret values that you must get from the Vercel admin:
+If you're running this for the first time, you will have to configure the Vercel
+CLI. You will need to link the folder to its corresponding project in Vercel:
+
+- ./apps/consulting is linked to `quansight-consulting`
+- ./apps/labs is linked to `quansight-labs`
+
+If you cannot use the Vercel CLI, you can get the needed environment variables
+from the admin portal:
 
 - [consulting environment
   variables](https://vercel.com/quansight/quansight-consulting/settings/environment-variables)
 - [labs environment
   variables](https://vercel.com/quansight/quansight-labs/settings/environment-variables)
-
-If the example .env file above does not match what you read in the Vercel admin,
-use what's in Vercel.
 
 Run `npm run start:consulting` or `npm run start:labs` to start a corresponding
 dev server. Navigate to <http://localhost:4200/> or use localhost preview in
@@ -34,10 +47,10 @@ Storyblok panel. On the localhost the app will automatically reload if you
 change any of the source files, in the Storyblok panel you need to refresh the
 page manually.
 
-Important: whenever the website's dependencies change or are updated, the lock file
-`package-lock.json` will be updated. Whenever `package-lock.json` is updated,
-you should re-run `npm install` (or `npm cli`), so that your local environment's
-dependencies will match the production environment.
+Important: whenever the website's dependencies change or are updated, the lock
+file `package-lock.json` will be updated. Whenever `package-lock.json` is
+updated, you should re-run `npm install` (or `npm cli`), so that your local
+environment's dependencies will match the production environment.
 
 ## Adding new components
 
