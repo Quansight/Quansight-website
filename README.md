@@ -9,7 +9,7 @@ Prerequisites:
   need admin access to the [Quansight org in
   Vercel](https://vercel.com/quansight), or you will need to work with a dev who
   has this access. 
-  - (Optional) [Vercel CLI](https://vercel.com/cli)
+- (Optional) [Vercel CLI](https://vercel.com/cli)
 
 To run the website locally on your own machine, you must first clone this git
 repo, `cd` into the repo, then run `npm install`.
