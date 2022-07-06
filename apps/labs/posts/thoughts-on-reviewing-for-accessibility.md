@@ -2,13 +2,15 @@
 title: 'Checking for accessibility: thoughts and a checklist!'
 author: isabela-presedo-floyd
 published: June 06, 2022
-category: [Accessibility, OSS Experience]
+description: 'A non-exhaustive but totally honest checklist
+for accessibility review'
+category: [Access-centered, OSS Experience]
 featuredImage:
-  src: /posts/thoughts-on-reviewing-for-accessibility/jlabaccess4.png
+  src: /posts/thoughts-on-reviewing-for-accessibility/jlabaccess4_featured.png
   alt: 'Illustration of checkboxes with ticks and checkmarks'
 hero:
-  imageSrc: /posts/thoughts-on-reviewing-for-accessibility/hero.jpeg
-  imageAlt: Lorem ipsum dolor
+  imageSrc: /posts/thoughts-on-reviewing-for-accessibility/jlabaccess4.png
+  imageAlt: 'Illustration of checkboxes with ticks and checkmarks'
 ---
 
 ## JupyterLab Accessibility Journey Part 4
