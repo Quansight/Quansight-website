@@ -37,6 +37,11 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/blog/:yyyy(\\d{4})/:mm(\\d{2})/:slug',
+        destination: '/blog/:slug?yyyy=:yyyy&mm=:mm',
+        permanent: true,
+      },
     ];
   },
   async rewrites() {
@@ -44,6 +49,9 @@ const nextConfig = {
     // https://nextjs.org/docs/api-reference/next.config.js/rewrites
     return {
       afterFiles: [
+        // These rewrites are checked after pages/public files are checked but
+        // before dynamic routes.
+
         // Proxying Plausible through Vercel
         // https://plausible.io/docs/proxy/guides/vercel
         {
@@ -56,9 +64,40 @@ const nextConfig = {
         },
       ],
       fallback: [
+        // These rewrites are checked after both pages/public files and dynamic
+        // routes are checked.
+        {
+          source: '/blog/:slug',
+          has: [
+            {
+              type: 'query',
+              key: 'yyyy',
+              value: '(?<yyyy>\\d{4})',
+            },
+            {
+              type: 'query',
+              key: 'mm',
+              value: '(?<mm>\\d{2})',
+            },
+          ],
+          destination:
+            'https://quansight-labs.netlify.app/blog/:yyyy/:mm/:slug/',
+        },
+        {
+          source: '/:file(.+\\..+)',
+          destination: 'https://quansight-labs.netlify.app/:file',
+        },
+        {
+          // Why is /archive an anomaly on Netlify site?
+          // On Netlify, /2022 redirects to /2022/
+          // But then on same Netlify site, /archive/ redirects to /archive
+          // WTF.
+          source: '/archive',
+          destination: 'https://quansight-labs.netlify.app/archive',
+        },
         {
           source: '/:path*',
-          destination: 'https://quansight-labs.netlify.app/:path*',
+          destination: 'https://quansight-labs.netlify.app/:path*/',
         },
       ],
     };

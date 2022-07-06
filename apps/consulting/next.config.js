@@ -19,6 +19,11 @@ const nextConfig = {
         permanent: false,
         destination: '/library?page=1',
       },
+      {
+        source: '/post/:slug',
+        destination: '/page-unavailable',
+        permanent: false,
+      },
     ];
   },
   nx: {
@@ -51,21 +56,17 @@ const nextConfig = {
     // https://nextjs.org/docs/api-reference/next.config.js/rewrites
     return {
       afterFiles: [
-        // Proxying Plausible through Vercel
-        // https://plausible.io/docs/proxy/guides/vercel
+        // These rewrites are checked after pages/public files are checked but
+        // before dynamic routes.
         {
+          // Proxying Plausible through Vercel:
+          // https://plausible.io/docs/proxy/guides/vercel
           source: '/plausible/js/script.js',
           destination: 'https://plausible.io/js/script.js',
         },
         {
           source: '/plausible/api/event',
           destination: 'https://plausible.io/api/event',
-        },
-      ],
-      fallback: [
-        {
-          source: '/post/:slug',
-          destination: '/page-unavailable',
         },
       ],
     };
