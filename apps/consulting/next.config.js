@@ -19,11 +19,6 @@ const nextConfig = {
         permanent: false,
         destination: '/library?page=1',
       },
-      {
-        source: '/post/:slug',
-        destination: '/page-unavailable',
-        permanent: false,
-      },
     ];
   },
   nx: {
@@ -67,6 +62,12 @@ const nextConfig = {
         {
           source: '/plausible/api/event',
           destination: 'https://plausible.io/api/event',
+        },
+      ],
+      fallback: [
+        {
+          source: '/post/:slug',
+          destination: '/page-unavailable',
         },
       ],
     };
