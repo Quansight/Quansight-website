@@ -25,6 +25,7 @@ export const FeatureArticle: FC<TFeatureArticleProps> = ({
               imageSrc={decorationSrc}
               imageAlt={decorationAlt}
               layout="fill"
+              objectFit="contain"
               priority
             />
           </div>
@@ -35,6 +36,7 @@ export const FeatureArticle: FC<TFeatureArticleProps> = ({
             imageSrc={imageSrc}
             imageAlt={imageAlt}
             layout="fill"
+            objectFit="contain"
             priority
           />
         </div>
