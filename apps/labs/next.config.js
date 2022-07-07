@@ -37,11 +37,6 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
-      {
-        source: '/blog/:yyyy(\\d{4})/:mm(\\d{2})/:slug',
-        destination: '/blog/:slug?yyyy=:yyyy&mm=:mm',
-        permanent: true,
-      },
     ];
   },
   async rewrites() {
@@ -66,23 +61,6 @@ const nextConfig = {
       fallback: [
         // These rewrites are checked after both pages/public files and dynamic
         // routes are checked.
-        {
-          source: '/blog/:slug',
-          has: [
-            {
-              type: 'query',
-              key: 'yyyy',
-              value: '(?<yyyy>\\d{4})',
-            },
-            {
-              type: 'query',
-              key: 'mm',
-              value: '(?<mm>\\d{2})',
-            },
-          ],
-          destination:
-            'https://quansight-labs.netlify.app/blog/:yyyy/:mm/:slug/',
-        },
         {
           source: '/:file(.+\\..+)',
           destination: 'https://quansight-labs.netlify.app/:file',
