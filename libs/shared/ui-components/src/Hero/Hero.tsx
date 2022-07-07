@@ -49,7 +49,7 @@ export const Hero: FC<THeroProps> = ({
             imageTablet={imageTablet}
             imageDesktop={imageDesktop}
           />
-        ) : (
+        ) : imageSrc ? (
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -57,7 +57,7 @@ export const Hero: FC<THeroProps> = ({
             objectFit={objectFit || 'cover'}
             objectPosition="center"
           />
-        )}
+        ) : null}
         {title && (
           <div
             className={clsx(
