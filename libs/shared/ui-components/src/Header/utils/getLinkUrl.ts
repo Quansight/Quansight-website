@@ -8,6 +8,6 @@ export const getLinkUrl = (
 ): string => {
   const isHomePageSlug =
     linkUrl.cached_url === 'homepage' || linkUrl.cached_url === 'home';
-  const baseUrl = isHomePageSlug ? '/' : linkUrl.cached_url;
-  return queryParams ? `/${baseUrl}${queryParams}` : `/${baseUrl}`;
+  const baseUrl = isHomePageSlug ? '/' : `/${linkUrl.cached_url}`;
+  return queryParams ? `${baseUrl}${queryParams}` : `${baseUrl}`;
 };
