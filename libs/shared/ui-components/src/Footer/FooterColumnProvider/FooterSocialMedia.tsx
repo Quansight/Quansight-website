@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import Picture from '../../Picture/Picture';
+import { FooterLink } from '../FooterLink/FooterLink';
 import { TFooterSocialMediaProps } from '../types';
 
 export const FooterSocialMedia: FC<TFooterSocialMediaProps> = ({
@@ -12,23 +12,9 @@ export const FooterSocialMedia: FC<TFooterSocialMediaProps> = ({
       {title}
     </h2>
     <ul className="flex gap-12 lg:gap-8 xl:gap-12">
-      {links.map(({ linkImage, linkUrl, _uid }) => (
-        <li key={_uid}>
-          <a
-            target="_blank"
-            href={linkUrl.url}
-            rel="noreferrer"
-            className="block relative w-10 h-10 brightness-0 lg:w-8 lg:h-8 xl:w-10 xl:h-10 xl:brightness-100"
-          >
-            {linkImage ? (
-              <Picture
-                imageSrc={linkImage.filename}
-                imageAlt={linkImage.alt}
-                layout="fill"
-                objectFit="contain"
-              />
-            ) : null}
-          </a>
+      {links.map((link) => (
+        <li key={link._uid}>
+          <FooterLink {...link} />
         </li>
       ))}
     </ul>
