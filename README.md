@@ -2,13 +2,13 @@
 
 ## Running project locally
 
-Prerequisites: 
+Prerequisites:
 
 - [Node](https://nodejs.org/en/)
 - To add the needed environment variables to your local environment, you will
   need admin access to the [Quansight org in
   Vercel](https://vercel.com/quansight), or you will need to work with a dev who
-  has this access. 
+  has this access.
 - (Optional) [Vercel CLI](https://vercel.com/cli)
 
 To run the website locally on your own machine, you must first clone this git
@@ -95,7 +95,7 @@ Every post is structured with two main sections - the `meta` and `content` secti
 - `author` - Unique slug of the author (from Storyblok) usually looks like: `jon-doe`. Based on this property blog post page will display proper info about author (and image).
 - `category` - Array of categories for example `[Machine Learning]`. All categories should be the same as in the previously mentioned `categories.json` file. Important note: Categories are case sensitive.
 - `featuredImage` - Object with properties: `src` and `alt`. The `src` property is a path to featured image which is displayed on the posts list on the`/blog` page. The `alt` property is alternative text for the image. The image should be added to the `apps/labs/public/posts/<post-name>` directory, example: `apps/labs/public/posts/hello-world-post`. There is no need to provide full image path so the pathname should start with `/posts/`.
-- `hero` - Object with properties: `imageSrc` and `imageAlt`. The `imageSrc` property is a path to hero image which is displayed on the post page between the nav bar and the blog heading title. The `imageAlt` property is alternative text for the image. The image should be added to the `apps/labs/public/posts/<post-name>` directory, example: `apps/labs/public/posts/hello-world-post`. There is no need to provide full image path so the pathname should start with `/posts/`.
+- `hero` - Hero object can have two different structures. One is object with properties: `imageSrc` and `imageAlt`. The `imageSrc` property is a path to hero image which is displayed on the post page between the nav bar and the blog heading title. The `imageAlt` property is alternative text for the image. The image should be added to the `apps/labs/public/posts/<post-name>` directory, example: `apps/labs/public/posts/hello-world-post`. The second structure is an object with properties: `imageMobile`, `imageTablet` and `imageDesktop`. Every properties also contains `imageSrc` and `imageAlt` properties. There is no need to provide full image path so the pathname should start with `/posts/`.
 
 #### Example of blog post meta section
 
