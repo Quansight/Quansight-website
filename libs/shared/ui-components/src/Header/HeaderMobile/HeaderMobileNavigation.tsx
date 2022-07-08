@@ -2,6 +2,8 @@ import { FC } from 'react';
 
 import clsx from 'clsx';
 
+import { DomainVariant } from '@quansight/shared/types';
+
 import { HeaderMobileBookingLink } from './HeaderMobileBookingLink';
 import { HeaderMobileNavigationProvider } from './HeaderMobileNavigationProvider/HeaderMobileNavigationProvider';
 import { THeaderMobileNavigationProps } from './types';
@@ -37,11 +39,13 @@ export const HeaderMobileNavigation: FC<THeaderMobileNavigationProps> = ({
           </li>
         ))}
       </ul>
-      <HeaderMobileBookingLink
-        bookACallLinkText={bookACallLinkText}
-        domainVariant={domainVariant}
-        setIsNavigationOpen={setIsNavigationOpen}
-      />
+      {domainVariant === DomainVariant.Quansight && (
+        <HeaderMobileBookingLink
+          bookACallLinkText={bookACallLinkText}
+          domainVariant={domainVariant}
+          setIsNavigationOpen={setIsNavigationOpen}
+        />
+      )}
     </div>
   </nav>
 );
