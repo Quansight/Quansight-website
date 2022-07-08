@@ -1,6 +1,3 @@
-import { readdir } from 'fs/promises';
-import path from 'path';
-
 import { FC } from 'react';
 
 import clsx from 'clsx';
@@ -23,7 +20,6 @@ import { getHeader } from '../../api/utils/getHeader';
 import { LinkWithArrow } from '../../components/LinkWithArrow/LinkWithArrow';
 import { FeaturedPosts } from '../../components/Post/FeaturedPosts/FeaturedPosts';
 import { PostMetaSection } from '../../components/Post/PostMetaSection/PostMetaSection';
-import { POSTS_DIRECTORY_PATH } from '../../services/api/posts/constants';
 import { getPost } from '../../services/api/posts/getPost';
 import { getPostsByCategory } from '../../services/api/posts/getPostsByCategory';
 import { blogAllowedComponents } from '../../services/blogAllowedComponents';
@@ -77,7 +73,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
         <div className="mt-[1.8rem]">
           <PostMetaSection {...post.meta} />
 
-          <div className="w-full max-w-none prose">
+          <div className="w-full max-w-none prose hover:prose-a:text-violet focus:prose-a:text-violet">
             <MDXRemote {...post.content} components={blogAllowedComponents} />
           </div>
         </div>
