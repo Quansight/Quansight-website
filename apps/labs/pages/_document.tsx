@@ -14,11 +14,12 @@ const Document: FC = () => {
       <body>
         <Main />
         <NextScript />
+        {/* For more info about this script, see note in labs/next.config.js */}
         <script
           defer
-          data-domain="yourdomain.com" // TODO to be changed before deploy
-          data-api="/plausible/api/event"
-          src="/plausible/js/script.js"
+          data-domain="labs.quansight.org"
+          data-api="/p7e/api/event"
+          src="/p7e/js/script.js"
         />
       </body>
     </Html>
