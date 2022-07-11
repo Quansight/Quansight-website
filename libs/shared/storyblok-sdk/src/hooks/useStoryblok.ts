@@ -11,7 +11,7 @@ interface CustomWindow extends Window {
 declare const window: CustomWindow;
 
 export const Storyblok = new StoryblokClient({
-  accessToken: process.env['NEXT_PUBLIC_STORYBLOK_TOKEN'],
+  accessToken: process.env['STORYBLOK_TOKEN'],
   cache: {
     clear: 'auto',
     type: 'memory',

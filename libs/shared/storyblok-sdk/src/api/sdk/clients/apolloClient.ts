@@ -1,10 +1,10 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 export const apolloClient = new ApolloClient({
-  uri: process.env['STORYBLOK_API_URL'],
+  uri: 'https://gapi.storyblok.com/v1/api',
   headers: {
     token: process.env['STORYBLOK_TOKEN'] || '',
-    version: process.env['STORYBLOK_TOKEN_VERSION'] || 'draft',
+    version: 'published',
   },
 
   cache: new InMemoryCache(),
