@@ -21,7 +21,7 @@ export const Header: FC<THeaderProps> = ({
   return (
     <header
       className={clsx(
-        'fixed inset-x-0 top-0 z-20 mx-auto text-white sm:absolute',
+        'fixed inset-x-0 top-0 z-20 mx-auto text-[#efefef] sm:absolute',
         domainVariant === DomainVariant.Quansight && 'bg-transparent',
         domainVariant === DomainVariant.Labs && 'bg-black',
       )}

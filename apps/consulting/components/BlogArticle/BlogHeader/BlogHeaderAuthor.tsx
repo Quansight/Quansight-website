@@ -34,7 +34,7 @@ export const BlogHeaderAuthor: FC<TBlogHeaderAuthorProps> = ({
         >
           {githubNick}
         </a>
-        <p className="text-[1.9rem] font-extrabold leading-[2.7rem] underline">
+        <p className="text-[1.9rem] font-extrabold leading-[2.7rem]">
           {authorsName}
         </p>
       </div>
