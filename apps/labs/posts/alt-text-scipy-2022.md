@@ -2,7 +2,7 @@
 title: SciPy 2022 Alt Text Scavenger Hunt
 author: tony-fast
 published: July 12, 2022
-description: 'Lorem ipsum dolor sit amet'
+description:"Announcing the SciPy 2022 Alt Text Scavenger Hunt"
 category: [Accessbility, Open SOurce]
 # featuredImage:
 #   src: /posts/hello-world-post/featured.png
