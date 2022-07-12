@@ -15,12 +15,14 @@ const Document: FC = () => {
         <Main />
         <NextScript />
         {/* For more info about this script, see note in consulting/next.config.js */}
-        <script
-          defer
-          data-domain="quansight.com"
-          data-api="/p7e/api/event"
-          src="/p7e/js/script.js"
-        />
+        {process.env.VERCEL_ENV === 'production' && (
+          <script
+            defer
+            data-domain="quansight.com"
+            data-api="/p7e/api/event"
+            src="/p7e/js/script.js"
+          />
+        )}
       </body>
     </Html>
   );
