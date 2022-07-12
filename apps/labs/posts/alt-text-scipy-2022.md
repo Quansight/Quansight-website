@@ -2,14 +2,14 @@
 title: SciPy 2022 Accessibility Awareness Programs
 author: tony-fast
 published: July 12, 2022
-description:"Announcing the SciPy 2022 Accessibility Awareness Efforts"
-category: [Accessbility, Open SOurce]
+description: "Announcing the SciPy 2022 Accessibility Awareness Efforts"
+category: [Accessibility]
 # featuredImage:
 #   src: /posts/hello-world-post/featured.png
 #   alt: 'Excellent alt-text describing the featured image'
-# hero:
-#   imageSrc: https://user-images.githubusercontent.com/4236275/178565586-86a92247-c7dd-4a60-a580-a26dd85f16ae.png
-#   imageAlt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'
+hero:
+ imageSrc: https://user-images.githubusercontent.com/4236275/178565586-86a92247-c7dd-4a60-a580-a26dd85f16ae.png
+ imageAlt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'
 ---
 
 It is SciPy this week! It's one of the biggest community events in our corner of the world. We are so excited for the festivities, the talks, and see hear all our friends new ideas.
