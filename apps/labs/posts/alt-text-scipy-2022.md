@@ -1,15 +1,15 @@
 ---
-title: SciPy 2022 Alt Text Scavenger Hunt
+title: SciPy 2022 Accessibility Awareness Programs
 author: tony-fast
 published: July 12, 2022
-description:"Announcing the SciPy 2022 Alt Text Scavenger Hunt"
+description:"Announcing the SciPy 2022 Accessibility Awareness Efforts"
 category: [Accessbility, Open SOurce]
 # featuredImage:
 #   src: /posts/hello-world-post/featured.png
 #   alt: 'Excellent alt-text describing the featured image'
 # hero:
-#   imageSrc: /posts/hello-world-post/hero.jpeg
-#   imageAlt: 'Excellent alt-text describing the hero image'
+#   imageSrc: https://user-images.githubusercontent.com/4236275/178565586-86a92247-c7dd-4a60-a580-a26dd85f16ae.png
+#   imageAlt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'
 ---
 
 It is SciPy this week! It's one of the biggest community events in our corner of the world. We are so excited for the festivities, the talks, and see hear all our friends new ideas.
@@ -19,7 +19,7 @@ Events, and technology, are increasingly more complex these days. This year SciP
 1. We're introducing a pilot open source scavenger hunt where you can:
    1. Contribute to popular open source projects.
    2. Improve the alt text of open source documentation.
-2. We'll distribute a print and digital zine about disability and accessibility advocacy.
+2. [__How to Write Alt Text for Scientific Diagrams and Visualization__][zine] digital (and print) zine.
 
 ## The scavenger hunt
 
@@ -66,6 +66,7 @@ Thank y'all for taking the time to prepare for the scavenger hunt, and wanting t
 [bokehqr]: https://user-images.githubusercontent.com/4236275/177208706-304e0176-969e-48a0-becd-730a8c92eb01.png
 [placeholder]: #
 [placeholderqr]: https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fgithub.com%2Falt-text-task-force&chs=300x300&choe=UTF-8&chld=L|2
+[zine]: https://heyzine.com/flip-book/f47006ad71.html
 
 [^1]: The Alt Text workshop format started from Project Jupyter. The goal was a low-code, no-git workshop that worked for a lot of people. You can learn more about the history in our past blog posts, or even learn to run an event yourself
 [^2]: These alt text events have been a community for mainstay for over a year. In these [low-code workshops](https://labs.quansight.org/blog/2021/09/low-code-contributions-through-github) we have been able to remove the complexities of git in contributing to open source. These events have been run [in the past with several communities](https://github.com/isabela-pf/a11y-events/tree/main/workshop-resources/alt-text#past-events).
