@@ -37,7 +37,7 @@ Thank y'all for taking the time to prepare for the scavenger hunt, and wanting t
 - Follow each link/code to a pull request.
 - Follow the pull request instructions to modify the respective alt text in markdown and rst formats.
 
-| JupyterLab [^2]     | SciPy                 | Dask                | Bokeh                 |
+| JupyterLab [^1]     | SciPy                 | Dask                | Bokeh                 |
 | ------------------- | --------------------- | ------------------- | --------------------- |
 | [![][jlabqr]][jlab] | [![][scipyqr]][scipy] | [![][daskqr]][dask] | [![][bokehqr]][bokeh] |
 
@@ -68,5 +68,4 @@ Thank y'all for taking the time to prepare for the scavenger hunt, and wanting t
 [placeholderqr]: https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fgithub.com%2Falt-text-task-force&chs=300x300&choe=UTF-8&chld=L|2
 [zine]: https://heyzine.com/flip-book/f47006ad71.html
 
-[^1]: The Alt Text workshop format started from Project Jupyter. The goal was a low-code, no-git workshop that worked for a lot of people. You can learn more about the history in our past blog posts, or even learn to run an event yourself
-[^2]: These alt text events have been a community for mainstay for over a year. In these [low-code workshops](https://labs.quansight.org/blog/2021/09/low-code-contributions-through-github) we have been able to remove the complexities of git in contributing to open source. These events have been run [in the past with several communities](https://github.com/isabela-pf/a11y-events/tree/main/workshop-resources/alt-text#past-events).
+[^1]: These alt text events, that started in Project Jupyter, have been a community mainstay for over a year. In these [low-code workshops](https://labs.quansight.org/blog/2021/09/low-code-contributions-through-github) we have been able to remove the complexities of git in contributing to open source. These events have been run [in the past with several communities](https://github.com/isabela-pf/a11y-events/tree/main/workshop-resources/alt-text#past-events).
