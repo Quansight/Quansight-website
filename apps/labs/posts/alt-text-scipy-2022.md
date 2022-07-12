@@ -57,8 +57,6 @@ Thank y'all for taking the time to prepare for the scavenger hunt, and wanting t
 - Give the project maintainers time to merge your submissions.
 - Enjoy [__How to Write Alt Text for Scientific Diagrams and Visualization__][zine]
 
-  <iframe src="https://heyzine.com/flip-book/f47006ad71.html" height="600" width="100%"></iframe>
-
 [jlab]: https://github.com/isabela-pf/jupyterlab/pull/1
 [jlabqr]: https://user-images.githubusercontent.com/4236275/176369870-6fd6501f-288d-48c5-8cc3-4eaad0a35ee1.png
 [scipy]: https://github.com/scipy/scipy/pull/16546
