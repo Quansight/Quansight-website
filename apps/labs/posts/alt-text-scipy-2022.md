@@ -8,7 +8,7 @@ category: [Accessibility]
 #   src: /posts/hello-world-post/featured.png
 #   alt: 'Excellent alt-text describing the featured image'
 hero:
- imageSrc: https://user-images.githubusercontent.com/4236275/178565586-86a92247-c7dd-4a60-a580-a26dd85f16ae.png
+ imageSrc: /posts/ally-scavenger-hunt-post-hero-image.png
  imageAlt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'
 ---
 
