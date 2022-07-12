@@ -1,6 +1,6 @@
 ---
 title: SciPy 2022 Alt Text Scavenger Hunt
-author: Tony Fast
+author: tony-fast
 published: July 12, 2022
 description: 'Lorem ipsum dolor sit amet'
 category: [Accessbility, Open SOurce]
@@ -14,50 +14,47 @@ category: [Accessbility, Open SOurce]
 
 It is SciPy this week! It's one of the biggest community events in our corner of the world. We are so excited for the festivities, the talks, and see hear all our friends new ideas.
 
-Events, and technology, are increasingly more complex these days. This year SciPy is in-person and virtual, and we wanted to bring y'all two things that fit these constraints: 
+Events, and technology, are increasingly more complex these days. This year SciPy is in-person and virtual, and we wanted to bring y'all two things that fit these constraints:
 
 1. We're introducing a pilot open source scavenger hunt where you can:
-	1. Contribute to popular open source projects.
-	2. Improve the alt text of open source documentation.
-2. We'll distribute  a print and digital zine about disability and accessibility advocacy.
+   1. Contribute to popular open source projects.
+   2. Improve the alt text of open source documentation.
+2. We'll distribute a print and digital zine about disability and accessibility advocacy.
 
 ## The scavenger hunt
 
-First, we need to acknowledge the four projects participating in this pilot: 
+First, we need to acknowledge the four projects participating in this pilot:
 
-1. Project Jupyter[^history]
+1. Project Jupyter[^1]
 2. SciPy
 3. Dask
 4. Bokeh
 
 Thank y'all for taking the time to prepare for the scavenger hunt, and wanting to improve your documentation.
 
-
 ## How to participate.
 
-* Follow each link/code to a pull request.
-* Follow the pull request instructions to modify the respective alt text in [markdown] and [rst] formats.
+- Follow each link/code to a pull request.
+- Follow the pull request instructions to modify the respective alt text in markdown and rst formats.
 
-| JupyterLab    [^history]  | SciPy   | Dask | Bokeh |
-|-----------------|----------------------|-------|---|
-| [![][jlabqr]][jlab]  | [![][scipyqr]][scipy] | [![][daskqr]][dask] |  [![][bokehqr]][bokeh] |
+| JupyterLab [^2]     | SciPy                 | Dask                | Bokeh                 |
+| ------------------- | --------------------- | ------------------- | --------------------- |
+| [![][jlabqr]][jlab] | [![][scipyqr]][scipy] | [![][daskqr]][dask] | [![][bokehqr]][bokeh] |
 
 ## Why participate?
 
-* *low barrier to entry* to participate in open source projects
-* *improve the accessibility of open source documentation* 
-* *learn about more alt text*
+- _low barrier to entry_ to participate in open source projects
+- _improve the accessibility of open source documentation_
+- _learn about more alt text_
 
 ## What next?
 
-* Start submitting and improving your alt text!
-    * [Working Jupyter alt text guide](https://github.com/Quansight-Labs/jupyter-accessibility-workshops/blob/main/docs/alt-text-guide.md#diagrams-charts-plots)
-    * [Chartability heuristics for accessible visualizations](https://chartability.fizz.studio/)
-* Stay tuned later this week to learn how you fight inaccessibility with our zine release.
-* Use more alt text in your social media and documentation.
-* Give the project maintainers time to merge your submissions.
-
-<!-- ![image](https://user-images.githubusercontent.com/4236275/176038647-78e2cb4a-5b17-4b15-8665-6b2990c68406.png) -->
+- Start submitting and improving your alt text!
+  - [Working Jupyter alt text guide](https://github.com/Quansight-Labs/jupyter-accessibility-workshops/blob/main/docs/alt-text-guide.md#diagrams-charts-plots)
+  - [Chartability heuristics for accessible visualizations](https://chartability.fizz.studio/)
+- Stay tuned later this week to learn how you fight inaccessibility with our zine release.
+- Use more alt text in your social media and documentation.
+- Give the project maintainers time to merge your submissions.
 
 [jlab]: https://github.com/isabela-pf/jupyterlab/pull/1
 [jlabqr]: https://user-images.githubusercontent.com/4236275/176369870-6fd6501f-288d-48c5-8cc3-4eaad0a35ee1.png
@@ -69,9 +66,6 @@ Thank y'all for taking the time to prepare for the scavenger hunt, and wanting t
 [bokehqr]: https://user-images.githubusercontent.com/4236275/177208706-304e0176-969e-48a0-becd-730a8c92eb01.png
 [placeholder]: #
 [placeholderqr]: https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fgithub.com%2Falt-text-task-force&chs=300x300&choe=UTF-8&chld=L|2
-[^history]: The Alt Text workshop format started from Project Jupyter. The goal was a low-code, no-git workshop that worked for a lot of people. You can learn more about the history in our past blog posts, or even learn to run an event yourself
-[markdown]: #
-[rst]: #
-[tips]: #
 
-[^history]: These alt text events have been a community for mainstay for over a year.  In these [low-code workshops](https://labs.quansight.org/blog/2021/09/low-code-contributions-through-github) we have been able to remove the complexities of git in contributing to open source. These events have been run [in the past with several communities](https://github.com/isabela-pf/a11y-events/tree/main/workshop-resources/alt-text#past-events).
+[^1]: The Alt Text workshop format started from Project Jupyter. The goal was a low-code, no-git workshop that worked for a lot of people. You can learn more about the history in our past blog posts, or even learn to run an event yourself
+[^2]: These alt text events have been a community for mainstay for over a year. In these [low-code workshops](https://labs.quansight.org/blog/2021/09/low-code-contributions-through-github) we have been able to remove the complexities of git in contributing to open source. These events have been run [in the past with several communities](https://github.com/isabela-pf/a11y-events/tree/main/workshop-resources/alt-text#past-events).
