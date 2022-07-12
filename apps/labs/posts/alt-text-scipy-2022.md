@@ -16,10 +16,10 @@ It is SciPy this week! It's one of the biggest community events in our corner of
 
 Events, and technology, are increasingly more complex these days. This year SciPy is in-person and virtual, and we wanted to bring y'all two things that fit these constraints:
 
-1. We're introducing a pilot open source scavenger hunt where you can:
+1. We're introducing a pilot open source [scavenger hunt](#the-scavenger-hunt) where you can:
    1. Contribute to popular open source projects.
    2. Improve the alt text of open source documentation.
-2. [__How to Write Alt Text for Scientific Diagrams and Visualization__][zine] digital (and print) zine.
+2. [__How to Write Alt Text for Scientific Diagrams and Visualization__][zine] digital (and print) zine created by [@marsbarlee](https://github.com/marsbarlee).
 
 ## The scavenger hunt
 
