@@ -14,7 +14,9 @@ hero:
   imageAlt: 'An illustration of a black hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
 ---
 
-Additional authors: Tania Allard, Melissa Mendonça, Rohit Goswami, Tony Fast, Dillon Roach, Dharhas Pothina, Eric Kelly.
+Additional authors: Tania Allard, Melissa Mendonça, Rohit Goswami, Tony Fast, Dillon Roach, 
+Dharhas Pothina, Eric Kelly.
+
 We write code. We write issues. We write documentation. We write notes to 
 ourselves, messages to each other, and guidelines to unite teams across 
 projects.
