@@ -1,7 +1,7 @@
 ---
 title: SciPy 2022 Accessibility Awareness Programs
 author: tony-fast
-published: July 12, 2022
+published: July 13, 2022
 description: "Announcing the SciPy 2022 Accessibility Awareness Efforts"
 category: [Accessibility]
 # featuredImage:
@@ -21,7 +21,7 @@ Events, and technology, are increasingly more complex these days. This year SciP
    2. Improve the alt text of open source documentation.
 2. A free digital _and limited print_ zine called [__How to Write Alt Text for Scientific Diagrams and Visualization__][zine] by [@marsbarlee](https://github.com/marsbarlee).
 
-## The scavenger hunt
+## The scavenger hunt.
 
 First, we need to acknowledge the four projects participating in this pilot:
 
