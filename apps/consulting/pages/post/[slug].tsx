@@ -87,7 +87,7 @@ export const getStaticProps: GetStaticProps<
     const article = item.content.body.filter(
       (body) => body.component === 'blog-article',
     )[0];
-    if (article.author.content.firstName === 'Ralf') {
+    if (article.author.content === undefined) {
       console.log('article.postTitle', article.postTitle);
       console.log('article.author', article.author);
     }
