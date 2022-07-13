@@ -3,7 +3,7 @@ title: SciPy 2022 Accessibility Awareness Programs
 author: tony-fast
 published: July 13, 2022
 description: "Announcing the SciPy 2022 Accessibility Awareness Efforts"
-category: [Accessibility]
+category: [Access-centered]
 # featuredImage:
 #   src: /posts/hello-world-post/featured.png
 #   alt: 'Excellent alt-text describing the featured image'
