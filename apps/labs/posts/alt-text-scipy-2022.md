@@ -35,7 +35,7 @@ Thank y'all for taking the time to prepare for the scavenger hunt, and wanting t
 ## How to participate.
 
 - Follow each link/code to a pull request.
-- Follow the pull request instructions to modify the respective alt text in markdown and rst formats.
+- Follow the pull request instructions to modify the respective alt text in markdown or rst format, as appropriate.
 
 | JupyterLab [^1]     | SciPy                 | Dask                | Bokeh                 |
 | ------------------- | --------------------- | ------------------- | --------------------- |
