@@ -88,7 +88,7 @@ export const getStaticProps: GetStaticProps<
       const article = item.content.body.filter(
         (body) => body.component === 'blog-article',
       )[0];
-      return [article.postTitle, article.author.content];
+      return [article.postTitle, article.author];
     }),
   );
   const libraryTiles = getLibraryTiles({
