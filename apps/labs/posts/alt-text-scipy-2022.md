@@ -45,7 +45,7 @@ Thank y'all for taking the time to prepare for the scavenger hunt, and wanting t
 
 - _low barrier to entry_ to participate in open source projects
 - _improve the accessibility of open source documentation_
-- _learn about more alt text_
+- _learn more about alt text_
 
 ## What next?
 
