@@ -14,12 +14,6 @@ const Document: FC = () => {
       <body>
         <Main />
         <NextScript />
-        <script
-          defer
-          data-domain="yourdomain.com" // TODO to be changed before deploy
-          data-api="/plausible/api/event"
-          src="/plausible/js/script.js"
-        />
       </body>
     </Html>
   );
