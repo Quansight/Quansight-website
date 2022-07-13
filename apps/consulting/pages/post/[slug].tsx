@@ -78,6 +78,19 @@ export const getStaticProps: GetStaticProps<
     relations: LIBRARY_AUTHOR_RELATION,
     prefix: ARTICLES_DIRECTORY_SLUG,
   });
+  console.log(
+    'blogArticles.items.length, blogArticles.total',
+    blogArticles.items.length,
+    blogArticles.total,
+  );
+  console.log(
+    blogArticles.items.map((item) => {
+      const article = item.content.body.filter(
+        (body) => body.component === 'blog-article',
+      )[0];
+      return [article.postTitle, article.author.content];
+    }),
+  );
   const libraryTiles = getLibraryTiles({
     blogArticles,
     libraryLinks,
