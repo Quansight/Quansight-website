@@ -56,11 +56,16 @@ const nextConfig = {
         {
           // Proxying Plausible through Vercel:
           // https://plausible.io/docs/proxy/guides/vercel
-          source: '/plausible/js/script.js',
+
+          // `p7e` stands for Plausible. Why not just use `plausible`? The docs
+          // say: Choose a generic or irrelevant name for the subdirectory. If
+          // you choose something like analytics or plausible, it might get
+          // blocked in the future.
+          source: '/p7e/js/script.js',
           destination: 'https://plausible.io/js/script.js',
         },
         {
-          source: '/plausible/api/event',
+          source: '/p7e/api/event',
           destination: 'https://plausible.io/api/event',
         },
       ],
