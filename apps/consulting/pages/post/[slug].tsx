@@ -83,14 +83,15 @@ export const getStaticProps: GetStaticProps<
     blogArticles.items.length,
     blogArticles.total,
   );
-  console.log(
-    blogArticles.items.map((item) => {
-      const article = item.content.body.filter(
-        (body) => body.component === 'blog-article',
-      )[0];
-      return [article.postTitle, article.author.content];
-    }),
-  );
+  blogArticles.items.map((item) => {
+    const article = item.content.body.filter(
+      (body) => body.component === 'blog-article',
+    )[0];
+    if (article.author.content.firstName === 'Ralf') {
+      console.log('article.postTitle', article.postTitle);
+      console.log('article.author', article.author);
+    }
+  });
   const libraryTiles = getLibraryTiles({
     blogArticles,
     libraryLinks,
