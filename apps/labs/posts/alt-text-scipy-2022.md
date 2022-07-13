@@ -12,7 +12,7 @@ hero:
  imageAlt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'
 ---
 
-It is SciPy this week! It's one of the biggest community events in our corner of the world. We are so excited for the festivities, the talks, and see hear all our friends new ideas.
+It is SciPy this week! It's one of the biggest community events in our corner of the world. We are so excited for the festivities, the talks, and to see & hear all our friends' new ideas.
 
 Events, and technology, are increasingly more complex these days. This year SciPy is in-person and virtual, and we wanted to bring y'all two things that fit these constraints:
 
