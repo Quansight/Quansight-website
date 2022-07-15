@@ -12,6 +12,10 @@ export const getBlogArticlesProps = (blogArticles: PageItems): TTiles =>
       ),
     };
 
+    if ( typeof blogArticleBodyItem.author.content === 'undefined' ) {
+      console.log(blogArticleBodyItem);
+    }
+
     /* blogArticleBodyItem.author could be a Promise */
     let author = '';
     let author_obj = blogArticleBodyItem.author;
