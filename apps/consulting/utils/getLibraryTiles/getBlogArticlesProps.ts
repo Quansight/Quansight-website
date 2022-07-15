@@ -21,12 +21,14 @@ export const getBlogArticlesProps = (blogArticles: PageItems): TTiles =>
     let author = '';
     let author_obj = blogArticleBodyItem.author;
     if (typeof author_obj === 'object' && typeof author_obj.then === 'function') {
+      console.log('Author with Promise value found, attempting to process.')
       let promise_author = {author: ''};
       // author_obj.then( auth => promise_author.author = getAuthorName(auth.content.firstName, auth.content.lastName) );
       // author = promise_author.author
       author_obj.then( auth => console.log(`Resolved Author: ${auth}`) );
       author = "Placeholder Author Name";
     } else {
+      console.log('Resolved author found')
       author = getAuthorName(author_obj.content.firstName, author_obj.content.lastName);
     };
 
