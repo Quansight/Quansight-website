@@ -73,8 +73,6 @@ const nextConfig = {
           source: '/p7e/api/event',
           destination: 'https://plausible.io/api/event',
         },
-      ],
-      fallback: [
         {
           source: '/post/:slug',
           destination: '/page-unavailable',
