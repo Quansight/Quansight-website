@@ -88,6 +88,8 @@ export const getStaticProps: GetStaticProps<
   ).category;
   const currentPostID = data.uuid;
 
+  console.log(data);
+
   return {
     props: {
       data,
