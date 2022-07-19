@@ -79,6 +79,10 @@ const nextConfig = {
           source: '/post/:slug',
           destination: '/page-unavailable',
         },
+        {
+          source: '/test-missing',
+          destination: '/page-unavailable',
+        },
       ],
     };
   },
