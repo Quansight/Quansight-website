@@ -72,10 +72,10 @@ same. There are three major stages, each with its own steps.
 
 Code changes move through three stages, each of which corresponds to a branch in
 git: a feature branch, then the `develop` branch, then `main`. When your code
-gets merged to the main branch, Vercel deploys it the public website.
+gets merged to the `main` branch, Vercel deploys it the public website.
 
 You should never merge your code into the `develop` branch unless it's ready for
-deployment (via merge to main). Putting your code into the `develop` branch is a
+deployment (via merge to `main`). Putting your code into the `develop` branch is a
 signal to the rest of your team that says: this code is ready to run on the
 public website.
 
@@ -109,7 +109,7 @@ The Vercel app is installed on GitHub. The app kicks off deployments on Vercel
 whenever someone opens a pull request or pushes a commit to the repo. All of
 these deployments are preview deployments (meaning they use the preview
 enviroment and its associated environment variables), except for commits to the
-`main` branch. Commits to the main branch are specially recognized by Vercel as
+`main` branch. Commits to the `main` branch are specially recognized by Vercel as
 a signal to deploy the live website.
 
 ### Storyblok
@@ -209,7 +209,7 @@ the site was built from (when that environment variable is available).
 
 ## A word about the word "preview"
 
-There is a semantic trap in the word preview. Storyblok, Next.js, and Vercel all
+There is a semantic trap in the word "preview". Storyblok, Next.js, and Vercel all
 use the word preview, and it means different things to each of them.
 
 Storyblok has two kinds of API keys: a preview key and a public key. With the
@@ -299,7 +299,7 @@ toggle between seeing published versus saved Storyblok content. The banner
 should change colors to indicate which of the two types of content preview modes
 the user is in.
 
-Except when the user is using the Storyblok web interface; then the website
+The above should hold *except* when the user is using the Storyblok web interface; then the website
 should always be in "draft" mode, showing published and unpublished content. And
 as mentioned previously, it should show this content against the latest code
 from the `develop` branch (not the main branch). Related: the content team
