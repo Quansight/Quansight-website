@@ -87,7 +87,8 @@ These are the concrete steps to follow to move your code from branch to branch:
 2. Check one or both preview URLs depending on whether your change affects one
    or both sites.
 3. Once your pull request has been reviewed and approved, commit it to the
-   `develop` branch.
+   `develop` branch. 
+   - Consider doing a [squash-merge](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits), especially if your pull request is relatively small, in order to contribute to a clean commit history on the `develop` branch.
 4. When you want your code change to go live, open a pull request to merge the
    `develop` branch into `main`.
 5. Review both preview URLs that Vercel will add to your pull request.
@@ -100,23 +101,22 @@ These are the concrete steps to follow to move your code from branch to branch:
 ## Integrations
 
 Making changes to the website relies on the ability of several different
-services to interact with each other. This section covers each service one by
+services to interact with each other. This section is for developers and covers each service one by
 one and how it integrates with some of the other services.
 
 ### GitHub
 
 The Vercel app is installed on GitHub. The app kicks off deployments on Vercel
 whenever someone opens a pull request or pushes a commit to the repo. All of
-these deployments are preview deployments (meaning they use the preview
-enviroment and its associated environment variables), except for commits to the
+these deployments are [preview deployments](https://vercel.com/docs/concepts/deployments/environments#preview) (meaning they use the preview
+environment in Vercel and associated environment variables), except for commits to the
 `main` branch. Commits to the `main` branch are specially recognized by Vercel as
 a signal to deploy the live website.
 
 ### Storyblok
 
 Each website has its own "space" in Storyblok. Each space has its own
-configuration. For example, the Consulting website Storyblok space has a
-separate pair of API keys from the Labs space.
+configuration.
 
 So each website has its own pair of API keys: preview and public. The preview
 API key allows API access to both published and unpublished content. The public
@@ -192,9 +192,9 @@ In this case, it automatically enters into Next.js preview mode.
 
 To help the end user distinguish what view of the site they are seeing, the
 codebase defines a visual banner at the top of each page. When the site is in
-preview mode, the banner turns green and displays a message telling the user
+preview mode, the banner turns yellow and displays a message telling the user
 that they can see published and unpublished content. When the site is not in
-preview mode, the banner turns yellow and tells the user that they can only see
+preview mode, the banner turns green and tells the user that they can only see
 published content. The banner provides a way to switch in and out of Next.js
 preview mode so long as the user is not viewing the page via the Storyblok UI
 (because when they are working within Storyblok, they should always see the site
