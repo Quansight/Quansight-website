@@ -8,11 +8,11 @@ contributors - they can look forward to much faster builds and a more
 pleasant development experience.'
 category: [Developer workflows]
 featuredImage:
-  src: /posts/
-  alt: 'Lorem ipsum dolor'
+  src: ../public/posts/moving-scipy-to-meson/feature.png
+  alt: ''Cropped diagram of SciPy's external build and runtime dependencies.'
 hero:
-  imageSrc: /posts/
-  imageAlt: 'Lorem ipsum dolor'
+  imageSrc: ../public/posts/moving-scipy-to-meson/blog_hero_var2.svg
+  imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
 ---
 
 Let's start with an announcement: _**SciPy now builds with
