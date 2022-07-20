@@ -7,7 +7,7 @@ export const getPageItems = <ResultType, VariablesType>(
   variables: VariablesType,
 ): Promise<ApolloQueryResult<ResultType>> => {
   return apolloClient.query({
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'network-only',
     query,
     variables,
   });
