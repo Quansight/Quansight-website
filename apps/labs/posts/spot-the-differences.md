@@ -1,7 +1,7 @@
 ---
 title: 'Spot the differences: what is new in Spyder 5?'
 published: April 16, 2021
-author: isabela-presedo-floyd, juanita-gomez
+author: isabela-presedo-floyd
 description: 'In case you missed it, Spyder 5 was released at the beginning of April! This blog post is a conversation attempting to document the long and complex process of improving Spyder's UI with this release.'
 category: [IDEs]
 featuredImage:
