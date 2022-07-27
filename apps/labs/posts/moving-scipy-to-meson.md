@@ -85,7 +85,7 @@ So in February I wrote
 [an RFC titled "switch to Meson as a build system"](https://github.com/scipy/scipy/issues/13615),
 and after positive feedback started working on this project.
 
-<img src="../public/posts/moving-scipy-to-meson/scipy_build_dependencies.png" alt="Diagram of SciPy's build and runtime dependencies" width="600">
+<img src="../public/posts/moving-scipy-to-meson/scipy_build_dependencies.png" alt="Diagram of SciPy's build and runtime dependencies" width="600" />
 
 *SciPy's external build and runtime dependencies. Vendored dependencies (e.g.,
 SuperLU, ARPACK, large parts of Boost, Uarray, HiGHS, Qhull, PocketFFT, etc.)
