@@ -24,7 +24,7 @@ pleasant development experience. So how fast is it? Currently the build takes
 about 1min 50s (a ~4x improvement) on my 3 year old 12-core Intel CPU
 (i9-7920X @ 2.90GHz):
 
-![Profiling result of a parallel build of SciPy with Meson](../public/posts/moving-scipy-to-meson/ninjabuild_tracing_12jobs.png)
+![Profiling result of a parallel build of SciPy with Meson](/posts/moving-scipy-to-meson/ninjabuild_tracing_12jobs.png)
 
 *Profiling result of a parallel build (12 jobs) of SciPy with Meson. Visualization created with [ninjatracing](https://github.com/nico/ninjatracing/blob/master/ninjatracing) and [Perfetto](https://ui.perfetto.dev).*
 
