@@ -25,6 +25,6 @@ With this grant we were able to contract one new developer, Juan Sebastian Bauti
 
 ## Next steps
 
-We will be focusing our time as a project on pushing forward the accepted proposals and submitting new ones. On top of this we will try to get more feedback about the things that volunteers, users and community in general want to see in the future for Spyder and share the proposals' progress relaunching the [Spyder Community calls](https://github.com/spyder-ide/community#spyder-communitycalls).
+We will be relaunching our [Spyder Community calls](https://github.com/spyder-ide/community#spyder-communitycalls). The idea with this is to be able to gather more feedback about what the volunteers, users and community in general want to see for Spyder, while also having a place to share the current proposals' progress.
 
 As a side note we want to thank NumFOCUS and Google Season of Docs for granting us the funds to be able to work on these projects and start making our roadmap possible!
