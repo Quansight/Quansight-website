@@ -28,37 +28,73 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
   );
 
   const className =
-    'py-2 text-xl text-center text-black ' +
-    (preview ? 'bg-[rgb(255,255,0)]' : 'bg-green');
+    'px-8 py-4 text-[1.5rem] text-black ' +
+    (preview ? 'bg-[rgb(255,255,0)]' : 'bg-gray-50');
 
   return (
     <div className={className}>
       {preview ? (
-        <>
-          This page is in content preview mode. You can see published{' '}
-          <strong>and unpublished</strong> content
-          {gitRef && <> against git branch {githubBranchLink}</>}.{' '}
-          {showExitPreviewLink && (
-            <a
-              href="/api/exit-preview"
-              className="underline transition-colors duration-200 hover:text-pink"
-            >
-              Exit content preview mode.
-            </a>
-          )}
-        </>
+        <details>
+          <summary>
+            This page is in content preview mode. You can see{' '}
+            <strong>draft</strong> content.
+          </summary>
+          <ul className="list-disc list-inside">
+            <li>
+              {' '}
+              {showExitPreviewLink && (
+                <a
+                  href="/api/exit-preview"
+                  className="underline transition-colors duration-200 hover:text-pink"
+                >
+                  Exit content preview mode.
+                </a>
+              )}
+            </li>
+            <li>
+              The page you are seeing may include code changes that have not yet
+              been pushed to production. Be on the lookout for possible
+              content/code conflicts.
+            </li>
+            <li>
+              Git branch used to build the site:{' '}
+              {gitRef
+                ? githubBranchLink
+                : 'Sorry, this info was not available at build time'}
+              .
+            </li>
+          </ul>
+        </details>
       ) : (
-        <>
-          You are seeing only <strong>published</strong> content
-          {gitRef && <> against git branch {githubBranchLink}</>}.{' '}
-          <a
-            href="/api/enter-preview"
-            className="underline transition-colors duration-200 hover:text-pink"
-          >
-            Enter content preview mode
-          </a>{' '}
-          to see published and unpublished content.
-        </>
+        <details>
+          <summary>
+            You are seeing only <strong>published</strong> content
+            {gitRef && <> against git branch {githubBranchLink}</>}.
+          </summary>
+          <ul className="list-disc list-inside">
+            <li>
+              <a
+                href="/api/enter-preview"
+                className="underline transition-colors duration-200 hover:text-pink"
+              >
+                Enter content preview mode
+              </a>{' '}
+              to see draft content.
+            </li>
+            <li>
+              The page you are seeing may include code changes that have not yet
+              been pushed to production. Be on the lookout for possible
+              content/code conflicts.
+            </li>
+            <li>
+              Git branch used to build the site:{' '}
+              {gitRef
+                ? githubBranchLink
+                : 'Sorry, this info was not available at build time'}
+              .
+            </li>
+          </ul>
+        </details>
       )}
     </div>
   );
