@@ -127,7 +127,13 @@ const BlogListPage: FC<BlogListPageProps> = ({
   return (
     <Layout
       footer={<Footer {...footer.content} />}
-      header={<Header {...header.content} domainVariant={DomainVariant.Labs} />}
+      header={
+        <Header
+          {...header.content}
+          domainVariant={DomainVariant.Labs}
+          preview={preview}
+        />
+      }
     >
       <SEO
         title={data.content.title}
@@ -200,11 +206,11 @@ const BlogListPage: FC<BlogListPageProps> = ({
 };
 
 export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
-  const footer = await getFooter();
-  const header = await getHeader();
+  const footer = await getFooter(preview);
+  const header = await getHeader(preview);
   const categories = await getCategories();
-  const { items } = await getAllPosts();
-  const data = await getPage({ slug: 'blog', relations: '' });
+  const { items } = await getAllPosts(preview);
+  const data = await getPage({ slug: 'blog', relations: '' }, preview);
 
   // await generateRSS(items);
 

@@ -17,7 +17,13 @@ import { TRawBlok } from '../../types/storyblok/bloks/rawBlock';
 const Container: FC<TContainerProps> = ({ data, header, footer, preview }) => (
   <Layout
     footer={<Footer {...footer.content} />}
-    header={<Header {...header.content} domainVariant={DomainVariant.Labs} />}
+    header={
+      <Header
+        {...header.content}
+        domainVariant={DomainVariant.Labs}
+        preview={preview}
+      />
+    }
   >
     <SEO
       title={data.content.title}
@@ -45,9 +51,9 @@ export const getStaticProps: GetStaticProps<
   TContainerProps,
   ISlugParams
 > = async ({ params: { slug }, preview = false }) => {
-  const data = await getPage({ slug, relations: '' });
-  const footer = await getFooter();
-  const header = await getHeader();
+  const data = await getPage({ slug, relations: '' }, preview);
+  const footer = await getFooter(preview);
+  const header = await getHeader(preview);
 
   return {
     props: {

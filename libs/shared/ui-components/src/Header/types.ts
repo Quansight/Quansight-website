@@ -33,9 +33,14 @@ export type THeaderSkipLinksProps = {
   skipLinksText: string;
 };
 
+export type THeaderPreviewModeBannerProps = {
+  preview: boolean;
+};
+
 export type THeaderProps = TBookingLink &
   TDomainVariant &
   THeaderLogoProps &
   THeaderNavigation &
   THeaderSkipLinksProps &
+  THeaderPreviewModeBannerProps &
   TBlok;
