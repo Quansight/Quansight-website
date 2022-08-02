@@ -206,7 +206,7 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
   const { items } = await getAllPosts();
   const data = await getPage({ slug: 'blog', relations: '' });
 
-  // await generateRSS(items);
+  await generateRSS(items);
 
   return {
     props: {
