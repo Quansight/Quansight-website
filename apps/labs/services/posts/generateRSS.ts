@@ -30,23 +30,19 @@ export const generateRSS = async (posts: TPost[]): Promise<void> => {
   });
 
   posts.forEach((post) => {
-    /* Only include posts since the website launch, to avoid
-       flooding RSS readers with old content.   */
-    if ( new Date(post.meta.published) >= new Date('2022-07-01') ) {
-      rssFeed.addItem({
-        title: post.meta.title,
-        description: post.meta.description,
-        date: new Date(post.meta.published),
-        image: `${siteUrl}${post.meta.featuredImage.src}`,
-        link: `${siteUrl}/blog/${post.slug}`,
-        author: [
-          {
-            name: post.meta.author.fullName,
-            link: `https://github.com/${post.meta.author.nickName}`,
-          },
-        ],
-      });
-    };
+    rssFeed.addItem({
+      title: post.meta.title,
+      description: post.meta.description,
+      date: new Date(post.meta.published),
+      image: `${siteUrl}${post.meta.featuredImage.src}`,
+      link: `${siteUrl}/blog/${post.slug}`,
+      author: [
+        {
+          name: post.meta.author.fullName,
+          link: `https://github.com/${post.meta.author.nickName}`,
+        },
+      ],
+    });
   });
 
   fs.writeFileSync(rssPath, rssFeed.rss2());
