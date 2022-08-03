@@ -24,7 +24,7 @@ pleasant development experience. So how fast is it? Currently the build takes
 about 1min 50s (a ~4x improvement) on my 3 year old 12-core Intel CPU
 (i9-7920X @ 2.90GHz):
 
-![Profiling result of a parallel build of SciPy with Meson](../public/posts/moving-scipy-to-meson/ninjabuild_tracing_12jobs.png)
+![Profiling result of a parallel build of SciPy with Meson](/posts/moving-scipy-to-meson/ninjabuild_tracing_12jobs.png)
 
 *Profiling result of a parallel build (12 jobs) of SciPy with Meson. Visualization created with [ninjatracing](https://github.com/nico/ninjatracing/blob/master/ninjatracing) and [Perfetto](https://ui.perfetto.dev).*
 
@@ -85,7 +85,7 @@ So in February I wrote
 [an RFC titled "switch to Meson as a build system"](https://github.com/scipy/scipy/issues/13615),
 and after positive feedback started working on this project.
 
-<img src="../public/posts/moving-scipy-to-meson/scipy_build_dependencies.png" alt="Diagram of SciPy's build and runtime dependencies" width="600" />
+<img src="/posts/moving-scipy-to-meson/scipy_build_dependencies.png" alt="Diagram of SciPy's build and runtime dependencies" width="600" />
 
 *SciPy's external build and runtime dependencies. Vendored dependencies (e.g.,
 SuperLU, ARPACK, large parts of Boost, Uarray, HiGHS, Qhull, PocketFFT, etc.)
