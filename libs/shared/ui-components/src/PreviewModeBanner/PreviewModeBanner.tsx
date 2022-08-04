@@ -22,7 +22,10 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
 
   const gitRef = process.env['NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF'];
   const githubBranchLink = (
-    <a href={`https://github.com/Quansight/Quansight-website/tree/${gitRef}`}>
+    <a
+      className="underline transition-colors duration-200 hover:text-pink"
+      href={`https://github.com/Quansight/Quansight-website/tree/${gitRef}`}
+    >
       {gitRef}
     </a>
   );
@@ -72,8 +75,7 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
       ) : (
         <details>
           <summary>
-            You are seeing only <strong>published</strong> content
-            {gitRef && <> against git branch {githubBranchLink}</>}.
+            You are seeing only <strong>published</strong> content.
           </summary>
           <ul className="list-disc list-inside">
             <li>
