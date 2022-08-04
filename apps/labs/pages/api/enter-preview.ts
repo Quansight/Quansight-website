@@ -25,8 +25,6 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
     url.search += `&_storyblok=${pageId}`;
   }
 
-  console.log('from enter-preview, redirecting', url.pathname + url.search);
-
   res.writeHead(307, {
     Location: url.pathname + url.search,
   });

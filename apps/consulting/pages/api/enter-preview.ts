@@ -9,8 +9,24 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
     ? req.query.pageId.join('')
     : req.query.pageId;
 
+  // Set cookie to None, so it can be read in the Storyblok iframe
+  const cookies = res.getHeader('Set-Cookie') as string[];
+  res.setHeader(
+    'Set-Cookie',
+    cookies.map((cookie) =>
+      cookie.replace('SameSite=Lax', 'SameSite=None;Secure'),
+    ),
+  );
+
+  const url = new URL(req.url, `https://${req.headers.host}`);
+  url.pathname = req.query.slug ? `/${slug}` : '/';
+
+  if (pageId) {
+    url.search += `&_storyblok=${pageId}`;
+  }
+
   res.writeHead(307, {
-    Location: req.query.slug ? `/${slug}?_storyblok=${pageId}` : '/',
+    Location: url.pathname + url.search,
   });
   res.end('Preview mode enabled');
 };
