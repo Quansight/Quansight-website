@@ -45,9 +45,9 @@ export const getStaticProps: GetStaticProps<
   TContainerProps,
   ISlugParams
 > = async ({ preview = false }) => {
-  const data = await getPage({ slug: 'about-us', relations: '' });
-  const footer = await getFooter();
-  const header = await getHeader();
+  const data = await getPage({ slug: 'about-us', relations: '' }, preview);
+  const footer = await getFooter(preview);
+  const header = await getHeader(preview);
   const team = await getTeam();
 
   const pageData: PageItem = {

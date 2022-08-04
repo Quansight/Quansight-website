@@ -67,17 +67,23 @@ export const getStaticProps: GetStaticProps<
   TLibraryArticleProps,
   ISlugParams
 > = async ({ params: { slug }, preview = false }) => {
-  const data = await getPage({
-    slug: `${ARTICLES_DIRECTORY_SLUG}${slug}`,
-    relations: LIBRARY_AUTHOR_RELATION,
-  });
-  const footer = await getFooter();
-  const header = await getHeader();
-  const libraryLinks = await getLibraryLinkItems();
-  const blogArticles = await getPageItems({
-    relations: LIBRARY_AUTHOR_RELATION,
-    prefix: ARTICLES_DIRECTORY_SLUG,
-  });
+  const data = await getPage(
+    {
+      slug: `${ARTICLES_DIRECTORY_SLUG}${slug}`,
+      relations: LIBRARY_AUTHOR_RELATION,
+    },
+    preview,
+  );
+  const footer = await getFooter(preview);
+  const header = await getHeader(preview);
+  const libraryLinks = await getLibraryLinkItems(preview);
+  const blogArticles = await getPageItems(
+    {
+      relations: LIBRARY_AUTHOR_RELATION,
+      prefix: ARTICLES_DIRECTORY_SLUG,
+    },
+    preview,
+  );
   const libraryTiles = getLibraryTiles({
     blogArticles,
     libraryLinks,

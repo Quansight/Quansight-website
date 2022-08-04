@@ -1,7 +1,7 @@
 import { ApolloQueryResult, DocumentNode } from '@apollo/client';
 
 import { apolloClient } from '../sdk/clients/apolloClient';
-import createHeaders from './createHeaders';
+import createContext from './createContext';
 
 export const getPageItems = <ResultType, VariablesType>(
   query: DocumentNode,
@@ -12,8 +12,6 @@ export const getPageItems = <ResultType, VariablesType>(
     fetchPolicy: 'network-only',
     query,
     variables,
-    context: {
-      headers: createHeaders(preview),
-    },
+    context: createContext(preview),
   });
 };

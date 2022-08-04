@@ -63,6 +63,10 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
                 : 'Sorry, this info was not available at build time'}
               .
             </li>
+            <li>
+              You should never see this banner on production (quansight.com or
+              labs.quansight.org)
+            </li>
           </ul>
         </details>
       ) : (
@@ -82,6 +86,12 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
               to see draft content.
             </li>
             <li>
+              Does not apply to Labs blog posts, since they exist outside of
+              Storyblok. If you can see this banner, then the Labs blog posts
+              should reflect the commit tree used to generate this instance of
+              the website (usually a PR branch or the `develop` branch).
+            </li>
+            <li>
               The page you are seeing may include code changes that have not yet
               been pushed to production. Be on the lookout for possible
               content/code conflicts.
@@ -92,6 +102,10 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
                 ? githubBranchLink
                 : 'Sorry, this info was not available at build time'}
               .
+            </li>
+            <li>
+              You should never see this banner on production (quansight.com or
+              labs.quansight.org)
             </li>
           </ul>
         </details>

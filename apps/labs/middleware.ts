@@ -6,7 +6,6 @@ function fromStoryblok(request: NextRequest): boolean {
   if (!referrer) {
     return false;
   }
-  console.log('referrer', referrer);
   return (
     referrer.startsWith('https://app.storyblok.com') ||
     // When previewing with localhost storyblok has to downgrade to insecure http
@@ -17,7 +16,6 @@ function fromStoryblok(request: NextRequest): boolean {
 function enterPreview(request: NextRequest): NextResponse {
   const isApi = /^\/api/.test(request.nextUrl.pathname);
   if (isApi) {
-    console.log('isApi, early return');
     return;
   }
 
@@ -27,13 +25,11 @@ function enterPreview(request: NextRequest): NextResponse {
     url.pathname = '/api/enter-preview';
     url.search = url.search +=
       '&slug=' + encodeURIComponent(request.nextUrl.pathname.slice(1));
-    console.log('redirecting', url.toString());
     return NextResponse.redirect(url);
   }
 }
 
 export function middleware(request: NextRequest) {
-  console.log('checking request', request.url);
   if (fromStoryblok(request)) {
     console.log('handling request');
     return enterPreview(request);

@@ -1,7 +1,7 @@
 import { ApolloQueryResult, DocumentNode } from '@apollo/client';
 
 import { apolloClient } from '../sdk/clients/apolloClient';
-import createHeaders from './createHeaders';
+import createContext from './createContext';
 
 export const getFooterItem = <ResultType>(
   query: DocumentNode,
@@ -13,8 +13,6 @@ export const getFooterItem = <ResultType>(
     variables: {
       slug: 'layout/footer',
     },
-    context: {
-      headers: createHeaders(preview),
-    },
+    context: createContext(preview),
   });
 };

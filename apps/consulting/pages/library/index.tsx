@@ -156,16 +156,22 @@ export const getStaticProps: GetStaticProps<
   TLibraryProps,
   ISlugParams
 > = async ({ preview = false }) => {
-  const data = await getPage({ slug: 'library', relations: '' });
-  const header = await getHeader();
-  const footer = await getFooter();
-  const blogArticles = await getPageItems({
-    relations: LIBRARY_AUTHOR_RELATION,
-    prefix: ARTICLES_DIRECTORY_SLUG,
-  });
-  const libraryLinks = await getLibraryLinkItems();
-  const postTypes = await getDataSourceEntries({ slug: 'post-type' });
-  const postCategories = await getDataSourceEntries({ slug: 'post-category' });
+  const data = await getPage({ slug: 'library', relations: '' }, preview);
+  const header = await getHeader(preview);
+  const footer = await getFooter(preview);
+  const blogArticles = await getPageItems(
+    {
+      relations: LIBRARY_AUTHOR_RELATION,
+      prefix: ARTICLES_DIRECTORY_SLUG,
+    },
+    preview,
+  );
+  const libraryLinks = await getLibraryLinkItems(preview);
+  const postTypes = await getDataSourceEntries({ slug: 'post-type' }, preview);
+  const postCategories = await getDataSourceEntries(
+    { slug: 'post-category' },
+    preview,
+  );
 
   return {
     props: {
