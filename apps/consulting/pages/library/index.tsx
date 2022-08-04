@@ -116,7 +116,11 @@ export const Library: FC<TLibraryProps> = ({
     <Layout
       footer={<Footer {...footer.content} />}
       header={
-        <Header {...header.content} domainVariant={DomainVariant.Quansight} />
+        <Header
+          {...header.content}
+          domainVariant={DomainVariant.Quansight}
+          preview={preview}
+        />
       }
     >
       <SEO

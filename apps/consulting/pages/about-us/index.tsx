@@ -25,7 +25,11 @@ export const About: FC<TContainerProps> = ({
   <Layout
     footer={<Footer {...footer.content} />}
     header={
-      <Header {...header.content} domainVariant={DomainVariant.Quansight} />
+      <Header
+        {...header.content}
+        domainVariant={DomainVariant.Quansight}
+        preview={preview}
+      />
     }
   >
     <SEO
@@ -48,7 +52,7 @@ export const getStaticProps: GetStaticProps<
   const data = await getPage({ slug: 'about-us', relations: '' }, preview);
   const footer = await getFooter(preview);
   const header = await getHeader(preview);
-  const team = await getTeam();
+  const team = await getTeam(preview);
 
   const pageData: PageItem = {
     ...data,
