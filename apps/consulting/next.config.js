@@ -19,6 +19,16 @@ const nextConfig = {
         permanent: false,
         destination: '/library?page=1',
       },
+      {
+        source: '/blog',
+        permanent: false,
+        destination: '/library?page=1&type=blog',
+      },
+      {
+        source: '/staffing',
+        permanent: false,
+        destination: '/careers',
+      },
     ];
   },
   nx: {

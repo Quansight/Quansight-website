@@ -9,7 +9,7 @@ export const getPageItems = <ResultType, VariablesType>(
   preview: boolean,
 ): Promise<ApolloQueryResult<ResultType>> => {
   return apolloClient.query({
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'network-only',
     query,
     variables,
     context: {
