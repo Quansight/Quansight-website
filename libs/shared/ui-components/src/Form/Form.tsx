@@ -35,6 +35,7 @@ export const Form: FC<TFormProps> = (props) => {
   };
 
   const onSubmit = handleSubmit((formValues): void => {
+    gtag_report_conversion("https://quansight.com/about-us");
     sendFormData(hookUrl, formValues)
       .then(() => setFormStatus(FormStates.Success))
       .catch(() => setFormStatus(FormStates.Failure));

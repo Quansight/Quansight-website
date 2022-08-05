@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Html, Head, Main, NextScript } from 'next/document';
+import { Html, Head, Main, NextScript, Script } from 'next/document';
 
 const Document: FC = () => {
   return (
@@ -14,6 +14,35 @@ const Document: FC = () => {
           rel="shortcut icon"
           href="/favicon.png"
         />
+        {/* <!-- Global site tag (gtag.js) - Google Ads: 722597110 --> */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-722597110"
+        />
+        <Script> 
+          {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-722597110');
+          }
+        </Script>
+        {/* <-- Event snippet for Click Submit on Lightbox (now Form Submit) conversion */}
+        <Script>
+          {
+            function gtag_report_conversion(url) {
+              var callback = function () {
+                if (typeof(url) != 'undefined') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'conversion', {
+                  'send_to': 'AW-722597110/TEbJCM3O4LQBEPbpx9gC',
+                  'event_callback': callback
+              });
+              return false;
+            }
+          }
+        </Script>
       </Head>
       <body>
         <Main />
