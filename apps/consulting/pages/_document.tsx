@@ -3,6 +3,9 @@ import { FC } from 'react';
 import { Html, Head, Main, NextScript } from 'next/document';
 import Script from 'next/script';
 
+import gtag from "@types/gtag.js";
+
+
 const Document: FC = () => {
   return (
     <Html lang="en" className="text-[62.5%]">
