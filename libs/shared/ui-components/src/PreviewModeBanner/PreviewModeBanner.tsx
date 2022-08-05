@@ -70,14 +70,20 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
           </summary>
           <ul className="list-disc list-inside">
             <li>
-              {' '}
-              {showExitPreviewLink && (
+              {showExitPreviewLink ? (
                 <a
                   href="/api/exit-preview"
                   className="underline transition-colors duration-200 hover:text-pink"
                 >
                   Exit content preview mode.
                 </a>
+              ) : (
+                <>
+                  <span className="line-through">
+                    Exit content preview mode.
+                  </span>{' '}
+                  (Exiting preview mode is not allowed when using Storyblok.)
+                </>
               )}
             </li>
             {sharedBulletPoints}
