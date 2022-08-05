@@ -17,20 +17,21 @@ const Document: FC = () => {
         />
         {/* <!-- Global site tag (gtag.js) - Google Ads: 722597110 --> */}
         <Script
+          id='gtag-global'
           src="https://www.googletagmanager.com/gtag/js?id=AW-722597110"
         />
-        <Script> 
+        <Script id='gtag-event'> 
           {
-            window.dataLayer = window.dataLayer || [];
+            `window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'AW-722597110');
+            gtag('config', 'AW-722597110');`
           }
         </Script>
         {/* <-- Event snippet for Click Submit on Lightbox (now Form Submit) conversion */}
         <Script>
           {
-            function gtag_report_conversion(url) {
+            `function gtag_report_conversion(url) {
               var callback = function () {
                 if (typeof(url) != 'undefined') {
                   window.location = url;
@@ -41,7 +42,7 @@ const Document: FC = () => {
                   'event_callback': callback
               });
               return false;
-            }
+            }`
           }
         </Script>
       </Head>
