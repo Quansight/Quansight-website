@@ -9,6 +9,8 @@ import type { TPreviewModeBannerProps } from './types';
 export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
   const [showExitPreviewLink, setShowExitPreviewLink] = useState(true);
   useEffect(() => {
+    // When inside the Storyblok visual editor, do not show the "exit preview"
+    // link in the banner.
     if (isStoryblok(window.location)) {
       setShowExitPreviewLink(false);
     }
@@ -20,6 +22,8 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
     return null;
   }
 
+  // Create link to the git branch that was used to build this instance of the
+  // website.
   const gitRef = process.env['NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF'];
   const githubBranchLink = (
     <a
@@ -30,12 +34,34 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
     </a>
   );
 
-  const className =
-    'px-8 py-4 text-[1.5rem] text-black ' +
-    (preview ? 'bg-[rgb(255,255,0)]' : 'bg-gray-50');
+  const sharedBulletPoints = (
+    <>
+      <li>
+        The page you are seeing may include code changes that have not yet been
+        pushed to production. Be on the lookout for possible content/code
+        conflicts.
+      </li>
+      <li>
+        Git branch used to build the site:{' '}
+        {gitRef
+          ? githubBranchLink
+          : 'Sorry, this info was not available at build time'}
+        .
+      </li>
+      <li>
+        You should never see this banner on production (quansight.com or
+        labs.quansight.org)
+      </li>
+    </>
+  );
 
   return (
-    <div className={className}>
+    <div
+      className={
+        'px-8 py-4 text-[1.5rem] text-black ' +
+        (preview ? 'bg-[rgb(255,255,0)]' : 'bg-gray-50')
+      }
+    >
       {preview ? (
         <details>
           <summary>
@@ -54,22 +80,7 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
                 </a>
               )}
             </li>
-            <li>
-              The page you are seeing may include code changes that have not yet
-              been pushed to production. Be on the lookout for possible
-              content/code conflicts.
-            </li>
-            <li>
-              Git branch used to build the site:{' '}
-              {gitRef
-                ? githubBranchLink
-                : 'Sorry, this info was not available at build time'}
-              .
-            </li>
-            <li>
-              You should never see this banner on production (quansight.com or
-              labs.quansight.org)
-            </li>
+            {sharedBulletPoints}
           </ul>
         </details>
       ) : (
@@ -87,28 +98,7 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
               </a>{' '}
               to see draft content.
             </li>
-            <li>
-              Does not apply to Labs blog posts, since they exist outside of
-              Storyblok. If you can see this banner, then the Labs blog posts
-              should reflect the commit tree used to generate this instance of
-              the website (usually a PR branch or the `develop` branch).
-            </li>
-            <li>
-              The page you are seeing may include code changes that have not yet
-              been pushed to production. Be on the lookout for possible
-              content/code conflicts.
-            </li>
-            <li>
-              Git branch used to build the site:{' '}
-              {gitRef
-                ? githubBranchLink
-                : 'Sorry, this info was not available at build time'}
-              .
-            </li>
-            <li>
-              You should never see this banner on production (quansight.com or
-              labs.quansight.org)
-            </li>
+            {sharedBulletPoints}
           </ul>
         </details>
       )}

@@ -15,6 +15,14 @@ export function fromStoryblok(request: NextRequest): boolean {
 
 export function enterPreview(request: NextRequest): NextResponse | void {
   const isApi = /^\/api/.test(request.nextUrl.pathname);
+  /*
+    Prevent redirect loop:
+      /x (this file)
+      /api/enter-preview?slug=x (enter-preview.ts)
+      /x redirects to
+      /api/enter-preview?slug=x redirects to
+      etc.
+  */
   if (isApi) {
     return;
   }
