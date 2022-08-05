@@ -31,7 +31,7 @@ const Document: FC = () => {
         {/* <-- Event snippet for Click Submit on Lightbox (now Form Submit) conversion */}
         <Script>
           {
-            `function gtag_report_conversion(url) {
+            function gtag_report_conversion(url) {
               var callback = function () {
                 if (typeof(url) != 'undefined') {
                   window.location = url;
@@ -42,7 +42,7 @@ const Document: FC = () => {
                   'event_callback': callback
               });
               return false;
-            }`
+            }
           }
         </Script>
       </Head>
