@@ -21,7 +21,6 @@ export const usePreviewMode = (
 
   useEffect(() => {
     if (!isPreviewMode && isStoryblok(window.location)) {
-      console.log('fetching /api/enter-preview then reloading');
       fetch(`/api/enter-preview`).then(reload);
     }
   }, [isPreviewMode, reload]);

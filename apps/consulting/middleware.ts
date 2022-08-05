@@ -31,7 +31,6 @@ function enterPreview(request: NextRequest): NextResponse {
 
 export function middleware(request: NextRequest) {
   if (fromStoryblok(request)) {
-    console.log('handling request');
     return enterPreview(request);
   }
 }
