@@ -42,6 +42,9 @@ global_script.innerHTML = gtag_global_snippet;
 const event_script = document.createElement('script');
 event_script.innerHTML = gtag_event_snippet;
 
+document.head.insertBefore(event_script, document.head.childNodes[0]);
+document.head.insertBefore(global_script, document.head.childNodes[0]);
+
 function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
   const consultingDomain = 'quansight.com';
   return (
@@ -57,8 +60,6 @@ function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
             src="/p7e/js/script.js"
           />
         )}
-      document.head.insertBefore(event_script, document.head.childNodes[0]);
-      document.head.insertBefore(global_script, document.head.childNodes[0]);
     </>
   );
 }
