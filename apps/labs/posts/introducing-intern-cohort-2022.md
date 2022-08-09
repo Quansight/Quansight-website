@@ -8,8 +8,8 @@ featuredImage:
 src: /posts/introducing-intern-cohort-2022/feature.svg
 alt: 'An illustration of a black hand and a white one coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
-imageSrc: /posts/introducing-intern-cohort-2022/hero_intern_cohort.svg
-imageAlt: 'Circular images of all the interns and their mentors connected with lines indicating who is working with whom. Each image is labeled with their first name.'
+  imageSrc: /posts/introducing-intern-cohort-2022/hero_intern_cohort.svg
+  imageAlt: 'Circular images of all the interns and their mentors connected with lines indicating who is working with whom. Each image is labeled with their first name.'
 ---
 
 We recently had the great pleasure of welcoming our second cohort of interns at Labs! The goal of our internship program is to provide them the opportunity to connect with open source communities and leaders, and grow professionally while developing solutions for the larger scientific open source ecosystem. Without further ado, allow us to introduce this wonderful new team and their projects!
