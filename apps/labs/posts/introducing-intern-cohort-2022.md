@@ -5,8 +5,8 @@ published: August 7, 2022
 description: 'Quansight Labs is delighted to welcome its second cohort of 6 interns, who will work on a variety of open source projects and tasks'
 category: [Community, OSS Experience, PyData ecosystem]
 featuredImage:
-src: /posts/introducing-intern-cohort-2022/feature.svg
-alt: 'An illustration of a black hand and a white one coming towards each other to pass a business card with the logo of Quansight Labs'
+  src: /posts/introducing-intern-cohort-2022/feature.svg
+  alt: 'An illustration of a black hand and a white one coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/introducing-intern-cohort-2022/hero_intern_cohort.svg
   imageAlt: 'Circular images of all the interns and their mentors connected with lines indicating who is working with whom. Each image is labeled with their first name.'
