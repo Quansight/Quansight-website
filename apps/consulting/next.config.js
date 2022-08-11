@@ -34,7 +34,7 @@ const nextConfig = {
         has: [
           {
             type: 'host',
-            value: 'labs([.].+)+',
+            value: 'labs\\..*',
           },
         ],
         permanent: true,
