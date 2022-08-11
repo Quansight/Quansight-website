@@ -30,11 +30,11 @@ const nextConfig = {
         destination: '/careers',
       },
       {
-        source: ':path*',
+        source: '/:path*',
         has: [
           {
             type: 'host',
-            value: 'labs.quansight.com',
+            value: 'labs([.].+)+',
           },
         ],
         permanent: true,
