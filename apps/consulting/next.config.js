@@ -29,6 +29,17 @@ const nextConfig = {
         permanent: false,
         destination: '/careers',
       },
+      {
+        source: ':path*',
+        has: [
+          {
+            type: 'host',
+            value: 'labs.quansight.com',
+          },
+        ],
+        permanent: true,
+        destination: 'https://labs.quansight.org/:path*',
+      },
     ];
   },
   nx: {
