@@ -29,6 +29,11 @@ const nextConfig = {
         permanent: true,
         destination: '/careers',
       },
+      {
+        source: '/labs',
+        permanent: true,
+        destination: 'https://labs.quansight.org',
+      },
     ];
   },
   nx: {
