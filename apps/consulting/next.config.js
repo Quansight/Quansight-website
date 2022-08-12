@@ -8,33 +8,6 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/library',
-        has: [
-          {
-            type: 'query',
-            key: 'page',
-            value: 'undefined',
-          },
-        ],
-        permanent: false,
-        destination: '/library?page=1',
-      },
-      {
-        source: '/blog',
-        permanent: true,
-        destination: '/library?page=1&type=blog',
-      },
-      {
-        source: '/staffing',
-        permanent: true,
-        destination: '/careers',
-      },
-      {
-        source: '/labs',
-        permanent: true,
-        destination: 'https://labs.quansight.org',
-      },
-      {
         source: '/:path*',
         has: [
           {
@@ -65,6 +38,11 @@ const nextConfig = {
                Otherwise, incoming traffic to `labs.quansight.com/:path`
                will receive a Vercel "no deployment at this address"
                404 error.
+
+               This redirect is placed first in the sequence so that
+               all incoming traffic to a labs.quansight.com/:path is
+               forwarded to labs.quansight.org/:path without being
+               modified by the other redirects below.
              */
             type: 'host',
             value: '^labs[.-].+',
@@ -72,6 +50,33 @@ const nextConfig = {
         ],
         permanent: true,
         destination: 'https://labs.quansight.org/:path*',
+      },
+      {
+        source: '/labs',
+        permanent: true,
+        destination: 'https://labs.quansight.org',
+      },
+      {
+        source: '/library',
+        has: [
+          {
+            type: 'query',
+            key: 'page',
+            value: 'undefined',
+          },
+        ],
+        permanent: false,
+        destination: '/library?page=1',
+      },
+      {
+        source: '/staffing',
+        permanent: true,
+        destination: '/careers',
+      },
+      {
+        source: '/blog',
+        permanent: true,
+        destination: '/library?page=1&type=blog',
       },
     ];
   },
