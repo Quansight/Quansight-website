@@ -21,13 +21,18 @@ const nextConfig = {
       },
       {
         source: '/blog',
-        permanent: false,
+        permanent: true,
         destination: '/library?page=1&type=blog',
       },
       {
         source: '/staffing',
-        permanent: false,
+        permanent: true,
         destination: '/careers',
+      },
+      {
+        source: '/labs',
+        permanent: true,
+        destination: 'https://labs.quansight.org',
       },
       {
         source: '/:path*',
