@@ -52,6 +52,14 @@ const nextConfig = {
                be ideal, since we are not planning on using anything other
                than the apex quansight.com domain for the website
                this configuration should not cause problems.
+               
+               Note that this redirect configuration requires that *BOTH*
+               `quansight.com` *and* `labs.quansight.com` be configured
+               as active domains for the `main` branch under the Vercel
+               project responsible for live deployment of the website.
+               Otherwise, incoming traffic to `labs.quansight.com/:path`
+               will receive a Vercel "no deployment at this address"
+               404 error.
              */
             type: 'host',
             value: '^labs[.-].+',
