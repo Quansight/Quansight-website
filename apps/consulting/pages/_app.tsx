@@ -23,6 +23,22 @@ function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
             gtag('config', 'AW-722597110');`,
         }}
       />
+      <Script
+        id="gtag-conversion-function"
+        dangerouslySetInnerHTML={{
+          __html: `function gtag_report_conversion(url) {
+              var callback = function () {
+                if (typeof(url) != 'undefined') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'conversion', {
+                  'send_to': 'AW-722597110/TEbJCM3O4LQBEPbpx9gC',
+                  'event_callback': callback
+              });
+              return false;`,
+        }}
+      />
       <Component {...pageProps} />
 
       {typeof window !== 'undefined' &&
