@@ -1,3 +1,5 @@
+import { window } from 'react';
+
 // Event code
 window.dataLayer = window.dataLayer || [];
 function gtag() {
