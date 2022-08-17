@@ -10,6 +10,10 @@ function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <>
       <Meta />
+      <Script
+        id="gtag-global"
+        src="https://www.googletagmanager.com/gtag/js?id=AW-722597110"
+      />
       <Component {...pageProps} />
 
       {typeof window !== 'undefined' &&
