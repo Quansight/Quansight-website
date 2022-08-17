@@ -14,31 +14,7 @@ function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
         id="gtag-global"
         src="https://www.googletagmanager.com/gtag/js?id=AW-722597110"
       />
-      <Script
-        id="gtag-event"
-        dangerouslySetInnerHTML={{
-          __html: `window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-722597110');`,
-        }}
-      />
-      <Script
-        id="gtag-conversion-function"
-        dangerouslySetInnerHTML={{
-          __html: `function gtag_report_conversion(url) {
-              var callback = function () {
-                if (typeof(url) != 'undefined') {
-                  window.location = url;
-                }
-              };
-              gtag('event', 'conversion', {
-                  'send_to': 'AW-722597110/TEbJCM3O4LQBEPbpx9gC',
-                  'event_callback': callback
-              });
-              return false;`,
-        }}
-      />
+      <Script id="gtag-setup" src="gtag.js" />
       <Component {...pageProps} />
 
       {typeof window !== 'undefined' &&
