@@ -14,6 +14,15 @@ function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
         id="gtag-global"
         src="https://www.googletagmanager.com/gtag/js?id=AW-722597110"
       />
+      <Script
+        id="gtag-event"
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-722597110');`,
+        }}
+      />
       <Component {...pageProps} />
 
       {typeof window !== 'undefined' &&
