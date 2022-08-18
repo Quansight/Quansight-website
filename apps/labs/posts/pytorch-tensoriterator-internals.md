@@ -8,7 +8,7 @@ featuredImage:
   src: posts/pytorch-tensoriterator-internals/feature.png
   alt: 'Code snippet on creating a TensorIterator using a default constructor.'
 hero:
-  imageSrc: posts/pytorch-tensoriterator-internals/blog_hero_var2.svg
+  imageSrc: posts/pytorch-tensoriterator-internals/blog_hero_var1.svg
   imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
