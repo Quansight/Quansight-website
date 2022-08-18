@@ -16,7 +16,6 @@ The history section of this post is still relevant, but `TensorIterator`'s
 interface has changed significantly. For an update on the new API, please check
 out [this new blog
 post](https://labs.quansight.org/blog/2021/04/pytorch-tensoriterator-internals-update).
-{: .alert .alert-warning}
 
 PyTorch is one of the leading frameworks for deep learning. Its core data
 structure is `Tensor`, a multi-dimensional array implementation with many
