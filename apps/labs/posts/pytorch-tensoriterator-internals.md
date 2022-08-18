@@ -10,7 +10,6 @@ featuredImage:
 hero:
   imageSrc: posts/pytorch-tensoriterator-internals/blog_hero_var2.svg
   imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
-'
 ---
 
 The history section of this post is still relevant, but `TensorIterator`'s
