@@ -12,10 +12,10 @@ hero:
   imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
-The history section of this post is still relevant, but `TensorIterator`'s
-interface has changed significantly. For an update on the new API, please check
-out [this new blog
-post](https://labs.quansight.org/blog/2021/04/pytorch-tensoriterator-internals-update).
+> The history section of this post is still relevant, but `TensorIterator`'s
+> interface has changed significantly. For an update on the new API, please check
+> out [this new blog
+> post](https://labs.quansight.org/blog/2021/04/pytorch-tensoriterator-internals-update).
 
 PyTorch is one of the leading frameworks for deep learning. Its core data
 structure is `Tensor`, a multi-dimensional array implementation with many
