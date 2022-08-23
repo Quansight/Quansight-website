@@ -9,10 +9,11 @@ import {
 
 export const getDataSourceEntries = async (
   variables: DatasourceEntriesQueryVariables,
+  preview: boolean,
 ): Promise<DatasourceEntries> => {
   const { data } = await Api.getDataSourceEntries<
     DatasourceEntriesQuery,
     DatasourceEntriesQueryVariables
-  >(DatasourceEntriesDocument, variables);
+  >(DatasourceEntriesDocument, variables, preview);
   return data.DatasourceEntries;
 };

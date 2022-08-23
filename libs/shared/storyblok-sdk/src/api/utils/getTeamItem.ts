@@ -1,9 +1,11 @@
 import { ApolloQueryResult, DocumentNode } from '@apollo/client';
 
 import { apolloClient } from '../sdk/clients/apolloClient';
+import createContext from './createContext';
 
 export const getTeamItem = <ResultType>(
   query: DocumentNode,
+  preview: boolean,
 ): Promise<ApolloQueryResult<ResultType>> => {
   return apolloClient.query({
     fetchPolicy: 'cache-first',
@@ -11,5 +13,6 @@ export const getTeamItem = <ResultType>(
     variables: {
       slug: 'team-members',
     },
+    context: createContext(preview),
   });
 };
