@@ -10,9 +10,10 @@ export const getPostsByCategory = async (
   category: string[],
   slug: string,
   limit = DEFAULT_API_OFFSET,
+  preview,
 ): Promise<TPost[]> => {
   try {
-    const allPosts = await getAllPosts();
+    const allPosts = await getAllPosts(preview);
 
     return compose(
       take(limit),
