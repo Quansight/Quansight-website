@@ -53,7 +53,7 @@ simpler that full-fledged extensions.
 Let's first see what we are trying to accomplish in a screenshot of the "winter 2020" theme.
 You will have the option to choose this theme in the dropdown menu of JupyterLab:
 
-[![Screenshot of JupyterLab Winter Theme](../public/posts/jupyterlab-winter-theme/jupyterlab-theme-winter.png)](https://github.com/Quansight-Labs/jupyterlab-theme-winter)
+[![Screenshot of JupyterLab Winter Theme](/posts/jupyterlab-winter-theme/jupyterlab-theme-winter.png)](https://github.com/Quansight-Labs/jupyterlab-theme-winter)
 
 To do so we'll need to:
 
@@ -335,12 +335,12 @@ free to modify it, and please suggest some themes you might like and share
 in the comments. For example we'd love to see a "summer 2020 theme" for our Southern Hemisphere friends.
 We will dive into how to distribute your themes and make them high-quality in a later blog post.
 
-[![Screenshot of JupyterLab Winter Theme](../public/posts/jupyterlab-winter-theme/jupyterlab-theme-winter.png)](https://github.com/Quansight-Labs/jupyterlab-theme-winter)
+[![Screenshot of JupyterLab Winter Theme](/posts/jupyterlab-winter-theme/jupyterlab-theme-winter.png)](https://github.com/Quansight-Labs/jupyterlab-theme-winter)
 
 And as a bonus, a [Christmas theme](https://github.com/Quansight-Labs/jupyterlab-theme-christmas) with more green-ish color and some lights shining
 at the bottom of your notebooks!
 
-[![Screenshot of JupyterLab Christmas Theme](../public/posts/jupyterlab-winter-theme/jupyterlab-theme-christmas.png)](https://github.com/Quansight-Labs/jupyterlab-theme-christmas)
+[![Screenshot of JupyterLab Christmas Theme](/posts/jupyterlab-winter-theme/jupyterlab-theme-christmas.png)](https://github.com/Quansight-Labs/jupyterlab-theme-christmas)
 
 ---
 
