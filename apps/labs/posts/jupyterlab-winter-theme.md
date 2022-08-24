@@ -14,7 +14,7 @@ hero:
 
 JupyterLab 3.0 is about to be released and provides many 
 improvements to the extension system. Theming is a way to extend JupyterLab and 
-benefits from those improvements.
+benefits from those improvements .
 
 While theming is often disregarded as a purely cosmetic endeavour, it can greatly
 improve software. Theming can be great help for accessibility, and the Jupyter team
