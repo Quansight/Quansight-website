@@ -8,10 +8,10 @@ In this post we'll answer this question along with where Traitlets came from,
 its applications, and a bit of history.'
 category: [PyData Ecosystem]
 featuredImage:
-  src: ../public/posts/but-what-are-traitlets/feature.png
+  src: /posts/but-what-are-traitlets/feature.png
   alt: 'A code snippet demonstrating the flexibility of Traitlet.'
 hero:
-  imageSrc: ../public/posts/but-what-are-traitlets/blog_hero_var2.svg
+  imageSrc: /posts/but-what-are-traitlets/blog_hero_var2.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
 
 ---
