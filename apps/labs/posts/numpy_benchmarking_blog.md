@@ -83,7 +83,7 @@ The ultimate goal was to prove that NumPy performs well even without using its u
 
 The following is the output of my work:
 
-<img src = "/posts/numpy_benchmarking_blog/performance_benchmarking.png" alt = "A visual representation to compare the performance of NumPy with various languages like Python, C++, and accelerators like Numba, and Pythran." title = "Performance Benchmark; Number of Iterations: 50">
+<img src = "/posts/numpy_benchmarking_blog/performance_benchmarking.png" alt = "A visual representation to compare the performance of NumPy with various languages like Python, C++, and accelerators like Numba, and Pythran." title = "Performance Benchmark; Number of Iterations: 50" />
 
 --- TEASER END ---
 
