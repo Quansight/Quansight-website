@@ -5,10 +5,10 @@ author: khushi-agrawal
 description: 'My work was majorly focused on providing performance benchmarks to NumPy in realistic situations. The target was to show the world that NumPy is efficient in handling quasi real-life situations too.'
 category: [Developer workflows]
 featuredImage:
-  src: ../public/posts/numpy_benchmarking_blog/feature.png
+  src: /posts/numpy_benchmarking_blog/feature.png
   alt: 'A word cloud with themes, open-source projects and people mentioned throughout the blog post. Each is stylized using a different font, most of them calligraphical.'
 hero:
-  imageSrc: ../public/posts/numpy_benchmarking_blog/blog_hero_var1.svg
+  imageSrc: /posts/numpy_benchmarking_blog/blog_hero_var1.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
@@ -24,7 +24,7 @@ The target was to show the world that NumPy is efficient in handling quasi real-
 The primary technical outcome of my work is available in the [numpy documentation](https://deploy-preview-461--numpy-preview.netlify.app/benchmark/).
 
 <p align="center">
-      <img src = "../public/posts/numpy_benchmarking_blog/journey.jpeg" alt = "A word cloud with themes, open-source projects and people mentioned throughout the blog post. Each is stylized using a different font, most of them calligraphical.">
+      <img src = "/posts/numpy_benchmarking_blog/journey.jpeg" alt = "A word cloud with themes, open-source projects and people mentioned throughout the blog post. Each is stylized using a different font, most of them calligraphical.">
 </p>
 
 ## My Experience
@@ -83,7 +83,7 @@ The ultimate goal was to prove that NumPy performs well even without using its u
 
 The following is the output of my work:
 
-<img src = "../public/posts/numpy_benchmarking_blog/performance_benchmarking.png" alt = "A visual representation to compare the performance of NumPy with various languages like Python, C++, and accelerators like Numba, and Pythran." title = "Performance Benchmark; Number of Iterations: 50">
+<img src = "/posts/numpy_benchmarking_blog/performance_benchmarking.png" alt = "A visual representation to compare the performance of NumPy with various languages like Python, C++, and accelerators like Numba, and Pythran." title = "Performance Benchmark; Number of Iterations: 50">
 
 --- TEASER END ---
 
