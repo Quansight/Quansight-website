@@ -1,14 +1,14 @@
 ---
-title: 'Making SciPy's Image Interpolation Consistent and Well Documented'
+title: 'Making SciPy''s Image Interpolation Consistent and Well Documented'
 published: January 22, 2021
 author: gregory-lee
-description: 'In this blog post we will focus specifically on recent improvements that have been made to SciPy's interpolation functions. A recent NumFOCUS small development grant awarded to the SciPy developers allowed a dedicated effort to fix existing bugs in boundary handling and improve the documentation of the behavior of these modes.'
+description: 'In this blog post we will focus specifically on recent improvements that have been made to SciPy''s interpolation functions. A recent NumFOCUS small development grant awarded to the SciPy developers allowed a dedicated effort to fix existing bugs in boundary handling and improve the documentation of the behavior of these modes.'
 category: [PyData Ecosystem]
 featuredImage:
-  src: ../public/posts/scipy-ndimage-interpolation/feature.png
+  src: /posts/scipy-ndimage-interpolation/feature.png
   alt: 'An example interpolation, using scipy.ndimage.zoom. The example shows five different synthetic brain MRIs. Each MRI has a different interpolation method.'
 hero:
-  imageSrc: ../public/posts/scipy-ndimage-interpolation/blog_hero_org.svg
+  imageSrc: /posts/scipy-ndimage-interpolation/blog_hero_org.svg
   imageAlt: 'An illustration of a light brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
@@ -30,7 +30,7 @@ A recent NumFOCUS small development grant awarded to the SciPy developers allowe
 --- show an image for order = 0 vs. 1 vs. 3 vs. 5 ---
 An illustration of interpolation order is given for a [synthetic brain MRI](https://brainweb.bic.mni.mcgill.ca/) (only one axial slice of the 3D brain is displayed). At the left is a simulated volume at 2 mm resolution. We then use `scipy.ndimage.zoom` to upsample the volume by a factor fo 2.0 along all axes to give an interpolated image where each voxel is of size 1 x 1 x 1 mm.
 
-![An example interpolation, using scipy.ndimage.zoom. The example shows five different synthetic brain MRIs. Each MRI has a different interpolation method.](../public/posts/scipy-ndimage-interpolation/scipy-brainweb-example.png)
+![An example interpolation, using scipy.ndimage.zoom. The example shows five different synthetic brain MRIs. Each MRI has a different interpolation method.](/posts/scipy-ndimage-interpolation/scipy-brainweb-example.png)
 
 Here we can see that nearest neighbor (order=0) gives a blocky appearance, while order=1 (trilinear interpolation) also has some loss of detail relative to order 3 spline interoplation. No interpolation method can perfectly recover the true 1 mm simulated image shown on the right, indicating that one cannot rely on interpolation alone as a method to reduce MRI exam time without a sacrifice in image quality.
 
@@ -40,7 +40,7 @@ Further details of the digital MRI phantom use for this example have been descri
 
 Although it was not previously well documented, `scipy.ndimage` uses the convention that pixel centers fall on integer coordinate indices between `0` and `shape[axis] - 1` along each axis. Two potential coordinate conventions are diagrammed in 1D in the figure below.
 
-![Coordinate Conventions](../public/posts/scipy-ndimage-interpolation/scipy-points-vs-grid.png)
+![Coordinate Conventions](/posts/scipy-ndimage-interpolation/scipy-points-vs-grid.png)
 
 At the top, the samples are treated as isolated points, whereas in the bottom panel points are considered as the centers of regulary spaced grid elements (i.e. pixels in 2D, voxels in 3D). The top interpolation has historically been used for ndimage's `wrap` (aka periodic) boundary mode. This leads to surprising behavior, because the period for `n` samples is `n - 1` with the first and last sample exactly overlapping. In SciPy 1.6, a new mode, `grid-wrap` was introduced which uses the grid interpretation of the lower panel so that all `n` samples are replicated.
 
