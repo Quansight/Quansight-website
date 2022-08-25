@@ -15,7 +15,7 @@ hero:
 # SciPy n-dimensional Image Processing
 
 SciPy's ndimage module provides a powerful set of general, n-dimensional image processing operations, categorized into areas such as filtering, interpolation and morphology. Traditional image processing deals with 2D arrays of pixels, possibly with an additional array dimension of size 3 or 4 to represent color channel and transparency information. However, there are many scientific applications where we may want to work with more general arrays such as the 3D volumetric images produced by medical imaging methods like computed tomography (CT) or magnetic resonance imaging (MRI) or biological imaging approaches such as light sheet microscopy. Aside from spatial axes, such data may have additional axes representing other quantities such as time, color, spectral frequency or different contrasts. Functions in ndimage have been implemented in a general n-dimensional manner so that they can be applied across 2D, 3D or more dimensions. A more detailed overview of the module is available in the
-[SciPy ndimage tutorial](https://docs.scipy.org/doc/scipy/reference/tutorial/ndimage.html). SciPy's image functions are also used by downstream libraries such as [scikit-image](https://scikit-image.org) to implement higher-level algorithms for things like image restoration, segmentation and registration. 
+[SciPy ndimage tutorial](https://docs.scipy.org/doc/scipy/reference/tutorial/ndimage.html). SciPy's image functions are also used by downstream libraries such as [scikit-image](https://scikit-image.org) to implement higher-level algorithms for things like image restoration, segmentation and registration.
 
 ## Interpolation in scipy.ndimage
 
