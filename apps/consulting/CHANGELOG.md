@@ -1,3 +1,11 @@
+Aug 25, 2022
+
+Via Storyblok:
+
+- Fix 'Learn More' links in service areas links at
+  bottom of /data-engineering-mlops
+
+
 July 7, 2022
 
 Via Storyblok:
