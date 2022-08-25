@@ -24,7 +24,7 @@ The target was to show the world that NumPy is efficient in handling quasi real-
 The primary technical outcome of my work is available in the [numpy documentation](https://deploy-preview-461--numpy-preview.netlify.app/benchmark/).
 
 <p align="center">
-      <img src = "/posts/numpy_benchmarking_blog/journey.jpeg" alt = "A word cloud with themes, open-source projects and people mentioned throughout the blog post. Each is stylized using a different font, most of them calligraphical.">
+      <img src = "/posts/numpy_benchmarking_blog/journey.jpeg" alt = "A word cloud with themes, open-source projects and people mentioned throughout the blog post. Each is stylized using a different font, most of them calligraphical." />
 </p>
 
 ## My Experience
