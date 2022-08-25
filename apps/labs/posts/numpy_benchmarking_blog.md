@@ -12,7 +12,7 @@ hero:
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
-In this blog post, I'll be talking about my journey in Quansight.
+In this blog post, I'll be talking about my journey in Quansight. 
 I want to share all things I was involved in and accomplished.
 What issues I faced, and most importantly, what were awesome life hacks I learned during this period.
 
