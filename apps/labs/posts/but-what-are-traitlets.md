@@ -4,7 +4,7 @@ published: August 30, 2020
 author: matthias-bussonnier
 description: 'You have probably seen Traitlets in applications, you likely even use it.
 The package has nearly 5 million downloads on conda-forge alone. But, what is Traitlets?
-In this post we'll answer this question along with where Traitlets came from,
+In this post we''ll answer this question along with where Traitlets came from,
 its applications, and a bit of history.'
 category: [PyData Ecosystem]
 featuredImage:
