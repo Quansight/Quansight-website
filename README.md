@@ -439,7 +439,9 @@ You can fetch data from Storyblok directly using queries. To add the query:
 ## Technical blog workflow
 
 All of the **Quansight Labs** blog posts are located inside `apps/labs/posts`,
-and there all new posts should be added.
+and there all new posts should be added. For now, all posts should be
+contributed using a branch-and-merge strategy within the website repo itself,
+instead of a fork-and-merge strategy. This may change in the future.
 
 Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). The
 `posts` directory also contains a [`categories.json`
