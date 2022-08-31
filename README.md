@@ -124,7 +124,7 @@ These are the concrete steps to follow to move your code from branch to branch:
    git checkout develop
    git pull
    git checkout -b release-YYYYMMDD
-   git push
+   git push -u origin release-YYYYMMDD
    ```
    Be sure to use `main` as the base branch of your PR and not `develop`.
 5. Review both preview URLs that Vercel will add to your pull request.
