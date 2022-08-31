@@ -8,9 +8,11 @@ import { serializePost } from '../../posts/serializePost';
 import { sortPostsByDate } from '../../posts/sortPostsByDate';
 import { DEFAULT_API_OFFSET } from './constants';
 
-export const getAllPosts = async (): Promise<TPostsResponse> => {
+export const getAllPosts = async (
+  preview: boolean,
+): Promise<TPostsResponse> => {
   try {
-    const team = await getTeam();
+    const team = await getTeam(preview);
     const postsFileNames = getAllPostFileNames();
 
     const posts = await Promise.all(
