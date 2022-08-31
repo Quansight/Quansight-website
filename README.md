@@ -14,8 +14,11 @@ There are primarily two types of website changes, each with its own process:
 - Code changes (this GitHub repo)
 
 Note that Labs blog posts are a bit of an exception. Categorically they are
-content changes, but the content lives in the Git repo, so technically they are
-code changes, so they follow the process for code changes.
+content changes, but the content lives in the Git repo -- so technically they are
+code changes, and they follow the process for code changes.
+Note that once issue #396 is implemented, the LLC blog posts will be
+converted to use the same machinery as the Labs posts, and after that
+time the LLC blog posts will *also* follow the process for code changes.
 
 This section will cover the process for each type of change.
 
@@ -63,7 +66,7 @@ same. There are three major stages, each with its own steps.
       get the Vercel preview URL from the Slack channel.)
    3. If it all looks good, coordinate with the dev team to merge the PR to
       `main`.
-   4. Once that PR is merged to main, wait for the production build to finish
+   4. Once that PR is merged to `main`, wait for the production build to finish
       deploying (check Slack channel for notifications), then check your changes
       against the live site. You may need to clear your browser's cache before
       you can see your changes.
@@ -72,7 +75,7 @@ same. There are three major stages, each with its own steps.
 
 Code changes move through three stages, each of which corresponds to a branch in
 git: a feature branch (PR), then the `develop` branch, then `main`. When your
-code gets merged to the `main` branch, Vercel deploys it the public website.
+code gets merged to the `main` branch, Vercel deploys it to the public website.
 
 You should never merge your code into the `develop` branch unless it's ready for
 deployment (via merge to `main`). Putting your code into the `develop` branch is
@@ -108,8 +111,10 @@ all use the word preview, and it means different things to each of them.
 
 Storyblok has two kinds of API keys: a preview key and a public key. With the
 Storyblok preview key, you can pass either `version=draft` or
-`version=published` to the Storyblok content API (side note: Storyblok has
-multiple APIs, but the main API is the content API). In contrast, [the public
+`version=published` to the Storyblok content API, where `version=draft`
+shows the *Saved* version of content from Storyblok and `version=published`
+shows the *Published* version from Storyblok.  (Side note: Storyblok has
+multiple APIs, but the main API we are concerned with is the content API). In contrast, [the public
 key only allows access to published
 content](https://www.storyblok.com/docs/api/content-delivery#topics/authentication).
 
@@ -117,7 +122,7 @@ Next.js supports a preview mode. The framework provides a method to set a cookie
 on the client. When this cookie is set, Next.js renders pages dynamically
 instead of statically and passes a boolean to the runtime. This allows the site
 to switch its behavior at runtime -- for example, passing `version=draft` to the
-Storyblok API when preview mode is activated versus `version=published` when it
+Storyblok API when Next.js preview mode is activated versus `version=published` when it
 is not.
 
 Finally, Vercel has preview URLs and a preview environment. Preview URLs point
@@ -127,7 +132,8 @@ It would be nice if all of these different uses of preview mapped cleanly to
 each other, but they do not. For example, you may be on a Vercel preview URL,
 but you may or may not be in Next.js preview mode. The Vercel preview
 environment uses the Storyblok preview key, but if it's not in Next.js preview
-mode, it passes `version=published` to the Storyblok API.
+mode, it passes `version=published` to the Storyblok API and you will see
+only Published content from Storyblok.
 
 Everything has been configured so that you shouldn't have to think about this
 too much, but just in case you find yourself confused, hopefully this section
@@ -196,7 +202,7 @@ and quansight-labs, respectively. However, because both projects are mapped to
 the same repository on GitHub, whenever a commit is made to the repo, whether
 the commit was just for the Consulting site or just for the Labs site, it
 triggers a preview deployment for both sites. Likewise, whenever a merge is made
-to the `main` branch, it triggers a production deployment to both websites.
+to the `main` branch, it triggers a production deployment to both live websites.
 
 Each Vercel project has settings that allow it to integrate with Storyblok,
 Next.js, and GitHub. Each Vercel project has three separate environments:
@@ -223,7 +229,7 @@ pre-rendered page (except when doing local development and then it always
 dynamically renders each page).
 
 The code in this repo takes advantage of the Next.js preview mode to integrate
-better with Storyblok and Vercel. When the code detects preview mode, it passes
+better with Storyblok and Vercel. When the code detects preview mode, it defaults to passing
 `{"version": "draft"}` to the Storyblok API in order to preview content that has
 been saved but not yet published -- in other words, `draft` content.
 
@@ -236,11 +242,11 @@ codebase defines a visual banner at the top of each page. When the site is in
 preview mode, the banner turns yellow and displays a message telling the user
 that they can see draft content. When the site is not in preview mode, the
 banner turns gray and tells the user that they can see published content. The
-banner provides a way to switch in and out of Next.js preview mode so long as
-the user is not viewing the page via the Storyblok UI (because when they are
+banner provides a clickable link to switch in and out of Next.js preview mode. 
+This switch is disabled when the user is viewing the page via the Storyblok UI, because when they are
 working within Storyblok, they should always see the site in Next.js preview
-mode so that they can see changes that are being worked on, have not yet been
-published). The banner does not show at all if the site was built in a
+mode so that they can see changes that are being worked on.
+The banner does not show at all if the site was built in a
 production environment.
 
 The codebase takes advantage of [Vercel environment
@@ -264,14 +270,14 @@ differ from each other.
 
 Let's take the row labeled "Vercel URL (gray banner)." This view is accessed by
 clicking on a Vercel SHA-style URL, which looks like
-https://quansight-labs-SHA-quansight.vercel.app. Typically this URL is found
-either on a GitHub pull request or in Slack. The site served by that URL can be
+`https://labs-{SHA}-quansight.vercel.app`. Typically this URL is found
+either on a GitHub pull request or in `#qwebsite-ops` in Slack. The site served by that URL can be
 built from any branch or commit on GitHub except `main`, which is reserved for
 production. It is built with the "preview" Vercel environment. It does not start
 in Next.js preview mode (though the end user can switch into it). The preview
 Vercel environment contains the preview Storyblok API key. The site passes
 `version=published` to the Storyblok API. It displays a gray banner at the top
-of each page. And the gray banner contains a way for the end user to switch in
+of each page, and that gray banner contains a way for the end user to switch in
 to and out of the Next.js preview mode.
 
 Note that within Storyblok, there is no button to switch out of preview mode.
@@ -287,15 +293,17 @@ review. With only one project per website, you get one preview URL (per website)
 posted to the pull request. If it's not clear from the pull request title or
 code which website the PR affects, the author should clarify in the PR
 description. Ideally, the PR author should add one or both of the (`Labs`,
-`LLC`) GitHub labels, as appropriate.
+`LLC`) GitHub labels, as appropriate, to mark the site(s) that the changes
+are meant to affect.
 
 Code in the `main` branch should only be used by the production Vercel
-environment, and it should show only published content. While it may be tempting
+environment, and it should show only published content from Storyblok. While it may be tempting
 to want to see draft content against the `main` branch code, it creates the
-potential for confusion. For example, if someone takes a screenshot of a
+potential for confusion and it is better not to allow it.
+For example, if someone takes a screenshot of a
 webpage, and in the screenshot you can see in the browser address bar that the
-URL is on the live production site (such as quansight.com), then you will be
-able to safely assume that you're seeing content that was **published** in
+URL is on the live production site (such as quansight.com), then there is no doubt
+that you're seeing content that was **published** in
 Storyblok at the time the `main` branch was deployed to production. The other
 reason for this discipline is that it's better to limit reviewers and content
 editors to previewing draft content against the `develop` branch in order to
@@ -308,12 +316,13 @@ be present on a production build of the site.
 
 The preview/development environment banner should allow the user to toggle
 between seeing published versus draft/saved Storyblok content. The banner should
-change colors to indicate which of the two content preview modes the user is in.
+change colors to indicate which of the two content preview modes the user is in
+(that is, whether they are seeing draft or published content from Storyblok).
 
 The above should hold _except_ when the user is using the Storyblok web
 interface; then the website should always be in "draft" mode, showing saved (but
 not published) content. And as mentioned previously, it should show this content
-against the latest code from the `develop` branch (not the main branch).
+against the latest code from the `develop` branch (not the `main` branch).
 Related: the content team shouldn't have to think about which URL to use with
 the Storyblok editor. It should be just one default URL, and this URL should
 show draft content against the latest code in `develop`.
