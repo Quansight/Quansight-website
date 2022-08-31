@@ -10,7 +10,7 @@ featuredImage:
     Foundational projects, to technique-specific projects, to domain-specific
     projects, to applications.'
 hero:
-  src: /posts/nasa-rose-grant-2020/scientific_python_ecosystem.png
+  imageSrc: /posts/nasa-rose-grant-2020/scientific_python_ecosystem.png
   alt: 'River of scientific python projects, flowing from Python and Numpy, to
     Foundational projects, to technique-specific projects, to domain-specific
     projects, to applications.'
