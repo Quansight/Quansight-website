@@ -1,5 +1,27 @@
 # Quansight Website
 
+## Orientation
+
+Here is some basic info to help orient you to this repo.
+
+- This repo holds the **code** for two websites:
+  - Quansight Consulting LLC: https://quansight.com
+  - Quansight Labs: https://labs.quansight.org
+- The websites' **content** lives in [Storyblok](https://app.storyblok.com),
+  which requires a login.
+  - But **Labs** blog posts live under apps/labs/posts.
+- The websites are hosted and deployed via Vercel.
+- The repo's default branch is `develop`, **not** `main`.
+  - Most pull requests (including Labs blog posts) will be opened against
+    `develop`.
+  - `main` is used for production (i.e., the live websites).
+  - You can think of `develop` as staging.
+  - Only hot fixes and releases are to be opened against `main`.
+  - Pushing commits to `main` triggers a deploy of both websites via Vercel.
+- `./apps/consulting/` holds code for the Consulting website.
+- `./apps/labs/` holds code for the Labs website.
+- `./libs` holds code shared by both websites.
+
 ## How to make changes to the website
 
 Before reading this section, familiarize yourself with [Vercel
@@ -18,7 +40,7 @@ content changes, but the content lives in the Git repo -- so technically they ar
 code changes, and they follow the process for code changes.
 Note that once issue #396 is implemented, the LLC blog posts will be
 converted to use the same machinery as the Labs posts, and after that
-time the LLC blog posts will *also* follow the process for code changes.
+time the LLC blog posts will _also_ follow the process for code changes.
 
 This section will cover the process for each type of change.
 
@@ -93,16 +115,26 @@ These are the concrete steps to follow to move your code from branch to branch:
    `develop` branch.
    - Consider doing a
      [squash-merge](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits),
-     especially if your pull request is relatively small, in order to contribute
-     to a clean commit history on the `develop` branch.
-4. When you want your code change to go live, open a pull request to merge the
-   `develop` branch into `main`.
+     especially if your pull request is relatively small, in order to keep a
+     clean commit history.
+4. When you want your code change to go live, cut a release branch from
+   `develop`, then open a pull request to merge the release branch into `main`.
+   From the command line:
+   ```sh
+   git checkout develop
+   git pull
+   git checkout -b release-YYYYMMDD
+   git push
+   ```
+   Be sure to use `main` as the base branch of your PR and not `develop`.
 5. Review both preview URLs that Vercel will add to your pull request.
 6. If all looks good and your pull request has gotten approval, then merge it
    into `main`. This will kick off a production deploy on Vercel. Check the live
    public websites once the deploy is finished (Vercel will send a notification
    to the Slack channel). You may need to clear your browser's cache before you
    can see your changes.
+7. Delete the release branch if GitHub did not automatically delete it when you
+   merged your pull request.
 
 ## A word about the word "preview"
 
@@ -112,8 +144,8 @@ all use the word preview, and it means different things to each of them.
 Storyblok has two kinds of API keys: a preview key and a public key. With the
 Storyblok preview key, you can pass either `version=draft` or
 `version=published` to the Storyblok content API, where `version=draft`
-shows the *Saved* version of content from Storyblok and `version=published`
-shows the *Published* version from Storyblok.  (Side note: Storyblok has
+shows the _Saved_ version of content from Storyblok and `version=published`
+shows the _Published_ version from Storyblok. (Side note: Storyblok has
 multiple APIs, but the main API we are concerned with is the content API). In contrast, [the public
 key only allows access to published
 content](https://www.storyblok.com/docs/api/content-delivery#topics/authentication).
@@ -242,7 +274,7 @@ codebase defines a visual banner at the top of each page. When the site is in
 preview mode, the banner turns yellow and displays a message telling the user
 that they can see draft content. When the site is not in preview mode, the
 banner turns gray and tells the user that they can see published content. The
-banner provides a clickable link to switch in and out of Next.js preview mode. 
+banner provides a clickable link to switch in and out of Next.js preview mode.
 This switch is disabled when the user is viewing the page via the Storyblok UI, because when they are
 working within Storyblok, they should always see the site in Next.js preview
 mode so that they can see changes that are being worked on.
