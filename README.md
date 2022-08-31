@@ -383,11 +383,6 @@ done in a similar way.
 Prerequisites:
 
 - [Node](https://nodejs.org/en/)
-- To add the needed environment variables to your local environment, you will
-  need admin access to the [Quansight org in
-  Vercel](https://vercel.com/quansight), or you will need to work with a dev who
-  has this access.
-- (Optional) [Vercel CLI](https://vercel.com/cli)
 
 To run the website locally on your own machine, you must first clone this git
 repo, `cd` into the repo, then run `npm install`.
@@ -395,10 +390,11 @@ repo, `cd` into the repo, then run `npm install`.
 This repo contains two projects (websites): Consulting and Labs. You must create
 a `.env` file for each project that you want to develop locally. For example,
 for Quansight Consulting LLC, you will need to create `apps/consulting/.env`.
+You can do this by copying the example environment file:
 
-You will need to ask [@gabalafou](https://github.com/gabalafou) for the
-environment variables. <a href="slack://user?team=T8XM7KN5B&id=U02JA56KDDY">Open Slack direct
-message</a>
+```
+cp apps/consulting/.env.example apps/consulting/.env
+```
 
 Run `npm run start:consulting` or `npm run start:labs` to start a corresponding
 dev server. Navigate to <http://localhost:4200/> or use localhost preview in
