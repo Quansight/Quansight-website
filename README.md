@@ -327,11 +327,6 @@ Related: the content team shouldn't have to think about which URL to use with
 the Storyblok editor. It should be just one default URL, and this URL should
 show draft content against the latest code in `develop`.
 
-When a reviewer visits a Vercel preview URL, the site should show draft content
-by default. This, again, is to help catch any potential content/code conflicts
-early. The banner at the top of the site will allow the reviewer to easily
-switch the content mode from published to draft.
-
 Hitting the publish button in Storyblok should not push that content to the
 public-facing site; rather, it should queue up the content for the next
 production deploy. This prevents bypassing any GitHub workflows that have been
