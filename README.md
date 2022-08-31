@@ -397,8 +397,8 @@ a `.env` file for each project that you want to develop locally. For example,
 for Quansight Consulting LLC, you will need to create `apps/consulting/.env`.
 
 You will need to ask [@gabalafou](https://github.com/gabalafou) for the
-environment variables. [Open Slack direct
-message](slack://user?team=T8XM7KN5B&id=U02JA56KDDY).
+environment variables. <a href="slack://user?team=T8XM7KN5B&id=U02JA56KDDY">Open Slack direct
+message</a>
 
 Run `npm run start:consulting` or `npm run start:labs` to start a corresponding
 dev server. Navigate to <http://localhost:4200/> or use localhost preview in
