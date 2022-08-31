@@ -16,7 +16,8 @@ There are primarily two types of website changes, each with its own process:
 Note that Labs blog posts are a bit of an exception. Categorically they are
 content changes, but the content lives in the Git repo -- so technically they are
 code changes, and they follow the process for code changes.
-Note that once issue #396 is implemented, the LLC blog posts will be
+Note that once [issue #396](https://github.com/Quansight/Quansight-website/issues/396)
+is implemented, the LLC blog posts will be
 converted to use the same machinery as the Labs posts, and after that
 time the LLC blog posts will *also* follow the process for code changes.
 
