@@ -16,7 +16,8 @@ There are primarily two types of website changes, each with its own process:
 Note that Labs blog posts are a bit of an exception. Categorically they are
 content changes, but the content lives in the Git repo -- so technically they are
 code changes, and they follow the process for code changes.
-Note that once issue #396 is implemented, the LLC blog posts will be
+Note that once [issue #396](https://github.com/Quansight/Quansight-website/issues/396)
+is implemented, the LLC blog posts will be
 converted to use the same machinery as the Labs posts, and after that
 time the LLC blog posts will *also* follow the process for code changes.
 
@@ -264,9 +265,9 @@ differ from each other.
 | Name                       | How to access          | GitHub branch | Vercel env | Storyblok API key | Next.js preview? | Storyblok version param | Display top banner? | Top banner color | Button to enter/exit preview? |
 | -------------------------- | ---------------------- | ------------- | ---------- | ----------------- | ---------------- | ----------------------- | ------------------- | ---------------- | ----------------------------- |
 | Production                 | .com/.org URL          | `main`        | production | public            | off              | `published`             | No                  | n/a              | n/a                           |
-| Storyblok (yellow banner)  | via Storyblok UI       | `develop`     | preview    | preview           | on               | `draft`                 | Yes                 | gray             | No                            |
-| Vercel URL (gray banner)   | via link to Vercel URL | any non-main  | preview    | preview           | off              | `published`             | Yes                 | yellow           | Yes                           |
-| Vercel URL (yellow banner) | via enter-preview      | any non-main  | preview    | preview           | on               | `draft`                 | Yes                 | gray             | Yes                           |
+| Storyblok (yellow banner)  | via Storyblok UI       | `develop`     | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | No                            |
+| Vercel URL (gray banner)   | via link to Vercel URL | any non-main  | preview    | preview           | off              | `published`             | Yes                 | gray             | Yes                           |
+| Vercel URL (yellow banner) | via enter-preview      | any non-main  | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | Yes                           |
 
 Let's take the row labeled "Vercel URL (gray banner)." This view is accessed by
 clicking on a Vercel SHA-style URL, which looks like
@@ -438,7 +439,9 @@ You can fetch data from Storyblok directly using queries. To add the query:
 ## Technical blog workflow
 
 All of the **Quansight Labs** blog posts are located inside `apps/labs/posts`,
-and there all new posts should be added.
+and there all new posts should be added. For now, all posts should be
+contributed using a branch-and-merge strategy within the website repo itself,
+instead of a fork-and-merge strategy. This may change in the future.
 
 Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). The
 `posts` directory also contains a [`categories.json`
