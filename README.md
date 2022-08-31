@@ -264,9 +264,9 @@ differ from each other.
 | Name                       | How to access          | GitHub branch | Vercel env | Storyblok API key | Next.js preview? | Storyblok version param | Display top banner? | Top banner color | Button to enter/exit preview? |
 | -------------------------- | ---------------------- | ------------- | ---------- | ----------------- | ---------------- | ----------------------- | ------------------- | ---------------- | ----------------------------- |
 | Production                 | .com/.org URL          | `main`        | production | public            | off              | `published`             | No                  | n/a              | n/a                           |
-| Storyblok (yellow banner)  | via Storyblok UI       | `develop`     | preview    | preview           | on               | `draft`                 | Yes                 | gray             | No                            |
-| Vercel URL (gray banner)   | via link to Vercel URL | any non-main  | preview    | preview           | off              | `published`             | Yes                 | yellow           | Yes                           |
-| Vercel URL (yellow banner) | via enter-preview      | any non-main  | preview    | preview           | on               | `draft`                 | Yes                 | gray             | Yes                           |
+| Storyblok (yellow banner)  | via Storyblok UI       | `develop`     | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | No                            |
+| Vercel URL (gray banner)   | via link to Vercel URL | any non-main  | preview    | preview           | off              | `published`             | Yes                 | gray             | Yes                           |
+| Vercel URL (yellow banner) | via enter-preview      | any non-main  | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | Yes                           |
 
 Let's take the row labeled "Vercel URL (gray banner)." This view is accessed by
 clicking on a Vercel SHA-style URL, which looks like
