@@ -396,28 +396,9 @@ This repo contains two projects (websites): Consulting and Labs. You must create
 a `.env` file for each project that you want to develop locally. For example,
 for Quansight Consulting LLC, you will need to create `apps/consulting/.env`.
 
-The easiest way to create this file is with the [Vercel command line
-interface](https://vercel.com/cli). For example, this is the command you would
-run to create the `.env` file for Consulting:
-
-```sh
-cd apps/consulting
-vercel env pull .env
-```
-
-If you're running this for the first time, you will have to configure the Vercel
-CLI. You will need to link the folder to its corresponding project in Vercel:
-
-- ./apps/consulting is linked to `quansight-consulting`
-- ./apps/labs is linked to `quansight-labs`
-
-If you cannot use the Vercel CLI, you can get the needed environment variables
-from the admin portal:
-
-- [consulting environment
-  variables](https://vercel.com/quansight/quansight-consulting/settings/environment-variables)
-- [labs environment
-  variables](https://vercel.com/quansight/quansight-labs/settings/environment-variables)
+You will need to ask [@gabalafou](https://github.com/gabalafou) for the
+environment variables. [Open Slack direct
+message](slack://user?team=T8XM7KN5B&id=U02JA56KDDY).
 
 Run `npm run start:consulting` or `npm run start:labs` to start a corresponding
 dev server. Navigate to <http://localhost:4200/> or use localhost preview in
@@ -427,7 +408,7 @@ page manually.
 
 Important: whenever the website's dependencies change or are updated, the lock
 file `package-lock.json` will be updated. Whenever `package-lock.json` is
-updated, you should re-run `npm install` (or `npm cli`), so that your local
+updated, you should re-run `npm install` (or `npm ci`), so that your local
 environment's dependencies will match the production environment.
 
 ## Adding new components
