@@ -5,8 +5,9 @@
 Here is some basic info to help orient you to this repo.
 
 - This repo holds the **code** for two websites:
-  - Quansight Consulting LLC: https://quansight.com
-  - Quansight Labs: https://labs.quansight.org
+  - `./apps/consulting/` holds code for Quansight Consulting LLC: https://quansight.com
+  - `./apps/labs/` hold code for Quansight Labs: https://labs.quansight.org
+  - `./libs` holds code shared by both websites.
 - The websites' **content** lives in [Storyblok](https://app.storyblok.com),
   which requires a login.
   - But **Labs** blog posts live under apps/labs/posts.
@@ -18,9 +19,6 @@ Here is some basic info to help orient you to this repo.
   - You can think of `develop` as staging.
   - Only hot fixes and releases are to be opened against `main`.
   - Pushing commits to `main` triggers a deploy of both websites via Vercel.
-- `./apps/consulting/` holds code for the Consulting website.
-- `./apps/labs/` holds code for the Labs website.
-- `./libs` holds code shared by both websites.
 
 ## How to make changes to the website
 
