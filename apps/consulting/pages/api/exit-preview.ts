@@ -1,10 +1,1 @@
-import { ServerResponse } from 'http';
-
-import { NextApiRequest, NextApiResponse } from 'next';
-
-const handler = (req: NextApiRequest, res: NextApiResponse): ServerResponse => {
-  res.clearPreviewData();
-  return res.status(200).end();
-};
-
-export default handler;
+export { exitPreviewHandler as default } from '@quansight/shared/utils';
