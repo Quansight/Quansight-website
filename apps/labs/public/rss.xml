@@ -14,22 +14,6 @@
         </image>
         <copyright>All rights reserved 2022, Quansight</copyright>
         <item>
-            <title><![CDATA[This is hello world post!]]></title>
-            <link>https://labs.quansight.org/blog/hello-world-post</link>
-            <guid>https://labs.quansight.org/blog/hello-world-post</guid>
-            <pubDate>Thu, 13 Oct 2022 22:00:00 GMT</pubDate>
-            <description><![CDATA[Lorem ipsum dolor sit amet]]></description>
-            <enclosure url="https://labs.quansight.org/posts/hello-world-post/featured.png" length="0" type="image/png"/>
-        </item>
-        <item>
-            <title><![CDATA[This is another hello world post!]]></title>
-            <link>https://labs.quansight.org/blog/another-post</link>
-            <guid>https://labs.quansight.org/blog/another-post</guid>
-            <pubDate>Wed, 12 Oct 2022 22:00:00 GMT</pubDate>
-            <description><![CDATA[Lorem ipsum dolor sit amet]]></description>
-            <enclosure url="https://labs.quansight.org/posts/another-post/featured.png" length="0" type="image/png"/>
-        </item>
-        <item>
             <title><![CDATA[Checking for accessibility: thoughts and a checklist!]]></title>
             <link>https://labs.quansight.org/blog/thoughts-on-reviewing-for-accessibility</link>
             <guid>https://labs.quansight.org/blog/thoughts-on-reviewing-for-accessibility</guid>

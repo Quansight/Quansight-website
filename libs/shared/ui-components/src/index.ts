@@ -23,6 +23,9 @@ export * from './Hero/types';
 export * from './Logos/Logos';
 export * from './Logos/types';
 
+export * from './OptOutAnalytics/OptOutAnalytics';
+export * from './OptOutAnalytics/types';
+
 export * from './Picture/Picture';
 export * from './Picture/types';
 
