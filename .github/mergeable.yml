@@ -6,4 +6,4 @@ mergeable:
       - do: approvals
         min:
           count: 1
-          message: 'Pull request must have at least 1 approvals'
+          message: 'Pull request must have at least 1 approval'
