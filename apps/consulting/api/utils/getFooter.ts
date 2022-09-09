@@ -4,8 +4,11 @@ import { FooterItem } from '../types/basic';
 import { FooterItemDocument } from '../types/hooks';
 import { FooterItemQuery } from '../types/operations';
 
-export const getFooter = async (): Promise<FooterItem> => {
-  const { data } = await Api.getFooterItem<FooterItemQuery>(FooterItemDocument);
+export const getFooter = async (preview: boolean): Promise<FooterItem> => {
+  const { data } = await Api.getFooterItem<FooterItemQuery>(
+    FooterItemDocument,
+    preview,
+  );
 
   return data.FooterItem;
 };

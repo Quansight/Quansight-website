@@ -1,0 +1,11 @@
+This file is used to trigger Vercel deploys when there are no code changes, only content changes in Storyblok.
+
+Here's how it works:
+
+git checkout -b trigger-deploy
+echo `date` >> last-content-only-deploy.txt
+git add last-content-only-deploy.txt
+git commit -m"date last-content-only-deploy.txt"
+git push
+
+Fri Jul 29 15:37:27 CEST 2022
