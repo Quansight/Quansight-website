@@ -1,3 +1,9 @@
+September 13, 2022
+
+Via Storyblok:
+
+- Remove DE Shaw logo from homepage
+
 August 30, 2022
 
 Via Storyblok:
