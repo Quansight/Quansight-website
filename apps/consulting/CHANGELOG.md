@@ -1,3 +1,12 @@
+September 13, 2022
+
+Via Storyblok:
+
+- Remove errant comma from homepage text
+- Remove DE Shaw logo from homepage
+- Demote 'Open Source Software' page from
+  header to bottom of footer
+
 August 30, 2022
 
 Via Storyblok:
