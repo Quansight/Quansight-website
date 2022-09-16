@@ -24,7 +24,7 @@ export const Page: FC<TPageProps> = ({
   usePreviewMode(preview);
 
   const handlePageItemLoad = async (slug: string): Promise<PageItem> => {
-    const pageItem = getPage({ slug, relations });
+    const pageItem = getPage({ slug, relations }, preview);
     return pageItem;
   };
 

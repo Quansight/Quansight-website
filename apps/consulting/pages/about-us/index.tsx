@@ -25,7 +25,11 @@ export const About: FC<TContainerProps> = ({
   <Layout
     footer={<Footer {...footer.content} />}
     header={
-      <Header {...header.content} domainVariant={DomainVariant.Quansight} />
+      <Header
+        {...header.content}
+        domainVariant={DomainVariant.Quansight}
+        preview={preview}
+      />
     }
   >
     <SEO
@@ -45,10 +49,10 @@ export const getStaticProps: GetStaticProps<
   TContainerProps,
   ISlugParams
 > = async ({ preview = false }) => {
-  const data = await getPage({ slug: 'about-us', relations: '' });
-  const footer = await getFooter();
-  const header = await getHeader();
-  const team = await getTeam();
+  const data = await getPage({ slug: 'about-us', relations: '' }, preview);
+  const footer = await getFooter(preview);
+  const header = await getHeader(preview);
+  const team = await getTeam(preview);
 
   const pageData: PageItem = {
     ...data,
