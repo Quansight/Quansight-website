@@ -32,7 +32,9 @@ export type TPostMeta = {
   author: TPostAuthor;
   category?: string[];
   featuredImage: TFeaturedImage;
-  hero?: Pick<THeroProps, 'imageSrc' | 'imageAlt'>;
+  hero?:
+    | Pick<THeroProps, 'imageSrc' | 'imageAlt'>
+    | Pick<THeroProps, 'imageMobile' | 'imageTablet' | 'imageDesktop'>;
 };
 
 export type TPost = {

@@ -16,12 +16,16 @@ const BoardListItem: FC<TBoardListItemProps> = ({
   <div
     className="
     flex flex-col items-center
-    lg:flex-row lg:items-start lg:w-1/2 lg:h-[30rem]
-    2xl:h-[25rem]
+    lg:flex-row lg:items-start
   "
   >
-    <div className="lg:w-1/3 lg:min-w-[9rem] lg:text-right">
-      <Picture imageSrc={imageSrc} imageAlt={imageAlt} width={90} height={90} />
+    <div className="relative w-full h-[9rem] lg:w-1/3 lg:min-w-[9rem] lg:text-right">
+      <Picture
+        imageSrc={imageSrc}
+        imageAlt={imageAlt}
+        layout="fill"
+        objectFit="contain"
+      />
     </div>
     <div className="mt-[1.5rem] mb-[4.4rem] lg:mt-0">
       <h3

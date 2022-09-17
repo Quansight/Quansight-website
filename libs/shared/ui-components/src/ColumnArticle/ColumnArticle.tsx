@@ -25,32 +25,32 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
           <ColumnArticleHeader header={header} level={2} />
         </header>
       )}
-      <main className="md:flex md:flex-wrap md:justify-between">
-        <section className={columnClass}>
+      <div className="flex flex-wrap justify-between">
+        <section className={clsx(columnClass, 'order-1')}>
           <ColumnArticleSection
             headerLevelModifier={headerLevelModifier}
-            content={leftColumn.content}
+            content={leftColumn?.content}
           />
         </section>
-        <section className={columnClass}>
+        <section className={clsx(columnClass, 'order-4 md:order-2')}>
           <ColumnArticleSection
             headerLevelModifier={headerLevelModifier}
-            content={rightColumn.content}
+            content={rightColumn?.content}
           />
         </section>
-        <section className={columnClass}>
+        <section className={clsx(columnClass, 'order-3')}>
           <ColumnArticleSection
             headerLevelModifier={headerLevelModifier}
-            content={final.content}
+            content={final?.content}
           />
         </section>
         <section
           className={clsx(
             columnClass,
-            'md:flex md:justify-center md:items-center',
+            'flex order-2 justify-center items-center w-[100%] md:order-4',
           )}
         >
-          <div className="relative w-4/5 h-4/5">
+          <div className="relative w-4/5 h-4/5 min-h-[240px]">
             <Picture
               imageSrc={imageSrc}
               imageAlt={imageAlt}
@@ -59,7 +59,7 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
             />
           </div>
         </section>
-      </main>
+      </div>
     </article>
   );
 };

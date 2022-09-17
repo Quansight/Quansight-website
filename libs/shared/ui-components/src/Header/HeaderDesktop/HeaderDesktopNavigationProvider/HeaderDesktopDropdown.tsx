@@ -75,7 +75,7 @@ export const HeaderDesktopDropdown: FC<THeaderDesktopDropdownProps> = ({
         <div className="absolute top-full right-0 z-20 pt-[2.4rem] w-max max-w-[25rem]">
           <ul
             id="options"
-            className="flex flex-col gap-[0.8rem] justify-between items-start p-[2.8rem] min-w-[19.8rem] text-left text-black bg-white/90"
+            className="flex flex-col gap-[1.8rem] justify-between items-start p-[2.8rem] min-w-[19.8rem] text-left text-black bg-white"
           >
             {links.map((link) => (
               <HeaderDesktopDropdownLink

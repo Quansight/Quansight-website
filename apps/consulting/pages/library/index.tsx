@@ -31,6 +31,7 @@ import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 import { filterLibraryTiles } from '../../utils/filterLibraryTiles/filterLibraryTiles';
 import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
+import { getCarouselTiles } from '../../utils/getLibraryTiles/getCarouselTiles';
 import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
 import { paginateLibraryTiles } from '../../utils/paginateLibraryTiles/paginateLibraryTiles';
 
@@ -39,6 +40,7 @@ export const Library: FC<TLibraryProps> = ({
   header,
   footer,
   tiles,
+  carouselTiles,
   preview,
   postTypes,
   postCategories,
@@ -114,7 +116,11 @@ export const Library: FC<TLibraryProps> = ({
     <Layout
       footer={<Footer {...footer.content} />}
       header={
-        <Header {...header.content} domainVariant={DomainVariant.Quansight} />
+        <Header
+          {...header.content}
+          domainVariant={DomainVariant.Quansight}
+          preview={preview}
+        />
       }
     >
       <SEO
@@ -129,7 +135,9 @@ export const Library: FC<TLibraryProps> = ({
         </Page>
       )}
       <div className="px-8 mx-auto lg:px-40 xl:px-[30rem] max-w-layout">
-        <Carousel tiles={tiles} />
+        {carouselTiles?.length > 0 && (
+          <Carousel carouselTiles={carouselTiles} />
+        )}
         <Filters
           postTypes={postTypes}
           postCategories={postCategories}
@@ -152,16 +160,22 @@ export const getStaticProps: GetStaticProps<
   TLibraryProps,
   ISlugParams
 > = async ({ preview = false }) => {
-  const data = await getPage({ slug: 'library', relations: '' });
-  const header = await getHeader();
-  const footer = await getFooter();
-  const blogArticles = await getPageItems({
-    relations: LIBRARY_AUTHOR_RELATION,
-    prefix: ARTICLES_DIRECTORY_SLUG,
-  });
-  const libraryLinks = await getLibraryLinkItems();
-  const postTypes = await getDataSourceEntries({ slug: 'post-type' });
-  const postCategories = await getDataSourceEntries({ slug: 'post-category' });
+  const data = await getPage({ slug: 'library', relations: '' }, preview);
+  const header = await getHeader(preview);
+  const footer = await getFooter(preview);
+  const blogArticles = await getPageItems(
+    {
+      relations: LIBRARY_AUTHOR_RELATION,
+      prefix: ARTICLES_DIRECTORY_SLUG,
+    },
+    preview,
+  );
+  const libraryLinks = await getLibraryLinkItems(preview);
+  const postTypes = await getDataSourceEntries({ slug: 'post-type' }, preview);
+  const postCategories = await getDataSourceEntries(
+    { slug: 'post-category' },
+    preview,
+  );
 
   return {
     props: {
@@ -170,6 +184,7 @@ export const getStaticProps: GetStaticProps<
       footer,
       postTypes,
       postCategories,
+      carouselTiles: getCarouselTiles(blogArticles),
       tiles: getLibraryTiles({
         blogArticles,
         libraryLinks,

@@ -14,8 +14,8 @@ export const TextArticle: FC<TTextArticleProps> = ({ header, text }) => {
     >
       <h2
         className="
-          mb-[2.5rem] text-[4rem] font-extrabold leading-[4.9rem] md:text-[4.8rem]
-          md:leading-[5.5rem] font-heading
+          mb-[2.5rem] text-[4rem] font-extrabold leading-[4.9rem] md:text-[3.8rem]
+          md:leading-[4.8rem] font-heading
           text-violet
         "
       >

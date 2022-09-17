@@ -1,12 +1,15 @@
 import { getTeam } from '../../../api';
 import { TPost } from '../../../types/storyblok/bloks/posts';
-import { getPostsDirectory } from '../../posts/getPostsDirectory';
+import { getAllPostFileNames } from '../../posts/getAllPostFileNames';
 import { serializePost } from '../../posts/serializePost';
 
-export const getPost = async (slug: string): Promise<TPost | undefined> => {
+export const getPost = async (
+  slug: string,
+  preview: boolean,
+): Promise<TPost | undefined> => {
   try {
-    const team = await getTeam();
-    const postsFileNames = getPostsDirectory();
+    const team = await getTeam(preview);
+    const postsFileNames = getAllPostFileNames();
     const fileName = postsFileNames.find((name) => name.startsWith(slug));
 
     if (!fileName) {

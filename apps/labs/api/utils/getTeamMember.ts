@@ -8,10 +8,12 @@ import { TeamMemberQuery } from '../types/operations';
 
 export const getTeamMember = async (
   slug: string,
+  preview: boolean,
 ): Promise<Pick<PersonItem, 'id' | 'slug' | 'content'>> => {
   const { data } = await Api.getTeamMemberBySlug<TeamMemberQuery>(
     TeamMemberDocument,
     slug,
+    preview,
   );
 
   // @ts-ignore type error
