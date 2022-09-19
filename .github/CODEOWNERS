@@ -1,0 +1,15 @@
+# Gabriel as default owner
+*   @gabalafou
+
+# Noa as default reviewer for Labs blogs and assets
+# Tania/Ralf/others to be manually added as appropriate
+/apps/labs/posts   @noatamir
+/apps/labs/public/posts   @noatamir
+
+# Noa as default reviewer for changes to Labs Storyblok content
+# Tania/Ralf/others to be manually added as appropriate
+/apps/labs/CHANGELOG.md   @noatamir 
+
+# Brian as default reviewer for changes to LLC Storyblok content
+# Kate/others to be manually added as appropriate
+/apps/consulting/CHANGELOG.md   @bskinn
