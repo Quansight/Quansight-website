@@ -4,8 +4,7 @@
 # Noa as reviewer for Markdown examples
 /examples   @noatamir
 
-# Noa as default reviewer for Labs blogs and assets
-# Tania/Ralf/others to be manually added as appropriate
+# Noa, Tania & Ralf as default reviewers for Labs blogs and assets
 /apps/labs/posts          @noatamir  @trallard  @rgommers
 /apps/labs/public/posts   @noatamir  @trallard  @rgommers
 
