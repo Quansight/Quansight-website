@@ -211,7 +211,7 @@ print(f'{df} \n\n'); df.info()
     3  <NA>     25  10.0   True  always TDD.        <NA>
 
 
-    <class cudf.core.dataframe.DataFrame>
+    <class 'cudf.core.dataframe.DataFrame'>
     RangeIndex: 4 entries, 0 to 3
     Data columns (total 6 columns):
     #   Column       Non-Null Count  Dtype
