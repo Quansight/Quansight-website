@@ -5,10 +5,10 @@ author: ismael-kone
 description: 'In the next lines, I'll try to capture my experience at Quansight Labs as an intern working on the cuDF implementation of the dataframe interchange protocol. cuDF is a dataframe library very much like pandas which operates on the GPU in order to benefit from its computing power.'
 category: [PyData Ecosystem]
 featuredImage:
-  src: ../public/posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/feature.png
+  src: /posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/feature.png
   alt: 'On the left, we have the interoperability between dataframe libraries through `pandas` which is a implementation dependency. On the right, we have the interoperability through the dataframe interchange API which an abstract dependency.'
 hero:
-  imageSrc: ../public/posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/blog_hero_var2.svg
+  imageSrc: /posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/blog_hero_var2.svg
   imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
@@ -50,7 +50,7 @@ Now, we can move from one dataframe library to another one using directly the `f
 <p align="center">
     <img
      alt="On the left, we have the interoperability between dataframe libraries through `pandas` which is a implementation dependency. On the right, we have the interoperability through the dataframe interchange API which an abstract dependency."
-     src="../public/posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/design_comparison.jpg">
+     src="/posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/design_comparison.jpg">
     <i>Design comparison without and with the dataframe interchange protocol API </i>
 </p>
 <br/>
@@ -69,7 +69,7 @@ The dataframe interchange protocol is in fact a composition of interfaces:
 <p align="center">
     <img
      alt="A composition of the 3 interfaces forming the dataframe interchange protocol: `_CuDFDataFrame` has 1 or more `_CuDFColumn` which in turn has 1 or more `_CuDFBuffer` "
-     src="../public/posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/protocol_interfaces.jpg">
+     src="/posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/protocol_interfaces.jpg">
     <i>Composition of the dataframe interchange protocol interfaces. Cardinality on links means "has 1 or more" of the Interfaces mentioned.</i>
 </p>
 <br/>
