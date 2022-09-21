@@ -4,7 +4,7 @@ published: August 18, 2021
 description: 'Instead of going through all the complications involved in renting or acquiring dedicated hardware, setting up credentials and monitoring costs of a benchmarkin suite, we hoped we could use the same free cloud resources normally used for CI tests. Ideally, GitHub Actions.'
 category: [Developer workflows]
 featuredImage:
-  src: ../public/posts/github-actions-benchmarks/feature.png
+  src: /posts/github-actions-benchmarks/feature.png
   alt: 'Reliability of benchmarks in GitHub Actions. This 2D plot shows a 16-day timeseries in the X axis.
   Each data point in the X axis corresponds to a cloud of 75 measurements (one per benchmark test).
   The y-axis spread of each cloud corresponds to the performance ratio. Ideal measurements would have
@@ -13,7 +13,7 @@ featuredImage:
   is an observable y-spread, it is small enough to be considered sensitive to performance
   regressions of more than 50%.'
 hero:
-  imageSrc: ../public/posts/github-actions-benchmarks/hero.png
+  imageSrc: /posts/github-actions-benchmarks/hero.png
   imageAlt: 'Reliability of benchmarks in GitHub Actions. This 2D plot shows a 16-day timeseries in the X axis. Each data point in the X axis corresponds to a cloud of 75 measurements (one per benchmark test).
   The y-axis spread of each cloud corresponds to the performance ratio. Ideal measurements would have
   a performance ratio of 1.0, since both runs returned the exact same performance. In practice this
@@ -29,7 +29,7 @@ hero:
   a performance ratio of 1.0, since both runs returned the exact same performance. In practice this
   does not happen and we can observe ratios between 0.6 and 1.5. This plot shows that while there
   is an observable y-spread, it is small enough to be considered sensitive to performance
-  regressions of more than 50%.](../public/posts/github-actions-benchmarks/github-actions-benchmark.png)
+  regressions of more than 50%.](/posts/github-actions-benchmarks/github-actions-benchmark.png)
 
 Benchmarking software is a tricky business. For robust results, you need dedicated
 hardware that only runs the benchmarking suite under controlled conditions. No other
@@ -166,7 +166,7 @@ After collecting data points for 16 days, these are the results:
   a performance ratio of 1.0, since both runs returned the exact same performance. In practice this
   does not happen and we can observe ratios between 0.5 and 1.5. This plot shows that while there is
   an observable y-spread, it is small enough to be considered sensitive to performance regressions
-  of more than 50%.](../public/posts/github-actions-benchmarks/github-actions-benchmark.png)
+  of more than 50%.](/posts/github-actions-benchmarks/github-actions-benchmark.png)
 
 * Average time taken: 1h55min
 * Minimum and maximum ratios observed: 0.51, 1.36
@@ -225,7 +225,7 @@ how bad? Here are the results:
   This 2D plot shows a 16-day timeseries in the X axis. Each data point in the X axis corresponds
   to a cloud of 75 measurements (one per benchmark test). The y-axis spread of each cloud corresponds
   to the performance ratio. Ideal measurements would have a performance ratio of 1.0, since both
-  runs returned the exact same performance. In practice this does not happen.](../public/posts/github-actions-benchmarks/github-actions-benchmark-no-interleaving.png)
+  runs returned the exact same performance. In practice this does not happen.](/posts/github-actions-benchmarks/github-actions-benchmark-no-interleaving.png)
 
 * Average time taken: 1h39min
 * Minimum and maximum ratios observed: 0.43, 1.5
@@ -244,7 +244,7 @@ per commit, instead of two. However, the accuracy loss might be too dramatic.Let
   Each data point in the X axis corresponds to a cloud of 75 measurements (one per benchmark test).
   The y-axis spread of each cloud corresponds to the performance ratio. Ideal measurements would have
   a performance ratio of 1.0, since both runs returned the exact same performance. In practice this
-  does not happen.](../public/posts/github-actions-benchmarks/github-actions-benchmark-single-process.png)
+  does not happen.](/posts/github-actions-benchmarks/github-actions-benchmark-single-process.png)
 
 * Average time taken: 1h7min
 * Minimum and maximum ratios observed: 0.51, 2.76
