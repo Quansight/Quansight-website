@@ -2,7 +2,7 @@
 title: 'Dataframe interchange protocol: cuDF implementation'
 published: October 21, 2021
 author: ismael-kone
-description: 'In the next lines, I'll try to capture my experience at Quansight Labs as an intern working on the cuDF implementation of the dataframe interchange protocol. cuDF is a dataframe library very much like pandas which operates on the GPU in order to benefit from its computing power.'
+description: 'In the next lines, I"ll try to capture my experience at Quansight Labs as an intern working on the cuDF implementation of the dataframe interchange protocol. cuDF is a dataframe library very much like pandas which operates on the GPU in order to benefit from its computing power.'
 category: [PyData Ecosystem]
 featuredImage:
   src: /posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/feature.png
