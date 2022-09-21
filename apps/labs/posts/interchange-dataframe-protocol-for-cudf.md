@@ -198,10 +198,13 @@ data = {'int': [1000, 2, 300, None],
 df = cudf.DataFrame(data)
 df['categorical'] = df['int'].astype('category')
 ```
+
 Let's see the dataframe and make sure column dtypes are correctly recognized internally:
+
 ```python
 print(f'{df} \n\n'); df.info()
 ```
+
 **output**:
 
         int  uint8 float   bool       string categorical
@@ -228,6 +231,7 @@ print(f'{df} \n\n'); df.info()
 
 
 Now, we create the dataframe interchange protocol object to check that basic information like number of rows, column names and dtypes are accurate:
+
 ```python
 dfo =  df.__dataframe__()
 print(f'{dfo}: {dfo.num_rows()} rows\n')
@@ -235,6 +239,7 @@ print('Column\t Non-Null Count\t\t\t\t\t    Dtype\n')
 for n, c in zip(dfo.column_names(), dfo.get_columns()):
     print(f'{n}\t\t      {int(c.size - c.null_count)}\t\t{c.dtype}')
 ```
+
 **output**:
 
     <cudf.core.df_protocol._CuDFDataFrame object at 0x7f3edee0d8e0>: 4 rows
@@ -250,12 +255,14 @@ for n, c in zip(dfo.column_names(), dfo.get_columns()):
 
 
 How about buffers? We will examine those of the 'float' column:
+
 ```python
 fcol = dfo.get_column_by_name('float')
 buffers = fcol.get_buffers()
 for k in buffers:
     print(f'{k}: {buffers[k]}\n')
 ```
+
 **output**:
 
     data: (CuDFBuffer({'bufsize': 32, 'ptr': 140704936368128, 'dlpack': <capsule object "dltensor" at 0x7ff893505e40>, 'device': 'CUDA'}), (<_DtypeKind.FLOAT: 2>, 64, '<f8', '='))
@@ -267,6 +274,7 @@ for k in buffers:
 We can notice the column dtype `<_DtypeKind.FLOAT: 2>` from the data buffer and the dtype of the validity mask which is always`<_DtypeKind.UINT: 1>` here. Finally there is no `offset` buffer as it is reserved to variable-length data like string.
 
 Let's retrieve data and validity arrays from their buffers using the [DLPack protocol](https://github.com/dmlc/dlpack) and compare with the column itself:
+
 ```python
 data_buffer = fcol.get_buffers()['data'][0]
 validity_buffer = fcol.get_buffers()['validity'][0]
@@ -276,6 +284,7 @@ print(f'column: {df.float}')
 print(f'data: {data}')
 print(f'validity: {validity}')
 ```
+
 **output**:
 
     float column
@@ -297,6 +306,7 @@ df_rebuilt = _from_dataframe(dfo)
 print(f'rebuilt df\n----------\n{df_rebuilt}\n')
 print(f'df\n--\n{df}')
 ```
+
 **output**:
 
     rebuilt df
