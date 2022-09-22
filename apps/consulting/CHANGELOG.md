@@ -1,3 +1,11 @@
+September 21, 2022
+
+Via Storyblok:
+
+- Add "Training" page to site
+- Remove "Home" link from header nav
+- Add "Training" link to header nav
+
 September 13, 2022
 
 Via Storyblok:
