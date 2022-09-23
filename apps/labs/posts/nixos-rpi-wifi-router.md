@@ -5,10 +5,10 @@ author: anthony-scopatz
 description: 'I recently moved, and my new place has a relatively small footprint. (Yes, I moved during the COVID-19 pandemic. And yes, it was crazy.) I quickly realized that was going to need a wireless router of some sort, or more formally, a wireless access point (WAP).'
 category: [Beyond PyData]
 featuredImage:
-  src: ../public/posts/nixos-rpi-wifi-router/feature.png
+  src: /posts/nixos-rpi-wifi-router/feature.png
   alt: 'A code snippet of how to set up a wireless DNS with NixOS.'
 hero:
-  imageSrc: ../public/posts/nixos-rpi-wifi-router/blog_hero_var2.svg
+  imageSrc: /posts/nixos-rpi-wifi-router/blog_hero_var2.svg
   imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
