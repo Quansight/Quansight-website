@@ -2,7 +2,7 @@
 title: 'Array Libraries Interoperability'
 published: October 13, 2021
 author: anirudh-dagar
-description: 'Let's dive into the technicalities involved in array libraries interoperability and understand the protocols making this a reality.'
+description: "Let's dive into the technicalities involved in array libraries interoperability and understand the protocols making this a reality."
 category: [Array API]
 featuredImage:
   src: /posts/array-libraries-interoperability/feature.png
