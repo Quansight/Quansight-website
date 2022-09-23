@@ -5,10 +5,10 @@ author: anirudh-dagar
 description: 'Let's dive into the technicalities involved in array libraries interoperability and understand the protocols making this a reality.'
 category: [Array API]
 featuredImage:
-  src: ../public/posts/array-libraries-interoperability/feature.png
+  src: /posts/array-libraries-interoperability/feature.png
   alt: 'A pro and cons list comparing two protocols, uarray and the Array API.'
 hero:
-  imageSrc: ../public/posts/array-libraries-interoperability/hero.png
+  imageSrc: /posts/array-libraries-interoperability/hero.png
   imageAlt: 'Meme of Master Splinter leading the baby turtles from TMNT. Splinter
      represents NumPy, and the turtles represent TensorFlow, CuPy, PyTorch and JAX.'
 ---
@@ -24,7 +24,7 @@ with their usage in the Python Scientific and Data Science software stack.
     <img
      alt="Meme of Master Splinter leading the baby turtles from TMNT. Splinter
      represents NumPy, and the turtles represent TensorFlow, CuPy, PyTorch and JAX."
-     src="../public/posts/array-libraries-interoperability/ninja_arrays.png">
+     src="/posts/array-libraries-interoperability/ninja_arrays.png">
     <i>Master NumPy leading the young Tensor Turtles</i>
 </p>
 
@@ -98,7 +98,7 @@ computations, but now will need to learn a new API.
 	<img
      alt="Comic depicting the happy relationship between NumPy and SciPy, and
      how envious other array/tensor libraries are of it."
-     src="../public/posts/array-libraries-interoperability/array_wonderland.JPG"
+     src="/posts/array-libraries-interoperability/array_wonderland.JPG"
 	 style="object-fit:cover;
             width: 80%;"/>
 </p>
@@ -245,7 +245,7 @@ SciPy.
 
 <p align="center">
 	<a href="https://quansight-labs.github.io/array-api-demo/intro.html">
-	<img alt="Screenshot of the demo's website" src="../public/posts/array-libraries-interoperability/array_api_demo_screenshot.png">
+	<img alt="Screenshot of the demo's website" src="/posts/array-libraries-interoperability/array_api_demo_screenshot.png">
     <i>Array API Demo</i>
     </a>
 </p>
@@ -381,7 +381,7 @@ I've been working on adding uarray backend support to more SciPy modules.
 
 <p align="center">
 	<a href="https://github.com/scipy/scipy/issues/14353">
-	<img alt="SciPy: uarray compatibility tracker" src="../public/posts/array-libraries-interoperability/uarray_compatibility_tracker.png">
+	<img alt="SciPy: uarray compatibility tracker" src="/posts/array-libraries-interoperability/uarray_compatibility_tracker.png">
     <i>SciPy: uarray compatibility tracker</i>
     </a>
 </p>
