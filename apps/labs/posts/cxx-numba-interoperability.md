@@ -62,7 +62,7 @@ functions which return the addresses of C++ library functions and
 can be easily called from Python using various techniques, here we use
 [ctypes](https://docs.python.org/3/library/ctypes.html).
 
-We provide here a Python script [cxx2py.py](https://raw.githubusercontent.com/Quansight/Quansight-website/public/posts/cxx-numba-interoperability/cxx2py.py) that
+We provide here a Python script [cxx2py.py](/posts/cxx-numba-interoperability/cxx2py.py) that
 auto-generates, from a user-supplied C++ header and source files, the
 C/C++ wrapper library as well as a Python
 [ctypes](https://docs.python.org/3/library/ctypes.html) wrapper
