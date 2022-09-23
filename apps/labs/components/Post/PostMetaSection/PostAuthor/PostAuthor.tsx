@@ -25,7 +25,7 @@ export const PostAuthor: FC<TPostAuthorProps> = ({
       <p className="text-[1.4rem] font-normal leading-[2.7rem] text-black text-sans">
         {nickName}
       </p>
-      <p className="text-[1.9rem] font-bold leading-[2.7rem] text-black underline text-sans">
+      <p className="text-[1.9rem] font-bold leading-[2.7rem] text-black text-sans">
         {fullName}
       </p>
     </div>

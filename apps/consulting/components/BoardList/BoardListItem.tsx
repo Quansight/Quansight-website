@@ -16,8 +16,7 @@ const BoardListItem: FC<TBoardListItemProps> = ({
   <div
     className="
     flex flex-col items-center
-    lg:flex-row lg:items-start lg:w-1/2 lg:h-[30rem]
-    2xl:h-[25rem]
+    lg:flex-row lg:items-start
   "
   >
     <div className="relative w-full h-[9rem] lg:w-1/3 lg:min-w-[9rem] lg:text-right">

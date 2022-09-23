@@ -1,11 +1,38 @@
+import { ReactNode } from 'react';
+
+import { Maybe } from 'graphql/jsutils/Maybe';
+
 import { TBlok, TImage, TLink, TRichText } from '@quansight/shared/types';
 
-type LinkItem = {
-  linkText?: string;
-  linkImage?: TImage;
-  linkUrl: TLink;
-} & TBlok;
+export enum LinkTargetType {
+  Story = 'story',
+  Url = 'url',
+}
 
+type TFooterLinkWrapper = {
+  linkUrl: TLink;
+  queryString?: string;
+};
+
+export type TFooterLinkWrapperProps = {
+  children: ReactNode;
+  className?: string;
+} & TFooterLinkWrapper;
+
+export type TFooterLinkContentProps = {
+  linkText: Maybe<string>;
+  linkImage?: TImage;
+};
+
+type TFooterLink = TFooterLinkContentProps & TFooterLinkWrapperProps;
+
+export type TFooterLinkProps = {
+  className?: string;
+} & TFooterLink;
+
+type TFooterLinkRawData = TFooterLink & TBlok;
+
+// Provider Bloks
 export type TFooterLogoProps = {
   logoMobile: TImage;
   logoDesktop: TImage;
@@ -13,7 +40,7 @@ export type TFooterLogoProps = {
 
 export type TFooterNavigationProps = {
   title: string;
-  links: LinkItem[];
+  links: TFooterLinkRawData[];
 } & TBlok;
 
 export type TFooterContactProps = {
@@ -25,13 +52,8 @@ export type TFooterContactProps = {
 
 export type TFooterSocialMediaProps = {
   title: string;
-  links: LinkItem[];
+  links: TFooterLinkRawData[];
 } & TBlok;
-
-export type TFooterCopyrightProps = {
-  policyAndConditions: LinkItem[];
-  copyright: string | null;
-};
 
 type TColumn =
   | TFooterNavigationProps
@@ -41,6 +63,11 @@ type TColumn =
 
 export type TFooterColumnProviderProps = {
   data: TColumn;
+};
+
+export type TFooterCopyrightProps = {
+  policyAndConditions: TFooterLinkRawData[];
+  copyright: string | null;
 };
 
 export type TFooterProps = {

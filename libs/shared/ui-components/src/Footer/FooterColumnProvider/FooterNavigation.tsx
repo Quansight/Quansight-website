@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
-import Link from 'next/link';
-
+import { FooterLink } from '../FooterLink/FooterLink';
 import { TFooterNavigationProps } from '../types';
 
 export const FooterNavigation: FC<TFooterNavigationProps> = ({
@@ -14,13 +13,12 @@ export const FooterNavigation: FC<TFooterNavigationProps> = ({
     </h2>
     <div className="flex flex-col">
       <ul>
-        {links.map(({ linkText, linkUrl, _uid }) => (
-          <li key={_uid}>
-            <Link href={`/${linkUrl.cached_url}`}>
-              <a className="pb-5 text-[1.4rem] font-normal leading-[2.3rem]">
-                {linkText}
-              </a>
-            </Link>
+        {links.map((link) => (
+          <li
+            key={link._uid}
+            className="pb-5 text-[1.4rem] font-normal leading-[2.3rem]"
+          >
+            <FooterLink {...link} />
           </li>
         ))}
       </ul>

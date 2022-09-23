@@ -31,11 +31,16 @@ export type THeaderLogoProps = {
 
 export type THeaderSkipLinksProps = {
   skipLinksText: string;
-} & TDomainVariant;
+};
+
+export type THeaderPreviewModeBannerProps = {
+  preview: boolean;
+};
 
 export type THeaderProps = TBookingLink &
   TDomainVariant &
   THeaderLogoProps &
   THeaderNavigation &
   THeaderSkipLinksProps &
+  THeaderPreviewModeBannerProps &
   TBlok;

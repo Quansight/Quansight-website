@@ -1,6 +1,3 @@
-import { readdir } from 'fs/promises';
-import path from 'path';
-
 import { FC } from 'react';
 
 import clsx from 'clsx';
@@ -23,7 +20,6 @@ import { getHeader } from '../../api/utils/getHeader';
 import { LinkWithArrow } from '../../components/LinkWithArrow/LinkWithArrow';
 import { FeaturedPosts } from '../../components/Post/FeaturedPosts/FeaturedPosts';
 import { PostMetaSection } from '../../components/Post/PostMetaSection/PostMetaSection';
-import { POSTS_DIRECTORY_PATH } from '../../services/api/posts/constants';
 import { getPost } from '../../services/api/posts/getPost';
 import { getPostsByCategory } from '../../services/api/posts/getPostsByCategory';
 import { blogAllowedComponents } from '../../services/blogAllowedComponents';
@@ -35,6 +31,7 @@ export type TBlogPostProps = {
   footer?: FooterItem;
   header?: HeaderItem;
   featuredPosts?: TPost[];
+  preview: boolean;
 };
 
 export const BlogPost: FC<TBlogPostProps> = ({
@@ -42,6 +39,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
   footer,
   header,
   featuredPosts,
+  preview,
 }) => {
   if (!post) {
     return null; // TODO we should do something when post is null
@@ -50,7 +48,13 @@ export const BlogPost: FC<TBlogPostProps> = ({
   return (
     <Layout
       footer={<Footer {...footer.content} />}
-      header={<Header {...header.content} domainVariant={DomainVariant.Labs} />}
+      header={
+        <Header
+          {...header.content}
+          domainVariant={DomainVariant.Labs}
+          preview={preview}
+        />
+      }
     >
       <SEO
         title={post.meta.title}
@@ -77,7 +81,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
         <div className="mt-[1.8rem]">
           <PostMetaSection {...post.meta} />
 
-          <div className="w-full max-w-none prose">
+          <div className="w-full max-w-none prose-a:underline-offset-2 prose hover:prose-a:text-violet focus:prose-a:text-violet">
             <MDXRemote {...post.content} components={blogAllowedComponents} />
           </div>
         </div>
@@ -115,14 +119,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<
   TBlogPostProps,
   ISlugParams
-> = async ({ params: { slug } }) => {
-  const post = await getPost(slug);
-  const header = await getHeader();
-  const footer = await getFooter();
+> = async ({ params: { slug }, preview = false }) => {
+  const post = await getPost(slug, preview);
+  const header = await getHeader(preview);
+  const footer = await getFooter(preview);
   const featuredPosts = await getPostsByCategory(
     post.meta.category,
     post.slug,
     2,
+    preview,
   );
 
   return {
@@ -131,6 +136,7 @@ export const getStaticProps: GetStaticProps<
       header,
       footer,
       featuredPosts,
+      preview,
     },
   };
 };
