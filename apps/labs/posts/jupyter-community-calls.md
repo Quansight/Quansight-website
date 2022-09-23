@@ -1,16 +1,18 @@
 ---
 title: 'A year of Jupyter community calls'
 published: December 10, 2021
-author: isabela-presedo-floyd
-description: 'A lot of us showed up for the code, but hung around for the community. We'll continue this post talking about the monthly Jupyter community calls, and how they help all jovyans, Project Jupyter's pet name for their developers and users, stay connected.'
+author: tony-fast
+description: "A lot of us showed up for the code, but hung around for the community. We'll continue this post talking about the monthly Jupyter community calls, and how they help all jovyans, Project Jupyter's pet name for their developers and users, stay connected."
 category: [Community]
 featuredImage:
   src: /posts/jupyter-community-calls/feature.png
-  alt: 'Table laying out each month's community calls in 2021, with links to each call's video.'
+  alt: "Table laying out each month's community calls in 2021, with links to each call's video."
 hero:
   imageSrc: /posts/jupyter-community-calls/blog_hero_var1.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
+
+Additional authors: Isabela Presedo-Floyd
 
 A framing for open source is that the software and code are kernels of community.
 The code, and its abstractions, unite developers and their patrons; 
