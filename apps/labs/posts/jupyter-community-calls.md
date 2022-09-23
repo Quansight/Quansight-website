@@ -5,10 +5,10 @@ author: Isabela Presedo-Floyd
 description: 'A lot of us showed up for the code, but hung around for the community. We'll continue this post talking about the monthly Jupyter community calls, and how they help all jovyans, Project Jupyter's pet name for their developers and users, stay connected.'
 category: [Community]
 featuredImage:
-  src: ../public/posts/jupyter-community-calls/feature.png
+  src: /posts/jupyter-community-calls/feature.png
   alt: 'Table laying out each month's community calls in 2021, with links to each call's video.'
 hero:
-  imageSrc: ../public/posts/jupyter-community-calls/blog_hero_var1.svg
+  imageSrc: /posts/jupyter-community-calls/blog_hero_var1.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
