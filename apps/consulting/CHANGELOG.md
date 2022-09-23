@@ -1,3 +1,14 @@
+September 23, 2022
+
+Via Storyblok:
+
+- Remove Github nick and URL from Ralf
+  - This is to avoid a Github logo showing on his
+    headshot in the Leadership pane of About Us
+  - This will be added back in once #470 is resolved
+- Remove all project listings from all staff
+  - Per Tania's request in #470
+
 September 21, 2022
 
 Via Storyblok:
