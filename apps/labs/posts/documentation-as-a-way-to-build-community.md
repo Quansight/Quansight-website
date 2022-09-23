@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/documentation-as-a-way-to-build-community/blog_feature_org.svg
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
-  imageSrc: ../public/posts/documentation-as-a-way-to-build-community/blog_hero_org.svg
+  imageSrc: /posts/documentation-as-a-way-to-build-community/blog_hero_org.svg
   imageAlt: 'An illustration of a light brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
