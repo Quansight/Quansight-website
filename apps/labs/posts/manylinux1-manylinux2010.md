@@ -58,7 +58,7 @@ compiling, and a `--prefer-binary` option to prefer older binary packages over
 compiling from source, but neither is on by default.
 
 Pip began supporting manylinux2010 wheels with [version
-19.0](https://github.com/pypa/pip/blob/master/NEWS.rst#190-November 12, 2020
+19.0](https://github.com/pypa/pip/blob/master/NEWS.rst#190-2019-01-22)
 released in Jan 2019. The version of Pip that is officially shipped with Python 3.6, via
 the [ensurepip](https://docs.python.org/3.6/library/ensurepip.html) module, is
 version 18. Python 3.7 ships pip 20. It is easy enough to upgrade, but to be on
