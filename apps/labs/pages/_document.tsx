@@ -10,6 +10,10 @@ const Document: FC = () => {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700;800&family=Mukta:wght@400;500;700;800&display=swap"
           rel="stylesheet"
         />
+        <link
+          rel="shortcut icon"
+          href="/favicon.png"
+        />
       </Head>
       <body>
         <Main />
