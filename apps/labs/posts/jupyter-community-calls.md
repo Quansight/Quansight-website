@@ -93,23 +93,7 @@ Information about the community calls for participants and hosts can be found in
 
 Jupyter community calls are still happening! 
 If you want to participate in one of these calls, whether as a presenter or audience member, 
-up-to-date info for the next call can be found on the [Jupyter community calendar](https://jupyter.org/events). 
-
-<style>
-article table {
-  width: 100%;
-  table-layout: fixed;
-}
-article table tr th {
-  width: 25%;
-  text-align: center;
-}
-article table tr td {
-  max-width: 25%;
-  border: 1px solid black;
-  text-align: center;
-}
-</style>
+up-to-date info for the next call can be found on the [Jupyter community calendar](https://jupyter.org/events).
 
 [i18n]: https://jupyterlab.readthedocs.io/en/stable/extension/internationalization.html
 [first]: https://www.youtube.com/watch?v=klxba-v27Q4&list=PLUrHeD2K9Cmkoamm4NjLmvXC4Y6E1o8SP&index=1
