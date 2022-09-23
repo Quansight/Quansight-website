@@ -6,10 +6,11 @@ import { PageItemsQuery, PageItemsQueryVariables } from '../types/operations';
 
 export const getPageItems = async (
   variables: PageItemsQueryVariables,
+  preview: boolean,
 ): Promise<PageItems> => {
   const { data } = await Api.getPageItems<
     PageItemsQuery,
     PageItemsQueryVariables
-  >(PageItemsDocument, variables);
+  >(PageItemsDocument, variables, preview);
   return data.PageItems;
 };
