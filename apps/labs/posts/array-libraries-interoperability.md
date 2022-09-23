@@ -32,8 +32,7 @@ with their usage in the Python Scientific and Data Science software stack.
 
 As someone who's been involved in the Data Science domain for more than four
 years now, I can't think of any of my projects without using an array/tensor
-library. Over time, NumPy (more than 15 years old today) has become a blind
-import before starting any Python project involving manipulation of arrays.
+library. Over time, NumPy (more than 15 years old today) has become a blind import before starting any Python project involving manipulation of arrays.
 
 With the recent advancements in and around the field of Machine Learning,
 Deep Learning techniques have gained a lot of popularity in the AI community.
