@@ -5,7 +5,7 @@ author: melissa-mendonca
 description: 'Having official high-level documentation written using up-to-date content and techniques will certainly mean more users (and developers/contributors) are involved in the NumPy community. So, if everybody agrees on its importance, why is it so hard to write good documentation?'
 category: [Community, Developer workflows, OSS Experience]
 featuredImage:
-  src: ../public/posts/documentation-as-a-way-to-build-community/blog_feature_org.svg
+  src: /posts/documentation-as-a-way-to-build-community/blog_feature_org.svg
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: ../public/posts/documentation-as-a-way-to-build-community/blog_hero_org.svg
