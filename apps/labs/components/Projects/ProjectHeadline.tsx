@@ -8,7 +8,10 @@ export const ProjectHeadline = ({
   title,
 }: TProjectHeadlineProps) => (
   <div className="flex relative justify-between items-center w-full sm:col-start-1 sm:col-end-2">
-    <h2 className="shrink-0 text-[4rem] font-extrabold leading-[6.648rem] font-heading text-violet">
+    <h2
+      id={title}
+      className="shrink-0 text-[4rem] font-extrabold leading-[6.648rem] font-heading text-violet"
+    >
       {title}
     </h2>
     <button
