@@ -342,6 +342,3 @@ at the bottom of your notebooks!
 
 [![Screenshot of JupyterLab Christmas Theme](/posts/jupyterlab-winter-theme/jupyterlab-theme-christmas.png)](https://github.com/Quansight-Labs/jupyterlab-theme-christmas)
 
----
-
-*This is part of a series of Jupyter tutorials. Find more [tutorials here](/categories/jupytertutorials).*
