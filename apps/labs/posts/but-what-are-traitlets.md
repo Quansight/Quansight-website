@@ -6,7 +6,7 @@ description: 'You have probably seen Traitlets in applications, you likely even 
 The package has nearly 5 million downloads on conda-forge alone. But, what is Traitlets?
 In this post we''ll answer this question along with where Traitlets came from,
 its applications, and a bit of history.'
-category: [PyData Ecosystem]
+category: [PyData ecosystem]
 featuredImage:
   src: /posts/but-what-are-traitlets/feature.png
   alt: 'A code snippet demonstrating the flexibility of Traitlet.'
