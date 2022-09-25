@@ -27,7 +27,7 @@ A recent NumFOCUS small development grant awarded to the SciPy developers allowe
 
 ### Interpolation order example
 
---- show an image for order = 0 vs. 1 vs. 3 vs. 5 ---
+{/* show an image for order = 0 vs. 1 vs. 3 vs. 5 */}
 An illustration of interpolation order is given for a [synthetic brain MRI](https://brainweb.bic.mni.mcgill.ca/) (only one axial slice of the 3D brain is displayed). At the left is a simulated volume at 2 mm resolution. We then use `scipy.ndimage.zoom` to upsample the volume by a factor fo 2.0 along all axes to give an interpolated image where each voxel is of size 1 x 1 x 1 mm.
 
 ![An example interpolation, using scipy.ndimage.zoom. The example shows five different synthetic brain MRIs. Each MRI has a different interpolation method.](/posts/scipy-ndimage-interpolation/scipy-brainweb-example.png)
