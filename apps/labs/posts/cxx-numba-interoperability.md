@@ -109,7 +109,7 @@ $ conda create -n cxx2py-demo -c conda-forge numba rbc cxx-compiler clangdev
 $ conda activate cxx2py-demo
 ```
 
-We assume that the [cxx2py.py](https://raw.githubusercontent.com/Quansight/Quansight-website/public/posts/cxx-numba-interoperability/cxx2py.py) script is copied to the
+We assume that the [cxx2py.py](/posts/cxx-numba-interoperability/cxx2py.py) script is copied to the
 current working directory and is functional:
 
 ```bash
@@ -198,7 +198,7 @@ $ ls *libfoo*
 cxx2py_libfoo.cpp  libcxx2py_libfoo.so  libfoo.py
 ```
 
-Notice that the generated [cxx2py_libfoo.cpp](https://raw.githubusercontent.com/Quansight/Quansight-website/public/posts/cxx-numba-interoperability/cxx2py_libfoo.cpp) file
+Notice that the generated [cxx2py_libfoo.cpp](/posts/cxx-numba-interoperability/cxx2py_libfoo.cpp) file
 contains light-weight C functions for returning the addresses of C++
 functions:
 
@@ -228,7 +228,7 @@ extern "C" intptr_t get_ns__BarCls__fun_address() {
 The `cxx2py_libfoo.cpp` file is built into the shared library
 `libcxx2py_libfoo.so` when `--build` flag is used.
 
-Let's test the wrapper module [libfoo](https://raw.githubusercontent.com/Quansight/Quansight-website/public/posts/cxx-numba-interoperability/libfoo.py) in Python:
+Let's test the wrapper module [libfoo](/posts/cxx-numba-interoperability/libfoo.py) in Python:
 
 ```bash
 $ export LD_LIBRARY_PATH=.  # this makes sure that ctypes is able to find the shared library
@@ -271,7 +271,7 @@ in foo(7)
 In this post, we outlined a method of calling C++ library functions
 from Python with an emphasis on their usage from Numba compiled
 functions with minimal overhead. While the provided tool
-[cxx2py.py](https://raw.githubusercontent.com/Quansight/Quansight-website/public/posts/cxx-numba-interoperability/cxx2py.py) currently supports only wrapping C++ functions
+[cxx2py.py](/posts/cxx-numba-interoperability/cxx2py.py) currently supports only wrapping C++ functions
 with scalar inputs and return values, it can be easily extended to
 support other C++ features as well.
 
