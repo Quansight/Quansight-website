@@ -5,10 +5,10 @@ author: ismael-kone
 description: 'In the next lines, I"ll try to capture my experience at Quansight Labs as an intern working on the cuDF implementation of the dataframe interchange protocol. cuDF is a dataframe library very much like pandas which operates on the GPU in order to benefit from its computing power.'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/feature.png
+  src: /posts/interchange-dataframe-protocol-for-cudf/feature.png
   alt: 'On the left, we have the interoperability between dataframe libraries through `pandas` which is a implementation dependency. On the right, we have the interoperability through the dataframe interchange API which an abstract dependency.'
 hero:
-  imageSrc: /posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/blog_hero_var2.svg
+  imageSrc: /posts/interchange-dataframe-protocol-for-cudf/blog_hero_var2.svg
   imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
@@ -17,11 +17,9 @@ In the next lines, I'll try to capture my experience at Quansight Labs as an int
 
 We'll continue by motivating this project through details about **cuDF** and the **dataframe interchange protocol**.
 
-
 ## cuDF - RAPIDS GPU Dataframes
 
 `cuDF` is a dataframe library very much like `pandas` which operates on the GPU in order to benefit from its computing power. For more details about `cuDF`, please take a look at: [https://rapids.ai/](https://rapids.ai/) and [https://github.com/rapidsai/cudf](https://github.com/rapidsai/cudf).
-
 
 To set the stage, recall that there are many dataframe libraries out there like: [`pandas`](https://pandas.pydata.org/), [`vaex`](https://vaex.io/), [`modin`](https://modin.readthedocs.io/en/latest/), [`dask`](https://dask.org/)/[cudf-dask](https://docs.rapids.ai/api/cudf/stable/dask-cudf.html). Each one has its strengths and weaknesses. For example, `vaex` allows you to work with bigger than memory (RAM) datasets on a laptop, `dask` allows you to distribute computation across processes and cluster nodes and `cudf-dask` is its GPU counterpart.
 
@@ -45,20 +43,17 @@ The dataframe protocol comes into play as the interface specifying a common repr
 
 Now, we can move from one dataframe library to another one using directly the `from_dataframe` method. No needs anymore to go through `pandas`. Note that this possible only among dataframe libraries supporting the protocol. Also, the protocol enforces zero-copy as much as possible which gets us rid of the possible memory overhead mentioned.
 
-
 <br/>
 <p align="center">
     <img
      alt="On the left, we have the interoperability between dataframe libraries through `pandas` which is a implementation dependency. On the right, we have the interoperability through the dataframe interchange API which an abstract dependency."
-     src="/posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/design_comparison.jpg">
+     src="/posts/interchange-dataframe-protocol-for-cudf/design_comparison.jpg" />
     <i>Design comparison without and with the dataframe interchange protocol API </i>
 </p>
 <br/>
 
-
 One of the main benefits of libraries complying with the dataframe interchange is that each library can evolve independently as long as the interface contract specification is followed and we are free from any dataframe library dependency as is the case with pandas.
 For more details about the purpose and scope of the protocol, please take a look [at the DataFrame API documentation](https://github.com/data-apis/dataframe-api/blob/main/protocol/purpose_and_scope.md).
-
 
 ## A brief description of the dataframe interchange protocol
 
@@ -69,7 +64,7 @@ The dataframe interchange protocol is in fact a composition of interfaces:
 <p align="center">
     <img
      alt="A composition of the 3 interfaces forming the dataframe interchange protocol: `_CuDFDataFrame` has 1 or more `_CuDFColumn` which in turn has 1 or more `_CuDFBuffer` "
-     src="/posts/interchange-dataframe-protocol-for-cudf/dataframe-api-cudf/protocol_interfaces.jpg">
+     src="/posts/interchange-dataframe-protocol-for-cudf/protocol_interfaces.jpg" />
     <i>Composition of the dataframe interchange protocol interfaces. Cardinality on links means "has 1 or more" of the Interfaces mentioned.</i>
 </p>
 <br/>
@@ -78,18 +73,17 @@ So each library supporting the protocol should implement these 3 interfaces that
 
 - **DataFrame** mainly exposes different methods to access/select columns (by name, index) and knowing the number of rows.
 
-- **Column** has methods to access the column data type, describe  valid/missing values, exposes different buffers (data, validity and offset),  chunks, ...etc.
+- **Column** has methods to access the column data type, describe valid/missing values, exposes different buffers (data, validity and offset), chunks, ...etc.
 
 - **Buffer** has methods to describe the contiguous block of memory of the column data i.e device (GPU, CPU, ...), memory address, size, etc...
 
 For more details, please have a look at [Python code of the protocol interfaces](https://github.com/data-apis/dataframe-api/blob/main/protocol/dataframe_protocol.py) and [design concepts](https://github.com/data-apis/dataframe-api/blob/main/protocol/design_requirements.md).
 
-### What is expected from `cuDF`   interface implementation
+### What is expected from `cuDF` interface implementation
 
 Let's recap the protocol main features to be implemented in `cuDF`:
 
-
-<table  style="width:100%">
+<table  style={{width: "100%"}}>
   <tr>
     <th>Simple dtype </th>
     <th>Complex dtype </th>
@@ -132,8 +126,7 @@ The above table shows different features of the dataframe interchange protocol t
 
 Checked elements in the table below represent implemented features so far.
 
-
-<table  style="width:100%">
+<table style={{width: "100%"}}>
   <tr>
     <th>Simple dtype </th>
     <th>Complex dtype </th>
@@ -143,30 +136,30 @@ Checked elements in the table below represent implemented features so far.
 
   </tr>
   <tr>
-    <td><input type="checkbox" disabled="disabled" checked="checked"> int</td>
-    <td><input type="checkbox" disabled="disabled" checked="checked"> categorical</td>
-    <td><input type="checkbox" disabled="disabled" checked="checked"> GPU</td>
-    <td><input type="checkbox" disabled="disabled" checked="checked"> all supported dtypes (simple & complex)</td>
-    <td><input type="checkbox" disabled="disabled" checked="checked"> single</td>
+    <td><input type="checkbox" disabled="disabled" checked="checked" /> int</td>
+    <td><input type="checkbox" disabled="disabled" checked="checked" /> categorical</td>
+    <td><input type="checkbox" disabled="disabled" checked="checked" /> GPU</td>
+    <td><input type="checkbox" disabled="disabled" checked="checked" /> all supported dtypes (simple & complex)</td>
+    <td><input type="checkbox" disabled="disabled" checked="checked" /> single</td>
 
   </tr>
   <tr>
-    <td><input type="checkbox" disabled="disabled" checked="checked"> uint8</td>
-    <td><input type="checkbox" disabled="disabled" checked="checked"> string</td>
-    <td><input type="checkbox" disabled="disabled" checked="checked"> CPU</td>
+    <td><input type="checkbox" disabled="disabled" checked="checked" /> uint8</td>
+    <td><input type="checkbox" disabled="disabled" checked="checked" /> string</td>
+    <td><input type="checkbox" disabled="disabled" checked="checked" /> CPU</td>
     <td>-</td>
-    <td><input type="checkbox" disabled="disabled" > multiple</td>
+    <td><input type="checkbox" disabled="disabled"  /> multiple</td>
 
   </tr>
   <tr>
-    <td> <input type="checkbox" disabled="disabled" checked="checked"> float</td>
-    <td><input type="checkbox" disabled="disabled"> datetime</td>
+    <td> <input type="checkbox" disabled="disabled" checked="checked" /> float</td>
+    <td><input type="checkbox" disabled="disabled" /> datetime</td>
     <td>-</td>
     <td>-</td>
     <td>-</td>
   </tr>
   <tr>
-    <td> <input type="checkbox" disabled="disabled" checked="checked"> bool</td>
+    <td> <input type="checkbox" disabled="disabled" checked="checked" /> bool</td>
     <td>-</td>
     <td>-</td>
     <td>-</td>
@@ -184,7 +177,6 @@ We've submitted this work as a [Pull Request](https://github.com/rapidsai/cudf/p
 
 We'll walk through a code example to the protocol in action as we round trip between `pandas` and `cuDF`.
 We start by creating a cuDF dataframe object with columns named after supported dtypes:
-
 
 ```python
 import cudf
@@ -207,6 +199,7 @@ print(f'{df} \n\n'); df.info()
 
 **output**:
 
+```
         int  uint8 float   bool       string categorical
     0  1000      0  <NA>   True        hello        1000
     1     2    128   2.5   <NA>                        2
@@ -227,8 +220,7 @@ print(f'{df} \n\n'); df.info()
     5   categorical  3 non-null      category
     dtypes: bool(1), category(1), float64(1), int64(1), object(1), uint8(1)
     memory usage: 393.0+ bytes
-
-
+```
 
 Now, we create the dataframe interchange protocol object to check that basic information like number of rows, column names and dtypes are accurate:
 
@@ -242,6 +234,7 @@ for n, c in zip(dfo.column_names(), dfo.get_columns()):
 
 **output**:
 
+```
     <cudf.core.df_protocol._CuDFDataFrame object at 0x7f3edee0d8e0>: 4 rows
 
     Column	 Non-Null Count					                Dtype
@@ -252,7 +245,7 @@ for n, c in zip(dfo.column_names(), dfo.get_columns()):
     bool	              3		(<_DtypeKind.BOOL: 20>, 8, '|b1', '|')
     string	              3		(<_DtypeKind.STRING: 21>, 8, 'u', '=')
     categorical	          3		(<_DtypeKind.CATEGORICAL: 23>, 8, '|u1', '=')
-
+```
 
 How about buffers? We will examine those of the 'float' column:
 
@@ -265,11 +258,13 @@ for k in buffers:
 
 **output**:
 
+```
     data: (CuDFBuffer({'bufsize': 32, 'ptr': 140704936368128, 'dlpack': <capsule object "dltensor" at 0x7ff893505e40>, 'device': 'CUDA'}), (<_DtypeKind.FLOAT: 2>, 64, '<f8', '='))
 
     validity: (CuDFBuffer({'bufsize': 512, 'ptr': 140704936365568, 'dlpack': <capsule object "dltensor" at 0x7ff893505e40>, 'device': 'CUDA'}), (<_DtypeKind.UINT: 1>, 8, 'C', '='))
 
     offsets: None
+```
 
 We can notice the column dtype `<_DtypeKind.FLOAT: 2>` from the data buffer and the dtype of the validity mask which is always`<_DtypeKind.UINT: 1>` here. Finally there is no `offset` buffer as it is reserved to variable-length data like string.
 
@@ -287,6 +282,7 @@ print(f'validity: {validity}')
 
 **output**:
 
+```
     float column
     0    <NA>
     1     2.5
@@ -296,6 +292,7 @@ print(f'validity: {validity}')
 
     data: [ 0.   2.5  0.  10. ]
     validity: [0 1 0 1]
+```
 
 Comparing the float column and the data, we see that values are similar except `<NA>` in the column correspond to `0` in the data array. In fact, at the buffer level, we encode missing values by a 'sentinel value' which is 0 here. This is where the validity array comes into play. Together with the data array, we are able to rebuild the column with missing values in their exact places. How? 0s in the validity array indicates places or indexes of missing values in the data and 1s indicates valid/non-missing values.
 All this work is done by a helper function `_from_dataframe` which builds up an entire cuDF dataframe from a dataframe interchange object:
@@ -309,6 +306,7 @@ print(f'df\n--\n{df}')
 
 **output**:
 
+```
     rebuilt df
     ----------
         int  uint8 float   bool       string categorical
@@ -324,23 +322,24 @@ print(f'df\n--\n{df}')
     1     2    128   2.5   <NA>                        2
     2   300    255  <NA>  False         <NA>         300
     3  <NA>     25  10.0   True  always TDD.        <NA>
-
+```
 
 We just went over a roundtrip demo from a cuDF dataframe to the dataframe interchange object. Then we saw how to build a cuDF dataframe object from the dataframe interchange object. Along the way, we've checked the integrity of the data.
-
-
 
 ## Lessons learned
 
 ### Diversity advantage
+
 Many studies show the benefits and better performance of diverse teams. My experience in this project was the [`CONTRIBUTING.md`](https://github.com/rapidsai/cudf/blob/branch-21.08/CONTRIBUTING.md)(old version) document on the repository which was very unclear for me as a newcomer. Following my mentors' advice ([Kshiteej Kalambarkar](https://github.com/kshitij12345) and [Ralf Gommers](https://github.com/rgommers)), I've opened an issue where I've shared my thoughts and kept asking clarifications which ended up in a (merged) [PR](https://github.com/rapidsai/cudf/pull/9026) to restructure the [`CONTRIBUTING.md`](https://github.com/rapidsai/cudf/blob/branch-21.12/CONTRIBUTING.md) (current version) document to make it clearer.
 
 Thus, a diversity of levels (experts, newcomers, etc...) ensures an inclusive environment where everyone can find their way easily.
 
 ### Test Driven Development (TDD)
+
 This process has been very helpful during this project. I've noticed my slowness on days where I've started developing features before writing any test. I kept going back and forth in the code base to ensure the coherence of different pieces of code written for that feature. However, when writing tests I felt the possibility to express all my expectations across different test cases then writing code for each one at a time. In this process, I felt like the tests pointed out next place on the code base where they might be something wrong.
 
 ### Collaboration, speaking out is very helpful
+
 Sometimes, when stumbling upon a problem, just speaking out or sharing the problem to someone else opens your eyes to a possible solution. This happened to me countless times when discussing with my mentor [Kshiteej Kalambarkar](https://github.com/kshitij12345) and my colleague [Alenka Frim](https://github.com/AlenkaF/) whose project is very close to mine. Otherwise, external inputs combined with ours will definitely be better than ours alone.
 
 ### Patience and Perseverence
