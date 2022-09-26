@@ -3,7 +3,7 @@ title: 'An efficient method of calling C++ functions from numba using clang++/ct
 published: October 19, 2021
 author: pearu-peterson
 description: 'An exploration of a method to call C++ libarary function from Numba compiled functions, i.e. python function that are decorated with "numba.jit(nopython=True)"'
-category: [Beyond PyData, PyData Ecosystem]
+category: [Beyond PyData, PyData ecosystem]
 featuredImage:
   src: /posts/cxx-numba-interoperability/blog_feature_var2.svg
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
