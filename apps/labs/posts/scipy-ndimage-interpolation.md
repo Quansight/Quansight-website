@@ -1,8 +1,8 @@
 ---
-title: 'Making SciPy''s Image Interpolation Consistent and Well Documented'
+title: "Making SciPy's Image Interpolation Consistent and Well Documented"
 published: January 22, 2021
 author: gregory-lee
-description: 'In this blog post we will focus specifically on recent improvements that have been made to SciPy''s interpolation functions. A recent NumFOCUS small development grant awarded to the SciPy developers allowed a dedicated effort to fix existing bugs in boundary handling and improve the documentation of the behavior of these modes.'
+description: "In this blog post we will focus specifically on recent improvements that have been made to SciPy's interpolation functions. A recent NumFOCUS small development grant awarded to the SciPy developers allowed a dedicated effort to fix existing bugs in boundary handling and improve the documentation of the behavior of these modes."
 category: [PyData Ecosystem]
 featuredImage:
   src: /posts/scipy-ndimage-interpolation/feature.png
@@ -15,7 +15,7 @@ hero:
 # SciPy n-dimensional Image Processing
 
 SciPy's ndimage module provides a powerful set of general, n-dimensional image processing operations, categorized into areas such as filtering, interpolation and morphology. Traditional image processing deals with 2D arrays of pixels, possibly with an additional array dimension of size 3 or 4 to represent color channel and transparency information. However, there are many scientific applications where we may want to work with more general arrays such as the 3D volumetric images produced by medical imaging methods like computed tomography (CT) or magnetic resonance imaging (MRI) or biological imaging approaches such as light sheet microscopy. Aside from spatial axes, such data may have additional axes representing other quantities such as time, color, spectral frequency or different contrasts. Functions in ndimage have been implemented in a general n-dimensional manner so that they can be applied across 2D, 3D or more dimensions. A more detailed overview of the module is available in the
-[SciPy ndimage tutorial](https://docs.scipy.org/doc/scipy/reference/tutorial/ndimage.html). SciPy's image functions are also used by downstream libraries such as [scikit-image](https://scikit-image.org) to implement higher-level algorithms for things like image restoration, segmentation and registration.
+[SciPy ndimage tutorial](https://docs.scipy.org/doc/scipy/tutorial/ndimage.html). SciPy's image functions are also used by downstream libraries such as [scikit-image](https://scikit-image.org) to implement higher-level algorithms for things like image restoration, segmentation and registration.
 
 ## Interpolation in scipy.ndimage
 
@@ -27,7 +27,7 @@ A recent NumFOCUS small development grant awarded to the SciPy developers allowe
 
 ### Interpolation order example
 
-{/* show an image for order = 0 vs. 1 vs. 3 vs. 5 */}
+{/_ show an image for order = 0 vs. 1 vs. 3 vs. 5 _/}
 An illustration of interpolation order is given for a [synthetic brain MRI](https://brainweb.bic.mni.mcgill.ca/) (only one axial slice of the 3D brain is displayed). At the left is a simulated volume at 2 mm resolution. We then use `scipy.ndimage.zoom` to upsample the volume by a factor fo 2.0 along all axes to give an interpolated image where each voxel is of size 1 x 1 x 1 mm.
 
 ![An example interpolation, using scipy.ndimage.zoom. The example shows five different synthetic brain MRIs. Each MRI has a different interpolation method.](/posts/scipy-ndimage-interpolation/scipy-brainweb-example.png)
