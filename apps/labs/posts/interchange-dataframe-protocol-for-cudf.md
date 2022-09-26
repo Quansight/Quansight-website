@@ -199,7 +199,7 @@ print(f'{df} \n\n'); df.info()
 
 **output**:
 
-```
+```shell
         int  uint8 float   bool       string categorical
     0  1000      0  <NA>   True        hello        1000
     1     2    128   2.5   <NA>                        2
@@ -234,7 +234,7 @@ for n, c in zip(dfo.column_names(), dfo.get_columns()):
 
 **output**:
 
-```
+```shell
     <cudf.core.df_protocol._CuDFDataFrame object at 0x7f3edee0d8e0>: 4 rows
 
     Column	 Non-Null Count					                Dtype
@@ -258,7 +258,7 @@ for k in buffers:
 
 **output**:
 
-```
+```shell
     data: (CuDFBuffer({'bufsize': 32, 'ptr': 140704936368128, 'dlpack': <capsule object "dltensor" at 0x7ff893505e40>, 'device': 'CUDA'}), (<_DtypeKind.FLOAT: 2>, 64, '<f8', '='))
 
     validity: (CuDFBuffer({'bufsize': 512, 'ptr': 140704936365568, 'dlpack': <capsule object "dltensor" at 0x7ff893505e40>, 'device': 'CUDA'}), (<_DtypeKind.UINT: 1>, 8, 'C', '='))
@@ -282,7 +282,7 @@ print(f'validity: {validity}')
 
 **output**:
 
-```
+```shell
     float column
     0    <NA>
     1     2.5
