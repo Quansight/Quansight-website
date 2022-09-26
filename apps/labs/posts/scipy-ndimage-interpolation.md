@@ -48,7 +48,7 @@ Similarly the `scipy.ndimage.zoom` function has a new `grid_mode` option that, w
 
 ### New documentation of boundary handling behavior
 
-Documentation of the boundary modes has been improved, adding [illustrations for the behavior of all modes](https://docs.scipy.org/doc/scipy/reference/tutorial/ndimage.html#interpolation-boundary-handling) and cross-linking to these figures from each individual function's docstring. Additionally, the coordinate origin being at the center of a pixel is more clearly documented and the difference between a pixel vs. point data model is better described.
+Documentation of the boundary modes has been improved, adding [illustrations for the behavior of all modes](https://docs.scipy.org/doc/scipy/tutorial/interpolate.html) and cross-linking to these figures from each individual function's docstring. Additionally, the coordinate origin being at the center of a pixel is more clearly documented, and the difference between a pixel vs. point data model is better described.
 
 ### Downstream Impact
 
