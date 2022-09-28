@@ -6,7 +6,7 @@ description: 'Today I want to look into a topic that has not evolved much since,
 category: [Developer workflows, OSS Experience]
 featuredImage:
   src: /posts/rethinking-jupyter-documentation/feature.png
-  alt: 'A side-by-side comparison of the current documentation of Jupyter with REPL vs NumPy's documentation as a website.'
+  alt: 'A side-by-side comparison of the current documentation of Jupyter with REPL vs NumPy"s documentation as a website.'
 hero:
   imageSrc: /posts/rethinking-jupyter-documentation/blog_hero_var2.svg
   imageAlt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
