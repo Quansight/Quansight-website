@@ -54,21 +54,22 @@ The table below looks at over 2000 issues in the Ibis project.
 It provides an annual summary of the issues tagged in Ibis
 for different backends over a span of six years.
 
-|  <div style="width:120px"/></div>  | <div style="width:70px"/>&nbsp; &nbsp; 2015</div> | <div style="width:70px"/>&nbsp; &nbsp; 2016</div> | <div style="width:70px"/>&nbsp; &nbsp; 2017</div> | <div style="width:70px"/>&nbsp; &nbsp; 2018</div> | <div style="width:70px"/>&nbsp; &nbsp; 2019</div> | <div style="width:70px"/>&nbsp; &nbsp; 2020</div> |
-|:-------------|:------:|:------:|:------:|:------:|:------:|:------:|
-| [Omnisci]    |        |        |        |   31   |   33   |   38   |
-| [Spark]      |        |        |   1    |        |   22   |   3    |
-| [PostgreSQL] |   2    |   3    |   21   |   10   |   17   |   4    |
-| [BigQuery]   |        |        |   15   |   71   |   12   |   2    |
-| [Pandas]     |    2   |        |   49   |   35   |   32   |   4    |
-| [SQLite]     |   25   |   2    |   10   |   8    |   1    |   1    |
-| [Impala]     |   52   |   4    |   15   |   17   |   4    |   2    |
-| [Kudu]       |        |        |        |        |        |   1    |
-| [Geospatial] |        |        |        |        |   7    |   3    |
-| [ClickHouse] |        |        |   8    |   9    |   1    |   4    |
-| [MySQL]      |        |        |        |   2    |   2    |   4    |
-| [SQLAlchemy] |   17   |   3    |   10   |   2    |   5    |        |
-<br>
+|              | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 |
+| :----------- | :--: | :--: | :--: | :--: | :--: | :--: |
+| [Omnisci]    |      |      |      |  31  |  33  |  38  |
+| [Spark]      |      |      |  1   |      |  22  |  3   |
+| [PostgreSQL] |  2   |  3   |  21  |  10  |  17  |  4   |
+| [BigQuery]   |      |      |  15  |  71  |  12  |  2   |
+| [Pandas]     |  2   |      |  49  |  35  |  32  |  4   |
+| [SQLite]     |  25  |  2   |  10  |  8   |  1   |  1   |
+| [Impala]     |  52  |  4   |  15  |  17  |  4   |  2   |
+| [Kudu]       |      |      |      |      |      |  1   |
+| [Geospatial] |      |      |      |      |  7   |  3   |
+| [ClickHouse] |      |      |  8   |  9   |  1   |  4   |
+| [MySQL]      |      |      |      |  2   |  2   |  4   |
+| [SQLAlchemy] |  17  |  3   |  10  |  2   |  5   |      |
+
+<br />
 
 We note an early focus SQLite, SQLAlchemy and Impala.
 Later, work began on the Pandas backend rounding out the three different types of backgrounds.
