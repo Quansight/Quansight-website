@@ -1,5 +1,5 @@
 ---
-title: 'Enhancements to Numba's guvectorize decorator'
+title: 'Enhancements to Numba''s guvectorize decorator'
 published: February 25, 2021
 author: guilherme-leobas
 description: 'Starting from Numba 0.53, Numba will ship with an enhanced version of the @guvectorize decorator. Similar to the @vectorize decorator, @guvectorize now has two modes of operation: Eager, or decoration-time compilation and Lazy, or call-time compilation'
