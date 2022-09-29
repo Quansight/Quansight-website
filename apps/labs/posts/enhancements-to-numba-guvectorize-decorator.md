@@ -6,7 +6,7 @@ description: 'Starting from Numba 0.53, Numba will ship with an enhanced version
 category: [PyData Ecosystem]
 featuredImage:
   src: /posts/enhancements-to-numba-guvectorize-decorator/blog_feature_var1.svg
-  alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
+  alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/enhancements-to-numba-guvectorize-decorator/blog_hero_org.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
