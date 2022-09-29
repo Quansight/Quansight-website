@@ -5,10 +5,10 @@ author: alenka-frim
 description: 'The work I briefly describe in this blog post is the implementation of the dataframe interchange protocol into Vaex which I was working on through the three month period as a Quansight Labs Intern.'
 category: [Array API, PyData Ecosystem]
 featuredImage:
-  src: /posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex/dataframe-api-vaex_protocol.jpg
+  src: /posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_protocol.jpg
   alt: 'Dataframe protocol will enable data interchange between different dataframe libraries for example cuDF, Vaex, Koalas, Pandas, etc. From all of these Vaex is the library for which the implementation of the dataframe protocol was attempted. Vaex is a high performance Python library for lazy Out-of-Core DataFrames.'
 hero:
-  imageSrc: /posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex/dataframe-api-vaex_protocol.jpg
+  imageSrc: /posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_protocol.jpg
   imageAlt: 'Dataframe protocol will enable data interchange between different dataframe libraries for example cuDF, Vaex, Koalas, Pandas, etc. From all of these Vaex is the library for which the implementation of the dataframe protocol was attempted. Vaex is a high performance Python library for lazy Out-of-Core DataFrames.'
 ---
 
@@ -54,7 +54,7 @@ The `__dataframe__` method returns an instance of the `_DataFrame` class. At thi
 
     <img
      alt="UML diagram of the classes `_Buffer`, `_Column` and `_DataFrame`. For the API info see the [concepts in the design page](https://data-apis.org/dataframe-protocol/latest/API.html)."
-     src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex/dataframe-api-vaex_UML.jpg"/>
+     src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_UML.jpg"/>
     <i>UML diagram</i>
 
 
@@ -101,7 +101,7 @@ This is used in the `from_dataframe` method when columns are iterated through. T
 
     <img
      alt="Column conversion through the buffers."
-     src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex/dataframe-api-vaex_buffer.jpg"/>
+     src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_buffer.jpg"/>
     <i>Buffers</i>
 
 
@@ -151,7 +151,7 @@ Vaex can read data in chunks. It is not the only library that does so and it is 
 
     <img
      alt="Iterating through the chunks in `from_dataframe`."
-     src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex/dataframe-api-vaex_chunks.png"/>
+     src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_chunks.png"/>
     <i>Chunks</i>
 
 
@@ -172,7 +172,7 @@ In the `get_buffers` method the data needs to be encoded to pass it through the 
 
     <img
      alt="My journey through the internship in colors."
-     src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex/dataframe-api-vaex_journey.png"/>
+     src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_journey.png"/>
     <i>My three-month journey</i>
 
 
@@ -206,6 +206,6 @@ Thank you for reading through.
 
     <img
      alt="The end - fin."
-     src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex/dataframe-api-vaex_fin.png"/>
+     src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_fin.png"/>
     <i>Thank you!</i>
 
