@@ -41,7 +41,7 @@ One of the dataframe libraries that is used very often for its high performance 
 
 More about Vaex is available on the [official site](https://vaex.io/docs/index.html) and [blog](https://vaex.io/blog).
 
-Vaex has many <a href="https://github.com/vaexio/vaex#key-features"/>great features</a>! With the implementation of the dataframe protocol other libraries such as Plotly could accept a Vaex dataframe and so the functionalities of both libraries would be enhanced.
+Vaex has many <a href="https://github.com/vaexio/vaex#key-features">great features</a>! With the implementation of the dataframe protocol other libraries such as Plotly could accept a Vaex dataframe and so the functionalities of both libraries would be enhanced.
 
 
 ### Implementation
