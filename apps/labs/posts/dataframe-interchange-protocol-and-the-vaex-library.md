@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_protocol.jpg
   alt: 'Dataframe protocol will enable data interchange between different dataframe libraries for example cuDF, Vaex, Koalas, Pandas, etc. From all of these Vaex is the library for which the implementation of the dataframe protocol was attempted. Vaex is a high performance Python library for lazy Out-of-Core DataFrames.'
 hero:
-  imageSrc: /posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_protocol.jpg
+  imageSrc: /posts/dataframe-interchange-protocol-and-the-vaex-library/hero.jpg
   imageAlt: 'Dataframe protocol will enable data interchange between different dataframe libraries for example cuDF, Vaex, Koalas, Pandas, etc. From all of these Vaex is the library for which the implementation of the dataframe protocol was attempted. Vaex is a high performance Python library for lazy Out-of-Core DataFrames.'
 ---
 
