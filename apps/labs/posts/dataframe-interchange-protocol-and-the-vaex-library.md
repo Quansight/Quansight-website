@@ -52,12 +52,11 @@ The `__dataframe__` method returns an instance of the `_DataFrame` class. At thi
 
 > The smallest building blocks in the memory representation of the dataframe are 1-D arrays (or "buffers"), which are contiguous in memory and contain data with the same dtype. A column consists of one or more 1-D arrays (if, e.g., missing data is represented with a boolean mask, that's a separate array). A dataframe contains one or more columns. A column or a dataframe can be "chunked"; a chunk is a subset of a column or dataframe that contains a set of (neighboring) rows.
 
-<p align="center"/>
     <img
      alt="UML diagram of the classes `_Buffer`, `_Column` and `_DataFrame`. For the API info see the [concepts in the design page](https://data-apis.org/dataframe-protocol/latest/API.html)."
      src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex/dataframe-api-vaex_UML.jpg"/>
     <i>UML diagram</i>
-</p>
+
 
 For the memory representation of the dataframe three separate classes are defined. These are `_Buffer`, `_Column` and `_DataFrame`. In the Vaex implementation we named them `_VaexBuffer`, `_VaexColumn` and `_VaexDataFrame` respectively. Each of them has necessary and utility methods to construct and describe a dataframe.
 
@@ -99,12 +98,12 @@ The function from the `_VaexColumn` class that saves the data into a `_VaexBuffe
 
 This is used in the `from_dataframe` method when columns are iterated through. The method calls the `get_buffers` function and converts the data via `__array_interface__`. If, for example, the user wants to convert Pandas dataframe to a Vaex instance, the Vaex `from_dataframe` method (that we called `from_dataframe_to_vaex` just to make it clearer) calls Pandas `get_buffers` method and then makes the conversion.
 
-<p align="center"/>
+
     <img
      alt="Column conversion through the buffers."
      src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex/dataframe-api-vaex_buffer.jpg"/>
     <i>Buffers</i>
-</p>
+
 
 Understanding the conversion cycle for simple dataframe dtypes by following Pandas implementation outline helped me implement the protocol for Vaex and after the tests were not giving any errors I added a boolean column which worked fine. The next stop was categorical dtypes.
 
@@ -149,12 +148,12 @@ The `_VaexColumn` and `_VaexDataFrame` methods used in the case of chunked dataf
 
 Vaex can read data in chunks. It is not the only library that does so and it is a functionality that should be preserved if possible.
 
-<p align="center"/>
+
     <img
      alt="Iterating through the chunks in `from_dataframe`."
      src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex/dataframe-api-vaex_chunks.png"/>
     <i>Chunks</i>
-</p>
+
 
 ### String dtype
 
@@ -170,12 +169,12 @@ In the `get_buffers` method the data needs to be encoded to pass it through the 
 
 ## Journey through the internship
 
-<p align="center"/>
+
     <img
      alt="My journey through the internship in colors."
      src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex/dataframe-api-vaex_journey.png"/>
     <i>My three-month journey</i>
-</p>
+
 
 *I will end this blog post with a little bit of a personal note.*
 
@@ -204,9 +203,9 @@ If the topic is of interest to you, here is an Example Notebook you can try out 
 
 Thank you for reading through.
 
-<p align="center"/>
+
     <img
      alt="The end - fin."
      src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex/dataframe-api-vaex_fin.png"/>
     <i>Thank you!</i>
-</p>
+
