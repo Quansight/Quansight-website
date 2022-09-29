@@ -5,11 +5,11 @@ author: guilherme-leobas
 description: 'Starting from Numba 0.53, Numba will ship with an enhanced version of the @guvectorize decorator. Similar to the @vectorize decorator, @guvectorize now has two modes of operation: Eager, or decoration-time compilation and Lazy, or call-time compilation'
 category: [PyData Ecosystem]
 featuredImage:
-  src: /posts/enhancements-to-numba-guvectorize-decorator/
-  alt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
+  src: /posts/enhancements-to-numba-guvectorize-decorator/blog_feature_var1.svg
+  alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/enhancements-to-numba-guvectorize-decorator/blog_hero_org.svg
-  imageAlt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
+  imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
 Starting from Numba 0.53, Numba will ship with an enhanced version of the `@guvectorize` decorator. Similar to the [@vectorize](https://numba.pydata.org/numba-doc/dev/user/vectorize.html#the-vectorize-decorator) decorator, [@guvectorize](https://numba.pydata.org/numba-doc/dev/user/vectorize.html#the-guvectorize-decorator) now has two modes of operation:
