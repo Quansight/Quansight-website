@@ -170,7 +170,7 @@ I encourage you to think about what features you are missing when using
 documentation from within Jupyter and let me know. I hope this could become a
 nice addition to Sphinx when consulting documentation from within Jupyter.
 
-For now I've submitted a [Letter of intent to CZI EOSS
+For now I've submitted a [letter of intent to CZI EOSS
 4](https://docs.google.com/document/d/1hk-Ww7pUwnoHINNhDeP9UOPvNEemAFe-pohK5dCtZPs/edit?usp=sharing)
 in an attempt to get some of that work funded to land in IPython, and if you
 have any interest in contributing or want something like that for your library,
