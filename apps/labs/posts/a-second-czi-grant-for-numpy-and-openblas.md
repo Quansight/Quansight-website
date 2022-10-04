@@ -105,7 +105,7 @@ As part of the third cycle of the ​Essential Open Source Software for Science
 (EOSS)​ program, CZI awarded $3 million for 17 new grants. These awards bring the
 total number of funded proposals to 67 projects and the EOSS program's total
 commitment to funding scientific open source to $11.8 million. View the
-​[full list of grantees​](https://chanzuckerberg.com/eoss/proposals/).
+ ​[full list of grantees​](https://chanzuckerberg.com/eoss/proposals/).
 
 As for our project, the funds will be again managed by NumFOCUS as a fiscal
 sponsor. Of the total value (removing the overhead charges), about two-thirds
