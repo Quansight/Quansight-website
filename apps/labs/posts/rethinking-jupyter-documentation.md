@@ -16,7 +16,7 @@ Jupyter Notebook first release was 8 years ago – under the IPython Notebook
 name at the time. Even if notebooks were not invented by Jupyter; they were
 definitely democratized by it. Being Web powered allowed development of many
 changes in the Datascience world. Objects now often expose rich representation; from
-Pandas dataframes with as html tables, to more recent [Scikit-learn model](https://github.com/scikit-learn/scikit-learn/pull/14180).
+Pandas dataframes with as html tables, to more recent [scikit-learn model](https://github.com/scikit-learn/scikit-learn/pull/14180).
 
 Today I want to look into a topic that has not evolved much since, and I believe
 could use an upgrade. Accessing interactive Documentation when in a Jupyter
