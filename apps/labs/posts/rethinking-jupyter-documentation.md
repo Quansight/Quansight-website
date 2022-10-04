@@ -79,7 +79,7 @@ You can use :py:func:`np.einsum('i->', a) <numpy.einsum>` ...
 ```
 
 This also leads to long discussions about which syntax to use in advanced areas,
-like formulas in [Sympy's docstrings](https://github.com/sympy/sympy/issues/14964).
+like formulas in [SymPy's docstrings](https://github.com/sympy/sympy/issues/14964).
 
 Many projects have to implement dynamic docstrings; for example to include all
 the parameters a function or class would pass down using ``**kwargs`` (search
