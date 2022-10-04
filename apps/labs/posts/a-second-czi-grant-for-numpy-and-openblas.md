@@ -33,7 +33,7 @@ Zuckerberg Initiative's program extend well beyond specific scientific areas.
 This past year, the funding has enabled several high-impact improvements to the
 NumPy and OpenBLAS communities. For NumPy, this has meant
 [a new website](https://numpy.org/), the establishment of the
-[Documentation and Website Teams](https://numpy.org/gallery/team.html), and
+[Documentation and Website Teams](https://numpy.org/teams/), and
 mentorship and onboarding activities to grow and diversify the maintainers for
 the project. For OpenBLAS, the focus has been on technical improvements (thread
 safety, support for the 512-bit Advanced Vector Extensions (AVX-512) code, and
