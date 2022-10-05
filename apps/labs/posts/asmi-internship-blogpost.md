@@ -1,6 +1,6 @@
 ---
 title: 'Asmi's Internship Experience at Quansight 2022'
-author: Asmi Jafar
+author: asmi-jafar
 published: October 4th, 2022
 description: 'Blogpost of my three months internship experience working on the Nebari project at Quansight'
 featuredImage:
