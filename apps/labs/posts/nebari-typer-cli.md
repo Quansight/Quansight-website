@@ -55,7 +55,8 @@ First we will start with `nebari --help` command to see all the commands and opt
 <p align="center">
     <img
      alt="Output of new nebari help command"
-     src="/posts/asmi-blogposts/nebari-help.png" />
+     src="/posts/asmi-blogposts/nebari-help.png"
+    />
     <br />
     <i>Output of new Nebari CLI help command</i>
 </p>
@@ -83,15 +84,19 @@ Like we can see it has lots of options available to pass as a flag in the comman
 <p align="center">
     <img
      alt="Output of nebari init --guided-init command"
-     src="/posts/asmi-blogposts/nebari-cli-gcp-1.1.png" />
+     src="/posts/asmi-blogposts/nebari-cli-gcp-1.1.png" 
+     height="600px"
+    />
     <br />
     <img
      alt="Output of nebari init --guided-init command"
-     src="/posts/asmi-blogposts/nebari-cli-gcp-1.2.png" />
+     src="/posts/asmi-blogposts/nebari-cli-gcp-1.2.png" 
+     height="600px"/>
     <br />
     <img
      alt="Output of nebari init --guided-init command"
-     src="/posts/asmi-blogposts/nebari-cli-gcp-1.3.png" />
+     src="/posts/asmi-blogposts/nebari-cli-gcp-1.3.png" 
+     height="600px"/>
     <br />
     <i>Output of nebari init guided-init command</i>
 </p>
