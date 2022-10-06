@@ -84,20 +84,18 @@ Like we can see it has lots of options available to pass as a flag in the comman
 <p align="center">
     <img
      alt="Output of nebari init --guided-init command"
-     src="/posts/asmi-blogposts/nebari-cli-gcp-1.1.png" 
-     width="300"
-     height="100"
+     src="/posts/asmi-blogposts/nebari-cli-1.1.png" 
     />
     <br />
     <img
      alt="Output of nebari init --guided-init command"
      src="/posts/asmi-blogposts/nebari-cli-gcp-1.2.png" 
-     height="100"/>
+     />
     <br />
     <img
      alt="Output of nebari init --guided-init command"
      src="/posts/asmi-blogposts/nebari-cli-gcp-1.3.png" 
-     height="100"/>
+     height="500"/>
     <br />
     <i>Output of nebari init guided-init command</i>
 </p>
