@@ -132,9 +132,9 @@ As we can see we have to pass the `-c/--config` flag for validating the `nebari-
 
 Render command builds the infrasture for the deployment. It creates all terraform stages file that are required during deployment.
 
-****NOTE:**** It's not neccessary to run validate and render command seperately. Because it runs under the hood of the deploy command.
+\***\*NOTE:\*\*** It's not neccessary to run validate and render command seperately. Because it runs under the hood of the deploy command.
 
-Now we will see the ouput of the `nebari-deploy` help command.Deploy command creates the provisioned resources that Nebari needs.
+Now we will see the ouput of the `nebari-deploy` help command. Deploy command creates the provisioned resources that Nebari requires and deploys your project. Nebari also has a destroy command that works the same way the deploy works but instead of creating the provisioned resources it destroys it. It comes with the confirmation that is very important feauture that the new CLI have because previously it didn't ask for the confirmation and the cluster gets destroyed right after executing it (we don't want that thing to happen with us even mistakenly).
 
 ```bash
   nebari deploy --help
@@ -142,29 +142,25 @@ Now we will see the ouput of the `nebari-deploy` help command.Deploy command cre
 
 <p align="center">
     <img
-     alt="Output of nebari deploy"
-     src="" />
+     alt="Output of nebari deploy help"
+     src="/posts/asmi-blogposts/nebari-cli-1.6.png" />
     <br />
-    <i>Output of nebari deploy command</i>
+    <i>Output of nebari deploy help command and destroy command</i>
 </p>
 
 It has many flag which user can pass while executing the deploy command according to it's preferences. Here also `-c` flag is important to pass to make the deployment of `nebari-config.yaml` file successful.
 
-Nebari also has a destroy command that works the same way the deploy works but instead of creating the provisioned resources it destroys it.
-
 ```bash
-  nebari destroy -c nebari-config.yaml
+  nebari deploy -c nebari-config.yaml
 ```
 
 <p align="center">
     <img
      alt="Output of nebari deploy"
-     src="" />
+     src="/posts/asmi-blogposts/nebari-cli-1.5.png" />
     <br />
     <i>Output of nebari deploy command</i>
 </p>
-
-It comes with the confirmation that is very important feauture that the new CLI have because previously it didn't ask for the confirmation and the cluster get destroyed right after running it (we don't want that thing to happen with us mistakenly).
 
 ### My learnings
 
