@@ -1,10 +1,10 @@
 ---
-title: 'Asmi Internship Experience at Quansight 2022'
+title: 'Nebari Typer CLI'
 published: October 4, 2022
 author: asmi-jafar
-description: 'Blogpost of my three months internship experience working on the Nebari project at Quansight'
+description: 'The evolution of Nebari CLI using Typer'
 featuredImage:
-  src: /posts/asmi-blogposts/feature.svg
+  src: /posts/asmi-blogposts/nebari-logo.png
   alt: 'An image of the assigned mentors.'
 hero:
   imageSrc: /posts/asmi-blogposts/nebari-logo.png
@@ -55,7 +55,7 @@ First we will start with `nebari --help` command to see all the commands and opt
 <p align="center">
     <img
      alt="Output of new nebari help command"
-     src="" />
+     src="/posts/asmi-blogposts/nebari-help.png" />
     <br />
     <i>Output of new Nebari CLI help command</i>
 </p>
@@ -69,7 +69,7 @@ Now, we will see the output of the `nebari init` help command to see all the arg
 <p align="center">
     <img
      alt="Output of new nebari init help command"
-     src="" />
+     src="posts/asmi-blogposts/nebari-init-help" />
     <br />
     <i>Output of nebari init help command</i>
 </p>
@@ -132,7 +132,7 @@ As we can see we have to pass the `-c/--config` flag for validating the `nebari-
 
 Render command builds the infrasture for the deployment. It creates all terraform stages file that are required during deployment.
 
-**\***NOTE:**** It's not neccessary to run validate and render command seperately. Because it runs under the hood of the deploy command.
+**\***NOTE:\*\*\*\* It's not neccessary to run validate and render command seperately. Because it runs under the hood of the deploy command.
 
 Now we will see the ouput of the `nebari-deploy` help command.Deploy command creates the provisioned resources that Nebari needs.
 
