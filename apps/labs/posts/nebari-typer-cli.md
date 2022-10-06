@@ -94,7 +94,7 @@ Like we can see it has lots of options available to pass as a flag in the comman
     <br />
     <img
      alt="Output of nebari init --guided-init command"
-     src="/posts/asmi-blogposts/nebari-cli-gcp-1.3.png" 
+     src="/posts/asmi-blogposts/nebari-cli-1.3.png" 
      height="500"/>
     <br />
     <i>Output of nebari init guided-init command</i>
@@ -105,51 +105,39 @@ As we can see it's more like a survey that asks users to fill out the correct de
 After creating or generating the `nebari-config.yaml`, It's time to validate and render it respectively. First we will see the `help` command output for the validate to see all the options and requirements available for it.
 
 ```bash
-  nebari validate -c nebari-config.yaml
+  nebari validate --help
 ```
 
 <p align="center">
     <img
      alt="Output of nebari validate help"
-     src="/posts/asmi-blogposts/nebari-cli-gcp-1.4.png" />
+     src="/posts/asmi-blogposts/nebari-validate-help.png" />
+    <br />
+    <i>Output of nebari validate help command</i>
+</p>
+
+As we can see we have to pass the `-c/--config` flag for validating the `nebari-config.yaml` file and we have to do the same for rendering the infrastructure using the render command.
+
+```bash
+  nebari validate -c qhub-config.yaml && nebari render -c qhub-config.yaml
+```
+
+<p align="center">
+    <img
+     alt="Output of nebari validate and neabri render"
+     src="/posts/asmi-blogposts/nebari-cli-1.4.png" />
     <br />
     <i>Output of nebari validate and render command</i>
 </p>
 
-As we can see we have to pass the `-c/--config` flag for validating the `nebari-config.yaml` file.
-
-```bash
-  nebari validate -c nebari-config.yaml
-```
-
-<p align="center">
-    <img
-     alt="Output of nebari validate"
-     src="" />
-    <br />
-    <i>Output of nebari validate command</i>
-</p>
-
-```bash
-    nebari render -c nebari-config.yaml
-```
-
-<p align="center">
-    <img
-     alt="Output of nebari render"
-     src="" />
-    <br />
-    <i>Output of nebari render command</i>
-</p>
-
 Render command builds the infrasture for the deployment. It creates all terraform stages file that are required during deployment.
 
-**\***NOTE:\*\*\*\* It's not neccessary to run validate and render command seperately. Because it runs under the hood of the deploy command.
+****NOTE:**** It's not neccessary to run validate and render command seperately. Because it runs under the hood of the deploy command.
 
 Now we will see the ouput of the `nebari-deploy` help command.Deploy command creates the provisioned resources that Nebari needs.
 
 ```bash
-  nebari deploy -c nebari-config.yaml
+  nebari deploy --help
 ```
 
 <p align="center">
