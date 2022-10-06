@@ -1,8 +1,8 @@
 ---
-title: 'Nebari Typer CLI'
+title: 'The evolution of Nebari CLI using Typer'
 published: October 4, 2022
 author: asmi-jafar
-description: 'The evolution of Nebari CLI using Typer'
+description: 'Nebari typer CLI'
 featuredImage:
   src: /posts/asmi-blogposts/nebari-logo.png
   alt: 'An image of the assigned mentors.'
@@ -68,8 +68,8 @@ Now, we will see the output of the `nebari init` help command to see all the arg
 
 <p align="center">
     <img
-     alt="Output of new nebari init help command"
-     src="posts/asmi-blogposts/nebari-init-help" />
+     alt="Output of nebari init help command"
+     src="/posts/asmi-blogposts/nebari-init-help" />
     <br />
     <i>Output of nebari init help command</i>
 </p>
@@ -82,8 +82,16 @@ Like we can see it has lots of options available to pass as a flag in the comman
 
 <p align="center">
     <img
-     alt="Output of new nebari init --guided-init command"
-     src="" />
+     alt="Output of nebari init --guided-init command"
+     src="/posts/asmi-blogposts/nebari-cli-gcp-1.1" />
+    <br />
+    <img
+     alt="Output of nebari init --guided-init command"
+     src="/posts/asmi-blogposts/nebari-cli-gcp-1.2" />
+    <br />
+    <img
+     alt="Output of nebari init --guided-init command"
+     src="/posts/asmi-blogposts/nebari-cli-gcp-1.3" />
     <br />
     <i>Output of nebari init guided-init command</i>
 </p>
@@ -99,9 +107,9 @@ After creating or generating the `nebari-config.yaml`, It's time to validate and
 <p align="center">
     <img
      alt="Output of nebari validate help"
-     src="" />
+     src="/posts/asmi-blogposts/nebari-cli-gcp-1.4" />
     <br />
-    <i>Output of nebari validate help command</i>
+    <i>Output of nebari validate and render command</i>
 </p>
 
 As we can see we have to pass the `-c/--config` flag for validating the `nebari-config.yaml` file.
