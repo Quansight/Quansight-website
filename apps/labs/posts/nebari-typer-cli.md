@@ -14,11 +14,11 @@ hero:
 Hey, I'm [Asmi Jafar](https://twitter.com/asmijafar20), a computer science postgraduate student from India.
 I've worked on the [Nebari project](https://www.nebari.dev/) (previously known as Qhub) during my three months internship at Quansight Labs.
 
-## About Nebari
+## 🪴 About Nebari
 
 Nebari is a open source project from Quansight that enables teams/user to build cost-effective and scalable compute/data science platform in the cloud. It uses an infrastructure-as-code approach to quickly and easily deploy a shared data science environment, on premises or in the cloud of choice.
 
-## What is Command-line Interface
+## 👩‍💻 What is Command-line Interface
 
 CLI is a structure of the application through which user can interact and able to run that application or a program. It connects a user to a program.
 
@@ -38,13 +38,13 @@ Below is the diagram of the Nebari CLI structure.
 4. `nebari deploy` command: Deploys the Nebari with all the resources available in `nebari-config.yaml` file.
 5. `nebari destroy` command: Destroy does the same thing as deploy but instead of creating we destroy the provisioned resources (the one which was created during deploy).
 
-## How I started
+## ✅ Initial steps
 
 Nebari already has a command line interface with all the functionalities but the structure of the CLI was not good and it was quite messy. I have to work on making it more clearer, structured and pretty. So, I started all the tools and libraries that we can use to make a CLI better. After exploring various tools and libraries it was decided to work with [Typer](https://typer.tiangolo.com/) and [Rich](https://rich.readthedocs.io/en/stable/introduction.html). Typer is a python library that makes CLI applications more interactive and user friendly. I started exploring features of `typer` and how it can be implemented with the current CLI. After exploring about typer and rich, Now it is time to implement `typer` on the predefined functions of the CLI.
 Initially it was hard to implement `typer` on the predefined functions of the CLI as it was important to understand how all functions fits together and their functionalities.
 In the next section, we will see how the new Nebari CLI looks like with all it's functionalities.
 
-## Nebari Typer CLI
+## 🪴✨ Nebari Typer CLI
 
 First we will start with `nebari --help` command to see all the commands and options available in the Nebari CLI.
 
@@ -132,7 +132,7 @@ As we can see we have to pass the `-c/--config` flag for validating the `nebari-
 
 Render command builds the infrasture for the deployment. It creates all terraform stages file that are required during deployment.
 
-\***\*NOTE:\*\*** It's not neccessary to run validate and render command seperately. Because it runs under the hood of the deploy command.
+**_NOTE:_** It's not neccessary to run validate and render command seperately. Because it runs under the hood of the deploy command.
 
 Now we will see the ouput of the `nebari-deploy` help command. Deploy command creates the provisioned resources that Nebari requires and deploys your project. Nebari also has a destroy command that works the same way the deploy works but instead of creating the provisioned resources it destroys it. It comes with the confirmation that is very important feauture that the new CLI have because previously it didn't ask for the confirmation and the cluster gets destroyed right after executing it (we don't want that thing to happen with us even mistakenly).
 
@@ -162,7 +162,7 @@ It has many flag which user can pass while executing the deploy command accordin
     <i>Output of nebari deploy command</i>
 </p>
 
-### My learnings
+## 😇 My learnings and Acknowledgement
 
 I learned a lot during my internship. First thing first I learned about `Typer` and `Rich` and their functionalities. Interacting with the command line interface is easy but understanding and making it more structured and user-friendly can be tough in the start but playing around with functions and it's features can make it easy.
 Nebari is very usefule tool for the data scientists/reseachers to develop their project. I hope to continue working on this very interesting project that makes life so much easier without having the much knowledge about devOps.
