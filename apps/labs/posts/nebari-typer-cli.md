@@ -57,7 +57,6 @@ First we will start with `nebari --help` command to see all the commands and opt
      alt="Output of new nebari help command"
      src="/posts/asmi-blogposts/nebari-help.png"
     />
-    <br />
     <i>Output of new Nebari CLI help command</i>
 </p>
 
@@ -71,7 +70,6 @@ Now, we will see the output of the `nebari init` help command to see all the arg
     <img
      alt="Output of nebari init help command"
      src="/posts/asmi-blogposts/nebari-init-help.png" />
-    <br />
     <i>Output of nebari init help command</i>
 </p>
 
@@ -84,19 +82,16 @@ Like we can see it has lots of options available to pass as a flag in the comman
 <p align="center">
     <img
      alt="Output of nebari init --guided-init command"
-     src="/posts/asmi-blogposts/nebari-cli-1.1.png" 
+     src="/posts/asmi-blogposts/nebari-gi.png" 
     />
-    <br />
     <img
      alt="Output of nebari init --guided-init command"
-     src="/posts/asmi-blogposts/nebari-cli-gcp-1.2.png" 
+     src="/posts/asmi-blogposts/nebari-gi1.png" 
      />
-    <br />
     <img
      alt="Output of nebari init --guided-init command"
-     src="/posts/asmi-blogposts/nebari-cli-1.3.png" 
-     height="500"/>
-    <br />
+     src="/posts/asmi-blogposts/nebari-gi2.png" 
+     />
     <i>Output of nebari init guided-init command</i>
 </p>
 
@@ -105,15 +100,14 @@ As we can see it's more like a survey that asks users to fill out the correct de
 After creating or generating the `nebari-config.yaml`, It's time to validate and render it respectively. First we will see the `help` command output for the validate to see all the options and requirements available for it.
 
 ```bash
-  nebari validate --help
+  nebari validate --help && nebari render --help
 ```
 
 <p align="center">
     <img
-     alt="Output of nebari validate help"
-     src="/posts/asmi-blogposts/nebari-validate-help.png" />
-    <br />
-    <i>Output of nebari validate help command</i>
+     alt="Output of nebari validate and render help"
+     src="/posts/asmi-blogposts/nebari-vrh.png" />
+    <i>Output of nebari validate and render help command</i>
 </p>
 
 As we can see we have to pass the `-c/--config` flag for validating the `nebari-config.yaml` file and we have to do the same for rendering the infrastructure using the render command.
@@ -125,8 +119,7 @@ As we can see we have to pass the `-c/--config` flag for validating the `nebari-
 <p align="center">
     <img
      alt="Output of nebari validate and neabri render"
-     src="/posts/asmi-blogposts/nebari-cli-1.4.png" />
-    <br />
+     src="/posts/asmi-blogposts/nebari-rv.png" />
     <i>Output of nebari validate and render command</i>
 </p>
 
@@ -143,8 +136,7 @@ Now we will see the ouput of the `nebari-deploy` help command. Deploy command cr
 <p align="center">
     <img
      alt="Output of nebari deploy help"
-     src="/posts/asmi-blogposts/nebari-cli-1.6.png" />
-    <br />
+     src="/posts/asmi-blogposts/nebari-dh.png" />
     <i>Output of nebari deploy help command and destroy command</i>
 </p>
 
@@ -157,8 +149,7 @@ It has many flag which user can pass while executing the deploy command accordin
 <p align="center">
     <img
      alt="Output of nebari deploy"
-     src="/posts/asmi-blogposts/nebari-cli-1.5.png" />
-    <br />
+     src="/posts/asmi-blogposts/nebari-d.png" />
     <i>Output of nebari deploy command</i>
 </p>
 
