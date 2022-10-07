@@ -1,5 +1,5 @@
 ---
-title: 'Sangho's Internship at Quansight'
+title: "Sangho's Internship at Quansight"
 published: October 6, 2022
 author: sangho-lee
 description: 'Blogpost of working on the PyTorch-Ignite project during internship at Quansight'
