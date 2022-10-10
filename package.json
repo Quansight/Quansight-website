@@ -22,7 +22,7 @@
   "dependencies": {
     "@apollo/client": "^3.5.10",
     "@code-hike/mdx": "^0.5.1-next.0",
-    "@nrwl/next": "13.8.5",
+    "@nrwl/next": "14.8.3",
     "@tailwindcss/typography": "^0.5.2",
     "axios": "0.27.2",
     "clsx": "^1.2.1",
