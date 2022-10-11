@@ -48,7 +48,7 @@ In the next section, we will take a look at this new Nebari CLI.
 First, we have added a new `nebari --help` command to see all the commands and options available in the Nebari CLI.
 
 ```bash
-  nebari --helps
+  `nebari --help`
 ```
 
 <p align="center">
