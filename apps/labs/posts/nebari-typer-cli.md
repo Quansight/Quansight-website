@@ -48,7 +48,7 @@ In the next section, we will take a look at this new Nebari CLI.
 First, we have added a new `nebari --help` command to see all the commands and options available in the Nebari CLI.
 
 ```bash
-  nebari --help
+  `nebari --help`
 ```
 
 <p align="center">
@@ -62,7 +62,7 @@ First, we have added a new `nebari --help` command to see all the commands and o
 Now, we will see the output of the `nebari init` help command to see all the arguments and options that are available to create and initialize a `nebari-config.yaml` configuration file.
 
 ```bash
-  nebari init --help
+  `nebari init --help`
 ```
 
 <p align="center">
@@ -75,7 +75,7 @@ Now, we will see the output of the `nebari init` help command to see all the arg
 We can see that the `nebari init` command has a lot of available options. If we are using Nebari first time and we don't know exactly what other each of the options represent, then running `nebari init --guided-init` will guide us through a simple questionnaire which provides helpful information ,and links to additional resources, to assist with a number of important decisions.
 
 ```bash
-  nebari init --guided-init
+  `nebari init --guided-init`
 ```
 
 <p align="center">
@@ -99,7 +99,7 @@ As we can see it's more like a survey that asks end-users to fill out the detail
 After generating the `nebari-config.yaml`, it's time to validate and render it respectively. First we will see the `help` command output for the validate to see all the options and requirements available for it.
 
 ```bash
-  nebari validate --help && nebari render --help
+  `nebari validate --help && nebari render --help`
 ```
 
 <p align="center">
@@ -112,7 +112,7 @@ After generating the `nebari-config.yaml`, it's time to validate and render it r
 As we can see we have to pass the `-c/--config` flag for validating the `nebari-config.yaml` file and we have to do the same for rendering the infrastructure using the render command.
 
 ```bash
-  nebari validate -c qhub-config.yaml && nebari render -c qhub-config.yaml
+  `nebari validate -c qhub-config.yaml && nebari render -c qhub-config.yaml`
 ```
 
 <p align="center">
@@ -129,7 +129,7 @@ The render command renders all of the Terraform scripts used for the actual depl
 Now we will see the output of the `nebari deploy` help command. The deploy command creates the provisioned resources that Nebari requires and deploys your project. Nebari also has a destroy command that works the same way the deploy works but instead of creating the provisioned resources it destroys it. The destroy command now requires confirmation, an important new feature. Previously it didn't ask for the confirmation and the cluster would start being destroyed right after executing it.
 
 ```bash
-  nebari deploy --help
+  `nebari deploy --help`
 ```
 
 <p align="center">
@@ -142,7 +142,7 @@ Now we will see the output of the `nebari deploy` help command. The deploy comma
 The deploy command also has a `--config` flag. Let's pass this flag to see the output of the `nebari deploy` command.
 
 ```bash
-  nebari deploy -c nebari-config.yaml
+  `nebari deploy -c nebari-config.yaml`
 ```
 
 <p align="center">
