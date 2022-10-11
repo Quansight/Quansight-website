@@ -4,10 +4,10 @@ published: October 4, 2022
 author: asmi-jafar
 description: 'Nebari typer CLI'
 featuredImage:
-  src: /posts/asmi-blogposts/typer-nebari.png
+  src: /posts/asmi-blogposts/intern-mentors.png
   alt: 'An illustration of nebari logo with the assigned mentors and intern.'
 hero:
-  imageSrc: /posts/asmi-blogposts/intern-mentors.png
+  imageSrc: /posts/asmi-blogposts/typer-nebari.png
   imageAlt: 'Nebari logo with Typer CLI logo'
 ---
 
@@ -48,7 +48,7 @@ In the next section, we will take a look at this new Nebari CLI.
 First, we have added a new `nebari --help` command to see all the commands and options available in the Nebari CLI.
 
 ```bash
-  `nebari --help`
+  nebari --helps
 ```
 
 <p align="center">
