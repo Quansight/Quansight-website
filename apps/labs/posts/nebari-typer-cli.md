@@ -4,11 +4,11 @@ published: October 4, 2022
 author: asmi-jafar
 description: 'Nebari typer CLI'
 featuredImage:
-  src: /posts/asmi-blogposts/nebari-logo.png
-  alt: 'An image of the assigned mentors.'
+  src: /posts/asmi-blogposts/intern-mentors.png
+  alt: 'An illustration of nebari logo with the assigned mentors and intern.'
 hero:
-  imageSrc: /posts/asmi-blogposts/nebari-logo.png
-  imageAlt: 'Nebari theme logo.'
+  imageSrc: /posts/asmi-blogposts/typer-nebari.png
+  imageAlt: 'Nebari logo with Typer CLI logo'
 ---
 
 Hey, I'm [Asmi Jafar](https://twitter.com/asmijafar20), a computer science postgraduate student from India.
@@ -16,37 +16,36 @@ I've worked on the [Nebari project](https://www.nebari.dev/) (previously known a
 
 ## 🪴 About Nebari
 
-Nebari is a open source project from Quansight that enables teams/user to build cost-effective and scalable compute/data science platform in the cloud. It uses an infrastructure-as-code approach to quickly and easily deploy a shared data science environment, on premises or in the cloud of choice.
+Nebari is an open source project from Quansight that enables teams/users to deploy a cost-effective and scalable compute/data science platforms in the cloud. It uses an infrastructure-as-a-code approach to quickly and smoothly deploy a shared data science environment, on-premises or in the cloud of choice. For more details, refer to the [Nebari docs](https://www.nebari.dev/).
 
-## 👩‍💻 What is Command-line Interface
+## Nebari Command-line Interface (CLI)
 
-CLI is a structure of the application through which user can interact and able to run that application or a program. It connects a user to a program.
+I've worked on developing the Nebari [Command-line interface (CLI)](https://en.wikipedia.org/wiki/Command-line_interface) during my three months internship.
 
-## Nebari CLI (Command-line Interface)
+The Nebari CLI consists of various commands the user needs to run to deploy, configure, and update Nebari. Let's see briefly what each one of the `nebari` commands does.
 
-I've worked on developing the Nebari CLI during my three months internship.
-
-Nebari CLI consists of various commands that user needs to run in order to use the Nebari. Let's see briefly what each one of the `nebari` commands does.
-
-Below is the diagram of the Nebari CLI structure.
+Below is a diagram of the Nebari CLI commands.
 
 <img alt="Nebari commands" src="/posts/asmi-blogposts/nebari-commands.png" />
 
-1. `nebari init` command: It initialize and create a `nebari-config.yaml` file for the deployment.
-2. `nebari validate` command: It validated the configuration file `nebari-config.yaml` for the deployment.
-3. `nebari render` command: Render the infrastructure (all terraform stages) and resources.
-4. `nebari deploy` command: Deploys the Nebari with all the resources available in `nebari-config.yaml` file.
-5. `nebari destroy` command: Destroy does the same thing as deploy but instead of creating we destroy the provisioned resources (the one which was created during deploy).
+1. `nebari init` command: initializes and creates the `nebari-config.yaml` file for the deployment.
+2. `nebari validate` command: validates the configuration file `nebari-config.yaml`.
+3. `nebari render` command: renders the infrastructure configuration files (all terraform stages) and resources.
+4. `nebari deploy` command: deploys the Nebari with all the resources and configurations set in `nebari-config.yaml` file.
+5. `nebari destroy` command: tears down the provisioned resources for Nebari (the ones which were created during deployment).
 
 ## ✅ Initial steps
 
-Nebari already has a command line interface with all the functionalities but the structure of the CLI was not good and it was quite messy. I have to work on making it more clearer, structured and pretty. So, I started all the tools and libraries that we can use to make a CLI better. After exploring various tools and libraries it was decided to work with [Typer](https://typer.tiangolo.com/) and [Rich](https://rich.readthedocs.io/en/stable/introduction.html). Typer is a python library that makes CLI applications more interactive and user friendly. I started exploring features of `typer` and how it can be implemented with the current CLI. After exploring about typer and rich, Now it is time to implement `typer` on the predefined functions of the CLI.
+Prior to my internship, Nebari already has a command line interface with all the functionality listed above however it was clunky and, at times, a little challenging to use. My task as an intern was to improve the CLI experience for the end-user. After exploring various tools and libraries it was decided that we would proceed with [Typer](https://typer.tiangolo.com/) and [Rich](https://rich.readthedocs.io/en/stable/introduction.html). For those unfamiliar, Typer is a Python library that makes CLI applications more interactive and user friendly. I started exploring features of `typer` and how it could be implemented as a replacement for the current CLI. After exploring about typer and rich, Now it is time to implement `typer` on the predefined functions of the CLI.
 Initially it was hard to implement `typer` on the predefined functions of the CLI as it was important to understand how all functions fits together and their functionalities.
-In the next section, we will see how the new Nebari CLI looks like with all it's functionalities.
+
+Prior to implementing the new Typer-based CLI, I spent some time trying to understand what each of the commands do and where the changes needed to be made. Once this was understood, I created a minimum viable product (MVP), shared it with the team and got the green-light to proceed.
+
+In the next section, we will take a look at this new Nebari CLI.
 
 ## 🪴✨ Nebari Typer CLI
 
-First we will start with `nebari --help` command to see all the commands and options available in the Nebari CLI.
+First, we have added a new `nebari --help` command to see all the commands and options available in the Nebari CLI.
 
 ```bash
   nebari --help
@@ -54,13 +53,13 @@ First we will start with `nebari --help` command to see all the commands and opt
 
 <p align="center">
     <img
-     alt="Output of new nebari help command"
+     alt="Output of the new nebari help command"
      src="/posts/asmi-blogposts/nebari-help.png"
     />
-    <i>Output of new Nebari CLI help command</i>
+    <i>Output of the new Nebari CLI help command</i>
 </p>
 
-Now, we will see the output of the `nebari init` help command to see all the arguments and options that are available to create and initialize a `nebari-config.yaml` file.
+Now, we will see the output of the `nebari init` help command to see all the arguments and options that are available to create and initialize a `nebari-config.yaml` configuration file.
 
 ```bash
   nebari init --help
@@ -68,12 +67,12 @@ Now, we will see the output of the `nebari init` help command to see all the arg
 
 <p align="center">
     <img
-     alt="Output of nebari init help command"
+     alt="Output of the nebari init help command"
      src="/posts/asmi-blogposts/nebari-init-help.png" />
-    <i>Output of nebari init help command</i>
+    <i>Output of the nebari init help command</i>
 </p>
 
-Like we can see it has lots of options available to pass as a flag in the command while executing it. The `guided-init` flag in the init command is the most valuable flag. If we are using Nebari first time and we don't know exactly what other options and arguments are there for the `init` command then we can run `init` command using `--guided-init` flag. It's ask values from the user and it is more friendly survey or questionnaire for the user to fill out. Let's see the output of it.
+We can see that the `nebari init` command has a lot of available options. If we are using Nebari first time and we don't know exactly what other each of the options represent, then running `nebari init --guided-init` will guide us through a simple questionnaire which provides helpful information ,and links to additional resources, to assist with a number of important decisions.
 
 ```bash
   nebari init --guided-init
@@ -81,23 +80,23 @@ Like we can see it has lots of options available to pass as a flag in the comman
 
 <p align="center">
     <img
-     alt="Output of nebari init --guided-init command"
+     alt="Output of the nebari init --guided-init command"
      src="/posts/asmi-blogposts/nebari-gi.png" 
     />
     <img
-     alt="Output of nebari init --guided-init command"
+     alt="Output of the nebari init --guided-init command"
      src="/posts/asmi-blogposts/nebari-gi1.png" 
      />
     <img
-     alt="Output of nebari init --guided-init command"
+     alt="Output of the nebari init --guided-init command"
      src="/posts/asmi-blogposts/nebari-gi2.png" 
      />
     <i>Output of nebari init guided-init command</i>
 </p>
 
-As we can see it's more like a survey that asks users to fill out the correct details for generating the `nebari-config.yaml` file. We have used the [questionary library](https://github.com/tmbo/questionary) for having the options for the questions.
+As we can see it's more like a survey that asks end-users to fill out the details for generating the `nebari-config.yaml` file. To create this questionnaire, We have used the [questionary library](https://github.com/tmbo/questionary).
 
-After creating or generating the `nebari-config.yaml`, It's time to validate and render it respectively. First we will see the `help` command output for the validate to see all the options and requirements available for it.
+After generating the `nebari-config.yaml`, it's time to validate and render it respectively. First we will see the `help` command output for the validate to see all the options and requirements available for it.
 
 ```bash
   nebari validate --help && nebari render --help
@@ -105,9 +104,9 @@ After creating or generating the `nebari-config.yaml`, It's time to validate and
 
 <p align="center">
     <img
-     alt="Output of nebari validate and render help"
+     alt="Output of the nebari validate and render help"
      src="/posts/asmi-blogposts/nebari-vrh.png" />
-    <i>Output of nebari validate and render help command</i>
+    <i>Output of the nebari validate and render help command</i>
 </p>
 
 As we can see we have to pass the `-c/--config` flag for validating the `nebari-config.yaml` file and we have to do the same for rendering the infrastructure using the render command.
@@ -118,16 +117,16 @@ As we can see we have to pass the `-c/--config` flag for validating the `nebari-
 
 <p align="center">
     <img
-     alt="Output of nebari validate and neabri render"
+     alt="Output of the nebari validate and neabri render"
      src="/posts/asmi-blogposts/nebari-rv.png" />
-    <i>Output of nebari validate and render command</i>
+    <i>Output of the nebari validate and render command</i>
 </p>
 
-Render command builds the infrasture for the deployment. It creates all terraform stages file that are required during deployment.
+The render command renders all of the Terraform scripts used for the actual deployment. These Terraform scripts are broken into stages and are stored in directory called `stages`.
 
-**_NOTE:_** It's not neccessary to run validate and render command seperately. Because it runs under the hood of the deploy command.
+**_NOTE:_** It's not necessary to run the `validate` and `render` commands separately as both commands are run under the hood by the deploy command.
 
-Now we will see the ouput of the `nebari-deploy` help command. Deploy command creates the provisioned resources that Nebari requires and deploys your project. Nebari also has a destroy command that works the same way the deploy works but instead of creating the provisioned resources it destroys it. It comes with the confirmation that is very important feauture that the new CLI have because previously it didn't ask for the confirmation and the cluster gets destroyed right after executing it (we don't want that thing to happen with us even mistakenly).
+Now we will see the output of the `nebari deploy` help command. The deploy command creates the provisioned resources that Nebari requires and deploys your project. Nebari also has a destroy command that works the same way the deploy works but instead of creating the provisioned resources it destroys it. The destroy command now requires confirmation, an important new feature. Previously it didn't ask for the confirmation and the cluster would start being destroyed right after executing it.
 
 ```bash
   nebari deploy --help
@@ -135,12 +134,12 @@ Now we will see the ouput of the `nebari-deploy` help command. Deploy command cr
 
 <p align="center">
     <img
-     alt="Output of nebari deploy help"
+     alt="Output of the nebari deploy help"
      src="/posts/asmi-blogposts/nebari-dh.png" />
-    <i>Output of nebari deploy help command and destroy command</i>
+    <i>Output of the nebari deploy help command and destroy command</i>
 </p>
 
-It has many flag which user can pass while executing the deploy command according to it's preferences. Here also `-c` flag is important to pass to make the deployment of `nebari-config.yaml` file successful.
+The deploy command also has a `--config` flag. Let's pass this flag to see the output of the `nebari deploy` command.
 
 ```bash
   nebari deploy -c nebari-config.yaml
@@ -148,14 +147,16 @@ It has many flag which user can pass while executing the deploy command accordin
 
 <p align="center">
     <img
-     alt="Output of nebari deploy"
+     alt="Output of the nebari deploy"
      src="/posts/asmi-blogposts/nebari-d.png" />
-    <i>Output of nebari deploy command</i>
+    <i>Output of the nebari deploy command</i>
 </p>
 
-## 😇 My learnings and Acknowledgement
+## 😇 My Learnings and Acknowledgements
 
-I learned a lot during my internship. First thing first I learned about `Typer` and `Rich` and their functionalities. Interacting with the command line interface is easy but understanding and making it more structured and user-friendly can be tough in the start but playing around with functions and it's features can make it easy.
-Nebari is very usefule tool for the data scientists/reseachers to develop their project. I hope to continue working on this very interesting project that makes life so much easier without having the much knowledge about devOps.
+I learned a lot during my internship. First, I learned about `Typer` and `Rich` and its functionalities. Interacting with the command line interface was easy but understanding how it worked and making it more structured and user-friendly was tough intially, but playing around with the respective functions and features made it more accessible.
+Nebari is a very useful platform for data scientists and reseachers to develop their projects. I hope to continue working on this very interesting project that makes life so much easier without requiring in-depth DevOps knowledge.
 
 PS: I want to thank my mentors [Eskild Eriksen](https://github.com/iameskild), [Vinicius D. Cerutti](https://github.com/viniciusdc) and [Amit Kumar](https://github.com/aktech) for all the help and support. I have learned a lot of things from them. It was a really good and memorable experience working at Quansight.
+
+PPS: I presented a demo on the Nebari CLI during Qshare (Quansight share) weekly meeting. Check out the recording 📹 [here](link to the video).
