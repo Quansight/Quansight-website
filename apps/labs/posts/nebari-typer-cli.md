@@ -4,10 +4,10 @@ published: October 4, 2022
 author: asmi-jafar
 description: 'Nebari typer CLI'
 featuredImage:
-  src: /posts/asmi-blogposts/intern-mentors.png
+  src: /posts/asmi-blogposts/typer-nebari.png
   alt: 'An illustration of nebari logo with the assigned mentors and intern.'
 hero:
-  imageSrc: /posts/asmi-blogposts/typer-nebari.png
+  imageSrc: /posts/asmi-blogposts/intern-mentors.png
   imageAlt: 'Nebari logo with Typer CLI logo'
 ---
 
