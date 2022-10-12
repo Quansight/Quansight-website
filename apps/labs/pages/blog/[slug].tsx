@@ -81,7 +81,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
         <div className="mt-[1.8rem]">
           <PostMetaSection {...post.meta} />
 
-          <div className="w-full max-w-none prose-a:underline-offset-2 prose hover:prose-a:text-violet focus:prose-a:text-violet">
+          <div className="w-full max-w-none prose-code:text-[1em] prose-code:font-normal prose-a:underline-offset-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-transparent prose-code:border-none prose hover:prose-a:text-violet focus:prose-a:text-violet prose-code:text-violet-code">
             <MDXRemote {...post.content} components={blogAllowedComponents} />
           </div>
         </div>
