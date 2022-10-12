@@ -11,6 +11,7 @@ module.exports = {
       fontFamily: {
         heading: ['Mukta', 'sans-serif'],
         sans: ['Inter', 'sans-serif'],
+        code: ['Fira Code', 'monospace'],
       },
       colors: {
         transparent: 'transparent',
