@@ -28,6 +28,22 @@ const nextConfig = {
           },
         ],
       },
+      {
+        // Next.js serves any file in the public folder whose type it does not
+        // recognize with the following HTTP header:
+        //
+        //   Content-Type: application/octet-stream
+        //
+        // The following rule catches some plain text file types that we link
+        // to, and supplies the text/plain MIME type in the Content-Type header.
+        source: '/:path*(.py|.cpp)',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'text/plain',
+          },
+        ],
+      },
     ];
   },
   async redirects() {
