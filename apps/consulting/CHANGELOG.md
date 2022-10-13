@@ -5,6 +5,7 @@ Via Storyblok:
 - The CTA links on the services pages that used to
   link to connect@quansight.com now take the visitor
   to the contact form at the bottom of each page.
+- Tania's title fixed to "Director, Quansight Labs"
 
 September 23, 2022
 
