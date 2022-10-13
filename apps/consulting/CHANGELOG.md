@@ -1,6 +1,14 @@
-September 23, 2022
+October 13, 2022
 
 Via Storyblok:
+
+- The CTA links on the services pages that used to
+  link to connect@quansight.com now take the visitor
+  to the contact form at the bottom of each page.
+
+September 23, 2022
+
+Via Storyblok (built to live on ~2022-10-11):
 
 - Remove Github nick and URL from Ralf
   - This is to avoid a Github logo showing on his
