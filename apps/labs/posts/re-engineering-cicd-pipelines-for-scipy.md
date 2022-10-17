@@ -16,7 +16,7 @@ In this blog post I talk about the projects and my work during my internship at 
 
 This blog post would assume a basic understanding of CI/CD and GitHub Actions. I will also assume a basic understanding of Python and the SciPy ecosystem.
 
-<p align="center"/>
+<p align="center">
     <img
      alt="The picture displays a logo of Quansight Labs on the left and a logo of SciPy on the right. It signifies the primary purpose of the project at Quansight Labs to re-engineer the GitHub Actions CI for the SciPy and lay down the further scope for developing an entire CI matrix for build, test and release."
      src="/posts/re-engineering-cicd-pipelines-for-scipy/re-engineering-ci-cd-scipy.png"/>
@@ -33,7 +33,7 @@ GitHub Actions features a vast number of architectures, operating systems, runne
 
 We can also emulate local CI runs using a tool like [Act](https://github.com/nektos/act) to validate our GitHub Actions workflow. It allows us to run the entire workflow (including build and test) on our local machine, using a Docker image without initially testing it on the CI. Apart from this, whenever we fork a repository, the actions automatically get forked. It allows us to test on our fork and makes it relatively straightforward to use.
 
-<p align="center"/>
+<p align="center">
     <img
      alt="A meme showing two panels. In the top one, a man says 'Life is good' while pointing at the camera. In the bottom panel, the same man smiles and says 'But it can be better'. On the top portion, we see the logos of CircleCI, TravisCI and AppVeyor. On the bottom portion, we see the logo of GitHub Actions."
      src="/posts/re-engineering-cicd-pipelines-for-scipy/life-is-good-github-actions.png"/>
@@ -68,7 +68,7 @@ You can try out `act` yourself by cloning [Ralf’s fork](https://github.com/rgo
 
 Here is `act` in action with the `meson` branch over [Ralf’s fork](https://github.com/rgommers/scipy):
 
-<p align="center"/>
+<p align="center">
     <img
      alt="A snapshot from the Visual Studio Code demonstrating the usage of `act` locally to test out the GitHub Action workflows. In the picture, we are running the `test_meson` workflow which runs the CI job locally to build, install and test SciPy locally."
      src="/posts/re-engineering-cicd-pipelines-for-scipy/scipy-github-actions-act-usage.png"/>
@@ -103,7 +103,7 @@ While digging around the documentation, I discovered that `ccache` is natively s
 
 In addition, I also worked on caching PyPI dependencies using the cache actions that allowed us to shave off some of the time required during the Python dependency installation. [PR #63](https://github.com/rgommers/scipy/pull/63) containing the commits for the code necessary to set up build caching as part of the GitHub Action workflow for Linux.
 
-<p align="center"/>
+<p align="center">
     <img
      alt="The picture displays the comparison between two GitHub Actions CI run. The top picture displays that the total build SciPy process takes around 11 minutes to complete. The bottom picture displays that the total build SciPy process takes around 3 minutes to complete with compiler caching in effect."
      src="/posts/re-engineering-cicd-pipelines-for-scipy/ci-cd-caching.jpeg"/>
@@ -154,7 +154,7 @@ After a lot of iterations and discussions with Ralf, we were able to identify th
 
 We also implemented a sampling strategy to match the versions of Python and NumPy. In addition, the special purpose jobs included are for linting, docs build, Gitpod build, benchmarking, Pythran, MyPy, and more.
 
-<p align="center"/>
+<p align="center">
     <img
      alt="The picture displays the a spreadsheet with rows showing the operating system, CPU Architecture, install method, Python interpreter, Numpy version, special purpose jobs and test modes. The columns on the other hand display notes, GitHub Action Nightly jobs, GitHub Actions PR jobs, Azure DevOps jobs and finally the CircleCI job. We use a cross (X) to display the methodologies that we have marked in our CI matrix for SciPy."
      src="/posts/re-engineering-cicd-pipelines-for-scipy/scipy-ci-matrix-strategy.png"/>
