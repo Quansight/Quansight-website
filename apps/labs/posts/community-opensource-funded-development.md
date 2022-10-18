@@ -1,7 +1,7 @@
 ---
 title: 'Community-driven open source and funded development'
 published: May 29, 2019
-author: Ralf Gommers
+author: ralf-gommers
 description: 'Quansight Labs is an experiment for us in a way. One of our main aims is to
 channel more resources into community-driven PyData projects, to keep them
 healthy and accelerate their development. And do so in a way that projects
