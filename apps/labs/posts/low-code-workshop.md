@@ -2,7 +2,7 @@
 title: 'Low-code contributions through GitHub'
 published: September 28, 2021
 author: isabela-presedo-floyd
-description: 'Our goal with the following low-code workshop is to offer a way for folks to join a project's contributors list without the technical overhead. To achieve this we'll discuss a format that relies solely on the GitHub web interface.'
+description: "Our goal with the following low-code workshop is to offer a way for folks to join a project's contributors list without the technical overhead. To achieve this we'll discuss a format that relies solely on the GitHub web interface."
 category: [Access-centered, Community, OSS Experience]
 featuredImage:
   src: /posts/low-code-workshop/blog_feature_org.svg
