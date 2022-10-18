@@ -5,11 +5,11 @@ author: mars-lee
 description: 'In response to this, a small team started working on making NumPy more accessible, specifically its website and documentation. They weren’t experts in accessible technology. In fact, they feared that they didn’t know enough. Yet they strongly believed that accessible technology is a right every person should access and that NumPy could be accessible too.'
 category: [Access-centered]
 featuredImage:
-  src: /posts/numpy-accessibility-guidelines/header_image.png
+  src: /posts/numpy-accessibility-guidelines/feature.png
   alt: 'A large eye is placed over two bar graphs. Two silhouettes of heads are also
 overlaid the bar graphs.'
 hero:
-  imageSrc: /posts/numpy-accessibility-guidelines/header_image.png
+  imageSrc: /posts/numpy-accessibility-guidelines/hero.png
   imageAlt: 'A large eye is placed over two bar graphs. Two silhouettes of heads are also
 overlaid the bar graphs.'
 ---
