@@ -12,8 +12,6 @@ hero:
   imageAlt: 'Multiple fires in an alternating pattern'
 ---
 
-![Multiple fires in an alternating pattern](/posts/putting-out-the-fire/jlabaccess2.png)
-
 ## JupyterLab Accessibility Journey Part 2
 
 I want to be honest with you, I started asking accessibility questions
