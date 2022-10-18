@@ -14,9 +14,6 @@ hero:
 overlaid the bar graphs.'
 ---
 
-![A large eye is placed over two bar graphs. Two silhouettes of heads are also
-overlaid the bar graphs.](/posts/numpy-accessibility-guidelines/header_image.png)
-
 _Header illustration by author, Mars Lee_
 
 Numpy is now foundational to Python scientific computing. Our efforts reach
