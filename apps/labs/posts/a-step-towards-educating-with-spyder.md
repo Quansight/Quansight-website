@@ -2,7 +2,7 @@
 title: 'A step towards educating with Spyder'
 published: April 11, 2021
 author: juanita-gomez
-description: 'As a community manager in the Spyder team, I have been looking for ways of involving more users in the community and making Spyder useful for a larger number of people. With this, a new idea came: Education. For the past months, we have been wondering with the team whether Spyder could also serve as a teaching-learning platform, especially in this era where remote instruction has become necessary. 
+description: 'As a community manager in the Spyder team, I have been looking for ways of involving more users in the community and making Spyder useful for a larger number of people. With this, a new idea came: Education. For the past months, we have been wondering with the team whether Spyder could also serve as a teaching-learning platform, especially in this era where remote instruction has become necessary.'
 category: [Community, IDEs]
 featuredImage:
   src: /posts/a-step-towards-educating-with-spyder/blog_hero_var1.svg
