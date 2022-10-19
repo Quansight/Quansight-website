@@ -12,8 +12,6 @@ hero:
   imageAlt: 'Fingers and question marks pointing in every direction'
 ---
 
-![Fingers and question marks pointing in every direction](/posts/accessibility-whos-responsible/jlabaccess1.png)
-
 ## JupyterLab Accessibility Journey Part 1
 
 For the past few months, I've been part of a group of people in the JupyterLab community 
