@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/welcome-tania-allard-as-labs-codirector/blog_feature_var1.svg
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
-  imageSrc: //posts/welcome-tania-allard-as-labs-codirector/blog_hero_var1.svg
+  imageSrc: /posts/welcome-tania-allard-as-labs-codirector/blog_hero_var1.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
