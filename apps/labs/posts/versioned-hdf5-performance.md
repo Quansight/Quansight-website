@@ -130,5 +130,5 @@ The Versioned HDF5 library was created by the [D. E. Shaw
 group](https://www.deshaw.com/) in conjunction with
 [Quansight](https://www.quansight.com/).
 
-<img src="/images/sponsors/black_logo_417x125.png" width="200" class="center"/>
+<img src="/posts/versioned-hdf5-performance/black_logo_417x125.png" width="200" class="center"/>
 
