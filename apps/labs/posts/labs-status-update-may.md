@@ -1,7 +1,7 @@
 ---
 title: 'Labs update and May highlights'
 published: June 12 , 2019
-author: Ralf Gommers
+author: ralf-gommers
 description: "Time flies when you're having fun. Here is an update of some of the highlights of my second month at Quansight Labs."
 category: [Funding, PyData ecosystem]
   src: /posts/the-ibis-backends/blog_feature_var2.svg
