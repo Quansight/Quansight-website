@@ -1,7 +1,7 @@
 ---
 title: 'Labs update and April highlights'
 published: May 3, 2019
-author: Ralf Gommers
+author: ralf-gommers
 description: "It has been an exciting first month for me at Quansight Labs. It's a good time for a summary of what we worked on in April and what is coming next."
 category: [Funding, PyData ecosystem]
 featuredImage:
