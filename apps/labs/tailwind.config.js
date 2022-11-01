@@ -16,7 +16,7 @@ module.exports = {
       colors: {
         transparent: 'transparent',
         violet: '#452393',
-        'violet-code': '#613ea3',
+        'violet-code': '#b2399a',
         pink: '#A43A8F',
         green: '#99C941',
         black: '#191919',
