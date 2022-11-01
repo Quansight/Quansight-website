@@ -376,6 +376,6 @@ working on improving this, so that she can focus on the technical writing
 aspects of our documentation.
 
 Lauren has created a draft style guide for documentation at
-<https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide>. Please
+https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide. Please
 take a moment to look at it and if you have any feedback on it, [email
 me](mailto:asmeurer@quansight.com) or write to the SymPy mailing list.
