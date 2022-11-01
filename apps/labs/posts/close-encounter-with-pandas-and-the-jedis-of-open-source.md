@@ -94,7 +94,13 @@ operations and tested them with empty inputs. It was really brilliant because it
 of the various inconsistencies in handling empty inputs and allowed for interest in the issue to be 
 rekindled. Here's a cutout from the table showing some GroupBy methods acting on empty dataframes.
 
-![Alt - The image shows a table of some pandas groupby operations dealing with empty inputs](/posts/close-encounter-with-pandas-and-the-jedis-of-open-source/table-of-methods.jpg)
+| Method    | Example                                                                                                                                                   | Return                                                           |
+|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| apply()   | # Create a single row dataframe d = {'root_id': [], 'side': []} df = pd.DataFrame(data=d)   df.groupby(['root_id'])   .apply(lambda x: x[‘side’].iloc[0]) | IndexError : single positional indexer is  out-of-bounds         |
+| take()    | df = pd.DataFrame({‘a’: [], ‘b’: []}) df.groupby(‘a’).take([0])                                                                                           | IndexError : single positional indexer is  out-of-bounds         |
+| sample()  | df = pd.DataFrame({‘a’: [], ‘b’: []}) df.groupby(‘a’).sample()                                                                                            | ValueError:  need at least one array to concatenate              |
+| boxplot() | df.groupby('a').boxplot()                                                                                                                                 | ValueError : Number of columns must be a positive integer, not 0 |
+
 
 ### Gaining an audience with pandas' Jedi Council
 
@@ -177,8 +183,13 @@ It really has been a journey of enlightenment, knowledge, fun, connection, growt
 
 I have a greater appreciation now for maintainers in Open Source and I hope to become a major maintainer myself someday. *"It's like poetry, they rhythm"*.😉
 
-### Credits - Everyone gets a medal
+### Closing credits - Everyone gets a medal
 
-My special thanks go over to the members and staff of Quansight Labs for their patience and guidance. I had the 
-opportunity to meet only a handful of people and it really was an incredible feeling being a part of this community.
+Condensing my internship experience into this blog post hasn't really been a breeze. So many activities and lesson 
+learned has been left out. The weekly activities like Qshare, where developers discuss on what they are working on, 
+internship share, where interns discuss on their progress, issues, and limitations and so many other activities 
+that promote connection, collaboration, and a sense of community. I had such a great time meeting the people that 
+contribute to improving the PyData ecosystem.
 
+My special thanks to all the members and staff of Quansight Labs and the pandas maintainers. It really has been an 
+incredible experience being part of the community.
