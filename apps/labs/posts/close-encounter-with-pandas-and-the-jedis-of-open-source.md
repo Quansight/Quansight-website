@@ -94,12 +94,12 @@ operations and tested them with empty inputs. It was really brilliant because it
 of the various inconsistencies in handling empty inputs and allowed for interest in the issue to be 
 rekindled. Here's a cutout from the table showing some GroupBy methods acting on empty dataframes.
 
-| Method    | Example                                                                                                                                                   | Return                                                           |
-|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
-| apply()   | # Create a single row dataframe d = {'root_id': [], 'side': []} df = pd.DataFrame(data=d)   df.groupby(['root_id'])   .apply(lambda x: x['side'].iloc[0]) | IndexError : single positional indexer is  out-of-bounds         |
-| take()    | df = pd.DataFrame({'a': [], 'b': []}) df.groupby('a').take([0])                                                                                           | IndexError : single positional indexer is  out-of-bounds         |
-| sample()  | df = pd.DataFrame({'a': [], 'b': []}) df.groupby('a').sample()                                                                                            | ValueError:  need at least one array to concatenate              |
-| boxplot() | df.groupby('a').boxplot()                                                                                                                                 | ValueError : Number of columns must be a positive integer, not 0 |
+| Method | Example | Return |
+|---|---|---|
+| apply() | df = pd.DataFrame(data={'root_id': [], 'side': [])<br>df.groupby(['root_id']).apply(lambda x: x['side'].iloc[0]) | IndexError: single positional indexer is  out-of-bounds |
+| take() | df = pd.DataFrame({'a': [], 'b': []})<br>df.groupby('a').take([0]) | IndexError: single positional indexer is  out-of-bounds |
+| sample() | df = pd.DataFrame({'a': [], 'b': []})<br>df.groupby('a').sample() | ValueError: need at least one array to concatenate |
+| boxplot() | df.groupby('a').boxplot() | ValueError: Number of columns must be a positive integer, not 0 |
 
 
 ### Gaining an audience with pandas' Jedi Council
