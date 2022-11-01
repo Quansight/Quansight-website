@@ -96,9 +96,9 @@ rekindled. Here's a cutout from the table showing some GroupBy methods acting on
 
 | Method    | Example                                                                                                                                                   | Return                                                           |
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
-| apply()   | # Create a single row dataframe d = {'root_id': [], 'side': []} df = pd.DataFrame(data=d)   df.groupby(['root_id'])   .apply(lambda x: x[‘side’].iloc[0]) | IndexError : single positional indexer is  out-of-bounds         |
-| take()    | df = pd.DataFrame({‘a’: [], ‘b’: []}) df.groupby(‘a’).take([0])                                                                                           | IndexError : single positional indexer is  out-of-bounds         |
-| sample()  | df = pd.DataFrame({‘a’: [], ‘b’: []}) df.groupby(‘a’).sample()                                                                                            | ValueError:  need at least one array to concatenate              |
+| apply()   | # Create a single row dataframe d = {'root_id': [], 'side': []} df = pd.DataFrame(data=d)   df.groupby(['root_id'])   .apply(lambda x: x['side'].iloc[0]) | IndexError : single positional indexer is  out-of-bounds         |
+| take()    | df = pd.DataFrame({'a': [], 'b': []}) df.groupby('a').take([0])                                                                                           | IndexError : single positional indexer is  out-of-bounds         |
+| sample()  | df = pd.DataFrame({'a': [], 'b': []}) df.groupby('a').sample()                                                                                            | ValueError:  need at least one array to concatenate              |
 | boxplot() | df.groupby('a').boxplot()                                                                                                                                 | ValueError : Number of columns must be a positive integer, not 0 |
 
 
