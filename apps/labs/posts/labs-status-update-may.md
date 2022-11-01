@@ -4,6 +4,7 @@ published: June 12 , 2019
 author: ralf-gommers
 description: "Time flies when you're having fun. Here is an update of some of the highlights of my second month at Quansight Labs."
 category: [Funding, PyData ecosystem]
+featuredImage:
   src: /posts/the-ibis-backends/blog_feature_var2.svg
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
