@@ -4,6 +4,7 @@ published: August 27, 2019
 author: james-bourbeau
 description: 'Through a community work order (CWO) with the D. E. Shaw group, the Quansight Labs team has been able to dedicate developer time towards bug fixes and feature requests for Dask.'
 category: [PyData ecosystem]
+featuredImage:
   src: /posts/labs-dask-update/blog_feature_var2.svg
   alt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 hero:
