@@ -5,12 +5,12 @@ author: ralf-gommers
 description: 'I'm very pleased to announce that NumPy and OpenBLAS just received a $195,000 grant from
 the Chan Zuckerberg Initiative, through its Essential Open Source Software for Science
 (EOSS) program! '
-category: [Funding, PyData Ecosystem]
+category: [Funding, PyData ecosystem]
 featuredImage:
-  src: /posts/blog_feature_var2.svg
+  src: /posts/numpy_CZI_grant/blog_feature_var2.svg
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
-  imageSrc: /posts/blog_hero_var2.svg
+  imageSrc: /posts/numpy_CZI_grant/blog_hero_var2.svg
   imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
