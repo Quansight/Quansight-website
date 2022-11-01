@@ -1,5 +1,5 @@
 ---
-title: 'Quansight presence at SciPy'19'
+title: "Quansight presence at SciPy'19"
 published: July 15, 2019
 author: Ralf Gommers
 description: 'This post is just a quick update to summarize Quansight's presence and contributions, as well as some of the more interesting things I noticed.'
