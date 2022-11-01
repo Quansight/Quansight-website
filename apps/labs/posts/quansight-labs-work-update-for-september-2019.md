@@ -265,7 +265,7 @@ in our [special functions
 documentation](https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.hyper.hyper),
 most special functions are defined using a LaTeX formula, like ![The docs for besselj.](/images/besselj_docs.png)
 
-(from <https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj>)
+(from https://docs.sympy.org/dev/modules/functions/special.html#sympy.functions.special.bessel.besselj)
 
 However, the source for this math in the docstring of the function uses RST
 syntax:
