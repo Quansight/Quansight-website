@@ -1,6 +1,6 @@
 ---
 title: 'Let's make Pygments accessible!'
-author: stephannie-jimenez-gacha
+author: stephannie-jimenez
 published: October 31, 2022
 description: 'accessible-pygments hosts curated WCAG-compliant themes for all your syntax highlighting needs.'
 category: [Access-centered]
@@ -16,7 +16,7 @@ Additional authors: Isabela Presedo-Floyd
 
 Themes… everyone has their personal preferences when it comes to colors and fonts. Because let’s face it, we all have spent some time trying to change or create our own theme for our operating system, terminals, and IDEs. But what happens when preferences create inaccessible tools? And how do you fix it?
 
-Creating themes is HARD enough, and checking whether a theme has proper contrast may be unfamiliar to people less aware of accessibility needs. Additionally, there is not a single “correct” answer, so we need multiple theming options.
+Creating themes is HARD enough, and checking whether a theme has proper contrast may be unfamiliar to people less aware of accessibility needs and standards. Additionally, there is no “correct” answer, so we need multiple theming options.
 
 `Pygments` is a very popular package for syntax highlighting and is the default backend for a lot of packages. JupyterLab, a project [we have worked to improve a breadth of accessibility issues](https://jupyter-a11y.netlify.app/) with, also uses Pygments as its syntax highlighting backend. This means that all your notebook cells, terminals, advanced settings editors, or any time you open a document in JupyterLab, you are interacting with potential color issues. Knowing that JupyterLab is far from the only project that could benefit from accessibility-considerate syntax highlighting, we created our own package named `accessible-pygments` to host themes that already had accessible and WCAG compliant colors. To date, this includes [Eric Bailey’s a11y-syntax-highlighting themes](https://github.com/ericwbailey/a11y-syntax-highlighting) and [Tania Allard’s pitaya smoothie theme](https://github.com/trallard/pitaya_smoothie).
 
@@ -24,7 +24,7 @@ Best of all, `accessible-pygments` is ready to use! While this package is at an 
 
 [Explore the themes in use at any time using our demo.](https://quansight-labs.github.io/accessible-pygments/)✨
 
-## What makes an accessible theme?
+## What makes a theme accessible?
 
 So what? Even if this sounds good on the surface, let’s talk about the motivation behind more accessible syntax highlighting and how you can review this (or any) theme in the future.
 
@@ -49,9 +49,10 @@ As a note: general accessibility advice is to not rely exclusively on color to c
 
 Most of all, we encourage you to [try `accessible-pygments` for yourself!](https://quansight-labs.github.io/accessible-pygments/) 🔍
 
-If you have any application or web page that is using `pygments` under the hood just add us as a dependency and use one of our themes. We have installers available in both `pip` and `conda` using the `conda-forge` channel. For more information about it, please visit [the project repo](https://github.com/Quansight-Labs/accessible-pygments).
+If you have any application or web page that is using `pygments` under the hood, you can add this package as a dependency and use one of our themes.
+We have installers available in both `pip` and `conda` using the `conda-forge` channel. For more information about installation, please visit [the project repo](https://github.com/Quansight-Labs/accessible-pygments).
 
-In case you experience any bug or want us to include a new theme, just reach us out in the [issue tracker](https://github.com/Quansight-Labs/accessible-pygments/issues) of the project. We will also love to know how you are using this package, so any screenshots or links to your project will be amazing as a resource not only for `accessible-pygments` but also to the broader accessibility community.
+If you experience any bugs or want us to include a new theme, reach out in the [issue tracker](https://github.com/Quansight-Labs/accessible-pygments/issues) of the project. We will also love to know how you are using this package, so any screenshots or links to your project will be amazing as a resource not only for `accessible-pygments` but also for the broader accessibility community.
 
 And remember, even if this project isn’t for you, evaluating the syntax highlighting you use in public-facing work is a great way to dive into making your work more accessible. Every step helps us make a more inclusive internet.
 
