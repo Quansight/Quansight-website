@@ -94,12 +94,64 @@ operations and tested them with empty inputs. It was really brilliant because it
 of the various inconsistencies in handling empty inputs and allowed for interest in the issue to be 
 rekindled. Here's a cutout from the table showing some GroupBy methods acting on empty dataframes.
 
-| Method | Example | Return |
-|---|---|---|
-| apply() | df = pd.DataFrame({'a': [], 'b': []}) df.groupby('a').apply(lambda x: x['b'].iloc[0]) | IndexError: single positional indexer is  out-of-bounds |
-| take() | df.groupby('a').take([0]) | IndexError: single positional indexer is  out-of-bounds |
-| sample() | df.groupby('a').sample() | ValueError: need at least one array to concatenate |
-| boxplot() | df.groupby('a').boxplot() | ValueError: Number of columns must be a positive integer, not 0 |
+<table>
+<thead>
+  <tr>
+    <th >Method</th>
+    <th >Example</th>
+    <th >Return</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+  <td >apply()</td>
+  <td>
+
+  ```python
+  df = pd.DataFrame(data={'root_id': [], 'side': []})
+  df.groupby(['root_id']).apply(lambda x: x['side'].iloc[0])
+  ```
+    
+  </td>
+  <td>IndexError: single positional indexer is  out-of-bounds</td>
+  </tr>
+  <tr>
+  <td >take()</td>
+  <td >
+
+  ```python
+  df = pd.DataFrame({'a': [], 'b': []})
+  df.groupby('a').take([0])
+  ```
+
+  </td>
+  <td >IndexError: single positional indexer is  out-of-bounds</td>
+  </tr>
+  <tr>
+  <td >sample()</td>
+  <td >
+
+  ```python
+  df = pd.DataFrame({'a': [], 'b': []})
+  df.groupby('a').sample()
+  ```
+
+  </td>
+  <td >ValueError: need at least one array to concatenate</td>
+  </tr>
+  <tr>
+    <td >boxplot()</td>
+    <td >
+
+  ```python
+  df.groupby('a').boxplot()
+  ```
+
+  </td>
+  <td >ValueError: Number of columns must be a positive integer, not 0</td>
+  </tr>
+</tbody>
+</table>
 
 ### Gaining an audience with pandas' Jedi Council
 
