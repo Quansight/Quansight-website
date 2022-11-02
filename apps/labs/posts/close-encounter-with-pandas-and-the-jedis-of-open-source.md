@@ -106,11 +106,10 @@ rekindled. Here's a cutout from the table showing some GroupBy methods acting on
   <tr>
   <td >apply()</td>
   <td>
-
-  ```python
-  df = pd.DataFrame(data={'root_id': [], 'side': []})
+  <pre>
+  df = pd.DataFrame(data={'root_id': [], 'side': []})<br>
   df.groupby(['root_id']).apply(lambda x: x['side'].iloc[0])
-  ```
+  </pre>
     
   </td>
   <td>IndexError: single positional indexer is  out-of-bounds</td>
@@ -118,34 +117,29 @@ rekindled. Here's a cutout from the table showing some GroupBy methods acting on
   <tr>
   <td >take()</td>
   <td >
-
-  ```python
-  df = pd.DataFrame({'a': [], 'b': []})
+  <pre>
+  df = pd.DataFrame({'a': [], 'b': []})<br>
   df.groupby('a').take([0])
-  ```
-
+  </pre>
   </td>
   <td >IndexError: single positional indexer is  out-of-bounds</td>
   </tr>
   <tr>
   <td >sample()</td>
   <td >
-
-  ```python
-  df = pd.DataFrame({'a': [], 'b': []})
+  <pre>
+  df = pd.DataFrame({'a': [], 'b': []})<br>
   df.groupby('a').sample()
-  ```
-
+  </pre>
   </td>
   <td >ValueError: need at least one array to concatenate</td>
   </tr>
   <tr>
     <td >boxplot()</td>
     <td >
-
-  ```python
+  <pre>
   df.groupby('a').boxplot()
-  ```
+  </pre>
 
   </td>
   <td >ValueError: Number of columns must be a positive integer, not 0</td>
