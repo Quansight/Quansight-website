@@ -232,7 +232,7 @@ beginning. I intend to maintain a relationship with my mentors at Quansight and 
 
 It really has been a journey of enlightenment, knowledge, fun, connection, growth, and Force Awakening. 
 
-I have a greater appreciation now for maintainers in Open Source and I hope to become a major maintainer myself someday. *"It's like poetry, they rhythm"*.😉
+I have a greater appreciation now for maintainers in Open Source and I hope to become a major maintainer myself someday. [*"It's like poetry, they rhyme"*](https://www.youtube.com/watch?v=yFqFLo_bYq0).😉
 
 ### Closing credits - Everyone gets a medal
 
