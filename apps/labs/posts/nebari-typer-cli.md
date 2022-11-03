@@ -161,4 +161,4 @@ Nebari is a very useful platform for data scientists and researchers to perform 
 
 PS: I want to thank my mentors [Eskild Eriksen](https://github.com/iameskild), [Vinicius D. Cerutti](https://github.com/viniciusdc) and [Amit Kumar](https://github.com/aktech) for all the help and support. I have learned a lot of things from them. It was a really good and memorable experience working at Quansight.
 
-PPS: I presented a demo on the Nebari CLI during Qshare (Quansight share) weekly meeting. Check out the recording 📹 [here](link to the video).
+<!--- TODO: PPS: I presented a demo on the Nebari CLI during Qshare (Quansight share) weekly meeting. Check out the recording 📹 [here](link to the video). --->
