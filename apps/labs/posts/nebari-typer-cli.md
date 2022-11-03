@@ -160,5 +160,3 @@ I learned a lot during my internship. First, I learned about `Typer` and `Rich`.
 Nebari is a very useful platform for data scientists and researchers to perform their job duties while not requiring a dedicated DevOps administrator. I look forward to making future contributions and seeing it improve.
 
 PS: I want to thank my mentors [Eskild Eriksen](https://github.com/iameskild), [Vinicius D. Cerutti](https://github.com/viniciusdc) and [Amit Kumar](https://github.com/aktech) for all the help and support. I have learned a lot of things from them. It was a really good and memorable experience working at Quansight.
-
-<!--- TODO: PPS: I presented a demo on the Nebari CLI during Qshare (Quansight share) weekly meeting. Check out the recording [here](link to the video). --->
