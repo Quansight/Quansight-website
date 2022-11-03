@@ -1,10 +1,11 @@
 ---
-title: 'The evolution of Nebari CLI using Typer'
+title: 'Developing a Typer CLI for Nebari'
 published: October 4, 2022
 author: asmi-jafar
-description: 'Nebari typer CLI'
+description: 'The Nebari CLI consists of various commands the user needs to run to initialize, deploy, configure, and update Nebari.'
+category: [Developer workflows]
 featuredImage:
-  src: /posts/asmi-blogposts/blog_feature.svg
+  src: /posts/asmi-blogposts/blog_feature.png
   alt: 'An illustration of nebari logo with the assigned mentors and intern.'
 hero:
   imageSrc: /posts/asmi-blogposts/blog_hero.svg
@@ -26,7 +27,7 @@ The Nebari CLI consists of various commands the user needs to run to initialize,
 
 Below is a diagram of the Nebari CLI commands.
 
-<img alt="Nebari commands" src="/posts/asmi-blogposts/nebari-commands.png" />
+<img alt="Nebari commands" src="/posts/asmi-blogposts/nebari-commands.svg" />
 
 1. `nebari init` command: initializes and creates the `nebari-config.yaml` file for the deployment.
 2. `nebari validate` command: validates the configuration file `nebari-config.yaml`.
