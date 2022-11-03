@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/conda-on-colaboratory/blog_feature_surbhi.svg
   alt: 'Condacolab logo with the assigned mentors and intern.'
 hero:
-  imageSrc: /posts/conda-on-colaboratory/condacolab.png
+  imageSrc: /posts/conda-on-colaboratory/blog_hero_surbhi.svg
   imageAlt: 'Condacolab logo.'
 ---
 
