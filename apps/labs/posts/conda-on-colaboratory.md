@@ -20,9 +20,10 @@ Hi, I am [Surbhi](https://github.com/ssurbhi560), and this blog post is about th
 
 [Colab](https://colab.research.google.com/) is a product from Google Research and is widely used by software developers and data scientists today. Some reasons behind its success are:
 
-* It is cloud-based.
-* It comes preinstalled with just about every library you could need in the cloud.
-* It is also not limited by the computer's available RAM, disk space, GPU, and CPU. 
+* It provides a cloud-based platform to run your code. This means it is not limited by the user's computer resources (like RAM, disk space, CPU, or GPU). 
+* It comes preinstalled with the most popular Python packages.
+* Its free plan is enough for a lot of use cases.
+* The resulting notebooks can be easily shared.
 
 However, some users might find that Colab has some limitations in some areas, like:
 
@@ -35,15 +36,15 @@ To help folks with these limitations and make Colab more user-friendly for `cond
 
 ## What is condacolab, and how does it work?
 
-[Condacolab]((https://github.com/conda-incubator/condacolab)) is a tool that lets you deploy a Miniconda installation easily on Google Colab notebooks and use conda or mamba in colab.
+[Condacolab](https://github.com/conda-incubator/condacolab) is a tool that lets you deploy a Miniconda installation easily on Google Colab notebooks and use conda or mamba in colab.
 
 ---
 
-![Condacolab's previous installation](/posts/conda-on-colaboratory/previous_condacolab_installation.png)
+![Screenshot that shows the Google Colab interface on the browser with three cells of code. The first cell installs condacolab with pip. A second cell runs condacolab.install() to download and install conda to /usr/local. A third cell installs OpenMM with conda.](/posts/conda-on-colaboratory/previous_condacolab_installation.png)
 
 ---
 
-The way it worked before was by installing the Miniconda distribution on top of the system's Python at `/usr/local`, and then adding a few configuration files to ensure we stay with Python 3.7. Finally, we wrapped the Python executable to redirect and inject some environment variables needed to load the new libraries installed by `conda`. Since we need to re-read `LD_LIBRARY_PATH`, we issued a Jupyter kernel restart.
+The way condacolab worked before was by installing the Miniconda distribution on top of the system's Python at `/usr/local`, and then adding a few configuration files to ensure we stay with Python 3.7. Finally, it wrapped the Python executable to redirect and inject some environment variables needed to load the new libraries installed by `conda`. Since we need to re-read `LD_LIBRARY_PATH`, it triggered a Jupyter kernel restart.
 
 The problem with this approach is that we are still stuck with Python 3.7 and overwriting the system's Python executable. This is not the best way because we are leaving some original Colab libraries that depend on other packages, resulting in a chaotic mixture of conda-provided files with colab-preinstalled files. In most simple cases, this doesn't present much of a problem. However, if users rely on more complex packages with compiled dependencies, chances are you would often run into difficult to debug errors due to ABI incompatibilities. 
 
@@ -55,25 +56,26 @@ After some iterations, we settled for the following approach:
 
 1. We install the Miniconda distribution (or any other distribution) at `/opt/conda` instead of `/usr/local`.
 2. We supplement the `base` environment with colab-required packages, like `google-colab`, `condatools`, `psutil`, and `matplotlib`. 
-3. We overwrite `/usr/local/python` (the executable run by the default ipykernel) with a shell script that activates conda and starts our custom ipykernel, forwarding the calls there. Thanks to this step, the Jupyter server didn't even notice, but we are now running the conda Python without touching the system one at all!
+3. We overwrite `/usr/local/python` (the executable run by the default ipykernel) with a shell script that activates conda and starts our custom ipykernel, forwarding the calls there. Thanks to this step, the Jupyter server will not even notice, but we are now running conda's Python without touching the system one at all!
 
---- 
+```
+#!/bin/bash
+source {prefix}/etc/profile.d/conda.sh
+conda activate
+unset PYTHONPATH
+mv /usr/bin/lsb_release /usr/bin/lsb_release.renamed_by_condacolab.bak
+exec {bin_path}/python $@
+```
 
-![bash script which activates the conda base environment](/posts/conda-on-colaboratory/bash_script_activating_env.png)
+Bash script which activates the conda base environment and then runs the ipykernel process.
 
 ---
 
----
-
-![colab's screenshot when using the new approach where we are activating the conda base environment using the python executable.](/posts/conda-on-colaboratory/colab-when-activating-base-env.png)
-
----
-
-## Some other work we  for condacolab
+## Some other work we did for condacolab
 
 ### 1. Adding a `Restart kernel` button.
 
-During the installation of condacolab the kernel is restarted automatically. This could make users feel like something is wrong with the installation or Colab. We now added a button to restart the kernel to resolve this issue. If you would set the `restart_kernel` to `False` during the installation, then the kernel will not restart automatically, and a button will appear, which you can click to restart the kernel.
+During the installation of condacolab the kernel is restarted automatically. This could make users feel like something is wrong with the installation or Colab. We now added a button to restart the kernel to resolve this issue. If you set `restart_kernel` to `False` during the installation, then the kernel will not restart automatically, and a button will appear, which you can click to restart the kernel.
 
 ---
 
@@ -94,11 +96,18 @@ We also worked on building an API that would give users the option to customize 
 
 The PR with the ongoing work for this has been opened here: [API for customizing the conda base environment. #38](https://github.com/conda-incubator/condacolab/pull/38)
 
----
+```
+condacolab.install(
+    environment_file="https://raw.githubusercontent.com/ssurbhi560/condacolab/07b92d827f56a4628a52f4f138ae92be3de5073d/environment.yaml",
+    python_version="3.10",
+    specs=["matplotlib", "numpy"],
+    channels=["conda-forge", "bioconda"],
+    pip_args=["blue"]
+    extra_conda_args=["-yq"]
+    )
+```
 
-![screenshot showing how users can use the API while installing condacolab.](/posts/conda-on-colaboratory/using_api_demo.png)
-
----
+This is how users will be able to use the API while installing condacolab.
 
 ### 3. Custom installers built with the constructor.
 
