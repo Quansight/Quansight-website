@@ -6,7 +6,7 @@ description: 'accessible-pygments hosts curated WCAG-compliant themes for all yo
 category: [Access-centered]
 featuredImage:
   src: /posts/lets-make-pygments-accessible/featured_themes.png
-alt: 'An animation of different accessible syntax highlighting themes being applied to the same example code.'
+  alt: 'An animation of different accessible syntax highlighting themes being applied to the same example code.'
 hero:
 imageSrc: /posts/lets-make-pygments-accessible/hero_themes.png
 imageAlt: 'An animation of different accessible syntax highlighting themes being applied to the same example code.'
