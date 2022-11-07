@@ -1,6 +1,6 @@
 ---
 title: 'Spyder 2022 roadmap and new grants work'
-published: July 12, 2022
+published: November 8, 2022
 author: daniel-althviz
 description: |
   A quick update on Spyder 2022 roadmap and proposals being worked on.
