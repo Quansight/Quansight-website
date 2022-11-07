@@ -1,7 +1,7 @@
 ---
-title: 'Let's make Pygments accessible!'
+title: '"Let's make Pygments accessible!"'
 author: stephannie-jimenez
-published: November 7, 2022
+published: November 15, 2022
 description: 'accessible-pygments hosts curated WCAG-compliant themes for all your syntax highlighting needs.'
 category: [Access-centered]
 featuredImage:
