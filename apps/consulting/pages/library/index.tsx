@@ -26,6 +26,7 @@ import { Page } from '../../components/Page/Page';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { Tiles } from '../../components/Tiles/Tiles';
 import { TileVariant } from '../../components/Tiles/types';
+import { getLocalCategories, getLibraryCategories } from '../../services/posts';
 import { TLibraryProps } from '../../types/storyblok/bloks/libraryProps';
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
@@ -163,6 +164,10 @@ export const getStaticProps: GetStaticProps<
   const data = await getPage({ slug: 'library', relations: '' }, preview);
   const header = await getHeader(preview);
   const footer = await getFooter(preview);
+  const postTypes = await getDataSourceEntries({ slug: 'post-type' }, preview);
+  const libraryLinks = await getLibraryLinkItems(preview);
+
+  // Blog Articles
   const blogArticles = await getPageItems(
     {
       relations: LIBRARY_AUTHOR_RELATION,
@@ -170,12 +175,20 @@ export const getStaticProps: GetStaticProps<
     },
     preview,
   );
-  const libraryLinks = await getLibraryLinkItems(preview);
-  const postTypes = await getDataSourceEntries({ slug: 'post-type' }, preview);
-  const postCategories = await getDataSourceEntries(
+
+  // Filter Categories
+  const remoteCategoriesDataSource = await getDataSourceEntries(
     { slug: 'post-category' },
     preview,
   );
+
+  const { items: remoteCategories } = remoteCategoriesDataSource;
+  const localCategories = await getLocalCategories();
+
+  const libraryCategorirs = getLibraryCategories({
+    remoteCategories,
+    localCategories,
+  });
 
   return {
     props: {
@@ -183,7 +196,7 @@ export const getStaticProps: GetStaticProps<
       header,
       footer,
       postTypes,
-      postCategories,
+      postCategories: remoteCategoriesDataSource,
       carouselTiles: getCarouselTiles(blogArticles),
       tiles: getLibraryTiles({
         blogArticles,
