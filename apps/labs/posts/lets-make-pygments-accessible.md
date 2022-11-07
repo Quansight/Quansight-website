@@ -5,7 +5,7 @@ published: November 7, 2022
 description: 'accessible-pygments hosts curated WCAG-compliant themes for all your syntax highlighting needs.'
 category: [Access-centered]
 featuredImage:
-src: /posts/lets-make-pygments-accessible/featured_themes.png
+  src: /posts/lets-make-pygments-accessible/featured_themes.png
 alt: 'An animation of different accessible syntax highlighting themes being applied to the same example code.'
 hero:
 imageSrc: /posts/lets-make-pygments-accessible/hero_themes.png
