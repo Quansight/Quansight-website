@@ -1,3 +1,34 @@
+November 7, 2022
+
+Via Storyblok:
+
+- Ralf's and Tania's titles changed to "Co-Director,
+  Quansight Labs"
+- Footer revised to remove QHub link, and add links for
+  Training and Blog
+- QHub component removed from `/consulting` and replaced
+  with a new contact form
+
+October 13, 2022
+
+Via Storyblok:
+
+- The CTA links on the services pages that used to
+  link to connect@quansight.com now take the visitor
+  to the contact form at the bottom of each page.
+- Tania's title fixed to "Director, Quansight Labs"
+
+September 23, 2022
+
+Via Storyblok (built to live on ~2022-10-11):
+
+- Remove Github nick and URL from Ralf
+  - This is to avoid a Github logo showing on his
+    headshot in the Leadership pane of About Us
+  - This will be added back in once #470 is resolved
+- Remove all project listings from all staff
+  - Per Tania's request in #470
+
 September 21, 2022
 
 Via Storyblok:
