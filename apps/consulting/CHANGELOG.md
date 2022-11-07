@@ -1,3 +1,14 @@
+November 7, 2022
+
+Via Storyblok:
+
+- Ralf's and Tania's titles changed to "Co-Director,
+  Quansight Labs"
+- Footer revised to remove QHub link, and add links for
+  Training and Blog
+- QHub component removed from `/consulting` and replaced
+  with a new contact form
+
 October 13, 2022
 
 Via Storyblok:
