@@ -27,7 +27,7 @@ The Nebari CLI consists of various commands the user needs to run to initialize,
 
 Below is a diagram of the Nebari CLI commands.
 
-<img alt="Nebari commands" src="/posts/asmi-blogposts/nebari-commands.svg" />
+<img alt="Nebari commands" src="/posts/asmi-blogposts/nebari-commands.png" />
 
 1. `nebari init` command: initializes and creates the `nebari-config.yaml` file for the deployment.
 2. `nebari validate` command: validates the configuration file `nebari-config.yaml`.
