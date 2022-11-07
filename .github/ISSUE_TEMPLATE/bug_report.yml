@@ -11,7 +11,7 @@ body:
       description: Select as many as needed
       multiple: true
       options:
-        - Quansight LLC
+        - Quansight Consulting
         - Quansight Labs
     validations:
       required: true
