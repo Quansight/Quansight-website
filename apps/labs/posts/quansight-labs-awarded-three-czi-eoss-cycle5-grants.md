@@ -101,6 +101,7 @@ As with other GPU applications, CuPy heavily relies on NVIDIA CUDA and AMD ROCm 
 * Setting up a continuous integration system to provide extensive coverage of the supported software combinations
 * Building a delivery pipeline to provide binary packages for the supported versions of the library
 
+
 # Want to join?
 
 The projects mentioned in this blog post are open-source community-led projects across the PyData ecosystem. Thanks to this round of CZI funding, Quansight Labs will contribute more to SciPy, conda-forge and CuPy., We also welcome and encourage your help in this endeavor. If you have a particular interest in one of these projects, or are interested in the work we do at Quansight and Quansight Labs, have a look at our [open job postings](https://www.quansight.com/careers). We are a fully remote and globally distributed company. Please don't hesitate to contact us with questions regarding your application.
