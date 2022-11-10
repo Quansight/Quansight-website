@@ -1,5 +1,5 @@
 ---
-title: ‘Quansight Labs awarded three CZI EOSS Cycle 5 Grants'
+title: "Quansight Labs awarded three CZI EOSS Cycle 5 Grants"
 author: jaime-rodriguez-guerra
 published: November 10, 2022
 description: 'We are delighted to share details about new grants to support the sustainability of SciPy, conda-forge, and CuPy‘
