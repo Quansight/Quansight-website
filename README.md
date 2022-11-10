@@ -28,7 +28,7 @@ The current schedule for website deployment to live is weekly, on Tuesdays.
 Please arrange to have all PRs that you wish to go live on a given week
 merged to `develop` by end-of-day of the immediately preceding Monday.
 
-We are following a rotating deployment manager schedule, as follows:
+We are following a rotating deployment manager schedule monthly as follows:
 
 - 1st Tuesdays: [@bskinn](https://github.com/bskinn)
 - 2nd Tuesdays: [@gabalafou](https://github.com/gabalafou)
