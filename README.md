@@ -44,8 +44,8 @@ same rotation sequence. Thus, through 2023:
 - 29 Aug 2023: @trallard
 - 31 Oct 2023: @bskinn
 
-Please coordinate your PRs and other deployment-related matters in the
-#qwebsite-ops Slack channel.
+Please coordinate your PRs and other deployment-related matters
+in the #qwebsite-ops Slack channel.
 
 ## How to make changes to the website
 
