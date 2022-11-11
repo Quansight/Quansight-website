@@ -6,10 +6,10 @@ description: "We are delighted to share details about new grants to support the 
 category: [Funding, PyData Ecosystem, Packaging, Community]
 featuredImage:
   src: /posts/quansight-labs-awarded-three-czi-eoss-cycle5-grants/blog_feature_czi5.svg
-  alt: ‘Logos of CZI, conda-forge, scipy, and CuPy'
+  alt: ‘Logos of CZI, conda-forge, SciPy, and CuPy'
 hero:
   imageSrc: /posts/quansight-labs-awarded-three-czi-eoss-cycle5-grants/blog_hero_czi5.svg
-  imageAlt: 'Logos of CZI, conda-forge, scipy, and CuPy'
+  imageAlt: 'Logos of CZI, conda-forge, SciPy, and CuPy'
 ---
 
 We are proud and excited to write to you again about the [Chan Zuckerberg Initiative](https://chanzuckerberg.com)'s [Essential Open Source Software for Science](https://chanzuckerberg.com/rfa/essential-open-source-software-for-science/) (EOSS) program. As in previous rounds, this funding cycle supports open source software projects that are essential to biomedical research, by funding software maintenance, growth, development, and community engagement for these critical tools.
@@ -21,7 +21,7 @@ Today, we are thrilled to announce that three new EOSS Cycle 5 grants were award
 ## SciPy: Fundamental Tools for Biomedical Research
 **PIs: [Matt Haberland](https://github.com/mdhaber) (Cal Poly), [Pamphile Roy](https://github.com/tupui) (Quansight)**
 
-We partnered with [Cal Poly](https://www.calpolycorporation.org/) to improve the scientific Python library SciPy towards helping the Biomedical community.
+We partnered with [Cal Poly](https://www.calpolycorporation.org/) to improve the scientific Python library [SciPy](https://scipy.org/) towards helping the Biomedical community.
 
 This project has four goals:
 1. Improvement of functions used by biomedical software tools
@@ -51,12 +51,12 @@ The dissemination of scientific knowledge and tools is vital to the open source 
 
 ### Call for contributions
 
-SciPy is open source, and as such, this grant work will also be done in the open and with the broaders community. It means that you can all contribute to help or provide feedback. Head over to https://scipy.org/ and help us shape SciPy for the next decade.
+SciPy is open source, and as such, this grant work will also be done in the open and with the broaders community. It means that you can all contribute to help or provide feedback. Join [our community](https://scipy.org/community/), and help us shape SciPy for the next decade.
 
 ## Transparent, open & sustainable infrastructure for conda-forge and bioconda
 **PIs: [Jaime Rodríguez-Guerra](https://github.com/jaimergp) (Quansight), [Wolf Vollprecht](https://github.com/wolfv) (Quantstack)**
 
-This is a joint project with [QuanstStack](https://quantstack.net/) to improve conda-forge and [Bioconda's](https://bioconda.github.io/) sustainability and transparency by adopting vendor-agnostic and secure infrastructure practices. In addition, the team will develop comprehensive maintenance metrics and dashboards 🎉
+This is a joint project with [QuanstStack](https://quantstack.net/) to improve conda-forge and [Bioconda's](https://bioconda.github.io/) sustainability and transparency by adopting vendor-agnostic and secure infrastructure practices. In addition, we will develop comprehensive maintenance metrics and dashboards. 🎉
 
 This project has three main goals:
 1. Reducing infrastructure technical debt
@@ -86,7 +86,7 @@ This project has two main goals
 2. Maintain CuPy to continue supporting the latest platforms
 
 ### Develop interpolation and signal processing modules
-The CuPy project aims to reach full [coverage of the NumPy and SciPy APIs](https://docs.cupy.dev/en/latest/reference/comparison.html). The developers will implement, profile, document, and add unit tests for each API in the targeted modules: `cupyx.scipy.interpolate` and `cupyx.scipy.signal`. This work includes:
+The [CuPy project](https://cupy.dev/) aims to reach full [coverage of the NumPy and SciPy APIs](https://docs.cupy.dev/en/latest/reference/comparison.html). The developers will implement, profile, document, and add unit tests for each API in the targeted modules: `cupyx.scipy.interpolate` and `cupyx.scipy.signal`. This work includes:
 
 
 * Careful analysis of the underlying algorithms will be carried out, and specialized GPU kernels (CUDA C/C++) will be written from scratch when needed.
@@ -104,4 +104,4 @@ As with other GPU applications, CuPy heavily relies on NVIDIA CUDA and AMD ROCm 
 
 # Want to join?
 
-The projects mentioned in this blog post are open-source community-led projects across the PyData ecosystem. Thanks to this round of CZI funding, Quansight Labs will contribute more to SciPy, conda-forge and CuPy., We also welcome and encourage your help in this endeavor. If you have a particular interest in one of these projects, or are interested in the work we do at Quansight and Quansight Labs, have a look at our [open job postings](https://www.quansight.com/careers). We are a fully remote and globally distributed company. Please don't hesitate to contact us with questions regarding your application.
+The projects mentioned in this blog post are open-source community-led projects across the PyData ecosystem. Thanks to this round of CZI funding, Quansight Labs will contribute more to SciPy, conda-forge and CuPy. We also welcome and encourage your help in this endeavor. If you have a particular interest in one of these projects, or are interested in the work we do at Quansight and Quansight Labs, have a look at our [open job postings](https://www.quansight.com/careers). We are a fully remote and globally distributed company. Please don't hesitate to contact us with questions regarding your application.
