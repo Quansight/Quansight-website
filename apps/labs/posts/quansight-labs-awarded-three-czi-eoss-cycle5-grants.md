@@ -56,7 +56,7 @@ SciPy is open source, and as such, this grant work will also be done in the open
 ## Transparent, open & sustainable infrastructure for conda-forge and bioconda
 **PIs: [Jaime Rodríguez-Guerra](https://github.com/jaimergp) (Quansight), [Wolf Vollprecht](https://github.com/wolfv) (Quantstack)**
 
-This is a joint project with [QuanstStack](https://quantstack.net/) to improve conda-forge and [Bioconda's](https://bioconda.github.io/) sustainability and transparency by adopting vendor-agnostic and secure infrastructure practices. In addition, we will develop comprehensive maintenance metrics and dashboards. 🎉
+This is a joint project with [QuanstStack](https://quantstack.net/) to improve [conda-forge](https://conda-forge.org/) and [Bioconda's](https://bioconda.github.io/) sustainability and transparency by adopting vendor-agnostic and secure infrastructure practices. In addition, we will develop comprehensive maintenance metrics and dashboards. 🎉
 
 This project has three main goals:
 1. Reducing infrastructure technical debt
