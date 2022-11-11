@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/the-new-spyder-editor-documentation-under-the-spotlights/blog_feature_var3.svg
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
-  imageSrc: /posts/what-do-we-need-to-write/blog_hero_var3.svg
+  imageSrc: /posts/the-new-spyder-editor-documentation-under-the-spotlights/blog_hero_var3.svg
   imageAlt: 'An illustration of a black hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
 ---
 
@@ -41,7 +41,7 @@ and improved some of the current IDE functionalities. Thus, making the documenta
 look irrelevant and outdated. Originally, the scope of this project was to
 update both the user and developer documentation for Spyder 5; however, updating
 the developer docs was descoped from this project due to unforeseen
-conditions and time limitations.  
+conditions and time limitations.
 
 ## My writing approach: Familiarize – Write – Demonstrate
 
@@ -68,7 +68,7 @@ I am sharing some of the good and not so good lessons that I’ve learned while 
 
 Finally, I hope my work on the Editor's documentation offers a better user
 experience, clearer structure, and an up-to-date information; encouraging users
-to explore Spyder deeper, and—eventually—reducing questions and issues related to the Editor pane.  
+to explore Spyder deeper, and—eventually—reducing questions and issues related to the Editor pane.
 
 You can browse the new and updated Editor's documentation [HERE](https://docs.spyder-ide.org/current/panes/editor.html).
 
