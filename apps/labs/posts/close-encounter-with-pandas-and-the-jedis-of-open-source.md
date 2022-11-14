@@ -94,62 +94,61 @@ operations and tested them with empty inputs. It was really brilliant because it
 of the various inconsistencies in handling empty inputs and allowed for interest in the issue to be 
 rekindled. Here's a cutout from the table showing some GroupBy methods acting on empty dataframes.
 
-<table>
+<table style="margin-left: auto; margin-right: auto;">
 <thead>
-  <tr>
-    <th >Method</th>
-    <th >Example</th>
-    <th >Return</th>
-  </tr>
+<tr style="height: 23px;">
+<th style="height: 23px;">Method</th>
+<th style="height: 23px;">Example</th>
+<th style="height: 23px;">Return</th>
+</tr>
 </thead>
 <tbody>
-  <tr>
-  <td >apply()</td>
-  <td>
+<tr style="height: 43.5px;">
+<td style="height: 43.5px; text-align: center; vertical-align: middle;">apply()</td>
+<td style="height: 43.5px;">
 
-  ```
-  df = pd.DataFrame(data={'root_id': [], 'side': []})
-  df.groupby(['root_id']).apply(lambda x: x['side'].iloc[0])
-  ```
-    
-  </td>
-  <td>IndexError: single positional indexer is  out-of-bounds</td>
-  </tr>
-  <tr>
-  <td >take()</td>
-  <td >
+```python
+ df = pd.DataFrame(data={'root_id': [], 'side': []})
+ df.groupby(['root_id'])
+   .apply(lambda x: x['side'].iloc[0]) 
+ ```
+ 
+</td>
+<td style="height: 43.5px;">IndexError: single positional indexer is out-of-bounds</td>
+</tr>
+<tr style="height: 43px;">
+<td style="height: 43px; text-align: center; vertical-align: middle;">take()</td>
+<td style="height: 43px;">
 
-  ```
-  df = pd.DataFrame({'a': [], 'b': []})
-  df.groupby('a').take([0])
-  ```
+``` python
+df = pd.DataFrame({'a': [], 'b': []})
+df.groupby('a').take([0]) 
 
-  </td>
-  <td >IndexError: single positional indexer is  out-of-bounds</td>
-  </tr>
-  <tr>
-  <td >sample()</td>
-  <td >
+```
+</td>
+<td style="height: 43px;">IndexError: single positional indexer is out-of-bounds</td>
+</tr>
+<tr style="height: 43px;">
+<td style="height: 43px; text-align: center; vertical-align: middle;">sample()</td>
+<td style="height: 43px;">
 
-  ```
-  df = pd.DataFrame({'a': [], 'b': []})
-  df.groupby('a').sample()
-  ```
+```python
+df = pd.DataFrame({'a': [], 'b': []})
+df.groupby('a').sample()
+```
+</td>
+<td style="height: 43px;">ValueError: need at least one array to concatenate</td>
+</tr>
+<tr style="height: 43px;">
+<td style="height: 43px; text-align: center; vertical-align: middle;">boxplot()</td>
+<td style="height: 43px;">
 
-  </td>
-  <td >ValueError: need at least one array to concatenate</td>
-  </tr>
-  <tr>
-    <td >boxplot()</td>
-    <td >
-
-  ```
-  df.groupby('a').boxplot()
-  ```
-
-  </td>
-  <td >ValueError: Number of columns must be a positive integer, not 0</td>
-  </tr>
+```python
+df.groupby('a').boxplot() 
+```
+</td>
+<td style="height: 43px;">ValueError: Number of columns must be a positive integer, not 0</td>
+</tr>
 </tbody>
 </table>
 
