@@ -94,18 +94,18 @@ operations and tested them with empty inputs. It was really brilliant because it
 of the various inconsistencies in handling empty inputs and allowed for interest in the issue to be 
 rekindled. Here's a cutout from the table showing some GroupBy methods acting on empty dataframes.
 
-<table style="margin-left: auto; margin-right: auto;">
+<table>
 <thead>
-<tr style="height: 23px;">
-<th style="height: 23px;">Method</th>
-<th style="height: 23px;">Example</th>
-<th style="height: 23px;">Return</th>
+<tr>
+<th>Method</th>
+<th>Example</th>
+<th>Return</th>
 </tr>
 </thead>
 <tbody>
-<tr style="height: 43.5px;">
-<td style="height: 43.5px; text-align: center; vertical-align: middle;">apply()</td>
-<td style="height: 43.5px;">
+<tr>
+<td>apply()</td>
+<td>
 
 ```python
  df = pd.DataFrame(data={'root_id': [], 'side': []})
@@ -114,11 +114,11 @@ rekindled. Here's a cutout from the table showing some GroupBy methods acting on
 ```
 
 </td>
-<td style="height: 43.5px;">IndexError: single positional indexer is out-of-bounds</td>
+<td>IndexError: single positional indexer is out-of-bounds</td>
 </tr>
-<tr style="height: 43px;">
-<td style="height: 43px; text-align: center; vertical-align: middle;">take()</td>
-<td style="height: 43px;">
+<tr>
+<td>take()</td>
+<td>
 
 ``` python
 df = pd.DataFrame({'a': [], 'b': []})
@@ -126,11 +126,11 @@ df.groupby('a').take([0])
 ```
 
 </td>
-<td style="height: 43px;">IndexError: single positional indexer is out-of-bounds</td>
+<td>IndexError: single positional indexer is out-of-bounds</td>
 </tr>
-<tr style="height: 43px;">
-<td style="height: 43px; text-align: center; vertical-align: middle;">sample()</td>
-<td style="height: 43px;">
+<tr>
+<td>sample()</td>
+<td>
 
 ```python
 df = pd.DataFrame({'a': [], 'b': []})
@@ -138,18 +138,18 @@ df.groupby('a').sample()
 ```
 
 </td>
-<td style="height: 43px;">ValueError: need at least one array to concatenate</td>
+<td>ValueError: need at least one array to concatenate</td>
 </tr>
-<tr style="height: 43px;">
-<td style="height: 43px; text-align: center; vertical-align: middle;">boxplot()</td>
-<td style="height: 43px;">
+<tr>
+<td>boxplot()</td>
+<td>
 
 ```python
 df.groupby('a').boxplot() 
 ```
 
 </td>
-<td style="height: 43px;">ValueError: Number of columns must be a positive integer, not 0</td>
+<td>ValueError: Number of columns must be a positive integer, not 0</td>
 </tr>
 </tbody>
 </table>
