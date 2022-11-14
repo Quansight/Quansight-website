@@ -9,7 +9,7 @@ featuredImage:
     alt: 'Accessibility and JupyterLab logos' 
 hero:
     imageSrc: /posts/improving-accessibility-in-jupyterlab/labsbg.png 
-    imageAlt: 'Accessibility and JupyterLab logos with Quansight lab's graphical elements'
+    imageAlt: 'Accessibility and JupyterLab logos with Quansight labs graphical elements'
 ---
 Hi! I’m [Kulsoom Zahra](https://twitter.com/KulsoomZahra3/), a computer science graduate based in India. I just completed a three month internship (July 22 - Oct 22) at Quansight Labs where I worked on the project “Removing accessibility barriers in JupyterLab”.
  
