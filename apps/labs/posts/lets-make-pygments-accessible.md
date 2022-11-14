@@ -1,15 +1,15 @@
 ---
-title: '"Let's make Pygments accessible!"'
+title: '"Making pygments accessible"'
 author: stephannie-jimenez
 published: November 15, 2022
 description: 'accessible-pygments hosts curated WCAG-compliant themes for all your syntax highlighting needs.'
 category: [Access-centered]
 featuredImage:
   src: /posts/lets-make-pygments-accessible/featured_themes.png
-  alt: 'An animation of different accessible syntax highlighting themes being applied to the same example code.'
+  alt: 'A display of different accessible syntax highlighting themes being applied to the same example code.'
 hero:
   imageSrc: /posts/lets-make-pygments-accessible/hero_themes.png
-  imageAlt: 'An animation of different accessible syntax highlighting themes being applied to the same example code.'
+  imageAlt: 'A display of different accessible syntax highlighting themes being applied to the same example code.'
 ---
 
 Additional authors: Isabela Presedo-Floyd
@@ -18,7 +18,7 @@ Themes… everyone has their personal preferences when it comes to colors and fo
 
 Creating themes is HARD enough, and checking whether a theme has proper contrast may be unfamiliar to people less aware of accessibility needs and standards. Additionally, there is no “correct” answer, so we need multiple theming options.
 
-[Pygments](https://pygments.org/) is a very popular package for syntax highlighting and is the default backend for a lot of packages. Within the Jupyter ecosystem, a community [we have worked to improve a breadth of accessibility issues](https://jupyter-a11y.netlify.app/) in, also uses Pygments as its syntax highlighting backend for projects like [Jupyter Book](https://jupyterbook.org/en/stable/intro.html). This means that in interacting with code cells and blocks, you are interacting with potential color issues inherited throughout the ecosystem. Knowing that Jupyter projects are far from the only ones that could benefit from accessibility-considerate syntax highlighting, we created our own package named `accessible-pygments` to host themes that already had accessible and WCAG compliant colors. To date, this includes 16 brand new themes based on [Eric Bailey’s a11y-syntax-highlighting themes](https://github.com/ericwbailey/a11y-syntax-highlighting), [github vscode themes](https://github.com/primer/github-vscode-theme), [gotthard vscode theme](https://github.com/janbiasi/vscode-gotthard-theme/), [blinds theme](https://github.com/orbulant/blinds-theme), [greative](https://github.com/SumanKhdka/Greative-VSCode-Theme) and [Tania Allard’s pitaya smoothie theme](https://github.com/trallard/pitaya_smoothie).
+[Pygments](https://pygments.org/) is a very popular package for syntax highlighting and is the default backend for many packages. Within the Jupyter ecosystem, a community [we have worked to improve a breadth of accessibility issues](https://jupyter-a11y.netlify.app/) in, also uses Pygments as its syntax highlighting backend for projects like [Jupyter Book](https://jupyterbook.org/en/stable/intro.html). This means that in interacting with code cells and blocks, you are interacting with potential color issues inherited throughout the ecosystem. Knowing that Jupyter projects are far from the only ones that could benefit from accessibility-considerate syntax highlighting, we created our package named `accessible-pygments` to host themes that already had accessible and WCAG-compliant colors. To date, this includes 16 brand new themes based on [Eric Bailey’s a11y-syntax-highlighting themes](https://github.com/ericwbailey/a11y-syntax-highlighting), [GitHub VSCode themes](https://github.com/primer/github-vscode-theme), [Gotthard VSCode theme](https://github.com/janbiasi/vscode-gotthard-theme/), [blinds theme](https://github.com/orbulant/blinds-theme), [greative](https://github.com/SumanKhdka/Greative-VSCode-Theme) and [Tania Allard’s Pitaya Smoothie theme](https://github.com/trallard/pitaya_smoothie).
 
 Best of all, `accessible-pygments` is ready to use! While this package is at an early stage, it builds on wider community knowledge and aims to bring more inclusive options to our ecosystem bit by bit. We hope that it starts to be used and powers multiple sphinx sites, syntax highlighting in IDEs and more!
 
