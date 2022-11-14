@@ -111,8 +111,8 @@ rekindled. Here's a cutout from the table showing some GroupBy methods acting on
  df = pd.DataFrame(data={'root_id': [], 'side': []})
  df.groupby(['root_id'])
    .apply(lambda x: x['side'].iloc[0]) 
- ```
- 
+```
+
 </td>
 <td style="height: 43.5px;">IndexError: single positional indexer is out-of-bounds</td>
 </tr>
@@ -122,9 +122,9 @@ rekindled. Here's a cutout from the table showing some GroupBy methods acting on
 
 ``` python
 df = pd.DataFrame({'a': [], 'b': []})
-df.groupby('a').take([0]) 
-
+df.groupby('a').take([0])
 ```
+
 </td>
 <td style="height: 43px;">IndexError: single positional indexer is out-of-bounds</td>
 </tr>
@@ -136,6 +136,7 @@ df.groupby('a').take([0])
 df = pd.DataFrame({'a': [], 'b': []})
 df.groupby('a').sample()
 ```
+
 </td>
 <td style="height: 43px;">ValueError: need at least one array to concatenate</td>
 </tr>
@@ -146,6 +147,7 @@ df.groupby('a').sample()
 ```python
 df.groupby('a').boxplot() 
 ```
+
 </td>
 <td style="height: 43px;">ValueError: Number of columns must be a positive integer, not 0</td>
 </tr>
