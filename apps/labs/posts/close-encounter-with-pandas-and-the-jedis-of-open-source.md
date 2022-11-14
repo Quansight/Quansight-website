@@ -1,6 +1,6 @@
 ---
 title: 'Close Encounter with pandas and the Jedis of open source'
-published: Novermber 1, 2022
+published: Novermber 14, 2022
 author: dennis-chukwunta
 description: 'Learning from awesome mentors and contributing to pandas open source' 
 category: [Community, Developer workflows, OSS Experience, PyData ecosystem]
@@ -107,7 +107,7 @@ rekindled. Here's a cutout from the table showing some GroupBy methods acting on
   <td >apply()</td>
   <td>
 
-  ```python
+  ```
   df = pd.DataFrame(data={'root_id': [], 'side': []})
   df.groupby(['root_id']).apply(lambda x: x['side'].iloc[0])
   ```
@@ -119,7 +119,7 @@ rekindled. Here's a cutout from the table showing some GroupBy methods acting on
   <td >take()</td>
   <td >
 
-  ```python
+  ```
   df = pd.DataFrame({'a': [], 'b': []})
   df.groupby('a').take([0])
   ```
@@ -131,7 +131,7 @@ rekindled. Here's a cutout from the table showing some GroupBy methods acting on
   <td >sample()</td>
   <td >
 
-  ```python
+  ```
   df = pd.DataFrame({'a': [], 'b': []})
   df.groupby('a').sample()
   ```
@@ -143,7 +143,7 @@ rekindled. Here's a cutout from the table showing some GroupBy methods acting on
     <td >boxplot()</td>
     <td >
 
-  ```python
+  ```
   df.groupby('a').boxplot()
   ```
 
@@ -175,7 +175,7 @@ with this one*" and I had so much fun learning and laughing at both the situatio
 very funny jedi 😆). 
 
 Aaron had a very particular way of seeing a problem and accessing a possible solution. It involved looking 
-at how other packages handled similar problems, trying out examples (using toys as Noa once mentioned), 
+at how other packages handled similar problems, trying out examples, 
 and debugging using the python debugger, PuDB. This was a new tool for me as I previously had to rely on 
 using print statements or the VS code debugger (which was pretty much a hit-or-miss with every 
 configuration for a new project). After just one live session with him and an [article](https://asmeurersympy.wordpress.com/2010/06/04/pudb-a-better-python-debugger/) 
