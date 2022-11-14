@@ -14,15 +14,15 @@
     - [Next.js plus the codebase in this repo](#nextjs-plus-the-codebase-in-this-repo)
   - [Ways to view the site at different stages 🔍](#ways-to-view-the-site-at-different-stages-)
   - [System design decisions 🏗](#system-design-decisions-)
-  - [Running project locally 🖥](#running-project-locally-)
+  - [Running the website locally 🖥](#running-the-website-locally-)
   - [Adding new components 🧩](#adding-new-components-)
   - [Adding new queries 🗃](#adding-new-queries-)
   - [GitHub-based blog workflow (Labs blog) 💻](#github-based-blog-workflow-labs-blog-)
     - [Structure of the blog post](#structure-of-the-blog-post)
       - [Example of blog post meta section](#example-of-blog-post-meta-section)
     - [Adding a new blog post 📝](#adding-a-new-blog-post-)
-    - [Adding new blog category](#adding-new-blog-category)
-    - [Adding new components for usage inside `mdx` posts.](#adding-new-components-for-usage-inside-mdx-posts)
+    - [Adding a new blog category](#adding-a-new-blog-category)
+    - [Adding new components for usage inside `.mdx` posts](#adding-new-components-for-usage-inside-mdx-posts)
     - [Specifications for Hero images](#specifications-for-hero-images)
 
 ## Orientation 🗺
@@ -30,9 +30,9 @@
 Here is some basic info to help orient you to this repo.
 
 - This repo holds the **code** for two websites:
-  - `./apps/consulting/` holds code for Quansight Consulting Consulting:
-    https://quansight.com
-  - `./apps/labs/` holds code for Quansight Labs: https://labs.quansight.org
+  - `./apps/consulting/` holds code for Quansight Consulting:
+    <https://quansight.com>
+  - `./apps/labs/` holds code for Quansight Labs: <https://labs.quansight.org>
   - `./libs` holds code shared by both websites.
 - The websites' **content** lives in [Storyblok](https://app.storyblok.com)
   (requires login).
@@ -44,8 +44,8 @@ Here is some basic info to help orient you to this repo.
     `develop`.
   - `main` is used for production (i.e., the live websites).
   - You can think of `develop` as staging.
-  - Only hot fixes and releases are to be opened against `main`.
-  - Pushing commits to `main` triggers a deploy of both websites via Vercel.
+  - Only hotfixes and releases are to be opened against `main`.
+  - Pushing commits to `main` triggers a deployment of both websites via Vercel.
 
 ## How to make changes to the website 👨🏿‍💻
 
@@ -404,7 +404,7 @@ update a log file. That single commit can then be merged into the `main` branch
 to kick off a deployment. This is a hotfix for content. A hotfix for code can be
 done similarly.
 
-## Running project locally 🖥
+## Running the website locally 🖥
 
 Prerequisites:
 
@@ -423,8 +423,7 @@ cp apps/consulting/.env.example apps/consulting/.env
 ```
 
 Run `npm run start:consulting` or `npm run start:labs` to start a corresponding
-dev server. Navigate to <http://localhost:4200/> or use localhost to preview in
-Storyblok panel. On the localhost, the app will automatically reload if you
+dev server. Navigate to <http://localhost:4200/> or use localhost to preview in the Storyblok panel. On the localhost, the app will automatically reload if you
 change any of the source files, in the Storyblok panel you need to refresh the
 page manually.
 
@@ -438,7 +437,7 @@ environment's dependencies will match the production environment.
 1. Create the component with its schema in Storyblok components.
 2. Create the React component. The components are located in
    `/apps/consulting/components` (Consulting components), `/apps/labs/components` (labs
-   components), or `/libs`/shared/ui-components/src` (shared components). The name of the Storyblok component should be the same as the name of the React
+   components), or `/libs/shared/ui-components/src` (shared components). The name of the Storyblok component should be the same as the name of the React
    component.
 3. (Only if you're adding a shared component) Add a component and `types imports`
    in the `/libs/shared/ui-components/src/index.ts` file to make it available in the
@@ -452,8 +451,8 @@ environment's dependencies will match the production environment.
    `/apps/.../components/BlockProvider/utils/getPropsByType.ts` file and add the
    case to the switch statement.
 8. Import the Next component to the
-   `/apps/.../components/BlockProvider/componentsMap.ts` file and add it to the `componentsMap`` variable.
-9. Import the Next component types to the
+   `/apps/.../components/BlockProvider/componentsMap.ts` file and add it to the `componentsMap` variable.
+9. Import the Next.js component types to the
    `/apps/.../components/BlockProvider/types.ts` file, add the component name to the
    `ComponentType` `enum` and add the props types to the `TBlokComponentPropsMap`
    type.
@@ -495,7 +494,7 @@ For more details about `.mdx` please see:
 Every post is structured with two main sections: `meta` and `content`.
 The `content` section is the body of the post added in Markdown format.
 The `meta` section is a `YAML` like structure and should be wrapped with `---`
-signs. The meta section contains post related information like:
+signs. The meta section contains post-related information like:
 
 - `title` - Title of the blog post. Used also as the title of the page inside
   `<title></title>` tag
@@ -536,51 +535,42 @@ hero:
 ### Adding a new blog post 📝
 
 1. Create a new feature branch. Example `feature/new-hello-world-post`.
-2. Add a new `.md|.mdx` file inside the `app/labs/posts` directory.
-3. Add post feature image inside `apps/labs/public/posts/<post-name>`.
-4. Add post hero image inside `apps/labs/public/posts/<post-name>`.
-5. Add all the meta information between `---` inside `.md|.mdx` file.
-6. After `---` add post content.
-7. Save file.
-8. Commit and push changes to the repository. For commits please follow the format of the conventional commit.
+2. Add post feature and hero images to `apps/labs/public/posts/<post-name>`.
+3. Add a new `.md|.mdx` file inside the `app/labs/posts` directory. Make sure to read the [Structure of the blog post section](#structure-of-the-blog-post) in this file to ensure that the post is properly structured.
+4. Commit and push your changes to the repository. For commits please follow the format of the conventional commit.
    [See](https://www.conventionalcommits.org/en/v1.0.0/)
-9. Review the pull request and if ok then merge it to develop branch.
-10. To make the post visible in production there should be a merge from the `develop` branch into the `main` branch. So create Pull request for this and merge.
+5. Create a pull request to the `develop` branch. Make sure to add the `type: content 📝` and `labs 🔭` labels to the PR.
+6. Wait for someone in the website team to review the new blog post. If everything is ok, the PR will be merged to the `develop` branch.
 
-### Adding new blog category
+### Adding a new blog category
 
-1.  Create new feature branch.
-2.  Open `apps/labs/posts/categories.json` file.
-3.  Add new category to array.
-4.  Save file
-5.  Commit and push changes to the repository. For commits please follow the
-    conventional commits format.
-    [See](https://www.conventionalcommits.org/en/v1.0.0/)
-6.  Review the pull request and if ok then merge to develop branch.
-7.  To make the changes visible in production there should be merged `develop`
-    branch into the `main` branch. So create Pull request for this and merge.
+1. Create a new feature branch.
+2. Ope the `apps/labs/posts/categories.json` file.
+3. Add a new category to the array. Make sure to follow the same format as the other categories.
+4. Commit and push your changes to the repository. For commits please follow the format of the conventional commit.
+   [See](https://www.conventionalcommits.org/en/v1.0.0/)
+5. Wait for someone in the website team to review the new blog post. If everything is ok, the PR will be merged to the `develop` branch.
 
-### Adding new components for usage inside `mdx` posts.
+### Adding new components for usage inside `.mdx` posts
 
-1.  Open `apps/labs/services/blogAllowedComponents.ts` file
-2.  Import component from the codebase
-3.  Add new component to `blogAllowedComponents` object.
+1. Open `apps/labs/services/blogAllowedComponents.ts` file
+2. Import the component from the codebase
+3. Add a new component to `blogAllowedComponents` object.
 
 ### Specifications for Hero images
 
-There are two options to add images to Hero component. First one is to add image
-in General tab of Hero component - image will be used for all screen sizes.
-Second one is to add different images in tabs: Image Mobile, Image Tablet and
-Image Desktop. While choosing second one remember to add all three of them.
+There are two options to add images to Hero component.
+
+1. The first one is to add the image in the `General` tab of the Hero component - the image will be used for all screen sizes.
+2. The Second one is to add different images in tabs: Image Mobile, Image Tablet, and Image Desktop. While choosing the second one remember to add all three of them.
 
 By default, the images in the Hero component adjust their size to fill the full
-width of the container box (objectFit: cover). You can customize this behaviour
-by choosing different objectFit property:
+width of the container box (`objectFit: cover`). You can customize this behavior
+by choosing a different `objectFit` property.
 
-- Contain: image is scaled to maintain its aspect ratio while fitting within the
+- `Contain`: the image is scaled to maintain its aspect ratio while fitting within the
   element's content box (height).
-
-- Cover: image is sized to maintain its aspect ratio while filling the element's
+- `Cover`: the image is sized to maintain its aspect ratio while filling the element's
   entire content box (width).
 
 <!-- reusable urls -->
