@@ -6,10 +6,10 @@ description: 'Kulsoom Zahra learns about accessibility and fixes a part of the J
 category: [Access-centered, OSS Experience]
 featuredImage:
     src: /posts/improving-accessibility-in-jupyterlab/accessibility+jupyter.png 
-    alt: 'Accessibility and JupyterLab logos' 
+    alt: 'Jupyter Accessibility' 
 hero:
     imageSrc: /posts/improving-accessibility-in-jupyterlab/labsbg.png 
-    imageAlt: 'Accessibility and JupyterLab logos with Quansight labs graphical elements'
+    imageAlt: 'Jupyter Accessibility'
 ---
 Hi! I’m [Kulsoom Zahra](https://twitter.com/KulsoomZahra3/), a computer science graduate based in India. I just completed a three month internship (July 22 - Oct 22) at Quansight Labs where I worked on the project “Removing accessibility barriers in JupyterLab”.
  
@@ -48,8 +48,11 @@ The gif below shows one of the issues we encountered. On browser zoom, some sect
 ## The Fix
  
 We tried changing things here and there, and finally, adding a vertical scrollbar to the Running Panel worked!  I was happy, as I am most of the times. :)
+
 This following GIF shows a fix for the issue. After putting a scrollbar in the Running Panel, all sections are reachable even when other sections are expanded. Now, it’s easy to reach the bottom.
+
 ![](/posts/improving-accessibility-in-jupyterlab/after.gif)
+
 The thing about proposing a solution in a massive open-source project is you need to be willing to take critiques. Everyone has an opinion, and it's your job to respect theirs while expressing yours. You also need to be sure that you give enough context and clarity on the issue while being open to better solutions.
  
 ## Rose, Bud and Thorn 🌹 🌱 🌵
