@@ -28,7 +28,7 @@ for people with no prior experience! That’s why I had a goal in mind to make
 contributing and using open-source software less intimidating and more
 convenient, which led me to the Google Season of Docs 21 and 22 programs.
 
-During the past 6 months, I, my mentor for this program "Stephannie Jiménez",
+During the past 6 months, I, my mentor for this program Stephannie Jiménez,
 and other community members have been working tirelessly to transform the current
 obsolete Editor docs and release them to users. The new documentation—hopefully—will
 provide the Spyder community with a reliable source of information while shedding
