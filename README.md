@@ -22,6 +22,31 @@ Here is some basic info to help orient you to this repo.
   - Only hot fixes and releases are to be opened against `main`.
   - Pushing commits to `main` triggers a deploy of both websites via Vercel.
 
+## Deployment Schedule
+
+The current schedule for website deployment to live is weekly, on Tuesdays.
+Please arrange to have all PRs that you wish to go live on a given week
+merged to `develop` by end-of-day of the immediately preceding Monday.
+
+We are following a rotating deployment manager schedule monthly as follows:
+
+- 1st Tuesdays: [@bskinn](https://github.com/bskinn)
+- 2nd Tuesdays: [@gabalafou](https://github.com/gabalafou)
+- 3rd Tuesdays: [@noa](https://github.com/noa)
+- 4th Tuesdays: [@trallard](https://github.com/trallard)
+
+For months with a 5th Tuesday, the deployment manager role will follow the
+same rotation sequence. Thus, through 2023:
+
+- 29 Nov 2022: @bskinn
+- 31 Jan 2023: @gabalafou
+- 30 May 2023: @noa
+- 29 Aug 2023: @trallard
+- 31 Oct 2023: @bskinn
+
+Please coordinate your PRs and other deployment-related matters
+in the #qwebsite-ops Slack channel.
+
 ## How to make changes to the website
 
 Before reading this section, familiarize yourself with [Vercel
