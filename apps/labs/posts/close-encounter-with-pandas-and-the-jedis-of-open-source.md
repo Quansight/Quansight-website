@@ -1,6 +1,6 @@
 ---
 title: 'Close Encounter with pandas and the Jedis of open source'
-published: Novermber 14, 2022
+published: November 14, 2022
 author: dennis-chukwunta
 description: 'Learning from awesome mentors and contributing to pandas open source' 
 category: [Community, Developer workflows, OSS Experience, PyData ecosystem]
@@ -65,8 +65,8 @@ Having been involved in other internships, with the most recent being the [MLH F
 and [Outreachy](https://www.outreachy.org/), I had to write a significant amount of code which was my 
 metric for measuring a developer at the time. This idea nursed a little bit of doubt in me as an intern 
 who was doing more reading and communicating rather than writing code. But luckily "*being a developer is 
-more than just typing code*", paraphrasing Malissa's comment when I made a pseudo-complaint about my 
-internship experience thus far (bearly a month in at the time).
+more than just typing code*", paraphrasing Melissa's comment when I made a pseudo-complaint about my 
+internship experience thus far (barely a month in at the time).
 
 Since most people working on open-source projects are usually not paid to make contributions, there are 
 lots of features to be implemented, tests to be performed and documentation to write. Noa mentioned that 
