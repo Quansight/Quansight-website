@@ -2,7 +2,7 @@
 
 - [Quansight Website](#quansight-website)
   - [Orientation 🗺](#orientation-)
-  - [Deployment Schedule 📆](deployment-schedule-)
+  - [Deployment Schedule 📆](#deployment-schedule-)
   - [How to make changes to the website 👨🏿‍💻](#how-to-make-changes-to-the-website-)
     - [Content changes (Storyblok) 📰](#content-changes-storyblok-)
     - [Code changes (GitHub) 💻](#code-changes-github-)
