@@ -2,7 +2,7 @@
 title: 'Introduction to Design in Open Source'
 published: November 18, 2020
 author: isabela-presedo-floyd
-description: "So what's the disconnect? I'm still exploring that myself, but after a few years in open source I want to share my observations, experiences, and hope for a stronger collaboration between design and development. I don't think I have a complete solution, and some days I'm not even sure I grasp the entire problem. What I hope is to say that which often goes unsaid in these spaces: design and development skills in open source coexist precariously."
+description: "This blog post is a conversation between two contributors, sharing their observations, experiences, and their hope for a stronger collaboration between design and development in open source."
 category: [Developer workflows, OSS Experience]
 featuredImage:
   src: /posts/design_in_open_source/blog_feature_var2.svg
