@@ -9,7 +9,7 @@ import { getFilterValue } from './utils/getFilterValue';
 
 export const Filters: FC<TFiltersProps> = ({
   postTypes,
-  postCategories,
+  libraryCategories,
   postFilters,
   onFiltersChange,
   onPageChange,
@@ -55,7 +55,7 @@ export const Filters: FC<TFiltersProps> = ({
       <FilterMenu
         filterMenuVariant={FilterMenuVariant.Category}
         menuDataCurrent={postFilters.category}
-        menuData={postCategories}
+        menuData={libraryCategories}
         onFilterChange={onFilterChange}
       />
     </div>

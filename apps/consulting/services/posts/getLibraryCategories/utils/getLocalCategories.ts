@@ -1,8 +1,8 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 
-import { POSTS_DIRECTORY_PATH } from '..';
-import { TLocalCategories } from './types';
+import { POSTS_DIRECTORY_PATH } from '../..';
+import { TLocalCategories } from '../types';
 
 export const getLocalCategories = async (): Promise<TLocalCategories> => {
   try {

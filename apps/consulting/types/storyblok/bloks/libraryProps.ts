@@ -5,6 +5,12 @@ import {
   DatasourceEntries,
 } from '../../../api/types/basic';
 
+export type TLibraryCategoryItem = {
+  name: string;
+  value: string;
+  key: string;
+};
+
 export enum LinkTarget {
   Internal = 'internal',
   External = 'external',
@@ -31,7 +37,7 @@ export type TTiles = TTile[];
 
 export type TLibraryProps = {
   postTypes: DatasourceEntries;
-  postCategories: DatasourceEntries;
+  libraryCategories: TLibraryCategoryItem[];
   data: PageItem;
   header: HeaderItem;
   footer: FooterItem;

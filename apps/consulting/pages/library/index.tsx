@@ -44,7 +44,7 @@ export const Library: FC<TLibraryProps> = ({
   carouselTiles,
   preview,
   postTypes,
-  postCategories,
+  libraryCategories,
 }) => {
   const [postFilters, setPostFilters] = useState({
     type: TYPES_STARTING_VALUE,
@@ -141,7 +141,7 @@ export const Library: FC<TLibraryProps> = ({
         )}
         <Filters
           postTypes={postTypes}
-          postCategories={postCategories}
+          libraryCategories={libraryCategories}
           postFilters={postFilters}
           onFiltersChange={setPostFilters}
           onPageChange={setCurrentPage}
@@ -166,8 +166,6 @@ export const getStaticProps: GetStaticProps<
   const footer = await getFooter(preview);
   const postTypes = await getDataSourceEntries({ slug: 'post-type' }, preview);
   const libraryLinks = await getLibraryLinkItems(preview);
-
-  // Blog Articles
   const blogArticles = await getPageItems(
     {
       relations: LIBRARY_AUTHOR_RELATION,
@@ -176,19 +174,11 @@ export const getStaticProps: GetStaticProps<
     preview,
   );
 
-  // Filter Categories
-  const remoteCategoriesDataSource = await getDataSourceEntries(
+  const datasourceCategories = await getDataSourceEntries(
     { slug: 'post-category' },
     preview,
   );
-
-  const { items: remoteCategories } = remoteCategoriesDataSource;
   const localCategories = await getLocalCategories();
-
-  const libraryCategorirs = getLibraryCategories({
-    remoteCategories,
-    localCategories,
-  });
 
   return {
     props: {
@@ -196,7 +186,10 @@ export const getStaticProps: GetStaticProps<
       header,
       footer,
       postTypes,
-      postCategories: remoteCategoriesDataSource,
+      libraryCategories: getLibraryCategories({
+        remoteCategories: datasourceCategories?.items,
+        localCategories,
+      }),
       carouselTiles: getCarouselTiles(blogArticles),
       tiles: getLibraryTiles({
         blogArticles,
@@ -206,5 +199,4 @@ export const getStaticProps: GetStaticProps<
     },
   };
 };
-
 export default Library;

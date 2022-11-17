@@ -11,13 +11,14 @@ export enum FilterMenuOption {
 }
 
 export type TFilterMenuItemProps = {
-  menuDataItem: string;
+  menuDataItemName: string;
+  menuDataItemValue: string;
   menuDataCurrent: Maybe<string>;
   onFilterChange: (filter: string) => void;
 };
 
 export type TFilterMenuProps = {
-  menuData: DatasourceEntries;
+  menuData: { name: string; value: string; key: string }[];
   menuDataCurrent: Maybe<string>;
   filterMenuVariant: FilterMenuVariant;
   onFilterChange: (filter: string, filterVariant: FilterMenuVariant) => void;
@@ -29,7 +30,7 @@ type postFilters = {
 
 export type TFiltersProps = {
   postTypes: DatasourceEntries;
-  postCategories: DatasourceEntries;
+  libraryCategories: { name: string; value: string; key: string }[];
   postFilters: postFilters;
   onFiltersChange: Dispatch<SetStateAction<postFilters>>;
   onPageChange: Dispatch<SetStateAction<number>>;

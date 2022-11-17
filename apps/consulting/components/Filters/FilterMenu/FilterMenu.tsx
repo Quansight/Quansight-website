@@ -86,14 +86,16 @@ export const FilterMenu: FC<TFilterMenuProps> = ({
           )}
         >
           <FilterMenuItem
-            menuDataItem={getFilterStartingValue(filterMenuVariant)}
+            menuDataItemValue={getFilterStartingValue(filterMenuVariant)}
+            menuDataItemName={getFilterStartingValue(filterMenuVariant)}
             menuDataCurrent={menuDataCurrent}
             onFilterChange={handleFilterChange}
           />
-          {menuData.items.map(({ id, value }) => (
+          {menuData.map(({ key, value, name }) => (
             <FilterMenuItem
-              key={id}
-              menuDataItem={value}
+              key={key}
+              menuDataItemValue={value}
+              menuDataItemName={name}
               menuDataCurrent={menuDataCurrent}
               onFilterChange={handleFilterChange}
             />

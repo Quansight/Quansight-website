@@ -1,52 +1,35 @@
 import { TGetLibraryCategoriesProps } from './types';
 import { validateCategoriesArray } from './utils/validateCategoriesArray';
 
-const testData = [
-  {
-    name: 'hello1',
-    value: 'world1',
-  },
-  {
-    name: '',
-    value: 'world2',
-  },
-  {
-    name: 'hello3',
-    value: '',
-  },
-  {
-    name: 123,
-    value: 'world4',
-  },
-  {
-    name: 'hello5',
-    value: 123,
-  },
-  {
-    name: 'hello1',
-    value: 'world6',
-  },
-  {
-    name: 'hello7',
-    value: 'world1',
-  },
-  {
-    name: 'hello1',
-    value: 'world1',
-  },
-  {
-    value: 'world9',
-  },
-  {
-    name: 'hello10',
-  },
-  {},
-];
-
 export const getLibraryCategories = ({
-  localCategories,
-  remoteCategories,
+  localCategories = [],
+  remoteCategories = [],
 }: TGetLibraryCategoriesProps) => {
   const validLocalCategories = validateCategoriesArray(localCategories);
   const validRemoteCategories = validateCategoriesArray(remoteCategories);
+
+  return [...validLocalCategories, ...validRemoteCategories]
+    .filter(
+      ({ name: currentName, value: currentValue }, index, validCategories) =>
+        index ===
+        validCategories.findIndex(
+          ({ name: allCategoriesName, value: allCategoriesValue }) =>
+            allCategoriesName === currentName &&
+            allCategoriesValue === currentValue,
+        ),
+    )
+    .map(({ name, value }, index) => ({
+      name,
+      value,
+      key: `${value}-${index}`,
+    }))
+    .sort(({ name: nameOne }, { name: nameTwo }) => {
+      const nameOneUpperCase = nameOne.toUpperCase();
+      const nameTwoUpperCase = nameTwo.toUpperCase();
+      return nameOneUpperCase < nameTwoUpperCase
+        ? -1
+        : nameOneUpperCase > nameTwoUpperCase
+        ? 1
+        : 0;
+    });
 };
