@@ -1,14 +1,21 @@
-import { TGetLibraryCategoriesProps } from './types';
-import { validateCategoriesArray } from './utils/validateCategoriesArray';
+import { getDataSourceEntries } from '../../../api/utils/getDataSourceEntries';
+import { TLibraryFilter } from '../../../types/utils/LibraryFilter';
+import { getLocalCategories } from './utils/getLocalCategories';
+import { getValidCategoriesArray } from './utils/getValidCategoriesArray';
 
-export const getLibraryCategories = ({
-  localCategories = [],
-  remoteCategories = [],
-}: TGetLibraryCategoriesProps) => {
-  const validLocalCategories = validateCategoriesArray(localCategories);
-  const validRemoteCategories = validateCategoriesArray(remoteCategories);
+export const getAllCategories = async (
+  preview: boolean,
+): Promise<TLibraryFilter> => {
+  const localCategories = await getLocalCategories();
+  const datasourceCategories = await getDataSourceEntries(
+    { slug: 'post-category' },
+    preview,
+  );
 
-  return [...validLocalCategories, ...validRemoteCategories]
+  return [
+    ...getValidCategoriesArray(localCategories),
+    ...getValidCategoriesArray(datasourceCategories?.items),
+  ]
     .filter(
       ({ name: currentName, value: currentValue }, index, validCategories) =>
         index ===

@@ -1,17 +1,18 @@
 import { DatasourceEntry } from '../../../api/types/basic';
 
-type TCategoryItem = {
+export type TRawCategoryItem = {
   name: string;
   value: string;
 };
 
-export type TLocalCategories = TCategoryItem[];
+export type TLocalCategories = TRawCategoryItem[];
+export type TRemoteCategories = DatasourceEntry[];
 
 export type TValidateCategoriesArrayProps =
   | TLocalCategories
-  | DatasourceEntry[];
+  | TRemoteCategories;
 
 export type TGetLibraryCategoriesProps = {
   localCategories: TLocalCategories;
-  remoteCategories: DatasourceEntry[];
+  remoteCategories: TRemoteCategories;
 };

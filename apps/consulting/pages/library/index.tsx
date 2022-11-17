@@ -8,7 +8,6 @@ import { Layout, SEO, Footer, Header } from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
 import { PAGINATION_OFFSETT } from '../..//utils/paginateLibraryTiles/constants';
-import { getDataSourceEntries } from '../../api/utils/getDataSourceEntries';
 import { getFooter } from '../../api/utils/getFooter';
 import { getHeader } from '../../api/utils/getHeader';
 import { getLibraryLinkItems } from '../../api/utils/getLibraryLinkItems';
@@ -26,8 +25,9 @@ import { Page } from '../../components/Page/Page';
 import { Pagination } from '../../components/Pagination/Pagination';
 import { Tiles } from '../../components/Tiles/Tiles';
 import { TileVariant } from '../../components/Tiles/types';
-import { getLocalCategories, getLibraryCategories } from '../../services/posts';
-import { getAllPosts } from '../../services/posts/getLibraryPosts/getAllPosts';
+import { getAllCategories } from '../../services/posts/getAllCategories/getAllCategories';
+// import { getAllPosts } from '../../services/posts/getLibraryPosts/getAllPosts';
+import { getLibraryTypes } from '../../services/posts/getLibraryTypes/getLibraryTypes';
 import { TLibraryProps } from '../../types/storyblok/bloks/libraryProps';
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
@@ -44,7 +44,7 @@ export const Library: FC<TLibraryProps> = ({
   tiles,
   carouselTiles,
   preview,
-  postTypes,
+  libraryTypes,
   libraryCategories,
 }) => {
   const [postFilters, setPostFilters] = useState({
@@ -141,7 +141,7 @@ export const Library: FC<TLibraryProps> = ({
           <Carousel carouselTiles={carouselTiles} />
         )}
         <Filters
-          postTypes={postTypes}
+          libraryTypes={libraryTypes}
           libraryCategories={libraryCategories}
           postFilters={postFilters}
           onFiltersChange={setPostFilters}
@@ -165,7 +165,8 @@ export const getStaticProps: GetStaticProps<
   const data = await getPage({ slug: 'library', relations: '' }, preview);
   const header = await getHeader(preview);
   const footer = await getFooter(preview);
-  const postTypes = await getDataSourceEntries({ slug: 'post-type' }, preview);
+  const libraryTypes = await getLibraryTypes(preview);
+  const libraryCategories = await getAllCategories(preview);
   const libraryLinks = await getLibraryLinkItems(preview);
   const blogArticles = await getPageItems(
     {
@@ -174,24 +175,14 @@ export const getStaticProps: GetStaticProps<
     },
     preview,
   );
-  // const { items: blogPosts } = await getAllPosts(preview);
-
-  const datasourceCategories = await getDataSourceEntries(
-    { slug: 'post-category' },
-    preview,
-  );
-  const localCategories = await getLocalCategories();
 
   return {
     props: {
       data,
       header,
       footer,
-      postTypes,
-      libraryCategories: getLibraryCategories({
-        remoteCategories: datasourceCategories?.items,
-        localCategories,
-      }),
+      libraryTypes,
+      libraryCategories,
       carouselTiles: getCarouselTiles(blogArticles),
       tiles: getLibraryTiles({
         blogArticles,

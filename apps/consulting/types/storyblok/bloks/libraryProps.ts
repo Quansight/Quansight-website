@@ -1,15 +1,5 @@
-import {
-  FooterItem,
-  HeaderItem,
-  PageItem,
-  DatasourceEntries,
-} from '../../../api/types/basic';
-
-export type TLibraryCategoryItem = {
-  name: string;
-  value: string;
-  key: string;
-};
+import { FooterItem, HeaderItem, PageItem } from '../../../api/types/basic';
+import { TLibraryFilter } from '../../utils/LibraryFilter';
 
 export enum LinkTarget {
   Internal = 'internal',
@@ -36,8 +26,8 @@ export type TTile = {
 export type TTiles = TTile[];
 
 export type TLibraryProps = {
-  postTypes: DatasourceEntries;
-  libraryCategories: TLibraryCategoryItem[];
+  libraryTypes: TLibraryFilter;
+  libraryCategories: TLibraryFilter;
   data: PageItem;
   header: HeaderItem;
   footer: FooterItem;

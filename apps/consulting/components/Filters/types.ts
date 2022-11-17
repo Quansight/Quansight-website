@@ -2,8 +2,8 @@ import { Dispatch, SetStateAction } from 'react';
 
 import { Maybe } from 'graphql/jsutils/Maybe';
 
-import { DatasourceEntries } from '../../api/types/basic';
 import { FilterMenuVariant } from '../../types/utils/FilterMenuVariant';
+import { TLibraryFilter } from '../../types/utils/LibraryFilter';
 
 export enum FilterMenuOption {
   State = 'state',
@@ -18,7 +18,7 @@ export type TFilterMenuItemProps = {
 };
 
 export type TFilterMenuProps = {
-  menuData: { name: string; value: string; key: string }[];
+  menuData: TLibraryFilter;
   menuDataCurrent: Maybe<string>;
   filterMenuVariant: FilterMenuVariant;
   onFilterChange: (filter: string, filterVariant: FilterMenuVariant) => void;
@@ -29,8 +29,8 @@ type postFilters = {
 };
 
 export type TFiltersProps = {
-  postTypes: DatasourceEntries;
-  libraryCategories: { name: string; value: string; key: string }[];
+  libraryTypes: TLibraryFilter;
+  libraryCategories: TLibraryFilter;
   postFilters: postFilters;
   onFiltersChange: Dispatch<SetStateAction<postFilters>>;
   onPageChange: Dispatch<SetStateAction<number>>;
