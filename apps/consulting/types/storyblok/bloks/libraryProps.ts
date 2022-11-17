@@ -20,7 +20,7 @@ export type TTile = {
   author: string;
   date: string;
   link: TLinkData;
-  uuid: string;
+  key: string;
 };
 
 export type TTiles = TTile[];
@@ -32,6 +32,6 @@ export type TLibraryProps = {
   header: HeaderItem;
   footer: FooterItem;
   preview: boolean;
-  tiles: TTiles;
+  allTiles: TTiles;
   carouselTiles: TTiles;
 };

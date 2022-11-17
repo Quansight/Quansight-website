@@ -8,7 +8,7 @@ import { TFiltersProps, FilterMenuOption } from './types';
 import { getFilterValue } from './utils/getFilterValue';
 
 export const Filters: FC<TFiltersProps> = ({
-  // libraryTypes,
+  libraryTypes,
   libraryCategories,
   postFilters,
   onFiltersChange,
@@ -48,10 +48,16 @@ export const Filters: FC<TFiltersProps> = ({
       <FilterMenu
         filterMenuVariant={FilterMenuVariant.Type}
         menuDataCurrent={postFilters.type}
-        menuData={postTypes.items}
+        menuData={libraryTypes}
         onFilterChange={onFilterChange}
       />
       */}
+      <FilterMenu
+        filterMenuVariant={FilterMenuVariant.Type}
+        menuDataCurrent={postFilters.type}
+        menuData={libraryTypes}
+        onFilterChange={onFilterChange}
+      />
       <FilterMenu
         filterMenuVariant={FilterMenuVariant.Category}
         menuDataCurrent={postFilters.category}

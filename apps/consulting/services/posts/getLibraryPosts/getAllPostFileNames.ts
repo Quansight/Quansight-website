@@ -1,7 +1,7 @@
 import { readdirSync } from 'fs';
 import path from 'path';
 
-import { POSTS_DIRECTORY_PATH } from '..';
+import { POSTS_DIRECTORY_PATH } from '../constants';
 
 export const postFileExtensionRegExp = /\.(md|mdx)$/;
 

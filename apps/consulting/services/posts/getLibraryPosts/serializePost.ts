@@ -33,8 +33,6 @@ export const serializePost = async (
     },
   });
 
-  console.log(authors.length);
-
   if (!data.author) {
     throw Error('You did not provide author slug');
   }

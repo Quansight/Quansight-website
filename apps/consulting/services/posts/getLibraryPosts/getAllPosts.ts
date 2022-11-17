@@ -1,6 +1,6 @@
-import { DEFAULT_API_OFFSET } from '..';
 import { getTeam } from '../../../api/utils/getTeam';
 import { TPostsResponse } from '../../../types/storyblok/bloks/blogPost';
+import { DEFAULT_API_OFFSET } from '../constants';
 import {
   getAllPostFileNames,
   postFileExtensionRegExp,
@@ -11,14 +11,12 @@ export const getAllPosts = async (
   preview: boolean,
 ): Promise<TPostsResponse> => {
   try {
-    const team = await getTeam(preview);
+    const authors = await getTeam(preview);
     const postsFileNames = getAllPostFileNames();
-
     const posts = await Promise.all(
       postsFileNames.map(async (fileName) => {
         const slug = fileName.replace(postFileExtensionRegExp, '');
-        const { content, meta } = await serializePost(fileName, team);
-
+        const { content, meta } = await serializePost(fileName, authors);
         return {
           slug,
           meta,

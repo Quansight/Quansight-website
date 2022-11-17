@@ -12,7 +12,6 @@ import { getFooter } from '../../api/utils/getFooter';
 import { getHeader } from '../../api/utils/getHeader';
 import { getLibraryLinkItems } from '../../api/utils/getLibraryLinkItems';
 import { getPage } from '../../api/utils/getPage';
-import { getPageItems } from '../../api/utils/getPageItems';
 import { LIBRARY_AUTHOR_RELATION } from '../../components/BlogArticle/constants';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { Carousel } from '../../components/Carousel/Carousel';
@@ -26,22 +25,20 @@ import { Pagination } from '../../components/Pagination/Pagination';
 import { Tiles } from '../../components/Tiles/Tiles';
 import { TileVariant } from '../../components/Tiles/types';
 import { getAllCategories } from '../../services/posts/getAllCategories/getAllCategories';
-// import { getAllPosts } from '../../services/posts/getLibraryPosts/getAllPosts';
+import { getAllPosts } from '../../services/posts/getLibraryPosts/getAllPosts';
+import { getLibraryTiles } from '../../services/posts/getLibraryTiles/getLibraryTiles';
 import { getLibraryTypes } from '../../services/posts/getLibraryTypes/getLibraryTypes';
 import { TLibraryProps } from '../../types/storyblok/bloks/libraryProps';
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 import { filterLibraryTiles } from '../../utils/filterLibraryTiles/filterLibraryTiles';
-import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
-import { getCarouselTiles } from '../../utils/getLibraryTiles/getCarouselTiles';
-import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
 import { paginateLibraryTiles } from '../../utils/paginateLibraryTiles/paginateLibraryTiles';
 
 export const Library: FC<TLibraryProps> = ({
   data,
   header,
   footer,
-  tiles,
+  allTiles,
   carouselTiles,
   preview,
   libraryTypes,
@@ -59,14 +56,14 @@ export const Library: FC<TLibraryProps> = ({
 
   useEffect(() => {
     const filteredItems = filterLibraryTiles(
-      tiles,
+      allTiles,
       postFilters.type,
       postFilters.category,
     );
     serPaginationPages(Math.ceil(filteredItems.length / PAGINATION_OFFSETT));
     const filterPagination = paginateLibraryTiles(filteredItems, currentPage);
     setLibraryTiles(filterPagination);
-  }, [postFilters.category, currentPage, postFilters.type, tiles]);
+  }, [postFilters.category, currentPage, postFilters.type, allTiles]);
 
   useEffect(() => {
     const isTheSameFilter = router.query.type === postFilters.type;
@@ -167,14 +164,14 @@ export const getStaticProps: GetStaticProps<
   const footer = await getFooter(preview);
   const libraryTypes = await getLibraryTypes(preview);
   const libraryCategories = await getAllCategories(preview);
+  const libraryPosts = await getAllPosts(preview);
   const libraryLinks = await getLibraryLinkItems(preview);
-  const blogArticles = await getPageItems(
-    {
-      relations: LIBRARY_AUTHOR_RELATION,
-      prefix: ARTICLES_DIRECTORY_SLUG,
-    },
-    preview,
-  );
+
+  const { allTiles, carouselTiles } = getLibraryTiles({
+    libraryPosts,
+    libraryLinks,
+    libraryCategories,
+  });
 
   return {
     props: {
@@ -182,12 +179,9 @@ export const getStaticProps: GetStaticProps<
       header,
       footer,
       libraryTypes,
+      allTiles,
       libraryCategories,
-      carouselTiles: getCarouselTiles(blogArticles),
-      tiles: getLibraryTiles({
-        blogArticles,
-        libraryLinks,
-      }),
+      carouselTiles,
       preview,
     },
   };

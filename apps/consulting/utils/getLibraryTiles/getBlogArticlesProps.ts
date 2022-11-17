@@ -12,7 +12,7 @@ export const getBlogArticlesProps = (blogArticles: PageItems): TTiles =>
       ),
     };
     return {
-      uuid: article.uuid,
+      key: article.uuid,
       link: getLinkType(article),
       imageSrc: blogArticleBodyItem.libraryImage.filename,
       imageAlt: blogArticleBodyItem.libraryImage.alt,
