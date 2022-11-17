@@ -27,6 +27,7 @@ import { Pagination } from '../../components/Pagination/Pagination';
 import { Tiles } from '../../components/Tiles/Tiles';
 import { TileVariant } from '../../components/Tiles/types';
 import { getLocalCategories, getLibraryCategories } from '../../services/posts';
+import { getAllPosts } from '../../services/posts/getLibraryPosts/getAllPosts';
 import { TLibraryProps } from '../../types/storyblok/bloks/libraryProps';
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
@@ -173,6 +174,7 @@ export const getStaticProps: GetStaticProps<
     },
     preview,
   );
+  // const { items: blogPosts } = await getAllPosts(preview);
 
   const datasourceCategories = await getDataSourceEntries(
     { slug: 'post-category' },
