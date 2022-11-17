@@ -35,7 +35,7 @@ export const Carousel: FC<TCarouselProps> = ({ carouselTiles }) => {
         }}
       >
         {carouselTiles.map((slide) => (
-          <SwiperSlide key={slide.uuid}>
+          <SwiperSlide key={slide.key}>
             <CarouselItem {...slide} />
           </SwiperSlide>
         ))}

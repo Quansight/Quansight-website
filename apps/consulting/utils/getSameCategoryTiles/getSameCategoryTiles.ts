@@ -10,8 +10,8 @@ export const getSameCategoryTiles = (
   if (tiles.length === 1) return tiles;
 
   const getSameCategoryLibraryPost = tiles.filter(
-    ({ postCategory, uuid }) =>
-      uuid !== currentPostID &&
+    ({ postCategory, key }) =>
+      key !== currentPostID &&
       postCategory.some((category) => currentPostCategories.includes(category)),
   );
 

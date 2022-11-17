@@ -20,7 +20,7 @@ import { TLibraryArticleProps } from '../../types/storyblok/bloks/libraryArticle
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
 import { getArticlesPaths } from '../../utils/getArticlesPaths/getArticlesPaths';
-import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
+// import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
 import { getSameCategoryTiles } from '../../utils/getSameCategoryTiles/getSameCategoryTiles';
 
 const Article: FC<TLibraryArticleProps> = ({
@@ -88,10 +88,7 @@ export const getStaticProps: GetStaticProps<
     },
     preview,
   );
-  const libraryTiles = getLibraryTiles({
-    blogArticles,
-    libraryLinks,
-  });
+  const libraryTiles = [];
 
   const currentPostCategories = data.content.body.find(
     (item) => item.category,
