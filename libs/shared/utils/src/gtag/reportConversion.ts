@@ -1,3 +1,5 @@
+// Snippet from https://github.com/Quansight/Quansight-website/issues/404#issuecomment-1248287234
+
 export const gtag_report_conversion = (url?: Location | undefined) => {
   const callback = function () {
     if (typeof url != 'undefined') {
