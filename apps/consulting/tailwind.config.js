@@ -12,10 +12,12 @@ module.exports = {
       fontFamily: {
         heading: ['Mukta', 'sans-serif'],
         sans: ['Inter', 'sans-serif'],
+        code: ['Fira Code', 'monospace'],
       },
       colors: {
         transparent: 'transparent',
         violet: '#452393',
+        'violet-code': '#b2399a',
         pink: '#A43A8F',
         green: '#99C941',
         black: '#191919',

@@ -62,7 +62,7 @@ const Article: FC<TLibraryArticleProps> = ({
           publishedDate={post.meta.published}
           author={post.meta.author}
         />
-        <div className="prose-code:px-0 prose-pre:px-0 prose-img:mx-auto prose-figcaption:mt-[2rem] mb-[5rem] min-w-full text-[1.8rem] leading-[2.7rem] text-black prose-a:underline-offset-2 prose-code:bg-transparent prose-pre:bg-transparent prose-code:rounded-lg prose sm:prose-figcaption:mt-0 focus:prose-a:text-violet hover:prose-a:text-violet">
+        <div className="prose-code:px-0 prose-pre:px-0 prose-img:mx-auto prose-figcaption:mt-[2rem] mb-[5rem] min-w-full prose-code:text-[.95em] text-[1.8rem]  prose-code:font-normal leading-[2.7rem] text-black prose-a:underline-offset-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-transparent prose-pre:bg-transparent prose-code:rounded-lg prose-code:border-none prose sm:prose-figcaption:mt-0 focus:prose-a:text-violet hover:prose-a:text-violet prose-code:text-violet-code prose-code:font-code">
           <MDXRemote {...post.content} components={blogAllowedComponents} />
         </div>
       </article>
