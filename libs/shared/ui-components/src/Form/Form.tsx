@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import { sendFormData, FormValues } from '@quansight/shared/utils';
 import { BOOK_A_CALL_FORM_ID } from '@quansight/shared/utils';
+import { gtag_report_conversion } from '@quansight/shared/utils';
 
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
@@ -35,6 +36,7 @@ export const Form: FC<TFormProps> = (props) => {
   };
 
   const onSubmit = handleSubmit((formValues): void => {
+    gtag_report_conversion();  // null argument so that no page nav happens
     sendFormData(hookUrl, formValues)
       .then(() => setFormStatus(FormStates.Success))
       .catch(() => setFormStatus(FormStates.Failure));

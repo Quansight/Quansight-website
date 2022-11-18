@@ -14,3 +14,5 @@ export * from './constants/bookACallFormID';
 export * from './hooks';
 
 export * from './preview';
+
+export * from './gtag/reportConversion';
