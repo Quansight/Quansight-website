@@ -12,6 +12,7 @@ function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
       <Meta />
       <Component {...pageProps} />
 
+      {/* These two scripts are included verbatim as per gtag instructions */}
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
