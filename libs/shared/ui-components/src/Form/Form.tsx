@@ -36,7 +36,7 @@ export const Form: FC<TFormProps> = (props) => {
   };
 
   const onSubmit = handleSubmit((formValues): void => {
-    gtag_report_conversion(window.location);
+    gtag_report_conversion();  // null argument so that no page nav happens
     sendFormData(hookUrl, formValues)
       .then(() => setFormStatus(FormStates.Success))
       .catch(() => setFormStatus(FormStates.Failure));
