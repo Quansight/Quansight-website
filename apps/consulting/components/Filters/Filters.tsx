@@ -8,7 +8,7 @@ import { TFiltersProps, FilterMenuOption } from './types';
 import { getFilterValue } from './utils/getFilterValue';
 
 export const Filters: FC<TFiltersProps> = ({
-  libraryTypes,
+  // libraryTypes,
   libraryCategories,
   postFilters,
   onFiltersChange,
@@ -45,19 +45,13 @@ export const Filters: FC<TFiltersProps> = ({
     <div className="flex flex-col gap-[2rem] justify-between items-center pb-[5.2rem] w-full sm:flex-row sm:gap-[5rem]">
       {/*
       We're removing the type filter until we have content of other types. Right now, we just have blog-type content.
-      <FilterMenu
+       <FilterMenu
         filterMenuVariant={FilterMenuVariant.Type}
         menuDataCurrent={postFilters.type}
         menuData={libraryTypes}
         onFilterChange={onFilterChange}
       />
       */}
-      <FilterMenu
-        filterMenuVariant={FilterMenuVariant.Type}
-        menuDataCurrent={postFilters.type}
-        menuData={libraryTypes}
-        onFilterChange={onFilterChange}
-      />
       <FilterMenu
         filterMenuVariant={FilterMenuVariant.Category}
         menuDataCurrent={postFilters.category}

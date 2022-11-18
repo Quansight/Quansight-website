@@ -1,7 +1,7 @@
 import { LibrarylinkItems } from '../../../../api/types/basic';
 import { TTiles } from '../../../../types/storyblok/bloks/libraryProps';
 import { LinkTarget } from '../../../../types/storyblok/bloks/libraryProps';
-import { formatArticleDate } from '../../../../utils/formatArticleDate/formatArticleDate';
+import { formatArticleDate } from './formatArticleDate';
 import { getAuthorName } from './getAuthorName';
 
 export const getLibraryLinksTiles = (libraryLinks: LibrarylinkItems): TTiles =>
