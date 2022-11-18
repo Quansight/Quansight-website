@@ -452,6 +452,7 @@ export type TeamQuery = {
           filename: string;
           alt: string | null;
         } | null;
+        githubLink: { __typename?: 'Link'; url: string } | null;
       } | null;
     } | null> | null;
   } | null;

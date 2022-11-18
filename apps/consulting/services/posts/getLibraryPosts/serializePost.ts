@@ -49,6 +49,7 @@ export const serializePost = async (
       avatarSrc: postAuthor.content.image.filename,
       fullName: `${postAuthor.content.firstName} ${postAuthor.content.lastName}`,
       nickName: postAuthor.content.githubNick,
+      authorUrl: postAuthor.content.githubLink,
     },
   };
 

@@ -8,8 +8,8 @@ featuredImage:
   src: /posts/a-second-czi-grant-for-numpy-and-openblas/blog_feature_var1.svg
   alt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 hero:
-  imageSrc: /posts/a-second-czi-grant-for-numpy-and-openblas/blog_hero_var2.svg
-  imageAlt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
+  imageSrc: /posts/hero-paris.webp
+  imageAlt: 'Data visualization of Paris city'
 ---
 
 I am happy to announce that NumPy and OpenBLAS have once again been awarded a

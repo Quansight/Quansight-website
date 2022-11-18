@@ -12,7 +12,6 @@ import { getFooter } from '../../api/utils/getFooter';
 import { getHeader } from '../../api/utils/getHeader';
 import { getLibraryLinkItems } from '../../api/utils/getLibraryLinkItems';
 import { getPage } from '../../api/utils/getPage';
-import { LIBRARY_AUTHOR_RELATION } from '../../components/BlogArticle/constants';
 import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { Carousel } from '../../components/Carousel/Carousel';
 import { Filters } from '../../components/Filters/Filters';
@@ -129,7 +128,7 @@ export const Library: FC<TLibraryProps> = ({
       />
 
       {isPageType(data?.content?.component) && (
-        <Page data={data} preview={preview} relations={LIBRARY_AUTHOR_RELATION}>
+        <Page data={data} preview={preview}>
           {(blok: TRawBlok) => <BlokProvider blok={blok} />}
         </Page>
       )}

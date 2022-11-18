@@ -45,6 +45,8 @@ export const BlogPost: FC<TBlogPostProps> = ({
     return null; // TODO we should do something when post is null
   }
 
+  console.log(post.content.compiledSource);
+
   return (
     <Layout
       footer={<Footer {...footer.content} />}

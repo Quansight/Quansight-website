@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { Picture } from '@quansight/shared/ui-components';
 
-import HeaderLinkIcon from '../assets/headerLinkIcon.svg';
+import HeaderLinkIcon from './assets/headerLinkIcon.svg';
 
 export const BlogHeaderLink: FC = () => (
   <Link href="/library">

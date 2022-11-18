@@ -6,6 +6,9 @@ export type TPostAuthor = {
   nickName: string;
   fullName: string;
   avatarSrc: string;
+  authorUrl?: {
+    url: string;
+  };
 };
 
 export type TFeaturedImage = {

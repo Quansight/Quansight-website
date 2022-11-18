@@ -1,9 +1,10 @@
 import { TLink, TImage, TRichText } from '@quansight/shared/types';
 
+import { TPostAuthor } from '../../types/storyblok/bloks/blogPost';
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 
 export type TBlogMoreArticlesProps = {
-  tiles: TTiles;
+  featuredPosts: TTiles;
 };
 
 export type TBlogPostProps = {
@@ -24,7 +25,5 @@ export type TBlogHeaderAuthorProps = {
 };
 
 export type TBlogHeaderProps = {
-  author: TBlogHeaderAuthorProps;
+  author: TPostAuthor;
 } & TBlogHeaderPostDataProps;
-
-export type TBlogArticleProps = TBlogHeaderProps & TBlogPostProps;

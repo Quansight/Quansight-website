@@ -419,6 +419,9 @@ export const TeamDocument = gql`
           }
           projects
           githubNick
+          githubLink {
+            url
+          }
         }
       }
     }

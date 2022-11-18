@@ -2,6 +2,7 @@ import { isValidArray } from '@quansight/shared/utils';
 
 import { TTiles } from '../../../../types/storyblok/bloks/libraryProps';
 import { LinkTarget } from '../../../../types/storyblok/bloks/libraryProps';
+import { POST_SLUG_DEFAULT_PREFIX } from '../../constants';
 import { TGetLibraryPostsTiles } from '../types';
 
 export const getLibraryPostsTiles = ({
@@ -15,7 +16,7 @@ export const getLibraryPostsTiles = ({
       title: meta?.title,
       key: slug,
       link: {
-        linkUrl: `post/${slug}`,
+        linkUrl: `/${POST_SLUG_DEFAULT_PREFIX}/${slug}`,
         linkType: LinkTarget.Internal,
       },
       imageSrc: meta?.featuredImage?.src,

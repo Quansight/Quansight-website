@@ -1,7 +1,7 @@
 ---
 title: 'Is GitHub Actions suitable for running benchmarks?'
 published: August 18, 2021
-author: chris-ostrouchov
+author: rob-zinkov
 description: 'Instead of going through all the complications involved in renting or acquiring dedicated hardware, setting up credentials and monitoring costs of a benchmarkin suite, we hoped we could use the same free cloud resources normally used for CI tests. Ideally, GitHub Actions.'
 category: [Custom Local, Jupyter]
 featuredImage:
@@ -14,13 +14,8 @@ featuredImage:
   is an observable y-spread, it is small enough to be considered sensitive to performance
   regressions of more than 50%.'
 hero:
-  imageSrc: /posts/github-actions-benchmarks/hero.png
-  imageAlt: 'Reliability of benchmarks in GitHub Actions. This 2D plot shows a 16-day timeseries in the X axis. Each data point in the X axis corresponds to a cloud of 75 measurements (one per benchmark test).
-  The y-axis spread of each cloud corresponds to the performance ratio. Ideal measurements would have
-  a performance ratio of 1.0, since both runs returned the exact same performance. In practice this
-  does not happen and we can observe ratios between 0.6 and 1.5. This plot shows that while there
-  is an observable y-spread, it is small enough to be considered sensitive to performance
-  regressions of more than 50%.'
+  imageSrc: /posts/hero-paris.webp
+  imageAlt: 'Data visualization of Paris city'
   
 ---
 
