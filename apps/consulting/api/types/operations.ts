@@ -212,6 +212,7 @@ export type PageItemsQuery = {
         title: string | null;
         description: string | null;
         component: string | null;
+        keywords: string | null;
         body: any | null;
         _editable: string | null;
       } | null;
@@ -417,6 +418,7 @@ export type PageItemQuery = {
       component: string | null;
       title: string | null;
       description: string | null;
+      keywords: string | null;
     } | null;
     translated_slugs: Array<{
       __typename?: 'TranslatedSlug';

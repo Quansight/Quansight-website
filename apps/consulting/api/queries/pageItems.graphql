@@ -6,6 +6,7 @@ query PageItems($relations: String, $prefix: String) {
         title
         description
         component
+        keywords
         body
         _editable
       }

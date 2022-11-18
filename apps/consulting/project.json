@@ -20,7 +20,7 @@
       "options": {
         "buildTarget": "consulting:build",
         "dev": true,
-        "port": 4201,
+        "port": 4200,
         "hostname": "localhost"
       },
       "configurations": {
