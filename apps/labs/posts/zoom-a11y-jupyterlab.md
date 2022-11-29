@@ -1,7 +1,7 @@
 ---
 title: 'Zoom zoom zoom! Improving Accessibility in JupyterLab'
 author: kulsoom-zahra
-published: October 31, 2022
+published: November 28, 2022
 description: 'Kulsoom Zahra learns about accessibility and fixes a part of the JupyterLab interface (that used to break when zoomed in) during her summer 2022 internship at Quansight Labs.'
 category: [Access-centered, OSS Experience]
 featuredImage:
