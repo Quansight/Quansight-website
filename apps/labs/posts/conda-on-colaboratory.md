@@ -1,7 +1,7 @@
 ---
 title: 'Conda on Colaboratory'
 author: surbhi-sharma
-published: Novemver 7, 2022
+published: December 5, 2022
 description: 'Sharing my exciting experience working as an intern at Quansight labs and contributing to condacolab, a tool that lets you deploy a Miniconda installation easily on Google Colab notebooks and use conda or mamba in colab.'
 category: [Packaging]
 featuredImage:
