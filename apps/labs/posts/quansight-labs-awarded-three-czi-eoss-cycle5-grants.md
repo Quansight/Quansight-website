@@ -16,7 +16,7 @@ We are proud and excited to write to you again about the [Chan Zuckerberg Initia
 
 Quansight Labs spends a significant amount of time working on impactful and critical infrastructure and projects within the open source Scientific Ecosystem. As we work to sustain and grow community-driven open source projects and ecosystems, we have been fortunate to receive CZI support in previous cycles as well! In the previous cycle, we were a part of [five EOSS grants](https://labs.quansight.org/blog/czi-eoss4-grants-at-quansight-labs). [NumPy](https://numpy.org/) and [OpenBLAS](https://www.openblas.net/) were supported in [cycle 3](https://labs.quansight.org/blog/a-second-czi-grant-for-numpy-and-openblas) and in [the original cycle 1](https://labs.quansight.org/blog/numpy_CZI_grant). We were also involved with the [cycle 3 grant](https://chanzuckerberg.com/eoss/proposals/real-time-collaboration-in-jupyter/) supporting Saul Shanabrook, Eric Charles, Mars Lee, and Athan Reines for their contributions to [Jupyter](https://jupyter.org/), and the two grants supporting Gregory Lee work in [cycles 1](https://chanzuckerberg.com/eoss/proposals/scalable-storage-of-tensor-data-for-scientific-computing/) and [4](https://chanzuckerberg.com/eoss/proposals/gpu-acceleration-rapid-releases-and-biomedical-examples-for-scikit-image/), in his contributions to [zarr](https://zarr.readthedocs.io/en/stable/) and [scikit-image](https://scikit-image.org/).
 
-Today, we are thrilled to announce that three new EOSS Cycle 5 grants were awarded, in which [Quansight Labs team members are taking a leading role](link to announcement).
+Today, we are thrilled to announce that three new EOSS Cycle 5 grants were awarded, in which [Quansight Labs team members are taking a leading role](https://cziscience.medium.com/the-key-to-scientific-breakthroughs-improving-access-to-open-source-software-38f04c14accf).
 
 ## SciPy: Fundamental Tools for Biomedical Research
 **PIs: [Matt Haberland](https://github.com/mdhaber) (Cal Poly), [Pamphile Roy](https://github.com/tupui) (Quansight)**
@@ -54,9 +54,9 @@ The dissemination of scientific knowledge and tools is vital to the open source 
 SciPy is open source, and as such, this grant work will also be done in the open and with the broaders community. It means that you can all contribute to help or provide feedback. Join [our community](https://scipy.org/community/), and help us shape SciPy for the next decade.
 
 ## Transparent, open & sustainable infrastructure for conda-forge and bioconda
-**PIs: [Jaime Rodríguez-Guerra](https://github.com/jaimergp) (Quansight), [Wolf Vollprecht](https://github.com/wolfv) (Quantstack)**
+**PIs: [Jaime Rodríguez-Guerra](https://github.com/jaimergp) (Quansight), [Wolf Vollprecht](https://github.com/wolfv) (QuantStack)**
 
-This is a joint project with [QuanstStack](https://quantstack.net/) to improve [conda-forge](https://conda-forge.org/) and [Bioconda's](https://bioconda.github.io/) sustainability and transparency by adopting vendor-agnostic and secure infrastructure practices. In addition, we will develop comprehensive maintenance metrics and dashboards. 🎉
+This is a joint project with [QuantStack](https://quantstack.net/) to improve [conda-forge](https://conda-forge.org/) and [Bioconda's](https://bioconda.github.io/) sustainability and transparency by adopting vendor-agnostic and secure infrastructure practices. In addition, we will develop comprehensive maintenance metrics and dashboards. 🎉
 
 This project has three main goals:
 1. Reducing infrastructure technical debt
@@ -101,6 +101,8 @@ As with other GPU applications, CuPy heavily relies on NVIDIA CUDA and AMD ROCm 
 * Setting up a continuous integration system to provide extensive coverage of the supported software combinations
 * Building a delivery pipeline to provide binary packages for the supported versions of the library
 
+
+<br />
 
 # Want to join?
 
