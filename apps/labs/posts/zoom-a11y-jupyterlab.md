@@ -5,10 +5,10 @@ published: November 28, 2022
 description: 'Kulsoom Zahra learns about accessibility and fixes a part of the JupyterLab interface (that used to break when zoomed in) during her summer 2022 internship at Quansight Labs.'
 category: [Access-centered, OSS Experience]
 featuredImage:
-    src: /posts/improving-accessibility-in-jupyterlab/accessibility+jupyter.png 
+    src: /posts/zoom-a11y-jupyterlab/accessibility+jupyter.png 
     alt: 'Jupyter Accessibility' 
 hero:
-    imageSrc: /posts/improving-accessibility-in-jupyterlab/labsbg.png 
+    imageSrc: /posts/zoom-a11y-jupyterlab/labsbg.png 
     imageAlt: 'Jupyter Accessibility'
 ---
 Hi! I’m [Kulsoom Zahra](https://twitter.com/KulsoomZahra3/), a computer science graduate based in India. I just completed a three month internship (July 22 - Oct 22) at Quansight Labs where I worked on the project “Removing accessibility barriers in JupyterLab”.
@@ -42,7 +42,7 @@ On the journey of making JupyterLab more accessible, we needed to make sure Jupy
 
 The gif below shows one of the issues we encountered. On browser zoom, some sections of the Running Panel disappear if sections above them are expanded. This makes `Language Servers` and `Terminals` impossible to reach at browser zoom. Mainly because there is no way to go down the panel.
  
-![](/posts/improving-accessibility-in-jupyterlab/before.gif)
+![](/posts/zoom-a11y-jupyterlab/before.gif)
  
  
 ## The Fix
@@ -51,7 +51,7 @@ We tried changing things here and there, and finally, adding a vertical scrollba
 
 This following GIF shows a fix for the issue. After putting a scrollbar in the Running Panel, all sections are reachable even when other sections are expanded. Now, it’s easy to reach the bottom.
 
-![](/posts/improving-accessibility-in-jupyterlab/after.gif)
+![](/posts/zoom-a11y-jupyterlab/after.gif)
 
 The thing about proposing a solution in a massive open-source project is you need to be willing to take critiques. Everyone has an opinion, and it's your job to respect theirs while expressing yours. You also need to be sure that you give enough context and clarity on the issue while being open to better solutions.
  
