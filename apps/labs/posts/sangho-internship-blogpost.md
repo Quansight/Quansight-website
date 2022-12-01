@@ -28,15 +28,15 @@ For example, `auto_model`, `auto_optim` or `auto_dataloader` helps provided mode
 to simplify distributed configuration setup for multiple backends.
 
 When using distributed computation with PyTorch-Ignite, data is transferred to multiple devices for computations then after calculation, it gathers outputs from each devices.
-<img alt="ddp configuration" src="/posts/sangho-blog-post/ddp1.png" />
+![ddp configuration](/posts/sangho-blog-post/ddp1.png)
 
 ## How PyTorch gathers data
 
 There are two major ways of collecting outputs from each devices, all reduce and all gather
 All reduce : Make each device have same values of summation
-<img alt="All reduce" src="/posts/sangho-blog-post/allreduce.png" />
+![All reduce](/posts/sangho-blog-post/allreduce.png)
 All gather : Make each device have same values of list
-<img alt="All gather" src="/posts/sangho-blog-post/allgather.png" />
+![All gather](/posts/sangho-blog-post/allgather.png)
 
 
 ## How I contributed with improving test code in DDP config
@@ -57,13 +57,13 @@ Problems : Existing methods in PyTorch-Ignite uses all ranks, however, for certa
 
 Distributed part of Ignite is wrapper of different backend like [horovod](https://horovod.ai/), [nccl](https://developer.nvidia.com/nccl), [gloo](https://github.com/facebookincubator/gloo) and [xla](https://github.com/pytorch/xla).
 I added new group method for generating group depends on its backend and modified all_reduce and all_gather to take group arguments for users to select the devices.
-<img alt="Code snippets" src="/posts/sangho-blog-post/code1.png" />
+![Code snippets](/posts/sangho-blog-post/code1.png)
 
 
 ### My contributions
 
-<img alt="Contributions with improving test" src="/posts/sangho-blog-post/cont1.png" />
-<img alt="Contributions with improving test" src="/posts/sangho-blog-post/cont2.png" />
+![Contributions with improving test](/posts/sangho-blog-post/cont1.png)
+![Contributions with improving test](/posts/sangho-blog-post/cont2.png)
 
 ### What I learned
 
