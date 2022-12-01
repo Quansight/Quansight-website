@@ -24,22 +24,22 @@ When you have 1) a larger batch of dataset such as training images or you 2) nee
 PyTorch-Ignite is a high-level library to help with training and evaluating neural networks in PyTorch flexibly and transparently.
 PyTorch-Ignite distributed module (ignite.distributed) is a helper module to use distributed settings for multiple backends like `nccl`, `gloo`, `mpi`, `xla` and `horovod`.
 
-![idist configuration](/posts/sangho-internship-blogpost/ddp0.png)
+![idist configuration](/posts/sangho-internship-blogpost/ddp0.png){align="center"}
 
 By simply designating the current backend, ignite.distributed provides a context manager to simplify the code of distributed configuration setup for all above supported backends. And it also provides methods for using existing configuration from each backend.
 For example, `auto_model`, `auto_optim` or `auto_dataloader` helps provided model to adapt existing configuration and `Parallel` helps 
 to simplify distributed configuration setup for multiple backends.
 
 When using distributed computation with PyTorch-Ignite, data is transferred to multiple devices for computations then after calculation, it gathers outputs from each devices.
-![ddp configuration](/posts/sangho-internship-blogpost/ddp1.png)
+![ddp configuration](/posts/sangho-internship-blogpost/ddp1.png){align="center"}
 
 ## How PyTorch gathers data
 
 There are two major ways of collecting outputs from each devices, all reduce and all gather
 All reduce : Make each device have same values of summation
-![All reduce](/posts/sangho-internship-blogpost/allreduce.png)
+![All reduce](/posts/sangho-internship-blogpost/allreduce.png){align="center"}
 All gather : Make each device have same values of list
-![All gather](/posts/sangho-internship-blogpost/allgather.png)
+![All gather](/posts/sangho-internship-blogpost/allgather.png){align="center"}
 
 
 ## How I contributed with improving test code in DDP config
@@ -60,13 +60,13 @@ Problems : Existing methods in PyTorch-Ignite uses all ranks, however, for certa
 
 Distributed part of Ignite is wrapper of different backend like [horovod](https://horovod.ai/), [nccl](https://developer.nvidia.com/nccl), [gloo](https://github.com/facebookincubator/gloo) and [xla](https://github.com/pytorch/xla).
 I added new group method for generating group depends on its backend and modified all_reduce and all_gather to take group arguments for users to select the devices.
-![Code snippets](/posts/sangho-internship-blogpost/code1.png)
+![Code snippets](/posts/sangho-internship-blogpost/code1.png){align="center"}
 
 
 ### My contributions
 
-![Contributions with improving test](/posts/sangho-internship-blogpost/cont1.png)
-![Contributions with improving test](/posts/sangho-internship-blogpost/cont2.png)
+![Contributions with improving test](/posts/sangho-internship-blogpost/cont1.png){align="center"}
+![Contributions with improving test](/posts/sangho-internship-blogpost/cont2.png){align="center"}
 
 ### What I learned
 
