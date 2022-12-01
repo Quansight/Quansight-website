@@ -277,7 +277,7 @@ Streamlit was recently [acquired by Snowflake][snowflake acquires streamlit] and
 it will be interesting to see where it goes with the influx of capital, and
 whether it will become more closely tied to Snowflake databases.
 
-## Answers to Questions We Get A Lot
+## Answers to Questions We Get a Lot
 
 ### Which one should I use?
 
@@ -353,7 +353,7 @@ Finally, Streamlit is primarily designed for data that can fit within memory.
   collections of independent dashboards and apps from a central overview page.
   Other custom multi-page apps can also be built, with more work.
 
-### Which is more suitable for non-coder/beginners?
+### Which is more suitable for non-coders/beginners?
 
 None of these options are designed for non-coders. All of them assume the user
 has enough Python experience to build plots and charts out of the underlying
