@@ -5,7 +5,7 @@ author: rob-zinkov
 description: 'Machine learning has significant strengths, especially when large amounts of clean, consistent data are available, and it’s providing dramatic benefits across diverse fields. There are numerous areas where machine learning is not necessarily the optimal tool, though, especially where data is lacking or of poor quality, or where visibility into the model’s internal decision-making processes is critical. In these situations, modeling techniques that make use of the processes underlying the data, informed by domain-specific expertise, are often able to outperform machine learning methods. Such ‘domain-directed’ methods are a great addition to your toolbox—they can be effective when machine learning fails or reaches its limits, and they often provide superior predictive performance in addition to improved model interpretability.'
 category: [Artificial Intelligence, PyData Ecosystem]
 featuredImage:
-  src: /posts/robust-domain-directed-modeling/epicycle-final-frame-2.png
+  src: /posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/epicycle-final-frame-2.png
   alt: 'Overlay of three plots, with two plots in the top row and one on the bottom. Upper left: A geocentric epicycle model of Mars orbiting the Earth, showing a red trace for the complex path of Mars, the current Earth-Mars distance as a dashed green line, and the deferent and epicycle circles in gray. Upper right: A heliocentric elliptical-orbit model of Mars and Earth orbiting the Sun, showing the current Earth-Mars distance as a solid green line. Center: A time-series plot of the Earth-Mars distances from the two models, showing a good but imperfect match.'
 hero:
   imageSrc: /posts/hero-paris.webp
@@ -19,7 +19,7 @@ world or positioned as if they'll one day take it over. In the 1990s we had the
 “information superhighway,” the 2000s gave us “web services,” and in the 2010s
 “Big Data” and “machine learning” were everywhere.
 
-![Line chart showing Ngram data for four phrases. X-axis from years 1985 to 2020, y-axis from 0 to 140k monthly counts. “Information superhighway” rises in 1992, peaks at (1995, 20k) and falls off with a long tail. “Web services” rises in 2000, has a broad, noisy peak 40k-60k from 2005-2011, then falls to 20k by 2020. “Big data” rises ~linearly from zero starting in 2011, ending near 100k by 2020. “Machine learning” rises ~linearly to 30k in 2015, then rises very sharply to 130k in 2020.](/posts/robust-domain-directed-modeling/ngram-1-75pct.svg)
+![Line chart showing Ngram data for four phrases. X-axis from years 1985 to 2020, y-axis from 0 to 140k monthly counts. “Information superhighway” rises in 1992, peaks at (1995, 20k) and falls off with a long tail. “Web services” rises in 2000, has a broad, noisy peak 40k-60k from 2005-2011, then falls to 20k by 2020. “Big data” rises ~linearly from zero starting in 2011, ending near 100k by 2020. “Machine learning” rises ~linearly to 30k in 2015, then rises very sharply to 130k in 2020.](/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/ngram-1-75pct.svg)
 
 _Monthly phrase counts retrieved from [Google Books Ngram Exports][ngram exports]_
 
@@ -108,7 +108,7 @@ distance for both the epicycle (dashed line) and heliocentric (solid line)
 models, showing how the epicycle model provides a reasonable but inexact match
 to the more physically realistic heliocentric model.
 
-![Animated GIF with three synchronized panels in a single horizontal row. Left: A geocentric epicycle model of Mars orbiting the Earth, showing a red trace for the historical path for Mars, the current Earth-Mars distance as a dashed green line, the deferent and epicycle circles in gray, and a representation of how Mars’s position is calculated in purple. Right: A heliocentric elliptical-orbit model of Mars and Earth orbiting the Sun, showing the current Earth-Mars distance as a solid green line. Center: A time-series plot of the Earth-Mars distances from the two models, showing a good but imperfect match.](/posts/robust-domain-directed-modeling/epicycle_anim.gif)
+![Animated GIF with three synchronized panels in a single horizontal row. Left: A geocentric epicycle model of Mars orbiting the Earth, showing a red trace for the historical path for Mars, the current Earth-Mars distance as a dashed green line, the deferent and epicycle circles in gray, and a representation of how Mars’s position is calculated in purple. Right: A heliocentric elliptical-orbit model of Mars and Earth orbiting the Sun, showing the current Earth-Mars distance as a solid green line. Center: A time-series plot of the Earth-Mars distances from the two models, showing a good but imperfect match.](/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/epicycle_anim.gif)
 
 In this way, domain-directed approaches, including probabilistic programming
 techniques, specifically focus on a better understanding of the processes that
@@ -167,7 +167,7 @@ Without underlying domain-driven guidance as to a good shape for our model, we
 can’t easily trust whether the uncertainty and quality of fit parameters we
 derive from our summary statistics are large or small.
 
-![A 2x2 matrix of scatter plots, showing four visually different datasets with eleven points each that all have the same linear regression line. Top left: Data with appreciable scatter, but that is well matched to the linear fit. Top right: Concave-down parabolic data, that is clearly not matched to the linear fit. Bottom left: Linear data with negligible scatter and a slope less than that of the linear fit, but with a single outlier falling far above the fit. Bottom right: A cluster of data at a single x-value of varying y values, with a single point at a higher x- and y-value that ‘pins” the linear fit.](/posts/robust-domain-directed-modeling/anscombe_3_57pct_adj.png)
+![A 2x2 matrix of scatter plots, showing four visually different datasets with eleven points each that all have the same linear regression line. Top left: Data with appreciable scatter, but that is well matched to the linear fit. Top right: Concave-down parabolic data, that is clearly not matched to the linear fit. Bottom left: Linear data with negligible scatter and a slope less than that of the linear fit, but with a single outlier falling far above the fit. Bottom right: A cluster of data at a single x-value of varying y values, with a single point at a higher x- and y-value that ‘pins” the linear fit.](/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/anscombe_3_57pct_adj.png)
 
 This principle was taken to an extreme with the [Datasaurus Dozen][datasaurus]
 dataset, where strikingly different visual patterns of data are shown to have
@@ -177,7 +177,7 @@ model telling us whether we expect star-shaped or dinosaur-shaped data, we
 really can’t tell whether the uncertainty and quality of fit represented by
 these summary statistics are large or small.
 
-![Animated GIF showing a series of scatter plots with ~50 points in different shapes: Dinosaur, random scatter, grid of dots, ellipse, bulls-eye, star, horizontal lines, vertical lines, “X” shape, diagonal lines. The GIF shows one-dimensional mean and standard deviation statistics for x and y and the r correlation between x and y for each plot; all of these values are identical between the plots, to two places past the decimal.](/posts/robust-domain-directed-modeling/dino_anim.gif)
+![Animated GIF showing a series of scatter plots with ~50 points in different shapes: Dinosaur, random scatter, grid of dots, ellipse, bulls-eye, star, horizontal lines, vertical lines, “X” shape, diagonal lines. The GIF shows one-dimensional mean and standard deviation statistics for x and y and the r correlation between x and y for each plot; all of these values are identical between the plots, to two places past the decimal.](/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/dino_anim.gif)
 
 The above examples demonstrate how we are best served during data analysis by
 looking at our data directly with the guidance of a specific model, rather than
@@ -207,7 +207,7 @@ model able to capture the discontinuity near a score of 30.
 
 The use of domain-directed tools thus gives us access to more relevant models and their associated distributions, and the enhanced structure and insight they provide.
 
-![Histogram plot of test scores, with score on the x-axis (0-100) and the fraction of test takers with that score on the y-axis (scale of 0-4%). The data looks generally normally distributed, except for a significant positive deviation just at and above a score of 30 (~2.3% actual vs ~1.2% fitted at score = 30), and a significant negative deviation just below 30. A normal distribution fit to the data is shown with a dashed line; it fits somewhat well, but its peak (54.6) is shifted toward low scores from the actual data (56), and the deviation in the data around score=30 causes the fit curve to run too high for scores from 34-55, and too low for 0-20. An inset shows a probability plot, and how a “knot” in this plot reveals the disruption in the data around score=30, and how marked deviation of both tails of the data reveals that a normal distribution is not the correct model for the data.](/posts/robust-domain-directed-modeling/matura_composite_67pct_adj.png)
+![Histogram plot of test scores, with score on the x-axis (0-100) and the fraction of test takers with that score on the y-axis (scale of 0-4%). The data looks generally normally distributed, except for a significant positive deviation just at and above a score of 30 (~2.3% actual vs ~1.2% fitted at score = 30), and a significant negative deviation just below 30. A normal distribution fit to the data is shown with a dashed line; it fits somewhat well, but its peak (54.6) is shifted toward low scores from the actual data (56), and the deviation in the data around score=30 causes the fit curve to run too high for scores from 34-55, and too low for 0-20. An inset shows a probability plot, and how a “knot” in this plot reveals the disruption in the data around score=30, and how marked deviation of both tails of the data reveals that a normal distribution is not the correct model for the data.](/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/matura_composite_67pct_adj.png)
 
 ## Probabilistic Programming Libraries As Domain-Directed Tools
 
@@ -228,7 +228,7 @@ For example, suppose you wanted to describe a probabilistic model of a linear
 relationship between _X_ and _Y_. Statisticians might use the following
 notation:
 
-![Image of statistics equations for a probabilistic model of a linear relationship: alpha ~ Normal(0,10) — beta ~ Normal(0,7) — sigma ~ HalfCauchy(5) — mu = alpha + beta * X — Y ~ Normal(mu, sigma). Each equation is underlined with a different color to match the underlines in the image of the Bean Machine code.](/posts/robust-domain-directed-modeling/bean-machine-equations_75pct.png)
+![Image of statistics equations for a probabilistic model of a linear relationship: alpha ~ Normal(0,10) — beta ~ Normal(0,7) — sigma ~ HalfCauchy(5) — mu = alpha + beta * X — Y ~ Normal(mu, sigma). Each equation is underlined with a different color to match the underlines in the image of the Bean Machine code.](/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/bean-machine-equations_75pct.png)
 
 Here, the tilde (~) operator indicates that a variable is defined as being drawn
 from a distribution, rather than by a discrete equation. For example, in this
@@ -242,7 +242,7 @@ The following code sample is written to use functionality provided by
 [PyTorch][pytorch homepage] and [Bean Machine][bean machine homepage], and
 describes the same relationships as the equations above:
 
-![Screen capture of PyTorch and Bean Machine code matched to the above image of probabilistic equations. import torch — import torch.distributions as dist — from beanmachine.ppl import random_variable — @random_variable def alpha(): return dist.Normal(0, 10) — @random_variable def beta(): return dist.Normal(0, 7) — @random_variable def sigma(): return dist.HalfCauchy(5) — @random_variable def Y(): mu = alpha() + beta() * X; return torch.Normal(mu, sigma())](/posts/robust-domain-directed-modeling/bean-machine-code.png)
+![Screen capture of PyTorch and Bean Machine code matched to the above image of probabilistic equations. import torch — import torch.distributions as dist — from beanmachine.ppl import random_variable — @random_variable def alpha(): return dist.Normal(0, 10) — @random_variable def beta(): return dist.Normal(0, 7) — @random_variable def sigma(): return dist.HalfCauchy(5) — @random_variable def Y(): mu = alpha() + beta() * X; return torch.Normal(mu, sigma())](/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/bean-machine-code.png)
 
 The colored underlines in both of the figures are paired, to highlight the
 similarities between the definitions in code and the related mathematical
@@ -287,7 +287,7 @@ deviation from the overall slope), and seasonal effects (e.g., cyclic annual or
 monthly variations). When such a model is fitted, each parameter is meaningful
 and something a stakeholder can consider when making decisions.
 
-![Time series plot of CO2 data from the Mauna Loa monitoring station. The raw data is shown as a scatter plot timeseries, which exhibits a general upward trend from ~330–390 ppm from 1970–2010, overlaid with a ~5 ppm annual seasonal variation. The data is broken into (i) a smooth long-term trend line; (ii) a line showing medium-term variations from the smooth trend, with magnitude of ~1 ppm and time scale on the order of 1–3 years; and (iii) the seasonal variation, which is a roughly sawtooth curve.](/posts/robust-domain-directed-modeling/mauna_loa_adj_800px.png)
+![Time series plot of CO2 data from the Mauna Loa monitoring station. The raw data is shown as a scatter plot timeseries, which exhibits a general upward trend from ~330–390 ppm from 1970–2010, overlaid with a ~5 ppm annual seasonal variation. The data is broken into (i) a smooth long-term trend line; (ii) a line showing medium-term variations from the smooth trend, with magnitude of ~1 ppm and time scale on the order of 1–3 years; and (iii) the seasonal variation, which is a roughly sawtooth curve.](/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/mauna_loa_adj_800px.png)
 
 In addition, in some cases an underlying domain-driven model further allows us
 to perform causal inference from the dataset, as opposed to just identifying
