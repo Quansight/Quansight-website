@@ -295,7 +295,7 @@ a single one be used across an organization. Consider the below as you decide:
   charting library is sufficient for your needs, Dash is for you.
 
 - If you want to build multi-page apps in Python using data-science-friendly
-  tools, then Panel.
+  tools, then choose Panel.
 
 ### Which is the best for performance and scalability?
 
