@@ -22,9 +22,12 @@ Second is modifying `all_reduce` and `all_gather` methods to take `group` argume
 When you have 1) a larger batch of dataset such as training images or you 2) need to parallelize computations, then it is natural to use multi-gpu in distributed configuration.
 
 PyTorch-Ignite is a high-level library to help with training and evaluating neural networks in PyTorch flexibly and transparently.
-PyTorch-Ignite distributed module (IGNITE.DISTRIBUTED) is a helper module to use distributed settings for multiple backends like `nccl`, `gloo`, `mpi`, `xla` and `horovod`
-It provides a context manager to simplify the code of distributed configuration setup for all above supported backends.
-For example, `auto_model`, `auto_optim` or `auto_dataloader` helps provided model to adapt existing configuration. And `Parallel` helps 
+PyTorch-Ignite distributed module (ignite.distributed) is a helper module to use distributed settings for multiple backends like `nccl`, `gloo`, `mpi`, `xla` and `horovod`.
+
+![idist configuration](/posts/sangho-blog-post/ddp0.png)
+
+By simply designating the current backend, ignite.distributed provides a context manager to simplify the code of distributed configuration setup for all above supported backends. And it also provides methods for using existing configuration from each backend.
+For example, `auto_model`, `auto_optim` or `auto_dataloader` helps provided model to adapt existing configuration and `Parallel` helps 
 to simplify distributed configuration setup for multiple backends.
 
 When using distributed computation with PyTorch-Ignite, data is transferred to multiple devices for computations then after calculation, it gathers outputs from each devices.
