@@ -33,14 +33,6 @@ By simply designating the current backend, `ignite.distributed` provides a conte
 For example, `auto_model`, `auto_optim` or `auto_dataloader` helps provided model to adapt existing configuration and `Parallel` helps 
 to simplify distributed configuration setup for multiple backends.
 
-## Collective functions in PyTorch
-
-There are two major ways of collecting outputs from each devices, all reduce and all gather
-All reduce : Make each device have same values of summation
-![All reduce](/posts/sangho-internship-blogpost/allreduce.png)
-All gather : Make each device have same values of list
-![All gather](/posts/sangho-internship-blogpost/allgather.png)
-
 
 ## How I contributed with improving test code in DDP config
 
