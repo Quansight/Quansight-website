@@ -2,7 +2,7 @@
 title: 'Conda on Colaboratory'
 author: surbhi-sharma
 published: December 5, 2022
-description: 'Sharing my exciting experience working as an intern at Quansight Labs and contributing to condacolab, a tool that lets you deploy a Miniconda installation easily on Google Colab notebooks. This enables you to use `conda` or `mamba` to install new packages on any Colab session.'
+description: 'Surbhi Sharma shares her exciting experience working as an intern at Quansight Labs and contributing to condacolab, a tool that lets you deploy a Miniconda installation easily on Google Colab notebooks. This enables you to use conda or mamba to install new packages on any Colab session.'
 category: [Packaging]
 featuredImage:
   src: /posts/conda-on-colaboratory/blog_feature_surbhi.svg
@@ -30,7 +30,7 @@ However, some users might find that Colab has some limitations in some areas, li
 * Colab is locked to a single Python version (3.8 at the time of writing). So, if you need to use any other Python version in Colab, you won't be able to do that easily. 
 * Colab ships many preinstalled packages, but users can only use `apt` or `pip` to update or obtain new ones.
 
-This means you won't be able to use any other package manager like [`conda`](https://docs.conda.io/projects/conda/en/latest/), which can be a better option for certain projects and data-science fields. You might be able to get `conda` to work on Colab after some hacking, but this kind of workaround tends to be break often and lacks reusability.
+This means you won't be able to use any other package manager like [`conda`](https://docs.conda.io/projects/conda/en/latest/), which can be a better option for certain projects and data-science fields. You might be able to get `conda` to work on Colab after some hacking, but this kind of workaround tends to break often and lacks reusability.
 
 To help folks with these limitations and make Colab more user-friendly for `conda` users, we have `condacolab`.
 
