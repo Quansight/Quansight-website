@@ -20,15 +20,15 @@ Hi, I am [Surbhi](https://github.com/ssurbhi560), and this blog post is about th
 
 [Google Colab](https://colab.research.google.com/) is a product from Google Research and is widely used by software developers and data scientists today. Some reasons behind its success are:
 
-* It provides a cloud-based platform to run your code. This means it is not limited by the user's computer resources (like RAM, disk space, CPU, or GPU). 
-* It comes preinstalled with the most popular Python packages.
-* Its free plan is enough for a lot of use cases.
-* The resulting notebooks can be easily shared.
+- It provides a cloud-based platform to run your code. This means it is not limited by the user's computer resources (like RAM, disk space, CPU, or GPU).
+- It comes preinstalled with the most popular Python packages.
+- Its free plan is enough for a lot of use cases.
+- The resulting notebooks can be easily shared.
 
 However, some users might find that Colab has some limitations in some areas, like:
 
-* Colab is locked to a single Python version (3.8 at the time of writing). So, if you need to use any other Python version in Colab, you won't be able to do that easily. 
-* Colab ships many preinstalled packages, but users can only use `apt` or `pip` to update or obtain new ones.
+- Colab is locked to a single Python version (3.8 at the time of writing). So, if you need to use any other Python version in Colab, you won't be able to do that easily.
+- Colab ships many preinstalled packages, but users can only use `apt` or `pip` to update or obtain new ones.
 
 This means you won't be able to use any other package manager like [`conda`](https://docs.conda.io/projects/conda/en/latest/), which can be a better option for certain projects and data-science fields. You might be able to get `conda` to work on Colab after some hacking, but this kind of workaround tends to break often and lacks reusability.
 
@@ -46,17 +46,17 @@ To help folks with these limitations and make Colab more user-friendly for `cond
 
 The way `condacolab` worked before was by installing the Miniconda distribution on top of the system's Python at `/usr/local`, and then adding a few configuration files to ensure we never changed the currently installed Python version. Finally, it wrapped the Python executable to redirect and inject some environment variables needed to load the new libraries installed by `conda`. Since we need to re-read `LD_LIBRARY_PATH`, it also triggered a Jupyter kernel restart.
 
-The problem with this approach is that we are still stuck with the preinstalled Python and we are overwriting the system's Python executable. This is not the best way because we are leaving some original Colab libraries that depend on other packages, resulting in a chaotic mixture of `conda`-provided files with Colab-preinstalled files. In most simple cases, this doesn't present much of a problem. However, if users rely on more complex packages with compiled dependencies, chances are you would often run into difficult to debug errors due to ABI incompatibilities. 
+The problem with this approach is that we are still stuck with the preinstalled Python and we are overwriting the system's Python executable. This is not the best way because we are leaving some original Colab libraries that depend on other packages, resulting in a chaotic mixture of `conda`-provided files with Colab-preinstalled files. In most simple cases, this doesn't present much of a problem. However, if users rely on more complex packages with compiled dependencies, chances are you would often run into difficult-to-debug errors due to ABI incompatibilities.
 
 ## Adopting a better solution 🥳
 
-The first goal we worked on during the internship was to design and implement a more robust solution to use `conda` and/or `mamba` on Colab. 
+The first goal we worked on during the internship was to design and implement a more robust solution to use `conda` and/or `mamba` on Colab.
 
 After some iterations, we settled for the following approach:
 
 1. We install the Miniconda distribution (or any other distribution) at `/opt/conda` instead of `/usr/local`.
-2. We supplement the `base` environment with Colab-required packages, like `google-colab`, `condatools`, `psutil`, and `matplotlib`. 
-3. We overwrite `/usr/local/python` (the executable run by the default `ipykernel`) with a shell script that activates the conda environment and starts our custom `ipykernel`, forwarding the calls there. Thanks to this step, the Jupyter server will not even notice, but we are now running `conda`'s Python without touching the system one at all!
+2. We supplement the `base` environment with Colab-required packages, like `google-colab`, `condatools`, `psutil`, and `matplotlib`.
+3. We overwrite `/usr/local/python` (the executable run by the default `ipykernel`) with a shell script that activates the `conda` environment and starts our custom `ipykernel`, forwarding the calls there. Thanks to this step, the Jupyter server will not even notice, but we are now running `conda`'s Python without touching the system one at all!
 
 ```bash
 #!/bin/bash
@@ -75,7 +75,7 @@ Bash script which activates the conda `base` environment and then runs the `ipyk
 
 ### 1. Adding a `Restart kernel` button
 
-During the installation of `condacolab` the kernel is restarted automatically. This could make users feel like something is wrong with the installation or Colab. We now added a button to restart the kernel to resolve this issue. If you set `restart_kernel` to `False` during the installation, then the kernel will not restart automatically, and a button will appear, which you can click to restart the kernel.
+By default, during the installation of `condacolab` the kernel is restarted automatically. This could make users feel like something is wrong with the installation or Colab. We now added a button to restart the kernel to resolve this UX issue. If you set `restart_kernel` to `False` during the installation, then the kernel will not restart automatically. Instead, a button will appear, which you can click to restart the kernel.
 
 ---
 
