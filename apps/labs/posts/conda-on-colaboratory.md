@@ -2,7 +2,7 @@
 title: 'Conda on Colaboratory'
 author: surbhi-sharma
 published: December 5, 2022
-description: 'Sharing my exciting experience working as an intern at Quansight Labs and contributing to condacolab,  is a tool that lets you deploy a Miniconda installation easily on Google Colab notebooks. This enables you to use `conda` or `mamba` to install new packages on any Colab session.'
+description: 'Sharing my exciting experience working as an intern at Quansight Labs and contributing to condacolab, a tool that lets you deploy a Miniconda installation easily on Google Colab notebooks. This enables you to use `conda` or `mamba` to install new packages on any Colab session.'
 category: [Packaging]
 featuredImage:
   src: /posts/conda-on-colaboratory/blog_feature_surbhi.svg
