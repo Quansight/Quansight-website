@@ -1,8 +1,9 @@
 ---
-title: 'Acceleration in Python Which Is Right for Your Project?'
+title: 'Acceleration in Python: Which Is Right for Your Project?'
 published: August 17, 2021
-author: dharhas
-description: 'Fast computation in Python relies on compiled code. Under the hoods of popular scientific computing libraries like NumPy, SciPy, and PyTorch are algorithms and data structures implemented in compiled languages. By using multiple languages, the aforementioned libraries and many others are able to run interactively in Python, but with the benefits of fast compiled code, facilitating real-time data analysis and manipulation. While this combination is highly desirable, reaping the benefits of both interactivity and speed, there are many ways to achieve this combination and the ways that developers have gone about this task have changed over the years. In this post, I'll highlight three main ways that open-source developers have approached writing performant Python libraries.'
+author: dale-tovar
+description: >
+  'Fast computation in Python relies on compiled code. Under the hoods of popular scientific computing libraries like NumPy, SciPy, and PyTorch are algorithms and data structures implemented in compiled languages. By using multiple languages, the aforementioned libraries and many others are able to run interactively in Python, but with the benefits of fast compiled code, facilitating real-time data analysis and manipulation. While this combination is highly desirable, reaping the benefits of both interactivity and speed, there are many ways to achieve this combination and the ways that developers have gone about this task have changed over the years. In this post, I'll highlight three main ways that open-source developers have approached writing performant Python libraries.'
 category: [PyData Ecosystem]
 featuredImage:
   src: /posts/acceleration-in-python-which-is-right-for-your-project/pythonacc.png
@@ -23,7 +24,16 @@ consideration for any scientific Python library is how to structure the
 algorithmic code around the slow Python interpreter. We'll return to sgkit
 below.
 
-Fast computation in Python relies on compiled code. Under the hoods of popular scientific computing libraries like NumPy, SciPy, and PyTorch are algorithms and data structures implemented in compiled languages. By using multiple languages, the aforementioned libraries and many others are able to run interactively in Python, but with the benefits of fast compiled code, facilitating real-time data analysis and manipulation. While this combination is highly desirable, reaping the benefits of both interactivity and speed, there are many ways to achieve this combination and the ways that developers have gone about this task have changed over the years. In this post, I'll highlight three main ways that open-source developers have approached writing performant Python libraries.
+Fast computation in Python relies on compiled code. Under the hoods of populars
+scientific computing libraries like NumPy, SciPy, and PyTorch are algorithms and
+data structures implemented in compiled languages. By using multiple languages,
+the aforementioned libraries and many others are able to run interactively in
+Python, but with the benefits of fast compiled code, facilitating real-time data
+analysis and manipulation. While this combination is highly desirable, reaping
+the benefits of both interactivity and speed, there are many ways to achieve
+this combination and the ways that developers have gone about this task have
+changed over the years. In this post, I'll highlight three main ways that
+open-source developers have approached writing performant Python libraries.
 
 - Using multiple languages in the same module
 
@@ -38,5 +48,15 @@ science are the same qualities that make Python slow. The main reason is that
 Python is an interpreted language. Most Python runs using the following model:
 
 ![](/posts/acceleration-in-python-which-is-right-for-your-project/pythonacc.png)
+
+Python source code is passed to the CPython compiler which generates Python byte
+code. The byte code is then passed to the interpreter. The main bottleneck in
+this process is the Python interpreter. As a result, code written natively in
+Python tends to run much slower than similar code code written in a compiled
+language like C or Fortran. Fortunately, we can compile compute-intensive
+operations in another language (often C or C++) as a library that extends the
+Python virtual machine. In this way, we can call these operations directly in
+the Python source code but bypass the slow interpreter, resulting in improved
+performance.
 
 [sgkit repo]: https://github.com/pystatgen/sgkit
