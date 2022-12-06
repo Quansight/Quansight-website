@@ -13,13 +13,13 @@ hero:
 ---
 
 Hey, I'm [Sangho Lee], a master's student from Seoul National University.
-I have participated in the [PyTorch-Ignite](https://pytorch-ignite.ai/) project internship at Quansight Labs working on test code improvements and features for distributed computations.
+I have participated in the [PyTorch-Ignite](https://pytorch-ignite.ai/) project internship at Quansight Labs, working on test code improvements and features for distributed computations.
 The first part of my contributions is improvements to the test code for metric computation in Distributed Data Parallel (DDP) configuration.
 Then I worked on adding the `group` argument to the `all_reduce` and `all_gather` methods in [`ignite.distributed`](https://pytorch.org/ignite/distributed.html) module.
 
 ## [About PyTorch-Ignite and distributed computations](https://pytorch-ignite.ai/tutorials/advanced/01-collective-communication/)
 
-PyTorch-Ignite is a high-level library to help with training and evaluating neural networks in PyTorch flexibly and transparently.
+PyTorch-Ignite is a high-level library which helps with training and evaluating neural networks in PyTorch flexibly and transparently.
 By using PyTorch-Ignite, we can get the benefit of less code than pure PyTorch and extensible API for metrics, experiments, and other components.
 In this point of view, PyTorch-Ignite also supports distributed computations with the PyTorch-Ignite distributed module for distributed computations.
 
@@ -52,7 +52,7 @@ There are 3 items to be checked to ensure that the test code for each metric wor
 
 Problem : Existing methods in PyTorch-Ignite uses all ranks, however, for certain use cases users may want to choose a subset of ranks for collecting the data like in the picture.
 
-As mentioned, Distributed part of Ignite is a wrapper of different backends like [horovod](https://horovod.ai/), [nccl](https://developer.nvidia.com/nccl), [gloo](https://github.com/facebookincubator/gloo) and [xla](https://github.com/pytorch/xla).
+As mentioned, the distributed part of Ignite is a wrapper of different backends like [horovod](https://horovod.ai/), [nccl](https://developer.nvidia.com/nccl), [gloo](https://github.com/facebookincubator/gloo) and [xla](https://github.com/pytorch/xla).
 I added a new group method for generating group depending on its backend and modified all_reduce and all_gather to take group arguments for users to select the devices.
 ![Code snippets](/posts/sangho-internship-blogpost/code1.png)
 
@@ -64,6 +64,6 @@ I added a new group method for generating group depending on its backend and mod
 
 ### What I learned
 
-Last 3 months was really precious time for me as an intern of Quansight.
+These 3 months were really precious time for me as an intern of Quansight.
 
 PS: I want to thank my mentor [Victor Fomin](https://github.com/vfdev-5) for the teaching and support during the internship.
