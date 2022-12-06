@@ -56,7 +56,7 @@ After some iterations, we settled for the following approach:
 
 1. We install the Miniconda distribution (or any other distribution) at `/opt/conda` instead of `/usr/local`.
 2. We supplement the `base` environment with Colab-required packages, like `google-colab`, `condatools`, `psutil`, and `matplotlib`. 
-3. We overwrite `/usr/local/python` (the executable run by the default `ipykernel`) with a shell script that activates the `conda` environment and starts our custom `ipykernel`, forwarding the calls there. Thanks to this step, the Jupyter server will not even notice, but we are now running `conda`'s Python without touching the system one at all!
+3. We overwrite `/usr/local/python` (the executable run by the default `ipykernel`) with a shell script that activates the conda environment and starts our custom `ipykernel`, forwarding the calls there. Thanks to this step, the Jupyter server will not even notice, but we are now running `conda`'s Python without touching the system one at all!
 
 ```
 #!/bin/bash
@@ -73,7 +73,7 @@ Bash script which activates the conda `base` environment and then runs the `ipyk
 
 ## Some other work we did for `condacolab`
 
-### 1. Adding a `Restart kernel` button.
+### 1. Adding a `Restart kernel` button
 
 During the installation of `condacolab` the kernel is restarted automatically. This could make users feel like something is wrong with the installation or Colab. We now added a button to restart the kernel to resolve this issue. If you set `restart_kernel` to `False` during the installation, then the kernel will not restart automatically, and a button will appear, which you can click to restart the kernel.
 
@@ -83,20 +83,20 @@ During the installation of `condacolab` the kernel is restarted automatically. T
 
 ---
 
-### 2. API for customizing the conda base environment.
+### 2. API for customizing the conda `base` environment
 
-We also worked on building an API that would give users the option to customize the newly activated `conda` `base` environment during the `condacolab` installation. The API provides the following options that users can specify:
+We also worked on building an API that would give users the option to customize the newly activated conda `base` environment during the `condacolab` installation. The API provides the following options that users can specify:
 
-1. `environment_file`: This can be a URL or path to an environment.yaml file.
+1. `environment_file`: This can be a URL or path to an `environment.yaml` file.
 2. `specs`: This is a list of additional specifications (packages) to install.
-3. `python_version`: Python version to use in the conda base environment
-4. `channels`: Comma-separated list of channels to use in the conda base environment.
-5. `pip_args`: List of additional packages to be installed using pip
-6. `extra_conda_args`: This is a list of any extra conda arguments used during the installation.
+3. `python_version`: Python version to use in the conda `base` environment.
+4. `channels`: Comma-separated list of channels to use in the conda `base` environment.
+5. `pip_args`: List of additional packages to be installed using `pip`.
+6. `extra_conda_args`: This is a list of any extra `conda` arguments used during the installation.
 
 The PR with the ongoing work for this has been opened here: [API for customizing the conda `base` environment (#38)](https://github.com/conda-incubator/condacolab/pull/38)
 
-```
+```python
 condacolab.install(
     environment_file="https://raw.githubusercontent.com/ssurbhi560/condacolab/07b92d827/environment.yaml",
     python_version="3.10",
@@ -109,7 +109,7 @@ condacolab.install(
 
 This is how users will be able to use the API while installing `condacolab`.
 
-### 3. Custom installers built with the constructor.
+### 3. Custom installers built with `constructor`
 
 As mentioned above, in the new solution we are using for `condacolab`, some extra packages are also installed (not just the ones shipped with Miniconda), which has increased the time for the installation of `condacolab`. So, to save some time during the installation and make `condacolab` faster, we are planning on pre-bundling these extra dependencies in custom installers built with [`constructor`](https://github.com/conda/constructor).
 
