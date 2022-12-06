@@ -2,7 +2,7 @@
 title: 'Conda on Colaboratory'
 author: surbhi-sharma
 published: December 5, 2022
-description: 'Sharing my exciting experience working as an intern at Quansight labs and contributing to condacolab, a tool that lets you deploy a Miniconda installation easily on Google Colab notebooks and use conda or mamba in colab.'
+description: 'Sharing my exciting experience working as an intern at Quansight Labs and contributing to condacolab,  is a tool that lets you deploy a Miniconda installation easily on Google Colab notebooks. This enables you to use `conda` or `mamba` to install new packages on any Colab session.'
 category: [Packaging]
 featuredImage:
   src: /posts/conda-on-colaboratory/blog_feature_surbhi.svg
@@ -36,7 +36,7 @@ To help folks with these limitations and make Colab more user-friendly for `cond
 
 ## What is `condacolab`, and how does it work?
 
-[`condacolab`](https://github.com/conda-incubator/condacolab) is a tool that lets you deploy a Miniconda installation easily on Google Colab notebooks. This enables you to use `conda` or `mamba` to install new packages on the Colab session.
+[`condacolab`](https://github.com/conda-incubator/condacolab) is a tool that lets you deploy a Miniconda installation easily on Google Colab notebooks. This enables you to use `conda` or `mamba` to install new packages on any Colab session.
 
 ---
 
