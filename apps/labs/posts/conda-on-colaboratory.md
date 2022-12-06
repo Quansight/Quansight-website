@@ -14,7 +14,7 @@ hero:
 
 ## Introduction
 
-Hi, I am [Surbhi](https://github.com/ssurbhi560), and this blog post is about the work I did over the last three most exciting months in my internship at Quansight Labs. My mentor during the internship was the very amazing [Jaime Rodríguez-Guerra](https://github.com/jaimergp). The project I worked on during the internship was [`condacolab`](https://github.com/conda-incubator/condacolab). We will shortly go into what `condacolab` is, but before that, let's understand a little about the two familiar names that we see here, which are conda and (Google) Colab and also why we needed `condacolab` in the first place.
+Hi, I am [Surbhi](https://github.com/ssurbhi560), and this blog post is about the work I did over the last three most exciting months in my internship at Quansight Labs. My mentor during the internship was the very amazing [Jaime Rodríguez-Guerra](https://github.com/jaimergp). The project I worked on during the internship was [`condacolab`](https://github.com/conda-incubator/condacolab). We will shortly go into what `condacolab` is, but before that, let's understand a little about the two familiar names that we see here, which are conda and (Google) Colab, and also why we needed `condacolab` in the first place.
 
 ## Why `condacolab`? 🐍
 
@@ -58,7 +58,7 @@ After some iterations, we settled for the following approach:
 2. We supplement the `base` environment with Colab-required packages, like `google-colab`, `condatools`, `psutil`, and `matplotlib`. 
 3. We overwrite `/usr/local/python` (the executable run by the default `ipykernel`) with a shell script that activates the conda environment and starts our custom `ipykernel`, forwarding the calls there. Thanks to this step, the Jupyter server will not even notice, but we are now running `conda`'s Python without touching the system one at all!
 
-```
+```bash
 #!/bin/bash
 source {prefix}/etc/profile.d/conda.sh
 conda activate
