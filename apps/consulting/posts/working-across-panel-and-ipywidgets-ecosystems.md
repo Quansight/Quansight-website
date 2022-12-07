@@ -15,8 +15,8 @@ hero:
 This notebook is designed to help you learn how to make apps in Panel in about
 15 minutes. Screenshots of cell outputs are included for convenience below, but
 it is **strongly** recommended that you use the
-[interactive Binder version][demo binder] (takes 1-2 minutes to load) or by
-cloning the [repo][demo repo] and running locally.
+[interactive Binder version][demo binder] (takes 1-2 minutes to load) or 
+clone the [repo][demo repo] to run the demo locally.
 
 ---
 
