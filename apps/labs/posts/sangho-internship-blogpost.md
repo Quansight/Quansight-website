@@ -5,7 +5,7 @@ author: sangho-lee
 description: 'Blogpost of working on the PyTorch-Ignite project during internship at Quansight'
 category: [Machine Learning, OSS Experience]
 featuredImage:
-  src: /posts/sangho-internship-blogpost/sangho1.png
+  src: /posts/sangho-internship-blogpost/sangho0.png
   alt: 'An image of the intern, Sangho.'
 hero:
   imageSrc: /posts/sangho-internship-blogpost/ignite_logo_mixed.png
