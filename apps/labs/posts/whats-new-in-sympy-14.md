@@ -118,7 +118,7 @@ If your [browser supports MathML](https://caniuse.com/#feat=mathml) (at the
 time of writing, only Firefox and Safari), you should see the above
 presentation form for `Integral(exp(-x**2), (x, -oo, oo))` below:
 
-<math style="display: block;"/><mrow><msubsup><mo>&#x222B;</mo><mrow><mo>-</mo><mi>&#x221E;</mi></mrow><mi>&#x221E;</mi></msubsup><msup><mi>&ExponentialE;</mi><mrow><mo>-</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msup><mo>&dd;</mo><mi>x</mi></mrow></math>
+<math style="display: block;"><mrow><msubsup><mo>&#x222B;</mo><mrow><mo>-</mo><mi>&#x221E;</mi></mrow><mi>&#x221E;</mi></msubsup><msup><mi>&ExponentialE;</mi><mrow><mo>-</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msup><mo>&dd;</mo><mi>x</mi></mrow></math>
 
 # Improvements to solvers
 
