@@ -2,7 +2,7 @@
 title: "What's New in SymPy 1.4"
 published: May 5, 2019
 author: aaron-meurer
-description: 'SymPy 1.4 was released on April 9, 2019. In this post, I'd like to go over some of the highlights for this release.'
+description: "SymPy 1.4 was released on April 9, 2019. In this post, I'd like to go over some of the highlights for this release."
 category: [PyData Ecosystem]
 featuredImage:
   src: /posts/whats-new-in-sympy-14/blog_feature_org.svg
