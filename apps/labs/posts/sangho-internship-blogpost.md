@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/sangho-internship-blogpost/sangho0.png
   alt: 'An image of the intern, Sangho.'
 hero:
-  imageSrc: /posts/sangho-internship-blogpost/ignite_logo_mixed.png
+  imageSrc: /posts/sangho-internship-blogpost/sangho0.png
   imageAlt: 'PyTorch-Ignite Logo'
 ---
 
