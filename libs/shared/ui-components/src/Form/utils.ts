@@ -20,15 +20,14 @@ export const getFormHeader = (props: TFormProps, state: FormStates): string => {
 };
 
 export const getParamValues = (): ParamValues => {
-  const params: ParamValues = {};
-
-  params.gclid = sessionStorage.getItem('gclid') || undefined;
-  params.utm_campaign = sessionStorage.getItem('utm_campaign') || undefined;
-  params.utm_content = sessionStorage.getItem('utm_content') || undefined;
-  params.utm_medium = sessionStorage.getItem('utm_medium') || undefined;
-  params.utm_source = sessionStorage.getItem('utm_source') || undefined;
-  params.utm_term = sessionStorage.getItem('utm_term') || undefined;
-
+  const params: ParamValues = {
+    gclid: sessionStorage.getItem('quansight_gclid') || undefined,
+    utm_campaign: sessionStorage.getItem('quansight_utm_campaign') || undefined,
+    utm_content: sessionStorage.getItem('quansight_utm_content') || undefined,
+    utm_medium: sessionStorage.getItem('quansight_utm_medium') || undefined,
+    utm_source: sessionStorage.getItem('quansight_utm_source') || undefined,
+    utm_term: sessionStorage.getItem('quansight_utm_term') || undefined,
+  };
   return params;
 };
 

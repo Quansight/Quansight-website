@@ -16,7 +16,7 @@ const Document: FC = () => {
                 param.toLowerCase().startsWith('gclid') || 
                 param.toLowerCase().startsWith('utm_')
                 ) {
-                  window.sessionStorage.setItem(param, params[param])
+                  window.sessionStorage.setItem('quansight_' + param, params[param])
                 }
             }
           `}
