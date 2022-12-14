@@ -10,8 +10,9 @@ export type FormValues = {
   message: string;
 };
 
+// GCLID capture disabled for now
 export type ParamValues = {
-  gclid?: string;
+  // gclid?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -25,7 +26,7 @@ export type FormAndParamValues = {
   phone: string;
   company: string;
   message: string;
-  gclid?: string;
+  // gclid?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;

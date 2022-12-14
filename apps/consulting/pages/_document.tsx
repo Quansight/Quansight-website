@@ -14,6 +14,10 @@ const Document: FC = () => {
           of collision with other sites that might be using sessionStorage for
           similar purposes.
 
+          The GCLID capture is disabled for now, since we're not sure how
+          extensively we will be running Google Ads, and it simplifies any
+          privacy questions to omit its capture.
+
           Search params approach from https://stackoverflow.com/a/901144/4376000.
         */}
         <Script id="session-store-url-params" strategy="beforeInteractive">
@@ -22,7 +26,7 @@ const Document: FC = () => {
             const params = Object.fromEntries(urlSearchParams.entries());
             for (const param in params) {
               if (
-                param.toLowerCase().startsWith('gclid') ||
+                // param.toLowerCase().startsWith('gclid') ||
                 param.toLowerCase().startsWith('utm_')
                 ) {
                   // Prefix with 'quansight_' to minimize possible name collisions

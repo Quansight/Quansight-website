@@ -1,8 +1,8 @@
-import { FormValues, SubscriberValues } from './types';
+import { FormAndParamValues, SubscriberValues } from './types';
 
 export const sendFormData = (
   url: string,
-  data: FormValues | SubscriberValues,
+  data: FormAndParamValues | SubscriberValues,
 ): Promise<string> => {
   return new Promise<string>(function (resolve, reject) {
     const xhr = new XMLHttpRequest();

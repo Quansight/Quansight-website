@@ -21,12 +21,13 @@ export const getFormHeader = (props: TFormProps, state: FormStates): string => {
 
 /**
  * Retrieves any GCLID & UTM parameters saved to sessionStorage.
+ * GCLID capture disabled for now.
  *
  * @returns {ParamValues} - Encapsulated GCLID/UTM parameters
  */
 export const getParamValues = (): ParamValues => {
   const params: ParamValues = {
-    gclid: sessionStorage.getItem('quansight_gclid') || undefined,
+    // gclid: sessionStorage.getItem('quansight_gclid') || undefined,
     utm_campaign: sessionStorage.getItem('quansight_utm_campaign') || undefined,
     utm_content: sessionStorage.getItem('quansight_utm_content') || undefined,
     utm_medium: sessionStorage.getItem('quansight_utm_medium') || undefined,
@@ -38,6 +39,7 @@ export const getParamValues = (): ParamValues => {
 
 /**
  * Compiles form data and GCLID/UTM data to a common object.
+ * GCLID capture disabled for now.
  *
  * @param formValues {FormValues} - User entered contact form data
  * @param paramValues {ParamValues} - GCLID/UTM parameters retrieved from sessionStorage
@@ -53,7 +55,7 @@ export const combineFormParamValues = (
     phone: formValues.phone,
     company: formValues.company,
     message: formValues.message,
-    gclid: paramValues.gclid,
+    // gclid: paramValues.gclid,
     utm_campaign: paramValues.utm_campaign,
     utm_content: paramValues.utm_content,
     utm_medium: paramValues.utm_medium,
