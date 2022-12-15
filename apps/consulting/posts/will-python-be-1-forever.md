@@ -22,7 +22,7 @@ there were many who believed that Java would never be replaced as #1.
 
 ![](/posts/will-python-be-1-forever/python-1-img-1.jpg)
 
-_([Image source][pypl page])_
+_([Image source: PYPL][pypl page])_
 
 But that certainly does not mean that Python is going away completely. Virtually
 none of the languages that have come to prominence in the past have disappeared
