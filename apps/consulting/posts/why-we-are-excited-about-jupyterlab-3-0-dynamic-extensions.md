@@ -23,7 +23,7 @@ version changes to [JupyterLab][jupyterlab docs]. We discussed the toil that
 core developers are investing to improve the experience of JupyterLab not only
 for developers but for users as well.**
 
-See the [video of this quirkshop][quirkshop video].
+See the video of this quirkshop, ["jupyterlab extensions quirkshop - migrating versions"][quirkshop video].
 
 The extension system is a central concept to JupyterLab; all of the features
 (e.g., notebook editor, file browser, menus, and status bar elements) are
@@ -55,7 +55,7 @@ At some point, the Jupyter Python community got very wrapped up in JavaScript de
 
 
 
-In JupyterLab 3, all of the packaging will be orchestrated by using pip, relying on PyPI alone. So, how did this come to be? Well, this could not have been achieved without advancements in [WebPack][webpack] version 5, the JavaScript library in charge of “bundling JavaScript files for usage in a browser” and the new [module federation][module federation] functionality. This functionality allows for a [JavaScript application][js app] to ship and load JavaScript modules on demand without having to pack it in the initial application bundle (a different Webpack build). This means we can now dynamically load extensions without the need for a build. This also means the possibility of using pip and PyPI packages to bundle the assets and place them in the right place for JupyterLab to load extensions. Since server-side extensions already depend on using Python, it was only natural to extend the use to also bundle the frontend extension assets.
+In JupyterLab 3, all of the packaging will be orchestrated by using pip, relying on PyPI alone. So, how did this come to be? Well, this could not have been achieved without advancements in [WebPack][webpack] version 5, the JavaScript library in charge of “bundling JavaScript files for usage in a browser” and the new [module federation][module federation] functionality. Using [module federation with webpack 5][module federation webpack 5] allows for a JavaScript application to ship and load JavaScript modules on demand without having to pack it in the initial application bundle (a different Webpack build). This means we can now dynamically load extensions without the need for a build. This also means the possibility of using pip and PyPI packages to bundle the assets and place them in the right place for JupyterLab to load extensions. Since server-side extensions already depend on using Python, it was only natural to extend the use to also bundle the frontend extension assets.
 
 Python users, those typically using IPython or [xeus-python][xeus] kernels, will only need a Python run-time to install packages!
 
@@ -113,7 +113,7 @@ Want more Jupyter? QHub is a new project from Quansight, read more about it in t
 [python]: https://www.python.org/
 [webpack]: https://webpack.js.org/
 [module federation]: https://webpack.js.org/concepts/module-federation/
-[js app]: https://dev.to/brandonvilla21/micro-frontends-module-federation-with-webpack-5-426
+[module federation webpack 5]: https://dev.to/brandonvilla21/micro-frontends-module-federation-with-webpack-5-426
 [xeus]: https://xeus-python.readthedocs.io/
 [mybinder]: https://mybinder.org/
 [postbuild]: https://www.npmjs.com/package/postbuild
