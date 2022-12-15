@@ -45,10 +45,6 @@ export const Form: FC<TFormProps> = (props) => {
       ...formValues,
       ...trackingParams,
     };
-    // const combinedValues: FormAndParamValues = combineFormParamValues(
-    //   formValues,
-    //   paramValues,
-    // );
 
     sendFormData(hookUrl, combinedValues)
       .then(() => setFormStatus(FormStates.Success))
