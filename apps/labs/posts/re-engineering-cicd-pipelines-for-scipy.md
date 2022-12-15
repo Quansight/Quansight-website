@@ -16,13 +16,6 @@ In this blog post I talk about the projects and my work during my internship at 
 
 This blog post would assume a basic understanding of CI/CD and GitHub Actions. I will also assume a basic understanding of Python and the SciPy ecosystem.
 
-<p align="center">
-    <img
-     alt="The picture displays a logo of Quansight Labs on the left and a logo of SciPy on the right. It signifies the primary purpose of the project at Quansight Labs to re-engineer the GitHub Actions CI for the SciPy and lay down the further scope for developing an entire CI matrix for build, test and release."
-     src="/posts/re-engineering-cicd-pipelines-for-scipy/re-engineering-ci-cd-scipy.png"/>
-    <i>Re-Engineering CI/CD pipelines for SciPy</i>
-</p>
-
 [SciPy](https://github.com/scipy/scipy) is quite an old and mature project, which is being used across the PyData community. The project currently uses a variety of continuous integration services and the Setuptools build system. As the project is growing and `distutils` will be deprecated as part of [PEP 632](https://www.python.org/dev/peps/pep-0632/), it was reasonable to migrate to a new build system. A [previous blog post](https://labs.quansight.org/blog/2021/07/moving-scipy-to-meson/) describes the migration process in detail and sets the future course for SciPy developers to look forward to faster builds.
 
 SciPy has been previously using [TravisCI](https://travis-ci.org/), [CircleCI](https://circleci.com/), and [AppVeyor](https://www.appveyor.com/) including [GitHub Actions](https://github.com/features/actions) across its continuous integration pipelines.My project was centered around building and re-engineering the continuous integration pipelines for SciPy using GitHub Actions to be made compatible with the new build system and increasing the adoption of GitHub Actions.
