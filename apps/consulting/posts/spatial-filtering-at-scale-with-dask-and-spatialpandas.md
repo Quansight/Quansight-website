@@ -239,5 +239,4 @@ _This work was originally presented at Scipy 2020, and can be viewed here:_
 
 [polygons]: (https://www2.census.gov/geo/tiger/TIGER2019/ZCTA5/tl_2019_us_zcta510.zip)
 
-
 [scipy2020 video]: https://youtu.be/czesBVUoXvk
