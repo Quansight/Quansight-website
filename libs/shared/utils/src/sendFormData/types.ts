@@ -11,7 +11,7 @@ export type FormValues = {
 };
 
 // GCLID capture disabled for now
-export type ParamValues = {
+export type TrackingParams = {
   // gclid?: string;
   utm_source?: string;
   utm_medium?: string;
@@ -20,7 +20,7 @@ export type ParamValues = {
   utm_term?: string;
 };
 
-export type FormAndParamValues = {
+export type FormAndTrackingValues = {
   name: string;
   email: string;
   phone: string;

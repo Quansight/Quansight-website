@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form';
 import {
   sendFormData,
   FormValues,
-  ParamValues,
-  FormAndParamValues,
+  TrackingParams,
+  FormAndTrackingValues,
 } from '@quansight/shared/utils';
 import { BOOK_A_CALL_FORM_ID } from '@quansight/shared/utils';
 
@@ -19,7 +19,7 @@ import { FormHeader } from './FormHeader';
 import { FormImage } from './FormImage';
 import { FormSuccess } from './FormSuccess';
 import { FormStates, TFormProps } from './types';
-import { getFormHeader, getParamValues, combineFormParamValues } from './utils';
+import { getFormHeader, getTrackingParams } from './utils';
 
 export const backgroundStyles = `
   before:absolute before:top-0 before:left-0 before:z-0 before:w-full before:h-full before:bg-gray-50
@@ -40,11 +40,15 @@ export const Form: FC<TFormProps> = (props) => {
   };
 
   const onSubmit = handleSubmit((formValues): void => {
-    const paramValues: ParamValues = getParamValues();
-    const combinedValues: FormAndParamValues = combineFormParamValues(
-      formValues,
-      paramValues,
-    );
+    const trackingParams: TrackingParams = getTrackingParams();
+    const combinedValues: FormAndTrackingValues = {
+      ...formValues,
+      ...trackingParams,
+    };
+    // const combinedValues: FormAndParamValues = combineFormParamValues(
+    //   formValues,
+    //   paramValues,
+    // );
 
     sendFormData(hookUrl, combinedValues)
       .then(() => setFormStatus(FormStates.Success))
