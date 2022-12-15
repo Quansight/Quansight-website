@@ -5,8 +5,8 @@ author: matthias-bussonnier
 description: 'Starting with IPython 7.16.1 (released in June 2020), you should be able to recreate the sdist (.tar.gz) and wheel (.whl), and get byte for byte identical result to the wheels published on PyPI. This is a critical step toward being able to trust your computing platforms, and a key component to improve efficiency of build and packaging platforms. It also potentially impacts fast conda environment creation for users. The following goes into some reasons for why you should care.'
 category: [Developer workflows]
 featuredImage:
-  src: /posts/reproducible-builds/blog_feature_var2.svg
-  alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
+  src: /posts/reproducible-builds/ipython_logo.png
+  alt: 'Logo of ipython.'
 hero:
   imageSrc: /posts/reproducible-builds/blog_hero_org.svg
   imageAlt: 'An illustration of a white hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
