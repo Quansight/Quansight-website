@@ -32,32 +32,3 @@ export const getTrackingParams = (): TrackingParams => {
   };
   return params;
 };
-
-/**
- * Compiles form data and GCLID/UTM data to a common object.
- * GCLID capture disabled for now.
- *
- * @param formValues {FormValues} - User entered contact form data
- * @param paramValues {ParamValues} - GCLID/UTM parameters retrieved from sessionStorage
- * @returns {FormAndParamValues} - Agglomerated form & GCLID/UTM data
- */
-// export const combineFormTrackingValues = (
-//   formValues: FormValues,
-//   paramValues: ParamValues,
-// ): FormAndParamValues => {
-//   const fpvals: FormAndParamValues = {
-//     name: formValues.name,
-//     email: formValues.email,
-//     phone: formValues.phone,
-//     company: formValues.company,
-//     message: formValues.message,
-//     // gclid: paramValues.gclid,
-//     utm_campaign: paramValues.utm_campaign,
-//     utm_content: paramValues.utm_content,
-//     utm_medium: paramValues.utm_medium,
-//     utm_source: paramValues.utm_source,
-//     utm_term: paramValues.utm_term,
-//   };
-
-//   return fpvals;
-// };
