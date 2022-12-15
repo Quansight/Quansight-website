@@ -219,9 +219,7 @@ Other approaches were considered and experimented with. AWS Athena is a serverle
 
 Reach out to Quansight for a free consultation by sending an email to [connect@quansight.com](email).
 
-_This work was originally presented at Scipy 2020, and can be viewed here:_
-
-[https://youtu.be/czesBVUoXvk](scipy2020 video)
+_This work was originally presented at Scipy 2020, and can be viewed here:_ [https://youtu.be/czesBVUoXvk](scipy2020 video)
 
 [geohash]: https://en.wikipedia.org/wiki/Geohash
 
