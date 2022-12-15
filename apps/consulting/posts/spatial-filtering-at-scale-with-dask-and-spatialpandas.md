@@ -224,19 +224,11 @@ _This work was originally presented at Scipy 2020, and can be viewed here:_
 [https://youtu.be/czesBVUoXvk][scipy2020 video]
 
 [geohash]: https://en.wikipedia.org/wiki/Geohash
-
 [hilbert]: https://en.wikipedia.org/wiki/Hilbert_curve
-
 [uber h3]: https://eng.uber.com/h3/
-
 [google s2 geometry]: https://opensource.googleblog.com/2017/12/announcing-s2-library-geometry-on-sphere.html
-
 [lexicographically]: https://en.wikipedia.org/wiki/Lexicographic_order
-
 [scipy2020 repo]: https://github.com/Quansight/scipy2020_spatial_algorithms_at_scale
-
 [gps points]: https://planet.openstreetmap.org/gps/simple-gps-points-120604.csv.xz
-
 [polygons]: (https://www2.census.gov/geo/tiger/TIGER2019/ZCTA5/tl_2019_us_zcta510.zip)
-
 [scipy2020 video]: https://youtu.be/czesBVUoXvk
