@@ -23,14 +23,13 @@ const Document: FC = () => {
         <Script id="session-store-url-params" strategy="beforeInteractive">
           {`
             const urlSearchParams = new URLSearchParams(window.location.search);
-            const params = Object.fromEntries(urlSearchParams.entries());
-            for (const param in params) {
+            for (const [key, value] of urlSearchParams) {
               if (
                 // param.toLowerCase().startsWith('gclid') ||
                 param.toLowerCase().startsWith('utm_')
                 ) {
                   // Prefix with 'quansight_' to minimize possible name collisions
-                  window.sessionStorage.setItem('quansight_' + param, params[param])
+                  window.sessionStorage.setItem('quansight_' + key, value)
                 }
             }
           `}
