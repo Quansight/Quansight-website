@@ -74,7 +74,7 @@ We chose these components generally to reduce memory use and increase filtering 
 
 Spatial sorting deserves more explanation, and it can be performed using a variety of techniques. The idea is to map the original point data from latitude-longitude space to a 1-dimensional space such that points that are near each other in the 1-dimensional space are also near each other in latitude-longitude space. We can then sort the points based on the 1-dimensional space value. If that isn’t clear, the coming examples describing geohash and Hilbert curve spatial sorting should help.
 
-Several established systems could be used for spatially sorting the data including [Geohash](geohash), [Hilbert Curve](hilbert curve), [Uber H3](uber h3), and [Google S2 Geometry](google s2 geometry). We only considered the first two methods due to time constraints, but they are conceptually similar to the last two methods.
+Several established systems could be used for spatially sorting the data including [Geohash][geohash], [Hilbert Curve][hilbert], [Uber H3][uber h3], and [Google S2 Geometry][google s2 geometry]. We only considered the first two methods due to time constraints, but they are conceptually similar to the last two methods.
 
 ###  _Geohash Spatial Sort Example_
 
@@ -84,7 +84,7 @@ Using geohashes is the first way we considered spatially sorting the point data,
 
 _Figure 3: Background: Select one-character geohash regions plotted over a world map. Inset: All two-character geohashes starting with “9” as the first character plotted over a map._
 
-To spatially sort the data with geohashes, we mapped each point to its four character geohash, and then sorted the geohashes [lexicographically](lexicographically). This results in the 2D latitude-longitude space being mapped to a 1D geohash space (string of characters) which can be sorted. The power of this method depended on the fact that points near each other in geohash space are also near each other in latitude-longitude space.
+To spatially sort the data with geohashes, we mapped each point to its four character geohash, and then sorted the geohashes [lexicographically][lexicographically]. This results in the 2D latitude-longitude space being mapped to a 1D geohash space (string of characters) which can be sorted. The power of this method depended on the fact that points near each other in geohash space are also near each other in latitude-longitude space.
 
 ## _Hilbert Curve Spatial Sort Example_
 
@@ -110,7 +110,7 @@ The spatial filtering function used in the last step was a spatial join. A spati
 
 ## Benchmark
 
-In order to compare the various solutions, we established a benchmark against which to compare the solution performances in terms of runtime. The task is to filter a large amount of point data by various randomly selected US zip code polygons. We performed the task five times for each solution, each time increasing the number of zip code polygons. The dataset and machine specification details are given below. Our work can be freely downloaded and reproduced from it’s repository: [https://github.com/Quansight/scipy2020_spatial_algorithms_at_scale](scipy2020 repo).
+In order to compare the various solutions, we established a benchmark against which to compare the solution performances in terms of runtime. The task is to filter a large amount of point data by various randomly selected US zip code polygons. We performed the task five times for each solution, each time increasing the number of zip code polygons. The dataset and machine specification details are given below. Our work can be freely downloaded and reproduced from it’s repository: [https://github.com/Quansight/scipy2020_spatial_algorithms_at_scale][scipy2020 repo].
 
 **Each benchmarking test follows these steps:**
 
@@ -124,7 +124,7 @@ Filter data for each query
 
 ## _Dataset_
 
-We used a dataset from OpenStreetMap (OSM), which originally consisted of 2.9 billion latitude-longitude point pairs. We removed data outside the contiguous US, leaving 114 million rows of point data in a 3.2 GB uncompressed CSV file. We then converted the data to a parquet file format. The data is available at [https://planet.openstreetmap.org/gps/simple-gps-points-120604.csv.xz](gps points). The polygons are randomly selected US zip code polygons available from the US Census at [https://www2.census.gov/geo/tiger/TIGER2019/ZCTA5/tl_2019_us_zcta510.zip](polygons).
+We used a dataset from OpenStreetMap (OSM), which originally consisted of 2.9 billion latitude-longitude point pairs. We removed data outside the contiguous US, leaving 114 million rows of point data in a 3.2 GB uncompressed CSV file. We then converted the data to a parquet file format. The data is available at [https://planet.openstreetmap.org/gps/simple-gps-points-120604.csv.xz][gps points]. The polygons are randomly selected US zip code polygons available from the US Census at [https://www2.census.gov/geo/tiger/TIGER2019/ZCTA5/tl_2019_us_zcta510.zip][polygons].
 
 ## _Machine Specifications_
 
@@ -217,13 +217,15 @@ Other approaches were considered and experimented with. AWS Athena is a serverle
 
 ## Are you working with large datasets?
 
-Reach out to Quansight for a free consultation by sending an email to [connect@quansight.com](email).
+Reach out to Quansight for a free consultation by sending an email to [connect@quansight.com][email].
 
-_This work was originally presented at Scipy 2020, and can be viewed here:_ [https://youtu.be/czesBVUoXvk](scipy2020 video)
+_This work was originally presented at Scipy 2020, and can be viewed here:_ 
+
+[https://youtu.be/czesBVUoXvk][scipy2020 video]
 
 [geohash]: https://en.wikipedia.org/wiki/Geohash
 
-[hilbert curve]: https://en.wikipedia.org/wiki/Hilbert_curve
+[hilbert]: https://en.wikipedia.org/wiki/Hilbert_curve
 
 [uber h3]: https://eng.uber.com/h3/
 
