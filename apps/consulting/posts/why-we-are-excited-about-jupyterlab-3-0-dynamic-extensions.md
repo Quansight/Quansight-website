@@ -47,7 +47,7 @@ Version 3 upgrades will save y’all’s and organization’s time and improve t
 
 As long-time Jupyter super users, the new changes to distributing JupyterLab extensions are particularly exciting. Currently, JupyterLab users are required to have a Node.js run-time in their environment in order to build and install JupyterLab extensions (written in TypeScript/JavaScript and providing different assets). This had to be performed every time a new extension was installed! In JupyterLab 3, an extension developer will package the JavaScript or CSS and ship that through PyPI with the prebuilt codes. This improvement applies broadly to the JupyterLab ecosystem because all of the components are extensions!
 
-In JupyterLab 3, users will experience reduced installation times, and Python users will rely on a familiar installation pattern by using [pip][pip url].
+In JupyterLab 3, users will experience reduced installation times, and Python users will rely on a familiar installation pattern by using [pip][pip].
 
 ## A familiar toolchain for Python
 
@@ -104,7 +104,7 @@ Want more Jupyter? QHub is a new project from Quansight, read more about it in t
 [dask]: https://docs.dask.org/
 [holoviz]: https://holoviz.org/
 [jupyterlab videochat]: https://github.com/yuvipanda/jupyter-videochat
-[cusomizing styling]: https://github.com/mauhai/awesome-jupyterlab#themes
+[customizing styling]: https://github.com/mauhai/awesome-jupyterlab#themes
 [pip]: https://pip.pypa.io/
 [npm]: https://www.npmjs.com/
 [pypi]: https://pypi.org/
