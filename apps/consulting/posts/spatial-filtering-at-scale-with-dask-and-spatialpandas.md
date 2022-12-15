@@ -217,7 +217,7 @@ Other approaches were considered and experimented with. AWS Athena is a serverle
 
 ## Are you working with large datasets?
 
-Reach out to Quansight for a free consultation by sending an email to [connect@quansight.com][email].
+Reach out to Quansight for a free consultation by sending an email to connect@quansight.com.
 
 _This work was originally presented at Scipy 2020, and can be viewed here:_ 
 
