@@ -2,10 +2,7 @@
 title: 'Designing with and for developers'
 published: August 05, 2020
 author: isabela-presedo-floyd
-description: 'Open source is notorious for lack of design presence, enough so that my search
-to prove this fact has turned up nearly nothing. There’s many ways that such a
-gap in community might manifest, but one that I never anticipated was working
-with developers that had never interacted with a designer before.'
+description: "Open source is notorious for lack of design presence, enough so that my search to prove this fact has turned up nearly nothing. Once I learned I shouldn’t expect that everyone on my team knows what they want from the design process, here’s what helped me move forward and collaborate with developers successfully."
 category: [OSS Experience]
 featuredImage:
   src: /posts/designing-with-and-for-developers/blog_feature_var1.svg
