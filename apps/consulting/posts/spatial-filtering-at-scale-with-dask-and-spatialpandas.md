@@ -147,13 +147,11 @@ As a baseline, we timed an unsorted case first. In this case, preprocessing and 
 
 Each row contains the results of filtering the 114 million initial points by a different number of zip code polygons. Because this baseline does not require preprocessing, the Geohash and sort times are each 0 seconds. The query times were all above 40 minutes, and increased with increasing numbers of zip code polygons. The workers didn’t have enough memory to filter by 1000 or 10,000 zip code polygons.
 
-![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-8.png)
-
 ## _Sorted Geohash With Sjoin Case_
 
 The next case used python-geohash to create geohashes for each point in our OSM dataset. Remember that this means each point in our dataset was labeled with a string of characters representing its location. Then, Dask was used to sort and index the data by the geohash labels. The geohash calculation and sorting times are one-time costs for a given dataset of points. The remaining steps must be performed each time a query is made, and are explained with the help of Figure 6 below.
 
-![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-9.png)
+![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-8.png)
 
 _Figure 6: Illustration showing the spatial features involved in querying data in the sorted geohash case._
 
@@ -161,7 +159,7 @@ In Figure 6, there is a bright red region representing a zip code area. The ligh
 
 In terms of our PyData stack, we first find the geohash polygons which intersect the zip code with Polygon-geohasher. Then we open our dataset with Dask. Dask uses its global index to open the partitions of our dataset corresponding to the geohash polygons (dark blue points). Then we used GeoPandas to perform a spatial join between the zip code polygon and the geohash points to exclude points outside of the zip code polygon and keep the points of interest (light blue points). The benchmark results are below.
 
-![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-10.png)
+![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-9.png)
 
 The one-time costs alone (30 min) are less than the single query time (~40 min) in the unsorted case (above), and this case was able to filter the data in the 1000 zip code polygon task. It’s important to note that the numbers of filtered data points are identical to the unsorted case, giving us confidence that we selected the same points.
 
@@ -169,7 +167,7 @@ The one-time costs alone (30 min) are less than the single query time (~40 min) 
 
 As the number of zip code polygons grows, the last spatial join step takes longer and longer. For some applications, the last spatial join step may not be necessary. The lower accuracy of returning all points that are near the zip code polygons, rather than only those within the zip code polygons reduces the query time significantly. In Figure 6, this solution would return all the light and dark blue points within the geohashes intersecting the zip code rather than just those light blue points within the zip code. This solution is not adequate in all cases, but the reduced query time may be worth it in some use cases. For example, this solution may be adequate when the uncertainty of the point data is greater than the size of the geohashes. The results of leaving off the last spatial join step are below.
 
-![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-11.png)
+![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-10.png)
 
 In this case, the query times are much lower, especially when the number of zip code polygons is higher, but the number of result points is also much larger, indicative of the lower filtering precision produced by excluding the last spatial join step.
 
@@ -177,7 +175,7 @@ In this case, the query times are much lower, especially when the number of zip 
 
 The last case used a new package called Spatialpandas. Spatialpandas spatially sorts the data using the Hilbert curve. The results of using Spatialpandas are below. It wasn’t possible to separate the preprocessing time from the spatial sort time in this case, so they are included together in the sort time column.
 
-![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-12.png)
+![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-11.png)
 
 _* Geohash time and sort time are combined because they could not be determined separately with Spatialpandas._
 
@@ -189,19 +187,19 @@ We’ve looked at the results individually, but the following plots compare the 
 
 As shown in Figure 7, the query time for the unsorted case (red) took the longest at over 40 minutes, and this case was not able to process the two largest batches of zip code polygons. The query time for the sorted geohash without spatial join (yellow) was the fastest for 100 or more polygons, but remember that it wasn’t as accurate as the other solutions. The fastest query time for an accurate solution is the Spatialpandas case (green).
 
-![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-13.png)
+![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-12.png)
 
 _Figure 7: Comparison of filtering time for each batch of zip code polygons. The dashed line indicates the case in which a spatial join was not used and the results are typically less accurate._
 
 Having looked at query times, now let’s look at the one-time preprocessing times shown in Figure 8. No preprocessing was necessary for the unsorted case, so the preprocessing time was 0 minutes. The two sorted geohash cases had the same preprocessing steps and are identical as a result. In the sorted geohash cases, the geohash calculation took 27 minutes, and the sorting took 3 minutes. By contrast, in the Spatialpandas case the preprocessing and sorting steps took just over 1 minute.
 
-![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-14.png)
+![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-13.png)
 
 _Figure 8: Preprocessing times for the Sorted Geohash and Spatialpandas solutions. For Spatialpandas, the sort time includes the preprocessing time._
 
 Figure 9 shows the extrapolated total time (preprocessing + query time) vs the number of queries when filtering the data by 1, 100, and 10,000 polygons in each query. Query times are extrapolated under the assumption of linear scaling of queries based on the results of the single query time.
 
-![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-15.png)
+![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-14.png)
 
 _Figure 9: Extrapolated total time vs number of queries using 1 polygon (left), 100 polygons (middle), and 10,000 polygons (right) in each query._
 
