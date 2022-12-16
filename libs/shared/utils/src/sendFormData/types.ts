@@ -12,12 +12,12 @@ export type FormValues = {
 
 // GCLID capture disabled for now
 export type TrackingParams = {
-  // gclid?: string;
-  utm_source?: string;
-  utm_medium?: string;
-  utm_campaign?: string;
-  utm_content?: string;
-  utm_term?: string;
+  // gclid: string;
+  utm_source: string;
+  utm_medium: string;
+  utm_campaign: string;
+  utm_content: string;
+  utm_term: string;
 };
 
 export type FormAndTrackingValues = {
@@ -26,10 +26,10 @@ export type FormAndTrackingValues = {
   phone: string;
   company: string;
   message: string;
-  // gclid?: string;
-  utm_source?: string;
-  utm_medium?: string;
-  utm_campaign?: string;
-  utm_content?: string;
-  utm_term?: string;
+  // gclid: string;
+  utm_source: string;
+  utm_medium: string;
+  utm_campaign: string;
+  utm_content: string;
+  utm_term: string;
 };
