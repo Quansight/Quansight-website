@@ -1,3 +1,10 @@
+December 16, 2022
+
+Via Storyblok:
+
+- Add Pavithra to `team` and set as Role `team`,
+  to display in the Staff Spotlight
+
 November 30, 2022
 
 Via Storyblok:
