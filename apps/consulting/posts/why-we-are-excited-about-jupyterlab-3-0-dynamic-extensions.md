@@ -163,8 +163,8 @@ communication through data and code.
 ## Closing Remarks
 
 In this post we wanted to highlight one of the features that in our opinion will
-drastically improve the user experience, however, there are other features
-coming with JupyterLab 3 including:
+drastically improve the user experience. However, there are other features
+coming with JupyterLab 3, including:
 
 - Internationalization
 - Debugging
