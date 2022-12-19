@@ -15,6 +15,10 @@ const Document: FC = () => {
           similar purposes.
 
           Search params approach from https://stackoverflow.com/a/901144/4376000.
+          
+          'afterInteractive' strategy chosen here to minimize any reduction of
+          page load speed. It seems unlikely that anything could happen to disrupt
+          the UTM parameters in the `window.location` prior to their capture here.
         */}
         <Script id="session-store-url-params" strategy="afterInteractive">
           {`
