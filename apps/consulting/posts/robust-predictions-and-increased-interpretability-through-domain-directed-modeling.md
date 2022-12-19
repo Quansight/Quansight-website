@@ -177,7 +177,11 @@ model telling us whether we expect star-shaped or dinosaur-shaped data, we
 really can’t tell whether the uncertainty and quality of fit represented by
 these summary statistics are large or small.
 
-![Animated GIF showing a series of scatter plots with ~50 points in different shapes: Dinosaur, random scatter, grid of dots, ellipse, bulls-eye, star, horizontal lines, vertical lines, “X” shape, diagonal lines. The GIF shows one-dimensional mean and standard deviation statistics for x and y and the r correlation between x and y for each plot; all of these values are identical between the plots, to two places past the decimal.](/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/dino_anim.gif)
+<img
+  src="/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/dino_anim.gif"
+  width="700px"
+  alt="Animated GIF showing a series of scatter plots with ~50 points in different shapes: Dinosaur, random scatter, grid of dots, ellipse, bulls-eye, star, horizontal lines, vertical lines, “X” shape, diagonal lines. The GIF shows one-dimensional mean and standard deviation statistics for x and y and the r correlation between x and y for each plot; all of these values are identical between the plots, to two places past the decimal."
+/>
 
 The above examples demonstrate how we are best served during data analysis by
 looking at our data directly with the guidance of a specific model, rather than
@@ -207,7 +211,11 @@ model able to capture the discontinuity near a score of 30.
 
 The use of domain-directed tools thus gives us access to more relevant models and their associated distributions, and the enhanced structure and insight they provide.
 
-![Histogram plot of test scores, with score on the x-axis (0-100) and the fraction of test takers with that score on the y-axis (scale of 0-4%). The data looks generally normally distributed, except for a significant positive deviation just at and above a score of 30 (~2.3% actual vs ~1.2% fitted at score = 30), and a significant negative deviation just below 30. A normal distribution fit to the data is shown with a dashed line; it fits somewhat well, but its peak (54.6) is shifted toward low scores from the actual data (56), and the deviation in the data around score=30 causes the fit curve to run too high for scores from 34-55, and too low for 0-20. An inset shows a probability plot, and how a “knot” in this plot reveals the disruption in the data around score=30, and how marked deviation of both tails of the data reveals that a normal distribution is not the correct model for the data.](/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/matura_composite_67pct_adj.png)
+<img
+src="/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/matura_composite_67pct_adj.png"
+width="650px"
+alt="Histogram plot of test scores, with score on the x-axis (0-100) and the fraction of test takers with that score on the y-axis (scale of 0-4%). The data looks generally normally distributed, except for a significant positive deviation just at and above a score of 30 (~2.3% actual vs ~1.2% fitted at score = 30), and a significant negative deviation just below 30. A normal distribution fit to the data is shown with a dashed line; it fits somewhat well, but its peak (54.6) is shifted toward low scores from the actual data (56), and the deviation in the data around score=30 causes the fit curve to run too high for scores from 34-55, and too low for 0-20. An inset shows a probability plot, and how a “knot” in this plot reveals the disruption in the data around score=30, and how marked deviation of both tails of the data reveals that a normal distribution is not the correct model for the data."
+/>
 
 ## Probabilistic Programming Libraries As Domain-Directed Tools
 
@@ -228,7 +236,11 @@ For example, suppose you wanted to describe a probabilistic model of a linear
 relationship between _X_ and _Y_. Statisticians might use the following
 notation:
 
-![Image of statistics equations for a probabilistic model of a linear relationship: alpha ~ Normal(0,10) — beta ~ Normal(0,7) — sigma ~ HalfCauchy(5) — mu = alpha + beta * X — Y ~ Normal(mu, sigma). Each equation is underlined with a different color to match the underlines in the image of the Bean Machine code.](/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/bean-machine-equations_75pct.png)
+<img
+  src="/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/bean-machine-equations_75pct.png"
+  width="180px"
+  alt="Image of statistics equations for a probabilistic model of a linear relationship: alpha ~ Normal(0,10) — beta ~ Normal(0,7) — sigma ~ HalfCauchy(5) — mu = alpha + beta * X — Y ~ Normal(mu, sigma). Each equation is underlined with a different color to match the underlines in the image of the Bean Machine code."
+/>
 
 Here, the tilde (~) operator indicates that a variable is defined as being drawn
 from a distribution, rather than by a discrete equation. For example, in this
@@ -287,7 +299,11 @@ deviation from the overall slope), and seasonal effects (e.g., cyclic annual or
 monthly variations). When such a model is fitted, each parameter is meaningful
 and something a stakeholder can consider when making decisions.
 
-![Time series plot of CO2 data from the Mauna Loa monitoring station. The raw data is shown as a scatter plot timeseries, which exhibits a general upward trend from ~330–390 ppm from 1970–2010, overlaid with a ~5 ppm annual seasonal variation. The data is broken into (i) a smooth long-term trend line; (ii) a line showing medium-term variations from the smooth trend, with magnitude of ~1 ppm and time scale on the order of 1–3 years; and (iii) the seasonal variation, which is a roughly sawtooth curve.](/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/mauna_loa_adj_800px.png)
+<img
+  src="/posts/robust-predictions-and-increased-interpretability-through-domain-directed-modeling/mauna_loa_adj_800px.png"
+  width="700px"
+  alt="Time series plot of CO2 data from the Mauna Loa monitoring station. The raw data is shown as a scatter plot timeseries, which exhibits a general upward trend from ~330–390 ppm from 1970–2010, overlaid with a ~5 ppm annual seasonal variation. The data is broken into (i) a smooth long-term trend line; (ii) a line showing medium-term variations from the smooth trend, with magnitude of ~1 ppm and time scale on the order of 1–3 years; and (iii) the seasonal variation, which is a roughly sawtooth curve."
+/>
 
 In addition, in some cases an underlying domain-driven model further allows us
 to perform causal inference from the dataset, as opposed to just identifying
