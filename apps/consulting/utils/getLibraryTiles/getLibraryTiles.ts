@@ -12,9 +12,13 @@ export const getLibraryTiles = ({
   const blogArticlesProps = getBlogArticlesProps(blogArticles);
   const libraryLinksProps = getLibraryLinksProps(libraryLinks);
 
+  const filteredLibraryLinksProps = libraryLinksProps.filter((libraryLink) =>
+    ['blog', 'videos', 'podcasts'].includes(libraryLink.postType),
+  );
+
   const allTiles =
-    blogArticlesProps && libraryLinksProps
-      ? [...blogArticlesProps, ...libraryLinksProps]
+    blogArticlesProps && filteredLibraryLinksProps
+      ? [...blogArticlesProps, ...filteredLibraryLinksProps]
       : [];
 
   return sortLibraryTiles(allTiles);
