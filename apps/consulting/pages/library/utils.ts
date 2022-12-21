@@ -11,3 +11,5 @@ export const filterPostTypes = (
     total: 3,
   };
 };
+
+export default filterPostTypes;
