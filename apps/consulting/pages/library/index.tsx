@@ -34,6 +34,7 @@ import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants'
 import { getCarouselTiles } from '../../utils/getLibraryTiles/getCarouselTiles';
 import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
 import { paginateLibraryTiles } from '../../utils/paginateLibraryTiles/paginateLibraryTiles';
+import { filterPostTypes } from './utils';
 
 export const Library: FC<TLibraryProps> = ({
   data,
@@ -171,7 +172,8 @@ export const getStaticProps: GetStaticProps<
     preview,
   );
   const libraryLinks = await getLibraryLinkItems(preview);
-  const postTypes = await getDataSourceEntries({ slug: 'post-type' }, preview);
+  let postTypes = await getDataSourceEntries({ slug: 'post-type' }, preview);
+  postTypes = filterPostTypes(postTypes);
   const postCategories = await getDataSourceEntries(
     { slug: 'post-category' },
     preview,
