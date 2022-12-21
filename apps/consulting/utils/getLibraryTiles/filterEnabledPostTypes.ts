@@ -11,5 +11,3 @@ export const filterEnabledPostTypes = (
     total: 3,
   };
 };
-
-export default filterEnabledPostTypes;
