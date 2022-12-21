@@ -1,15 +1,15 @@
 import { DatasourceEntries } from '../../api/types/basic';
-import { enabledPostTypes } from '../../utils/constants';
+import { enabledPostTypeNames } from '../constants';
 
-export const filterPostTypes = (
+export const filterEnabledPostTypes = (
   postTypes: DatasourceEntries,
 ): DatasourceEntries => {
   return {
     items: postTypes.items.filter((item) =>
-      enabledPostTypes.includes(item.name),
+      enabledPostTypeNames.includes(item.name),
     ),
     total: 3,
   };
 };
 
-export default filterPostTypes;
+export default filterEnabledPostTypes;

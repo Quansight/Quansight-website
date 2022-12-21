@@ -1,3 +1,3 @@
-export const enabledPostTypes = ['blog', 'videos', 'podcasts'];
+export const enabledPostTypeNames = ['blog', 'videos', 'podcasts'];
 
-export default enabledPostTypes;
+export default enabledPostTypeNames;

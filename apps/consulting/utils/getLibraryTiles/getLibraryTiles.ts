@@ -1,5 +1,5 @@
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
-import { enabledPostTypes } from '../constants';
+import { enabledPostTypeNames } from '../constants';
 import { defaultTilesValues } from './constants';
 import { getBlogArticlesProps } from './getBlogArticlesProps';
 import { getLibraryLinksProps } from './getLibraryLinksProps';
@@ -13,13 +13,13 @@ export const getLibraryTiles = ({
   const blogArticlesProps = getBlogArticlesProps(blogArticles);
   const libraryLinksProps = getLibraryLinksProps(libraryLinks);
 
-  const filteredLibraryLinksProps = libraryLinksProps.filter((libraryLink) =>
-    enabledPostTypes.includes(libraryLink.postType),
+  const enabledLibraryLinksProps = libraryLinksProps.filter((libraryLink) =>
+    enabledPostTypeNames.includes(libraryLink.postType),
   );
 
   const allTiles =
-    blogArticlesProps && filteredLibraryLinksProps
-      ? [...blogArticlesProps, ...filteredLibraryLinksProps]
+    blogArticlesProps && enabledLibraryLinksProps
+      ? [...blogArticlesProps, ...enabledLibraryLinksProps]
       : [];
 
   return sortLibraryTiles(allTiles);

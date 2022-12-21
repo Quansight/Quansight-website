@@ -31,10 +31,10 @@ import { TTiles } from '../../types/storyblok/bloks/libraryProps';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
 import { filterLibraryTiles } from '../../utils/filterLibraryTiles/filterLibraryTiles';
 import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
+import { filterEnabledPostTypes } from '../../utils/getLibraryTiles/filterEnabledPostTypes';
 import { getCarouselTiles } from '../../utils/getLibraryTiles/getCarouselTiles';
 import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
 import { paginateLibraryTiles } from '../../utils/paginateLibraryTiles/paginateLibraryTiles';
-import { filterPostTypes } from './utils';
 
 export const Library: FC<TLibraryProps> = ({
   data,
@@ -172,8 +172,11 @@ export const getStaticProps: GetStaticProps<
     preview,
   );
   const libraryLinks = await getLibraryLinkItems(preview);
-  let postTypes = await getDataSourceEntries({ slug: 'post-type' }, preview);
-  postTypes = filterPostTypes(postTypes);
+  const allPostTypes = await getDataSourceEntries(
+    { slug: 'post-type' },
+    preview,
+  );
+  const postTypes = filterEnabledPostTypes(allPostTypes);
   const postCategories = await getDataSourceEntries(
     { slug: 'post-category' },
     preview,
