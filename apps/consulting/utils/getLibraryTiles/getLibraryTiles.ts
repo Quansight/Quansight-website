@@ -1,4 +1,5 @@
 import { TTiles } from '../../types/storyblok/bloks/libraryProps';
+import { enabledPostTypes } from '../constants';
 import { defaultTilesValues } from './constants';
 import { getBlogArticlesProps } from './getBlogArticlesProps';
 import { getLibraryLinksProps } from './getLibraryLinksProps';
@@ -13,7 +14,7 @@ export const getLibraryTiles = ({
   const libraryLinksProps = getLibraryLinksProps(libraryLinks);
 
   const filteredLibraryLinksProps = libraryLinksProps.filter((libraryLink) =>
-    ['blog', 'videos', 'podcasts'].includes(libraryLink.postType),
+    enabledPostTypes.includes(libraryLink.postType),
   );
 
   const allTiles =
