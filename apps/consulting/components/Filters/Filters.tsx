@@ -43,9 +43,6 @@ export const Filters: FC<TFiltersProps> = ({
 
   return (
     <div className="flex flex-col gap-[2rem] justify-between items-center pb-[5.2rem] w-full sm:flex-row sm:gap-[5rem]">
-      {/*
-      We're removing the type filter until we have content of other types. Right now, we just have blog-type content.
-  */}
       <FilterMenu
         filterMenuVariant={FilterMenuVariant.Type}
         menuDataCurrent={postFilters.type}
