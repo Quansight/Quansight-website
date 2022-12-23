@@ -26,6 +26,7 @@ export type FormAndTrackingValues = {
   phone: string;
   company: string;
   message: string;
+  url: string;
   // gclid: string;
   utm_source: string;
   utm_medium: string;
