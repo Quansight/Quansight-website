@@ -5,7 +5,7 @@ author: melissa-mendonca
 description: 'The Versioned HDF5 library is a versioned abstraction on top of h5py. Because of the flexibility of the HDF5 data model, all versioning data is stored in the file itself, which means that different versions of the same data (including version metadata) can be stored in a single HDF5 file.'
 category: [PyData Ecosystem]
 featuredImage:
-  src: /posts/introducing-versioned-hdf5/hdf5_structure4_resized.png
+  src: /posts/introducing-versioned-hdf5/feature.png
   alt: 'Diagram illustrating the hierarchical nature of an HDF5 file. An HDF container is shown that contains two groups. Each of these groups then contains datasets and/or subgroups. There is associated metadata for both the top-level container as well as each group and dataset.'
 hero:
   imageSrc: /posts/introducing-versioned-hdf5/blog_hero_var2.svg
