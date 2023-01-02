@@ -62,7 +62,7 @@ df.sample(10)
 
 ![](/public/posts/quick-dashboarding-with-panel/panel-dashboard-img-1.png)
 
-With our data in hand, we first want to define a plotter function. This function produces plots of historical trends of registered baby names over a range of years with certain scalings (all user-specified). If you're unfamiliar with Python, it's enough to simply say that this function produces the plot we want without any interactive components. Without Panel, you can invoke this function yourself to generate plots in Jupyter using different input values supplied by hand.
+With our data in hand, we first want to define a `plotter` function. This function produces plots of historical trends of registered baby names over a range of years with certain scalings (all user-specified). If you're unfamiliar with Python, it's enough to simply say that this function produces the plot we want without any interactive components. Without Panel, you can invoke this function yourself to generate plots in Jupyter using different input values supplied by hand.
 
 ```python
 def plotter(names_list, names_list2, years, scale, scale2):
@@ -130,9 +130,9 @@ def plotter(names_list, names_list2, years, scale, scale2):
     return to_plot.hvplot(x='year', y=(listed_names), alpha=0.04, kind='area', legend="top_left", height=400, width=800, value_label=label) * to_plot.hvplot(x='year', y=(listed_names), kind='line', legend="top_left", height=400, width=800, value_label=label).opts(toolbar=None)
 ```    
 
-If calling plotter itself were enough, we'd be done. In this case, we want to share a plotting tool with a boss or friends. This means we want some interactive elements for our dashboard: _widgets_.
+If calling `plotter` itself were enough, we'd be done. In this case, we want to share a plotting tool with a boss or friends. This means we want some interactive elements for our dashboard: _widgets_.
 
-Widgets are often the basic building blocks of a Panel dashboard. These components are familiar to anyone who has seen web forms previously. For the use-case here, we need only three types of Panel widget: TextInput (to enter names), a RangeSlider (to select the years to plot), and Checkbox (to toggle optional metrics).
+Widgets are often the basic building blocks of a Panel dashboard. These components are familiar to anyone who has seen web forms previously. For the use-case here, we need only three types of Panel widget: `TextInput` (to enter names), a `RangeSlider` (to select the years to plot), and `Checkbox` (to toggle optional metrics).
 
 ```python
 tickers_male = panel.widgets.TextInput(name='Names (M)', value="Andrew", placeholder='Enter Names Here', width=left_panel_width, margin=(100,30,0,10))
@@ -150,11 +150,17 @@ yearly_average = df.reset_index().groupby("year").mean()
 yearly_unique = df.reset_index().groupby("year").count()["Normalized"] # this metric double-counts names both in M and F categories; a careful analysis might want to split them up.
 ```
 
-The function panel.interact makes it straightforward to connect the plotter function with the preceding widgets. We simply supply the function (plotter) as the first input argument to panel.interact. The remaining input arguments associate widgets with plotter's input arguments. Be certain that the widget output data types match with plotter's requirements. For example, the input years should be a (sorted) list or tuple of two distinct integers; a RangeSlider with specified values for start & stop provides a valid tuple.
+The function `panel.interact` makes it straightforward to connect the `plotter` function with the preceding widgets. We simply supply the function (`plotter`) as the first input argument to `panel.interact`. The remaining input arguments associate widgets with `plotter`'s input arguments. Be certain that the widget output data types match with `plotter`'s requirements. For example, the input `years` should be a (sorted) list or tuple of two distinct integers; a `RangeSlider` with specified values for start & stop provides a valid tuple.
 
-Panel also enables arranging elements of your dashboard with Row and Column objects. For instance, below, dashboard[0] contains all the input widgets, while dashboard[1] is the output of the plotter.
+Panel also enables arranging elements of your dashboard with `Row` and `Column` objects. For instance, below, `dashboard[0]` contains all the input widgets, while `dashboard[1]` is the output of the plotter.
 
-The addition of .servable() to your panel layout allows the entire notebook to be called by $ panel serve <Notebook-Path> from the command line (provided you have Panel installed). This allows multiple clients to connect to this service via web browsers.
+The addition of `.servable()` to your panel layout allows the entire notebook to be called by 
+
+```bash
+$ panel serve <Notebook-Path>
+```
+
+from the command line (provided you have Panel installed). This allows multiple clients to connect to this service via web browsers.
 
 ```python
 interact = panel.interact(plotter, names_list=tickers_male, names_list2=tickers_female, years=years_range, scale=checkbox_year, scale2=checkbox_nunique)
