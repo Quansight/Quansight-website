@@ -44,7 +44,7 @@ export const Form: FC<TFormProps> = (props) => {
     const combinedValues: FormAndTrackingValues = {
       ...formValues,
       ...trackingParams,
-      url: window.location.toString(),
+      form_url: window.location.toString(),
     };
 
     sendFormData(hookUrl, combinedValues)
