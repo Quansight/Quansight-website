@@ -72,8 +72,7 @@ cols = autompg.columns
 opts = {'options': list(cols.drop(['origin', 'name']))}
 print(opts)
 ```
-
-{'options': ['mpg', 'cyl', 'displ', 'hp', 'weight', 'accel', 'yr']}
+`{'options': ['mpg', 'cyl', 'displ', 'hp', 'weight', 'accel', 'yr']}`
 
 ```python
 # Define the relevant Panel widgets
