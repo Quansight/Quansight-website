@@ -12,10 +12,10 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
-This notebook is designed to help you learn how to make apps in panel in about
+_This notebook is designed to help you learn how to make apps in panel in about
 15 minutes. Screenshots of cell outputs are included for convenience below, but
 it is **strongly** recommended that you use the [interactive Binder version][demo binder]
-(takes 1-2 minutes to load) or clone the [repo][demo repo] and run the demo locally.
+(takes 1-2 minutes to load) or clone the [repo][demo repo] and run the demo locally._
 
 ---
 
@@ -35,10 +35,10 @@ pn.extension()
 **Try out the app below. It's a mortgage calculator app allowing you to see your
 mortgage payment, amortization schedule, and principal paid over time.**
 
-Note: For the app below to work in JupyterLab, you'll need to run
+_Note: For the app below to work in JupyterLab, you'll need to run
 `jupyter labextension install @pyviz/jupyterlab_pyviz` in the terminal to
 install the needed labextension. This is not needed if running in a Jupyter
-notebook outside of JupyterLab.
+notebook outside of JupyterLab._
 
 ```python
 mortgage_app
@@ -78,7 +78,7 @@ Panel has 3 main components: panes, widgets, and panels.
 - **Widgets** are used to manipulate your app - think sliders, file selectors, password inputs, etc.
 - **Panels** are used to arrange panes and widgets. The 4 main types of panels are `Row`, `Column`, `Tabs`, and `GridSpec`.
 
-Take a look at more examples of panes, widgets, and panels (layouts) at https://panel.holoviz.org/reference/index.html. You can also learn about what parameters each widget supports by clicking on a particular widget from there.
+Take a look at more examples of panes, widgets, and panels (layouts) at the [Panel Reference Gallery][panel gallery]. You can also learn about what parameters each widget supports by clicking on a particular widget from there.
 
 ### 2. Building the App Backbone
 
@@ -101,7 +101,7 @@ radio_button.value = 'b'
 
 #### Making a sample Layout
 
-We combine a widget and some markdown panes with a Column panel in the next cell.
+We combine a widget and some markdown panes with a `Column` panel in the next cell.
 
 ```python
 # Markdown Pane
@@ -133,9 +133,9 @@ layout
 
 ![](/posts/panel-holoviews-learning-aid/panelholo-img-5.png)
 
-Be careful about running the above cell multiple times. Doing so will attach multiple function callbacks to the radio button, and the app may not behave as expected. Restarting the kernel, and rerunning the cells will fix this.
+_Be careful about running the above cell multiple times. Doing so will attach multiple function callbacks to the radio button, and the app may not behave as expected. Restarting the kernel, and rerunning the cells will fix this._
 
-You may be wondering why the if statement in the update function is needed. In this simple example, it's not. However, as we add more widgets I've found it's nice to have a single update function for all widgets in order to more precisely specify the order in which pane updates need to happen as well as share intermediate results computed during the update function.
+You may be wondering why the `if` statement in the update function is needed. In this simple example, it's not. However, as we add more widgets I've found it's nice to have a single update function for all widgets in order to more precisely specify the order in which pane updates need to happen as well as share intermediate results computed during the update function.
 
 ### 3. Holoviews Plots
 The app above could serve as the start of many, many apps, but how exactly do we update plots based on widgets instead of just some text? It's pretty simple, we just replace the Markdown pane with a HoloViews pane. The panel HoloViews pane is a wrapper around Holoviews plots. Other plotting libraries (matplotlib, plotly, etc.) are supported as well, but I'll be demonstrating with Holoviews plots.
@@ -151,7 +151,7 @@ autompg.sample(2)
 
 ![](/posts/panel-holoviews-learning-aid/panelholo-img-6.png)
 
-A complete tutorial of plotting in Holoviews is beyond the scope of this learning aid. For this example, just know that `hv.Scatter(dataframe, kdims='x_column', vdims='y_column')` will produce a scatter plot. The documentation https://holoviews.org/getting_started/Introduction.html can be consulted for additional specifics.
+A complete tutorial of plotting in Holoviews is beyond the scope of this learning aid. For this example, just know that `hv.Scatter(dataframe, kdims='x_column', vdims='y_column')` will produce a scatter plot. The [HoloViews documentation][holoviews documentation] can be consulted for additional specifics.
 
 ```python
 hv.Scatter(data=autompg, kdims='mpg', vdims='weight').opts(tools=['hover'], size=6, title='Example Scatter Plot')
@@ -210,7 +210,7 @@ layout
 _Be careful about running the above cell multiple times. Doing so will attach multiple function callbacks to the radio button, and the app may not behave as expected. Restarting the kernel, and rerunning the cells will fix this._
 
 ### 4. Closing Notes
-After you build an app, you'll want to deploy the app so others can view it. Deployment is beyond the scope of this learning aid, but the documentation https://panel.holoviz.org/user_guide/Server_Deployment.html covers a variety of deployment scenarios. MyBinder is useful for apps that are for demonstration purposes only. If you want to see how your app would look deployed by itself, then you can run `app.show()` in the notebook, and a new browser tab will open up with the app served on it. Run the cell below to see it in action.
+After you build an app, you'll want to deploy the app so others can view it. Deployment is beyond the scope of this learning aid, but the [Panel server deployment documentation][panel server docs] covers a variety of deployment scenarios. MyBinder is useful for apps that are for demonstration purposes only. If you want to see how your app would look deployed by itself, then you can run `app.show()` in the notebook, and a new browser tab will open up with the app served on it. Run the cell below to see it in action.
 
 ```python
 layout.show()  # You won't be able to view this from binder, but will be able to if running locally.
@@ -222,4 +222,7 @@ If you liked this article, check out this Panel article on [Working Across Panel
 
 [demo binder]: https://mybinder.org/v2/gh/Quansight/panel-learning-aid/master?filepath=learning_aid.ipynb
 [demo repo]: https://github.com/Quansight/panel-learning-aid
+[panel gallery]: https://panel.holoviz.org/reference/index.html
+[holoviews documentation]: https://holoviews.org/getting_started/Introduction.html
+[panel server docs]: https://panel.holoviz.org/user_guide/Server_Deployment.html
 [panel article]: https://www.quansight.com/post/working-across-panel-and-ipywidgets-ecosystems
