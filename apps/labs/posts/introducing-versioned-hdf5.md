@@ -2,7 +2,7 @@
 title: 'Introducing Versioned HDF5'
 published: August 21, 2020
 author: melissa-mendonca
-description: 'The Versioned HDF5 library is a versioned abstraction on top of h5py. Because of the flexibility of the HDF5 data model, all versioning data is stored in the file itself, which means that different versions of the same data (including version metadata) can be stored in a single HDF5 file.'
+description: 'HDF5 is an open technology that implements a hierarchical structure (similar to a file-system structure) for storing large amounts of possibly heterogeneous data within a single binary file, using regular version control tools (such as git) may prove difficult. The Versioned HDF5 library is a versioned abstraction on top of h5py, that allows you to keep a record of which changes occurred to your HDF5 files, and enables you to recover previous versions of this file.'
 category: [PyData Ecosystem]
 featuredImage:
   src: /posts/introducing-versioned-hdf5/feature.png
