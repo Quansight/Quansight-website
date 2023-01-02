@@ -32,4 +32,12 @@ export type FormAndTrackingValues = {
   utm_campaign: string;
   utm_content: string;
   utm_term: string;
+  /*
+    We also include here the URL of the page where the contact form lives.
+    This will allow us to use a single, common Zap for all contact forms,
+    instead of having to define a separate Zap for each form.
+
+    See https://github.com/Quansight/Quansight-website/pull/617.
+  */
+  form_url: string;
 };
