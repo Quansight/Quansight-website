@@ -69,8 +69,7 @@ Our largest innovation initiative is the
 created in mid-2020. This consortium brings together many array, tensor and
 dataframe library maintainers and has the ambitious aim to tackle the problem
 of fragmentation of Python array and dataframe libraries. We published our
-first RFC for an array API standard in November, and there's more to come in
-2021.
+first RFC for an array API standard in November, and there's more to come in 2021.
 
 Other significant innovation activities this year included pushing Ibis and
 PyData Sparse forward, two projects with potential that fill holes in the
