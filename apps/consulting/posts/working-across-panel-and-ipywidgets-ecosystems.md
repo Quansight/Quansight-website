@@ -144,6 +144,8 @@ Panel.Row(
 )
 ```
 
+![](/posts/working-across-panel-and-ipywidgets-ecosystems/ipywidgets-img-3.png)
+
 ## Conclusion
 
 When building a Panel app or dashboard, embedding widgets from ipywidgets is just as simple as using Panel widgets only! This greatly broadens the number of widgets and different styling options available.
