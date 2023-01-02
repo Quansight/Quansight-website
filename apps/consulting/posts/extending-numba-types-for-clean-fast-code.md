@@ -155,7 +155,7 @@ make_attribute_wrapper(MatrixType, 'indptr', 'indptr')
 make_attribute_wrapper(MatrixType, 'shape', 'shape')
 ```
 
-Almost there! All that's left is to do is teach Numba how to make a native (Numba) matrix into a Python matrix and vice versa. This is called boxing and unboxing.
+Almost there! All that's left to do is teach Numba how to make a native (Numba) matrix into a Python matrix and vice versa. This is called boxing and unboxing.
 
 ```python
 def make_matrix(context, builder, typ, **kwargs):
