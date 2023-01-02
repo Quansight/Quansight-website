@@ -60,7 +60,7 @@ panel.extension() #this call is neccessary to make panel behave inside jupyter
 df.sample(10)
 ```
 
-![](/public/posts/quick-dashboarding-with-panel/panel-dashboard-img-1.png)
+![](/posts/quick-dashboarding-with-panel/panel-dashboard-img-1.png)
 
 With our data in hand, we first want to define a `plotter` function. This function produces plots of historical trends of registered baby names over a range of years with certain scalings (all user-specified). If you're unfamiliar with Python, it's enough to simply say that this function produces the plot we want without any interactive components. Without Panel, you can invoke this function yourself to generate plots in Jupyter using different input values supplied by hand.
 
