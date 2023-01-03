@@ -64,6 +64,7 @@ df.sample(10)
 <img
 src="/posts/quick-dashboarding-with-panel/panel-dashboard-img-1.png"
 width="400px"
+alt="Table showing representative data, with four columns and six rows. Columns: year, Name, Gender, Normalized. Row 1: 1973, Valentine, F, 0.000232. Row 2: 1949, Catalino, M, 0.000316. Row 3: 2010, Akeil, M, 0.000135. Row 4: 2017, Lucrezia, F, 0.000309. Row 5: 1977, Mel, M, 0.000535. Row 6: 1984, Tymon, M, 0.000143."
 />
 
 With our data in hand, we first want to define a `plotter` function. This
