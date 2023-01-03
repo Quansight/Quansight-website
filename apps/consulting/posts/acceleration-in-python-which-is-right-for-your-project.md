@@ -55,7 +55,7 @@ Of course, this strategy is not without shortcomings as well:
 - Since most users of scientific computing libraries don't know C++, contributions from your main user base may be scarce.
 - Without a large contributing base it can be difficult to keep the steam going on an open-source project.
 
-These are important points to consider when you begin organizing your project. This kind of organization is especially common among BLAS implementations and math libraries more generally. There are many good examples of this strategy. One of my favorites is the Tensor Algebra Compiler (TACO).
+These are important points to consider when you begin organizing your project. This kind of organization is especially common among [BLAS][blas] implementations and math libraries more generally. There are many good examples of this strategy. One of my favorites is the [Tensor Algebra Compiler (TACO)][taco repo].
 
 ## TACO
 
@@ -95,7 +95,7 @@ Sgkit uses a single data structure in the form of an `xarray.Dataset` with speci
 - sgkit uses one data structure
 - algorithms
 - scikit-allel uses Cython to accelerate algorithmic code
-- sgkit uses Numba to to accelerate algorithmic code and enable GPU-based computation
+- sgkit uses Numba to accelerate algorithmic code and enable GPU-based computation
 - parallelism
 - scikit-allel uses different data structures for single- versus multi-node processing
 - sgkit uses a single data structure, which can scale to whatever compute resources are available
@@ -112,6 +112,7 @@ As you can see, there are many ways to organize a software library. Each organiz
 [coo]: https://en.wikipedia.org/wiki/Sparse_matrix#Coordinate_list_(COO)
 [dok]: https://en.wikipedia.org/wiki/Sparse_matrix#Dictionary_of_keys_(DOK)
 [csf]: http://shaden.io/pub-files/smith2015csf.pdf
+[blas]: https://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms
 [taco repo]: https://github.com/tensor-compiler/taco
 [pythran]: https://pythran.readthedocs.io/en/latest/
 [cython]: https://cython.org/
