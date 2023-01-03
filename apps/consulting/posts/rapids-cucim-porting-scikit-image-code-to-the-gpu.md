@@ -88,12 +88,6 @@ The necessary changes typically involve:
 1. Use `cupy.asarray` to transfer array inputs to cuCIM functions from the host to the GPU
 2. Replace functions imported from CPU-based library with GPU equivalents as in the following table
 
-![](/posts/rapids-cucim-porting-scikit-image-code-to-the-gpu/image-processing-img-5.png)
-
-3. Use `cupy.asnumpy` to transfer results back to the host for plotting with Matplotlib or other visualization libraries or to save results to disk.
-
-As is also the case for CuPy itself, cuCIM functions assume that the inputs are already GPU arrays. The user must manage transfer of data to/from the GPU using cupy.asarray/cupy.asnumpy. In general, for best performance, one should try to minimize the number of data transfers between the host and GPU by performing multiple operations on the GPU in sequence. For additional examples see the C++ and Python examples in our repository as well as our GTC conference presentation.
-
 | CPU Module  | GPU Module    |
 |-------------|---------------|
 | numpy       | cupy          |
@@ -101,6 +95,10 @@ As is also the case for CuPy itself, cuCIM functions assume that the inputs are 
 | skimage     | cucim.skimage |
 | sklearn     | cuml          |
 | networkx    | cugraph       |
+
+3. Use `cupy.asnumpy` to transfer results back to the host for plotting with Matplotlib or other visualization libraries or to save results to disk.
+
+As is also the case for CuPy itself, cuCIM functions assume that the inputs are already GPU arrays. The user must manage transfer of data to/from the GPU using `cupy.asarray`/`cupy.asnumpy`. In general, for best performance, one should try to minimize the number of data transfers between the host and GPU by performing multiple operations on the GPU in sequence. For additional examples see the [C++ and Python examples][c++ and python examples] in our repository as well as our GTC conference presentation.
 
 Contributing
 cuCIM is an open-source project that welcomes community contributions. We welcome help in reporting bugs, making feature requests or opening pull requests at our GitHub repository. For more details see our Contributor Guidelines. We outline below some areas on our roadmap where we would welcome contributions but are also interested in hearing from the community regarding other ideas. Please reach out and let us know how you are using cuCIM and what areas could use improvement for your application.
@@ -153,3 +151,4 @@ The current 0.19 release of cuCIM uses a newer version of CuPy than other RAPIDS
 [skimage examples]: https://scikit-image.org/docs/stable/auto_examples/
 [example notebooks]: https://github.com/rapidsai/cucim/tree/branch-0.19/notebooks
 [gabor example]: https://github.com/rapidsai/cucim/blob/branch-0.19/notebooks/gabor_example.ipynb
+[c++ and python examples]: https://github.com/rapidsai/cucim/tree/branch-0.19/examples
