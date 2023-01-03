@@ -62,8 +62,8 @@ computing ecosystem, which is mainly powered by the flexibility of OSS.
 ## Why NLP Is Indispensable
 
 > _There’s no way you can have an AI system that’s humanlike that doesn’t have language at the heart of it._
->
-> —Josh Tenenbaum, MIT Brain and Cognitive Sciences
+
+—Josh Tenenbaum, MIT Brain and Cognitive Sciences
 
 Among the subfields of AI, NLP focuses on computational algorithms for analysis and processing natural human language. Some capabilities include extracting information from textual data, translating between languages, holding conversations, answering questions, classifying sentiments, and generating language. These capabilities create numerous possibilities for applications.
 
