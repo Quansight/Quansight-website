@@ -12,7 +12,7 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
-![](/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-1.png)
+![](/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-1.png)
 
 The relatively recent advancements in open source Artificial Intelligence (AI)
 technologies is revolutionary and demonstrable of producing unrivaled value to
@@ -85,7 +85,7 @@ The great potential and widely applicable and practical uses of NLP have already
 
 Open source NLP libraries have continued to improve over the last few years. Today, anyone who would like to learn and experiment with NLP techniques, either for fun, research, or business can do so using open source tools and libraries. Those participating in NLP will certainly encounter uses for NLTK, SpaCy, and Spark NLP. Let’s take a look at these libraries.
 
-![](/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-2.png)
+![](/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-2.png)
 
 First released in 2001, [NLTK][nltk] is among the first open source NLP libraries and arguably the most well-known. It provides data preprocessing methods and multiple ways of completing each NLP task, which make it relatively easy to apply to various NLP tasks. Designed by Steven Bird, an academic in computer science and computational linguistics, NLTK’s methodology supports research and teaching in NLP, so the library lends itself nicely to the teaching and learning of NLP techniques. As a testament to its unquestioned importance, it is quite often the first library and resource that those beginning to learn NLP go to. Perhaps for this reason, it is widely used in NLP courses in universities around the world. That is not to say that NLTK has not been used in the industry. On the contrary, its simplicity, flexibility, and computational ease at certain tasks often made NLTK a preferable choice in some NLP applications in industry for years. Continuous support and maintenance are often the concerns with OSS in industry; NLTK has been maintained considerably well since its first release, and version 3.5 was released in 2020, marking a strong sign of maturity for an open source project. Additionally, it has established a sizable and active list of contributors, which is always a good indication of a project’s open source health.
 
@@ -93,7 +93,7 @@ As the field of NLP has remarkably accelerated with the advances in Deep Learnin
 
 Unlike some of the more recent NLP libraries, NLTK still lacks support for integrated word vectors, which means one needs to handle vectorization by separately integrating models, such as GloVe or Word2Vec, to obtain vector representations of words or work with libraries with built-in word vectors, such as Gensim. This lack of integration is one of the drawbacks of NLTK, especially since transfer learning (the use of pre-trained models) became advantageous for those without powerful computational resources or enough data. This means that the lack of support for the most recent built-in pre-trained Neural Network models partially put this library into the realm of rule-based machine learning approaches to NLP. All that aside, NLTK is still a relevant and useful library to start getting one’s hands dirty with NLP and acts as an indispensable tool, particularly to prepare one for more advanced and robust NLP libraries.
 
-![](/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-3.png)
+![](/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-3.png)
 
 First released in 2015, [SpaCy][spacy] has recently shown considerable growth in terms of popularity among industrial NLP applications for its noticeable robustness and speed. Having thousands of GitHub stars and use metrics, as well as its highly engaged contributors, SpaCy is an excellent example of a healthy open source library. SpaCy’s version, 3.0, has recently been released. This new release features transformer-based pipelines, meaning one can now use any pretrained transformer (fast encoder-decoder model for sequences) to train their own models, which significantly improves SpaCy’s performance. The release also provides better integration with the rest of the NLP ecosystem; SpaCy 3.0 can interoperate with frameworks such as PyTorch, HuggingFace, and TensorFlow.
 
@@ -101,17 +101,17 @@ One of the features that makes SpaCy distinguishable from others is that it earn
 
 SpaCy is a self-proclaimed industrial-strength library, which delivers a kind of robustness that puts SpaCy high up on the list of open source NLP libraries. By providing support for deep learning workflows, pre-trained language models, integration of pre-trained word vectors, and built-in visualizers, as well as multilingual tokenization that extends up to 50 languages, SpaCy justifiably stands out among the previously mentioned NLP libraries. A [set of examples][spacy examples] of how to use SpaCy in your workflows can be found in their docs.
 
-![](/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-4.png)
+![](/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-4.png)
 
 Built on Apache Spark ML APIs and first released in 2017, [Spark NLP][spark nlp], developed by John Snow Labs, supports a full spectrum NLP pipeline and has quickly gained the top place among production grade NLP libraries. The last few years have witnessed a historical moment in deep learning and NLP research. State-of-the-art deep learning models have been frequently outmoded in a matter of weeks, and some models have even surpassed human benchmarks. A significant feature that distinguishes Spark NLP from others is that it efficiently incorporates the latest algorithms and pre-trained NLP models, currently the library comes with over 646+ pre-trained pipelines and models, providing its industrial users a competitive advantage. Last week, Spark NLP was released on PyPi and hit 3 million downloads in just a few days.
 
-![](/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-5.png)
+![](/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-5.png)
 
 With Spark NLP one can execute the entire pipeline of NLP from loading, training, and transforming data, building features up to and including an evaluation of the results without having to import other NLP tools, which minimizes the overhead in computation. It offers the streamlined capability to customize and save models to run on a single machine or a cluster. Leveraging the performance of Apache Spark, which is a powerful analytics engine for large-scale data processing on distributed networks, Spark NLP outperforms many others in terms of speed, accuracy, and scalability. The library can take full advantage of powerful systems with multiple GPUs, such as NVIDIA’s DGX 1 or a cloud resource. It supports multiple programming languages (Python, Java, and Scala), as well as natural languages. Spark NLP is a company-backed OSS, which means they have a funded development team that maintains the project. Although it has the smallest number of open source contributors among the previous two, it welcomes contributions from the open source community and shows great potential to stay one of the most comprehensive, enterprise-grade, open source NLP libraries on the free market.
 
 ## Quick Comparison
 
-![](/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-6.png)
+![](/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-6.png)
 
 ## Summary
 
