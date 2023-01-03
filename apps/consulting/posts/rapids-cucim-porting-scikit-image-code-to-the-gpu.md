@@ -120,32 +120,29 @@ The necessary changes typically involve:
 
 3. Use `cupy.asnumpy` to transfer results back to the host for plotting with Matplotlib or other visualization libraries or to save results to disk.
 
-As is also the case for CuPy itself, cuCIM functions assume that the inputs are already GPU arrays. The user must manage transfer of data to/from the GPU using `cupy.asarray`/`cupy.asnumpy`. In general, for best performance, one should try to minimize the number of data transfers between the host and GPU by performing multiple operations on the GPU in sequence. For additional examples see the [C++ and Python examples][c++ and python examples] in our repository as well as our GTC conference presentation.
+As is also the case for CuPy itself, cuCIM functions assume that the inputs are already GPU arrays. The user must manage transfer of data to/from the GPU using `cupy.asarray`/`cupy.asnumpy`. In general, for best performance, one should try to minimize the number of data transfers between the host and GPU by performing multiple operations on the GPU in sequence. For additional examples see the [C++ and Python examples][c++ and python examples] in our repository as well as our [GTC conference presentation][gtc conference presentation].
 
-Contributing
-cuCIM is an open-source project that welcomes community contributions. We welcome help in reporting bugs, making feature requests or opening pull requests at our GitHub repository. For more details see our Contributor Guidelines. We outline below some areas on our roadmap where we would welcome contributions but are also interested in hearing from the community regarding other ideas. Please reach out and let us know how you are using cuCIM and what areas could use improvement for your application.
+## Contributing
 
+cuCIM is an open-source project that welcomes community contributions. We welcome help in reporting bugs, making feature requests or opening pull requests at our [GitHub repository][github repo]. For more details see our [Contributor Guidelines][contributor guidelines]. We outline below some areas on our roadmap where we would welcome contributions but are also interested in hearing from the community regarding other ideas. Please reach out and let us know how you are using cuCIM and what areas could use improvement for your application.
 
+## Future Plans: Expanded Functionality
 
-Future Plans: Expanded Functionality
 As mentioned previously, we would like to support reading/writing additional image formats from both the C++ and Python APIs. For the scikit-image API, there is still approximately 1/3 of the upstream API that has not been implemented and we hope to gradually expand this coverage over time. There are also a number of opportunities to improve the performance of existing implementations.
 
 Another area of interest is in providing implementations of image processing functions within the C++ API as well. This would not only be of interest to C++ library authors but may also result in implementations that provide improved performance from the Python API.
 
+## Future Plans: Long Term Maintenance and Interoperability
 
+Another concern is how to keep the existing implementations in sync with upstream scikit-image. Work is starting under a [Chan Zuckerberg Institute (CZI) grant][czi grant] with upstream [scikit-image][scikit image] to explore ways of dispatching to different computational backends such as [cuCIM][cucim repo] and [dask-image][dask image]. We aim to avoid unnecessary code duplication where possible and hope to eventually be able to test against different backends to help resolve any discrepancies in behavior among implementations.
 
-Future Plans: Long Term Maintenance and Interoperability
-Another concern is how to keep the existing implementations in sync with upstream scikit-image. Work is starting under a Chan Zuckerberg Institute (CZI) grant with upstream scikit-image to explore ways of dispatching to different computational backends such as cuCIM and dask-image. We aim to avoid unnecessary code duplication where possible and hope to eventually be able to test against different backends to help resolve any discrepancies in behavior among implementations.
+## Expanding Examples and Tutorials
 
-
-
-Expanding Examples and Tutorials
 We hope to also gradually expand our documentation and tutorials. We would particularly like to highlight instances of the interoperation of cuCIM with other GPU-accelerated packages in the scientific Python ecosystem.
 
+## Easier installation with other RAPIDS libraries
 
-
-Easier installation with other RAPIDS libraries
-The current 0.19 release of cuCIM uses a newer version of CuPy than other RAPIDS libraries, so installing it alongside these is currently non-trivial. We expect to be fully in sync with other RAPIDS libraries for the upcoming 0.20 release, making it easy to install cuCIM along with other RAPIDS libraries via conda.
+The current 0.19 release of cuCIM uses a newer version of CuPy than other RAPIDS libraries, so installing it alongside these is currently non-trivial. We expect to be fully in sync with other RAPIDS libraries for the upcoming 0.20 release, making it easy to install cuCIM along with other RAPIDS libraries via [conda][conda].
 
 [cucim repo]: https://github.com/rapidsai/cucim
 [nvidia companion post]: https://developer.nvidia.com/blog/cucim-rapid-n-dimensional-image-processing-and-i-o-on-gpus
@@ -174,3 +171,9 @@ The current 0.19 release of cuCIM uses a newer version of CuPy than other RAPIDS
 [example notebooks]: https://github.com/rapidsai/cucim/tree/branch-0.19/notebooks
 [gabor example]: https://github.com/rapidsai/cucim/blob/branch-0.19/notebooks/gabor_example.ipynb
 [c++ and python examples]: https://github.com/rapidsai/cucim/tree/branch-0.19/examples
+[gtc conference presentation]: https://gtc21.event.nvidia.com/media/cuCIM%3A%20A%20GPU%20Image%20I_O%20and%20Processing%20Toolkit%20%5BS32194%5D/1_fwfxd0iu
+[github repo]: https://github.com/rapidsai/cucim
+[contributor guidelines]: https://github.com/rapidsai/cucim/blob/main/CONTRIBUTING.md
+[czi grant]: https://chanzuckerberg.com/eoss/proposals/gpu-acceleration-rapid-releases-and-biomedical-examples-for-scikit-image/
+[dask image]: http://image.dask.org/en/latest/
+[conda]: https://docs.conda.io/en/latest/
