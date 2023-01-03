@@ -79,23 +79,28 @@ else:
     device_name = "cpu"
 ```
 
-Here it can be seen that the primary difference is in the import statements and the use of a variable xp to represent either the CuPy or NumPy array module. The asnumpy function is defined to transfer data back from the GPU for visualization with Matplotlib. Users inspecting the output on the CPU and GPU will see that it is equivalent and the ratio of the time spent on the CPU vs. GPU will be displayed.
+Here it can be seen that the primary difference is in the import statements and the use of a variable `xp` to represent either the CuPy or NumPy array module. The `asnumpy` function is defined to transfer data back from the GPU for visualization with Matplotlib. Users inspecting the output on the CPU and GPU will see that it is equivalent and the ratio of the time spent on the CPU vs. GPU will be displayed.
 
 Please note that because CuPy does just-in-time compilation of CUDA kernels the first time they are called, it is expected that the very first time a given example is run, it will have compilation overhead. On repeated executions, previously compiled kernels will be fetched either from an in-memory cache (or from CuPy’s on disk kernel cache in the case of a new Python session).
 
 The necessary changes typically involve:
 
-1.) Use cupy.asarray to transfer array inputs to cuCIM functions from the host to the GPU
+1. Use `cupy.asarray` to transfer array inputs to cuCIM functions from the host to the GPU
+2. Replace functions imported from CPU-based library with GPU equivalents as in the following table
 
-2.) Replace functions imported from CPU-based library with GPU equivalents as in the following table
+![](/posts/rapids-cucim-porting-scikit-image-code-to-the-gpu/image-processing-img-5.png)
 
-
-
-3.) Use cupy.asnumpy to transfer results back to the host for plotting with Matplotlib or other visualization libraries or to save results to disk.
+3. Use `cupy.asnumpy` to transfer results back to the host for plotting with Matplotlib or other visualization libraries or to save results to disk.
 
 As is also the case for CuPy itself, cuCIM functions assume that the inputs are already GPU arrays. The user must manage transfer of data to/from the GPU using cupy.asarray/cupy.asnumpy. In general, for best performance, one should try to minimize the number of data transfers between the host and GPU by performing multiple operations on the GPU in sequence. For additional examples see the C++ and Python examples in our repository as well as our GTC conference presentation.
 
-
+| CPU Module  | GPU Module    |
+|-------------|---------------|
+| numpy       | cupy          |
+| scipy       | cupyx.scipy   |
+| skimage     | cucim.skimage |
+| sklearn     | cuml          |
+| networkx    | cugraph       |
 
 Contributing
 cuCIM is an open-source project that welcomes community contributions. We welcome help in reporting bugs, making feature requests or opening pull requests at our GitHub repository. For more details see our Contributor Guidelines. We outline below some areas on our roadmap where we would welcome contributions but are also interested in hearing from the community regarding other ideas. Please reach out and let us know how you are using cuCIM and what areas could use improvement for your application.
