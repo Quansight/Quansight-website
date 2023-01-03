@@ -34,15 +34,37 @@ and Clara teams.
 As a quick first look, the following code applies a set of filters that
 highlight vessels in an image of the retina.
 
-![](/posts/rapids-cucim-porting-scikit-image-code-to-the-gpu/image-processing-img-2.png)
+```python
+import cupy as cp
+import numpy as np
+import matplotlib.pyplot as plt
+
+from skimage import data
+from cucim.skimage import color
+from cucim.skimage import filters
+
+# load example data and transfer it to the GPU
+retina = data.retina()
+retina_gpu = cp.asarray(retina)
+
+# convert color image to grayscale
+retina_gpu = color.rgb2gray(retina_gpu)
+
+# apply four different filters that can enhance vessels
+filter_kwargs = dict(sigmas=[2], mode='reflect', black_ridges=True)
+filtered_meijering = filters.meijering(retina_gpu, **filter_kwargs)
+filtered_sato = filters.sato(retina_gpu, **filter_kwargs)
+filtered_frangi = filters.frangi(retina_gpu, **filter_kwargs)
+filtered_hessian = filters.hessian(retina_gpu, **filter_kwargs)
+```
 
 The filtered images produced appear as follows:
 
-![](/posts/rapids-cucim-porting-scikit-image-code-to-the-gpu/image-processing-img-3.png)
+![](/posts/rapids-cucim-porting-scikit-image-code-to-the-gpu/image-processing-img-2.png)
 
 Even for this relatively small-scale image of shape 1011x1011, filtering operations are faster on the GPU than for the corresponding CPU code in scikit-image. In the figure below, acceleration factors relative to scikit-image are shown where the rightmost bar in each group is the acceleration factor observed when round trip host -> device -> host data transfer overhead is included.
 
-![](/posts/rapids-cucim-porting-scikit-image-code-to-the-gpu/image-processing-img-4.png)
+![](/posts/rapids-cucim-porting-scikit-image-code-to-the-gpu/image-processing-img-3.png)
 
 Specific benchmark results across a wider range of functions are highlighted in the [companion NVIDIA blog post][nvidia companion post].
 
