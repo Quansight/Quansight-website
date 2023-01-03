@@ -224,6 +224,18 @@ chance to collaborate and share ideas. We invite you to come by and say _hi_.
 Try out Nebari, and let us know how it goes. We look forward to seeing you in
 our community spaces!
 
+export const GoButton = () => {
+return (
+<button
+className='py-2 px-8 w-fit text-[1.8rem] font-bold leading-[3.7rem] text-white bg-violet content-center'
+onClick={() => {window.location = 'https://nebari.dev';}}>
+Get Started: nebari.dev &#8594;
+</button>
+)
+}
+
+<GoButton />
+
 [announcing qhub post]: https://quansight.com/post/announcing-qhub
 [diataxis site]: https://diataxis.fr/
 [dogfooding @ wik]: https://en.wikipedia.org/wiki/Eating_your_own_dog_food
