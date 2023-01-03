@@ -1,3 +1,11 @@
+January 2, 2023
+
+Via Storyblok:
+
+- All contact forms' webhook URLs updated to use the new, common Zap
+  that takes advantage of the page URL being passed into the Zap
+  payload as `form_url`
+
 December 19, 2022
 
 Via Storyblok:
