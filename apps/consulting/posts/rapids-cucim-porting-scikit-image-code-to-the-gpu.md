@@ -78,7 +78,7 @@ Aside from providing image processing functions, we also provide image/data read
 
 ## cucim.skimage architecture
 
-The cucim.skimage module is currently implemented using [CuPy][cupy]. CuPy provides a GPU-based implementation of the NumPy API as well as a useful subset of the SciPy API (FFTs, sparse matrices and scipy.ndimage functions). As part of this work we also contributed many image processing functions from the SciPy API back upstream to CuPy itself (see, for example, the image affine transform benchmarks in the [complementary NVIDIA post][nvidia companion post]). These capabilities have made it possible to implement a substantial fraction of the scikit-image API in a relatively short time. At this point more than half of the scikit-image API has been implemented and we hope to continue to expand our API coverage over time.
+The `cucim.skimage` module is currently implemented using [CuPy][cupy]. CuPy provides a GPU-based implementation of the NumPy API as well as a useful subset of the SciPy API (FFTs, sparse matrices and scipy.ndimage functions). As part of this work we also contributed many image processing functions from the SciPy API back upstream to CuPy itself (see, for example, the image affine transform benchmarks in the [complementary NVIDIA post][nvidia companion post]). These capabilities have made it possible to implement a substantial fraction of the scikit-image API in a relatively short time. At this point more than half of the scikit-image API has been implemented and we hope to continue to expand our API coverage over time.
 
 ## Adding GPU support to existing CPU-based code
 
