@@ -88,35 +88,50 @@ Showing 11/344 rows × 8 columns, full data set available at the bottom of this 
 
 ### Defining Tasks
 
-With Prefect, the smallest components of a pipeline are called tasks. These are individual operations which are usually strung together to carry out loading of data, transformations, and output. Prefect's functional API makes it simple to turn Python functions into tasks using decorators. Here we'll define clean_data, which removes any rows which contain a NaN value. Note that we're only using the return annotations here because Prefect uses them to handle tasks which return multiple arguments:
+With Prefect, the smallest components of a pipeline are called _tasks_. These are individual operations which are usually strung together to carry out loading of data, transformations, and output. Prefect's functional API makes it simple to turn Python functions into _tasks_ using decorators. Here we'll define `clean_data`, which removes any rows which contain a NaN value. Note that we're only using the return annotations here because Prefect uses them to handle _tasks_ which return multiple arguments:
 
+```python
 @prefect.task
     def clean_data(df) -> pandas.DataFrame:
         return df.dropna()
-split_oversize splits the penguins into two dataframes: one group of standard sized birds, and another for the oversize population.
+```
 
+`split_oversize` splits the penguins into two dataframes: one group of standard sized birds and another for the oversize population.
+
+```python
 @prefect.task
     def split_oversize(df, oversize_mass = 5000) -> tuple[pandas.DataFrame, pandas.DataFrame]:
         oversize = df['body_mass_g'] < oversize_mass
         return df.loc[~oversize], df.loc[oversize]
-compute_costs computes the shipping cost of a group of penguins based on their mass. Oversize parcels cost, while standard parcels cost.
+```
 
+`compute_costs` computes the shipping cost of a group of penguins based on their mass. Oversize parcels cost 0.022, while standard parcels cost 0.014.
+
+```python
 @prefect.task
-    def compute_costs(df, is_oversize) -> pandas.DataFrame:
-        df = df.copy()
-        price_per_g = is_oversize and .022 or .014
-    
-        df['cost'] = df['body_mass_g']*price_per_g
-        return df
-compute_total_cost adds the cost of shipping the standard as well as the oversize penguins to get the total cost for shipping the entire population.
+def compute_costs(df, is_oversize) -> pandas.DataFrame:
+    df = df.copy()
+    price_per_g = is_oversize and .022 or .014
 
+    df['cost'] = df['body_mass_g'] * price_per_g
+    return df
+```
+
+`compute_total_cost` adds the cost of shipping the standard as well as the oversize penguins to get the total cost for shipping the entire population.
+
+```python
 @prefect.task
     def compute_total_cost(standard, oversize) -> float:
         return standard['cost'].sum() + oversize['cost'].sum()
-Running the Tasks
-Here, we've defined Python functions as usual for removing bad data, for splitting the penguins into dataframes containing standard birds and oversize birds, and for computing the cost of the shipments. The only additional code needed to enable monitoring for these tasks is the @prefect.task decorator above each function; this decorator turns each function into a prefect.Task class instance. In a moment we'll assemble these tasks into a complete pipeline, but if you still want to execute one of these functions independently of the others, you'll need to call the .run() method:
+```
 
+### Running the Tasks
+
+Here, we've defined Python functions as usual for removing bad data, for splitting the penguins into dataframes containing standard birds and oversize birds, and for computing the cost of the shipments. The only additional code needed to enable monitoring for these _tasks_ is the `@prefect.task` decorator above each function; this decorator turns each function into a `prefect.Task` class instance. In a moment we'll assemble these _tasks_ into a complete pipeline, but if you still want to execute one of these functions independently of the others, you'll need to call the `.run()` method:
+
+```python
 clean_data.run(penguins)
+```
 
 |     | species | island    | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g | sex    | year |
 |-----|---------|-----------|----------------|---------------|-------------------|-------------|--------|------|
@@ -134,32 +149,39 @@ clean_data.run(penguins)
 
 Showing the first 15/333 rows × 8 columns.
 
-In order to execute these tasks on our data we'll need to define the order in which they need to be run; we'll do this by chaining them together into a flow, which defines their order of execution.
+In order to execute these _tasks_ on our data we'll need to define the order in which they need to be run; we'll do this by chaining them together into a _flow_, which defines their order of execution.
 
-we first need to remove the bad data; some rows have NaN values
+1. we first need to remove the bad data; some rows have NaN values
+2. then compute the cost of each shipment, with an additional fee added if it is an oversize penguin
+3. Finally, add the cost of all the shipments together to get the `total_cost` of shipping the entire population
 
-then compute the cost of each shipment, with an additional fee added if it is an oversize penguin
+Prefect allows us to easily define these dependencies with Python's [context manager syntax][context manager syntax]:
 
-Finally, add the cost of all the shipments together to get the total_cost of shipping the entire population
-
-Prefect allows us to easily define these dependencies with Python's context manager syntax:
-
+```python
 with prefect.Flow('Shipment Flow') as flow:
     penguins_cleaned = clean_data(penguins)
     standard, oversize = split_oversize(penguins_cleaned)
     standard_cost = compute_costs(standard, is_oversize=False)
     oversize_cost = compute_costs(oversize, is_oversize=True)
     total_cost = compute_total_cost(standard_cost, oversize_cost)
-With the flow defined, let's pause for just a moment. In a complicated workflow, there might be hundreds of individual tasks, each of which may have numerous dependencies on the output of other tasks. How can we be sure that the order in which we've instantiated the tasks inside the flow sets up the dependencies as we intended?
+```
 
-One of the most useful features of Prefect is that it makes it easy to visualize the relationships between the various tasks using graphviz:
+With the _flow_ defined, let's pause for just a moment. In a complicated workflow, there might be _hundreds_ of individual _tasks_, each of which may have numerous dependencies on the output of other _tasks_. How can we be sure that the order in which we've instantiated the _tasks_ inside the _flow_ sets up the dependencies as we intended?
 
+One of the most useful features of Prefect is that it makes it easy to visualize the relationships between the various _tasks_ using graphviz:
+
+```python
 flow.visualize()
+```
 
+![](/posts/up-and-running-with-prefect/prefect-img-3.png)
 
-Here, each node of the graph represents a task, and each arrow indicates a dependency. Visualizations such as these allow us to quickly confirm that our mental model of the computation matches up with what we intended to program. Brilliant! Okay, the flow has been set up and we're sure the task graph looks good. Let's run it!
+Here, each node of the graph represents a _task_, and each arrow indicates a dependency. Visualizations such as these allow us to quickly confirm that our mental model of the computation matches up with what we intended to program. Brilliant! Okay, the _flow_ has been set up and we're sure the _task_ graph looks good. Let's run it!
 
+```python
 state = flow.run()
+```
+```bash
 [2021-08-26 14:43:38-0700] INFO - prefect.FlowRunner | Beginning Flow run for 'Shipment Flow'
 
 [2021-08-26 14:43:38-0700] INFO - prefect.TaskRunner | Task 'clean_data': Starting task run...
@@ -191,16 +213,20 @@ state = flow.run()
 [2021-08-26 14:43:38-0700] INFO - prefect.TaskRunner | Task 'compute_total_cost': Finished task run for task with final state: 'Success'
 
 [2021-08-26 14:43:38-0700] INFO - prefect.FlowRunner | Flow run SUCCESS: all reference tasks succeeded
+```
 
-From the information that prefect by default logs to stdout, it looks like all tasks executed successfully. Next, let's look at the results.
+From the information that prefect by default logs to stdout, it looks like all _tasks_ executed successfully. Next, let's look at the results.
 
+### Interpreting the results
 
+Prefect has a number of useful features related to storing, caching, and retrieving results. By default, the `State` instance returned by `flow.run()` stores the state of each _task_ in a dictionary:
 
-Interpreting the results
-Prefect has a number of useful features related to storing, caching, and retrieving results. By default, the State instance returned by flow.run() stores the state of each task in a dictionary:
-
+```python
 task_results = state.result
-    task_results
+task_results
+```
+
+```bash
 {<Task: clean_data>: <Success: "Task run succeeded.">,
 
 <Task: split_oversize>: <Success: "Task run succeeded.">,
@@ -214,31 +240,42 @@ task_results = state.result
 <Task: compute_costs>: <Success: "Task run succeeded.">,
 
 <Task: compute_total_cost>: <Success: "Task run succeeded.">}
+```
 
-The Result associated with each Task instance contains the output of the decorated function:
+The Result associated with each `Task` instance contains the output of the decorated function:
 
+```python
 task_results[total_cost].result
+```
+
+```bash
 27896.1
+```
 
-This is the total cost of shipping the entire population of standard and oversize penguins. Finally, we can visualize the state of the flow, this time after the run:
+This is the total cost of shipping the entire population of standard and oversize penguins. Finally, we can visualize the state of the _flow_, this time after the run:
 
+```python
 flow.visualize(flow_state=state)
+```
 
+![](/posts/up-and-running-with-prefect/prefect-img-4.png)
 
 Each node is now green, indicating that it executed successfully.
 
+## Going further with Prefect
 
+We've demonstrated how Prefect can quickly and simply manage and track _task_ execution. Although this isn't the most complicated example, it succinctly illustrates some of the core features of Prefect, and could be readily modified to tackle more difficult problems. While [prefect.io][prefect site] certainly targets machine learning pipelines with its branding and documentation, Prefect could be useful for anything where _task_ tracking is important - including research applications.
 
-Going further with Prefect
-We've demonstrated how Prefect can quickly and simply manage and track task execution. Although this isn't the most complicated example, it succinctly illustrates some of the core features of Prefect, and could be readily modified to tackle more difficult problems. While prefect.io certainly targets machine learning pipelines with its branding and documentation, Prefect could be useful for anything where task tracking is important - including research applications.
-
-If you'd like to learn more about Prefect's powerful caching and data persistence mechanisms, notifications (including Slack integration!), and other capabilities take a look at the docs and tutorials available at https://docs.prefect.io/core/.
+If you'd like to learn more about Prefect's powerful [caching and data persistence mechanisms][prefect persistance], [notifications][prefect notifications] (including Slack integration!), and other capabilities take a look at the docs and tutorials available in the [Prefect documentation][prefect site: core].
 
 [airflow homepage]: https://airflow.apache.org/
 [allison horst paper]: https://allisonhorst.github.io/palmerpenguins/articles/intro.html
+[context manager syntax]: https://docs.python.org/3/library/contextlib.html
 [gorman williams fraser paper]: https://doi.org/10.1371/journal.pone.0090081
 [luigi repo]: https://github.com/spotify/luigi
 [numpy site]: https://numpy.org/
+[prefect persistance]: https://docs.prefect.io/core/concepts/persistence.html
+[prefect notifications]: https://docs.prefect.io/core/concepts/notifications.html#responding-to-state
 [pandas site]: https://pandas.pydata.org/
 [prefect repo]: https://github.com/prefecthq/prefect
 [prefect site]: https://www.prefect.io/
