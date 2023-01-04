@@ -6,7 +6,7 @@ description: >
   cuCIM is a new RAPIDS library for accelerated n-dimensional image processing and image I/O. The project is now publicly available under a permissive license (Apache 2.0) and welcomes community contributions. This is the second part of a joint blog post with NVIDIA. Both posts feature a common motivation section, but the NVIDIA post focuses on cuCIM software architecture, image I/O functionality, and benchmark results. In this post, we expand on the CuPy-based cucim.skimage package, which provides a CUDA-based implementation of the scikit-image API. We will give an overview of how existing CPU-based scikit-image code can be ported to the GPU. We will also provide guidance on how to get started using and contributing to cuCIM. The initial release of the library was a collaboration between Quansight and NVIDIA's RAPIDS and Clara teams.
 category: [Artificial Intelligence, Optimization]
 featuredImage:
-  src: /posts/rapids-cucim-porting-scikit-image-code-to-the-gpu/image-processing-img-1.png
+  src: /posts/performance-for-image-processing-with-cucim/image-processing-img-1.png
   alt: ''
 hero:
   imageSrc: /posts/hero-paris.webp
@@ -60,11 +60,11 @@ filtered_hessian = filters.hessian(retina_gpu, **filter_kwargs)
 
 The filtered images produced appear as follows:
 
-![](/posts/rapids-cucim-porting-scikit-image-code-to-the-gpu/image-processing-img-2.png)
+![](/posts/performance-for-image-processing-with-cucim/image-processing-img-2.png)
 
 Even for this relatively small-scale image of shape 1011x1011, filtering operations are faster on the GPU than for the corresponding CPU code in scikit-image. In the figure below, acceleration factors relative to scikit-image are shown where the rightmost bar in each group is the acceleration factor observed when round trip host -> device -> host data transfer overhead is included.
 
-![](/posts/rapids-cucim-porting-scikit-image-code-to-the-gpu/image-processing-img-3.png)
+![](/posts/performance-for-image-processing-with-cucim/image-processing-img-3.png)
 
 Specific benchmark results across a wider range of functions are highlighted in the [companion NVIDIA blog post][nvidia companion post].
 
@@ -110,13 +110,13 @@ The necessary changes typically involve:
 1. Use `cupy.asarray` to transfer array inputs to cuCIM functions from the host to the GPU
 2. Replace functions imported from CPU-based library with GPU equivalents as in the following table
 
-| CPU Module  | GPU Module    |
-|-------------|---------------|
-| numpy       | cupy          |
-| scipy       | cupyx.scipy   |
-| skimage     | cucim.skimage |
-| sklearn     | cuml          |
-| networkx    | cugraph       |
+| CPU Module | GPU Module    |
+| ---------- | ------------- |
+| numpy      | cupy          |
+| scipy      | cupyx.scipy   |
+| skimage    | cucim.skimage |
+| sklearn    | cuml          |
+| networkx   | cugraph       |
 
 3. Use `cupy.asnumpy` to transfer results back to the host for plotting with Matplotlib or other visualization libraries or to save results to disk.
 
