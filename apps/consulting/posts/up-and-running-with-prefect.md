@@ -42,14 +42,14 @@ cloud-based task management dashboard called
 we'll explore some of Prefect's data structures by building a simple pipeline
 from the ground up. Along the way, we'll show how to
 
-- define the _tasks_ (read: functions) that will make up the pipeline
-- chain tasks together into a _flow_ as a way of defining their interdependencies
-- run the pipeline, and examine the output
-- visualize the task graph with graphviz
+- Define the _tasks_ (read: functions) that will make up the pipeline
+- Chain tasks together into a _flow_ as a way of defining their interdependencies
+- Run the pipeline, and examine the output
+- Visualize the task graph with graphviz
 
 ### Installing Prefect
 
-First we'll need to install prefect; we'll also need [pandas][pandas site] and
+First we'll need to install Prefect; we'll also need [pandas][pandas site] and
 [NumPy][numpy site]. For example data, we'll make use of the Palmer penguins
 dataset:
 
@@ -84,7 +84,7 @@ penguins
 | 10  | Adelie  | Torgersen | 37.8           | 17.1          | 186.0             | 3300.0      | NaN    | 2007 | 
 | 11  | Adelie  | Torgersen | 37.8           | 17.3          | 180.0             | 3700.0      | NaN    | 2007 | 
 
-Showing 11/344 rows × 8 columns, full data set available at the bottom of this post.
+The table shows 11/344 rows × 8 columns.
 
 ### Defining Tasks
 
@@ -92,17 +92,17 @@ With Prefect, the smallest components of a pipeline are called _tasks_. These ar
 
 ```python
 @prefect.task
-    def clean_data(df) -> pandas.DataFrame:
-        return df.dropna()
+def clean_data(df) -> pandas.DataFrame:
+    return df.dropna()
 ```
 
 `split_oversize` splits the penguins into two dataframes: one group of standard sized birds and another for the oversize population.
 
 ```python
 @prefect.task
-    def split_oversize(df, oversize_mass = 5000) -> tuple[pandas.DataFrame, pandas.DataFrame]:
-        oversize = df['body_mass_g'] < oversize_mass
-        return df.loc[~oversize], df.loc[oversize]
+def split_oversize(df, oversize_mass = 5000) -> tuple[pandas.DataFrame, pandas.DataFrame]:
+    oversize = df['body_mass_g'] < oversize_mass
+    return df.loc[~oversize], df.loc[oversize]
 ```
 
 `compute_costs` computes the shipping cost of a group of penguins based on their mass. Oversize parcels cost 0.022, while standard parcels cost 0.014.
@@ -121,8 +121,8 @@ def compute_costs(df, is_oversize) -> pandas.DataFrame:
 
 ```python
 @prefect.task
-    def compute_total_cost(standard, oversize) -> float:
-        return standard['cost'].sum() + oversize['cost'].sum()
+def compute_total_cost(standard, oversize) -> float:
+    return standard['cost'].sum() + oversize['cost'].sum()
 ```
 
 ### Running the Tasks
@@ -151,8 +151,8 @@ Showing the first 15/333 rows × 8 columns.
 
 In order to execute these _tasks_ on our data we'll need to define the order in which they need to be run; we'll do this by chaining them together into a _flow_, which defines their order of execution.
 
-1. we first need to remove the bad data; some rows have NaN values
-2. then compute the cost of each shipment, with an additional fee added if it is an oversize penguin
+1. We first need to remove the bad data; some rows have NaN values
+2. Then compute the cost of each shipment, with an additional fee added if it is an oversize penguin
 3. Finally, add the cost of all the shipments together to get the `total_cost` of shipping the entire population
 
 Prefect allows us to easily define these dependencies with Python's [context manager syntax][context manager syntax]:
@@ -215,7 +215,7 @@ state = flow.run()
 [2021-08-26 14:43:38-0700] INFO - prefect.FlowRunner | Flow run SUCCESS: all reference tasks succeeded
 ```
 
-From the information that prefect by default logs to stdout, it looks like all _tasks_ executed successfully. Next, let's look at the results.
+From the information that Prefect logs, by default, to `stdout`, it looks like all _tasks_ executed successfully. Next, let's look at the results.
 
 ### Interpreting the results
 
@@ -266,7 +266,7 @@ Each node is now green, indicating that it executed successfully.
 
 We've demonstrated how Prefect can quickly and simply manage and track _task_ execution. Although this isn't the most complicated example, it succinctly illustrates some of the core features of Prefect, and could be readily modified to tackle more difficult problems. While [prefect.io][prefect site] certainly targets machine learning pipelines with its branding and documentation, Prefect could be useful for anything where _task_ tracking is important - including research applications.
 
-If you'd like to learn more about Prefect's powerful [caching and data persistence mechanisms][prefect persistance], [notifications][prefect notifications] (including Slack integration!), and other capabilities take a look at the docs and tutorials available in the [Prefect documentation][prefect site: core].
+If you'd like to learn more about Prefect's powerful [caching and data persistence mechanisms][prefect persistance], [notifications][prefect notifications] (including Slack integration!), and other capabilities, take a look at the docs and tutorials available in the [Prefect documentation][prefect site: core].
 
 [airflow homepage]: https://airflow.apache.org/
 [allison horst paper]: https://allisonhorst.github.io/palmerpenguins/articles/intro.html
