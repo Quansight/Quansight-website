@@ -16,6 +16,8 @@ hero:
 
 ---
 
+![](/posts/exploring-reinforcement-learning/reinf_learning.png)
+
 Arthur C. Clark penned three adages in the '60s and '70s that became known as his three laws. If you read many tech blogs, you probably know the third law, which reads
 
 > _Any sufficiently advanced technology is indistinguishable from magic._
