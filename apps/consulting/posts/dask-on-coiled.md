@@ -168,7 +168,7 @@ In the reduction step, we take the square root of the sum of all the squared sum
 
 ### Implementation
 
-The implementation was done using Dask and Numba. Dask arrays `da.blockwise` and `da.reduction` were used for scaling the map-reduce algorithm to large datasets and Numba's `guvectorize` and `cuda` modules were used for implementing the distance metric map and reduce functions on CPU and GPU. Full implementation can be seen in the [sgkit distance module][sgkit distance].
+The implementation was done using Dask and Numba. Dask arrays `da.blockwise` and `da.reduction` were used for scaling the map-reduce algorithm to large datasets and Numba's `guvectorize` and `cuda` modules were used for implementing the distance metric map and reduce functions on CPU and GPU. Full implementation can be seen in the [sgkit distance API][sgkit distance].
 
 ### Using Coiled
 
@@ -271,7 +271,7 @@ Here are the benchmarks for the computation on Coiled Cloud
 
 ## Final notes
 
-The final implementation of the same can be seen in the [sgkit API][sgkit distance]:
+The final implementation of the same can be seen in the [sgkit distance API][sgkit distance]:
 
 ```python
 from sgkit.distance.api import pairwise_distance
@@ -307,5 +307,5 @@ The main takeaway here is, if you have a computation that uses Dask and you need
 [coiled]: https://www.coiled.io/
 [pdist]: https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.pdist.html
 [sgkit]: https://pystatgen.github.io/sgkit/latest/
-[sgkit distance]: https://github.com/pystatgen/sgkit/blob/f22b667b071d18e4885bcfa73b00dc821ee6f1bf/sgkit/distance/api.py#L14
+[sgkit distance]: https://github.com/pystatgen/sgkit/blob/f22b667b071d18e4885bcfa73b00dc821ee6f1bf/sgkit/distance/api.py
 [malariagen dataset]: https://malariagen.github.io/vector-data/landing-page.html
