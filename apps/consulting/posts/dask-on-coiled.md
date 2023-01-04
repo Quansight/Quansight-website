@@ -262,7 +262,9 @@ def run_with_report(x, metric, target, report_name):
 
 Run the computation for the euclidean metric on GPU on Coiled as follows:
 
+```python
 run_with_report(x, metric="euclidean", target="gpu", report_name="full")
+```
 
 ## Benchmarks
 Here are the benchmarks for the computation on Coiled Cloud
