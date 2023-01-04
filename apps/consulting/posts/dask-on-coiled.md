@@ -250,12 +250,9 @@ gt_da = da.from_zarr(gt)
 x = gt_da[:, :, 1].T
 x = x.rechunk((-1, 100000))
 
-
 def run_with_report(x, metric, target, report_name):
-    with performance_report(
-        filename=f"dask-report-{metric}-{report_name}.html"), 
-        get_task_stream(
-            filename=f"task-stream-{metric}-{report_name}.html"):
+    with performance_report(filename=f"dask-report-{metric}-{report_name}.html"), \
+            get_task_stream(filename=f"task-stream-{metric}-{report_name}.html"):
         out = pairwise_distance(x, metric=metric, target=target)
         out.compute()
 ```
