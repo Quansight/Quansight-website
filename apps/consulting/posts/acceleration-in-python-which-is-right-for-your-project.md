@@ -25,7 +25,7 @@ Fast computation in Python relies on compiled code. Under the hoods of populars 
 
 Some of the same qualities that make Python user-friendly and good for data science are the same qualities that make Python slow. The main reason is that Python is an interpreted language. Most Python runs using the following model:
 
-![](/posts/acceleration-in-python-which-is-right-for-your-project/pythonacc.png)
+![](/posts/acceleration-in-python-which-is-right-for-your-project/acceleration-img-1.jpg)
 
 Python source code is passed to the CPython compiler which generates Python byte code. The byte code is then passed to the interpreter. The main bottleneck in this process is the Python interpreter. As a result, code written natively in Python tends to run much slower than similar code code written in a compiled language like C or Fortran. Fortunately, we can compile compute-intensive operations in another language (often C or C++) as a library that extends the Python virtual machine. In this way, we can call these operations directly in the Python source code but bypass the slow interpreter, resulting in improved performance.
 
