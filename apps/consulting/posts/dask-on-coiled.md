@@ -148,7 +148,7 @@ Consider a small chunk of a large 2D array as follows:
 
 ![](/posts/dask-on-coiled/daskoncoiled-img-6.png)
 
-We calculate the map step of the computation on the chunk. To illustrate this, consider euclidean distance. The euclidean distance for a pair of vectors V0 and V1 is defined as the square root of
+We calculate the map step of the computation on the chunk. To illustrate this, consider Euclidean distance. The Euclidean distance for a pair of vectors V0 and V1 is defined as the square root of
 
 ![](/posts/dask-on-coiled/daskoncoiled-img-7.png)
 
@@ -257,20 +257,23 @@ def run_with_report(x, metric, target, report_name):
         out.compute()
 ```
 
-Run the computation for the euclidean metric on GPU on Coiled as follows:
+Run the computation for the Euclidean metric on GPU on Coiled as follows:
 
 ```python
 run_with_report(x, metric="euclidean", target="gpu", report_name="full")
 ```
 
 ## Benchmarks
+
 Here are the benchmarks for the computation on Coiled Cloud
 
+![](/posts/dask-on-coiled/daskoncoiled-img-10.png)
 
+## Final notes
 
-Final notes
-The final implementation of the same can be seen in the sgkit library through the following API:
+The final implementation of the same can be seen in the [sgkit API][sgkit distance]:
 
+```python
 from sgkit.distance.api import pairwise_distance
 import dask.array as da
 
@@ -282,14 +285,20 @@ pairwise_distance(x).compute()
 
 # Compute Pairwise distance on GPU (if you have one)
 pairwise_distance(x, device="gpu").compute()
+```
+
 Output:
 
+```python
 array([[0.        , 1.73205081, 2.44948974, 2.23606798, 2.44948974],
        [1.73205081, 0.        , 2.23606798, 2.        , 1.73205081],
        [2.44948974, 2.23606798, 0.        , 1.73205081, 2.44948974],
        [2.23606798, 2.        , 1.73205081, 0.        , 2.23606798],
        [2.44948974, 1.73205081, 2.44948974, 2.23606798, 0.        ]])
-Conclusion
+```
+
+## Conclusion
+
 In this blog post, we learned how a complex problem of genomics analysis can use Dask to scale to a large dataset and the compute can be easily obtained from Coiled for CPU as well as GPU architectures with just a few lines of code.
 
 The main takeaway here is, if you have a computation that uses Dask and you need compute at scale to speed up the computation, then using Coiled is a very easy way to get compute quickly.
