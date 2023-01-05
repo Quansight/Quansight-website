@@ -120,7 +120,7 @@ Preprocess data (if necessary) one time
 3. Save data in partitions
 
 Filter data for each query
-1. Select points from dataset that are within 1, 10, 100, 1000, 10000 random zip code polygons distributed around the contiguous US
+4. Select points from dataset that are within 1, 10, 100, 1000, 10000 random zip code polygons distributed around the contiguous US
 
 ## _Dataset_
 
