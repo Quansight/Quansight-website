@@ -132,9 +132,9 @@ Although a cloud cluster was used in production, the benchmark results presented
 - Processor: AMD Ryzen Threadripper 2970WX 24-Core Processor
 - RAM: 64 GB
 - For this comparison Dask Workers were limited to:
-- 4 Workers
-- 2 Threads per Worker
-- 3 GB RAM per Worker
+  - 4 Workers
+  - 2 Threads per Worker
+  - 3 GB RAM per Worker
 
 Note that the final computation brings the filtered data into the main process potentially using more RAM than an individual worker has.
 
