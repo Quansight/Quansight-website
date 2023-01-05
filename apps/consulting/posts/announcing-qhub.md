@@ -144,7 +144,7 @@ QHub is a JupyterHub distribution with a focused goal. It is an opinionated depl
 
 If you liked this article, check out our new blog post about [JupyterLab 3.0 dynamic extensions][jupyterlab blog post] at the link here.
 
-Update: QHub is now Nebari.  See https://www.nebari.dev for more.
+Update: QHub is now Nebari.  See the [more recent post on Nebari][nebari post] and https://www.nebari.dev for more.
 
 [conda-docker repo]: https://github.com/conda-incubator/conda-docker
 [conda-store repo]: https://github.com/quansight/conda-store
@@ -161,6 +161,7 @@ Update: QHub is now Nebari.  See https://www.nebari.dev for more.
 [jupyterlab documentation]: https://jupyterlab.readthedocs.io/en/stable/
 [kubernetes documentation]: https://kubernetes.io/docs/home/
 [kubessh repo]: https://github.com/yuvipanda/kubessh
+[nebari post]: https://quansight.com/post/evolving-qhub-to-nebari
 [openshift site]: https://www.openshift.com/
 [nss_wrapper library]: https://cwrap.org/nss_wrapper.html
 [terraform site]: https://www.terraform.io/intro/index.html
