@@ -86,7 +86,7 @@ class Stage1(param.Parameterized):
         return text
 
     def panel(self):
-        returnpn.Column(
+        return pn.Column(
             pn.WidgetBox(self.text_input, self.continue_button)
         )
 ```
