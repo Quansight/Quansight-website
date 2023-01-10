@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/python-packaging-where-to-next/unified_workflow_tool.png
   alt: 'A diagram of a workflow tool named pyp. The diagram has three swim lanes, with the first one showing the pyp commands, the second one showing the underlying tool it wraps (e.g., pip or pytest), and the third one shows alternative tools that can perform the same job as the default tool.'
 hero:
-  imageSrc: /posts/python-packaging-where-to-next/team_hero_png.svg
+  imageSrc: /posts/python-packaging-where-to-next/team_hero.svg
   imageAlt: 'Illustration - Three different hands meeting in a concentric circle, each holding a different shape (square, triangle, circle).'
 ---
 
