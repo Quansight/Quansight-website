@@ -5,11 +5,11 @@ author: ralf-gommers
 description: 'Potential solutions for pain points when dealing with native code; what needs unifying in the Python packaging space, and how should that be approached? '
 category: [Packaging]
 featuredImage:
-  src: /posts/python-packaging-where-to-next/a-custom-image-I-think.png
-  alt: 'todo.'
+  src: /posts/python-packaging-where-to-next/unified_workflow_tool.png
+  alt: 'Unified packaging tool schematic parting from pyp.toml and pyproject.toml configuration files and leading to a list of pyp and other tools and their commands.'
 hero:
-  imageSrc: /posts/python-packaging-where-to-next/hero-image.png
-  imageAlt: 'todo.'
+  imageSrc: /posts/python-packaging-where-to-next/team_hero_png.svg
+  imageAlt: 'Illustration - Three different hands meeting in a concentric circle, each holding a different shape (square, triangle, circle).'
 ---
 
 A lot is going on in Python packaging land. Two weeks ago I released
@@ -22,7 +22,7 @@ was a large discussion on Discourse -
 [Wanting a singular packaging tool/vision ](https://discuss.python.org/t/wanting-a-singular-packaging-tool-vision/21141) -
 about future wishes and big picture packaging topics/changes. A second big
 picture thread,
-[Python Packaging Strategy Disccusion - Part 1](https://discuss.python.org/t/python-packaging-strategy-discussion-part-1/22420)
+[Python Packaging Strategy Discussion - Part 1](https://discuss.python.org/t/python-packaging-strategy-discussion-part-1/22420)
 is active right now (and the title implies there'll at least be a "strategy -
 part 2" one).
 
@@ -35,7 +35,6 @@ thing to worry about.
 
 This blog post is my attempt to address solutions, and what I hope is a good
 way forward for Python packaging as a whole.
-
 
 ## The short version
 
@@ -69,9 +68,9 @@ Equally important, here are the non-changes and assumptions:
 
 On the topic of what needs to be unified:
 
-- Aim for uniform *concepts* (e.g., build backend, environment manager, installer) and a multitude of *implementations*,
+- Aim for uniform _concepts_ (e.g., build backend, environment manager, installer) and a multitude of _implementations_,
 - Align the UX between implementations of the same concept to the extent possible,
-- Build a single *layered* workflow tool on top (ala [Cargo](ttps://doc.rust-lang.org/stable/cargo/)) that,
+- Build a single _layered_ workflow tool on top (ala [Cargo](ttps://doc.rust-lang.org/stable/cargo/)) that,
 
   - allows dropping down into the underlying tools as needed,
   - is independent of any of the tools, including what package and environment
@@ -81,12 +80,11 @@ On the topic of what needs to be unified:
 
 For rationales for and more details on these points, read on!
 
-
 ## The long version
 
 Let me start with the key assumptions I'm making, because they're important for
-everything else. The first is *"users are not, and don't want to become, system
-integrators"*. To maintainers of scientific/PyData packages, this is 100%
+everything else. The first is _"users are not, and don't want to become, system
+integrators"_. To maintainers of scientific/PyData packages, this is 100%
 obvious. If you're working in, say, devops or web development where (a) almost
 everyone is a developer, and (b) most things are pure Python so there is less
 integration to do, it may not be though. Let me quote Steve Dower, who
@@ -107,8 +105,8 @@ This is all correct, the average user doesn't want to do any of those things
 and gets very confused very quickly if it is required. Hence supporting the
 existing integrators better is pretty clearly the right way forward.
 
-The second assumption is: *one way of building packages for everything for all
-Python users is not feasible*. This should be self-evident - Python is one of
+The second assumption is: _one way of building packages for everything for all
+Python users is not feasible_. This should be self-evident - Python is one of
 the most diverse languages in terms of application domains and types of users.
 HPC users are going to continue to want the capabilities of Spack (or something
 like it), scientific and data science users are going to continue to like a
@@ -116,14 +114,13 @@ full-featured binary packaging system like Conda, devops users are going to
 continue to want the flexibility of PyPI/wheels/pip, and there'll continue to
 be more flavors for other use cases and personal tastes.
 
-The last main assumption is: *major backwards compatibility breaks will be too
-painful and hard to pull off*. This is simply based on previous experience with
+The last main assumption is: _major backwards compatibility breaks will be too
+painful and hard to pull off_. This is simply based on previous experience with
 packaging changes and the level of coordination and effort needed for any major
 breaks. I'm thinking about things like "change conda so it works with wheels
 and non-conda Python installers". Or "stop distributing standalone Python
 installers on python.org". It's not impossible, however such proposals are
 unlikely to succeed.
-
 
 ### The way forward for native code
 
@@ -135,7 +132,7 @@ languages and not present on PyPI), as discussed on
 The initial hurdle there is not that those dependencies are not on PyPI, but
 that we cannot even express the external dependencies a package has.
 The solution seems obvious (the devil will be in the details probably though):
-*allow declaring external dependencies*. This has to be done in a complete
+_allow declaring external dependencies_. This has to be done in a complete
 enough fashion, so dependencies on compilers, external libraries (whether from
 another specific packaging ecosystem or independent of that), and virtual
 dependencies (i.e., dependencies that can have multiple providers) can all be
@@ -145,13 +142,13 @@ implementation may use something like
 [namespaces](https://discuss.python.org/t/wanting-a-singular-packaging-tool-vision/21141/104),
 or [purl](https://github.com/package-url/purl-spec), or something in a similar
 direction but custom to Python. Either way, it's a universal scheme and/or some
-form of *mapping from canonical PyPI names to other names*.
+form of _mapping from canonical PyPI names to other names_.
 
-A second change that is very much necessary is to *better split the three purposes of PyPI*
+A second change that is very much necessary is to _better split the three purposes of PyPI_
 (see [this explanation](https://pypackaging-native.github.io/meta-topics/purposes_of_pypi/)).
 This is primarily a conceptual and package installers issue. Installers, Pip in
-particular, must not install from source by default, and must *avoid mixing from
-source and binary features in general.* There are very few packaging systems
+particular, must not install from source by default, and must _avoid mixing from
+source and binary features in general._ There are very few packaging systems
 that do mix building from source and serving binaries, and for those that do
 the binary serving really acts like a cache. For Pip that's not true - building
 from source almost certainly results in a very different wheel than the one
@@ -166,8 +163,8 @@ remove the incentive for projects to upload wheels without a matching sdist.
 This set of changes will actually not be all that much work, at least compared
 to most of the other design changes proposed in this post.
 
-A third change to make is to *implement post-release metadata editing
-capabilities for PyPI*. This has been discussed on and off for a long time. It
+A third change to make is to _implement post-release metadata editing
+capabilities for PyPI_. This has been discussed on and off for a long time. It
 is needed for multiple reasons, discussed on
 [this pypackaging-native page](https://pypackaging-native.github.io/key-issues/pypi_metadata_handling/).
 Almost any system package manager as well as conda-forge and Spack can do this,
@@ -193,7 +190,7 @@ suggest to avoid making - less work!
 Distributing packages with GPU code or SIMD code on PyPI is very challenging,
 as discussed [here](https://pypackaging-native.github.io/key-issues/gpus/) and
 [here](https://pypackaging-native.github.io/key-issues/simd_support/) respectively.
-However, I'm still going to *recommend against adding GPU or SIMD wheel tags.* Adding
+However, I'm still going to _recommend against adding GPU or SIMD wheel tags._ Adding
 such tags would be a large amount of work, and in and of itself not really be a
 solution. The current state is somewhat acceptable. In the case of SIMD code it
 can be further improved by making it easier to implement runtime CPU
@@ -202,11 +199,11 @@ systems (e.g., Meson and CMake) can support and reusable libraries can
 facilitate. For GPUs it would not solve the binary size issue; solid GPU
 support is probably best left to system package managers.
 
-Another thing that I'd propose to do is to *accept that some of the hardest
+Another thing that I'd propose to do is to _accept that some of the hardest
 cases (complex C++ dependencies, hairy native dependencies like in the
-geospatial stack) are not a good fit for PyPI's social model* and require a
+geospatial stack) are not a good fit for PyPI's social model_ and require a
 package manager which builds everything in a coherent fashion. Very complex
-builds and dependencies across a larger set of native libraries simply *need* a
+builds and dependencies across a larger set of native libraries simply _need_ a
 coordinated approach. The strength (or weakness, depending on your point of
 view) of PyPI is that every package author can and will do their own thing, at
 their own time. That is a pretty fundamental property of how the PyPI ecosystem
@@ -216,12 +213,11 @@ builds, and instead make all of Python packaging work better together with
 system package managers where doing those complex builds is a lot easier and
 can be done by specialists rather than package authors.
 
-
 ### Supporting system integrators - a new installer mode
 
 What we discussed so far will be a lot of work - but they're all logical and
-previously-discussed ideas, and don't yet answer the question: *if we want to
-better support system integrators, then how do we do that?*
+previously-discussed ideas, and don't yet answer the question: _if we want to
+better support system integrators, then how do we do that?_
 The answer I'll propose here has, to the best of my knowledge, not been
 discussed seriously before. That answer is: implement a new, opt-in mode for
 installers, only pure Python (or `-any`) packages from PyPI, and everything
@@ -233,7 +229,7 @@ Such a new installer mode has a number of nice properties:
 2. It's the one clean split one can make between what's on PyPI and what comes
    from another package manager without running into ABI issues.
 3. With the external dependencies specification, package name mapping and this
-   install mode, it will be possible to declare *and* fulfill all dependencies.
+   install mode, it will be possible to declare _and_ fulfill all dependencies.
 4. Widely used packages that are still reasonable to build as wheels (e.g., the
    likes of NumPy, SciPy and scikit-learn) can continue their current release
    practices unchanged, while packages that are even harder to build or less
@@ -263,7 +259,6 @@ changes listed in the previous section:
 And of course, for every design change there's documentation and educational
 materials to update.
 
-
 ### Python packaging strategy - what to unify?
 
 So say that we're good on dealing with native code and better supporting system
@@ -277,7 +272,7 @@ packaging elephant, and a single hypothetical workflow tool called `pyp`. It
 expresses a lot of good ideas and workflows and constraints to think about, and
 is still relevant after 4+ years. It's a tool like `pyp`, or `cargo` (the Rust
 workflow tool), that we seem to want[^1]. That should be a top-level tool that
-wraps underlying tools, and is properly *layered* so that users can dig in and
+wraps underlying tools, and is properly _layered_ so that users can dig in and
 both understand what's under the hood and reach down to that next more complex
 level if they have to. The latter in order to use a tool directly if the
 higher-level UX isn't sufficient, or to replace the underlying tool with a
@@ -306,14 +301,14 @@ different tools. We have multiple tools for each job for a reason, and that's a
 good (or at least necessary) thing. As long as the tools that do the same job
 are mostly interchangeable, this is not a problem. We then have some reasonable
 default tool, and alternatives that can be plugged in. Interchangeable here
-means two things: the job or concept is *well-defined*, and *the UX for the
-tool* is either the same or close enough that the differences can be bridged.
+means two things: the job or concept is _well-defined_, and _the UX for the
+tool_ is either the same or close enough that the differences can be bridged.
 
 This is perhaps a little abstract, so let's have a look at one type of tool - a
 build frontend. There aren't that many build frontends, the two most popular
 ones are `pip` and `pypa/build`. Their main job is to allow invoking a build
 backend and build a wheel (`pip` may then install it too). The interfaces for
-these two tools won't be the same, but *interface alignment* can happen to make
+these two tools won't be the same, but _interface alignment_ can happen to make
 using them interchangeably easier. For example, here are some unnecessary
 differences that the maintainers can align on:
 
@@ -333,10 +328,9 @@ differences that the maintainers can align on:
 A second set of tools are environment managers. These are fairly uniform, and
 only have a few relevant concepts: an environment is something that can be
 created, activated and deactivated, and that packages can be installed into.
-Most tools have those concepts, with a similar UX. E.g., `tool activate
-<envname>` and `tool deactivate <envname>` are the same across `venv`,
+Most tools have those concepts, with a similar UX. E.g., `tool activate <envname>` and `tool deactivate <envname>` are the same across `venv`,
 `virtualenv`, `conda`/`mamba` and `spack`. Creating and removing environments
-has some more variation. However, as long as the *concepts* are the same, it's
+has some more variation. However, as long as the _concepts_ are the same, it's
 not too bad that the exact UX is different. At least it allows a higher level
 tool to paper over the naming differences and wrap the lower-level tools in
 order to provide a uniform experience for its users.
@@ -358,8 +352,8 @@ Wheh, thank you for reading to the end! I hope this looks like a way forward
 that either seems compelling or stimulates even better ideas.
 
 Given that this is my very-ambitious-but-still-somewhat-realistic wish list, I
-can't resist adding one more wish: I want *a documented design of Python
-packaging*. Packaging PEPs are _not_ a documented design. They're like a
+can't resist adding one more wish: I want _a documented design of Python
+packaging_. Packaging PEPs are _not_ a documented design. They're like a
 collection of random git commits for a project where you can't see the current
 state of the contents of the repository. I'd like to see that current state in
 written form.
