@@ -15,8 +15,10 @@ hero:
 A lot is going on in Python packaging land. Two weeks ago I released
 [the pypackaging-native website](https://pypackaging-native.github.io/), which
 documents extensively what the most important issues are with packaging Python
-projects that contain code that needs to be compiled. It's something I had wanted to have for a long time, and I sincerely hope thatit'll help improve the quality of Python packaging design discussion.
-Right before that release, there was a large discussion on Discourse -
+projects that contain code that needs to be compiled. It's something I had
+wanted to have for a long time, and I sincerely hope thatit'll help improve the
+quality of Python packaging design discussion. Right before that release, there
+was a large discussion on Discourse -
 [Wanting a singular packaging tool/vision ](https://discuss.python.org/t/wanting-a-singular-packaging-tool-vision/21141) -
 about future wishes and big picture packaging topics/changes. A second big
 picture thread,
@@ -25,9 +27,11 @@ is active right now (and the title implies there'll at least be a "strategy -
 part 2" one).
 
 `pypackaging-native` content on purpose does not go into detail on solution
-directions. Real-world problems are, well, real - they're hard to argue with.
-While for preferred solution directions, one can be a lot more opinionated. And
-one person's solution may be another's unwanted extra thing to worry about.
+directions. Real-world problems are, well, real. Unlike for new ideas, it's
+hard to argue with concrete examples of "this doesn't work for me or my
+project, because of X". While for preferred solution directions, one can be a
+lot more opinionated. And one person's solution may be another's unwanted extra
+thing to worry about.
 
 This blog post is my attempt to address solutions, and what I hope is a good
 way forward for Python packaging as a whole.
@@ -302,7 +306,7 @@ different tools. We have multiple tools for each job for a reason, and that's a
 good (or at least necessary) thing. As long as the tools that do the same job
 are mostly interchangeable, this is not a problem. We then have some reasonable
 default tool, and alternatives that can be plugged in. Interchangeable here
-means two things: the job (or concept) is *well-defined*, and *the UX for the
+means two things: the job or concept is *well-defined*, and *the UX for the
 tool* is either the same or close enough that the differences can be bridged.
 
 This is perhaps a little abstract, so let's have a look at one type of tool - a
