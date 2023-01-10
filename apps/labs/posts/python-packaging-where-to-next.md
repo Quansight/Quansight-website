@@ -6,7 +6,7 @@ description: 'Potential solutions for pain points when dealing with native code;
 category: [Packaging]
 featuredImage:
   src: /posts/python-packaging-where-to-next/unified_workflow_tool.png
-  alt: 'Unified packaging tool schematic parting from pyp.toml and pyproject.toml configuration files and leading to a list of pyp and other tools and their commands.'
+  alt: 'A diagram of a workflow tool named pyp. The diagram has three swim lanes, with the first one showing the pyp commands, the second one showing the underlying tool it wraps (e.g., pip or pytest), and the third one shows alternative tools that can perform the same job as the default tool.'
 hero:
   imageSrc: /posts/python-packaging-where-to-next/team_hero_png.svg
   imageAlt: 'Illustration - Three different hands meeting in a concentric circle, each holding a different shape (square, triangle, circle).'
@@ -70,10 +70,10 @@ On the topic of what needs to be unified:
 
 - Aim for uniform _concepts_ (e.g., build backend, environment manager, installer) and a multitude of _implementations_,
 - Align the UX between implementations of the same concept to the extent possible,
-- Build a single _layered_ workflow tool on top (ala [Cargo](ttps://doc.rust-lang.org/stable/cargo/)) that,
+- Build a single _layered_ workflow tool on top (à la [Cargo](ttps://doc.rust-lang.org/stable/cargo/)) that,
 
   - allows dropping down into the underlying tools as needed,
-  - is independent of any of the tools, including what package and environment
+  - is independent of the tools, including what package and environment
     managers to use. Importantly, it should handle working with wheels, conda
     packages, and other packaging formats/systems that provide the needed
     concepts and tools.
@@ -85,8 +85,8 @@ For rationales for and more details on these points, read on!
 Let me start with the key assumptions I'm making, because they're important for
 everything else. The first is _"users are not, and don't want to become, system
 integrators"_. To maintainers of scientific/PyData packages, this is 100%
-obvious. If you're working in, say, devops or web development where (a) almost
-everyone is a developer, and (b) most things are pure Python so there is less
+obvious. If you're working in, say, DevOps or web development where (a) almost
+everyone is a developer, and (b) most things are pure Python, so there is less
 integration to do, it may not be though. Let me quote Steve Dower, who
 explicitly [asked the question](https://discuss.python.org/t/python-packaging-strategy-discussion-part-1/22420/26?u=rgommers)
 "should we be trying to make each Python user be their own system integrator,
@@ -110,7 +110,7 @@ Python users is not feasible_. This should be self-evident - Python is one of
 the most diverse languages in terms of application domains and types of users.
 HPC users are going to continue to want the capabilities of Spack (or something
 like it), scientific and data science users are going to continue to like a
-full-featured binary packaging system like Conda, devops users are going to
+full-featured binary packaging system like Conda, DevOps users are going to
 continue to want the flexibility of PyPI/wheels/pip, and there'll continue to
 be more flavors for other use cases and personal tastes.
 
@@ -195,7 +195,7 @@ such tags would be a large amount of work, and in and of itself not really be a
 solution. The current state is somewhat acceptable. In the case of SIMD code it
 can be further improved by making it easier to implement runtime CPU
 architecture detection and dynamic dispatch - this is a capability that build
-systems (e.g., Meson and CMake) can support and reusable libraries can
+systems (e.g., Meson and CMake) can support, and reusable libraries can
 facilitate. For GPUs it would not solve the binary size issue; solid GPU
 support is probably best left to system package managers.
 
