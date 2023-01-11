@@ -16,7 +16,7 @@ A lot is going on in Python packaging land. Two weeks ago I released
 [the pypackaging-native website](https://pypackaging-native.github.io/), which
 documents extensively what the most important issues are with packaging Python
 projects that contain code that needs to be compiled. It's something I had
-wanted to have for a long time, and I sincerely hope thatit'll help improve the
+wanted to have for a long time, and I sincerely hope that it'll help improve the
 quality of Python packaging design discussion. Right before that release, there
 was a large discussion on Discourse -
 [Wanting a singular packaging tool/vision ](https://discuss.python.org/t/wanting-a-singular-packaging-tool-vision/21141) -
