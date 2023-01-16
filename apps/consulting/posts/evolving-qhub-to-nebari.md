@@ -224,17 +224,22 @@ chance to collaborate and share ideas. We invite you to come by and say _hi_.
 Try out Nebari, and let us know how it goes. We look forward to seeing you in
 our community spaces!
 
-export const GoButton = () => {
+export const GoButton = ({text}) => {
 return (
+
+<div class='flex justify-center'>
 <button
-className='py-2 px-8 w-fit text-[1.8rem] font-bold leading-[3.7rem] text-white bg-violet content-center'
-onClick={() => {window.location = 'https://nebari.dev';}}>
-Get Started: nebari.dev &#8594;
+className='py-2 px-8 mt-6 w-fit text-[1.8rem] font-bold leading-[3.7rem] text-white bg-violet'
+onClick={() => {window.open('https://nebari.dev?utm_medium=web&utm_source=quansight-com&utm_content=post-evolving-qhub', '_blank');}}>
+
+{text} &nbsp; &#9654;
+
 </button>
+</div>
 )
 }
 
-<GoButton />
+<GoButton text="Get Started: nebari.dev" />
 
 [announcing qhub post]: https://quansight.com/post/announcing-qhub
 [diataxis site]: https://diataxis.fr/
