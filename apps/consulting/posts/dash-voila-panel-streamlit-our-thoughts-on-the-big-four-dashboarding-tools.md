@@ -12,12 +12,15 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 At Quansight, we use the top four Python dashboarding tools and clients often ask which one we recommend. Here’s our breakdown of each and why you might choose one over another.
 
 ## The Power of Interactive Data Visualization
 
 TLDR: There are many great interactive dashboarding options in Python, which
-should you use? Jump to the [comparison][which should i use] for our thoughts.
+should you use? Jump to the <a href="#which-one-should-i-use"
+target="_self">comparison</a> for our thoughts.
 
 It's often said that a picture is worth a thousand words, and similarly so is a
 well-crafted data visualization. It conveys a complex message quickly and
@@ -441,4 +444,3 @@ out to us for more information at connect@quansight.com.
 [using panel for data apps]: https://medium.com/@marcskovmadsen/i-prefer-to-use-panel-for-my-data-apps-here-is-why-1ff5d2b98e8f
 [voila announcement]: https://blog.jupyter.org/and-voil%C3%A0-f6a2c08a4a93
 [voila-vuetify repo]: https://github.com/voila-dashboards/voila-vuetify
-[which should i use]: #which-one-should-i-use
