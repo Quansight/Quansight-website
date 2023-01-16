@@ -421,7 +421,7 @@ out to us for more information at connect@quansight.com.
 [jupyter homepage]: https://jupyter.org/
 [jupyter-flex repo]: https://github.com/danielfrg/jupyter-flex
 [lumen repo]: https://github.com/holoviz/lumen
-[minard figure source]: https://upload.wikimedia.org/wikipedia/commons/2/29/Minard.png
+[minard figure source]: https://commons.wikimedia.org/wiki/File:Minard.png
 [nyt visualizations overview]: https://getdolphins.com/blog/interactive-data-visualizations-new-york-times/
 [oauth2-proxy docs]: https://oauth2-proxy.github.io/oauth2-proxy
 [olympic races in your neighborhood]: https://www.nytimes.com/interactive/2016/08/18/sports/olympics/olympic-races-near-you.html
