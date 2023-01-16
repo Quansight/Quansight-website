@@ -17,6 +17,8 @@ hero:
 
 ---
 
+<base target="_blank" />
+
 We’re excited to announce a new chapter for Nebari, formerly known as QHub, as
 it evolves into an independent, community-led project, with a fresh new look!
 
