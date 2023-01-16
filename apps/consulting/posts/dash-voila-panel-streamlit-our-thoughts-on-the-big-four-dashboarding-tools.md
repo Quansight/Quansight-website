@@ -123,7 +123,7 @@ dissemination of important information across an organization.
 
 ![Three-column table describing three catgories of tools and giving examples. Left: BI Tools -- Easy to use -- Setup charts & dashboards with a few clicks -- Works well with tabular data -- Tableau, Power BI. Python Tools -- Requires basic-to-moderate programming skills -- Accessible to SMEs -- Handles complicated datasets -- Ability to incorporate custom algorithms -- Plotly, HoloViews, matplotlib. Javascript Tools -- Maximum customizability -- Requires communication between SMEs and Javascript dev team -- Challenging to do quick prototypes -- Highcharts, three.js, d3.js.](/posts/dash-voila-panel-streamlit-our-thoughts-on-the-big-four-dashboarding-tools/big-four-img-2.png)
 
-# Short Detour Into Python Data Visualization Landscape
+## Short Detour Into Python Data Visualization Landscape
 
 When thinking about Python data visualization, it is useful to make the
 distinction between the core visualization libraries that let you build
