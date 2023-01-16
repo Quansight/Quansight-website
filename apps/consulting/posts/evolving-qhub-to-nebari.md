@@ -205,7 +205,7 @@ contributing paths that involve little to no code. We are actively improving and
 expanding the documentation, and making our integrations more robust.
 
 You can keep up with Nebari’s progress by keeping track of our
-[detailed roadmap][nebari governance repo] on GitHub!
+[detailed roadmap][nebari roadmap] on GitHub!
 
 ## Join Our Community!
 
@@ -257,6 +257,7 @@ onClick={() => {window.open('https://nebari.dev?utm_medium=web&utm_source=quansi
 [nebari homepage]: https://www.nebari.dev
 [nebari license]: https://github.com/nebari-dev/governance/blob/main/LICENSE
 [nebari name proposal comment]: https://github.com/nebari-dev/nebari/discussions/964#discussioncomment-1984965
+[nebari roadmap]: https://github.com/nebari-dev/governance/blob/main/roadmap.md
 [nebari typer cli post]: https://labs.quansight.org/blog/nebari-typer-cli
 [pamphile github profile]: https://github.com/tupui
 [qhub-hpc repo]: https://github.com/Quansight/qhub-hpc
