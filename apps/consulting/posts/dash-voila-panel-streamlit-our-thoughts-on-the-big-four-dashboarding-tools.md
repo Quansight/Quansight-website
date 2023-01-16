@@ -14,9 +14,30 @@ hero:
 
 <base target="_blank" />
 
+export const ContactFormButton = ({text}) => {
+return (
+
+<div class='flex justify-center'>
+<button
+className='py-2 px-8 mt-6 w-fit text-[1.8rem] font-bold leading-[3.7rem] text-white bg-violet'
+onClick={() => {window.location = '/visualization-dashboards#bookacallform';}}>
+
+{text} &nbsp; &#9654;
+
+</button>
+</div>
+)
+}
+
 At Quansight, we use the top four Python dashboarding tools and clients often
-ask which one we recommend. Here’s our breakdown of each and why you might
-choose one over another.
+ask which one we recommend. This post provides our breakdown of each and why you
+might choose one over another.
+
+If you need someone to build—or show you how to build—an integrated
+visualization workflow to better understand your data, Quansight can help. Reach
+out to us for more information:
+
+<ContactFormButton text="Contact Us"/>
 
 ## The Power of Interactive Data Visualization
 
@@ -410,9 +431,11 @@ have built in options of varying maturity.
 
 ![Four-column table titled "Bottom Line" --- (column 1) Voila -- Low effort -- Jupyter-focused -- Doesn't scale -- Requires front-end engineer to pre-build templates -- Single-page apps --- (column 2) Streamlit -- Low effort -- Editor-focused -- No Jupyter support -- Doesn't scale -- Mostly single-page apps --- (column 3) Plotly | Dash -- Medium effort -- Jupyter possible -- Requires front-end engineers -- Handles Big Data with some work -- Scales well -- Multi-page apps with front-end engineer support --- (column 4) Panel -- Easy to start, medium effort for complex apps -- Robust Jupyter & non-Jupyter support -- Robust Big Data support -- Scales well -- Multi-page apps can be built by SMEs](/posts/dash-voila-panel-streamlit-our-thoughts-on-the-big-four-dashboarding-tools/big-four-img-4.png)
 
-If you need someone to build—or show you how to build—an integrated
-visualization workflow to better understand your data, Quansight can help. Reach
-out to us for more information at connect@quansight.com.
+As we said at the top of the post, if you need someone to build—or show you how
+to build—an integrated visualization workflow to better understand your data,
+Quansight can help. Reach out to us for more information:
+
+<ContactFormButton text="Contact Us" />
 
 [containds docs]: https://cdsdashboards.readthedocs.io/en/stable/
 [dash announcement]: https://medium.com/plotly/introducing-dash-5ecf7191b503
