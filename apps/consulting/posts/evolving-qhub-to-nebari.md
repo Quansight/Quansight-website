@@ -77,7 +77,7 @@ Nebari has been completely open source since day one, though to date it has been
 primarily developed by Quansight. We believe it has reached a maturity level
 where a community-first approach to Nebari’s development and governance is
 essential for its long-term sustainability. This is a core part of [Quansight’s
-mission of “Building a Sustainable Open Source Ecosystem”][quansight about us].
+mission of “Building a Sustainable Open Source Ecosystem][quansight about us].”
 
 ## Governance That Supports Our Community
 
