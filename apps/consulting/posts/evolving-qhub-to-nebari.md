@@ -42,7 +42,7 @@ Nebari is a quick-to-setup JupyterHub-based platform, where data science teams
 can work and collaborate effectively.
 
 You can set up (both configure and deploy) Nebari for your team with a single
-YAML file, on [any major public cloud provider][nebari core repo] or your [local
+YAML file, on [any major public cloud provider][nebari core repo readme] or your [local
 HPC cluster][qhub-hpc repo]. Nebari has been developed with a DevOps-first
 mindset, and it comes with
 [several tools & integrations pre-configured][nebari homepage], including Dask
@@ -249,7 +249,7 @@ onClick={() => {window.open('https://nebari.dev?utm_medium=web&utm_source=quansi
 [irina website]: https://irinafumarel.ro/
 [nebari community docs]: https://www.nebari.dev/docs/community/
 [nebari community meetings info]: https://www.nebari.dev/docs/community#community-meetings
-[nebari core repo]: https://github.com/nebari-dev/nebari
+[nebari core repo readme]: https://github.com/nebari-dev/nebari#readme
 [nebari design repo]: https://github.com/nebari-dev/nebari-design
 [nebari design theme]: https://www.compai.pub/v1/theme/59f11df0f1e0bd488afb0fd67f5df15b5305b8c7d7e889e8b638e6cb8aca321f
 [nebari github org]: https://github.com/nebari-dev
