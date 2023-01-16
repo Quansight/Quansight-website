@@ -14,7 +14,9 @@ hero:
 
 <base target="_blank" />
 
-At Quansight, we use the top four Python dashboarding tools and clients often ask which one we recommend. Here’s our breakdown of each and why you might choose one over another.
+At Quansight, we use the top four Python dashboarding tools and clients often
+ask which one we recommend. Here’s our breakdown of each and why you might
+choose one over another.
 
 ## The Power of Interactive Data Visualization
 
