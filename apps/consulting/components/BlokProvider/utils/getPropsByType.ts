@@ -19,6 +19,7 @@ import { getTeamProps } from '../mappers/getTeamProps';
 import { getTeaserProps } from '../mappers/getTeaserProps';
 import { getTestimonialProps } from '../mappers/getTestimonialProps';
 import { getTextArticleProps } from '../mappers/getTextArticleProps';
+import { getVideoProps } from '../mappers/getVideoProps';
 import { ComponentType, TBlokComponentProps } from '../types';
 
 export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
@@ -82,6 +83,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.TextArticle: {
       return getTextArticleProps(blok);
+    }
+    case ComponentType.Video: {
+      return getVideoProps(blok);
     }
     default:
       return null;
