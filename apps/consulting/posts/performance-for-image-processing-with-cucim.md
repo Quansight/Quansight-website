@@ -171,8 +171,8 @@ The necessary changes typically involve:
    the following table:
 
 <BlogTable
-tableDivClass='w-2/5'
-headings={['CPU Module', 'GPU Module']}
+tableDivClassName='w-2/5'
+headingData={['CPU Module', 'GPU Module']}
 tableData={[
 [<code>numpy</code>, <code>cupy</code>],
 [<code>scipy</code>, <code>cupyx.scipy</code>],

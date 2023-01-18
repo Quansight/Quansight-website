@@ -54,8 +54,8 @@ export const BlogTableRow: FC<TBlogTableRowProps> = ({
 };
 
 export const BlogTable: FC<TBlogTableProps> = ({
-  tableDivClass = 'w-2/5',
-  headings = ['Heading 1', 'Heading 2'],
+  tableDivClassName = 'w-2/5',
+  headingData = ['Heading 1', 'Heading 2'],
   tableData = [
     ['Cell 1,1', 'Cell 1,2'],
     ['Cell 2,1', 'Cell 2,2'],
@@ -75,12 +75,12 @@ export const BlogTable: FC<TBlogTableProps> = ({
   );
 
   return (
-    <div className="flex pl-16 md:justify-center md:pl-0 justify-left">
-      <div className={tableDivClass}>
+    <div className="flex pl-16 md:justify-center md:pl-0 justify-left ">
+      <div className={tableDivClassName}>
         <table className="table-fixed">
           <thead>
             <BlogTableHeaderRow
-              rowData={headings}
+              rowData={headingData}
               cellClassName={headingCellClassName}
             />
           </thead>
