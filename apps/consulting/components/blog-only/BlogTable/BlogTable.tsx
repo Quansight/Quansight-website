@@ -39,17 +39,15 @@ export const BlogTableRow: FC<TBlogTableRowProps> = ({
   rowIndex,
   cellClassName,
 }) => {
-  return (
-    <tr>
-      {dataRowArray.map((cellData: string, colIndex: number) => (
-        <BlogTableCell
-          data={cellData}
-          className={cellClassName}
-          key={`cell-row${rowIndex}-col${colIndex}`}
-        />
-      ))}
-    </tr>
-  );
+  const rowItems = dataRowArray.map((cellData: string, colIndex: number) => (
+    <BlogTableCell
+      data={cellData}
+      className={cellClassName}
+      key={`cell-row${rowIndex}-col${colIndex}`}
+    />
+  ));
+
+  return <tr>{rowItems}</tr>;
 };
 
 export const BlogTable: FC<TBlogTableProps> = ({
@@ -62,6 +60,17 @@ export const BlogTable: FC<TBlogTableProps> = ({
   headingCellClass = 'pl-8 pr-12 w-64',
   regularCellClass = 'px-12',
 }) => {
+  const rowsItems = data.map(
+    (dataRowArray: Array<string>, rowIndex: number) => (
+      <BlogTableRow
+        dataRowArray={dataRowArray}
+        rowIndex={rowIndex}
+        cellClassName={regularCellClass}
+        key={`row${rowIndex}`}
+      />
+    ),
+  );
+
   return (
     <div className="flex pl-16 md:justify-center md:pl-0 justify-left">
       <div className={tableDivClass}>
@@ -73,14 +82,7 @@ export const BlogTable: FC<TBlogTableProps> = ({
             />
           </thead>
           <tbody>
-            {data.map((dataRowArray: Array<string>, rowIndex: number) => (
-              <BlogTableRow
-                dataRowArray={dataRowArray}
-                rowIndex={rowIndex}
-                cellClassName={regularCellClass}
-                key={`row${rowIndex}`}
-              />
-            ))}
+            {rowsItems}
             <tr className="h-0">
               {/* This adds the bottom border line to the table */}
             </tr>
