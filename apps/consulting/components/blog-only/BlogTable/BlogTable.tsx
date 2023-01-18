@@ -1,23 +1,21 @@
 import { FC } from 'react';
 
-export type TBlogTableHeaderCell = {
-  data: string;
-  className: string;
-};
+import {
+  TBlogTableHeaderCellProps,
+  TBlogTableHeaderRowProps,
+  TBlogTableCellProps,
+  TBlogTableRowProps,
+  TBlogTableProps,
+} from './types';
 
-export const BlogTableHeaderCell: FC<TBlogTableHeaderCell> = ({
+export const BlogTableHeaderCell: FC<TBlogTableHeaderCellProps> = ({
   data,
   className,
 }) => {
   return <th className={className}>{data}</th>;
 };
 
-export type TBlogTableHeaderRow = {
-  dataArray: Array<string>;
-  cellClassName: string;
-};
-
-export const BlogTableHeaderRow: FC<TBlogTableHeaderRow> = ({
+export const BlogTableHeaderRow: FC<TBlogTableHeaderRowProps> = ({
   dataArray,
   cellClassName,
 }) => {
@@ -32,22 +30,11 @@ export const BlogTableHeaderRow: FC<TBlogTableHeaderRow> = ({
   return <tr>{rowItems}</tr>;
 };
 
-export type TBlogTableCell = {
-  data: string;
-  className: string;
-};
-
-export const BlogTableCell: FC<TBlogTableCell> = ({ data, className }) => {
+export const BlogTableCell: FC<TBlogTableCellProps> = ({ data, className }) => {
   return <td className={className}>{data}</td>;
 };
 
-export type TBlogTableRow = {
-  dataRowArray: Array<string>;
-  rowIndex: number;
-  cellClassName: string;
-};
-
-export const BlogTableRow: FC<TBlogTableRow> = ({
+export const BlogTableRow: FC<TBlogTableRowProps> = ({
   dataRowArray,
   rowIndex,
   cellClassName,
@@ -63,14 +50,6 @@ export const BlogTableRow: FC<TBlogTableRow> = ({
       ))}
     </tr>
   );
-};
-
-export type TBlogTableProps = {
-  tableDivClass: string; // For <div> surrounding the table
-  headings: Array<string>; // Text for <th> header cells
-  data: Array<Array<string>>; //  Text for <td> regular cells
-  headingCellClass: string; // Class for <th> cells
-  regularCellClass: string; // Class for <td> cells
 };
 
 export const BlogTable: FC<TBlogTableProps> = ({
