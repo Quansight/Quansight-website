@@ -8,7 +8,7 @@ import { BlogTable } from '../../components/blog-only/BlogTable/BlogTable';
 
 export const blogAllowedComponents = {
   BlogCTAButton,
-  Picture,
-  CH,
   BlogTable,
+  CH,
+  Picture,
 };
