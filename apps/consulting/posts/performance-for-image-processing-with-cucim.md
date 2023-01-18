@@ -171,7 +171,7 @@ The necessary changes typically involve:
    the following table:
 
 <BlogTable
-tableWidth='2/5'
+tableDivClass='w-2/5'
 headings={['CPU Module', 'GPU Module']}
 data={[
 [<code>numpy</code>, <code>cupy</code>],
