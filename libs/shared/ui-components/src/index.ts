@@ -53,3 +53,6 @@ export * from './Footer/types';
 
 export * from './Logos/Logos';
 export * from './Logos/types';
+
+export * from './Video/Video';
+export * from './Video/types';
