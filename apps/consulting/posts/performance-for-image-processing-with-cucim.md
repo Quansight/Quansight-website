@@ -173,7 +173,7 @@ The necessary changes typically involve:
 <BlogTable
 tableDivClass='w-2/5'
 headings={['CPU Module', 'GPU Module']}
-data={[
+tableData={[
 [<code>numpy</code>, <code>cupy</code>],
 [<code>scipy</code>, <code>cupyx.scipy</code>],
 [<code>skimage</code>, <code>cucim.skimage</code>],

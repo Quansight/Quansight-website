@@ -1,20 +1,20 @@
 export type TBlogTableHeaderCellProps = {
-  data: string;
-  className: string;
+  cellData: string;
+  cellClassName: string;
 };
 
 export type TBlogTableHeaderRowProps = {
-  dataArray: Array<string>;
+  rowData: Array<string>;
   cellClassName: string;
 };
 
 export type TBlogTableCellProps = {
-  data: string;
-  className: string;
+  cellData: string;
+  cellClassName: string;
 };
 
 export type TBlogTableRowProps = {
-  dataRowArray: Array<string>;
+  rowData: Array<string>;
   rowIndex: number;
   cellClassName: string;
 };
@@ -22,7 +22,7 @@ export type TBlogTableRowProps = {
 export type TBlogTableProps = {
   tableDivClass: string; // For <div> surrounding the table
   headings: Array<string>; // Text for <th> header cells
-  data: Array<Array<string>>; //  Text for <td> regular cells
-  headingCellClass: string; // Class for <th> cells
-  regularCellClass: string; // Class for <td> cells
+  tableData: Array<Array<string>>; //  Text for <td> regular cells
+  headingCellClassName: string; // Class for <th> cells
+  regularCellClassName: string; // Class for <td> cells
 };

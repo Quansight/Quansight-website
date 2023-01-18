@@ -9,63 +9,66 @@ import {
 } from './types';
 
 export const BlogTableHeaderCell: FC<TBlogTableHeaderCellProps> = ({
-  data,
-  className,
+  cellData,
+  cellClassName,
 }) => {
-  return <th className={className}>{data}</th>;
+  return <th className={cellClassName}>{cellData}</th>;
 };
 
 export const BlogTableHeaderRow: FC<TBlogTableHeaderRowProps> = ({
-  dataArray,
+  rowData,
   cellClassName,
 }) => {
-  const rowItems = dataArray.map((dataValue: string, index: number) => (
+  const rowCells = rowData.map((cellValue: string, index: number) => (
     <BlogTableHeaderCell
-      data={dataValue}
-      className={cellClassName}
+      cellData={cellValue}
+      cellClassName={cellClassName}
       key={`hdr-col-${index}`}
     />
   ));
 
-  return <tr>{rowItems}</tr>;
+  return <tr>{rowCells}</tr>;
 };
 
-export const BlogTableCell: FC<TBlogTableCellProps> = ({ data, className }) => {
-  return <td className={className}>{data}</td>;
+export const BlogTableCell: FC<TBlogTableCellProps> = ({
+  cellData,
+  cellClassName,
+}) => {
+  return <td className={cellClassName}>{cellData}</td>;
 };
 
 export const BlogTableRow: FC<TBlogTableRowProps> = ({
-  dataRowArray,
+  rowData,
   rowIndex,
   cellClassName,
 }) => {
-  const rowItems = dataRowArray.map((cellData: string, colIndex: number) => (
+  const rowCells = rowData.map((cellData: string, colIndex: number) => (
     <BlogTableCell
-      data={cellData}
-      className={cellClassName}
+      cellData={cellData}
+      cellClassName={cellClassName}
       key={`cell-row${rowIndex}-col${colIndex}`}
     />
   ));
 
-  return <tr>{rowItems}</tr>;
+  return <tr>{rowCells}</tr>;
 };
 
 export const BlogTable: FC<TBlogTableProps> = ({
   tableDivClass = 'w-2/5',
   headings = ['Heading 1', 'Heading 2'],
-  data = [
+  tableData = [
     ['Cell 1,1', 'Cell 1,2'],
     ['Cell 2,1', 'Cell 2,2'],
   ],
-  headingCellClass = 'pl-8 pr-12 w-64',
-  regularCellClass = 'px-12',
+  headingCellClassName = 'pl-8 pr-12 w-64',
+  regularCellClassName = 'px-12',
 }) => {
-  const rowsItems = data.map(
-    (dataRowArray: Array<string>, rowIndex: number) => (
+  const rowsItems = tableData.map(
+    (rowData: Array<string>, rowIndex: number) => (
       <BlogTableRow
-        dataRowArray={dataRowArray}
+        rowData={rowData}
         rowIndex={rowIndex}
-        cellClassName={regularCellClass}
+        cellClassName={regularCellClassName}
         key={`row${rowIndex}`}
       />
     ),
@@ -77,8 +80,8 @@ export const BlogTable: FC<TBlogTableProps> = ({
         <table className="table-fixed">
           <thead>
             <BlogTableHeaderRow
-              dataArray={headings}
-              cellClassName={headingCellClass}
+              rowData={headings}
+              cellClassName={headingCellClassName}
             />
           </thead>
           <tbody>
