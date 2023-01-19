@@ -53,7 +53,7 @@ Pretty, right :-) ?
 
 This enhancement was made possible by the work of
 [Colin Duquesnoy](https://github.com/ColinDuquesnoy),
-[Daniel Pizzeta](https://github.com/DPizzeta)
+[Daniel Pizzeta](https://github.com/dpizetta)
 and their [QDarkStyle](https://github.com/ColinDuquesnoy/QDarkStyleSheet/)
 package. The Spyder team is now actively collaborating with Colin and Daniel
 to pursue the release of QDarkStyle 3.x, which will be using Spyder's
