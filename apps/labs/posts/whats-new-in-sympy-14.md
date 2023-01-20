@@ -3,7 +3,7 @@ title: "What's New in SymPy 1.4"
 published: May 5, 2019
 author: aaron-meurer
 description: "SymPy 1.4 was released on April 9, 2019. In this post, I'd like to go over some of the highlights for this release."
-category: [PyData Ecosystem]
+category: [PyData ecosystem]
 featuredImage:
   src: /posts/whats-new-in-sympy-14/blog_feature_org.svg
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
@@ -56,7 +56,7 @@ do the release itself.
 # Automatic LaTeX rendering in the Jupyter notebook
 
 Prior to SymPy 1.4, SymPy expressions in the notebook rendered by default with their
- string representation. To get `LaTeX` output, you had to call `init_printing()`:
+string representation. To get `LaTeX` output, you had to call `init_printing()`:
 
 ![Code snippet in an interactive Jupyter session showing the usage of init_printing in SymPy 1.3 for LaTeX.](/posts/whats-new-in-sympy-14/sympy-1.3-notebook.png)
 
@@ -118,7 +118,11 @@ If your [browser supports MathML](https://caniuse.com/#feat=mathml) (at the
 time of writing, only Firefox and Safari), you should see the above
 presentation form for `Integral(exp(-x**2), (x, -oo, oo))` below:
 
-<math style="display: block;"><mrow><msubsup><mo>&#x222B;</mo><mrow><mo>-</mo><mi>&#x221E;</mi></mrow><mi>&#x221E;</mi></msubsup><msup><mi>&ExponentialE;</mi><mrow><mo>-</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msup><mo>&dd;</mo><mi>x</mi></mrow></math>
+<math style={{display: 'block'}}>
+<mrow><msubsup><mo>&#x222B;</mo><mrow><mo>-</mo><mi>&#x221E;</mi></mrow><mi>&#x221E;</mi></msubsup><msup><mi>&ExponentialE;</mi><mrow><mo>-</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msup><mo>&dd;</mo><mi>x</mi></mrow>
+</math>
+
+<br />
 
 # Improvements to solvers
 
@@ -154,7 +158,7 @@ algebraically:
 ```
 
 `'nth_order_reducible'` solves ODEs that only involve derivatives of `f(x)`,
-via the substitution $g(x)=f^{(n)}(x)$.
+via the substitution $g(x)=f^\{(n)\}(x)$.
 
 ```pycon
 >>> eq = Eq(Derivative(f(x), (x, 2)) + x*Derivative(f(x), x), x)
