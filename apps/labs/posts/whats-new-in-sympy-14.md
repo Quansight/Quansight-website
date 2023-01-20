@@ -14,7 +14,7 @@ hero:
 
 As of November, 2018, I have been working at
 [Quansight](https://www.quansight.com/), under the heading of [Quansight
-Labs](https://www.quansight.com/labs). Quansight Labs is a public-benefit
+Labs](https://labs.quansight.org). Quansight Labs is a public-benefit
 division of Quansight. It provides a home for a "PyData Core Team" which
 consists of developers, community managers, designers, and documentation
 writers who build open-source technology and grow open-source communities
