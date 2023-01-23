@@ -14,21 +14,6 @@ hero:
 
 <base target="_blank" />
 
-export const ContactFormButton = ({text}) => {
-return (
-
-<div class='flex justify-center'>
-<button
-className='py-2 px-8 mt-6 w-fit text-[1.8rem] font-bold leading-[3.7rem] text-white bg-violet'
-onClick={() => {window.location = '/visualization-dashboards#bookacallform';}}>
-
-{text} &nbsp; &#9654;
-
-</button>
-</div>
-)
-}
-
 At Quansight, we use the top four Python dashboarding tools and clients often
 ask which one we recommend. Here’s our breakdown of each and why you might
 choose one over another.
@@ -429,7 +414,11 @@ As we said at the top of the post, if you need someone to build—or show you ho
 to build—an integrated visualization workflow to better understand your data,
 Quansight can help. Reach out to us for more information:
 
-<ContactFormButton text="Contact Us" />
+<BlogCTAButton
+text="Contact Us"
+url="/visualization-dashboards#bookacallform"
+target="_self"
+/>
 
 [containds docs]: https://cdsdashboards.readthedocs.io/en/stable/
 [dash announcement]: https://medium.com/plotly/introducing-dash-5ecf7191b503
