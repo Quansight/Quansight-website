@@ -170,43 +170,17 @@ The necessary changes typically involve:
 2. Replace functions imported from CPU-based library with GPU equivalents as in
    the following table:
 
-<div class="flex md:justify-center md:pl-0 justify-left pl-16">
-  <div class="w-2/5">
-    <table class="table-fixed">
-      <thead>
-        <tr>
-          <th class="pl-8 pr-12 w-64">CPU Module</th>
-          <th class="pl-8 pr-12 w-64">GPU Module</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="px-12"><code>numpy</code></td>
-          <td class="px-12"><code>cupy</code></td>
-        </tr>
-        <tr>
-          <td class="px-12"><code>scipy</code></td>
-          <td class="px-12"><code>cupyx.scipy</code></td>
-        </tr>
-        <tr>
-          <td class="px-12"><code>skimage</code></td>
-          <td class="px-12"><code>cucim.skimage</code></td>
-        </tr>
-        <tr>
-          <td class="px-12"><code>sklearn</code></td>
-          <td class="px-12"><code>cuml</code></td>
-        </tr>
-        <tr>
-          <td class="px-12"><code>networkx</code></td>
-          <td class="px-12"><code>cugraph</code></td>
-        </tr>
-        <tr class="h-0">
-          {/* This adds the bottom border line to the table */}
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<BlogTable
+tableDivClassName='w-2/5'
+headingData={['CPU Module', 'GPU Module']}
+tableData={[
+[<code>numpy</code>, <code>cupy</code>],
+[<code>scipy</code>, <code>cupyx.scipy</code>],
+[<code>skimage</code>, <code>cucim.skimage</code>],
+[<code>sklearn</code>, <code>cuml</code>],
+[<code>networkx</code>, <code>cugraph</code>]
+]}
+/>
 
 3. Use `cupy.asnumpy` to transfer results back to the host for plotting with
    Matplotlib or other visualization libraries or to save results to disk.
