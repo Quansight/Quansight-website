@@ -42,12 +42,12 @@ Nebari is a quick-to-setup JupyterHub-based platform, where data science teams
 can work and collaborate effectively.
 
 You can set up (both configure and deploy) Nebari for your team with a single
-YAML file, on [any major public cloud provider][nebari core repo readme] or your [local
-HPC cluster][qhub-hpc repo]. Nebari has been developed with a DevOps-first
-mindset, and it comes with
-[several tools & integrations pre-configured][nebari homepage], including Dask
-for scalability, reproducible environments, and features for sharing dashboards,
-so that your team can use it out-of-the-box.
+YAML file, on [any major public cloud provider][nebari core repo readme] or your
+[local HPC cluster][qhub-hpc repo]. Nebari has been developed with a
+DevOps-first mindset, and it comes with
+[several tools & integrations pre-configured][nebari homepage (what is nebari)],
+including Dask for scalability, reproducible environments, and features for
+sharing dashboards, so that your team can use it out-of-the-box.
 
 <img
 src="/posts/evolving-qhub-to-nebari/2-nebari-cloud-architecture.svg"
@@ -171,16 +171,16 @@ will soon add the design guidelines and a broader color palette!
 
 ## How Far We Have Come, and What’s Next
 
-Nebari has come a long way since its [official launch in 2020]announcing qhub
-post! It currently supports all major cloud providers: Amazon Web Services
-(AWS), Google Cloud Provider (GCP), Azure, and Digital Ocean; as well as local
-HPC clusters.
+Nebari has come a long way since its
+[official launch in 2020][announcing qhub post]! It currently supports all major
+cloud providers: Amazon Web Services (AWS), Google Cloud Provider (GCP), Azure,
+and Digital Ocean; as well as local HPC clusters.
 
 In preparation for the rename and change of governance, we spent the last few
 months focusing on improving the user and developer experiences. For example, we
 did a complete documentation re-write and re-structure. Nebari now follows the
 [Diátaxis][diataxis site] framework, and has a new website built using
-Docusaurus and hosted at [nebari.dev][nebari homepage].
+Docusaurus and hosted at [nebari.dev][nebari homepage (how far we've come)].
 
 We updated Nebari’s command line interface (CLI) using Typer and Rich for a
 better user experience. We also created a new “Guided Init” wizard for new users
@@ -231,7 +231,7 @@ text="Get Started: nebari.dev"
 url="https://nebari.dev?utm_campaign=post-evolving-qhub-to-nebari&utm_medium=web&utm_source=quansight-com&utm_content=cta-button"
 />
 
-[announcing qhub post]: https://quansight.com/post/announcing-qhub
+[announcing qhub post]: /post/announcing-qhub
 [diataxis site]: https://diataxis.fr/
 [dogfooding @ wik]: https://en.wikipedia.org/wiki/Eating_your_own_dog_food
 [irina website]: https://irinafumarel.ro/
@@ -242,7 +242,8 @@ url="https://nebari.dev?utm_campaign=post-evolving-qhub-to-nebari&utm_medium=web
 [nebari design theme]: https://www.compai.pub/v1/theme/59f11df0f1e0bd488afb0fd67f5df15b5305b8c7d7e889e8b638e6cb8aca321f
 [nebari github org]: https://github.com/nebari-dev
 [nebari governance repo]: https://github.com/nebari-dev/governance
-[nebari homepage]: https://www.nebari.dev
+[nebari homepage (how far we've come)]: https://nebari.dev?utm_campaign=post-evolving-qhub-to-nebari&utm_medium=web&utm_source=quansight-com&utm_content=how-far-weve-come
+[nebari homepage (what is nebari)]: https://nebari.dev?utm_campaign=post-evolving-qhub-to-nebari&utm_medium=web&utm_source=quansight-com&utm_content=what-is-nebari
 [nebari license]: https://github.com/nebari-dev/governance/blob/main/LICENSE
 [nebari name proposal comment]: https://github.com/nebari-dev/nebari/discussions/964#discussioncomment-1984965
 [nebari roadmap]: https://github.com/nebari-dev/governance/blob/main/roadmap.md
