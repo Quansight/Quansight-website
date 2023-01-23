@@ -1,10 +1,6 @@
 import { FC } from 'react';
 
-export type TBlogCTAButtonProps = {
-  text: string; // text to display on button
-  url: string; // destination URL for onClick
-  target?: string; // <a> target value (e.g., _blank, _self, ...)
-};
+import { TBlogCTAButtonProps } from './types';
 
 export const BlogCTAButton: FC<TBlogCTAButtonProps> = ({
   text,
