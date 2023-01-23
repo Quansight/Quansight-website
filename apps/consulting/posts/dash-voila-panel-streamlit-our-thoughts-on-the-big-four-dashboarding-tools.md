@@ -30,14 +30,8 @@ onClick={() => {window.location = '/visualization-dashboards#bookacallform';}}>
 }
 
 At Quansight, we use the top four Python dashboarding tools and clients often
-ask which one we recommend. This post provides our breakdown of each and why you
-might choose one over another.
-
-If you need someone to build—or show you how to build—an integrated
-visualization workflow to better understand your data, Quansight can help. Reach
-out to us for more information:
-
-<ContactFormButton text="Contact Us"/>
+ask which one we recommend. Here’s our breakdown of each and why you might
+choose one over another.
 
 ## The Power of Interactive Data Visualization
 
