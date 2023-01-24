@@ -26,7 +26,7 @@ With that out of the way, I'd like to present some improvements the Quansight te
 
 ## Progress on Integration
 ### `uarray` ❤️ `scipy.fft`
-`uarray` is now the [official override mechanism](http://scipy.github.io/devdocs/fft.html#backend-control) for `scipy.fft`. This is a *huge* win.
+`uarray` is now the [official override mechanism](https://scipy.github.io/devdocs/reference/fft.html#backend-control) for `scipy.fft`. This is a *huge* win.
 
 ### NEP-31 merged with draft status
 Already discussed above, but [NEP-31](https://numpy.org/neps/nep-0031-uarray.html) is available on the NumPy website in draft form.
