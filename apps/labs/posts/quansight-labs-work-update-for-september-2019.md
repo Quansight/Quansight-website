@@ -5,7 +5,7 @@ author: aaron-meurer
 description: 'In this post, I will detail some of the open source work that I have done
 recently, both as part of my open source consulting, and as part of my work on
 SymPy for Quansight Labs.'
-category:
+category: [PyData ecosystem]
 featuredImage:
   src: /posts/quansight-labs-work-update-for-september-2019/blog_feature_org.svg
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
