@@ -64,6 +64,8 @@ at the possibility of creating different types of projects. Currently Spyder
 provides an "empty project" project type.
 
 ![Project creation](/posts/tdk-partners-with-quansight-labs/spyder-project-creation.png)
+
+<img src = "/posts/tdk-partners-with-quansight-labs/spyder-project-creation.png" alt = "Project creation." />
  
 This feature will:
 
