@@ -19,7 +19,7 @@ As of November, 2018, I have been working at
 the same people who started Anaconda, which aims to connect companies and open
 source communities, and offers consulting, training, support and mentoring
 services. I work under the heading of [Quansight
-Labs](https://www.quansight.com/labs). Quansight Labs is a public-benefit
+Labs](https://labs.quansight.org). Quansight Labs is a public-benefit
 division of Quansight. It provides a home for a "PyData Core Team" which
 consists of developers, community managers, designers, and documentation
 writers who build open-source technology and grow open-source communities
@@ -376,6 +376,6 @@ working on improving this, so that she can focus on the technical writing
 aspects of our documentation.
 
 Lauren has created a draft style guide for documentation at
-https://github.com/sympy/sympy/wiki/SymPy-Documentation-Style-Guide. Please
+https://docs.sympy.org/latest/contributing/documentation-style-guide.html. Please
 take a moment to look at it and if you have any feedback on it, [email
 me](mailto:asmeurer@quansight.com) or write to the SymPy mailing list.
