@@ -1,7 +1,7 @@
 ---
 title: 'Measuring API usage for popular numerical and scientific libraries'
 published: May 27, 2019
-author: christopher-ostrouchov
+author: chris-ostrouchov
 description: 'Developers of open source software often have a difficult time understanding how others utilize their libraries. Having better data of when and how functions are being used has many benefits.'
 category: [Developer workflows]
 featuredImage:
