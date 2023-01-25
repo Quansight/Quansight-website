@@ -116,8 +116,8 @@ On an off week, between our normal syncs, we tested a low-code format for folks
 to participate in the Jupyter project.  During an hour, four people were
 included in the project by suggesting changes to alt text for images in the
 JupyterLab documentation (https://github.com/isabela-pf/jupyterlab/pull/1),
-resulting in a collaborative commit to mainline with the help of @krassowski
-and @isabela-pf as champions for the shared
+resulting in a collaborative commit to mainline with the help of [@krassowski](https://github.com/krassowski)
+and [@isabela-pf](https://github.com/isabela-pf) as champions for the shared
 work.(https://github.com/jupyterlab/jupyterlab/pull/10670)
 
 We consider this event a success because we were able to remove `git` as a
