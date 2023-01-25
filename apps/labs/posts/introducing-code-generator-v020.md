@@ -5,10 +5,10 @@ author: victor-fomin
 description: 'PyTorch-Ignite is one such practical solution, a high-level library from the PyTorch ecosystem for training neural networks designed to simplify workflow development while maintaining maximum control, flexibility, and reproducibility. PyTorch-Ignite feels like a natural extension to PyTorch.'
 category: [Machine Learning]
 featuredImage:
-  src: /posts/introducing-code-generator-v020/blog_hero_var1
+  src: /posts/introducing-code-generator-v020/blog_feature_var2
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
-  imageSrc: /posts/introducing-code-generator-v020/blog_feature_var2
+  imageSrc: /posts/introducing-code-generator-v020/blog_hero_var1
   imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
