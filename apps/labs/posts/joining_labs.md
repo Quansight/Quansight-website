@@ -3,7 +3,7 @@ title: 'Thoughts on joining Quansight Labs'
 published: April 8, 2019
 author: ralf-gommers
 description: "Ralf Gommers's thoughts on joining Quansight Labs as its director, and his perspectives for pushing forward the Python ecosystem for scientific computing and data science, and how to fund it."
-category: [Community, PyData Ecosystem]
+category: [Community, PyData ecosystem]
 featuredImage:
   src: /posts/joining_labs/community_landscape.png
   alt: 'Image of a word cloud emphasizing the interrelationship of Projects with Assets, Funding and Community.'
