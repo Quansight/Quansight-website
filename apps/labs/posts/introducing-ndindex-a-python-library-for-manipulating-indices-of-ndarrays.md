@@ -3,7 +3,7 @@ title: 'Introducing ndindex, a Python library for manipulating indices of ndarra
 published: April 4, 2020
 author: aaron-meurer
 description: 'ndindex is a new library that provides high level objects representing the various objects that can index NumPy arrays. These objects automatically canonicalize under the assumption of NumPy indexing semantics, and can be manipulated with a uniform API. All ndindex types have a .args that can be used to access the arguments used to create the object, and they are all hashable.'
-category: [PyData Ecosystem]
+category: [PyData ecosystem]
 featuredImage:
   src: /posts/introducing-ndindex-a-python-library-for-manipulating-indices-of-ndarrays/blog_feature_var1.svg
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
@@ -160,7 +160,7 @@ The following things are not yet implemented, but are planned.
   indexin](https://numpy.org/neps/nep-0021-advanced-indexing.html).
 
 And more. If there is something you would like to see this library be able to
-do, please [open an issue](https://github.com/quansight/ndindex/issues). Pull
+do, please [open an issue](https://github.com/Quansight-Labs/ndindex/issues). Pull
 requests are welcome as well.
 
 ## Testing and correctness
@@ -219,7 +219,7 @@ There are two primary types of tests that ndindex employs to verify this:
   ```
 
   `check_same` is a [helper
-  function](https://github.com/Quansight/ndindex/blob/f8706a6fb6ffac879a0863cb93243f9bb14e6487/ndindex/tests/helpers.py#L60-L82)
+  function](https://github.com/Quansight-Labs/ndindex/blob/f8706a6fb6ffac879a0863cb93243f9bb14e6487/ndindex/tests/helpers.py#L60-L82)
   that ensures that two indices give either the exact same subarray or raise
   the exact same exception. The test checks all `a[start:stop:step]` where
   `a` is an array with shape from 0 to 10, and `start`, `stop`, and `step`
@@ -319,10 +319,10 @@ You can install ndindex with pip or from conda-forge
 
     conda install -c conda-forge ndindex
 
-The documentation can be found [here](https://quansight.github.io/ndindex/),
-and the development is on [GitHub](https://github.com/Quansight/ndindex).
+The documentation can be found [here](https://quansight-labs.github.io/ndindex/),
+and the development is on [GitHub](https://github.com/Quansight-Labs/ndindex).
 Please try the library out and
-[report](https://github.com/Quansight/ndindex/issues) any issues you have, or
+[report](https://github.com/Quansight-Labs/ndindex/issues) any issues you have, or
 things you would like to see implemented. We are also looking for people who
 are interested in using the library and for people who are interested in
 contributing to it.
