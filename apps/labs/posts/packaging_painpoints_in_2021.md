@@ -127,7 +127,7 @@ _RG: This would be so helpful. Not being able to mix `defaults` and `conda-forge
     - Also conda is never the default in CI so you need to do quite a bit of manipulation on some platforms
 - Confusion in the community over the new Anaconda ToS
 
-_RG: Anaconda has done the right thing here imho: make large institutional users pay if they use the `defaults` channel. Packaging is hard and labour-intensive, and having a sustainable revenue stream to offset the cost of packaging difficult libraries, maintaining core tooling like `conda-build`, and serving packages to millions of users is important. Conda-forge and all other channels are still completely free. Unfortunately Anaconda communicated that very poorly, which led to unnecessary confusion. See [this blog posts from the conda-forge team](https://conda-forge.org/blog/posts/January 24, 2021
+_RG: Anaconda has done the right thing here imho: make large institutional users pay if they use the `defaults` channel. Packaging is hard and labour-intensive, and having a sustainable revenue stream to offset the cost of packaging difficult libraries, maintaining core tooling like `conda-build`, and serving packages to millions of users is important. Conda-forge and all other channels are still completely free. Unfortunately Anaconda communicated that very poorly, which led to unnecessary confusion. See [this blog posts from the conda-forge team](https://conda-forge.org/blog/posts/2020-11-20-anaconda-tos/)
 
 - There's no way to distinguish packages that provide the same binaries, e.g., `turbojpeg` vs. `libjpeg`, both package `libjpeg`
 - Need to separate metadata (especially dependencies) from packages.
@@ -161,7 +161,7 @@ _RG: True. For doing serious scientific computing, data science and ML type work
 - Mambaforge
 - macos-arm64 support in conda-forge
 
-_RG: It'll be a while before we get wheels for core PyData packages, but conda-forge already has support, see [this blog post](https://conda-forge.org/blog/posts/January 24, 2021
+_RG: It'll be a while before we get wheels for core PyData packages, but conda-forge already has support, see [this blog post](https://conda-forge.org/blog/posts/2020-10-29-macos-arm64/)
 
 - The new conda community umbrella org
 - Pip and PyPI are now well-managed and have a nontrivial amount of funding
@@ -219,7 +219,7 @@ While I'm at it, let me also link to some of the most informative blog posts on 
 - [Jake VanderPlas - Conda: Myths and Misconceptions (2016)](https://jakevdp.github.io/blog/2016/08/25/conda-myths-and-misconceptions/)
 - [Wes McKinney - conda-forge and PyData's CentOS moment (2016)](https://wesmckinney.com/blog/conda-forge-centos-moment/)
 - [Donald Stufft - Powering the Python Package Index (2016)](https://caremad.io/posts/2016/05/powering-pypi/)
-- [Pauli Virtanen - Building Python wheels with Fortran for Windows (2017)](https://pav.iki.fi/blog/January 24, 2021
+- [Pauli Virtanen - Building Python wheels with Fortran for Windows (2017)](https://web.archive.org/web/20210616203153/https://pav.iki.fi/blog/2017-10-08/pywingfortran.html)
 - [Uwe Korn - How we build Apache Arrow's manylinux wheels (2019)](https://uwekorn.com/2019/09/15/how-we-build-apache-arrows-manylinux-wheels.html)
 - [Pradyun Gedam - Testing the next-gen pip dependency resolver (2020)](https://pradyunsg.me/blog/2020/03/27/pip-resolver-testing/)
 - [Sumana Harihareswara - Releasing pip 20.3, featuring new dependency resolver (2020)](https://pyfound.blogspot.com/2020/11/pip-20-3-new-resolver.html)
