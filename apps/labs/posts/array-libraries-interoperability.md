@@ -441,14 +441,69 @@ the Array API also have their limitations.
 
 Let's highlight some Pros & Cons for these two protocols.
 
-| uarray                                                                                                                                                                                                                                                                  | Array API                                                                                                                                                    |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <b>Pros</b>                                                                                                                                                                                                                                                             | <b>Cons</b>                                                                                                                                                  |
-| Can handle compiled code (anything not Python but which ends up with Python bindings).                                                                                                                                                                                  | Can't handle compiled code, works only for pure Python and array provider based code in consumer library methods.                                            |
-| Supports ability to coerce/convert inputs and wrapping other arrays using the `__ua_convert__` protocol.                                                                                                                                                                | Not all functions are covered in the Array API spec, which may be a blocker if the consumer library method utilizes a function outside of Array API's scope. |
-| <b>Cons</b>                                                                                                                                                                                                                                                             | <b>Pros</b>                                                                                                                                                  |
-| Involves a lot of utility code (setup machinery) on both the libraries which may get tricky at times.                                                                                                                                                                   | Easy for consumer libraries to add support and compatibility with multiple "array providers".                                                                |
-| The dispatching mechanism is not implicit. The user is required to register the backend before they can use the array library of their choice. See the <a href="https://github.com/scipy/scipy/issues/14266">scipy/scipy#14266</a> issue for auto-registering backends. | One can make use of the consumer library functions without thinking about any form of backend registration etc.                                              |
+<table>
+  <thead>
+    <tr>
+      <th>uarray</th>
+      <th>Array API</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>**Pros**</td>
+      <td>**Cons**</td>
+    </tr>
+    <tr>
+      <td>
+        Can handle compiled code (anything not Python but which ends up with
+        Python bindings).
+      </td>
+      <td>
+        Can't handle compiled code, works only for pure Python and array
+        provider based code in consumer library methods.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Supports ability to coerce/convert inputs and wrapping other arrays
+        using the `__ua_convert__` protocol.
+      </td>
+      <td>
+        Not all functions are covered in the Array API spec, which may be a
+        blocker if the consumer library method utilizes a function outside of
+        Array API's scope.
+      </td>
+    </tr>
+    <tr>
+      <td>**Cons**</td>
+      <td>**Pros**</td>
+    </tr>
+    <tr>
+      <td>
+        Involves a lot of utility code (setup machinery) on both the libraries
+        which may get tricky at times.
+      </td>
+      <td>
+        Easy for consumer libraries to add support and compatibility with
+        multiple "array providers".
+      </td>
+    </tr>
+    <tr>
+      <td>
+        The dispatching mechanism is not implicit. The user is required to
+        register the backend before they can use the array library of their
+        choice. See the
+        <a href="https://github.com/scipy/scipy/issues/14266">scipy/scipy#14266</a>
+        issue for auto-registering backends.
+      </td>
+      <td>
+        One can make use of the consumer library functions without thinking
+        about any form of backend registration etc.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 These protocols may not be perfect, but are a big step towards interoperability
 and bringing the array/tensor libraries ecosystem closer together.
