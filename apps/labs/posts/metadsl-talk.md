@@ -202,7 +202,7 @@ This project is at an early state and would benefit from collaboration. If you w
 [pldi-poster]: http://hirzels.com/martin/papers/mapl18-deep-ppl-poster.pdf
 [metadsl-abstraction]: https://github.com/Quansight-Labs/metadsl/blob/c0419e89e72776026f97b4e5b08d337a5189300d/metadsl_core/abstraction.py
 [dataflow-paper]: https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-705.pdf
-[fscd]: http://fscdconference.org/
+[fscd]: https://fscd-conference.org/
 [snek-lms]: https://github.com/jmd1011/snek-LMS#lightweight-syntax-for-building-computation-graphs
 [rompf-paper]: https://www.cs.purdue.edu/homes/rompf/papers/decker-preprint201811.pdf
 [snek-image]: https://user-images.githubusercontent.com/1186124/69267752-d20b1700-0b9b-11ea-8fbb-1a014536099d.png
