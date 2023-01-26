@@ -8,7 +8,7 @@ supported community-driven projects in the Python scientific and data science
 software stack, primarily to NumPy.  I have found my next home; the people, the
 projects, and the atmosphere are an all around win-win for me and (I hope) for
 the projects to which I contribute.'
-category: [PyData Ecosystem]
+category: [PyData ecosystem]
 featuredImage:
   src: /posts/three-months-and-having-fun/blog_feature_org.svg
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
