@@ -125,7 +125,6 @@ our story well, people and projects organized, a funding stream, and more.
 
 One of the first things we did do is start this blog, to start communicating
 about the technical work we're doing. We're also going through the roadmaps
-published at [quansight.com/projects](https://www.quansight.com/projects),
 to ensure they're up-to-date and to make clear that those are for _community
 driven projects_ that Quansight is aiming to obtain industry support for.
 
