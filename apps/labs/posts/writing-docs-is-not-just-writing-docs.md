@@ -14,7 +14,7 @@ hero:
 
 I joined the [Spyder](https://www.spyder-ide.org) team almost two years ago, and I never thought I was going to end up working on docs. Six months ago I started a project with [CAM Gerlach](https://github.com/CAM-Gerlach) and [Carlos Cordoba](https://github.com/ccordoba12) to improve Spyder’s documentation. At first, I didn’t actually understand how important docs are for software, especially for open source projects. However, during all this time I’ve learned how documentation has a huge impact on the open-source community and I’ve been thankful to have been able to do this. But, from the beginning, I asked myself “why am I the ‘right person’ for this?”
 
-Improving Spyder’s documentation started as part of a NumFOCUS Small Development Grant awarded at the end of last year. The goal of the project was not only to [update the documentation](http://docs.spyder-ide.org/develop/) for Spyder 4, but also to make it more user-friendly, so users can understand Spyder’s key concepts and get started with it more easily.
+Improving Spyder’s documentation started as part of a NumFOCUS Small Development Grant awarded at the end of last year. The goal of the project was not only to [update the documentation](http://docs.spyder-ide.org/) for Spyder 4, but also to make it more user-friendly, so users can understand Spyder’s key concepts and get started with it more easily.
 
 One of the main ideas for this project was to create a series of short video tutorials, explaining the basic functionality of Spyder and its most important panes, allowing users to learn how to use Spyder faster and easier.
 
