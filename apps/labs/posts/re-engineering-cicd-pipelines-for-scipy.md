@@ -57,7 +57,7 @@ The project's first step was to ensure that we could run the GitHub Actions CI l
 
 `act` is a tool offered by Nektos which provides a handy way to run GitHub Actions locally. It gives a quick way to validate your changes on the CI locally, without committing/pushing your changes to the workflows to trigger and validate them. It leads to fast feedback and compatibility as a local task runner to validate all our CI jobs.
 
-You can try out `act` yourself by cloning [Ralf’s fork](https://github.com/rgommers/scipy) and referencing the documentation for the [`act` usage](https://github.com/rgommers/scipy/blob/meson/ACT-USAGE.md). It keeps the GitHub Action notifications clutter-free and reduces the chance of accidentally triggering any failure during debugging.
+You can try out `act` yourself by cloning [Ralf’s fork](https://github.com/rgommers/scipy) and referencing the documentation for the [`act` usage](https://docs.scipy.org/doc/scipy/dev/contributor/using_act.html). It keeps the GitHub Action notifications clutter-free and reduces the chance of accidentally triggering any failure during debugging.
 
 Here is `act` in action with the `meson` branch over [Ralf’s fork](https://github.com/rgommers/scipy):
 
