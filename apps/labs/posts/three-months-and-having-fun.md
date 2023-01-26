@@ -36,7 +36,7 @@ Labs as a full-time developer.
 LLC, and Labs' mission is "Sustaining the future of open source". It does this
 by gathering together an amazing group of software developers and letting them
 loose on a variety of open source projects: Numpy, Spyder, Jupyter, conda-forge,
-Numba and [more](http://labs.quansight.org/categories). Of course, the
+Numba and [more](https://labs.quansight.org/blog). Of course, the
 developers do not only volunteer their time. Quansight Labs is sponsored via
 
 - generous support from Quansight LLC,
