@@ -12,7 +12,7 @@ hero:
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
---- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again ---
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again  -->
 **Table of Contents**
 
 - [Introduction](#introduction)
@@ -36,7 +36,7 @@ hero:
   - [Automatic Kernel Generation](#automatic-kernel-generation)
 - [Conclusion and Future Work](#conclusion-and-future-work)
 
---- markdown-toc end ---
+<!-- markdown-toc end -->
 
 
 # Introduction
