@@ -107,7 +107,7 @@ and other general maintenance tasks. He also improved PDF preview in JupyterLab,
 now [works as expected](https://github.com/jupyterlab/jupyterlab/pull/6264) in Firefox
 and Chrome (at least).
 
-Saul added support for the [nteract Data Explorer](https://github.com/nteract/nteract/tree/master/packages/data-explorer) to the JupyterLab data registry as a plugin.
+Saul added support for the [nteract Data Explorer](https://data-explorer.nteract.io/) to the JupyterLab data registry as a plugin.
 [This pull request](https://github.com/jupyterlab/jupyterlab-data-explorer/pull/10) shows it
 in action on a pandas DataFrame.
 
