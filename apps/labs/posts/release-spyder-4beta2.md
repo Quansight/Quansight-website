@@ -68,7 +68,7 @@ The Language Server Protocol (LSP) was created by Microsoft for Visual Studio Co
 development tools (e.g. editors and IDEs) communicate with
 servers that provide code completion, linting and related facilities for
 different programming languages. With LSP, as
-[they describe it](https://microsoft.github.io/language-server-protocol/):
+[they describe it](https://web.archive.org/web/20190528210156/https://microsoft.github.io/language-server-protocol/):
 
 > A single Language Server can be reused in multiple development tools,
 > which in turn can support multiple languages with minimal effort.
