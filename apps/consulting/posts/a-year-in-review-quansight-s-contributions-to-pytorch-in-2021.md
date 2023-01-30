@@ -12,9 +12,9 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
-This post was co-written between Mario Lezcano & Ralf Gommers.
+<base target="_blank" />
 
-&nbsp;
+This post was co-written between Mario Lezcano & Ralf Gommers.
 
 PyTorch is a very popular open source deep learning framework, primarily
 developed by Meta AI. If you are making deep learning models, chances are you
@@ -70,9 +70,9 @@ world. Most libraries for data science in Python, such as
 [Matplotlib][matplotlib homepage] use and consume arrays, and build on top of
 them to implement higher-level functionality.
 
-The [Python Array API standard][array api docs] aims to serve as a bridge
-between these two realities. It is a standard that aims to provide a common API.
-Then, if libraries write their code in terms of this API, their code becomes
+The [Python Array API standard][array api docs] serves as a bridge between these
+two realities. It is a standard that aims to provide a common API. Then, if
+libraries write their code in terms of this API, their code becomes
 library-agnostic. This means that the user could choose the backend library that
 is used to manage the arrays internally depending on their use case. For this to
 be possible, the Python Array API is largely based on (a curated subset of)
@@ -125,9 +125,10 @@ forward AD mode in PyTorch 1.11][pytorch tutorial fwd auto diff].
 
 PyTorch 1.10 came out with
 [complex numbers support][pytorch docs complex numbers], and optimization over
-complex tensors. This feature was requested [since the beginning of PyTorch][pytorch gh complex numbers issue], and
-has deep applications in fields ranging from signal processing to quantum
-mechanics. Quansight helped generalize the formulas for many functions and their
+complex tensors. This feature was requested
+[since the beginning of PyTorch][pytorch gh complex numbers issue], and has deep
+applications in fields ranging from signal processing to quantum mechanics.
+Quansight helped generalize the formulas for many functions and their
 derivatives to the complex case. The foundations of how to do so are not
 well-understood by the community, so a number of people from Quansight are
 currently working on publishing a paper formalizing the ideas and semantics that
@@ -189,7 +190,7 @@ tests and in adding support for more and more operations to increase the test
 coverage. While doing this, the engineers at Quansight have also been involved
 in fixing bugs that were found in the process.
 
-### Testing utilities: torch.testing
+### Testing Utilities: torch.testing
 
 Internally, PyTorch developed elaborate utilities needed for testing, e.g.
 creating random tensors for a given specification and comparing the results of
@@ -222,7 +223,7 @@ files and was highly disruptive to the development cycle. Quansight engineers
 have profiled and eliminated bottlenecks in PyTorch’s parallel builds, as well
 as fixed structural issues in PyTorch’s core C++ codebase, that led to thousands
 of files being rebuilt unnecessarily. Typical build times when switching
-branches went from 20 minutes to 5 or fewer minutes.
+branches went from 20 minutes to five or fewer minutes.
 
 ### Docs and Docs Infrastructure
 
