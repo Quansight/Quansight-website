@@ -12,6 +12,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 **Co-Authors:** Brian Skinn, Eric Kelly
 
 Every tech era has buzzwords and trends that are billed as worthy of saving the
