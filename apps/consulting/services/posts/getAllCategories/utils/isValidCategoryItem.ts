@@ -13,19 +13,19 @@ const checkCategoryName = (name: string) =>
 const checkCategoryValue = (name: string) =>
   removeWhiteSpace(name).length === name.length ? name : false;
 
-const cetegorySchema = {
+const categorySchema = {
   name: checkCategoryName,
   value: checkCategoryValue,
 };
 
 export const isValidCategoryItem = (categoryItem: TRawCategoryItem): boolean =>
   isValidObject(categoryItem) &&
-  Object.keys(cetegorySchema).filter((schemaKey) => {
+  Object.keys(categorySchema).filter((schemaKey) => {
     const categoryItemProperty = categoryItem[schemaKey];
 
     if (
       !isValidString(categoryItemProperty) ||
-      !cetegorySchema[schemaKey](categoryItemProperty)
+      !categorySchema[schemaKey](categoryItemProperty)
     )
       return true;
   }).length === 0;

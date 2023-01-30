@@ -1,3 +1,9 @@
+November 30, 2022
+
+Via Storyblok:
+
+- Add Pamphile to team listing
+
 November 8, 2022
 
 Via Storyblok:
