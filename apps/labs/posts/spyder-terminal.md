@@ -5,7 +5,7 @@ author: stephannie-jimenez
 description: 'The Spyder-Terminal project is revitalized! The new 0.3.0 version adds numerous features that improves the user experience, and enhances compatibility with the latest Spyder 4 release, in part thanks to the improvements made in the xterm.js project.'
 category: [IDEs]
 featuredImage:
-  src: /posts/spyder-terminal/shells.png
+  src: /posts/spyder-terminal/feature.png
   alt: 'UNIX shell options for starting the terminal'
 hero:
   imageSrc: /posts/spyder-terminal/blog_hero_var2.svg
