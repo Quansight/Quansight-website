@@ -43,11 +43,23 @@ last year.
 We have a team of 15+ engineers involved in the various aspects of PyTorch
 development. We distinguish the following as our main topic areas:
 
-- [Python Array API and NumPy Compatibility][h2-array-api-numpy]
-- [Scientific PyTorch][h2-scientific-pytorch]
-- [Maintainability][h2-maintainability]
-- [Torchvision][h2-torchvision]
-- [Research Topics][h2-research-topics]
+<ul>
+<li>
+<a href="#python-array-api-and-numpy-compatibility" target="_self">Python Array API and NumPy Compatibility</a>
+</li>
+<li>
+<a href="#scientific-pytorch" target="_self">Scientific PyTorch</a>
+</li>
+<li>
+<a href="#maintainability" target="_self">Maintainability</a>
+</li>
+<li>
+<a href="#torchvision" target="_self">Torchvision</a>
+</li>
+<li>
+<a href="#research-topics" target="_self">Research Topics</a>
+</li>
+</ul>
 
 ## Python Array API and NumPy Compatibility
 
