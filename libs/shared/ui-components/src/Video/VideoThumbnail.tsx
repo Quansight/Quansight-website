@@ -28,7 +28,7 @@ export const VideoThumbnail = ({ src, alt, onClick }: TVideoThumbnailProps) => {
   };
 
   return (
-    <div className={wrapperStyles} onClick={handleClick} aria-hidden={true}>
+    <div className={wrapperStyles} onClick={handleClick} aria-hidden="true">
       <Picture
         imageSrc={src}
         imageAlt={alt}
