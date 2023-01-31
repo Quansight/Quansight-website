@@ -13,6 +13,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 **Co-authors:** Gonzalo Peña-Castellanos, Eric Charles, Eric Kelly
 
 **At [Quansight][quansight site], we’ve been hosting a series of live streams
