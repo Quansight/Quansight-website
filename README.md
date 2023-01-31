@@ -32,7 +32,7 @@ We are following a rotating deployment manager schedule monthly as follows:
 
 - 1st Tuesdays: [@bskinn](https://github.com/bskinn)
 - 2nd Tuesdays: [@gabalafou](https://github.com/gabalafou)
-- 3rd Tuesdays: [@noa](https://github.com/noa)
+- 3rd Tuesdays: [@pavithraes](https://github.com/pavithraes)
 - 4th Tuesdays: [@trallard](https://github.com/trallard)
 
 For months with a 5th Tuesday, the deployment manager role will follow the
@@ -40,7 +40,7 @@ same rotation sequence. Thus, through 2023:
 
 - 29 Nov 2022: @bskinn
 - 31 Jan 2023: @gabalafou
-- 30 May 2023: @noa
+- 30 May 2023: @pavithraes
 - 29 Aug 2023: @trallard
 - 31 Oct 2023: @bskinn
 
