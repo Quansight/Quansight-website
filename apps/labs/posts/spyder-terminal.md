@@ -5,7 +5,7 @@ author: stephannie-jimenez
 description: 'The Spyder-Terminal project is revitalized! The new 0.3.0 version adds numerous features that improves the user experience, and enhances compatibility with the latest Spyder 4 release, in part thanks to the improvements made in the xterm.js project.'
 category: [IDEs]
 featuredImage:
-  src: /posts/spyder-terminal/feature.png
+  src: /posts/spyder-terminal/cursor-style.png
   alt: 'UNIX shell options for starting the terminal'
 hero:
   imageSrc: /posts/spyder-terminal/blog_hero_var2.svg
@@ -19,6 +19,7 @@ The [Spyder-Terminal project](https://github.com/spyder-ide/Spyder-Terminal) is 
 First, we were able to update all the old JavaScript files to use ES6/JSX syntax and the tests for the client terminal. This change simplified the code base and maintenance and allows us to easily extend the project to new functionalities that the xterm.js API offers. In order to compile this code and run it inside Spyder, we migrated our deployment to Webpack.
 
 ## Multiple shells per operating system
+
 In the new release, you now have the ability to configure which shell to use in the terminal. On Linux and UNIX systems, `bash`, `sh`, `ksh`, `zsh`, `csh`, `pwsh`, `tcsh`, `screen`, `tmux`, `dash` and `rbash` are supported, while `cmd` and `powershell` are the available options on Windows. To select your preferred command processor, simply choose it from the menu in the `Terminal` pane of Spyder's preferences and restart the IDE.
 
 ![UNIX shell options for starting the terminal](/posts/spyder-terminal/shells.png)
