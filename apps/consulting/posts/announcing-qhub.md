@@ -19,6 +19,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 **Today, we are announcing the release of QHub, a new open source project from
 Quansight that enables teams to build and maintain a cost-effective and scalable
 compute/data science platform in the cloud or on-premises. QHub can be deployed
