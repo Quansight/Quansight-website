@@ -13,6 +13,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 This post was co-written between Gregory R. Lee & Gigon Bae (NVIDIA).
 
 ## Overview
