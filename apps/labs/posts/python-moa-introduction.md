@@ -83,6 +83,8 @@ expression = (A + B).T.reduce('+')[0]
 expression
 ```
 
+![Diagram of the python-moa compiler.](/posts/python-moa-introduction/frontend.png)
+
 ## Shape Calculation
 
 The shape calculation is responsible for calculating the shape at every
@@ -99,7 +101,7 @@ stage and fails then it is an issue with the compiler not the algorithm.
 expression.visualize(stage='shape')
 ```
 
-![](fd44349e853e261cc9dc57d1aacee22dea36a773.svg)
+![Diagram of shape calculation.](/posts/shape_calculation.png)
 
 ## Denotational Normal Form (DNF)
 
@@ -113,7 +115,7 @@ because transpose is simply index manipulation.
 expression.visualize(stage='dnf')
 ```
 
-![](0123236cac19fa87b330447e166ea07019b5af52.svg)
+![Diagram of Denotational Normal Form.](/posts/python-moa-introduction/shape_calculation.png)
 
 
 ## Operational Normal Form (ONF)
