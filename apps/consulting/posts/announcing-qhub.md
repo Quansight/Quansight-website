@@ -293,11 +293,13 @@ enterprise use cases. If you would like help installing, supporting, or building
 on top of QHub or JupyterHub in your organization, please reach out to Quansight
 for a free consultation by sending an email to connect@quansight.com.
 
-If you liked this article, check out our new blog post about
-[JupyterLab 3.0 dynamic extensions][jupyterlab blog post] at the link here.
+If you liked this article, check out our new blog post about <a
+href="/post/why-we-are-excited-about-jupyterlab-3-0-dynamic-extensions"
+target="_self">JupyterLab 3.0 dynamic extensions</a>.
 
-Update: QHub is now Nebari. See the [more recent post on Nebari][nebari post]
-and https://www.nebari.dev for more.
+Update: QHub is now Nebari. See the <a href="/post/evolving-qhub-to-nebari"
+target="_self">more recent post on Nebari</a> and <a
+href="https://www.nebari.dev">nebari.dev</a> for more.
 
 [conda-docker repo]: https://github.com/conda-incubator/conda-docker
 [conda-store repo]: https://github.com/quansight/conda-store
@@ -310,11 +312,9 @@ and https://www.nebari.dev for more.
 [jitsi site]: https://jitsi.org/
 [jupyter video chat repo]: https://github.com/yuvipanda/jupyter-videochat
 [jupyterhub site]: https://jupyter.org/hub
-[jupyterlab blog post]: https://www.quansight.com/post/why-we-are-excited-about-jupyterlab-3-0-dynamic-extensions
 [jupyterlab documentation]: https://jupyterlab.readthedocs.io/en/stable/
 [kubernetes documentation]: https://kubernetes.io/docs/home/
 [kubessh repo]: https://github.com/yuvipanda/kubessh
-[nebari post]: https://quansight.com/post/evolving-qhub-to-nebari
-[openshift site]: https://www.openshift.com/
 [nss_wrapper library]: https://cwrap.org/nss_wrapper.html
+[openshift site]: https://www.openshift.com/
 [terraform site]: https://www.terraform.io/intro/index.html
