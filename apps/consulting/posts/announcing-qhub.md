@@ -21,6 +21,13 @@ hero:
 
 <base target="_blank" />
 
+**Editor's Note:** Since the launch of QHub in 2020, we have evolved it into a
+community-led open source project called Nebari. See our <a
+href="/post/evolving-qhub-to-nebari" target="_self">blog post on Nebari</a> and
+visit [nebari.dev][nebari.dev] for more information.
+
+---
+
 **Today, we are announcing the release of QHub, a new open source project from
 Quansight that enables teams to build and maintain a cost-effective and scalable
 compute/data science platform in the cloud or on-premises. QHub can be deployed
@@ -276,7 +283,7 @@ new open source project, we expect that you will find rough edges. We are
 actively developing new features and we invite you to get involved by
 contributing to QHub directly or to any of the upstream projects it depends on.
 
-- **Documentation:** https://nebari.dev (formerly https://qhub.dev, see the update below)
+- **Documentation:** https://nebari.dev (formerly https://qhub.dev)
 
 - **Repository:** https://github.com/nebari-dev/nebari (formerly https://github.com/Quansight/qhub)
 
@@ -297,9 +304,9 @@ If you liked this article, check out our new blog post about <a
 href="/post/why-we-are-excited-about-jupyterlab-3-0-dynamic-extensions"
 target="_self">JupyterLab 3.0 dynamic extensions</a>.
 
-**Update:** QHub is now Nebari. See the <a href="/post/evolving-qhub-to-nebari"
-target="_self">more recent post on Nebari</a> and <a
-href="https://www.nebari.dev">nebari.dev</a> for more.
+**Update:** As we noted above, QHub is now Nebari. See the <a
+href="/post/evolving-qhub-to-nebari" target="_self">more recent post on
+Nebari</a> and [nebari.dev][nebari.dev] for more.
 
 [conda-docker repo]: https://github.com/conda-incubator/conda-docker
 [conda-store repo]: https://github.com/quansight/conda-store
@@ -315,6 +322,7 @@ href="https://www.nebari.dev">nebari.dev</a> for more.
 [jupyterlab documentation]: https://jupyterlab.readthedocs.io/en/stable/
 [kubernetes documentation]: https://kubernetes.io/docs/home/
 [kubessh repo]: https://github.com/yuvipanda/kubessh
+[nebari.dev]: https://www.nebari.dev
 [nss_wrapper library]: https://cwrap.org/nss_wrapper.html
 [openshift site]: https://www.openshift.com/
 [terraform site]: https://www.terraform.io/intro/index.html
