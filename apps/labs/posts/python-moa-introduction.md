@@ -7,11 +7,11 @@ compiler that is based on the work of Lenore Mullin. The MOA principles allow fo
 level reductions, that other compilers will miss, and for optimization of algorithms as a whole.'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/hello-world-post/featured.png
-  alt: 'Excellent alt-text describing the featured image'
+  src: /posts/python-moa-introduction/blog_feature_var2.png
+  alt: 'An illustration of a brown and a dark white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
-  imageSrc: /posts/hello-world-post/hero.jpeg
-  imageAlt: 'Excellent alt-text describing the hero image'
+  imageSrc: /posts/python-moa-introduction/blog_hero_var1.jpeg
+  imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
 
