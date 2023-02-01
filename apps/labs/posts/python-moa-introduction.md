@@ -2,9 +2,7 @@
 title: 'MOA: a theory for composable and verifiable tensor computations'
 author: chris-ostrouchov
 published: April 17, 2019
-description: 'Python-moa (mathematics of arrays) is an approach to a high level tensor
-compiler that is based on the work of Lenore Mullin. The MOA principles allow for high
-level reductions, that other compilers will miss, and for optimization of algorithms as a whole.'
+description: 'Python-moa (mathematics of arrays) is an approach to a high level tensor compiler that is based on the work of Lenore Mullin. The MOA principles allow for high level reductions, that other compilers will miss, and for optimization of algorithms as a whole.'
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/python-moa-introduction/blog_feature_var2.svg
