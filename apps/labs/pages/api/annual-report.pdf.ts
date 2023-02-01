@@ -12,6 +12,8 @@ export default async function handler(req: NextRequest) {
   req.ip ${req.ip}
   user-agent ${req.headers.get('user-agent')}
   `);
+  // The shape of this fetch comes from the Plausible docs:
+  // https://plausible.io/docs/events-api
   await fetch('https://plausible.io/api/event', {
     method: 'POST',
     headers: {
