@@ -71,7 +71,7 @@ const nextConfig = {
           // you choose something like analytics or plausible, it might get
           // blocked in the future.
           source: '/p7e/js/script.js',
-          destination: 'https://plausible.io/js/script.js',
+          destination: 'https://plausible.io/js/script.file-downloads.js',
         },
         {
           source: '/p7e/api/event',
