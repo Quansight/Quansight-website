@@ -82,9 +82,13 @@ is made to the configuration file, the platform is redeployed. The state of the
 deployed platform is self-documenting and is always reflected in this
 version-controlled repository.
 
-![](/posts/announcing-qhub/qhub-img-2.png)
+<img
+src="/posts/announcing-qhub/qhub-img-2.png"
+alt=""
+width="880px"
+/>
 
-_Overview of the infrastructure-as-code workflow_
+&nbsp; &nbsp; &nbsp; &nbsp; _Overview of the infrastructure-as-code workflow_
 
 This infrastructure-as-code approach has several key benefits. For an
 administrator, it is easy to set up and maintain multiple deployments, say a
@@ -126,7 +130,7 @@ users.
 
 ![](/posts/announcing-qhub/qhub-img-3.png)
 
-_Specifying the instance type to spawn with QHub_
+&nbsp; &nbsp; &nbsp; &nbsp; _Specifying the instance type to spawn with QHub_
 
 ## Big Data Using Dask
 
@@ -169,9 +173,13 @@ the container) which allows non-root users to dynamically map ids to names. In
 the image below (top cell) we show the given Linux mapping of ids to usernames.
 This enables the full Linux permission model for each JupyterLab user.
 
-![](/posts/announcing-qhub/qhub-img-4.png)
+<img
+src="/posts/announcing-qhub/qhub-img-4.png"
+alt=""
+width="880px"
+/>
 
-_Example of standard Linux-style permissioning in QHub_
+&nbsp; &nbsp; &nbsp; &nbsp; _Example of standard Linux-style permissioning in QHub_
 
 ## Data Science Environment Handling
 
@@ -187,7 +195,7 @@ have different requirements.
 
 ![](/posts/announcing-qhub/qhub-img-5.png)
 
-_Using Conda-Store to manage cloud environments_
+&nbsp; &nbsp; &nbsp; &nbsp; _Using conda-store to manage cloud environments_
 
 Allowing end-users to build custom ad-hoc environments in the cloud is a hard
 problem and Quansight has solved it through the creation of two new open-source
@@ -209,9 +217,13 @@ manage an open-source video-conferencing tool within JupyterLab—along with a
 terminal, notebook, file browser and other conveniences—is remarkably useful for
 remote pair-programming and also for teaching or training remotely.
 
-![](/posts/announcing-qhub/qhub-img-6.png)
+<img
+src="/posts/announcing-qhub/qhub-img-6.png"
+alt=""
+width="880px"
+/>
 
-_Using the Jupyter Video Chat plug-in within a JupyterLab session_
+&nbsp; &nbsp; &nbsp; &nbsp; _Using the Jupyter Video Chat plug-in within a JupyterLab session_
 
 ## An Open Source Technology Stack
 
@@ -247,9 +259,13 @@ over the base infrastructure costs. (Conda-Store and Conda-Docker are new
 libraries created by Quansight, whereas KubeSSH received numerous
 contributions.)
 
-![](/posts/announcing-qhub/qhub-img-1.png)
+<img
+src="/posts/announcing-qhub/qhub-img-1.png"
+alt=""
+width="880px"
+/>
 
-_Overview of the QHub stack_
+&nbsp; &nbsp; &nbsp; &nbsp; _Overview of the QHub stack_
 
 ## Take QHub for a Spin
 
