@@ -199,7 +199,7 @@ have different requirements.
 
 Allowing end-users to build custom ad-hoc environments in the cloud is a hard
 problem and Quansight has solved it through the creation of two new open-source
-packages, Conda-Store and Conda-Docker. We will describe these packages in more
+packages, conda-store and conda-docker. We will describe these packages in more
 detail in a future blog post. QHub’s integration with these packages allows for
 both pre-built controlled environments as well as ad-hoc user created
 environments that are fully integrated with both JupyterLab as well as the
@@ -248,15 +248,15 @@ the following existing open-source libraries:
   remote development to QHub.
 - [Jupyter-Videochat][jupyter video chat repo], a Jupyter extension for
   integrated video chat within the platform
-- [Conda-store][conda-store repo], a tool for declaratively building Conda
+- [conda-store][conda-store repo], a tool for declaratively building Conda
   environments by watching a directory of environment.yaml files.
-- [Conda-docker][conda-docker repo], a tool to associate declarative
+- [conda-docker][conda-docker repo], a tool to associate declarative
   environments with docker images. In addition, this tool does not require
   docker to build images.
 
 This means there is no vendor lock-in, no licensing costs, and no premium to pay
-over the base infrastructure costs. (Conda-Store and Conda-Docker are new
-libraries created by Quansight, whereas KubeSSH received numerous
+over the base infrastructure costs. (conda-store and conda-docker are new
+libraries created by Quansight, whereas KubeSSH received numerous Quansight
 contributions.)
 
 <img
