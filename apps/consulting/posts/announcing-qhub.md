@@ -276,11 +276,11 @@ new open source project, we expect that you will find rough edges. We are
 actively developing new features and we invite you to get involved by
 contributing to QHub directly or to any of the upstream projects it depends on.
 
-- **Documentation:** https://nebari.dev (formerly https://qhub.dev, see below)
+- **Documentation:** https://nebari.dev (formerly https://qhub.dev, see the update below)
 
 - **Repository:** https://github.com/nebari-dev/nebari (formerly https://github.com/Quansight/qhub)
 
-- **Discussion:** https://gitter.im/Quansight/qhub
+- **Discussion:** https://github.com/orgs/nebari-dev/discussions (formerly https://gitter.im/Quansight/qhub)
 
 ## Need Help with QHub or JupyterHub?
 
@@ -297,7 +297,7 @@ If you liked this article, check out our new blog post about <a
 href="/post/why-we-are-excited-about-jupyterlab-3-0-dynamic-extensions"
 target="_self">JupyterLab 3.0 dynamic extensions</a>.
 
-Update: QHub is now Nebari. See the <a href="/post/evolving-qhub-to-nebari"
+**Update:** QHub is now Nebari. See the <a href="/post/evolving-qhub-to-nebari"
 target="_self">more recent post on Nebari</a> and <a
 href="https://www.nebari.dev">nebari.dev</a> for more.
 
