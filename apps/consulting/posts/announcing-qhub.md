@@ -276,11 +276,11 @@ new open source project, we expect that you will find rough edges. We are
 actively developing new features and we invite you to get involved by
 contributing to QHub directly or to any of the upstream projects it depends on.
 
-https://qhub.dev
+- **Documentation:** https://nebari.dev (formerly https://qhub.dev, see below)
 
-https://github.com/Quansight/qhub
+- **Repository:** https://github.com/nebari-dev/nebari (formerly https://github.com/Quansight/qhub)
 
-https://gitter.im/Quansight/qhub
+- **Discussion:** https://gitter.im/Quansight/qhub
 
 ## Need Help with QHub or JupyterHub?
 
