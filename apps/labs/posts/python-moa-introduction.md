@@ -101,7 +101,7 @@ stage and fails then it is an issue with the compiler not the algorithm.
 expression.visualize(stage='shape')
 ```
 
-![Diagram of shape calculation.](/posts/shape_calculation.png)
+![Diagram of shape calculation.](/posts/python-moa-introduction/shape_calculation.png)
 
 ## Denotational Normal Form (DNF)
 
@@ -115,7 +115,7 @@ because transpose is simply index manipulation.
 expression.visualize(stage='dnf')
 ```
 
-![Diagram of Denotational Normal Form.](/posts/python-moa-introduction/shape_calculation.png)
+![Diagram of Denotational Normal Form.](/posts/python-moa-introduction/denotational_normal_form.png)
 
 
 ## Operational Normal Form (ONF)
