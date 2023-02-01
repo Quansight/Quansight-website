@@ -28,6 +28,8 @@ export default async function handler(req: NextRequest) {
       referrer: req.headers.get('referer'),
     }),
   });
+  // Returning fetch comes from Next.js docs:
+  // https://nextjs.org/docs/api-routes/edge-api-routes#forwarding-headers
   return fetch(
     // TODO change this to the real annual report PDF
     'https://a.storyblok.com/f/152463/x/1752e51fa9/nf-annual-report-2021.pdf',
