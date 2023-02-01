@@ -5,10 +5,10 @@ published: April 30, 2019
 description: 'The problem is, stated simply: How do we use all of the PyData libraries in tandem, moving seamlessly from one to the other, without actually changing the API, or even the imports?'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/hello-world-post/blog_hero_var2.svg
-  alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
+  src: /posts/hello-world-post/blog_hero_var1.svg
+  alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
-  imageSrc: /posts/hello-world-post/blog_feature_org/svg
+  imageSrc: /posts/hello-world-post/blog_hero_var1.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
