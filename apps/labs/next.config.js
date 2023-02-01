@@ -61,7 +61,7 @@ const nextConfig = {
     return {
       beforeFiles: [
         {
-          source: '/annual-report.pdf',
+          source: '/annual-reports/quansight-labs-annual-report-2022.pdf',
           destination: '/api/annual-report.pdf',
         },
       ],
