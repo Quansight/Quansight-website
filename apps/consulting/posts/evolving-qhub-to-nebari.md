@@ -171,8 +171,8 @@ will soon add the design guidelines and a broader color palette!
 
 ## How Far We Have Come, and What’s Next
 
-Nebari has come a long way since its
-[official launch in 2020][announcing qhub post]! It currently supports all major
+Nebari has come a long way since its <a href="/post/announcing-qhub"
+target="_self">official launch in 2020</a>! It currently supports all major
 cloud providers: Amazon Web Services (AWS), Google Cloud Provider (GCP), Azure,
 and Digital Ocean; as well as local HPC clusters.
 
@@ -231,7 +231,6 @@ text="Get Started: nebari.dev"
 url="https://nebari.dev?utm_campaign=post-evolving-qhub-to-nebari&utm_medium=web&utm_source=quansight-com&utm_content=cta-button"
 />
 
-[announcing qhub post]: /post/announcing-qhub
 [diataxis site]: https://diataxis.fr/
 [dogfooding @ wik]: https://en.wikipedia.org/wiki/Eating_your_own_dog_food
 [irina website]: https://irinafumarel.ro/
