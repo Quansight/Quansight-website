@@ -22,7 +22,7 @@ export default async function handler(req: NextRequest) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      domain: 'gabalafou.com',
+      domain: 'labs.quansight.org',
       name: 'pageview',
       url: req.url,
       referrer: req.headers.get('referer'),
