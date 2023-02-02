@@ -138,7 +138,8 @@ same. There are three major stages, each with distinct steps.
 3. **Going live**
    1. When you want your changes to go to the live production site, coordinate
       with the dev team to open a merge pull request to the `main` branch on
-      GitHub.
+      GitHub. Refer to the [deployment schedule](#deployment-schedule-)
+      to see whom you should specifically reach out to.
    2. When the Vercel GitHub app comments on the merge PR with a preview URL,
       visit that preview URL to check your changes. (You should also be able to
       get the Vercel preview URL from the Slack channel.)
@@ -233,7 +234,9 @@ will help clear things up.
 
 ## Integrations 🛠
 
-Making changes to the website relies on the ability of several services to interact with each other. This section is for developers and covers each service one by one and how it integrates with some other services.
+Making changes to the website relies on the ability of several services
+to interact with each other. This section is for developers and covers each service
+one by one and how it integrates with some other services.
 
 ### GitHub
 
@@ -248,9 +251,9 @@ website.
 
 ### Storyblok
 
-Each website has its own "space" in Storyblok and configuration.
+Each website has its own "space" and configuration in Storyblok.
 
-So each website has a unique pair of API keys: preview and public. The preview
+Each website has a unique pair of API keys: preview and public. The preview
 API key allows API access to both published and draft content. The public key
 only allows access to published content. The Vercel production environment is
 configured with the value of the public API key so that it cannot accidentally
@@ -286,7 +289,8 @@ draft content on the site.
 
 ### Vercel
 
-Each website corresponds to a separate project in Vercel, `quansight-consulting`, and `quansight-labs`, respectively. However, because both projects are mapped to
+Each website corresponds to a separate project in Vercel, `quansight-consulting`,
+and `quansight-labs`, respectively. However, because both projects are mapped to
 the same repository on GitHub, whenever a commit is made to the repo, whether
 the commit was only for the Consulting site or the Labs site, it
 triggers a preview deployment for both sites. **Likewise, whenever a merge is made
@@ -331,7 +335,8 @@ preview mode, the banner turns yellow and displays a message telling the user
 that they can see draft content. When the site is not in preview mode, the
 banner turns gray and tells the user that they can see published content. The
 banner provides a clickable link to switch in and out of Next.js preview mode.
-This switch is turned off when the user is viewing the page via the Storyblok UI because when they are working within Storyblok, they should always see the site in Next.js preview
+This switch is turned off when the user is viewing the page via the Storyblok UI because when
+they are working within Storyblok, they should always see the site in Next.js preview
 mode so that they can see changes that are being worked on.
 The banner does not show at all if the site was built in a
 production environment.
@@ -392,7 +397,8 @@ URL is on the live production site (such as quansight.com), then there is no dou
 that you're seeing content that was **published** in
 Storyblok at the time the `main` branch was deployed to production. The other
 reason for this discipline is that it's better to limit reviewers and content
-editors to previewing draft content against the `develop` branch to help catch any potential code/content conflicts before merging to `main`.
+editors to previewing draft content against the `develop` branch to help catch
+any potential code/content conflicts before merging to `main`.
 
 When viewing the site in local development or at a Vercel preview URL, there
 should be a banner that explains that you are looking at a preview of the site.
@@ -413,7 +419,8 @@ the Storyblok editor. It should be only one default URL, and this URL should
 show draft content against the latest code in `develop`.
 
 Hitting the publish button in Storyblok should not push that content to the
-public-facing site; rather, it should queue up the content for the next production deployment. This prevents bypassing any GitHub workflows that have been
+public-facing site; rather, it should queue up the content for the next production deployment.
+This prevents bypassing any GitHub workflows that have been
 set up for quality control.
 
 Content that is marked as "published" in Storyblok should be ready to be pushed
@@ -449,7 +456,8 @@ cp apps/consulting/.env.example apps/consulting/.env
 ```
 
 Run `npm run start:consulting` or `npm run start:labs` to start a corresponding
-dev server. Navigate to <http://localhost:4200/> or use localhost to preview in the Storyblok panel. On the localhost, the app will automatically reload if you
+dev server. Navigate to <http://localhost:4200/> or use `localhost` to preview
+in the Storyblok panel. On the local host, the app will automatically reload if you
 change any of the source files, in the Storyblok panel you need to refresh the
 page manually.
 
@@ -462,8 +470,9 @@ environment's dependencies will match the production environment.
 
 1. Create the component with its schema in Storyblok components.
 2. Create the React component. The components are located in
-   `/apps/consulting/components` (Consulting components), `/apps/labs/components` (labs
-   components), or `/libs/shared/ui-components/src` (shared components). The name of the Storyblok component should be the same as the name of the React
+   `/apps/consulting/components` (Consulting components), `/apps/labs/components` (Labs
+   components), or `/libs/shared/ui-components/src` (shared components).
+   The name of the Storyblok component should be the same as the name of the React
    component.
 3. (Only if you're adding a shared component) Add a component and `types imports`
    in the `/libs/shared/ui-components/src/index.ts` file to make it available in the
@@ -477,7 +486,8 @@ environment's dependencies will match the production environment.
    `/apps/.../components/BlockProvider/utils/getPropsByType.ts` file and add the
    case to the switch statement.
 8. Import the Next component to the
-   `/apps/.../components/BlockProvider/componentsMap.ts` file and add it to the `componentsMap` variable.
+   `/apps/.../components/BlockProvider/componentsMap.ts` file and add it to the
+   `componentsMap` variable.
 9. Import the Next.js component types to the
    `/apps/.../components/BlockProvider/types.ts` file, add the component name to the
    `ComponentType` `enum` and add the props types to the `TBlokComponentPropsMap`
@@ -490,12 +500,13 @@ You can fetch data from Storyblok directly using queries. To add the query:
 1. Add the query schema `.graphql` file to the `/apps/.../api/queries` folder.
 2. Run `npm run codegen:quansight` or `npm run codegen:labs` command, depending on
    which site are you adding the query to.
-3. Create the getting data function in the `/apps/.../api/utils` folder using the
+3. Create the data retrieval function in the `/apps/.../api/utils` folder using the
    function, type, and hook created by the code gen script.
 
 ## GitHub-based blog workflow (Labs blog) 💻
 
-All the **Quansight Labs** blog posts are located inside `apps/labs/post`, and therefore, any new posts _must_ be added to this same folder.
+All the **Quansight Labs** blog posts are located inside `apps/labs/post`,
+and therefore, any new posts _must_ be added to this same folder.
 
 > **Note**
 > For now, all posts should be
@@ -527,20 +538,30 @@ signs. The meta section contains post-related information like:
 - `description` - Description of the blog post. Used inside `<meta name="description" />` tag
 - `published` - Publishing date of the blog post. Used also for sorting posts by
   date (the format should be `Month d, yyyy` for example `January 1, 2023`)
-- `author` - Unique slug of the author (from Storyblok) usually looks like `jon-doe`. Based on this property blog post page will display proper info about the author (and their avatar).
+- `author` - Unique slug of the author (from Storyblok) usually looks like `jon-doe`.
+  Based on this property blog post page will display proper info about the author
+  (and their avatar). The author must be present in Storyblok in order for the
+  post to build without error.
 - `category` - Array of categories for example `[Machine Learning]`. All
-  categories should be the same as in the previously mentioned [`categories.json`](./apps/labs/posts/categories.json) file. **Important note:** categories are case-sensitive.
+  categories should be the same as in the previously mentioned
+  [`categories.json`](./apps/labs/posts/categories.json) file.
+  **Important note:** categories are case-sensitive.
 - `featuredImage` - Object with properties: `src` and `alt`. The `src` property
   is a path to the featured image which is displayed on the posts list on the`/blog`
   page. The `alt` property is alternative text for the image. The image should
-  be added to the `apps/labs/public/posts/<post-name>` directory, for example, `apps/labs/public/posts/hello-world-post`. There is no need to provide a full image path, so the path name should start with `/posts/`.
+  be added to the `apps/labs/public/posts/<post-name>` directory, for example,
+  `apps/labs/public/posts/hello-world-post`. There is no need to provide a full image path,
+  so the path name should start with `/posts/`.
 - `hero` - the object for the Hero section of the post. This can have two different structures:
-  - And object with `imageSrc` and `imageAlt`. The `imageSrc` property is a path to
-    the hero image which is displayed on the blog post page between the nav bar and the
+  - The first structure is an object with `imageSrc` and `imageAlt`. The `imageSrc` property is a path to
+    the hero image, which is displayed on the blog post page between the nav bar and the
     blog heading title. The `imageAlt` property is alternative text for the image.
     The image should be added to the `apps/labs/public/posts/<post-name>`
     directory, for example, `apps/labs/public/posts/hello-world-post`.
-  - The second structure is an object with properties: `imageMobile`,`imageTablet`, and `imageDesktop`. All properties also contain `imageSrc`and`imageAlt` properties. There is no need to provide a full image path, so the path name should start with`/posts/`.
+  - The second structure is an object with properties: `imageMobile`,`imageTablet`,
+    and `imageDesktop`. Each of these properties also contain `imageSrc` and `imageAlt` properties.
+  - For both of these structures, there is no need to provide full image paths,
+    so the path names should start with`/posts/`.
 
 #### Example of blog post meta section
 
@@ -560,9 +581,11 @@ hero:
 
 ### Adding a new blog post 📝
 
-1. Create a new feature branch. Example `feature/new-hello-world-post`.
+1. Create a new feature branch. Example: `feature/new-hello-world-post`.
 2. Add post feature and hero images to `apps/labs/public/posts/<post-name>`.
-3. Add a new `.md|.mdx` file inside the `app/labs/posts` directory. Make sure to read the [Structure of the blog post section](#structure-of-the-blog-post) in this file to ensure that the post is properly structured.
+3. Add a new `.md|.mdx` file inside the `app/labs/posts` directory. Make sure to read the
+   [Structure of the blog post section](#structure-of-the-blog-post) in this file to ensure
+   that the post is properly structured.
 4. Commit and push your changes to the repository. For commits please follow the format of the conventional commit.
    [See](https://www.conventionalcommits.org/en/v1.0.0/)
 5. Create a pull request to the `develop` branch. Make sure to add the `type: content 📝` and `labs 🔭` labels to the PR.
@@ -583,12 +606,16 @@ hero:
 2. Import the component from the codebase
 3. Add a new component to `blogAllowedComponents` object.
 
-### Specifications for Hero images
+### Specifications for Hero Images in Storyblok
 
-There are two options to add images to Hero component.
+There are two options to add images to the Hero component in Storyblok,
+for non-blog pages of both the Consulting and Labs sites.
 
-1. The first one is to add the image in the `General` tab of the Hero component - the image will be used for all screen sizes.
-2. The Second one is to add different images in tabs: Image Mobile, Image Tablet, and Image Desktop. While choosing the second one remember to add all three of them.
+1. The first one is to add the image in the `General` tab of the Hero component -
+   this image will be used for all screen sizes.
+2. The second one is to add different images for the three screen sizes in their
+   respective tabs: Image Mobile, Image Tablet, and Image Desktop. When choosing
+   this second option, you **MUST** add images for all three screen sizes.
 
 By default, the images in the Hero component adjust their size to fill the full
 width of the container box (`objectFit: cover`). You can customize this behavior
