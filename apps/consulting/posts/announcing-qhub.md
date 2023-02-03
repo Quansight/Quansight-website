@@ -24,7 +24,7 @@ hero:
 **Editor's Note:** Since the launch of QHub in 2020, we have evolved it into a
 community-led open source project called Nebari. See our <a
 href="/post/evolving-qhub-to-nebari" target="_self">blog post on Nebari</a> and
-visit [nebari.dev][nebari.dev] for more information.
+visit [nebari.dev][nebari.dev top ed note] for more information.
 
 ---
 
@@ -306,7 +306,7 @@ target="_self">JupyterLab 3.0 dynamic extensions</a>.
 
 **Update:** As we noted above, QHub is now Nebari. See the <a
 href="/post/evolving-qhub-to-nebari" target="_self">more recent post on
-Nebari</a> and [nebari.dev][nebari.dev] for more.
+Nebari</a> and [nebari.dev][nebari.dev bot ed note] for more.
 
 [conda-docker repo]: https://github.com/conda-incubator/conda-docker
 [conda-store repo]: https://github.com/quansight/conda-store
@@ -322,7 +322,8 @@ Nebari</a> and [nebari.dev][nebari.dev] for more.
 [jupyterlab documentation]: https://jupyterlab.readthedocs.io/en/stable/
 [kubernetes documentation]: https://kubernetes.io/docs/home/
 [kubessh repo]: https://github.com/yuvipanda/kubessh
-[nebari.dev]: https://www.nebari.dev
+[nebari.dev bot ed note]: https://nebari.dev?utm_campaign=post-announcing-qhub&utm_medium=web&utm_source=quansight-com&utm_content=nebari-note-bottom&utm_term=
+[nebari.dev top ed note]: https://nebari.dev?utm_campaign=post-announcing-qhub&utm_medium=web&utm_source=quansight-com&utm_content=nebari-note-top&utm_term=
 [nss_wrapper library]: https://cwrap.org/nss_wrapper.html
 [openshift site]: https://www.openshift.com/
 [terraform site]: https://www.terraform.io/intro/index.html
