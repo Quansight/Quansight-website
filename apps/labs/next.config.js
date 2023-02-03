@@ -66,6 +66,15 @@ const nextConfig = {
     // The conventions of this return value are described in the Next.js docs:
     // https://nextjs.org/docs/api-reference/next.config.js/rewrites
     return {
+      beforeFiles: [
+        {
+          // In the future, this rewrite can be generalized by doing something like
+          // source: '/annual-reports/quansight-labs-annual-report-:year.pdf'
+          // destination: '/api/annual-report.pdf?year=:year'
+          source: '/annual-reports/quansight-labs-annual-report-2022.pdf',
+          destination: '/api/annual-report.pdf',
+        },
+      ],
       afterFiles: [
         // These rewrites are checked after pages/public files are checked but
         // before dynamic routes.
