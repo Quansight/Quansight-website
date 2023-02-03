@@ -35,8 +35,10 @@ const nextConfig = {
         //   Content-Type: application/octet-stream
         //
         // The following rule catches some plain text file types that we link
-        // to, and supplies the text/plain MIME type in the Content-Type header.
-        source: '/:path*(.py|.cpp)',
+        // to, and supplies the text/plain MIME type in the Content-Type header
+        // so that end users can open and view the file directly in their
+        // browser rather than having to first download and save the file.
+        source: '/:path*.(py|cpp)',
         headers: [
           {
             key: 'Content-Type',
