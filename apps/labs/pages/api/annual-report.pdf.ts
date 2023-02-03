@@ -25,13 +25,20 @@ export default async function handler(req: NextRequest) {
       domain: 'labs.quansight.org',
       name: 'pageview',
       url: req.url,
+      // A note about spelling: `referrer` on the left (double r) is from the
+      // Plausible spec: https://plausible.io/docs/events-api. `referer` on the
+      // right (single r) is from the HTTP spec. To read more:
+      // https://en.wikipedia.org/wiki/HTTP_referer#Etymology
       referrer: req.headers.get('referer'),
     }),
   });
-  // Returning fetch comes from Next.js docs:
-  // https://nextjs.org/docs/api-routes/edge-api-routes#forwarding-headers
-  return fetch(
-    // TODO change this to the real annual report PDF
+  // A few reasons to use 302 vs 301:
+  // - Ensures that this handler gets called every time that somebody clicks the
+  //   tracking URL for the PDF even if they've clicked it before.
+  // - It signals to search engines and other tech that we do not consider the
+  //   CDN URL for the annual report to be the canonical URL for this resource.
+  return Response.redirect(
     'https://a.storyblok.com/f/152463/x/1752e51fa9/nf-annual-report-2021.pdf',
+    302,
   );
 }

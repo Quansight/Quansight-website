@@ -61,6 +61,9 @@ const nextConfig = {
     return {
       beforeFiles: [
         {
+          // In the future, this rewrite can be generalized by doing something like
+          // source: '/annual-reports/quansight-labs-annual-report-:year.pdf'
+          // destination: '/api/annual-report.pdf?year=:year'
           source: '/annual-reports/quansight-labs-annual-report-2022.pdf',
           destination: '/api/annual-report.pdf',
         },
@@ -77,7 +80,7 @@ const nextConfig = {
           // you choose something like analytics or plausible, it might get
           // blocked in the future.
           source: '/p7e/js/script.js',
-          destination: 'https://plausible.io/js/script.file-downloads.js',
+          destination: 'https://plausible.io/js/script.js',
         },
         {
           source: '/p7e/api/event',
