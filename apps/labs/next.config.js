@@ -38,6 +38,11 @@ const nextConfig = {
         // to, and supplies the text/plain MIME type in the Content-Type header
         // so that end users can open and view the file directly in their
         // browser rather than having to first download and save the file.
+        //
+        // In the following path matcher string only the stuff in parens is
+        // treated as a regular expression. The period outside the parens is a
+        // literal period. Per the docs:
+        // https://nextjs.org/docs/api-reference/next.config.js/headers#regex-path-matching
         source: '/:path*.(py|cpp)',
         headers: [
           {
