@@ -19,7 +19,9 @@ We at Quansight Labs are delighted to share our first-ever annual report with yo
 
 In these pages, we reflect on the past year and share how we're progressing towards our mission to sustain and grow community-driven open source projects and ecosystems.
 
-<!-- TODO: Add Infographic with alt-text -->
+{
+// TODO: Add Infographic with alt-text
+}
 
 As members of the PyData community, the success of the open source data science ecosystem is our success. In 2022, the projects we contribute to and collaborate with continued to improve and flourish. We secured grants for substantial advancements and essential maintenance work, collaborated with industry partners on key initiatives, focused on accessibility initiatives for more people to benefit from our tools, and welcomed new enthusiastic contributors with diverse skills and backgrounds.
 
