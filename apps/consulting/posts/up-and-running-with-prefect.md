@@ -62,7 +62,7 @@ $ pip install prefect prefect[viz] pandas NumPy palmerpenguins
 `prefect[viz]` is an optional extra which is only needed if you want to generate
 flow visualizations with Graphviz.
 
-## The Example: How much does it cost to ship all of the Palmer penguins🐧?
+## The Example: How Much Does It Cost to Ship All of the Palmer Penguins🐧?
 
 The Palmer penguins dataset is a great example dataset first published in 2014
 by [Gorman, Williams, and Fraser][gorman williams fraser paper] and originally
@@ -313,7 +313,7 @@ width="450px"
 
 Each node is now green, indicating that it executed successfully.
 
-## Going further with Prefect
+## Going Further With Prefect
 
 We've demonstrated how Prefect can quickly and simply manage and track _task_
 execution. Although this isn't the most complicated example, it succinctly
