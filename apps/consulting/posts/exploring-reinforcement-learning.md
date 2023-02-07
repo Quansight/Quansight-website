@@ -12,6 +12,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 [Reinforcement learning][reinforcement learning], a type of machine learning, can tackle a wide range of complex issues. Some of the applications include autonomous driving, robotics, trading strategies, healthcare treatment policy, warehouse management, strategic game theory, and many others. The list goes on long enough that one might be tempted to see the technology as magic. If you have big challenges in need of novel solutions, then this post is for you.
 
 ---
@@ -20,7 +22,7 @@ hero:
 
 Arthur C. Clark penned three adages in the '60s and '70s that became known as his three laws. If you read many tech blogs, you probably know the third law, which reads
 
-> _Any sufficiently advanced technology is indistinguishable from magic._
+> Any sufficiently advanced technology is indistinguishable from magic.
 
 The author of said blog is usually quoting this line while standing in awe before an impressive new tool or research development. And rightly so; there are many technological marvels these days. Here, however, we want to take the line with a different inflection:
 
