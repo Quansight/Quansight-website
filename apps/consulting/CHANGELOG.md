@@ -1,3 +1,31 @@
+January 2, 2023
+
+Via Storyblok:
+
+- All contact forms' webhook URLs updated to use the new, common Zap
+  that takes advantage of the page URL being passed into the Zap
+  payload as `form_url`
+
+December 19, 2022
+
+Via Storyblok:
+
+- Publish the Nebari announcement blog post.
+  - Will live at https://quansight.com/post/evolving-qhub-to-nebari
+
+December 16, 2022
+
+Via Storyblok:
+
+- Add Pavithra to `team` and set as Role `team`,
+  to display in the Staff Spotlight
+
+November 30, 2022
+
+Via Storyblok:
+
+- Add Pamphile to team listing
+
 November 8, 2022
 
 Via Storyblok:
