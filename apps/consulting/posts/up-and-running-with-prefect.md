@@ -47,7 +47,7 @@ from the ground up. Along the way, we'll show how to
 - Define the _tasks_ (read: functions) that will make up the pipeline
 - Chain tasks together into a _flow_ as a way of defining their interdependencies
 - Run the pipeline, and examine the output
-- Visualize the task graph with graphviz
+- Visualize the task graph with Graphviz
 
 ### Installing Prefect
 
@@ -60,7 +60,7 @@ pip install prefect prefect[viz] pandas NumPy palmerpenguins
 ```
 
 `prefect[viz]` is an optional extra which is only needed if you want to generate
-flow visualizations with graphviz.
+flow visualizations with Graphviz.
 
 ## The Example: How much does it cost to ship all of the Palmer penguins🐧?
 
@@ -205,7 +205,7 @@ that the order in which we've instantiated the _tasks_ inside the _flow_ sets up
 the dependencies as we intended?
 
 One of the most useful features of Prefect is that it makes it easy to visualize
-the relationships between the various _tasks_ using graphviz:
+the relationships between the various _tasks_ using Graphviz:
 
 ```python
 flow.visualize()
