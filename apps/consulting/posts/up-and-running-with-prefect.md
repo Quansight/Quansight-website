@@ -211,7 +211,10 @@ the relationships between the various _tasks_ using graphviz:
 flow.visualize()
 ```
 
-![](/posts/up-and-running-with-prefect/prefect-img-3.png)
+<img
+src="/posts/up-and-running-with-prefect/prefect-img-3.png"
+width="450px"
+/>
 
 Here, each node of the graph represents a _task_, and each arrow indicates a
 dependency. Visualizations such as these allow us to quickly confirm that our
@@ -305,7 +308,10 @@ after the run:
 flow.visualize(flow_state=state)
 ```
 
-![](/posts/up-and-running-with-prefect/prefect-img-4.png)
+<img
+src="/posts/up-and-running-with-prefect/prefect-img-4.png"
+width="450px"
+/>
 
 Each node is now green, indicating that it executed successfully.
 
