@@ -95,7 +95,7 @@ importing the required libraries and getting the dataset.
 | 10  | Adelie  | Torgersen | 37.8           | 17.1          | 186.0             | 3300.0      | NaN    | 2007 |
 | 11  | Adelie  | Torgersen | 37.8           | 17.3          | 180.0             | 3700.0      | NaN    | 2007 |
 
-The table shows 11/344 rows × 8 columns.
+&nbsp; &nbsp; _This table shows 11 out of 344 rows and 8 columns._
 
 ### Defining Tasks
 
@@ -174,7 +174,7 @@ of the others, you'll need to call the `.run()` method:
 | 14  | Adelie  | Torgersen | 34.6           | 21.1          | 198.0             | 4400.0      | male   | 2007 |
 | 15  | Adelie  | Torgersen | 36.6           | 17.8          | 185.0             | 3700.0      | female | 2007 |
 
-Showing the first 15/333 rows × 8 columns.
+&nbsp; &nbsp; _This table shows 15 out of 333 rows and 8 columns._
 
 In order to execute these _tasks_ on our data we'll need to define the order in
 which they need to be run; we'll do this by chaining them together into a
