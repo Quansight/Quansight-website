@@ -331,7 +331,7 @@ capabilities, take a look at the docs and tutorials available in the
 
 [airflow homepage]: https://airflow.apache.org/
 [allison horst paper]: https://allisonhorst.github.io/palmerpenguins/articles/intro.html
-[context manager syntax]: https://docs.python.org/3/library/contextlib.html
+[context manager syntax]: https://docs.python.org/3/library/contextlib.html#contextlib.contextmanager
 [gorman williams fraser paper]: https://doi.org/10.1371/journal.pone.0090081
 [luigi repo]: https://github.com/spotify/luigi
 [numpy site]: https://numpy.org/
