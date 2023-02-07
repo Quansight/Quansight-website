@@ -12,6 +12,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 _Note: This post discusses the 1.x version of Prefect, and not the newer 2.x
 series._
 
@@ -70,19 +72,19 @@ penguins
 ```
 
 |     | species | island    | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g | sex    | year |
-|-----|---------|-----------|----------------|---------------|-------------------|-------------|--------|------|
-| 0   | Adelie  | Torgersen | 39.1           | 18.7          | 181.0             | 3750.0      | male   | 2007 | 
-| 1   | Adelie  | Torgersen | 39.5           | 17.4          | 186.0             | 3800.0      | female | 2007 | 
-| 2   | Adelie  | Torgersen | 40.3           | 18.0          | 195.0             | 3250.0      | female | 2007 | 
-| 3   | Adelie  | Torgersen | NaN            | NaN           | NaN               | NaN         | NaN    | 2007 | 
-| 4   | Adelie  | Torgersen | 36.7           | 19.3          | 193.0             | 3450.0      | female | 2007 | 
-| 5   | Adelie  | Torgersen | 39.3           | 20.6          | 190.0             | 3650.0      | male   | 2007 | 
-| 6   | Adelie  | Torgersen | 38.9           | 17.8          | 181.0             | 3625.0      | female | 2007 | 
-| 7   | Adelie  | Torgersen | 39.2           | 19.6          | 195.0             | 4675.0      | male   | 2007 | 
-| 8   | Adelie  | Torgersen | 34.1           | 18.1          | 193.0             | 3475.0      | NaN    | 2007 | 
-| 9   | Adelie  | Torgersen | 42.0           | 20.2          | 190.0             | 4250.0      | NaN    | 2007 | 
-| 10  | Adelie  | Torgersen | 37.8           | 17.1          | 186.0             | 3300.0      | NaN    | 2007 | 
-| 11  | Adelie  | Torgersen | 37.8           | 17.3          | 180.0             | 3700.0      | NaN    | 2007 | 
+| --- | ------- | --------- | -------------- | ------------- | ----------------- | ----------- | ------ | ---- |
+| 0   | Adelie  | Torgersen | 39.1           | 18.7          | 181.0             | 3750.0      | male   | 2007 |
+| 1   | Adelie  | Torgersen | 39.5           | 17.4          | 186.0             | 3800.0      | female | 2007 |
+| 2   | Adelie  | Torgersen | 40.3           | 18.0          | 195.0             | 3250.0      | female | 2007 |
+| 3   | Adelie  | Torgersen | NaN            | NaN           | NaN               | NaN         | NaN    | 2007 |
+| 4   | Adelie  | Torgersen | 36.7           | 19.3          | 193.0             | 3450.0      | female | 2007 |
+| 5   | Adelie  | Torgersen | 39.3           | 20.6          | 190.0             | 3650.0      | male   | 2007 |
+| 6   | Adelie  | Torgersen | 38.9           | 17.8          | 181.0             | 3625.0      | female | 2007 |
+| 7   | Adelie  | Torgersen | 39.2           | 19.6          | 195.0             | 4675.0      | male   | 2007 |
+| 8   | Adelie  | Torgersen | 34.1           | 18.1          | 193.0             | 3475.0      | NaN    | 2007 |
+| 9   | Adelie  | Torgersen | 42.0           | 20.2          | 190.0             | 4250.0      | NaN    | 2007 |
+| 10  | Adelie  | Torgersen | 37.8           | 17.1          | 186.0             | 3300.0      | NaN    | 2007 |
+| 11  | Adelie  | Torgersen | 37.8           | 17.3          | 180.0             | 3700.0      | NaN    | 2007 |
 
 The table shows 11/344 rows × 8 columns.
 
@@ -134,18 +136,18 @@ clean_data.run(penguins)
 ```
 
 |     | species | island    | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g | sex    | year |
-|-----|---------|-----------|----------------|---------------|-------------------|-------------|--------|------|
-| 0   | Adelie  | Torgersen | 39.1           | 18.7          | 181.0             | 3750.0      | male   | 2007 | 
-| 1   | Adelie  | Torgersen | 39.5           | 17.4          | 186.0             | 3800.0      | female | 2007 | 
-| 2   | Adelie  | Torgersen | 40.3           | 18.0          | 195.0             | 3250.0      | female | 2007 | 
-| 4   | Adelie  | Torgersen | 36.7           | 19.3          | 193.0             | 3450.0      | female | 2007 | 
-| 5   | Adelie  | Torgersen | 39.3           | 20.6          | 190.0             | 3650.0      | male   | 2007 | 
-| 6   | Adelie  | Torgersen | 38.9           | 17.8          | 181.0             | 3625.0      | female | 2007 | 
-| 7   | Adelie  | Torgersen | 39.2           | 19.6          | 195.0             | 4675.0      | male   | 2007 | 
-| 12  | Adelie  | Torgersen | 41.1           | 17.6          | 182.0             | 3200.0      | female | 2007 | 
-| 13  | Adelie  | Torgersen | 38.6           | 21.2          | 191.0             | 3800.0      | male   | 2007 | 
-| 14  | Adelie  | Torgersen | 34.6           | 21.1          | 198.0             | 4400.0      | male   | 2007 | 
-| 15  | Adelie  | Torgersen | 36.6           | 17.8          | 185.0             | 3700.0      | female | 2007 | 
+| --- | ------- | --------- | -------------- | ------------- | ----------------- | ----------- | ------ | ---- |
+| 0   | Adelie  | Torgersen | 39.1           | 18.7          | 181.0             | 3750.0      | male   | 2007 |
+| 1   | Adelie  | Torgersen | 39.5           | 17.4          | 186.0             | 3800.0      | female | 2007 |
+| 2   | Adelie  | Torgersen | 40.3           | 18.0          | 195.0             | 3250.0      | female | 2007 |
+| 4   | Adelie  | Torgersen | 36.7           | 19.3          | 193.0             | 3450.0      | female | 2007 |
+| 5   | Adelie  | Torgersen | 39.3           | 20.6          | 190.0             | 3650.0      | male   | 2007 |
+| 6   | Adelie  | Torgersen | 38.9           | 17.8          | 181.0             | 3625.0      | female | 2007 |
+| 7   | Adelie  | Torgersen | 39.2           | 19.6          | 195.0             | 4675.0      | male   | 2007 |
+| 12  | Adelie  | Torgersen | 41.1           | 17.6          | 182.0             | 3200.0      | female | 2007 |
+| 13  | Adelie  | Torgersen | 38.6           | 21.2          | 191.0             | 3800.0      | male   | 2007 |
+| 14  | Adelie  | Torgersen | 34.6           | 21.1          | 198.0             | 4400.0      | male   | 2007 |
+| 15  | Adelie  | Torgersen | 36.6           | 17.8          | 185.0             | 3700.0      | female | 2007 |
 
 Showing the first 15/333 rows × 8 columns.
 
@@ -181,6 +183,7 @@ Here, each node of the graph represents a _task_, and each arrow indicates a dep
 ```python
 state = flow.run()
 ```
+
 ```bash
 [2021-08-26 14:43:38-0700] INFO - prefect.FlowRunner | Beginning Flow run for 'Shipment Flow'
 
