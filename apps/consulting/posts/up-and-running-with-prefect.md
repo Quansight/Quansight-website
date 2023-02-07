@@ -222,11 +222,9 @@ mental model of the computation matches up with what we intended to program.
 Brilliant! Okay, the _flow_ has been set up and we're sure the _task_ graph
 looks good. Let's run it!
 
-```python
+```none
 >>> state = flow.run()
-```
 
-```bash
 [2021-08-26 14:43:38-0700] INFO - prefect.FlowRunner | Beginning Flow run for 'Shipment Flow'
 
 [2021-08-26 14:43:38-0700] INFO - prefect.TaskRunner | Task 'clean_data': Starting task run...
@@ -269,12 +267,10 @@ Prefect has a number of useful features related to storing, caching, and
 retrieving results. By default, the `State` instance returned by `flow.run()`
 stores the state of each _task_ in a dictionary:
 
-```python
+```none
 >>> task_results = state.result
 >>> task_results
-```
 
-```bash
 {<Task: clean_data>: <Success: "Task run succeeded.">,
 
 <Task: split_oversize>: <Success: "Task run succeeded.">,
