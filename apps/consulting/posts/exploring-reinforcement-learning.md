@@ -25,7 +25,7 @@ have big challenges in need of novel solutions, then this post is for you.
 
 Arthur C. Clark penned three adages in the '60s and '70s that became known as
 his three laws. If you read many tech blogs, you probably know the third law,
-which reads
+which reads:
 
 > Any sufficiently advanced technology is indistinguishable from magic.
 
@@ -94,13 +94,13 @@ Depending on the complexity of the environment and the agent's goals, the agent
 may learn everything it needs to know in relatively short order. In more complex
 cases, the agent may need much more experience to come to reasonable solutions.
 For example, in the [OpenAI hide and seek study][emergent tool use] mentioned
-above, they trained on hundreds of millions of episodes - billions of
+above, they trained on hundreds of millions of episodes—billions of
 time-steps. In the larger, more complex cases, the architecture of the learning
 pipeline becomes significant itself.
 
 To be clear, this is not an exhaustive search where the computer simply
 brute-forces every possible action/environment combination and returns the best
-it found - that is possible with certain small-scale scenarios, but would be
+it found—that is possible with certain small-scale scenarios, but would be
 dauntingly expensive, and often impossible, for large scenarios requiring
 exploration of countless (infinite) combinations. Instead, successful
 reinforcement learning algorithms use various techniques to learn optimal action
