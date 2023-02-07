@@ -21,8 +21,6 @@ warehouse management, strategic game theory, and many others. The list goes on
 long enough that one might be tempted to see the technology as magic. If you
 have big challenges in need of novel solutions, then this post is for you.
 
----
-
 ![](/posts/exploring-reinforcement-learning/reinf_learning.png)
 
 Arthur C. Clark penned three adages in the '60s and '70s that became known as
