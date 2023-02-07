@@ -56,7 +56,7 @@ First we'll need to install Prefect; we'll also need [pandas][pandas site] and
 dataset:
 
 ```bash
-pip install prefect prefect[viz] pandas NumPy palmerpenguins
+$ pip install prefect prefect[viz] pandas NumPy palmerpenguins
 ```
 
 `prefect[viz]` is an optional extra which is only needed if you want to generate
@@ -75,9 +75,9 @@ calculate the total cost of shipping the entire bird population. We'll start by
 importing the required libraries and getting the dataset.
 
 ```python
-import prefect, pandas, numpy, palmerpenguins
-penguins = palmerpenguins.load_penguins()
-penguins
+>>> import prefect, pandas, numpy, palmerpenguins
+>>> penguins = palmerpenguins.load_penguins()
+>>> penguins
 ```
 
 |     | species | island    | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g | sex    | year |
@@ -157,7 +157,7 @@ pipeline, but if you still want to execute one of these functions independently
 of the others, you'll need to call the `.run()` method:
 
 ```python
-clean_data.run(penguins)
+>>> clean_data.run(penguins)
 ```
 
 |     | species | island    | bill_length_mm | bill_depth_mm | flipper_length_mm | body_mass_g | sex    | year |
@@ -190,12 +190,12 @@ Prefect allows us to easily define these dependencies with Python's
 [context manager syntax][context manager syntax]:
 
 ```python
-with prefect.Flow('Shipment Flow') as flow:
-    penguins_cleaned = clean_data(penguins)
-    standard, oversize = split_oversize(penguins_cleaned)
-    standard_cost = compute_costs(standard, is_oversize=False)
-    oversize_cost = compute_costs(oversize, is_oversize=True)
-    total_cost = compute_total_cost(standard_cost, oversize_cost)
+>>> with prefect.Flow('Shipment Flow') as flow:
+...     penguins_cleaned = clean_data(penguins)
+...     standard, oversize = split_oversize(penguins_cleaned)
+...     standard_cost = compute_costs(standard, is_oversize=False)
+...     oversize_cost = compute_costs(oversize, is_oversize=True)
+...     total_cost = compute_total_cost(standard_cost, oversize_cost)
 ```
 
 With the _flow_ defined, let's pause for just a moment. In a complicated
@@ -208,7 +208,7 @@ One of the most useful features of Prefect is that it makes it easy to visualize
 the relationships between the various _tasks_ using Graphviz:
 
 ```python
-flow.visualize()
+>>> flow.visualize()
 ```
 
 <img
@@ -223,7 +223,7 @@ Brilliant! Okay, the _flow_ has been set up and we're sure the _task_ graph
 looks good. Let's run it!
 
 ```python
-state = flow.run()
+>>> state = flow.run()
 ```
 
 ```bash
@@ -270,8 +270,8 @@ retrieving results. By default, the `State` instance returned by `flow.run()`
 stores the state of each _task_ in a dictionary:
 
 ```python
-task_results = state.result
-task_results
+>>> task_results = state.result
+>>> task_results
 ```
 
 ```bash
@@ -293,10 +293,8 @@ task_results
 The Result associated with each `Task` instance contains the output of the decorated function:
 
 ```python
-task_results[total_cost].result
-```
+>>> task_results[total_cost].result
 
-```bash
 27896.1
 ```
 
@@ -305,7 +303,7 @@ oversize penguins. Finally, we can visualize the state of the _flow_, this time
 after the run:
 
 ```python
-flow.visualize(flow_state=state)
+>>> flow.visualize(flow_state=state)
 ```
 
 <img
