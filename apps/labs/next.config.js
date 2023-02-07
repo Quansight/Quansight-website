@@ -35,8 +35,15 @@ const nextConfig = {
         //   Content-Type: application/octet-stream
         //
         // The following rule catches some plain text file types that we link
-        // to, and supplies the text/plain MIME type in the Content-Type header.
-        source: '/:path*(.py|.cpp)',
+        // to, and supplies the text/plain MIME type in the Content-Type header
+        // so that end users can open and view the file directly in their
+        // browser rather than having to first download and save the file.
+        //
+        // In the following path matcher string only the stuff in parens is
+        // treated as a regular expression. The period outside the parens is a
+        // literal period. Per the docs:
+        // https://nextjs.org/docs/api-reference/next.config.js/headers#regex-path-matching
+        source: '/:path*.(py|cpp)',
         headers: [
           {
             key: 'Content-Type',
@@ -59,6 +66,15 @@ const nextConfig = {
     // The conventions of this return value are described in the Next.js docs:
     // https://nextjs.org/docs/api-reference/next.config.js/rewrites
     return {
+      beforeFiles: [
+        {
+          // In the future, this rewrite can be generalized by doing something like
+          // source: '/annual-reports/quansight-labs-annual-report-:year.pdf'
+          // destination: '/api/annual-report.pdf?year=:year'
+          source: '/annual-reports/quansight-labs-annual-report-2022.pdf',
+          destination: '/api/annual-report.pdf',
+        },
+      ],
       afterFiles: [
         // These rewrites are checked after pages/public files are checked but
         // before dynamic routes.
