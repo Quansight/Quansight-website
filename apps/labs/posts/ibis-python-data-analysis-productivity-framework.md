@@ -2,7 +2,7 @@
 title: "Ibis: Python data analysis productivity framework"
 author: ivan-ogasawara
 published: July 9, 2019
-description: ''
+description: 'During the last months OmniSci and Quansight were working together to add a backend to Ibis for OmniSciDB (formerly MapD Core)The implementation of this new backend also resulted in the creation of new expressions/operators on Ibis core, such as GeoSpatial data types and operations, trigonometric operations and Ssome statistcal operations.'
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/hello-world-post/featured.png
@@ -41,11 +41,11 @@ your analytical workflow!
 If you want to learn more about ibis consider taking a look at these
 tutorials:
 
--   <https://docs.ibis-project.org/tutorial.html>
+-   [https://docs.ibis-project.org/tutorial.html](https://docs.ibis-project.org/tutorial.html)
 
 Do you want to watch some interesting video about Ibis? Check this out:
 
--   <https://www.youtube.com/embed/8Tzh42mQjrw?start=1625>
+-   [https://www.youtube.com/embed/8Tzh42mQjrw?start=1625](https://www.youtube.com/embed/8Tzh42mQjrw?start=1625)
 
 **Now, let's check out some work developed here at Quansight in the
 last months!**
