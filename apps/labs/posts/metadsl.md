@@ -5,7 +5,7 @@ published: May 31, 2019
 description: 'metadsl is meant to be a place to come together to build a framework for DSLs in Python. It provides a way to seperate the user experience from the the specific of execution, to enable consistency and flexibility for users. In this post, I will go through an example of creating a very basic DSL.'
 category: [Beyond PyData]
 featuredImage:
-  src: /posts/metadsl/blog_hero_org.svg,
+  src: /posts/metadsl/blog_feature_org.svg
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/metadsl/blog_hero_org.svg
