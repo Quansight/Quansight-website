@@ -42,7 +42,7 @@ cloud-based task management dashboard called
 [Prefect Cloud][prefect site: cloud] as their flagship product. By itself, the
 [Prefect library][prefect repo] is open source and totally free to use. Today
 we'll explore some of Prefect's data structures by building a simple pipeline
-from the ground up. Along the way, we'll show how to
+from the ground up. Along the way, we'll show how to:
 
 - Define the _tasks_ (read: functions) that will make up the pipeline
 - Chain tasks together into a _flow_ as a way of defining their interdependencies
@@ -130,7 +130,7 @@ mass. Oversize parcels cost 0.022, while standard parcels cost 0.014.
 @prefect.task
 def compute_costs(df, is_oversize) -> pandas.DataFrame:
     df = df.copy()
-    price_per_g = is_oversize and .022 or .014
+    price_per_g = is_oversize and 0.022 or 0.014
 
     df['cost'] = df['body_mass_g'] * price_per_g
     return df
@@ -261,7 +261,7 @@ looks good. Let's run it!
 From the information that Prefect logs, by default, to `stdout`, it looks like
 all _tasks_ executed successfully. Next, let's look at the results.
 
-### Interpreting the results
+### Interpreting the Results
 
 Prefect has a number of useful features related to storing, caching, and
 retrieving results. By default, the `State` instance returned by `flow.run()`
@@ -286,7 +286,8 @@ stores the state of each _task_ in a dictionary:
 <Task: compute_total_cost>: <Success: "Task run succeeded.">}
 ```
 
-The Result associated with each `Task` instance contains the output of the decorated function:
+The `Result` associated with each `Task` instance contains the output of the
+decorated function:
 
 ```python
 >>> task_results[total_cost].result
@@ -316,11 +317,11 @@ execution. Although this isn't the most complicated example, it succinctly
 illustrates some of the core features of Prefect, and could be readily modified
 to tackle more difficult problems. While [prefect.io][prefect site] certainly
 targets machine learning pipelines with its branding and documentation, Prefect
-could be useful for anything where _task_ tracking is important - including
+could be useful for anything where _task_ tracking is important—including
 research applications.
 
 If you'd like to learn more about Prefect's powerful
-[caching and data persistence mechanisms][prefect persistance],
+[caching and data persistence mechanisms][prefect persistence],
 [notifications][prefect notifications] (including Slack integration!), and other
 capabilities, take a look at the docs and tutorials available in the
 [Prefect documentation][prefect site: core].
@@ -333,7 +334,7 @@ capabilities, take a look at the docs and tutorials available in the
 [numpy site]: https://numpy.org/
 [prefect persistance]: https://docs.prefect.io/core/concepts/persistence.html
 [prefect notifications]: https://docs.prefect.io/core/concepts/notifications.html#responding-to-state
-[pandas site]: https://pandas.pydata.org/
+[prefect persistence]: https://docs.prefect.io/core/concepts/persistence.html
 [prefect repo]: https://github.com/prefecthq/prefect
 [prefect site]: https://www.prefect.io/
 [prefect site: cloud]: https://www.prefect.io/cloud/
