@@ -52,8 +52,8 @@ from the ground up. Along the way, we'll show how to
 ### Installing Prefect
 
 First we'll need to install Prefect; we'll also need [pandas][pandas site] and
-[NumPy][numpy site]. For example data, we'll make use of the Palmer penguins
-dataset:
+[NumPy][numpy site]. For example data, we'll make use of the [Palmer penguins
+dataset][palmer penguins pypi] available on PyPI:
 
 ```bash
 $ pip install prefect prefect[viz] pandas NumPy palmerpenguins
