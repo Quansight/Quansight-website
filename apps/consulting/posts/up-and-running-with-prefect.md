@@ -45,9 +45,10 @@ we'll explore some of Prefect's data structures by building a simple pipeline
 from the ground up. Along the way, we'll show how to:
 
 - Define the _tasks_ (read: functions) that will make up the pipeline
-- Chain tasks together into a _flow_ as a way of defining their interdependencies
-- Run the pipeline, and examine the output
-- Visualize the task graph with Graphviz
+- Chain _tasks_ together into a _flow_ as a way of defining their
+  interdependencies
+- Run the _flow_ (or pipeline), and examine the output
+- Visualize the _task_ graph with Graphviz
 
 ### Installing Prefect
 
@@ -312,7 +313,7 @@ Each node is now green, indicating that it executed successfully.
 
 ## Going Further With Prefect
 
-We've demonstrated how Prefect can quickly and simply manage and track _task_
+We've demonstrated how Prefect can quickly and simply manage and track task
 execution. Although this isn't the most complicated example, it succinctly
 illustrates some of the core features of Prefect, and could be readily modified
 to tackle more difficult problems. While [prefect.io][prefect site] certainly
