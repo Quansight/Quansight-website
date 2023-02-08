@@ -244,4 +244,4 @@ So \...
     issues](https://github.com/ibis-project/ibis/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
     label on GitHub!
 -   Do you want to add new features and want to fund Ibis? Contact us at
-    <info@quansight.com>
+    (info@quansight.com)[info@quansight.com]
