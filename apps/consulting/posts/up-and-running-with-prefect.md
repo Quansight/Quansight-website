@@ -104,15 +104,16 @@ With Prefect, the smallest components of a pipeline are called _tasks_. These
 are individual operations which are usually strung together to carry out loading
 of data, transformations, and output. Prefect's functional API makes it simple
 to turn Python functions into _tasks_ using decorators. Here we'll define
-`clean_data`, which removes any rows which contain a NaN value. Note that we're
-only using the return annotations here because Prefect uses them to handle
-_tasks_ which return multiple arguments:
+`clean_data`, which removes any rows which contain a NaN (not a number) value:
 
 ```python
 @prefect.task
 def clean_data(df) -> pandas.DataFrame:
     return df.dropna()
 ```
+
+Note that we're using type annotations on the return values here because Prefect
+uses the annotations to handle _tasks_ which return multiple arguments.
 
 `split_oversize` splits the penguins into two dataframes: one group of standard
 sized birds and another for the oversize population.
@@ -181,11 +182,11 @@ In order to execute these _tasks_ on our data we'll need to define the order in
 which they need to be run; we'll do this by chaining them together into a
 _flow_, which defines their order of execution.
 
-1. We first need to remove the bad data; some rows have NaN values
-2. Then compute the cost of each shipment, with an additional fee added if it is
-   an oversize penguin
-3. Finally, add the cost of all the shipments together to get the `total_cost`
-   of shipping the entire population
+1. We first need to remove the bad data, as some rows have NaN values
+2. We then compute the cost of each shipment, with an additional fee added if it
+   is an oversize penguin
+3. Finally, we add the cost of all the shipments together to get the
+   `total_cost` of shipping the entire population
 
 Prefect allows us to easily define these dependencies with Python's
 [context manager syntax][context manager syntax]:
@@ -259,8 +260,8 @@ looks good. Let's run it!
 [2021-08-26 14:43:38-0700] INFO - prefect.FlowRunner | Flow run SUCCESS: all reference tasks succeeded
 ```
 
-From the information that Prefect logs, by default, to `stdout`, it looks like
-all _tasks_ executed successfully. Next, let's look at the results.
+From the information that Prefect logs (to `stdout`, by default), it looks like
+all of the _tasks_ executed successfully. Next, let's look at the results.
 
 ### Interpreting the Results
 
