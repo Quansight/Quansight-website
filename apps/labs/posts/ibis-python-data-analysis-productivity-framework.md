@@ -239,7 +239,7 @@ So \...
 -   Are you excited to use Ibis? [Try it out
     now](https://docs.ibis-project.org/getting-started.html)!
 -   Have you already used Ibis? Reach out to me,
-    <ivan.ogasawara@quansight.com>, and share your experience!
+    [ivan.ogasawara@quansight.com](ivan.ogasawara@quansight.com), and share your experience!
 -   Are you interested in contributing to Ibis? Check the [good first
     issues](https://github.com/ibis-project/ibis/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
     label on GitHub!
