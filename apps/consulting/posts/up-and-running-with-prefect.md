@@ -332,7 +332,8 @@ capabilities, take a look at the docs and tutorials available in the
 [gorman williams fraser paper]: https://doi.org/10.1371/journal.pone.0090081
 [luigi repo]: https://github.com/spotify/luigi
 [numpy site]: https://numpy.org/
-[prefect persistance]: https://docs.prefect.io/core/concepts/persistence.html
+[palmer penguins pypi]: https://pypi.org/project/palmerpenguins/
+[pandas site]: https://pandas.pydata.org/
 [prefect notifications]: https://docs.prefect.io/core/concepts/notifications.html#responding-to-state
 [prefect persistence]: https://docs.prefect.io/core/concepts/persistence.html
 [prefect repo]: https://github.com/prefecthq/prefect
