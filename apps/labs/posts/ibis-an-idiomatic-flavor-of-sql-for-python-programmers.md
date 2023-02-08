@@ -5,14 +5,12 @@ published: June 26, 2020
 description: 'Ibis is an alternative approach using databases that relies on Python rather than SQL experience. This post focuses on writing SQL expressions in Python and how to compose queries visually using Ibis.'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/ibis-an-idiomatic-flavor-of-sql-for-python-programmers/d47c33e991c43658e0b328f336af5eb6723531bc.png
-  alt: 'Excellent alt-text describing the featured image'
+  src: /posts/ibis-an-idiomatic-flavor-of-sql-for-python-programmers/feature.png
+  alt: 'The Ibis project logo, which is a tall, black and white bird.'
 hero:
-  imageSrc: /posts/ibis-an-idiomatic-flavor-of-sql-for-python-programmers/d47c33e991c43658e0b328f336af5eb6723531bc.png
-  imageAlt: 'Excellent alt-text describing the hero image'
+  imageSrc: /posts/ibis-an-idiomatic-flavor-of-sql-for-python-programmers/hero.png
+  imageAlt: 'The Ibis project logo, which is a tall, black and white bird.'
 ---
-
-![The Ibis project logo, which is a black and white tall bird.](/posts/ibis-an-idiomatic-flavor-of-sql-for-python-programmers/d47c33e991c43658e0b328f336af5eb6723531bc.png)
 
 [Ibis](https://www.ibis-project.org/) is a mature open-source project
 that has been in development for about 5 years; it currently has about
