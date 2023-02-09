@@ -6,15 +6,11 @@ description: 'This blog post is for anyone developing array-consuming methods (t
 category: [Array API]
 featuredImage:
   src: /posts/hypothesis-array-api/hypothesis-array-api-social.png
-  alt: "Hypothesis logo accompanied by the text 'Property-based testing for
-the Array API'"
+  alt: 'Hypothesis logo accompanied by the text Property-based testing for the Array API'
 hero:
   imageSrc: /posts/hypothesis-array-api/hypothesis-array-api-social.png
-  imageAlt: "Hypothesis logo accompanied by the text 'Property-based testing for
-the Array API'"
+  imageAlt: 'Hypothesis logo accompanied by the text 'Property-based testing for the Array API'
 ---
-
-![](/images/2021/10/hypothesis-array-api-social.png)
 
 Over the summer, I\'ve been interning at Quansight Labs to develop
 testing tools for the developers and users of the upcoming [Array API
