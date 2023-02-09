@@ -5,10 +5,10 @@ published: June 28, 2021
 description: 'Writing agnostic distributed code that supports different platforms, hardware configurations (GPUs, TPUs) and communication frameworks is tedious. In this blog, we will discuss how PyTorch-Ignite solves this problem with minimal code change.'
 category: [Machine Learning]
 featuredImage:
-  src: /posts/pytorch-ignite/ignite_logo_mixed.png
+  src: /posts/pytorch-ignite-distributed/ignite_logo_mixed.png
   alt: 'PyTorch-Ignite logo.'
 hero:
-  imageSrc: /posts/pytorch-ignite/ignite_logo_mixed.png
+  imageSrc: /posts/pytorch-ignite-distributed/ignite_logo_mixed.png
   imageAlt: 'PyTorch-Ignite logo.'
 ---
 
