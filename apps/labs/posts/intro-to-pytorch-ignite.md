@@ -21,8 +21,8 @@ PyTorch-Ignite with the training and evaluation of a MNIST classifier as
 a beginner application case. We also assume that the reader is familiar
 with PyTorch.
 
-`<a href="https://colab.research.google.com/drive/1gFIPXmUX73HWlLSxFvvYEweQBD_OPx1t">`{=html}`<img style="float: left;" src="https://colab.research.google.com/assets/colab-badge.svg"/>`{=html}
-This tutorial can be also executed in Google Colab. `</a>`{=html}
+`<a href="https://colab.research.google.com/drive/1gFIPXmUX73HWlLSxFvvYEweQBD_OPx1t">``<img style="float: left;" src="https://colab.research.google.com/assets/colab-badge.svg"/>`
+This tutorial can be also executed in Google Colab. `</a>`
 
 ## Content
 
@@ -80,7 +80,7 @@ Additional benefits of using PyTorch-Ignite are
     simplicity
 -   More modular code
 
-```{=html}
+```
 <table>
 <tr>
 
@@ -118,7 +118,7 @@ Pure PyTorch
         
 </table>
 ```
-`<a href="https://raw.githubusercontent.com/pytorch/ignite/master/assets/ignite_vs_bare_pytorch.png">`{=html}`<img width=800  src="https://raw.githubusercontent.com/pytorch/ignite/master/assets/ignite_vs_bare_pytorch.png"/>`{=html}`</a>`{=html}
+`<a href="https://raw.githubusercontent.com/pytorch/ignite/master/assets/ignite_vs_bare_pytorch.png">``<img width=800  src="https://raw.githubusercontent.com/pytorch/ignite/master/assets/ignite_vs_bare_pytorch.png"/>``</a>`
 
 ### About the design of PyTorch-Ignite
 
@@ -600,7 +600,7 @@ We can inspect results using `tensorboard`. We can observe two tabs
 
     <IPython.core.display.Javascript object>
 
-```{=html}
+```
 <div>
     
 <a href="/images/pytorch-ignite/mnist-tb-scalars.png">
@@ -1314,7 +1314,7 @@ AI](https://allegro.ai/) who are making this possible!
 
 ------------------------------------------------------------------------
 
-```{=html}
+```
 <!--div align="center">
 <img width=150 src="https://numfocus.org/wp-content/uploads/2018/01/optNumFocus_LRG.png" />
 <img width=175 src="https://labs.quansight.org/images/QuansightLabs_logo_V2.png" />
@@ -1329,7 +1329,7 @@ promoting open practices in research and industry.
 
 ------------------------------------------------------------------------
 
-`<img style="float: left;" width=20 src="https://hacktoberfest.digitalocean.com/h-light.svg" />`{=html}
+`<img style="float: left;" width=20 src="https://hacktoberfest.digitalocean.com/h-light.svg" />`
 🎉 [Hacktoberfest 2020](https://hacktoberfest.digitalocean.com/) is the
 open-source coding festival for everyone to attend in October and
 PyTorch-Ignite is also preparing for it. Please, check out [our
@@ -1337,7 +1337,7 @@ announcement](https://github.com/pytorch/ignite/issues/1257).
 
 ------------------------------------------------------------------------
 
-```{=html}
+```
 <!--div align="center">
     
 <a href="https://www.mentored-sprints.dev/">
@@ -1347,14 +1347,14 @@ announcement](https://github.com/pytorch/ignite/issues/1257).
 </div-->
 ```
 🎉
-`<img style="float: left;" width=20 src="https://global.pydata.org/assets/images/pydata.png"/>`{=html}
+`<img style="float: left;" width=20 src="https://global.pydata.org/assets/images/pydata.png"/>`
 We are pleased to announce that we will run a mentored sprint session to
 contribute to PyTorch-Ignite at PyData Global 2020. We are looking
 forward to seeing you in November at this event!
 
 ------------------------------------------------------------------------
 
-```{=html}
+```
 <!--div align="center">
 
 <img width=200 src="https://raw.githubusercontent.com/pytorch/ignite/master/assets/ignite_logo.svg" />
@@ -1369,7 +1369,7 @@ for more information if this sounds interesting to you.
 
 ------------------------------------------------------------------------
 
-`<img style="float: left;" width=20 src="https://github.githubassets.com/images/icons/emoji/octocat.png"/>`{=html}
+`<img style="float: left;" width=20 src="https://github.githubassets.com/images/icons/emoji/octocat.png"/>`
 Check out the project on [GitHub](https://github.com/pytorch/ignite) and
 follow us on [Twitter](https://twitter.com/pytorch_ignite). For any
 questions, support or issues, please [reach out to
@@ -1382,7 +1382,7 @@ questions and inquiries, please send an email to
 ------------------------------------------------------------------------
 
 ::: {.cell .markdown colab="{}" colab_type="code" id="Pae3a0-qLeBI"}
-`<a href="https://labs.quansight.org/">`{=html}`<img style="float: left;" width=175 src="/images/QuansightLabs_logo_V2.png"/>`{=html}`</a>`{=html}
+`<a href="https://labs.quansight.org/">``<img style="float: left;" width=175 src="/images/QuansightLabs_logo_V2.png"/>``</a>`
 Quansight Labs is a public-benefit division of
 [Quansight](https://www.quansight.com/) created to provide a home for a
 "PyData Core Team" who create and maintain open-source technology around
@@ -1391,7 +1391,7 @@ being part of Labs benefits from Labs\' community, supports
 PyTorch-Ignite\'s sustainability, and accelerates development of the
 project that users rely on.
 
-`<a href="https://www.ifpenergiesnouvelles.com/">`{=html}`<img style="float: left;" pad=5 width=170 src="https://www.ifpenergiesnouvelles.com/sites/ifpen.fr/files/logo_ifpen_2.jpg"/>`{=html}`</a>`{=html}
+`<a href="https://www.ifpenergiesnouvelles.com/">``<img style="float: left;" pad=5 width=170 src="https://www.ifpenergiesnouvelles.com/sites/ifpen.fr/files/logo_ifpen_2.jpg"/>``</a>`
 IFP Energies nouvelles (IFPEN) is a major research and training player
 in the fields of energy, transport and the environment. Deep Learning
 approaches are currently carried out through different projects from
