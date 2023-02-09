@@ -87,14 +87,14 @@ it without any changes to the code, in particular:
 More information on launchers experiments can be found
 [here](https://github.com/sdesrozis/why-ignite).
 
-# 🔥 Pytorch-Ignite Unified Distributed API {#-pytorch-ignite-unified-distributed-api}
+# 🔥 Pytorch-Ignite Unified Distributed API
 
 We need to write different code for different distributed backends. This
 can be tedious especially if you would like to run your code on
 different hardware configurations. Pytorch-Ignite's `idist` will do all
 the work for you, owing to the high-level helper methods.
 
-## 🔍 Focus on the helper `auto_*` methods: {#-focus-on-the-helper-auto-methods}
+## 🔍 Focus on the helper `auto_*` methods:
 
 -   [auto_model()](https://pytorch.org/ignite/distributed.html#ignite.distributed.auto.auto_model)
 
