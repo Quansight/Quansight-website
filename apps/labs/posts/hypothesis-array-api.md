@@ -5,15 +5,16 @@ published: October 6, 2021
 description: 'This blog post is for anyone developing array-consuming methods (think SciPy and scikit-learn) and is new to property-based testing. I demonstrate a typical workflow of testing with Hypothesis whilst writing an array-consuming function that works for all libraries adopting the Array API, catching bugs before your users do.'
 category: [Array API]
 featuredImage:
-  src: /posts/hello-world-post/featured.png
-  alt: 'Excellent alt-text describing the featured image'
+  src: /posts/hypothesis-array-api/hypothesis-array-api-social.png
+  alt: "Hypothesis logo accompanied by the text 'Property-based testing for
+the Array API'"
 hero:
-  imageSrc: /posts/hello-world-post/hero.jpeg
-  imageAlt: 'Excellent alt-text describing the hero image'
+  imageSrc: /posts/hypothesis-array-api/hypothesis-array-api-social.png
+  imageAlt: "Hypothesis logo accompanied by the text 'Property-based testing for
+the Array API'"
 ---
 
-![Hypothesis logo accompanied by the text \"Property-based testing for
-the Array API\"](/images/2021/10/hypothesis-array-api-social.png)
+![](/images/2021/10/hypothesis-array-api-social.png)
 
 Over the summer, I\'ve been interning at Quansight Labs to develop
 testing tools for the developers and users of the upcoming [Array API
