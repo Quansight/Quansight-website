@@ -102,7 +102,7 @@ This method adapts the logic for non-distributed and available
 distributed configurations. Here are the equivalent code snippets for
 distributed model instantiation:
 
-```{=html}
+```
 <embed>
    <div>
       <table>
@@ -152,7 +152,7 @@ This method adapts the optimizer logic for non-distributed and available
 distributed configurations seamlessly. Here are the equivalent code
 snippets for distributed optimizer instantiation:
 
-```{=html}
+```
 <embed>
    <div>
       <table>
@@ -191,7 +191,7 @@ general way of loading sample batches on multiple devices.
 Here are the equivalent code snippets for the distributed data loading
 step:
 
-```{=html}
+```
 <embed>
    <div>
       <table>
@@ -246,7 +246,7 @@ The complete source code of these experiments can be found
 
 ## PyTorch-Ignite - Torch native Distributed Data Parallel - Horovod - XLA/TPUs
 
-```{=html}
+```
 <embed> 
    <div>
       <table>
