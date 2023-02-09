@@ -115,7 +115,8 @@ gist_url = 'https://gist.githubusercontent.com/xmnlab/587dd1bde44850f3117a1087ed
 !wget {gist_url} -O omniscidb_geopandas_output.py
 ```
 
-    --2019-07-05 11:31:57--  https://gist.githubusercontent.com/xmnlab/587dd1bde44850f3117a1087ed3f0f28/raw/0750400db90cf97319a91aa514648c31ad4ace45/omniscidb_geopandas_output.py
+    --2019-07-05 11:31:57--  [https://gist.githubusercontent.com/xmnlab/587dd1bde44850f3117a1087ed3f0f28/raw/0750400
+    db90cf97319a91aa514648c31ad4ace45/omniscidb_geopandas_output.py](https://gist.githubusercontent.com/xmnlab/587dd1bde44850f3117a1087ed3f0f28/raw/0750400db90cf97319a91aa514648c31ad4ace45/omniscidb_geopandas_output.py)
     Resolviendo gist.githubusercontent.com (gist.githubusercontent.com)... 151.101.48.133
     Conectando con gist.githubusercontent.com (gist.githubusercontent.com)[151.101.48.133]:443... conectado.
     Petición HTTP enviada, esperando respuesta... 200 OK
