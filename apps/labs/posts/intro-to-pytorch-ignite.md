@@ -26,18 +26,31 @@ This tutorial can be also executed in Google Colab. `</a>`
 
 ## Content
 
--   [PyTorch-Ignite: What and Why?](#PyTorch-Ignite:-What-and-Why-?)
--   [Quick-start example](#Quick-start-example)
--   [Advanced features](#Advanced-features)
-    -   [Power of Events & Handlers](#Power-of-Events-&-Handlers)
-    -   [Out-of-the-box metrics](#Out-of-the-box-metrics)
-    -   [Out-of-the-box handlers](#Out-of-the-box-handlers)
-    -   [Distributed and XLA device
-        support](#Distributed-and-XLA-device-support)
--   [Projects using PyTorch-Ignite](#Projects-using-PyTorch-Ignite)
--   [Project news](#Project-news)
+- [PyTorch-Ignite: What and Why ?](#pytorch-ignite-what-and-why-)
+  - [🔥 PyTorch + Ignite 🔥](#-pytorch--ignite-)
+    - [About the design of PyTorch-Ignite](#about-the-design-of-pytorch-ignite)
+- [Quick-start example](#quick-start-example)
+  - [Common PyTorch code](#common-pytorch-code)
+  - [Trainer and evaluator's setup](#trainer-and-evaluators-setup)
+  - [Events and Handers](#events-and-handers)
+  - [Model evaluation metrics](#model-evaluation-metrics)
+  - [Common training handlers](#common-training-handlers)
+  - [5 takeaways](#5-takeaways)
+- [Advanced features](#advanced-features)
+  - [Power of Events \& Handlers](#power-of-events--handlers)
+    - [Built-in events filtering](#built-in-events-filtering)
+    - [Stack events to share the action](#stack-events-to-share-the-action)
+    - [Add custom events](#add-custom-events)
+  - [Out-of-the-box metrics](#out-of-the-box-metrics)
+    - [More on the `reset, update, compute` public API](#more-on-the-reset-update-compute-public-api)
+    - [Composable metrics](#composable-metrics)
+  - [Out-of-the-box handlers](#out-of-the-box-handlers)
+    - [Common training handlers](#common-training-handlers-1)
+  - [Distributed and XLA device support](#distributed-and-xla-device-support)
+- [Projects using PyTorch-Ignite](#projects-using-pytorch-ignite)
+- [Project news](#project-news)
 
-# PyTorch-Ignite: What and Why ? {#pytorch-ignite-what-and-why-}
+# PyTorch-Ignite: What and Why ?
 
 PyTorch-Ignite is a high-level library to help with training and
 evaluating neural networks in PyTorch flexibly and transparently.
@@ -52,7 +65,7 @@ PyTorch-Ignite takes a \"Do-It-Yourself\" approach as research is
 unpredictable and it is important to capture its requirements without
 blocking things.
 
-## 🔥 PyTorch + Ignite 🔥 {#-pytorch--ignite-}
+## 🔥 PyTorch + Ignite 🔥
 
 PyTorch-Ignite wraps native PyTorch abstractions such as Modules,
 Optimizers, and DataLoaders in thin abstractions which allow your models
@@ -614,7 +627,7 @@ We can inspect results using `tensorboard`. We can observe two tabs
 </div>
 ```
 
-## 5 takeaways {#5-takeaways}
+## 5 takeaways
 
 -   Almost any training logic can be coded as a `train_step` method and
     a trainer built using this method.
@@ -639,7 +652,7 @@ metrics in more detail, as well as distributed computations on GPUs and
 TPUs. Feel free to skip this section now and come back later if you are
 a beginner.
 
-## Power of Events & Handlers {#power-of-events--handlers}
+## Power of Events & Handlers
 
 We have seen throughout the quick-start example that events and handlers
 are perfect to execute any number of functions whenever you wish. In
@@ -1024,7 +1037,7 @@ for `ignite.handlers` and
 [here](https://pytorch.org/ignite/contrib/handlers.html#ignite-contrib-handlers)
 for `ignite.contrib.handlers`.
 
-### Common training handlers {#common-training-handlers}
+### Common training handlers 
 
 With the out-of-the-box
 [`Checkpoint`](https://pytorch.org/ignite/handlers.html#ignite.handlers.Checkpoint)
