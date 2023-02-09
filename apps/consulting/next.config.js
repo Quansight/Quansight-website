@@ -78,6 +78,11 @@ const nextConfig = {
         permanent: true,
         destination: '/library?page=1&type=blog',
       },
+      {
+        source: '/post/rapids-cucim-porting-scikit-image-code-to-the-gpu',
+        permanent: true,
+        destination: '/post/performance-for-image-processing-with-cucim',
+      },
     ];
   },
   nx: {
