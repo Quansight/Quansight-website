@@ -5,11 +5,11 @@ published: May 2, 2020
 description: 'Ibis 1.3 was just released, after 8 months of development work, with 104 new commits from 16 unique contributors. In this blog post we will discuss some important features in this new version!'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/hello-world-post/featured.png
-  alt: 'Excellent alt-text describing the featured image'
+  src: /posts/ibis-1.3-release/blog_feature_var2.svg
+  alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
-  imageSrc: /posts/hello-world-post/hero.jpeg
-  imageAlt: 'Excellent alt-text describing the hero image'
+  imageSrc: /posts/ibis-1.3-release/blog_hero_var2.svg
+  imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
 Ibis 1.3 was just released, after 8 months of development work, with 104
@@ -178,7 +178,7 @@ uuid_value = ibis.literal(uuid4(), type='uuid')
 uuid_value == ibis.literal(uuid4(), type='uuid')
 ```
 
-![](6a98cb83ec33da5b0824391dc456c3cf654cbd89.png)
+![A graph showing the relationship between Equals, Left and Right.](/posts/ibis-1.3-release/6a98cb83ec33da5b0824391dc456c3cf654cbd89.png)
 
 ``` python
 import json
@@ -186,14 +186,14 @@ json_value = ibis.literal(json.dumps({"id": 1}), type='json')
 json_value
 ```
 
-![](29d7d60365fe2da629b5103143e73bfea0b6f39f.png)
+![Literal pointing at json.](/posts/ibis-1.3-release/29d7d60365fe2da629b5103143e73bfea0b6f39f.png)
 
 ``` python
 jsonb_value = ibis.literal(json.dumps({"id": 1}).encode('utf8'), type='jsonb')
 jsonb_value
 ```
 
-![](8ddc92a22b0ccd022331e7a05bda2e0793922b6b.png)
+![Literal pointing at jsonb.](/posts/ibis-1.3-release/8ddc92a22b0ccd022331e7a05bda2e0793922b6b.png)
 
 Another important new features on `PostgreSQL` backend is the support of
 new `geospatial` operations, such as
@@ -318,7 +318,7 @@ t = con_pyspark.table('functional_alltypes')
 t
 ```
 
-![](5040bcc66b7071e11bb0db32b0142239a2336085.png)
+![The data types for the pyspark.table.](/posts/ibis-1.3-release/5040bcc66b7071e11bb0db32b0142239a2336085.png)
 
 Different than a `SQL` backend, that returns a `SQL` statement, the
 returned `object` from the PySpark `compile` method is a PySpark
@@ -649,14 +649,14 @@ shp_point = shapely.geometry.Point((20, 10))
 shp_point
 ```
 
-![](fba0adc684226342999e42956c4bb303dedd9595.svg)
+![A green dot.](/posts/ibis-1.3-release/fba0adc684226342999e42956c4bb303dedd9595.svg)
 
 ``` python
 shp_polygon_1 = shapely.geometry.Polygon([(20, 10), (40, 30), (40, 20), (20, 10)])
 shp_polygon_1
 ```
 
-![](227141ab17cfaa94c0a1cad75849b5d1763fcae1.svg)
+![A green triangle.](/posts/ibis-1.3-release/227141ab17cfaa94c0a1cad75849b5d1763fcae1.svg)
 
 Now, let's create a Ibis table expression to manipulate a \"geo\"
 table:
@@ -753,7 +753,7 @@ So you can take the advantage of GeoPandas features too!
 df_geo.set_geometry('geo_multipolygon').head(1).plot();
 ```
 
-![](6567cb659b1067258d29fbe649755a2e848e108a.png)
+![Two triangles on a graph](/posts/ibis-1.3-release/6567cb659b1067258d29fbe649755a2e848e108a.png)
 
 Now, let's check if there are any `geo_multipolygon`'s that contain
 the `shape` point we just created.
