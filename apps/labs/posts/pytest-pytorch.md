@@ -5,10 +5,10 @@ published: Jun 23, 2021
 description: 'PyTorch has an extensive test suite with a lot of configuration options and auto-generated tests. Internally, PyTorch uses a TestCase class that is derived from unittest.TestCase. In the first part of the post we are going to explore how the auto-generation of tests works in the PyTorch test suite and how they are collected by pytest.'
 category: [Machine Learning, Developer Workflows]
 featuredImage:
-  src: /posts/ pytest-pytorch/blog_feature_org.svg
-  alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
+  src: /posts/pytest-pytorch/blog_feature_var2.svg
+  alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
-  imageSrc: /posts/ pytest-pytorch/blog_hero_org.svg
+  imageSrc: /posts/pytest-pytorch/blog_hero_org.svg
   imageAlt: 'An illustration of a white hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
