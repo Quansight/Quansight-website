@@ -5,10 +5,10 @@ published: July 9, 2019
 description: 'During the last months OmniSci and Quansight were working together to add a backend to Ibis for OmniSciDB (formerly MapD Core)The implementation of this new backend also resulted in the creation of new expressions/operators on Ibis core, such as GeoSpatial data types and operations, trigonometric operations and Ssome statistcal operations.'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/ibis-an-idiomatic-flavor-of-sql-for-python-programmers/blog_feature_var2.svg
+  src: /posts/ibis-python-data-analysis-productivity-framework/blog_feature_var2.svg
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
-  imageSrc: /posts/ibis-an-idiomatic-flavor-of-sql-for-python-programmers/blog_hero_var1.svg
+  imageSrc: /posts/ibis-python-data-analysis-productivity-framework/blog_hero_var1.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
