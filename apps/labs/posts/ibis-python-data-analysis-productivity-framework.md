@@ -137,7 +137,7 @@ t = omniscidb_cli.table('zipcodes_2017')
 display(t)
 ```
 
-![A DatabaseTable with its data types](a0a51ad71e1a32140f3e47e71145e6a67d061750.png)
+![A DatabaseTable with its data types](/posts/ibis-python-data-analysis-productivity-framework/a0a51ad71e1a32140f3e47e71145e6a67d061750.png)
 
 ``` python
 print('# rows:', t.count().execute())
@@ -185,7 +185,7 @@ df['omnisci_geo'].iloc[::3].plot(**style_kwds)
 plt.show()
 ```
 
-![A scatterplot graph clustered in the upper right corner. It is clusetered -120 to 80 on the X axis and 40-60 in the Y axis.](e62b7c1311b137ea2d1bfd6e7715369df26b2570.png)
+![A scatterplot graph clustered in the upper right corner. It is clusetered -120 to 80 on the X axis and 40-60 in the Y axis.](/posts/ibis-python-data-analysis-productivity-framework/e62b7c1311b137ea2d1bfd6e7715369df26b2570.png)
 
 ### Trigonometric operations
 
@@ -204,7 +204,7 @@ expr.execute().rowid_sin.plot()
 plt.show()
 ```
 
-![A sine wave plot that repeats many times, the high points at 1,-- and -1.00. The X axis is 0 to 80.](70f0a567ee713d1392bab6d8fef07bbe9777c033.png)
+![A sine wave plot that repeats many times, the high points at 1,-- and -1.00. The X axis is 0 to 80.](/posts/ibis-python-data-analysis-productivity-framework/70f0a567ee713d1392bab6d8fef07bbe9777c033.png)
 
 ### Some statistical operations
 
