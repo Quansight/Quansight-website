@@ -5,23 +5,12 @@ published: September 10, 2020
 description: 'This blog post intends to give a brief but illustrative overview of what PyTorch-Ignite can offer for Deep Learning enthusiasts, professionals and researchers. Throughout this tutorial, we will introduce the basic concepts of PyTorch-Ignite with the training and evaluation of a MNIST classifier as a beginner application case.'
 category: [Machine Learning]
 featuredImage:
-  src: /posts/intro-to-pytorch-ignite/featured.png
-  alt: 'Excellent alt-text describing the featured image'
+  src: /posts/intro-to-pytorch-ignite/habr-pytorch-ignite-image.png
+  alt: "A man holding a flaming torch in a cave. On the cave walls are the words 'Pytorch Ignite: Your Pytorch neural networks'."
 hero:
   imageSrc: /posts/intro-to-pytorch-ignite/habr-pytorch-ignite-image.png
-  imageAlt: 'Excellent alt-text describing the hero image'
+  imageAlt: "A man holding a flaming torch in a cave. On the cave walls are the words 'Pytorch Ignite: Your Pytorch neural networks'."
 ---
-
-```{=html}
-<!--div align="center">
-<img width=512 src="https://i.ibb.co/WtbmXJQ/ignite-blog.jpg"/>
-</div-->
-```
-```{=html}
-<div align="center">
-<img width=512 src="https://i.ibb.co/x8Bhqhj/habr-pytorch-ignite-image.png"/>
-</div>
-```
 
 Authors: Victor Fomin (Quansight), Sylvain Desroziers (IFPEN, France)
 
