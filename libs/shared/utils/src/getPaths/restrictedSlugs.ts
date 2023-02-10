@@ -7,5 +7,4 @@ export const restrictedSlugs: string[] = [
   'about',
   'home',
   'team',
-  'blog',
 ];
