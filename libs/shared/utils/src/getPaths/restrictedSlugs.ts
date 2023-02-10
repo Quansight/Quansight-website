@@ -1,8 +1,11 @@
 export const restrictedSlugs: string[] = [
-  // Consulting
   'homepage',
-  'about-us',
-  // Labs
+  'team',
+  'layout',
+  'library',
+  'team-members',
+  'about',
   'home',
   'team',
+  'blog',
 ];

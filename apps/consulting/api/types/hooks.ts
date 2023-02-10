@@ -337,7 +337,6 @@ export const LinksDocument = gql`
         slug
         isFolder
         name
-        parentId
       }
     }
   }
