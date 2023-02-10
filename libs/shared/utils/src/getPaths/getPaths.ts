@@ -6,7 +6,8 @@ export const getPaths = <LinkEntry extends { isFolder: boolean; slug: string }>(
 ): TGetPaths[] =>
   items
     .filter(
-      ({ isFolder, slug }) => slug && !isFolder && !isSlugRestricted(slug),
+      ({ isFolder, slug }) =>
+        slug && !isFolder && !slug.includes('/') && !isSlugRestricted(slug),
     )
     .map(({ slug }) => ({
       params: {
