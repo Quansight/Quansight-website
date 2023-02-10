@@ -367,6 +367,7 @@ export type LinksQuery = {
       slug: string | null;
       isFolder: boolean | null;
       name: string | null;
+      parentId: number | null;
     }>;
   } | null;
 };

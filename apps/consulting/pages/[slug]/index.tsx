@@ -44,7 +44,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const links = await getLinks();
   return {
     paths:
-      getPaths<Pick<LinkEntry, 'id' | 'isFolder' | 'name' | 'slug'>>(links),
+      getPaths<
+        Pick<LinkEntry, 'id' | 'isFolder' | 'name' | 'slug' | 'parentId'>
+      >(links),
     fallback: false,
   };
 };
