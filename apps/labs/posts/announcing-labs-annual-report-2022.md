@@ -8,7 +8,9 @@ featuredImage:
   src: /posts/announcing-labs-annual-report-2022/featured.svg
   alt: 'TODO'
 hero:
-  imageSrc: /posts/announcing-labs-annual-report-2022/hero.svg
+  imageDesktop: apps/labs/public/posts/announcing-labs-annual-report-2022/hero-desktop.svg
+  imageMobile: apps/labs/public/posts/announcing-labs-annual-report-2022/hero-mobile.svg
+  imageTablet: /posts/announcing-labs-annual-report-2022/hero-tablet.svg
   imageAlt: 'TODO'
 ---
 
