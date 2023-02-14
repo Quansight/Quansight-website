@@ -18,6 +18,7 @@ _Designer: Irina Fumarel_
 We at Quansight Labs are delighted to share our first-ever annual report with you!
 
 In these pages, we reflect on the past year and share how we're progressing towards our mission to sustain and grow community-driven open source projects and ecosystems.
+Take a look at the infographic below for a quick report-summary.
 
 <img src="/posts/announcing-labs-annual-report-2022/annual-report-infographic.jpg" alt="TODO" />
 
