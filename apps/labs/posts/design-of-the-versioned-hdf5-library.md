@@ -3,7 +3,7 @@ title: 'Design of the Versioned HDF5 Library'
 published: September 29, 2020
 author: aaron-meurer
 description: "In this post, we'll go into detail on how the underlying design of the library works on a technical level. Versioned HDF5 is a library that wraps h5py and offers a versioned abstraction for HDF5 groups and datasets."
-category: [PyData Ecosystem]
+category: [PyData ecosystem]
 featuredImage:
   src: /posts/design-of-the-versioned-hdf5-library/versioned-hdf5-design-2.svg
   alt: 'Example dataset made with Versioned HDF5'
@@ -13,7 +13,7 @@ hero:
 ---
 
 In a [previous
-post](https://labs.quansight.org/blog/2020/08/introducing-versioned-hdf5/), we
+post](https://labs.quansight.org/blog/introducing-versioned-hdf5), we
 introduced the Versioned HDF5 library and described some of its features. In
 this post, we'll go into detail on how the underlying design of the library
 works on a technical level.
