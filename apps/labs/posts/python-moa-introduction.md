@@ -5,13 +5,12 @@ published: April 17, 2019
 description: 'Python-moa (mathematics of arrays) is an approach to a high level tensor compiler that is based on the work of Lenore Mullin. The MOA principles allow for high level reductions, that other compilers will miss, and for optimization of algorithms as a whole.'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/python-moa-introduction/blog_feature_var2.svg
-  alt: 'An illustration of a brown and a dark white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
+  src: /posts/python-moa-introduction/frontend.png
+  alt: 'Clip from a diagram of the python-moa compiler.'
 hero:
   imageSrc: /posts/python-moa-introduction/blog_hero_var1.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
-
 
 Python-moa (mathematics of arrays) is an approach to a high level tensor
 compiler that is based on the work of [Lenore
@@ -36,31 +35,31 @@ a compiler. It is a theory that guides compiler development. Since
 [python-moa](https://github.com/Quansight-Labs/python-moa) is based on
 theory we get unique properties that other compilers cannot guarantee:
 
--   No out of bounds array accesses
--   A computation is determined to be either valid or invalid at compile
-    time
--   The computation will always reduce to a deterministic minimal form
-    (dnf) (see
-    [church-rosser](https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem)
-    property)
--   All MOA operations are composable (including black box functions and
-    [gufuncs](https://docs.scipy.org/doc/numpy-1.13.0/reference/c-api.generalized-ufuncs.html))
--   Arbitrary high level operations will compile down to a minimal
-    backend instruction set. If the shape and indexing of a given
-    operation is known it can be added to python-moa.
+- No out of bounds array accesses
+- A computation is determined to be either valid or invalid at compile
+  time
+- The computation will always reduce to a deterministic minimal form
+  (dnf) (see
+  [church-rosser](https://en.wikipedia.org/wiki/Church%E2%80%93Rosser_theorem)
+  property)
+- All MOA operations are composable (including black box functions and
+  [gufuncs](https://docs.scipy.org/doc/numpy-1.13.0/reference/c-api.generalized-ufuncs.html))
+- Arbitrary high level operations will compile down to a minimal
+  backend instruction set. If the shape and indexing of a given
+  operation is known it can be added to python-moa.
 
 ## Frontend
+
 Lenore Mullin originally developed a [moa
 compiler](https://github.com/saulshanabrook/psi-compiler/) in the 90s
 with programs that used a symbolic syntax heavily inspired by
-[APL](https://en.wikipedia.org/wiki/APL_(programming_language))
+[APL](<https://en.wikipedia.org/wiki/APL_(programming_language)>)
 ([example
 program](https://github.com/saulshanabrook/psi-compiler/blob/master/examples/ex1.m)).
 This work was carried into python-moa initially with a lex/yacc compiler
 with an example program below.
 
-
-``` python
+```python
 from moa.frontend import parse
 
 context = parse('<0> psi (tran (A ^ <n m> + B ^ <k l>))')
@@ -73,7 +72,7 @@ which look much like the current numeric python libraries. Ideally MOA
 is hidden from the user. The python-moa compiler is broken into several
 pieces each which their own responsibilities: shape, DNF, and ONF.
 
-``` python
+```python
 from moa.frontend import LazyArray
 
 A = LazyArray(shape=('n', 'm'), name='A')
@@ -97,7 +96,7 @@ no out of bound memory accesses. Making MOA extremely compelling for
 compute units with a minimal OS. If an algorithm makes it past this
 stage and fails then it is an issue with the compiler not the algorithm.
 
-``` python
+```python
 expression.visualize(stage='shape')
 ```
 
@@ -111,12 +110,11 @@ all of the indexing patterns of the computation and resulting shapes.
 Notice that several operations disappear in this stage such a transpose
 because transpose is simply index manipulation.
 
-``` python
+```python
 expression.visualize(stage='dnf')
 ```
 
 ![Diagram of Denotational Normal Form.](/posts/python-moa-introduction/denotational_normal_form.png)
-
 
 ## Operational Normal Form (ONF)
 
@@ -133,32 +131,32 @@ column major, row major. The ONF stage is responsible for any
 user to user and thus will have to allow for multiple programs: optimal
 single core, optimal parallel, optimal gpu, optimal low memory, etc.
 
-``` python
+```python
 print(expression.compile(use_numba=True, include_conditions=False))
 ```
 
     @numba.jit
     def f(A, B):
-        
-        
+
+
         n = A.shape[0]
-        
+
         m = A.shape[1]
-        
+
         k = B.shape[0]
-        
+
         l = B.shape[1]
-        
+
         _a21 = numpy.zeros(())
-        
+
         _a19 = numpy.zeros(())
-        
+
         _a21 = 0
-        
+
         for _i10 in range(0, m, 1):
-            
+
             _a21 = (_a21 + (A[(0, _i10)] + B[(0, _i10)]))
-        
+
         _a19[()] = _a21
         return _a19
 
@@ -175,7 +173,7 @@ test python-moa\'s weaknesses). You will see with the benchmarks that if
 **any** indexing is required MOA will be significantly faster unless you
 hand optimize the numerical computations.
 
-``` python
+```python
 import numpy
 import numba
 
@@ -191,11 +189,12 @@ Here we execute the MOA optimized code with the help of
 [numba](https://github.com/numba/numba) which is a JIT LLVM compiler for
 python.
 
-``` python
+```python
 %%timeit
 
 f(A=A, B=B)
 ```
+
 2.14 µs ± 6.76 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 
 The following numpy computation is obviously the worst case expression
@@ -203,24 +202,25 @@ that you could write but this brings up the point that often times the
 algorithm is expressed differently than the implementation. This is one
 of the problems that MOA hopes to solve.
 
-``` python
+```python
 %%timeit
 
 (A + B).T.sum(axis=0)[0]
 ```
+
 2.74 ms ± 29.2 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 
 We notice that even with the optimized version MOA is faster. This is
 mostly due to the transpose operation the numpy performs that we have no
 way around.
 
-``` python
+```python
 %%timeit
 
 (A[0] + B[0]).T.sum(axis=0)
 ```
-6.67 µs ± 91.2 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 
+6.67 µs ± 91.2 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 
 ## Conclusions
 
