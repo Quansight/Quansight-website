@@ -8,10 +8,15 @@ featuredImage:
   src: /posts/announcing-labs-annual-report-2022/featured.svg
   alt: 'TODO'
 hero:
-  imageDesktop: apps/labs/public/posts/announcing-labs-annual-report-2022/hero-desktop.svg
-  imageMobile: apps/labs/public/posts/announcing-labs-annual-report-2022/hero-mobile.svg
-  imageTablet: /posts/announcing-labs-annual-report-2022/hero-tablet.svg
-  imageAlt: 'TODO'
+  imageDesktop:
+    imageSrc: /posts/announcing-labs-annual-report-2022/hero-desktop.svg
+    imageAlt: 'TODO'
+  imageMobile:
+    imageSrc: /posts/announcing-labs-annual-report-2022/hero-mobile.svg
+    imageAlt: 'TODO'
+  imageTablet:
+    imageSrc: /posts/announcing-labs-annual-report-2022/hero-tablet.svg
+    imageAlt: 'TODO'
 ---
 
 _Co-authors: Noa Tamir, Ralf Gommers, and Tania Allard._
