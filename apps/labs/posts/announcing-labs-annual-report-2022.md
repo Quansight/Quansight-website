@@ -5,10 +5,10 @@ published: February 15, 2023
 description: 'Presenting our first annual report! Read about our project achievements, community initiatives, and work culture.'
 category: [Community, PyData ecosystem]
 featuredImage:
-  src: /posts/hello-world-post/featured.png
+  src: /posts/announcing-labs-annual-report-2022/featured.svg
   alt: 'TODO'
 hero:
-  imageSrc: /posts/hello-world-post/hero.jpeg
+  imageSrc: /posts/hello-world-post/hero.svg
   imageAlt: 'TODO'
 ---
 
