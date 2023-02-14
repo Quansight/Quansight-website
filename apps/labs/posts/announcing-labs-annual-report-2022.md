@@ -1,7 +1,7 @@
 ---
 title: 'Quansight Labs 2022 Annual Report: Celebrating Growth and Sustainability'
 author: pavithra-eswaramoorthy
-published: February 7, 2023
+published: February 15, 2023
 description: 'Presenting our first annual report! Read about our project achievements, community initiatives, and work culture.'
 category: [Community, PyData ecosystem]
 featuredImage:
@@ -27,6 +27,6 @@ Most of the projects we contribute to are supported by NumFOCUS, a non-profit or
 
 Learn about our projects, our team, and how we work at Labs in the full report below:
 
-[Download Quansight Labs Annual Report 2022](labs.quansight.org/annual-reports/quansight-labs-annual-report-2022.pdf)
+[Download Quansight Labs Annual Report 2022](/annual-reports/quansight-labs-annual-report-2022.pdf)
 
 We have many exciting plans for this new year, and thank you for being on this journey with us!
