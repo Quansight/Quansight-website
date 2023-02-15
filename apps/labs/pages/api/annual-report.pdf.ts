@@ -38,7 +38,7 @@ export default async function handler(req: NextRequest) {
   // - It signals to search engines and other tech that we do not consider the
   //   CDN URL for the annual report to be the canonical URL for this resource.
   return Response.redirect(
-    'https://a.storyblok.com/f/152463/x/015c6aa140/labs-annual-report-2022.pdf',
+    'https://a.storyblok.com/f/152463/x/1b6099870a/quansight-labs-annual-report-2022.pdf',
     302,
   );
 }
