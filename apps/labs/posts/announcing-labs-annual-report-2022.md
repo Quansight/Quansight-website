@@ -63,7 +63,7 @@ Most of the projects we contribute to are supported by NumFOCUS, a non-profit or
 Learn about our projects, our team, and how we work at Labs in the full report below:
 
 <p align="center">
-  <a href="/annual-reports/quansight-labs-annual-report-2022.pdf">
+  <a href="/annual-reports/quansight-labs-annual-report-2022.pdf?utm_campaign=labs-report-2022-launch&utm_medium=website&utm_source=labs-blog&utm_content=&utm_term=">
     <b>Download Quansight Labs Annual Report 2022</b>
   </a>
 </p>
