@@ -6,17 +6,17 @@ description: 'Presenting our first annual report! Read about our project achieve
 category: [Community, PyData ecosystem]
 featuredImage:
   src: /posts/announcing-labs-annual-report-2022/featured.svg
-  alt: 'TODO'
+  alt: 'A hands placing a flower in a flowerpot, next to the text: Quansight Labs 2022 Annual Report'
 hero:
   imageDesktop:
     imageSrc: /posts/announcing-labs-annual-report-2022/hero-desktop.svg
-    imageAlt: 'TODO'
+    imageAlt: 'Two hands arranging flowers in a flowerpot.'
   imageMobile:
     imageSrc: /posts/announcing-labs-annual-report-2022/hero-mobile.svg
-    imageAlt: 'TODO'
+    imageAlt: 'Two hands arranging flowers in a flowerpot.'
   imageTablet:
     imageSrc: /posts/announcing-labs-annual-report-2022/hero-tablet.svg
-    imageAlt: 'TODO'
+    imageAlt: 'Two hands arranging flowers in a flowerpot.'
 ---
 
 _Co-authors: Noa Tamir, Ralf Gommers, and Tania Allard._
@@ -35,6 +35,10 @@ Most of the projects we contribute to are supported by NumFOCUS, a non-profit or
 
 Learn about our projects, our team, and how we work at Labs in the full report below:
 
-[Download Quansight Labs Annual Report 2022](/annual-reports/quansight-labs-annual-report-2022.pdf)
+<p align="center">
+  <a href="/annual-reports/quansight-labs-annual-report-2022.pdf">
+    <b>Download Quansight Labs Annual Report 2022</b>
+  </a>
+</p>
 
 We have many exciting plans for this new year, and thank you for being on this journey with us!
