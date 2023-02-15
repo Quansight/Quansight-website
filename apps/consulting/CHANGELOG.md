@@ -1,3 +1,10 @@
+February 15, 2023
+
+Via Storyblok:
+
+- Add Teaser component to homepage with copy and link to Labs 2022
+  Annual Report
+
 January 2, 2023
 
 Via Storyblok:
