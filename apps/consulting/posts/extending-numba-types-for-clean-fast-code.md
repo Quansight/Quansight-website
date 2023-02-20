@@ -136,7 +136,7 @@ def typeof_matrix(val, c):
     return MatrixType(data.dtype)
 ```
 
-The types that are used in `nopython` mode use data models (Numba-specific
+The types that are used in `nopython` mode use _data models_ (Numba-specific
 representations of the class). In this case, we'll extend the `StructModel`
 which is similar to a `struct` in C.
 
@@ -168,7 +168,8 @@ make_attribute_wrapper(MatrixType, "shape", "shape")
 ```
 
 Almost there! All that's left to do is teach Numba how to make a native (Numba)
-matrix into a Python matrix and vice versa. This is called boxing and unboxing.
+matrix into a Python matrix and vice versa. This is called _boxing_ and
+_unboxing_.
 
 ```python
 def make_matrix(context, builder, typ, **kwargs):
