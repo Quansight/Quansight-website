@@ -13,6 +13,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 The scientific Python ecosystem relies on compiled code for fast execution.
 While it is still common to see C++ and C code contributed to the internals of
 Python libraries, much of the new compiled code written today uses a Python
@@ -94,10 +96,9 @@ matrices. To do this, we need four attributes:
 
 ```python
 class csc_matrix:
-    def __init__(self, data: np.array,
-                 indices: np.array,
-                 indptr: np.array,
-                 shape: tuple):
+    def __init__(
+        self, data: np.array, indices: np.array, indptr: np.array, shape: tuple
+    ):
         self.data = data
         self.indices = indices
         self.indptr = indptr
@@ -115,11 +116,12 @@ from numba.core import types
 class MatrixType(types.Type):
     def __init__(self, dtype):
         self.dtype = dtype
-        self.data = types.Array(self.dtype, 1, 'C')
-        self.indices = types.Array(types.int64, 1, 'C')
-        self.indptr = types.Array(types.int64, 1, 'C')
+        self.data = types.Array(self.dtype, 1, "C")
+        self.indices = types.Array(types.int64, 1, "C")
+        self.indptr = types.Array(types.int64, 1, "C")
         self.shape = types.UniTuple(types.int64, 2)
-        super(MatrixType, self).__init__('csc_matrix')
+        super(MatrixType, self).__init__("csc_matrix")
+
 ```
 
 For Numba to know that the csc_matrix should be typed as a MatrixType, we need
@@ -145,10 +147,10 @@ from numba.extending import models
 class MatrixModel(models.StructModel):
     def __init__(self, dmm, fe_type):
         members = [
-            ('data', fe_type.data),
-            ('indices', fe_type.indices),
-            ('indptr', fe_type.indptr),
-            ('shape', fe_type.shape)
+            ("data", fe_type.data),
+            ("indices", fe_type.indices),
+            ("indptr", fe_type.indptr),
+            ("shape", fe_type.shape),
         ]
         models.StructModel.__init__(self, dmm, fe_type, members)
 ```
@@ -159,10 +161,10 @@ access to class attributes with the same identifiers within jitted functions.
 ```python
 from numba.extending import make_attribute_wrapper
 
-make_attribute_wrapper(MatrixType, 'data', 'data')
-make_attribute_wrapper(MatrixType, 'indices', 'indices')
-make_attribute_wrapper(MatrixType, 'indptr', 'indptr')
-make_attribute_wrapper(MatrixType, 'shape', 'shape')
+make_attribute_wrapper(MatrixType, "data", "data")
+make_attribute_wrapper(MatrixType, "indices", "indices")
+make_attribute_wrapper(MatrixType, "indptr", "indptr")
+make_attribute_wrapper(MatrixType, "shape", "shape")
 ```
 
 Almost there! All that's left to do is teach Numba how to make a native (Numba)
@@ -185,22 +187,21 @@ def unbox_matrix(typ, obj, c):
     matrix.shape = c.unbox(typ.shape, shape).value
     for att in [data, indices, indptr, shape]:
         c.pyapi.decref(att)
-    is_error = cgutils.is_not_null(
-        c.builder, c.pyapi.err_occurred())
+    is_error = cgutils.is_not_null(c.builder, c.pyapi.err_occurred())
 
     return NativeValue(matrix._getvalue(), is_error=is_error)
 
 @box(MatrixType)
 def box_matrix(typ, val, c):
     matrix = make_matrix(c.context, c.builder, typ)
-    classobj = c.pyapi.unserialize(
-        c.pyapi.serialize_object(csc_matrix))
+    classobj = c.pyapi.unserialize(c.pyapi.serialize_object(csc_matrix))
     data_obj = c.box(typ.data, matrix.data)
     indices_obj = c.box(typ.indices, matrix.indices)
     indptr_obj = c.box(typ.indptr, matrix.indptr)
     shape_obj = c.box(typ.shape, matrix.shape)
     matrix_obj = c.pyapi.call_function_objargs(
-        classobj, (data_obj, indices_obj, indptr_obj, shape_obj))
+        classobj, (data_obj, indices_obj, indptr_obj, shape_obj)
+    )
     return matrix_obj
 ```
 
