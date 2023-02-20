@@ -33,9 +33,9 @@ multiple related arguments, we can pass the whole data structure and use its
 functionality inside of a Numba-jitted function. This is particularly useful
 when we want to have access to a data structure in multiple algorithms. A case
 came up for me when I was writing a sparse matrix multiplication kernel between
-a sparse matrix a and a dense NumPy array b. Here's a simplified version of the
-algorithm in plain Python. We iterate through each of the nonzeros in a and all
-of the elements of b.
+a sparse matrix `a` and a dense NumPy array `b`. Here's a simplified version of
+the algorithm in plain Python. We iterate through each of the nonzeros in `a`
+and all of the elements of `b`.
 
 ```python
 def csc_ndarray_dot(a: csc_matrix, b: np.ndarray):
@@ -89,10 +89,10 @@ Fortunately, with a little work, we can teach Numba how to use sparse matrices
 internally. First, we'll define a pure Python class for compressed sparse column
 matrices. To do this, we need four attributes:
 
-1. data, a NumPy array that stores the nonzero values of the matrix;
-2. indices, a NumPy array that stores the rows of each of the nonzero values;
-3. indptr, a NumPy array that stores pointers to the beginning of each column; and
-4. shape, a tuple that stores the dimensions of the matrix.
+1. `data`, a NumPy array that stores the nonzero values of the matrix;
+2. `indices`, a NumPy array that stores the rows of each of the nonzero values;
+3. `indptr`, a NumPy array that stores pointers to the beginning of each column; and
+4. `shape`, a tuple that stores the dimensions of the matrix.
 
 ```python
 class csc_matrix:
@@ -106,9 +106,9 @@ class csc_matrix:
 ```
 
 Since Numba doesn't deal with native Python types directly, we need to specify
-what the csc_matrix class looks like in Numba's types. To teach Numba to
-recognize the csc_matrix class, we'll define a new class that extends Numba's
-Type class. Here we specify the types of each of the attributes.
+what the `csc_matrix` class looks like in Numba's types. To teach Numba to
+recognize the `csc_matrix` class, we'll define a new class that extends Numba's
+`Type` class. Here we specify the types of each of the attributes.
 
 ```python
 from numba.core import types
@@ -124,8 +124,8 @@ class MatrixType(types.Type):
 
 ```
 
-For Numba to know that the csc_matrix should be typed as a MatrixType, we need
-to register that relationship:
+For Numba to know that the `csc_matrix` should be typed as a `MatrixType`, we
+need to register that relationship:
 
 ```python
 from numba.extending import typeof_impl
@@ -136,9 +136,9 @@ def typeof_matrix(val, c):
     return MatrixType(data.dtype)
 ```
 
-The types that are used in nopython mode use data models (Numba-specific
-representations of the class). In this case, we'll extend the StructModel which
-is similar to a struct in C.
+The types that are used in `nopython` mode use data models (Numba-specific
+representations of the class). In this case, we'll extend the `StructModel`
+which is similar to a `struct` in C.
 
 ```python
 from numba.extending import models
@@ -205,9 +205,9 @@ def box_matrix(typ, val, c):
     return matrix_obj
 ```
 
-Okay, now we can use our csc_matrix class inside a Numba-jitted function and
-just pass the two necessary arguments to function. All that's added is the jit
-decorator.
+Okay, now we can use our `csc_matrix` class inside a Numba-jitted function and
+just pass the two necessary arguments to the function. All that's added is the
+`jit` decorator.
 
 ```python
 @numba.jit(nopython=True)
@@ -224,7 +224,7 @@ In conclusion, Numba offers some nice features that enable the use of custom
 data types and structures inside of jitted functions. In the above case, all we
 needed was access to class attributes for a single function. In the setting of a
 large library, it can be very useful to be able to write fast compiled code
-using pythonic code with access to properties and methods. Extending Numba in
+using Pythonic code with access to properties and methods. Extending Numba in
 this way can help keep codebases clean and maintainable.
 
 [awkward array docs]: https://awkward-array.readthedocs.io/en/latest/index.html
