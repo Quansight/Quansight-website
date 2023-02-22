@@ -128,7 +128,7 @@ distributed model instantiation:
             <th style="text-align:center;">PyTorch DDP</th>
          </tr>
          <tr>
-            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_automodel.png"></img> </td>
+            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_automodel.png" alt="PyTorch-Ignite and PyTorch DDP code comparison."></img> </td>
          </tr>
          <tr>
             <td>&nbsp;</td>
@@ -138,7 +138,7 @@ distributed model instantiation:
             <th style="text-align:center;">Torch XLA</th>
          </tr>
          <tr>
-            <td colspan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_automodel.png"></img> </td>
+            <td colspan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_automodel.png" alt="Horovod and PTorch XLA code comparison."></img> </td>
          </tr>
       </table>
    </div>
@@ -177,7 +177,7 @@ snippets for distributed optimizer instantiation:
             <th style="text-align:center;">PyTorch DDP</th>
          </tr>
          <tr>
-            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_autooptim.png"></img> </td>
+            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_autooptim.png"  alt="PyTorch-Ignite and PyTorch DDP code comparison."></img> </td>
          </tr>
          <tr>
             <td>&nbsp;</td>
@@ -187,7 +187,7 @@ snippets for distributed optimizer instantiation:
             <th style="text-align:center;">Torch XLA</th>
          </tr>
          <tr>
-            <td colspan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_autooptim.png"></img> </td>
+            <td colspan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_autooptim.png" alt="Horovod and PTorch XLA code comparison."></img> </td>
          </tr>
       </table>
    </div>
@@ -216,7 +216,7 @@ step:
             <th style="text-align:center;">PyTorch DDP</th>
          </tr>
          <tr>
-            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_autodataloader.png"></img> </td>
+            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_autodataloader.png"  alt="PyTorch-Ignite and PyTorch DDP code comparison."></img> </td>
          </tr>
          <tr>
             <td>&nbsp;</td>
@@ -226,7 +226,7 @@ step:
             <th style="text-align:center;">Torch XLA</th>
          </tr>
          <tr>
-            <td colspan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_autodataloader.png"></img> </td>
+            <td colspan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_autodataloader.png" alt="Horovod and PTorch XLA code comparison."></img> </td>
          </tr>
       </table>
    </div>
@@ -275,7 +275,7 @@ The complete source code of these experiments can be found
             <td style="text-align:center; padding: 0;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/torch_native.py"><h3>Source Code</h3></a> </td>
          </tr>
          <tr>
-            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_whole.png"></img> </td>
+            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_whole.png" alt="PyTorch-Ignite and PyTorch DDP code comparison."></img> </td>
          </tr>
          <tr>
             <th style="text-align:center;"><h3><b><u>Horovod</u></b></h3></th>
@@ -286,8 +286,8 @@ The complete source code of these experiments can be found
             <td style="text-align:center;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/torch_xla_native.py"><h3>Source Code</h3></a> </td>
          </tr>
          <tr>
-            <td> <img src="/posts/pytorch-ignite-distributed/horovod_whole.png"></img> </td>
-            <td> <img src="/posts/pytorch-ignite-distributed/xla_whole.png"></img> </td>
+            <td> <img src="/posts/pytorch-ignite-distributed/horovod_whole.png" alt="Horovod code."></img> </td>
+            <td> <img src="/posts/pytorch-ignite-distributed/xla_whole.png" alt="Torch XLA code."></img> </td>
          </tr>
       </table>
    </div>
