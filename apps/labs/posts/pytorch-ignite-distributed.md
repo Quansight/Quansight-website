@@ -100,7 +100,7 @@ This method adapts the logic for non-distributed and available
 distributed configurations. Here are the equivalent code snippets for
 distributed model instantiation:
 
-```
+
 <embed>
    <div>
       <table>
@@ -124,7 +124,6 @@ distributed model instantiation:
       </table>
    </div>
 </embed>
-```
 | 
 
 Additionally, it is also compatible with
@@ -150,7 +149,7 @@ This method adapts the optimizer logic for non-distributed and available
 distributed configurations seamlessly. Here are the equivalent code
 snippets for distributed optimizer instantiation:
 
-```
+
 <embed>
    <div>
       <table>
@@ -174,7 +173,7 @@ snippets for distributed optimizer instantiation:
       </table>
    </div>
 </embed>
-```
+
 | 
 
 -   [auto_dataloader()](https://pytorch.org/ignite/distributed.html#ignite.distributed.auto.auto_dataloader)
@@ -189,7 +188,7 @@ general way of loading sample batches on multiple devices.
 Here are the equivalent code snippets for the distributed data loading
 step:
 
-```
+
 <embed>
    <div>
       <table>
@@ -213,7 +212,7 @@ step:
       </table>
    </div>
 </embed>
-```
+
 
 Note
 
@@ -244,7 +243,7 @@ The complete source code of these experiments can be found
 
 ## PyTorch-Ignite - Torch native Distributed Data Parallel - Horovod - XLA/TPUs
 
-```
+
 <embed> 
    <div>
       <table>
@@ -278,7 +277,7 @@ The complete source code of these experiments can be found
       </table>
    </div>
 </embed>
-```
+
 
 Note
 
