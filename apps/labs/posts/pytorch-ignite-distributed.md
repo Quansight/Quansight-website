@@ -25,6 +25,25 @@ communication frameworks is tedious. In this blog, we will discuss how
 [PyTorch-Ignite](https://pytorch.org/ignite/) solves this problem with
 minimal code change.
 
+**Contents**
+
+- [Prerequisites](#prerequisites)
+- [Introduction](#introduction)
+- [🔥 Pytorch-Ignite Unified Distributed API](#-pytorch-ignite-unified-distributed-api)
+  - [🔍 Focus on the helper `auto_*` methods:](#-focus-on-the-helper-auto_-methods)
+- [Examples](#examples)
+  - [PyTorch-Ignite - Torch native Distributed Data Parallel - Horovod - XLA/TPUs](#pytorch-ignite---torch-native-distributed-data-parallel---horovod---xlatpus)
+- [Running Distributed Code](#running-distributed-code)
+  - [With `torch.multiprocessing.spawn`](#with-torchmultiprocessingspawn)
+  - [With Distributed launchers](#with-distributed-launchers)
+    - [With torch.distributed.launch](#with-torchdistributedlaunch)
+    - [With horovodrun](#with-horovodrun)
+    - [With slurm](#with-slurm)
+- [Closing Remarks](#closing-remarks)
+  - [References](#references)
+  - [Next Steps](#next-steps)
+
+
 # Prerequisites
 
 This blog assumes you have some knowledge about:
