@@ -286,8 +286,8 @@ The complete source code of these experiments can be found
             <td style="text-align:center;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/torch_xla_native.py"><h3>Source Code</h3></a> </td>
          </tr>
          <tr>
-            <td> <img src="/posts/pytorch-ignite-distributed/horovod_whole.png"> </td>
-            <td> <img src="/posts/pytorch-ignite-distributed/xla_whole.png"> </td>
+            <td> <img src="/posts/pytorch-ignite-distributed/horovod_whole.png"></img> </td>
+            <td> <img src="/posts/pytorch-ignite-distributed/xla_whole.png"></img> </td>
          </tr>
       </table>
    </div>
