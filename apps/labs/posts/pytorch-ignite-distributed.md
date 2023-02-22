@@ -267,10 +267,8 @@ The complete source code of these experiments can be found
    <div>
       <table>
          <tr>
-            <th style="text-align:center; padding: 0;">
-               <h3><b><u>PyTorch-Ignite</u></b></h3></th>
-            <th style="text-align:center; padding: 0;">
-               <h3><b><u>PyTorch DDP</u></b></h3></th>
+            <th style="text-align:center; padding: 0;"><h3><b><u>PyTorch-Ignite</u></b></h3></th>
+            <th style="text-align:center; padding: 0;"><h3><b><u>PyTorch DDP</u></b></h3></th>
          </tr>
          <tr>
             <td style="text-align:center; padding: 0;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/ignite_idist.py"><h3>Source Code</h3></a> </th>
