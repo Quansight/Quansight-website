@@ -278,10 +278,8 @@ The complete source code of these experiments can be found
             <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_whole.png"></img> </td>
          </tr>
          <tr>
-            <th style="text-align:center;">
-               <h3><b><u>Horovod</u></b></h3></th>
-            <th style="text-align:center;">
-               <h3><b><u>Torch XLA</u></b></h3></th>
+            <th style="text-align:center;"><h3><b><u>Horovod</u></b></h3></th>
+            <th style="text-align:center;"><h3><b><u>Torch XLA</u></b></h3></th>
          </tr>
          <tr>
             <td style="text-align:center;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/torch_horovod.py"><h3>Source Code</h3></a> </td>
