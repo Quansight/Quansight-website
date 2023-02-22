@@ -128,7 +128,7 @@ distributed model instantiation:
             <th style="text-align:center;">PyTorch DDP</th>
          </tr>
          <tr>
-            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_automodel.png"> </td>
+            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_automodel.png"></img> </td>
          </tr>
          <tr>
             <td>&nbsp;</td>
@@ -138,7 +138,7 @@ distributed model instantiation:
             <th style="text-align:center;">Torch XLA</th>
          </tr>
          <tr>
-            <td colspan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_automodel.png"> </td>
+            <td colspan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_automodel.png"></img> </td>
          </tr>
       </table>
    </div>
@@ -177,7 +177,7 @@ snippets for distributed optimizer instantiation:
             <th style="text-align:center;">PyTorch DDP</th>
          </tr>
          <tr>
-            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_autooptim.png"> </td>
+            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_autooptim.png"></img> </td>
          </tr>
          <tr>
             <td>&nbsp;</td>
@@ -187,7 +187,7 @@ snippets for distributed optimizer instantiation:
             <th style="text-align:center;">Torch XLA</th>
          </tr>
          <tr>
-            <td colspan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_autooptim.png"> </td>
+            <td colspan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_autooptim.png"></img> </td>
          </tr>
       </table>
    </div>
@@ -216,7 +216,7 @@ step:
             <th style="text-align:center;">PyTorch DDP</th>
          </tr>
          <tr>
-            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_autodataloader.png"> </td>
+            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_autodataloader.png"></img> </td>
          </tr>
          <tr>
             <td>&nbsp;</td>
@@ -226,7 +226,7 @@ step:
             <th style="text-align:center;">Torch XLA</th>
          </tr>
          <tr>
-            <td colspan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_autodataloader.png"> </td>
+            <td colspan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_autodataloader.png"></img> </td>
          </tr>
       </table>
    </div>
@@ -277,7 +277,7 @@ The complete source code of these experiments can be found
             <td style="text-align:center; padding: 0;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/torch_native.py"><h3>Source Code</h3></a> </th>
          </tr>
          <tr>
-            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_whole.png"> </td>
+            <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_whole.png"></img> </td>
          </tr>
          <tr>
             <th style="text-align:center;">
