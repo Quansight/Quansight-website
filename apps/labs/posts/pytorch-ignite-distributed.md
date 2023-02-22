@@ -271,8 +271,8 @@ The complete source code of these experiments can be found
             <th style="text-align:center; padding: 0;"><h3><b><u>PyTorch DDP</u></b></h3></th>
          </tr>
          <tr>
-            <td style="text-align:center; padding: 0;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/ignite_idist.py"><h3>Source Code</h3></a> </th>
-            <td style="text-align:center; padding: 0;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/torch_native.py"><h3>Source Code</h3></a> </th>
+            <td style="text-align:center; padding: 0;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/ignite_idist.py"><h3>Source Code</h3></a> </td>
+            <td style="text-align:center; padding: 0;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/torch_native.py"><h3>Source Code</h3></a> </td>
          </tr>
          <tr>
             <td colspan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_whole.png"></img> </td>
@@ -284,8 +284,8 @@ The complete source code of these experiments can be found
                <h3><b><u>Torch XLA</u></b></h3></th>
          </tr>
          <tr>
-            <td style="text-align:center;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/torch_horovod.py"><h3>Source Code</h3></a> </th>
-            <td style="text-align:center;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/torch_xla_native.py"><h3>Source Code</h3></a> </th>
+            <td style="text-align:center;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/torch_horovod.py"><h3>Source Code</h3></a> </td>
+            <td style="text-align:center;"> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/torch_xla_native.py"><h3>Source Code</h3></a> </td>
          </tr>
          <tr>
             <td> <img src="/posts/pytorch-ignite-distributed/horovod_whole.png"> </td>
