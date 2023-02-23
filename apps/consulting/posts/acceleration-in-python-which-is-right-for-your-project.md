@@ -221,16 +221,16 @@ kinds of libraries. In my opinion, the second and third approaches are more
 favorable as they may be easier to build and maintain and may reach a wider
 developer and user base.
 
-[sgkit repo]: https://github.com/pystatgen/sgkit
-[dynd]: https://github.com/libdynd/libdynd
-[sparsity post]: https://www.quansight.com/post/leveraging-sparsity-for-efficient-data-manipulation-the-gcxs-sparse-array-format
-[coo]: https://en.wikipedia.org/wiki/Sparse_matrix#Coordinate_list_(COO)
-[dok]: https://en.wikipedia.org/wiki/Sparse_matrix#Dictionary_of_keys_(DOK)
-[csf]: http://shaden.io/pub-files/smith2015csf.pdf
 [blas]: https://en.wikipedia.org/wiki/Basic_Linear_Algebra_Subprograms
-[taco repo]: https://github.com/tensor-compiler/taco
-[pythran]: https://pythran.readthedocs.io/en/latest/
+[coo]: https://en.wikipedia.org/wiki/Sparse_matrix#Coordinate_list_(COO)
+[csf]: http://shaden.io/pub-files/smith2015csf.pdf
 [cython]: https://cython.org/
+[dok]: https://en.wikipedia.org/wiki/Sparse_matrix#Dictionary_of_keys_(DOK)
+[dynd]: https://github.com/libdynd/libdynd
 [numba]: http://numba.pydata.org/
-[scikit learn]: https://github.com/scikit-learn/scikit-learn
 [pydata sparse]: https://github.com/pydata/sparse
+[pythran]: https://pythran.readthedocs.io/en/latest/
+[scikit learn]: https://github.com/scikit-learn/scikit-learn
+[sgkit repo]: https://github.com/pystatgen/sgkit
+[sparsity post]: /post/leveraging-sparsity-for-efficient-data-manipulation-the-gcxs-sparse-array-format
+[taco repo]: https://github.com/tensor-compiler/taco
