@@ -130,7 +130,7 @@ efficiently store and manipulate them. See my previous <a
 href="/post/leveraging-sparsity-for-efficient-data-manipulation-the-gcxs-sparse-array-format"
 target="_self">post on sparsity</a> for more details. (Editor's note: This post
 is pending migration.) There are formats like [COO][coo], [DOK][dok],
-[CSF][csf], among countless others including many that are unique to matrices. A
+[CSF][csf], among numerous others including many that are unique to matrices. A
 cost of having many different formats is that developers have to write
 customized algorithms for performing operations like elementwise addition and
 matrix and tensor multiply between many different sparse tensor formats. TACO
@@ -197,7 +197,7 @@ Sgkit uses a single data structure in the form of an
 [`xarray.Dataset`][xarray.dataset] with specific attributes. This decision
 affords a high degree of flexibility regarding how the computations take place.
 The array objects in an `xarray.Dataset` could be standard Numpy arrays, GPU
-arrays using [Cupy][cupy], compressed arrays using [Zarr][zarr docs], or sparse
+arrays using [CuPy][cupy], compressed arrays using [Zarr][zarr docs], or sparse
 arrays using pydata/sparse. Using [Dask][dask] with [Xarray][xarray docs] is
 compatible with all of the aforementioned options as well. The algorithms in
 sgkit are written using Numba, offering support for both CPU- and GPU-based
