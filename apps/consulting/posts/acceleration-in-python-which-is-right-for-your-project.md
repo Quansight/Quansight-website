@@ -142,7 +142,7 @@ pybind11._
 ## Using a Python-Accelerating Library
 
 With tools such as [Pythran][pythran], [Cython][cython], and [Numba][numba] it
-is now easier than ever to write performant code soley in Python. All of these
+is now easier than ever to write performant code solely in Python. All of these
 tools allow you to transform native Python code into compiled code. This comes
 with several clear advantages:
 
