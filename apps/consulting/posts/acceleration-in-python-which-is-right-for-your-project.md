@@ -42,7 +42,7 @@ open-source developers have approached writing performant Python libraries.
   languages
 - Using a Python-accelerating library
 
-## Why does Python need speeding up in the first place?
+## Why Does Python Need Speeding Up in the First Place?
 
 Some of the same qualities that make Python user-friendly and good for data
 science are the same qualities that make Python slow. The main reason is that
@@ -60,7 +60,7 @@ Python virtual machine. In this way, we can call these operations directly in
 the Python source code but bypass the slow interpreter, resulting in improved
 performance.
 
-## Multiple languages in the same module
+## Multiple Languages in the Same Module
 
 A common strategy, especially among older libraries, is to write computationally
 intensive algorithms in C or C++ and call the algorithms from the outward-facing
@@ -72,7 +72,7 @@ important routines inside `scipy.sparse` including indexing and matrix
 multiplication are written in C++. This kind of approach works well for writing
 performant code. It does come with some downsides, however:
 
-- Contributors will need to know C/C++/fortran to be able to make changes to the
+- Contributors will need to know C/C++/Fortran to be able to make changes to the
   compute-intensive code.
 - The language barrier may prevent many Python developers from contributing.
 - Libraries following this model cannot easily be ported to other languages.
@@ -89,7 +89,7 @@ separately.
 While this approach will result in fast code, the above points should be
 considered when beginning a project.
 
-## Writing the codebase in a compiled language and writing bindings to other languages
+## Writing the Codebase in a Compiled Language and Writing Bindings to Other Languages
 
 An increasingly common approach today is to write the core of your library in C
 or C++ and write bindings to more data-science-friendly languages like R, Julia,
@@ -139,7 +139,7 @@ is pure C++, they need only write bindings.
 _One of the easiest ways to write bindings for Python from C++ code is to use
 pybind11._
 
-## Using a Python-accelerating library
+## Using a Python-Accelerating Library
 
 With tools such as [Pythran][pythran], [Cython][cython], and [Numba][numba] it
 is now easier than ever to write performant code soley in Python. All of these
@@ -166,7 +166,7 @@ code inside [scikit-learn][scikit learn] is written with Cython. There is
 Pythran and Cython code in SciPy. Numba is used extensively in
 [pydata/sparse][pydata sparse].
 
-## A quick note about SciPy
+## A Quick Note About SciPy
 
 SciPy is a very complicated project. It includes aspects of all three
 approaches. SciPy includes algorithmic C++ code, bindings to fast linear algebra
