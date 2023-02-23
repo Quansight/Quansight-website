@@ -13,6 +13,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 Quansight recently assisted the University of Oxford on the [sgkit][sgkit repo]
 library, a new genetics toolkit. Sgkit is based on the scikit-allel project,
 which has moved into maintenance mode. Part of the impetus behind this large
