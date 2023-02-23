@@ -12,6 +12,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 A bespoke, polished data science dashboard can be a beautiful thing for anyone
 looking to make data-driven decisions. And yet, not every project can afford
 setting up elaborate dashboards that cost money and developer time.
