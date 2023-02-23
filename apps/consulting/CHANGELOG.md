@@ -1,3 +1,10 @@
+February 22, 2023
+
+Via Storyblok:
+
+- Update 'About Us' page copy and illustrations, plus icons in the
+  Our Values section
+
 February 15, 2023
 
 Via Storyblok:
