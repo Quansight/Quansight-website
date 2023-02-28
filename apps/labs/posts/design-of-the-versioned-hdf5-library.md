@@ -75,7 +75,7 @@ tips on picking an optimal chunk size.
 Because chunks are the most basic HDF5 primitive, Versioned HDF5 uses them as
 the underlying blobs for storage. This way operations on data can be as
 [performant as
-possible](https://labs.quansight.org/blog/2020/09/versioned-hdf5-performance/).
+possible](https://labs.quansight.org/blog/versioned-hdf5-performance/).
 
 [Virtual datasets](http://docs.h5py.org/en/stable/vds.html) are a special kind
 of dataset that reference data from other datasets in a seamless way. The data
