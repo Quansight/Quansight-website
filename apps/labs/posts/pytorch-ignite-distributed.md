@@ -124,7 +124,9 @@ distributed model instantiation:
             <th style={{textAlign: 'center'}}>PyTorch DDP</th>
          </tr>
          <tr>
-            <td colSpan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_automodel.png" alt="PyTorch-Ignite and PyTorch DDP code comparison."></img> </td>
+            <td colSpan="2">
+               <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_automodel.png" alt="PyTorch-Ignite and PyTorch DDP code comparison." style={{width: '100%'}}></img>
+            </td>
          </tr>
          <tr>
             <td>&nbsp;</td>
@@ -134,7 +136,9 @@ distributed model instantiation:
             <th style={{textAlign: 'center'}}>Torch XLA</th>
          </tr>
          <tr>
-            <td colSpan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_automodel.png" alt="Horovod and PTorch XLA code comparison."></img> </td>
+            <td colSpan="2">
+               <img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_automodel.png" alt="Horovod and PTorch XLA code comparison." style={{width: '100%'}}></img>
+            </td>
          </tr>
       </table>
    </div>
@@ -171,7 +175,9 @@ snippets for distributed optimizer instantiation:
             <th style={{textAlign: 'center'}}>PyTorch DDP</th>
          </tr>
          <tr>
-            <td colSpan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_autooptim.png"  alt="PyTorch-Ignite and PyTorch DDP code comparison."></img> </td>
+            <td colSpan="2">
+               <img width="100%" src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_autooptim.png"  alt="PyTorch-Ignite and PyTorch DDP code comparison." style={{width: '100%'}}></img>
+            </td>
          </tr>
          <tr>
             <td>&nbsp;</td>
@@ -181,7 +187,9 @@ snippets for distributed optimizer instantiation:
             <th style={{textAlign: 'center'}}>Torch XLA</th>
          </tr>
          <tr>
-            <td colSpan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_autooptim.png" alt="Horovod and PTorch XLA code comparison."></img> </td>
+            <td colSpan="2">
+               <img width="100%" src="/posts/pytorch-ignite-distributed/horovod_vs_xla_autooptim.png" alt="Horovod and PTorch XLA code comparison." style={{width: '100%'}}></img>
+            </td>
          </tr>
       </table>
    </div>
@@ -207,7 +215,9 @@ step:
             <th style={{textAlign: 'center'}}>PyTorch DDP</th>
          </tr>
          <tr>
-            <td colSpan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_autodataloader.png"  alt="PyTorch-Ignite and PyTorch DDP code comparison."></img> </td>
+            <td colSpan="2">
+               <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_autodataloader.png"  alt="PyTorch-Ignite and PyTorch DDP code comparison." style={{width: '100%'}}></img>
+            </td>
          </tr>
          <tr>
             <td>&nbsp;</td>
@@ -217,7 +227,9 @@ step:
             <th style={{textAlign: 'center'}}>Torch XLA</th>
          </tr>
          <tr>
-            <td colSpan="2"><img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_autodataloader.png" alt="Horovod and PTorch XLA code comparison."></img> </td>
+            <td colSpan="2">
+               <img src="/posts/pytorch-ignite-distributed/horovod_vs_xla_autodataloader.png" alt="Horovod and PTorch XLA code comparison." style={{width: '100%'}}></img>
+            </td>
          </tr>
       </table>
    </div>
@@ -262,7 +274,9 @@ The complete source code of these experiments can be found
             <td style={{textAlign: 'center', padding: 0}}> <a href="https://github.com/pytorch-ignite/idist-snippets/blob/master/torch_native.py"><h3>Source Code</h3></a> </td>
          </tr>
          <tr>
-            <td colSpan="2"> <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_whole.png" alt="PyTorch-Ignite and PyTorch DDP code comparison."></img> </td>
+            <td colSpan="2">
+               <img src="/posts/pytorch-ignite-distributed/ignite_vs_ddp_whole.png" alt="PyTorch-Ignite and PyTorch DDP code comparison." style={{width: '100%'}}></img>
+            </td>
          </tr>
          <tr>
             <th style={{textAlign: 'center'}}><h3><b><u>Horovod</u></b></h3></th>
