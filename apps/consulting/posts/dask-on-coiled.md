@@ -12,6 +12,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 In this blog post, we will talk about a case study of utilizing [Dask][dask] to speed up
 a particular computation, and we will scale it with the help of [Coiled][coiled].
 
@@ -49,6 +51,7 @@ df.head()
 And the latter can scale from your computer to distributed machines on the cloud.
 
 ## Coiled
+
 Coiled is a service to scale Dask on the cloud. It's a company started by Matthew Rocklin, who is also the main developer of Dask.
 
 ![](/posts/dask-on-coiled/daskoncoiled-img-3.png)
@@ -76,6 +79,7 @@ client = Client(cluster)
 Reference: https://docs.coiled.io/user_guide/index.html
 
 Notes:
+
 - As shown above you need the Coiled pypi package to interact with Coiled's API.
 - You also need to sign up for a free account on Coiled to be able to spin up a Dask cluster on Coiled. At the time of writing this, Coiled's Free account gives 1000 CPU hours with 100 cores every month.
 
@@ -105,6 +109,7 @@ Our goal here is to calculate the pairwise distance between all vector pairs. Th
 - Ability to benchmark on large clusters on cloud with access to CPUs and GPUs
 
 ## Solution
+
 There exists a solution for the same operation in the scipy library in the form of a function named [`pdist`][pdist].
 
 It solves the problem for relatively smaller datasets and is fast enough, but it doesn't scale well and does not utilize GPUs either. Therefore, there was a need for a new implementation.
@@ -142,6 +147,7 @@ array([[0.        , 0.58320543, 0.85297084, 0.67021758],
 ```
 
 ### Approach
+
 To tackle the problem of scaling the computation for large datasets, where the array would not fit in memory, we took the map-reduce approach on the chunks of the arrays which can be described as follows:
 
 Consider a small chunk of a large 2D array as follows:
@@ -240,7 +246,7 @@ import dask.array as da
 import fsspec, zarr
 
 store = fsspec.get_mapper(
-    'gs://ag1000g-release/' \ 
+    'gs://ag1000g-release/' \
     'phase2.AR1/variation/main/' \
     'zarr/all/ag1000g.phase2.ar1')
 callset_snps = zarr.open_consolidated(store=store)
