@@ -194,8 +194,6 @@ snippets for distributed optimizer instantiation:
       </table>
    </div>
 
-|
-
 - [auto_dataloader()](https://pytorch.org/ignite/distributed.html#ignite.distributed.auto.auto_dataloader)
 
 This method adapts the data loading logic for non-distributed and
@@ -234,6 +232,7 @@ step:
       </table>
    </div>
 
+:::info
 Note
 
 Additionally, `idist` provides collective operations like `all_reduce`,
@@ -241,6 +240,7 @@ Additionally, `idist` provides collective operations like `all_reduce`,
 distributed frameworks. Please, see [our
 documentation](https://pytorch.org/ignite/distributed.html#ignite-distributed-utils)
 for more details.
+:::
 
 # Examples
 
@@ -293,6 +293,7 @@ The complete source code of these experiments can be found
       </table>
    </div>
 
+:::info
 Note
 
 You can also mix the usage of `idist` with other distributed APIs as
@@ -307,15 +308,17 @@ model = idist.auto_model(model)
 
 dist.destroy_process_group()
 ```
+:::
 
 # Running Distributed Code
 
-| PyTorch-Ignite's `idist` also unifies the distributed codes launching
+PyTorch-Ignite's `idist` also unifies the distributed codes launching
 method and makes the distributed configuration setup easier with the
 [ignite.distributed.launcher.Parallel (idist
 Parallel)](https://pytorch.org/ignite/distributed.html#ignite.distributed.launcher.Parallel)
 context manager.
-| This context manager has the capability to either spawn
+
+This context manager has the capability to either spawn
 `nproc_per_node` (passed as a script argument) child processes and
 initialize a processing group according to the provided backend or use
 tools like `torch.distributed.launch`, `slurm`, `horovodrun` by
@@ -366,6 +369,7 @@ python -m torch.distributed.launch --nproc_per_node 2 --use_env ignite_idist.py 
 horovodrun -np 4 -H hostname1:2,hostname2:2 python ignite_idist.py --backend horovod
 ```
 
+:::info
 Note
 
 In order to run this example and to avoid the installation procedure,
@@ -377,6 +381,7 @@ It will include Horovod with `gloo` controller and `nccl` support.
 docker run --gpus all -it -v $PWD:/project pytorchignite/hvd-vision:latest /bin/bash
 cd project
 ```
+:::
 
 ### With slurm
 
