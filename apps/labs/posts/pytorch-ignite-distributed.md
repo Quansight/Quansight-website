@@ -232,15 +232,14 @@ step:
       </table>
    </div>
 
-:::info
-Note
-
-Additionally, `idist` provides collective operations like `all_reduce`,
-`all_gather`, and `broadcast` that can be used with all supported
-distributed frameworks. Please, see [our
-documentation](https://pytorch.org/ignite/distributed.html#ignite-distributed-utils)
-for more details.
-:::
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Additionally, <code class="docutils literal">idist</code> provides collective operations like
+<code class="docutils literal">all_reduce</code>, <code class="docutils literal">all_gather</code>, and <code class="docutils literal">broadcast</code> that can be used
+with all supported distributed frameworks. Please, see <a class="reference external" href="https://pytorch.org/ignite/distributed.html#ignite-distributed-utils">our
+documentation</a>
+for more details.</p>
+</div>
 
 # Examples
 
