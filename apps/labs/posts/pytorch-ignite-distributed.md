@@ -231,9 +231,8 @@ step:
       </table>
    </div>
 
-Note
-
-Additionally, `idist` provides collective operations like `all_reduce`,
+**Note**
+- Additionally, `idist` provides collective operations like `all_reduce`,
 `all_gather`, and `broadcast` that can be used with all supported
 distributed frameworks. Please, see [our
 documentation](https://pytorch.org/ignite/distributed.html#ignite-distributed-utils)
@@ -290,9 +289,8 @@ The complete source code of these experiments can be found
       </table>
    </div>
 
-Note
-
-You can also mix the usage of `idist` with other distributed APIs as
+**Note**
+- You can also mix the usage of `idist` with other distributed APIs as
 below:
 
 ```python
@@ -364,9 +362,8 @@ python -m torch.distributed.launch --nproc_per_node 2 --use_env ignite_idist.py 
 horovodrun -np 4 -H hostname1:2,hostname2:2 python ignite_idist.py --backend horovod
 ```
 
-Note
-
-In order to run this example and to avoid the installation procedure,
+**Note**
+- In order to run this example and to avoid the installation procedure,
 you can pull one of PyTorch-Ignite's [docker image with pre-installed
 Horovod](https://github.com/pytorch/ignite/blob/master/docker/hvd/Dockerfile.hvd-base).
 It will include Horovod with `gloo` controller and `nccl` support.
