@@ -238,7 +238,7 @@ distributed frameworks. Please, see [our
 documentation](https://pytorch.org/ignite/distributed.html#ignite-distributed-utils)
 for more details.
 
-# Examples
+# Examples 
 
 The code snippets below highlight the API's specificities of each of
 the distributed backends on the same use case as compared to the `idist`
