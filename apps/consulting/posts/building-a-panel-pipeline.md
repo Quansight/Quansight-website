@@ -12,6 +12,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 Over a number of recent posts, we have given some examples of
 [how to build dashboards][qs panel dashboard post] using [Panel][panel site] and
 [how to integrate widgets from Panel and ipywidgets][qs panel & ipywidgets post]
@@ -173,7 +175,7 @@ This pipeline is about as simple as possible. The point here is to show how easy
 We have built a custom two-stage Panel app for pre-processing NLP (Natural Language Processing) pipelines. Rather than showing the details of those two classes as above, we have stored them in separate Python files as modules. All we need to do is import those classes—`PreProcessor` and `Trainer`—and insert them into our pipeline as above.
 
 ```python
-from app.api import PreProcessor   # Stage 1 
+from app.api import PreProcessor   # Stage 1
 from app.test_train import Trainer # Stage 2
 ```
 
