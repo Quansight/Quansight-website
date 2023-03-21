@@ -26,11 +26,11 @@ _(Image source: [PYPL][pypl page])_
 
 But that certainly does not mean that Python is going away completely. Virtually
 none of the languages that have come to prominence in the past have disappeared
-yet. They continue on as legacy code. Looking at the table of languages at
-[PYPL][pypl page], we see that people are still learning to code in Cobol and
-Ada. The last Cobol programmer on the planet will probably be the highest paid
-programmer on the planet. We also see that a newcomer, Rust, is quickly climbing
-the chart. Will it be the new #1 someday?
+yet. They continue on as legacy code. Looking at the bottom right of the same
+chart, we see that people are still learning to code in Cobol and Ada. The last
+Cobol programmer on the planet will probably be the highest paid programmer on
+the planet. We also see that a newcomer, Rust, is quickly climbing the chart.
+Will it be the new #1 someday?
 
 So the questions more relevant than "will Python stay #1 forever?" are: "when
 will Python fall out of prominent use?", "why?", and "should we care?"
