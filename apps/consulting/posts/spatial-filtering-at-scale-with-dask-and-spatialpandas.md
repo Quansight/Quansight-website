@@ -156,7 +156,7 @@ latitude-longitude space.
 Instead of using geohashes, the point data could be spatially sorted via a
 Hilbert curve. In Figure 4, the Hilbert curve (red), is a continuous curve
 beginning in the bottom left, and ending in the bottom right which fills the 2D
-latitude-longitude space. If we snap our point data, to the nearest part of the
+latitude-longitude space. If we snap our point data to the nearest part of the
 Hilbert curve, we can define each point by the distance it lies along the
 Hilbert curve. We can then sort the data by the 1D Hilbert curve distance. After
 doing so, we’ve mapped our 2D latitude-longitude data to a 1D Hilbert curve
@@ -174,9 +174,33 @@ relative to the curve._
 
 Now that the components of the general approach have been explained, let’s get
 into the specific packages implemented in the four solutions we tested. We
-conducted performance tests on the following stacks (Table 2) to help determine
-the best solution for our client.
+conducted performance tests on the following stacks to help determine
+the best solution for our client. The numbers for each column refer to the five components of the solution listed below Figure 2, above.
 
+| Solution Name  | 1. Partitioned Binary <br /> File Format |  2. Spatial Sorting   | 3. Global Index for <br /> Subdata Access | 4. Parallel Access <br /> & Processing | 5. Spatial Filtering |
+| :------------: | :--------------------------------------: | :-------------------: | :---------------------------------------: | :------------------------------------: | :------------------: |
+|    Unsorted    |                 Parquet                  |          N/A          |                    N/A                    |                  Dask                  |      Geopandas       |
+| Sorted Geohash |                 Parquet                  | Python-Geohash + Dask |                   Dask                    |                  Dask                  |      Geopandas       |
+
+<BlogTable
+tableDivClassName='w-fit'
+headingCellClassName = 'pl-4 pr-4 w-64 text-xl text-center align-top'
+regularCellClassName = 'px-4 text-xl text-center align-middle'
+headingData={[
+'Solution Name',
+'1. Partitioned Binary File Format',
+'2. Spatial Sorting',
+'3. Global Index for Subdata Access',
+'4. Parallel Access & Processing',
+'5. Spatial Filtering'
+]}
+tableData={[
+['Unsorted', 'Parquet', 'N/A', 'N/A', 'Dask', 'Geopandas'],
+['Sorted Geohash', 'Parquet', 'Python-Geohash + Dask', 'Dask', 'Dask', 'Geopandas'],
+['Sorted Geohash, No Sjoin*', 'Parquet', 'Python-Geohash + Dash', 'Dask', 'Dask', 'N/A'],
+['Spatialpandas', 'Parquet', 'Spatialpandas', 'Spatialpandas', 'Spatialpandas + Dask', 'Spatialpandas']
+]}
+/>
 Table 2: Packages used in each Spatial Filtering Solution
 
 ![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-6.png)
