@@ -13,6 +13,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 Based on the data collected by [PYPL][pypl page] and shown in the chart below,
 over the last 5 years, PHP and Java declined in popularity while Python’s
 popularity rose. Sometime in 2018, Python became the most popular language. But
