@@ -53,9 +53,11 @@ disadvantage is cost.
 
 Databases hosted on AWS RDS have a variety of costs, but in this case, with such
 a large amount of data, database storage costs dominate. Using RDS requires
-using more expensive database storage rather than using S3 storage. The table
+using more expensive database storage rather than using S3 storage. Table 1
 below compares the costs of RDS Database Storage and S3 Storage at the time of
 writing.
+
+<div class="text-center"><em>Table 1. Comparison of AWS Storage Costs</em></div>
 
 <BlogTable
 tableDivClassName='w-2/3'
@@ -177,11 +179,11 @@ into the specific packages implemented in the four solutions we tested. We
 conducted performance tests on the following stacks (Table 2) to help determine
 the best solution for our client.
 
-Table 2: Packages used in each Spatial Filtering Solution
+<div class="pl-20"><em>Table 2: Packages used in each spatial filtering solution.</em></div>
 
 ![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-6.png)
 
-_\* Sorted Geohash No Sjoin is not as accurate as the other solutions._
+<div class="pl-20"><em><sup>*</sup>Sorted Geohash No Sjoin is not as accurate as the other solutions.</em></div>
 
 [Parquet][parquet docs] was used in all four potential solutions as the binary
 file format allowing partitioning of the data for subsequently accessing only
