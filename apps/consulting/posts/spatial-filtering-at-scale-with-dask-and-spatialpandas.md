@@ -39,9 +39,9 @@ data from Miguel Román, NASA's Goddard Space Flight Center_
 
 Our client was a small startup who needed to avoid large up-front infrastructure
 costs. This constrained our approaches to those possible via cloud providers
-like AWS, Azure, or GCP. We considered five potential approaches to meet the
-client’s needs, one of which employs a relational database, and four that use
-the PyData stack.
+like AWS, Azure, or Google Cloud Platform (GCP). We considered five potential
+approaches to meet the client’s needs, one of which employs a relational
+database, and four that use the PyData stack.
 
 ## Relational Database With Geospatial Extension
 
