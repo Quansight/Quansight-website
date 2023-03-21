@@ -43,7 +43,7 @@ like AWS, Azure, or GCP. We considered five potential approaches to meet the
 client’s needs, one of which employs a relational database, and four that use
 the PyData stack.
 
-## Relational Database with Geospatial Extension
+## Relational Database With Geospatial Extension
 
 Perhaps the first approach that comes to mind is the use of a relational
 database such as PostgreSQL and an extension like PostGIS which allows the use
@@ -144,7 +144,7 @@ characters) which can be sorted. The power of this method depended on the fact
 that points near each other in geohash space are also near each other in
 latitude-longitude space.
 
-## _Hilbert Curve Spatial Sort Example_
+### _Hilbert Curve Spatial Sort Example_
 
 Instead of using geohashes, the point data could be spatially sorted via a
 Hilbert curve. In Figure 4, the Hilbert curve (red), is a continuous curve
@@ -163,7 +163,7 @@ latitude-longitude coordinate system. The red curvy line is the Hilbert curve
 inside the box. The points are arbitrary examples showing where they might lie
 relative to the curve._
 
-## Tech stacks used in PyData solutions
+## Tech Stacks Used in PyData Solutions
 
 Now that the components of the general approach have been explained, let’s get
 into the specific packages implemented in the four solutions we tested. We
@@ -217,7 +217,7 @@ Preprocess data (if necessary) one time
 Filter data for each query 4. Select points from dataset that are within 1, 10,
 100, 1000, 10000 random zip code polygons distributed around the contiguous US
 
-## _Dataset_
+### _Dataset_
 
 We used a dataset from OpenStreetMap (OSM), which originally consisted of 2.9
 billion latitude-longitude point pairs. We removed data outside the contiguous
@@ -228,7 +228,7 @@ The polygons are randomly selected US zip code polygons available from the US
 Census at
 [https://www2.census.gov/geo/tiger/TIGER2019/ZCTA5/tl_2019_us_zcta510.zip][polygons].
 
-## _Machine Specifications_
+### _Machine Specifications_
 
 Although a cloud cluster was used in production, the benchmark results presented
 here were performed on a workstation. The specs are included below:
@@ -245,7 +245,7 @@ potentially using more RAM than an individual worker has.
 
 ## Benchmark Results
 
-## _Unsorted Case_
+### _Unsorted Case_
 
 As a baseline, we timed an unsorted case first. In this case, preprocessing and
 sorting of the data was not necessary. We simply opened up every partition of
@@ -262,7 +262,7 @@ were all above 40 minutes, and increased with increasing numbers of zip code
 polygons. The workers didn’t have enough memory to filter by 1000 or 10,000 zip
 code polygons.
 
-## _Sorted Geohash With Sjoin Case_
+### _Sorted Geohash With Sjoin Case_
 
 The next case used python-geohash to create geohashes for each point in our OSM
 dataset. Remember that this means each point in our dataset was labeled with a
@@ -302,7 +302,7 @@ in the unsorted case (above), and this case was able to filter the data in the
 data points are identical to the unsorted case, giving us confidence that we
 selected the same points.
 
-## _Sorted Geohash No Sjoin Case_
+### _Sorted Geohash No Sjoin Case_
 
 As the number of zip code polygons grows, the last spatial join step takes
 longer and longer. For some applications, the last spatial join step may not be
@@ -323,7 +323,7 @@ code polygons is higher, but the number of result points is also much larger,
 indicative of the lower filtering precision produced by excluding the last
 spatial join step.
 
-## _Spatialpandas Case_
+### _Spatialpandas Case_
 
 The last case used a new package called Spatialpandas. Spatialpandas spatially
 sorts the data using the Hilbert curve. The results of using Spatialpandas are
@@ -421,7 +421,7 @@ imported into its internal format which also increases storage costs over S3.
 The NVIDIA RAPIDS suite has a new tool called CuSpatial but in practice, it is a
 very early prototype and is not usable in production.
 
-## Are you working with large datasets?
+## Are You Working With Large Datasets?
 
 Reach out to Quansight for a free consultation by sending an email to
 connect@quansight.com.
