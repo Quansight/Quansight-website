@@ -121,7 +121,7 @@ However, the common methods of getting speed and scale into your Python
 run-times are implementation dependent meaning that you have to commit to a
 certain underlying runtime solution for Python such as CPython. Your Python code
 is no longer portable to other, incompatible Python runtime implementations
-paradigms such as PyPy, Jython (Java), IronPyhton (.NET), MicroPython (IOT), and
+paradigms such as PyPy, Jython (Java), IronPython (.NET), MicroPython (IOT), and
 Brython (web).
 
 Portable performance and scale are Python’s achilles heel. It has other
