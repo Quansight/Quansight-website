@@ -13,6 +13,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 Imagine having a dataset of over 50 TB of compressed geospatial point data
 stored in flat files, and you want to efficiently filter data in a few ZIP codes
 for further processing. You can’t even open a dataset that large on a single
@@ -62,6 +64,7 @@ Various open source python packages exist which could be combined to accomplish 
 _Figure 2: Illustration of the general workflow for solutions based on the PyData stack approach._
 
 The five components are:
+
 1. Use a partitionable binary file format
 2. Spatially sort the dataset
 3. Create a global data index
@@ -76,7 +79,7 @@ Spatial sorting deserves more explanation, and it can be performed using a varie
 
 Several established systems could be used for spatially sorting the data including [Geohash][geohash], [Hilbert Curve][hilbert], [Uber H3][uber h3], and [Google S2 Geometry][google s2 geometry]. We only considered the first two methods due to time constraints, but they are conceptually similar to the last two methods.
 
-###  _Geohash Spatial Sort Example_
+### _Geohash Spatial Sort Example_
 
 Using geohashes is the first way we considered spatially sorting the point data, but what is a geohash? In practical terms, a geohash is a string of characters which represents a rectangular region in latitude-longitude space. In Figure 3, geohash “9” represents the area contained in the red rectangle. Smaller and smaller subregions can be defined within the larger geohash by adding more characters. You can see that the geohash “9q” represents the region in the light blue rectangle which is contained within geohash “9”. You can continue adding characters to the geohash to define an arbitrarily small subregion.
 
@@ -102,7 +105,7 @@ Table 2: Packages used in each Spatial Filtering Solution
 
 ![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-6.png)
 
-_* Sorted Geohash No Sjoin is not as accurate as the other solutions._
+_\* Sorted Geohash No Sjoin is not as accurate as the other solutions._
 
 Parquet was used in all four potential solutions as the binary file format allowing partitioning of the data for subsequently accessing only relevant data partitions. For spatial sorting, solutions using both geohashes via Python-Geohash and the Hilbert curve via Spatialpandas were considered. Dask was used to build a global index of the data in the geohash sorted solutions, while Spatialpandas built the global index of the data in the Hilbert curve solution. Dask is used to read the data in parallel in all cases. Additionally, Dask is used to map the spatial filtering function across each of the data partitions in all cases. The spatial filtering function, a spatial join (explained below), was part of GeoPandas in the first 2 cases, and part of Spatialpandas in the last case. In the Sorted Geohash No Sjoin case, no final spatial filtering was performed, resulting in lower accuracy solution than the other cases.
 
@@ -115,12 +118,12 @@ In order to compare the various solutions, we established a benchmark against wh
 **Each benchmarking test follows these steps:**
 
 Preprocess data (if necessary) one time
-1. Calculate geohash or Hilbert curve 
+
+1. Calculate geohash or Hilbert curve
 2. Spatially sort data
 3. Save data in partitions
 
-Filter data for each query
-4. Select points from dataset that are within 1, 10, 100, 1000, 10000 random zip code polygons distributed around the contiguous US
+Filter data for each query 4. Select points from dataset that are within 1, 10, 100, 1000, 10000 random zip code polygons distributed around the contiguous US
 
 ## _Dataset_
 
@@ -129,6 +132,7 @@ We used a dataset from OpenStreetMap (OSM), which originally consisted of 2.9 bi
 ## _Machine Specifications_
 
 Although a cloud cluster was used in production, the benchmark results presented here were performed on a workstation. The specs are included below:
+
 - Processor: AMD Ryzen Threadripper 2970WX 24-Core Processor
 - RAM: 64 GB
 - For this comparison Dask Workers were limited to:
@@ -139,6 +143,7 @@ Although a cloud cluster was used in production, the benchmark results presented
 Note that the final computation brings the filtered data into the main process potentially using more RAM than an individual worker has.
 
 ## Benchmark Results
+
 ## _Unsorted Case_
 
 As a baseline, we timed an unsorted case first. In this case, preprocessing and sorting of the data was not necessary. We simply opened up every partition of the data, and used GeoPandas to spatially join each partition of points with the set of zip code polygons. We spatially joined the partitions in parallel with Dask. The results are in Table 3.
@@ -177,7 +182,7 @@ The last case used a new package called Spatialpandas. Spatialpandas spatially s
 
 ![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-11.png)
 
-_* Geohash time and sort time are combined because they could not be determined separately with Spatialpandas._
+_\* Geohash time and sort time are combined because they could not be determined separately with Spatialpandas._
 
 This case was much faster than the other cases. Additionally, this was the only case that could filter the data by the 10,000 polygon set with full accuracy. This is because the Spatialpandas spatial join requires less memory than the GeoPandas spatial join method.
 
@@ -219,7 +224,7 @@ Other approaches were considered and experimented with. AWS Athena is a serverle
 
 Reach out to Quansight for a free consultation by sending an email to connect@quansight.com.
 
-_This work was originally presented at Scipy 2020, and can be viewed here:_ 
+_This work was originally presented at Scipy 2020, and can be viewed here:_
 
 [https://youtu.be/czesBVUoXvk][scipy2020 video]
 
