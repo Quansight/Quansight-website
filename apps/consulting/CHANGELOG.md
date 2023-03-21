@@ -1,3 +1,11 @@
+March 19, 2023
+
+Via Storyblok:
+
+- Fixes to PyTorch 2022 blog post
+  - Add Andrew James as coauthor
+  - Remove Francisco Massa from acknowledgments
+
 March 17, 2023
 
 Via Storyblok:
