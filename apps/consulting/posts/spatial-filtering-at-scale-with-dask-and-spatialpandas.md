@@ -68,11 +68,11 @@ more cost effective. This cost difference led us to consider the PyData stack.
 In this approach, building a solution using open-source libraries is more cost
 effective and transparent, but it’s more than that for us at Quansight. We are
 experts in the PyData open source tool stack. Many core contributors and
-creators of popular python open source packages have found a home at Quansight.
+creators of popular Python open source packages have found a home at Quansight.
 We often see solutions that make significant use of open source tools, so
-naturally, this is where we focused the remainder of our development.
+naturally this is where we focused the remainder of our development.
 
-Various open source python packages exist which could be combined to accomplish
+Various open source Python packages exist which could be combined to accomplish
 spatial sorting. We built several solutions and compared their performances
 below. Generally, each solution consists of five components, which are
 illustrated in Figure 2.
@@ -92,20 +92,20 @@ The five components are:
 We chose these components generally to reduce memory use and increase filtering
 speed. The first component, a partitionable binary file format, was useful
 because partitions allow for subsets of the data to be read. The second
-component was spatial sorting. It is the process of mapping 2-dimensional data
+component was spatial sorting. This is the process of mapping 2-dimensional data
 to a single dimension such that points near each other in the single dimension
 are near each other in the original 2-dimensions, and then sorting the data by
 that single dimension. The third component, creating a global index of the
 partitions, allows for efficient lookup of the partitions which contain data in
 a particular region. After the data was sorted and indexed, it was saved in
 partitions, which could be opened individually instead of opening the entire
-dataset at once. With the data in that format, filtering (by zip code polygons
+dataset at once. With the data in that format, filtering (by ZIP code polygons
 in this paper) was much faster because we only needed to open the data
 partitions relevant to a specific region. The fourth component was parallelized
 access and processing of the relevant partitions. The relevant partitions of the
-dataset include points both within and outside the set of zip code polygons. The
+dataset include points both within and outside the set of ZIP code polygons. The
 fifth component, another filtering step, was necessary to exclude data outside
-the zip code polygons.
+the ZIP code polygons.
 
 ## Spatial Sorting
 
@@ -199,9 +199,9 @@ methods are implemented in GeoPandas and Spatialpandas.
 
 In order to compare the various solutions, we established a benchmark against
 which to compare the solution performances in terms of runtime. The task is to
-filter a large amount of point data by various randomly selected US zip code
+filter a large amount of point data by various randomly selected US ZIP code
 polygons. We performed the task five times for each solution, each time
-increasing the number of zip code polygons. The dataset and machine
+increasing the number of ZIP code polygons. The dataset and machine
 specification details are given below. Our work can be freely downloaded and
 reproduced from it’s repository:
 [https://github.com/Quansight/scipy2020_spatial_algorithms_at_scale][scipy2020 repo].
@@ -215,7 +215,7 @@ Preprocess data (if necessary) one time
 3. Save data in partitions
 
 Filter data for each query 4. Select points from dataset that are within 1, 10,
-100, 1000, 10000 random zip code polygons distributed around the contiguous US
+100, 1000, 10000 random ZIP code polygons distributed around the contiguous US
 
 ### _Dataset_
 
@@ -224,7 +224,7 @@ billion latitude-longitude point pairs. We removed data outside the contiguous
 US, leaving 114 million rows of point data in a 3.2 GB uncompressed CSV file. We
 then converted the data to a parquet file format. The data is available at
 [https://planet.openstreetmap.org/gps/simple-gps-points-120604.csv.xz][gps points].
-The polygons are randomly selected US zip code polygons available from the US
+The polygons are randomly selected US ZIP code polygons available from the US
 Census at
 [https://www2.census.gov/geo/tiger/TIGER2019/ZCTA5/tl_2019_us_zcta510.zip][polygons].
 
@@ -250,16 +250,16 @@ potentially using more RAM than an individual worker has.
 As a baseline, we timed an unsorted case first. In this case, preprocessing and
 sorting of the data was not necessary. We simply opened up every partition of
 the data, and used GeoPandas to spatially join each partition of points with the
-set of zip code polygons. We spatially joined the partitions in parallel with
+set of ZIP code polygons. We spatially joined the partitions in parallel with
 Dask. The results are in Table 3.
 
 ![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-7.png)
 
 Each row contains the results of filtering the 114 million initial points by a
-different number of zip code polygons. Because this baseline does not require
+different number of ZIP code polygons. Because this baseline does not require
 preprocessing, the Geohash and sort times are each 0 seconds. The query times
-were all above 40 minutes, and increased with increasing numbers of zip code
-polygons. The workers didn’t have enough memory to filter by 1000 or 10,000 zip
+were all above 40 minutes, and increased with increasing numbers of ZIP code
+polygons. The workers didn’t have enough memory to filter by 1000 or 10,000 ZIP
 code polygons.
 
 ### _Sorted Geohash With Sjoin Case_
@@ -277,40 +277,40 @@ below.
 _Figure 6: Illustration showing the spatial features involved in querying data
 in the sorted geohash case._
 
-In Figure 6, there is a bright red region representing a zip code area. The
+In Figure 6, there is a bright red region representing a ZIP code area. The
 light blue and dark blue points are the subset of the points from our OSM
 dataset that lie within the pink geohashes (two, side-by-side) which intersect
-the zip code area. Our goal was to efficiently return the light blue points,
-those that intersect the zip code area. This was accomplished by opening only
-the data in the geohashes (partitions) intersecting the zip code polygon (light
+the ZIP code area. Our goal was to efficiently return the light blue points,
+those that intersect the ZIP code area. This was accomplished by opening only
+the data in the geohashes (partitions) intersecting the ZIP code polygon (light
 and dark blue points) using the global index of our spatially sorted data, and
 then applying spatial filtering to leave only the light blue points.
 
 In terms of our PyData stack, we first find the geohash polygons which intersect
-the zip code with Polygon-geohasher. Then we open our dataset with Dask. Dask
+the ZIP code with Polygon-geohasher. Then we open our dataset with Dask. Dask
 uses its global index to open the partitions of our dataset corresponding to the
 geohash polygons (dark blue points). Then we used GeoPandas to perform a spatial
-join between the zip code polygon and the geohash points to exclude points
-outside of the zip code polygon and keep the points of interest (light blue
+join between the ZIP code polygon and the geohash points to exclude points
+outside of the ZIP code polygon and keep the points of interest (light blue
 points). The benchmark results are below.
 
 ![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-9.png)
 
 The one-time costs alone (30 min) are less than the single query time (~40 min)
 in the unsorted case (above), and this case was able to filter the data in the
-1000 zip code polygon task. It’s important to note that the numbers of filtered
+1000 ZIP code polygon task. It’s important to note that the numbers of filtered
 data points are identical to the unsorted case, giving us confidence that we
 selected the same points.
 
 ### _Sorted Geohash No Sjoin Case_
 
-As the number of zip code polygons grows, the last spatial join step takes
+As the number of ZIP code polygons grows, the last spatial join step takes
 longer and longer. For some applications, the last spatial join step may not be
-necessary. The lower accuracy of returning all points that are near the zip code
-polygons, rather than only those within the zip code polygons reduces the query
+necessary. The lower accuracy of returning all points that are near the ZIP code
+polygons, rather than only those within the ZIP code polygons reduces the query
 time significantly. In Figure 6, this solution would return all the light and
-dark blue points within the geohashes intersecting the zip code rather than just
-those light blue points within the zip code. This solution is not adequate in
+dark blue points within the geohashes intersecting the ZIP code rather than just
+those light blue points within the ZIP code. This solution is not adequate in
 all cases, but the reduced query time may be worth it in some use cases. For
 example, this solution may be adequate when the uncertainty of the point data is
 greater than the size of the geohashes. The results of leaving off the last
@@ -318,7 +318,7 @@ spatial join step are below.
 
 ![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-10.png)
 
-In this case, the query times are much lower, especially when the number of zip
+In this case, the query times are much lower, especially when the number of ZIP
 code polygons is higher, but the number of result points is also much larger,
 indicative of the lower filtering precision produced by excluding the last
 spatial join step.
@@ -344,20 +344,20 @@ GeoPandas spatial join method.
 
 We’ve looked at the results individually, but the following plots compare the
 performances of the potential solutions. The first plot below shows the query
-times vs the number of zip code polygons by which the data was being filtered.
+times vs the number of ZIP code polygons by which the data was being filtered.
 Query times don’t include the one time costs like calculating geohashes, the
 Hilbert curve, or sorting the data.
 
 As shown in Figure 7, the query time for the unsorted case (red) took the
 longest at over 40 minutes, and this case was not able to process the two
-largest batches of zip code polygons. The query time for the sorted geohash
+largest batches of ZIP code polygons. The query time for the sorted geohash
 without spatial join (yellow) was the fastest for 100 or more polygons, but
 remember that it wasn’t as accurate as the other solutions. The fastest query
 time for an accurate solution is the Spatialpandas case (green).
 
 ![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-12.png)
 
-_Figure 7: Comparison of filtering time for each batch of zip code polygons. The
+_Figure 7: Comparison of filtering time for each batch of ZIP code polygons. The
 dashed line indicates the case in which a spatial join was not used and the
 results are typically less accurate._
 
@@ -392,7 +392,7 @@ cost of accuracy.
 ## Additional Considerations
 
 Spatialpandas was the best overall solution explored here, and was what we ended
-up using for our client. Spatialpandas is an easy to install, pure python
+up using for our client. Spatialpandas is an easy to install, pure Python
 package. It makes heavy use of Numba for highly efficient spatial joins and
 bounding box queries. It’s also integrated nicely with Dask and the parquet file
 format.
@@ -426,7 +426,7 @@ very early prototype and is not usable in production.
 Reach out to Quansight for a free consultation by sending an email to
 connect@quansight.com.
 
-_This work was originally presented at Scipy 2020, and can be viewed here:_
+_This work was originally presented at SciPy 2020, and can be viewed here:_
 
 [https://youtu.be/czesBVUoXvk][scipy2020 video]
 
