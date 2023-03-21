@@ -214,7 +214,7 @@ filter a large amount of point data by various randomly selected US ZIP code
 polygons. We performed the task five times for each solution, each time
 increasing the number of ZIP code polygons. The dataset and machine
 specification details are given below. Our work can be freely downloaded and
-reproduced from [its repository][scipy2020 repo].
+reproduced from [this GitHub repository][scipy2020 repo].
 
 **Each benchmarking test follows these steps:**
 
@@ -226,8 +226,8 @@ Preprocess data (if necessary) one time:
 
 Filter data for each query:
 
-1. Select points from dataset that are within 1, 10,
-   100, 1000, 10000 random ZIP code polygons distributed around the contiguous US
+1. Select points from dataset that are within 1, 10, 100, 1000, or 10,000 random
+   ZIP code polygons distributed around the contiguous US
 
 ### _Dataset_
 
