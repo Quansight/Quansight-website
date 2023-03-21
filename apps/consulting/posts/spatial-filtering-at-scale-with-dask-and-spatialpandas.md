@@ -53,11 +53,18 @@ disadvantage is cost.
 
 Databases hosted on AWS RDS have a variety of costs, but in this case, with such
 a large amount of data, database storage costs dominate. Using RDS requires
-using more expensive database storage rather than using S3 storage. Table 1
-compares the costs of RDS Database Storage and S3 Storage at the time of
+using more expensive database storage rather than using S3 storage. The table
+below compares the costs of RDS Database Storage and S3 Storage at the time of
 writing.
 
-![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-2.png)
+<BlogTable
+tableDivClassName='w-2/3'
+headingData={['', 'RDS Database', 'S3']}
+tableData={[
+['Per GB-Month', '$0.115', '$0.023'],
+['Per 50 TB-Month', '$5,750', '$1,150']
+]}
+/>
 
 Database storage is 5x the cost of S3 storage making an RDS database approach
 unattractive. Approaches that allow the data to be accessed directly from S3 are
