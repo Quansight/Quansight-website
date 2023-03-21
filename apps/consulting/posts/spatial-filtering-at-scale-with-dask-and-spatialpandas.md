@@ -3,7 +3,7 @@ title: 'Spatial Filtering at Scale With Dask and Spatialpandas'
 published: October 7, 2020
 author: adam-lewis
 description: >
-  Imagine having a dataset of over 50 TB of compressed geospatial point data stored in flat files, and you want to efficiently filter data in a few ZIP codes for further processing. You can’t even open a dataset that large on a single machine using tools like pandas, so what is the best way to accomplish the filtering? This is exactly the problem one of our clients recently faced.
+  Imagine having a dataset of over 50 TB of compressed geospatial point data stored in flat files, and you want to efficiently filter data in a few ZIP codes for further processing. You can't even open a dataset that large on a single machine using tools like pandas, so what is the best way to accomplish the filtering? This is exactly the problem one of our clients recently faced.
 category: [Scalable Computing, PyData Ecosystem]
 featuredImage:
   src: /posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-1.png
@@ -17,7 +17,7 @@ hero:
 
 Imagine having a dataset of over 50 TB of compressed geospatial point data
 stored in flat files, and you want to efficiently filter data in a few ZIP codes
-for further processing. You can’t even open a dataset that large on a single
+for further processing. You can't even open a dataset that large on a single
 machine using tools like pandas, so what is the best way to accomplish the
 filtering? This is exactly the problem one of our clients recently faced.
 
@@ -25,7 +25,7 @@ We addressed this challenge by spatially sorting the data, storing it in a
 partitionable binary file format, and parallelizing spatial filtering of the
 data all while using only open source tools within the PyData ecosystem on a
 commercial cloud platform. This white paper documents the potential solutions
-that we considered to address our client’s needs.
+that we considered to address our client's needs.
 
 ![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-1.png)
 
@@ -40,7 +40,7 @@ data from Miguel Román, NASA's Goddard Space Flight Center_
 Our client was a small startup who needed to avoid large up-front infrastructure
 costs. This constrained our approaches to those possible via cloud providers
 like AWS, Azure, or Google Cloud Platform (GCP). We considered five potential
-approaches to meet the client’s needs, one of which employs a relational
+approaches to meet the client's needs, one of which employs a relational
 database, and four that use the PyData stack.
 
 ## Relational Database With Geospatial Extension
@@ -48,7 +48,7 @@ database, and four that use the PyData stack.
 Perhaps the first approach that comes to mind is the use of a relational
 database such as PostgreSQL and an extension like PostGIS which allows the use
 of spatial data types and queries on AWS Relational Database Service (RDS). The
-advantage of this approach is that it’s well established, but the strong
+advantage of this approach is that it's well established, but the strong
 disadvantage is cost.
 
 Databases hosted on AWS RDS have a variety of costs, but in this case, with such
@@ -73,7 +73,7 @@ more cost effective. This cost difference led us to consider the PyData stack.
 ## PyData Stack
 
 In this approach, building a solution using open-source libraries is more cost
-effective and transparent, but it’s more than that for us at Quansight. We are
+effective and transparent, but it's more than that for us at Quansight. We are
 experts in the PyData open source tool stack. Many core contributors and
 creators of popular Python open source packages have found a home at Quansight.
 We often see solutions that make significant use of open source tools, so
@@ -121,7 +121,7 @@ variety of techniques. The idea is to map the original point data from
 latitude-longitude space to a 1-dimensional space such that points that are near
 each other in the 1-dimensional space are also near each other in
 latitude-longitude space. We can then sort the points based on the 1-dimensional
-space value. If that isn’t clear, the coming examples describing geohash and
+space value. If that isn't clear, the coming examples describing geohash and
 Hilbert curve spatial sorting should help.
 
 Several established systems could be used for spatially sorting the data including [Geohash][geohash], [Hilbert Curve][hilbert], [Uber H3][uber h3], and [Google S2 Geometry][google s2 geometry]. We only considered the first two methods due to time constraints, but they are conceptually similar to the last two methods.
@@ -159,7 +159,7 @@ beginning in the bottom left, and ending in the bottom right which fills the 2D
 latitude-longitude space. If we snap our point data, to the nearest part of the
 Hilbert curve, we can define each point by the distance it lies along the
 Hilbert curve. We can then sort the data by the 1D Hilbert curve distance. After
-doing so, we’ve mapped our 2D latitude-longitude data to a 1D Hilbert curve
+doing so, we've mapped our 2D latitude-longitude data to a 1D Hilbert curve
 distance dimension, and points which are near each other on the Hilbert curve
 are also near each other in latitude-longitude space.
 
@@ -172,7 +172,7 @@ relative to the curve._
 
 ## Tech Stacks Used in PyData Solutions
 
-Now that the components of the general approach have been explained, let’s get
+Now that the components of the general approach have been explained, let's get
 into the specific packages implemented in the four solutions we tested. We
 conducted performance tests on the following stacks (Table 2) to help determine
 the best solution for our client.
@@ -183,23 +183,25 @@ Table 2: Packages used in each Spatial Filtering Solution
 
 _\* Sorted Geohash No Sjoin is not as accurate as the other solutions._
 
-Parquet was used in all four potential solutions as the binary file format
-allowing partitioning of the data for subsequently accessing only relevant data
-partitions. For spatial sorting, solutions using both geohashes via
-Python-Geohash and the Hilbert curve via Spatialpandas were considered. Dask was
-used to build a global index of the data in the geohash sorted solutions, while
+[Parquet][parquet docs] was used in all four potential solutions as the binary
+file format allowing partitioning of the data for subsequently accessing only
+relevant data partitions. For spatial sorting, solutions using both geohashes
+via [Python-Geohash][python-geohash pypi] and the Hilbert curve via
+[Spatialpandas][spatialpandas repo] were considered. [Dask][dask docs] was used
+to build a global index of the data in the geohash sorted solutions, while
 Spatialpandas built the global index of the data in the Hilbert curve solution.
 Dask is used to read the data in parallel in all cases. Additionally, Dask is
 used to map the spatial filtering function across each of the data partitions in
 all cases. The spatial filtering function, a spatial join (explained below), was
-part of GeoPandas in the first 2 cases, and part of Spatialpandas in the last
-case. In the Sorted Geohash No Sjoin case, no final spatial filtering was
-performed, resulting in lower accuracy solution than the other cases.
+part of [GeoPandas][geopandas docs] in the first 2 cases, and part of
+Spatialpandas in the last case. In the Sorted Geohash No Sjoin case, no final
+spatial filtering was performed, resulting in a lower-accuracy solution than the
+other cases.
 
 The spatial filtering function used in the last step was a spatial join. A
 spatial join is like a regular database join, except the keys being joined are
 geometric objects and the relationships between them can include geometric
-relationships (e.g. Join by points within a polygon). Different spatial join
+relationships (e.g., 'join by points within a polygon'). Different spatial join
 methods are implemented in GeoPandas and Spatialpandas.
 
 ## Benchmark
@@ -210,30 +212,29 @@ filter a large amount of point data by various randomly selected US ZIP code
 polygons. We performed the task five times for each solution, each time
 increasing the number of ZIP code polygons. The dataset and machine
 specification details are given below. Our work can be freely downloaded and
-reproduced from it’s repository:
-[https://github.com/Quansight/scipy2020_spatial_algorithms_at_scale][scipy2020 repo].
+reproduced from [its repository][scipy2020 repo].
 
 **Each benchmarking test follows these steps:**
 
-Preprocess data (if necessary) one time
+Preprocess data (if necessary) one time:
 
 1. Calculate geohash or Hilbert curve
 2. Spatially sort data
 3. Save data in partitions
 
-Filter data for each query 4. Select points from dataset that are within 1, 10,
-100, 1000, 10000 random ZIP code polygons distributed around the contiguous US
+Filter data for each query:
+
+1. Select points from dataset that are within 1, 10,
+   100, 1000, 10000 random ZIP code polygons distributed around the contiguous US
 
 ### _Dataset_
 
-We used a dataset from OpenStreetMap (OSM), which originally consisted of 2.9
-billion latitude-longitude point pairs. We removed data outside the contiguous
-US, leaving 114 million rows of point data in a 3.2 GB uncompressed CSV file. We
-then converted the data to a parquet file format. The data is available at
-[https://planet.openstreetmap.org/gps/simple-gps-points-120604.csv.xz][gps points].
-The polygons are randomly selected US ZIP code polygons available from the US
-Census at
-[https://www2.census.gov/geo/tiger/TIGER2019/ZCTA5/tl_2019_us_zcta510.zip][polygons].
+We used a [dataset from OpenStreetMap (OSM)][gps points] (direct download link), which originally
+consisted of 2.9 billion latitude-longitude point pairs. We removed data outside
+the contiguous US, leaving 114 million rows of point data in a 3.2 GB
+uncompressed CSV file. We then converted the data to a Parquet file format. The
+polygons are randomly selected US ZIP code polygons available from the
+[US Census][polygons] (direct download link, via archive.org).
 
 ### _Machine Specifications_
 
@@ -266,12 +267,12 @@ Each row contains the results of filtering the 114 million initial points by a
 different number of ZIP code polygons. Because this baseline does not require
 preprocessing, the Geohash and sort times are each 0 seconds. The query times
 were all above 40 minutes, and increased with increasing numbers of ZIP code
-polygons. The workers didn’t have enough memory to filter by 1000 or 10,000 ZIP
+polygons. The workers didn't have enough memory to filter by 1000 or 10,000 ZIP
 code polygons.
 
 ### _Sorted Geohash With Sjoin Case_
 
-The next case used python-geohash to create geohashes for each point in our OSM
+The next case used Python-Geohash to create geohashes for each point in our OSM
 dataset. Remember that this means each point in our dataset was labeled with a
 string of characters representing its location. Then, Dask was used to sort and
 index the data by the geohash labels. The geohash calculation and sorting times
@@ -305,7 +306,7 @@ points). The benchmark results are below.
 
 The one-time costs alone (30 min) are less than the single query time (~40 min)
 in the unsorted case (above), and this case was able to filter the data in the
-1000 ZIP code polygon task. It’s important to note that the numbers of filtered
+1000 ZIP code polygon task. It's important to note that the numbers of filtered
 data points are identical to the unsorted case, giving us confidence that we
 selected the same points.
 
@@ -332,10 +333,11 @@ spatial join step.
 
 ### _Spatialpandas Case_
 
-The last case used a new package called Spatialpandas. Spatialpandas spatially
-sorts the data using the Hilbert curve. The results of using Spatialpandas are
-below. It wasn’t possible to separate the preprocessing time from the spatial
-sort time in this case, so they are included together in the sort time column.
+The last case used a new package called [Spatialpandas][spatialpandas repo].
+Spatialpandas spatially sorts the data using the Hilbert curve. The results of
+using Spatialpandas are below. It wasn't possible to separate the preprocessing
+time from the spatial sort time in this case, so they are included together in
+the sort time column.
 
 ![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-11.png)
 
@@ -349,17 +351,17 @@ GeoPandas spatial join method.
 
 ## Benchmark Result Comparison
 
-We’ve looked at the results individually, but the following plots compare the
+We've looked at the results individually, but the following plots compare the
 performances of the potential solutions. The first plot below shows the query
 times vs the number of ZIP code polygons by which the data was being filtered.
-Query times don’t include the one time costs like calculating geohashes, the
+Query times don't include the one time costs like calculating geohashes, the
 Hilbert curve, or sorting the data.
 
 As shown in Figure 7, the query time for the unsorted case (red) took the
 longest at over 40 minutes, and this case was not able to process the two
 largest batches of ZIP code polygons. The query time for the sorted geohash
 without spatial join (yellow) was the fastest for 100 or more polygons, but
-remember that it wasn’t as accurate as the other solutions. The fastest query
+remember that it wasn't as accurate as the other solutions. The fastest query
 time for an accurate solution is the Spatialpandas case (green).
 
 ![](/posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-12.png)
@@ -368,7 +370,7 @@ _Figure 7: Comparison of filtering time for each batch of ZIP code polygons. The
 dashed line indicates the case in which a spatial join was not used and the
 results are typically less accurate._
 
-Having looked at query times, now let’s look at the one-time preprocessing times
+Having looked at query times, now let's look at the one-time preprocessing times
 shown in Figure 8. No preprocessing was necessary for the unsorted case, so the
 preprocessing time was 0 minutes. The two sorted geohash cases had the same
 preprocessing steps and are identical as a result. In the sorted geohash cases,
@@ -401,32 +403,33 @@ cost of accuracy.
 Spatialpandas was the best overall solution explored here, and was what we ended
 up using for our client. Spatialpandas is an easy to install, pure Python
 package. It makes heavy use of Numba for highly efficient spatial joins and
-bounding box queries. It’s also integrated nicely with Dask and the parquet file
+bounding box queries. It's also integrated nicely with Dask and the Parquet file
 format.
 
 However, there are additional considerations to keep in mind. Spatialpandas is a
 young project with a small community at the moment. The documentation is limited
 compared with more established libraries, and it has low development activity
-for the moment. Spatialpandas is good at what it does, but it’s also limited in
+for the moment. Spatialpandas is good at what it does, but it's also limited in
 functionality. If you need Spatialpandas to do something similar, but slightly
 different from what is shown here, you may be forced to implement changes to the
-library yourself. Keep these considerations in mind if you’re thinking of using
+library yourself. Keep these considerations in mind if you're thinking of using
 Spatialpandas in your application.
 
 ## Other Approaches Considered: AWS Athena, Omnisci and NVIDIA RAPIDS
 
-Other approaches were considered and experimented with. AWS Athena is a
+We considered and experimented with a few other approaches. AWS Athena is a
 serverless interactive query service allowing users to query datasets residing
 in S3 via SQL queries. Though promising, at the time Athena had file size
-limitations that made it impractical for use and also did not obviate the need
-to sort and partition the data spatially to improve access times. The other main
-area considered was GPU acceleration. Two technologies were explored Omnisci and
-NVIDIA RAPIDS. These showed some promise but turned out to be too expensive to
-be practical. Omnisci has excellent GPU accelerated geospatial query performance
-but requires a fairly beefy GPU instance to run and requires that the data be
-imported into its internal format which also increases storage costs over S3.
-The NVIDIA RAPIDS suite has a new tool called CuSpatial but in practice, it is a
-very early prototype and is not usable in production.
+limitations that made it impractical for this use-case and also did not obviate
+the need to sort and partition the data spatially to improve access times. The
+other main area considered was GPU acceleration. We explored two technologies
+for this, [OmniSci][omnisci docs] and [NVIDIA RAPIDS][rapids page]. These showed
+some promise but turned out to be too expensive to be practical. Omnisci has
+excellent GPU accelerated geospatial query performance but requires a fairly
+beefy GPU instance to run and requires that the data be imported into its
+internal format, which also increases storage costs over S3. The NVIDIA RAPIDS
+suite has a new tool called CuSpatial, but in practice it was a very early
+prototype and not usable in production.
 
 ## Are You Working With Large Datasets?
 
@@ -437,12 +440,19 @@ _This work was originally presented at SciPy 2020, and can be viewed here:_
 
 [https://youtu.be/czesBVUoXvk][scipy2020 video]
 
+[dask docs]: https://docs.dask.org/en/stable/
 [geohash]: https://en.wikipedia.org/wiki/Geohash
-[hilbert]: https://en.wikipedia.org/wiki/Hilbert_curve
-[uber h3]: https://eng.uber.com/h3/
+[geopandas docs]: https://geopandas.org/en/stable/
 [google s2 geometry]: https://opensource.googleblog.com/2017/12/announcing-s2-library-geometry-on-sphere.html
-[lexicographically]: https://en.wikipedia.org/wiki/Lexicographic_order
-[scipy2020 repo]: https://github.com/Quansight/scipy2020_spatial_algorithms_at_scale
 [gps points]: https://planet.openstreetmap.org/gps/simple-gps-points-120604.csv.xz
-[polygons]: (https://www2.census.gov/geo/tiger/TIGER2019/ZCTA5/tl_2019_us_zcta510.zip)
+[hilbert]: https://en.wikipedia.org/wiki/Hilbert_curve
+[lexicographically]: https://en.wikipedia.org/wiki/Lexicographic_order
+[polygons]: https://web.archive.org/web/20221220154446/https://www2.census.gov/geo/tiger/TIGER2019/ZCTA5/tl_2019_us_zcta510.zip
+[omnisci docs]: https://docs.omnisci.com/v5.1.1/1_overview.html
+[parquet docs]: https://parquet.apache.org/docs/
+[python-geohash pypi]: https://pypi.org/project/python-geohash/
+[rapids page]: https://developer.nvidia.com/rapids
+[scipy2020 repo]: https://github.com/Quansight/scipy2020_spatial_algorithms_at_scale
 [scipy2020 video]: https://youtu.be/czesBVUoXvk
+[spatialpandas repo]: https://github.com/holoviz/spatialpandas
+[uber h3]: https://eng.uber.com/h3/
