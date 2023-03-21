@@ -6,7 +6,7 @@ description: >
   Based on the data collected by http://pypl.github.io/, over the last 5 years, PHP and Java declined in popularity while Python’s popularity rose. Sometime in 2018, Python became the most popular language. But Python probably won’t be #1 forever. If history is any indication, no language can maintain the premier position in language popularity indefinitely. I’m sure there were many who believed that Java would never be replaced as #1.
 category: [Open Source Software, PyData Ecosystem]
 featuredImage:
-  src: /posts/python-forever/python-1-img-1.jpg
+  src: /posts/python-forever/python-1-img-gallery.png
   alt: ''
 hero:
   imageSrc: /posts/hero-paris.webp
@@ -20,7 +20,7 @@ Python probably won’t be #1 forever. If history is any indication, no language
 can maintain the premier position in language popularity indefinitely. I’m sure
 there were many who believed that Java would never be replaced as #1.
 
-![](/posts/python-forever/python-1-img-1.jpg)
+![](/posts/python-forever/python-1-img-1.png)
 
 _(Image source: [PYPL][pypl page])_
 
