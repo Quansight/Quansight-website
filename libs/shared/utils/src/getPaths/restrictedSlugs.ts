@@ -1,10 +1,12 @@
+// These are all of the Storyblok slugs that should not match pages/[slug]
+// because they are matched to other pages. For example, Labs 'blog' is matched
+// to apps/labs/pages/blog/index.tsx.
 export const restrictedSlugs: string[] = [
+  // Consulting
   'homepage',
-  'team',
-  'layout',
+  'about-us',
   'library',
-  'team-members',
-  'about',
+  // Labs
   'home',
   'team',
   'blog',
