@@ -3,7 +3,7 @@ title: 'Will Python Be #1 Forever?'
 published: June 1, 2020
 author: troy-bailey
 description: >
-  Based on the data collected by http://pypl.github.io/, over the last 5 years, PHP and Java declined in popularity while Python’s popularity rose. Sometime in 2018, Python became the most popular language. But Python probably won’t be #1 forever. If history is any indication, no language can maintain the premier position in language popularity indefinitely. I’m sure there were many who believed that Java would never be replaced as #1.
+  Based on the data collected by http://pypl.github.io/, over the last 5 years, PHP and Java declined in popularity while Python's popularity rose. Sometime in 2018, Python became the most popular language. But Python probably won't be #1 forever. If history is any indication, no language can maintain the premier position in language popularity indefinitely. I'm sure there were many who believed that Java would never be replaced as #1.
 category: [Open Source Software, PyData Ecosystem]
 featuredImage:
   src: /posts/python-forever/python-1-img-gallery.png
@@ -16,10 +16,10 @@ hero:
 <base target="_blank" />
 
 Based on the data collected by [PYPL][pypl page] and shown in the chart below,
-over the last 5 years, PHP and Java declined in popularity while Python’s
+over the last 5 years, PHP and Java declined in popularity while Python's
 popularity rose. Sometime in 2018, Python became the most popular language. But
-Python probably won’t be #1 forever. If history is any indication, no language
-can maintain the premier position in language popularity indefinitely. I’m sure
+Python probably won't be #1 forever. If history is any indication, no language
+can maintain the premier position in language popularity indefinitely. I'm sure
 there were many who believed that Java would never be replaced as #1.
 
 ![](/posts/python-forever/python-1-img-1.png)
@@ -35,9 +35,9 @@ the planet. We also see that a newcomer, Rust, is quickly climbing the chart.
 Will it be the new #1 someday?
 
 So the questions more relevant than "will Python stay #1 forever?" are: "when
-will Python fall out of prominent use?", "why?", and "should we care?"
+will Python fall out of prominent use?," "why?," and "should we care?"
 
-I’ll take the "should we care" question first. When a new language comes to
+I'll take the "should we care?" question first. When a new language comes to
 prominence, sometimes it is addressing an entirely new need. In those cases all
 the work of creating software in the language is new and the value is additive
 so there is no real cost to the industry driven by the emergence of a new
@@ -86,7 +86,7 @@ The question of "why" Python will eventually fall from prominence will be
 because either it has some shortcomings that a new language fixes or there is a
 new application that Python is not suited to perform efficiently. Again it is
 impossible to predict the new application that will obsolete existing languages.
-It’s much easier to discuss the strengths that led to the Python’s popularity
+It's much easier to discuss the strengths that led to the Python's popularity
 and to also consider the weaknesses in Python that could open the door for a new
 language.
 
@@ -97,7 +97,7 @@ diverse and global community has led to a robust foundation enabling
 contributions from anyone.
 
 The weaknesses of Python are also well documented. The item that often tops the
-lists is Python’s speed. Python is an interpreted language meaning that, unlike
+lists is Python's speed. Python is an interpreted language meaning that, unlike
 compiled languages, the human written code is converted (interpreted) to machine
 executable code at the time of execution rather than ahead of time (compiled).
 This interpretation step means that runtime speed is lower than compiled
@@ -126,7 +126,7 @@ is no longer portable to other, incompatible Python runtime implementations
 paradigms such as PyPy, Jython (Java), IronPython (.NET), MicroPython (IOT), and
 Brython (web).
 
-Portable performance and scale are Python’s achilles heel. It has other
+Portable performance and scale are Python's achilles heel. It has other
 weaknesses but these are the ones most likely to open the door for another
 language to replace Python. So we should be keeping our eyes out for languages
 with all (or most) of the benefits of Python without the portable performance
