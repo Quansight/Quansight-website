@@ -17,7 +17,7 @@ hero:
 ![](/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-1.png)
 
 The relatively recent advancements in open source Artificial Intelligence (AI)
-technologies is revolutionary and demonstrable of producing unrivaled value to
+technologies are revolutionary and demonstrable of producing unrivaled value to
 computing. Chief among the subsets of AI is Natural Language Processing (NLP),
 which constitutes my primary focus and area of expertise. I am also an ardent
 advocate of Open Source Software (OSS), so it follows that I believe AI ought to
@@ -29,7 +29,7 @@ In this post, I will explain the subtle nuances among popular OSS NLP libraries,
 namely Natural Language Toolkit (NLTK), SpaCy, and Spark NLP, and comment on
 their relative performance and specific applications. My preference for
 discussing these three libraries is informed by the following observations: how
-intuitive the library seems to be, their general performance, their overall
+intuitive the libraries seem to be, their general performance, their overall
 strengths, and how well-maintained their open source repositories are.
 
 The goal with this post is to assist those who are just getting started with
@@ -39,9 +39,9 @@ is to enhance the profitability of your business.
 ## OSS in AI
 
 Although the genesis of AI dates back to the 1950s — when Alan Turing published
-his seminal paper, “Computing Machinery and Intelligence,” hypothesizing whether
+his seminal paper, "Computing Machinery and Intelligence," hypothesizing whether
 machines possess the capacity to think, learn and demonstrate reason, and Frank
-Rosenblatt invented the “perceptron algorithm,” formulating the basis for binary
+Rosenblatt invented the "perceptron algorithm," formulating the basis for binary
 classification — it was not until recently that AI made a quantum leap.
 
 Notwithstanding the significance of such AI pioneers’ contributions, the field
@@ -103,9 +103,9 @@ scholarly articles (100,000 with full text) about COVID-19, SARS-CoV-2, and
 related coronaviruses.
 
 The dataset, which is open sourced for use by the global research community,
-aims “to apply recent advances in natural language processing and other AI
+aims "to apply recent advances in natural language processing and other AI
 techniques to generate new insights in support of the ongoing fight against this
-infectious disease.” The White House joined this collaboration and issued
+infectious disease." The White House joined this collaboration and issued
 [a call to action][call to action] "to the Nation’s AI experts to develop new
 text and data mining techniques that can help the science community answer
 high-priority questions related to COVID-19."
@@ -244,7 +244,7 @@ human benchmarks. A significant feature that distinguishes Spark NLP from others
 is that it efficiently incorporates the latest algorithms and pre-trained NLP
 models, currently the library comes with over 646+ pre-trained pipelines and
 models, providing its industrial users a competitive advantage. Last week, Spark
-NLP was released on PyPi and hit 3 million downloads in just a few days.
+NLP was released on PyPI and hit 3 million downloads in just a few days.
 
 <img
 src="/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-5.png"
