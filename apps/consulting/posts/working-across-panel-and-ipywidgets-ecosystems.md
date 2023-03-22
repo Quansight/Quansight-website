@@ -37,7 +37,7 @@ fortunately, that is no longer the case. The union of these ecosystems opens up
 enormous possibilities for designing flexible GUIs (both in notebooks and in web
 applications).
 
-## Panel and ipywidgets demonstration
+## Panel and ipywidgets Demonstration
 
 We'll show you an example in this notebook that uses widgets from ipywidgets
 within a Panel app. We are going to modify an example Panel app for exploring
@@ -61,7 +61,7 @@ autompg.head()
 
 ![](/posts/working-across-panel-and-ipywidgets-ecosystems/ipywidgets-img-1.png)
 
-## Widgets with Panel and hvPlot
+## Widgets With Panel and hvPlot
 
 The `hvplot` accessor enables simple ways to produce plots from the `autompg`
 dataframe. For instance, we can make a scatter plot using the `mpg` and `hp`
@@ -94,7 +94,7 @@ x_col = Panel.widgets.Select(value='mpg', name='x', **opts)
 y_col = Panel.widgets.Select(value='hp',  name='y', **opts)
 ```
 
-## Widgets with ipywidgets
+## Widgets With ipywidgets
 
 Next, let's define some widgets drawn from the ipywidgets library.
 
@@ -135,7 +135,7 @@ marker = ipywidgets.Dropdown(
 )
 ```
 
-## Linking interactions in each ecosystem
+## Linking Interactions in Each Ecosystem
 
 We can now connect all the widget objects instantiated so far. In particular,
 the decorated function `autompg_plot` combines the Panel `Select` objects
