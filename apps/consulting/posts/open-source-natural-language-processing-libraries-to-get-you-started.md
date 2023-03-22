@@ -97,7 +97,7 @@ which still continues to compound exponentially. It soon became clear that this
 novel virus could be effectively investigated using AI, particularly with NLP.
 Leading scientific and AI institutions, including Allen Institute for AI, Chan
 Zuckerberg Initiative, and the National Institutes of Health (NIH), released the
-COVID-19 Open Research Dataset ([CORD-19][cord19],
+COVID-19 Open Research Dataset ([CORD-19 dataset][cord19], reported in
 [Wang et al., 2020][wang et al 2020]) which is a resource of over 200,000
 scholarly articles (100,000 with full text) about COVID-19, SARS-CoV-2, and
 related coronaviruses.
