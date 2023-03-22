@@ -83,6 +83,11 @@ const nextConfig = {
         permanent: true,
         destination: '/post/performance-for-image-processing-with-cucim',
       },
+      {
+        source: '/post/will-python-be-1-forever',
+        permanent: true,
+        destination: '/post/python-forever',
+      },
     ];
   },
   nx: {
