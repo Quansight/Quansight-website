@@ -141,7 +141,11 @@ for fun, research, or business can do so using open source tools and libraries.
 Those participating in NLP will certainly encounter uses for NLTK, SpaCy, and
 Spark NLP. Let’s take a look at these libraries.
 
-![](/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-2.png)
+<img
+src="/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-2.png"
+alt="Natural Language Toolkit"
+width="500px"
+/>
 
 First released in 2001, [NLTK][nltk] is among the first open source NLP
 libraries and arguably the most well-known. It provides data preprocessing
@@ -190,7 +194,11 @@ approaches to NLP. All that aside, NLTK is still a relevant and useful library
 to start getting one’s hands dirty with NLP and acts as an indispensable tool,
 particularly to prepare one for more advanced and robust NLP libraries.
 
-![](/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-3.png)
+<img
+src="/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-3.png"
+alt="spaCy"
+width="450px"
+/>
 
 First released in 2015, [SpaCy][spacy] has recently shown considerable growth in
 terms of popularity among industrial NLP applications for its noticeable
@@ -220,7 +228,11 @@ stands out among the previously mentioned NLP libraries. A
 [set of examples][spacy examples] of how to use SpaCy in your workflows can be
 found in their docs.
 
-![](/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-4.png)
+<img
+src="/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-4.png"
+alt="Spark NLP"
+width="450px"
+/>
 
 Built on Apache Spark ML APIs and first released in 2017,
 [Spark NLP][spark nlp], developed by John Snow Labs, supports a full spectrum
@@ -234,7 +246,10 @@ models, currently the library comes with over 646+ pre-trained pipelines and
 models, providing its industrial users a competitive advantage. Last week, Spark
 NLP was released on PyPi and hit 3 million downloads in just a few days.
 
-![](/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-5.png)
+<img
+src="/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-5.png"
+width="800px"
+/>
 
 With Spark NLP one can execute the entire pipeline of NLP from loading,
 training, and transforming data, building features up to and including an
@@ -255,7 +270,10 @@ NLP libraries on the free market.
 
 ## Quick Comparison
 
-![](/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-6.png)
+<img
+src="/posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-6.png"
+width="800px"
+/>
 
 ## Summary
 
