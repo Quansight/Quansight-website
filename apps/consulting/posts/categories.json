@@ -38,9 +38,5 @@
   {
     "name": "Data Engineering",
     "value": "data-engineering"
-  },
-  {
-    "name": "Custom Local",
-    "value": "custom-local"
   }
 ]
