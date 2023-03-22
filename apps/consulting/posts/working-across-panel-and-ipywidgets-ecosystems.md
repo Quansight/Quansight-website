@@ -42,26 +42,31 @@ applications).
 ## Panel and ipywidgets Demonstration
 
 We'll show you an example in this notebook that uses widgets from ipywidgets
-within a Panel app. We are going to modify an example Panel app for exploring
-the autompg dataset (from the Panel website) by switching out the
-`Panel.ColorPicker` widget with the `ipywidgets.ColorPicker` widget. Just for
-fun, we'll also add in widgets from ipywidgets to change the size and shape of
-the markers in a scatter plot.
+within a Panel app. We are going to modify an
+[example Panel app][panel example app] for exploring the
+[autompg dataset][autompg dataset] included with the Bokeh package by switching
+out the `Panel.ColorPicker` widget with the `ipywidgets.ColorPicker` widget.
+Just for fun, we'll also add in widgets from ipywidgets to change the size and
+shape of the markers in a scatter plot.
 
 ```python
 import hvplot.pandas, panel, ipywidgets
 from bokeh.sampledata.autompg import autompg
+
 panel.extension()
 ```
 
-`autompg` is a sample dataframe included with the Bokeh package. We can sample a
-few leading rows to see what the columns are.
+`autompg` is a pandas `DataFrame`, so we can sample a few leading rows to see
+what the columns are:
 
 ```python
 autompg.head()
 ```
 
-![](/posts/working-across-panel-and-ipywidgets-ecosystems/ipywidgets-img-1.png)
+<img
+src="/posts/working-across-panel-and-ipywidgets-ecosystems/ipywidgets-img-1.png"
+width="550px"
+/>
 
 ## Widgets With Panel and hvPlot
 
@@ -71,7 +76,7 @@ features. We'll use the resulting plot as a template to develop a GUI for
 exploring the `autompg` dataset.
 
 ```python
-autompg.hvplot.scatter('mpg','hp')
+autompg.hvplot.scatter("mpg", "hp")
 ```
 
 ![](/posts/working-across-panel-and-ipywidgets-ecosystems/ipywidgets-img-2.png)
@@ -84,7 +89,7 @@ scatter plot.
 ```python
 # Define keyword argument 'options' for both Select widgets
 cols = autompg.columns
-opts = {'options': list(cols.drop(['origin', 'name']))}
+opts = {"options": list(cols.drop(["origin", "name"]))}
 print(opts)
 ```
 
@@ -92,8 +97,8 @@ print(opts)
 
 ```python
 # Define the relevant Panel widgets
-x_col = Panel.widgets.Select(value='mpg', name='x', **opts)
-y_col = Panel.widgets.Select(value='hp',  name='y', **opts)
+x_col = Panel.widgets.Select(value="mpg", name="x", **opts)
+y_col = Panel.widgets.Select(value="hp", name="y", **opts)
 ```
 
 ## Widgets With ipywidgets
@@ -105,12 +110,12 @@ plot.
 
 ```python
 color = ipywidgets.widgets.ColorPicker(
-    description='Pick a color',
-    value='blue',
+    description="Pick a color",
+    value="blue",
 )
 ```
 
-Next, the object, `size`, is instantiated as an `ipywidgets.IntSlider` for
+Next, the object `size` is instantiated as an `ipywidgets.IntSlider`, for
 adjusting the marker size in the scatter plot.
 
 ```python
@@ -119,20 +124,20 @@ size = ipywidgets.IntSlider(
     min=0,
     max=50,
     step=1,
-    description='Point size:',
+    description="Point size:",
     disabled=False,
-    orientation='horizontal',
+    orientation="horizontal",
 )
 ```
 
-We can also create an object, `marker`, using `ipywidgets.Dropdown` to provide
+We can also create an object `marker` using `ipywidgets.Dropdown` to provide
 options for choosing different marker symbols in the scatter plot.
 
 ```python
 marker = ipywidgets.Dropdown(
-    options=list('*d^v><x'),
-    value='*',
-    description='Symbol:',
+    options=list("*d^v><x"),
+    value="*",
+    description="Symbol:",
     disabled=False,
 )
 ```
@@ -152,10 +157,7 @@ such, the resulting scatter plot is updated too.
 ```python
 @panel.depends(x_col, y_col, color, size, marker)
 def autompg_plot(x_col, y_col, color, size, marker):
-    new_plot = autompg.hvplot.scatter(
-        x_col, y_col, c=color,
-        size=size, marker=marker
-    )
+    new_plot = autompg.hvplot.scatter(x_col, y_col, c=color, size=size, marker=marker)
     return new_plot
 ```
 
@@ -163,7 +165,7 @@ Finally, we can create a useful Panel app layout for the application. With the
 objects `Panel.Row` and `Panel.Column` nested as below, we will have a single
 row composed of a column of widgets on the left and the associated scatter plot
 on the right. More specifically, from top to bottom, the left-hand column has
-MarkDown text at the top, two drop-down menus beneath, then a color picker, a
+Markdown text at the top, two drop-down menus beneath, then a color picker, a
 slider, and finally another drop-down menu at the bottom. Notice again that the
 Panel application combines widgets from both the ipywidgets and the Panel
 ecosystems.
@@ -185,7 +187,9 @@ When building a Panel app or dashboard, embedding widgets from ipywidgets is
 just as simple as using Panel widgets only! This greatly broadens the number of
 widgets and different styling options available.
 
+[autompg dataset]: https://docs.bokeh.org/en/3.0.2/docs/reference/sampledata.html#module-bokeh.sampledata.autompg
 [demo binder]: https://mybinder.org/v2/gh/Quansight/panel-ipywidgets/HEAD
 [demo repo]: https://github.com/Quansight/panel-ipywidgets
 [ipywidgets docs]: https://ipywidgets.readthedocs.io/en/latest/
+[panel example app]: https://panel.holoviz.org/user_guide/APIs.html
 [panel site]: https://panel.holoviz.org/index.html
