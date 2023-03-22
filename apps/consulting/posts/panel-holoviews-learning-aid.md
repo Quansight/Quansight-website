@@ -14,10 +14,11 @@ hero:
 
 <base target="_blank" />
 
-_This notebook is designed to help you learn how to make apps in panel in about
-15 minutes. Screenshots of cell outputs are included for convenience below, but
-it is **strongly** recommended that you use the [interactive Binder version][demo binder]
-(takes 1-2 minutes to load) or clone the [repo][demo repo] and run the demo locally._
+_This blog post is adapted from a notebook designed to help you learn how to
+make apps in panel in about 15 minutes. Screenshots of cell outputs are included
+for convenience below, but it is **strongly** recommended that you use the
+[interactive Binder version][demo binder] (takes 1-2 minutes to load) or clone
+the [repo][demo repo] and run the demo locally._
 
 ---
 
@@ -66,9 +67,14 @@ Several sections follow below demonstrating key knowledge used to build the app 
 
 #### Prototyping in Jupyter
 
-Panel and Holoviews are nice because they integrate well with Jupyter notebooks and Jupyterlab. You can build your app and display it interactively in Jupyterlab to speed up development. For this to work however, make sure to:
+Panel and Holoviews are nice because they integrate well with Jupyter notebooks
+and Jupyterlab. You can build your app and display it interactively in
+Jupyterlab to speed up development. For this to work however, make sure to:
 
-1. If running in JupyterLab, run `jupyter labextension install @pyviz/jupyterlab_pyviz` in the terminal to install the needed labextension if you didn't above. This is not needed if running in a Jupyter notebook outside of JupyterLab.
+1. If running in JupyterLab, run
+   `jupyter labextension install @pyviz/jupyterlab_pyviz` in the terminal to
+   install the needed labextension if you didn't above. This is not needed if
+   running in a Jupyter notebook outside of JupyterLab.
 2. Run `import panel as pn` and `pn.extension()` at the top of the notebook.
 
 After doing so, you should be all set to prototype the app within jupyterlab.
@@ -77,11 +83,16 @@ After doing so, you should be all set to prototype the app within jupyterlab.
 
 Panel has 3 main components: panes, widgets, and panels.
 
-- **Panes** wrap external viewable items, like markdown, plots, gifs, and even video.
-- **Widgets** are used to manipulate your app - think sliders, file selectors, password inputs, etc.
-- **Panels** are used to arrange panes and widgets. The 4 main types of panels are `Row`, `Column`, `Tabs`, and `GridSpec`.
+- **Panes** wrap external viewable items, like markdown, plots, gifs, and even
+  video.
+- **Widgets** are used to manipulate your app - think sliders, file selectors,
+  password inputs, etc.
+- **Panels** are used to arrange panes and widgets. The 4 main types of panels
+  are `Row`, `Column`, `Tabs`, and `GridSpec`.
 
-Take a look at more examples of panes, widgets, and panels (layouts) at the [Panel Reference Gallery][panel gallery]. You can also learn about what parameters each widget supports by clicking on a particular widget from there.
+Take a look at more examples of panes, widgets, and panels (layouts) at the
+[Panel Reference Gallery][panel gallery]. You can also learn about what
+parameters each widget supports by clicking on a particular widget from there.
 
 ### 2. Building the App Backbone
 
@@ -94,7 +105,10 @@ radio_button
 
 ![](/posts/panel-holoviews-learning-aid/panelholo-img-2.png)
 
-When choosing a widget for your app, try to choose a widget made for the applicable datatype (string, float, int, set, etc.). This will greatly reduce the amount of custom input validation you'll need to do. Also notice that you can manipulate widgets in the UI or in code.
+When choosing a widget for your app, try to choose a widget made for the
+applicable datatype (string, float, int, set, etc.). This will greatly reduce
+the amount of custom input validation you'll need to do. Also notice that you
+can manipulate widgets in the UI or in code.
 
 ```python
 radio_button.value = 'b'
@@ -117,9 +131,12 @@ layout
 
 ![](/posts/panel-holoviews-learning-aid/panelholo-img-4.png)
 
-You'll notice the display doesn't update when a different radio button is pressed. To update we need to make a function to call when a specific widget's value is modified.
+You'll notice the display doesn't update when a different radio button is
+pressed. To update we need to make a function to call when a specific widget's
+value is modified.
 
-_Note: Panel has four different API's. This learning aid uses the callback API, which is the lowest level of the four, and gives the most control._
+_Note: Panel has four different API's. This learning aid uses the callback API,
+which is the lowest level of the four, and gives the most control._
 
 ```python
  # Defines the function to call when Radio Box is updated.
@@ -136,13 +153,24 @@ layout
 
 ![](/posts/panel-holoviews-learning-aid/panelholo-img-5.png)
 
-_Be careful about running the above cell multiple times. Doing so will attach multiple function callbacks to the radio button, and the app may not behave as expected. Restarting the kernel, and rerunning the cells will fix this._
+_Be careful about running the above cell multiple times. Doing so will attach
+multiple function callbacks to the radio button, and the app may not behave as
+expected. Restarting the kernel, and rerunning the cells will fix this._
 
-You may be wondering why the `if` statement in the update function is needed. In this simple example, it's not. However, as we add more widgets I've found it's nice to have a single update function for all widgets in order to more precisely specify the order in which pane updates need to happen as well as share intermediate results computed during the update function.
+You may be wondering why the `if` statement in the update function is needed. In
+this simple example, it's not. However, as we add more widgets I've found it's
+nice to have a single update function for all widgets in order to more precisely
+specify the order in which pane updates need to happen as well as share
+intermediate results computed during the update function.
 
 ### 3. Holoviews Plots
 
-The app above could serve as the start of many, many apps, but how exactly do we update plots based on widgets instead of just some text? It's pretty simple, we just replace the Markdown pane with a HoloViews pane. The panel HoloViews pane is a wrapper around Holoviews plots. Other plotting libraries (matplotlib, plotly, etc.) are supported as well, but I'll be demonstrating with Holoviews plots.
+The app above could serve as the start of many, many apps, but how exactly do we
+update plots based on widgets instead of just some text? It's pretty simple, we
+just replace the Markdown pane with a HoloViews pane. The panel HoloViews pane
+is a wrapper around Holoviews plots. Other plotting libraries (matplotlib,
+plotly, etc.) are supported as well, but I'll be demonstrating with Holoviews
+plots.
 
 ```python
 # Define some sample data and import holoviews
@@ -155,7 +183,11 @@ autompg.sample(2)
 
 ![](/posts/panel-holoviews-learning-aid/panelholo-img-6.png)
 
-A complete tutorial of plotting in Holoviews is beyond the scope of this learning aid. For this example, just know that `hv.Scatter(dataframe, kdims='x_column', vdims='y_column')` will produce a scatter plot. The [HoloViews documentation][holoviews documentation] can be consulted for additional specifics.
+A complete tutorial of plotting in Holoviews is beyond the scope of this
+learning aid. For this example, just know that
+`hv.Scatter(dataframe, kdims='x_column', vdims='y_column')` will produce a
+scatter plot. The [HoloViews documentation][holoviews documentation] can be
+consulted for additional specifics.
 
 ```python
 hv.Scatter(data=autompg, kdims='mpg', vdims='weight').opts(tools=['hover'], size=6, title='Example Scatter Plot')
@@ -163,7 +195,8 @@ hv.Scatter(data=autompg, kdims='mpg', vdims='weight').opts(tools=['hover'], size
 
 ![](/posts/panel-holoviews-learning-aid/panelholo-img-7.png)
 
-Let's make an app which toggles the axes of the plot. First we'll make the radio buttons to toggle the axis.
+Let's make an app which toggles the axes of the plot. First we'll make the radio
+buttons to toggle the axis.
 
 ```python
 radio_opts = [col for col in autompg.columns if col not in {'origin', 'name'}]
@@ -211,11 +244,19 @@ layout
 
 ![](/posts/panel-holoviews-learning-aid/panelholo-img-9.png)
 
-_Be careful about running the above cell multiple times. Doing so will attach multiple function callbacks to the radio button, and the app may not behave as expected. Restarting the kernel, and rerunning the cells will fix this._
+_Be careful about running the above cell multiple times. Doing so will attach
+multiple function callbacks to the radio button, and the app may not behave as
+expected. Restarting the kernel, and rerunning the cells will fix this._
 
 ### 4. Closing Notes
 
-After you build an app, you'll want to deploy the app so others can view it. Deployment is beyond the scope of this learning aid, but the [Panel server deployment documentation][panel server docs] covers a variety of deployment scenarios. MyBinder is useful for apps that are for demonstration purposes only. If you want to see how your app would look deployed by itself, then you can run `app.show()` in the notebook, and a new browser tab will open up with the app served on it. Run the cell below to see it in action.
+After you build an app, you'll want to deploy the app so others can view it.
+Deployment is beyond the scope of this learning aid, but the
+[Panel server deployment documentation][panel server docs] covers a variety of
+deployment scenarios. MyBinder is useful for apps that are for demonstration
+purposes only. If you want to see how your app would look deployed by itself,
+then you can run `app.show()` in the notebook, and a new browser tab will open
+up with the app served on it. Run the cell below to see it in action.
 
 ```python
 layout.show()  # You won't be able to view this from binder, but will be able to if running locally.
@@ -223,7 +264,8 @@ layout.show()  # You won't be able to view this from binder, but will be able to
 
 Now that you have a simple app to start from, keep going and build your own!
 
-If you liked this article, check out this Panel article on [Working Across Panel and ipywidgets Ecosystems][panel article]!
+If you liked this article, check out this Panel article on
+[Working Across Panel and ipywidgets Ecosystems][panel article]!
 
 [demo binder]: https://mybinder.org/v2/gh/Quansight/panel-learning-aid/master?filepath=learning_aid.ipynb
 [demo repo]: https://github.com/Quansight/panel-learning-aid
