@@ -1,5 +1,5 @@
 ---
-title: 'Open Source Natural Language Processing Libraries To Get You Started'
+title: 'Open Source Natural Language Processing Libraries to Get You Started'
 published: March 1, 2021
 author: fatma-tarlaci
 description: 'The relatively recent advancements in open source Artificial Intelligence (AI) technologies is revolutionary and demonstrable of producing unrivaled value to computing. Chief among the subsets of AI is Natural Language Processing (NLP), which constitutes my primary focus and area of expertise. I am also an ardent advocate of Open Source Software (OSS), so it follows that I believe AI ought to be both transparent and inclusive. NLP not only fits this belief, it has arguably been one of the domains of AI that has benefited from the openness and ubiquity of OSS the most. '
