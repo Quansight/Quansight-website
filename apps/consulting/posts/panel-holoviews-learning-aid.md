@@ -280,7 +280,7 @@ _Be careful about running the above cell multiple times. Doing so will attach
 multiple function callbacks to the radio button, and the app may not behave as
 expected. Restarting the kernel and rerunning the cells will fix this._
 
-### 4. Closing Notes
+### 4. A Note on App Deployment
 
 After you build an app, you'll want to deploy the app so others can view it.
 Deployment is beyond the scope of this learning aid, but the
