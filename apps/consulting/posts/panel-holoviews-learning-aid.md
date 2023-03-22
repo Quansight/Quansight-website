@@ -22,7 +22,7 @@ the [repo][demo repo] and run the demo locally._
 
 ---
 
-## Building a Web App with Panel and Holoviews
+## Building a Web App With Panel and Holoviews
 
 ```python
 import panel as pn
@@ -40,7 +40,7 @@ mortgage payment, amortization schedule, and principal paid over time.**
 
 _Note: For the app below to work in JupyterLab, you'll need to run
 `jupyter labextension install @pyviz/jupyterlab_pyviz` in the terminal to
-install the needed labextension. This is not needed if running in a Jupyter
+install the needed Labs extension. This is not needed if running in a Jupyter
 notebook outside of JupyterLab._
 
 ```python
@@ -77,7 +77,7 @@ Jupyterlab to speed up development. For this to work however, make sure to:
    running in a Jupyter notebook outside of JupyterLab.
 2. Run `import panel as pn` and `pn.extension()` at the top of the notebook.
 
-After doing so, you should be all set to prototype the app within jupyterlab.
+After doing so, you should be all set to prototype the app within JupyterLab.
 
 #### Panel Basics
 
@@ -99,50 +99,62 @@ parameters each widget supports by clicking on a particular widget from there.
 First, let's make a widget by running the code below.
 
 ```python
-radio_button = pn.widgets.RadioButtonGroup(options=['a','b','c'], value='a', name='radio_buttons')
+radio_button = pn.widgets.RadioButtonGroup(
+    options=["a", "b", "c"], value="a", name="radio_buttons"
+)
 radio_button
 ```
 
-![](/posts/panel-holoviews-learning-aid/panelholo-img-2.png)
+<img
+src="/posts/panel-holoviews-learning-aid/panelholo-img-2.png"
+width="400px"
+/>
 
 When choosing a widget for your app, try to choose a widget made for the
-applicable datatype (string, float, int, set, etc.). This will greatly reduce
-the amount of custom input validation you'll need to do. Also notice that you
-can manipulate widgets in the UI or in code.
+applicable datatype (`string`, `float`, `int`, `set`, etc.). This will greatly
+reduce the amount of custom input validation you'll need to do. Also notice that
+you can manipulate widgets in the UI or in code.
 
 ```python
-radio_button.value = 'b'
+radio_button.value = "b"
 ```
 
-![](/posts/panel-holoviews-learning-aid/panelholo-img-3.png)
+<img
+src="/posts/panel-holoviews-learning-aid/panelholo-img-3.png"
+width="400px"
+/>
 
-#### Making a sample Layout
+#### Making a Sample Layout
 
 We combine a widget and some markdown panes with a `Column` panel in the next cell.
 
 ```python
 # Markdown Pane
-radio_button_display = pn.pane.Markdown(f'Radio Button Value: {radio_button.value}')
+radio_button_display = pn.pane.Markdown(f"Radio Button Value: {radio_button.value}")
 
 # Combine Panes and Widget in the Column panel
-layout = pn.Column('## My Radio Button App', radio_button, radio_button_display)
+layout = pn.Column("## My Radio Button App", radio_button, radio_button_display)
 layout
 ```
 
-![](/posts/panel-holoviews-learning-aid/panelholo-img-4.png)
+<img
+src="/posts/panel-holoviews-learning-aid/panelholo-img-4.png"
+width="400px"
+/>
 
 You'll notice the display doesn't update when a different radio button is
 pressed. To update we need to make a function to call when a specific widget's
 value is modified.
 
 _Note: Panel has four different API's. This learning aid uses the callback API,
-which is the lowest level of the four, and gives the most control._
+which is the lowest level of the four and gives the most control._
 
 ```python
- # Defines the function to call when Radio Box is updated.
+# Defines the function to call when Radio Box is updated.
 def update(event):
     if event.obj is radio_button:
-        radio_button_display.object = f'Radio Button Value: {radio_button.value}'
+        radio_button_display.object = f"Radio Button Value: {radio_button.value}"
+
 
 # Run the update function when the "value" parameter of radio_button widget changes.
 radio_button.param.watch(update, "value")
@@ -151,11 +163,14 @@ radio_button.param.watch(update, "value")
 layout
 ```
 
-![](/posts/panel-holoviews-learning-aid/panelholo-img-5.png)
+<img
+src="/posts/panel-holoviews-learning-aid/panelholo-img-5.png"
+width="400px"
+/>
 
 _Be careful about running the above cell multiple times. Doing so will attach
 multiple function callbacks to the radio button, and the app may not behave as
-expected. Restarting the kernel, and rerunning the cells will fix this._
+expected. Restarting the kernel and rerunning the cells will fix this._
 
 You may be wondering why the `if` statement in the update function is needed. In
 this simple example, it's not. However, as we add more widgets I've found it's
@@ -167,7 +182,7 @@ intermediate results computed during the update function.
 
 The app above could serve as the start of many, many apps, but how exactly do we
 update plots based on widgets instead of just some text? It's pretty simple, we
-just replace the Markdown pane with a HoloViews pane. The panel HoloViews pane
+just replace the Markdown pane with a HoloViews pane. The Panel HoloViews pane
 is a wrapper around Holoviews plots. Other plotting libraries (matplotlib,
 plotly, etc.) are supported as well, but I'll be demonstrating with Holoviews
 plots.
@@ -181,50 +196,67 @@ import holoviews as hv
 autompg.sample(2)
 ```
 
-![](/posts/panel-holoviews-learning-aid/panelholo-img-6.png)
+<img
+src="/posts/panel-holoviews-learning-aid/panelholo-img-6.png"
+width="650px"
+/>
 
 A complete tutorial of plotting in Holoviews is beyond the scope of this
 learning aid. For this example, just know that
-`hv.Scatter(dataframe, kdims='x_column', vdims='y_column')` will produce a
+`hv.Scatter(dataframe, kdims="x_column", vdims="y_column")` will produce a
 scatter plot. The [HoloViews documentation][holoviews documentation] can be
 consulted for additional specifics.
 
 ```python
-hv.Scatter(data=autompg, kdims='mpg', vdims='weight').opts(tools=['hover'], size=6, title='Example Scatter Plot')
+hv.Scatter(data=autompg, kdims="mpg", vdims="weight").opts(
+    tools=["hover"], size=6, title="Example Scatter Plot"
+)
 ```
 
-![](/posts/panel-holoviews-learning-aid/panelholo-img-7.png)
+<img
+src="/posts/panel-holoviews-learning-aid/panelholo-img-7.png"
+width="550px"
+/>
 
 Let's make an app which toggles the axes of the plot. First we'll make the radio
 buttons to toggle the axis.
 
 ```python
-radio_opts = [col for col in autompg.columns if col not in {'origin', 'name'}]
-auto_mpg_radio_x = pn.widgets.RadioButtonGroup(options=radio_opts, value='mpg')
-auto_mpg_radio_y = pn.widgets.RadioButtonGroup(options=radio_opts, value='mpg')
+radio_opts = [col for col in autompg.columns if col not in {"origin", "name"}]
+auto_mpg_radio_x = pn.widgets.RadioButtonGroup(options=radio_opts, value="mpg")
+auto_mpg_radio_y = pn.widgets.RadioButtonGroup(options=radio_opts, value="mpg")
 auto_mpg_radio_x
 ```
 
-![](/posts/panel-holoviews-learning-aid/panelholo-img-8.png)
+<img
+src="/posts/panel-holoviews-learning-aid/panelholo-img-8.png"
+width="550px"
+/>
 
 Now let's set up the layout of the plot.
 
 ```python
-auto_plot = pn.pane.HoloViews(object=None, sizing_mode='stretch_width') # empty plot initially
+auto_plot = pn.pane.HoloViews(
+    object=None, sizing_mode="stretch_width"
+)  # empty plot initially
 
 layout = pn.Column(
-            '## Auto MPG App',
-            pn.Row('#### x-axis:', auto_mpg_radio_x),
-            pn.Row('#### y-axis:', auto_mpg_radio_y),
-            auto_plot,
-            sizing_mode='stretch_width')
+    "## Auto MPG App",
+    pn.Row("#### x-axis:", auto_mpg_radio_x),
+    pn.Row("#### y-axis:", auto_mpg_radio_y),
+    auto_plot,
+    sizing_mode="stretch_width",
+)
 ```
 
 Next, let's configure the plot to update when the widget values are changed.
 
 ```python
 def autompg_plot(x_axis, y_axis):
-    return hv.Scatter(data=autompg, kdims=x_axis, vdims=y_axis).opts(tools=['hover'], size=6, max_width=750)
+    return hv.Scatter(data=autompg, kdims=x_axis, vdims=y_axis).opts(
+        tools=["hover"], size=6, max_width=750
+    )
+
 
 def auto_mpg_update(event):
     if event.obj is auto_mpg_radio_x:
@@ -232,12 +264,12 @@ def auto_mpg_update(event):
     if event.obj is auto_mpg_radio_y:
         auto_plot.object = autompg_plot(auto_mpg_radio_x.value, auto_mpg_radio_y.value)
 
+
 # Run the update function when the "value" parameter of radio_button widget changes.
 for widget in [auto_mpg_radio_x, auto_mpg_radio_y]:
     widget.param.watch(auto_mpg_update, "value")
-
 # trigger initial plot update
-auto_mpg_radio_y.value = 'cyl'
+auto_mpg_radio_y.value = "cyl"
 
 layout
 ```
@@ -246,7 +278,7 @@ layout
 
 _Be careful about running the above cell multiple times. Doing so will attach
 multiple function callbacks to the radio button, and the app may not behave as
-expected. Restarting the kernel, and rerunning the cells will fix this._
+expected. Restarting the kernel and rerunning the cells will fix this._
 
 ### 4. Closing Notes
 
@@ -264,12 +296,12 @@ layout.show()  # You won't be able to view this from binder, but will be able to
 
 Now that you have a simple app to start from, keep going and build your own!
 
-If you liked this article, check out this Panel article on
-[Working Across Panel and ipywidgets Ecosystems][panel article]!
+If you liked this article, check out this Panel article on <a
+href="/post/working-across-panel-and-ipywidgets-ecosystems"
+target="_self">Working Across Panel and ipywidgets Ecosystems</a>!
 
 [demo binder]: https://mybinder.org/v2/gh/Quansight/panel-learning-aid/master?filepath=learning_aid.ipynb
 [demo repo]: https://github.com/Quansight/panel-learning-aid
-[panel gallery]: https://panel.holoviz.org/reference/index.html
 [holoviews documentation]: https://holoviews.org/getting_started/Introduction.html
+[panel gallery]: https://panel.holoviz.org/reference/index.html
 [panel server docs]: https://panel.holoviz.org/user_guide/Server_Deployment.html
-[panel article]: https://www.quansight.com/post/working-across-panel-and-ipywidgets-ecosystems
