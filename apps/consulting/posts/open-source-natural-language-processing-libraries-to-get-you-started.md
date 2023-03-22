@@ -311,7 +311,7 @@ future endeavors.
 
 [cord19]: https://www.semanticscholar.org/cord19
 [wang et al 2020]: https://arxiv.org/pdf/2004.10706.pdf
-[call to action]: https://www.whitehouse.gov/briefings-statements/call-action-tech-community-new-machine-readable-covid-19-dataset/
+[call to action]: https://trumpwhitehouse.archives.gov/briefings-statements/call-action-tech-community-new-machine-readable-covid-19-dataset/
 [kaggle challenge]: https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge
 [nltk]: https://www.nltk.org/
 [bert]: https://arxiv.org/abs/1810.04805
