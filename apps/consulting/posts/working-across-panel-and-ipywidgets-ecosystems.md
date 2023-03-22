@@ -12,6 +12,8 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
+<base target="_blank" />
+
 _This post is adapted from a notebook designed to help you learn how to make
 apps in Panel in about 15 minutes. Screenshots of cell outputs are included for
 convenience below, but it is **strongly** recommended that you use the
