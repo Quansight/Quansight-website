@@ -12,11 +12,11 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
-_This notebook is designed to help you learn how to make apps in Panel in about
-15 minutes. Screenshots of cell outputs are included for convenience below, but
-it is **strongly** recommended that you use the
-[interactive Binder version][demo binder] (takes 1-2 minutes to load) or 
-clone the [repo][demo repo] to run the demo locally._
+_This post is adapted from a notebook designed to help you learn how to make
+apps in Panel in about 15 minutes. Screenshots of cell outputs are included for
+convenience below, but it is **strongly** recommended that you use the
+[interactive Binder version][demo binder] (takes 1-2 minutes to load) or clone
+the [repo][demo repo] to run the demo locally._
 
 ---
 
@@ -52,6 +52,7 @@ panel.extension()
 ```python
 autompg.head()
 ```
+
 ![](/posts/working-across-panel-and-ipywidgets-ecosystems/ipywidgets-img-1.png)
 
 ## Widgets with Panel and hvPlot
@@ -72,6 +73,7 @@ cols = autompg.columns
 opts = {'options': list(cols.drop(['origin', 'name']))}
 print(opts)
 ```
+
 `{'options': ['mpg', 'cyl', 'displ', 'hp', 'weight', 'accel', 'yr']}`
 
 ```python
@@ -81,6 +83,7 @@ y_col = Panel.widgets.Select(value='hp',  name='y', **opts)
 ```
 
 ## Widgets with ipywidgets
+
 Next, let's define some widgets drawn from the ipywidgets library.
 
 The first one, `color`, is used to choose the color of markers in the scatter plot.
@@ -118,6 +121,7 @@ marker = ipywidgets.Dropdown(
 ```
 
 ## Linking interactions in each ecosystem
+
 We can now connect all the widget objects instantiated so far. In particular, the decorated function `autompg_plot` combines the Panel `Select` objects `x_col` and `y_col` together with the ipywidgets objects `color`, `size`, and `marker` to construct an explicit call to `autompg.hvplot.scatter`.
 
 For context, the `Panel.depends` decorator wrapping `autompg_plot` produces a function that is revaluated whenever any of the specified widget objects (`x_col`, `y_col`, `color`, `size`, and `marker`) are changed by the user. As such, the resulting scatter plot is updated too.
