@@ -37,7 +37,8 @@ Here is some basic info to help orient you to this repo.
   - `./libs` holds code shared by both websites.
 - The websites' **content** lives in [Storyblok](https://app.storyblok.com)
   (requires login).
-  - But **Labs** blog posts live under `./apps/labs/posts`.
+  - But Labs and Consulting **blog posts** live under `./apps/labs/posts` and 
+    `./apps/consulting/posts`, respectively.
 - The websites are hosted and deployed via
   [Vercel](https://vercel.com/quansight) (requires login).
 - The repo's default branch is `develop`, **not** `main`.
