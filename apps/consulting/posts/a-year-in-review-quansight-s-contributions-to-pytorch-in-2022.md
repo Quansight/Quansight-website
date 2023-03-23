@@ -249,12 +249,137 @@ A few highlights from 2022 are:
 - `torch.sort(dim)`: [1.5x speedup on CUDA][pytorch gh: torch.sort(dim)] for
   `dim <= 128`
 
+## Maintainability
+
+It is great to talk about the flashy new features and performance improvements
+we have worked on, but every project needs to be maintained at a level that most
+users will never see. When the project is as large and complex as PyTorch, this
+work is even more important, but often harder to see. Quansight engineers are
+constantly at work refactoring sub-systems to reduce technical debt and making
+improvements to PyTorch that allow the entire project to continue marching
+forward.
+
+### Build Time Improvements
+
+In a project the size of PyTorch, keeping build times reasonable is paramount.
+<a
+href="/post/a-year-in-review-quansight-s-contributions-to-pytorch-in-2021#build-time-improvements"
+target="_self">Last year</a>, Quansight engineers helped reduce the average
+fresh build time from 20 minutes to five minutes. This year, we continued
+working on recompilations. A huge number of compilation sources are generated at
+build time from specification files, such as all of the C++ to Python bindings,
+which are found in a single file. The generation system does not have a notion
+of what has changed, and what has not, between compilations so all of the
+generated sources are re-generated, and subsequently recompiled, any time that
+single file is edited in any way—even if the edit is a comment.
+
+Our work entailed making recompilation more granular. If one signature is
+modified, you will just need to recompile the relevant files.
+
+### Typeless Storage
+
+In 2021, the classes managing the memory where tensor data is stored, called
+“storage,” were modified such that all data was stored as raw bytes without a
+data type. This change made tensor storage more flexible and easier to maintain.
+The change was not duplicated to the Python interface for these classes to
+maintain backward compatibility. In 2022, we continued this work to begin the
+deprecation cycle and re-unify the two interfaces under the type-free storage
+system. This delicate task required diligent work to maintain the correctness of
+lower-level functionality such as serialization, but our team was equal to the
+task and typed storage is officially deprecated, and will be completely removed
+in PyTorch 2.1!
+
+### Maintenance of `torch.linalg` and `torch.fft`
+
+In 2021, a number of Quansight and Meta engineers designed and implemented the
+`linalg` and `fft` modules based on their NumPy and SciPy counterparts. One year
+later, these modules are now completely stable, but we still provide guidance to
+users that find [the sharper corners][pytorch 2.0 docs: accuracy] of the
+mathematically-involved functions in them.
+
+### Testing
+
+Another front where Quansight spent a reasonable amount of time in 2022 was
+helping to set up a scalable and reliable testing infrastructure in the PyTorch
+project. At this time, the main structure and the tests are rather stable and
+provide a reliable way to test new features that are added to the library. Now,
+as any system that sets itself to tackle such a humongous task, it needs
+maintaining to stop it from growing out of control.
+
+In 2022, Quansight engineers helped refactor the new testing infrastructure to
+keep parts of it more manageable and implemented a number of quality of life
+improvements for it, which helped find and fix a number of bugs it had.
+
+## TorchVision
+
+PyTorch core provides critical functionality that is generally applicable to
+learning workflows, but it is not intended to cover all applications on its own.
+Domain specific extension libraries like TorchVision fill the gaps with
+specialized tools for a particular problem space. Not to be outshined by the
+PyTorch 2.0 release, we have worked to deliver some exciting new features in
+TorchVision as well.
+
+### Transforms API 2.0
+
+One of the most tiring parts of doing real-world Machine Learning is data
+pre-processing. TorchVision offers a set of functions to help you in this task
+when you want to classify images. The issue is that image classification is
+so 2016. Modern Deep Learning deals with segmentation tasks with masks, object
+detection with bounding boxes, videos and more. This means that when you rotate
+an image, you may also need to rotate the annotations, cropping and all other
+transformations in general.
+
+Quansight engineers designed and developed a more flexible API for these
+transforms that allows you to have more heterogeneous data and annotations, to
+go with modern vision tasks. This new API is not only backwards compatible, but
+actually faster than the previous one and will be released in a beta state with
+TorchVision 0.15. You can read more about it in this very nice blog post,
+[Extending TorchVision’s Transforms to Object Detection, Segmentation & Video tasks][pytorch blog: torchvision transforms].
+
+### Video Codecs Support
+
+As discussed above, image preprocessing is annoying. Now, this is difficult to
+deal with when images are static. But when they move… that’s a whole different
+level.
+
+One particular pain point when dealing with videos is [the different formats
+they come in][xkcd standards]. We have been working on putting together a robust
+video reader that deals with these different codecs and prepares the data to be
+able to be processed by a neural network.
+
+## Closing Remarks
+
+Yearly reviews are great! They help you see how much you moved forward in the
+last twelve months in one go. We also can’t hope to cover everything our team of
+20 engineers have done in over 18,000 hours of work in 2022. These highlights
+show it was a truly impressive group effort together with Meta! Whether you are
+looking to get started or are already using PyTorch, Quansight has the experts
+to help you.
+
+All this would not have been possible without the contributions from our
+fantastic team of PyTorch and TorchVision contributors: Peter Bell, Mario
+Lezcano, Andrew James, Nikita Vedeneev, Pearu Peterson, Kshiteej Kalambarkar,
+Philip Meier, Victor Fomin, Yukio Siraichi, Kurt Mohler, Evgeni Burovski, Aaron
+Meuer, Matthew Barber, Fabio Rocha, Aleksandar Samardžić, Bruno Korbar, Nikita
+Karetnikov, Sean Ross-Ross, Ralf Gommers, and Matti Picus.
+
+The other part of the story comes from the great team of PyTorch and TorchVision
+engineers at Meta. Without their dedication and openness to collaboration this
+work would not be possible. In particular, we would like to thank Alban
+Desmaison, Natalia Gimelschein, Edward Yang, Anjali Chourdia, Christian Pursch,
+Jane Xu, Joel Schlosser, Nikita Shulga, Richard Zou, Brian Hirsh, Horace He,
+Jason Ansel, Joe Isaacson, and Soumith Chintala (PyTorch) and Vasilis Vryniotis,
+Prabhat Roy, and Nicolas Hug (TorchVision). Thank you all for making this
+collaboration so fruitful and enjoyable.
+
 [array api 2022.12]: https://data-apis.org/array-api/2022.12/
 [pytorch 2.0 announcement]: https://pytorch.org/blog/getting-started-with-pytorch-2.0/
 [pytorch 2.0 docs: complex numbers]: https://pytorch.org/docs/stable/complex_numbers.html
 [pytorch 2.0 docs: func]: https://pytorch.org/docs/2.0/func.html
+[pytorch 2.0 docs: accuracy]: https://pytorch.org/docs/2.0/notes/numerical_accuracy.html#linear-algebra-torch-linalg
 [pytorch 2.0 maintainer talks]: https://pytorch.org/get-started/pytorch-2.0/#ask-the-engineers-20-live-qa-series
 [pytorch blog: fft]: https://pytorch.org/blog/the-torch.fft-module-accelerated-fast-fourier-transforms-with-autograd-in-pyTorch/
+[pytorch blog: torchvision transforms]: https://pytorch.org/blog/extending-torchvisions-transforms-to-object-detection-segmentation-and-video-tasks/
 [pytorch c++ api]: https://pytorch.org/cppdocs/
 [pytorch fx graph]: https://pytorch.org/docs/stable/fx.html
 [pytorch gh: 2x speedup 2d-3d]: https://github.com/pytorch/pytorch/pull/76828
@@ -275,3 +400,4 @@ A few highlights from 2022 are:
 [tracing with primitives post]: https://dev-discuss.pytorch.org/t/tracing-with-primitives-update-0/577
 [triton open.ai site]: https://openai.com/research/triton
 [triton repo]: https://github.com/openai/triton
+[xkcd standards]: https://xkcd.com/927/
