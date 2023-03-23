@@ -243,8 +243,7 @@ A few highlights from 2022 are:
 
 - `torch.norm`:
   [100x speedup on double inputs on CPU][pytorch gh: torch.norm double]. [2x
-  speedup on complex inputs][pytorch gh: torch.norm complex].
-  [2x on][pytorch gh: torch.norm ord-fro] `ord='fro'`
+  speedup on complex inputs and 2x on `ord='fro'`][pytorch gh: torch.norm complex]
 
 - `torch.sort(dim)`: [1.5x speedup on CUDA][pytorch gh: torch.sort(dim)] for
   `dim <= 128`
@@ -391,7 +390,6 @@ collaboration so fruitful and enjoyable.
 [pytorch gh: torch.flip really]: https://github.com/pytorch/pytorch/pull/89414
 [pytorch gh: torch.norm complex]: https://github.com/pytorch/pytorch/pull/81761
 [pytorch gh: torch.norm double]: https://github.com/pytorch/pytorch/pull/91502
-[pytorch gh: torch.norm ord-fro]: https://github.com/pytorch/pytorch/pull/81761
 [pytorch gh: torch.sort(dim)]: https://github.com/pytorch/pytorch/pull/79627
 [pytorch gh: type conversions]: https://github.com/pytorch/pytorch/pull/80905
 [pytorch jax-like transforms]: https://pytorch.org/docs/2.0/func.html
