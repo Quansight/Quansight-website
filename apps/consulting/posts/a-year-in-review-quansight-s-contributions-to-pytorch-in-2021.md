@@ -5,7 +5,7 @@ author: ralf
 description: 'PyTorch is a very popular open source deep learning framework, primarily developed by Meta AI. If you are making deep learning models, chances are you are using PyTorch. Not only is Quansight a major contributor to the development of PyTorch, but we also use it in applied data science consulting projects as our go-to framework for building deep learning models.  '
 category: [Artificial Intelligence]
 featuredImage:
-  src: /posts/a-year-in-review-quansight-s-contributions-to-pytorch-in-2021/pytorch_logo_large.png
+  src: /posts/logos/pytorch_logo_large.png
   alt: 'The PyTorch logo, above the "PyTorch" project name in sans serif font. A stylized flame made from a single, thick orange line, with round bottom and single pointed top. There is a gap in the upper right of the line containing a circle with diameter equal to the line thickness.'
 hero:
   imageSrc: /posts/hero-paris.webp
