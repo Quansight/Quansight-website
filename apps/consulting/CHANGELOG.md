@@ -1,3 +1,9 @@
+March 24, 2023
+
+Via Storyblok:
+
+- Fix glitched asset reference for homepage hero on mobile
+
 March 19, 2023
 
 Via Storyblok:
