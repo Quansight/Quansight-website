@@ -28,7 +28,7 @@ const videoSizeStyles: Record<TVideoProps['size'], string> = {
 const alignVideoStyles: Record<TVideoProps['align'], string> = {
   left: 'lg:flex-row',
   right: 'lg:flex-row-reverse',
-  center: '',
+  center: 'flex-col',
 };
 
 const topSpaceStyles: Record<TVideoProps['topSpace'], string> = {
@@ -44,7 +44,7 @@ const bottomSpaceStyles: Record<TVideoProps['bottomSpace'], string> = {
 };
 
 const textStyles =
-  'my-[1.6rem] text-[1.6rem] text-black marker:text-black prose sm:text-[1.8rem] sm:my-[4rem] xl:leading-[2.7rem]';
+  'my-[1.6rem] text-[1.6rem] text-black marker:text-black sm:text-[1.8rem] sm:my-[4rem] lg:mx-[7rem] xl:leading-[2.7rem] w-auto text-justify';
 
 export const Video = ({
   url,
@@ -77,13 +77,14 @@ export const Video = ({
       xl:mb-[6.8rem]
     `,
     player: clsx(
-      'relative pt-[56.25%] w-full',
+      'relative pt-[56.25%] mx-auto w-full',
       videoSizeStyles[size || 'large'],
     ),
     text: clsx(textStyles, 'hidden', size === 'small' && 'lg:block'),
     video: clsx(
       size === 'small' && 'lg:flex lg:gap-[4rem] lg:items-center xl:gap-[8rem]',
       size === 'small' && alignVideoStyles[align || 'left'],
+      size === 'medium' && alignVideoStyles[align || 'left'],
     ),
     wrapper: clsx(
       'px-[1.8rem] mx-auto md:px-[3rem] xl:px-[15rem] max-w-layout',
