@@ -1,16 +1,16 @@
 # Gabriel as default owner
 *   @gabalafou
 
-# Noa as reviewer for Markdown examples
-/examples   @noatamir
+# Pavithra as reviewer for Markdown examples
+/examples   @pavithraes
 
-# Noa, Tania & Ralf as default reviewers for Labs blogs and assets
-/apps/labs/posts          @noatamir  @trallard  @rgommers
-/apps/labs/public/posts   @noatamir  @trallard  @rgommers
+# Pavithra, Tania & Ralf as default reviewers for Labs blogs and assets
+/apps/labs/posts          @pavithraes  @trallard  @rgommers
+/apps/labs/public/posts   @pavithraes  @trallard  @rgommers
 
-# Noa as default reviewer for changes to Labs Storyblok content
+# Pavithra as default reviewer for changes to Labs Storyblok content
 # Tania/Ralf/others to be manually added as appropriate
-/apps/labs/CHANGELOG.md   @noatamir 
+/apps/labs/CHANGELOG.md   @pavithraes
 
 # Brian as default reviewer for changes to LLC Storyblok content
 # Kate/others to be manually added as appropriate
