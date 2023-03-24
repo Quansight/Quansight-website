@@ -1,3 +1,31 @@
+March 19, 2023
+
+Via Storyblok:
+
+- Fixes to PyTorch 2022 blog post
+  - Add Andrew James as coauthor
+  - Remove Francisco Massa from acknowledgments
+
+March 17, 2023
+
+Via Storyblok:
+
+- Add PyTorch 2022 Contributions Consulting blog post
+
+February 22, 2023
+
+Via Storyblok:
+
+- Update 'About Us' page copy and illustrations, plus icons in the
+  Our Values section
+
+February 15, 2023
+
+Via Storyblok:
+
+- Add Teaser component to homepage with copy and link to Labs 2022
+  Annual Report
+
 January 2, 2023
 
 Via Storyblok:
@@ -31,7 +59,7 @@ November 8, 2022
 Via Storyblok:
 
 - Replaced hero for Visualization & Dashboards page
-  with a version without the white stripe at the right 
+  with a version without the white stripe at the right
   edge, and switch the 'hero background color' for that
   hero to black
 - Replaced mis-named profile picture of Adam Lewis

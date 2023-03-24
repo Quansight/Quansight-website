@@ -5,7 +5,7 @@ import { TFeaturesProps } from './types';
 
 export const Features: FC<TFeaturesProps> = ({ title, columns }) => {
   return (
-    <section className="px-[2rem] pt-[6.2rem] lg:px-0 lg:pt-[8.8rem] xl:px-[5rem] bg-pink">
+    <section className="px-[2rem] pt-[6.2rem] lg:px-0 lg:pt-[8.8rem] xl:px-[5rem] bg-violet">
       {title && (
         <h2
           className="
