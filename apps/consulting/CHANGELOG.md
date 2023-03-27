@@ -1,3 +1,9 @@
+March 27, 2023
+
+Via Storyblok:
+
+- Change homepage hero to be green at all screen sizes
+
 March 24, 2023
 
 Via Storyblok:
