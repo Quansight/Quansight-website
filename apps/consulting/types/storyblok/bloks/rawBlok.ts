@@ -1,4 +1,3 @@
-import { TBlogArticleRawData } from './blogArticle';
 import { TBoardRawData } from './board';
 import { TBoardListRawData } from './boardList';
 import { TCenteredIntroRawData } from './centeredIntro';
@@ -20,7 +19,6 @@ import { TTestimonialRawData } from './testimonial';
 import { TTextArticleRawData } from './textArticle';
 
 export type TRawBlok =
-  | TBlogArticleRawData
   | TBoardRawData
   | TBoardListRawData
   | TCenteredIntroRawData

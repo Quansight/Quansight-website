@@ -59,7 +59,7 @@ November 8, 2022
 Via Storyblok:
 
 - Replaced hero for Visualization & Dashboards page
-  with a version without the white stripe at the right 
+  with a version without the white stripe at the right
   edge, and switch the 'hero background color' for that
   hero to black
 - Replaced mis-named profile picture of Adam Lewis
