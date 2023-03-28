@@ -37,13 +37,21 @@ Here is some basic info to help orient you to this repo.
   - `./libs` holds code shared by both websites.
 - The websites' **content** lives in [Storyblok](https://app.storyblok.com)
   (requires login).
-  - But Labs and Consulting **blog posts** live under `./apps/labs/posts` and 
+  - But Labs and Consulting **blog posts** live under `./apps/labs/posts` and
     `./apps/consulting/posts`, respectively.
+- **Static content** for each site lives under `./apps/labs/public` and
+  `./apps/consulting/public`, respectively.
+  - The `public` path element is removed when the site is built: for example, a
+    file located at `./apps/labs/public/favicon.png` in the repository will be
+    accessible at `/favicon.png` in a build of the Labs site.
 - The websites are hosted and deployed via
   [Vercel](https://vercel.com/quansight) (requires login).
 - The repo's default branch is `develop`, **not** `main`.
   - Most pull requests (including Labs blog posts) will be opened against
     `develop`.
+  - Branch protection is enabled on the `develop` branch, and each PR to
+    `develop` requires at least one approving review by someone _other_ than the
+    PR creator in order to merge.
   - `main` is used for production (i.e., the live websites).
   - You can think of `develop` as staging.
   - Only hotfixes and releases are to be opened against `main`.
@@ -88,15 +96,9 @@ There are primarily two types of website changes, each with its process:
 - Content changes ([Storyblok](https://www.storyblok.com/home), our CMS - Content Management System)
 - Code changes (this GitHub repo)
 
-Note that Labs blog posts are a bit of an exception. Categorically they are
-content changes, but the content lives in the Git repo -- so technically they are
-code changes, and they follow the process for code changes.
-
-> **Note**
-> Once [issue #396](https://github.com/Quansight/Quansight-website/issues/396)
-> is implemented, the Consulting blog posts will be
-> converted to use the same machinery as the Labs posts, and after that
-> time the Consulting blog posts will _also_ follow the process for code changes.
+Note that blog posts for both sites are a bit of an exception. Categorically
+they are content changes, but the content lives in the Git repo -- so
+technically they are code changes, and they follow the process for code changes.
 
 This section will cover the process for each type of change.
 
@@ -109,7 +111,7 @@ configuration does not mean that the content has gone live on the
 corresponding public website. However, you should never publish any content in
 Storyblok if it is not ready for public presentation. In our configuration,
 publishing content in Storyblok is a signal to the rest of the team that says:
-this content is ready at any time to appear on the public website. **If it's not
+this content is ready at any time to appear on the public website, whenever the next live build . **If it's not
 ready, don't hit the publish button.**
 
 The Storyblok process is covered in more detail in the [GitHub repo's wiki](https://github.com/Quansight/Quansight-website/wiki).
@@ -174,7 +176,7 @@ These are the concrete steps to follow to move your code from branch to branch:
    `develop` branch.
    - Consider doing a
      [squash-merge](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits),
-     especially if your pull request is relatively small, to keep a
+     except if your pull request is relatively small, to keep a
      clean commit history.
 4. When you want your code change to go live, cut a release branch from
    `develop`, then open a pull request to merge the release branch into `main`.
@@ -188,6 +190,11 @@ These are the concrete steps to follow to move your code from branch to branch:
    ```
 
    Be sure to use `main` as the base branch of your PR and not `develop`.
+
+   GitHub's UI will likely indicate that the release branch is out of date
+   relative to the base branch (`main`). This is because the merge commits to
+   `main` from prior release branches are not present on `develop`. **Ignore
+   this. Do not update the base branch.**
 
 5. Review both preview URLs that Vercel will add to your Pull Request.
 6. If all looks good and your Pull Request has gotten approval, then merge it
@@ -402,27 +409,28 @@ editors to previewing draft content against the `develop` branch to help catch
 any potential code/content conflicts before merging to `main`.
 
 When viewing the site in local development or at a Vercel preview URL, there
-should be a banner that explains that you are looking at a preview of the site.
-This helps reduce confusion when screenshots are shared. This banner should not
-be present on a production build of the site.
+should be a gray or yellow banner that indicates that you are looking at a
+preview of the site. This helps reduce confusion when screenshots are shared.
+This banner should not be present on a production build of the site.
 
 The preview/development environment banner should allow the user to toggle
 between seeing published versus draft/saved Storyblok content. The banner should
 change colors to indicate which of the two content preview modes the user is in
-(that is, whether they are seeing draft or published content from Storyblok).
+(that is, whether they are seeing draft (yellow banner) or published (gray
+banner) content from Storyblok).
 
 The above should hold _except_ when the user is using the Storyblok web
 interface; then the website should always be in "draft" mode, showing saved (but
-not published) content. And as mentioned previously, it should show this content
-against the latest code from the `develop` branch (not the `main` branch).
-Related: The content team shouldn't have to think about which URL to use with
-the Storyblok editor. It should be only one default URL, and this URL should
-show draft content against the latest code in `develop`.
+not published) content (yellow banner). And as mentioned previously, it should
+show this content against the latest code from the `develop` branch (not the
+`main` branch). Related: The content team shouldn't have to think about which
+URL to use with the Storyblok editor. It should be only one default URL, and
+this URL should show draft content against the latest code in `develop`.
 
 Hitting the publish button in Storyblok should not push that content to the
-public-facing site; rather, it should queue up the content for the next production deployment.
-This prevents bypassing any GitHub workflows that have been
-set up for quality control.
+public-facing site; rather, it should queue up the content for the next
+production deployment. This prevents bypassing any GitHub workflows that have
+been set up for quality control.
 
 Content that is marked as "published" in Storyblok should be ready to be pushed
 to production at any time. Likewise, code that is merged into the `develop`
@@ -480,17 +488,17 @@ environment's dependencies will match the production environment.
    apps.
 4. Add Storyblok raw data types to the `/apps/.../types/storyblok` folder.
 5. Import these raw data types to the `/apps/.../types/storyblok/rawBlok.ts` file
-   and add them to the collective `TRawBlock` type.
+   and add them to the collective `TRawBlok` type.
 6. Add Storyblok props mapper to `/apps/.../components/BlokProvider/mappers`
    folder.
 7. Import this props mapper to
-   `/apps/.../components/BlockProvider/utils/getPropsByType.ts` file and add the
+   `/apps/.../components/BlokProvider/utils/getPropsByType.ts` file and add the
    case to the switch statement.
 8. Import the Next component to the
-   `/apps/.../components/BlockProvider/componentsMap.ts` file and add it to the
+   `/apps/.../components/BlokProvider/componentsMap.ts` file and add it to the
    `componentsMap` variable.
 9. Import the Next.js component types to the
-   `/apps/.../components/BlockProvider/types.ts` file, add the component name to the
+   `/apps/.../components/BlokProvider/types.ts` file, add the component name to the
    `ComponentType` `enum` and add the props types to the `TBlokComponentPropsMap`
    type.
 
@@ -504,30 +512,59 @@ You can fetch data from Storyblok directly using queries. To add the query:
 3. Create the data retrieval function in the `/apps/.../api/utils` folder using the
    function, type, and hook created by the code gen script.
 
-## GitHub-based blog workflow (Labs blog) 💻
+## GitHub-based blog workflow (Labs and Consulting blogs) 💻
 
-All the **Quansight Labs** blog posts are located inside `apps/labs/post`,
-and therefore, any new posts _must_ be added to this same folder.
+All the blog posts for **both websites** are located inside `./apps/labs/posts`
+and `./apps/consulting/posts`, and therefore, any new posts _must_ be added to
+these same folders.
 
 > **Note**
 > For now, all posts should be
 > contributed using a branch-and-merge strategy within the website repo itself,
 > instead of a fork-and-merge strategy. This may change in the future.
 
-Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). The
-`posts` directory also contains a [`categories.json`
-file](./apps/labs/posts/categories.json) containing the posts categories.
+Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). Each
+`posts` directory also contains a `categories.json` file
+([Labs file](./apps/labs/posts/categories.json) and
+[Consulting file](./apps/consulting/posts/categories.json)) containing the post
+categories.
+
+- For the Labs blog, `categories.json` is an array of case-sensitive strings.
+  These strings are used:
+  - As-is in the rendered category list on the main `/blog` page
+  - In a custom slugified format (spaces replaced with `+`) when filtering
+    `/blog` by category
+    - For example, the category `"Beyond PyData"` is slugified as
+      `"Beyond+PyData`"
+    - This category filter is currently **case-sensitive**—URLs with mismatched
+      case in the `category` query parameter will return **no results**
+- For the Consulting blog, `categories.json` is a list of objects, where each
+  object has two `string` properties:
+  - `name`
+    - Should be written with natural capitalization and whitespace
+    - Used as-is (case and whitespace sensitive) in post metadata to associate a
+      post with a category
+    - Converted to all caps for use in the category-selection dropdown on the
+      `/library` page
+  - `value`
+    - Should be written in slugified form and in all lowercase
+      - NOTE: Currently one category, `Infrastructure & HPC`, has a capitalized
+        `value` due to an oversight. We plan to fix this.
+    - Used as-is (case sensitive) in the `category` query parameter to
+      `/library`—URLs with mismatched case in the `category` query parameter
+      will return **no results**
 
 The `categories.json` file is also used for displaying category filters on the
-`/blog` page so after adding a new category, it will also be visible on that
-page.
+`/blog` page for Labs and the `/library` page for Consulting. So, when a new
+category is added to `categories.json`, it should also automatically render on
+the appropriate page.
 
 For more details about `.mdx` please see:
 
 - <https://mdxjs.com/>
 - <https://github.com/hashicorp/next-mdx-remote>
 
-### Structure of the blog post
+### Structure of a blog post
 
 Every post is structured with two main sections: `meta` and `content`.
 The `content` section is the body of the post added in Markdown format.
@@ -543,24 +580,29 @@ signs. The meta section contains post-related information like:
   Based on this property blog post page will display proper info about the author
   (and their avatar). The author must be present in Storyblok in order for the
   post to build without error.
-- `category` - Array of categories for example `[Machine Learning]`. All
-  categories should be the same as in the previously mentioned
-  [`categories.json`](./apps/labs/posts/categories.json) file.
-  **Important note:** categories are case-sensitive.
+- `category` - Array of categories; for example, `[Machine Learning]`. All
+  categories should match entries in the previously mentioned `categories.json`
+  file for the appropriate site. If a category you want to use doesn't exist
+  yet, create it in `categories.json`; however, err on the side of using
+  existing categories where possible. **Important note:** categories are
+  case-sensitive.
 - `featuredImage` - Object with properties: `src` and `alt`. The `src` property
-  is a path to the featured image which is displayed on the posts list on the`/blog`
-  page. The `alt` property is alternative text for the image. The image should
-  be added to the `apps/labs/public/posts/<post-name>` directory, for example,
-  `apps/labs/public/posts/hello-world-post`. There is no need to provide a full image path,
-  so the path name should start with `/posts/`.
+  is a path to the featured image which is displayed on the posts list on the
+  `/blog` page for Labs and the `/library` page for Consulting. The `alt`
+  property is alternative text for the image. The image should be added to the
+  `apps/<site>/public/posts/<post-name>` directory, for example,
+  `apps/<site>/public/posts/hello-world-post`. There is no need to provide a full
+  image path, so the path name should start with `/posts/`.
 - `hero` - the object for the Hero section of the post. This can have two different structures:
-  - The first structure is an object with `imageSrc` and `imageAlt`. The `imageSrc` property is a path to
-    the hero image, which is displayed on the blog post page between the nav bar and the
-    blog heading title. The `imageAlt` property is alternative text for the image.
-    The image should be added to the `apps/labs/public/posts/<post-name>`
-    directory, for example, `apps/labs/public/posts/hello-world-post`.
-  - The second structure is an object with properties: `imageMobile`,`imageTablet`,
-    and `imageDesktop`. Each of these properties also contain `imageSrc` and `imageAlt` properties.
+  - The first structure is an object with `imageSrc` and `imageAlt`. The
+    `imageSrc` property is a path to the hero image, which is displayed on the
+    blog post page between the nav bar and the blog heading title. The
+    `imageAlt` property is alternative text for the image. The image should be
+    added to the `apps/{site}/public/posts/<post-name>` directory, for example,
+    `apps/{site}/public/posts/hello-world-post`.
+  - The second structure is an object with properties:
+    `imageMobile`,`imageTablet`, and `imageDesktop`. Each of these properties
+    also contains its own `imageSrc` and `imageAlt` properties.
   - For both of these structures, there is no need to provide full image paths,
     so the path names should start with`/posts/`.
 
@@ -582,28 +624,48 @@ hero:
 
 ### Adding a new blog post 📝
 
-1. Create a new feature branch. Example: `feature/new-hello-world-post`.
-2. Add post feature and hero images to `apps/labs/public/posts/<post-name>`.
-3. Add a new `.md|.mdx` file inside the `app/labs/posts` directory. Make sure to read the
-   [Structure of the blog post section](#structure-of-the-blog-post) in this file to ensure
-   that the post is properly structured.
-4. Commit and push your changes to the repository. For commits please follow the format of the conventional commit.
+> **Note** If there is a deadline or other timing consideration for the
+> publication of your post, **please coordinate actively** with the Marketing
+> team (currently @Katebrack and @bskinn) and the website ops team
+> (#qwebsite-ops channel on Slack) from as early as possible to ensure we can
+> meet your requirements.
+
+1. Create a new feature branch. Example: `<site>-blog/new-hello-world-post`.
+2. Add post images (feature, hero, and any for the post body) to
+   `apps/<site>/public/posts/<post-name>`.
+3. Add a new `.md|.mdx` file inside the `app/<site>/posts` directory. Make sure
+   to read the
+   [Structure of the blog post section](#structure-of-the-blog-post) in this
+   file to ensure that the post is properly structured.
+4. Commit and push your changes to the repository. For commits please follow the
+   format of the conventional commit.
    [See](https://www.conventionalcommits.org/en/v1.0.0/)
-5. Create a pull request to the `develop` branch. Make sure to add the `type: content 📝` and `labs 🔭` labels to the PR.
-6. Wait for someone in the website team to review the new blog post. If everything is ok, the PR will be merged to the `develop` branch.
+5. Create a pull request to the `develop` branch. Make sure to add the
+   `type: content 📝`, `owner: Quansight`, and either `labs 🔭` or
+   `consulting 🤝` labels to the PR.
+6. Wait for someone on the website team to review the new blog post. If
+   everything is ok, the PR will be merged to the `develop` branch. The blog post will then go live with the next build
 
 ### Adding a new blog category
 
 1. Create a new feature branch.
-2. Ope the `apps/labs/posts/categories.json` file.
-3. Add a new category to the array. Make sure to follow the same format as the other categories.
-4. Commit and push your changes to the repository. For commits please follow the format of the conventional commit.
+2. Open the `apps/<site>/posts/categories.json` file.
+3. Add a new category/category object to the array. Make sure to follow the same
+   format as the other categories.
+4. Commit and push your changes to the repository. For commits please follow the
+   format of the conventional commit.
    [See](https://www.conventionalcommits.org/en/v1.0.0/)
-5. Wait for someone in the website team to review the new blog post. If everything is ok, the PR will be merged to the `develop` branch.
+5. Wait for someone in the website team to review the new blog category. If
+   everything is ok, the PR will be merged to the `develop` branch.
 
 ### Adding new components for usage inside `.mdx` posts
 
-1. Open `apps/labs/services/blogAllowedComponents.ts` file
+If the component you need doesn't yet exist in the site codebase, coordinate
+with the site maintenance team (#qwebsite-ops) regarding its implementation.
+
+Once implemented:
+
+1. Open `apps/<site>/services/blogAllowedComponents.ts` file
 2. Import the component from the codebase
 3. Add a new component to `blogAllowedComponents` object.
 
