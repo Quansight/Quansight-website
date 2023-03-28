@@ -527,7 +527,8 @@ Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). Each
 `posts` directory also contains a `categories.json` file
 ([Labs file](./apps/labs/posts/categories.json) and
 [Consulting file](./apps/consulting/posts/categories.json)) containing the post
-categories.
+categories. The formats of these `categories.json` files are currently **not**
+the same:
 
 - For the Labs blog, `categories.json` is an array of case-sensitive strings.
   These strings are used:
