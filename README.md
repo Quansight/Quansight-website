@@ -523,8 +523,13 @@ these same folders.
 > contributed using a branch-and-merge strategy within the website repo itself,
 > instead of a fork-and-merge strategy. This may change in the future.
 
-Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). Each
-`posts` directory also contains a `categories.json` file
+Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). For
+more details about `.mdx` please see:
+
+- <https://mdxjs.com/>
+- <https://github.com/hashicorp/next-mdx-remote>
+
+Each `posts` directory also contains a `categories.json` file
 ([Labs file](./apps/labs/posts/categories.json) and
 [Consulting file](./apps/consulting/posts/categories.json)) containing the post
 categories. The formats of these `categories.json` files are currently **not**
@@ -559,11 +564,6 @@ The `categories.json` file is also used for displaying category filters on the
 `/blog` page for Labs and the `/library` page for Consulting. So, when a new
 category is added to `categories.json`, it should also automatically render on
 the appropriate page.
-
-For more details about `.mdx` please see:
-
-- <https://mdxjs.com/>
-- <https://github.com/hashicorp/next-mdx-remote>
 
 ### Structure of a blog post
 
