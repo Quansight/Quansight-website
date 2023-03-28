@@ -18,13 +18,13 @@
   - [Running the website locally 🖥](#running-the-website-locally-)
   - [Adding new components 🧩](#adding-new-components-)
   - [Adding new queries 🗃](#adding-new-queries-)
-  - [GitHub-based blog workflow (Labs blog) 💻](#github-based-blog-workflow-labs-blog-)
-    - [Structure of the blog post](#structure-of-the-blog-post)
+  - [GitHub-based blog workflow (Labs and Consulting blogs) 💻](#github-based-blog-workflow-labs-and-consulting-blogs-)
+    - [Structure of a blog post](#structure-of-a-blog-post)
       - [Example of blog post meta section](#example-of-blog-post-meta-section)
     - [Adding a new blog post 📝](#adding-a-new-blog-post-)
     - [Adding a new blog category](#adding-a-new-blog-category)
     - [Adding new components for usage inside `.mdx` posts](#adding-new-components-for-usage-inside-mdx-posts)
-    - [Specifications for Hero images](#specifications-for-hero-images)
+    - [Specifications for Hero images in Storyblok](#specifications-for-hero-images-in-storyblok)
 
 ## Orientation 🗺
 
