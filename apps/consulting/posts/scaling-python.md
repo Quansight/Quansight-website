@@ -3,7 +3,7 @@ title: 'Scaling Python'
 published: March 28, 2023
 author: andrew-fulton
 description: 'In this post, we walk you through how Quansight helped a banking client through this process of scaling in a real life scenario.'
-category: [Scalable Computing, Training]
+category: [Scalable Computing, Optimization, Data Engineering]
 featuredImage:
   src: /posts/scaling-python/header.png
   alt: 'summing dataframes visualization'
@@ -11,6 +11,8 @@ hero:
   imageSrc: /posts/scaling-python/header.png
   imageAlt: 'summing dataframes visualization'
 ---
+
+<base target="_blank" />
 
 This post is based off of a talk given at PyData NYC 2022. You can watch the talk here: [Scaling Python: Bank Edition](https://www.youtube.com/watch?v=tbqgsM6iGng).
 
@@ -23,6 +25,7 @@ To start, we were tasked with deploying a large scale data processing pipeline f
 <img
 src="/posts/scaling-python/introduction-img-1.png"
 width="400px"
+alt="Three dataframes stacked on top of each other. Each dataframe has index named path with values ranging from 0-49,999. Each has two columns. The first is named Date. The second column is labeled value. The dataframes are labeled File 1, File 2, ..., File N. to the right of the stacked dataframes is an arrow with the text sum inside of it. To the right of the arrow is another dataframe representing the sum of the three dataframes by path and date."
 />
 
 ## Hardware Options
@@ -44,6 +47,7 @@ GPU architecture lends itself to a pattern that many of these tools rely on. Fir
 
 <img
 src="/posts/scaling-python/pygpu-cuda-algorithm.png"
+alt="An image representing a flow diagram of the pyGPU-cuda algorith."
 />
 
 Unfortunately what we ended up finding was that copying the data back and forth between the host's memory and the GPU memory turned out to be rather expensive. It was expensive enough in fact to mitigate a lot of the benefits we saw in the speedup of the computation itself. On top of that, the increased cost of GPU available cloud instances made the usage of GPUs for our calculation unfeasible for our problem. With that in mind, we decided to focus on good old distributed CPU architecture for our computation.
@@ -58,6 +62,7 @@ we thought that the dataframe approach made sense due to the ease of implementat
 
 <img
 src="/posts/scaling-python/dd-groupby.png"
+alt="A picture of a jupyter notebook input and output cells, next to an image of the cell contents equivilent dask graph being run"
 />
 
 However, as we noted earlier, our resources may be limited. What happens if our dataframe is larger than the cluster itself?
@@ -68,6 +73,7 @@ As it turns out this is an issue we ran into with some of our larger aggregation
 
 <img
 src="/posts/scaling-python/dd-larger-than-cluster.png"
+alt="A picture of a jupyter notebook input and output cells next to an image of the dask dashboard with the results of the equivilent dask graph being run. The output cell of the jupyter notebook shows a KilledWorker error."
 />
 
 The image above shows an example of this happening. In this example I used a Dask cluster with 2 workers each with 4 GB of memory and get a killed worker error when I try to aggregate 10 6,000,000 row files.
@@ -83,6 +89,7 @@ The new set would be concatenated with the previously aggregated results. The re
 
 <img
 src="/posts/scaling-python/dd-chunking.png"
+alt="A picture of a jupyter notebook input cell next to an image of the dask dashboard with the graph build by the jupyter cell."
 />
 
 With this strategy, we were able aggregate the our largest aggregation sets, but we still had a lot of aggregations to do and we wanted to run them as quick as possible. That’s where we started seeing our next set of problems. The strategy laid out so far allowed us to be able to complete any of our aggregations on an individual basis.
@@ -91,6 +98,7 @@ we again ran into our original problem. Workers were frequently running out of m
 
 <img
 src="/posts/scaling-python/oom-error.png"
+alt="A picture of a jupyter notebook input and output cells. The output is showing dask worker usage warnings."
 />
 
 ### Manual throttling
@@ -105,6 +113,7 @@ So instead of just lowering the number of thread-workers in our thread-pool, we 
 
 <img
 src="/posts/scaling-python/throttling.png"
+alt="A picture of a jupyter notebook input and output cells, next to an image of the cell contents equivilent dask graph being run. The image demonstrates showing work being passed to the scheduler in a chunk based manner"
 />
 
 This strategy was starting to get us closer. We now had a little more leeway to increase thread-pool workers for better cluster utilization, but it was still taking time to create the graphs in the first place, and we didn’t have complete reliability with our larger aggregations.
@@ -121,6 +130,7 @@ At this point we realized that pandas dataframe actually sum together quiet nice
 
 <img
 src="/posts/scaling-python/df-sum.png"
+alt="A picture of a jupyter notebook input and output cells. The first set shows a pandas groupby. The ouput shows that the computation took 1.77 s +- 72.3 ms per loop. The second input cells shows the summation of several dataframes. The ouput shows that the computation took 639 ms +- 15.9 ms per loop"
 />
 
 We were still having a bit of trouble with getting the dataframes at the right place at the right time though. We also wanted our architecture to account for the parallelization opportunities among the different aggregation groups. Ideally we wanted to run an aggregation group on a single worker when feasible to cut down on network traffic on the cluster. With that in mind we started looking at cluster of clusters.
@@ -132,6 +142,7 @@ We based our cluster of clusters implementation off of a [keynote at the 2021 da
 <img
 src="/posts/scaling-python/cluster-of-clusters.png"
 width="400px"
+alt="A diagram showing how cluster of Cluster works. It contains a box with the text Outer Dask Cluster. Inside there are 4 boxes, 1 on the left and three on the right. There multi directional arrows between the box on the left and the boxes on the right. Each box is labeled 'K8s Node'. The box on the left encapsulates another box with the text Dask Scheduler. Each box on the right encapsulates a box with the text Dask Worker. That box encapsulates another box with the text Dask LocalCluster"
 />
 
 ### Dask Bag and Resource Annotations
@@ -141,6 +152,7 @@ Next we mapped `load_dataframe` to our our sequence of file-paths and finally we
 
 <img
 src="/posts/scaling-python/dask-bag.png"
+alt="A picture of a jupyter notebook input cell, next to an image of the cell contents equivilent dask graph being run. The input cell has the code for a dask bag data frame summation wit resource annotations."
 />
 
 On top of dask bag, we also started utilizing resource annotations. These gave us a big hand up by letting us take a more hands off approach to the scheduler. Instead of managing how much work we are submitting. We can submit it all and let the scheduler do the heavy lifting of resource management. Insuring that the workers will not get more work then the resources that they have available.
@@ -177,6 +189,7 @@ We initially thought that prefect would be a good fit for us. Prefect is a pytho
 
 <img
 src="/posts/scaling-python/prefect-flow.png"
+alt="A diagram of a prefect flow."
 />
 
 Unfortunately, we found that when running our workflow from within prefect, we were overloading the dask scheduler. Each prefect task was creating a client and connecting to the dask cluster. The scheduler can only handle so many open connections so we were running into errors due to having too many file descriptors open. Likewise, all the connections were slowing down communication between the scheduler and the workers causing dask workers to time out waiting from a response from the scheduler.
@@ -191,6 +204,7 @@ We were able to use Dask bag to control resource usage within a workflow pod for
 
 <img
 src="/posts/scaling-python/argo-workflow.png"
+alt="An Argo Workflows cluster. It shows a Fast API server connecting argo worflow pods. Two of those pods start up local dask clusters. The third starts up a distributed dask cluster for doing large aggregations."
 />
 
 ## Conclusion
