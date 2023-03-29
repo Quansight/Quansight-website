@@ -11,6 +11,7 @@ import {
   Header,
   Hero,
   HeroVariant,
+  MediaSeo,
 } from '@quansight/shared/ui-components';
 
 import { getFooter } from '../../api/utils/getFooter';
@@ -46,7 +47,19 @@ const Article: FC<TLibraryArticleProps> = ({
         title={post.meta.title}
         description={post.meta.description}
         variant={DomainVariant.Quansight}
-      />
+        type={post.meta.category.join(',')}
+      >
+        {post.meta.hero && (
+          <MediaSeo
+            image={
+              post.meta.hero?.image || post.meta.hero?.imageTablet?.imageSrc
+            }
+            imageAlt={
+              post.meta.hero?.imageAlt || post.meta.hero?.imageTablet?.imageAlt
+            }
+          />
+        )}
+      </SEO>
 
       {post.meta.hero && (
         <Hero

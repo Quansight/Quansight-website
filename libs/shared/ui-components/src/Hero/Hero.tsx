@@ -25,7 +25,6 @@ export const Hero: FC<THeroProps> = ({
   const isLargeHeroOverlapping = variant === HeroVariant.LargeOverlapping;
   const isMediumHeroOverlapping = variant === HeroVariant.MediumOverlapping;
   const isSmallHero = variant === HeroVariant.Small;
-
   return (
     <div
       className={clsx(
