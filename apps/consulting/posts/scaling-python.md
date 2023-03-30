@@ -16,7 +16,9 @@ hero:
 
 This post is based off of a talk given at PyData NYC 2022. You can watch the talk here: [Scaling Python: Bank Edition](https://www.youtube.com/watch?v=tbqgsM6iGng).
 
-Often scaling a distributed computation is easy until it isn't. There are currently several tools that will get you off the ground quickly, but when the size of your data increases and you are required to scale further, the complexity needed for a solution often increases considerably as well. At this point algorithm and infrastructure dependent requirements will likely preclude experimentation and problem solving. In this post, we walk you through how Quansight helped a banking client through this process of scaling in a real life scenario.
+Often scaling a distributed computation is easy until it isn't. There are currently several tools that will get you off the ground quickly, but when the size of your data increases and you are required to scale further, the complexity needed for a solution often increases considerably as well. At this point, algorithm- and infrastructure-dependent requirements will likely preclude experimentation and problem solving. While new tools are continuously emerging that promise straightforward hyper-scaling, in most situations there are at least a few confounding details that have to be ironed out manually.
+
+In this post, we walk you through how Quansight helped a banking client through this process of scaling Python DataFrame calculations in a real-life scenario.
 
 ## Problem Overview
 
