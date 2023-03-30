@@ -9,7 +9,7 @@ featuredImage:
   alt: 'summing dataframes visualization'
 hero:
   imageSrc: /posts/hero-paris.webp
-  imageAlt: 'summing dataframes visualization'
+  imageAlt: 'Data visualization of Paris city'
 ---
 
 <base target="_blank" />
