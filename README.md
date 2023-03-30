@@ -606,6 +606,9 @@ signs. The meta section contains post-related information like:
     also contains its own `imageSrc` and `imageAlt` properties.
   - For both of these structures, there is no need to provide full image paths,
     so the path names should start with`/posts/`.
+  - **FOR THE CONSULTING BLOG**: Currently we are using a common hero for all posts. The `hero` metadata property should always contain:
+    - `imageSrc: /posts/hero-paris.webp`
+    - `imageAlt: 'Data visualization of Paris city'`
 
 #### Example of blog post meta section
 
