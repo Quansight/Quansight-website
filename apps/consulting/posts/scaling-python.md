@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/scaling-python/header.png
   alt: 'summing dataframes visualization'
 hero:
-  imageSrc: /posts/scaling-python/header.png
+  imageSrc: /posts/hero-paris.webp
   imageAlt: 'summing dataframes visualization'
 ---
 
