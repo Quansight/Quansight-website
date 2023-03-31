@@ -634,7 +634,8 @@ hero:
 > (#qwebsite-ops channel on Slack) from as early as possible to ensure we can
 > meet your requirements.
 
-1. Create a new feature branch. Example: `<site>-blog/new-hello-world-post`.
+1. Create a new feature branch off of the `develop` branch. Example:
+   `<site>-blog/new-hello-world-post`.
 2. Add post images (feature, hero, and any for the post body) to
    `apps/<site>/public/posts/<post-name>`.
 3. Add a new `.md|.mdx` file inside the `app/<site>/posts` directory. Make sure
@@ -648,7 +649,8 @@ hero:
    `type: content 📝`, `owner: Quansight`, and either `labs 🔭` or
    `consulting 🤝` labels to the PR.
 6. Wait for someone on the website team to review the new blog post. If
-   everything is ok, the PR will be merged to the `develop` branch. The blog post will then go live with the next build
+   everything is ok, the PR will be merged to the `develop` branch. The blog
+   post will then go live with the next site build (merge to `main`).
 
 ### Adding a new blog category
 
