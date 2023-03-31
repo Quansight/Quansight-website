@@ -50,7 +50,6 @@ this while accounting for potentially limited compute resources.
 
 <img
 src="/posts/scaling-python/introduction-img-1.png"
-width="400px"
 alt="Three dataframes stacked on top of each other. Each dataframe has index named path with values ranging from 0-49,999. Each has two columns. The first is named Date. The second column is labeled value. The dataframes are labeled File 1, File 2, ..., File N. to the right of the stacked dataframes is an arrow with the text sum inside of it. To the right of the arrow is another dataframe representing the sum of the three dataframes by path and date."
 />
 
@@ -126,8 +125,24 @@ that list to Dask dataframe’s read_parquet function. We would then run
 the group-by method on the loaded dataframe and take the sum of the
 group-by object.
 
+```python
+%%time
+
+def build_graph(paths):
+    df = dd.read_parquet(paths,
+                         index=False,
+                         storage_options=storage_options)
+    gb = df.groupby(['path', 'Date']).sum()
+    return gb
+
+
+graph = build_graph(paths_5)
+fut = client.compute(graph)
+fut.result().info()
+```
+
 <img
-src="/posts/scaling-python/dd-groupby.png"
+src="/posts/scaling-python/dd-groupby-dask-dashboard.png"
 alt="A picture of a jupyter notebook input and output cells, next to an image of the cell contents equivilent dask graph being run"
 />
 
@@ -141,9 +156,20 @@ aggregations. We were finding that when we submitted jobs workers
 would be forced to pause or restart when the memory thresholds for the
 cluster were reached causing the job to fail.
 
+```python
+graph = build_graph(paths_10)
+fut = client.compute(graph)
+fut.result().info()
+```
+
 <img
-src="/posts/scaling-python/dd-larger-than-cluster.png"
-alt="A picture of a jupyter notebook input and output cells next to an image of the dask dashboard with the results of the equivilent dask graph being run. The output cell of the jupyter notebook shows a KilledWorker error."
+src="/posts/scaling-python/dd-larger-than-cluster-jlab.png"
+alt="A picture of a jupyter notebook input and output cells for the code above. The output cell of the jupyter notebook shows a KilledWorker error."
+/>
+
+<img
+src="/posts/scaling-python/dd-larger-than-cluster-dask.png"
+alt="An image of the dask dashboard with the results a dask graph representing the code above and the resulting run failing."
 />
 
 The image above shows an example of this happening. In this example I
@@ -173,9 +199,36 @@ aggregated until all files were aggregated together. If there where
 not enough files to meet the threshold, We would follow the standard
 read_parquet, group-by, sum strategy.
 
+```python
+%%time
+
+def build_graph(paths, batch_cutoff=10, n_per=5):
+    df = None
+    if len(paths) >= batch_cutoff:
+        for x in range(0, len(paths), n_per):
+            ps = paths[x:x+n_per]
+            sub = dd.read_parquet(ps,
+                                  index=False,
+                                  storage_options=storage_options)
+            if df is not None:
+                sub = dd.concat([sub, df])
+            sub = sub.groupby(['path', 'Date'])
+            sub = sub.sum()
+            df = sub
+    else:
+        df = dd.read_parquet(paths, index=False, storage_options=storage_options)
+        df = df.groupby(['path', 'Date']).sum()
+    return df
+
+
+graph = build_graph(paths_10, batch_cutoff=5, n_per=2)
+fut = client.compute(graph)
+fut.result().info()
+```
+
 <img
-src="/posts/scaling-python/dd-chunking.png"
-alt="A picture of a jupyter notebook input cell next to an image of the dask dashboard with the graph build by the jupyter cell."
+src="/posts/scaling-python/dd-chunking-dask-graph.png"
+alt="The dask graph build by the code above."
 />
 
 With this strategy, we were able aggregate the our largest aggregation
@@ -188,6 +241,21 @@ larger than the cluster itself, we again ran into our original
 problem. Workers were frequently running out of memory and either
 pausing, or worse, getting killed. This caused a lot of work being
 duplicated or erroring out completely
+
+```python
+>>> [len(group) for group in small_path_groups]
+[20, 15, 15, 10, 10, 10, 5, 4, 4, 2, 3, 2]
+```
+
+```python
+%%time
+graphs = []
+for path_group in small_path_groups:
+    graphs.append(build_graph(path_group, batch_cutoff=9, n_per=5))
+
+futs = client.compute(graphs)
+wait(futs)
+```
 
 <img
 src="/posts/scaling-python/oom-error.png"
@@ -228,9 +296,57 @@ scheduler.At this point, there would be a brief wait and the
 thread-lock would be released so other workers could continue their
 work.
 
+```python
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import as_completed
+from threading import Lock
+from time import sleep
+
+def build_graph(paths, batch_cutoff=10, n_per=5):
+    ...
+    return df
+
+def good_to_go(needed_bytes_gb, submitted_task_cutoff=20):
+    # returns is cluster has available resources
+    # percent of cluster in use
+    ...
+    return bool, percent_use
+
+lock = Lock()
+
+def compute_task(graph, num_paths):
+    max_size = num_paths * 200 / 1000
+    go_ahead = False
+    while not go_ahead:
+        with lock:
+            go_ahead, cluster_usage = good_to_go(max_size)
+            sleep_mult = (cluster_usage * 2) ** 1.5
+            if go_ahead:
+                fut = client.compute(graph)
+                sleep(sleep_mult)
+    wait(fut)
+    return fut
+
+def creator(paths):
+    n_paths = len(paths)
+    graph = build_graph(paths, batch_cutoff=9, n_per=5)
+    return graph, n_paths
+
+def submit_via_threadpool(graphs):
+    results = []
+    with ThreadPoolExecutor(max_workers=1) as creation_executor:
+        with ThreadPoolExecutor(max_workers=6) as submission_executor:
+            for (graph, n_paths) in creation_executor.map(creator, small_path_groups):
+                result = submission_executor.submit(compute_task, graph, n_paths)
+                results.append(result)
+    for fut in as_completed(results):
+        print(fut.result())
+    return result
+```
+
 <img
 src="/posts/scaling-python/throttling.png"
-alt="A picture of a jupyter notebook input and output cells, next to an image of the cell contents equivilent dask graph being run. The image demonstrates showing work being passed to the scheduler in a chunk based manner"
+alt="An image of the above code being run as represented by the dask dashboard."
 />
 
 This strategy was starting to get us closer. We now had a little more
@@ -277,9 +393,24 @@ than running a group-by operation on the equivalent concatenated
 dataframe.
 
 <img
-src="/posts/scaling-python/df-sum.png"
-alt="A picture of a jupyter notebook input and output cells. The first set shows a pandas groupby. The ouput shows that the computation took 1.77 s +- 72.3 ms per loop. The second input cells shows the summation of several dataframes. The ouput shows that the computation took 639 ms +- 15.9 ms per loop"
+src="/posts/scaling-python/groupby_sum.png"
+alt="An image of a dataframe that shows the before and after of an groupby operation."
 />
+
+```python
+>>> %timeit concated_list_of_dfs.groupby(['path', 'Date']).sum()
+1.77 s ± 72.3 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+```
+
+<img
+src="/posts/scaling-python/df_list_sum.png"
+alt="An image of a dataframe that shows the before and after diagram for summing a list of dataframes."
+/>
+
+```python
+>>> %timeit concated_list_of_dfs.groupby(['path', 'Date']).sum()
+1.77 s ± 72.3 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+```
 
 We were still having a bit of trouble with getting the dataframes at
 the right place at the right time though. We also wanted our
