@@ -264,21 +264,27 @@ duplicated or erroring out completely
 ```
 
 ```python
-%%time
-graphs = []
-for path_group in small_path_groups:
-    graphs.append(build_graph(path_group, batch_cutoff=9, n_per=5))
+>>> graphs = []
+>>> for path_group in small_path_groups:
+...    graphs.append(build_graph(path_group, batch_cutoff=9, n_per=5))
 
-futs = client.compute(graphs)
-wait(futs)
+>>> futs = client.compute(graphs)
+>>> wait(futs)
+
+2023-03-31 19:16:02,371 - distributed.worker_memory - WARNING - Unmanaged memory use is high. This may indicate a memory leak or the memory may not be released to the OS; see https://distributed.dask.org/en/latest/worker.html#memtrim for more information. -- Unmanaged memory: 2.62 GiB -- Worker memory limit: 4.00 GiB
+2023-03-31 19:16:13,723 - distributed.worker_memory - WARNING - Unmanaged memory use is high. This may indicate a memory leak or the memory may not be released to the OS; see https://distributed.dask.org/en/latest/worker.html#memtrim for more information. -- Unmanaged memory: 2.67 GiB -- Worker memory limit: 4.00 GiB
+2023-03-31 19:19:15,364 - distributed.worker_memory - WARNING - Unmanaged memory use is high. This may indicate a memory leak or the memory may not be released to the OS; see https://distributed.dask.org/en/latest/worker.html#memtrim for more information. -- Unmanaged memory: 2.77 GiB -- Worker memory limit: 4.00 GiB
+
+ ...
+
+2023-03-31 19:40:35,851 - distributed.worker_memory - WARNING - Unmanaged memory use is high. This may indicate a memory leak or the memory may not be released to the OS; see https://distributed.dask.org/en/latest/worker.html#memtrim for more information. -- Unmanaged memory: 2.66 GiB -- Worker memory limit: 4.00 GiB
+2023-03-31 19:40:36,265 - distributed.utils_perf - WARNING - full garbage collections took 33% CPU time recently (threshold: 10%)
+2023-03-31 19:40:36,384 - distributed.worker_memory - WARNING - Unmanaged memory use is high. This may indicate a memory leak or the memory may not be released to the OS; see https://distributed.dask.org/en/latest/worker.html#memtrim for more information. -- Unmanaged memory: 2.70 GiB -- Worker memory limit: 4.00 GiB
+2023-03-31 19:40:38,542 - distributed.utils_perf - WARNING - full garbage collections took 20% CPU time recently (threshold: 10%)
+2023-03-31 19:40:39,007 - distributed.utils_perf - WARNING - full garbage collections took 23% CPU time recently (threshold: 10%)
+
+DoneAndNotDoneFutures(done={<Future: error, key: finalize-e92147f1de33377e5d699b9a433833ce>, <Future: error, key: finalize-84b8df9a83cf66156a75066a2ac1e76d>, <Future: finished, type: pandas.core.frame.DataFrame, key: finalize-ab97ef0c5f1a508ff7794c880dc52904>, <Future: error, type: pandas.core.frame.DataFrame, key: finalize-fa12a3d29b570a5c9fde46ad4bb4b54e>, <Future: error, key: finalize-27d9405ba12f958c13d758e631561dc1>, <Future: error, key: finalize-62c1aac7865d455c15c608feb900b359>, <Future: finished, type: pandas.core.frame.DataFrame, key: finalize-0736bf3a3c1b701cf111a7602b94688f>, <Future: finished, type: pandas.core.frame.DataFrame, key: finalize-e7a25f8b5dec897b1324baeb1058e0ae>, <Future: error, key: finalize-04ea3d501751890ece2130a20efc5dba>, <Future: error, key: finalize-d7140f09799374ca916b3cbb28816323>, <Future: error, key: finalize-89541c92fdaf68ded72329388778eadf>, <Future: error, key: finalize-0dde02417f66f47d1f389e64ee5fb966>}, not_done=set())
 ```
-
-Below is an example of the above code crashing a cluster when run in a jupyter lab session.
-
-<img
-src="/posts/scaling-python/oom-error.png"
-alt="A picture of a jupyter notebook input and output cells. The output is showing dask worker usage warnings."
-/>
 
 ### Manual throttling
 
