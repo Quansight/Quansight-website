@@ -257,6 +257,8 @@ futs = client.compute(graphs)
 wait(futs)
 ```
 
+Below is an example of the above code crashing a cluster when run in a jupyter lab session.
+
 <img
 src="/posts/scaling-python/oom-error.png"
 alt="A picture of a jupyter notebook input and output cells. The output is showing dask worker usage warnings."
@@ -392,8 +394,13 @@ dataset, summing our re-indexed dataframe was about 3 times faster
 than running a group-by operation on the equivalent concatenated
 dataframe.
 
+```python
+>>> %timeit concated_list_of_dfs.groupby(['path', 'Date']).sum()
+1.77 s ± 72.3 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+```
+
 <img
-src="/posts/scaling-python/groupby_sum.png"
+src="/posts/scaling-python/groupby_sum_diagram.png"
 alt="An image of a dataframe that shows the before and after of an groupby operation."
 />
 
@@ -406,11 +413,6 @@ alt="An image of a dataframe that shows the before and after of an groupby opera
 src="/posts/scaling-python/df_list_sum.png"
 alt="An image of a dataframe that shows the before and after diagram for summing a list of dataframes."
 />
-
-```python
->>> %timeit concated_list_of_dfs.groupby(['path', 'Date']).sum()
-1.77 s ± 72.3 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
-```
 
 We were still having a bit of trouble with getting the dataframes at
 the right place at the right time though. We also wanted our
@@ -461,6 +463,33 @@ size to the workers. The workers will then apply the mappings and the
 aggregation to each batch. And finally, the workers will re-partition
 and apply the mappings and aggregation on the new batches until the
 dataset is fully aggregated
+
+```python
+def load_dataframe(data):
+    df = pd.read_parquet(
+        data,
+        storage_options=storage_options
+    )
+    df = df.set_index(['Date'], append=True)
+    return df
+
+@delayed
+def info(df):
+    buffer = io.StringIO()
+    df.info(buf=buffer)
+    return buffer.getvalue()
+
+def build_task_graph(filepaths):
+    part_size = 5
+    with dask.annotate(resources={'MEMORY': 200*part_size}):
+        b = db.from_sequence(filepaths, partition_size=part_size)
+        dfs = b.map(load_dataframe)
+        summed_df = dfs.sum()
+    with dask.annotate(resources={'MEMORY': 200}):
+        delayed_df = summed_df.to_delayed(optimize_graph=True)
+    info_delayed = info(delayed_df)
+    return info_delayed
+```
 
 <img
 src="/posts/scaling-python/dask-bag.png"
