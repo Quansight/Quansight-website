@@ -157,15 +157,31 @@ would be forced to pause or restart when the memory thresholds for the
 cluster were reached causing the job to fail.
 
 ```python
-graph = build_graph(paths_10)
-fut = client.compute(graph)
-fut.result().info()
-```
+>>> graph = build_graph(paths_10)
+>>> fut = client.compute(graph)
+>>> fut.result().info()
 
-<img
-src="/posts/scaling-python/dd-larger-than-cluster-jlab.png"
-alt="A picture of a jupyter notebook input and output cells for the code above. The output cell of the jupyter notebook shows a KilledWorker error."
-/>
+2023-03-31 18:58:33,630 - distributed.worker_memory - WARNING - Worker is at 83% memory usage. Pausing worker.  Process memory: 3.33 GiB -- Worker memory limit: 4.00 GiB
+2023-03-31 18:58:33,792 - distributed.worker_memory - WARNING - Worker is at 76% memory usage. Resuming worker. Process memory: 3.07 GiB -- Worker memory limit: 4.00 GiB
+2023-03-31 18:58:33,893 - distributed.worker_memory - WARNING - Worker is at 89% memory usage. Pausing worker.  Process memory: 3.60 GiB -- Worker memory limit: 4.00 GiB
+2023-03-31 18:58:33,934 - distributed.worker_memory - WARNING - Worker exceeded 95% memory budget. Restarting
+2023-03-31 18:58:33,977 - distributed.nanny - WARNING - Restarting worker
+2023-03-31 18:58:51,739 - distributed.worker_memory - WARNING - Worker is at 86% memory usage. Pausing worker.  Process memory: 3.46 GiB -- Worker memory limit: 4.00 GiB
+2023-03-31 18:58:52,334 - distributed.worker_memory - WARNING - Worker exceeded 95% memory budget. Restarting
+2023-03-31 18:58:52,376 - distributed.nanny - WARNING - Restarting worker
+---------------------------------------------------------------------------
+KilledWorker                              Traceback (most recent call last)
+File <timed exec>:3
+
+File ~/.conda/envs/bank/lib/python3.8/site-packages/distributed/client.py:283, in Future.result(self, timeout)
+    281 if self.status == "error":
+    282     typ, exc, tb = result
+--> 283     raise exc.with_traceback(tb)
+    284 elif self.status == "cancelled":
+    285     raise result
+
+KilledWorker: ("('dataframe-groupby-sum-chunk-d4e753da53a3eff842bab7cbba152105-e7aebcddb75c44615a5bb2eb1e6f9433', 82)", <WorkerState 'tcp://127.0.0.1:42571', name: 1, status: closed, memory: 0, processing: 39>)
+```
 
 <img
 src="/posts/scaling-python/dd-larger-than-cluster-dask.png"
