@@ -144,6 +144,7 @@ fut.result().info()
 <img
 src="/posts/scaling-python-banking-edition/dd-groupby-dask-dashboard.png"
 alt="A picture of a jupyter notebook input and output cells, next to an image of the cell contents equivilent dask graph being run"
+width="700px"
 />
 
 However, as we noted earlier, our resources may be limited. What
