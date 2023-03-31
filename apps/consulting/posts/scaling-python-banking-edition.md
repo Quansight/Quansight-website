@@ -1,11 +1,11 @@
 ---
-title: 'Scaling Python'
+title: 'Scaling Python: Banking Edition'
 published: March 28, 2023
 author: andrew-fulton
 description: 'In this post, we walk you through how Quansight helped a banking client through this process of scaling in a real life scenario.'
 category: [Scalable Computing, Optimization, Data Engineering]
 featuredImage:
-  src: /posts/scaling-python/header.png
+  src: /posts/scaling-python-banking-edition/header.png
   alt: 'summing dataframes visualization'
 hero:
   imageSrc: /posts/hero-paris.webp
@@ -49,7 +49,7 @@ possible. To complicate the problem, we had to be able to accomplish
 this while accounting for potentially limited compute resources.
 
 <img
-src="/posts/scaling-python/introduction-img-1.png"
+src="/posts/scaling-python-banking-edition/introduction-img-1.png"
 alt="Three dataframes stacked on top of each other. Each dataframe has index named path with values ranging from 0-49,999. Each has two columns. The first is named Date. The second column is labeled value. The dataframes are labeled File 1, File 2, ..., File N. to the right of the stacked dataframes is an arrow with the text sum inside of it. To the right of the arrow is another dataframe representing the sum of the three dataframes by path and date."
 />
 
@@ -94,7 +94,7 @@ loaded into GPU memory. Then the computation is run using one of the
 above tools, and then finally the data is extracted back to the host.
 
 <img
-src="/posts/scaling-python/pygpu-cuda-algorithm.png"
+src="/posts/scaling-python-banking-edition/pygpu-cuda-algorithm.png"
 alt="An image representing a flow diagram of the pyGPU-cuda algorith."
 />
 
@@ -142,7 +142,7 @@ fut.result().info()
 ```
 
 <img
-src="/posts/scaling-python/dd-groupby-dask-dashboard.png"
+src="/posts/scaling-python-banking-edition/dd-groupby-dask-dashboard.png"
 alt="A picture of a jupyter notebook input and output cells, next to an image of the cell contents equivilent dask graph being run"
 />
 
@@ -184,7 +184,7 @@ KilledWorker: ("('dataframe-groupby-sum-chunk-d4e753da53a3eff842bab7cbba152105-e
 ```
 
 <img
-src="/posts/scaling-python/dd-larger-than-cluster-dask.png"
+src="/posts/scaling-python-banking-edition/dd-larger-than-cluster-dask.png"
 alt="An image of the dask dashboard with the results a dask graph representing the code above and the resulting run failing."
 />
 
@@ -243,7 +243,7 @@ fut.result().info()
 ```
 
 <img
-src="/posts/scaling-python/dd-chunking-dask-graph.png"
+src="/posts/scaling-python-banking-edition/dd-chunking-dask-graph.png"
 alt="The dask graph build by the code above."
 />
 
@@ -369,7 +369,7 @@ def submit_via_threadpool(graphs):
 ```
 
 <img
-src="/posts/scaling-python/throttling.png"
+src="/posts/scaling-python-banking-edition/throttling.png"
 alt="An image of the above code being run as represented by the dask dashboard."
 />
 
@@ -422,7 +422,7 @@ dataframe.
 ```
 
 <img
-src="/posts/scaling-python/groupby_sum_diagram.png"
+src="/posts/scaling-python-banking-edition/groupby_sum_diagram.png"
 alt="An image of a dataframe that shows the before and after of an groupby operation."
 />
 
@@ -432,7 +432,7 @@ alt="An image of a dataframe that shows the before and after of an groupby opera
 ```
 
 <img
-src="/posts/scaling-python/df_list_sum.png"
+src="/posts/scaling-python-banking-edition/df_list_sum.png"
 alt="An image of a dataframe that shows the before and after diagram for summing a list of dataframes."
 />
 
@@ -462,7 +462,7 @@ to pivot away from the aggregation strategy and try something
 different.
 
 <img
-src="/posts/scaling-python/cluster-of-clusters.png"
+src="/posts/scaling-python-banking-edition/cluster-of-clusters.png"
 width="400px"
 alt="A diagram showing how cluster of Cluster works. It contains a box with the text Outer Dask Cluster. Inside there are 4 boxes, 1 on the left and three on the right. There multi directional arrows between the box on the left and the boxes on the right. Each box is labeled 'K8s Node'. The box on the left encapsulates another box with the text Dask Scheduler. Each box on the right encapsulates a box with the text Dask Worker. That box encapsulates another box with the text Dask LocalCluster"
 />
@@ -514,7 +514,7 @@ def build_task_graph(filepaths):
 ```
 
 <img
-src="/posts/scaling-python/dask-bag.png"
+src="/posts/scaling-python-banking-edition/dask-bag.png"
 alt="A picture of a jupyter notebook input cell, next to an image of the cell contents equivilent dask graph being run. The input cell has the code for a dask bag data frame summation wit resource annotations."
 />
 
@@ -575,7 +575,7 @@ visualization dashboard. It also integrates nicely with Dask to run
 each dask on a dask cluster.
 
 <img
-src="/posts/scaling-python/prefect-flow.png"
+src="/posts/scaling-python-banking-edition/prefect-flow.png"
 alt="A diagram of a prefect flow."
 />
 
@@ -617,7 +617,7 @@ risk of one failure jeopardizing other work, will still allowing us to
 scale to the resources we needed.
 
 <img
-src="/posts/scaling-python/argo-workflow.png"
+src="/posts/scaling-python-banking-edition/argo-workflow.png"
 alt="An Argo Workflows cluster. It shows a Fast API server connecting argo worflow pods. Two of those pods start up local dask clusters. The third starts up a distributed dask cluster for doing large aggregations."
 />
 
