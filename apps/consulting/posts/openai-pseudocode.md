@@ -41,7 +41,7 @@ docstrings and provide easy ways to have automated tests.
 
 ## Example
 
-Let's use a concrete example of a slightly non-trivial usage getting
+Let's use a concrete example of a slightly non-trivial task of getting
 Github issues.
 
 ```python
@@ -73,102 +73,104 @@ def get_issues(respository: str) -> typing.List[typing.Tuple[str, int, datetime.
 print('github issues', get_issues("conda/conda"))
 ```
 
-It is hard to remember how to use the github API exactly and
-inevitably requires some back and forth using the
-[PyGithub](https://github.com/PyGithub/PyGithub) python library,
-requests, and viewing API documentation. LLMs show promise for these
-applications since there is a large amount of surrounding
+We feel this is a good example because it is hard to remember how to
+use the github API exactly and inevitably requires some back and forth
+using the [PyGithub](https://github.com/PyGithub/PyGithub) python
+library, requests, and viewing API documentation. LLMs show promise
+for these applications since there is a large amount of surrounding
 documentation but no one example to do exactly what you
 need. `pseudocode` enforces the practice of creating an __interface__
 specification which:
  - declares the function signature `def get_issues(respository: str) -> typing.List[typing.Tuple[str, int, datetime.datetime]]`
- - has a docstring which specifies what the function should actually be doing
- - has automated tests which can be run by `pseudocode` to provide automated feedback to the LLM of the quality of the code generated
+ - uses the function's `docstring` to specify what the function should be doing
+ - automated tests run by `pseudocode` to provide feedback to the LLM of the quality and correctness of the code generated
 
 When you run the following code you will see the following.
 
 ```shell
-╭────────────────────────────────────────────────────── Function Specification ───────────────────────────────────────────────────────╮
-│                                                                                                                                     │
-│ The following is a short description of what this function should do "A function to fetch all issues created by".                   │
-│ A longer more detailed description of what this function should do is as follows:                                                   │
-│ A function that does the following:                                                                                                 │
-│  - assume you have a github token environment variable GITHUB_TOKEN                                                                 │
-│  - assume that repositiory is of the form organization/repo                                                                         │
-│  - use the requests library                                                                                                         │
-│  - fetch all github issues from repository in last 10 days                                                                          │
-│  - only show issue numbers which are odd                                                                                            │
-│  - return a tuple with issue titles, number, and date created                                                                       │
-│ The function takes the following arguments:                                                                                         │
-│  - variable "respository" of python type "<class 'str'>"                                                                            │
-│ This function must return a result of python type "typing.List[typing.Tuple]".                                                      │
-│ Output code that will satisfy the given requirements.                                                                               │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭──────────────────────────────────────────────────────────── Code Review ────────────────────────────────────────────────────────────╮
-│                                                                                                                                     │
-│ import os                                                                                                                           │
-│ import datetime                                                                                                                     │
-│ import requests                                                                                                                     │
-│                                                                                                                                     │
-│ def run(repository: str) -> list:                                                                                                   │
-│                                                                                                                                     │
-│     headers = {                                                                                                                     │
-│         'Authorization': f"Bearer {os.environ['GITHUB_TOKEN']}",                                                                    │
-│         'Accept': 'application/vnd.github.v3+json'                                                                                  │
-│     }                                                                                                                               │
-│                                                                                                                                     │
-│     url = f"https://api.github.com/repos/{repository}/issues"                                                                       │
-│                                                                                                                                     │
-│     now = datetime.datetime.now()                                                                                                   │
-│     ten_days_ago = now - datetime.timedelta(days=10)                                                                                │
-│                                                                                                                                     │
-│     response = requests.get(url, headers=headers, params={"since": ten_days_ago})                                                   │
-│                                                                                                                                     │
-│     issues = response.json()                                                                                                        │
-│     odd_issue_numbers = [f"{issue['number']}" for issue in issues if issue['number'] % 2 != 0]                                      │
-│                                                                                                                                     │
-│     result = []                                                                                                                     │
-│     for issue in issues:                                                                                                            │
-│         if str(issue['number']) in odd_issue_numbers:                                                                               │
-│             result.append((issue['title'], issue['number'], issue['created_at']))                                                   │
-│                                                                                                                                     │
-│     return result                                                                                                                   │
-│                                                                                                                                     │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭────────────────────────────────────────────────────── Function Specification ────────────────────────────────────╮
+│                                                                                                                  │
+│ The following is a short description of what this function should do "A function to fetch all issues created by".│
+│ A longer more detailed description of what this function should do is as follows:                                │
+│ A function that does the following:                                                                              │
+│  - assume you have a github token environment variable GITHUB_TOKEN                                              │
+│  - assume that repositiory is of the form organization/repo                                                      │
+│  - use the requests library                                                                                      │
+│  - fetch all github issues from repository in last 10 days                                                       │
+│  - only show issue numbers which are odd                                                                         │
+│  - return a tuple with issue titles, number, and date created                                                    │
+│ The function takes the following arguments:                                                                      │
+│  - variable "respository" of python type "<class 'str'>"                                                         │
+│ This function must return a result of python type "typing.List[typing.Tuple]".                                   │
+│ Output code that will satisfy the given requirements.                                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────── Code Review ─────────────────────────────────────────╮
+│                                                                                                                  │
+│ import os                                                                                                        │
+│ import datetime                                                                                                  │
+│ import requests                                                                                                  │
+│                                                                                                                  │
+│ def run(repository: str) -> list:                                                                                │
+│                                                                                                                  │
+│     headers = {                                                                                                  │
+│         'Authorization': f"Bearer {os.environ['GITHUB_TOKEN']}",                                                 │
+│         'Accept': 'application/vnd.github.v3+json'                                                               │
+│     }                                                                                                            │
+│                                                                                                                  │
+│     url = f"https://api.github.com/repos/{repository}/issues"                                                    │
+│                                                                                                                  │
+│     now = datetime.datetime.now()                                                                                │
+│     ten_days_ago = now - datetime.timedelta(days=10)                                                             │
+│                                                                                                                  │
+│     response = requests.get(url, headers=headers, params={"since": ten_days_ago})                                │
+│                                                                                                                  │
+│     issues = response.json()                                                                                     │
+│     odd_issue_numbers = [f"{issue['number']}" for issue in issues if issue['number'] % 2 != 0]                   │
+│                                                                                                                  │
+│     result = []                                                                                                  │
+│     for issue in issues:                                                                                         │
+│         if str(issue['number']) in odd_issue_numbers:                                                            │
+│             result.append((issue['title'], issue['number'], issue['created_at']))                                │
+│                                                                                                                  │
+│     return result                                                                                                │
+│                                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 What code feedback would you like to provide? (leave empty for approval): 
 ```
 
-In this case we specified `review=True` in the decorator which
-prompted `pseudocode` to ask for use feedback on the code generated.
+`pseudocode` generates appropriate prompts to the LLM asking it to
+provide code in response to the user's requirements. In this case we
+specified `review=True` in the decorator which prompted `pseudocode`
+to ask for user feedback on the generated code.
 
 ```shell
 What code feedback would you like to provide? (leave empty for approval): this code is messy can you simplify it?
-╭─────────────────────────────────────────────────────────── LLM Feedback ────────────────────────────────────────────────────────────╮
-│ this code is messy can you simplify it?                                                                                             │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-╭──────────────────────────────────────────────────────────── Code Review ────────────────────────────────────────────────────────────╮
-│                                                                                                                                     │
-│ import os                                                                                                                           │
-│ import datetime                                                                                                                     │
-│ import requests                                                                                                                     │
-│                                                                                                                                     │
-│ def run(repository: str) -> list:                                                                                                   │
-│     headers = {'Authorization': f"Bearer {os.environ['GITHUB_TOKEN']}"}                                                             │
-│     url = f"https://api.github.com/repos/{repository}/issues"                                                                       │
-│     since = datetime.datetime.now() - datetime.timedelta(days=10)                                                                   │
-│     params = {'since': since.isoformat()}                                                                                           │
-│     response = requests.get(url, headers=headers, params=params)                                                                    │
-│     issues = response.json()                                                                                                        │
-│     return [(i['title'], i['number'], i['created_at']) for i in issues if i['number'] % 2 != 0]                                     │
-│                                                                                                                                     │
-╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─────────────────────────────────────────────────────────── LLM Feedback ─────────────────────────╮
+│ this code is messy can you simplify it?                                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭──────────────────────────────────────────────────────────── Code Review ─────────────────────────╮
+│                                                                                                  │
+│ import os                                                                                        │
+│ import datetime                                                                                  │
+│ import requests                                                                                  │
+│                                                                                                  │
+│ def run(repository: str) -> list:                                                                │
+│     headers = {'Authorization': f"Bearer {os.environ['GITHUB_TOKEN']}"}                          │
+│     url = f"https://api.github.com/repos/{repository}/issues"                                    │
+│     since = datetime.datetime.now() - datetime.timedelta(days=10)                                │
+│     params = {'since': since.isoformat()}                                                        │
+│     response = requests.get(url, headers=headers, params=params)                                 │
+│     issues = response.json()                                                                     │
+│     return [(i['title'], i['number'], i['created_at']) for i in issues if i['number'] % 2 != 0]  │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
 What code feedback would you like to provide? (leave empty for approval):
 ```
 
 Already after some quick initial feedback we can see that the LLM
-takes into account the user feedback. If we do not provide feedback
-then automated tests are run, if those tests fail or run into
-exceptions they will be automatically passed back to the LLM.
+takes into account the users needs. After user provided feedback the
+automated tests are run. If those tests fail or run into exceptions
+they will be automatically passed back to the LLM for corrections.
 
 ```
 pass result = str(all([_[1] % 2 == 1 for _ in run("conda/conda")]))
@@ -184,13 +186,12 @@ github issues [
 There are several key ideas here we want to highlight about why we
 think the approaches taken in `pseudocode` are unique.
 
- * Some feedback is generated from the user and the rest is guided by
+ * Feedback is generated from the user and the rest is guided by
    automated testing and exception reporting back to the
-   LLM. Autogenerated code needs guidance.
+   LLM. __Autogenerated code needs guidance__.
 
  * Declaring interfaces for LLMs to operate within. Interface design
-   is naturally high level thinking and is the key to composable
-   generated code.
+   is naturally a high level task which is the key to composable code.
 
  * Separation of code declarations and generated code. Similar to
    `.py` and `.pyc` files.
@@ -199,9 +200,12 @@ We mentioned earlier that this was an experiment of the interaction
 between automated testing, user feedback, and LLMs. We want to explore
 this more and already have additional ideas we would like to
 explore. We would like to apply formatting and linting to generated
-LLM code. Caching of LLM code generated to avoid repetative API
-calls. Similar to `pseudocode.pseudo_function(...)` it would be nice
-to have an equivalent for arbitrary files. This feels somewhat like
+LLM code via [black](https://black.readthedocs.io/en/stable/),
+[ruff](https://github.com/charliermarsh/ruff), and
+[isort](https://pycqa.github.io/isort/). Caching of LLM code generated
+to avoid repetitive API calls and a database of reusable code. Similar
+to `pseudocode.pseudo_function(...)` it would be nice to have an
+equivalent for arbitrary files. This feels somewhat like
 [cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) on
 steriods
 
