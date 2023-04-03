@@ -104,15 +104,15 @@ This section will cover the process for each type of change.
 
 ### Content changes (Storyblok) 📰
 
-Content in Storyblok moves through several stages: drafting -> reviewing ->
-ready to publish -> published -> deployed. It's confusing, but "published" in
-our Storyblok configuration does not mean that the content has gone live on the
+Content in Storyblok moves through several stages: drafting -> reviewing -> ready to
+publish -> published -> deployed.
+It's confusing, but "published" in our Storyblok
+configuration does not mean that the content has gone live on the
 corresponding public website. However, you should never publish any content in
 Storyblok if it is not ready for public presentation. In our configuration,
 publishing content in Storyblok is a signal to the rest of the team that says:
-this content is ready at any time to appear on the public website, whenever the
-next live build is executed. **If it's not ready, don't hit the publish
-button.**
+this content is ready at any time to appear on the public website, whenever the next live build . **If it's not
+ready, don't hit the publish button.**
 
 The Storyblok process is covered in more detail in the [GitHub repo's wiki](https://github.com/Quansight/Quansight-website/wiki).
 A simplified version is presented here.
