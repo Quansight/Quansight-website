@@ -40,23 +40,23 @@ Copilot](https://github.com/features/copilot), show the power of AI
 assisted coding to boost productivity. Our testing has shown however
 that while CoPilot can greatly assist a developer, it is also prone to
 hallucinations inventing new methods that don't exist or sometimes
-using outdated api's that no longer exist in recent versions of the
+using outdated APIs that no longer exist in recent versions of the
 code.
 
-We decided to experiment to if we could add a feedback loop into the
-process of code generation to reduce model hallucinations and iterate
-towards a working solution faster. We also wanted to experiment with
-adding conversational feedback to the results rather than the
-auto-complete mechanism that CoPilot currently implements (Note:
-CoPilot just announced a preview release of a [conversational chat
-based mode](https://github.blog/2023-03-22-github-copilot-x-the-ai-powered-developer-experience/).
+We decided to see if we could add a feedback loop into the process of
+code generation to reduce model hallucinations and iterate towards a
+working solution faster. We also wanted to experiment with adding
+conversational feedback to the results rather than the auto-complete
+mechanism that CoPilot currently implements (Note: CoPilot just
+announced a preview release of a [conversational chat based
+mode](https://github.blog/2023-03-22-github-copilot-x-the-ai-powered-developer-experience/).
 
-As an experiment we developed a python package
+As an experiment we developed a Python package
 [pseudocode](https://github.com/Quansight/pseudocode) which allows
 developers to annotate their code and produce testable code generated
 by LLMs without the user writing any code. We hope that
 [pseudocode](https://github.com/Quansight/pseudocode) may be a "higher
-level language" for writing python code. Below you will find an
+level language" for writing Python code. Below you will find an
 example. We emphasize interfaces via type annotations and function
 docstrings and provide easy ways to have automated tests.
 
@@ -111,7 +111,7 @@ print('github issues', get_issues("conda/conda"))
 
 We feel this is a good example because it is hard to remember how to
 use the GitHub API exactly and inevitably requires some back and forth
-using the [PyGithub](https://github.com/PyGithub/PyGithub) python
+using the [PyGithub](https://github.com/PyGithub/PyGithub) Python
 library, API requests, and viewing API documentation. LLMs show promise
 
 for these applications since there is a large amount of surrounding
