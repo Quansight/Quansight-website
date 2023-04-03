@@ -643,8 +643,8 @@ hero:
    [Structure of the blog post section](#structure-of-the-blog-post) in this
    file to ensure that the post is properly structured.
 4. Commit and push your changes to the repository. For commits please follow the
-   format of the conventional commit.
-   [See](https://www.conventionalcommits.org/en/v1.0.0/)
+   format of the conventional commit. See the
+   [Conventional Commits docs](https://www.conventionalcommits.org/en/v1.0.0/).
 5. Create a pull request to the `develop` branch. Make sure to add the
    `type: content 📝`, `owner: Quansight`, and either `labs 🔭` or
    `consulting 🤝` labels to the PR.
