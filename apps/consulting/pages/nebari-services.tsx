@@ -39,8 +39,8 @@ export const Index: FC<TContainerProps> = ({
     }
   >
     <SEO
-      title={data.content.title}
-      description={data.content.description}
+      title="Nebari Services | Quansight Consulting"
+      description="Nebari is designed to be deployed and managed without DevOps expertise. However, if you need support, we offer flexible service options. Learn about Nebari."
       variant={DomainVariant.Quansight}
     />
 
@@ -435,10 +435,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       data: {
-        content: {
-          title: 'Nebari',
-          description: 'Nebari helps your data scientists focus on the data',
-        },
+        content: {},
       } as PageItem,
       header,
       footer,
