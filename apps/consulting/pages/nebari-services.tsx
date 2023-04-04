@@ -22,8 +22,7 @@ import morningstarLogo from '../public/nebari-services/morningstar-logo.png';
 import nebariLogo from '../public/nebari-services/nebari-logo.svg';
 import { TContainerProps } from '../types/containerProps';
 
-export const Index: FC<TContainerProps> = ({
-  data,
+export const NebariServicesPage: FC<TContainerProps> = ({
   header,
   footer,
   preview,
@@ -39,7 +38,7 @@ export const Index: FC<TContainerProps> = ({
     }
   >
     <SEO
-      title="Nebari Services | Quansight Consulting"
+      title="Nebari Services"
       description="Nebari is designed to be deployed and managed without DevOps expertise. However, if you need support, we offer flexible service options. Learn about Nebari."
       variant={DomainVariant.Quansight}
     />
@@ -110,14 +109,18 @@ export const Index: FC<TContainerProps> = ({
     <section className="bg-gray-200">
       <h2 className="sr-only">Used by</h2>
       <div className="flex flex-col items-center p-20 mx-auto space-y-20 md:overflow-hidden md:flex-row md:justify-evenly md:py-2 md:px-32 md:space-y-0 md:space-x-8 max-w-layout">
-        <Image alt="Morningstar" src={morningstarLogo} width={137} />
+        <Image alt="Morningstar" src={morningstarLogo} className="w-[137px]" />
         <Image
           alt="Earth Science Information Partners"
           src={esipLogo}
-          width={110}
+          className="w-[110px]"
         />
-        <Image alt="Earth Big Data" src={earthBigDataLogo} width={223} />
-        <Image alt="Confluency" src={confluencyLogo} width={131} />
+        <Image
+          alt="Earth Big Data"
+          src={earthBigDataLogo}
+          className="w-[223px]"
+        />
+        <Image alt="Confluency" src={confluencyLogo} className="w-[131px]" />
       </div>
     </section>
 
@@ -434,9 +437,7 @@ export const getStaticProps: GetStaticProps<
   const header = await getHeader(preview);
   return {
     props: {
-      data: {
-        content: {},
-      } as PageItem,
+      data: {} as PageItem,
       header,
       footer,
       preview,
@@ -444,4 +445,4 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export default Index;
+export default NebariServicesPage;
