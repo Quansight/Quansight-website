@@ -368,12 +368,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
                   tools and simple configuration scripts. Nebari is not only
                   easy to deploy and maintain, but our users have found
                   conda-store to be critical for effectively working with
-                  research workflows. Most open source packages [inlcuding
-                  Nebari] use a release-early-and-often approach and users are
-                  eager to try new features, and conda-store is a killer-feature
-                  for any user to update environments that work with Dask
-                  Gateway clusters without building and distributed huge Docker
-                  images.
+                  research workflows.
                 </p>
               </blockquote>
               <figcaption className="mb-[4em] text-[1.8rem] font-bold leading-[2.7rem]">
