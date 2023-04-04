@@ -20,7 +20,6 @@ import earthBigDataLogo from '../public/nebari-services/earth-big-data-logo.png'
 import esipLogo from '../public/nebari-services/esip-logo.png';
 import morningstarLogo from '../public/nebari-services/morningstar-logo.png';
 import nebariLogo from '../public/nebari-services/nebari-logo.svg';
-import videoPlaceholder from '../public/nebari-services/video-placeholder.svg';
 import { TContainerProps } from '../types/containerProps';
 
 export const Index: FC<TContainerProps> = ({
@@ -87,11 +86,15 @@ export const Index: FC<TContainerProps> = ({
           </li>
         ))}
       </ul>
-      <Image
-        className="px-8 mb-[7rem] w-[100%] max-w-[900px] md:p-0"
-        alt="video"
-        src={videoPlaceholder}
-      />
+      {/* eslint-disable jsx-a11y/media-has-caption */}
+      <video controls className="px-8 mb-[7rem] w-[100%] max-w-[900px] md:p-0">
+        <source src="/nebari-services/demo.mp4" />
+        <p>
+          A silent video demo of Nebari features using screen recordings and
+          slides
+        </p>
+      </video>
+      {/* eslint-enable jsx-a11y/media-has-caption */}
       <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-[#20AAA1]">
         <Link href="/about-us#bookacallform">
           <a className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading">
