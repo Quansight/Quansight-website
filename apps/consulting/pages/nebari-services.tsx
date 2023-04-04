@@ -17,10 +17,9 @@ import { getFooter } from '../api/utils/getFooter';
 import { getHeader } from '../api/utils/getHeader';
 import confluencyLogo from '../public/nebari-services/confluency-logo.png';
 import earthBigDataLogo from '../public/nebari-services/earth-big-data-logo.png';
+import esipLogo from '../public/nebari-services/esip-logo.png';
 import morningstarLogo from '../public/nebari-services/morningstar-logo.png';
 import nebariLogo from '../public/nebari-services/nebari-logo.svg';
-import quansightLogo from '../public/nebari-services/quansight-logo.png';
-import usgsLogo from '../public/nebari-services/usgs-logo.png';
 import videoPlaceholder from '../public/nebari-services/video-placeholder.svg';
 import { TContainerProps } from '../types/containerProps';
 
@@ -71,7 +70,7 @@ export const Index: FC<TContainerProps> = ({
         for teams with serious computational and collaboration needs, looking
         to:
       </p>
-      <ul className="mb-[4rem] w-[100%] max-w-[900px] list-none md:columns-2 md:gap-[82px] md:mb-[7.3rem]">
+      <ul className="mb-[4rem] w-[100%] max-w-[900px] list-none md:columns-2 md:gap-[82px] md:mb-[5rem]">
         {[
           'Work in familiar IDEs like JupyterLab or VSCode',
           'Scale work with built-in support for distributed computing with Dask',
@@ -89,11 +88,11 @@ export const Index: FC<TContainerProps> = ({
         ))}
       </ul>
       <Image
-        className="px-8 mb-[4.2rem] w-[100%] max-w-[900px] md:p-0"
+        className="px-8 mb-[7rem] w-[100%] max-w-[900px] md:p-0"
         alt="video"
         src={videoPlaceholder}
       />
-      <div className="py-[1.8rem] px-[2.9rem] mb-[1.9rem] text-center bg-[#20AAA1]">
+      <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-[#20AAA1]">
         <Link href="/about-us#bookacallform">
           <a className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading">
             Demo Nebari
@@ -106,12 +105,15 @@ export const Index: FC<TContainerProps> = ({
     </section>
 
     <section className="bg-gray-200">
-      <p className="sr-only">Used by:</p>
+      <h2 className="sr-only">Used by</h2>
       <div className="flex flex-col items-center p-20 mx-auto space-y-20 md:overflow-hidden md:flex-row md:justify-evenly md:py-2 md:px-32 md:space-y-0 md:space-x-8 max-w-layout">
         <Image alt="Morningstar" src={morningstarLogo} width={137} />
-        <Image alt="U.S. Geological Survey" src={usgsLogo} width={92} />
+        <Image
+          alt="Earth Science Information Partners"
+          src={esipLogo}
+          width={110}
+        />
         <Image alt="Earth Big Data" src={earthBigDataLogo} width={223} />
-        <Image alt="Quansight" src={quansightLogo} width={173} />
         <Image alt="Confluency" src={confluencyLogo} width={131} />
       </div>
     </section>
@@ -126,12 +128,21 @@ export const Index: FC<TContainerProps> = ({
         have complex existing infrastructure, Quansight has some service
         offerings to help you reach your goals.
       </p>
-      <p className="mb-[4em] text-[1.6rem] leading-[1.6] text-center md:max-w-[1016px]">
+      <p className="mb-[2em] text-[1.6rem] leading-[1.6] text-center md:max-w-[1016px]">
         As the creators of Nebari, we know it inside and out, and understand the
         underlying tools, including JupyterHub and Dask. We&apos;re experts in
         data science solutions, and have years of experience deploying and using
         Nebari for various client projects.
       </p>
+
+      <div className="py-[1.7rem] px-[3.5rem] mb-[6rem] text-center bg-[#BA18DD]">
+        <Link href="/about-us#bookacallform">
+          <a className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading">
+            Contact Sales
+          </a>
+        </Link>
+      </div>
+
       <div className="px-[10%] w-full md:grid md:grid-cols-3 md:gap-6 md:p-0 md:max-w-[1016px]">
         {/* Starter */}
         <div className="flex flex-col mb-[5.4rem] min-h-[55rem]">
@@ -277,6 +288,7 @@ export const Index: FC<TContainerProps> = ({
     </section>
 
     <section className="bg-black">
+      <h2 className="sr-only">Testimonials</h2>
       <div
         className="p-4 mx-auto max-w-layout"
         style={{
@@ -304,9 +316,6 @@ export const Index: FC<TContainerProps> = ({
             enabled: true,
           }}
           navigation={true}
-          // onSlideChange={(item) => {
-          //   setCurrentSlide(item.realIndex);
-          // }}
         >
           <SwiperSlide>
             <figure className="py-10 px-24 text-white">
