@@ -37,7 +37,7 @@ in a real-life scenario.
 
 For this project, we were tasked with deploying a large scale data processing
 pipeline for running valuation adjustment models using open source tools from
-the PyData ecosystem. We were given 140,000 simulation files, each around 140MB,
+the PyData ecosystem. We were given 140,000 simulation files, each around 140 MB,
 totaling about 20 TB. The data was stored in flat parquet files with columns
 `path`, `Date`, and `value`. Each file contained 50,000 simulations, where each
 simulation spanned the same set of 120 non-sequential dates into the future
