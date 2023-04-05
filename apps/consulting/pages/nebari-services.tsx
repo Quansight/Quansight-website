@@ -692,6 +692,14 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           </p>
         </details>
       </div>
+
+      <div className="py-[1.7rem] px-[3.5rem] mt-[6rem] text-center bg-[#BA18DD]">
+        <Link href="/about-us#bookacallform">
+          <a className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading">
+            Contact Sales
+          </a>
+        </Link>
+      </div>
     </section>
 
     <section className="flex flex-col items-center py-36 px-12 bg-black md:bg-white">
