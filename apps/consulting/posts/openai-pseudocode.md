@@ -254,7 +254,7 @@ and linting to generated LLM code via
 [ruff](https://github.com/charliermarsh/ruff), and
 [isort](https://pycqa.github.io/isort/), and caching of generated LLM
 code to avoid repetitive API calls and store a database of reusable
-code. Similar to `pseudocode.pseudo_function(...)`, it would be nice
+code. Similar to `pseudocode.pseudo_function(...)` shown below, it would be nice
 to have an equivalent for arbitrary files. This would provide a feel
 somewhat like
 [cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) on
