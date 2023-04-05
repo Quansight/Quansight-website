@@ -479,8 +479,8 @@ at a cluster-of-clusters approach.
 ### Cluster-of-Clusters
 
 We based our cluster-of-clusters implementation off of a [keynote at
-the 2021 dask
-summit][cluster of clusters keynote]. With
+the 2021 Dask
+Summit][cluster of clusters keynote]. With
 this setup, you have a normal Dask distributed cluster with a
 scheduler and a set of workers. Instead of passing your work directly
 to the scheduler as normal, though, you pass delayed objects that
