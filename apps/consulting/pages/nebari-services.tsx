@@ -296,7 +296,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
     <section className="bg-black">
       <h2 className="sr-only">Testimonials</h2>
       <div
-        className="p-4 mx-auto max-w-layout"
+        className="p-4 mx-auto sm:px-[3.4rem] xl:px-[11.5rem] max-w-layout"
         style={{
           background:
             'url(/nebari-services/nebari-logo-grayscale.svg) right bottom / 325px no-repeat',
@@ -419,6 +419,197 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             </figure>
           </SwiperSlide>
         </Swiper>
+      </div>
+    </section>
+
+    <section className="flex flex-col items-center py-28 px-12 mx-auto max-w-layout">
+      <h2 className="mb-[1em] text-[4.2rem] leading-[1.16] text-center font-heading">
+        Frequently Asked Questions
+      </h2>
+      <div className="w-full text-[1.6rem] font-normal leading-[1.3] sm:px-[3.4rem] xl:px-[11.5rem]">
+        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
+          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
+            How can I use Nebari as the platform for my team?
+          </summary>
+          <p>
+            The first step to using Nebari is{' '}
+            <a
+              href="https://www.nebari.dev/docs/get-started/installing-nebari"
+              className="underline decoration-from-font underline-offset-4"
+            >
+              installing and deploying
+            </a>{' '}
+            your Nebari instance. You can then add your team members to your
+            instance, and help them start working on the platform, leveraging
+            the compute and tools your Nebari instance provides. Our services
+            support you throughout this process.
+          </p>
+        </details>
+        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
+          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
+            How can I use Nebari as a blueprint to build my in-house platform
+          </summary>
+          <p>
+            Nebari is a free and open source project. You can go through the{' '}
+            <a
+              href="https://github.com/nebari-dev/nebari"
+              className="underline decoration-from-font underline-offset-4"
+            >
+              Nebari codebase hosted on GitHub
+            </a>{' '}
+            to understand how we built it. If you have questions or need help
+            building your own system, we&rsquo;ll be happy to support you! We
+            can discuss a custom support package for your needs:{' '}
+            <Link href="/about-us#bookacallform">
+              <a className="underline decoration-from-font underline-offset-4">
+                Contact us.
+              </a>
+            </Link>
+          </p>
+        </details>
+        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
+          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
+            Do you offer options for support hours only?
+          </summary>
+          <p>
+            Yes! We can discuss a custom support package for your needs:{' '}
+            <Link href="/about-us#bookacallform">
+              <a className="underline decoration-from-font underline-offset-4">
+                Contact us.
+              </a>
+            </Link>
+          </p>
+        </details>
+        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
+          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
+            Do you offer options for training only?
+          </summary>
+          <p>
+            Yes! You can choose from our catalog of{' '}
+            <a
+              href="https://quansight.com/training"
+              className="underline decoration-from-font underline-offset-4"
+            >
+              advanced PyData training courses
+            </a>
+            , or we can discuss a custom training package for your team:{' '}
+            <Link href="/about-us#bookacallform">
+              <a className="underline decoration-from-font underline-offset-4">
+                Contact us.
+              </a>
+            </Link>
+          </p>
+        </details>
+        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
+          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
+            Can I access GPUs on Nebari?
+          </summary>
+          <p>
+            Yes! You can configure certain instances with GPUs, and manage who
+            (users and groups) can access it.
+          </p>
+        </details>
+        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
+          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
+            How does Nebari compare SaaS products like Anaconda Enterprise,
+            Coiled, Databricks, Domino Cloud, Posit Cloud, Saturn Cloud, etc.?
+          </summary>
+          <p>
+            Some companies offer data science platforms as a subscription
+            service. They each solve unique problems and can be a great fit for
+            certain use cases, for example if you need only Dask or Spark on the
+            cloud, you will be able to find companies that specialize in these
+            domains. These companies are friends in the ecosystem, and we
+            encourage you to evaluate each option for your specific needs.
+          </p>
+          <p>
+            Nebari is primarily designed as a free and open source project for
+            the complete data science workflow, that can be quickly setup and
+            used by anyone without needing DevOps experience. The Nebari
+            services offered by Quansight help you work with Nebari.
+          </p>
+          <p>
+            Another useful resource for comparing options is the{' '}
+            <a
+              href="https://docs.2i2c.org/en/latest/about/service/comparison.html#overview-of-services"
+              className="underline decoration-from-font underline-offset-4"
+            >
+              2i2c documentation
+            </a>
+            .
+          </p>
+        </details>
+        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
+          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
+            How does Nebari compare to Cloud SaaS platforms like AWS Sagemaker?
+          </summary>
+          <p>
+            Several cloud providers offer their own SaaS products that integrate
+            with their cloud infrastructure. The most popular such platform is
+            AWS Sagemaker. Typically, these are designed for a support a broad
+            range of common use cases, and hence support widely used libraries
+            like PyTorch and Tensorflow, as well as some vendor-specific tools.
+          </p>
+          <p>
+            Nebari takes a very different approach because designed to be
+            vendor-agnostic. You can deploy it on any major cloud provider or
+            your in-house HPC cluster. Flexibility is one of the core values for
+            Nebari development, so it can adapt to your needs and support any
+            tool/library/service with minimal effort.
+          </p>
+          <p>You can select the approach that works best for your team.</p>
+        </details>
+        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
+          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
+            How does Nebari support compare to offerings from other consulting
+            companies like Anaconda and QuantStack?
+          </summary>
+          <p>
+            Many consulting companies offer to build a fresh platform specific
+            to your needs, and most tend to use OSS tools like Nebari&rsquo;s
+            internals. This can be a great option if you&rsquo;re looking for a
+            custom solution.
+          </p>
+          <p>
+            Nebari was born out of a similar need within Quansight, where
+            developers required a collaborative platform to work on client
+            projects. We created Nebari to be flexible and customizable from the
+            beginning, which allowed us to use it for a range of different
+            client projects. We have also deployed custom Nebari instances
+            tailored for client needs within their infrastructure.
+          </p>
+          <p>
+            Each consultancy has expertise with specific tools or cloud
+            providers, and you can select one that fits your requirements.
+          </p>
+          <p>
+            As creators of Nebari, Quansight has expertise with major cloud
+            providers (AWS, GCP, Azure, and Digital Ocean), Dask, Holoviz
+            ecosystem of visualization, environment management, Python
+            geospatial stack. As a consulting company, Quansight specializes in
+            several open source PyData libraries. If you&rsquo;re unsure about
+            your options, we can help bring clarity to your requirements:{' '}
+            <Link href="/about-us#bookacallform">
+              <a className="underline decoration-from-font underline-offset-4">
+                Contact us.
+              </a>
+            </Link>
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <section className="flex flex-col items-center py-36 px-12 bg-black md:bg-white">
+      <div className="mb-[1em] max-w-[70rem] text-[3rem] font-bold tracking-wide leading-[1.43] text-center text-white md:text-black font-heading">
+        <h2 className="inline">Learn more</h2> about Nebari deployment,
+        training, and support.
+      </div>
+      <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-[#EAB54E]">
+        <Link href="/about-us#bookacallform">
+          <a className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading">
+            Download the PDF
+          </a>
+        </Link>
       </div>
     </section>
   </Layout>
