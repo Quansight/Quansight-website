@@ -38,7 +38,7 @@ Between discussion sites like StackOverflow and code repositories like
 GitHub and GitLab, there is a tremendous amount of source code
 available online for potential training. Efforts like [Github
 Copilot](https://github.com/features/copilot), show the power of AI
-assisted coding to boost productivity. Our testing has shown however
+assisted coding to boost productivity. Our testing has shown, however,
 that while Copilot can greatly assist a developer, it is also prone to
 hallucinations inventing new methods that don't exist or sometimes
 using outdated APIs that no longer exist in recent versions of the
