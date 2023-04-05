@@ -51,7 +51,7 @@ iterate towards a working solution faster. We also experimented
 than the auto-complete mechanism that Copilot currently implements
 (Note: Copilot just announced a preview release of a [conversational
 chat based
-mode](https://github.blog/2023-03-22-github-copilot-x-the-ai-powered-developer-experience/).
+mode](https://github.blog/2023-03-22-github-copilot-x-the-ai-powered-developer-experience/)).
 
 As an experiment we developed a Python package
 [pseudocode](https://github.com/Quansight/pseudocode) which allows
