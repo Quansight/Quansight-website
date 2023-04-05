@@ -187,7 +187,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
             onClick={() =>
               prefillContactFormMessage(
-                'Hi, could you send me a Nebari login so that I can testdrive it for myself? Thanks!',
+                'Hi, could you send me a login to a demo instance of Nebari so that I can testdrive it for myself? Thanks!',
               )
             }
           >
