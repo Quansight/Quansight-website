@@ -693,20 +693,21 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </details>
       </div>
     </section>
-    {/*
+
     <section className="flex flex-col items-center py-36 px-12 bg-black md:bg-white">
       <div className="mb-[1em] max-w-[70rem] text-[3rem] font-bold tracking-wide leading-[1.43] text-center text-white md:text-black font-heading">
         <h2 className="inline">Learn more</h2> about Nebari deployment,
         training, and support.
       </div>
       <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-[#EAB54E]">
-        <Link href="/about-us#bookacallform">
-          <a className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading">
-            Download the PDF
-          </a>
-        </Link>
+        <a
+          href="https://a.storyblok.com/f/147759/x/ca2cc06c40/more-about-nebari-services.pdf"
+          className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
+        >
+          Download the PDF
+        </a>
       </div>
-    </section> */}
+    </section>
   </Layout>
 );
 
