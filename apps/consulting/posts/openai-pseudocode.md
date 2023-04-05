@@ -68,7 +68,7 @@ example. We emphasize that the interface is via type annotations and function do
    instructions
 4. Any feedback is resubmitted to the ChatGPT session to continue
    refining the code
-5. If the users provide feedback, then the feedback is sent back to
+5. If the user provides feedback, then the feedback is sent back to
    ChatGPT and we repeat the process
 6. We run the resulting code, and if the tests fail, we resubmit the
    errors to the ChatGPT session
