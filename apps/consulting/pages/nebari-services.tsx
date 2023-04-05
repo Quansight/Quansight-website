@@ -265,15 +265,23 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       <h3 className="mb-[1em] text-[3rem] font-bold tracking-wide leading-[4.3rem] text-center font-heading">
         Interested in Nebari services,
         <br />
-        or a more customized solution? Contact us about:
+        or a more customized solution?
       </h3>
+
+      <div className="py-[1.7rem] px-[3.5rem] mb-[1.9rem] text-center bg-[#BA18DD]">
+        <Link href="/about-us#bookacallform">
+          <a className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading">
+            Contact Sales
+          </a>
+        </Link>
+      </div>
 
       <ul className="flex flex-col grow-[3] items-center p-8 mb-[4rem] list-none">
         {[
           'A guided, hands-on Nebari demo',
-          'Custom integrations',
-          'Enterprise-level support',
           'General Nebari questions',
+          'Enterprise-level support',
+          'Custom integrations',
         ].map((txt) => (
           <li
             key={txt}
@@ -283,14 +291,6 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           </li>
         ))}
       </ul>
-
-      <div className="py-[1.7rem] px-[3.5rem] mb-[1.9rem] text-center bg-[#BA18DD]">
-        <Link href="/about-us#bookacallform">
-          <a className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading">
-            Contact Sales
-          </a>
-        </Link>
-      </div>
     </section>
 
     <section className="bg-black">
