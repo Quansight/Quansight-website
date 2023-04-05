@@ -47,7 +47,7 @@ code.
 We decided to experiment to see if we could add a feedback loop into
 the process of code generation to reduce model hallucinations and
 iterate towards a working solution faster. We also experimented
-experiment with adding conversational feedback to the results rather
+ with adding conversational feedback to the results rather
 than the auto-complete mechanism that Copilot currently implements
 (Note: Copilot just announced a preview release of a [conversational
 chat based
