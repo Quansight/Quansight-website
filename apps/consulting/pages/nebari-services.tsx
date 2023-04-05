@@ -598,7 +598,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </details>
       </div>
     </section>
-
+    {/*
     <section className="flex flex-col items-center py-36 px-12 bg-black md:bg-white">
       <div className="mb-[1em] max-w-[70rem] text-[3rem] font-bold tracking-wide leading-[1.43] text-center text-white md:text-black font-heading">
         <h2 className="inline">Learn more</h2> about Nebari deployment,
@@ -611,7 +611,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           </a>
         </Link>
       </div>
-    </section>
+    </section> */}
   </Layout>
 );
 
