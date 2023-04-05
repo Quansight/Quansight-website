@@ -78,7 +78,7 @@ Below we walk through a demonstration of this process.
 ## Example
 
 Let's use a concrete example of a slightly non-trivial task of getting
-Github issues.
+GitHub issues.
 
 ```python
 import typing
