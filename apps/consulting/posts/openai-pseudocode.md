@@ -122,7 +122,7 @@ specification which:
  - uses the function's `docstring` to specify what the function should be doing
  - automates tests run by `pseudocode` to provide feedback to the LLM of the quality and correctness of the code generated
 
-When you run the example above, you will see the following.
+The specification is essential for helping the LLM avoid hallucinating, and we have found that it is highly effective for the examples we've experimented with. When you run the example above, you will see the following.
 
 ```shell
 ╭────────────────────────────────────────────────────── Function Specification ────────────────────────────────────╮
