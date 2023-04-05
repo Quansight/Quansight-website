@@ -431,7 +431,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
             How can I use Nebari as the platform for my team?
           </summary>
-          <p>
+          <p className="max-w-prose">
             The first step to using Nebari is{' '}
             <a
               href="https://www.nebari.dev/docs/get-started/installing-nebari"
@@ -447,9 +447,9 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </details>
         <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
           <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
-            How can I use Nebari as a blueprint to build my in-house platform
+            How can I use Nebari as a blueprint to build my in-house platform?
           </summary>
-          <p>
+          <p className="max-w-prose">
             Nebari is a free and open source project. You can go through the{' '}
             <a
               href="https://github.com/nebari-dev/nebari"
@@ -471,7 +471,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
             Do you offer options for support hours only?
           </summary>
-          <p>
+          <p className="max-w-prose">
             Yes! We can discuss a custom support package for your needs:{' '}
             <Link href="/about-us#bookacallform">
               <a className="underline decoration-from-font underline-offset-4">
@@ -484,7 +484,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
             Do you offer options for training only?
           </summary>
-          <p>
+          <p className="max-w-prose">
             Yes! You can choose from our catalog of{' '}
             <a
               href="https://quansight.com/training"
@@ -504,7 +504,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
             Can I access GPUs on Nebari?
           </summary>
-          <p>
+          <p className="max-w-prose">
             Yes! You can configure certain instances with GPUs, and manage who
             (users and groups) can access it.
           </p>
@@ -514,7 +514,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             How does Nebari compare SaaS products like Anaconda Enterprise,
             Coiled, Databricks, Domino Cloud, Posit Cloud, Saturn Cloud, etc.?
           </summary>
-          <p>
+          <p className="max-w-prose">
             Some companies offer data science platforms as a subscription
             service. They each solve unique problems and can be a great fit for
             certain use cases, for example if you need only Dask or Spark on the
@@ -522,13 +522,13 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             domains. These companies are friends in the ecosystem, and we
             encourage you to evaluate each option for your specific needs.
           </p>
-          <p>
+          <p className="max-w-prose">
             Nebari is primarily designed as a free and open source project for
             the complete data science workflow, that can be quickly setup and
             used by anyone without needing DevOps experience. The Nebari
             services offered by Quansight help you work with Nebari.
           </p>
-          <p>
+          <p className="max-w-prose">
             Another useful resource for comparing options is the{' '}
             <a
               href="https://docs.2i2c.org/en/latest/about/service/comparison.html#overview-of-services"
@@ -543,34 +543,36 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
             How does Nebari compare to Cloud SaaS platforms like AWS Sagemaker?
           </summary>
-          <p>
+          <p className="max-w-prose">
             Several cloud providers offer their own SaaS products that integrate
             with their cloud infrastructure. The most popular such platform is
             AWS Sagemaker. Typically, these are designed for a support a broad
             range of common use cases, and hence support widely used libraries
             like PyTorch and Tensorflow, as well as some vendor-specific tools.
           </p>
-          <p>
+          <p className="max-w-prose">
             Nebari takes a very different approach because designed to be
             vendor-agnostic. You can deploy it on any major cloud provider or
             your in-house HPC cluster. Flexibility is one of the core values for
             Nebari development, so it can adapt to your needs and support any
             tool/library/service with minimal effort.
           </p>
-          <p>You can select the approach that works best for your team.</p>
+          <p className="max-w-prose">
+            You can select the approach that works best for your team.
+          </p>
         </details>
         <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
           <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
             How does Nebari support compare to offerings from other consulting
             companies like Anaconda and QuantStack?
           </summary>
-          <p>
+          <p className="max-w-prose">
             Many consulting companies offer to build a fresh platform specific
             to your needs, and most tend to use OSS tools like Nebari&rsquo;s
             internals. This can be a great option if you&rsquo;re looking for a
             custom solution.
           </p>
-          <p>
+          <p className="max-w-prose">
             Nebari was born out of a similar need within Quansight, where
             developers required a collaborative platform to work on client
             projects. We created Nebari to be flexible and customizable from the
@@ -578,11 +580,11 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             client projects. We have also deployed custom Nebari instances
             tailored for client needs within their infrastructure.
           </p>
-          <p>
+          <p className="max-w-prose">
             Each consultancy has expertise with specific tools or cloud
             providers, and you can select one that fits your requirements.
           </p>
-          <p>
+          <p className="max-w-prose">
             As creators of Nebari, Quansight has expertise with major cloud
             providers (AWS, GCP, Azure, and Digital Ocean), Dask, Holoviz
             ecosystem of visualization, environment management, Python
