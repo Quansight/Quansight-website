@@ -610,6 +610,7 @@ each Dask on a Dask cluster.
 <img
 src="/posts/scaling-python-banking-edition/prefect-flow.png"
 alt="A diagram of a prefect flow."
+width="600px"
 />
 
 Unfortunately, we found that when running our workflow from within
