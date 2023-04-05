@@ -38,6 +38,10 @@ export const FilterMenu: FC<TFilterMenuProps> = ({
     return;
   }, [isDropdownOpen]);
 
+  const currentMenuName =
+    menuData.find(({ value }) => value === menuDataCurrent)?.name ||
+    menuDataCurrent;
+
   return (
     <div
       ref={container}
@@ -59,7 +63,7 @@ export const FilterMenu: FC<TFilterMenuProps> = ({
             : 'sm:flex sm:gap-0 sm:justify-between sm:items-center',
         )}
       >
-        {menuDataCurrent}
+        {currentMenuName}
         <span
           className={clsx(
             'inline-block absolute top-1/2 right-[1rem] w-0 h-0 border-x-8 border-t-8 border-x-transparent translate-y-[-50%] border-x-solid border-l-solid',
@@ -86,14 +90,16 @@ export const FilterMenu: FC<TFilterMenuProps> = ({
           )}
         >
           <FilterMenuItem
-            menuDataItem={getFilterStartingValue(filterMenuVariant)}
+            menuDataItemValue={getFilterStartingValue(filterMenuVariant)}
+            menuDataItemName={getFilterStartingValue(filterMenuVariant)}
             menuDataCurrent={menuDataCurrent}
             onFilterChange={handleFilterChange}
           />
-          {menuData.items.map(({ id, value }) => (
+          {menuData.map(({ key, value, name }) => (
             <FilterMenuItem
-              key={id}
-              menuDataItem={value}
+              key={key}
+              menuDataItemValue={value}
+              menuDataItemName={name}
               menuDataCurrent={menuDataCurrent}
               onFilterChange={handleFilterChange}
             />

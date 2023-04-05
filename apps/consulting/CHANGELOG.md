@@ -1,3 +1,29 @@
+March 27, 2023
+
+Via Storyblok:
+
+- Change homepage hero to be green at all screen sizes
+
+March 24, 2023
+
+Via Storyblok:
+
+- Fix glitched asset reference for homepage hero on mobile
+
+March 19, 2023
+
+Via Storyblok:
+
+- Fixes to PyTorch 2022 blog post
+  - Add Andrew James as coauthor
+  - Remove Francisco Massa from acknowledgments
+
+March 17, 2023
+
+Via Storyblok:
+
+- Add PyTorch 2022 Contributions Consulting blog post
+
 February 22, 2023
 
 Via Storyblok:
@@ -45,7 +71,7 @@ November 8, 2022
 Via Storyblok:
 
 - Replaced hero for Visualization & Dashboards page
-  with a version without the white stripe at the right 
+  with a version without the white stripe at the right
   edge, and switch the 'hero background color' for that
   hero to black
 - Replaced mis-named profile picture of Adam Lewis
