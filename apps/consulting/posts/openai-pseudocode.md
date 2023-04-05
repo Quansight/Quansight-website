@@ -270,7 +270,7 @@ pseudocode.pseudo_file(
   [test_dockercompose]
 )
 ```
-
+To see the full example, have a look at this video.
 [![asciicast](https://asciinema.org/a/573724.svg)](https://asciinema.org/a/573724)
 
 Check out the project at [Quansight/pseudocode](https://github.com/quansight/pseudocode).
