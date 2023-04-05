@@ -169,7 +169,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       </ul>
       {/* eslint-disable jsx-a11y/media-has-caption */}
       <video controls className="px-8 mb-[7rem] w-[100%] max-w-[900px] md:p-0">
-        <source src="/nebari-services/demo.mp4" />
+        <source src="https://a.storyblok.com/f/147759/x/00ddc13b05/nebari-features.mp4" />
         <p>
           A silent video demo of Nebari features using screen recordings and
           slides
