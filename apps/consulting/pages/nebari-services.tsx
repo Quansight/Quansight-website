@@ -22,6 +22,29 @@ import morningstarLogo from '../public/nebari-services/morningstar-logo.png';
 import nebariLogo from '../public/nebari-services/nebari-logo.svg';
 import { TContainerProps } from '../types/containerProps';
 
+// This is kinda hacky. It runs a loop for up to 8 seconds checking every 400 ms
+// for the contact form. If it finds the contact form, it fills in the message
+// field.
+const prefillContactFormMessage = function (msg) {
+  let count = 20;
+  const intervalId = setInterval(() => {
+    if (!count--) {
+      clearInterval(intervalId);
+    }
+    const messageField: HTMLTextAreaElement | void = document.querySelector(
+      '#bookacallform [name=message]',
+    ) as HTMLTextAreaElement;
+    if (!messageField) {
+      return;
+    }
+    clearInterval(intervalId);
+    // Fill in the message field only if it hasn't already been filled in.
+    if (!messageField.value) {
+      messageField.value = msg;
+    }
+  }, 400);
+};
+
 export const NebariServicesPage: FC<TContainerProps> = ({
   header,
   footer,
@@ -155,9 +178,22 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       {/* eslint-enable jsx-a11y/media-has-caption */}
       <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-[#20AAA1]">
         <Link href="/about-us#bookacallform">
-          <a className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading">
+          {/* eslint-disable jsx-a11y/anchor-is-valid, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+          {/* Disable eslint here because it doesn't like the onClick handler,
+            but it's fine because it doesn't circumvent the default behavior of
+            the link plus onClick also works for hitting the enter key on the
+            keyboard */}
+          <a
+            className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
+            onClick={() =>
+              prefillContactFormMessage(
+                'Hi, could you send me a Nebari login so that I can testdrive it for myself? Thanks!',
+              )
+            }
+          >
             Demo Nebari
           </a>
+          {/* eslint-enable jsx-a11y/anchor-is-valid, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         </Link>
       </div>
       <p className="px-[10rem] max-w-prose font-[400] text-[1.4rem] italic leading-[1.7rem] text-center text-[rgba(0,0,0,1)]">
