@@ -23,3 +23,51 @@
 
   border-bottom: 2px solid #452393;
 }
+
+.nebari-hero-background {
+  background: url(/nebari-services/upper-right-yellow-quarter-pie.svg) -23px bottom /
+      121px no-repeat,
+    url(/nebari-services/left-half-purple-pill.svg) top right / 99px no-repeat,
+    url(/nebari-services/orange-dot.svg) calc(50% - 534px) 95px no-repeat,
+    url(/nebari-services/yellow-dot.svg) calc(50% + 500px) 69px no-repeat,
+    url(/nebari-services/light-teal-pill.svg) calc(50% + 470px)
+      calc(100% - 35px) no-repeat,
+    url(/nebari-services/nebari-logo-grayscale.svg) left top / 225px no-repeat,
+    url(/nebari-services/quansight-logo-grayscale.svg) right bottom / 240px
+      no-repeat,
+    black;
+}
+
+@media screen(sm) {
+  .nebari-hero-background {
+    background: url(/nebari-services/upper-right-yellow-quarter-pie.svg) -23px bottom /
+        121px no-repeat,
+      url(/nebari-services/left-half-purple-pill.svg) top right / 99px no-repeat,
+      url(/nebari-services/orange-dot.svg) calc(50% - 534px) 95px no-repeat,
+      url(/nebari-services/yellow-dot.svg) calc(50% + 500px) 69px no-repeat,
+      url(/nebari-services/light-teal-pill.svg) calc(50% + 470px)
+        calc(100% - 35px) no-repeat,
+      url(/nebari-services/nebari-logo-grayscale.svg) left top /
+        calc(37vw - 12px) no-repeat,
+      url(/nebari-services/quansight-logo-grayscale.svg) right bottom /
+        calc(39vw - 10px) no-repeat,
+      black;
+  }
+}
+
+@media screen(lg) {
+  .nebari-hero-background {
+    background: url(/nebari-services/upper-right-yellow-quarter-pie.svg) bottom
+        left / 121px no-repeat,
+      url(/nebari-services/left-half-purple-pill.svg) top right / 99px no-repeat,
+      url(/nebari-services/orange-dot.svg) calc(50% - 534px) 95px no-repeat,
+      url(/nebari-services/yellow-dot.svg) calc(50% + 500px) 69px no-repeat,
+      url(/nebari-services/light-teal-pill.svg) calc(50% + 470px)
+        calc(100% - 35px) no-repeat,
+      url(/nebari-services/nebari-logo-grayscale.svg) calc(50% - 343px)
+        calc(100% - 23px) no-repeat,
+      url(/nebari-services/quansight-logo-grayscale.svg) calc(50% + 280px)
+        calc(100% - 10px) no-repeat,
+      black;
+  }
+}
