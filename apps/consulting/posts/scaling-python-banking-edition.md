@@ -495,17 +495,13 @@ is typically used for processing text or JSON files, so it’s probably
 not the first thing people think of when they need to work with
 dataframes. One of the big advantages of Dask Bag, though, is that it
 follows the map-reduce model. It allows us to take a more hands-off
-approach to managing the calculations because we can trust that it will reduce our data on each
-individual worker as much as possible before moving data between
-workers to finish the aggregations. We also made sure to define a
-`partition_size`, which is the number of units included in each
-reduction. Next we mapped `load_dataframe` to our our sequence of
-file-paths and finally we sum it. When the Dask Bag object is
+approach to managing the calculations because we can trust that it will reduce our data on each individual worker as much as possible before moving data between
+workers to finish the aggregations. When the Dask Bag object is
 submitted, Dask will send batches of files as defined by `partition_size`
 to the workers. The workers will then apply the mappings and the
 aggregation to each batch. Finally, the workers will re-partition
-and apply the mappings and aggregation across the batches until the
-dataset is fully aggregated.
+and apply the mappings and aggregation across the newly formed batches until the
+dataset is fully aggregated. This helps to minimize the amount of data traveling between workers. It also let us take advantage of summing dataframes instead of running group-by aggregations on them.
 
 ```python
 def load_dataframe(data):
