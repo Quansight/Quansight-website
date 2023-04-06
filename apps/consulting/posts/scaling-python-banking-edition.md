@@ -388,7 +388,7 @@ src="/posts/scaling-python-banking-edition/throttling.png"
 alt="An image of the above code being run as represented by the dask dashboard."
 />
 
-**_!!!! (We need to walk the reader through the above figure) !!!!_**
+Above the dask dashboard demonstrates this strategy successfully working. We can see how different tasks are running both in parallel and consecutevely as resources become. Some begin immediately, and then as they finish and the resources are freed, new tasks begin. This happens until all work is complete.
 
 This strategy was starting to get us closer. We now had a little more
 leeway to increase thread-pool workers for better cluster utilization,
