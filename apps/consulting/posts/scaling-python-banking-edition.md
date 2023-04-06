@@ -555,11 +555,9 @@ client = Client(cluster)
 
 As you can see in the above example, I used the context manager
 `dask.config.set` to set the `MEMORY` resources of each worker
-to 2000 **_WHAT UNITS?_**. The resource name and the value can be set arbitrarily. For
-example, I could have set the resource to be `WIDGET` instead of
+to 2000, meant to represent megabytes. However, the resource name and the value can be set arbitrarily. For example, I could have set the resource to be `WIDGET` instead of
 `MEMORY`, and it would work the same as long as your naming is consistent
-between your cluster configuration and your annotations. Next, you
-annotate your Dask **_Dask Bag?_** objects.
+between your cluster configuration and your annotations. Likewise the value can be any value as long as you are consistent. Next, we annotate out Dask Bag objects.
 
 ```python
 import dask.bag as db
@@ -571,9 +569,9 @@ with dask.annotate(resources={'MEMORY': 200*part_size}):
     summed_df = dfs.sum()
 ```
 
-In the above code, I have annotated the blocks of Dask objects with
+In the above code, I have annotated the Dask objects with
 the max amount of memory I expect them to need. Now, when I run this,
-the scheduler knows not to send off a block of work to a worker until
+the scheduler knows not to send off a new task to a worker until
 there are the necessary resources available on a worker.
 
 ## Orchestration & Productionisation
