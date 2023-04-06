@@ -597,7 +597,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </details>
         <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
           <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
-            How does Nebari compare SaaS products like Anaconda Enterprise,
+            How does Nebari compare to SaaS products like Anaconda Enterprise,
             Coiled, Databricks, Domino Cloud, Posit Cloud, Saturn Cloud, etc.?
           </summary>
           <p className="max-w-prose">
@@ -632,12 +632,12 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           <p className="max-w-prose">
             Several cloud providers offer their own SaaS products that integrate
             with their cloud infrastructure. The most popular such platform is
-            AWS Sagemaker. Typically, these are designed for a support a broad
+            AWS Sagemaker. Typically, these are designed to support a broad
             range of common use cases, and hence support widely used libraries
             like PyTorch and Tensorflow, as well as some vendor-specific tools.
           </p>
           <p className="max-w-prose">
-            Nebari takes a very different approach because designed to be
+            Nebari takes a very different approach because it is designed to be
             vendor-agnostic. You can deploy it on any major cloud provider or
             your in-house HPC cluster. Flexibility is one of the core values for
             Nebari development, so it can adapt to your needs and support any
