@@ -244,11 +244,11 @@ fut.result().info()
 
 <img
 src="/posts/scaling-python-banking-edition/dd-chunking-dask-graph.png"
-alt="The dask graph build by the code above."
+alt="The dask graph built by the code above."
 />
 
 The above image is a schematic of the chunked calculate-and-aggregate
-strategy used for one large dataset. **_!! (Is this correct?) !!_**
+strategy used for one large dataset.
 
 With this strategy, we were able process our largest aggregation
 sets, but we still had a lot of aggregations to do and we wanted to
