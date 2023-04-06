@@ -76,12 +76,12 @@ used at one time.
 ### Tools We Explored
 
 We explored several different libraries that use a GPU compute engine
-as their back-end. Several of these were from the RAPIDS stack. We
-also explored TensorFlow and PyTorch, but found that these were more
+as their back-end. Several of these were from the [RAPIDS][rapids] stack. We
+also explored [TensorFlow][tensorflow] and [PyTorch][pytorch], but found that these were more
 suited to machine learning-specific tasks than what our problem called
-for. The RAPIDS stack libraries that we explored were cuDF, CuPy, and
-blazing-SQL (though that has now been deprecated in favor of Dask SQL).
-Another tool that we tried was HEAVY.AI, formerly OmniSci. While
+for. The RAPIDS stack libraries that we explored were [cuDF][cudf], [CuPy][cupy], and
+[blazing-SQL (though that has now been deprecated in favor of Dask SQL)][dasksql].
+Another tool that we tried was [HEAVY.AI][], formerly OmniSci. While
 HEAVY.AI was fast, it could not handle simultaneous read/write, which
 was a showstopper for us.
 
@@ -112,10 +112,10 @@ architecture for our computation.
 ## Dataframe Aggregation
 
 With our decision made to use a distributed CPU architecture, we
-started looking at ways we could implement Dask to solve the problem. We
+started looking at ways we could implement [Dask][dask] to solve the problem. We
 choose Dask due to its native Python implementation and its
 utilization of standard Python APIs. This makes it easy to test code
-in pandas or numpy and then quickly distribute the code using Dask,
+in [pandas][pandas] or [numpy][numpy] and then quickly distribute the code using Dask,
 with only slight changes. The first approach we tried was
 a simple dataframe group-by.
 
@@ -123,7 +123,7 @@ a simple dataframe group-by.
 
 We thought that the dataframe approach made sense due to the ease of
 implementation: we could simply take a list of Parquet files and pass
-that list to the Dask dataframe’s `read_parquet()` function. We would then run
+that list to the [Dask dataframe’s][dask-dataframe] `read_parquet()` function. We would then run
 the `groupby()` method on the loaded dataframe and take the sum of the resulting
 group-by object. Below is an example of this code and an image of the dask dashboard after successfully running the above code. You can see that the work has run without error across 2 workers each allocated with 2 threads.
 
@@ -475,7 +475,7 @@ alt="A diagram showing how cluster-of-clusters works. It contains a box with the
 
 ### Dask Bag and Resource Annotations
 
-At this point, we started looking more seriously into Dask Bag. Dask Bag
+At this point, we started looking more seriously into [Dask Bag][dask-bag]. Dask Bag
 is typically used for processing text or JSON files, so it’s probably
 not the first thing people think of when they need to work with
 dataframes. One of the big advantages of Dask Bag, though, is that it
@@ -522,8 +522,8 @@ alt="A picture of a jupyter notebook input cell, next to an image of the cell co
 
 In the image above is the graph representation of several aggregation tasks that have been submitted to a Dask cluster. We can see the multiple levels of aggregation that each task goes through for each bag partition until all partitions are aggregated together. This demonstrates the map reduce model in action.
 
-On top of Dask Bag, we also started utilizing a tool called 'resource
-annotations.' These allowed us to take a much more
+On top of Dask Bag, we also started utilizing a tool called ['resource
+annotations.'][resource-annotations] These allowed us to take a much more
 hands-off approach to the scheduler. Instead of manually managing how much work
 we are submitting at a time, we can submit it all and let the scheduler do the
 heavy lifting of resource management. This automatically insures that the workers will
@@ -568,7 +568,7 @@ tried two separate tools for this, Prefect and Argo Workflows.
 
 ### Prefect
 
-We initially thought that Prefect would be a good fit for us. Prefect
+We initially thought that [Prefect][prefect] would be a good fit for us. Prefect
 is a Python-native package, which was a bonus. Also, tasks in Prefect
 are just Python functions wrapped in a workflow definition with some flow control
 logic. It includes a server that can be used to run flows in response
@@ -604,8 +604,8 @@ was out of scope for us so we began looking at other tools.
 
 ### Argo Workflows
 
-With Prefect no longer an option, we decided to try Argo
-Workflows. Argo Workflows is an open source workflow engine for
+With Prefect no longer an option, we decided to try [Argo
+Workflows][argo-workflows]. Argo Workflows is an open source workflow engine for
 orchestrating parallel jobs on Kubernetes. With Argo, we could use the
 cluster-of-clusters strategy, but replace Prefect and the primary Dask
 cluster with Argo Workflows. This would allow us to simplify Dask
@@ -644,5 +644,20 @@ to achieve our goal of deploying an open source large scale data
 processing pipeline for running valuation adjustment models using
 tools from the PyData ecosystem.
 
-[cluster of clusters keynote]: https://summit.dask.org/schedule/presentation/61/keynote-clusters-of-clusters-using-dask-distributed-to-scale-enterprise-machine-learning-systems/
+[rapids]: https://rapids.ai/
+[tensorflow]: https://www.tensorflow.org/
+[pytorch]: https://pytorch.org/
+[cudf]: https://docs.rapids.ai/api/cudf/stable/
+[cupy]: https://cupy.dev/
+[dasksql]: https://dask-sql.readthedocs.io/en/latest/
+[heavy.ai]: https://www.heavy.ai/
 [nvidia mem swapping post]: https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc
+[dask]: https://www.dask.org/
+[pandas]: https://pandas.pydata.org/
+[numpy]: https://numpy.org/
+[dask-dataframe]: https://docs.dask.org/en/stable/dataframe.html
+[dask-bag]: https://docs.dask.org/en/stable/bag.html
+[resource-annotations]: https://distributed.dask.org/en/stable/resources.html
+[prefect]: https://www.prefect.io/opensource/v2/?utm_medium=search&utm_campaign=Prefect_Brand&utm_keyword=Prefect&gclid=Cj0KCQjw27mhBhC9ARIsAIFsETGvItXRJnnoK6ExbnvuvOUvjbIfpvl_aE_T_Du-iSNpux7tVesCl8caAjPuEALw_wcB
+[argo-workflows]: https://argoproj.github.io/argo-workflows/
+[cluster of clusters keynote]: https://summit.dask.org/schedule/presentation/61/keynote-clusters-of-clusters-using-dask-distributed-to-scale-enterprise-machine-learning-systems/
