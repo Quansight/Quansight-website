@@ -146,7 +146,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
             onClick={() =>
               prefillContactFormMessage(
-                'Hi, could you send me a login to a demo instance of Nebari so that I can testdrive it for myself? Thanks!',
+                'Hi, please send me a login to a demo instance of Nebari so I can check it out. Thanks!',
               )
             }
           >
@@ -196,7 +196,14 @@ export const NebariServicesPage: FC<TContainerProps> = ({
 
       <div className="py-[1.7rem] px-[3.5rem] mb-[6rem] text-center bg-[#BA18DD]">
         <Link href="/about-us#bookacallform">
-          <a className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading">
+          <a
+            className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
+            onClick={() =>
+              prefillContactFormMessage(
+                "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+              )
+            }
+          >
             Contact Sales
           </a>
         </Link>
@@ -323,7 +330,14 @@ export const NebariServicesPage: FC<TContainerProps> = ({
 
       <div className="py-[1.7rem] px-[3.5rem] mb-[1.9rem] text-center bg-[#BA18DD]">
         <Link href="/about-us#bookacallform">
-          <a className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading">
+          <a
+            className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
+            onClick={() =>
+              prefillContactFormMessage(
+                "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+              )
+            }
+          >
             Contact Sales
           </a>
         </Link>
@@ -512,7 +526,14 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             building your own system, we&rsquo;ll be happy to support you! We
             can discuss a custom support package for your needs:{' '}
             <Link href="/about-us#bookacallform">
-              <a className="underline decoration-from-font underline-offset-4">
+              <a
+                className="underline decoration-from-font underline-offset-4"
+                onClick={() =>
+                  prefillContactFormMessage(
+                    "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                  )
+                }
+              >
                 Contact us.
               </a>
             </Link>
@@ -525,7 +546,14 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           <p className="max-w-prose">
             Yes! We can discuss a custom support package for your needs:{' '}
             <Link href="/about-us#bookacallform">
-              <a className="underline decoration-from-font underline-offset-4">
+              <a
+                className="underline decoration-from-font underline-offset-4"
+                onClick={() =>
+                  prefillContactFormMessage(
+                    "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                  )
+                }
+              >
                 Contact us.
               </a>
             </Link>
@@ -545,7 +573,14 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             </a>
             , or we can discuss a custom training package for your team:{' '}
             <Link href="/about-us#bookacallform">
-              <a className="underline decoration-from-font underline-offset-4">
+              <a
+                className="underline decoration-from-font underline-offset-4"
+                onClick={() =>
+                  prefillContactFormMessage(
+                    "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                  )
+                }
+              >
                 Contact us.
               </a>
             </Link>
@@ -643,7 +678,14 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             several open source PyData libraries. If you&rsquo;re unsure about
             your options, we can help bring clarity to your requirements:{' '}
             <Link href="/about-us#bookacallform">
-              <a className="underline decoration-from-font underline-offset-4">
+              <a
+                className="underline decoration-from-font underline-offset-4"
+                onClick={() =>
+                  prefillContactFormMessage(
+                    "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                  )
+                }
+              >
                 Contact us.
               </a>
             </Link>
@@ -653,7 +695,14 @@ export const NebariServicesPage: FC<TContainerProps> = ({
 
       <div className="py-[1.7rem] px-[3.5rem] mt-[6rem] text-center bg-[#BA18DD]">
         <Link href="/about-us#bookacallform">
-          <a className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading">
+          <a
+            className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
+            onClick={() =>
+              prefillContactFormMessage(
+                "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+              )
+            }
+          >
             Contact Sales
           </a>
         </Link>
