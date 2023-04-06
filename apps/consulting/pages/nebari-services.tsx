@@ -492,205 +492,245 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         Frequently Asked Questions
       </h2>
       <div className="w-full text-[1.6rem] font-normal leading-[1.3] sm:px-[3.4rem] xl:px-[11.5rem]">
-        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
-          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
-            How can I use Nebari as the platform for my team?
-          </summary>
-          <p className="max-w-prose">
-            The first step to using Nebari is{' '}
-            <a
-              href="https://www.nebari.dev/docs/get-started/installing-nebari"
-              className="underline decoration-from-font underline-offset-4"
-            >
-              installing and deploying
-            </a>{' '}
-            your Nebari instance. You can then add your team members to your
-            instance, and help them start working on the platform, leveraging
-            the compute and tools your Nebari instance provides. Our services
-            support you throughout this process.
-          </p>
-        </details>
-        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
-          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
-            How can I use Nebari as a blueprint to build my in-house platform?
-          </summary>
-          <p className="max-w-prose">
-            Nebari is a free and open source project. You can go through the{' '}
-            <a
-              href="https://github.com/nebari-dev/nebari"
-              className="underline decoration-from-font underline-offset-4"
-            >
-              Nebari codebase hosted on GitHub
-            </a>{' '}
-            to understand how we built it. If you have questions or need help
-            building your own system, we&rsquo;ll be happy to support you! We
-            can discuss a custom support package for your needs:{' '}
-            <Link href="/about-us#bookacallform">
-              <a
-                className="underline decoration-from-font underline-offset-4"
-                onClick={() =>
-                  prefillContactFormMessage(
-                    "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
-                  )
-                }
-              >
-                Contact us.
-              </a>
-            </Link>
-          </p>
-        </details>
-        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
-          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
-            Do you offer options for support hours only?
-          </summary>
-          <p className="max-w-prose">
-            Yes! We can discuss a custom support package for your needs:{' '}
-            <Link href="/about-us#bookacallform">
-              <a
-                className="underline decoration-from-font underline-offset-4"
-                onClick={() =>
-                  prefillContactFormMessage(
-                    "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
-                  )
-                }
-              >
-                Contact us.
-              </a>
-            </Link>
-          </p>
-        </details>
-        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
-          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
-            Do you offer options for training only?
-          </summary>
-          <p className="max-w-prose">
-            Yes! You can choose from our catalog of{' '}
-            <a
-              href="https://quansight.com/training"
-              className="underline decoration-from-font underline-offset-4"
-            >
-              advanced PyData training courses
-            </a>
-            , or we can discuss a custom training package for your team:{' '}
-            <Link href="/about-us#bookacallform">
-              <a
-                className="underline decoration-from-font underline-offset-4"
-                onClick={() =>
-                  prefillContactFormMessage(
-                    "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
-                  )
-                }
-              >
-                Contact us.
-              </a>
-            </Link>
-          </p>
-        </details>
-        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
-          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
-            Can I access GPUs on Nebari?
-          </summary>
-          <p className="max-w-prose">
-            Yes! You can configure certain instances with GPUs, and manage who
-            (users and groups) can access it.
-          </p>
-        </details>
-        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
-          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
-            How does Nebari compare to SaaS products like Anaconda Enterprise,
-            Coiled, Databricks, Domino Cloud, Posit Cloud, Saturn Cloud, etc.?
-          </summary>
-          <p className="max-w-prose">
-            Some companies offer data science platforms as a subscription
-            service. They each solve unique problems and can be a great fit for
-            certain use cases, for example if you need only Dask or Spark on the
-            cloud, you will be able to find companies that specialize in these
-            domains. These companies are friends in the ecosystem, and we
-            encourage you to evaluate each option for your specific needs.
-          </p>
-          <p className="max-w-prose">
-            Nebari is primarily designed as a free and open source project for
-            the complete data science workflow, that can be quickly setup and
-            used by anyone without needing DevOps experience. The Nebari
-            services offered by Quansight help you work with Nebari.
-          </p>
-          <p className="max-w-prose">
-            Another useful resource for comparing options is the{' '}
-            <a
-              href="https://docs.2i2c.org/en/latest/about/service/comparison.html#overview-of-services"
-              className="underline decoration-from-font underline-offset-4"
-            >
-              2i2c documentation
-            </a>
-            .
-          </p>
-        </details>
-        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
-          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
-            How does Nebari compare to Cloud SaaS platforms like AWS Sagemaker?
-          </summary>
-          <p className="max-w-prose">
-            Several cloud providers offer their own SaaS products that integrate
-            with their cloud infrastructure. The most popular such platform is
-            AWS Sagemaker. Typically, these are designed to support a broad
-            range of common use cases, and hence support widely used libraries
-            like PyTorch and Tensorflow, as well as some vendor-specific tools.
-          </p>
-          <p className="max-w-prose">
-            Nebari takes a very different approach because it is designed to be
-            vendor-agnostic. You can deploy it on any major cloud provider or
-            your in-house HPC cluster. Flexibility is one of the core values for
-            Nebari development, so it can adapt to your needs and support any
-            tool/library/service with minimal effort.
-          </p>
-          <p className="max-w-prose">
-            You can select the approach that works best for your team.
-          </p>
-        </details>
-        <details className="py-12 px-4 space-y-8 border-b border-b-gray-300">
-          <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
-            How does Nebari support compare to offerings from other consulting
-            companies like Anaconda and QuantStack?
-          </summary>
-          <p className="max-w-prose">
-            Many consulting companies offer to build a fresh platform specific
-            to your needs, and most tend to use OSS tools like Nebari&rsquo;s
-            internals. This can be a great option if you&rsquo;re looking for a
-            custom solution.
-          </p>
-          <p className="max-w-prose">
-            Nebari was born out of a similar need within Quansight, where
-            developers required a collaborative platform to work on client
-            projects. We created Nebari to be flexible and customizable from the
-            beginning, which allowed us to use it for a range of different
-            client projects. We have also deployed custom Nebari instances
-            tailored for client needs within their infrastructure.
-          </p>
-          <p className="max-w-prose">
-            Each consultancy has expertise with specific tools or cloud
-            providers, and you can select one that fits your requirements.
-          </p>
-          <p className="max-w-prose">
-            As creators of Nebari, Quansight has expertise with major cloud
-            providers (AWS, GCP, Azure, and Digital Ocean), Dask, Holoviz
-            ecosystem of visualization, environment management, Python
-            geospatial stack. As a consulting company, Quansight specializes in
-            several open source PyData libraries. If you&rsquo;re unsure about
-            your options, we can help bring clarity to your requirements:{' '}
-            <Link href="/about-us#bookacallform">
-              <a
-                className="underline decoration-from-font underline-offset-4"
-                onClick={() =>
-                  prefillContactFormMessage(
-                    "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
-                  )
-                }
-              >
-                Contact us.
-              </a>
-            </Link>
-          </p>
-        </details>
+        {[
+          [
+            'How can I use Nebari as the platform for my team?',
+            <>
+              <p>
+                The first step to using Nebari is{' '}
+                <a
+                  href="https://www.nebari.dev/docs/get-started/installing-nebari"
+                  className="underline decoration-from-font underline-offset-4"
+                >
+                  installing and deploying
+                </a>{' '}
+                your Nebari instance. You can then add your team members to your
+                instance and help them start working on the platform, leveraging
+                the compute and tools your Nebari instance provides. Our
+                services support you throughout this process.
+              </p>
+            </>,
+          ],
+          [
+            'How can I use Nebari as a blueprint to build my in-house platform?',
+            <>
+              <p>
+                Nebari is a free and open source project. You can go through the
+                Nebari codebase hosted on GitHub to understand how we built it.
+                If you have questions or need help building your own system,
+                we&rsquo;ll be happy to support you! We can discuss a custom
+                support package for your needs:{' '}
+                <Link href="/about-us#bookacallform">
+                  <a
+                    className="underline decoration-from-font underline-offset-4"
+                    onClick={() =>
+                      prefillContactFormMessage(
+                        "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                      )
+                    }
+                  >
+                    Contact us.
+                  </a>
+                </Link>
+              </p>
+            </>,
+          ],
+          [
+            'Do you offer options for support hours only?',
+            <>
+              <p>
+                Yes! We can discuss a custom support package for your needs:{' '}
+                <Link href="/about-us#bookacallform">
+                  <a
+                    className="underline decoration-from-font underline-offset-4"
+                    onClick={() =>
+                      prefillContactFormMessage(
+                        "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                      )
+                    }
+                  >
+                    Contact us.
+                  </a>
+                </Link>
+              </p>
+            </>,
+          ],
+          [
+            'Do you offer options for training only?',
+            <>
+              <p>
+                Yes! You can choose from our catalog of{' '}
+                <a
+                  href="https://quansight.com/training"
+                  className="underline decoration-from-font underline-offset-4"
+                >
+                  advanced PyData training courses
+                </a>
+                , or we can discuss a custom training package for your team:{' '}
+                <Link href="/about-us#bookacallform">
+                  <a
+                    className="underline decoration-from-font underline-offset-4"
+                    onClick={() =>
+                      prefillContactFormMessage(
+                        "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                      )
+                    }
+                  >
+                    Contact us.
+                  </a>
+                </Link>
+              </p>
+            </>,
+          ],
+          [
+            'Can I access GPUs on Nebari?',
+            <>
+              <p>
+                Yes! You can configure certain instances with GPUs and manage
+                who (users and groups) can access it.
+              </p>
+            </>,
+          ],
+          [
+            'How does Nebari compare to SaaS products like Anaconda Enterprise, Coiled, Databricks, Domino Cloud, Posit Cloud, Saturn Cloud, etc.?',
+            <>
+              <p>
+                Some companies offer data science platforms as a subscription
+                service. They each solve unique problems and can be a great fit
+                for certain use cases. For example, if you need only Dask or
+                Spark on the cloud, you will be able to find companies that
+                specialize in these domains. These companies are almost always
+                friends of ours in the ecosystem, and we encourage you to
+                evaluate each option for your specific needs.
+              </p>
+              <p>
+                Nebari is primarily designed as a free and open source project
+                for the complete data science workflow with customized MLops
+                integrations. It can be quickly set up and used by anyone
+                without needing DevOps experience. The Nebari services offered
+                by Quansight help you work with Nebari to provide immediate
+                value to your business.
+              </p>
+              <p>
+                Another useful resource for comparing options is the{' '}
+                <a
+                  href="https://docs.2i2c.org/en/latest/about/service/comparison.html#overview-of-services"
+                  className="underline decoration-from-font underline-offset-4"
+                >
+                  2i2c documentation
+                </a>
+                .
+              </p>
+            </>,
+          ],
+          [
+            'How does Nebari compare to Cloud SaaS platforms like AWS Sagemaker?',
+            <>
+              <p>
+                Several cloud providers offer their own SaaS products that
+                integrate with their cloud infrastructure. The most popular such
+                platform is AWS Sagemaker. Typically, these are designed to
+                support a broad range of common use cases. They also support
+                widely used libraries like PyTorch and Tensorflow, as well as
+                some vendor-specific tools.
+              </p>
+              <p>
+                Nebari takes a different approach because it is designed to be
+                cloud and vendor agnostic. You can deploy it on any major cloud
+                provider or on your on-prem HPC cluster or Kubernetes cluster.
+                You can use it to integrate with any open source or
+                vendor-supplied product. Flexibility is one of the core values
+                for Nebari development, so it can adapt to your needs and
+                support any tool/library/service with minimal effort.
+              </p>
+              <p>You can select the approach that works best for your team.</p>
+            </>,
+          ],
+          [
+            'How does Quansight and Nebari compare to 2i2c’s managed JupyterHub cloud service?',
+            <>
+              <p>
+                Quansight counts 2i2c as a friend organization. They implement a
+                similar approach of providing services around open source tools.
+                We both use the model of providing managed services on top of
+                open source thereby avoiding vendor lock-in. Where 2i2c manages
+                a JupyterHub installation, Quansight manages Nebari which
+                provides JupyterHub plus powerful environment management,
+                built-in scalable computing, visualization capability, workflow
+                scheduling, AI/ML tools, and more.
+              </p>
+              <p>
+                Where 2i2c primarily targets academic and research institutions,
+                Quansight primarily targets companies and government agencies.
+                Quansight will fully manage your Nebari installation in a way
+                that you can always “take over” and manage it yourself. We want
+                to help every organization enable their data-curious subject
+                matter experts to build powerful models, dashboards, and
+                applications easily while quickly taking advantage of the
+                evolving landscape of powerful open-source tools.
+              </p>
+            </>,
+          ],
+          [
+            'Can I obtain Nebari support from other companies?  Is Nebari support available through the OpenTeams general open source support contract?',
+            <>
+              <p>
+                While Quansight sponsored the creation of Nebari, the project is
+                built on community-driven open source foundations and is now
+                itself a community-driven project. As a result, any company can
+                provide support for Nebari.
+              </p>
+              <p>
+                As creators of Nebari, Quansight has deep expertise with major
+                cloud providers (AWS, GCP, Azure, and Digital Ocean), Dask,
+                Panel and Holoviz ecosystem of visualization, environment
+                management, as well as Python’s geospatial stack. It is likely
+                that Quansight will provide you the best support for Nebari.
+              </p>
+              <p>
+                In fact, OpenTeams, which is an open source support marketplace,
+                uniquely works with us at Quansight to provide support for
+                Nebari as part of its general open source support offering. You
+                can contact{' '}
+                <a
+                  href="mailto:connect@openteams.com"
+                  className="underline decoration-from-font underline-offset-4"
+                >
+                  connect@openteams.com
+                </a>{' '}
+                for more information about their offering.
+              </p>
+              <p>
+                Using Quansight (or OpenTeams) to provide Nebari support will
+                provide not only the most efficient answers to your support
+                questions, but also be able to engage with the creators of the
+                library to help you build custom solutions on top.{' '}
+                <Link href="/about-us#bookacallform">
+                  <a
+                    className="underline decoration-from-font underline-offset-4"
+                    onClick={() =>
+                      prefillContactFormMessage(
+                        "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                      )
+                    }
+                  >
+                    Contact us.
+                  </a>
+                </Link>
+              </p>
+            </>,
+          ],
+        ].map(([question, answer]) => (
+          <details
+            key={String(question)}
+            className="py-12 px-4 space-y-8 border-b border-b-gray-300"
+          >
+            <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
+              {question}
+            </summary>
+            <div className="space-y-8 max-w-prose">{answer}</div>
+          </details>
+        ))}
       </div>
 
       <div className="py-[1.7rem] px-[3.5rem] mt-[6rem] text-center bg-[#BA18DD]">
