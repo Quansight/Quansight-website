@@ -173,6 +173,7 @@ export const PageItemsDocument = gql`
           title
           description
           component
+          keywords
           body
           _editable
         }
@@ -364,6 +365,7 @@ export const PageItemDocument = gql`
         component
         title
         description
+        keywords
       }
       created_at
       default_full_slug
@@ -419,6 +421,9 @@ export const TeamDocument = gql`
           }
           projects
           githubNick
+          githubLink {
+            url
+          }
         }
       }
     }
