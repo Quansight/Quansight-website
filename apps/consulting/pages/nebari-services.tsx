@@ -125,7 +125,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         ].map((txt) => (
           <li
             key={txt}
-            className="flex before:relative before:top-[8px] before:shrink-0 before:mr-[1em] mb-[1em] before:w-[39px] max-w-prose before:h-[36px] text-[1.6rem] font-bold leading-loose before:bg-[url(/nebari-services/nebari-logo.svg)] before:bg-no-repeat before:bg-contain"
+            className="flex before:relative before:top-[8px] before:shrink-0 before:mr-[1em] mb-[1em] before:w-[39px] max-w-prose before:h-[36px] text-[1.6rem] font-bold leading-[2.7rem] before:bg-[url(/nebari-services/nebari-logo.svg)] before:bg-no-repeat before:bg-contain"
           >
             {txt}
           </li>
