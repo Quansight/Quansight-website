@@ -45,6 +45,15 @@ const prefillContactFormMessage = function (msg) {
   }, 400);
 };
 
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* Disable these eslint rules for this file. These rules are unhappy with the
+  links that have an onClick handler, but these are fine because the handler
+  doesn't circumvent the default behavior of the link, plus onClick also works
+  with keyboards (enter key). So I think these rules are falsely flagging this
+  file. */
+
 export const NebariServicesPage: FC<TContainerProps> = ({
   header,
   footer,
@@ -74,9 +83,23 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         <h1 className="px-[5.2rem] mb-[1rem] text-[4.6rem] font-extrabold tracking-wide leading-[1] text-center text-white md:text-[5.6rem] md:leading-[1.2] font-heading">
           Nebari Services
         </h1>
-        <p className="text-[1.6em] text-white">
+        <p className="mb-[2em] text-[1.6em] text-white">
           Deployment, support, and training
         </p>
+        <div className="py-[1.2rem] px-[3rem] mb-[6rem] text-center bg-[#BA18DD]">
+          <Link href="/about-us#bookacallform">
+            <a
+              className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
+              onClick={() =>
+                prefillContactFormMessage(
+                  "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                )
+              }
+            >
+              Contact Sales
+            </a>
+          </Link>
+        </div>
       </div>
     </div>
 
@@ -119,11 +142,6 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       {/* eslint-enable jsx-a11y/media-has-caption */}
       <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-[#20AAA1]">
         <Link href="/about-us#bookacallform">
-          {/* eslint-disable jsx-a11y/anchor-is-valid, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-          {/* Disable eslint here because it doesn't like the onClick handler,
-            but it's fine because it doesn't circumvent the default behavior of
-            the link plus onClick also works for hitting the enter key on the
-            keyboard */}
           <a
             className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
             onClick={() =>
@@ -134,7 +152,6 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           >
             Demo Nebari
           </a>
-          {/* eslint-enable jsx-a11y/anchor-is-valid, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         </Link>
       </div>
       <p className="px-[10rem] max-w-prose font-[400] text-[1.4rem] italic leading-[1.7rem] text-center text-[rgba(0,0,0,1)]">
