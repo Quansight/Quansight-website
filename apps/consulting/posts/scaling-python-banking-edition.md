@@ -56,14 +56,12 @@ src="/posts/scaling-python-banking-edition/introduction-img-1.png"
 alt="Three dataframes stacked on top of each other. Each dataframe has index named path with values ranging from 0-49,999. Each has two columns. The first is named Date. The second column is labeled value. The dataframes are labeled File 1, File 2, ..., File N. to the right of the stacked dataframes is an arrow with the text sum inside of it. To the right of the arrow is another dataframe representing the sum of the three dataframes by path and date."
 />
 
-## Hardware Options
+## Considering GPUs
 
 To solve this problem we first explored what hardware options were
 available to us. Specifically, as we were basically doing matrix
 summations on a large scale, we were curious if GPUs could be a good
 fit for our problem.
-
-### GPUs
 
 There were several reasons why we considered using GPU hardware. We thought that
 trying different GPU tools could help us speed up our computation, as we would
@@ -75,7 +73,7 @@ in optimizing for-loop operations. We would be able to set up our computation
 using n-D arrays and for loops alongside striding to reduce the amount of memory
 used at one time.
 
-### GPU Tools
+### Tools We Explored
 
 We explored several different libraries that use a GPU compute engine
 as their back-end. Several of these were from the RAPIDS stack. We
@@ -111,7 +109,7 @@ the usage of GPUs infeasible for this project. With
 that in mind, we decided to focus on good, old distributed CPU
 architecture for our computation.
 
-## Orchestration & Aggregation
+## Dataframe Aggregation
 
 With our decision made to use a distributed CPU architecture, we
 started looking at ways we could implement Dask to solve the problem. We
@@ -155,8 +153,6 @@ width="700px"
 
 However, as we noted earlier, our resources may be limited. What
 happens if our dataframe is larger than the cluster itself?
-
-### Dataframe Group-by
 
 As it turns out, we ran into this issue with some of our larger
 aggregations. We were finding that when we submitted jobs, workers
@@ -207,7 +203,7 @@ the Dask scheduler are released. I am not able to reproduce this error
 on the same aggregation if I use a more recent version of Dask. This
 was however something we had to address at the time we were executing the project.)
 
-### Dataframe Group-by Chunking
+### Chunking Dataframe Group-by Operations
 
 In order to address this out of memory error, we used a chunking
 strategy. We found that if we created a graph that chunks the group-by
@@ -300,7 +296,7 @@ duplicated or error out completely.
 DoneAndNotDoneFutures(done={<Future: error, key: finalize-e92147f1de33377e5d699b9a433833ce>, <Future: error, key: finalize-84b8df9a83cf66156a75066a2ac1e76d>, <Future: finished, type: pandas.core.frame.DataFrame, key: finalize-ab97ef0c5f1a508ff7794c880dc52904>, <Future: error, type: pandas.core.frame.DataFrame, key: finalize-fa12a3d29b570a5c9fde46ad4bb4b54e>, <Future: error, key: finalize-27d9405ba12f958c13d758e631561dc1>, <Future: error, key: finalize-62c1aac7865d455c15c608feb900b359>, <Future: finished, type: pandas.core.frame.DataFrame, key: finalize-0736bf3a3c1b701cf111a7602b94688f>, <Future: finished, type: pandas.core.frame.DataFrame, key: finalize-e7a25f8b5dec897b1324baeb1058e0ae>, <Future: error, key: finalize-04ea3d501751890ece2130a20efc5dba>, <Future: error, key: finalize-d7140f09799374ca916b3cbb28816323>, <Future: error, key: finalize-89541c92fdaf68ded72329388778eadf>, <Future: error, key: finalize-0dde02417f66f47d1f389e64ee5fb966>}, not_done=set())
 ```
 
-### Manual Throttling
+### Throttling Dask Graph Submission
 
 To combat this, we decided to throttle how much work we were going to
 give the scheduler at a time. To do this we employed a thread-pool
