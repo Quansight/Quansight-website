@@ -125,11 +125,9 @@ We thought that the dataframe approach made sense due to the ease of
 implementation: we could simply take a list of Parquet files and pass
 that list to the Dask dataframe’s `read_parquet()` function. We would then run
 the `groupby()` method on the loaded dataframe and take the sum of the resulting
-group-by object.
+group-by object. Below is an example of this code and an image of the dask dashboard after successfully running the above code. You can see that the work has run without error across 2 workers each allocated with 2 threads.
 
 ```python
-%%time
-
 def build_graph(paths):
     df = dd.read_parquet(paths,
                          index=False,
@@ -149,10 +147,7 @@ alt="A picture of a jupyter notebook input and output cells, next to an image of
 width="700px"
 />
 
-**_!!!! (We need to walk the reader through the above figure) !!!!_**
-
-However, as we noted earlier, our resources may be limited. What
-happens if our dataframe is larger than the cluster itself?
+However, as we noted earlier, we couldn't guarentee the resources available to the cluster. What happens if our dataframe is larger than the cluster itself?
 
 As it turns out, we ran into this issue with some of our larger
 aggregations. We were finding that when we submitted jobs, workers
