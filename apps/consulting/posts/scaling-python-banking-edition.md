@@ -329,7 +329,7 @@ that when a thread-pool worker got a new task, we would:
      about cluster utilization.
 
 1. Check cluster resources.
-1. If sufficient resources are _not_ available, **_(WHAT DO WE DO?)_**
+1. If sufficient resources are _not_ available, the thread sleeps for a period of time and then rechecks the cluster resources.
 1. Once sufficient resources are available, submit the task to the Dask
    scheduler.
 1. Wait briefly to allow the job to start.
