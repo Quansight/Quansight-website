@@ -535,7 +535,7 @@ src="/posts/scaling-python-banking-edition/dask-bag.png"
 alt="A picture of a jupyter notebook input cell, next to an image of the cell contents equivilent dask graph being run. The input cell has the code for a dask bag data frame summation wit resource annotations."
 />
 
-**_!!!! (We need to walk the reader through the above figure) !!!!_**
+In the image above is the graph representation of several aggregation tasks that have been submitted to a Dask cluster. We can see the multiple levels of aggregation that each task goes through for each bag partition until all partitions are aggregated together. This demonstrates the map reduce model in action.
 
 On top of Dask Bag, we also started utilizing a tool called 'resource
 annotations.' These allowed us to take a much more
