@@ -438,27 +438,12 @@ dataframe.
 1.77 s ± 72.3 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 ```
 
-<img
-src="/posts/scaling-python-banking-edition/groupby_sum_diagram.png"
-alt="An image of a dataframe that shows the before and after of an groupby operation."
-/>
-
 ```python
->>> %timeit concated_list_of_dfs.groupby(['path', 'Date']).sum()
-1.77 s ± 72.3 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+>>> %timeit sum(list_of_dfs)
+639 ms ± 15.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 ```
 
-<img
-src="/posts/scaling-python-banking-edition/df_list_sum.png"
-alt="An image of a dataframe that shows the before and after diagram for summing a list of dataframes."
-/>
-
-**_!!!! (What's the difference between the two figures above? Why are both of these figures included? If they're showing two different things, that difference needs to be explained. If they're both showing basically the same thing, then one figure can be removed. Also, the two code snippets look identical—should they be different?) !!!!_**
-
-While these performance improvements were promising, we were still having a bit of trouble with getting the dataframes to
-the right place at the right time. **_!! (What does this mean? What is the 'right place', and what is the 'right time'?) !!_**
-
-We also wanted our
+While these performance improvements were promising, we were passing a lot of data between workers causing the jobs to generally run slower, and adding extra burden to the scheduler in managing where work was. We also wanted our
 architecture to exploit any parallelization opportunities among
 the different aggregation groups. Ideally, we wanted to run an
 aggregation group on a single worker whenever feasible, to cut down on
