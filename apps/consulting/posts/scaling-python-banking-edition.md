@@ -486,6 +486,7 @@ src="/posts/scaling-python-banking-edition/cluster-of-clusters.png"
 width="400px"
 alt="A diagram showing how cluster-of-clusters works. It contains a box with the text Outer Dask Cluster. Inside there are 4 boxes, 1 on the left and three on the right. There multi directional arrows between the box on the left and the boxes on the right. Each box is labeled 'K8s Node'. The box on the left encapsulates another box with the text Dask Scheduler. Each box on the right encapsulates a box with the text Dask Worker. That box encapsulates another box with the text Dask LocalCluster"
 />
+&nbsp; &nbsp; _(k8s = Kubernetes)_
 
 ### Dask Bag and Resource Annotations
 
@@ -645,6 +646,7 @@ scale to the resources we needed.
 src="/posts/scaling-python-banking-edition/argo-workflow.png"
 alt="An Argo Workflows cluster. It shows a Fast API server connecting argo worflow pods. Two of those pods start up local dask clusters. The third starts up a distributed dask cluster for doing large aggregations."
 />
+&nbsp; &nbsp; _(k8s = Kubernetes)_
 
 ## Conclusion
 
