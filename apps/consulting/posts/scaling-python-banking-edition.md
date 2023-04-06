@@ -491,7 +491,7 @@ alt="A diagram showing how cluster-of-clusters works. It contains a box with the
 ### Dask Bag and Resource Annotations
 
 At this point, we started looking more seriously into Dask Bag. Dask Bag
-is typically used for processing text or CON files **_!! (What's a CON file?) !!!_**, so it’s probably
+is typically used for processing text or JSON files, so it’s probably
 not the first thing people think of when they need to work with
 dataframes. One of the big advantages of Dask Bag, though, is that it
 follows the map-reduce model. It allows us to take a more hands-off
