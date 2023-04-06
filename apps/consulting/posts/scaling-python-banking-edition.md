@@ -572,7 +572,7 @@ with dask.annotate(resources={'MEMORY': 200*part_size}):
 In the above code, I have annotated the Dask objects with
 the max amount of memory I expect them to need. Now, when I run this,
 the scheduler knows not to send off a new task to a worker until
-there are the necessary resources available on a worker.
+there are the necessary resources available on a worker. This was really valuable because it allowed us to use the scheduler to it's full potential. Instead of carefully managing how much work was on the cluster ourselves. The scheduler could now do that itself since it knew apriori what the needed resources for a task would be.
 
 ## Orchestration & Productionisation
 
