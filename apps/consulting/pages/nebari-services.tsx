@@ -150,12 +150,12 @@ export const NebariServicesPage: FC<TContainerProps> = ({
               )
             }
           >
-            Demo Nebari
+            Try Nebari
           </a>
         </Link>
       </div>
       <p className="px-[10rem] max-w-prose font-[400] text-[1.4rem] italic leading-[1.7rem] text-center text-[rgba(0,0,0,1)]">
-        Access a Quansight-hosted Nebari instance
+        Drop us a line and we&rsquo;ll send you a login
       </p>
     </section>
 
