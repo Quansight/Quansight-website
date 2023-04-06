@@ -589,7 +589,7 @@ are just Python functions wrapped in a workflow definition with some flow contro
 logic. It includes a server that can be used to run flows in response
 to triggers and schedulers and to manage logging, and it provides a
 visualization dashboard. It also integrates nicely with Dask to run
-each Dask on a Dask cluster.
+each task on a Dask cluster with few edits to the code.
 
 <img
 src="/posts/scaling-python-banking-edition/prefect-flow.png"
