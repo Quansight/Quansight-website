@@ -186,11 +186,9 @@ src="/posts/scaling-python-banking-edition/dd-larger-than-cluster-dask.png"
 alt="An image of the dask dashboard with the results a dask graph representing the code above and the resulting run failing."
 />
 
-**_!!!!(Can we add some sort of annotation to the above image to show how a reader could interpret the graph to understand it was an out-of-memory failure? Or is the only way to know this from inspecting the traceback)!!!!_**
-
-The image above shows an example of this happening. In this example I
+The above code shows an example of this happening. In this example I
 used a Dask cluster with 2 workers, each with 4 GB of memory, and I get a
-'killed worker' error when I try to aggregate ten 6,000,000-row files.
+'killed worker' error when I try to aggregate ten 6,000,000-row files. Likewise, the dask dashboard image on the left shows new workers getting started after the workers are killed. If this ran as expected. We would expect the task stream diagram to have 4 rows. 1 for each thread on each worker. Instead, we several rows showing new workers starting and trying to run the remaining jobs before failing. The graph on the right shows the dask graph for this task, demonstrating how the various groups are aggregated together.
 
 (Author's Note: In this example, I am using an older version
 of Dask. This problem is becoming less of an issue as improvements to
