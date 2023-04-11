@@ -213,7 +213,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </Link>
       </div>
 
-      <div className="px-[10%] w-full md:grid md:grid-cols-3 md:gap-6 md:p-0 md:max-w-[1016px]">
+      <div className="px-[10%] w-full max-w-[405px] md:grid md:grid-cols-3 md:gap-6 md:p-0 md:max-w-[1016px] mx:auto">
         {/* Starter */}
         <div className="flex flex-col mb-[5.4rem] min-h-[55rem]">
           <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
@@ -304,7 +304,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </div>
       </div>
 
-      <div className="px-[10%] mb-[3.4em] w-full max-w-[1016px] md:flex md:flex-row md:p-0 md:space-x-10">
+      <div className="px-[10%] mb-[3.4em] w-full max-w-[405px] md:grid md:grid-cols-2 md:gap-10 md:p-0 md:max-w-[1016px]">
         <div className="flex flex-col mb-[3.4rem]">
           <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
             Fully managed
