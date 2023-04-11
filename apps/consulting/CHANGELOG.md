@@ -6,6 +6,8 @@ Via Storyblok:
   Scaling & Acceleration' tile on `/consulting`, to fix
   the incorrect rendered link as reported in #716
 - Revise Ashley's title to 'COO'
+- Revise header navigation to incorporate redesign and
+  inclusion of link to new Nebari Services page
 
 March 27, 2023
 
