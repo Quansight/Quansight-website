@@ -1,3 +1,20 @@
+April 11, 2023
+
+Via Storyblok:
+
+- Recreate the Board List Item for the 'Infrastructure,
+  Scaling & Acceleration' tile on `/consulting`, to fix
+  the incorrect rendered link as reported in #716
+- Revise Ashley's title to 'COO'
+- Revise header navigation to incorporate redesign and
+  inclusion of link to new Nebari Services page
+- Add 'Nebari Install & Support' link to site footer
+- Revise Jupyter Technologies services page, QHub->Nebari
+  - Rename 'QHub & JupyterHub' tile heading to 'Nebari & JupyterHub'
+    and update the icon to match
+  - Remove the QHub logo from the logo spread and update the
+    Nebari placeholder logo to the actual logo
+
 March 27, 2023
 
 Via Storyblok:
