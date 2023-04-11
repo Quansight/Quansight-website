@@ -760,7 +760,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       </div>
       <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-pink">
         <a
-          href="https://a.storyblok.com/f/147759/x/ca2cc06c40/more-about-nebari-services.pdf"
+          href="https://a.storyblok.com/f/147759/x/9c608eb5e1/quansight-more-about-nebari-services.pdf"
           className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
         >
           Download the PDF
