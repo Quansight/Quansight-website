@@ -5,6 +5,7 @@ Via Storyblok:
 - Recreate the Board List Item for the 'Infrastructure,
   Scaling & Acceleration' tile on `/consulting`, to fix
   the incorrect rendered link as reported in #716
+- Revise Ashley's title to 'COO'
 
 March 27, 2023
 
