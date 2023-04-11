@@ -1,6 +1,6 @@
 ---
 title: 'Exploring the Impact of Feedback Loops on LLM Code Generation'
-published: March 27, 2023
+published: April 5, 2023
 author: chris-ostrouchov
 description: 'As an experiment we wanted to add a feedback loop into LLM generated code via type annotations, docstrings, automated tests, and user feedback. We developed a simple package "pseudoscode" which uses the OpenAI API for generating code.'
 category: ["Artificial Intelligence"]
