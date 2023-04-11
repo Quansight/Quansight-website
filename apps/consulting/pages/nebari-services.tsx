@@ -19,7 +19,7 @@ import confluencyLogo from '../public/nebari-services/confluency-logo.png';
 import earthBigDataLogo from '../public/nebari-services/earth-big-data-logo.png';
 import esipLogo from '../public/nebari-services/esip-logo.png';
 import morningstarLogo from '../public/nebari-services/morningstar-logo.png';
-import nebariLogo from '../public/nebari-services/nebari-logo.svg';
+import nebariLogoWhite from '../public/nebari-services/nebari-logo-white.svg';
 import { TContainerProps } from '../types/containerProps';
 
 // This is kinda hacky. It runs a loop for up to 8 seconds checking every 400 ms
@@ -79,14 +79,18 @@ export const NebariServicesPage: FC<TContainerProps> = ({
 
     <div className="relative mx-auto max-w-full h-[52.4rem] sm:h-[calc(780px_-_40vw)] lg:h-[36.7rem] nebari-hero-background">
       <div className="flex relative flex-col items-center px-[2rem] pt-[13rem] w-full h-full sm:pt-[calc(280px_-_23.4vw)] md:absolute md:px-0 lg:pt-[4rem]">
-        <Image className="mb-[20px]" alt="Nebari logo" src={nebariLogo} />
+        <Image
+          className="mb-[20px] brightness-200"
+          alt="Nebari logo"
+          src={nebariLogoWhite}
+        />
         <h1 className="px-[5.2rem] mb-[1rem] text-[4.6rem] font-extrabold tracking-wide leading-[1] text-center text-white md:text-[5.6rem] md:leading-[1.2] font-heading">
           Nebari Services
         </h1>
         <p className="mb-[2em] text-[1.6em] text-white">
           Deployment, support, and training
         </p>
-        <div className="py-[1.2rem] px-[3rem] mb-[6rem] text-center bg-[#BA18DD]">
+        <div className="py-[1.2rem] px-[3rem] mb-[6rem] text-center bg-violet">
           <Link href="/about-us#bookacallform">
             <a
               className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
@@ -125,7 +129,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         ].map((txt) => (
           <li
             key={txt}
-            className="flex before:relative before:top-[8px] before:shrink-0 before:mr-[1em] mb-[1em] before:w-[39px] max-w-prose before:h-[36px] text-[1.6rem] font-bold leading-[2.7rem] before:bg-[url(/nebari-services/nebari-logo.svg)] before:bg-no-repeat before:bg-contain"
+            className="flex before:relative before:top-[6px] before:shrink-0 before:mr-[1em] mb-[1em] before:w-[39px] max-w-prose before:h-[36px] text-[1.6rem] font-bold leading-[2.7rem] before:bg-[url(/nebari-services/quansight-logo.svg)] before:bg-no-repeat before:bg-contain"
           >
             {txt}
           </li>
@@ -140,7 +144,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </p>
       </video>
       {/* eslint-enable jsx-a11y/media-has-caption */}
-      <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-[#20AAA1]">
+      <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-violet">
         <Link href="/about-us#bookacallform">
           <a
             className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
@@ -194,7 +198,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         Nebari for various client projects.
       </p>
 
-      <div className="py-[1.7rem] px-[3.5rem] mb-[6rem] text-center bg-[#BA18DD]">
+      <div className="py-[1.7rem] px-[3.5rem] mb-[6rem] text-center bg-pink">
         <Link href="/about-us#bookacallform">
           <a
             className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
@@ -212,7 +216,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       <div className="px-[10%] w-full md:grid md:grid-cols-3 md:gap-6 md:p-0 md:max-w-[1016px]">
         {/* Starter */}
         <div className="flex flex-col mb-[5.4rem] min-h-[55rem]">
-          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-black font-heading">
+          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
             Starter
           </h3>
           <p className="grow py-7  px-1 font-[600] text-[1.6rem] italic tracking-wide leading-[2.6rem] text-center bg-gray-200 border-b border-b-black md:grow-0 md:px-2 md:h-[12rem]">
@@ -233,14 +237,14 @@ export const NebariServicesPage: FC<TContainerProps> = ({
               </li>
             ))}
           </ul>
-          <div className="p-7 text-[4rem] font-bold tracking-wide text-center text-white bg-[#BA18DD] font-heading">
+          <div className="p-7 text-[4rem] font-bold tracking-wide text-center text-white bg-pink font-heading">
             $5k
           </div>
         </div>
 
         {/* Standard */}
         <div className="flex flex-col mb-[5.4rem] min-h-[55rem]">
-          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-black font-heading">
+          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
             Standard
           </h3>
           <p className="grow py-7 px-1 font-[600] text-[1.6rem] italic tracking-wide leading-[2.6rem] text-center bg-gray-200 border-b border-b-black md:grow-0 md:px-2 md:h-[12rem]">
@@ -263,14 +267,14 @@ export const NebariServicesPage: FC<TContainerProps> = ({
               </li>
             ))}
           </ul>
-          <div className="p-7 text-[4rem] font-bold tracking-wide text-center text-white bg-[#BA18DD] font-heading">
+          <div className="p-7 text-[4rem] font-bold tracking-wide text-center text-white bg-pink font-heading">
             $20k
           </div>
         </div>
 
         {/* Plus */}
         <div className="flex flex-col mb-[5.4rem] min-h-[55rem]">
-          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-black font-heading">
+          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
             Plus
           </h3>
           <p className="grow py-7 px-1 font-[600] text-[1.6rem] italic tracking-wide leading-[2.6rem] text-center bg-gray-200 border-b border-b-black md:flex md:grow-0 md:items-center md:px-2 md:h-[12rem]">
@@ -294,7 +298,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
               </li>
             ))}
           </ul>
-          <div className="p-7 text-[4rem] font-bold tracking-wide text-center text-white bg-[#BA18DD] font-heading">
+          <div className="p-7 text-[4rem] font-bold tracking-wide text-center text-white bg-pink font-heading">
             $50k
           </div>
         </div>
@@ -302,7 +306,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
 
       <div className="px-[10%] mb-[3.4em] w-full max-w-[1016px] md:flex md:flex-row md:p-0 md:space-x-10">
         <div className="flex flex-col mb-[3.4rem]">
-          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-black font-heading">
+          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
             Fully managed
           </h3>
           <p className="grow py-10 px-4 font-[500] text-[1.6rem] tracking-wide leading-[2.6rem] text-center bg-gray-200">
@@ -312,7 +316,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </div>
 
         <div className="flex flex-col mb-[3.4rem]">
-          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-black font-heading">
+          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
             Event services
           </h3>
           <p className="grow py-10 px-4 font-[500] text-[1.6rem] tracking-wide leading-[2.6rem] text-center bg-gray-200">
@@ -328,7 +332,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         or a more customized solution?
       </h3>
 
-      <div className="py-[1.7rem] px-[3.5rem] mb-[1.9rem] text-center bg-[#BA18DD]">
+      <div className="py-[1.7rem] px-[3.5rem] mb-[1.9rem] text-center bg-pink">
         <Link href="/about-us#bookacallform">
           <a
             className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
@@ -360,13 +364,13 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       </ul>
     </section>
 
-    <section className="bg-black">
+    <section className="bg-violet">
       <h2 className="sr-only">Testimonials</h2>
       <div
         className="p-4 mx-auto sm:px-[3.4rem] xl:px-[11.5rem] max-w-layout"
         style={{
           background:
-            'url(/nebari-services/nebari-logo-grayscale.svg) right bottom / 325px no-repeat',
+            'url(/nebari-services/quansight-logo-violet-grayscale.svg) right bottom / 325px no-repeat',
         }}
       >
         <style>{`
@@ -733,7 +737,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         ))}
       </div>
 
-      <div className="py-[1.7rem] px-[3.5rem] mt-[6rem] text-center bg-[#BA18DD]">
+      <div className="py-[1.7rem] px-[3.5rem] mt-[6rem] text-center bg-violet">
         <Link href="/about-us#bookacallform">
           <a
             className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
@@ -754,10 +758,10 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         <h2 className="inline">Learn more</h2> about Nebari deployment,
         training, and support.
       </div>
-      <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-[#EAB54E]">
+      <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-pink">
         <a
           href="https://a.storyblok.com/f/147759/x/ca2cc06c40/more-about-nebari-services.pdf"
-          className="after:ml-[1em] text-[1.7rem] font-bold text-black after:content-[url(/nebari-services/right-pointing-triangle.svg)] after:invert font-heading"
+          className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
         >
           Download the PDF
         </a>
