@@ -347,7 +347,12 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </Link>
       </div>
 
-      <ul className="flex flex-col grow-[3] p-8 list-image-[url(/nebari-services/purple-check-mark.svg)]">
+      <ul
+        className="flex flex-col grow-[3] p-8"
+        style={{
+          listStyleImage: 'url(/nebari-services/purple-check-mark.svg)',
+        }}
+      >
         {[
           'A guided, hands-on Nebari demo',
           'Custom integrations',
