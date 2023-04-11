@@ -1,3 +1,11 @@
+April 11, 2023
+
+Via Storyblok:
+
+- Recreate the Board List Item for the 'Infrastructure,
+  Scaling & Acceleration' tile on `/consulting`, to fix
+  the incorrect rendered link as reported in #716
+
 March 27, 2023
 
 Via Storyblok:
