@@ -347,7 +347,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </Link>
       </div>
 
-      <ul className="flex flex-col grow-[3] p-8 mb-[4rem] list-none">
+      <ul className="flex flex-col grow-[3] p-8 list-image-[url(/nebari-services/purple-check-mark.svg)]">
         {[
           'A guided, hands-on Nebari demo',
           'Custom integrations',
@@ -356,7 +356,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         ].map((txt) => (
           <li
             key={txt}
-            className="before:inline-block before:relative before:top-[6px] before:shrink-0 before:mr-[0.4em] mb-[0.4em] before:w-[17px] before:h-[13px] font-[700] text-[1.9rem] tracking-wide before:align-text-top before:bg-[url(/nebari-services/purple-check-mark.svg)] before:bg-no-repeat before:bg-contain flex-inline"
+            className="mb-[0.4em] font-[700] text-[1.9rem] tracking-wide"
           >
             {txt}
           </li>
