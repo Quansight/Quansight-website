@@ -14,7 +14,9 @@
       },
       "configurations": {
         "production": {},
-        "development": {}
+        "development": {
+          "outputPath": "tmp/apps/labs"
+        }
       }
     },
     "serve": {
