@@ -70,7 +70,6 @@
     "@nrwl/web": "15.9.2",
     "@nrwl/workspace": "15.9.2",
     "@testing-library/react": "13.4.0",
-    "@testing-library/react-hooks": "7.0.2",
     "@types/jest": "29.4.4",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
