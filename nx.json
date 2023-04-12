@@ -11,7 +11,7 @@
       }
     },
     "no-cloud": {
-      "runner": "@nrwl/workspace/src/tasks-runner/default-tasks-runner",
+      "runner": "nx/tasks-runners/default",
       "options": {}
     }
   },
