@@ -75,25 +75,25 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       variant={DomainVariant.Quansight}
     />
 
-    <div className="overflow-hidden w-full h-[100px] bg-[#000]"></div>
+    <div className="h-[100px] w-full overflow-hidden bg-[#000]"></div>
 
-    <div className="relative mx-auto max-w-full h-[52.4rem] sm:h-[calc(780px_-_40vw)] lg:h-[36.7rem] nebari-hero-background">
-      <div className="flex relative flex-col items-center px-[2rem] pt-[13rem] w-full h-full sm:pt-[calc(280px_-_23.4vw)] md:absolute md:px-0 lg:pt-[4rem]">
+    <div className="nebari-hero-background relative mx-auto h-[52.4rem] max-w-full sm:h-[calc(780px_-_40vw)] lg:h-[36.7rem]">
+      <div className="relative flex h-full w-full flex-col items-center px-[2rem] pt-[13rem] sm:pt-[calc(280px_-_23.4vw)] md:absolute md:px-0 lg:pt-[4rem]">
         <Image
           className="mb-[20px] brightness-200"
           alt="Nebari logo"
           src={nebariLogoWhite}
         />
-        <h1 className="px-[5.2rem] mb-[1rem] text-[4.6rem] font-extrabold tracking-wide leading-[1] text-center text-white md:text-[5.6rem] md:leading-[1.2] font-heading">
+        <h1 className="font-heading mb-[1rem] px-[5.2rem] text-center text-[4.6rem] font-extrabold leading-[1] tracking-wide text-white md:text-[5.6rem] md:leading-[1.2]">
           Nebari Services
         </h1>
         <p className="mb-[2em] text-[1.6em] text-white">
           Deployment, support, and training
         </p>
-        <div className="py-[1.2rem] px-[3rem] mb-[6rem] text-center bg-violet">
+        <div className="bg-violet mb-[6rem] px-[3rem] py-[1.2rem] text-center">
           <Link href="/about-us#bookacallform">
             <a
-              className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
+              className="font-heading text-[1.7rem] font-bold text-white after:ml-[0.5em] after:content-[url(/nebari-services/right-pointing-triangle.svg)]"
               onClick={() =>
                 prefillContactFormMessage(
                   "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
@@ -107,18 +107,18 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       </div>
     </div>
 
-    <section className="flex flex-col flex-nowrap items-center py-24 px-8 mx-auto lg:px-[13rem] max-w-layout">
-      <h2 className="mb-[1em] text-[4.2rem] font-bold tracking-wide leading-[1] text-center md:text-[4.8rem] font-heading">
+    <section className="max-w-layout mx-auto flex flex-col flex-nowrap items-center px-8 py-24 lg:px-[13rem]">
+      <h2 className="font-heading mb-[1em] text-center text-[4.2rem] font-bold leading-[1] tracking-wide md:text-[4.8rem]">
         What is Nebari?
       </h2>
-      <p className="mx-auto mb-[3.7rem] max-w-prose text-[1.6rem] leading-[2.7rem] text-center">
+      <p className="mx-auto mb-[3.7rem] max-w-prose text-center text-[1.6rem] leading-[2.7rem]">
         <span className="font-bold">
           Nebari is on open source data science platform{' '}
         </span>
         for teams with serious computational and collaboration needs, looking
         to:
       </p>
-      <ul className="mb-[4rem] w-[100%] max-w-[900px] list-none md:columns-2 md:gap-[82px] md:mb-[5rem]">
+      <ul className="mb-[4rem] w-[100%] max-w-[900px] list-none md:mb-[5rem] md:columns-2 md:gap-[82px]">
         {[
           'Work in familiar IDEs like JupyterLab or VSCode',
           'Scale work with built-in support for distributed computing with Dask',
@@ -129,14 +129,14 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         ].map((txt) => (
           <li
             key={txt}
-            className="flex before:relative before:top-[6px] before:shrink-0 before:mr-[1em] mb-[1em] before:w-[39px] max-w-prose before:h-[36px] text-[1.6rem] font-bold leading-[2.7rem] before:bg-[url(/nebari-services/quansight-logo.svg)] before:bg-no-repeat before:bg-contain"
+            className="mb-[1em] flex max-w-prose text-[1.6rem] font-bold leading-[2.7rem] before:relative before:top-[6px] before:mr-[1em] before:h-[36px] before:w-[39px] before:shrink-0 before:bg-[url(/nebari-services/quansight-logo.svg)] before:bg-contain before:bg-no-repeat"
           >
             {txt}
           </li>
         ))}
       </ul>
       {/* eslint-disable jsx-a11y/media-has-caption */}
-      <video controls className="px-8 mb-[7rem] w-[100%] max-w-[900px] md:p-0">
+      <video controls className="mb-[7rem] w-[100%] max-w-[900px] px-8 md:p-0">
         <source src="https://a.storyblok.com/f/147759/x/00ddc13b05/nebari-features.mp4" />
         <p>
           A silent video demo of Nebari features using screen recordings and
@@ -144,10 +144,10 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </p>
       </video>
       {/* eslint-enable jsx-a11y/media-has-caption */}
-      <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-violet">
+      <div className="bg-violet mb-[1rem] px-[2.9rem] py-[1.8rem] text-center">
         <Link href="/about-us#bookacallform">
           <a
-            className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
+            className="font-heading text-[1.7rem] font-bold text-white after:ml-[1em] after:content-[url(/nebari-services/right-pointing-triangle.svg)]"
             onClick={() =>
               prefillContactFormMessage(
                 'Hi, please send me a login to a demo instance of Nebari so I can check it out. Thanks!',
@@ -158,14 +158,14 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           </a>
         </Link>
       </div>
-      <p className="px-[10rem] max-w-prose font-[400] text-[1.4rem] italic leading-[1.7rem] text-center text-[rgba(0,0,0,1)]">
+      <p className="max-w-prose px-[10rem] text-center text-[1.4rem] font-[400] italic leading-[1.7rem] text-[rgba(0,0,0,1)]">
         Drop us a line and we&rsquo;ll send you a login
       </p>
     </section>
 
     <section className="bg-gray-200">
       <h2 className="sr-only">Used by</h2>
-      <div className="flex flex-col items-center p-20 mx-auto space-y-20 md:overflow-hidden md:flex-row md:justify-evenly md:py-2 md:px-32 md:space-y-0 md:space-x-8 max-w-layout">
+      <div className="max-w-layout mx-auto flex flex-col items-center space-y-20 p-20 md:flex-row md:justify-evenly md:space-x-8 md:space-y-0 md:overflow-hidden md:px-32 md:py-2">
         <Image alt="Morningstar" src={morningstarLogo} className="w-[137px]" />
         <Image
           alt="Earth Science Information Partners"
@@ -181,27 +181,27 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       </div>
     </section>
 
-    <section className="flex flex-col items-center py-24 px-8 mx-auto max-w-layout">
-      <h2 className="mb-[0.9em] text-[4.2rem] font-bold leading-[1] text-center font-heading">
+    <section className="max-w-layout mx-auto flex flex-col items-center px-8 py-24">
+      <h2 className="font-heading mb-[0.9em] text-center text-[4.2rem] font-bold leading-[1]">
         Service Packages
       </h2>
-      <p className="mb-[2em] text-[1.6rem] leading-[1.6] text-center md:max-w-[1016px]">
+      <p className="mb-[2em] text-center text-[1.6rem] leading-[1.6] md:max-w-[1016px]">
         Nebari is designed to be deployed and managed without DevOps expertise.
         However, if you need a helping hand, require special customizations, or
         have complex existing infrastructure, Quansight has some service
         offerings to help you reach your goals.
       </p>
-      <p className="mb-[2em] text-[1.6rem] leading-[1.6] text-center md:max-w-[1016px]">
+      <p className="mb-[2em] text-center text-[1.6rem] leading-[1.6] md:max-w-[1016px]">
         As the creators of Nebari, we know it inside and out, and understand the
         underlying tools, including JupyterHub and Dask. We&apos;re experts in
         data science solutions, and have years of experience deploying and using
         Nebari for various client projects.
       </p>
 
-      <div className="py-[1.7rem] px-[3.5rem] mb-[6rem] text-center bg-pink">
+      <div className="bg-pink mb-[6rem] px-[3.5rem] py-[1.7rem] text-center">
         <Link href="/about-us#bookacallform">
           <a
-            className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
+            className="font-heading text-[1.7rem] font-bold text-white after:ml-[0.5em] after:content-[url(/nebari-services/right-pointing-triangle.svg)]"
             onClick={() =>
               prefillContactFormMessage(
                 "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
@@ -213,16 +213,16 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </Link>
       </div>
 
-      <div className="px-[10%] w-full max-w-[405px] md:grid md:grid-cols-3 md:gap-6 md:p-0 md:max-w-[1016px] mx:auto">
+      <div className="mx:auto w-full max-w-[405px] px-[10%] md:grid md:max-w-[1016px] md:grid-cols-3 md:gap-6 md:p-0">
         {/* Starter */}
-        <div className="flex flex-col mb-[5.4rem] min-h-[55rem]">
-          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
+        <div className="mb-[5.4rem] flex min-h-[55rem] flex-col">
+          <h3 className="bg-violet font-heading p-8 text-center text-[3rem] font-bold tracking-wide text-white">
             Starter
           </h3>
-          <p className="grow py-7  px-1 font-[600] text-[1.6rem] italic tracking-wide leading-[2.6rem] text-center bg-gray-200 border-b border-b-black md:grow-0 md:px-2 md:h-[12rem]">
+          <p className="grow border-b  border-b-black bg-gray-200 px-1 py-7 text-center text-[1.6rem] font-[600] italic leading-[2.6rem] tracking-wide md:h-[12rem] md:grow-0 md:px-2">
             Need some assistance with setup
           </p>
-          <ul className="grow-[3] p-8 list-none bg-gray-200">
+          <ul className="grow-[3] list-none bg-gray-200 p-8">
             {[
               'Evaluate needs',
               'Deploy Nebari on your infrastructure',
@@ -231,27 +231,27 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             ].map((txt) => (
               <li
                 key={txt}
-                className="flex before:relative before:top-[6px] before:shrink-0 before:mr-[1em] mb-[8%] before:w-[13px] before:h-[10px] text-[1.6rem] tracking-wide leading-[2.3rem] before:bg-[url(/nebari-services/purple-check-mark.svg)] before:bg-no-repeat before:bg-contain"
+                className="mb-[8%] flex text-[1.6rem] leading-[2.3rem] tracking-wide before:relative before:top-[6px] before:mr-[1em] before:h-[10px] before:w-[13px] before:shrink-0 before:bg-[url(/nebari-services/purple-check-mark.svg)] before:bg-contain before:bg-no-repeat"
               >
                 {txt}
               </li>
             ))}
           </ul>
-          <div className="p-7 text-[4rem] font-bold tracking-wide text-center text-white bg-pink font-heading">
+          <div className="bg-pink font-heading p-7 text-center text-[4rem] font-bold tracking-wide text-white">
             $5k
           </div>
         </div>
 
         {/* Standard */}
-        <div className="flex flex-col mb-[5.4rem] min-h-[55rem]">
-          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
+        <div className="mb-[5.4rem] flex min-h-[55rem] flex-col">
+          <h3 className="bg-violet font-heading p-8 text-center text-[3rem] font-bold tracking-wide text-white">
             Standard
           </h3>
-          <p className="grow py-7 px-1 font-[600] text-[1.6rem] italic tracking-wide leading-[2.6rem] text-center bg-gray-200 border-b border-b-black md:grow-0 md:px-2 md:h-[12rem]">
+          <p className="grow border-b border-b-black bg-gray-200 px-1 py-7 text-center text-[1.6rem] font-[600] italic leading-[2.6rem] tracking-wide md:h-[12rem] md:grow-0 md:px-2">
             Need assistance with setup, onboarding users, and migrating
             workflows
           </p>
-          <ul className="grow-[3] p-8 list-none bg-gray-200 md:grow">
+          <ul className="grow-[3] list-none bg-gray-200 p-8 md:grow">
             {[
               'All Starter-tier services',
               'User training (up to 15 people)',
@@ -261,27 +261,27 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             ].map((txt) => (
               <li
                 key={txt}
-                className="flex before:relative before:top-[6px] before:shrink-0 before:mr-[1em] mb-[8%] before:w-[13px] before:h-[10px] text-[1.6rem] tracking-wide leading-[2.3rem] before:bg-[url(/nebari-services/purple-check-mark.svg)] before:bg-no-repeat before:bg-contain"
+                className="mb-[8%] flex text-[1.6rem] leading-[2.3rem] tracking-wide before:relative before:top-[6px] before:mr-[1em] before:h-[10px] before:w-[13px] before:shrink-0 before:bg-[url(/nebari-services/purple-check-mark.svg)] before:bg-contain before:bg-no-repeat"
               >
                 {txt}
               </li>
             ))}
           </ul>
-          <div className="p-7 text-[4rem] font-bold tracking-wide text-center text-white bg-pink font-heading">
+          <div className="bg-pink font-heading p-7 text-center text-[4rem] font-bold tracking-wide text-white">
             $20k
           </div>
         </div>
 
         {/* Plus */}
-        <div className="flex flex-col mb-[5.4rem] min-h-[55rem]">
-          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
+        <div className="mb-[5.4rem] flex min-h-[55rem] flex-col">
+          <h3 className="bg-violet font-heading p-8 text-center text-[3rem] font-bold tracking-wide text-white">
             Plus
           </h3>
-          <p className="grow py-7 px-1 font-[600] text-[1.6rem] italic tracking-wide leading-[2.6rem] text-center bg-gray-200 border-b border-b-black md:flex md:grow-0 md:items-center md:px-2 md:h-[12rem]">
+          <p className="grow border-b border-b-black bg-gray-200 px-1 py-7 text-center text-[1.6rem] font-[600] italic leading-[2.6rem] tracking-wide md:flex md:h-[12rem] md:grow-0 md:items-center md:px-2">
             Need assistance with setup, onboarding users, migrating workflows,
             and custom integrations
           </p>
-          <ul className="grow-[3] p-8 list-none bg-gray-200 md:flex md:flex-col">
+          <ul className="grow-[3] list-none bg-gray-200 p-8 md:flex md:flex-col">
             {[
               'All Standard-tier services',
               'User training (up to 45 people)',
@@ -292,50 +292,50 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             ].map((txt) => (
               <li
                 key={txt}
-                className="flex before:relative before:top-[6px] shrink before:shrink-0 before:mr-[1em] mb-[8%] before:w-[13px] before:h-[10px] text-[1.6rem] tracking-wide leading-[2.3rem] before:bg-[url(/nebari-services/purple-check-mark.svg)] before:bg-no-repeat before:bg-contain"
+                className="mb-[8%] flex shrink text-[1.6rem] leading-[2.3rem] tracking-wide before:relative before:top-[6px] before:mr-[1em] before:h-[10px] before:w-[13px] before:shrink-0 before:bg-[url(/nebari-services/purple-check-mark.svg)] before:bg-contain before:bg-no-repeat"
               >
                 {txt}
               </li>
             ))}
           </ul>
-          <div className="p-7 text-[4rem] font-bold tracking-wide text-center text-white bg-pink font-heading">
+          <div className="bg-pink font-heading p-7 text-center text-[4rem] font-bold tracking-wide text-white">
             $50k
           </div>
         </div>
       </div>
 
-      <div className="px-[10%] mb-[3.4em] w-full max-w-[405px] md:grid md:grid-cols-2 md:gap-10 md:p-0 md:max-w-[1016px]">
-        <div className="flex flex-col mb-[3.4rem]">
-          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
+      <div className="mb-[3.4em] w-full max-w-[405px] px-[10%] md:grid md:max-w-[1016px] md:grid-cols-2 md:gap-10 md:p-0">
+        <div className="mb-[3.4rem] flex flex-col">
+          <h3 className="bg-violet font-heading p-8 text-center text-[3rem] font-bold tracking-wide text-white">
             Fully managed
           </h3>
-          <p className="grow py-10 px-4 font-[500] text-[1.6rem] tracking-wide leading-[2.6rem] text-center bg-gray-200">
+          <p className="grow bg-gray-200 px-4 py-10 text-center text-[1.6rem] font-[500] leading-[2.6rem] tracking-wide">
             Nebari deployment on your infrastructure, completely managed and
             maintained by Quansight, with dedicated user support.
           </p>
         </div>
 
-        <div className="flex flex-col mb-[3.4rem]">
-          <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
+        <div className="mb-[3.4rem] flex flex-col">
+          <h3 className="bg-violet font-heading p-8 text-center text-[3rem] font-bold tracking-wide text-white">
             Event services
           </h3>
-          <p className="grow py-10 px-4 font-[500] text-[1.6rem] tracking-wide leading-[2.6rem] text-center bg-gray-200">
+          <p className="grow bg-gray-200 px-4 py-10 text-center text-[1.6rem] font-[500] leading-[2.6rem] tracking-wide">
             One-time Nebari deployment and management to run tutorials and
             workshops, with user and infrastructure support during the event.{' '}
           </p>
         </div>
       </div>
 
-      <h3 className="mb-[1em] text-[3rem] font-bold tracking-wide leading-[4.3rem] text-center font-heading">
+      <h3 className="font-heading mb-[1em] text-center text-[3rem] font-bold leading-[4.3rem] tracking-wide">
         Interested in Nebari services,
         <br />
         or a more customized solution?
       </h3>
 
-      <div className="py-[1.7rem] px-[3.5rem] mb-[1.9rem] text-center bg-pink">
+      <div className="bg-pink mb-[1.9rem] px-[3.5rem] py-[1.7rem] text-center">
         <Link href="/about-us#bookacallform">
           <a
-            className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
+            className="font-heading text-[1.7rem] font-bold text-white after:ml-[0.5em] after:content-[url(/nebari-services/right-pointing-triangle.svg)]"
             onClick={() =>
               prefillContactFormMessage(
                 "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
@@ -347,12 +347,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </Link>
       </div>
 
-      <ul
-        className="flex flex-col grow-[3] p-8"
-        style={{
-          listStyleImage: 'url(/nebari-services/purple-check-mark.svg)',
-        }}
-      >
+      <ul className="flex grow-[3] list-image-[url(/nebari-services/purple-check-mark.svg)] flex-col p-8">
         {[
           'A guided, hands-on Nebari demo',
           'Custom integrations',
@@ -361,7 +356,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         ].map((txt) => (
           <li
             key={txt}
-            className="mb-[0.4em] font-[700] text-[1.9rem] tracking-wide"
+            className="mb-[0.4em] text-[1.9rem] font-[700] tracking-wide"
           >
             {txt}
           </li>
@@ -372,7 +367,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
     <section className="bg-violet">
       <h2 className="sr-only">Testimonials</h2>
       <div
-        className="p-4 mx-auto sm:px-[3.4rem] xl:px-[11.5rem] max-w-layout"
+        className="max-w-layout mx-auto p-4 sm:px-[3.4rem] xl:px-[11.5rem]"
         style={{
           background:
             'url(/nebari-services/quansight-logo-violet-grayscale.svg) right bottom / 325px no-repeat',
@@ -398,8 +393,8 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           navigation={true}
         >
           <SwiperSlide>
-            <figure className="py-10 px-24 text-white">
-              <blockquote className="before:relative before:top-[45px] before:left-[-30px] text-[1.8rem] before:text-[10rem] italic font-semibold leading-[2.7rem] before:text-white before:content-['“']">
+            <figure className="px-24 py-10 text-white">
+              <blockquote className="text-[1.8rem] font-semibold italic leading-[2.7rem] before:relative before:left-[-30px] before:top-[45px] before:text-[10rem] before:text-white before:content-['“']">
                 <p className="mb-[1em]">
                   It [Nebari] is a really good way to produce a scalable Jupyter
                   data science platform on whichever cloud you need. The Nebari
@@ -416,8 +411,8 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             </figure>
           </SwiperSlide>
           <SwiperSlide>
-            <figure className="py-10 px-24 text-white">
-              <blockquote className="before:relative before:top-[45px] before:left-[-30px] text-[1.8rem] before:text-[10rem] italic font-semibold leading-[2.7rem] before:text-white before:content-['“']">
+            <figure className="px-24 py-10 text-white">
+              <blockquote className="text-[1.8rem] font-semibold italic leading-[2.7rem] before:relative before:left-[-30px] before:top-[45px] before:text-[10rem] before:text-white before:content-['“']">
                 <p className="mb-[1em]">
                   We engaged Quansight with some Jupyter [custom on-prem
                   Nebari], Python team development, data visualization skills in
@@ -433,8 +428,8 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             </figure>
           </SwiperSlide>
           <SwiperSlide>
-            <figure className="py-10 px-24 text-white">
-              <blockquote className="before:relative before:top-[45px] before:left-[-30px] text-[1.8rem] before:text-[10rem] italic font-semibold leading-[2.7rem] before:text-white before:content-['“']">
+            <figure className="px-24 py-10 text-white">
+              <blockquote className="text-[1.8rem] font-semibold italic leading-[2.7rem] before:relative before:left-[-30px] before:top-[45px] before:text-[10rem] before:text-white before:content-['“']">
                 <p className="mb-[1em]">
                   Before Nebari, we needed a devops engineer to launch and
                   maintain the deployment for ESIP, but now anyone can maintain
@@ -457,8 +452,8 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             </figure>
           </SwiperSlide>
           <SwiperSlide>
-            <figure className="py-10 px-24 text-white">
-              <blockquote className="before:relative before:top-[45px] before:left-[-30px] text-[1.8rem] before:text-[10rem] italic font-semibold leading-[2.7rem] before:text-white before:content-['“']">
+            <figure className="px-24 py-10 text-white">
+              <blockquote className="text-[1.8rem] font-semibold italic leading-[2.7rem] before:relative before:left-[-30px] before:top-[45px] before:text-[10rem] before:text-white before:content-['“']">
                 <p className="mb-[1em]">
                   Nebari is not only easy to deploy and maintain, but our users
                   have found conda-store to be critical for effectively working
@@ -475,8 +470,8 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             </figure>
           </SwiperSlide>
           <SwiperSlide>
-            <figure className="py-10 px-24 text-white">
-              <blockquote className="before:relative before:top-[45px] before:left-[-30px] text-[1.8rem] before:text-[10rem] italic font-semibold leading-[2.7rem] before:text-white before:content-['“']">
+            <figure className="px-24 py-10 text-white">
+              <blockquote className="text-[1.8rem] font-semibold italic leading-[2.7rem] before:relative before:left-[-30px] before:top-[45px] before:text-[10rem] before:text-white before:content-['“']">
                 <p className="mb-[1em]">
                   We chose Nebari to help manage our Kubernetes services better.
                   With no full-time DevOps person, we needed a solution that
@@ -496,8 +491,8 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       </div>
     </section>
 
-    <section className="flex flex-col items-center py-28 px-12 mx-auto max-w-layout">
-      <h2 className="mb-[1em] text-[4.2rem] leading-[1.16] text-center font-heading">
+    <section className="max-w-layout mx-auto flex flex-col items-center px-12 py-28">
+      <h2 className="font-heading mb-[1em] text-center text-[4.2rem] leading-[1.16]">
         Frequently Asked Questions
       </h2>
       <div className="w-full text-[1.6rem] font-normal leading-[1.3] sm:px-[3.4rem] xl:px-[11.5rem]">
@@ -732,20 +727,20 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         ].map(([question, answer]) => (
           <details
             key={String(question)}
-            className="py-12 px-4 space-y-8 border-b border-b-gray-300"
+            className="space-y-8 border-b border-b-gray-300 px-4 py-12"
           >
-            <summary className="text-[2.8rem] font-bold leading-[1.1] font-heading">
+            <summary className="font-heading text-[2.8rem] font-bold leading-[1.1]">
               {question}
             </summary>
-            <div className="space-y-8 max-w-prose">{answer}</div>
+            <div className="max-w-prose space-y-8">{answer}</div>
           </details>
         ))}
       </div>
 
-      <div className="py-[1.7rem] px-[3.5rem] mt-[6rem] text-center bg-violet">
+      <div className="bg-violet mt-[6rem] px-[3.5rem] py-[1.7rem] text-center">
         <Link href="/about-us#bookacallform">
           <a
-            className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
+            className="font-heading text-[1.7rem] font-bold text-white after:ml-[0.5em] after:content-[url(/nebari-services/right-pointing-triangle.svg)]"
             onClick={() =>
               prefillContactFormMessage(
                 "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
@@ -758,15 +753,15 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       </div>
     </section>
 
-    <section className="flex flex-col items-center py-36 px-12 bg-black md:bg-white">
-      <div className="mb-[1em] max-w-[70rem] text-[3rem] font-bold tracking-wide leading-[1.43] text-center text-white md:text-black font-heading">
+    <section className="flex flex-col items-center bg-black px-12 py-36 md:bg-white">
+      <div className="font-heading mb-[1em] max-w-[70rem] text-center text-[3rem] font-bold leading-[1.43] tracking-wide text-white md:text-black">
         <h2 className="inline">Learn more</h2> about Nebari deployment,
         training, and support.
       </div>
-      <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-pink">
+      <div className="bg-pink mb-[1rem] px-[2.9rem] py-[1.8rem] text-center">
         <a
           href="https://a.storyblok.com/f/147759/x/9c608eb5e1/quansight-more-about-nebari-services.pdf"
-          className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
+          className="font-heading text-[1.7rem] font-bold text-white after:ml-[1em] after:content-[url(/nebari-services/right-pointing-triangle.svg)]"
         >
           Download the PDF
         </a>
