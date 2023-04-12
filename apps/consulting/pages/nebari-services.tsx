@@ -20,6 +20,7 @@ import earthBigDataLogo from '../public/nebari-services/earth-big-data-logo.png'
 import esipLogo from '../public/nebari-services/esip-logo.png';
 import morningstarLogo from '../public/nebari-services/morningstar-logo.png';
 import nebariLogoWhite from '../public/nebari-services/nebari-logo-white.svg';
+import rightPointingTriangle from '../public/nebari-services/right-pointing-triangle.svg';
 import { TContainerProps } from '../types/containerProps';
 
 // This is kinda hacky. It runs a loop for up to 8 seconds checking every 400 ms
@@ -90,20 +91,23 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         <p className="mb-[2em] text-[1.6em] text-white">
           Deployment, support, and training
         </p>
-        <div className="py-[1.2rem] px-[3rem] mb-[6rem] text-center bg-violet">
-          <Link href="/about-us#bookacallform">
-            <a
-              className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
-              onClick={() =>
-                prefillContactFormMessage(
-                  "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
-                )
-              }
-            >
-              Contact Sales
-            </a>
-          </Link>
-        </div>
+        <Link href="/about-us#bookacallform">
+          <a
+            className="block py-[1.2rem] px-[3rem] mb-[6rem] text-[1.7rem] font-bold text-center text-white font-heading bg-violet"
+            onClick={() =>
+              prefillContactFormMessage(
+                "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+              )
+            }
+          >
+            Contact Sales
+            <Image
+              className="inline relative top-[-2px] ml-[0.5em]"
+              alt=""
+              src={rightPointingTriangle}
+            />
+          </a>
+        </Link>
       </div>
     </div>
 
@@ -144,20 +148,23 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </p>
       </video>
       {/* eslint-enable jsx-a11y/media-has-caption */}
-      <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-violet">
-        <Link href="/about-us#bookacallform">
-          <a
-            className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
-            onClick={() =>
-              prefillContactFormMessage(
-                'Hi, please send me a login to a demo instance of Nebari so I can check it out. Thanks!',
-              )
-            }
-          >
-            Try Nebari
-          </a>
-        </Link>
-      </div>
+      <Link href="/about-us#bookacallform">
+        <a
+          className="block py-[1.8rem] px-[2.9rem] mb-[1rem] text-[1.7rem] font-bold text-center text-white bg-violet font-heading"
+          onClick={() =>
+            prefillContactFormMessage(
+              'Hi, please send me a login to a demo instance of Nebari so I can check it out. Thanks!',
+            )
+          }
+        >
+          Try Nebari
+          <Image
+            className="inline relative top-[-2px] ml-[0.5em]"
+            alt=""
+            src={rightPointingTriangle}
+          />
+        </a>
+      </Link>
       <p className="px-[10rem] max-w-prose font-[400] text-[1.4rem] italic leading-[1.7rem] text-center text-[rgba(0,0,0,1)]">
         Drop us a line and we&rsquo;ll send you a login
       </p>
@@ -198,20 +205,23 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         Nebari for various client projects.
       </p>
 
-      <div className="py-[1.7rem] px-[3.5rem] mb-[6rem] text-center bg-pink">
-        <Link href="/about-us#bookacallform">
-          <a
-            className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
-            onClick={() =>
-              prefillContactFormMessage(
-                "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
-              )
-            }
-          >
-            Contact Sales
-          </a>
-        </Link>
-      </div>
+      <Link href="/about-us#bookacallform">
+        <a
+          className="block py-[1.7rem] px-[3.5rem] mb-[6rem] text-[1.7rem] font-bold text-center text-white bg-pink font-heading"
+          onClick={() =>
+            prefillContactFormMessage(
+              "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+            )
+          }
+        >
+          Contact Sales
+          <Image
+            className="inline relative top-[-2px] ml-[0.5em]"
+            alt=""
+            src={rightPointingTriangle}
+          />
+        </a>
+      </Link>
 
       <div className="px-[10%] w-full max-w-[405px] md:grid md:grid-cols-3 md:gap-6 md:p-0 md:max-w-[1016px] mx:auto">
         {/* Starter */}
@@ -332,20 +342,23 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         or a more customized solution?
       </h3>
 
-      <div className="py-[1.7rem] px-[3.5rem] mb-[1.9rem] text-center bg-pink">
-        <Link href="/about-us#bookacallform">
-          <a
-            className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
-            onClick={() =>
-              prefillContactFormMessage(
-                "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
-              )
-            }
-          >
-            Contact Sales
-          </a>
-        </Link>
-      </div>
+      <Link href="/about-us#bookacallform">
+        <a
+          className="block py-[1.7rem] px-[3.5rem] mb-[1.9rem] text-[1.7rem] font-bold text-center text-white bg-pink font-heading"
+          onClick={() =>
+            prefillContactFormMessage(
+              "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+            )
+          }
+        >
+          Contact Sales
+          <Image
+            className="inline relative top-[-2px] ml-[0.5em]"
+            alt=""
+            src={rightPointingTriangle}
+          />
+        </a>
+      </Link>
 
       <ul
         className="flex flex-col grow-[3] p-8"
@@ -742,20 +755,23 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         ))}
       </div>
 
-      <div className="py-[1.7rem] px-[3.5rem] mt-[6rem] text-center bg-violet">
-        <Link href="/about-us#bookacallform">
-          <a
-            className="after:ml-[0.5em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
-            onClick={() =>
-              prefillContactFormMessage(
-                "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
-              )
-            }
-          >
-            Contact Sales
-          </a>
-        </Link>
-      </div>
+      <Link href="/about-us#bookacallform">
+        <a
+          className="py-[1.7rem] px-[3.5rem] mt-[6rem] text-[1.7rem] font-bold text-center text-white bg-violet font-heading"
+          onClick={() =>
+            prefillContactFormMessage(
+              "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+            )
+          }
+        >
+          Contact Sales
+          <Image
+            className="inline relative top-[-2px] ml-[0.5em]"
+            alt=""
+            src={rightPointingTriangle}
+          />
+        </a>
+      </Link>
     </section>
 
     <section className="flex flex-col items-center py-36 px-12 bg-black md:bg-white">
@@ -763,14 +779,18 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         <h2 className="inline">Learn more</h2> about Nebari deployment,
         training, and support.
       </div>
-      <div className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-center bg-pink">
-        <a
-          href="https://a.storyblok.com/f/147759/x/9c608eb5e1/quansight-more-about-nebari-services.pdf"
-          className="after:ml-[1em] text-[1.7rem] font-bold text-white after:content-[url(/nebari-services/right-pointing-triangle.svg)] font-heading"
-        >
-          Download the PDF
-        </a>
-      </div>
+
+      <a
+        href="https://a.storyblok.com/f/147759/x/9c608eb5e1/quansight-more-about-nebari-services.pdf"
+        className="py-[1.8rem] px-[2.9rem] mb-[1rem] text-[1.7rem] font-bold text-center text-white bg-pink font-heading"
+      >
+        Download the PDF
+        <Image
+          className="inline relative top-[-2px] ml-[0.5em]"
+          alt=""
+          src={rightPointingTriangle}
+        />
+      </a>
     </section>
   </Layout>
 );
