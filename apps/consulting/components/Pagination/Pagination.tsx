@@ -37,7 +37,7 @@ export const Pagination: FC<TPaginationProps> = ({
   };
 
   return (
-    <div className="flex relative justify-center items-center pb-[20rem] mt-[1.1rem] sm:pb-[31.8rem] sm:mt-[4.6rem]">
+    <div className="relative mt-[1.1rem] flex items-center justify-center pb-[20rem] sm:mt-[4.6rem] sm:pb-[31.8rem]">
       {!!shouldRenderPagination && (
         <ReactPaginate
           breakLabel="..."
@@ -63,7 +63,7 @@ export const Pagination: FC<TPaginationProps> = ({
       )}
       <div
         aria-hidden="true"
-        className="absolute right-0 bottom-0 w-[26.832rem] h-[15.7rem] sm:top-0 sm:w-[41.388rem] sm:h-[24.217rem] xl:top-auto xl:right-[-15%] xl:bottom-0"
+        className="absolute bottom-0 right-0 h-[15.7rem] w-[26.832rem] sm:top-0 sm:h-[24.217rem] sm:w-[41.388rem] xl:bottom-0 xl:right-[-15%] xl:top-auto"
       >
         <Picture
           imageSrc={PaginationDecorativeImage}

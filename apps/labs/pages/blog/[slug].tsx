@@ -71,7 +71,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
       )}
       <article
         className={clsx(
-          'pt-[7.5rem] pb-[11.4rem] mx-auto w-[95%] max-w-[100.17rem] border-gray-100 border-solid md:w-[85%] xl:w-[70%]',
+          'mx-auto w-[95%] max-w-[100.17rem] border-solid border-gray-100 pb-[11.4rem] pt-[7.5rem] md:w-[85%] xl:w-[70%]',
           {
             'border-b': featuredPosts.length,
           },
@@ -81,7 +81,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
         <div className="mt-[1.8rem]">
           <PostMetaSection {...post.meta} />
 
-          <div className="w-full max-w-none prose-code:text-[.95em] prose-code:font-normal prose-a:underline-offset-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-transparent prose-code:border-none prose hover:prose-a:text-violet focus:prose-a:text-violet prose-code:text-violet-code prose-code:font-code">
+          <div className="prose-code:text-[.95em] prose-code:font-normal prose-a:underline-offset-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-transparent prose-code:border-none prose hover:prose-a:text-violet focus:prose-a:text-violet prose-code:text-violet-code prose-code:font-code w-full max-w-none">
             <MDXRemote {...post.content} components={blogAllowedComponents} />
           </div>
         </div>

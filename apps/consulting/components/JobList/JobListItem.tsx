@@ -7,12 +7,12 @@ export const JobListItem: FC<TJobListItem> = ({
   location,
   title,
 }) => (
-  <li className="sm:flex sm:justify-between sm:items-center">
+  <li className="sm:flex sm:items-center sm:justify-between">
     <a
       target="_blank"
       href={absolute_url}
       rel="noreferrer"
-      className="text-[2rem] font-bold leading-[2.7rem] sm:text-left text-violet"
+      className="text-violet text-[2rem] font-bold leading-[2.7rem] sm:text-left"
     >
       {title}
     </a>

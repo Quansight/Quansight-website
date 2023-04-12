@@ -27,7 +27,7 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
   const gitRef = process.env['NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF'];
   const githubBranchLink = (
     <a
-      className="underline transition-colors duration-200 hover:text-pink"
+      className="hover:text-pink underline transition-colors duration-200"
       href={`https://github.com/Quansight/Quansight-website/tree/${gitRef}`}
     >
       {gitRef}
@@ -65,7 +65,7 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
       {preview ? (
         <details>
           <summary>Preview</summary>
-          <ul className="list-disc list-inside">
+          <ul className="list-inside list-disc">
             <li>
               This page is in content preview mode. You can see{' '}
               <strong>draft</strong> content.
@@ -74,7 +74,7 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
               {showExitPreviewLink ? (
                 <a
                   href="/api/exit-preview"
-                  className="underline transition-colors duration-200 hover:text-pink"
+                  className="hover:text-pink underline transition-colors duration-200"
                 >
                   Exit content preview mode.
                 </a>
@@ -93,14 +93,14 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
       ) : (
         <details>
           <summary>Preview</summary>
-          <ul className="list-disc list-inside">
+          <ul className="list-inside list-disc">
             <li>
               You are seeing only <strong>published</strong> content.
             </li>
             <li>
               <a
                 href="/api/enter-preview"
-                className="underline transition-colors duration-200 hover:text-pink"
+                className="hover:text-pink underline transition-colors duration-200"
               >
                 Enter content preview mode
               </a>{' '}

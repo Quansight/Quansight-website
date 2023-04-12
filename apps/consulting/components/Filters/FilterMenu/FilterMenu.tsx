@@ -56,22 +56,22 @@ export const FilterMenu: FC<TFilterMenuProps> = ({
         aria-controls="filters"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         className={clsx(
-          'relative py-[0.8rem] px-[1.2rem] w-full text-[1.4rem]  font-normal leading-[3rem] text-center uppercase bg-gray-200 border-2 border-gray-300 sm:w-[26rem]',
+          'relative w-full border-2 border-gray-300 bg-gray-200  px-[1.2rem] py-[0.8rem] text-center text-[1.4rem] font-normal uppercase leading-[3rem] sm:w-[26rem]',
           isDropdownOpen ? 'border-b-transparent' : 'border-b-gray-300',
           filterMenuVariant === FilterMenuVariant.Type
             ? 'sm:hidden'
-            : 'sm:flex sm:gap-0 sm:justify-between sm:items-center',
+            : 'sm:flex sm:items-center sm:justify-between sm:gap-0',
         )}
       >
         {currentMenuName}
         <span
           className={clsx(
-            'inline-block absolute top-1/2 right-[1rem] w-0 h-0 border-x-8 border-t-8 border-x-transparent translate-y-[-50%] border-x-solid border-l-solid',
+            'border-x-solid border-l-solid absolute right-[1rem] top-1/2 inline-block h-0 w-0 translate-y-[-50%] border-x-8 border-t-8 border-x-transparent',
             isDropdownOpen
-              ? '-rotate-180 border-violet'
-              : 'border-gray-300 rotate-0',
+              ? 'border-violet -rotate-180'
+              : 'rotate-0 border-gray-300',
             filterMenuVariant === FilterMenuVariant.Category &&
-              'sm:relative sm:top-0 sm:right-0 sm:translate-y-none',
+              'sm:translate-y-none sm:relative sm:right-0 sm:top-0',
           )}
         />
       </button>
@@ -79,14 +79,14 @@ export const FilterMenu: FC<TFilterMenuProps> = ({
         <ul
           id="filters"
           className={clsx(
-            'absolute top-[-.2rem] z-20 px-[1.2rem] pb-[0.8rem] w-full bg-gray-200 border-x-2 border-b-2 border-gray-300',
+            'absolute top-[-.2rem] z-20 w-full border-x-2 border-b-2 border-gray-300 bg-gray-200 px-[1.2rem] pb-[0.8rem]',
             isDropdownOpen
               ? 'block'
               : filterMenuVariant === FilterMenuVariant.Type
-              ? 'hidden sm:block sm:relative'
+              ? 'hidden sm:relative sm:block'
               : 'hidden',
             filterMenuVariant === FilterMenuVariant.Type &&
-              'sm:flex sm:gap-[2rem] sm:justify-start sm:items-center sm:px-0 sm:pb-0 sm:bg-transparent sm:border-none',
+              'sm:flex sm:items-center sm:justify-start sm:gap-[2rem] sm:border-none sm:bg-transparent sm:px-0 sm:pb-0',
           )}
         >
           <FilterMenuItem

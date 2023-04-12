@@ -11,7 +11,7 @@ export const HeaderDesktopLink: FC<THeaderDesktopLinkProps> = ({
   queryParams,
 }) => (
   <Link href={getLinkUrl(queryParams, linkUrl)}>
-    <a className="text-[1.7rem] font-extrabold leading-[2.825rem] capitalize transition-colors motion-reduce:transition-none ease-in-out font-heading hover:text-green">
+    <a className="font-heading hover:text-green text-[1.7rem] font-extrabold capitalize leading-[2.825rem] transition-colors ease-in-out motion-reduce:transition-none">
       {linkText}
     </a>
   </Link>

@@ -6,15 +6,15 @@ import { TRelatedProps } from './types';
 export const Related: FC<TRelatedProps> = ({ title, items }) => (
   <section
     className="
-      py-[7rem] px-[3.5rem] mx-auto lg:px-[13rem] 
-      lg:pt-[11rem] max-w-layout
+      max-w-layout mx-auto px-[3.5rem] py-[7rem] 
+      lg:px-[13rem] lg:pt-[11rem]
     "
   >
     <h2
       className="
-        mb-[5rem] text-[4rem] font-extrabold leading-[4.9rem] text-center lg:mb-[8rem] 
-        lg:text-[4.8rem] font-heading
-        text-violet
+        font-heading text-violet mb-[5rem] text-center text-[4rem] font-extrabold 
+        leading-[4.9rem] lg:mb-[8rem]
+        lg:text-[4.8rem]
       "
     >
       {title}

@@ -22,11 +22,11 @@ export const Team: FC<TTeamProps> = ({
   const needHeadingSpace = checkNamesOverflow(teamToDisplay);
 
   return (
-    <section className="px-[1.8rem] my-[6rem] mx-auto md:my-[8rem] lg:px-[3rem] xl:px-[18rem] max-w-layout">
+    <section className="max-w-layout mx-auto my-[6rem] px-[1.8rem] md:my-[8rem] lg:px-[3rem] xl:px-[18rem]">
       <h2
         className="
-          text-[4rem] font-extrabold leading-[4.9rem] text-center md:text-[4.8rem]
-          text-violet font-heading
+          text-violet font-heading text-center text-[4rem] font-extrabold
+          leading-[4.9rem] md:text-[4.8rem]
         "
       >
         {header}

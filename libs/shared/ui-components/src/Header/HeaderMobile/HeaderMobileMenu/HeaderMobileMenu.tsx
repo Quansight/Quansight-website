@@ -38,7 +38,7 @@ export const HeaderMobileMenu: FC<THeaderMobileMenuProps> = ({
     <div
       ref={container}
       className={clsx(
-        'flex absolute z-40 justify-between items-center py-[0.5rem] px-[2rem] w-full transition-all motion-reduce:transition-none duration-300 ease-in-out',
+        'absolute z-40 flex w-full items-center justify-between px-[2rem] py-[0.5rem] transition-all duration-300 ease-in-out motion-reduce:transition-none',
         !menuBackground && domainVariant === DomainVariant.Quansight
           ? 'bg-transparent'
           : 'bg-black',

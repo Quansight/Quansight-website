@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { OptOutAnalytics } from '@quansight/shared/ui-components';
 
 export const OptOutAnalyticsPage = () => (
-  <div className="mx-auto text-[2em] prose">
+  <div className="prose mx-auto text-[2em]">
     <OptOutAnalytics domain="quansight.com" />
     <hr />
     <p>

@@ -7,9 +7,9 @@ export const FooterCopyright: FC<TFooterCopyrightProps> = ({
   policyAndConditions,
   copyright,
 }) => (
-  <section className="items-center pt-8 mt-[3.7rem] border-t-[0.5px] border-black sm:flex sm:gap-[2.7rem] sm:mt-[8.5rem] xl:border-white">
+  <section className="mt-[3.7rem] items-center border-t-[0.5px] border-black pt-8 sm:mt-[8.5rem] sm:flex sm:gap-[2.7rem] xl:border-white">
     {policyAndConditions?.length > 0 && (
-      <ul className="flex gap-[2.4rem] justify-start items-center sm:gap-[2.7rem]">
+      <ul className="flex items-center justify-start gap-[2.4rem] sm:gap-[2.7rem]">
         {policyAndConditions.map((link) => (
           <li key={link._uid}>
             <FooterLink {...link} className="text-[1.2rem] leading-[2.4rem]" />

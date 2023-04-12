@@ -14,13 +14,13 @@ export type TPostListItem = {
 
 export const PostListItem: FC<TPostListItem> = ({ post, variant }) => (
   <div
-    className={clsx('flex flex-row border border-gray-300 border-solid', {
+    className={clsx('flex flex-row border border-solid border-gray-300', {
       'flex-col': variant === 'vertical',
     })}
   >
     {post.meta.featuredImage && (
       <div
-        className={clsx('relative mb-[1.1rem] w-full h-[20rem]', {
+        className={clsx('relative mb-[1.1rem] h-[20rem] w-full', {
           'mb-0 w-1/2': variant === 'horizontal',
         })}
       >
@@ -39,7 +39,7 @@ export const PostListItem: FC<TPostListItem> = ({ post, variant }) => (
     >
       <h3
         className={clsx(
-          'text-[2.4rem] font-extrabold leading-[3rem] text-heading text-violet',
+          'text-heading text-violet text-[2.4rem] font-extrabold leading-[3rem]',
           {
             'my-[2rem]': variant === 'horizontal',
           },
@@ -49,7 +49,7 @@ export const PostListItem: FC<TPostListItem> = ({ post, variant }) => (
           <a>{post.meta.title}</a>
         </Link>
       </h3>
-      <p className="text-[1.2rem] font-normal leading-[2.7rem] text-black text-sans">
+      <p className="text-sans text-[1.2rem] font-normal leading-[2.7rem] text-black">
         By {post.meta.author.fullName} {post.meta.published}
       </p>
     </div>

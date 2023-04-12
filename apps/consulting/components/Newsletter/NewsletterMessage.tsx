@@ -7,7 +7,7 @@ export const NewsletterMessage: FC<TNewsletterMessageProps> = ({ message }) => {
     return (
       <p
         className="
-        absolute top-[-3rem] left-0 w-full text-[1.4rem] text-white
+        absolute left-0 top-[-3rem] w-full text-[1.4rem] text-white
         md:top-[6rem] md:text-center
       "
       >

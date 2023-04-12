@@ -14,9 +14,9 @@ export const HeaderDesktopNavigation: FC<THeaderDesktopNavigationProps> = ({
   return (
     <nav
       className={clsx(
-        'flex flex-wrap gap-x-[3rem] gap-y-[1.5rem] items-center w-full xl:gap-[2.7rem] xl:justify-end',
+        'flex w-full flex-wrap items-center gap-x-[3rem] gap-y-[1.5rem] xl:justify-end xl:gap-[2.7rem]',
         domainVariant === DomainVariant.Quansight
-          ? 'justify-start mt-[2.4rem]'
+          ? 'mt-[2.4rem] justify-start'
           : 'justify-end',
       )}
     >

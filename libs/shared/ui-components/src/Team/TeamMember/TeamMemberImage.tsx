@@ -11,7 +11,7 @@ export type TTeamMemberImage = {
 };
 
 export const TeamMemberImage: FC<TTeamMemberImage> = ({ image, shape }) => (
-  <div className="flex relative mb-[0.5rem] md:mb-[1rem]">
+  <div className="relative mb-[0.5rem] flex md:mb-[1rem]">
     <Picture
       className="brightness-110 grayscale"
       imageSrc={image.filename}
@@ -20,6 +20,6 @@ export const TeamMemberImage: FC<TTeamMemberImage> = ({ image, shape }) => (
       height={shape === TeamShape.Square ? 200 : 280}
       objectFit="cover"
     />
-    <span className="absolute top-0 left-0 w-full h-full opacity-25 z-2 bg-violet" />
+    <span className="z-2 bg-violet absolute left-0 top-0 h-full w-full opacity-25" />
   </div>
 );

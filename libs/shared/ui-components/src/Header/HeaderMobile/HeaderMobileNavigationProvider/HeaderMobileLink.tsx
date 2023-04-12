@@ -25,7 +25,7 @@ export const HeaderMobileLink: FC<THeaderMobileLinkProps> = ({
     <button
       onClick={onLinkClick}
       className={clsx(
-        'inline-block px-[2rem] w-full text-[1.7rem] leading-[2.825rem] text-left capitalize font-heading',
+        'font-heading inline-block w-full px-[2rem] text-left text-[1.7rem] capitalize leading-[2.825rem]',
         linkVariant === LinkVariant.Dropdown
           ? 'font-normal'
           : 'py-[1.6rem] font-extrabold',

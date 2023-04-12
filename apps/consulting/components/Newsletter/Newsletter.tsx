@@ -41,8 +41,8 @@ export const Newsletter: FC = () => {
   return (
     <section
       className={clsx(
-        'box-border py-[3rem] px-[1rem] my-[3rem] max-w-layout bg-violet',
-        'md:py-[4rem] md:px-[10rem] md:my-[5rem]',
+        'max-w-layout bg-violet my-[3rem] box-border px-[1rem] py-[3rem]',
+        'md:my-[5rem] md:px-[10rem] md:py-[4rem]',
       )}
     >
       <NewsletterHeader text="Subscribe for Updates & News" />
@@ -50,8 +50,8 @@ export const Newsletter: FC = () => {
         <div className="relative md:grow">
           <input
             className={clsx(
-              'p-[1.5rem] w-full text-[1.4rem] text-black',
-              'placeholder:text-[1.4rem] placeholder:text-grey',
+              'w-full p-[1.5rem] text-[1.4rem] text-black',
+              'placeholder:text-grey placeholder:text-[1.4rem]',
               'md:text-[1.6rem] md:placeholder:text-[1.6rem]',
             )}
             type="email"

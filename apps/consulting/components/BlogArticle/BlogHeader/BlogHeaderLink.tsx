@@ -8,8 +8,8 @@ import HeaderLinkIcon from './assets/headerLinkIcon.svg';
 
 export const BlogHeaderLink: FC = () => (
   <Link href="/library">
-    <a className="flex gap-[1rem] items-center mb-[1.2rem] sm:mt-[1.8rem] justify-left">
-      <div aria-hidden="true" className="relative w-[1rem] h-[1rem] text-black">
+    <a className="justify-left mb-[1.2rem] flex items-center gap-[1rem] sm:mt-[1.8rem]">
+      <div aria-hidden="true" className="relative h-[1rem] w-[1rem] text-black">
         <Picture
           imageSrc={HeaderLinkIcon}
           imageAlt="Decorative"

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Picture } from '@quansight/shared/ui-components';
 
 export const HeaderDecoration: FC = () => (
-  <div className="hidden absolute top-[6%] left-[6%] w-[16.6rem] h-[12.5rem] lg:block xl:top-[15%] xl:left-[2%]">
+  <div className="absolute left-[6%] top-[6%] hidden h-[12.5rem] w-[16.6rem] lg:block xl:left-[2%] xl:top-[15%]">
     <Picture
       imageSrc="/board/board-header-icon.svg"
       imageAlt=""

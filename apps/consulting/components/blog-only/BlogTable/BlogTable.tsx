@@ -75,7 +75,7 @@ export const BlogTable: FC<TBlogTableProps> = ({
   );
 
   return (
-    <div className="flex pl-16 md:justify-center md:pl-0 justify-left ">
+    <div className="justify-left flex pl-16 md:justify-center md:pl-0 ">
       <div className={tableDivClassName}>
         <table className="table-fixed">
           <thead>

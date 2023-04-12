@@ -14,7 +14,7 @@ export const RelatedItem: FC<TRelatedItemProps> = ({
 }) => (
   <li className="mb-[3.5rem] shadow-[0_4px_14px_rgba(0,0,0,.11)] md:w-1/3">
     <Link href={linkUrl}>
-      <a className="box-border block px-[6rem] pt-[3rem] pb-[5rem] h-full text-center md:px-0">
+      <a className="box-border block h-full px-[6rem] pb-[5rem] pt-[3rem] text-center md:px-0">
         <Picture
           imageSrc={imageSrc}
           imageAlt={imageAlt}
@@ -23,8 +23,8 @@ export const RelatedItem: FC<TRelatedItemProps> = ({
         />
         <h3
           className="
-            mt-[2.5rem] text-[2.2rem] font-extrabold leading-[3rem] md:mx-auto 
-            md:max-w-[15rem] font-heading
+            font-heading mt-[2.5rem] text-[2.2rem] font-extrabold leading-[3rem] 
+            md:mx-auto md:max-w-[15rem]
           "
         >
           {title}

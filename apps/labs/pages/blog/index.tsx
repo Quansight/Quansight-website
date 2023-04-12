@@ -145,9 +145,9 @@ const BlogListPage: FC<BlogListPageProps> = ({
           {(blok: TRawBlok) => <BlokProvider blok={blok} />}
         </Page>
       )}
-      <div className="pt-[3rem] pb-[12.2rem] mx-auto w-[95%] max-w-[83rem] md:w-[85%] xl:w-[70%]">
+      <div className="mx-auto w-[95%] max-w-[83rem] pb-[12.2rem] pt-[3rem] md:w-[85%] xl:w-[70%]">
         {data.content.title && (
-          <h2 className="text-[2.4rem] font-extrabold leading-[4.9rem] text-heading text-violet">
+          <h2 className="text-heading text-violet text-[2.4rem] font-extrabold leading-[4.9rem]">
             {data.content.title}
           </h2>
         )}
@@ -170,7 +170,7 @@ const BlogListPage: FC<BlogListPageProps> = ({
             return (
               <div
                 key={post.slug}
-                className="odd:mr-[2%] mb-[3.7rem] w-full md:w-[49%]"
+                className="mb-[3.7rem] w-full odd:mr-[2%] md:w-[49%]"
               >
                 <PostListItem post={post} variant="vertical" />
               </div>
@@ -212,7 +212,6 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
   const { items } = await getAllPosts(preview);
   const data = await getPage({ slug: 'blog', relations: '' }, preview);
 
-  
   /* TODO: RSS build is broken and needs fixing */
   // await generateRSS(items);
 

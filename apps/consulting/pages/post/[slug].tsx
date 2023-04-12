@@ -56,13 +56,13 @@ const Article: FC<TLibraryArticleProps> = ({
           objectFit="cover"
         />
       )}
-      <article className="px-[2rem] mx-auto sm:px-[6rem] lg:px-[10rem] xl:px-[25rem] max-w-layout">
+      <article className="max-w-layout mx-auto px-[2rem] sm:px-[6rem] lg:px-[10rem] xl:px-[25rem]">
         <BlogHeader
           postTitle={post.meta.title}
           publishedDate={post.meta.published}
           author={post.meta.author}
         />
-        <div className="prose-code:px-0 prose-pre:px-0 prose-img:mx-auto prose-figcaption:mt-[2rem] mb-[5rem] min-w-full prose-code:text-[.95em] text-[1.8rem]  prose-code:font-normal leading-[2.7rem] text-black prose-a:underline-offset-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-transparent prose-pre:bg-transparent prose-code:rounded-lg prose-code:border-none prose sm:prose-figcaption:mt-0 focus:prose-a:text-violet hover:prose-a:text-violet prose-code:text-violet-code prose-code:font-code">
+        <div className="prose-code:px-0 prose-pre:px-0 prose-img:mx-auto prose-figcaption:mt-[2rem] prose-code:text-[.95em] prose-code:font-normal prose-a:underline-offset-2 prose-code:before:content-none  prose-code:after:content-none prose-code:bg-transparent prose-pre:bg-transparent prose-code:rounded-lg prose-code:border-none prose sm:prose-figcaption:mt-0 focus:prose-a:text-violet hover:prose-a:text-violet prose-code:text-violet-code prose-code:font-code mb-[5rem] min-w-full text-[1.8rem] leading-[2.7rem] text-black">
           <MDXRemote {...post.content} components={blogAllowedComponents} />
         </div>
       </article>

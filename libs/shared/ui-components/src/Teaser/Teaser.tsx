@@ -16,18 +16,18 @@ export const Teaser: FC<TTeaserProps> = ({
   buttonText,
   buttonLink,
 }) => (
-  <div className={`relative max-w-layout mx-auto my-[6rem] lg:my-[7.6rem]`}>
+  <div className={`max-w-layout relative mx-auto my-[6rem] lg:my-[7.6rem]`}>
     <div
       className={clsx(
-        'py-[9.2rem] px-[2.4rem] lg:pt-[11.8rem] lg:pr-[34rem] lg:pl-[13rem] lg:w-3/4 xl:pr-[38rem]',
-        color === TeaserColor.Green && 'text-black bg-green',
-        color === TeaserColor.Violet && 'text-white bg-violet',
-        color === TeaserColor.Pink && 'text-white bg-pink',
+        'px-[2.4rem] py-[9.2rem] lg:w-3/4 lg:pl-[13rem] lg:pr-[34rem] lg:pt-[11.8rem] xl:pr-[38rem]',
+        color === TeaserColor.Green && 'bg-green text-black',
+        color === TeaserColor.Violet && 'bg-violet text-white',
+        color === TeaserColor.Pink && 'bg-pink text-white',
       )}
     >
       <h2
         className={`
-          w-full max-w-[440px] mb-[6.4rem] font-extrabold text-[4rem] leading-[4.9rem]
+          mb-[6.4rem] w-full max-w-[440px] text-[4rem] font-extrabold leading-[4.9rem]
           lg:mb-[2.6rem] lg:text-[4.8rem]
         `}
       >
@@ -41,7 +41,7 @@ export const Teaser: FC<TTeaserProps> = ({
       <div
         className={`
           w-full text-center
-          lg:absolute lg:w-2/5 lg:top-1/2 lg:right-32 lg:-translate-y-1/2
+          lg:absolute lg:right-32 lg:top-1/2 lg:w-2/5 lg:-translate-y-1/2
         `}
       >
         <Picture

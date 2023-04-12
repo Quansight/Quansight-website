@@ -58,7 +58,7 @@ export const HeaderDesktopDropdown: FC<THeaderDesktopDropdownProps> = ({
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         className={clsx(
           isDropdownOpen ? 'text-green' : 'text-white',
-          'flex justify-between items-center text-[1.7rem] font-extrabold leading-[2.825rem] capitalize font-heading',
+          'font-heading flex items-center justify-between text-[1.7rem] font-extrabold capitalize leading-[2.825rem]',
         )}
       >
         {buttonText}
@@ -67,15 +67,15 @@ export const HeaderDesktopDropdown: FC<THeaderDesktopDropdownProps> = ({
           className={clsx(
             isDropdownOpen ? 'rotate-180' : 'rotate-0',
             isDropdownOpen && 'border-y-green',
-            'inline-block ml-4 w-0 h-0 border-x-[0.7rem] border-t-[.7rem] border-x-transparent transition-transform motion-reduce:transition-none ease-in-out border-y-solid border-l-solid',
+            'border-y-solid border-l-solid ml-4 inline-block h-0 w-0 border-x-[0.7rem] border-t-[.7rem] border-x-transparent transition-transform ease-in-out motion-reduce:transition-none',
           )}
         />
       </button>
       {isDropdownOpen && (
-        <div className="absolute top-full right-0 z-20 pt-[2.4rem] w-max max-w-[25rem]">
+        <div className="absolute right-0 top-full z-20 w-max max-w-[25rem] pt-[2.4rem]">
           <ul
             id="options"
-            className="flex flex-col gap-[1.8rem] justify-between items-start p-[2.8rem] min-w-[19.8rem] text-left text-black bg-white"
+            className="flex min-w-[19.8rem] flex-col items-start justify-between gap-[1.8rem] bg-white p-[2.8rem] text-left text-black"
           >
             {links.map((link) => (
               <HeaderDesktopDropdownLink

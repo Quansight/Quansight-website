@@ -10,7 +10,7 @@ export const BlogHeader: FC<TBlogHeaderProps> = ({
   publishedDate,
   author,
 }) => (
-  <header className="mt-[5.8rem] mb-[7rem] sm:mt-[4.4rem] sm:mb-[4.1rem] xl:mt-[7.1rem]">
+  <header className="mb-[7rem] mt-[5.8rem] sm:mb-[4.1rem] sm:mt-[4.4rem] xl:mt-[7.1rem]">
     <BlogHeaderLink />
     <BlogHeaderPostData postTitle={postTitle} publishedDate={publishedDate} />
     <BlogHeaderAuthor {...author} />

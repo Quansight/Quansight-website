@@ -12,7 +12,7 @@ export const PostAuthor: FC<TPostAuthorProps> = ({
   avatarSrc,
 }) => (
   <div className="flex">
-    <div className="overflow-hidden mr-[0.8rem] w-[48px] h-[48px] rounded-[50%]">
+    <div className="mr-[0.8rem] h-[48px] w-[48px] overflow-hidden rounded-[50%]">
       <Picture
         width={48}
         height={48}
@@ -22,10 +22,10 @@ export const PostAuthor: FC<TPostAuthorProps> = ({
       />
     </div>
     <div>
-      <p className="text-[1.4rem] font-normal leading-[2.7rem] text-black text-sans">
+      <p className="text-sans text-[1.4rem] font-normal leading-[2.7rem] text-black">
         {nickName}
       </p>
-      <p className="text-[1.9rem] font-bold leading-[2.7rem] text-black text-sans">
+      <p className="text-sans text-[1.9rem] font-bold leading-[2.7rem] text-black">
         {fullName}
       </p>
     </div>

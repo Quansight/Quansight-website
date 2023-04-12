@@ -16,11 +16,11 @@ export const JobList: FC<TJobListProps> = ({
 
   return (
     <section
-      className="flex flex-col justify-center items-center my-24 mx-auto xl:mt-52 xl:mb-24 max-w-layout"
+      className="max-w-layout mx-auto my-24 flex flex-col items-center justify-center xl:mb-24 xl:mt-52"
       aria-live="polite"
       aria-busy={!error && !data ? 'true' : 'false'}
     >
-      <h2 className="mb-[4.3rem] text-[4rem] font-extrabold leading-[4.9rem] sm:mb-32 sm:text-[4.8rem] text-violet font-heading">
+      <h2 className="text-violet font-heading mb-[4.3rem] text-[4rem] font-extrabold leading-[4.9rem] sm:mb-32 sm:text-[4.8rem]">
         {title}
       </h2>
       {!error && !data && <Loading />}
@@ -28,7 +28,7 @@ export const JobList: FC<TJobListProps> = ({
       {!error && data?.jobs?.length === 0 && (
         <Message message={noOpeningsMessage} />
       )}
-      <ul className="flex flex-col gap-[6rem] px-20 text-center sm:px-0 sm:w-full sm:max-w-[60rem] lg:max-w-[70rem] xl:max-w-[80rem]">
+      <ul className="flex flex-col gap-[6rem] px-20 text-center sm:w-full sm:max-w-[60rem] sm:px-0 lg:max-w-[70rem] xl:max-w-[80rem]">
         {data?.jobs?.map((props) => (
           <JobListItem {...props} key={props.id} />
         ))}

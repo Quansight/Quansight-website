@@ -12,12 +12,12 @@ export const IntertwinedArticleItem: FC<TIntertwinedArticleItemProps> = ({
 }) => {
   const [imageSizes, setImageSizes] = useState({ width: 0, height: 0 });
   return (
-    <section className="flex flex-col-reverse gap-16 justify-center items-center mb-16 sm:flex-row sm:odd:flex-row-reverse sm:gap-32">
+    <section className="mb-16 flex flex-col-reverse items-center justify-center gap-16 sm:flex-row sm:gap-32 sm:odd:flex-row-reverse">
       <div
-        className="flex flex-col gap-8 text-[1.6rem] font-normal leading-[2.7rem] text-left text-black sm:w-1/2"
+        className="flex flex-col gap-8 text-left text-[1.6rem] font-normal leading-[2.7rem] text-black sm:w-1/2"
         dangerouslySetInnerHTML={createMarkup(text)}
       />
-      <div className="flex relative justify-center items-center w-full sm:w-1/2">
+      <div className="relative flex w-full items-center justify-center sm:w-1/2">
         <Picture
           imageSrc={imageSrc}
           imageAlt={imageAlt}

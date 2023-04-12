@@ -18,15 +18,15 @@ export const Logos: FC<TLogosProps> = ({
   return (
     <section
       className="
-        flex flex-col items-center py-[4rem] px-[3rem] mx-auto text-center 
-        md:py-[6.5rem] md:px-[13rem]
-        max-w-layout
+        max-w-layout mx-auto flex flex-col items-center px-[3rem] py-[4rem] 
+        text-center md:px-[13rem]
+        md:py-[6.5rem]
       "
     >
       {title && (
         <h2
           className={clsx(
-            'relative mx-auto max-w-[65rem] leading-[3.5rem] z-1 font-heading',
+            'z-1 font-heading relative mx-auto max-w-[65rem] leading-[3.5rem]',
             colorVariant === LogosColors.White &&
               'hidden pb-[2rem] text-[2.2rem] text-white md:block',
             colorVariant === LogosColors.Black &&

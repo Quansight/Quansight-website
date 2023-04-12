@@ -10,11 +10,11 @@ export const CarouselPagination: FC<TCarouselPaginationProps> = ({
   const swiper = useSwiper();
 
   return (
-    <div className="flex gap-4 justify-center items-center py-1 mt-[8.8rem] sm:mt-[1.1rem]">
+    <div className="mt-[8.8rem] flex items-center justify-center gap-4 py-1 sm:mt-[1.1rem]">
       {[...Array(slidesLength).keys()].map((slideIndex) => (
         <button
           aria-label={`Go to slide ${slideIndex + 1}`}
-          className={`w-4 h-4 rounded-full ${
+          className={`h-4 w-4 rounded-full ${
             currentSlide === slideIndex ? 'bg-pink' : 'bg-gray-100'
           }`}
           key={slideIndex}

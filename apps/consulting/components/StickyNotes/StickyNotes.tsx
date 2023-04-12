@@ -6,7 +6,7 @@ import { TStickyNotesProps, StickyNotesVariant } from './types';
 
 export const StickyNotes: FC<TStickyNotesProps> = ({ variant, items }) => {
   return (
-    <div className="flex relative flex-col items-stretch mx-auto sm:flex-row xl:px-[18rem] max-w-layout">
+    <div className="max-w-layout relative mx-auto flex flex-col items-stretch sm:flex-row xl:px-[18rem]">
       {items.map((item, index, source) => (
         <StickyNote
           key={item.title}

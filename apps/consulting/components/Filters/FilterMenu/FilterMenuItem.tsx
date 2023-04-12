@@ -13,7 +13,7 @@ export const FilterMenuItem: FC<TFilterMenuItemProps> = ({
   <li>
     <button
       className={clsx(
-        'w-full text-[1.4rem] font-normal leading-[3rem] text-left uppercase',
+        'w-full text-left text-[1.4rem] font-normal uppercase leading-[3rem]',
         menuDataCurrent === menuDataItemValue ? 'text-pink' : 'text:black',
       )}
       onClick={() => onFilterChange(menuDataItemValue)}

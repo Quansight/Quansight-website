@@ -12,19 +12,19 @@ export type TFeaturedPostsProps = {
 
 export const FeaturedPosts: FC<TFeaturedPostsProps> = ({ posts }) => {
   return (
-    <div className="pt-[9.9rem] pb-[11.4rem]">
-      <h3 className="mb-[5rem] text-[1.9rem] font-bold leading-[2.7rem] text-center text-black">
+    <div className="pb-[11.4rem] pt-[9.9rem]">
+      <h3 className="mb-[5rem] text-center text-[1.9rem] font-bold leading-[2.7rem] text-black">
         More articles from our Blog
       </h3>
 
       <div className="flex flex-col justify-start sm:flex-row">
         {posts.map((post) => (
           <div
-            className="first:mb-[3.6rem] w-full border border-gray-300 border-solid sm:first:mr-[2.2rem] sm:first:mb-0 sm:w-1/2"
+            className="w-full border border-solid border-gray-300 first:mb-[3.6rem] sm:w-1/2 sm:first:mb-0 sm:first:mr-[2.2rem]"
             key={post.slug}
           >
             {post.meta.featuredImage && (
-              <div className="relative w-full h-[20rem]">
+              <div className="relative h-[20rem] w-full">
                 <Picture
                   layout="fill"
                   objectFit="cover"
@@ -33,7 +33,7 @@ export const FeaturedPosts: FC<TFeaturedPostsProps> = ({ posts }) => {
                 />
               </div>
             )}
-            <div className="px-[1.5rem] pt-[1.5rem] pb-[3rem]">
+            <div className="px-[1.5rem] pb-[3rem] pt-[1.5rem]">
               <h4 className="text-[2.2rem] font-extrabold leading-[3.7rem] text-black">
                 <Link href={`/blog/${post.slug}`}>
                   <a>{post.meta.title}</a>

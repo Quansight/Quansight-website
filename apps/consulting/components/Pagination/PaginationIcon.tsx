@@ -12,7 +12,7 @@ export const PaginationIcon: FC<TPaginationIconProps> = ({ orientation }) => {
   return (
     <div
       className={clsx(
-        'relative  w-[1.5rem] h-[1.5rem]',
+        'relative  h-[1.5rem] w-[1.5rem]',
         orientation === PaginationOrientation.Prev && 'rotate-180',
       )}
     >

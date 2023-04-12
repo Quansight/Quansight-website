@@ -19,7 +19,7 @@ const BoardListItem: FC<TBoardListItemProps> = ({
     lg:flex-row lg:items-start
   "
   >
-    <div className="relative w-full h-[9rem] lg:w-1/3 lg:min-w-[9rem] lg:text-right">
+    <div className="relative h-[9rem] w-full lg:w-1/3 lg:min-w-[9rem] lg:text-right">
       <Picture
         imageSrc={imageSrc}
         imageAlt={imageAlt}
@@ -27,11 +27,11 @@ const BoardListItem: FC<TBoardListItemProps> = ({
         objectFit="contain"
       />
     </div>
-    <div className="mt-[1.5rem] mb-[4.4rem] lg:mt-0">
+    <div className="mb-[4.4rem] mt-[1.5rem] lg:mt-0">
       <h3
         className="
-        text-[2.2rem] font-extrabold leading-[3rem] text-center lg:pl-[3rem]
-        lg:mb-[2.5rem] lg:text-left font-heading
+        font-heading text-center text-[2.2rem] font-extrabold leading-[3rem]
+        lg:mb-[2.5rem] lg:pl-[3rem] lg:text-left
       "
       >
         {title}
@@ -39,7 +39,7 @@ const BoardListItem: FC<TBoardListItemProps> = ({
       {text && (
         <p
           className="
-          mb-[0.5rem] text-[1.6rem] leading-[2.7rem] text-center
+          mb-[0.5rem] text-center text-[1.6rem] leading-[2.7rem]
           lg:px-[3rem] lg:text-left
           xl:pr-[10rem]
         "

@@ -132,7 +132,7 @@ export const Library: FC<TLibraryProps> = ({
           {(blok: TRawBlok) => <BlokProvider blok={blok} />}
         </Page>
       )}
-      <div className="px-8 mx-auto lg:px-40 xl:px-[30rem] max-w-layout">
+      <div className="max-w-layout mx-auto px-8 lg:px-40 xl:px-[30rem]">
         {carouselTiles?.length > 0 && (
           <Carousel carouselTiles={carouselTiles} />
         )}

@@ -3,12 +3,12 @@ import { FC } from 'react';
 export const StickyNotesDecor: FC = () => (
   <div
     className="
-      flex absolute right-[3rem] bottom-[-5rem] z-[1] justify-center items-center w-[10rem]
-      h-[10rem] border border-solid rotate-45 sm:right-[2.5rem]
-      sm:bottom-[-3rem] xl:right-[15rem] border-violet
-      sm:border-green
+      border-violet sm:border-green absolute bottom-[-5rem] right-[3rem] z-[1] flex h-[10rem]
+      w-[10rem] rotate-45 items-center justify-center border
+      border-solid sm:bottom-[-3rem] sm:right-[2.5rem]
+      xl:right-[15rem]
     "
   >
-    <div className="w-[73%] h-[73%] rotate-45 bg-violet"></div>
+    <div className="bg-violet h-[73%] w-[73%] rotate-45"></div>
   </div>
 );

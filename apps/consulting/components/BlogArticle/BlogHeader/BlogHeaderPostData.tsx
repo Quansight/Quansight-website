@@ -7,7 +7,7 @@ export const BlogHeaderPostData: FC<TBlogHeaderPostDataProps> = ({
   publishedDate,
 }) => (
   <section className="mb-[1.2rem] lg:mb-[3.7rem]">
-    <h2 className="text-[3rem] font-extrabold leading-[5.3rem] sm:mb-[5.1rem] sm:text-[4.8rem] font-heading text-violet">
+    <h2 className="font-heading text-violet text-[3rem] font-extrabold leading-[5.3rem] sm:mb-[5.1rem] sm:text-[4.8rem]">
       {postTitle}
     </h2>
     {publishedDate && (

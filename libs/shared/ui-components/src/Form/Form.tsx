@@ -59,9 +59,9 @@ export const Form: FC<TFormProps> = (props) => {
     <div
       id={BOOK_A_CALL_FORM_ID}
       className={clsx(
-        'relative py-[4.1rem] my-[6rem] mx-auto max-w-layout',
+        'max-w-layout relative mx-auto my-[6rem] py-[4.1rem]',
         'md:flex md:items-center md:py-[6rem]',
-        'xl:py-[8rem] xl:my-[8rem]',
+        'xl:my-[8rem] xl:py-[8rem]',
         backgroundStyles,
       )}
     >
@@ -109,7 +109,7 @@ export const Form: FC<TFormProps> = (props) => {
           </div>
           <div className="flex justify-center md:justify-end lg:mr-[-3.5rem]">
             <Button
-              className="py-[1.5rem] px-[5rem]"
+              className="px-[5rem] py-[1.5rem]"
               title="Submit"
               type="submit"
               onClick={checkErrors}

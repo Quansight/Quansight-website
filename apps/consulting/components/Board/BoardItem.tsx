@@ -17,7 +17,7 @@ const BoardItem: FC<TBoardItemProps & { classNameBorder: string }> = ({
   return (
     <div
       className={clsx(
-        'flex flex-col pt-[2.8rem] pb-[4.1rem] text-center sm:pt-[4.2rem]',
+        'flex flex-col pb-[4.1rem] pt-[2.8rem] text-center sm:pt-[4.2rem]',
         classNameBorder,
       )}
     >
@@ -33,10 +33,10 @@ const BoardItem: FC<TBoardItemProps & { classNameBorder: string }> = ({
               priority
             />
           </div>
-          <div className="text-[2.2rem] font-extrabold leading-[3rem] sm:mt-[2.8rem] sm:mb-[2.2rem] xl:mt-[3.6rem] xl:mb-[2.2rem] font-heading">
+          <div className="font-heading text-[2.2rem] font-extrabold leading-[3rem] sm:mb-[2.2rem] sm:mt-[2.8rem] xl:mb-[2.2rem] xl:mt-[3.6rem]">
             {title}
           </div>
-          <div className="flex gap-3 justify-center items-center mx-auto w-auto text-[1.6rem] font-bold leading-[3.7rem]">
+          <div className="mx-auto flex w-auto items-center justify-center gap-3 text-[1.6rem] font-bold leading-[3.7rem]">
             {linkTitle}
             <Picture
               imageSrc="/board/board-btn-arrow.svg"

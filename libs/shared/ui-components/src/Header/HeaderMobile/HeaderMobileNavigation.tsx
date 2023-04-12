@@ -15,14 +15,14 @@ export const HeaderMobileNavigation: FC<THeaderMobileNavigationProps> = ({
 }) => (
   <nav
     className={clsx(
-      'absolute inset-0 z-30 pt-[8rem] w-screen h-screen bg-black transition-transform motion-reduce:transition-none duration-300 ease-in-out',
+      'absolute inset-0 z-30 h-screen w-screen bg-black pt-[8rem] transition-transform duration-300 ease-in-out motion-reduce:transition-none',
       isNavigationOpen ? 'block' : 'hidden',
     )}
   >
-    <div className="overflow-y-auto pb-[5rem] h-full">
+    <div className="h-full overflow-y-auto pb-[5rem]">
       <ul
         id="menu"
-        className="flex flex-col justify-start items-center px-[2rem] pt-[1.8rem]"
+        className="flex flex-col items-center justify-start px-[2rem] pt-[1.8rem]"
       >
         {navigation.map((navigationItem) => (
           <li
