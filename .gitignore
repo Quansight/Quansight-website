@@ -44,3 +44,6 @@ Thumbs.db
 .eslintcache
 .env
 .history
+
+# Next.js
+.next
