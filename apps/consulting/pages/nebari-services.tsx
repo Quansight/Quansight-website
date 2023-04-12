@@ -75,9 +75,9 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       variant={DomainVariant.Quansight}
     />
 
-    <div className="overflow-hidden w-full h-[100px] bg-[#000]"></div>
+    <div className="overflow-hidden w-full h-[100px] bg-black"></div>
 
-    <div className="relative mx-auto max-w-full h-[52.4rem] sm:h-[calc(780px_-_40vw)] lg:h-[36.7rem] nebari-hero-background">
+    <div className="relative mx-auto max-w-full h-[52.4rem] bg-black sm:h-[calc(780px_-_40vw)] lg:h-[36.7rem] nebari-hero-background">
       <div className="flex relative flex-col items-center px-[2rem] pt-[13rem] w-full h-full sm:pt-[calc(280px_-_23.4vw)] md:absolute md:px-0 lg:pt-[4rem]">
         <Image
           className="mb-[20px] brightness-200"
@@ -372,11 +372,8 @@ export const NebariServicesPage: FC<TContainerProps> = ({
     <section className="bg-violet">
       <h2 className="sr-only">Testimonials</h2>
       <div
-        className="p-4 mx-auto sm:px-[3.4rem] xl:px-[11.5rem] max-w-layout"
-        style={{
-          background:
-            'url(/nebari-services/quansight-logo-violet-grayscale.svg) right bottom / 325px no-repeat',
-        }}
+        // eslint-disable-next-line
+        className="py-8 px-4 mx-auto bg-[url(/nebari-services/quansight-logo-violet-grayscale.svg)] bg-right-bottom bg-no-repeat bg-[length:340px] sm:px-[3.4rem] md:py-32 md:bg-[length:460px] xl:px-[11.5rem] max-w-layout"
       >
         <style>{`
           .swiper-button-next, .swiper-button-prev {
@@ -399,7 +396,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         >
           <SwiperSlide>
             <figure className="py-10 px-24 text-white">
-              <blockquote className="before:relative before:top-[45px] before:left-[-30px] text-[1.8rem] before:text-[10rem] italic font-semibold leading-[2.7rem] before:text-white before:content-['“']">
+              <blockquote className="before:relative before:top-[36px] before:left-[-36px] text-[1.8rem] before:text-[10rem] italic font-semibold leading-[2.7rem] before:text-white before:content-['“']">
                 <p className="mb-[1em]">
                   It [Nebari] is a really good way to produce a scalable Jupyter
                   data science platform on whichever cloud you need. The Nebari
