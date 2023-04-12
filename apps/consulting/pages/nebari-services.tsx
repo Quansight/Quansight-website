@@ -113,7 +113,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       </h2>
       <p className="mx-auto mb-[3.7rem] max-w-prose text-[1.6rem] leading-[2.7rem] text-center">
         <span className="font-bold">
-          Nebari is on open source data science platform{' '}
+          Nebari is an open source data science platform{' '}
         </span>
         for teams with serious computational and collaboration needs, looking
         to:
