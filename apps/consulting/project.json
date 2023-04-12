@@ -13,7 +13,8 @@
         "outputPath": "dist/apps/consulting"
       },
       "configurations": {
-        "production": {}
+        "production": {},
+        "development": {}
       }
     },
     "serve": {
@@ -28,8 +29,13 @@
         "production": {
           "buildTarget": "consulting:build:production",
           "dev": false
+        },
+        "development": {
+          "buildTarget": "consulting:build:development",
+          "dev": true
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "export": {
       "executor": "@nrwl/next:export",

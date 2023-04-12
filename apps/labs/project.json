@@ -13,7 +13,8 @@
         "outputPath": "dist/apps/labs"
       },
       "configurations": {
-        "production": {}
+        "production": {},
+        "development": {}
       }
     },
     "serve": {
@@ -28,8 +29,13 @@
         "production": {
           "buildTarget": "labs:build:production",
           "dev": false
+        },
+        "development": {
+          "buildTarget": "labs:build:development",
+          "dev": true
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "export": {
       "executor": "@nrwl/next:export",
