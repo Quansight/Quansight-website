@@ -289,14 +289,6 @@
       "name": "update-configs-jest-29"
     },
     {
-      "version": "15.8.0-beta.0",
-      "cli": "nx",
-      "description": "Update jest test files to support jest 29 changes (https://jestjs.io/docs/upgrading-to-jest29)",
-      "factory": "./src/migrations/update-15-8-0/update-tests-jest-29",
-      "package": "@nrwl/jest",
-      "name": "update-tests-jest-29"
-    },
-    {
       "cli": "nx",
       "version": "13.10.0-beta.0",
       "description": "Update to React 18",
