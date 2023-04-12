@@ -16,7 +16,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/shared/types"],
       "options": {
-        "jestConfig": "libs/shared/types/jest.config.js",
+        "jestConfig": "libs/shared/types/jest.config.ts",
         "passWithNoTests": true
       }
     }
