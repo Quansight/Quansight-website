@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 export const FormError: FC = () => (
-  <span className="block mt-[.5rem] text-[1.2rem] text-red">
+  <span className="text-red mt-[.5rem] block text-[1.2rem]">
     This field is required
   </span>
 );

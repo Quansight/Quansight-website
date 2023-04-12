@@ -27,13 +27,13 @@ export const HeaderMobileBookingLink: FC<TBookingLinkProps> = ({
   return (
     <button
       onClick={onButtonClick}
-      className="inline-block py-[1.6rem] px-[4.4rem] mx-[2rem] mt-[6.8rem] text-[1.7rem] font-extrabold leading-[2.825rem] text-white bg-pink font-heading"
+      className="bg-pink font-heading mx-[2rem] mt-[6.8rem] inline-block py-[1.6rem] px-[4.4rem] text-[1.7rem] font-extrabold leading-[2.825rem] text-white"
     >
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         {bookACallLinkText}
         <span
           aria-hidden="true"
-          className="inline-block ml-4 w-0 h-0 border-y-8 border-l-8 border-y-transparent border-y-solid border-l-solid"
+          className="border-y-solid border-l-solid ml-4 inline-block h-0 w-0 border-y-8 border-l-8 border-y-transparent"
         />
       </div>
     </button>

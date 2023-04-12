@@ -8,7 +8,7 @@ export const FooterNavigation: FC<TFooterNavigationProps> = ({
   links,
 }) => (
   <div className="mb-8">
-    <h2 className="pb-[1.3rem] mb-4 text-[1.6rem] font-bold leading-[3rem] border-b-[0.5px] border-black xl:border-white">
+    <h2 className="mb-4 border-b-[0.5px] border-black pb-[1.3rem] text-[1.6rem] font-bold leading-[3rem] xl:border-white">
       {title}
     </h2>
     <div className="flex flex-col">

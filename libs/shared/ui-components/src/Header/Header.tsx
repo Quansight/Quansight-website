@@ -31,7 +31,7 @@ export const Header: FC<THeaderProps> = ({
       {process.env['NEXT_PUBLIC_VERCEL_ENV'] !== 'production' && (
         <PreviewModeBanner preview={preview} />
       )}
-      <div className="mx-auto max-w-layout">
+      <div className="max-w-layout mx-auto">
         <HeaderSkipLinks skipLinksText={skipLinksText} />
         {deviceSize === DeviceSizeVariant.Mobile && (
           <HeaderMobile

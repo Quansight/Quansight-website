@@ -19,8 +19,8 @@ export const HeaderSkipLinks: FC<THeaderSkipLinksProps> = ({
   };
 
   return (
-    <div className="absolute inset-x-0 top-0 z-50 py-[2rem] max-w-full text-[1.6rem] font-extrabold  text-center text-white bg-black transition-transform motion-reduce:transition-none duration-300 ease-in-out -translate-y-full focus-within:translate-y-0">
-      <button onClick={onSkipLinks} className="pb-2 border-b-2 ">
+    <div className="absolute inset-x-0 top-0 z-50 max-w-full -translate-y-full bg-black py-[2rem]  text-center text-[1.6rem] font-extrabold text-white transition-transform duration-300 ease-in-out focus-within:translate-y-0 motion-reduce:transition-none">
+      <button onClick={onSkipLinks} className="border-b-2 pb-2 ">
         {skipLinksText}
       </button>
     </div>

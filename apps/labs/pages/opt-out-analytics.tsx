@@ -1,7 +1,7 @@
 import { OptOutAnalytics } from '@quansight/shared/ui-components';
 
 export const OptOutAnalyticsPage = () => (
-  <div className="mx-auto prose">
+  <div className="prose mx-auto">
     <OptOutAnalytics domain="labs.quansight.org" />
     <hr />
     <p>

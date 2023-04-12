@@ -10,9 +10,9 @@ export const NewsletterButton: FC<TNewsletterButtonProps> = ({
 }) => (
   <button
     className={clsx(
-      'py-[.7rem] px-[5rem] mt-[1.2rem] w-full text-[1.6rem] leading-[3.9rem] text-white bg-pink',
-      'md:box-border md:mt-0 md:w-[20rem] md:text-[1.8rem]',
-      isSubscribed && 'opacity-50 pointer-events-none',
+      'bg-pink mt-[1.2rem] w-full py-[.7rem] px-[5rem] text-[1.6rem] leading-[3.9rem] text-white',
+      'md:mt-0 md:box-border md:w-[20rem] md:text-[1.8rem]',
+      isSubscribed && 'pointer-events-none opacity-50',
     )}
     title={cta}
     type="submit"

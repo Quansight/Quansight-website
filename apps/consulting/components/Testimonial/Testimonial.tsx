@@ -14,14 +14,14 @@ export const Testimonial: FC<TTestimonialProps> = ({
   position,
 }) => (
   <section className="md:py-[5rem]">
-    <div className="relative text-white bg-pink">
+    <div className="bg-pink relative text-white">
       <Triangle />
-      <div className="pt-[3.6rem] pb-[14rem] mx-auto md:pt-[11rem] md:pb-[30rem] max-w-layout">
+      <div className="max-w-layout mx-auto pt-[3.6rem] pb-[14rem] md:pt-[11rem] md:pb-[30rem]">
         <div className="px-[2.4rem] md:flex md:gap-[7rem] lg:px-[13rem]">
           <h2
             className="
-              text-[4rem] font-extrabold leading-[4.9rem] md:w-1/2
-              md:text-[4.8rem] font-heading
+              font-heading text-[4rem] font-extrabold leading-[4.9rem]
+              md:w-1/2 md:text-[4.8rem]
             "
           >
             {header}
@@ -32,7 +32,7 @@ export const Testimonial: FC<TTestimonialProps> = ({
         </div>
       </div>
     </div>
-    <div className="px-[2.4rem] mt-[-6.6rem] md:px-[8rem] md:mt-[-20rem]">
+    <div className="mt-[-6.6rem] px-[2.4rem] md:mt-[-20rem] md:px-[8rem]">
       <Quote
         imageSrc={imageSrc}
         imageAlt={imageAlt}

@@ -27,7 +27,7 @@ export const Tile: FC<TTileProps> = ({
       <div
         className={clsx(
           tileVariant === TileVariant.Blog && 'h-[19.8rem] sm:h-[21.9rem]',
-          'relative w-full h-[21.2rem] sm:h-[23rem] lg:h-[16.4rem]',
+          'relative h-[21.2rem] w-full sm:h-[23rem] lg:h-[16.4rem]',
         )}
       >
         <Picture
@@ -47,13 +47,13 @@ export const Tile: FC<TTileProps> = ({
         )}
       >
         {tileVariant === TileVariant.Library && (
-          <p className="pt-8 pb-5 text-[1.4rem] font-normal leading-[3rem] uppercase sm:pb-1 xl:pb-5">
+          <p className="pt-8 pb-5 text-[1.4rem] font-normal uppercase leading-[3rem] sm:pb-1 xl:pb-5">
             {postType}
           </p>
         )}
         <h3
           className={clsx(
-            'w-1/2 text-[2.2rem] font-extrabold leading-[2.9rem] text-black lg:w-full font-heading',
+            'font-heading w-1/2 text-[2.2rem] font-extrabold leading-[2.9rem] text-black lg:w-full',
             tileVariant === TileVariant.Blog && 'leading-[3.7rem]',
           )}
         >
@@ -61,7 +61,7 @@ export const Tile: FC<TTileProps> = ({
         </h3>
         <div
           className={clsx(
-            'flex gap-5 justify-start items-center text-[1.2rem] font-normal leading-[2.7rem] text-black',
+            'flex items-center justify-start gap-5 text-[1.2rem] font-normal leading-[2.7rem] text-black',
             tileVariant === TileVariant.Blog && 'mt-[0.5rem] ml-[0.4rem]',
           )}
         >

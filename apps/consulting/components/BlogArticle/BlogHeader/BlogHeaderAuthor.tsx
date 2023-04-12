@@ -10,8 +10,8 @@ export const BlogHeaderAuthor: FC<TPostAuthor> = ({
   nickName,
   authorUrl,
 }) => (
-  <section className="flex gap-[1.4rem] justify-start items-center">
-    <div className="overflow-hidden relative w-[4.8rem] h-[4.8rem] rounded-full">
+  <section className="flex items-center justify-start gap-[1.4rem]">
+    <div className="relative h-[4.8rem] w-[4.8rem] overflow-hidden rounded-full">
       <Picture
         imageSrc={avatarSrc}
         imageAlt={fullName}
@@ -20,7 +20,7 @@ export const BlogHeaderAuthor: FC<TPostAuthor> = ({
         objectPosition="center"
       />
     </div>
-    <div className="flex flex-col justify-between items-start">
+    <div className="flex flex-col items-start justify-between">
       <a
         href={authorUrl.url}
         target="_blank"

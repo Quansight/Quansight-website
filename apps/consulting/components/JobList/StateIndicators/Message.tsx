@@ -7,7 +7,7 @@ type TMessage = {
 export const Message: FC<TMessage> = ({ message }) => (
   <p
     role="alert"
-    className="text-[2rem] font-normal leading-[3rem] text-center text-black sm:text-[3rem]"
+    className="text-center text-[2rem] font-normal leading-[3rem] text-black sm:text-[3rem]"
   >
     {message}
   </p>

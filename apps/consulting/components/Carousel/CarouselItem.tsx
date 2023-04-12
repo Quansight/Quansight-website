@@ -19,7 +19,7 @@ export const CarouselItem: FC<TCarouselItemProps> = ({
 
   return (
     <div className="flex flex-col sm:flex-row">
-      <div className="relative w-full h-[22rem] sm:h-[32.7rem]">
+      <div className="relative h-[22rem] w-full sm:h-[32.7rem]">
         <Picture
           imageSrc={imageSrc}
           imageAlt={imageAlt}
@@ -29,13 +29,13 @@ export const CarouselItem: FC<TCarouselItemProps> = ({
           priority
         />
       </div>
-      <div className="flex flex-col pt-[4.1rem] min-h-[27.6rem] text-center text-white sm:basis-[30rem] sm:px-[3.7rem] sm:pb-[4.6rem] sm:min-h-[32.7rem] sm:text-left bg-violet">
+      <div className="bg-violet flex min-h-[27.6rem] flex-col pt-[4.1rem] text-center text-white sm:min-h-[32.7rem] sm:basis-[30rem] sm:px-[3.7rem] sm:pb-[4.6rem] sm:text-left">
         <div>
-          <p className="text-[1.6rem] font-normal leading-[3rem] capitalize">
+          <p className="text-[1.6rem] font-normal capitalize leading-[3rem]">
             {postType}
           </p>
           <LibraryLink link={link} tabIndex={swiperSlide.isActive ? 0 : -1}>
-            <h3 className="text-[3rem] font-extrabold leading-[3.7rem] sm:w-[22.7rem] font-heading">
+            <h3 className="font-heading text-[3rem] font-extrabold leading-[3.7rem] sm:w-[22.7rem]">
               {title}
             </h3>
           </LibraryLink>

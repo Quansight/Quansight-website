@@ -19,7 +19,7 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
   const headerLevelModifier = header ? 1 : 0;
 
   return (
-    <article className="py-[8rem] px-[2.2rem] mx-auto sm:px-[4.3rem] xl:px-[18rem] max-w-layout">
+    <article className="max-w-layout mx-auto py-[8rem] px-[2.2rem] sm:px-[4.3rem] xl:px-[18rem]">
       {header && (
         <header className="mb-[2.5rem]">
           <ColumnArticleHeader header={header} level={2} />
@@ -47,10 +47,10 @@ export const ColumnArticle: FC<TColumnArticleProps> = ({
         <section
           className={clsx(
             columnClass,
-            'flex order-2 justify-center items-center w-[100%] md:order-4',
+            'order-2 flex w-[100%] items-center justify-center md:order-4',
           )}
         >
-          <div className="relative w-4/5 h-4/5 min-h-[240px]">
+          <div className="relative h-4/5 min-h-[240px] w-4/5">
             <Picture
               imageSrc={imageSrc}
               imageAlt={imageAlt}

@@ -24,7 +24,7 @@ export const TeamMember: FC<TTeamMemberComponent> = (teamMember) => {
   `;
 
   return (
-    <li className="box-border px-[1.25rem] w-1/2 md:mb-[3rem] md:w-1/5">
+    <li className="box-border w-1/2 px-[1.25rem] md:mb-[3rem] md:w-1/5">
       <TeamMemberName name={teamMemberName} />
       {image && <TeamMemberImage image={image} shape={shape} />}
       {githubNick && <TeamMemberGithub nick={githubNick} />}

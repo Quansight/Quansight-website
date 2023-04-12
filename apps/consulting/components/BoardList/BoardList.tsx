@@ -11,11 +11,11 @@ export const BoardList: FC<TBoardListProps> = ({
   linkUrl,
 }) => {
   return (
-    <section className="grid grid-cols-1 gap-x-[2rem] px-[3rem] mx-auto mt-[2.5rem] md:px-[13rem] lg:grid-cols-2 lg:mt-[5rem] max-w-layout">
+    <section className="max-w-layout mx-auto mt-[2.5rem] grid grid-cols-1 gap-x-[2rem] px-[3rem] md:px-[13rem] lg:mt-[5rem] lg:grid-cols-2">
       {grid.map((props) => (
         <BoardListItem {...props} key={props._uid} />
       ))}
-      <div className="flex justify-center items-center lg:justify-start lg:items-start lg:mt-[6rem] lg:ml-[12rem] lg:w-[29rem]">
+      <div className="flex items-center justify-center lg:mt-[6rem] lg:ml-[12rem] lg:w-[29rem] lg:items-start lg:justify-start">
         <ButtonLink
           isFull
           isTriangle

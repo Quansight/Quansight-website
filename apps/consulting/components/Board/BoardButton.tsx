@@ -14,7 +14,7 @@ const BoardButton: FC<TBoardButtonProps & { classNameBorder: string }> = ({
   return (
     <div
       className={clsx(
-        'z-10 mx-auto mt-[6.5rem] sm:flex sm:justify-center sm:items-center sm:mx-0 sm:mt-0',
+        'z-10 mx-auto mt-[6.5rem] sm:mx-0 sm:mt-0 sm:flex sm:items-center sm:justify-center',
         classNameBorder,
       )}
     >

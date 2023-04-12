@@ -13,7 +13,7 @@ type THeaderProps = {
 export const Header: FC<THeaderProps> = ({ variant, text }) => (
   <h2
     className={clsx(
-      'mb-[3.7rem] text-[4rem] font-extrabold leading-[4.9rem] font-heading',
+      'font-heading mb-[3.7rem] text-[4rem] font-extrabold leading-[4.9rem]',
       'sm:text-[4.8rem]',
       getTextColor(variant),
     )}

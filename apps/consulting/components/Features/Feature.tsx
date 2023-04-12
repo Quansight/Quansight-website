@@ -7,9 +7,9 @@ import { TFeatureProps } from './types';
 const Feature: FC<TFeatureProps> = ({ title, text, imageSrc, imageAlt }) => (
   <li
     className="
-      pt-[2rem] pb-[5rem] text-center last:border-0 border-b
-      border-white
-      lg:px-[5rem] lg:pb-[13rem] lg:w-1/3 lg:border-r lg:border-b-0
+      border-b border-white pt-[2rem] pb-[5rem] text-center
+      last:border-0
+      lg:w-1/3 lg:border-r lg:border-b-0 lg:px-[5rem] lg:pb-[13rem]
       xl:px-[11rem]
     "
   >
@@ -23,8 +23,8 @@ const Feature: FC<TFeatureProps> = ({ title, text, imageSrc, imageAlt }) => (
     </div>
     <h3
       className="
-        my-[1.5rem] text-[2.2rem] font-extrabold leading-[3rem] text-white uppercase lg:mt-[4rem]
-        lg:mb-[2rem] font-heading
+        font-heading my-[1.5rem] text-[2.2rem] font-extrabold uppercase leading-[3rem] text-white
+        lg:mt-[4rem] lg:mb-[2rem]
       "
     >
       {title}

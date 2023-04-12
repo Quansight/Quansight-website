@@ -5,8 +5,8 @@ import { TFormSuccessProps } from './types';
 export const FormSuccess: FC<TFormSuccessProps> = ({ thanksMessage }) => (
   <div
     className="
-      relative py-[10.1rem] px-[2.2rem] mx-auto md:py-[12rem] lg:px-[13rem] xl:py-[16rem]
-      max-w-layout
+      max-w-layout relative mx-auto py-[10.1rem] px-[2.2rem] md:py-[12rem] lg:px-[13rem]
+      xl:py-[16rem]
     "
   >
     {thanksMessage.content.map(({ type, content }) => {
@@ -17,9 +17,9 @@ export const FormSuccess: FC<TFormSuccessProps> = ({ thanksMessage }) => (
           <h2
             key={value}
             className="
-              text-[4rem] font-extrabold leading-[5.9rem] text-center 
-              md:text-[4.8rem] 
-              text-violet font-heading
+              text-violet font-heading text-center text-[4rem] 
+              font-extrabold 
+              leading-[5.9rem] md:text-[4.8rem]
             "
           >
             {value}
@@ -29,7 +29,7 @@ export const FormSuccess: FC<TFormSuccessProps> = ({ thanksMessage }) => (
         return (
           <p
             key={value}
-            className="text-[1.8rem] leading-[2.7rem] text-center text-black"
+            className="text-center text-[1.8rem] leading-[2.7rem] text-black"
           >
             {value}
           </p>

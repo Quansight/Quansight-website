@@ -21,7 +21,7 @@ export const Tiles: FC<TTilesProps> = ({ tiles, tileVariant }) => {
   return (
     <section>
       {tiles.length === 0 && (
-        <p className="text-[2.2rem] font-extrabold text-center text-black">
+        <p className="text-center text-[2.2rem] font-extrabold text-black">
           We don&apos;t have any posts yet. Please check back later.
         </p>
       )}

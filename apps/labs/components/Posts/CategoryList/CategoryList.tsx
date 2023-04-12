@@ -24,7 +24,7 @@ export const CategoryList: FC<TCategoryListProps> = ({
           onClick(categoryName);
         }}
         className={clsx(
-          'py-[0.7rem] px-[0.8rem] last:mr-0 text-[1.1rem] !font-normal !leading-[2.7rem] text-white whitespace-nowrap',
+          'whitespace-nowrap py-[0.7rem] px-[0.8rem] text-[1.1rem] !font-normal !leading-[2.7rem] text-white last:mr-0',
           {
             '!text-black !bg-white': selectedCategory !== categoryName,
           },

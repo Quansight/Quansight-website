@@ -59,9 +59,9 @@ export const Form: FC<TFormProps> = (props) => {
     <div
       id={BOOK_A_CALL_FORM_ID}
       className={clsx(
-        'relative py-[4.1rem] my-[6rem] mx-auto max-w-layout',
+        'max-w-layout relative my-[6rem] mx-auto py-[4.1rem]',
         'md:flex md:items-center md:py-[6rem]',
-        'xl:py-[8rem] xl:my-[8rem]',
+        'xl:my-[8rem] xl:py-[8rem]',
         backgroundStyles,
       )}
     >

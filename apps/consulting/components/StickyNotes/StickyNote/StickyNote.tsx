@@ -25,10 +25,10 @@ export const StickyNote: FC<TStickyNoteComponentProps> = ({
 }) => {
   const showButton = buttonLink && buttonText;
   const noteStyle = clsx(
-    'basis-1/2 px-[2.5rem] pb-[3.9rem] h-full sm:px-[5.1rem] sm:pt-[4.1rem] sm:pb-[5.1rem] sm:mx-0',
-    isFirst && 'relative pt-[2.8rem] ml-[2rem] sm:ml-0 z-1',
+    'h-full basis-1/2 px-[2.5rem] pb-[3.9rem] sm:mx-0 sm:px-[5.1rem] sm:pt-[4.1rem] sm:pb-[5.1rem]',
+    isFirst && 'z-1 relative ml-[2rem] pt-[2.8rem] sm:ml-0',
     isLast &&
-      'pt-[11.8rem] mt-[-9rem] mr-[2rem] sm:pt-[4.1rem] sm:mt-0 sm:mr-0',
+      'mt-[-9rem] mr-[2rem] pt-[11.8rem] sm:mt-0 sm:mr-0 sm:pt-[4.1rem]',
     isFirst && getFirstNoteMargins(notesVariant),
     isLast && getLastNoteMargins(notesVariant),
     getBackgroundColor(variant),

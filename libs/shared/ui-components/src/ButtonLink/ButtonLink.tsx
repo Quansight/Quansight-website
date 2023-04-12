@@ -13,10 +13,10 @@ export const ButtonLink: FC<TButtonLinkProps> = ({
   text,
   url,
 }) => (
-  (<Link
+  <Link
     href={url}
     className={clsx(
-      'flex justify-start items-center py-4 px-12 w-fit text-[1.6rem] font-bold leading-[3.7rem]',
+      'flex w-fit items-center justify-start py-4 px-12 text-[1.6rem] font-bold leading-[3.7rem]',
       color === ButtonColor.Pink && 'text-pink',
       color === ButtonColor.Violet && 'text-violet',
       color === ButtonColor.White && 'text-white',
@@ -25,21 +25,20 @@ export const ButtonLink: FC<TButtonLinkProps> = ({
         `border-2 border-solid ${
           color === ButtonColor.Violet ? 'border-violet' : 'border-white'
         }`,
-    )}>
-
+    )}
+  >
     {text}
     {isTriangle && (
       <span
         className={clsx(
-          'inline-block ml-4 w-0 h-0 border-y-8 border-l-8 border-y-transparent border-y-solid border-l-solid',
+          'border-y-solid border-l-solid ml-4 inline-block h-0 w-0 border-y-8 border-l-8 border-y-transparent',
           color === ButtonColor.Pink && 'border-l-pink',
           color === ButtonColor.Violet && 'border-l-violet',
           color === ButtonColor.White && 'bordel-l-white',
         )}
       />
     )}
-
-  </Link>)
+  </Link>
 );
 
 export default ButtonLink;

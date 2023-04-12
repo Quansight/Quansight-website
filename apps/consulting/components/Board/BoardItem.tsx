@@ -22,7 +22,6 @@ const BoardItem: FC<TBoardItemProps & { classNameBorder: string }> = ({
       )}
     >
       <Link href={linkUrl}>
-
         <div className="relative h-32">
           <Picture
             imageSrc={imageSrc}
@@ -33,10 +32,10 @@ const BoardItem: FC<TBoardItemProps & { classNameBorder: string }> = ({
             priority
           />
         </div>
-        <div className="text-[2.2rem] font-extrabold leading-[3rem] sm:mt-[2.8rem] sm:mb-[2.2rem] xl:mt-[3.6rem] xl:mb-[2.2rem] font-heading">
+        <div className="font-heading text-[2.2rem] font-extrabold leading-[3rem] sm:mt-[2.8rem] sm:mb-[2.2rem] xl:mt-[3.6rem] xl:mb-[2.2rem]">
           {title}
         </div>
-        <div className="flex gap-3 justify-center items-center mx-auto w-auto text-[1.6rem] font-bold leading-[3.7rem]">
+        <div className="mx-auto flex w-auto items-center justify-center gap-3 text-[1.6rem] font-bold leading-[3.7rem]">
           {linkTitle}
           <Picture
             imageSrc="/board/board-btn-arrow.svg"
@@ -46,7 +45,6 @@ const BoardItem: FC<TBoardItemProps & { classNameBorder: string }> = ({
             priority
           />
         </div>
-
       </Link>
     </div>
   );

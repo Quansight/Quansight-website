@@ -15,10 +15,10 @@ export const PostMetaSection: FC<PostMetaSectionProps> = ({
 }) => {
   return (
     <>
-      <h2 className="mb-[5rem] text-[4.8rem] font-extrabold leading-[5.3rem] font-heading text-violet">
+      <h2 className="font-heading text-violet mb-[5rem] text-[4.8rem] font-extrabold leading-[5.3rem]">
         {title}
       </h2>
-      <p className="pb-[3rem] text-[1.4rem] leading-[2.7rem] text-black text-sans">
+      <p className="text-sans pb-[3rem] text-[1.4rem] leading-[2.7rem] text-black">
         Published {published}
       </p>
       <div className="mb-[5rem]">

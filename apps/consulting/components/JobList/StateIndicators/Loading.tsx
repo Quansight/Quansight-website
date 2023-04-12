@@ -7,12 +7,12 @@ export const Loading: FC = () => (
     </p>
     <div
       aria-hidden="true"
-      className="flex justify-center items-center space-x-2"
+      className="flex items-center justify-center space-x-2"
     >
       {[1, 2, 3].map((item) => (
         <div
           key={item}
-          className="w-8 h-8 rounded-full animate-pulse motion-reduce:animate-none bg-violet"
+          className="bg-violet h-8 w-8 animate-pulse rounded-full motion-reduce:animate-none"
         ></div>
       ))}
     </div>

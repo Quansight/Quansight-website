@@ -18,7 +18,7 @@ export const FooterLink: FC<TFooterLinkProps> = ({
     <FooterLinkWrapper linkUrl={linkUrl} queryString={queryString} {...props}>
       {isTextPresent ? (
         isIconPreset ? (
-          <span className="block relative w-10 h-10 brightness-0 lg:w-8 lg:h-8 xl:w-10 xl:h-10 xl:brightness-100">
+          <span className="relative block h-10 w-10 brightness-0 lg:h-8 lg:w-8 xl:h-10 xl:w-10 xl:brightness-100">
             <span className="sr-only">{linkText}</span>
             <Picture
               aria-hidden={true}

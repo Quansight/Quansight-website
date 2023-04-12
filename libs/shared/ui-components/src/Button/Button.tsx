@@ -19,7 +19,7 @@ export const Button: FC<TButtonProps> = ({
       {...buttonProps}
       onClick={onClick}
       className={clsx(
-        'py-4 px-12 w-fit text-[1.6rem] font-bold leading-[3.7rem] text-white bg-violet',
+        'bg-violet w-fit py-4 px-12 text-[1.6rem] font-bold leading-[3.7rem] text-white',
         className,
       )}
     >

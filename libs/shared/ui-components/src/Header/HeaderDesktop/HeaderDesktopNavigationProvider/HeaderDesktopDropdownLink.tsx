@@ -19,7 +19,7 @@ export const HeaderDesktopDropdownLink: FC<THeaderDesktopDropdownLinkProps> = ({
 
   return (
     <button
-      className="text-[1.7rem] font-normal leading-[2.225rem] text-left hover:underline focus:underline capitalize transition-colors motion-reduce:transition-none ease-in-out font-heading"
+      className="font-heading text-left text-[1.7rem] font-normal capitalize leading-[2.225rem] transition-colors ease-in-out hover:underline focus:underline motion-reduce:transition-none"
       onClick={onButtonClick}
     >
       {linkText}
