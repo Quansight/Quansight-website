@@ -758,8 +758,8 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       </div>
     </section>
 
-    <section className="flex flex-col items-center py-36 px-12 bg-black md:bg-white">
-      <div className="mb-[1em] max-w-[70rem] text-[3rem] font-bold tracking-wide leading-[1.43] text-center text-white md:text-black font-heading">
+    <section className="flex flex-col items-center py-36 px-12 bg-black xl:bg-white">
+      <div className="mb-[1em] max-w-[70rem] text-[3rem] font-bold tracking-wide leading-[1.43] text-center text-white xl:text-black font-heading">
         <h2 className="inline">Learn more</h2> about Nebari deployment,
         training, and support.
       </div>
