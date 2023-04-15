@@ -24,30 +24,29 @@
   border-bottom: 2px solid #452393;
 }
 
+/* Mobile first  */
 .nebari-hero-background {
-  background: url(/nebari-services/quansight-logo-black-grayscale.svg) left top /
-      240px no-repeat,
-    url(/nebari-services/nebari-logo-grayscale.svg) right bottom / 225px
-      no-repeat,
-    theme('colors.black');
+  background-repeat: no-repeat;
+  background-image: url(/nebari-services/quansight-logo-black-grayscale.svg),
+    url(/nebari-services/nebari-logo-grayscale.svg);
+  background-position: left top, right bottom;
+  background-size: 240px, 225px;
+  background-color: theme('colors.black');
 }
 
+/* Tablet */
 @media screen(sm) {
   .nebari-hero-background {
-    background: url(/nebari-services/quansight-logo-black-grayscale.svg) left
-        top / calc(39vw - 10px) no-repeat,
-      url(/nebari-services/nebari-logo-grayscale.svg) right bottom /
-        calc(37vw - 12px) no-repeat,
-      theme('colors.black');
+    background-position: left top, right bottom;
+    background-size: calc(39vw - 10px), calc(37vw - 12px);
   }
 }
 
+/* Desktop */
 @media screen(lg) {
   .nebari-hero-background {
-    background: url(/nebari-services/quansight-logo-black-grayscale.svg)
-        calc(50% - 343px) calc(100% - 10px) no-repeat,
-      url(/nebari-services/nebari-logo-grayscale.svg) calc(50% + 343px)
-        calc(100% - 18px) no-repeat,
-      theme('colors.black');
+    background-position: calc(50% - 343px) calc(100% - 10px),
+      calc(50% + 343px) calc(100% - 18px);
+    background-size: auto, auto;
   }
 }

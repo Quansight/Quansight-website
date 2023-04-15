@@ -77,7 +77,13 @@ export const NebariServicesPage: FC<TContainerProps> = ({
 
     <div className="overflow-hidden w-full h-[100px] bg-black"></div>
 
-    <div className="relative mx-auto max-w-full h-[52.4rem] sm:h-[calc(780px_-_40vw)] lg:h-[36.7rem] nebari-hero-background">
+    <div
+      className="
+      relative mx-auto max-w-full
+      h-[52.4rem] sm:h-[calc(780px_-_40vw)] lg:h-[36.7rem]
+      nebari-hero-background
+    "
+    >
       <div className="flex relative flex-col items-center px-[2rem] pt-[13rem] w-full h-full sm:pt-[calc(280px_-_23.4vw)] md:absolute md:px-0 lg:pt-[4rem]">
         <Image
           className="mb-[20px] brightness-200"
