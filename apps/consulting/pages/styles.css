@@ -37,7 +37,6 @@
 /* Tablet */
 @media screen(sm) {
   .nebari-hero-background {
-    background-position: left top, right bottom;
     background-size: calc(39vw - 10px), calc(37vw - 12px);
   }
 }
