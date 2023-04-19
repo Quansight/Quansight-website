@@ -441,69 +441,78 @@ the Array API also have their limitations.
 
 Let's highlight some Pros & Cons for these two protocols.
 
-<table>
-  <thead>
-    <tr>
-      <th>uarray</th>
-      <th>Array API</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td>**Pros**</td>
-      <td>**Cons**</td>
-    </tr>
-    <tr>
-      <td>
+<div className="grid grid-cols-2">
+  <h3 className="col-start-1 row-start-1" align="center">
+    <b>uarray</b>
+  </h3>
+  <div className="col-start-1 row-start-2">
+    <p align="left">
+      <b>Pros</b>
+    </p>
+    <ul>
+      <li>
         Can handle compiled code (anything not Python but which ends up with
         Python bindings).
-      </td>
-      <td>
-        Can't handle compiled code, works only for pure Python and array
-        provider based code in consumer library methods.
-      </td>
-    </tr>
-    <tr>
-      <td>
+      </li>
+      <li>
         Supports ability to coerce/convert inputs and wrapping other arrays
         using the `__ua_convert__` protocol.
-      </td>
-      <td>
-        Not all functions are covered in the Array API spec, which may be a
-        blocker if the consumer library method utilizes a function outside of
-        Array API's scope.
-      </td>
-    </tr>
-    <tr>
-      <td>**Cons**</td>
-      <td>**Pros**</td>
-    </tr>
-    <tr>
-      <td>
-        Involves a lot of utility code (setup machinery) on both the libraries
-        which may get tricky at times.
-      </td>
-      <td>
-        Easy for consumer libraries to add support and compatibility with
-        multiple "array providers".
-      </td>
-    </tr>
-    <tr>
-      <td>
-        The dispatching mechanism is not implicit. The user is required to
-        register the backend before they can use the array library of their
-        choice. See the
+      </li>
+    </ul>
+  </div>
+  <div className="col-start-1 row-start-3">
+    <p align="left">
+      <b>Cons</b>
+    </p>
+    <ul>
+      <li>
+        Involves a lot of utility code (setup machinery) on both the libraries which may
+        get tricky at times.
+      </li>
+      <li>
+        The dispatching mechanism is not implicit. The user is required to register
+        the backend before they can use the array library of their choice. See
+        the
         <a href="https://github.com/scipy/scipy/issues/14266">scipy/scipy#14266</a>
         issue for auto-registering backends.
-      </td>
-      <td>
+      </li>
+    </ul>
+  </div>
+  <h3 className="col-start-2 row-start-1" align="center">
+    <b>Array API</b>
+  </h3>
+  <div className="col-start-2 row-start-2">
+    <p align="left">
+      <b>Pros</b>
+    </p>
+    <ul>
+      <li>
+        Easy for consumer libraries to add support and compatiblity with
+        multiple "array providers".
+      </li>
+      <li>
         One can make use of the consumer library functions without thinking
         about any form of backend registration etc.
-      </td>
-    </tr>
-  </tbody>
-</table>
+      </li>
+    </ul>
+  </div>
+  <div className="col-start-2 row-start-3">
+    <p align="left">
+      <b>Cons</b>
+    </p>
+    <ul>
+      <li>
+        Can't handle compiled code, works only for pure Python and array provider
+        based code in consumer library methods.
+      </li>
+      <li>
+        Not all functions are covered in the Array API spec, which may be a blocker
+        if the consumer library method utilizes a function outside of Array API's
+        scope.
+      </li>
+    </ul>
+  </div>
+</div>
 
 These protocols may not be perfect, but are a big step towards interoperability
 and bringing the array/tensor libraries ecosystem closer together.
