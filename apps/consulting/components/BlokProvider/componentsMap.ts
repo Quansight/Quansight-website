@@ -8,7 +8,6 @@ import {
   Team,
 } from '@quansight/shared/ui-components';
 
-import { BlogArticle } from '../BlogArticle/BlogArticle';
 import { Board } from '../Board/Board';
 import { BoardList } from '../BoardList/BoardList';
 import { CenteredIntro } from '../CenteredIntro/CenteredIntro';
@@ -24,7 +23,6 @@ import { TextArticle } from '../TextArticle/TextArticle';
 import { ComponentType } from './types';
 
 export const componentsMap = {
-  [ComponentType.BlogArticle]: BlogArticle,
   [ComponentType.Board]: Board,
   [ComponentType.BoardList]: BoardList,
   [ComponentType.CenteredIntro]: CenteredIntro,

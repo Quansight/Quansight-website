@@ -16,6 +16,7 @@ query pageItem($slug: ID!, $relations: String) {
       component
       title
       description
+      keywords
     }
     created_at
     default_full_slug
