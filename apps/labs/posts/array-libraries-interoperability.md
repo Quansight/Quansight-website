@@ -432,7 +432,9 @@ are directly or indirectly connected to uarray.
 
 ---
 
-<h2 id="protocol_differences"> All ☀️ & 🌈?</h2>
+<h2 id="protocol_differences">{/*
+The span is a workaround to some issue with Chromium and Next.js v12's font optimization, which causes certain emoji to display in text rather than emoji presentation: https://en.wikipedia.org/wiki/Emoji#Emoji_versus_text_presentation
+*/}All <span className="font-['sans-serif']">☀️</span> & 🌈?</h2>
 
 As they say, nothing is perfect on the human stage, both uarray and
 the Array API also have their limitations.
