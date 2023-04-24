@@ -5,7 +5,7 @@ author: anirudh-dagar
 description: "Let's dive into the technicalities involved in array libraries interoperability and understand the protocols making this a reality."
 category: [Array API]
 featuredImage:
-  src: /posts/array-libraries-interoperability/feature.png
+  src: /posts/array-libraries-interoperability/ninja_arrays.png
   alt: 'A pro and cons list comparing two protocols, uarray and the Array API.'
 hero:
   imageSrc: /posts/array-libraries-interoperability/hero.png
