@@ -34,18 +34,22 @@ export const Form: FC<TFormProps> = (props) => {
     handleSubmit,
     setValue,
     formState: { errors, isValid },
-  } = useForm<FormValues>({ mode: 'onSubmit' });
+  } = useForm<FormValues>({ mode: 'onChange' });
 
   // Check session storage for form prepopulate values.
-  useEffect(() => {
-    // Other pages on the website can prepopulate the form message field by
-    // setting a session storage value before the form loads.
-    const message = sessionStorage.getItem(FormSessionStorageKeys.Message);
-    if (message) {
-      sessionStorage.removeItem(FormSessionStorageKeys.Message);
-      setValue('message', message);
-    }
-  }, [setValue]);
+  useEffect(
+    () => {
+      // Other pages on the website can prepopulate the form message field by
+      // setting a session storage value before the form loads.
+      const message = sessionStorage.getItem(FormSessionStorageKeys.Message);
+      if (message) {
+        sessionStorage.removeItem(FormSessionStorageKeys.Message);
+        setValue('message', message);
+      }
+    },
+    // eslint-disable-next-line
+    [], // Run effect only once, when the component mounts
+  );
 
   const checkErrors = (): void => {
     if (!isValid) setFormStatus(FormStates.Errors);
