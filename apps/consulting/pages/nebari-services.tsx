@@ -10,6 +10,7 @@ import 'swiper/css/bundle';
 import 'swiper/css/navigation';
 
 import { ISlugParams, DomainVariant } from '@quansight/shared/types';
+import { FormSessionStorageKeys } from '@quansight/shared/ui-components';
 import { Layout, SEO, Footer, Header } from '@quansight/shared/ui-components';
 
 import { PageItem } from '../api/types/basic';
@@ -22,27 +23,10 @@ import morningstarLogo from '../public/nebari-services/morningstar-logo.png';
 import nebariLogoWhite from '../public/nebari-services/nebari-logo-white.svg';
 import { TContainerProps } from '../types/containerProps';
 
-// This is kinda hacky. It runs a loop for up to 8 seconds checking every 400 ms
-// for the contact form. If it finds the contact form, it fills in the message
-// field.
-const prefillContactFormMessage = function (msg) {
-  let count = 20;
-  const intervalId = setInterval(() => {
-    if (!count--) {
-      clearInterval(intervalId);
-    }
-    const messageField: HTMLTextAreaElement | void = document.querySelector(
-      '#bookacallform [name=message]',
-    ) as HTMLTextAreaElement;
-    if (!messageField) {
-      return;
-    }
-    clearInterval(intervalId);
-    // Fill in the message field only if it hasn't already been filled in.
-    if (!messageField.value) {
-      messageField.value = msg;
-    }
-  }, 400);
+// Set a session storage value that can be read by the contact form to
+// prepopulate the message field.
+const prefillContactFormMessage = function (msg: string): void {
+  sessionStorage.setItem(FormSessionStorageKeys.Message, msg);
 };
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
