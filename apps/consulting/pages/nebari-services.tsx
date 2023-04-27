@@ -79,18 +79,18 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           Nebari Services
         </h1>
         <p className="mb-[2em] text-[1.6em] text-white">
-          Deployment, support, and training
+          Deployment, support, and training.
         </p>
         <Link href="/about-us#bookacallform">
           <a
             className="block py-[1.2rem] px-[3rem] mb-[6rem] text-[1.7rem] font-bold text-center text-white font-heading bg-violet"
             onClick={() =>
               prefillContactFormMessage(
-                "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
               )
             }
           >
-            Contact Sales
+            Book a Call
             <Image
               className="inline relative top-[-2px] ml-[0.5em]"
               alt=""
@@ -103,7 +103,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
 
     <section className="flex flex-col flex-nowrap items-center py-24 px-8 mx-auto lg:px-[13rem] max-w-layout">
       <h2 className="mb-[1em] text-[4.2rem] font-bold tracking-wide leading-[1] text-center md:text-[4.8rem] font-heading">
-        What is Nebari?
+        What Is Nebari?
       </h2>
       <p className="mx-auto mb-[3.7rem] max-w-prose text-[1.6rem] leading-[2.7rem] text-center">
         <span className="font-bold">
@@ -156,7 +156,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
         </a>
       </Link>
       <p className="px-[10rem] max-w-prose font-[400] text-[1.4rem] italic leading-[1.7rem] text-center text-[rgba(0,0,0,1)]">
-        Drop us a line and we&rsquo;ll send you a login
+        Drop us a line and we&rsquo;ll send you a login.
       </p>
     </section>
 
@@ -200,11 +200,11 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           className="block py-[1.7rem] px-[3.5rem] mb-[6rem] text-[1.7rem] font-bold text-center text-white bg-pink font-heading"
           onClick={() =>
             prefillContactFormMessage(
-              "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+              "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
             )
           }
         >
-          Contact Sales
+          Book a Call
           <Image
             className="inline relative top-[-2px] ml-[0.5em]"
             alt=""
@@ -253,7 +253,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           </p>
           <ul className="grow-[3] p-8 list-none bg-gray-200 md:grow">
             {[
-              'All Starter-tier services',
+              'All services in "Starter" tier',
               'User training (up to 15 people)',
               'Single sign-on integration',
               '10 hours of custom/integration work',
@@ -283,7 +283,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           </p>
           <ul className="grow-[3] p-8 list-none bg-gray-200 md:flex md:flex-col">
             {[
-              'All Standard-tier services',
+              'All services in "Standard" tier',
               'User training (up to 45 people)',
               'Optional special tools and use-case training',
               'Installation into custom VPCs and private subnets',
@@ -307,7 +307,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
       <div className="px-[10%] mb-[3.4em] w-full max-w-[405px] md:grid md:grid-cols-2 md:gap-10 md:p-0 md:max-w-[1016px]">
         <div className="flex flex-col mb-[3.4rem]">
           <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
-            Fully managed
+            Fully Managed
           </h3>
           <p className="grow py-10 px-4 font-[500] text-[1.6rem] tracking-wide leading-[2.6rem] text-center bg-gray-200">
             Nebari deployment on your infrastructure, completely managed and
@@ -317,7 +317,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
 
         <div className="flex flex-col mb-[3.4rem]">
           <h3 className="p-8 text-[3rem] font-bold tracking-wide text-center text-white bg-violet font-heading">
-            Event services
+            Event Services
           </h3>
           <p className="grow py-10 px-4 font-[500] text-[1.6rem] tracking-wide leading-[2.6rem] text-center bg-gray-200">
             One-time Nebari deployment and management to run tutorials and
@@ -337,11 +337,11 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           className="block py-[1.7rem] px-[3.5rem] mb-[1.9rem] text-[1.7rem] font-bold text-center text-white bg-pink font-heading"
           onClick={() =>
             prefillContactFormMessage(
-              "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+              "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
             )
           }
         >
-          Contact Sales
+          Book a Call
           <Image
             className="inline relative top-[-2px] ml-[0.5em]"
             alt=""
@@ -534,7 +534,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
                     className="underline decoration-from-font underline-offset-4"
                     onClick={() =>
                       prefillContactFormMessage(
-                        "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                        "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
                       )
                     }
                   >
@@ -554,7 +554,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
                     className="underline decoration-from-font underline-offset-4"
                     onClick={() =>
                       prefillContactFormMessage(
-                        "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                        "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
                       )
                     }
                   >
@@ -581,7 +581,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
                     className="underline decoration-from-font underline-offset-4"
                     onClick={() =>
                       prefillContactFormMessage(
-                        "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                        "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
                       )
                     }
                   >
@@ -719,7 +719,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
                     className="underline decoration-from-font underline-offset-4"
                     onClick={() =>
                       prefillContactFormMessage(
-                        "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                        "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
                       )
                     }
                   >
@@ -747,11 +747,11 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           className="py-[1.7rem] px-[3.5rem] mt-[6rem] text-[1.7rem] font-bold text-center text-white bg-violet font-heading"
           onClick={() =>
             prefillContactFormMessage(
-              "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+              "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
             )
           }
         >
-          Contact Sales
+          Book a Call
           <Image
             className="inline relative top-[-2px] ml-[0.5em]"
             alt=""
