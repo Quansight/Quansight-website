@@ -86,7 +86,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
             className="block py-[1.2rem] px-[3rem] mb-[6rem] text-[1.7rem] font-bold text-center text-white font-heading bg-violet"
             onClick={() =>
               prefillContactFormMessage(
-                "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
               )
             }
           >
@@ -200,7 +200,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           className="block py-[1.7rem] px-[3.5rem] mb-[6rem] text-[1.7rem] font-bold text-center text-white bg-pink font-heading"
           onClick={() =>
             prefillContactFormMessage(
-              "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+              "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
             )
           }
         >
@@ -337,7 +337,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           className="block py-[1.7rem] px-[3.5rem] mb-[1.9rem] text-[1.7rem] font-bold text-center text-white bg-pink font-heading"
           onClick={() =>
             prefillContactFormMessage(
-              "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+              "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
             )
           }
         >
@@ -534,7 +534,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
                     className="underline decoration-from-font underline-offset-4"
                     onClick={() =>
                       prefillContactFormMessage(
-                        "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                        "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
                       )
                     }
                   >
@@ -554,7 +554,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
                     className="underline decoration-from-font underline-offset-4"
                     onClick={() =>
                       prefillContactFormMessage(
-                        "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                        "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
                       )
                     }
                   >
@@ -581,7 +581,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
                     className="underline decoration-from-font underline-offset-4"
                     onClick={() =>
                       prefillContactFormMessage(
-                        "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                        "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
                       )
                     }
                   >
@@ -719,7 +719,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
                     className="underline decoration-from-font underline-offset-4"
                     onClick={() =>
                       prefillContactFormMessage(
-                        "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+                        "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
                       )
                     }
                   >
@@ -747,7 +747,7 @@ export const NebariServicesPage: FC<TContainerProps> = ({
           className="py-[1.7rem] px-[3.5rem] mt-[6rem] text-[1.7rem] font-bold text-center text-white bg-violet font-heading"
           onClick={() =>
             prefillContactFormMessage(
-              "Hi, I'm interested in learning more about your Nebari Services options. Thanks!",
+              "Hi, I'm interested in learning more about your Nebari Services options and would like to schedule a call. Thanks!",
             )
           }
         >
