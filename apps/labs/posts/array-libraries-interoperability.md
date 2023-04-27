@@ -6,7 +6,9 @@ description: "Let's dive into the technicalities involved in array libraries int
 category: [Array API]
 featuredImage:
   src: /posts/array-libraries-interoperability/ninja_arrays.png
-  alt: 'A pro and cons list comparing two protocols, uarray and the Array API.'
+  alt:
+    'Meme of Master Splinter leading the baby turtles from TMNT. Splinter
+    represents NumPy, and the turtles represent TensorFlow, CuPy, PyTorch and JAX.'
 hero:
   imageSrc: /posts/array-libraries-interoperability/hero.png
   imageAlt:
