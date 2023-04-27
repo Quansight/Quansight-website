@@ -20,6 +20,9 @@ query Team {
         }
         projects
         githubNick
+        githubLink {
+          url
+        }
       }
     }
   }
