@@ -5,10 +5,10 @@ author: isabela-presedo-floyd
 description: 'With the support of a team member with prior experience auditing for accessibility, we pinpointed specific ways in which JupyterLab lacked support for accessibility broken up by WCAG 2.1 standards.'
 category: [Access-centered, OSS Experience]
 featuredImage:
-  src: /posts/putting-out-the-fire/jlabaccess2.png
+  src: /posts/putting-out-the-fire/featured_jlabaccess2.png
   alt: 'Multiple fires in an alternating pattern'
 hero:
-  imageSrc: /posts/putting-out-the-fire/jlabaccess2.png
+  imageSrc: /posts/putting-out-the-fire/hero_jlabaccess2.png
   imageAlt: 'Multiple fires in an alternating pattern'
 ---
 
