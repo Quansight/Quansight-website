@@ -166,7 +166,7 @@ that impacted the time and way we’ve solved issues in JupyterLab so far.
 ___
 
 *This is part of a series of blogs around making JupyterLab more accessible. You can read the
-[whole series here](/categories/jlaba11y).*
+[whole series here](https://labs.quansight.org/blog?category=Access-centered).*
 
 *Interested in getting involved? Join our community via the JupyterLab accessibility meetings
 listed every other week on the [Jupyter community calendar](https://jupyter.readthedocs.io/en/latest/community/content-community.html#jupyter-community-meetings).*
