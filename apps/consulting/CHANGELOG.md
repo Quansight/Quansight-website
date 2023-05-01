@@ -1,3 +1,11 @@
+April 27, 2023
+
+Via Storyblok:
+
+- Revise text copy on homepage
+  - Switch to Intertwined Article component
+  - Change to @marsbarlee's new illustrations
+
 April 11, 2023
 
 Via Storyblok:
