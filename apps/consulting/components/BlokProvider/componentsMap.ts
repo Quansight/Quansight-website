@@ -6,6 +6,7 @@ import {
   Statute,
   Teaser,
   Team,
+  Video,
 } from '@quansight/shared/ui-components';
 
 import { Board } from '../Board/Board';
@@ -42,4 +43,5 @@ export const componentsMap = {
   [ComponentType.Teaser]: Teaser,
   [ComponentType.Testimonial]: Testimonial,
   [ComponentType.TextArticle]: TextArticle,
+  [ComponentType.Video]: Video,
 };
