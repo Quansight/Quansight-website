@@ -9,12 +9,15 @@ import { TSEOProps } from './types';
 
 export const SEO: FC<TSEOProps> = ({ title, description, variant }) => {
   const { asPath } = useRouter();
-  const origin =
+  const fallBackOrigin =
     DomainVariant[variant] === 'Quansight'
       ? 'quansight.com'
-      : 'labs.quansight.com';
+      : 'labs.quansight.org';
+  const origin =
+    typeof window !== 'undefined' && window.location.origin
+      ? window.location.origin
+      : fallBackOrigin;
   const url = `${origin}${asPath}`;
-
   return (
     <Head>
       <title>{`${title} | ${DomainVariant[variant]}`}</title>
