@@ -51,8 +51,8 @@ export const SEO: FC<TSEOProps> = ({ title, description, variant }) => {
         property="og:image"
         content={
           DomainVariant[variant] === 'Quansight'
-            ? 'https://a.storyblok.com/f/147759/1200x630/ce491624ae/quansight-logo-opengraph.png'
-            : 'https://a.storyblok.com/f/152463/900x472/fe2083b744/qslabs-logo-opengraph.png'
+            ? 'https://a.storyblok.com/f/147759/1200x630/8b20f86b2a/quansight-logo-opengraph-size`.png'
+            : 'https://a.storyblok.com/f/152463/900x472/b289c484e3/qslabs-logo-opengraph-size.png'
         }
       />
     </Head>
