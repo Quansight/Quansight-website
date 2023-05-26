@@ -30,8 +30,8 @@ export const SEO: FC<TSEOProps> = ({ title, description, variant }) => {
         name="twitter:image"
         content={
           DomainVariant[variant] === 'Quansight'
-            ? 'https://a.storyblok.com/f/147759/1200x630/ce491624ae/quansight-logo-opengraph.png'
-            : 'https://a.storyblok.com/f/152463/900x472/fe2083b744/qslabs-logo-opengraph.png'
+            ? 'https://a.storyblok.com/f/147759/1200x1200/86c1d25b6a/quansight-logo-twittersquare.png'
+            : 'https://a.storyblok.com/f/152463/700x700/ea6ce93c47/qslabs-logo-twittersquare.png'
         }
       />
       <meta
