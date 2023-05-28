@@ -1,6 +1,6 @@
 import { DomainVariant } from '@quansight/shared/types';
 
-export type TSocailCardProps = {
+export type TSocialCardProps = {
   title: string;
   description: string;
   variant: DomainVariant;

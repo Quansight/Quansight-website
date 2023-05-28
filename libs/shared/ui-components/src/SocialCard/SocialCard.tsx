@@ -5,9 +5,9 @@ import { useRouter } from 'next/router';
 
 import { DomainVariant } from '@quansight/shared/types';
 
-import { TSocailCardProps } from './types';
+import { TSocialCardProps } from './types';
 
-export const SocialCard: FC<TSocailCardProps> = ({
+export const SocialCard: FC<TSocialCardProps> = ({
   title,
   description,
   variant,
@@ -50,7 +50,7 @@ export const SocialCard: FC<TSocailCardProps> = ({
     } else {
       return DomainVariant[variant] === 'Quansight'
         ? 'Quansight logo'
-        : 'Quansight labs logo';
+        : 'Quansight Labs logo';
     }
   };
   return (
