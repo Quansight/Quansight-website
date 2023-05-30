@@ -1,3 +1,9 @@
+May 23, 2023
+
+Via Storyblok:
+
+- Add Camp Quansight video & adjacent content to Careers page
+
 April 27, 2023
 
 Via Storyblok:
