@@ -5,7 +5,7 @@ Via Storyblok
 - Add Lysandros Nikolaou (CPython, SciPy) and Albert Steppi (SciPy) to the team.
 - Remove Noa Tamir, Anirrudh Krishnan, Pam Wadhwa, Cristian Garcia, and Marc Garcia from the team page.
 - Update affiliations on team page:
-  - Tania: remove JupyterHubm Jupyter accessibility; add Jupyter, pydata-sphinx-theme, Nebari
+  - Tania: remove JupyterHub, Jupyter accessibility; add Jupyter, pydata-sphinx-theme, Nebari
   - Ralf: add meson-python
   - Athan: add data-apis.org
   - Chris: add conda-store, Nebari, remove python-api-inspect
