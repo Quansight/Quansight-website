@@ -18,16 +18,7 @@ export const SocialCard: FC<TSocialCardProps> = ({
 }) => {
   const { asPath } = useRouter();
 
-  const fallBackOrigin =
-    DomainVariant[variant] === DomainVariant.Quansight
-      ? 'https://quansight.com'
-      : 'https://labs.quansight.org';
-  const origin =
-    typeof window !== 'undefined' && window.location.origin
-      ? window.location.origin
-      : fallBackOrigin;
-
-  const url = `${origin}${asPath}`;
+  const url = `https://${process.env['NEXT_PUBLIC_VERCEL_URL']}${asPath}`;
 
   const defaultTwitterImage = (variant: DomainVariant): string => {
     switch (variant) {
