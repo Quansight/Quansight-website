@@ -1,3 +1,17 @@
+May 31, 2023
+
+Via Storyblok:
+
+- Add open-source-services page
+  - Page itself
+  - Header nav
+  - Footer nav
+  - Link blok from /consulting
+  - Link blok from homepage
+- Adjust 'other service areas' heading text on
+  Data Engineering & MLOps services page
+- Alphabetize service areas in header nav and footer
+
 May 23, 2023
 
 Via Storyblok:
