@@ -6,11 +6,9 @@ import { DomainVariant } from '@quansight/shared/types';
 
 import { TSEOProps } from './types';
 
-export const SEO: FC<TSEOProps> = ({ title, description, variant }) => {
-  return (
-    <Head>
-      <title>{`${title} | ${DomainVariant[variant]}`}</title>
-      <meta name="description" content={description} />
-    </Head>
-  );
-};
+export const SEO: FC<TSEOProps> = ({ title, description, variant }) => (
+  <Head>
+    <title>{`${title} | ${DomainVariant[variant]}`}</title>
+    <meta name="description" content={description} />
+  </Head>
+);
