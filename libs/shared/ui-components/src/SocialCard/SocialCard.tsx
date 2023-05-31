@@ -50,6 +50,7 @@ export const SocialCard: FC<TSocialCardProps> = ({
         return '';
     }
   };
+  console.log('url', url);
   return (
     <Head>
       {/* twitter */}
@@ -67,6 +68,7 @@ export const SocialCard: FC<TSocialCardProps> = ({
       <meta name="twitter:alt" content={alt || defaultAlt(variant)} />
 
       {/* open-graph / LinkedIn Specification */}
+      <link rel="canonical" href={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
