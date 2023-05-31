@@ -18,7 +18,16 @@ export const SocialCard: FC<TSocialCardProps> = ({
 }) => {
   const { asPath } = useRouter();
 
-  const url = `${process.env['NEXT_PUBLIC_VERCEL_URL']}${asPath}`;
+  const fallBackOrigin =
+    DomainVariant[variant] === DomainVariant.Quansight
+      ? 'https://quansight.com'
+      : 'https://labs.quansight.org';
+  const origin =
+    typeof window !== 'undefined' && window.location.origin
+      ? window.location.origin
+      : fallBackOrigin;
+
+  const url = `${origin}${asPath}`;
 
   const defaultTwitterImage = (variant: DomainVariant): string => {
     switch (variant) {
@@ -68,7 +77,6 @@ export const SocialCard: FC<TSocialCardProps> = ({
       <meta name="twitter:alt" content={alt || defaultAlt(variant)} />
 
       {/* open-graph / LinkedIn Specification */}
-      <link rel="canonical" href={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
