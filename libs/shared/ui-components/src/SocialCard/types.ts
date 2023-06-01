@@ -6,7 +6,7 @@ export type TSocialCardProps = {
   Platform specific behaviors for twitter:
    iOS, Android: Truncated to two lines in timeline and expanded Tweet
    Web: Truncated to one line in timeline and expanded Tweet
-  More info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary#:~:text=A%20concise%20title%20for%20the%20related,line%20in%20timeline%20and%20expanded%20Tweet
+  More info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary
   **/
   title: string;
 
@@ -15,8 +15,7 @@ export type TSocialCardProps = {
   Platform specific behaviors for twitter:
    iOS, Android: Not displayed
    Web: Truncated to three lines in timeline and expanded Tweet
-  More info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image#:~:text=Yes-,twitter%3Adescription,Web%3A%20Truncated%20to%20three%20lines%20in%20timeline%20and%20expanded%20Tweet,-No
-  **/
+  More info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image **/
   description: string;
 
   /**
@@ -33,7 +32,7 @@ export type TSocialCardProps = {
   Images must be less than 5MB in size. JPG, PNG, WEBP and GIF formats are supported.
   Only the first frame of an animated GIF will be used.
   SVG is not supported.
-  more info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image#:~:text=A%20URL%20to,is%20not%20supported.
+  more info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image.
             twitter:image for small summary cards
   twitter:image should be absolute URL
   aspect ratio of 1:1 with minimum dimensions of 144x144 or maximum of 4096x4096 pixels.
@@ -54,7 +53,7 @@ export type TSocialCardProps = {
     A text description of the image conveying the essential nature of an image to users who are visually impaired. 
     Maximum 420 characters for twitter
     but for Open Graph there’s no official guidance on this, but 40 characters for mobile and 60 for desktop is roughly the sweet spot.
-    More info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image#:~:text=twitter%3Aimage%3Aalt,Maximum%20420%20characters.
+    More info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
 */
   alt?: string;
 
@@ -66,7 +65,7 @@ export type TSocialCardProps = {
    with minimum dimensions of 300x157 or maximum of 4096x4096 pixels.(see twitterImg type above for more detial)
    full-width prominent image alongside a tweet. It is designed to give the reader a rich photo experience,
   and clicking on the image brings the user to your website. 
-  More info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
+  More info: `https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image`
   */
   summaryLargeImage?: boolean;
 };
