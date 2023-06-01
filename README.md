@@ -121,7 +121,7 @@ same. There are three major stages, each with distinct steps.
 1. **Editing**
    1. Make your changes in Storyblok.
    2. Preview how your changes will look on the site using Storyblok's preview
-      iframe. You should see a yellow banner at the top of the page telling you
+      iframe. You should see a yellow overlay at the top of the page telling you
       that you can see draft content.
    3. Save your changes.
 2. **Publishing**
@@ -285,7 +285,7 @@ Some middleware checks if the HTTP referrer is
 <https://app.storyblok.com/>. In that case, the code assumes that the end user
 is coming to the site from within the Storyblok iframe. So it puts the user in
 Next.js preview mode. When the user is in preview mode, the website shows a
-yellow banner at the top of the page, letting the user know that they are seeing
+yellow overlay at the top of the page, letting the user know that they are seeing
 draft content on the site.
 
 ### Vercel
@@ -331,20 +331,20 @@ In this case, the code forces the browser to automatically enter into Next.js
 preview mode.
 
 **To help the end user distinguish which view of the site they are seeing, the
-codebase defines a visual banner at the top of each page.** When the site is in
-preview mode, the banner turns yellow and displays a message telling the user
+codebase defines a visual overlay at the top of each page.** When the site is in
+preview mode, the overlay turns yellow and displays a message telling the user
 that they can see draft content. When the site is not in preview mode, the
-banner turns gray and tells the user that they can see published content. The
-banner provides a clickable link to switch in and out of Next.js preview mode.
+overlay turns gray and tells the user that they can see published content. The
+overlay provides a clickable link to switch in and out of Next.js preview mode.
 This switch is turned off when the user is viewing the page via the Storyblok UI because when
 they are working within Storyblok, they should always see the site in Next.js preview
 mode so that they can see changes that are being worked on.
-The banner does not show at all if the site was built in a
+The overlay does not show at all if the site was built in a
 production environment.
 
 The codebase takes advantage of [Vercel environment
 variables](https://vercel.com/docs/concepts/projects/environment-variables) at
-build time. For example, the preview mode banner links to the git branch that
+build time. For example, the preview mode overlay links to the git branch that
 the site was built from (when that environment variable is available at build
 time).
 
@@ -354,14 +354,14 @@ Throughout the develop-deploy process, there are several ways to view the
 website. The following table summarizes the important ways in which those views
 differ from each other.
 
-| Name                       | How to access          | GitHub branch  | Vercel env | Storyblok API key | Next.js preview? | Storyblok version param | Display top banner? | Top banner color | Button to enter/exit preview? |
+| Name                       | How to access          | GitHub branch  | Vercel env | Storyblok API key | Next.js preview? | Storyblok version param | Display top overlay? | Top overlay color | Button to enter/exit preview? |
 | -------------------------- | ---------------------- | -------------- | ---------- | ----------------- | ---------------- | ----------------------- | ------------------- | ---------------- | ----------------------------- |
 | Production                 | .com/.org URL          | `main`         | production | public            | off              | `published`             | No                  | n/a              | n/a                           |
-| Storyblok (yellow banner)  | via Storyblok UI       | `develop`      | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | No                            |
-| Vercel URL (gray banner)   | via link to Vercel URL | any non-`main` | preview    | preview           | off              | `published`             | Yes                 | gray             | Yes                           |
-| Vercel URL (yellow banner) | via enter-preview      | any non-`main` | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | Yes                           |
+| Storyblok (yellow overlay)  | via Storyblok UI       | `develop`      | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | No                            |
+| Vercel URL (gray overlay)   | via link to Vercel URL | any non-`main` | preview    | preview           | off              | `published`             | Yes                 | gray             | Yes                           |
+| Vercel URL (yellow overlay) | via enter-preview      | any non-`main` | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | Yes                           |
 
-Let's take the row labeled "Vercel URL (gray banner)." This view is accessed by
+Let's take the row labeled "Vercel URL (gray overlay)." This view is accessed by
 clicking on a Vercel SHA-style URL, which looks like
 `https://labs-{SHA}-quansight.vercel.app`. Typically, this URL is found
 either on a GitHub pull request or in `#website-vercel-bot-log` in Slack. The site served by that URL can be
@@ -369,8 +369,8 @@ built from any branch or commit on GitHub except `main`, which is reserved for
 production. It is built with the "preview" Vercel environment. It does not start
 in Next.js preview mode (though the end user can switch to it). The preview
 Vercel environment contains the preview Storyblok API key. The site passes
-`version=published` to the Storyblok API. It displays a gray banner at the top
-of each page, and that gray banner contains a way for the end user to switch to and out of the Next.js preview mode.
+`version=published` to the Storyblok API. It displays a gray overlay at the top
+of each page, and that gray overlay contains a way for the end user to switch to and out of the Next.js preview mode.
 
 Note that within Storyblok, there is no button to switch out of preview mode.
 This was done by design because the whole point of the Storyblok UI is to be
@@ -402,12 +402,12 @@ editors to previewing draft content against the `develop` branch to help catch
 any potential code/content conflicts before merging to `main`.
 
 When viewing the site in local development or at a Vercel preview URL, there
-should be a banner that explains that you are looking at a preview of the site.
-This helps reduce confusion when screenshots are shared. This banner should not
+should be a overlay that explains that you are looking at a preview of the site.
+This helps reduce confusion when screenshots are shared. This overlay should not
 be present on a production build of the site.
 
-The preview/development environment banner should allow the user to toggle
-between seeing published versus draft/saved Storyblok content. The banner should
+The preview/development environment overlay should allow the user to toggle
+between seeing published versus draft/saved Storyblok content. The overlay should
 change colors to indicate which of the two content preview modes the user is in
 (that is, whether they are seeing draft or published content from Storyblok).
 
