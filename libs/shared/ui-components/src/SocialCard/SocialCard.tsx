@@ -14,7 +14,7 @@ export const SocialCard: FC<TSocialCardProps> = ({
   twitterImage,
   ogImage,
   alt,
-  summary_large_image = true,
+  summaryLargeImage = true,
 }) => {
   const { asPath } = useRouter();
 
@@ -50,13 +50,12 @@ export const SocialCard: FC<TSocialCardProps> = ({
         return '';
     }
   };
-  console.log('url', url);
   return (
     <Head>
       {/* twitter */}
       <meta
         name="twitter:card"
-        content={summary_large_image ? 'summary_large_image' : 'summary'}
+        content={summaryLargeImage ? 'summary_large_image' : 'summary'}
       />
       <meta name="twitter:site" content="@quansightai" />
       <meta name="twitter:title" content={title} />
@@ -65,7 +64,10 @@ export const SocialCard: FC<TSocialCardProps> = ({
         name="twitter:image"
         content={twitterImage || defaultTwitterImage(variant)}
       />
-      <meta name="twitter:alt" content={alt || defaultAlt(variant)} />
+      <meta
+        name="twitter:alt"
+        content={alt || twitterImage ? '' : defaultAlt(variant)}
+      />
 
       {/* open-graph / LinkedIn Specification */}
       <meta property="og:title" content={title} />
@@ -73,6 +75,10 @@ export const SocialCard: FC<TSocialCardProps> = ({
       <meta property="og:url" content={url} />
       <meta property="og:image" content={ogImage || defaultOgImage(variant)} />
       <meta property="og:image:alt" content={alt || defaultAlt(variant)} />
+      <meta
+        property="og:image:alt"
+        content={alt || ogImage ? '' : defaultAlt(variant)}
+      />
     </Head>
   );
 };
