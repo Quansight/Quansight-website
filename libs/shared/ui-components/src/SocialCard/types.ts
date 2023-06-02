@@ -60,7 +60,7 @@ export interface TSocialCardProps {
 
   /**
    * The `summaryLargeImage` prop controls whether the large or small Twitter summary card will be used.
-   * The component defaults to true value if a value is not specified here.
+   * The `SocialCard` component *should* be configured with a `true` default value for this prop.
    * Remember to use the twitter:image that fits aspect ratio of 2:1 when summaryLargeImage is true.
    * with minimum dimensions of 300x157 or maximum of 4096x4096 pixels.(see twitterImage type above for more details).
    * full-width prominent image alongside a tweet. It is designed to give the reader a rich photo experience,
