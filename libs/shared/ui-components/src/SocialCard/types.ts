@@ -21,7 +21,7 @@ export interface TSocialCardProps {
 
   /**
    * Uses DomainVariant enum values if the optional properties are not added
-   * SocialCard component uses it to set images and alt based on the variant value.
+   * SocialCard component uses it to set default images and alt based on the variant value.
    */
   variant: DomainVariant;
 
