@@ -33,7 +33,7 @@ export interface TSocialCardProps {
    * Only the first frame of an animated GIF will be used.
    * SVG is not supported.
    * more info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image.
-
+  *
    * twitter:image for small summary cards:
    * twitter:image should be absolute URL.
    * aspect ratio of 1:1 with minimum dimensions of 144x144 or maximum of 4096x4096 pixels.
