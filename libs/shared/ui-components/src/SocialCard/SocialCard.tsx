@@ -18,14 +18,14 @@ export const SocialCard: FC<TSocialCardProps> = ({
 }) => {
   const { asPath } = useRouter();
 
-  /**
-   * url is constructed starting from https:// because 'NEXT_PUBLIC_VERCEL_URL' doesn't provide the protocol(https)
-   * and for og:url requires absolute URL which includes the protocol and domain name
-   * using the prefix NEXT_PUBLIC is used to indicate that the environment variable is public,
-   * meaning that it can be accessed by the browser.
-   * 'NEXT_PUBLIC_VERCEL_URL' is set by Vercel when the application is deployed, and it can be accessed by the application code.
-   * This kind of URL is need because of og:url needs absolute path and allows it to use this as the correct canonical tag
-   * Also twitter doesn't have something similar to og:url like twitter:url.
+  /*
+    url is constructed starting from https:// because 'NEXT_PUBLIC_VERCEL_URL' doesn't provide the protocol(https)
+    and for og:url requires absolute URL which includes the protocol and domain name
+    using the prefix NEXT_PUBLIC is used to indicate that the environment variable is public,
+    meaning that it can be accessed by the browser.
+    'NEXT_PUBLIC_VERCEL_URL' is set by Vercel when the application is deployed, and it can be accessed by the application code.
+    This kind of URL is need because of og:url needs absolute path and allows it to use this as the correct canonical tag
+    Also twitter doesn't have something similar to og:url like twitter:url.
    */
   const url = `https://${process.env['NEXT_PUBLIC_VERCEL_URL']}${asPath}`;
 
@@ -61,7 +61,7 @@ export const SocialCard: FC<TSocialCardProps> = ({
   };
   return (
     <Head>
-      {/** twitter */}
+      {/* twitter */}
       <meta
         name="twitter:card"
         content={summaryLargeImage ? 'summary_large_image' : 'summary'}
@@ -73,16 +73,16 @@ export const SocialCard: FC<TSocialCardProps> = ({
         name="twitter:image"
         content={twitterImage || defaultTwitterImage(variant)}
       />
-      {/**
-       * If `twitterImage` is specified but `alt` is not, we use blank alt-text because
-       * it's better to have no alt-text than incorrect alt-text.
+      {/*
+        If `twitterImage` is specified but `alt` is not, we use blank alt-text because
+        it's better to have no alt-text than incorrect alt-text.
        */}
       <meta
         name="twitter:alt"
         content={alt || twitterImage ? '' : defaultAlt(variant)}
       />
 
-      {/** open-graph / LinkedIn Specification */}
+      {/* open-graph / LinkedIn Specification */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
