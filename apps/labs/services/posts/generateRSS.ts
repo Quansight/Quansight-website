@@ -34,7 +34,7 @@ export const generateRSS = async (posts: TPost[]): Promise<void> => {
       title: post.meta.title,
       description: post.meta.description,
       date: new Date(post.meta.published),
-      image: `${siteUrl}${post.meta.featuredImage.src}`,
+      image: `${siteUrl}${post.meta.featuredImage.src || ''}`,
       link: `${siteUrl}/blog/${post.slug}`,
       author: [
         {
