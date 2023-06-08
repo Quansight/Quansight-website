@@ -21,7 +21,7 @@ type TSocialCardPropsBase = {
 
   /**
    * Uses DomainVariant enum values if the optional properties are not added
-   * SocialCard component uses it to set images and alt based on the variant value.
+   * SocialCard component uses it to set default images and alt based on the variant value.
    */
   variant: DomainVariant;
 };
@@ -39,6 +39,7 @@ export type TSocialCardPropsCustomizedImage = TSocialCardPropsBase & {
    * Only the first frame of an animated GIF will be used.
    * SVG is not supported.
    * more info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image.
+   *
    * twitter:image for small summary cards:
    * twitter:image should be absolute URL.
    * aspect ratio of 1:1 with minimum dimensions of 144x144 or maximum of 4096x4096 pixels.
@@ -65,9 +66,9 @@ export type TSocialCardPropsCustomizedImage = TSocialCardPropsBase & {
 
   /**
    * The `summaryLargeImage` prop controls whether the large or small Twitter summary card will be used.
-   * The component defaults to true value if a value is not specified here.
+   * The `SocialCard` component *should* be configured with a `true` default value for this prop.
    * Remember to use the twitter:image that fits aspect ratio of 2:1 when summaryLargeImage is true.
-   * with minimum dimensions of 300x157 or maximum of 4096x4096 pixels.(see twitterImage type above for more details).
+   * with minimum dimensions of 300x157 or maximum of 4096x4096 pixels (see twitterImage type above for more details).
    * full-width prominent image alongside a tweet. It is designed to give the reader a rich photo experience,
    * and clicking on the image brings the user to your website.
    * More info: `https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image`
