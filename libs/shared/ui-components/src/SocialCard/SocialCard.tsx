@@ -5,25 +5,31 @@ import { useRouter } from 'next/router';
 
 import { DomainVariant } from '@quansight/shared/types';
 
-import { TSocialCardProps } from './types';
+import { TSocialCardProps, TSocialCardPropsCustomizedImage } from './types';
 
-export const SocialCard: FC<TSocialCardProps> = ({
-  title,
-  description,
-  variant,
-  twitterImage,
-  ogImage,
-  alt,
-  summaryLargeImage = true,
-}) => {
+export const SocialCard: FC<TSocialCardProps> = (Props) => {
   const { asPath } = useRouter();
+
+  const isSocialCardImageCustomized = (
+    cardProp: TSocialCardProps,
+  ): cardProp is TSocialCardPropsCustomizedImage => {
+    return (
+      (cardProp as TSocialCardPropsCustomizedImage).twitterImage !== undefined
+    );
+  };
+
+  const isCustom = isSocialCardImageCustomized(Props);
+  const isSummaryCardLargeImage = (summaryLargeImage = true) =>
+    summaryLargeImage ? 'summary_large_image' : 'summary';
+
+  const { title, description, variant } = Props;
 
   /*
     url is constructed starting from https:// because 'NEXT_PUBLIC_VERCEL_URL' doesn't provide the protocol(https)
     and for og:url requires absolute URL which includes the protocol and domain name
     using the prefix NEXT_PUBLIC is used to indicate that the environment variable is public,
     meaning that it can be accessed by the browser.
-    'NEXT_PUBLIC_VERCEL_URL' is set by Vercel when the application is deployed, and it can be accessed by the application code.
+    'NEXT_PUBLIC_VERCEL_URL' is set when the site is statically built, the build step inline the current value for the environment variable into the built JS file.
     This kind of URL is need because of og:url needs absolute path and allows it to use this as the correct canonical tag
     Also twitter doesn't have something similar to og:url like twitter:url.
    */
@@ -59,37 +65,41 @@ export const SocialCard: FC<TSocialCardProps> = ({
         return '';
     }
   };
+
   return (
     <Head>
       {/* twitter */}
       <meta
         name="twitter:card"
-        content={summaryLargeImage ? 'summary_large_image' : 'summary'}
+        content={
+          isCustom
+            ? isSummaryCardLargeImage(Props.summaryLargeImage)
+            : 'summary_large_image'
+        }
       />
       <meta name="twitter:site" content="@quansightai" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta
         name="twitter:image"
-        content={twitterImage || defaultTwitterImage(variant)}
+        content={isCustom ? Props.twitterImage : defaultTwitterImage(variant)}
       />
-      {/*
-        If `twitterImage` is specified but `alt` is not, we use blank alt-text because
-        it's better to have no alt-text than incorrect alt-text.
-       */}
       <meta
         name="twitter:alt"
-        content={alt || twitterImage ? '' : defaultAlt(variant)}
+        content={isCustom ? Props.alt : defaultAlt(variant)}
       />
 
       {/* open-graph / LinkedIn Specification */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
-      <meta property="og:image" content={ogImage || defaultOgImage(variant)} />
+      <meta
+        property="og:image"
+        content={isCustom ? Props.ogImage : defaultOgImage(variant)}
+      />
       <meta
         property="og:image:alt"
-        content={alt || ogImage ? '' : defaultAlt(variant)}
+        content={isCustom ? Props.alt : defaultAlt(variant)}
       />
     </Head>
   );

@@ -1,6 +1,6 @@
 import { DomainVariant } from '@quansight/shared/types';
 
-export interface TSocialCardProps {
+type TSocialCardPropsBase = {
   /**
    * A concise title for the related content.
    * Platform specific behaviors for twitter:
@@ -24,7 +24,13 @@ export interface TSocialCardProps {
    * SocialCard component uses it to set images and alt based on the variant value.
    */
   variant: DomainVariant;
+};
 
+export type TSocialCardPropsDefaultImage = TSocialCardPropsBase;
+
+// If you supply a customized social card image, you must supply the same image
+// for both Twitter and Open Graph, and it must have alt text.
+export type TSocialCardPropsCustomizedImage = TSocialCardPropsBase & {
   /**
    * twitter:image for large summary cards:
    * absolute URL must be used rather than relative URL.
@@ -39,7 +45,7 @@ export interface TSocialCardProps {
    * The image will be cropped to a square on all platforms.
    * other specification's are similar to large summary cards.
    */
-  twitterImage?: string;
+  twitterImage: string;
 
   /**
    * og:image
@@ -47,7 +53,7 @@ export interface TSocialCardProps {
    * aspect ratio: The recommended size for an OG Image is 1.91:1.
    * The recommended pixel dimensions of 1200:630 px.
    */
-  ogImage?: string;
+  ogImage: string;
 
   /**
    * A text description of the image conveying the essential nature of an image to users who are visually impaired.
@@ -55,7 +61,7 @@ export interface TSocialCardProps {
    * but for Open Graph there’s no official guidance on this, but 40 characters for mobile and 60 for desktop is roughly the sweet spot.
    * More info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
    */
-  alt?: string;
+  alt: string;
 
   /**
    * The `summaryLargeImage` prop controls whether the large or small Twitter summary card will be used.
@@ -67,4 +73,8 @@ export interface TSocialCardProps {
    * More info: `https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image`
    */
   summaryLargeImage?: boolean;
-}
+};
+
+export type TSocialCardProps =
+  | TSocialCardPropsDefaultImage
+  | TSocialCardPropsCustomizedImage;
