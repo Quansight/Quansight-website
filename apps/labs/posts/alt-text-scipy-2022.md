@@ -2,14 +2,13 @@
 title: SciPy 2022 Accessibility Awareness Programs
 author: tony-fast
 published: July 13, 2022
-description: "Announcing the SciPy 2022 Accessibility Awareness Efforts"
+description: 'Announcing the SciPy 2022 Accessibility Awareness Efforts'
 category: [Access-centered]
 featuredImage:
- src: /posts/ally-scavenger-hunt-post-hero-image.png
- alt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'
+  alt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'
 hero:
- imageSrc: /posts/ally-scavenger-hunt-post-hero-image.png
- imageAlt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'
+  imageSrc: /posts/ally-scavenger-hunt-post-hero-image.png
+  imageAlt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'
 ---
 
 It is SciPy this week! It's one of the biggest community events in our corner of the world. We are so excited for the festivities, the talks, and to see & hear all our friends' new ideas.
@@ -19,7 +18,7 @@ Events, and technology, are increasingly more complex these days. This year SciP
 1. We're introducing a pilot open source [scavenger hunt](#the-scavenger-hunt) where you can:
    1. Contribute to popular open source projects.
    2. Improve the alt text of open source documentation.
-2. A free digital _and limited print_ zine called [__How to Write Alt Text for Scientific Diagrams and Visualization__][zine] by [@marsbarlee](https://github.com/marsbarlee).
+2. A free digital _and limited print_ zine called [**How to Write Alt Text for Scientific Diagrams and Visualization**][zine] by [@marsbarlee](https://github.com/marsbarlee).
 
 ## The scavenger hunt.
 
@@ -55,7 +54,7 @@ Thank y'all for taking the time to prepare for the scavenger hunt, and wanting t
 - Stay tuned later this week to learn how you fight inaccessibility with our zine release.
 - Use more alt text in your social media and documentation.
 - Give the project maintainers time to merge your submissions.
-- Enjoy [__How to Write Alt Text for Scientific Diagrams and Visualization__][zine]
+- Enjoy [**How to Write Alt Text for Scientific Diagrams and Visualization**][zine]
 
 [jlab]: https://github.com/isabela-pf/jupyterlab/pull/1
 [jlabqr]: https://user-images.githubusercontent.com/4236275/176369870-6fd6501f-288d-48c5-8cc3-4eaad0a35ee1.png
