@@ -7,7 +7,10 @@ import { DomainVariant } from '@quansight/shared/types';
 
 import { TSocialCardProps, TSocialCardPropsCustomizedImage } from './types';
 
-export const SocialCard: FC<TSocialCardProps> = (Props) => {
+const TWITTER_SMALL_CARD_NAME = 'summary';
+const TWITTER_LARGE_CARD_NAME = 'summary_large_image';
+
+export const SocialCard: FC<TSocialCardProps> = (props) => {
   const { asPath } = useRouter();
 
   const isSocialCardImageCustomized = (
@@ -18,11 +21,11 @@ export const SocialCard: FC<TSocialCardProps> = (Props) => {
     );
   };
 
-  const isCustom = isSocialCardImageCustomized(Props);
-  const isSummaryCardLargeImage = (summaryLargeImage = true) =>
-    summaryLargeImage ? 'summary_large_image' : 'summary';
+  const isCustom = isSocialCardImageCustomized(props);
+  const getTwitterCardTypeName = (twitterLargeImage = true) =>
+    twitterLargeImage ? TWITTER_LARGE_CARD_NAME : TWITTER_SMALL_CARD_NAME;
 
-  const { title, description, variant } = Props;
+  const { title, description, variant } = props;
 
   /*
     url is constructed starting from https:// because 'NEXT_PUBLIC_VERCEL_URL' doesn't provide the protocol(https)
@@ -73,8 +76,8 @@ export const SocialCard: FC<TSocialCardProps> = (Props) => {
         name="twitter:card"
         content={
           isCustom
-            ? isSummaryCardLargeImage(Props.summaryLargeImage)
-            : 'summary_large_image'
+            ? getTwitterCardTypeName(props.twitterLargeImage)
+            : getTwitterCardTypeName()
         }
       />
       <meta name="twitter:site" content="@quansightai" />
@@ -82,11 +85,11 @@ export const SocialCard: FC<TSocialCardProps> = (Props) => {
       <meta name="twitter:description" content={description} />
       <meta
         name="twitter:image"
-        content={isCustom ? Props.twitterImage : defaultTwitterImage(variant)}
+        content={isCustom ? props.twitterImage : defaultTwitterImage(variant)}
       />
       <meta
         name="twitter:alt"
-        content={isCustom ? Props.alt : defaultAlt(variant)}
+        content={isCustom ? props.alt : defaultAlt(variant)}
       />
 
       {/* open-graph / LinkedIn Specification */}
@@ -95,11 +98,11 @@ export const SocialCard: FC<TSocialCardProps> = (Props) => {
       <meta property="og:url" content={url} />
       <meta
         property="og:image"
-        content={isCustom ? Props.ogImage : defaultOgImage(variant)}
+        content={isCustom ? props.ogImage : defaultOgImage(variant)}
       />
       <meta
         property="og:image:alt"
-        content={isCustom ? Props.alt : defaultAlt(variant)}
+        content={isCustom ? props.alt : defaultAlt(variant)}
       />
     </Head>
   );
