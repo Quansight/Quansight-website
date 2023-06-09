@@ -4,9 +4,9 @@ author: tony-fast
 published: July 13, 2022
 description: 'Announcing the SciPy 2022 Accessibility Awareness Efforts'
 category: [Access-centered]
-# featuredImage:
-#   src: /posts/ally-scavenger-hunt-post-hero-image.png
-#   alt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'
+featuredImage:
+  src: /posts/ally-scavenger-hunt-post-hero-image.png
+  alt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'
 hero:
   imageSrc: /posts/ally-scavenger-hunt-post-hero-image.png
   imageAlt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'
