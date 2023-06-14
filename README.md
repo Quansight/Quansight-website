@@ -37,7 +37,7 @@ Here is some basic info to help orient you to this repo.
   - `./libs` holds code shared by both websites.
 - The websites' **content** lives in [Storyblok](https://app.storyblok.com)
   (requires login).
-  - But Labs and Consulting **blog posts** live under `./apps/labs/posts` and 
+  - But Labs and Consulting **blog posts** live under `./apps/labs/posts` and
     `./apps/consulting/posts`, respectively.
 - The websites are hosted and deployed via
   [Vercel](https://vercel.com/quansight) (requires login).
@@ -354,12 +354,12 @@ Throughout the develop-deploy process, there are several ways to view the
 website. The following table summarizes the important ways in which those views
 differ from each other.
 
-| Name                       | How to access          | GitHub branch  | Vercel env | Storyblok API key | Next.js preview? | Storyblok version param | Display top overlay? | Top overlay color | Button to enter/exit preview? |
-| -------------------------- | ---------------------- | -------------- | ---------- | ----------------- | ---------------- | ----------------------- | ------------------- | ---------------- | ----------------------------- |
-| Production                 | .com/.org URL          | `main`         | production | public            | off              | `published`             | No                  | n/a              | n/a                           |
-| Storyblok (yellow overlay)  | via Storyblok UI       | `develop`      | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | No                            |
-| Vercel URL (gray overlay)   | via link to Vercel URL | any non-`main` | preview    | preview           | off              | `published`             | Yes                 | gray             | Yes                           |
-| Vercel URL (yellow overlay) | via enter-preview      | any non-`main` | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | Yes                           |
+| Name                        | How to access          | GitHub branch  | Vercel env | Storyblok API key | Next.js preview? | Storyblok version param | Display top overlay? | Top overlay color | Button to enter/exit preview? |
+| --------------------------- | ---------------------- | -------------- | ---------- | ----------------- | ---------------- | ----------------------- | -------------------- | ----------------- | ----------------------------- |
+| Production                  | .com/.org URL          | `main`         | production | public            | off              | `published`             | No                   | n/a               | n/a                           |
+| Storyblok (yellow overlay)  | via Storyblok UI       | `develop`      | preview    | preview           | on               | `draft`                 | Yes                  | yellow            | No                            |
+| Vercel URL (gray overlay)   | via link to Vercel URL | any non-`main` | preview    | preview           | off              | `published`             | Yes                  | gray              | Yes                           |
+| Vercel URL (yellow overlay) | via enter-preview      | any non-`main` | preview    | preview           | on               | `draft`                 | Yes                  | yellow            | Yes                           |
 
 Let's take the row labeled "Vercel URL (gray overlay)." This view is accessed by
 clicking on a Vercel SHA-style URL, which looks like
@@ -534,12 +534,12 @@ The `content` section is the body of the post added in Markdown format.
 The `meta` section is a `YAML` like structure and should be wrapped with `---`
 signs. The meta section contains post-related information like:
 
-- `title` - Title of the blog post. Used also as the title of the page inside
+- `title (required)` - Title of the blog post. Used also as the title of the page inside
   `<title></title>` tag
 - `description` - Description of the blog post. Used inside `<meta name="description" />` tag
-- `published` - Publishing date of the blog post. Used also for sorting posts by
+- `published (required)` - Publishing date of the blog post. Used also for sorting posts by
   date (the format should be `Month d, yyyy` for example `January 1, 2023`)
-- `author` - Unique slug of the author (from Storyblok) usually looks like `jon-doe`.
+- `author (required)` - Unique slug of the author (from Storyblok) usually looks like `jon-doe`.
   Based on this property blog post page will display proper info about the author
   (and their avatar). The author must be present in Storyblok in order for the
   post to build without error.
@@ -547,9 +547,9 @@ signs. The meta section contains post-related information like:
   categories should be the same as in the previously mentioned
   [`categories.json`](./apps/labs/posts/categories.json) file.
   **Important note:** categories are case-sensitive.
-- `featuredImage` - Object with properties: `src` and `alt`. The `src` property
+- `featuredImage (required)` - Object with properties: `src` and `alt`. The `src (required)` property
   is a path to the featured image which is displayed on the posts list on the`/blog`
-  page. The `alt` property is alternative text for the image. The image should
+  page. The `alt (required)` property is alternative text for the image. The image should
   be added to the `apps/labs/public/posts/<post-name>` directory, for example,
   `apps/labs/public/posts/hello-world-post`. There is no need to provide a full image path,
   so the path name should start with `/posts/`.
