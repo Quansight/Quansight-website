@@ -547,9 +547,9 @@ signs. The meta section contains post-related information like:
   categories should be the same as in the previously mentioned
   [`categories.json`](./apps/labs/posts/categories.json) file.
   **Important note:** categories are case-sensitive.
-- `featuredImage (required)` - Object with properties: `src` and `alt`. The `src (required)` property
+- `featuredImage (required)` - Object with two required properties: `src` and `alt`. The `src` property
   is a path to the featured image which is displayed on the posts list on the`/blog`
-  page. The `alt (required)` property is alternative text for the image. The image should
+  page. The `alt` property is alternative text for the image. The image should
   be added to the `apps/labs/public/posts/<post-name>` directory, for example,
   `apps/labs/public/posts/hello-world-post`. There is no need to provide a full image path,
   so the path name should start with `/posts/`.
