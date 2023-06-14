@@ -548,15 +548,15 @@ the same:
   object has two `string` properties:
   - `name`
     - Should be written with natural capitalization and whitespace
-    - Used as-is (case and whitespace sensitive) in post metadata to associate a
-      post with a category
+    - Used as-is (case and whitespace sensitive, and _without_ surrounding quotes) in the post `category` metadata field to associate a
+      post with one or more categories
     - Converted to all caps for use in the category-selection dropdown on the
       `/library` page
   - `value`
     - Should be written in slugified form and in all lowercase
       - NOTE: Currently one category, `Infrastructure & HPC`, has a capitalized
         `value` due to an oversight. We plan to fix this.
-    - Used as-is (case sensitive) in the `category` query parameter to
+    - Used as-is (**case sensitive**) in the `category` query parameter to
       `/library`—URLs with mismatched case in the `category` query parameter
       will return **no results**
 
@@ -660,7 +660,8 @@ hero:
    format as the other categories.
 4. Commit and push your changes to the repository. For commits please follow the
    format of the conventional commit.
-   [See](https://www.conventionalcommits.org/en/v1.0.0/)
+   See the
+   [Conventional Commits docs](https://www.conventionalcommits.org/en/v1.0.0/).
 5. Wait for someone in the website team to review the new blog category. If
    everything is ok, the PR will be merged to the `develop` branch.
 
