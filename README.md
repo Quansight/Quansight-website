@@ -37,7 +37,7 @@ Here is some basic info to help orient you to this repo.
   - `./libs` holds code shared by both websites.
 - The websites' **content** lives in [Storyblok](https://app.storyblok.com)
   (requires login).
-  - But Labs and Consulting **blog posts** live under `./apps/labs/posts` and
+  - But Labs and Consulting **blog posts** live under `./apps/labs/posts` and 
     `./apps/consulting/posts`, respectively.
 - The websites are hosted and deployed via
   [Vercel](https://vercel.com/quansight) (requires login).
@@ -354,12 +354,12 @@ Throughout the develop-deploy process, there are several ways to view the
 website. The following table summarizes the important ways in which those views
 differ from each other.
 
-| Name                        | How to access          | GitHub branch  | Vercel env | Storyblok API key | Next.js preview? | Storyblok version param | Display top overlay? | Top overlay color | Button to enter/exit preview? |
-| --------------------------- | ---------------------- | -------------- | ---------- | ----------------- | ---------------- | ----------------------- | -------------------- | ----------------- | ----------------------------- |
-| Production                  | .com/.org URL          | `main`         | production | public            | off              | `published`             | No                   | n/a               | n/a                           |
-| Storyblok (yellow overlay)  | via Storyblok UI       | `develop`      | preview    | preview           | on               | `draft`                 | Yes                  | yellow            | No                            |
-| Vercel URL (gray overlay)   | via link to Vercel URL | any non-`main` | preview    | preview           | off              | `published`             | Yes                  | gray              | Yes                           |
-| Vercel URL (yellow overlay) | via enter-preview      | any non-`main` | preview    | preview           | on               | `draft`                 | Yes                  | yellow            | Yes                           |
+| Name                       | How to access          | GitHub branch  | Vercel env | Storyblok API key | Next.js preview? | Storyblok version param | Display top overlay? | Top overlay color | Button to enter/exit preview? |
+| -------------------------- | ---------------------- | -------------- | ---------- | ----------------- | ---------------- | ----------------------- | ------------------- | ---------------- | ----------------------------- |
+| Production                 | .com/.org URL          | `main`         | production | public            | off              | `published`             | No                  | n/a              | n/a                           |
+| Storyblok (yellow overlay)  | via Storyblok UI       | `develop`      | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | No                            |
+| Vercel URL (gray overlay)   | via link to Vercel URL | any non-`main` | preview    | preview           | off              | `published`             | Yes                 | gray             | Yes                           |
+| Vercel URL (yellow overlay) | via enter-preview      | any non-`main` | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | Yes                           |
 
 Let's take the row labeled "Vercel URL (gray overlay)." This view is accessed by
 clicking on a Vercel SHA-style URL, which looks like
