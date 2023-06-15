@@ -534,20 +534,20 @@ The `content` section is the body of the post added in Markdown format.
 The `meta` section is a `YAML` like structure and should be wrapped with `---`
 signs. The meta section contains post-related information like:
 
-- `title (required)` - Title of the blog post. Used also as the title of the page inside
+- `title` (required) - Title of the blog post. Used also as the title of the page inside
   `<title></title>` tag
-- `description` - Description of the blog post. Used inside `<meta name="description" />` tag
-- `published (required)` - Publishing date of the blog post. Used also for sorting posts by
+- `description` (required) - Description of the blog post. Used inside `<meta name="description" />` tag
+- `published` (required) - Publishing date of the blog post. Used also for sorting posts by
   date (the format should be `Month d, yyyy` for example `January 1, 2023`)
-- `author (required)` - Unique slug of the author (from Storyblok) usually looks like `jon-doe`.
+- `author` (required) - Unique slug of the author (from Storyblok) usually looks like `jon-doe`.
   Based on this property blog post page will display proper info about the author
   (and their avatar). The author must be present in Storyblok in order for the
   post to build without error.
-- `category` - Array of categories for example `[Machine Learning]`. All
+- `category` (required) - Array of categories for example `[Machine Learning]`. All
   categories should be the same as in the previously mentioned
   [`categories.json`](./apps/labs/posts/categories.json) file.
   **Important note:** categories are case-sensitive.
-- `featuredImage (required)` - Object with two required properties: `src` and `alt`. The `src` property
+- `featuredImage` (required) - Object with two required properties: `src` and `alt`. The `src` property
   is a path to the featured image which is displayed on the posts list on the`/blog`
   page. The `alt` property is alternative text for the image. The image should
   be added to the `apps/labs/public/posts/<post-name>` directory, for example,
