@@ -553,7 +553,7 @@ signs. The meta section contains post-related information like:
   be added to the `apps/labs/public/posts/<post-name>` directory, for example,
   `apps/labs/public/posts/hello-world-post`. There is no need to provide a full image path,
   so the path name should start with `/posts/`.
-- `hero` - the object for the Hero section of the post. This can have two different structures:
+- `hero` (required) - the object for the Hero section of the post. This can have two different structures:
   - The first structure is an object with `imageSrc` and `imageAlt`. The `imageSrc` property is a path to
     the hero image, which is displayed on the blog post page between the nav bar and the
     blog heading title. The `imageAlt` property is alternative text for the image.
