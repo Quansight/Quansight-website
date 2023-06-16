@@ -32,7 +32,7 @@ export const SocialCard: FC<TSocialCardProps> = (props) => {
     and for og:url requires absolute URL which includes the protocol and domain name
     using the prefix NEXT_PUBLIC is used to indicate that the environment variable is public,
     meaning that it can be accessed by the browser.
-    'NEXT_PUBLIC_VERCEL_URL' is set when the site is statically built, the build step inline the current value for the environment variable into the built JS file.
+    'NEXT_PUBLIC_VERCEL_URL' is set when the site is statically built, the build step inlines the current value for the environment variable into the built JS file.
     This kind of URL is need because of og:url needs absolute path and allows it to use this as the correct canonical tag
     Also twitter doesn't have something similar to og:url like twitter:url.
    */
