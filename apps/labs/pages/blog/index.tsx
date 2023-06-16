@@ -6,7 +6,13 @@ import { useRouter } from 'next/router';
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 
 import { DomainVariant } from '@quansight/shared/types';
-import { Footer, Header, Layout, SEO } from '@quansight/shared/ui-components';
+import {
+  Footer,
+  Header,
+  Layout,
+  SEO,
+  SocialCard,
+} from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
 import {
@@ -136,6 +142,11 @@ const BlogListPage: FC<BlogListPageProps> = ({
       }
     >
       <SEO
+        title={data.content.title}
+        description={data.content.description}
+        variant={DomainVariant.Labs}
+      />
+      <SocialCard
         title={data.content.title}
         description={data.content.description}
         variant={DomainVariant.Labs}

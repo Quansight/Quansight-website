@@ -4,7 +4,13 @@ import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
 import { ISlugParams, DomainVariant } from '@quansight/shared/types';
-import { Layout, SEO, Footer, Header } from '@quansight/shared/ui-components';
+import {
+  Layout,
+  SEO,
+  Footer,
+  Header,
+  SocialCard,
+} from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
 import { PAGINATION_OFFSETT } from '../..//utils/paginateLibraryTiles/constants';
@@ -122,6 +128,11 @@ export const Library: FC<TLibraryProps> = ({
       }
     >
       <SEO
+        title={data.content.title}
+        description={data.content.description}
+        variant={DomainVariant.Quansight}
+      />
+      <SocialCard
         title={data.content.title}
         description={data.content.description}
         variant={DomainVariant.Quansight}

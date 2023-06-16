@@ -12,6 +12,7 @@ import {
   HeroVariant,
   Layout,
   SEO,
+  SocialCard,
 } from '@quansight/shared/ui-components';
 
 import { FooterItem, HeaderItem } from '../../api/types/basic';
@@ -57,6 +58,11 @@ export const BlogPost: FC<TBlogPostProps> = ({
       }
     >
       <SEO
+        title={post.meta.title}
+        description={post.meta.description}
+        variant={DomainVariant.Labs}
+      />
+      <SocialCard
         title={post.meta.title}
         description={post.meta.description}
         variant={DomainVariant.Labs}
