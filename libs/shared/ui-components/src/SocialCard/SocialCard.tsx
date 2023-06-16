@@ -22,8 +22,10 @@ export const SocialCard: FC<TSocialCardProps> = (props) => {
   };
 
   const isCustom = isSocialCardImageCustomized(props);
+  const getTwitterCardTypeName = (twitterLargeImage = true) =>
+    twitterLargeImage ? TWITTER_LARGE_CARD_NAME : TWITTER_SMALL_CARD_NAME;
 
-  const { title, description, variant, twitterLargeImage } = props;
+  const { title, description, variant } = props;
 
   /*
     url is constructed starting from https:// because 'NEXT_PUBLIC_VERCEL_URL' doesn't provide the protocol(https)
@@ -73,7 +75,9 @@ export const SocialCard: FC<TSocialCardProps> = (props) => {
       <meta
         name="twitter:card"
         content={
-          twitterLargeImage ? TWITTER_LARGE_CARD_NAME : TWITTER_SMALL_CARD_NAME
+          isCustom
+            ? getTwitterCardTypeName(props.twitterLargeImage)
+            : getTwitterCardTypeName()
         }
       />
       <meta name="twitter:site" content="@quansightai" />

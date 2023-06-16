@@ -24,18 +24,6 @@ type TSocialCardPropsBase = {
    * SocialCard component uses it to set default images and alt based on the variant value.
    */
   variant: DomainVariant;
-
-  /**
-   * The `twitterLargeImage` prop controls whether the large or small Twitter summary card will be used.
-   * The `SocialCard` component *should* be configured with a `true` default value for this prop.
-   * Remember to use the twitter:image that fits aspect ratio of 2:1 when twitterLargeImage is true.
-   * with minimum dimensions of 300x157 or maximum of 4096x4096 pixels (see twitterImage type above for more details).
-   * full-width prominent image alongside a tweet. It is designed to give the reader a rich photo experience,
-   * and clicking on the image brings the user to your website.
-   * More info: `https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image`
-   * Our default Twitter cards for Quansight and Quansight Labs are large
-   */
-  twitterLargeImage?: true;
 };
 
 export type TSocialCardPropsDefaultImage = TSocialCardPropsBase;
@@ -75,6 +63,17 @@ export type TSocialCardPropsCustomizedImage = TSocialCardPropsBase & {
    * More info: https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
    */
   alt: string;
+
+  /**
+   * The `twitterLargeImage` prop controls whether the large or small Twitter summary card will be used.
+   * The `SocialCard` component *should* be configured with a `true` default value for this prop.
+   * Remember to use the twitter:image that fits aspect ratio of 2:1 when twitterLargeImage is true.
+   * with minimum dimensions of 300x157 or maximum of 4096x4096 pixels (see twitterImage type above for more details).
+   * full-width prominent image alongside a tweet. It is designed to give the reader a rich photo experience,
+   * and clicking on the image brings the user to your website.
+   * More info: `https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image`
+   */
+  twitterLargeImage?: boolean;
 };
 
 export type TSocialCardProps =
