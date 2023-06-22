@@ -66,6 +66,10 @@ export const BlogPost: FC<TBlogPostProps> = ({
         title={post.meta.title}
         description={post.meta.description}
         variant={DomainVariant.Labs}
+        twitterLargeImage={true}
+        twitterImage={`${process.env.NEXT_PUBLIC_VERCEL_URL}${post.meta.featuredImage.src}`}
+        ogImage={`${process.env.NEXT_PUBLIC_VERCEL_URL}${post.meta.featuredImage.src}`}
+        alt={post.meta.featuredImage.alt}
       />
       {post.meta.hero && (
         <Hero
