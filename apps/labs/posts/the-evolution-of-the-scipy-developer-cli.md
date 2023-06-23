@@ -1,7 +1,7 @@
 ---
 title: 'The evolution of the SciPy developer CLI'
 published: May 03, 2022
-author: sayantika-banik
+author: [sayantika-banik]
 description: 'The development story of a developer command-line interface (CLI) for the SciPy project, with exmaples'
 category: [Developer workflows]
 featuredImage:

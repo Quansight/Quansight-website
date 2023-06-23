@@ -2,7 +2,7 @@
 title: 'Planned architectural work for PyData/Sparse'
 published: March 11, 2020
 description: 'An update about recent research activities and upcoming changes'
-author: hameer-abbasi
+author: [hameer-abbasi]
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/whats-next-for-pydatasparse/blog_feature_var1.svg

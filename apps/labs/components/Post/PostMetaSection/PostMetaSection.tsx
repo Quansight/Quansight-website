@@ -22,7 +22,7 @@ export const PostMetaSection: FC<PostMetaSectionProps> = ({
         Published {published}
       </p>
       <div className="mb-[5rem]">
-        <PostAuthor {...author} />
+        <PostAuthor authors={author} />
       </div>
     </>
   );

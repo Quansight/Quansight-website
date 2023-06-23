@@ -1,6 +1,6 @@
 ---
 title: 'Distributed Training Made Easy with PyTorch-Ignite'
-author: victor-fomin
+author: [victor-fomin]
 published: June 28, 2021
 description: 'Writing agnostic distributed code that supports different platforms, hardware configurations (GPUs, TPUs) and communication frameworks is tedious. In this blog, we will discuss how PyTorch-Ignite solves this problem with minimal code change.'
 category: [Machine Learning]

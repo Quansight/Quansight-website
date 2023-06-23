@@ -1,7 +1,7 @@
 ---
 title: 'IPython 8.0, Lessons learned maintaining software'
 published: January 12, 2022
-author: matthias-bussonnier
+author: [matthias-bussonnier]
 description: 'This is a companion post from the Official release of IPython
 8.0. We hope it will help you apply best practices, and have an easier time
 maintaining your projects, or helping other.'

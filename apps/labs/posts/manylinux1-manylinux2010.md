@@ -1,7 +1,7 @@
 ---
 title: 'Manylinux1 is obsolete, manylinux2010 is almost EOL, what is next?'
 published: November 12, 2020
-author: matti-picus
+author: [matti-picus]
 description: 'The basic installation format for users who install packages via pip is the wheel format. But what about Linux? The first manylinux standard, manylinux1, was based on CentOS5 which has been obsolete since March 2017. So what is next for manylinux, and what manylinux should users and package maintainers use?'
 category: [Beyond PyData, Developer workflows]
 featuredImage:

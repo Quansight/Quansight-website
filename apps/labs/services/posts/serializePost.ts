@@ -33,23 +33,24 @@ export const serializePost = async (
     },
   });
 
-  if (!data.author) {
+  if (!data.author || data.author.length == 0) {
     throw Error('You did not provide author slug');
   }
 
-  const postAuthor = authors.find((author) => author.slug === data.author);
-
-  if (!postAuthor) {
-    throw Error('There is not matching author in database');
-  }
-
+  const postAuthor = data.author.map((authorName) => {
+    const foundAuthor = authors.find((author) => author.slug === authorName);
+    if (!foundAuthor) {
+      throw Error(`Author ${authorName} is not in the database`);
+    }
+    return {
+      avatarSrc: foundAuthor.content.image.filename,
+      fullName: `${foundAuthor.content.firstName} ${foundAuthor.content.lastName}`,
+      nickName: foundAuthor.content.githubNick,
+    };
+  });
   const meta: TPost['meta'] = {
     ...(data as TPost['meta']),
-    author: {
-      avatarSrc: postAuthor.content.image.filename,
-      fullName: `${postAuthor.content.firstName} ${postAuthor.content.lastName}`,
-      nickName: postAuthor.content.githubNick,
-    },
+    author: postAuthor,
   };
 
   return {

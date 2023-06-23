@@ -1,7 +1,7 @@
 ---
 title: 'Quansight Labs Work Update for September, 2019'
 published: October 7, 2020
-author: aaron-meurer
+author: [aaron-meurer]
 description: 'In this post, I will detail some of the open source work that I have done
 recently, both as part of my open source consulting, and as part of my work on
 SymPy for Quansight Labs.'

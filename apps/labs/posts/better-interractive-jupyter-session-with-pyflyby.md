@@ -1,7 +1,7 @@
 ---
 title: 'Pyflyby: Improving Efficiency of Jupyter Interactive Sessions'
 published: July 07, 2021
-author: aaron-meurer
+author: [aaron-meurer]
 description: 'In this blogpost we present pyflyby, a
 project and an extension to IPython and JupyterLab, that, among many
 things, automatically inserts imports and tidies Python files and notebooks.'

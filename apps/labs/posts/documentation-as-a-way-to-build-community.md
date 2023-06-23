@@ -1,7 +1,7 @@
 ---
 title: 'Documentation as a way to build Community'
 published: March 14, 2020
-author: melissa-mendonca
+author: [melissa-mendonca]
 description: 'Having official high-level documentation written using up-to-date content and techniques will certainly mean more users (and developers/contributors) are involved in the NumPy community. So, if everybody agrees on its importance, why is it so hard to write good documentation?'
 category: [Community, Developer workflows, OSS Experience]
 featuredImage:

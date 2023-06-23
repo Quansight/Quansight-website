@@ -1,7 +1,7 @@
 ---
 title: 'Close Encounter with pandas and the Jedis of open source'
 published: November 14, 2022
-author: dennis-chukwunta
+author: [dennis-chukwunta]
 description: 'Learning from awesome mentors and contributing to pandas open source'
 category: [Community, Developer workflows, OSS Experience, PyData ecosystem]
 featuredImage:

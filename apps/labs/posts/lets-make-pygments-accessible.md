@@ -1,6 +1,6 @@
 ---
 title: 'Making pygments accessible'
-author: stephannie-jimenez
+author: [stephannie-jimenez]
 published: November 15, 2022
 description: 'accessible-pygments hosts curated WCAG-compliant themes for all your syntax highlighting needs.'
 category: [Access-centered]

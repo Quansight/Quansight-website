@@ -1,7 +1,7 @@
 ---
 title: 'TDK-Micronas partners with Quansight to sponsor Spyder'
 published: July 2, 2019
-author: ivan-ogasawara
+author: [ivan-ogasawara]
 description: "TDK-Micronas is sponsoring Spyder development efforts through Quansight Labs.
 This will enable the development of some features that have been requested by
 our users, as well as new features that will help TDK develop custom Spyder

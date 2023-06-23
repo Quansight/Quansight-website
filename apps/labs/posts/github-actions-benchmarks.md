@@ -1,7 +1,7 @@
 ---
 title: 'Is GitHub Actions suitable for running benchmarks?'
 published: August 18, 2021
-author: jaime-rodriguez-guerra
+author: [jaime-rodriguez-guerra]
 description: 'Instead of going through all the complications involved in renting or acquiring dedicated hardware, setting up credentials and monitoring costs of a benchmarkin suite, we hoped we could use the same free cloud resources normally used for CI tests. Ideally, GitHub Actions.'
 category: [Developer workflows]
 featuredImage:

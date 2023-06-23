@@ -1,7 +1,7 @@
 ---
 title: 'NumPy Benchmarking'
 published: November 03, 2021
-author: khushi-agrawal
+author: [khushi-agrawal]
 description: 'My work was majorly focused on providing performance benchmarks to NumPy in realistic situations. The target was to show the world that NumPy is efficient in handling quasi real-life situations too.'
 category: [Developer workflows]
 featuredImage:

@@ -1,7 +1,7 @@
 ---
 title: 'Introduction to Design in Open Source'
 published: November 18, 2020
-author: isabela-presedo-floyd
+author: [isabela-presedo-floyd]
 description: "This blog post is a conversation between two contributors, sharing their observations, experiences, and their hope for a stronger collaboration between design and development in open source."
 category: [Developer workflows, OSS Experience]
 featuredImage:

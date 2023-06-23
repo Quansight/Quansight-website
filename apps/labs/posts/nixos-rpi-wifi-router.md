@@ -1,7 +1,7 @@
 ---
 title: 'Learn NixOS by turning a Raspberry Pi into a Wireless Router'
 published: July 11, 2020
-author: anthony-scopatz
+author: [anthony-scopatz]
 description: 'I recently moved, and my new place has a relatively small footprint. (Yes, I moved during the COVID-19 pandemic. And yes, it was crazy.) I quickly realized that was going to need a wireless router of some sort, or more formally, a wireless access point (WAP).'
 category: [Beyond PyData]
 featuredImage:

@@ -1,7 +1,7 @@
 ---
 title: 'A second CZI grant for NumPy and OpenBLAS'
 published: November 19, 2020
-author: melissa-mendonca
+author: [melissa-mendonca, juanita-gomez]
 description: 'This new grant totaling $140,000 will fund part of our efforts to improve usability and sustainability in both projects and is excellent news for the scientific computing community, which will certainly benefit from this work downstream.'
 category: [Array API, Funding]
 featuredImage:
@@ -105,7 +105,7 @@ As part of the third cycle of the ​Essential Open Source Software for Science
 (EOSS)​ program, CZI awarded $3 million for 17 new grants. These awards bring the
 total number of funded proposals to 67 projects and the EOSS program's total
 commitment to funding scientific open source to $11.8 million. View the
- ​[full list of grantees​](https://chanzuckerberg.com/eoss/proposals/).
+​[full list of grantees​](https://chanzuckerberg.com/eoss/proposals/).
 
 As for our project, the funds will be again managed by NumFOCUS as a fiscal
 sponsor. Of the total value (removing the overhead charges), about two-thirds
@@ -118,4 +118,3 @@ funds will support Martin Kroeker part-time for a year.
 The actual work begins on January 1st, and I'm looking forward to this. Moving
 from being a part of the grant project for NumPy in 2020 to being the PI in 2021
 is exciting - I can't wait to see what we do next!
-

@@ -1,7 +1,7 @@
 ---
 title: 'uarray: Attempting to move the ecosystem forward'
 published: November 10, 2019
-author: hameer-abbasi
+author: [hameer-abbasi]
 description: "There comes a time in every project where most technological hurdles have been surpassed, and its adoption is a social problem. I believe uarray and unumpy had reached such a state, a month ago. I'd like to present some improvements the Quansight team has made to uarray over the course of the past several months."
 category: [PyData ecosystem]
 featuredImage:

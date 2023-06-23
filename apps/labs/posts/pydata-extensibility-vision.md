@@ -1,7 +1,7 @@
 ---
 title: 'A vision for extensibility to GPU & distributed support for SciPy, scikit-learn, scikit-image and beyond'
 published: November 17, 2021
-author: ralf-gommers
+author: [ralf-gommers]
 description: 'In this post, we aim to articulate that vision and suggest a path to making it concrete, focusing on three libraries at the core of the PyData ecosystem: SciPy, scikit-learn and scikit-image. '
 category: [Array API]
 featuredImage:

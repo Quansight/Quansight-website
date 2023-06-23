@@ -1,7 +1,7 @@
 ---
 title: 'Why is writing blog posts hard?'
 published: April 10, 2022
-author: isabela-presedo-floyd
+author: [isabela-presedo-floyd]
 description: 'In our weekly show and tell we got real about "why can writing blog 
 posts be so hard?" and collaboratively wrote up this blog post about what we learned 
 from the discussion.'

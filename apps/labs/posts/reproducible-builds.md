@@ -1,7 +1,7 @@
 ---
 title: 'IPython reproducible builds'
 published: August 24, 2020
-author: matthias-bussonnier
+author: [matthias-bussonnier]
 description: 'Starting with IPython 7.16.1 (released in June 2020), you should be able to recreate the sdist (.tar.gz) and wheel (.whl), and get byte for byte identical result to the wheels published on PyPI. This is a critical step toward being able to trust your computing platforms, and a key component to improve efficiency of build and packaging platforms. It also potentially impacts fast conda environment creation for users. The following goes into some reasons for why you should care.'
 category: [Developer workflows]
 featuredImage:
@@ -132,11 +132,10 @@ detecting that two builds are actually identical.
 
 This could allow to decrease precious disk space, bandwidth, and time spent waiting for software to install.
 
-If you'd like to learn more about this topic, I'd recommend talking to some [Nix][Nix] users to see how a purely functional package manager works and
+If you'd like to learn more about this topic, I'd recommend talking to some [Nix][nix] users to see how a purely functional package manager works and
 which other advantages this brings.
 
 But in the meantime, please go track the various sources of randomness in your favorite library or build system, and
 let's work together to change things so that things never change!
 
-
-[Nix]: https://nixos.org/
+[nix]: https://nixos.org/

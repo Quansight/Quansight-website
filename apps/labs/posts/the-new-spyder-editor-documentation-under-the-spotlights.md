@@ -1,7 +1,7 @@
 ---
 title: 'The new Spyder Editor documentation under the spotlights!'
 published: November 15, 2022
-author: hanan-younes
+author: [hanan-younes]
 description: 'In this blogpost, I share my experience as a Google Season of Docs 2022 technical writer working on updating the Editor user documentation.'
 category: [Community, OSS Experience]
 featuredImage:

@@ -1,7 +1,7 @@
 ---
 title: 'Python packaging & workflows - where to next?'
 published: January 10, 2023
-author: ralf-gommers
+author: [ralf-gommers]
 description: 'Potential solutions for pain points when dealing with native code; what needs unifying in the Python packaging space, and how should that be approached? '
 category: [Packaging]
 featuredImage:

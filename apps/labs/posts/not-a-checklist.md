@@ -1,7 +1,7 @@
 ---
 title: 'Not a checklist: different accessibility needs in JupyterLab'
 published: September 14, 2021
-author: isabela-presedo-floyd
+author: [isabela-presedo-floyd]
 description: "How we ended up with a discussion about where issues with JupyterLab’s built-in code editors fit on the list of immediate accessibility priorities."
 category: [Access-centered]
 featuredImage:

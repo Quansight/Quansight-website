@@ -1,7 +1,7 @@
 ---
 title: 'Dataframe interchange protocol and Vaex'
 published: October 04, 2021
-author: alenka-frim
+author: [alenka-frim]
 description: 'The work I briefly describe in this blog post is the implementation of the dataframe interchange protocol into Vaex which I was working on through the three month period as a Quansight Labs Intern.'
 category: [Array API, PyData Ecosystem]
 featuredImage:

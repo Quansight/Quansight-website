@@ -1,6 +1,6 @@
 ---
 title: 'Checking for accessibility: thoughts and a checklist!'
-author: isabela-presedo-floyd
+author: [isabela-presedo-floyd]
 published: June 06, 2022
 description: 'A non-exhaustive but totally honest checklist
 for accessibility review'

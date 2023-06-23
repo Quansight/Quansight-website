@@ -1,7 +1,7 @@
 ---
 title: 'Spyder 4.0 beta4: Kite integration is here'
 published: August 16, 2019
-author: edgar-margffoy
+author: [edgar-margffoy]
 description: 'As part of our next release, we are proud to announce an additional completion client for Spyder, Kite. Kite is a novel completion client that uses Machine Learning techniques to find and predict the best autocompletion for a given text.'
 category: [IDEs]
 featuredImage:
