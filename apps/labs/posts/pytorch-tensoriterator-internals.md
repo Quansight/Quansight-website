@@ -1,7 +1,7 @@
 ---
 title: 'PyTorch TensorIterator Internals'
 published: April 13, 2020
-author: [sameer-deshmukh]
+authors: [sameer-deshmukh]
 description: 'This post is a deep dive into how TensorIterator works, and is an essential part of learning to contribute to the PyTorch codebase since iterations over tensors in the C++ codebase are extremely commonplace. This post is aimed at someone who wants to contribute to PyTorch'
 category: [Machine Learning]
 featuredImage:
@@ -41,7 +41,7 @@ tensors in the C++ codebase are extremely commonplace. This post is aimed at
 someone who wants to contribute to PyTorch, and you should at least be familiar
 with some of the basic terminologies of the PyTorch codebase that can be found
 in Edward Yang's excellent [blog post](http://blog.ezyang.com/2019/05/pytorch-internals)
-on PyTorch internals.  Although `TensorIterator` can be used for both CPUs and
+on PyTorch internals. Although `TensorIterator` can be used for both CPUs and
 accelerators, this post has been written keeping in mind usage on the CPU.
 Although there can be some dissimilarities between the two, the overall
 concepts are the same.
@@ -57,7 +57,7 @@ consider this simple `TH` loop for computing the product of all the numbers in
 a particular dimension (find the code
 [here](https://github.com/pytorch/pytorch/blob/master/aten/src/TH/generic/THTensorMoreMath.cpp#L350)):
 
-``` C
+```C
 TH_TENSOR_DIM_APPLY2(scalar_t, t, scalar_t, r_, dimension,
     accreal prod = 1;
     int64_t i;
@@ -110,7 +110,7 @@ that you want as inputs or outputs. A good example can be found from the `Tensor
 allows you to create `TensorIterator` objects for performing point-wise binary operations
 between two tensors. The important parts look like so:
 
-``` cpp
+```cpp
 auto iter = TensorIterator();
 
 iter.add_output(out);
@@ -119,6 +119,7 @@ iter.add_input(b);
 
 iter.build();
 ```
+
 As you can see, you add a tensor called `out` as the output tensors and `a` and `b` as the
 input tensors. Calling `build` is then mandatory for creating the object and letting
 the class perform other optimizations like collapsing dimensions.
@@ -143,7 +144,7 @@ of a single dimension whereas the latter can do so over two dimensions. The simp
 way of using `for_each` is to pass it a lambda of type `loop_t` (or `loop2d_t`).
 A code snippet using it this way would look like so:
 
-``` cpp
+```cpp
 auto iter = TensorIterator();
 iter.add_output(out);
 iter.add_input(a);
@@ -167,6 +168,7 @@ auto loop = [&](char **data, const int64_t* strides, int64_t n) {
 
 iter.for_each(loop);
 ```
+
 In the above example, the `char** data` gives a pointer to the data within the
 tensor in the same order that you specify when you build the iterator. Note
 that in order to make the implementation agnostic of any particular data type, you
@@ -195,7 +197,8 @@ For example, say we want to build a function that performs the point-wise additi
 of two tensors and stores the result in a third tensor, we can use the `cpu_kernel`
 function. Note that in this example we assume a tensor of `float` but you can
 use the `AT_DISPATCH_ALL_TYPES_AND2` macro.
-``` cpp
+
+```cpp
 TensorIterator iter;
 iter.add_input(a_tensor);
 iter.add_input(b_tensor);
@@ -205,6 +208,7 @@ cpu_kernel(iter, [] (float a, float b) -> float {
   return a + b;
 });
 ```
+
 Writing the kernel in this way ensures that the value returned by the lambda passed to
 `cpu_kernel` will populate the corresponding place in the target output tensor.
 
@@ -240,7 +244,7 @@ the code for the [kernel](https://github.com/pytorch/pytorch/blob/master/aten/sr
 
 The important bits of this function are like so:
 
-``` cpp
+```cpp
 auto self_sizes = ensure_nonempty_vec(self.sizes().vec());
 self_sizes[dim] = 1;
 
@@ -254,6 +258,7 @@ iter.add_output(result_restrided);
 iter.add_input(self_restrided);
 iter.build();
 ```
+
 You can see that we first change the size of the tensors to `1` on the
 reduction dimension so that the dimension collapsing logic inside
 `TensorIterator#build` will know which dimension to skip.

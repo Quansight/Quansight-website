@@ -1,7 +1,7 @@
 ---
 title: 'Querying multiple backends with Ibis'
 published: November 13, 2020
-author: [tony-fast]
+authors: [tony-fast]
 description: "We'll highlight the ability of Ibis to generically prescribe query expressions across different data storage systems."
 category: [PyData ecosystem]
 featuredImage:
@@ -11,7 +11,6 @@ hero:
   imageSrc: /posts/the-ibis-backends/blog_hero_var1.svg
   imageAlt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 ---
-
 
 In [our recent Ibis post], we discussed querying & retrieving data using a familiar [Pandas]-like interface.
 That discussion focused on the fluent API that [Ibis] provides to query structure from a SQLite database&mdash;in particular, using a single specific backend.
@@ -24,7 +23,7 @@ import ibis.omniscidb, dask, intake, sqlalchemy, pandas, pyarrow as arrow, altai
 ## Ibis in the scientific Python ecosystem
 
 Before we delve into the technical details of using Ibis, we'll consider Ibis in the greater historical context of the scientific Python ecosystem. It was started by Wes McKinney, the creator of Pandas, as way to query information on
-the [Hadoop distributed file system][HDFS] and [PySpark]. More backends were added later as Ibis became a general tool for data queries.
+the [Hadoop distributed file system][hdfs] and [PySpark]. More backends were added later as Ibis became a general tool for data queries.
 
 Throughout the rest of this post, we'll highlight the ability of Ibis to generically prescribe
 query expressions across different data storage systems.
@@ -77,10 +76,10 @@ From this point, improvements were made to these key backends as ClickHouse, Spa
 For the past two years, Quansight, in partnership with OmniSci, added the `ibis.omniscidb`
 string-generating backend. Further, our responsibilities have expanded
 to support Ibis as community maintainers through Quansight Labs.
-This collaboration introduced [geospatial functionality to Ibis][Geospatial] for several backends.
+This collaboration introduced [geospatial functionality to Ibis][geospatial] for several backends.
 
 There are currently ongoing efforts to introduce support for [SQL Server][sql-server] backends.
-What other backends would you like to see for Ibis?  Maybe our community could benefit from a [Dask]
+What other backends would you like to see for Ibis? Maybe our community could benefit from a [Dask]
 backend or an [Altair] backend?
 
 ## Ibis direct execution backends
@@ -91,6 +90,7 @@ Pandas is the gold standard for structured data in Python and inspires the API f
 ```python
 pd = ibis.pandas.connect({'A': pandas.util.testing.makeDataFrame()})
 ```
+
 The object `pd` is an Ibis backend based on `pandas.DataFrame`.
 
 ```python
@@ -107,7 +107,7 @@ that is interpreted by a backend.
 ```
 
 In the case of direction execution backends, the `expression` compiles to an the original Ibis
-expression.  The computation itself is carried out based on a set of recipes defined in Ibis.
+expression. The computation itself is carried out based on a set of recipes defined in Ibis.
 In general, we would typically do this work directly in Pandas; however this approach is
 practical in making tests for backend-independent expressions.
 
@@ -171,6 +171,7 @@ A string-generating expression compiles to `ibis.omniscidb` flavored SQL, while 
 ```
 
 ## Acknowledgements
+
 Major credit goes to [@xmnlab] in his heroic PR to introduce `ibis.omniscidb` into Ibis. You can watch
 the drama play out in this [Github Issue][omnisci-pr]. We'd like to thank the maintainers of Ibis for
 their effort in supporting the Ibis community.
@@ -178,17 +179,17 @@ their effort in supporting the Ibis community.
 Learn more about OmniSci and `ibis.omniscidb` in this Quansight Labs post:
 [Ibis: Python data analysis productivity framework][labs-post].
 
-[our recent Ibis post]: https://labs.quansight.org/blog/2020/06/ibis-an-idiomatic-flavor-of-sql-for-python-programmers/
-[Ibis]: https://www.ibis-project.org/
-[SQL]: https://en.wikipedia.org/wiki/SQL
-[Python]: https://en.wikipedia.org/wiki/Python_(programming_language)
+[our recent ibis post]: https://labs.quansight.org/blog/2020/06/ibis-an-idiomatic-flavor-of-sql-for-python-programmers/
+[ibis]: https://www.ibis-project.org/
+[sql]: https://en.wikipedia.org/wiki/SQL
+[python]: https://en.wikipedia.org/wiki/Python_(programming_language)
 [flavor of sql]: https://stackoverflow.com/questions/1326318/difference-between-different-types-of-sql
 [design]: https://docs.ibis-project.org/design.html
-[SQLite]: https://www.sqlite.org/index.html
-[Pandas]: http://pandas.pydata.org/
-[Omnisci]: https://www.omnisci.com/
+[sqlite]: https://www.sqlite.org/index.html
+[pandas]: http://pandas.pydata.org/
+[omnisci]: https://www.omnisci.com/
 [glue]: https://docs.scipy.org/doc/numpy/user/c-info.python-as-glue.html
-[Dask]: https://dask.org/
+[dask]: https://dask.org/
 [flavor of sql]: https://stackoverflow.com/questions/1326318/difference-between-different-types-of-sql
 [dag]: https://en.wikipedia.org/wiki/Directed_acyclic_graph
 [data]: http://www.seanlahman.com/baseball-archive/statistics/
@@ -199,26 +200,26 @@ Learn more about OmniSci and `ibis.omniscidb` in this Quansight Labs post:
 [qs]: https://www.quansight.com/
 [graphviz]: https://graphviz.org
 [materialized view]: https://en.wikipedia.org/wiki/Materialized_view
-[Blaze]: https://blaze.pydata.org/
-[SQLAlchemy]: https://www.sqlalchemy.org/
+[blaze]: https://blaze.pydata.org/
+[sqlalchemy]: https://www.sqlalchemy.org/
 [backends]: https://ibis-project.org/docs/backends/index.html
 [intake]: https://intake.readthedocs.io/en/latest/
 [arrow]: https://arrow.apache.org/docs/python/
 [labs-post]: https://labs.quansight.org/blog/2019/07/ibis-python-data-analysis-productivity-framework/
-[Geospatial]: http://ibis-project.org/docs/user_guide/geospatial_analysis.html
+[geospatial]: http://ibis-project.org/docs/user_guide/geospatial_analysis.html
 [geo-tutorial]: https://github.com/ibis-project/ibis/pull/1991
 [geo-closed]: https://github.com/ibis-project/ibis/issues?q=label%3Ageospatial+is%3Aclosed
 [sql-server]: https://github.com/ibis-project/ibis/pull/1997
 [omnisci-pr]: https://github.com/ibis-project/ibis/pull/1419
 [test-hdf5]: https://github.com/ibis-project/ibis/blob/master/ibis/file/tests/test_hdf5.py
 [@xmnlab]: https://github.com/xmnlab
-[HDFS]: https://en.wikipedia.org/wiki/Apache_Hadoop#HDFS
-[Spark]: https://spark.apache.org/
-[PySpark]: https://pypi.org/project/pyspark/
-[PostgreSQL]: https://www.postgresql.org/
-[MySQL]: https://www.mysql.com/
-[BigQuery]: https://cloud.google.com/bigquery/
-[Impala]: https://impala.apache.org/
-[ClickHouse]: https://clickhouse.tech/
-[Kudu]: https://kudu.apache.org/
-[Altair]: https://www.altair.com/
+[hdfs]: https://en.wikipedia.org/wiki/Apache_Hadoop#HDFS
+[spark]: https://spark.apache.org/
+[pyspark]: https://pypi.org/project/pyspark/
+[postgresql]: https://www.postgresql.org/
+[mysql]: https://www.mysql.com/
+[bigquery]: https://cloud.google.com/bigquery/
+[impala]: https://impala.apache.org/
+[clickhouse]: https://clickhouse.tech/
+[kudu]: https://kudu.apache.org/
+[altair]: https://www.altair.com/

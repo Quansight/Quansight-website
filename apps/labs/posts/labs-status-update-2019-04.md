@@ -1,7 +1,7 @@
 ---
 title: 'Labs update and April highlights'
 published: May 3, 2019
-author: [ralf-gommers]
+authors: [ralf-gommers]
 description: "It has been an exciting first month for me at Quansight Labs. It's a good time for a summary of what we worked on in April and what is coming next."
 category: [Funding, PyData ecosystem]
 featuredImage:
@@ -36,7 +36,7 @@ gives a good overview of the motivation for `uarray` and its main concepts.
 
 Saul Shanabrook and Chris Ostrouchov worked out how best to put `metadsl`
 and `python-moa` together: `metadsl` can be used to create the API for
-`python-moa` to simplify the code base of the latter a lot. Chris 
+`python-moa` to simplify the code base of the latter a lot. Chris
 also wrote an interesting [blog post](https://labs.quansight.org/blog/2019/04/python-moa-tensor-compiler/)
 explaining the MoA principles.
 
@@ -50,7 +50,6 @@ overhead for small arrays is larger). The `xnd.array` interface, which is a high
 level interface than `xnd.xnd` and can be used similarly to `numpy`, is taking
 shape as well. One user-visible new feature worth mentioning is that xnd containers
 can now be serialized and pickled.
-
 
 ## Work on PyData core projects
 
@@ -100,7 +99,7 @@ with both maintenance tasks and adding new features to Jupyter and JupyterLab.
 JupyterLab is about to get support for printing (not inside the notebook, but the old-fashioned
 `Ctrl-P` variant). [This pull request](https://github.com/jupyterlab/jupyterlab/pull/5850)
 by Saul has nice screenshots showing the feature in action for whole notebooks,
- images, the JSON viewer and the inspector.
+images, the JSON viewer and the inspector.
 
 Ian worked on the third alpha release of JupyterLab 1.0, on testing and CI infrastructure,
 and other general maintenance tasks. He also improved PDF preview in JupyterLab, so it

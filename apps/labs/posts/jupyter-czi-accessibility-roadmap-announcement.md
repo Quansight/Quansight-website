@@ -1,7 +1,7 @@
 ---
 title: 'Jupyter accessibility efforts have a roadmap!'
 published: February 28, 2022
-author: [isabela-presedo-floyd]
+authors: [isabela-presedo-floyd]
 description: 'The Chan Zuckerberg Initiative has funded efforts to make the Jupyter ecosystem, starting with JupyterLab, more accessible. As a part of these increased efforts, the team will be providing a periodically updated list of what is currently being worked on and what is coming soon.'
 category: [Access-centered]
 featuredImage:

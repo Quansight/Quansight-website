@@ -1,7 +1,7 @@
 ---
 title: 'Spyder 4.0 takes a big step closer with the release of Beta 2!'
 published: May 21, 2019
-author: [gonzalo-pena-castellanos]
+authors: [gonzalo-pena-castellanos]
 description: 'This is the first of a series of blog posts we will be writing to showcase updates on the development of Spyder, new planned features and news on the road to Spyder 4.0 and beyond.'
 category: [IDEs]
 featuredImage:
@@ -12,19 +12,19 @@ hero:
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
-It has been almost two months since I joined Quansight in April, to start 
-working on Spyder maintenance and 
-development. So far, it has been a very exciting and rewarding journey under 
+It has been almost two months since I joined Quansight in April, to start
+working on Spyder maintenance and
+development. So far, it has been a very exciting and rewarding journey under
 the guidance of long time Spyder maintainer
 [Carlos Córdoba](https://github.com/ccordoba12).
-This is the first of a series of blog posts we will be writing to showcase 
-updates on the development of Spyder, new planned features and news on the 
+This is the first of a series of blog posts we will be writing to showcase
+updates on the development of Spyder, new planned features and news on the
 road to Spyder 4.0 and beyond.
 
 First off, I would like to give a warm welcome to
 [Edgar Margffoy](https://github.com/andfoy),
 who recently joined Quansight and will be working with the Spyder team to
-take its development even further. Edgar has been a core Spyder developer 
+take its development even further. Edgar has been a core Spyder developer
 for more than two years now, and we are very excited to have his (almost)
 full-time commitment to the project.
 
@@ -44,8 +44,8 @@ and numerous other feature enhancements, bug fixes and internal improvements.
 A full-interface dark theme has been a
 [long awaited feature](https://github.com/spyder-ide/spyder/issues/2350),
 and is enabled by default in Spyder 4. You can still select the
-light theme under  ``Preferences > Appearance`` by either choosing a light-background
-syntax-highlighting scheme, or changing ``Interface theme`` to ``Light``.
+light theme under `Preferences > Appearance` by either choosing a light-background
+syntax-highlighting scheme, or changing `Interface theme` to `Light`.
 
 ![Screenshot of the Spyder main window with default panes, with the dark theme applied across the entire interface.](/posts/release-spyder-4beta2/spyder-qdarkstyle.png)
 
@@ -60,7 +60,6 @@ to pursue the release of QDarkStyle 3.x, which will be using Spyder's
 [QtSASS](https://github.com/spyder-ide/qtsass/)
 package to harness the power of SASS/SCSS and allow users to fully customize
 the theme dynamically.
-
 
 ## Language Server Protocol architecture
 
@@ -114,14 +113,14 @@ them.
 There are numerous additional features we've added in the previous 10
 months! These include:
 
-* **Autosave** and **File Recovery** in the editor, so Spyder can restore your
-unsaved files in case it crashes or something else goes wrong.
-* Dedicated **Sympy**, **Cython** and **Pylab** consoles, making it
-very simple to quickly explore and create code for these libraries.
-* OS level **window pane undocking**, allowing you to easily
-organize panes across different monitors.
-* Support for **[multi-indexes](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html)**
-in our Dataframe viewer, making working with complex datasets much easier.
+- **Autosave** and **File Recovery** in the editor, so Spyder can restore your
+  unsaved files in case it crashes or something else goes wrong.
+- Dedicated **Sympy**, **Cython** and **Pylab** consoles, making it
+  very simple to quickly explore and create code for these libraries.
+- OS level **window pane undocking**, allowing you to easily
+  organize panes across different monitors.
+- Support for **[multi-indexes](https://pandas.pydata.org/pandas-docs/stable/user_guide/advanced.html)**
+  in our Dataframe viewer, making working with complex datasets much easier.
 
 We will describe all of these additional enhancements in greater detail in
 future blog posts.
@@ -129,10 +128,10 @@ future blog posts.
 ## You can help!
 
 If would like to help us test this beta release and try out the new features it offers,
-you can! You can install it with ``conda`` (if using Anaconda/Miniconda, as we recommend),
-or with ``pip``; we suggest doing so in a new Conda env or ``virtualenv``/``venv``
+you can! You can install it with `conda` (if using Anaconda/Miniconda, as we recommend),
+or with `pip`; we suggest doing so in a new Conda env or `virtualenv`/`venv`
 so you can easily switch between your existing Spyder install and the Spyder 4 beta.
-For example, to do so with ``conda``, enter the following at the Terminal/Anaconda prompt:
+For example, to do so with `conda`, enter the following at the Terminal/Anaconda prompt:
 
 ```bash
 $ conda create --channel spyder-ide --name spyder-beta spyder=4.0.0b2

@@ -1,7 +1,7 @@
 ---
 title: 'PyTorch TensorIterator Internals - 2021 Update'
 published: April 09, 2021
-author: [kurt-mohler]
+authors: [kurt-mohler]
 description: 'For contributors to the PyTorch codebase, one of the most commonly encountered C++ classes is TensorIterator. Recently, however, the interface has changed significantly. This post describes how to use the current interface as of April 2021.'
 category: [Machine Learning]
 featuredImage:
@@ -43,7 +43,7 @@ In the following example, a tensor named `out` is configured as the output
 tensor and `a` and `b` are the input tensors. Calling `build` creates the
 `TensorIterator` object from the specified configuration.
 
-``` cpp
+```cpp
 at::TensorIteratorConfig iter_config;
 iter_config
   .add_output(out)
@@ -97,7 +97,7 @@ amount' of data to iterate over in order to gain a significant speedup using
 multi-threaded execution. If you want to explicitly specify that your operation
 _must_ run in serial, then use the `serial_for_each` loop.
 
-``` cpp
+```cpp
 at::TensorIteratorConfig iter_config;
 iter_config
   .add_output(out)
@@ -141,7 +141,7 @@ addition of two tensors and stores the result in a third tensor. We can use the
 but you can use one of the `AT_DISPATCH_ALL_TYPES*` macros to support multiple
 data types.
 
-``` cpp
+```cpp
 at::TensorIteratorConfig iter_config;
 iter_config
   .add_output(c)
@@ -203,7 +203,7 @@ calculates the sum of all elements from the beginning of the vector up to and
 including each position in the input. A 2-D input is treated as a list of
 vectors, and the cumulative sum is calculated for each vector. Higher
 dimensional inputs follow the same logic--everything is just a list of 1-D
-vectors.  So to implement a cumulative sum, we must take into account two
+vectors. So to implement a cumulative sum, we must take into account two
 different strides: the stride between elements in a vector (`result_dim_stride`
 and `self_dim_stride` in the example below) and the stride between each vector
 (`strides[0]` and `strides[1]` in the example below).

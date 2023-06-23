@@ -1,7 +1,7 @@
 ---
 title: 'Introducing Versioned HDF5'
 published: August 21, 2020
-author: [melissa-mendonca]
+authors: [melissa-mendonca]
 description: 'HDF5 is an open technology that implements a hierarchical structure (similar to a file-system structure) for storing large amounts of possibly heterogeneous data within a single binary file, using regular version control tools (such as git) may prove difficult. The Versioned HDF5 library is a versioned abstraction on top of h5py, that allows you to keep a record of which changes occurred to your HDF5 files, and enables you to recover previous versions of this file.'
 category: [PyData ecosystem]
 featuredImage:
@@ -12,23 +12,22 @@ hero:
   imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
-
 The problem of storing and manipulating large amounts of data is a challenge in
 many scientific computing and industry applications. One of the standard data
 models for this is [HDF5](https://support.hdfgroup.org/HDF5/whatishdf5.html),
 an open technology that implements a hierarchical structure (similar to a
 file-system structure) for storing large amounts of possibly heterogeneous data
-within a single file. Data in an HDF5 file is organized into *groups* and
-*datasets*; you can think about these as the folders and files in your local
+within a single file. Data in an HDF5 file is organized into _groups_ and
+_datasets_; you can think about these as the folders and files in your local
 file system, respectively. You can also optionally store metadata associated
 with each item in a file, which makes this a self-describing and powerful data
 storage model.
 
 ![Diagram illustrating the hierarchical nature of an HDF5 file. An HDF container is shown that contains two groups. Each of these groups then contains datasets and/or subgroups. There is associated metadata for both the top-level container as well as each group and dataset.](/posts/introducing-versioned-hdf5/hdf5_structure4_resized.png)
-*Image: Hierarchical Data Format (HDF5) Dataset (From https://www.neonscience.org/about-hdf5)*
+_Image: Hierarchical Data Format (HDF5) Dataset (From https://www.neonscience.org/about-hdf5)_
 
 Since reading and writing operations in these large data files must be fast,
-the HDF5 model includes data compression and *chunking*. This technique allows
+the HDF5 model includes data compression and _chunking_. This technique allows
 the data to be retrieved in subsets that fit the computer's memory or RAM,
 which means that it doesn't require the entire file contents to be loaded into
 memory at once. All this makes HDF5 a popular format in several domains, and
@@ -41,8 +40,7 @@ metadata, and keep a record of which changes occurred when, with a way to
 recover previous versions of this file. Since HDF5 is a binary file format,
 using regular version control tools (such as git) may prove difficult.
 
-Introducing the Versioned HDF5 library
---------------------------------------
+## Introducing the Versioned HDF5 library
 
 The Versioned HDF5 library is a versioned abstraction on top of h5py. Because
 of the flexibility of the HDF5 data model, all versioning data is stored in the
@@ -115,9 +113,7 @@ Both versions are now stored in the file, and can be accessed independently.
     array([-10., 1., 1., ...,  1.,  1.,  1.])]
 ```
 
-
-Current status
---------------
+## Current status
 
 `versioned-hdf5 1.0` has recently been released, and is available on PyPI and conda-forge. You can install it with
 
@@ -134,9 +130,7 @@ For now, you can check out the
 [documentation](https://deshaw.github.io/versioned-hdf5/) for more details on
 what is supported and how the library is built.
 
-
-Next steps
-----------
+## Next steps
 
 This is the first post in a series about the Versioned HDF5 library. Next,
 we'll discuss the performance of Versioned HDF5 files, and the design of the
@@ -147,4 +141,3 @@ group](https://www.deshaw.com/) in conjunction with
 [Quansight](https://www.quansight.com/).
 
 ![D.E. Shaw logo](/posts/introducing-versioned-hdf5/black_logo_417x125.png)
-

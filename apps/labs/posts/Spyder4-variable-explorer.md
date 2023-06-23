@@ -1,7 +1,7 @@
 ---
 title: 'Variable Explorer improvements in Spyder 4'
 published: November 28, 2019
-author: [daniel-althviz]
+authors: [daniel-althviz]
 description: 'In this post, we will be talking about the improvements made to the Variable Explorer. These include the brand new Object Explorer for inspecting arbitrary Python variables, full support for MultiIndex dataframes with multiple dimensions, and the ability to filter and search for variables by name and type, and much more.'
 category: [IDEs]
 featuredImage:
@@ -18,9 +18,7 @@ These include the brand new Object Explorer for inspecting arbitrary Python vari
 
 It is important to mention that several of the above improvements were made possible through integrating the work of two other projects. Code from [gtabview](https://github.com/TabViewer/gtabview) was used to implement the multi-dimensional Pandas indexes, while [objbrowser](https://github.com/titusjan/objbrowser) was the foundation of the new Object Explorer.
 
-
 ## New viewer for arbitrary Python objects
-
 
 For Spyder 4 we added a long-requested feature: full support for inspecting any kind of Python object through the Variable Explorer. For many years, Spyder has been able to view and edit a small subset of Python variables: NumPy arrays, Pandas DataFrames and Series, and builtin collections (lists, dictionaries and tuples). Other objects were displayed as dictionaries of their attributes, inspecting any of which required showing a new table. This made it rather cumbersome to use this functionality, and was the reason arbitrary Python objects were hidden by default from the Variable Explorer view.
 
@@ -54,7 +52,6 @@ For Spyder 4, we took advantage of the work done by Scott Hansen ([@firecat53](h
 
 Spyder 4 also includes the ability to filter the variables shown down to only those of interest. This employs fuzzy matching between the text entered in the search field and the name and type of all available variables.
 To access this functionality, click the search icon in the Variable Explorer toolbar, or press `Ctrl+F` (`Cmd-F` on macOS) when the Variable Explorer has focus.
-
 
 ![Filter variables](/posts/Spyder4-variable-explorer/filter-variables.png)
 

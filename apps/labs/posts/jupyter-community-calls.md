@@ -1,7 +1,7 @@
 ---
 title: 'A year of Jupyter community calls'
 published: December 10, 2021
-author: [tony-fast]
+authors: [tony-fast]
 description: "A lot of us showed up for the code, but hung around for the community. We'll continue this post talking about the monthly Jupyter community calls, and how they help all jovyans, Project Jupyter's pet name for their developers and users, stay connected."
 category: [Community]
 featuredImage:
@@ -15,31 +15,30 @@ hero:
 Additional authors: Isabela Presedo-Floyd
 
 A framing for open source is that the software and code are kernels of community.
-The code, and its abstractions, unite developers and their patrons; 
-a struggle for growing/evolving open communities is to make sure these groups remain connected. 
-A lot of us showed up for the code, but hung around for the community. 
-We'll continue this post talking about the monthly Jupyter community calls, 
+The code, and its abstractions, unite developers and their patrons;
+a struggle for growing/evolving open communities is to make sure these groups remain connected.
+A lot of us showed up for the code, but hung around for the community.
+We'll continue this post talking about the monthly Jupyter community calls,
 and how they help all [jovyans](https://jupyter.readthedocs.io/en/latest/community/content-community.html#what-is-a-jovyan), Project Jupyter's pet name for their developers and users, stay connected.
 
 ## Why community calls?
 
-  > A lot of us showed up for the code, but hung around for the community. 
+> A lot of us showed up for the code, but hung around for the community.
 
-[Project Jupyter has a rich community calendar](https://docs.jupyter.org/en/latest/community/content-community.html#jupyter-community-meetings) spanning different projects in the ecosystem. 
-Although these events are open to all, the meetings can appear daunting and exclusive. 
+[Project Jupyter has a rich community calendar](https://docs.jupyter.org/en/latest/community/content-community.html#jupyter-community-meetings) spanning different projects in the ecosystem.
+Although these events are open to all, the meetings can appear daunting and exclusive.
 
-This year, Quansight Labs took on the responsibility of reviving an existing series of events: 
-the Jupyter community calls. 
-The original monthly series, starting in [March 2019][first], gave the stage to those using Jupyter daily. 
+This year, Quansight Labs took on the responsibility of reviving an existing series of events:
+the Jupyter community calls.
+The original monthly series, starting in [March 2019][first], gave the stage to those using Jupyter daily.
 These events started to created space for Jupyter's patrons to demonstrate how they use Jupyter as a computational tool.
 
-Jupyter is a rapidly moving piece of technology, and staying up to date with the latest advances takes significant labor. 
-The community calls ensure us a monthly check-in of the latest and greatest. 
+Jupyter is a rapidly moving piece of technology, and staying up to date with the latest advances takes significant labor.
+The community calls ensure us a monthly check-in of the latest and greatest.
 Sometimes these events digress into Jupyter's rich folk history, or peer into future interactive computing technologies like [real time collaboration][rtc] or [browser-based computing environments][jupyter-lite].
 
-Having these events consistently encouraged folks to get their work in to share with others. 
+Having these events consistently encouraged folks to get their work in to share with others.
 These calls also gave some structure through an otherwise chaotic pandemic.
-
 
 ## The last dozen events
 
@@ -61,38 +60,38 @@ We made sure to record these events for posterity, and you can check them out in
 
 Each event had its own charm as the attendees varied. Below we highlight some interesting outcomes:
 
-* Jupyter underwent a major version change - 2.x to 3.x - during the past year. 
-  The monthly syncs were critical in keeping the community aware of what is coming and weather the storm together. 
+- Jupyter underwent a major version change - 2.x to 3.x - during the past year.
+  The monthly syncs were critical in keeping the community aware of what is coming and weather the storm together.
   More recently, we're seeing the fruits of the [Jupyter 4.0 roadmap][40] at our meetings each month.
-* We received updates from the [JupyterHub](https://jupyter.org/hub) and [BinderHub](https://github.com/jupyterhub/binderhub) communities, 
+- We received updates from the [JupyterHub](https://jupyter.org/hub) and [BinderHub](https://github.com/jupyterhub/binderhub) communities,
   which support scaling Jupyter's abilities.
-* We saw the _first_ browser based implementation of Jupyterlab called [jupyterlite](https://jupyterlite.readthedocs.io/en/latest/). 
-* We explored several cool extensions such as [ipydrawio](https://github.com/deathbeds/ipydrawio), 
-  [jupyter-lsp](https://github.com/jupyter-lsp/jupyterlab-lsp), 
-  [internationalization](https://jupyterlab.readthedocs.io/en/stable/extension/internationalization.html), 
-  [janki](https://github.com/gt-coar/janki), [jupyter-videochat](https://github.com/jupyterlab-contrib/jupyter-videochat), 
-  [citations](https://github.com/krassowski/jupyterlab-citation-manager), 
+- We saw the _first_ browser based implementation of Jupyterlab called [jupyterlite](https://jupyterlite.readthedocs.io/en/latest/).
+- We explored several cool extensions such as [ipydrawio](https://github.com/deathbeds/ipydrawio),
+  [jupyter-lsp](https://github.com/jupyter-lsp/jupyterlab-lsp),
+  [internationalization](https://jupyterlab.readthedocs.io/en/stable/extension/internationalization.html),
+  [janki](https://github.com/gt-coar/janki), [jupyter-videochat](https://github.com/jupyterlab-contrib/jupyter-videochat),
+  [citations](https://github.com/krassowski/jupyterlab-citation-manager),
   [jupyter-h5web](https://github.com/silx-kit/jupyterlab-h5web)
-* We saw the formation of a security-focused working group and governance updates.
+- We saw the formation of a security-focused working group and governance updates.
 
 ## More community calls
 
-We'd love to see more events like this cater properly to Jupyter's global audience. 
-If that's something you care about too, please [contact us by opening an issue on our planning repository](https://github.com/Quansight-Labs/jupyter-communitycalls/issues). 
+We'd love to see more events like this cater properly to Jupyter's global audience.
+If that's something you care about too, please [contact us by opening an issue on our planning repository](https://github.com/Quansight-Labs/jupyter-communitycalls/issues).
 We've treated these events as an open source project and have a lot of resources to get you started in the [technical resources section](#technical-resources).
 
-We're all nostalgic for the conference hallway track as we stay safe in a pandemic. 
-With the community calls, for one hour a month, we've been doing our best to simulate the hallway track and the communitas it can bring. 
+We're all nostalgic for the conference hallway track as we stay safe in a pandemic.
+With the community calls, for one hour a month, we've been doing our best to simulate the hallway track and the communitas it can bring.
 We hope to see you and your notebooks at an up and coming event.
 
 ## Technical resources
 
-Information about the community calls for participants and hosts can be found in the [__Jupyter community call repository__][repo].
+Information about the community calls for participants and hosts can be found in the [**Jupyter community call repository**][repo].
 
 ## Join a call
 
-Jupyter community calls are still happening! 
-If you want to participate in one of these calls, whether as a presenter or audience member, 
+Jupyter community calls are still happening!
+If you want to participate in one of these calls, whether as a presenter or audience member,
 up-to-date info for the next call can be found on the [Jupyter community calendar](https://jupyter.org/events).
 
 [i18n]: https://jupyterlab.readthedocs.io/en/stable/extension/internationalization.html
@@ -102,5 +101,3 @@ up-to-date info for the next call can be found on the [Jupyter community calenda
 [40]: https://github.com/jupyterlab/jupyterlab/projects/12
 [jupyter-lite]: https://github.com/jupyterlite/jupyterlite
 [rtc]: https://blog.jupyter.org/how-we-made-jupyter-notebooks-collaborative-with-yjs-b8dff6a9d8af
-
-

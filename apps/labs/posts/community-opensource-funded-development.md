@@ -1,7 +1,7 @@
 ---
 title: 'Community-driven open source and funded development'
 published: May 29, 2019
-author: [ralf-gommers]
+authors: [ralf-gommers]
 description: 'Quansight Labs is an experiment for us in a way. One of our main aims is to
 channel more resources into community-driven PyData projects, to keep them
 healthy and accelerate their development. And do so in a way that projects
@@ -17,8 +17,8 @@ hero:
 
 Quansight Labs is an experiment for us in a way. One of our main aims is to
 channel more resources into community-driven PyData projects, to keep them
-healthy and accelerate their development. *And do so in a way that projects
-themselves stay in charge.*
+healthy and accelerate their development. _And do so in a way that projects
+themselves stay in charge._
 
 This post explains one method we're starting to use for this. I'm writing it
 to be transparent with projects, the wider community and potential funders
@@ -83,7 +83,7 @@ multiple times in the past. As one of the more visible maintainers of SciPy and
 NumPy I received offers of financial support or paid development work
 occasionally. The answer was always easy: even if I were interested, I have a
 job and my employment contract does not allow me to take on any other paid
-work.  So I cannot help you. Referring the inquirer to, e.g., NumFOCUS doesn't
+work. So I cannot help you. Referring the inquirer to, e.g., NumFOCUS doesn't
 help - unless there's a developer who is in the position to accept a contract,
 not much can be done.
 
@@ -212,4 +212,3 @@ You can reach out via email (`rgommers@quansight.com`), Twitter
 (`@quansightai`), or in person at one of the many conferences we visit. I will
 also actively be reaching out to maintainers of the projects we're including in
 our sales and marketing conversations.
-

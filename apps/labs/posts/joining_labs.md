@@ -1,7 +1,7 @@
 ---
 title: 'Thoughts on joining Quansight Labs'
 published: April 8, 2019
-author: [ralf-gommers]
+authors: [ralf-gommers]
 description: "Ralf Gommers's thoughts on joining Quansight Labs as its director, and his perspectives for pushing forward the Python ecosystem for scientific computing and data science, and how to fund it."
 category: [Community, PyData ecosystem]
 featuredImage:
@@ -18,7 +18,7 @@ In his [blog post](https://www.quansight.com/post/welcoming-ralf-gommers-as-dire
 
 The SciPy and PyData ecosystems have experienced massive growth over the past years, and this is likely to continue in the near future. As a maintainer, that feels very gratifying. At the same time it brings up worries. Core projects struggle to keep up with the growth in number of users. Funded development can help with this, if done right. Some of the things I would like to see from companies that participate in the ecosystem:
 
-- Explain innovations they're working on to the community and solicit input, *at an early stage*. Developing something away from the spotlight and then unveiling it as the "next big thing" once it's done usually leads to either corporate-driven projects (if users adopt it) or a short life span.
+- Explain innovations they're working on to the community and solicit input, _at an early stage_. Developing something away from the spotlight and then unveiling it as the "next big thing" once it's done usually leads to either corporate-driven projects (if users adopt it) or a short life span.
 - Participate in a sustainable way. This means for example to contribute in a way that lowers, or at least doesn't increase, the overall effort required for maintenance. Only sending pull requests with new features doesn't achieve that. Solving maintenance pain points or helping with code review does.
 - Operate transparently. Develop in the open, plan in the open, be clear about directions and motivations.
 
@@ -26,7 +26,7 @@ When I started working on NumPy and SciPy the world was simple: projects with Su
 
 ![Image of a word cloud emphasizing the interrelationship of Projects with Assets, Funding and Community.](/posts/joining_labs/community_landscape.png)
 
-Acting effectively within that landscape as a project has become important maintenance work in itself, and working on governance structures or legal agreements is less fun (and thus harder to find volunteers for) than writing code. Quansight Labs will add to this complexity. It also provides an opportunity to help manage that same complexity though, as a home for core developers of many of the projects in the ecosystem. 
+Acting effectively within that landscape as a project has become important maintenance work in itself, and working on governance structures or legal agreements is less fun (and thus harder to find volunteers for) than writing code. Quansight Labs will add to this complexity. It also provides an opportunity to help manage that same complexity though, as a home for core developers of many of the projects in the ecosystem.
 
 ### A Quansight Labs perspective
 
@@ -50,7 +50,7 @@ This was the view from my window on my first day: a ship with the letters "APL" 
 
 Given NumPy's heritage and the work on Mathematics of Arrays at Quansight Labs (both connected to [APL]), it felt symbolic.
 
-[APL]: https://en.wikipedia.org/wiki/APL_(programming_language)
+[apl]: https://en.wikipedia.org/wiki/APL_(programming_language)
 
 ### Next steps
 
@@ -66,6 +66,5 @@ It's early days, however I do have two things in mind that will be priorities ov
 
 They are focused on NumPy and SciPy for a number of reasons: I understand the needs of those projects well; improvements in those projects benefit the whole stack; they need more maintenance; and a lot of the people at Quansight work on things that require in-depth knowledge of the NumPy and Python C APIs. We will quickly branch out though. Last week I have already talked to core developers of Dask, JupyterLab and Spyder. I have also recently co-written a proposal that included significant work on Matplotlib, Pandas and scikit-learn. And I plan, together with others at Quansight, to actively engage with the wider community.
 
-
 I strongly believe in a community-governed open source ecosystem, so am very interested in open conversations about project and ecosystem priorities.
-*Feedback and ideas for what we should (or should not) be focusing on at Quansight Labs are very much welcome!*
+_Feedback and ideas for what we should (or should not) be focusing on at Quansight Labs are very much welcome!_

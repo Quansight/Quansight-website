@@ -2,7 +2,7 @@
 title: 'uarray: GSoC Participation'
 published: March 12, 2020
 description: "We're quite excited by the number of students who have shown an interest in participating, and we look forward to seeing excellent applications! What's more exciting, though, are some of the first contributions from people not currently at Quansight, in the true spirit of open-source software!"
-author: [hameer-abbasi]
+authors: [hameer-abbasi]
 category: [Funding, PyData Ecosystem]
 featuredImage:
   src: /posts/uarray-gsoc-participation/blog_feature_org.svg

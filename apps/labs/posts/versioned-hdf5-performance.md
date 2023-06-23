@@ -1,7 +1,7 @@
 ---
 title: 'Performance of the Versioned HDF5 Library'
 published: September 11, 2020
-author: [melissa-mendonca]
+authors: [melissa-mendonca]
 description: "In this post, we'll show some of the performance analysis we did while developing the library, hopefully making the case that reading and writing versioned HDF5 files can be done with a nice, intuitive API while being as efficient as possible. The tests presented here show that using the Versioned HDF5 library results in reduced disk space usage, and further reductions in this area can be achieved with the use of HDF5/h5py-provided compression algorithms."
 category: [PyData ecosystem]
 featuredImage:

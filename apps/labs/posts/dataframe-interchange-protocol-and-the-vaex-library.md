@@ -1,7 +1,7 @@
 ---
 title: 'Dataframe interchange protocol and Vaex'
 published: October 04, 2021
-author: [alenka-frim]
+authors: [alenka-frim]
 description: 'The work I briefly describe in this blog post is the implementation of the dataframe interchange protocol into Vaex which I was working on through the three month period as a Quansight Labs Intern.'
 category: [Array API, PyData Ecosystem]
 featuredImage:
@@ -20,7 +20,7 @@ Today there are quite a number of different dataframe libraries available in Pyt
 
 ### Dataframe protocol
 
->The purpose of the **Dataframe interchange protocol (`__dataframe__`)** is to enable data interchange. I.e., a way to convert one type of dataframe into another type (for example, convert a [Koalas](https://koalas.readthedocs.io/en/latest/#) dataframe into a Pandas dataframe, or a [cuDF](https://github.com/rapidsai/cudf) dataframe into a Vaex dataframe).
+> The purpose of the **Dataframe interchange protocol (`__dataframe__`)** is to enable data interchange. I.e., a way to convert one type of dataframe into another type (for example, convert a [Koalas](https://koalas.readthedocs.io/en/latest/#) dataframe into a Pandas dataframe, or a [cuDF](https://github.com/rapidsai/cudf) dataframe into a Vaex dataframe).
 
 With the protocol implemented in dataframe libraries we will be able to write code that accepts any kind of dataframe 🎉 <br/>
 For more information about the protocol visit the [RFC blog post](https://data-apis.org/blog/dataframe_protocol_rfc/) or the [official site](https://data-apis.org/dataframe-protocol/latest/index.html).
@@ -37,12 +37,11 @@ For the purpose of the dataframe protocol the term is defined as follows:
 
 One of the dataframe libraries that is used very often for its high performance is Vaex.
 
->**Vaex** is a high performance Python library for lazy Out-of-Core DataFrames, to visualize and explore big tabular datasets. It can calculate statistics such as mean, sum, count, standard deviation etc, on an N-dimensional grid up to a billion objects/rows per second. Visualization is done using histograms, density plots and 3d volume rendering, allowing interactive exploration of big data. Vaex uses memory mapping, a zero memory copy policy, and lazy computations for best performance (no memory wasted).
+> **Vaex** is a high performance Python library for lazy Out-of-Core DataFrames, to visualize and explore big tabular datasets. It can calculate statistics such as mean, sum, count, standard deviation etc, on an N-dimensional grid up to a billion objects/rows per second. Visualization is done using histograms, density plots and 3d volume rendering, allowing interactive exploration of big data. Vaex uses memory mapping, a zero memory copy policy, and lazy computations for best performance (no memory wasted).
 
 More about Vaex is available on the [official site](https://vaex.io/docs/index.html) and [blog](https://vaex.io/blog).
 
 Vaex has many <a href="https://github.com/vaexio/vaex#key-features">great features</a>! With the implementation of the dataframe protocol other libraries such as Plotly could accept a Vaex dataframe and so the functionalities of both libraries would be enhanced.
-
 
 ### Implementation
 
@@ -56,7 +55,6 @@ The `__dataframe__` method returns an instance of the `_DataFrame` class. At thi
      alt="UML diagram of the classes `_Buffer`, `_Column` and `_DataFrame`. For the API info see the [concepts in the design page](https://data-apis.org/dataframe-protocol/latest/API.html)."
      src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_UML.jpg"/>
     <i>UML diagram</i>
-
 
 For the memory representation of the dataframe three separate classes are defined. These are `_Buffer`, `_Column` and `_DataFrame`. In the Vaex implementation we named them `_VaexBuffer`, `_VaexColumn` and `_VaexDataFrame` respectively. Each of them has necessary and utility methods to construct and describe a dataframe.
 
@@ -88,7 +86,7 @@ The best candidate for the array API is chosen to be DLPack. Pandas and Vaex don
 
 The specifications of the buffer, for example, buffer size, a pointer to the start of the buffer, DLPack attributes and a string representation of the buffer, are a part of the `_VaexBuffer` class.
 
-In the `_VaexColumn` class the data type description is added in `.dtype` as a tuple ``(kind, bit-width, format string, endianness)``. It is used as a descriptive attribute and also as an input to construct a NumPy array from the buffer. The implementation of the dtype got more complicated when dealing with categoricals and string dtypes.
+In the `_VaexColumn` class the data type description is added in `.dtype` as a tuple `(kind, bit-width, format string, endianness)`. It is used as a descriptive attribute and also as an input to construct a NumPy array from the buffer. The implementation of the dtype got more complicated when dealing with categoricals and string dtypes.
 
 The function from the `_VaexColumn` class that saves the data into a `_VaexBuffer` class to be converted in the process is `get_buffers`. It returns a dictionary of three separate two-element tuples:
 
@@ -98,12 +96,10 @@ The function from the `_VaexColumn` class that saves the data into a `_VaexBuffe
 
 This is used in the `from_dataframe` method when columns are iterated through. The method calls the `get_buffers` function and converts the data via `__array_interface__`. If, for example, the user wants to convert Pandas dataframe to a Vaex instance, the Vaex `from_dataframe` method (that we called `from_dataframe_to_vaex` just to make it clearer) calls Pandas `get_buffers` method and then makes the conversion.
 
-
     <img
      alt="Column conversion through the buffers."
      src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_buffer.jpg"/>
     <i>Buffers</i>
-
 
 Understanding the conversion cycle for simple dataframe dtypes by following Pandas implementation outline helped me implement the protocol for Vaex and after the tests were not giving any errors I added a boolean column which worked fine. The next stop was categorical dtypes.
 
@@ -124,7 +120,7 @@ Clarifying what a missing value should and should not be is quite difficult and 
 
 More about this topic can be found [in this issue](https://github.com/data-apis/dataframe-api/issues/9).
 
-Methods in the `_VaexColumn` class used for the missing data are the number of missing values `null_count` and `describe_null` which returns the missing value (or "null") representation the column dtype uses, as a tuple ``(kind, value)``. "Kind" can be non-nullable, NaN/NaT, sentinel value, bit mask or byte mask. The "value" can be the actual (sentinel) value, (0 or 1) indicating a missing value in case of a mask representation or None otherwise.
+Methods in the `_VaexColumn` class used for the missing data are the number of missing values `null_count` and `describe_null` which returns the missing value (or "null") representation the column dtype uses, as a tuple `(kind, value)`. "Kind" can be non-nullable, NaN/NaT, sentinel value, bit mask or byte mask. The "value" can be the actual (sentinel) value, (0 or 1) indicating a missing value in case of a mask representation or None otherwise.
 
 All the missing values in Vaex are nullable. Arrow columns via bitmask, NumPy columns via bool/byte arrays. For defining a validity buffer I used a boolean array returned from Vaex's `.ismissing()` method and worked with that.
 
@@ -148,12 +144,10 @@ The `_VaexColumn` and `_VaexDataFrame` methods used in the case of chunked dataf
 
 Vaex can read data in chunks. It is not the only library that does so and it is a functionality that should be preserved if possible.
 
-
     <img
      alt="Iterating through the chunks in `from_dataframe`."
      src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_chunks.png"/>
     <i>Chunks</i>
-
 
 ### String dtype
 
@@ -169,14 +163,12 @@ In the `get_buffers` method the data needs to be encoded to pass it through the 
 
 ## Journey through the internship
 
-
     <img
      alt="My journey through the internship in colors."
      src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_journey.png"/>
     <i>My three-month journey</i>
 
-
-*I will end this blog post with a little bit of a personal note.*
+_I will end this blog post with a little bit of a personal note._
 
 For me the work at Quansight in the least three months meant lots of space to figure things out. I don't have trouble getting things done. If, with this freedom to work, you can also receive the right amount of interaction, motivation, community vibe, .that is just awesome. And that was how I experienced the internship.
 
@@ -203,9 +195,7 @@ If the topic is of interest to you, here is an Example Notebook you can try out 
 
 Thank you for reading through.
 
-
     <img
      alt="The end - fin."
      src="/posts/dataframe-interchange-protocol-and-the-vaex-library/dataframe-api-vaex_fin.png"/>
     <i>Thank you!</i>
-

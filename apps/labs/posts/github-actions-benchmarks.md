@@ -1,7 +1,7 @@
 ---
 title: 'Is GitHub Actions suitable for running benchmarks?'
 published: August 18, 2021
-author: [jaime-rodriguez-guerra]
+authors: [jaime-rodriguez-guerra]
 description: 'Instead of going through all the complications involved in renting or acquiring dedicated hardware, setting up credentials and monitoring costs of a benchmarkin suite, we hoped we could use the same free cloud resources normally used for CI tests. Ideally, GitHub Actions.'
 category: [Developer workflows]
 featuredImage:
@@ -59,14 +59,14 @@ cloud resources normally used for CI tests. Ideally, GitHub Actions.
 Let's compare the requirements for good benchmarks and the features provided by CI services.
 That way we can understand how to work around some of the apparent limitations:
 
-| A good benchmark suite.| CI services.|
-| ------------------------- | -------------- |
-| runs on the same hardware every time | provide a different (standardized) machine for each run |
-| runs on dedicated hardware | run on shared resources |
-| runs on a frozen OS configuration | update their VM images often |
-| requires renting or acquiring such hardware | are free |
-| requires authentication mechanisms | implement authentication out of the box |
-| requires hardware that can be abused through public PRs &nbsp; | are designed for public PRs |
+| A good benchmark suite.                                        | CI services.                                            |
+| -------------------------------------------------------------- | ------------------------------------------------------- |
+| runs on the same hardware every time                           | provide a different (standardized) machine for each run |
+| runs on dedicated hardware                                     | run on shared resources                                 |
+| runs on a frozen OS configuration                              | update their VM images often                            |
+| requires renting or acquiring such hardware                    | are free                                                |
+| requires authentication mechanisms                             | implement authentication out of the box                 |
+| requires hardware that can be abused through public PRs &nbsp; | are designed for public PRs                             |
 
 <br />
 
@@ -108,25 +108,25 @@ functionally we needed. The help message says:
 This sounds like exactly what we are looking for! Let's break down how it works:
 
 1. When we run `asv continuous A B`, `asv` will create at least two<sup>†</sup> virtual environments
-(one per commit) and install revisions A and B in those, respectively. If the project
-involves compiled libraries (as is the case with `scikit-image`), this can be a lengthy
-process!
+   (one per commit) and install revisions A and B in those, respectively. If the project
+   involves compiled libraries (as is the case with `scikit-image`), this can be a lengthy
+   process!
 2. The default configuration will run the benchmark in two interleaved passes, with several
-repeats each. In other words, `asv` will run the suite four times (`A->B->A->B`)! This is done to account
-for the unavoidable deviations from ideality caused from co-running processes, as mentioned above.
+   repeats each. In other words, `asv` will run the suite four times (`A->B->A->B`)! This is done to account
+   for the unavoidable deviations from ideality caused from co-running processes, as mentioned above.
 3. The statistics for each commit are gathered and a report table is presented. The ratio
-of each test is computed and, if it is greater than a certain threshold (`1.2` by default)
-an error is emitted.
+   of each test is computed and, if it is greater than a certain threshold (`1.2` by default)
+   an error is emitted.
 
 > <sup>†</sup> `asv` supports the notion of a configuration matrix, so you can test your code under
-different environments; e.g. NumPy versions, Python interpreters, etc.
+> different environments; e.g. NumPy versions, Python interpreters, etc.
 
 For the benchmark suite of `scikit-image` as of June/July 2021, this ends up taking up to two hours.
 This raises two questions we will answer in the following sections:
 
 1. Although we are trying hard to reduce measurement errors, is that enough? Are these measurements reliable?
 2. Two hours might be too long. Are there any settings we can tune to reduce the runtime
-without reducing the accuracy of the measurements?
+   without reducing the accuracy of the measurements?
 
 # Are CI services reliable enough for benchmarking?
 
@@ -138,16 +138,16 @@ an experiment!
 
 If our experiment is data-driven, we should generate some data first. This is our strategy:
 
-* We will benchmark and compare two commits that are exactly the same in terms of tested code.
-* Under ideal conditions, we should see that the performance ratio between the two commits is `1.0`.
-In other words, performance should be the same. Of course, these are not ideal conditions, so
-some kind of error is expected. We just want it to stay reliably under an acceptable threshold.
-* We will implement a GitHub Actions workflow that will run every six hours (four times a day) and
-collect results for a week or more. This will help us account for two things:
-    * Accumulate sufficient data points to answer our question.
-    * Account for time factors like different days of the week (e.g. weekday vs weekend),
-      or the time of the day (3am vs 3pm).
-* The workflow will upload the benchmark results as artifacts we can download and process locally
+- We will benchmark and compare two commits that are exactly the same in terms of tested code.
+- Under ideal conditions, we should see that the performance ratio between the two commits is `1.0`.
+  In other words, performance should be the same. Of course, these are not ideal conditions, so
+  some kind of error is expected. We just want it to stay reliably under an acceptable threshold.
+- We will implement a GitHub Actions workflow that will run every six hours (four times a day) and
+  collect results for a week or more. This will help us account for two things:
+  _ Accumulate sufficient data points to answer our question.
+  _ Account for time factors like different days of the week (e.g. weekday vs weekend),
+  or the time of the day (3am vs 3pm).
+- The workflow will upload the benchmark results as artifacts we can download and process locally
   with a Jupyter Notebook.
 
 > Check the [GitHub Actions workflow in this fork](https://github.com/jaimergp/scikit-image/blob/main/.github/workflows/benchmarks-cron.yml)!
@@ -169,10 +169,10 @@ After collecting data points for 16 days, these are the results:
   an observable y-spread, it is small enough to be considered sensitive to performance regressions
   of more than 50%.](/posts/github-actions-benchmarks/github-actions-benchmark.png)
 
-* Average time taken: 1h55min
-* Minimum and maximum ratios observed: 0.51, 1.36
-* Mean and standard deviation of ratios: 1.00, 0.05
-* Proportion of false positives: 4/108 = 3.7%
+- Average time taken: 1h55min
+- Minimum and maximum ratios observed: 0.51, 1.36
+- Mean and standard deviation of ratios: 1.00, 0.05
+- Proportion of false positives: 4/108 = 3.7%
 
 In the X axis you can see the different runs, sorted by date and time. Days of the week are grouped
 with colored patches for easier visual analysis. In the Y axis, we plot the performance ratio. Each
@@ -197,18 +197,18 @@ passes and repeats to reduce the measurement error, but maybe some of those defa
 are not needed. Namely:
 
 - The benchmark runs with `--interleave-processes`, but it can be disabled with `--no-interleave-processes`.
-The help message for this flag says:
+  The help message for this flag says:
 
-    > Interleave benchmarks with multiple processes across commits. This can avoid measurement biases
-    > from commit ordering, can take longer.
+      > Interleave benchmarks with multiple processes across commits. This can avoid measurement biases
+      > from commit ordering, can take longer.
 
-    How much longer? Does it help keep error under control? We should measure that.
+      How much longer? Does it help keep error under control? We should measure that.
 
 - By default, all tests are run several times, with different schedules. There are two
-[benchmark attributes](https://asv.readthedocs.io/en/stable/benchmarks.html#timing-benchmarks)
-that govern these settings: `processes` and `repeat`. `processes` defaults to `2`, which means that
-the full suite will be run twice per commit. If we only do one pass (`processes=1`), we will reduce
-the running time in half, but will we lose too much accuracy?
+  [benchmark attributes](https://asv.readthedocs.io/en/stable/benchmarks.html#timing-benchmarks)
+  that govern these settings: `processes` and `repeat`. `processes` defaults to `2`, which means that
+  the full suite will be run twice per commit. If we only do one pass (`processes=1`), we will reduce
+  the running time in half, but will we lose too much accuracy?
 
 To answer both questions, we added more entries to the data collection workflow shown above by
 [parameterizing the `asv` command-line options](https://github.com/jaimergp/scikit-image/blob/e561996/.github/workflows/benchmarks-cron.yml#L14-L23).
@@ -228,10 +228,10 @@ how bad? Here are the results:
   to the performance ratio. Ideal measurements would have a performance ratio of 1.0, since both
   runs returned the exact same performance. In practice this does not happen.](/posts/github-actions-benchmarks/github-actions-benchmark-no-interleaving.png)
 
-* Average time taken: 1h39min
-* Minimum and maximum ratios observed: 0.43, 1.5
-* Mean and standard deviation of ratios: 0.99, 0.07
-* Proportion of false positives: 6/66 = 9.99%
+- Average time taken: 1h39min
+- Minimum and maximum ratios observed: 0.43, 1.5
+- Mean and standard deviation of ratios: 0.99, 0.07
+- Proportion of false positives: 6/66 = 9.99%
 
 ## Single-pass with `processes=1`
 
@@ -247,10 +247,10 @@ per commit, instead of two. However, the accuracy loss might be too dramatic.Let
   a performance ratio of 1.0, since both runs returned the exact same performance. In practice this
   does not happen.](/posts/github-actions-benchmarks/github-actions-benchmark-single-process.png)
 
-* Average time taken: 1h7min
-* Minimum and maximum ratios observed: 0.51, 2.76
-* Mean and standard deviation of ratios: 1.01, 0.07
-* Proportion of false positives: 8/64 = 12.5%
+- Average time taken: 1h7min
+- Minimum and maximum ratios observed: 0.51, 2.76
+- Mean and standard deviation of ratios: 1.01, 0.07
+- Proportion of false positives: 8/64 = 12.5%
 
 At first sight, those clouds look very spread! The number of false positives is also larger.
 
@@ -259,11 +259,11 @@ At first sight, those clouds look very spread! The number of false positives is 
 Let's take a look at the three strategies now. The main columns are **runtime** and **%FP**
 (percentage of false positives). We want the smallest %FP at the shortest runtime.
 
-| Strategy        | Runtime  &nbsp;| %FP  | Min  | Max  | Mean &nbsp;| Std  |
-|-----------------|---------|-------|------|------|------|------|
-| Default         | 1h55    | 3.7  | 0.51 &nbsp;| 1.36 | 1.00 | 0.05 |
-| No interleaving &nbsp;| 1h39    | 9.99 &nbsp;| 0.43 | 1.50 | 0.99 | 0.07 |
-| Single pass     | 1h07    | 12.5 | 0.51 | 2.76 &nbsp;| 1.01 | 0.07 |
+| Strategy               | Runtime &nbsp; | %FP         | Min         | Max         | Mean &nbsp; | Std  |
+| ---------------------- | -------------- | ----------- | ----------- | ----------- | ----------- | ---- |
+| Default                | 1h55           | 3.7         | 0.51 &nbsp; | 1.36        | 1.00        | 0.05 |
+| No interleaving &nbsp; | 1h39           | 9.99 &nbsp; | 0.43        | 1.50        | 0.99        | 0.07 |
+| Single pass            | 1h07           | 12.5        | 0.51        | 2.76 &nbsp; | 1.01        | 0.07 |
 
 <br />
 
@@ -354,15 +354,15 @@ to let the maintainers decide when to do it on demand.
 
 # Useful references
 
-* [scikit-image/scikit-image #5424](https://github.com/scikit-image/scikit-image/pull/5424): The PR where
+- [scikit-image/scikit-image #5424](https://github.com/scikit-image/scikit-image/pull/5424): The PR where
   all this was implemented.
-* [Analysis notebook](https://gist.github.com/jaimergp/aa4f059c14e394c4089b320cb8b51b1a): The code used
+- [Analysis notebook](https://gist.github.com/jaimergp/aa4f059c14e394c4089b320cb8b51b1a): The code used
   to analyze the benchmarking data.
-* [asv.readthedocs.io](https://asv.readthedocs.io): The official documentation for `asv`.
-* [Building an Open Source, Continuous Benchmark System](https://wolfv.medium.com/building-an-open-source-continuous-benchmark-system-717839093962)
-* [Conbench: Language-independent Continuous Benchmarking Tool, by Ursa Labs](https://ursalabs.org/blog/announcing-conbench/)
-* [PyPy Speed](https://speed.pypy.org/)
-* [Pandas Speed](http://pandas.pydata.org/speed/pandas/)
+- [asv.readthedocs.io](https://asv.readthedocs.io): The official documentation for `asv`.
+- [Building an Open Source, Continuous Benchmark System](https://wolfv.medium.com/building-an-open-source-continuous-benchmark-system-717839093962)
+- [Conbench: Language-independent Continuous Benchmarking Tool, by Ursa Labs](https://ursalabs.org/blog/announcing-conbench/)
+- [PyPy Speed](https://speed.pypy.org/)
+- [Pandas Speed](http://pandas.pydata.org/speed/pandas/)
 
 # Acknowledgements
 

@@ -1,7 +1,7 @@
 ---
 title: "Quansight presence at SciPy'19"
 published: July 15, 2019
-author: [ralf-gommers]
+authors: [ralf-gommers]
 description: "This post is just a quick update to summarize Quansight's presence and contributions, as well as some of the more interesting things I noticed."
 category: [Community, PyData ecosystem]
 featuredImage:
@@ -16,7 +16,7 @@ Yesterday the SciPy'19 conference ended. It was a lot of fun, and very productiv
 
 ## A few highlights
 
-The "Open Source Communities" track, which had a strong emphasis on topics like burnout, diversity and sustainability, as well as the keynotes by Stuart Geiger ("_The Invisible Work of Maintaining and Sustaining Open-Source Software_") and Carol Willing ("_Jupyter: Always Open for Learning and Discovery_") showed that many more people and projects are paying more attention to and evolving their thinking on the human and organizational aspects of open source. 
+The "Open Source Communities" track, which had a strong emphasis on topics like burnout, diversity and sustainability, as well as the keynotes by Stuart Geiger ("_The Invisible Work of Maintaining and Sustaining Open-Source Software_") and Carol Willing ("_Jupyter: Always Open for Learning and Discovery_") showed that many more people and projects are paying more attention to and evolving their thinking on the human and organizational aspects of open source.
 
 I did not go to many technical talks, but did make sure to catch Matt Rocklin's talk "_Refactoring the SciPy Ecosystem for Heterogeneous Computing_". Matt clearly explained some key issues and opportunities around the state of array computing libraries in Python - I highly recommend watching this talk.
 
@@ -26,7 +26,7 @@ Finally, the number of people interested in helping grow the community and proje
 
 ## Contributions by Quansight people
 
-**Carol Willing** gave a fascinating keynote, _Jupyter: Always Open for Learning and Discovery_. 
+**Carol Willing** gave a fascinating keynote, _Jupyter: Always Open for Learning and Discovery_.
 
 **Anthony Scopatz** must have lost out on some sleep: he gave a talk, _Inequality of Underrepresented Groups in Core Project Leadership_, co-taught two tutorials, _Xonsh - Bringing Python Data Science to your Shell_ and _RAPIDS: Open GPU Data Science_, and entertailed us hosting the lightning talks every day (together with Paul Ivanov).
 

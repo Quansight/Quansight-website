@@ -1,7 +1,7 @@
 ---
 title: 'File management improvements in Spyder4'
 published: November 12, 2019
-author: [juanita-gomez]
+authors: [juanita-gomez]
 description: "We will focus on the Files pane in this post, where we've made several improvements to the interface and file management tools."
 category: [IDEs]
 featuredImage:
@@ -12,7 +12,7 @@ hero:
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
-Version 4.0 of [Spyder](https://www.spyder-ide.org/)—a powerful Python IDE designed for scientists, engineers and data analysts—is almost ready! It has been in the making for well over two years, and it contains lots of interesting new features. We will focus on the Files pane in this post, where we've made several improvements to the interface and file management tools. 
+Version 4.0 of [Spyder](https://www.spyder-ide.org/)—a powerful Python IDE designed for scientists, engineers and data analysts—is almost ready! It has been in the making for well over two years, and it contains lots of interesting new features. We will focus on the Files pane in this post, where we've made several improvements to the interface and file management tools.
 
 ## Simplified interface
 
@@ -48,7 +48,6 @@ We added the option to open files with the operating system's default program fo
 Moreover, it is now possible to select more than one file on which to perform a context menu action, thanks to the Files pane's new multi-select functionality. For this, press `Ctrl` (`Cmd` on macOS) or `Shift` while clicking on the files to select, just as you would in your operating system's file manager (Windows Explorer, macOS Finder, etc). As you'd expect, `Ctrl` (`Cmd`) selects individual files one by one, while `Shift` selects all the files between the one you click and the one previously selected.
 Once you've selected multiple files, it is now possible to execute many of the actions available in the context menu on all the selected files, including delete, rename, move, copy and open externally.
 
-
 ![Select Files](/posts/files-improvements/select-files.png)
 
 ## Absolute and relative path handling
@@ -76,4 +75,3 @@ Finally, files in the `Files` pane are now displayed with icons depending on the
 ![File Extensions](/posts/files-improvements/file-extensions.png)
 
 With these new features and UI options in Spyder's `Files` pane, we hope you will enjoy the improved file management experience coming in Spyder 4! We would like to thank Quansight, our donors, and most of all our dedicated users and contributors from around the world for making these features possible. The final version will be released very soon, but if you'd like to try it out now and share your feedback, follow the instructions on our [Github](https://github.com/spyder-ide/spyder/releases). Happy Spydering!
-

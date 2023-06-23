@@ -1,7 +1,7 @@
 ---
 title: 'TDK-Micronas partners with Quansight to sponsor Spyder'
 published: July 2, 2019
-author: [ivan-ogasawara]
+authors: [ivan-ogasawara]
 description: "TDK-Micronas is sponsoring Spyder development efforts through Quansight Labs.
 This will enable the development of some features that have been requested by
 our users, as well as new features that will help TDK develop custom Spyder
@@ -26,16 +26,16 @@ At this point it may be useful to clarify the relationship the role of
 Quansight Labs in Spyder's development and the relationship with TDK. To quote
 Ralf Gommers (director of Quansight Labs):
 
->"We're an R&D lab for open source development of core technologies around data
-science and scientific computing in Python. And focused on growing communities
-around those technologies. That's how I see it for Spyder as well: Quansight
-Labs enables developers to be employed to work on Spyder, and helps with
-connecting them to developers of other projects in similar situations. Labs
-should be an enabler to let the Spyder project, its community and individual
-developers grow. And Labs provides mechanisms to attract and coordinate
-funding. Of course the project is still independent. If there are other
-funding sources, e.g. donations from individuals to Spyder via OpenCollective,
-all the better."
+> "We're an R&D lab for open source development of core technologies around data
+> science and scientific computing in Python. And focused on growing communities
+> around those technologies. That's how I see it for Spyder as well: Quansight
+> Labs enables developers to be employed to work on Spyder, and helps with
+> connecting them to developers of other projects in similar situations. Labs
+> should be an enabler to let the Spyder project, its community and individual
+> developers grow. And Labs provides mechanisms to attract and coordinate
+> funding. Of course the project is still independent. If there are other
+> funding sources, e.g. donations from individuals to Spyder via OpenCollective,
+> all the better."
 
 ## Multiple Projects aka Workspaces
 
@@ -48,9 +48,9 @@ For TDK-Micronas, as well as for a large part of the Spyder user base, the use
 of multiple simultaneous projects is a common pattern, so this enhancement
 will:
 
-* Move from a single to a multiple active projects concept
-* Change the name `Project Explorer` to `WorkSpace Explorer`.
-* Copying from one project to another is done in the 'Explorer' by means of
+- Move from a single to a multiple active projects concept
+- Change the name `Project Explorer` to `WorkSpace Explorer`.
+- Copying from one project to another is done in the 'Explorer' by means of
   context menus.
 
 It is worth mentioning that projects are considered an “advanced feature”,
@@ -64,11 +64,11 @@ at the possibility of creating different types of projects. Currently Spyder
 provides an "empty project" project type.
 
 ![Project creation](/posts/tdk-partners-with-quansight-labs/spyder-project-creation.png)
- 
+
 This feature will:
 
-* Expand the (current) Project Explorer API to handle Project Types.
-* Define and implement the minimal aspects that should be extensible by a
+- Expand the (current) Project Explorer API to handle Project Types.
+- Define and implement the minimal aspects that should be extensible by a
   Project Type
 
 ### File Associations
@@ -96,7 +96,7 @@ The purpose of this enhancement is to enable basic Git integration from
 within the File and Project Explorer and to extend the current plugin
 API so context menus can be customized with specific Git features and
 commands.
- 
+
 Initial work has already started to display Git relevant information
 on the status bar
 

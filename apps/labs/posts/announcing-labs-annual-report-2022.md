@@ -1,6 +1,6 @@
 ---
 title: 'Quansight Labs Annual Report 2022: Celebrating Growth and Sustainability in Open Source'
-author: [pavithra-eswaramoorthy]
+authors: [pavithra-eswaramoorthy]
 published: February 15, 2023
 description: 'Presenting our first annual report! Read about our project achievements, community initiatives, and work culture.'
 category: [Community, PyData ecosystem]

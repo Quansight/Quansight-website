@@ -1,7 +1,7 @@
 ---
 title: 'Learn NixOS by turning a Raspberry Pi into a Wireless Router'
 published: July 11, 2020
-author: [anthony-scopatz]
+authors: [anthony-scopatz]
 description: 'I recently moved, and my new place has a relatively small footprint. (Yes, I moved during the COVID-19 pandemic. And yes, it was crazy.) I quickly realized that was going to need a wireless router of some sort, or more formally, a wireless access point (WAP).'
 category: [Beyond PyData]
 featuredImage:
@@ -12,7 +12,7 @@ hero:
   imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
-I recently moved, and my new place has a relatively small footprint.  (Yes, I
+I recently moved, and my new place has a relatively small footprint. (Yes, I
 moved during the COVID-19 pandemic. And yes, it was crazy.) I quickly realized
 that was going to need a wireless router of some sort, or more formally, a wireless
 access point (WAP). Using my Ubuntu laptop's "wireless hotspot" capability was a
@@ -20,13 +20,13 @@ nice temporary solution, but it had a few serious drawbacks.
 
 ## Drawbacks of hotspotting with a laptop
 
-* The wireless internet goes out whenever I would travel with the laptop,
-* The laptop had to be close to the modem, so that it could be plugged into
-  ethernet, making my laptop not even portable *within* the apartment,
-* The SSID was my laptop's hostname,
-* The WPA password would be set to a random string whenever the hotspot
+- The wireless internet goes out whenever I would travel with the laptop,
+- The laptop had to be close to the modem, so that it could be plugged into
+  ethernet, making my laptop not even portable _within_ the apartment,
+- The SSID was my laptop's hostname,
+- The WPA password would be set to a random string whenever the hotspot
   was started, and so
-* Whenever I moved my laptop I would also need to reset the credentials
+- Whenever I moved my laptop I would also need to reset the credentials
   on all of my wireless devices!
 
 Additionally, some of my coworkers are [Nix](https://nixos.org) true believers.
@@ -127,25 +127,25 @@ The following are some basic Nix tips for helping get you started.
 ### Don't use `nix-env`
 
 The first bit of philosophy to understand is that while much of the Nix documentation
-touts the *functional* nature of its underlying language, the important aspect of Nix
-is that it is *declarative*.
+touts the _functional_ nature of its underlying language, the important aspect of Nix
+is that it is _declarative_.
 
 Nix wants you to specify the configuration and layout of your Operating System (OS)
 ahead of time in a relatively static way. This is very different from how other
-Linux distributions operate, which assume that you will *procedurally* build
+Linux distributions operate, which assume that you will _procedurally_ build
 up your system from various available components, as needed. The declarative
 approach has advantages & disadvantages.
 
 **Advantages:**
 
-* You can write out exactly what your OS is in a single text file (see above).
-* Your OS can be built and tested before booting into it.
-* Errors in configuration are caught and tested during the build process.
+- You can write out exactly what your OS is in a single text file (see above).
+- Your OS can be built and tested before booting into it.
+- Errors in configuration are caught and tested during the build process.
 
 **Disadvantages:**
 
-* You have to know what you want in your OS before you build it.
-* Changes to the OS configuration require a rebuild.
+- You have to know what you want in your OS before you build it.
+- Changes to the OS configuration require a rebuild.
 
 In many cases, the advantages here outweigh the disadvantages. It is without
 question that [Docker](https://www.docker.com/), [CoreOS](http://coreos.com/),
@@ -157,7 +157,7 @@ Of course, even a functional OS has to have an escape valve. This is called
 (a collection of packages) in an existing OS.
 
 !!! warning
-    Do not use `nix-env`!
+Do not use `nix-env`!
 
 We want to create a dedicated device that, when it boots up, is a WAP. To this
 end, it is important that we declare everything in the configuration file.
@@ -239,7 +239,7 @@ Yours might be called `/dev/sdc` or something similar. It also might have more t
 two partitions. That is totally normal at this step.
 
 **Third**, we need to copy the NixOS image over to the SD card. We'll do this with
-the `dd` command. The SD card should *not* be mounted right now. Run the following
+the `dd` command. The SD card should _not_ be mounted right now. Run the following
 command with the path to the image and the SD card device replaced as appropriate.
 
 ```sh
@@ -303,7 +303,7 @@ If you only see packet loss, then this means you do not have internet on the Pi
 and you cannot proceed. Nix requires internet access to build in all realistic
 scenarios.
 
-Next run the `ifconfig` command and verify that *both* `eth0` (the ethernet device)
+Next run the `ifconfig` command and verify that _both_ `eth0` (the ethernet device)
 and `wlan0` (the wireless device) exist.
 
 ```sh
@@ -336,7 +336,7 @@ the last boot option (which for various reasons says it is from 1970). This allo
 us to always get back to a working NixOS to do another `nixos-rebuild` if something
 went terribly wrong and we need to do another rebuild. For example, this could
 happen if there was a typo in the configuration file.
-*If you ever modify `/etc/nixos/configuration.nix`, you'll need to rebuild & reboot.*
+_If you ever modify `/etc/nixos/configuration.nix`, you'll need to rebuild & reboot._
 The rebuild & reboot cycle is the fundamental implication of having a declarative OS.
 
 **Tenth**, if you want to verify that everything is working on your router after
@@ -445,7 +445,7 @@ services.hostapd = {
 };
 ```
 
-Because we are installing the router packages along with the OS, we *also* need
+Because we are installing the router packages along with the OS, we _also_ need
 to configure these packages at the same time we configure the OS itself.
 The first line here tells Nix not to use normal networking management on the
 `wlan0` device. This is because we'll be managing it as a WAP ourselves.
@@ -512,7 +512,7 @@ Nix had better documentation that was more aimed at,
 2. People who are trying to build dedicated devices.
 
 A lot of the Nix documentation seems to be aimed at a very particular kind
-of desktop user: *someone who already has Nix installed!* Such users represent
+of desktop user: _someone who already has Nix installed!_ Such users represent
 an important use case, and the nix build configurations are easy enough to read.
 However, I definitely think there is on-boarding improvement work to be done in
 the Nix ecosystem.

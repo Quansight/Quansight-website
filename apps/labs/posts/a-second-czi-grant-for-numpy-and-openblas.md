@@ -1,7 +1,7 @@
 ---
 title: 'A second CZI grant for NumPy and OpenBLAS'
 published: November 19, 2020
-author: [melissa-mendonca, juanita-gomez]
+authors: [melissa-mendonca, juanita-gomez]
 description: 'This new grant totaling $140,000 will fund part of our efforts to improve usability and sustainability in both projects and is excellent news for the scientific computing community, which will certainly benefit from this work downstream.'
 category: [Array API, Funding]
 featuredImage:

@@ -3,7 +3,7 @@ title: 'Making GPUs accessible to the PyData Ecosystem via the Array API Standar
 published: March 31, 2022
 description: 'How we can use the Python Array API Standard with the fundamental libraries in the PyData ecosystem along with CuPy for
 making GPUs accessible to the users of these libraries'
-author: [amit-kumar]
+authors: [amit-kumar]
 category: [Array API, Machine Learning]
 featuredImage:
   src: /posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/blog_feature.svg

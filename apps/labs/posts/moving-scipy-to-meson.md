@@ -1,7 +1,7 @@
 ---
 title: 'Moving SciPy to the Meson build system'
 published: July 25, 2021
-author: [ralf-gommers]
+authors: [ralf-gommers]
 description: 'SciPy now builds with Meson on Linux, and the full test suite passes!
 This is a pretty exciting milestone, and good news for SciPy maintainers and
 contributors - they can look forward to much faster builds and a more
@@ -26,7 +26,7 @@ about 1min 50s (a ~4x improvement) on my 3 year old 12-core Intel CPU
 
 ![Profiling result of a parallel build of SciPy with Meson](/posts/moving-scipy-to-meson/ninjabuild_tracing_12jobs.png)
 
-*Profiling result of a parallel build (12 jobs) of SciPy with Meson. Visualization created with [ninjatracing](https://github.com/nico/ninjatracing/blob/master/ninjatracing) and [Perfetto](https://ui.perfetto.dev).*
+_Profiling result of a parallel build (12 jobs) of SciPy with Meson. Visualization created with [ninjatracing](https://github.com/nico/ninjatracing/blob/master/ninjatracing) and [Perfetto](https://ui.perfetto.dev)._
 
 As you can see from the tracing results, building a single C++ file
 (`bsr.cxx`, which is one of SciPy's sparse matrix formats) takes over 90
@@ -68,7 +68,7 @@ build system - if we are forced to do a lot of work because of PEP 632
 anyway, then now is the time. That left the question: which build system?
 Really there were only two viable candidates: CMake and Meson. After some
 experimentation, I had a strong preference for Meson for two main reasons: it
-has *great* [documentation](https://mesonbuild.com/) (unlike CMake), and it's
+has _great_ [documentation](https://mesonbuild.com/) (unlike CMake), and it's
 easy to contribute to (it is ~25,000 lines of clean Python code, compared to
 ~1,000,000 lines of C/C++ for CMake). Given that there are very few Python
 projects using either CMake or Meson, good docs and an easy to understand
@@ -87,10 +87,9 @@ and after positive feedback started working on this project.
 
 <img src="/posts/moving-scipy-to-meson/scipy_build_dependencies.png" alt="Diagram of SciPy's build and runtime dependencies" width="600" />
 
-*SciPy's external build and runtime dependencies. Vendored dependencies (e.g.,
+_SciPy's external build and runtime dependencies. Vendored dependencies (e.g.,
 SuperLU, ARPACK, large parts of Boost, Uarray, HiGHS, Qhull, PocketFFT, etc.)
-aren't shown.*
-
+aren't shown._
 
 ## Some of the benefits of building with Meson
 
@@ -148,76 +147,78 @@ anymore to figure out how an extension is built exactly. To look at compiler
 flags, include paths, and other information relevant to how a target is
 built, simple run `meson introspect build/ -i --targets` to obtain a JSON
 representation like this:
+
 ```json
 {
-    "name": "_sparsetools.cpython-39-x86_64-linux-gnu",
-    "id": "c534037@@_sparsetools.cpython-39-x86_64-linux-gnu@sha",
-    "type": "shared module",
-    "defined_in": "/home/rgommers/code/bldscipy/scipy/sparse/sparsetools/meson.build",
-    "filename": [
-        "/home/rgommers/code/bldscipy/build/scipy/sparse/sparsetools/_sparsetools.cpython-39-x86_64-linux-gnu.so"
-    ],
-    "build_by_default": true,
-    "target_sources": [
-        {
-            "language": "cpp",
-            "compiler": [
-                "/home/rgommers/anaconda3/envs/scipy-meson/bin/x86_64-conda-linux-gnu-c++"
-            ],
-            "parameters": [
-                "-I/home/rgommers/code/bldscipy/build/scipy/sparse/sparsetools/_sparsetools.cpython-39-x86_64-linux-gnu.so.p",
-                "-I/home/rgommers/code/bldscipy/build/scipy/sparse/sparsetools",
-                "-I/home/rgommers/code/bldscipy/scipy/sparse/sparsetools",
-                "-I/home/rgommers/anaconda3/envs/scipy-meson/lib/python3.9/site-packages/numpy/core/include",
-                "-I/home/rgommers/anaconda3/envs/scipy-meson/include/python3.9",
-                "-fdiagnostics-color=always",
-                "-D_FILE_OFFSET_BITS=64",
-                "-Wall",
-                "-Winvalid-pch",
-                "-Wnon-virtual-dtor",
-                "-std=c++14",
-                "-O2",
-                "-g",
-                "-fvisibility-inlines-hidden",
-                "-std=c++17",
-                "-fmessage-length=0",
-                "-march=nocona",
-                "-mtune=haswell",
-                "-ftree-vectorize",
-                "-fPIC",
-                "-fstack-protector-strong",
-                "-fno-plt",
-                "-O2",
-                "-ffunction-sections",
-                "-pipe",
-                "-isystem",
-                "/home/rgommers/anaconda3/envs/scipy-meson/include",
-                "-DNDEBUG",
-                "-D_FORTIFY_SOURCE=2",
-                "-O2",
-                "-isystem",
-                "/home/rgommers/anaconda3/envs/scipy-meson/include",
-                "-fPIC",
-                "-DNPY_NO_DEPRECATED_API=NPY_1_9_API_VERSION"
-            ],
-            "sources": [
-                "/home/rgommers/code/bldscipy/scipy/sparse/sparsetools/bsr.cxx",
-                "/home/rgommers/code/bldscipy/scipy/sparse/sparsetools/csc.cxx",
-                "/home/rgommers/code/bldscipy/scipy/sparse/sparsetools/csr.cxx",
-                "/home/rgommers/code/bldscipy/scipy/sparse/sparsetools/other.cxx",
-                "/home/rgommers/code/bldscipy/scipy/sparse/sparsetools/sparsetools.cxx"
-            ],
-            "generated_sources": []
-        }
-    ],
-    "extra_files": [],
-    "subproject": null,
-    "installed": true,
-    "install_filename": [
-        "/usr/local/lib/python3.9/site-packages/scipy/sparse/_sparsetools.cpython-39-x86_64-linux-gnu.so"
-    ]
+  "name": "_sparsetools.cpython-39-x86_64-linux-gnu",
+  "id": "c534037@@_sparsetools.cpython-39-x86_64-linux-gnu@sha",
+  "type": "shared module",
+  "defined_in": "/home/rgommers/code/bldscipy/scipy/sparse/sparsetools/meson.build",
+  "filename": [
+    "/home/rgommers/code/bldscipy/build/scipy/sparse/sparsetools/_sparsetools.cpython-39-x86_64-linux-gnu.so"
+  ],
+  "build_by_default": true,
+  "target_sources": [
+    {
+      "language": "cpp",
+      "compiler": [
+        "/home/rgommers/anaconda3/envs/scipy-meson/bin/x86_64-conda-linux-gnu-c++"
+      ],
+      "parameters": [
+        "-I/home/rgommers/code/bldscipy/build/scipy/sparse/sparsetools/_sparsetools.cpython-39-x86_64-linux-gnu.so.p",
+        "-I/home/rgommers/code/bldscipy/build/scipy/sparse/sparsetools",
+        "-I/home/rgommers/code/bldscipy/scipy/sparse/sparsetools",
+        "-I/home/rgommers/anaconda3/envs/scipy-meson/lib/python3.9/site-packages/numpy/core/include",
+        "-I/home/rgommers/anaconda3/envs/scipy-meson/include/python3.9",
+        "-fdiagnostics-color=always",
+        "-D_FILE_OFFSET_BITS=64",
+        "-Wall",
+        "-Winvalid-pch",
+        "-Wnon-virtual-dtor",
+        "-std=c++14",
+        "-O2",
+        "-g",
+        "-fvisibility-inlines-hidden",
+        "-std=c++17",
+        "-fmessage-length=0",
+        "-march=nocona",
+        "-mtune=haswell",
+        "-ftree-vectorize",
+        "-fPIC",
+        "-fstack-protector-strong",
+        "-fno-plt",
+        "-O2",
+        "-ffunction-sections",
+        "-pipe",
+        "-isystem",
+        "/home/rgommers/anaconda3/envs/scipy-meson/include",
+        "-DNDEBUG",
+        "-D_FORTIFY_SOURCE=2",
+        "-O2",
+        "-isystem",
+        "/home/rgommers/anaconda3/envs/scipy-meson/include",
+        "-fPIC",
+        "-DNPY_NO_DEPRECATED_API=NPY_1_9_API_VERSION"
+      ],
+      "sources": [
+        "/home/rgommers/code/bldscipy/scipy/sparse/sparsetools/bsr.cxx",
+        "/home/rgommers/code/bldscipy/scipy/sparse/sparsetools/csc.cxx",
+        "/home/rgommers/code/bldscipy/scipy/sparse/sparsetools/csr.cxx",
+        "/home/rgommers/code/bldscipy/scipy/sparse/sparsetools/other.cxx",
+        "/home/rgommers/code/bldscipy/scipy/sparse/sparsetools/sparsetools.cxx"
+      ],
+      "generated_sources": []
+    }
+  ],
+  "extra_files": [],
+  "subproject": null,
+  "installed": true,
+  "install_filename": [
+    "/usr/local/lib/python3.9/site-packages/scipy/sparse/_sparsetools.cpython-39-x86_64-linux-gnu.so"
+  ]
 }
 ```
+
 This helps quickly pinpointing mistakes in your `meson.build` files. In
 addition, debugging potential issues in Meson itself, the generated
 `ninja.build` file is fairly readable too - its syntax is simple enough that
@@ -229,9 +230,9 @@ correctly).
 
 Other significant benefits include:
 
-1. Cross-compiling will become possible. For years we've told people *"sorry,
+1. Cross-compiling will become possible. For years we've told people _"sorry,
    `distutils` wasn't really made for cross-compiling, let us know if you
-   have any luck".* As a result we've completely ignored users on some exotic
+   have any luck"._ As a result we've completely ignored users on some exotic
    platforms, and also spent a lot of time fighting with different CI systems
    to do native builds. For example, we will likely want to cross-compile to
    `aarch64` rather than struggle with underpowered ARM hardware on Travis
@@ -307,7 +308,6 @@ def configuration(parent_package='', top_path=None):
     ext._pre_build_hook = pre_build_hook
 ```
 
-
 ## Some key Meson design principles
 
 Meson is a well-designed build system, and both the
@@ -317,27 +317,28 @@ that design. So I won't try and give a full picture here. However, there are
 a few things that are particularly important and would have helped me to
 fully grasp when I started on this project. So let's have a look at those.
 
-*Builds must be out-of-tree.* Meson will not allow building inside your existing
+_Builds must be out-of-tree._ Meson will not allow building inside your existing
 source tree - and that includes code generation. There are good reasons for
 this, but when coming from `distutils` it may bite you. For example, if you
 have a script to generate Cython `.pyx` and `.pxd` files (quite common in
 SciPy), those files cannot be placed next to the template, they must go into
 a build directory (the one we chose with `meson setup <builddir>`).
 
-*Meson is not Turing-complete, and not extensible via APIs.* What this means is
+_Meson is not Turing-complete, and not extensible via APIs._ What this means is
 that if something is not supported in Meson itself, you cannot just write a
 bit of Python code to hack around the problem. Instead, you must add it in
 Meson itself. If that takes too long, just fork Meson and use your fork until
-your feature is merged upstream. This *seems* painful, but it guarantees that
+your feature is merged upstream. This _seems_ painful, but it guarantees that
 people don't just copy around changes from project to project and long-term
 maintainability deteriorates. Instead, the philosophy is to fix things once
 for all users.
 
-*All source files and targets must be listed explicitly.* This means that if you
+_All source files and targets must be listed explicitly._ This means that if you
 build a single Python extension from 50 Fortran files, you must list all 50
 files names. This is not really a problem in practice, but it can be a little
 verbose. Using a few helper snippets to generate file listings in IPython
 saves time:
+
 ```python
 >>> for f in sorted(os.listdir('.')):
 .    if f.endswith('.f'):
@@ -348,7 +349,7 @@ saves time:
   ...
 ```
 
-*Meson has an imperative DSL with immutable objects.* The syntax of the DSL is
+_Meson has an imperative DSL with immutable objects._ The syntax of the DSL is
 inspired by Python, and is easy to read. Objects - which can be dependencies,
 generated files, built extensions, etc. - being immutable makes things easy
 to debug, but in some cases it can restrict what you can do. For example,
@@ -357,6 +358,7 @@ elegant, but the `foreach` pattern will not work if the `.pyx` files are
 generated. This is because they'd then be objects created by `custom_target`,
 and there is no syntax to give them unique names within the `foreach` loop -
 this cost me some time to figure out:
+
 ```python
 pyx_files = [
   ['_flow', '_flow.pyx'],
@@ -378,18 +380,17 @@ foreach pyx_file : pyx_files
 endforeach
 ```
 
-*Meson uses `pkg-config` for discovering dependencies.* This means certain
+_Meson uses `pkg-config` for discovering dependencies._ This means certain
 things "just work". E.g., `blas = dependency('openblas')` followed by using
 `dependencies: blas` to build the `scipy.linalg._fblas` extension worked on
 the first try for me - definitely did not expect that.
 
-*There is one escape hatch to do things Meson does not natively support: `custom_target`.*
+_There is one escape hatch to do things Meson does not natively support: `custom_target`._
 As long you list its source files and outputs, you can invoke Python scripts
 through `custom_target`. This is how the SciPy build invokes `numpy.f2py`,
 Pythran and `cython --cplus` (Meson's Cython support is brand new, and only
 supports targeting C if you give a `.pyx` file to `py3.extension_module`
 right now).
-
 
 ## The sharp bits
 
@@ -428,7 +429,6 @@ issues I ran into:
    issue, however I have forgotten to add `--prefix=$PWD/installdir` often
    enough that it's a point of friction. The plan is to solve this by writing
    a `dev.py` CLI wrapper, similar to SciPy's `runtests.py`.
-
 
 ## Next steps for SciPy and beyond
 
@@ -471,14 +471,14 @@ use Bento rather than distutils - nothing in Python 3.x was interesting
 enough that it was worth dealing with distutils on a daily basis.
 Unfortunately Waf was not a stable enough project to build on, and Bento was
 a one-person project. Meson is even better than Waf and is well-maintained,
-so we can finally have a single *nice* build system.
+so we can finally have a single _nice_ build system.
 
 This project has consumed a lot of nights and weekends to get it to this
 point. I wouldn't have gotten this far in five months without some very
 important contributions though. [Dylan Baker](https://github.com/dcbaker),
 one of the Meson maintainers, implemented Cython support in Meson
-impressively quickly after my *"[Treating Cython like a
-language?](https://github.com/mesonbuild/meson/issues/8693)"* proposal. That
+impressively quickly after my _"[Treating Cython like a
+language?](https://github.com/mesonbuild/meson/issues/8693)"_ proposal. That
 was a real life saver - using `custom_target` for every Cython extension
 would have been very tedious. My colleague [Gagandeep
 Singh](https://github.com/czgdp1807/) added Meson support for some of the

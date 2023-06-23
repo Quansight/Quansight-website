@@ -1,7 +1,7 @@
 ---
 title: 'Quansight Labs Work Update for September, 2019'
 published: October 7, 2020
-author: [aaron-meurer]
+authors: [aaron-meurer]
 description: 'In this post, I will detail some of the open source work that I have done
 recently, both as part of my open source consulting, and as part of my work on
 SymPy for Quansight Labs.'
@@ -166,8 +166,7 @@ Some reasons why `import *` is bad:
   level, `import *` will import every public (doesn't start with an
   underscore) name defined in the module file. This can often include things
   like standard library imports or loop variables defined at the top-level of
-  the file. For imports from modules (from `__init__.py`), `from module import
-  *` will include every submodule defined in that module. Using `__all__` in
+  the file. For imports from modules (from `__init__.py`), `from module import *` will include every submodule defined in that module. Using `__all__` in
   modules and `__init__.py` files is also good practice, as these things are
   also often confusing even for interactive use where `import *` is
   acceptable.
@@ -309,7 +308,6 @@ With the new [sphinx-math-dollar](https://www.sympy.org/sphinx-math-dollar/)
 Sphinx extension, this is now possible. Writing `$\nu$` produces $\nu$, and
 the above docstring can now be written as
 
-
 ```py
 class besselj(BesselBase):
     """
@@ -334,8 +332,7 @@ class besselj(BesselBase):
         J_{-n}(z) = (-1)^n J_n(z).
 ```
 
-We also plan to add support for `$$double dollars$$` for display math so that `..
-math ::` is no longer needed either .
+We also plan to add support for `$$double dollars$$` for display math so that `.. math ::` is no longer needed either .
 
 For end users, the documentation on [docs.sympy.org](https://docs.sympy.org)
 will continue to render exactly the same, but for developers, it is much

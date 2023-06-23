@@ -1,7 +1,7 @@
 ---
 title: "Introducing PyTorch-Ignite's Code Generator v0.2.0"
 published: July 16, 2021
-author: [victor-fomin]
+authors: [victor-fomin]
 description: 'PyTorch-Ignite is a practical solution, a high-level library from the PyTorch ecosystem for training neural networks. It is designed to simplify workflow development while maintaining maximum control, flexibility, and reproducibility. PyTorch-Ignite feels like a natural extension to PyTorch.'
 category: [Machine Learning]
 featuredImage:
@@ -47,7 +47,6 @@ Start adjusting the code in the template by visiting different tabs on the left 
 Once you choose the appropriate settings, press the "Download" or "Open in Colab" button at the top to export generated code as a zip archive or a notebook, and follow any given additional steps. The resulting archive contains generated files bundled together. The `requirements.txt` file contains all the required dependencies, and the `README` contains all the necessary information for launching the script.
 
 You are now ready to add in your data and model and run the code!
-
 
 ## I Want To Contribute!
 
