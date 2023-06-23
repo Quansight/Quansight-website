@@ -50,7 +50,10 @@ export const PostListItem: FC<TPostListItem> = ({ post, variant }) => (
         </Link>
       </h3>
       <p className="text-[1.2rem] font-normal leading-[2.7rem] text-black text-sans">
-        By {post.meta.author.fullName} {post.meta.published}
+        By {post.meta.author[0].fullName}
+        {post.meta.author.length > 1 &&
+          `+ ${post.meta.author.length - 1} more`}{' '}
+        {post.meta.published}
       </p>
     </div>
   </div>

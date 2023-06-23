@@ -38,8 +38,8 @@ export const generateRSS = async (posts: TPost[]): Promise<void> => {
       link: `${siteUrl}/blog/${post.slug}`,
       author: [
         {
-          name: post.meta.author.fullName,
-          link: `https://github.com/${post.meta.author.nickName}`,
+          name: post.meta.author[0].fullName,
+          link: `https://github.com/${post.meta.author[0].nickName}`,
         },
       ],
     });
