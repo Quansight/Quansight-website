@@ -549,7 +549,7 @@ signs. The meta section contains post-related information like:
   **Important note:** categories are case-sensitive.
 - `featuredImage` (required) - Object with two required properties: `src` and `alt`.
   - The `src` property
-    is a path to the featured image which is displayed both (a) on the posts gallery on the`/blog`
+    is a path to the featured image which is displayed both (a) in the posts gallery on the`/blog`
     page and (b) in rich social media preview cards (on Twitter, Slack, LinkedIn, etc.). The image should
     be added to the `apps/labs/public/posts/<post-name>` directory, for example,
     `apps/labs/public/posts/hello-world-post`. There is no need to provide a full image path,
