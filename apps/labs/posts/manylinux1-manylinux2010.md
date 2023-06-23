@@ -16,10 +16,10 @@ The basic installation format for users who install packages via `pip` is
 the wheel format. Wheel names are composed of four parts: a
 package-name-and-version tag (which can be further broken down), a Python tag,
 an ABI tag, and a platform tag. More information on the tags can be found in
-[PEP 425](https://www.python.org/dev/peps/pep-0425). So a package like NumPy
+[PEP 425](https://www.python.org/dev/peps/pep-0425).  So a package like NumPy
 will be available on PyPI as `numpy-1.19.2-cp36-cp36m-win_amd64.whl` for 64-bit
 windows and `numpy-1.19.2-cp36-cp36m-macosx_10_9_x86_64.whl` for macOS. Note
-that only the plaform tag `win_amd64` or `macosx_10_9_x86_64` differs.
+that only the plaform tag `win_amd64` or `macosx_10_9_x86_64` differs. 
 
 But what about Linux? There is no single, vendor controlled, "Linux platform"
 e.g., Ubuntu, RedHat, Fedora, Debian, FreeBSD all package software at slightly
@@ -66,7 +66,6 @@ the safe side, and prevent havoc, library authors will ship a manylinux1 wheel
 for Python 3.6 support.
 
 ## What happens now that Python 3.6 is falling out of favor?
-
 [Python 3.6 is no longer in active
 development](https://www.python.org/dev/peps/pep-0494). In fact, the scientific
 Python community has decided to stop actively supporting Python 3.6 [from
@@ -76,7 +75,6 @@ and drop support for Python 3.6 sooner rather than later, meaning that
 **`manylinux2014` may soon become the only option** for new versions.
 
 ## What about Conda packages?
-
 Conda does not use the same kind of wheel format provided by PyPI and Pip. Conda's
 build system is internally consistent, and Conda packagers build a binary
 package for each supported OS, thus they are not bound to the manylinux
@@ -87,11 +85,10 @@ usage!), and the Pip provided should be version 20 or later. If needed,
 `manylinux2014` will soon become the only option.
 
 ## What comes after manylinux2014?
-
 The glibc used in manylinux2014 is defined as the one used by CentOS7. This OS
 was released in June 2014. This manylinux standard, for the first time,
 declared support for non-x86 hardware systems like ARM64 (aarch64), Power
-(ppc64) and S390X. However the ARM platform has grown greatly since 2014, and
+(ppc64) and S390X.  However the ARM platform has grown greatly since 2014, and
 glibc has moved from version 2.17 to 2.31, fixing many bugs. Since the real
 driver for platform compatibility is glibc, [PEP
 600](https://www.python.org/dev/peps/pep-0600/) defined a "perennial manylinux
@@ -121,4 +118,4 @@ since conda-forge has support for non-x86 architectures today.
 - Manylinux1 and Python 3.6 are going away. Update your systems.
 - For people looking to move PEP 600 forward, the next step is to dive into the
   [auditwheel](https://github.com/pypa/auditwheel) repo to define and support
-  the next manylinux version.
+  the next manylinux version. 

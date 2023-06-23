@@ -20,7 +20,7 @@ hero:
 I joined Quansight at the beginning of April, splitting my time between
 PyTorch (as part of a larger Quansight team) and contributing to Quansight Labs
 supported community-driven projects in the Python scientific and data science
-software stack, primarily to NumPy. I have found my next home; the people, the
+software stack, primarily to NumPy.  I have found my next home; the people, the
 projects, and the atmosphere are an all around win-win for me and (I hope) for
 the projects to which I contribute.
 
@@ -30,7 +30,7 @@ skills, and quickly became enamoured with the people and the mission. Over the
 years my efforts in the open source world moved more mainstream, and in 2018 I
 took on a full-time position working on NumPy, funded through a grant to
 [BIDS](https://bids.berkeley.edu). Since April 2020, I have moved to Quansight
-Labs as a full-time developer.
+Labs as a full-time developer. 
 
 [Quansight Labs](https://www.quansight.com/labs) is a subsidiary of Quansight
 LLC, and Labs' mission is "Sustaining the future of open source". It does this

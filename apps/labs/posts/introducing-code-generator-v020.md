@@ -48,6 +48,7 @@ Once you choose the appropriate settings, press the "Download" or "Open in Colab
 
 You are now ready to add in your data and model and run the code!
 
+
 ## I Want To Contribute!
 
 We encourage open source contributors from both frontend and data science communities to collaborate on the project. If you are interested, please visit the [Contribution Guide](https://github.com/pytorch-ignite/code-generator/blob/main/CONTRIBUTING.md). If you have any questions, do not hesitate to ask them on our [Discord](https://discord.com/invite/djZtm3EmKj). Here are some [good first issues](https://github.com/pytorch-ignite/code-generator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22).

@@ -80,7 +80,7 @@ dataframe and array library landscape.
 Now that we have an established model and a set of major projects that are
 well-defined and continuing in 2021, we can focus more on our diverse set of
 smaller activities in addition to growing the team and organization. New
-projects in the pipeline will be announced in the coming weeks and months,
+projects in the pipeline will be announced in the coming weeks and months, 
 be sure to watch this space. Tania will also inject her own ideas
 and energy, and I'm looking forward to how that will help shape and improve
 the Labs' roadmap.

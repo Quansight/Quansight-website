@@ -78,8 +78,8 @@ Fellowship](https://fellowship.mlh.io) and
 [Outreachy](https://www.outreachy.org/), I had to write a significant amount of
 code which was my metric for measuring a developer at the time. This idea nursed
 a little bit of doubt in me as an intern who was doing more reading and
-communicating rather than writing code. But luckily "_being a developer is more
-than just typing code_", paraphrasing Melissa's comment when I made a
+communicating rather than writing code. But luckily "*being a developer is more
+than just typing code*", paraphrasing Melissa's comment when I made a
 pseudo-complaint about my internship experience thus far (barely a month in at
 the time).
 

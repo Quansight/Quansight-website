@@ -53,22 +53,22 @@ Users want to:
 
 - Use JupyterLab to read or navigate documents.
 - Use JupyterLab to edit and run documents. To edit a document, users need to
-  be able to navigate where they want to edit, so the read-only experience is a
-  prerequisite.
+be able to navigate where they want to edit, so the read-only experience is a
+prerequisite.
 - Know what things they can do in JupyterLab and get help on how to do it.
 
 Contributors want to:
 
 - Gain enough understanding of a JupyterLab in order to work with it.
 - Understand the expectations of their contributions and how to meet them. In
-  this case, they would want to know that they need to think about accessibility
-  and how to consider that.
+this case, they would want to know that they need to think about accessibility
+and how to consider that.
 
 Maintainers want to:
 
 - Ensure that JupyterLab is both progressing and relatively stable.
 - Promote sustainable growth for a project that doesn’t overwrite past efforts.
-  Automation can be helpful because maintainers are usually strapped for time.
+Automation can be helpful because maintainers are usually strapped for time.
 
 With the support of a team member with prior experience auditing for accessibility,
 we pinpointed [specific ways](https://github.com/jupyterlab/jupyterlab/issues/9399)
@@ -163,10 +163,10 @@ out for my next blog where I’ll talk about what the disconnect of
 what accessibility meant to different people in our community and how
 that impacted the time and way we’ve solved issues in JupyterLab so far.
 
----
+___
 
-_This is part of a series of blogs around making JupyterLab more accessible. You can read the
-[whole series here](https://labs.quansight.org/blog?category=Access-centered)._
+*This is part of a series of blogs around making JupyterLab more accessible. You can read the
+[whole series here](https://labs.quansight.org/blog?category=Access-centered).*
 
-_Interested in getting involved? Join our community via the JupyterLab accessibility meetings
-listed every other week on the [Jupyter community calendar](https://jupyter.readthedocs.io/en/latest/community/content-community.html#jupyter-community-meetings)._
+*Interested in getting involved? Join our community via the JupyterLab accessibility meetings
+listed every other week on the [Jupyter community calendar](https://jupyter.readthedocs.io/en/latest/community/content-community.html#jupyter-community-meetings).*

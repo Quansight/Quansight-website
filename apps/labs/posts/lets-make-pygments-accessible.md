@@ -31,7 +31,6 @@ So what? Even if accessible theming sounds good on the surface, let’s talk abo
 At its foundation, ensuring that syntax highlighting considers accessibility matters for [the same reasons any accessibility effort does](https://www.w3.org/WAI/fundamentals/accessibility-intro/#context). Given that syntax highlighting is already a visual support for people handling code, this is more about extending the benefits to people of all abilities rather than only the fully sighted. Syntax highlighting may fail people with low vision, all types of color blindness, and anyone working in bright areas with a big glare on their screen.
 
 To address this, we’ll need some color theory language. All colors can be described by these three properties:
-
 - Hue, or “what color is it?” 🖍
 - Value, or “how light or dark is it?” 🌞🌚
 - Saturation, or “how much of that color is present?” You can also ask yourself if it looks like it’s mixed with other colors, white, black, or grey. ⚖️
@@ -60,7 +59,6 @@ And remember, even if this project isn’t for you, evaluating the syntax highli
 `accessible-pygments` just released its second version, so naturally, we still have plenty to do for future versions!
 
 Our main areas of focus inside the project include,
-
 - Adding more accessible themes 🎨
 - Increase the demo site with more languages 🆙
 - Create automatic tests to check WCAG compliance of the theme's colors 🌟

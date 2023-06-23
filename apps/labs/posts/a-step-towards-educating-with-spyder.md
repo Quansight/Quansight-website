@@ -6,7 +6,7 @@ description: 'As a community manager in the Spyder team, I have been looking for
 category: [Community, IDEs]
 featuredImage:
   src: /posts/a-step-towards-educating-with-spyder/blog_feature_var2.svg
-  alt: 'An illustration of a brown and white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
+  alt:  'An illustration of a brown and white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/a-step-towards-educating-with-spyder/blog_hero_var1.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'

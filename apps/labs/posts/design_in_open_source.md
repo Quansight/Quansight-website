@@ -2,7 +2,7 @@
 title: 'Introduction to Design in Open Source'
 published: November 18, 2020
 authors: [isabela-presedo-floyd]
-description: 'This blog post is a conversation between two contributors, sharing their observations, experiences, and their hope for a stronger collaboration between design and development in open source.'
+description: "This blog post is a conversation between two contributors, sharing their observations, experiences, and their hope for a stronger collaboration between design and development in open source."
 category: [Developer workflows, OSS Experience]
 featuredImage:
   src: /posts/design_in_open_source/blog_feature_var2.svg
@@ -14,8 +14,8 @@ hero:
 
 ## Designers should be a good fit for open source
 
-_This blog post is a conversation. Portions lead by Tim George are marked with
-**TG**, and those lead by Isabela Presedo-Floyd are marked with **IPF**._
+*This blog post is a conversation. Portions lead by Tim George are marked with
+**TG**, and those lead by Isabela Presedo-Floyd are marked with **IPF**.*
 
 **TG:** When I speak with other designers, one common theme I see concerning why
 they chose this career path is they want to make a difference in the world. We
@@ -57,7 +57,7 @@ explaining the absence of design in this space:
 
 - Designers might be unaware of open source.
 - Designers might be wary of working in public. ("You want me to post my
-  horrible first draft somewhere anyone could see it forever?")
+horrible first draft somewhere anyone could see it forever?")
 - Some open-source communities don't want or need conventional design.
 - Some open-source communities might not welcome different skill sets.
 - Designers have a history of being underpaid or not paid for their work; we
@@ -161,7 +161,7 @@ open-source software are the result of one or two software developers writing
 the code and offering it directly to the project, while even the most well
 executed design still needs to be coded. It often happens that the solution
 that's working now, is the priority over the solution that might work better,
-_if_ it is even built.
+*if* it is even built.
 
 **IPF:** Because features are often already or mostly built by the time they are
 revealed to the team (designers included), they have also already been
@@ -232,7 +232,6 @@ with Ani Krishnan and Tony Fast
 [here](https://www.youtube.com/watch?v=3SBwb8ppz5I).
 
 ---
-
 ¹ Wondering what's wrong with this scenario? Yellow and white is a low contrast
 combination that makes it hard to see the icon. It also fails accessibility
 contrast standards.

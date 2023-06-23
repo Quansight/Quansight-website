@@ -30,21 +30,23 @@ With DDP, the model is replicated on every process, and every model replica will
 However, when we use another backend like `horovod` or `xla`, then we should rewrite the code for each configuration.
 PyTorch-Ignite distributed module (`ignite.distributed`) is a helper module to use distributed settings for multiple backends like `nccl`, `gloo`, `mpi`, `xla`, and `horovod`, accordingly, we can use `ignite.distributed` for distributed computations regardless of backend.
 
+
 ![idist configuration](/posts/sangho-internship-blogpost/ddp0.png)
 
 By simply designating the current backend, `ignite.distributed` provides a context manager to simplify the code of distributed configuration setup for all above supported backends. And it also provides methods for using existing configurations from each backend.
-For example, `auto_model`, `auto_optim` or `auto_dataloader` helps provided model to adapt existing configuration and `Parallel` helps
+For example, `auto_model`, `auto_optim` or `auto_dataloader` helps provided model to adapt existing configuration and `Parallel` helps 
 to simplify distributed configuration setup for multiple backends.
+
 
 ## How I contributed with improving test code in DDP config
 
 Problem : test code for metrics computation has incorrectly implemented correctness checks in a distributed configuration
 
 There are 3 items to be checked to ensure that the test code for each metric works correctly in DDP configuration.
+1) Generate random input data on each rank and make sure it is different on each rank. This input data is used to compute a metric value with ignite.
+2) Gather data with [`idist.all_gather`](https://pytorch-ignite.ai/tutorials/advanced/01-collective-communication/#all-gather) on each rank such that they have the same data before computing reference metric
+3) Compare the computed metric value with the reference value (e.g. computed with scikit-learn)
 
-1. Generate random input data on each rank and make sure it is different on each rank. This input data is used to compute a metric value with ignite.
-2. Gather data with [`idist.all_gather`](https://pytorch-ignite.ai/tutorials/advanced/01-collective-communication/#all-gather) on each rank such that they have the same data before computing reference metric
-3. Compare the computed metric value with the reference value (e.g. computed with scikit-learn)
 
 ## How I contributed new feature: `group` argument to `all_reduce` and `all_gather` methods
 
@@ -53,6 +55,7 @@ Problem : Existing methods in PyTorch-Ignite uses all ranks, however, for certai
 As mentioned, the distributed part of Ignite is a wrapper of different backends like [horovod](https://horovod.ai/), [nccl](https://developer.nvidia.com/nccl), [gloo](https://github.com/facebookincubator/gloo) and [xla](https://github.com/pytorch/xla).
 I added a new group method for generating group depending on its backend and modified all_reduce and all_gather to take group arguments for users to select the devices.
 ![Code snippets](/posts/sangho-internship-blogpost/code1.png)
+
 
 ### My contributions
 

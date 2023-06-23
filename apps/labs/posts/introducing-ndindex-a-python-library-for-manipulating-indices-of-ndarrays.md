@@ -120,12 +120,12 @@ implemented:
 
 - `len()` computes the maximum length of an index over a given axis.
 
-  ```py
-  >>> len(Slice(2, 10, 3))
-  3
-  >>> len(arange(10)[2:10:3])
-  3
-  ```
+   ```py
+   >>> len(Slice(2, 10, 3))
+   3
+   >>> len(arange(10)[2:10:3])
+   3
+   ```
 
 - `idx.reduce(shape)` reduces an index to an equivalent index over an array
   with the given shape.

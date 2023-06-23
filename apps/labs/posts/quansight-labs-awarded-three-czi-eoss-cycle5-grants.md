@@ -1,8 +1,8 @@
 ---
-title: 'Quansight Labs awarded three CZI EOSS Cycle 5 Grants'
+title: "Quansight Labs awarded three CZI EOSS Cycle 5 Grants"
 authors: [jaime-rodriguez-guerra]
 published: November 10, 2022
-description: 'We are delighted to share details about new grants to support the sustainability of SciPy, conda-forge, and CuPy'
+description: "We are delighted to share details about new grants to support the sustainability of SciPy, conda-forge, and CuPy"
 category: [Funding, PyData Ecosystem, Packaging, Community]
 featuredImage:
   src: /posts/quansight-labs-awarded-three-czi-eoss-cycle5-grants/blog_feature_czi5.svg
@@ -19,13 +19,11 @@ Quansight Labs spends a significant amount of time working on impactful and crit
 Today, we are thrilled to announce that three new EOSS Cycle 5 grants were awarded, in which [Quansight Labs team members are taking a leading role](https://cziscience.medium.com/the-key-to-scientific-breakthroughs-improving-access-to-open-source-software-38f04c14accf).
 
 ## SciPy: Fundamental Tools for Biomedical Research
-
 **PIs: [Matt Haberland](https://github.com/mdhaber) (Cal Poly), [Pamphile Roy](https://github.com/tupui) (Quansight)**
 
 We partnered with [Cal Poly](https://www.calpolycorporation.org/) to improve the scientific Python library [SciPy](https://scipy.org/) towards helping the Biomedical community.
 
 This project has four goals:
-
 1. Improvement of functions used by biomedical software tools
 2. Enhancement of functionality used directly by biomedical researchers
 3. General maintenance, so that dependent projects and researchers can use SciPy with confidence
@@ -56,13 +54,11 @@ The dissemination of scientific knowledge and tools is vital to the open source 
 SciPy is open source, and as such, this grant work will also be done in the open and with the broaders community. It means that you can all contribute to help or provide feedback. Join [our community](https://scipy.org/community/), and help us shape SciPy for the next decade.
 
 ## Transparent, open & sustainable infrastructure for conda-forge and bioconda
-
 **PIs: [Jaime Rodríguez-Guerra](https://github.com/jaimergp) (Quansight), [Wolf Vollprecht](https://github.com/wolfv) (QuantStack)**
 
 This is a joint project with [QuantStack](https://quantstack.net/) to improve [conda-forge](https://conda-forge.org/) and [Bioconda's](https://bioconda.github.io/) sustainability and transparency by adopting vendor-agnostic and secure infrastructure practices. In addition, we will develop comprehensive maintenance metrics and dashboards. 🎉
 
 This project has three main goals:
-
 1. Reducing infrastructure technical debt
 2. Adopting an OCI-based mirroring strategy
 3. Development of a maintenance dashboard on Quetz
@@ -79,33 +75,32 @@ Conda-forge and Bioconda rely on infrastructure and tooling distributed across m
 
 There is no straightforward way to monitor the operational status of conda-forge or Bioconda’s infrastructure. The existing [conda-forge.org/status panel](https://conda-forge.org/status/) is far from giving a comprehensive view of ongoing maintenance tasks, bottlenecks or the overall health of the many bots and infrastructure pieces. Having a detailed picture of the infrastructure and automation tools will significantly improve the maintainers' workflow and aid with identifying critical risks. The dashboard will be built on top of [Quetz](https://quetz.readthedocs.io/en/latest/index.html), an open source server for hosting conda packages, allowing for increased transparency and extensibility.
 
-## Enhancing High-Level Scientific Computing Support in CuPy
 
+## Enhancing High-Level Scientific Computing Support in CuPy
 **PI: [Kenichi Maehashi](https://github.com/kmaehashi) (Preferred Networks)**
 
-Led by [Preferred Networks](https://www.preferred.jp/en), Quansight Labs is proud to collaborate on this grant, which aims to provide a series of GPU accelerated routines for signal processing and interpolation in CuPy. The goal is to match SciPy’s `signal` and `interpolate` submodules, as a foundation for the research community.
+Led by [Preferred Networks](https://www.preferred.jp/en), Quansight Labs is proud to collaborate on this grant, which aims to provide a series of GPU accelerated routines for signal processing and interpolation in CuPy. The goal is to match SciPy’s `signal` and `interpolate` submodules,  as a foundation for the research community. 
 
 This project has two main goals
-
 1. Develop interpolation and signal processing modules
 2. Maintain CuPy to continue supporting the latest platforms
 
 ### Develop interpolation and signal processing modules
-
 The [CuPy project](https://cupy.dev/) aims to reach full [coverage of the NumPy and SciPy APIs](https://docs.cupy.dev/en/latest/reference/comparison.html). The developers will implement, profile, document, and add unit tests for each API in the targeted modules: `cupyx.scipy.interpolate` and `cupyx.scipy.signal`. This work includes:
 
-- Careful analysis of the underlying algorithms will be carried out, and specialized GPU kernels (CUDA C/C++) will be written from scratch when needed.
-- GPU & CPU elapsed implementation time profiling for a variety of GPU devices representing common research environments
-- Unit tests added to cover all possible input combinations and edge cases, e.g. overflows, exceptions, and warnings
+
+* Careful analysis of the underlying algorithms will be carried out, and specialized GPU kernels (CUDA C/C++) will be written from scratch when needed.
+* GPU & CPU elapsed implementation time profiling for a variety of GPU devices representing common research environments 
+* Unit tests added to cover all possible input combinations and edge cases, e.g. overflows, exceptions, and warnings
 
 ### Maintain CuPy to continue supporting the latest platforms
-
 As with other GPU applications, CuPy heavily relies on NVIDIA CUDA and AMD ROCm libraries. Currently, CuPy supports with CUDA versions (10.2, 11.0-11.6) and four ROCm versions (4.0, 4.2, 4.3, 5.0). GPU vendors generally release updates of these toolkits on a quarterly basis, and providing immediate support for them is essential to allow users to enjoy the latest features, performance enhancements, security, and bug fixes. This work includes:
 
-- Implementing Python wrappers for new APIs added to the library to make them available to CuPy
-- Supporting new features from a new CUDA or ROCm release, when applicable
-- Setting up a continuous integration system to provide extensive coverage of the supported software combinations
-- Building a delivery pipeline to provide binary packages for the supported versions of the library
+* Implementing Python wrappers for new APIs added to the library to make them available to CuPy
+* Supporting  new features from a new CUDA or ROCm release, when applicable 
+* Setting up a continuous integration system to provide extensive coverage of the supported software combinations
+* Building a delivery pipeline to provide binary packages for the supported versions of the library
+
 
 <br />
 

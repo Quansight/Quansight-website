@@ -38,6 +38,7 @@ packaging and distribution tools, and library authors needing to package
 their projects. Readers newer to Python packaging may want to start with the
 blog posts linked in the Conclusion section.
 
+
 ## Topic 1: The pip/wheel/PyPI world
 
 - PyPI file size limit .deep learning, CUDA 11
@@ -45,7 +46,7 @@ blog posts linked in the Conclusion section.
 _RG: the default file size limit on PyPI is (I believe) 60 MB currently, which is not enough for many libraries with heavy dependencies. You must file an issue to ask for an exemption, which can take quite a while to be resolved because PyPI has only a few volunteers. See, e.g., [this issue where MXNet asks for a 1 GB limit](https://github.com/pypa/pypi-support/issues/243). The issue will get significantly worse with CUDA 11, which is several times larger than CUDA 10. Looking at for example [PyTorch wheels](https://pypi.org/project/torch/#files), which are already 776 MB now, that simply won't fit. When I asked one of the PyPI maintainers recently, the answer was "interesting - that will be a problem"._
 
 - Native dependencies for wheels
-  - two proposed solutions: pynativelib, or spec to interface with outside packages
+    - two proposed solutions: pynativelib, or spec to interface with outside packages
 
 _RG: what projects do with non-Python dependencies today is simply don't declare the dependency, and use either static linking or put the needed shared libraries into the wheel with name mangling. The [pynativelib](https://mail.python.org/pipermail/wheel-builders/2016-April/000090.html) idea is technically feasible for simple scenarios, but will always be limited because of how pip, wheels and PyPI work. It's not in use today. The more sensible route seems to be to work out how to let packages interact with external package managers, and figure out what's out of scope completely. I'm not aware of significant work happening on this topic._
 
@@ -66,7 +67,7 @@ _RG: using virtual environments is good practice, but writing install instructio
 _RG: `distutils` will be deprecated in Python 3.10 and removed in Python 3.12. This is likely good news in the long term, but for now it means building packages with nontrivial compiled dependencies is going to be unstable. See for example [this issue about `numpy.distutils` and `setuptools` interaction](https://github.com/pypa/setuptools/issues/2372)._
 
 - manylinux: Alpine Linux, and (maybe) the death of CentOS
-  - Is musl compatible yet?
+    - Is musl compatible yet?
 
 _RG: I'm not sure if this is a major isssue. Right now Alpine Linux doesn't work with the `manylinux1/2010/2014` wheels on PyPI, because Alpine uses musl libc rather than glibc. The manylinux standard is based on CentOS, which is being discontinued. If that leads to growth of Alpine (perhaps not likely) then we'll be getting more users asking for wheels. Right now all we can say is "that's unsupported, sorry"._
 
@@ -80,8 +81,8 @@ _RG: Isolated builds are a good idea, but with ABI compatibility constraints one
 
 _RG: See [this blog post from Matthias Bussonnier](https://labs.quansight.org/blog/2020/08/ipython-reproducible-builds/) for more on this topic._
 
-- `setup.py` is dynamic making downstream packaging/automation much harder (including for conda)
-  - Use [flit](http://flit.readthedocs.org/) – completely static!
+- `setup.py` is dynamic making downstream packaging/automation much harder (including for conda) 
+    - Use [flit](http://flit.readthedocs.org/) – completely static! 
 
 _RG: For pure Python packages Flit is great indeed. For packages with compiled code, we'll be stuck with `setup.py` for a while longer, I'm afraid. It is what it is - this has gotten better already with `pyproject.toml` and it's not one of the biggest issues anymore imho._
 
@@ -95,7 +96,8 @@ _RG: yeah, kinda. Devs do know conda and conda-forge exist, but as far as I can 
 
 - Shipping JupyterLab 3.0 extensions without Node.js is kinda cool.
 - Rust/Maturin to develop Python packages is nice.
-  - The relocation of depending binaries must be done manually in some cases.
+    - The relocation of depending binaries must be done manually in some cases.
+
 
 ## Topic 2: The conda world
 
@@ -107,13 +109,13 @@ _RG: a quick peek at [the conda repo](https://github.com/conda/conda/pulse) inde
 
 _RG: this is definitely true if you start with conda; it can take minutes for conda to do the solve to install mamba and its dependencies from conda-forge. With the recently added [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge) installer that problem should be mostly solved now._
 
-- No TensorFlow
-  - Does conda-forge count?
+- No TensorFlow 
+    - Does conda-forge count?
 
 _RG: this is actually no longer true, the TensorFlow package in `defaults` is reasonably but not completely up to date (2.3.0 CPU and GPU packages at the moment, missing 2.3.1-2.4.1). In general it's a problem indeed that important packages like TensorFlow and PyTorch in `defaults` may be one or even more versions behind._
 
 - Conda-forge is growing too large
-  - In which respect?
+    - In which respect?
 
 _RG: As discussed in [this blog post on conda performance](https://www.anaconda.com/blog/how-we-made-conda-faster-4-7), the more packages there are in a channel, the slower the conda solves get. Given the ever-growing size of conda-forge, conda is getting slower and slower when used with conda-forge._
 
@@ -122,10 +124,10 @@ _RG: As discussed in [this blog post on conda performance](https://www.anaconda.
 _RG: This would be so helpful. Not being able to mix `defaults` and `conda-forge`, and users doing it anyway because they need packages from both, is a long-standing issue._
 
 - Conda solves in CI often get really bogged down
-  - Also conda is never the default in CI so you need to do quite a bit of manipulation on some platforms
+    - Also conda is never the default in CI so you need to do quite a bit of manipulation on some platforms
 - Confusion in the community over the new Anaconda ToS
 
-\_RG: Anaconda has done the right thing here imho: make large institutional users pay if they use the `defaults` channel. Packaging is hard and labour-intensive, and having a sustainable revenue stream to offset the cost of packaging difficult libraries, maintaining core tooling like `conda-build`, and serving packages to millions of users is important. Conda-forge and all other channels are still completely free. Unfortunately Anaconda communicated that very poorly, which led to unnecessary confusion. See [this blog posts from the conda-forge team](https://conda-forge.org/blog/posts/2020-11-20-anaconda-tos/)
+_RG: Anaconda has done the right thing here imho: make large institutional users pay if they use the `defaults` channel. Packaging is hard and labour-intensive, and having a sustainable revenue stream to offset the cost of packaging difficult libraries, maintaining core tooling like `conda-build`, and serving packages to millions of users is important. Conda-forge and all other channels are still completely free. Unfortunately Anaconda communicated that very poorly, which led to unnecessary confusion. See [this blog posts from the conda-forge team](https://conda-forge.org/blog/posts/2020-11-20-anaconda-tos/)
 
 - There's no way to distinguish packages that provide the same binaries, e.g., `turbojpeg` vs. `libjpeg`, both package `libjpeg`
 - Need to separate metadata (especially dependencies) from packages.
@@ -147,10 +149,11 @@ _RG: [Purism](https://puri.sm/) and [this blog post from its devs about security
 _RG: It's great to see that both the PyPA team and the Conda community are getting better organized. There's now more funding for work on PyPI, Warehouse and Pip; the teams working on it have grown, there's good project management, roadmapping and even Pip user experience research going on. And the Conda community has set up a new organization to align on standards, incubate promising new projects. The next step will hopefully be more productive interactions between those two somewhat separate groups._
 
 - `pip` and `conda` interaction still not great
-  - I'd like a way to have "safe" (e.g., pure Python) packages so you can confidently mix them. `+100`
-  - The pip dependency resolver is not great yet and it also ends up with conflicts with conda.
+    - I'd like a way to have "safe" (e.g., pure Python) packages so you can confidently mix them. `+100`
+    - The pip dependency resolver is not great yet and it also ends up with conflicts with conda.
 
 _RG: True. For doing serious scientific computing, data science and ML type work, you often need the combination, using `conda` for the core libraries, and filling in the gaps with `pip` for packages that are not packaged for conda or installing things from source._
+
 
 ## Topic 4: There's always good news too
 
@@ -158,11 +161,12 @@ _RG: True. For doing serious scientific computing, data science and ML type work
 - Mambaforge
 - macos-arm64 support in conda-forge
 
-\_RG: It'll be a while before we get wheels for core PyData packages, but conda-forge already has support, see [this blog post](https://conda-forge.org/blog/posts/2020-10-29-macos-arm64/)
+_RG: It'll be a while before we get wheels for core PyData packages, but conda-forge already has support, see [this blog post](https://conda-forge.org/blog/posts/2020-10-29-macos-arm64/)
 
 - The new conda community umbrella org
 - Pip and PyPI are now well-managed and have a nontrivial amount of funding
 - Pip has a solver :) ; the solver is a "backtracking solver" because metadata on PyPI is incomplete :(
+
 
 ## Bonus topic: A puzzle
 
@@ -171,7 +175,7 @@ tomorrow (note, you do need a very fast internet connection for this): create
 a concise recipe for installing the latest versions of NumPy, TensorFlow,
 PyTorch, CuPy, Dask, JAX and MXNet in a single environment.
 
-👆🏼 This is a trick question I am sure
+👆🏼 This is a trick question I am sure 
 
 _RG: everyone had till the end of the next day to submit a solution. It turns out to be not so simple, the winning entry (with six out of seven packages, JAX is missing) came from Chris Ostrouchov - our local Nix evangelist:_
 
@@ -219,5 +223,6 @@ While I'm at it, let me also link to some of the most informative blog posts on 
 - [Uwe Korn - How we build Apache Arrow's manylinux wheels (2019)](https://uwekorn.com/2019/09/15/how-we-build-apache-arrows-manylinux-wheels.html)
 - [Pradyun Gedam - Testing the next-gen pip dependency resolver (2020)](https://pradyunsg.me/blog/2020/03/27/pip-resolver-testing/)
 - [Sumana Harihareswara - Releasing pip 20.3, featuring new dependency resolver (2020)](https://pyfound.blogspot.com/2020/11/pip-20-3-new-resolver.html)
+
 
 I hope this sketches a useful picture of where we are today. If we missed any major issues (I'm sure we did), I'd love to hear them!

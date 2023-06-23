@@ -25,65 +25,48 @@ Although my main focus at this point in my career isn't `uarray` (not that I don
 With that out of the way, I'd like to present some improvements the Quansight team has made to `uarray` over the course of the past several months:
 
 ## Progress on Integration
-
 ### `uarray` ❤️ `scipy.fft`
-
-`uarray` is now the [official override mechanism](https://scipy.github.io/devdocs/reference/fft.html#backend-control) for `scipy.fft`. This is a _huge_ win.
+`uarray` is now the [official override mechanism](https://scipy.github.io/devdocs/reference/fft.html#backend-control) for `scipy.fft`. This is a *huge* win.
 
 ### NEP-31 merged with draft status
-
 Already discussed above, but [NEP-31](https://numpy.org/neps/nep-0031-uarray.html) is available on the NumPy website in draft form.
 
 ## In core `uarray`
-
 ### C++ Implementation Merged
-
 The C++ implementation of the `uarray` protocol is now [merged](https://github.com/Quansight-Labs/uarray/pull/170). `uarray` is now lightning fast: About as fast as `__array_function__`.
 
 ### Global backend as the "only" backend
-
 The `set_global_backend` gained an `only=` kwarg. You can read what this means in the [docs](https://uarray.org/en/latest/generated/uarray.set_global_backend.html), but basically: In the absence of any local backends; no other backend will be tried at all.
 
 ### Cross-platform CI
-
 We now have [cross-platform CI](https://github.com/Quansight-Labs/uarray/pull/178) for Windows, macOS and Linux.
 
 ### Building wheels on CI
-
 [.so we don't have to. 😁](https://github.com/Quansight-Labs/uarray/pull/193)
 
 ### Backends can fail fast
-
 [.by throwing a `ua.BackendNotImplementedError`](https://github.com/Quansight-Labs/uarray/pull/199)
 
 ### New website 🥳
-
 [https://uarray.org/](https://uarray.org/), and [https://unumpy.uarray.org/](https://unumpy.uarray.org/). 'Nuff said.
 
 ### Test `scipy.fft` in CI
-
 [.so we don't accidentally break it.](https://github.com/Quansight-Labs/uarray/commit/ddbdad8bec3c94258e646313bcb20189f103a120)
 
 ### Re-entrant context managers
-
 [.so you can cache contexts and use them without worrying.](https://github.com/Quansight-Labs/uarray/pull/207)
 
 ### Then we cache for you
-
 [.so you don't have to.](https://github.com/Quansight-Labs/uarray/pull/210)
 
 ### Rich comparison of backends
-
 [.so you can specify (via `__eq__`) which backends to skip](https://github.com/Quansight-Labs/uarray/pull/212)
 
 ### A bit of performance here and there
-
 [Backend systems need to be fast. 😉](https://github.com/Quansight-Labs/uarray/pull/212)
 
 ## In `unumpy`
-
 More coverage of the NumPy API, mainly. 🏃‍
 
 ## [`udiff`](https://github.com/Quansight-Labs/udiff)
-
 There's another part of the [`uarray`](https://uarray.org/) ecosystem now: [`udiff`](https://github.com/Quansight-Labs/udiff). It can perform auto differentiation of any [`unumpy`](https://unumpy.uarray.org/) array.

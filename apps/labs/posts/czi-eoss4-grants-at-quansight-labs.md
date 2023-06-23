@@ -3,14 +3,7 @@ title: 'CZI EOSS4 Grants at Quansight Labs'
 published: August 31, 2021
 authors: [ralf-gommers]
 description: 'We are thrilled to announce that the team at Quansight Labs has been awarded five EOSS Cycle 4 grants to work on several projects within the PyData ecosystem. This post will introduce the successful grantees and their objectives for these two-year long grants.'
-category:
-  [
-    Access-centered,
-    Developer workflows,
-    Funding,
-    OSS Experience,
-    PyData Ecosystem,
-  ]
+category: [Access-centered, Developer workflows, Funding, OSS Experience, PyData Ecosystem]
 featuredImage:
   src: /posts/czi-eoss4-grants-at-quansight-labs/blog_feature_org.svg
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
@@ -28,12 +21,11 @@ CZI’s Essential Open Source Software for Science program supports software mai
 Today, we are thrilled to announce that the team at Quansight Labs [has been awarded](https://chanzuckerberg.com/newsroom/czi-awards-16-million-for-foundational-open-source-software-tools-essential-to-biomedicine/) five EOSS Cycle 4 grants to work on several projects within the PyData ecosystem. This post will introduce the successful grantees and their objectives for these two-year long grants.
 
 ## Maintenance & Extension of Scikit-learn: Machine Learning in Python
-
 **PI: Thomas Fan**
 
 This proposal aims to decrease the maintenance backlog of scikit-learn and increase responsiveness to issues and new pull-requests. The team expects that reducing the number of open issues and response and pull-request review timelines will increase community and contributor engagement in the long run.
 
-In addition to day-to-day maintenance, this grant will also enable the scikit-learn team to focus on adding new features, such as:
+In addition to day-to-day maintenance, this grant will also enable the  scikit-learn team to focus on adding new features, such as:
 
 - Column name consistency
 - `ColumnTransformer` outputting pandas DataFrames
@@ -47,7 +39,6 @@ As part of the project's commitment to Diversity, Equity and Inclusion, the team
 [CZI proposal page](https://chanzuckerberg.com/eoss/proposals/maintenance-extension-of-scikit-learn-machine-learning-in-python/)
 
 ## SymPy: Improving Foundational Open Source Symbolic Mathematics for Science
-
 **PIs: Aaron Meurer, Jason Moore, and Oscar Benjamin**
 
 This proposal focuses on [SymPy](https://www.sympy.org/) maintenance and improvements in three critical areas:
@@ -68,10 +59,9 @@ Lastly, Aaron Meurer will focus on improving the high-level documentation of Sym
 [CZI proposal page](https://chanzuckerberg.com/eoss/proposals/sympy-improving-foundational-open-source-symbolic-mathematics-for-science/)
 
 ## Advancing an inclusive culture in the scientific Python ecosystem
-
 **PI: Melissa Mendonça**
 
-This joint proposal from [NumPy](https://numpy.org/), [SciPy](https://scipy.org/), [Matplotlib](https://matplotlib.org/), and [Pandas](https://pandas.pydata.org/) was submitted as part of a supplemental program called [Essential Open Source Software Diversity & Inclusion](https://cziscience.medium.com/advancing-diversity-and-inclusion-in-scientific-open-source-eaabe6a5488b).
+ This joint proposal from [NumPy](https://numpy.org/), [SciPy](https://scipy.org/), [Matplotlib](https://matplotlib.org/), and [Pandas](https://pandas.pydata.org/) was submitted as part of a supplemental program called [Essential Open Source Software Diversity & Inclusion](https://cziscience.medium.com/advancing-diversity-and-inclusion-in-scientific-open-source-eaabe6a5488b).
 Melissa Mendonça will lead this effort as the PI and include 1-2 maintainers of each project to help set priorities and guide the work, targeted towards Diversity, Equity and Inclusion (DEI).
 
 This grant will help create two Contributor Experience Lead positions, which will involve a mixture of technical and community work with a particular focus on DEI.
@@ -89,7 +79,6 @@ Another goal of this project is to align documentation across the involved proje
 [CZI proposal page](https://chanzuckerberg.com/eoss/proposals/advancing-an-inclusive-culture-in-the-scientific-python-ecosystem/)
 
 ## Inclusive and Accessible Scientific Computing in the Jupyter Ecosystem
-
 **PI: Tania Allard**
 
 A critical aspect of open-source Scientific Computing is to enable projects to be accessible to all users. This grant was awarded to Jupyter with Tania as PI and Isabela Presedo-Floyd and Tony Fast as other named Quansight Labs members on the proposal to address existing accessibility issues within the Jupyter Ecosystem.
@@ -105,7 +94,6 @@ By improving accessibility for everyone, the team aspires to broaden the Jupyter
 [CZI proposal page](https://chanzuckerberg.com/eoss/proposals/inclusive-and-accessible-scientific-computing-in-the-jupyter-ecosystem/)
 
 ## Papyri: Better documentation for the Scientific Ecosystem in Jupyter
-
 **PI: Matthias Bussonnier**
 
 This proposal focuses on a significant overhaul of the Jupyter and IPython interactive documentation framework with many features currently only available in hosted websites (inline graphs, search, navigation). Such an approach will provide a less distractive coding experience for Jupyter users while making documentation more accessible.
@@ -120,3 +108,4 @@ Therefore, through this grant, the team will make this implementation possible a
 # Join us
 
 All of the projects mentioned in this blogpost are open-source community-led projects across the PyData ecosystem. Thanks to the CZI funding, the Quansight Labs team will enable more contributions, but we welcome and encourage your help. If you have a particular interest in any of these projects or are interested in the work we do at Quansight and Quansight Labs, have a look at our [jobs posting](https://www.quansight.com/careers) (Most of our positions are Remote OK and worldwide) and feel free to contact us.
+

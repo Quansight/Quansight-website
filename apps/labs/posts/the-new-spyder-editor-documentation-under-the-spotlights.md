@@ -47,7 +47,6 @@ conditions and time limitations.
 
 I developed the following approach to tackle the project’s tasks and update the
 documentation to reflect recent information on the current release/s.
-
 1. **Familiarize**: I first started exploring the Spyder IDE’s Editor pane and its features from a user perspective through existing documentation, which helped me better understand the project tasks and have clear insights into any specific needs or gaps in the live documentation.
 2. **Write**: based on the knowledge I acquired via exploration, I started updating the existing content, adding new sections and static images; while taking into consideration any feedback provided by community members or mentors.
 3. **Demonstrate**: lastly, I used the revamped Editor docs as a reference to create Gifs to illustrate written documentation on how to perform certain tasks.
@@ -65,7 +64,7 @@ I am sharing some of the good and not so good lessons that I’ve learned while 
 4. It takes a team to create good and helpful user documentation
 5. Be open to work with different people, and **expect to learn more from those with difficult attitude**
 6. Even during times of disagreement; still be **KIND**!
-7. Remember, _"Editing is done to communicate meaning" Donald Murray - Write to Learn_
+7. Remember, *"Editing is done to communicate meaning" Donald Murray - Write to Learn*
 
 Finally, I hope my work on the Editor's documentation offers a better user
 experience, clearer structure, and an up-to-date information; encouraging users
