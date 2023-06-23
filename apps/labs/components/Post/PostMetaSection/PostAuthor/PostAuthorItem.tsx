@@ -11,11 +11,11 @@ export const PostAuthorItem: FC<TPostAuthorItemProps> = ({
   fullName,
   avatarSrc,
 }) => (
-  <div className="flex">
-    <div className="overflow-hidden mr-[0.8rem] w-[48px] h-[48px] rounded-[50%]">
+  <div className="flex items-center">
+    <div className="overflow-hidden mr-[0.8rem] w-[54px] h-[54px] rounded-[50%]">
       <Picture
-        width={48}
-        height={48}
+        width={54}
+        height={54}
         objectFit="cover"
         imageSrc={avatarSrc}
         imageAlt={nickName}

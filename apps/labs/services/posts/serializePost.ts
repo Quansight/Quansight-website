@@ -40,7 +40,7 @@ export const serializePost = async (
   const postAuthors: TPostAuthor[] = data.authors.map((authorName: string) => {
     const foundAuthor = authors.find((author) => author.slug === authorName);
     if (!foundAuthor) {
-      throw Error(`Author '${authorName}' is not in the database`);
+      throw Error(`Author '${authorName}' is not defined in Storyblok`);
     }
     return {
       avatarSrc: foundAuthor.content.image.filename,

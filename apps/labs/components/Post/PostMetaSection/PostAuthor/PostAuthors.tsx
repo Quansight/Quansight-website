@@ -9,12 +9,12 @@ export interface TPostAuthorsProps {
 
 export const PostAuthors: FC<TPostAuthorsProps> = ({ authors }) => {
   return (
-    <>
+    <div className="grid grid-cols-1 gap-4 gap-y-6 sm:grid-cols-2 md:grid-cols-3">
       {authors.map((author, i) => (
         <div key={i}>
           <PostAuthorItem {...author} />
         </div>
       ))}
-    </>
+    </div>
   );
 };

@@ -43,6 +43,8 @@ export const FeaturedPosts: FC<TFeaturedPostsProps> = ({ posts }) => {
                 By {post.meta.authors[0].nickName}
                 {post.meta.authors.length > 1 &&
                   `+ ${post.meta.authors.length - 1} more`}
+              </p>
+              <p className="font-sans text-[1.2rem] font-normal leading-[2.7rem]">
                 {post.meta.published}
               </p>
             </div>
