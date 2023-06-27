@@ -160,10 +160,8 @@ At runtime, before the control flow is returned to the interpreter, `__exc_conv`
 
 I encourage anyone interested in further details to read the comments left on `callconv.py::CPUCallConv` ([ref](https://github.com/numba/numba/blob/c9cc06ba1410aff242764ffde8387a1bef2180ae/numba/core/callconv.py#L411-L444)).
 
-### Limitations and future work
+## Limitations and future work
 
 Numba has a [page](https://numba.readthedocs.io/en/stable/reference/pysupported.html#exception-handling) describing what is supported in exception handling. Some work still needs to be done to support exceptions to its full extent.
-
-### Conclusion
 
 We would like to thank Bodo for sponsoring this work and the Numba core developers and community for reviewing this work and the useful insights given during code review.
