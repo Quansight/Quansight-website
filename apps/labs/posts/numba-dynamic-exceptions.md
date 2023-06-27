@@ -96,7 +96,7 @@ The return code is one of the `RETCODE_*` constants in the [callconv.py](https:/
 <p align="center">
     <img
      alt="Control flow of execution when an exception is raised"
-     src="/posts/python-packaging-where-to-next/unified_workflow_tool.png" />
+     src="/posts/numba-dynamic-exceptions/diagram.png" />
     <br /><i>Figure contains a high-level illustration of the control flow
     when a Numba function raises an exception.</i>
 </p>
