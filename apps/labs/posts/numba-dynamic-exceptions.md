@@ -93,12 +93,6 @@ retcode_t (<Python return type>*, excinfo_t **, ... <Python arguments>)
 
 The return code is one of the `RETCODE_*` constants in the [callconv.py](https://github.com/numba/numba/blob/main/numba/core/callconv.py#L47-L55) file.
 
-<img
-src="/posts/numba-dynamic-exceptions/diagram.png"
-alt="Control flow of execution for an exception"
-<figcaption align = "center">Figure contains a high-level illustration of the control flow when a Numba function raises an exception</figcaption>
-/>
-
 <p align="center">
     <img
      alt="Control flow of execution when an exception is raised"
