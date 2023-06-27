@@ -529,10 +529,12 @@ more details about `.mdx` please see:
 - <https://mdxjs.com/>
 - <https://github.com/hashicorp/next-mdx-remote>
 
-Each `posts` directory also contains a `categories.json` file
-([Labs file](./apps/labs/posts/categories.json) and
-[Consulting file](./apps/consulting/posts/categories.json)) containing the post
-categories. The formats of these `categories.json` files are currently **not**
+Each site has a separate JSON file that defines the blog categories for that site:
+
+- [Labs categories.json](./apps/labs/posts/categories.json)
+- [Consulting categories.json](./apps/consulting/posts/categories.json)
+
+The formats of these `categories.json` files are currently **not**
 the same:
 
 - For the Labs blog, `categories.json` is an array of case-sensitive strings.
