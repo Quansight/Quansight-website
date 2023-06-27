@@ -4,7 +4,7 @@ published: December 21, 2022
 author: pavithra-eswaramoorthy
 description: >
   We’re excited to announce a new chapter for Nebari, formerly known as QHub, as it evolves into an independent, community-led project, with a fresh new look!
-category: [Jupyter, Open Source Software]
+category: [Jupyter, Open Source Software, Scalable Computing]
 featuredImage:
   src: /posts/evolving-qhub-to-nebari/5-nebari-logo.png
   alt: 'Nebari logo'

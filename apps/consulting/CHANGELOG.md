@@ -1,3 +1,60 @@
+May 31, 2023
+
+Via Storyblok:
+
+- Add open-source-services page
+  - Page itself
+  - Header nav
+  - Footer nav
+  - Link blok from /consulting
+  - Link blok from homepage
+- Adjust 'other service areas' heading text on
+  Data Engineering & MLOps services page
+- Alphabetize service areas in header nav and footer
+
+May 23, 2023
+
+Via Storyblok:
+
+- Add Camp Quansight video & adjacent content to Careers page
+
+April 27, 2023
+
+Via Storyblok:
+
+- Revise text copy on homepage
+  - Switch to Intertwined Article component
+  - Change to @marsbarlee's new illustrations
+
+April 11, 2023
+
+Via Storyblok:
+
+- Recreate the Board List Item for the 'Infrastructure,
+  Scaling & Acceleration' tile on `/consulting`, to fix
+  the incorrect rendered link as reported in #716
+- Revise Ashley's title to 'COO'
+- Revise header navigation to incorporate redesign and
+  inclusion of link to new Nebari Services page
+- Add 'Nebari Install & Support' link to site footer
+- Revise Jupyter Technologies services page, QHub->Nebari
+  - Rename 'QHub & JupyterHub' tile heading to 'Nebari & JupyterHub'
+    and update the icon to match
+  - Remove the QHub logo from the logo spread and update the
+    Nebari placeholder logo to the actual logo
+
+March 27, 2023
+
+Via Storyblok:
+
+- Change homepage hero to be green at all screen sizes
+
+March 24, 2023
+
+Via Storyblok:
+
+- Fix glitched asset reference for homepage hero on mobile
+
 March 19, 2023
 
 Via Storyblok:
