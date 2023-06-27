@@ -117,11 +117,11 @@ def func():
     raise ValueError('exc message')
 ```
 
-The triple `(ValueError, 'exc message', location)` is pickled and serialized to the [LLVM module](https://llvm.org/docs/LangRef.html#module-structure) as a constant string. When the exception is raised, this same serialized string is unpickled by the interpreter and a frame is created for the exception. This is done in `_helperlib.c::numba_do_raise` ([ref](https://github.com/numba/numba/blob/39fc546dda0a21b90432e60f3c5e8c34f7892024/numba/_helperlib.c#L995-L1025)).
+The triple `(ValueError, 'exc message', location)` is pickled and serialized to the [LLVM module](https://llvm.org/docs/LangRef.html#module-structure) as a constant string. When the exception is raised, this same serialized string is unpickled by the interpreter (1) and a frame is created for the exception (2).
 
 ### Dynamic Exceptions
 
-To support dynamic exceptions, we reuse all the existing fields and introduce two new ones. 
+To support dynamic exceptions, we reuse all the existing fields and introduce two new ones.
 
 - A pointer (`i8*`) to a pickled string containing static information
 - String size (`i32`)
@@ -139,13 +139,15 @@ def dyn_exc_func(s: str):
 
 For each dynamic exception, Numba will generate a function that boxes native values into Python types. In the example above, `__exc_conv` will be generated automatically:
 
-```c
-def __exc_conv(s: native_string, i: int64):
+```python
+def __exc_conv(s: native_string, i: int64) -> Tuple[str, int]:
     # convert
-    # * native string -> Python string
-    # * int64 -> Python int
-    ...
+    py_string: str = box(s)
+    py_int: int = box(i)
+    return (py_string, py_int)
 ```
+
+The code mentioned earlier is used for illustrative purposes. However, in practice, `__exc_conv` is implemented as native code.
 
 The `excinfo` struct will be filled with:
 
@@ -155,12 +157,21 @@ The `excinfo` struct will be filled with:
 - A pointer to `__exc_conv`
 - Number of dynamic arguments: `2`
 
-At runtime, before the control flow is returned to the interpreter, `__exc_conv` is called to convert native `string/int` values into Python `str/int` types.
+During runtime, just before the control flow is returned to the interpreter, function `__exc_conv` is invoked to convert native `string/int` values into their equivalent Python `str/int` types. At this stage, the interpreter also unpickles constant information, and both static and dynamic arguments are combined into a unified list (3).
 
 I encourage anyone interested in further details to read the comments left on `callconv.py::CPUCallConv` ([ref](https://github.com/numba/numba/blob/c9cc06ba1410aff242764ffde8387a1bef2180ae/numba/core/callconv.py#L411-L444)).
+
+
+(3) https://github.com/numba/numba/blob/82d3cbb8818b43dc66e5dd4bb38355eaf25131be/numba/core/serialize.py#L64-L73
 
 ## Limitations and future work
 
 Numba has a [page](https://numba.readthedocs.io/en/stable/reference/pysupported.html#exception-handling) describing what is supported in exception handling. Some work still needs to be done to support exceptions to its full extent.
 
 We would like to thank Bodo for sponsoring this work and the Numba core developers and community for reviewing this work and the useful insights given during code review.
+
+## References
+
+* (1) [`numba/core/serialize.py::_numba_unpickle`](https://github.com/numba/numba/blob/82d3cbb8818b43dc66e5dd4bb38355eaf25131be/numba/core/serialize.py#L30-L49)
+* (2) [`numba/_helperlib.c::numba_do_raise`](https://github.com/numba/numba/blob/39fc546dda0a21b90432e60f3c5e8c34f7892024/numba/_helperlib.c#L995-L1025)
+* (3) [`numba/core/serialize.py::runtime_build_excinfo_struct`](https://github.com/numba/numba/blob/82d3cbb8818b43dc66e5dd4bb38355eaf25131be/numba/core/serialize.py#L64-L73)
