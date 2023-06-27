@@ -93,14 +93,7 @@ retcode_t (<Python return type>*, excinfo_t **, ... <Python arguments>)
 
 The return code is one of the `RETCODE_*` constants in the [callconv.py](https://github.com/numba/numba/blob/main/numba/core/callconv.py#L47-L55) file.
 
-```{mermaid}
-sequenceDiagram
-    Interpreter->>JIT: Call jitted function (1)
-    activate JIT
-    JIT->>JIT: Raise Exception (2)
-    JIT->>Interpreter: Return control flow to interpreter (3)
-    deactivate JIT
-```
+![Figure contains a high-level illustration of the control flow when a Numba function raises an exception](/apps/labs/public/posts/numba-dynamic-exceptions/diagram.png "control flow of execution for an exception")
 
 ### Static Exceptions
 
