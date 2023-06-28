@@ -12,8 +12,6 @@ hero:
   imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
-# PyCon US 2023 - An action-packed week
-
 A few weeks ago, I had the great opportunity of traveling to Salt Lake City,
 UT to attend the biggest worldwide Python conference, PyCon US. After about
 20 hours of traveling from Berlin to Utah through Frankfurt and Denver, I arrived
@@ -96,4 +94,4 @@ sponsoring me and enabling me to be there!
 
 
 > I don't know about the rest of you... I came for the language, but I stayed for the community.
-> *- Brett Cannon*
+_~ Brett Cannon_
