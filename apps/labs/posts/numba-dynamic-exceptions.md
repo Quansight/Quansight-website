@@ -105,9 +105,9 @@ The return code is one of the `RETCODE_*` constants in the [callconv.py](https:/
 
 When an exception is raised, the struct `excinfo_t**` is filled with a pointer to a struct describing the raised exception. Before Numba 0.57, this struct contained three fields:
 
-- A pointer (`i8*`) to a pickled string
-- String size (`i32`)
-- Hash (`i8*`) of this same string
+- A pointer (`i8*`) to a pickled string.
+- String size (`i32`).
+- Hash (`i8*`) of this same string.
 
 Take for instance the following snippet of code:
 
@@ -123,13 +123,13 @@ The triple `(ValueError, 'exc message', location)` is pickled and serialized to 
 
 To support dynamic exceptions, we reuse all the existing fields and introduce two new ones.
 
-- A pointer (`i8*`) to a pickled string containing static information
-- String size (`i32`)
-- The third argument (`i8*`), which was previously used for hashing is now used to hold a list of native values
+- A pointer (`i8*`) to a pickled string containing static information.
+- String size (`i32`).
+- The third argument (`i8*`), which was previously used for hashing is now used to hold a list of native values.
 - A pointer to a function (`i8*`) that knows how to convert native values back to Python values. This is called [boxing](https://numba.pydata.org/numba-doc/dev/extending/interval-example.html#boxing-and-unboxing).
-- A flag (`i32`) to signal whether an exception is static or dynamic. A value greater than zero not only indicates whether it is a dynamic exception, but also the number of runtime arguments
+- A flag (`i32`) to signal whether an exception is static or dynamic. A value greater than zero not only indicates whether it is a dynamic exception, but also the number of runtime arguments.
 
-Using Python code, dynamic exceptions work as follow:
+Using Python code, dynamic exceptions work as follows:
 
 ```python
 @jit(nopython=True)
@@ -151,24 +151,21 @@ The code mentioned earlier is used for illustrative purposes. However, in practi
 
 The `excinfo` struct will be filled with:
 
-- Pickled string of compile-time information: (exception type, static arguments, location)
-- String size
-- A list of dynamic arguments: `[native string, int64]`
-- A pointer to `__exc_conv`
-- Number of dynamic arguments: `2`
+- Pickled string of compile-time information: (exception type, static arguments, location).
+- String size.
+- A list of dynamic arguments: `[native string, int64]`.
+- A pointer to `__exc_conv`.
+- Number of dynamic arguments: `2`.
 
 During runtime, just before the control flow is returned to the interpreter, function `__exc_conv` is invoked to convert native `string/int` values into their equivalent Python `str/int` types. At this stage, the interpreter also unpickles constant information, and both static and dynamic arguments are combined into a unified list (3).
 
 I encourage anyone interested in further details to read the comments left on `callconv.py::CPUCallConv` ([ref](https://github.com/numba/numba/blob/c9cc06ba1410aff242764ffde8387a1bef2180ae/numba/core/callconv.py#L411-L444)).
 
-
-(3) https://github.com/numba/numba/blob/82d3cbb8818b43dc66e5dd4bb38355eaf25131be/numba/core/serialize.py#L64-L73
-
 ## Limitations and future work
 
-Numba has a [page](https://numba.readthedocs.io/en/stable/reference/pysupported.html#exception-handling) describing what is supported in exception handling. Some work still needs to be done to support exceptions to its full extent.
+Numba has a [page](https://numba.readthedocs.io/en/stable/reference/pysupported.html#exception-handling) describing what is supported in exception handling. Some work still needs to be done to support exceptions to their full extent.
 
-We would like to thank Bodo for sponsoring this work and the Numba core developers and community for reviewing this work and the useful insights given during code review.
+We would like to thank [Bodo](https://bodo.ai) for sponsoring this work and the Numba core developers and community for reviewing this work and the useful insights given during code review.
 
 ## References
 
