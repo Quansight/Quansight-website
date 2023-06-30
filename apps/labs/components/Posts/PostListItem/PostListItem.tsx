@@ -52,7 +52,7 @@ export const PostListItem: FC<TPostListItem> = ({ post, variant }) => (
       <p className="text-[1.2rem] font-normal leading-[2.7rem] text-black text-sans">
         By {post.meta.authors[0].fullName}
         {post.meta.authors.length > 1 &&
-          ` +${post.meta.authors.length - 1} more`}{' '}
+          ` + ${post.meta.authors.length - 1} more`}{' '}
       </p>
       <p className="text-[1.2rem] font-normal leading-[2.7rem] text-black text-sans">
         {post.meta.published}
