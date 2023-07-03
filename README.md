@@ -18,13 +18,13 @@
   - [Running the website locally 🖥](#running-the-website-locally-)
   - [Adding new components 🧩](#adding-new-components-)
   - [Adding new queries 🗃](#adding-new-queries-)
-  - [GitHub-based blog workflow (Labs blog) 💻](#github-based-blog-workflow-labs-blog-)
-    - [Structure of the blog post](#structure-of-the-blog-post)
+  - [GitHub-based blog workflow (Labs and Consulting blogs) 💻](#github-based-blog-workflow-labs-and-consulting-blogs-)
+    - [Structure of a blog post](#structure-of-a-blog-post)
       - [Example of blog post meta section](#example-of-blog-post-meta-section)
     - [Adding a new blog post 📝](#adding-a-new-blog-post-)
     - [Adding a new blog category](#adding-a-new-blog-category)
     - [Adding new components for usage inside `.mdx` posts](#adding-new-components-for-usage-inside-mdx-posts)
-    - [Specifications for Hero images](#specifications-for-hero-images)
+    - [Specifications for Hero images in Storyblok](#specifications-for-hero-images-in-storyblok)
 
 ## Orientation 🗺
 
@@ -39,11 +39,19 @@ Here is some basic info to help orient you to this repo.
   (requires login).
   - But Labs and Consulting **blog posts** live under `./apps/labs/posts` and
     `./apps/consulting/posts`, respectively.
+- **Static content** for each site lives under `./apps/labs/public` and
+  `./apps/consulting/public`, respectively.
+  - The `public` path element is removed when the site is built: for example, a
+    file located at `./apps/labs/public/favicon.png` in the repository will be
+    accessible at `/favicon.png` in a build/deployment of the Labs site.
 - The websites are hosted and deployed via
   [Vercel](https://vercel.com/quansight) (requires login).
 - The repo's default branch is `develop`, **not** `main`.
   - Most pull requests (including Labs blog posts) will be opened against
     `develop`.
+  - Branch protection is enabled on the `develop` branch, and each PR to
+    `develop` requires at least one approving review by someone _other_ than the
+    PR creator in order to merge.
   - `main` is used for production (i.e., the live websites).
   - You can think of `develop` as staging.
   - Only hotfixes and releases are to be opened against `main`.
@@ -88,29 +96,23 @@ There are primarily two types of website changes, each with its process:
 - Content changes ([Storyblok](https://www.storyblok.com/home), our CMS - Content Management System)
 - Code changes (this GitHub repo)
 
-Note that Labs blog posts are a bit of an exception. Categorically they are
-content changes, but the content lives in the Git repo -- so technically they are
-code changes, and they follow the process for code changes.
-
-> **Note**
-> Once [issue #396](https://github.com/Quansight/Quansight-website/issues/396)
-> is implemented, the Consulting blog posts will be
-> converted to use the same machinery as the Labs posts, and after that
-> time the Consulting blog posts will _also_ follow the process for code changes.
+Note that blog posts for both sites are a bit of an exception. Categorically
+they are content changes, but the content lives in the Git repo -- so
+technically they are code changes, and they follow the process for code changes.
 
 This section will cover the process for each type of change.
 
 ### Content changes (Storyblok) 📰
 
-Content in Storyblok moves through several stages: drafting -> reviewing -> ready to
-publish -> published -> deployed.
-It's confusing, but "published" in our Storyblok
-configuration does not mean that the content has gone live on the
+Content in Storyblok moves through several stages: drafting -> reviewing ->
+ready to publish -> published -> deployed. It's confusing, but "published" in
+our Storyblok configuration does not mean that the content has gone live on the
 corresponding public website. However, you should never publish any content in
 Storyblok if it is not ready for public presentation. In our configuration,
 publishing content in Storyblok is a signal to the rest of the team that says:
-this content is ready at any time to appear on the public website. **If it's not
-ready, don't hit the publish button.**
+this content is ready at any time to appear on the public website, whenever the
+next production deployment is executed. **If it's not ready, don't hit the publish
+button.**
 
 The Storyblok process is covered in more detail in the [GitHub repo's wiki](https://github.com/Quansight/Quansight-website/wiki).
 A simplified version is presented here.
@@ -146,24 +148,24 @@ same. There are three major stages, each with distinct steps.
       get the Vercel preview URL from the Slack channel.)
    3. If it all looks good, coordinate with the dev team to merge the PR to the
       `main` branch.
-   4. Once that PR is merged to `main`, wait for the production build to finish
-      deploying (check our [internal Slack channel][slack-channel] for notifications), then check your changes
+   4. Once that PR is merged to `main`, wait for the production deployment to finish
+      (check our [internal Slack channel][slack-channel] for notifications), then check your changes
       against the live site. You may need to clear your browser's cache before
       you can see your changes.
 
 ### Code changes (GitHub) 💻
 
-Code changes move through three stages, each of which corresponds to a branch in
-git: a feature branch (PR), then the `develop` branch, then `main`. When your
+Code changes move through four stages, each of which corresponds to a branch in
+git: a feature branch (PR), then the `develop` branch, then a release branch, then `main`. When your
 code gets merged to the `main` branch, Vercel deploys it to the public website.
 
 > **Note**
 > You should never merge your code into the `develop` branch unless it's ready for
 > deployment (via merge to `main`).
-> Putting your code into the `develop` branch is a signal to the rest of your team that says:
+> Putting your code into the `develop` branch is a signal to the rest of the team that says:
 > this code is ready to run on the public website.
 
-These are the concrete steps to follow to move your code from branch to branch:
+These are the concrete steps to follow to get a code change merged into `develop`:
 
 1. Open a pull request against the `develop` branch. This will kick off preview
    deployments in Vercel. Vercel will add a comment to your pull request with
@@ -172,11 +174,18 @@ These are the concrete steps to follow to move your code from branch to branch:
    or both sites.
 3. Once your pull request has been reviewed and approved, commit it to the
    `develop` branch.
-   - Consider doing a
-     [squash-merge](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits),
-     especially if your pull request is relatively small, to keep a
-     clean commit history.
-4. When you want your code change to go live, cut a release branch from
+   - Please use a
+     [squash-merge](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits)
+     for all pull requests merged to `develop`. This provides two benefits:
+     1. The `develop` branch history will remain clean, regardless of how
+        complex the pull request is, because only a single commit will be
+        created there.
+     2. The full, detailed commit history will remain available for later
+        inspection in the merged-and-closed pull request, if needed.
+
+These are the concrete steps that the website maintenance team will follow to merge code from `develop` to `main`, leading to deployment on the public sites:
+
+1. Cut a release branch named `release-YYYYMMDD` (using the current date) from
    `develop`, then open a pull request to merge the release branch into `main`.
    From the command line:
 
@@ -189,14 +198,29 @@ These are the concrete steps to follow to move your code from branch to branch:
 
    Be sure to use `main` as the base branch of your PR and not `develop`.
 
-5. Review both preview URLs that Vercel will add to your Pull Request.
-6. If all looks good and your Pull Request has gotten approval, then merge it
-   into `main`. This will kick off a production deployment on Vercel. Check the live
+   GitHub's UI will likely indicate that the release branch is out of date
+   relative to the base branch (`main`). This is because the merge commits to
+   `main` from prior release branches are not present on `develop`. **Ignore
+   this. Do not update against the base branch.**
+
+2. Review both preview URLs that Vercel will add to your pull request.
+   - If any last-minute fixes are needed, commit them to the release branch using a commit message starting with `[HOTFIX] -`
+3. Once all looks good, merge the release PR
+   into `main` using a **standard merge** (_NOT_ a squash merge). This will kick off a production deployment on Vercel. Check the live
    public websites once the deployment is finished (Vercel will send a notification
-   to the [Slack channel][slack-channel]. You may need to clear your browser's cache before you
+   to the [Slack channel][slack-channel]). You may need to clear your browser's cache before you
    can see your changes.
-7. Delete the release branch if GitHub did not automatically delete it when you
-   merged your Pull Request.
+
+If no hotfixes were applied during the release, delete the release branch (if
+GitHub did not automatically delete it for you when you merged the PR).
+
+If hotfixes _were_ applied during the release, they need to be back-merged into `develop`:
+
+1. Un-delete the release branch, if GitHub deleted it automatically.
+2. Create another pull request for the release branch, but this time using `develop` as the base branch.
+3. Review the Vercel preview deployments once they complete.
+4. Once all looks good, merge the back-merge PR into `develop` using a **standard merge** (_not_ a squash merge).
+5. Delete the back-merge branch if GitHub didn't delete it for you.
 
 ## A word about the word "preview" 🤔
 
@@ -220,7 +244,7 @@ Storyblok API when Next.js preview mode is activated versus `version=published` 
 is not.
 
 Finally, Vercel has preview URLs and a preview environment. Preview URLs point
-to builds (or deployments) that were performed in a preview environment.
+to deployments that were performed in a preview environment.
 
 It would be nice if all of these different uses of preview mapped cleanly to
 each other, but they do not. For example, you may be on a Vercel preview URL,
@@ -267,7 +291,7 @@ Vercel. When this Vercel webhook is called, it does a preview deployment based
 on the current commit of the `develop` branch on GitHub.
 
 The Storyblok preview iframe is configured to show content previews against the
-Vercel URL that points to the latest build off the `develop` branch. This was
+Vercel URL that points to the latest deployment based on the `develop` branch. This was
 done to help ensure that if there are any possible issues or conflicts between
 code changes and content changes, they will be caught early on. The Storyblok
 editor automatically passes cache-busting query string parameters (as in
@@ -344,8 +368,8 @@ production environment.
 
 The codebase takes advantage of [Vercel environment
 variables](https://vercel.com/docs/concepts/projects/environment-variables) at
-build time. For example, the preview mode overlay links to the git branch that
-the site was built from (when that environment variable is available at build
+deploy time. For example, the preview mode overlay links to the git branch that
+the site was deployed from (when that environment variable is available at deployment
 time).
 
 ## Ways to view the site at different stages 🔍
@@ -402,27 +426,28 @@ editors to previewing draft content against the `develop` branch to help catch
 any potential code/content conflicts before merging to `main`.
 
 When viewing the site in local development or at a Vercel preview URL, there
-should be a overlay that explains that you are looking at a preview of the site.
+should be an overlay that explains that you are looking at a preview of the site.
 This helps reduce confusion when screenshots are shared. This overlay should not
-be present on a production build of the site.
+be present on a production deployment of the site.
 
 The preview/development environment overlay should allow the user to toggle
 between seeing published versus draft/saved Storyblok content. The overlay should
 change colors to indicate which of the two content preview modes the user is in
-(that is, whether they are seeing draft or published content from Storyblok).
+—that is, whether they are seeing draft (yellow overlay) or published (gray
+overlay) content from Storyblok.
 
 The above should hold _except_ when the user is using the Storyblok web
 interface; then the website should always be in "draft" mode, showing saved (but
-not published) content. And as mentioned previously, it should show this content
-against the latest code from the `develop` branch (not the `main` branch).
-Related: The content team shouldn't have to think about which URL to use with
-the Storyblok editor. It should be only one default URL, and this URL should
-show draft content against the latest code in `develop`.
+not published) content (yellow overlay). And as mentioned previously, it should
+show this content against the latest code from the `develop` branch (not the
+`main` branch). Related: The content team shouldn't have to think about which
+URL to use with the Storyblok editor. It should be only one default URL, and
+this URL should show draft content against the latest code in `develop`.
 
 Hitting the publish button in Storyblok should not push that content to the
-public-facing site; rather, it should queue up the content for the next production deployment.
-This prevents bypassing any GitHub workflows that have been
-set up for quality control.
+public-facing site; rather, it should queue up the content for the next
+production deployment. This prevents bypassing any GitHub workflows that have
+been set up for quality control.
 
 Content that is marked as "published" in Storyblok should be ready to be pushed
 to production at any time. Likewise, code that is merged into the `develop`
@@ -480,17 +505,17 @@ environment's dependencies will match the production environment.
    apps.
 4. Add Storyblok raw data types to the `/apps/.../types/storyblok` folder.
 5. Import these raw data types to the `/apps/.../types/storyblok/rawBlok.ts` file
-   and add them to the collective `TRawBlock` type.
+   and add them to the collective `TRawBlok` type.
 6. Add Storyblok props mapper to `/apps/.../components/BlokProvider/mappers`
    folder.
 7. Import this props mapper to
-   `/apps/.../components/BlockProvider/utils/getPropsByType.ts` file and add the
+   `/apps/.../components/BlokProvider/utils/getPropsByType.ts` file and add the
    case to the switch statement.
 8. Import the Next component to the
-   `/apps/.../components/BlockProvider/componentsMap.ts` file and add it to the
+   `/apps/.../components/BlokProvider/componentsMap.ts` file and add it to the
    `componentsMap` variable.
 9. Import the Next.js component types to the
-   `/apps/.../components/BlockProvider/types.ts` file, add the component name to the
+   `/apps/.../components/BlokProvider/types.ts` file, add the component name to the
    `ComponentType` `enum` and add the props types to the `TBlokComponentPropsMap`
    type.
 
@@ -504,67 +529,111 @@ You can fetch data from Storyblok directly using queries. To add the query:
 3. Create the data retrieval function in the `/apps/.../api/utils` folder using the
    function, type, and hook created by the code gen script.
 
-## GitHub-based blog workflow (Labs blog) 💻
+## GitHub-based blog workflow (Labs and Consulting blogs) 💻
 
-All the **Quansight Labs** blog posts are located inside `apps/labs/post`,
-and therefore, any new posts _must_ be added to this same folder.
+All the blog posts for both websites are located inside `./apps/labs/posts`
+and `./apps/consulting/posts`, and therefore, any new posts _must_ be added to
+these same folders.
 
 > **Note**
 > For now, all posts should be
 > contributed using a branch-and-merge strategy within the website repo itself,
 > instead of a fork-and-merge strategy. This may change in the future.
 
-Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). The
-`posts` directory also contains a [`categories.json`
-file](./apps/labs/posts/categories.json) containing the posts categories.
-
-The `categories.json` file is also used for displaying category filters on the
-`/blog` page so after adding a new category, it will also be visible on that
-page.
-
-For more details about `.mdx` please see:
+Every post is an [`.mdx` file](https://mdxjs.com/docs/using-mdx/), even for source files with a `.md` extension. For
+more details about `.mdx` please see:
 
 - <https://mdxjs.com/>
 - <https://github.com/hashicorp/next-mdx-remote>
 
-### Structure of the blog post
+Each site has a separate JSON file that defines the blog categories for that site:
+
+- [Labs categories.json](./apps/labs/posts/categories.json)
+- [Consulting categories.json](./apps/consulting/posts/categories.json)
+
+The formats of these `categories.json` files are currently **not**
+the same:
+
+- For the Labs blog, `categories.json` is an array of case-sensitive strings.
+  These strings are used:
+  - As-is in the rendered category list on the main `/blog` page
+  - In a custom slugified format (spaces replaced with `+`) when filtering
+    `/blog` by category
+    - For example, the category `"Beyond PyData"` is slugified as
+      `"Beyond+PyData`"
+    - This category filter is currently **case-sensitive**—URLs with mismatched
+      case in the `category` query parameter will return **no results**
+- For the Consulting blog, `categories.json` is a list of objects, where each
+  object has two `string` properties:
+  - `name`
+    - Should be written with natural capitalization and whitespace
+    - Used as-is (case and whitespace sensitive, and _without_ surrounding quotes) in the post `category` metadata field to associate a
+      post with one or more categories
+    - Converted to all caps for use in the category-selection dropdown on the
+      `/library` page
+  - `value`
+    - Should be written in slugified form and in all lowercase
+      - NOTE: Currently one category, `Infrastructure & HPC`, has a capitalized
+        `value` due to an oversight. We plan to fix this.
+    - Used as-is (**case sensitive**) in the `category` query parameter to
+      `/library`—URLs with mismatched case in the `category` query parameter
+      will return **no results**
+
+The `categories.json` file is also used for displaying category filters on the
+`/blog` page for Labs and the `/library` page for Consulting. So, when a new
+category is added to `categories.json`, it should also automatically render on
+the appropriate page.
+
+### Structure of a blog post
 
 Every post is structured with two main sections: `meta` and `content`.
 The `content` section is the body of the post added in Markdown format.
 The `meta` section is a `YAML` like structure and should be wrapped with `---`
 signs. The meta section contains post-related information like:
 
-- `title` (required) - Title of the blog post. Used also as the title of the page inside
-  `<title></title>` tag
-- `description` (required) - Description of the blog post. Used inside `<meta name="description" />` tag
-- `published` (required) - Publishing date of the blog post. Used also for sorting posts by
-  date (the format should be `Month d, yyyy` for example `January 1, 2023`)
-- `author` (required) - Unique slug of the author (from Storyblok) usually looks like `jon-doe`.
-  Based on this property blog post page will display proper info about the author
-  (and their avatar). The author must be present in Storyblok in order for the
-  post to build without error.
-- `category` (required) - Array of categories for example `[Machine Learning]`. All
-  categories should be the same as in the previously mentioned
-  [`categories.json`](./apps/labs/posts/categories.json) file.
-  **Important note:** categories are case-sensitive.
+- `title` (required) - Title of the blog post. Used also as the title of the
+  page inside `<title></title>` tag
+- `description` (required) - Description of the blog post. Used inside
+  `<meta name="description" />` tag
+- `published` (required) - Publishing date of the blog post. Used also for
+  sorting posts by date (the format should be `Month d, yyyy` for example
+  `January 1, 2023`)
+- `author` (required) - Unique slug of the author (from Storyblok) usually looks
+  like `jon-doe`. Based on this property blog post page will display proper info
+  about the author (and their avatar). The author must be present in Storyblok
+  in order for the post to build without error.
+- `category` (required) - Array of categories for example `[Machine Learning]`.
+  All categories should match entries in the previously mentioned
+  `categories.json` file for the appropriate site. If a category you want to use
+  doesn't exist yet, create it in `categories.json`; however, err on the side of
+  using existing categories where possible. **Important note:** categories are
+  case-sensitive.
 - `featuredImage` (required) - Object with two required properties: `src` and `alt`.
-  - The `src` property
-    is a path to the featured image which is displayed both (a) in the posts gallery on the`/blog`
-    page and (b) in rich social media preview cards (on Twitter, Slack, LinkedIn, etc.). The image should
-    be added to the `apps/labs/public/posts/<post-name>` directory, for example,
-    `apps/labs/public/posts/hello-world-post`. There is no need to provide a full image path,
-    so the path name should start with `/posts/`. This image should have a 2:1 aspect ratio and a minimum height of 627 pixels.
+  - The `src` property is a path to the featured image which is displayed both
+    (a) in the posts gallery on the`/blog` page for Labs and the `/library` page
+    for Consulting, and (b) in rich social media preview cards (on Twitter,
+    Slack, LinkedIn, etc.). The image should be added to the
+    `apps/<site>/public/posts/<post-name>` directory, for example,
+    `apps/<site>/public/posts/hello-world-post`. There is no need to provide a
+    full image path, so the path name should start with `/posts/`. This image
+    should have a 2:1 aspect ratio and a minimum height of 627 pixels.
   - The `alt` property is alternative text for the image.
-- `hero` (required) - the object for the Hero section of the post. This can have two different structures:
-  - The first structure is an object with `imageSrc` and `imageAlt`. The `imageSrc` property is a path to
-    the hero image, which is displayed on the blog post page between the nav bar and the
-    blog heading title. The `imageAlt` property is alternative text for the image.
-    The image should be added to the `apps/labs/public/posts/<post-name>`
-    directory, for example, `apps/labs/public/posts/hello-world-post`.
+- `hero` (required) - The object for the Hero section of the post. This can have
+  two different structures:
+  - The first structure is an object with `imageSrc` and `imageAlt`. The
+    `imageSrc` property is a path to the hero image, which is displayed on the
+    blog post page between the nav bar and the blog heading title. The
+    `imageAlt` property is alternative text for the image. The image should be
+    added to the `apps/<site>/public/posts/<post-name>` directory, for example,
+    `apps/<site>/public/posts/hello-world-post`.
   - The second structure is an object with properties: `imageMobile`,`imageTablet`,
     and `imageDesktop`. Each of these properties also contain `imageSrc` and `imageAlt` properties.
   - For both of these structures, there is no need to provide full image paths,
     so the path names should start with`/posts/`.
+  - **FOR THE CONSULTING BLOG**: Currently we are using a common hero for all
+    posts. The `hero` metadata property should always contain:
+    - `imageSrc: /posts/hero-paris.webp`
+    - `imageAlt: 'Data visualization of Paris city'`
 
 #### Example of blog post meta section
 
@@ -584,28 +653,45 @@ hero:
 
 ### Adding a new blog post 📝
 
-1. Create a new feature branch. Example: `feature/new-hello-world-post`.
-2. Add post feature and hero images to `apps/labs/public/posts/<post-name>`.
-3. Add a new `.md|.mdx` file inside the `app/labs/posts` directory. Make sure to read the
-   [Structure of the blog post section](#structure-of-the-blog-post) in this file to ensure
-   that the post is properly structured.
-4. Commit and push your changes to the repository. For commits please follow the format of the conventional commit.
-   [See](https://www.conventionalcommits.org/en/v1.0.0/)
-5. Create a pull request to the `develop` branch. Make sure to add the `type: content 📝` and `labs 🔭` labels to the PR.
-6. Wait for someone in the website team to review the new blog post. If everything is ok, the PR will be merged to the `develop` branch.
+> **Note** If there is a deadline or other timing consideration for the
+> publication of your post, **please coordinate actively** with the Marketing
+> team (currently @Katebrack and @bskinn) and the website ops team
+> (#qwebsite-ops channel on Slack) from as early as possible to ensure we can
+> meet your requirements.
+
+1. Create a new feature branch off of the `develop` branch. Example:
+   `<site>-blog/new-hello-world-post`.
+2. Add post images (feature, hero, and any for the post body) to
+   `apps/<site>/public/posts/<post-name>`.
+3. Add a new `.mdx` file inside the `app/<site>/posts` directory. Make sure
+   to read the
+   [Structure of the blog post section](#structure-of-the-blog-post) in this
+   file to ensure that the post is properly structured.
+4. Commit and push your changes to the repository. For commits please follow the
+   format of the Conventional Commit. See the
+   [Conventional Commit format](https://www.conventionalcommits.org/en/v1.0.0/).
+5. Create a pull request to the `develop` branch. Make sure to add the
+   `type: content 📝`, `owner: Quansight`, and either `labs 🔭` or
+   `consulting 🤝` labels to the PR.
+6. Wait for someone on the website team to review the new blog post. If
+   everything is ok, the PR will be merged to the `develop` branch. The blog
+   post will then go live with the next production deployment (merge to `main`).
 
 ### Adding a new blog category
 
-1. Create a new feature branch.
-2. Ope the `apps/labs/posts/categories.json` file.
-3. Add a new category to the array. Make sure to follow the same format as the other categories.
-4. Commit and push your changes to the repository. For commits please follow the format of the conventional commit.
-   [See](https://www.conventionalcommits.org/en/v1.0.0/)
-5. Wait for someone in the website team to review the new blog post. If everything is ok, the PR will be merged to the `develop` branch.
+_There used to be separate instructions here for adding a new blog category,
+independent of adding a new blog post that needs that category. This is now
+discouraged; please only add a new blog category as part of a pull request where
+you are adding a blog post that needs it._
 
 ### Adding new components for usage inside `.mdx` posts
 
-1. Open `apps/labs/services/blogAllowedComponents.ts` file
+If the component you need doesn't yet exist in the site codebase, coordinate
+with the site maintenance team (#qwebsite-ops) regarding its implementation.
+
+Once implemented:
+
+1. Open `apps/<site>/services/blogAllowedComponents.ts` file
 2. Import the component from the codebase
 3. Add a new component to `blogAllowedComponents` object.
 
