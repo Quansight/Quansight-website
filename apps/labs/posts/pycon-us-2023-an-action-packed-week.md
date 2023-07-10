@@ -33,19 +33,19 @@ front-end co-conspirator, went up to the podium and, in front of everyone, merge
 PEP 701, which marked a significant milestone in our work toward standardizing and
 improving f-strings.
 
-The next few days passed quickly by. On Thursday I attended the opening reception.
+The next few days passed by quickly. On Thursday I attended the opening reception.
 It was the first time we got to see the expo hall with all the different companies
-and sponsors of PyCon US, which also included our very own [OpenTeams](https://www.openteams.com/).
-Friday was the first day of talks. It started off with a great keynote on how to go
-about talking to people by Ned Batchelder. It really helped me put into perspective
-a lot of my own open-source interactions and how to guard against common pitfalls
-when engaging with open source communities. After that and for the rest of the day I
-attended a lot of exciting talks on topics ranging from WASM and PyScript to Python
-3.11’s specializing adaptive interpreter. I’m also very happy that, this year, for
-the first time, I volunteered as a session chair. This session included three
-amazing presentations on mutation testing by Dave Aronson, molecular simulation by
-Iván Pulido, and one of the killer-features of Python 3.12, the per-interpreter GIL
-by Eric Snow.
+and sponsors of PyCon US, which also included [Quansight](https://quansight.com/) and
+our sister company [OpenTeams](https://www.openteams.com/). Friday was the first day
+of talks. It started off with a great keynote on how to go about talking to people by
+Ned Batchelder. It really helped me put into perspective a lot of my own open-source
+interactions and how to guard against common pitfalls when engaging with open source
+communities. After that and for the rest of the day I attended a lot of exciting
+talks on topics ranging from WASM and PyScript to Python 3.11’s specializing
+adaptive interpreter. I’m also very happy that, this year, for the first time,
+I volunteered as a session chair. This session included three amazing presentations
+on mutation testing by Dave Aronson, molecular simulation by Iván Pulido, and one
+of the killer-features of Python 3.12, the per-interpreter GIL by Eric Snow.
 
 Saturday was another first for me. Attending the [Mentored Sprints for Diverse
 Beginners](https://mentored-sprints.netlify.app/), an event that aims at introducing
@@ -72,7 +72,7 @@ In the first one, Carol Willing talked about Python’s global network and how t
 three basic elements to it: connection, communication, and scale. The second one was
 Deb Nicholson’s update on the PSF and the giving of Community Service Awards. The
 last talk of the day, which also marked the end of the 20th PyCon US, was a trip down
-memory lane by Guido van Rossum, who told us stories about the first python conferences,
+memory lane by Guido van Rossum, who told us stories about the first Python conferences,
 the ones that started it all.
 
 The following three days were mostly about coming together to sprint on a variety of
