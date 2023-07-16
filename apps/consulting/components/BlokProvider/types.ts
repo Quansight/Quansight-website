@@ -7,9 +7,9 @@ import {
   TStatuteProps,
   TTeaserProps,
   TTeamProps,
+  TVideoProps,
 } from '@quansight/shared/ui-components';
 
-import { TBlogArticleProps } from '../BlogArticle/types';
 import { TBoardProps } from '../Board/types';
 import { TBoardListProps } from '../BoardList/types';
 import { TCenteredIntroProps } from '../CenteredIntro/types';
@@ -24,7 +24,6 @@ import { TTestimonialProps } from '../Testimonial/types';
 import { TTextArticleProps } from '../TextArticle/types';
 
 export enum ComponentType {
-  BlogArticle = 'blog-article',
   Board = 'board',
   BoardList = 'board-list',
   CenteredIntro = 'centered-intro',
@@ -44,10 +43,10 @@ export enum ComponentType {
   Teaser = 'teaser',
   Testimonial = 'testimonial',
   TextArticle = 'text-article',
+  Video = 'video',
 }
 
 type TBlokComponentPropsMap = {
-  [ComponentType.BlogArticle]: TBlogArticleProps;
   [ComponentType.Board]: TBoardProps;
   [ComponentType.BoardList]: TBoardListProps;
   [ComponentType.CenteredIntro]: TCenteredIntroProps;
@@ -67,6 +66,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Teaser]: TTeaserProps;
   [ComponentType.Testimonial]: TTestimonialProps;
   [ComponentType.TextArticle]: TTextArticleProps;
+  [ComponentType.Video]: TVideoProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

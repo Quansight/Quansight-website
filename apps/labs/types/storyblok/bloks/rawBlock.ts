@@ -7,6 +7,7 @@ import { TProjectsRawData } from './projects';
 import { TStatuteRawData } from './statute';
 import { TTeamRawData } from './team';
 import { TTeaserRawData } from './teaser';
+import { TVideoRawData } from './video';
 
 export type TRawBlok =
   | TPageHeadingRawData
@@ -17,4 +18,5 @@ export type TRawBlok =
   | TStatuteRawData
   | TTeamRawData
   | TTeaserRawData
-  | THeroRawData;
+  | THeroRawData
+  | TVideoRawData;
