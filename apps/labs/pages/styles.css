@@ -11,3 +11,11 @@
 .navbar-open {
   @apply h-screen overflow-y-hidden;
 }
+
+/*
+  Hide the top-left buttons in the Code Hike block.
+  See: https://codehike.org/docs/ch-code#panels
+*/
+.labs-blog-cell-in-out .ch-frame-buttons {
+  display: none;
+}
