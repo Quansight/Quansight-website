@@ -58,6 +58,8 @@ def process_markdown_file(file_path):
     yaml_data = yaml.safe_load(front_matter.strip())
 
     if 'featuredImage' in yaml_data and yaml_data['featuredImage']['src'].endswith('.svg'):
+        print() # newline
+
         # Get SVG file path, create PNG file path
         svg_url_path = yaml_data['featuredImage']['src']
         svg_path = os.path.join(os.path.dirname(os.path.dirname(file_path)), "public", svg_url_path[1:])
@@ -77,13 +79,7 @@ def process_markdown_file(file_path):
                 f.write(updated_content)
                 print(f"Updated frontmatter in {file_path} to point to {png_url_path}")
 
-            # Delete the SVG file
-            try:
-                os.remove(svg_path)
-                print(f"File {svg_path} deleted successfully.")
-            except OSError as e:
-                print(f"Error deleting file {svg_path}: {e}")
-
+            return svg_path
 
 # Main function
 def main():
@@ -93,9 +89,22 @@ def main():
 
     markdown_dir = sys.argv[1]
     markdown_files = glob.glob(os.path.join(markdown_dir, '*.md')) + glob.glob(os.path.join(markdown_dir, '*.mdx'))
+    svg_paths = []
 
     for file in markdown_files:
-        process_markdown_file(file)
+        svg_path = process_markdown_file(file)
+        if (svg_path):
+            svg_paths.append(svg_path)
+
+    print() # newline
+
+    # Delete SVG files last because some posts reuse the same SVG file
+    for svg_path in set(svg_paths):
+        try:
+            os.remove(svg_path)
+            print(f"File {svg_path} deleted successfully.")
+        except OSError as e:
+            print(f"Error deleting file {svg_path}: {e}")
 
 if __name__ == "__main__":
     main()
