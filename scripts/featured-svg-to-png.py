@@ -52,9 +52,9 @@ def convert_svg_to_png(svg_path, png_path):
 # ...
 def process_markdown_file(file_path):
     with open(file_path, 'r') as f:
-        content = f.read()
+        file_contents = f.read()
 
-    front_matter, content = content.split('---', 2)[1:]
+    front_matter, content = file_contents.split('---', 2)[1:]
     yaml_data = yaml.safe_load(front_matter.strip())
 
     if 'featuredImage' in yaml_data and yaml_data['featuredImage']['src'].endswith('.svg'):
@@ -70,13 +70,10 @@ def process_markdown_file(file_path):
 
         if success:
             # Update the YAML frontmatter to point to the PNG file
-            updated_yaml_data = {**yaml_data}
             png_url_path = svg_url_path[:-4] + '.png'
-            updated_yaml_data['featuredImage']['src'] = png_url_path
-            updated_front_matter = '---\n' + yaml.dump(updated_yaml_data, default_flow_style=False) + '---\n'
-            updated_content = updated_front_matter + content
+            updated_contents = file_contents.replace(svg_url_path, png_url_path, 1)
             with open(file_path, 'w') as f:
-                f.write(updated_content)
+                f.write(updated_contents)
                 print(f"Updated frontmatter in {file_path} to point to {png_url_path}")
 
             return svg_path
