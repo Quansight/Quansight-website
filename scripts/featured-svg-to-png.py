@@ -1,0 +1,98 @@
+import os
+import sys
+import glob
+import yaml
+import pyvips
+
+# This script takes a directory, goes through all blog posts in that directory,
+# and converts any featured images that use SVG to PNG.
+#
+# To use this script:
+#
+# 1. Create an environment and install dependencies:
+#
+#     conda create -n featured-svg-to-png -c conda-forge pyvips pyyaml
+#     conda activate featured-svg-to-png
+#
+# 2. Run the script:
+#
+#     python featured-svg-to-png.py /path/to/mdx-blog-posts
+#
+# 3. Finally, deactivate the environment:
+#
+#     conda deactivate
+
+
+# Function to convert SVG to PNG
+def convert_svg_to_png(svg_path, png_path):
+    try:
+        image = pyvips.Image.thumbnail(svg_path, 1200)
+        image.write_to_file(png_path)
+        print(f"Converted {svg_path} to {png_path}")
+    except Exception as e:
+        print(f"Error converting {svg_path} to PNG: {e}")
+
+# Function to process markdown files with YAML front matter.
+#
+# It looks for a featured image file pathname in the YAML. If the pathname ends
+# with .svg, it opens the file, converts it to .png, then updates the YAML file
+# pathname to point to the PNG file.
+#
+# Assumes the following relationship between the markdown and image file paths:
+# <markdown_path>/../../public/<svg_path>
+#
+# example.md:
+# ---
+# title: Example Blog Post
+# featuredImage:
+#   src: /posts/example-blog-post/feat.svg
+# ---
+# ...
+def process_markdown_file(file_path):
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    front_matter, content = content.split('---', 2)[1:]
+    yaml_data = yaml.safe_load(front_matter.strip())
+
+    if 'featuredImage' in yaml_data and yaml_data['featuredImage']['src'].endswith('.svg'):
+        # Get SVG file path, create PNG file path
+        svg_url_path = yaml_data['featuredImage']['src']
+        svg_path = os.path.join(os.path.dirname(file_path), "..", "public", svg_url_path[1:])
+        png_path = svg_path[:-4] + '.png'
+
+        # Create PNG file from SVG file
+        convert_svg_to_png(svg_path, png_path)
+
+        # Update the YAML frontmatter to point to the PNG file
+        updated_yaml_data = {**yaml_data}
+        png_url_path = svg_url_path[:-4] + '.png'
+        updated_yaml_data['featuredImage']['src'] = png_url_path
+        updated_front_matter = '---\n' + yaml.dump(updated_yaml_data, default_flow_style=False) + '---\n'
+        updated_content = updated_front_matter + content
+        with open(file_path, 'w') as f:
+            f.write(updated_content)
+            print(f"Updated frontmatter in {file_path} to point to {png_url_path}")
+
+        # Delete the SVG file
+        try:
+            os.remove(svg_path)
+            print(f"File {svg_path} deleted successfully.")
+        except OSError as e:
+            print(f"Error deleting file {svg_path}: {e}")
+
+
+# Main function
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: python featured-svg-to-png.py /path/to/markdown/files")
+        sys.exit(1)
+
+    markdown_dir = sys.argv[1]
+    markdown_files = glob.glob(os.path.join(markdown_dir, '*.md')) + glob.glob(os.path.join(markdown_dir, '*.mdx'))
+
+    for file in markdown_files:
+        process_markdown_file(file)
+
+if __name__ == "__main__":
+    main()
