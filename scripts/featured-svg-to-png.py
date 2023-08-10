@@ -29,8 +29,10 @@ def convert_svg_to_png(svg_path, png_path):
         image = pyvips.Image.thumbnail(svg_path, 1200)
         image.write_to_file(png_path)
         print(f"Converted {svg_path} to {png_path}")
+        return True
     except Exception as e:
         print(f"Error converting {svg_path} to PNG: {e}")
+        return False
 
 # Function to process markdown files with YAML front matter.
 #
@@ -58,28 +60,29 @@ def process_markdown_file(file_path):
     if 'featuredImage' in yaml_data and yaml_data['featuredImage']['src'].endswith('.svg'):
         # Get SVG file path, create PNG file path
         svg_url_path = yaml_data['featuredImage']['src']
-        svg_path = os.path.join(os.path.dirname(file_path), "..", "public", svg_url_path[1:])
+        svg_path = os.path.join(os.path.dirname(os.path.dirname(file_path)), "public", svg_url_path[1:])
         png_path = svg_path[:-4] + '.png'
 
         # Create PNG file from SVG file
-        convert_svg_to_png(svg_path, png_path)
+        success = convert_svg_to_png(svg_path, png_path)
 
-        # Update the YAML frontmatter to point to the PNG file
-        updated_yaml_data = {**yaml_data}
-        png_url_path = svg_url_path[:-4] + '.png'
-        updated_yaml_data['featuredImage']['src'] = png_url_path
-        updated_front_matter = '---\n' + yaml.dump(updated_yaml_data, default_flow_style=False) + '---\n'
-        updated_content = updated_front_matter + content
-        with open(file_path, 'w') as f:
-            f.write(updated_content)
-            print(f"Updated frontmatter in {file_path} to point to {png_url_path}")
+        if success:
+            # Update the YAML frontmatter to point to the PNG file
+            updated_yaml_data = {**yaml_data}
+            png_url_path = svg_url_path[:-4] + '.png'
+            updated_yaml_data['featuredImage']['src'] = png_url_path
+            updated_front_matter = '---\n' + yaml.dump(updated_yaml_data, default_flow_style=False) + '---\n'
+            updated_content = updated_front_matter + content
+            with open(file_path, 'w') as f:
+                f.write(updated_content)
+                print(f"Updated frontmatter in {file_path} to point to {png_url_path}")
 
-        # Delete the SVG file
-        try:
-            os.remove(svg_path)
-            print(f"File {svg_path} deleted successfully.")
-        except OSError as e:
-            print(f"Error deleting file {svg_path}: {e}")
+            # Delete the SVG file
+            try:
+                os.remove(svg_path)
+                print(f"File {svg_path} deleted successfully.")
+            except OSError as e:
+                print(f"Error deleting file {svg_path}: {e}")
 
 
 # Main function
