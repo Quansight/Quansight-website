@@ -5,7 +5,7 @@ author: matti-picus
 description: 'The basic installation format for users who install packages via pip is the wheel format. But what about Linux? The first manylinux standard, manylinux1, was based on CentOS5 which has been obsolete since March 2017. So what is next for manylinux, and what manylinux should users and package maintainers use?'
 category: [Beyond PyData, Developer workflows]
 featuredImage:
-  src: /posts/manylinux1-manylinux2010/blog_feature_org.svg
+  src: /posts/manylinux1-manylinux2010/blog_feature_org.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/manylinux1-manylinux2010/blog_hero_org.svg

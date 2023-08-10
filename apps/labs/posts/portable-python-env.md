@@ -7,7 +7,7 @@ description: |
   one machine, and transfering it to a another machine.
 category: [Developer workflows]
 featuredImage:
-  src: /posts/portable-python-env/blog_feature_var1.svg
+  src: /posts/portable-python-env/blog_feature_var1.png
   alt: 'A brown and a black coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/portable-python-env/blog_hero_var1.svg
