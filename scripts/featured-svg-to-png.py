@@ -26,6 +26,8 @@ import pyvips
 # Function to convert SVG to PNG
 def convert_svg_to_png(svg_path, png_path):
     try:
+        # 1200 px width comes from the open graph recommendation
+        # See: https://github.com/Quansight/Quansight-website/blob/3d1e583d6f69f12c11438b5cb2f396421fb900e9/libs/shared/ui-components/src/SocialCard/types.ts#L55
         image = pyvips.Image.thumbnail(svg_path, 1200)
         image.write_to_file(png_path)
         print(f"Converted {svg_path} to {png_path}")
