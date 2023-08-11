@@ -4,6 +4,8 @@ import glob
 import yaml
 import pyvips
 
+# See: https://github.com/Quansight/Quansight-website/pull/753
+#
 # This script takes a directory, goes through all blog posts in that directory,
 # and converts any featured images that use SVG to PNG.
 #
