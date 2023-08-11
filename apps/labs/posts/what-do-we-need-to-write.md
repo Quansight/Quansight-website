@@ -7,7 +7,7 @@ posts be so hard?" and collaboratively wrote up this blog post about what we lea
 from the discussion.'
 category: [Community, Developer workflows]
 featuredImage:
-  src: /posts/what-do-we-need-to-write/blog_feature_var2.svg
+  src: /posts/what-do-we-need-to-write/blog_feature_var2.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/what-do-we-need-to-write/blog_hero_var2.svg

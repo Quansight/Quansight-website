@@ -8,7 +8,7 @@ my annotations on it (in italics) which capture some of the discussion during
 the session and links and context that may be helpful.'
 category: [Packaging]
 featuredImage:
-  src: /posts/packaging_painpoints_in_2021/blog_feature_org.svg
+  src: /posts/packaging_painpoints_in_2021/blog_feature_org.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/packaging_painpoints_in_2021/blog_hero_var1.svg

@@ -6,7 +6,7 @@ making GPUs accessible to the users of these libraries'
 author: amit-kumar
 category: [Array API, Machine Learning]
 featuredImage:
-  src: /posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/blog_feature.svg
+  src: /posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/blog_feature.png
   alt: 'A brown and a black comgin towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/blog_hero.svg

@@ -5,7 +5,7 @@ author: aaron-meurer
 description: 'ndindex is a new library that provides high level objects representing the various objects that can index NumPy arrays. These objects automatically canonicalize under the assumption of NumPy indexing semantics, and can be manipulated with a uniform API. All ndindex types have a .args that can be used to access the arguments used to create the object, and they are all hashable.'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/introducing-ndindex-a-python-library-for-manipulating-indices-of-ndarrays/blog_feature_var1.svg
+  src: /posts/introducing-ndindex-a-python-library-for-manipulating-indices-of-ndarrays/blog_feature_var1.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/introducing-ndindex-a-python-library-for-manipulating-indices-of-ndarrays/blog_hero_org.svg
