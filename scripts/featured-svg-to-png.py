@@ -58,6 +58,8 @@ def process_markdown_file(file_path):
     with open(file_path, 'r') as f:
         file_contents = f.read()
 
+    # TODO look into using something like python-frontmatter
+    # because this parsing could fail if description has three dashes
     front_matter, content = file_contents.split('---', 2)[1:]
     yaml_data = yaml.safe_load(front_matter.strip())
 
