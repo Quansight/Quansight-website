@@ -5,7 +5,7 @@ author: isabela-presedo-floyd
 description: "This blog post is a conversation between two contributors, sharing their observations, experiences, and their hope for a stronger collaboration between design and development in open source."
 category: [Developer workflows, OSS Experience]
 featuredImage:
-  src: /posts/design_in_open_source/blog_feature_var2.svg
+  src: /posts/design_in_open_source/blog_feature_var2.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/design_in_open_source/blog_hero_org.svg

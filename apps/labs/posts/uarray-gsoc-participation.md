@@ -5,7 +5,7 @@ description: "We're quite excited by the number of students who have shown an in
 author: hameer-abbasi
 category: [Funding, PyData Ecosystem]
 featuredImage:
-  src: /posts/uarray-gsoc-participation/blog_feature_org.svg
+  src: /posts/uarray-gsoc-participation/blog_feature_org.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/uarray-gsoc-participation/blog_hero_org.svg

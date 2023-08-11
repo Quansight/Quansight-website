@@ -37,7 +37,7 @@ Here is some basic info to help orient you to this repo.
   - `./libs` holds code shared by both websites.
 - The websites' **content** lives in [Storyblok](https://app.storyblok.com)
   (requires login).
-  - But Labs and Consulting **blog posts** live under `./apps/labs/posts` and 
+  - But Labs and Consulting **blog posts** live under `./apps/labs/posts` and
     `./apps/consulting/posts`, respectively.
 - The websites are hosted and deployed via
   [Vercel](https://vercel.com/quansight) (requires login).
@@ -354,12 +354,12 @@ Throughout the develop-deploy process, there are several ways to view the
 website. The following table summarizes the important ways in which those views
 differ from each other.
 
-| Name                       | How to access          | GitHub branch  | Vercel env | Storyblok API key | Next.js preview? | Storyblok version param | Display top overlay? | Top overlay color | Button to enter/exit preview? |
-| -------------------------- | ---------------------- | -------------- | ---------- | ----------------- | ---------------- | ----------------------- | ------------------- | ---------------- | ----------------------------- |
-| Production                 | .com/.org URL          | `main`         | production | public            | off              | `published`             | No                  | n/a              | n/a                           |
-| Storyblok (yellow overlay)  | via Storyblok UI       | `develop`      | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | No                            |
-| Vercel URL (gray overlay)   | via link to Vercel URL | any non-`main` | preview    | preview           | off              | `published`             | Yes                 | gray             | Yes                           |
-| Vercel URL (yellow overlay) | via enter-preview      | any non-`main` | preview    | preview           | on               | `draft`                 | Yes                 | yellow           | Yes                           |
+| Name                        | How to access          | GitHub branch  | Vercel env | Storyblok API key | Next.js preview? | Storyblok version param | Display top overlay? | Top overlay color | Button to enter/exit preview? |
+| --------------------------- | ---------------------- | -------------- | ---------- | ----------------- | ---------------- | ----------------------- | -------------------- | ----------------- | ----------------------------- |
+| Production                  | .com/.org URL          | `main`         | production | public            | off              | `published`             | No                   | n/a               | n/a                           |
+| Storyblok (yellow overlay)  | via Storyblok UI       | `develop`      | preview    | preview           | on               | `draft`                 | Yes                  | yellow            | No                            |
+| Vercel URL (gray overlay)   | via link to Vercel URL | any non-`main` | preview    | preview           | off              | `published`             | Yes                  | gray              | Yes                           |
+| Vercel URL (yellow overlay) | via enter-preview      | any non-`main` | preview    | preview           | on               | `draft`                 | Yes                  | yellow            | Yes                           |
 
 Let's take the row labeled "Vercel URL (gray overlay)." This view is accessed by
 clicking on a Vercel SHA-style URL, which looks like
@@ -547,12 +547,17 @@ signs. The meta section contains post-related information like:
   categories should be the same as in the previously mentioned
   [`categories.json`](./apps/labs/posts/categories.json) file.
   **Important note:** categories are case-sensitive.
-- `featuredImage` (required) - Object with two required properties: `src` and `alt`. The `src` property
-  is a path to the featured image which is displayed on the posts list on the`/blog`
-  page. The `alt` property is alternative text for the image. The image should
-  be added to the `apps/labs/public/posts/<post-name>` directory, for example,
-  `apps/labs/public/posts/hello-world-post`. There is no need to provide a full image path,
-  so the path name should start with `/posts/`.
+- `featuredImage` (required) - Object with two required properties: `src` and
+  `alt`. The `src` property is a path to the featured image which is displayed
+  on the posts list on the`/blog` page. When the blog post is built, the
+  featured image is also copied to the HTML meta section, so it will be picked
+  up and displayed when people share the blog post on social media sites like
+  Mastodon, LinkedIn, and Twitter. Some social media sites do not support SVG,
+  so the featured image should be in PNG or JPEG format (recommended width: 1200
+  px). The `alt` property is alternative text for the image. The image should be
+  added to the `apps/labs/public/posts/<post-name>` directory, for example,
+  `apps/labs/public/posts/hello-world-post`. There is no need to provide a full
+  image path, so the path name should start with `/posts/`.
 - `hero` (required) - the object for the Hero section of the post. This can have two different structures:
   - The first structure is an object with `imageSrc` and `imageAlt`. The `imageSrc` property is a path to
     the hero image, which is displayed on the blog post page between the nav bar and the

@@ -5,7 +5,7 @@ author: pearu-peterson
 description: 'An exploration of a method to call C++ libarary function from Numba compiled functions, i.e. python function that are decorated with "numba.jit(nopython=True)"'
 category: [Beyond PyData, PyData ecosystem]
 featuredImage:
-  src: /posts/cxx-numba-interoperability/blog_feature_var2.svg
+  src: /posts/cxx-numba-interoperability/blog_feature_var2.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/cxx-numba-interoperability/blog_hero_var2.svg

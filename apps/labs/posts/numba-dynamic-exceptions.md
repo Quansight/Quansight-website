@@ -5,7 +5,7 @@ author: guilherme-leobas
 description: 'In the following blogpost, we will explore the newly added feature in Numba: Dynamic exception support. We will discuss the previous limitations and explain how Numba was enhanced to handle runtime exceptions.'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/enhancements-to-numba-guvectorize-decorator/blog_feature_var1.svg
+  src: /posts/enhancements-to-numba-guvectorize-decorator/blog_feature_var1.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/enhancements-to-numba-guvectorize-decorator/blog_hero_org.svg
