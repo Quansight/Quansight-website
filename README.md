@@ -547,17 +547,22 @@ signs. The meta section contains post-related information like:
   categories should be the same as in the previously mentioned
   [`categories.json`](./apps/labs/posts/categories.json) file.
   **Important note:** categories are case-sensitive.
-- `featuredImage` (required) - Object with two required properties: `src` and
-  `alt`. The `src` property is a path to the featured image which is displayed
-  on the posts list on the`/blog` page. When the blog post is built, the
-  featured image is also copied to the HTML meta section, so it will be picked
-  up and displayed when people share the blog post on social media sites like
-  Mastodon, LinkedIn, and Twitter. Some social media sites do not support SVG,
-  so the featured image should be in PNG or JPEG format (recommended width: 1200
-  px). The `alt` property is alternative text for the image. The image should be
-  added to the `apps/labs/public/posts/<post-name>` directory, for example,
-  `apps/labs/public/posts/hello-world-post`. There is no need to provide a full
-  image path, so the path name should start with `/posts/`.
+- `featuredImage` (required) - Object with two required properties: `src` and `alt`.
+  - The `src` property is a path to the featured image which is displayed both
+    (a) in the posts gallery on the`/blog` page and (b) in rich social media
+    preview cards (on Twitter, Slack, LinkedIn, etc.). The image should be added
+    to the `apps/labs/public/posts/<post-slug>` directory and the `src` property
+    should be `/posts/<post-slug/<image-filename-with-extension>`. For example,
+    if the filename of your blog post is `hello-world.md` and the filename of
+    your featured image is `featured-image.png`, then you save the image at
+    `apps/labs/public/posts/hello-world/featured-image.png`, and `src` would be
+    `/posts/hello-world/featured-image.png`. This image should (a) be in PNG or
+    JPEG format and (b) have close to a 2:1 aspect ratio and a minimum height of
+    627 pixels. If you're unsure about how your image will appear in social
+    media preview cards, you can open a PR for your blog post, get the preview
+    build URL to your post, then paste the preview URL in a draft social media
+    post to see how the card will look on that social media platform.
+  - The `alt` property is alternative text for the image.
 - `hero` (required) - the object for the Hero section of the post. This can have two different structures:
   - The first structure is an object with `imageSrc` and `imageAlt`. The `imageSrc` property is a path to
     the hero image, which is displayed on the blog post page between the nav bar and the
