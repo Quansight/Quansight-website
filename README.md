@@ -561,7 +561,9 @@ signs. The meta section contains post-related information like:
     627 pixels. If you're unsure about how your image will appear in social
     media preview cards, you can open a PR for your blog post, get the preview
     build URL to your post, then paste the preview URL in a draft social media
-    post to see how the card will look on that social media platform.
+    post to see how the card will look on that social media platform.[^1]
+    [^1]: Note that Twitter post previews can be flaky and
+    [LinkedIn has a useful post-inspector tool](linkedin.com/post-inspector).
   - The `alt` property is alternative text for the image.
 - `hero` (required) - the object for the Hero section of the post. This can have two different structures:
   - The first structure is an object with `imageSrc` and `imageAlt`. The `imageSrc` property is a path to
