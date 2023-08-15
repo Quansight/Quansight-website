@@ -21,6 +21,13 @@ export const serializePost = async (
 }> => {
   const fileContent = getFileContent(fileName);
   const { data, content } = matter(fileContent);
+
+  if ((data as TPost['meta']).featuredImage.src.endsWith('.svg')) {
+    throw Error(
+      `SVG not allowed for featured image. Convert to PNG or JPEG: ${data.featuredImage.src}`,
+    );
+  }
+
   const result = await serialize(content, {
     scope: data,
     mdxOptions: {

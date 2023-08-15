@@ -7,7 +7,7 @@ recently, both as part of my open source consulting, and as part of my work on
 SymPy for Quansight Labs.'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/quansight-labs-work-update-for-september-2019/blog_feature_org.svg
+  src: /posts/quansight-labs-work-update-for-september-2019/blog_feature_org.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/quansight-labs-work-update-for-september-2019/blog_hero_org.svg

@@ -5,7 +5,7 @@ published: February 15, 2023
 description: 'Presenting our first annual report! Read about our project achievements, community initiatives, and work culture.'
 category: [Community, PyData ecosystem]
 featuredImage:
-  src: /posts/announcing-labs-annual-report-2022/featured.svg
+  src: /posts/announcing-labs-annual-report-2022/featured.png
   alt: 'A hand placing a flower in a flowerpot, next to the text: Quansight Labs 2022 Annual Report'
 hero:
   imageDesktop:

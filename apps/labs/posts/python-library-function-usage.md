@@ -5,7 +5,7 @@ author: chris-ostrouchov
 description: 'Developers of open source software often have a difficult time understanding how others utilize their libraries. Having better data of when and how functions are being used has many benefits.'
 category: [Developer workflows]
 featuredImage:
-  src: /posts/python-library-function-usage/blog_feature_var2.svg
+  src: /posts/python-library-function-usage/blog_feature_var2.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/python-library-function-usage/blog_hero_var2.svg

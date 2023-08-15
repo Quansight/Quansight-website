@@ -5,7 +5,7 @@ author: juanita-gomez
 description: "We will focus on the Files pane in this post, where we've made several improvements to the interface and file management tools."
 category: [IDEs]
 featuredImage:
-  src: /posts/files-improvements/blog_feature_org.svg
+  src: /posts/files-improvements/blog_feature_org.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/files-improvements/blog_hero_var1.svg
