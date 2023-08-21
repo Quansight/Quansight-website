@@ -539,10 +539,13 @@ signs. The meta section contains post-related information like:
 - `description` (required) - Description of the blog post. Used inside `<meta name="description" />` tag
 - `published` (required) - Publishing date of the blog post. Used also for sorting posts by
   date (the format should be `Month d, yyyy` for example `January 1, 2023`)
-- `author` (required) - Unique slug of the author (from Storyblok) usually looks like `jon-doe`.
-  Based on this property blog post page will display proper info about the author
-  (and their avatar). The author must be present in Storyblok in order for the
-  post to build without error.
+- `authors` (required) - Array of unique author slugs (from Storyblok). Usually
+  the blog post will have only one author and the value of this field will look
+  like `[tania-allard]`, but when the same blog post has multiple authors it
+  will look like `[tania-allard, ralf-gommers]`. Based on this property, the
+  blog post page will display proper info about the author(s) (and their
+  avatars). The author(s) must be present in Storyblok in order for the post to
+  build without error.
 - `category` (required) - Array of categories for example `[Machine Learning]`. All
   categories should be the same as in the previously mentioned
   [`categories.json`](./apps/labs/posts/categories.json) file.
@@ -580,7 +583,7 @@ signs. The meta section contains post-related information like:
 
 ```yaml
 title: 'This is hello world post!'
-author: anirrudh-krishnan
+authors: [anirrudh-krishnan]
 published: October 14, 2022
 description: 'Lorem ipsum dolor sit amet'
 category: [Machine Learning]
