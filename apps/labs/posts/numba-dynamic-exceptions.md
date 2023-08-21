@@ -1,7 +1,7 @@
 ---
 title: 'Numba Dynamic Exceptions'
 published: June 27, 2023
-author: guilherme-leobas
+authors: [guilherme-leobas]
 description: 'In the following blogpost, we will explore the newly added feature in Numba: Dynamic exception support. We will discuss the previous limitations and explain how Numba was enhanced to handle runtime exceptions.'
 category: [PyData ecosystem]
 featuredImage:
