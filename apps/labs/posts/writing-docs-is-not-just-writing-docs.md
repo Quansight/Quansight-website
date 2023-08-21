@@ -5,7 +5,7 @@ authors: [juanita-gomez]
 description: 'At first, I didn’t actually understand how important docs are for software, especially for open source projects. However, during all this time I’ve learned how documentation has a huge impact on the open-source community and I’ve been thankful to have been able to do this. But, from the beginning, I asked myself “why am I the ‘right person’ for this?”'
 category: [Developer workflows, OSS Experience]
 featuredImage:
-  src: /posts/writing-docs-is-not-just-writing-docs/blog_feature_var1.svg
+  src: /posts/writing-docs-is-not-just-writing-docs/blog_feature_var1.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/writing-docs-is-not-just-writing-docs//blog_hero_var2.svg

@@ -5,7 +5,7 @@ authors: [isabela-presedo-floyd]
 description: "How we ended up with a discussion about where issues with JupyterLab’s built-in code editors fit on the list of immediate accessibility priorities."
 category: [Access-centered]
 featuredImage:
-  src: /posts/not-a-checklist/blog_feature_var1.svg
+  src: /posts/not-a-checklist/blog_feature_var1.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/not-a-checklist/blog_hero_org.svg

@@ -5,7 +5,7 @@ authors: [saul-shanabrook]
 description: 'This was my first time to present metadsl, although really a year earlier Travis and I co-presented on a previous incarnation of the project. I think once I got to the actual code example though, I could have done a better job actually explaining how the system worked and what its limitations are. But it did give me leaping off point to have many great conversations with folks afterwards, which I will summarize below.'
 category: [Beyond PyData]
 featuredImage:
-  src: /posts/metadsl-talk/blog_feature_var2.svg
+  src: /posts/metadsl-talk/blog_feature_var2.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/metadsl-talk/blog_hero_var1.svg

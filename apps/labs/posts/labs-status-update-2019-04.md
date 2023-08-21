@@ -5,7 +5,7 @@ authors: [ralf-gommers]
 description: "It has been an exciting first month for me at Quansight Labs. It's a good time for a summary of what we worked on in April and what is coming next."
 category: [Funding, PyData ecosystem]
 featuredImage:
-  src: /posts/labs-status-update-2019-04/blog_feature_org.svg
+  src: /posts/labs-status-update-2019-04/blog_feature_org.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/labs-status-update-2019-04/blog_hero_org.svg

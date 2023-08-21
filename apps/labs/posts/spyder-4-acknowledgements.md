@@ -5,7 +5,7 @@ authors: [carlos-cordoba]
 description: 'After more than three years in development and more than 5000 commits from 60 authors around the world, Spyder 4 finally saw the light on December 5, 2019!'
 category: [IDEs]
 featuredImage:
-  src: /posts/spyder-4-acknowledgements/blog_feature_org.svg
+  src: /posts/spyder-4-acknowledgements/blog_feature_org.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/spyder-4-acknowledgements/blog_hero_var1.svg

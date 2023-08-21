@@ -5,7 +5,7 @@ authors: [juanita-gomez]
 description: 'As a community manager in the Spyder team, I have been looking for ways of involving more users in the community and making Spyder useful for a larger number of people. With this, a new idea came: Education. For the past months, we have been wondering with the team whether Spyder could also serve as a teaching-learning platform, especially in this era where remote instruction has become necessary.'
 category: [Community, IDEs]
 featuredImage:
-  src: /posts/a-step-towards-educating-with-spyder/blog_feature_var2.svg
+  src: /posts/a-step-towards-educating-with-spyder/blog_feature_var2.png
   alt:  'An illustration of a brown and white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/a-step-towards-educating-with-spyder/blog_hero_var1.svg

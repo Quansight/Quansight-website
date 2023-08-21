@@ -5,7 +5,7 @@ authors: [edgar-margffoy]
 description: 'As part of our next release, we are proud to announce an additional completion client for Spyder, Kite. Kite is a novel completion client that uses Machine Learning techniques to find and predict the best autocompletion for a given text.'
 category: [IDEs]
 featuredImage:
-  src: /posts/spyder-40-beta4-kite-integration-is-here/blog_feature_var2.svg
+  src: /posts/spyder-40-beta4-kite-integration-is-here/blog_feature_var2.png
   alt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 hero:
   imageSrc: /posts/spyder-40-beta4-kite-integration-is-here/blog_hero_var1.svg

@@ -5,7 +5,7 @@ authors: [melissa-mendonca]
 description: 'This new grant totaling $140,000 will fund part of our efforts to improve usability and sustainability in both projects and is excellent news for the scientific computing community, which will certainly benefit from this work downstream.'
 category: [Array API, Funding]
 featuredImage:
-  src: /posts/a-second-czi-grant-for-numpy-and-openblas/blog_feature_var1.svg
+  src: /posts/a-second-czi-grant-for-numpy-and-openblas/blog_feature_var1.png
   alt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 hero:
   imageSrc: /posts/a-second-czi-grant-for-numpy-and-openblas/blog_hero_var2.svg
