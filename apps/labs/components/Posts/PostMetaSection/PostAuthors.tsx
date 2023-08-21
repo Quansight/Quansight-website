@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { TPostMeta } from '../../../../types/storyblok/bloks/posts';
+import { TPostMeta } from '../../../types/storyblok/bloks/posts';
 import { PostAuthorItem } from './PostAuthorItem';
 
 export interface TPostAuthorsProps {

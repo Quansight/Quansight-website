@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import { TPostMeta } from '../../../types/storyblok/bloks/posts';
-import { PostAuthors } from './PostAuthor/PostAuthors';
+import { PostAuthors } from './PostAuthors';
 
 export type PostMetaSectionProps = Pick<
   TPostMeta,

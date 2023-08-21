@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { Picture } from '@quansight/shared/ui-components';
 
-import { TPostAuthor } from '../../../../types/storyblok/bloks/posts';
+import { TPostAuthor } from '../../../types/storyblok/bloks/posts';
 
 export type TPostAuthorItemProps = TPostAuthor;
 
