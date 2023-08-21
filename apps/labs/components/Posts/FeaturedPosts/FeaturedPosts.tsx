@@ -40,7 +40,7 @@ export const FeaturedPosts: FC<TFeaturedPostsProps> = ({ posts }) => {
                 </Link>
               </h4>
               <p className="font-sans text-[1.2rem] font-normal leading-[2.7rem]">
-                By {post.meta.authors[0].nickName}
+                By {post.meta.authors[0].fullName}
                 {post.meta.authors.length > 1 &&
                   ` + ${post.meta.authors.length - 1} more`}
               </p>
