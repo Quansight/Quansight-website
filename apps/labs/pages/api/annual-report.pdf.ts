@@ -5,13 +5,6 @@ export const config = {
 };
 
 export default async function handler(req: NextRequest) {
-  // TODO - remove after checking the logs on Vercel
-  console.log(`
-  req.url ${req.url}
-  req.referer ${req.headers.get('referer')}
-  req.ip ${req.ip}
-  user-agent ${req.headers.get('user-agent')}
-  `);
   // The shape of this fetch comes from the Plausible docs:
   // https://plausible.io/docs/events-api
   await fetch('https://plausible.io/api/event', {
@@ -32,13 +25,9 @@ export default async function handler(req: NextRequest) {
       referrer: req.headers.get('referer'),
     }),
   });
-  // A few reasons to use 302 vs 301:
-  // - Ensures that this handler gets called every time that somebody clicks the
-  //   tracking URL for the PDF even if they've clicked it before.
-  // - It signals to search engines and other tech that we do not consider the
-  //   CDN URL for the annual report to be the canonical URL for this resource.
-  return Response.redirect(
+  // Returning fetch comes from Next.js docs:
+  // https://nextjs.org/docs/api-routes/edge-api-routes#forwarding-headers
+  return fetch(
     'https://a.storyblok.com/f/152463/x/20372ca74f/quansight-labs-annual-report-2022.pdf',
-    302,
   );
 }
