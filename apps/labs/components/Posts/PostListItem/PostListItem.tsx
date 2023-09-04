@@ -17,6 +17,7 @@ export const PostListItem: FC<TPostListItem> = ({ post, variant }) => (
   <div
     className={clsx('flex flex-row border border-gray-300 border-solid', {
       'flex-col': variant === 'vertical',
+      'h-[400px]': variant === 'vertical',
     })}
   >
     {post.meta.featuredImage && (
