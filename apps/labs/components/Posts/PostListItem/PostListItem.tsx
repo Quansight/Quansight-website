@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { Picture } from '@quansight/shared/ui-components';
 
+import { authorsToString } from '../../../services/posts/authorsToString';
 import { TPost } from '../../../types/storyblok/bloks/posts';
 
 export type TPostListItem = {
@@ -50,9 +51,7 @@ export const PostListItem: FC<TPostListItem> = ({ post, variant }) => (
         </Link>
       </h3>
       <p className="text-[1.2rem] font-normal leading-[2.7rem] text-black text-sans">
-        By {post.meta.authors[0].fullName}
-        {post.meta.authors.length > 1 &&
-          ` + ${post.meta.authors.length - 1} more`}{' '}
+        By {authorsToString(post.meta.authors)}{' '}
       </p>
       <p className="text-[1.2rem] font-normal leading-[2.7rem] text-black text-sans">
         {post.meta.published}
