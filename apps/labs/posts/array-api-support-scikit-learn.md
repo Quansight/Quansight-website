@@ -97,7 +97,7 @@ def _nanmin(X, axis=None):
     else:
         # Implements nanmin in terms of the Array API standard
         mask = xp.isnan(X)
-        X = xp.min(..., X), axis=axis)
+        X = xp.min(xp.where(mask, ...), axis=axis)
     return X
 ```
 
