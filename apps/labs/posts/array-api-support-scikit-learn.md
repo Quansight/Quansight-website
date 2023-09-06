@@ -6,32 +6,35 @@ description: 'In this blog post, we share how scikit-learn enabled support for t
 category: [Array API]
 featuredImage:
   src: /posts/array-api-support-scikit-learn/data-api-scikit-learn-logos.png
-  alt: 'The Data API logo next to the scikit-learn logo.'
+  alt: 'The Data APIs logo next to the scikit-learn logo.'
 hero:
   src: /posts/array-api-support-scikit-learn/data-api-scikit-learn-logos-hero.png
-  alt: 'The Data API logo next to the scikit-learn logo.'
+  alt: 'The Data APIs logo next to the scikit-learn logo.'
 ---
 
-The Consortium for Python Data API Standards developed the Array API standard, which aims to define consistent behavior between the ecosystem of array libraries, such as PyTorch, NumPy, and CuPy. The Array API standard enables libraries, such as scikit-learn, to write code once with the standard and have it work on multiple array libraries. With PyTorch tensors or CuPy tensors, it is now possible to run computation on accelerators, such as GPUs.
+The Consortium for Python Data APIs Standards developed the Array API standard, which aims to define consistent behavior between the ecosystem of array libraries, such as PyTorch, NumPy, and CuPy. The Array API standard enables libraries, such as scikit-learn, to write code once with the standard and have it work on multiple array libraries. With PyTorch tensors or CuPy arrays, it is now possible to run computations on accelerators, such as GPUs.
 
-With the release of scikit-learn 1.3, we enabled experimental Array API for a limited set of machine learning models. Array API support is gradually expanding to include more machine learning models and functionality on the development branch. Scikit-learn depends on the `array_api_compat` library for Array API support. The `array_api_compat` extends the Array API standard to NumPy's, CuPy arrays, and PyTorch Tensors. In this blog post, we cover scikit-learn's public interface for enabling Array API, the performance gain of running on an accelerator, and the challenges we faced when integrating Array API.
+With the release of scikit-learn 1.3, we enabled experimental Array API support for a limited set of machine learning models. Array API support is gradually expanding to include more machine learning models and functionality on the development branch. Scikit-learn depends on the `array_api_compat` library for Array API support. `array_api_compat` extends the Array API standard to the main namespaces of NumPy's arrays, CuPy's arrays, and PyTorch's tensors. In this blog post, we cover scikit-learn's public interface for enabling Array API, the performance gain of running on an accelerator, and the challenges we faced when integrating Array API.
 
 ## Benchmarks
-Scikit-learn was initially developed to run on CPUs with NumPy arrays. With Array API support, a limited set of scikit-learn models and tools can now run with other array libraries and devices like GPUs. The following benchmark results are from running scikit-learn's LinearDiscurementAnalysis with different array libraries:
 
-![Bar plot with benchmark results comparing NumPy, PyTorch CPUs, and PyTorch GPUs running Linear Discriminant Analysis. The PyTorch GPU results are marked as 27 times faster compared to NumPy for fitting the model and 28 times faster compared to NumPy for prediction.](/posts/array-api-support-scikit-learn/benchmark_results.png)
+Scikit-learn was initially developed to run on CPUs with NumPy arrays. With Array API support, a limited set of scikit-learn models and tools can now run with other array libraries and devices like GPUs. The following benchmark results are from running scikit-learn's `LinearDiscriminantAnalysis` with different array libraries:
+
+![Bar plot with benchmark results comparing NumPy, PyTorch on CPU, and PyTorch on NVIDIA 3090 running Linear Discriminant Analysis. The PyTorch GPU results are marked as 27 times faster compared to NumPy for fitting the model and 28 times faster compared to NumPy for prediction.](/posts/array-api-support-scikit-learn/benchmark_results.png)
 
 The training and prediction times are improved when using PyTorch compared to NumPy. Running the computation on PyTorch CPU tensors is faster than NumPy because PyTorch CPU operations are multi-threaded by default.
 
 ## scikit-learn's Array API interface
 
-Scikit-learn extended its experimental Array API support in version 1.3 to support NumPy's `ndarrays`, CuPy's `ndararys`, and PyTorch `Tensors`. By themselves, these array objects do not implement the Array API specification. To overcome this limitation, Quansight engineer Aaron Meurer, led the development of `array_api_compat` to adopt the Array API to NumPy, CuPy, and PyTorch. Scikit-learn directly uses `array_api_compat` for its Array API support. There are two APIs enabling Array API in scikit-learn: a global configuration and a context manager. The following example use a context manager:
+Scikit-learn extended its experimental Array API support in version 1.3 to support NumPy's `ndarrays`, CuPy's `ndararys`, and PyTorch `Tensors`. By themselves, these array objects do not implement the Array API specification. To overcome this limitation, Quansight engineer Aaron Meurer, led the development of `array_api_compat` to adopt the Array API to NumPy, CuPy, and PyTorch. Scikit-learn directly uses `array_api_compat` for its Array API support. There are two APIs enabling Array API in scikit-learn: a global configuration and a context manager. The following example uses a context manager:
 
 ```python
 import sklearn
-import torch
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.datasets import make_classification
+import torch
 
+X_np, y_np = make_classification(random_state=0, n_samples=500_000, n_features=300)
 X_torch_cpu, y_torch_cpu = torch.asarray(X_np), torch.asarray(y_np)
 
 with sklearn.config_context(array_api_dispatch=True):
@@ -80,9 +83,9 @@ You can learn more about Scikit-learn's Array API support in their [documentatio
 
 ## Challenges
 
-Adopting the Array API standard in scikit-learn was not a straightforward task and required us to overcome some challenges. The significant challenges fall into two broad categories:
+Adopting the Array API standard in scikit-learn was not a straightforward task and required us to overcome some challenges. In this section, we cover the two most significant challenges:
 
-- Array API Standard is a subset of NumPy's API
+- The Array API Standard is a subset of NumPy's API.
 - Compiled code that only run on CPUs that was written in C, C++, or Cython.
 
 ### Array API Standard is a subset of NumPy's API
@@ -141,4 +144,6 @@ With plugins, the dispatched code will ingest and return arrays that follow the 
 
 In recent years, there has been increase usage of accelerators for computation in many domains. The array API standard gives Python libraries, such as scikit-learn, access these accelerators with the same source code. Depending on your code, there are various challenges for adopting Array API, but there are performance and compatibilities benefits for using the API. If you observe any limitations, you are welcome to open issues on their issue tracker. For more information about Array API, you may watch Aaron's [SciPy presentation](https://www.youtube.com/watch?v=16rB-fosAWw), read the SciPy proceedings [paper](https://conference.scipy.org/proceedings/scipy2023/aaron_meurer.html), or read the [Array API documentation](https://data-apis.org/array-api/latest/).
 
-This work has made possible by Quansight's collaboration with Meta's PyTorch team. I'll like to thank Aaron Meurer, Matthew Barber, and Ralf Gommers for the development of `array_api_compat`, which was a vital part of this project's success.
+This work was made possible by Meta funding the effort, enabling us to progress on this topic quickly. This topic was a longer-term goal on scikit-learn's roadmap for quite some time. Similar steps are under way to incorporate the Array API Standard into SciPy. As the adoption of the Array API Standard increases, we aim to make it easier for domain libraries and their users to better utilize their hardware for computation.
+
+I want to thank Aaron Meurer, Matthew Barber, and Ralf Gommers for the development of `array_api_compat`, which was a vital part of this project's success. I also want to thank Olivier Grisel and Tim Head for helping with this project and continuing to push forward on expanding support.
