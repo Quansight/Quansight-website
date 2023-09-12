@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { Picture } from '@quansight/shared/ui-components';
 
+import { authorsToString } from '../../../services/posts/authorsToString';
 import { TPost } from '../../../types/storyblok/bloks/posts';
 
 export type TFeaturedPostsProps = {
@@ -40,7 +41,10 @@ export const FeaturedPosts: FC<TFeaturedPostsProps> = ({ posts }) => {
                 </Link>
               </h4>
               <p className="font-sans text-[1.2rem] font-normal leading-[2.7rem]">
-                By {post.meta.author.nickName} {post.meta.published}
+                By {authorsToString(post.meta.authors)}{' '}
+              </p>
+              <p className="font-sans text-[1.2rem] font-normal leading-[2.7rem]">
+                {post.meta.published}
               </p>
             </div>
           </div>

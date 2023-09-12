@@ -1,6 +1,7 @@
 ---
 title: 'Quansight Labs Annual Report 2022: Celebrating Growth and Sustainability in Open Source'
-author: pavithra-eswaramoorthy
+authors:
+  [pavithra-eswaramoorthy, noa-tamir, ralf-gommers, tania-allard, irina-fumarel]
 published: February 15, 2023
 description: 'Presenting our first annual report! Read about our project achievements, community initiatives, and work culture.'
 category: [Community, PyData ecosystem]
@@ -18,9 +19,6 @@ hero:
     imageSrc: /posts/announcing-labs-annual-report-2022/hero-tablet.svg
     imageAlt: 'Two hands arranging flowers in a flowerpot.'
 ---
-
-_Co-authors: Noa Tamir, Ralf Gommers, and Tania Allard._
-_Designer: Irina Fumarel_
 
 We at Quansight Labs are delighted to share our first-ever annual report with you!
 

@@ -1,7 +1,7 @@
 ---
 title: 'Thanking the people behind Spyder 4'
 published: April 28, 2020
-author: carlos-cordoba
+authors: [carlos-cordoba]
 description: 'After more than three years in development and more than 5000 commits from 60 authors around the world, Spyder 4 finally saw the light on December 5, 2019!'
 category: [IDEs]
 featuredImage:
