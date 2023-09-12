@@ -1,7 +1,7 @@
 ---
 title: 'PyCon US 2023 - An action-packed week'
 published: June 28, 2023
-author: lysandros-nikolaou
+authors: [lysandros-nikolaou]
 description: "In this post I'm sharing my experience of traveling to the US for PyCon US 2023"
 category: [Community, OSS Experience]
 featuredImage:

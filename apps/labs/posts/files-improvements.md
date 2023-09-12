@@ -1,7 +1,7 @@
 ---
 title: 'File management improvements in Spyder4'
 published: November 12, 2019
-author: juanita-gomez
+authors: [juanita-gomez]
 description: "We will focus on the Files pane in this post, where we've made several improvements to the interface and file management tools."
 category: [IDEs]
 featuredImage:

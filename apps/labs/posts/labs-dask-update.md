@@ -1,7 +1,7 @@
 ---
 title: 'Quansight Labs Dask Update'
 published: August 27, 2019
-author: james-bourbeau
+authors: [james-bourbeau]
 description: 'Through a community work order (CWO) with the D. E. Shaw group, the Quansight Labs team has been able to dedicate developer time towards bug fixes and feature requests for Dask.'
 category: [PyData ecosystem]
 featuredImage:

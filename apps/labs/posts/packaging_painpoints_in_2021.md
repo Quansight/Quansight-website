@@ -1,7 +1,7 @@
 ---
 title: 'Python packaging in 2021 - pain points and bright spots'
 published: January 24, 2021
-author: ralf-gommers
+authors: [ralf-gommers]
 description: 'This blog post contains the raw
 output of the 30-minute brainstorm (only cleaned up for textual issues) and
 my annotations on it (in italics) which capture some of the discussion during

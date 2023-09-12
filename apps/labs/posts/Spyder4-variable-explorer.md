@@ -1,7 +1,7 @@
 ---
 title: 'Variable Explorer improvements in Spyder 4'
 published: November 28, 2019
-author: daniel-althviz
+authors: [daniel-althviz]
 description: 'In this post, we will be talking about the improvements made to the Variable Explorer. These include the brand new Object Explorer for inspecting arbitrary Python variables, full support for MultiIndex dataframes with multiple dimensions, and the ability to filter and search for variables by name and type, and much more.'
 category: [IDEs]
 featuredImage:
