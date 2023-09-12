@@ -1,16 +1,16 @@
 import React, { FC } from 'react';
 
 import { TPostMeta } from '../../../types/storyblok/bloks/posts';
-import { PostAuthor } from './PostAuthor/PostAuthor';
+import { PostAuthors } from './PostAuthors';
 
 export type PostMetaSectionProps = Pick<
   TPostMeta,
-  'author' | 'published' | 'title'
+  'authors' | 'published' | 'title'
 >;
 
 export const PostMetaSection: FC<PostMetaSectionProps> = ({
   title,
-  author,
+  authors,
   published,
 }) => {
   return (
@@ -22,7 +22,7 @@ export const PostMetaSection: FC<PostMetaSectionProps> = ({
         Published {published}
       </p>
       <div className="mb-[5rem]">
-        <PostAuthor {...author} />
+        <PostAuthors authors={authors} />
       </div>
     </>
   );

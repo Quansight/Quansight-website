@@ -1,7 +1,7 @@
 ---
 title: 'PyTorch TensorIterator Internals - 2021 Update'
 published: April 09, 2021
-author: kurt-mohler
+authors: [kurt-mohler]
 description: 'For contributors to the PyTorch codebase, one of the most commonly encountered C++ classes is TensorIterator. Recently, however, the interface has changed significantly. This post describes how to use the current interface as of April 2021.'
 category: [Machine Learning]
 featuredImage:

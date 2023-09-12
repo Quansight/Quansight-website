@@ -1,7 +1,7 @@
 ---
 title: 'A new grant for NumPy and OpenBLAS!'
 published: November 14, 2019
-author: ralf-gommers
+authors: [ralf-gommers]
 description: "I'm very pleased to announce that NumPy and OpenBLAS just received a $195,000 grant from the Chan Zuckerberg Initiative, through its Essential Open Source Software for Science (EOSS) program!"
 category: [Funding, PyData ecosystem]
 featuredImage:

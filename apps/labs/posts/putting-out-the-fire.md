@@ -1,7 +1,7 @@
 ---
 title: 'Putting out the fire: Where do we start with accessibility in JupyterLab?'
 published: May 25, 2021
-author: isabela-presedo-floyd
+authors: [isabela-presedo-floyd]
 description: 'With the support of a team member with prior experience auditing for accessibility, we pinpointed specific ways in which JupyterLab lacked support for accessibility broken up by WCAG 2.1 standards.'
 category: [Access-centered, OSS Experience]
 featuredImage:

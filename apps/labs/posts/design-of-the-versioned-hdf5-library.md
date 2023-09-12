@@ -1,7 +1,7 @@
 ---
 title: 'Design of the Versioned HDF5 Library'
 published: September 29, 2020
-author: aaron-meurer
+authors: [aaron-meurer]
 description: "In this post, we'll go into detail on how the underlying design of the library works on a technical level. Versioned HDF5 is a library that wraps h5py and offers a versioned abstraction for HDF5 groups and datasets."
 category: [PyData ecosystem]
 featuredImage:

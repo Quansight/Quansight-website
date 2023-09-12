@@ -1,7 +1,7 @@
 ---
 title: 'Making Numpy Accessible: Guidelines and Tools'
 published: September 06, 2021
-author: mars-lee
+authors: [mars-lee]
 description: 'A small team started working on making NumPy more accessible, specifically its website and documentation. They weren’t experts in accessible technology. In fact, they feared that they didn’t know enough. Yet they strongly believed that accessible technology is a right every person should access and that NumPy could be accessible too.'
 category: [Access-centered]
 featuredImage:
