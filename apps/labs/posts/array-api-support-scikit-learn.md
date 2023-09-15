@@ -1,6 +1,6 @@
 ---
 title: 'Array API Support in scikit-learn'
-published: September 5, 2023
+published: September 19, 2023
 author: thomas-j-fan
 description: 'In this blog post, we share how scikit-learn enabled support for the Array API Standard.'
 category: [Array API]
@@ -26,7 +26,7 @@ The training and prediction times are improved when using PyTorch compared to Nu
 
 ## scikit-learn's Array API interface
 
-Scikit-learn extended its experimental Array API support in version 1.3 to support NumPy's `ndarrays`, CuPy's `ndararys`, and PyTorch `Tensors`. By themselves, these array objects do not implement the Array API specification. To overcome this limitation, Quansight engineer Aaron Meurer, led the development of `array_api_compat` to adopt the Array API to NumPy, CuPy, and PyTorch. Scikit-learn directly uses `array_api_compat` for its Array API support. There are two APIs enabling Array API in scikit-learn: a global configuration and a context manager. The following example uses a context manager:
+Scikit-learn extended its experimental Array API support in version 1.3 to support NumPy's `ndarray`s, CuPy's `ndarray`s, and PyTorch's `Tensor`s. By themselves, these array objects do not implement the Array API specification fully yet. To overcome this limitation, Quansight engineer Aaron Meurer led the development of `array_api_compat` to bridge any gaps and provide Array API compatibility for NumPy, CuPy, and PyTorch. Scikit-learn directly uses `array_api_compat` for its Array API support. There are two ways of enabling Array API in scikit-learn: through a global configuration and a context manager. The following example uses a context manager:
 
 ```python
 import sklearn
@@ -86,7 +86,7 @@ You can learn more about Scikit-learn's Array API support in their [documentatio
 Adopting the Array API standard in scikit-learn was not a straightforward task and required us to overcome some challenges. In this section, we cover the two most significant challenges:
 
 - The Array API Standard is a subset of NumPy's API.
-- Compiled code that only run on CPUs that was written in C, C++, or Cython.
+- Compiled code that only runs on CPUs because it was written in C, C++, or Cython.
 
 ### Array API Standard is a subset of NumPy's API
 
@@ -106,9 +106,9 @@ def _nanmin(X, axis=None):
 
 The NumPy arrays are still dispatched to `np.nanmin`, while all other libraries go through an implementation that uses the Array API standard.
 
-There is an open issue in the Array API repo to discuss bringing `nanmean` into the standard. Historically, this process of introducing new functionality has been successful. For example, `take` was introduced into the Array API standard in v2022.12, because we proposed it in the Array API repo. The community determined that selecting elements of an array with indices was a standard operation, so they introduced `take` into the updated standard.
+There is an open issue in the Array API repo to discuss bringing `nanmin` into the standard. Historically, this process of introducing new functionality has been successful. For example, `take` was introduced into the Array API standard in v2022.12, because we proposed it in the Array API repo. The community determined that selecting elements of an array with indices was a standard operation, so they introduced `take` into the updated standard.
 
-The Array API standard includes [optional extensions](https://data-apis.org/array-api/latest/extensions/index.html) for linear algebra and Fourier transforms. These optional extensions are implemented commonly implemented across array libraries, but are not required by the Array API standard. As a machine learning library, scikit-learn extensively use the `linalg` module for computation. The Array API standard for NumPy arrays will call `numpy.linalg` and not `scipy.linalg`, which has subtle differences. We decided to be conservative and maintain backward computability by dispatching NumPy arrays to SciPy:
+The Array API standard includes [optional extensions](https://data-apis.org/array-api/latest/extensions/index.html) for linear algebra and Fourier transforms. These optional extensions are commonly implemented across array libraries, but are not required by the Array API standard. As a machine learning library, scikit-learn extensively use the `linalg` module for computation. The Array API standard for NumPy arrays will call `numpy.linalg` and not `scipy.linalg`, which has subtle differences. We decided to be conservative and maintain backward compatibility by dispatching NumPy arrays to SciPy:
 
 ```python
 def func(X):
@@ -127,9 +127,9 @@ This implementation was a compromise to ensure that NumPy arrays go through the 
 
 ### Compiled Code
 
-Scikit-learn contains a mixture of Python code and compiled code in Cython, C, and C++. For example, typical machine learning algorithms such as random forests, linear models, and gradient boosted trees all have compiled code. Given that the Array API standard is a Python API, it is most productive to adapt scikit-learn's Python code to use the standard. This limitation restricts the amount of functionality can take advantage of Array API.
+Scikit-learn contains a mixture of Python code and compiled code in Cython, C, and C++. For example, typical machine learning algorithms such as random forests, linear models, and gradient boosted trees all have compiled code. Given that the Array API standard is a Python API, it is most productive to adapt scikit-learn's Python code to use the standard. This limitation restricts the amount of functionality that can take advantage of Array API.
 
-Currently, scikit-learn contributors are experimenting with a plugin system to dispatch complied code to external libraries. Although there is compiled code, Array API will still play a critical role to get the plugin system up and running. For example, scikit-learn commonly preforms computation in Python before and after dispatching a external library:
+Currently, scikit-learn contributors are experimenting with a plugin system to dispatch compiled code to external libraries. Although there is compiled code, Array API will still play a critical role to get the plugin system up and running. For example, scikit-learn commonly preforms computation in Python before and after dispatching to an external library:
 
 ```python
 def fit(self, X, y):
@@ -142,8 +142,8 @@ With plugins, the dispatched code will ingest and return arrays that follow the 
 
 ## Conclusion
 
-In recent years, there has been increase usage of accelerators for computation in many domains. The array API standard gives Python libraries, such as scikit-learn, access these accelerators with the same source code. Depending on your code, there are various challenges for adopting Array API, but there are performance and compatibilities benefits for using the API. If you observe any limitations, you are welcome to open issues on their issue tracker. For more information about Array API, you may watch Aaron's [SciPy presentation](https://www.youtube.com/watch?v=16rB-fosAWw), read the SciPy proceedings [paper](https://conference.scipy.org/proceedings/scipy2023/aaron_meurer.html), or read the [Array API documentation](https://data-apis.org/array-api/latest/).
+In recent years, there has been increasing usage of accelerators for computation in many domains. The array API standard gives Python libraries like scikit-learn access to these accelerators with the same source code. Depending on your code, there are various challenges for adopting Array API, but there are performance and compatibility benefits from using the API. If you observe any limitations, you are welcome to open issues on their issue tracker. For more information about Array API, you may watch Aaron's [SciPy presentation](https://www.youtube.com/watch?v=16rB-fosAWw), read the SciPy proceedings [paper](https://conference.scipy.org/proceedings/scipy2023/aaron_meurer.html), or read the [Array API documentation](https://data-apis.org/array-api/latest/).
 
-This work was made possible by Meta funding the effort, enabling us to progress on this topic quickly. This topic was a longer-term goal on scikit-learn's roadmap for quite some time. Similar steps are under way to incorporate the Array API Standard into SciPy. As the adoption of the Array API Standard increases, we aim to make it easier for domain libraries and their users to better utilize their hardware for computation.
+This work was made possible by Meta funding the effort, enabling us to make progress on this topic quickly. This topic was a longer-term goal on scikit-learn's roadmap for quite some time. Similar steps are under way to incorporate the Array API Standard into SciPy. As the adoption of the Array API Standard increases, we aim to make it easier for domain libraries and their users to better utilize their hardware for computation.
 
 I want to thank Aaron Meurer, Matthew Barber, and Ralf Gommers for the development of `array_api_compat`, which was a vital part of this project's success. I also want to thank Olivier Grisel and Tim Head for helping with this project and continuing to push forward on expanding support.
