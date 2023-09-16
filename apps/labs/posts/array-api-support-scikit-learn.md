@@ -18,9 +18,9 @@ With the release of scikit-learn 1.3, we enabled experimental Array API support 
 
 ## Benchmarks
 
-Scikit-learn was initially developed to run on CPUs with NumPy arrays. With Array API support, a limited set of scikit-learn models and tools can now run with other array libraries and devices like GPUs. The following benchmark results are from running scikit-learn's `LinearDiscriminantAnalysis` with different array libraries:
+Scikit-learn was initially developed to run on CPUs with NumPy arrays. With Array API support, a limited set of scikit-learn models and tools can now run with other array libraries and devices like GPUs. The following benchmark results are from running scikit-learn's `LinearDiscriminantAnalysis` using NumPy and PyTorch on a AMD 5950x CPU and PyTorch on a Nvidia RTX 3090 GPU.
 
-![Bar plot with benchmark results comparing NumPy, PyTorch on CPU, and PyTorch on NVIDIA 3090 running Linear Discriminant Analysis. The PyTorch GPU results are marked as 27 times faster compared to NumPy for fitting the model and 28 times faster compared to NumPy for prediction.](/posts/array-api-support-scikit-learn/benchmark_results.png)
+![Bar plot with benchmark results comparing NumPy and PyTorch on a AMD 5950x CPU and PyTorch on a Nvidia RTX 3090 GPU running Linear Discriminant Analysis. The PyTorch GPU results are marked as 27 times faster compared to NumPy for fitting the model and 28 times faster compared to NumPy for prediction.](/posts/array-api-support-scikit-learn/benchmark_results.png)
 
 The training and prediction times are improved when using PyTorch compared to NumPy. Running the computation on PyTorch CPU tensors is faster than NumPy because PyTorch CPU operations are multi-threaded by default.
 
