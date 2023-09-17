@@ -8,8 +8,8 @@ featuredImage:
   src: /posts/array-api-support-scikit-learn/data-api-scikit-learn-logos.png
   alt: 'The Data APIs logo next to the scikit-learn logo.'
 hero:
-  src: /posts/array-api-support-scikit-learn/data-api-scikit-learn-logos-hero.png
-  alt: 'The Data APIs logo next to the scikit-learn logo.'
+  imageSrc: /posts/array-api-support-scikit-learn/data-api-scikit-learn-logos-hero.png
+  imageAlt: 'The Data APIs logo next to the scikit-learn logo.'
 ---
 
 The Consortium for Python Data APIs Standards developed the Array API standard, which aims to define consistent behavior between the ecosystem of array libraries, such as PyTorch, NumPy, and CuPy. The Array API standard enables libraries, such as scikit-learn, to write code once with the standard and have it work on multiple array libraries. With PyTorch tensors or CuPy arrays, it is now possible to run computations on accelerators, such as GPUs.
