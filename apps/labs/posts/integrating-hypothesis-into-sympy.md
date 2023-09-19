@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/integrating-hypothesis-into-sympy/blog_feature_org.png
   alt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 hero:
-  imageSrc: /posts/integrating-hypothesis-into-sympy/blog_hero_var1.svg
+  imageSrc: /posts/integrating-hypothesis-into-sympy/blog_hero_var2.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.' 
 ---
 This summer I interned at Quansight Labs with a focus of intergrating [Hypothesis](https://github.com/HypothesisWorks/hypothesis/) into the testing suit of [Sympy](https://github.com/sympy/sympy). The primary [pull request](https://github.com/sympy/sympy/pull/25428) to complete this was simple. The primary challenges lied thereafter: questions around the _utility of hypothesis_ and its appropriate usage arose. 
