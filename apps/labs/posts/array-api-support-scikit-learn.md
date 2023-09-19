@@ -1,7 +1,7 @@
 ---
 title: 'Array API Support in scikit-learn'
 published: September 19, 2023
-author: [thomas-j-fan]
+authors: [thomas-j-fan]
 description: 'In this blog post, we share how scikit-learn enabled support for the Array API Standard.'
 category: [Array API]
 featuredImage:
