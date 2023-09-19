@@ -2,14 +2,14 @@
 title: 'Integrating Hypothesis into Sympy'
 authors: [diane-tchuindjo]
 published: September 20, 2023
-description: 'gives an introduction to the utility of hypothesis in sympy'
+description: 'Gives an introduction to the utility of hypothesis in sympy'
 category: [Property Based Testing]
 featuredImage:
-  src: 
-  alt: 
+  src: /posts/integrating-hypothesis-into-sympy/blog_feature_org.png
+  alt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 hero:
-  imageSrc: 
-  imageAlt: 
+  imageSrc: /posts/integrating-hypothesis-into-sympy/blog_hero_var1.svg
+  imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.' 
 ---
 This summer I interned at Quansight Labs with a focus of intergrating [Hypothesis](https://github.com/HypothesisWorks/hypothesis/) into the testing suit of [Sympy](https://github.com/sympy/sympy). The primary [pull request](https://github.com/sympy/sympy/pull/25428) to complete this was simple. The primary challenges lied thereafter: questions around the _utility of hypothesis_ and its appropriate usage arose. 
 
@@ -94,7 +94,7 @@ Sympy is an ideal library for property based testing so integration was painless
 
 ### What Has Changed in Sympy?
 
-Hypothesis is now a required _testing_ dependency of sympy.  Property based tests can be created in the _test_hypothesis.py_ file in respective tests directories (More on this [here](https://github.com/sympy/sympy/blob/master/doc/src/contributing/new-contributors-guide/writing-tests.md#hypothesis-testing)). An example PBT file can be found in  [ntheory/tests](https://github.com/sympy/sympy/blob/master/sympy/ntheory/tests/test_hypothesis.py)
+Hypothesis is now a required _testing_ dependency of sympy.  Property based tests can be created in the _test_hypothesis.py_ file in respective tests directories (More on this [here](https://github.com/sympy/sympy/blob/master/doc/src/contributing/new-contributors-guide/writing-tests.md#hypothesis-testing)). An example testing file using hypothesis can be found in  [ntheory/tests](https://github.com/sympy/sympy/blob/master/sympy/ntheory/tests/test_hypothesis.py)
 ### Utilizing Hypothesis in Sympy
 
 Hypothesis was able to find various bugs and code design flaws. Below I will highlight two:
@@ -102,6 +102,6 @@ Hypothesis was able to find various bugs and code design flaws. Below I will hig
   
 * There were various issues with the lowest common multiple function ([here](https://github.com/sympy/sympy/issues/25624), [here](https://github.com/sympy/sympy/pull/25636), and [here](https://github.com/sympy/sympy/pull/25517#issuecomment-1714474991)), the biggest being when the lcm should make use of the integer implementation vs polynomial implementation (when the defined polynomial is essentially an integer).
 
-# Thank you
+# Acknowledgements
 
-Thank you to my mentors Aaron and Matthew for guidance during this project. Added thanks to Melissa and the general internship program for their support. 
+Thank you to my mentors [Aaron](https://github.com/asmeurer) and [Matthew](https://github.com/honno) for guidance during this project. Added thanks to Melissa and the general internship program for their support. 
