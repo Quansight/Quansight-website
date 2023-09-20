@@ -1,6 +1,6 @@
 ---
 title: 'Integrating Hypothesis into Sympy'
-authors: [diane-tchuindjo]
+authors: [diane-tc]
 published: September 20, 2023
 description: 'Gives an introduction to the utility of hypothesis in sympy'
 category: [Property Based Testing]
