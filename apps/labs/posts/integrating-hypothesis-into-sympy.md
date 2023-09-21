@@ -1,8 +1,8 @@
 ---
-title: 'Integrating Hypothesis into Sympy'
+title: 'Integrating Hypothesis into SymPy'
 authors: [diane-tc]
 published: September 20, 2023
-description: 'Gives an introduction to the utility of hypothesis in sympy'
+description: 'Gives an introduction to the utility of hypothesis in SymPy'
 category: [Property Based Testing]
 featuredImage:
   src: /posts/integrating-hypothesis-into-sympy/blog_feature_org.png
@@ -11,13 +11,13 @@ hero:
   imageSrc: /posts/integrating-hypothesis-into-sympy/blog_hero_var2.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.' 
 ---
-This summer I interned at Quansight Labs with a focus of intergrating [Hypothesis](https://github.com/HypothesisWorks/hypothesis/) into the testing suit of [Sympy](https://github.com/sympy/sympy). The primary [pull request](https://github.com/sympy/sympy/pull/25428) to complete this was simple. The primary challenges lied thereafter: questions around the _utility of hypothesis_ and its appropriate usage arose. 
+This summer I interned at Quansight Labs with a focus of intergrating [Hypothesis](https://github.com/HypothesisWorks/hypothesis/) into the testing suit of [SymPy](https://github.com/sympy/sympy). The primary [pull request](https://github.com/sympy/sympy/pull/25428) to complete this was simple. The primary challenges lied thereafter: questions around the _utility of hypothesis_ and its appropriate usage arose. 
 
 There are many ways to test your software : unit testing, regression testing, diff testing, and mutation testing are a few that come to mind. This blog post is for anyone interested in understanding the value of utilizing _property based testing_ in their software projects. The post  will be broken up into three parts:
 
 * What is Property Based Testing?
 * What is Hypothesis?
-* Experience Integrating into Sympy
+* Experience Integrating into SymPy
 
 If you wish to follow the examples in the blog post, you will need to install Hypothesis via:
 
@@ -88,14 +88,14 @@ Hypothesis is great at finding bugs and in general, writing tests as high level 
   
 * Hypothesis is **_not_** just a bug finder, it helps protect against _future_ bugs. Hypothesis disallows the existence of latent bugs which increases trust in the current implementation of whatever function is being tested. Hypothesis may also reveal weird design patterns. 
 
-# Integrating Hypothesis into Sympy
+# Integrating Hypothesis into SymPy
 
-Sympy is an ideal library for property based testing so integration was painless.
+SymPy is an ideal library for property based testing so integration was painless.
 
-### What Has Changed in Sympy?
+### What Has Changed in SymPy?
 
-Hypothesis is now a required _testing_ dependency of sympy.  Property based tests can be created in the _test_hypothesis.py_ file in respective tests directories (More on this [here](https://github.com/sympy/sympy/blob/master/doc/src/contributing/new-contributors-guide/writing-tests.md#hypothesis-testing)). An example testing file using hypothesis can be found in  [ntheory/tests](https://github.com/sympy/sympy/blob/master/sympy/ntheory/tests/test_hypothesis.py)
-### Utilizing Hypothesis in Sympy
+Hypothesis is now a required _testing_ dependency of SymPy.  Property based tests can be created in the _test_hypothesis.py_ file in respective tests directories (More on this [here](https://github.com/sympy/sympy/blob/master/doc/src/contributing/new-contributors-guide/writing-tests.md#hypothesis-testing)). An example testing file using hypothesis can be found in  [ntheory/tests](https://github.com/sympy/sympy/blob/master/sympy/ntheory/tests/test_hypothesis.py)
+### Utilizing Hypothesis in SymPy
 
 Hypothesis was able to find various bugs and code design flaws. Below I will highlight two:
 * The resultant function returning [incorrect answers](https://github.com/sympy/sympy/issues/25406). While this bug ended up not needing to be resolved, it did  reveal the utility in having Hypothesis check [consistency between implementations](https://github.com/sympy/sympy/issues/25406#issuecomment-1652243538) of the same function.
@@ -104,4 +104,4 @@ Hypothesis was able to find various bugs and code design flaws. Below I will hig
 
 # Acknowledgements
 
-Thank you to my mentors [Aaron](https://github.com/asmeurer) and [Matthew](https://github.com/honno) for guidance during this project. Added thanks to Melissa and the general internship program for their support. 
+Thank you to my mentors [Aaron](https://github.com/asmeurer) and [Matthew](https://github.com/honno) for guidance during this project. Added thanks to [Melissa](https://github.com/melissawm) and the general internship program for their support. 
