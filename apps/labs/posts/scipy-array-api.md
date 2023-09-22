@@ -27,9 +27,10 @@ which will allow users to use SciPy functions with CuPy arrays, PyTorch Tensors 
 many other array/tensor libraries in the future.
 
 This post stands on the shoulders of giants, including
-[Anirudh Dagar](https://anirudhdagar.github.io/)'s blog post "Array Libraries Interoperability"[^1]
+[Anirudh Dagar](https://anirudhdagar.github.io/)'s blog post
+["Array Libraries Interoperability"](https://labs.quansight.org/blog/array-libraries-interoperability)
 (from which my illustration takes much inspiration!) and [Aaron Meurer](https://www.asmeurer.com/blog/about/)'s
-SciPy 2023 talk "Toward Array Interoperability in the Scientific Python Ecosystem"[^2];
+SciPy 2023 talk ["Toward Array Interoperability in the Scientific Python Ecosystem"](https://youtu.be/16rB-fosAWw);
 for details of wider interoperability efforts and the array API standard,
 I urge you to check out those links!
 
@@ -44,25 +45,30 @@ the array API standard.
 SciPy is one part of a wide collection of Open Source tools, written in Python,
 which are fundamental to a range of work which relies on manipulating numbers with computers.
 This collection is known as the Scientific Python Ecosystem - a term which broadly
-encompasses Open Source Python projects which are community driven and used for science[^3].
+encompasses Open Source Python projects which are community driven and used for science
+(see [scientific-python.org](https://scientific-python.org/about/) for more information).
 
 NumPy is the n-dimensional array library which SciPy is built to work with - it is SciPy's only non-optional
 runtime dependency.
 At the time of writing, the vast majority of SciPy functions only work when providing NumPy arrays,
-despite the various interoperability efforts so far (see [^1]).
+despite the various interoperability efforts so far
+(see [Anirudh's blog post](https://labs.quansight.org/blog/array-libraries-interoperability)).
 The main problem with this is that "NumPy provides an array implementation that’s in-memory,
-CPU-only and single-threaded."[^4]
+CPU-only and single-threaded."
 The potential performance improvements that could be won with parallel algorithms, support for distributed
 arrays and support for GPUs (and other hardware accelerators) are huge, and thus "SciPy has had 'support
-for distributed and GPU arrays' on its roadmap"[^5] for five years now.
+for distributed and GPU arrays' on its roadmap" for five years now.
+See [this page](https://data-apis.org/array-api/latest/use_cases.html#use-case-scipy) on the use cases of the
+array API and [this blog post](https://labs.quansight.org/blog/2021/11/pydata-extensibility-vision) by
+Ivan Yashchuk and Ralf Gommers for more information.
 
-Due to these performance wishes, many different "array provider"[^1] libraries, such as CuPy and
+Due to these performance wishes, many different "array provider" libraries, such as CuPy and
 PyTorch, have been developed, with support for one or more of these hardware use-cases in mind.
 However, due to the fact that "array consumer" libraries are typically built to be compatible with
 only one array provider library, many functions have been reimplemented in different consumer libraries,
 just to work with a different provider library.
 In extreme cases, this has led to efforts to reimplement entire consumer libraries,
-for example `cupyx.scipy`[^6].
+for example [`cupyx.scipy`](https://docs.cupy.dev/en/stable/reference/scipy.html).
 This constant reimplementation of the same functionality has led many to see the Scientific Python Ecosystem
 as rather being fractured into many smaller ecosystems, one built around each array library, and to dream for a
 world where the ecosystems are unified and everything works together!
@@ -87,15 +93,18 @@ Fortunately, there has been work on a standard which will help push us towards t
 
 ## The Array API Standard
 
-The Consortium for Python Data API Standards[^7] has created the Python array API standard[^8], which is a
-"specification for what it means for a library to have an ‘array API’"[^2].
+[The Consortium for Python Data API Standards](https://data-apis.org/) has created
+[the Python array API standard](https://data-apis.org/array-api/), which is a "specification for what it means for a
+library to have an ‘array API’" (see [Aaron's talk](https://youtu.be/16rB-fosAWw)).
 Array consumer libraries can write 'array-agnostic' code which is compatible with this specification,
 rather than any particular provider library's API, and it will work with any provider library which complies with the
 standard.
-NumPy, CuPy and PyTorch are all planning to be fully compliant - with this being one of the goals for NumPy 2.0[^9] -
-and JAX and Dask also have implementations in progress.
-The consortium has also developed array-api-compat[^10], a small wrapper around each array library (currently NumPy,
-CuPy and PyTorch), which, for practical purposes, is fully compliant with the standard.
+NumPy, CuPy and PyTorch are all planning to be fully compliant - with this being one of
+[the goals for NumPy 2.0](https://github.com/orgs/numpy/projects/9) - and JAX and Dask also have implementations
+in progress.
+The consortium has also developed [array-api-compat](https://github.com/data-apis/array-api-compat),
+a small wrapper around each array library (currently NumPy, CuPy and PyTorch), which, for practical purposes,
+is fully compliant with the standard.
 
 This means that array consumer libraries are able to start writing and testing array-agnostic code today.
 For a NumPy-consuming library like SciPy, this has opened the opportunity to implement support for CuPy and
@@ -106,7 +115,7 @@ PyTorch by adding support for the standard into submodules.
 Before these interoperability efforts started, SciPy did not work well with provider libraries other than
 NumPy at all (as expressed by
 [this amazing illustration](https://labs.quansight.org/posts/array-libraries-interoperability/array_wonderland.JPG)
-from [^1]).
+from [Anirudh's blog post](https://labs.quansight.org/blog/array-libraries-interoperability)).
 For example, when trying to use `scipy.fft.fft` with a CuPy array, users would be hit with this error message:
 
 ```python
@@ -128,31 +137,35 @@ SciPy functions can simply change the provider library used for their input data
 program still work the same, while taking advantage of any benefits provided by the new provider library.
 
 To kick off the process of this work, the request-for-comment (RFC) issue
-"SciPy array types & libraries support"[^11] was opened.
+["SciPy array types & libraries support"](https://github.com/scipy/scipy/issues/18286) was opened.
 This set out the basic design principle of "***container type in == container type out***", as well as a
 detailed plan for how to treat different array inputs, and the development strategy.
 To summarise, the scope of the work is to treat all array inputs as specified in the RFC and to convert all
 existing pure Python + NumPy code to be array API compatible.
 Out of scope is converting the C/C++/Cython/Fortran code which is used within SciPy.
 For this, some dispatching mechanism seems like the right solution, but no particular solution or development
-strategy has been settled on yet - see the discussion of `uarray` in [^1] and [^11] for more information.
+strategy has been settled on yet - see the discussion of `uarray` in
+[Anirudh's blog post](https://labs.quansight.org/blog/array-libraries-interoperability) and
+[the RFC](https://github.com/scipy/scipy/issues/18286) for more information.
 
-Near the start of my internship, the first PR to convert a SciPy submodule[^12] was merged, with `scipy.cluster`
-being covered (modulo a few minor follow-ups).
+Near the start of my internship,
+[the first PR to convert a SciPy submodule](https://github.com/scipy/scipy/pull/18668) was merged,
+with `scipy.cluster` being covered (modulo a few minor follow-ups).
 This PR added a lot of machinery (which I will explore in more detail later) to enable conversion and testing,
 while keeping the new behaviour behind an experimental environment variable.
 
 My first task was to convert `scipy.fft`.
-`fft` is an array API standard extension module[^13], which means that array provider libraries supporting the
-standard can choose to implement it or not.
+`fft` is an
+[array API standard extension module](https://data-apis.org/array-api/latest/extensions/fourier_transform_functions.html),
+which means that array provider libraries supporting the standard can choose to implement it or not.
 `scipy.fft`'s backend is mostly written in C++, but thanks to the extension module, we were able to convert all
 of the standard extension functions to be compatible with all libraries which:
 
 1. comply with the standard
 2. implement the `fft` extension
 
-After the main PR[^14] merged, the ability to use CuPy arrays and PyTorch Tensors with the standard
-extension functions was enabled when the experimental environment variable `SCIPY_ARRAY_API` is set to `1`.
+After [the main PR](https://github.com/scipy/scipy/pull/19005) merged, the ability to use CuPy arrays and PyTorch Tensors
+with the standard extension functions was enabled when the experimental environment variable `SCIPY_ARRAY_API` is set to `1`.
 For example, the code in the following benchmark - the task of smoothing an image (taking a 2-D image,
 using `scipy.fftn`, zero-ing out the highest frequency components, and using `scipy.ifftn`) using CuPy
 arrays - now works:
@@ -170,7 +183,7 @@ x = scipy.fft.ifftn(f_ishift)
 ```
 
 On my machine, this demonstrated a ~20x performance improvment over using NumPy arrays in the same functions.
-You can see the full benchmark on [^14].
+You can see the full benchmark on [the PR](https://github.com/scipy/scipy/pull/19005).
 
 Completing this PR wasn't without difficulty, as lots of SciPy's brand new array API testing infrastructure
 needed improvements in the process.
@@ -190,7 +203,8 @@ I'll start by showing what the necessary changes look like, before explaining in
 machinery works.
 
 For functions which are made up of pure Python and NumPy, the conversion process is really quite simple!
-It involves comparing the currently used functions/methods with those in the standard API specification[^15]
+It involves comparing the currently used functions/methods with those in
+[the standard API specification](https://data-apis.org/array-api/latest/API_specification/)
 and mimicking the current behaviour.
 The key step is the addition of `xp = array_namespace(x, y)`, where `x` and `y` (and so on for more inputs)
 are the input arrays.
@@ -238,8 +252,8 @@ def fht(a, dln, mu, offset=0.0, bias=0.0):
 For functions which hit compiled code, the standard isn't enough anymore.
 For now, we attempt to convert to NumPy using `np.asarray` before the compiled code, then convert back to our
 array's namespace using `xp.asarray` after it.
-This will raise exceptions for arrays on a different device to the CPU, as justified in the RFC[^11]
-(tldr: we want to avoid silent device transfers).
+This will raise exceptions for arrays on a different device to the CPU, as justified in
+[the RFC](https://github.com/scipy/scipy/issues/18286) (tldr: we want to avoid silent device transfers).
 
 Here is an example from `scipy.fft`'s Discrete Sine and Cosine Transforms, where `_pocketfft` is the backend
 which SciPy uses for NumPy arrays:
@@ -261,7 +275,8 @@ def dctn(x, type=2, s=None, axes=None, norm=None,
 ```
 
 As a side note, there has also been work to support the calling of some specific backends instead of hitting
-compiled code in `scipy.special`[^16], which enables GPU support for at least some provider libraries.
+compiled code in `scipy.special` (in [this PR](https://github.com/scipy/scipy/pull/19023/)),
+which enables GPU support for at least some provider libraries.
 I will keep this blog post focused on just array-agnostic code since this work in `special` should ultimately be
 replaced by a more robust dispatching mechanism, whereas the array-agnostic code is here to stay!
 
@@ -340,16 +355,17 @@ When we call `array_namespace`, a little more is done than just returning the na
 If the environment variable `SCIPY_ARRAY_API` is not set, `array_api_compat.numpy`
 (the compatible wrapper for `numpy`) is returned, regardless of the type of the input array.
 This allows us to retain all pre-array API behaviour unless the user has set the environment variable.
-If it isn't set, we raise exceptions for known-bad subclasses (as set out in the RFC[^11]),
+If it isn't set, we raise exceptions for known-bad subclasses
+(as set out in [the RFC](https://github.com/scipy/scipy/issues/18286)),
 like NumPy `MaskedArray`s and object arrays.
 After that, we retrieve the namespace using `array_api_compat.array_namespace`.
 
 The current testing infrastructure allows us to test with PyTorch (CPU & GPU) and CuPy through the command line.
 For example, `python dev.py test -b pytorch` tests with PyTorch, and `python dev.py test -b all` tests with
 NumPy, CuPy, PyTorch and `numpy.array_api`.
-`numpy.array_api`[^17] is a strict minimal implementation of the standard, which allows us to make sure that our
-array-agnostic code is _really_ array-agnostic - if our tests pass for `numpy.array_api`, then they will pass
-for any fully compliant library.
+[`numpy.array_api`](https://numpy.org/devdocs/reference/array_api.html) is a strict minimal implementation of the
+standard, which allows us to make sure that our array-agnostic code is _really_ array-agnostic -
+if our tests pass for `numpy.array_api`, then they will pass for any fully compliant library.
 PyTorch GPU can be enabled by setting the environment variable `SCIPY_DEVICE=cuda`.
 
 ---
@@ -359,8 +375,10 @@ PyTorch GPU can be enabled by setting the environment variable `SCIPY_DEVICE=cud
 At the time of writing, SciPy has two of its submodules converted (in the sense I have described above):
 `cluster` and `fft`.
 `linalg` and `signal` have partial coverage in progress, and some of the compiled-code functions in `special`
-have been covered, with additional calling-out to CuPy, PyTorch and JAX, in [^16], as mentioned above.
-The tracker issue[^18] should be kept up to date with progress as more submodules are converted.
+have been covered, with additional calling-out to CuPy, PyTorch and JAX, in
+[the `special` PR](https://github.com/scipy/scipy/pull/19023/), as mentioned above.
+[The tracker issue](https://github.com/scipy/scipy/issues/18867)
+should be kept up to date with progress as more submodules are converted.
 
 We currently support CuPy and PyTorch through `array-api-compat`, with Dask and JAX on the horizon.
 The great thing is that whenever a provider library complies with the standard, it will work with our
@@ -368,8 +386,9 @@ converted submodules, without SciPy even needing to know that it exists!
 
 ## Looking to the Future
 
-I have opened the first PR for `scipy.linalg`[^19] which covers the functions which are part of the
-`linalg` standard extension module[^20].
+I have opened [the first PR for `scipy.linalg`](https://github.com/scipy/scipy/pull/19260)
+which covers the functions which are part of
+[the `linalg` standard extension module](https://data-apis.org/array-api/latest/extensions/linear_algebra_functions.html).
 In the short term, we hope to see PRs covering the rest of the submodules and continued refinement of our
 testing infrastructure.
 Looking further ahead, once all libraries which we want to support comply with the standard, we can drop
@@ -412,25 +431,11 @@ attended (as well as coordinating the internship program!).
 
 ## References
 
-[^1]: https://labs.quansight.org/blog/array-libraries-interoperability
-[^2]: https://youtu.be/16rB-fosAWw
-[^3]: https://scientific-python.org/about/
-[^4]: https://data-apis.org/array-api/latest/use_cases.html#use-case-scipy
-[^5]: https://labs.quansight.org/blog/2021/11/pydata-extensibility-vision
-[^6]: https://docs.cupy.dev/en/stable/reference/scipy.html
-[^7]: https://data-apis.org/
-[^8]: https://data-apis.org/array-api/
-[^9]: https://github.com/orgs/numpy/projects/9
-[^10]: https://github.com/data-apis/array-api-compat
-[^11]: https://github.com/scipy/scipy/issues/18286
-[^12]: https://github.com/scipy/scipy/pull/18668
-[^13]: https://data-apis.org/array-api/latest/extensions/fourier_transform_functions.html
-[^14]: https://github.com/scipy/scipy/pull/19005
-[^15]: https://data-apis.org/array-api/latest/API_specification/
-[^16]: https://github.com/scipy/scipy/pull/19023/
-[^17]: https://numpy.org/devdocs/reference/array_api.html
-[^18]: https://github.com/scipy/scipy/issues/18867
-[^19]: https://github.com/scipy/scipy/pull/19260
-[^20]: https://data-apis.org/array-api/latest/extensions/linear_algebra_functions.html
+- [The array API standard](https://data-apis.org/array-api/)
+- ["Toward Array Interoperability in the Scientific Python Ecosystem" SciPy 2023 Talk](https://youtu.be/16rB-fosAWw)
+- ["SciPy array types & libraries support" RFC](https://github.com/scipy/scipy/issues/18286)
+- ["Array Libraries Interoperability" blog post](https://labs.quansight.org/blog/array-libraries-interoperability)
+- [array-api-compat](https://github.com/data-apis/array-api-compat)
+- [Tracker issue for support in SciPy](https://github.com/scipy/scipy/issues/18867)
 
 <br />
