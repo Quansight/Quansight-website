@@ -133,7 +133,7 @@ program still work the same, while taking advantage of any benefits of the new p
 
 To kick off the process of this work, the request-for-comment (RFC) issue
 ["SciPy array types & libraries support"](https://github.com/scipy/scipy/issues/18286) was opened.
-This set out the basic design principle of "***container type in == container type out***", as well as a
+This set out the basic design principle of "**container type in == container type out**", as well as a
 detailed plan for how to treat different array inputs, and the development strategy.
 To summarise, the scope of the work is to treat all array inputs as specified in the RFC and to convert all
 existing pure Python + NumPy code to be array API compatible.
