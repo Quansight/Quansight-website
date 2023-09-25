@@ -1,6 +1,6 @@
 ---
 title: 'Array API Standard in SciPy'
-published: September 21, 2023
+published: September 25, 2023
 authors: [lucas-colley]
 description: "How can SciPy use the Array API Standard to achieve array library interoperability?"
 category: [Array API]
@@ -217,7 +217,7 @@ def fht(a, dln, mu, offset=0.0, bias=0.0):
 +
      # size of transform
 -    n = np.shape(a)[-1]
-+    n = a.shape[-1]
++    n = a.shape[-1] # example of a change where the standard differs slightly from the NumPy API
  
      # bias input array
      if bias != 0:
@@ -350,7 +350,8 @@ an overview!
 When we call `array_namespace`, a little more is done than just returning the namespace.
 If the environment variable `SCIPY_ARRAY_API` is not set, `array_api_compat.numpy`
 (the compatible wrapper for `numpy`) is returned, regardless of the type of the input array.
-This allows us to retain all pre-array API behaviour unless the user has set the environment variable.
+This allows us to retain all pre-array API behaviour unless the user has set the environment variable,
+since the arrays are caught by our `if is_numpy(xp)` code path.
 If it isn't set, we raise exceptions for known-bad subclasses
 (as set out in [the RFC](https://github.com/scipy/scipy/issues/18286)),
 like NumPy `MaskedArray`s and object arrays.
