@@ -120,24 +120,30 @@ non-compliant and devising a fix for the same. The issue tracker can be found
 [here](https://github.com/pytorch/pytorch/issues/69991).
 
 ## Support for `chunk_size` in `vmap` and `jacrev`
-Computing the Jacobian can require a lot of memory and related
-[issue](https://github.com/pytorch/functorch/issues/680) were raised by the users.
-To mitigate this, we added support to compute the `jacrev` and `vmap` in smaller
-chunks decided based on `chunk_size` argument to reduce the peak memory usage
-during the computation. Using this argument user can specify the number of rows
-of the Jacobian to be computed at once. Same argument was added to `vmap` for
-similar purpose. This feature was added in [jacrev PR](https://github.com/pytorch/pytorch/pull/89376)
-and [vmap PR](https://github.com/pytorch/pytorch/pull/91157).
+The computation of the Jacobian can be memory-intensive, and users have raised
+concerns about related issues, as detailed in this [link](https://github.com/pytorch/functorch/issues/680).
+In response to these concerns, we have introduced a feature that allows for the
+calculation of `jacrev` and `vmap` in smaller, user-defined chunks, determined
+by the `chunk_size` argument. This adjustment serves to reduce the peak memory
+usage during the computation process. With this argument, users can specify the
+number of rows of the Jacobian to be computed at once. This enhancement was
+incorporated into the [jacrev PR](https://github.com/pytorch/pytorch/pull/89376)
+and the [vmap PR](https://github.com/pytorch/pytorch/pull/91157) to address
+these issues.
 
 ## Support for `linearize` transform
 
-`jvp` transform computes both `f(x)` and jacobian-vector product. So, even if
-one wants to compute `jvp` for fixed inputs, `jvp` transform ends up repeating
-the evaluation of `f(x)`. For such scenarios, one can use `linearize` which is
-useful if `jvp` is to be computed multiple times at fixed `primals`. However,
-to achieve this, linearize saves intermediate computation and has higher memory
-requrements than directly applying `jvp`. `linearize` was added in this
-[PR](https://github.com/pytorch/pytorch/pull/94173)
+The "jvp" transform is designed to calculate both `f(x)` and the Jacobian-vector
+product. Consequently, even when one intends to compute the Jacobian-vector
+product for fixed inputs, the `jvp` transform still redundantly evaluates `f(x)`.
+To address such scenarios, the `linearize` transform comes into play. This
+transform proves valuable when multiple `jvp` computations are needed for
+constant `primals`.
+
+However, it's worth noting that to achieve this efficiency, `linearize` optimizes
+by storing intermediate computations, which can result in higher memory
+requirements compared to directly applying `jvp`. `linearize` transform was
+implemented in this [PR](https://github.com/pytorch/pytorch/pull/94173).
 
 ## Supporting transforms for `torch.compile`
 
