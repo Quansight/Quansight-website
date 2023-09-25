@@ -35,33 +35,30 @@ Example:
 import torch
 
 # Written to handle only single sample.
-# Calling it with batched input, will
-# result in incorrect output.
-def my_simple_model(input, weight, bias):
-    return input @ weight + bias
+def my_simple_model(feature_vec, weight):
+    return feature_vec.dot(weight).relu()
 
-batched_inputs = torch.randn(3, 3, 3, 3)
-weight = torch.randn(3, 1) * 5
-bias = torch.randn([])
+batch_size = 4
+batched_inputs = torch.randn(batch_size, 3)
+weight = torch.randn(3)
 
 # For Loop version
 expected = []
 for input in batched_inputs:
-    expected.append(my_simple_model(input, weight, bias))
+    expected.append(my_simple_model(input, weight))
 expected = torch.stack(expected)
 
 # Vmap
 # `in_dims` specifies the dimension that should be mapped over.
 # In this case, we map only over 0-dim of `batched_inputs`.
-actual = torch.vmap(my_simple_model, in_dims=(0, None, None))(batched_inputs, weight, bias)
+actual = torch.vmap(my_simple_model, in_dims=(0, None))(batched_inputs, weight)
 
 # Verify that the results match.
 torch.testing.assert_close(expected, actual)
-
 ```
 
 To support `vmap` for PyTorch operators, we need to specify the batching rule
-i.e. how to apply the given operator for a batched input. This is similar to how
+i.e. how to map the given function for a batched input. This is similar to how
 PyTorch internally specifies the rule for gradient computation for operators.
 Batching rule is essentially a function which takes one or multiple batched
 inputs and computes the batched operation. In the above example to support
