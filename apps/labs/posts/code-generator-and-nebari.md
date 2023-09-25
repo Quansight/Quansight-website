@@ -5,10 +5,10 @@ authors: [aryan-gupta]
 description: 'A summary of my contributions to the Code-Generator Project and PyTorch-Ignite ecosystem in the past few months as Quansight Labs intern and my learnings in the process.'
 category: [PyData ecosystem, Machine Learning, OSS Experience]
 featuredImage:
-  src: /posts/code-generator-integrations/blog_feature_var2.png
+  src: /posts/code-generator-and-nebari/blog_feature_var2.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
-  imageSrc: /posts/code-generator-integrations/hero.png
+  imageSrc: /posts/code-generator-and-nebari/hero.png
   imageAlt: 'The Image of the Code-Generator app'
 ---
 
@@ -70,16 +70,16 @@ Some of the related PRs can be found here: https://github.com/pytorch-ignite/cod
 I worked on testing this great infrastructure tool, [Nebari](http://nebari.dev/), which is used for managing GPU clusters and Cloud infrastructure for data scientists and other professionals. It provides a [JupyterHub](https://jupyterhub.readthedocs.io/) interface, which can be very helpful for deploying code and running tools. So, to explain the integration of my project with Nebari, firstly, I would like to discuss how the project stores the templates with a particular configuration.
 
 <center>
-<img src='/posts/code-generator-integrations/nebari-image.png' alt='The Nebari-server Option in Code-Generator App' height="300">
+<img src='/posts/code-generator-and-nebari/nebari-image.png' alt='The Nebari-server Option in Code-Generator App' height="300">
 </center>
 
 To explain it quickly, let’s see how the app works when you click on `Open in Nebari` . After the button is clicked, we use a `netlify` function to commit a zip file and Jupyter notebook using `github/octokit` to `[PyTorch-Ignite/nbs](https://github.com/pytorch-ignite/nbs)`repository. We can see a committed notebook example below. To understand this better, you can read the code in [PyTorch-Ignite/code-generator/functions/nebari.js](https://github.com/pytorch-ignite/code-generator/tree/main/functions/nebari.js).
 
-![GitHub Notebook Pushed By Code-Generator](posts/code-generator-integrations/github-notebook-push.png)
+![GitHub Notebook Pushed By Code-Generator](posts/code-generator-and-nebari/github-notebook-push.png)
 
 Now, to integrate this with the `Nebari` server , we used an extension called [`Jupyterlab-Github`](https://github.com/jupyterlab/jupyterlab-github). I wrote a `netlify` function to create a URL that can use this extension, open the generated link in the new tab, pull the notebook committed by the above `netlify` function, and open this notebook in the server. An example can be seen here. Pretty cool, right?
 
-![Template Opened in Nebari](posts/code-generator-integrations/template-open-in-nebari.png)
+![Template Opened in Nebari](posts/code-generator-and-nebari/template-open-in-nebari.png)
 
 For this, I appreciate the Jupyter community's extension ecosystem. They have great extensions for everything and maybe in the future, I may work or try to add more extensions to increase the functionality in the app. Also, I would like to thank the Nebari-dev community here, who provided such great support in testing this in the Nebari server.
 
