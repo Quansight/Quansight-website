@@ -12,8 +12,8 @@ hero:
   imageAlt: 'An illustration of three cartoon characters - CuPy Cube, SciPy Snake and PyTorch Flame - together (happily!) under a tree with green leaves bearing the Consortium for Python Data API Standards logo ("DataAPIs") on a brown background. CuPy Cube and PyTorch Flame are made up of the CuPy and PyTorch logos respectively, with smiley faces and stick legs. SciPy Snake is a green snake with a red tongue, wearing sunglasses with SciPy logos for lenses. Some graphical elements on a white background surround the illustration.'
 ---
 
-In this blog post I discuss how SciPy is harnessing the power of array-agnostic code to become
-more interoperable, and why that matters.
+In this blog post I discuss how [SciPy](https://www.nature.com/articles/s41592%E2%80%90019%E2%80%900686%E2%80%902)
+is harnessing the power of array-agnostic code to become more interoperable, and why that matters.
 
 ---
 
@@ -48,8 +48,8 @@ This collection is known as the Scientific Python Ecosystem - a term which broad
 encompasses Open Source Python projects which are community driven and used for science
 (see [scientific-python.org](https://scientific-python.org/about/) for more information).
 
-NumPy is the n-dimensional array library which SciPy is built to work with - it is SciPy's only non-optional
-runtime dependency.
+[NumPy](https://www.nature.com/articles/s41586-020-2649-2) is the n-dimensional array library which SciPy is
+built to work with - it is SciPy's only non-optional runtime dependency.
 At the time of writing, the vast majority of SciPy functions only work when providing NumPy arrays,
 despite the various interoperability efforts so far
 (see [Anirudh's blog post](https://labs.quansight.org/blog/array-libraries-interoperability)).
@@ -58,9 +58,10 @@ CPU-only and single-threaded."
 The potential performance improvements that could be won with parallel algorithms, support for distributed
 arrays and support for GPUs (and other hardware accelerators) are huge, and thus "SciPy has had 'support
 for distributed and GPU arrays' on its roadmap" for five years now.
-See [this page](https://data-apis.org/array-api/latest/use_cases.html#use-case-scipy) on the use cases of the
-array API and [this blog post](https://labs.quansight.org/blog/2021/11/pydata-extensibility-vision) by
-Ivan Yashchuk and Ralf Gommers for more information.
+For more information, see
+[this page on the use cases of the array API](https://data-apis.org/array-api/latest/use_cases.html#use-case-scipy),
+and [the blog post: "A vision for extensibility to GPU & distributed support for SciPy, scikit-learn, scikit-image and beyond"](https://labs.quansight.org/blog/2021/11/pydata-extensibility-vision)
+by Ivan Yashchuk and Ralf Gommers.
 
 Due to these performance wishes, many different "array provider" libraries, such as CuPy and
 PyTorch, have been developed, with support for one or more of these hardware use-cases in mind.
@@ -120,12 +121,6 @@ For example, when trying to use `scipy.fft.fft` with a CuPy array, users would b
 
 ```python
 >>> import scipy
->>> import numpy as np
->>> scipy.fft.fft(np.exp(2j * np.pi * np.arange(8) / 8))
-array([-3.44509285e-16+1.14423775e-17j,
-       …
-       0.00000000e+00+1.22464680e-16j])
-
 >>> import cupy as cp
 >>> scipy.fft.fft(cp.exp(2j * cp.pi * cp.arange(8) / 8))
 …
@@ -154,7 +149,7 @@ with `scipy.cluster` being covered (modulo a few minor follow-ups).
 This PR added a lot of machinery (which I will explore in more detail later) to enable conversion and testing,
 while keeping the new behaviour behind an experimental environment variable.
 
-My first task was to convert `scipy.fft`.
+My first task was to convert `scipy.fft`, SciPy's Fast Fourier Transform module.
 `fft` is an
 [array API standard extension module](https://data-apis.org/array-api/latest/extensions/fourier_transform_functions.html),
 which means that array provider libraries supporting the standard can choose to implement it or not.
@@ -182,14 +177,15 @@ f_ishift = scipy.fft.ifftshift(original - fshift)
 x = scipy.fft.ifftn(f_ishift)
 ```
 
-On my machine, this demonstrated a ~20x performance improvment over using NumPy arrays in the same functions.
+On my machine (AMD Ryzen 5 2600 & NVIDIA GeForce GTX 1060 6GB), this demonstrated a ~15x performance improvment over
+using NumPy arrays in the same functions.
 You can see the full benchmark on [the PR](https://github.com/scipy/scipy/pull/19005).
 
 Completing this PR wasn't without difficulty, as lots of SciPy's brand new array API testing infrastructure
 needed improvements in the process.
 I contributed quite a few PRs to help make this testing infrastructure more robust, and squash some bugs;
 you can find all of my merged contributions relating to array types
-[here](https://github.com/scipy/scipy/pulls?q=is%3Apr+author%3Alucascolley+is%3Amerged+label%3A%22array+types%22).
+[in this filtered view of SciPy's PR tracker](https://github.com/scipy/scipy/pulls?q=is%3Apr+author%3Alucascolley+is%3Amerged+label%3A%22array+types%22).
 This was also my first ever big contribution to Open Source, so there was a large (but very rewarding!) learning
 process with Git, GitHub and collaboration with reviewers.
 In the next section, I'll dive into the process of converting `scipy.fft` and share some of the lessons learned
@@ -312,7 +308,7 @@ def fft(x, n=None, axis=-1, norm=None,
                        overwrite_x=overwrite_x, workers=workers, plan=plan)
 ```
 
-After converting the production functions, we also need to convert the tests!
+After converting the production functions, we also need to convert the tests.
 
 We have the `@array_api_compatible` decorator, which parametrizes `xp` with the
 available backends that we have for testing.
@@ -362,7 +358,7 @@ After that, we retrieve the namespace using `array_api_compat.array_namespace`.
 
 The current testing infrastructure allows us to test with PyTorch (CPU & GPU) and CuPy through the command line.
 For example, `python dev.py test -b pytorch` tests with PyTorch, and `python dev.py test -b all` tests with
-NumPy, CuPy, PyTorch and `numpy.array_api`.
+NumPy, `numpy.array_api`, CuPy and PyTorch.
 [`numpy.array_api`](https://numpy.org/devdocs/reference/array_api.html) is a strict minimal implementation of the
 standard, which allows us to make sure that our array-agnostic code is _really_ array-agnostic -
 if our tests pass for `numpy.array_api`, then they will pass for any fully compliant library.
@@ -372,8 +368,8 @@ PyTorch GPU can be enabled by setting the environment variable `SCIPY_DEVICE=cud
 
 ## Status
 
-At the time of writing, SciPy has two of its submodules converted (in the sense I have described above):
-`cluster` and `fft`.
+At the time of writing, SciPy has two of its submodules, cluster and fft, converted 
+(in the sense I have described above).
 `linalg` and `signal` have partial coverage in progress, and some of the compiled-code functions in `special`
 have been covered, with additional calling-out to CuPy, PyTorch and JAX, in
 [the `special` PR](https://github.com/scipy/scipy/pull/19023/), as mentioned above.
