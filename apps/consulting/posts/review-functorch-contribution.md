@@ -2,24 +2,26 @@
 title: 'Review: `torch.func` Contribution'
 published: September 22, 2023
 author: kshiteej-kalambarkar
-description: '`torch.func` (formerly known as `functorch`) is a PyTorch module
-designed to offer JAX-like transformations. Within this module, various higher-order
+description: '`torch.func` (previously known as `functorch`) is a PyTorch module
+designed to offer JAX-like transforms. Within this module, various higher-order
 functions, such as `grad`, `vmap`, and `vjp` are made accessible. These
-transformations empower users to perform transformations on the entire model in
-functional manner. The beauty of these transformations lies in their ability to
-compose with one another. Thanks to this, the process of calculating per-sample
-gradients becomes the straightforward application of `vmap(grad(model))`.'
+transforms help users to easily compute gradients for the paramters of their model
+or write batch-size agnostic code. The beauty of these transformations lies in
+their ability to compose with one another. Thanks to this, the process of
+calculating per-sample gradients becomes the straightforward application of
+`vmap(grad(model))`.'
 ---
 
 <base target="_blank" />
 
-`torch.func` (formerly known as `functorch`) is a PyTorch module designed to
-offer JAX-like transformations. Within this module, various higher-order
+`torch.func` (previously known as `functorch`) is a PyTorch module designed to
+offer JAX-like transforms. Within this module, various higher-order
 functions, such as `grad`, `vmap`, and `vjp` are made accessible. These
-transformations empower users to perform transformations on the entire model in
-functional manner. The beauty of these transformations lies in their ability to
-compose with one another. Thanks to this, the process of calculating per-sample
-gradients becomes the straightforward application of `vmap(grad(model))`.
+transforms help users to easily compute gradients for the paramters of their model
+or write batch-size agnostic code. The beauty of these transformations lies in
+their ability to compose with one another. Thanks to this, the process of
+calculating per-sample gradients becomes the straightforward application of
+`vmap(grad(model))`.
 
 Here are a few of the tasks we had the opportunity to tackle:
 
