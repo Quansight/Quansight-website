@@ -24,10 +24,13 @@ gradients becomes the straightforward application of `vmap(grad(model))`.
 Here are a few of the tasks we had the opportunity to tackle:
 
 ## Adding Batching Rule for `vmap`
-`vmap` is a transform which takes a function `func` that runs on a single
-datapoint and returns a function which can handle a batch of data. Semantically,
-it runs a `for`-loop over all data points and stacks all the results together.
-It does so efficiently by pushing the `for`-loop into the PyTorch operations,
+`vmap` is a transformation that accepts a function `func` designed to operate on
+a single data point. It then generates a new function capable of applying the
+given function to a batched input. When processing batched input, an additional
+dimension, denoted by `in_dims`, is introduced to indicate which dimension to
+apply the function over. Conceptually, it emulates a `for` loop that iterates
+through all data points and stacks the results. Importantly, it performs this
+operation efficiently by pushing the `for` loop into the PyTorch operations,
 effectively vectorizing the computation. Consider the following example:
 
 Example:
@@ -58,7 +61,7 @@ torch.testing.assert_close(expected, actual)
 ```
 
 To support `vmap` for PyTorch operators, we need to specify the batching rule
-i.e. how to map the given function for a batched input. This is similar to how
+i.e. how to map the given function over a batched input. This is similar to how
 PyTorch internally specifies the rule for gradient computation for operators.
 Batching rule is essentially a function which takes one or multiple batched
 inputs and computes the batched operation. In the above example to support
