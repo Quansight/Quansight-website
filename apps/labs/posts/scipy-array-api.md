@@ -63,9 +63,9 @@ For more information, see
 and [the blog post: "A vision for extensibility to GPU & distributed support for SciPy, scikit-learn, scikit-image and beyond"](https://labs.quansight.org/blog/2021/11/pydata-extensibility-vision)
 by Ivan Yashchuk and Ralf Gommers.
 
-Due to these performance wishes, many different "array provider" libraries, such as CuPy and
+Due to these performance wishes, many different 'array provider' libraries, such as CuPy and
 PyTorch, have been developed, with support for one or more of these hardware use-cases in mind.
-However, due to the fact that "array consumer" libraries are typically built to be compatible with
+However, due to the fact that 'array consumer' libraries are typically built to be compatible with
 only one array provider library, many functions have been reimplemented in different consumer libraries,
 just to work with a different provider library.
 In extreme cases, this has led to efforts to reimplement entire consumer libraries,
@@ -109,7 +109,7 @@ is fully compliant with the standard.
 
 This means that array consumer libraries are able to start writing and testing array-agnostic code today.
 For a NumPy-consuming library like SciPy, this has opened the opportunity to implement support for CuPy and
-PyTorch by adding support for the standard into submodules.
+PyTorch by adding support for the standard via `array-api-compat`.
 
 ## SciPy Support for the Array API
 
@@ -129,7 +129,7 @@ KeyError: 'ALIGNED is not defined for cupy.ndarray.flags'
 
 Adopting the standard is the first step towards a future where users who have programs made up of
 SciPy functions can simply change the provider library used for their input data, and have the rest of the
-program still work the same, while taking advantage of any benefits provided by the new provider library.
+program still work the same, while taking advantage of any benefits of the new provider library.
 
 To kick off the process of this work, the request-for-comment (RFC) issue
 ["SciPy array types & libraries support"](https://github.com/scipy/scipy/issues/18286) was opened.
@@ -138,7 +138,7 @@ detailed plan for how to treat different array inputs, and the development strat
 To summarise, the scope of the work is to treat all array inputs as specified in the RFC and to convert all
 existing pure Python + NumPy code to be array API compatible.
 Out of scope is converting the C/C++/Cython/Fortran code which is used within SciPy.
-For this, some dispatching mechanism seems like the right solution, but no particular solution or development
+For this, some dispatching mechanism seems like the right solution, but no particular implementation or development
 strategy has been settled on yet - see the discussion of `uarray` in
 [Anirudh's blog post](https://labs.quansight.org/blog/array-libraries-interoperability) and
 [the RFC](https://github.com/scipy/scipy/issues/18286) for more information.
@@ -276,7 +276,7 @@ which enables GPU support for at least some provider libraries.
 I will keep this blog post focused on just array-agnostic code since this work in `special` should ultimately be
 replaced by a more robust dispatching mechanism, whereas the array-agnostic code is here to stay!
 
-However, as mentioned above, `fft` is a standard extension module, so the standard can still help us with some
+Despite this limitation on GPU support, as mentioned above, `fft` is a standard extension module, so the standard can still help us with some
 compiled code!
 For the functions in the extension, we can check whether the array's namespace implements the extension with
 `if hasattr(xp, 'fft')`, and use `xp.fft` if so.
@@ -316,7 +316,7 @@ We have also written three new assertions - `assert_close`, `assert_equal` and `
 which incorporate checks for matching namespaces and dtypes.
 If any tests use results or input data from NumPy, we convert everything to the `xp` namespace before using
 these assertions.
-The assertions make use of functions from `xp` where possible which helps avoid device transfers.
+The assertions make use of functions from `xp` where possible which helps to avoid device transfers.
 
 Other than that, we make similar changes to those in the production functions so that every test works
 with all of the backends we test with.
@@ -372,7 +372,7 @@ At the time of writing, SciPy has two of its submodules, cluster and fft, conver
 (in the sense I have described above).
 `linalg` and `signal` have partial coverage in progress, and some of the compiled-code functions in `special`
 have been covered, with additional calling-out to CuPy, PyTorch and JAX, in
-[the `special` PR](https://github.com/scipy/scipy/pull/19023/), as mentioned above.
+[the `special` PR](https://github.com/scipy/scipy/pull/19023/) mentioned above.
 [The tracker issue](https://github.com/scipy/scipy/issues/18867)
 should be kept up to date with progress as more submodules are converted.
 
@@ -403,13 +403,13 @@ Going from having never contributed to Open Source to feeling proficient as a co
 significant contributions merged towards a bleeding-edge project, has been a challenging but very special
 experience!
 Regular meetings with my mentors and the community meant that I was always able to ask questions when I was
-confused, and learn about the project and SciPy as a whole.
+confused, and learn about the array types project and SciPy as a whole.
 At Quansight Labs, I was part of a cohort of interns and we also met regularly to discuss our achievements and
 explain where we were stuck.
 Sometimes, just putting your difficulties into words can help you figure things out from a different perspective!
 
 After joining the SciPy community as part of my internship, I am keen to contribute voluntarily in the future 
-and help to advance science in this way.
+and help to sustain science in this way.
 Knowing that my code will be used in a package as widely depended on as SciPy is a big motivation, and I am
 invested in the success of the array API standard now!
 
@@ -423,15 +423,15 @@ I would also like to thank the SciPy community, especially
 [Tyler Reddy](https://github.com/tylerjereddy) and [Matt Haberland](https://github.com/mdhaber)
 who have been greatly involved in the review process of many of my PRs, and
 [Melissa Weber Mendonça](https://github.com/melissawm) who hosted many of the community meetings which I
-attended (as well as coordinating the internship program!).
+attended (as well as coordinating the internship program at Quansight Labs!).
 
 ## References
 
 - [The array API standard](https://data-apis.org/array-api/)
 - ["Toward Array Interoperability in the Scientific Python Ecosystem" SciPy 2023 Talk](https://youtu.be/16rB-fosAWw)
 - ["SciPy array types & libraries support" RFC](https://github.com/scipy/scipy/issues/18286)
-- ["Array Libraries Interoperability" blog post](https://labs.quansight.org/blog/array-libraries-interoperability)
+- ["Array Libraries Interoperability" Blog Post](https://labs.quansight.org/blog/array-libraries-interoperability)
 - [array-api-compat](https://github.com/data-apis/array-api-compat)
-- [Tracker issue for support in SciPy](https://github.com/scipy/scipy/issues/18867)
+- [Tracker Issue for array API support in SciPy](https://github.com/scipy/scipy/issues/18867)
 
 <br />
