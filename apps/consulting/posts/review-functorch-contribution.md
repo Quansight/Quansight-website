@@ -2,31 +2,33 @@
 title: 'Review: `torch.func` Contribution'
 published: September 22, 2023
 author: kshiteej-kalambarkar
-description: '`torch.func` (previously `functorch`) is a PyTorch module to
-provide JAX-like transforms. This module exposes higher order functions like
-`grad`, `vmap` and `vjp`. These functional transforms allow the user to compute
-in a functional way transformations on the whole model at once. And being
-composable, one can compute per-sample gradients simply by using `vmap(grad(model))`.'
+description: '`torch.func` (formerly known as `functorch`) is a PyTorch module
+designed to offer JAX-like transformations. Within this module, various higher-order
+functions, such as `grad`, `vmap`, and `vjp` are made accessible. These
+transformations empower users to perform transformations on the entire model in
+functional manner. The beauty of these transformations lies in their ability to
+compose with one another. Thanks to this, the process of calculating per-sample
+gradients becomes the straightforward application of `vmap(grad(model))`.'
 ---
 
 <base target="_blank" />
 
-`torch.func` (previously `functorch`) is a PyTorch module to provide JAX-like
-transforms. This module exposes higher order functions like `grad`, `vmap` and
-`vjp`. These functional transforms allow the user to compute in a functional
-way transformations on the whole model at once. These transforms can compose
-arbitrarily. This makes computing per-sample gradients as simple as using
-`vmap(grad(model))`.
+`torch.func` (formerly known as `functorch`) is a PyTorch module designed to
+offer JAX-like transformations. Within this module, various higher-order
+functions, such as `grad`, `vmap`, and `vjp` are made accessible. These
+transformations empower users to perform transformations on the entire model in
+functional manner. The beauty of these transformations lies in their ability to
+compose with one another. Thanks to this, the process of calculating per-sample
+gradients becomes the straightforward application of `vmap(grad(model))`.
 
-Below are some of the things that we got to work on:
+Here are a few of the tasks we had the opportunity to tackle:
 
 ## Adding Batching Rule for `vmap`
 `vmap` is a transform which takes a function `func` that runs on a single
-datapoint and returns a function which can handle a batch of data effectively
-vectorizing it. Semantically, it runs a `for`-loop over all data points and
-stacks all the results together. It does so efficiently by pushing the `for`-loop
-into the PyTorch operations, effectively vectorizing the computation. Consider the
-following example:
+datapoint and returns a function which can handle a batch of data. Semantically,
+it runs a `for`-loop over all data points and stacks all the results together.
+It does so efficiently by pushing the `for`-loop into the PyTorch operations,
+effectively vectorizing the computation. Consider the following example:
 
 Example:
 ```python
@@ -71,33 +73,44 @@ fallback in case an operator is not supported so as not to crash the code.
 
 PyTorch operators can be roughly categorized as primitive (internally
 `CompositeExplicitAutograd`) vs composite (internally `CompositeImplicitAutograd`).
-Composite operators are derived from the primitive operators. To have
-complete coverage, we need to have batching rules for all the primitive operators
-and we get the rules for composite operators for free.
+Primitive operators are the ones for which we specify the batching and
+gradient rules. Composite operators are implemented using these the primitive operators.
+Achieving coverage necessitates batching rules for every primitive operator,
+and as a result, we automatically get the rules for composite operators.
 
-To add a batching rules for a primitive operator, we can
+There are two ways to add batching support for an operator:
 * Manually write the batching rule. See for example the [batching rule for torch.dot](https://github.com/pytorch/pytorch/blob/b30ee35a6f141d3247a24fd09f96ea50a7e2b3c7/aten/src/ATen/functorch/BatchRulesLinearAlgebra.cpp#L25-L34)
 * Decompose operators using other operators for which we already have a
 batching rule. See for example the [batching rule for torch.vdot](https://github.com/pytorch/pytorch/blob/b30ee35a6f141d3247a24fd09f96ea50a7e2b3c7/aten/src/ATen/functorch/BatchRulesLinearAlgebra.cpp#L35-L37)
 
 ## Composite Compliance
 
-Above we mentioned that we get batching rules for free for composite operators.
-But that is true only if the operator follows [a few constraints](https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/native/README.md#composite-compliance)
-like they should not access the data pointer of the tensor, they should not call
-`out=` variants of the operators, etc. Unfortunately, operators which claim to
-be composite can sometimes not follow these constraints and that works when you
-are using plain eager PyTorch but can lead to problems with `torch.func` transforms
-(eg. what does accessing `item` or `data_ptr` on BatchedTensor mean?).
+As mentioned earlier, we obtain batching rules effortlessly for composite operators
+but this holds true only when certain constraints, as outlined in [this link](https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/native/README.md#composite-compliance),
+are adhered to. These constraints include requirements like refraining from accessing
+the tensor's data pointer and avoiding the use of `out=` variants of the operators,
+among others.
+
+Unfortunately, operators that claim to be composite may occasionally deviate
+from these constraints. While such deviations may not pose issues when utilizing
+plain eager PyTorch, they can lead to complications when using `torch.func`
+transformations. For instance, questions arise when calling methods like `item`
+or `data_ptr` on a BatchedTensor, highlighting the challenges that can emerge.
 
 ### Testing for Composite Compliance
 
-The idea is to write extensive tests to verify that the constraints are met.
-This is achieved by having a new subclass and with `__torch_dispatch__` mechanism,
-we error on the non-compliant behaviour. We run the test on the actual
-[operator](https://github.com/pytorch/pytorch/blob/40b2c796dcae5768ff5de279b13914d5948fd414/test/test_ops.py#L1446), their [backward formula](https://github.com/pytorch/pytorch/blob/40b2c796dcae5768ff5de279b13914d5948fd414/test/test_ops.py#L1459) and their [forward formula](https://github.com/pytorch/pytorch/blob/40b2c796dcae5768ff5de279b13914d5948fd414/test/test_ops.py#L1476). The reason for having the test on backward and forward formula is
-because we can have `vmap(vjp(fn))` or `vmap(jvp(fn))` which requires them to be
-Composite Compliant.
+For ensuring that composite operators adhere to these constraints, we rely on
+extensive testing for. We achieve this through the creation of a new
+subclass `CompositeCompliantTensor` that utilizes the `__torch_dispatch__` mechanism.
+This mechanism is invoked for all operators in the OpInfo testing infrastructure,
+enabling us to detect any non-compliant behavior exhibited by an operator.
+
+Our testing approach involves running tests on the actual [operator](https://github.com/pytorch/pytorch/blob/40b2c796dcae5768ff5de279b13914d5948fd414/test/test_ops.py#L1446),
+as well as their [backward formula](https://github.com/pytorch/pytorch/blob/40b2c796dcae5768ff5de279b13914d5948fd414/test/test_ops.py#L1459)
+and [forward formula](https://github.com/pytorch/pytorch/blob/40b2c796dcae5768ff5de279b13914d5948fd414/test/test_ops.py#L1476).
+Testing both the backward and forward formulas is crucial because we may encounter
+scenarios involving `vmap(vjp(fn))` or `vmap(jvp(fn))`, which require these
+formulas to comply with the composite compliance.
 
 ### Fixing the operators on case by case basis.
 
