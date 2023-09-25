@@ -1,9 +1,9 @@
 ---
 title: 'Doctesting for PyData Libraries'
-author: [Sheila-nk]
+authors: [sheila-kahwai]
 published: September 30, 2023
 description: 'The journey of a PyData Newbie'
-category: [Doctests]
+category: [Developer workflows]
 featuredImage:
     src: /posts/doctesting-for-pydata-libraries/quansight-pydata.png
     alt: 'Image featuring the Quansight logo alongside the PyData logo in close proximity'
@@ -60,7 +60,7 @@ But here's the twist: Scpdt could only perform doctesting on SciPy's and NumPy's
 ## Bridging the Gap with Pytest
 [Pytest](https://docs.pytest.org/en/stable/index.html) already has a [doctesting module](https://github.com/pytest-dev/pytest/blob/main/src/_pytest/doctest.py), but unfortunately, it doesn't meet the specific needs of the PyData libraries. Therefore, the crucial task was to ensure pytest could leverage the power of Scpdt for doctesting. This involved overriding some of doctest's functions and classes to incorporate scpdt's alternative doctesting objects. It also meant modifying pytest's behavior by implementing hooks, primarily for initialization and collection.
 
-Once all the technical juggling was done, it was time for what my mentor called "[dogfooding](https://www.forbes.com/sites/michaeldefranco/2014/03/04/not-eating-your-own-dog-food-you-probably-should-be-2/?sh=69c002d0692e)"(a term he picked up from Joel Spolsky's [essay](https://www.joelonsoftware.com/2001/05/05/what-is-the-work-of-dogs-in-this-country/)). The term simply means putting your own product to the test by using it, and I had to make sure that the plugin functioned as expected. I did this by locally running doctests on SciPy's modules. It was an eye-opener, exposing issues like faulty collection – for example, the plugin wasn't collecting compiled and NumPy universal functions for doctesting.
+Once all the technical juggling was done, it was time for what my mentor called "[dogfooding](https://www.forbes.com/sites/michaeldefranco/2014/03/04/not-eating-your-own-dog-food-you-probably-should-be-2/?sh=69c002d0692e)" (a term he picked up from Joel Spolsky's [essay](https://www.joelonsoftware.com/2001/05/05/what-is-the-work-of-dogs-in-this-country/)). The term simply means putting your own product to the test by using it, and I had to make sure that the plugin functioned as expected. I did this by locally running doctests on SciPy's modules. It was an eye-opener, exposing issues like faulty collection – for example, the plugin wasn't collecting compiled and NumPy universal functions for doctesting.
 
 With the bugs and vulnerabilities exposed during this process, I was able to refine the plugin further. I then created a [pull request](https://github.com/scipy/scipy/pull/19242) to demonstrate how the pytest plugin could be seamlessly integrated into SciPy. The process is fairly straightforward:
 
@@ -69,7 +69,7 @@ With the bugs and vulnerabilities exposed during this process, I was able to ref
 3. **Running Doctests in SciPy**: If you're running doctests on SciPy, execute the command `python dev.py test --doctests` in your shell.
 4. **Running Doctests on Other Packages**: If you're not working with SciPy, use the command `pytest --pyargs <your-package> --doctest-modules` to run your doctests.
 
-Voila! :tada: 
+Voila! 🎉
 
 <p align="center">
     <img
@@ -78,13 +78,13 @@ Voila! :tada:
 </p>
 
 ## Future Goals
-I am currently in the process of integrating the plugin into SciPy; for more details, you can check out the PR linked [here](https://github.com/scipy/scipy/pull/19242). Looking ahead, our goal is to publish the plugin on [PyPI](https://pypi.org/) and extend its integration to NumPy and other PyData libraries. 
+I am currently in the process of integrating the plugin into SciPy; for more details, you can check out [the PR](https://github.com/scipy/scipy/pull/19242). Looking ahead, our goal is to publish the plugin on [PyPI](https://pypi.org/) and extend its integration to NumPy and other PyData libraries. 
 
 If you run into challenges with floating-point arithmetic, face output issues related to whitespace and array abrreviations, need to validate example source code without output testing, or simply desire a customized doctesting experience, consider giving this [plugin](https://github.com/ev-br/scpdt) a try.
 
 ## The Journey's End
 Throughout this incredible journey, I cherished every moment spent working, learning from my mentors: [Evgeni Burovski](https://github.com/ev-br) and [Melissa Weber Mendonça](https://github.com/melissawm), and being part of the Quansight team. I'm incredibly grateful for this opportunity, and I look forward to continuing my contributions to the pytest plugin even after the internship.
 
-Curious? Check out the plugin [here](https://github.com/ev-br/scpdt). Feel free to contribute – the more, the merrier! 🚀🐍
+Curious? Check out the [plugin repository on GitHub](https://github.com/ev-br/scpdt). Feel free to contribute – the more, the merrier! 🚀🐍
 
 Stay tuned for more exciting developments! 
