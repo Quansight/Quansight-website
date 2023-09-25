@@ -69,9 +69,7 @@ Some of the related PRs can be found here: https://github.com/pytorch-ignite/cod
 
 I worked on testing this great infrastructure tool, [Nebari](http://nebari.dev/), which is used for managing GPU clusters and Cloud infrastructure for data scientists and other professionals. It provides a [JupyterHub](https://jupyterhub.readthedocs.io/) interface, which can be very helpful for deploying code and running tools. So, to explain the integration of my project with Nebari, firstly, I would like to discuss how the project stores the templates with a particular configuration.
 
-<center>
-<img src='/posts/code-generator-and-nebari/nebari-image.png' alt='The Nebari-server Option in Code-Generator App' height="300">
-</center>
+<img src='/posts/code-generator-and-nebari/nebari-image.png' alt='The Nebari-server Option in Code-Generator App' height="300" style="display: block; margin: 0 auto;">
 
 To explain it quickly, let’s see how the app works when you click on `Open in Nebari` . After the button is clicked, we use a `netlify` function to commit a zip file and Jupyter notebook using `github/octokit` to `[PyTorch-Ignite/nbs](https://github.com/pytorch-ignite/nbs)`repository. We can see a committed notebook example below. To understand this better, you can read the code in [PyTorch-Ignite/code-generator/functions/nebari.js](https://github.com/pytorch-ignite/code-generator/tree/main/functions/nebari.js).
 
