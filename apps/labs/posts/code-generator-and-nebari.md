@@ -5,7 +5,7 @@ authors: [aryan-gupta]
 description: 'A summary of my contributions to the Code-Generator Project and PyTorch-Ignite ecosystem in the past few months as Quansight Labs intern and my learnings in the process.'
 category: [PyData ecosystem, Machine Learning, OSS Experience]
 featuredImage:
-  src: /posts/code-generator-and-nebari/feature_and_hero.svg
+  src: /posts/code-generator-and-nebari/hero-feature-image.png
   alt: 'An illustration of Code-Generator app integration with Nebari and other ML based libraries.'
 hero:
   imageSrc: /posts/code-generator-and-nebari/feature_and_hero.svg
