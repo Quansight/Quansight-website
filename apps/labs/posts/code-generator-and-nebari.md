@@ -5,16 +5,16 @@ authors: [aryan-gupta]
 description: 'A summary of my contributions to the Code-Generator Project and PyTorch-Ignite ecosystem in the past few months as Quansight Labs intern and my learnings in the process.'
 category: [PyData ecosystem, Machine Learning, OSS Experience]
 featuredImage:
-  src: /posts/code-generator-and-nebari/blog_feature_var2.png
-  alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
+  src: /posts/code-generator-and-nebari/feature_and_hero.svg
+  alt: 'An illustration of Code-Generator app integration with Nebari and other ML based libraries.'
 hero:
-  imageSrc: /posts/code-generator-and-nebari/hero.png
-  imageAlt: 'The Image of the Code-Generator app'
+  imageSrc: /posts/code-generator-and-nebari/feature_and_hero.svg
+  imageAlt: 'An illustration of Code-Generator app integration with Nebari and other ML based libraries.'
 ---
 
 To the readers, I am Aryan Gupta(@[guptaaryan16](https://github.com/guptaaryan16/)), an EE Junior at IIT Roorkee, and this summer, I had a chance to work on PyTorch-Ignite’s Code-Generator Project, a tailor-made web application to help machine learning researchers and enthusiasts and also keeping in mind the growing Kaggle community.
 
-## The Project Itself
+# The Project Itself
 
 Let’s see the project itself. [Code-generator](https://code-generator.pytorch-ignite.ai/) is a [Vue.js](https://vuejs.org/) application that streamlines the process of working on machine learning tasks. The app generates preconfigured code templates for tasks like vision classification, text classification, and other common themes in ML competitions.
 
@@ -22,7 +22,9 @@ The aim is not to be another abstraction over PyTorch and PyTorch-Ignite. Instea
 
 This app was created with the great efforts of members of the PyTorch-Ignite community, particularly @[ydcjeff](https://github.com/ydcjeff) @[trsvchn](https://github.com/trsvchn) @[vfdev-5](https://github.com/vfdev-5).
 
-## The Issues I worked on
+![The Code Generator App](/posts/code-generator-and-nebari/app.png)
+
+# The Issues I worked on
 
 My tasks were primarily to work on features that could improve the reproducibility-related features of the templates. Also, I had to contribute to new features and libraries which can be best for experiments configuration management. My contributions to the project were mainly three-fold:
 
@@ -49,9 +51,9 @@ with open("config2.yaml", "r") as f2:
 >> config2 = { 'lr': 1e-10 } # (the expected behaviour)
 ```
 
-There were other problems as well, like not being able to store Python objects using `PyYAML API`. This led us to adopt `[OmegaConf.DictConfig](https://omegaconf.readthedocs.io/en/2.3_branch/api_reference.html#the-omegaconf-api)` as the API standard for maintaining config data in the templates. This worked great on testing and is well maintained by the developers. Also, methods like resolution of config dict are very well written in this `OmegaConf` project.
+There were other problems as well, like not being able to store Python objects using `PyYAML API`. This led us to adopt [OmegaConf.DictConfig](https://omegaconf.readthedocs.io/en/2.3_branch/api_reference.html#the-omegaconf-api) as the API standard for maintaining config data in the templates. This worked great on testing and is well maintained by the developers. Also, methods like resolution of config dict are very well written in this `OmegaConf` project.
 
-Also, we added support for `[Hydra](http://hydra.cc)` and `[Python-Fire](https://github.com/google/python-fire/blob/master/docs/guide.md)` as they are great in terms of configuration management and also worked very well with PyTorch-Ignite. They also allow overriding existing configurations using the following bash commands.
+Also, we added support for [Hydra](http://hydra.cc)`and`[Python-Fire](https://github.com/google/python-fire/blob/master/docs/guide.md) as they are great in terms of configuration management and also worked very well with PyTorch-Ignite. They also allow overriding existing configurations using the following bash commands.
 
 ```bash
 [For Python Fire]
@@ -61,7 +63,7 @@ Also, we added support for `[Hydra](http://hydra.cc)` and `[Python-Fire](https:/
 >> python main.py lr=0.001 ++checkpoint_dir=./logs
 ```
 
-Note that you have to use `++` only for overrides not present in `config.yaml` for the `hydra CLI` use. For more info, do check the docs for [OmegaConf](https://omegaconf.readthedocs.io), [Python-Fire](https://github.com/google/python-fire/blob/master/docs/guide.md) and [Hydra](http://hydra.cc) .
+Note that you have to use `++` only for overrides not present in `config.yaml` for the `Hydra CLI` use. For more info, do check the docs for [OmegaConf](https://omegaconf.readthedocs.io), [Python-Fire](https://github.com/google/python-fire/blob/master/docs/guide.md) and [Hydra](http://hydra.cc) .
 
 Some of the related PRs can be found here: https://github.com/pytorch-ignite/code-generator/pull/292 https://github.com/pytorch-ignite/code-generator/pull/300 https://github.com/pytorch-ignite/code-generator/pull/302
 
@@ -69,16 +71,18 @@ Some of the related PRs can be found here: https://github.com/pytorch-ignite/cod
 
 I worked on testing this great infrastructure tool, [Nebari](http://nebari.dev/), which is used for managing GPU clusters and Cloud infrastructure for data scientists and other professionals. It provides a [JupyterHub](https://jupyterhub.readthedocs.io/) interface, which can be very helpful for deploying code and running tools. So, to explain the integration of my project with Nebari, firstly, I would like to discuss how the project stores the templates with a particular configuration.
 
-<img src='/posts/code-generator-and-nebari/nebari-image.png' alt='The Nebari-server Option in Code-Generator App' height="300" style={{textAlign:"center"}}>
+<center>
+<img src='/posts/code-generator-and-nebari/nebari-image.png' alt='The Nebari-server Option in Code-Generator App' height="300">
 </img>
+</center>
 
 To explain it quickly, let’s see how the app works when you click on `Open in Nebari` . After the button is clicked, we use a `netlify` function to commit a zip file and Jupyter notebook using `github/octokit` to [PyTorch-Ignite/nbs](https://github.com/pytorch-ignite/nbs) repository. We can see a committed notebook example below. To understand this better, you can read the code in [PyTorch-Ignite/code-generator/functions/nebari.js](https://github.com/pytorch-ignite/code-generator/tree/main/functions/nebari.js).
 
-![GitHub Notebook Pushed By Code-Generator](posts/code-generator-and-nebari/github-notebook-push.png)
+![GitHub Notebook Pushed By Code-Generator](/posts/code-generator-and-nebari/github-notebook-push.png)
 
 Now, to integrate this with the `Nebari` server , we used an extension called [Jupyterlab-Github](https://github.com/jupyterlab/jupyterlab-github). I wrote a `netlify` function to create a URL that can use this extension, open the generated link in the new tab, pull the notebook committed by the above `netlify` function, and open this notebook in the server. An example can be seen here. Pretty cool, right?
 
-![Template Opened in Nebari](posts/code-generator-and-nebari/template-open-in-nebari.png)
+![Template Opened in Nebari](/posts/code-generator-and-nebari/template-open-in-nebari.png)
 
 For this, I appreciate the Jupyter community's extension ecosystem. They have great extensions for everything and maybe in the future, I may work or try to add more extensions to increase the functionality in the app. Also, I would like to thank the Nebari-dev community here, who provided such great support in testing this in the Nebari server.
 
@@ -109,7 +113,7 @@ But it can be challenging to manage, and we also need to ensure we satisfy the `
 
 Some of the related PRs can be found here: https://github.com/pytorch-ignite/code-generator/pull/288 https://github.com/pytorch-ignite/code-generator/pull/283
 
-## The Way Forward for the Project
+# The Way Forward for the Project
 
 The Code generator project seems to be moving forward at a great pace and is expected to have many more additions in the future. Starting and maintaining a new project is challenging in open source and can have a very high risk/reward ratio. Still, good communities try their best to make and maintain projects that can be helpful for the maximum number of people and reduce the friction for new people entering the community. Some of the issues I suggest and may work on in the future are
 
@@ -139,7 +143,7 @@ When we try to write new code or change the existing files, we often try to do i
 While making a pull request(PR) seems very exciting on a project, you should know what and how much you want to accomplish in one pull request. Sometimes, we can make too many functional changes in one pull request, making testing and removing all the bugs difficult. This issue was evident in my time as an intern as some of my PRs were terribly formatted, and this led to me completely rebasing them and making 4-5 more PRs to the main project to remove many bugs in those changes. This was painful for me and my mentor, but I thank him for helping me with great suggestions and reviews.
 Also, this experience increased my learning and helped me improve the quality of my pull requests. So don’t be afraid to make mistakes; learn from them and make your way in this incredible world of OSS!
 
-## Acknowledgements
+# Acknowledgements
 
 In this section, I would like to thank my mentor, @[vfdev-5](https://github.com/vfdev-5), and other members of the PyTorch-Ignite community for helping me in this internship. Also, I would like to thank the people at [Quansight-Labs](https://quansight.com/) for providing me with such a great opportunity, especially @[rgommers](https://github.com/rgommers), @[trallard](https://github.com/trallard), @[melissawm](https://github.com/melissawm), and others for their invaluable guidance and time during this internship.
 
