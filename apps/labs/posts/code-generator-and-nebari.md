@@ -53,7 +53,7 @@ with open("config2.yaml", "r") as f2:
 
 There were other problems as well, like not being able to store Python objects using `PyYAML API`. This led us to adopt [OmegaConf.DictConfig](https://omegaconf.readthedocs.io/en/2.3_branch/api_reference.html#the-omegaconf-api) as the API standard for maintaining config data in the templates. This worked great on testing and is well maintained by the developers. Also, methods like resolution of config dict are very well written in this `OmegaConf` project.
 
-Also, we added support for [Hydra](http://hydra.cc)`and`[Python-Fire](https://github.com/google/python-fire/blob/master/docs/guide.md) as they are great in terms of configuration management and also worked very well with PyTorch-Ignite. They also allow overriding existing configurations using the following bash commands.
+Also, we added support for [Hydra](http://hydra.cc) `and` [Python-Fire](https://github.com/google/python-fire/blob/master/docs/guide.md) as they are great in terms of configuration management and also worked very well with PyTorch-Ignite. They also allow overriding existing configurations using the following bash commands.
 
 ```bash
 [For Python Fire]
@@ -65,14 +65,14 @@ Also, we added support for [Hydra](http://hydra.cc)`and`[Python-Fire](https://gi
 
 Note that you have to use `++` only for overrides not present in `config.yaml` for the `Hydra CLI` use. For more info, do check the docs for [OmegaConf](https://omegaconf.readthedocs.io), [Python-Fire](https://github.com/google/python-fire/blob/master/docs/guide.md) and [Hydra](http://hydra.cc) .
 
-Some of the related PRs can be found here: https://github.com/pytorch-ignite/code-generator/pull/292 https://github.com/pytorch-ignite/code-generator/pull/300 https://github.com/pytorch-ignite/code-generator/pull/302
+Some of the related PRs can be found here: [#292](https://github.com/pytorch-ignite/code-generator/pull/292) [#300](https://github.com/pytorch-ignite/code-generator/pull/300) [#302](https://github.com/pytorch-ignite/code-generator/pull/302)
 
 ### 2. Integration with Nebari and other infrastructure management tools
 
 I worked on testing this great infrastructure tool, [Nebari](http://nebari.dev/), which is used for managing GPU clusters and Cloud infrastructure for data scientists and other professionals. It provides a [JupyterHub](https://jupyterhub.readthedocs.io/) interface, which can be very helpful for deploying code and running tools. So, to explain the integration of my project with Nebari, firstly, I would like to discuss how the project stores the templates with a particular configuration.
 
 <center>
-<img src='/posts/code-generator-and-nebari/nebari-image.png' alt='The Nebari-server Option in Code-Generator App' height="300">
+<img src='/posts/code-generator-and-nebari/nebari-image.png' alt='The Nebari-server Option in Code-Generator App' width="250px">
 </img>
 </center>
 
@@ -86,13 +86,13 @@ Now, to integrate this with the `Nebari` server , we used an extension called [
 
 For this, I appreciate the Jupyter community's extension ecosystem. They have great extensions for everything and maybe in the future, I may work or try to add more extensions to increase the functionality in the app. Also, I would like to thank the Nebari-dev community here, who provided such great support in testing this in the Nebari server.
 
-Some of the related PRs can be found here: https://github.com/pytorch-ignite/code-generator/pull/314 https://github.com/pytorch-ignite/code-generator/pull/265
+Some of the related PRs can be found here:[#314](https://github.com/pytorch-ignite/code-generator/pull/314) [#265](https://github.com/pytorch-ignite/code-generator/pull/265)
 
 ### 3. The changes in the CI and other Vuejs based parts of the code base (mainly based on JS)
 
 I had to contribute some JavaScript-based code to the app, but since I had not worked on a JS project before, I needed to learn the basics before contributing to these issues, especially [Vue.js](https://vuejs.org) :-( . So, I tried to learn by reading some online tutorials and documentation. I particularly liked this [tutorial](https://www.youtube.com/watch?v=YrxBCBibVo0&list=PL4cUxeGkcC9hYYGbV60Vq3IXYNfDk8At1) series on YouTube.
 
-To explain more about how the generates templates, let's assume I made some files like`main.py`, `model.py`, and `utils.py` as a template. Now we use the [ejs](https://ejs.co) project to design the templates. To illustrate this, let us take an example from the templates.
+To explain more about how the generates templates, let's assume I made some files like `main.py`, `model.py`, and `utils.py` as a template. Now we use the [ejs](https://ejs.co) project to design the templates. To illustrate this, let us take an example from the templates.
 
 ```python
 #::: if ((it.argparser == 'fire')) { :::#
@@ -107,11 +107,11 @@ To explain more about how the generates templates, let's assume I made some file
 #::: } :::#
 ```
 
-Now, as you can see, there are some commented codes. This is part of JS, which helps select different configurations of [argparsers](http://argparsers.It). Seems great, right?
+Now, as you can see, there are some commented codes. This is part of JS, which helps select different configurations of [argparsers](http://argparsers.It). Seems easy, right?
 
 But it can be challenging to manage, and we also need to ensure we satisfy the `lint` formatting for the CI (which can be pretty tricky with templates :-( ). Still, these JS features can be very powerful, and we are trying to improve these as much as possible. By the way, if you are confused about where this `it.argparser` selector came from, better check the project, but the short answer is it comes from a `metadata.json` file that maintains the options for all the templates in the app.
 
-Some of the related PRs can be found here: https://github.com/pytorch-ignite/code-generator/pull/288 https://github.com/pytorch-ignite/code-generator/pull/283
+Some of the related PRs can be found here: [#288](https://github.com/pytorch-ignite/code-generator/pull/288) [#283](https://github.com/pytorch-ignite/code-generator/pull/283)
 
 # The Way Forward for the Project
 
@@ -119,7 +119,7 @@ The Code generator project seems to be moving forward at a great pace and is exp
 
 ### 1. Separate `metadata.json` for each template
 
-We are considering providing separate metadata.json files for each template or something similar to that in the future. I proposed an issue to the project for the same [here](https://github.com/pytorch-ignite/code-generator/issues/308%5C) and will try to work on this in the future.
+We are considering providing separate metadata.json files for each template or something similar to that in the future. I proposed an issue to the project for the same [here](https://github.com/pytorch-ignite/code-generator/issues/308) and will try to work on this in the future.
 
 ### 2. Script to contribute new templates
 
@@ -128,6 +128,7 @@ Since it is hard for Data science enthusiasts to learn JS and contribute templat
 ### 3. More templates and feature options
 
 We will add more templates and feature options in the future to the project. Templates like Object detection, text summarisation, and diffusion models can be an excellent addition to the project.
+
 P.S. If you feel excited about the project, please feel free to suggest more changes and contribute to the project.
 
 # Some Lessons I learnt along the Way
