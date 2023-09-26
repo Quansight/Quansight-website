@@ -66,7 +66,7 @@ Give Hypothesis the types of inputs you are expecting using the _@given_ decorat
 
 Hypothesis is able to come up with interesting inputs using a combination of smart generation, guiding metrics, and feedback loops. For example, the built-in stategies like `integers()` have default behaviors tuned for common useful values. That is, while some inputs are random, it also tries to choose cases that commonly cause errors (like 0 or NaN). Hypothesis is _adversarial_ in the way it chooses inputs to test against your function. 
 
-Hypothesis comes with built-in strategy functions for common Python data types. In the example above, we accessed integers using **_st.integers()_**, but Hypothesis also gives you access to floats(), booleans(), fractions(), dictionaries() etc.
+Hypothesis comes with built-in strategy functions for common Python data types. In the example above, we accessed integers using `st.integers()`, but Hypothesis also gives you access to `floats()`, `booleans()`, `fractions()`, `dictionaries()`, and many more.
 
 
 The full documentation for Hypothesis can be found [here](https://hypothesis.readthedocs.io/en/latest/index.html) and for a nice and robust introduction, check out this video from [PyCon 2019](https://youtu.be/KcyGUVzL7HA?si=lglSRamsWsY1YLIR).
