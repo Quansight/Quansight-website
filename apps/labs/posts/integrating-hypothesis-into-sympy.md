@@ -59,7 +59,7 @@ def test_degree(f, g):
     h = f * g
     assert h.degree() == f.degree() + g.degree()
 ```
-Note, that here `polys()` is custom-built for sympy and not a built-in Hypothesis strategy.
+Note, that here `polys()` is custom-built for sympy and generates a random polynomial with integer coefficeints. It is not a built-in Hypothesis strategy.
 
 ### How Hypothesis Works
 Give Hypothesis the types of inputs you are expecting using the _@given_ decorator and it will automatically generate examples using the _strategies_ module. It will then use these examples to test and report the minimal failing inputs (if any). 
