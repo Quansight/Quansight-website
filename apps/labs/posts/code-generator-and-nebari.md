@@ -1,5 +1,5 @@
 ---
-title: 'Bridging Data Science Tools with PyTorch-Ignite's Code Generator and Nebari'
+title: "Bridging Data Science Tools with PyTorch-Ignite's Code Generator and Nebari"
 published: September 20, 2023
 authors: [aryan-gupta]
 description: 'A summary of my contributions to the Code-Generator Project and PyTorch-Ignite ecosystem in the past few months as Quansight Labs intern and my learnings in the process.'
