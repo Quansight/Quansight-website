@@ -5,7 +5,7 @@ published: September 20, 2023
 description: 'Gives an introduction to the utility of hypothesis in SymPy'
 category: [Property Based Testing]
 featuredImage:
-  src: /posts/integrating-hypothesis-into-sympy/blog_feature_org.svg
+  src: /posts/integrating-hypothesis-into-sympy/blog_feature_org.png
   alt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 hero:
   imageSrc: /posts/integrating-hypothesis-into-sympy/blog_hero_var2.svg
