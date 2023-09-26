@@ -16,7 +16,7 @@ To the readers, I am Aryan Gupta(@[guptaaryan16](https://github.com/guptaaryan16
 
 ## The Project Itself
 
-Let’s see the project itself. [Code-generator](https://code-generator.pytorch-ignite.ai/) is a [Vue.js](https://vuejs.org/) application that streamlines the process of working on machine learning tasks. The app generates preconfigured code templates for tasks like vision classification, text classification, and other common themes in ML competitions.
+Let’s see the project itself. [Code-generator](https://code-generator.pytorch-ignite.ai/) is a [Vue.js](https://vuejs.org/) application that streamlines the process of working on machine learning tasks. The app generates preconfigured code templates for tasks like vision classification, text classification, and other common themes in ML competitions.
 
 The aim is not to be another abstraction over PyTorch and PyTorch-Ignite. Instead, it is a web app that generates the boilerplate code, which means you still have complete control over the generated code. You can start by selecting the minimal template like ‘Text-Classification’ and turn options on or off according to your needs, like a particular logger like [Tensorboard](https://tensorboard.dev/) or an arg-parser like [Python-Fire](https://github.com/google/python-fire/blob/master/docs/guide.md). This app can be helpful in data science competitions on Kaggle or in writing papers, especially with easy integration of loggers and checkpoint handlers. Also, the templates are well-tested on CI and hopefully will require minimal changes to work on your workflows.
 
@@ -71,11 +71,11 @@ I worked on testing this great infrastructure tool, [Nebari](http://nebari.dev/
 
 <img src='/posts/code-generator-and-nebari/nebari-image.png' alt='The Nebari-server Option in Code-Generator App' height="300" style="display: block; margin: 0 auto;">
 
-To explain it quickly, let’s see how the app works when you click on `Open in Nebari` . After the button is clicked, we use a `netlify` function to commit a zip file and Jupyter notebook using `github/octokit` to `[PyTorch-Ignite/nbs](https://github.com/pytorch-ignite/nbs)`repository. We can see a committed notebook example below. To understand this better, you can read the code in [PyTorch-Ignite/code-generator/functions/nebari.js](https://github.com/pytorch-ignite/code-generator/tree/main/functions/nebari.js).
+To explain it quickly, let’s see how the app works when you click on `Open in Nebari` . After the button is clicked, we use a `netlify` function to commit a zip file and Jupyter notebook using `github/octokit` to [PyTorch-Ignite/nbs](https://github.com/pytorch-ignite/nbs) repository. We can see a committed notebook example below. To understand this better, you can read the code in [PyTorch-Ignite/code-generator/functions/nebari.js](https://github.com/pytorch-ignite/code-generator/tree/main/functions/nebari.js).
 
 ![GitHub Notebook Pushed By Code-Generator](posts/code-generator-and-nebari/github-notebook-push.png)
 
-Now, to integrate this with the `Nebari` server , we used an extension called [`Jupyterlab-Github`](https://github.com/jupyterlab/jupyterlab-github). I wrote a `netlify` function to create a URL that can use this extension, open the generated link in the new tab, pull the notebook committed by the above `netlify` function, and open this notebook in the server. An example can be seen here. Pretty cool, right?
+Now, to integrate this with the `Nebari` server , we used an extension called [Jupyterlab-Github](https://github.com/jupyterlab/jupyterlab-github). I wrote a `netlify` function to create a URL that can use this extension, open the generated link in the new tab, pull the notebook committed by the above `netlify` function, and open this notebook in the server. An example can be seen here. Pretty cool, right?
 
 ![Template Opened in Nebari](posts/code-generator-and-nebari/template-open-in-nebari.png)
 
@@ -87,7 +87,7 @@ Some of the related PRs can be found here: https://github.com/pytorch-ignite/cod
 
 I had to contribute some JavaScript-based code to the app, but since I had not worked on a JS project before, I needed to learn the basics before contributing to these issues, especially [Vue.js](https://vuejs.org) :-( . So, I tried to learn by reading some online tutorials and documentation. I particularly liked this [tutorial](https://www.youtube.com/watch?v=YrxBCBibVo0&list=PL4cUxeGkcC9hYYGbV60Vq3IXYNfDk8At1) series on YouTube.
 
-To explain more about how the generates templates, let's assume I made some files like`main.py`, `model.py`, and `utils.py` as a template. Now we use the `[ejs](https://ejs.co)` project to design the templates. To illustrate this, let us take an example from the templates.
+To explain more about how the generates templates, let's assume I made some files like`main.py`, `model.py`, and `utils.py` as a template. Now we use the [ejs](https://ejs.co) project to design the templates. To illustrate this, let us take an example from the templates.
 
 ```python
 #::: if ((it.argparser == 'fire')) { :::#
