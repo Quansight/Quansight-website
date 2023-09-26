@@ -69,7 +69,7 @@ Some of the related PRs can be found here: https://github.com/pytorch-ignite/cod
 
 I worked on testing this great infrastructure tool, [Nebari](http://nebari.dev/), which is used for managing GPU clusters and Cloud infrastructure for data scientists and other professionals. It provides a [JupyterHub](https://jupyterhub.readthedocs.io/) interface, which can be very helpful for deploying code and running tools. So, to explain the integration of my project with Nebari, firstly, I would like to discuss how the project stores the templates with a particular configuration.
 
-<img src='/posts/code-generator-and-nebari/nebari-image.png' alt='The Nebari-server Option in Code-Generator App' height="300" style="display: block; margin: 0 auto;">
+<img src='/posts/code-generator-and-nebari/nebari-image.png' alt='The Nebari-server Option in Code-Generator App' height="300" style={{textAlign:"center"}}>
 </img>
 
 To explain it quickly, let’s see how the app works when you click on `Open in Nebari` . After the button is clicked, we use a `netlify` function to commit a zip file and Jupyter notebook using `github/octokit` to [PyTorch-Ignite/nbs](https://github.com/pytorch-ignite/nbs) repository. We can see a committed notebook example below. To understand this better, you can read the code in [PyTorch-Ignite/code-generator/functions/nebari.js](https://github.com/pytorch-ignite/code-generator/tree/main/functions/nebari.js).
@@ -103,7 +103,7 @@ To explain more about how the generates templates, let's assume I made some file
 #::: } :::#
 ```
 
-Now, as you can see, there are some commented codes. This is part of JS, which helps select different configurations of [argparsers.](http://argparsers.It) Seems great, right?
+Now, as you can see, there are some commented codes. This is part of JS, which helps select different configurations of [argparsers](http://argparsers.It). Seems great, right?
 
 But it can be challenging to manage, and we also need to ensure we satisfy the `lint` formatting for the CI (which can be pretty tricky with templates :-( ). Still, these JS features can be very powerful, and we are trying to improve these as much as possible. By the way, if you are confused about where this `it.argparser` selector came from, better check the project, but the short answer is it comes from a `metadata.json` file that maintains the options for all the templates in the app.
 
@@ -115,7 +115,7 @@ The Code generator project seems to be moving forward at a great pace and is exp
 
 ### 1. Separate `metadata.json` for each template
 
-We are considering providing separate metadata.json files for each template or something similar to that in the future. I proposed an issue to the project for the same [here](https://github.com/pytorch-ignite/code-generator/issues/308%5C) and will try to work on this in the future.
+We are considering providing separate metadata.json files for each template or something similar to that in the future. I proposed an issue to the project for the same [here](https://github.com/pytorch-ignite/code-generator/issues/308%5C) and will try to work on this in the future.
 
 ### 2. Script to contribute new templates
 
