@@ -19,7 +19,7 @@ There are many ways to test your software : unit testing, regression testing, di
 * What is Hypothesis?
 * Experience Integrating into SymPy
 
-If you wish to follow the examples in the blog post, you will need to install Hypothesis via:
+If you wish to follow the examples in the blog post, you will need to have the latest version of sympy (on master) and you need to install Hypothesis via:
 
 ```bash
 pip install hypothesis
