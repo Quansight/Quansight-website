@@ -23,7 +23,7 @@ This summer, I have had the amazing opportunity of working under the mentorship 
 [Ralf Gommers](https://github.com/rgommers), [Pamphile Roy](https://github.com/tupui) and
 [Irwin Zaid](https://github.com/izaid) in my Open Source internship at Quansight Labs.
 My project was to make progress towards SciPy's goal of adopting support for the array API standard,
-which will allow users to use SciPy functions with CuPy arrays, PyTorch Tensors and potentially
+which will allow users to use SciPy functions with CuPy arrays, PyTorch tensors and potentially
 many other array/tensor libraries in the future.
 
 This post stands on the shoulders of giants, including
@@ -373,7 +373,7 @@ PyTorch GPU can be enabled by setting the environment variable `SCIPY_DEVICE=cud
 
 ## Status
 
-At the time of writing, SciPy has two of its submodules, cluster and fft, converted 
+At the time of writing, SciPy has two of its submodules, `cluster` and `fft`, converted 
 (in the sense I have described above).
 `linalg` and `signal` have partial coverage in progress, and some of the compiled-code functions in `special`
 have been covered, with additional calling-out to CuPy, PyTorch and JAX, in
