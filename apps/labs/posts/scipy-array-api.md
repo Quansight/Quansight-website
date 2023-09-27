@@ -1,5 +1,5 @@
 ---
-title: 'Array API Standard in SciPy'
+title: 'The Array API Standard in SciPy'
 published: September 25, 2023
 authors: [lucas-colley]
 description: "How can SciPy use the Array API Standard to achieve array library interoperability?"
@@ -97,6 +97,9 @@ Fortunately, there has been work on a standard which will help push us towards t
 [The Consortium for Python Data API Standards](https://data-apis.org/) has created
 [the Python array API standard](https://data-apis.org/array-api/), which is a "specification for what it means for a
 library to have an ‘array API’" (see [Aaron's talk](https://youtu.be/16rB-fosAWw)).
+The Consortium was formed in 2020 by a group of maintainers and industry stakeholders - see
+[the paper accompanying Aaron's talk](https://conference.scipy.org/proceedings/scipy2023/pdfs/aaron_meurer.pdf) for
+more information.
 Array consumer libraries can write 'array-agnostic' code which is compatible with this specification,
 rather than any particular provider library's API, and it will work with any provider library which complies with the
 standard.
@@ -144,12 +147,12 @@ strategy has been settled on yet - see the discussion of `uarray` in
 [the RFC](https://github.com/scipy/scipy/issues/18286) for more information.
 
 Near the start of my internship,
-[the first PR to convert a SciPy submodule](https://github.com/scipy/scipy/pull/18668) was merged,
-with `scipy.cluster` being covered (modulo a few minor follow-ups).
+[the first PR to convert a SciPy submodule](https://github.com/scipy/scipy/pull/18668), by Pamphile Roy, one of my mentors,
+was merged, with `scipy.cluster` being covered (modulo a few minor follow-ups).
 This PR added a lot of machinery (which I will explore in more detail later) to enable conversion and testing,
 while keeping the new behaviour behind an experimental environment variable.
 
-My first task was to convert `scipy.fft`, SciPy's Fast Fourier Transform module.
+My main goal was to convert `scipy.fft`, SciPy's Fast Fourier Transform module.
 `fft` is an
 [array API standard extension module](https://data-apis.org/array-api/latest/extensions/fourier_transform_functions.html),
 which means that array provider libraries supporting the standard can choose to implement it or not.
@@ -159,7 +162,7 @@ of the standard extension functions to be compatible with all libraries which:
 1. comply with the standard
 2. implement the `fft` extension
 
-After [the main PR](https://github.com/scipy/scipy/pull/19005) merged, the ability to use CuPy arrays and PyTorch Tensors
+After [the main PR](https://github.com/scipy/scipy/pull/19005) merged, the ability to use CuPy arrays and PyTorch tensors
 with the standard extension functions was enabled when the experimental environment variable `SCIPY_ARRAY_API` is set to `1`.
 For example, the code in the following benchmark - the task of smoothing an image (taking a 2-D image,
 using `scipy.fftn`, zero-ing out the highest frequency components, and using `scipy.ifftn`) using CuPy
@@ -168,6 +171,7 @@ arrays - now works:
 ```python
 import scipy
 import cupy as cp
+
 cpface = cp.asarray(face)
 f = scipy.fft.fftn(cpface)
 fshift = scipy.fft.fftshift(f)
@@ -217,7 +221,7 @@ def fht(a, dln, mu, offset=0.0, bias=0.0):
 +
      # size of transform
 -    n = np.shape(a)[-1]
-+    n = a.shape[-1] # example of a change where the standard differs slightly from the NumPy API
++    n = a.shape[-1] # example of a change where the standard offers only one way of doing things, while NumPy has more ways
  
      # bias input array
      if bias != 0:
@@ -342,7 +346,7 @@ Here is what that looks like for one of the Discrete Sine and Cosine Transforms 
 +     xp_assert_close(fft_res, fftpack_res)
 ```
 
-## Machinery, Helpers and Utilities
+### Enabling and testing with non-NumPy arrays
 
 I'll talk a bit about implementation details now - feel free to skip this section if you are just here for
 an overview!
@@ -429,7 +433,8 @@ attended (as well as coordinating the internship program at Quansight Labs!).
 ## References
 
 - [The array API standard](https://data-apis.org/array-api/)
-- ["Toward Array Interoperability in the Scientific Python Ecosystem" SciPy 2023 Talk](https://youtu.be/16rB-fosAWw)
+- ["Python Array API Standard: Toward Array Interoperability in the Scientific Python Ecosystem" SciPy 2023 Talk](https://youtu.be/16rB-fosAWw)
+- ["Python Array API Standard: Toward Array Interoperability in the Scientific Python Ecosystem" Paper](https://conference.scipy.org/proceedings/scipy2023/pdfs/aaron_meurer.pdf)
 - ["SciPy array types & libraries support" RFC](https://github.com/scipy/scipy/issues/18286)
 - ["Array Libraries Interoperability" Blog Post](https://labs.quansight.org/blog/array-libraries-interoperability)
 - [array-api-compat](https://github.com/data-apis/array-api-compat)
