@@ -20,7 +20,12 @@ With the release of scikit-learn 1.3, we enabled experimental Array API support 
 
 Scikit-learn was initially developed to run on CPUs with NumPy arrays. With Array API support, a limited set of scikit-learn models and tools can now run with other array libraries and devices like GPUs. The following benchmark results are from running scikit-learn's `LinearDiscriminantAnalysis` using NumPy and PyTorch on a AMD 5950x CPU and PyTorch on a Nvidia RTX 3090 GPU.
 
-![Bar plot with benchmark results comparing NumPy and PyTorch on a AMD 5950x CPU and PyTorch on a Nvidia RTX 3090 GPU running Linear Discriminant Analysis. The PyTorch GPU results are marked as 27 times faster compared to NumPy for fitting the model and 28 times faster compared to NumPy for prediction.](/posts/array-api-support-scikit-learn/benchmark_results.png)
+<p align="center">
+    <img
+     alt="Bar plot with benchmark results comparing NumPy and PyTorch on a AMD 5950x CPU and PyTorch on a Nvidia RTX 3090 GPU running Linear Discriminant Analysis. The PyTorch GPU results are marked as 27 times faster compared to NumPy for fitting the model and 28 times faster compared to NumPy for prediction"
+     src="/posts/array-api-support-scikit-learn/benchmark_results.png"
+    />
+</p>
 
 The training and prediction times are improved when using PyTorch compared to NumPy. Running the computation on PyTorch CPU tensors is faster than NumPy because PyTorch CPU operations are multi-threaded by default.
 
@@ -142,7 +147,7 @@ With plugins, the dispatched code will ingest and return arrays that follow the 
 
 ## Conclusion
 
-In recent years, there has been increasing usage of accelerators for computation in many domains. The array API standard gives Python libraries like scikit-learn access to these accelerators with the same source code. Depending on your code, there are various challenges for adopting Array API, but there are performance and compatibility benefits from using the API. If you observe any limitations, you are welcome to open issues on their issue tracker. For more information about Array API, you may watch Aaron's [SciPy presentation](https://www.youtube.com/watch?v=16rB-fosAWw), read the SciPy proceedings [paper](https://conference.scipy.org/proceedings/scipy2023/aaron_meurer.html), or read the [Array API documentation](https://data-apis.org/array-api/latest/).
+In recent years, there has been increasing usage of accelerators for computation in many domains. The array API standard gives Python libraries like scikit-learn access to these accelerators with the same source code. Depending on your code, there are various challenges for adopting Array API, but there are performance and compatibility benefits from using the API. If you observe any limitations, you are welcome to open issues on their [issue tracker](https://github.com/data-apis/array-api/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc). For more information about Array API, you may watch Aaron's [SciPy presentation](https://www.youtube.com/watch?v=16rB-fosAWw), read the SciPy proceedings [paper](https://conference.scipy.org/proceedings/scipy2023/aaron_meurer.html), or read the [Array API documentation](https://data-apis.org/array-api/latest/).
 
 This work was made possible by Meta funding the effort, enabling us to make progress on this topic quickly. This topic was a longer-term goal on scikit-learn's roadmap for quite some time. Similar steps are under way to incorporate the Array API Standard into SciPy. As the adoption of the Array API Standard increases, we aim to make it easier for domain libraries and their users to better utilize their hardware for computation.
 
