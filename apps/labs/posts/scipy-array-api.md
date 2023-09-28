@@ -87,11 +87,14 @@ For users who decide to use a different provider library to take advantage of pe
 find themselves needing to learn new APIs to accomplish the same tasks, which are often similar but frustratingly
 different to those which they are used to.
 There are also likely to be gaps in the functionality offered by the libraries, which can lead back to the problem
-of converting between libraries.
+of converting between libraries, or require the user to find new ways to complete the same task.
 For large existing projects, this makes the prospect of switching to a different provider library a very daunting one.
 
 On the developer side of things, it seems like there is a lot of wasted time in reimplementing the same functionality
 for many different provider libraries.
+Developer time is very valuable since these projects are still largely maintained by volunteers (and hence large
+tasks like adding GPU support can stay on the roadmap for many years), so work to reduce the overall maintenance
+load is key to accelerating progress.
 If each piece of functionality only needed to be implemented once and worked with any array library, then there would 
 be many fewer projects to maintain, and much more time to work on implementing brand new functionality.
 Fortunately, there has been work on a standard which will help push us towards this imagined future.
