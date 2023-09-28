@@ -11,7 +11,7 @@ hero:
   imageSrc: /posts/integrating-hypothesis-into-sympy/blog_hero_var2.svg
   imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.' 
 ---
-This summer I interned at Quansight Labs with a focus of intergrating [Hypothesis](https://github.com/HypothesisWorks/hypothesis/) into the testing suit of [SymPy](https://github.com/sympy/sympy). The primary [pull request to add Hypothesis to the test infrastructure](https://github.com/sympy/sympy/pull/25428) to complete this was simple. The primary challenges lied thereafter: questions around the _utility of hypothesis_ and its appropriate usage arose. 
+This summer I interned at Quansight Labs with a focus of integrating [Hypothesis](https://github.com/HypothesisWorks/hypothesis/) into the testing suit of [SymPy](https://github.com/sympy/sympy). The primary [pull request to add Hypothesis to the test infrastructure](https://github.com/sympy/sympy/pull/25428) to complete this was simple. The primary challenges lied thereafter: questions around the _utility of hypothesis_ and its appropriate usage arose. 
 
 There are many ways to test your software : unit testing, regression testing, diff testing, and mutation testing are a few that come to mind. This blog post is for anyone interested in understanding the value of utilizing _property based testing_ in their software projects. The post  will be broken up into three parts:
 
@@ -26,7 +26,7 @@ pip install hypothesis
 ```
 # What is Property Based Testing?
 
-Property based testing (PBT) is a technique where instead of testing individual test cases, you specify properties you which to hold true for a range of inputs. These properties are then tested against automatically generated test data. PBT uses logical properties over generated test data to facilitate broad, robust testing that can expose edge cases not easily found via traditional test cases.
+Property based testing (PBT) is a technique where instead of testing individual test cases, you specify properties you wish to hold true for a range of inputs. These properties are then tested against automatically generated test data. PBT uses logical properties over generated test data to facilitate broad, robust testing that can expose edge cases not easily found via traditional test cases.
 
 PBT _shines_ when testing generic functions and libraries working across a wide range of possible inputs, where manually enumerating test cases is difficult but the behavior in question is easily testable. Examples include:
 
@@ -45,13 +45,13 @@ def test_degree():
     h = f*g
     assert h.degree() == f.degree() + g.degree()
 ```
-Notice, we are limited in how many various combinations of _f_ and _g_ we can test. It would be better if we could fix a property and have a library automatically generate interesting test cases and run them for us. We would no longer need to worry about thinking up input/output pairs. This would increase our **_trust_** in the implementation.
+Notice we are limited in how many various combinations of _f_ and _g_ we can test. It would be better if we could fix a property and have a library automatically generate interesting test cases and run them for us. We would no longer need to worry about thinking up input/output pairs. This would increase our **_trust_** in the implementation.
 
 # What is Hypothesis?
  > [Hypothesis](https://hypothesis.readthedocs.io/en/latest/) is a Python library for creating unit tests which are simpler to write and more powerful when run, finding edge cases in your code you wouldn’t have thought to look for. It is stable, powerful and easy to add to any existing test suite.
 > Now, let's test out the property above using Hypothesis:
   
-  ```python
+```python
 from hypothesis import given, strategies as st
 
 @given(f = polys(), g = polys())
@@ -59,7 +59,7 @@ def test_degree(f, g):
     h = f * g
     assert h.degree() == f.degree() + g.degree()
 ```
-Note, that here `polys()` is custom-built for sympy and generates a random polynomial with integer coefficeints. It is not a built-in Hypothesis strategy.
+Note, that here `polys()` is custom-built for sympy and generates a random polynomial with integer coefficients. It is not a built-in Hypothesis strategy.
 
 ### How Hypothesis Works
 Give Hypothesis the types of inputs you are expecting using the _@given_ decorator and it will automatically generate examples using the _strategies_ module. It will then use these examples to test and report the minimal failing inputs (if any). 
