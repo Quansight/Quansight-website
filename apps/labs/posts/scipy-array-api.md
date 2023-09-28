@@ -149,7 +149,8 @@ existing pure Python + NumPy code to be array API compatible.
 Out of scope is converting the C/C++/Cython/Fortran code which is used within SciPy.
 Behind the scenes, SciPy provides Python APIs for low level functions which are written in other languages and for the
 CPU only.
-These APIs are made to work with NumPy arrays - they will definitely not work for arrays on a different device to the CPU.
+These APIs are made to work with NumPy arrays - they will definitely not work for arrays on a different device to the CPU,
+and are not guaranteed to work with other types of array on the CPU.
 For these functions which use compiled code, some dispatching mechanism seems like the right solution, but no particular
 implementation or development strategy has been settled on yet - see the discussion of `uarray` in
 [Anirudh's blog post](https://labs.quansight.org/blog/array-libraries-interoperability) and
