@@ -317,5 +317,7 @@ minimal limitations, providing a more comprehensive compilation support for `tor
 transforms
 
 ## Closing Remarks
-This collective effort has been made achievable through the contributions of the
-PyTorch team at Quansight, as well as from Richard Zou and Horace He from Meta.
+This project was yet another instance of the tight collaboration between Quansight
+and Meta within PyTorch. In particular, we would like to thank Richard Zou and
+Horace He, the `torch.func` creators, for all the design discussions and
+guidance throughout these years.
