@@ -187,7 +187,7 @@ class GraphModule(torch.nn.Module):
 produce a lower-level FX graph using `aten` functions (from the private API).
 Additionally, `aot_autograd` decomposes composite operations into primitive
 operations. For instance, a composite operation like `torch.square` is traced
-down to `torch.pow(x, 2)`.
+down to `aten.pow(x, 2)`.
 
 Moreover, `aot_autograd` also manages the creation of the backward graph when
 requested. This is useful for transforms like `grad`, `vjp`, etc. Below, you can see the
