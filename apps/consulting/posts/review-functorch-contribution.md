@@ -73,8 +73,8 @@ and we need to have coverage for all of them
 to support `vmap`. That being said, there is a `for`-loop
 fallback in case an operator is not supported so as not to crash the code.
 
-From the point of view of adding batch rule, PyTorch operators can be roughly
-categorised as primitive or composite.
+From the point of view of adding batching rules, PyTorch operators can be roughly
+categorized as primitive or composite.
 Primitive operators are the ones for which we specify the batching and
 gradient rules. Composite operators are implemented using these primitive operators
 and other simpler composite operators. If we implement batching rules for every
@@ -150,7 +150,7 @@ stack, namely `dynamo`, `aot_autograd`, and `inductor`.
 The `dynamo` and `aot_autograd` layers primarily focus on capturing the
 computation graph and converting the captured operations into more basic operations.
 This captured graph is then passed to `inductor`, the compiler. `inductor` then applies
-various optimizations passes before generating specialized code.
+various optimization passes before generating specialized code.
 
 To gain insight into the different stages of this stack,
 let us compile a simple program in debug mode.
@@ -235,7 +235,7 @@ However, if the function cannot be successfully traced due to its failure to
 meet the above constraints, we fallback to the eager implementation, and this
 particular portion of the code remains uncompiled.
 
-Let us have a look what `dynamo` and `aot_autograd` generates when we compile
+Let us have a look at what `dynamo` and `aot_autograd` generates when we compile a
 program with `grad`.
 
 ```python
