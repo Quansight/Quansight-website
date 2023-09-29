@@ -290,8 +290,8 @@ The graph shown above is handed over to `aot_autograd` for the subsequent phase
 of the compilation process. `aot_autograd` performs a trace through the
 transformation, resulting in the generation of the transformed graph. This
 explains why we observe a call to `cos` instead of `sin`. `aot_autograd`
-has traced through the forward and backward graph as we have applied `grad` transform
-and optimized away the forward computation as `grad` discards that value.
+has traced through the forward and backward graph, as we have applied the `grad` transform,
+then optimized away the forward computation as `grad` discards that value.
 
 ```python
 def forward(self, arg0_1: f32[]):
