@@ -25,15 +25,15 @@ calculating per-sample gradients becomes the straightforward application of
 
 Here are a few of the tasks we had the opportunity to tackle:
 
-## Adding Batching Rule for `vmap`
+## Adding Batching Rules for `vmap`
 `vmap` is a transformation that accepts a function that operates on non-batched
-data and returns a new function that operates on batched input.
+tensors and returns a new function that operates on batched tensors.
 When processing a batched input, an additional
 dimension, denoted by `in_dims`, is introduced to indicate which dimension to
 apply the function over. Conceptually, it emulates a `for` loop that iterates
 through all the data points and stacks the results. Importantly, it performs this
 operation efficiently by pushing the `for` loop into the PyTorch operations,
-effectively vectorizing the computation.
+allowing the batches to run in parallel.
 
 Consider the following example:
 ```python
@@ -68,14 +68,15 @@ A batching rule is essentially a function which takes one or multiple batched
 inputs and computes the batched operation. In the above example to support
 `vmap` for `my_simple_model`, we need to know the batching rule for `torch.dot`
 and `torch.relu` to be able to vectorize our model.
-PyTorch has a lot of operators and we need to have coverage for all of them
+PyTorch has more than [2000 operators](https://dev-discuss.pytorch.org/t/where-do-the-2000-pytorch-operators-come-from-more-than-you-wanted-to-know/373)
+and we need to have coverage for all of them
 to support `vmap`. That being said, there is a `for`-loop
 fallback in case an operator is not supported so as not to crash the code.
 
 PyTorch operators can be roughly categorized as primitive (internally
 `CompositeExplicitAutograd`) vs composite (internally `CompositeImplicitAutograd`).
 Primitive operators are the ones for which we specify the batching and
-gradient rules. Composite operators are implemented using these the primitive operators
+gradient rules. Composite operators are implemented using these primitive operators
 and other simpler composite operators. If we implement batching rules for every
 primitive operator, we automatically get the batching rules for composite operators.
 
@@ -87,8 +88,8 @@ batching rule. See for example the [batching rule for torch.vdot](https://github
 ## Composite Compliance
 
 As mentioned earlier, we obtain batching rules effortlessly for composite operators
-but this holds true only under certain constraints. These constraints include requirements
-like refraining from accessing the tensor's data pointer and avoiding the use of
+but this holds true only under certain constraints. These constraints include
+refraining from accessing the tensor's data pointer and avoiding the use of
 `out=` variants of the operators.
 For the full list of constraints, see [this documentation](https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/native/README.md#composite-compliance).
 When all these hold for an operator, we say that it is composite compliant.
@@ -113,6 +114,7 @@ Testing both the backward and forward formulas is crucial because we may encount
 scenarios involving `vmap(vjp(fn))` or `vmap(jvp(fn))`.
 
 ## Support for `chunk_size` in `vmap` and `jacrev`
+
 The computation of the Jacobian can be memory-intensive, and users have raised
 concerns about related issues, (e.g., [this one](https://github.com/pytorch/functorch/issues/680)).
 In response to these concerns, we have introduced a feature that allows for the
@@ -130,7 +132,7 @@ product. Consequently, even when one intends to compute the Jacobian-vector
 product for fixed inputs, the `jvp` transform still redundantly evaluates `f(x)`.
 To address such scenarios, the `linearize` transform comes into play. This
 transform proves valuable when multiple `jvp` computations are needed for
-constant `primals`.
+constant inputs.
 
 Note that, in order to implement this efficiently, `linearize` stores some
 intermediate computations, which can result in higher memory requirements compared
@@ -212,7 +214,7 @@ extern "C" void kernel(const float* in_ptr0, float* out_ptr0) {
   for (long i0 = 0L; i0 < 8L; i0 += 8L) {
     auto tmp0 = at::vec::Vectorized<float>::loadu(in_ptr0 + i0);
     auto tmp1 = tmp0.sin();
-    auto tmp2 = tmp0.cos();
+    auto tmp2 = tmp0 * tmp0;
     auto tmp3 = tmp1 + tmp2;
     tmp3.store(out_ptr0 + i0);
   }
@@ -220,7 +222,7 @@ extern "C" void kernel(const float* in_ptr0, float* out_ptr0) {
   for (long i0 = 8L; i0 < 9L; i0 += 1L) {
     auto tmp0 = in_ptr0[i0];
     auto tmp1 = std::sin(tmp0);
-    auto tmp2 = std::cos(tmp0);
+    auto tmp2 = decltype(tmp0)(tmp0 * tmp0);
     auto tmp3 = tmp1 + tmp2;
     out_ptr0[i0] = tmp3;
   }
@@ -296,8 +298,9 @@ class GraphModule(torch.nn.Module):
 The graph shown above is handed over to `aot_autograd` for the subsequent phase
 of the compilation process. `aot_autograd` performs a trace through the
 transformation, resulting in the generation of the transformed graph. This
-explains why we observe a call to `cos` instead of `sin`, as the transformation
-has effectively altered the operation from what was originally present in our function.
+explains why we observe a call to `cos` instead of `sin`. `aot_autograd`
+has traced through the forward and backward graph as we have applied `grad` transform
+and optimized away the forward computation as `grad` discards that value.
 
 ```python
 def forward(self, arg0_1: f32[]):
