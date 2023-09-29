@@ -26,22 +26,22 @@ calculating per-sample gradients becomes the straightforward application of
 Here are a few of the tasks we had the opportunity to tackle:
 
 ## Adding Batching Rule for `vmap`
-`vmap` is a transformation that accepts a function `func` designed to operate on
-a single data point. It then generates a new function capable of applying the
-given function to a batched input. When processing batched input, an additional
+`vmap` is a transformation that accepts a function `func` that operaters on non-batched
+data. It then generates a new function capable of applying the
+given function to a batched input. When processing a batched input, an additional
 dimension, denoted by `in_dims`, is introduced to indicate which dimension to
 apply the function over. Conceptually, it emulates a `for` loop that iterates
-through all data points and stacks the results. Importantly, it performs this
+through all the data points and stacks the results. Importantly, it performs this
 operation efficiently by pushing the `for` loop into the PyTorch operations,
-effectively vectorizing the computation. Consider the following example:
+effectively vectorizing the computation.
 
-Example:
+Consider the following example:
 ```python
 import torch
 
 # Written to handle only single sample.
 def my_simple_model(feature_vec, weight):
-    return feature_vec.dot(weight).relu()
+    return torch.dot(feature_vec, weight).relu()
 
 batch_size = 4
 batched_inputs = torch.randn(batch_size, 3)
@@ -67,8 +67,8 @@ i.e. how to map the given function over a batched input. This is similar to how
 PyTorch internally specifies the rule for gradient computation for operators.
 Batching rule is essentially a function which takes one or multiple batched
 inputs and computes the batched operation. In the above example to support
-`vmap` for `my_simple_model`, we need to know the batching rule for `torch.sum`,
-`@`/`torch.matmul` and `+`/`torch.add` to be able to vectorize our model.
+`vmap` for `my_simple_model`, we need to know the batching rule for `torch.dot`
+and `torch.relu` to be able to vectorize our model.
 PyTorch has a lot of operators and we need to have coverage for all the
 operators to seamlessly support optimized `vmap`. There is a `for`-loop
 fallback in case an operator is not supported so as not to crash the code.
@@ -76,9 +76,9 @@ fallback in case an operator is not supported so as not to crash the code.
 PyTorch operators can be roughly categorized as primitive (internally
 `CompositeExplicitAutograd`) vs composite (internally `CompositeImplicitAutograd`).
 Primitive operators are the ones for which we specify the batching and
-gradient rules. Composite operators are implemented using these the primitive operators.
-Achieving coverage necessitates batching rules for every primitive operator,
-and as a result, we automatically get the rules for composite operators.
+gradient rules. Composite operators are implemented using these the primitive operators
+and other simpler composite operators. If we implement batching rules for every
+primitive operator, we automatically get the batching rules for composite operators.
 
 There are two ways to add batching support for an operator:
 * Manually write the batching rule. See for example the [batching rule for torch.dot](https://github.com/pytorch/pytorch/blob/b30ee35a6f141d3247a24fd09f96ea50a7e2b3c7/aten/src/ATen/functorch/BatchRulesLinearAlgebra.cpp#L25-L34)
@@ -88,50 +88,48 @@ batching rule. See for example the [batching rule for torch.vdot](https://github
 ## Composite Compliance
 
 As mentioned earlier, we obtain batching rules effortlessly for composite operators
-but this holds true only when certain constraints, as outlined in [this link](https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/native/README.md#composite-compliance),
-are adhered to. These constraints include requirements like refraining from accessing
-the tensor's data pointer and avoiding the use of `out=` variants of the operators,
-among others.
+but this holds true only when certain constraints. These constraints include requirements
+like refraining from accessing the tensor's data pointer and avoiding the use of
+`out=` variants of the operators.
+For the full list of constraints, see [this documentation](https://github.com/pytorch/pytorch/blob/main/aten/src/ATen/native/README.md#composite-compliance).
+When all these hold for an operator, we say that it is composite compliant.
 
 Unfortunately, operators that claim to be composite may occasionally deviate
 from these constraints. While such deviations may not pose issues when utilizing
 plain eager PyTorch, they can lead to complications when using `torch.func`
-transformations. For instance, questions arise when calling methods like `item`
-or `data_ptr` on a BatchedTensor, highlighting the challenges that can emerge.
+transformations.
 
 ### Testing for Composite Compliance
 
-For ensuring that composite operators adhere to these constraints, we rely on
-extensive testing for. We achieve this through the creation of a new
-subclass `CompositeCompliantTensor` that utilizes the `__torch_dispatch__` mechanism.
-This mechanism is invoked for all operators in the OpInfo testing infrastructure,
-enabling us to detect any non-compliant behavior exhibited by an operator.
+We have tests to ensure that operators tagged as composite are indeed composite
+compliant. We test this by creating a new subclass `CompositeCompliantTensor`
+that utilizes the `__torch_dispatch__` mechanism. This mechanism is invoked for
+all operators in the testing, enabling us to detect any non-compliant behavior
+exhibited by an operator.
 
 Our testing approach involves running tests on the actual [operator](https://github.com/pytorch/pytorch/blob/40b2c796dcae5768ff5de279b13914d5948fd414/test/test_ops.py#L1446),
 as well as their [backward formula](https://github.com/pytorch/pytorch/blob/40b2c796dcae5768ff5de279b13914d5948fd414/test/test_ops.py#L1459)
-and [forward formula](https://github.com/pytorch/pytorch/blob/40b2c796dcae5768ff5de279b13914d5948fd414/test/test_ops.py#L1476).
+and [forward AD formula](https://github.com/pytorch/pytorch/blob/40b2c796dcae5768ff5de279b13914d5948fd414/test/test_ops.py#L1476).
 Testing both the backward and forward formulas is crucial because we may encounter
 scenarios involving `vmap(vjp(fn))` or `vmap(jvp(fn))`, which require these
 formulas to comply with the composite compliance.
 
-### Fixing the operators on case by case basis.
+### Fixing the operators on a case by case basis
 
 Once we had the tests and the list of failing operators, it was a matter of
 going through the list, verifying what was the cause of the operator being
-non-compliant and devising a fix for the same. The issue tracker can be found
-[here](https://github.com/pytorch/pytorch/issues/69991).
+non-compliant and devising a fix for the same.
 
 ## Support for `chunk_size` in `vmap` and `jacrev`
 The computation of the Jacobian can be memory-intensive, and users have raised
-concerns about related issues, as detailed in this [link](https://github.com/pytorch/functorch/issues/680).
+concerns about related issues, (eg. [this one](https://github.com/pytorch/functorch/issues/680)).
 In response to these concerns, we have introduced a feature that allows for the
 calculation of `jacrev` and `vmap` in smaller, user-defined chunks, determined
 by the `chunk_size` argument. This adjustment serves to reduce the peak memory
 usage during the computation process. With this argument, users can specify the
 number of rows of the Jacobian to be computed at once. This enhancement was
 incorporated into the [jacrev PR](https://github.com/pytorch/pytorch/pull/89376)
-and the [vmap PR](https://github.com/pytorch/pytorch/pull/91157) to address
-these issues.
+and the [vmap PR](https://github.com/pytorch/pytorch/pull/91157).
 
 ## Support for `linearize` transform
 
@@ -142,31 +140,29 @@ To address such scenarios, the `linearize` transform comes into play. This
 transform proves valuable when multiple `jvp` computations are needed for
 constant `primals`.
 
-However, it's worth noting that to achieve this efficiency, `linearize` optimizes
-by storing intermediate computations, which can result in higher memory
-requirements compared to directly applying `jvp`. `linearize` transform was
-implemented in this [PR](https://github.com/pytorch/pytorch/pull/94173).
+Note that, in order to implement this efficiently, `linearize` stores some
+intermediate computations, which can result in higher memory requirements compared
+to directly applying `jvp`. The `linearize` transform was implemented in this
+[PR](https://github.com/pytorch/pytorch/pull/94173).
 
 ## Supporting `torch.func` transforms for `torch.compile`
 
-PyTorch 2.0 introduced a new compilation stack known as `torch.compile`.
-In comparison to JAX, PyTorch's `torch.func` was lacking the `jit` transform.
+PyTorch 2.0 introduced a JIT compiler under `torch.compile`, similar to `jax.jit`.
 This opened up the possibility of compiling the existing transforms to enhance
-their performance. To comprehend how these transforms can be compiled, it's
-essential to understand the workings of the three layers within the compilation
+their performance. To understand how these transforms can be compiled, it's
+essential to discuss the workings of the three layers within the compilation
 stack, which are namely `dynamo`, `aot_autograd`, and `inductor`.
 
 The `dynamo` and `aot_autograd` layers primarily focus on capturing the
 computation graph and converting the captured operations into more basic operations.
-On the other hand, the `inductor` layer functions more like a compiler.
-It takes the captured graph and applies various optimizations, including fusion,
-before generating specialized code.
+This captured graph is then passed to `inductor`, the compiler. `inductor` then applies
+various optimizations passes before generating specialized code.
 
 To gain insight into the different stages of this stack,
 let's compile a simple program in debug mode.
 
 ```python
-# Run this file with `TORCH_COMPILE_DEBUG=1` env flag.
+# Run this file with `TORCH_COMPILE_DEBUG=1`
 
 import torch
 
@@ -177,7 +173,7 @@ torch.compile(fn)(torch.randn(3, 3))
 ```
 
 **dynamo**: The primary responsibility of dynamo is to trace the Python program
-and convert it into the FX graph format. The FX graph generated by `dynamo` is a
+and convert it into the FX graph format. The FX graph generated by `dynamo`
 represents PyTorch operations from the public API, such as `torch.sin`.
 Below, you can observe the graph captured by `dynamo`.
 
@@ -193,15 +189,14 @@ class GraphModule(torch.nn.Module):
         return (add,)
 ```
 
-**aot_autograd**: `aot_autograd` component retraces all PyTorch operations to
-produce an FX graph once again. However, this time, it represents these operations
-at a lower level using `aten` operators. Additionally, `aot_autograd` decomposes
-composite operations into the primitive operations. For instance, a composite
-operation like `torch.square` is traced down to `torch.pow(x, 2)`.
+**aot_autograd**: `aot_autograd` retraces all PyTorch operations to
+produce a lower-level FX graph using `aten` functions (from the private API).
+Additionally, `aot_autograd` decomposes composite operations into primitive
+operations. For instance, a composite operation like `torch.square` is traced
+down to `torch.pow(x, 2)`.
 
 Moreover, `aot_autograd` also manages the creation of the backward graph when
-requested. The name "ahead of time autograd" or `aot_autograd` is derived from
-this ability to handle autograd operations in advance. Below, you can see the
+requested. This is useful for transforms like `grad`, `vjp`, etc. Below, you can see the
 graph generated by `aot_autograd` for the above program.
 
 ```python
@@ -214,33 +209,12 @@ def forward(self, arg0_1: f32[3, 3]):
 
 ```
 
-inductor: As discussed above, it is inductor's job to apply optimisations and
+**inductor**: As discussed above, it is inductor's job to apply optimisations and
 generate specialised code. In this case, it has fused `sin` and `square` to run
 within the same `for`-loop. This allows the generated program to do more compute
 per read/write effectively improving the memory bandwith utilization.
 
-```python
-from ctypes import c_void_p, c_long
-import torch
-import math
-import random
-import os
-import tempfile
-from math import inf, nan
-from torch._inductor.hooks import run_intermediate_hooks
-from torch._inductor.utils import maybe_profile
-
-from torch import empty_strided, device
-from torch._inductor.codecache import AsyncCompile
-from torch._inductor.select_algorithm import extern_kernels
-
-aten = torch.ops.aten
-assert_size_stride = torch._C._dynamo.guards.assert_size_stride
-reinterpret_tensor = torch.ops.inductor._reinterpret_tensor
-async_compile = AsyncCompile()
-
-
-cpp_fused_add_cos_sin_0 = async_compile.cpp('''
+```c++
 #include "/tmp/torchinductor_kshiteej/ib/cibrnuq56cxamjj4krp4zpjvsirbmlolpbnmomodzyd46huzhdw7.h"
 extern "C" void kernel(const float* in_ptr0,
                        float* out_ptr0)
@@ -265,26 +239,12 @@ extern "C" void kernel(const float* in_ptr0,
         }
     }
 }
-''')
-
-
-async_compile.wait(globals())
-del async_compile
-
-def call(args):
-    arg0_1, = args
-    args.clear()
-    assert_size_stride(arg0_1, (3, 3), (3, 1))
-    buf0 = empty_strided((3, 3), (3, 1), device='cpu', dtype=torch.float32)
-    cpp_fused_add_cos_sin_0(c_void_p(arg0_1.data_ptr()), c_void_p(buf0.data_ptr()))
-    del arg0_1
-    return (buf0, )
 ```
 
 ### Teaching `dynamo` about `torch.func` transforms
 
 Now that we have a basic understanding of how `torch.compile` works, let's
-delve into how we can extend the support for `torch.func` transforms. Given that
+delve into how we extended the support for `torch.func` transforms. Given that
 `aot_autograd` is already capable of tracing through the transforms, our task is
 to teach `dynamo` to validate whether the user-defined function intended for
 transformation is free of side effects affecting the global state or graph-breaks.
@@ -300,7 +260,7 @@ Let us have a look what `dynamo` and `aot_autograd` generates when we compile
 program with `vmap`.
 Example
 ```python
-# Run this file with `TORCH_COMPILE_DEBUG=1` env flag.
+# Run this file with `TORCH_COMPILE_DEBUG=1`
 
 import torch
 
@@ -319,7 +279,7 @@ to the `wrapper_fn`, clearly indicating a call to `grad` on the traced represent
 of the user's function intended for transformation. Subsequently, the second
 `GraphModule` corresponds to the function provided by the user. In this instance,
 our function didn't have side effects and graph-breaks. Thus, we were able to
-successfully compile this program.
+successfully trace through this program in one graph.
 
 ```python
 class GraphModule(torch.nn.Module):
@@ -372,7 +332,7 @@ to the compilation of `grad` and `vmap`. However, it's important to note that
 there are certain [limitations](https://pytorch.org/docs/main/torch.compiler_faq.html#limitations)
 that restrict the range of cases we can compile.
 
-Looking ahead, our future roadmap aims to extend support for all transforms with
+Looking ahead, our roadmap aims to extend support for all transforms with
 minimal limitations, providing a more comprehensive compilation support for `torch.func`
 transforms
 
