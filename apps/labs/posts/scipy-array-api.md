@@ -200,7 +200,7 @@ You can see the full benchmark on [the PR](https://github.com/scipy/scipy/pull/1
 
 Completing this PR wasn't without difficulty, as lots of SciPy's brand new array API testing infrastructure
 needed improvements in the process.
-I contributed quite a few PRs to help make this testing infrastructure more robust, and squash some bugs;
+I contributed quite a few PRs to help make this testing infrastructure more robust and squash some bugs;
 you can find all of my merged contributions relating to array types
 [in this filtered view of SciPy's PR tracker](https://github.com/scipy/scipy/pulls?q=is%3Apr+author%3Alucascolley+is%3Amerged+label%3A%22array+types%22).
 This was also my first ever big contribution to Open Source, so there was a large (but very rewarding!) learning
@@ -340,14 +340,14 @@ After converting the production functions, we also need to convert the tests.
 
 We have the `@array_api_compatible` decorator, which parametrizes `xp` with the
 available backends that we have for testing.
-We have also written three new assertions - `assert_close`, `assert_equal` and `assert_less` -
+We have also written three new array-agnostic assertions - `xp_assert_close`, `xp_assert_equal` and `xp_assert_less` -
 which incorporate checks for matching namespaces and dtypes.
 If any tests use results or input data from NumPy, we convert everything to the `xp` namespace before using
 these assertions.
-The assertions make use of functions from `xp` where possible which helps to avoid device transfers.
+The assertions make use of functions from `xp` where possible which helps to minimise the amount of device transfers.
 
 Other than that, we make similar changes to those in the production functions so that every test works
-with all of the backends we test with.
+with all of the backends with which we test.
 Finally, for tests of functions which hit compiled code, we add the `@skip_if_array_api_gpu` decorator.
 
 Here is what that looks like for one of the Discrete Sine and Cosine Transforms tests:
@@ -404,8 +404,7 @@ For more information on the implementation details, see
 At the time of writing, SciPy has two of its submodules, `cluster` and `fft`, converted 
 (in the sense I have described above).
 `linalg` and `signal` have partial coverage in progress, and some of the compiled-code functions in `special`
-have been covered, with additional calling-out to CuPy, PyTorch and JAX, in
-[the `special` PR](https://github.com/scipy/scipy/pull/19023/) mentioned above.
+have been covered, with additional calling-out to CuPy, PyTorch and JAX.
 [The tracker issue](https://github.com/scipy/scipy/issues/18867)
 should be kept up to date with progress as more submodules are converted.
 
