@@ -194,7 +194,7 @@ f_ishift = scipy.fft.ifftshift(original - fshift)
 x = scipy.fft.ifftn(f_ishift)
 ```
 
-On my machine (AMD Ryzen 5 2600 & NVIDIA GeForce GTX 1060 6GB), this demonstrated a ~15x performance improvment over
+On my machine (AMD Ryzen 5 2600 & NVIDIA GeForce GTX 1060 6GB), this demonstrated a ~15x performance improvement over
 using NumPy arrays in the same functions.
 You can see the full benchmark on [the PR](https://github.com/scipy/scipy/pull/19005).
 
