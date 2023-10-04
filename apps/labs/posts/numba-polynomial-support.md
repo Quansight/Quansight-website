@@ -1,16 +1,18 @@
 ---
-title: "Adding support for polynomials to Numba"
+title: 'Adding support for polynomials to Numba'
 published: September 18, 2023
 authors: [kristian-minchev]
-description: "My work was focused on improving NumPy support in Numba, with focus on the polynomial package."
+description: 'My work was focused on improving NumPy support in Numba, with focus on the polynomial package.'
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/numba-polynomial-support/feature_grayscale.png
-  alt: "An image containing photos of Kristian Minchev, intern at Quansight Labs, and Guilherme Leobas, Kristian's mentor during the internship."
+  alt: >
+    An image containing photos of Kristian Minchev, intern at Quansight Labs, and Guilherme Leobas, Kristian's mentor during the internship.
 hero:
   imageSrc: /posts/numba-polynomial-support/hero.png
-  imageAlt: "An image containing the logos of Numba and NumPy next to each other."
+  imageAlt: 'An image containing the logos of Numba and NumPy next to each other.'
 ---
+
 Hi, my name is Kristian Minchev. In this blog post, I will be talking about my experience as a summer intern at Quansight Labs working on increasing NumPy support in Numba. In particular, my work was focused on adding support for the Polynomial class as well as other functions from the polynomial API.
 
 
