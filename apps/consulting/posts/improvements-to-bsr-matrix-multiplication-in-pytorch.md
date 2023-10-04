@@ -275,8 +275,8 @@ We have made some serious improvements to the usability of key features for BSR,
 quite finished yet. These are only the first steps toward a larger goal, namely, making block sparse
 layouts a first class technique for accelerating transformer workflows. With PyTorch 2.1 coming out,
 it is a good time to take stock of where we are at, and we have come a long way, but there is plenty
-of work left to do. We hope to improve on these kernels and add more in the upcoming months. We also
-are working to enable pathways such that masking behavior for gradients can be accessed without
+of work left to do. We hope to improve on these kernels and add more in the upcoming months. We are
+also working to enable pathways such that masking behavior for gradients can be accessed without
 writing a custom autograd function or module.
 
 This work would not have been possible without the close collaboration between Quansight, and Meta
