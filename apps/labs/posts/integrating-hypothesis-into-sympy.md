@@ -14,7 +14,7 @@ hero:
 
 This summer I interned at Quansight Labs with a focus of integrating [Hypothesis](https://github.com/HypothesisWorks/hypothesis/) into the testing suit of [SymPy](https://github.com/sympy/sympy). The primary [pull request to add Hypothesis to the test infrastructure](https://github.com/sympy/sympy/pull/25428) to complete this was simple. The primary challenges lied thereafter: questions around the _utility of hypothesis_ and its appropriate usage arose.
 
-There are many ways to test your software : unit testing, regression testing, diff testing, and mutation testing are a few that come to mind. This blog post is for anyone interested in understanding the value of utilizing _property based testing_ in their software projects. The post will be broken up into three parts:
+There are many ways to test your software: unit testing, regression testing, diff testing, and mutation testing are a few that come to mind. This blog post is for anyone interested in understanding the value of utilizing _property based testing_ in their software projects. The post will be broken up into three parts:
 
 - What is Property Based Testing?
 - What is Hypothesis?
@@ -70,7 +70,7 @@ Note, that here `polys()` is custom-built for sympy and generates a random polyn
 
 Give Hypothesis the types of inputs you are expecting using the _@given_ decorator and it will automatically generate examples using the _strategies_ module. It will then use these examples to test and report the minimal failing inputs (if any).
 
-Hypothesis is able to come up with interesting inputs using a combination of smart generation, guiding metrics, and feedback loops. For example, the built-in stategies like `integers()` have default behaviors tuned for common useful values. That is, while some inputs are random, it also tries to choose cases that commonly cause errors (like 0 or NaN). Hypothesis is _adversarial_ in the way it chooses inputs to test against your function.
+Hypothesis is able to come up with interesting inputs using a combination of smart generation, guiding metrics, and feedback loops. For example, the built-in strategies like `floats()` have default behaviors tuned for common useful values. That is, while some inputs are random, it also tries to choose cases that commonly cause errors (like 0 or NaN). Hypothesis is _adversarial_ in the way it chooses inputs to test against your function.
 
 Hypothesis comes with built-in strategy functions for common Python data types. In the example above, we accessed integers using `st.integers()`, but Hypothesis also gives you access to `floats()`, `booleans()`, `fractions()`, `dictionaries()`, and many more.
 
@@ -80,7 +80,7 @@ Overall, Hypothesis is great at finding bugs and in general, writing tests as hi
 
 ### What Hypothesis is NOT
 
-- Hypothesis cannot test black boxes, machine learning systems, simulations of complicated systems, or code with lots of state (e.g., things which depend on a database or talk to a network etc.). Hypothesis must receive an understanding of the input and output behavior that can be easily modelled.
+- It's tricky to test black boxes, machine learning systems, simulations of complicated systems, or code with lots of state (e.g., things which depend on a database or talk to a network etc.) with Hypothesis. Hypothesis must receive an understanding of the input and output behavior that can be easily modelled.
 - Hypothesis is **_not_** just a bug finder, it helps protect against _future_ bugs. Hypothesis disallows the existence of latent bugs which increases trust in the current implementation of whatever function is being tested. Hypothesis may also reveal weird design patterns.
 
 # Integrating Hypothesis into SymPy
