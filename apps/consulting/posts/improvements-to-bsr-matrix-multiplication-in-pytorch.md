@@ -6,13 +6,26 @@ description: 'Quansight engineers have implemented several new kernels for matri
 involving sparse and dense arguments. These implementations, available in PyTorch 2.1,  offer a
 significant performance improvement over those available in previous versions of PyTorch.'
 category: [Open Source Software, PyTorch, Triton, GPU]
+featuredImage:
+  src: /posts/logos/pytorch_logo_large.png
+  alt: 'The PyTorch logo, above the "PyTorch" project name in sans serif font. A stylized flame made from a single, thick orange line, with round bottom and single pointed top. There is a gap in the upper right of the line containing a circle with diameter equal to the line thickness.'
+hero:
+  imageSrc: /posts/hero-paris.webp
+  imageAlt: 'Data visualization of Paris city'
 ---
 
 <base target="_blank" />
 
 Quansight engineers have implemented several new kernels for matrix multiplication involving sparse
 and dense arguments. These implementations, available in PyTorch 2.1, offer a significant
+<<<<<<< HEAD
 performance improvement over those available in previous versions of PyTorch.
+=======
+performance improvement over those available in previous versions of PyTorch. In addition, they have
+the unique property that they are implemented using `triton`, however they are not the product of
+`torch.compile`.
+
+> > > > > > > 95e8e34 (Changes to make consulting blog build locally:)
 
 In this post, we will discuss the results of this work and how it can be used.
 
@@ -21,10 +34,18 @@ In this post, we will discuss the results of this work and how it can be used.
 PyTorch implements a total of 5 sparse layouts. Each layout has properties which make it more, or
 less, suitable for a particular task. As an example, the coordinate format ([COO][pytorch-docs-coo])
 can be used to incrementally build sparse tensors, with features allowing for individual element
+<<<<<<< HEAD
 access and updates to be more efficient. However for most mathematical operations [compressed
 layouts][pytorch-docs-compressed], like compressed sparse row ([CSR][pytorch-docs-csr]), are a
 better choice since they store specified elements with a more regular structure. This is what a
 PyTorch tensor looks like using the CSR layout
+=======
+access and updates to be more efficient. However for most mathematical operations
+[compressed layouts][pytorch-docs-compressed], like compressed sparse row
+([CSR][pytorch-docs-csr]), are a better choice since they store specified elements with a more
+regular structure. This is what a PyTorch tensor looks like using the CSR layout
+
+> > > > > > > 95e8e34 (Changes to make consulting blog build locally:)
 
 ```python
 >>> mat = torch.tensor([
@@ -116,7 +137,7 @@ There exist BLAS-like libraries supporting sparse layouts, for example NVIDIA's
 [cuSPARSE][cusparse-docs], and Intel's [MKL sparse API][mkl-docs-sparse-blas] . These options are
 lacking some important features that are needed to make it practical to use sparse layouts in
 machine learning applications. First, they typically perform poorly compared to dense matrix
-multiply except when the sparsity is very high (\<10% of the elements are specified). Second, many
+multiply except when the sparsity is very high (&lt;<10% of the elements are specified). Second, many
 of the operations are missing support for half precision data types, which is a feature used
 frequently in learning applications.
 

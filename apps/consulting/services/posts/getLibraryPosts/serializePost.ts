@@ -40,7 +40,7 @@ export const serializePost = async (
   const postAuthor = authors.find((author) => author.slug === data.author);
 
   if (!postAuthor) {
-    throw Error('There is not matching author in database');
+    throw Error(`Author not found in database: ${data.author}`);
   }
 
   const meta: TPostMeta = {
