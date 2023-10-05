@@ -64,7 +64,7 @@ tensor(crow_indices=tensor([0, 3, 4, 6]),
 There are some drawbacks to a block sparse layout; a key disadvantage is that we must fully
 materialize a block if any value within it is non-zero. Larger blocks are generally better for
 vectorized operations, but may lead to more zero-valued elements being stored. The example we have
-used here demonstrates this well. In [Figure-1][#fig-1] we have this matrix with non-zero values in
+used here demonstrates this well. In [Figure-1][#fig-1], we have this matrix with non-zero values in
 yellow, and the 2x2 block size shown with the red grid. The large number of red blocks that contain
 mostly zero values illustrates this matrix would be an example where BSR is less memory efficient.
 
@@ -129,15 +129,14 @@ available in PyTorch 2.1.
 
 We have evaluated the performance of new kernels. The performance is measured by speedup compared to
 the dense implementation. Whenever the functionality exists in both pytorch 2.1 and 2.0, we show the
-metrics for both versions. All experiments are performed using the `cuda` device type on a system
-with a single NVIDIA A100-80G, and CUDA 11.8. We evaluated kernels using 2-dimensional tensors with
-shape `(n, n)` (n=4096) for all tensor arguments. We report performance at different Sparsity (%).
+metrics for both versions. All experiments are performed on a single NVIDIA A100-80G GPU, using CUDA 11.8. We evaluated kernels using 2-dimensional tensors with
+shape `(n, n)` (`n`=4096) for all tensor arguments. We report performance at different Sparsity (%).
 This metric describes the fraction of elements which are implicitly zero, so a tensor with 90%
 sparsity contains only 10% of the values compared to a dense tensor with the same shape.
 
 ### `sampled_addmm` (SDD)
 
-In the case of this operation, a dense equivalent would involve the composition between matrix
+Strictly speaking, a dense equivalent would involve the composition between matrix
 multiplication and a masking operation. Here, we have chosen for the dense baseline a normal matrix
 multiplication without masking since, in practice, the masking operation may not be used if the
 inputs are not sparse, for example, when computing gradients. This gives us a harder target to hit,
@@ -145,7 +144,7 @@ but is a fair assessment.
 
 A key detail on these figures is the sparsity ratio (horizontal axis) where the speedup (vertical
 axis) crosses the 1.0 threshold, which is marked with a horizontal line labeled "1x". At this point
-the sparse operation executes more quickly than the dense baseline. This quantity tells us how much
+the sparse operation executes faster than the dense baseline. This quantity tells us how much
 do we need to be able to prune to use sparsity without our model executing more slowly. Looking at
 the results for [`float32`][#fig-2] data type,
 
@@ -158,11 +157,11 @@ the results for [`float32`][#fig-2] data type,
 />
 
 we see some promising results. Using block sizes of 32 and 64, we cross the 1x threshold below 70%
-sparsity. However, the smallest block size of 16 is able to pass 1x above 90% sparsity. The small
+sparsity. However, the smallest block size of 16 requires 90% sparsity to pass 1x. The small
 block size is important as it offers more flexibility in the pruning stage as non-zero values can be
-more dispersed, usually resulting in a less accuracy loss.
+more dispersed, usually resulting in less accuracy loss.
 
-Moving on to [half precision data types][#fig-3] we see much poorer performance compared to dense,
+Moving on to [half precision data types][#fig-3], we see much poorer performance compared to dense,
 with the 1x threshold crossed only with the largest block size (64) and a sparsity greater than
 90%. Requiring pruning to this degree is not practical. In most cases, pruning to this level will
 result in unacceptable drops in accuracy.
@@ -257,7 +256,7 @@ will continue to close the gap for the sparse kernels provided by PyTorch!
 ## Try it out!
 
 These kernels are not yet considered stable, and only some of the functionality is available through
-calls PyTorch operators. They can all be found in the `torch.sparse._triton_ops` private submodule,
+PyTorch operators. They can all be found in the `torch.sparse._triton_ops` private submodule,
 for the curious user who wants to experiment with these tools.
 
 If you want to stick to the public features only, the `bsr_dense_mm` kernel is also fully integrated
