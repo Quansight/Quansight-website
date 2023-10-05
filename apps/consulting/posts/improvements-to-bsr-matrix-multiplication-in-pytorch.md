@@ -8,11 +8,18 @@ significant performance improvement over those available in previous versions of
 addition, they have the unique property that they are implemented using `triton`, however they are
 not the product of `torch.compile`.'
 category: [Open Source Software, PyTorch, Triton, GPU]
+featuredImage:
+  src: /posts/logos/pytorch_logo_large.png
+  alt: 'The PyTorch logo, above the "PyTorch" project name in sans serif font. A stylized flame made from a single, thick orange line, with round bottom and single pointed top. There is a gap in the upper right of the line containing a circle with diameter equal to the line thickness.'
+hero:
+  imageSrc: /posts/hero-paris.webp
+  imageAlt: 'Data visualization of Paris city'
 ---
+
 <base target="_blank" />
 
 Quansight engineers have implemented several new kernels for matrix multiplication involving sparse
-and dense arguments. These implementations, available in PyTorch 2.1,  offer a significant
+and dense arguments. These implementations, available in PyTorch 2.1, offer a significant
 performance improvement over those available in previous versions of PyTorch. In addition, they have
 the unique property that they are implemented using `triton`, however they are not the product of
 `torch.compile`.
@@ -24,8 +31,8 @@ In this post, we will discuss the results of this work and how it can be used.
 PyTorch implements a total of 5 sparse layouts. Each layout has properties which make it more, or
 less, suitable for a particular task. As an example, the coordinate format ([COO][pytorch-docs-coo])
 can be used to incrementally build sparse tensors, with features allowing for individual element
-access and updates to be more efficient.  However for most mathematical operations 
-[compressed layouts][pytorch-docs-compressed], like compressed sparse row 
+access and updates to be more efficient. However for most mathematical operations
+[compressed layouts][pytorch-docs-compressed], like compressed sparse row
 ([CSR][pytorch-docs-csr]), are a better choice since they store specified elements with a more
 regular structure. This is what a PyTorch tensor looks like using the CSR layout
 
@@ -67,7 +74,7 @@ tensor(crow_indices=tensor([0, 3, 4, 6]),
 
 There are some drawbacks to a block sparse layout; a key disadvantage is that we must fully materialize a block if any
 value within it is non-zero. Larger blocks are generally better for vectorized operations, but will
-have more memory overhead.  The example we have used here demonstrates this well. In
+have more memory overhead. The example we have used here demonstrates this well. In
 [Figure-1][#fig-1] we have this matrix with non-zero values in yellow, and the 2x2 block size shown
 with the red grid. The large number of red blocks that contain mostly zero values illustrates this relatively poor memory efficiency of the layout.
 
@@ -109,16 +116,16 @@ supported. Note that `linear` is defined by `x@W^T` and above we have calculated
 expression.
 
 In contrast, the SDD pattern is not semantically equivalent to the dense-to-dense `GEMM`. In
-this case the sparse tensor updated with the result of `A@B` also acts as a mask.  In other words,
-`C` will have the same sparsity pattern and that pattern is imposed on the product `A@B`.  In
-PyTorch, we call this operation [`torch.sparse.sampled_addmm`][pytorch-docs-sampled-addmm].  This
-operation is particularly relevant for transformer models.  It can be used to compute masked gradients for
+this case the sparse tensor updated with the result of `A@B` also acts as a mask. In other words,
+`C` will have the same sparsity pattern and that pattern is imposed on the product `A@B`. In
+PyTorch, we call this operation [`torch.sparse.sampled_addmm`][pytorch-docs-sampled-addmm]. This
+operation is particularly relevant for transformer models. It can be used to compute masked gradients for
 terms like `linear` where during training we want to ensure that the sparsity pattern of `W` is preserved.
 
 There exist BLAS-like libraries supporting sparse layouts, for example NVIDIA's
 [cuSPARSE][cusparse-docs]. These options are lacking some important features that are needed to make
 it practical to use sparse layouts in machine learning applications. First, they typically perform
-poorly compared to dense matrix multiply except when the sparsity is very high (<10% of the elements
+poorly compared to dense matrix multiply except when the sparsity is very high (&lt;10% of the elements
 are stored). Second, many of the operations are missing support for half precision data types, which
 is a feature used frequently in learning applications.
 
@@ -131,13 +138,14 @@ matrix multiplication using BSR layout available in PyTorch 2.1.
 
 We have evaluated the performance of new kernels. The performance is measured by speedup compared to
 the dense implementation. Whenever the functionality exists in both pytorch 2.1 and 2.0, we show
-the metrics for both versions.  All experiments are performed using the `cuda` device type on a
-system with a single NVIDIA A100-80G, and CUDA 11.8. 
+the metrics for both versions. All experiments are performed using the `cuda` device type on a
+system with a single NVIDIA A100-80G, and CUDA 11.8.
 
 ### `sampled_addmm` (SDD)
+
 In the case of this operation, a dense equivalent would involve the composition between matrix
-multiplication and a masking operation.  Here, we have chosen for the dense baseline a normal matrix
-multiplication without masking since, in practice, the masking operation may not be used if the inputs are not 
+multiplication and a masking operation. Here, we have chosen for the dense baseline a normal matrix
+multiplication without masking since, in practice, the masking operation may not be used if the inputs are not
 sparse, for example, when computing gradients. This gives us a harder target to
 hit, but is a fair assessment. All matrices are square two with size 4096 in both dimensions, this
 is a large subject, but sparsity is usually attractive in these cases as one of the features is a
@@ -165,7 +173,7 @@ non-zero values can be more dispersed, usually resulting in a less accuracy loss
 Moving on to [half precision data types][#fig-3] we see much poorer performance compared to dense,
 with the 1x threshold crossed only with the largest block size (64) and a sparsity greater than
 90%. Requiring pruning to this degree is not practical. In most cases, pruning to this level will
-result in unacceptable drops in accuracy. 
+result in unacceptable drops in accuracy.
 
 <img src="posts/improvements-to-bsr-matrix-multiplication-in-pytorch/sampled_addmm_half.png"
     name="fig-3"
@@ -192,8 +200,8 @@ multiplication already exists within PyTorch. In PyTorch 2.0 `BSR @ Dense` multi
 forward to cuSPARSE for float32, and to a custom implementation for half precision types. Here we
 compare to both the dense baseline and these older implementations of the same operation.
 
-Again, we will look at the performance for [`float32`][#fig-4] first.  The plot compares the new
-triton-based implementation to the one available in older versions of PyTorch.  The triton backed
+Again, we will look at the performance for [`float32`][#fig-4] first. The plot compares the new
+triton-based implementation to the one available in older versions of PyTorch. The triton backed
 kernels show significant improvements over the previous version. A speedup near 2x is observed at
 sparsity ratios near 50%. At high sparsity ratios, it exceeds 6x. This is a leap forward in terms of
 raw sparse performance but we are primarily concerned with performance compared to the dense baseline
@@ -208,7 +216,7 @@ as this will determine if sparsity can be used without a performance penalty.
 
 Comparison to the [dense baseline][#fig-5] is also very promising. Block sizes of 32 and 64 are
 faster than dense for all sparsity ratios, and block size 16 crossing the 1x boundary at 70% sparsity.
-This also represents a leap forward in the usability of sparse tensors. 
+This also represents a leap forward in the usability of sparse tensors.
 
 <img src="posts/improvements-to-bsr-matrix-multiplication-in-pytorch/bsr_dense_mm_float32_vs_dense.png"
     name="fig-5"
@@ -223,7 +231,7 @@ speedup over the [older sparse implementation][#fig-6]. While a speedup of this 
 result, we have known that the implementation supporting half precision data types would not be
 optimal. However, as cuSPARSE did not support these data types a working implementation was created
 by composing calls into the dense kernel for each sparse block. This approach suffers from a
-significant penalty due to launching many CUDA kernels. 
+significant penalty due to launching many CUDA kernels.
 
 <img src="posts/improvements-to-bsr-matrix-multiplication-in-pytorch/bsr_dense_mm_half_vs_sparse.png"
     name="fig-6"
@@ -234,8 +242,8 @@ significant penalty due to launching many CUDA kernels.
 
 Comparing performance for half precision to the [dense baseline][#fig-7] we again see one clear win.
 Using a block size of 64, the triton implementation begins to outperform the dense matrix multiply
-at 60% sparsity.  Unfortunately, this does not hold for smaller block sizes with 32 reach >1x
-speedup at 90% sparsity, and block size 16 only passing this point at 99%. 
+at 60% sparsity. Unfortunately, this does not hold for smaller block sizes with 32 reach >1x
+speedup at 90% sparsity, and block size 16 only passing this point at 99%.
 
 <img src="posts/improvements-to-bsr-matrix-multiplication-in-pytorch/bsr_dense_mm_half_vs_dense.png"
     name="fig-7"
@@ -251,7 +259,7 @@ speedup at 90% sparsity, and block size 16 only passing this point at 99%.
 These kernels will be shipped with PyTorch 2.1. They can all be found in the
 `torch.sparse._triton_ops` private submodule. Although not yet stable, the curious user may want
 experiment with these tools. If you want to stick to the public features only, the `bsr_dense_mm`
-kernel is also fully integrated with matrix multiply ops like `torch.mm` and  `torch.addmm`. 
+kernel is also fully integrated with matrix multiply ops like `torch.mm` and `torch.addmm`.
 If you meet the following conditions:
 
 - The RHS of the matrix multiply or `A` in `A@B`, `torch.mm(A, B)`, or `torch.addmm(C, A, B)` has
@@ -260,7 +268,7 @@ If you meet the following conditions:
 - The data type is `torch.float16`, or `torch.bfloat16`
 
 then the work will be forwarded to the triton kernel! It was an interesting process to set
-those bindings up, but that would deserve its own blog post. 
+those bindings up, but that would deserve its own blog post.
 
 ## Conclusion
 
@@ -276,14 +284,10 @@ This work would not have been possible without the close collaboration between Q
 within the PyTorch project. We thank Christian Puhrsch, Alban Desmaison, Driss Guessous for their
 support and feedback during research and implementation, and their continued support moving forward.
 
-
-
-
-
 [pytorch-docs-coo]: https://pytorch.org/docs/stable/sparse.html#sparse-coo-tensors
-[pytorch-docs-compressed]: https://pytorch.org/docs/stable/sparse.html#sparse-compressed-tensors 
+[pytorch-docs-compressed]: https://pytorch.org/docs/stable/sparse.html#sparse-compressed-tensors
 [pytorch-docs-csr]: https://pytorch.org/docs/stable/sparse.html#sparse-csr-tensor
-[pytorch-docs-bsr]: https://pytorch.org/docs/stable/sparse.html#sparse-bsr-tensor 
+[pytorch-docs-bsr]: https://pytorch.org/docs/stable/sparse.html#sparse-bsr-tensor
 [pytorch-docs-linear]: https://pytorch.org/docs/stable/generated/torch.nn.functional.linear
 [pytorch-docs-sampled-addmm]: https://pytorch.org/docs/stable/generated/torch.sparse.sampled_addmm.html
 [cusparse-docs]: https://docs.nvidia.com/cuda/cusparse/index.html
