@@ -83,8 +83,8 @@ mostly zero values illustrates BSR is less memory efficient for this matrix.
 ## Matrix Multiplication with Sparse Tensors
 
 In PyTorch, dense matrix multiplication in eager mode will usually forward to a high performance
-math library (i.e. cuBLAS) that implements the general matrix multiply or
-([`GEMM`][cublas-docs-gemm]) interface. Once we start to involve sparse tensors the situation
+math library (i.e. cuBLAS) that implements the general matrix multiply (or
+[`GEMM`][cublas-docs-gemm]) interface. Once we start to involve sparse tensors the situation
 becomes more complex. We must have a different `GEMM`-like operation for every pattern of
 sparse/dense arguments. Here we will focus on two forms involving exactly one sparse argument:
 
@@ -116,7 +116,7 @@ case, the sparse tensor updated with the result of `A@B` also acts as a mask. In
 will keep its sparsity pattern, and this will be imposed on `A@B`. In PyTorch, we call this
 operation [`torch.sparse.sampled_addmm`][pytorch-docs-sampled-addmm]. This operation is particularly
 relevant for transformer models. It can be used to compute masked gradients for terms like `linear`,
-where we want to ensure that the sparsity apttern of `W` is preserved during training.
+where we want to ensure that the sparsity pattern of `W` is preserved during training.
 
 There exist BLAS-like libraries supporting sparse layouts, for example NVIDIA's
 [cuSPARSE][cusparse-docs], and Intel's [MKL sparse API][mkl-docs-sparse-blas]. These libraries are
