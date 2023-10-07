@@ -1,6 +1,6 @@
 ---
 title: 'The Array API Standard in SciPy'
-published: September 25, 2023
+published: October 4, 2023
 authors: [lucas-colley]
 description: "How can SciPy use the Array API Standard to achieve array library interoperability?"
 category: [Array API]
