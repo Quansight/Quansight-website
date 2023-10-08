@@ -1,6 +1,6 @@
 ---
 title: 'The Array API Standard in SciPy'
-published: September 25, 2023
+published: October 4, 2023
 authors: [lucas-colley]
 description: "How can SciPy use the Array API Standard to achieve array library interoperability?"
 category: [Array API]
@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/scipy-array-api/scipy-array-api-illustration.png
   alt: 'An illustration of three cartoon characters - CuPy Cube, SciPy Snake and PyTorch Flame - together (happily!) under a tree with green leaves bearing the Consortium for Python Data API Standards logo ("DataAPIs") on a brown background. CuPy Cube and PyTorch Flame are made up of the CuPy and PyTorch logos respectively, with smiley faces and stick legs. SciPy Snake is a green snake with a red tongue, wearing sunglasses with SciPy logos for lenses.'
 hero:
-  imageSrc: /posts/scipy-array-api/scipy-array-api-hero.png
+  imageSrc: /posts/scipy-array-api/scipy-array-api-hero.svg
   imageAlt: 'An illustration of three cartoon characters - CuPy Cube, SciPy Snake and PyTorch Flame - together (happily!) under a tree with green leaves bearing the Consortium for Python Data API Standards logo ("DataAPIs") on a brown background. CuPy Cube and PyTorch Flame are made up of the CuPy and PyTorch logos respectively, with smiley faces and stick legs. SciPy Snake is a green snake with a red tongue, wearing sunglasses with SciPy logos for lenses. Some graphical elements on a white background surround the illustration.'
 ---
 
