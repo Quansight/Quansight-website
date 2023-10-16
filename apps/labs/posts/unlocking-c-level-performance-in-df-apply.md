@@ -3,7 +3,7 @@ title: 'Unlocking C-level performance in pandas DataFrame.apply with numba'
 authors: [thomas-li]
 published: October 15, 2023
 description: 'A high-level overview of the new numba engine in DataFrame.apply'
-category: [Machine Learning, PyData ecosystem]
+category: [PyData ecosystem]
 featuredImage:
   src: /posts/numpy-python-api-cleanup/numpy-python-api-cleanup-featured.png
   alt: 'todo'
