@@ -1,3 +1,9 @@
+October 17, 2023
+
+Via Storyblok
+
+- Remove Thomas Fan and Pamphile Roy from the team page
+
 May 27, 2023
 
 Via Storyblok
