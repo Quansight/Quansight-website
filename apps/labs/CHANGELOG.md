@@ -3,6 +3,7 @@ October 17, 2023
 Via Storyblok
 
 - Remove Thomas Fan and Pamphile Roy from the team page
+  (switch Role from `team` to `author`)
 
 May 27, 2023
 
