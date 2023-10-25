@@ -154,3 +154,109 @@ sub-categories, Basics, Code Generation, Logic, Matrices, Number Theory,
 Physics, Utilities, and Topics.
 
 ## Contribution Documentation
+
+One of the most important things  an open source project can do to attract new
+contributors is to have good contributor documentation. SymPy has historically
+had a wealth of contributor documentation, but much of it was outdated.
+Additionally, this documentation was stored on SymPy's
+[wiki](https://github.com/sympy/sympy/wiki), which made it less accessible and
+harder to maintain in the context of SymPy's full documentation.
+
+Consequently, we decided to move all contributor documentation from the wiki
+to the main [SymPy documentation
+pages](https://docs.sympy.org/latest/contributing/index.html). Additionally,
+we rewrite the [main guide for new
+contributors](https://docs.sympy.org/dev/contributing/new-contributors-guide/index.html)
+to be more inline with modern SymPy contribution practices, and to reduce the
+parts that only explain details on how to use Git and GitHub, which are now
+more readily explained better in other sources on the internet.
+
+## Live Documentation Previews on Pull Requests
+
+A live documentation preview build was added to the SymPy CI so that people
+can easily view how their documentation looks in the rendered HTML. While this
+is a relatively minor change compared to some of the other things mentioned
+here, this has made things significantly easier for SymPy developers to review
+documentation related changes.
+
+To view a preview of the documentation, reviewers just need to click the
+button in the status checks for the pull request
+
+![](/posts/sympy-documentation/sympy-docs-preview-link.png)
+
+and they will be shown a rendered page like
+
+
+![](/posts/sympy-documentation/sympy-docs-preview-page.png)
+
+## New Top-level Documentation Guides
+
+In addition to these organizational cleanups, the project involved writing new
+documentation guides.
+
+### New Deprecation Policy
+
+SymPy as a symbolic mathematics system is designed not just as an interactive
+piece of software, but also as a library, which can be used as a dependency in
+other Python projects. Consequently, we in the SymPy community take backwards
+compatibility breakages in our API very seriously. Any time the API changes in
+a backwards incompatible way, downstream users of that API are forced to
+update their code before they can update SymPy, which can be disruptive.
+
+Previously, SymPy's actual policies on backwards compatibility breaks were
+vague, and sometimes developers would make breaks that ended up being
+unnecessarily disruptive to SymPy's end-users. A [new deprecation
+guide](https://docs.sympy.org/dev/contributing/deprecations.html) has been
+written that outlines a deprecation policy. This guide brings three new things
+to SymPy:
+
+- A clear policy on when backwards compatibility breaks should be made. The
+  [gist](https://docs.sympy.org/dev/contributing/deprecations.html#try-to-avoid-backwards-incompatible-changes-in-the-first-place)
+  is that deprecations should be avoided, and only done if absolutely
+  necessary. There is also now [a policy](https://docs.sympy.org/dev/contributing/deprecations.html#how-long-should-deprecations-last) that all such public compatibility
+  breaks should come with a deprecation when possible, and this deprecation
+  shooed last at least a year before being removed.
+
+- A new `SymPyDeprecationWarning` class used for deprecation warnings, which
+  gives much more user friendly error messages. For example
+
+  ```py
+  >>> import sympy.core.compatibility
+  <stdin>:1: SymPyDeprecationWarning:
+
+  The sympy.core.compatibility submodule is deprecated.
+
+  This module was only ever intended for internal use. Some of the functions
+  that were in this module are available from the top-level SymPy namespace,
+  i.e.,
+
+      from sympy import ordered, default_sort_key
+
+  The remaining were only intended for internal SymPy use and should not be used
+  by user code.
+
+  See https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-sympy-core-compatibility
+  for details.
+
+  This has been deprecated since SymPy version 1.10. It
+  will be removed in a future version of SymPy.
+  ```
+
+  These warning messages give detailed information on what is deprecated, what
+  users can replace their code with, what version the deprecation was added
+  in, and a link to a [documentation
+  page](https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-sympy-core-compatibility).
+
+- All activate deprecations are listed in a [new page the
+  documentation](https://docs.sympy.org/latest/explanation/active-deprecations.html).
+  This page gives more details about each deprecation than would be appropiate
+  to put in the deprecation message, including details on why each deprecation
+  was made. The page also gives [helpful
+  information](https://docs.sympy.org/dev/explanation/active-deprecations.html#silencing-sympy-deprecation-warnings)
+  on how to silence deprecation warnings.
+
+## Guide on Writing Custom Functions
+
+## Guide on SymPy Best Practices
+
+## Glossary of SymPy Termonology
