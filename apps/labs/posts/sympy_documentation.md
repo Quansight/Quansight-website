@@ -249,7 +249,7 @@ to SymPy:
 
 - All activate deprecations are listed in a [new page the
   documentation](https://docs.sympy.org/latest/explanation/active-deprecations.html).
-  This page gives more details about each deprecation than would be appropiate
+  This page gives more details about each deprecation than would be appropriate
   to put in the deprecation message, including details on why each deprecation
   was made. The page also gives [helpful
   information](https://docs.sympy.org/dev/explanation/active-deprecations.html#silencing-sympy-deprecation-warnings)
@@ -257,6 +257,90 @@ to SymPy:
 
 ## Guide on Writing Custom Functions
 
+SymPy comes with hundreds of mathematical functions built-in. But it also
+comes with a standard functionality for users to define their own custom
+functions. This is achieved by subclassing `sympy.Function` and defining
+various methods to specify the symbolic behavior. For example,
+
+```py
+class log(Function):
+    """
+    Simplified version of sympy.log that supports basic evaluation and
+    differentiation.
+    """
+    @classmethod
+    def eval(cls, x):
+        if x == 1:
+            return 0
+
+    def fdiff(self, argindex=1):
+        return 1/self.args[0]
+```
+
+```py
+>>> x = sympy.Symbol('x')
+>>> log(1)
+0
+>>> log(x).diff(x)
+1/x
+```
+
+SymPy now includes an extensive [how-to guide on defining custom symbolic
+functions](https://docs.sympy.org/latest/guides/custom-functions.html). This
+guide is useful to advanced users, but also this exact same
+method is used to define the functions that are included in
+SymPy itself. So this guide serves as both a guide to advanced end-users as
+well as a guide to SymPy developers looking to define or extend one of the
+functions that comes with SymPy.
+
 ## Guide on SymPy Best Practices
 
-## Glossary of SymPy Termonology
+SymPy has many pitfalls, both for new users and advanced users. The new guide
+on [best
+practices](https://docs.sympy.org/dev/explanation/best-practices.html) goes
+over some of the best practices that should be applied to avoid these
+pitfalls.
+
+For example, one pitfall that many new SymPy users run into is using strings
+as inputs to SymPy functions, like
+
+```py
+>>> from sympy import expand
+>>> expand("(x**2 + x)/x")
+x + 1
+```
+
+It's much better to define symbolic variables and create expressions directly,
+like
+
+```
+>>> from sympy import symbols
+>>>> x = symbols('x')
+>>> expand((x**2 + x)/x)
+x + 1
+```
+
+The [best practices
+page](https://docs.sympy.org/dev/explanation/best-practices.html#avoid-string-inputs)
+outlines why this is a bad idea, as well as dozens of other best practices
+surrounding both basic and advanced usage of SymPy.
+
+## Glossary of SymPy Terminology
+
+As a technical library, SymPy makes use of many terms which have a specific
+meaning. If you are not already familiar with SymPy, you might not know what
+these specific terms mean, or not realize that they have a specific meaning in
+the context of SymPy.
+
+For example, the term "solve" is often used generically in mathematics to
+refer to any sort of problem solving. But [in the context of
+SymPy](https://docs.sympy.org/latest/explanation/glossary.html#term-Solve),
+"solve" always refers to the act of isolating a variable or set of variables
+in an equation, like "solve for $x$ in $x^2 = 1$."
+
+The new [glossary](https://docs.sympy.org/latest/explanation/glossary.html)
+page in the SymPy documentation defines various terms as used in the context
+SymPy. This is useful not only as a standalone guide, but it is now easy for
+other places in the SymPy documentation to cross-reference these specific
+terms in the glossary so that readers of those documents can understand what
+those terms mean.
