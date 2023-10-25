@@ -126,3 +126,31 @@ to have better color contrast.
 Docs for the main SymPy documentation landing page
 [now](https://docs.sympy.org/latest/index.html) vs. in [early 2021](https://web.archive.org/web/20210225051926/https://docs.sympy.org/latest/index.html)
 (courtesy of [Wayback Machine](https://archive.org/web/)).
+
+A related project was reorganizing the top-level organization of the
+documentation. As you can see from the screenshot above from early 2021, the
+SymPy documentation main page used to just consist of a long list of every
+page in the documentation. The new Furo theme makes this list unnecessary, but
+it also gave us an opportunity to explore how these pages could be explored
+in a more logical way.
+
+We decided to adopt the [Diátaxis](https://diataxis.fr/) for documentation
+organization. The Diátaxis framework splits documentation pages into one of
+four categories, depending on whether the reader is interested in practical or
+theoretical knowledge, and on whether they have study or work oriented goals.
+As can be seen from the current documentation main page, the docs are now
+organized into four categories: tutorials, how-to guides, explanations, and
+API reference. We additionally added "installation" and "contributing" (see
+below) as separate top-level categories. Installation is important enough to
+warrant calling out documentation for separately. Contribution documentation
+is separate because it serves a separate audience, people who want to
+contribute to SymPy, rather than people who are interested in using it.
+
+<!-- TODO: Add Diátaxis framework diagram here -->
+
+In addition to this, we reorganized the dozens of [API reference
+pages](https://docs.sympy.org/latest/reference/index.html) into eight
+sub-categories, Basics, Code Generation, Logic, Matrices, Number Theory,
+Physics, Utilities, and Topics.
+
+## Contribution Documentation
