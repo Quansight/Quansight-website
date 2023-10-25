@@ -1,4 +1,10 @@
-# Improving SymPy's Documentation
+---
+title: "Improving SymPy's Documentation"
+authors: [aaron-meurer]
+published: October 25, 2022
+description: 'SymPy's documentation has received many significant improvements over the past two years thanks to funding by the Chan Zuckerberg Initiative.'
+category: []
+---
 
 The Chan Zuckerberg Initiative (CZI) has funded
 [SymPy](https://www.sympy.org/) as part of Cycle 4 of its [Essential Open
@@ -19,7 +25,7 @@ and to improve its code generation capabilities. These improvements are
 discussed in other blog posts.
 <!-- TODO: Link the other posts -->
 
-## Documentation Survey
+# Documentation Survey
 
 To start the project, from November 29, 2021 to January 5, 2022 we ran a short
 survey on the SymPy community, to get a feel for SymPy's documentation needs.
@@ -68,7 +74,7 @@ three main takeaways of the survey were:
 3. We were been able to identify some primary areas of documentation that
    to prioritize for writing new documentation guides.
 
-## Improved Sphinx Theme - Furo
+# Improved Sphinx Theme - Furo
 
 <!-- TODO: organize these pictures so that the text is a caption -->
 
@@ -153,7 +159,7 @@ pages](https://docs.sympy.org/latest/reference/index.html) into eight
 sub-categories, Basics, Code Generation, Logic, Matrices, Number Theory,
 Physics, Utilities, and Topics.
 
-## Contribution Documentation
+# Contribution Documentation
 
 One of the most important things  an open source project can do to attract new
 contributors is to have good contributor documentation. SymPy has historically
@@ -171,7 +177,7 @@ to be more inline with modern SymPy contribution practices, and to reduce the
 parts that only explain details on how to use Git and GitHub, which are now
 more readily explained better in other sources on the internet.
 
-## Live Documentation Previews on Pull Requests
+# Live Documentation Previews on Pull Requests
 
 A live documentation preview build was added to the SymPy CI so that people
 can easily view how their documentation looks in the rendered HTML. While this
@@ -189,12 +195,12 @@ and they will be shown a rendered page like
 
 ![](/posts/sympy-documentation/sympy-docs-preview-page.png)
 
-## New Top-level Documentation Guides
+# New Top-level Documentation Guides
 
 In addition to these organizational cleanups, the project involved writing new
 documentation guides.
 
-### New Deprecation Policy
+## New Deprecation Policy
 
 SymPy as a symbolic mathematics system is designed not just as an interactive
 piece of software, but also as a library, which can be used as a dependency in
