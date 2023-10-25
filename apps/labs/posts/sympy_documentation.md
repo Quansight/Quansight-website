@@ -37,11 +37,12 @@ three main takeaways of the survey were:
   the most popular resource that people use to get help with SymPy. This is
   true across all levels of experience, compared to other resources like the
   SymPy website, StackOverflow, and community sites (note: this survey was
-  given in 2021, before the popularity of LLM tools like ChatGPT).
+  given in 2021, before the popularity of LLM tools like ChatGPT, so this was
+  not included as an option for respondents).
   Consequently, we decided that it would be most impactful to spend efforts on
   improving the documentation site over those other resources.
 
-<!-- TODO: Insert graph here-->
+  ![](/posts/sympy-documentation/sympy-survey-results.svg)
 
 2. Survey respondents identified many deficiencies in the SymPy docs which
    made it clear that certain improvements needed to be made to the overall
