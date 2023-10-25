@@ -42,7 +42,10 @@ three main takeaways of the survey were:
   Consequently, we decided that it would be most impactful to spend efforts on
   improving the documentation site over those other resources.
 
-  ![](/posts/sympy-documentation/sympy-survey-results.svg)
+  ![Plot showing results of SymPy documentation question "which of the
+  following resources do you use when getting help with SymPy (select all that
+  apply)?" The choice "SymPy Docs Website" has the most responses at
+  91%.](/posts/sympy-documentation/sympy-survey-results.svg)
 
 2. Survey respondents identified many deficiencies in the SymPy docs which
    made it clear that certain improvements needed to be made to the overall
@@ -79,8 +82,8 @@ three main takeaways of the survey were:
 
 <!-- TODO: organize these pictures so that the text is a caption -->
 
-![](/posts/sympy-documentation/sympy-112-docs-odes.png)
-![](/posts/sympy-documentation/sympy-17-docs-odes.png)
+![Documentation page for the SymPy ODE module for SymPy 1.12 (October 2023)](/posts/sympy-documentation/sympy-112-docs-odes.png)
+![Documentation page for the SymPy ODE module from SymPy 1.7 (May 2021)](/posts/sympy-documentation/sympy-17-docs-odes.png)
 
 Docs for the SymPy documentation page for the ODE submodule
 [now](https://docs.sympy.org/latest/modules/solvers/ode.html ) vs. in [early
@@ -127,8 +130,8 @@ to have better color contrast.
 
 # Improved Organization - Diataxis
 
-![](/posts/sympy-documentation/sympy-112-docs-main-page.png)
-![](/posts/sympy-documentation/sympy-17-docs-main-page.png)
+![Main page of the SymPy documentation from SymPy 1.12 (October 2023)](/posts/sympy-documentation/sympy-112-docs-main-page.png)
+![Main page of the SymPy documentation from SymPy 1.7 (May 2021)](/posts/sympy-documentation/sympy-17-docs-main-page.png)
 
 Docs for the main SymPy documentation landing page
 [now](https://docs.sympy.org/latest/index.html) vs. in [early 2021](https://web.archive.org/web/20210225051926/https://docs.sympy.org/latest/index.html)
@@ -189,12 +192,14 @@ documentation related changes.
 To view a preview of the documentation, reviewers just need to click the
 button in the status checks for the pull request
 
-![](/posts/sympy-documentation/sympy-docs-preview-link.png)
+![Link saying "Click here to see a preview of the documentation." from a SymPy
+pull request CI checks listing](/posts/sympy-documentation/sympy-docs-preview-link.png)
 
 and they will be shown a rendered page like
 
 
-![](/posts/sympy-documentation/sympy-docs-preview-page.png)
+![Screenshot of a SymPy pull request documentation buil. There is a header on
+the page that says "This is a preview build from SymPy pull request #25512. It was built against a9765f6. If you aren't looking for a PR preview, go to the main SymPy documentation."](/posts/sympy-documentation/sympy-docs-preview-page.png)
 
 # New Top-level Documentation Guides
 
