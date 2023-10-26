@@ -146,7 +146,7 @@ it also gave us an opportunity to explore how these pages could be explored
 in a more logical way.
 
 We decided to adopt the [Diátaxis](https://diataxis.fr/) framework for documentation
-organization. The Diátaxis framework splits documentation pages into one of
+organization. Diátaxis splits documentation pages into one of
 four categories, depending on whether the reader is interested in practical or
 theoretical knowledge, and on whether they have study or work oriented goals.
 As can be seen from the current documentation main page, the docs are now
