@@ -122,7 +122,7 @@ considerable time retheming the default Furo colors to match the traditional
 SymPy green theme. This included adding a dark mode set of colors (this can be
 accessed by clicking the circle icon at the top of a docs page, or by setting
 your device to use dark mode). We took care to make sure all color
-combinations used throughout the documentation were that at least WCAG level
+combinations used throughout the documentation were at least WCAG level
 AA color contrast so that text would always be readable. This included
 modifying the [Pygments syntax highlighting
 styles](https://github.com/sympy/sympy/blob/master/doc/src/_pygments/styles.py)
