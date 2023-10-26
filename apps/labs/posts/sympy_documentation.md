@@ -169,7 +169,7 @@ Physics, Utilities, and Topics.
 One of the most important things  an open source project can do to attract new
 contributors is to have good contributor documentation. SymPy has historically
 had a wealth of contributor documentation, but much of it was outdated.
-Additionally, this documentation was stored on SymPy's
+It was also stored on SymPy's
 [wiki](https://github.com/sympy/sympy/wiki), which made it less accessible and
 harder to maintain in the context of SymPy's full documentation.
 
