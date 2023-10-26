@@ -263,9 +263,8 @@ to SymPy:
 - [All activate deprecations](https://docs.sympy.org/latest/explanation/active-deprecations.html) are listed in a single page.
   This page gives more details about each deprecation than would be appropriate
   to put in the deprecation message, including details on why each deprecation
-  was made. The page also gives [helpful
-  information](https://docs.sympy.org/dev/explanation/active-deprecations.html#silencing-sympy-deprecation-warnings)
-  on how to silence deprecation warnings.
+  was made. The page also gives helpful
+  information on [how to silence deprecation warnings](https://docs.sympy.org/dev/explanation/active-deprecations.html#silencing-sympy-deprecation-warnings).
 
 ## Guide on Writing Custom Functions
 
