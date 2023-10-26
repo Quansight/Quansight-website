@@ -20,9 +20,8 @@ long-form narrative documentation to supplement these reference docs.
 In this post, I will go over some of the key documentation improvements that
 were made over the course of the 2-year grant period. Note that the
 documentation improvements were only one part of the CZI grant to improve
-SymPy. Other SymPy developers were funded to improve the performance of SymPy,
-and to improve its code generation capabilities. These improvements are
-discussed in other blog posts.
+SymPy. Other SymPy developers were funded to [improve the performance of SymPy](link-to-blog-post-about-performance),
+and to [improve its code generation capabilities](link-to-blog-post-about-code-generation).
 <!-- TODO: Link the other posts -->
 
 # Documentation Survey
