@@ -104,7 +104,7 @@ while giving the docs a distinctive flavor, had poor contrast in some
 places such as the left sidebar, making it difficult or impossible to read 
 for people with low vision. It cannot be seen from these screenshots, but the
 classic Sphinx theme does not work well on mobile (the components
-do scale to smaller screen sizes at all), and it does not have native support
+do not scale to smaller screen sizes at all), and it does not have native support
 for dark modes.
 
 In order to pick a replacement theme, we ran a second survey from February
