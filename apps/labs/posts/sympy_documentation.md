@@ -10,7 +10,7 @@ The Chan Zuckerberg Initiative (CZI) has funded
 [SymPy](https://www.sympy.org/) as part of Cycle 4 of its [Essential Open
 Source Software for Science (EOSS)](https://chanzuckerberg.com/eoss/) grant
 program. As part of this work, Aaron Meurer worked on improving the SymPy
-documentation, with a focus on writing new narritave documentation guides.
+documentation, with a focus on writing new narrative documentation guides.
 
 SymPy is a mature project, and has over 1000 functions and classes. Most of
 these functions and classes have API reference documentation in the form of
