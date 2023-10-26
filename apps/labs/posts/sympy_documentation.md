@@ -10,7 +10,7 @@ The Chan Zuckerberg Initiative (CZI) has funded
 [SymPy](https://www.sympy.org/) as part of Cycle 4 of its [Essential Open
 Source Software for Science (EOSS)](https://chanzuckerberg.com/eoss/) grant
 program. As part of this work, Aaron Meurer worked on improving the SymPy
-documentation, with a focus on writing new narritave documentation guides.
+documentation, with a focus on writing new narrative documentation guides.
 
 SymPy is a mature project, and has over 1000 functions and classes. Most of
 these functions and classes have API reference documentation in the form of
@@ -20,9 +20,8 @@ long-form narrative documentation to supplement these reference docs.
 In this post, I will go over some of the key documentation improvements that
 were made over the course of the 2-year grant period. Note that the
 documentation improvements were only one part of the CZI grant to improve
-SymPy. Other SymPy developers were funded to improve the performance of SymPy,
-and to improve its code generation capabilities. These improvements are
-discussed in other blog posts.
+SymPy. Other SymPy developers were funded to [improve the performance of SymPy](link-to-blog-post-about-performance),
+and to [improve its code generation capabilities](link-to-blog-post-about-code-generation).
 <!-- TODO: Link the other posts -->
 
 # Documentation Survey
