@@ -188,7 +188,7 @@ A live documentation preview build was added to the SymPy CI so that people
 can easily view how it looks as HTML. While this
 is a relatively minor change compared to some of the other things mentioned
 here, this has made things significantly easier for SymPy developers to review
-documentation related changes.
+documentation changes.
 
 To view a preview of the documentation, reviewers just need to click the
 button in the status checks for the pull request
