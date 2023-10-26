@@ -307,10 +307,8 @@ functions that comes with SymPy.
 ## Guide on SymPy Best Practices
 
 SymPy has many pitfalls, both for new users and advanced users. The new guide
-on [best
-practices](https://docs.sympy.org/dev/explanation/best-practices.html) goes
-over some of the best practices that should be applied to avoid these
-pitfalls.
+on [best practices](https://docs.sympy.org/dev/explanation/best-practices.html) 
+goes over some ways to avoid these pitfalls.
 
 For example, one pitfall that many new SymPy users run into is using strings
 as inputs to SymPy functions, like
