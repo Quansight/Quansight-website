@@ -47,7 +47,7 @@ The three main takeaways of the survey were:
 
 2. Survey respondents identified many deficiencies in the SymPy docs which
    made it clear that certain improvements needed to be made to the overall
-   layout and organization of SymPy documentation site In particular, we
+   layout and organization of SymPy documentation site. In particular, we
    identified 4 major improvements that could be made:
 
    - Better top-level organization.
