@@ -352,7 +352,7 @@ in an equation, like "solve for $x$ in $x^2 = 1$."
 
 The new [glossary](https://docs.sympy.org/latest/explanation/glossary.html)
 page in the SymPy documentation defines various terms as used in the context
-SymPy. This is useful not only as a standalone guide, but it is now easy for
+of SymPy. This is useful not only as a standalone guide, but it is now easy for
 other places in the SymPy documentation to cross-reference these specific
 terms in the glossary so that readers of those documents can understand what
 those terms mean.
