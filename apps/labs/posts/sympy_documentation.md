@@ -180,7 +180,7 @@ we rewrote the [main guide for new
 contributors](https://docs.sympy.org/dev/contributing/new-contributors-guide/index.html)
 to be more inline with modern SymPy contribution practices, and to reduce the
 parts that only explain details on how to use Git and GitHub, which are now
-more readily explained better in other sources on the internet.
+explained better in other sources on the internet.
 
 # Live Documentation Previews on Pull Requests
 
