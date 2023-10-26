@@ -204,7 +204,7 @@ and they will be shown a rendered page like
 # New Top-level Documentation Guides
 
 In addition to these organizational cleanups, the project involved writing new
-documentation guides.
+documentation on deprecation, custom functions, best practices, and a glossary.
 
 ## New Deprecation Policy
 
