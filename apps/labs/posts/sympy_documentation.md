@@ -66,7 +66,7 @@ The three main takeaways of the survey were:
    The SymPy Live extension in the documentation was removed, as it was
    considered too much of a maintenance burden for the SymPy community to
    maintain. There is a new [SymPy Live](https://live.sympy.org/) shell that
-   runs on [JupyterLite](https://jupyter.org/try-jupyter/lab/index.html), that
+   runs on [JupyterLite](https://jupyter.org/try-jupyter/lab/index.html)—that
    is, it runs entirely in the browser using
    [Pyodide](https://pyodide.org/en/stable/). We are hopeful that the
    JupyterLite community can come up with an equivalent SymPy Live-like
