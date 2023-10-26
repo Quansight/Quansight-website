@@ -344,9 +344,10 @@ these specific terms mean, or not realize that they have a specific meaning in
 the context of SymPy.
 
 For example, the term "solve" is often used generically in mathematics to
-refer to any sort of problem solving. But [in the context of
-SymPy](https://docs.sympy.org/latest/explanation/glossary.html#term-Solve),
-"solve" always refers to the act of isolating a variable or set of variables
+refer to any sort of problem solving. But in the context of
+SymPy,
+["solve"](https://docs.sympy.org/latest/explanation/glossary.html#term-Solve) 
+always refers to the act of isolating a variable or set of variables
 in an equation, like "solve for $x$ in $x^2 = 1$."
 
 The new [glossary](https://docs.sympy.org/latest/explanation/glossary.html)
