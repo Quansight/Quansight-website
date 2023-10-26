@@ -199,8 +199,7 @@ pull request CI checks listing](/posts/sympy-documentation/sympy-docs-preview-li
 and they will be shown a rendered page like
 
 
-![Screenshot of a SymPy pull request documentation buil. There is a header on
-the page that says "This is a preview build from SymPy pull request #25512. It was built against a9765f6. If you aren't looking for a PR preview, go to the main SymPy documentation."](/posts/sympy-documentation/sympy-docs-preview-page.png)
+![header on the page that says "This is a preview build from SymPy pull request #25512. It was built against a9765f6. If you aren't looking for a PR preview, go to the main SymPy documentation."](/posts/sympy-documentation/sympy-docs-preview-page.png)
 
 # New Top-level Documentation Guides
 
