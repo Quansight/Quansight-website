@@ -153,7 +153,7 @@ As can be seen from the current documentation main page, the docs are now
 organized into four categories: tutorials, how-to guides, explanations, and
 API reference. We additionally added "installation" and "contributing" (see
 below) as separate top-level categories. Installation is important enough to
-warrant calling out documentation for separately. Contribution documentation
+warrant calling out documentation for it separately. Contribution documentation
 is separate because it serves a separate audience, people who want to
 contribute to SymPy, rather than people who are interested in using it.
 
