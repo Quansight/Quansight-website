@@ -76,6 +76,8 @@ The three main takeaways of the survey were:
 3. We were been able to identify some primary areas of documentation that
    to prioritize for writing new documentation guides.
 
+Click if you wish to read the [full survey results](https://www.sympy.org/sympy-docs-survey/2021-docs-survey.html).
+
 # Improved Sphinx Theme - Furo
 
 <!-- TODO: organize these pictures so that the text is a caption -->
