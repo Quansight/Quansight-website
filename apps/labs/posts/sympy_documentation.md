@@ -101,7 +101,7 @@ shown by a small breadcrumb at the top of the page. The overall layout of the
 subheadings on the page was given by a table of contents on the left side of
 the page, but this was hard to navigate. SymPy's green color scheme,
 while giving the docs a distinctive flavor, had poor contrast in some
-places such as the left sidebar, making it difficult or impossible to read 
+places such as the left sidebar, making it difficult or impossible to read
 for people with low vision. It cannot be seen from these screenshots, but the
 classic Sphinx theme does not work well on mobile (the components
 do not scale to smaller screen sizes at all), and it does not have native support
@@ -123,7 +123,7 @@ SymPy green theme. This included adding a dark mode set of colors (this can be
 accessed by clicking the circle icon at the top of a docs page, or by setting
 your device to use dark mode). We took care to make sure all color
 combinations used throughout the documentation were at least WCAG level
-AA color contrast so that text can be perceived by a wide audience 
+AA color contrast so that text can be perceived by a wide audience
 of readers, including many with low vision. This included
 modifying the [Pygments syntax highlighting
 styles](https://github.com/sympy/sympy/blob/master/doc/src/_pygments/styles.py)
@@ -223,11 +223,13 @@ written that outlines a deprecation policy. This guide brings three new things
 to SymPy:
 
 - A clear policy on when backwards compatibility breaks should be made. The
-  [gist](https://docs.sympy.org/dev/contributing/deprecations.html#try-to-avoid-backwards-incompatible-changes-in-the-first-place)
-  is that deprecations should be avoided, and only done if absolutely
-  necessary. There is also now [a policy](https://docs.sympy.org/dev/contributing/deprecations.html#how-long-should-deprecations-last) that all such public compatibility
-  breaks should come with a deprecation when possible, and this deprecation
-  should last at least a year before being removed.
+  gist is that [deprecations should be
+  avoided](https://docs.sympy.org/dev/contributing/deprecations.html#try-to-avoid-backwards-incompatible-changes-in-the-first-place),
+  and only done if absolutely necessary. There is also now a policy that all
+  such public compatibility breaks should come with a deprecation when
+  possible, and this deprecation should [last at least a
+  year](https://docs.sympy.org/dev/contributing/deprecations.html#how-long-should-deprecations-last)
+  before being removed.
 
 - A new `SymPyDeprecationWarning` class used for deprecation warnings, which
   gives much more user friendly error messages. For example
