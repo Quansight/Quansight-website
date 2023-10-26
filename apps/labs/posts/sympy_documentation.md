@@ -161,7 +161,7 @@ contribute to SymPy, rather than people who are interested in using it.
 
 In addition to this, we reorganized the dozens of [API reference
 pages](https://docs.sympy.org/latest/reference/index.html) into eight
-sub-categories, Basics, Code Generation, Logic, Matrices, Number Theory,
+sub-categories: Basics, Code Generation, Logic, Matrices, Number Theory,
 Physics, Utilities, and Topics.
 
 # Contribution Documentation
