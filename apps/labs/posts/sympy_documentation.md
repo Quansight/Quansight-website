@@ -3,7 +3,7 @@ title: "Improving SymPy's Documentation"
 authors: [aaron-meurer]
 published: October 25, 2022
 description: 'SymPy's documentation has received many significant improvements over the past two years thanks to funding by the Chan Zuckerberg Initiative.'
-category: []
+category: [Community, Developer Workflows, OSS Experience]
 ---
 
 The Chan Zuckerberg Initiative (CZI) has funded
