@@ -99,10 +99,10 @@ lacks interactive navigation. As can be seen from the above screenshot, the
 layout of the page in the context of the rest of the documentation is only
 shown by a small breadcrumb at the top of the page. The overall layout of the
 subheadings on the page was given by a table of contents on the left side of
-the page, but this was hard to navigate. Additionally green color scheme used,
-while giving the SymPy docs a distinctive flavor, had some poor contrast in
-some places such as the left sidebar, meaning some people may have had
-difficulty reading the text. It cannot be seen from these screenshots, but the
+the page, but this was hard to navigate. SymPy's green color scheme,
+while giving the docs a distinctive flavor, had poor contrast in some
+places such as the left sidebar, making it difficult or impossible to read 
+for people with low vision. It cannot be seen from these screenshots, but the
 classic Sphinx theme additionally does not work well on mobile (the components
 do scale to smaller screen sizes at all), and it does not have native support
 for dark modes.
