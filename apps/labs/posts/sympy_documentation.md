@@ -185,7 +185,7 @@ explained better in other sources on the internet.
 # Live Documentation Previews on Pull Requests
 
 A live documentation preview build was added to the SymPy CI so that people
-can easily view how their documentation looks in the rendered HTML. While this
+can easily view how it looks as HTML. While this
 is a relatively minor change compared to some of the other things mentioned
 here, this has made things significantly easier for SymPy developers to review
 documentation related changes.
