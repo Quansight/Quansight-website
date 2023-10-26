@@ -227,7 +227,7 @@ to SymPy:
   is that deprecations should be avoided, and only done if absolutely
   necessary. There is also now [a policy](https://docs.sympy.org/dev/contributing/deprecations.html#how-long-should-deprecations-last) that all such public compatibility
   breaks should come with a deprecation when possible, and this deprecation
-  shooed last at least a year before being removed.
+  should last at least a year before being removed.
 
 - A new `SymPyDeprecationWarning` class used for deprecation warnings, which
   gives much more user friendly error messages. For example
