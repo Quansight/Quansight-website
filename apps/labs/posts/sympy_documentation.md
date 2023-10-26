@@ -258,8 +258,7 @@ to SymPy:
 
   These warning messages give detailed information on what is deprecated, what
   users can replace their code with, what version the deprecation was added
-  in, and a link to a [documentation
-  page](https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-sympy-core-compatibility).
+  in, and a link to an even more detailed page of [deprecation explanations](https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-sympy-core-compatibility).
 
 - All activate deprecations are listed in a [new page the
   documentation](https://docs.sympy.org/latest/explanation/active-deprecations.html).
