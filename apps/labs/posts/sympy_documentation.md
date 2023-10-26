@@ -29,9 +29,7 @@ its code generation capabilities.
 
 To start the project, from November 29, 2021 to January 5, 2022 we ran a short
 survey on the SymPy community, to get a feel for SymPy's documentation needs.
-The results of this survey are summarized
-[here](https://www.sympy.org/sympy-docs-survey/2021-docs-survey.html). The
-three main takeaways of the survey were:
+The three main takeaways of the survey were:
 
 1. The main SymPy documentation site (https://docs.sympy.org) is overwhelmingly
   the most popular resource that people use to get help with SymPy. This is
