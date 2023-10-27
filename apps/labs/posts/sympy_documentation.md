@@ -258,16 +258,13 @@ to SymPy:
 
   These warning messages give detailed information on what is deprecated, what
   users can replace their code with, what version the deprecation was added
-  in, and a link to a [documentation
-  page](https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-sympy-core-compatibility).
+  in, and a link to an even more detailed page of [deprecation explanations](https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-sympy-core-compatibility).
 
-- All activate deprecations are listed in a [new page the
-  documentation](https://docs.sympy.org/latest/explanation/active-deprecations.html).
+- [All activate deprecations](https://docs.sympy.org/latest/explanation/active-deprecations.html) are listed in a single page.
   This page gives more details about each deprecation than would be appropriate
   to put in the deprecation message, including details on why each deprecation
-  was made. The page also gives [helpful
-  information](https://docs.sympy.org/dev/explanation/active-deprecations.html#silencing-sympy-deprecation-warnings)
-  on how to silence deprecation warnings.
+  was made. The page also gives helpful
+  information on [how to silence deprecation warnings](https://docs.sympy.org/dev/explanation/active-deprecations.html#silencing-sympy-deprecation-warnings).
 
 ## Guide on Writing Custom Functions
 
@@ -310,10 +307,8 @@ functions that comes with SymPy.
 ## Guide on SymPy Best Practices
 
 SymPy has many pitfalls, both for new users and advanced users. The new guide
-on [best
-practices](https://docs.sympy.org/dev/explanation/best-practices.html) goes
-over some of the best practices that should be applied to avoid these
-pitfalls.
+on [best practices](https://docs.sympy.org/dev/explanation/best-practices.html) 
+goes over some ways to avoid these pitfalls.
 
 For example, one pitfall that many new SymPy users run into is using strings
 as inputs to SymPy functions, like
@@ -347,9 +342,10 @@ these specific terms mean, or not realize that they have a specific meaning in
 the context of SymPy.
 
 For example, the term "solve" is often used generically in mathematics to
-refer to any sort of problem solving. But [in the context of
-SymPy](https://docs.sympy.org/latest/explanation/glossary.html#term-Solve),
-"solve" always refers to the act of isolating a variable or set of variables
+refer to any sort of problem solving. But in the context of
+SymPy,
+["solve"](https://docs.sympy.org/latest/explanation/glossary.html#term-Solve) 
+always refers to the act of isolating a variable or set of variables
 in an equation, like "solve for $x$ in $x^2 = 1$."
 
 The new [glossary](https://docs.sympy.org/latest/explanation/glossary.html)
