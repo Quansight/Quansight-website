@@ -21,9 +21,9 @@ In this post, I will go over some of the key documentation improvements that
 were made over the course of the 2-year grant period. Note that the
 documentation improvements were only one part of the CZI grant to improve
 SymPy. Other SymPy developers were funded to [improve the performance of
-SymPy](https://oscarbenjamin.github.io/blog/czi/index.html), and to improve
-its code generation capabilities.
-<!-- TODO: Link the codegen post when https://github.com/mechmotum/mechmotum.github.io/pull/138 is merged -->
+SymPy](https://oscarbenjamin.github.io/blog/czi/index.html), and to [improve
+its code generation
+capabilities](https://mechmotum.github.io/blog/czi-sympy-wrapup.html).
 
 # Documentation Survey
 
