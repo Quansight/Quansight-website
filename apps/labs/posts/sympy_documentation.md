@@ -2,7 +2,7 @@
 title: "Improving SymPy's Documentation"
 authors: [aaron-meurer]
 published: October 25, 2022
-description: 'SymPy's documentation has received many significant improvements over the past two years thanks to funding by the Chan Zuckerberg Initiative.'
+description: "SymPy's documentation has received many significant improvements over the past two years thanks to funding by the Chan Zuckerberg Initiative."
 category: [Community, Developer Workflows, OSS Experience]
 featuredImage:
   src: /posts/sympy-documentation/blog_feature_var1.png
@@ -335,7 +335,7 @@ like
 x + 1
 ```
 
-The best practices page outlines why one should [avoid string inputs](https://docs.sympy.org/dev/explanation/best-practices.html#avoid-string-inputs), 
+The best practices page outlines why one should [avoid string inputs](https://docs.sympy.org/dev/explanation/best-practices.html#avoid-string-inputs),
 as well as dozens of other best practices
 surrounding both basic and advanced usage of SymPy.
 
