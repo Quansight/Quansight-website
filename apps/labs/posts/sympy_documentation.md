@@ -4,6 +4,12 @@ authors: [aaron-meurer]
 published: October 25, 2022
 description: 'SymPy's documentation has received many significant improvements over the past two years thanks to funding by the Chan Zuckerberg Initiative.'
 category: [Community, Developer Workflows, OSS Experience]
+featuredImage:
+  src: /posts/sympy-documentation/blog_feature_var1.png
+  alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
+hero:
+  imageSrc: /posts/sympy-documentation/blog_hero_var2.svg
+  imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
 The Chan Zuckerberg Initiative (CZI) has funded
@@ -307,7 +313,7 @@ functions that comes with SymPy.
 ## Guide on SymPy Best Practices
 
 SymPy has many pitfalls, both for new users and advanced users. The new guide
-on [best practices](https://docs.sympy.org/dev/explanation/best-practices.html) 
+on [best practices](https://docs.sympy.org/dev/explanation/best-practices.html)
 goes over some ways to avoid these pitfalls.
 
 For example, one pitfall that many new SymPy users run into is using strings
@@ -344,7 +350,7 @@ the context of SymPy.
 For example, the term "solve" is often used generically in mathematics to
 refer to any sort of problem solving. But in the context of
 SymPy,
-["solve"](https://docs.sympy.org/latest/explanation/glossary.html#term-Solve) 
+["solve"](https://docs.sympy.org/latest/explanation/glossary.html#term-Solve)
 always refers to the act of isolating a variable or set of variables
 in an equation, like "solve for $x$ in $x^2 = 1$."
 
