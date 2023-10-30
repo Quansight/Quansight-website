@@ -324,7 +324,7 @@ like
 
 ```
 >>> from sympy import symbols
->>>> x = symbols('x')
+>>> x = symbols('x')
 >>> expand((x**2 + x)/x)
 x + 1
 ```
