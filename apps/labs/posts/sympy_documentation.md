@@ -159,8 +159,6 @@ warrant calling out documentation for it separately. Contribution documentation
 is separate because it serves a separate audience, people who want to
 contribute to SymPy, rather than people who are interested in using it.
 
-<!-- TODO: Add Diátaxis framework diagram here -->
-
 In addition to this, we reorganized the dozens of [API reference
 pages](https://docs.sympy.org/latest/reference/index.html) into eight
 sub-categories: Basics, Code Generation, Logic, Matrices, Number Theory,
