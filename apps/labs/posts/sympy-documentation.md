@@ -1,7 +1,7 @@
 ---
 title: "Improving SymPy's Documentation"
 authors: [aaron-meurer]
-published: October 30, 2022
+published: October 30, 2023
 description: "SymPy's documentation has received many significant improvements over the past two years thanks to funding by the Chan Zuckerberg Initiative."
 category: [Community, Developer Workflows, OSS Experience]
 featuredImage:
