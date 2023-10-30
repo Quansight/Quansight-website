@@ -86,8 +86,6 @@ Click if you wish to read the [full survey results](https://www.sympy.org/sympy-
 
 # Improved Sphinx Theme - Furo
 
-<!-- TODO: organize these pictures so that the text is a caption -->
-
 ![Documentation page for the SymPy ODE module for SymPy 1.12 (October 2023)](/posts/sympy-documentation/sympy-112-docs-odes.png)
 ![Documentation page for the SymPy ODE module from SymPy 1.7 (May 2021)](/posts/sympy-documentation/sympy-17-docs-odes.png)
 
@@ -95,8 +93,6 @@ Docs for the SymPy documentation page for the ODE submodule
 [now](https://docs.sympy.org/latest/modules/solvers/ode.html ) vs. in [early
 2021](https://web.archive.org/web/20210502170201/https://docs.sympy.org/latest/modules/solvers/ode.html)
 (courtesy of [Wayback Machine](https://archive.org/web/)).
-
-
 
 Prior to this project, the SymPy documentation used the "classic" Sphinx
 theme. This is the same theme that is used by the [official Python
