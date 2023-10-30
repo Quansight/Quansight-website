@@ -1,3 +1,11 @@
+October 17, 2023
+
+Via Storyblok
+
+- Remove Thomas Fan, Mars Lee, and Pamphile Roy from the team page (switch Role from `team` to `author`)
+- Added Mateusz Sokół (switch Role from `author` to `team`) and Isuru Fernando (newly added) to the team page
+  
+
 May 27, 2023
 
 Via Storyblok
