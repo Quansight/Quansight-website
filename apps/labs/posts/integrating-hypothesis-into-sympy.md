@@ -1,7 +1,7 @@
 ---
 title: 'Integrating Hypothesis into SymPy'
 authors: [diane-tc]
-published: September 20, 2023
+published: October 30, 2023
 description: 'Gives an introduction to the utility of hypothesis in SymPy'
 category: [Property Based Testing]
 featuredImage:
