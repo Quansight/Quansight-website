@@ -1,7 +1,7 @@
 ---
 title: "Improving SymPy's Documentation"
 authors: [aaron-meurer]
-published: October 30, 2023
+published: October 31, 2023
 description: "SymPy's documentation has received many significant improvements over the past two years thanks to funding by the Chan Zuckerberg Initiative."
 category: [Community, Developer Workflows, OSS Experience]
 featuredImage:
@@ -38,15 +38,15 @@ survey on the SymPy community, to get a feel for SymPy's documentation needs.
 The three main takeaways of the survey were:
 
 1. The main SymPy documentation site (https://docs.sympy.org) is overwhelmingly
-  the most popular resource that people use to get help with SymPy. This is
-  true across all levels of experience, compared to other resources like the
-  SymPy website, StackOverflow, and community sites (note: this survey was
-  given in 2021, before the popularity of LLM tools like ChatGPT, so this was
-  not included as an option for respondents).
-  Consequently, we decided that it would be most impactful to spend efforts on
-  improving the documentation site over those other resources.
+   the most popular resource that people use to get help with SymPy. This is
+   true across all levels of experience, compared to other resources like the
+   SymPy website, StackOverflow, and community sites (note: this survey was
+   given in 2021, before the popularity of LLM tools like ChatGPT, so this was
+   not included as an option for respondents).
+   Consequently, we decided that it would be most impactful to spend efforts on
+   improving the documentation site over those other resources.
 
-  ![Plot showing results of SymPy documentation question "which of the
+![Plot showing results of SymPy documentation question "which of the
   following resources do you use when getting help with SymPy (select all that
   apply)?" The choice "SymPy Docs Website" has the most responses at
   91%.](/posts/sympy-documentation/sympy-survey-results.svg)
@@ -89,10 +89,10 @@ Click if you wish to read the [full survey results](https://www.sympy.org/sympy-
 ![Documentation page for the SymPy ODE module for SymPy 1.12 (October 2023)](/posts/sympy-documentation/sympy-112-docs-odes.png)
 ![Documentation page for the SymPy ODE module from SymPy 1.7 (May 2021)](/posts/sympy-documentation/sympy-17-docs-odes.png)
 
-Docs for the SymPy documentation page for the ODE submodule
-[now](https://docs.sympy.org/latest/modules/solvers/ode.html ) vs. in [early
+<em><center>Docs for the SymPy documentation page for the ODE submodule
+[now](https://docs.sympy.org/latest/modules/solvers/ode.html) vs. in [early
 2021](https://web.archive.org/web/20210502170201/https://docs.sympy.org/latest/modules/solvers/ode.html)
-(courtesy of [Wayback Machine](https://archive.org/web/)).
+(courtesy of [Wayback Machine](https://archive.org/web/)).</center></em>
 
 Prior to this project, the SymPy documentation used the "classic" Sphinx
 theme. This is the same theme that is used by the [official Python
@@ -136,9 +136,9 @@ to have better color contrast.
 ![Main page of the SymPy documentation from SymPy 1.12 (October 2023)](/posts/sympy-documentation/sympy-112-docs-main-page.png)
 ![Main page of the SymPy documentation from SymPy 1.7 (May 2021)](/posts/sympy-documentation/sympy-17-docs-main-page.png)
 
-Docs for the main SymPy documentation landing page
+<em><center>Docs for the main SymPy documentation landing page
 [now](https://docs.sympy.org/latest/index.html) vs. in [early 2021](https://web.archive.org/web/20210225051926/https://docs.sympy.org/latest/index.html)
-(courtesy of [Wayback Machine](https://archive.org/web/)).
+(courtesy of [Wayback Machine](https://archive.org/web/)).</center></em>
 
 A related project was reorganizing the top-level organization of the
 documentation. As you can see from the screenshot above from early 2021, the
@@ -166,7 +166,7 @@ Physics, Utilities, and Topics.
 
 # Contribution Documentation
 
-One of the most important things  an open source project can do to attract new
+One of the most important things an open source project can do to attract new
 contributors is to have good contributor documentation. SymPy has historically
 had a wealth of contributor documentation, but much of it was outdated.
 It was also stored on SymPy's
@@ -197,7 +197,6 @@ button in the status checks for the pull request
 pull request CI checks listing](/posts/sympy-documentation/sympy-docs-preview-link.png)
 
 and they will be shown a rendered page like
-
 
 ![header on the page that says "This is a preview build from SymPy pull request #25512. It was built against a9765f6. If you aren't looking for a PR preview, go to the main SymPy documentation."](/posts/sympy-documentation/sympy-docs-preview-page.png)
 
@@ -345,7 +344,7 @@ refer to any sort of problem solving. But in the context of
 SymPy,
 ["solve"](https://docs.sympy.org/latest/explanation/glossary.html#term-Solve)
 always refers to the act of isolating a variable or set of variables
-in an equation, like "solve for $x$ in $x^2 = 1$."
+in an equation, like "solve for _x_ in _x_<sup>2</sup> = 1."
 
 The new [glossary](https://docs.sympy.org/latest/explanation/glossary.html)
 page in the SymPy documentation defines various terms as used in the context
