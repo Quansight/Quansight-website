@@ -329,9 +329,8 @@ like
 x + 1
 ```
 
-The [best practices
-page](https://docs.sympy.org/dev/explanation/best-practices.html#avoid-string-inputs)
-outlines why this is a bad idea, as well as dozens of other best practices
+The best practices page outlines why one should [avoid string inputs](https://docs.sympy.org/dev/explanation/best-practices.html#avoid-string-inputs), 
+as well as dozens of other best practices
 surrounding both basic and advanced usage of SymPy.
 
 ## Glossary of SymPy Terminology
