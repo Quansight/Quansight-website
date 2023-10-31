@@ -62,11 +62,10 @@ identified 4 major improvements that could be made:
   Sphinx extension that allowed users to execute the example code blocks in
   the SymPy documentation directly in their browser.
 
-Of these, all except the third, splitting large pages, were done as part of
-the CZI grant work. See below for more details. Splitting large pages
-hasn't been done yet due to technical difficulties with the Sphinx autodoc
-extension, as well as due to the fact that the large pages are now much
-easier to navigate with the new Sphinx theme (see below).
+Of these, all except the third, splitting large pages, were done as part of the
+CZI grant work. Splitting large pages hasn't been done yet due to technical
+difficulties with the Sphinx autodoc extension, as well as due to the fact that
+the large pages are now much easier to navigate with the new Sphinx theme.
 
 The SymPy Live extension in the documentation was removed, as it was
 considered too much of a maintenance burden for the SymPy community to
@@ -135,23 +134,22 @@ to have better color contrast.
 # Improved Organization - Diataxis
 
 A related project was reorganizing the top-level organization of the
-documentation. As you can see from the screenshot above from early 2021, the
-SymPy documentation main page used to just consist of a long list of every
-page in the documentation. The new Furo theme makes this list unnecessary, but
-it also gave us an opportunity to explore how these pages could be explored
-in a more logical way.
+documentation. The SymPy documentation main page used to just consist of a long
+list of every page in the documentation. The new Furo theme makes this list
+unnecessary, but it also gave us an opportunity to explore how these pages could
+be explored in a more logical way.
 
-We decided to adopt the [Diátaxis](https://diataxis.fr/) framework for documentation
-organization. Diátaxis splits documentation pages into one of
-four categories, depending on whether the reader is interested in practical or
-theoretical knowledge, and on whether they have study or work oriented goals.
-As can be seen from the current documentation main page, the docs are now
-organized into four categories: tutorials, how-to guides, explanations, and
-API reference. We additionally added "installation" and "contributing" (see
-below) as separate top-level categories. Installation is important enough to
-warrant calling out documentation for it separately. Contribution documentation
-is separate because it serves a separate audience, people who want to
-contribute to SymPy, rather than people who are interested in using it.
+We decided to adopt the [Diátaxis](https://diataxis.fr/) framework for
+documentation organization. Diátaxis splits documentation pages into one of four
+categories, depending on whether the reader is interested in practical or
+theoretical knowledge, and on whether they have study or work oriented goals. As
+can be seen from the current documentation main page, the docs are now organized
+into four categories: tutorials, how-to guides, explanations, and API reference.
+We additionally added "installation" and "contributing" as separate top-level
+categories. Installation is important enough to warrant calling out
+documentation for it separately. Contribution documentation is separate because
+it serves a separate audience, people who want to contribute to SymPy, rather
+than people who are interested in using it.
 
 <figure>
   <img src="/posts/sympy-documentation/sympy-112-docs-main-page.png" alt="Main page of the SymPy 1.12 documentation (October 2023)" />
