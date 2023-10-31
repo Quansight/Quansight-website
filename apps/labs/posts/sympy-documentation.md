@@ -104,9 +104,8 @@ for dark modes.
   <figcaption style={{textAlign: "center"}}>Early 2021 SymPy 1.7 documentation page for the ODE submodule (courtesy WayBack Machine)</figcaption>
 </figure>
 
-In order to pick a replacement theme, we ran a second survey from February
-5-19, 2022. The results of that survey are summarized
-[here](https://www.sympy.org/sympy-docs-survey/2022-theme-survey.html). The
+In order to pick a replacement theme, we ran a [second survey](https://www.sympy.org/sympy-docs-survey/2022-theme-survey.html) 
+from February 5-19, 2022. The results of that survey are summarized. The
 candidate themes were [Read the Docs](https://sphinx-rtd-theme.readthedocs.io/en/stable/), [PyData Sphinx Theme](https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html), [Book](https://sphinx-book-theme.readthedocs.io/en/stable/), and [Furo](https://pradyunsg.me/furo/)
 
 Based on the results of the survey, we decided to use the Furo theme. The Furo
