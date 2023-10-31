@@ -255,7 +255,7 @@ These warning messages give detailed information on what is deprecated, what
 users can replace their code with, what version the deprecation was added
 in, and a link to an even more detailed page of [deprecation explanations](https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-sympy-core-compatibility).
 
-Three - [all activate deprecations](https://docs.sympy.org/latest/explanation/active-deprecations.html) are listed in a single page.
+Three - [all active deprecations](https://docs.sympy.org/latest/explanation/active-deprecations.html) are listed in a single page.
 This page gives more details about each deprecation than would be appropriate
 to put in the deprecation message, including details on why each deprecation
 was made. The page also gives helpful
