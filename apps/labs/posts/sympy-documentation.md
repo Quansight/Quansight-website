@@ -52,7 +52,7 @@ improving the documentation site over those other resources.
 
 Two - survey respondents identified many deficiencies in the SymPy docs which
 made it clear that certain improvements needed to be made to the overall
-layout and organization of SymPy documentation site. In particular, we
+layout and organization of SymPy's documentation site. In particular, we
 identified 4 major improvements that could be made:
 
 - Better top-level organization.
