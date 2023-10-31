@@ -170,9 +170,8 @@ It was also stored on SymPy's
 [wiki](https://github.com/sympy/sympy/wiki), which made it less accessible and
 harder to maintain in the context of SymPy's full documentation.
 
-Consequently, we decided to move all contributor documentation from the wiki
-to the main [SymPy documentation
-pages](https://docs.sympy.org/latest/contributing/index.html). Additionally,
+Consequently, we decided to move all [contributor documentation](https://docs.sympy.org/latest/contributing/index.html) 
+from the wiki to the main SymPy docs. Additionally,
 we rewrote the [main guide for new
 contributors](https://docs.sympy.org/dev/contributing/new-contributors-guide/index.html)
 to be more inline with modern SymPy contribution practices, and to reduce the
