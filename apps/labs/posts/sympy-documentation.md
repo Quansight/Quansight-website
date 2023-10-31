@@ -153,7 +153,7 @@ than people who are interested in using it.
 
 <figure>
   <img src="/posts/sympy-documentation/sympy-112-docs-main-page.png" alt="Main page of the SymPy 1.12 documentation (October 2023)" />
-  <figcaption><center>Docs for the main SymPy documentation landing page</center></figcaption>
+  <figcaption><center>New SymPy docs landing page</center></figcaption>
 </figure>
 
 In addition to this, we reorganized the dozens of [API reference
