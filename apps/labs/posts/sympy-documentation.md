@@ -172,8 +172,8 @@ harder to maintain in the context of SymPy's full documentation.
 
 Consequently, we decided to move all [contributor documentation](https://docs.sympy.org/latest/contributing/index.html) 
 from the wiki to the main SymPy docs. Additionally,
-we rewrote the [main guide for new
-contributors](https://docs.sympy.org/dev/contributing/new-contributors-guide/index.html)
+we rewrote the [new
+contributors guide](https://docs.sympy.org/dev/contributing/new-contributors-guide/index.html)
 to be more inline with modern SymPy contribution practices, and to reduce the
 parts that only explain details on how to use Git and GitHub, which are now
 explained better in other sources on the internet.
