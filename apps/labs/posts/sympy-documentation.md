@@ -5,20 +5,19 @@ published: October 31, 2023
 description: "SymPy's documentation has received many significant improvements over the past two years thanks to funding by the Chan Zuckerberg Initiative."
 category: [Community, Developer Workflows, OSS Experience]
 featuredImage:
-  src: /posts/sympy-documentation/blog_feature_var1.png
-  alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
+  src: /posts/sympy-documentation/sympy-112-docs-main-page.png
+  alt: 'Main page of the SymPy 1.12 documentation (October 2023).'
 hero:
-  imageSrc: /posts/sympy-documentation/blog_hero_var2.svg
-  imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
+  imageSrc: /posts/sympy-documentation/sympy-112-docs-main-page.png
+  imageAlt: 'Main page of the SymPy 1.12 documentation (October 2023).'
 ---
 
-The Chan Zuckerberg Initiative (CZI) has funded
-[SymPy](https://www.sympy.org/) as part of Cycle 4 of its [Essential Open
-Source Software for Science (EOSS)](https://chanzuckerberg.com/eoss/) grant
-program. As part of this work, Aaron Meurer worked on improving the SymPy
+The Chan Zuckerberg Initiative (CZI) has funded SymPy as part of Cycle 4 of its
+[Essential Open Source Software for Science (EOSS)](https://chanzuckerberg.com/eoss/)
+grant program. As part of this work, Aaron Meurer worked on improving the SymPy
 documentation, with a focus on writing new narrative documentation guides.
 
-SymPy is a mature project, and has over 1000 functions and classes. Most of
+[SymPy](https://www.sympy.org/) is a mature project, and has over 1000 functions and classes. Most of
 these functions and classes have API reference documentation in the form of
 docstrings, but the SymPy documentation has historically been lacking in
 long-form narrative documentation to supplement these reference docs.
@@ -35,69 +34,61 @@ capabilities](https://mechmotum.github.io/blog/czi-sympy-wrapup.html).
 
 To start the project, from November 29, 2021 to January 5, 2022 we ran a short
 survey on the SymPy community, to get a feel for SymPy's documentation needs.
-The three main takeaways of the survey were:
+We had three takeaways.
 
-1. The main SymPy documentation site (https://docs.sympy.org) is overwhelmingly
-   the most popular resource that people use to get help with SymPy. This is
-   true across all levels of experience, compared to other resources like the
-   SymPy website, StackOverflow, and community sites (note: this survey was
-   given in 2021, before the popularity of LLM tools like ChatGPT, so this was
-   not included as an option for respondents).
-   Consequently, we decided that it would be most impactful to spend efforts on
-   improving the documentation site over those other resources.
+One - the main SymPy documentation site (https://docs.sympy.org) is overwhelmingly
+the most popular resource that people use to get help with SymPy. This is
+true across all levels of experience, compared to other resources like the
+SymPy website, StackOverflow, and community sites (note: this survey was
+given in 2021, before the popularity of LLM tools like ChatGPT, so this was
+not included as an option for respondents).
+Consequently, we decided that it would be most impactful to spend efforts on
+improving the documentation site over those other resources.
 
 ![Plot showing results of SymPy documentation question "which of the
   following resources do you use when getting help with SymPy (select all that
   apply)?" The choice "SymPy Docs Website" has the most responses at
   91%.](/posts/sympy-documentation/sympy-survey-results.svg)
 
-2. Survey respondents identified many deficiencies in the SymPy docs which
-   made it clear that certain improvements needed to be made to the overall
-   layout and organization of SymPy documentation site. In particular, we
-   identified 4 major improvements that could be made:
+Two - survey respondents identified many deficiencies in the SymPy docs which
+made it clear that certain improvements needed to be made to the overall
+layout and organization of SymPy documentation site. In particular, we
+identified 4 major improvements that could be made:
 
-   - Better top-level organization.
-   - A better Sphinx theme that provides better sidebar navigation.
-   - The docs have many large pages which would benefit from being split into smaller pages.
-   - There were several issues with the SymPy Live extension. This was a
-     Sphinx extension that allowed users to execute the example code blocks in
-     the SymPy documentation directly in their browser.
+- Better top-level organization.
+- A better Sphinx theme that provides better sidebar navigation.
+- The docs have many large pages which would benefit from being split into smaller pages.
+- There were several issues with the SymPy Live extension. This was a
+  Sphinx extension that allowed users to execute the example code blocks in
+  the SymPy documentation directly in their browser.
 
-   Of these, all except the third, splitting large pages, were done as part of
-   the CZI grant work. See below for more details. Splitting large pages
-   hasn't been done yet due to technical difficulties with the Sphinx autodoc
-   extension, as well as due to the fact that the large pages are now much
-   easier to navigate with the new Sphinx theme (see below).
+Of these, all except the third, splitting large pages, were done as part of
+the CZI grant work. See below for more details. Splitting large pages
+hasn't been done yet due to technical difficulties with the Sphinx autodoc
+extension, as well as due to the fact that the large pages are now much
+easier to navigate with the new Sphinx theme (see below).
 
-   The SymPy Live extension in the documentation was removed, as it was
-   considered too much of a maintenance burden for the SymPy community to
-   maintain. There is a new [SymPy Live](https://live.sympy.org/) shell that
-   runs on [JupyterLite](https://jupyter.org/try-jupyter/lab/index.html)—that
-   is, it runs entirely in the browser using
-   [Pyodide](https://pyodide.org/en/stable/). We are hopeful that the
-   JupyterLite community can come up with an equivalent SymPy Live-like
-   extension that so that we can re-enable similar functionality in the SymPy
-   documentation.
+The SymPy Live extension in the documentation was removed, as it was
+considered too much of a maintenance burden for the SymPy community to
+maintain. There is a new [SymPy Live](https://live.sympy.org/) shell that
+runs on [JupyterLite](https://jupyter.org/try-jupyter/lab/index.html)—that
+is, it runs entirely in the browser using
+[Pyodide](https://pyodide.org/en/stable/). We are hopeful that the
+JupyterLite community can come up with an equivalent SymPy Live-like
+extension that so that we can re-enable similar functionality in the SymPy
+documentation.
 
-3. We were been able to identify some primary areas of documentation that
-   to prioritize for writing new documentation guides.
+Three - we were been able to identify some primary areas to prioritize for
+writing new documentation guides.
 
 Click if you wish to read the [full survey results](https://www.sympy.org/sympy-docs-survey/2021-docs-survey.html).
 
 # Improved Sphinx Theme - Furo
 
-![Documentation page for the SymPy ODE module for SymPy 1.12 (October 2023)](/posts/sympy-documentation/sympy-112-docs-odes.png)
-![Documentation page for the SymPy ODE module from SymPy 1.7 (May 2021)](/posts/sympy-documentation/sympy-17-docs-odes.png)
-
-<em><center>Docs for the SymPy documentation page for the ODE submodule
-[now](https://docs.sympy.org/latest/modules/solvers/ode.html) vs. in [early
-2021](https://web.archive.org/web/20210502170201/https://docs.sympy.org/latest/modules/solvers/ode.html)
-(courtesy of [Wayback Machine](https://archive.org/web/)).</center></em>
-
 Prior to this project, the SymPy documentation used the "classic" Sphinx
 theme. This is the same theme that is used by the [official Python
 documentation](https://docs.python.org/), but it is outdated in many ways. It
-lacks interactive navigation. As can be seen from the above screenshot, the
+lacks interactive navigation. As can be seen from the screenshot below, the
 layout of the page in the context of the rest of the documentation is only
 shown by a small breadcrumb at the top of the page. The overall layout of the
 subheadings on the page was given by a table of contents on the left side of
@@ -109,6 +100,11 @@ classic Sphinx theme does not work well on mobile (the components
 do not scale to smaller screen sizes at all), and it does not have native support
 for dark modes.
 
+<figure>
+  <img src="/posts/sympy-documentation/sympy-17-docs-odes.png" alt="SymPy 1.7 ODE Module documentation page (May 2021)" />
+  <figcaption style={{textAlign: "center"}}>Early 2021 SymPy 1.7 documentation page for the ODE submodule (courtesy WayBack Machine)</figcaption>
+</figure>
+
 In order to pick a replacement theme, we ran a second survey from February
 5-19, 2022. The results of that survey are summarized
 [here](https://www.sympy.org/sympy-docs-survey/2022-theme-survey.html). The
@@ -118,6 +114,11 @@ Based on the results of the survey, we decided to use the Furo theme. The Furo
 theme was ranked the highest by survey respondents. In particular, they liked
 the improved sidebar navigation, the dark mode, and mobile support.
 Additionally, Furo has good accessibility and the CSS is easy to customize.
+
+<figure>
+  <img src="/posts/sympy-documentation/sympy-112-docs-odes.png" alt="SymPy 1.12 ODE Module documentation page (October 2023)" />
+  <figcaption style={{textAlign: "center"}}>Now using the Furo theme: ODE submodule page</figcaption>
+</figure>
 
 The result is a documentation site that has navigable sidebars. We spent
 considerable time retheming the default Furo colors to match the traditional
@@ -132,13 +133,6 @@ styles](https://github.com/sympy/sympy/blob/master/doc/src/_pygments/styles.py)
 to have better color contrast.
 
 # Improved Organization - Diataxis
-
-![Main page of the SymPy documentation from SymPy 1.12 (October 2023)](/posts/sympy-documentation/sympy-112-docs-main-page.png)
-![Main page of the SymPy documentation from SymPy 1.7 (May 2021)](/posts/sympy-documentation/sympy-17-docs-main-page.png)
-
-<em><center>Docs for the main SymPy documentation landing page
-[now](https://docs.sympy.org/latest/index.html) vs. in [early 2021](https://web.archive.org/web/20210225051926/https://docs.sympy.org/latest/index.html)
-(courtesy of [Wayback Machine](https://archive.org/web/)).</center></em>
 
 A related project was reorganizing the top-level organization of the
 documentation. As you can see from the screenshot above from early 2021, the
@@ -158,6 +152,11 @@ below) as separate top-level categories. Installation is important enough to
 warrant calling out documentation for it separately. Contribution documentation
 is separate because it serves a separate audience, people who want to
 contribute to SymPy, rather than people who are interested in using it.
+
+<figure>
+  <img src="/posts/sympy-documentation/sympy-112-docs-main-page.png" alt="Main page of the SymPy 1.12 documentation (October 2023)" />
+  <figcaption><center>Docs for the main SymPy documentation landing page</center></figcaption>
+</figure>
 
 In addition to this, we reorganized the dozens of [API reference
 pages](https://docs.sympy.org/latest/reference/index.html) into eight
@@ -191,12 +190,12 @@ here, this has made things significantly easier for SymPy developers to review
 documentation changes.
 
 To view a preview of the documentation, reviewers just need to click the
-button in the status checks for the pull request
+button in the status checks for the pull request:
 
 ![Link saying "Click here to see a preview of the documentation." from a SymPy
 pull request CI checks listing](/posts/sympy-documentation/sympy-docs-preview-link.png)
 
-and they will be shown a rendered page like
+and they will be shown a rendered page like:
 
 ![header on the page that says "This is a preview build from SymPy pull request #25512. It was built against a9765f6. If you aren't looking for a PR preview, go to the main SymPy documentation."](/posts/sympy-documentation/sympy-docs-preview-page.png)
 
@@ -219,51 +218,51 @@ vague, and sometimes developers would make breaks that ended up being
 unnecessarily disruptive to SymPy's end-users. A [new deprecation
 guide](https://docs.sympy.org/dev/contributing/deprecations.html) has been
 written that outlines a deprecation policy. This guide brings three new things
-to SymPy:
+to SymPy.
 
-- A clear policy on when backwards compatibility breaks should be made. The
-  gist is that [deprecations should be
-  avoided](https://docs.sympy.org/dev/contributing/deprecations.html#try-to-avoid-backwards-incompatible-changes-in-the-first-place),
-  and only done if absolutely necessary. There is also now a policy that all
-  such public compatibility breaks should come with a deprecation when
-  possible, and this deprecation should [last at least a
-  year](https://docs.sympy.org/dev/contributing/deprecations.html#how-long-should-deprecations-last)
-  before being removed.
+One - a clear policy on when backwards compatibility breaks should be made. The gist
+is that [deprecations should be
+avoided](https://docs.sympy.org/dev/contributing/deprecations.html#try-to-avoid-backwards-incompatible-changes-in-the-first-place),
+and only done if absolutely necessary. There is also now a policy that all such
+public compatibility breaks should come with a deprecation when possible, and
+this deprecation should [last at least a
+year](https://docs.sympy.org/dev/contributing/deprecations.html#how-long-should-deprecations-last)
+before being removed.
 
-- A new `SymPyDeprecationWarning` class used for deprecation warnings, which
-  gives much more user friendly error messages. For example
+Two - a new `SymPyDeprecationWarning` class for deprecation warnings, which
+gives much more user friendly error messages. For example
 
-  ```py
-  >>> import sympy.core.compatibility
-  <stdin>:1: SymPyDeprecationWarning:
+```python-console
+>>> import sympy.core.compatibility
+<stdin>:1: SymPyDeprecationWarning:
 
-  The sympy.core.compatibility submodule is deprecated.
+The sympy.core.compatibility submodule is deprecated.
 
-  This module was only ever intended for internal use. Some of the functions
-  that were in this module are available from the top-level SymPy namespace,
-  i.e.,
+This module was only ever intended for internal use. Some of the functions
+that were in this module are available from the top-level SymPy namespace,
+i.e.,
 
-      from sympy import ordered, default_sort_key
+    from sympy import ordered, default_sort_key
 
-  The remaining were only intended for internal SymPy use and should not be used
-  by user code.
+The remaining were only intended for internal SymPy use and should not be used
+by user code.
 
-  See https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-sympy-core-compatibility
-  for details.
+See https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-sympy-core-compatibility
+for details.
 
-  This has been deprecated since SymPy version 1.10. It
-  will be removed in a future version of SymPy.
-  ```
+This has been deprecated since SymPy version 1.10. It
+will be removed in a future version of SymPy.
+```
 
-  These warning messages give detailed information on what is deprecated, what
-  users can replace their code with, what version the deprecation was added
-  in, and a link to an even more detailed page of [deprecation explanations](https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-sympy-core-compatibility).
+These warning messages give detailed information on what is deprecated, what
+users can replace their code with, what version the deprecation was added
+in, and a link to an even more detailed page of [deprecation explanations](https://docs.sympy.org/latest/explanation/active-deprecations.html#deprecated-sympy-core-compatibility).
 
-- [All activate deprecations](https://docs.sympy.org/latest/explanation/active-deprecations.html) are listed in a single page.
-  This page gives more details about each deprecation than would be appropriate
-  to put in the deprecation message, including details on why each deprecation
-  was made. The page also gives helpful
-  information on [how to silence deprecation warnings](https://docs.sympy.org/dev/explanation/active-deprecations.html#silencing-sympy-deprecation-warnings).
+Three - [all activate deprecations](https://docs.sympy.org/latest/explanation/active-deprecations.html) are listed in a single page.
+This page gives more details about each deprecation than would be appropriate
+to put in the deprecation message, including details on why each deprecation
+was made. The page also gives helpful
+information on [how to silence deprecation warnings](https://docs.sympy.org/dev/explanation/active-deprecations.html#silencing-sympy-deprecation-warnings).
 
 ## Guide on Writing Custom Functions
 
@@ -287,7 +286,7 @@ class log(Function):
         return 1/self.args[0]
 ```
 
-```py
+```python-console
 >>> x = sympy.Symbol('x')
 >>> log(1)
 0
@@ -312,7 +311,7 @@ goes over some ways to avoid these pitfalls.
 For example, one pitfall that many new SymPy users run into is using strings
 as inputs to SymPy functions, like
 
-```py
+```python-console
 >>> from sympy import expand
 >>> expand("(x**2 + x)/x")
 x + 1
@@ -321,7 +320,7 @@ x + 1
 It's much better to define symbolic variables and create expressions directly,
 like
 
-```
+```python-console
 >>> from sympy import symbols
 >>> x = symbols('x')
 >>> expand((x**2 + x)/x)
