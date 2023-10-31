@@ -152,7 +152,7 @@ it serves a separate audience, people who want to contribute to SymPy, rather
 than people who are interested in using it.
 
 <figure>
-  <img src="/posts/sympy-documentation/sympy-112-docs-main-page.png" alt="Main page of the SymPy 1.12 documentation (October 2023)" />
+  <img src="/posts/sympy-documentation/sympy-112-docs-main-page.png" alt="Main page of the SymPy docs (v1.12, October 2023)" />
   <figcaption><center>New SymPy docs landing page</center></figcaption>
 </figure>
 
