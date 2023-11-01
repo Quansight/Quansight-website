@@ -98,7 +98,7 @@
     "lint-staged": "^13.0.3",
     "minimist": "^1.2.6",
     "nx-stylelint": "^13.2.1",
-    "postcss": "^8.4.14",
+    "postcss": "^8.4.31",
     "prettier": "^2.5.1",
     "react-test-renderer": "17.0.2",
     "sass": "1.49.9",
