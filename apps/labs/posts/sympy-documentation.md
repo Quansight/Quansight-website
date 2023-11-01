@@ -8,8 +8,8 @@ featuredImage:
   src: /posts/sympy-documentation/sympy-logo-2-1.png
   alt: 'SymPy logo'
 hero:
-  imageSrc: /posts/sympy-documentation/sympy-docs-hero-composite-135pct-yshift2.png
-  imageAlt: 'Main page of the SymPy 1.12 documentation (October 2023), composited with samples of internal SymPy code.'
+  imageSrc: /posts/sympy-documentation/blog_hero_var2.svg
+  imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
 The Chan Zuckerberg Initiative (CZI) has funded SymPy as part of Cycle 4 of its
