@@ -1,18 +1,20 @@
 ---
-title: 'The \'eu\' in eucatastrophe -- Why SciPy builds for Python 3.12 on Windows are a minor miracle'
+title: >
+  The 'eu' in eucatastrophe -- Why SciPy builds for Python 3.12 on Windows are a minor miracle
 published: November 5, 2023
 authors: [axel-obermeier]
 description: 'Moving SciPy to Meson meant finding a different Fortran compiler
 on Windows, which was particularly tricky to pull off for conda-forge. This
 blog tells the story about how things looked pretty grim for the Python 3.12
-release, and how things ended up worked out just in the nick of time.'
+release, and how things ended up working out just in the nick of time.'
 category: [Developer workflows]
 featuredImage:
   src: /posts/building-scipy-with-flang/scipy_indy.jpg
-  alt: 'An object-labelling meme showing Indiana Jones (labelled "SciPy") running away in a tight space from a rolling boulder labelled "distutils removal", while carrying something labelled "Fortran code".'
+  alt: >
+    An object-labelling meme showing Indiana Jones (labelled "SciPy") running away in a tight space from a rolling boulder labelled "distutils removal", while carrying something labelled "Fortran code".
 hero:
   imageSrc: /posts/building-scipy-with-flang/hero.png
-  imageAlt: ' collage of the logos of SciPy, Meson, Fortran & LLVM. Some graphical elements on a white background surround the illustration.'
+  imageAlt: 'A collage of the logos of SciPy, Meson, Fortran & LLVM. Some graphical elements on a white background surround the illustration.'
 ---
 
 You've probably heard already that Python 3.12 was released recently.
@@ -41,10 +43,11 @@ From our perch on the shoulders of giants, let's take a quick look at the
 landscape.
 
 We'll briefly shed some light on the following:
-  * Why is Fortran still used in so many places?
-  * How is that relevant to Python?
-  * Why progress in Python packaging standardisation throws a wrench in the works.
-  * What role conda-forge plays in this context.
+
+- Why is Fortran still used in so many places?
+- How is that relevant to Python?
+- Why progress in Python packaging standardisation throws a wrench in the works.
+- What role conda-forge plays in this context.
 
 If you feel you have a good-enough understanding of all this, or not much time,
 [skip](#The-situation) right past the background. 😉
@@ -55,10 +58,11 @@ If you feel you have a good-enough understanding of all this, or not much time,
 Started in 1953, first appearing in 1958, it quickly became the most important
 programming language of its time, in an age when computing made several
 important evolutionary leaps. Most importantly for our story:
-  * A lot of scientific code was written in Fortran (meaning often: the
-    accumulated math knowledge of many decades got crystallised into code), and:
-  * There was a huge number of Fortran compilers, and in the age before Open
-    Source Software, all of those were proprietary.
+
+- A lot of scientific code was written in Fortran (meaning often: the
+  accumulated math knowledge of many decades got crystallised into code), and:
+- There was a huge number of Fortran compilers, and in the age before Open
+  Source Software, all of those were proprietary.
 
 ## Compilers
 
@@ -110,9 +114,9 @@ just 1-2 cells.
     <tbody>
         <tr>
             <td>x86_32</td>
-            <td rowspan=6>GCC</td>
-            <td rowspan=3>Apple Clang</td>
-            <td rowspan=3>MSVC<br/>(arm64 added recently)</td>
+            <td rowspan="6">GCC</td>
+            <td rowspan="3">Apple Clang</td>
+            <td rowspan="3">MSVC<br/>(arm64 added recently)</td>
         </tr>
         <tr>
             <td>x86_64</td>
@@ -137,7 +141,6 @@ just 1-2 cells.
         </tr>
     </tbody>
 </table>
-
 
 Of course, GCC remains usable on MacOS (due to shared Unix roots), and there
 are ways to make it work on Windows (through cygwin or MinGW), and the whole
@@ -317,16 +320,17 @@ in conda-forge.
 ## The situation
 
 To recap:
-  * SciPy uses a lot of Fortran code, having incorporated existing and standard
-    implementations (like BLAS & LAPACK) for mathematical computations.
-  * This did not play well with Python's native build tools, leading to the
-    creation of `numpy.distutils`, which is considered a bandaid and in minimal
-    maintenance mode.
-  * The Python packaging world has been continually reinventing itself to
-    overcome burning problems that are due to the immense complexity being
-    wrapped by Python packages.
-  * A parallel ecosystem has arisen around conda & conda-forge, for packages
-    and users that were underserved by the standard tools for Python packaging.
+
+- SciPy uses a lot of Fortran code, having incorporated existing and standard
+  implementations (like BLAS & LAPACK) for mathematical computations.
+- This did not play well with Python's native build tools, leading to the
+  creation of `numpy.distutils`, which is considered a bandaid and in minimal
+  maintenance mode.
+- The Python packaging world has been continually reinventing itself to
+  overcome burning problems that are due to the immense complexity being
+  wrapped by Python packages.
+- A parallel ecosystem has arisen around conda & conda-forge, for packages
+  and users that were underserved by the standard tools for Python packaging.
 
 This is where our story starts in earnest.
 Going back for many years already, the situation around `distutils` and
@@ -380,9 +384,10 @@ In particular, Meson was going to refuse to accept the MSVC+gfortran
 combination that was in use in conda-forge.
 In fact, it looked like we were going to be completely boxed in.
 As of Python 3.12:
-  * distutils would be gone, and setuptools incompatible with numpy.distutils.
-  * Meson would refuse to work with the hack we had until now.
-  * There were no free (and ABI-compatible) Fortran compilers on Windows _at all_.
+
+- distutils would be gone, and setuptools incompatible with numpy.distutils.
+- Meson would refuse to work with the hack we had until now.
+- There were no free (and ABI-compatible) Fortran compilers on Windows _at all_.
 
 ## Fortran, the revival
 
@@ -391,13 +396,14 @@ over, in a curious twist of fate, it has seen a dramatic resurgence in the last
 decade.
 While the reasons for this are not exactly obvious (at least to us!), a few
 possible explanations are:
-  * It has relatively simple syntax, and maps well to the structure of
-    mathematical formulae.
-  * It produces performant code, especially in combination with parallelisation
-    frameworks like OpenMP.
-  * Due to the large amount of Fortran code in scientific computing, and the
-    promised performance gains through GPUs, it became an attractive target for
-    supporting GPU computations.
+
+- It has relatively simple syntax, and maps well to the structure of
+  mathematical formulae.
+- It produces performant code, especially in combination with parallelisation
+  frameworks like OpenMP.
+- Due to the large amount of Fortran code in scientific computing, and the
+  promised performance gains through GPUs, it became an attractive target for
+  supporting GPU computations.
 
 As such, there was renewed vigour in the Fortran compiler space, and several
 important developments happened in short succession.
@@ -498,13 +504,14 @@ to do all OSes and architectures at the same time (as they're all built
 simultaneously per package).
 
 So it looked conceivable that we'd end up in a situation where:
-  * We have no Windows builds for SciPy, because there's no Fortran compiler
-    we can use.
-  * Not being able to rebuild SciPy for Python 3.12 on Windows would either
-    hold up the migration for at least ~1000 packages that depend on SciPy on
-    all platforms, or we would have to drop Windows from the Python migration
-    completely, which would be similarly disruptive and a lot of effort to fix
-    later.
+
+- We have no Windows builds for SciPy, because there's no Fortran compiler
+  we can use.
+- Not being able to rebuild SciPy for Python 3.12 on Windows would either
+  hold up the migration for at least ~1000 packages that depend on SciPy on
+  all platforms, or we would have to drop Windows from the Python migration
+  completely, which would be similarly disruptive and a lot of effort to fix
+  later.
 
 ## A pious hope
 
@@ -569,15 +576,16 @@ Depending on where you draw the line, hundreds or even thousands of person
 years of effort went into the ingredients that were necessary for us to achieve
 the final result (SciPy, Meson, Flang, LLVM, etc.).
 We cannot realistically thank everyone, but a few call-outs nevertheless:
-  * Ralf Gommers, for tirelessly positive support and for outstanding
-    stewardship of NumPy and SciPy, and driving the massive effort to move
-    SciPy to Meson.
-  * Isuru Fernando, for building & maintaining some of the trickiest pieces in
-    conda-forge, and consistently helping out with keeping them running or
-    building on top of them, as well as reviewing with incredible expertise.
-  * The Meson developers, for a clean build system with a solid design philosophy.
-  * The Flang developers, for providing the world with an open source Fortran
-    compiler that also works on Windows.
+
+- Ralf Gommers, for tirelessly positive support and for outstanding
+  stewardship of NumPy and SciPy, and driving the massive effort to move
+  SciPy to Meson.
+- Isuru Fernando, for building & maintaining some of the trickiest pieces in
+  conda-forge, and consistently helping out with keeping them running or
+  building on top of them, as well as reviewing with incredible expertise.
+- The Meson developers, for a clean build system with a solid design philosophy.
+- The Flang developers, for providing the world with an open source Fortran
+  compiler that also works on Windows.
 
 PS. In case you're still wondering what the "eu" in eucatastrophe
 [means](https://tolkiengateway.net/wiki/Eucatastrophe), it's a neologism coined
