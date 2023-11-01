@@ -5,11 +5,11 @@ published: October 31, 2023
 description: "SymPy's documentation has received many significant improvements over the past two years thanks to funding by the Chan Zuckerberg Initiative."
 category: [Community, Developer Workflows, OSS Experience]
 featuredImage:
-  src: /posts/sympy-documentation/sympy-112-docs-main-page.png
-  alt: 'Main page of the SymPy 1.12 documentation (October 2023).'
+  src: /posts/sympy-documentation/sympy-logo-2-1.png
+  alt: 'SymPy logo'
 hero:
-  imageSrc: /posts/sympy-documentation/sympy-112-docs-main-page.png
-  imageAlt: 'Main page of the SymPy 1.12 documentation (October 2023).'
+  imageSrc: /posts/sympy-documentation/sympy-docs-hero-composite-135pct-yshift2.png
+  imageAlt: 'Main page of the SymPy 1.12 documentation (October 2023), composited with samples of internal SymPy code.'
 ---
 
 The Chan Zuckerberg Initiative (CZI) has funded SymPy as part of Cycle 4 of its
@@ -104,7 +104,7 @@ for dark modes.
   <figcaption style={{textAlign: "center"}}>Early 2021 SymPy 1.7 documentation page for the ODE submodule (courtesy WayBack Machine)</figcaption>
 </figure>
 
-In order to pick a replacement theme, we ran a [second survey](https://www.sympy.org/sympy-docs-survey/2022-theme-survey.html) 
+In order to pick a replacement theme, we ran a [second survey](https://www.sympy.org/sympy-docs-survey/2022-theme-survey.html)
 from February 5-19, 2022. The results of that survey are summarized. The
 candidate themes were [Read the Docs](https://sphinx-rtd-theme.readthedocs.io/en/stable/), [PyData Sphinx Theme](https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html), [Book](https://sphinx-book-theme.readthedocs.io/en/stable/), and [Furo](https://pradyunsg.me/furo/)
 
@@ -169,7 +169,7 @@ It was also stored on SymPy's
 [wiki](https://github.com/sympy/sympy/wiki), which made it less accessible and
 harder to maintain in the context of SymPy's full documentation.
 
-Consequently, we decided to move all [contributor documentation](https://docs.sympy.org/latest/contributing/index.html) 
+Consequently, we decided to move all [contributor documentation](https://docs.sympy.org/latest/contributing/index.html)
 from the wiki to the main SymPy docs. Additionally,
 we rewrote the [new
 contributors guide](https://docs.sympy.org/dev/contributing/new-contributors-guide/index.html)
