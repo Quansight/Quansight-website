@@ -50,7 +50,7 @@ We'll briefly shed some light on the following:
 - What role conda-forge plays in this context.
 
 If you feel you have a good-enough understanding of all this, or not much time,
-[skip](#The-situation) right past the background. 😉
+[skip](#the-situation) right past the background. 😉
 
 ## Fortran
 
