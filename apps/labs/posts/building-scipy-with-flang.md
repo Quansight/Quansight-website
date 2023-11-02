@@ -1,6 +1,6 @@
 ---
 title: >
-  The 'eu' in eucatastrophe -- Why SciPy builds for Python 3.12 on Windows are a minor miracle
+  The 'eu' in eucatastrophe – Why SciPy builds for Python 3.12 on Windows are a minor miracle
 published: November 5, 2023
 authors: [axel-obermeier]
 description: 'Moving SciPy to Meson meant finding a different Fortran compiler
@@ -46,7 +46,7 @@ We'll briefly shed some light on the following:
 
 - Why is Fortran still used in so many places?
 - How is that relevant to Python?
-- Why progress in Python packaging standardisation throws a wrench in the works.
+- Past struggles in NumPy/SciPy with vanilla Python packaging.
 - What role conda-forge plays in this context.
 
 If you feel you have a good-enough understanding of all this, or not much time,
@@ -102,9 +102,9 @@ been x86, but that has been changing in recent times).
 What GCC did was essentially cover an entire column of that matrix, rather than
 just 1-2 cells.
 
-<table>
-    <thead>
-        <tr>
+<table bgcolor="#efefef" cellpadding="10" border-color="#666666">
+    <thead bgcolor="#00327d">
+        <tr color="white">
             <th>👉 OS<br/>👇CPU Arch.</th>
             <th>Linux</th>
             <th>MacOS</th>
@@ -114,15 +114,16 @@ just 1-2 cells.
     <tbody>
         <tr>
             <td>x86_32</td>
-            <td rowspan="6">GCC</td>
-            <td rowspan="3">Apple Clang</td>
-            <td rowspan="3">MSVC<br/>(arm64 added recently)</td>
+            <td rowspan="6" bgcolor="#b6d7a8">GCC</td>
+            <td rowspan="3" bgcolor="#c9daf8">Apple Clang</td>
+            <td rowspan="2" bgcolor="#c9daf8">MSVC</td>
         </tr>
         <tr>
             <td>x86_64</td>
         </tr>
         <tr>
             <td>arm64</td>
+            <td border-style="dotted" bgcolor="#c9daf8">(added recently)</td>
         </tr>
         <tr>
             <td>aarch64</td>
@@ -165,7 +166,7 @@ and any compiled program is subject to this.
 
 ## Python
 
-I won't bore you with the history here, but the immediate thing to note is:
+We won't bore you with the history here, but the immediate thing to note is:
 you don't need a compiler to use Python. That's a blessing as well as a curse,
 because on the one hand, it dramatically lowers the difficulty of using it,
 and on the other hand, this makes Python slow compared to compiled languages.
@@ -385,7 +386,8 @@ combination that was in use in conda-forge.
 In fact, it looked like we were going to be completely boxed in.
 As of Python 3.12:
 
-- distutils would be gone, and setuptools incompatible with numpy.distutils.
+- `distutils` would be gone, and contemporary `setuptools` incompatible with
+  `numpy.distutils`.
 - Meson would refuse to work with the hack we had until now.
 - There were no free (and ABI-compatible) Fortran compilers on Windows _at all_.
 
@@ -519,7 +521,7 @@ So while the `distutils` removal was coming down the line like an oncoming
 freight train, all we could try to do is cross our fingers that _a_ Fortran
 compiler would be ready in time (most likely either llvm-flang or LFortran),
 and be as prepared as possible in terms of having all the other pieces ready to
-go – LLVM is a big baby, and keeping the compiler stack up to date consistently
+go – for example, LLVM is a big baby, and keeping the compiler stack up-to-date
 is a non-negligible effort.
 
 In addition to that, there are the normal FOSS constraints at play – no-one can
@@ -527,21 +529,21 @@ keep all the required knowledge in their head, so we need other people's
 feedback, but everyone's a volunteer, people have lives and other interests, or
 they're just plain busy with other things.
 
-As it happened, LLVM 17 was coming up, and it was the first release where Flang
-had matured enough to remove the `-flang-experimental-exec` flag, and was
-[estimated](https://discourse.llvm.org/t/proposal-rename-flang-new-to-flang/69462/33)
+As it happened, the release of LLVM 17.0 was coming up, which would be the first
+release where Flang had matured enough to remove the `-flang-experimental-exec`
+flag, and was [estimated](https://discourse.llvm.org/t/proposal-rename-flang-new-to-flang/69462/33)
 to be roughly "0.8 level maturity".
 As soon as we had the release candidates built in conda-forge, we tried to throw
 it at SciPy, only to realise that Meson did not support the new Flang yet.
 
 Even worse, it wasn't clear which ABI Flang was using (as mentioned above,
 conda-forge uses the MSVC ABI on Windows everywhere), not least because the
-Clang driver that Flang uses can use two different modes.
+Clang driver that Flang uses under the hood can target both modes.
 There's also two different standard libraries, two different runtime libraries
 and two different linkers to consider in all this.
 At this point, we still hadn't compiled more than a "Hello World!" example with
 Flang yet, so it wasn't even clear that it could compile all of SciPy, much
-less pass the test suite.
+less pass the test suite...
 
 ## Eucatastrophe
 
