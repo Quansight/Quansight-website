@@ -29,16 +29,15 @@ Not that there isn't a huge amount of dedicated maintainers (mostly
 volunteers!) working tirelessly behind the scenes to make that happen,
 but overall, it's a pretty routine situation.
 
-However, behind all the ordinary-seeming "SciPy released builds compatible with
+However, behind the ordinary-seeming "SciPy released builds compatible with
 Python 3.12" hides an extraordinary story worth telling, because of how several
 unrelated, multi-decade-long timelines happened to clash in a way that could
 have very easily led to no Python 3.12-compatible releases for a long time.
 
 To understand why this was such a lucky coincidence (though we tried our best
 to tip the scales, _a lot_ of luck was necessary), we need to zoom out a bit
-and explore the big players involved in this situation.
-In the interest of brevity, the following recap is going to be incomplete and
-opinionated.
+and explore the big players involved in this situation (in the interest of
+brevity, the following recap is going to be incomplete and opinionated).
 From our perch on the shoulders of giants, let's take a quick look at the
 landscape.
 
@@ -46,7 +45,7 @@ We'll briefly shed some light on the following:
 
 - Why is Fortran still used in so many places?
 - How is that relevant to Python?
-- Past struggles in NumPy/SciPy with vanilla Python packaging.
+- Past struggles of NumPy/SciPy with vanilla Python packaging.
 - What role conda-forge plays in this context.
 
 If you feel you have a good-enough understanding of all this, or not much time,
@@ -145,13 +144,19 @@ just 1-2 cells.
   </table>
 </div>
 
+This matrix would be _a lot_ larger if it included historical OSes and less
+common architectures, where support with the respective compiler was often in
+a 1:1 relationship (i.e. that combination would cover a single cell in the matrix).
+The matrix also does not cover which programming languages a given compiler is
+able to process, but for simplicity, you can picture C/C++ here.
+
 Of course, GCC remains usable on MacOS (due to shared Unix roots), and there
 are ways to make it work on Windows (through cygwin or MinGW), and the whole
 truth is way more [complicated](https://www.flother.is/til/llvm-target-triple/)
 still.
 But as a first-order approximation, this shouldn't raise too many eyebrows.
 
-Alright, after almost a full page about compilers, we can hear you thinking:
+Alright, after a full page about compilers, we can hear you thinking:
 "What does all this have to do with Python?!".
 And you're right, but just one last thing:
 
@@ -160,8 +165,9 @@ expectations built into that so-called "binary", which will expect very
 explicitly-sized inputs, read things from – and load things into – very
 specific CPU registers etc.
 Basically, at this point, the training wheels come off, and if you use said
-binary under different circumstances (different sized inputs, other CPU type
-etc.), you're going to have a bad time.
+binary under even slightly different circumstances (different sized inputs,
+changed order of function arguments, different in-memory layout of some
+structure etc., much less another CPU type), you're going to have a bad time.
 This is the so-called Application Binary Interface
 ([ABI](https://pypackaging-native.github.io/background/binary_interface)),
 and any compiled program is subject to this.
@@ -176,10 +182,13 @@ and on the other hand, this makes Python slow compared to compiled languages.
 Python's duck-typing means it will go through many layers of wrapping and
 fall-backs, before anything actually is executed.
 Sidenote: this process is taken care of by Python's interpreter, which – uh oh…
-– has itself been compiled.
+– has itself been compiled[^1].
 Unsurprisingly this approach is slower than a compiled program that will just
 run with whatever instructions you've given it (and fail, if any part of the
 ABI is violated).
+
+[^1]: and thus also has an ABI, if you want to speak to Python from another
+compiled language.
 
 This slow-down doesn't matter so much for prototyping, or general scripting,
 but it becomes immensely limiting once there's medium-sized or larger amounts
@@ -199,14 +208,14 @@ not like those definitions had changed since the 70s…).
 
 However, this came with a terrible price:
 Users needed a compiler to install the package.
-In the early Python days where many people were on Linux distributions (which
+In the early Python days, when many people were on Linux distributions (which
 comes with GCC pre-installed), this was less of an issue.
-But it made it extraordinarily difficult to do this in a cross-platform way;
+But it made it extraordinarily difficult to do this in a cross-platform way –
 particularly on Windows, it's not common for users to have a compiler
 installed, much less know how to use it.
 
-It's even worse on the maintainer-side, because now suddenly you need to become
-an expert in the vagaries of different compilers, linkers and runtime libraries
+It's even worse on the maintainer-side, because they suddenly need to become
+experts in the vagaries of different compilers, linkers and runtime libraries
 necessary on different platforms, and with sometimes wildly varying behaviour.
 
 ## Python packaging
@@ -221,24 +230,27 @@ already a hugely pressing issue in C/C++.
 
 The packaging world in Python has had to continually reinvent itself in order
 to solve these issues.
-Here's a good [historical](https://www.youtube.com/watch?v=AQsZsgJ30AE&t=200s)
-overview of the many iterations this had gone through.
-One of the biggest problems that did get solved through the "wheel" format,
-was to avoid users having to compile anything to install a package.
+One of the biggest problems, which got solved through the "wheel" format,
+was to avoid users having to compile something to install a package.
 
 !['A meme about a difficult choice in Python packaging, with a man unable to decide between two buttons labeled "ABI Hell" and "Users need a compiler"'](/posts/building-scipy-with-flang/ABI_meme.jpg)
 
-This again comes with substantial maintenance trade-offs, because there are
-still many very involved things that maintainers have to take care of when
-preparing a wheel for their users.
-In terms of the necessary tooling, there was a point in this long evolution
-where `distutils` emerged as the "one way" to solve things, so much so that it
+This comes with some substantial downsides, especially on the maintainer-side,
+but overall, it is a massive improvement over the situation that existed before.
+Nowadays, most packages are installable through wheels from PyPI.
+Aside from not needing a compiler, this also means that the installation goes
+much faster, there's better metadata, and so on.
+
+The tooling to create these wheels (or to do Python packaging in general)
+underwent many iterations as well.
+At one point in this long [evolution](https://www.youtube.com/watch?v=AQsZsgJ30AE&t=200s),
+`distutils` had emerged as the "one way" to solve things, so much so that it
 even got adopted into the standard library.
 
 However, this was not enough for the Scientific Python community, which had
 bigger problems.
 This [blog](http://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html)
-by one of the founding contributors of NumPy and SciPy is full of relevant
+post by one of the founding contributors of NumPy and SciPy is full of relevant
 anecdotes; here's one quote:
 
 > We in the scientific python community have had difficulty and a rocky history
@@ -267,14 +279,17 @@ Conda was designed to take a more holistic view of all the things that are
 required for packaging – including the non-Python bits.
 This introduced an unfortunate bifurcation in the Python world, because other
 Python tools like pip cannot install conda-packages, yet what conda had done
-did not easily fit into the standardisation-by-consensus model, especially
+did not easily fit into the standardisation-by-consensus model[^2], especially
 because many things essential to conda were considered "out of scope" by the
 wider Python packaging community.
 
+[^2]: coupled with fears (at least initially) that a single company would
+"take over" such a critical piece of the ecosystem.
+
 However, for users and maintainers of packages that are affected by some of the
 deep-seated [issues](https://pypackaging-native.github.io/) in Python packaging,
-it provided a much more powerful solution and got adopted widely, though by far
-not everywhere.
+it provided a much more powerful solution and got adopted widely (especially in
+scientific computing, though by far not everywhere).
 One key necessity in controlling the interaction of various bits (like ensuring
 the ABI is kept, or packages are recompiled where necessary), is that each
 package has to be integrated into the conda world, by creating a "recipe" that
@@ -284,8 +299,9 @@ Given the size of the ecosystem, not even a company like Anaconda (which grew
 around the needs conda addresses, and is the main driver behind the tool) could
 hope to integrate everything that users wanted, and over time, the
 community-driven conda-forge channel became the place to do this integration work.
-Anyone can submit "recipes" for a package that is missing, or provide fixes for
-those that are already being built on so-called "feedstocks".
+Anyone can [submit](https://github.com/conda-forge/staged-recipes/) "recipes"
+for a package that is missing, or provide fixes for those that are already
+being built on so-called "feedstocks".
 
 One of the things that complicates matters is that conda-forge – as a
 philosophy – is aiming to support all common platforms, and even some less
@@ -294,7 +310,7 @@ This multiplies the kind of problems a Linux distribution might have by at
 least ~three, because a different set of problems will also appear for MacOS
 and Windows.
 To have any chance at success, conda-forge uses the platform defaults
-(compiler, stdlib, ABI, etc.) wherever possible.
+(compiler, standard library, ABI, etc.) wherever possible.
 
 Conda-forge is almost 100% volunteer-run, and dependent on public CI resources
 like those provided by Azure Pipelines, as well as Anaconda footing the bill
@@ -327,8 +343,8 @@ To recap:
 - SciPy uses a lot of Fortran code, having incorporated existing and standard
   implementations (like BLAS & LAPACK) for mathematical computations.
 - This did not play well with Python's native build tools, leading to the
-  creation of `numpy.distutils`, which is considered a bandaid and in minimal
-  maintenance mode.
+  creation of `numpy.distutils`, which is however considered a bandaid and in
+  minimal maintenance mode.
 - The Python packaging world has been continually reinventing itself to
   overcome burning problems that are due to the immense complexity being
   wrapped by Python packages.
@@ -339,7 +355,7 @@ This is where our story starts in earnest.
 Going back for many years already, the situation around `distutils` and
 `setuptools` had been a source of great pain in the Python packaging world.
 The two (in close interaction) represented the de-facto standard way of
-building Python packages, and changing anything about them was extremely hard
+building Python packages, but changing anything about them was extremely hard
 because of how many use-cases had to be considered, how much everything had
 grown organically, and so on.
 
@@ -415,7 +431,8 @@ For example, PGI / NVidia open sourced a version of pgfortran with a new
 backend based on LLVM (more on that below), which later turned into what's now
 known as "classic" Flang.
 In the process of trying to upstream this into LLVM itself, the compiler got
-rewritten completely as f18, which later turned into "new" Flang.
+rewritten completely (under the name f18), which later turned into "new" Flang
+that eventually got merged into LLVM itself.
 Pretty much at the
 [same time](https://fortran-lang.discourse.group/t/what-is-the-exact-difference-between-llvm-flang-and-lfortran/901/17),
 another group started developing a Fortran-compiler based on LLVM: LFortran.
@@ -442,11 +459,11 @@ code and the code that most programmers write, but in a way that is
 language-agnostic.
 In particular, it would be possible to target the LLVM IR from Fortran, and
 then automatically benefit from all the "backends" that do most of the heavy
-optimization work between the IR and the actual architecture.
+optimization work between the IR and the actual CPU architecture.
 
 This made LLVM an attractive foundation for these new Fortran compiler efforts,
 and both the "new" Flang, as well as LFortran followed this approach, though
-with different aims in what they build on top.
+with different aims in what they built on top.
 
 ## Compiler bingo
 
@@ -458,18 +475,20 @@ took off, not least as the lion's share of resources behind Flang was
 refocussed on getting the rewritten version (formerly f18) merged into LLVM itself.
 
 But these were not the only changes happening in this space.
-For example, Intel also did a major overhaul of their Fortran compiler, and
-started making it freely available, though not open source (which precludes
-conda-forge from using it, unless Intel themselves packages the compilers for us;
+For example, Intel did a major overhaul of their Fortran compiler (also basing
+it on LLVM), and started making it freely available, though not open source
+(which precludes conda-forge from using it, unless Intel themselves packages
+the compilers for us;
 we [asked](https://github.com/conda-forge/intel-compiler-repack-feedstock/issues/15),
 but there was no timeline).
 
 Furthermore, through the mingw-w64 project, it slowly started to become possible
-to use gfortran with Microsoft's "Universal C Runtime" (UCRT), which would
-essentially ensure ABI-compatibility on Windows.
-Switching out the underlying C library however would represent a major overhaul
-in the MinGW stack for windows within conda-forge, and was also not something
-we could count on to be ready in time.
+to use gfortran with Microsoft's "Universal C Runtime" (UCRT), which is
+essentially the biggest hurdle in achieving ABI-compatibility on Windows.
+However, switching out the underlying C standard library would represent a
+[major](https://github.com/conda-forge/conda-forge.github.io/issues/1654)
+overhaul in the MinGW stack for windows within conda-forge, and was also not
+something we could count on to be ready in time.
 
 For people on the sidelines like ourselves, this turned into something akin to
 "Waiting for Godot" – a seemingly endless period as things kept stretching and
@@ -493,9 +512,8 @@ What ended up happening is that one lone developer managed to custom-build a
 MinGW-based toolchain (in other words, GCC on Windows), carefully adapted to
 use the right-sized integers and to conform to the MSVC ABI.
 This is enough to pass through Meson's sanity checks (after all, it is a
-consistent toolchain), but as explained above, this approach would not have
-been feasible for conda-forge as a whole, at least not without some more heroic
-efforts.
+consistent toolchain), however it is again subtly-yet-crucially different from
+the requirements that would be necessary for wide-spread use in conda-forge.
 
 ## conda-forge and the migration problem
 
@@ -520,7 +538,7 @@ So it looked conceivable that we'd end up in a situation where:
 ## A pious hope
 
 So while the `distutils` removal was coming down the line like an oncoming
-freight train, all we could try to do is cross our fingers that _a_ Fortran
+freight train, all we could try to do is cross our fingers that _one_ Fortran
 compiler would be ready in time (most likely either llvm-flang or LFortran),
 and be as prepared as possible in terms of having all the other pieces ready to
 go – for example, LLVM is a big baby, and keeping the compiler stack up-to-date
@@ -539,13 +557,18 @@ As soon as we had the release candidates built in conda-forge, we tried to throw
 it at SciPy, only to realise that Meson did not support the new Flang yet.
 
 Even worse, it wasn't clear which ABI Flang was using (as mentioned above,
-conda-forge uses the MSVC ABI on Windows everywhere), not least because the
-Clang driver that Flang uses under the hood can target both modes.
-There's also two different standard libraries, two different runtime libraries
-and two different linkers to consider in all this.
+conda-forge uses the default ABI on Windows everywhere), not least because the
+Clang driver which Flang uses under the hood can target both modes.
+Unfortunately, it wasn't clear which mode was being chosen, and generally it
+looked like Windows support was (as often happens in FOSS) the least mature
+platform.
+
+To top it off, there's also two different standard libraries, two different
+runtime libraries (one of which comes in 4 flavours) and two different linkers
+to consider in all this.
 At this point, we still hadn't compiled more than a "Hello World!" example with
-Flang yet, so it wasn't even clear that it could compile all of SciPy, much
-less pass the test suite...
+Flang, so it wasn't even clear that it could compile all of SciPy, much less
+pass the test suite...
 
 ## Eucatastrophe
 
