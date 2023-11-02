@@ -103,46 +103,46 @@ What GCC did was essentially cover an entire column of that matrix, rather than
 just 1-2 cells.
 
 <div class="flex flex-row justify-center">
-<table bgcolor="#efefef" cellpadding="10" border-color="#666666" class="w-[750px]">
-    <thead bgcolor="#00327d">
-        <tr class="border-red border-2">
-            <th>👉 OS<br/>👇CPU Arch.</th>
-            <th>Linux</th>
-            <th>MacOS</th>
-            <th>Windows</th>
-        </tr>
+  <table class="w-[750px] bg-gray-200">
+    <thead class="border border-solid border-gray-700 bg-indigo-900">
+      <tr class="text-left">
+        <th class="w-1/4 px-2 text-white">👉 OS<br />👇CPU Arch.</th>
+        <th class="w-1/4 px-2 align-top text-white">Linux</th>
+        <th class="w-1/4 px-2 align-top text-white">Windows</th>
+        <th class="w-1/4 px-2 align-top text-white">MacOS</th>
+      </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>x86_32</td>
-            <td rowspan="6" bgcolor="#b6d7a8">GCC</td>
-            <td rowspan="3" bgcolor="#c9daf8">Apple Clang</td>
-            <td rowspan="2" bgcolor="#c9daf8">MSVC</td>
-        </tr>
-        <tr>
-            <td>x86_64</td>
-        </tr>
-        <tr>
-            <td>arm64</td>
-            <td border-style="dotted" bgcolor="#c9daf8">(added recently)</td>
-        </tr>
-        <tr>
-            <td>aarch64</td>
-            <td>➖</td>
-            <td>➖</td>
-        </tr>
-        <tr>
-            <td>ppc64le</td>
-            <td>➖</td>
-            <td>➖</td>
-        </tr>
-        <tr>
-            <td>...</td>
-            <td>➖</td>
-            <td>➖</td>
-        </tr>
+      <tr>
+        <td class="border border-solid border-gray-700 px-2">x86_32</td>
+        <td rowspan="6" class="border border-solid border-gray-700 bg-lime-600 px-2 align-middle">GCC</td>
+        <td rowspan="2" class="border-t border-solid border-gray-700 bg-sky-600 px-2 align-middle">MSVC</td>
+        <td rowspan="3" class="border border-solid border-gray-700 bg-sky-600 px-2 align-middle">Apple Clang</td>
+      </tr>
+      <tr>
+        <td class="border border-solid border-gray-700 px-2">x86_64</td>
+      </tr>
+      <tr>
+        <td class="border border-solid border-gray-700 px-2">arm64</td>
+        <td class="border-t-[1.5px] border-dashed border-gray-700 bg-sky-600 px-2">(added recently)</td>
+      </tr>
+      <tr>
+        <td class="border border-solid border-gray-700 px-2">aarch64</td>
+        <td class="border border-solid border-gray-700 px-2">➖</td>
+        <td class="border border-solid border-gray-700 px-2">➖</td>
+      </tr>
+      <tr>
+        <td class="border border-solid border-gray-700 px-2">ppc64le</td>
+        <td class="border border-solid border-gray-700 px-2">➖</td>
+        <td class="border border-solid border-gray-700 px-2">➖</td>
+      </tr>
+      <tr>
+        <td class="border border-solid border-gray-700 px-2">...</td>
+        <td class="border border-solid border-gray-700 px-2">➖</td>
+        <td class="border border-solid border-gray-700 px-2">➖</td>
+      </tr>
     </tbody>
-</table>
+  </table>
 </div>
 
 Of course, GCC remains usable on MacOS (due to shared Unix roots), and there
