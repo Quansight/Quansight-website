@@ -102,9 +102,10 @@ been x86, but that has been changing in recent times).
 What GCC did was essentially cover an entire column of that matrix, rather than
 just 1-2 cells.
 
-<table bgcolor="#efefef" cellpadding="10" border-color="#666666">
+<div class="flex flex-row justify-center">
+<table bgcolor="#efefef" cellpadding="10" border-color="#666666" class="w-[750px]">
     <thead bgcolor="#00327d">
-        <tr color="white">
+        <tr class="border-red border-2">
             <th>👉 OS<br/>👇CPU Arch.</th>
             <th>Linux</th>
             <th>MacOS</th>
@@ -142,6 +143,7 @@ just 1-2 cells.
         </tr>
     </tbody>
 </table>
+</div>
 
 Of course, GCC remains usable on MacOS (due to shared Unix roots), and there
 are ways to make it work on Windows (through cygwin or MinGW), and the whole
