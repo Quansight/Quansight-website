@@ -282,8 +282,8 @@ will build the package from the sources.
 
 Given the size of the ecosystem, not even a company like Anaconda (which grew
 around the needs conda addresses, and is the main driver behind the tool) could
-hope to integrate everything that users wanted, and over time, the community-
-driven conda-forge channel became the place to do this integration work.
+hope to integrate everything that users wanted, and over time, the
+community-driven conda-forge channel became the place to do this integration work.
 Anyone can submit "recipes" for a package that is missing, or provide fixes for
 those that are already being built on so-called "feedstocks".
 
