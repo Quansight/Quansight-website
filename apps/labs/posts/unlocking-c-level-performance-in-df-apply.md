@@ -285,7 +285,7 @@ small_df = pd.DataFrame({"a": [1]})
 Now, let's measure the overhead of the boxing/unboxing of the input DataFrame.
 To do this, we will compare the speed of apply with numba with raw=True and raw=False.
 
-Although, doing a raw apply on the DataFrame still does have some overhead (mainly due to converting the DataFrame into a 2D ndarray),
+Although doing a raw apply on the DataFrame still does have some overhead (mainly due to converting the DataFrame into a 2D ndarray),
 it is minimal compared to the total execution time.
 
 ```python
@@ -302,11 +302,14 @@ it is minimal compared to the total execution time.
 
 We can see here that the difference is several orders of magnitude.
 This is because the unboxing process currently individually unboxes each resultant Series to a Python object
-before running concat.
+before concatenating them together to build the result DataFrame.
 
-The solution to this is to do the concatenation inside of numba, so
+In future pandas releases, this can be optimized by concatenating the results of apply inside of the numba
+engine (which would only require one final unobxing call for the concatenated DataFrame),
+which should bring the speed of apply on Series in numba on par with the speed of
+apply on the raw numpy arrays.
 
-Do note however that this is still much faster than the Python engine, as seen below.
+Despite this, the numba engine is still much faster than the Python engine, as seen below.
 
 ```python
 %timeit df.apply(f, engine="python", axis=1)
