@@ -187,9 +187,6 @@ Unsurprisingly this approach is slower than a compiled program that will just
 run with whatever instructions you've given it (and fail, if any part of the
 ABI is violated).
 
-[^1]: and thus also has an ABI, if you want to speak to Python from another
-compiled language.
-
 This slow-down doesn't matter so much for prototyping, or general scripting,
 but it becomes immensely limiting once there's medium-sized or larger amounts
 of data involved.
@@ -282,9 +279,6 @@ Python tools like pip cannot install conda-packages, yet what conda had done
 did not easily fit into the standardisation-by-consensus model[^2], especially
 because many things essential to conda were considered "out of scope" by the
 wider Python packaging community.
-
-[^2]: coupled with fears (at least initially) that a single company would
-"take over" such a critical piece of the ecosystem.
 
 However, for users and maintainers of packages that are affected by some of the
 deep-seated [issues](https://pypackaging-native.github.io/) in Python packaging,
@@ -538,16 +532,21 @@ So it looked conceivable that we'd end up in a situation where:
 ## A pious hope
 
 So while the `distutils` removal was coming down the line like an oncoming
-freight train, all we could try to do is cross our fingers that _one_ Fortran
-compiler would be ready in time (most likely either llvm-flang or LFortran),
-and be as prepared as possible in terms of having all the other pieces ready to
-go – for example, LLVM is a big baby, and keeping the compiler stack up-to-date
-is a non-negligible effort.
+freight train, all we could try to do was cross our fingers that _one_ Fortran
+compiler would be ready in time (most likely either llvm-flang or LFortran), and
+be as prepared as possible in terms of having all the other pieces ready to go.
+LLVM is a big baby, and keeping all the pieces involved up-to-date is a
+non-trivial exercise already[^3], but we put extra effort into trying to
+identify potential problems with Flang early on, both in our own
+[infrastructure](https://github.com/conda-forge/flang-feedstock/pull/27),
+[as well as](https://github.com/llvm/llvm-project/issues/60730)
+[upstream](https://github.com/llvm/llvm-project/issues/63712).
 
-In addition to that, there are the normal FOSS constraints at play – no-one can
-keep all the required knowledge in their head, so we need other people's
-feedback, but everyone's a volunteer, people have lives and other interests, or
-they're just plain busy with other things.
+But no matter how motivated we were to pursue this, the iron-clad constraints
+of FOSS remain at play: no-one can take care of everything, much less keep all
+the required knowledge in their head.
+That means we need other people's input & feedback – and when everyone's a
+volunteer[^4], things can take a while.
 
 As it happened, the release of LLVM 17.0 was coming up, which would be the first
 release where Flang had matured enough to remove the `-flang-experimental-exec`
@@ -622,3 +621,21 @@ fortune from a seemingly unconquerable situation to an unforeseen victory,
 usually brought by grace rather than heroic effort.
 Such a turn is catastrophic in the sense of its breadth and surprise and
 positive in that a great evil or misfortune is averted."
+
+
+[^1]: and thus also has an ABI, if you want to speak to Python from another
+compiled language.
+
+[^2]: coupled with fears (at least initially) that a single company would
+"take over" such a critical piece of the ecosystem.
+
+[^3]: aside from the fact that we cannot build the whole enchilada in one go
+within the 6h time limit on the relatively modest CI agents that Azure provides
+for free, any substantial change in our LLVM setup needs a lot of care due to
+the sheer number of packages that can be affected by something so deep in the
+stack.
+
+[^4]: i.e. people who have lives and their own interests, or who're just plain
+busy with other urgencies or things they care about more.
+And even though there are people employed to work on some of these projects,
+they almost always aren't paid to solve _your_ problem.
