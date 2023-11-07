@@ -51,14 +51,15 @@ the best performance. It is important to note that nopython mode is not
 guaranteed to compile successfully. This can happen if there are unsupported
 functions or classes which are used in the scope of the `@jit` decorator.
 
-<p align="center">
-    <img
-     alt="Numba schematic showing different stages of compilation."
-     src="numba-schematic.png"/>
-    <br/>
-    <i>How Numba works. Taken from <a href="https://towardsdatascience.com numba-weapon-of-mass-optimization-43cdeb76c7da">here</a>
-.</i>
-</p>
+<center>
+  <img
+    alt="Numba schematic showing different stages of compilation."
+    src="/posts/numba-polynomial-support/numba-schematic.png"
+    class="mb-0 mt-16"
+    />
+  <br/>
+  <i>How Numba works. Taken from <a href="https://towardsdatascience.com numba-weapon-of-mass-optimization-43cdeb76c7da">here</a>.</i>
+</center>
 
 ## Increasing support for NumPy functions in Numba
 
