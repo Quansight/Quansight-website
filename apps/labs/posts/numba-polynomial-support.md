@@ -13,18 +13,26 @@ hero:
   imageAlt: 'An image containing the logos of Numba and NumPy next to each other.'
 ---
 
-Hi, my name is Kristian Minchev. In this blog post, I will be talking about my
-experience as a summer intern at Quansight Labs working on enhancing NumPy
-support in Numba. In particular, my work was focused on adding support for the
-Polynomial class as well as other functions from the polynomial API.
-
-<p float="right">
-  <img alt="Numba logo."
-       src="/posts/numba-polynomial-support/numba_logo.png" width="45%" />
-  <img alt="Quansight Labs logo."
-       src="/posts/numba-polynomial-support/qlabs_logo.png"
-       width="45%" /> 
-</p>
+<div class="flex flex-col lg:flex-row w-full h-[22em] md:h-[20em] lg:h-[10em] gap-y-0 lg:gap-x-10 items-center">
+  <div class="w-full lg:w-3/5">
+    Hi, my name is Kristian Minchev. In this blog post, I will be talking about my
+    experience as a summer intern at Quansight Labs working on enhancing NumPy
+    support in Numba. In particular, my work was focused on adding support for the
+    Polynomial class as well as other functions from the polynomial API.
+  </div>
+  <div class="flex flex-row w-4/5 mr-8 md:mr-0 md:w-3/5 lg:mx-0 lg:w-2/5 lg:self-start">
+    <div class="w-1/2">
+      <img alt="Numba logo."
+          src="/posts/numba-polynomial-support/numba_logo.png" 
+          class="h-[8em] lg:h-1/2 mx-auto lg:mt-4" />
+    </div>
+    <div class="w-1/2">
+      <img alt="Quansight Labs logo."
+          src="/posts/numba-polynomial-support/qlabs_logo.png" 
+          class="h-[8em] lg:h-1/2 mx-auto lg:mt-4" />
+    </div>
+  </div>
+</div>
 
 ## What is Numba?
 
