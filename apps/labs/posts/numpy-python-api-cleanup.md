@@ -1,44 +1,44 @@
 ---
-title: 'Python API cleanup for NumPy 2.0'
-published: October 11, 2023
-author: mateusz-sokol
-description: 'A journey through NumPy's Python API from a maintenance perspective.'
-category: [NumPy]
+title: "Refining NumPy's Python API for its 2.0 release"
+published: November 08, 2023
+authors: [mateusz-sokol]
+description: "A journey through NumPy's Python API from a maintenance perspective."
+category: [PyData ecosystem]
 featuredImage:
-  src: /posts/numpy-python-api-cleanup/numpy-python-api-cleanup-featured.png
-  alt: 'todo'
+  src: /posts/numpy-python-api-cleanup/numpy-python-api-cleanup-logo.png
+  alt: 'NumPy logo.'
 hero:
   imageSrc: /posts/numpy-python-api-cleanup/numpy-python-api-cleanup-hero.png
-  imageAlt: 'todo'
+  imageAlt: 'NumPy logo.'
 ---
 
 To ensure the vitality of well-established libraries, periodic cleanups play an important
-role in maintenance efforts. This is no different to NumPy, which plays a central role in
+role in maintenance efforts. This is also the case for NumPy, which plays a central role in
 the Scientific Python ecosystem. In this blog post, I describe the purpose and key
 achievements of the [NEP 52](https://numpy.org/neps/nep-0052-python-api-cleanup.html)
 workstream, which aimed to clean up NumPy's Python API.
 
 ---
 
-Hi! I'm Mateusz Sokół and for the last three months, I've had the pleasure of
-participating in the Quansight Labs internship program and contributing in multiple ways
-to the Scientific Python ecosystem. My mentors were [Ralf Gommers](https://github.com/rgommers)
-and [Nathan Goldbaum](https://github.com/ngoldbaum) who supervised my work and assisted
-with planning my tasks.
+Hi! I'm [Mateusz Sokół](https://github.com/mtsokol) and for the last three months,
+I've had the pleasure of participating in the Quansight Labs internship program and
+contributing in multiple ways to the Scientific Python ecosystem. My mentors were
+[Ralf Gommers](https://github.com/rgommers) and [Nathan Goldbaum](https://github.com/ngoldbaum)
+who supervised my work and assisted with planning my tasks.
 
-During the program, I mainly focused on working on one of the Numpy Extension Proposals
+During the program, I mainly focused on working on one of the Numpy Enhancement Proposals
 (NEP), specifically NEP 52. This proposal, with its name "Python API cleanup for NumPy
 2.0", was nondistinctive at first glance, but once explored it had a multitude of
 interesting technical challenges and required to make impactful design decisions. It was
 a solid introduction to the internals of NumPy and closely related scientific libraries.
 This NEP also allowed me to collaborate with many engineering teams from other libraries,
-such as JAX, pybind11, and Pandas.
+such as JAX, pybind11, and pandas.
 
 In this short article, I would like to briefly outline the motivation behind NEP 52 and
 its scope. I will then take this opportunity to explain some of the technical issues we
 solved, covering both Python and C code.
 
-As of this moment, the NEP 52 has been accepted and most of the goals have been achieved,
+As of this moment, NEP 52 has been accepted and most of the goals have been achieved,
 but the work is still ongoing!
 
 ---
@@ -62,7 +62,7 @@ the BSD 3-Clause license.
 ## NEP 52 - motivation & scope
 
 Over the course of two decades NumPy's Python API has continually evolved and adapted to
-subsequent versions of Python. As we all know, over time, software often becomes
+the evolution of the Python language. As we all know, over time, software often becomes
 obsolete and public APIs grow larger as new features arrive.
 
 NEP 52 was meant to identify obsolete, duplicated, and deprecated members of Python API
@@ -72,8 +72,9 @@ and remove/rearrange them. This NEP had a few principles in mind:
 * Redundant or misleading aliases for dtypes and functions should be removed.
 * There should be a clear distinction between what is private and what is public
   (the concept of a "semi-private" API member should be avoided).
+* Concretely define the NumPy API and remove internal usages of `import *`.
 
-The desired result was to contribute to a well-defined, unambiguous public API,
+The desired result was to end up with a well-defined, unambiguous public API,
 that is easy for learning and searching through it, with ideally only one way to do
 a specific thing.
 
@@ -81,13 +82,16 @@ Changes that we merged vary in terms of disruption - from aliases removal, which
 fixed by a script, to substantial changes, such as a package name change.
 The top-level list of changes is:
 
-* Remove redundant aliases, such as these that point to `np.inf`: `np.Infinity`,
-  `np.Inf`, `np.INF` and `np.infty`.
-* Remove niche functions and internal constants from the main namespace.
-* Clean `numpy.lib` namespace. Establish well-defined submodules for it.
+* Clarified NumPy's submodule structure and made all submodules accessible through
+  lazy imports,
+* Cleaned `numpy.lib` namespace and establish well-defined submodules for it,
+* Settled on canonical data type names and documented those,
+* Removed redundant aliases, such as these that point to `np.inf`: `np.Infinity`,
+  `np.Inf`, `np.INF` and `np.infty`,
+* Removed niche functions and internal constants from the main namespace,
 * Rename `numpy.core` to `numpy._core` to clearly indicate that this is a private and
-  internal submodule.
-* Remove niche and misleading data type aliases, such as `int0`, `uint0`, `float_`, `a`.
+  internal submodule,
+* Remove niche and misleading data type aliases, such as `int0`, `uint0`, `float_`.
 
 To ensure a smooth migration to NumPy 2.0 we provide several areas where changes are
 communicated/addressed:
@@ -98,7 +102,7 @@ communicated/addressed:
 * Meaningful error messages and deprecation warnings, which can also provide migration
   instructions.
 * Tool for automatic application of changes (originally a `sed` script was considered,
-  but eventually a `ruff` rule will be implemented).
+  but eventually a new `ruff` rule was implemented).
 
 ---
 
@@ -116,8 +120,10 @@ of entries in `np.*` by over 80:
 
 ```python
 >>> import numpy as np
+>>> np.__version__
+'1.26.1'
 >>> len(dir(np))
-595
+594
 ```
 
 And now:
@@ -125,7 +131,7 @@ And now:
 ```python
 >>> import numpy as np
 >>> len(dir(np))
-507
+511
 ```
 
 Each removed item was replaced by an `AttributeError` that contains a migration
@@ -140,13 +146,13 @@ AttributeError: `np.byte_bounds` was removed in the NumPy 2.0 release. Now it's 
 
 ### Guaranteeing backward compatibility
 
-We've already learned several types of Python API changes, such as removing aliases,
+We've already touched on several types of Python API changes, such as removing aliases,
 adding a new member to a namespace, or moving an existing item to a new location.
-Each one of them might cause a different repercussions in downstream libraries that
-heavily depend on NumPy.
+Each one of them have different repercussions in downstream libraries that heavily
+depend on NumPy.
 
-Downstream libraries that required a modification to adjust to the new changes were:
-SciPy, matplotlib, Pandas, JAX, scikit-learn and CuPy. Also, there were some one-time
+Downstream libraries that required modifications to adjust to the API changes were:
+SciPy, Matplotlib, pandas, JAX, scikit-learn and CuPy. Also, there were some one-time
 contributions to pybind11, joblib, and hypothesis libraries. For each one of them we had
 to ensure that we do not narrow applicable NumPy versions down. We had to maintain a
 compatibility with them:
@@ -164,7 +170,7 @@ In our efforts we paid attention to backward compatibility. Libraries, such as S
 run CI stages with both stable and nightly NumPy releases. It is required that we
 continue to support several NumPy releases back, given the latest version of SciPy.
 
-A backward incompatible change required us to, e.g. branch on the dependency version:
+A backward incompatible change required us to, e.g., branch on the dependency version:
 
 ```python
 AxisError: Type[Exception]
@@ -175,7 +181,7 @@ else:
 	from numpy import AxisError
 ```
 
-### Clearing `numpy.lib` namespace
+### Clearing out the `numpy.lib` namespace
 
 One of the goals of NEP 52 was to enforce each function/constant to only be available
 from one location, if possible. It especially concerns `numpy.lib`, whose
@@ -186,23 +192,25 @@ the module and split its members into:
 * Local exports - members available only from the `numpy.lib` or `numpy.lib.<submodule>`.
 
 Members exported to the main namespace ended up in private files, such as
-`numpy.lib._array_utils_impl`, where ones exported locally received dedicated
+`numpy.lib._array_utils_impl`, whereas ones exported locally received dedicated
 submodules, e.g. `numpy.lib.array_utils`.
 
 As a result, the number of members in `numpy.lib` reduced from:
 
 ```python
 >>> import numpy as np
->>> len(dir(np.lib))
-206
+>>> np.__version__
+'1.26.1'
+>>> len([s for s in dir(np.lib) if not s.startswith('_')])
+192
 ```
 
 To:
 
 ```python
 >>> import numpy as np
->>> len(dir(np.lib))
-46
+>>> len([s for s in dir(np.lib) if not s.startswith('_')])
+13
 ```
 
 Now `numpy.lib` hosts only a handful of functions and submodules with well-defined
@@ -211,16 +219,16 @@ purposes.
 ### Renaming `numpy.core` to `numpy._core`
 
 In my opinion, the most challenging task was renaming the `numpy.core` submodule to
-`numpy._core`. It concerned most of the NumPy's source code and affected C-level and
-downstream libraries as well.
+`numpy._core`. `numpy/core` contained most of NumPy's source code, and this change
+affected both downstream libraries and NumPy-internal C code.
 
 In terms of C-level code, it is worth emphasizing that not only does Python use C
-functions through compiled extension modules, but also C code imports NumPy's Python API
-via Python's C-API!
+functions through compiled extension modules, but also C code in NumPy accesses
+functionality implemented in Python directly via `PyImport_XXX`.
 
-For the source code that is compiled into shared objects and extension modules, we only
-had to rename `core` imports to `_core`. A more complex issue appeared for header files
-that are included in third party objects. We wanted to make sure that library/executable
+For the source code that is compiled into extension modules, we only had to rename
+`core` imports to `_core`. A more complex issue appeared for header files that are
+included in third party objects. We wanted to make sure that library/executable
 compiled with numpy 2.0 will work with numpy 1.x installed (and vice versa). For this
 purpose, we used two simple mechanisms:
 
@@ -252,6 +260,13 @@ if (numpy == NULL) {
 }
 ```
 
+**Pickle files compatibility** - Inside pickled arrays there's a `numpy.core.multiarray._reconstruct`
+path which has changed with the rename. To make old pickles loadable for NumPy 2.0
+we rely on `numpy/core` stubs to ensure that relevant functions can be imported.
+To make NumPy 2.0 pickles also loadable for NumPy 1.26.x, we backported `numpy/_core`
+stubs to the maintenance branch. As a result, pickle files can be used without worrying
+about NumPy or pickle versions.
+
 Other libraries have also followed our lead and started working on renaming `core`
 submodule to `_core`, such as Pandas - [(Pandas PR)](https://github.com/pandas-dev/pandas/pull/55429).
 
@@ -272,9 +287,9 @@ The canonical names, that are available in the main namespace and should be used
 a first choice, are "words+bits". These names are unambiguous about which type we're
 referring to, and we make an explicit declaration about precision, leaving no room for
 platform-specific behavior. "Words" that refer to C types should be used when
-interacting with C exctension modules directly.
+interacting with C code outside of NumPy.
 
-### Ruff plugin
+### A Ruff plugin for NumPy 2.0 migration rules
 
 Ruff is a new Python linter that can outperform other well-known linting tools.
 During one of the discussions on Scientific Python Discord server, we came up with
@@ -283,11 +298,11 @@ an automated way to fix a large part of changes - migrating to retained aliases 
 flagging lines that require manual intervention to be compatible with NumPy 2.0.
 
 This assignment gave me the opportunity to write a bit of Rust code, since it is
-the core language for Ruff. As of today, the PR is still open, but the rule is available
-in the local setup and it managed to correctly fix over a hundred of lines of code for
-the latest SciPy release source code.
+the core language for Ruff. As of today, the PR is merged, but the rule is still
+available in the "preview" mode only. In the local setup it managed to correctly fix
+over a hundred of lines of code for the latest SciPy release source code.
 
-The command for running Ruff linter:
+The command for running the Ruff linter:
 
 ```sh
 ruff check scipy/ --no-cache --fix
@@ -314,19 +329,20 @@ than a text-based search only.
 
 ## Wrapping up
 
-The development and maintenance efforts for NumPy package will continue, most notably
-in the Array API area, where full compatibility is still being implemented. The release
-of NumPy 2.0 is planned for end of the year, and only then will the official adoption
-of the new, major version begin.
+My development and maintenance efforts on NumPy will continue, most notably around
+Array API Standard support, where full compatibility is still being implemented.
+The release of NumPy 2.0 is planned for early next year, and only then will the official
+adoption of the new, major version begin.
 
 ---
 
 ## Acknowledgements
 
 I would like to thank my mentors [Ralf Gommers](https://github.com/rgommers) and
-[Nathan Goldbaum](https://github.com/ngoldbaum) for their advices and guidance during
-the whole internship, and [Melissa Weber Mendonça](https://github.com/melissawm) for
-organising and conducting intern cohort meetings. The time spent on NEP 52 was a perfect
+[Nathan Goldbaum](https://github.com/ngoldbaum) for their advice and guidance during
+the whole internship, [Melissa Weber Mendonça](https://github.com/melissawm) for
+organising and conducting intern cohort meetings, and [Sebastian Berg](https://github.com/seberg)
+for PR reviews and explaining NumPy internals. The time spent on NEP 52 was a perfect
 primer to the Scientific Python ecosystem!
 
 I look forward to continuing working on NumPy and other libraries within the community!
@@ -341,5 +357,3 @@ I look forward to continuing working on NumPy and other libraries within the com
 - [`numpy.lib` cleanup tracking issue](https://github.com/numpy/numpy/issues/24507)
 - [`core` to `_core` refactor PR](https://github.com/numpy/numpy/pull/24634)
 - [Ruff NumPy 2.0 rule PR](https://github.com/astral-sh/ruff/pull/7702)
-
-<br />
