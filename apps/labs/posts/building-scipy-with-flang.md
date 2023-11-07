@@ -583,7 +583,18 @@ the first installation too.
 What happened next felt like nothing short of magical – while we were expecting
 test failures, hangs or even crashes, the test suite… just passed 100%?!
 
-!['Screenshot of the first passing test suite with the new flang-built SciPy'](/posts/building-scipy-with-flang/scipy_flang_first_green_CI.png)
+```
+ ........................................................................ [ 99%]
+ .................................................s.......                [100%]
+ = 54987 passed, 2866 skipped, 245 xfailed, 11 xpassed, 1 warning in 979.88s (0:16:19) =
+
+ Resource usage statistics from testing scipy-tests:
+    Process count: 43
+    CPU time: Sys=0:01:20.6, User=0:29:59.3
+    Memory: 1.7G
+    Disk usage: 1.8K
+    Time elapsed: 0:16:24.6
+```
 
 55'000 tests, and not a single failure? When does that ever happen on the first
 try after major surgery?
