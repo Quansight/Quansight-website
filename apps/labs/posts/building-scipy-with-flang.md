@@ -24,7 +24,8 @@ stuff in there!).
 
 It would appear even more "ordinary" that key packages (think `pandas`,
 `matplotlib` etc.) in the ecosystem would have a release compatible with the
-new Python version pretty soon after, and broadly speaking, you would be right.
+new Python version shortly after (or even before based on release candidates!),
+and broadly speaking, you would be right.
 Not that there isn't a huge amount of dedicated maintainers (mostly
 volunteers!) working tirelessly behind the scenes to make that happen,
 but overall, it's a pretty routine situation.
@@ -108,7 +109,7 @@ just 1-2 cells.
         <th class="w-1/4 px-2 text-white">👉 OS<br />👇CPU Arch.</th>
         <th class="w-1/4 px-2 align-top text-white">Linux</th>
         <th class="w-1/4 px-2 align-top text-white">Windows</th>
-        <th class="w-1/4 px-2 align-top text-white">MacOS</th>
+        <th class="w-1/4 px-2 align-top text-white">macOS</th>
       </tr>
     </thead>
     <tbody>
@@ -150,7 +151,7 @@ a 1:1 relationship (i.e. that combination would cover a single cell in the matri
 The matrix also does not cover which programming languages a given compiler is
 able to process, but for simplicity, you can picture C/C++ here.
 
-Of course, GCC remains usable on MacOS (due to shared Unix roots), and there
+Of course, GCC remains usable on macOS (due to shared Unix roots), and there
 are ways to make it work on Windows (through cygwin or MinGW), and the whole
 truth is way more [complicated](https://www.flother.is/til/llvm-target-triple/)
 still.
@@ -201,7 +202,7 @@ reuse that when libraries like NumPy and SciPy wanted to expose such
 functionality to the Python world.
 SciPy additionally also used Fortran code to provide special mathematical
 functions and other mathematical tools like interpolation & integration (it's
-not like those definitions had changed since the 70s…).
+not like the basic math had changed since the 70s…).
 
 However, this came with a terrible price:
 Users needed a compiler to install the package.
@@ -281,13 +282,13 @@ because many things essential to conda were considered "out of scope" by the
 wider Python packaging community.
 
 However, for users and maintainers of packages that are affected by some of the
-deep-seated [issues](https://pypackaging-native.github.io/) in Python packaging,
+[deep-seated issues](https://pypackaging-native.github.io/) in Python packaging,
 it provided a much more powerful solution and got adopted widely (especially in
 scientific computing, though by far not everywhere).
 One key necessity in controlling the interaction of various bits (like ensuring
-the ABI is kept, or packages are recompiled where necessary), is that each
-package has to be integrated into the conda world, by creating a "recipe" that
-will build the package from the sources.
+the ABI is kept consistent, or that packages are recompiled where necessary),
+is that each package has to be integrated into the conda world, by creating a
+"recipe" that will build the package from source.
 
 Given the size of the ecosystem, not even a company like Anaconda (which grew
 around the needs conda addresses, and is the main driver behind the tool) could
@@ -301,7 +302,7 @@ One of the things that complicates matters is that conda-forge – as a
 philosophy – is aiming to support all common platforms, and even some less
 common ones.
 This multiplies the kind of problems a Linux distribution might have by at
-least ~three, because a different set of problems will also appear for MacOS
+least ~three, because a different set of problems will also appear for macOS
 and Windows.
 To have any chance at success, conda-forge uses the platform defaults
 (compiler, standard library, ABI, etc.) wherever possible.
@@ -387,7 +388,7 @@ released.
 
 It's necessary to note that Meson as a build tool has a much broader audience
 than Python developers – it is used widely for C & C++ projects for example (if
-you're on Linux, much of your graphic stack is being built by Meson nowadays).
+you're on Linux, much of your graphics stack is being built with Meson nowadays).
 As part of an overall design ideology to bring some much-needed sanity to this
 space (and especially the world of C/C++ where no uniform solution exists),
 Meson will not let you do things that are sure to go wrong in all but the most
@@ -406,8 +407,8 @@ As of Python 3.12:
 ## Fortran, the revival
 
 While Fortran has long been the butt of the joke in IT departments the world
-over, in a curious twist of fate, it has seen a dramatic resurgence in the last
-decade.
+over, in a curious twist of fate, it has seen a dramatic resurgence over the
+last few years.
 While the reasons for this are not exactly obvious (at least to us!), a few
 possible explanations are:
 
@@ -421,7 +422,7 @@ possible explanations are:
 
 As such, there was renewed vigour in the Fortran compiler space, and several
 important developments happened in short succession.
-For example, PGI / NVidia open sourced a version of pgfortran with a new
+For example, PGI / NVIDIA open sourced a version of pgfortran with a new
 backend based on LLVM (more on that below), which later turned into what's now
 known as "classic" Flang.
 In the process of trying to upstream this into LLVM itself, the compiler got
@@ -429,7 +430,7 @@ rewritten completely (under the name f18), which later turned into "new" Flang
 that eventually got merged into LLVM itself.
 Pretty much at the
 [same time](https://fortran-lang.discourse.group/t/what-is-the-exact-difference-between-llvm-flang-and-lfortran/901/17),
-another group started developing a Fortran-compiler based on LLVM: LFortran.
+another group started developing a Fortran compiler based on LLVM: LFortran.
 
 ## LLVM & Clang
 
@@ -442,13 +443,13 @@ As it happened, the last dimension of universality was tackled by another large
 project that grew from a research project into a fully cross-architecture and
 cross-platform compiler infrastructure (not least because Apple hired its
 founder, with the ostensible goal of having a compiler that was not subject to
-GCC's GPL): LLVM, and it's flagship compiler Clang.
+GCC's GPL): LLVM, and its flagship compiler Clang.
 This was an absolutely massive undertaking, but due to its cross-platform
 nature, permissive licensing, and modular infrastructure, has become _the_
 focal point of efforts around all kinds of compiler development.
 
 Without going into the technical details, LLVM provides several so-called
-"Intermediate Representations" (IR), which are somewhere in between machine
+"Intermediate Representations" (IRs), which are somewhere in between machine
 code and the code that most programmers write, but in a way that is
 language-agnostic.
 In particular, it would be possible to target the LLVM IR from Fortran, and
@@ -476,7 +477,7 @@ the compilers for us;
 we [asked](https://github.com/conda-forge/intel-compiler-repack-feedstock/issues/15),
 but there was no timeline).
 
-Furthermore, through the mingw-w64 project, it slowly started to become possible
+Furthermore, through the Mingw-w64 project, it slowly started to become possible
 to use gfortran with Microsoft's "Universal C Runtime" (UCRT), which is
 essentially the biggest hurdle in achieving ABI-compatibility on Windows.
 However, switching out the underlying C standard library would represent a
@@ -487,7 +488,7 @@ something we could count on to be ready in time.
 For people on the sidelines like ourselves, this turned into something akin to
 "Waiting for Godot" – a seemingly endless period as things kept stretching and
 stretching and stretching out further into the future.
-To give some perspective, things already seemed not "too far out" 3-4 years
+To give some perspective, things already seemed "not too far out" 3-4 years
 [ago](https://github.com/conda-forge/conda-forge.github.io/issues/961#issuecomment-597094501).
 
 At this point you may be asking yourself:
@@ -613,6 +614,9 @@ We cannot realistically thank everyone, but a few call-outs nevertheless:
 - The Flang developers, for providing the world with an open source Fortran
   compiler that also works on Windows.
 
+_We are very grateful that this work was supported in part by a grant from NASA
+to SciPy, scikit-learn, pandas and NumPy, under the NASA ROSES 2020 program._
+
 PS. In case you're still wondering what the "eu" in eucatastrophe
 [means](https://tolkiengateway.net/wiki/Eucatastrophe), it's a neologism coined
 by J. R. R. Tolkien from Greek ευ- "good" and καταστροφή "sudden turn".
@@ -622,6 +626,7 @@ usually brought by grace rather than heroic effort.
 Such a turn is catastrophic in the sense of its breadth and surprise and
 positive in that a great evil or misfortune is averted."
 
+------
 
 [^1]: and thus also has an ABI, if you want to speak to Python from another
 compiled language.
