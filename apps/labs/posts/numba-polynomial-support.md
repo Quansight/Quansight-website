@@ -1,7 +1,7 @@
 ---
 title: 'Adding support for polynomials to Numba'
 authors: [kristian-minchev]
-published: September 18, 2023
+published: November 8, 2023
 description: 'My work was focused on improving NumPy support in Numba, with focus on the polynomial package.'
 category: [PyData ecosystem]
 featuredImage:
