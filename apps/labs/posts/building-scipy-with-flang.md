@@ -19,13 +19,12 @@ hero:
 
 You've probably heard already that Python 3.12 was released recently.
 For a while already, we've been getting new feature releases every year,
-so perhaps this wasn't big news to you (though there's lots of interesting
-stuff in there!).
+so perhaps this wasn't big news to you – though there's lots of interesting
+stuff in there!
 
 It would appear even more "ordinary" that key packages (think `pandas`,
 `matplotlib` etc.) in the ecosystem would have a release compatible with the
-new Python version shortly after (or even before based on release candidates!),
-and broadly speaking, you would be right.
+new Python version shortly after[^5], and broadly speaking, you would be right.
 Not that there isn't a huge amount of dedicated maintainers (mostly
 volunteers!) working tirelessly behind the scenes to make that happen,
 but overall, it's a pretty routine situation.
@@ -37,8 +36,9 @@ have very easily led to no Python 3.12-compatible releases for a long time.
 
 To understand why this was such a lucky coincidence (though we tried our best
 to tip the scales, _a lot_ of luck was necessary), we need to zoom out a bit
-and explore the big players involved in this situation (in the interest of
-brevity, the following recap is going to be incomplete and opinionated).
+and explore the big players involved in this situation.
+Fair warning: In the interest of brevity, the following recap is going to be
+incomplete and opinionated.
 From our perch on the shoulders of giants, let's take a quick look at the
 landscape.
 
@@ -151,10 +151,9 @@ a 1:1 relationship (i.e. that combination would cover a single cell in the matri
 The matrix also does not cover which programming languages a given compiler is
 able to process, but for simplicity, you can picture C/C++ here.
 
-Of course, GCC remains usable on macOS (due to shared Unix roots), and there
-are ways to make it work on Windows (through cygwin or MinGW), and the whole
-truth is way more [complicated](https://www.flother.is/til/llvm-target-triple/)
-still.
+Of course, GCC remains usable on macOS due to shared Unix roots, there are ways
+to make it work on Windows (through cygwin or MinGW), and the whole truth is
+way more [complicated](https://www.flother.is/til/llvm-target-triple/) still.
 But as a first-order approximation, this shouldn't raise too many eyebrows.
 
 Alright, after a full page about compilers, we can hear you thinking:
@@ -201,8 +200,8 @@ with common problems in linear algebra, and so it was an obvious choice to
 reuse that when libraries like NumPy and SciPy wanted to expose such
 functionality to the Python world.
 SciPy additionally also used Fortran code to provide special mathematical
-functions and other mathematical tools like interpolation & integration (it's
-not like the basic math had changed since the 70s…).
+functions and other mathematical tools like interpolation & integration – it's
+not like the basic math had changed since the 70s…
 
 However, this came with a terrible price:
 Users needed a compiler to install the package.
@@ -242,9 +241,9 @@ Letting users just download the sources is problematic, because:
 - if the packages is not just pure Python, the user needs a working compiler
   setup (and the source code needs to be compatible with that setup!), which is
   a huge usability hurdle.
-- there's no reliable metadata (because even something as fundamental as the
-  necessary third-party dependencies used to get populated only once `setup.py`
-  was run).
+- there's no reliable metadata, because even something as fundamental as the
+  necessary third-party dependencies used to get populated only through running
+  `setup.py`.
 
 The alternative – distributing pre-compiled artefacts – is problematic for many
 reasons too, and especially fragile in the face of the above-mentioned ABI.
@@ -252,9 +251,9 @@ Given the impact of breaking the ABI (random crashes, heisenbugs, etc.), doing
 "binary" distribution haphazardly is not an option.
 
 Eventually, a feasible approach for such distribution emerged in the form of
-the "wheel" format (which essentially creates a bubble for each package that
+the "wheel" format, which essentially creates a bubble for each package that
 brings along all the required libraries, but hides them from others through a
-clever mechanism).
+clever mechanism.
 While wheels still have some downsides (especially on the maintainer-side),
 they are a massive improvement over the situation that existed before, and
 nowadays, most Python packages are installable through wheels from PyPI.
@@ -304,21 +303,20 @@ script is ever run.
 
 This introduced an unfortunate bifurcation in the Python world, because other
 Python tools like pip cannot install conda-packages, yet what conda had done
-did not easily fit into the standardisation-by-consensus model[^2], especially
+did not easily fit into the standardisation-by-consensus model[^2], primarily
 because many things essential to conda were considered "out of scope" by the
 wider Python packaging community.
 
 However, for users and maintainers of packages that are affected by some of the
 [deep-seated issues](https://pypackaging-native.github.io/) in Python packaging,
-it provided a much more powerful solution and got adopted widely (especially in
-scientific computing, though by far not everywhere).
+it provided a much more powerful solution and got adopted widely – especially
+in scientific computing, though by far not everywhere.
 While the recipes for conda-packages enable many key features (like ensuring
 the ABI is kept consistent, or that packages are recompiled where necessary),
 this means in turn that integrating a given package into the conda world
 requires creating such a recipe that will build the package from source.
 
-Given the size of the ecosystem, not even a company like Anaconda (which grew
-around the needs conda addresses, and is the main driver behind the tool) could
+Given the size of the ecosystem, not even a company like Anaconda[^6] could
 hope to integrate everything that users wanted, and over time, the
 community-driven conda-forge channel became the place to do this integration work.
 Anyone can [submit](https://github.com/conda-forge/staged-recipes/) recipes
@@ -344,15 +342,13 @@ packages (or some underlying docker images), and that means conda-forge cannot
 use proprietary compilers, but must use what's freely available.
 
 Remember how we discussed above that all Fortran compilers are proprietary
-(except gfortran as part of GCC), and how GCC is not (easily) usable on Windows?
+(except gfortran as part of GCC), and how GCC is not directly usable on Windows?
 This has been a huge issue for conda-forge, especially as the expectation of
 general support on Windows became more and more wide-spread.
 For a very long time, conda-forge was not able to build SciPy at all due to this.
-Instead it had to rely on packages from the Anaconda channels (which doesn't
-have a fully public build infrastructure, and can enter into contracts with
-compiler vendors), until some particularly talented contributors hacked
-together an unholy amalgamation of MSVC (c.f. the default ABI on Windows)
-and gfortran, first in SciPy
+Instead it had to rely on packages from the Anaconda channels[^7], until some
+particularly talented contributors hacked together an unholy amalgamation of
+MSVC (c.f. the default ABI on Windows) and gfortran, first in SciPy
 [itself](https://web.archive.org/web/20210616203153/https://pav.iki.fi/blog/2017-10-08/pywingfortran.html)
 and later on the
 [feedstock](https://github.com/conda-forge/scipy-feedstock/pull/146)
@@ -414,8 +410,7 @@ this far in advance, rather than having an "uh oh" moment once Python 3.12 is
 released.
 
 It's necessary to note that Meson as a build tool has a much broader audience
-than Python developers – it is used widely for C & C++ projects for example (if
-you're on Linux, much of your graphics stack is being built with Meson nowadays).
+than Python developers – it is used widely for C & C++ projects for example[^8].
 As part of an overall design ideology to bring some much-needed sanity to this
 space (and especially the world of C/C++ where no uniform solution exists),
 Meson will not let you do things that are sure to go wrong in all but the most
@@ -453,7 +448,7 @@ For example, PGI / NVIDIA open sourced a version of pgfortran with a new
 backend based on LLVM (more on that below), which later turned into what's now
 known as "classic" Flang.
 In the process of trying to upstream this into LLVM itself, the compiler got
-rewritten completely (under the name f18), which later turned into "new" Flang
+rewritten completely under the name f18, which later turned into "new" Flang
 that eventually got merged into LLVM itself.
 Pretty much at the
 [same time](https://fortran-lang.discourse.group/t/what-is-the-exact-difference-between-llvm-flang-and-lfortran/901/17),
@@ -463,14 +458,14 @@ another group started developing a Fortran compiler based on LLVM: LFortran.
 
 Further up we had looked at a matrix of Operating Systems versus CPU
 architectures, and how most compilers tended to only cover 1-2 "cells", whereas
-GCC covered essentially all possible architectures on Linux (i.e. a whole
-column of the matrix).
+GCC covered essentially all possible architectures on Linux – i.e. a whole
+column of the matrix.
 
 As it happened, the last dimension of universality was tackled by another large
 project that grew from a research project into a fully cross-architecture and
 cross-platform compiler infrastructure (not least because Apple hired its
 founder, with the ostensible goal of having a compiler that was not subject to
-GCC's GPL): LLVM, and its flagship compiler Clang.
+GCC's license): LLVM, and its flagship compiler Clang.
 This was an absolutely massive undertaking, but due to its cross-platform
 nature, permissive licensing, and modular infrastructure, has become _the_
 focal point of efforts around all kinds of compiler development.
@@ -494,15 +489,15 @@ great hope to unblock the general situation regarding the lack of free Fortran
 compilers on Windows.
 Classic Flang already had preliminary support for Windows, but this never fully
 took off, not least as the lion's share of resources behind Flang was
-refocussed on getting the rewritten version (formerly f18) merged into LLVM itself.
+refocussed on getting the rewritten version merged into LLVM itself.
 
 But these were not the only changes happening in this space.
 For example, Intel did a major overhaul of their Fortran compiler (also basing
-it on LLVM), and started making it freely available, though not open source
-(which precludes conda-forge from using it, unless Intel themselves packages
-the compilers for us;
+it on LLVM), and started making it freely available, though not open source.
+Unfortunately this precludes conda-forge from using it, unless Intel themselves
+packages the compilers for us;
 we [asked](https://github.com/conda-forge/intel-compiler-repack-feedstock/issues/15),
-but there was no timeline).
+but there was no timeline.
 
 Furthermore, through the Mingw-w64 project, it slowly started to become possible
 to use gfortran with Microsoft's "Universal C Runtime" (UCRT), which is
@@ -526,14 +521,14 @@ compilers for Windows?"
 
 While SciPy has some amount of funding through grants and such, and could
 conceivably pay for a compiler licence to use for producing wheels, the
-requirements of building things in CI regularly (to avoid the otherwise
-inevitable bitrot) would cost a lot and not be a judicious use of the limited
+requirements of building things in CI regularly – to avoid the otherwise
+inevitable bitrot – would cost a lot and not be a judicious use of the limited
 funds available.
 
 What ended up happening is that one lone developer managed to custom-build a
-MinGW-based toolchain (in other words, GCC on Windows), carefully adapted to
-use the right-sized integers and to conform to the MSVC ABI.
-This is enough to pass through Meson's sanity checks (after all, it is a
+MinGW-based toolchain, carefully adapted to use the right-sized integers and to
+conform to the MSVC ABI.
+This is enough to pass through Meson's sanity checks (after all, GCC is a
 consistent toolchain), however it is again subtly-yet-crucially different from
 the requirements that would be necessary for wide-spread use in conda-forge.
 
@@ -544,8 +539,8 @@ constraints in terms of how large-scale maintenance efforts work, e.g.
 something like rolling out a new Python version.
 Essentially, this means rebuilding all Python-related feedstocks in the order
 how they depend on each other, and the only reasonable way to do it at scale is
-to do all OSes and architectures at the same time (as they're all built
-simultaneously per package).
+to do all OSes and architectures at the same time, as they're all built
+simultaneously per feedstock.
 
 So it looked conceivable that we'd end up in a situation where:
 
@@ -666,11 +661,22 @@ positive in that a great evil or misfortune is averted."
 
 ------
 
+[^5]: or even before, based on Python release candidates!
+
 [^1]: and thus also has an ABI, if you want to speak to Python from another
 compiled language.
 
 [^2]: coupled with fears (at least initially) that a single company would
 "take over" such a critical piece of the ecosystem.
+
+[^6]: which grew around the needs conda addresses, and is the main driver
+behind the tool.
+
+[^7]: Anaconda can afford to have their own build infrastructure, and is able
+to enter into contracts with compiler vendors.
+
+[^8]: if you're on Linux, much of your graphics stack is being built with Meson
+nowadays.
 
 [^3]: aside from the fact that we cannot build the whole enchilada in one go
 within the 6h time limit on the relatively modest CI agents that Azure provides
