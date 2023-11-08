@@ -5,9 +5,9 @@ published: November 8, 2023
 description: 'My work was focused on improving NumPy support in Numba, with focus on the polynomial package.'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/numba-polynomial-support/feature_grayscale-hi_res.png
+  src: /posts/numba-polynomial-support/numba-polynomial-featured-50pct.png
   alt: >
-    An image containing photos of Kristian Minchev, intern at Quansight Labs, and Guilherme Leobas, Kristian's mentor during the internship.
+    An image containing photos of Kristian Minchev, intern at Quansight Labs, and Guilherme Leobas, Kristian's mentor during the internship, plus the Numba and NumPy logos.
 hero:
   imageSrc: /posts/numba-polynomial-support/hero.png
   imageAlt: 'An image containing the logos of Numba and NumPy next to each other.'
