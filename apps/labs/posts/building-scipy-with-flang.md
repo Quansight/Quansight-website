@@ -24,7 +24,7 @@ stuff in there!
 
 It would appear even more "ordinary" that key packages (think `pandas`,
 `matplotlib` etc.) in the ecosystem would have a release compatible with the
-new Python version shortly after[^5], and broadly speaking, you would be right.
+new Python version shortly after[^1], and broadly speaking, you would be right.
 Not that there isn't a huge amount of dedicated maintainers (mostly
 volunteers!) working tirelessly behind the scenes to make that happen,
 but overall, it's a pretty routine situation.
@@ -182,7 +182,7 @@ and on the other hand, this makes Python slow compared to compiled languages.
 Python's duck-typing means it will go through many layers of wrapping and
 fall-backs, before anything actually is executed.
 Sidenote: this process is taken care of by Python's interpreter, which – uh oh…
-– has itself been compiled[^1].
+– has itself been compiled[^2].
 Unsurprisingly this approach is slower than a compiled program that will just
 run with whatever instructions you've given it (and fail, if any part of the
 ABI is violated).
@@ -303,7 +303,7 @@ environment), before the first line of any build script is ever run.
 
 This introduced an unfortunate bifurcation in the Python world, because other
 Python tools like pip cannot install conda-packages, yet what conda had done
-did not easily fit into the standardisation-by-consensus model[^2], primarily
+did not easily fit into the standardisation-by-consensus model[^3], primarily
 because many things essential to conda were considered "out of scope" by the
 wider Python packaging community.
 
@@ -316,7 +316,7 @@ enough control to ensure that the ABI is kept consistent, or that packages are
 recompiled where necessary), this means in turn that integrating a given
 package into the conda world requires creating such a recipe in the first place.
 
-Given the size of the ecosystem, not even a company like Anaconda[^6] could
+Given the size of the ecosystem, not even a company like Anaconda[^4] could
 hope to integrate everything that users wanted, and over time, the
 community-driven conda-forge channel became _the_ place to do this integration
 work.
@@ -340,7 +340,7 @@ On top of that, conda-forge cannot arbitrarily package things where the licence
 does not allow it.
 There is no hidden layer for build tools; anyone can download and install the
 packages that the infrastructure is made of (or the underlying docker images),
-and that means conda-forge cannot use proprietary compilers[^9], but must use
+and that means conda-forge cannot use proprietary compilers[^5], but must use
 what's freely available.
 
 Remember how we discussed above that all Fortran compilers are proprietary
@@ -348,7 +348,7 @@ Remember how we discussed above that all Fortran compilers are proprietary
 This has been a huge issue for conda-forge, especially as the expectation of
 general support on Windows became more and more wide-spread.
 For a very long time, conda-forge was not able to build SciPy at all due to this.
-Instead it had to rely on packages from the Anaconda channels[^7], until some
+Instead it had to rely on packages from the Anaconda channels[^6], until some
 particularly talented contributors hacked together an unholy amalgamation of
 MSVC (c.f. the default ABI on Windows) and gfortran, first in SciPy
 [itself](https://web.archive.org/web/20210616203153/https://pav.iki.fi/blog/2017-10-08/pywingfortran.html)
@@ -411,7 +411,7 @@ and NumPy developers in tackling the issue this far in advance, rather than
 having an "uh oh" moment once Python 3.12 is released.
 
 It's necessary to note that Meson as a build tool has a much broader audience
-than Python developers – it is used widely for C & C++ projects for example[^8].
+than Python developers – it is used widely for C & C++ projects for example[^7].
 As part of an overall design ideology to bring some much-needed sanity to this
 space (and especially the world of C/C++ where no uniform solution exists),
 Meson will not let you do things that are sure to go wrong in all but the most
@@ -464,7 +464,7 @@ column of the matrix.
 
 As it happened, the last dimension of universality was tackled by another large
 project that grew from a research project into a fully cross-architecture and
-cross-platform compiler infrastructure[^10]: LLVM, and its flagship compiler Clang.
+cross-platform compiler infrastructure[^8]: LLVM, and its flagship compiler Clang.
 This was an absolutely massive undertaking, but due to its cross-platform
 nature, permissive licensing, and modular infrastructure, has become _the_
 focal point of efforts around all kinds of compiler development.
@@ -557,7 +557,7 @@ freight train, all we could try to do was cross our fingers that _one_ Fortran
 compiler would be ready in time (most likely either llvm-flang or LFortran), and
 be as prepared as possible in terms of having all the other pieces ready to go.
 LLVM is a big baby, and keeping all the pieces involved up-to-date is a
-non-trivial exercise already[^3], but we put extra effort into trying to
+non-trivial exercise already[^9], but we put extra effort into trying to
 identify potential problems with Flang early on, both in our own
 [infrastructure](https://github.com/conda-forge/flang-feedstock/pull/27),
 [as well as](https://github.com/llvm/llvm-project/issues/60730)
@@ -567,7 +567,7 @@ But no matter how motivated we were to pursue this, the iron-clad constraints
 of FOSS remain at play: no-one can take care of everything, much less keep all
 the required knowledge in their head.
 That means we need other people's input & feedback – and when everyone's a
-volunteer[^4], things can take a while.
+volunteer[^10], things can take a while.
 
 As it happened, the release of LLVM 17.0 was coming up, which would be the first
 release where Flang had matured enough to remove the `-flang-experimental-exec`
@@ -659,36 +659,36 @@ positive in that a great evil or misfortune is averted."
 
 ------
 
-[^5]: or even before, based on Python release candidates!
+[^1]: or even before, based on Python release candidates!
 
-[^1]: and thus also has an ABI, if you want to speak to Python from another
+[^2]: and thus also has an ABI, if you want to speak to Python from another
 compiled language.
 
-[^2]: coupled with fears (at least initially) that a single company would
+[^3]: coupled with fears (at least initially) that a single company would
 "take over" such a critical piece of the ecosystem.
 
-[^6]: which grew around the needs conda addresses, and is the main driver
+[^4]: which grew around the needs conda addresses, and is the main driver
 behind the tool.
 
-[^9]: because their licenses forbid redistribution – which conda-forge wouldn't
+[^5]: because their licenses forbid redistribution – which conda-forge wouldn't
 be able to prevent from happening.
 
-[^7]: Anaconda can afford to have their own build infrastructure, and is able
+[^6]: Anaconda can afford to have their own build infrastructure, and is able
 to enter into contracts with compiler vendors.
 
-[^8]: if you're on Linux, much of your graphics stack is being built with Meson
+[^7]: if you're on Linux, much of your graphics stack is being built with Meson
 nowadays.
 
-[^10]: not least because Apple hired its founder, with the ostensible goal of
+[^8]: not least because Apple hired its founder, with the ostensible goal of
 having a compiler that was not subject to GCC's license.
 
-[^3]: aside from the fact that conda-forge cannot build the whole enchilada in
+[^9]: aside from the fact that conda-forge cannot build the whole enchilada in
 one go within the 6h time limit on the relatively modest CI agents that Azure
 provides for free, any substantial change in our LLVM setup needs a lot of care
 due to the sheer number of packages that can be affected by something so deep
 in the stack.
 
-[^4]: i.e. people who have lives and their own interests, or who're just plain
+[^10]: i.e. people who have lives and their own interests, or who're just plain
 busy with other urgencies or things they care about more.
 And even though there are people employed to work on some of these projects,
 they almost always aren't paid to solve _your_ problem.
