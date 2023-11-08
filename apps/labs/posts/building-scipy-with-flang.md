@@ -231,7 +231,7 @@ It's instructive to check out this
 [historical](https://www.youtube.com/watch?v=AQsZsgJ30AE&t=200s)
 overview, to get a feeling of the many iterations things have gone through.
 
-!['A meme about a difficult choice in Python packaging, with a man unable to decide between two buttons labeled "ABI Hell" and "Users need a compiler"'](/posts/building-scipy-with-flang/ABI_meme.jpg)
+!['A meme about a difficult choice in Python packaging, with a cartoon man sweating under the stress of being unable to decide between two buttons labeled "ABI Hell" and "Users need a compiler"'](/posts/building-scipy-with-flang/ABI_meme.jpg)
 
 One of the biggest problems over the course of this evolution has been
 the question about the right way to distribute a package.
@@ -297,9 +297,9 @@ In many ways, this is what led to the creation of conda:
 
 Conda was designed to take a more holistic view of all the things that are
 required for packaging – including the non-Python bits – and unsurprisingly,
-done in a declarative way, with a "recipe" that lays out explicitly what needs
-to be present in the build environment, before the first line of any build
-script is ever run.
+done in a declarative way. The basis for this is a "recipe" that explicitly
+defines relevant quantities (e.g. what needs to be present in the build
+environment), before the first line of any build script is ever run.
 
 This introduced an unfortunate bifurcation in the Python world, because other
 Python tools like pip cannot install conda-packages, yet what conda had done
@@ -311,14 +311,15 @@ However, for users and maintainers of packages that are affected by some of the
 [deep-seated issues](https://pypackaging-native.github.io/) in Python packaging,
 it provided a much more powerful solution and got adopted widely – especially
 in scientific computing, though by far not everywhere.
-While the recipes for conda-packages enable many key features (like ensuring
-the ABI is kept consistent, or that packages are recompiled where necessary),
-this means in turn that integrating a given package into the conda world
-requires creating such a recipe that will build the package from source.
+While the recipes conda uses are the basis for many key features (e.g. having
+enough control to ensure that the ABI is kept consistent, or that packages are
+recompiled where necessary), this means in turn that integrating a given
+package into the conda world requires creating such a recipe in the first place.
 
 Given the size of the ecosystem, not even a company like Anaconda[^6] could
 hope to integrate everything that users wanted, and over time, the
-community-driven conda-forge channel became the place to do this integration work.
+community-driven conda-forge channel became _the_ place to do this integration
+work.
 Anyone can [submit](https://github.com/conda-forge/staged-recipes/) recipes
 for a package that is missing, or provide fixes for those that are already
 being built on so-called "feedstocks".
@@ -327,8 +328,8 @@ One of the things that complicates matters is that conda-forge – as a
 philosophy – is aiming to support all common platforms, and even some less
 common ones.
 This multiplies the kind of problems a Linux distribution might have by at
-least ~three, because a different set of problems will also appear for macOS
-and Windows.
+least ~three, because very often a _different_ set of problems will appear
+for macOS and Windows.
 To have any chance at success, conda-forge uses the platform defaults
 (compiler, standard library, ABI, etc.) wherever possible.
 
@@ -337,9 +338,10 @@ like those provided by Azure Pipelines, as well as Anaconda footing the bill
 for the hosting and download traffic of all the hosted artefacts.
 On top of that, conda-forge cannot arbitrarily package things where the licence
 does not allow it.
-There is no hidden layer for build tools; anyone can download and install
-packages (or some underlying docker images), and that means conda-forge cannot
-use proprietary compilers, but must use what's freely available.
+There is no hidden layer for build tools; anyone can download and install the
+packages that the infrastructure is made of (or the underlying docker images),
+and that means conda-forge cannot use proprietary compilers[^9], but must use
+what's freely available.
 
 Remember how we discussed above that all Fortran compilers are proprietary
 (except gfortran as part of GCC), and how GCC is not directly usable on Windows?
@@ -404,10 +406,9 @@ pull things off.
 
 To put this effort into context, all this required many, many engineering
 months of highly talented people over the last ~2.5 years.
-Unbeknownst to most, we are benefitting from the great level of foresight and
-involvement in the general ecosystem of the SciPy and NumPy developers in doing
-this far in advance, rather than having an "uh oh" moment once Python 3.12 is
-released.
+Unbeknownst to most, we are benefitting from the great foresight of the SciPy
+and NumPy developers in tackling the issue this far in advance, rather than
+having an "uh oh" moment once Python 3.12 is released.
 
 It's necessary to note that Meson as a build tool has a much broader audience
 than Python developers – it is used widely for C & C++ projects for example[^8].
@@ -423,7 +424,7 @@ As of Python 3.12:
 
 - `distutils` would be gone, and contemporary `setuptools` incompatible with
   `numpy.distutils`.
-- Meson would refuse to work with the hack we had until now.
+- Meson would refuse to work with the hack conda-forge was using.
 - There were no free (and ABI-compatible) Fortran compilers on Windows _at all_.
 
 ## Fortran, the revival
@@ -444,9 +445,9 @@ possible explanations are:
 
 As such, there was renewed vigour in the Fortran compiler space, and several
 important developments happened in short succession.
-For example, PGI / NVIDIA open sourced a version of pgfortran with a new
-backend based on LLVM (more on that below), which later turned into what's now
-known as "classic" Flang.
+For example, PGI / NVIDIA open sourced a version of their compiler called
+pgfortran with a new backend based on LLVM (more on that below), which later
+turned into what's now known as "classic" Flang.
 In the process of trying to upstream this into LLVM itself, the compiler got
 rewritten completely under the name f18, which later turned into "new" Flang
 that eventually got merged into LLVM itself.
@@ -463,9 +464,7 @@ column of the matrix.
 
 As it happened, the last dimension of universality was tackled by another large
 project that grew from a research project into a fully cross-architecture and
-cross-platform compiler infrastructure (not least because Apple hired its
-founder, with the ostensible goal of having a compiler that was not subject to
-GCC's license): LLVM, and its flagship compiler Clang.
+cross-platform compiler infrastructure[^10]: LLVM, and its flagship compiler Clang.
 This was an absolutely massive undertaking, but due to its cross-platform
 nature, permissive licensing, and modular infrastructure, has become _the_
 focal point of efforts around all kinds of compiler development.
@@ -474,19 +473,18 @@ Without going into the technical details, LLVM provides several so-called
 "Intermediate Representations" (IRs), which are somewhere in between machine
 code and the code that most programmers write, but in a way that is
 language-agnostic.
-In particular, it would be possible to target the LLVM IR from Fortran, and
+In particular, it would be possible to target the LLVM IRs from Fortran, and
 then automatically benefit from all the "backends" that do most of the heavy
-optimization work between the IR and the actual CPU architecture.
+optimization work between the IRs and the actual CPU architecture.
 
 This made LLVM an attractive foundation for these new Fortran compiler efforts,
-and both the "new" Flang, as well as LFortran followed this approach, though
-with different aims in what they built on top.
+and both incarnations of Flang as well as LFortran followed this approach,
+though with different aims in what they built on top.
 
 ## Compiler bingo
 
-Together with "classic" Flang, all of these FOSS Fortran compilers attracted
-great hope to unblock the general situation regarding the lack of free Fortran
-compilers on Windows.
+All of these FOSS Fortran compilers attracted great hope to unblock the general
+situation regarding the lack of free Fortran compilers on Windows.
 Classic Flang already had preliminary support for Windows, but this never fully
 took off, not least as the lion's share of resources behind Flang was
 refocussed on getting the rewritten version merged into LLVM itself.
@@ -545,7 +543,7 @@ simultaneously per feedstock.
 So it looked conceivable that we'd end up in a situation where:
 
 - We have no Windows builds for SciPy, because there's no Fortran compiler
-  we can use.
+  conda-forge can use.
 - Not being able to rebuild SciPy for Python 3.12 on Windows would either
   hold up the migration for at least ~1000 packages that depend on SciPy on
   all platforms, or we would have to drop Windows from the Python migration
@@ -585,9 +583,9 @@ Unfortunately, it wasn't clear which mode was being chosen, and generally it
 looked like Windows support was (as often happens in FOSS) the least mature
 platform.
 
-To top it off, there's also two different standard libraries, two different
-runtime libraries (one of which comes in 4 flavours) and two different linkers
-to consider in all this.
+To top it off, there are also two different standard libraries, two different
+runtime libraries and two different linkers to consider in all this – all of
+which had the potential to lead to subtle breakage.
 At this point, we still hadn't compiled more than a "Hello World!" example with
 Flang, so it wasn't even clear that it could compile all of SciPy, much less
 pass the test suite...
@@ -634,7 +632,7 @@ At the end of this journey, we can only marvel at how long and winding the ways
 have been that lead us here.
 Depending on where you draw the line, hundreds or even thousands of person
 years of effort went into the ingredients that were necessary for us to achieve
-the final result (SciPy, Meson, Flang, LLVM, etc.).
+the final result (SciPy, Meson, Flang, LLVM, LAPACK etc.).
 We cannot realistically thank everyone, but a few call-outs nevertheless:
 
 - Ralf Gommers, for tirelessly positive support and for outstanding
@@ -672,17 +670,23 @@ compiled language.
 [^6]: which grew around the needs conda addresses, and is the main driver
 behind the tool.
 
+[^9]: because their licenses forbid redistribution – which conda-forge wouldn't
+be able to prevent from happening.
+
 [^7]: Anaconda can afford to have their own build infrastructure, and is able
 to enter into contracts with compiler vendors.
 
 [^8]: if you're on Linux, much of your graphics stack is being built with Meson
 nowadays.
 
-[^3]: aside from the fact that we cannot build the whole enchilada in one go
-within the 6h time limit on the relatively modest CI agents that Azure provides
-for free, any substantial change in our LLVM setup needs a lot of care due to
-the sheer number of packages that can be affected by something so deep in the
-stack.
+[^10]: not least because Apple hired its founder, with the ostensible goal of
+having a compiler that was not subject to GCC's license.
+
+[^3]: aside from the fact that conda-forge cannot build the whole enchilada in
+one go within the 6h time limit on the relatively modest CI agents that Azure
+provides for free, any substantial change in our LLVM setup needs a lot of care
+due to the sheer number of packages that can be affected by something so deep
+in the stack.
 
 [^4]: i.e. people who have lives and their own interests, or who're just plain
 busy with other urgencies or things they care about more.
