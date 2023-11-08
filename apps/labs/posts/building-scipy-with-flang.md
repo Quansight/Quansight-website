@@ -222,34 +222,48 @@ This situation also happens to be _the_ fundamental problem in Python packaging.
 There's so much complexity hiding under the surface, that actually dealing with
 it in any kind of sane way is really difficult.
 For example, the C & C++ ecosystems never managed to standardise any sort of
-build & distribution mechanism, and since Python is wrapping around a lot of
-C & C++ code, the problems in Python packaging are a _superset_ of what's
-already a hugely pressing issue in C/C++.
+build & distribution mechanism, and since Python is wrapping around basically
+any flavour of C & C++ code, the problems in Python packaging are a _superset_
+of what's already a hugely pressing issue in C/C++.
 
 The packaging world in Python has had to continually reinvent itself in order
 to solve these issues.
-One of the biggest problems, which got solved through the "wheel" format,
-was to avoid users having to compile something to install a package.
+It's instructive to check out this
+[historical](https://www.youtube.com/watch?v=AQsZsgJ30AE&t=200s)
+overview, to get a feeling of the many iterations things have gone through.
 
 !['A meme about a difficult choice in Python packaging, with a man unable to decide between two buttons labeled "ABI Hell" and "Users need a compiler"'](/posts/building-scipy-with-flang/ABI_meme.jpg)
 
-This comes with some substantial downsides, especially on the maintainer-side,
-but overall, it is a massive improvement over the situation that existed before.
-Nowadays, most packages are installable through wheels from PyPI.
-Aside from not needing a compiler, this also means that the installation goes
-much faster, there's better metadata, and so on.
+One of the biggest problems over the course of this evolution has been
+the question about the right way to distribute a package.
+Letting users just download the sources is problematic, because:
 
-The tooling to create these wheels (or to do Python packaging in general)
-underwent many iterations as well.
-At one point in this long [evolution](https://www.youtube.com/watch?v=AQsZsgJ30AE&t=200s),
-`distutils` had emerged as the "one way" to solve things, so much so that it
-even got adopted into the standard library.
+- packages can take a lot of time to build.
+- if the packages is not just pure Python, the user needs a working compiler
+  setup (and the source code needs to be compatible with that setup!), which is
+  a huge usability hurdle.
+- there's no reliable metadata (because even something as fundamental as the
+  necessary third-party dependencies used to get populated only once `setup.py`
+  was run).
 
-However, this was not enough for the Scientific Python community, which had
-bigger problems.
-This [blog](http://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html)
-post by one of the founding contributors of NumPy and SciPy is full of relevant
-anecdotes; here's one quote:
+The alternative – distributing pre-compiled artefacts – is problematic for many
+reasons too, and especially fragile in the face of the above-mentioned ABI.
+Given the impact of breaking the ABI (random crashes, heisenbugs, etc.), doing
+"binary" distribution haphazardly is not an option.
+Eventually, a feasible approach for binary distribution emerged in the form of
+the "wheel" format (which essentially creates a bubble for each package that
+brings along all the required libraries, but hides them from others through a
+clever mechanism).
+While wheels still have some downsides (especially on the maintainer-side),
+they are a massive improvement over the situation that existed before, and
+nowadays, most Python packages are installable through wheels from PyPI.
+
+But wheels were not around yet at the time when the Scientific Python community
+needed to solve some problems they were facing (as well as not versatile enough
+conceptually for solving all the key issues involved).
+This [blog post](http://technicaldiscovery.blogspot.com/2013/12/why-i-promote-conda.html)
+by one of the founding contributors of NumPy and SciPy is full of relevant
+anecdotes:
 
 > We in the scientific python community have had difficulty and a rocky history
 > with just waiting for the Python.org community to solve the [packaging]
@@ -258,10 +272,18 @@ anecdotes; here's one quote:
 > needed Fortran-compiled libraries.
 
 Despite being the product of heroic efforts by many very bright people,
-`numpy.distutils` is generally regarded as a pile of hacks, and has been in
-minimal maintenance mode for years.
-In many ways, this is what led to the creation of conda.
+`numpy.distutils` is generally regarded as a bandaid, and has been in minimal
+maintenance mode for years.
+This is largely due to fundamental limitations inherent in just running a
+script (e.g. `setup.py`), without being able to precisely control in advance
+the conditions under which a package gets built.
 Again from that blog post:
+
+> [...] `numpy.distutils` replaces most of the innards of `distutils` but is
+> still shackled by the architecture and imperative approach to what should
+> fundamentally be a declarative problem.
+
+In many ways, this is what led to the creation of conda:
 
 > Therefore, you can't really address the problem of Python packaging without
 > addressing the core problems of trying to use `distutils` (at least for the
@@ -274,7 +296,11 @@ Again from that blog post:
 ## conda & conda-forge
 
 Conda was designed to take a more holistic view of all the things that are
-required for packaging – including the non-Python bits.
+required for packaging – including the non-Python bits – and unsurprisingly,
+done in a declarative way, with a "recipe" that lays out explicitly what needs
+to be present in the build environment, before the first line of any build
+script is ever run.
+
 This introduced an unfortunate bifurcation in the Python world, because other
 Python tools like pip cannot install conda-packages, yet what conda had done
 did not easily fit into the standardisation-by-consensus model[^2], especially
@@ -285,10 +311,10 @@ However, for users and maintainers of packages that are affected by some of the
 [deep-seated issues](https://pypackaging-native.github.io/) in Python packaging,
 it provided a much more powerful solution and got adopted widely (especially in
 scientific computing, though by far not everywhere).
-One key necessity in controlling the interaction of various bits (like ensuring
+While the recipes for conda-packages enable many key features (like ensuring
 the ABI is kept consistent, or that packages are recompiled where necessary),
-is that each package has to be integrated into the conda world, by creating a
-"recipe" that will build the package from source.
+this means in turn that integrating a given package into the conda world
+requires creating such a recipe that will build the package from source.
 
 Given the size of the ecosystem, not even a company like Anaconda (which grew
 around the needs conda addresses, and is the main driver behind the tool) could
@@ -625,8 +651,8 @@ We cannot realistically thank everyone, but a few call-outs nevertheless:
 - The Flang developers, for providing the world with an open source Fortran
   compiler that also works on Windows.
 
-_We are very grateful that this work was supported in part by a grant from NASA
-to SciPy, scikit-learn, pandas and NumPy, under the NASA ROSES 2020 program._
+_We are also very grateful that this work was supported in part by a grant from
+NASA to SciPy, scikit-learn, pandas and NumPy under the NASA ROSES 2020 program._
 
 PS. In case you're still wondering what the "eu" in eucatastrophe
 [means](https://tolkiengateway.net/wiki/Eucatastrophe), it's a neologism coined
