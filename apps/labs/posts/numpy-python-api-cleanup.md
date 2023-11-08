@@ -1,6 +1,6 @@
 ---
 title: "Refining NumPy's Python API for its 2.0 release"
-published: November 08, 2023
+published: November 8, 2023
 authors: [mateusz-sokol]
 description: "A journey through NumPy's Python API from a maintenance perspective."
 category: [PyData ecosystem]
@@ -68,11 +68,11 @@ obsolete and public APIs grow larger as new features arrive.
 NEP 52 was meant to identify obsolete, duplicated, and deprecated members of Python API
 and remove/rearrange them. This NEP had a few principles in mind:
 
-* Each public function should be available from only one place.
-* Redundant or misleading aliases for dtypes and functions should be removed.
-* There should be a clear distinction between what is private and what is public
+- Each public function should be available from only one place.
+- Redundant or misleading aliases for dtypes and functions should be removed.
+- There should be a clear distinction between what is private and what is public
   (the concept of a "semi-private" API member should be avoided).
-* Concretely define the NumPy API and remove internal usages of `import *`.
+- Concretely define the NumPy API and remove internal usages of `import *`.
 
 The desired result was to end up with a well-defined, unambiguous public API,
 that is easy for learning and searching through it, with ideally only one way to do
@@ -82,26 +82,26 @@ Changes that we merged vary in terms of disruption - from aliases removal, which
 fixed by a script, to substantial changes, such as a package name change.
 The top-level list of changes is:
 
-* Clarified NumPy's submodule structure and made all submodules accessible through
+- Clarified NumPy's submodule structure and made all submodules accessible through
   lazy imports,
-* Cleaned `numpy.lib` namespace and establish well-defined submodules for it,
-* Settled on canonical data type names and documented those,
-* Removed redundant aliases, such as these that point to `np.inf`: `np.Infinity`,
+- Cleaned `numpy.lib` namespace and establish well-defined submodules for it,
+- Settled on canonical data type names and documented those,
+- Removed redundant aliases, such as these that point to `np.inf`: `np.Infinity`,
   `np.Inf`, `np.INF` and `np.infty`,
-* Removed niche functions and internal constants from the main namespace,
-* Rename `numpy.core` to `numpy._core` to clearly indicate that this is a private and
+- Removed niche functions and internal constants from the main namespace,
+- Rename `numpy.core` to `numpy._core` to clearly indicate that this is a private and
   internal submodule,
-* Remove niche and misleading data type aliases, such as `int0`, `uint0`, `float_`.
+- Remove niche and misleading data type aliases, such as `int0`, `uint0`, `float_`.
 
 To ensure a smooth migration to NumPy 2.0 we provide several areas where changes are
 communicated/addressed:
 
-* Clear and succinct release notes for each relevant PR.
-* Migration guide containing all changes with migration instructions (what has changed
+- Clear and succinct release notes for each relevant PR.
+- Migration guide containing all changes with migration instructions (what has changed
   and how it should be addressed in the codebase).
-* Meaningful error messages and deprecation warnings, which can also provide migration
+- Meaningful error messages and deprecation warnings, which can also provide migration
   instructions.
-* Tool for automatic application of changes (originally a `sed` script was considered,
+- Tool for automatic application of changes (originally a `sed` script was considered,
   but eventually a new `ruff` rule was implemented).
 
 ---
@@ -188,8 +188,8 @@ from one location, if possible. It especially concerns `numpy.lib`, whose
 contents were almost fully exported to the main namespace. We did an analysis of
 the module and split its members into:
 
-* Main namespace exports - members exported to the `numpy` namespace.
-* Local exports - members available only from the `numpy.lib` or `numpy.lib.<submodule>`.
+- Main namespace exports - members exported to the `numpy` namespace.
+- Local exports - members available only from the `numpy.lib` or `numpy.lib.<submodule>`.
 
 Members exported to the main namespace ended up in private files, such as
 `numpy.lib._array_utils_impl`, whereas ones exported locally received dedicated
@@ -232,10 +232,10 @@ included in third party objects. We wanted to make sure that library/executable
 compiled with numpy 2.0 will work with numpy 1.x installed (and vice versa). For this
 purpose, we used two simple mechanisms:
 
-|                      | Built with numpy 1.x   | Built with numpy 2.0            |
-|----------------------|------------------------|---------------------------------|
-| numpy 1.x installed  | standard execution     | falls back to second C's import |
-| numpy 2.0 installed  | uses `numpy.core` stub | standard execution              |
+|                     | Built with numpy 1.x   | Built with numpy 2.0            |
+| ------------------- | ---------------------- | ------------------------------- |
+| numpy 1.x installed | standard execution     | falls back to second C's import |
+| numpy 2.0 installed | uses `numpy.core` stub | standard execution              |
 
 **Stubs** - After renaming `numpy.core` submodule to `numpy._core` we did not completely
 remove the former. Instead, we replaced it with a stub module that replicates
@@ -277,11 +277,11 @@ available in the main namespace `np.*` (1) and through `np.dtype(...)` (2).
 The debate on the final form is still ongoing (specifically `np.int_` and `np.uint`) but
 there are several groups of names that are available through (1) or (2):
 
-* words: `float`, `cdouble`, `uint`, `bool`, `object`, `long` ...
-* words+bits: `int16`, `uint8`, `float64`, ...
-* symbols: `p`, `L`, `i`, ...
-* symbols+bytes: `c8`, `i1`, `i2`, ...
-* abstract types: `numeric`, `inexact`, `integer`, ...
+- words: `float`, `cdouble`, `uint`, `bool`, `object`, `long` ...
+- words+bits: `int16`, `uint8`, `float64`, ...
+- symbols: `p`, `L`, `i`, ...
+- symbols+bytes: `c8`, `i1`, `i2`, ...
+- abstract types: `numeric`, `inexact`, `integer`, ...
 
 The canonical names, that are available in the main namespace and should be used as
 a first choice, are "words+bits". These names are unambiguous about which type we're
