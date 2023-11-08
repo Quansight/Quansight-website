@@ -1,7 +1,7 @@
 ---
 title: >
   The 'eu' in eucatastrophe – Why SciPy builds for Python 3.12 on Windows are a minor miracle
-published: November 5, 2023
+published: November 8, 2023
 authors: [axel-obermeier]
 description: 'Moving SciPy to Meson meant finding a different Fortran compiler
 on Windows, which was particularly tricky to pull off for conda-forge. This
