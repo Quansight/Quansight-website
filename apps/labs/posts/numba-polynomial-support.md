@@ -134,7 +134,7 @@ which I followed very closely. The first big task when working on the
 creating a type class called `PolynomialType`, I needed to "show" Numba that
 each instance of the `Polynomial` class should be treated by Numba as if its
 type is `PolynomialType`, using the
-`@typeof_impl.register(np.polynomial.polynomial.Polynomial)` decorator. Another
+`@typeof_impl.register` decorator with `np.polynomial.polynomial.Polynomial` as its argument . Another
 important part is defining the constructor for the `Polynomial` class. We decided
 to add support for `Polynomial(coef)` and `Polynomial(coef, domain, window)` at
 this point. The next step is to define a data model for the new type. That is,
