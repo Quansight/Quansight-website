@@ -250,7 +250,8 @@ The alternative – distributing pre-compiled artefacts – is problematic for m
 reasons too, and especially fragile in the face of the above-mentioned ABI.
 Given the impact of breaking the ABI (random crashes, heisenbugs, etc.), doing
 "binary" distribution haphazardly is not an option.
-Eventually, a feasible approach for binary distribution emerged in the form of
+
+Eventually, a feasible approach for such distribution emerged in the form of
 the "wheel" format (which essentially creates a bubble for each package that
 brings along all the required libraries, but hides them from others through a
 clever mechanism).
@@ -274,9 +275,9 @@ anecdotes:
 Despite being the product of heroic efforts by many very bright people,
 `numpy.distutils` is generally regarded as a bandaid, and has been in minimal
 maintenance mode for years.
-This is largely due to fundamental limitations inherent in just running a
-script (e.g. `setup.py`), without being able to precisely control in advance
-the conditions under which a package gets built.
+This is largely due to fundamental limitations inherent in only having a build
+script (e.g. `setup.py`), without a way to precisely control in advance the
+conditions under which a package gets built.
 Again from that blog post:
 
 > [...] `numpy.distutils` replaces most of the innards of `distutils` but is
@@ -320,7 +321,7 @@ Given the size of the ecosystem, not even a company like Anaconda (which grew
 around the needs conda addresses, and is the main driver behind the tool) could
 hope to integrate everything that users wanted, and over time, the
 community-driven conda-forge channel became the place to do this integration work.
-Anyone can [submit](https://github.com/conda-forge/staged-recipes/) "recipes"
+Anyone can [submit](https://github.com/conda-forge/staged-recipes/) recipes
 for a package that is missing, or provide fixes for those that are already
 being built on so-called "feedstocks".
 
