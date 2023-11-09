@@ -39,23 +39,23 @@ point that most commonplace and popular APIs are now available, including
 n-dimensional array creation, operation, and manipulation, linear algebra,
 fast Fourier transforms (FFTs), and statistics. Given the great progress in
 replicating the NumPy API on GPU, the next step was to port the extensive SciPy
-API to use support GPUs, as well. This has led to several improvements, such as
+API to support GPUs, as well. This has led to several improvements, such as
 sparse array support and spatial computation.
 
 Porting SciPy APIs is a significant undertaking. Until recently, there were
 several modules, such as interpolation and signal processing, that were missing
-or had a partial API coverage and are critical in several scientific
-applications like image, audio processing, weather, radar and spectral analysis,
+or had a partial API coverage and are critical in scientific
+applications like image and audio processing, weather, radar and spectral analysis,
 as well as computational chemistry and sensor design. Given this interest, a
 joint CZI grant (EOSS Cycle 5) was proposed between
 [Preferred Networks](https://www.preferred.jp/en/) and Quansight Labs in order
 to reduce the gap between SciPy and CuPy and to specifically port most of the
-APIs available in the `scipy.interpolate` and `scipy.signal namespaces`.
+APIs available in the `scipy.interpolate` and `scipy.signal` namespaces.
 
 During the first year of the grant work, a team of developers at Quansight Labs
 have teamed up with CuPy maintainers at Preferred Networks to increase the
 coverage of interpolation and signal processing subpackages, where, as of CuPy
-pre-release v13.0-b1, 18 interpolation and more than 100 signal APIs are now
+pre-release 13.0.0b1, 18 interpolation and more than 100 signal APIs are now
 available, including basis splines, regular grid interpolation, and piecewise
 polynomials for the interpolation module and IIR linear filtering,
 filter design, linear time invariant systems, and peak finding for the
@@ -63,7 +63,7 @@ signal processing subpackage.
 
 As expected, all the ported APIs afford a significant performance increase
 relative to the SciPy CPU reference implementations by exploiting the parallel
-nature of GPU kernels against the sequential nature of CPU implementations.
+nature of GPU kernels (whereas CPU implementations are sequential).
 For example, the new CuPy `BSpline` implementation has a nearly 10x performance
 improvement when compared to its corresponding implementation in SciPy,
 and `PPoly` has a 32x performance improvement, representing a huge enhancement
@@ -89,7 +89,7 @@ linear filtering routines, which represent the first time IIR filters can be
 applied on GPUs from Python. As part of this process, some enhancements and
 simplifications were also backported to SciPy, such as a major refactor of
 symmetric IIR filters to leverage IIR linear filtering and second order sections
-rather than dedicated routines that reduplicate code.
+rather than dedicated routines which contained duplicate code.
 
 The following example demonstrates the new capabilities of CuPy in filtering
 multiple signals in parallel using a GPU. For illustrative purposes, we begin
@@ -204,9 +204,9 @@ such as adding special functions for elliptic filters, implementing the
 matrix exponential in the `cupyx.scipy.linalg` namespace, and implementing
 KD-Trees in `cupyx.scipy.spatial`.
 
-This work would not be possible without the help of the
+This work would not have been possible without the help of the
 [cuSignal](https://github.com/rapidsai/cusignal) team at the NVIDIA RAPIDS
-initiative, where more than 36 APIs will be migrated from their project into
+initiative, who agreed to migrate the implementations of over 36 APIs from their project to
 CuPy, thus unifying the GPU signal processing efforts currently available
 in the ecosystem. As part of this migration, cuSignal will be deprecated and
 replaced by the new `cupyx.scipy.signal` module calls. The calls will be
@@ -227,7 +227,7 @@ batch processing of data, and we hope they will be useful to the CuPy community.
 Right now, these additions are being pre-released as part of the beta releases
 of the upcoming CuPy v13.0. We invite you to keep an eye on our tracking issues
 https://github.com/cupy/cupy/issues/7186 and https://github.com/cupy/cupy/issues/7403,
-where you can find more information regarding the implementation discussions,
+where you can find more information on and discussions about implementations,
 as well as the current progress on the remaining functionality of CuPy’s
 interpolation and signal modules. Please feel free to chime in and contribute
 to any discussion or improvement to the project!
