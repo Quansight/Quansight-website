@@ -100,16 +100,13 @@ import cupy as cp
 from cupyx.scipy import signal
 import matplotlib.pyplot as plt
 
-cp.random.seed(2354)
-
 rng = cp.random.default_rng(seed=1234)
 t = cp.linspace(-1, 1, 201)
 t = cp.broadcast_to(t, (4, 201)).copy()
-phase = 10 * cp.random.rand(4, 1) - 5
+phase = 10 * rng.random((4, 1)) - 5
 
 # Define 4 random signals composed of a main component with quadratic time
-# input and two sinusoids with 1.25Hz and 3.85Hz frequencies, plus a DC
-# component.
+# input and two sinusoids with 1.25Hz and 3.85Hz frequencies, plus a DC component.
 main_x = cp.sin(2 * cp.pi * 0.75 * t * (1 - t) + 2.1 + phase)
 ```
 
@@ -137,6 +134,8 @@ x = (main_x +
     0.1 * cp.sin( 2 *cp.pi * 1.25 * t + 1) +
     0.18 * cp.cos(2 * cp.pi * 3.85 * t))
 xn = x + rng.standard_normal(t.shape) * 0.08
+
+# Make sure that input is float32, since it yields a better performance
 xn = xn.astype(cp.float32)
 ```
 
