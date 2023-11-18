@@ -2,7 +2,7 @@
 title: 'Unlocking C-level performance in pandas.DataFrame.apply with Numba'
 authors: [thomas-li]
 published: November 17, 2023
-description: 'A high-level overview of the new numba engine in DataFrame.apply'
+description: 'A quick overview of the new Numba engine in DataFrame.apply'
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/numpy-python-api-cleanup/numpy-python-api-cleanup-featured.png
@@ -16,10 +16,9 @@ hero:
 
 If you've been using pandas for a while, you are probably familiar with the family of `apply` functions in pandas (e.g. `DataFrame.apply`, `Series.apply`, `DataFrameGroupBy.apply`, etc.). For those unaware, these functions allow you to specify a Python function to be called for each row/column of a DataFrame, and then combines and returns the results back to you.
 
-Because everything happens in Python-land, though, apply is usually very slow, and its recommended that you only use it when you cannot find an equivalent
-method that does what you want.
+Because everything happens in Python-land, though, apply is usually very slow, and its recommended that you only use it when you cannot find an equivalent method that does what you want.
 
-In pandas 2.2.0, though, a new engine (`engine="numba"`) option will be added to `DataFrame.apply`, opening up the possibility for fast and parallelizable apply in pandas. It works by using numba, a JIT (just-in-time) compiler that translates your Python/numpy functions into fast machine code when their called, providing a several times speedup compared to the original python engine.
+In pandas 2.2.0, though, a new engine (`engine="numba"`) option will be added to `DataFrame.apply`, opening up the possibility for fast and parallelizable apply in pandas. It works by using numba, a JIT (just-in-time) compiler that translates your Python/numpy functions into fast machine code when their called, providing up to a compared to the original python engine.
 
 So, can I just slap on `engine="numba"` to `DataFrame.apply` and enjoy a free many-times speedup?
 
@@ -28,7 +27,8 @@ So, can I just slap on `engine="numba"` to `DataFrame.apply` and enjoy a free ma
 + df.apply(f, engine="numba")
 ```
 
-Well, not quite. Because of the way that numba/the numba engine inside pandas works, there are several caveats and gotchas to keep in mind to obtain this speedup.
+Well, not quite. Because of the way that numba/the numba engine inside pandas works, there are several caveats
+to keep in mind to obtain this speedup.
 
 TLDR:
 Use apply only when you have to (e.g. there is no corresponding method or chain of pandas methods that do that you want).
@@ -37,15 +37,31 @@ Use apply only when you have to (e.g. there is no corresponding method or chain 
 
 Currently, in pandas, there are currently two implementations of the numba engine inside of apply, one for `raw=True`, and one for `raw=False` (the default).
 
-If you didn't know already, passing in `raw=True` to `DataFrame.apply` tells pandas to pass in numpy arrays, not pandas Series to the functions you pass into apply. Because, numba itself supports numpy arrays natively, in general, every function runnable with the `Python` engine, should also be runnable with the `numba` engine, as long as you stick to the [supported numpy features](https://numba.readthedocs.io/en/latest/reference/numpysupported.html) inside numba.
+If you didn't know already, passing in `raw=True` to `DataFrame.apply` tells pandas to pass in numpy arrays, not pandas Series, to the functions you pass into apply. Because, numba itself supports numpy arrays natively, in general, every function runnable with the `python` engine, should also be runnable with the `numba` engine, as long as you stick to the [supported numpy features](https://numba.readthedocs.io/en/latest/reference/numpysupported.html) inside numba.
 
-When `raw=False` is passed in or no `raw` parameter is passed in, we must "mock" the pandas `Series` object that would normally get passsed in, since numba doesn't natively support pandas DataFrames. This means that while most functions passed into apply with work with the numba engine out of the box with `raw=False`, some functions may require modifications, as the "mocked" DataFrame does not implement the entire pandas API.
+When `raw=False`, apply operates on the pandas Series representations of rows/columns, which won't work by default, since numba doesn't recognize
+pandas objects or functions. We could work around this by breaking down DataFrame/Series into their values and indices (like we do in Groupby methods that support numba UDFs, e.g. [transform](https://pandas.pydata.org/docs/reference/api/pandas.core.groupby.DataFrameGroupBy.transform.html)).
+
+Unfortunately, this approach would require users to rewrite their code to use numba, which can be a pretty big barrier to adoption.
+
+To work around this limitation, we can use numba's [extension API](https://numba.readthedocs.io/en/stable/extending/index.html), to teach numba
+to operate on pandas Series/DataFrames.
+
+In essence, what we can do through this API, is define a equivalent data structure for the internals of a pandas Series inside numba, and also
+define numba equivalents of the pandas Series methods that we want. Through this, we can create a "mocked" version of a pandas Series, that
+JITed numba code can access. Now, we can create pandas Series inside numba. Finally, we need to define a way to convert to and from the numba
+representation by using numba's boxing/unboxing APIs, which is fairly straightforward as we can unwrap Numpy-backed Series into numpy arrays,
+for the index, and for the values.
+
+One thing that's important to note with this approach is that these APIs usually operate at a pretty low level, and as per usual for numba code, we have no access to the original pandas Python object in numba-land. This means that whatever we don't define in our mocked dataframe will not be available to use in a JITed numba function and will raise an error at compile-time (see the supported features section for more info)
+
+If you're curious about what this looks like, check out the [implementation](https://github.com/pandas-dev/pandas/blob/main/pandas/core/_numba/extensions.py) in pandas to learn more.
 
 ### Supported features
 
 To summarize the existing support as of pandas 2.2.0, the `numba` engine in df.apply supports:
 
-- Numeric numpy arrays
+- Numeric columns/rows
 - Series methods \*
   - In general, all methods that have a numpy equivalent (e.g. mean) are supported
   - Other more complex methods are generally unsupported.
@@ -65,7 +81,7 @@ arrays, datetime/timedelta arrays, or string arrays.
 
 However, it is anticipated that these and other features will be added, as the numba engine matures and pickes up adoption.
 
-Because of limitations within numba, the numba engine will not support:
+Because of limitations within numba, the numba engine will never support:
 
 - Any Python/numpy operations not supported by numba
   - It's important to note that numba only compiles a subset of valid Python code.
@@ -228,23 +244,21 @@ we will use a simple function that returns the input Series without modification
 ```
 
 ```python
-# Timing the compilation time
-# To estimate this, we will use the numba engine on a very small DataFrames
+>>> # Timing the compilation time
+>>> # To estimate this, we will use the numba engine on a very small DataFrames
 >>> small_df = pd.DataFrame({"a": [1]})
+>>> %time small_df.apply(f, engine="numba", axis=1)
 >>> %time small_df.apply(f, engine="numba", axis=1)
 
 CPU times: user 2.67 s, sys: 201 ms, total: 2.87 s
 Wall time: 3.21 s
-```
-
-```python
-# Notice how the compilation overhead disappears on the second run
-# because of the caching of the compiled function
->>> %time small_df.apply(f, engine="numba", axis=1)
 
 CPU times: user 1.31 ms, sys: 21 µs, total: 1.33 ms
 Wall time: 1.33 ms
 ```
+
+Notice how the compilation overhead disappears on the second run
+because of the caching of the compiled function.
 
 Now, let's measure the overhead of the boxing/unboxing of the input DataFrame.
 To do this, we will compare the speed of apply with numba with raw=True and raw=False.
@@ -265,7 +279,7 @@ it is minimal compared to the total execution time.
 307 µs ± 44.3 µs per loop (mean ± std. dev. of 7 runs, 1 loop each)
 ```
 
-We can see here that the difference is several orders of magnitude.
+We can see here that several order of magnitude of difference between `raw=True`, and `raw=False`.
 This is because the unboxing process currently individually unboxes each resultant Series to a Python object
 before concatenating them together to build the result DataFrame.
 
@@ -274,7 +288,7 @@ engine (which would only require one final unobxing call for the concatenated Da
 which should bring the speed of apply on Series in numba on par with the speed of
 apply on the raw numpy arrays.
 
-While the numba engine is a fair bit slower in this case, compared to the Python engin,
+For reference, here is the same function run with the Python engine.
 
 ```python
 >>> %timeit -n 20 df.apply(f, engine="python", axis=1)
