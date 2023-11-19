@@ -132,8 +132,7 @@ We will perform 4 tests here on:
 
 All tests are performed with numba 0.58.1.
 
-<details>
-    <summary>DataFrame Creation Code</summary>
+First let's create our DataFrame.
 
 ```python
 import pandas as pd
@@ -144,12 +143,7 @@ np.random.seed(42)
 size = int(10**4)
 
 df = pd.DataFrame({"a": np.random.randn(size), "b": np.random.randint(0, size, size), "c": np.random.randn(size)})
-```
-
-</details>
-
-```python
-df
+df.head(3)
 ```
 
 <div>
@@ -181,57 +175,9 @@ df
         <td>5150</td>
         <td>-0.533877</td>
       </tr>
-      <tr>
-        <th>3</th>
-        <td>1.523030</td>
-        <td>1697</td>
-        <td>-0.592459</td>
-      </tr>
-      <tr>
-        <th>4</th>
-        <td>-0.234153</td>
-        <td>5885</td>
-        <td>0.355951</td>
-      </tr>
-      <tr>
-        <th>...</th>
-        <td>...</td>
-        <td>...</td>
-        <td>...</td>
-      </tr>
-      <tr>
-        <th>9995</th>
-        <td>1.301102</td>
-        <td>9250</td>
-        <td>-1.044473</td>
-      </tr>
-      <tr>
-        <th>9996</th>
-        <td>-1.998345</td>
-        <td>7004</td>
-        <td>0.121797</td>
-      </tr>
-      <tr>
-        <th>9997</th>
-        <td>-0.705317</td>
-        <td>9198</td>
-        <td>0.154088</td>
-      </tr>
-      <tr>
-        <th>9998</th>
-        <td>0.495766</td>
-        <td>1220</td>
-        <td>-0.495612</td>
-      </tr>
-      <tr>
-        <th>9999</th>
-        <td>0.644388</td>
-        <td>4661</td>
-        <td>-0.419253</td>
-      </tr>
     </tbody>
   </table>
-  <p>10000 rows × 3 columns</p>
+  <p>3 rows × 3 columns</p>
 </div>
 
 #### Measuring compilation and boxing/unboxing overhead
@@ -250,11 +196,11 @@ we will use a simple function that returns the input Series without modification
 >>> %time small_df.apply(f, engine="numba", axis=1)
 >>> %time small_df.apply(f, engine="numba", axis=1)
 
-CPU times: user 2.67 s, sys: 201 ms, total: 2.87 s
-Wall time: 3.21 s
+CPU times: user 1.97 s, sys: 175 ms, total: 2.15 s
+Wall time: 2.43 s
 
-CPU times: user 1.31 ms, sys: 21 µs, total: 1.33 ms
-Wall time: 1.33 ms
+CPU times: user 1.11 ms, sys: 39 µs, total: 1.15 ms
+Wall time: 1.14 ms
 ```
 
 Notice how the compilation overhead disappears on the second run
@@ -270,13 +216,13 @@ it is minimal compared to the total execution time.
 >>> df.apply(f, engine="numba", axis=1) # warmup run to avoid JIt compilation
 >>> %timeit -n 20 df.apply(f, engine="numba", axis=1)
 
-333 ms ± 29 ms per loop (mean ± std. dev. of 7 runs, 20 loops each)
+167 ms ± 901 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
 ```
 
 ```python
 >>> %timeit df.apply(f, engine="numba", axis=1, raw=True)
 
-307 µs ± 44.3 µs per loop (mean ± std. dev. of 7 runs, 1 loop each)
+236 µs ± 3.77 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
 ```
 
 We can see here that several order of magnitude of difference between `raw=True`, and `raw=False`.
@@ -288,17 +234,17 @@ engine (which would only require one final unobxing call for the concatenated Da
 which should bring the speed of apply on Series in numba on par with the speed of
 apply on the raw numpy arrays.
 
-For reference, here is the same function run with the Python engine.
+Despite this, the numba engine is still able to match the speed of the Python engine
 
 ```python
 >>> %timeit -n 20 df.apply(f, engine="python", axis=1)
 
-185 ms ± 6.63 ms per loop (mean ± std. dev. of 7 runs, 20 loops each)
+166 ms ± 1.52 ms per loop (mean ± std. dev. of 7 runs, 20 loops each)
 ```
 
 #### Indexing Performance
 
-Here, we wil do a very simple test of selecting a column/row, followed by a more complex example
+Here, we will do a very simple test of selecting a column/row, followed by a more complex example
 of taking the square of the difference of two columns.
 
 ```python
@@ -307,8 +253,8 @@ of taking the square of the difference of two columns.
 >>> %timeit -n 20 df.apply(f, engine="numba", axis=1)
 >>> %timeit -n 20 df.apply(f, engine="python", axis=1)
 
-20.6 ms ± 1.39 ms per loop (mean ± std. dev. of 7 runs, 20 loops each)
-40.6 ms ± 1.19 ms per loop (mean ± std. dev. of 7 runs, 20 loops each)
+20.1 ms ± 431 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
+38.7 ms ± 302 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
 ```
 
 ```python
@@ -317,8 +263,8 @@ of taking the square of the difference of two columns.
 >>> %timeit -n 20 df.apply(f, engine="numba", axis=0)
 >>> %timeit -n 20 df.apply(f, engine="python", axis=0)
 
-1.17 ms ± 168 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
-247 µs ± 18.6 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
+941 µs ± 14.9 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
+199 µs ± 8.26 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
 ```
 
 ```python
@@ -327,11 +273,20 @@ of taking the square of the difference of two columns.
 >>> %timeit -n 20 df.apply(f, engine="numba", axis=1)
 >>> %timeit -n 20 df.apply(f, engine="python", axis=1)
 
-25.5 ms ± 8.09 ms per loop (mean ± std. dev. of 7 runs, 20 loops each)
-63.7 ms ± 3.33 ms per loop (mean ± std. dev. of 7 runs, 20 loops each)
+25 ms ± 6.84 ms per loop (mean ± std. dev. of 7 runs, 20 loops each)
+57.1 ms ± 432 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
 ```
 
+numba outperforms the Python engine when selecting columns by 2-3x, but is slower when selecting
+rows. This is probably because there are only 3 columns to apply our function to, but in the future
+this could be optimized to at least be somewhat on par with the Python engine in the future.
+
 #### Normalization example
+
+Now, let's try a more complicated example where we normalize each row.
+
+Here, numba really shines, providing roughly a 10x speedup over the Python
+engine.
 
 NOTE: Because, numba only supports ddof=0,
 we are not using the `std` method on a Series (since that defaults to ddof = 1).
@@ -344,9 +299,13 @@ we are not using the `std` method on a Series (since that defaults to ddof = 1).
 >>> %timeit -n 10 df.apply(f, engine="numba", axis=1)
 >>> %timeit -n 10 df.apply(f, engine="python", axis=1)
 
-349 ms ± 19.3 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
-2.68 s ± 184 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+169 ms ± 1.54 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+2.18 s ± 114 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
 ```
+
+Your mileage will vary depending on the number of items you're applying on though.
+Running the same function over the columns, yields only roughly a 37% speedup, because
+there are only three columns.
 
 ```python
 f = lambda x: (x - x.mean()) / (np.std(x.values))
@@ -354,42 +313,32 @@ df.apply(f, engine="numba", axis=0) # warmup run to avoid JIT compilation
 %timeit -n 20 df.apply(f, engine="numba", axis=0)
 %timeit -n 20 df.apply(f, engine="python", axis=0)
 
-The slowest run took 5.83 times longer than the fastest. This could mean that an intermediate result is being cached.
-2.68 ms ± 1.71 ms per loop (mean ± std. dev. of 7 runs, 20 loops each)
-2.93 ms ± 895 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
+708 µs ± 26.6 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
+1.13 ms ± 86.5 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
 ```
 
 #### Performance comparison between raw=True/raw=False
 
-We will now look at how performance differs with the numba engine when raw=True and raw=False.
+We will now look at how performance differs with the numba engine when raw=True and raw=False, using the
+same normalization function from before.
 
-We'll also look at when parallel apply can provide a speedup, compared to regular DataFrame functions.
+We'll also look at when parallel apply (only available when `raw=True`) can provide a speedup,
+compared to regular DataFrame functions.
 
-First, let's take a look at the speed of our apply function when raw is False, to provide a baseline.
-
-```python
->>> # Now on the raw data (ndarrays instead of Series)
->>> raw_f = lambda x: (x-x.mean()) / x.std()
->>> df.apply(f, engine="numba", axis=1, raw=False) # warmup run to avoid JIT compilation
->>> %timeit -n 20 df.apply(f, engine="numba", axis=1, raw=False)
-
-415 ms ± 25.1 ms per loop (mean ± std. dev. of 7 runs, 20 loops each)
-```
-
-And now, the raw performance.
-
-Notice as with before how operating on raw values is much faster than operating on the Series itself.
+Previously, we had around 169ms in execution time for `raw=False`.
+Now, let's check out the performance when `raw=True`.
 
 ```python
 >>> df.apply(raw_f, engine="numba", axis=1, raw=True, engine_kwargs={"parallel": False}) # warmup to avoid JIT compilation
 >>> %timeit -n 20 df.apply(raw_f, engine="numba", axis=1, raw=True, engine_kwargs={"parallel": False})
 
-2.17 ms ± 32.5 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
+1.48 ms ± 70.3 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
 ```
 
+Notice as with before how operating on raw values is much faster than operating on the Series itself.
 Now, let's trying operating in parallel.
 
-Here, we can see roughly a 5x speedup over just using raw.
+Here, we can see roughly a 6x speedup over just using raw.
 (Again, this was performed on my 2019 Intel MacBook Pro with 6 cores.)
 
 ```python
@@ -400,7 +349,7 @@ Here, we can see roughly a 5x speedup over just using raw.
 OMP: Info #276: omp_set_nested routine deprecated, please use omp_set_max_active_levels instead.
 
 
-345 µs ± 28.5 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
+289 µs ± 15.5 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
 ```
 
 Finally, for comparison's sake, let's look at the Python performance with raw=True, and also the
@@ -409,10 +358,10 @@ time it takes for the vectorized equivalents.
 ```python
 >>> %timeit -n 20 df.sub(df.mean(axis=1), axis=0).div(df.std(ddof=0, axis=1), axis=0)
 
-3.66 ms ± 670 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
+3.25 ms ± 600 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
 ```
 
-In this case, parallel apply with raw=True provided a good speedup, however,
+In this case, parallel apply with raw=True provided a good speedup (~10x), however,
 this is not guaranteed to happen in all cases.
 
 A good rule of thumb to follow is that if there already exists a numpy/pandas function
@@ -436,13 +385,12 @@ performance improvement with numba above.
 >>> %timeit -n 20 df.mean(axis=1)
 >>> %timeit -n 20 df.values.mean(axis=1)
 
-181 µs ± 45.5 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
-1.69 ms ± 72.9 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
-93.4 µs ± 13.4 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
+160 µs ± 24.4 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
+1.59 ms ± 60 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
+77.8 µs ± 6.11 µs per loop (mean ± std. dev. of 7 runs, 20 loops each)
 ```
 
-Here, we can see that although numba beats the pandas mean function (it's a bit slower than the numpy version because it does some extra work),
-it loses to the numpy mean function, illustrating the point above.
+Here, we can see that although numba beats the pandas mean function by ~10x (it's a bit slower than the numpy version because it does some extra work), it's 2x slower than the numpy version, illustrating the point above.
 
 ## Conclusion
 
