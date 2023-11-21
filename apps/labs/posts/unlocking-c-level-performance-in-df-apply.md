@@ -396,16 +396,13 @@ To conclude our analysis, let's finish with a log-log plot running the normaliza
 1,000,000 rows, but you can run the script for larger sizes yourself if you'd like)
 
 ```python
-import numpy as np
-import pandas as pd
-import timeit
 import matplotlib.pyplot as plt
 
 f = lambda x: (x - x.mean()) / (np.std(x.values))
 raw_f = lambda x: (x-x.mean()) / x.std()
 
 def time_numba(timing_func, func_name, save=False):
-    def time_sizes(kwargs, engine_kwargs, n_loops=10000):
+    def time_sizes(kwargs, engine_kwargs, n_loops=200):
         times = []
         for size in sizes:
             times.append(timing_func(size, kwargs=kwargs, engine_kwargs=engine_kwargs, n_loops=n_loops))
@@ -413,8 +410,10 @@ def time_numba(timing_func, func_name, save=False):
         return times
 
 
-    sizes = 2**np.arange(2, 20)  # 2**16 -> ~65000,  2**22 -> ~4e6
-    n_loops = 10000
+    #sizes = 2**np.arange(2, 20)  # 2**16 -> ~65000,  2**22 -> ~4e6
+    # Running for sizes about
+    # 500, 1k, 15k, 130k, ~1mil
+    sizes = [2**7, 2**9, 2**10, 2**14, 2**17, 2**20]
 
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(8, 6))
 
@@ -422,14 +421,17 @@ def time_numba(timing_func, func_name, save=False):
                      ({"engine": "numba", "raw": False},{}),
                      ({"engine": "numba", "raw": True},{}),
                      ({"engine": "numba", "raw": True},{"parallel": True})]
-    for kwargs, engine_kwargs in full_kwargs:
+    # We also set n_loops, otherwise
+    # the Python engine will take way to long on the larger sizes
+    n_loops_lst = [1, 1, 1, 1]
+    for (kwargs, engine_kwargs), n_loops in zip(full_kwargs, n_loops_lst):
         label_dict = kwargs.copy()
         label_dict.update(engine_kwargs)
         ax.loglog(sizes, time_sizes(kwargs, engine_kwargs, n_loops), 'o-', label=str(label_dict))
 
         ax.grid(True)
         ax.set_xlabel('DataFrame size')
-        ax.set_ylabel('Time per {} loops (sec))'.format(n_loops))
+        ax.set_ylabel('Time taken')
         ax.set_title('{}'.format(func_name))
 
     ax.legend(loc='best', numpoints=1)
@@ -441,16 +443,13 @@ def time_numba(timing_func, func_name, save=False):
 
 def time_normalization(size, kwargs, engine_kwargs, n_loops):
     df = pd.DataFrame({"a": np.random.randn(size), "b": np.random.randint(0, size, size), "c": np.random.randn(size)})
-    # Timeit doesn't figure out number of repetitions automatically,
-    # unless used via `python -m timeit`
-    div = np.log2(size)
     if "raw" in kwargs and kwargs["raw"]:
         func = raw_f
     else:
         func = f
     namespace = locals().copy()
-    expr = "df.apply(func, **kwargs, engine_kwargs=engine_kwargs)"
-    return div * min(timeit.repeat(expr, number=int(n_loops/div), globals=namespace))
+    expr = "df.apply(func, axis=1, **kwargs, engine_kwargs=engine_kwargs)"
+    return min(timeit.repeat(expr, number=n_loops, globals=namespace)) / n_loops
 
 fig, axes = time_numba(time_normalization, 'Scaling of apply with normalization UDF', save=False)
 plt.show()
@@ -458,8 +457,9 @@ plt.show()
 
 <img src='/posts/unlocking-c-level-performance-in-df-apply/loglogplot.png' alt="A log log plot of the normalization function being ran with various sizes"></img>
 
-As we can see, the numba engine is pretty consistently faster than the Python engine from the get go, and using the parallel mode of the numba engine
-with `raw=True`, starts to become worth it after around 10,000 rows.
+As we can see, the numba engine is pretty consistently faster than the Python engine from the get go, even from small sizes of ~100 rows.
+Parallel mode also matches the speed of the non parallel mode at small sizes (for this particular functio at least, you might see a slowdown
+for others), and starts to provide good speedups for DataFrames with greater than 10,000 rows.
 
 ## Conclusion
 
