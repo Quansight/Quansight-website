@@ -1,6 +1,6 @@
 ---
 title: 'Improving the interpolation and signal processing capabilities of CuPy'
-published: November 20, 2023
+published: November 23, 2023
 authors: [edgar-margffoy]
 description: 'We are excited to spread the news about the improvements that have been taking place in CuPy, where 18 interpolation and more than 100 signal processing parallel GPU APIs are now available as part of a EOSS4 CZI grant.'
 category: [GPU, PyData Ecosystem, CuPy]
