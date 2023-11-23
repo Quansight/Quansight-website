@@ -1,7 +1,7 @@
 ---
 title: 'Doctesting for PyData Libraries'
 authors: [sheila-kahwai]
-published: September 30, 2023
+published: October 30, 2023
 description: 'The journey of a PyData Newbie'
 category: [Developer workflows]
 featuredImage:
