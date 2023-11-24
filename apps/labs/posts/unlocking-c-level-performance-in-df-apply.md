@@ -1,7 +1,7 @@
 ---
 title: 'Unlocking C-level performance in pandas.DataFrame.apply with Numba'
 authors: [thomas-li]
-published: November 17, 2023
+published: November 24, 2023
 description: 'A quick overview of the new Numba engine in DataFrame.apply'
 category: [PyData ecosystem]
 featuredImage:
@@ -42,7 +42,9 @@ Well, not quite. Because of the way that Numba and the numba engine inside
 pandas work, there are several caveats to keep in mind to obtain this speedup.
 
 TL;DR: Use `apply` only when you have to (e.g. there is no corresponding method
-or chain of pandas methods that do that you want).
+or chain of pandas methods that do that you want). If you absolutely have to, 
+then engine='numba' may help get better performance
+
 
 ## How the Numba engine works
 
@@ -525,11 +527,18 @@ data) in pandas 2.2 and above.
 It does this by "mocking" the Series object passed in to your function. This is
 necessary because Numba code cannot access the methods on a Series like Python
 code can - each Numba equivalent must either be rewritten or wrap the logic
-behind the original method.
+behind the original method. For users, this means that some Series functionality
+may be missing from the "mocked" Series object, so not all functions will compile
+out of the box with the "numba" engine.
 
-It also opens up the door to parallel `DataFrame.apply`, when operating on the
-raw values of the DataFrame, which is super exciting as this has been a highly
-requested feature in pandas over the years.
+The numba engine also opens up the door to parallel `DataFrame.apply` when
+operating on the raw values of the DataFrame (with `raw=True`),
+which is super exciting as this has been a highly
+requested feature in pandas over the years. It's important to note that this may
+not always result in a performance speedup over using the "vectorized" pandas/numpy
+equivalents of your function (it it exists), and it's always recommended to at least
+attempt to vectorize your function before trying out the numba apply engine, and its
+various modes(e.g. `raw`, `parallel`, etc.).
 
 While many features/methods may be missing from the mocked Series object
 currently (such is the nature of mocking) and the Numba engine in general, it's
