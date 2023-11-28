@@ -1,11 +1,11 @@
 ---
 title: 'Developing a Typer CLI for Nebari'
 published: November 7, 2022
-author: asmi-jafar
+authors: [asmi-jafar]
 description: 'The Nebari CLI consists of various commands the user needs to run to initialize, deploy, configure, and update Nebari.'
 category: [Developer workflows]
 featuredImage:
-  src: /posts/asmi-blogposts/blog_feature.svg
+  src: /posts/asmi-blogposts/blog_feature.png
   alt: 'An illustration of nebari logo with the assigned mentors and intern.'
 hero:
   imageSrc: /posts/asmi-blogposts/blog_hero.svg

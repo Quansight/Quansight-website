@@ -11,6 +11,7 @@ import {
   Header,
   Hero,
   HeroVariant,
+  SocialCard,
 } from '@quansight/shared/ui-components';
 
 import { getFooter } from '../../api/utils/getFooter';
@@ -43,6 +44,11 @@ const Article: FC<TLibraryArticleProps> = ({
       }
     >
       <SEO
+        title={post.meta.title}
+        description={post.meta.description}
+        variant={DomainVariant.Quansight}
+      />
+      <SocialCard
         title={post.meta.title}
         description={post.meta.description}
         variant={DomainVariant.Quansight}

@@ -9,7 +9,7 @@ import theme from 'shiki/themes/solarized-dark.json';
 import { ArrayElementType } from '@quansight/shared/types';
 
 import { TeamQuery } from '../../api';
-import { TPost } from '../../types/storyblok/bloks/posts';
+import { TPost, TPostAuthor } from '../../types/storyblok/bloks/posts';
 import { getFileContent } from '../api/posts/getFileContent';
 
 export const serializePost = async (
@@ -21,6 +21,13 @@ export const serializePost = async (
 }> => {
   const fileContent = getFileContent(fileName);
   const { data, content } = matter(fileContent);
+
+  if ((data as TPost['meta']).featuredImage.src.endsWith('.svg')) {
+    throw Error(
+      `SVG not allowed for featured image. Convert to PNG or JPEG: ${data.featuredImage.src}`,
+    );
+  }
+
   const result = await serialize(content, {
     scope: data,
     mdxOptions: {
@@ -33,23 +40,24 @@ export const serializePost = async (
     },
   });
 
-  if (!data.author) {
-    throw Error('You did not provide author slug');
+  if (!data.authors || data.authors.length == 0) {
+    throw Error('You did not provide any author slug(s)');
   }
 
-  const postAuthor = authors.find((author) => author.slug === data.author);
-
-  if (!postAuthor) {
-    throw Error('There is not matching author in database');
-  }
-
+  const postAuthors: TPostAuthor[] = data.authors.map((authorName: string) => {
+    const foundAuthor = authors.find((author) => author.slug === authorName);
+    if (!foundAuthor) {
+      throw Error(`Author '${authorName}' is not defined in Storyblok`);
+    }
+    return {
+      avatarSrc: foundAuthor.content.image.filename,
+      fullName: `${foundAuthor.content.firstName} ${foundAuthor.content.lastName}`,
+      nickName: foundAuthor.content.githubNick,
+    };
+  });
   const meta: TPost['meta'] = {
     ...(data as TPost['meta']),
-    author: {
-      avatarSrc: postAuthor.content.image.filename,
-      fullName: `${postAuthor.content.firstName} ${postAuthor.content.lastName}`,
-      nickName: postAuthor.content.githubNick,
-    },
+    authors: postAuthors,
   };
 
   return {
