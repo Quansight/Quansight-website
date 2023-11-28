@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/unlocking-c-level-performance-in-df-apply/pandas-logo.png
   alt: 'Pandas logo'
 hero:
-  imageSrc: /posts/unlocking-c-level-performance-in-df-apply/pandas-logo.png
+  imageSrc: /posts/unlocking-c-level-performance-in-df-apply/pandas-logo-wide-field.png
   imageAlt: 'Pandas logo'
 ---
 
@@ -42,9 +42,8 @@ Well, not quite. Because of the way that Numba and the numba engine inside
 pandas work, there are several caveats to keep in mind to obtain this speedup.
 
 TL;DR: Use `apply` only when you have to (e.g. there is no corresponding method
-or chain of pandas methods that do that you want). If you absolutely have to, 
+or chain of pandas methods that do that you want). If you absolutely have to,
 then engine='numba' may help get better performance
-
 
 ## How the Numba engine works
 
