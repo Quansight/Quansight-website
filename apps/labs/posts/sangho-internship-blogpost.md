@@ -1,7 +1,7 @@
 ---
 title: "Sangho's Internship at Quansight with PyTorch-Ignite project"
 published: December 12, 2022
-author: sangho-lee
+authors: [sangho-lee]
 description: 'Blogpost of working on the PyTorch-Ignite project during internship at Quansight'
 category: [Machine Learning, OSS Experience]
 featuredImage:

@@ -5,6 +5,11 @@ const withNx = require('@nrwl/next/plugins/with-nx');
  * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
+  experimental: {
+    images: {
+      allowFutureImage: true,
+    },
+  },
   async redirects() {
     return [
       {
@@ -16,7 +21,7 @@ const nextConfig = {
                https://labs.quansight.org/:path. The value here is a regex
                matching the host of an incoming request, which will find
                the initial `labs.` of https://labs.quansight.com.
-            
+
                The reason why a literal `labs.quansight.com` was not used
                was to allow testing of the redirect before deployment.
                During work on the PR, a temporary Vercel deployment was
@@ -25,12 +30,12 @@ const nextConfig = {
                subdomains on deployment URLs, so a `labs.` prefix
                was not an option.) This is why the regex includes the `[.-]`
                character class, instead of just `\\.` to match a period.
-               
+
                While a tighter scope on this host regex match would probably
                be ideal, since we are not planning on using anything other
                than the apex quansight.com domain for the website
                this configuration should not cause problems.
-               
+
                Note that this redirect configuration requires that *BOTH*
                `quansight.com` *and* `labs.quansight.com` be configured
                as active domains for the `main` branch under the Vercel

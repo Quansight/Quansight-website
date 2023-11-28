@@ -1,7 +1,7 @@
 ---
 title: 'Rethinking Jupyter Interactive Documentation'
 published: May 07, 2021
-author: matthias-bussonnier
+authors: [matthias-bussonnier]
 description: 'Today I want to look into a topic that has not evolved much since, and I believe could use an upgrade. Accessing interactive Documentation when in a Jupyter session, and what it could become. At the end I"ll link to my current prototype if you are adventurous.'
 category: [Developer workflows, OSS Experience]
 featuredImage:

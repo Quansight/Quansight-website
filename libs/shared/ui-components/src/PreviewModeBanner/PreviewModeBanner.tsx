@@ -58,17 +58,18 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
   return (
     <div
       className={
-        'px-8 py-4 text-[1.5rem] text-black ' +
+        'fixed z-[100] px-8 py-4 text-[1.5rem] text-black ' +
         (preview ? 'bg-[rgb(255,255,0)]' : 'bg-gray-50')
       }
     >
       {preview ? (
         <details>
-          <summary>
-            This page is in content preview mode. You can see{' '}
-            <strong>draft</strong> content.
-          </summary>
+          <summary>Preview</summary>
           <ul className="list-disc list-inside">
+            <li>
+              This page is in content preview mode. You can see{' '}
+              <strong>draft</strong> content.
+            </li>
             <li>
               {showExitPreviewLink ? (
                 <a
@@ -91,10 +92,11 @@ export const PreviewModeBanner: FC<TPreviewModeBannerProps> = ({ preview }) => {
         </details>
       ) : (
         <details>
-          <summary>
-            You are seeing only <strong>published</strong> content.
-          </summary>
+          <summary>Preview</summary>
           <ul className="list-disc list-inside">
+            <li>
+              You are seeing only <strong>published</strong> content.
+            </li>
             <li>
               <a
                 href="/api/enter-preview"

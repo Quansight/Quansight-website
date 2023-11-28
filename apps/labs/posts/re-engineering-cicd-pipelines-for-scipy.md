@@ -1,7 +1,7 @@
 ---
 title: 'Re-Engineering CI/CD pipelines for SciPy'
 published: October 11, 2021
-author: harsh-mishra
+authors: [harsh-mishra]
 description: 'In this blog post I talk about the projects and my work during my internship at Quansight Labs. My efforts were geared towards re-engineering CI/CD pipelines for SciPy to make them more efficient to use with GitHub Actions.'
 category: [Developer workflows]
 featuredImage:

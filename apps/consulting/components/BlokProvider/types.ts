@@ -7,6 +7,7 @@ import {
   TStatuteProps,
   TTeaserProps,
   TTeamProps,
+  TVideoProps,
 } from '@quansight/shared/ui-components';
 
 import { TBoardProps } from '../Board/types';
@@ -42,6 +43,7 @@ export enum ComponentType {
   Teaser = 'teaser',
   Testimonial = 'testimonial',
   TextArticle = 'text-article',
+  Video = 'video',
 }
 
 type TBlokComponentPropsMap = {
@@ -64,6 +66,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Teaser]: TTeaserProps;
   [ComponentType.Testimonial]: TTestimonialProps;
   [ComponentType.TextArticle]: TTextArticleProps;
+  [ComponentType.Video]: TVideoProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

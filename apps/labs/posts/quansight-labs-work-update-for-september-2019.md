@@ -1,13 +1,13 @@
 ---
 title: 'Quansight Labs Work Update for September, 2019'
 published: October 7, 2020
-author: aaron-meurer
+authors: [aaron-meurer]
 description: 'In this post, I will detail some of the open source work that I have done
 recently, both as part of my open source consulting, and as part of my work on
 SymPy for Quansight Labs.'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/quansight-labs-work-update-for-september-2019/blog_feature_org.svg
+  src: /posts/quansight-labs-work-update-for-september-2019/blog_feature_org.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/quansight-labs-work-update-for-september-2019/blog_hero_org.svg
