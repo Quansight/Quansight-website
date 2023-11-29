@@ -9,3 +9,8 @@ updates:
       prefix-development: chore
       include: scope
     open-pull-requests-limit: 5
+    ignore:
+      # All Nx updates must occur together.
+      # See: https://nx.dev/recipes/tips-n-tricks/keep-nx-versions-in-sync
+      dependency-name: "@nrwl/*"
+      dependency-name: "@nx/*"
