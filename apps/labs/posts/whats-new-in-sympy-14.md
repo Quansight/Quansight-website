@@ -82,7 +82,7 @@ If you want the string form of an expression for copy-pasting, you can use
 
 Simplification of relational and piecewise expressions has been improved:
 
-```pycon
+```py
 >>> x, y, z, w = symbols('x y z w')
 >>> init_printing()
 >>> expr = And(Eq(x,y), x >= y, w < y, y >= z, z < y)
@@ -92,7 +92,7 @@ x = y ∧ x ≥ y ∧ y ≥ z ∧ w < y ∧ z < y
 x = y ∧ y > Max(w, z)
 ```
 
-```pycon
+```py
 >>> expr = Piecewise((x*y, And(x >= y, Eq(y, 0))), (x - 1, Eq(x, 1)), (0, True))
 >>> expr
 ⎧ x⋅y   for y = 0 ∧ x ≥ y
@@ -109,7 +109,7 @@ x = y ∧ y > Max(w, z)
 The MathML presentation printer has been greatly improved, putting it on par
 with the existing Unicode and LaTeX pretty printers.
 
-```pycon
+```py
 >>> mathml(Integral(exp(-x**2), (x, -oo, oo)), 'presentation')
 <mrow><msubsup><mo>&#x222B;</mo><mrow><mo>-</mo><mi>&#x221E;</mi></mrow><mi>&#x221E;</mi></msubsup><msup><mi>&ExponentialE;</mi><mrow><mo>-</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msup><mo>&dd;</mo><mi>x</mi></mrow>
 ```
@@ -128,7 +128,7 @@ presentation form for `Integral(exp(-x**2), (x, -oo, oo))` below:
 
 Several improvements have been made to the solvers.
 
-```pycon
+```py
 >>> eq = Eq((x**2 - 7*x + 11)**(x**2 - 13*x + 42), 1)
 >>> eq
                 2
@@ -145,7 +145,7 @@ been added.
 `'nth_algebraic'` solves ODEs using `solve` by inverting the derivatives
 algebraically:
 
-```pycon
+```py
 >>> f = Function('f')
 >>> eq = Eq(f(x) * (f(x).diff(x)**2 - 1), 0)
 >>> eq
@@ -160,7 +160,7 @@ algebraically:
 `'nth_order_reducible'` solves ODEs that only involve derivatives of `f(x)`,
 via the substitution $g(x)=f^\{(n)\}(x)$.
 
-```pycon
+```py
 >>> eq = Eq(Derivative(f(x), (x, 2)) + x*Derivative(f(x), x), x)
 >>> eq
                2

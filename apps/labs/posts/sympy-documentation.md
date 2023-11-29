@@ -228,7 +228,7 @@ before being removed.
 Two - a new `SymPyDeprecationWarning` class for deprecation warnings, which
 gives much more user friendly error messages. For example
 
-```python-console
+```py
 >>> import sympy.core.compatibility
 <stdin>:1: SymPyDeprecationWarning:
 
@@ -282,7 +282,7 @@ class log(Function):
         return 1/self.args[0]
 ```
 
-```python-console
+```py
 >>> x = sympy.Symbol('x')
 >>> log(1)
 0
@@ -307,7 +307,7 @@ goes over some ways to avoid these pitfalls.
 For example, one pitfall that many new SymPy users run into is using strings
 as inputs to SymPy functions, like
 
-```python-console
+```py
 >>> from sympy import expand
 >>> expand("(x**2 + x)/x")
 x + 1
@@ -316,7 +316,7 @@ x + 1
 It's much better to define symbolic variables and create expressions directly,
 like
 
-```python-console
+```py
 >>> from sympy import symbols
 >>> x = symbols('x')
 >>> expand((x**2 + x)/x)
