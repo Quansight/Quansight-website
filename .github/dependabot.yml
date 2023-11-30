@@ -10,8 +10,8 @@ updates:
       include: scope
     open-pull-requests-limit: 5
     groups:
-      # All Nx updates must occur together.
-      # See: https://nx.dev/recipes/tips-n-tricks/keep-nx-versions-in-sync
+      # All Nx updates must occur together. See:
+      # https://nx.dev/recipes/tips-n-tricks/keep-nx-versions-in-sync
       nx:
         patterns:
           - "nx"
@@ -20,3 +20,11 @@ updates:
         update-types:
           - "patch"
           - "minor"
+    ignore:
+      # Do major Nx updates manually with `nx migrate`, not with Dependabot
+      - dependency-name: "nx"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@nrwl/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@nx/*"
+        update-types: ["version-update:semver-major"]
