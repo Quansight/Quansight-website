@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   displayName: 'shared-storyblok-sdk',
   preset: '../../../jest.preset.js',
@@ -6,4 +7,4 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/libs/shared/storyblok-sdk',
-}
+};
