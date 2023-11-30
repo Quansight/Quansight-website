@@ -49,3 +49,6 @@ Thumbs.db
 rss.xml
 
 .nx/cache
+
+# Next.js
+.next
