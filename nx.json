@@ -47,5 +47,6 @@
       }
     }
   },
-  "defaultProject": "labs"
+  "defaultProject": "labs",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json"
 }
