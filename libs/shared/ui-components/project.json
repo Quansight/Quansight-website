@@ -14,7 +14,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/ui-components"],
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/ui-components"],
       "options": {
         "jestConfig": "libs/shared/ui-components/jest.config.js",
         "passWithNoTests": true
