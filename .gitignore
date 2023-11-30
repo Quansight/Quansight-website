@@ -47,3 +47,5 @@ Thumbs.db
 
 #rss.xml file
 rss.xml
+
+.nx/cache
