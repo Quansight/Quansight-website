@@ -1,5 +1,6 @@
 {
-  "root": "libs/shared/ui-components",
+  "name": "shared-ui-components",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/ui-components/src",
   "projectType": "library",
   "tags": [],

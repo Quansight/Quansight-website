@@ -1,5 +1,6 @@
 {
-  "root": "apps/consulting",
+  "name": "consulting",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/consulting",
   "projectType": "application",
   "targets": {
