@@ -13,6 +13,10 @@ const nextConfig = {
   images: {
     domains: ['a.storyblok.com'],
   },
+  experimental: {
+    // Only warn about built pages at 1MB and above
+    largePageDataBytes: 1024 * 1024,
+  },
   async headers() {
     return [
       {
