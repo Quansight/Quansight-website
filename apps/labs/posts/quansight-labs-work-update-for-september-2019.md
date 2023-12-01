@@ -110,7 +110,7 @@ you will be able to enable it by passing `boundscheck=True` to `@njit`, or by
 setting the `NUMBA_BOUNDSCHECK=1` environment variable. This will make it
 easier to detect out of bounds issues like the one above. It will work like
 
-```pycon
+```py
 >>> @njit(boundscheck=True)
 .def outtabounds(x):
 .    A = 0
@@ -166,8 +166,7 @@ Some reasons why `import *` is bad:
   level, `import *` will import every public (doesn't start with an
   underscore) name defined in the module file. This can often include things
   like standard library imports or loop variables defined at the top-level of
-  the file. For imports from modules (from `__init__.py`), `from module import
-  *` will include every submodule defined in that module. Using `__all__` in
+  the file. For imports from modules (from `__init__.py`), `from module import *` will include every submodule defined in that module. Using `__all__` in
   modules and `__init__.py` files is also good practice, as these things are
   also often confusing even for interactive use where `import *` is
   acceptable.
@@ -309,7 +308,6 @@ With the new [sphinx-math-dollar](https://www.sympy.org/sphinx-math-dollar/)
 Sphinx extension, this is now possible. Writing `$\nu$` produces $\nu$, and
 the above docstring can now be written as
 
-
 ```py
 class besselj(BesselBase):
     """
@@ -334,8 +332,7 @@ class besselj(BesselBase):
         J_{-n}(z) = (-1)^n J_n(z).
 ```
 
-We also plan to add support for `$$double dollars$$` for display math so that `..
-math ::` is no longer needed either .
+We also plan to add support for `$$double dollars$$` for display math so that `.. math ::` is no longer needed either .
 
 For end users, the documentation on [docs.sympy.org](https://docs.sympy.org)
 will continue to render exactly the same, but for developers, it is much
