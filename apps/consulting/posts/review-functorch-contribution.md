@@ -26,6 +26,7 @@ calculating per-sample gradients becomes the straightforward application of
 Here are a few of the tasks we had the opportunity to tackle:
 
 ## Adding Batching Rules for `vmap`
+
 `vmap` is a transformation that accepts a function that operates on non-batched
 tensors and returns a new function that operates on batched tensors.
 When processing a batched input, an additional
@@ -36,6 +37,7 @@ operation efficiently by pushing the `for` loop into the PyTorch operations,
 allowing the batches to run in parallel.
 
 Consider the following example:
+
 ```python
 import torch
 
@@ -81,9 +83,10 @@ and other simpler composite operators. If we implement batching rules for every
 primitive operator, we automatically get the batching rules for composite operators.
 
 There are two ways to add batching support for an operator:
-* Manually write the batching rule. See for example the [batching rule for torch.dot](https://github.com/pytorch/pytorch/blob/b30ee35a6f141d3247a24fd09f96ea50a7e2b3c7/aten/src/ATen/functorch/BatchRulesLinearAlgebra.cpp#L25-L34)
-* Decompose operators using other operators for which we already have a
-batching rule. See for example the [batching rule for torch.vdot](https://github.com/pytorch/pytorch/blob/b30ee35a6f141d3247a24fd09f96ea50a7e2b3c7/aten/src/ATen/functorch/BatchRulesLinearAlgebra.cpp#L35-L37)
+
+- Manually write the batching rule. See for example the [batching rule for torch.dot](https://github.com/pytorch/pytorch/blob/b30ee35a6f141d3247a24fd09f96ea50a7e2b3c7/aten/src/ATen/functorch/BatchRulesLinearAlgebra.cpp#L25-L34)
+- Decompose operators using other operators for which we already have a
+  batching rule. See for example the [batching rule for torch.vdot](https://github.com/pytorch/pytorch/blob/b30ee35a6f141d3247a24fd09f96ea50a7e2b3c7/aten/src/ATen/functorch/BatchRulesLinearAlgebra.cpp#L35-L37)
 
 ## Composite Compliance
 
@@ -208,7 +211,7 @@ generate specialized code. In this case, it has fused `sin` and `square` to run
 within the same `for`-loop. This allows the generated program to do more compute
 per read/write effectively improving the memory bandwidth utilization.
 
-```c++
+```cpp
 extern "C" void kernel(const float* in_ptr0, float* out_ptr0) {
   for (long i0 = 0L; i0 < 16L; i0 += 8L) {
     auto tmp0 = at::vec::Vectorized<float>::loadu(in_ptr0 + i0);
@@ -264,7 +267,7 @@ successfully trace through this program in one graph.
 class GraphModule(torch.nn.Module):
     def forward(self, L_x_ : torch.Tensor):
         l_x_ = L_x_
-        
+
         # File: torch/_functorch/apis.py:363, code:
         # return eager_transforms.grad_impl(func, argnums, has_aux, args, kwargs)
         grad_body_0 = self.grad_body_0
@@ -272,7 +275,7 @@ class GraphModule(torch.nn.Module):
         call = grad_proxy.__call__(l_x_);  grad_proxy = l_x_ = None
         contiguous = call.contiguous();  call = None
         return (contiguous,)
-        
+
     class GraphModule(torch.nn.Module):
         def forward(self, l_x_):
             # No stacktrace found for following nodes
@@ -317,6 +320,7 @@ minimal limitations, providing a more comprehensive compilation support for `tor
 transforms
 
 ## Closing Remarks
+
 This project was yet another instance of the tight collaboration between Quansight
 and Meta within PyTorch. In particular, we would like to thank Richard Zou and
 Horace He, the `torch.func` creators, for all the design discussions and
