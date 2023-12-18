@@ -388,7 +388,7 @@ don't match (e.g., `concat` in the standard instead of `np.concatenate`).
 
 Here is an example of a naming inconsistency between NumPy and the Array API standard:
 
-```ipython
+```py
 
 In [1]: import numpy as np
 In [2]: import numpy.array_api as npx
@@ -404,7 +404,7 @@ Out[4]: <function numpy.array_api._manipulation_functions.concat...>
 
 And here is an example of a behavioral inconsistency for an indexing operation:
 
-```ipython
+```py
 In [1]: import numpy as np
 In [2]: import numpy.array_api as npx
 

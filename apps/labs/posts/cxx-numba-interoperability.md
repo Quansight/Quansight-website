@@ -147,7 +147,7 @@ optional arguments:
 Next, let us consider the following C++ header and source file that we
 will use as a model of a C++ library:
 
-```c++
+```cpp
 /* File: foo.hpp */
 #include <iostream>
 int foo(int a);
@@ -202,7 +202,7 @@ Notice that the generated [cxx2py_libfoo.cpp](/posts/cxx-numba-interoperability/
 contains light-weight C functions for returning the addresses of C++
 functions:
 
-```c++
+```cpp
 #include <memory>
 #include <cstdint>
 #include "foo.hpp"
