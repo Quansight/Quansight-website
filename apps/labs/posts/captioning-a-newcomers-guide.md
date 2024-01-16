@@ -6,11 +6,11 @@ description: 'What are those words on the bottom of your video screen and where 
 Captioning’s normalization in the past several decades may seem like it would render those questions moot, but understanding more about captions means making more informed decisions about when, how, and why we make sure information is accessible.'
 category: [Access-centered, OSS Experience]
 featuredImage:
-  src: 
-  alt: ''
+  src: /posts/captioning-a-newcomers-guide/blog_feature_1.png
+  alt: 'An exclamation point and the word captions over a background pattern made of the lower contrast words captions, subtitles, and transcripts.'
 hero:
-  imageSrc: /posts/community-opensource-funded-development/blog_hero_var2.svg
-  imageAlt: 'An illustration of a dark brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
+  imageSrc: /posts/captioning-a-newcomers-guide/blog_hero_1.svg
+  imageAlt: 'An exclamation point and the word captions over a background pattern made of the lower contrast words captions, subtitles, and transcripts.'
 ---
 
 ## JupyterLab Accessibility Journey Part 5
