@@ -1,6 +1,6 @@
 ---
 title: 'Captioning: A Newcomer’s Guide'
-published: February 1, 2024
+published: January 24, 2024
 authors: [isabela-presedo-floyd]
 description: 'What are those words on the bottom of your video screen and where do they come from?
 Captioning’s normalization in the past several decades may seem like it would render those questions moot, but understanding more about captions means making more informed decisions about when, how, and why we make sure information is accessible.'
