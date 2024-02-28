@@ -25,9 +25,17 @@ export default async function handler(req: NextRequest) {
       referrer: req.headers.get('referer'),
     }),
   });
-  // Returning fetch comes from Next.js docs:
-  // https://nextjs.org/docs/api-routes/edge-api-routes#forwarding-headers
-  return fetch(
-    'https://a.storyblok.com/f/152463/x/20372ca74f/quansight-labs-annual-report-2022.pdf',
-  );
+
+  switch (req.nextUrl.searchParams.get('year')) {
+    case '2022':
+      // Returning fetch comes from Next.js docs:
+      // https://nextjs.org/docs/api-routes/edge-api-routes#forwarding-headers
+      return fetch(
+        'https://a.storyblok.com/f/152463/x/20372ca74f/quansight-labs-annual-report-2022.pdf',
+      );
+    case '2023': // falls through to default
+    default:
+      // TODO: put Storyblok URL here
+      return fetch('https://labs.quansight.org/');
+  }
 }
