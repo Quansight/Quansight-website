@@ -1,5 +1,6 @@
 {
-  "root": "libs/shared/types",
+  "name": "shared-types",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/types/src",
   "projectType": "library",
   "tags": [],
@@ -13,9 +14,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/types"],
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/types"],
       "options": {
-        "jestConfig": "libs/shared/types/jest.config.js",
+        "jestConfig": "libs/shared/types/jest.config.ts",
         "passWithNoTests": true
       }
     }

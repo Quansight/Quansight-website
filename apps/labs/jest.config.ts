@@ -1,10 +1,11 @@
-module.exports = {
-  displayName: 'consulting',
+/* eslint-disable */
+export default {
+  displayName: 'labs',
   preset: '../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nrwl/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nrwl/next/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/apps/consulting',
-}
+  coverageDirectory: '../../coverage/apps/labs',
+};

@@ -1,5 +1,6 @@
 {
-  "root": "apps/consulting",
+  "name": "consulting",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/consulting",
   "projectType": "application",
   "targets": {
@@ -12,7 +13,10 @@
         "outputPath": "dist/apps/consulting"
       },
       "configurations": {
-        "production": {}
+        "production": {},
+        "development": {
+          "outputPath": "apps/consulting"
+        }
       }
     },
     "serve": {
@@ -27,8 +31,13 @@
         "production": {
           "buildTarget": "consulting:build:production",
           "dev": false
+        },
+        "development": {
+          "buildTarget": "consulting:build:development",
+          "dev": true
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "export": {
       "executor": "@nrwl/next:export",
@@ -38,9 +47,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/consulting"],
+      "outputs": ["{workspaceRoot}/coverage/apps/consulting"],
       "options": {
-        "jestConfig": "apps/consulting/jest.config.js",
+        "jestConfig": "apps/consulting/jest.config.ts",
         "passWithNoTests": true
       }
     },

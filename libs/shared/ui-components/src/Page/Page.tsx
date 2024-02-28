@@ -17,6 +17,7 @@ export const Page: FC<TPageProps> = ({ data, children }) => {
 
   return data.content.body.map((blok: TBlok) => {
     return (
+      // @ts-expect-error
       <SbEditable content={blok} key={blok._uid}>
         {children(blok)}
       </SbEditable>

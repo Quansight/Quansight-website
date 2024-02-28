@@ -15,8 +15,10 @@ export const FooterLinkWrapper: FC<TFooterLinkWrapperProps> = ({
   switch (linkUrl?.linktype) {
     case LinkTargetType.Story:
       return (
-        <Link href={getLinkHref(prefixSlug(linkUrl.cached_url), queryString)}>
-          <a {...props}>{children}</a>
+        <Link
+          href={getLinkHref(prefixSlug(linkUrl.cached_url), queryString)}
+          {...props}>
+          {children}
         </Link>
       );
     case LinkTargetType.Url:
