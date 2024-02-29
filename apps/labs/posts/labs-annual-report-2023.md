@@ -32,28 +32,23 @@ Check the following infographic for a quick summary, and download the full repor
     Section heading: Our mission
     The mission of Quansight Labs is to sustain and grow community-driven open source projects and ecosystems, with a focus on the core of the PyData stack and on tools and digital infrastructure for data science, ML/AI, and scientific computing.
     Section heading: Our Community
-    We worked on 30+ open-source projects
-    Logos for Ray, SymPy, Project Jupyter, stdlib, Spyder, Bokeh, conda-forge, DataAPIs, PyTorch Ignite, Open Source Design, SciPy, pandas, scikit-learn, nd[index], Numba, Hypothesis, NumPy, Matplotlib, Python, IPython, NumFOCUS’ Diversity & Inclusion in Scientific Computing, and Napari.
-    These projects reached ~20 million people worldwide
-    We spent 12,500+ hours contributing to open source projects
-    A plot shows hours spent on OSS projects: 12,600 hours in 2022, compared to 7,800 hours in 2021.
-    And organized 230+ hours of community meetings
-    We supported NumFOCUS with $30,000 to keep our ecosystem healthy
-    A plot shows donations to NumFOCUS: $34,130 donated in Q4 2021 - Q3 2022, compared to Q4 202 - Q3 2021
-    Section heading: Our Culture
-    Labs is a public-benefit and remote-first organization, with a globally distributed team.
-    We brought our team together in 2 continent-wide in-person meetups in Austin (US) and Italy.
-    Equity, diversity, and inclusion are at the core of everything we do.
-    We encourage asynchronous and handbook-driven work, and emphasize clear documentation and explicit social rules.
-    We had an 8%+ increase in representation of employees belonging to a marginalized group in tech
-    A plot shows gender identity: 11.5% of employees identify as Other, 15% as a Woman, and 73% as a Man.
-    A plot shows LGBTQAI+ self-identification: 80% of employees said No, while 20% said Yes.
-    A footnote describes that the gender data includes employees who have self-identified as a man or a woman. Those who self-identified outside the gender binary (man/woman)  are counted in the Other category to avoid individual identification as we honor their choice not to be restricted by a binary system.
-    50% of employees have been part of Labs for 2 years or more
-    A plot shows time working at Labs: 32% of employees have worked at Labs for 3+ years, 20% for 2-3 years, 28% for 1-2 years, and 20% for less than 1 year.
+    We worked on 35+ open-source projects
+    Logos for conda, Hypothesis, Numba, SciPy, JupyterLab, Napari, SymPy,  scikit-learn, Bokeh, IPython,  NumPy, Panel, Cython, DataAPIs, JAX, PyTorch, pandas, Nebari, conda-store, CuPy, PaPyri, PyData Sphinx Theme, conda-forge, Polars, OpenBLAS, CPython, PyTorch Ignite, Spyder, Project Jupyter, Matplotlib, Meson, stdlib, NumFOCUS’ Diversity & Inclusion in Scientific Computing, and the Python Software Foundation.
+    We worked on community-driven open source projects for 38,000+ hours, out of which, ~22% were directly funded by Quansight Labs
+    A plot shows hours spent per funding source, where 30087 hours were externally funded and 8321 hours were Labs funded
+    Section heading: Inside Labs
+    Our 2023 focus areas: Python packaging, Access-centered practices, Multiple library support
+    Following a co-ownership approach to governance, senior Labs members shared ownership and accountability for particular focus areas
+    In the 3rd iteration of our open source internship program, we welcomed 6 interns
+    A plot shows that in 2023, 2022, and 2021, the internship program had 12, 11, and 8 mentors, and 6, 6, and 7 interns, respectively.
+    For the long-term sustainability of our ecosystem, we ensure: Funds follow community roadmaps and decisions, and work is done transparently; Investment in foundational infrastructure (e.g., packaging) and initiatives (e.g., interoperability); Maintenance and holistic contributions to Open Source projects (documentation, UI/UX design, community, and more)
+    Finally, we’re glad to share that 55% of our employees have been part of Labs for 2 years or more.
+    A plot shows time working at Labs, where 26% respondents have worked at Labs for under 1 year, 17% between 1-2 years, 21% between 2-3 years, and 34% for 3 years or more.
     Visit labs.quansight.org to learn more about us, and reach out to us at connect@quansight.com
-    Twitter: @quansightai"
-  />
+    Twitter: @quansightai
+    LinkedIn: https://www.linkedin.com/company/quansight/"
+/>
+
 </p>
 
 Over the past year, our team's impact and Labs-supported projects grew significantly, and we made significant strides towards our focus areas.
