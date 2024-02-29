@@ -2,21 +2,21 @@
 title: 'Quansight Labs Annual Report 2023: Building for Ecosystem-wide Impact and Sustainability'
 authors: [pavithra-eswaramoorthy, tania-allard, irina-fumarel, ralf-gommers]
 published: February 28, 2024
-description: 'Presenting our annual report for 2024! Read about our project achievements, community initiatives, and work culture.'
+description: 'Presenting our 2023 annual report! Read about our open source project and community highlights, initiatives, and work culture.'
 category: [Community, PyData ecosystem]
 featuredImage:
-  src: /posts/announcing-labs-annual-report-2022/featured.png
-  alt: 'A hand placing a flower in a flowerpot, next to the text: Quansight Labs 2022 Annual Report'
+  src: /posts/labs-annual-report-2023/thumbnail.png
+  alt: 'A coral reef ecosystem with corals, fish hammerhead shark, jelly fish, and turtle.'
 hero:
   imageDesktop:
-    imageSrc: /posts/announcing-labs-annual-report-2022/hero-desktop.svg
-    imageAlt: 'Two hands arranging flowers in a flowerpot.'
+    imageSrc: /posts/labs-annual-report-2023/hero-desktop.png
+    imageAlt: 'A coral reef ecosystem with corals, fish hammerhead shark, jelly fish, and turtle.'
   imageMobile:
-    imageSrc: /posts/announcing-labs-annual-report-2022/hero-mobile.svg
-    imageAlt: 'Two hands arranging flowers in a flowerpot.'
+    imageSrc: /posts/labs-annual-report-2023/hero-mobile.png
+    imageAlt: 'A coral reef ecosystem with corals, fish hammerhead shark, jelly fish, and turtle.'
   imageTablet:
-    imageSrc: /posts/announcing-labs-annual-report-2022/hero-tablet.svg
-    imageAlt: 'Two hands arranging flowers in a flowerpot.'
+    imageSrc: /posts/labs-annual-report-2023/hero-tablet.png
+    imageAlt: 'A coral reef ecosystem with corals, fish hammerhead shark, jelly fish, and turtle.'
 ---
 
 We're very excited to present the Quansight Labs Annual Report for 2023!
