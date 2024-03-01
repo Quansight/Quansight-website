@@ -6,17 +6,17 @@ description: 'Presenting our 2023 annual report! Read about our open source proj
 category: [Community, PyData ecosystem]
 featuredImage:
   src: /posts/labs-annual-report-2023/thumbnail.png
-  alt: 'A coral reef ecosystem with corals, fish hammerhead shark, jelly fish, and turtle.'
+  alt: 'A coral reef ecosystem with corals, hammerhead shark, jelly fish, and turtle.'
 hero:
   imageDesktop:
     imageSrc: /posts/labs-annual-report-2023/hero-desktop.png
-    imageAlt: 'A coral reef ecosystem with corals, fish hammerhead shark, jelly fish, and turtle.'
+    imageAlt: 'A coral reef ecosystem with corals, hammerhead shark, jelly fish, and turtle.'
   imageMobile:
     imageSrc: /posts/labs-annual-report-2023/hero-mobile.png
-    imageAlt: 'A coral reef ecosystem with corals, fish hammerhead shark, jelly fish, and turtle.'
+    imageAlt: 'A coral reef ecosystem with corals, hammerhead shark, jelly fish, and turtle.'
   imageTablet:
     imageSrc: /posts/labs-annual-report-2023/hero-tablet.png
-    imageAlt: 'A coral reef ecosystem with corals, fish hammerhead shark, jelly fish, and turtle.'
+    imageAlt: 'A coral reef ecosystem with corals, hammerhead shark, jelly fish, and turtle.'
 ---
 
 We're very excited to present the Quansight Labs Annual Report for 2023!
@@ -51,12 +51,12 @@ Check the following infographic for a quick summary, and download the full repor
 
 </p>
 
-Over the past year, our team's impact and Labs-supported projects grew significantly, and we made significant strides towards our focus areas.
+Over the past year, our team's impact and Labs-supported projects grew, and we made significant strides towards our focus areas.
 
 Read more about it and hear directly from Labs members about key initiatives, including Consortium for Python Data API Standards, Contributor Experience, JupyterLab Accessibility, and a lot more, in the report below:
 
 <p align="center">
-  <a href="">
+  <a href="https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2023.pdf">
     <b>Download Quansight Labs Annual Report 2023</b>
   </a>
 </p>
