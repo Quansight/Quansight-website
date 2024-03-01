@@ -56,7 +56,7 @@ Over the past year, our team's impact and Labs-supported projects grew, and we m
 Read more about it and hear directly from Labs members about key initiatives, including Consortium for Python Data API Standards, Contributor Experience, JupyterLab Accessibility, and a lot more, in the report below:
 
 <p align="center">
-  <a href="https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2023.pdf">
+  <a href="https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2023.pdf?utm_campaign=2023-labs-report&utm_medium=website&utm_source=labs-blog&utm_content=&utm_term=">
     <b>Download Quansight Labs Annual Report 2023</b>
   </a>
 </p>
