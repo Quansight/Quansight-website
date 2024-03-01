@@ -35,7 +35,6 @@ export default async function handler(req: NextRequest) {
       );
     case '2023': // falls through to default
     default:
-      // TODO: put Storyblok URL here
       return fetch(
         'https://a.storyblok.com/f/152463/x/fb9d254ecd/quansight-labs-annual-report-2023.pdf'
       );
