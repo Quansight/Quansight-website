@@ -1,3 +1,10 @@
+March 1, 2024
+
+Via Storyblok
+
+- Updated homepage section for annual report 2023 with a new title, description, image, and link.
+
+
 October 17, 2023
 
 Via Storyblok

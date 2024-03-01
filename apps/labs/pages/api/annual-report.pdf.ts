@@ -25,9 +25,18 @@ export default async function handler(req: NextRequest) {
       referrer: req.headers.get('referer'),
     }),
   });
-  // Returning fetch comes from Next.js docs:
-  // https://nextjs.org/docs/api-routes/edge-api-routes#forwarding-headers
-  return fetch(
-    'https://a.storyblok.com/f/152463/x/20372ca74f/quansight-labs-annual-report-2022.pdf',
-  );
+
+  switch (req.nextUrl.searchParams.get('year')) {
+    case '2022':
+      // Returning fetch comes from Next.js docs:
+      // https://nextjs.org/docs/api-routes/edge-api-routes#forwarding-headers
+      return fetch(
+        'https://a.storyblok.com/f/152463/x/20372ca74f/quansight-labs-annual-report-2022.pdf',
+      );
+    case '2023': // falls through to default
+    default:
+      return fetch(
+        'https://a.storyblok.com/f/152463/x/fb9d254ecd/quansight-labs-annual-report-2023.pdf'
+      );
+  }
 }

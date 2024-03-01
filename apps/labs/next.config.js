@@ -68,11 +68,9 @@ const nextConfig = {
     return {
       beforeFiles: [
         {
-          // In the future, this rewrite can be generalized by doing something like
-          // source: '/annual-reports/quansight-labs-annual-report-:year.pdf'
-          // destination: '/api/annual-report.pdf?year=:year'
-          source: '/annual-reports/quansight-labs-annual-report-2022.pdf',
-          destination: '/api/annual-report.pdf',
+          source:
+            '/annual-reports/quansight-labs-annual-report-:year(\\d{4}).pdf',
+          destination: '/api/annual-report.pdf?year=:year',
         },
       ],
       afterFiles: [
