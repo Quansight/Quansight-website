@@ -444,27 +444,44 @@ Prerequisites:
 
 - [Node](https://nodejs.org/en/)
 
-To run the website locally on your machine, you must first clone this git
-repo, `cd` into the repo, then run `npm install`.
+### Short version (Labs site)
 
-This repo contains two projects (websites): Consulting and Labs. You must create
-a `.env` file for each project that you want to develop locally. For example,
-for Quansight Consulting, you will need to create `apps/consulting/.env`.
-You can do this by copying the example environment file:
+Copy and paste the following commands:
 
-```bash
-cp apps/consulting/.env.example apps/consulting/.env
+```sh
+git clone git@github.com:Quansight/Quansight-website.git 
+cd Quansight-website 
+npm install 
+cp apps/labs/.env.example apps/labs/.env 
+npm run start:labs
 ```
 
-Run `npm run start:consulting` or `npm run start:labs` to start a corresponding
-dev server. Navigate to <http://localhost:4200/> or use `localhost` to preview
-in the Storyblok panel. On the local host, the app will automatically reload if you
-change any of the source files, in the Storyblok panel you need to refresh the
-page manually.
+### Longer version
+
+To run the website locally on your machine, you must first clone this git repo,
+`cd` into the repo, then run `npm install`.
+
+This repo contains two projects (websites): Consulting and Labs. (We are not
+currently using the Consulting project.) You must create a `.env` file for each
+project that you want to develop locally. For example, for Quansight Labs, you
+will need to create `apps/labs/.env`. You can do this by copying the example
+environment file:
+
+```bash
+cp apps/labs/.env.example apps/labs/.env
+```
+
+Note: You should **not** modify the example environment file. 
+
+Run `npm run start:labs` to start a corresponding dev server. Navigate to
+<http://localhost:4200/> or use `localhost` in the Storyblok preview panel. On
+the local host, the app will automatically reload if you change any of the
+source files, whereas in the Storyblok panel you need to refresh the page
+manually.
 
 Important: whenever the website's dependencies change or are updated, the lock
 file `package-lock.json` will be updated. Whenever `package-lock.json` is
-updated, you should re-run `npm install` (or `npm ci`), so that your local
+updated, you should re-run `npm install` (on CI, `npm ci`), so that your local
 environment's dependencies will match the production environment.
 
 ## Adding new components 🧩
