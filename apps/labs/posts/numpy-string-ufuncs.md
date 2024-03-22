@@ -27,7 +27,7 @@ process.
 Last July, the D.E. Shaw group, one of our customers, reported that string operations
 were not performant. Their team had already looked into the issue and found an
 obvious bottleneck. For every operation on string arrays, NumPy would create a
-Python Object and call the associated method in `str` or `bytes` (depending
+Python object and call the associated method in `str` or `bytes` (depending
 on the array's dtype). It looks something like this in C pseudocode:
 
 ```cpp
@@ -58,8 +58,8 @@ And all that in a loop over all array items.
 
 The obvious solution to this was to operate on the raw C data in the NumPy array
 buffer and not rely on the Python round-trip. NumPy's ufunc mechanism is
-the right solution for doing just that. Here's a short excerpt from the NumPy
-documentation explaining ufuncs in a bit more depth:
+the right solution for doing just that. Here's a [short excerpt from the NumPy
+documentation](https://numpy.org/doc/stable/reference/ufuncs.html#universal-functions-ufunc) explaining ufuncs in a bit more depth:
 
 > A universal function (or ufunc for short) is a function that operates on ndarrays
 > in an element-by-element fashion, supporting array broadcasting, type casting,
@@ -160,12 +160,16 @@ array buffer still allocates the number of bytes corresponding to four character
 has the side-effect that both of these dtypes strip all trailing zero bytes.
 
 ```python3
->>> s = np.array(["abcd", "ef"])
+>>> s = np.array([b"abc", b"defgh"])
 >>> s
-array(['abcd', 'ef'], dtype='<U4')
->>> s[0] = "h\0\0"
+array([b'abc', b'defgh'], dtype='|S5')
+>>> s.tobytes()  # View raw data
+b'abc\x00\x00defgh'
+>>> s[0] = 'a\0\0'
 >>> s
-array(['h', 'ef'], dtype='<U4')
+array([b'a', b'defgh'], dtype='|S5')
+>>> s.tobytes()
+b'a\x00\x00\x00\x00defgh'
 ```
 
 Now back to our string ufuncs.
@@ -216,11 +220,42 @@ NPY_CASTING resolve_descriptors(struct PyArrayMethodObject_tag *method,
 
 The important arguments here are `given_descrs` and `loop_descrs`:
 - `given_descrs` is an array of input and output (if any were given
-   by the user) descriptor instances. A descriptor instance is a descriptor
-   for an array, and includes information about the size of each item.
+   by the user, more on this in the next paragraph) descriptor instances.
+   A descriptor instance is a descriptor for an array, and includes information
+   about the size of each item.
 - `loop_descrs` is an array of descriptors that must be filled in by the resolve
    descriptors implementation. These will be the descriptors that will be used
    in order to call the loop with the correct information.
+More information can be found on the
+[NumPy documentation for `NPY_METH_resolve_descriptors`](https://numpy.org/devdocs/reference/c-api/array.html#c.NPY_METH_resolve_descriptors).
+
+If you're wondering how the user can pass output dtypes to the `resolve_descriptors`
+function, that's the work of the `out` optional keyword argument (kwarg) to ufuncs. If the
+`out` kwarg is `None`, which is the default, a new array will be created for each of the
+outputs. If one passes an array through the `out` kwarg though, the results will be
+written in the `out` array, and *that* array will be returned. In that case, the `out`
+array descriptor will be the last item in `given_descrs`. Let's see that in practice:
+
+```python3
+>>> a = np.array([1, 2, 3])
+>>> b = np.array([6, 7, 8])
+>>> a
+array([1, 2, 3])
+>>> b
+array([6, 7, 8])
+>>> np.add(a, b)
+array([ 7,  9, 11])
+>>> a
+array([1, 2, 3])
+>>> b
+array([6, 7, 8])
+>>> np.add(a, b, out=a)
+array([ 7,  9, 11])
+>>> a
+array([ 7,  9, 11])
+>>> b
+array([6, 7, 8])
+```
 
 For `add`, writing a `resolve_descriptors` function is relatively straightforward,
 since the size of the result dtype should be the sum of the two input-dtype sizes,
@@ -248,6 +283,7 @@ string_addition_resolve_descriptors(PyArrayMethodObject *self,
                                     PyArray_Descr *loop_descrs[3],
                                     npy_intp *view_offset)
 {
+    // Don't mess with the input descriptors.
     loop_descrs[0] = NPY_DT_CALL_ensure_canonical(given_descrs[0]);
     if (loop_descrs[0] == NULL) {
         return _NPY_ERROR_OCCURRED_IN_CAST;
@@ -273,11 +309,11 @@ string_addition_resolve_descriptors(PyArrayMethodObject *self,
 It does the following:
 - Specifies that the input dtypes are the ones that should be
   used for passing information to the loop. In doing so, it also ensures that
-  the dtypes are in canonical representation, meaning in the native byte order of
-  the underlying system.
+  the dtypes are in canonical representation, meaning in the underlying system's
+  native byte order.
 - For the output dtype (`loop_descrs[2]`), we create a new descriptor instance
-  from one of the inputs (either one would be fine), and then add the element size
-  of the other one. This way, we get an output dtype with a size that's equal to
+  from one of the inputs (either one would be fine), and then add the other's
+  element size. This way, we get an output dtype with a size that's equal to
   the sum of the sizes of the two input dtypes.
 
 After registering the `resolve_descriptors` function, everything works correctly
@@ -288,11 +324,11 @@ and `np.add` now works for string dtypes as well!
 Next in our list of functions to implement as ufuncs was `find` and `rfind`. Like
 `isalpha`, these two return fixed-type dtypes (`int`s), so no need for a
 `resolve_descriptors` function, and they both would be new ufuncs. Unlike
-`isalpha` though, they both accept four input arguments: the buffer to search in,
-the substring to search for, and starting and ending indices (if one wants to
-specify in what part of the buffer to search). The starting and ending indices
-can be of any integer dtype (int8, int16, int32 etc.), but we only want to write
-one loop for all of them. To achieve that we need a promoter.
+`isalpha` though, which only has one input argument, they both accept four input
+arguments: the buffer to search in, the substring to search for, and starting and
+ending indices (if one wants to specify in what part of the buffer to search). The
+starting and ending indices can be of any integer dtype (int8, int16, int32 etc.),
+but we only want to write one loop for all of them. To achieve that we need a promoter.
 
 A promoter is a function that specifies the promotion rules for a ufunc. In general,
 a ufunc will search for a loop that matches the input dtypes exactly. In order
@@ -347,7 +383,7 @@ Our promoter specifies the following:
 
 Doing all of this allows us to do the following, having only written one loop:
 
-```cpp
+```python3
 >>> buf = np.array(["abcd", "cdef"])
 >>> sub = "c"
 >>> start = np.array([3, 0], dtype=np.int8)
@@ -363,7 +399,7 @@ array([-1,  0])
 ## Last stop: `replace`
 
 The last ufunc we're going to talk about is `replace`. First, let's remember that
-`replace` accepts four arguments: the buffer to search, the substring to search for
+`replace` accepts four arguments: the buffer to search in, the substring to search for
 and replace, the replacement string, and a final integer argument that specifies
 the maximum number of replacements to do. Putting everything we've covered so far
 together gives us the following tasks:
@@ -377,39 +413,8 @@ the `resolve_descriptors` function does not get access to the data itself; it on
 gets access to the array descriptors that contain meta information about the array.
 By just looking at the input dtype sizes though, we do not know how many replacements
 we'll have to do, and how long the final string will be. In order to circumvent
-that, we have to create a Python wrapper around the ufunc written in C++. But,
-before we explain how the wrapper works, let's talk about another feature of ufuncs:
-the `out` optional keyword argument.
-
-If the optional `out` keyword argument is `None`, which is the default, a new array
-will be created for each of the outputs. If one passes an array through the `out`
-keyword argument though, the results will be written in the `out` array, and *that*
-array will be returned.
-
-Let's see that in practice:
-
-```python3
->>> a = np.array([1, 2, 3])
->>> b = np.array([6, 7, 8])
->>> a
-array([1, 2, 3])
->>> b
-array([6, 7, 8])
->>> np.add(a, b)
-array([ 7,  9, 11])
->>> a
-array([1, 2, 3])
->>> b
-array([6, 7, 8])
->>> np.add(a, b, out=a)
-array([ 7,  9, 11])
->>> a
-array([ 7,  9, 11])
->>> b
-array([6, 7, 8])
-```
-
-See where this is going? We can use the `out` kwarg to pass an array with the
+that, we have to create a Python wrapper around the ufunc written in C++ and use
+the `out` kwarg, which I described above, to pass an array with the
 correct dtype into the `replace` ufunc. All we have to do is find out what the maximum
 length is, which, through some NumPy magic, is easy enough:
 
@@ -443,7 +448,7 @@ def replace(a, old, new, count=-1):
     return _replace(arr, old, new, counts, out=out)
 ```
 
-The only thing remaining now is to require that `out` should be not `None`
+The only thing remaining now is to require that `out` should not be `None`
 when calling the `_replace` internal ufunc. We can do that easily in the
 `resolve_descriptors` function:
 
@@ -455,6 +460,8 @@ string_replace_resolve_descriptors(PyArrayMethodObject *self,
                                    PyArray_Descr *loop_descrs[5],
                                    npy_intp *view_offset)
 {
+    // Error in case the last item of given_descrs (the output descriptor)
+    // is NULL which means that out=None.
     if (given_descrs[4] == NULL) {
         PyErr_SetString(PyExc_ValueError, "out kwarg should be given");
         return _NPY_ERROR_OCCURRED_IN_CAST;
@@ -507,7 +514,7 @@ small strings. Here's an illustration of the exact results:
   alt="A bar plot showing the performance increase between the old approach and the new ufuncs across two different benchmarks" />
 
 The results clearly illustrate a big performance improvement, especially for
-bigger arrays. In the benchmarks we ran with 1000-element array, there was
+bigger arrays. In the benchmarks we ran with a 1000-element array, there was
 a performance increase of 150x-492x depending on the string operation, while
 there was a much moderate speed-up of 4x-11x for smaller two-element arrays.
 This goes to show that operating on the raw C data, instead of doing the CPython
