@@ -54,10 +54,10 @@ All formats have a number of read/write characteristics. For reading, they can b
 | ----------------- | --------------- | ---------------- | ------------------- | ------------ | ------------------ | ------------------ | ------------------ |
 | **COO**           | 🚫              | 🚫               | ✅                  | 🚧           | 🚧                 | 🚧                 | ✅                 |
 | **DOK**           | ✅              | ✅               | 🚫                  | 🚧           | 🚧                 | 🚧                 | 🚫                 |
-| **CSR/CSC**       | 🚫              | 🚫               | ✅                  | 🚧           | ✅                 | ✅                 | 🚫                 |
+| **CSR/CSC**       | 🚫              | 🚫               | ✅                  | 🚧           | ✅                 | ✅                 | 🚧                 |
 | **LIL**           | 🚫              | ✅               | 🚫                  | 🚫           | 🚧                 | 🚫                 | 🚫                 |
 | **DIA**           | ✅              | 🚫               | ✅                  | 🚫           | 🚧                 | 🚧                 | 🚫                 |
-| **BSR**           | ✅<sup>1</sup>  | ✅<sup>1</sup>   | ✅                  | 🚫           | 🚧                 | 🚫                 | 🚫                 |
+| **BSR**           | ✅<sup>1</sup>  | ✅<sup>1</sup>   | ✅                  | 🚫           | 🚧                 | 🚫                 | 🚧                 |
 | **N-dimensional** |                 |                  |                     | ✅           | 🚫                 | 🚫                 | ✅                 |
 
 <sup>1</sup> Within same block if it exists
@@ -65,9 +65,42 @@ All formats have a number of read/write characteristics. For reading, they can b
 🚧 Present, with intermediate conversions or sub-optimal iterations
 🚫 Unavailable
 
-## Array Creation API
+### Array Creation API
 
-<!-- TODO -->
+Here, we will compare how to creat sparse arrays with the different libraries, as well as any kinks and notable pain points.
+
+#### `sparse`
+
+`sparse` provides two main options for constructing arrays:
+
+1. From an existing array with [`sparse.asarray`](https://sparse.pydata.org/en/stable/generated/sparse.asarray.html).
+2. By creating a [`sparse.DOK`](https://sparse.pydata.org/en/stable/generated/sparse.DOK.html) instance, populating it, then using [`sparse.DOK.asformat`](https://sparse.pydata.org/en/stable/generated/sparse.DOK.asformat.html).
+3. By specifying the constituent data or arrays.
+
+One notable pain point for `sparse` is its performance: It's notably slower than equivalent SciPy operations.
+
+#### `cupyx.sparse` and `scipy.sparse`
+
+One can do any of the following to create a `scipy.sparse` or `cupyx.sparse` array:
+
+1. Use `array_type(existing_obj)`, as [an example CSR](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html).
+2. (Only for SciPy) Instantiate a [`scipy.sparse.dok_array`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.dok_array.html), populate it, and then use [`scipy.sparse.dok_array.asformat`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.dok_array.asformat.html#scipy.sparse.dok_array.asformat)
+   - For `cupyx.sparse`, we can later move the array to the GPU.
+3. Use `array_type(tuple_of_constituent_arrays)`.
+
+The main pain points for this set of libraries are twofold:
+
+1. They only support 2-D arrays or matrices.
+2. Most of the existing work only exists for the old, deprecated `np.matrix` interface. SciPy is trying to move away from that, but progress there is slow.
+
+#### `torch.sparse`
+
+To create a sparse array, one can:
+
+1. Call the [`torch.Tensor.to_sparse`](https://pytorch.org/docs/stable/generated/torch.Tensor.to_sparse.html) on an existing `Tensor` (or any of the `to_sparse_*` format-specific methods).
+2. By calling the format-specific constructors, for example [`torch.sparse_coo_tensor`](https://pytorch.org/docs/stable/generated/torch.sparse_coo_tensor.html), to create a format from its constituent arrays.
+
+The main pain points for `torch.sparse` is the differing API from most other libraries, and lack of DOK support to construct hyper-sparse tensors intuitively.
 
 ### Honorable Mentions
 
