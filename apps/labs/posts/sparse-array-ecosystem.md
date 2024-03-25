@@ -42,6 +42,33 @@ This member of the sparse array libraries follows an interface that closely mirr
 
 This submodule of PyTorch allows one to create and operate on mainly N-dimensional COO arrays on the CPU or GPU.
 
+## API and Performance Comparison
+
+### Format Support
+
+Support for many different formats can be important, especially as they usually represent differing patterns of sparsity, which in turn represent differing mathematical structures and patterns in nature. Native support for a wide variety of formats can be the key to unlocking a lot of performance and/or saving memory.
+
+All formats have a number of read/write characteristics. For reading, they can be random access or sequential access, similarly with adding data to a sparse array. Whether they are ordered sequentially in memory is important, as this improves performance and compactness of the format. We list these characteristics below together with which library supports a format. We have also included a row for N-dimensional capabilities.
+
+|                   | **Random Read** | **Random Write** | **Cache Optimized** | **`sparse`** | **`scipy.sparse`** | **`cupyx.sparse`** | **`torch.sparse`** |
+| ----------------- | --------------- | ---------------- | ------------------- | ------------ | ------------------ | ------------------ | ------------------ |
+| **COO**           | 🚫              | 🚫               | ✅                  | 🚧           | 🚧                 | 🚧                 | ✅                 |
+| **DOK**           | ✅              | ✅               | 🚫                  | 🚧           | 🚧                 | 🚧                 | 🚫                 |
+| **CSR/CSC**       | 🚫              | 🚫               | ✅                  | 🚧           | ✅                 | ✅                 | 🚫                 |
+| **LIL**           | 🚫              | ✅               | 🚫                  | 🚫           | 🚧                 | 🚫                 | 🚫                 |
+| **DIA**           | ✅              | 🚫               | ✅                  | 🚫           | 🚧                 | 🚧                 | 🚫                 |
+| **BSR**           | ✅<sup>1</sup>  | ✅<sup>1</sup>   | ✅                  | 🚫           | 🚧                 | 🚫                 | 🚫                 |
+| **N-dimensional** |                 |                  |                     | ✅           | 🚫                 | 🚫                 | ✅                 |
+
+<sup>1</sup> Within same block if it exists
+✅ Available, with optimized loops for atomic operations
+🚧 Present, with intermediate conversions or sub-optimal iterations
+🚫 Unavailable
+
+## Array Creation API
+
+<!-- TODO -->
+
 ### Honorable Mentions
 
 There are a number of honorable mentions that never managed to gain enough traction to be included in this list:
