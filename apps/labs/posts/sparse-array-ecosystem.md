@@ -60,9 +60,9 @@ All formats have a number of read/write characteristics. For reading, they can b
 | **BSR**           | ✅<sup>1</sup>  | ✅<sup>1</sup>   | ✅                  | 🚫           | 🚧                 | 🚫                 | 🚧                 |
 | **N-dimensional** |                 |                  |                     | ✅           | 🚫                 | 🚫                 | ✅                 |
 
-<sup>1</sup> Within same block if it exists <br>
-✅ Available, with optimized loops for atomic operations <br>
-🚧 Present, with intermediate conversions or sub-optimal iterations <br>
+<sup>1</sup> Within same block if it exists <br />
+✅ Available, with optimized loops for atomic operations <br />
+🚧 Present, with intermediate conversions or sub-optimal iterations <br />
 🚫 Unavailable
 
 ### Array Creation API
