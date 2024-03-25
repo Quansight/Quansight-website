@@ -67,7 +67,7 @@ All formats have a number of read/write characteristics. For reading, they can b
 
 ### Array Creation API
 
-Here, we will compare how to creat sparse arrays with the different libraries, as well as any kinks and notable pain points.
+Here, we will compare how to create sparse arrays with the different libraries, as well as any kinks and notable pain points.
 
 #### `sparse`
 
@@ -104,7 +104,7 @@ The main pain points for `torch.sparse` is the differing API from most other lib
 
 ### Honorable Mentions
 
-There are a number of honorable mentions that never managed to gain enough traction to be included in this list:
+There are a number of honorable mentions that haven't managed to gain enough traction to be included in this list:
 
 - [**`jax.experimental.sparse`**](https://jax.readthedocs.io/en/latest/jax.experimental.sparse.html): A forward-thinking sparse array module based on the [MLIR sparse tensor dialect](https://mlir.llvm.org/docs/Dialects/SparseTensorOps/).
 - [**`pysparse`**](https://pysparse.sourceforge.net/): Not to be confused with `sparse`, this was a package that didn't take off, but has a rather common name.
