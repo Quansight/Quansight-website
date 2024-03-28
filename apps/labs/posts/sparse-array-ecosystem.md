@@ -18,7 +18,21 @@ hero:
 
 ### Sparsity in nature
 
-We live in a locally-connected universe. What this means is every particle in the universe can only influence its local neighbourhood of particles (or at least a small number of particles compared to what's out there) at a given time. For this reason, most arrays that show up in nature as adjacency arrays representing connections between particles are sparse. One might also say they are hypersparse, due to the sheer amount of difference between the non-background-value elements and the total elements. Many other arrays, representing connections between components of a circuit, perhaps, or a mechanical system, will also be sparse. What's more, these arrays typically become sparser as the system becomes more complex.
+There are many examples of loosely-connected systems that lend themselves well to an expression in terms of sparse arrays. Let's illustrate this claim with a few examples:
+
+#### An [impedance matrix](https://en.wikipedia.org/wiki/Impedance_parameters) for a circuit
+
+An impedance matrix for a linear circuit (which is a circuit comprising purely of resistors, capacitors, inductors, alongside connections between them) with `N` ports is an `N ✕ N` matrix, with each entry representing the connection between two ports. Where no connection is present, the Z-matrix, as it is also known, has a value of infinity.
+
+Consider that in a large circuit with many ports, due to physical limitations and also to keep the design simple, the amount of connections do not scale as `N²`, but usually as a much lower factor. This means, in essence, that the larger the circuit; the sparser its impedance matrix will be, if the background value is taken to be infinity. Due to technologies such as multi-layer PCBs, there isn't usually a clear pattern as to which ports will be connected.
+
+#### [Convolution](https://en.wikipedia.org/wiki/Convolution)
+
+Convolution is simply the smearing out of one signal, with the "shape" of the smearing depending on another signal, called a kernel. Mathematically, each sample in a discrete signal would only affect its neighbours. Thus, if this relationship were to be expressed in a matrix, it would have samples concentrated along the diagonal, but for long signals and short kernels; this matrix would also be very sparse.
+
+#### NLP Use-case
+
+Consider an natural-language processing use-case where we parse statements of the form `(subject, object, predicate)`, such as, for example `(Hameer, this blog post, authored)`. This particular predicate would be true. On the other hand, `(Elephant, fish, is)` would be false. Now consider the massive space of all predicates arranged into a 3-dimensional array, we would give them a value of `+1` for true or `-1` for untrue, or `0` for unknown or to be predicted. Such an array would have a shape of `N ✕ N ✕ K` where `N` is the number of entities and `K` is the number of predicates. Such a system would also be very sparse.
 
 ### Exploiting sparsity
 
