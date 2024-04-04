@@ -36,7 +36,63 @@ Consider an natural-language processing use-case where we parse statements of th
 
 ### Exploiting sparsity
 
-We can exploit the natural sparsity of these arrays in two main ways: storage and compute. By recognizing patterns in the data, one can reduce the storage required to store such arrays. Additionally, one can also reduce the time required to perform operations on such arrays. Sometimes (depending on the exact patterns, and also on the sparsity) one can reduce the time required from being brazenly impossible even on a large supercomputer; to being lightning fast on your cell phone. Many algorithms take advantage of sparsity without advertising it, but by providing a solid framework, many of these algorithms can be expressed using the more natural language of array computing.
+Sparsity can be exploited in many algorithms in two main ways. The first is storage: By simply "not storing" the background value, we can save on a lot of storage. Of course, this means that one has to store information about what elements are actually not at the background value. This usually implies storing extra information beyond just the values of the present elements; it implies we must also encode their position. This implies two trade-offs we must make. The first is, if the fraction of present values (often called simply the _density_ of a sparse array) is more than a certain threshold; it may simply be better to store the array as a simple dense array. The other trade-off is more subtle: What scheme should we use for encoding the positions of the present values? The presence of multiple schemes with their own benefits and drawbacks is presented below.
+
+The second main way we can take advantage of sparsity is via compute. By "skipping over" the background values; one can exceed the speed of a dense algorithm; once again assuming that the density does not exceed some threshold. This is, once again, not as simple as it may seem at first glance: A sparse algorithm needs to combine present values and their corresponding positions from different arrays and decide the value and presence of a corresponding element in the output array. We see a common pitfall here when writing sparse algorithms: If at any point; we accidentally iterate over the missing values, we risk losing many performance benefits of a sparse algorithm.
+
+### Common Formats
+
+In the last section, we hinted at different schemes for storing the positions of present values in sparse arrays. Such a scheme is known more commonly as a (sparse array) _format_. What format is best for storing some data is often determined by the pattern of present values in the data, the sparsity of the data, and some other considerations. Let's explore further by seeing a two common example formats for illustrative purposes.
+
+#### Dictionary-of-keys (DOK)
+
+This is one of the simplest formats to explain, so we begin with this one. The idea is that we have a dictionary that stores the coordinates of present values as the key, with the value representing the value of the array at that coordinate. Let's illustrate with a small example using the `sparse` library.
+
+```python
+>>> import numpy as np
+>>> import sparse
+>>> import pprint
+>>> eye_dok = sparse.DOK.from_numpy(np.eye(5))
+>>> pprint.pp(eye_dok.data)
+{(0, 0): 1.0, (1, 1): 1.0, (2, 2): 1.0, (3, 3): 1.0, (4, 4): 1.0}
+```
+
+This format has a number of advantages:
+
+1. It's simple to implement.
+2. It supports insertion into any coordinate by inserting the appropriate key-value pair into the dictionary.
+3. Random access is possible by retrieving a key from the dictionary.
+
+However, it also has a number of disadvantages:
+
+1. Iterating over values may be random, depending on the dictionary implementation. This creates problems when combining different arrays; and checking the presence of a given row or column (one can only check the presence of an element efficiently).
+2. It suffers from a higher memory usage than some other formats, as dictionaries take up more space than arrays.
+3. Retrieval of a single element may be fast, but it's slower than a similar access from an array due to hashing.
+
+### COOrdinate Format
+
+This format is also extremely simple, it stores one array of values, and a corresponding array of positions.
+
+```python
+>>> eye_coo = sparse.COO.from_numpy(np.eye(5))
+>>> eye_coo.coords
+array([[0, 1, 2, 3, 4],
+       [0, 1, 2, 3, 4]])
+>>> eye_coo.data
+array([1., 1., 1., 1., 1.])
+```
+
+The advantages for this one are the flip-side of DOK:
+
+1. It's simple to implement.
+2. If the constituent arrays are stored as lists, one can easily append a new coordinate. However, we risk working with out-of-order indices that way.
+3. Storage is near-optimal (for hyper-sparse arrays).
+
+Here are some disadvantages:
+
+1. Random access using a coordinate isn't possible, one has to search for an existing coordiate. This may be easy if the coordinates are sorted or hard if they're not.
+2. Random insertion makes the coordinates go out of order.
+3. Sorting may be frequently required.
 
 ## What tools can I use?
 
