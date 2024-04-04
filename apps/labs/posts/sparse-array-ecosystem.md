@@ -161,7 +161,7 @@ One can do any of the following to create a `scipy.sparse` or `cupyx.sparse` arr
 The main pain points for this set of libraries are twofold:
 
 1. They only support 2-D arrays or matrices.
-2. Most of the existing work only exists for the old, deprecated `np.matrix` interface. SciPy is trying to move away from that, but progress there is slow.
+2. Most of the existing work only exists for the old, deprecated `np.matrix` interface. SciPy has recently, however, begun work to migrate away from `np.matrix`.
 
 #### `torch.sparse`
 
