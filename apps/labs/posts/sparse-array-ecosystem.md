@@ -185,5 +185,3 @@ There are a number of honorable mentions that haven't managed to gain enough tra
 ## Conclusion
 
 The Sparse array ecosystem in Python is, in a word, _fragmented_. The meme below illustrates the options available to users. We would like to change that for the better. To that end, we at Quansight along with Professor Samaringhe's group at MIT CSAIL have received a grant from DARPA spanning two years of work to help move the ecosystem in a direction that would benefit the whole commpunity.
-
-![Meme describing sparse array choices](/posts/sparse-array-ecosystem/meme.jpg 'The State of Sparse Array Computing in Python')
