@@ -87,6 +87,7 @@ The advantages for this one are the flip-side of DOK:
 1. It's simple to implement.
 2. If the constituent arrays are stored as lists, one can easily append a new coordinate. However, we risk working with out-of-order indices that way.
 3. Storage is near-optimal (for hyper-sparse arrays).
+4. Iterating in-order is possible if the constituent arrays are sorted.
 
 Here are some disadvantages:
 
@@ -130,7 +131,7 @@ All formats have a number of read/write characteristics. For reading, they can b
 | **BSR**           | ✅<sup>1</sup>  | ✅<sup>1</sup>   | ✅                  | 🚫           | 🚧                 | 🚫                 | 🚧                 |
 | **N-dimensional** |                 |                  |                     | ✅           | 🚫                 | 🚫                 | ✅                 |
 
-<sup>1</sup> Within same block if it exists <br />
+<sup>1</sup> Within same block if it exists, otherwise similar to CSC. <br />
 ✅ Available, with optimized loops for atomic operations <br />
 🚧 Present, with intermediate conversions or sub-optimal iterations <br />
 🚫 Unavailable
@@ -147,7 +148,7 @@ Here, we will compare how to create sparse arrays with the different libraries, 
 2. By creating a [`sparse.DOK`](https://sparse.pydata.org/en/stable/generated/sparse.DOK.html) instance, populating it, then using [`sparse.DOK.asformat`](https://sparse.pydata.org/en/stable/generated/sparse.DOK.asformat.html).
 3. By specifying the constituent data or arrays.
 
-One notable pain point for `sparse` is its performance: It's notably slower than equivalent SciPy operations.
+One current pain point for `sparse` is its performance: It's notably slower than equivalent SciPy operations. Work is ongoing to resolve this difference in performance while maintaining generality.
 
 #### `cupyx.sparse` and `scipy.sparse`
 
