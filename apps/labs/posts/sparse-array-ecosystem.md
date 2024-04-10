@@ -142,11 +142,20 @@ Here, we will compare how to create sparse arrays with the different libraries, 
 
 #### `sparse`
 
-`sparse` provides two main options for constructing arrays:
+`sparse` provides a few main options for constructing arrays:
 
-1. From an existing array with [`sparse.asarray`](https://sparse.pydata.org/en/stable/generated/sparse.asarray.html).
-2. By creating a [`sparse.DOK`](https://sparse.pydata.org/en/stable/generated/sparse.DOK.html) instance, populating it, then using [`sparse.DOK.asformat`](https://sparse.pydata.org/en/stable/generated/sparse.DOK.asformat.html).
-3. By specifying the constituent data or arrays.
+```python
+# 1. with `sparse.asarray`
+spx = sparse.asarray(x, [format=...])
+
+# 2. Create a `sparse.DOK` and then convert
+spy = sparse.DOK(shape=..., dtype=...)  # Instantiate
+spy[...] = ...  # Assign repeatedly
+spy = spy.asformat(...)  # Convert
+
+# 3. By specifying the constituent arrays
+spz = sparse.COO(shape=..., data=..., coords=...)
+```
 
 One current pain point for `sparse` is its performance: It's notably slower than equivalent SciPy operations. Work is ongoing to resolve this difference in performance while maintaining generality.
 
@@ -154,22 +163,41 @@ One current pain point for `sparse` is its performance: It's notably slower than
 
 One can do any of the following to create a `scipy.sparse` or `cupyx.sparse` array:
 
-1. Use `array_type(existing_obj)`, as [an example CSR](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_array.html).
-2. (Only for SciPy) Instantiate a [`scipy.sparse.dok_array`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.dok_array.html), populate it, and then use [`scipy.sparse.dok_array.asformat`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.dok_array.asformat.html#scipy.sparse.dok_array.asformat)
-   - For `cupyx.sparse`, we can later move the array to the GPU.
-3. Use `array_type(tuple_of_constituent_arrays)`.
+```python
+# Use `array_type(existing_arr)`
+spx_arr_csr = scipy.sparse.csr_array(x)
+spx_mat_coo = scipy.sparse.coo_matrix(x)  #
+cpx_mat_csc = cupyx.sparse.csc_matrix(x)
+
+# Use `dok_array` or `dok_matrix` and then `.asformat`
+spy_arr_dok = scipy.sparse.dok_array(shape, dtype=...)  # Instantiate
+spy_arr_dok[...] = ...  # Assign repeatedly
+spy_arr_csr = spy_arr_dok.asformat("csr")  # Convert
+cpy_mat_csr = cupyx.sparse.csr_matrix(spy_arr_csr)  # Move to GPU
+
+# Use `array_type(tuple_of_constituent_arrays)`
+spz_arr_csr = scipy.sparse.csr_array((data, indices, indptr), shape=...)  # NumPy arrays
+cpz_mat_csr = cupyx.sparse.csr_array((data, indices, indptr), shape=...)  # CuPy arrays
+```
 
 The main pain points for this set of libraries are twofold:
 
 1. They only support 2-D arrays or matrices.
-2. Most of the existing work only exists for the deprecated `np.matrix` interface. SciPy has recently begun work to migrate away from `np.matrix`.
+2. Most of the existing work only exists for the deprecated `np.matrix` interface. SciPy has recently begun work to migrate away from `np.matrix`, but it remains the only option in `cupyx.sparse`.
 
 #### `torch.sparse`
 
 To create a sparse array, one can:
 
-1. Call the [`torch.Tensor.to_sparse`](https://pytorch.org/docs/stable/generated/torch.Tensor.to_sparse.html) on an existing `Tensor` (or any of the `to_sparse_*` format-specific methods).
-2. By calling the format-specific constructors, for example [`torch.sparse_coo_tensor`](https://pytorch.org/docs/stable/generated/torch.sparse_coo_tensor.html), to create a format from its constituent arrays.
+```python
+# Call `.to_sparse or .to_sparse_* methods`
+spx = x.to_sparse([layout=...])
+spx_csr = x.to_sparse_csr()
+
+# Call constructors and use constituent arrays
+spy_coo = torch.sparse.coo_tensor(coords, data, [shape, dtype=...])
+spy_csr = torch.sparse.csr_tensor(indices, indptr, data, [shape, dtype=...])
+```
 
 The main pain points for `torch.sparse` is the lack of Array API support, differing API from most other libraries (such as lack of a `asformat` method, and format-specific methods), and lack of DOK support to construct hyper-sparse tensors intuitively. On the flip side, `torch.sparse` is the only library to allow for N-dimensional GPU sparse arrays.
 
