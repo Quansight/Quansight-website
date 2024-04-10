@@ -99,19 +99,19 @@ Here are some disadvantages:
 
 ### [`sparse`](https://sparse.pydata.org/)
 
-Also known as PyData/Sparse, this is a library maintained by yours truly. Its original aim was to provide a NumPy-like API for working with N-dimensional sparse arrays. With the emergence of the [Array API standard](https://data-apis.org/array-api/latest/) and research into Sparse array computing, the aim has shifted to providing perfomant sparse array operations following the Array API standard, though we are some time away from reaching that goal.
+Also known as PyData/Sparse, this is a library maintained by yours truly. Its aim is to provide perfomant sparse array operations following the Array API standard, though we are some time away from reaching that goal. The work on this library started in April 2017, with the author of this blog post taking over maintenance around January 2018.
 
 ### [`scipy.sparse`](https://docs.scipy.org/doc/scipy/reference/sparse.html)
 
-This is one of the original/popular sparse matrix libraries. For a long time, it followed a discouraged corner of NumPy's API and was also limited to exactly two dimensional matrices. Work is underway to make it conform to a more modern API. Details can be found here in [various discussion posts on the SciPy Discourse](https://discuss.scientific-python.org/tag/sparse-arrays).
+This is one of the original/popular sparse matrix libraries. For a long time, it followed a discouraged corner of NumPy's API and was also limited to exactly two dimensional matrices. Work is underway to make it conform to a more modern API. Details can be found here in [various discussion posts on the SciPy Discourse](https://discuss.scientific-python.org/tag/sparse-arrays). It existed since before SciPy was moved to GitHub, or even TRAC, with the earliest references pointing to 2006.
 
 ### [`cupyx.sparse`](https://docs.cupy.dev/en/stable/reference/scipy_sparse.html)
 
-This member of the sparse array libraries follows an interface that closely mirrors SciPy's, while executing on Nvidia and AMD's GPUs.
+This member of the sparse array libraries follows an interface that closely mirrors SciPy's, while executing on Nvidia and AMD's GPUs. Work on `cupyx.sparse` started around 2017.
 
 ### [`torch.sparse`](https://pytorch.org/docs/stable/sparse.html)
 
-This submodule of PyTorch allows one to create and operate on mainly N-dimensional COO arrays on the CPU or GPU.
+This submodule of PyTorch allows one to create and operate on mainly N-dimensional COO arrays on the CPU or GPU. Work on `torch.sparse` existed in early releases of PyTorch, around 2016.
 
 ## API and Performance Comparison
 
