@@ -162,7 +162,7 @@ One can do any of the following to create a `scipy.sparse` or `cupyx.sparse` arr
 The main pain points for this set of libraries are twofold:
 
 1. They only support 2-D arrays or matrices.
-2. Most of the existing work only exists for the old, deprecated `np.matrix` interface. SciPy has recently, however, begun work to migrate away from `np.matrix`.
+2. Most of the existing work only exists for the deprecated `np.matrix` interface. SciPy has recently begun work to migrate away from `np.matrix`.
 
 #### `torch.sparse`
 
@@ -171,7 +171,7 @@ To create a sparse array, one can:
 1. Call the [`torch.Tensor.to_sparse`](https://pytorch.org/docs/stable/generated/torch.Tensor.to_sparse.html) on an existing `Tensor` (or any of the `to_sparse_*` format-specific methods).
 2. By calling the format-specific constructors, for example [`torch.sparse_coo_tensor`](https://pytorch.org/docs/stable/generated/torch.sparse_coo_tensor.html), to create a format from its constituent arrays.
 
-The main pain points for `torch.sparse` is the differing API from most other libraries, and lack of DOK support to construct hyper-sparse tensors intuitively.
+The main pain points for `torch.sparse` is the lack of Array API support, differing API from most other libraries (such as lack of a `asformat` method, and format-specific methods), and lack of DOK support to construct hyper-sparse tensors intuitively. On the flip side, `torch.sparse` is the only library to allow for N-dimensional GPU sparse arrays.
 
 ### Honorable Mentions
 
