@@ -193,7 +193,7 @@ I have [blogged in the
 past](https://www.asmeurer.com/blog/posts/moving-away-from-python-2/) on why I
 believe it is important for library authors to be proactive in dropping Python
 2 support, and since then [a large number of Python
-libraries](https://python3statement.org) have either dropped support or
+libraries](https://python3statement.github.io) have either dropped support or
 announced their plans to by 2020.
 
 Having Python 2 support removed will not only allow us to remove a [large
