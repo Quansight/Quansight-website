@@ -1,6 +1,6 @@
 ---
 title: "Writing fast string ufuncs for NumPy 2.0"
-published: March 21, 2024
+published: May 21, 2024
 authors: [lysandros-nikolaou]
 description: "The journey of writing string ufuncs and creating the np.strings namespace for NumPy 2.0"
 category: [PyData ecosystem]
@@ -28,7 +28,7 @@ Last July, the D.E. Shaw group, one of our customers, reported that string opera
 were not performant. Their team had already looked into the issue and found an
 obvious bottleneck. For every operation on string arrays, NumPy would create a
 Python object and call the associated method in `str` or `bytes` (depending
-on the array's dtype). It looks something like this in C pseudocode:
+on the array's dtype). It looked something like this in C pseudocode:
 
 ```cpp
 // Get the corresponding str method
@@ -83,8 +83,8 @@ When invoking the ufunc, NumPy provides the following arguments:
 - data: arbitrary data (extra arguments, function names, etc. ) that can be stored
   with the ufunc and will be passed in when it is called.
 
-When I first started looking into addressing the performance concerns raised by D.E. Shaw,
-I chose isalpha as the first ufunc I'd try to implement. Since `isalpha` is a function
+When I first started looking into addressing these performance concerns,
+I chose `isalpha` as the first ufunc I'd try to implement. Since `isalpha` is a function
 with just one input and one output, the loop was relatively easy to write. It looked
 something like this[^1]:
 
@@ -136,7 +136,7 @@ string dtypes, one for Unicode (UTF-32) and one for bytes (ASCII). Both of these
 dtypes are fixed-length dtypes, which means that the maximum length of each array
 item is specified by the dtype. Let's take the following example:
 
-```python3
+```python
 >>> import numpy as np
 >>> s = np.array(["abcd"])
 >>> s
@@ -147,7 +147,7 @@ The `dtype='<U4'` tells us that the strings in this array have a maximum length
 of four characters. Were we to assign an item of the array to a string that's
 longer than that, the excess characters would be stripped:
 
-```python3
+```python
 >>> s[0] = 'efghi'
 >>> s
 array(['efgh'], dtype='<U4')
@@ -159,7 +159,7 @@ array buffer still allocates the number of bytes corresponding to four character
 (4 bytes for ASCII, 16 bytes for UTF-32), but the rest of the bytes are zero. That
 has the side-effect that both of these dtypes strip all trailing zero bytes.
 
-```python3
+```python
 >>> s = np.array([b"abc", b"defgh"])
 >>> s
 array([b'abc', b'defgh'], dtype='|S5')
@@ -182,7 +182,7 @@ the new loop (which was essentially the same as `isalpha` with just one more inp
 and everything would be fine, right? Wrong! As soon as I built NumPy and ran a
 Python REPL to test, I was met with the following error:
 
-```python3
+```python
 >>> import numpy as np
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
@@ -226,17 +226,17 @@ The important arguments here are `given_descrs` and `loop_descrs`:
 - `loop_descrs` is an array of descriptors that must be filled in by the resolve
    descriptors implementation. These will be the descriptors that will be used
    in order to call the loop with the correct information.
-More information can be found on the
+More information can be found in the
 [NumPy documentation for `NPY_METH_resolve_descriptors`](https://numpy.org/devdocs/reference/c-api/array.html#c.NPY_METH_resolve_descriptors).
 
 If you're wondering how the user can pass output dtypes to the `resolve_descriptors`
 function, that's the work of the `out` optional keyword argument (kwarg) to ufuncs. If the
 `out` kwarg is `None`, which is the default, a new array will be created for each of the
-outputs. If one passes an array through the `out` kwarg though, the results will be
-written in the `out` array, and *that* array will be returned. In that case, the `out`
+outputs. If one passes an array through the `out` kwarg however, the results will be
+written into the `out` array, and *that* array will be returned. In that case, the `out`
 array descriptor will be the last item in `given_descrs`. Let's see that in practice:
 
-```python3
+```python
 >>> a = np.array([1, 2, 3])
 >>> b = np.array([6, 7, 8])
 >>> a
@@ -261,7 +261,7 @@ For `add`, writing a `resolve_descriptors` function is relatively straightforwar
 since the size of the result dtype should be the sum of the two input-dtype sizes,
 so that we get something like this:
 
-```python3
+```python
 >>> a = np.array(['abc'])
 >>> b = np.array(['def'])
 >>> a
@@ -321,7 +321,7 @@ and `np.add` now works for string dtypes as well!
 
 ## `find` / `rfind`: Nothing new here, right?
 
-Next in our list of functions to implement as ufuncs was `find` and `rfind`. Like
+Next in our list of functions to implement as ufuncs were `find` and `rfind`. Like
 `isalpha`, these two return fixed-type dtypes (`int`s), so no need for a
 `resolve_descriptors` function, and they both would be new ufuncs. Unlike
 `isalpha` though, which only has one input argument, they both accept four input
@@ -383,7 +383,7 @@ Our promoter specifies the following:
 
 Doing all of this allows us to do the following, having only written one loop:
 
-```python3
+```python
 >>> buf = np.array(["abcd", "cdef"])
 >>> sub = "c"
 >>> start = np.array([3, 0], dtype=np.int8)
@@ -418,15 +418,15 @@ the `out` kwarg, which I described above, to pass an array with the
 correct dtype into the `replace` ufunc. All we have to do is find out what the maximum
 length is, which, through some NumPy magic, is easy enough:
 
-```python3
+```python
 buffersizes = str_len(arr) + counts * (str_len(new) - str_len(old))
 ```
 
-It's just the diffence in size between the substring to be replaced and the replacement
+It's just the difference in size between the substring to be replaced and the replacement
 string, multiplied by the number of replacements. This leads to to the Python
 wrapper looking something like this:
 
-```python3
+```python
 def replace(a, old, new, count=-1):
     # Convert all input arguments to arrays
     arr = np.asanyarray(a)
@@ -434,14 +434,14 @@ def replace(a, old, new, count=-1):
     old = np.asanyarray(old, dtype=getattr(old, 'dtype', a_dt))
     new = np.asanyarray(new, dtype=getattr(new, 'dtype', a_dt))
 
-    # Count the number of occurences of `old` in `a`
+    # Count the number of occurrences of `old` in `a`
     # and compare that to the number of maximum replacements
     max_int64 = np.iinfo(np.int64).max
     counts = _count_ufunc(arr, old, 0, max_int64)
     count = np.asanyarray(count)
     counts = np.where(count < 0, counts, np.minimum(counts, count))
 
-    # Compute buffersizes, construct output array and call ufunc
+    # Compute buffer sizes, construct output array and call ufunc
     buffersizes = str_len(arr) + counts * (str_len(new) - str_len(old))
     out_dtype = f"{arr.dtype.char}{buffersizes.max()}"
     out = np.empty_like(arr, shape=buffersizes.shape, dtype=out_dtype)
@@ -482,11 +482,11 @@ string_replace_resolve_descriptors(PyArrayMethodObject *self,
 }
 ```
 
-With this function in place the `_replace` internal ufunc will fail as expected when
+With this function in place, the `_replace` internal ufunc will fail as expected when
 `out` is not provided. To get a better interface and avoid the need for an `out` array
 one can use the `numpy.strings.replace` wrapper.
 
-```python3
+```python
 >>> a = np.array(["abc"])
 >>> out = np.empty_like(a, shape=a.shape, dtype="U3")
 >>> _replace(a, "b", "c", 1)
@@ -501,28 +501,28 @@ array(['acc'], dtype='<U3')
 
 ## Results
 
-The benchmarks we ran were not too extensive, but the little results we had
+The benchmarks we ran were not too extensive, but the few results we had
 were already so promising, that we decided that doing all of this for all of the
 string operations was definitely going to be worth it.
 
-More specifically, we ran two experiments. One with a very small list with
-relatively big strings and one with somewhat bigger list that only contained
-small strings. Here's an illustration of the exact results:
+More specifically, we ran two experiments. One with a very small array with
+relatively long strings and one with somewhat larger array that only contained
+short strings. Here's an illustration of the exact results:
 
 <img
   src='/posts/numpy-string-ufuncs/benchmarks.png'
   alt="A bar plot showing the performance increase between the old approach and the new ufuncs across two different benchmarks" />
 
 The results clearly illustrate a big performance improvement, especially for
-bigger arrays. In the benchmarks we ran with a 1000-element array, there was
+larger arrays. In the benchmarks we ran with a 1000-element array, there was
 a performance increase of 150x-492x depending on the string operation, while
-there was a much moderate speed-up of 4x-11x for smaller two-element arrays.
+there was a more moderate speed-up of 4x-11x for smaller two-element arrays.
 This goes to show that operating on the raw C data, instead of doing the CPython
 PyObject dance explained above, has a very significant effect.
 
 ## Conclusion
 
-In this blog post, we explained how an observation from our client, D.E. Shaw,
+In this blog post, we explained how an observation from our client, the D.E. Shaw group,
 led to a complete rework of how string operations are done for NumPy arrays.
 In the process, we went over how to write ufuncs that operate on the raw C
 data buffer of the array and we described how the `resolve_descriptors` function
@@ -533,7 +533,7 @@ we can write only one loop that can operate on multiple dtypes.
 But that's not all! While all of this was brewing, [Nathan Goldbaum](https://github.com/ngoldbaum)
 was also working on a variable length string dtype with support for UTF-8.
 Combining these two work streams, NumPy 2.0 comes with a new `numpy.strings`
-namepsace that implements fast ufuncs for most of the string operations (with more
+namespace that implements fast ufuncs for most of the string operations (with more
 to come soon!) with support for byte strings (ASCII) and unicode (both UTF-8 and
 UTF-32).
 
@@ -543,7 +543,7 @@ Thanks to [Nathan Goldbaum](https://github.com/ngoldbaum), [Sebastian Berg](http
 [Marten van Kerkwijk](https://github.com/mhvk) and [Matti Picus](https://github.com/mattip) for their
 countless reviews and all of their patience.
 
-Big thanks to the D.E. Shaw group for sponsoring this work.
+A big thank you to the D.E. Shaw group for sponsoring this work.
 
 
 [^1]: In reality, the string ufuncs look similar to this, but have some differences.
