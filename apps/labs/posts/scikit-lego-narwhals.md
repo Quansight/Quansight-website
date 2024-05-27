@@ -6,7 +6,7 @@ description: 'And how your library can become dataframe-agnostic too'
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.png
-  alt: 'Narwhals logo'
+  alt: 'Scikit-lego and Narwhals logos, with handshake in between'
 hero:
   imageSrc: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.png
   imageAlt: 'Scikit-lego and Narwhals logos, with handshake in between'
