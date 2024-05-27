@@ -19,7 +19,7 @@ It's a relatively popular project with over 1000 Github stars and 20,000 downloa
 It's popularity comes from industry as many of the tools that it provides aren't proven to be state-of-the-art,
 but fall a bit more in the 'tricks that work' category. These features include a GroupedEstimator which
 can effectively run full pipelines split per subset, a TimeGapSplit cross validator for timeseries
-that adds a gap between train and test set and a whole suite of techniques that leverage mixture methods
+that adds a gap between train and test set, and a whole suite of techniques that leverage mixture methods
 for outlier detection and non-linear classification.
 
 Recently, because polars has been gaining traction, the library maintainers have been looking for a simple way to support multiple dataframe implementations. The project still wants to support pandas, but it would be a shame if newer dataframes couldn't be supported.
