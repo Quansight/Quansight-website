@@ -1,7 +1,7 @@
 ---
 title: 'Dataframe interoperability - what has been achieved, and what comes next?'
 authors: [marco-gorelli]
-published: April 9, 2024
+published: May 27, 2024
 description: 'An overview of the dataframe landscape, and solution to the "we only support pandas" problem'
 category: [PyData ecosystem]
 featuredImage:
@@ -14,7 +14,7 @@ hero:
 
 # DataFrame Interoperability
 
-I attended PyConLithuania 2024, and had a blast! I don't speak Lithuanian, and probably
+I attended PyCon Lithuania 2024, and had a blast! I don't speak Lithuanian, and probably
 neither did half the attendees. But - so long as we all stuck to a simple and clear subset
 of the English language - we could all understand each other and exchange ideas. I actually
 wanted to learn some Lithuanian in preparation for the event, but Duolingo didn't offer such
@@ -31,7 +31,7 @@ import polars as pd
 
 print((3 in pd.Series([1,2,3])) == (3 in pl.Series([1,2,3])))
 ```
-to print `'True'` - but no so! pandas checks if `3` is in the index, whereas Polars checks
+to print `'True'` - but not so! pandas checks if `3` is in the index, whereas Polars checks
 if `3` is in the values.
 
 This little prelude was just to establish two premises:
@@ -42,10 +42,10 @@ This little prelude was just to establish two premises:
 I'll tell you about the dataframe landscape, the interchange protocol, how to write
 dataframe-agnostic code, and where we go from here.
 
-## pandas are everywhere
+## pandas is everywhere
 
 There's a great array of diverse dataframes out there. And the way that data science libraries
-have typically to such diversity is to support pandas...
+have typically responded to such diversity is to support pandas...
 
 ![Image showing a meeting in which one person is dismissed for suggesting that a library other
 than pandas might be supported](/posts/dataframe-interop-pycon-lit-2024/pandas_everywhere.png)
@@ -98,7 +98,7 @@ Nonetheless, does it work? Is it reliable?
   `plotly` dataframe libraries.
 - Converting from pandas: unreliable, don't use it. There are cases when the results
   are literal nonsense. These have generally been fixed, and will be available in
-  pandas 3.0+. For now, however, if you're using the interchange protocol to convert
+  pandas 3.0. For now, however, if you're using the interchange protocol to convert
   to anything other pandas, then you may want to proceed with great care.
 
 So as of April 2024, the interchange protocol can be used as a standardised version
@@ -127,7 +127,7 @@ Polars, Modin, and cuDF. But most importantly, GPU code can stay on GPU, and laz
 can stay lazy!
 
 To see a complete example of Narwhals in action, its website features
-[a little tutorial](https://marcogorelli.github.io/narwhals/basics/complete_example/).
+[a little tutorial](https://narwhals-dev.github.io/narwhals/basics/complete_example/).
 
 Regarding the four problems of libraries only supporting pandas, Narwhals addresses all
 of them:
@@ -138,27 +138,9 @@ of them:
 - Data which starts lazy can stay lazy.
 - No heavy dependencies necessary (as we'll soon see, Narwhals is about as light as it gets).
 
-Finally, [Narwhals is also extensible](https://marcogorelli.github.io/narwhals/extending/),
-meaning that libraries can become compatible without having to asking any other library
+Finally, [Narwhals is also extensible](https://narwhals-dev.github.io/narwhals/extending/),
+meaning that libraries can become compatible without having to ask any other library
 to change anything.
-
-### Did you get deja-vu? Does this remind you of Ibis?
-
-A related project is Ibis, which [presents itself as a dataframe standard](https://voltrondata.com/resources/open-source-standards),
-and dispatches to 20+ backends. Some differences with Narwhals are:
-
-- Narwhals is ~1000 times lighter
-- Narwhals only supports 4 backends, Ibis more than 20
-- Narwhals is new, whereas Ibis is mature and production-ready
-
-The first point is a major differentiator:
-if your objective is to make your dataframe library dataframe-agnostic, and package size is a concern to you,
-then Narwhals is currently (as of April 2024) a more realistic solution - Ibis alone (310 MB) would put you above
-the AWS Lambda package size limit (250MB).
-
-![Image relative sizes of Narwhals (0.3 MB) vs Ibis (310 MB)](/posts/dataframe-interop-pycon-lit-2024/narwhals_vs_ibis.png)
-
-Note that the projects are not in competition and have different goals.
 
 ## Where do we go from here?
 
