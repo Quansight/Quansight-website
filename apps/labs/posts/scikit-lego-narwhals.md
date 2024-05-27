@@ -5,7 +5,7 @@ published: May 26, 2024
 description: 'And how your library can become dataframe-agnostic too'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.jpg
+  src: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.png
   alt: 'Narwhals logo'
 hero:
   imageSrc: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.png
@@ -91,8 +91,8 @@ To drive the second point home, here are some timings comparing running `add_lag
 [Code to reproduce](https://gist.github.com/MarcoGorelli/1da1971063caf0b3e5133f5dfba3315b).
 
 Note that we're dealing with purely numeric data here, so the conversion is extremely cheap.
-The reason that the second approach takes over 100x longer is that Polars is generally much
-faster at feature engineering than pandas. As the size of the dataframe increases, the comparison
+The reason that the second approach takes over 100x longer is that Polars generally excels at
+feature engineering. As the size of the dataframe increases, the comparison
 scales even better in the "native Polars support" direction.
 
 That's why "just convert to pandas" is a disappointing solution, and why it's worth it to
