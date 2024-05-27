@@ -91,7 +91,7 @@ Scikit-learn also supports Polars in a somewhat standardised way, by leveraging 
 some custom logic. And in this blog post, we look at how scikit-lego achieved the same by using Narwhals.
 
 Is this a sign of what's to come? I certainly hope so. pandas is - and will very likely continue to be -
-and enormously useful tool which solves a lot of problems for a lot of real people. 
+an enormously useful tool which solves a lot of problems for a lot of real people. 
 However, if pandas remained the _only_ dataframe library supported in the data science
 ecosystem, then that'd be a opportunity.
 
