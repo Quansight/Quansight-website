@@ -9,7 +9,7 @@ category: [PyData ecosystem]
 # How scikit-lego became dataframe-agnostic
 
 Scikit-lego is a Python project which provides extra building blocks on top of scikit-learn.
-It provides some extra funcionality such as `TimeGapSplit` and `add_lags` which may be considered
+It provides some extra functionality such as `TimeGapSplit` and `add_lags` which may be considered
 too niche for scikit-learn itself. These functions have always only ever supported pandas...up until now!
 
 As of scikit-lego 0.9.0, you can also pass dataframes from Polars, Modin, cuDF, and in principle a whole host
@@ -28,12 +28,12 @@ Let's take a look at `sklego.pandas_utils.add_lags`. The code before version 0.9
 - if it's NumPy, then perform array operations
 - if it's pandas, then perform pandas dataframe operations
 
-In order to support Polars too, one possible solution could have been do add a third step to
+In order to support Polars too, one possible solution could have been to add a third step to
 the above:
 
 - if it's Polars, then perform Polars dataframe operations
 
-This looks simple, but it actually opens up a rabbit-hole of extra steps, such as:
+This looks simple, but it actually opens up a rabbit hole of extra steps, such as:
 
 - if it's Modin, ...
 - if it's cuDF, ...
@@ -72,7 +72,7 @@ To drive the second point home, here are some timings comparing running `add_lag
 10-million-row Polars dataframe directly, as opposed to converting to pandas and back:
 
 - passing Polars directly to `add_lags`:  ~ 10.8 ms
-- converting Polars to pandas, passing that to `add_lags`, then converting back: ~ 1.47 s
+- converting Polars to pandas, passing that to `add_lags`, then converting back: ~ 1470 ms
 
 [Code to reproduce](https://gist.github.com/MarcoGorelli/1da1971063caf0b3e5133f5dfba3315b).
 
@@ -93,9 +93,9 @@ some custom logic. And in this blog post, we look at how scikit-lego achieved th
 Is this a sign of what's to come? I certainly hope so. pandas is - and will very likely continue to be -
 and enormously useful tool which solves a lot of problems for a lot of real people. 
 However, if pandas remained the _only_ dataframe library supported in the data science
-ecosystem, then that'd be a opportunity.
+ecosystem, then that'd be a missed opportunity.
 
-We've looked at how scikit-lego leveraged Narwhals in order to become dataframe-agnostic. Like this, they are
-able to natively support Polars, Modin, and cuDF without any of them becoming required dependencies.
+We've looked at how scikit-lego leveraged Narwhals in order to become dataframe-agnostic,
+able to natively support Polars, Modin, and cuDF without adding them as dependencies.
 Let's hope that this is the direction that data science libraries are headed towards, and that Narwhals
 can facilitate the process.
