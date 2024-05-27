@@ -40,12 +40,12 @@ This little prelude was just to establish two premises:
 - a simple and clear common language can enable collaboration
 
 I'll tell you about the dataframe landscape, the interchange protocol, how to write
-dataframe-agnostic code, and where we go from here.
+dataframe-agnostic code, and where we might go from here.
 
 ## pandas is everywhere
 
 There's a great array of diverse dataframes out there. And the way that data science libraries
-have typically responded to such diversity is to support pandas...
+have historically responded to such diversity is to support pandas...
 
 ![Image showing a meeting in which one person is dismissed for suggesting that a library other
 than pandas might be supported](/posts/dataframe-interop-pycon-lit-2024/pandas_everywhere.png)
@@ -64,8 +64,8 @@ Before talking about how to solve all 4, let's talk about how to solve at least 
 
 ## The Dataframe Interchange Protocol
 
-The general idea is "write your library using dataframe X, and then if a user comes along with
-dataframe Y, then you use the interchange protocol to convert dataframe X to dataframe Y".
+The general idea is "write your library using dataframe Y, and then if a user comes along with
+dataframe X, then you use the interchange protocol to convert dataframe X to dataframe Y".
 
 ![Image showing a pumpkin being fed to someone through a funnel. The input to the funnel is labelled
 "Dataframe X", and the output "Dataframe Y"](/posts/dataframe-interop-pycon-lit-2024/interchange.png)
@@ -95,9 +95,9 @@ Nonetheless, does it work? Is it reliable?
 
 - Converting to pandas: reliable enough after pandas 2.0.2, though may sometimes
   raise unnecessarily in some versions. It's already used by the `seaborn` and
-  `plotly` dataframe libraries.
+  `plotly` plotting libraries.
 - Converting from pandas: unreliable, don't use it. There are cases when the results
-  are literal nonsense. These have generally been fixed, and will be available in
+  are "garbage". These have generally been fixed, and will be available in
   pandas 3.0. For now, however, if you're using the interchange protocol to convert
   to anything other pandas, then you may want to proceed with great care.
 
@@ -114,7 +114,7 @@ Look at how happy this panda and polar bear look, chilling out with their narwha
 
 ![Image showing a panda, a polar bear, and a narwhal chilling out in an office together](/posts/dataframe-interop-pycon-lit-2024/narwhals_small.jpg)
 
-As you may have guessed from the image, Narwhals aims to bring pandas and Polars together.
+As you may have guessed from the image, Narwhals aims to bring pandas, Polars (and more!) together.
 
 The way you write dataframe-agnostic code using Narwhals is:
 
@@ -153,10 +153,10 @@ wish that:
   of converting to pandas as an intermediate step.
 - The Polars API becomes more widespread, as opposed to all libraries trying to imitate pandas.
 
-There's actually one item on my wishlist. It's way more ambitious that the above ones, and I don't
+There's actually one more item on my wishlist. It's way more ambitious than the above ones, and I don't
 know if we'll ever see it happen. However, I'm a dreamer, so that's not going to stop me from hoping:
 
 - I hope that Duolingo will finally add a Lithuanian course to their catalog.
 
-That's it from me, I look forward to revisiting this post in one year's time to see in which direction
+I look forward to revisiting this post in one year's time to see in which direction
 data science has gone. Now please go out and use the Polars API!
