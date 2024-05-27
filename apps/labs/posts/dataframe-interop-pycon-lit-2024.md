@@ -110,7 +110,7 @@ Addressing all four points seems ambitious - is it even possible?
 
 ## And now for something completely different: Narwhals
 
-Look at how happy this panda and polar bear looking, chilling out with their narwhal friend:
+Look at how happy this panda and polar bear look, chilling out with their narwhal friend:
 
 ![Image showing a panda, a polar bear, and a narwhal chilling out in an office together](/posts/dataframe-interop-pycon-lit-2024/narwhals_small.jpg)
 
