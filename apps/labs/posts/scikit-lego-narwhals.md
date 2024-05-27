@@ -1,18 +1,30 @@
 ---
-title: 'How Narwhals and scikit-lego came together to enable dataframe-agnosticism'
+title: 'How Narwhals and scikit-lego came together to achieve dataframe-agnosticism'
 authors: [marco-gorelli]
 published: May 26, 2024
 description: 'And how your library can become dataframe-agnostic too'
 category: [PyData ecosystem]
+featuredImage:
+  src: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.jpg
+  alt: 'Narwhals logo'
+hero:
+  imageSrc: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.png
+  imageAlt: 'Scikit-lego and Narwhals logos, with handshake in between'
 ---
 
 # How scikit-lego became dataframe-agnostic
 
-Scikit-lego is a Python project which provides extra building blocks on top of scikit-learn.
-It provides some extra functionality such as `TimeGapSplit` and `add_lags` which may be considered
-too niche for scikit-learn itself. These functions have always only ever supported pandas...up until now!
+[Scikit-lego](https://github.com/koaning/scikit-lego) is a Python project from the [scikit-learn](https://scikit-learn.org/stable/) ecosystem that contributes extra estimators for machine-learning pipelines.
+It's a relatively popular project with over 1000 Github stars and 20,000 downloads a month.
+It's popularity comes from industry as many of the tools that it provides aren't proven to be state-of-the-art,
+but fall a bit more in the 'tricks that work' category. These features include a GroupedEstimator which
+can effectively run full pipelines split per subset, a TimeGapSplit cross validator for timeseries
+that adds a gap between train and test set and a whole suite of techniques that leverage mixture methods
+for outlier detection and non-linear classification.
 
-As of scikit-lego 0.9.0, you can also pass dataframes from Polars, Modin, cuDF, and in principle a whole host
+Recently, because polars has been gaining traction, the library maintainers have been looking for a simple way to support multiple dataframe implementations. The project still wants to support pandas, but it would be a shame if newer dataframes couldn't be supported.
+
+Enter narwhals. As of scikit-lego 0.9.0, you can also pass dataframes from Polars, Modin, cuDF, and in principle a whole host
 of other dataframes.
 But, how does it work? Why did they use Narwhals?
 Why don't they just
@@ -22,28 +34,29 @@ We'll start by answering these questions, and will end with some hopes for the f
 
 ## How does it work?
 
-Let's take a look at `sklego.pandas_utils.add_lags`. The code before version 0.9.0 did something like this:
+Let's take a look at `sklego.pandas_utils.add_lags` as a tangible example that demonstrates how you might be able to leverage Narwhals in your own library. The code before version 0.9.0 did something like this:
 
-- check if the input is NumPy or a pandas dataframe
-- if it's NumPy, then perform array operations
-- if it's pandas, then perform pandas dataframe operations
+1. check if the input is NumPy or a pandas dataframe
+2. if it's NumPy, then perform array operations
+3. if it's pandas, then perform pandas dataframe operations
 
-In order to support Polars too, one possible solution could have been to add a third step to
+In order to support Polars too, one possible solution could have been to add a fourth step to
 the above:
 
-- if it's Polars, then perform Polars dataframe operations
+4. if it's Polars, then perform Polars dataframe operations
 
 This looks simple, but it actually opens up a rabbit hole of extra steps, such as:
 
-- if it's Modin, ...
-- if it's cuDF, ...
-- if it's fireducks, ...
+5. if it's Modin, ...
+6. if it's cuDF, ...
+7. if it's fireducks, ...
 
 In order to address all the above, scikit-lego opted for a simpler approach: use Narwhals.
 The steps then become:
 
-- run `narwhals.from_native` on the input
-- express the dataframe logic using the subset of the Polars API supported by Narwhals
+1. run `narwhals.from_native` on the input
+2. if it's NumPy, then perform array operations
+3. otherwise, express dataframe logic using the subset of the Polars API supported by Narwhals
 
 Like this, Narwhals takes care of translating its (Polars-like) syntax to each
 supported backend. Read the [Narwhals docs](https://narwhals-dev.github.io/narwhals) for more
@@ -65,8 +78,9 @@ However, even in the best-case zero-copy-conversion scenario, this presents seve
   dataframe
 
 Furthermore, converting to pandas may present a cost - for example, if you start with a Polars
-LazyFrame, then you're required to call `.collect` on it before converting
-to pandas.
+LazyFrame, which can run significantly faster because it delays reading data into memory and performs
+[several optimisations](https://docs.pola.rs/user-guide/lazy/optimizations/),
+then you're required to call `.collect` on it before converting to pandas.
 
 To drive the second point home, here are some timings comparing running `add_lags` on a
 10-million-row Polars dataframe directly, as opposed to converting to pandas and back:
