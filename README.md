@@ -1,6 +1,8 @@
 # Quansight Website
 
 - [Quansight Website](#quansight-website)
+  - [How to publish a new blog post 📝](#how-to-publish-a-new-blog-post-)
+  - [Running the website locally 🖥](#running-the-website-locally-)
   - [Orientation 🗺](#orientation-)
   - [Deployment Schedule 📆](#deployment-schedule-)
   - [How to make changes to the website 👨🏿‍💻](#how-to-make-changes-to-the-website-)
@@ -15,73 +17,129 @@
     - [Next.js plus the codebase in this repo](#nextjs-plus-the-codebase-in-this-repo)
   - [Ways to view the site at different stages 🔍](#ways-to-view-the-site-at-different-stages-)
   - [System design decisions 🏗](#system-design-decisions-)
-  - [Running the website locally 🖥](#running-the-website-locally-)
   - [Adding new components 🧩](#adding-new-components-)
   - [Adding new queries 🗃](#adding-new-queries-)
   - [GitHub-based blog workflow (Labs blog) 💻](#github-based-blog-workflow-labs-blog-)
     - [Structure of the blog post](#structure-of-the-blog-post)
       - [Example of blog post meta section](#example-of-blog-post-meta-section)
-    - [Adding a new blog post 📝](#adding-a-new-blog-post-)
     - [Adding a new blog category](#adding-a-new-blog-category)
     - [Adding new components for usage inside `.mdx` posts](#adding-new-components-for-usage-inside-mdx-posts)
     - [Specifications for Hero images](#specifications-for-hero-images)
+
+## How to publish a new blog post 📝
+
+1. Create a new feature branch. Example: `feature/new-hello-world-post`.
+2. Choose a good, human-readable slug for your blog post. This slug will be used
+   both in the URL path to your blog post and in the folder and file names in
+   the next steps.
+3. Add feature and hero images plus any other images contained in your blog
+   post to `apps/labs/public/posts/<post-slug>/`. The feature image is used for
+   sharing on social media and in the blog index. The hero image is the big
+   banner above the blog post.
+4. Add a new `.md|.mdx` file inside the `app/labs/posts` directory (careful:
+   this is not the same directory as the images). Make sure to
+   read the [Structure of the blog post section](#structure-of-the-blog-post) in
+   this file to ensure that the post is properly structured.
+5. Your commit tree should have the following structure:
+   - apps/labs/posts/
+     - new-hello-world-post.mdx
+   - apps/labs/public/posts/new-hello-world-post/
+     - descriptive-name-of-feature-image.png
+     - descriptive-name-of-hero-image.png
+     - any other images needed within your blog post
+6. Commit and push your changes to the repository. For commits please follow the
+   format of the [conventional
+   commit](https://www.conventionalcommits.org/en/v1.0.0/).
+7. Create a pull request to the `main` branch. Make sure to add the `type: content 📝`
+   and `labs 🔭` labels to the PR.
+8. Wait for someone to review the new blog post.
+   > TIP: Look for the Vercel preview URL posted by a bot to the pull request so
+   > you can check that the blog post looks okay before publishing to the world
+   > wide web.
+9. Once your pull request is approved, you should be able to merge your PR into
+   the `main` branch.
+10. Once merged into the `main` branch, your blog post should appear within a few
+    minutes on labs.quansight.org.
+
+## Running the website locally 🖥
+
+Prerequisites:
+
+- [Node](https://nodejs.org/en/)
+
+### Short version (Labs site)
+
+Copy and paste the following commands:
+
+```sh
+git clone git@github.com:Quansight/Quansight-website.git
+cd Quansight-website
+npm install
+cp apps/labs/.env.example apps/labs/.env
+npm run start:labs
+```
+
+### Longer version
+
+To run the website locally on your machine, you must first clone this git repo,
+`cd` into the repo, then run `npm install`.
+
+This repo contains two projects (websites): Consulting and Labs. (We are not
+currently using the Consulting project.) You must create a `.env` file for each
+project that you want to develop locally. For example, for Quansight Labs, you
+will need to create `apps/labs/.env`. You can do this by copying the example
+environment file:
+
+```bash
+cp apps/labs/.env.example apps/labs/.env
+```
+
+Note: You should **not** modify the example environment file.
+
+Run `npm run start:labs` to start a corresponding dev server. Navigate to
+<http://localhost:4200/> or use `localhost` in the Storyblok preview panel. On
+the local host, the app will automatically reload if you change any of the
+source files, whereas in the Storyblok panel you need to refresh the page
+manually.
+
+Important: whenever the website's dependencies change or are updated, the lock
+file `package-lock.json` will be updated. Whenever `package-lock.json` is
+updated, you should re-run `npm install` (on CI, `npm ci`), so that your local
+environment's dependencies will match the production environment.
 
 ## Orientation 🗺
 
 Here is some basic info to help orient you to this repo.
 
 - This repo holds the **code** for two websites:
-  - `./apps/consulting/` holds code for Quansight Consulting:
-    <https://quansight.com>
   - `./apps/labs/` holds code for Quansight Labs: <https://labs.quansight.org>
+  - `./apps/consulting/` holds code for the previous Quansight Consulting website.
+    It is now just an archive.
   - `./libs` holds code shared by both websites.
-- The websites' **content** lives in [Storyblok](https://app.storyblok.com)
+- Labs website **content** lives in [Storyblok](https://app.storyblok.com)
   (requires login).
-  - But Labs and Consulting **blog posts** live under `./apps/labs/posts` and
-    `./apps/consulting/posts`, respectively.
+  - But Labs **blog posts** live under `./apps/labs/posts`
 - The websites are hosted and deployed via
   [Vercel](https://vercel.com/quansight) (requires login).
-- The repo's default branch is `develop`, **not** `main`.
-  - Most pull requests (including Labs blog posts) will be opened against
-    `develop`.
-  - `main` is used for production (i.e., the live websites).
+- The repo's default branch is `main`
+  - Most pull requests (i.e., Labs blog posts) will be opened against
+    `main`.
+  - Riskier pull requests will be opened against the `develop` branch.
+  - `main` is used for production (i.e., the live website).
   - You can think of `develop` as staging.
-  - Only hotfixes and releases are to be opened against `main`.
   - Pushing commits to `main` triggers a deployment of both websites via Vercel.
 
 ## Deployment Schedule 📆
 
-The current schedule for website deployment to live is weekly, on Tuesdays.
-Please arrange to have all PRs that you wish to go live on a given week
-merged to `develop` by end-of-day of the immediately preceding Monday.
-
-We are following a rotating deployment manager schedule monthly as follows:
-
-- 1st Tuesdays: [@bskinn](https://github.com/bskinn)
-- 2nd Tuesdays: [@gabalafou](https://github.com/gabalafou)
-- 3rd Tuesdays: [@pavithraes](https://github.com/pavithraes)
-- 4th Tuesdays: [@trallard](https://github.com/trallard)
-
-For months with a 5th Tuesday, the deployment manager role will follow the
-same rotation sequence. Thus, through 2023:
-
-- 29 Nov 2022: @bskinn
-- 31 Jan 2023: @gabalafou
-- 30 May 2023: @pavithraes
-- 29 Aug 2023: @trallard
-- 31 Oct 2023: @bskinn
-
-Please coordinate your PRs and other deployment-related matters
-in the #qwebsite-ops Slack channel.
+There used to be a deployment schedule but now the website is deployed whenever
+a new blog post is approved and merged to the main branch. All other changes are
+deployed as needed.
 
 ## How to make changes to the website 👨🏿‍💻
 
 > **Note**
 > Before reading this section, familiarize yourself with [Vercel
 > environments](https://vercel.com/docs/concepts/deployments/environments).
-
-This repo contains two websites ([Consulting](./apps/consulting/) and [Labs](./apps/labs/)), but the process to update
-either is essentially the same.
 
 There are primarily two types of website changes, each with its process:
 
@@ -91,12 +149,6 @@ There are primarily two types of website changes, each with its process:
 Note that Labs blog posts are a bit of an exception. Categorically they are
 content changes, but the content lives in the Git repo -- so technically they are
 code changes, and they follow the process for code changes.
-
-> **Note**
-> Once [issue #396](https://github.com/Quansight/Quansight-website/issues/396)
-> is implemented, the Consulting blog posts will be
-> converted to use the same machinery as the Labs posts, and after that
-> time the Consulting blog posts will _also_ follow the process for code changes.
 
 This section will cover the process for each type of change.
 
@@ -134,22 +186,22 @@ same. There are three major stages, each with distinct steps.
       button, Storyblok will make a request to Vercel to start a preview
       deployment.
    3. Look for deployment notifications in Slack. Vercel will send a message to
-      the `#website-vercel-bot-log` channel containing a link to the preview URL.
+      the [#website-vercel-bot-log][slack-channel] channel containing a link to the preview URL.
    4. Visit the Vercel preview URL to review and double-check your changes.
 3. **Going live**
    1. When you want your changes to go to the live production site, coordinate
       with the dev team to open a merge pull request to the `main` branch on
-      GitHub. Refer to the [deployment schedule](#deployment-schedule-)
-      to see whom you should specifically reach out to.
+      GitHub.
    2. When the Vercel GitHub app comments on the merge PR with a preview URL,
       visit that preview URL to check your changes. (You should also be able to
       get the Vercel preview URL from the Slack channel.)
    3. If it all looks good, coordinate with the dev team to merge the PR to the
       `main` branch.
    4. Once that PR is merged to `main`, wait for the production build to finish
-      deploying (check our [internal Slack channel][slack-channel] for notifications), then check your changes
-      against the live site. You may need to clear your browser's cache before
-      you can see your changes.
+      deploying (check our internal Slack channel,
+      [#website-vercel-bot-log][slack-channel], for notifications), then check
+      your changes against the live site. You may need to clear your browser's
+      cache before you can see your changes.
 
 ### Code changes (GitHub) 💻
 
@@ -167,9 +219,8 @@ These are the concrete steps to follow to move your code from branch to branch:
 
 1. Open a pull request against the `develop` branch. This will kick off preview
    deployments in Vercel. Vercel will add a comment to your pull request with
-   links to the preview URLs.
-2. Check one or both preview URLs depending on whether your change affects one
-   or both sites.
+   links to the preview URL.
+2. Check preview URL.
 3. Once your pull request has been reviewed and approved, commit it to the
    `develop` branch.
    - Consider doing a
@@ -187,14 +238,14 @@ These are the concrete steps to follow to move your code from branch to branch:
    git push -u origin release-YYYYMMDD
    ```
 
-   Be sure to use `main` as the base branch of your PR and not `develop`.
+   Be sure to use `main` as the base branch of your release PR and not `develop`.
 
-5. Review both preview URLs that Vercel will add to your Pull Request.
+5. Review preview URL that Vercel will add to your Pull Request.
 6. If all looks good and your Pull Request has gotten approval, then merge it
-   into `main`. This will kick off a production deployment on Vercel. Check the live
-   public websites once the deployment is finished (Vercel will send a notification
-   to the [Slack channel][slack-channel]. You may need to clear your browser's cache before you
-   can see your changes.
+   into `main`. This will kick off a production deployment on Vercel. Check the
+   live public websites once the deployment is finished. (Vercel will send a
+   notification to the [#website-vercel-bot-log][slack-channel] slack channel.)
+   You may need to clear your browser's cache before you can see your changes.
 7. Delete the release branch if GitHub did not automatically delete it when you
    merged your Pull Request.
 
@@ -290,21 +341,16 @@ draft content on the site.
 
 ### Vercel
 
-Each website corresponds to a separate project in Vercel, `quansight-consulting`,
-and `quansight-labs`, respectively. However, because both projects are mapped to
-the same repository on GitHub, whenever a commit is made to the repo, whether
-the commit was only for the Consulting site or the Labs site, it
-triggers a preview deployment for both sites. **Likewise, whenever a merge is made
-to the `main` branch, it triggers a production deployment to both live websites**.
+The Labs website corresponds to the `quansight-labs` project in Vercel.
 
-Each Vercel project has settings that allow it to integrate with Storyblok,
-Next.js, and GitHub. Each Vercel project has three separate environments:
+The Vercel project has settings that allow it to integrate with Storyblok,
+Next.js, and GitHub. The Vercel project has three separate environments:
 development, preview, and production. The development and preview environments
 contain the preview key to Storyblok. The production environment contains the
 public key to Storyblok, which only allows access to the published
 version of the content, not the draft version.
 
-Each Vercel project is also configured with a webhook that Storyblok uses to
+The Vercel project is also configured with a webhook that Storyblok uses to
 kick off a preview deployment of the `develop` branch whenever new content is published
 in Storyblok.
 
@@ -402,7 +448,7 @@ editors to previewing draft content against the `develop` branch to help catch
 any potential code/content conflicts before merging to `main`.
 
 When viewing the site in local development or at a Vercel preview URL, there
-should be a overlay that explains that you are looking at a preview of the site.
+should be an overlay that explains that you are looking at a preview of the site.
 This helps reduce confusion when screenshots are shared. This overlay should not
 be present on a production build of the site.
 
@@ -437,52 +483,6 @@ code changes in the `develop` branch, a pull request can be made to
 update a log file. That single commit can then be merged into the `main` branch
 to kick off a deployment. This is a hotfix for content. A hotfix for code can be
 done similarly.
-
-## Running the website locally 🖥
-
-Prerequisites:
-
-- [Node](https://nodejs.org/en/)
-
-### Short version (Labs site)
-
-Copy and paste the following commands:
-
-```sh
-git clone git@github.com:Quansight/Quansight-website.git 
-cd Quansight-website 
-npm install 
-cp apps/labs/.env.example apps/labs/.env 
-npm run start:labs
-```
-
-### Longer version
-
-To run the website locally on your machine, you must first clone this git repo,
-`cd` into the repo, then run `npm install`.
-
-This repo contains two projects (websites): Consulting and Labs. (We are not
-currently using the Consulting project.) You must create a `.env` file for each
-project that you want to develop locally. For example, for Quansight Labs, you
-will need to create `apps/labs/.env`. You can do this by copying the example
-environment file:
-
-```bash
-cp apps/labs/.env.example apps/labs/.env
-```
-
-Note: You should **not** modify the example environment file. 
-
-Run `npm run start:labs` to start a corresponding dev server. Navigate to
-<http://localhost:4200/> or use `localhost` in the Storyblok preview panel. On
-the local host, the app will automatically reload if you change any of the
-source files, whereas in the Storyblok panel you need to refresh the page
-manually.
-
-Important: whenever the website's dependencies change or are updated, the lock
-file `package-lock.json` will be updated. Whenever `package-lock.json` is
-updated, you should re-run `npm install` (on CI, `npm ci`), so that your local
-environment's dependencies will match the production environment.
 
 ## Adding new components 🧩
 
@@ -568,11 +568,11 @@ signs. The meta section contains post-related information like:
   [`categories.json`](./apps/labs/posts/categories.json) file.
   **Important note:** categories are case-sensitive.
 - `featuredImage` (required) - Object with two required properties: `src` and `alt`.
-  - The `src` property is a path to the featured image which is displayed both
+  - The `src` property is a path to the featured image. The image is displayed both
     (a) in the posts gallery on the`/blog` page and (b) in rich social media
     preview cards (on Twitter, Slack, LinkedIn, etc.). The image should be added
     to the `apps/labs/public/posts/<post-slug>` directory and the `src` property
-    should be `/posts/<post-slug/<image-filename-with-extension>`. For example,
+    should be `/posts/<post-slug>/<image-filename-with-extension>`. For example,
     if the filename of your blog post is `hello-world.md` and the filename of
     your featured image is `featured-image.png`, then you save the image at
     `apps/labs/public/posts/hello-world/featured-image.png`, and `src` would be
@@ -584,19 +584,24 @@ signs. The meta section contains post-related information like:
     post to see how the card will look on that social media platform.[^1]
     [^1]: Note that Twitter post previews can be flaky and
     [LinkedIn has a useful post-inspector tool](linkedin.com/post-inspector).
-  - The `alt` property is alternative text for the image.
-- `hero` (required) - the object for the Hero section of the post. This can have two different structures:
-  - The first structure is an object with `imageSrc` and `imageAlt`. The `imageSrc` property is a path to
-    the hero image, which is displayed on the blog post page between the nav bar and the
-    blog heading title. The `imageAlt` property is alternative text for the image.
-    The image should be added to the `apps/labs/public/posts/<post-name>`
-    directory, for example, `apps/labs/public/posts/hello-world-post`.
-  - The second structure is an object with properties: `imageMobile`,`imageTablet`,
-    and `imageDesktop`. Each of these properties also contain `imageSrc` and `imageAlt` properties.
-  - For both of these structures, there is no need to provide full image paths,
-    so the path names should start with`/posts/`.
+  - The `alt` property is alternative text for the image for use by blind and
+    low vision readers.
+- `hero` (required) - the object for the Hero section of the post. This can have
+  two different structures:
+  - The first structure is an object with `imageSrc` and `imageAlt`. The
+    `imageSrc` property is a path to the hero image, which is displayed on the
+    blog post page between the nav bar and the blog heading title. The
+    `imageAlt` property is alternative text for the image. The image should be
+    added to the `apps/labs/public/posts/<post-name>` directory, for example,
+    `apps/labs/public/posts/hello-world-post`.
+  - The second structure is an object with properties:
+    `imageMobile`,`imageTablet`, and `imageDesktop`. Each of these properties
+    also contain `imageSrc` and `imageAlt` properties.
+  - The src should begin with `/posts/` (not apps/labs/public/posts/).
 
 #### Example of blog post meta section
+
+For a blog post with the file name, `hello-world-post.mdx`:
 
 ```yaml
 title: 'This is hello world post!'
@@ -612,26 +617,17 @@ hero:
   imageAlt: 'Excellent alt-text describing the hero image'
 ```
 
-### Adding a new blog post 📝
-
-1. Create a new feature branch. Example: `feature/new-hello-world-post`.
-2. Add post feature and hero images to `apps/labs/public/posts/<post-name>`.
-3. Add a new `.md|.mdx` file inside the `app/labs/posts` directory. Make sure to read the
-   [Structure of the blog post section](#structure-of-the-blog-post) in this file to ensure
-   that the post is properly structured.
-4. Commit and push your changes to the repository. For commits please follow the format of the conventional commit.
-   [See](https://www.conventionalcommits.org/en/v1.0.0/)
-5. Create a pull request to the `develop` branch. Make sure to add the `type: content 📝` and `labs 🔭` labels to the PR.
-6. Wait for someone in the website team to review the new blog post. If everything is ok, the PR will be merged to the `develop` branch.
-
 ### Adding a new blog category
 
 1. Create a new feature branch.
-2. Ope the `apps/labs/posts/categories.json` file.
-3. Add a new category to the array. Make sure to follow the same format as the other categories.
-4. Commit and push your changes to the repository. For commits please follow the format of the conventional commit.
-   [See](https://www.conventionalcommits.org/en/v1.0.0/)
-5. Wait for someone in the website team to review the new blog post. If everything is ok, the PR will be merged to the `develop` branch.
+2. Open the `apps/labs/posts/categories.json` file.
+3. Add a new category to the array. Make sure to follow the same format as the
+   other categories.
+4. Commit and push your changes to the repository. For commits please follow the
+   format of the [conventional
+   commit](https://www.conventionalcommits.org/en/v1.0.0/).
+5. Wait for someone in the website team to review the new blog post. If
+   everything is ok, the PR will be merged to the `develop` branch.
 
 ### Adding new components for usage inside `.mdx` posts
 
