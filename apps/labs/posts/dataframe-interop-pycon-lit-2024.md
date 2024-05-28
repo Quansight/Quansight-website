@@ -97,7 +97,7 @@ Nonetheless, does it work? Is it reliable?
   raise unnecessarily in some versions. It's already used by the `seaborn` and
   `plotly` plotting libraries.
 - Converting from pandas: unreliable, don't use it. There are cases when the results
-  are "garbage". These have generally been fixed, and will be available in
+  are garbage values. These have generally been fixed, and will be available in
   pandas 3.0. For now, however, if you're using the interchange protocol to convert
   to anything other pandas, then you may want to proceed with great care.
 
