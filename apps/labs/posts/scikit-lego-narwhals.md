@@ -5,11 +5,11 @@ published: May 26, 2024
 description: 'And how your library can become dataframe-agnostic too'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.jpg
-  alt: 'Scikit-lego and Narwhals logos, with handshake in between'
+  src: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.png
+  alt: 'Scikit-lego and Narwhals logos shaking hands'
 hero:
-  imageSrc: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.jpg
-  imageAlt: 'Scikit-lego and Narwhals logos, with handshake in between'
+  imageSrc: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.png
+  imageAlt: 'Scikit-lego and Narwhals logos shaking hands'
 ---
 
 # How scikit-lego became dataframe-agnostic
