@@ -85,8 +85,8 @@ then you're required to call `.collect` on it before converting to pandas.
 To drive the second point home, here are some timings comparing running `add_lags` on a
 10-million-row Polars dataframe directly, as opposed to converting to pandas and back:
 
-- passing Polars directly to `add_lags`:  ~ 10.8 ms
-- converting Polars to pandas, passing that to `add_lags`, then converting back: ~ 1470 ms
+![passing Polars directly to `add_lags` takes ~ 11 ms, whereas converting to pandas
+first and then passing that takes ~ 1470 ms. Made with `great-tables` package](/posts/scikit-lego-narwhals/comparison.png)
 
 [Code to reproduce](https://gist.github.com/MarcoGorelli/1da1971063caf0b3e5133f5dfba3315b).
 
