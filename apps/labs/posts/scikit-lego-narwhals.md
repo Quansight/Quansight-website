@@ -82,11 +82,13 @@ LazyFrame, which can run significantly faster because it delays reading data int
 [several optimisations](https://docs.pola.rs/user-guide/lazy/optimizations/),
 then you're required to call `.collect` on it before converting to pandas.
 
-To drive the second point home, here are some timings comparing running `add_lags` on a
-10-million-row Polars dataframe directly, as opposed to converting to pandas and back:
+To drive the second point home, here are some timings comparing:
 
-![passing Polars directly to `add_lags` takes ~ 11 ms, whereas converting to pandas
-first and then passing that takes ~ 1470 ms. Made with `great-tables` package](/posts/scikit-lego-narwhals/comparison.png)
+- running `add_lags` on a 10-million-row Polars dataframe directly
+- converting that same dataframe to pandas and running `add_lags` on that
+
+![with native Polars support `add_lags` takes ~ 11 ms, whereas going via pandas it
+takes ~ 1470 ms. Image produced with `great-tables` package](/posts/scikit-lego-narwhals/comparison.png)
 
 [Code to reproduce](https://gist.github.com/MarcoGorelli/1da1971063caf0b3e5133f5dfba3315b).
 
