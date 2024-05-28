@@ -12,8 +12,6 @@ hero:
   imageAlt: 'Scikit-lego and Narwhals logos'
 ---
 
-# How scikit-lego became dataframe-agnostic
-
 [Scikit-lego](https://github.com/koaning/scikit-lego) is a Python project from the [scikit-learn](https://scikit-learn.org/stable/) ecosystem that contributes extra estimators for machine-learning pipelines.
 It's a relatively popular project with over 1000 Github stars and 20,000 downloads a month.
 It's popularity comes from industry as many of the tools that it provides aren't proven to be state-of-the-art,
@@ -34,7 +32,7 @@ We'll start by answering these questions, and will end with some hopes for the f
 
 ## How does it work?
 
-Let's take a look at `sklego.pandas_utils.add_lags` as a tangible example that demonstrates how you might be able to leverage Narwhals in your own library. The code before version 0.9.0 did something like this:
+Let's take a look at [scikit-lego's `add_lags` function](https://koaning.github.io/scikit-lego/api/pandas-utils/?h=add_lags) as a tangible example that demonstrates how you might be able to leverage Narwhals in your own library. The code before version 0.9.0 did something like this:
 
 1. check if the input is NumPy or a pandas dataframe
 2. if it's NumPy, then perform array operations
@@ -54,7 +52,7 @@ This looks simple, but it actually opens up a rabbit hole of extra steps, such a
 In order to address all the above, scikit-lego opted for a simpler approach: use Narwhals.
 The steps then become:
 
-1. run `narwhals.from_native` on the input
+1. run [`narwhals.from_native`](https://narwhals-dev.github.io/narwhals/api-reference/narwhals/#narwhals.from_native) on the input
 2. if it's NumPy, then perform array operations
 3. otherwise, express dataframe logic using the subset of the Polars API supported by Narwhals
 
@@ -80,7 +78,7 @@ However, even in the best-case zero-copy-conversion scenario, this presents seve
 Furthermore, converting to pandas may present a cost - for example, if you start with a Polars
 LazyFrame, which can run significantly faster because it delays reading data into memory and performs
 [several optimisations](https://docs.pola.rs/user-guide/lazy/optimizations/),
-then you're required to call `.collect` on it before converting to pandas.
+then you're required to call [`.collect`](https://docs.pola.rs/py-polars/html/reference/lazyframe/api/polars.LazyFrame.collect.html) on it before converting to pandas.
 
 To drive the second point home, here are some timings comparing:
 
