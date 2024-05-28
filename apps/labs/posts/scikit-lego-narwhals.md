@@ -8,8 +8,8 @@ featuredImage:
   src: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.png
   alt: 'Scikit-lego and Narwhals logos shaking hands'
 hero:
-  imageSrc: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.png
-  imageAlt: 'Scikit-lego and Narwhals logos shaking hands'
+  imageSrc: /posts/scikit-lego-narwhals/hero.png
+  imageAlt: 'Scikit-lego and Narwhals logos'
 ---
 
 # How scikit-lego became dataframe-agnostic
