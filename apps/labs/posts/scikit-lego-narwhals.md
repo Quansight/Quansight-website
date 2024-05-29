@@ -2,7 +2,7 @@
 title: 'How Narwhals and scikit-lego came together to achieve dataframe-agnosticism'
 authors: [marco-gorelli]
 published: May 26, 2024
-description: 'And how your library can become dataframe-agnostic too'
+description: 'And how your Python library can become dataframe-agnostic too'
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.png
@@ -13,20 +13,15 @@ hero:
 ---
 
 [Scikit-lego](https://github.com/koaning/scikit-lego) is a Python project from the [scikit-learn](https://scikit-learn.org/stable/) ecosystem that contributes extra estimators for machine-learning pipelines.
-It's a relatively popular project with over 1000 Github stars and 20,000 downloads a month.
+It's a relatively popular project with over 1,000 Github stars and 20,000 downloads a month.
 It's popularity comes from industry as many of the tools that it provides aren't proven to be state-of-the-art,
-but fall a bit more in the 'tricks that work' category. These features include a GroupedEstimator which
-can effectively run full pipelines split per subset, a TimeGapSplit cross validator for timeseries
-that adds a gap between train and test set, and a whole suite of techniques that leverage mixture methods
-for outlier detection and non-linear classification.
+but fall a bit more in the 'tricks that work' or 'experimental with proven use case' category.
 
-Recently, because polars has been gaining traction, the library maintainers have been looking for a simple way to support multiple dataframe implementations. The project still wants to support pandas, but it would be a shame if newer dataframes couldn't be supported.
+Recently, because Polars has been gaining traction, the library maintainers have been looking for a simple way to support multiple dataframe implementations. The project still wants to support pandas, but it would be a shame if newer dataframes couldn't be supported.
 
 Enter narwhals. As of scikit-lego 0.9.0, you can also pass dataframes from Polars, Modin, cuDF, and in principle a whole host
-of other dataframes.
-But, how does it work? Why did they use Narwhals?
-Why don't they just
-convert to pandas internally on the user's behalf?
+of other dataframes. But, how does it work? Why did they use Narwhals?
+Why don't they just convert to pandas internally on the user's behalf?
 
 We'll start by answering these questions, and will end with some hopes for the future.
 
@@ -102,14 +97,14 @@ invest the time to achieve dataframe-agnosticism.
 
 Earlier this year, we saw [Great Tables announce that they are now "bring your own dataframe"](https://posit-dev.github.io/great-tables/blog/bring-your-own-df/).
 Scikit-learn also supports Polars in a somewhat standardised way, by leveraging the [dataframe interchange protocol](https://data-apis.org/dataframe-protocol/latest/), the [`__array__` method](https://numpy.org/devdocs/user/basics.interoperability.html), and
-some custom logic. And in this blog post, we look at how scikit-lego achieved the same by using Narwhals.
+some custom logic. And in this blog post, we looked at how scikit-lego achieved the same by using Narwhals.
 
 Is this a sign of what's to come? I certainly hope so. pandas is - and will very likely continue to be -
 an enormously useful tool which solves a lot of problems for a lot of real people. 
 However, if pandas remained the _only_ dataframe library supported in the data science
 ecosystem, then that'd be a missed opportunity.
 
-We've looked at how scikit-lego leveraged Narwhals in order to become dataframe-agnostic,
-able to natively support Polars, Modin, and cuDF without adding them as dependencies.
+Scikit-lego leveraged Narwhals in order to become dataframe-agnostic,
+and is now able to natively support Polars, Modin, and cuDF without adding any of them as dependencies.
 Let's hope that this is the direction that data science libraries are headed towards, and that Narwhals
 can facilitate the process.
