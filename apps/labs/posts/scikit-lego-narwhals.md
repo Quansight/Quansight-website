@@ -14,12 +14,13 @@ hero:
 
 [Scikit-lego](https://github.com/koaning/scikit-lego) is a Python project from the [scikit-learn](https://scikit-learn.org/stable/) ecosystem that contributes extra estimators for machine-learning pipelines.
 It's a relatively popular project with over 1,000 Github stars and 20,000 downloads a month.
-It's popularity comes from industry as many of the tools that it provides aren't proven to be state-of-the-art,
-but fall a bit more in the 'tricks that work' or 'experimental with proven use case' category.
+Its popularity comes from practical applications, as many of the tools that it provides aren't
+proven to be state-of-the-art but instead fall a bit more in the 'tricks that work' or
+'experimental with proven use case' category.
 
 Recently, because Polars has been gaining traction, the library maintainers have been looking for a simple way to support multiple dataframe implementations. The project still wants to support pandas, but it would be a shame if newer dataframes couldn't be supported.
 
-Enter narwhals. As of scikit-lego 0.9.0, you can also pass dataframes from Polars, Modin, cuDF, and in principle a whole host
+Enter Narwhals. As of scikit-lego 0.9.0, you can also pass dataframes from Polars, Modin, cuDF, and in principle a whole host
 of other dataframes. But, how does it work? Why did they use Narwhals?
 Why don't they just convert to pandas internally on the user's behalf?
 
