@@ -76,7 +76,7 @@ LazyFrame, which can run significantly faster because it delays reading data int
 [several optimisations](https://docs.pola.rs/user-guide/lazy/optimizations/),
 then you're required to call [`.collect`](https://docs.pola.rs/py-polars/html/reference/lazyframe/api/polars.LazyFrame.collect.html) on it before converting to pandas.
 
-To drive the second point home, here are some timings comparing:
+To drive the second point home, here are some timings comparing (lower is better):
 
 - running `add_lags` on a 10-million-row Polars dataframe directly
 - converting that same dataframe to pandas and running `add_lags` on that
@@ -93,6 +93,22 @@ scales even better in the "native Polars support" direction.
 
 That's why "just convert to pandas" is a disappointing solution, and why it's worth it to
 invest the time to achieve dataframe-agnosticism.
+
+## What's the Narwhals overhead?
+
+Narwhals translates a subset of the Polars API to other dataframe libraries.
+You might expect, therefore, that there is some overhead when translating the Polars API to
+the pandas one.
+
+However, this overhead is negligible, and barely detectable. The few extra Python calls it makes
+don't add up to much. Running the above benchmark for pandas, we see the following timings
+(lower is better):
+
+- scikit-lego 0.8.2 (before Narwhals): 1593 ms
+- scikit-lego 0.9.0 (with Narwhals): 1383 ms
+
+There is some variability here, and these timings do vary - but overall, we consistently find them
+to be in the same ballpark, and that the Narwhals overhead is barely (if at all) detectable.
 
 ## Will the future of data science become "BYODF" (bring your own dataframe)?
 
