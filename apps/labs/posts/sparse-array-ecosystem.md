@@ -95,52 +95,22 @@ However, the format has some disadvantages:
 2. Random insertion causes the coordinates to be inserted out of order.
 3. Sorting may be frequently required.
 
+### Other Formats
+
+There are many other formats, each with their own set of advantages and disadvantages:
+
+- CSR/CSC are popular 2-dimensional formats, with fast row-major or column-major access respectively.
+- Blocked formats are versions of formats which can store dense regions in a blocked structure.
+
+Of course, it one can come up with their own way of encoding the positions, and therefore their own format. In this sense, it is important to recognize we aren't limited to the formats we mention here.
+
 ## Python Libraries for Sparse Arrays
+
+While choosing the right format can be tricky, thankfully, Python has a number of libraries providing sparse array storage and compute capabilities. Some of these libraries have been around for some time, while others are relatively new to the scene. I'll briefly discuss a few of the major players.
 
 ### [`sparse`](https://sparse.pydata.org/)
 
-`sparse` (also known as PyData/Sparse) is a library maintained by yours truly. Its aim is to provide perfomant sparse array operations following the Array API standard, though we are some time away from reaching that goal. The work on this library started in April 2017, with the author of this blog post taking over maintenance around January 2018.
-
-### [`scipy.sparse`](https://docs.scipy.org/doc/scipy/reference/sparse.html)
-
-`scipy.sparse` is one of the original sparse matrix libraries. The library has existed since before SciPy was moved to GitHub, or even TRAC, with the earliest references pointing to 2006. It is built on NumPy matrices and has been limited to two dimensional sparse arrays. Work is underway to migrate `scipy.sparse` away from NumPy matrices (a discouraged corner of NumPy's API) and to conform to a more modern API. Details can be found here in [various discussion posts on the SciPy Discourse](https://discuss.scientific-python.org/tag/sparse-arrays).
-
-### [`cupyx.sparse`](https://docs.cupy.dev/en/stable/reference/scipy_sparse.html)
-
-This member of the sparse array libraries follows an interface that closely mirrors SciPy's, while executing on Nvidia and AMD's GPUs. Work on `cupyx.sparse` started around 2017.
-
-### [`torch.sparse`](https://pytorch.org/docs/stable/sparse.html)
-
-This submodule of PyTorch allows one to create and operate on mainly N-dimensional COO arrays on the CPU or GPU. Work on `torch.sparse` existed in early releases of PyTorch, starting around 2016.
-
-## API and Performance Comparison
-
-### Format Support
-
-Support for many different formats can be important, especially as they usually represent differing patterns of sparsity, which in turn represent differing mathematical structures and patterns in nature. Native support for a wide variety of formats can be the key to unlocking significant memory and performance gains.
-
-All formats have a number of read/write characteristics. For reading, they can be random access or sequential access. The same applies to writing data to a sparse array. Whether they are ordered sequentially in memory is important, as this improves performance and compactness of the format. We list these characteristics below, along with which library supports which format. We have also included a row for N-dimensional capabilities.
-
-|                   | **Random Read** | **Random Write** | **Cache Optimized** | **`sparse`** | **`scipy.sparse`** | **`cupyx.sparse`** | **`torch.sparse`** |
-| ----------------- | --------------- | ---------------- | ------------------- | ------------ | ------------------ | ------------------ | ------------------ |
-| **COO**           | 🚫              | 🚫               | ✅                  | 🚧           | 🚧                 | 🚧                 | ✅                 |
-| **DOK**           | ✅              | ✅               | 🚫                  | 🚧           | 🚧                 | 🚧                 | 🚫                 |
-| **CSR/CSC**       | 🚫              | 🚫               | ✅                  | 🚧           | ✅                 | ✅                 | 🚧                 |
-| **LIL**           | 🚫              | ✅               | 🚫                  | 🚫           | 🚧                 | 🚫                 | 🚫                 |
-| **DIA**           | ✅              | 🚫               | ✅                  | 🚫           | 🚧                 | 🚧                 | 🚫                 |
-| **BSR**           | ✅<sup>1</sup>  | ✅<sup>1</sup>   | ✅                  | 🚫           | 🚧                 | 🚫                 | 🚧                 |
-| **N-dimensional** |                 |                  |                     | ✅           | 🚫                 | 🚫                 | ✅                 |
-
-<sup>1</sup> Within same block if it exists, otherwise similar to CSC. <br />
-✅ Available, with optimized loops for atomic operations <br />
-🚧 Present, with intermediate conversions or sub-optimal iterations <br />
-🚫 Unavailable
-
-### Array Creation API
-
-To help make things a bit more concrete, let's compare sparse array creation in different libraries and, while doing so, make a note of any notable pain points.
-
-#### `sparse`
+`sparse` (also known as PyData/Sparse) is a library maintained by yours truly. Its aim is to provide perfomant sparse array operations following the Array API standard, though we are some time away from reaching that goal. The work on this library started in April 2017, with the author of this blog post taking over maintenance around January 2018. `sparse` provides a drop-in replacement for NumPy arrays, with support for **n-dimensional** arrays.
 
 `sparse` provides a few main options for constructing arrays:
 
@@ -159,33 +129,59 @@ spz = sparse.COO(shape=..., data=..., coords=...)
 
 One current pain point for `sparse` is its performance: It's notably slower than equivalent SciPy operations. Work is ongoing to resolve this difference in performance while maintaining generality.
 
-#### `cupyx.sparse` and `scipy.sparse`
+### [`scipy.sparse`](https://docs.scipy.org/doc/scipy/reference/sparse.html)
 
-One can do any of the following to create a `scipy.sparse` or `cupyx.sparse` array:
+`scipy.sparse` is one of the original sparse matrix libraries. The library has existed since before SciPy was moved to GitHub, or even TRAC, with the earliest references pointing to 2006. It is built on NumPy matrices and has been limited to two dimensional sparse arrays. Work is underway to migrate `scipy.sparse` away from NumPy matrices (a discouraged corner of NumPy's API) and to conform to a more modern API. Details can be found here in [various discussion posts on the SciPy Discourse](https://discuss.scientific-python.org/tag/sparse-arrays).
+
+One can do any of the following to create a `scipy.sparse` array:
 
 ```python
 # Use `array_type(existing_arr)`
 spx_arr_csr = scipy.sparse.csr_array(x)
-spx_mat_coo = scipy.sparse.coo_matrix(x)  #
-cpx_mat_csc = cupyx.sparse.csc_matrix(x)
+spx_mat_coo = scipy.sparse.coo_matrix(x)
+spx_mat_csc = scipy.sparse.csc_matrix(x)
 
 # Use `dok_array` or `dok_matrix` and then `.asformat`
 spy_arr_dok = scipy.sparse.dok_array(shape, dtype=...)  # Instantiate
 spy_arr_dok[...] = ...  # Assign repeatedly
 spy_arr_csr = spy_arr_dok.asformat("csr")  # Convert
-cpy_mat_csr = cupyx.sparse.csr_matrix(spy_arr_csr)  # Move to GPU
 
 # Use `array_type(tuple_of_constituent_arrays)`
 spz_arr_csr = scipy.sparse.csr_array((data, indices, indptr), shape=...)  # NumPy arrays
-cpz_mat_csr = cupyx.sparse.csr_array((data, indices, indptr), shape=...)  # CuPy arrays
+spz_mat_csr = scipy.sparse.csr_array((data, indices, indptr), shape=...)  # NumPy arrays
 ```
 
-The main pain points for this set of libraries are twofold:
+The main pain points for this library are twofold:
 
 1. They only support 2-D arrays or matrices.
-2. Most of the existing work only exists for the deprecated `np.matrix` interface. SciPy has recently begun work to migrate away from `np.matrix`, but it remains the only option in `cupyx.sparse`.
+2. Most of the existing work only exists for the deprecated `np.matrix` interface. SciPy has recently begun work to migrate away from `np.matrix`.
 
-#### `torch.sparse`
+### [`cupyx.sparse`](https://docs.cupy.dev/en/stable/reference/scipy_sparse.html)
+
+This member of the sparse array libraries follows an interface that closely mirrors SciPy's, while executing on Nvidia and AMD's GPUs. Work on `cupyx.sparse` started around 2017.
+
+One can do any of the following to create a `cupyx.sparse` array:
+
+```python
+# Use `array_type(existing_arr)`
+cpx_arr_csr = cupyx.sparse.csr_matrix(x)
+cpx_mat_coo = cupyx.sparse.coo_matrix(x)
+cpx_mat_csc = cupyx.sparse.csc_matrix(x)
+
+# Use `array_type(tuple_of_constituent_arrays)`
+cpz_arr_csr = cupyx.sparse.csr_matrix((data, indices, indptr), shape=...)  # Cupy arrays
+cpz_mat_csr = cupyx.sparse.csr_matrix((data, indices, indptr), shape=...)  # CuPy arrays
+```
+
+CuPy also has some disadvantages:
+
+1. They only support 2-D arrays or matrices.
+2. The `np.matrix` interface remains the only option in `cupyx.sparse`.
+3. There is no `cupyx.sparse.dok_matrix` type: One must use SciPy's DOK format.
+
+### [`torch.sparse`](https://pytorch.org/docs/stable/sparse.html)
+
+This submodule of PyTorch allows one to create and operate on mainly N-dimensional COO arrays on the CPU or GPU. Work on `torch.sparse` existed in early releases of PyTorch, starting around 2016.
 
 To create a sparse array, one can:
 
@@ -210,6 +206,26 @@ There are a number of honorable mentions that haven't managed to gain enough tra
 - [**TACO**](http://tensor-compiler.org/): A C++ package with Python bindings by some of the brains behind performant sparse code generation.
 - [**`finch-tensor` and `Finch.jl`**](https://willowahrens.io/Finch.jl/dev): A Julia package with respective Python bindings that's also showing promise and contains some novel research on performant sparse computing.
 
+## Format Support
+
+Support for many different formats can be important, especially as they usually represent differing patterns of sparsity, which in turn represent differing mathematical structures and patterns in nature. Native support for a wide variety of formats can be the key to unlocking significant memory and performance gains.
+
+All formats have a number of read/write characteristics. For reading, they can be random access or sequential access. The same applies to writing data to a sparse array. Whether they are ordered sequentially in memory is important, as this improves performance and compactness of the format. We list these characteristics below, along with which library supports which format. We have also included a row for N-dimensional capabilities.
+
+|                   | **Random Read** | **Random Write** | **Cache Optimized** | **`sparse`** | **`scipy.sparse`** | **`cupyx.sparse`** | **`torch.sparse`** |
+| ----------------- | --------------- | ---------------- | ------------------- | ------------ | ------------------ | ------------------ | ------------------ |
+| **COO**           | 🚫              | 🚫               | ✅                  | 🚧           | 🚧                 | 🚧                 | ✅                 |
+| **DOK**           | ✅              | ✅               | 🚫                  | 🚧           | 🚧                 | 🚧                 | 🚫                 |
+| **CSR/CSC**       | 🚫              | 🚫               | ✅                  | 🚧           | ✅                 | ✅                 | 🚧                 |
+| **LIL**           | 🚫              | ✅               | 🚫                  | 🚫           | 🚧                 | 🚫                 | 🚫                 |
+| **DIA**           | ✅              | 🚫               | ✅                  | 🚫           | 🚧                 | 🚧                 | 🚫                 |
+| **BSR**           | ✅<sup>1</sup>  | ✅<sup>1</sup>   | ✅                  | 🚫           | 🚧                 | 🚫                 | 🚧                 |
+| **N-dimensional** |                 |                  |                     | ✅           | 🚫                 | 🚫                 | ✅                 |
+
+<sup>1</sup> Within same block if it exists, otherwise similar to CSC. <br />
+✅ Available, with optimized loops for atomic operations <br />
+🚧 Present, with intermediate conversions or sub-optimal iterations <br />
+
 ## Conclusion
 
-The Sparse array ecosystem in Python is, in a word, _fragmented_. The meme below illustrates the options available to users. We would like to change that for the better. To that end, we at Quansight, along with Professor Samaringhe's group at MIT CSAIL, have received a grant from DARPA spanning two years of work to help move the ecosystem in a direction that would benefit the whole community.
+The Sparse array ecosystem in Python is, in a word, _fragmented_. However, it's also relatively nascent, and a hard problem without a general solution. We would like to change that for the better. To that end, we at Quansight, along with Professor Samaringhe's group at MIT CSAIL, have received a grant from DARPA spanning two years of work to help move the ecosystem in a direction that would benefit the whole community, and to provide a truly general solution.
