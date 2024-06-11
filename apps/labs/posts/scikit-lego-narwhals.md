@@ -1,7 +1,7 @@
 ---
 title: 'How Narwhals and scikit-lego came together to achieve dataframe-agnosticism'
 authors: [marco-gorelli]
-published: May 26, 2024
+published: June 11, 2024
 description: 'And how your Python library can become dataframe-agnostic too'
 category: [PyData ecosystem]
 featuredImage:
