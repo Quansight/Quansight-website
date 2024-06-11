@@ -64,10 +64,11 @@ couldn't scikit-lego just have done something like:
 - if the input is pandas, keep as-is
 - if the input is a non-pandas dataframe, then convert to pandas
 
-However, even in the best-case zero-copy-conversion scenario, this presents several issues:
+This may look like a good solution - however, even in the best-case zero-copy-conversion scenario,
+it presents several issues:
 
 - once the input has been converted to pandas, there's no standardised way of converting back to
-  the original dataframe library.
+  the original dataframe library
 - using pandas as an engine may be significantly slower than doing everything using the original
   dataframe
 
@@ -107,8 +108,11 @@ don't add up to much. Running the above benchmark for pandas, we see the followi
 - scikit-lego 0.8.2 (before Narwhals): 1593 ms
 - scikit-lego 0.9.0 (with Narwhals): 1383 ms
 
-There is some variability here, and these timings do vary - but overall, we consistently find them
-to be in the same ballpark, and that the Narwhals overhead is barely (if at all) detectable.
+There is some variability here - sometimes the second one is marginally faster, sometimes
+marginally slower. Overall, we consistently find them to be in the same ballpark -
+because Narwhals is so simple and lightweight, its overhead is typically negligible. Thus,
+it truly enables library authors to support newer dataframe libraries with little to no impact
+on pandas users.
 
 ## Will the future of data science become "BYODF" (bring your own dataframe)?
 
