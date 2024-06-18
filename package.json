@@ -20,7 +20,7 @@
   },
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.5.10",
+    "@apollo/client": "^3.10.5",
     "@code-hike/mdx": "^0.9.0",
     "@nrwl/next": "13.8.5",
     "@tailwindcss/typography": "^0.5.2",
