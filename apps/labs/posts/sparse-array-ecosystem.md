@@ -158,7 +158,7 @@ The main pain points for this library are twofold:
 
 ### [`cupyx.sparse`](https://docs.cupy.dev/en/stable/reference/scipy_sparse.html)
 
-This member of the sparse array libraries follows an interface that closely mirrors SciPy's, while executing on Nvidia and AMD's GPUs. Work on `cupyx.sparse` started around 2017.
+This member of the sparse array libraries follows an interface that closely mirrors SciPy's, while executing on Nvidia and AMD GPUs. Work on `cupyx.sparse` started around 2017.
 
 One can do any of the following to create a `cupyx.sparse` array:
 
