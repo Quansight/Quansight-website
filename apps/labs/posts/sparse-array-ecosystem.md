@@ -175,9 +175,9 @@ cpz_mat_csr = cupyx.sparse.csr_matrix((data, indices, indptr), shape=...)  # CuP
 
 CuPy also has some disadvantages:
 
-1. They only support 2-D arrays or matrices.
+1. It only supports 2-D arrays or matrices.
 2. The `np.matrix` interface remains the only option in `cupyx.sparse`.
-3. There is no `cupyx.sparse.dok_matrix` type: One must use SciPy's DOK format.
+3. There is no `cupyx.sparse.dok_matrix` type: one must use SciPy's DOK format.
 
 ### [`torch.sparse`](https://pytorch.org/docs/stable/sparse.html)
 
