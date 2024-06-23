@@ -102,7 +102,7 @@ There are many other formats, each with their own set of advantages and disadvan
 - CSR/CSC are popular 2-dimensional formats, with fast row-major or column-major access respectively.
 - Blocked formats are versions of formats which can store dense regions in a blocked structure.
 
-Of course, it one can come up with their own way of encoding the positions, and therefore their own format. In this sense, it is important to recognize we aren't limited to the formats we mention here.
+It is, however, important to recognize that we aren't limited to the formats we mention here. You can come up with your own way of encoding the positions and thus your own special brand of sparse array format!
 
 ## Python Libraries for Sparse Arrays
 
