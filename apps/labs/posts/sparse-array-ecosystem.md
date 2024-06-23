@@ -153,7 +153,7 @@ spz_mat_csr = scipy.sparse.csr_array((data, indices, indptr), shape=...)  # NumP
 
 The main pain points for this library are twofold:
 
-1. They only support 2-D arrays or matrices.
+1. It only supports 2-D arrays or matrices.
 2. Most of the existing work only exists for the deprecated `np.matrix` interface. SciPy has recently begun work to migrate away from `np.matrix`.
 
 ### [`cupyx.sparse`](https://docs.cupy.dev/en/stable/reference/scipy_sparse.html)
