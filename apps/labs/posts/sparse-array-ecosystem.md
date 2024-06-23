@@ -210,7 +210,7 @@ There are a number of honorable mentions that haven't managed to gain enough tra
 
 Support for many different formats can be important, especially as they usually represent differing patterns of sparsity, which in turn represent differing mathematical structures and patterns in nature. Native support for a wide variety of formats can be the key to unlocking significant memory and performance gains.
 
-All formats have a number of read/write characteristics. For reading, they can be random access or sequential access. The same applies to writing data to a sparse array. Whether they are ordered sequentially in memory is important, as this improves performance and compactness of the format. We list these characteristics below, along with which library supports which format. We have also included a row for N-dimensional capabilities.
+All formats have a number of read/write characteristics. For reading, they can be random access or sequential access. The same applies to writing data to a sparse array. Whether data is ordered sequentially in memory is important, as this improves performance and compactness of the format. We list these characteristics below, along with which library supports which format. We have also included a row for N-dimensional capabilities.
 
 |                   | **Random Read** | **Random Write** | **Cache Optimized** | **`sparse`** | **`scipy.sparse`** | **`cupyx.sparse`** | **`torch.sparse`** |
 | ----------------- | --------------- | ---------------- | ------------------- | ------------ | ------------------ | ------------------ | ------------------ |
