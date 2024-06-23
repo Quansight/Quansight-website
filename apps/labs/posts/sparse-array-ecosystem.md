@@ -195,7 +195,7 @@ spy_coo = torch.sparse.coo_tensor(coords, data, [shape, dtype=...])
 spy_csr = torch.sparse.csr_tensor(indices, indptr, data, [shape, dtype=...])
 ```
 
-The main pain points for `torch.sparse` is the lack of Array API support, with an API differing from most other libraries. For example, the library lacks an `asformat` method and various format-specific methods and lacks DOK support for constructing hyper-sparse tensors in an intuitive manner. On the flip side, `torch.sparse` is the only library to allow for N-dimensional GPU sparse arrays.
+The main pain point for `torch.sparse` is the lack of Array API support, with an API differing from most other libraries. For example, the library lacks an `asformat` method and various format-specific methods and lacks DOK support for constructing hyper-sparse tensors in an intuitive manner. On the flip side, `torch.sparse` is the only library to allow for N-dimensional GPU sparse arrays.
 
 ### Honorable Mentions
 
