@@ -127,7 +127,7 @@ spy = spy.asformat(...)  # Convert
 spz = sparse.COO(shape=..., data=..., coords=...)
 ```
 
-One current pain point for `sparse` is its performance: It's notably slower than equivalent SciPy operations. Work is ongoing to resolve this difference in performance while maintaining generality.
+One current pain point for `sparse` is its performance: it's notably slower than equivalent SciPy operations. Work is ongoing to resolve this difference in performance while maintaining generality.
 
 ### [`scipy.sparse`](https://docs.scipy.org/doc/scipy/reference/sparse.html)
 
