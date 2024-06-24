@@ -30,7 +30,7 @@ Due to physical limitations and also to keep the design simple, in a large circu
 
 [Convolution](https://en.wikipedia.org/wiki/Convolution) can be viewed as the smearing out of one signal, with the "shape" of the smearing depending on another signal called a kernel. Mathematically, each sample in a discrete signal would only affect its neighbors. Thus, if this relationship were to be expressed in a matrix, it would have samples concentrated along the diagonal. Except for long signals and short kernels, this matrix would tend to be very sparse.
 
-#### NLP Use-case
+#### Natural language processing
 
 Consider a natural-language processing use-case where we parse statements of the form `(subject, object, predicate)` (e.g., `(Hameer, this blog post, authored)`). This particular predicate would be true. On the other hand, `(Elephant, fish, is)` would be false. If we then consider the massive space of all predicates arranged into a 3-dimensional array, we would give them a value of `+1` for true, `-1` for untrue, and `0` for unknown (or to be predicted). Such an array would have a shape of `N ✕ N ✕ K`, where `N` is the number of entities and `K` is the number of predicates. Such a system would also be very sparse, as many triplets would be exceedingly unlikely.
 
