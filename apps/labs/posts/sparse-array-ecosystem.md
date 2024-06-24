@@ -20,15 +20,15 @@ hero:
 
 There are many examples of loosely-connected systems that lend themselves well to an expression in terms of sparse arrays. Let's illustrate this claim with a few examples:
 
-#### An [impedance matrix](https://en.wikipedia.org/wiki/Impedance_parameters) for a circuit
+#### An impedance matrix for a circuit
 
-An impedance matrix for a linear circuit (which is a circuit comprised purely of resistors, capacitors, inductors, and the connections between them) with `N` ports is an `N ✕ N` matrix, with each entry representing the connection between two ports. Where no connection is present, the Z-matrix, as it is also known, has a value of infinity.
+An [impedance matrix](https://en.wikipedia.org/wiki/Impedance_parameters) for a linear circuit (which is a circuit comprised purely of resistors, capacitors, inductors, and the connections between them) with `N` ports is an `N ✕ N` matrix, with each entry representing the connection between two ports. Where no connection is present, the Z-matrix, as it is also known, has a value of infinity.
 
 Due to physical limitations and also to keep the design simple, in a large circuit with many ports, the number of connections does not scale as `N²`, but usually as a much lower factor. Accordingly, this means that the larger the circuit, the sparser its impedance matrix will be, so long as we assume that the background value is taken to be infinity. In general, due to technologies such as multi-layer PCBs, there isn't usually a clear pattern as to which ports will be connected.
 
-#### [Convolution](https://en.wikipedia.org/wiki/Convolution)
+#### Convolution
 
-Convolution can be viewed as the smearing out of one signal, with the "shape" of the smearing depending on another signal called a kernel. Mathematically, each sample in a discrete signal would only affect its neighbors. Thus, if this relationship were to be expressed in a matrix, it would have samples concentrated along the diagonal. Except for long signals and short kernels, this matrix would tend to be very sparse.
+[Convolution](https://en.wikipedia.org/wiki/Convolution) can be viewed as the smearing out of one signal, with the "shape" of the smearing depending on another signal called a kernel. Mathematically, each sample in a discrete signal would only affect its neighbors. Thus, if this relationship were to be expressed in a matrix, it would have samples concentrated along the diagonal. Except for long signals and short kernels, this matrix would tend to be very sparse.
 
 #### NLP Use-case
 
