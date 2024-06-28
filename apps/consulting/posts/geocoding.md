@@ -19,8 +19,6 @@ hero:
   imageAlt: 'Image of a bear putting a plug into the wall'
 ---
 
-# Saving money and time using Polars, Polars plugins, and open source data.
-
 Geocoding is the practice of taking in an address and assigning a latitude-longitude coordinate
 to it. Doing so for millions of rows can be an expensive and slow process, as it
 typically relies on paid API services. Learn about how we saved a client time and
