@@ -1,3 +1,24 @@
+---
+title: 'Saving time and money using Polars, Polars plugins, and open source data'
+published: June 28, 2024
+author: marco-gorelli
+description: 'Geocoding is the process of taking in an address and assigning a
+latitude-longitude pair to it. Doing so for millions of rows can be expensive
+and time-consuming. Learn about how we delivered a solution to a client, and
+what it unlocked for them!'
+category:
+  [
+    Open Source Software,
+    Scalable Computing,
+  ]
+featuredImage:
+  src: /posts/geocoding/featured.jpg
+  alt: ''
+hero:
+  imageSrc: /posts/geocoding/hero.jpg
+  imageAlt: 'Image of a bear putting a plug into the wall'
+---
+
 # Saving money and time using Polars, Polars plugins, and open source data.
 
 Geocoding is the practice of taking in an address and assigning a latitude-longitude coordinate
