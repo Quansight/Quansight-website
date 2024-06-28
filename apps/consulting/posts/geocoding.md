@@ -68,8 +68,9 @@ Suppose we're starting with a batch of addresses
 and need to geocode them. The gist of the solution we delivered is:
 
 - take the client's proprietary data and complement it with open source
-  datasets (such as OpenAddresses data). Preprocess it so it's all in a
-  standardised form. We'll refer to this collection of data as our _lookup dataset_.
+  datasets (such as [OpenAddresses](https://openaddresses.io/) data).
+  Preprocess it so it's all in a standardised form. We'll refer to this
+  collection of data as our _lookup dataset_.
 - join input addresses with our lookup dataset, based on:
   - address number
   - road
@@ -97,8 +98,9 @@ and the lookup dataset), thus increasing the chances of finding matches.
 The OpenAddresses data contained all the information we needed, except that for some rows the zip code
 was missing. For such rows, we would do the following:
 
-- Try to fill in the zip code by leveraging GeoPandas' spatial joins and freely available data
-  on zip code boundaries
+- Try to fill in the zip code by leveraging
+  [GeoPandas' spatial joins](https://geopandas.org/en/stable/gallery/spatial_joins.html)
+  and freely available data on zip code boundaries
 - else:
   - If the lookup address had a city, then try to join with the input addresses based on
     <address number, road, city>.
@@ -109,7 +111,7 @@ was missing. For such rows, we would do the following:
 The last option used a Polars plugin which we developed specially for the client (who kindly allowed
 us to open source it). Using that plugin, it's possible to do approximate reverse geocoding of
 millions of rows in just seconds. We have expertise in a variety of areas at Quansight - including Rust!
-- so please reach out to https://quansight.com/https://quansight.com/ to learn more about what we
+- so please reach out to https://quansight.com/ to learn more about what we
 can do for you.
 
 ### Third hurdle: going out-of-memory
@@ -119,7 +121,8 @@ The amount of data we collected was several gigabytes in size - much more than w
 it. However, we found this to be unnecessary, because Polars' lazy execution made it very easy for
 us to not have to load in all the data at once.
 
-By leveraging Polars' lazy execution, we were able to carry out the entire process on a single-node
+By leveraging [Polars' lazy execution and query optimisation](https://docs.pola.rs/user-guide/lazy/optimizations/),
+we were able to carry out the entire process on a single-node
 machine! The overall impact was enormous: the geocoding process went from taking hours, to
 less than 10 minutes. This was fast and reliable enough that the client was able to discontinue
 a paid API service of theirs, which was costing them ~$30,000 per year!
@@ -131,8 +134,8 @@ This is where the success story becomes even bigger: not only did our solution r
 node, it could actually run on AWS Lambda, where memory, time, and package size are all very
 constrained!
 
-In order to describe our solution, we need to introduce the concept of geohashing. Geohashing
-involves taking a coordinate and assigning an alphanumeric string to it. A geohash identifies
+In order to describe our solution, we need to introduce the concept of [geohashing](https://en.wikipedia.org/wiki/Geohash).
+Geohashing involves taking a coordinate and assigning an alphanumeric string to it. A geohash identifies
 a region in space - the more digits you consider in the geohash, the smaller the area. For example,
 the geohash `9xe` stretches out across hundres of miles and covers Wyoming entirely (plus parts of
 other states), whereas `9xejgxn` covers a very small amount of land and allows you to idenfity
@@ -167,7 +170,7 @@ Our complete environment was composed of:
 
 - Polars
 - 3 Polars plugins
-- s3fs, boto3, and fsspec for reading and writing cloud data
+- `s3fs`, `boto3`, and `fsspec` for reading and writing cloud data
 
 Not only did it all fit comfortably into the AWS Lambda 250MB package size limit, execution was also
 fast enough that we could reverse-geocode millions of coordinates from across the United States in
@@ -182,5 +185,6 @@ Quansight Consulting.
 By leveraging both open source datasets and open source tools, as well our in-house expertise,
 we were able to save our client time and money for their geocoding and reverse-geocoding needs.
 We made the infeasible feasible. If you'd like customised solutions tailored to your business needs,
-delivered by open source experts, please get in contact with Quansight today.
+delivered by open source experts, please [get in contact with Quansight](https://quansight.com/open-source-services/)
+today.
 
