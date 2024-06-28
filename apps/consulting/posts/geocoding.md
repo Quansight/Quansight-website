@@ -6,7 +6,8 @@ typically relies on paid API services. Learn about how we saved a client time an
 money by leveraging open source tools and datasets for their geocoding needs.
 
 Our solution took their geocoding process from taking hours to taking minutes,
-and from costing tends of thousands of dollars per year, to just dozens.
+and their reverse-geocoding process from being unfeasibly expensive and slow to
+being fast and cheap.
 
 ## What are geocoding and reverse-geocoding?
 
@@ -26,16 +27,19 @@ Both are useful in several applications:
 - point-of-interest recommendations.
 
 Our client needed to geocode and reverse-geocode millions
-of rows at a time. It was costing them a lot of money and time:
+of rows at a time. Geocoding was slow, and reverse-geocoding
+unfeasibly expensive. To process ~7,000,000 rows:
 
-- Geocoding ~7,000,000 addresses: ~2-3 hours, $32,100 yearly subscription
-- Reverse geocoding ~7,000,000 coordinates: 35 hours, $35,000 (this was so slow
-  and expensive that they would not typically do it)
+- Geocoding would take ~2-3 hours and cost them $32,100
+  in yearly subscriptions (in addition to compute costs).
+- Reverse geocoding was simply unfeasible: it would have taken
+  them 35 hours and cost $35,000, so in practice they would very rarely do it.
 
-The solution we delivered them, on the other hand, required:
+The solution we delivered them, on the other hand, was lightweight, cheap, and fast.
+To process the same number of rows:
 
-- Geocoding: <10 minutes, costing <$10 per month
-- Reverse geocoding: ~7-8 minutes, cost $5-6
+- Geocoding: <10 minutes, without any subscription costs.
+- Reverse geocoding: ~7-8 minutes, cost $5-6, lightweight enough to run on AWS Lambda.
 
 We're here to share our findings, and to give an overview of how we did it.
 
@@ -44,7 +48,7 @@ We're here to share our findings, and to give an overview of how we did it.
 Suppose we're starting with a batch of addresses
 and need to geocode them. The gist of the solution we delivered is:
 
-- take the client's proprietary datasets and complement them with open source
+- take the client's proprietary data and complement it with open source
   datasets (such as OpenAddresses data). Preprocess it so it's all in a
   standardised form. We'll refer to this collection of data as our _lookup dataset_.
 - join input addresses with our lookup dataset, based on:
@@ -52,7 +56,8 @@ and need to geocode them. The gist of the solution we delivered is:
   - road
   - zip code (if available, else city)
 
-This is conceptually simple, but we encountered several hurdles when implementing it.
+Whilst conceptually simple, we encountered several hurdles when implementing it. We'll
+now tell about how we overcame them.
 
 ### First hurdle: inconsistent road names
 
@@ -64,32 +69,28 @@ as:
 - w. broncho avenue
 - w. broncho
 
-We use the [libpostal](https://github.com/openvenues/libpostal)'s `expand_address` function,
+We used the [libpostal](https://github.com/openvenues/libpostal)'s `expand_address` function,
 as well as some hand-crafted logic, to generate multiple variants of each address (in both the input
 and the lookup dataset), thus increasing the chances of finding matches.
 
-### Second hurdle: some addresses in the lookup don't have a zip code, and possibly neither a city
+### Second hurdle: some addresses in the lookup didn't have a zip code, and possibly neither a city
 
-Some of the OpenAddresses data contained all the information we needed, except zip code.
-In some cases, by leveraging other freely available data on zip code boundaries, as well as
-GeoPandas' spatial joins, we could assign a zip code to that data. However, that was not always
-sufficient - some rows remained zip-code-less.
+The OpenAddresses data contained all the information we needed, except that for some rows the zip code
+was missing. For such rows, we would do the following:
 
-For zip-code-less rows, we would do the following:
-
-- try to find the zip code by leveraging GeoPandas' spatial joins and freely available data
+- Try to fill in the zip code by leveraging GeoPandas' spatial joins and freely available data
   on zip code boundaries
 - else:
-  - if the lookup address has a city, then to join with the input addresses based on
-    <address number, road, city>
-  - else, use the [polars-reverse-geocode](https://github.com/MarcoGorelli/polars-reverse-geocode)
+  - If the lookup address had a city, then try to join with the input addresses based on
+    <address number, road, city>.
+  - Else, use the [polars-reverse-geocode](https://github.com/MarcoGorelli/polars-reverse-geocode)
     Polars plugin to find the closest city to the coordinates in the lookup file, and then join
-    with the input addresses based on that
+    with the input addresses based on that.
 
 The last option used a Polars plugin which we developed specially for the client (who kindly allowed
 us to open source it). Using that plugin, it's possible to do approximate reverse geocoding of
-millions of rows in just seconds. We have a variety of expertises at Quansight - including Rust! - so
-please reach out to https://quansight.com/https://quansight.com/ to learn more about what we
+millions of rows in just seconds. We have expertise in a variety of areas at Quansight - including Rust!
+- so please reach out to https://quansight.com/https://quansight.com/ to learn more about what we
 can do for you.
 
 ### Third hurdle: going out-of-memory
@@ -97,11 +98,7 @@ can do for you.
 The amount of data we collected was several gigabytes in size - much more than what our single-node
 16GB RAM machine could handle, which is why our client was previously using a cluster to process
 it. However, we found this to be unnecessary, because Polars' lazy execution made it very easy for
-us to not have to load in all the data at once. All we needed to do was:
-
-1. express our business logic
-2. use `.collect` when we want to materialise our results
-3. let Polars figure out which rows and columns it needs to read from the input, and only read in those
+us to not have to load in all the data at once.
 
 By leveraging Polars' lazy execution, we were able to carry out the entire process on a single-node
 machine! The overall impact was enormous: the geocoding process went from taking hours, to
@@ -112,14 +109,17 @@ a paid API service of theirs, which was costing them ~$30,000 per year!
 
 Thus far, we've talked about geocoding. What about the reverse process, reverse-geocoding?
 This is where the success story becomes even bigger: not only did our solution run on a single
-node, it could run on AWS Lambda, where memory, time, and package size are all constrained.
+node, it could actually run on AWS Lambda, where memory, time, and package size are all very
+constrained!
 
 In order to describe our solution, we need to introduce the concept of geohashing. Geohashing
 involves taking a coordinate and assigning an alphanumeric string to it. A geohash identifies
 a region in space - the more digits you consider in the geohash, the smaller the area. For example,
-the geohash 3fs stretches out across thousands of kilometers and covers Montata and Arizona, whereas
-3fs94kfsj is only a few hundred meters long. Given a latitude and longitude coordinate, the geohash
-is very cheap to compute, and so it gives us an easy way to filter which data we need to read.
+the geohash `9xe` stretches out across hundres of miles and covers Wyoming entirely (plus parts of
+other states), whereas `9xejgxn` covers a very small amount of land and allows you to idenfity
+3rd Street Shoshoni, Wyoming. Given a latitude and longitude coordinate, the geohash
+is very cheap to compute, and so it gives us an easy way to filter out irrelevant data from our
+lookup dataset.
 
 Here's a simplified sketch of the solution we delivered:
 
@@ -131,20 +131,20 @@ Here's a simplified sketch of the solution we delivered:
    and do a cross join. For each unique input coordinate, we only keep the row matching the smallest
    haversine distance between the input coordinate and the lookup address. Write the result
    to a temporary Parquet file.
-3. One all the `execute-reverse-geocoder` jobs have finished, concatenate all the temporary Parquet
+3. Once all the `execute-reverse-geocoder` jobs have finished, concatenate all the temporary Parquet
    files which they wrote into a single output file.
 
 This solution is easy to describe - the only issue is that no common dataframe library has in-built
 functionality for computing geohashes, nor for computing distances between pairs of coordinates.
 This is where one of Polars' killer features (extensibility) came into play: if Polars doesn't implement
 a function you need, you can always make a plugin that can do it for you. In this case, we used several
-plugins:
+plugins to adapt Polars to our needs:
 
-- polars-hash, for computing geohashes
-- polars-distance, for computing the distance between pairs of coordinates
-- polars-reverse-geocode, for finding the closest state to a given coordinate
+- `polars-hash`, for computing geohashes
+- `polars-distance`, for computing the distance between pairs of coordinates
+- `polars-reverse-geocode`, for finding the closest state to a given coordinate
 
-All in all, our environment needed to contain:
+Our complete environment was composed of:
 
 - Polars
 - 3 Polars plugins
@@ -152,7 +152,7 @@ All in all, our environment needed to contain:
 
 Not only did it all fit comfortably into the AWS Lambda 250MB package size limit, execution was also
 fast enough that we could reverse-geocode millions of coordinates from across the United States in
-less than 10 minutes, staying within the 10GB memory limit.
+less than 10 minutes, staying within the 10GB memory limit!
 
 That's the power of lazy execution and Rust. If you too would like custom Rust and/or Python
 solutions for your use case, which can be easily and cheaply deployed, please contact
@@ -160,7 +160,8 @@ Quansight Consulting.
 
 ## What we did for Datum, and what we can do for you
 
-Would you like customised solutions to your business needs, based on open source tools,
-delivered by open source experts? We allowed Datum to save time and money, and could do the
-same for you! Please contact Quansight today.
+By leveraging both open source datasets and open source tools, as well our in-house expertise,
+we were able to save our client time and money for their geocoding and reverse-geocoding needs.
+We made the infeasible feasible. If you'd like customised solutions tailored to your business needs,
+delivered by open source experts, please get in contact with Quansight today.
 
