@@ -1,7 +1,7 @@
 ---
 title: 'An overview of the Sparse Array Ecosystem for Python'
 authors: [hameer-abbasi]
-published: March 19, 2024
+published: July 2, 2024
 description: 'An overview of the different options available for working with sparse arrays in Python'
 category: [PyData ecosystem, OSS Experience]
 featuredImage:
