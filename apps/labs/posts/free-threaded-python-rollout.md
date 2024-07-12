@@ -23,7 +23,13 @@ dependencies of your project (e.g., "what was the first release of a package on
 PyPI to support free-threaded Python?" or "are there nightly wheels and where
 can I find them?") and get an overview of ecosystem-wide progress.
 
-![Tracker for package compatibility with free-threaded CPython](/posts/free-threaded-python-rollout/py_free_threading_tracker.png)
+<p align="center">
+  <img
+    alt="Tracking website for package compatibility with free-threaded CPython."
+    src="/posts/free-threaded-python-rollout/py_free_threading_tracker.png"
+    width="60%"
+  />
+</p>
 
 Later today, the Birds-of-a-Feather session
 ["Supporting free-threaded Python"](https://cfp.scipy.org/2024/talk/HDR7WZ/)
