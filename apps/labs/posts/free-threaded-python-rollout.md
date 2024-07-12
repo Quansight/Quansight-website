@@ -1,7 +1,7 @@
 ---
 title: 'Free-threaded CPython is ready to experiment with!'
 authors: [ralf-gommers]
-published: July 11, 2024
+published: July 12, 2024
 description: 'An overview of the ongoing efforts to improve and roll out support for free-threaded CPython throughout the Python open source ecosystem'
 category: [Community, PyData ecosystem]
 featuredImage:
