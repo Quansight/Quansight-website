@@ -44,7 +44,7 @@ capability that is finally arriving as a result of the efforts that went into
 
 Why? Performance. Multi-threaded performance. It makes it significantly easier
 to write code that efficiently runs in parallel and will utilize multiple CPU
-cores effectively. The core count in modern CPUs continue to grow, while clock
+cores effectively. The core counts in modern CPUs continue to grow, while clock
 speeds do not grow, so multi-threaded performance will continue to grow in
 importance.
 
