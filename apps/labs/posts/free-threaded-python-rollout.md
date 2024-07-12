@@ -23,7 +23,7 @@ dependencies of your project (e.g., "what was the first release of a package on
 PyPI to support free-threaded Python?" or "are there nightly wheels and where
 can I find them?") and get an overview of ecosystem-wide progress.
 
-![Tracker for package compatibility with free-threaded CPython](/posts/py_free_threading_tracker.py)
+![Tracker for package compatibility with free-threaded CPython](/posts/py_free_threading_tracker.png)
 
 Later today, the Birds-of-a-Feather session
 ["Supporting free-threaded Python"](https://cfp.scipy.org/2024/talk/HDR7WZ/)
@@ -77,7 +77,10 @@ Here are a couple of examples of such intermittent failures:
 
 [numpy#26690](https://github.com/numpy/numpy/issues/26690) shows an example
 where a simple call to the `.sum()` method of a numpy array fails with a
-fairly mysterious `RuntimeError: Identity cache already includes the item.`
+fairly mysterious
+```
+RuntimeError: Identity cache already includes the item.
+```
 when used with the Python `threading` and `queue` modules. This was noticed
 in a scikit-learn CI job - it never failed in NumPy's own CI (scikit-learn has
 more tests involving parallelism). After the bug report with a reproducer was
