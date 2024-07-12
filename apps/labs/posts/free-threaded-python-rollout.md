@@ -21,7 +21,7 @@ Python ecosystem. We hope and expect both of these to be very useful, with the
 status tracker providing a one-stop-shop to check the support status of the
 dependencies of your project (e.g., "what was the first release of a package on
 PyPI to support free-threaded Python?" or "are there nightly wheels and where
-can I find them?") and get an overview of ecosystem-wide progress.
+can I find them?") and get an overview of ecosystem-wide progress:
 
 <p align="center">
   <img
@@ -53,6 +53,10 @@ to write code that efficiently runs in parallel and will utilize multiple CPU
 cores effectively. The core counts in modern CPUs continue to grow, while clock
 speeds do not grow, so multi-threaded performance will continue to grow in
 importance.
+
+How? It's now [easy to get started by installing a free-threaded interpreter](https://py-free-threading.github.io/installing_cpython/):
+macOS/Linux/Windows & python.org/pyenv/apt/yum/conda - your preferred option is
+probably available now.
 
 
 ## Sounds awesome - what's the catch?
