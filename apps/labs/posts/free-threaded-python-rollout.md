@@ -165,7 +165,7 @@ be used as a template by others we think. The steps are roughly:
 Our main takeaway so far: it's challenging, but tractable! And fun as well:)
 
 We've only just scratched the surface, there'll be a lot to do - from key
-complex packages like PyO3 (of key importance for projects using Rust) and
+complex packages like PyO3 (important for projects using Rust) and
 PyTorch, to the sheer volume of smaller packages with extension modules.
 The lessons we are learning, as far as they are reusable, are going into the
 documentation at
