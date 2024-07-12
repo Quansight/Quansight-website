@@ -160,11 +160,16 @@ PyTorch, to the sheer volume of smaller packages with extension modules.
 The lessons we are learning, as far as they are reusable, are going into the
 documentation at
 [py-free-threading.github.io](https://py-free-threading.github.io).
+The [repository](https://github.com/Quansight-Labs/free-threaded-compatibility/)
+that contains the sources for that website also has an issue tracker that is used
+to link to the relevant project-specific tracking issues for free-threaded support,
+as well as for ecosystem-wide issues and tasks (contributions and ideas are
+very welcome here!).
 
 Furthermore, we'd like to spend time on whatever may be impactful in helping
 the ecosystem adopt free-threaded CPython, from answering questions
-to helping with debugging - please don't hesitate to reach out or ping us on
-GitHub!
+to helping with debugging - please don't hesitate to reach out or ping one of
+us directly on GitHub!
 
 
 ## Conclusion & acknowledgements
