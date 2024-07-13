@@ -34,7 +34,7 @@ can I find them?") and get an overview of ecosystem-wide progress:
 Later today, the Birds-of-a-Feather session
 ["Supporting free-threaded Python"](https://cfp.scipy.org/2024/talk/HDR7WZ/)
 will be held at the SciPy 2024 conference (co-organized by one of our team
-members, Nathan Goldbaum, together with Madicken Munck), focusing on knowledge
+members, Nathan Goldbaum, together with Madicken Munk), focusing on knowledge
 and experience sharing.
 
 
