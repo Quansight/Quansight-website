@@ -178,7 +178,7 @@ Community meetings are great for these kinds of discussions since, in comparison
 
 The consensus from the meetings is that Option 2 (Sort `NaN`s to the back) is the more useful behaviour, so I set out to implement it.
 
-However, while such behaviour is easy to implement for types that can be negated:
+However, while such behaviour is easy to implement for types that can be negated, as shown below,
 
 ```py
 def top_k(a, k, /, *, axis=-1, largest=True):
