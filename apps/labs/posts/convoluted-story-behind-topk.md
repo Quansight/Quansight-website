@@ -5,10 +5,10 @@ published: July 19, 2024
 description: 'In this blog post, I describe my experience as a first-time contributor to NumPy and talk about the story behind `np.top_k`.'
 category: [OSS Experience, Array API]
 featuredImage:
-  src: /posts/convoluted-story-behind-topk/NumPy_logo_2020.webp
+  src: /posts/convoluted-story-behind-topk/NumPy_logo_2020_hero.webp
   alt: 'NumPy Logo retrieved from Wikipedia Commons'
 hero:
-  imageSrc: /posts/convoluted-story-behind-topk/NumPy_logo_2020_hero.webp
+  imageSrc: /posts/convoluted-story-behind-topk/NumPy_logo_2020.webp
   imageAlt: 'NumPy Logo retrieved from Wikipedia Commons'
 ---
 
