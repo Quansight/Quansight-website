@@ -1,5 +1,5 @@
 ---
-title: 'The Convoluted Story Behind `np.top_k`'
+title: 'The convoluted story Behind `np.top_k`'
 authors: [jules-poon]
 published: July 19, 2024
 description: 'In this blog post, I describe my experience as a first-time contributor to NumPy and talk about the story behind `np.top_k`.'
@@ -16,10 +16,10 @@ In this blog post, I describe my experience as a first-time contributor and talk
 
 ---
 
-Hi~ I'm [Jules Poon](https://juliapoo.github.io/), a Year 2 undergraduate at the National University of Singapore. This summer I had the incredible opportunity to join the Open Source internship at Quansight Labs, under the mentorship of [Ralf Gommers](https://github.com/rgommers), [Nathan Goldbaum](https://ngoldbaum.github.io/) and [Matti Picus](https://github.com/mattip) for work on NumPy, and [Evgeni Burovski](https://github.com/ev-br) for work
+Hi~ I'm [Jules Poon](https://juliapoo.github.io/), a Year 2 undergraduate at the National University of Singapore. This summer I had the incredible opportunity to join the Open Source internship program at Quansight Labs, under the mentorship of [Ralf Gommers](https://github.com/rgommers), [Nathan Goldbaum](https://github.com/ngoldbaum) and [Matti Picus](https://github.com/mattip) for work on NumPy, and [Evgeni Burovski](https://github.com/ev-br) for work
 on SciPy.
 
-My task for NumPy is quite generic: To contribute to NumPy. So I'm placed in a position most people just beginning in open source will find themselves in. Hopefully, this blog post can help somebody just starting with open-source to navigate projects and understand the process behind the decisions made in open-source projects.
+My task for NumPy is quite generic: To contribute to NumPy. While I find myself in a position similar to many people just beginning in open source, I had two important advantages: recommendations of good starting issues and direct access to maintainers for discussion. These factors made it easier compared to starting as a new contributor alone. Hopefully, this blog post can help somebody just starting with open-source to navigate projects and understand the process behind the decisions made in open-source projects.
 
 First, I want to go through some tips for contributing to NumPy.
 
@@ -39,7 +39,7 @@ Throughout the 1.5 months working on NumPy, I made incremental improvements to t
 
 ### Reviewing Community Discussions
 
-The discussions for `np.top_k` started from [gh-15128 Feature request: Allow np.argmax to output top K maximum values](https://github.com/numpy/numpy/issues/15128) in 2019 where multiple people expressed their request for having this feature in NumPy.
+The discussions for `np.top_k` started from [gh-15128 Feature request: Allow np.argmax to output top K maximum values](https://github.com/numpy/numpy/issues/15128) in 2019 where multiple people expressed their request for having this feature in NumPy. Furthermore, Ralf mentioned that it's the 6th-highest feature request in the whole issue tracker as measured by 👍🏼 emojis.
 
 Seemingly independently, a thread was opened by [@quarrying](https://github.com/quarrying) in the mailing list in May 2021 [EHN: Discusions about 'add numpy.topk'](https://mail.python.org/archives/list/numpy-discussion@python.org/thread/F4P5UVTAKRJJ3OORI6UOWFSUEE5CNTSC/) with a corresponding PR [gh-19117 EHN: add numpy.topk](https://github.com/numpy/numpy/pull/19117).
 
@@ -115,9 +115,9 @@ def top_k(
     """
 ```
 
-I decided on `np.top_k` as the name of the function, and against an additional function like `argtop_k` as there isn't a significant performance difference for just returning both the indices and values in one call (which Ralf agrees).
+I decided on `np.top_k` as the name of the function, and against an additional function like `argtop_k` as there isn't a significant performance difference for just returning both the indices and values in one call (which Ralf agrees with).
 
-I made heavy reference to the [array-api PR](https://github.com/data-apis/array-api/pull/722) and the notes there as well. Something I changed was to have `axis=-1` by default instead of the proposed `axis=None`. This follows `np.argparitition` and my own sensibility.
+I made heavy reference to the [array-api PR](https://github.com/data-apis/array-api/pull/722) and the notes there as well. Something I changed was to have `axis=-1` by default instead of the proposed `axis=None`. This follows `np.argpartition` and my own sensibility.
 
 There were other open questions posed here as well which I had to resolve for the implementation of `top_k`. Since the NumPy implementation heavily relies on `np.argpartition`, I suggested that `np.top_k` should simply follow the behaviour of `np.argpartition`. For instance:
 
@@ -129,7 +129,7 @@ There were other open questions posed here as well which I had to resolve for th
 >
 > A: `np.argpartition` (at this point in time) does not define the sort order of `np.nan`, even though `np.sort` does, so `np.top_k` shouldn't either.
 
-The behaviour for `NaN` values will become a huge contention later.
+The behaviour for `NaN` values will become a huge point of contention later.
 
 ### Feedback for the First Implementation
 
@@ -138,7 +138,7 @@ The performance of the implementation is good, being significantly faster than a
 1. Leave the sort order of `np.nan` unchanged (that it's the biggest element).
 2. Always sort `np.nan` to the end.
 
-The significance of Option 2 is that `np.top_k([1., np.nan], 1)` will return `1.` instead of `nan`, which is arguably preferable. This also follows data libraries such as `pandas`.
+The significance of Option 2 is that `np.top_k([1., np.nan], 1)` will return `1.` instead of `nan`, which is arguably preferable. This also follows dataframe libraries such as `pandas`.
 
 However, Option 2 means that the sort order of `np.nan` is inconsistent: It is the biggest element when `largest=False`, and smallest when `largest=True`. Furthermore, this goes against the behaviour of `np.sort`.
 
@@ -174,7 +174,7 @@ The discussions on the `NaN` ordering for `np.top_k` raised the issue that `np.p
 
 However, there was still an impasse about the `NaN` ordering, so Ralf brought up the topic on my behalf at the next NumPy community meeting, which I did not join as it was very late for my time zone.
 
-Community meetings are great for these kinds of discussions since, in comparison to asynchronous conversations spread across, say, 4 threads, everything can happen in realtime.
+Community meetings are great for these kinds of discussions since, in comparison to asynchronous conversations spread across, say, 4 threads, everything can happen in real-time.
 
 The consensus from the meetings is that Option 2 (Sort `NaN`s to the back) is the more useful behaviour, so I set out to implement it.
 
