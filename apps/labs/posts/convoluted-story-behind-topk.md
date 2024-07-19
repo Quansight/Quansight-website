@@ -1,5 +1,5 @@
 ---
-title: 'The convoluted story Behind `np.top_k`'
+title: 'The convoluted story behind `np.top_k`'
 authors: [jules-poon]
 published: July 19, 2024
 description: 'In this blog post, I describe my experience as a first-time contributor to NumPy and talk about the story behind `np.top_k`.'
