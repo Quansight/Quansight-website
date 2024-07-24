@@ -16,8 +16,6 @@ The 2024 Quansight Labs Internship Program started July 1st, and we’re excited
 
 The Quansight Labs summer internship was created to provide up-and-coming open source talent with the opportunity to connect with the community, work alongside open source leaders, and grow professionally while developing solutions for the larger scientific open source ecosystem. Each project focuses on a different part of our ecosystem, and gives interns a chance to contribute and interact with different open source communities.
 
-This year, we also have the pleasure of collaborating with Oxford University and welcome two interns from that institution.
-
 Now, let’s meet the 2024 cohort!
 
 ## Quansight Labs’ 2024 Summer Interns
