@@ -5,11 +5,11 @@ published: June 17, 2024
 description: 'Learn what you should be using instead'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/scikit-lego-narwhals/scikit_lego_narwhals_handshake.png
-  alt: 'Scikit-lego and Narwhals logos shaking hands'
+  src: /posts/pandas-resample/resample.png
+  alt: 'Image of Drake not looking impressed at `resample("M")`, and preferring `resample("MS")`'
 hero:
-  imageSrc: /posts/scikit-lego-narwhals/hero.png
-  imageAlt: 'Scikit-lego and Narwhals logos'
+  imageSrc: /posts/pandas-resample/pandas-logo-wide-field.png
+  imageAlt: 'Pandas logo'
 ---
 
 Suppose you have a Dataframe `df` containing two columns:
