@@ -96,10 +96,10 @@ Community feedback was key. I did not realize when I removed the `role="main"`
 attribute that [Sphinx uses the corresponding
 [role="main"]](https://github.com/sphinx-doc/sphinx/blob/4fbd3682d5cdf606159630f7daf6f818d58de05e/sphinx/themes/basic/static/searchtools.js#L185)
 CSS attribute selector to highlight search results when a reader searches a
-Sphinx-generated docs site. But one of our user-contributors, Michael Wisely,
+Sphinx-generated docs site. But one of our user-contributors, [Michael Wisely][(https://github.com/michael-wisely-gravwell),
 [reported the missing search
 highlight](https://github.com/pydata/pydata-sphinx-theme/issues/1676) on GitHub.
-Then maintainer Daniel McCloy connected the dots. The fix was fortunately
+Then maintainer [Daniel McCloy](https://github.com/drammock) connected the dots. The fix was fortunately
 straightforward. It just required redundantly adding the role attribute to the
 main tag, like so: `<main role="main">`. (But don't do that in your own
 day-to-day HTML! You can and should just use the `<main>` tag without the role
@@ -114,7 +114,7 @@ a way to view all of the landmarks on a web page at once.
 
 ## Sidebar Table of Contents, Before and After
 
-This section assumes some knowledge of HTML and CSS.
+This section assumes some knowledge of [HTML](https://en.wikipedia.org/wiki/HTML) and [CSS](https://en.wikipedia.org/wiki/CSS).
 
 A crucial part of web accessibility is keyboard accessibility. This means that
 users should be able to use your website without a mouse or touch device—in
@@ -234,7 +234,7 @@ Some of the ideas that my team came up with:
   pattern](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/)
 
 Since I was a little unsure about which direction to take, I decided to ask an
-expert. Here I would like to a give a big shout out to Eric Bailey. Some time
+expert. Here I would like to a give a big shout out to [Eric Bailey](https://ericwbailey.design/). Some time
 ago I had read on his blog that he was offering office hours as a way to
 give back to the community. So I sent him an email to ask him if he was still
 offering. He replied yes and asked me for more info about the problem I was
@@ -291,7 +291,7 @@ pressing the `Enter` key should follow the link or expand the section.
 
 ![](/posts/pydata-theme-a11y-fixes/ambiguous-summary.png)
 
-With the help of my designer partner in crime, Smera Goel, we decided that we
+With the help of my designer partner in crime, [Smera Goel](https://github.com/smeragoel), we decided that we
 should present the two elements, the link and the expand/collapse icon, as
 completely separate. This led to a new, slightly different markup structure,
 which allows the toggle button to be focussed separately from the section link:
