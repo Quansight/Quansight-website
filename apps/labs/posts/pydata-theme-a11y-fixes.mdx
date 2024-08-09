@@ -17,40 +17,39 @@ hero:
 Over the past several months, I have been working with a few coworkers and the
 PyData community at large to make some accessibility improvements to the PyData
 Sphinx Theme. For this blog post, I chose three such improvements (out of many!)
-to examine with a before-and-after lens to give a better idea of how these kinds
-of changes can create an improved user experience for disabled people—and often
-for people without disabilities, too.
+to examine with a before-and-after lens. This will give a better idea of how
+these kinds of changes can create an improved user experience for disabled
+people—and often for people without disabilities, too.
 
 For those not familiar with Sphinx, it is a framework for writing documentation.
-It is used, for example, to generate the official Python docs. As with many such
-content generation frameworks, Sphinx supports customization via themes. One
-such theme, created by and for the PyData community, is the PyData
-Theme.
-
-For those not familiar with accessibility, it is the practice of adapting built
-environments (including digital and virtual environments) to meet the needs of
-disabled people.
+It is used, for example, to generate the official Python documentation. As with
+many such content generation frameworks, Sphinx supports customization via
+themes. One such theme, created by and for the PyData community, is the PyData
+Theme. For those not familiar with accessibility, it is the practice of adapting
+built environments (including digital and virtual environments) to meet the
+needs of disabled people.
 
 A small, subtle point of clarification before we begin. Throughout this blog
 post, I will use screenshots from the [PyData Sphinx Theme
-docs](https://pydata-sphinx-theme.readthedocs.io/en/latest/index.html), which
-uses the theme; however, I want to emphasize that these improvements apply to
-the theme itself, and by extension to all documentation sites that choose to use
-it.
+documentation](https://pydata-sphinx-theme.readthedocumentation.io) (v0.15.4),
+which uses the theme; however, I want to emphasize that these improvements apply
+to the theme itself, and by extension to all documentation sites that choose to
+use it.
 
 ## Landmarks, Before and After
 
 This section assumes that you know [what a screen reader
 is](https://en.wikipedia.org/wiki/Screen_reader).
 
-If you are sighted, then when you visit a website, you are used to seeing the
-content arranged in a limited number of ways: typically, a header, a main area,
-a footer, maybe a sidebar. Visual cues like alignment, horizontal lines, and
-font sizes all work together to help your eyes and brain to scan the page to
-know where to look. But if you are blind, you rely on landmarks to fulfill the
-same function. HTML5 provides tags like header, footer, and main that allow
-web page authors to break up the content on the page into meaningful sections.
-These sections can then be surfaced to screen readers and other assistive tech.
+If you are a sighted person, then when you visit a website, you are used to
+seeing the content arranged in a limited number of ways: typically, a header, a
+main area, a footer, maybe a sidebar. Visual cues like alignment, horizontal
+lines, and font sizes all work together to help your eyes and brain to scan the
+page to know where to look. But if you are a blind person, you rely on landmarks
+to fulfill the same function. HTML5 provides tags like header, footer, and main
+that allow web page authors to break up the content on the page into meaningful
+sections. These sections can then be surfaced to screen readers and other
+assistive tech.
 
 Screen reader software provides a way to quickly cycle through all of the
 landmarks on the page. The following screenshot shows the landmarks as they
@@ -65,7 +64,7 @@ Confusing, right?
 
 ![](/posts/pydata-theme-a11y-fixes/landmarks-before.png)
 
-In order to be useful, the set of landmarks needs to be short and unambiguous.
+To be useful, the set of landmarks needs to be short and unambiguous.
 There should be one and only one landmark for the main part of the page, just as
 there should only be one header and one footer. It’s okay to have multiple
 navigations, but they should be clear and distinct from each other.
@@ -96,14 +95,14 @@ Community feedback was key. I did not realize when I removed the `role="main"`
 attribute that [Sphinx uses the corresponding
 [role="main"]](https://github.com/sphinx-doc/sphinx/blob/4fbd3682d5cdf606159630f7daf6f818d58de05e/sphinx/themes/basic/static/searchtools.js#L185)
 CSS attribute selector to highlight search results when a reader searches a
-Sphinx-generated docs site. But one of our user-contributors, [Michael Wisely][(https://github.com/michael-wisely-gravwell),
-[reported the missing search
-highlight](https://github.com/pydata/pydata-sphinx-theme/issues/1676) on GitHub.
-Then maintainer [Daniel McCloy](https://github.com/drammock) connected the dots. The fix was fortunately
-straightforward. It just required redundantly adding the role attribute to the
-main tag, like so: `<main role="main">`. (But don't do that in your own
-day-to-day HTML! You can and should just use the `<main>` tag without the role
-attribute.)
+Sphinx-generated documentation site. But one of our user-contributors, [Michael
+Wisely](https://github.com/michael-wisely-gravwell), [reported the missing
+search highlight](https://github.com/pydata/pydata-sphinx-theme/issues/1676) on
+GitHub. Then maintainer [Daniel McCloy](https://github.com/drammock) connected
+the dots. The fix was fortunately straightforward. It just required redundantly
+adding the role attribute to the main tag, like so: `<main role="main">`. (But
+don't do that in your own day-to-day HTML! You can and should just use the
+`<main>` tag without the role attribute.)
 
 If you're curious about how I generated the screenshots in the pull request that
 I linked, or if you're curious about how your own website looks in terms of
@@ -118,30 +117,28 @@ This section assumes some knowledge of [HTML](https://en.wikipedia.org/wiki/HTML
 
 A crucial part of web accessibility is keyboard accessibility. This means that
 users should be able to use your website without a mouse or touch device—in
-other words, with only a keyboard. Not only does this help low-vision users;
-providing full keyboard access is like providing a kind of input API to your
-site. Different kinds of assistive tech can hook into the same interface
-intended for keyboards. (There is a nice historical continuity here as some of
-the first [typewriters were assistive
+other words, with only a keyboard. Full keyboard access essentially provides an
+input API to your site. Different kinds of assistive tech can hook into the same
+interface intended for keyboards. (There is a nice historical continuity here as
+some of the first [typewriters were assistive
 tech](https://en.wikipedia.org/wiki/Hansen_Writing_Ball).)
 
 The PyData theme provides a table of contents in the left sidebar. One nice
 feature of this table of contents is that site authors can choose how many
 nested levels to show before the sublevels are hidden automatically beneath an
-expand/collapse button. The only problem with this expand/collapse "button",
-though, was that it was not keyboard accessible.
+expand/collapse button. The only problem with this button, though, was that it
+was not keyboard accessible.
 
 ![A "before" screenshot shows a mouse pointer hovering over a toggle "button" to
 convey the idea that prior to the accessibility work, the "button" was only
 point-and-click accessible, not
 keyboard accessible](/posts/pydata-theme-a11y-fixes/sidebar-toc-before.png)
 
-I put "button" in quotes because a true HTML `<button>` is keyboard accessible,
-meaning that a user can both navigate to it using only the keyboard (via the
-`Tab` key) **and** a user can "press" the button using only the keyboard (via
-`Space`, `Enter` or `Return` keys). But in the case of our foldable/unfoldable
-table of contents, it had been implemented without HTML buttons to avoid
-JavaScript. It used two tricks in a clever way:
+In fact, it wasn't really a button. A true HTML `<button>` is keyboard
+accessible, meaning that a user can both navigate to it using the `Tab` key
+**and** operate it using the `Space`, `Enter` or `Return` keys. But our
+foldable/unfoldable table of contents had been implemented without HTML buttons
+to avoid JavaScript. It used two tricks in a clever way:
 
 1. In HTML, if you associate a `<label>` with an `<input type="checkbox" />`,
    then clicking the label checks and unchecks the associated checkbox.
@@ -189,28 +186,28 @@ checked. In code, it looks like the following:
 
 The `~` is standard CSS, but it's not very commonly used. It's called the
 subsequent-sibling combinator. `A ~ B` means select all B elements that come
-after A and are at the same level in the HTML tree (A and B share the same
-parent). In other words, B must be a "younger sibling" of A.
+after A and are at the same level in the HTML tree. In other words, A and B
+share the same parent, and B must be a younger sibling of A.
 
-The problem with this clever, CSS-only technique is that browsers do not treat
-the label as a keyboard-interactive element; they only provide keyboard
+The problem with this clever, CSS-only technique is that browsers do not treat a
+`<label>` as a keyboard-interactive element; they only provide keyboard
 interactivity for its associated checkbox. But the checkbox has been made
 invisible, leaving only the label behind, so there's no way to interact with the
 checkbox using only a keyboard. Interestingly, even though the checkbox is
-hidden, browsers will still transmit clicks from the label to the checkbox, so
-that when you click or press the label, it causes the associated, invisible
-checkbox to be checked and unchecked. But, to reiterate, the browser provides
-the label itself with no keyboard interactivity.
+hidden, browsers will still transmit mouse clicks from the label to the
+checkbox, so that when you click or press the label, it causes the associated,
+invisible checkbox to be checked and unchecked. But, to reiterate, the browser
+provides the label itself with no keyboard interactivity.
 
 I should mention that I do not know if every browser behaves this way. But I am
 sure that this was the behavior in Chrome when I was working on this. It's also
 worth mentioning that screen readers, such as macOS VoiceOver and NVDA, will
 generally provide keyboard interactivity for the label element in the absence of
-the browser providing it, but it's also worth mentioning that to meet the [Web
-Content Accessibility Guidelines success criterion
+the browser providing it. But to meet the [Web Content Accessibility Guidelines
+success criterion
 2.1.1](https://www.w3.org/WAI/WCAG21/Understanding/keyboard.html), this sort of
-functionality should be operable by the keyboard in general and not just in the
-particular circumstance of having a screen reader.
+functionality should be operable by the keyboard in general, with or without a
+screen reader.
 
 So what if you turn the label into a tab stop like so: `<label tabindex="0">`,
 what do you think happens?
@@ -316,13 +313,13 @@ which allows the toggle button to be focussed separately from the section link:
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | ![](/posts/pydata-theme-a11y-fixes/sidebar-toc-after-1-ring-around-link.png) | ![](/posts/pydata-theme-a11y-fixes/sidebar-toc-after-2-ring-around-toggle.png) |
 
-The thing I don't love about this is that it is a somewhat unconventional
-implementation and presentation of a details/summary widget. And let's recall
-that it was an unconventional use of a standard pattern (label + checkbox) that
-got us into this mess to begin with. That said, I think this particular
-unconventional presentation is okay. I think it may come across as somewhat
-confusing to screen reader users the first time they come across it, but I also
-think the context will quickly make things clear.
+There is one thing I don't love about this approach. It is a somewhat
+unconventional implementation and presentation of a details/summary widget. And
+let's recall that it was an unconventional use of a standard pattern (visible
+label + invisible checkbox) that got us into this mess to begin with. That said,
+I think this particular unconventional presentation is okay. I think it may come
+across as somewhat confusing to screen reader users the first time they come
+across it, but I also think the context will quickly make things clear.
 
 At the very least, we know that we have enabled keyboard interaction in the
 sidebar table of contents where there was none before, and that in itself is a
@@ -332,7 +329,7 @@ feedback](https://github.com/pydata/pydata-sphinx-theme/discussions).
 
 Another improvement we made is that prior to this work the toggle button did not
 communicate its state (open or closed) to the [accessibility
-tree](https://developer.mozilla.org/en-US/docs/Glossary/Accessibility_tree). By
+tree](https://developer.mozilla.org/en-US/documentation/Glossary/Accessibility_tree). By
 using the HTML native disclosure widget (i.e., `<details>` and `<summary>`),
 this information gets conveyed automatically to the accessibility tree, no
 JavaScript needed.
@@ -360,20 +357,19 @@ what the default focus ring in Chrome looks like:
 Improving and ensuring focus indicators across all interactive elements in the
 PyData theme was a major part of the accessibility work we did in the past six
 months. There were lots of places where focus rings were missing, incomplete,
-low contrast, or just didn't look good. In this section, I've rounded up and
+had low contrast, or just didn't look good. In this section, I've rounded up and
 grouped several examples to show-and-tell the before-and-after difference.
 
 ### Missing focus rings
 
 The most important kind of before-and-after fix that we made was to add focus
 rings to places where they were missing. Now, you might wonder why there were
-missing focus rings to begin with, since the browser provides them by default. TODO:
-Ask Chris Holdgraff if he knows about Sphinx-copybutton and Sphinx-togglebutton
-(he added the `outline: none` rule). My best guess is that the focus rings were
-removed to fix some other issue and were never restored because their importance was
-not appreciated. So it bears repeating here: in your own CSS, be very careful
-about setting `outline: none` on any keyboard-focusable element because that
-will turn off the browser's default focus ring.
+missing focus rings to begin with, since the browser provides them by default.
+My best guess is that the focus rings were removed to fix some other issue and
+were never restored because their importance was not appreciated. So it bears
+repeating here: in your own CSS, be very careful about setting `outline: none`
+on any keyboard-focusable element because that will turn off the browser's
+default focus ring.
 
 I don't have a full inventory of all the places [missing focus
 indicators](https://github.com/pydata/pydata-sphinx-theme/pull/1549), but there
@@ -387,7 +383,7 @@ were at least seven. Here are before and after screenshots of two such places:
 In some places where there were focus rings they were broken or did not meet
 accessibility guidelines. Here are two examples. In one, the focus ring doesn't
 have sufficient contrast with the background. In the other, there is a bug with
-the focus ring. It is squished and does not contain the focussed element.
+the focus ring; it is squished and does not contain the focussed element.
 
 | Gallery tile                                                                                                                             | In-page table of contents                                                                                                  |
 | ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -401,19 +397,19 @@ term that I find helpful when talking about the challenge of harmonizing several
 different kinds of indicators on the same element. For example, a link can have
 a hover state, a focus state, a visited state, a non-visited state, an active
 state (when you are actively clicking it), and a current state (if you're on the
-page that the link goes to). Many of these states can overlap, hence
-"frankenstates." For example, a link can be hovered and focussed at the same
-time by using the mouse and keyboard together. It's a challenge to design for
-all of these states in such a way that all the different frankenstates look
+page that the link goes to). Many of these states can overlap. For example, a
+link can be hovered and focussed simultaneously using the mouse and keyboard
+together. This overlapping state is what we call a frankenstate. It's
+challenging to design states in such a way that the frankenstates also look
 good. It's even more of a challenge if your design process is access-centered.
 In many design systems, a lot of state differences are conveyed through color
 alone. A previously visited link might be purple, an unvisited link blue, an
-active link green. But an access-centered designer is wary of relying on color
-alone (because of various forms of color blindness and vision impairments). But
-that removes an entire dimension from the design space, and you end up designing
-for the frakenstates in much the same way that you would arrange a tiny
-apartment: carefully, thoughtfully, creatively, skillfully, and with a
-willingness to make needed compromises.
+active link green. However, an access-centered designer is wary of relying on
+color alone (because of various forms of color blindness and vision
+impairments). But that removes an entire dimension from the design space, and
+you end up designing for the frakenstates in much the same way that you would
+arrange a tiny apartment: carefully, thoughtfully, creatively, skillfully, and
+with a willingness to make needed compromises.
 
 | Header nav link: hover + focus + current                                                                                                                                                                                                                                                                                              |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -446,13 +442,14 @@ including but not limited to:
 
 This blog post is not meant to capture all of the accessibility work that we did
 over the past six months, but rather my hope is that I have given you a taste of
-what this work looks like from the developer side of things.
+what this work looks like from my side of things as a developer.
 
 If you would like to take a more exhaustive look, your best option would be to
 look at all of the [PST issues and PRs tagged with
 accessibility](https://github.com/pydata/pydata-sphinx-theme/issues?q=label%3A%22tag%3A+accessibility%22).
-If you find anything you would like to see written about in a blog post like
-this one, please let us know!
+If you find anything you want read about in a blog post like this one, please
+let us know! You can contact us at
+[connect@quansight.com](mailto:connect@quansight.com).
 
 ## Accessibility in this Blog Post
 
@@ -462,17 +459,18 @@ but some part of it is going to be more directly in your hands, in how you
 present and structure your content. There are a number of things that I did in
 writing this blog post to make it more accessible, for example:
 
-- All of the images have alt text or are described by the surrounding text. Even
-  if you cannot see the screenshots in this blog post, you still get the
-  pertinent information because I do not rely on the images alone to tell the
-  story. I try to make sure that all relevant visual information is conveyed
-  through text. There is a real art to this, just as there is with writing, so
-  it's always a learning-and-improving process.
+- All images have alt text or are described by the surrounding text (in which
+  case the alt text is an empty string). Even if you cannot see the screenshots
+  in this blog post, you still get the pertinent information because I do not
+  rely on the images alone to tell the story. I try to make sure that all
+  relevant visual information is conveyed through text. There is a real art to
+  this, just as there is with writing, so it's always a learning-and-improving
+  process.
 - All of the links in the blog post are **descriptive**. If you take a link out
   of the context of the blog post, it should still give you a good clue about
   where it will take you.
 - The headings are clear and in the right order, with only one level-1 heading
-  (`<h1>`) for the blog post title
+  (`<h1>`) for the blog post title.
 
 I hope that this blog post has given you an inside look at some of the
 accessibility work we do here at Quansight Labs, and that you can hopefully
