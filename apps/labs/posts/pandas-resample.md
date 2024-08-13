@@ -79,7 +79,7 @@ probably get mixed answers.
 ## What happens when we resample by 'MS'
 
 `'MS'` is the start-of-the-month counterpart to `'M'` / `'ME'` (not to be confused with `'ms'`, which stands for
-milliseconds). Let's repeat the example above using this offset alias instead:
+"millisecond"). Let's repeat the example above using this offset alias instead:
 
 ```python
 print(df.resample('MS', on='date')['price'].mean())
