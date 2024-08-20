@@ -378,32 +378,36 @@ default focus ring.
 
 I don't have a full inventory of all the places [missing focus
 indicators](https://github.com/pydata/pydata-sphinx-theme/pull/1549), but there
-were at least seven. Here are before and after screenshots of two such places:
+were at least seven. Here are screenshots of two such places where focus rings
+were previously missing:
 
 ![focus ring on code block copy button](/posts/pydata-theme-a11y-fixes/focus-ring-copy-button-after.png)
 ![focus ring on dropdown admonitions](/posts/pydata-theme-a11y-fixes/focus-ring-toggle-admonition-after.png)
 
 ### Inaccessible or broken focus rings
 
-In some places where there were focus rings that were broken or did not meet
+In some places there were focus rings that were broken or did not meet
 accessibility guidelines. Here are two examples. In one, the focus ring doesn't
 have sufficient contrast with the background. In the other, there is a bug with
 the focus ring; it is squished and does not contain the focussed element.
 
-| Gallery tile                                                                                                                             | In-page table of contents                                                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| ![Before: broken focus ring appears squished at the bottom of a gallery tile](/posts/pydata-theme-a11y-fixes/focus-ring-tile-before.png) | ![Before: low contrast focus ring in table of contents](/posts/pydata-theme-a11y-fixes/focus-ring-right-toc-before.png)    |
-| ![After: fixed focus ring wraps around gallery tile](/posts/pydata-theme-a11y-fixes/focus-ring-tile-after.png)                           | ![After: improved contrast focus ring in table of contents](/posts/pydata-theme-a11y-fixes/focus-ring-right-toc-after.png) |
+| Before: In-page table of contents                                                                                       | After: In-page table of contents                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| ![Before: low-contrast focus ring in table of contents](/posts/pydata-theme-a11y-fixes/focus-ring-right-toc-before.png) | ![After: improved-contrast focus ring in table of contents](/posts/pydata-theme-a11y-fixes/focus-ring-right-toc-after.png) |
+
+| Before: Gallery tile                                                                                                                     | After: Gallery tile                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| ![Before: broken focus ring appears squished at the bottom of a gallery tile](/posts/pydata-theme-a11y-fixes/focus-ring-tile-before.png) | ![After: fixed focus ring wraps around gallery tile](/posts/pydata-theme-a11y-fixes/focus-ring-tile-after.png) |
 
 ### Frankenstates
 
 My colleague Smera Goel, while working through the focus ring designs, coined a
 term that I find helpful when talking about the challenge of harmonizing several
-different kinds of indicators on the same element. For example, a link can have
-a hover state, a focus state, a visited state, a non-visited state, an active
-state (when you are actively clicking it), and a current state (if you're on the
-page that the link goes to). Many of these states can overlap. For example, a
-link can be hovered and focussed simultaneously using the mouse and keyboard
+kinds of indicators on the same element. For example, a link can have a hover
+state, a focus state, a visited state, a non-visited state, an active state
+(when you are actively clicking it), and a current state (if you're on the page
+that the link goes to). Many of these states can overlap. For example, a link
+can be hovered and focussed simultaneously using the mouse and keyboard
 together. This overlapping state is what we call a frankenstate. It's
 challenging to design base states in such a way that the frankenstates also look
 good. It's even more of a challenge if your design process is access-centered.
@@ -449,20 +453,18 @@ This blog post is not meant to capture all of the accessibility work that we did
 over the past six months, but rather my hope is that I have given you a taste of
 what this work looks like from my side of things as a developer.
 
-If you would like to take a more exhaustive look, your best option would be to
-look at all of the [PST issues and PRs tagged with
+If you would like to take a closer look, your best option would be to look at
+all of the [PST issues and PRs tagged with
 accessibility](https://github.com/pydata/pydata-sphinx-theme/issues?q=label%3A%22tag%3A+accessibility%22).
-If you find anything you want read about in a blog post like this one, please
-let us know! You can contact us at
+If you find anything you would like to read about in a blog post like this one,
+please let us know! You can contact us at
 [connect@quansight.com](mailto:connect@quansight.com).
 
 ## Accessibility in this Blog Post
 
-If you write online content, part of your accessibility story will reside in the
-authoring tools you choose (tools like PyData Sphinx Theme), but some part of it
-is going to be more directly in your hands, in how you present and structure
-your content. There are a number of things that I did in writing this blog post
-to make it more accessible, for example:
+Since this is a blog post about accessibility, I think it's worth taking a
+moment to point out some of the measures I took to make this blog post
+accessible:
 
 - All images have alt text or are described by the surrounding text (in which
   case the alt text is an empty string). Even if you cannot see the screenshots
@@ -470,7 +472,9 @@ to make it more accessible, for example:
   rely on the images alone to tell the story. I try to make sure that all
   relevant visual information is conveyed through text. There is a real art to
   this, just as there is with writing, so it's always a learning-and-improving
-  process.
+  process. The W3C has a fantastic [alt text decision
+  tree](https://www.w3.org/WAI/tutorials/images/decision-tree/) that can help
+  you.
 - All of the links in the blog post are **descriptive**. If you take a link out
   of the context of the blog post, it should still give you a good clue about
   where it will take you.
