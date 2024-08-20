@@ -293,9 +293,9 @@ or expand the section.
 
 With the help of my designer partner in crime, [Smera
 Goel](https://github.com/smeragoel), we decided that we should present the two
-elements, the link and the expand/collapse icon, as completely separate. This
-led to a new, slightly different markup structure, which allows the toggle
-button to be focussed separately from the section link:
+elements—the link and the expand/collapse icon—as completely separate. This led
+to a new, slightly different markup structure, which allows the toggle button to
+be focussed separately from the section link:
 
 ```html
 <li>
@@ -321,9 +321,9 @@ The one thing I don't love about this approach is that it is a somewhat
 unconventional implementation and presentation of a details/summary widget. And
 let's recall that it was an unconventional use of a standard pattern (label +
 checkbox) that got us into this mess to begin with. That said, I think this
-particular unconventional presentation is okay. I think it may come across as
-somewhat confusing to screen reader users the first time they encounter it,
-but I also think the context will quickly make things clear.
+particular variation is okay. I think it may come across as somewhat confusing
+to screen reader users the first time they encounter it, but I also think the
+context will quickly make things clear.
 
 At the very least, we know that we have enabled keyboard interaction in the
 sidebar table of contents where there was none before, and that in itself is a
@@ -385,7 +385,7 @@ were at least seven. Here are before and after screenshots of two such places:
 
 ### Inaccessible or broken focus rings
 
-In some places where there were focus rings they were broken or did not meet
+In some places where there were focus rings that were broken or did not meet
 accessibility guidelines. Here are two examples. In one, the focus ring doesn't
 have sufficient contrast with the background. In the other, there is a bug with
 the focus ring; it is squished and does not contain the focussed element.
