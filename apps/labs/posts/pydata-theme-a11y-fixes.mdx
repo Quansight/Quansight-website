@@ -1,24 +1,30 @@
 ---
 title: 'PyData Sphinx Theme Accessibility Fixes, Before and After'
 authors: [gabriel-fouasnon]
-published: August 21, 2024
+published: August 23, 2024
 description: 'A small showcase of accessibility improvements made to the PyData Sphinx Theme, Fall 2023-Spring 2024'
 category: [Access-centered]
 featuredImage:
   src: /posts/pydata-theme-a11y-fixes/magnification-app-sherm-for-disabled-and-here.png
   alt: 'A Black person with short, thick hair and prescription glasses sits at an organized workstation, using a magnification app to navigate a webpage. Their posture is proper and relaxed. On the desk: a computer, a mouse, a large desk lamp and a small notebook. Illustration by Sherm for Disabled And Here.'
 hero:
-  imageSrc: /posts/hello-world-post/hero.jpeg
-  imageAlt: 'Excellent alt-text describing the hero image'
+  imageSrc: /posts/pydata-theme-a11y-fixes/magnification-app-sherm-for-disabled-and-here.png
+  imageAlt: 'A Black person with short, thick hair and prescription glasses sits at an organized workstation, using a magnification app to navigate a webpage. Their posture is proper and relaxed. On the desk: a computer, a mouse, a large desk lamp and a small notebook. Illustration by Sherm for Disabled And Here.'
 ---
+
+Image credit: Illustration by Sherm for [Disabled and
+Here](https://affecttheverb.com/disabledandhere/) ([image
+source](https://affecttheverb.com/gallery/disabledandhere/magnificationapp/),
+[image
+license](https://creativecommons.org/licenses/by/4.0/))
 
 # PyData Sphinx Theme Accessibility Fixes, Before and After
 
-Over the past several months, I have been working with a few coworkers and the
-PyData community at large to make some accessibility improvements to the PyData
-Sphinx Theme. For this blog post, I chose three such improvements (out of many!)
-to examine with a before-and-after lens. This will give a better idea of how
-these kinds of changes can create an improved user experience for disabled
+Over the past several months, I and a few coworkers have had the privilege to
+work with the PyData community to make some accessibility improvements to the
+PyData Sphinx Theme. For this blog post, I chose three such improvements (out of
+many!) to examine with a before-and-after lens. This will give a better idea of
+how these kinds of changes can create an improved user experience for disabled
 people—and often for people without disabilities, too.
 
 For those not familiar with Sphinx, it is a framework for writing documentation.
@@ -186,7 +192,7 @@ checked. In code, it looks like the following:
 }
 ```
 
-The `~` is standard CSS, but it's not very commonly used. It's called the
+The tilde (~) is standard CSS, but it's not very commonly used. It's called the
 subsequent-sibling combinator. `A ~ B` means select all B elements that come
 after A and are at the same level in the HTML tree. In other words, A and B
 share the same parent, and B must be a younger sibling of A.
@@ -484,11 +490,3 @@ accessible:
 I hope that this blog post has given you an inside look at some of the
 accessibility work we do here at Quansight Labs, and that you can hopefully
 apply some of the lessons we have learned. 🌻
-
-## Image credit
-
-The illustration used as featured image for this blog post was used with permission ([CC BY
-4.0](https://creativecommons.org/licenses/by/4.0/)) from the [Disabled and
-Here](https://affecttheverb.com/disabledandhere) project. Image credit: [**Sherm
-for Disabled And
-Here.**](https://affecttheverb.com/gallery/disabledandhere/magnificationapp/)
