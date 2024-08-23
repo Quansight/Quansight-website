@@ -12,8 +12,6 @@ hero:
   imageAlt: 'Narwhals logo'
 ---
 
-# DataFrame Interoperability
-
 I attended PyCon Lithuania 2024, and had a blast! I don't speak Lithuanian, and probably
 neither did half the attendees. But - so long as we all stuck to a simple and clear subset
 of the English language - we could all understand each other and exchange ideas. I actually
@@ -25,12 +23,14 @@ make mistakes. If you learn a bit of
 Spanish, you might think that "estoy embarazado" means "I'm embarrassed", but it actually
 means "I'm pregnant". Similarly, after learning a bit of pandas and Polars, you might
 expect
+
 ```python
 import pandas as pd
 import polars as pd
 
 print((3 in pd.Series([1,2,3])) == (3 in pl.Series([1,2,3])))
 ```
+
 to print `'True'` - but not so! pandas checks if `3` is in the index, whereas Polars checks
 if `3` is in the values.
 

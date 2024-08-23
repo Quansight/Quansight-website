@@ -30,8 +30,7 @@ project and an extension to IPython and
 [JupyterLab](https://github.com/deshaw/jupyterlab-pyflyby), that, among many
 things, automatically inserts imports and tidies Python files and notebooks.
 
-
-# What is pyflyby?
+## What is pyflyby?
 
 Pyflyby is a set of tools designed to improve interactive and non-interactive
 workflows in Python. Pyflyby provides a number of utilities and extensions aimed
@@ -65,7 +64,6 @@ the `py` executable replacing python.
 With the [jupyterlab-pyflyby](https://github.com/deshaw/jupyterlab-pyflyby) extension, imports will be executed and inserted in
 the first cell of one's notebook:
 
-
 ![Fresh Jupyter session with two cells: the first imports Matplotlib, and the
 second plots using both Matplotlib and NumPy. Upon execution, jupyterlab-pyflyby
 automatically adds the missing NumPy import in the first cell, and then
@@ -82,7 +80,6 @@ format imports in Python files. This is similar to tools such as
 [black](https://pypi.org/project/black/) and
 [isort](https://pypi.org/project/isort/), but with different styling options and
 with the ability to infer missing imports.
-
 
 `tidy-import` includes the imports to pandas and matplotlib, as in the example
 below, and queries whether to update the file:
@@ -114,11 +111,10 @@ IPython or to execute commands quickly from the developer's shell without the
 need for imports. It supports a range of syntax options, allowing for quick
 calculation and graph plotting.
 
- - Without any parameters, `py` will start IPython with the pyflyby extension
-   activated.
- - With space-separated arguments, `py` will attempt to interpret each argument
-   as a Python function call with the right imports:
-
+- Without any parameters, `py` will start IPython with the pyflyby extension
+  activated.
+- With space-separated arguments, `py` will attempt to interpret each argument
+  as a Python function call with the right imports:
 
 ```bash
 $ py np.random.normal 0 1
@@ -139,12 +135,12 @@ $ py 'plot(scipy.stats.norm.pdf(linspace(-5, 5), 0, 1))'
 ```
 
 ![Bash shell where the py command is passed a string argument, which is code
-that renders a Matplotlib plot using methods that were not imported. The plot 
+that renders a Matplotlib plot using methods that were not imported. The plot
 successfully renders. The Python code used is printed, which contains the
 automatically inferred imports and ends with the passed code.](/posts/better-interractive-jupyter-session-with-pyflyby/py-exec-matplotlib.png)
 
 `find-import` , another utility available in pyflyby, can be deployed to find a
-particular function across many libraries by returning the relevant import.  For
+particular function across many libraries by returning the relevant import. For
 example:
 
 ```bash
@@ -152,24 +148,23 @@ $ find-import norm
 from scipy.stats.distributions import norm
 ```
 
-# Notes on pyflyby codebase
+## Notes on pyflyby codebase
 
 The [Pyflyby codebase](https://github.com/deshaw/pyflyby) provides a window into
 advanced data structures and programming paradigms. Its use of modules and
 programming concepts is unusual relative to those found in more classical data
 science-focused libraries. For example:
 
- - Pyflyby will conduct non-trivial manipulation of the Python Abstract Syntax
-   Tree (AST), which represents code written in tree form. Pyflyby uses AST to
-   find and insert missing imports, and it does so even as AST's exact
-   representation changes with almost every minor release.
+- Pyflyby will conduct non-trivial manipulation of the Python Abstract Syntax
+  Tree (AST), which represents code written in tree form. Pyflyby uses AST to
+  find and insert missing imports, and it does so even as AST's exact
+  representation changes with almost every minor release.
 
- - Pyflyby demonstrates the use of  [Aspect-Oriented
-   programming](https://en.wikipedia.org/wiki/Aspect-oriented_programming),
-   which highlights the flexibility of the Python programming model.
+- Pyflyby demonstrates the use of [Aspect-Oriented
+  programming](https://en.wikipedia.org/wiki/Aspect-oriented_programming),
+  which highlights the flexibility of the Python programming model.
 
-
-# Conclusion
+## Conclusion
 
 Pyflyby's utilities are designed to improve developer efficiency and materially
 reduce the impact of interruption on productivity. Its value, however, is
@@ -177,7 +172,7 @@ broader than that. Pyflyby expands what one is capable of doing within the Pytho
 and has helped identify a number of limitations and bugs in Python and IPython
 over time.
 
-# How to get pyflyby
+## How to get pyflyby
 
 Pyflyby is available on [GitHub](https://github.com/deshaw/pyflyby) or, for
 terminal IPython users:
@@ -191,18 +186,7 @@ JupyterLab users can also install [the JupyterLab
 Extension](https://github.com/deshaw/jupyterlab-pyflyby), which is
 notebook-aware and enables even more features.
 
-
-# Acknowledgements
+## Acknowledgements
 
 Pyflyby was created by Karl Chen and is supported by the [D. E. Shaw
 group](https://www.deshaw.com/) in collaboration with [Quansight](https://www.quansight.com).
-
-
-
-
-
-
-
-
-
-

@@ -43,7 +43,7 @@ minimal code change.
   - [References](#references)
   - [Next Steps](#next-steps)
 
-# Prerequisites
+## Prerequisites
 
 This blog assumes you have some knowledge about:
 
@@ -60,7 +60,7 @@ This blog assumes you have some knowledge about:
     [blog](https://labs.quansight.org/blog/2020/09/pytorch-ignite/) for
     a quick high-level overview.
 
-# Introduction
+## Introduction
 
 [PyTorch-Ignite's](https://github.com/pytorch/ignite)
 [ignite.distributed](https://pytorch.org/ignite/distributed.html)
@@ -102,14 +102,14 @@ it without any changes to the code, in particular:
 More information on launchers experiments can be found
 [here](https://github.com/sdesrozis/why-ignite).
 
-# 🔥 Pytorch-Ignite Unified Distributed API
+## 🔥 Pytorch-Ignite Unified Distributed API
 
 We need to write different code for different distributed backends. This
 can be tedious especially if you would like to run your code on
 different hardware configurations. Pytorch-Ignite's `idist` will do all
 the work for you, owing to the high-level helper methods.
 
-## 🔍 Focus on the helper `auto_*` methods:
+### 🔍 Focus on the helper `auto_*` methods:
 
 - [auto_model()](https://pytorch.org/ignite/distributed.html#ignite.distributed.auto.auto_model)
 
@@ -142,7 +142,6 @@ distributed model instantiation:
          </tr>
       </table>
    </div>
-
 
 Additionally, it is also compatible with
 [NVIDIA/apex](https://github.com/NVIDIA/apex)
@@ -232,13 +231,14 @@ step:
    </div>
 
 **Note**
-- Additionally, `idist` provides collective operations like `all_reduce`,
-`all_gather`, and `broadcast` that can be used with all supported
-distributed frameworks. Please, see [our
-documentation](https://pytorch.org/ignite/distributed.html#ignite-distributed-utils)
-for more details.
 
-# Examples 
+- Additionally, `idist` provides collective operations like `all_reduce`,
+  `all_gather`, and `broadcast` that can be used with all supported
+  distributed frameworks. Please, see [our
+  documentation](https://pytorch.org/ignite/distributed.html#ignite-distributed-utils)
+  for more details.
+
+## Examples
 
 The code snippets below highlight the API's specificities of each of
 the distributed backends on the same use case as compared to the `idist`
@@ -257,7 +257,7 @@ production-grade example that uses PyTorch-Ignite, refer
 The complete source code of these experiments can be found
 [here](https://github.com/pytorch-ignite/idist-snippets).
 
-## PyTorch-Ignite - Torch native Distributed Data Parallel - Horovod - XLA/TPUs
+### PyTorch-Ignite - Torch native Distributed Data Parallel - Horovod - XLA/TPUs
 
    <div>
       <table>
@@ -290,8 +290,9 @@ The complete source code of these experiments can be found
    </div>
 
 **Note**
+
 - You can also mix the usage of `idist` with other distributed APIs as
-below:
+  below:
 
 ```python
 dist.init_process_group(backend, store=..., world_size=world_size, rank=rank)
@@ -303,7 +304,7 @@ model = idist.auto_model(model)
 dist.destroy_process_group()
 ```
 
-# Running Distributed Code
+## Running Distributed Code
 
 PyTorch-Ignite's `idist` also unifies the distributed codes launching
 method and makes the distributed configuration setup easier with the
@@ -318,7 +319,7 @@ tools like `torch.distributed.launch`, `slurm`, `horovodrun` by
 initializing the processing group given the `backend` argument only in
 a general way.
 
-## With `torch.multiprocessing.spawn`
+### With `torch.multiprocessing.spawn`
 
 In this case `idist Parallel` is using the native torch
 `torch.multiprocessing.spawn` method under the hood in order to run the
@@ -342,12 +343,12 @@ python -u ignite_idist.py --backend horovod --nproc_per_node 2
 python -u ignite_idist.py --backend xla-tpu --nproc_per_node 8 --batch_size 32
 ```
 
-## With Distributed launchers
+### With Distributed launchers
 
 PyTorch-Ignite's `idist Parallel` context manager is also compatible
 with multiple distributed launchers.
 
-### With torch.distributed.launch
+#### With torch.distributed.launch
 
 Here we are using the `torch.distributed.launch` script in order to
 spawn the processes:
@@ -356,24 +357,25 @@ spawn the processes:
 python -m torch.distributed.launch --nproc_per_node 2 --use_env ignite_idist.py --backend gloo
 ```
 
-### With horovodrun
+#### With horovodrun
 
 ```bash
 horovodrun -np 4 -H hostname1:2,hostname2:2 python ignite_idist.py --backend horovod
 ```
 
 **Note**
+
 - In order to run this example and to avoid the installation procedure,
-you can pull one of PyTorch-Ignite's [docker image with pre-installed
-Horovod](https://github.com/pytorch/ignite/blob/master/docker/hvd/Dockerfile.hvd-base).
-It will include Horovod with `gloo` controller and `nccl` support.
+  you can pull one of PyTorch-Ignite's [docker image with pre-installed
+  Horovod](https://github.com/pytorch/ignite/blob/master/docker/hvd/Dockerfile.hvd-base).
+  It will include Horovod with `gloo` controller and `nccl` support.
 
 ```bash
 docker run --gpus all -it -v $PWD:/project pytorchignite/hvd-vision:latest /bin/bash
 cd project
 ```
 
-### With slurm
+#### With slurm
 
 The same result can be achieved by using `slurm` without any
 modification to the code:
@@ -405,7 +407,7 @@ or using `sbatch script.bash` with the script file `script.bash`:
 srun python ignite_idist.py --backend nccl
 ```
 
-# Closing Remarks
+## Closing Remarks
 
 As we saw through the above examples, managing multiple configurations
 and specifications for distributed computing has never been easier. In

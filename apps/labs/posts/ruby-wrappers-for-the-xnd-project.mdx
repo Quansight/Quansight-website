@@ -42,7 +42,7 @@ hero:
 <br />
 <br />
 
-# Introduction
+## Introduction
 
 Lack of stable and reliable scientific computing software has been a persistent problem
 for the Ruby community, making it hard for enthusiastic Ruby developers to use Ruby in
@@ -98,7 +98,7 @@ existed before the Ruby wrapper). Read on for further details.
 
 All the source code can be found in the [xnd-ruby](https://github.com/xnd-project/xnd-ruby) repo.
 
-# Ndtypes
+## Ndtypes
 
 Ndtypes is the library that is used for defining the shape of data.
 
@@ -106,9 +106,9 @@ Run `gem install ndtypes --pre` for easily installing ndtypes onto your machine.
 been tested with Ruby 2.4.1 so far. The `gem install` will download the C sources and compile
 them by itself.
 
-## Usage
+### Usage
 
-### Basic initialization
+#### Basic initialization
 
 The ndtypes Ruby wrapper provides a simple interface to the ndtypes C library for creating
 complex data shapes with extreme simplicity. For example, for creating an array of 10 `int64`
@@ -125,7 +125,7 @@ terminology for a Ruby `Hash`) with the values as arrays of type `float32` of si
 t = NDT.new "{x: 25 * float32, y: {a: 25 * float64, 25 * float64}}"
 ```
 
-### Concrete Vs. Abstract Types
+#### Concrete Vs. Abstract Types
 
 Ndtypes distinguishes types depending on whether they are abstract or concrete. Abstract types
 can have symbolic values like dimension or type variables and are used for type checking. Concrete
@@ -144,14 +144,14 @@ NDT.typedef "cost", "int32"
 NDT.typedef "graph", "var * var * (node, cost)"
 ```
 
-### Usage via The C API
+#### Usage via The C API
 
 Most of the C API functions of ndtypes deal with creating `NDT` Ruby objects or obtaining
 internal struct data of an `NDT` Ruby object. The complete specification can be found
 in the [ruby_ndtypes.h](https://github.com/xnd-project/xnd-ruby/blob/master/ndtypes/ext/ruby_ndtypes/ruby_ndtypes.h) file. This is the file you should include if you want to use the
 C API in any of your libraries.
 
-## Implementation
+### Implementation
 
 The Ruby wrapper is a wrapper over the libndtypes library. The `NDT` Ruby object is a wrapper
 over a C struct of type `NdtObject` that has the following definition:
@@ -172,7 +172,7 @@ decremented using `ndt_decref()`. Once the refcount reaches the `0` the object i
 destroyed by libndtypes. Of course, `ndt_t` structs allocated via calls to functions like
 `ndt_alloc()` already come with a refcount of 1.
 
-# Xnd
+## Xnd
 
 XND is the main storage library of the project. It uses types defined by ndtypes for defining
 the shape of data and allows users to read and write data into buffers that are of the shape
@@ -184,7 +184,7 @@ functions that are defined within gumath (explained later in this post).
 Similar to the ndtypes wrapper, the xnd Ruby wrapper can be installed with a call to
 `gem install xnd --pre`.
 
-## Basic Usage
+### Basic Usage
 
 The xnd Ruby wrapper is extremely simple to use and provides a single class `XND` for the
 user that interfaces with libxnd. In the simplest case, one can create an XND object as follows:
@@ -286,7 +286,7 @@ to reflect on the parent object), you should use the `XND#dup` method and make a
 can also allocate a data container without storing any data into it using the `XND.empty`
 method as can be seen in the following examples.
 
-### Data Type Support
+#### Data Type Support
 
 As a result of the flexibility provided by the ndtypes type definition interface, xnd is able
 to provide type support for far more flexible data shapes than simply for arrays with fixed
@@ -307,7 +307,7 @@ x
 #	 value= {"x"=>(1.0+20.0i), "y"=>"abc", "z"=>"any"}
 ```
 
-### Missing Values
+#### Missing Values
 
 XND also supports optional data (represented by `nil`). It can be created as follows:
 
@@ -318,12 +318,12 @@ x[INF] = v # assign full slice
 # => [[10.0, nil, 2.0, 100.12], [nil, nil, 6.0, 7.0]]
 ```
 
-### Usage via The C API
+#### Usage via The C API
 
 The primary function of the XND Ruby C API is for creating and querying XND Ruby objects.
 The full API can be found in the [ruby_xnd.h](https://github.com/xnd-project/xnd-ruby/blob/master/xnd/ext/ruby_xnd/ruby_xnd.h) file.
 
-## Implementation
+### Implementation
 
 The implementation of the Ruby wrapper differs from the Python wrapper largely due to nature
 of the garbage collection algorithms employed by both these languages: Ruby uses a mark-and-sweep
@@ -339,7 +339,7 @@ because we only want to save the object in some kind of a global store so that R
 aware of its presence (in case of NDT we use `true` for the value). XND uses three different
 GC guards for various internal objects, which can be found in the [gc_guard.h](https://github.com/xnd-project/xnd-ruby/blob/master/xnd/ext/ruby_xnd/gc_guard.h) file.
 
-# Gumath
+## Gumath
 
 While ndtypes and xnd allow us to define types and memory storage, gumath allows us to actually
 do something with them. The basic idea behind gumath is that it is a library that allows defining
@@ -350,7 +350,7 @@ on the appropriate type. The Ruby interface is a wrapper over the `libgumath` C 
 Some functions (known as kernels) come bundled with libgumath and others can be written fairly
 easily. Similar to the xnd and ndtypes wrappers, the gumath Ruby wrapper can be installed with a call to `gem install gumath --pre`.
 
-## Usage
+### Usage
 
 The `Gumath` class is a top level namespace for various modules that serve as namespaces for
 functions that come rolled in with the libgumath C library. These modules will keep expanding
@@ -372,7 +372,7 @@ z = Gumath::Functions.multiply x, y
 #	 value= [2.0, 6.0, 12.0, 20.0, 30.0, 42.0, 56.0, 72.0]
 ```
 
-### Usage via The C API
+#### Usage via The C API
 
 Since the main purpose of the gumath C API is to allow adding kernels to a Ruby module,
 it provides a single function of the prototype:
@@ -383,7 +383,7 @@ int rb_gumath_add_functions(VALUE module, const gm_tbl_t *tbl);
 
 The `module` parameter is a Ruby object, and `tbl` is a function table of gumath kernels.
 
-## Implementation
+### Implementation
 
 Compared to xnd and ndtypes, the gumath Ruby wrapper is much simpler
 since its primary function is to take functions from libgumath and add them as module
@@ -417,14 +417,14 @@ signify whether the function is a CPU function or a CUDA function (or for that m
 other device that might be added in the future). `identity` is a Ruby object used for identifying
 this function. It is initially set to `nil`.
 
-## Automatic Kernel Generation
+### Automatic Kernel Generation
 
 Writing kernels can be painstaking if you're not familiar with the various functionalities
 that libgumath provides for this purpose. Therefore we also provide a kernel generator
 called [xndtools](https://xnd.readthedocs.io/en/latest/xndtools/index.html#kernel-generator) that allows writing gumath kernels by simply providing the function
 that needs to wrapped. However, this functionality has not yet been tested for Ruby.
 
-# Conclusion and Future Work
+## Conclusion and Future Work
 
 The current state of the Ruby XND wrappers makes them suitable for the XND libraries via Ruby,
 but what would be truly exciting would be have a more Ruby-like API that conforms to accepted
