@@ -15,9 +15,9 @@ export const FeatureArticle: FC<TFeatureArticleProps> = ({
 }) => {
   return (
     <article className="grid grid-rows-[auto,auto,auto] gap-x-12 gap-y-14 py-24 pr-20 pl-8 mx-auto sm:grid-cols-[1fr,1fr] sm:grid-rows-[auto,1fr] sm:px-16 lg:grid-cols-[3fr,2fr] lg:px-[13rem] xl:grid-cols-[6fr,5fr] max-w-layout">
-      <h1 className="text-[4rem] font-extrabold leading-[4.8rem] text-left lg:text-[4.8rem] text-violet font-heading">
+      <h2 className="text-[4rem] font-extrabold leading-[4.8rem] text-left lg:text-[4.8rem] text-violet font-heading">
         {title}
-      </h1>
+      </h2>
       <div className="self-center my-24 sm:row-span-2 sm:my-0">
         {decorationSrc && decorationAlt && (
           <div className="relative h-36 sm:h-44">
