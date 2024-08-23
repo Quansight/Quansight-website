@@ -9,8 +9,8 @@ category: [PyData ecosystem]
 # The Polars vs pandas difference nobody is talking about
 
 I attended PyData Berlin 2024 in April, and it was a blast! I met so many colleagues, collaborators, and friends.
-There was quite some talk of Polars - some people even gathered together for a Polars-themed dinner! It's certainly nice to see
-people talking about it, and the focus tends to be on features such as:
+There was quite some talk of Polars - some people even gathered together for a Polars-themed dinner!
+It's certainly nice to see people talking about it, and the focus tends to be on features such as:
 
 - lazy execution
 - Rust
@@ -84,11 +84,11 @@ If you're coming from a pandas-like library, you may have been used to writing t
 df.groupby('a')['b'].sum()
 ```
 
-And indeed, for such a simple task as this one, that is quite a nice API:
+And indeed, for such a simple task as this one, the pandas API is quite nice. All we had to do was:
 
-1. you select which columns you're grouping by
-2. you select the column(s) you want to aggregate
-3. you specify an elementary aggregation function
+1. select which columns we're grouping by
+2. select the column(s) we want to aggregate
+3. specify an elementary aggregation function
 
 Let's try something else: "find the maximum value of 'c', where 'b' is greater than its mean, per
 group 'a'".
@@ -110,25 +110,30 @@ Another solution one might come up with is this one:
 ```python
 df[df['b'] > df.groupby('a')['b'].transform('mean')].groupby('a')['c'].max()
 ```
-This isn't as bad as the `apply` solution above, but still looks overly complicated and involves
-doing two group-bys.
+It's not as bad as the `apply` solution above, but it still looks overly complicated and requires
+two group-bys.
 
-Finally, one solution that very few users would realistically come up with is to rely on `GroupBy`
-caching its groups, performing in-place mutation of the original dataframe, and using the
-fact that `'max'` skips over missing values. It looks like this:
+There's actually a third solution, which:
+
+- relies on `GroupBy` caching its groups
+- performs in-place mutation of the original dataframe
+- uses the fact that `'max'` skips over missing values
+
+Realistically, few users would come up with it (most would jump straight to `apply`), but for
+completeness, we present it:
 ```python
 gb = df.groupby("a")
 mask = df["b"] > gb["b"].transform("mean")
 df["result"] = np.where(mask, df["c"], np.nan)
 gb["result"].max()
 ```
-Technically, it works. But it did involve some manual optimisation and knowledge of pandas internals.
 
 Surely it's possible to do better?
 
 ## Non-elementary group-bys in Polars
 
-The Polars API lets us pass expressions to `GroupBy.agg`. So long as you can express your aggregation as
+The Polars API lets us pass [expressions](https://docs.pola.rs/user-guide/concepts/expressions/) to `GroupBy.agg`.
+So long as you can express your aggregation as
 an expression, you can use it in a group-by setting. In this case, we can express "the maximum value
 of 'c' where 'b' is greater than its mean" as
 ```python
@@ -147,11 +152,11 @@ implementation which follows the Polars API has the possibility to evaluate this
 ## Conclusion, and a plea to future dataframe authors
 
 We've learned about the group-by operation, elementary aggregations in both pandas and Polars, and how
-Polars' syntax enables optimisation of non-elementary aggregations.
+Polars' syntax enables users to cleanly express non-elementary aggregations.
 
 pandas is a wonderful tool which solves a lot of real problems for a lot of real people.
 However, by insisting on copying its API, the dataframe landscape is stunting its own potential.
-If the API doesn't allow for an operation to be expressed and users end up using `apply` with custom
+If an API doesn't allow for an operation to be expressed and users end up using `apply` with custom
 Python lambda functions, then no amount of acceleration is going to make up for that.
 
 On the other hand, innovation on the API side can enable new possibilities. There's a reason
@@ -161,7 +166,7 @@ that
 
 is a common refrain among Polars users.
 
-For a while, the unwritten consensus among dataframe library authors was that if you wanted to
+For years, the unwritten consensus among dataframe library authors was that if you wanted to
 get adoption, then you needed to mimic the pandas API. However, Polars' success calls that into question.
 There may be a more general lesson to be learned here: try doing things differently, and then maybe - just
 maybe - you might be rewarded.
