@@ -1,32 +1,32 @@
 ---
-title: 'The "Polars vs pandas" difference nobody is talking about'
+title: 'The Polars vs pandas difference nobody is talking about'
 authors: [marco-gorelli]
 published: May 10, 2024
 description: 'A closer look at non-elementary group-by aggregations'
 category: [PyData ecosystem]
 ---
 
-# The "Polars vs pandas" difference nobody is talking about
+# The Polars vs pandas difference nobody is talking about
 
-I attended PyData Berlin 2024 this week, and it was a blast! I met so many colleagues, collaborators, and friends.
+I attended PyData Berlin 2024 in April, and it was a blast! I met so many colleagues, collaborators, and friends.
 There was quite some talk of Polars - some people even gathered together for a Polars-themed dinner! It's certainly nice to see
 people talking about it, and the focus tends to be on features such as:
 
-- lazy execution;
-- Rust;
-- consistent handling of null values;
-- multithreading;
-- query optimisation.
+- lazy execution
+- Rust
+- consistent handling of null values
+- multithreading
+- query optimisation
 
 Yet there's one innovation which barely ever gets a mention: non-elementary group-by aggregations.
 
 I'll start by introducing the group-by operation. We'll then take a look at elementary aggregations
-with both the pandas and Polars syntaxes. Finally, we'll look at non-elementary aggregations, and see
-how the Polars syntax enables so much more than the pandas one.
+with both the pandas and Polars APIs. Finally, we'll look at non-elementary aggregations, and see
+how the Polars API enables so much more than the pandas one.
 
 ## What's a group-by?
 
-Suppose we start with a dataframe such as:
+Suppose we start with a (Polars) dataframe such as:
 
 ```python
 shape: (6, 3)
@@ -84,20 +84,20 @@ If you're coming from a pandas-like library, you may have been used to writing t
 df.groupby('a')['b'].sum()
 ```
 
-For this task, that's a nice API:
+And indeed, for such a simple task as this one, that is quite a nice API:
 
-- select which columns you're grouping by;
-- select the column(s) you want to aggregate;
-- specify an elementary aggregation function.
+1. you select which columns you're grouping by
+2. you select the column(s) you want to aggregate
+3. you specify an elementary aggregation function
 
 Let's try something else: "find the maximum value of 'c', where 'b' is greater than its mean, per
 group 'a'".
 
 Unfortunately, the pandas API has no way to express this, meaning
-that no library which copies pandas can truly optimise such an
+that no library which copies the pandas API can truly optimise such an
 operation in the general case.
 
-We could do
+You might be wondering whether we can just do the following:
 ```python
 df.groupby('a').apply(
     lambda df: df[df['b'] > df['b'].mean()]['c'].max()
@@ -106,22 +106,23 @@ df.groupby('a').apply(
 
 However, that uses a Python `lambda` function and so is generally going to be inefficient.
 
-Another solution could be to do:
+Another solution one might come up with is this one:
 ```python
 df[df['b'] > df.groupby('a')['b'].transform('mean')].groupby('a')['c'].max()
 ```
-This isn't too bad, but it involves doing two group-bys, and so is at least twice as slow as it could
-be.
+This isn't as bad as the `apply` solution above, but still looks overly complicated and involves
+doing two group-bys.
 
-Finally, can rely on `GroupBy` caching its groups, in-place mutation of the original dataframe, and the
-fact that `'max'` skips over missing values, to write:
+Finally, one solution that very few users would realistically come up with is to rely on `GroupBy`
+caching its groups, performing in-place mutation of the original dataframe, and using the
+fact that `'max'` skips over missing values. It looks like this:
 ```python
 gb = df.groupby("a")
 mask = df["b"] > gb["b"].transform("mean")
 df["result"] = np.where(mask, df["c"], np.nan)
 gb["result"].max()
 ```
-This works, but it involved quite some manual optimisation, and is definitely not a general solution.
+Technically, it works. But it did involve some manual optimisation and knowledge of pandas internals.
 
 Surely it's possible to do better?
 
@@ -140,8 +141,8 @@ df.group_by('a').agg(
     pl.col('c').filter(pl.col('b') > pl.mean('b')).max()
 )
 ```
-Wonderful! We could express the operation cleanly using the library's own API, meaning that any implementation
-of the Polars API (not necessarily Polars itself) has the possibility to evaluate this efficiently.
+Wonderful! Like this, we can express the operation cleanly and without hacks, meaning that any dataframe
+implementation which follows the Polars API has the possibility to evaluate this efficiently.
 
 ## Conclusion, and a plea to future dataframe authors
 
@@ -149,19 +150,22 @@ We've learned about the group-by operation, elementary aggregations in both pand
 Polars' syntax enables optimisation of non-elementary aggregations.
 
 pandas is a wonderful tool which solves a lot of real problems for a lot of real people.
-But please, stop copying its API. No matter how much effort you put into
-your implementation, if your API is limited and can't express non-elementary group-by aggregations,
-then you're going to run into a wall at some point. Good luck reverse-parsing the bytecode of a user's
-Python lambda function.
+However, by insisting on copying its API, the dataframe landscape is stunting its own potential.
+If the API doesn't allow for an operation to be expressed and users end up using `apply` with custom
+Python lambda functions, then no amount of acceleration is going to make up for that.
 
-On the other hand, if you innovate on the API side, you can enable new possibilities. There's a reason
+On the other hand, innovation on the API side can enable new possibilities. There's a reason
 that
 
 > I came for the speed, but stayed for the syntax
 
 is a common refrain among Polars users.
 
-There may be a more general lesson here: if you have the courage to do things differently, you may be rewarded.
+For a while, the unwritten consensus among dataframe library authors was that if you wanted to
+get adoption, then you needed to mimic the pandas API. However, Polars' success calls that into question.
+There may be a more general lesson to be learned here: try doing things differently, and then maybe - just
+maybe - you might be rewarded.
 
 If you'd like to learn about how to use Polars effectively, or how to solve problems in your organisation
-using Polars, Quansight is here to help - you can get in touch [here](https://quansight.com/about-us/#bookacallform).
+using Polars, Quansight is here to help - [please get in touch](https://quansight.com/about-us/#bookacallform) -
+we'd love to hear from you.
