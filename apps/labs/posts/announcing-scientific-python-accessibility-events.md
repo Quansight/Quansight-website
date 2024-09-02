@@ -26,7 +26,7 @@ For anyone who spends part of their day online, figuring out how to incorporate 
 
 **What attendees should know:** No prior knowledge needed.
 
-**Register here**
+**[Register for the first event here](https://us06web.zoom.us/meeting/register/tZIvd-qprjIiH90QqVSf_GKSQzqt_x1H21Ms)**
 
 ### Data visualization and accessibility
 
@@ -36,7 +36,7 @@ Data visualization is a varied and often complex topic that draws on many discip
 
 **What attendees should know:** Basic knowledge of what a data visualization is and the names of common parts of them.
 
-**Register here**
+**[Register for the second event here](https://us06web.zoom.us/meeting/register/tZUpdOiurjsuGtERhmsYbrGp3EdgvFj3mF3U)**
 
 ## Who can attend?
 
