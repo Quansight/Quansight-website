@@ -20,7 +20,7 @@ Each event has its own theme and will cover different, though overlapping, acces
 
 ### Accessibility in your digital day-to-day
 
-For anyone who spends part of their day online, figuring out how to incorporate accessibility can leave many question marks. Advice, if you can find it all, is often vague enough or detailed enough to make action impossible. This event is designed to align practical examples of day-to-day digital activities—like making a calendar invite or sending things to your friends—with small habits that can make identifying and remedying accessibility pitfalls clear. All in the style of a choose-your-own-adventure story with audience polling!
+For anyone who spends part of their day online, figuring out how to incorporate accessibility can leave many question marks, including how to get started. If you can find it all, advice is often vague enough or detailed enough to make action impossible. This event is designed to align practical examples of day-to-day digital activities—like making a calendar invite or sending things to your friends—with small habits that can make identifying and remedying accessibility pitfalls clear. All in the style of a choose-your-own-adventure story with audience polling!
 
 **When:** Tuesday, 17 September, 2024 at 8 AM Pacific Time ([in your timezone](https://arewemeetingyet.com/Los%20Angeles/2024-09-17/08:00/Accessibility%20in%20your%20digital%20day-to-day%20with%20Scientific%20Python%20and%20Quansight%20Labs))
 
