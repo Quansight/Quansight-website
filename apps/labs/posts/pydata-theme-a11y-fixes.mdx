@@ -1,7 +1,7 @@
 ---
-title: 'PyData Sphinx Theme Accessibility Fixes, Before and After'
+title: 'Accessibility Before and After: Transforming the PyData Sphinx Theme'
 authors: [gabriel-fouasnon]
-published: August 23, 2024
+published: September 2, 2024
 description: 'A small showcase of accessibility improvements made to the PyData Sphinx Theme, Fall 2023-Spring 2024'
 category: [Access-centered]
 featuredImage:
@@ -18,7 +18,7 @@ source](https://affecttheverb.com/gallery/disabledandhere/magnificationapp/),
 [image
 license](https://creativecommons.org/licenses/by/4.0/))
 
-# PyData Sphinx Theme Accessibility Fixes, Before and After
+# Accessibility Before and After: Transforming the PyData Sphinx Theme
 
 Over the past several months, I and a few coworkers have had the privilege to
 work with the PyData community to make some accessibility improvements to the
@@ -35,12 +35,13 @@ Theme. For those not familiar with accessibility, it is the practice of adapting
 built environments (including digital and virtual environments) to meet the
 needs of disabled people.
 
-A small, subtle point of clarification before we begin. Throughout this blog
-post, I will use screenshots from the [PyData Sphinx Theme
+Before we begin, there's an important clarification to make. Throughout this
+blog post, I will use screenshots from the [PyData Sphinx Theme
 documentation](https://pydata-sphinx-theme.readthedocumentation.io) (v0.15.4),
 which uses the theme; however, I want to emphasize that these improvements apply
 to the theme itself, and by extension to all documentation sites that choose to
-use it.
+use it, including the ones featured in the [PST
+gallery](https://pydata-sphinx-theme.readthedocs.io/en/latest/examples/gallery.html).
 
 ## Landmarks, Before and After
 
@@ -355,10 +356,10 @@ this theme and examine an important aspect: focus indicators. When users
 navigate a web page by pressing the tab key, they need to know where they are on
 the page. If they are using a screen reader, it will read out the content at the
 currently focussed element. But users not using a screen reader need to be able
-to see some kind of visual indicator of where the focus is. Imagine trying to
-use a mouse without a cursor. That's what it's like to use a keyboard without
-focus indicators. By default, browsers use a focus ring to show focus. This is
-what the default focus ring in Chrome looks like:
+to see some kind of visual indicator of where the focus is. Navigating a webpage
+without clear focus indicators can be as disorienting as trying to use a mouse
+without a cursor. By default, browsers indicate focus with a ring around the
+focussed element. This is what the default focus ring in Chrome looks like:
 
 | Button not focussed (no focus ring)                   | Button focussed (default browser focus ring)                     |
 | ----------------------------------------------------- | ---------------------------------------------------------------- |
@@ -459,8 +460,8 @@ This blog post is not meant to capture all of the accessibility work that we did
 over the past six months, but rather my hope is that I have given you a taste of
 what this work looks like from my side of things as a developer.
 
-If you would like to take a closer look, your best option would be to look at
-all of the [PST issues and PRs tagged with
+If you would like to take a closer inspection, your best option would be to go
+to all of the [PST issues and PRs tagged with
 accessibility](https://github.com/pydata/pydata-sphinx-theme/issues?q=label%3A%22tag%3A+accessibility%22).
 If you find anything you would like to read about in a blog post like this one,
 please let us know! You can contact us at
@@ -486,6 +487,9 @@ accessible:
   where it will take you.
 - The headings are clear and in the right order, with only one level-1 heading
   (`<h1>`) for the blog post title.
+- I avoid [ableist
+  language](https://hbr.org/2020/12/why-you-need-to-stop-using-these-words-and-phrases)
+  (where I am aware of it)
 
 I hope that this blog post has given you an inside look at some of the
 accessibility work we do here at Quansight Labs, and that you can hopefully
