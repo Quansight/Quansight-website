@@ -6,10 +6,10 @@ description: 'I am happy to announce two upcoming public events focused on helpi
 category: [Access-centered, OSS Experience]
 featuredImage:
   src: /posts/announcing-scientific-python-accessibility-events/blog_feature_1.png
-  alt: 'A tree branch extends from the screen of a laptop with a bar chart.'
+  alt: 'A tree branch extends from a laptop screen. There is a bar chart on the screen.'
 hero:
   imageSrc: /posts/announcing-scientific-python-accessibility-events/blog_feature_1.png
-  imageAlt: 'A tree branch extends from the screen of a laptop with a bar chart.'
+  imageAlt: 'A tree branch extends from a laptop screen. There is a bar chart on the screen.'
 ---
 
 I am happy to announce two upcoming public events focused on helping the scientific Python ecosystem develop their accessibility skills before the new year. Supported by the [Chan Zuckerberg Initiative’s Essential Open-source Software for Science grants](https://chanzuckerberg.com/eoss/proposals/), these events pair with the [Scientific Python project](https://scientific-python.org/) to address popularly requested accessibility recommendations and gaps the team has found working in the ecosystem.
@@ -20,7 +20,7 @@ Each event has its own theme and will cover different, though overlapping, acces
 
 ### Accessibility in your digital day-to-day
 
-For anyone who spends part of their day online, figuring out how to incorporate accessibility can leave many question marks, including how to get started. If you can find it all, advice is often vague enough or detailed enough to make action impossible. This event is designed to align practical examples of day-to-day digital activities—like making a calendar invite or sending things to your friends—with small habits that can make identifying and remedying accessibility pitfalls clear. All in the style of a choose-your-own-adventure story with audience polling!
+For anyone who spends part of their day online, figuring out how to incorporate accessibility can leave many question marks, including how to get started. If you can find it at all, advice is often vague enough (or so overwhelmingly detailed) to make action impossible. This event is designed to align practical examples of day-to-day digital activities—like making a calendar invite or sending things to your friends—with small habits that can make identifying and remedying accessibility pitfalls clear. All in the style of a choose-your-own-adventure story with audience polling!
 
 **When:** Tuesday, 17 September, 2024 at 8 AM Pacific Time ([in your timezone](https://arewemeetingyet.com/Los%20Angeles/2024-09-17/08:00/Accessibility%20in%20your%20digital%20day-to-day%20with%20Scientific%20Python%20and%20Quansight%20Labs))
 
@@ -30,7 +30,7 @@ For anyone who spends part of their day online, figuring out how to incorporate 
 
 ### Data visualization and accessibility
 
-Data visualization is a varied and often complex topic that draws on many disciplines. Many have advised on ways to make data visualizations include more options for people who are blind and low vision and deaf and hard of hearing. This event will compile existing recommendations to provide an abbreviated guide to the what and why behind making data visualizations available to more people.
+Data visualization is a varied and complex topic that draws on many disciplines. Many have advised on ways to make data visualizations more inclusive of people who are blind or low vision and/or deaf or hard of hearing. This event will compile existing recommendations to provide an abbreviated guide to the what and why behind making data visualizations available to more people.
 
 **When:** Tuesday, 15 October, 2024 at 8 AM Pacific Time ([in your timezone](https://arewemeetingyet.com/Los%20Angeles/2024-10-15/08:00/Data%20visualization%20and%20accessibility%20with%20Scientific%20Python%20and%20Quansight%20Labs))
 
