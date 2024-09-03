@@ -2,8 +2,8 @@
 title: 'The Array API Standard in SciPy'
 published: October 4, 2023
 authors: [lucas-colley]
-description: "How can SciPy use the Array API Standard to achieve array library interoperability?"
-category: [Array API]
+description: 'How can SciPy use the Array API Standard to achieve array library interoperability?'
+category: [Array API, Internship]
 featuredImage:
   src: /posts/scipy-array-api/scipy-array-api-illustration.png
   alt: 'An illustration of three cartoon characters - CuPy Cube, SciPy Snake and PyTorch Flame - together (happily!) under a tree with green leaves bearing the Consortium for Python Data API Standards logo ("DataAPIs") on a brown background. CuPy Cube and PyTorch Flame are made up of the CuPy and PyTorch logos respectively, with smiley faces and stick legs. SciPy Snake is a green snake with a red tongue, wearing sunglasses with SciPy logos for lenses.'
@@ -95,7 +95,7 @@ for many different provider libraries.
 Developer time is very valuable since these projects are still largely maintained by volunteers (and hence large
 tasks like adding GPU support can stay on the roadmap for many years), so work to reduce the overall maintenance
 load is key to accelerating progress.
-If each piece of functionality only needed to be implemented once and worked with any array library, then there would 
+If each piece of functionality only needed to be implemented once and worked with any array library, then there would
 be many fewer projects to maintain, and much more time to work on implementing brand new functionality.
 Fortunately, there has been work on a standard which will help push us towards this imagined future.
 
@@ -240,7 +240,7 @@ def fht(a, dln, mu, offset=0.0, bias=0.0):
      # size of transform
 -    n = np.shape(a)[-1]
 +    n = a.shape[-1] # example of a change where the standard offers only one way of doing things, while NumPy has more ways
- 
+
      # bias input array
      if bias != 0:
          # a_q(r) = a(r) (r/r_c)^{-q}
@@ -249,21 +249,21 @@ def fht(a, dln, mu, offset=0.0, bias=0.0):
 -        a = a * np.exp(-bias*(j - j_c)*dln)
 +        j = xp.arange(n, dtype=xp.float64)
 +        a = a * xp.exp(-bias*(j - j_c)*dln)
- 
+
      # compute FHT coefficients
 -    u = fhtcoeff(n, dln, mu, offset=offset, bias=bias)
 +    u = xp.asarray(fhtcoeff(n, dln, mu, offset=offset, bias=bias))
- 
+
      # transform
 -    A = _fhtq(a, u)
 +    A = _fhtq(a, u, xp=xp)
- 
+
      # bias output array
      if bias != 0:
          # A(k) = A_q(k) (k/k_c)^{-q} (k_c r_c)^{-q}
 -        A *= np.exp(-bias*((j - j_c)*dln + offset))
 +        A *= xp.exp(-bias*((j - j_c)*dln + offset))
- 
+
      return A
 ```
 
@@ -279,7 +279,7 @@ Here is an example from `scipy.fft`'s Discrete Sine and Cosine Transforms, where
 which SciPy uses for NumPy arrays:
 
 ```python
-def _execute(pocketfft_func, x, type, s, axes, norm, 
+def _execute(pocketfft_func, x, type, s, axes, norm,
              overwrite_x, workers, orthogonalize):
     xp = array_namespace(x)
     x = np.asarray(x)
@@ -290,7 +290,7 @@ def _execute(pocketfft_func, x, type, s, axes, norm,
 
 def dctn(x, type=2, s=None, axes=None, norm=None,
          overwrite_x=False, workers=None, *, orthogonalize=None):
-    return _execute(_pocketfft.dctn, x, type, s, axes, norm, 
+    return _execute(_pocketfft.dctn, x, type, s, axes, norm,
                     overwrite_x, workers, orthogonalize)
 ```
 
@@ -401,7 +401,7 @@ For more information on the implementation details, see
 
 ## Status
 
-At the time of writing, SciPy has two of its submodules, `cluster` and `fft`, converted 
+At the time of writing, SciPy has two of its submodules, `cluster` and `fft`, converted
 (in the sense I have described above).
 `linalg` and `signal` have partial coverage in progress, and some of the compiled-code functions in `special`
 have been covered, with additional calling-out to CuPy, PyTorch and JAX.
@@ -440,7 +440,7 @@ At Quansight Labs, I was part of a cohort of interns and we also met regularly t
 explain where we were stuck.
 Sometimes, just putting your difficulties into words can help you figure things out from a different perspective!
 
-After joining the SciPy community as part of my internship, I am keen to contribute voluntarily in the future 
+After joining the SciPy community as part of my internship, I am keen to contribute voluntarily in the future
 and help to sustain science in this way.
 Knowing that my code will be used in a package as widely depended on as SciPy is a big motivation, and I am
 invested in the success of the array API standard now!
@@ -451,7 +451,7 @@ I would like to thank my mentors [Ralf Gommers](https://github.com/rgommers),
 [Pamphile Roy](https://github.com/tupui) and [Irwin Zaid](https://github.com/izaid) for their
 incredible support and guidance during my internship!
 I feel very lucky to have had the opportunity to learn from them in such a practical way.
-I would also like to thank the SciPy community, especially 
+I would also like to thank the SciPy community, especially
 [Tyler Reddy](https://github.com/tylerjereddy) and [Matt Haberland](https://github.com/mdhaber)
 who have been greatly involved in the review process of many of my PRs, and
 [Melissa Weber Mendonça](https://github.com/melissawm) who hosted many of the community meetings which I

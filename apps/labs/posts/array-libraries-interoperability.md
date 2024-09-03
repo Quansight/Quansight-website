@@ -3,11 +3,10 @@ title: 'Array Libraries Interoperability'
 published: October 13, 2021
 authors: [anirudh-dagar]
 description: "Let's dive into the technicalities involved in array libraries interoperability and understand the protocols making this a reality."
-category: [Array API]
+category: [Array API, Internship]
 featuredImage:
   src: /posts/array-libraries-interoperability/ninja_arrays.png
-  alt:
-    'Meme of Master Splinter leading the baby turtles from TMNT. Splinter
+  alt: 'Meme of Master Splinter leading the baby turtles from TMNT. Splinter
     represents NumPy, and the turtles represent TensorFlow, CuPy, PyTorch and JAX.'
 hero:
   imageSrc: /posts/array-libraries-interoperability/hero.png
