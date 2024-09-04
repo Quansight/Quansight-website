@@ -12,9 +12,7 @@ hero:
   imageAlt: 'Cube representing a sparse array with the word sparse on the left.'
 ---
 
-Hi, I'm [Dea María Léon](https://github.com/DeaMariaLeon). I had the pleasure to work at Quansight Labs for three months. The objective was to perform maintenance tasks and a documentation overhaul to the `sparse` project.
-
-In this post, I'll describe the work during that time. From now on, I'll refer to the project only as `sparse`.
+Hi, I'm [Dea María Léon](https://github.com/DeaMariaLeon). I had the pleasure to work at Quansight Labs for three months. The objective was to perform maintenance tasks and a documentation overhaul to the `sparse` project. In this post, I'll describe the work during that time.
 
 ---
 
@@ -22,9 +20,9 @@ In this post, I'll describe the work during that time. From now on, I'll refer t
 
 - [Documentation overhaul](#documentation-overhaul)
 
-  - [Convert the documentation website to Material for MkDocs.](#Convert-the-documentation-website-to-material-for-mkdocs)
+  - [Convert the documentation website to Material for MkDocs.](#convert-the-documentation-website-to-material-for-mkdocs)
   - [Deployment to Read the Docs.](#deployment-to-read-the-docs)
-  - [Restructured the documentation to match Divio's ](#restructured-the-documentation-to-match-Divio's)
+  - [Restructured the documentation](#restructured-the-documentation)
   - [Added missing docstrings](#added-missing-docstrings)
 
 - [Maintenance tasks](#maintenance-tasks)
@@ -32,7 +30,7 @@ In this post, I'll describe the work during that time. From now on, I'll refer t
   - [Added community tools to repository on GitHub](#added-community-tools-to-repository-on-github)
   - [Improved and expanded benchmarks.](#improved-and-expanded-benchmarks)
 
-- [Acknowledges](#acknowledges)
+- [Acknowledgements](#acknowledgements)
 
 - [References](#references)
 
@@ -91,7 +89,7 @@ All the dependencies that I added for the documentation are included in the `pyp
 
 ### Deployment to Read the Docs
 
-`Material for MkDocs` is designed to be deployed on `GitHub Pages`. It works "out-of-the box" with it. So, deploying it to [`ReadtheDocs`](https://about.readthedocs.com/) which is a documentation host, took some experimenting. But keeping the site there, meant that the previous releases (done with Sphinx) would still be available.
+`Material for MkDocs` is designed to be deployed on `GitHub Pages`. It works "out-of-the box" with it. So, deploying it to [`ReadtheDocs`](https://about.readthedocs.com/) which is a documentation host, took some experimenting. But keeping the site there, meant that the previous releases (done with `Sphinx`) would still be available.
 
 The first step to deploy to `Read the Docs` is to create an account and authorize its access to the `GitHub` account. The authorization means that `Read the Docs` will be able to install webhooks to the `GitHub` repository.
 
@@ -107,7 +105,7 @@ At the time of writing, the new website is available only under the "latest" ver
 
 The resulting documentation site can be seen [here.](https://sparse.pydata.org/en/latest/)
 
-### Restructured the documentation to match Divio's
+### Restructured the documentation
 
 Once the documentation website was working with the new framework, I needed to reorganize it. The objective was to use the documentation guidelines from [`Divio's`](https://docs.divio.com/documentation-system/)
 
