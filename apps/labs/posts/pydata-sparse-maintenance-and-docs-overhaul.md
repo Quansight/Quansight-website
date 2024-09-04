@@ -1,5 +1,5 @@
 ---
-title: 'Pydata sparse: Maintenance and docs overhaul'
+title: 'Pydata/Sparse: Maintenance and docs overhaul'
 authors: [dea-leon]
 published: September, 2024
 description: 'Making the documentation more user friendly and how benchmarks were integrated in pydata sparse.'
@@ -12,13 +12,13 @@ hero:
   imageAlt: 'Cube representing a sparse array with the word sparse on the left.'
 ---
 
-Hi, I'm [Dea María Léon](https://github.com/DeaMariaLeon). I had the pleasure to work at Quansight Labs for three months. The objective was to perform maintenance tasks and a documentation overhaul to the `Pydata.sparse` project.
+Hi, I'm [Dea María Léon](https://github.com/DeaMariaLeon). I had the pleasure to work at Quansight Labs for three months. The objective was to perform maintenance tasks and a documentation overhaul to the `sparse` project.
 
 In this post, I'll describe the work during that time. From now on, I'll refer to the project only as `sparse`.
 
 ---
 
-- [Introduction to pydata sparse](#introduction-to-pydata-sparse)
+- [Introduction to `sparse`](#introduction-to-pydata-sparse)
 
 - [Documentation overhaul](#documentation-overhaul)
 
@@ -40,7 +40,7 @@ In this post, I'll describe the work during that time. From now on, I'll refer t
 
 ## Introduction to pydata sparse
 
-`sparse` is a library that implements operations for sparse arrays with two or more dimensions.
+`sparse` is a library that implements operations for sparse arrays with an arbitrary number of dimensions.
 
 Sparse arrays or matrices are an important concept in scientific computing. These types of arrays are mostly filled with zeros. There are different formats to represent them in a compressed way. This translates to using less memory to store them.
 
@@ -54,7 +54,7 @@ Matthew Rocklin started the project and Hameer Abbasi took over in 2018. I worke
 
 ### Convert the documentation website to Material for MkDocs
 
-`Sparse` documentation website was originally done with [`Sphinx`](https://www.sphinx-doc.org/en/master/index.html). Both Sphinx and [`Material for MkDocs`](https://squidfunk.github.io/mkdocs-material/) are static site generators and are used to create technical documentation.
+`sparse` documentation website was originally done with [`Sphinx`](https://www.sphinx-doc.org/en/master/index.html). Both Sphinx and [`Material for MkDocs`](https://squidfunk.github.io/mkdocs-material/) are static site generators and are used to create technical documentation.
 
 One of the benefits of the conversion was that `Sphinx` requires writing input documents in `reStructuredText format`[^2]. This is more complicated than using regular `Markdown`, the format used by `Material for MkDocs`. In addition, the learning curve to use `Sphinx` for new contributors is steep.
 
@@ -105,7 +105,7 @@ If I had started by deploying `sparse` directly, without installing my own fork 
 
 At the time of writing, the new website is available only under the "latest" version on `Read the Docs`. The stable version is still the `Sphinx` website, as the next release is still not ready. But it will be part of the next release.
 
-The resulting documentation site can be seen [here.](https://sparse-nd--747.org.readthedocs.build/en/747/)
+The resulting documentation site can be seen [here.](https://sparse-nd--747.org.readthedocs.build/en/latest/)
 
 ### Restructured the documentation to match Divio's
 
@@ -125,7 +125,7 @@ The final requirement related to the website was to add the missing docstrings s
 
 ### Added community tools to repository on GitHub
 
-I added issue templates to the `sparse` repository on `GitHub`. I also added a pull request template and a release drafter.
+I added issue templates to the `sparse` repository on `GitHub`. I also added a pull request template and a release drafter. For documentation on GitHub about these topics, please see [here](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates).
 
 There are now four different issue template types: to report bugs, documentation issues, enhancement requests and question support.
 
@@ -165,8 +165,8 @@ We are now benchmarking matmul, elemwise and tensordot with `CodSpeed`. We are a
 
 I would like to thank:
 
-Hameer Abbas who was my guide during this time.
-Mateus Sokól, who also helped me very kindly in the beginning of the project.
+Hameer Abbasi who was my guide during this time.
+Mateusz Sokól, who also helped me very kindly at the beginning of the project.
 Melissa Weber Mendoça, who organized and supported us in many ways.
 Tania Allard who interviewed me for this temporary work.
 Everybody at Quansight Labs who was involved in making this program possible.
