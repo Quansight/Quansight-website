@@ -1,19 +1,15 @@
 ---
-
-title: "Pydata sparse: Maintenance and docs overhaul"
+title: 'Pydata sparse: Maintenance and docs overhaul'
 authors: [dea-leon]
 published: September, 2024
-description: "Making the documentation more user friendly and how benchmarks were integrated in pydata sparse."
+description: 'Making the documentation more user friendly and how benchmarks were integrated in pydata sparse.'
 category: [PyData ecosystem]
 featuredImage:
-src: /posts/pydata-sparse-maintenance-and-docs-overhaul/featured.png
-alt:
-"Cube representing a sparse array with the word sparse on the left."
+  src: /posts/pydata-sparse-maintenance-and-docs-overhaul/featured.png
+  alt: 'Cube representing a sparse array with the word sparse on the left.'
 hero:
-imageSrc: /posts/pydata-sparse-maintenance-and-docs-overhaul/hero.svg
-imageAlt:
-"Cube representing a sparse array with the word sparse on the left."
-
+  imageSrc: /posts/pydata-sparse-maintenance-and-docs-overhaul/hero.svg
+  imageAlt: 'Cube representing a sparse array with the word sparse on the left.'
 ---
 
 Hi, I'm [Dea María Léon](https://github.com/DeaMariaLeon). I had the pleasure to work at Quansight Labs for three months. The objective was to perform maintenance tasks and a documentation overhaul to the `Pydata.sparse` project.
