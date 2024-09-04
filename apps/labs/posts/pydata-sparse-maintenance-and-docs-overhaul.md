@@ -29,7 +29,7 @@ In this post, I'll describe the work during that time. From now on, I'll refer t
 
 - [Maintenance tasks](#maintenance-tasks)
 
-  - [Added contributor experience tools to repository on GitHub](#added-contributor-experience-tools-to-repository-on-GitHub)
+  - [Added community tools to repository on GitHub](#added-community-tools-to-repository-on-github)
   - [Improved and expanded benchmarks.](#improved-and-expanded-benchmarks)
 
 - [Acknowledges](#acknowledges)
@@ -105,13 +105,13 @@ If I had started by deploying `sparse` directly, without installing my own fork 
 
 At the time of writing, the new website is available only under the "latest" version on `Read the Docs`. The stable version is still the `Sphinx` website, as the next release is still not ready. But it will be part of the next release.
 
-The resulting documentation site can be seen [here.](https://sparse-nd--747.org.readthedocs.build/en/latest/)
+The resulting documentation site can be seen [here.](https://sparse.pydata.org/en/latest/)
 
 ### Restructured the documentation to match Divio's
 
 Once the documentation website was working with the new framework, I needed to reorganize it. The objective was to use the documentation guidelines from [`Divio's`](https://docs.divio.com/documentation-system/)
 
-These Divio’s principles state that the documentation should be structured in four sections. Each section should cover a different purpose and should be written differently. These sections are tutorials, how-to guides, explanations and reference (API).
+These `Divio`’s principles state that the documentation should be structured in four sections. Each section should cover a different purpose and should be written differently. These sections are tutorials, how-to guides, explanations and reference (API).
 
 The purpose of tutorials is learning. How-to guides should solve problems. Explanation pages should lead to understanding. And the reference should be the area where the comprehensive technical information is.
 
@@ -125,7 +125,7 @@ The final requirement related to the website was to add the missing docstrings s
 
 ### Added community tools to repository on GitHub
 
-I added issue templates to the `sparse` repository on `GitHub`. I also added a pull request template and a release drafter. For documentation on GitHub about these topics, please see [here](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates).
+I added issue templates to the `sparse` repository on `GitHub`. I also added a pull request template and a release drafter. For documentation about these topics, please see [here](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/about-issue-and-pull-request-templates).
 
 There are now four different issue template types: to report bugs, documentation issues, enhancement requests and question support.
 
@@ -133,11 +133,11 @@ As we know, these templates set a format and a structure to the information that
 
 The templates are configured in a YAML file, under the subdirectory `.github/ISSUE_TEMPLATE`. This file is a GitHub form schema, and it has the name of the fields and properties included on each template.
 
-The Release Drafter is a GitHub action that can be found in "Marketplace Actions". It must be added to the repository with a YAML workflow file. It is stored in ` .github/workflows/release-drafter.yml`. After that, it needs to be configured with another YAML file, now with the name `.github/release-drafter.yml`.
+The [`Release Drafter`](https://github.com/marketplace/actions/release-drafter) is a GitHub action that can be found in [Marketplace Actions](https://github.com/marketplace?type=actions). It must be added to the repository with a YAML workflow file. It is stored in ` .github/workflows/release-drafter.yml`. After that, it needs to be configured with another YAML file, now with the name `.github/release-drafter.yml`.
 
-Both files need to be in the `main` branch already in order to start working. Because of this, it is easier to add these files directly to the repository on GitHub than with a pull request. But that can be done only by the owners of the repositories. When someone who is not the owner of the repository creates the pull request to add them, the workflow fails. The pull request must be merged like that. Once the files are in the default branch, the Release Drafter starts working.
+Both files need to be in the `main` branch already in order to start working. Because of this, it is easier to add these files directly to the repository on GitHub than with a pull request. But that can be done only by the owners of the repositories. When someone who is not the owner of the repository creates the pull request to add them, the workflow fails. At the time of writing, the pull request must be merged like that. Once the files are in the default branch, the `Release Drafter` starts working.
 
-With all this, a document that is the release draft keeps updating itself automaticaly when pull requests are merged. I included the option to categorize pull requests and it does it by setting labels to the pull requests, depending on their titles. For this, I added the "Autolabeler" funcionality.
+With all this, a document that is the release draft keeps updating itself automaticaly when pull requests are merged. I included the option to categorize pull requests and it does it by setting labels to the pull requests, depending on their titles. For this, I added the "Autolabeler" funcionality. Please see visit the [documentation](https://github.com/marketplace/actions/release-drafter#:~:text=Adding%20such%20labels%20to%20your%20PRs%20can%20be%20automated%20by%20using%20the%20embedded%20Autolabeler) for more info.
 
 ### Improved and expanded benchmarks
 
@@ -151,9 +151,10 @@ My job was to convert those benchmarks so they could be run and analyzed with [`
 
 Some OS projects run the benchmarks on separate servers, and the results are published on yet another server. `asv` only shows some graphs with the results, but it doesn't notify when it finds a regression.
 
-When using `CodSpeed`, the benchmarks are run in the CI environment. Then the results are sent to `CodSpeed` servers to be analyzed. Running benchmarks in the CI environment (on `GitHub`) is normally something to avoid, due to the noise that could be introduced. But `CodSpeed` simulates CPU behavior, so the results measure CPU cycles. They include cache and memory access.
+When using `CodSpeed`, the benchmarks are run in the CI environment. Then the results are sent to `CodSpeed` servers to be analyzed. Running benchmarks in the CI environment (on `GitHub`) is normally something to avoid, due to the noise that could be introduced. But `CodSpeed` simulates CPU behavior, so the results measure CPU cycles. They include cache and memory access. To learn more details, please visit this [section](https://docs.codspeed.io/features/understanding-the-metrics/).
 
 Like I said earlier, I needed to install `CodSpeed`. This is done by adding the `pytest` extension `pytest-codspeed` as a development dependency. Then, I added a `GitHub Actions` workflow to run the benchmarks and report the results to `CodSpeed`. The `sparse` repository needed to be imported to `CodSpeed` and enabled as well. To do this, one must have Admin rights of the organization on GitHub.
+This is important as without these right, the tool does not run. Please see [here](https://docs.codspeed.io/features/roles-and-permissions/).
 
 Finally, I added benchmarks so they could be run by `CodSpeed`. The benchmarks are run whenever a pull request is opened and with each commit to it. A report is generated and posted as a comment on the pull request (on `GitHub`). The report has links to the analyses and graphs of the results in `CodSpeed` cloud.
 
