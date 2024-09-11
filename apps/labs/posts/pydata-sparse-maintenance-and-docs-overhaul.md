@@ -3,7 +3,7 @@ title: 'Pydata/Sparse: Maintenance and docs overhaul'
 authors: [dea-leon]
 published: September, 2024
 description: 'Making the documentation more user friendly and how benchmarks were integrated in pydata sparse.'
-category: [PyData ecosystem]
+category: [PyData ecosystem, Internship]
 featuredImage:
   src: /posts/pydata-sparse-maintenance-and-docs-overhaul/featured.png
   alt: 'Cube representing a sparse array with the word sparse on the left.'
