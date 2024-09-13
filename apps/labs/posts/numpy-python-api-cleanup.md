@@ -3,7 +3,7 @@ title: "Refining NumPy's Python API for its 2.0 release"
 published: November 8, 2023
 authors: [mateusz-sokol]
 description: "A journey through NumPy's Python API from a maintenance perspective."
-category: [PyData ecosystem]
+category: [PyData ecosystem, Internship]
 featuredImage:
   src: /posts/numpy-python-api-cleanup/numpy-python-api-cleanup-logo.png
   alt: 'NumPy logo.'
