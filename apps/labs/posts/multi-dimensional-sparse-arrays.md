@@ -1,6 +1,6 @@
 ---
 title: 'Multi-dimensional Sparse Arrays in SciPy'
-published: 19 September, 2024
+published: 20 September, 2024
 authors: [anushka-suyal]
 description: 'My work focused on extending support for COOrdinate sparse arrays in SciPy to n-dimensions.'
 category: [Internship]
