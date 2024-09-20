@@ -50,8 +50,6 @@ By the end of this stage, I had become fairly confident that the entire COO code
 
 I then moved on to the second stage, which involved tackling the fundamental operations in linear algebra, `matmul`, `dot`, and `tensordot`.
 
-This section has a clear direction, but it needed some clarification, especially in the incomplete sentence. I've enhanced the language for readability and better flow:
-
 Most functions in SciPy's sparse module fall into one of two categories: they are either purely Python-based or they involve compiled code. Compiled code is introduced when a significant speed boost is essential. However, increasing the amount of compiled code also increases the size of binaries, which can lead to portability issues and larger memory footprints. Fortunately, Python's numeric library, NumPy, has been optimised so heavily that it can at times deliver as good of a performance as compiled code, if not faster, while also avoiding the drawbacks of increased memory usage associated with binaries.
 
 Given these considerations, the implementation of methods in this stage required careful thought. In the next section, I will walk through the key decisions made during the implementation of the `matmul`, `dot`, and `tensordot` methods. But first, I will introduce a concept called broadcasting.
