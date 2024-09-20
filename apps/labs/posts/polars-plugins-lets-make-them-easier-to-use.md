@@ -19,6 +19,24 @@ Hop in, grab your popcorn, fasten your seatbelts.
 
 ---
 
+- [What are Polars plugins?](#what-are-polars-plugins)
+- [Prelude and first week](#prelude-and-first-week)
+- [Writing plugins and chapters](#writing-plugins-and-chapters)
+- [Working at Quansight Labs](#working-at-quansight-labs)
+- [New ideas to make plugins more approachable](#new-ideas-to-make-plugins-more-approachable)
+
+---
+
+## What are Polars plugins?
+
+> Expression plugins are the preferred way to create user defined functions. They allow you to compile a Rust function and register that as an expression into the Polars library. - [Official docs](https://docs.pola.rs/user-guide/expressions/plugins/)
+
+User defined functions are quite important in the context of DataFrames. Polars is made in Rust and distributed as a library for Python, R and NodeJS (besides Rust itself). Users of these other languages might be tempted to write User Defined Functions (UDFs) in these languages, since it's how they're using Polars, not to mention the comfort zone factor. However, plugins are a way to possibly increase the performance of these functions by orders of magnitude! By writing UDFs in Rust (as expression plugins), Polars is able to work more efficiently than if they were defined in the languages mentioned above. Expression plugins are _a_ type of plugin, and the main target of this article - whenver you read plugin, I'm referring to expression plugins, unless stated otherwise. The other type is called an IO plugin, more on that later.
+
+---
+
+## Prelude and first week
+
 Sometime before the internship began, I was told my project would be related to Polars plugins.
 Thrilled, I rushed and wrote my first plugin, following the official tutorial, then... nothing.
 I'm not a Polars user, nor is my Rust-fu strong enough to explore the plugin system in-depth.
@@ -35,7 +53,7 @@ What would you tell a lunatic intern with such a ridiculous idea? I don't know, 
 This was **it**, _the game was on!_ But wait, no... I don't know how to do that... I actually have no clue!
 
 Those were my thoughts, initially. I believed the same limitations I had before the internship began were also present here, but that was not entirely true.
-After all, I did the tutorial, I played with some examples, and I even managed to "explain" ChatGPT a broader context of plugins, allowing it to give me some useful suggestions besides its usual hallucinations.
+After all, I did the tutorial, I played with some examples, and I even managed to "explain" to ChatGPT a broader context of plugins, allowing it to give me some useful suggestions besides its usual hallucinations.
 I could at least _try_ something. Fast forward... a day? Two? It was done - for real. I couldn't believe myself.
 
 You see, Conway's Game of Life is a cellular automaton which beautifully displays emergent behavior.
@@ -78,6 +96,8 @@ That was fine, things were just beginning.
 
 <hr />
 
+## Writing plugins and chapters
+
 As time went by, I explored and created more plugins, like a URL parser (making use of the `url` crate).
 I learned about optimizations that could be applied to my code, profiled memory and runtime of the things I wrote.
 The wind was good, and things were sailing well, but I was anxious to make progress in the tutorial.
@@ -98,6 +118,8 @@ It was annoying and took longer than I expected, but fortunately it wasn't anyth
 The allocations section I wrote was finally merged - we were waiting for some functions to be merged to Polars before publishing it, otherwise we'd need to update it shortly after writing the section.
 I started reading about arrays, drafting ideas for the very text you're reading, and studying a bit of Narwhals and Dask, to be able to contribute more than just test-related PRs.
 
+## Working at Quansight Labs
+
 Now's a good time to make a brief pause to talk about working at Quansight.
 Many readers might be familiar with remote work, and the things some companies do to avoid the burden of being isolated from your colleagues.
 Quansight not only has channels in Slack for us to share _Qool_ personal projects and things (whence I learned there are lots of 3D-printer enthusiasts here),
@@ -108,11 +130,11 @@ But I told myself I'd be saying "yes" to as many things that were presented to m
 
 <figure style={{ textAlign: 'center' }}>
     <img 
-      src="/posts/polars-plugins-lets-make-them-easier-to-use/yes-yes-yes.gif"
-      alt="GIF from the movie 'Yes man' of the protagonist accepting saying 'yes' to everything"
+      src="/posts/polars-plugins-lets-make-them-easier-to-use/yes_to_everything_white_bg.png"
+      alt="Mock flowchart with a block labeled 'time to meet for #coffee buddies' (which is the name of the slack channel for Donut meetings), with two arrows pointing outwards, labeled 'yes', and 'also yes'"
       style={{ display: 'inline-block' }}
     />
-    <figcaption>Yes!</figcaption> 
+    <figcaption>Yes?</figcaption> 
 </figure>
 
 It did, and still does feel a bit forced, everytime that little bot messages me - can't simply wash away introversion like that, after all.
@@ -132,6 +154,8 @@ But even considering they wouldn't hire us, they were kind enough to have a "CV 
 They didn't have to do that, so I'd call it a nice move.
 
 <hr />
+
+## New ideas to make plugins more approachable
 
 Back to work!
 Up until now, I haven't talked about a key term that kept haunting me: accessibility.
