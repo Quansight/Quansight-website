@@ -22,7 +22,7 @@ My work focused on extending support for COO sparse arrays to n-dimensions in Sc
 
 ## What are Sparse Arrays?
 
-A sparse array is one where most of the values are zero. hese naturally arise in many applications, making it possible to efficiently work with large datasets as we don't need to explicitly storing all of the zeros.
+A sparse array is one where most of the values are zero. These naturally arise in many applications, making it possible to efficiently work with large datasets as we don't need to explicitly storing all of the zeros.
 The two-dimensional version, known as sparse matrices, has been well-developed over the years. Sparse matrices can be stored in various formats, such as COO (COOrdinate), CSR (Compressed Sparse Row), CSC (Compressed Sparse Column), DOK (Dictionary Of Keys), LIL (List of Lists), DIA (DIAgonal), and BSR (Block Sparse Row).
 The CSR format allows for extremely fast arithmetic and vector operations, however due to how it stores the arrays, it’s more complex to extend to n-dimensions. In contrast, the COOrdinate format facilitates very fast conversion to and from CSR, and its simpler structure is more intuitive for extending to n-dimensions. Essentially, the COO format (for 1D and 2D) stores the non-zero data and the coordinates of that data using three arrays – `data`, `row`, and `col`. When extended to n-D, we instead represent it using a `data` array and a tuple of n arrays, where each array, `a_1, …, a_i, …, a_n`, stores the indices for the i-th dimension.
 
@@ -50,7 +50,7 @@ By the end of this stage, I had become fairly confident that the entire COO code
 
 I then moved on to the second stage, which involved tackling the fundamental operations in linear algebra, `matmul`, `dot`, and `tensordot`.
 
-Most functions in SciPy's sparse module fall into one of two categories: they are either purely Python-based or they involve compiled code. Compiled code is introduced when a significant speed boost is essential. However, increasing the amount of compiled code also increases the size of binaries, which can lead to portability issues and larger memory footprints. Fortunately, Python's numeric library, NumPy, has been optimised so heavily that it can at times deliver as good of a performance as compiled code, if not faster, while also avoiding the drawbacks of increased memory usage associated with binaries.
+Most functions in SciPy's sparse module fall into one of two categories: they are either purely Python-based or they involve compiled code. Compiled code is introduced when a significant speed boost is essential. However, increasing the amount of compiled code also increases the size of binaries, which can lead to portability issues and larger memory footprints. To add on, another issue with compiled code is maintenance. Not many people want to jump down into C++! Fortunately, Python's numeric library, NumPy, has been optimised so heavily that it can at times deliver as good of a performance as compiled code, if not faster, while also avoiding the drawbacks of increased memory usage associated with binaries.
 
 Given these considerations, the implementation of methods in this stage required careful thought. In the next section, I will walk through the key decisions made during the implementation of the `matmul`, `dot`, and `tensordot` methods. But first, I will introduce a concept called broadcasting.
 
