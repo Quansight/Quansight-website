@@ -13,7 +13,7 @@ hero:
 ---
 
 I am Bruno Kind, and this is the place where I tell the world about my journey in Open Source during July-September 2024.
-How I got an internship to work with Open Source, in an entry-level Rust position – yes, they're real!
+How I made it through an internship to work with Open Source, in an entry-level Rust position – yes, they're real!
 And how I managed to contribute and improve Marco Gorelli's existing [Polars Plugin Tutorial](https://marcogorelli.github.io/polars-plugins-tutorial/).
 Hop in, grab your popcorn, fasten your seatbelts.
 
@@ -24,6 +24,7 @@ Hop in, grab your popcorn, fasten your seatbelts.
 - [Writing plugins and chapters](#writing-plugins-and-chapters)
 - [Working at Quansight Labs](#working-at-quansight-labs)
 - [New ideas to make plugins more approachable](#new-ideas-to-make-plugins-more-approachable)
+- [The end](#the-end)
 
 ---
 
@@ -40,7 +41,7 @@ User defined functions are quite important in the context of DataFrames. Polars 
 Sometime before the internship began, I was told my project would be related to Polars plugins.
 Thrilled, I rushed and wrote my first plugin, following the official tutorial, then... nothing.
 I'm not a Polars user, nor is my Rust-fu strong enough to explore the plugin system in-depth.
-But I did have an idea - what if I could make Conway's Game of Life play itself in a dataframe?
+But I did have an idea - what if I could make [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) play itself in a dataframe?
 Could plugins do that? Regardless, I had to wait. I lacked the juice.
 
 Time passed, as it always does, and the internship began.
@@ -116,7 +117,7 @@ Then I got sick. Happens to all of us, but what a frustrating thing, not being a
 It was annoying and took longer than I expected, but fortunately it wasn't anything serious, and I was able to pick up from where I left after a week of rest, give or take.
 
 The allocations section I wrote was finally merged - we were waiting for some functions to be merged to Polars before publishing it, otherwise we'd need to update it shortly after writing the section.
-I started reading about arrays, drafting ideas for the very text you're reading, and studying a bit of Narwhals and Dask, to be able to contribute more than just test-related PRs.
+I started reading, then writing about arrays (which ended up being merged as a whole chapter), drafting ideas for the very text you're reading, and studying a bit of Narwhals and Dask, to be able to contribute more than just test-related PRs.
 
 ## Working at Quansight Labs
 
@@ -159,7 +160,7 @@ They didn't have to do that, so I'd call it a nice move.
 
 Back to work!
 Up until now, I haven't talked about a key term that kept haunting me: accessibility.
-I'm not sure it was explicit, or if I made it up when thinking of "making a tutorial easier to use", but I couldn't stop thinking about accessibility.
+I'm not sure I read that word explicitly somewhere, or if I made it up when thinking of "making a tutorial easier to use", but I couldn't stop thinking about accessibility.
 And to be fair, it's quite hard for me to work on it, as I've never dealt with it before (in-depth).
 Was it part of my job to make the tutorial more accessible? If so, I had a lot to do. Did I? Did it lack accessibility?
 I was confused and helpless.
@@ -171,15 +172,47 @@ We had text and code blocks, maybe a benchmarking chart or two.
 I could draw diagrams and memory layouts that would've made a huge difference when I was first learning.
 It couldn't hurt to try.
 
-The first thing I drew was flat-out wrong. This shows I either suck at studying, or the material lacked something... or perhaps both!?
-I don't think it's worth dissecting my mistake. Suffice to say, it wasn't something trivial, and yes, a picture would've done wonders.
-The error had to do with the memory layout of structs, so I put it in my to-do list: draw memory layout for struct chapter.
-You might be wondering, why not do it right then and there? Because something else was waiting for me: IO plugins.
+The first thing I drew was a diagram showing the array memory layout. It was flat-out wrong. To be honest, I don't think it's worth dissecting this mistake - suffice to say, it wasn't something trivial. I ended up choosing to not include any picture for arrays, as I concluded the "intuitive" memory layout was the correct one - for some reason I thought it was different. What a great first diagram - nothing!
 
-What are IO plugins? A (**very**) new type of plugins introduced in a PR. It was brand new, so there was no Marco's tutorial to teach me the thing.
-I only had the PR and _one_ example to look at and try to figure something out.
-By the way, I didn't _have_ to do it, but it was a stretch goal, and something pretty cool to achieve, if I managed to write about it in time.
+Mistakes happen, so I moved on. Next I was drawing diagrams showing how Polars stored structs under the hood, which **is not** intuitive. Assume we have the following struct defined in Rust:
 
----
+```rust
+struct Point2D {
+    x: f64,
+    y: f64,
+    rgb: u32,
+}
+```
 
-W.I.P.
+Compare the following two diagrams, noting the difference between an array of struct instances in pure Rust vs. how Polars organizes a chunk of the same struct in memory:
+
+<figure style={{ textAlign: 'center' }}>
+    <img 
+      src="/posts/polars-plugins-lets-make-them-easier-to-use/struct_array_memory_layout.png"
+      alt="Diagram showing how a pure rust array of structs fits in memory"
+      style={{ display: 'inline-block' }}
+    />
+    <figcaption>How an array of structs in pure Rust fits in memory</figcaption>
+</figure>
+
+<figure style={{ textAlign: 'center' }}>
+    <img 
+      src="/posts/polars-plugins-lets-make-them-easier-to-use/structchunked_fields_memory_layout.png"
+      alt="Diagram for struct memory layout, showing three arrows coming out of the word fields, each pointing to a separate, contiguous area of memory"
+      style={{ display: 'inline-block' }}
+    />
+    <figcaption>How Polars stores a chunk of the same struct in memory</figcaption>
+</figure>
+
+This is due to Polars following Apache Arrow's columnar format. No need to get into more details, the point is: pictures help. A lot.
+So I continued drawing, making the tutorial more accessible.
+This went until the very end, which was sadly approaching.
+
+## The end
+
+It was time to say goodbye, so I started wrapping things up, which unfortunately meant not finishing my work on IO plugins. Yes, there is another kind of plugins! But this is a very recent (as of this writing) and undocumented area. It should be enough to say I did manage to explore and [write](https://github.com/condekind/io_plugin) some IO plugins, but there wasn't enough time to write about them in an entire new section of Marco's tutorial (or another tutorial altogether). On the bright side, there's a lot of work for new interns in the next batches of the Open Source internship program!
+
+This is the end of my Summer journey in open source. I hope you enjoyed reading it as much as I enjoyed writing it.
+
+Kind regards,  
+B. Kind
