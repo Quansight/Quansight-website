@@ -108,7 +108,7 @@ While tasked with this, I also had the chance to work on a function that would e
 I never imagined doing these things while having such a basic level of Rust (I'm still afraid of lifetimes!), but somehow it was possible... what a third week!
 
 The days were passing and fortunately I was seeing constant progress of my end-goal: improving the tutorial.
-I wrote a new chapter about a possible pitfall, in which users could be tempted to allocate and return a `Vector<Option<T>>` instead of just `Vector<T>`,
+I wrote a new chapter about a possible pitfall, in which users could be tempted to allocate and return a `Vec<Option<T>>` instead of just `Vec<T>`,
 then started writing about... guess what? The Game of Life I made in the first week! Yes, that would find its way into the tutorial as well, who would've thought!?
 This was a very step-by-step, holding-hands kind of chapter, with all the Rust and Python needed to make the plugin happen.
 I was concerned about improving the tutorial and forgetting the "make it easier to use", so I was extra careful to write that chapter in a very beginner friendly way.
