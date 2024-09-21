@@ -189,7 +189,7 @@ Compare the following two diagrams, noting the difference between an array of st
 <figure style={{ textAlign: 'center' }}>
     <img 
       src="/posts/polars-plugins-lets-make-them-easier-to-use/struct_array_memory_layout.png"
-      alt="Diagram showing how a pure rust array of structs fits in memory"
+      alt="Diagram of a single contiguous memory region, showing how a pure rust array of structs fits in memory"
       style={{ display: 'inline-block' }}
     />
     <figcaption>How an array of structs in pure Rust fits in memory</figcaption>
