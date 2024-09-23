@@ -1,5 +1,5 @@
 ---
-title: 'Multdimensional integration in SciPy'
+title: 'Multidimensional integration in SciPy'
 description: Extending SciPy's integration facilities for multidimensional and array-valued integrands.
 authors: [olly-britton]
 published: September 12, 2024
@@ -11,7 +11,7 @@ featuredImage:
     on the right of the curve are darker and narrower, and their area more closely matches
     the area of the function.
 hero:
-  imageSrc: /posts/multidimensional-integration-in-scipy/subdivisions-in-higher-dimensions.png
+  imageSrc: /posts/multidimensional-integration-in-scipy/subdivisions-in-higher-dimensions-hero.png
   imageAlt: >
     A plot of an undulating function in 3D. On top of the surface of the function,
     there is a white mesh. The top right corner of the mesh is being filled in by a finer
@@ -57,7 +57,8 @@ Integrating functions, given function object
     ...
 ```
 
-After 20 years of maturing as an open source project, SciPy now contains over 15 different functions for numerical integration, all of which address different but overlapping use-cases and functionality. My task for this internship was to address a small gap in these offerings: improving the support for multidimensional numerical integration ("cubature"), as initially discussed [in this SciPy issue](https://github.com/scipy/scipy/issues/20252) in March earlier this year. This culminated in a new function, `cubature`, which slots into the middle of the "array-valued" and "multidimensional" Venn diagram.
+After 20 years of maturing as an open source project, SciPy now contains over 15 different functions for numerical integration bundled into the [`scipy.integrate`](https://docs.scipy.org/doc/scipy/tutorial/integrate.html) package, all of which address different but overlapping use-cases and functionality. My task for this internship was to address a small gap in these offerings: improving the support for multidimensional numerical integration ("cubature"), as initially discussed [in this SciPy issue](https://github.com/scipy/scipy/issues/20252) in March earlier this year. This culminated in a new function, `cubature`, which slots into the middle of the "array-valued" and "multidimensional" Venn diagram.
+
 
 ![A Venn diagram with two intersecting circles. One is labelled "array-valued integrands", the other is labelled "multi-dim integrands". In the intersection, "cubature" is written with a smiley face afterwards. There is another partial circle at the bottom labelled "available to Galileo and Archmides".](/posts/multidimensional-integration-in-scipy/scipy-integration-venn-diagram.png)
 
@@ -145,7 +146,7 @@ Here, the usefulness of supporting array-valued integrands should be clear: it l
 
 ## Array API support
 
-One feature of the new `cubature` function that would be hard to support with `dblquad` is that it also supports the array API standard. For a good primer on what this means, see [The Array API Standard in SciPy](https://labs.quansight.org/blog/scipy-array-api). In brief, a lot of SciPy's code relies heavily on NumPy, which provides the `array` data structure used to efficiently implement most of the algorithms SciPy offers. But a considerable amount of recent effort has meant that lots of SciPy functions are now array-agnostic – you can give these functions arrays from other compatible libraries, like PyTorch or CuPy, and they will also work:
+One feature of the new `cubature` function that would be hard to support with `dblquad` is that it also supports the [array API standard](https://data-apis.org/array-api/). For a good primer on what this means, see [The Array API Standard in SciPy](https://labs.quansight.org/blog/scipy-array-api). In brief, a lot of SciPy's code relies heavily on NumPy, which provides the `array` data structure used to efficiently implement most of the algorithms SciPy offers. But a considerable amount of recent effort has meant that lots of SciPy functions are now array-agnostic – you can give these functions arrays from other compatible libraries, like PyTorch or CuPy, and they will also work:
 
 ```python
 import torch
@@ -227,7 +228,7 @@ There might be `rule` classes which implement the trapezoid rule or Gauss-Legend
 
 For example, the simplest version of trapezium rule evaluates the function at the start and end of an interval, and estimates that the area of the function is roughly the same as the area of the trapezium formed by connecting up these two points.
 
-![An illustration of the premise behind the trapezoid rule. A curve is show, and layered on top is a trapezium that begins and ends at the start and end of the curve.](basic-trapezoid-rule.png)
+![An illustration of the premise behind the trapezoid rule. A curve is show, and layered on top is a trapezium that begins and ends at the start and end of the curve.](/posts/multidimensional-integration-in-scipy/basic-trapezoid-rule.png)
 
 If the number of points that $f$ is evaluated at remains constant for each call to `rule`, then you'd expect that applying the rule over a smaller region would give more accurate estimates. This forms the basis of "$h$-adaptive" algorithms: estimate the integral over the big region requested by the user, and if the error is too high, split the interval in half and apply the rule to each of the subregions separately. Then you continue dividing the region with the highest error until the tolerance is reached.
 
@@ -236,6 +237,7 @@ If the number of points that $f$ is evaluated at remains constant for each call 
     src="/posts/multidimensional-integration-in-scipy/refining-trapezoid-rule.mp4"
     type="video/mp4"
   />
+  <track kind="subtitles" src="/posts/multidimensional-integration-in-scipy/refining-trapezoid-rule.vtt" srcLang="en" />
 </video>
 
 If instead you increase the number of points that $f$ is evaluated at for each call to `rule` while keeping the size of the region fixed, this forms the basis of a "$p$-adaptive" algorithm. $h$-adaptive algorithms and $p$-adaptive algorithms are named for the things they vary: $h$-adaptive algorithms vary the size ($h$) of the region being integrated, and $p$-adaptive algorithms vary the number of points ($p$) being used.
@@ -247,6 +249,7 @@ For $h$-adaptive cubature in higher dimensions, the process is almost identical.
     src="/posts/multidimensional-integration-in-scipy/subdivisions-in-higher-dimensions.mp4"
     type="video/mp4"
   />
+  <track kind="subtitles" src="/posts/multidimensional-integration-in-scipy/subdivisions-in-higher-dimensions.vtt" srcLang="en" />
 </video>
 
 That's the premise behind the algorithm. In more than two dimensions, things get harder to visualise, but the idea is the same: compute an estimate of the integral over some region, and if the error is still too high, split that region into many smaller regions and repeatedly apply the rule to the small regions with high error. But the basic idea is still the same: stripped back, the key loop in the actual source of `cubature` reads something like this:
