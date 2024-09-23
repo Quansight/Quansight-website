@@ -122,10 +122,10 @@ Developing functionality for `matmul` involved considering two cases:
    Without diving too deep into the C++ logic, I want to introduce the concept of strides with the following code snippet:
 
    ```cpp
-   npy_int64 strides_B[n_dim];
-   strides_B[n_dim - 1] = 1;
+   std::vector<npy_int64> strides_B(n_dim);
+   strides[n_dim - 1] = 1;
    for (npy_int64 i = n_dim - 2; i >= 0; --i) {
-        strides_B[i] = strides_B[i + 1] * shape_B[i + 1];
+        strides[i] = strides[i + 1] * shape[i + 1];
    }
    ```
 
