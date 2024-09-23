@@ -60,13 +60,13 @@ Broadcasting is a technique used to expand arrays of different shapes to a given
 
 <p align="center">
   <img
-    alt="Visual illustration of broadcasting."
+    alt="Visual illustration of broadcasting (stretching) a row vector and a column vector to the shape of a 2-D matrix, thus allowing for element-wise addition."
     src="/posts/multi-dimensional-sparse-arrays/broadcasting.png"
     width="67%"
   />
 </p>
 <i align="center">
-  Retrieved from NumPy Documentation.
+  Source: <a href="https://numpy.org/doc/stable/user/basics.broadcasting.html">NumPy Documentation</a>
 </i>
 
 NumPy provides a method `broadcast_to`, which allows a dense array to be broadcast to a specific shape.
@@ -122,7 +122,7 @@ Developing functionality for `matmul` involved considering two cases:
    Without diving too deep into the C++ logic, I want to introduce the concept of strides with the following code snippet:
 
    ```cpp
-   std::vector<npy_int64> strides_B(n_dim);
+   std::vector<npy_int64> strides(n_dim);
    strides[n_dim - 1] = 1;
    for (npy_int64 i = n_dim - 2; i >= 0; --i) {
         strides[i] = strides[i + 1] * shape[i + 1];
@@ -142,7 +142,7 @@ Developing functionality for `matmul` involved considering two cases:
   />
 </p>
 <i align="center">
-  Retrieved from Wikipedia Commons, authored by CMG Lee.
+  Source: <a href="https://commons.wikimedia.org/wiki/File:Row_and_column_major_order.svg">Wikipedia Commons, authored by CMG Lee</a>
 </i>
 
 ### `dot`/`tensordot`
