@@ -129,7 +129,7 @@ Developing functionality for `matmul` involved considering two cases:
    }
    ```
 
-   This code creates an array `strides`, which stores the step size needed to move from one element to the next along a particular axis in a multi-dimensional array.
+   This code creates an array `strides`, which stores the step size needed to move from one element to the next along a particular axis in a multi-dimensional array. Here, `shape` is a tuple of dimension sizes of the array.
 
    There are two common approaches for storing matrices/arrays in memory, namely **column-major** and **row-major** ordering.
    C and C++ use row-major ordering, meaning elements of a row are stored contiguously in memory. This ordering determines how strides are defined for traversing the array.
