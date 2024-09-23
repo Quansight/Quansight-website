@@ -158,7 +158,7 @@ Developing functionality for `matmul` involved considering two cases:
 
       For example:
       For `A` of shape `(2,3,4,5)` and `B` of shape `(6,7,5,9)` (where `A.shape[-1] == B.shape[-2]`), `A.dot(B)` will have shape `(2,3,4,6,7,9)`.
-      Bu reshaping `A` to `(2,3,4,1,1,1)` and `B` to `(1,1,1,6,7,9)` and multiplying the reshaped arrays after broadcasting, we obtain a product of shape `(2,3,4,6,7,9)`, which matches the dot product of the original arrays.
+      But reshaping `A` to `(2,3,4,1,1,1)` and `B` to `(1,1,1,6,7,9)` and multiplying the reshaped arrays after broadcasting, we obtain a product of shape `(2,3,4,6,7,9)`, which matches the dot product of the original arrays.
 
       Routing `dot` via `matmul` here had a significant advantage - it avoided the need to introduce new compiled code to handle the sparse-dense case.
 
