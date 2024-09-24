@@ -48,7 +48,7 @@ The first stage involved developing the core constructors required to initialise
 
 By the end of this stage, I had become fairly confident that the entire COO codebase could be extended to n-dimensions.
 
-I then moved on to the second stage, which involved tackling the fundamental operations in linear algebra, `matmul`, `dot`, and `tensordot`.
+I then moved on to the second stage, which involved tackling the fundamental operations in linear algebra, [`matmul`](https://numpy.org/doc/stable/reference/generated/numpy.matmul.html), [`dot`](https://numpy.org/doc/stable/reference/generated/numpy.dot.html), and [`tensordot`](https://numpy.org/doc/stable/reference/generated/numpy.tensordot.html).
 
 Most functions in SciPy's sparse module fall into one of two categories: they are either purely Python-based or they involve compiled code. Compiled code is introduced when a significant speed boost is essential. However, increasing the amount of compiled code also increases the size of binaries, which can lead to portability issues and larger memory footprints. To add on, another issue with compiled code is maintenance. Not many people want to jump down into C++! Fortunately, Python's numeric library, NumPy, has been optimised so heavily that it can at times deliver as good of a performance as compiled code, if not faster, while also avoiding the drawbacks of increased memory usage associated with binaries.
 
