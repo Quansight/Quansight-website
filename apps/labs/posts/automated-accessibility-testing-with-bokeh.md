@@ -5,7 +5,7 @@ published: September 10, 2024
 description: 'Data is only useful to the extent that people can access it.
   Let me walk you through one of several steps toward making Bokeh data
   visualizations more accessible.'
-category: [Access-centered, Beyond PyData]
+category: [Access-centered, Beyond PyData, Internship]
 featuredImage:
   src: /posts/hello-world-post/featured.png
   alt: 'Excellent alt-text describing the featured image which appears as a
