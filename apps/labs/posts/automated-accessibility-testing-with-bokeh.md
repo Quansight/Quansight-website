@@ -107,7 +107,7 @@ Now that I'd known the inner working and where things fit, I had an idea of how
 to start the testing. This, however, brought up the question of "what" to test
 things with.
 
-## Testing tools
+## Accessibility testing tools
 
 For the right blend of power, ease of use, and modernity, my mentor
 [Gabriel](https://github.com/gabalafou) and I decided to use
