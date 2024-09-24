@@ -171,7 +171,7 @@ variety of valid data visualizations. Luckily, Bokeh very generously had over
 100 example plots in the documentation that we could test against. Testing
 against the documentation came with a few challenges: one of which was the fact
 that the documentation would always need to be built and served locally before
-we could run axe-core tests against them. Bokeh also had certain commands we
+we could run axe-core tests against it. Bokeh also had certain commands we
 would have to model new ones after.
 
 Overall, our efforts towards going from 0 to 1 ended up looking like this [PR on
