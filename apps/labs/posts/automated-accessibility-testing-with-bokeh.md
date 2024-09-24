@@ -117,7 +117,7 @@ I had hoped that using Playwright would help me wriggle out of a particular
 problem. You see, sometimes when I'm uncertain of a direction to go, I let
 someone/something else be the deciding factor. Remember I mentioned that Bokeh
 had both Javascript and Python equivalents for the same thing? Well, I hoped
-playwright would be opinionated about whether to test with Javascript or Python.
+Playwright would be opinionated about whether to test with Javascript or Python.
 In an interesting series of events, I realized that it had support for both.
 
 We also decided that having axe-core in the tests might prove useful. I also
