@@ -138,7 +138,7 @@ widgets like sliders and dropdowns which are rendered outside the canvas and are
 thus testable with the Axe API. This put me in a situation where I would have to
 report [my
 findings](https://github.com/bokeh/bokeh/discussions/14057#discussioncomment-10674506)
-and ask the larger Bokeh community whether they felt leaving axe-core was
+and ask the larger Bokeh community whether they felt adding axe-core was
 worthwhile.
 
 All of this was happening while I was simultaneously facing my biggest stumbling
