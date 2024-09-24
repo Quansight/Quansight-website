@@ -167,7 +167,7 @@ Bokeh."
 ## Where we currently are
 
 A testing environment needs tests, and to test what we'd done, we needed a
-variety of valid data visualizations. Luckily, Bokeh very generously had us over
+variety of valid data visualizations. Luckily, Bokeh very generously had over
 100 example plots in the documentation that we could test against. Testing
 against the documentation came with a few challenges: one of which was the fact
 that the documentation would always need to be built and served locally before
