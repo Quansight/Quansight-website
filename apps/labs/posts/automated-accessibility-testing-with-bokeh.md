@@ -103,7 +103,7 @@ Python to JSON, to Javascript, and then to final HTML output"
 src="/posts/automated-accessibility-testing-with-bokeh/bokeh_bokehjs.jpg"
 style={{padding: '10px 20px'}}/>
 
-Now that I'd known the inner working and where things fit, I had an idea of how
+Now that I knew the inner workings and where things fit, I had an idea of how
 to start the testing. This, however, brought up the question of "what" to test
 things with.
 
