@@ -187,7 +187,7 @@ there was some internal conflict within myself because I thought I wasn't doing
 enough. The idea of slow research was new to me and it took some getting used
 to, but thankfully I got around to doing more studying than coding for the
 purpose of this internship. It also paid off because I read so many things and
-got knew knowledge in my repertoire.
+got new knowledge in my repertoire.
 
 ## Progressive work going forward
 
