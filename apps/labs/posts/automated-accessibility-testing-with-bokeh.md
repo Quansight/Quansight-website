@@ -64,7 +64,7 @@ but the biggest one of them ended up being "How does Bokeh even work?"
 ## How Bokeh works under the hood
 
 After about 6 Wednesdays of knowledge share sessions with Bokeh maintainers, ~7
-pair programming sessions with my mentor, an unrelated doc fix pull request, 2
+pair programming sessions with my mentor, 2
 fresh repo installations, 10's of hours spent reading documentation & consulting
 tutorial materials, and weeks of asking myself "what is going on in this
 codebase?", I can finally say I have a somewhat decent idea of how Bokeh works
