@@ -148,7 +148,7 @@ block yet: "the python in the room".
 
 This was no elephant, and it certainly wasn't python-related, but it was a big
 problem for me. Owing to the custom nature of all things Bokeh, I had a problem
-with getting the environment to allow axe-core run. Axe-core required core
+with getting the environment to allow axe-core to run. Axe-core required core
 modules from Node, and Bokeh had a stripped away version of node for the most
 part. I tend to like solving problems by myself with minimal hand-holding, but
 this was one of those scenarios that I just couldn't seem to fix. The ways
