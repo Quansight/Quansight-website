@@ -14,7 +14,7 @@ hero:
 
 *Picture this*: You're a scientist, working on complex simulations that push the boundaries of numerical precision. You fire up your trusty NumPy-powered Python script, eagerly anticipating the results. But then... your calculations start producing unexpected errors. You've just stumbled into the realm of floating-point precision limitations.
 
-Hi there! I'm [Swayam Singh](https://github.com/SwayamInSync/), and for the past three months, I've been developing numpy_quaddtype with [Nathan Goldbaum](https://github.com/ngoldbaum), a true cross-platform quadruple precision datatype for NumPy. In this blog post, we'll explore why such high precision is sometimes necessary, dive into the technical aspects of numpy_quaddtype, and discuss its potential applications. Whether you're a quantum physicist, a financial modeler, or just curious about numerical computing, this post will give you insights about current precision limitations in NumPy and how we are resolving them.
+Hi there! I'm [Swayam Singh](https://github.com/SwayamInSync/), and for the past three months, I've been developing `numpy_quaddtype` with [Nathan Goldbaum](https://github.com/ngoldbaum), a true cross-platform quadruple precision datatype for NumPy. In this blog post, we'll explore why such high precision is sometimes necessary, dive into the technical aspects of `numpy_quaddtype`, and discuss its potential applications. Whether you're a quantum physicist, a financial modeler, or just curious about numerical computing, this post will give you insights about current precision limitations in NumPy and how we are resolving them.
 
 So buckle up and grab your favorite beverage (*might I suggest a Quad Espresso?*)
 
@@ -71,6 +71,170 @@ The `np.longdouble` dtype in NumPy has become a significant pain point for devel
 
 Given these issues, the NumPy community is at a crossroads. The current approach to `long double` support is proving to be increasingly problematic and difficult to maintain. It's clear that a new direction is needed to ensure the long-term stability and usability of NumPy across different platforms.
 
-As we move forward, the community is considering several potential solutions, from full deprecation to developing a true cross-platform quadruple precision dtype.
+As we move forward, the community is considering several potential solutions, <u><i>from full deprecation to developing a true cross-platform quadruple precision dtype</i></u>.
 
 In our next section, we'll explore how `numpy_quaddtype` aims to address these issues, promising a future where high-precision computing in Python doesn't come with a side of maintenance headaches.
+
+---
+
+## Introducing Numpy-QuadDType
+
+NumPy-QuadDType (`numpy_quaddtype`) is a custom data type (dtype) implementation for NumPy that provides true quadruple precision floating-point arithmetic across different platforms. This project aims to address the long-standing issues with `np.longdouble` by offering a consistent, high-precision floating-point type regardless of the underlying system architecture with also providing backwards compatibility of `long double`.
+
+The core of `numpy_quaddtype` is built around two key components:
+
+1. A scalar type `QuadPrecision` that represents individual quadruple-precision scalars.
+2. A NumPy dtype `QuadPrecDType` that allows these quadruple-precision scalars to be used in NumPy arrays and operations.
+
+What sets `numpy_quaddtype` apart is its dual-backend approach:
+
+- **SLEEF (SIMD Library for Evaluating Elementary Functions)**: This backend uses the `Sleef_quad` type from the SLEEF library, providing true 128-bit quadruple precision.
+- **Long Double**: This backend uses the native `long double` type, which can offer up to 80-bit precision on some systems allowing backwads compatibility with `np.longdouble`.
+
+:::info
+If the compiler natively supports IEEE 754 quad precision Floating Point type, then `Sleef_quad` is an alias of that data type. Otherwise, it defines a 128-bit data type for retaining a number in IEEE 754 Quad-Precision data format.
+:::
+
+This flexibility allows `numpy_quaddtype` to provide the best available precision across different platforms while maintaining a consistent interface.
+
+By addressing these goals, `numpy_quaddtype` not only solves the immediate issues surrounding `np.longdouble` but also paves the way for more robust and precise numerical computing in Python. In the following sections, we'll delve deeper into how these goals are achieved through the technical implementation of `numpy_quaddtype`.
+
+
+### The Inner Workings of `numpy_quaddtype`
+
+`numpy_quaddtype` is built on a flexible architecture that marries high precision with cross-platform compatibility. At its core lies the `QuadPrecisionObject`, a chameleon-like structure that can switch between two forms:
+
+```c=
+typedef union {
+    Sleef_quad sleef_value;
+    long double longdouble_value;
+} quad_value;
+
+typedef struct {
+    PyObject_HEAD
+    quad_value value;
+    QuadBackendType backend;
+} QuadPrecisionObject;
+```
+
+This dual-nature allows us to leverage the full 128-bit precision of SLEEF when available, while maintaining backwards compatibility with `np.longdouble`.
+
+To integrate seamlessly with NumPy, we've created the `QuadPrecDTypeObject`:
+
+```c=
+typedef struct {
+    PyArray_Descr base;
+    QuadBackendType backend;
+} QuadPrecDTypeObject;
+```
+
+This structure acts as a bridge, allowing our high-precision numbers to work harmoniously within NumPy arrays and operations.
+
+The backend selection is handled by a simple enum:
+
+```c=
+typedef enum {
+    BACKEND_INVALID = -1,
+    BACKEND_SLEEF,
+    BACKEND_LONGDOUBLE
+} QuadBackendType;
+```
+
+This flexibility enables `numpy_quaddtype` to provide optimal precision across different platforms while maintaining a consistent interface. Users can select their preferred `backend` at runtime:
+
+```python=
+import numpy as np
+import numpy_quaddtype as npq
+
+# Using SLEEF backend (default)
+x = npq.QuadPrecision(3.14159)
+x =npq.QuadPrecision(3.14159, backend='sleef')
+
+# Using longdouble backend
+y = npq.(2.71828, backend='longdouble')
+
+# Creating a NumPy array with QuadPrecision dtype
+z = np.array([x, y], dtype=npq.QuadPrecDType()) # SLEEF
+z = np.array([x, y], dtype=npq.QuadPrecDType("longdouble")) # SLEEF
+```
+
+Under the hood, `numpy_quaddtype` manages memory efficiently for both aligned and unaligned access. This is crucial for performance, especially when dealing with large arrays or complex computations. We've implemented specialized strided loop functions for various operations
+
+> Graphic here, illustrating aligned and unaligned memory
+
+**Casting operations** are another critical component. We've implemented a range of casts between QuadPrecision and other NumPy types, ensuring smooth interoperability:
+
+```python=
+import numpy as np
+import numpy_quaddtype as npq
+
+# NumPy to QuadPrecision
+numpy_array = np.array([1.5, 2.7, 3.14])
+quad_array = numpy_array.astype(npq.QuadPrecDType())
+
+# QuadPrecision to NumPy
+quad_value = QuadPrecision("3.14159265358979323846")
+numpy_float = np.float64(quad_value)
+
+# Mixing types in operations
+result = quad_array + numpy_array  # Automatically promotes to QuadPrecision
+```
+
+:::info
+For preserving precision during casting it is recommended to pass input as a string
+>QuadPrecision("3.14159265358979323846")
+:::
+
+working with QuadPrecision numbers is as straightforward as working with any other NumPy type. The casting operations handle the heavy lifting behind the scenes, allowing you to focus on your computations rather than type management.
+
+**Universal Functions (UFuncs)**
+
+`numpy_quaddtype` implements a wide range of universal functions, covering unary operations (like square root or exponential), binary operations (addition, multiplication, etc.), and comparison operations. These ufuncs are the backbone of NumPy's efficient array operations, and we've ensured that QuadPrecision numbers work seamlessly with them.
+Here's a taste of how you might use these ufuncs:
+
+```python=
+a = npq.QuadPrecision(2.0)
+b = npq.QuadPrecision(3.0)
+
+# Unary operation
+print(np.sqrt(a))  # QuadPrecision square root
+
+# Binary operation
+print(a + b)  # QuadPrecision addition
+
+# Comparison
+print(a < b)  # QuadPrecision comparison
+
+# Using with NumPy arrays
+quad_array = np.array([a, b], dtype=np.QuadPrecDType())
+print(np.exp(quad_array))  # Element-wise exponential
+```
+
+These operations look identical to standard NumPy operations, but under the hood, they're using the full precision of QuadPrecision numbers.
+
+**Precision in Printing: The Dragon4 Algorithm**
+
+When it comes to displaying QuadPrecision numbers, accuracy is paramount. That's where our customized implementation of the `Dragon4` algorithm comes in. `Dragon4` is a sophisticated algorithm for converting binary floating-point numbers to their decimal representations, ensuring that the printed value is as close as possible to the true value of the number in memory.
+
+- Without `Dragon4`
+    ```python=
+    a = npq.QuadPrecision("1.123124242")
+    print(a)
+
+    ## Output
+    1.123124242000000000000000000000000e+00
+    ```
+
+- With `Dragon4`
+    ```python=
+    a = npq.QuadPrecision("1.123124242")
+    print(a)
+
+    ## Output
+    1.123124242
+    ```
+
+Our implementation of `Dragon4` for `numpy_quaddtype` is a significant improvement over the previous approach used for `np.longdouble`. We've eliminated complex platform-specific branching that was used to handle different binary representations of `np.longdouble`, resulting in a more streamlined, maintainable and consistent output across different platforms.
+
+
+By addressing these various aspects - from low-level memory management to high-level NumPy integration and precise number representation - `numpy_quaddtype` provides a robust and flexible solution for high-precision arithmetic in Python. It offers the extreme accuracy you need for demanding computations, wrapped in the familiar and user-friendly NumPy interface you already know and love.
