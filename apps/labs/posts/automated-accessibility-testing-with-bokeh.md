@@ -37,9 +37,7 @@ An important part of Bokeh is mentioned in the definition, and it's the word
 actions/events in the browser (for example: clicking, dragging, or keystrokes).
 Bokeh visualizations have a built-in interaction layer that makes them suitable
 for situations where one might try to deduce additional information, explore
-hypothetical scenarios, or present to an audience. This makes Bokeh data
-visualizations perfect for web pages, applications, Jupyter notebooks, and
-dashboards.
+hypothetical scenarios, or present to an audience.
 
 ## What is Accessibility?
 
@@ -57,7 +55,7 @@ website is, the more people have a chance to use it.
 I mentioned earlier that my mentor and I had never worked with the Bokeh library
 before. For testing to be meaningful, we needed to know what could be tested,
 and to know what could be tested, we needed to understand the experience of
-using Bokeh. The first step was to install the Bokeh tool and follow the [user
+using Bokeh. The first step was to install Bokeh and follow the [user
 guide](https://docs.bokeh.org/en/latest/docs/user_guide.html) to get a sense for
 what the existing flow was. This was my first task: using Bokeh. On spending my
 first week completing the tutorial, I felt confident enough with my usage of
@@ -70,14 +68,16 @@ visualization tool more accessible let alone test for accessibility. The word
 from a web development background, I approached things with a similar mindset
 I'd use when trying to make a website more accessible and thought to myself:
 "Making a data visualization library accessible shouldn't be so difficult so
-testing for it should be a breeze". Well, a few weeks into the internship, I
-realized I couldn't have been more wrong. The fact that Bokeh code generated
-`html` files with plots that opened in a browser didn't mean the plots could be
-treated like a web page. I'll explain better in the section on "accessibility
-testing tools". Right away, there were so many questions about what to do, what
-to look out for, how to test, what would be an acceptable baseline for
-"success". These were conceptual questions, but the biggest one of them ended up
-being "How does Bokeh even work?"
+testing for it should be a breeze" because with web accessibility, issues could
+be fixed by changing the colors, adding labels or values to elements, or
+swapping out some elements for more compatible ones. Well, a few weeks into the
+internship, I realized I couldn't have been more wrong. The fact that Bokeh code
+generated `html` files with plots that opened in a browser didn't mean the plots
+could be treated like a web page. I'll explain better in the section on
+"accessibility testing tools". Right away, there were so many questions about
+what to do, what to look out for, how to test, what would be an acceptable
+baseline for "success". These were conceptual questions, but the biggest one of
+them ended up being "How does Bokeh even work?"
 
 ## How Bokeh works under the hood
 
@@ -89,22 +89,20 @@ can finally say I have a somewhat decent idea of how Bokeh works under the hood.
 
 The Bokeh codebase is huge, and the library was created at a time where lots of
 modern tools like bundlers and compilers weren't as good, so a lot of the
-components of the codebase are custom-built. A lot of answers to questions that
-come up when trying to contribute can only be answered by the maintainers,
-because the Bokeh documentation was tethered towards using it, rather than
-maintaining it". To the user who only wants to create a visualization, there
-isn't a need for more than surface-level understanding of how Bokeh works, no
-more than a phone user needs to know about how a phone works when trying to make
-a phone call. However, for someone who wants to contribute, you need a good
-understanding of things. It was at this point in time my perspective of the
-internship took a slight turn, and I realized I would spend more time doing
-research and gathering feedback than I would pushing code into the codebase. My
-mentor and I went back to the drawing board to define what the project goals
-would be, and we decided that a successful internship would start with (and I
-quote him literally): "taking things from 0 to 1." The Bokeh codebase didn't
-have tests for accessibility, so that would be the "0", and "1" would be to
-create an environment to run accessibility tests. Subsequently, the next step
-would be to actually write some tests and further refinements could follow.
+components of the codebase are custom-built. To the user who only wants to
+create a visualization, there isn't a need for more than surface-level
+understanding of how Bokeh works, no more than a phone user needs to know about
+how a phone works when trying to make a phone call. However, for someone who
+wants to contribute, you need a good understanding of things. It was at this
+point in time my perspective of the internship took a slight turn, and I
+realized I would spend more time doing research and gathering feedback than I
+would pushing code into the codebase. My mentor and I went back to the drawing
+board to define what the project goals would be, and we decided that a
+successful internship would start with (and I quote him literally): "taking
+things from 0 to 1." The Bokeh codebase didn't have tests for accessibility, so
+that would be the "0", and "1" would be to create an environment to run
+accessibility tests. Subsequently, the next step would be to actually write some
+tests and further refinements could follow.
 
 For how Bokeh actually works, picture a language translator helping two people
 converse. For proper communication, each speaker needs to use vocabulary that
@@ -144,17 +142,15 @@ We also decided that having [axe-core](https://github.com/dequelabs/axe-core) in
 the tests might prove useful. Axe-core is a tool that takes in a HTML node and
 scans it against the [Axe
 API](https://www.deque.com/axe/core-documentation/api-documentation/) for known
-Accessibility issues. I also fancied the idea that it would be more opinionated
-than Playwright. Yet again, even more hilariously, it had support for both
-Javascript and Python. I was going to have to play "Dora the explorer".
+Accessibility issues.
 
 I ended up starting with Python because it was closer to the intended usage of
-Bokeh (as a PyData tool) and had little friction for me, but after about a week
+Bokeh (as a Python tool) and had little friction for me, but after about a week
 of development, there were doubts on if it would be the better approach going
 forward. This was because generated plots and visualizations would be rendered
 in the browser and the code responsible for that would be in Javascript.
 Additionally, although the testing tools had Python equivalents, Python wasn't a
-first-class candidate for them.
+first-class candidate for Playwright.
 
 Javascript had first-class support for the testing tools and it was the language
 responsible for interactive rendering on the browser, so we ported to that. It
@@ -162,28 +158,57 @@ was just before switching to Javascript equivalents that I made an important
 discovery: Due to the very nature of Bokeh, axe-core would be useless for lots
 of plots. Remember I mentioned that despite generating HTML, Bokeh plots could
 not be treated in the same way as web pages? Well, web pages tend to have a
-structure, and elements with semantic meaning. However, Bokeh data
+structure, and elements with semantic meaning. However, most Bokeh data
 visualizations end up getting wrapped in an HTML `<canvas>` with some styling in
 the [Shadow
 DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM),
-which is something axe does not know how to work with. This is a half-truth. The
-complete truth is that certain plots (or documents) rely on extra components or
-widgets like sliders and dropdowns which are rendered outside the canvas and are
-thus testable with the Axe API. Axe-core cannot check anything in a `<canvas>`.
-This put me in a situation where I would have to report [my
+which is something axe does not know how to work with. The Bokeh data
+visualizations that do in fact break out of this norm rely on extra components
+or widgets like sliders and dropdowns which are rendered outside the canvas and
+are thus testable with the Axe API. Let's look at some images:
+
+1. An [image URL
+   scatter](https://docs.bokeh.org/en/latest/docs/examples/basic/scatters/image_url.html)
+   from Bokeh's docs showing a visualization wrapped in a `<canvas>` element
+   <img alt="Image of a URL scatter data visualization from Bokeh's
+   documentation. It shows a series of bokeh logos scattered across the plot."
+   src="/posts/automated-accessibility-testing-with-bokeh/url_scatter.png"
+   style={{padding: '10px 20px'}}/>
+
+2. A [colour
+   scatter](https://docs.bokeh.org/en/latest/docs/examples/basic/scatters/color_scatter.html)
+   from Bokeh's docs with a toolbar and a highlighted accessibility issue. <img
+   alt="Image of a colour scatter data visualization from Bokeh's documentation.
+   It shows a series of coloured dots and has a toolbar on the right side with a
+   bokeh logo highlighted for triggering an accessibility issue."
+   src="/posts/automated-accessibility-testing-with-bokeh/color_scatter.png"
+   style={{padding: '10px 20px'}}/>
+
+3. A [callback
+   slider](https://docs.bokeh.org/en/latest/docs/examples/interaction/js_callbacks/slider.html)
+   from Bokeh's docs and its highlighted accessibility issue. <img alt="Image of
+   a js callback data visualization from Bokeh's documentation. It shows a
+   curved line in a plot and some interactive elements on the right side, one of
+   which is a slider that has been highlighted for triggering an accessibility
+   issue."
+   src="/posts/automated-accessibility-testing-with-bokeh/callback_slider.png"
+   style={{padding: '10px 20px'}}/>
+
+Axe-core cannot check anything in a `<canvas>` so the first image would not
+produce any problems whatsoever, whereas the other two would produce
+accessibility errors. This led me to writing a more detailed report of [my
 findings](https://github.com/bokeh/bokeh/discussions/14057#discussioncomment-10674506)
-and ask the larger Bokeh community whether they felt adding axe-core was
-worthwhile.
+and asking the larger Bokeh community whether they felt adding axe-core was
+worthwhile, or whether fixing the identified issues was a good enough action.
 
 All of this was happening while I was simultaneously facing some challenges.
 
 ## Challenges
 
-A small, but just as important challenge I faced was internal (within myself). I
-had a problem with not producing as much code. For some reason, I always equated
-productivity with having lots of lines of code and PRs waiting to be reviewed.
-At some point, there was some internal conflict within myself because I thought
-I wasn't doing enough. The idea of slow research was new to me and it took some
+The first challenge I faced was internal (within myself). I had a problem with
+not producing as much code. I have always equated productivity with having lots
+of lines of code and PRs waiting to be reviewed. At some point, I thought I
+wasn't doing enough. The idea of slow research was new to me and it took some
 getting used to, but thankfully I got around to doing more studying than coding
 for the purpose of this internship. It also paid off because I read so many
 things and got new knowledge in my repertoire. This leads me to the bigger
@@ -210,52 +235,77 @@ able to both run in the terminal, and on the devtools server. The `unit` and
 and/or write in different projects because they had `describe` blocks and
 `assert` statements. Basing this assumption on just those two facts, I felt the
 location for `playwright` tests would have to model either of those two, to run
-on both terminal & devtools, as well as with assertions. It was on closer
+on both terminal & devtools (which is Bokeh's server for running tests and
+viewing output in a browser), as well as with assertions. It was on closer
 inspection with my mentor in a pair programming session that we discovered that
 the `codebase` sub-directory used core node modules, and we decided to base
-playwright off that, but imported the necessary parts from `unit` and
+playwright off that, but followed the pattern of written tests from `unit` and
 `integration` that would let the assertions and descriptions work as planned.
 This last part had to be done because Bokeh has its own custom-built test
 tooling, similar in syntax to [Jest](https://jestjs.io/), but implemented
 differently. We tested to see if things worked, and they did. We cleaned up the
-code, committed, pushed, and both stood GitHub PR comment section.
+code, committed, pushed, and both stood by the GitHub PR comment section.
 
 On occasion, a question would come up in the PR comment section that would seem
-a bit confusing to me, but then he would clarify what the person was trying to
-ask/communicate, giving me tips on how to implement the suggestions from
-reviewers. It was at that point in time I could really say: "We'd done something
-truly amazing for Bokeh."
+a bit confusing to me, so I would ask my mentor and he would clarify what the
+person was trying to ask/communicate, giving me tips on how to implement the
+suggestions from reviewers. The feedback brought about some refinements on my
+end, and answered questions on the end of the maintainers. Eventually, there was
+a general agreement with the status of things. It was at that point in time I
+could really say: "We'd done something truly amazing for Bokeh."
 
 ## Where we currently are
 
 A testing environment needs tests, and to test what we'd done, we needed a
 variety of valid data visualizations. Luckily, Bokeh very generously had over
-100 example plots in the documentation that we could test against. Testing
-against the documentation came with a few challenges: one of which was the fact
-that the documentation would always need to be built and served locally before
-we could run axe-core tests against it.
+100 example plots in the documentation that we could test against. A caveat to
+testing against the documentation was the fact that it would always need to be
+built and served locally before we could run axe-core tests against it.
+
+When the internship started, we had the following
+[project](https://github.com/Quansight-Labs/open-source-internships/issues/31)
+outcomes:
+
+1. Familiarizing with Bokeh concepts.
+2. Initial implementation of automated testing with Playwright and Axe-core.
+3. Building on existing tests.
+4. Integrating tests with Bokeh's CI.
+5. Adding relevant test documentation.
+
+There were a few limitations to achieving all these objectives. The limitations
+were:
+
+- Complexities of the Bokeh codebase that required weeks of knowledge share
+  sessions.
+- The `<canvas>` element being something that couldn't properly be tested.
+- Initial difficulty in getting Playwright and Axe-core to run in the tests.
+- Time constraints.
+
+We were, however, able to achieve the following:
+
+- An audit and
+  [summary](https://github.com/bokeh/bokeh/discussions/14057#discussioncomment-10674506)
+  of ~113 doc examples that were run through axe-core.
+- Familiarity with the Bokeh codebase.
+- An implementation of tests that support Playwright and Axe-core.
+- A provision for creating new integration and unit tests and marking as
+  "accessibility-focused".
 
 Overall, our efforts towards going from 0 to 1 ended up looking like this [PR
-that adds playwright.](https://github.com/bokeh/bokeh/pull/14032)
+that adds Playwright.](https://github.com/bokeh/bokeh/pull/14032)
 
 ## Progressive work going forward
 
 Going from 0 to 1 was a good start, but to go from 1 to n, there are more things
 that can be done in Bokeh. In the future, we could:
 
-- Add Integration snapshot tests against regressions and known failures. This
-  would mostly be for accessibility issues found by manual means of testing
-  (rather than through tools), where the problems are of a visual nature. A
-  snapshot could test that future updates do not resurface accessibility
-  problems that have been solved.
+- Add Integration snapshot tests that will be marked as known failures.
 - Add CI checks for accessibility tests. This would prevent commits from being
   merged if they will change Bokeh data visualizations in a way that triggers
   accessibility issues.
 - Couple things a little tighter with the existing convention. In Bokeh,
   Javascript tests are run with a specific type of command: `node make test:suite_name`. There are certain commands for pairing types of tests
-  together, and these commands could be worked upon or modified as needed. Tests
-  could also use more Bokeh codebase's internal alternatives than just
-  assertions and descriptions.
+  together, and these commands could be worked upon or modified as needed.
 - Have a labeling system to be able to run only "accessibility-focused" tests at
   will. In Bokeh, you can run both individual and group tests using a search
   string command. The syntax is: `node make test:suite_name -k "search string"`.
