@@ -91,9 +91,9 @@ What sets `numpy_quaddtype` apart is its dual-backend approach:
 - **SLEEF (SIMD Library for Evaluating Elementary Functions)**: This backend uses the `Sleef_quad` type from the SLEEF library, providing true 128-bit quadruple precision.
 - **Long Double**: This backend uses the native `long double` type, which can offer up to 80-bit precision on some systems allowing backwads compatibility with `np.longdouble`.
 
-:::info
-If the compiler natively supports IEEE 754 quad precision Floating Point type, then `Sleef_quad` is an alias of that data type. Otherwise, it defines a 128-bit data type for retaining a number in IEEE 754 Quad-Precision data format.
-:::
+
+> If the compiler natively supports IEEE 754 quad precision Floating Point type, then `Sleef_quad` is an alias of that data type. Otherwise, it defines a 128-bit data type for retaining a number in IEEE 754 Quad-Precision data format.
+
 
 This flexibility allows `numpy_quaddtype` to provide the best available precision across different platforms while maintaining a consistent interface.
 
@@ -104,7 +104,7 @@ By addressing these goals, `numpy_quaddtype` not only solves the immediate issue
 
 `numpy_quaddtype` is built on a flexible architecture that marries high precision with cross-platform compatibility. At its core lies the `QuadPrecisionObject`, a chameleon-like structure that can switch between two forms:
 
-```c=
+```c
 typedef union {
     Sleef_quad sleef_value;
     long double longdouble_value;
@@ -121,7 +121,7 @@ This dual-nature allows us to leverage the full 128-bit precision of SLEEF when 
 
 To integrate seamlessly with NumPy, we've created the `QuadPrecDTypeObject`:
 
-```c=
+```c
 typedef struct {
     PyArray_Descr base;
     QuadBackendType backend;
@@ -132,7 +132,7 @@ This structure acts as a bridge, allowing our high-precision numbers to work har
 
 The backend selection is handled by a simple enum:
 
-```c=
+```c
 typedef enum {
     BACKEND_INVALID = -1,
     BACKEND_SLEEF,
@@ -142,7 +142,7 @@ typedef enum {
 
 This flexibility enables `numpy_quaddtype` to provide optimal precision across different platforms while maintaining a consistent interface. Users can select their preferred `backend` at runtime:
 
-```python=
+```python
 import numpy as np
 import numpy_quaddtype as npq
 
@@ -164,7 +164,7 @@ Under the hood, `numpy_quaddtype` manages memory efficiently for both aligned an
 
 **Casting operations** are another critical component. We've implemented a range of casts between QuadPrecision and other NumPy types, ensuring smooth interoperability:
 
-```python=
+```python
 import numpy as np
 import numpy_quaddtype as npq
 
@@ -180,10 +180,8 @@ numpy_float = np.float64(quad_value)
 result = quad_array + numpy_array  # Automatically promotes to QuadPrecision
 ```
 
-:::info
-For preserving precision during casting it is recommended to pass input as a string
->QuadPrecision("3.14159265358979323846")
-:::
+> For preserving precision during casting it is recommended to pass input as a string
+
 
 working with QuadPrecision numbers is as straightforward as working with any other NumPy type. The casting operations handle the heavy lifting behind the scenes, allowing you to focus on your computations rather than type management.
 
@@ -192,7 +190,7 @@ working with QuadPrecision numbers is as straightforward as working with any oth
 `numpy_quaddtype` implements a wide range of universal functions, covering unary operations (like square root or exponential), binary operations (addition, multiplication, etc.), and comparison operations. These ufuncs are the backbone of NumPy's efficient array operations, and we've ensured that QuadPrecision numbers work seamlessly with them.
 Here's a taste of how you might use these ufuncs:
 
-```python=
+```python
 a = npq.QuadPrecision(2.0)
 b = npq.QuadPrecision(3.0)
 
@@ -217,7 +215,7 @@ These operations look identical to standard NumPy operations, but under the hood
 When it comes to displaying QuadPrecision numbers, accuracy is paramount. That's where our customized implementation of the `Dragon4` algorithm comes in. `Dragon4` is a sophisticated algorithm for converting binary floating-point numbers to their decimal representations, ensuring that the printed value is as close as possible to the true value of the number in memory.
 
 - Without `Dragon4`
-    ```python=
+    ```python
     a = npq.QuadPrecision("1.123124242")
     print(a)
 
@@ -226,7 +224,7 @@ When it comes to displaying QuadPrecision numbers, accuracy is paramount. That's
     ```
 
 - With `Dragon4`
-    ```python=
+    ```python
     a = npq.QuadPrecision("1.123124242")
     print(a)
 
