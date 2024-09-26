@@ -26,9 +26,13 @@ previously worked with the codebase prior to this internship.
 
 ## What is Bokeh?
 
-Bokeh is a Python library for creating interactive visualizations for modern web
-browsers. It lets you build beautiful graphics, from plots to dashboards. An
-important part of Bokeh is mentioned in the definition, and it's the word
+To quote [Bokeh's documentation website](https://docs.bokeh.org/en/latest/):
+
+> Bokeh is a Python library for creating interactive visualizations for modern
+> web browsers. It helps you build beautiful graphics, ranging from simple plots
+> to complex dashboards with streaming datasets.
+
+An important part of Bokeh is mentioned in the definition, and it's the word
 "interactive". Bokeh visualizations have a built-in interaction layer that makes
 them suitable for situations where one might try to deduce additional
 information, explore hypothetical scenarios, or present to an audience. This
@@ -64,27 +68,27 @@ but the biggest one of them ended up being "How does Bokeh even work?"
 ## How Bokeh works under the hood
 
 After about 6 Wednesdays of knowledge share sessions with Bokeh maintainers, ~7
-pair programming sessions with my mentor, 2
-fresh repo installations, 10's of hours spent reading documentation & consulting
-tutorial materials, and weeks of asking myself "what is going on in this
-codebase?", I can finally say I have a somewhat decent idea of how Bokeh works
-under the hood.
+pair programming sessions with my mentor, 2 fresh repo installations, 10's of
+hours spent reading documentation & consulting tutorial materials, and weeks of
+asking myself "what is going on in this codebase?", I can finally say I have a
+somewhat decent idea of how Bokeh works under the hood.
 
 The Bokeh codebase is huge, and the library was created at a time where lots of
 modern tools like bundlers and compilers weren't as good, so a lot of the
-components of the codebase are custom-built. Paraphrasing; "a lot of answers to
-questions can only be found in the minds of the maintainers" because you can
-only document so much at the early stages of a project. To the user who only
-wants to create a visualization, there isn't a need for more than surface-level
-understanding of how Bokeh works, no more than a phone user needs to know about
-how a phone works when trying to make a phone call. However, for someone who
-wants to contribute, you need a good understanding of things. It was at this
-point in time my internship took a slight turn, and I realized I would spend
-more time doing research and gathering feedback than I would pushing code into
-the codebase. My mentor and I went back to the drawing board to define what the
-project goals would be, and we decided that a successful internship would be
-(and I quote him literally): "taking things from 0 to 1." We would focus on
-creating an environment to run accessibility tests.
+components of the codebase are custom-built. A lot of answers to questions
+that come up when trying to contribute can only be answered by the maintainers,
+because the Bokeh documentation was tethered towards using it, rather than
+maintaining it". To the user who only wants to create a visualization, there
+isn't a need for more than surface-level understanding of how Bokeh works, no
+more than a phone user needs to know about how a phone works when trying to make
+a phone call. However, for someone who wants to contribute, you need a good
+understanding of things. It was at this point in time my internship took a
+slight turn, and I realized I would spend more time doing research and gathering
+feedback than I would pushing code into the codebase. My mentor and I went back
+to the drawing board to define what the project goals would be, and we decided
+that a successful internship would be (and I quote him literally): "taking
+things from 0 to 1." We would focus on creating an environment to run
+accessibility tests.
 
 For how Bokeh actually works, picture a language translator helping two people
 converse. For proper communication, each speaker needs to use vocabulary that
@@ -94,8 +98,7 @@ is the driver behind the interaction on the browser, Python is the tool for the
 backend, and the complexities of the codebase come from transferring data,
 keeping things balanced, and rendering.
 
-Here's a picture from their [SciPy 2023
-tutorial](https://www.youtube.com/watch?v=G0Yc3ck4lC8) to illustrate how data
+Here's a picture from the Bokeh docs on [contributing to BokehJs](https://docs.bokeh.org/en/latest/docs/dev_guide/bokehjs.html#contributor-guide-bokehjs) to illustrate how data
 flows:
 
 <img alt="Image of Bokeh data model flow represented as a flow chart moving from
@@ -103,8 +106,8 @@ Python to JSON, to Javascript, and then to final HTML output"
 src="/posts/automated-accessibility-testing-with-bokeh/bokeh_bokehjs.jpg"
 style={{padding: '10px 20px'}}/>
 
-Now that I knew the inner workings and where things fit, I had an idea of how
-to start the testing. This, however, brought up the question of "what" to test
+Now that I knew the inner workings and where things fit, I had an idea of how to
+start the testing. This, however, brought up the question of "what" to test
 things with.
 
 ## Accessibility testing tools
@@ -141,28 +144,56 @@ findings](https://github.com/bokeh/bokeh/discussions/14057#discussioncomment-106
 and ask the larger Bokeh community whether they felt adding axe-core was
 worthwhile.
 
-All of this was happening while I was simultaneously facing my biggest stumbling
-block yet: "the python in the room".
+All of this was happening while I was simultaneously facing some challenges.
 
-## The Python in the room
+## Challenges
 
-This was no elephant, and it certainly wasn't python-related, but it was a big
-problem for me. Owing to the custom nature of all things Bokeh, I had a problem
-with getting the environment to allow axe-core to run. Axe-core required core
-modules from Node, and Bokeh had a stripped away version of node for the most
-part. I tend to like solving problems by myself with minimal hand-holding, but
-this was one of those scenarios that I just couldn't seem to fix. The ways
+A small, but just as important challenge I faced was internal (within myself). I
+had a problem with not producing as much code. For some reason, I always equated
+productivity with having lots of lines of code and PRs waiting to be reviewed.
+At some point, there was some internal conflict within myself because I thought
+I wasn't doing enough. The idea of slow research was new to me and it took some
+getting used to, but thankfully I got around to doing more studying than coding
+for the purpose of this internship. It also paid off because I read so many
+things and got new knowledge in my repertoire. This leads me to the bigger
+challenge.
+
+Owing to the custom nature of all things Bokeh, I had a problem with getting the
+environment to allow axe-core to run. Axe-core required core modules from Node,
+and Bokeh had a stripped away version of node for the most part. I tend to like
+solving problems by myself with minimal hand-holding, but this was one of those
+scenarios that I just couldn't seem to fix without asking for help. The ways
 around the problem looked even more problematic, and I found myself questioning
-my abilities.
+my abilities. For this problem, experience did make all the difference and my
+mentor helped me with a part of the codebase we could draw inspiration from. In
+one of our pair programming sessions, he said for us to look more closely at all
+the directories within the Javascript test directory.
 
-This was one of those moments where experience makes all the difference, and my
-mentor helped me with some other parts of the codebase we could draw inspiration
-from. He found something in one of our pair programming sessions, we built
-something that worked, tested it, pushed, and he even stood guard at the GitHub
-PR comment section, answering questions he knew I might struggle to answer, and
-giving me tips on how to implement the suggestions from reviewers. It was at
-that point in time I could really say: "We'd done something truly amazing for
-Bokeh."
+We found out that I had been looking at the test setup the wrong way. The bokeh
+test folder has the following [sub
+folders](https://docs.bokeh.org/en/latest/docs/dev_guide/testing.html#select-specific-bokehjs-tests):
+`baselines`, `codebase`, `defaults`, `devtools`, `integration`, and `unit`. The
+`unit`, `defaults`, and `integration` categories of tests were designed to be
+able to both run in the terminal, and on the devtools server. The `unit` and
+`integration` tests looked the most like tests that one would normally see
+and/or write in different projects because they had `describe` blocks and
+`assert` statements. Basing this assumption on just those two facts, I felt the
+location for `playwright` tests would have to model either of those two, to run
+on both terminal & devtools, as well as with assertions. It was on closer
+inspection with my mentor in a pair programming session that we discovered that
+the `codebase` sub-directory used core node modules, and we decided to base
+playwright off that, but imported the necessary parts from `unit` and
+`integration` that would let the assertions and descriptions work as planned.
+This last part had to be done because Bokeh has its own custom-built test
+tooling, similar in syntax to [Jest](https://jestjs.io/), but implemented
+differently. We tested to see if things worked, and they did. We cleaned up the
+code, committed, pushed, and both stood GitHub PR comment section.
+
+On occasion, a question would come up in the PR comment section that would seem
+a bit confusing to me, but then he would clarify what the person was trying to
+ask/communicate, giving me tips on how to implement the suggestions from
+reviewers. It was at that point in time I could really say: "We'd done something
+truly amazing for Bokeh."
 
 ## Where we currently are
 
@@ -171,21 +202,11 @@ variety of valid data visualizations. Luckily, Bokeh very generously had over
 100 example plots in the documentation that we could test against. Testing
 against the documentation came with a few challenges: one of which was the fact
 that the documentation would always need to be built and served locally before
-we could run axe-core tests against it. Bokeh also had certain commands we
-would have to model new ones after.
+we could run axe-core tests against it. Bokeh also had certain commands we would
+have to model new ones after.
 
-Overall, our efforts towards going from 0 to 1 ended up looking like this [PR that adds playwright.](https://github.com/bokeh/bokeh/pull/14032)
-
-## Challenges
-
-Momentarily keeping aside "the python in the room", I had a problem with not
-producing as much code. For some reason, I always equated productivity with
-having lots of lines of code and PRs waiting to be reviewed. At some point,
-there was some internal conflict within myself because I thought I wasn't doing
-enough. The idea of slow research was new to me and it took some getting used
-to, but thankfully I got around to doing more studying than coding for the
-purpose of this internship. It also paid off because I read so many things and
-got new knowledge in my repertoire.
+Overall, our efforts towards going from 0 to 1 ended up looking like this [PR
+that adds playwright.](https://github.com/bokeh/bokeh/pull/14032)
 
 ## Progressive work going forward
 
@@ -204,7 +225,7 @@ that can be done in Bokeh. In the future, we could:
 
 Several collaborative efforts led to the success of my internship work. I'm
 grateful to the following people for making the journey smoother: My mentor
-Gabriel, Tania and Pavithra for periodic information and pointers,  Melissa for the periodic checkups and feedback
-loop, Bokeh
-maintainers Mateusz and Bryan, the Bokeh community for being welcoming, and Quansight for giving me an
-enabling environment to do some great work.
+Gabriel, Tania and Pavithra for periodic information and pointers, Melissa for
+the periodic checkups and feedback loop, Bokeh maintainers Mateusz and Bryan,
+the Bokeh community for being welcoming, and Quansight for giving me an enabling
+environment to do some great work.
