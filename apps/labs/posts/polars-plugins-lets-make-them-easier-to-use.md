@@ -66,7 +66,7 @@ Complex constructs from a _very simple_ rule-set.
       alt="GIF of a terminal displaying a pattern formed by filled or empty cells alternating between two states"
       style={{ display: 'inline-block' }}
     />
-    <figcaption>Toad pattern</figcaption> 
+    <figcaption>Game-of-life pattern, alternating between two states</figcaption> 
 </figure>
 
 What needed to be done? I had to get the rule-set right, and manage to advance the simulation (iterate the rules).
@@ -83,7 +83,7 @@ After finishing those, the magic took place, the simulation was happening before
       alt="GIF of a dataframe displaying a pattern formed by 1's and 0's alternating between two states"
       style={{ display: 'inline-block' }}
     />
-    <figcaption>Toad pattern, in a dataframe</figcaption> 
+    <figcaption>The same game-of-life pattern as before, this time in a dataframe</figcaption> 
 </figure>
 
 During that week, I also learned about [Narwhals](https://narwhals-dev.github.io/narwhals/), an amazing project started by Marco to provide DataFrame agnosticism when writing libraries.
@@ -103,13 +103,13 @@ As time went by, I explored and created more plugins, like a URL parser (making 
 I learned about optimizations that could be applied to my code, profiled memory and runtime of the things I wrote.
 The wind was good, and things were sailing well, but I was anxious to make progress in the tutorial.
 
-Eventually the opportunity presented itself: writing a section about allocations for the `String`s chapter.
+Eventually the opportunity presented itself: writing a [section about allocations](https://marcogorelli.github.io/polars-plugins-tutorial/stringify/#so-lets-think-about-allocations) for the `String`s chapter.
 While tasked with this, I also had the chance to work on a function that would end up in the Polars code itself: `binary_elementwise_into_string_amortized`.
 I never imagined doing these things while having such a basic level of Rust (I'm still afraid of lifetimes!), but somehow it was possible... what a third week!
 
 The days were passing and fortunately I was seeing constant progress of my end-goal: improving the tutorial.
-I wrote a new chapter about a possible pitfall, in which users could be tempted to allocate and return a `Vec<Option<T>>` instead of just `Vec<T>`,
-then started writing about... guess what? The Game of Life I made in the first week! Yes, that would find its way into the tutorial as well, who would've thought!?
+I wrote a [new chapter](https://marcogorelli.github.io/polars-plugins-tutorial/vec_of_option/) about a possible pitfall, in which users could be tempted to allocate and return a `Vec<Option<T>>` instead of just `Vec<T>`,
+then started writing about... guess what? The Game of Life I made in the first week! Yes, that would [find its way into the tutorial as well](https://marcogorelli.github.io/polars-plugins-tutorial/life_pt1/), who would've thought!?
 This was a very step-by-step, holding-hands kind of chapter, with all the Rust and Python needed to make the plugin happen.
 I was concerned about improving the tutorial and forgetting the "make it easier to use", so I was extra careful to write that chapter in a very beginner friendly way.
 
@@ -117,7 +117,7 @@ Then I got sick. Happens to all of us, but what a frustrating thing, not being a
 It was annoying and took longer than I expected, but fortunately it wasn't anything serious, and I was able to pick up from where I left after a week of rest, give or take.
 
 The allocations section I wrote was finally merged - we were waiting for some functions to be merged to Polars before publishing it, otherwise we'd need to update it shortly after writing the section.
-I started reading, then writing about arrays (which ended up being merged as a whole chapter), drafting ideas for the very text you're reading, and studying a bit of Narwhals and Dask, to be able to contribute more than just test-related PRs.
+I started reading, then writing about arrays (which ended up being [merged as a whole chapter](https://marcogorelli.github.io/polars-plugins-tutorial/arrays/)), drafting ideas for the very text you're reading, and studying a bit of Narwhals and Dask, to be able to contribute more than just test-related PRs.
 
 ## Working at Quansight Labs
 
@@ -212,6 +212,29 @@ This went until the very end, which was sadly approaching.
 
 It was time to say goodbye, so I started wrapping things up, which unfortunately meant not finishing my work on IO plugins. Yes, there is another kind of plugins! But this is a very recent (as of this writing) and undocumented area. It should be enough to say I did manage to explore and [write](https://github.com/condekind/io_plugin) some IO plugins, but there wasn't enough time to write about them in an entire new section of Marco's tutorial (or another tutorial altogether). On the bright side, there's a lot of work for new interns in the next batches of the Open Source internship program!
 
+Before the end of the internship, we even got some praise online!
+
+<figure style={{ textAlign: 'center' }}>
+    <img 
+      src="/posts/polars-plugins-lets-make-them-easier-to-use/praise0.png"
+      alt="Diagram for struct memory layout, showing three arrows coming out of the word fields, each pointing to a separate, contiguous area of memory"
+      style={{ display: 'inline-block' }}
+    />
+</figure>
+
+<figure style={{ textAlign: 'center' }}>
+    <img 
+      src="/posts/polars-plugins-lets-make-them-easier-to-use/praise1.png"
+      alt="Diagram for struct memory layout, showing three arrows coming out of the word fields, each pointing to a separate, contiguous area of memory"
+      style={{ display: 'inline-block' }}
+    />
+</figure>
+
+And a user [wrote on Linkedin](https://www.linkedin.com/posts/tom-burdge-734709223_harley-activity-7238586735918477312-ymTg):
+
+> [...] I have published three polars plugins to pyipi now. None would be possible without the excellent tutorial by Marco Gorelli of Quansight labs.
+
+I'm glad I was able to help them, and hopefully many others to come.
 This is the end of my Summer journey in open source. I hope you enjoyed reading it as much as I enjoyed writing it.
 
 Kind regards,  
