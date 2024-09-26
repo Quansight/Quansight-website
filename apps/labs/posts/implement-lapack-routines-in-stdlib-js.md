@@ -1,8 +1,8 @@
 ---
-title: "Implement LAPACK routines in stdlib-js"
-authors: [Pranavchiku]
+title: "Implement LAPACK routines in stdlib"
+authors: [pranav-goswami]
 published: September 30, 2024
-description: "Implement various LAPACK routines in standard of javascript for numerical computing"
+description: "Implementing LAPACK routines for numerical computation in web applications"
 category: [stdlib, mathematics, linear-algebra, numerical-computing]
 featuredImage:
   src: /posts/hello-world-post/featured.png
