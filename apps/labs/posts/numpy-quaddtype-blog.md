@@ -1,5 +1,5 @@
 ---
-title: "Numpy QuadDType: A New Data Type for Quadruple Precision"
+title: "Numpy QuadDType: Quadruple Precision for Everyone"
 authors: [swayam-singh]
 published: September 30, 2024
 description: "Introducing the new data type for Numpy providing cross-platform support of quadruple precision."
