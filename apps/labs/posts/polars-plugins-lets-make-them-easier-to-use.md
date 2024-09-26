@@ -32,9 +32,11 @@ Hop in, grab your popcorn, fasten your seatbelts.
 
 ## What are Polars plugins?
 
+Polars is a DataFrame library made in Rust and distributed in Python, R and NodeJS (besides Rust itself). How about plugins?
+
 > Expression plugins are the preferred way to create user defined functions. They allow you to compile a Rust function and register that as an expression into the Polars library. - [Official docs](https://docs.pola.rs/user-guide/expressions/plugins/)
 
-User defined functions are quite important in the context of DataFrames. Polars is made in Rust and distributed as a library for Python, R and NodeJS (besides Rust itself). Users of these other languages might be tempted to write User Defined Functions (UDFs) in these languages, since it's how they're using Polars, not to mention the comfort zone factor. However, plugins are a way to possibly increase the performance of these functions by orders of magnitude! By writing UDFs in Rust (as expression plugins), Polars is able to work more efficiently than if they were defined in the languages mentioned above. Expression plugins are _a_ type of plugin, and the main target of this article - whenever you read plugin, I'm referring to expression plugins, unless stated otherwise. The other type is called an IO plugin, more on that later.
+User defined functions are quite important in the context of DataFrames. Users of these other languages (Python, R, JS) might be tempted to write User Defined Functions (UDFs) in the language they're already using Polars with. However, plugins are a way to possibly increase the performance of these functions by orders of magnitude! By writing UDFs in Rust (as expression plugins), Polars is able to work more efficiently than if they were defined in the languages mentioned above. Expression plugins are _a_ type of plugin, and the main target of this article - whenever you read plugin, I'm referring to expression plugins, unless stated otherwise. The other type is called an IO plugin, more on that later.
 
 ---
 
