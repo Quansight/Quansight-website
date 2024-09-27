@@ -412,7 +412,7 @@ These past three months have been an extraordinary journey of learning and innov
 
 Special appreciation goes to [Ralf Gommers](https://github.com/rgommers), [Melissa Weber Mendonça](https://github.com/melissawm) and whole Quansight community for providing this unique opportunity to contribute to NumPy. This experience has been both humbling and inspiring, and I'm excited to see how `numpy_quaddtype` will evolve and be utilized by the community in the future.
 
-> **P.S.** I will be actively involved in this project, so please feel free to ping me with any questions, suggestions, or contributions.
+> In future, I will be actively involved in this project, so please feel free to ping me with any questions, suggestions, or contributions.
 
 ## References
 - [Numpy-User-Dtype Repository](https://github.com/numpy/numpy-user-dtypes)
