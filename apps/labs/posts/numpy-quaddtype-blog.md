@@ -21,22 +21,23 @@ So buckle up and grab your favorite beverage (*might I suggest a Quad Espresso?*
 ---
 ## Table of Contents
 
-1. [The Long Double Dilemma in NumPy](#the-long-double-dilemma-in-numpy)
-2. [Introducing Numpy-QuadDType](#introducing-numpy-quaddtype)
-   - [The Inner Workings of `numpy_quaddtype`](#the-inner-workings-of-numpy_quaddtype)
-   - [Casting operations](#casting-operations)
-   - [Universal Functions (UFuncs)](#universal-functions-ufuncs)
-   - [Precision in Printing: The Dragon4 Algorithm](#precision-in-printing-the-dragon4-algorithm)
-   - [Precision and Accuracy](#precision-and-accuracy)
-     - [SLEEF Backend Precision](#sleef-backend-precision)
-     - [Long Double Backend Precision](#long-double-backend-precision)
-   - [ULP Analysis](#ulp-analysis)
-3. [Testing and Applications](#testing-and-applications)
-   - [Mandelbrot Set: Exploring the Depths of Chaos](#mandelbrot-set-exploring-the-depths-of-chaos)
-   - [Quantum Harmonic Oscillator for Diatomic Molecules](#quantum-harmonic-oscillator-for-diatomic-molecules)
-4. [Current Status And Next Steps](#current-status-and-next-steps)
-5. [Conclusion](#conclusion)
-6. [References](#references)
+- [Table of Contents](#table-of-contents)
+- [The Long Double Dilemma in NumPy](#the-long-double-dilemma-in-numpy)
+- [Introducing Numpy-QuadDType](#introducing-numpy-quaddtype)
+  - [The Inner Workings of `numpy_quaddtype`](#the-inner-workings-of-numpy_quaddtype)
+  - [Casting operations](#casting-operations)
+  - [Universal Functions (UFuncs)](#universal-functions-ufuncs)
+  - [Precision in Printing: The Dragon4 Algorithm](#precision-in-printing-the-dragon4-algorithm)
+  - [Precision and Accuracy](#precision-and-accuracy)
+    - [SLEEF Backend Precision](#sleef-backend-precision)
+    - [Long Double Backend Precision](#long-double-backend-precision)
+  - [ULP Analysis](#ulp-analysis)
+- [Testing and Applications](#testing-and-applications)
+  - [Mandelbrot Set: Exploring the Depths of Chaos](#mandelbrot-set-exploring-the-depths-of-chaos)
+  - [Quantum Harmonic Oscillator for Diatomic Molecules](#quantum-harmonic-oscillator-for-diatomic-molecules)
+- [Current Status And Next Steps](#current-status-and-next-steps)
+- [Conclusion](#conclusion)
+- [References](#references)
 
 ---
 ## The Long Double Dilemma in NumPy
@@ -168,51 +169,56 @@ typedef enum {
 This flexibility enables `numpy_quaddtype` to provide optimal precision across different platforms while maintaining a consistent interface. Users can select their preferred `backend` at runtime:
 
 ```python
-import numpy as np
-import numpy_quaddtype as npq
+>>> import numpy as np
+>>> import numpy_quaddtype as npq
 
 # Using SLEEF backend (default)
-x = npq.QuadPrecision(3.14159)
-x =npq.QuadPrecision(3.14159, backend='sleef')
+>>> x = npq.QuadPrecision(3.5)
+>>> x = npq.QuadPrecision(3.5, backend='sleef')
+>>> repr(x)
+QuadPrecision('3.5e+000', backend='sleef')
 
 # Using longdouble backend
-y = npq.(2.71828, backend='longdouble')
+>>> y = npq.QuadPrecision(2.5, backend='longdouble')
+>>> repr(y)
+QuadPrecision('2.5e+000', backend='longdouble')
 
 # Creating a NumPy array with QuadPrecision dtype
-z = np.array([x, y], dtype=npq.QuadPrecDType()) # SLEEF
-z = np.array([x, y], dtype=npq.QuadPrecDType("longdouble")) # SLEEF
+>>> z = np.array([x, x], dtype=npq.QuadPrecDType()) # SLEEF
+>>> print(z)
+[QuadPrecision('3.5e+000', backend='sleef')
+ QuadPrecision('3.5e+000', backend='sleef')]
+
+>>> z = np.array([y, y], dtype=npq.QuadPrecDType("longdouble")) # longdouble
+>>> print(z)
+[QuadPrecision('2.5e+000', backend='longdouble')
+ QuadPrecision('2.5e+000', backend='longdouble')]
 ```
 
-Under the hood, `numpy_quaddtype` manages memory efficiently for both **aligned** and **unaligned**. This is crucial for performance, especially when dealing with large arrays or complex computations. We've implemented specialized strided loop functions for various operations
-
-<figure style={{ textAlign: 'center' }}>
-    <img 
-      src="/posts/numpy-quaddtype-blog/aligned_unaligned_memory.png"
-      alt="Diagram illustrating an example of aligned versus unaligned memory"
-      style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
-    />
-    <figcaption>Figure 1: Illustrating an example of aligned and unaligned memory</figcaption>
-</figure>
-
-
+Under the hood, `numpy_quaddtype` manages memory efficiently for both **aligned** and **unaligned** memory access. This is crucial for performance, especially when dealing with large arrays or complex computations. We've also implemented specialized strided loop functions for various operations.
 
 ### Casting operations
 Casting operations are another critical component. We've implemented a range of casts between QuadPrecision and other NumPy types, ensuring smooth interoperability:
 
 ```python
-import numpy as np
-import numpy_quaddtype as npq
-
 # NumPy to QuadPrecision
-numpy_array = np.array([1.5, 2.7, 3.14])
-quad_array = numpy_array.astype(npq.QuadPrecDType())
+>>> numpy_array = np.array([1.5, 2.7, 3.14])
+>>> quad_array = numpy_array.astype(npq.QuadPrecDType())
+>>> print(quad_array)
+[QuadPrecision('1.5', backend='sleef') QuadPrecision('2.7', backend='sleef')
+ QuadPrecision('3.14', backend='sleef')]
 
 # QuadPrecision to NumPy
-quad_value = QuadPrecision("3.14159265358979323846")
-numpy_float = np.float64(quad_value)
+>>> quad_value = npq.QuadPrecision("3.14159265358979323846")
+>>> numpy_float = np.float64(quad_value)
+>>> print(numpy_float)
+3.141592653589793
 
 # Mixing types in operations
-result = quad_array + numpy_array  # Automatically promotes to QuadPrecision
+>>> result = quad_array + numpy_array  # Automatically promotes to QuadPrecision
+>>> print(result)
+[QuadPrecision('3.0', backend='sleef') QuadPrecision('5.4', backend='sleef')
+ QuadPrecision('6.28', backend='sleef')]
 ```
 
 > For preserving precision during casting it is recommended to pass input as a string
@@ -226,21 +232,25 @@ working with QuadPrecision numbers is as straightforward as working with any oth
 Here's a taste of how you might use these ufuncs:
 
 ```python
-a = npq.QuadPrecision(2.0)
-b = npq.QuadPrecision(3.0)
+>>> a = npq.QuadPrecision(2.0)
+>>> b = npq.QuadPrecision(3.0)
 
 # Unary operation
-print(np.sqrt(a))  # QuadPrecision square root
+>>> print(np.sqrt(a))  # QuadPrecision square root
+1.4142135623730950488016887242097
 
 # Binary operation
-print(a + b)  # QuadPrecision addition
+>>> print(a + b)  # QuadPrecision addition
+5.0
 
 # Comparison
-print(a < b)  # QuadPrecision comparison
+>>> print(a < b)  # QuadPrecision comparison
+True
 
 # Using with NumPy arrays
-quad_array = np.array([a, b], dtype=np.QuadPrecDType())
-print(np.exp(quad_array))  # Element-wise exponential
+>>> quad_array = np.array([a, b], dtype=np.QuadPrecDType())
+>>> print(np.exp(quad_array))  # Element-wise exponential
+['7.38905609893065022723042746057501 ', '20.0855369231876677409285296545817  ']
 ```
 
 These operations look identical to standard NumPy operations, but under the hood, they're using the full precision of QuadPrecision numbers.
@@ -251,19 +261,15 @@ When it comes to displaying QuadPrecision numbers, accuracy is paramount. That's
 
 - <u>Without `Dragon4`</u>
     ```python
-    a = npq.QuadPrecision("1.123124242")
-    print(a)
-
-    ## Output
+    >>> a = npq.QuadPrecision("1.123124242")
+    >>> print(a)
     1.123124242000000000000000000000000e+00
     ```
 
 - <u>With `Dragon4`</u>
     ```python
-    a = npq.QuadPrecision("1.123124242")
-    print(a)
-
-    ## Output
+    >>> a = npq.QuadPrecision("1.123124242")
+    >>> print(a)
     1.123124242
     ```
 
@@ -392,14 +398,10 @@ However, like any new software project, there's still room for improvement and e
 Looking ahead, we have several key objectives:
 
 1. **Package Distribution**: We're preparing to release `numpy_quaddtype` as Python wheels, which will be available for installation via **PyPI** and as a **conda package**. This will make it easily accessible to the wider Python scientific computing community.
-
 2. **Community Engagement**: We plan to make a public announcement about `numpy_quaddtype` and actively seek feedback from the community. User experiences and suggestions will be crucial for guiding future improvements.
-
 3. **NumPy Enhancement Proposal (NEP)**: We're drafting a NEP to formally propose the integration of `numpy_quaddtype` into the NumPy ecosystem. This process will allow for thorough discussion and review by the NumPy community.
+4. **Future Backend Optimization**: We plan to evaluate [TLFloat](https://github.com/shibatch/tlfloat), *a C++ template library for floating-point operations*, as a potential replacement for `SLEEF` in future versions. TLFloat offers IEEE 754 compliant operations with correctly rounded results for arithmetic operations and 1-ULP accuracy for other math functions across various precisions. This future exploration aims to further enhance `numpy_quaddtype`'s precision and performance, particularly in scenarios requiring guaranteed correctly-rounded results.
 
-4. **Optimized Linear Algebra**: One of our next technical challenges is to support optimized linear algebra routines for our quadruple precision dtype. This will enhance performance for matrix operations, which are crucial in many scientific and engineering applications.
-
-5. **Long-term NumPy Integration**: As `numpy_quaddtype` matures and gains wider adoption, we aim to work with the NumPy community to explore the possibility of it eventually replacing `np.longdouble`. This would provide a more consistent, cross-platform solution for high-precision calculations.
 
 `numpy_quaddtype` will continue to be an active development project under the NumPy umbrella. We're committed to refining and expanding its capabilities based on user needs and emerging requirements in the scientific computing community.
 We look forward to seeing how the community puts this new capability to use and hearing your feedback as we continue to improve and expand its functionality.
