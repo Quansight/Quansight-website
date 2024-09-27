@@ -2,7 +2,7 @@
 title: "Numpy QuadDType: Quadruple Precision for Everyone"
 authors: [swayam-singh]
 published: September 30, 2024
-description: "Introducing the new data type for Numpy providing cross-platform support of quadruple precision."
+description: "Introducing the new data-type for Numpy providing cross-platform support of quadruple precision."
 category: [OSS Experience, Array API, PyData ecosystem, Packaging]
 featuredImage:
   src: /posts/hello-world-post/featured.png
@@ -160,9 +160,16 @@ z = np.array([x, y], dtype=npq.QuadPrecDType("longdouble")) # SLEEF
 
 Under the hood, `numpy_quaddtype` manages memory efficiently for both aligned and unaligned access. This is crucial for performance, especially when dealing with large arrays or complex computations. We've implemented specialized strided loop functions for various operations
 
-> Graphic here, illustrating aligned and unaligned memory
+<img
+    alt="aligned and unaligned memory"
+    src=""
+    width="67%"
+  />
 
-**Casting operations** are another critical component. We've implemented a range of casts between QuadPrecision and other NumPy types, ensuring smooth interoperability:
+
+
+### Casting operations
+Casting operations are another critical component. We've implemented a range of casts between QuadPrecision and other NumPy types, ensuring smooth interoperability:
 
 ```python
 import numpy as np
@@ -185,7 +192,7 @@ result = quad_array + numpy_array  # Automatically promotes to QuadPrecision
 
 working with QuadPrecision numbers is as straightforward as working with any other NumPy type. The casting operations handle the heavy lifting behind the scenes, allowing you to focus on your computations rather than type management.
 
-**Universal Functions (UFuncs)**
+### Universal Functions (UFuncs)
 
 `numpy_quaddtype` implements a wide range of universal functions, covering unary operations (like square root or exponential), binary operations (addition, multiplication, etc.), and comparison operations. These ufuncs are the backbone of NumPy's efficient array operations, and we've ensured that QuadPrecision numbers work seamlessly with them.
 Here's a taste of how you might use these ufuncs:
@@ -210,11 +217,11 @@ print(np.exp(quad_array))  # Element-wise exponential
 
 These operations look identical to standard NumPy operations, but under the hood, they're using the full precision of QuadPrecision numbers.
 
-**Precision in Printing: The Dragon4 Algorithm**
+### Precision in Printing: The Dragon4 Algorithm
 
 When it comes to displaying QuadPrecision numbers, accuracy is paramount. That's where our customized implementation of the `Dragon4` algorithm comes in. `Dragon4` is a sophisticated algorithm for converting binary floating-point numbers to their decimal representations, ensuring that the printed value is as close as possible to the true value of the number in memory.
 
-- Without `Dragon4`
+- <u>Without `Dragon4`</u>
     ```python
     a = npq.QuadPrecision("1.123124242")
     print(a)
@@ -223,7 +230,7 @@ When it comes to displaying QuadPrecision numbers, accuracy is paramount. That's
     1.123124242000000000000000000000000e+00
     ```
 
-- With `Dragon4`
+- <u>With `Dragon4`</u>
     ```python
     a = npq.QuadPrecision("1.123124242")
     print(a)
@@ -236,3 +243,133 @@ Our implementation of `Dragon4` for `numpy_quaddtype` is a significant improveme
 
 
 By addressing these various aspects - from low-level memory management to high-level NumPy integration and precise number representation - `numpy_quaddtype` provides a robust and flexible solution for high-precision arithmetic in Python. It offers the extreme accuracy you need for demanding computations, wrapped in the familiar and user-friendly NumPy interface you already know and love.
+
+### Precision and Accuracy
+
+In the world of high-precision computing, not all floating-point representations are created equal. numpy_quaddtype offers two backends, each with its own precision characteristics. Let's break them down:
+
+#### SLEEF Backend Precision
+
+The **SLEEF** (SIMD Library for Evaluating Elementary Functions) backend provides true 128-bit quadruple precision. Here's what that means in practice:
+
+- Significand: 113 bits
+- Exponent: 15 bits
+- Sign: 1 bit
+
+This translates to approximately 34 decimal digits of precision. To put this in perspective, if you were measuring the diameter of the observable universe (approximately 8.8 x 10<sup>26</sup> meters), you could do so with precision down to the width of a proton!
+
+#### Long Double Backend Precision
+
+The long double backend's precision varies depending on the platform:
+
+- On most x86 and x86-64 Linux systems: 80-bit extended precision
+  - Significand: 64 bits
+  - Exponent: 15 bits
+  - Sign: 1 bit
+  - This provides about 18-19 decimal digits of precision
+
+- On Windows and some other platforms: Often identical to double precision (64 bits)
+  - Significand: 52 bits
+  - Exponent: 11 bits
+  - Sign: 1 bit
+  - This provides about 15-17 decimal digits of precision
+
+### ULP Analysis
+
+**ULP** (Unit in the Last Place), is a measure of the spacing between floating-point numbers and is crucial for understanding the accuracy of floating-point operations. In `numpy_quaddtype`, the ULP characteristics vary not just between backends, but also between different operations.
+
+For the **SLEEF** backend:
+- Basic arithmetic operations (add, subtract, multiply, divide), **ULP** error bound ≤ 0.5000000001
+- Transcendental functions (e.g., sine, cosine), **ULP** error bound ≤ 1.0
+
+This means that for basic arithmetic near 1, the SLEEF backend can provide results accurate to about 33-34 decimal places, while transcendental functions maintain accuracy to about 32-33 decimal places.
+
+This level of detail in ULP analysis is particularly relevant for applications where the accumulation of small errors over many operations can lead to significant discrepancies. For instance, in numerical simulations or financial modeling, understanding these ULP characteristics can help in choosing the most appropriate functions and in estimating the overall accuracy of complex calculations.
+
+## Testing and Applications
+
+To rigorously evaluate the performance and capabilities of `numpy_quaddtype`, we implemented several challenging applications to showcase the power of quad-precision arithmetic but also demonstrate the cross-platform consistency of our implementation.
+
+### Mandelbrot Set: Exploring the Depths of Chaos
+
+One of the most visually striking applications of high-precision arithmetic is in exploring the Mandelbrot set. This famous fractal serves as an excellent stress test for floating-point precision, as zooming into its intricate structures requires increasingly precise calculations.
+
+We generated Mandelbrot set visualizations at an extreme <u>zoom level of 10<sup>20</sup></u>, centered at the coordinates `-1.749624030987687 + 0.0i`, with `1000` iterations. The results are remarkable:
+
+<img
+    alt="Mandelbrot set zoom at 1e20 with Quad-Precision SLEEF backend"
+    src=""
+    width="67%"
+  />
+
+Using the SLEEF backend of `numpy_quaddtype`, we achieved stunning detail and clarity even at this extreme magnification. The image reveals intricate structures, delicate filaments, and complex patterns that would be lost with lower precision calculations.
+
+For comparison, we generated the same view using standard double-precision floating-point numbers (`np.float64`) and extended-precision `long double`:
+
+<img
+    alt="Mandelbrot set zoom at 1e20 with double-precision np.float64"
+    src=""
+    width="67%"
+  />
+  
+<img
+    alt="Mandelbrot set zoom at 1e20 with Extended-Precision long double backend"
+    src=""
+    width="67%"
+  />
+
+The difference is stark. Both version loses all details, resulting in large blocks of solid color. This dramatically illustrates the limitations of 64-bit floating-point arithmetic and system dependent `long double` when pushed to these extremes.
+
+### Quantum Harmonic Oscillator for Diatomic Molecules
+
+We applied `numpy_quaddtype` to model the quantum harmonic oscillator for diatomic molecules (*Hydrochloric acid in our case*).
+
+We compared the performance of `numpy_quaddtype` against standard double-precision (`np.float64`) calculations. The results, visualized in two key graphs, highlight the significant advantages of quad-precision arithmetic in quantum mechanical calculations.
+
+<img
+    alt="Quantum Harmonic Oscillator results for HCL on np.float64 and Quad-Precision dtype"
+    src=""
+    width="67%"
+  />
+
+1. <u>Absolute Error in Energy Level Differences</u>
+
+    - **Quad Precision**: Maintains extremely low error, consistently around 10<sup>-52</sup> to 10<sup>-53</sup> J across all quantum numbers, demonstrating exceptional stability and accuracy.
+    - **Float64**: Shows significantly higher error, ranging from 10<sup>-34</sup> to 10<sup>-33</sup> J, with a slight upward trend for higher quantum numbers, indicating gradual precision loss.
+
+2. <u>Absolute Error in Wavefunction Normalization</u>
+
+    - **Quad Precision**: Exhibits remarkably stable error around 3.65 × 10<sup>-13</sup>, ensuring consistent wavefunction validity across all quantum states.
+    - **Float64**: Starts near quad precision levels but shows a clear upward trend for higher states, suggesting accumulating inaccuracies.
+
+## Current Status And Next Steps
+
+As of this writing, `numpy_quaddtype` has reached a significant milestone. It's ready for use, supporting most major operations and integrating well with NumPy. As we've demonstrated with our Mandelbrot set visualizations and quantum harmonic oscillator calculations, it's capable of handling demanding computational tasks that require high precision.
+
+However, like any new software project, there's still room for improvement and expansion. During development, we identified several areas in NumPy's dtype C-API that could be enhanced to better support custom dtypes like ours. We've documented these findings and raised them as issues ([NumPy Issue #27231](https://github.com/numpy/numpy/issues/27231)) to contribute to the ongoing improvement of NumPy's infrastructure.
+
+Looking ahead, we have several key objectives:
+
+1. **Package Distribution**: We're preparing to release `numpy_quaddtype` as Python wheels, which will be available for installation via PyPI and as a conda package. This will make it easily accessible to the wider Python scientific computing community.
+
+2. **Community Engagement**: We plan to make a public announcement about `numpy_quaddtype` and actively seek feedback from the community. User experiences and suggestions will be crucial for guiding future improvements.
+
+3. **NumPy Enhancement Proposal (NEP)**: We're drafting a NEP to formally propose the integration of `numpy_quaddtype` into the NumPy ecosystem. This process will allow for thorough discussion and review by the NumPy community.
+
+4. **Optimized Linear Algebra**: One of our next technical challenges is to support optimized linear algebra routines for our quadruple precision dtype. This will enhance performance for matrix operations, which are crucial in many scientific and engineering applications.
+
+5. **Long-term NumPy Integration**: As `numpy_quaddtype` matures and gains wider adoption, we aim to work with the NumPy community to explore the possibility of it eventually replacing `np.longdouble`. This would provide a more consistent, cross-platform solution for high-precision calculations.
+
+`numpy_quaddtype` will continue to be an active development project under the NumPy umbrella. We're committed to refining and expanding its capabilities based on user needs and emerging requirements in the scientific computing community.
+We look forward to seeing how the community puts this new capability to use and hearing your feedback as we continue to improve and expand its functionality.
+
+Stay tuned for updates, and happy computing! Remember, in the world of numerical analysis, precision is not just a luxury—it's often a necessity.
+
+## Conclusion
+
+These past three months have been an extraordinary journey of learning and innovation. None of this would have been possible without the exceptional guidance and unwavering support of my mentor, [Nathan Goldbaum](https://github.com/ngoldbaum). I'm deeply grateful to the entire NumPy community for their support and insights, with particular thanks to [Sebastian Berg](https://github.com/seberg) and Nathan for their prior work on NumPy's DType-API, which laid the foundation for this project. 
+Special appreciation goes to [Ralf Gommers](https://github.com/rgommers), [Melissa Weber Mendonça](https://github.com/melissawm) and whole Quansight community for providing this unique opportunity to contribute to NumPy awesome Donut meets. This experience has been both humbling and inspiring, and I'm excited to see how `numpy_quaddtype` will evolve and be utilized by the community in the future.
+
+## References
+- [Numpy-User-Dtype Repository](https://github.com/numpy/numpy-user-dtypes)
+- [SLEEF](https://sleef.org/)
