@@ -5,11 +5,11 @@ published: September 30, 2024
 description: "Introducing the new data-type for Numpy providing cross-platform support of quadruple precision."
 category: [OSS Experience, Array API, PyData ecosystem, Packaging]
 featuredImage:
-  src: /posts/hello-world-post/featured.png
-  alt: "WIP"
+  src: /posts/numpy-quaddtype-blog/feature.png
+  alt: "Feature image for the blog post"
 hero:
-  imageSrc: /posts/hello-world-post/hero.jpeg
-  imageAlt: "WIP"
+  imageSrc: /posts/numpy-quaddtype-blog/feature.png
+  imageAlt: "Hero image for the blog post"
 ---
 
 *Picture this*: You're a scientist, working on complex simulations that push the boundaries of numerical precision. You fire up your trusty NumPy-powered Python script, eagerly anticipating the results. But then... your calculations start producing unexpected errors. You've just stumbled into the realm of floating-point precision limitations.
@@ -411,6 +411,8 @@ Stay tuned for updates, and happy computing! Remember, in the world of numerical
 These past three months have been an extraordinary journey of learning and innovation. None of this would have been possible without the exceptional guidance and unwavering support of my mentor, [Nathan Goldbaum](https://github.com/ngoldbaum). I'm deeply grateful to the entire NumPy community for their support and insights, with particular thanks to [Sebastian Berg](https://github.com/seberg) and Nathan for their prior work on NumPy's DType-API, which laid the foundation for this project.
 
 Special appreciation goes to [Ralf Gommers](https://github.com/rgommers), [Melissa Weber Mendonça](https://github.com/melissawm) and whole Quansight community for providing this unique opportunity to contribute to NumPy. This experience has been both humbling and inspiring, and I'm excited to see how `numpy_quaddtype` will evolve and be utilized by the community in the future.
+
+> **P.S.** I will be actively involved in this project, so please feel free to ping me with any questions, suggestions, or contributions.
 
 ## References
 - [Numpy-User-Dtype Repository](https://github.com/numpy/numpy-user-dtypes)
