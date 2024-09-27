@@ -46,9 +46,9 @@ The `np.longdouble` dtype in NumPy has become a significant pain point for devel
 1. **Cross-Platform Inconsistency**
 
   The `long double` type varies dramatically across platforms:
-   - Windows & macOS: 64-bit (same as `double`)
-   - Linux (x86/x86_64): 80-bit
-   - Some architectures (IBM Power9): True 128-bit quadruple precision
+   - **Windows** & **macOS**: 64-bit (same as `double`)
+   - **Linux** (x86/x86_64): 80-bit
+   - Some architectures (**IBM Power9**): True 128-bit quadruple precision
 
    This inconsistency leads to portability issues and unexpected behavior, read more about this at [NumPy: Issue #14574](https://github.com/numpy/numpy/issues/14574).
 
@@ -63,8 +63,8 @@ The `np.longdouble` dtype in NumPy has become a significant pain point for devel
 
 2. **Build Complications**
    Building NumPy, especially on Windows, has become increasingly complex due to `np.longdouble`:
-   - MSVC uses 64-bit `long double`
-   - Mingw-w64 defaults to 80-bit `long double`
+   - **MSVC** uses 64-bit `long double`
+   - **Mingw-w64** defaults to 80-bit `long double`
 
    This discrepancy necessitates dealing with multiple toolchains and compiler patches, significantly increasing the maintenance burden. A detailed discussion of this issue can be found at [NumPy: Issue #20348](https://github.com/numpy/numpy/issues/20348):
 
@@ -307,8 +307,8 @@ The long double backend's precision varies depending on the platform:
 **ULP** (Unit in the Last Place), is a measure of the spacing between floating-point numbers and is crucial for understanding the accuracy of floating-point operations. In `numpy_quaddtype`, the ULP characteristics vary not just between backends, but also between different operations.
 
 For the **SLEEF** backend:
-- Basic arithmetic operations (add, subtract, multiply, divide), **ULP** error bound ≤ 0.5000000001
-- Transcendental functions (e.g., sine, cosine), **ULP** error bound ≤ 1.0
+- Basic arithmetic operations (add, subtract, multiply, divide), **ULP error bound ≤ 0.5000000001**
+- Transcendental functions (e.g., sine, cosine), **ULP error bound ≤ 1.0**
 
 This means that for basic arithmetic near 1, the SLEEF backend can provide results accurate to about 33-34 decimal places, while transcendental functions maintain accuracy to about 32-33 decimal places.
 
@@ -387,11 +387,11 @@ We compared the performance of `numpy_quaddtype` against standard double-precisi
 
 As of this writing, `numpy_quaddtype` has reached a significant milestone. It's ready for use, supporting most major operations and integrating well with NumPy. As we've demonstrated with our Mandelbrot set visualizations and quantum harmonic oscillator calculations, it's capable of handling demanding computational tasks that require high precision.
 
-However, like any new software project, there's still room for improvement and expansion. During development, we identified several areas in NumPy's dtype C-API that could be enhanced to better support custom dtypes like ours. We've documented these findings and raised them as issues ([NumPy Issue #27231](https://github.com/numpy/numpy/issues/27231)) to contribute to the ongoing improvement of NumPy's infrastructure.
+However, like any new software project, there's still room for improvement and expansion. During development, we identified several areas in NumPy's dtype C-API that could be enhanced to better support custom dtypes like ours ([NumPy Issue #27231](https://github.com/numpy/numpy/issues/27231))
 
 Looking ahead, we have several key objectives:
 
-1. **Package Distribution**: We're preparing to release `numpy_quaddtype` as Python wheels, which will be available for installation via PyPI and as a conda package. This will make it easily accessible to the wider Python scientific computing community.
+1. **Package Distribution**: We're preparing to release `numpy_quaddtype` as Python wheels, which will be available for installation via **PyPI** and as a **conda package**. This will make it easily accessible to the wider Python scientific computing community.
 
 2. **Community Engagement**: We plan to make a public announcement about `numpy_quaddtype` and actively seek feedback from the community. User experiences and suggestions will be crucial for guiding future improvements.
 
@@ -408,8 +408,9 @@ Stay tuned for updates, and happy computing! Remember, in the world of numerical
 
 ## Conclusion
 
-These past three months have been an extraordinary journey of learning and innovation. None of this would have been possible without the exceptional guidance and unwavering support of my mentor, [Nathan Goldbaum](https://github.com/ngoldbaum). I'm deeply grateful to the entire NumPy community for their support and insights, with particular thanks to [Sebastian Berg](https://github.com/seberg) and Nathan for their prior work on NumPy's DType-API, which laid the foundation for this project. 
-Special appreciation goes to [Ralf Gommers](https://github.com/rgommers), [Melissa Weber Mendonça](https://github.com/melissawm) and whole Quansight community for providing this unique opportunity to contribute to NumPy awesome Donut meets. This experience has been both humbling and inspiring, and I'm excited to see how `numpy_quaddtype` will evolve and be utilized by the community in the future.
+These past three months have been an extraordinary journey of learning and innovation. None of this would have been possible without the exceptional guidance and unwavering support of my mentor, [Nathan Goldbaum](https://github.com/ngoldbaum). I'm deeply grateful to the entire NumPy community for their support and insights, with particular thanks to [Sebastian Berg](https://github.com/seberg) and Nathan for their prior work on NumPy's DType-API, which laid the foundation for this project.
+
+Special appreciation goes to [Ralf Gommers](https://github.com/rgommers), [Melissa Weber Mendonça](https://github.com/melissawm) and whole Quansight community for providing this unique opportunity to contribute to NumPy. This experience has been both humbling and inspiring, and I'm excited to see how `numpy_quaddtype` will evolve and be utilized by the community in the future.
 
 ## References
 - [Numpy-User-Dtype Repository](https://github.com/numpy/numpy-user-dtypes)
