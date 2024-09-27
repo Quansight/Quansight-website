@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/numpy-quaddtype-blog/feature.png
   alt: "Feature image for the blog post"
 hero:
-  imageSrc: /posts/numpy-quaddtype-blog/feature.png
+  imageSrc: /posts/numpy-quaddtype-blog/hero.png
   imageAlt: "Hero image for the blog post"
 ---
 
