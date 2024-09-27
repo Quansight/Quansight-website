@@ -19,8 +19,24 @@ Hi there! I'm [Swayam Singh](https://github.com/SwayamInSync/), and for the past
 So buckle up and grab your favorite beverage (*might I suggest a Quad Espresso?*)
 
 ---
+## Table of Contents
 
-=> WIP (Table of contents)
+1. [The Long Double Dilemma in NumPy](#the-long-double-dilemma-in-numpy)
+2. [Introducing Numpy-QuadDType](#introducing-numpy-quaddtype)
+   - [The Inner Workings of `numpy_quaddtype`](#the-inner-workings-of-numpy_quaddtype)
+   - [Casting operations](#casting-operations)
+   - [Universal Functions (UFuncs)](#universal-functions-ufuncs)
+   - [Precision in Printing: The Dragon4 Algorithm](#precision-in-printing-the-dragon4-algorithm)
+   - [Precision and Accuracy](#precision-and-accuracy)
+     - [SLEEF Backend Precision](#sleef-backend-precision)
+     - [Long Double Backend Precision](#long-double-backend-precision)
+   - [ULP Analysis](#ulp-analysis)
+3. [Testing and Applications](#testing-and-applications)
+   - [Mandelbrot Set: Exploring the Depths of Chaos](#mandelbrot-set-exploring-the-depths-of-chaos)
+   - [Quantum Harmonic Oscillator for Diatomic Molecules](#quantum-harmonic-oscillator-for-diatomic-molecules)
+4. [Current Status And Next Steps](#current-status-and-next-steps)
+5. [Conclusion](#conclusion)
+6. [References](#references)
 
 ---
 ## The Long Double Dilemma in NumPy
@@ -29,12 +45,21 @@ The `np.longdouble` dtype in NumPy has become a significant pain point for devel
 
 1. **Cross-Platform Inconsistency**
 
-   The `long double` type varies dramatically across platforms:
+  The `long double` type varies dramatically across platforms:
    - Windows & macOS: 64-bit (same as `double`)
    - Linux (x86/x86_64): 80-bit
    - Some architectures (IBM Power9): True 128-bit quadruple precision
 
    This inconsistency leads to portability issues and unexpected behavior, read more about this at [NumPy: Issue #14574](https://github.com/numpy/numpy/issues/14574).
+
+  <figure style={{ textAlign: 'center' }}>
+    <img 
+      src="/posts/numpy-quaddtype-blog/longdouble_meme.jpg"
+      alt="Meme showing different precision levels as Spider-Man characters"
+      style={{ display: 'inline-block', maxWidth: '75%', height: 'auto' }}
+    />
+    <figcaption>Figure: Visual representation of different precision levels in computing</figcaption>
+  </figure>
 
 2. **Build Complications**
    Building NumPy, especially on Windows, has become increasingly complex due to `np.longdouble`:
@@ -303,7 +328,7 @@ We generated Mandelbrot set visualizations at an extreme <u>zoom level of 10<sup
     <img 
       src="/posts/numpy-quaddtype-blog/mandelbrot_128.png"
       alt="Mandelbrot set zoom at 1e20 using Quad-Precision SLEEF backend"
-      style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+      style={{ display: 'inline-block', maxWidth: '80%', height: 'auto' }}
     />
     <figcaption>Figure 2: Mandelbrot set at 1e20 zoom using numpy_quaddtype with SLEEF backend</figcaption>
 </figure>
@@ -323,7 +348,7 @@ For comparison, we generated the same view using standard double-precision float
   
   <figure style={{ textAlign: 'center', flex: 1 }}>
     <img 
-      src="/posts/numpy-quaddtype-blog/mandelbrot_long_doubke.png"
+      src="/posts/numpy-quaddtype-blog/mandelbrot_long_double.png"
       alt="Mandelbrot set zoom at 1e20 using long double precision"
       style={{ maxWidth: '100%', height: 'auto' }}
     />
