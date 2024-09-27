@@ -183,15 +183,15 @@ z = np.array([x, y], dtype=npq.QuadPrecDType()) # SLEEF
 z = np.array([x, y], dtype=npq.QuadPrecDType("longdouble")) # SLEEF
 ```
 
-Under the hood, `numpy_quaddtype` manages memory efficiently for both aligned and unaligned access. This is crucial for performance, especially when dealing with large arrays or complex computations. We've implemented specialized strided loop functions for various operations
+Under the hood, `numpy_quaddtype` manages memory efficiently for both **aligned** and **unaligned**. This is crucial for performance, especially when dealing with large arrays or complex computations. We've implemented specialized strided loop functions for various operations
 
 <figure style={{ textAlign: 'center' }}>
     <img 
-      src="/posts/numpy-quaddtype-blog/aligned_unaligned.png"
-      alt="Diagram illustrating aligned versus unaligned memory access in numpy_quaddtype"
+      src="/posts/numpy-quaddtype-blog/aligned_unaligned_memory.png"
+      alt="Diagram illustrating an example of aligned versus unaligned memory"
       style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
     />
-    <figcaption>Figure 1: Illustration of aligned and unaligned memory access in numpy_quaddtype</figcaption>
+    <figcaption>Figure 1: Illustrating an example of aligned and unaligned memory</figcaption>
 </figure>
 
 
