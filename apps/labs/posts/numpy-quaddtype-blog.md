@@ -56,7 +56,7 @@ The `np.longdouble` dtype in NumPy has become a significant pain point for devel
     <img 
       src="/posts/numpy-quaddtype-blog/longdouble_meme.jpg"
       alt="Meme showing different precision levels as Spider-Man characters"
-      style={{ display: 'inline-block', maxWidth: '75%', height: 'auto' }}
+      style={{ display: 'inline-block', maxWidth: '70%', height: 'auto' }}
     />
     <figcaption>Figure: Visual representation of different precision levels in computing</figcaption>
   </figure>
@@ -336,21 +336,21 @@ Using the SLEEF backend of `numpy_quaddtype`, we achieved stunning detail and cl
 
 For comparison, we generated the same view using standard double-precision floating-point numbers (`np.float64`) and extended-precision `long double`:
 
-<div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-  <figure style={{ textAlign: 'center', flex: 1 }}>
+<div style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'flex-start' }}>
+  <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
     <img 
       src="/posts/numpy-quaddtype-blog/mandelbrot_double.png"
       alt="Mandelbrot set zoom at 1e20 using double-precision floating-point"
-      style={{ maxWidth: '100%', height: 'auto' }}
+      style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
     />
     <figcaption>Figure 3a: Mandelbrot set at 1e20 zoom using np.float64</figcaption>
   </figure>
   
-  <figure style={{ textAlign: 'center', flex: 1 }}>
+  <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
     <img 
       src="/posts/numpy-quaddtype-blog/mandelbrot_long_double.png"
       alt="Mandelbrot set zoom at 1e20 using long double precision"
-      style={{ maxWidth: '100%', height: 'auto' }}
+      style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
     />
     <figcaption>Figure 3b: Mandelbrot set at 1e20 zoom using np.longdouble</figcaption>
   </figure>
