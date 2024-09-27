@@ -25,7 +25,7 @@ So buckle up and grab your favorite beverage (*might I suggest a Quad Espresso?*
 ---
 ## The Long Double Dilemma in NumPy
 
-The `np.longdouble` dtype in NumPy has become a significant pain point for developers and users alike. Ralf Gommers, a core NumPy developer, highlighted several critical issues that make long double support "extremely painful to maintain, probably far more than justified."
+The `np.longdouble` dtype in NumPy has become a significant pain point for developers and users alike. [Ralf Gommers](https://github.com/rgommers), a core NumPy Maintainer, highlighted several critical issues that make long double support "extremely painful to maintain, probably far more than justified."
 
 1. **Cross-Platform Inconsistency**
 
@@ -160,11 +160,14 @@ z = np.array([x, y], dtype=npq.QuadPrecDType("longdouble")) # SLEEF
 
 Under the hood, `numpy_quaddtype` manages memory efficiently for both aligned and unaligned access. This is crucial for performance, especially when dealing with large arrays or complex computations. We've implemented specialized strided loop functions for various operations
 
-<img
-    alt="aligned and unaligned memory"
-    src=""
-    width="67%"
-  />
+<figure style={{ textAlign: 'center' }}>
+    <img 
+      src="/posts/numpy-quaddtype-blog/aligned_unaligned.png"
+      alt="Diagram illustrating aligned versus unaligned memory access in numpy_quaddtype"
+      style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+    />
+    <figcaption>Figure 1: Illustration of aligned and unaligned memory access in numpy_quaddtype</figcaption>
+</figure>
 
 
 
@@ -296,27 +299,37 @@ One of the most visually striking applications of high-precision arithmetic is i
 
 We generated Mandelbrot set visualizations at an extreme <u>zoom level of 10<sup>20</sup></u>, centered at the coordinates `-1.749624030987687 + 0.0i`, with `1000` iterations. The results are remarkable:
 
-<img
-    alt="Mandelbrot set zoom at 1e20 with Quad-Precision SLEEF backend"
-    src=""
-    width="67%"
-  />
-
+<figure style={{ textAlign: 'center' }}>
+    <img 
+      src="/posts/numpy-quaddtype-blog/mandelbrot_128.png"
+      alt="Mandelbrot set zoom at 1e20 using Quad-Precision SLEEF backend"
+      style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+    />
+    <figcaption>Figure 2: Mandelbrot set at 1e20 zoom using numpy_quaddtype with SLEEF backend</figcaption>
+</figure>
 Using the SLEEF backend of `numpy_quaddtype`, we achieved stunning detail and clarity even at this extreme magnification. The image reveals intricate structures, delicate filaments, and complex patterns that would be lost with lower precision calculations.
 
 For comparison, we generated the same view using standard double-precision floating-point numbers (`np.float64`) and extended-precision `long double`:
 
-<img
-    alt="Mandelbrot set zoom at 1e20 with double-precision np.float64"
-    src=""
-    width="67%"
-  />
+<div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+  <figure style={{ textAlign: 'center', flex: 1 }}>
+    <img 
+      src="/posts/numpy-quaddtype-blog/mandelbrot_double.png"
+      alt="Mandelbrot set zoom at 1e20 using double-precision floating-point"
+      style={{ maxWidth: '100%', height: 'auto' }}
+    />
+    <figcaption>Figure 3a: Mandelbrot set at 1e20 zoom using np.float64</figcaption>
+  </figure>
   
-<img
-    alt="Mandelbrot set zoom at 1e20 with Extended-Precision long double backend"
-    src=""
-    width="67%"
-  />
+  <figure style={{ textAlign: 'center', flex: 1 }}>
+    <img 
+      src="/posts/numpy-quaddtype-blog/mandelbrot_long_doubke.png"
+      alt="Mandelbrot set zoom at 1e20 using long double precision"
+      style={{ maxWidth: '100%', height: 'auto' }}
+    />
+    <figcaption>Figure 3b: Mandelbrot set at 1e20 zoom using np.longdouble</figcaption>
+  </figure>
+</div>
 
 The difference is stark. Both version loses all details, resulting in large blocks of solid color. This dramatically illustrates the limitations of 64-bit floating-point arithmetic and system dependent `long double` when pushed to these extremes.
 
@@ -326,11 +339,14 @@ We applied `numpy_quaddtype` to model the quantum harmonic oscillator for diatom
 
 We compared the performance of `numpy_quaddtype` against standard double-precision (`np.float64`) calculations. The results, visualized in two key graphs, highlight the significant advantages of quad-precision arithmetic in quantum mechanical calculations.
 
-<img
-    alt="Quantum Harmonic Oscillator results for HCL on np.float64 and Quad-Precision dtype"
-    src=""
-    width="67%"
-  />
+<figure style={{ textAlign: 'center' }}>
+    <img 
+      src="/posts/numpy-quaddtype-blog/quantum_oscillator_comparison.png"
+      alt="Comparison of Quantum Harmonic Oscillator calculations using np.float64 and numpy_quaddtype"
+      style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+    />
+    <figcaption>Figure 4: Comparison of Quantum Harmonic Oscillator calculations for HCl molecule using np.float64 and numpy_quaddtype</figcaption>
+</figure>
 
 1. <u>Absolute Error in Energy Level Differences</u>
 
