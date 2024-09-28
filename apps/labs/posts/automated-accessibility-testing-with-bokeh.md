@@ -7,7 +7,7 @@ description: 'Data is only useful to the extent that people can access it.
   visualizations more accessible.'
 category: [Access-centered, Beyond PyData, Internship]
 featuredImage:
-  src: /posts/hello-world-post/featured.png
+  src: /posts/hello-world-post/featured_image.png
   alt: 'Excellent alt-text describing the featured image which appears as a
     small image in our main blog page. This image needs to be 391x174 pixels
     in size.'
