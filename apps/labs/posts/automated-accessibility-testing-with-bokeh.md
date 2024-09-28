@@ -7,15 +7,11 @@ description: 'Data is only useful to the extent that people can access it.
   visualizations more accessible.'
 category: [Access-centered, Beyond PyData, Internship]
 featuredImage:
-  src: /posts/hello-world-post/featured_image.png
-  alt: 'Excellent alt-text describing the featured image which appears as a
-    small image in our main blog page. This image needs to be 391x174 pixels
-    in size.'
+  src: /posts/automated-accessibility-testing-with-bokeh/featured_image.png
+  alt: 'An image of the Bokeh visualization library logo with a plus symbol directly beneath it, and the logo of the playwright testing tool beneath the plus symbol. They are arranged vertically on a white background.'
 hero:
-  imageSrc: /posts/hello-world-post/hero.jpeg
-  imageAlt: 'Excellent alt-text describing the hero image which appears as a
-    large image at the top of your post page. This image needs to be 1440x696
-    pixels in size'
+  imageSrc: /posts/automated-accessibility-testing-with-bokeh/featured_image.png
+  imageAlt: 'An image of the Bokeh visualization library logo with a plus symbol directly beneath it, and the logo of the playwright testing tool beneath the plus symbol. They are arranged vertically on a white background.'
 ---
 
 My name is Chiemezuo, and I got to do some amazing work as a Quansight Labs
