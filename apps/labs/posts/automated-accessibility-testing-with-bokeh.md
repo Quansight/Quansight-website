@@ -1,5 +1,5 @@
 ---
-title: 'Automated Accessibility Testing with Bokeh'
+title: "Testing Bokeh's Accessibility: A Web Developer's Experience with a Python Data Library"
 authors: [chiemezuo-akujobi]
 published: September 30, 2024
 description: 'Lessons learned during my three-month internship in 2024 at Quansight on adding accessibility testing to Bokeh.'
