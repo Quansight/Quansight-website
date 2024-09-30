@@ -11,7 +11,7 @@ featuredImage:
   alt: 'Bokeh + Playwright'
 hero:
   imageSrc: /posts/automated-accessibility-testing-with-bokeh/featured_image.png
-  imageAlt: 'An image of the Bokeh visualization library logo with a plus symbol directly beneath it, and the logo of the playwright testing tool beneath the plus symbol. They are arranged vertically on a white background.'
+  imageAlt: 'Bokeh + Playwright'
 ---
 
 My name is Chiemezuo, and I got to do some amazing work as a Quansight Labs
