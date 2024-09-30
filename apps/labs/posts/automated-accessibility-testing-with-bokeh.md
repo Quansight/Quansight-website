@@ -155,10 +155,7 @@ discovery: Due to the very nature of Bokeh, axe-core would be useless for lots
 of plots. Remember I mentioned that despite generating HTML, Bokeh plots could
 not be treated in the same way as web pages? Well, web pages tend to have a
 structure, and elements with semantic meaning. However, most Bokeh data
-visualizations end up getting wrapped in an HTML `<canvas>` with some styling in
-the [Shadow
-DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM),
-which is something axe does not know how to work with. The Bokeh data
+visualizations end up getting wrapped in an HTML `<canvas>`, which is something axe does not know how to work with. The Bokeh data
 visualizations that do in fact break out of this norm rely on extra components
 or widgets like sliders and dropdowns which are rendered outside the canvas and
 are thus testable with the Axe API. Let's look at some images:
