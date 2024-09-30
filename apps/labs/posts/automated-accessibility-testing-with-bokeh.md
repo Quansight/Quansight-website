@@ -210,7 +210,7 @@ challenge.
 
 Owing to the custom nature of all things Bokeh, I had a problem with getting the
 environment to allow axe-core to run. Playwright required core modules from Node,
-and Bokeh had a stripped away version of node for the most part. I tend to like
+and Bokeh had a stripped away version of Node for the most part. I tend to like
 solving problems by myself with minimal hand-holding, but this was one of those
 scenarios that I just couldn't seem to fix without asking for help. The ways
 around the problem looked even more problematic, and I found myself questioning
