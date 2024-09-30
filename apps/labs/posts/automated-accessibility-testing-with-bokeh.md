@@ -301,10 +301,10 @@ that can be done in Bokeh. In the future, we could:
   all tests can run from a single command. The only requirement of this
   functionality will be a test-labeling mechanism described in the next bullet
   point.
-- Have a labeling system to be able to run only "accessibility-focused" tests at
+- Have a labeling system to be able to run only accessibility-focused tests at
   will. In Bokeh, you can run both individual and group tests using a search
   string command. For labeling, you could prepend (or append) a string like
-  "accessibility-focused" to the test description. This feature becomes even
+  accessibility-focused to the test description. This feature becomes even
   more useful as `unit` and `integration` directories start to contain more
   accessibility tests.
 - Write more tests.
