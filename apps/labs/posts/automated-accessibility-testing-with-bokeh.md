@@ -15,7 +15,7 @@ hero:
 ---
 
 My name is Chiemezuo, and I got to do some amazing work as a Quansight Labs
-intern this summer. My project was on developing Automated Accessibility Testing
+intern this summer. My project was on developing automated accessibility testing
 for the [Bokeh](https://bokeh.org/) project, and I'm here to tell you all about
 it. Interestingly, neither my mentor nor I had previously worked with the
 codebase prior to this internship.
