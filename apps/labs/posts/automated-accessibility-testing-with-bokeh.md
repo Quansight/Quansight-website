@@ -1,7 +1,7 @@
 ---
 title: 'Automated Accessibility Testing with Bokeh'
 authors: [chiemezuo-akujobi]
-published: September 10, 2024
+published: September 30, 2024
 description: 'Data is only useful to the extent that people can access it.
   Let me walk you through one of several steps toward making Bokeh data
   visualizations more accessible.'
