@@ -8,7 +8,7 @@ description: 'Data is only useful to the extent that people can access it.
 category: [Access-centered, Beyond PyData, Internship]
 featuredImage:
   src: /posts/automated-accessibility-testing-with-bokeh/featured_image.png
-  alt: 'An image of the Bokeh visualization library logo with a plus symbol directly beneath it, and the logo of the playwright testing tool beneath the plus symbol. They are arranged vertically on a white background.'
+  alt: 'Bokeh + Playwright'
 hero:
   imageSrc: /posts/automated-accessibility-testing-with-bokeh/featured_image.png
   imageAlt: 'An image of the Bokeh visualization library logo with a plus symbol directly beneath it, and the logo of the playwright testing tool beneath the plus symbol. They are arranged vertically on a white background.'
