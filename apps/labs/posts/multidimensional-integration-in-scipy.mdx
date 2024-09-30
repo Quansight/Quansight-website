@@ -5,17 +5,15 @@ authors: [olly-britton]
 published: September 12, 2024
 category: [PyData ecosystem, Internship, Array API]
 featuredImage:
-  src: /posts/multidimensional-integration-in-scipy/trapezoid-subdivisions-featured.png
+  src: /posts/multidimensional-integration-in-scipy/trapezoid-subdivisions-featured.jpg
   alt: >
     Applying the trapezoid rule to a curve with three trapeziums. The two trapeziums
     on the right of the curve are darker and narrower, and their area more closely matches
     the area of the function.
 hero:
-  imageSrc: /posts/multidimensional-integration-in-scipy/subdivisions-in-higher-dimensions-hero.png
+  imageSrc: /posts/multidimensional-integration-in-scipy/3d-function-zoomed-hero.jpg
   imageAlt: >
-    A plot of an undulating function in 3D. On top of the surface of the function,
-    there is a white mesh. The top right corner of the mesh is being filled in by a finer
-    mesh.
+    A plot of an undulating function in 3D.
 ---
 
 Hi! I'm Olly Britton, an undergraduate studying mathematics and computer science in the UK. This blog post talks about the work I did extending SciPy's integration facilities as part of a three-month internship with Quansight Labs.
@@ -58,7 +56,7 @@ Integrating functions, given function object
 After 20 years of maturing as an open source project, SciPy now contains over 15 different functions for numerical integration bundled into the [`scipy.integrate`](https://docs.scipy.org/doc/scipy/tutorial/integrate.html) package, all of which address different but overlapping use-cases and functionality. My task for this internship was to address a small gap in these offerings: improving the support for multidimensional numerical integration ("cubature"), as initially discussed [in this SciPy issue](https://github.com/scipy/scipy/issues/20252) in March earlier this year. This culminated in a new function, `cubature`, which slots into the middle of the "array-valued" and "multidimensional" Venn diagram.
 
 
-![A Venn diagram with two intersecting circles. One is labelled "array-valued integrands", the other is labelled "multi-dim integrands". In the intersection, "cubature" is written with a smiley face afterwards. There is another partial circle at the bottom labelled "available to Galileo and Archmides".](/posts/multidimensional-integration-in-scipy/scipy-integration-venn-diagram.png)
+![A Venn diagram with two intersecting circles. One is labelled "array-valued integrands", the other is labelled "multi-dim integrands". In the intersection, "cubature" is written with a smiley face afterwards. There is another partial circle at the bottom labelled "available to Galileo and Archmides".](/posts/multidimensional-integration-in-scipy/scipy-integration-venn-diagram.jpg)
 
 By "multidimensional", I mean that the routine supports calculating integrals of more than one variable (so volumes and not just areas under a curve), and by "array-valued", I mean that the routine supports integrands that can return arbitrarily-shaped arrays rather than a single number.
 
