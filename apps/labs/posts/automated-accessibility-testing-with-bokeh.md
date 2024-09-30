@@ -215,26 +215,7 @@ solving problems by myself with minimal hand-holding, but this was one of those
 scenarios that I just couldn't seem to fix without asking for help. The ways
 around the problem looked even more problematic, and I found myself questioning
 my abilities. For this problem, experience did make all the difference and my
-mentor helped me with a part of the codebase we could draw inspiration from. In
-one of our pair programming sessions, he said for us to look more closely at all
-the directories within the Javascript test directory.
-
-We found out that I had been looking at the test setup the wrong way. The bokeh
-test folder has the following [sub
-folders](https://docs.bokeh.org/en/latest/docs/dev_guide/testing.html#select-specific-bokehjs-tests):
-`baselines`, `codebase`, `defaults`, `devtools`, `integration`, and `unit`. The
-`unit`, `defaults`, and `integration` categories of tests were designed to be
-able to both run in the terminal, and on the devtools server. The `unit` and
-`integration` tests looked the most like tests that one would normally see
-and/or write in different projects because they had `describe` blocks and
-`assert` statements. Basing this assumption on just those two facts, I felt the
-location for `playwright` tests would have to model either of those two, to run
-on both terminal & devtools (which is Bokeh's server for running tests and
-viewing output in a browser), as well as with assertions. It was on closer
-inspection with my mentor in a pair programming session that we discovered that
-the `codebase` sub-directory used core node modules, and we decided to base
-playwright off that, but followed the pattern of written tests from `unit` and
-`integration` that would let the assertions and descriptions work as planned. We
+mentor helped me with a part of the codebase we could draw inspiration from. We
 tested to see if things worked, and they did. We cleaned up the code, committed,
 pushed, and both stood by the GitHub PR comment section.
 
