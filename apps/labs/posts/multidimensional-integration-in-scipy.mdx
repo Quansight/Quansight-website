@@ -28,14 +28,12 @@ Numerical integration, or "quadrature", is about _approximating_ the value of a 
 
 Before this internship, I wondered why you might ever want just an approximation rather than the exact value. But there are many good reasons to prefer numerical integration over symbolic integration: for one, the problem of finding out whether the integral of an arbitrary function has a "closed-form" is actually impossible in general! And even when it is, the results can be hopelessly complicated even for simple functions.
 
-{/*
 $$
-\begin{aligned}
-&\int^1_0 \frac{1}{1 + x + x^3} \, \text dx \approx 0.6303 \\\\
-&\int^1_0 \frac{1}{1 + x + x^3} \, \text dx = \frac{2 ^ \frac{4}{3}\cdot3 ^ \frac{5}{2} \left(\frac{\sqrt{31}}{2\cdot 3 ^ \frac{3}{2}} - \frac 1 2\right)\ln\Big(\Big| 2- \cdots}{\sqrt[3]{\sqrt{31} - 3 ^ \frac{3}{2}}\Big(\Big(-\frac{3 ^ \frac{3}{2} \sqrt[3]{29 \cdot 3 ^ \frac{3}{2}\cdot}}{\sqrt[3]{2}} \,\,\,\cdots}
-\end{aligned}
+\\begin\{aligned\}
+&\\int^1_0 \\frac\{1\}\{1 + x + x^3\} \\, \\text dx \\approx 0.6303 \\\\\\\\
+&\\int^1_0 \\frac\{1\}\{1 + x + x^3\} \\, \\text dx = \\frac\{2 ^ \\frac\{4\}\{3\}\\cdot3 ^ \\frac\{5\}\{2\} \\left(\\frac\{\\sqrt\{31\}\}\{2\\cdot 3 ^ \\frac\{3\}\{2\}\} - \\frac 1 2\\right)\\ln\\Big(\\Big| 2- \\cdots\}\{\\sqrt[3]\{\\sqrt\{31\} - 3 ^ \\frac\{3\}\{2\}\}\\Big(\\Big(-\\frac\{3 ^ \\frac\{3\}\{2\} \\sqrt[3]\{29 \\cdot 3 ^ \\frac\{3\}\{2\}\\cdot\}\}\{\\sqrt[3]\{2\}\} \\,\\,\\,\\cdots\}
+\\end\{aligned\}
 $$
-*/}
 
 Numerical integration is necessary across many different domains of mathematics and science, especially when faced with real-world problems that are difficult to solve analytically. It's also one of the oldest mathematical problems that humans have been tackling, with a long history stretching all the way back to Archimedes estimating $\pi$ by approximating the area of a circle.
 
@@ -66,15 +64,13 @@ By "multidimensional", I mean that the routine supports calculating integrals of
 
 What does it mean to integrate a function that returns an array? It's the same as if you were to differentiate a function that returns an array: you integrate separately each element of the output. If the function returns a vector (the special case of a 1D array), then this is identical to integrating each component separately:
 
-{/*
 $$
-\begin{aligned}
-&\mathbf f: \mathbb R^n \to \mathbb R^m \\\\
-&\mathbf f(\pmb x) = [\mathbf f_1(x_1, \ldots, x_n), \ldots, \mathbf f_m(x_1, \ldots, x_n)]^\top \\\\
-\int &\mathbf f(\pmb x) \text d\pmb x = \left[\int\mathbf f_1(\pmb x) \text d\pmb x, \ldots, \int\mathbf f_m(\pmb x) \text d\pmb x\right]^\top
-\end{aligned}
+\\begin\{aligned\}
+&\\mathbf f: \\mathbb R^n \\to \\mathbb R^m \\\\\\\\
+&\\mathbf f(\\pmb x) = [\\mathbf f_1(x_1, \\ldots, x_n), \\ldots, \\mathbf f_m(x_1, \\ldots, x_n)]^\\top \\\\\\\\
+\\int &\\mathbf f(\\pmb x) \\text d\\pmb x = \\left[\\int\\mathbf f_1(\\pmb x) \\text d\\pmb x, \\ldots, \\int\\mathbf f_m(\\pmb x) \\text d\\pmb x\\right]^\\top
+\\end\{aligned\}
 $$
-*/}
 
 Previously, there was no function in SciPy that let you efficiently integrate functions that were both multidimensional and array-valued at the same time. For example, `quad_vec` integrates array-valued univariate functions, while `nquad` handles scalar-valued multivariate functions. But there was nothing that let you handle integrands that were both.
 
@@ -104,11 +100,9 @@ Their implementation of $f$ is _vectorized_ – although $f$ is actually a func
 
 Given this function, the scientists now wish to calculate the total daily rainfall $r$ that's going to fall on the patch around where they live. This is equivalent to the following double integral:
 
-{/*
 $$
-r(n) = \int^1_0 \int^1_0 \mathbf f(x, y) \, \text dy \text dx
+r(n) = \\int^1_0 \\int^1_0 \\mathbf f(x, y) \\, \\text dy \\text dx
 $$
-*/}
 
 This can be done with the new `scipy.integrate.cubature` function like so:
 
@@ -170,11 +164,9 @@ Another feature of `cubature` relates to the kinds of integrals it can calculate
 
 For example, one way of phrasing Archimedes' problem of calculating $\pi$ is that he was, without knowing it, approximating the following integral:
 
-{/*
 $$
-\int^1_{-1} \int^{\sqrt{1-x^2}}_{-\sqrt{1-x^2}} \,1 \,\text dy \text dx
+\\int^1_\{-1\} \\int^\{\\sqrt\{1-x^2\}\}_\{-\\sqrt\{1-x^2\}\} \\,1 \\,\\text dy \\text dx
 $$
-*/}
 
 `cubature` also supports these kind of problems, where you have arbitrary functions in the limits:
 
@@ -196,11 +188,9 @@ cubature(
 
 You can even use infinite limits before the functions and it will still work. For example:
 
-{/*
 $$
-\int^\infty_0 \int^x_0 e^{-x^2-y^2} \text dy \text dx = \frac \pi 8
+\\int^\\infty_0 \\int^x_0 e^\{-x^2-y^2\} \\text dy \\text dx = \\frac \\pi 8
 $$
-*/}
 
 ```python
 cubature(
@@ -285,27 +275,19 @@ while np.any(err > atol + rtol * np.abs(est)):
 
 Another piece of the puzzle is how arbitrary regions are handled. It's not immediately obvious how you'd apply this algorithm to integrals like this one from earlier:
 
-{/*
-
 $$
-\int^\infty_0 \int^x_0 e^{-x^2-y^2} \text dy \text dx = \frac \pi 8
+\\int^\\infty_0 \\int^x_0 e^\{-x^2-y^2\} \\text dy \\text dx = \\frac \\pi 8
 $$
-
-*/}
 
 The issue here is that the region being integrated over is no longer rectangular – here it's shaped like an infinitely large pizza slice extending out from the origin. To tackle this, you need some consistent method of subdividing non-rectangular regions.
 
 One way of doing this is quite simple: you apply a coordinate transformation to the integral which turns it into an equivalent integral over a rectangle like $[-1, 1]^n$, and then you can subdivide like before.
 
-{/*
-
 $$
-\int^\infty_0 \int^x_0 e^{-x^2-y^2} \text dy \text dx
-\leadsto
-\int^1_{-1} \int^1_{-1} g(s, t) \text dt \text ds
+\\int^\\infty_0 \\int^x_0 e^\{-x^2-y^2\} \\text dy \\text dx
+\\leadsto
+\\int^1_\{-1\} \\int^1_\{-1\} g(s, t) \\text dt \\text ds
 $$
-
-*/}
 
 Since these integrals are equal, `cubature` can calculate the rectangular integral using the algorithm above, and subdivisions in these transformed coordinates correspond to useful non-linear subdivisions in the original coordinates.
 
