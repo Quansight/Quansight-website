@@ -292,7 +292,7 @@ that adds Playwright.](https://github.com/bokeh/bokeh/pull/14032)
 Going from 0 to 1 was a good start, but to go from 1 to n, there are more things
 that can be done in Bokeh. In the future, we could:
 
-- Add Integration snapshot tests that will be marked as known failures.
+- Add integration snapshot tests that will be marked as known failures.
 - Add CI checks for accessibility tests. This would prevent commits from being
   merged if they will change Bokeh data visualizations in a way that triggers
   accessibility issues.
