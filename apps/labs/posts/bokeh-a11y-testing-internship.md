@@ -5,10 +5,10 @@ published: September 30, 2024
 description: 'Lessons learned during my three-month internship in 2024 at Quansight on adding accessibility testing to Bokeh.'
 category: [Access-centered, Beyond PyData, Internship]
 featuredImage:
-  src: /posts/automated-accessibility-testing-with-bokeh/featured_image.png
+  src: /posts/bokeh-a11y-testing-internship/bokeh_plus_playwright.png
   alt: 'Bokeh + Playwright'
 hero:
-  imageSrc: /posts/automated-accessibility-testing-with-bokeh/featured_image.png
+  imageSrc: /posts/bokeh-a11y-testing-internship/bokeh_plus_playwright.png
   imageAlt: 'Bokeh + Playwright'
 ---
 
@@ -112,7 +112,7 @@ to illustrate how data flows:
 
 <img alt="Image of Bokeh data model flow represented as a flow chart moving from
 Python to JSON, to Javascript, and then to final HTML output"
-src="/posts/automated-accessibility-testing-with-bokeh/bokeh_bokehjs.jpg"
+src="/posts/bokeh-a11y-testing-internship/bokeh_bokehjs.jpg"
 style={{padding: '10px 20px'}}/>
 
 Now that I knew the inner workings and where things fit, I had an idea of how to
@@ -164,7 +164,7 @@ Axe API. Let's look at some images:
    from Bokeh's docs showing a visualization wrapped in a `<canvas>` element
    <img alt="Image of a URL scatter data visualization from Bokeh's
    documentation. It shows a series of bokeh logos scattered across the plot."
-   src="/posts/automated-accessibility-testing-with-bokeh/url_scatter.png"
+   src="/posts/bokeh-a11y-testing-internship/url_scatter.png"
    style={{padding: '10px 20px'}}/>
 
 2. A [colour
@@ -173,7 +173,7 @@ Axe API. Let's look at some images:
    alt="Image of a colour scatter data visualization from Bokeh's documentation.
    It shows a series of coloured dots and has a toolbar on the right side with a
    bokeh logo highlighted for triggering an accessibility issue."
-   src="/posts/automated-accessibility-testing-with-bokeh/color_scatter.png"
+   src="/posts/bokeh-a11y-testing-internship/color_scatter.png"
    style={{padding: '10px 20px'}}/>
 
 3. A [callback
@@ -183,7 +183,7 @@ Axe API. Let's look at some images:
    curved line in a plot and some interactive elements on the right side, one of
    which is a slider that has been highlighted for triggering an accessibility
    issue."
-   src="/posts/automated-accessibility-testing-with-bokeh/callback_slider.png"
+   src="/posts/bokeh-a11y-testing-internship/callback_slider.png"
    style={{padding: '10px 20px'}}/>
 
 Axe-core cannot check anything in a `<canvas>` so the first image would not
