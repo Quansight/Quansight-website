@@ -166,6 +166,8 @@ Melissa Weber Mendoça, who organized and supported us in many ways.
 Tania Allard who interviewed me for this temporary work.
 Everybody at Quansight Labs who was involved in making this program possible.
 
+**Update (Sep 30, 2025):** Removed `asv` references per `asv` core maintainer.
+
 ## References
 
 [^1]: [Sparse array ecosystem](https://labs.quansight.org/blog/sparse-array-ecosystem)
