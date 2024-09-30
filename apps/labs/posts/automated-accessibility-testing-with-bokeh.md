@@ -321,6 +321,6 @@ tests](https://docs.bokeh.org/en/latest/docs/dev_guide/writing_tests.html)
 Several collaborative efforts led to the success of my internship work. I'm
 grateful to the following people for making the journey smoother: My mentor
 Gabriel, Tania and Pavithra for periodic information and pointers, Melissa for
-the periodic checkups and feedback loop, Bokeh maintainers Mateusz and Bryan,
-the Bokeh community for being welcoming, and Quansight for giving me an enabling
+the periodic checkups and feedback loop, Bokeh maintainers Mateusz and Bryan.
+I also want to thank the Bokeh community for being welcoming, and Quansight for giving me an enabling
 environment to do some great work.
