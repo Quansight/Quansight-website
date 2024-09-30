@@ -2,9 +2,7 @@
 title: 'Automated Accessibility Testing with Bokeh'
 authors: [chiemezuo-akujobi]
 published: September 30, 2024
-description: 'Data is only useful to the extent that people can access it.
-  Let me walk you through one of several steps toward making Bokeh data
-  visualizations more accessible.'
+description: 'Lessons learned during my three-month internship in 2024 at Quansight on adding accessibility testing to Bokeh.'
 category: [Access-centered, Beyond PyData, Internship]
 featuredImage:
   src: /posts/automated-accessibility-testing-with-bokeh/featured_image.png
