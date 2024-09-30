@@ -143,11 +143,7 @@ Benchmarks in general are used to track and test code performance. When code is 
 
 The `sparse` project already had benchmarks, but they were designed to be run by [`asv`](https://asv.readthedocs.io/en/stable/), a tool to benchmark performance. Plus, they were meant to be run by contributors locally in their machine. Thus, running the benchmark was not included in the CI workflow.
 
-My job was to convert those benchmarks so they could be run and analyzed with [`CodSpeed`](https://docs.codspeed.io/), a different tool for benchmarks. For that, I had to install it first. I will describe shortly what the work involved, but I would like to mention some of the differences between both tools.
-
-`asv` needs to be installed from `PyPI`. The benchmarks that it runs are short python scripts that call the project's functions or methods. It needs a `JSON` configuration file for it to work. Then the result of the tests are stored in `JSON` format files as well, and they can grow quite large. `asv` displays the results in a web frontend. So, it normally needs a host.
-
-Some OS projects run the benchmarks on separate servers, and the results are published on yet another server. `asv` only shows some graphs with the results, but it doesn't notify when it finds a regression.
+My job was to convert those benchmarks so they could be run and analyzed with [`CodSpeed`](https://docs.codspeed.io/), a different tool for benchmarks. For that, I had to install it first. I will describe shortly what the work involved.
 
 When using `CodSpeed`, the benchmarks are run in the CI environment. Then the results are sent to `CodSpeed` servers to be analyzed. Running benchmarks in the CI environment (on `GitHub`) is normally something to avoid, due to the noise that could be introduced. But `CodSpeed` simulates CPU behavior, so the results measure CPU cycles. They include cache and memory access. To learn more details, please visit this [section](https://docs.codspeed.io/features/understanding-the-metrics/).
 
