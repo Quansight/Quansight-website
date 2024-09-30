@@ -267,8 +267,8 @@ outcomes:
 There were a few limitations to achieving all these objectives. The limitations
 were:
 
-- Complexities of the Bokeh codebase that required weeks of knowledge share
-  sessions.
+- Complexities of the Bokeh codebase that required weeks of [knowledge share
+  sessions](https://drive.google.com/drive/folders/1xP1NRPEPGmTR1v4BU_eT94qi_n0bnzxy?usp=sharing).
 - The `<canvas>` element being something that couldn't properly be tested.
 - Initial difficulty in getting Playwright and Axe-core to run in the tests.
 - Time constraints.
