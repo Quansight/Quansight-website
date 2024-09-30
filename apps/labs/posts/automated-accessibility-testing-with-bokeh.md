@@ -155,10 +155,11 @@ discovery: Due to the very nature of Bokeh, axe-core would be useless for lots
 of plots. Remember I mentioned that despite generating HTML, Bokeh plots could
 not be treated in the same way as web pages? Well, web pages tend to have a
 structure, and elements with semantic meaning. However, most Bokeh data
-visualizations end up getting wrapped in an HTML `<canvas>`, which is something axe does not know how to work with. The Bokeh data
-visualizations that do in fact break out of this norm rely on extra components
-or widgets like sliders and dropdowns which are rendered outside the canvas and
-are thus testable with the Axe API. Let's look at some images:
+visualizations end up getting wrapped in an HTML `<canvas>`, which is something
+axe does not know how to work with. The Bokeh data visualizations that do in
+fact break out of this norm rely on extra components or widgets like sliders and
+dropdowns which are rendered outside the canvas and are thus testable with the
+Axe API. Let's look at some images:
 
 1. An [image URL
    scatter](https://docs.bokeh.org/en/latest/docs/examples/basic/scatters/image_url.html)
@@ -233,11 +234,9 @@ viewing output in a browser), as well as with assertions. It was on closer
 inspection with my mentor in a pair programming session that we discovered that
 the `codebase` sub-directory used core node modules, and we decided to base
 playwright off that, but followed the pattern of written tests from `unit` and
-`integration` that would let the assertions and descriptions work as planned.
-This last part had to be done because Bokeh has its own custom-built test
-tooling, similar in syntax to [Jest](https://jestjs.io/), but implemented
-differently. We tested to see if things worked, and they did. We cleaned up the
-code, committed, pushed, and both stood by the GitHub PR comment section.
+`integration` that would let the assertions and descriptions work as planned. We
+tested to see if things worked, and they did. We cleaned up the code, committed,
+pushed, and both stood by the GitHub PR comment section.
 
 On occasion, a question would come up in the PR comment section that would seem
 a bit confusing to me, so I would ask my mentor and he would clarify what the
@@ -296,16 +295,17 @@ that can be done in Bokeh. In the future, we could:
 - Add CI checks for accessibility tests. This would prevent commits from being
   merged if they will change Bokeh data visualizations in a way that triggers
   accessibility issues.
-- Couple things a little tighter with the existing convention. In Bokeh,
-  Javascript tests are run with a specific type of command: `node make test:suite_name`. There are certain commands for pairing types of tests
-  together, and these commands could be worked upon or modified as needed.
+- Couple things a little tighter with the existing convention. In Bokeh
+  currently, to run both the existing tests and the new tests I added, you have
+  to run two separate commands. Future work could involve unifying them so that
+  all tests can run from a single command. The only requirement of this
+  functionality will be a test-labeling mechanism described in the next bullet
+  point.
 - Have a labeling system to be able to run only "accessibility-focused" tests at
   will. In Bokeh, you can run both individual and group tests using a search
-  string command. The syntax is: `node make test:suite_name -k "search string"`.
-  For labeling, you could prepend (or append) a string like
-  "accessibility-focused" to the code for the tests and run the matching search
-  string in the syntax to run all matching tests. This feature becomes even more
-  useful as `unit` and `integration` directories start to contain more
+  string command. For labeling, you could prepend (or append) a string like
+  "accessibility-focused" to the test description. This feature becomes even
+  more useful as `unit` and `integration` directories start to contain more
   accessibility tests.
 - Write more tests.
 
@@ -321,6 +321,6 @@ tests](https://docs.bokeh.org/en/latest/docs/dev_guide/writing_tests.html)
 Several collaborative efforts led to the success of my internship work. I'm
 grateful to the following people for making the journey smoother: My mentor
 Gabriel, Tania and Pavithra for periodic information and pointers, Melissa for
-the periodic checkups and feedback loop, Bokeh maintainers Mateusz and Bryan.
-I also want to thank the Bokeh community for being welcoming, and Quansight for giving me an enabling
-environment to do some great work.
+the periodic checkups and feedback loop, Bokeh maintainers Mateusz and Bryan. I
+also want to thank the Bokeh community for being welcoming, and Quansight for
+giving me an enabling environment to do some great work.
