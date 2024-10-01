@@ -1,9 +1,11 @@
 import { remarkCodeHike } from '@code-hike/mdx';
 import matter from 'gray-matter';
-import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
+import rehypeKatex from 'rehype-katex';
 import slug from 'rehype-slug-custom-id';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 import theme from 'shiki/themes/solarized-dark.json';
 
 import { ArrayElementType } from '@quansight/shared/types';
@@ -34,8 +36,12 @@ export const serializePost = async (
       remarkPlugins: [
         [remarkCodeHike, { autoImport: false, theme }],
         remarkGfm,
+        remarkMath,
       ],
-      rehypePlugins: [[slug, { enableCustomId: true, removeAccents: true }]],
+      rehypePlugins: [
+        [slug, { enableCustomId: true, removeAccents: true }],
+        rehypeKatex,
+      ],
       useDynamicImport: true,
     },
   });

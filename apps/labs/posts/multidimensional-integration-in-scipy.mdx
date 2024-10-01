@@ -61,8 +61,6 @@ By "multidimensional", I mean that the routine supports calculating integrals of
 
 What does it mean to integrate a function that returns an array? It's the same as if you were to differentiate a function that returns an array: you integrate separately each element of the output. If the function returns a vector (the special case of a 1D array), then this is identical to integrating each component separately:
 
-{/\*
-
 $$
 \begin{aligned}
 &\mathbf f: \mathbb R^n \to \mathbb R^m \\\\
@@ -70,8 +68,6 @@ $$
 \int &\mathbf f(\pmb x) \text d\pmb x = \left[\int\mathbf f_1(\pmb x) \text d\pmb x, \ldots, \int\mathbf f_m(\pmb x) \text d\pmb x\right]^\top
 \end{aligned}
 $$
-
-\*/}
 
 Previously, there was no function in SciPy that let you efficiently integrate functions that were both multidimensional and array-valued at the same time. For example, `quad_vec` integrates array-valued univariate functions, while `nquad` handles scalar-valued multivariate functions. But there was nothing that let you handle integrands that were both.
 
@@ -101,13 +97,9 @@ Their implementation of $f$ is _vectorized_ – although $f$ is actually a func
 
 Given this function, the scientists now wish to calculate the total daily rainfall $r$ that's going to fall on the patch around where they live. This is equivalent to the following double integral:
 
-{/\*
-
 $$
 r(n) = \int^1_0 \int^1_0 \mathbf f(x, y) \, \text dy \text dx
 $$
-
-\*/}
 
 This can be done with the new `scipy.integrate.cubature` function like so:
 
@@ -169,13 +161,9 @@ Another feature of `cubature` relates to the kinds of integrals it can calculate
 
 For example, one way of phrasing Archimedes' problem of calculating $\pi$ is that he was, without knowing it, approximating the following integral:
 
-{/\*
-
 $$
 \int^1_{-1} \int^{\sqrt{1-x^2}}_{-\sqrt{1-x^2}} \,1 \,\text dy \text dx
 $$
-
-\*/}
 
 `cubature` also supports these kind of problems, where you have arbitrary functions in the limits:
 
@@ -197,13 +185,9 @@ cubature(
 
 You can even use infinite limits before the functions and it will still work. For example:
 
-{/\*
-
 $$
 \int^\infty_0 \int^x_0 e^{-x^2-y^2} \text dy \text dx = \frac \pi 8
 $$
-
-\*/}
 
 ```python
 cubature(
@@ -296,27 +280,19 @@ while np.any(err > atol + rtol * np.abs(est)):
 
 Another piece of the puzzle is how arbitrary regions are handled. It's not immediately obvious how you'd apply this algorithm to integrals like this one from earlier:
 
-{/\*
-
 $$
 \int^\infty_0 \int^x_0 e^{-x^2-y^2} \text dy \text dx = \frac \pi 8
 $$
 
-\*/}
-
 The issue here is that the region being integrated over is no longer rectangular – here it's shaped like an infinitely large pizza slice extending out from the origin. To tackle this, you need some consistent method of subdividing non-rectangular regions.
 
 One way of doing this is quite simple: you apply a coordinate transformation to the integral which turns it into an equivalent integral over a rectangle like $[-1, 1]^n$, and then you can subdivide like before.
-
-{/\*
 
 $$
 \int^\infty_0 \int^x_0 e^{-x^2-y^2} \text dy \text dx
 \leadsto
 \int^1_{-1} \int^1_{-1} g(s, t) \text dt \text ds
 $$
-
-\*/}
 
 Since these integrals are equal, `cubature` can calculate the rectangular integral using the algorithm above, and subdivisions in these transformed coordinates correspond to useful non-linear subdivisions in the original coordinates.
 
