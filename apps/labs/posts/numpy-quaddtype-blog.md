@@ -3,7 +3,7 @@ title: "Numpy QuadDType: Quadruple Precision for Everyone"
 authors: [swayam-singh]
 published: September 30, 2024
 description: "Introducing the new data-type for Numpy providing cross-platform support of quadruple precision."
-category: [OSS Experience, Array API, PyData ecosystem, Packaging]
+category: [OSS Experience, Array API, PyData ecosystem, Packaging, Internship]
 featuredImage:
   src: /posts/numpy-quaddtype-blog/feature.png
   alt: "Feature image for the blog post"
