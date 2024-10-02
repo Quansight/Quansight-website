@@ -49,11 +49,9 @@ LAPACK is vast, with approximately 1,700 routines, and implementing even 10% of 
 <table>
   <tr>
     <td style="vertical-align: top; width: auto;">
-      <!-- Image column -->
       <img src="/posts/implement-lapack-routines-in-stdlib/image-2.png" alt="alt text" style="width:1200px;height:300px;">
     </td>
     <td style="vertical-align: top; width: auto;">
-      <!-- Text column -->
         <p>
             One day, I reviewed all the available LAPACK routines from netlib-lapack, categorizing them based on difficulty and dependencies. I compiled this information into a list, which can be found at lapack-tracker-issue. My original approach was to implement the routines in a depth-first manner for each package, which led to the creation of several dependency trees, prioritizing easier implementations.
         </p>
