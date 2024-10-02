@@ -23,7 +23,7 @@ During the course of internship my goal was to add support for as many LAPACK ro
 
 <img src="/posts/implement-lapack-routines-in-stdlib/image02.jpg" alt="alt text" style="position:relative;left:10%;width:80%;height:400px;">
 
-<br>
+<br></br>
 
 Now, it might seem what's tricky in that, just take existing Fortran implementation, translate it to javascript ( shh, via chatGPT? ), follow stdlib conventions, do benchmarking, add tests, documentation, etc and you are done. Sounds simple, but there is a catch or I say there are multiple catches, please read through the blog to get a detailed walkthrough.
 
@@ -45,7 +45,7 @@ In the interim, pure JavaScript fallbacks, supported by robust testing and bench
 
 LAPACK is vast, with approximately 1,700 routines, and implementing even 10% of them within a three-month timeframe is a significant challenge. I found that selecting the right package was, and still is, one of the most difficult tasks I encountered during my internship. It felt akin to being given a collection of coins with values like 1000, 100, 10, 5, and so on, and being asked to select as many as possible to maximize the total value. That essentially summarized my problem.
 
-One day, I reviewed all the available LAPACK routines from netlib-lapack, categorizing them based on difficulty and dependencies. I compiled this information into a list, which can be found at lapack-tracker-issue. My original approach was to implement the routines in a depth-first manner for each package, which led to the creation of several dependency trees, prioritizing easier implementations.
+One day, I reviewed all the available LAPACK routines from netlib-lapack, categorizing them based on difficulty and dependencies. I compiled this information into a list, which can be found at [lapack-tracker-issue](https://github.com/stdlib-js/stdlib/issues/2464). My original approach was to implement the routines in a depth-first manner for each package, which led to the creation of several dependency trees, prioritizing easier implementations.
 
 I quickly realized that the depth-first approach would not be feasible, as we did not have the luxury of years to develop and integrate the packages. Instead, I had a strict timeline of just three months to get up to speed, minimize code errors, automate certain processes, and still maintain a steady and positive pace in implementing the packages.
 
@@ -59,10 +59,10 @@ With the plan set, I opened my first LAPACK pull request (PR), which introduced 
 
 Fortran stores array elements in a `column-major` format, unlike C or JavaScript, which prefer `row-major` storage. Following the approach used in LAPACKE, we decided to introduce a new parameter, order, in each implementation to specify the storage layout. Based on the value of order, there would be distinct implementations and optimizations for each layout. The order we loop through multidimensional arrays can have a big impact on speed. Fortran is as said `column-major`, Meaning consecutive elements of a column are stored next to each other in memory, and we should loop through arrays in this order order of columns unlike conventional looping over rows.
 
-<br>
+<br></br>
 <img src="/posts/implement-lapack-routines-in-stdlib/image-3.png" alt="alt text" style="position:relative;left:15%;width:70%;height:50%;">
 
-<br>
+<br></br>
 
 
 Let's illustrate this with an example. Consider a 2D array A of arbitrary size. We have implemented a function that copies the entire contents of matrix A into another matrix B. In `row-major` order iteration, we traverse the array by iterating over each row first, and within each row, we loop through the columns. On the other hand, in `column-major` order iteration, we loop through each column first, followed by the rows within that column. The code snippet below presents a cache-efficient implementation of the `dlacpy` function specifically optimized for `row-major` order traversal.
@@ -125,19 +125,19 @@ Now, let's examine the plot below, which depicts the relationship between the ra
 
 > Rate vs Size plot: `row-major` vs `column-major` order 
 
-<br>
+<br></br>
 <img src="/posts/implement-lapack-routines-in-stdlib/rate-vs-size-row-vs-column.png" alt="alt text" style="position:relative;left:25%;width:50%;height:50%;">
 
-<br>
+<br></br>
 
 Next stepl involves fixint the the iteration order first to `row-major` and then to `column-major` and compare how increasing the number of rows and columns affects the rate of copying elements from one matrix to another. Intuitively, one might expect that increasing the number of elements in a row would reduce the rate of copying, due to the limited cache size. Let's see if this intuition holds.
 
 From Figure 2(b), it is evident that increasing the row size has a more pronounced impact on the copying rate after a certain threshold. This is due to the limited cache size, resulting in a lower rate for larger row sizes when compared to increasing the column size. On the other hand, Figure 2(a) shows no significant difference in the copying rate when increasing the row or column size in the `column-major` order. This is because `column-major` order experiences more frequent cache misses compared to `row-major` order, regardless of whether the size increase is in the rows or columns, leading to lower efficiency overall for both small and large sizes.
 
-<br>
+<br></br>
 <img src="/posts/implement-lapack-routines-in-stdlib/combined-increasing-size-row-col.png" alt="alt text" style="position:relative;left:25%;width:50%;height:50%;">
 
-<br>
+<br></br>
 
 Thereby, we need to ensure that our implementations are optimized for both `row-major` and `column-major` orders. We employ various optimization techniques, such as loop tiling and cache optimization, to enhance performance. While some of these optimizations are already present in Fortran codes, simplifying the translation process, in most cases, we need to identify and implement these optimizations ourselves to achieve optimal performance.
 
@@ -167,10 +167,10 @@ With the following diff, we can interchange the loops to optimize the `dlacpy` f
         ia = offsetA;
 ```
 
-<br>
+<br></br>
 <img src="/posts/implement-lapack-routines-in-stdlib/column-major-optimized.png" alt="alt text" style="position:relative;left:25%;width:50%;height:50%;">
 
-<br>
+<br></br>
 
 It is evident that the optimized `dlacpy` function for `column-major` order is significantly faster ( almost 5x ) than the `row-major` order, as shown in the plot above. This optimization is crucial for enhancing performance, especially when dealing with large arrays.
 
@@ -184,10 +184,10 @@ Let's now understand `ndarray` API using an example of LAPACK routine `dlacpy` t
 ```javascript
 function dlacpy( M, N, A, offsetA, strideA1, strideA2, B, offsetB, strideB1, strideB2 );
 ```
-<br>
+<br></br>
 <img src="/posts/implement-lapack-routines-in-stdlib/ndarray-example.png" alt="alt text" style="position:relative;left:25%;width:50%;height:50%;">
 
-<br>
+<br></br>
 
 Suppose you want to copy the matrix A to B using the ndarray API, as illustrated in the graphic above. This operation is not feasible with conventional LAPACK/BLAS APIs, but you can easily achieve it by running the dlacpy function with the following arguments:
 
@@ -268,11 +268,11 @@ end function
 
 If we attempt to convert these functions to JavaScript while assuming a column-major order, it is crucial to ensure that the logic is accurately translated to prevent any inconsistencies.
 
-<br>
+<br></br>
 
 <img src="/posts/implement-lapack-routines-in-stdlib/challenge-fortran.png" alt="alt text" style="position:relative;left:25%;width:50%;height:50%;">
 
-<br>
+<br></br>
 
 The definition of the add function will include two additional arguments: offsetA and strideA.
 
