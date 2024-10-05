@@ -53,7 +53,7 @@ While I did not personally work on any of the changes listed below (my work
 for this release tended to be more invisible, behind the scenes fixes), I did
 do the release itself.
 
-# Automatic LaTeX rendering in the Jupyter notebook
+## Automatic LaTeX rendering in the Jupyter notebook
 
 Prior to SymPy 1.4, SymPy expressions in the notebook rendered by default with their
 string representation. To get `LaTeX` output, you had to call `init_printing()`:
@@ -78,7 +78,7 @@ selecting a different printer.
 If you want the string form of an expression for copy-pasting, you can use
 `print`.
 
-# Improved simplification of relational expressions
+## Improved simplification of relational expressions
 
 Simplification of relational and piecewise expressions has been improved:
 
@@ -104,7 +104,7 @@ x = y ∧ y > Max(w, z)
 0
 ```
 
-# Improved MathML printing
+## Improved MathML printing
 
 The MathML presentation printer has been greatly improved, putting it on par
 with the existing Unicode and LaTeX pretty printers.
@@ -124,7 +124,7 @@ presentation form for `Integral(exp(-x**2), (x, -oo, oo))` below:
 
 <br />
 
-# Improvements to solvers
+## Improvements to solvers
 
 Several improvements have been made to the solvers.
 
@@ -174,7 +174,7 @@ f(x) = C₁ + C₂⋅erf⎜────⎟ + x
                   ⎝ 2  ⎠
 ```
 
-# Dropping Python 3.4 support
+## Dropping Python 3.4 support
 
 This is the last release of SymPy to support Python 3.4. SymPy 1.4 supports
 Python 2.7, 3.4, 3.5, 3.6, 3.7, and PyPy. What's perhaps more exciting is that
@@ -227,7 +227,7 @@ you do not do this. SymPy is also [already faster in Python
 due to things like `math.gcd` and `functools.lru_cache` being written in C,
 and general performance improvements in the interpreter itself.
 
-# And much more
+## And much more
 
 These are only a few of the highlights of the hundreds of changes in this
 release. The full release notes can be found on [our

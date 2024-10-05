@@ -36,7 +36,7 @@ some variable elements and your model is incomplete; having a complete model, re
 component to be able to trust the results and build upon it. We are not going to enter into the exact distinction
 between reproducible and replicable, both have their goals and uses.
 
-# Aren't computers reproducible by design?
+## Aren't computers reproducible by design?
 
 One of the prerequisites for reproducibility is to have a deterministic process, and while we tend to think about computers
 as deterministic things, they often are not, and on purpose. Mainly driven by security concerns, a number of processes in
@@ -51,7 +51,7 @@ order they may be listed.
 To obtain a reproducible result, one thus often needs to make sure each step is deterministic and that all the variables
 influencing that process are either controlled or recorded.
 
-# Reproducible artifact build
+## Reproducible artifact build
 
 In IPython 7.16.1 we have tried to removed all sources of variability, by controlling the order in which the files are
 generated, archived in the sdists, their metadata, timestamps, etc. Thus you should be able to go from the commit in the
@@ -61,7 +61,7 @@ been introduced in the released packages. It is also critically useful for effic
 Of course you have to trust that the IPython source itself and its dependencies are devoid of backdoors, but let's move
 one step at a time. Reproducible build artifacts can also have impact on the build and installation process of packages.
 
-# Efficient rebuilds of dependencies
+## Efficient rebuilds of dependencies
 
 Currently IPython depends on many packages: `prompt_toolkit`, `traitlets`, `setuptools`, and more. We also have a number of
 downstream packages, like `ipykernel`, then `jupyter notebook`. When a dependency tree is rebuilt for one reason or another, a change of a
@@ -78,7 +78,7 @@ This can allow breaking rebuild chains by stopping as soon as a dependency rebui
 Thus, reproducible builds are a necessary but not sufficient condition to decrease the time spent by platforms like conda-forge on rebuilding the ecosystem
 for a new version of Python; making new packages available faster.
 
-# Deduplication
+## Deduplication
 
 One rarely mentioned advantage is deduplication. In many cases there are no reasons why artifacts produced by a build
 step would depend on _all_ of their inputs. For example IPython has currently no reason to build differently on Python 3.7,
