@@ -1,21 +1,25 @@
+October 17, 2024
+
+Via Storyblok:
+
+- Updates to the team projects
+
 March 1, 2024
 
-Via Storyblok
+Via Storyblok:
 
 - Updated homepage section for annual report 2023 with a new title, description, image, and link.
 
-
 October 17, 2023
 
-Via Storyblok
+Via Storyblok:
 
 - Remove Thomas Fan, Mars Lee, and Pamphile Roy from the team page (switch Role from `team` to `author`)
 - Added Mateusz Sokół (switch Role from `author` to `team`) and Isuru Fernando (newly added) to the team page
-  
 
 May 27, 2023
 
-Via Storyblok
+Via Storyblok:
 
 - Add Lysandros Nikolaou (CPython, SciPy) and Albert Steppi (SciPy) to the team.
 - Remove Noa Tamir, Anirrudh Krishnan, Pam Wadhwa, Cristian Garcia, and Marc Garcia from the team page.
