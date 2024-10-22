@@ -3,6 +3,7 @@ October 17, 2024
 Via Storyblok:
 
 - Updates to the team projects
+- Move 2024 interns from `team` to `author` (remove from team page)
 
 March 1, 2024
 
