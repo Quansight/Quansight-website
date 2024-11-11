@@ -130,7 +130,7 @@ completeness, we present it:
 ```python
 gb = df.groupby("a")
 mask = df["b"] > gb["b"].transform("mean")
-df["result"] = np.where(mask, df["c"], np.nan)
+df["result"] = df['c'].where(mask)
 gb["result"].max()
 ```
 
@@ -161,7 +161,7 @@ We've learned about the group-by operation, elementary aggregations in both pand
 Polars' syntax enables users to cleanly express non-elementary aggregations.
 
 pandas is a wonderful tool which solves a lot of real problems for a lot of real people.
-However, by insisting on copying its API, the dataframe landscape is stunting its own potential.
+However, when new dataframe libraries insist on copying its API, they are stunting their own potential.
 If an API doesn't allow for an operation to be expressed and users end up using `apply` with custom
 Python lambda functions, then no amount of acceleration is going to make up for that.
 
@@ -172,11 +172,7 @@ that
 
 is a common refrain among Polars users.
 
-For years, the unwritten consensus among dataframe library authors was that if you wanted to
-get adoption, then you needed to mimic the pandas API. However, Polars' success calls that into question.
-There may be a more general lesson to be learned here: try doing things differently, and then maybe - just
-maybe - you might be rewarded.
-
 If you'd like to learn about how to use Polars effectively, or how to solve problems in your organisation
 using Polars, Quansight is here to help - [please get in touch](https://quansight.com/about-us/#bookacallform) -
 we'd love to hear from you.
+
