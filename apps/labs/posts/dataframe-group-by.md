@@ -6,7 +6,7 @@ description: 'A closer look at non-elementary group-by aggregations'
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/dataframe-group-by/featured.jpg
-  alt: 'Group of Polar bears, '
+  alt: 'Young polar bears, northern Alaska, by Hans-Jurgen Mager, https://unsplash.com/photos/polar-bear-on-snow-covered-ground-during-daytime-k4ov7ulBn20'
 hero:
   imageSrc: /posts/dataframe-group-by/hero.jpg
   imageAlt: 'Young polar bears, northern Alaska, by Hans-Jurgen Mager, https://unsplash.com/photos/polar-bear-on-snow-covered-ground-during-daytime-k4ov7ulBn20'
