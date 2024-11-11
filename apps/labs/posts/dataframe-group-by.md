@@ -138,7 +138,7 @@ Surely it's possible to do better?
 
 ## Non-elementary group-bys in Polars
 
-The Polars API lets us pass [expressions](https://docs.pola.rs/user-guide/concepts/expressions/) to `GroupBy.agg`.
+The Polars API lets us pass [expressions](https://docs.pola.rs/user-guide/expressions/) to `GroupBy.agg`.
 So long as you can express your aggregation as
 an expression, you can use it in a group-by setting. In this case, we can express "the maximum value
 of 'c' where 'b' is greater than its mean" as
