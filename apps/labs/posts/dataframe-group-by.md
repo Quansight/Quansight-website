@@ -6,10 +6,10 @@ description: 'A closer look at non-elementary group-by aggregations'
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/dataframe-group-by/group-by-hero-mobile.png
-  alt: 'todo'
+  alt: 'Group of Polar bears'
 hero:
   imageSrc: /posts/dataframe-group-by/group-by-hero-desktop.png
-  imageAlt: 'todo'
+  imageAlt: 'Example of group-by operation in Polars'
 ---
 
 # The Polars vs pandas difference nobody is talking about
