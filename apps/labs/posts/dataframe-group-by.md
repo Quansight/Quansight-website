@@ -1,9 +1,15 @@
 ---
 title: 'The Polars vs pandas difference nobody is talking about'
+published: November 11, 2024
 authors: [marco-gorelli]
-published: May 10, 2024
 description: 'A closer look at non-elementary group-by aggregations'
 category: [PyData ecosystem]
+featuredImage:
+  src: /posts/dataframe-group-by/group-by-hero-mobile.png
+  alt: 'todo'
+hero:
+  imageSrc: /posts/dataframe-group-by/group-by-hero-desktop.png
+  imageAlt: 'todo'
 ---
 
 # The Polars vs pandas difference nobody is talking about
