@@ -36,50 +36,50 @@ Suppose we start with a (Polars) dataframe such as:
 
 ```python
 shape: (6, 3)
-┌─────┬─────┬─────┐
-│ a   ┆ b   ┆ c   │
-│ --- ┆ --- ┆ --- │
-│ i64 ┆ i64 ┆ i64 │
-╞═════╪═════╪═════╡
-│ 1   ┆ 4   ┆ 3   │
-│ 1   ┆ 1   ┆ 1   │
-│ 1   ┆ 2   ┆ 2   │
-│ 2   ┆ 7   ┆ 8   │
-│ 2   ┆ 6   ┆ 6   │
-│ 2   ┆ 7   ┆ 7   │
-└─────┴─────┴─────┘
+┌─────┬───────┬───────┐
+│ id  ┆ sales ┆ views │
+│ --- ┆ ---   ┆ ---   │
+│ i64 ┆ i64   ┆ i64   │
+╞═════╪═══════╪═══════╡
+│ 1   ┆ 4     ┆ 3     │
+│ 1   ┆ 1     ┆ 1     │
+│ 1   ┆ 2     ┆ 2     │
+│ 2   ┆ 7     ┆ 8     │
+│ 2   ┆ 6     ┆ 6     │
+│ 2   ┆ 7     ┆ 7     │
+└─────┴───────┴───────┘
 ```
 
 A group-by operation produces a single row per group:
 ```python
-df.group_by('a').agg('b')
+df.group_by('id').agg('sales')
 ```
 ```
 shape: (2, 2)
 ┌─────┬───────────┐
-│ a   ┆ b         │
+│ id  ┆ sales     │
 │ --- ┆ ---       │
 │ i64 ┆ list[i64] │
 ╞═════╪═══════════╡
-│ 2   ┆ [7, 6, 7] │
 │ 1   ┆ [4, 1, 2] │
+│ 2   ┆ [7, 6, 7] │
 └─────┴───────────┘
 ```
 
 If we want a single scalar value per group, we can use a reduction ('mean', 'sum', 'std', ...):
 ```python
-df.group_by('a').agg(pl.sum('b'))
+df.group_by('id').agg(pl.sum('sales'))
 ```
 ```python
 shape: (2, 2)
-┌─────┬─────┐
-│ a   ┆ b   │
-│ --- ┆ --- │
-│ i64 ┆ i64 │
-╞═════╪═════╡
-│ 2   ┆ 20  │
-│ 1   ┆ 7   │
-└─────┴─────┘
+┌─────┬───────┐
+│ id  ┆ sales │
+│ --- ┆ ---   │
+│ i64 ┆ i64   │
+╞═════╪═══════╡
+│ 1   ┆ 7     │
+│ 2   ┆ 20    │
+└─────┴───────┘
 ```
 
 ### Group-by in pandas
@@ -87,7 +87,7 @@ shape: (2, 2)
 If you're coming from a pandas-like library, you may have been used to writing the above example as
 
 ```python
-df.groupby('a')['b'].sum()
+df.groupby('id')['sales'].sum()
 ```
 
 And indeed, for such a simple task as this one, the pandas API is quite nice. All we had to do was:
@@ -96,8 +96,8 @@ And indeed, for such a simple task as this one, the pandas API is quite nice. Al
 2. select the column(s) we want to aggregate
 3. specify an elementary aggregation function
 
-Let's try something else: "find the maximum value of 'c', where 'b' is greater than its mean, per
-group 'a'".
+Let's try something else: "find the maximum value of 'views', where 'sales' is greater than its mean, per
+'id'".
 
 Unfortunately, the pandas API has no way to express this, meaning
 that no library which copies the pandas API can truly optimise such an
@@ -105,8 +105,8 @@ operation in the general case.
 
 You might be wondering whether we can just do the following:
 ```python
-df.groupby('a').apply(
-    lambda df: df[df['b'] > df['b'].mean()]['c'].max()
+df.groupby('id').apply(
+    lambda df: df[df['sales'] > df['sales'].mean()]['views'].max()
 )
 ```
 
@@ -114,7 +114,7 @@ However, that uses a Python `lambda` function and so is generally going to be in
 
 Another solution one might come up with is this one:
 ```python
-df[df['b'] > df.groupby('a')['b'].transform('mean')].groupby('a')['c'].max()
+df[df['sales'] > df.groupby('id')['sales'].transform('mean')].groupby('id')['views'].max()
 ```
 It's not as bad as the `apply` solution above, but it still looks overly complicated and requires
 two group-bys.
@@ -128,9 +128,9 @@ There's actually a third solution, which:
 Realistically, few users would come up with it (most would jump straight to `apply`), but for
 completeness, we present it:
 ```python
-gb = df.groupby("a")
-mask = df["b"] > gb["b"].transform("mean")
-df["result"] = df['c'].where(mask)
+gb = df.groupby("id")
+mask = df["sales"] > gb["sales"].transform("mean")
+df["result"] = df["views"].where(mask)
 gb["result"].max()
 ```
 
@@ -143,13 +143,13 @@ So long as you can express your aggregation as
 an expression, you can use it in a group-by setting. In this case, we can express "the maximum value
 of 'c' where 'b' is greater than its mean" as
 ```python
-pl.col('c').filter(pl.col('b') > pl.mean('b')).max()
+pl.col('views').filter(pl.col('sales') > pl.mean('sales')).max()
 ```
 Then, all we need to do is pass this expression to `GroupBy.agg`:
 
 ```python
-df.group_by('a').agg(
-    pl.col('c').filter(pl.col('b') > pl.mean('b')).max()
+df.group_by('id').agg(
+    pl.col('views').filter(pl.col('sales') > pl.mean('sales')).max()
 )
 ```
 Wonderful! Like this, we can express the operation cleanly and without hacks, meaning that any dataframe
