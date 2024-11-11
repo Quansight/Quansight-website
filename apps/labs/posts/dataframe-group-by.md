@@ -5,11 +5,11 @@ authors: [marco-gorelli]
 description: 'A closer look at non-elementary group-by aggregations'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/dataframe-group-by/group-by-hero-mobile.png
+  src: /posts/dataframe-group-by/featured.png
   alt: 'Group of Polar bears'
 hero:
-  imageSrc: /posts/dataframe-group-by/group-by-hero-desktop.png
-  imageAlt: 'Example of group-by operation in Polars'
+  imageSrc: /posts/dataframe-group-by/hero.jpg
+  imageAlt: 'Young polar bears, northern Alaska, by Hans-Jurgen Mager, https://unsplash.com/photos/polar-bear-on-snow-covered-ground-during-daytime-k4ov7ulBn20'
 ---
 
 # The Polars vs pandas difference nobody is talking about
