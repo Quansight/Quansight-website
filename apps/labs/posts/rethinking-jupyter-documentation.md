@@ -23,7 +23,7 @@ could use an upgrade. Accessing interactive Documentation when in a Jupyter
 session, and what it could become. At the end I'll link to my current prototype
 if you are adventurous.
 
-# The current limitation for users
+## The current limitation for users
 
 The current documentation of IPython and Jupyter come in a few forms, but mostly
 have the same limitation.
@@ -38,7 +38,6 @@ You can scroll around but that's about it whether in terminal or Notebooks.
 
 Compare it to the same documentation on the NumPy website.
 
-
 <img alt="numpy.linspace on numpy.org" src="/posts/rethinking-jupyter-documentation/numpy-linspace-compare.png" />
 
 On the left is the documentation for NumPy when visiting [the NumPy website](https://numpy.org). Let's
@@ -48,18 +47,17 @@ it is typically reached via `identifier?` or `help(identifier)`
 
 Compared to rendered documentation, the help documentation is:
 
- - Hard to read,
- - Has no navigation,
- - RST Directives have not been interpreted,
- - No inline graphs, no rendered math.
-
+- Hard to read,
+- Has no navigation,
+- RST Directives have not been interpreted,
+- No inline graphs, no rendered math.
 
 There is also no access to non-docstring based documentation, **no narrative**,
 **no tutorials**, **no image gallery or examples**, no search, no syntax
 highlighting, no way to interact or modify documentation to test effects of
 parameters.
 
-# Limitation for authors
+## Limitation for authors
 
 Due to Jupyter and IPython limitations to display documentation I believe
 authors are often contained to document functions.
@@ -82,8 +80,8 @@ This also leads to long discussions about which syntax to use in advanced areas,
 like formulas in [SymPy's docstrings](https://github.com/sympy/sympy/issues/14964).
 
 Many projects have to implement dynamic docstrings; for example to include all
-the parameters a function or class would pass down using ``**kwargs`` (search
-the matplotlib source code for `_kwdoc` for example, or look at the ``pandas.DataFrame`` implementation).
+the parameters a function or class would pass down using `**kwargs` (search
+the matplotlib source code for `_kwdoc` for example, or look at the `pandas.DataFrame` implementation).
 
 This can make it relatively difficult for authors and contributors to properly
 maintain and provide comprehensive docs.
@@ -94,7 +92,7 @@ tool to help there. See for example [vélin](https://github.com/Carreau/velin)
 which attempts to auto reformat and fix common NumPyDoc's format mistakes and
 typos – but that's a subject of a future post.
 
-# Stuck between a Rock and a Hard place
+## Stuck between a Rock and a Hard place
 
 While Sphinx and related projects are great at offering hosted HTML
 documentation, extensive usage of those makes interactive documentation harder
@@ -110,7 +108,7 @@ Hosted websites often may not reflect the locally installed version of the
 libraries and require careful linking, deprecation and narrative around
 platform or version specific features.
 
-# This is fixable
+## This is fixable
 
 For the past few months I've been working on rewriting how IPython (and hence
 Jupyter) can display documentation. It works both in terminal (IPython) and
@@ -121,7 +119,7 @@ understands most directives; it could be customized to understand any new ones:
 
 Above is the (terminal) documentation of `scipy.polynomial.lagfit`, see how the
 single backticks are properly understood and refer to known parameters, it
-detected that  `` `n` `` is incorrect as it should have double backticks; notice
+detected that `` `n` `` is incorrect as it should have double backticks; notice
 the rendering of the math even in terminal.
 
 For that matter technically this does not care as to whether the DocString is
@@ -142,17 +140,16 @@ Images are included, even in the terminal when they are not inline but replaced 
 a button to open them in your preferred viewer (see the `Open with quicklook` in
 the above screenshot).
 
-# The future
-
+## The future
 
 I'm working on a number of other features, in particular:
 
- - rendering of narrative docs – for which I have a prototype,
- - automatic indexing of all the figures and plots –  working but slow right now,
- - proper cross-library referencing and indexing without the need for intersphinx.
-   For example, it is possible from the `numpy.linspace` page to see all pages that
-   reference it, or use `numpy.linspace` in their example section
-   (see previous image).
+- rendering of narrative docs – for which I have a prototype,
+- automatic indexing of all the figures and plots –  working but slow right now,
+- proper cross-library referencing and indexing without the need for intersphinx.
+  For example, it is possible from the `numpy.linspace` page to see all pages that
+  reference it, or use `numpy.linspace` in their example section
+  (see previous image).
 
 And many others, like showing a graph of the local references between functions,
 search, and preference configurability. I think this could also support many
