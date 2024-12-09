@@ -1,18 +1,62 @@
 ---
-title: >
-  lib_sf_error_state – The story of SciPy's first shared library
-published: December 4, 2024
+title: The story behind SciPy's first shared library
 authors: [albert-steppi]
-description: 'lorem ipsum'
+published: December 4, 2024
+description: The story of the first shared library to make it into the world of low level code that lies beneath SciPy's surface.
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/lib-sf-error-state/featured.png
-  alt: >
-    The text "SciPy" along with the SciPy logo superimposed over an elaborate computer generated image of a circuitboard in the style of Francisco Goya, intended to evoke a sense of great complexity beneath a simple surface.
+  alt: The text "SciPy" along with the SciPy logo superimposed over a computer generated image of a circuitboard.
 hero:
   imageSrc: /posts/lib-sf-error-state/hero.png
-  imageAlt: 'The text "SciPy" along with the SciPy logo superimposed over an elaborate computer generated image of a circuitboard in the style of Francisco Goya, intended to evoke a sense of great complexity beneath a simple surface.'
+  imageAlt: The text "SciPy" along with the SciPy logo superimposed over a computer generated image of a circuitboard.
 ---
+
+## Introduction
+
+This is the story of the first shared library to make it into the world of low level code that lies beneath SciPy's
+surface. It offers a glimpse at some of the complexity we try to hide from users, while previewing some exciting
+developments in `scipy.special`.
+
+First, let's take a step back and look at the wider context. Python has become wildly popular as a scripting language
+for scientific and other data intensive applications. It owes much of its success to an exemplary execution of the
+"compiled core, interpreted shell" principle and a pragmatic "worse-is-better" philosophy, which provided fertile ground
+for rapid growth of a healthy ecosystem, giving it an edge in the "winner-take-all" like dynamics of the battle for
+developer and institutional attention and support.
+
+From modeling atmospheric dynamics with numerical solutions of systems of partial differential equations, fitting a
+neural network model to massive datasets to predict text tokens based on context, to running Markov Chain Monte-Carlo
+simulations to perform statistical inference with sophisticated hierarchical models of disease prevalence—scientific
+applications can make intense computational demands, making it desirable to work close to the metal in a compiled
+language that produces efficient native code.
+
+There is also important work that is not so computationally demanding: orchestration of simulation pipelines, data
+munging and preprocessing, setting up models for statistical analysis, production of plots and tables, these and other
+things that involve writing what is known as "glue-code". Though one could write such code in a traditional compiled
+language, what's at a premium here is not computational efficiency, but developer efficiency. Good research involves a
+process of trial and error, mucking around so to speak, and the more mucking around one can do in a set amount of time,
+the more likely it is to hit upon something that works. Python offers a flexible and expressive language that has been
+described as executable pseudocode, sometimes making it feel like one can put one's thoughts directly in action.
+
+Before the Julia developers could dream of a better world and set out to solve the two language problem, Python offered
+a two language solution. For in addition to its friendly syntax and interactivity, Python had the benefit that its
+default CPython interpreter was designed specifically to make it easy to extend Python programs with efficient native
+code. It's clear that serious thought was given to Python's C API and C interoperability in general. Even the
+oft-maligned global interpreter lock or GIL, a barrier to free threading within Python, has the benefit of making it
+much easier to call out to native code, since one need not worry about the thread-safety of wrapped compiled
+libraries. The GIL can be selectively released and reacquired within C extensions to allow for explicit management of
+threading in cases where there is no need to interact with the Python interpreter. Python's design thus made it feasible
+for a handful of motivated early adopters to kickstart development of the Scientific Python ecosystem by wrapping,
+filling in gaps, and providing user friendly Python APIs to a wide range of battle tested permissively licensed and
+public domain scientific software tools from places like NETLIB.
+
+With Python's world of healthy ecosystems of packages, it's possible to get a lot of computationally intensive
+work done without writing a line of code in any other language. Journeying deeper into the stack, it may be surprising
+to see the level of work that can go into making even a relatively simple feature work smoothly.
+
+## from original draft is below
+
+I'll reuse this stuff, but am now writing in a less conversational tone, and trying to aim for a more knowledgeable audience.
 
 ### Intro to scipy.special
 
