@@ -14,9 +14,9 @@ hero:
 
 ## Introduction
 
-This is the story of the first shared library to make it into the deep lake of low level code that lies beneath SciPy's
-surface. It offers a glimpse at some of the complexity we try to hide from users, while previewing some exciting
-developments in `scipy.special`.
+This is the story of the first shared library to make it into the low level code that lies beneath SciPy's surface. It
+offers a glimpse at some of the complexity we try to hide from users, while previewing some exciting developments in
+`scipy.special`.
 
 Python has become wildly popular as a scripting language for scientific and other data intensive applications. It owes
 much of its success to an exemplary execution of the "compiled core, interpreted shell" principle. One can orchestrate
@@ -25,45 +25,152 @@ and tables, and more, in an expressive high level language—while delegating co
 libraries.
 
 The default CPython interpreter was designed specifically to make it easy to extend Python programs with efficient
-native code. The Python C API is well thought out and straightforward to work with. The controversial global
-interpreter lock or GIL, a barrier to free threading within Python, has the benefit of making it much easier to call out
-to native code, since one need not worry about the thread-safety of wrapped compiled libraries.
+native code. The Python C API is well thought out and straightforward to work with. The controversial global interpreter
+lock or GIL, a barrier to free threading within Python, has the benefit of making it much easier to call out to native
+code, since one need not worry about the thread-safety of wrapped compiled libraries.
 
 By wrapping, filling in gaps, and providing user friendly Python APIs to a wide range of battle tested permissively
-licensed and public domain scientific software tools from places like NETLIB; NumPy and SciPy's founding developers were
-able to kickstart the growth of the Scientific Python ecosystem. There is now a world of ecosystems of scientific and
-data intensive software available in Python. Users who spend their time in the "interpreted shell" may have little idea
-of the complexity that can arise in the "compiled core". Journeying deeper into the stack, it can be surprising to see
-the level of work that can go into making even a relatively simple feature work smoothly.
+licensed and public domain scientific software tools from places like NETLIB [^1]; NumPy and SciPy's founding developers
+[^2] were able to kickstart the growth of the Scientific Python ecosystem. There is now a world of ecosystems of
+scientific and data intensive software available in Python. Users who spend their time in the "interpreted shell" may
+have little idea of the complexity that can arise in the "compiled core". Journeying deeper into the stack, it can be
+surprising to see the level of work that can go into making even a relatively simple feature work smoothly.
 
-## from original draft is below
+## NumPy Universal functions
 
-I'll reuse this stuff, but am now writing in a less conversational tone, and trying to aim for a more knowledgeable audience.
+NumPy `ndarray`s represent arbitrary dimensional arrays of elements of the same type, stored in a continguous buffer at
+the machine level. A universal function or `ufunc` for short is a Python level function which applies a transform to
+each element of an `ndarray` by calling out to native code which operates elementwise over the underlying contiguous
+buffer.
 
-### Intro to scipy.special
+Here's the ufunc `np.sqrt` in action
 
-[`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html) offers
-implementations of a wide collection of [special
-functions](https://en.wikipedia.org/wiki/Special_functions). Though not a
-precise term, a loose definition of a special function is a mathematical
-function which cannot be expressed in terms of well known [elementary
-functions](https://en.wikipedia.org/wiki/Elementary_function) (think
-polynomials,`log`, `exp`, `sin`, etc.), but which arises in applications
-frequently enough that it is worthy of its own name.
+```python
+In  [1]: import numpy as np
 
-Most of the functions in `scipy.special` are NumPy [Universal
-functions](https://numpy.org/doc/stable/reference/ufuncs.html) - ufuncs for
-short. A ufunc operates on NumPy
-[`ndarrays`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray),
-looping over the elements and evaluating a function in efficient native code [^1], avoiding Python
-function call overhead.
+In  [2]: A = np.arange(1, 11, dtype=float)
 
-Here is an example using the [Gamma
-function](https://en.wikipedia.org/wiki/Gamma_function), a continuous extension
-of the factorial, to reproduce a plot from the Wikipedia article [_Volume of an
-n-ball_](https://en.wikipedia.org/wiki/Volume_of_an_n-ball). The plot shows how
-the volume of a solid multi-dimensional sphere depends on the dimension `n` when
-the radius `R` is one of 0.9, 1.0, or 1.1.
+In  [3]: A
+Out [3]: array([ 1.,  2.,  3.,  4.,  5.,  6.,  7.,  8.,  9., 10.])
+
+In  [4]: np.sqrt(A)
+Out [4]:
+array([1.        , 1.41421356, 1.73205081, 2.        , 2.23606798,
+       2.44948974, 2.64575131, 2.82842712, 3.        , 3.16227766])
+
+```
+
+For large arrays, the speedup from by applying `np.sqrt` over an
+`ndarray` rather than `math.sqrt` over each element of a list is substantial.
+On my laptop:
+
+```python
+In  [1]: import numpy as np
+
+In  [2]: A = np.arange(1, 1000000, dtype=float)
+
+In  [3]: %timeit np.sqrt(A)
+1.35 ms ± 49 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+
+In  [4]: B = [float(t) for t in range(1, 1000000)]
+
+In  [5]: %timeit [math.sqrt(t) for t in B]
+103 ms ± 1.18 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+```
+
+## Error handling
+
+Consider for a moment what should happen if one gives invalid input to a `ufunc`. If we pass a negative `float` to
+`math.sqrt` a `ValueError` is raised.
+
+```python
+In  [1]: import math
+
+In  [2]: math.sqrt(-1.0)
+ValueError                                Traceback (most recent call last)
+Cell In[2], line 1
+----> 1 math.sqrt(-1.0)
+
+ValueError: math domain error
+```
+
+What if one applies a ufunc over a large array and only a small number of inputs are invalid? Would it be reasonable to
+raise a `ValueError` even though almost every calculation succeeded and produced a useful result? Fortunately that's not
+what happens.
+
+```python
+In  [1]: import numpy as np
+
+In  [2]: A = np.arange(-1, 1000, dtype=float)
+
+In  [3]: np.sqrt(A)
+<ipython-input-3-d44c5e97424e>:1: RuntimeWarning: invalid value encountered in sqrt
+  np.sqrt(A)
+Out[3]:
+array([        nan,  0.        ,  1.        , ..., 31.57530681,
+       31.591138  , 31.60696126])
+```
+
+Instead a warning is raised, and `-1.0` is mapped to `NaN`, a special floating point number representing an undefined
+result; `NaN`s propagate sanely through most calculations [^3], making them useful in these situations.
+
+What if we want to suppress the warning? Perhaps we're applying a ufunc within an inner loop and getting buried in
+unhelpful warning output? NumPy provides an API for controlling [floating point error
+handling](https://numpy.org/doc/stable/reference/routines.err.html) which is very helpful in such situations. Here's the
+[np.errstate](https://numpy.org/doc/stable/reference/generated/numpy.errstate.html#numpy.errstate) context manager in
+action:
+
+```python
+In  [1]: import numpy as np
+
+In  [2]: A = np.arange(-1, 1000, dtype=float)
+
+In  [3]: with np.errstate(invalid="ignore"):
+    ...:     B = np.sqrt(A)
+    ...:
+
+In  [4]: B
+
+Out [5]:
+array([        nan,  0.        ,  1.        , ..., 31.57530681,
+       31.591138  , 31.60696126]
+```
+
+or what if we genuinely want to raise if any kind of floating point error occurs? Maybe negative inputs imply a sensor
+failure in a latency insensitive [^4] robot which will ping its handlers upon an exception and hibernate until it can be
+physically recovered.
+
+`np.errstate` has us covered there too.
+
+```python
+In  [1]: import numpy as np
+
+In  [2]: A = np.arange(-1, 1000, dtype=float)
+
+In  [3]: with np.errstate(all="raise"):
+    ...:     B = np.sqrt(A)
+    ...:
+---------------------------------------------------------------------------
+FloatingPointError                        Traceback (most recent call last)
+Cell In[3], line 2
+      1 with np.errstate(all="raise"):
+----> 2     B = np.sqrt(A)
+
+FloatingPointError: invalid value encountered in sqrt
+
+```
+
+## scipy.special
+
+NumPy has over 60 [available ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html#available-ufuncs) for a range of
+mathematical functions and operations, but more specialized functions useful in the sciences and engineering are out of
+scope. `ufunc`s for many such functions can be found instead in
+[`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html) [^5].
+
+Here is an example using the `ufunc` `special.gamma` for the [Gamma
+function](https://en.wikipedia.org/wiki/Gamma_function), to reproduce a plot from the Wikipedia article [_Volume of an
+n-ball_](https://en.wikipedia.org/wiki/Volume_of_an_n-ball). The plot shows how the volume of a solid multi-dimensional
+sphere depends on the dimension `n` when the radius `R` is one of 0.9, 1.0, or 1.1.
 
 ```python
 import matplotlib.pyplot as plt
@@ -91,7 +198,7 @@ ax.legend()
 plt.show()
 ```
 
-which outputs
+which outputs:
 
 <p align="center">
   <img
@@ -101,210 +208,96 @@ which outputs
    />
 </p>
 
-Beyond the performance benefit from getting to loop and evaluate over arrays in
-low level native code, ufuncs also let us write more readable Python code
-by allowing us to work directly with arrays without having to write our own loops.
+There are currently ufuncs for over 230 mathematical functions in `scipy.special`.
 
-### Error handling for ufuncs
+## scipy.special error handling
 
-Having ufuncs which operate over entire arrays poses a question. What should
-be done if errors occur for some of the scalar function evaluations performed
-when looping over the input arrays? The scalar function `gamma`
-in the [`math`](https://docs.python.org/3/library/math.html) module from the
-Python standard library raises an exception when the input is a non-positive
-integer, since these points, known as poles, are outside the domain of the Gamma
-function
-
-```
-In [1]: import math
-
-In [2]: math.gamma(-2)
----------------------------------------------------------------------------
-ValueError                                Traceback (most recent call last)
-Cell In[2], line 1
-----> 1 math.gamma(-2)
-
-ValueError: math domain error
-```
-
-But consider the example below where we evaluate the Gamma function over many
-points to produce a graph. Would it make sense to raise an exception because
-5 of the 5,000,001 inputs are outside of the domain?
+What if one of the `ufunc`s in `scipy.special` recieves an array with some invalid
+elements?
 
 ```python
-import matplotlib.pyplot as plt
-import numpy as np
-import scipy.special as special
+In  [1]: import numpy as np
 
-x = np.linspace(-5, 5, 5000001)
-y = special.gamma(x)
+In  [2]: import scipy.special as special
 
-fig, ax = plt.subplots(1, 1)
-ax.plot(x, y, color="blue")
-ax.set_xlim(-5, 5)
-ax.set_ylim(-5, 5)
-ax.minorticks_on()
-ax.grid(which="major", linestyle="-", linewidth="0.75", color="black")
-ax.grid(which="minor", linestyle=":", linewidth="0.5", color="gray")
-plt.show()
-```
+In  [3]: x = np.linspace(-4, 4, 5)
 
-If we run it, we see that it produces the correct result without issue
+In  [4]: special.gamma(x)
 
-<p align="center">
-  <img
-    src="/posts/lib-sf-error-state/gamma_function_plot.png"
-	alt="Plot of the Gamma function for x in the interval from -5 to  5."
-   />
-</p>
+Out [4]: array([nan, nan, inf,  1.,  6.])
 
-The errors were ignored. There may be situations where one
-actually cares about errors though, therefore `scipy.special`
-provides [`seterr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.seterr.html#scipy.special.seterr), [`geterr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.geterr.html#scipy.special.geterr) and
-[`errstate`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.errstate.html#scipy.special.errstate) for controlling how
-special-function errors are handled. These tools mirror those used in
-NumPy for controlling [floating point error handling](https://numpy.org/devdocs/reference/routines.err.html). By default, all special-function errors are ignored.
-Below we use the `special.seterr` context manager to raise warnings instead,
-observing 5 warnings corresponding to the 5 poles of the Gamma function within the
-array `x`.
+In  [5]: with np.errstate(all="raise"):
+    ...:     _ = special.gamma(x)
+	...:
 
 ```
-In [1]: import numpy as np
 
-In [2]: import scipy.special as special
+Just like for the `ufunc`s included in NumPy, by default invalid entries will be mapped to `NaN`, however no warning is
+raised, and `np.errstate` has no impact on error handling. What's going on? Well, NumPy's `ufunc`s are provided in a C
+[extension module](https://docs.python.org/3/extending/extending.html) that's bundled into NumPy. Within this extension
+module, there's a library of compiled code and an interface for interacting with this code from Python. Some of
+compiled code in the extension module manages the current state for error handling policies. The `ufunc`s in
+`scipy.special` are bundled into a different extension module in SciPy. Typically, extension modules are like separate
+worlds, and one cannot access another except through its Python interface. Instead, SciPy includes its own means of
+controlling error handling,
+[scipy.special.errstate](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.errstate.html), which
+mirrors `np.errstate`.
 
-In [3]: x = np.linspace(-5, 5, 5000001)
+```python
+In  [1]: import numpy as np
 
-In [4]: with special.errstate(all="warn"):
-   ...:     y = special.gamma(x)
-   ...:
-<ipython-input-6-b5f6b4a88c33>:2: SpecialFunctionWarning: scipy.special/Gamma: overflow
-  y = special.gamma(x)
-<ipython-input-6-b5f6b4a88c33>:2: SpecialFunctionWarning: scipy.special/Gamma: overflow
-  y = special.gamma(x)
-<ipython-input-6-b5f6b4a88c33>:2: SpecialFunctionWarning: scipy.special/Gamma: overflow
-  y = special.gamma(x)
-<ipython-input-6-b5f6b4a88c33>:2: SpecialFunctionWarning: scipy.special/Gamma: overflow
-  y = special.gamma(x)
-<ipython-input-6-b5f6b4a88c33>:2: SpecialFunctionWarning: scipy.special/Gamma: overflow
-  y = special.gamma(x)
-<ipython-input-6-b5f6b4a88c33>:2: SpecialFunctionWarning: scipy.special/Gamma: overflow
-  y = special.gamma(x)
+In  [2]: import scipy.special as special
+
+In  [3]: x = np.linspace(-4, 4, 5)
+
+In  [4]: with special.errstate(all="raise"):
+    ...:     _ = special.gamma(x)
+	...:
+---------------------------------------------------------------------------
+SpecialFunctionError                      Traceback (most recent call last)
+Cell In[4], line 2
+      1 with special.errstate(all="raise"):
+----> 2     _ = special.gamma(x)
+
+SpecialFunctionError: scipy.special/Gamma: singularity
 ```
 
-### Error handling internals
+But is there a way to _share_ state between extension modules without going through Python?
+_(hint: the title of this article)._
 
-Let's take a moment to look into how this error handling works.
-Every ufunc is based on a _scalar kernel_ written in a compiled language.
-In most cases, a scalar kernel is a function which takes either a scalar
-floating point or integer value for each of its inputs and returns a
-single scalar. Historically, `scipy.special` featured scalar kernels written
-in C, C++, Fortran, and Cython, mostly taken from existing permissively licensed
-special function implementations, with some custom implementations written
-by SciPy's maintainers and contributors to fill in gaps.
+## Some exciting developments
 
-The scalar kernel for `special.gamma` was, until recently, written in C with
-signature
+To create a `ufunc` for a mathematical function, one needs a scalar implementation of this function in a compiled
+language that can be called from C. These scalar implementations are known as scalar kernels. Until recently,
+`scipy.special` had scalar kernels written in all of C, C++, Fortran 77, and Cython. In August of 2023, Irwin Zaid at
+Christ Church College Oxford proposed rewriting all of the scalar kernels in header files which could be included in
+both C++ and CUDA programs. This would allow these special functions to be used not just in SciPy, but also GPU-aware
+array libraries like CuPy and PyTorch, improving special function support across array library backends. I was supported
+by the 2020 NASA ROSES grant, _Reinforcing the Foundations of Scientific Python_ (with travel and compute costs covered
+by the 2023 NumFocus SDG _Streamlined Special Function Development in SciPy_), to work together with Irwin to put this
+plan in action. With additional help from SciPy maintainer Ilhan Polat, who made a heroic effort to translate over
+twenty thousand lines of Fortran scalar kernel code to C, and contributions from other volunteers, substantial progress
+has been made, and we are in the process of splitting these headed into a separate library called
+[xsf](https://github.com/scipy/xsf/). This is a story for another time. Until then, to learn more, see
+[xsf/#1](https://github.com/scipy/xsf/issues/1).
 
-```c
-double Gamma(double x)
-```
+While working on this project, it became apparent to everyone involves that the infrastructure used in SciPy for
+creating `ufunc`s was greatly complicated by the need to work with scalar kernels from so many languages. Standardizing
+on C++ offered a chance to simplify things considerably. Irwin found that existing infrastructure was not flexible
+enough for work he had planned involving [Generalized universal
+functions](https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html), or `gufuncs` for short, so he wrote
+new machinery from scratch. `ufunc`s and `gufunc`s created with the new machinery live in a separate extension module
+from those created with the old machinery [^6]. What problem could this cause?
 
-taking one double precision floating point value and returning another. A
-C function, `sf_error`, is used for error handling. Below is an example where
-`sf_error` is used at poles of the Gamma function to signal an overflow.
-The three arguments are the name of the function, an error code, and an
-optional message (`NULL` here specifies that no message is supplied.)[^2]
+## Error handling redux
 
-```c
-    q = fabs(x);
-
-    if (q > 33.0) {
-	    if (x < 0.0) {
-	        p = floor(q);
-	        if (p == q) {
-	    gamnan:
-		        sf_error("Gamma", SF_ERROR_OVERFLOW, NULL);
-		        return (INFINITY);
-```
-
-Internally, `sf_error` consults a global array, `sf_error_actions`, which
-is initialized as
-
-```C
-/* If this isn't volatile clang tries to optimize it away */
-static volatile sf_action_t sf_error_actions[] = {
-    SF_ERROR_IGNORE, /* SF_ERROR_OK */
-    SF_ERROR_IGNORE, /* SF_ERROR_SINGULAR */
-    SF_ERROR_IGNORE, /* SF_ERROR_UNDERFLOW */
-    SF_ERROR_IGNORE, /* SF_ERROR_OVERFLOW */
-    SF_ERROR_IGNORE, /* SF_ERROR_SLOW */
-    SF_ERROR_IGNORE, /* SF_ERROR_LOSS */
-    SF_ERROR_IGNORE, /* SF_ERROR_NO_RESULT */
-    SF_ERROR_IGNORE, /* SF_ERROR_DOMAIN */
-    SF_ERROR_IGNORE, /* SF_ERROR_ARG */
-    SF_ERROR_IGNORE, /* SF_ERROR_OTHER */
-    SF_ERROR_IGNORE  /* SF_ERROR__LAST */
-};
-```
-
-Each entry of the array corresponds to a different special function error code,
-and we see that by default, all errors are ignored.
-
-When `special.seterr` is called from within Python, a C function
-`scipy_sf_error_set_action` is used to update the `sf_error_actions` array. When
-`sf_error` is called within a scalar kernel with a particular error code,
-it checks the `sf_error_actions` array for the desired behavior, and either
-ignores, warns, or raises depending on what it finds.
-
-### Some recent developments in scipy.special
-
-This system worked smoothly for over 20 years until recent developments
-unearthed a limitation. We mentioned that historically, the scalar kernels
-for ufuncs in `scipy.special` were written in C, C++, Fortran, and Cython.
-This is changing. In 2023,
-Dr. Irwin Zaid ([@izaid](https://github.com/izaid)) of Christ Church College, Oxford reached out to some of
-SciPy's maintainers and proposed a plan to write special function scalar kernels
-in C++ headers in such a way that they could be used either on CPU or on NVIDIA
-GPU's with CUDA [^3]. This would make it possible to use SciPy's implementations
-in other array libraries such as [CuPy](https://cupy.dev/) and
-[PyTorch](https://pytorch.org/), improving special function availability
-in libraries seeking to conform to the
-[Python Array API standard](https://data-apis.org/array-api/latest/) and
-opening up the possibility for a
-[special function array API extension](https://github.com/data-apis/array-api/issues/725). This proposal was enthusiastically accepted and a great effort t
-o translate all of `scipy.special` into such C++ began.
-
-Now the ufuncs in `scipy.special` are defined in what is known as a
-[C extension module](https://docs.python.org/3/extending/extending.html). One
-of the great strength's of the [CPython](https://github.com/python/cpython)
-interpreter is that it offers a powerful [C API](https://docs.python.org/3/c-api/index.html) that makes it straightforward to extend Python with efficient native
-code [^4].
-
-The need for supporting scalar kernels written in each of C, C++, Cython, and
-Fortran lead to a somewhat convoluted design for `scipy.special`'s `_ufuncs`
-extension module, which is created through a
-[sophisticated code generation process](https://github.com/scipy/scipy/blob/main/scipy/special/_generate_pyx.py) that few understand completely. Having all scalar
-kernels written in C or C++ allows for simplifying `scipy.special`'s ufunc
-infrastructure, a possibility which was
-[first suggested](https://github.com/scipy/scipy/issues/19964)
-by SciPy maintainer Ilhan Polat ([@ilayn](https://github.com/ilayn)),
-who helped translate _all_ of the Fortran scalar kernels in `scipy.special`
-into C [^5]. [@izaid](https://github.com/izaid) eventually followed up with
-a pull request, [scipy/#20260](https://github.com/scipy/scipy/pull/20260),
-offering a streamlined means of defining the ufuncs in `scipy.special` which
-works for scalar kernels written in C and C++.
-
-### A problem with error handling
-
-Since not all scalar kernels
-are translated and ready to use with the new infrastructure, the ufuncs
-in `scipy.special` have become split between two different extension modules, one
-using the old infrastructure and the other the new infrastructure. There were
-challenges getting this to work correctly. When the ufuncs were first split
-between separate extension modules, a lone doctest began to fail:
+Just as before, when `ufunc`s are split across multiple extension modules, the error policy state can no longer be
+easily shared between them. We caught this immediately due to a failure in the following doctest for
+[special.seterr](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.seterr.html#scipy.special.seterr).
 
 ```
+    Examples
+    --------
     >>> import scipy.special as sc
     >>> from pytest import raises
     >>> sc.gammaln(0)
@@ -313,167 +306,63 @@ between separate extension modules, a lone doctest began to fail:
     >>> with raises(sc.SpecialFunctionError):
     ...     sc.gammaln(0)
     ...
+    >>> _ = sc.seterr(**olderr)
 ```
 
-After the call to `seterr` , the call to `gammaln(0)` should raise
-an exception because
-0 is a pole of the Gamma function [^6] but the doctest was failing because
-no exception was raised. What changed is that `gammaln` had been moved to
-the new extension module using the new ufunc definition infrastructure.
+`gammaln`, for the log of the absolute value of the Gamma function, was one of a handful of ufuncs moved to the new
+extension module. Both extension modules contained a separate copy of the state for managing error handling policies and
+a Python interface for managing this state, but the user facing `special.seterr`, `special.errstate`, and
+`special.geterr` in SciPy all came from the first extension module. We then saw two options:
 
-Recall that error handling behavior is
-encoded in a global array `sf_error_actions`; this was, until recently, defined in
-the C file, `sf_error.c`. An extension module can be built up from multiple C
-source files which are compiled and linked together into a library which can
-be called from the Python interpreter. When the ufuncs were first split between
-two extension modules, each had a separate copy of `sf_error.c` compiled into it.
-This means that each had a separate copy of the array `sf_error_actions` and
-updates to one were not reflected in the other. The Python function `seterr` and
-the context manager `errstate` are defined in the old ufuncs
-extension module, and therefore could only modify the `sf_error_actions` array
-for the old extension module. Error handling thus couldn't be controlled for
-ufuncs defined in the new extension module.
+1. Update `special.seterr`, `special.errstate`, `special.geterr` to access and update the state in each extension
+   module, taking care that the state remains synchronized.
 
-[@izaid](https://github.com/izaid) suggested we fix
-this by making an `sf_error` [shared library](https://en.wikipedia.org/wiki/Shared_library)
-which is shared between the two extension modules [^7], [^8].
-A shared library contains executable code which can be loaded into different programs at runtime,
-as opposed to a [static library](https://en.wikipedia.org/wiki/Static_library)
-with code which is directly linked into other programs at compile time. @izaid and I
-initially thought this would be straightforward [^9].
+2. Extract the error handling state and primitives for managing it into a shared library that would be a dependency for
+   each of the extension modules.
 
-### The challenges of shipping a cross platform shared library
+As you've correctly guessed, we chose to create a shared library, which seemed like the more principled [^7] option. How
+hard it could it be? [^8]
 
-At least for Linux and Mac OS, it was fairly straightforward to get the shared library
-working. The shared library contains only a single source file `sf_error_state.c`
-which defines the global `sf_error_actions` array and provides two functions,
-`scipy_sf_error_set_action` and `scipy_sf_error_get_action` for modifying and
-inspecting this array respectively. This entire file is reproduced below.
+## Static vs shared linking
 
-```C
-#include <stdlib.h>
+For those who are unfamiliar, let's review the structure of C programs. Below I've annotated the classic hello world
+program. Every C program must have a single entrypoint function `main` where execution begins. Within `main` one can use
+functions and data structures which were defined outside of `main`. Here we use a function `printf` from the C standard
+library.
 
-#include "sf_error_state.h"
+```c
+/* Insert the contents of the standard library header file "stdio.h"
+ * so we can use printf below. */
+#include <stdio.h>
 
-
-/* If this isn't volatile clang tries to optimize it away */
-static volatile sf_action_t sf_error_actions[] = {
-    SF_ERROR_IGNORE, /* SF_ERROR_OK */
-    SF_ERROR_IGNORE, /* SF_ERROR_SINGULAR */
-    SF_ERROR_IGNORE, /* SF_ERROR_UNDERFLOW */
-    SF_ERROR_IGNORE, /* SF_ERROR_OVERFLOW */
-    SF_ERROR_IGNORE, /* SF_ERROR_SLOW */
-    SF_ERROR_IGNORE, /* SF_ERROR_LOSS */
-    SF_ERROR_IGNORE, /* SF_ERROR_NO_RESULT */
-    SF_ERROR_IGNORE, /* SF_ERROR_DOMAIN */
-    SF_ERROR_IGNORE, /* SF_ERROR_ARG */
-    SF_ERROR_IGNORE, /* SF_ERROR_OTHER */
-    SF_ERROR_IGNORE  /* SF_ERROR__LAST */
-};
-
-
-void scipy_sf_error_set_action(sf_error_t code, sf_action_t action)
-{
-    sf_error_actions[(int)code] = action;
-}
-
-
-sf_action_t scipy_sf_error_get_action(sf_error_t code)
-{
-    return sf_error_actions[(int)code];
+/* The signature int main(void) says that main takes no arguments
+ * and returns an integer. */
+int main(void) {  /* Execution begins here */
+    /* Use the function printf from the standard library to output
+	 * "Hello World!" to the terminal. */
+    printf("Hello World!\n");
+	/* Return a status code zero for successful execution. */
+	return 0;
 }
 ```
 
-In recent years, SciPy has moved to using the
-[Meson build system](https://mesonbuild.com/) [^10]. Setting up
-the shared library in `scipy.special`'s
-[meson.build](https://github.com/scipy/scipy/blob/main/scipy/special/meson.build) file
-is fairly straightforward.
+A C program may contain more than one file. Each file in the program is separately compiled into an object file of
+native machine instructions which give explicit commands directly to the CPU [^9]. A program known as a linker is
+responsible for combining the generated object files into a single program. A library is a collection of code which is
+not itself a standalone program, but contains functions and data structures which can be used in programs. The linker
+needs to _link_ library code into a program and there are two ways to do this. The simplest way is _static linking_, in
+which the library code is linked and bundled directly into the program. Separate programs which use the library will
+each have their own bundled copy. Special function error handling broke because the code responsible for it was
+statically linked into each separate extension module.
 
-```
-sf_error_state_lib = shared_library('sf_error_state',
-  ['sf_error_state.c'],
-  include_directories: ['../_lib', '../_build_utils/src'],
-  cpp_args: ['-DSP_SPECFUN_ERROR'],
-  install: true,
-  install_dir: py3.get_install_dir() / 'scipy/special',
-)
-```
+By contrast, a shared library
 
-In the meson syntax for creating an extension module, one specifies that
-one wants to link with the `sf_error_state_lib`. It's also required to
-specify that `install_rpath` is `$ORIGIN`. This instructs meson to look
-for shared library object files in the same folder where this `meson.build`
-file is located. Here is how the extension module for ufuncs using the new
-infrastructure is defined.
-
-```
-py3.extension_module('_special_ufuncs',
-  ['_special_ufuncs.cpp', '_special_ufuncs_docs.cpp', 'sf_error.cc'],
-  include_directories: ['../_lib', '../_build_utils/src'],
-  cpp_args: ['-DSP_SPECFUN_ERROR'],
-  dependencies: [np_dep],
-  link_with: [sf_error_state_lib],
-  link_args: version_link_args,
-  install: true,
-  subdir: 'scipy/special',
-  install_rpath: '$ORIGIN'
-)
-```
-
-[^1]:
-    A program known as a compiler converts code written
-    in a higher level language like C or Fortran to instructions which
-    tell the processor specifically what to do in concrete detail. Such instructions
-    are referred to as machine code or native code.
-
-[^2]:
-    One can also see here one of the oldest still living "bugs" in SciPy. In
-    the plot of the Gamma function in this article, one can see that `gamma(x)`
-    tends to either +∞ or -∞ depending on the direction in which it approaches a
-    non-positive integer. Rather than returning `INFINITY` for positive infinity, it
-    would make more sense to return `NAN` to specify an indeterminate result.
-
-[^3]:
-    See [scipy/#19404](https://github.com/scipy/scipy/issues/19404) for the
-    start of the discussion,
-    [scipy/#19601](https://github.com/scipy/scipy/pull/19601) for the first instance
-    of a special function scalar kernel in SciPy that can work on both CPU and GPU,
-    and [cupy/#8140](https://github.com/cupy/cupy/pull/8140) for the first special
-    function added to CuPy following [@izaid](https://github.com/izaid)'s plan.
-
-[^4]:
-    This enables what is known as the "compiled core, interpreted shell"
-    design philosophy, where performance critical components are written in
-    efficient low level code and intuitive interfaces are provided in a user
-    friendly high level language. This "two language solution" is what allows Python
-    to be so effective in fields like scientific computing and data science despite
-    the performance drawbacks of pure Python.
-
-[^5]:
-    Nearly 20,000 lines of code within 101 files between the
-    [amos](https://github.com/scipy/scipy/pull/19587),
-    [cdflib](https://github.com/scipy/scipy/pull/19560), and
-    [specfun](https://github.com/scipy/scipy/pull/19824) libraries.
-
-[^6]:
-    `gammaln` computes the natural logarithm of the absolute value of the
-    Gamma function.
-
-[^7] https://github.com/scipy/scipy/pull/20316
-
-[^8]:
-    Another potential solution would be to have separate private
-    `_seterr` functions defined in each of the extension
-    modules, each working with the `sf_error_actions` array from its extension
-    module. The public `seterr` and `errstate`, could then be written
-    in Python and use the private extension module specific `_seterr`s to control
-    error handling, taking care to ensure that the multiple copies of
-    `sf_error_actions` remain consistent.
-
-[^9]:
-    From experience, SciPy steering council chair and Quansight Labs co-director
-    Ralf Gommers knew it would be difficult to get this working on Windows
-    https://github.com/scipy/scipy/pull/20316#issuecomment-2016533133
-
-[^10]: See https://labs.quansight.org/blog/2021/07/moving-scipy-to-meson
+[^1]: footnote 1
+[^2]: footnote 2
+[^3]: footnote 3
+[^4]: footnote 4
+[^5]: footnote 5
+[^6]: footnote 6
+[^7]: footnote 7
+[^8]: footnote 8
+[^9]: https://godbolt.org/z/rqv5Y7489
