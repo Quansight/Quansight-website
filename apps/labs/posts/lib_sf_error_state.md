@@ -323,9 +323,9 @@ a Python interface for managing this state, but the user facing `special.seterr`
 As you've correctly guessed, we chose to create a shared library, which seemed like the more principled [^7] option. How
 hard it could it be? [^8]
 
-## Static vs shared linking
+## Static vs dynamic linking
 
-For those who are unfamiliar, let's review the structure of C programs. Below I've annotated the classic hello world
+Let's review the structure of C programs. Below I've annotated the classic hello world
 program. Every C program must have a single entrypoint function `main` where execution begins. Within `main` one can use
 functions and data structures which were defined outside of `main`. Here we use a function `printf` from the C standard
 library.
@@ -335,7 +335,7 @@ library.
  * so we can use printf below. */
 #include <stdio.h>
 
-/* The signature int main(void) says that main takes no arguments
+/* The signature int main(void) says that function main takes no arguments
  * and returns an integer. */
 int main(void) {  /* Execution begins here */
     /* Use the function printf from the standard library to output
@@ -353,9 +353,16 @@ not itself a standalone program, but contains functions and data structures whic
 needs to _link_ library code into a program and there are two ways to do this. The simplest way is _static linking_, in
 which the library code is linked and bundled directly into the program. Separate programs which use the library will
 each have their own bundled copy. Special function error handling broke because the code responsible for it was
-statically linked into each separate extension module.
+statically linked into each separate extension module. By contrast, when library code is dynamically linked, it is not
+included in the executable binary file for a program at compile time. It is instead placed in a separate binary file,
+called a shared library, which can be loaded into the program at runtime.
 
-By contrast, a shared library
+In addition to executable machine instructions, each object file contains a _symbol table_ mapping each identifier used
+in the original source file (e.g. a function name) to either the position in the executable code where the identifier is
+defined (e.g. the function's definition) or a placeholder if there's no definition in the source file. When combining
+object files into a single program through static linking, the linker fills these placeholders by searching the symbol
+tables of the other object files being linked into the program. Object files from a statically linked library are treated
+no differently from object files generated from the program's source code.
 
 [^1]: footnote 1
 [^2]: footnote 2
