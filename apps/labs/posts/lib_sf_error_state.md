@@ -320,15 +320,15 @@ a Python interface for managing this state, but the user facing `special.seterr`
 2. Extract the error handling state and primitives for managing it into a shared library that would be a dependency for
    each of the extension modules.
 
-As you've correctly guessed, we chose to create a shared library, which seemed like the more principled [^7] option. How
-hard it could it be? [^8]
+As you've correctly guessed, we chose to create a shared library, which seemed like the more principled option [^7].
+As the saying goes: we do things not because they are easy, but because we thought they would be easy [^8].
 
 ## Static vs dynamic linking
 
-Let's review the structure of C programs. Below I've annotated the classic hello world
-program. Every C program must have a single entrypoint function `main` where execution begins. Within `main` one can use
-functions and data structures which were defined outside of `main`. Here we use a function `printf` from the C standard
-library.
+Now for some background information to make sure everyone's on the same page. As an entrypoint, let's review the
+structure of C programs. Below I've annotated the classic hello world program. Every C program must have a single
+function `main` where execution begins. Within `main` one can use functions and data structures which were defined
+outside of `main`. Here we use a function `printf` from the C standard library.
 
 ```c
 /* Insert the contents of the standard library header file "stdio.h"
@@ -364,6 +364,35 @@ object files into a single program through static linking, the linker fills thes
 tables of the other object files being linked into the program. Object files from a statically linked library are treated
 no differently from object files generated from the program's source code.
 
+For dynamic linking, at compile time, the linker only checks the shared library's symbol table for entries that could
+fill placeholders, but does not link the shared library into the program. Shared libraries are instead loaded by
+programs at runtime. Function names, variable names, and other identifiers a shared library makes available to
+programs are referred to as symbols exported by the library.
+
+Some benefits using of shared libraries are that
+
+- Separate programs can load and use the same library, rather than having separate copies bundled into each program,
+  reducing code duplication.
+- Updates can be made to a shared library without requiring dependent programs to be recompiled, so long as the library's
+  interface doesn't change.
+
+For these reasons, the C standard library mentioned above is almost always linked dynamically.
+
+As always, there are tradeoffs. A small amount of overhead may be added to function calls, since the process of function
+lookups is more involved, and the need to locate and load the shared libray into memory at runtime can incur a fixed
+amount of startup overhead.
+
+## Sharing global state
+
+One thing shared libraries cannot do is share global state between programs running in separate processes. Each process
+has its own separate address space of memory it can access, and interprocess communication requires special protocols.
+However, in our case there is only one program, the Python interpreter, running in a single process. A shared library
+can share global state between separate Python extension modules [^10] running in the same process, since only a single copy
+of the library is loaded into memory. This is the means we chose for sharing special function error handling state
+between extension modules.
+
+## lib_sf_error_state
+
 [^1]: footnote 1
 [^2]: footnote 2
 [^3]: footnote 3
@@ -373,3 +402,4 @@ no differently from object files generated from the program's source code.
 [^7]: footnote 7
 [^8]: footnote 8
 [^9]: https://godbolt.org/z/rqv5Y7489
+[^10]: footnote 10
