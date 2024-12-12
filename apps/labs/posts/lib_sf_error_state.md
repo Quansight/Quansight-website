@@ -269,13 +269,13 @@ _(hint: the title of this article)._
 
 To create a `ufunc` for a mathematical function, one needs a scalar implementation of this function in a compiled
 language that can be called from C. These scalar implementations are known as scalar kernels. Until recently,
-`scipy.special` had scalar kernels written in all of C, C++, Fortran 77, and Cython. In August of 2023, Irwin Zaid at
-Christ Church College Oxford proposed rewriting all of the scalar kernels in header files which could be included in
+`scipy.special` had scalar kernels written in all of C, C++, Fortran 77, and Cython. In August of 2023, Irwin Zaid (izaid)
+at Christ Church College Oxford proposed rewriting all of the scalar kernels in header files which could be included in
 both C++ and CUDA programs. This would allow these special functions to be used not just in SciPy, but also GPU-aware
 array libraries like CuPy and PyTorch, improving special function support across array library backends. I was supported
 by the 2020 NASA ROSES grant, _Reinforcing the Foundations of Scientific Python_ (with travel and compute costs covered
 by the 2023 NumFocus SDG _Streamlined Special Function Development in SciPy_), to work together with Irwin to put this
-plan in action. With additional help from SciPy maintainer Ilhan Polat, who made a heroic effort to translate over
+plan in action. With additional help from SciPy maintainer Ilhan Polat (ilayn), who made a heroic effort to translate over
 twenty thousand lines of Fortran scalar kernel code to C, and contributions from other volunteers, substantial progress
 has been made, and we are in the process of splitting these headed into a separate library called
 [xsf](https://github.com/scipy/xsf/). This is a story for another time. Until then, to learn more, see
@@ -393,6 +393,122 @@ between extension modules.
 
 ## lib_sf_error_state
 
+That should be enough background. Let's dive in and look at this shared library. It is simple enough in concept that we
+have space to explain it in detail.
+
+We extracted out the global variable containing error handling state and functions to work with it
+into an implementation file `sf_error_state.c` with corresponding header file `sf_error_state.h`. Let's look at the header
+first. The header defines the interface for the code in its companion file, as well as any datatypes that are intended for
+use outside the companion file. If one writes `#include "sf_error_state.h"` at the top of a `.c` file, the C preprocessor
+will effectively dump the contents of the header directly into the source code of the `.c` file.
+
+### sf_error_state.h
+
+This directive guards against the possibility of the header accidentally
+being included multiple times in the same implementation file. This could occur
+if a file includes both sf_error_state.h and another header file which itself
+includes sf_error_state.h, or other similar possibilities.
+
+```c
+#pragma once
+```
+
+Another header from the `xsf` special function library is included next. This provides access to
+type `sf_error_t`.
+
+```c
+#include "xsf/error.h"
+```
+
+`sf_error_t` is what is known as an `enum` and looks like this:
+
+```c
+typedef enum {
+    SF_ERROR_OK = 0,    /* no error */
+    SF_ERROR_SINGULAR,  /* singularity encountered */
+    SF_ERROR_UNDERFLOW, /* floating point underflow */
+    SF_ERROR_OVERFLOW,  /* floating point overflow */
+    SF_ERROR_SLOW,      /* too many iterations required */
+    SF_ERROR_LOSS,      /* loss of precision */
+    SF_ERROR_NO_RESULT, /* no result obtained */
+    SF_ERROR_DOMAIN,    /* out of domain */
+    SF_ERROR_ARG,       /* invalid input parameter */
+    SF_ERROR_OTHER,     /* unclassified error */
+    SF_ERROR__LAST
+} sf_error_t;
+```
+
+It defines a mapping between human readable special function error code variable names to integers.
+The integers are arranged in increasing order, so `SF_ERROR_OK = 0`, `SF_ERROR_SINGULAR = 1` and so
+on. By writing `#include "xsf/error.h"`, it's as if we included this `enum` definition directly in
+`sf_error_state.h`.
+
+The following block uses what is known as conditional compilation. In this case we're letting C++ compilers know that the
+code within the `extern "C"` block should be treated as C code. C++ performs something called name mangling, where the
+underlying identifiers for functions and variables are transformed to support more advanced features like function
+overloading. The C++ compiler knows not to mangle the names of identifiers within an `extern "C"` block. This allows us
+to write a library in C which can be used in both C and C++ code.
+
+```c
+#ifdef __cplusplus
+extern "C" {
+#endif
+```
+
+```c
+    typedef enum {
+        SF_ERROR_IGNORE = 0,  /* Ignore errors */
+        SF_ERROR_WARN,        /* Warn on errors */
+        SF_ERROR_RAISE        /* Raise on errors */
+    } sf_action_t;
+```
+
+    void scipy_sf_error_set_action(sf_error_t code, sf_action_t action);
+
+    sf_action_t scipy_sf_error_get_action(sf_error_t code);
+
+#ifdef \_\_cplusplus
+}
+#endif
+
+````
+
+Here's `sf_error_state.c`:
+
+```c
+#include "sf_error_state.h"
+
+
+/* If this isn't volatile clang tries to optimize it away */
+static volatile sf_action_t sf_error_actions[] = {
+    SF_ERROR_IGNORE, /* SF_ERROR_OK */
+    SF_ERROR_IGNORE, /* SF_ERROR_SINGULAR */
+    SF_ERROR_IGNORE, /* SF_ERROR_UNDERFLOW */
+    SF_ERROR_IGNORE, /* SF_ERROR_OVERFLOW */
+    SF_ERROR_IGNORE, /* SF_ERROR_SLOW */
+    SF_ERROR_IGNORE, /* SF_ERROR_LOSS */
+    SF_ERROR_IGNORE, /* SF_ERROR_NO_RESULT */
+    SF_ERROR_IGNORE, /* SF_ERROR_DOMAIN */
+    SF_ERROR_IGNORE, /* SF_ERROR_ARG */
+    SF_ERROR_IGNORE, /* SF_ERROR_OTHER */
+    SF_ERROR_IGNORE  /* SF_ERROR__LAST */
+};
+
+
+void scipy_sf_error_set_action(sf_error_t code, sf_action_t action)
+{
+    sf_error_actions[(int)code] = action;
+}
+
+
+sf_action_t scipy_sf_error_get_action(sf_error_t code)
+{
+    return sf_error_actions[(int)code];
+}
+````
+
+and the associated header file `sf_error_state.h`:
+
 [^1]: footnote 1
 [^2]: footnote 2
 [^3]: footnote 3
@@ -403,3 +519,4 @@ between extension modules.
 [^8]: footnote 8
 [^9]: https://godbolt.org/z/rqv5Y7489
 [^10]: footnote 10
+[^11]: footnote 11
