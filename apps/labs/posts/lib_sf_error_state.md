@@ -1,5 +1,5 @@
 ---
-title: The story behind SciPy's first shared library
+title: "lib_sf_error_state: SciPy's first shared library"
 authors: [albert-steppi]
 published: December 4, 2024
 description: The story of the first shared library to make it into the world of low level code that lies beneath SciPy's surface.
@@ -329,9 +329,9 @@ As the saying goes: we do things not because they are easy, but because we thoug
 ## Static vs dynamic linking
 
 Now for some background information. I'll try to make things self contained enough that the remainder of the article can
-be still followed by Python programmers without much or any experience working directly with compiled code. Let's review
-the structure of C programs. Below I've annotated the classic hello world program [^9]. Every C program must have a
-single function `main` where execution begins.
+be followed by Python programmers without much or any experience working directly with compiled code. Let's review the
+structure of C programs. Below I've annotated the classic hello world program [^9]. Every C program must have a single
+function `main` where execution begins.
 
 ### hello_world.c
 
@@ -365,30 +365,29 @@ Return status code zero signaling successful execution.
 
 </section>
 
-A C program may contain more than one file. Each file in the program is separately compiled into an object file of
-native machine instructions which give explicit commands directly to the CPU [^9]. A program known as a linker is
-responsible for combining the generated object files into a single program. A library is a collection of code which is
-not itself a standalone program, but contains functions and data structures which can be used in programs. There are
-library code can be linked into a program. The simplest way is _static linking_: the library code is linked and bundled
-directly into the program. Two programs [^10] statically linked with the same library will each have their own separate
-copy. Special function error handling broke because the code responsible for it was statically linked into each separate
-extension module. By contrast, when library code is dynamically linked, it is not included in the executable binary file
-for the program at compile time. It instead lives in a separate binary file, called a shared library, which can be
-loaded into the program at runtime.
+For C programs with multiple files, each file is compiled separately into an object file of machine instructions which
+give explicit commands directly to the CPU [^9]. A program called a linker is responsible for combining the generated
+object files into a single program. A library is a collection of code containing functions and datatypes which can be
+used in programs. There are two ways library code can be linked into a program. The simplest way is _static linking_,
+where the library code is bundled directly into the program. Two programs [^10] statically linked with the same library
+will each have their own separate copy of the library. Special function error handling broke because the code
+responsible for it was statically linked into each separate extension module. By contrast, when library code is
+dynamically linked, it is not included in the executable binary file for the program at compile time. It instead lives
+in a separate binary file, called a shared library, which can be loaded into the program at runtime.
 
 In addition to executable machine instructions, each object file contains a _symbol table_ mapping each identifier used
 in the original source file (e.g. a function name) to either the position in the executable code where the identifier is
 defined (e.g. the function's definition) or a placeholder if there's no definition in the source file. When combining
 object files into a single program through static linking, the linker fills these placeholders by searching the symbol
-tables of the other object files being linked into the program. Object files from a statically linked library are treated
-no differently from object files generated from the program's source code.
+tables of the other object files being linked into the program.
 
-For dynamic linking, at compile time, the linker only checks the shared library's symbol table for entries that could
-fill placeholders, but does not link the shared library into the program. Shared libraries are instead loaded by
-programs at runtime. Function names, variable names, and other identifiers a shared library makes available to
+Object files from a statically linked library are treated no differently from object files generated from the program's
+source code. For dynamic linking, at compile time, the linker only checks the shared library's symbol table for entries
+that could fill placeholders, but does not link the shared library into the program. Shared libraries are instead loaded
+by programs at runtime. Function names, variable names, and other identifiers a shared library makes available to
 programs are referred to as symbols exported by the library.
 
-Some benefits using of shared libraries are that
+Some benefits of shared libraries are that:
 
 - Separate programs can load and use the same library, rather than having separate copies bundled into each program,
   reducing code duplication.
@@ -397,7 +396,7 @@ Some benefits using of shared libraries are that
 
 For these reasons, the C standard library mentioned above is almost always linked dynamically.
 
-There are some tradeoffs. A small amount of overhead may be added to function calls, since the process of function
+There are tradeoffs. A small amount of overhead may be added to function calls, since the process of function
 lookups is more involved, and the need to locate and load the shared libray into memory at runtime can incur a fixed
 amount of startup overhead.
 
@@ -415,7 +414,7 @@ earliest days. What we mean is the first regular shared library that's not a Pyt
 
 ## lib_sf_error_state
 
-Let's dive in and take a close look at the contents of this shared library.
+Let's take a look at the contents of this shared library.
 
 We extracted out the global variable containing error handling state and functions to work with it into an
 implementation file `sf_error_state.c` with corresponding header file `sf_error_state.h` [^11].
@@ -441,7 +440,7 @@ sf_error_state.h and another header file which also includes sf_error_state.h).
 
 The header file `"xsf/error.h"` is included to get the definition for the type `sf_error_t`.
 
-`sf_error_t` is what is known as an `enum` and looks like this:
+`sf_error_t` is an `enum`.
 
 ```c
 typedef enum {
@@ -465,8 +464,8 @@ on. By writing `#include "xsf/error.h"`, it's as if we included this `enum` defi
 `sf_error_state.h`.
 
 The following block uses what is known as conditional compilation. In this case we're letting C++ compilers know that
-the code within the `extern "C"` block should be linked as C code [^10]. This allows the functions below to be used in
-either C or C++ code.
+the code within the `extern "C"` block should be linked as C code [^10]. This allows the functions in the block to
+be called in C and C++ code.
 
 ```c
 #ifdef __cplusplus
@@ -474,8 +473,8 @@ extern "C" {
 #endif
 ```
 
-Next we define another `enum`, `sf_action_t`, giving human readable names for integer codes representing the different
-error handling policies.
+Another `enum`, `sf_action_t`, gives human readable names for integer codes representing the different error handling
+policies.
 
 ```c
     typedef enum {
@@ -485,12 +484,12 @@ error handling policies.
     } sf_action_t;
 ```
 
-There are then two _declarations_. Recall that each file is compiled in isolation and it is only after the files are
-compiled that the linker stitches the generated object files into a program. An individual file can use functions
-defined in other files, but the actual definitions don't need to be known at compile time. What is needed is the type
-signatures of these functions which is communicated to the compiler through declarations. Header files can be used to
-provide a single source of truth [^11] for such declarations. In the Hello World example from earlier, the header file
-`stdio.h` was included to insert the declaration for the `printf` function.
+There are then two _declarations_. Again, each file is compiled in isolation and it is only after the files are compiled
+that the linker stitches the generated object files into a program. Still, functions from other files can still be
+called even though the compiler is not aware of their definitions when compiling a particular file. The compiler only
+needs to know the type signature of an external functio and this is communicated to the compiler through a declaration.
+Header files can be used to provide a single source of truth [^11] for declarations. In the Hello World example from
+earlier, the header file `stdio.h` was included to insert the declaration for the `printf` function.
 
 ```c
     void scipy_sf_error_set_action(sf_error_t code, sf_action_t action);
@@ -504,9 +503,9 @@ provide a single source of truth [^11] for such declarations. In the Hello World
 
 </section>
 
-Even without the actual function definitions, you may have correctly guessed from these declarations that the function
-`scipy_sf_error_set_action` is used to update and `scipy_sf_error_get_action` is used to query for the error handling
-policy associated to a given special function error type. If a user runs the following in an IPython shell
+Just from the declarations, you may have correctly guessed that the function `scipy_sf_error_set_action` is used to
+update and `scipy_sf_error_get_action` is used to query for the error handling policy associated to a given special
+function error type. If a user runs the following in an IPython session
 
 ```python
 In  [1]: import scipy.special as special
@@ -566,9 +565,10 @@ static volatile sf_action_t sf_error_actions[] = {
    `scipy_sf_error_get_action` respectively, encapsulating the state in the array.
 
 4. The `volatile` keyword informs the compiler that a variable's value may change unexpectedly without the programs
-   knowledge. It appears some version of the `clang` compiler was replacing all accesses to `sf_error_actions` with the
-   constant `SF_ERROR_IGNORE` under the assumption that `sf_error_actions` could not be modified. Compilers are free to
-   change code to make it more efficient if they believe the observed behavior will remain the same.
+   knowledge. I'm not sure exactly what was going on or why, but it appears some version of the `clang` compiler may
+   have been replacing all accesses to `sf_error_actions` with the constant `SF_ERROR_IGNORE` under the assumption that
+   `sf_error_actions` would not be modified. Compilers are free to change code to make it more efficient if they believe
+   the observed behavior will remain the same.
 
 Finally we have the definitions of `scipy_sf_error_set_action` and `scipy_sf_error_get_action`.`(int)code` is a cast
 which converts an `sf_error_t` `enum` value to the corresponding `int` so that it can be used as an index into the array.
@@ -587,11 +587,17 @@ sf_action_t scipy_sf_error_get_action(sf_error_t code)
 
 </section>
 
-That's it for the contents of the library.
+## Shipping it
 
-## The pain and joy of getting this to actually work
+`lib_sf_error_state`'s contents are fairly simple, but how _does_ one ship a shared library as part of a Python package
+like SciPy? The process of creating and using shared libraries varies based on operating system and compiler toolchain.
+Since SciPy aims to support a wide range of platforms in aid of its goal to democratize access to scientific computing
+tools, things were not as straightforward as we expected. Several times, just as we thought everything was finally
+working, another quirk would pop up that needed to be addressed.
 
-Getting this to work on Linux and Mac OS wasn't too hard. We just had to find the right invocations to give
+SciPy is a Python package, but contains a large amount of compiled code in several different languages.
+
+Getting this to work on Linux and Mac OS wasn't too bad. We just had to find the right invocations to give
 the [Meson build system](https://labs.quansight.org/blog/2021/07/moving-scipy-to-meson) used by SciPy.
 Looking at the [meson.build](https://github.com/steppi/scipy/blob/57de94e36602dda9efafa054ecc6f03308d76341/scipy/special/meson.build)
 
