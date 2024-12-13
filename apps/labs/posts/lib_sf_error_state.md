@@ -237,13 +237,12 @@ In  [5]: with np.errstate(all="raise"):
 Just like for the `ufunc`s included in NumPy, by default invalid entries will be mapped to `NaN`, however no warning is
 raised, and `np.errstate` has no impact on error handling. What's going on? Well, NumPy's `ufunc`s are provided in a C
 [extension module](https://docs.python.org/3/extending/extending.html) that's bundled into NumPy. Within this extension
-module, there's a library of compiled code and an interface for interacting with this code from Python. Some of
-compiled code in the extension module manages the current state for error handling policies. The `ufunc`s in
-`scipy.special` are bundled into a different extension module in SciPy. Typically, extension modules are like separate
-worlds, and one cannot access another except through its Python interface. Instead, SciPy includes its own means of
-controlling error handling,
-[scipy.special.errstate](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.errstate.html), which
-mirrors `np.errstate`.
+module, there's a library of compiled code and an interface for interacting with this code from Python. Some of compiled
+code in the extension module manages the current state for error handling policies. The `ufunc`s in `scipy.special` are
+bundled into a different extension module in SciPy. Typically, extension modules are like separate worlds, and one
+cannot access another except through its Python interface. Instead, SciPy includes its own means of controlling error
+handling, [scipy.special.errstate](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.errstate.html),
+which mirrors `np.errstate`.
 
 ```python
 In  [1]: import numpy as np
@@ -312,7 +311,7 @@ easily shared between them. We noticed something was wrong due to a failure in t
 ```
 
 `gammaln`, for the log of the absolute value of the Gamma function, was one of a handful of ufuncs moved to the new
-extension module. Irwin was the first to identify the issue.
+extension module.
 
 Both extension modules contained a separate copy of the state for managing error handling policies and
 a Python interface for managing this state, but the user facing `special.seterr`, `special.errstate`, and
@@ -321,20 +320,18 @@ a Python interface for managing this state, but the user facing `special.seterr`
 1. Update `special.seterr`, `special.errstate`, `special.geterr` to access and update the state in each extension
    module, taking care that the state remains synchronized.
 
-2. Extract the error handling state and primitives for managing it into a shared library that would be a dependency for
-   each of the extension modules.
+2. Extract the error handling state and primitives for managing it into a shared library that each extension
+   module would be dependent on.
 
-As you've correctly guessed, we chose to create a shared library, which seemed like the more principled option [^7].
+We chose to create a shared library because it seemed like the more principled option [^7].
 As the saying goes: we do things not because they are easy, but because we thought they would be easy [^8].
 
 ## Static vs dynamic linking
 
-Now for some background information to make sure everyone's on the same page. I'll try to make things self contained
-enough that the remainder of the article can be still followed by Python programmers without much or any experience
-working directly with compiled code. As an entrypoint, let's review the structure of C programs. Below I've annotated
-the classic hello world program [^9]. Every C program must have a single function `main` where execution begins. Within
-`main` one can use functions and data structures which were defined outside of `main`. Here we use a function `printf`
-from the C standard library.
+Now for some background information. I'll try to make things self contained enough that the remainder of the article can
+be still followed by Python programmers without much or any experience working directly with compiled code. Let's review
+the structure of C programs. Below I've annotated the classic hello world program [^9]. Every C program must have a
+single function `main` where execution begins.
 
 ### hello_world.c
 
@@ -371,13 +368,13 @@ Return status code zero signaling successful execution.
 A C program may contain more than one file. Each file in the program is separately compiled into an object file of
 native machine instructions which give explicit commands directly to the CPU [^9]. A program known as a linker is
 responsible for combining the generated object files into a single program. A library is a collection of code which is
-not itself a standalone program, but contains functions and data structures which can be used in programs. The linker
-needs to _link_ library code into a program and there are two ways to do this. The simplest way is _static linking_, in
-which the library code is linked and bundled directly into the program. Separate programs which use the library will
-each have their own bundled copy. Special function error handling broke because the code responsible for it was
-statically linked into each separate extension module. By contrast, when library code is dynamically linked, it is not
-included in the executable binary file for a program at compile time. It is instead placed in a separate binary file,
-called a shared library, which can be loaded into the program at runtime.
+not itself a standalone program, but contains functions and data structures which can be used in programs. There are
+library code can be linked into a program. The simplest way is _static linking_: the library code is linked and bundled
+directly into the program. Two programs [^10] statically linked with the same library will each have their own separate
+copy. Special function error handling broke because the code responsible for it was statically linked into each separate
+extension module. By contrast, when library code is dynamically linked, it is not included in the executable binary file
+for the program at compile time. It instead lives in a separate binary file, called a shared library, which can be
+loaded into the program at runtime.
 
 In addition to executable machine instructions, each object file contains a _symbol table_ mapping each identifier used
 in the original source file (e.g. a function name) to either the position in the executable code where the identifier is
@@ -400,18 +397,17 @@ Some benefits using of shared libraries are that
 
 For these reasons, the C standard library mentioned above is almost always linked dynamically.
 
-As always, there are tradeoffs. A small amount of overhead may be added to function calls, since the process of function
+There are some tradeoffs. A small amount of overhead may be added to function calls, since the process of function
 lookups is more involved, and the need to locate and load the shared libray into memory at runtime can incur a fixed
 amount of startup overhead.
 
 ## Sharing global state
 
-One thing shared libraries cannot do is share global state between programs running in separate processes. Each process
-has its own separate address space of memory it can access, and interprocess communication requires special protocols.
-However, in our case there is only one program, the Python interpreter, running in a single process. A shared library
-can share global state between separate Python extension modules [^10] running in the same process, since only a single copy
-of the library is loaded into memory. This is the means we chose for sharing special function error handling state
-between extension modules.
+Shared libraries cannot share global state between programs running in separate processes; each process has its own
+separate address space of memory it can access, and interprocess communication requires special protocols. Nevertheless,
+a shared library _can_ be used to share global state between separate Python extension modules that were dynamically
+loaded by a Python interpreter running in the same process, since only a single copy of the library is loaded into
+memory. This is the means we chose for sharing special function error handling state between extension modules.
 
 Note that the title of this article isn't entirely accurate. A Python extension module is itself a shared library which
 is loaded by the Python interpreter at runtime. Thus SciPy actually ships many shared libaries and has done so from its
@@ -419,16 +415,13 @@ earliest days. What we mean is the first regular shared library that's not a Pyt
 
 ## lib_sf_error_state
 
-That should be enough background. Let's dive in and take a close look at the contents of this shared library. It is
-simple enough in concept that we have space to explain all of it.
+Let's dive in and take a close look at the contents of this shared library.
 
 We extracted out the global variable containing error handling state and functions to work with it into an
 implementation file `sf_error_state.c` with corresponding header file `sf_error_state.h` [^11].
 
-Let's look at the header first. The header defines the interface for the code in its companion file, as well as any
-datatypes that are intended for use outside the companion file. If one writes `#include "sf_error_state.h"` at the top
-of a `.c` file, the C preprocessor will effectively dump the contents of the header directly into the source code of the
-`.c` file.
+Let's look at the header first. The header defines the interface for the code living in its companion file, including
+definitions of datatypes which should be available outside the companion file.
 
 ### sf_error_state.h
 
@@ -439,16 +432,14 @@ of a `.c` file, the C preprocessor will effectively dump the contents of the hea
 ```
 
 The `#pragma once` directive guards against the possibility of the header accidentally
-being included multiple times in the same implementation file. This could occur
-if a file includes both sf_error_state.h and another header file which itself
-includes sf_error_state.h, or other similar possibilities.
-
-Another header from the `xsf` special function library is included next. This provides access to
-type `sf_error_t`.
+being included multiple times in the same implementation (e.g. some file includes both
+sf_error_state.h and another header file which also includes sf_error_state.h).
 
 ```c
 #include "xsf/error.h"
 ```
+
+The header file `"xsf/error.h"` is included to get the definition for the type `sf_error_t`.
 
 `sf_error_t` is what is known as an `enum` and looks like this:
 
@@ -473,11 +464,9 @@ The integers are arranged in increasing order, so `SF_ERROR_OK = 0`, `SF_ERROR_S
 on. By writing `#include "xsf/error.h"`, it's as if we included this `enum` definition directly in
 `sf_error_state.h`.
 
-The following block uses what is known as conditional compilation. In this case we're letting C++ compilers know that the
-code within the `extern "C"` block should be treated as C code. C++ performs something called name mangling, where the
-underlying identifiers for functions and variables are transformed to support more advanced features like function
-overloading. The C++ compiler knows not to mangle the names of identifiers within an `extern "C"` block. This allows us
-to write a library in C which can be used in both C and C++.
+The following block uses what is known as conditional compilation. In this case we're letting C++ compilers know that
+the code within the `extern "C"` block should be linked as C code [^10]. This allows the functions below to be used in
+either C or C++ code.
 
 ```c
 #ifdef __cplusplus
@@ -498,11 +487,10 @@ error handling policies.
 
 There are then two _declarations_. Recall that each file is compiled in isolation and it is only after the files are
 compiled that the linker stitches the generated object files into a program. An individual file can use functions
-defined in other files, but the actual definitions don't need to be known at compile time. Instead, all the compiler
-needs to know is the type signatures of these functions, and this information is communicated to the compiler through
-declarations. Header files can be used to provide a single source of truth [^11] for such declarations. In the
-Hello World example from earlier, the header file `stdio.h` was included to insert the declaration for the `printf`
-function.
+defined in other files, but the actual definitions don't need to be known at compile time. What is needed is the type
+signatures of these functions which is communicated to the compiler through declarations. Header files can be used to
+provide a single source of truth [^11] for such declarations. In the Hello World example from earlier, the header file
+`stdio.h` was included to insert the declaration for the `printf` function.
 
 ```c
     void scipy_sf_error_set_action(sf_error_t code, sf_action_t action);
@@ -516,10 +504,9 @@ function.
 
 </section>
 
-Even without the actual function definitions, you may have inferred from these declarations that the function
-`scipy_sf_error_set_action` is used to update and `scipy_sf_error_get_action` is used to query for the error
-handling policy associated to a given special function error type. If a user runs the following in an IPython
-shell
+Even without the actual function definitions, you may have correctly guessed from these declarations that the function
+`scipy_sf_error_set_action` is used to update and `scipy_sf_error_get_action` is used to query for the error handling
+policy associated to a given special function error type. If a user runs the following in an IPython shell
 
 ```python
 In  [1]: import scipy.special as special
@@ -533,8 +520,7 @@ then somewhere down in the stack, there will be a call
 scipy_sf_error_set_action(SF_ERROR_LOSS, SF_ERROR_WARN)
 ```
 
-that updates the error state (note how the use of an `enum` make this much easier to comprehend at a glance than if
-integer literals were used). Using the terminology from earlier, `scipy_sf_error_set_action` and `scipy_sf_error_get_action`
+that updates the error state. Using the terminology from earlier, `scipy_sf_error_set_action` and `scipy_sf_error_get_action`
 are the two symbols exported by this shared library.
 
 Now let's turn to the corresponding `.c` file. This is where the function definitions for these two symbols live.
@@ -551,7 +537,7 @@ First, we include the `sf_error_state.h` header file. This provides access to de
 ```
 
 The we define an array named `sf_error_actions` for storing the current special function error handling policy for each
-error type. There's a bit to unpack here so let's take things step by step.
+error type.
 
 ```c
 /* If this isn't volatile clang tries to optimize it away */
@@ -570,28 +556,22 @@ static volatile sf_action_t sf_error_actions[] = {
 };
 ```
 
-1. Even if you haven't programmed in C, you probably guessed that `/* this is comment syntax */`.
+1. `sf_action_t` is the value type of the array. Entries contain error policy codes with the default being `SF_ERROR_IGNORE`.
 
-2. `sf_action_t` is the value type of the array. Each entry can be one of `SF_ERROR_IGNORE`, `SF_ERROR_WARN`, or `SF_ERROR_RAISE`.
-   All entries start at `SF_ERROR_IGNORE`; the default policy is to ignore errors.
+2. Indices into the array correspond to special function error types from the `sf_error_t` `enum`. The array
+   stores the error handling policy for each error type, with comments making it clear which is which.
 
-3. The indices into the array `0`, `1`, ..., `10`, correspond to values of the `sf_error_t` `enum`, so that entries of the array
-   correspond to special function error types.
+3. The `static` keyword makes this use of the identifier `sf_error_actions` local to only this file.
+   `sf_error_actions` can only be modified and accessed through `scipy_sf_error_set_action` and
+   `scipy_sf_error_get_action` respectively, encapsulating the state in the array.
 
-4. The `static` keyword makes this use of the identifier `sf_error_actions` local to only this file. This is done for the
-   purpose of encapsulation, so that `sf_error_actions` can only be modified and accessed through
-   `scipy_sf_error_set_action` and `scipy_sf_error_get_action` respectively.
+4. The `volatile` keyword informs the compiler that a variable's value may change unexpectedly without the programs
+   knowledge. It appears some version of the `clang` compiler was replacing all accesses to `sf_error_actions` with the
+   constant `SF_ERROR_IGNORE` under the assumption that `sf_error_actions` could not be modified. Compilers are free to
+   change code to make it more efficient if they believe the observed behavior will remain the same.
 
-5. Perhaps most mysterious is the use of the `volatile` keyword. This rarely used keyword informs the compiler that a
-   variable's value may change unexpectedly at any time, even outside of the programs control. One of its effects is to
-   supress certain optimizations to the code intended to improve performance that could impact `sf_error_actions`. It seems
-   a particularly aggressive optimization was either removing this variable as dead code, or replacing all accesses to it
-   with the constant `SF_ERROR_IGNORE`. I haven't been able to reproduce this with clang locally, and am not sure exactly
-   why this was happening.
-
-Finally we have the definitions of `scipy_sf_error_set_action` and `scipy_sf_error_get_action`. They simply set and get
-entries in the array as expected. `(int)code` is a cast which converts an `sf_error_t` enum value to the corresponding `int`
-so that it can be used as an index into the array.
+Finally we have the definitions of `scipy_sf_error_set_action` and `scipy_sf_error_get_action`.`(int)code` is a cast
+which converts an `sf_error_t` `enum` value to the corresponding `int` so that it can be used as an index into the array.
 
 ```c
 void scipy_sf_error_set_action(sf_error_t code, sf_action_t action)
@@ -607,11 +587,11 @@ sf_action_t scipy_sf_error_get_action(sf_error_t code)
 
 </section>
 
-That's it for its contents, but how can we actually ship this as shared library in SciPy?
+That's it for the contents of the library.
 
-## The fun and pain of getting this to actually work
+## The pain and joy of getting this to actually work
 
-Getting this to work on Linux and Mac OS wasn't too hard. We had to find the right invocations to give
+Getting this to work on Linux and Mac OS wasn't too hard. We just had to find the right invocations to give
 the [Meson build system](https://labs.quansight.org/blog/2021/07/moving-scipy-to-meson) used by SciPy.
 Looking at the [meson.build](https://github.com/steppi/scipy/blob/57de94e36602dda9efafa054ecc6f03308d76341/scipy/special/meson.build)
 
