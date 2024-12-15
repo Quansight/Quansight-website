@@ -548,22 +548,59 @@ sf_error_state_lib = shared_library('sf_error_state', # Name of the library
 )
 ```
 
-Even after this I was still receiving the same error. After consulting `meson`'s excellent documentation and looking at some
-related issues, it turned out that the `pip` workflow was configured to do some extra steps to set up the runtime search path,
-or `RPATH`, correctly for each extension module. This tells the dynamic linker where to look for shared libraries.
+Even after this I was still receiving the same error. After consulting `meson`'s excellent documentation and looking at
+some related issues, it turned out that the `pip` sets the runtime search path (`RPATH`) for each extension module. This
+tells the dynamic linker where to look for shared libraries.
 
-To get things to work, I needed to explicitly set the `install_rpath` in `meson`, I needed to add `install_rpath: '$ORIGIN'`
-to each extension module. `'$ORIGIN'` means to search in the same folder as the extension module. Configuring `RPATH` for
-is not supported on Windows, but the current directory is always on the search path, so fortunately there were no issues
-with the `python dev.py build` there.
+To get things to work with `dev.py`, I needed to explicitly set the `RPATH` in `meson` by adding
+`install_rpath: '$ORIGIN'` to each extension module. `'$ORIGIN'` means to search in the same folder as the extension
+module.
 
 ### Building Wheels on Windows
 
-After setting `install_dir` and `install_rpath` correctly, all but one of SciPy's CI jobs were passing. The sole
-failing job involved building a wheel on Windows. A [wheel](https://packaging.python.org/en/latest/specifications/binary-distribution-format/)
-is essentially a precompiled binary for a Python package that follows a standard format.
+After setting `install_dir` and `install_rpath` correctly, all but one of SciPy's CI jobs were passing. The sole failing
+job involved building a wheel on Windows. A
+[wheel](https://packaging.python.org/en/latest/specifications/binary-distribution-format/) can be thought of as a
+precompiled binary for a Python package. The underlying issue here was that Windows does not have support for something
+like `RPATH`, following less flexible
+[rules](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order#standard-search-order-for-packaged-apps)
+for determining the search path for shared libraries [^13]. At the time I didn't really have any experience developing for
+Windows, but fortunately Ralf Gommers (rgommers) had seen this issue before, and had a ready-made solution; manually
+loading the shared library from within `scipy/special/__init__.py` so it would be available when needed:
 
-### Breaking SciPy for MSVC builds.
+```python
+def _load_libsf_error_state():
+    """Load libsf_error_state.dll shared library on Windows
+    libsf_error_state manages shared state used by
+    ``scipy.special.seterr`` and ``scipy.special.geterr`` so that these
+    can work consistently between special functions provided by different
+    extension modules. This shared library is installed in scipy/special
+    alongside this __init__.py file. Due to lack of rpath support, Windows
+    cannot find shared libraries installed within wheels. To circumvent this,
+    we pre-load ``lib_sf_error_state.dll`` when on Windows.
+    The logic for this function was borrowed from the function ``make_init``
+    in `scipy/tools/openblas_support.py`:
+    https://github.com/scipy/scipy/blob/bb92c8014e21052e7dde67a76b28214dd1dcb94a/tools/openblas_support.py#L239-L274
+    """  # noqa: E501
+    if os.name == "nt":
+        try:
+            from ctypes import WinDLL
+            basedir = os.path.dirname(__file__)
+        except:  # noqa: E722
+            pass
+        else:
+            dll_path = os.path.join(basedir, "libsf_error_state.dll")
+            if os.path.exists(dll_path):
+                WinDLL(dll_path)
+
+
+_load_libsf_error_state()
+```
+
+Finally, all CI jobs were passing [^14] and Ralf merged my PR [scipy/#20321](https://github.com/scipy/scipy/pull/20321).
+We did it! We fixed the bug we'd introduced with months to go before the next SciPy release—or so we thought.
+
+### Breaking SciPy for MSVC builds
 
 https://github.com/conda-forge/scipy-feedstock/pull/277
 https://github.com/scipy/scipy/issues/20840
