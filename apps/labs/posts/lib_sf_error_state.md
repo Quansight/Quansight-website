@@ -1,5 +1,5 @@
 ---
-title: "lib_sf_error_state: SciPy's first shared library"
+title: "libsf_error_state: SciPy's first shared library"
 authors: [albert-steppi]
 published: December 4, 2024
 description: The story of the first shared library to make it into the world of low level code that lies beneath SciPy's surface.
@@ -329,24 +329,21 @@ As the saying goes: we do things not because they are easy, but because we thoug
 
 ## Static vs dynamic linking
 
-Now for some background information. I'll try to make things self contained enough that the remainder of the article can
-be followed by Python programmers without much or any experience working directly with compiled code.
+Let's make sure everyone's on the same page regarding what a shared libray is.
 
-Let's review some facts about the structure of C programs.
-
-A C program must have one and only one file with a function `main` where execution begins; this file may refer to
-functions, global variables, and datatypes from other files. For C programs with multiple files, each file is compiled
-separately into an object file of machine instructions which give explicit commands directly to the CPU [^9]. A program
-called a linker is responsible for combining the generated object files into a single program. A library is a collection
-of code containing functions and datatypes which can be used in programs, but which itself doesn't have a `main`
-function.
+Consider the structure of a C program. It must have one and only one file with an entrypoint function `main` where
+execution begins; this file may refer to functions, global variables, and datatypes from other files. For a C program
+with multiple files, each file is compiled separately into an object file of machine instructions, specific to a
+particular platform, giving explicit commands directly to the CPU [^9]. A program called a linker is responsible for
+combining the generated object files into a single program. A library is a collection of code containing functions and
+datatypes which can be used in programs, but which itself doesn't have a `main` function.
 
 There are two ways library code can be linked into a program. The simplest way is _static linking_, where the
 library code is bundled directly into the program. Two programs [^10] statically linked with the same library will each
 have their own separate copy of the library. Special function error handling broke because the code responsible for it
 was statically linked into each separate extension module. By contrast, when library code is dynamically linked, it is
 not included in the executable binary file for the program at compile time. It instead lives in a separate binary file,
-called a shared library, which can be loaded into the program at runtime.
+called a _shared library_, which can be loaded into the program at runtime.
 
 In addition to executable machine instructions, each object file contains a _symbol table_ mapping each identifier used
 in the original source file (e.g. a function name) to either the position in the executable code where the identifier is
@@ -384,15 +381,17 @@ memory. This is the means we chose for sharing special function error handling s
 <a name="asterisk2">
 [*](#asterisk1) Note that the title of this article isn't entirely accurate. A Python extension module is itself a shared library which
 is loaded by the Python interpreter at runtime. Thus SciPy actually ships many shared libaries and has done so from its
-earliest days. What we mean is the first regular shared library that's not a Python extension module.
+earliest days. What we mean is the first regular shared library that's not a Python extension module. Also, although we've been
+talking in terms of linking programs with a shared library, in this case we are linking Python extension modules with a shared
+library. It's perfectly valid to link one shared library with another.
 </a>
 
-## lib_sf_error_state
+## libsf_error_state
 
-Let's take a look at the core lines of code from this shared library. In essence it's very simple.
+Let's take a look at the core lines of code from this shared library, `libsf_error_state`. In essence it's very simple.
 
-There is an array `sf_error_actions` for storing the error handling policy associated to each
-special function error handling type.
+There is an array `sf_error_actions` for storing the error handling policy associated to each special function error
+handling type.
 
 ```c
 static sf_action_t sf_error_actions[] = {
@@ -477,23 +476,22 @@ scipy_sf_error_set_action(SF_ERROR_LOSS, SF_ERROR_WARN)
 
 ## Shipping it
 
-`lib_sf_error_state`'s contents are fairly simple, but how _does_ one actually ship it as shared library within a
-Python package like SciPy? The process of creating and using shared libraries varies based on operating system and
-compiler toolchain. Since SciPy aims to support a wide range of platforms in aid of its goal to democratize access to
-scientific computing tools, things were not as straightforward as we expected. Several times, just as we thought
-everything was finally working, another quirk would pop up that needed to be addressed.
-
-SciPy began using the [meson](https://mesonbuild.com/) build system in 2021 for reasons explained by Ralf Gommers
-(rgommers) in the blog post: https://labs.quansight.org/blog/2021/07/moving-scipy-to-meson. Extension modules are
-configured in the `meson.build` files spread across SciPy's source tree. The key it seemed was to find the right `meson`
-invocations to set up a shared library and link it into the special function extension modules. Irwin and I began
-working on this independently, sharing notes as we went [^13].
+`libsf_error_state`'s contents are fairly simple, but how _does_ one actually ship it as shared library within a Python
+package like SciPy? The process for creating and using shared libraries depends on the operating system and compiler
+toolchain. SciPy supports a wide range of platforms in aim of its goal to democratize access to scientific computing
+tools, and the greatest challenge turned out to be getting things to work on all of them. Several times, just as we
+thought everything was finally working, another quirk would pop up that needed to be addressed.
 
 ### Path troubles
 
-We quickly ran into our first wrinkle. Irwin was able to get things working locally on his Mac by using `meson`'s
-[shared_library](https://mesonbuild.com/Reference-manual_functions.html#shared_library) function
-inside `scipy.special`'s `meson.build` file.
+The initial challenge was finding the right invocations to give to the [meson build system](https://mesonbuild.com/)
+used by SciPy [^13]. Extension modules are configured in the `meson.build` files spread across SciPy's source tree
+and we needed to figure out how to set up a shared library and link it into each of the special function `ufunc`
+extension modules. Irwin and I begin working on this independently, comparing notes as we went.
+
+The first hiccup is that the following invocations were working on Irwin's Mac:
+
+Setting up the shared library like this.
 
 ```meson
 sf_error_state_lib = shared_library('sf_error_state', # Name of the library
@@ -505,14 +503,14 @@ sf_error_state_lib = shared_library('sf_error_state', # Name of the library
 )
 ```
 
-and linking this shared library into each extension module:
+and adding a `link_with` entry to the creation of each extension module:
 
 ```
 py3.extension_module('_special_ufuncs',
   ['_special_ufuncs.cpp', '_special_ufuncs_docs.cpp', 'sf_error.cc'],
   include_directories: ['../_lib', '../_build_utils/src'],
   dependencies: [np_dep],
-  link_with: [sf_error_state_lib], # The only line that actually changed
+  link_with: [sf_error_state_lib], # The new line
   link_args: version_link_args,
   install: true,
   cpp_args: ['-DSP_SPECFUN_ERROR'],
@@ -520,38 +518,25 @@ py3.extension_module('_special_ufuncs',
 )
 ```
 
-However, this was not working on my Linux machine. SciPy would build successfully
-but attempts to import `scipy.special` were failing because the shared library
-could not be found.
+However, on my Linux machine SciPy would build without issue, but attempting to import `scipy.special` would
+result in the error:
 
-```python
-In [1]: import scipy.special as special
----------------------------------------------------------------------------
-ImportError                               Traceback (most recent call last)
-Cell In[1], line 1
-----> 1 import scipy.special as special
-
-File ~/scipy/build-install/lib/python3.11/site-packages/scipy/special/__init__.py:777
-    773 import warnings
-    775 from ._sf_error import SpecialFunctionWarning, SpecialFunctionError
---> 777 from . import _ufuncs
-    778 from ._ufuncs import *
-    780 # Replace some function definitions from _ufuncs to add Array API support
-
-ImportError: libspecial_error.so: cannot open shared object file: No such file or directory
+```
+ImportError: libsf_error_state.so: cannot open shared object file: No such file or directory
 ```
 
-After a period of head scratching in which I pondered almost every possibility for what I could be doing wrong except
-the right one, I posted a comment with my error message on the work in progress PR for Irwin's attempt. It turned out
-that the difference lay in how we were installing SciPy. The [contributor
-documentation](https://docs.scipy.org/doc/scipy/building/index.html#building-from-source-for-scipy-development)
-recommends one of two methods, `python dev.py build` or an editable install `pip install -e . --no-build-isolation`. I
-was using the former and he the later. For an editable install, SciPy is installed directly in the project folder, with
-the shared library installed directly in `~/scipy/scipy/special/` right next to the extension modules where it
-belongs. With the `dev.py` workflow, SciPy gets installed installed in a separate location. I didn't explicitly tell
-`meson` where to install the shared library, and it's default choice was wrong. What I needed to do was the following.
+After a period of head scratching in which I pondered every possible explanation except the correct one, I showed Irwin
+what I tried and the error message I was getting. It turned out that the difference in operating systems was a red
+herring. The issue was that of the two methods for building SciPy from source for development recommended in SciPy's
+[contributor
+documentation](https://docs.scipy.org/doc/scipy/building/index.html#building-from-source-for-scipy-development), I was
+using the `python dev.py build` workflow and he was using an editable install `pip install -e . --no-build-isolation`.
+For the editable install, SciPy is installed directly in its own project folder, and the shared library and the relevant
+extension modules were all being installed next to eachother in `~/scipy/scipy/special`. For the `dev.py` workflow,
+SciPy is installed elsewhere, and since I didn't specify where to install the shared library, it got put in the wrong
+place. What I had to configure the `install_dir` in `meson` like this:
 
-```meson
+```
 sf_error_state_lib = shared_library('sf_error_state', # Name of the library
   # Implementation files contained it.
   ['sf_error_state.c'],
@@ -563,26 +548,14 @@ sf_error_state_lib = shared_library('sf_error_state', # Name of the library
 )
 ```
 
-Although this caused the shared library to be installed in the right location next to extension modules, I found that
-the linker still couldn't find the library. By searching for similar issues I found that I also needed to set the
-`install_rpath` to `'$ORIGIN'`.
+Even after this I was still receiving the same error. After consulting `meson`'s excellent documentation and looking at some
+related issues, it turned out that the `pip` workflow was configured to do some extra steps to set up the runtime search path,
+or `RPATH`, correctly for each extension module. This tells the dynamic linker where to look for shared libraries.
 
-```meson
-py3.extension_module('_special_ufuncs',
-  ['_special_ufuncs.cpp', '_special_ufuncs_docs.cpp', 'sf_error.cc'],
-  include_directories: ['../_lib', '../_build_utils/src'],
-  dependencies: [np_dep],
-  link_with: [sf_error_state_lib], # The only line that actually changed
-  link_args: version_link_args,
-  install: true,
-  cpp_args: ['-DSP_SPECFUN_ERROR'],
-  subdir: 'scipy/special'
-  install_rpath: '$ORIGIN'
-)
-```
-
-This lets the linker know to search for shared libraries relative to the location of the `_special_ufuncs` extension
-module.
+To get things to work, I needed to explicitly set the `install_rpath` in `meson`, I needed to add `install_rpath: '$ORIGIN'`
+to each extension module. `'$ORIGIN'` means to search in the same folder as the extension module. Configuring `RPATH` for
+is not supported on Windows, but the current directory is always on the search path, so fortunately there were no issues
+with the `python dev.py build` there.
 
 ### Building Wheels on Windows
 
