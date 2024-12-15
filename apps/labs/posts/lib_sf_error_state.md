@@ -285,11 +285,16 @@ has been made, and we are in the process of splitting these headed into a separa
 
 While working on this project, it became apparent to everyone involves that the infrastructure used in SciPy for
 creating `ufunc`s was greatly complicated by the need to work with scalar kernels from so many languages. Standardizing
-on C++ offered a chance to simplify things considerably. Irwin found that existing infrastructure was not flexible
-enough for work he had planned involving [Generalized universal
+on C++ offered a chance to simplify things considerably.
+
+In the Spring of 2024, things moved very quickly because Irwin was able to use his free time between terms to work on
+SciPy as a volunteer pretty much fulltime to help get things off the ground. He found that the existing `ufunc`
+infrastructure was not flexible enough for work he had planned involving [Generalized universal
 functions](https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html), or `gufuncs` for short, so he wrote
 new machinery from scratch. `ufunc`s and `gufunc`s created with the new machinery live in a separate extension module
-from those created with the old machinery [^6]. What problem could this cause?
+from those created with the old machinery [^6]. It will be a great win in terms of simplifying `scipy.special`'s build
+process when we're able to get all `ufunc`s moved over to the new infrastructure, but in the short term there was
+a problem.
 
 ## Error handling redux
 
@@ -324,8 +329,10 @@ a Python interface for managing this state, but the user facing `special.seterr`
 2. Extract the error handling state and primitives for managing it into a shared library that each extension
    module would be dependent on.
 
-We chose to create a shared library because it seemed like the more principled option [^7].
-As the saying goes: we do things not because they are easy, but because we thought they would be easy [^8].
+We chose to create a shared library because it seemed like the more principled option [^7]. As the saying goes: we do
+things not because they are easy, but because we think they will be easy [^8]. Scientific Python guru and Quansight
+Labs Co-director Ralf Gommers (rgommers) knew from long experience that this would be difficult to get right, but
+trusted that we'd be able to figure it out.
 
 ## Static vs dynamic linking
 
@@ -383,7 +390,7 @@ memory. This is the means we chose for sharing special function error handling s
 is loaded by the Python interpreter at runtime. Thus SciPy actually ships many shared libaries and has done so from its
 earliest days. What we mean is the first regular shared library that's not a Python extension module. Also, although we've been
 talking in terms of linking programs with a shared library, in this case we are linking Python extension modules with a shared
-library. It's perfectly valid to link one shared library with another.
+library. It's perfectly valid to link one shared library with one or more others.
 </a>
 
 ## libsf_error_state
@@ -530,11 +537,11 @@ what I tried and the error message I was getting. It turned out that the differe
 herring. The issue was that of the two methods for building SciPy from source for development recommended in SciPy's
 [contributor
 documentation](https://docs.scipy.org/doc/scipy/building/index.html#building-from-source-for-scipy-development), I was
-using the `python dev.py build` workflow and he was using an editable install `pip install -e . --no-build-isolation`.
+using the `"python dev.py build"` workflow and he was using an editable install, `"pip install -e . --no-build-isolation"`.
 For the editable install, SciPy is installed directly in its own project folder, and the shared library and the relevant
 extension modules were all being installed next to eachother in `~/scipy/scipy/special`. For the `dev.py` workflow,
 SciPy is installed elsewhere, and since I didn't specify where to install the shared library, it got put in the wrong
-place. What I had to configure the `install_dir` in `meson` like this:
+place. What I had to do was configure the `install_dir` in `meson` like this:
 
 ```
 sf_error_state_lib = shared_library('sf_error_state', # Name of the library
@@ -561,12 +568,20 @@ module.
 After setting `install_dir` and `install_rpath` correctly, all but one of SciPy's CI jobs were passing. The sole failing
 job involved building a wheel on Windows. A
 [wheel](https://packaging.python.org/en/latest/specifications/binary-distribution-format/) can be thought of as a
-precompiled binary for a Python package. The underlying issue here was that Windows does not have support for something
-like `RPATH`, following less flexible
+precompiled binary for a Python package. The underlying issue was that Windows does not have support for something like
+`RPATH`, following a less flexible set of
 [rules](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order#standard-search-order-for-packaged-apps)
-for determining the search path for shared libraries [^13]. At the time I didn't really have any experience developing for
-Windows, but fortunately Ralf Gommers (rgommers) had seen this issue before, and had a ready-made solution; manually
-loading the shared library from within `scipy/special/__init__.py` so it would be available when needed:
+for determining the search path for shared libraries [^13].
+
+So far, it took us a day of work to get to this point. Since things were not as straightforward as expected, we decided
+I'd take it from here so Irwin could use the rest of his free time between terms to work on more impactful things.
+
+At the time I didn't really have any experience developing for Windows, and didn't even have a Windows machine
+available at home to use. I fired up Windows in a VM and got to work.
+
+I found a solution using [delvewheel](https://github.com/adang1345/delvewheel) that worked but wasn't viable for
+production. Fortunately, Ralf had seen this problem before and had a ready made solution: manually loading the shared
+library from within `scipy/special/__init__.py` so it would be available when needed:
 
 ```python
 def _load_libsf_error_state():
@@ -598,7 +613,8 @@ _load_libsf_error_state()
 ```
 
 Finally, all CI jobs were passing [^14] and Ralf merged my PR [scipy/#20321](https://github.com/scipy/scipy/pull/20321).
-We did it! We fixed the bug we'd introduced with months to go before the next SciPy release—or so we thought.
+We did it! We fixed the bug we'd introduced in `special.errstate` with months to go before the next SciPy release—or so
+we thought.
 
 ### Breaking SciPy for MSVC builds
 
