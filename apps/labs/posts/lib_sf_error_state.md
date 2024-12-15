@@ -35,9 +35,7 @@ licensed and public domain scientific software tools from places like NETLIB [^1
 [^2] were able to kickstart the growth of the Scientific Python ecosystem. There is now a world of ecosystems of
 scientific and data intensive software available in Python. Users who spend their time in the "interpreted shell" may
 have little idea of the complexity that can arise in the "compiled core". Journeying deeper into the stack, it can be
-surprising to see the level of work that can go into making even a relatively simple feature work smoothly. I will
-try to keep all explanations self contained, so that this article can be followed by Python programmers without
-C or C++ programming experience.
+surprising to see the level of work that can go into making even a relatively simple feature work smoothly.
 
 ## NumPy Universal functions
 
