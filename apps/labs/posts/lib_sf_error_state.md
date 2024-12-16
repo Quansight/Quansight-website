@@ -337,31 +337,35 @@ it out.
 Before we continue, let's review some background information. Feel free to skim or skip this section if you know
 this stuff already.
 
-Consider the structure of a C program. It must have one and only one file with an entrypoint function `main` where
-execution begins. This file may refer to functions, global variables, and datatypes from other files. For a C program
-with multiple files, each file is compiled separately into an object file of machine instructions, specific to a
-particular platform, giving explicit commands directly to the CPU. A program called a linker is responsible for
-combining the generated object files into a single program. A library is a collection of code containing functions and
-datatypes which can be used in programs, but which itself doesn't have a `main` function.
+Consider the structure of a C program. It must have one and only one file with an [entry
+point](https://en.wikipedia.org/wiki/Entry_point) function `main` where execution begins. This file may refer to
+functions, global variables, and datatypes from other files. For a C program with multiple files, each file is compiled
+separately into an object file of machine instructions, specific to a particular platform, giving explicit commands
+directly to the CPU. A program called a linker is responsible for combining the generated object files into a single
+program. A library is a collection of code containing functions and datatypes which can be used in programs, but which
+itself doesn't have a `main` function.
 
-There are two ways library code can be linked into a program. The simplest way is _static linking_, where the library
-code is bundled directly into the program. Two programs statically linked with the same library will each have their own
-separate copy of the library. Special function error handling broke because the code responsible for it was statically
-linked into each separate extension module. By contrast, when library code is dynamically linked, it is not included in
-the executable binary file for the program at compile time. It instead lives in a separate binary file, called a _shared
-library_, which can be loaded into the program at runtime.
+There are two ways library code can be linked into a program. The simplest way is [_static
+linking_](https://en.wikipedia.org/wiki/Static_library), where the library code is bundled directly into the
+program. Two programs statically linked with the same library will each have their own separate copy of the
+library. Special function error handling broke because the code responsible for it was statically linked into each
+separate extension module. By contrast, when library code is [_dynamically
+linked_](https://en.wikipedia.org/wiki/Dynamic_linker), it is not included in the executable binary file for the program
+at compile time. It instead lives in a separate binary file, called a _shared library_, which can be loaded into the
+program at runtime.
 
-In addition to executable machine instructions, each object file contains a _symbol table_ mapping each identifier used
-in the original source file (e.g. a function name) to either the position in the executable code where the identifier is
-defined (e.g. the function's definition) or a placeholder if there's no definition in the source file. When combining
-object files into a single program through static linking, the linker fills these placeholders by searching the symbol
-tables of the other object files being linked into the program.
+In addition to executable machine instructions, each object file contains a [_symbol
+table_](https://en.wikipedia.org/wiki/Symbol_table) mapping each identifier used in the original source file (e.g. a
+function name) to either the position in the executable code where the identifier is defined (e.g. the function's
+definition) or a placeholder if there's no definition in the source file. When combining object files into a single
+program through static linking, the linker fills these placeholders by searching the symbol tables of the other object
+files being linked into the program.
 
 Object files from a statically linked library are treated no differently from object files generated from the program's
 source code. By contrast: for dynamic linking, at compile time, the linker only checks the shared library's symbol table
 for entries that could fill placeholders, but does not link the shared library into the program. Shared libraries are
 instead loaded by programs at runtime. Function names, variable names, and other identifiers a shared library makes
-available to programs are referred to as **symbols exported by the library**.
+available to programs are referred to as _symbols exported by the library_.
 
 Some benefits of shared libraries are that:
 
@@ -388,12 +392,25 @@ earliest days. What we mean is the first regular shared library that's not a Pyt
 we've been talking in terms of linking programs with a shared library, in this case we are linking Python extension
 modules with a shared library. It's perfectly valid to link one shared library with one or more others.
 
-## libsf_error_state
+## The relevant code
 
-Let's take a look at the core lines of code from this shared library, `libsf_error_state`. In essence it's very simple.
+Having decided on the shared library approach, we looked into code `scipy.special` used for managing error handling state.
+In essence, things were very simple. Let's walk through the core lines.
 
-There is an array `sf_error_actions` for storing the error handling policy associated to each special function error
-handling type.
+There is an [`enum` type](https://learn.microsoft.com/en-us/cpp/c-language/c-enumeration-declarations?view=msvc-170)
+`sf_action_t` giving human readable names to the different error handling policies:
+
+```c
+enum sf_action_t {
+	SF_ERROR_IGNORE = 0;
+	SF_ERROR_WARN;
+	SF_ERROR_RAISE;
+}
+```
+
+And then an array `sf_error_actions` storing the error handling policy associated to each special function error
+handling type. We see that the default is to ignore errors all errors, matching what we observed in the example with
+`special.gamma`.
 
 ```c
 static sf_action_t sf_error_actions[] = {
@@ -431,8 +448,9 @@ typedef enum {
 } sf_error_t;
 ```
 
-There are then two functions, `scipy_sf_error_set_action` for updating and `scipy_sf_error_get_action` for querying the
-the error handling policy associated to a given error type.
+`sf_action_t` is declared static to make using it directly local to only this file. Instead there are are two functions,
+`scipy_sf_error_set_action` for updating and `scipy_sf_error_get_action` for querying the the error handling policy
+associated to a given error type.
 
 ```c
 void scipy_sf_error_set_action(sf_error_t code, sf_action_t action)
@@ -445,12 +463,6 @@ sf_action_t scipy_sf_error_get_action(sf_error_t code)
     return sf_error_actions[(int)code];
 }
 ```
-
-To encapsulate the error handling state, we want to force dependent programs to work with this state only through the
-above two functions. Using the terminology from earlier, these are the two symbols we want to export from our shared
-library. To accomplish this, the array the containing error handling state was marked with the `static` keyword
-[^13]. This makes this use of the name `sf_error_actions` local to only the file `sf_error_state.c`, preventing the
-symbol from being exported.
 
 If a user runs the following in an IPython session
 
@@ -466,22 +478,24 @@ then somewhere down in the stack, the following call will occur to update the er
 scipy_sf_error_set_action(SF_ERROR_LOSS, SF_ERROR_WARN)
 ```
 
-## Shipping it
+The idea then, was to split off this code into a shared library, which ended up being called `libsf_error_state` [].
 
-`libsf_error_state`'s contents are fairly simple, but how _does_ one actually ship it as shared library within a Python
+## The many battles to actually ship it
+
+`lib_sf_error_state`'s contents are fairly simple, but how does one actually ship a shared library within a Python
 package like SciPy? The process for creating and using shared libraries depends on the operating system and compiler
 toolchain. SciPy supports a wide range of platforms in aim of its goal to democratize access to scientific computing
-tools, and the greatest challenge turned out to be getting things to work on all of them. Several times, just as we
+tools and the greatest challenge turned out to be getting things to work on each of them. Several times, just as we
 thought everything was finally working, another quirk would pop up that needed to be addressed.
 
 ### Path troubles
 
 The initial challenge was finding the right invocations to give to the [meson build system](https://mesonbuild.com/)
-used by SciPy [^13]. Extension modules are configured in the `meson.build` files spread across SciPy's source tree
+used by SciPy []. Extension modules are configured in the `meson.build` files spread across SciPy's source tree
 and we needed to figure out how to set up a shared library and link it into each of the special function ufunc
 extension modules. Irwin and I begin working on this independently, comparing notes as we went.
 
-The first hiccup is that the following invocations were working on Irwin's Mac:
+The first hiccup is that the following invocations were working on Irwin's Mac.
 
 Setting up the shared library like this.
 
@@ -522,11 +536,11 @@ what I tried and the error message I was getting. It turned out that the differe
 herring. The issue was that of the two methods for building SciPy from source for development recommended in SciPy's
 [contributor
 documentation](https://docs.scipy.org/doc/scipy/building/index.html#building-from-source-for-scipy-development), I was
-using the `"python dev.py build"` workflow and he was using an editable install, `"pip install -e . --no-build-isolation"`.
+using the `"python dev.py build"` workflow and he was using an editable install: `"pip install -e . --no-build-isolation"`.
 For the editable install, SciPy is installed directly in its own project folder, and the shared library and the relevant
-extension modules were all being installed next to eachother in `~/scipy/scipy/special`. For the `dev.py` workflow,
-SciPy is installed elsewhere, and since I didn't specify where to install the shared library, it got put in the wrong
-place. What I had to do was configure the `install_dir` in `meson` like this:
+extension modules were all being installed next to each other in `~/scipy/scipy/special`. For the `dev.py` workflow,
+SciPy is installed elsewhere. Since I didn't specify where to install the shared library, it got put in the wrong
+place. It turned out what I had to do was configure the `install_dir` in `meson` like this:
 
 ```
 sf_error_state_lib = shared_library('sf_error_state', # Name of the library
@@ -540,9 +554,10 @@ sf_error_state_lib = shared_library('sf_error_state', # Name of the library
 )
 ```
 
-Even after this I was still receiving the same error. After consulting `meson`'s excellent documentation and looking at
-some related issues, it turned out that the `pip` sets the runtime search path (`RPATH`) for each extension module. This
-tells the dynamic linker where to look for shared libraries.
+But even after this, I was still receiving the same error. After consulting `meson`'s excellent documentation and
+looking at some related issues, it turns out that the `pip` takes care to set the
+[`RPATH`](https://en.wikipedia.org/wiki/Rpath) for each extension module, which tells the dynamic linker where to look
+for shared libraries.
 
 To get things to work with `dev.py`, I needed to explicitly set the `RPATH` in `meson` by adding
 `install_rpath: '$ORIGIN'` to each extension module. `'$ORIGIN'` means to search in the same folder as the extension
@@ -554,17 +569,16 @@ After setting `install_dir` and `install_rpath` correctly, all but one of SciPy'
 job involved building a wheel on Windows. A
 [wheel](https://packaging.python.org/en/latest/specifications/binary-distribution-format/) can be thought of as a
 precompiled binary for a Python package. The underlying issue was that Windows does not have support for something like
-`RPATH`, following a less flexible set of
+`RPATH`, following a less configurable set of
 [rules](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order#standard-search-order-for-packaged-apps)
-for determining the search path for shared libraries [^13].
+for determining the search path for shared libraries [].
 
-So far, it took us a day of work to get to this point. Since things were not as straightforward as expected, we decided
-I'd take it from here so Irwin could use the rest of his free time between terms to work on more impactful things.
+It took us a day of work to get to this point. Since things were not as straightforward as expected; I took it from here.
 
-At the time I didn't really have any experience developing for Windows, and didn't even have a Windows machine
-available at home to use. I looked up how to run Windows in a VM and got to work.
+At the time I didn't really have any experience developing for Windows and didn't even have a Windows machine available
+at home to use []. I looked up how to run Windows in a VM and got to work.
 
-First, I found a solution using [delvewheel](https://github.com/adang1345/delvewheel) that worked but wasn't viable for
+I found a solution using [delvewheel](https://github.com/adang1345/delvewheel) that worked but wasn't viable for
 production. Fortunately, Ralf had seen this problem before and had a ready made solution: manually loading the shared
 library from within `scipy/special/__init__.py` so it would be available when needed:
 
@@ -597,16 +611,16 @@ def _load_libsf_error_state():
 _load_libsf_error_state()
 ```
 
-One week in, finally, all CI jobs were passing [^14] and Ralf merged my PR
-[scipy/#20321](https://github.com/scipy/scipy/pull/20321). We did it! We fixed the bug we'd introduced in
-`special.errstate` with months to go before the next SciPy release—or so we thought.
+One week in, all CI jobs were passing and the [PR creating
+`libsf_error_state`](https://github.com/scipy/scipy/pull/20321) was merged. We did it! We fixed the bug we'd introduced
+in `special.errstate` with months to go before the next SciPy release—or so we thought.
 
 ### Breaking SciPy for MSVC builds
 
-On May 30th, SciPy maintainer and Conda-Forge core member Axel Obermeir (h-vetinari) posted a comment
-on the open PR [scipy-feedstock/gh-277](https://github.com/conda-forge/scipy-feedstock/pull/277).
-The first release candidate for SciPy 1.14.0 had just come out, he was starting the process to add version
-1.14.0 to Conda-Forge, and he noticed that Windows builds for SciPy 1.14.0 were failing with the error:
+On May 30th, SciPy maintainer and Conda-Forge core member Axel Obermeir (h-vetinari) posted a comment on his open PR,
+[scipy-feedstock/gh-277](https://github.com/conda-forge/scipy-feedstock/pull/277). The first release candidate for
+SciPy 1.14.0 had just come out, he was starting the process to add version 1.14.0 to Conda-Forge, and noticed that
+Windows builds for SciPy 1.14.0 were failing with the following error:
 
 ```
 lld-link: error: undefined symbol: scipy_sf_error_get_action
@@ -619,12 +633,14 @@ jobs using [MSVC](https://visualstudio.microsoft.com/vs/features/cplusplus/). We
 difference.
 
 Fortunately, Axel knew what the problem was. On Linux, Mac OS (and Windows while using MinGW), symbols from shared
-libraries are exported by default, but with MSVC, they must be explicitly exported from shared libraries and explicitly
-imported into dependencies by annotating source code with special compiler directives, [\_\_declspec(dllexport)](https://learn.microsoft.com/en-us/cpp/build/exporting-from-a-dll-using-declspec-dllexport) for exporting and
-and [\_\_declspec(dllimport)](https://learn.microsoft.com/en-us/cpp/build/importing-into-an-application-using-declspec-dllimport)
-for importing.
+libraries are exported by default, but with MSVC they must be explicitly exported from shared libraries and explicitly
+imported into consumers by annotating source code with special compiler directives:
+[\_\_declspec(dllexport)](https://learn.microsoft.com/en-us/cpp/build/exporting-from-a-dll-using-declspec-dllexport) for
+exports and and
+[\_\_declspec(dllimport)](https://learn.microsoft.com/en-us/cpp/build/importing-into-an-application-using-declspec-dllimport)
+for imports.
 
-He had a recipe ready to use, defining and using macros which conditionally compiled to the right thing depending on their context.
+He had a recipe ready to use: defining and using macros which conditionally compiled to the right thing depending on their context.
 
 ```C++
 // SCIPY_DLL
@@ -645,10 +661,11 @@ He had a recipe ready to use, defining and using macros which conditionally comp
 #endif
 ```
 
-When I had a chance, I fired up my Windows VM again and put together [a PR](https://github.com/scipy/scipy/pull/20937) implementing Axel's solution.
-MSVC builds were working again and there would be no need to postpone the release date. A couple weeks later, fellow Quansight Labs member
-and LFortran/LPython core developer Gagandeep Singh (czgdp1807) submitted [a PR](https://github.com/scipy/scipy/pull/20985) to add an MSVC CI job,
-plugging the gap in SciPy's coverage.
+As soon as I had a chance, I fired up my Windows VM again and put together [a
+PR](https://github.com/scipy/scipy/pull/20937) implementing Axel's solution. After a couple misteps, MSVC builds were
+working again. There would be no need to push back the release date. A couple weeks later, fellow Quansight Labs member
+and LFortran/LPython core developer Gagandeep Singh (czgdp1807) submitted [a
+PR](https://github.com/scipy/scipy/pull/20985) to add an MSVC CI job, plugging the gap in SciPy's coverage.
 
 ### Thread safety
 
