@@ -269,7 +269,7 @@ SpecialFunctionError: scipy.special/Gamma: singularity
 
 To create a ufunc for a mathematical function, one needs a scalar implementation of this function written in a compiled
 language, known as a scalar kernel. Until recently, `scipy.special` had scalar kernels written in all of C, C++, Fortran
-77, and Cython. In August of 2023, Irwin Zaid (izaid) at Christ Church College Oxford proposed rewriting all of the
+77, and Cython. In August of 2023, Irwin Zaid (izaid) at Oxford proposed rewriting all of the
 scalar kernels in C++ header files in such a way that they could be included in both C++ and CUDA programs. This would
 allow these scalar kernels to also be used in GPU-aware array libraries like CuPy and PyTorch, improving special
 function support across array library backends. I've been supported by the 2020 NASA ROSES grant, _Reinforcing the
@@ -284,10 +284,9 @@ First of all, while working on this project, it became apparent to everyone invo
 SciPy for creating ufuncs was greatly complicated by the need to work with scalar kernels from so many
 languages. Standardizing on C++ offered a chance to simplify things considerably.
 
-In the Spring of 2024, things moved very quickly because Irwin was able to use his free time between terms to work on
-SciPy as a volunteer pretty much fulltime to help get things off the ground. He found that the existing ufunc
-infrastructure was not flexible enough for work he had planned involving [Generalized universal
-functions](https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html) (gufuncs for short) so he wrote new
+In the Spring of 2024, things moved very quickly because Irwin was able to put in some time working on
+SciPy to help get things off the ground. He found that the existing ufunc infrastructure was not flexible enough for work
+he had planned involving [Generalized universal functions](https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html) (gufuncs for short) so he wrote new
 machinery from scratch. Ufuncs and gufuncs created with the new machinery live in a separate extension module from those
 created with the old machinery []. It will be a great win in terms of simplifying `scipy.special`'s build process when
 all ufuncs can be moved over to the new infrastructure, but in the short term there was a problem.
