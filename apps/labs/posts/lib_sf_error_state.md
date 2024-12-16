@@ -15,9 +15,9 @@ hero:
 <a name="asterisk1"/>
 ## Introduction
 
-This is the story of the first[\*](#asterisk2) shared library to make it into the low level code
-that lies beneath SciPy's surface. It offers a glimpse at some of the complexity we try to hide from users, while
-briefly previewing some exciting developments in `scipy.special`.
+This is the story of the first\* shared library to make it into the low level code that lies beneath SciPy's surface. It
+offers a glimpse at some of the complexity that's hidden from users, while briefly previewing some exciting developments
+in `scipy.special`.
 
 Python has become wildly popular as a scripting language for scientific and other data intensive applications. It owes
 much of its success to an exemplary execution of the "compiled core, interpreted shell" principle. One can orchestrate
@@ -32,7 +32,7 @@ code, since one need not worry about the thread-safety of wrapped compiled libra
 
 By wrapping, filling in gaps, and providing user friendly Python APIs to a wide range of battle tested permissively
 licensed and public domain scientific software tools from places like NETLIB [^1]; NumPy and SciPy's founding developers
-[^2] were able to kickstart the growth of the Scientific Python ecosystem. There is now a world of ecosystems of
+[^2] were able to kickstart the growth of the Scientific Python ecosystem. There is now a thriving ecosystem of
 scientific and data intensive software available in Python. Users who spend their time in the "interpreted shell" may
 have little idea of the complexity that can arise in the "compiled core". Journeying deeper into the stack, it can be
 surprising to see the level of work that can go into making even a relatively simple feature work smoothly.
@@ -40,7 +40,7 @@ surprising to see the level of work that can go into making even a relatively si
 ## NumPy Universal functions
 
 NumPy `ndarray`s represent arbitrary dimensional arrays of elements of the same type, stored in a continguous buffer
-[^2] at the machine level. A universal function or `ufunc` for short is a Python level function which applies a
+[^2] at the machine level. A universal function or ufunc for short is a Python level function which applies a
 transform to each element of an `ndarray` by calling out to native code which operates elementwise over the underlying
 contiguous buffer.
 
@@ -63,7 +63,7 @@ array([1.        , 1.41421356, 1.73205081, 2.        , 2.23606798,
 
 For large arrays, the speedup from by applying `np.sqrt` over an
 `ndarray` rather than `math.sqrt` over each element of a list is substantial.
-On my laptop:
+On my laptop I witnessed:
 
 ```python
 In  [1]: import numpy as np
@@ -81,7 +81,7 @@ In  [5]: %timeit [math.sqrt(t) for t in B]
 
 ## Error handling
 
-Consider for a moment what should happen if one gives invalid input to a `ufunc`. If we pass a negative `float` to
+Consider for a moment what should happen if one gives invalid input to a ufunc. If we pass a negative `float` to
 `math.sqrt` a `ValueError` is raised.
 
 ```python
@@ -96,8 +96,8 @@ ValueError: math domain error
 ```
 
 What if one applies a ufunc over a large array and only a small number of inputs are invalid? Would it be reasonable to
-raise a `ValueError` even though almost every calculation succeeded and produced a useful result? Fortunately that's not
-what happens.
+raise a `ValueError` even though almost every calculation succeeded and produced a useful result? We see fortunately,
+that's not what happens.
 
 ```python
 In  [1]: import numpy as np
@@ -112,12 +112,12 @@ array([        nan,  0.        ,  1.        , ..., 31.57530681,
        31.591138  , 31.60696126])
 ```
 
-Instead a warning is raised, and `-1.0` is mapped to `NaN`, a special floating point number representing an undefined
-result; `NaN`s propagate sanely through most calculations [^3], making them useful in these situations.
+Instead a warning is raised and `-1.0` is mapped to `NaN`, a special floating point number representing an undefined
+result. `NaN`s propagate sanely through most calculations [^3], making them useful in these situations.
 
 What if we want to suppress the warning? Perhaps we're applying a ufunc within an inner loop and getting buried in
-unhelpful warning output? NumPy provides an API for controlling [floating point error
-handling](https://numpy.org/doc/stable/reference/routines.err.html) which is very helpful in such situations. Here's the
+unhelpful warning output. For such situations, NumPy provides an API for controlling [floating point error
+handling](https://numpy.org/doc/stable/reference/routines.err.html). Here's the
 [np.errstate](https://numpy.org/doc/stable/reference/generated/numpy.errstate.html#numpy.errstate) context manager in
 action:
 
@@ -137,11 +137,11 @@ array([        nan,  0.        ,  1.        , ..., 31.57530681,
        31.591138  , 31.60696126]
 ```
 
-or what if we genuinely want to raise if any kind of floating point error occurs? Maybe negative inputs imply a sensor
+What if we genuinely want to raise if any kind of floating point error occurs? Perhaps negative inputs imply a sensor
 failure in a latency insensitive [^4] robot which will ping its handlers upon an exception and hibernate until it can be
 physically recovered.
 
-`np.errstate` has us covered there too.
+`np.errstate` also has us covered in this situation:
 
 ```python
 In  [1]: import numpy as np
@@ -165,11 +165,10 @@ FloatingPointError: invalid value encountered in sqrt
 
 NumPy has over 60 [available ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html#available-ufuncs) for a range of
 mathematical functions and operations, but more specialized functions useful in the sciences and engineering are out of
-scope. `ufunc`s for many such functions can be found instead in
+scope. UFuncs for over 230 such functions can be found instead in
 [`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html) [^5].
 
-Here is an example using the `ufunc` `special.gamma` for the [Gamma
-function](https://en.wikipedia.org/wiki/Gamma_function), to reproduce a plot from the Wikipedia article [_Volume of an
+Here is an example using the ufunc `special.gamma` to reproduce a plot from the Wikipedia article [_Volume of an
 n-ball_](https://en.wikipedia.org/wiki/Volume_of_an_n-ball). The plot shows how the volume of a solid multi-dimensional
 sphere depends on the dimension `n` when the radius `R` is one of 0.9, 1.0, or 1.1.
 
@@ -208,8 +207,6 @@ which outputs:
 		dimension n for radius R = 0.9, 1.0, and 1.1"
    />
 </p>
-
-There are currently ufuncs for over 230 mathematical functions in `scipy.special`.
 
 ## scipy.special error handling
 
@@ -267,7 +264,7 @@ _(hint: the title of this article)._
 
 ## Some exciting developments
 
-To create a `ufunc` for a mathematical function, one needs a scalar implementation of this function in a compiled
+To create a ufunc for a mathematical function, one needs a scalar implementation of this function in a compiled
 language that can be called from C. These scalar implementations are known as scalar kernels. Until recently,
 `scipy.special` had scalar kernels written in all of C, C++, Fortran 77, and Cython. In August of 2023, Irwin Zaid (izaid)
 at Christ Church College Oxford proposed rewriting all of the scalar kernels in header files which could be included in
@@ -282,21 +279,21 @@ has been made, and we are in the process of splitting these headed into a separa
 [xsf/#1](https://github.com/scipy/xsf/issues/1).
 
 While working on this project, it became apparent to everyone involves that the infrastructure used in SciPy for
-creating `ufunc`s was greatly complicated by the need to work with scalar kernels from so many languages. Standardizing
+creating ufuncs was greatly complicated by the need to work with scalar kernels from so many languages. Standardizing
 on C++ offered a chance to simplify things considerably.
 
 In the Spring of 2024, things moved very quickly because Irwin was able to use his free time between terms to work on
-SciPy as a volunteer pretty much fulltime to help get things off the ground. He found that the existing `ufunc`
+SciPy as a volunteer pretty much fulltime to help get things off the ground. He found that the existing ufunc
 infrastructure was not flexible enough for work he had planned involving [Generalized universal
-functions](https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html), or `gufuncs` for short, so he wrote
-new machinery from scratch. `ufunc`s and `gufunc`s created with the new machinery live in a separate extension module
+functions](https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html), or gufuncs for short, so he wrote
+new machinery from scratch. ufuncs and gufuncs created with the new machinery live in a separate extension module
 from those created with the old machinery [^6]. It will be a great win in terms of simplifying `scipy.special`'s build
-process when we're able to get all `ufunc`s moved over to the new infrastructure, but in the short term there was
+process when we're able to get all ufuncs moved over to the new infrastructure, but in the short term there was
 a problem.
 
 ## Error handling redux
 
-Just as before, when `ufunc`s are split across multiple extension modules, the error policy state can no longer be
+Just as before, when ufuncs are split across multiple extension modules, the error policy state can no longer be
 easily shared between them. We noticed something was wrong due to a failure in the following doctest for
 [special.seterr](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.seterr.html#scipy.special.seterr).
 
@@ -381,13 +378,11 @@ a shared library _can_ be used to share global state between separate Python ext
 loaded by a Python interpreter running in the same process, since only a single copy of the library is loaded into
 memory. This is the means we chose for sharing special function error handling state between extension modules.
 
-<a name="asterisk2">
-[*](#asterisk1) Note that the title of this article isn't entirely accurate. A Python extension module is itself a shared library which
+Note that the title of this article isn't entirely accurate. A Python extension module is itself a shared library which
 is loaded by the Python interpreter at runtime. Thus SciPy actually ships many shared libaries and has done so from its
-earliest days. What we mean is the first regular shared library that's not a Python extension module. Also, although we've been
-talking in terms of linking programs with a shared library, in this case we are linking Python extension modules with a shared
-library. It's perfectly valid to link one shared library with one or more others.
-</a>
+earliest days. What we mean is the first regular shared library that's not a Python extension module. Also, although
+we've been talking in terms of linking programs with a shared library, in this case we are linking Python extension
+modules with a shared library. It's perfectly valid to link one shared library with one or more others.
 
 ## libsf_error_state
 
@@ -479,7 +474,7 @@ thought everything was finally working, another quirk would pop up that needed t
 
 The initial challenge was finding the right invocations to give to the [meson build system](https://mesonbuild.com/)
 used by SciPy [^13]. Extension modules are configured in the `meson.build` files spread across SciPy's source tree
-and we needed to figure out how to set up a shared library and link it into each of the special function `ufunc`
+and we needed to figure out how to set up a shared library and link it into each of the special function ufunc
 extension modules. Irwin and I begin working on this independently, comparing notes as we went.
 
 The first hiccup is that the following invocations were working on Irwin's Mac:
