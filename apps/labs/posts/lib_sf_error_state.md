@@ -656,23 +656,23 @@ plugging the gap in SciPy's coverage.
 In the introduction I'd mentioned that CPython's global interpreter lock (GIL) makes it easier to extend Python with C
 or other compiled languages since one doesn't need to worry about the thread safety of wrapped code. Still, being able
 to have only one thread in a running Python process execute Python code at a time is greatly limiting for multicore
-applications. In October 2023, a Python Enhancement Proposal (PEP) to make the GIL optional was accepted. This
-proposal, [PEP 703](https://peps.python.org/pep-0703/), is well worth reading for its excellent summary of the
-surrounding issues. CPython 3.13 launched with an optional [free-threaded
+applications. In October 2023, a Python Enhancement Proposal (PEP) was accepted to make the GIL optional. This proposal,
+[PEP 703](https://peps.python.org/pep-0703/), is well worth reading for its thoughtful summary of the surrounding
+issues. CPython 3.13 launched with an optional [free-threaded
 mode](https://docs.python.org/3.13/whatsnew/3.13.html#free-threaded-cpython) which supports running with the GIL
-disabled. Free-threading in Python offers great promise, but to take advantage of it, extensions need to be
-rewritten with thread safety in mind.
+disabled. Free-threading in Python offers great promise, but to take advantage of it, extensions need to be rewritten
+with thread safety in mind.
 
 `lib_sf_error_state` is obviously not thread safe. There is a global array carrying the current state of special
 function error handling policies with nothing to stop competing threads from trying to access the same memory
-location. Simultaneous modifications could even leave an entry in some corrupt and indeterminate state.
-This situation is known as a [data race](https://en.wikipedia.org/wiki/Race_condition#Data_race),
-and leads to [undefined behavior](https://en.wikipedia.org/wiki/Undefined_behavior) in C and C++. Weird things
-can happen when there is a data race.
+location. Simultaneous modifications could even leave an entry in some corrupt and indeterminate state. This situation
+is known as a [data race](https://en.wikipedia.org/wiki/Race_condition#Data_race), and leads to [undefined
+behavior](https://en.wikipedia.org/wiki/Undefined_behavior) in C and C++. Weird things can happen when there is a data
+race.
 
 The latest tale in the saga of `lib_sf_error_state` is [a PR](https://github.com/scipy/scipy/pull/21956) from Edgar
-Margffoy (andfoy) on Quansight Labs' [free-threaded Python
-team](https://labs.quansight.org/blog/free-threaded-python-rollout_) to ensure thread safety by declaring the array
+Margffoy (andfoy)—a member of Quansight Labs' [free-threaded Python
+team](https://labs.quansight.org/blog/free-threaded-python-rollout_)—to ensure thread safety by declaring the array
 `sf_error_actions` [thread local](https://en.wikipedia.org/wiki/Thread-local_storage). This eliminates the data-race by
 making it so each thread gets its own separate copy of the array. Edgar and the others on the free-threaded Python team
 have been doing great work improving support for free-threaded Python across the ecosystem for much of this past year.
