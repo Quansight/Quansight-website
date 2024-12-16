@@ -12,12 +12,11 @@ hero:
   imageAlt: The text "SciPy" along with the SciPy logo superimposed over a computer generated image of a circuitboard.
 ---
 
-<a name="asterisk1"/>
 ## Introduction
 
-This is the story of the first\* shared library to make it into the low level code that lies beneath SciPy's surface. It
-offers a glimpse at some of the complexity that's hidden from users, while briefly previewing some exciting developments
-in `scipy.special`.
+This is the story of the first[^1] shared library to be shipped within SciPy. It offers a glimpse at some of the
+complexity SciPy tries to hide from users, while previewing some exciting developments in
+[`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html).
 
 Python has become wildly popular as a scripting language for scientific and other data intensive applications. It owes
 much of its success to an exemplary execution of the "compiled core, interpreted shell" principle. One can orchestrate
@@ -30,23 +29,24 @@ native code. The Python C API is well thought out and straightforward to work wi
 lock or GIL, a barrier to free threading within Python, has the benefit of making it much easier to call out to native
 code, since one need not worry about the thread-safety of wrapped compiled libraries.
 
-By wrapping, filling in gaps, and providing user friendly Python APIs to a wide range of battle tested permissively
-licensed and public domain scientific software tools from places like NETLIB [^1]; NumPy and SciPy's founding developers
-[^2] were able to kickstart the growth of the Scientific Python ecosystem. There is now a thriving ecosystem of
-scientific and data intensive software available in Python. Users who spend their time in the "interpreted shell" may
-have little idea of the complexity that can arise in the "compiled core". Journeying deeper into the stack, it can be
-surprising to see the level of work that can go into making even a relatively simple feature work smoothly.
+By wrapping, filling in gaps, and providing user friendly Python APIs to a wide range of battle tested, permissively
+licensed and public domain scientific software tools—SciPy's founding developers [] were able to kickstart the growth of
+the Scientific Python ecosystem. There are now worlds of scientific and data intensive software available in
+Python. Users who spend their time in the interpreted shell may not be aware of the complexity that lies
+underneath. Journeying deeper into the stack, it can be surprising to see the level of work that can go into making even
+a relatively simple feature work smoothly.
 
 ## NumPy Universal functions
 
-NumPy `ndarray`s represent arbitrary dimensional arrays of elements of the same type, stored in a continguous buffer
-[^2] at the machine level. A universal function or ufunc for short is a Python level function which applies a
-transform to each element of an `ndarray` by calling out to native code which operates elementwise over the underlying
-contiguous buffer.
+A NumPy [`ndarray`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) represents an arbitrary
+dimensional array of elements of the same data type, stored in a continguous buffer at the machine level. A [universal
+function](https://numpy.org/doc/stable/reference/ufuncs.html) or ufunc for short is a Python level function which
+applies a transform to each element of an `ndarray` by looping and operating elementwise over the underlying contiguous
+buffer in efficient native code.
 
-Here's the ufunc `np.sqrt` in action
+Here's the ufunc [`np.sqrt`](https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html) in action
 
-```python
+```
 In  [1]: import numpy as np
 
 In  [2]: A = np.arange(1, 11, dtype=float)
@@ -61,11 +61,11 @@ array([1.        , 1.41421356, 1.73205081, 2.        , 2.23606798,
 
 ```
 
-For large arrays, the speedup from by applying `np.sqrt` over an
-`ndarray` rather than `math.sqrt` over each element of a list is substantial.
-On my laptop I witnessed:
+For large arrays, the speedup from by applying `np.sqrt` over an `ndarray` rather than
+[`math.sqrt`](https://docs.python.org/3/library/math.html#math.sqrt) over each element of a list is substantial. On my
+laptop I witnessed:
 
-```python
+```
 In  [1]: import numpy as np
 
 In  [2]: A = np.arange(1, 1000000, dtype=float)
@@ -81,25 +81,26 @@ In  [5]: %timeit [math.sqrt(t) for t in B]
 
 ## Error handling
 
-Consider for a moment what should happen if one gives invalid input to a ufunc. If we pass a negative `float` to
-`math.sqrt` a `ValueError` is raised.
+What should happen if one gives invalid input to a ufunc? If we pass a negative
+[`float`](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex) to `math.sqrt` a
+[`ValueError`](https://docs.python.org/3/library/exceptions.html#ValueError) is raised [].
 
-```python
+```
 In  [1]: import math
 
 In  [2]: math.sqrt(-1.0)
 ValueError                                Traceback (most recent call last)
-Cell In[2], line 1
+Cell In[2], line 1p
 ----> 1 math.sqrt(-1.0)
 
 ValueError: math domain error
 ```
 
 What if one applies a ufunc over a large array and only a small number of inputs are invalid? Would it be reasonable to
-raise a `ValueError` even though almost every calculation succeeded and produced a useful result? We see fortunately,
-that's not what happens.
+raise a `ValueError` even though almost every calculation succeeded and produced a useful result? Fortunately, that's
+not what happens:
 
-```python
+```
 In  [1]: import numpy as np
 
 In  [2]: A = np.arange(-1, 1000, dtype=float)
@@ -112,16 +113,17 @@ array([        nan,  0.        ,  1.        , ..., 31.57530681,
        31.591138  , 31.60696126])
 ```
 
-Instead a warning is raised and `-1.0` is mapped to `NaN`, a special floating point number representing an undefined
-result. `NaN`s propagate sanely through most calculations [^3], making them useful in these situations.
+Instead a warning is raised and `-1.0` is mapped to [`NaN`](https://en.wikipedia.org/wiki/NaN), a special floating point
+number representing an undefined result. `NaN`s propagate sanely through most calculations [], making them useful in
+such situations.
 
 What if we want to suppress the warning? Perhaps we're applying a ufunc within an inner loop and getting buried in
 unhelpful warning output. For such situations, NumPy provides an API for controlling [floating point error
 handling](https://numpy.org/doc/stable/reference/routines.err.html). Here's the
-[np.errstate](https://numpy.org/doc/stable/reference/generated/numpy.errstate.html#numpy.errstate) context manager in
+[`np.errstate`](https://numpy.org/doc/stable/reference/generated/numpy.errstate.html#numpy.errstate) context manager in
 action:
 
-```python
+```
 In  [1]: import numpy as np
 
 In  [2]: A = np.arange(-1, 1000, dtype=float)
@@ -138,12 +140,12 @@ array([        nan,  0.        ,  1.        , ..., 31.57530681,
 ```
 
 What if we genuinely want to raise if any kind of floating point error occurs? Perhaps negative inputs imply a sensor
-failure in a latency insensitive [^4] robot which will ping its handlers upon an exception and hibernate until it can be
+failure in a latency insensitive [] robot which will ping its handlers upon an exception and hibernate until it can be
 physically recovered.
 
-`np.errstate` also has us covered in this situation:
+`np.errstate` has us covered here too:
 
-```python
+```
 In  [1]: import numpy as np
 
 In  [2]: A = np.arange(-1, 1000, dtype=float)
@@ -163,14 +165,16 @@ FloatingPointError: invalid value encountered in sqrt
 
 ## scipy.special
 
-NumPy has over 60 [available ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html#available-ufuncs) for a range of
+NumPy has over 60 [ufuncs available](https://numpy.org/doc/stable/reference/ufuncs.html#available-ufuncs) for a range of
 mathematical functions and operations, but more specialized functions useful in the sciences and engineering are out of
-scope. UFuncs for over 230 such functions can be found instead in
-[`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html) [^5].
+scope. Ufuncs for over 230 such functions can be found instead in
+[`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html) [].
 
-Here is an example using the ufunc `special.gamma` to reproduce a plot from the Wikipedia article [_Volume of an
-n-ball_](https://en.wikipedia.org/wiki/Volume_of_an_n-ball). The plot shows how the volume of a solid multi-dimensional
-sphere depends on the dimension `n` when the radius `R` is one of 0.9, 1.0, or 1.1.
+Just for fun, let's use
+[`scipy.special.gamma`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gamma.html) to reproduce a
+plot from the Wikipedia article ["_Volume of an n-ball_"](https://en.wikipedia.org/wiki/Volume_of_an_n-ball). The plot
+shows how the volume of a solid multi-dimensional sphere depends on the dimension `n` when the radius `R` is one of 0.9,
+1.0, or 1.1.
 
 ```python
 import matplotlib.pyplot as plt
@@ -210,10 +214,11 @@ which outputs:
 
 ## scipy.special error handling
 
-What if one of the `ufunc`s in `scipy.special` recieves an array with some invalid
-elements?
+What if one of the ufuncs in `scipy.special` recieves an array with some invalid elements? The [Gamma
+function](https://en.wikipedia.org/wiki/Gamma_function) used above has singularities at non-positive
+integers.
 
-```python
+```
 In  [1]: import numpy as np
 
 In  [2]: import scipy.special as special
@@ -228,19 +233,20 @@ In  [5]: with np.errstate(all="raise"):
     ...:     _ = special.gamma(x)
 	...:
 
+In  [6]:
+
 ```
 
-Just like for the `ufunc`s included in NumPy, by default invalid entries will be mapped to `NaN`, however no warning is
-raised, and `np.errstate` has no impact on error handling. What's going on? Well, NumPy's `ufunc`s are provided in a C
-[extension module](https://docs.python.org/3/extending/extending.html) that's bundled into NumPy. Within this extension
-module, there's a library of compiled code and an interface for interacting with this code from Python. Some of compiled
-code in the extension module manages the current state for error handling policies. The `ufunc`s in `scipy.special` are
-bundled into a different extension module in SciPy. Typically, extension modules are like separate worlds, and one
-cannot access another except through its Python interface. Instead, SciPy includes its own means of controlling error
-handling, [scipy.special.errstate](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.errstate.html),
-which mirrors `np.errstate`.
+`np.errstate` had no impact on error handling, there were no warnings, but we do see `NaN`s in the output []. What's
+going on? Well, NumPy's ufuncs are provided in a C [extension
+module](https://docs.python.org/3/extending/extending.html) that's part of NumPy. There's some C code in this extension
+module for managing the state for error handling policies. The ufuncs in `scipy.special` come from a different extension
+module in SciPy. Extension modules from separate projects are like separate worlds, and cannot communicate with one
+another except through their Python interfaces []. SciPy instead has its own context manager:
+[`scipy.special.errstate`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.errstate.html) that
+mirrors `np.errstate`.
 
-```python
+```
 In  [1]: import numpy as np
 
 In  [2]: import scipy.special as special
@@ -258,9 +264,6 @@ Cell In[4], line 2
 
 SpecialFunctionError: scipy.special/Gamma: singularity
 ```
-
-But is there a way to _share_ state between extension modules without going through Python?
-_(hint: the title of this article)._
 
 ## Some exciting developments
 
@@ -677,16 +680,4 @@ support](https://github.com/scipy/scipy/pull/21956#pullrequestreview-2476680430)
 
 ## Reflections
 
-[^1]: footnote 1
-[^2]: footnote 2
-[^3]: footnote 3
-[^4]: footnote 4
-[^5]: footnote 5
-[^6]: footnote 6
-[^7]: footnote 7
-[^8]: footnote 8
-[^9]: footnote 9
-[^10]: footnote 10
-[^11]: footnote 11
-[^12]: footnote 12
-[^13]: footnote 13
+[^1]: The first regular shared library, not including Python extension modules.
