@@ -680,8 +680,6 @@ have been doing great work improving support for free-threaded Python across the
 In a curious reversal, it is now the `win32` flavor of MinGW that is causing trouble due to [lack of proper threading
 support](https://github.com/scipy/scipy/pull/21956#pullrequestreview-2476680430).
 
-While conducting research for this post, I found that in October 2016, now inactive SciPy BDFL Pauli Virtanen had
-
 ## Reflections
 
 [^1]: footnote 1
@@ -692,8 +690,8 @@ While conducting research for this post, I found that in October 2016, now inact
 [^6]: footnote 6
 [^7]: footnote 7
 [^8]: footnote 8
-[^9]: https://godbolt.org/z/rqv5Y7489
+[^9]: footnote 9
 [^10]: footnote 10
 [^11]: footnote 11
 [^12]: footnote 12
-[^13]: asfd SciPy steering council chair and Quansight Labs co-director Ralf Gommers (rgommers) in a [blog post]().
+[^13]: footnote 13
