@@ -267,38 +267,36 @@ SpecialFunctionError: scipy.special/Gamma: singularity
 
 ## Some exciting developments
 
-To create a ufunc for a mathematical function, one needs a scalar implementation of this function in a compiled
-language that can be called from C. These scalar implementations are known as scalar kernels. Until recently,
-`scipy.special` had scalar kernels written in all of C, C++, Fortran 77, and Cython. In August of 2023, Irwin Zaid (izaid)
-at Christ Church College Oxford proposed rewriting all of the scalar kernels in header files which could be included in
-both C++ and CUDA programs. This would allow these special functions to be used not just in SciPy, but also GPU-aware
-array libraries like CuPy and PyTorch, improving special function support across array library backends. I was supported
-by the 2020 NASA ROSES grant, _Reinforcing the Foundations of Scientific Python_ (with travel and compute costs covered
-by the 2023 NumFocus SDG _Streamlined Special Function Development in SciPy_), to work together with Irwin putting this
-plan into action. With additional help from SciPy maintainer Ilhan Polat (ilayn), who made a heroic effort to translate over
-twenty thousand lines of Fortran scalar kernel code to C, and contributions from other volunteers, substantial progress
-has been made, and we are in the process of splitting these headed into a separate library called
-[xsf](https://github.com/scipy/xsf/). This is a story for another time. Until then, to learn more, see
-[xsf/#1](https://github.com/scipy/xsf/issues/1).
+To create a ufunc for a mathematical function, one needs a scalar implementation of this function written in a compiled
+language, known as a scalar kernel. Until recently, `scipy.special` had scalar kernels written in all of C, C++, Fortran
+77, and Cython. In August of 2023, Irwin Zaid (izaid) at Christ Church College Oxford proposed rewriting all of the
+scalar kernels in C++ header files in such a way that they could be included in both C++ and CUDA programs. This would
+allow these scalar kernels to also be used in GPU-aware array libraries like CuPy and PyTorch, improving special
+function support across array library backends. I've been supported by the 2020 NASA ROSES grant, _Reinforcing the
+Foundations of Scientific Python_ (with travel and compute costs covered by the 2023 NumFocus SDG _Streamlined Special
+Function Development in SciPy_), to work together with Irwin to put this plan into action. With additional help from
+SciPy maintainer Ilhan Polat (ilayn), who made a heroic effort to translate over twenty thousand lines of Fortran scalar
+kernel code to C, and contributions from other volunteers, substantial progress has been made, and we are in the process
+of splitting these headed into a separate library called [xsf](https://github.com/scipy/xsf/). This is a story for
+another time. Until then, for more info, see [xsf/#1](https://github.com/scipy/xsf/issues/1).
 
-While working on this project, it became apparent to everyone involves that the infrastructure used in SciPy for
-creating ufuncs was greatly complicated by the need to work with scalar kernels from so many languages. Standardizing
-on C++ offered a chance to simplify things considerably.
+First of all, while working on this project, it became apparent to everyone involved that the infrastructure used in
+SciPy for creating ufuncs was greatly complicated by the need to work with scalar kernels from so many
+languages. Standardizing on C++ offered a chance to simplify things considerably.
 
 In the Spring of 2024, things moved very quickly because Irwin was able to use his free time between terms to work on
 SciPy as a volunteer pretty much fulltime to help get things off the ground. He found that the existing ufunc
 infrastructure was not flexible enough for work he had planned involving [Generalized universal
-functions](https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html), or gufuncs for short, so he wrote
-new machinery from scratch. ufuncs and gufuncs created with the new machinery live in a separate extension module
-from those created with the old machinery [^6]. It will be a great win in terms of simplifying `scipy.special`'s build
-process when we're able to get all ufuncs moved over to the new infrastructure, but in the short term there was
-a problem.
+functions](https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html) (gufuncs for short) so he wrote new
+machinery from scratch. Ufuncs and gufuncs created with the new machinery live in a separate extension module from those
+created with the old machinery []. It will be a great win in terms of simplifying `scipy.special`'s build process when
+all ufuncs can be moved over to the new infrastructure, but in the short term there was a problem.
 
 ## Error handling redux
 
-Just as before, when ufuncs are split across multiple extension modules, the error policy state can no longer be
-easily shared between them. We noticed something was wrong due to a failure in the following doctest for
-[special.seterr](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.seterr.html#scipy.special.seterr).
+After splitting them between multiple extension modules, the error policy state could no longer be easily shared
+between ufuncs. We noticed something was wrong due to a failure in a doctest for
+[`special.seterr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.seterr.html#scipy.special.seterr).
 
 ```
     Examples
@@ -314,39 +312,45 @@ easily shared between them. We noticed something was wrong due to a failure in t
     >>> _ = sc.seterr(**olderr)
 ```
 
-`gammaln`, for the log of the absolute value of the Gamma function, was one of a handful of ufuncs moved to the new
-extension module.
+[`gammaln`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gammaln.html), for the log of the
+absolute value of the Gamma function, was one of a handful of ufuncs moved to the new extension module.
 
-Both extension modules contained a separate copy of the state for managing error handling policies and
-a Python interface for managing this state, but the user facing `special.seterr`, `special.errstate`, and
-`special.geterr` in SciPy all came from the first extension module. We then saw two options:
+Both extension modules contained a separate copy of the state for managing error handling policies, but it appeared that
+the user facing `special.errstate` could only see and change the state from the first extension module. We saw three
+options:
 
-1. Update `special.seterr`, `special.errstate`, `special.geterr` to access and update the state in each extension
-   module, taking care that the state remains synchronized.
+1. Have the Python interface for modifying the error handling state (`special.errstate` and
+   [`special.seterr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.seterr.html)) update the state
+   in each extension module, taking care that the state remains synchronized.
 
-2. Extract the error handling state and primitives for managing it into a shared library that each extension
-   module would be dependent on.
+2. Extract the error handling state and primitives for managing it into a shared library that would be linked with
+   each extension module.
 
-We chose to create a shared library because it seemed like the more principled option [^7]. As the saying goes: we do
-things not because they are easy, but because we think they will be easy [^8]. Scientific Python guru and Quansight
-Labs Co-director Ralf Gommers (rgommers) knew from long experience that this would be difficult to get right, but
-trusted that we'd be able to figure it out.
+3. Keep the error handling state in one of the extension modules and have it retrieved from there by the other.
+
+We chose to create a shared library because it seemed like the more principled option []. As the saying goes: we do
+things not because they are easy, but because we think they will be easy []. Quansight Labs Co-director Ralf Gommers
+(rgommers) knew from long experience that this may be difficult to get right, but trusted that we'd be able to figure
+it out.
 
 ## Static vs dynamic linking
 
+Before we continue, let's review some background information. Feel free to skim or skip this section if you know
+this stuff already.
+
 Consider the structure of a C program. It must have one and only one file with an entrypoint function `main` where
-execution begins; this file may refer to functions, global variables, and datatypes from other files. For a C program
+execution begins. This file may refer to functions, global variables, and datatypes from other files. For a C program
 with multiple files, each file is compiled separately into an object file of machine instructions, specific to a
-particular platform, giving explicit commands directly to the CPU [^9]. A program called a linker is responsible for
+particular platform, giving explicit commands directly to the CPU. A program called a linker is responsible for
 combining the generated object files into a single program. A library is a collection of code containing functions and
 datatypes which can be used in programs, but which itself doesn't have a `main` function.
 
-There are two ways library code can be linked into a program. The simplest way is _static linking_, where the
-library code is bundled directly into the program. Two programs [^10] statically linked with the same library will each
-have their own separate copy of the library. Special function error handling broke because the code responsible for it
-was statically linked into each separate extension module. By contrast, when library code is dynamically linked, it is
-not included in the executable binary file for the program at compile time. It instead lives in a separate binary file,
-called a _shared library_, which can be loaded into the program at runtime.
+There are two ways library code can be linked into a program. The simplest way is _static linking_, where the library
+code is bundled directly into the program. Two programs statically linked with the same library will each have their own
+separate copy of the library. Special function error handling broke because the code responsible for it was statically
+linked into each separate extension module. By contrast, when library code is dynamically linked, it is not included in
+the executable binary file for the program at compile time. It instead lives in a separate binary file, called a _shared
+library_, which can be loaded into the program at runtime.
 
 In addition to executable machine instructions, each object file contains a _symbol table_ mapping each identifier used
 in the original source file (e.g. a function name) to either the position in the executable code where the identifier is
@@ -355,10 +359,10 @@ object files into a single program through static linking, the linker fills thes
 tables of the other object files being linked into the program.
 
 Object files from a statically linked library are treated no differently from object files generated from the program's
-source code. For dynamic linking, at compile time, the linker only checks the shared library's symbol table for entries
-that could fill placeholders, but does not link the shared library into the program. Shared libraries are instead loaded
-by programs at runtime. Function names, variable names, and other identifiers a shared library makes available to
-programs are referred to as **symbols exported by the library**.
+source code. By contrast: for dynamic linking, at compile time, the linker only checks the shared library's symbol table
+for entries that could fill placeholders, but does not link the shared library into the program. Shared libraries are
+instead loaded by programs at runtime. Function names, variable names, and other identifiers a shared library makes
+available to programs are referred to as **symbols exported by the library**.
 
 Some benefits of shared libraries are that:
 
@@ -367,19 +371,17 @@ Some benefits of shared libraries are that:
 - Updates can be made to a shared library without requiring dependent programs to be recompiled, so long as the library's
   interface doesn't change.
 
-For these reasons, the C standard library mentioned above is almost always linked dynamically.
-
 There are tradeoffs. A small amount of overhead may be added to function calls, since the process of function
 lookups is more involved, and the need to locate and load the shared libray into memory at runtime can incur a fixed
 amount of startup overhead.
 
 ## Sharing global state
 
-Shared libraries cannot share global state between programs running in separate processes; each process has its own
+Shared libraries cannot share global state between programs running in separate processes. Each process has its own
 separate address space of memory it can access, and interprocess communication requires special protocols. Nevertheless,
 a shared library _can_ be used to share global state between separate Python extension modules that were dynamically
 loaded by a Python interpreter running in the same process, since only a single copy of the library is loaded into
-memory. This is the means we chose for sharing special function error handling state between extension modules.
+memory.
 
 Note that the title of this article isn't entirely accurate. A Python extension module is itself a shared library which
 is loaded by the Python interpreter at runtime. Thus SciPy actually ships many shared libaries and has done so from its
