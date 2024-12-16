@@ -284,12 +284,13 @@ First of all, while working on this project, it became apparent to everyone invo
 SciPy for creating ufuncs was greatly complicated by the need to work with scalar kernels from so many
 languages. Standardizing on C++ offered a chance to simplify things considerably.
 
-In the Spring of 2024, things moved very quickly because Irwin was able to put in some time working on
-SciPy to help get things off the ground. He found that the existing ufunc infrastructure was not flexible enough for work
-he had planned involving [Generalized universal functions](https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html) (gufuncs for short) so he wrote new
-machinery from scratch. Ufuncs and gufuncs created with the new machinery live in a separate extension module from those
-created with the old machinery []. It will be a great win in terms of simplifying `scipy.special`'s build process when
-all ufuncs can be moved over to the new infrastructure, but in the short term there was a problem.
+In the Spring of 2024, things moved quickly because Irwin was able to put in some time working on SciPy to help get
+things off the ground. He found that the existing ufunc infrastructure was not flexible enough for work he had planned
+involving [Generalized universal functions](https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html)
+(gufuncs for short) so he wrote new machinery from scratch. Ufuncs and gufuncs created with the new machinery live in a
+separate extension module from those created with the old machinery []. It will be a great win in terms of simplifying
+`scipy.special`'s build process when all ufuncs can be moved over to the new infrastructure, but in the short term there
+was a problem.
 
 ## Error handling redux
 
