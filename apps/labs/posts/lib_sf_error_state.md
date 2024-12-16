@@ -417,16 +417,6 @@ clear, there is another `enum` type, `sf_error_t`, which associates the name for
 the corresponding index into `sf_error_actions`.
 
 ```c
-sf_error_t code = SF_ERROR_LOSS;
-
-// Doesn't compile, an enum cannot be used as an array index.
-sf_error_actions[code];
-
-//
-sf_error_actions[int(code)]
-```
-
-```c
 typedef enum {
     SF_ERROR_OK = 0,    /* no error */
     SF_ERROR_SINGULAR,  /* singularity encountered */
@@ -657,9 +647,40 @@ He had a recipe ready to use, defining and using macros which conditionally comp
 ```
 
 When I had a chance, I fired up my Windows VM again and put together [a PR](https://github.com/scipy/scipy/pull/20937) implementing Axel's solution.
-MSVC builds were working again and there would be no need to postpone the release date.
+MSVC builds were working again and there would be no need to postpone the release date. A couple weeks later, fellow Quansight Labs member
+and LFortran/LPython core developer Gagandeep Singh (czgdp1807) submitted [a PR](https://github.com/scipy/scipy/pull/20985) to add an MSVC CI job,
+plugging the gap in SciPy's coverage.
 
 ### Thread safety
+
+In the introduction I'd mentioned that CPython's global interpreter lock (GIL) makes it easier to extend Python with C
+or other compiled languages since one doesn't need to worry about the thread safety of wrapped code. Still, being able
+to have only one thread in a running Python process execute Python code at a time is greatly limiting for multicore
+applications. In October 2023, a Python Enhancement Proposal (PEP) to make the GIL optional was accepted. This
+proposal, [PEP 703](https://peps.python.org/pep-0703/), is well worth reading for its excellent summary of the
+surrounding issues. CPython 3.13 launched with an optional [free-threaded
+mode](https://docs.python.org/3.13/whatsnew/3.13.html#free-threaded-cpython) which supports running with the GIL
+disabled. Free-threading in Python offers great promise, but to take advantage of it, extensions need to be
+rewritten with thread safety in mind.
+
+`lib_sf_error_state` is obviously not thread safe. There is a global array carrying the current state of special
+function error handling policies with nothing to stop competing threads from trying to access the same memory
+location. Simultaneous modifications could even leave an entry in some corrupt and indeterminate state.
+This situation is known as a [data race](https://en.wikipedia.org/wiki/Race_condition#Data_race),
+and leads to [undefined behavior](https://en.wikipedia.org/wiki/Undefined_behavior) in C and C++. Weird things
+can happen when there is a data race.
+
+The latest tale in the saga of `lib_sf_error_state` is [a PR](https://github.com/scipy/scipy/pull/21956) from Edgar
+Margffoy (andfoy) on Quansight Labs' [free-threaded Python
+team](https://labs.quansight.org/blog/free-threaded-python-rollout_) to ensure thread safety by declaring the array
+`sf_error_actions` [thread local](https://en.wikipedia.org/wiki/Thread-local_storage). This eliminates the data-race by
+making it so each thread gets its own separate copy of the array. Edgar and the others on the free-threaded Python team
+have been doing great work improving support for free-threaded Python across the ecosystem for much of this past year.
+
+In a curious reversal, it is now the `win32` flavor of MinGW that is causing trouble due to [lack of proper threading
+support](https://github.com/scipy/scipy/pull/21956#pullrequestreview-2476680430).
+
+While conducting research for this post, I found that in October 2016, now inactive SciPy BDFL Pauli Virtanen had
 
 ## Reflections
 
