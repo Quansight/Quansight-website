@@ -334,8 +334,6 @@ trusted that we'd be able to figure it out.
 
 ## Static vs dynamic linking
 
-Let's make sure everyone's on the same page regarding what a shared libray is.
-
 Consider the structure of a C program. It must have one and only one file with an entrypoint function `main` where
 execution begins; this file may refer to functions, global variables, and datatypes from other files. For a C program
 with multiple files, each file is compiled separately into an object file of machine instructions, specific to a
@@ -575,9 +573,9 @@ So far, it took us a day of work to get to this point. Since things were not as 
 I'd take it from here so Irwin could use the rest of his free time between terms to work on more impactful things.
 
 At the time I didn't really have any experience developing for Windows, and didn't even have a Windows machine
-available at home to use. I fired up Windows in a VM and got to work.
+available at home to use. I looked up how to run Windows in a VM and got to work.
 
-I found a solution using [delvewheel](https://github.com/adang1345/delvewheel) that worked but wasn't viable for
+First, I found a solution using [delvewheel](https://github.com/adang1345/delvewheel) that worked but wasn't viable for
 production. Fortunately, Ralf had seen this problem before and had a ready made solution: manually loading the shared
 library from within `scipy/special/__init__.py` so it would be available when needed:
 
@@ -610,14 +608,56 @@ def _load_libsf_error_state():
 _load_libsf_error_state()
 ```
 
-Finally, all CI jobs were passing [^14] and Ralf merged my PR [scipy/#20321](https://github.com/scipy/scipy/pull/20321).
-We did it! We fixed the bug we'd introduced in `special.errstate` with months to go before the next SciPy release—or so
-we thought.
+One week in, finally, all CI jobs were passing [^14] and Ralf merged my PR
+[scipy/#20321](https://github.com/scipy/scipy/pull/20321). We did it! We fixed the bug we'd introduced in
+`special.errstate` with months to go before the next SciPy release—or so we thought.
 
 ### Breaking SciPy for MSVC builds
 
-https://github.com/conda-forge/scipy-feedstock/pull/277
-https://github.com/scipy/scipy/issues/20840
+On May 30th, SciPy maintainer and Conda-Forge core member Axel Obermeir (h-vetinari) posted a comment
+on the open PR [scipy-feedstock/gh-277](https://github.com/conda-forge/scipy-feedstock/pull/277).
+The first release candidate for SciPy 1.14.0 had just come out, he was starting the process to add version
+1.14.0 to Conda-Forge, and he noticed that Windows builds for SciPy 1.14.0 were failing with the error:
+
+```
+lld-link: error: undefined symbol: scipy_sf_error_get_action
+```
+
+How could this be? SciPy's own CI jobs were passing on Windows, but here, symbols from `lib_sf_error_state` were clearly
+not being found. The thing is, at that point in time there was still a key gap in SciPy's CI coverage. Although there
+were Windows builds in CI, they all used the [MinGW](https://en.wikipedia.org/wiki/MinGW) compiler toolchain, with no
+jobs using [MSVC](https://visualstudio.microsoft.com/vs/features/cplusplus/). We had run into another platform specific
+difference.
+
+Fortunately, Axel knew what the problem was. On Linux, Mac OS (and Windows while using MinGW), symbols from shared
+libraries are exported by default, but with MSVC, they must be explicitly exported from shared libraries and explicitly
+imported into dependencies by annotating source code with special compiler directives, [\_\_declspec(dllexport)](https://learn.microsoft.com/en-us/cpp/build/exporting-from-a-dll-using-declspec-dllexport) for exporting and
+and [\_\_declspec(dllimport)](https://learn.microsoft.com/en-us/cpp/build/importing-into-an-application-using-declspec-dllimport)
+for importing.
+
+He had a recipe ready to use, defining and using macros which conditionally compiled to the right thing depending on their context.
+
+```C++
+// SCIPY_DLL
+// inspired by https://github.com/abseil/abseil-cpp/blob/20240116.2/absl/base/config.h#L736-L753
+//
+// When building sf_error_state as a DLL, this macro expands to `__declspec(dllexport)`
+// so we can annotate symbols appropriately as being exported. When used in
+// headers consuming a DLL, this macro expands to `__declspec(dllimport)` so
+// that consumers know the symbol is defined inside the DLL. In all other cases,
+// the macro expands to nothing.
+// Note: SCIPY_DLL_{EX,IM}PORTS are set in scipy/special/meson.build
+#if defined(SCIPY_DLL_EXPORTS)
+    #define SCIPY_DLL __declspec(dllexport)
+#elif defined(SCIPY_DLL_IMPORTS)
+    #define SCIPY_DLL __declspec(dllimport)
+#else
+    #define SCIPY_DLL
+#endif
+```
+
+When I had a chance, I fired up my Windows VM again and put together [a PR](https://github.com/scipy/scipy/pull/20937) implementing Axel's solution.
+MSVC builds were working again and there would be no need to postpone the release date.
 
 ### Thread safety
 
