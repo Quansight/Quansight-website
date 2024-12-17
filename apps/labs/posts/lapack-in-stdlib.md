@@ -94,31 +94,31 @@ To help illustrate the last point, let's return to the BLAS routine `daxpy`, whi
 
 ```c
 void c_daxpy(const int N, const double alpha, const double *X, const int strideX, double *Y, const int strideY) {
-	int ix;
-	int iy;
-	int i;
-	if (N <= 0) {
-		return;
-	}
-	if (alpha == 0.0) {
-		return;
-	}
-	if (strideX < 0) {
-		ix = (1-N) * strideX;
-	} else {
-		ix = 0;
-	}
-	if (strideY < 0) {
-		iy = (1-N) * strideY;
-	} else {
-		iy = 0;
-	}
-	for (i = 0; i < N; i++) {
-		Y[iy] += alpha * X[ix];
-		ix += strideX;
-		iy += strideY;
-	}
-	return;
+  int ix;
+  int iy;
+  int i;
+  if (N <= 0) {
+    return;
+  }
+  if (alpha == 0.0) {
+    return;
+  }
+  if (strideX < 0) {
+    ix = (1-N) * strideX;
+  } else {
+    ix = 0;
+  }
+  if (strideY < 0) {
+    iy = (1-N) * strideY;
+  } else {
+    iy = 0;
+  }
+  for (i = 0; i < N; i++) {
+    Y[iy] += alpha * X[ix];
+    ix += strideX;
+    iy += strideY;
+  }
+  return;
 }
 ````
 
@@ -135,15 +135,15 @@ Next, we need to define module memory and create a new WebAssembly module instan
 ```javascript
 // Initialize 10 pages of memory and allow growth to 100 pages:
 const mem = new WebAssembly.Memory({
-	'initial': 10,  // 640KiB, where each page is 64KiB
-	'maximum': 100  // 6.4MiB
+  'initial': 10,  // 640KiB, where each page is 64KiB
+  'maximum': 100  // 6.4MiB
 });
 
 // Create a new module instance:
 const instance = new WebAssembly.Instance(mod, {
-	'env': {
-		'memory': mem
-	}
+  'env': {
+    'memory': mem
+  }
 });
 ```
 
@@ -171,17 +171,17 @@ const view = new DataView(mem.buffer);
 // Resolve the first indexed elements in both `xdata` and `ydata`:
 let offsetX = 0;
 if (strideX < 0) {
-	offsetX = (1-N) * strideX;
+  offsetX = (1-N) * strideX;
 }
 let offsetY = 0;
 if (strideY < 0) {
-	offsetY = (1-N) * strideY;
+  offsetY = (1-N) * strideY;
 }
 
 // Write data to the memory instance:
 for (let i = 0; i < N; i++) {
-	view.setFloat64(xptr+(i*8), xdata[offsetX+(i*strideX)], true);
-	view.setFloat64(yptr+(i*8), ydata[offsetY+(i*strideY)], true);
+  view.setFloat64(xptr+(i*8), xdata[offsetX+(i*strideX)], true);
+  view.setFloat64(yptr+(i*8), ydata[offsetY+(i*strideY)], true);
 }
 ```
 
@@ -195,7 +195,7 @@ And, finally, if we need to pass the results to a downstream library without sup
 
 ```javascript
 for (let i = 0; i < N; i++) {
-	ydata[offsetY+(i*strideY)] = view.getFloat64(yptr+(i*8), true);
+  ydata[offsetY+(i*strideY)] = view.getFloat64(yptr+(i*8), true);
 }
 ```
 
@@ -203,31 +203,31 @@ That's a lot of work just to compute `y = a*x + y`. In contrast, compare to a pl
 
 ```javascript
 function daxpy(N, alpha, X, strideX, Y, strideY) {
-	let ix;
-	let iy;
-	let i;
-	if (N <= 0) {
-		return;
-	}
-	if (alpha === 0.0) {
-		return;
-	}
-	if (strideX < 0) {
-		ix = (1-N) * strideX;
-	} else {
-		ix = 0;
-	}
-	if (strideY < 0) {
-		iy = (1-N) * strideY;
-	} else {
-		iy = 0;
-	}
-	for (i = 0; i < N; i++) {
-		Y[iy] += alpha * X[ix];
-		ix += strideX;
-		iy += strideY;
-	}
-	return;
+  let ix;
+  let iy;
+  let i;
+  if (N <= 0) {
+    return;
+  }
+  if (alpha === 0.0) {
+    return;
+  }
+  if (strideX < 0) {
+    ix = (1-N) * strideX;
+  } else {
+    ix = 0;
+  }
+  if (strideY < 0) {
+    iy = (1-N) * strideY;
+  } else {
+    iy = 0;
+  }
+  for (i = 0; i < N; i++) {
+    Y[iy] += alpha * X[ix];
+    ix += strideX;
+    iy += strideY;
+  }
+  return;
 }
 ```
 
@@ -240,10 +240,10 @@ daxpy(N, 5.0, xdata, 1, ydata, 1);
 At least in this case, not only is the WebAssembly approach less ergonomic, but, as might be expected given the required data movement, there's a negative performance impact, as well, as demonstrated in the following figure.
 
 <figure style="text-align:center">
-	<img src="/posts/implement-lapack-routines-in-stdlib/daxpy_wasm_comparison_benchmarks_small.png" alt="Grouped column chart displaying a performance comparison of stdlib's C, JavaScript, and WebAssembly (Wasm) implementations for the BLAS routine daxpy for increasing array lengths." style="position:relative,left:15%,width:70%"/>
-	<figcaption>
-		Figure 1: Performance comparison of stdlib's C, JavaScript, and WebAssembly (Wasm) implementations for the BLAS routine <i>daxpy</i> for increasing array lengths (x-axis). In the <i>Wasm (copy)</i> benchmark, input and output data is copied to and from Wasm memory, leading to poorer performance.
-	</figcaption>
+  <img src="/posts/implement-lapack-routines-in-stdlib/daxpy_wasm_comparison_benchmarks_small.png" alt="Grouped column chart displaying a performance comparison of stdlib's C, JavaScript, and WebAssembly (Wasm) implementations for the BLAS routine daxpy for increasing array lengths." style="position:relative,left:15%,width:70%"/>
+  <figcaption>
+    Figure 1: Performance comparison of stdlib's C, JavaScript, and WebAssembly (Wasm) implementations for the BLAS routine <i>daxpy</i> for increasing array lengths (x-axis). In the <i>Wasm (copy)</i> benchmark, input and output data is copied to and from Wasm memory, leading to poorer performance.
+  </figcaption>
 </figure>
 
 In the figure above, I'm displaying a performance comparison of stdlib's C, JavaScript, and WebAssembly (Wasm) implementations for the BLAS routine `daxpy` for increasing array lengths, as enumerated along the x-axis. The y-axis shows a normalized rate relative to a baseline C implementation. In the `Wasm` benchmark, input and output data is allocated and manipulated directly in WebAssembly module memory, and, in the `Wasm (copy)` benchmark, input and output data is copied to and from WebAssembly module memory, as discussed above. From the chart, we may observe the following:
@@ -401,43 +401,43 @@ The next code snippet shows the same routine, but implemented using the free for
 
 ```fortran
 subroutine dlacpy( uplo, M, N, A, LDA, B, LDB )
-	implicit none
-	! ..
-	! Scalar arguments:
-	character :: uplo
-	integer :: LDA, LDB, M, N
-	! ..
-	! Array arguments:
-	double precision :: A( LDA, * ), B( LDB, * )
-	! ..
-	! Local scalars:
-	integer :: i, j
-	! ..
-	! External functions:
-	logical LSAME
-	external lsame
-	! ..
-	! Intrinsic functions:
-	intrinsic min
-	! ..
-	if ( lsame( uplo, 'U' ) ) then
+  implicit none
+  ! ..
+  ! Scalar arguments:
+  character :: uplo
+  integer :: LDA, LDB, M, N
+  ! ..
+  ! Array arguments:
+  double precision :: A( LDA, * ), B( LDB, * )
+  ! ..
+  ! Local scalars:
+  integer :: i, j
+  ! ..
+  ! External functions:
+  logical LSAME
+  external lsame
+  ! ..
+  ! Intrinsic functions:
+  intrinsic min
+  ! ..
+  if ( lsame( uplo, 'U' ) ) then
         do j = 1, n
             do i = 1, min( j, m )
                b( i, j ) = a( i, j )
-   			end do
-   		end do
+         end do
+       end do
     else if( lsame( uplo, 'L' ) ) then
         do j = 1, n
             do i = j, m
                b( i, j ) = a( i, j )
-   			end do
-   		end do
+         end do
+       end do
     else
         do j = 1, n
             do i = 1, m
                b( i, j ) = a( i, j )
             end do
-   		end do
+       end do
     end if
     return
 end subroutine dlacpy
@@ -480,10 +480,10 @@ Along a similar vein to test coverage, outside of LAPACK itself, finding real-wo
 When storing matrix elements in linear memory, one has two choices: either store columns contiguously or rows contiguously (see Figure 2). The former memory layout is referred to as **column-major** order and the latter as **row-major** order.
 
 <figure style="text-align:center">
-	<img src="/posts/implement-lapack-routines-in-stdlib/row_vs_column_major.png" alt="Schematic demonstrating storing matrix elements in linear memory in either column-major or row-major order" style="position:relative,left:15%,width:70%"/>
-	<figcaption>
-		Figure 2: Schematic demonstrating storing matrix elements in linear memory in either (a) column-major (Fortran-style) or (b) row-major (C-style) order. The choice of which layout to use is largely a matter of convention.
-	</figcaption>
+  <img src="/posts/implement-lapack-routines-in-stdlib/row_vs_column_major.png" alt="Schematic demonstrating storing matrix elements in linear memory in either column-major or row-major order" style="position:relative,left:15%,width:70%"/>
+  <figcaption>
+    Figure 2: Schematic demonstrating storing matrix elements in linear memory in either (a) column-major (Fortran-style) or (b) row-major (C-style) order. The choice of which layout to use is largely a matter of convention.
+  </figcaption>
 </figure>
 
 The choice of which layout to use is largely a matter of convention. For example, Fortran stores elements in column-major order, and C stores elements in row-major order. Higher-level libraries, such as NumPy and stdlib, support both column- and row-major orders, allowing you to configure the layout of a multi-dimensional array during array creation.
@@ -493,14 +493,14 @@ import asarray from '@stdlib/ndarray-array';
 
 // Create a row-major array:
 const x = asarray([1.0, 2.0, 3.0, 4.0], {
-	'shape': [2, 2],
-	'order': 'row-major'
+  'shape': [2, 2],
+  'order': 'row-major'
 });
 
 // Create a column-major array:
 const y = asarray([1.0, 3.0, 2.0, 4.0], {
-	'shape': [2, 2],
-	'order': 'column-major'
+  'shape': [2, 2],
+  'order': 'column-major'
 });
 ```
 
@@ -524,31 +524,31 @@ To demonstrate the performance impact of sequential vs non-sequential element ac
 * @param {integer} offsetB - index of the first indexed element in `B`
 */
 function copy(M, N, A, strideA1, strideA2, offsetA, B, strideB1, strideB2, offsetB) {
-	// Initialize loop bounds:
-	const S0 = M;
-	const S1 = N;
+  // Initialize loop bounds:
+  const S0 = M;
+  const S1 = N;
 
-	// For column-major matrices, the first dimension has the fastest changing index.
-	// Compute "pointer" increments accordingly:
-	const da0 = strideA1;                  // pointer increment for innermost loop
-	const da1 = strideA2 - (S0*strideA1);  // pointer increment for outermost loop
-	const db0 = strideB1;
-	const db1 = strideB2 - (S0*strideB1);
+  // For column-major matrices, the first dimension has the fastest changing index.
+  // Compute "pointer" increments accordingly:
+  const da0 = strideA1;                  // pointer increment for innermost loop
+  const da1 = strideA2 - (S0*strideA1);  // pointer increment for outermost loop
+  const db0 = strideB1;
+  const db1 = strideB2 - (S0*strideB1);
 
-	// Initialize "pointers" to the first indexed elements in the respective arrays:
-	let ia = offsetA;
-	let ib = offsetB;
+  // Initialize "pointers" to the first indexed elements in the respective arrays:
+  let ia = offsetA;
+  let ib = offsetB;
 
-	// Iterate over matrix dimensions:
-	for (let i1 = 0; i1 < S1; i1++) {
-		for (let i0 = 0; i0 < S0; i0++) {
-			B[ib] = A[ia];
-			ia += da0;
-			ib += db0;
-		}
-		ia += da1;
-		ib += db1;
-	}
+  // Iterate over matrix dimensions:
+  for (let i1 = 0; i1 < S1; i1++) {
+    for (let i0 = 0; i0 < S0; i0++) {
+      B[ib] = A[ia];
+      ia += da0;
+      ib += db0;
+    }
+    ia += da1;
+    ib += db1;
+  }
 }
 ```
 
@@ -588,10 +588,10 @@ copy(3, 2, A, 2, 1, 0, B, 2, 1, 0);
 Notice that, in the latter scenario, we fail to access elements in sequential order within the innermost loop, as `da0` is `2` and `da1` is `-5` and similarly for `db0` and `db1`. Instead, the array index "pointers" repeatedly skip ahead before returning to earlier elements in linear memory, with `ia = {0, 2, 4, 1, 3, 5}` and `ib` the same. In Figure 3, we show the performance impact of non-sequential access.
 
 <figure style="text-align:center">
-	<img src="/posts/implement-lapack-routines-in-stdlib/dlacpy_row_vs_column_major_comparison_benchmarks_small.png" alt="Performance comparison of copying matrices stored in either row- or column-major order when the underlying algorithm assumes column-major order" style="position:relative,left:15%,width:70%"/>
-	<figcaption>
-		Figure 3: Performance comparison when providing square column-major versus row-major matrices to <i>copy</i> when <i>copy</i> assumes sequential element access according to column-major order. The x-axis enumerates increasing matrix sizes (i.e., number of elements). All rates are normalized relative to column-major results for a corresponding matrix size.
-	</figcaption>
+  <img src="/posts/implement-lapack-routines-in-stdlib/dlacpy_row_vs_column_major_comparison_benchmarks_small.png" alt="Performance comparison of copying matrices stored in either row- or column-major order when the underlying algorithm assumes column-major order" style="position:relative,left:15%,width:70%"/>
+  <figcaption>
+    Figure 3: Performance comparison when providing square column-major versus row-major matrices to <i>copy</i> when <i>copy</i> assumes sequential element access according to column-major order. The x-axis enumerates increasing matrix sizes (i.e., number of elements). All rates are normalized relative to column-major results for a corresponding matrix size.
+  </figcaption>
 </figure>
 
 From the figure, we may observe that column- and row-major performance is roughly equivalent until we operate on square matrices having more than 1e5 elements (`M = N = ~316`). For 1e6 elements (`M = N = ~1000`), providing a row-major matrix to `copy` results in a greater than 25% performance decrease. For 1e7 elements (`M = N = ~3160`), we observe a greater than 85% performance decrease. The significant performance impact may be attributed to decreased locality of reference when operating on row-major matrices having large row sizes.
@@ -605,10 +605,10 @@ To mitigate adverse performance impacts, we borrowed an idea from [BLIS](https:/
 LAPACK routines primarily operate on matrices stored in linear memory and whose elements are accessed according to specified dimensions and the stride of the leading (i.e., first) dimension. Dimensions specify the number of elements in each row and column, respectively. The stride specifies how many elements in linear memory must be skipped in order to access the next element of a row. LAPACK assumes that elements belonging to the same column are always contiguous (i.e., adjacent in linear memory). Figure 4 provides a visual representation of LAPACK conventions (specifically, schematics (a) and (b)).
 
 <figure style="text-align:center">
-	<img src="/posts/implement-lapack-routines-in-stdlib/lapack_vs_ndarray_conventions.png" alt="Diagram illustrating the generalization of LAPACK strided array conventions to non-contiguous strided arrays" style="position:relative,left:15%,width:70%"/>
-	<figcaption>
-		Figure 4: Schematics illustrating the generalization of LAPACK strided array conventions to non-contiguous strided arrays. a) A 5-by-5 contiguous matrix stored in column-major order. b) A 3-by-3 non-contiguous sub-matrix stored in column-major order. Sub-matrices can be operated on in LAPACK by providing a pointer to the first indexed element and specifying the stride of the leading (i.e., first) dimension. In this case, the stride of leading dimension is five, even though there are only three elements per column, due to the non-contiguity of sub-matrix elements in linear memory when stored as part of a larger matrix. In LAPACK, the stride of the trailing (i.e., second) dimension is always assumed to be unity. c) A 3-by-3 non-contiguous sub-matrix stored in column-major order having non-unit strides and generalizing LAPACK stride conventions to both leading and trailing dimensions. This generalization underpins stdlib's multi-dimensional arrays (also referred to as "ndarrays").
-	</figcaption>
+  <img src="/posts/implement-lapack-routines-in-stdlib/lapack_vs_ndarray_conventions.png" alt="Diagram illustrating the generalization of LAPACK strided array conventions to non-contiguous strided arrays" style="position:relative,left:15%,width:70%"/>
+  <figcaption>
+    Figure 4: Schematics illustrating the generalization of LAPACK strided array conventions to non-contiguous strided arrays. a) A 5-by-5 contiguous matrix stored in column-major order. b) A 3-by-3 non-contiguous sub-matrix stored in column-major order. Sub-matrices can be operated on in LAPACK by providing a pointer to the first indexed element and specifying the stride of the leading (i.e., first) dimension. In this case, the stride of leading dimension is five, even though there are only three elements per column, due to the non-contiguity of sub-matrix elements in linear memory when stored as part of a larger matrix. In LAPACK, the stride of the trailing (i.e., second) dimension is always assumed to be unity. c) A 3-by-3 non-contiguous sub-matrix stored in column-major order having non-unit strides and generalizing LAPACK stride conventions to both leading and trailing dimensions. This generalization underpins stdlib's multi-dimensional arrays (also referred to as "ndarrays").
+  </figcaption>
 </figure>
 
 Libraries, such as NumPy and stdlib, generalize LAPACK's strided array conventions to support
@@ -647,10 +647,10 @@ Without support for non-unit strides in the last dimension, returning a view fro
 
 
 <figure style="text-align:center">
-	<img src="/posts/implement-lapack-routines-in-stdlib/flip_and_rotate_stride_tricks.png" alt="Schematics illustrating the use of stride manipulation to create flipped and rotated views of matrix elements stored in linear memory" style="position:relative,left:15%,width:70%"/>
-	<figcaption>
-		Figure 5: Schematics illustrating the use of stride manipulation to create flipped and rotated views of matrix elements stored in linear memory. For all sub-schematics, strides are listed as <code>[trailing_dimension, leading_dimension]</code>. Implicit for each schematic is an "offset", which indicates the index of the first indexed element such that, for a matrix <i>A</i>, the element <i>A<sub>ij</sub></i> is resolved according to <code>i*strides[1] + j*strides[0] + offset</code>. a) Given a 3-by-3 matrix stored in column-major order, one can manipulate the strides of the leading and trailing dimensions to create views in which matrix elements along one or more axes are accessed in reverse order. b) Using similar stride manipulation, one can create rotated views of matrix elements relative to their arrangement within linear memory.
-	</figcaption>
+  <img src="/posts/implement-lapack-routines-in-stdlib/flip_and_rotate_stride_tricks.png" alt="Schematics illustrating the use of stride manipulation to create flipped and rotated views of matrix elements stored in linear memory" style="position:relative,left:15%,width:70%"/>
+  <figcaption>
+    Figure 5: Schematics illustrating the use of stride manipulation to create flipped and rotated views of matrix elements stored in linear memory. For all sub-schematics, strides are listed as <code>[trailing_dimension, leading_dimension]</code>. Implicit for each schematic is an "offset", which indicates the index of the first indexed element such that, for a matrix <i>A</i>, the element <i>A<sub>ij</sub></i> is resolved according to <code>i*strides[1] + j*strides[0] + offset</code>. a) Given a 3-by-3 matrix stored in column-major order, one can manipulate the strides of the leading and trailing dimensions to create views in which matrix elements along one or more axes are accessed in reverse order. b) Using similar stride manipulation, one can create rotated views of matrix elements relative to their arrangement within linear memory.
+  </figcaption>
 </figure>
 
 Support for negative strides enables O(1) reversal and rotation of elements along one or more dimensions (see Figure 5). For example, to flip a matrix top-to-bottom and left-to-right, one need only negate the strides. Building on the previous code snippet, the following code snippet demonstrates reversing elements about one or more axes.
@@ -694,9 +694,9 @@ In BLAS and LAPACK routines supporting negative strides—something which is onl
 
 ```c
 if (stride < 0) {
-	offset = (1-M) * stride;
+  offset = (1-M) * stride;
 } else {
-	offset = 0;
+  offset = 0;
 }
 ```
 
@@ -728,7 +728,7 @@ However, in JavaScript, which does not support explicit pointer arithmetic for b
 * @returns {TypedArray} typed array view
 */
 function offsetView( x, offset ) {
-	return new x.constructor( x.buffer, x.byteOffset+(x.BYTES_PER_ELEMENT*offset), x.length-offset );
+  return new x.constructor( x.buffer, x.byteOffset+(x.BYTES_PER_ELEMENT*offset), x.length-offset );
 }
 
 // ...
@@ -768,31 +768,31 @@ For simplicity, let's return to the JavaScript implementation of `daxpy`, which 
 
 ```javascript
 function daxpy(N, alpha, X, strideX, Y, strideY) {
-	let ix;
-	let iy;
-	let i;
-	if (N <= 0) {
-		return;
-	}
-	if (alpha === 0.0) {
-		return;
-	}
-	if (strideX < 0) {
-		ix = (1-N) * strideX;
-	} else {
-		ix = 0;
-	}
-	if (strideY < 0) {
-		iy = (1-N) * strideY;
-	} else {
-		iy = 0;
-	}
-	for (i = 0; i < N; i++) {
-		Y[iy] += alpha * X[ix];
-		ix += strideX;
-		iy += strideY;
-	}
-	return;
+  let ix;
+  let iy;
+  let i;
+  if (N <= 0) {
+    return;
+  }
+  if (alpha === 0.0) {
+    return;
+  }
+  if (strideX < 0) {
+    ix = (1-N) * strideX;
+  } else {
+    ix = 0;
+  }
+  if (strideY < 0) {
+    iy = (1-N) * strideY;
+  } else {
+    iy = 0;
+  }
+  for (i = 0; i < N; i++) {
+    Y[iy] += alpha * X[ix];
+    ix += strideX;
+    iy += strideY;
+  }
+  return;
 }
 ```
 
@@ -800,23 +800,23 @@ As demonstrated in the following code snippet, we can modify the above signature
 
 ```javascript
 function daxpy_ndarray(N, alpha, X, strideX, offsetX, Y, strideY, offsetY) {
-	let ix;
-	let iy;
-	let i;
-	if (N <= 0) {
-		return;
-	}
-	if (alpha === 0.0) {
-		return;
-	}
-	ix = offsetX;
-	iy = offsetY;
-	for (i = 0; i < N; i++) {
-		Y[iy] += alpha * X[ix];
-		ix += strideX;
-		iy += strideY;
-	}
-	return;
+  let ix;
+  let iy;
+  let i;
+  if (N <= 0) {
+    return;
+  }
+  if (alpha === 0.0) {
+    return;
+  }
+  ix = offsetX;
+  iy = offsetY;
+  for (i = 0; i < N; i++) {
+    Y[iy] += alpha * X[ix];
+    ix += strideX;
+    iy += strideY;
+  }
+  return;
 }
 ```
 
@@ -996,74 +996,74 @@ const BLOCK_SIZE = 32;
 // ...
 
 function base(N, A, strideA1, strideA2, offsetA, k1, k2, inck, IPIV, strideIPIV, offsetIPIV) {
-	let nrows;
-	let n32;
-	let tmp;
-	let row;
-	let ia1;
-	let ia2;
-	let ip;
-	let o;
+  let nrows;
+  let n32;
+  let tmp;
+  let row;
+  let ia1;
+  let ia2;
+  let ip;
+  let o;
 
-	// Compute the number of rows to be interchanged:
-	if (inck > 0) {
-		nrows = k2 - k1;
-	} else {
-		nrows = k1 - k2;
-	}
-	nrows += 1;
+  // Compute the number of rows to be interchanged:
+  if (inck > 0) {
+    nrows = k2 - k1;
+  } else {
+    nrows = k1 - k2;
+  }
+  nrows += 1;
 
-	// If the order is row-major, we can delegate to the Level 1 routine `dswap` for interchanging rows...
-	if (isRowMajor([strideA1, strideA2])) {
-		ip = offsetIPIV;
-		for (let i = 0, k = k1; i < nrows; i++, k += inck) {
-			row = IPIV[ip];
-			if (row !== k) {
-				dswap(N, A, strideA2, offsetA+(k*strideA1), A, strideA2, offsetA+(row*strideA1));
-			}
-			ip += strideIPIV;
-		}
-		return A;
-	}
-	// If the order is column-major, we need to use loop tiling to ensure efficient cache access when accessing matrix elements...
-	n32 = floor(N/BLOCK_SIZE) * BLOCK_SIZE;
-	if (n32 !== 0) {
-		for (let j = 0; j < n32; j += BLOCK_SIZE) {
-			ip = offsetIPIV;
-			for (let i = 0, k = k1; i < nrows; i++, k += inck) {
-				row = IPIV[ip];
-				if (row !== k) {
-					ia1 = offsetA + (k*strideA1);
-					ia2 = offsetA + (row*strideA1);
-					for (let n = j; n < j+BLOCK_SIZE; n++) {
-						o = n * strideA2;
-						tmp = A[ia1+o];
-						A[ia1+o] = A[ia2+o];
-						A[ia2+o] = tmp;
-					}
-				}
-				ip += strideIPIV;
-			}
-		}
-	}
-	if (n32 !== N) {
-		ip = offsetIPIV;
-		for (let i = 0, k = k1; i < nrows; i++, k += inck) {
-			row = IPIV[ ip ];
-			if (row !== k) {
-				ia1 = offsetA + (k*strideA1);
-				ia2 = offsetA + (row*strideA1);
-				for (let n = n32; n < N; n++) {
-					o = n * strideA2;
-					tmp = A[ia1+o];
-					A[ia1+o] = A[ia2+o];
-					A[ia2+o] = tmp;
-				}
-			}
-			ip += strideIPIV;
-		}
-	}
-	return A;
+  // If the order is row-major, we can delegate to the Level 1 routine `dswap` for interchanging rows...
+  if (isRowMajor([strideA1, strideA2])) {
+    ip = offsetIPIV;
+    for (let i = 0, k = k1; i < nrows; i++, k += inck) {
+      row = IPIV[ip];
+      if (row !== k) {
+        dswap(N, A, strideA2, offsetA+(k*strideA1), A, strideA2, offsetA+(row*strideA1));
+      }
+      ip += strideIPIV;
+    }
+    return A;
+  }
+  // If the order is column-major, we need to use loop tiling to ensure efficient cache access when accessing matrix elements...
+  n32 = floor(N/BLOCK_SIZE) * BLOCK_SIZE;
+  if (n32 !== 0) {
+    for (let j = 0; j < n32; j += BLOCK_SIZE) {
+      ip = offsetIPIV;
+      for (let i = 0, k = k1; i < nrows; i++, k += inck) {
+        row = IPIV[ip];
+        if (row !== k) {
+          ia1 = offsetA + (k*strideA1);
+          ia2 = offsetA + (row*strideA1);
+          for (let n = j; n < j+BLOCK_SIZE; n++) {
+            o = n * strideA2;
+            tmp = A[ia1+o];
+            A[ia1+o] = A[ia2+o];
+            A[ia2+o] = tmp;
+          }
+        }
+        ip += strideIPIV;
+      }
+    }
+  }
+  if (n32 !== N) {
+    ip = offsetIPIV;
+    for (let i = 0, k = k1; i < nrows; i++, k += inck) {
+      row = IPIV[ ip ];
+      if (row !== k) {
+        ia1 = offsetA + (k*strideA1);
+        ia2 = offsetA + (row*strideA1);
+        for (let n = n32; n < N; n++) {
+          o = n * strideA2;
+          tmp = A[ia1+o];
+          A[ia1+o] = A[ia2+o];
+          A[ia2+o] = tmp;
+        }
+      }
+      ip += strideIPIV;
+    }
+  }
+  return A;
 }
 ```
 
@@ -1078,37 +1078,37 @@ const base = require( './base.js' );
 // ...
 
 function dlaswp(order, N, A, LDA, k1, k2, IPIV, incx) {
-	let tmp;
-	let inc;
-	let sa1;
-	let sa2;
-	let io;
-	if (!isLayout(order)) {
-		throw new TypeError(format('invalid argument. First argument must be a valid order. Value: `%s`.', order));
-	}
-	if (order === 'row-major' && LDA < max(1, N)) {
-		throw new RangeError(format('invalid argument. Fourth argument must be greater than or equal to max(1,%d). Value: `%d`.', N, LDA));
-	}
-	if (incx > 0) {
-		inc = 1;
-		io = k1;
-	} else if (incx < 0) {
-		inc = -1;
-		io = k1 + ((k1-k2) * incx);
-		tmp = k1;
-		k1 = k2;
-		k2 = tmp;
-	} else {
-		return A;
-	}
-	if (order === 'column-major') {
-		sa1 = 1;
-		sa2 = LDA;
-	} else { // order === 'row-major'
-		sa1 = LDA;
-		sa2 = 1;
-	}
-	return base(N, A, sa1, sa2, 0, k1, k2, inc, IPIV, incx, io);
+  let tmp;
+  let inc;
+  let sa1;
+  let sa2;
+  let io;
+  if (!isLayout(order)) {
+    throw new TypeError(format('invalid argument. First argument must be a valid order. Value: `%s`.', order));
+  }
+  if (order === 'row-major' && LDA < max(1, N)) {
+    throw new RangeError(format('invalid argument. Fourth argument must be greater than or equal to max(1,%d). Value: `%d`.', N, LDA));
+  }
+  if (incx > 0) {
+    inc = 1;
+    io = k1;
+  } else if (incx < 0) {
+    inc = -1;
+    io = k1 + ((k1-k2) * incx);
+    tmp = k1;
+    k1 = k2;
+    k2 = tmp;
+  } else {
+    return A;
+  }
+  if (order === 'column-major') {
+    sa1 = 1;
+    sa2 = LDA;
+  } else { // order === 'row-major'
+    sa1 = LDA;
+    sa2 = 1;
+  }
+  return base(N, A, sa1, sa2, 0, k1, k2, inc, IPIV, incx, io);
 }
 ```
 
@@ -1122,19 +1122,19 @@ const base = require( './base.js' );
 // ...
 
 function dlaswp_ndarray( N, A, strideA1, strideA2, offsetA, k1, k2, inck, IPIV, strideIPIV, offsetIPIV ) {
-	let tmp;
-	if (inck < 0) {
-		offsetIPIV += k2 * strideIPIV;
-		strideIPIV *= -1;
-		tmp = k1;
-		k1 = k2;
-		k2 = tmp;
-		inck = -1;
-	} else {
-		offsetIPIV += k1 * strideIPIV;
-		inck = 1;
-	}
-	return base(N, A, strideA1, strideA2, offsetA, k1, k2, inck, IPIV, strideIPIV, offsetIPIV);
+  let tmp;
+  if (inck < 0) {
+    offsetIPIV += k2 * strideIPIV;
+    strideIPIV *= -1;
+    tmp = k1;
+    k1 = k2;
+    k2 = tmp;
+    inck = -1;
+  } else {
+    offsetIPIV += k1 * strideIPIV;
+    inck = 1;
+  }
+  return base(N, A, strideA1, strideA2, offsetA, k1, k2, inck, IPIV, strideIPIV, offsetIPIV);
 }
 ```
 
