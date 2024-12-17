@@ -1,9 +1,9 @@
 ---
-title: 'Adding support for LAPACK routines in stdlib'
+title: 'LAPACK in your web browser: high-performance linear algebra with stdlib'
 authors: [pranav-goswami]
-published: September 30, 2024
+published: December 20, 2024
 description: 'Implementing LAPACK routines for numerical computation in web applications'
-category: [Stdlib, Mathematics, Linear Algebra, Numerical Computing, Internship]
+category: [stdlib, Mathematics, Linear Algebra, Numerical Computing, Internship]
 featuredImage:
   src: /posts/hello-world-post/featured.png
   alt: 'WIP'
