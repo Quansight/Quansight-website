@@ -5,10 +5,10 @@ published: December 15, 2024
 description: The story of the first shared library to make it into the world of low level code that lies beneath SciPy's surface.
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/libsf-error-state/scipy_logo_img_featured.png
+  src: /posts/libsf-error-state/featured.png
   alt: The text "SciPy" along with the SciPy logo superimposed over a computer generated image of a circuitboard.
 hero:
-  imageSrc: /posts/libsf-error-state/scipy_logo_img_hero.png
+  imageSrc: /posts/libsf-error-state/hero.png
   imageAlt: The text "SciPy" along with the SciPy logo superimposed over a computer generated image of a circuitboard.
 ---
 
