@@ -239,10 +239,6 @@ daxpy(N, 5.0, xdata, 1, ydata, 1);
 
 At least in this case, not only is the WebAssembly approach less ergonomic, but, as might be expected given the required data movement, there's a negative performance impact, as well, as demonstrated in the following figure.
 
-<!-- TODO: remove the following Markdown image and keep the <figure> prior to publishing. The Markdown image is just for local development. -->
-
-<!-- ![Grouped column chart displaying a performance comparison of stdlib's C, JavaScript, and WebAssembly (Wasm) implementations for the BLAS routine daxpy for increasing array lengths.](./daxpy_wasm_comparison_benchmarks_small.png) -->
-
 <figure style="text-align:center">
 	<img src="/posts/implement-lapack-routines-in-stdlib/daxpy_wasm_comparison_benchmarks_small.png" alt="Grouped column chart displaying a performance comparison of stdlib's C, JavaScript, and WebAssembly (Wasm) implementations for the BLAS routine daxpy for increasing array lengths." style="position:relative,left:15%,width:70%"/>
 	<figcaption>
@@ -483,10 +479,6 @@ Along a similar vein to test coverage, outside of LAPACK itself, finding real-wo
 
 When storing matrix elements in linear memory, one has two choices: either store columns contiguously or rows contiguously (see Figure 2). The former memory layout is referred to as **column-major** order and the latter as **row-major** order.
 
-<!-- TODO: remove the following Markdown image and keep the <figure> prior to publishing. The Markdown image is just for local development. -->
-
-<!-- ![Schematic demonstrating storing matrix elements in linear memory in either column-major or row-major order](./row_vs_column_major.png) -->
-
 <figure style="text-align:center">
 	<img src="/posts/implement-lapack-routines-in-stdlib/row_vs_column_major.png" alt="Schematic demonstrating storing matrix elements in linear memory in either column-major or row-major order" style="position:relative,left:15%,width:70%"/>
 	<figcaption>
@@ -595,10 +587,6 @@ copy(3, 2, A, 2, 1, 0, B, 2, 1, 0);
 
 Notice that, in the latter scenario, we fail to access elements in sequential order within the innermost loop, as `da0` is `2` and `da1` is `-5` and similarly for `db0` and `db1`. Instead, the array index "pointers" repeatedly skip ahead before returning to earlier elements in linear memory, with `ia = {0, 2, 4, 1, 3, 5}` and `ib` the same. In Figure 3, we show the performance impact of non-sequential access.
 
-<!-- TODO: remove the following Markdown image and keep the <figure> prior to publishing. The Markdown image is just for local development. -->
-
-<!-- ![Performance comparison of copying matrices stored in either row- or column-major order when the underlying algorithm assumes column-major order](./dlacpy_row_vs_column_major_comparison_benchmarks_small.png) -->
-
 <figure style="text-align:center">
 	<img src="/posts/implement-lapack-routines-in-stdlib/dlacpy_row_vs_column_major_comparison_benchmarks_small.png" alt="Performance comparison of copying matrices stored in either row- or column-major order when the underlying algorithm assumes column-major order" style="position:relative,left:15%,width:70%"/>
 	<figcaption>
@@ -615,10 +603,6 @@ To mitigate adverse performance impacts, we borrowed an idea from [BLIS](https:/
 ### ndarrays
 
 LAPACK routines primarily operate on matrices stored in linear memory and whose elements are accessed according to specified dimensions and the stride of the leading (i.e., first) dimension. Dimensions specify the number of elements in each row and column, respectively. The stride specifies how many elements in linear memory must be skipped in order to access the next element of a row. LAPACK assumes that elements belonging to the same column are always contiguous (i.e., adjacent in linear memory). Figure 4 provides a visual representation of LAPACK conventions (specifically, schematics (a) and (b)).
-
-<!-- TODO: remove the following Markdown image and keep the <figure> prior to publishing. The Markdown image is just for local development. -->
-
-<!-- ![Diagram illustrating the generalization of LAPACK strided array conventions to non-contiguous strided arrays](./lapack_vs_ndarray_conventions.png) -->
 
 <figure style="text-align:center">
 	<img src="/posts/implement-lapack-routines-in-stdlib/lapack_vs_ndarray_conventions.png" alt="Diagram illustrating the generalization of LAPACK strided array conventions to non-contiguous strided arrays" style="position:relative,left:15%,width:70%"/>
@@ -661,9 +645,6 @@ const b2 = ( v2.data.buffer === x.data.buffer );
 
 Without support for non-unit strides in the last dimension, returning a view from the expression `x['::2,::2']` would not be possible, as one would need to copy selected elements to a new linear memory buffer in order to ensure contiguity.
 
-<!-- TODO: remove the following Markdown image and keep the <figure> prior to publishing. The Markdown image is just for local development. -->
-
-<!-- ![Schematics illustrating the use of stride manipulation to create flipped and rotated views of matrix elements stored in linear memory](./flip_and_rotate_stride_tricks.png) -->
 
 <figure style="text-align:center">
 	<img src="/posts/implement-lapack-routines-in-stdlib/flip_and_rotate_stride_tricks.png" alt="Schematics illustrating the use of stride manipulation to create flipped and rotated views of matrix elements stored in linear memory" style="position:relative,left:15%,width:70%"/>
