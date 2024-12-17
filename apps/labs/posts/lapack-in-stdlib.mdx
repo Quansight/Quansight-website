@@ -727,7 +727,7 @@ However, in JavaScript, which does not support explicit pointer arithmetic for b
 * @param {integer} offset - starting index
 * @returns {TypedArray} typed array view
 */
-function offsetView( x, offset ) {
+function offsetView(x, offset) {
   return new x.constructor(x.buffer, x.byteOffset+(x.BYTES_PER_ELEMENT*offset), x.length-offset);
 }
 
