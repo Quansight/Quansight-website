@@ -206,7 +206,7 @@ which outputs:
 
 <p align="center">
   <img
-    src="/posts/lib-sf-error-state/n_sphere_volume.png"
+    src="/posts/libsf-error-state/n_sphere_volume.png"
 	alt="Plot showing how the volume of an n-ball depends on the
 		dimension n for radius R = 0.9, 1.0, and 1.1"
    />
