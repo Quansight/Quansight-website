@@ -645,7 +645,6 @@ const b2 = ( v2.data.buffer === x.data.buffer );
 
 Without support for non-unit strides in the last dimension, returning a view from the expression `x['::2,::2']` would not be possible, as one would need to copy selected elements to a new linear memory buffer in order to ensure contiguity.
 
-
 <figure style="text-align:center">
   <img src="/posts/implement-lapack-routines-in-stdlib/flip_and_rotate_stride_tricks.png" alt="Schematics illustrating the use of stride manipulation to create flipped and rotated views of matrix elements stored in linear memory" style="position:relative,left:15%,width:70%"/>
   <figcaption>
