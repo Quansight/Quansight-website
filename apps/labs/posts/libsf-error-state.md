@@ -113,7 +113,7 @@ array([        nan,  0.        ,  1.        , ..., 31.57530681,
        31.591138  , 31.60696126])
 ```
 
-Instead a warning is raised and `-1.0` is mapped to [`NaN`](https://en.wikipedia.org/wiki/NaN), a special floating point
+Instead a warning is raised and `-1.0` is mapped to `NaN`, a special floating point
 number representing an undefined result. `NaN`s propagate sanely through most calculations [], making them useful in
 such situations.
 
@@ -165,16 +165,15 @@ FloatingPointError: invalid value encountered in sqrt
 
 ## scipy.special
 
-NumPy has over 60 [ufuncs available](https://numpy.org/doc/stable/reference/ufuncs.html#available-ufuncs) for a range of
-mathematical functions and operations, but more specialized functions useful in the sciences and engineering are out of
-scope. Ufuncs for over 230 such functions can be found instead in
-[`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html) [].
+NumPy has over 60 ufuncs available [] for a range of mathematical functions and operations, but more specialized
+functions useful in the sciences and engineering are out of scope. Ufuncs for over 230 such functions can be found
+instead in [`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html) [].
 
 Just for fun, let's use
-[`scipy.special.gamma`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gamma.html) to reproduce a
-plot from the Wikipedia article ["_Volume of an n-ball_"](https://en.wikipedia.org/wiki/Volume_of_an_n-ball). The plot
-shows how the volume of a solid multi-dimensional sphere depends on the dimension `n` when the radius `R` is one of 0.9,
-1.0, or 1.1.
+[`scipy.special.gamma`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gamma.html), a continuous
+extension of the factorial function, to reproduce a plot from the Wikipedia article ["_Volume of an
+n-ball_"](https://en.wikipedia.org/wiki/Volume_of_an_n-ball). The plot shows how the volume of a solid multi-dimensional
+sphere depends on the dimension `n` when the radius `R` is one of 0.9, 1.0, or 1.1.
 
 ```python
 import matplotlib.pyplot as plt
@@ -214,9 +213,8 @@ which outputs:
 
 ## scipy.special error handling
 
-What if one of the ufuncs in `scipy.special` recieves an array with some invalid elements? The [Gamma
-function](https://en.wikipedia.org/wiki/Gamma_function) used above has singularities at non-positive
-integers.
+What if one of the ufuncs in `scipy.special` recieves an array with some invalid elements? The Gamma function has
+singularities at non-positive integers, similar to how `1 / x` has a singularity at 0.
 
 ```
 In  [1]: import numpy as np
@@ -269,16 +267,16 @@ SpecialFunctionError: scipy.special/Gamma: singularity
 
 To create a ufunc for a mathematical function, one needs a scalar implementation of this function written in a compiled
 language, known as a scalar kernel. Until recently, `scipy.special` had scalar kernels written in all of C, C++, Fortran
-77, and Cython. In August of 2023, Irwin Zaid (izaid) at Oxford proposed rewriting all of the
-scalar kernels in C++ header files in such a way that they could be included in both C++ and CUDA programs. This would
-allow these scalar kernels to also be used in GPU-aware array libraries like CuPy and PyTorch, improving special
-function support across array library backends. I've been supported by the 2020 NASA ROSES grant, _Reinforcing the
-Foundations of Scientific Python_ (with travel and compute costs covered by the 2023 NumFocus SDG _Streamlined Special
-Function Development in SciPy_), to work together with Irwin to put this plan into action. With additional help from
-SciPy maintainer Ilhan Polat (ilayn), who made a heroic effort to translate over twenty thousand lines of Fortran scalar
-kernel code to C, and contributions from other volunteers, substantial progress has been made, and we are in the process
-of splitting these headed into a separate library called [xsf](https://github.com/scipy/xsf/). This is a story for
-another time. Until then, for more info, see [xsf/#1](https://github.com/scipy/xsf/issues/1).
+77, and Cython. In August of 2023, Irwin Zaid (izaid) at Oxford proposed rewriting all of the scalar kernels in C++
+header files in such a way that they could be included in both C++ and CUDA programs. This would allow these scalar
+kernels to also be used in GPU-aware array libraries like CuPy and PyTorch, improving special function support across
+array library backends. I've been supported by the 2020 NASA ROSES grant, _Reinforcing the Foundations of Scientific
+Python_ (with travel and compute costs covered by the 2023 NumFocus SDG _Streamlined Special Function Development in
+SciPy_), to work together with Irwin to put this plan into action. With additional help from SciPy maintainer Ilhan
+Polat (ilayn), who made a heroic effort to translate over twenty thousand lines of Fortran scalar kernel code to C, and
+contributions from other volunteers, substantial progress has been made, and we are in the process of splitting these
+headed into a separate library called xsf. This is a story for another time. Until then, see [the first
+issue in the xsf repo.](https://github.com/scipy/xsf/issues/1) for more info.
 
 First of all, while working on this project, it became apparent to everyone involved that the infrastructure used in
 SciPy for creating ufuncs was greatly complicated by the need to work with scalar kernels from so many
@@ -316,8 +314,13 @@ between ufuncs. We noticed something was wrong due to a failure in a doctest for
 absolute value of the Gamma function, was one of a handful of ufuncs moved to the new extension module.
 
 Both extension modules contained a separate copy of the state for managing error handling policies, but it appeared that
-the user facing `special.errstate` could only see and change the state from the first extension module. We saw three
-options:
+the user facing `special.errstate` could only see and change the state from the first extension module. While
+investigating, we also found that, for some reason, there was a separate extension module just for the function
+[`ellip_harm_2`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.ellip_harm_2.html#scipy.special.ellip_harm_2).
+As expected, `special.errstate` did not and had never worked for `ellip_harm_2` either, but since there were no relevant
+tests, no one knew.
+
+We saw three options:
 
 1. Have the Python interface for modifying the error handling state (`special.errstate` and
    [`special.seterr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.seterr.html)) update the state
@@ -326,7 +329,7 @@ options:
 2. Extract the error handling state and primitives for managing it into a shared library that would be linked with
    each extension module.
 
-3. Keep the error handling state in one of the extension modules and have it retrieved from there by the other.
+3. Keep the error handling state in one of the extension modules and have it retrieved from there by the others.
 
 We chose to create a shared library because it seemed like the more principled option []. As the saying goes: we do
 things not because they are easy, but because we think they will be easy []. Quansight Labs Co-director Ralf Gommers
@@ -338,29 +341,25 @@ it out.
 Before we continue, let's review some background information. Feel free to skim or skip this section if you know
 this stuff already.
 
-Consider the structure of a C program. It must have one and only one file with an [entry
-point](https://en.wikipedia.org/wiki/Entry_point) function `main` where execution begins. This file may refer to
-functions, global variables, and datatypes from other files. For a C program with multiple files, each file is compiled
-separately into an object file of machine instructions, specific to a particular platform, giving explicit commands
-directly to the CPU. A program called a linker is responsible for combining the generated object files into a single
-program. A library is a collection of code containing functions and datatypes which can be used in programs, but which
-itself doesn't have a `main` function.
+Consider the structure of a C program. It must have one and only one file with an entry point function `main` where
+execution begins. This file may refer to functions, global variables, and datatypes from other files. For a C program
+with multiple files, each file is compiled separately into an object file of machine instructions, specific to a
+particular platform, giving explicit commands directly to the CPU. A program called a linker is responsible for
+combining the generated object files into a single program. A library is a collection of code containing functions and
+datatypes which can be used in programs, but which itself doesn't have a `main` function.
 
-There are two ways library code can be linked into a program. The simplest way is [_static
-linking_](https://en.wikipedia.org/wiki/Static_library), where the library code is bundled directly into the
-program. Two programs statically linked with the same library will each have their own separate copy of the
-library. Special function error handling broke because the code responsible for it was statically linked into each
-separate extension module. By contrast, when library code is [_dynamically
-linked_](https://en.wikipedia.org/wiki/Dynamic_linker), it is not included in the executable binary file for the program
-at compile time. It instead lives in a separate binary file, called a _shared library_, which can be loaded into the
-program at runtime.
+There are two ways library code can be linked into a program. The simplest way is _static linking_, where the library
+code is bundled directly into the program. Two programs statically linked with the same library will each have their own
+separate copy of the library. Special function error handling broke because the code responsible for it was statically
+linked into each separate extension module. By contrast, when library code is _dynamically linked_, it is not included
+in the executable binary file for the program at compile time. It instead lives in a separate binary file, called a
+_shared library_, which can be loaded into the program at runtime.
 
-In addition to executable machine instructions, each object file contains a [_symbol
-table_](https://en.wikipedia.org/wiki/Symbol_table) mapping each identifier used in the original source file (e.g. a
-function name) to either the position in the executable code where the identifier is defined (e.g. the function's
-definition) or a placeholder if there's no definition in the source file. When combining object files into a single
-program through static linking, the linker fills these placeholders by searching the symbol tables of the other object
-files being linked into the program.
+In addition to executable machine instructions, each object file contains a _symbol table_ mapping each identifier used
+in the original source file (e.g. a function name) to either the position in the executable code where the identifier is
+defined (e.g. the function's definition) or a placeholder if there's no definition in the source file. When combining
+object files into a single program through static linking, the linker fills these placeholders by searching the symbol
+tables of the other object files being linked into the program.
 
 Object files from a statically linked library are treated no differently from object files generated from the program's
 source code. By contrast: for dynamic linking, at compile time, the linker only checks the shared library's symbol table
@@ -398,8 +397,7 @@ modules with a shared library. It's perfectly valid to link one shared library w
 Having decided on the shared library approach, we looked into code `scipy.special` used for managing error handling state.
 In essence, things were very simple. Let's walk through the core lines.
 
-There is an [`enum` type](https://learn.microsoft.com/en-us/cpp/c-language/c-enumeration-declarations?view=msvc-170)
-`sf_action_t` giving human readable names to the different error handling policies:
+There is an enumeration type `sf_action_t` giving human readable names to the different error handling policies:
 
 ```c
 enum sf_action_t {
@@ -429,9 +427,9 @@ static sf_action_t sf_error_actions[] = {
 };
 ```
 
-To make the correspondence between entries in the array and special function error handling types
-clear, there is another `enum` type, `sf_error_t`, which associates the name for each error type with
-the corresponding index into `sf_error_actions`.
+To make the correspondence between entries in the array and special function error handling types clear, there is
+another enumeration type, `sf_error_t`, which associates the name for each error type with the corresponding index into
+`sf_error_actions`.
 
 ```c
 typedef enum {
@@ -449,9 +447,9 @@ typedef enum {
 } sf_error_t;
 ```
 
-`sf_action_t` is declared static to make using it directly local to only this file. Instead there are are two functions,
-`scipy_sf_error_set_action` for updating and `scipy_sf_error_get_action` for querying the the error handling policy
-associated to a given error type.
+`sf_action_t` is declared static to make use of its name local only to the file where it's defined. Instead there are
+are two functions, `scipy_sf_error_set_action` for updating and `scipy_sf_error_get_action` for querying the error
+handling policy associated to a given error type.
 
 ```c
 void scipy_sf_error_set_action(sf_error_t code, sf_action_t action)
@@ -483,7 +481,7 @@ The idea then, was to split off this code into a shared library, which ended up 
 
 ## The many battles to actually ship it
 
-`lib_sf_error_state`'s contents are fairly simple, but how does one actually ship a shared library within a Python
+`libsf_error_state`'s contents are fairly simple, but how does one actually ship a shared library within a Python
 package like SciPy? The process for creating and using shared libraries depends on the operating system and compiler
 toolchain. SciPy supports a wide range of platforms in aim of its goal to democratize access to scientific computing
 tools and the greatest challenge turned out to be getting things to work on each of them. Several times, just as we
@@ -491,10 +489,10 @@ thought everything was finally working, another quirk would pop up that needed t
 
 ### Path troubles
 
-The initial challenge was finding the right invocations to give to the [meson build system](https://mesonbuild.com/)
-used by SciPy []. Extension modules are configured in the `meson.build` files spread across SciPy's source tree
-and we needed to figure out how to set up a shared library and link it into each of the special function ufunc
-extension modules. Irwin and I begin working on this independently, comparing notes as we went.
+The initial challenge was finding the right invocations to give to the meson build system, used by SciPy []. Extension
+modules are configured in the `meson.build` files spread across SciPy's source tree and we needed to figure out how to
+set up a shared library and link it into each of the special function ufunc extension modules. Irwin and I begin working
+on this independently, comparing notes as we went.
 
 The first hiccup is that the following invocations were working on Irwin's Mac.
 
@@ -557,7 +555,7 @@ sf_error_state_lib = shared_library('sf_error_state', # Name of the library
 
 But even after this, I was still receiving the same error. After consulting `meson`'s excellent documentation and
 looking at some related issues, it turns out that the `pip` takes care to set the
-[`RPATH`](https://en.wikipedia.org/wiki/Rpath) for each extension module, which tells the dynamic linker where to look
+`RPATH` [] for each extension module, which tells the dynamic linker where to look
 for shared libraries.
 
 To get things to work with `dev.py`, I needed to explicitly set the `RPATH` in `meson` by adding
@@ -568,20 +566,18 @@ module.
 
 After setting `install_dir` and `install_rpath` correctly, all but one of SciPy's CI jobs were passing. The sole failing
 job involved building a wheel on Windows. A
-[wheel](https://packaging.python.org/en/latest/specifications/binary-distribution-format/) can be thought of as a
+wheel can be thought of as a
 precompiled binary for a Python package. The underlying issue was that Windows does not have support for something like
-`RPATH`, following a less configurable set of
-[rules](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order#standard-search-order-for-packaged-apps)
-for determining the search path for shared libraries [].
+`RPATH`, following a less configurable set of rules for determining the search path for shared libraries [].
 
 It took us a day of work to get to this point. Since things were not as straightforward as expected; I took it from here.
 
 At the time I didn't really have any experience developing for Windows and didn't even have a Windows machine available
 at home to use []. I looked up how to run Windows in a VM and got to work.
 
-I found a solution using [delvewheel](https://github.com/adang1345/delvewheel) that worked but wasn't viable for
-production. Fortunately, Ralf had seen this problem before and had a ready made solution: manually loading the shared
-library from within `scipy/special/__init__.py` so it would be available when needed:
+I found a solution using delvewheel, a tool for bundling shared libraries into wheels on Windows []. It worked on my
+machine but wasn't viable for production []. Fortunately, Ralf had seen this problem before and had a ready made solution:
+manually loading the shared library from within `scipy/special/__init__.py` so it would be available when needed:
 
 ```python
 def _load_libsf_error_state():
@@ -627,19 +623,16 @@ Windows builds for SciPy 1.14.0 were failing with the following error:
 lld-link: error: undefined symbol: scipy_sf_error_get_action
 ```
 
-How could this be? SciPy's own CI jobs were passing on Windows, but here, symbols from `lib_sf_error_state` were clearly
-not being found. The thing is, at that point in time there was still a key gap in SciPy's CI coverage. Although there
-were Windows builds in CI, they all used the [MinGW](https://en.wikipedia.org/wiki/MinGW) compiler toolchain, with no
-jobs using [MSVC](https://visualstudio.microsoft.com/vs/features/cplusplus/). We had run into another platform specific
-difference.
+    How could this be? SciPy's own CI jobs were passing on Windows, but here, symbols from `lib_sf_error_state` were
+
+clearly not being found. The thing is, at that point in time there was still a key gap in SciPy's CI coverage. Although
+there were Windows builds in CI, they all used the MinGW compiler toolchain [], with no jobs using MSVC (Microsoft
+Visual C++) []. We had run into another platform specific difference.
 
 Fortunately, Axel knew what the problem was. On Linux, Mac OS (and Windows while using MinGW), symbols from shared
 libraries are exported by default, but with MSVC they must be explicitly exported from shared libraries and explicitly
-imported into consumers by annotating source code with special compiler directives:
-[\_\_declspec(dllexport)](https://learn.microsoft.com/en-us/cpp/build/exporting-from-a-dll-using-declspec-dllexport) for
-exports and and
-[\_\_declspec(dllimport)](https://learn.microsoft.com/en-us/cpp/build/importing-into-an-application-using-declspec-dllimport)
-for imports.
+imported into consumers by annotating source code with special compiler directives: `__declspec(dllexport)` for exports
+and and `__declspec(dllimport)` for imports.
 
 He had a recipe ready to use: defining and using macros which conditionally compiled to the right thing depending on their context.
 
@@ -662,11 +655,11 @@ He had a recipe ready to use: defining and using macros which conditionally comp
 #endif
 ```
 
-As soon as I had a chance, I fired up my Windows VM again and put together [a
-PR](https://github.com/scipy/scipy/pull/20937) implementing Axel's solution. After a couple misteps, MSVC builds were
-working again. There would be no need to push back the release date. A couple weeks later, fellow Quansight Labs member
-and LFortran/LPython core developer Gagandeep Singh (czgdp1807) submitted [a
-PR](https://github.com/scipy/scipy/pull/20985) to add an MSVC CI job, plugging the gap in SciPy's coverage.
+As soon as I had a chance, I fired up a Windows VM again and put together [a PR implementing Axel's
+solution](https://github.com/scipy/scipy/pull/20937). After a couple misteps, MSVC builds were working again. There
+would be no need to push back the release date. A couple weeks later, fellow Quansight Labs member and LFortran/LPython
+core developer Gagandeep Singh (czgdp1807) submitted [a PR to add an MSVC CI
+job](https://github.com/scipy/scipy/pull/20985), plugging the gap in SciPy's coverage.
 
 ### Thread safety
 
@@ -683,20 +676,71 @@ with thread safety in mind.
 `lib_sf_error_state` is obviously not thread safe. There is a global array carrying the current state of special
 function error handling policies with nothing to stop competing threads from trying to access the same memory
 location. Simultaneous modifications could even leave an entry in some corrupt and indeterminate state. This situation
-is known as a [data race](https://en.wikipedia.org/wiki/Race_condition#Data_race), and leads to [undefined
-behavior](https://en.wikipedia.org/wiki/Undefined_behavior) in C and C++. Weird things can happen when there is a data
-race.
+is known as a data race and leads to undefined behavior in C and C++ []. Weird things can happen when there is a data race.
 
 The latest tale in the saga of `lib_sf_error_state` is [a PR](https://github.com/scipy/scipy/pull/21956) from Edgar
-Margffoy (andfoy)—a member of Quansight Labs' [free-threaded Python
-team](https://labs.quansight.org/blog/free-threaded-python-rollout_)—to ensure thread safety by declaring the array
-`sf_error_actions` [thread local](https://en.wikipedia.org/wiki/Thread-local_storage). This eliminates the data-race by
-making it so each thread gets its own separate copy of the array. Edgar and the others on the free-threaded Python team
-have been doing great work improving support for free-threaded Python across the ecosystem for much of this past year.
+Margffoy (andfoy)—a member of Quansight Labs' free-threaded Python team )—to ensure thread safety by declaring the array
+`sf_error_actions` thread local. This eliminates the data-race by making it so each thread gets its own separate copy of
+the array. Edgar and the others on the free-threaded Python team have been doing great work improving support for
+free-threaded Python across the ecosystem for much of this past year.
 
-In a curious reversal, it is now the `win32` flavor of MinGW that is causing trouble due to [lack of proper threading
-support](https://github.com/scipy/scipy/pull/21956#pullrequestreview-2476680430).
+In a curious reversal, it is now (the `win32` flavor of) MinGW that is causing trouble due to lack of proper threading
+support [].
 
 ## Reflections
 
+Now that the dust has mostly settled, it's valuable to look back and try to judge whether we made the right choice. Over
+the entire timeframe, the primary goal for Irwin and I was always to make as much of SciPy special available on GPUs as
+possible—with secondary goals of simplifying SciPy special's build process and improving the scalar kernel codebase. The
+story of `libsf_error_state` is that of a side quest—a story of needing to fix something we broke in pursuit of bigger
+things—and the challenges we faced and brought to others because we underestimated the difficulty of our chosen
+solution. Having a single array for managing shared state between the extension modules appeals to a desire to have a
+single source of truth [], but looking back, it would have taken much less time to have each extension module carry its
+own copy of the array, and to always update them all together.
+
+While conducting research for this blog post, I discovered another wrinkle. Just beneath our noses, there was another
+extension module, [`_ufuncs_cxx`](https://github.com/scipy/scipy/blob/main/scipy/special/meson.build#L187-L199) for
+scalar kernels written in C++. Through the byzantine machinations of SciPy special's build system, brought about by
+the need to handle scalar kernels written in 4 languages, the actual ufuncs from `_ufuncs_cxx` are defined in the
+`_ufuncs` extension module discussed earlier. Because `special.errstate` worked without issue for these ufuncs, and
+they appeared to be coming from the `_ufuncs` extension module, I never looked more deeply into `_ufuncs_cxx`. It
+turns out that `_ufuncs_cxx` has its own copy of `sf_error_actions` and it is updated in synchrony when setting the
+error state from Python.
+
+From [github.com/scipy/.../\_ufuncs_extra_code.pxi](https://github.com/scipy/scipy/blob/b98e79e4b326bf3beb4d861a744101ee7f438471/scipy/special/_ufuncs_extra_code.pxi#L158-L162):
+
+```python
+    for error, action in kwargs.items():
+        action = _sf_error_action_map[action]
+        code = _sf_error_code_map[error]
+        _set_action(code, action)
+        scipy.special._ufuncs_cxx._set_action(code, action)
+```
+
+I also found [an October 2016 comment on GitHub](https://github.com/scipy/scipy/pull/6722#issuecomment-256539142) from
+currently inactive SciPy maintainer Josh Wilson (person142), the original author of SciPy special's error handling
+features, which shows he was acutely aware of the problems we ended up facing. He was trying to make special function
+error handling work correctly in
+[`scipy.special.cython_special`](https://docs.scipy.org/doc/scipy/reference/special.cython_special.html), a module for
+calling scalar versions of special function from Cython. To quote:
+
+_"To make the necessary modifications to cython_special error handling we need to instead share a single global variable
+between the two extension modules. On gcc we could do this with -rpath, but coming up with a portable solution seems
+messy. Is there a nice way out of this?"_
+
+A nice way? I think it's safe to answer with a definitive no. He wisely chose to instead disable error handling entirely
+in `cython_special`. Perhaps now that we have a shared global variable, error handling in `cython_special` could be
+revisited.
+
+Looking back at old comment threads, I get the impression that the earlier maintainers of `scipy.special` had a solid
+understanding of issues I've only started to get grip on in three years as a maintainer. In [another GitHub comment from
+2016](https://github.com/scipy/scipy/issues/6681#issuecomment-254192679), currently inactive SciPy BDFL Pauli Virtanen
+suggested to _"make `sf_error` error handling thread-local (which probably should be done in any case)_", which is only
+now happening. Open source maintainers come and go. Developers who have the time and will to contribute in one stage of
+life may not in another. Looking to the future, I think it's important to strive to keep institutional memory from being
+lost [^20]. The only solution I can think of is to write.
+
 [^1]: The first regular shared library, not including Python extension modules.
+[^20]:
+    See the article [Institutional Memory in Open Source](https://recompilermag.com/issues/extras/institutional-memory-in-open-source/)
+    by Thursday Bram for a thoughtful discussion of the problem of institutional memory in open source.
