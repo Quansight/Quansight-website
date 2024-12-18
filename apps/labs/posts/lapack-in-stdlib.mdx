@@ -1071,7 +1071,7 @@ To provide an API having consistent behavior with conventional LAPACK, I then wr
 // File: dlaswp.js
 
 // ...
-const base = require( './base.js' );
+const base = require('./base.js');
 
 // ...
 
@@ -1115,11 +1115,11 @@ I subsequently wrote a separate but similar [wrapper](https://github.com/stdlib-
 ```javascript
 // File: ndarray.js
 
-const base = require( './base.js' );
+const base = require('./base.js');
 
 // ...
 
-function dlaswp_ndarray( N, A, strideA1, strideA2, offsetA, k1, k2, inck, IPIV, strideIPIV, offsetIPIV ) {
+function dlaswp_ndarray(N, A, strideA1, strideA2, offsetA, k1, k2, inck, IPIV, strideIPIV, offsetIPIV) {
   let tmp;
   if (inck < 0) {
     offsetIPIV += k2 * strideIPIV;
