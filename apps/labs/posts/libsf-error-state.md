@@ -631,7 +631,7 @@ not being found. The thing is, at that point in time there was still a key gap i
 were Windows builds in CI, they all used the MinGW compiler toolchain, with no jobs using MSVC (Microsoft Visual C++).
 We had run into another platform specific difference.
 
-Fortunately, Axel knew what the problem was. On Linux, Mac OS (and Windows while using MinGW), symbols from shared
+Fortunately, h-vetinari knew what the problem was. On Linux, Mac OS (and Windows while using MinGW), symbols from shared
 libraries are exported by default, but with MSVC they must be explicitly exported from shared libraries and explicitly
 imported into consumers by annotating source code with special compiler directives: `__declspec(dllexport)` for exports
 and `__declspec(dllimport)` for imports.[^16]
@@ -658,7 +658,7 @@ He had a recipe ready to use: defining and using macros which conditionally comp
 ```
 
 As soon as I had a chance, I fired up a Windows VM again and put together [a PR](https://github.com/scipy/scipy/pull/20937)
-implementing Axel's solution. After a couple misteps, MSVC builds were working again. There would be no need to push
+implementing h-vetinari's solution. After a couple missteps, MSVC builds were working again. There would be no need to push
 back the release date. A couple weeks later, fellow Quansight Labs member and LFortran/LPython core developer Gagandeep
 Singh ([@czgdp1807](https://github.com/czgdp1807)) submitted [a PR](https://github.com/scipy/scipy/pull/20985) to add an
 MSVC CI job, plugging the gap in SciPy's coverage.
