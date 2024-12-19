@@ -561,13 +561,13 @@ sf_error_state_lib = shared_library('sf_error_state', # Name of the library
 )
 ```
 
-But even after this, I was still receiving the same error. After consulting Meson's
-[excellent documentation](https://mesonbuild.com/) and looking at some related issues, it turns out that `pip` takes
-care to set the `RPATH` for each extension module,[^11] which tells the dynamic linker where to look for shared libraries.
+But even after this, I was still receiving the same error. I asked Ralf about it, and found what happens is that `pip`
+goes through [meson-python](https://github.com/mesonbuild/meson-python) while `dev.py` uses Meson directly.
+`meson-python` takes care to set the `RPATH` for each extension module, which tells the dynamic linker where to look
+for shared libraries.[^11]
 
-To get things to work with `dev.py`, I needed to explicitly set the `RPATH` in Meson by adding
-`install_rpath: '$ORIGIN'` to each extension module. `'$ORIGIN'` means to search in the same folder as the extension
-module.
+To get things to work with `dev.py`, I needed to explicitly set the `RPATH` in Meson by adding `install_rpath:'$ORIGIN'`
+to each extension module. `'$ORIGIN'` in this case means to search in the same folder as the extension module.
 
 ### Building Wheels on Windows
 
