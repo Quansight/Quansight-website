@@ -270,14 +270,12 @@ kernel, that's written in a compiled language. Until recently, `scipy.special` h
 C++, Fortran 77, and Cython. In August of 2023, Irwin Zaid ([@izaid](https://github.com/izaid)) at Oxford proposed
 rewriting all of the scalar kernels in C++ header files in such a way that they could be included in both C++ and CUDA
 programs. This would allow these scalar kernels to also be used in GPU-aware array libraries like CuPy and PyTorch,
-improving special function support across array library backends. I've been supported by the 2020 NASA ROSES grant,
-_Reinforcing the Foundations of Scientific Python_ (with travel and compute costs partially covered by the 2023 NumFocus
-SDG _Streamlined Special Function Development in SciPy_), to work together with Irwin to put this plan into action. With
-additional help from SciPy maintainer Ilhan Polat ([@ilayn](https://github.com/ilayn)), who made a heroic effort to
-translate over twenty thousand lines of Fortran scalar kernel code to C, and contributions from other volunteers,
-substantial progress has been made. We're now in the process of splitting these headers into a separate library called
-xsf. This is a story deserving of its own post. Until then, see [the first issue in the xsf
-repo](https://github.com/scipy/xsf/issues/1) for more info.
+improving special function support across array library backends. Over the past year, I've been working together with
+Irwin to put this plan into action. With additional help from SciPy maintainer Ilhan Polat
+([@ilayn](https://github.com/ilayn)), who made a heroic effort to translate over twenty thousand lines of Fortran scalar
+kernel code to C, and contributions from other volunteers, substantial progress has been made. We're now in the process
+of splitting these headers into a separate library called xsf. This is a story deserving of its own post. Until then,
+see [the first issue in the xsf repo](https://github.com/scipy/xsf/issues/1) for more info.
 
 At the outset of this project, `scipy.special` had been under-maintained for several years. I'm not sure if there were
 any active maintainers left who fully understood the details of the infrastucture `scipy.special` has been using for
@@ -739,6 +737,10 @@ Before we finish, one more gem: in [another GitHub comment from
 2016](https://github.com/scipy/scipy/issues/6681#issuecomment-254192679), currently inactive SciPy BDFL Pauli Virtanen
 suggested to "make `sf_error` error handling thread-local (which probably should be done in any case)". Over eight years
 later this is finally happening. I should probably go back and read old comment threads more often.
+
+### Funding acknowledgements
+
+This work was supported by the 2020 NASA ROSES grant, _Reinforcing the Foundations of Scientific Python_.
 
 ---
 
