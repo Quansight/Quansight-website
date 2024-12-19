@@ -486,8 +486,9 @@ to take.
 ## The many battles to actually ship it
 
 The shared library `libsf_error_state`'s contents are fairly simple, but how does one actually ship a shared library
-within a Python package like SciPy? The process for creating and using shared libraries depends on the operating system
-and compiler toolchain. SciPy supports a wide range of platforms in aim of its goal to democratize access to scientific
+within a Python package like SciPy? Even now, we've yet to find any prior examples of a Python package that contains
+an internal shared library. The process for creating and using shared libraries depends on the operating system and
+compiler toolchain. SciPy supports a wide range of platforms in aim of its goal to democratize access to scientific
 computing tools and the greatest challenge turned out to be getting things to work on each of them. Several times, just
 as we thought everything was finally working, another quirk would pop up that needed to be addressed.
 
