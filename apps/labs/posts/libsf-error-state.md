@@ -781,7 +781,7 @@ This work was supported by the 2020 NASA ROSES grant, _Reinforcing the Foundatio
 [^6]: The Programmers Credo. From a 2016 twitter post by Maciej Cegłowski.
 [^7]:
     Some small simplifications have been made to keep the explanations concise. To see the library files as they
-    exist at the moment I'm writing this, see these GitHub permalinks for
+    exist at the moment I'm writing this, see the the following GitHub permalinks for
     [scipy/special/sf_error_state.c](https://github.com/scipy/scipy/blob/03cdb807958066d1af6a2c624803d066c7ab0bce/scipy/special/sf_error_state.c)
     and the corresponding header
     [scipy/special/sf_error_state.h](https://github.com/scipy/scipy/blob/03cdb807958066d1af6a2c624803d066c7ab0bce/scipy/special/sf_error_state.h).
