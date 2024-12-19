@@ -695,7 +695,8 @@ is known as a [data race](https://en.wikipedia.org/wiki/Race_condition#Data_race
 is a data race.
 
 The latest tale in the saga of `libsf_error_state` is [a PR](https://github.com/scipy/scipy/pull/21956) from Edgar
-Margffoy ([@andfoy](https://github.com/andfoy)) — a member of Quansight Labs' free-threaded Python team — to ensure
+Margffoy ([@andfoy](https://github.com/andfoy)) — a member of Quansight Labs'
+[free-threaded Python team](https://labs.quansight.org/blog/free-threaded-python-rollout) — to ensure
 thread safety by declaring the array `sf_error_actions` thread local. This eliminates the data-race by making it so each
 thread gets its own separate copy of the array. Edgar and the others on the free-threaded Python team have been doing
 great work improving support for free-threaded Python across the ecosystem for much of this past year.[^9]
@@ -787,4 +788,3 @@ This work was supported by the 2020 NASA ROSES grant, _Reinforcing the Foundatio
     [scipy/special/sf_error_state.h](https://github.com/scipy/scipy/blob/03cdb807958066d1af6a2c624803d066c7ab0bce/scipy/special/sf_error_state.h).
 
 [^8]: For more info on SciPy's move to Meson, see Ralf's [2021 Quansight blog post](https://labs.quansight.org/blog/2021/07/moving-scipy-to-meson)
-[^9]: https://labs.quansight.org/blog/free-threaded-python-rollout
