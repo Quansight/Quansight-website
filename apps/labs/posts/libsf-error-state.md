@@ -16,7 +16,7 @@ hero:
 
 This is the story of the first[^1] shared library to be shipped within SciPy. It offers a glimpse at some of the
 complexity SciPy tries to hide from users, while previewing some exciting developments in
-[scipy.special](https://docs.scipy.org/doc/scipy/reference/special.html).
+[`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html).
 
 Python has become wildly popular as a language for scientific and other data-intensive applications. It owes
 much of its success to an exemplary execution of the "compiled core, interpreted shell" principle. One can orchestrate
@@ -41,13 +41,13 @@ a relatively simple feature work smoothly.
 The simple feature in this case is error handling for mathematical functions in `scipy.special` which operate
 elementwise over NumPy arrays. Let's look into this more closely.
 
-A NumPy [ndarray](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) represents an arbitrary
+A NumPy [`ndarray`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) represents an arbitrary
 dimensional array of elements of the same data type, stored in a continguous buffer at the machine level. A [universal
 function](https://numpy.org/doc/stable/reference/ufuncs.html) or ufunc for short is a Python level function which
 applies a transform to each element of an `ndarray` by looping and operating elementwise over the underlying contiguous
 buffer in efficient native code.
 
-Here's the ufunc [np.sqrt](https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html) in action
+Here's the ufunc [`np.sqrt`](https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html) in action:
 
 ```
 In  [1]: import numpy as np
@@ -65,7 +65,7 @@ array([1.        , 1.41421356, 1.73205081, 2.        , 2.23606798,
 ```
 
 For large arrays, the speedup from applying `np.sqrt` over an `ndarray` rather than
-[math.sqrt](https://docs.python.org/3/library/math.html#math.sqrt) over each element of a list is significant. On my
+[`math.sqrt`](https://docs.python.org/3/library/math.html#math.sqrt) over each element of a list is significant. On my
 laptop I witnessed:
 
 ```
@@ -85,8 +85,8 @@ In  [5]: %timeit [math.sqrt(t) for t in B]
 ## Error handling
 
 What should happen if one gives invalid input to a ufunc? If we pass a negative
-[float](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex) to `math.sqrt` a
-[ValueError](https://docs.python.org/3/library/exceptions.html#ValueError) is raised.[^3]
+[`float`](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex) to `math.sqrt` a
+[`ValueError`](https://docs.python.org/3/library/exceptions.html#ValueError) is raised.[^3]
 
 ```
 In  [1]: import math
@@ -168,9 +168,9 @@ FloatingPointError: invalid value encountered in sqrt
 
 ## scipy.special
 
-NumPy has over 60 ufuncs available [^4] for a range of mathematical functions and operations, but more specialized
-functions useful in the sciences and engineering are out of scope. Ufuncs for over 230 such functions can be found
-instead in `scipy.special`.[^5]
+NumPy has over 60 [ufuncs available](https://numpy.org/doc/stable/reference/ufuncs.html#available-ufuncs) for a range
+of mathematical functions and operations, but more specialized functions useful in the sciences and engineering are out
+of scope. Ufuncs for over 230 such functions can be found instead in `scipy.special`.
 
 Just for fun, let's use
 [`scipy.special.gamma`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gamma.html), which implements a
@@ -238,7 +238,7 @@ In  [6]:
 
 ```
 
-`np.errstate` had no impact on error handling, there were no warnings, but we do see `NaN`s in the output.[^6] What's
+`np.errstate` had no impact on error handling, there were no warnings, but we do see `NaN`s in the output.[^4] What's
 going on? Well, NumPy's ufuncs are provided in a C [extension
 module](https://docs.python.org/3/extending/extending.html) that's part of NumPy. There's some C code in this extension
 module for managing the state for error handling policies. The ufuncs in `scipy.special` come from a different extension
@@ -290,7 +290,7 @@ In the Spring of 2024, things moved fairly quickly because Irwin was able to put
 things off the ground. He found that the existing ufunc infrastructure was not flexible enough for work he had planned
 involving [Generalized universal functions](https://numpy.org/doc/stable/reference/c-api/generalized-ufuncs.html)
 (gufuncs for short) so he wrote new machinery from scratch. Ufuncs and gufuncs created with the new machinery live in a
-separate extension module from those created with the old machinery.[^7] It will be a great win in terms of simplifying
+separate extension module from those created with the old machinery.[^5] It will be a great win in terms of simplifying
 `scipy.special`'s build process when all ufuncs can be moved over to the new infrastructure but in the short term there
 was a problem.
 
@@ -298,7 +298,7 @@ was a problem.
 
 After splitting them between multiple extension modules, the error policy state could no longer be easily shared
 between ufuncs. We noticed something was wrong due to a failure in a doctest for
-[special.seterr](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.seterr.html#scipy.special.seterr).
+[`special.seterr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.seterr.html#scipy.special.seterr).
 The expected error was not being raised.
 
 ```
@@ -315,7 +315,7 @@ The expected error was not being raised.
     >>> _ = sc.seterr(**olderr)
 ```
 
-[gammaln](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gammaln.html) was one of a handful of
+[`gammaln`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gammaln.html) was one of a handful of
 ufuncs moved to the new extension module.
 
 Both extension modules contained a separate copy of the state for managing error handling policies, but the user facing
@@ -337,7 +337,7 @@ We saw three options:
 3. Keep the error handling state in one of the extension modules and have it retrieved from there by the others.
 
 We chose to create a shared library because it seemed like the more principled option. As the saying goes: we do these
-things not because they are easy, but because we thought they were going to be easy.[^8] Quansight Labs Co-director Ralf
+things not because they are easy, but because we thought they were going to be easy.[^6] Quansight Labs Co-director Ralf
 Gommers ([@rgommers](https://github.com/rgommers)) knew from long experience that this may be difficult to get right,
 but trusted that we'd be able to figure it out.
 
@@ -400,7 +400,7 @@ modules with a shared library. It's perfectly valid to link one shared library w
 ## The relevant code
 
 Having decided on the shared library approach, we looked into code `scipy.special` used for managing error handling state.
-In essence, things were very simple. Let's walk through the core lines.[^9]
+In essence, things were very simple. Let's walk through the core lines.[^7]
 
 There is an enumeration type `sf_action_t` giving human readable names to the different error handling policies:
 
@@ -497,7 +497,7 @@ as we thought everything was finally working, another quirk would pop up that ne
 
 ### Path troubles
 
-The initial challenge was finding the right invocations to give to the Meson build system used by SciPy.[^10] Extension
+The initial challenge was finding the right invocations to give to the [Meson build system](https://mesonbuild.com/) used by SciPy.[^8] Extension
 modules are configured in the `meson.build` files spread across SciPy's source tree and we needed to figure out how to
 set up a shared library and link it into each of the special function ufunc extension modules. Irwin and I begin working
 on this independently, comparing notes as we went.
@@ -547,7 +547,7 @@ using the `"python dev.py build"` workflow and he was using an editable install:
 For the editable install, SciPy is installed directly in its own project folder, and the shared library and the relevant
 extension modules were all being installed next to each other in `~/scipy/scipy/special`. For the `dev.py` workflow,
 SciPy is installed elsewhere. Since I didn't specify where to install the shared library, it got put in the wrong
-place. It turned out what I had to do was configure the `install_dir` in Meson like this:
+place. I fixed things by directly configuring the `install_dir` in Meson like this:
 
 ```
 sf_error_state_lib = shared_library('sf_error_state', # Name of the library
@@ -561,10 +561,10 @@ sf_error_state_lib = shared_library('sf_error_state', # Name of the library
 )
 ```
 
-But even after this, I was still receiving the same error. I asked Ralf about it, and found what happens is that `pip`
+Even after this, I was still seeing the same error. I asked Ralf about it, and found what happens is that `pip`
 goes through [meson-python](https://github.com/mesonbuild/meson-python) while `dev.py` uses Meson directly.
-`meson-python` takes care to set the `RPATH` for each extension module, which tells the dynamic linker where to look
-for shared libraries.[^11]
+`meson-python` takes care to set the [`RPATH`](https://en.wikipedia.org/wiki/Rpath) for each extension module,
+which tells the dynamic linker where to look for shared libraries.
 
 To get things to work with `dev.py`, I needed to explicitly set the `RPATH` in Meson by adding `install_rpath:'$ORIGIN'`
 to each extension module. `'$ORIGIN'` in this case means to search in the same folder as the extension module.
@@ -573,18 +573,21 @@ to each extension module. `'$ORIGIN'` in this case means to search in the same f
 
 After setting `install_dir` and `install_rpath` correctly, all but one of SciPy's CI jobs were passing. The sole failing
 job involved building a wheel on Windows. A
-wheel can be thought of as a
-precompiled binary for a Python package.[^12] The underlying issue was that Windows does not have support for something like
-`RPATH`, following a less configurable set of rules for determining the search path for shared libraries.[^13]
+[wheel](https://packaging.python.org/en/latest/specifications/binary-distribution-format/) can be thought of as a
+precompiled binary for a Python package. The underlying issue was that Windows does not have support for something like
+`RPATH`, following a less configurable [set of rules](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order)
+for determining the search path for shared libraries.
 
 It took us a day of work to get to this point. Since things were not as straightforward as expected; I took it from here.
 
 At the time I didn't really have any experience developing for Windows and didn't even have a Windows machine available
 at home to use. I looked up how to run Windows in a VM and got to work.
 
-I found a solution using delvewheel, a tool for bundling shared libraries into wheels on Windows.[^14] It worked on my
-machine but wasn't viable for production.[^15] Fortunately, Ralf had seen this problem before and had a ready made solution:
-manually loading the shared library from within `scipy/special/__init__.py` so it would be available when needed:
+I found a solution using [delvewheel](https://github.com/adang1345/delvewheel), a tool for bundling shared libraries
+into wheels on Windows. It worked on my machine but
+[wasn't viable for production](https://github.com/scipy/scipy/pull/20321#pullrequestreview-1969657606). Fortunately,
+Ralf had seen this problem before and had a ready made solution: manually loading the shared library from within
+`scipy/special/__init__.py` so it would be available when needed:
 
 ```python
 def _load_libsf_error_state():
@@ -632,13 +635,18 @@ lld-link: error: undefined symbol: scipy_sf_error_get_action
 
 How could this be? SciPy's own CI jobs were passing on Windows, but here, symbols from `lib_sf_error_state` were clearly
 not being found. The thing is, at that point in time there was still a key gap in SciPy's CI coverage. Although there
-were Windows builds in CI, they all used the MinGW compiler toolchain. There were no jobs using Clang-cl, the toolchain
-used for Windows builds in conda-forge. We had run into another platform specific difference.
+were Windows builds in CI, they all used the [MinGW](https://en.wikipedia.org/wiki/MinGW) compiler toolchain. There were no jobs using
+[MSVC](https://visualstudio.microsoft.com/vs/features/cplusplus/) or [Clang-cl](https://clang.llvm.org/docs/MSVCCompatibility.html),
+a Clang compiler driver that aims for compatability with MSVC. Clang-cl is used for Windows builds in conda-forge and we had run into
+another platform specific difference.
 
 Fortunately, h-vetinari knew what the problem was. On Linux, Mac OS (and Windows while using MinGW), symbols from shared
-libraries are exported by default, but on Windows with Clang-cl or MSVC they must be explicitly exported from shared
+libraries are exported by default, but on Windows with MSVC or Clang-cl they must be explicitly exported from shared
 libraries and explicitly imported into consumers by annotating source code with special compiler directives:
-`__declspec(dllexport)` for exports and `__declspec(dllimport)` for imports.[^16]
+[`__declspec(dllexport)`](https://learn.microsoft.com/en-us/cpp/build/exporting-from-a-dll-using-declspec-dllexport?view=msvc-170)
+for exports and
+[`__declspec(dllimport)`](https://learn.microsoft.com/en-us/cpp/build/importing-into-an-application-using-declspec-dllimport?view=msvc-170)
+for imports.
 
 He had a recipe ready to use: defining and using macros which conditionally compiled to the right thing depending on their context.
 
@@ -664,8 +672,8 @@ He had a recipe ready to use: defining and using macros which conditionally comp
 As soon as I had a chance, I fired up a Windows VM again and put together [a PR](https://github.com/scipy/scipy/pull/20937)
 implementing h-vetinari's solution. After a couple missteps, Clang-cl builds were working again. There would be no need to push
 back the release date. A couple weeks later, fellow Quansight Labs member and LFortran/LPython core developer Gagandeep
-Singh ([@czgdp1807](https://github.com/czgdp1807)) submitted [a PR](https://github.com/scipy/scipy/pull/20985) to add an
-MSVC CI job, helping plug the gap in SciPy's coverage.
+Singh ([@czgdp1807](https://github.com/czgdp1807)) submitted [a PR](https://github.com/scipy/scipy/pull/20985) to plug the
+gap in SciPy's CI coverage.
 
 ### Thread safety
 
@@ -682,16 +690,18 @@ it, extensions need to be rewritten with thread safety in mind.
 `libsf_error_state` is obviously not thread safe. There is a global array carrying the current state of special
 function error handling policies with nothing to stop competing threads from trying to access the same memory
 location. Simultaneous modifications could even leave an entry in some corrupt and indeterminate state. This situation
-is known as a data race and leads to undefined behavior in C and C++.[^17] Weird things can happen when there is a data race.
+is known as a [data race](https://en.wikipedia.org/wiki/Race_condition#Data_race) and leads to
+[undefined behavior](https://en.wikipedia.org/wiki/Undefined_behavior) in C and C++. Weird things can happen when there
+is a data race.
 
 The latest tale in the saga of `libsf_error_state` is [a PR](https://github.com/scipy/scipy/pull/21956) from Edgar
 Margffoy ([@andfoy](https://github.com/andfoy)) — a member of Quansight Labs' free-threaded Python team — to ensure
 thread safety by declaring the array `sf_error_actions` thread local. This eliminates the data-race by making it so each
 thread gets its own separate copy of the array. Edgar and the others on the free-threaded Python team have been doing
-great work improving support for free-threaded Python across the ecosystem for much of this past year.
+great work improving support for free-threaded Python across the ecosystem for much of this past year.[^9]
 
 In a curious reversal, it is now (the `win32` flavor of) MinGW that is causing trouble due to lack of support for
-thread local variables. [^18]
+thread local variables.
 
 ## Reflections
 
@@ -701,7 +711,7 @@ possible, with secondary goals of simplifying SciPy special's build process and 
 story of `libsf_error_state` is that of a side quest — a story of needing to fix something we broke in pursuit of bigger
 things — and the challenges we faced and brought to others because we underestimated the difficulty of our chosen
 solution. Having a single array for managing shared state between the extension modules appeals to a desire to have a
-single source of truth [], but looking back, it would have taken much less time to have each extension module carry its
+single source of truth, but looking back, it would have taken much less time to have each extension module carry its
 own copy of the array, and to always update them all together.
 
 While conducting research for this blog post, I discovered another wrinkle. Just beneath our noses, there was another
@@ -724,9 +734,9 @@ From [github.com/scipy/.../\_ufuncs_extra_code.pxi](https://github.com/scipy/sci
 ```
 
 I also found [an October 2016 comment on GitHub](https://github.com/scipy/scipy/pull/6722#issuecomment-256539142) from
-currently inactive SciPy maintainer Josh Wilson (person142), the original author of SciPy special's error handling
-features, which shows he was already aware of the problem we ended up facing. He was trying to make special function
-error handling work correctly in
+currently inactive SciPy maintainer Josh Wilson ([@person142](https://github.com/person142)), the original author of
+SciPy special's error handling features, which shows he was already aware of the problem we ended up facing. He was
+trying to make special function error handling work correctly in
 [`scipy.special.cython_special`](https://docs.scipy.org/doc/scipy/reference/special.cython_special.html), a module for
 calling scalar versions of special function from Cython. To quote:
 
@@ -755,9 +765,7 @@ This work was supported by the 2020 NASA ROSES grant, _Reinforcing the Foundatio
     output type should depend only on the input type, not the input value. Allowing the latter makes code more difficult to
     reason about, both for programmers and for tools like static type checkers and jit compilers.
 
-[^4]: https://numpy.org/doc/stable/reference/ufuncs.html#available-ufuncs
-[^5]: https://docs.scipy.org/doc/scipy/reference/special.html
-[^6]:
+[^4]:
     Those using `scipy<1.15` will see `inf` instead of `nan` at negative integers due to a bug in `special.gamma`
     which was fixed in [the PR scipy/#21827](https://github.com/scipy/scipy/pull/21827).If you're curious why
     `special.gamma(0.)` evaluated to `inf`, note that the IEE-754 floating point standard requires signed zeros `+0.`
@@ -765,28 +773,18 @@ This work was supported by the 2020 NASA ROSES grant, _Reinforcing the Foundatio
     `special.gamma(+0.)` evaluates the limit of the Gamma function as `x` approaches `0` from the right. Signed zeros
     can be used to ensure the correct sign is preserved when underflow occurs.
 
-[^7]:
+[^5]:
     We could have stuck to one extension module by making it more complicated, but the idea was to build the simpler
     extension module that would be possible after all scalar kernels are written in C++ headers, move ufuncs over
     to it incrementally, and then remove the old extension module after this process is completed.
 
-[^8]: The Programmers Credo. From a 2016 twitter post by Maciej Cegłowski.
-[^9]:
+[^6]: The Programmers Credo. From a 2016 twitter post by Maciej Cegłowski.
+[^7]:
     Some small simplifications have been made to keep the explanations concise. To see the library files as they
-    exist at the moment I'm writing this see the current GitHub permalinks for
+    exist at the moment I'm writing this, see these GitHub permalinks for
     [scipy/special/sf_error_state.c](https://github.com/scipy/scipy/blob/03cdb807958066d1af6a2c624803d066c7ab0bce/scipy/special/sf_error_state.c)
     and the corresponding header
     [scipy/special/sf_error_state.h](https://github.com/scipy/scipy/blob/03cdb807958066d1af6a2c624803d066c7ab0bce/scipy/special/sf_error_state.h).
 
-[^10]: For more info on SciPy's move to Meson, see Ralf's [2021 Quansight blog post](https://labs.quansight.org/blog/2021/07/moving-scipy-to-meson)
-[^11]: https://en.wikipedia.org/wiki/Rpath
-[^12]: https://packaging.python.org/en/latest/specifications/binary-distribution-format/
-[^13]: https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order
-[^14]: https://github.com/adang1345/delvewheel
-[^15]: https://github.com/scipy/scipy/pull/20321#pullrequestreview-1969657606
-[^16]:
-    https://learn.microsoft.com/en-us/cpp/build/exporting-from-a-dll-using-declspec-dllexport?view=msvc-170
-    https://learn.microsoft.com/en-us/cpp/build/importing-into-an-application-using-declspec-dllimport?view=msvc-170
-
-[^17]: https://en.wikipedia.org/wiki/Race_condition#Data_race
-[^18]: https://github.com/scipy/scipy/pull/21956#pullrequestreview-2476680430
+[^8]: For more info on SciPy's move to Meson, see Ralf's [2021 Quansight blog post](https://labs.quansight.org/blog/2021/07/moving-scipy-to-meson)
+[^9]: https://labs.quansight.org/blog/free-threaded-python-rollout
