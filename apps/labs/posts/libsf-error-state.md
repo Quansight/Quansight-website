@@ -38,6 +38,9 @@ a relatively simple feature work smoothly.
 
 ## NumPy Universal functions
 
+The simple feature in this case is error handling for mathematical functions in `scipy.special` which operate
+elementwise over NumPy arrays. Let's look into this more closely.
+
 A NumPy [ndarray](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) represents an arbitrary
 dimensional array of elements of the same data type, stored in a continguous buffer at the machine level. A [universal
 function](https://numpy.org/doc/stable/reference/ufuncs.html) or ufunc for short is a Python level function which
