@@ -632,13 +632,13 @@ lld-link: error: undefined symbol: scipy_sf_error_get_action
 
 How could this be? SciPy's own CI jobs were passing on Windows, but here, symbols from `lib_sf_error_state` were clearly
 not being found. The thing is, at that point in time there was still a key gap in SciPy's CI coverage. Although there
-were Windows builds in CI, they all used the MinGW compiler toolchain, with no jobs using MSVC (Microsoft Visual C++).
-We had run into another platform specific difference.
+were Windows builds in CI, they all used the MinGW compiler toolchain. There were no jobs using Clang-cl, the toolchain
+used for Windows builds in conda-forge. We had run into another platform specific difference.
 
 Fortunately, h-vetinari knew what the problem was. On Linux, Mac OS (and Windows while using MinGW), symbols from shared
-libraries are exported by default, but with MSVC they must be explicitly exported from shared libraries and explicitly
-imported into consumers by annotating source code with special compiler directives: `__declspec(dllexport)` for exports
-and `__declspec(dllimport)` for imports.[^16]
+libraries are exported by default, but on Windows with Clang-cl or MSVC they must be explicitly exported from shared
+libraries and explicitly imported into consumers by annotating source code with special compiler directives:
+`__declspec(dllexport)` for exports and `__declspec(dllimport)` for imports.[^16]
 
 He had a recipe ready to use: defining and using macros which conditionally compiled to the right thing depending on their context.
 
@@ -662,10 +662,10 @@ He had a recipe ready to use: defining and using macros which conditionally comp
 ```
 
 As soon as I had a chance, I fired up a Windows VM again and put together [a PR](https://github.com/scipy/scipy/pull/20937)
-implementing h-vetinari's solution. After a couple missteps, MSVC builds were working again. There would be no need to push
+implementing h-vetinari's solution. After a couple missteps, Clang-cl builds were working again. There would be no need to push
 back the release date. A couple weeks later, fellow Quansight Labs member and LFortran/LPython core developer Gagandeep
 Singh ([@czgdp1807](https://github.com/czgdp1807)) submitted [a PR](https://github.com/scipy/scipy/pull/20985) to add an
-MSVC CI job, plugging the gap in SciPy's coverage.
+MSVC CI job, helping plug the gap in SciPy's coverage.
 
 ### Thread safety
 
@@ -690,8 +690,8 @@ thread safety by declaring the array `sf_error_actions` thread local. This elimi
 thread gets its own separate copy of the array. Edgar and the others on the free-threaded Python team have been doing
 great work improving support for free-threaded Python across the ecosystem for much of this past year.
 
-In a curious reversal, it is now (the `win32` flavor of) MinGW that is causing trouble due to lack of proper threading
-support.[^18]
+In a curious reversal, it is now (the `win32` flavor of) MinGW that is causing trouble due to lack of support for
+thread local variables. [^18]
 
 ## Reflections
 
