@@ -18,11 +18,11 @@ This is the story of the first[^1] shared library to be shipped within SciPy. It
 complexity SciPy tries to hide from users, while previewing some exciting developments in
 [scipy.special](https://docs.scipy.org/doc/scipy/reference/special.html).
 
-Python has become wildly popular as a scripting language for scientific and other data intensive applications. It owes
+Python has become wildly popular as a language for scientific and other data-intensive applications. It owes
 much of its success to an exemplary execution of the "compiled core, interpreted shell" principle. One can orchestrate
 simulation pipelines, preprocess and munge data, set up and use explanatory or predictive statistical models, make plots
-and tables, and more, in an expressive high level language—while delegating computationally intensive tasks to compiled
-libraries.
+and tables, and more, in an expressive high level language — while delegating computationally intensive tasks to
+compiled libraries.
 
 The default CPython interpreter was designed specifically to make it easy to extend Python programs with efficient
 native code. The Python C API is well thought out and straightforward to work with. The controversial global interpreter
@@ -30,8 +30,8 @@ lock or GIL, a barrier to free threading within Python, has the benefit of makin
 code, since one need not worry about the thread-safety of wrapped compiled libraries.
 
 By wrapping, filling in gaps, and providing user friendly Python APIs to a wide range of battle tested, permissively
-licensed and public domain scientific software tools—SciPy's founding developers[^2] were able to kickstart the growth of
-the Scientific Python ecosystem. There are now worlds of scientific and data intensive software available in
+licensed and public domain scientific software tools — SciPy's founding developers[^2] were able to kickstart the growth
+of the Scientific Python ecosystem. There are now worlds of scientific and data intensive software available in
 Python. Users who spend their time in the interpreted shell may not be aware of the complexity that lies
 underneath. Journeying deeper into the stack, it can be surprising to see the level of work that can go into making even
 a relatively simple feature work smoothly.
@@ -267,16 +267,17 @@ SpecialFunctionError: scipy.special/Gamma: singularity
 
 To create a ufunc for a mathematical function, one needs a scalar implementation of this function, known as a scalar
 kernel, that's written in a compiled language. Until recently, `scipy.special` had scalar kernels written in all of C,
-C++, Fortran 77, and Cython. In August of 2023, Irwin Zaid (izaid) at Oxford proposed rewriting all of the scalar
-kernels in C++ header files in such a way that they could be included in both C++ and CUDA programs. This would allow
-these scalar kernels to also be used in GPU-aware array libraries like CuPy and PyTorch, improving special function
-support across array library backends. I've been supported by the 2020 NASA ROSES grant, _Reinforcing the Foundations of
-Scientific Python_ (with travel and compute costs partially covered by the 2023 NumFocus SDG _Streamlined Special
-Function Development in SciPy_), to work together with Irwin to put this plan into action. With additional help from
-SciPy maintainer Ilhan Polat (ilayn), who made a heroic effort to translate over twenty thousand lines of Fortran scalar
-kernel code to C, and contributions from other volunteers, substantial progress has been made. We're now in the process
-of splitting these headers into a separate library called xsf. This is a story deserving of its own post. Until then,
-see [the first issue in the xsf repo](https://github.com/scipy/xsf/issues/1) for more info.
+C++, Fortran 77, and Cython. In August of 2023, Irwin Zaid ([@izaid](https://github.com/izaid)) at Oxford proposed
+rewriting all of the scalar kernels in C++ header files in such a way that they could be included in both C++ and CUDA
+programs. This would allow these scalar kernels to also be used in GPU-aware array libraries like CuPy and PyTorch,
+improving special function support across array library backends. I've been supported by the 2020 NASA ROSES grant,
+_Reinforcing the Foundations of Scientific Python_ (with travel and compute costs partially covered by the 2023 NumFocus
+SDG _Streamlined Special Function Development in SciPy_), to work together with Irwin to put this plan into action. With
+additional help from SciPy maintainer Ilhan Polat ([@ilayn](https://github.com/ilayn)), who made a heroic effort to
+translate over twenty thousand lines of Fortran scalar kernel code to C, and contributions from other volunteers,
+substantial progress has been made. We're now in the process of splitting these headers into a separate library called
+xsf. This is a story deserving of its own post. Until then, see [the first issue in the xsf
+repo](https://github.com/scipy/xsf/issues/1) for more info.
 
 At the outset of this project, `scipy.special` had been under-maintained for several years. I'm not sure if there were
 any active maintainers left who fully understood the details of the infrastucture `scipy.special` has been using for
@@ -336,8 +337,8 @@ We saw three options:
 
 We chose to create a shared library because it seemed like the more principled option. As the saying goes: we do these
 things not because they are easy, but because we thought they were going to be easy.[^8] Quansight Labs Co-director Ralf
-Gommers (rgommers) knew from long experience that this may be difficult to get right, but trusted that we'd be able to
-figure it out.
+Gommers ([@rgommers](https://github.com/rgommers)) knew from long experience that this may be difficult to get right,
+but trusted that we'd be able to figure it out.
 
 ## Static vs dynamic linking
 
@@ -411,7 +412,7 @@ enum sf_action_t {
 ```
 
 And then an array `sf_error_actions` storing the error handling policy associated to each special function error
-handling type. We see that the default is to ignore errors all errors, matching what we observed in the example with
+handling type. We see that the default is to ignore all errors, matching what we observed in the example with
 `special.gamma`.
 
 ```c
@@ -494,7 +495,7 @@ as we thought everything was finally working, another quirk would pop up that ne
 
 ### Path troubles
 
-The initial challenge was finding the right invocations to give to the meson build system used by SciPy.[^10] Extension
+The initial challenge was finding the right invocations to give to the Meson build system used by SciPy.[^10] Extension
 modules are configured in the `meson.build` files spread across SciPy's source tree and we needed to figure out how to
 set up a shared library and link it into each of the special function ufunc extension modules. Irwin and I begin working
 on this independently, comparing notes as we went.
@@ -503,7 +504,7 @@ The first hiccup is that the following invocations were working on Irwin's Mac.
 
 Setting up the shared library like this.
 
-```meson
+```python
 sf_error_state_lib = shared_library('sf_error_state', # Name of the library
   # Implementation files contained it.
   ['sf_error_state.c'],
@@ -515,7 +516,7 @@ sf_error_state_lib = shared_library('sf_error_state', # Name of the library
 
 and adding a `link_with` entry to the creation of each extension module:
 
-```
+```python
 py3.extension_module('_special_ufuncs',
   ['_special_ufuncs.cpp', '_special_ufuncs_docs.cpp', 'sf_error.cc'],
   include_directories: ['../_lib', '../_build_utils/src'],
@@ -559,7 +560,7 @@ sf_error_state_lib = shared_library('sf_error_state', # Name of the library
 ```
 
 But even after this, I was still receiving the same error. After consulting `meson`'s
-[excellent documentation](https://mesonbuild.com/) and looking at some related issues, it turns out that the `pip` takes
+[excellent documentation](https://mesonbuild.com/) and looking at some related issues, it turns out that `pip` takes
 care to set the `RPATH` for each extension module,[^11] which tells the dynamic linker where to look for shared libraries.
 
 To get things to work with `dev.py`, I needed to explicitly set the `RPATH` in `meson` by adding
@@ -614,14 +615,14 @@ _load_libsf_error_state()
 
 One week in, all CI jobs were passing and the [PR](https://github.com/scipy/scipy/pull/20321) creating
 `libsf_error_state` was merged. We did it! We fixed the bug we'd introduced in `special.errstate` with months to go
-before the next SciPy release—or so we thought.
+before the next SciPy release — or so we thought.
 
 ### Breaking SciPy for MSVC builds
 
-On May 30th, SciPy maintainer and Conda-Forge core member Axel Obermeir (h-vetinari) posted a comment on his open PR,
-[scipy-feedstock/gh-277](https://github.com/conda-forge/scipy-feedstock/pull/277). The first release candidate for
-SciPy 1.14.0 had just come out, he was starting the process to add version 1.14.0 to Conda-Forge, and noticed that
-Windows builds for SciPy 1.14.0 were failing with the following error:
+On May 30th, SciPy maintainer and conda-forge core member [@h-vetinari](https://github.com/h-vetinari) posted a comment
+on his open PR, [scipy-feedstock/gh-277](https://github.com/conda-forge/scipy-feedstock/pull/277). The first release
+candidate for SciPy 1.14.0 had just come out, he was starting the process to add version 1.14.0 to Conda-Forge, and
+noticed that Windows builds for SciPy 1.14.0 were failing with the following error:
 
 ```
 lld-link: error: undefined symbol: scipy_sf_error_get_action
@@ -635,7 +636,7 @@ We had run into another platform specific difference.
 Fortunately, Axel knew what the problem was. On Linux, Mac OS (and Windows while using MinGW), symbols from shared
 libraries are exported by default, but with MSVC they must be explicitly exported from shared libraries and explicitly
 imported into consumers by annotating source code with special compiler directives: `__declspec(dllexport)` for exports
-and and `__declspec(dllimport)` for imports.[^16]
+and `__declspec(dllimport)` for imports.[^16]
 
 He had a recipe ready to use: defining and using macros which conditionally compiled to the right thing depending on their context.
 
@@ -661,8 +662,8 @@ He had a recipe ready to use: defining and using macros which conditionally comp
 As soon as I had a chance, I fired up a Windows VM again and put together [a PR](https://github.com/scipy/scipy/pull/20937)
 implementing Axel's solution. After a couple misteps, MSVC builds were working again. There would be no need to push
 back the release date. A couple weeks later, fellow Quansight Labs member and LFortran/LPython core developer Gagandeep
-Singh (czgdp1807) submitted [a PR](https://github.com/scipy/scipy/pull/20985) to add an MSVC CI job, plugging the gap in
-SciPy's coverage.
+Singh ([@czgdp1807](https://github.com/czgdp1807)) submitted [a PR](https://github.com/scipy/scipy/pull/20985) to add an
+MSVC CI job, plugging the gap in SciPy's coverage.
 
 ### Thread safety
 
@@ -682,10 +683,10 @@ location. Simultaneous modifications could even leave an entry in some corrupt a
 is known as a data race and leads to undefined behavior in C and C++.[^17] Weird things can happen when there is a data race.
 
 The latest tale in the saga of `libsf_error_state` is [a PR](https://github.com/scipy/scipy/pull/21956) from Edgar
-Margffoy (andfoy)—a member of Quansight Labs' free-threaded Python team—to ensure thread safety by declaring the array
-`sf_error_actions` thread local. This eliminates the data-race by making it so each thread gets its own separate copy of
-the array. Edgar and the others on the free-threaded Python team have been doing great work improving support for
-free-threaded Python across the ecosystem for much of this past year.
+Margffoy ([@andfoy](https://github.com/andfoy)) — a member of Quansight Labs' free-threaded Python team — to ensure
+thread safety by declaring the array `sf_error_actions` thread local. This eliminates the data-race by making it so each
+thread gets its own separate copy of the array. Edgar and the others on the free-threaded Python team have been doing
+great work improving support for free-threaded Python across the ecosystem for much of this past year.
 
 In a curious reversal, it is now (the `win32` flavor of) MinGW that is causing trouble due to lack of proper threading
 support.[^18]
@@ -694,9 +695,9 @@ support.[^18]
 
 Now that the dust has mostly settled, it's valuable to look back and try to judge whether we made the right choice. Over
 the entire timeframe, the primary goal for Irwin and I was always to make as much of SciPy special available on GPUs as
-possible—with secondary goals of simplifying SciPy special's build process and improving the scalar kernel codebase. The
-story of `libsf_error_state` is that of a side quest—a story of needing to fix something we broke in pursuit of bigger
-things—and the challenges we faced and brought to others because we underestimated the difficulty of our chosen
+possible, with secondary goals of simplifying SciPy special's build process and improving the scalar kernel codebase. The
+story of `libsf_error_state` is that of a side quest — a story of needing to fix something we broke in pursuit of bigger
+things — and the challenges we faced and brought to others because we underestimated the difficulty of our chosen
 solution. Having a single array for managing shared state between the extension modules appeals to a desire to have a
 single source of truth [], but looking back, it would have taken much less time to have each extension module carry its
 own copy of the array, and to always update them all together.
