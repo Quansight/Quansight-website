@@ -670,7 +670,7 @@ In the introduction I'd mentioned that CPython's global interpreter lock (GIL) m
 or other compiled languages since one doesn't need to worry about the thread safety of wrapped code. Still, being able
 to have only one thread in a running Python process execute Python code at a time is greatly limiting for multicore
 applications. In October 2023, a Python Enhancement Proposal (PEP) was accepted to make the GIL optional. This proposal,
-[PEP 703](https://peps.python.org/pep-0703/), is well worth reading for its in-depth summary of the surrounding
+[PEP 703](https://peps.python.org/pep-0703/), is well worth reading for its thoughtful summary of the surrounding
 issues. CPython 3.13 launched with an optional
 [free-threaded mode](https://docs.python.org/3.13/whatsnew/3.13.html#free-threaded-cpython)
 which supports running with the GIL disabled. Free-threading in Python offers great promise, but to take advantage of
