@@ -545,7 +545,7 @@ using the `"python dev.py build"` workflow and he was using an editable install:
 For the editable install, SciPy is installed directly in its own project folder, and the shared library and the relevant
 extension modules were all being installed next to each other in `~/scipy/scipy/special`. For the `dev.py` workflow,
 SciPy is installed elsewhere. Since I didn't specify where to install the shared library, it got put in the wrong
-place. It turned out what I had to do was configure the `install_dir` in `meson` like this:
+place. It turned out what I had to do was configure the `install_dir` in Meson like this:
 
 ```
 sf_error_state_lib = shared_library('sf_error_state', # Name of the library
@@ -559,11 +559,11 @@ sf_error_state_lib = shared_library('sf_error_state', # Name of the library
 )
 ```
 
-But even after this, I was still receiving the same error. After consulting `meson`'s
+But even after this, I was still receiving the same error. After consulting Meson's
 [excellent documentation](https://mesonbuild.com/) and looking at some related issues, it turns out that `pip` takes
 care to set the `RPATH` for each extension module,[^11] which tells the dynamic linker where to look for shared libraries.
 
-To get things to work with `dev.py`, I needed to explicitly set the `RPATH` in `meson` by adding
+To get things to work with `dev.py`, I needed to explicitly set the `RPATH` in Meson by adding
 `install_rpath: '$ORIGIN'` to each extension module. `'$ORIGIN'` means to search in the same folder as the extension
 module.
 
@@ -772,10 +772,7 @@ later this is finally happening. I should probably go back and read old comment 
     and the corresponding header
     [scipy/special/sf_error_state.h](https://github.com/scipy/scipy/blob/03cdb807958066d1af6a2c624803d066c7ab0bce/scipy/special/sf_error_state.h).
 
-[^10]:
-    For more info on SciPy's move to meson, see this [2021 Quansight blog post](https://labs.quansight.org/blog/2021/07/moving-scipy-to-meson)
-    from labs Co-Director Ralf Gommers.
-
+[^10]: For more info on SciPy's move to Meson, see Ralf's [2021 Quansight blog post](https://labs.quansight.org/blog/2021/07/moving-scipy-to-meson)
 [^11]: https://en.wikipedia.org/wiki/Rpath
 [^12]: https://packaging.python.org/en/latest/specifications/binary-distribution-format/
 [^13]: https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order
