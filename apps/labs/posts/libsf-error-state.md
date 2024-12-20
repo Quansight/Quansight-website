@@ -36,10 +36,10 @@ Python. Users who spend their time in the interpreted shell may not be aware of 
 underneath. Journeying deeper into the stack, it can be surprising to see the level of work that can go into making even
 a relatively simple feature work smoothly.
 
-## NumPy Universal functions
-
-The simple feature in question is error handling for mathematical functions in `scipy.special` that operate
+Here, the simple feature in question is error handling for mathematical functions in `scipy.special` that operate
 elementwise over NumPy arrays. Let's look into this more closely.
+
+## NumPy Universal functions
 
 A NumPy [`ndarray`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) represents an arbitrary
 dimensional array of elements of the same data type, stored in a continguous buffer at the machine level. A [universal
@@ -47,9 +47,9 @@ function](https://numpy.org/doc/stable/reference/ufuncs.html) or ufunc for short
 applies a transform to each element of an `ndarray` by looping and operating elementwise over the underlying contiguous
 buffer in efficient native code.
 
-Here's the ufunc [`np.sqrt`](https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html) in action:
+Here's the ufunc `np.sqrt` in action:
 
-```
+```python
 In  [1]: import numpy as np
 
 In  [2]: A = np.arange(1, 11, dtype=float)
@@ -64,11 +64,10 @@ array([1.        , 1.41421356, 1.73205081, 2.        , 2.23606798,
 
 ```
 
-For large arrays, the speedup from applying `np.sqrt` over an `ndarray` rather than
-[`math.sqrt`](https://docs.python.org/3/library/math.html#math.sqrt) over each element of a list is significant. On my
-laptop I witnessed:
+For large arrays, the speedup from applying `np.sqrt` over an `ndarray` rather than `math.sqrt` over each element of
+a list is significant. On my laptop I witnessed:
 
-```
+```python
 In  [1]: import numpy as np
 
 In  [2]: A = np.arange(1, 1000000, dtype=float)
@@ -84,11 +83,10 @@ In  [5]: %timeit [math.sqrt(t) for t in B]
 
 ## Error handling
 
-What should happen if one gives invalid input to a ufunc? If we pass a negative
-[`float`](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex) to `math.sqrt` a
-[`ValueError`](https://docs.python.org/3/library/exceptions.html#ValueError) is raised.[^3]
+What should happen if one gives invalid input to a ufunc? If we pass a negative `float` to `math.sqrt`
+a `ValueError` is raised.[^3]
 
-```
+```python
 In  [1]: import math
 
 In  [2]: math.sqrt(-1.0)
@@ -103,7 +101,7 @@ What if one applies a ufunc over a large array and only a small number of inputs
 raise a `ValueError` even though almost every calculation succeeded and produced a useful result? Fortunately, that's
 not what happens:
 
-```
+```python
 In  [1]: import numpy as np
 
 In  [2]: A = np.arange(-1, 1000, dtype=float)
@@ -172,10 +170,8 @@ NumPy has over 60 [ufuncs available](https://numpy.org/doc/stable/reference/ufun
 of mathematical functions and operations, but more specialized functions useful in the sciences and engineering are out
 of scope. Ufuncs for over 230 such functions can be found instead in `scipy.special`.
 
-Just for fun, let's use
-[`scipy.special.gamma`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gamma.html), which implements a
-continuous extension of the factorial function called the [Gamma function](https://en.wikipedia.org/wiki/Gamma_function),
-to reproduce a plot from the Wikipedia article
+Just for fun, let's use `scipy.special.gamma`, which implements a continuous extension of the factorial function called
+the [Gamma function](https://en.wikipedia.org/wiki/Gamma_function), to reproduce a plot from the Wikipedia article
 ["_Volume of an n-ball_"](https://en.wikipedia.org/wiki/Volume_of_an_n-ball). The plot shows how the volume of a solid
 multi-dimensional sphere depends on the dimension `n` when the radius `R` is one of 0.9, 1.0, or 1.1.
 
@@ -220,7 +216,7 @@ which outputs:
 What if one of the ufuncs in `scipy.special` recieves an array with some invalid elements? The Gamma function has
 singularities at non-positive integers, similar to how `1 / x` has a singularity at 0.
 
-```
+```python
 In  [1]: import numpy as np
 
 In  [2]: import scipy.special as special
@@ -316,21 +312,19 @@ The expected error was not being raised.
     >>> _ = sc.seterr(**olderr)
 ```
 
-[`gammaln`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gammaln.html) was one of a handful of
-ufuncs moved to the new extension module.
+`special.gammaln` was one of a handful of ufuncs moved to the new extension module.
 
 Both extension modules contained a separate copy of the state for managing error handling policies, but the user facing
 `special.errstate` could only see and change the state from the first extension module. While investigating, we also
 found that, for some reason, there was a separate extension module just for the function
-[`ellip_harm_2`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.ellip_harm_2.html#scipy.special.ellip_harm_2).
+[`special.ellip_harm_2`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.ellip_harm_2.html#scipy.special.ellip_harm_2).
 As expected, `special.errstate` did not and had never worked for `ellip_harm_2` either, but since there were no relevant
 tests, no one knew.
 
 We saw three options:
 
-1. Have the Python interface for modifying the error handling state (`special.errstate` and
-   [`special.seterr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.seterr.html)) update the state
-   in each extension module, taking care that the state remains synchronized.
+1. Have the Python interface for modifying the error handling state (`special.errstate` and `special.seterr` update the
+   state in each extension module, taking care that the state remains synchronized.
 
 2. Extract the error handling state and primitives for managing it into a shared library that would be linked with
    each extension module.
@@ -498,7 +492,7 @@ compiler toolchain. SciPy supports a wide range of platforms in aim of its goal 
 computing tools and the greatest challenge turned out to be getting things to work on each of them. Several times, just
 as we thought everything was finally working, another quirk would pop up that needed to be addressed.
 
-### Path troubles
+## Path troubles
 
 The initial challenge was finding the right invocations to give to the [Meson build system](https://mesonbuild.com/)
 used by SciPy.[^8] Extension modules are configured in the `meson.build` files spread across SciPy's source tree and we
@@ -572,7 +566,7 @@ The `RPATH` tells the dynamic linker where to look for shared libraries.
 To get things to work with `dev.py`, I needed to explicitly set the `RPATH` in Meson by adding `install_rpath:'$ORIGIN'`
 to each extension module. `'$ORIGIN'` in this case means to search in the same folder as the extension module.
 
-### Building Wheels on Windows
+## Building Wheels on Windows
 
 After setting `install_dir` and `install_rpath` correctly, all but one of SciPy's CI jobs were passing. The sole failing
 job involved building a wheel on Windows. A
@@ -625,7 +619,7 @@ One week in, all CI jobs were passing and the [PR](https://github.com/scipy/scip
 `libsf_error_state` was merged. We did it! We fixed the bug we'd introduced in `special.errstate` with months to go
 before the next SciPy release — or so we thought.
 
-### Breaking SciPy for MSVC builds
+## Breaking SciPy for MSVC builds
 
 On May 30th, SciPy maintainer and conda-forge core member [@h-vetinari](https://github.com/h-vetinari) posted a comment
 on his open PR, [scipy-feedstock/gh-277](https://github.com/conda-forge/scipy-feedstock/pull/277). The first release
@@ -643,7 +637,7 @@ were Windows builds in CI, they all used the [MinGW](https://en.wikipedia.org/wi
 a Clang compiler driver that aims for compatability with MSVC. Clang-cl is used for Windows builds in conda-forge and we had run into
 another platform specific difference.
 
-Fortunately, h-vetinari knew what the problem was. On Linux, Mac OS (and Windows while using MinGW), symbols from shared
+Fortunately, h-vetinari knew what the problem was. On Linux, macOS (and Windows while using MinGW), symbols from shared
 libraries are exported by default, but on Windows with MSVC or Clang-cl they must be explicitly exported from shared
 libraries and explicitly imported into consumers by annotating source code with special compiler directives:
 [`__declspec(dllexport)`](https://learn.microsoft.com/en-us/cpp/build/exporting-from-a-dll-using-declspec-dllexport?view=msvc-170)
@@ -653,7 +647,7 @@ for imports.
 
 He had a recipe ready to use: defining and using macros which conditionally compiled to the right thing depending on their context.
 
-```C++
+```c
 // SCIPY_DLL
 // inspired by https://github.com/abseil/abseil-cpp/blob/20240116.2/absl/base/config.h#L736-L753
 //
@@ -678,7 +672,7 @@ back the release date. A couple weeks later, fellow Quansight Labs member and LF
 Singh ([@czgdp1807](https://github.com/czgdp1807)) submitted [a PR](https://github.com/scipy/scipy/pull/20985) to plug the
 gap in SciPy's CI coverage.
 
-### Thread safety
+## Thread safety
 
 In the introduction I'd mentioned that CPython's global interpreter lock (GIL) makes it easier to extend Python with C
 or other compiled languages since one doesn't need to worry about the thread safety of wrapped code. Still, being able
@@ -702,7 +696,7 @@ Margffoy ([@andfoy](https://github.com/andfoy)) — a member of Quansight Labs'
 [free-threaded Python team](https://labs.quansight.org/blog/free-threaded-python-rollout) — to ensure
 thread safety by declaring the array `sf_error_actions` thread local. This eliminates the data-race by making it so each
 thread gets its own separate copy of the array. Edgar and the others on the free-threaded Python team have been doing
-great work improving support for free-threaded Python across the ecosystem for much of this past year.[^9]
+great work improving support for free-threaded Python across the ecosystem for much of this past year.
 
 In a curious reversal, it is now (the `win32` flavor of) MinGW that is causing trouble due to lack of support for
 thread local variables.
