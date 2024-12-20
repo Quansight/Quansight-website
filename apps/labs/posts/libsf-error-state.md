@@ -38,7 +38,7 @@ a relatively simple feature work smoothly.
 
 ## NumPy Universal functions
 
-The simple feature in this case is error handling for mathematical functions in `scipy.special` which operate
+The simple feature in question is error handling for mathematical functions in `scipy.special` that operate
 elementwise over NumPy arrays. Let's look into this more closely.
 
 A NumPy [`ndarray`](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html) represents an arbitrary
@@ -174,7 +174,8 @@ of scope. Ufuncs for over 230 such functions can be found instead in `scipy.spec
 
 Just for fun, let's use
 [`scipy.special.gamma`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gamma.html), which implements a
-continuous extension of the factorial function called the Gamma function, to reproduce a plot from the Wikipedia article
+continuous extension of the factorial function called the [Gamma function](https://en.wikipedia.org/wiki/Gamma_function),
+to reproduce a plot from the Wikipedia article
 ["_Volume of an n-ball_"](https://en.wikipedia.org/wiki/Volume_of_an_n-ball). The plot shows how the volume of a solid
 multi-dimensional sphere depends on the dimension `n` when the radius `R` is one of 0.9, 1.0, or 1.1.
 
@@ -244,7 +245,7 @@ module](https://docs.python.org/3/extending/extending.html) that's part of NumPy
 module for managing the state for error handling policies. The ufuncs in `scipy.special` come from a different extension
 module in SciPy. Extension modules from separate projects are like separate worlds, and cannot communicate with one
 another except through their Python interfaces. SciPy instead has its own context manager:
-[scipy.special.errstate](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.errstate.html) that
+[`scipy.special.errstate`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.errstate.html) that
 mirrors `np.errstate`.
 
 ```
@@ -468,6 +469,8 @@ sf_action_t scipy_sf_error_get_action(sf_error_t code)
 }
 ```
 
+Using the terminology from before, these are the symbols that we want to export from the shared library.
+
 If a user runs the following in an IPython session
 
 ```python
@@ -489,18 +492,18 @@ to take.
 ## The many battles to actually ship it
 
 The shared library `libsf_error_state`'s contents are fairly simple, but how does one actually ship a shared library
-within a Python package like SciPy? Even now, we've yet to find any prior examples of a Python package that contains
-an internal shared library. The process for creating and using shared libraries depends on the operating system and
+within a Python package like SciPy? When we started out, we weren't even aware of any Python packages that contain an
+internal shared library. The process for creating and using shared libraries depends on the operating system and
 compiler toolchain. SciPy supports a wide range of platforms in aim of its goal to democratize access to scientific
 computing tools and the greatest challenge turned out to be getting things to work on each of them. Several times, just
 as we thought everything was finally working, another quirk would pop up that needed to be addressed.
 
 ### Path troubles
 
-The initial challenge was finding the right invocations to give to the [Meson build system](https://mesonbuild.com/) used by SciPy.[^8] Extension
-modules are configured in the `meson.build` files spread across SciPy's source tree and we needed to figure out how to
-set up a shared library and link it into each of the special function ufunc extension modules. Irwin and I begin working
-on this independently, comparing notes as we went.
+The initial challenge was finding the right invocations to give to the [Meson build system](https://mesonbuild.com/)
+used by SciPy.[^8] Extension modules are configured in the `meson.build` files spread across SciPy's source tree and we
+needed to figure out how to set up a shared library and link it into each of the special function ufunc extension
+modules. Irwin and I begin working on this independently, comparing notes as we went.
 
 The first hiccup is that the following invocations were working on Irwin's Mac.
 
@@ -563,8 +566,8 @@ sf_error_state_lib = shared_library('sf_error_state', # Name of the library
 
 Even after this, I was still seeing the same error. I asked Ralf about it, and found what happens is that `pip`
 goes through [meson-python](https://github.com/mesonbuild/meson-python) while `dev.py` uses Meson directly.
-`meson-python` takes care to set the [`RPATH`](https://en.wikipedia.org/wiki/Rpath) for each extension module,
-which tells the dynamic linker where to look for shared libraries.
+`meson-python` takes care to set the [`RPATH`](https://en.wikipedia.org/wiki/Rpath) for each extension module.
+The `RPATH` tells the dynamic linker where to look for shared libraries.
 
 To get things to work with `dev.py`, I needed to explicitly set the `RPATH` in Meson by adding `install_rpath:'$ORIGIN'`
 to each extension module. `'$ORIGIN'` in this case means to search in the same folder as the extension module.
@@ -768,11 +771,11 @@ This work was supported by the 2020 NASA ROSES grant, _Reinforcing the Foundatio
 
 [^4]:
     Those using `scipy<1.15` will see `inf` instead of `nan` at negative integers due to a bug in `special.gamma`
-    which was fixed in [the PR scipy/#21827](https://github.com/scipy/scipy/pull/21827).If you're curious why
-    `special.gamma(0.)` evaluated to `inf`, note that the IEE-754 floating point standard requires signed zeros `+0.`
-    and `-0.` as described in [Signed zero Wikipedia article](https://en.wikipedia.org/wiki/Signed_zero).
-    `special.gamma(+0.)` evaluates the limit of the Gamma function as `x` approaches `0` from the right. Signed zeros
-    can be used to ensure the correct sign is preserved when underflow occurs.
+    which was fixed in the PR [scipy/#21827](https://github.com/scipy/scipy/pull/21827).If you're curious why
+    `special.gamma(0.)` evaluated to `+inf`, note that the IEE-754 floating point standard requires
+    [signed zeros](https://en.wikipedia.org/wiki/Signed_zero) `+0.` and `-0.`.
+    `special.gamma(-0.)` and `special.gamma(+0.)` evaluate the limit of the Gamma function as `x` approaches `0` from the
+    left and right respectively.
 
 [^5]:
     We could have stuck to one extension module by making it more complicated, but the idea was to build the simpler
