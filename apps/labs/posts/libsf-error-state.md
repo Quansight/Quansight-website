@@ -316,9 +316,8 @@ The expected error was not being raised.
 
 Both extension modules contained a separate copy of the state for managing error handling policies, but the user facing
 `special.errstate` could only see and change the state from the first extension module. While investigating, we also
-found that, for some reason, there was a separate extension module just for the function
-[`special.ellip_harm_2`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.ellip_harm_2.html#scipy.special.ellip_harm_2).
-As expected, `special.errstate` did not and had never worked for `ellip_harm_2` either, but since there were no relevant
+found that, for some reason, there was a separate extension module just for the function `special.ellip_harm_2`. As
+expected, `special.errstate` did not and had never worked for `ellip_harm_2` either, but since there were no relevant
 tests, no one knew.
 
 We saw three options:
