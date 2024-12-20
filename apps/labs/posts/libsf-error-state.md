@@ -753,8 +753,9 @@ that we at least have _a_ portable way to share global state between extension m
 
 Before we finish, one more gem: in [another GitHub comment from
 2016](https://github.com/scipy/scipy/issues/6681#issuecomment-254192679), currently inactive SciPy BDFL Pauli Virtanen
-suggested to "make `sf_error` error handling thread-local (which probably should be done in any case)". Over eight years
-later this is finally happening. I should probably go back and read old comment threads more often.
+([@pv](https://github.com/pv)) suggested to "make `sf_error` error handling thread-local (which probably should be done
+in any case)". Over eight years later this is finally happening. I should probably go back and read old comment threads
+more often.
 
 ### Funding acknowledgements
 
