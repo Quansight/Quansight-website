@@ -5,11 +5,11 @@ authors: [marco-gorelli]
 description: 'Support everything, depend on (almost) nothing'
 category: [PyData ecosystem]
 featuredImage:
-  src: ...
-  alt: ''
+  src: /posts/narwhals-pycapsule/featured.jpg
+  alt: 'Cat looking out window, with dataframe logos outside, original image by  Lucy Jackline https://unsplash.com/photos/a-cat-sitting-on-a-window-sill-looking-out-a-window-O896LIqr2vc'
 hero:
-  imageSrc: ...
-  imageAlt: ''
+  imageSrc: /posts/narwhals-pycapsule/hero.jpg
+  imageAlt: 'Cat looking out window, with dataframe logos outside, original image by  Lucy Jackline https://unsplash.com/photos/a-cat-sitting-on-a-window-sill-looking-out-a-window-O896LIqr2vc'
 ---
 
 # How the Arrow PyCapsule Interface and Narwhals universal dataframe support 
