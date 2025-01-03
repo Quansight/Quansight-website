@@ -48,7 +48,7 @@ knowledge of the incoming dataframe?
 An example of a Rust solution via Pyo3 can be found at [pycapsule-demo/src/lib.rs](https://github.com/MarcoGorelli/pycapsule-demo/blob/6aad64be26ebbfc8526f26695544bfc6436e3266/src/lib.rs#L9-L56).
 
 This blog post isn't about explaining all the technical details behind the
-PyCapsule Interfae (interested readers are welcome to read the docs), but about
+PyCapsule Interface (interested readers are welcome to read the docs), but about
 its consequences. Check this out:
 
 ```python
