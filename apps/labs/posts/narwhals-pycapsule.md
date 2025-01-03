@@ -15,19 +15,21 @@ hero:
 # How the Arrow PyCapsule Interface and Narwhals universal dataframe support 
 
 If you were writing a dataframe-consuming library in 2015, you'd probably have
-added pandas support and called it a day. However, it's not 2015, but 2025, so if you do that today you know full well that you'll be inundated with 
-endless "can you support Polars / DuckDB / PyArrow / Modin / ..." requests. Yet
-you have no interest in understanding the subtle differences between them - what can you do?
+added pandas support and called it a day. However, it's not 2015, but 2025, so if you do that
+today you know full well that you'll be inundated with endless "can you support
+Polars / DuckDB / PyArrow / Modin / ..." requests. Yet you have no interest in understanding
+the subtle differences between them - what can you do?
 
 Today, you'll learn about exactly what you can do:
 
-- The Arrow PyCapsule Interface, if you need access to dataframe data from a low-level language like C or Rust.
-- Narwhals, if you want to keep your logic in Python.
+- The [Arrow PyCapsule Interface](https://arrow.apache.org/docs/format/CDataInterface/PyCapsuleInterface.html),
+  if you need access to dataframe data from a low-level language like C or Rust.
+- [Narwhals](https://github.com/narwhals-dev/narwhals), if you want to keep your logic in Python.
 - Narwhals _and_ the PyCapsule Interface together, if you want it all!
 
-## `sum_i64_column` - "slow down, Professor!"
+## `agnostic_sum_i64_column` - "slow down, Professor!"
 
-We'll learn about how you make a dataframe-agnostic function `sum_i64_column`.
+We'll learn about how you make a dataframe-agnostic function `agnostic_sum_i64_column`.
 Here are the requirements:
 
 - Given a dataframe `df` and a column name `column_name`, it should compute
@@ -54,18 +56,18 @@ its consequences. Check this out:
 >>> import pandas as pd
 >>> import polars as pl
 >>> import pyarrow as pa
->>> from pycapsule_demo import sum_i64_column
+>>> from pycapsule_demo import agnostic_sum_i64_column
 >>> df_pl = pl.DataFrame({'a': [1,1,2], 'b': [4,5,6]})
 >>> df_pd = pd.DataFrame({'a': [1,1,2], 'b': [4,5,6]})
 >>> df_pa = pa.table({'a': [1,1,2], 'b': [4,5,6]})
 >>> rel = duckdb.sql("select * from df_pd")
->>> sum_i64_column(df_pl, column_name="a")
+>>> agnostic_sum_i64_column(df_pl, column_name="a")
 6
->>> sum_i64_column(df_pd, column_name="a")
+>>> agnostic_sum_i64_column(df_pd, column_name="a")
 6
->>> sum_i64_column(df_pa, column_name="a")
+>>> agnostic_sum_i64_column(df_pa, column_name="a")
 6
->>> sum_i64_column(rel, column_name="a")
+>>> agnostic_sum_i64_column(rel, column_name="a")
 6
 ```
 Our function works agnostically for any of these dataframes, without us having
@@ -103,15 +105,86 @@ This is where Narwhals comes into the game.
 
 ## Python solution: Narwhals
 
-...
+Narwhals is a lightweight, dependency-free and extensible compatibility layer between
+dataframe libraries, which lets you write "Dataframe X in -> Dataframe X out"-style
+pipelines.  To use it to write a dataframe-agnostic function, you need to follow three
+steps:
 
-## Narwhals + PyCapsule Interface: Tusk and Rust
+- Call `narwhals.from_native` on the user's object.
+- Use the [Narwhals API](https://narwhals-dev.github.io/narwhals/api-reference/).
+- If you want to return to the user an object of the same kind that they started with,
+  call `to_native`.
 
-...
+In this case, a Narwhals version of `agnostic_sum_i64_column` could be:
+
+```python
+import narwhals as nw
+from narwhals.typing import IntoFrame
+
+
+def agnostic_sum_i64_column_narwhals(df_native: IntoFrame, column_name: str) -> int:
+    df = nw.from_native(df_native)
+    schema = df.collect_schema()
+    if column_name not in schema:
+        msg = f"Column '{column_name}' not found, available columns are: {schema.names()}."
+        raise ValueError(msg)
+    if (dtype := schema[column_name]) != nw.Int64:
+        msg = f"Column '{column_name}' is of type {dtype}, expected Int64"
+        raise TypeError(msg)
+    return df[column_name].sum()
+```
+Like above, we can now pass different inputs and get the same result:
+```python
+>>> agnostic_sum_i64_column_narwhals(df_pl, column_name="a")
+6
+>>> agnostic_sum_i64_column_narwhals(df_pd, column_name="a")
+6
+>>> agnostic_sum_i64_column_narwhals(df_pa, column_name="a")
+6
+>>> agnostic_sum_i64_column_narwhals(rel, column_name="a")
+6
+```
+
+## Narwhals vs PyCapsule Interface: when to use one over the other, and when to use them together
+
+If the Narwhals API is extensive enough for your use-case, then this is arguably
+a simpler and easier solution than writing your own Rust function. On the other hand,
+if you write a Rust function using the PyCapsule Interface, then you have complete
+control over what do with the data. So, when should you use which?
+
+Let's cover some scenarios:
+
+- If you want your dataframe logic to stay completely lazy where possible: use Narwhals.
+  This is because the PyCapsule Interface requires you to materialise the data into memory.
+- You want complete control over which operations happen on your data: use the
+  PyCapsule Interface. If you have the necessary Rust / C skills, there should be no limit
+  to how complex and bespoke you make your data processing.
+- You want to keep your library logic in pure-Python and without heavy dependencies, so
+  it's easy to maintain and install: use Narwhals. Packaging a pure-Python project is very
+  easy, if you need to get Rust or C in there then it becomes trickier.
+- You want to do part of your processing in Python, and part of it in Rust - **use both**!
+  An example of a library which does this is [Vegafusion](https://vegafusion.io/).
 
 ## What about Polars Plugins?
 
-- Pro: work with Polars LazyFrames, query optimiser can understand them
-- Cons: specific to Polars
+We wrote some Rust code earlier to write custom logic. You may have come across another way
+to do this in Polars, which is the [Expression Plugin](https://marcogorelli.github.io/polars-plugins-tutorial/)
+mechanism. How does that differ from custom code written with the PyCapsule Interface?
+
+- Pros: Polars Plugins slot in seamlessly with Polars' lazy execution.
+- Cons: Polars Plugins are specific to Polars, so won't work with other dataframe libraries.
+
+Does the ecosystem need a standardised way of writing custom logic in a low-level language such
+that it's not necessary to materialise data into memory? Perhaps - watch this space ;)
 
 # Conclusion
+
+As the Dataframe ecosystem grows, so does the need for tools which support any of them as opposed
+to being tightly-coupled to pandas. We've learned about how we can use the PyCapsule Interface
+to write dataframe-agnostic code from a low-level language such as Rust or C. We also learned
+about how we can do that using Narwhals entirely from Python, and when it may makes sense to use
+one, the other, or even both approaches together.
+
+If you would like to contribute with efforts to standardise the data ecosystem and enable innovation,
+or would just like to speak with data experts about how we can help your organisation, please
+[book a call](https://quansight.com/about-us/#bookacallform) with us, we'd love to hear from you!
