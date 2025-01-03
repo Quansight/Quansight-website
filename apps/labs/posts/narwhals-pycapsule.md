@@ -1,5 +1,5 @@
 ---
-title: 'Arrow PyCapsule Interface and Narwhals: Rust and Tusk for universal dataframe support'
+title: 'Arrow PyCapsule Interface and Narwhals for universal dataframe support'
 published: December 20, 2024
 authors: [marco-gorelli]
 description: 'Support everything, depend on (almost) nothing'
@@ -12,7 +12,7 @@ hero:
   imageAlt: 'Cat looking out window, with dataframe logos outside, original image by  Lucy Jackline https://unsplash.com/photos/a-cat-sitting-on-a-window-sill-looking-out-a-window-O896LIqr2vc'
 ---
 
-# How the Arrow PyCapsule Interface and Narwhals universal dataframe support 
+# How the Arrow PyCapsule Interface and Narwhals universal enable dataframe support 
 
 If you were writing a dataframe-consuming library in 2015, you'd probably have
 added pandas support and called it a day. However, it's not 2015, but 2025, so if you do that
@@ -20,7 +20,7 @@ today you know full well that you'll be inundated with endless "can you support
 Polars / DuckDB / PyArrow / Modin / ..." requests. Yet you have no interest in understanding
 the subtle differences between them - what can you do?
 
-Today, you'll learn about exactly what you can do:
+Today, you'll learn about ways to support different kinds of dataframes:
 
 - The [Arrow PyCapsule Interface](https://arrow.apache.org/docs/format/CDataInterface/PyCapsuleInterface.html),
   if you need access to dataframe data from a low-level language like C or Rust.
@@ -107,7 +107,7 @@ This is where Narwhals comes into the game.
 
 Narwhals is a lightweight, dependency-free and extensible compatibility layer between
 dataframe libraries, which lets you write "Dataframe X in -> Dataframe X out"-style
-pipelines.  To use it to write a dataframe-agnostic function, you need to follow three
+functions.  To use it to write a dataframe-agnostic function, you need to follow three
 steps:
 
 - Call `narwhals.from_native` on the user's object.
@@ -115,7 +115,7 @@ steps:
 - If you want to return to the user an object of the same kind that they started with,
   call `to_native`.
 
-In this case, a Narwhals version of `agnostic_sum_i64_column` could be:
+In this case, a Narwhals version of `agnostic_sum_i64_column` would look like this:
 
 ```python
 import narwhals as nw
@@ -155,13 +155,14 @@ control over what do with the data. So, when should you use which?
 Let's cover some scenarios:
 
 - If you want your dataframe logic to stay completely lazy where possible: use Narwhals.
-  This is because the PyCapsule Interface requires you to materialise the data into memory.
+  This is because the PyCapsule Interface requires you to materialise the data into memory,
+  whereas Narwhals has both eager and lazy APIs.
 - You want complete control over which operations happen on your data: use the
   PyCapsule Interface. If you have the necessary Rust / C skills, there should be no limit
   to how complex and bespoke you make your data processing.
 - You want to keep your library logic in pure-Python and without heavy dependencies, so
   it's easy to maintain and install: use Narwhals. Packaging a pure-Python project is very
-  easy, if you need to get Rust or C in there then it becomes trickier.
+  easy, whereas if you need to get Rust or C in there then it becomes trickier.
 - You want to do part of your processing in Python, and part of it in Rust - **use both**!
   An example of a library which does this is [Vegafusion](https://vegafusion.io/).
 
@@ -171,11 +172,13 @@ We wrote some Rust code earlier to write custom logic. You may have come across 
 to do this in Polars, which is the [Expression Plugin](https://marcogorelli.github.io/polars-plugins-tutorial/)
 mechanism. How does that differ from custom code written with the PyCapsule Interface?
 
-- Pros: Polars Plugins slot in seamlessly with Polars' lazy execution.
+- Pros: Polars Plugins slot in seamlessly with Polars' lazy execution. This can enable massive
+  time and cost savings, see [Reverse-Geocoding in AWS Lambda: Save Time and Money Using Polars Plugins](https://quansight.com/post/reverse-geocoding-aws-lambda-using-polars-plugin/)
+  for an example.
 - Cons: Polars Plugins are specific to Polars, so won't work with other dataframe libraries.
 
-Does the ecosystem need a standardised way of writing custom logic in a low-level language such
-that it's not necessary to materialise data into memory? Perhaps - watch this space ;)
+If Polars is the only library you need to support and would like help writing Polars Plugins,
+[we can help](https://quansight.com/about-us/#bookacallform)!
 
 # Conclusion
 
