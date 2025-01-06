@@ -165,7 +165,10 @@ Let's cover some scenarios:
   it's easy to maintain and install: use Narwhals. Packaging a pure-Python project is very
   easy, especially compared with if you need to get Rust or C in there.
 - If you want to do part of your processing in Python, and part of it in Rust - **use both**!
-  An example of a library which does this is [Vegafusion](https://vegafusion.io/).
+  An example of a library which does this is [Vegafusion](https://vegafusion.io/). This is
+  facilitated by the fact that Narwhals exposes the PyCapsule Interface for both
+  [import](https://narwhals-dev.github.io/narwhals/api-reference/narwhals/#narwhals.from_arrow)
+  and [export](https://narwhals-dev.github.io/narwhals/api-reference/dataframe/#narwhals.dataframe.DataFrame.__arrow_c_stream__).
 
 ## What about Polars Plugins?
 
