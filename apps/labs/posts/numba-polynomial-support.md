@@ -3,7 +3,7 @@ title: 'Adding support for polynomials to Numba'
 authors: [kristian-minchev]
 published: November 8, 2023
 description: 'My work was focused on improving NumPy support in Numba, with focus on the polynomial package.'
-category: [PyData ecosystem]
+category: [PyData ecosystem, Internship]
 featuredImage:
   src: /posts/numba-polynomial-support/numba-polynomial-featured-50pct.png
   alt: >

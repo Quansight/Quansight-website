@@ -25,12 +25,14 @@ make mistakes. If you learn a bit of
 Spanish, you might think that "estoy embarazado" means "I'm embarrassed", but it actually
 means "I'm pregnant". Similarly, after learning a bit of pandas and Polars, you might
 expect
+
 ```python
 import pandas as pd
 import polars as pd
 
 print((3 in pd.Series([1,2,3])) == (3 in pl.Series([1,2,3])))
 ```
+
 to print `'True'` - but not so! pandas checks if `3` is in the index, whereas Polars checks
 if `3` is in the values.
 
@@ -97,7 +99,7 @@ Nonetheless, does it work? Is it reliable?
   raise unnecessarily in some versions. It's already used by the `seaborn` and
   `plotly` plotting libraries.
 - Converting from pandas: unreliable, don't use it. There are cases when the results
-  are garbage values. These have generally been fixed, and will be available in
+  are "garbage". These have generally been fixed, and will be available in
   pandas 3.0. For now, however, if you're using the interchange protocol to convert
   to anything other pandas, then you may want to proceed with great care.
 

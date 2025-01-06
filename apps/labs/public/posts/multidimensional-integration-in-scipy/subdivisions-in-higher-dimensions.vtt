@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.000
+An undulating function is shown plotted in 3D. The function is slowly spinning.
+
+2
+00:00:03.000 --> 00:00:05.000
+The camera zooms out to show the function from a top-down view.
+
+3
+00:00:05.000 --> 00:00:08.000
+A square white mesh covers a portion of the top of the function. A formula shows the integral of f(x, y) over the intervals [-2, 2] for x and [-2, 2] for y. Text appears which says "Subdivide!".
+
+4
+00:00:08.000 --> 00:00:15.000
+The mesh and "Subidivide!" text disappears. A new mesh where the original was appears in 4 sections, fading in from a clockwise direction. This mesh is finer than the original mesh. Text appears on the top right section which says "Subdivide!" again.
+
+5
+00:00:15.000 --> 00:00:19.000
+The top right section of the mesh and the "Subdivide!" text disappears. A new mesh where the original top right section was appears again, fading in from a clockwise direction.
