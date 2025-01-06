@@ -1,5 +1,5 @@
 ---
-title: 'Arrow PyCapsule Interface and Narwhals for universal dataframe support'
+title: 'Universal dataframe support with the Arrow PyCapsule Interface + Narwhals'
 published: January 6, 2025
 authors: [marco-gorelli]
 description: 'Support everything, depend on (almost) nothing'
@@ -12,7 +12,7 @@ hero:
   imageAlt: 'Cat looking out window, with dataframe logos outside, original image by  Lucy Jackline https://unsplash.com/photos/a-cat-sitting-on-a-window-sill-looking-out-a-window-O896LIqr2vc'
 ---
 
-# How the Arrow PyCapsule Interface and Narwhals universal enable dataframe support 
+# Universal dataframe support with the Arrow PyCapsule Interface + Narwhals
 
 If you were writing a dataframe-consuming library in 2015, you'd probably have
 added pandas support and called it a day. However, it's not 2015, but 2025, so if you do that
