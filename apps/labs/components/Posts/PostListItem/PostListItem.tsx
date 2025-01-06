@@ -47,7 +47,9 @@ export const PostListItem: FC<TPostListItem> = ({ post, variant }) => (
           },
         )}
       >
-        <Link href={`/blog/${post.slug}`}>{post.meta.title}</Link>
+        <Link href={`/blog/${post.slug}`}>
+          {post.meta.title}
+        </Link>
       </h3>
       <p className="text-[1.2rem] font-normal leading-[2.7rem] text-black text-sans">
         By {authorsToString(post.meta.authors)}{' '}

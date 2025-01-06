@@ -37,6 +37,7 @@ will be held at the SciPy 2024 conference (co-organized by one of our team
 members, Nathan Goldbaum, together with Madicken Munk), focusing on knowledge
 and experience sharing.
 
+
 ## Free-threaded CPython - what, why, how?
 
 You may be wondering by now what "free threading" or "free-threaded CPython"
@@ -56,6 +57,7 @@ importance.
 How? It's now [easy to get started by installing a free-threaded interpreter](https://py-free-threading.github.io/installing_cpython/):
 macOS/Linux/Windows & python.org/pyenv/apt/yum/conda - your preferred option is
 probably available now.
+
 
 ## Sounds awesome - what's the catch?
 
@@ -86,11 +88,9 @@ Here are a couple of examples of such intermittent failures:
 [numpy#26690](https://github.com/numpy/numpy/issues/26690) shows an example
 where a simple call to the `.sum()` method of a numpy array fails with a
 fairly mysterious
-
 ```
 RuntimeError: Identity cache already includes the item.
 ```
-
 when used with the Python `threading` and `queue` modules. This was noticed
 in a scikit-learn CI job - it never failed in NumPy's own CI (scikit-learn has
 more tests involving parallelism). After the bug report with a reproducer was
@@ -98,11 +98,9 @@ submitted, the fix to a numpy-internal cache wasn't that hard.
 
 [pywavelets#758](https://github.com/PyWavelets/pywt/issues/758) was a report
 of another fairly obscure failure in a test using `concurrent.futures`:
-
 ```
 TypeError: descriptor '__enter__' for '_thread.RLock' objects doesn't apply to a '_thread.lock' object
 ```
-
 That looked a lot like a problem in CPython, and after some investigating it
 was found there as well [cpython#121368](https://github.com/python/cpython/issues/121368)
 and fixed fairly quickly (the fix required some deep expertise in both CPython
@@ -125,6 +123,7 @@ thread-safety issues does seem doable. That test strategy will have to be
 multi-pronged: from writing new tests and running tests in loops with `pytest-repeat` &
 co., to getting [ThreadSanitizer](https://clang.llvm.org/docs/ThreadSanitizer.html)
 to work in CI and doing integration-level and real-world testing with users.
+
 
 ## The road ahead & what our team will be working on
 
@@ -182,6 +181,7 @@ the ecosystem adopt free-threaded CPython, from answering questions
 to helping with debugging - please don't hesitate to reach out or ping one of
 us directly on GitHub!
 
+
 ## Conclusion & acknowledgements
 
 We're really excited about what is becoming possible with free-threaded CPython!
@@ -199,3 +199,4 @@ Council, for its thoughtful approach to (and acceptance of) PEP 703, to the
 many library maintainers and community members who are proactively adding
 support to their own projects or guide and review our contributions whenever we
 work on projects we are not ourselves maintainers of.
+

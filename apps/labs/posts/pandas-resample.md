@@ -55,14 +55,12 @@ df = pd.DataFrame({
 })
 print(df.resample('ME', on='date')['price'].mean())
 ```
-
 ```
 date
 2020-01-31    2.5
 2020-02-29    3.0
 Freq: ME, Name: price, dtype: float64
 ```
-
 We got a Series where the values are `[2.5, 3]` and the index `['2020-01-31', '2020-02-29']`.
 How should we interpret the index? Does it contain the lower-bound or the upper-bound of each
 bucket?
@@ -86,7 +84,6 @@ probably get mixed answers.
 ```python
 print(df.resample('MS', on='date')['price'].mean())
 ```
-
 ```
 2020-01-01    2.5
 2020-02-01    3.0
@@ -96,8 +93,8 @@ Freq: MS, Name: price, dtype: float64
 The values are the same, but the index has changed. It now consistently shows
 the start of each bucket:
 
-- Label `'2020-01-01'` corresponds to the bucket `['2020-01-01', '2020-02-01')`
-- Label `'2020-02-01'` corresponds to the bucket `['2020-02-01', '2020-03-01')`
+- Label `'2020-01-01'` corresponds to the bucket  `['2020-01-01', '2020-02-01')`
+- Label `'2020-02-01'` corresponds to the bucket  `['2020-02-01', '2020-03-01')`
 - ...
 
 Much simpler to reason about! In this case, the Series values (`2.5` and `3.0`) are

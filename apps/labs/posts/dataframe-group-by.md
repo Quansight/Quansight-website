@@ -51,11 +51,9 @@ shape: (6, 3)
 ```
 
 A group-by operation produces a single row per group:
-
 ```python
 df.group_by('id').agg('sales')
 ```
-
 ```
 shape: (2, 2)
 ┌─────┬───────────┐
@@ -69,11 +67,9 @@ shape: (2, 2)
 ```
 
 If we want a single scalar value per group, we can use a reduction ('mean', 'sum', 'std', ...):
-
 ```python
 df.group_by('id').agg(pl.sum('sales'))
 ```
-
 ```python
 shape: (2, 2)
 ┌─────┬───────┐
@@ -108,7 +104,6 @@ that no library which copies the pandas API can truly optimise such an
 operation in the general case.
 
 You might be wondering whether we can just do the following:
-
 ```python
 df.groupby('id').apply(
     lambda df: df[df['sales'] > df['sales'].mean()]['views'].max()
@@ -118,11 +113,9 @@ df.groupby('id').apply(
 However, that uses a Python `lambda` function and so is generally going to be inefficient.
 
 Another solution one might come up with is this one:
-
 ```python
 df[df['sales'] > df.groupby('id')['sales'].transform('mean')].groupby('id')['views'].max()
 ```
-
 It's not as bad as the `apply` solution above, but it still looks overly complicated and requires
 two group-bys.
 
@@ -134,7 +127,6 @@ There's actually a third solution, which:
 
 Realistically, few users would come up with it (most would jump straight to `apply`), but for
 completeness, we present it:
-
 ```python
 gb = df.groupby("id")
 mask = df["sales"] > gb["sales"].transform("mean")
@@ -150,11 +142,9 @@ The Polars API lets us pass [expressions](https://docs.pola.rs/user-guide/expres
 So long as you can express your aggregation as
 an expression, you can use it in a group-by setting. In this case, we can express "the maximum value
 of 'views' where 'sales' is greater than its mean" as
-
 ```python
 pl.col('views').filter(pl.col('sales') > pl.mean('sales')).max()
 ```
-
 Then, all we need to do is pass this expression to `GroupBy.agg`:
 
 ```python
@@ -162,7 +152,6 @@ df.group_by('id').agg(
     pl.col('views').filter(pl.col('sales') > pl.mean('sales')).max()
 )
 ```
-
 Wonderful! Like this, we can express the operation cleanly and without hacks, meaning that any dataframe
 implementation which follows the Polars API has the possibility to evaluate this efficiently.
 
@@ -186,3 +175,4 @@ is a common refrain among Polars users.
 If you'd like to learn about how to use Polars effectively, or how to solve problems in your organisation
 using Polars, Quansight is here to help - [please get in touch](https://quansight.com/about-us/#bookacallform) -
 we'd love to hear from you.
+
