@@ -1,6 +1,6 @@
 ---
 title: 'Arrow PyCapsule Interface and Narwhals for universal dataframe support'
-published: December 20, 2024
+published: January 1, 2024
 authors: [marco-gorelli]
 description: 'Support everything, depend on (almost) nothing'
 category: [PyData ecosystem]
@@ -96,6 +96,12 @@ True
 Because we can access the underlying data in a library-agnostic manner from
 Rust, this enables us to write functions for any kind of complex and bespoke logic
 which users of any of the above libraries can then all make use of!
+
+> **_NOTE:_** How many times can `agnostic_sum_i64_column` be called? Strictly
+> speaking, the PyCapsule Interface only guarantees that it can be called once.
+> In practice, however, all implementations that we're aware of (except for
+> DuckDB) allow for it to be called repeatedly. Discussion about the
+> DuckDB implementation is ongoing at https://github.com/duckdb/duckdb/discussions/15536.
 
 This is nice, but it may seem a little daunting. Sure, it gives us complete
 freedom over which algorithms to implement, but what if we don't need all that
