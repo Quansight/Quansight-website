@@ -124,7 +124,7 @@ handling](https://numpy.org/doc/stable/reference/routines.err.html). Here's the
 [`np.errstate`](https://numpy.org/doc/stable/reference/generated/numpy.errstate.html#numpy.errstate) context manager in
 action:
 
-```
+```python
 In  [1]: import numpy as np
 
 In  [2]: A = np.arange(-1, 1000, dtype=float)
@@ -146,7 +146,7 @@ physically recovered.
 
 `np.errstate` has us covered here too:
 
-```
+```python
 In  [1]: import numpy as np
 
 In  [2]: A = np.arange(-1, 1000, dtype=float)
@@ -488,7 +488,7 @@ The shared library `libsf_error_state`'s contents are fairly simple, but how doe
 within a Python package like SciPy? When we started out, we weren't even aware of any Python packages that contain an
 internal shared library. The process for creating and using shared libraries depends on the operating system and
 compiler toolchain. SciPy supports a wide range of platforms in aim of its goal to democratize access to scientific
-computing tools and the greatest challenge turned out to be getting things to work on each of them. Several times, just
+computing tools; the greatest challenge turned out to be getting things to work on each of them. Several times, just
 as we thought everything was finally working, another quirk would pop up that needed to be addressed.
 
 ## Path troubles
@@ -536,7 +536,7 @@ ImportError: libsf_error_state.so: cannot open shared object file: No such file 
 
 After a period of head scratching in which I pondered every possible explanation except the correct one, I showed Irwin
 what I tried and the error message I was getting. It turned out that the difference in operating systems was a red
-herring. The issue was that of the two methods for building SciPy from source for development recommended in SciPy's
+herring. The issue was that, of the two methods for building SciPy from source for development recommended in SciPy's
 [contributor
 documentation](https://docs.scipy.org/doc/scipy/building/index.html#building-from-source-for-scipy-development), I was
 using the `"python dev.py build"` workflow and he was using an editable install: `"pip install -e . --no-build-isolation"`.
@@ -545,7 +545,7 @@ extension modules were all being installed next to each other in `~/scipy/scipy/
 SciPy is installed elsewhere. Since I didn't specify where to install the shared library, it got put in the wrong
 place. I fixed things by directly configuring the `install_dir` in Meson like this:
 
-```
+```python
 sf_error_state_lib = shared_library('sf_error_state', # Name of the library
   # Implementation files contained it.
   ['sf_error_state.c'],
@@ -571,7 +571,7 @@ After setting `install_dir` and `install_rpath` correctly, all but one of SciPy'
 job involved building a wheel on Windows. A
 [wheel](https://packaging.python.org/en/latest/specifications/binary-distribution-format/) can be thought of as a
 precompiled binary for a Python package. The underlying issue was that Windows does not have support for something like
-`RPATH`, following a less configurable [set of rules](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order)
+`RPATH`, following instead a less configurable [set of rules](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order)
 for determining the search path for shared libraries.
 
 It took us a day of work to get to this point. Since things were not as straightforward as expected; I took it from here.
@@ -673,9 +673,9 @@ gap in SciPy's CI coverage.
 
 ## Thread safety
 
-In the introduction I'd mentioned that CPython's global interpreter lock (GIL) makes it easier to extend Python with C
-or other compiled languages since one doesn't need to worry about the thread safety of wrapped code. Still, being able
-to have only one thread in a running Python process execute Python code at a time is greatly limiting for multicore
+In the introduction I'd mentioned that CPython's GIL makes it easier to extend Python with C
+or other compiled languages since one doesn't need to worry about the thread safety of wrapped code. Still, having
+only one thread in a running Python process able to execute Python code at a time is a severe limitation for multicore
 applications. In October 2023, a Python Enhancement Proposal (PEP) was accepted to make the GIL optional. This proposal,
 [PEP 703](https://peps.python.org/pep-0703/), is well worth reading for its thoughtful summary of the surrounding
 issues. CPython 3.13 launched with an optional
@@ -695,7 +695,7 @@ Margffoy ([@andfoy](https://github.com/andfoy)) — a member of Quansight Labs'
 [free-threaded Python team](https://labs.quansight.org/blog/free-threaded-python-rollout) — to ensure
 thread safety by declaring the array `sf_error_actions` thread local. This eliminates the data-race by making it so each
 thread gets its own separate copy of the array. Edgar and the others on the free-threaded Python team have been doing
-great work improving support for free-threaded Python across the ecosystem for much of this past year.
+great work improving support for free-threaded Python across the ecosystem for much of the past year.
 
 In a curious reversal, it is now (the `win32` flavor of) MinGW that is causing trouble due to lack of support for
 thread local variables.
@@ -703,7 +703,7 @@ thread local variables.
 ## Reflections
 
 Now that the dust has mostly settled, it's valuable to look back and try to judge whether we made the right choice. Over
-the entire timeframe, the primary goal for Irwin and I was always to make as much of SciPy special available on GPUs as
+the entire timeframe, the primary goal for Irwin and I was always to make as much of SciPy special available on the GPU as
 possible, with secondary goals of simplifying SciPy special's build process and improving the scalar kernel codebase. The
 story of `libsf_error_state` is that of a side quest — a story of needing to fix something we broke in pursuit of bigger
 things — and the challenges we faced and brought to others because we underestimated the difficulty of our chosen
@@ -767,7 +767,7 @@ This work was supported by the 2020 NASA ROSES grant, _Reinforcing the Foundatio
     Those using `scipy<1.15` will see `inf` instead of `nan` at negative integers due to a bug in `special.gamma`
     which was fixed in the PR [scipy/#21827](https://github.com/scipy/scipy/pull/21827).If you're curious why
     `special.gamma(0.)` evaluated to `+inf`, note that the IEE-754 floating point standard requires
-    [signed zeros](https://en.wikipedia.org/wiki/Signed_zero) `+0.` and `-0.`.
+    [signed zeros](https://en.wikipedia.org/wiki/Signed_zero) `-0.` and `+0.`.
     `special.gamma(-0.)` and `special.gamma(+0.)` evaluate the limit of the Gamma function as `x` approaches `0` from the
     left and right respectively.
 
