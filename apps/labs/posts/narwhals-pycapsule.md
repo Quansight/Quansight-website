@@ -28,7 +28,7 @@ Today, you'll learn about how to create tools which support all kinds of datafra
 - [Narwhals](https://github.com/narwhals-dev/narwhals), if you want to keep your logic in Python.
 - Narwhals _and_ the PyCapsule Interface together, if you want it all!
 
-## `agnostic_sum_i64_column` - "slow down, Professor!"
+## Summing non-null values in a column - "slow down, Professor!"
 
 We'll learn about how you make a dataframe-agnostic function `agnostic_sum_i64_column`.
 Here are the requirements:
@@ -50,7 +50,7 @@ An example of a Rust solution via Pyo3 can be found at [pycapsule-demo/src/lib.r
 
 The technical details are beyond the scope of this post, but the summary is:
 
-- We accept any object which implements the
+- We accept any object which implements the `ArrowStreamExportable` protocol from the
   [PyCapsule Interface](https://arrow.apache.org/docs/format/CDataInterface/PyCapsuleInterface.html).
   We can check for this by looking for the `__arrow_c_stream__` attribute:
 
