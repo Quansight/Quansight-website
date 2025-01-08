@@ -1,6 +1,6 @@
 ---
 title: 'Universal dataframe support with the Arrow PyCapsule Interface + Narwhals'
-published: January 6, 2025
+published: January 8, 2025
 authors: [marco-gorelli]
 description: 'Support everything, depend on (almost) nothing'
 category: [PyData ecosystem]
