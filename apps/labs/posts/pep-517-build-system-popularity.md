@@ -46,8 +46,17 @@ graciously provided by Hugo van Kemenade, specifically the list
 provided on 2024-12-01. I attempted to download the source
 distributions for these packages, using a modified version of
 [download_pypi_packages.py](https://github.com/python/cpython/blob/3.12/Tools/peg_generator/scripts/download_pypi_packages.py)
-script from the CPython repository, and then unpacked `pyproject.toml`,
+script from the CPython repository. The downloaded files corresponded
+to the newest available on 2025-01-08. Then I unpacked `pyproject.toml`,
 `setup.cfg` and `setup.py` files from them.
+
+Out of 8000 projects listed in the dump, two were not available anymore,
+and 561 did not feature source distributions at all. Furthermore,
+out of the resulting 7437 source distributions, two lacked build system
+files entirely and one incorrectly capitalized filenames, preventing it
+from working on case-sensitive systems. This left me with 7434 valid
+data points. However, as noted further on, clearly not all of these
+packages had a functional build system either.
 
 I ran a number of analyses on these files:
 
@@ -272,8 +281,6 @@ explicitly, which is arguably incorrect. 51 packages still use
 the deprecated `poetry.masonry.api` backend. The deprecated
 `flit.buildapi` and `pdm.pep517.api` backends are used by 4 packages
 each.
-
-## Packages that can't be installed from source
 
 ## Different setuptools package formats
 
