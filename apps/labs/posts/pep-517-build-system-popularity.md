@@ -290,7 +290,42 @@ the deprecated `poetry.masonry.api` backend. The deprecated
 `flit.buildapi` and `pdm.pep517.api` backends are used by 4 packages
 each.
 
-## Different setuptools package formats
+## Different setuptools configuration formats
+
+At the time of writing, setuptools support three different configuration
+formats: functional configuration via `setup.py`, declarative
+configuration via `setup.cfg` and the modern `pyproject.toml` files.
+
+Configuring via `setup.py` is the oldest approach, and it has been
+inherited from the original `distutils` build system provided by Python.
+In this approach, different configuration options are passed
+as arguments to the `setup()` function invocation. This method provides
+the widest functionality and most flexibility. However, the latter also
+comes at a price: some packages still make mistakes such as declaring
+the metadata conditionally to Python version, e.g.:
+
+```python
+install_requires = []
+# WRONG: "py3" wheel will either contain an unconditional dependency
+# or none at all
+if sys.version_info < (3, 11):
+    install_requires.append("exceptiongroup")
+```
+
+[Declarative configuration via
+`setup.cfg`](https://setuptools.pypa.io/en/latest/userguide/declarative_config.html)
+was added in 30.3.0. It supports the most of the commonly used metadata
+keys and build options, but e.g. it does not support extension builds.
+Interestingly, it also provides streamlined ways of obtaining dynamic
+metadata, such as extracting the version from a Python file or reading
+long description from a file — replacing the need to code the logic
+explicitly.
+
+Finally, support for [`pyproject.toml`
+configuration](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html)
+was added in 61.0.0. It is based on [PEP
+621](https://peps.python.org/pep-0621/), and therefore brings setuptools
+in line with other PEP 517 build backends.
 
 ## The wheel dependency
 
