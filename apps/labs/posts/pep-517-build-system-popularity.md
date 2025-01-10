@@ -271,6 +271,14 @@ backend. Conversely, the `flit_core` package does not support plugins.
 Instead, it is extended via subclassing, in `flit_scm` and
 `flit_gettext` packages.
 
+It should be noted that some of the listed PEP 517 backends are derived
+from earlier setuptools plugins. This is particularly the case for
+`scikit-build-core` (derived from `scikit-build`) and `pbr` (with
+the same package providing both the plugin and the backend). Therefore,
+the numbers for these backends are likely to raise once packages switch
+from the earlier approach of using the plugin to the newer approach
+of using the PEP 517 backend.
+
 23 packages in total declared a custom (local) backend, with all but 3
 being based on some other build system. Setuptools accounted for 15
 custom build backend uses.
