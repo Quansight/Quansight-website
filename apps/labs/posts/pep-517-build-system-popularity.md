@@ -1,5 +1,5 @@
 ---
-title: 'PEP 517 buil system popularity'
+title: 'PEP 517 build system popularity'
 published: TODO
 authors: [michal-gorny]
 description: 'A closer look at non-elementary group-by aggregations'
@@ -89,167 +89,58 @@ repository.
 
 ## Most popular build systems
 
-<table style={{width: 'auto', margin: 'auto'}}>
-<caption>Table 1. PEP 517 backends ordered by frequency of use in packages</caption>
+<div style={{textAlign: 'center'}}>
 
-<tr>
-<th>Family</th>
-<th>Backend</th>
-<th>Count</th>
-</tr>
-
-<tr>
-<td rowspan="5" valign="top">setuptools</td>
-<td>(total)</td>
-<td>5854</td>
-</tr>
-<tr>
-<td>(none)</td>
-<td>4178</td>
-</tr>
-<tr>
-<td>`setuptools.build_meta`</td>
-<td>1642</td>
-</tr>
-<tr>
-<td>`setuptools.build_meta:__legacy__`</td>
-<td>19</td>
-</tr>
-<tr>
-<td>(custom)</td>
-<td>15</td>
-</tr>
-<tr>
-<td rowspan="4" valign="top">poetry</td>
-<td>(total)</td>
-<td>625</td>
-</tr>
-<tr>
-<td>`poetry.core.masonry.api`</td>
-<td>553</td>
-</tr>
-<tr>
-<td>`poetry.masonry.api`</td>
-<td>51</td>
-</tr>
-<tr>
-<td>`poetry_dynamic_versioning.backend`</td>
-<td>21</td>
-</tr>
-<tr>
-<td rowspan="4" valign="top">hatchling</td>
-<td>(total)</td>
-<td>480</td>
-</tr>
-<tr>
-<td>`hatchling.build`</td>
-<td>477</td>
-</tr>
-<tr>
-<td>(custom)</td>
-<td>2</td>
-</tr>
-<tr>
-<td>`hatchling.ouroboros`</td>
-<td>1</td>
-</tr>
-<tr>
-<td rowspan="6" valign="top">flit</td>
-<td>(total)</td>
-<td>285</td>
-</tr>
-<tr>
-<td>`flit_core.buildapi`</td>
-<td>276</td>
-</tr>
-<tr>
-<td>`flit.buildapi`</td>
-<td>4</td>
-</tr>
-<tr>
-<td>`flit_scm:buildapi`</td>
-<td>3</td>
-</tr>
-<tr>
-<td>(custom)</td>
-<td>1</td>
-</tr>
-<tr>
-<td>`flit_gettext.scm`</td>
-<td>1</td>
-</tr>
-<tr>
-<td>maturin</td>
-<td>`maturin`</td>
-<td>85</td>
-</tr>
-<tr>
-<td rowspan="4" valign="top">pdm</td>
-<td>(total)</td>
-<td>42</td>
-</tr>
-<tr>
-<td>`pdm.backend`</td>
-<td>37</td>
-</tr>
-<tr>
-<td>`pdm.pep517.api`</td>
-<td>4</td>
-</tr>
-<tr>
-<td>`pdm.backend.intree`</td>
-<td>1</td>
-</tr>
-<tr>
-<td rowspan="3" valign="top">scikit-build-core</td>
-<td>(total)</td>
-<td>30</td>
-</tr>
-<tr>
-<td>`scikit_build_core.build`</td>
-<td>28</td>
-</tr>
-<tr>
-<td>(custom)</td>
-<td>2</td>
-</tr>
-<tr>
-<td>mesonpy</td>
-<td>`mesonpy`</td>
-<td>16</td>
-</tr>
-<tr>
-<td>whey</td>
-<td>`whey`</td>
-<td>4</td>
-</tr>
-<tr>
-<td>(custom)</td>
-<td>(custom)</td>
-<td>3</td>
-</tr>
-<tr>
-<td>sphinx-theme-builder</td>
-<td>`sphinx_theme_builder`</td>
-<td>3</td>
-</tr>
-<tr>
-<td>sipbuild</td>
-<td>`sipbuild.api`</td>
-<td>3</td>
-</tr>
-<tr>
-<td>pbr</td>
-<td>`pbr.build`</td>
-<td>2</td>
-</tr>
-<tr>
-<td>jupyter-packaging</td>
-<td>`jupyter_packaging.build_api`</td>
-<td>2</td>
-</tr>
-
+<table style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+  <caption>Table 1. Cumulative backend use counts</caption>
+  <tr><th>Backend / family</th><th>Count</th></tr>
+  <tr style={{ background: '#fef' }}><td style={{ height: '4em' }}>setuptools</td><td align='right'>5854</td></tr>
+  <tr style={{ background: '#eff' }}><td style={{ height: '4em' }}>poetry</td><td align='right'>625</td></tr>
+  <tr style={{ background: '#ffe' }}><td style={{ height: '4em' }}>hatchling</td><td align='right'>480</td></tr>
+  <tr style={{ background: '#eef' }}><td style={{ height: '4em' }}>flit</td><td align='right'>285</td></tr>
+  <tr><td style={{ height: '2.5em' }}>`maturin`</td><td align='right'>85</td></tr>
+  <tr style={{ background: '#efe' }}><td style={{ height: '4em' }}>pdm</td><td align='right'>42</td></tr>
+  <tr style={{ background: '#fee' }}><td style={{ height: '4em' }}>scikit-build-core</td><td align='right'>30</td></tr>
+  <tr><td style={{ height: '2.5em' }}>`mesonpy`</td><td align='right'>16</td></tr>
+  <tr><td style={{ height: '2.5em' }}>`whey`</td><td align='right'>4</td></tr>
+  <tr><td style={{ height: '2.5em' }}>(custom)</td><td align='right'>3</td></tr>
+  <tr><td style={{ height: '2.5em' }}>`sphinx_theme_builder`</td><td align='right'>3</td></tr>
+  <tr><td style={{ height: '2.5em' }}>`sipbuild.api`</td><td align='right'>3</td></tr>
+  <tr><td style={{ height: '2.5em' }}>`pbr.build`</td><td align='right'>2</td></tr>
+  <tr><td style={{ height: '2.5em' }}>`jupyter_packaging.build_api`</td><td align='right'>2</td></tr>
 </table>
+<table style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+  <caption>Table 2. Detailed counts for common families</caption>
+  <tr><th>Family / backend</th><th>Count</th></tr>
+  <tr style={{ background: '#fef' }}><th>setuptools</th><th></th></tr>
+  <tr style={{ background: '#fef' }}><td>`None`</td><td align='right'>4178</td></tr>
+  <tr style={{ background: '#fef' }}><td>`setuptools.build_meta`</td><td align='right'>1642</td></tr>
+  <tr style={{ background: '#fef' }}><td>`setuptools.build_meta:__legacy__`</td><td align='right'>19</td></tr>
+  <tr style={{ background: '#fef' }}><td>(custom)</td><td align='right'>15</td></tr>
+  <tr style={{ background: '#eff' }}><th>poetry</th><th></th></tr>
+  <tr style={{ background: '#eff' }}><td>`poetry.core.masonry.api`</td><td align='right'>553</td></tr>
+  <tr style={{ background: '#eff' }}><td>`poetry.masonry.api`</td><td align='right'>51</td></tr>
+  <tr style={{ background: '#eff' }}><td>`poetry_dynamic_versioning.backend`</td><td align='right'>21</td></tr>
+  <tr style={{ background: '#ffe' }}><th>hatchling</th><th></th></tr>
+  <tr style={{ background: '#ffe' }}><td>`hatchling.build`</td><td align='right'>477</td></tr>
+  <tr style={{ background: '#ffe' }}><td>(custom)</td><td align='right'>2</td></tr>
+  <tr style={{ background: '#ffe' }}><td>`hatchling.ouroboros`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#eef' }}><th>flit</th><th></th></tr>
+  <tr style={{ background: '#eef' }}><td>`flit_core.buildapi`</td><td align='right'>276</td></tr>
+  <tr style={{ background: '#eef' }}><td>`flit.buildapi`</td><td align='right'>4</td></tr>
+  <tr style={{ background: '#eef' }}><td>`flit_scm:buildapi`</td><td align='right'>3</td></tr>
+  <tr style={{ background: '#eef' }}><td>(custom)</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#eef' }}><td>`flit_gettext.scm`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#efe' }}><th>pdm</th><th></th></tr>
+  <tr style={{ background: '#efe' }}><td>`pdm.backend`</td><td align='right'>37</td></tr>
+  <tr style={{ background: '#efe' }}><td>`pdm.pep517.api`</td><td align='right'>4</td></tr>
+  <tr style={{ background: '#efe' }}><td>`pdm.backend.intree`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#fee' }}><th>scikit-build-core</th><th></th></tr>
+  <tr style={{ background: '#fee' }}><td>`scikit_build_core.build`</td><td align='right'>28</td></tr>
+  <tr style={{ background: '#fee' }}><td>(custom)</td><td align='right'>2</td></tr>
+</table>
+
+</div>
 
 In the data set, setuptools was used as a build system for almost 79%
 of packages. 7 out of 10 packages using this build system do so without
@@ -292,7 +183,7 @@ each.
 
 ## Different setuptools configuration formats
 
-At the time of writing, setuptools support three different configuration
+At the time of writing, setuptools supported three different configuration
 formats: functional configuration via `setup.py`, declarative
 configuration via `setup.cfg` and the modern `pyproject.toml` files.
 
@@ -326,6 +217,58 @@ configuration](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.h
 was added in 61.0.0. It is based on [PEP
 621](https://peps.python.org/pep-0621/), and therefore brings setuptools
 in line with other PEP 517 build backends.
+
+<div style={{textAlign: 'center'}}>
+
+<table style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+  <caption>Table 3. Counts for setuptools configuration format combinations</caption>
+  <tr><th>Formats</th><th>Count</th></tr>
+  <tr><td>`setup.py`</td><td align='right'>3750</td></tr>
+  <tr><td>`setup.cfg` + `setup.py`</td><td align='right'>1104</td></tr>
+  <tr><td>`pyproject.toml`</td><td align='right'>541</td></tr>
+  <tr><td>`pyproject.toml` + `setup.py`</td><td align='right'>330</td></tr>
+  <tr><td>`setup.cfg`</td><td align='right'>87</td></tr>
+  <tr><td>`pyproject.toml` + `setup.cfg` + `setup.py`</td><td align='right'>17</td></tr>
+  <tr><td>`pyproject.toml` + `setup.cfg`</td><td align='right'>14</td></tr>
+  <tr><td>(no configuration — broken distribution)</td><td align='right'>11</td></tr>
+</table>
+<table style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+  <caption>Table 4. Cumulative counts for every configuration format</caption>
+  <tr><th>Format</th><th>Total</th></tr>
+  <tr><td>(all packages)</td><td align='right'>5854</td></tr>
+  <tr><td>`setup.py`</td><td align='right'>5201</td></tr>
+  <tr><td>`setup.cfg`</td><td align='right'>1222</td></tr>
+  <tr><td>`pyproject.toml`</td><td align='right'>902</td></tr>
+</table>
+
+</div>
+
+`setup.py` still remains the most popular of the configuration formats,
+being used by 89% of the analyzed packages, with 64% relying exclusively
+on this format. One out of five packages would declare the project
+metadata in `setup.cfg`, and around 15% in `pyproject.toml`.
+
+Note the significant overlap in these numbers. Only 87 packages would
+declare their metadata in `setup.cfg` exclusively, while 1104 would
+combine it with `setup.py`. The numbers are more even for `pyproject.toml` —
+with 541 packages using it exclusively for metadata, and 330 with `setup.py`.
+Perhaps the most curious combinations are 17 packages using all three formats
+and 14 declaring the project metadata using the two declarative formats —
+the way the analysis was done, such an overlap clearly indicates that the
+project metadata would be specified redundantly.
+
+Perhaps the most surprising number are the 11 packages that did not provide
+any metadata. A detailed analysis revealed that half of them feature
+only a `setup.cfg` file without metadata, and the other half featured
+Poetry metadata while declaring setuptools as a build backend. Needless
+to say, in both cases the source distributions would not be installed
+correctly.
+
+Note that these numbers are only approximate. Because of the functional
+nature of `setup.py`, its sole presence was counted towards its use —
+meaning that even an empty `setup()` call would increase the number.
+On the other hand, `setup.cfg` and `pyproject.toml` files would be counted
+only if they actually contained the respective metadata sections.
 
 ## The wheel dependency
 
