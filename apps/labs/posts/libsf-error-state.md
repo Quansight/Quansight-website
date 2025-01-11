@@ -758,8 +758,8 @@ This work was supported by the 2020 NASA ROSES grant, _Reinforcing the Foundatio
 
 [^1]:
     The first regular shared library that's part of SciPy itself, not including Python extension modules
-    within SciPy or shared libraries shipped alongside SciPy in platform specific wheels to fill missing
-    dependencies.
+    within SciPy or shared libraries shipped alongside SciPy in platform specific wheels to supply
+    dependencies which may not be consistently available otherwise.
 
 [^2]: Travis Oliphant, Pearu Peterson, and Eric Jones. https://en.wikipedia.org/wiki/SciPy#History)
 [^3]:
