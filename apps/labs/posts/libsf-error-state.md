@@ -14,7 +14,7 @@ hero:
 
 ## Introduction
 
-This is the story of the first[^1] shared library to be shipped within SciPy. It offers a glimpse at some of the
+This is the story of the first[^1] shared library to be shipped as part of SciPy. It offers a glimpse at some of the
 complexity SciPy tries to hide from users, while previewing some exciting developments in
 [`scipy.special`](https://docs.scipy.org/doc/scipy/reference/special.html).
 
@@ -386,7 +386,7 @@ loaded by a Python interpreter running in the same process, since only a single 
 memory.
 
 Note that the title of this article isn't entirely accurate. A Python extension module is itself a shared library which
-is loaded by the Python interpreter at runtime. Thus SciPy actually ships many shared libaries and has done so from its
+is loaded by the Python interpreter at runtime. Thus SciPy actually contains many shared libaries and has done so from its
 earliest days. What we mean is the first regular shared library that's not a Python extension module. Also, although
 we've been talking in terms of linking programs with a shared library, in this case we are linking Python extension
 modules with a shared library. It's perfectly valid to link one shared library with one or more others.
@@ -756,7 +756,11 @@ This work was supported by the 2020 NASA ROSES grant, _Reinforcing the Foundatio
 
 ---
 
-[^1]: The first regular shared library, not including Python extension modules.
+[^1]:
+    The first regular shared library that's part of SciPy itself, not including Python extension modules
+    within SciPy or shared libraries shipped alongside SciPy in platform specific wheels to fill missing
+    dependencies.
+
 [^2]: Travis Oliphant, Pearu Peterson, and Eric Jones. https://en.wikipedia.org/wiki/SciPy#History)
 [^3]:
     Having `math.sqrt(-1.0)` evaluate to the complex number `1j` instead of raising would violate a principle that the
