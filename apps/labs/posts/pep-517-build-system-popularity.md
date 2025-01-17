@@ -8,8 +8,8 @@ featuredImage:
   src: /posts/pep-517-build-system-popularity/featured.jpg
   alt:
 hero:
-  imageSrc: /posts/pep-517-build-system-popularity/hero.jpg
-  imageAlt:
+  imageSrc: /posts/pep-517-build-system-popularity/hero.jpeg
+  imageAlt: A tabby cat in a carton box, with a slightly surprised look on its face. Photograph by kaylaflam, https://pixabay.com/photos/cat-feline-animal-kitty-box-5453535/.
 ---
 
 # PEP 517 build system popularity
