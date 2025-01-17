@@ -405,7 +405,8 @@ dependencies only if they cannot find the required tool. The packages
 counted here added the dependency and therefore required installing a local
 copy of the tool, even though system tools were available. Furthermore,
 some packages explicitly rely on helper Python modules that are installed
-as part of these packages.
+as part of these packages. Note that the number is two and a half times
+higher than the use of `scikit-build`, indicating custom CMake handlers.
 
 82 packages used `pytest-runner` to provide a test command via PyTest.
 71 packages used `pbr` extensions to setuptools. As noted in table 1,
@@ -443,7 +444,18 @@ binaries. And some open source projects
 stopped providing source distributions, because their build process
 was complex and it often failed when tools such as `pip` attempted
 to build the package from source — preferring their users to either
-use wheels or use the sources consciously
+use wheels or use the sources consciously.
+
+A somewhat relevant problem are the packages that cannot be installed
+due to a variety of bugs — over half of them involving files missing
+from source distribution archives, the rest mostly needed adjustments
+for newer standards and build system versions. By adding both numbers,
+we discover that over 9% packages from the list clearly cannot
+be installed from source. The actual number is likely to be higher,
+since my research was limited to attempting to obtain build requirements.
+Proceeding to actually build a wheel would likely yield further problems,
+including further missing source files and incompatibilities with newer
+compiler or dependency versions.
 
 The second significant observation is that setuptools remain the most
 frequently used build system. While this is not exactly surprising
@@ -470,4 +482,35 @@ It is also quite probable that some projects choose Hatchling because
 it is the default option in [‘Choosing a build backend’ part
 of the Python Packaging User Guide](https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend).
 
-[…]
+On top of that, over a half of the packages using setuptools
+still rely on functional way of declaring package metadata, often
+manually reimplementing features that are integrated into the newer
+formats, such as reading version from Python files or a README file.
+Even those using a newer metadata format provide `setup.py` for one
+reason or another. It can be added that other PEP 517 backends,
+such as Hatchling and poetry-core, often also provide the run additional
+Python code throughout build process.
+
+The last part of the post was primarily focused on build system plugins
+and other build dependencies.
+Some of the packages still used setuptools plugins that grew into their
+own backends, such as `pbr` and `scikit-build`, meaning that they are
+likely to switch in the future. Other packages combined different
+PEP 517 backends with setuptools to facilitate extension builds.
+
+It indicated that some of the plugins are very popular — particularly
+VCS-based versioning plugins. On the other hand, it also indicated
+that there is a fair number of plugins that are used by a few packages
+only. A fair number of packages used deprecated plugins as well.
+
+PEP 517 was adopted seven years ago, and a lot of progress was made
+since. On one hand, multiple alternatives to setuptools were developed.
+On the other, setuptools themselves changed too, reshaping themselves
+to fit better into the PEP 517 workflow and deprecating many of their
+baroque features in the process. However, it seems that the wider
+ecosystem was not moving that fast. Many packages either did not decide
+to move their build systems forward, or even were started using older
+approaches and configuration formats. The most important point
+illustrated by this post is that numbers alone provide little insight —
+what would be really interesting is a research on the actual causes
+and motivations.
