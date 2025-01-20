@@ -157,7 +157,7 @@ The website was officially launched on April 9th, 2024. The [announcement](https
     style={{ width: '600px', height: 'auto', objectFit: 'contain' }}
   />
   </a>
-  <figcaption>Figure 2a: The previous Sphinx site running on a customized <code>cloud-sptheme</code> design.</figcaption>
+  <figcaption>Figure 2a: The new conda-forge.org frontpage.</figcaption>
 </figure>
 
 <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'flex-start' }}>
@@ -170,7 +170,7 @@ The website was officially launched on April 9th, 2024. The [announcement](https
       style={{ width: '300px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
-    <figcaption>Figure 2b: The former Status page rendered directly on <code>conda-forge/status</code>.</figcaption>
+    <figcaption>Figure 2b: The revamped Status page.</figcaption>
   </figure>
   
   <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
@@ -181,7 +181,7 @@ The website was officially launched on April 9th, 2024. The [announcement](https
       style={{ width: '300px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
-    <figcaption>Figure 2c: This is how the Packages page looked like in the old site.</figcaption>
+    <figcaption>Figure 2c: This is how the Packages page looks like now.</figcaption>
   </figure>
 </div>
 
