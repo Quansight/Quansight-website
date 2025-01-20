@@ -91,11 +91,14 @@ Like magic, our function works agnostically for any of these dataframes,
 without us having to write any specialised code to handle the subtle differences
 between them!
 
-> **_NOTE:_** How many times can `agnostic_sum_i64_column` be called? Strictly
-> speaking, the PyCapsule Interface only guarantees that it can be called once for
-> any given input. In practice, however, all implementations that we're aware of
-> (except for DuckDB) allow for it to be called repeatedly. Discussion about the
-> DuckDB implementation is ongoing at https://github.com/duckdb/duckdb/discussions/15536.
+> **_NOTE:_** If you try running the above multiple times, you may note that
+> for DuckDB, `agnostic_sum_i64_column(rel, column_name="a")` can only be called
+> once for a given `rel` object. This is because the PyCapsule Interface only
+> guarantees that it can be called once for a given input. In-memory dataframes
+> such as `polars.DataFrame`, `pandas.DataFrame`, and `pyarrow.Table` tend to allow
+> for multiple calls per object anyway, whereas DuckDB (which is not in-memory) does
+> not. Discussion about the DuckDB implementation is ongoing at
+> https://github.com/duckdb/duckdb/discussions/15536.
 
 If you found the above example a little daunting, you may be wondering if a simpler
 solution exists which you can develop entirely in Python-land. Enter: Narwhals.
@@ -155,15 +158,13 @@ control over the data. So, when should you use which?
 
 Let's cover some scenarios:
 
-- If you want your dataframe logic to stay completely lazy where possible: use Narwhals.
-  The PyCapsule Interface requires you to materialise the data into memory immediately,
-  whereas Narwhals has both eager and lazy APIs.
-- If you want complete control over your data: use the
-  PyCapsule Interface. If you have the necessary Rust / C skills, there should be no limit
-  to how complex and bespoke you make your data processing.
+- If you want your dataframe logic to stay completely native (e.g. Polars in -> Polars out): use Narwhals.
 - If you want to keep your library logic to pure-Python and without heavy dependencies so
   it's easy to maintain and install: use Narwhals. Packaging a pure-Python project is very
   easy, especially compared with if you need to get Rust or C in there.
+- If you want complete control over your data: use the
+  PyCapsule Interface. If you have the necessary Rust / C skills, there should be no limit
+  to how complex and bespoke you make your data processing.
 - If you want to do part of your processing in Python, and part of it in Rust - **use both**!
   An example of a library which does this is [Vegafusion](https://vegafusion.io/). This is
   facilitated by the fact that Narwhals exposes the PyCapsule Interface for both
