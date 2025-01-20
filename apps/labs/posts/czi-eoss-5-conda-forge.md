@@ -83,7 +83,7 @@ The [conda-forge.org website](https://conda-forge.org) used to be built around i
   <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-3.png" target="_blank">
     <img 
-      src="/posts/czi-eoss-5-conda-forge/conda-forge-old-1.png"
+      src="/posts/czi-eoss-5-conda-forge/conda-forge-old-3.png"
       alt="Screenshot of the Contributing section of the frontpage of the original conda-forge website. A flat background painted in red with white text and green hyperlinks."
       style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
     />
