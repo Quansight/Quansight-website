@@ -60,7 +60,7 @@ The [conda-forge.org website](https://conda-forge.org) used to be built around i
     <img 
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-1.png"
       alt="Screenshot of the frontpage of the original conda-forge website. A forge emitting impact sparks is used as a dark background. A prominent large white text reading conda-forge sits below the official conda-forge logo, a black anvil. Some smaller text follows, also in white."
-      style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
+      style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
     <figcaption>Figure 1a: The old conda-forge.org frontpage.</figcaption>
@@ -71,7 +71,7 @@ The [conda-forge.org website](https://conda-forge.org) used to be built around i
     <img 
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-2.png"
       alt="Screenshot of the About section of the frontpage of the original conda-forge website. A white background presents some text in black introducing conda-forge to the newcomers."
-      style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
+      style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
     <figcaption>Figure 1b: The About section in the previous conda-forge.org design.</figcaption>
@@ -84,7 +84,7 @@ The [conda-forge.org website](https://conda-forge.org) used to be built around i
     <img 
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-3.png"
       alt="Screenshot of the Contributing section of the frontpage of the original conda-forge website. A flat background painted in red with white text and green hyperlinks."
-      style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
+      style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
     <figcaption>Figure 1c: The old Contributing section.</figcaption>
@@ -95,7 +95,7 @@ The [conda-forge.org website](https://conda-forge.org) used to be built around i
     <img 
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-4.png"
       alt="Screenshot of how the old documentation site of conda-forge used to look like. Top navigation bar painted in black, with a grey sidebar on the left, and the main text on a white background. The headers are signaled with red background and white foreground."
-      style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
+      style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
     <figcaption>Figure 1d: The previous Sphinx site running on a customized <code>cloud-sptheme</code> design.</figcaption>
@@ -108,7 +108,7 @@ The [conda-forge.org website](https://conda-forge.org) used to be built around i
     <img 
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-5.png"
       alt="Screenshot of the previous status page design. A neon green header with white text informs of all services being operational, followed by a list of badges reporting the status of different infrastructure components."
-      style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
+      style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
     <figcaption>Figure 1e: The former Status page rendered directly on <code>conda-forge/status</code>.</figcaption>
@@ -119,7 +119,7 @@ The [conda-forge.org website](https://conda-forge.org) used to be built around i
     <img 
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-6.png"
       alt="Screenshot of the original Packages page in the conda-forge website, with a search bar that filters which packages are provided by which feedstocks. Text in neon green on white background."
-      style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
+      style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
     <figcaption>Figure 1f: This is how the Packages page looked like in the old site.</figcaption>
@@ -153,7 +153,7 @@ The website was officially launched on April 9th, 2024. The [announcement](https
   <img 
     src="/posts/czi-eoss-5-conda-forge/conda-forge-new-1.png"
     alt="Screenshot of the frontpage of revamped conda-forge website. A 3D anvil sits on the left side of the main section, with hero text on the right side. Emphasis is given to the words 'recipes', 'infrastructure', 'distributions' and 'conda' using a teal-to-turquoise gradient. The rest of the text is in black. The bottom half of the screenshot shows some statistics about conda-forge's scale and usage, like the monthly downloads or the number of projects and packages published."
-    style={{ width: '600px', height: 'auto', objectFit: 'contain' }}
+    style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
   />
   </a>
   <figcaption>Figure 2a: The new conda-forge.org frontpage.</figcaption>
@@ -166,7 +166,7 @@ The website was officially launched on April 9th, 2024. The [announcement](https
     <img 
       src="/posts/czi-eoss-5-conda-forge/conda-forge-new-2.png"
       alt="Screenshot of the new status page, integrated in the same website as the frontpage, as evidence by the top navigation bar. A sidebar on the left, with main content occupying the rest of the canvas. Two columns inform of the status of different infrastructure components, followed by a table that reports the progress of some ongoing migrations in the organisation."
-      style={{ width: '300px', height: 'auto', objectFit: 'contain' }}
+      style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
     <figcaption>Figure 2b: The revamped Status page.</figcaption>
@@ -177,7 +177,7 @@ The website was officially launched on April 9th, 2024. The [announcement](https
     <img 
       src="/posts/czi-eoss-5-conda-forge/conda-forge-new-3.png"
       alt="Screenshot of how the documentation section of the new website looks like. A sidebar on the left serves as menu to navigate the content. The main area is occupied by the text, with a header that reads 'The life cycle of a package'. Another sidebar awaits on the right, reporting the sections found in the currently opened document."
-      style={{ width: '300px', height: 'auto', objectFit: 'contain' }}
+      style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
     <figcaption>Figure 2c: This is how the Packages page looks like now.</figcaption>
