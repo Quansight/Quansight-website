@@ -134,9 +134,11 @@ We decided to start a prototype Docusaurus website just to see how it felt to wr
 
 So we went for it!
 
-While Afshin Darian (QuantStack) was building the new status page (link to PRs here), we were lucky to have Asmit Malakannawar join us for an internship in conda-forge. He was in charge of designing a new, modern frontpage for the Docusaurus site. You can read about this experience in this blog post. Together with Tania Allard and Isabela Presedo-Floyd (Quansight), as well as Gabriela Vives (QuantStack), we ensured that the new design and color system complied to essential accessibility affordances.
+We were lucky to have Asmit Malakannawar join us for a Google Summer of Code internship in conda-forge during the summer of 2023. He was in charge of designing a new, modern frontpage for the Docusaurus site. You can read about this experience in [his website](https://www.asmitbm.me/projects/conda-forge-website-redesign). Together with Tania Allard and Isabela Presedo-Floyd (Quansight), as well as Gabriela Vives (QuantStack), we ensured that the new design and color system complied to essential accessibility affordances.
 
-Once we were happy with the result, we consulted the conda-forge/core team and submitted the final proposal for review and merge. However, we were still serving the documentation itself from Sphinx. It took a couple extra PRs to convert Sphinx's RST text to Docusaurus' Markdown and make it look great. Klaus Zimmermann (Quansight) also contributed some consolidated documentation taken from our infrastructure notes.
+Shortly after, Afshin Darian (QuantStack) started building the new status page ([`conda-forge.github.io#2090`](https://github.com/conda-forge/conda-forge.github.io/pull/2090)). We had decided to not rely on a Quetz instance because that would tie us to running and maintaining a server 24/7, with the associated costs. Instead, the new proposal presented a client-side dashboard built with components already offered by the Docusaurus framework. Since it uses React, it was deemed as a good compromise of complexity and long-term maintenance costs (specially for the conda-forge teams, who are not too familiar with the fast changing frontend development). After lots of feedback (118 comments!), the PR was finally merged in March 2024.
+
+As we were increasingly satisfied with the results, we [https://github.com/conda-forge/conda-forge.github.io/issues/1971](started consulting) the conda-forge community and submitted the final proposal for review and merge. However, we were still serving the documentation itself from Sphinx. It took a couple extra PRs to convert Sphinx's RST text to Docusaurus' Markdown and make it look great. Klaus Zimmermann (Quansight) also contributed some consolidated documentation taken from our infrastructure notes.
 
 The website was officially launched on April 9th, 2024. The [announcement](https://conda-forge.org/news/2024/04/09/new-website) contains some more details if you are curious, but the main changes are:
 
@@ -166,7 +168,7 @@ The website was officially launched on April 9th, 2024. The [announcement](https
     <img 
       src="/posts/czi-eoss-5-conda-forge/conda-forge-new-2.png"
       alt="Screenshot of the new status page, integrated in the same website as the frontpage, as evidence by the top navigation bar. A sidebar on the left, with main content occupying the rest of the canvas. Two columns inform of the status of different infrastructure components, followed by a table that reports the progress of some ongoing migrations in the organisation."
-      style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
+      style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
     <figcaption>Figure 2b: The revamped Status page.</figcaption>
@@ -177,7 +179,7 @@ The website was officially launched on April 9th, 2024. The [announcement](https
     <img 
       src="/posts/czi-eoss-5-conda-forge/conda-forge-new-3.png"
       alt="Screenshot of how the documentation section of the new website looks like. A sidebar on the left serves as menu to navigate the content. The main area is occupied by the text, with a header that reads 'The life cycle of a package'. Another sidebar awaits on the right, reporting the sections found in the currently opened document."
-      style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
+      style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
     <figcaption>Figure 2c: This is how the Packages page looks like now.</figcaption>
