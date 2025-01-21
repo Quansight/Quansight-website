@@ -5,8 +5,8 @@ authors: [michal-gorny]
 description: 'A closer look at non-elementary group-by aggregations'
 category: [Packaging]
 featuredImage:
-  src: /posts/pep-517-build-system-popularity/featured.jpg
-  alt:
+  src: /posts/pep-517-build-system-popularity/featured.jpeg
+  alt: A tabby cat in a carton box, with a slightly surprised look on its face. Photograph by kaylaflam, https://pixabay.com/photos/cat-feline-animal-kitty-box-5453535/.
 hero:
   imageSrc: /posts/pep-517-build-system-popularity/hero.jpeg
   imageAlt: A tabby cat in a carton box, with a slightly surprised look on its face. Photograph by kaylaflam, https://pixabay.com/photos/cat-feline-animal-kitty-box-5453535/.
