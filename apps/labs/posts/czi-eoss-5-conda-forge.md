@@ -63,7 +63,6 @@ The [conda-forge.org website](https://conda-forge.org) used to be built around i
       style={{ width: '400px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
-    </a>
     <figcaption>Figure 1a: The old conda-forge.org frontpage.</figcaption>
   </figure>
   
