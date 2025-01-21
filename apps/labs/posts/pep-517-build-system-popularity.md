@@ -17,76 +17,80 @@ hero:
 In 2017, [PEP 517](https://peps.python.org/pep-0517/) changed the Python
 packaging landscape forever. Prior to it, the setuptools build system
 held a de facto monopoly. If you were to publish a Python package
-on PyPI, it was the build system to go to. If you really wanted to
-create another build system, you had to either extend setuptools,
-or simulate its interface. And since it built quite an baroque
-interface over the years, and different tools used different portions of
-it, the latter usually meant trouble.
+on PyPI, you either used setuptools, extended it or had to create
+something reasonably compatible with it. And given how many different
+options setuptools provided, and how various users used different
+combinations of these options, you were likely to spend a lot of effort
+implementing what you believed to be necessary, and still learn that someone's
+workflow does not work.
 
-PEP 517 changed that by enabling a ‘black box’ approach to build
-systems. A released Python package would declare what build backend it
-wished to use, and a frontend would call into a few predefined methods
-provided by it, and obtain a source or binary distribution.
-The interface is well-defined and relatively simple.
+PEP 517 enabled a ‘black box’ approach to building Python packages.
+A package needed only to name the backend it wished to use, and the backend
+implemented a few predefined functions to run the build process and create
+a source or binary distribution. This interface is well-defined
+and relatively simple. There are only two mandatory functions, and currently
+up to five optional — compared to 28 commands in setuptools (each with
+its own list of options).
 
-Unsurpringly, PEP 517 gave a rise to quite a few different build
-systems. Some focused on pure Python packages, others on integration
-with non-Python build systems such as CMake, Meson or Cargo. While it is
-clear that there is a choice between the new build systems, how
-popular did they become after all? In this post, I would like to explore
-the landscape 7 years after the adoption of PEP 517.
+Unsurpringly, many new build systems were created. Some of them focused
+on pure Python packages, others on integration with other build systems
+such as CMake, Meson or Cargo. It is clear that you can now choose
+between many new build systems. But how popular are they today? In this
+post, I would like to explore that.
 
 ## Methodology
 
-In order to determine the popularity of PEP 517 build systems, I
-decided to investigate the build systems used in the most popular PyPI
-packages. I used [the monthly dumps of top PyPI
+For my research, I decided to investigate the build systems used
+in the most popular PyPI packages. I used [the monthly dumps of top PyPI
 packages](https://hugovk.github.io/top-pypi-packages/) that are
 graciously provided by Hugo van Kemenade, specifically the list
-provided on 2024-12-01. I attempted to download the source
+provided for 2024-12-01. I attempted to download the source
 distributions for these packages, using a modified version of
 [download_pypi_packages.py](https://github.com/python/cpython/blob/3.12/Tools/peg_generator/scripts/download_pypi_packages.py)
 script from the CPython repository. The downloaded files corresponded
-to the newest available on 2025-01-08. Then I unpacked `pyproject.toml`,
+to the newest versions available on 2025-01-08. Then I unpacked `pyproject.toml`,
 `setup.cfg` and `setup.py` files from them.
 
-Out of 8000 projects listed in the dump, two were not available anymore,
-and 561 did not feature source distributions at all. Furthermore,
-out of the resulting 7437 source distributions, two lacked build system
-files entirely and one incorrectly capitalized filenames, preventing it
-from working on case-sensitive systems. This left me with 7434 valid
-data points. However, as noted further on, clearly not all of these
-packages had a functional build system either.
+Out of 8000 projects listed in the dump:
 
-I ran a number of analyses on these files:
+- two were not available anymore,
 
-1. Obtaining the raw values of `build-system.build-backend` key
+- 561 did not feature source distributions at all,
+
+- two did not have any build system files,
+
+- one had incorrectly capitalized filenames, preventing it from working
+  on Linux.
+
+I performed the analysis on the remaining 7434 source distributions.
+However, I must note that not all of these distributions could actually
+be installed, as I explain in detail further on.
+
+I wrote a few scripts to analyze these distributions and process
+the results, creating tables that are included in this post. The scripts
+are available in the [pep517-stats](https://github.com/mgorny/pep517-stats/)
+repository. They perform the following actions:
+
+1. Obtain the raw values of `build-system.build-backend` key from `pyproject.toml`
    to determine the popularity of individual build backends.
 
-2. Matching these values into the published build systems, particularly
-   combining multiple backends corresponding to the same build system.
+2. Match these values to known build systems, combining multiple backends
+   corresponding to the same or closely related packages.
 
-3. Matching custom build backends into the public build systems that
-   they utilize, using the `build-system.requires` key.
+3. Look at the `build-system.requires` key in packages using a custom build
+   backend to determine which package it is based on.
 
-4. Determining which of the different configuration formats supported
+4. Determine which of the different configuration formats supported
    by setuptools are used by the project:
 
-   - `pyproject.toml` by the presence of the `[project]` table
-   - `setup.cfg` by the presence of the `[metadata]` section
-   - `setup.py` by the presence of the file itself
+   - `pyproject.toml` — if `[project]` table exists in said file
+   - `setup.cfg` — if `[metadata]` section exists in said file
+   - `setup.py` — if said file exists
 
-5. Running the `get_requires_for_build_wheel()` build backend hook
-   to obtain the build dependencies of the package.
+5. Run the `get_requires_for_build_wheel()` hook
+   to obtain all build requirements of the package.
 
-6. Analyzing the build dependencies, both on their own and in specific
-   combinations.
-
-The scripts used to perform all these actions are available
-in the [pep517-stats](https://github.com/mgorny/pep517-stats/)
-repository.
-
-## Most popular build systems
+## The most popular build systems
 
 <div style={{textAlign: 'center'}}>
 
