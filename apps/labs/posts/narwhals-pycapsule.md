@@ -93,11 +93,8 @@ between them!
 
 > **_NOTE:_** If you try running the above multiple times, you may note that
 > for DuckDB, `agnostic_sum_i64_column(rel, column_name="a")` can only be called
-> once for a given `rel` object. This is because the PyCapsule Interface only
-> guarantees that it can be called once for a given input. In-memory dataframes
-> such as `polars.DataFrame`, `pandas.DataFrame`, and `pyarrow.Table` tend to allow
-> for multiple calls per object anyway, whereas DuckDB (which is not in-memory) does
-> not. Discussion about the DuckDB implementation is ongoing at
+> once for a given `rel` object - a second call would raise. Discussion about
+> whether this is a feature or bug is ongoing at
 > https://github.com/duckdb/duckdb/discussions/15536.
 
 If you found the above example a little daunting, you may be wondering if a simpler
