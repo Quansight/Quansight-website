@@ -402,58 +402,62 @@ or expecting being built from a git checkout.
   <tr><td>`versioneer-518`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>1</td></tr>
 </table>
 
-There are some interesting data that can be seen in table 5.
-Firstly, in the examined set there were over two dozen packages that
-depended on `setuptools` while using another PEP 517 build backend.
-Except for the cases where mesonpy and scikit-build-core were involved
-(these two were determined to be mistakes), these are cases of using
-setuptools to build extensions. In fact, pdm-backend has an explicit
-option to call into setuptools for the purpose of extension building.
+Table 5 provides some interesting data.
 
-Secondly, you can note that over half of the packages depending
-on `setuptools` additionally depend on the `wheel` package. While
-in a few cases this is justified, most often this results from
+Firstly, there were over two dozen packages that required setuptools
+while using another PEP 517 build backend. Most likely, these packages
+used a backend that did not provide direct support for building C
+extensions, and used setuptools to provide that function. In fact,
+some build backends officially support that.
+
+Secondly, over half of the packages depending on `setuptools`
+additionally depended on the `wheel` package. Sometimes `wheel` is actually
+used by the `setup.py` script, but most often this is copied from
 [a historical mistake in setuptools documentation that listed `wheel`
 dependency unnecessarily](https://github.com/pypa/setuptools/commit/f7d30a9529378cf69054b5176249e5457aaf640a).
 
 Finally, we can look at the popularity of different plugins
-for the hatchling, pdm, poetry and setuptools build systems. The most
-popular category are VCS versioning plugins, with `setuptools_scm` being
-used by approximately 8% of all packages, and `hatch-vcs` by over
-a hundred projects. There were also other plugins serving the same purpose,
-such as `versioneer` (this one was probably undercounted, as it is often
-vendored inside packages), `setuptools-git-versioning`, `versioningit`
-and more. We can also note the `setuptools-scm-git-archive` plugin
-that was still recorded in 12 packages, though it is no longer necessary
-with `setuptools_scm >= 8`.
+for the hatchling, pdm, poetry and setuptools. VCS versioning plugins
+were the most popular, with `setuptools_scm` being used by approximately
+8% of all packages, and `hatch-vcs` by over a hundred projects. There
+were also other plugins serving the same purpose, such as `versioneer`,
+`setuptools-git-versioning`, `versioningit` and more. `versioneer` is
+often vendored, so it is probably used by more packages than the numbers
+suggest.
 
-The next most popular category were plugins focused on building
-extensions. Cython was used by 178 packages. 45 packages used pybind11,
+We can also note that `setuptools-scm-git-archive` plugin was still
+used in 12 packages, though `setuptools_scm >= 8` supersedes it.
+
+Plugins related to extension builds were the next most
+popular category. Cython was used by 178 packages. 45 packages used pybind11,
 while its competitor nanobind featured 5 uses. 32 packages declared a build
-dependency on CFFI (this is not representative of CFFI popularity,
-as the majority of consumers use it as runtime dependency only). 17 packages
-used `setuptools-rust`, and further 12 used `scikit-build` (also note that
-30 projects used `scikit-build-core`, per table 1).
+dependency on CFFI. However, this only captured some of the CFFI use
+cases, as others use CFFI at runtime only. 17 packages used
+`setuptools-rust`, and further 12 used `scikit-build` (also note that 30
+projects used `scikit-build-core`, per table 1).
 
-It should also be noted that 32 packages declared a dependency on `cmake`
-package, and 16 more on `ninja` package. These PyPI packages provide
-precompiled executables for systems where system tools are not available.
-Some projects, notably these using scikit-build-core backend, add these
-dependencies only if they cannot find the required tool. The packages
-counted here added the dependency and therefore required installing a local
-copy of the tool, even though system tools were available. Furthermore,
-some packages explicitly rely on helper Python modules that are installed
-as part of these packages. Note that the number is two and a half times
-higher than the use of `scikit-build`, indicating custom CMake handlers.
+32 packages declared a dependency on `cmake`, and 16 on `ninja`. These
+PyPI packages provide precompiled executables for systems where system
+tools are not available. Some projects add these dependencies only
+if they cannot find the required tool. Since these tools were present
+on my system, the numbers here represent packages adding
+the dependencies unconditionally. This indicates that they will use
+a local copy instead of the system tools.
 
-82 packages used `pytest-runner` to provide a test command via PyTest.
-71 packages used `pbr` extensions to setuptools. As noted in table 1,
-two were using its backend directly. The Jupyter ecosystem featured
-16 uses of `hatch-jupyter-builder` and 8 uses of the older `jupyter-packaging`.
+Note that the number of `cmake` dependencies is much higher than
+the number of `scikit-build` dependencies, indicating that many projects
+implemented their own CMake support rather than using the existing tools.
 
-The next popular Hatch plugins were related to README files (represented
-primarily by `hatch-fancy-pypi-readme`, used by 32 packages)
-and requirement-reading plugins (`hatch-requirements-txt` with 11 uses).
+82 packages used `pytest-runner`, a plugin that provided a custom test
+command for setuptools. 71 packages used `pbr` with setuptools build
+backend, while as noted in table 1, two were using the `pbr` backend
+directly. Jupyter-related packages were perhaps the most diverse,
+with 16 packages using `hatch-jupyter-builder`, 6 using
+`jupyter-packaging` with setuptools and two with its own backend.
+
+32 packages used `hatch-fancy-pypi-readme` plugin that aids providing
+package descriptions. 11 used `hatch-requirements-txt` to read
+requirements from files.
 
 Interesting enough, there was a large number of plugins that were used
 only by a handful of packages in the set — some clearly written
