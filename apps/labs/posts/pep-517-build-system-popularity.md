@@ -96,92 +96,96 @@ repository. They perform the following actions:
 
 <table style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <caption>Table 1. Cumulative backend use counts</caption>
-  <tr><th>Backend / family</th><th>Count</th></tr>
+  <tr><th>Family or backend</th><th>Count</th></tr>
   <tr style={{ background: '#fef' }}><td style={{ height: '4em' }}>setuptools</td><td align='right'>5854</td></tr>
   <tr style={{ background: '#eff' }}><td style={{ height: '4em' }}>poetry</td><td align='right'>625</td></tr>
   <tr style={{ background: '#ffe' }}><td style={{ height: '4em' }}>hatchling</td><td align='right'>480</td></tr>
   <tr style={{ background: '#eef' }}><td style={{ height: '4em' }}>flit</td><td align='right'>285</td></tr>
-  <tr><td style={{ height: '2.5em' }}>`maturin`</td><td align='right'>85</td></tr>
+  <tr><td style={{ height: '3em' }}>`maturin`</td><td align='right'>85</td></tr>
   <tr style={{ background: '#efe' }}><td style={{ height: '4em' }}>pdm</td><td align='right'>42</td></tr>
   <tr style={{ background: '#fee' }}><td style={{ height: '4em' }}>scikit-build-core</td><td align='right'>30</td></tr>
-  <tr><td style={{ height: '2.5em' }}>`mesonpy`</td><td align='right'>16</td></tr>
-  <tr><td style={{ height: '2.5em' }}>`whey`</td><td align='right'>4</td></tr>
-  <tr><td style={{ height: '2.5em' }}>(custom)</td><td align='right'>3</td></tr>
-  <tr><td style={{ height: '2.5em' }}>`sphinx_theme_builder`</td><td align='right'>3</td></tr>
-  <tr><td style={{ height: '2.5em' }}>`sipbuild.api`</td><td align='right'>3</td></tr>
-  <tr><td style={{ height: '2.5em' }}>`pbr.build`</td><td align='right'>2</td></tr>
-  <tr><td style={{ height: '2.5em' }}>`jupyter_packaging.build_api`</td><td align='right'>2</td></tr>
+  <tr><td style={{ height: '3em' }}>`mesonpy`</td><td align='right'>16</td></tr>
+  <tr><td style={{ height: '3em' }}>`whey`</td><td align='right'>4</td></tr>
+  <tr><td style={{ height: '3em' }}>(custom)</td><td align='right'>3</td></tr>
+  <tr><td style={{ height: '3em' }}>`sphinx_theme_builder`</td><td align='right'>3</td></tr>
+  <tr><td style={{ height: '3em' }}>`sipbuild.api`</td><td align='right'>3</td></tr>
+  <tr><td style={{ height: '3em' }}>`pbr.build`</td><td align='right'>2</td></tr>
+  <tr><td style={{ height: '3em' }}>`jupyter_packaging.build_api`</td><td align='right'>2</td></tr>
 </table>
 <table style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <caption>Table 2. Detailed counts for common families</caption>
-  <tr><th>Family / backend</th><th>Count</th></tr>
-  <tr style={{ background: '#fef' }}><th>setuptools</th><th></th></tr>
-  <tr style={{ background: '#fef' }}><td>`None`</td><td align='right'>4178</td></tr>
-  <tr style={{ background: '#fef' }}><td>`setuptools.build_meta`</td><td align='right'>1642</td></tr>
-  <tr style={{ background: '#fef' }}><td>`setuptools.build_meta:__legacy__`</td><td align='right'>19</td></tr>
-  <tr style={{ background: '#fef' }}><td>(custom)</td><td align='right'>15</td></tr>
-  <tr style={{ background: '#eff' }}><th>poetry</th><th></th></tr>
-  <tr style={{ background: '#eff' }}><td>`poetry.core.masonry.api`</td><td align='right'>553</td></tr>
-  <tr style={{ background: '#eff' }}><td>`poetry.masonry.api`</td><td align='right'>51</td></tr>
-  <tr style={{ background: '#eff' }}><td>`poetry_dynamic_versioning.backend`</td><td align='right'>21</td></tr>
-  <tr style={{ background: '#ffe' }}><th>hatchling</th><th></th></tr>
-  <tr style={{ background: '#ffe' }}><td>`hatchling.build`</td><td align='right'>477</td></tr>
-  <tr style={{ background: '#ffe' }}><td>(custom)</td><td align='right'>2</td></tr>
-  <tr style={{ background: '#ffe' }}><td>`hatchling.ouroboros`</td><td align='right'>1</td></tr>
-  <tr style={{ background: '#eef' }}><th>flit</th><th></th></tr>
-  <tr style={{ background: '#eef' }}><td>`flit_core.buildapi`</td><td align='right'>276</td></tr>
-  <tr style={{ background: '#eef' }}><td>`flit.buildapi`</td><td align='right'>4</td></tr>
-  <tr style={{ background: '#eef' }}><td>`flit_scm:buildapi`</td><td align='right'>3</td></tr>
-  <tr style={{ background: '#eef' }}><td>(custom)</td><td align='right'>1</td></tr>
-  <tr style={{ background: '#eef' }}><td>`flit_gettext.scm`</td><td align='right'>1</td></tr>
-  <tr style={{ background: '#efe' }}><th>pdm</th><th></th></tr>
-  <tr style={{ background: '#efe' }}><td>`pdm.backend`</td><td align='right'>37</td></tr>
-  <tr style={{ background: '#efe' }}><td>`pdm.pep517.api`</td><td align='right'>4</td></tr>
-  <tr style={{ background: '#efe' }}><td>`pdm.backend.intree`</td><td align='right'>1</td></tr>
-  <tr style={{ background: '#fee' }}><th>scikit-build-core</th><th></th></tr>
-  <tr style={{ background: '#fee' }}><td>`scikit_build_core.build`</td><td align='right'>28</td></tr>
-  <tr style={{ background: '#fee' }}><td>(custom)</td><td align='right'>2</td></tr>
+  <tr><th colspan='2'>Family and backend</th><th>Count</th></tr>
+  <tr style={{ background: '#fef' }}><th colspan='2'>setuptools</th><th></th></tr>
+  <tr style={{ background: '#fef' }}><td style={{ width: '1em' }}></td><td>(none)</td><td align='right'>4178</td></tr>
+  <tr style={{ background: '#fef' }}><td></td><td>`setuptools.build_meta`</td><td align='right'>1642</td></tr>
+  <tr style={{ background: '#fef' }}><td></td><td>`setuptools.build_meta:__legacy__`</td><td align='right'>19</td></tr>
+  <tr style={{ background: '#fef' }}><td></td><td>(custom)</td><td align='right'>15</td></tr>
+  <tr style={{ background: '#eff' }}><th colspan='2'>poetry</th><th></th></tr>
+  <tr style={{ background: '#eff' }}><td></td><td>`poetry.core.masonry.api`</td><td align='right'>553</td></tr>
+  <tr style={{ background: '#eff' }}><td></td><td>`poetry.masonry.api`</td><td align='right'>51</td></tr>
+  <tr style={{ background: '#eff' }}><td></td><td>`poetry_dynamic_versioning.backend`</td><td align='right'>21</td></tr>
+  <tr style={{ background: '#ffe' }}><th colspan='2'>hatchling</th><th></th></tr>
+  <tr style={{ background: '#ffe' }}><td></td><td>`hatchling.build`</td><td align='right'>477</td></tr>
+  <tr style={{ background: '#ffe' }}><td></td><td>(custom)</td><td align='right'>2</td></tr>
+  <tr style={{ background: '#ffe' }}><td></td><td>`hatchling.ouroboros`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#eef' }}><th colspan='2'>flit</th><th></th></tr>
+  <tr style={{ background: '#eef' }}><td></td><td>`flit_core.buildapi`</td><td align='right'>276</td></tr>
+  <tr style={{ background: '#eef' }}><td></td><td>`flit.buildapi`</td><td align='right'>4</td></tr>
+  <tr style={{ background: '#eef' }}><td></td><td>`flit_scm:buildapi`</td><td align='right'>3</td></tr>
+  <tr style={{ background: '#eef' }}><td></td><td>(custom)</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#eef' }}><td></td><td>`flit_gettext.scm`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#efe' }}><th colspan='2'>pdm</th><th></th></tr>
+  <tr style={{ background: '#efe' }}><td></td><td>`pdm.backend`</td><td align='right'>37</td></tr>
+  <tr style={{ background: '#efe' }}><td></td><td>`pdm.pep517.api`</td><td align='right'>4</td></tr>
+  <tr style={{ background: '#efe' }}><td></td><td>`pdm.backend.intree`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#fee' }}><th colspan='2'>scikit-build-core</th><th></th></tr>
+  <tr style={{ background: '#fee' }}><td></td><td>`scikit_build_core.build`</td><td align='right'>28</td></tr>
+  <tr style={{ background: '#fee' }}><td></td><td>(custom)</td><td align='right'>2</td></tr>
 </table>
 
 </div>
 
-In the data set, setuptools was used as a build system for almost 79%
-of packages. 7 out of 10 packages using this build system do so without
-explicitly declaring a build backend, via the implicit fallback to
-`setup.py`.
+Setuptools was used as a build system for almost 79%
+of the tested packages. Seven out of ten packages using setuptools do not
+declare a build backend in `pyproject.toml` — they rely on the tools
+running `setup.py` when no backend is declared.
 
-The three next build system families are Poetry (8.4% packages),
-Hatchling (6.5% packages) and Flit (3.8%). The remaining build systems
-amount for 2.6% of packages, and include both generic Python build
-systems (such as `pdm-backend`), as well as more specialized tools
-such as Maturin that is used for Rust packages (1.1%), scikit-build-core
-that provide CMake integration (0.40%) and mesonpy that provides Meson
-integration (0.22%).
+The three next top ranking build system families are Poetry (8.4% packages),
+Hatchling (6.5% packages) and Flit (3.8%). Build systems other than the four
+already mentioned amount for 2.6% of packages. They include both generic Python build
+systems (such as `pdm-backend`), as well as more specialized tools such as:
 
-Setuptools, Poetry and Hatchling both support plugins, making their
-consumers almost uniformly use the provided backends. The exception
-to this is the `poetry_dynamic_versioning` plugin that uses a custom
-backend. Conversely, the `flit_core` package does not support plugins.
-Instead, it is extended via subclassing, in `flit_scm` and
-`flit_gettext` packages.
+- Maturin — used to build Rust packages (1.1%)
 
-It should be noted that some of the listed PEP 517 backends are derived
-from earlier setuptools plugins. This is particularly the case for
-`scikit-build-core` (derived from `scikit-build`) and `pbr` (with
-the same package providing both the plugin and the backend). Therefore,
-the numbers for these backends are likely to raise once packages switch
-from the earlier approach of using the plugin to the newer approach
-of using the PEP 517 backend.
+- scikit-build-core — used to integrate with CMake build system (0.40%)
 
-23 packages in total declared a custom (local) backend, with all but 3
-being based on some other build system. Setuptools accounted for 15
-custom build backend uses.
+- mesonpy — used to integrate with Meson build system (0.22%)
 
-Aside from the overwhelming implicit use of the legacy setuptools
-backend, there are 19 packages declaring the use of this backend
-explicitly, which is arguably incorrect. 51 packages still use
-the deprecated `poetry.masonry.api` backend. The deprecated
-`flit.buildapi` and `pdm.pep517.api` backends are used by 4 packages
+All of setuptools, Poetry and Hatchling support plugins. Packages that
+need to extend their behavior usually use the same standard build backend
+and enable plugins in their configuration. The exception to that
+is the `poetry_dynamic_versioning` plugin that uses a separate backend.
+Conversely, `flit_core` does not support plugins and is extended
+by creating new backends based on it. Two examples of such backends
+are `flit_scm` and `flit_gettext`.
+
+Some of the listed PEP 517 backends are derived
+from earlier setuptools plugins. For example, `scikit-build-core` replaces
+the earlier `scikit-build` plugin, and `pbr` provides a setuptools
+plugin along with the newer PEP 517 backend. We can expect the numbers
+corresponding to these backends to grow once packages are updated
+from the older approach of using plugins to the newer approach of using
+the respective backend.
+
+23 source distributions provided a custom backend as a Python module
+inside the distribution. However, only three were truly custom
+and the remainder simply extended another build system. In three out of
+four cases, that build system were setuptools.
+
+19 packages declared the use of `setuptools.build_meta:__legacy__`
+backend. Arguably, [using the legacy backend explicitly is incorrect](https://github.com/pypa/setuptools/issues/1689). 51 packages still used
+the deprecated `poetry.masonry.api` backend, and the deprecated
+`flit.buildapi` and `pdm.pep517.api` backends were used by four packages
 each.
 
 ## Different setuptools configuration formats
