@@ -190,40 +190,52 @@ each.
 
 ## Different setuptools configuration formats
 
-At the time of writing, setuptools supported three different configuration
-formats: functional configuration via `setup.py`, declarative
-configuration via `setup.cfg` and the modern `pyproject.toml` files.
+Setuptools support three different configuration formats right now:
+`setup.py`, `setup.cfg` and `pyproject.toml`.
 
-Configuring via `setup.py` is the oldest approach, and it has been
-inherited from the original `distutils` build system provided by Python.
-In this approach, different configuration options are passed
-as arguments to the `setup()` function invocation. This method provides
-the widest functionality and most flexibility. However, the latter also
-comes at a price: some packages still make mistakes such as declaring
-the metadata conditionally to Python version, e.g.:
+Configuring via `setup.py` is the oldest approach. It follows the format
+originally used by the earlier `distutils` build system. When the package
+is built, the `setup.py` script is executed with specific commands to
+build a wheel. The script eventually calls the `setup()` function
+provided by setuptools, passing the package metadata and build
+configuration as arguments.
+
+This configuration method is the most flexible, as it permits executing
+any Python code during the build. However, this comes at a price — it is
+easy to make mistakes such as:
 
 ```python
 install_requires = []
-# WRONG: "py3" wheel will either contain an unconditional dependency
-# or none at all
+# WRONG!
 if sys.version_info < (3, 11):
     install_requires.append("exceptiongroup")
 ```
 
+With the above snippet, if a wheel is built with Python 3.10, it will
+install the `exceptiongroup` dependency on all Python versions. Conversely,
+a wheel built with Python 3.11 or newer will never install `exceptiongroup`,
+not even on Python 3.10 or older.
+
 [Declarative configuration via
 `setup.cfg`](https://setuptools.pypa.io/en/latest/userguide/declarative_config.html)
-was added in 30.3.0. It supports the most of the commonly used metadata
-keys and build options, but e.g. it does not support extension builds.
-Interestingly, it also provides streamlined ways of obtaining dynamic
-metadata, such as extracting the version from a Python file or reading
-long description from a file — replacing the need to code the logic
-explicitly.
+was added in 30.3.0. It supports most of the common configuration options
+but not all. For example, Python extensions written in C can only be
+declared via `setup.py`. However, it also supports some new features,
+such as automatically extracting the version from a Python file or reading
+the package description from a README file:
+
+```ini
+[metadata]
+version = attr: frobnicate.__version__
+long_description = file: README.rst
+```
 
 Finally, support for [`pyproject.toml`
 configuration](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html)
 was added in 61.0.0. It is based on [PEP
-621](https://peps.python.org/pep-0621/), and therefore brings setuptools
-in line with other PEP 517 build backends.
+621](https://peps.python.org/pep-0621/), and therefore makes the common
+part of the configuration compatible with other PEP 517 build backends
+such as Hatchling.
 
 <div style={{textAlign: 'center'}}>
 
@@ -250,32 +262,32 @@ in line with other PEP 517 build backends.
 
 </div>
 
-`setup.py` still remains the most popular of the configuration formats,
-being used by 89% of the analyzed packages, with 64% relying exclusively
-on this format. One out of five packages would declare the project
+`setup.py` still remains the most popular of the configuration formats.
+It is used by 89% of the analyzed packages, with 64% not using any other
+format. One out of five packages would declare the project
 metadata in `setup.cfg`, and around 15% in `pyproject.toml`.
 
-Note the significant overlap in these numbers. Only 87 packages would
-declare their metadata in `setup.cfg` exclusively, while 1104 would
-combine it with `setup.py`. The numbers are more even for `pyproject.toml` —
-with 541 packages using it exclusively for metadata, and 330 with `setup.py`.
-Perhaps the most curious combinations are 17 packages using all three formats
-and 14 declaring the project metadata using the two declarative formats —
-the way the analysis was done, such an overlap clearly indicates that the
-project metadata would be specified redundantly.
+Note the significant overlap in these numbers. Only 87 packages used
+`setup.cfg` exclusively, while 1104 combined it with `setup.py`.
+The numbers are more even for `pyproject.toml`. 541 packages used it
+exclusively for metadata, and 330 combined with `setup.py`.
 
-Perhaps the most surprising number are the 11 packages that did not provide
-any metadata. A detailed analysis revealed that half of them feature
-only a `setup.cfg` file without metadata, and the other half featured
-Poetry metadata while declaring setuptools as a build backend. Needless
-to say, in both cases the source distributions would not be installed
-correctly.
+Perhaps it is most curious that 17 packages used all three formats
+simultaneously, and 14 used the pair of `setup.cfg` with `pyproject.toml`.
+In all these cases, the project probably repeated the same information
+in multiple formats.
 
-Note that these numbers are only approximate. Because of the functional
-nature of `setup.py`, its sole presence was counted towards its use —
-meaning that even an empty `setup()` call would increase the number.
-On the other hand, `setup.cfg` and `pyproject.toml` files would be counted
-only if they actually contained the respective metadata sections.
+11 packages did not provide any metadata. Half of them have only
+a generated `setup.cfg` file that does not contain package metadata,
+and the other half used a configuration format specific to Poetry build
+system while incorrectly declaring setuptools as the build backend.
+These source distributions could not be installed correctly.
+
+All these numbers are only approximate. `setup.py` can contain any Python
+code, and I counted all the packages containing `setup.py` as using it.
+However, some packages used it only as a compatibility script without
+actually declaring any metadata in it. `setup.cfg` and `pyproject.toml`
+were counted if they actually contained a package metadata section.
 
 ## Build system dependencies
 
