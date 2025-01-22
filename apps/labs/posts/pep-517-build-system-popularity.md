@@ -291,40 +291,58 @@ were counted if they actually contained a package metadata section.
 
 ## Build system dependencies
 
-According to PEP 517, the build-time dependencies are combined from two
-sources: the explicit `build-system.requires` key in `pyproject.toml`,
-and an invocation to `get_requires_for_build_wheel()` method on the build
-backend. The former must specify all dependencies needed to invoke
-the latter (most notably, the build backend itself) and generally
-is preferred for all explicit non-dynamic dependencies. Conversely,
-the latter is generally used for implicit dependencies of the build
-system, and for dependencies that need to be declared dynamically.
-For example, it could pull in PyPI packages for `cmake` and `ninja`
-if these tools are not provided by the system. It is also used to
-handle build-system specific build dependency metadata, such as
-the deprecated setuptools `setup_requires` key.
+PEP 517 specifies that the packages that need to be installed for the build
+process come from two sources:
+
+- the values declared in `build-system.requires` key of `pyproject.toml`, and
+
+- the values returned by `get_requires_for_build_wheel()` function
+  of the PEP 517 build backend.
+
+The packages listed in `pyproject.toml` are installed first. It often lists
+all build requirements for the project, but it must at least include all
+packages that are required to invoke the build backend (e.g. `setuptools`
+and all packages imported in `setup.py`).
+
+The packages provided by the backend function usually include the dependencies
+of the build backend itself, and dynamic dependencies of the project.
+For example, the scikit-build-core backend uses it to request installing `cmake`
+and `ninja` packages if the respective tools are not present on the system.
 
 Out of 7434 source distributions analyzed, 8 used top-level directories
 that did not match their filenames. Some of them used normalized
 directory names but non-normalized filenames (e.g. `pyre-check-0.9.23.tar.gz`
 contained `pyre_check-0.9.23` directory), others the other way around
-(`PyICU-2.14.tar.gz` contained `pyicu-2.14`). Other packages used even
+(`PyICU-2.14.tar.gz` contained `pyicu-2.14`). A few packages used even
 more arbitrary directories, e.g. `Distance-0.1.3.tar.gz` used `distance`,
-while `kuzu-0.7.1.tar.gz` used `sdist`).
+while `kuzu-0.7.1.tar.gz` used `sdist`.
 
-306 source distributions raised an exception while attempting
-to obtain the metadata, indicating that the source distribution cannot
-be installed. Out of these, 95 belonged to `pyobjc-framework` that
-cannot be installed on non-macOS systems, 19 failed due to missing
-non-Python dependencies, 2 represented non-installable deprecated
-package aliases, one a Python 2-only backport and one failed while
-building a C extension prematurely.
+306 source distributions raised an exception while calling their
+`get_requires_for_build_wheel()` function. This means that these
+distributions could not be intalled on my system. Out of these:
 
-This leaves us with 188 source distributions that are not installable
-due to upstream bugs. Notably, this includes 90 distributions that were
-missing some required files (such as README or requirement files read
-by `setup.py` scripts) and 64 failing due to missing Python dependencies
-(that would need to be specified in `build-system.requires` key).
+- 95 belonged to `pyobjc-framework` that supports macOS only
+
+- 19 failed due to missing system packages that cannot be installed
+  from PyPI
+
+- two represented deprecated package aliases that weren't meant to be
+  installed, and only inform the user to use another package
+
+- one was a backport that supports Python 2 only
+
+- one failed while building a C extension (it shouldn't have started
+  building anything yet)
+
+I discounted these packages as having special requirements, and focused
+on the remaining 188 source distributions. These clearly failed because
+of bugs. This number included:
+
+- 90 packages missing some required files (such as README or requirement
+  files specified in `setup.py`)
+
+- 64 missing Python dependencies in `build-system.requires` key
+
 The remaining packages were either failing due to incorrect metadata,
 use of removed setuptools API, code incompatible with Python 3.11
 or expecting being built from a git checkout.
@@ -475,7 +493,8 @@ be installed from source. The actual number is likely to be higher,
 since my research was limited to attempting to obtain build requirements.
 Proceeding to actually build a wheel would likely yield further problems,
 including further missing source files and incompatibilities with newer
-compiler or dependency versions.
+compiler or dependency versions. I also noticed that some packages
+start building C extensions prematurely while metadata is requested.
 
 The second significant observation is that setuptools remain the most
 frequently used build system. While this is not exactly surprising
