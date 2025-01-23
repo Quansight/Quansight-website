@@ -417,7 +417,8 @@ used by the `setup.py` script, but most often this is copied from
 dependency unnecessarily](https://github.com/pypa/setuptools/commit/f7d30a9529378cf69054b5176249e5457aaf640a).
 
 Finally, we can look at the popularity of different plugins
-for the hatchling, pdm, poetry and setuptools. VCS versioning plugins
+for the hatchling, pdm, poetry and setuptools. Plugins obtaining the version
+from a Version Control System (such as git)
 were the most popular, with `setuptools_scm` being used by approximately
 8% of all packages, and `hatch-vcs` by over a hundred projects. There
 were also other plugins serving the same purpose, such as `versioneer`,
@@ -463,97 +464,95 @@ Interesting enough, there was a large number of plugins that were used
 only by a handful of packages in the set — some clearly written
 with a single package in mind.
 
-## Summary
+## Conclusion
 
-I have attempted to analyze the popularity of different Python build
-systems based on the data obtained from the 8000 most popular packages,
+I attempted to analyze the popularity of different Python build
+systems using data obtained from the 8000 most popular PyPI packages,
 according to download counts. While this certainly is not the most
-precise measure of popularity, and one could argue that choosing this
-particular set of packages will yield a biased result, I think
-the sample is large enough to be representative. Unfortunately, while
-the data can give general impressions of the ecosystem, it cannot
-provide the rationale for the decisions made by package maintainers.
+precise measure of popularity, and you could argue that the result
+is biased, I think the sample is large enough to be representative.
+Unfortunately, while the data can give a general impression of what
+people do, it can't answer why they do that.
 
-The first surprising number are the packages that do not provide source
-distributions at all; they account for 7% of the packages on the list.
-While in some cases this could be an incidental, for example due to
-a buggy release workflow, it is also clear that sometimes this is
-a deliberate decision. In the past, I have experienced a few reasons
-for that. Some maintainers did not publish source distributions,
-because they believed that the wheels are sufficient for their pure Python
-packages. Some projects are proprietary, and therefore provide only
-binaries. And some open source projects
-stopped providing source distributions, because their build process
-was complex and it often failed when tools such as `pip` attempted
-to build the package from source — preferring their users to either
-use wheels or use the sources consciously.
+It is surprising how many packages do not provide source distributions
+at all; they account for 7% of the packages on the list. Sometimes this
+could be an accidental mistake, such as a buggy release workflow.
+However, sometimes it is deliberate, and I have seen people mention a few
+reasons for that. To list a few examples:
 
-A somewhat relevant problem are the packages that cannot be installed
-due to a variety of bugs — over half of them involving files missing
-from source distribution archives, the rest mostly needed adjustments
-for newer standards and build system versions. By adding both numbers,
-we discover that over 9% packages from the list clearly cannot
-be installed from source. The actual number is likely to be higher,
-since my research was limited to attempting to obtain build requirements.
-Proceeding to actually build a wheel would likely yield further problems,
-including further missing source files and incompatibilities with newer
-compiler or dependency versions. I also noticed that some packages
-start building C extensions prematurely while metadata is requested.
+- Some maintainers believe that wheels are sufficient for pure Python
+  packages, and do not publish source distributions.
 
-The second significant observation is that setuptools remain the most
-frequently used build system. While this is not exactly surprising
-given its head start, it raises some questions that could justify
-further research. Particularly, how frequently setuptools is chosen
-as a build system for new projects? How frequently it is chosen
-as a new build system, rather than being copied from another project
-(recently coined as [the Makefile
+- Some projects are proprietary, and do not distribute sources at all.
+
+- Some open source projects stopped providing source distributions,
+  because their build process was complex and it often failed when
+  `pip` attempted to build the package from source. Their maintainers
+  prefer that users either use wheels, or manually build from source
+  when they know what they're doing.
+
+Many packages also could not be installed due to a variety of bugs.
+Over half of them involved files missing from source distribution
+archives. Others needed adjustments for newer Python standards,
+and newer build system versions. If we combine this number with packages
+not providing source distributions at all, we discover that over 9%
+packages from the list cannot be installed from source. However, I
+did not start actually building the package — if I did, I would probably
+discover many more packages failing. I did note that some packages
+actually started building their sources prematurely, though.
+
+Setuptools remain the most frequently used build system. It is derived
+from the old distutils build system, and therefore predates PEP 517 quite
+a lot — it should not be surprising that many projects use it.
+However, we can ask a few interesting questions. How often are
+setuptools chosen for new projects? How often is this just a matter
+of copying an existing solution from another project (recently coined
+as [the Makefile
 effect](https://blog.yossarian.net/2025/01/10/Be-aware-of-the-Makefile-effect))?
-Does neglecting to specify the build backend in `pyproject.toml`
-indicate lack of PEP 517 awareness, or merely the fact that it is not
-strictly necessary?
+If there is no build backend specified in `pyproject.toml`, does that
+mean that the author is not aware of PEP 517?
 
-All major PEP 517 build systems share a common base subset of features,
-and with PEP 621 also the way of specifying most of the project
-metadata. How often do people choose a specific backend because of
-the features it offers, and how often is the decision
-semi-incidental? At least part of the popularity of some of the backends
-comes from the accompanying tools — Flit for the `flit_core` package,
-Poetry for `poetry-core`, Hatch for `hatchling` and PDM for `pdm-backend`.
-In fact, in my experience some maintainers do not realize that they
-do not actually have to match backend to the tooling they use.
-It is also quite probable that some projects choose Hatchling because
-it is the default option in [‘Choosing a build backend’ part
-of the Python Packaging User Guide](https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend).
+All major build systems share basic features. They also support a common
+way of specifying package metadata in `pyproject.toml`. How often do people
+select a backend based on its extra features? And how often the actual
+backend does not make much of a difference to them?
 
-On top of that, over a half of the packages using setuptools
-still rely on functional way of declaring package metadata, often
-manually reimplementing features that are integrated into the newer
-formats, such as reading version from Python files or a README file.
-Even those using a newer metadata format provide `setup.py` for one
-reason or another. It can be added that other PEP 517 backends,
-such as Hatchling and poetry-core, often also provide the run additional
-Python code throughout build process.
+Many backends were developed as part of some packaging tool. In my experience,
+many people choose `hatchling`, because they use Hatch. They choose
+`flit_core` when they use Flit, `poetry-core` when they use Poetry,
+`pdm-backend` when they use PDM. Some of them think they cannot use
+another backend with their chosen tool. Some people probably choose
+Hatchling, because it is the default option in [‘Choosing a build
+backend’ part of the Python Packaging User
+Guide](https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend).
 
-The last part of the post was primarily focused on build system plugins
-and other build dependencies.
-Some of the packages still used setuptools plugins that grew into their
-own backends, such as `pbr` and `scikit-build`, meaning that they are
-likely to switch in the future. Other packages combined different
-PEP 517 backends with setuptools to facilitate extension builds.
+Over half of the packages using setuptools still rely on `setup.py`.
+People often manually write code to read version from a Python file,
+or description from a README file, even though newer setuptools can
+do that for them. Many packages declaring metadata in `setup.cfg`
+or `pyproject.toml`, also use `setup.py` in addition to these files.
 
-It indicated that some of the plugins are very popular — particularly
-VCS-based versioning plugins. On the other hand, it also indicated
-that there is a fair number of plugins that are used by a few packages
-only. A fair number of packages used deprecated plugins as well.
+Some PEP 517 backends provide means to run arbitrary Python code during
+the build process. Some can be extended by plugins. Some also can
+internally use setuptools to build C extensions. If neither of these
+is sufficient, you can always create your own backend.
 
-PEP 517 was adopted seven years ago, and a lot of progress was made
-since. On one hand, multiple alternatives to setuptools were developed.
-On the other, setuptools themselves changed too, reshaping themselves
-to fit better into the PEP 517 workflow and deprecating many of their
-baroque features in the process. However, it seems that the wider
-ecosystem was not moving that fast. Many packages either did not decide
-to move their build systems forward, or even were started using older
-approaches and configuration formats. The most important point
-illustrated by this post is that numbers alone provide little insight —
-what would be really interesting is a research on the actual causes
-and motivations.
+A few setuptools plugins were superseded by PEP 517 backends. For example,
+`pbr` started providing a backend in addition to a plugin,
+and `scikit-build-core` backend replaced `scikit-build` plugin.
+I think we can assume that packages using these plugins will eventually
+switch to the corresponding backends.
+
+Some of the plugins are very popular — particularly the plugins that
+obtain the version number from a Version Control System. On the other
+hand, there are also many plugins that are only used by a few packages.
+
+PEP 517 was adopted seven years ago, and a lot of progress was made.
+On one hand, we have multiple alternatives to setuptools. On the other,
+setuptools also became more modern. However, the overall ecosystem
+does not seem to be moving fast. Many old packages did not embrace new
+build systems. Some new packages are still created without PEP 517
+build backend declaration, or using older setuptools configuration
+formats. Unfortunately, numbers alone tell us very little — to understand
+the situation better, we need to talk to individual maintainers and learn
+their reasons.
