@@ -159,7 +159,7 @@ systems (such as `pdm-backend`), as well as more specialized tools such as:
 
 - scikit-build-core — used to integrate with CMake build system (0.40%)
 
-- mesonpy — used to integrate with Meson build system (0.22%)
+- meson-python — used to integrate with Meson build system (0.22%)
 
 All of setuptools, Poetry and Hatchling support plugins. Packages that
 need to extend their behavior usually use the same standard build backend
@@ -319,7 +319,7 @@ while `kuzu-0.7.1.tar.gz` used `sdist`.
 
 306 source distributions raised an exception while calling their
 `get_requires_for_build_wheel()` function. This means that these
-distributions could not be intalled on my system. Out of these:
+distributions could not be installed on my system. Out of these:
 
 - 95 belonged to `pyobjc-framework` that supports macOS only
 
@@ -526,7 +526,8 @@ Hatchling, because it is the default option in [‘Choosing a build
 backend’ part of the Python Packaging User
 Guide](https://packaging.python.org/en/latest/tutorials/packaging-projects/#choosing-a-build-backend).
 
-Over half of the packages using setuptools still rely on `setup.py`.
+Over half of the packages using setuptools still rely on declaring
+their metadata in `setup.py` only.
 People often manually write code to read version from a Python file,
 or description from a README file, even though newer setuptools can
 do that for them. Many packages declaring metadata in `setup.cfg`
