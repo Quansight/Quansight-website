@@ -18,7 +18,7 @@ If you were writing a data science tool in 2015, you'd probably have
 added pandas support and called it a day. However, it's not 2015, we've fast-forwarded to 2025,
 and so if you do that today you'll be inundated with endless "can you support
 Polars / DuckDB / PyArrow / DataFusion / ..." requests. Yet you have no interest in understanding
-the subtle differences between them, prefering to focus on the problems which your library set
+the subtle differences between them, preferring to focus on the problems which your library set
 out to solve. What can you do?
 
 Today, you'll learn about how to create tools which support all kinds of dataframes:
