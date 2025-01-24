@@ -244,7 +244,7 @@ another except through their Python interfaces. SciPy instead has its own contex
 [`scipy.special.errstate`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.errstate.html) that
 mirrors `np.errstate`.
 
-```
+```python
 In  [1]: import numpy as np
 
 In  [2]: import scipy.special as special
@@ -298,7 +298,7 @@ between ufuncs. We noticed something was wrong due to a failure in a doctest for
 [`special.seterr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.seterr.html#scipy.special.seterr).
 The expected error was not being raised.
 
-```
+```python
     Examples
     --------
     >>> import scipy.special as sc
@@ -323,7 +323,7 @@ tests, no one knew.
 We saw three options:
 
 1. Have the Python interface for modifying the error handling state (`special.errstate` and `special.seterr` update the
-   state in each extension module, taking care that the state remains synchronized.
+   state in each extension module, taking care that the state remains synchronized).
 
 2. Extract the error handling state and primitives for managing it into a shared library that would be linked with
    each extension module.
@@ -386,7 +386,7 @@ loaded by a Python interpreter running in the same process, since only a single 
 memory.
 
 Note that the title of this article isn't entirely accurate. A Python extension module is itself a shared library which
-is loaded by the Python interpreter at runtime. Thus SciPy actually contains many shared libaries and has done so from its
+is loaded by the Python interpreter at runtime. Thus SciPy actually contains many shared libraries and has done so from its
 earliest days. What we mean is the first regular shared library that's not a Python extension module. Also, although
 we've been talking in terms of linking programs with a shared library, in this case we are linking Python extension
 modules with a shared library. It's perfectly valid to link one shared library with one or more others.
