@@ -322,8 +322,8 @@ tests, no one knew.
 
 We saw three options:
 
-1. Have the Python interface for modifying the error handling state (`special.errstate` and `special.seterr` update the
-   state in each extension module, taking care that the state remains synchronized).
+1. Have the Python interface for modifying the error handling state (`special.errstate` and `special.seterr`) update the
+   state in each extension module, taking care that the state remains synchronized.
 
 2. Extract the error handling state and primitives for managing it into a shared library that would be linked with
    each extension module.
