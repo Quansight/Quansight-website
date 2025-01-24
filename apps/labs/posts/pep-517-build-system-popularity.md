@@ -1,6 +1,6 @@
 ---
 title: 'PEP 517 build system popularity'
-published: TODO
+published: January 24, 2025
 authors: [michal-gorny]
 description: 'A closer look at non-elementary group-by aggregations'
 category: [Packaging]
