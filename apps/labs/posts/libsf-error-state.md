@@ -558,9 +558,15 @@ sf_error_state_lib = shared_library('sf_error_state', # Name of the library
 ```
 
 Even after this, I was still seeing the same error. I asked Ralf about it, and found what happens is that `pip`
-goes through [meson-python](https://github.com/mesonbuild/meson-python) while `dev.py` uses Meson directly.
-`meson-python` takes care to set the [`RPATH`](https://en.wikipedia.org/wiki/Rpath) for each extension module.
-The `RPATH` tells the dynamic linker where to look for shared libraries.
+goes through [meson-python](https://github.com/mesonbuild/meson-python) and its editable install support uses
+extension modules straight from the build directory, while `dev.py` uses Meson directly and does an actual install
+step with `meson install`. For the editable install, two things can make the shared library loading work:
+(1) Meson adds the build directory to the [`RPATH`](https://en.wikipedia.org/wiki/Rpath) of each extension module in
+order to enable usage without an install step (and strips it again during the `meson install` step), and (2) when
+the `install_dir` for a shared library is outside of the Python package's tree under `site-packages`,
+`meson-python` takes care of rewriting the install dir automatically to be within `site-packages` and it rewrites
+the RPATHs to match. The `dev.py` method avoids both of these fixes, and the `RPATH` that tells the dynamic linker
+where to look for shared libraries ends up being wrong as a result.
 
 To get things to work with `dev.py`, I needed to explicitly set the `RPATH` in Meson by adding `install_rpath:'$ORIGIN'`
 to each extension module. `'$ORIGIN'` in this case means to search in the same folder as the extension module.
