@@ -1,7 +1,7 @@
 ---
 title: "libsf_error_state: SciPy's first shared library"
 authors: [albert-steppi]
-published: December 15, 2024
+published: January 24, 2024
 description: The story of the first shared library to make it into the world of low level code that lies beneath SciPy's surface.
 category: [PyData ecosystem]
 featuredImage:
