@@ -94,7 +94,7 @@ repository. They perform the following actions:
 
 <div style={{textAlign: 'center'}}>
 
-<table style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<table id="table-1" style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <caption>Table 1. Cumulative backend use counts</caption>
   <tr><th>Family or backend</th><th>Count</th></tr>
   <tr style={{ background: '#fef' }}><td style={{ height: '4em' }}>setuptools</td><td align='right'>5854</td></tr>
@@ -112,7 +112,7 @@ repository. They perform the following actions:
   <tr><td style={{ height: '3em' }}>`pbr.build`</td><td align='right'>2</td></tr>
   <tr><td style={{ height: '3em' }}>`jupyter_packaging.build_api`</td><td align='right'>2</td></tr>
 </table>
-<table style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<table id="table-2" style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <caption>Table 2. Detailed counts for common families</caption>
   <tr><th colspan='2'>Family and backend</th><th>Count</th></tr>
   <tr style={{ background: '#fef' }}><th colspan='2'>setuptools</th><th></th></tr>
@@ -239,7 +239,7 @@ such as Hatchling.
 
 <div style={{textAlign: 'center'}}>
 
-<table style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<table id="table-3" style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <caption>Table 3. Counts for setuptools configuration format combinations</caption>
   <tr><th>Formats</th><th>Count</th></tr>
   <tr><td>`setup.py`</td><td align='right'>3750</td></tr>
@@ -251,7 +251,7 @@ such as Hatchling.
   <tr><td>`pyproject.toml` + `setup.cfg`</td><td align='right'>14</td></tr>
   <tr><td>(no configuration — broken distribution)</td><td align='right'>11</td></tr>
 </table>
-<table style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<table id="table-4" style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <caption>Table 4. Cumulative counts for every configuration format</caption>
   <tr><th>Format</th><th>Total</th></tr>
   <tr><td>(all packages)</td><td align='right'>5854</td></tr>
@@ -347,7 +347,7 @@ The remaining packages were either failing due to incorrect metadata,
 use of removed setuptools API, code incompatible with Python 3.11
 or expecting being built from a git checkout.
 
-<table>
+<table id="table-5">
   <caption>Table 5. Selected build requirements (P = `pyproject.toml`, H = via hook)</caption>
   <tr><th rowspan='2'>Package</th><th colspan='2' align='center'>hatchling</th><th colspan='2' align='center'>mesonpy</th><th colspan='2' align='center'>pdm</th><th colspan='2' align='center'>poetry</th><th colspan='2' align='center'>scikit-build-core</th><th colspan='2' align='center'>setuptools</th><th rowspan='2' style={{ textAlign: 'center', width: '3.2em'}}>Total</th></tr>
   <tr><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th></tr>
