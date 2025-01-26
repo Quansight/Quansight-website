@@ -145,6 +145,31 @@ repository. They perform the following actions:
 
 </div>
 
+<div style={{textAlign: 'center'}}>
+
+<figure id="fig-1" style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+  <img src="/posts/pep-517-build-system-popularity/fig1.png" width="402" height="374"
+    alt="Pie chart of build backend use. Setuptools is used by 78% of packages,
+    poetry 8.4%, hatchling 6.5%, flit 3.8%. The other backends are lumped together
+    to form 2.6%."
+  />
+
+  <figcaption>Figure 1. Cumulative use of build backends</figcaption>
+</figure>
+
+<figure id="fig-2" style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+  <img src="/posts/pep-517-build-system-popularity/fig2.png" width="417" height="374"
+    alt="Pie chart of setuptools backend use. 56% packages do not declare
+    build-backend, 22% use setuptools.build_meta backend. Other backends
+    represent less than 1%. All three pieces of the pie are of equal length
+    as the setuptools piece in figure 1, leaving the remainder open."
+  />
+
+  <figcaption>Figure 2. Use of setuptools backends</figcaption>
+</figure>
+
+</div>
+
 Setuptools was used as a build system for almost 79%
 of the tested packages. Seven out of ten packages using setuptools do not
 declare a build backend in `pyproject.toml` — they rely on the tools
