@@ -2,7 +2,7 @@
 title: 'PEP 517 build system popularity'
 published: January 24, 2025
 authors: [michal-gorny]
-description: 'A closer look at non-elementary group-by aggregations'
+description: 'Analysis of PEP 517 build backends used in 8000 top PyPI packages'
 category: [Packaging]
 featuredImage:
   src: /posts/pep-517-build-system-popularity/featured.jpeg
