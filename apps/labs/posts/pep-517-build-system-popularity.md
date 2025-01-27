@@ -287,6 +287,18 @@ such as Hatchling.
 
 </div>
 
+<figure id="fig-3" style={{float: 'right', maxWidth: '372px', padding: '0 1em'}}>
+  <img src="/posts/pep-517-build-system-popularity/fig3.png" width="372" height="374"
+    alt="A Venn Diagram of setuptools configuration formats. It consists of
+    three overlapping circles: one big circle representing setup.py use
+    and two smaller circles representing setup.cfg and pyproject.toml.
+    The setup.cfg circle is mostly overlapping with setup.py, while
+    the pyproject.toml circle is closer to half-overlapped."
+  />
+
+  <figcaption>Figure 3. Use of setuptools configuration formats combinations</figcaption>
+</figure>
+
 `setup.py` still remains the most popular of the configuration formats.
 It is used by 89% of the analyzed packages, with 64% not using any other
 format. One out of five packages would declare the project
