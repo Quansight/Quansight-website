@@ -17,11 +17,12 @@ hero:
   imageAlt: TBD
 ---
 
-`napari` and `conda` have more things in common that you would expect at first. What does an visualization library have to do with a package manager after all? The answer lies in _application distribution stories_ and _open-source collaboration_. Keep reading to find out how we migrated the `napari` installers from Briefcase to `conda/constructor` and then upstreamed all of our contributions in a beautiful open-source synergy.
+What do a visualization library and a package manager have in common? 
+Despite what one thinks, `napari` and `conda` have more things in common than meet the eye. The answer lies in _application distribution stories_ and _open-source collaboration_. Keep reading to discover how the migration of `napari` installers from Briefcase to `conda/constructor` led to a beautiful open source synergy full of upstream contributions and collaborations.
 
-## What is napari and what constraints it imposes
+## About napari and its constraints
 
-napari is a free, open-source library for n-dimensional image visualisation, annotation, and analysis. It is written in Python, so you can apply it in your notebooks and workflows, but also ships a Qt application that can be used as a standalone UI. It is primarily used by researchers working on some sort of scientific imaging discipline, like microscopy, tomography, medical imaging, etc, but nothing stops you from using it for other types of images! You can learn more about what it can do for you in their [PyCon AU 2024 talk](https://www.youtube.com/watch?v=EYmTLGwScBI).
+napari is a free, open-source library for n-dimensional image visualization, annotation, and analysis. It is written in Python so that you can use it directly in your notebooks and workflows, but it also ships a `Qt` application that can be used as a standalone UI. It is primarily used by researchers working on some scientific imaging disciplines, like microscopy, tomography, medical imaging, etc., but nothing stops you from using it for other types of images! You can learn more about what it can do for you in their [PyCon AU 2024 talk](https://www.youtube.com/watch?v=EYmTLGwScBI).
 
 As a Python project, it is distributed via [PyPI](https://pypi.org/project/napari/) and [conda-forge](https://github.com/conda-forge/napari-feedstock), so the usual installation process involves creating some sort of virtual environment and using your favorite package manager to fetch and extract the project and its dependencies in the desired location. To launch the Qt application, you type `napari` and you are greeted with this UI:
 
@@ -41,9 +42,9 @@ We were tasked with creating an installation story targeting the users of the Qt
 - The whole process should only consist of a click-through journey until napari shows up in the desktop.
 - It must be easy to update.
 - It must be extendable with plugins.
-- It should be as robust as possible; i.e. it should not break with common tasks like installing a plugin.
+- It should be as robust as possible, meaning it should not break with common tasks like installing a plugin.
 
-Surely we are not alone in this field, right? There must be a lot of tools available to build installers out of Python applications. It's Python after all; it's immensely popular! Right? You've possibly heard of [PyInstaller](https://pyinstaller.org/en/stable/), [Nuitka](https://nuitka.net/), [Briefcase](https://beeware.org/project/projects/tools/briefcase/) and many others, right? The Dropbox desktop client is also written in Python and Qt and it works perfectly, why wouldn't we able to do [something similar](https://news.ycombinator.com/item?id=32245091)?
+Surely, we are not alone in this field, right? There must be a lot of tools available to build installers out of Python applications. It's Python, after all; it's immensely popular! Right? You've possibly heard of [PyInstaller](https://pyinstaller.org/en/stable/), [Nuitka](https://nuitka.net/), [Briefcase](https://beeware.org/project/projects/tools/briefcase/) and many others, right? The [Dropbox desktop client is also written in Python and Qt](https://news.ycombinator.com/item?id=32245091), and it works perfectly; why wouldn't we be able to do something similar?
 
 ## A new installer generation pipeline
 
@@ -55,7 +56,7 @@ After assessing the state of the art, we came up with one of the first Napari Ad
 - Qt support for Apple Silicon (which was not available in PyPI back then).
 - A review process to curate packaging metadata for maximum compatibility between plugins.
 
-In practice, moving to conda-forge also forced us to move away from Briefcase, because it didn't have support for conda packaging. While we briefly contemplated such a contribution, in the end we decided to bet on tooling built specifically for the conda ecosystem. This is the "constructor stack", which includes:
+In practice, moving to conda-forge also forced us to move away from Briefcase, because it didn't support conda packaging. While briefly contemplating contributing such a feature to Briefcase, we decided to bet on tooling explicitly built for the conda ecosystem. This is the "constructor stack", which includes:
 
 - [`constructor`](https://github.com/conda/constructor) proper: this is the CLI tool that allows users to create Windows, Linux and macOS installers made of conda packages. On Windows, it uses NSIS to create a graphical installer. On Linux and macOS, a fat shell script is used. In macOS, native PKG installers can also be generated, but they were heavily marked with Anaconda branding.
 - [`menuinst`](https://github.com/conda/menuinst): this is the library that creates shortcuts for Windows. It consumes JSON documents placed under the `Menu/` directory of a conda package. We needed to extend this to all platforms, each in its own native way.
@@ -68,7 +69,7 @@ When we started this project, the `constructor` repository had not been really m
 
 So we did the same. The "napari fork" experiment resulted in a very long list of bug fixes and new features:
 
-- Add custom branding options for macOS PKG installers (they were initially built with hardcoded Anaconda branding)
+- Add features to allow for custom branding options for macOS PKG installers (they were initially built with hardcoded Anaconda branding)
 - Add signing for Windows to avoid SmartScreen warnings
 - Add notarization for macOS PKG installers to avoid security-related alerts
 - Add support to ship multiple environments with a single installer so we can have a `base`-like environment with just `conda` and `mamba`, and a `napari`-specific environment with our application for robustness.
@@ -76,7 +77,7 @@ So we did the same. The "napari fork" experiment resulted in a very long list of
 
 Once we were satisfied with what our fork could do, we decided to upstream all those changes back to `conda/constructor`. Part of the initial work was upstreamed in [`constructor 3.4.0`](https://github.com/conda/constructor/releases/tag/3.4.0), and we kept adding more and more features as the different pieces could fit together (e.g. we could not add `menuinst` support until we had released `menuinst 2.0`, which required the approval of its corresponding CEP).
 
-The momentum generated by this collaboration enabled more contributions from the community. Since the 3.4.0 milestone, we have merged 200+ PRs, published 17 more releases, and established a maintenance team! Among the new features, you can find lockfile support (which is the basis for thin installers that require internet connection instead of the fat offline artifacts we generate now), better provenance metadata, cross-platform uninstallation, customizable extra pages in EXE and PKG installers, and system compatibility checks before the installation starts.
+The momentum generated by this collaboration enabled more contributions from the community. Since the 3.4.0 milestone, we have merged 200+ PRs, published 17 more releases, and established a maintenance team! Among the new features added since then, you can find lockfile support (which is the basis for thin installers that require an internet connection instead of the fat offline artifacts we generate now), better provenance metadata, cross-platform uninstallation, customizable extra pages in EXE and PKG installers, and system compatibility checks before the installation starts.
 
 <figure style={{ textAlign: 'center' }}>
   <img 
@@ -91,7 +92,7 @@ The momentum generated by this collaboration enabled more contributions from the
 
 With the changes in `constructor`, we could install napari in the three main operating systems, but we still needed to provide our users a nice way of launching napari from their desktop UI. Anaconda and conda-forge had relied on `menuinst` to provide Windows shortcuts for some years now, but Linux and macOS had no equivalent feature. After all, those users were already familiar with CLIs and the terminal.
 
-But napari is not a CLI application. It's a GUI one. These users are not expected to interact with a terminal just to launch it. They'd like to use an icon in their desktop that launches the main application directly.
+But napari is not a CLI application. It's a GUI one. Its users are not expected to interact with a terminal just to launch it. They'd like to use an icon on their desktop that launches the main application directly.
 
 menuinst did have support for Linux, but it used a slightly different input file than Windows and had not been tested or maintained ever. So we set to unify the schemas, extend it for macOS and rewrite it from scratch while maintaining backwards compatibility with the old Windows format. The result was [CEP-12](https://github.com/conda/ceps/blob/main/cep-0012.md) and [menuinst v2](https://github.com/conda/menuinst/releases/tag/2.0.0), which has the following features:
 
@@ -121,7 +122,7 @@ Having a home for a project like this is essential. Thanks to this, `conda-stand
 
 ## Extending napari via `napari-plugin-manager`
 
-napari is meant to be extensible and has a healthy ecosystem of plugins written in Python. These plugins can add support for new image formats, analysis workflows and other imaging tasks. They often fall in the realm of computer vision, machine learning and automated annotation. This all translates to heavy dependencies and a lot of scientific code. In other words: packaging nightmares! This was one of the main reasons to primarily rely on conda-forge packaging.
+napari is meant to be extensible and has a healthy ecosystem of plugins written in Python. These plugins can add support for new image formats, analysis workflows, and other imaging tasks. They often fall into computer vision, machine learning, and automated annotation. This all translates to heavy dependencies and a lot of scientific code. In other words, packaging nightmares! This was one of the main reasons for relying primarily on conda-forge packaging.
 
 When we started contributing to `napari`, it already had a Plugin Manager dialog that allowed users to install selected packages from PyPI using `pip`. The discovery process was based on the presence of the `Framework :: napari` classifier. Packages that displayed that metadata were collected in the [napari Hub website](https://www.napari-hub.org/) and the [napari plugins API](https://api.napari.org/).
 
@@ -146,7 +147,7 @@ Instead, we decided we should focus on recoverability first: we created a conda 
 
 ## Checking updates with `napari-update-checker`
 
-Applications usually have friendly strategies to notify end users of the availability of new versions. Oftentimes, the notification includes a way to automatically install the new version. Sometimes, the application is even upgraded in the background and available after a restart.
+Applications usually include user-friendly affordances to notify end users of the availability of new versions. Oftentimes, the notification includes a way to install the new version automatically. Sometimes, the application is even upgraded in the background and available after a restart.
 
 We needed a similar feature for napari, but... how can we make that happen? conda environments that can be extended with arbitrarily-sourced plugins are not the easiest thing to upgrade. Instead, the idea would be to _create_ new environments for each new version, and try to migrate as many plugins as possible without getting too much in the way.
 
