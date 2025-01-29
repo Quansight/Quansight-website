@@ -17,12 +17,13 @@ hero:
   imageAlt: TBD
 ---
 
-What do a visualization library and a package manager have in common? 
-Despite what one thinks, `napari` and `conda` have more things in common than meet the eye. The answer lies in _application distribution stories_ and _open-source collaboration_. Keep reading to discover how the migration of `napari` installers from Briefcase to `conda/constructor` led to a beautiful open source synergy full of upstream contributions and collaborations.
+What do a visualization library and a package manager have in common?
+
+Despite what one thinks, [`napari`](https://napari.org) and [`conda`](https://docs.conda.io/projects/conda/) have more things in common than meet the eye. The answer lies in _application distribution stories_ and _open-source collaboration_. Keep reading to discover how the migration of `napari` installers from Briefcase to `conda/constructor` led to a beautiful open source synergy full of upstream contributions and collaborations.
 
 ## About napari and its constraints
 
-napari is a free, open-source library for n-dimensional image visualization, annotation, and analysis. It is written in Python so that you can use it directly in your notebooks and workflows, but it also ships a `Qt` application that can be used as a standalone UI. It is primarily used by researchers working on some scientific imaging disciplines, like microscopy, tomography, medical imaging, etc., but nothing stops you from using it for other types of images! You can learn more about what it can do for you in their [PyCon AU 2024 talk](https://www.youtube.com/watch?v=EYmTLGwScBI).
+[napari](https://napari.org) is a free, open-source library for n-dimensional image visualization, annotation, and analysis. It is written in Python so that you can use it directly in your notebooks and workflows, but it also ships a [Qt](https://www.qt.io/) application that can be used as a standalone UI. It is primarily used by researchers working on some scientific imaging disciplines, like microscopy, tomography, medical imaging, etc., but nothing stops you from using it for other types of images! You can learn more about what it can do for you in their [PyCon AU 2024 talk](https://www.youtube.com/watch?v=EYmTLGwScBI).
 
 As a Python project, it is distributed via [PyPI](https://pypi.org/project/napari/) and [conda-forge](https://github.com/conda-forge/napari-feedstock), so the usual installation process involves creating some sort of virtual environment and using your favorite package manager to fetch and extract the project and its dependencies in the desired location. To launch the Qt application, you type `napari` and you are greeted with this UI:
 
