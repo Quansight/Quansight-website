@@ -23,7 +23,7 @@ hero:
 
 napari is a free, open-source library for n-dimensional image visualisation, annotation, and analysis. It is written in Python, so you can apply it in your notebooks and workflows, but also ships a Qt application that can be used as a standalone UI. It is primarily used by researchers working on some sort of scientific imaging discipline, like microscopy, tomography, medical imaging, etc, but nothing stops you from using it for other types of images! You can learn more about what it can do for you in their [PyCon AU 2024 talk](https://www.youtube.com/watch?v=EYmTLGwScBI).
 
-As a Python project, it is distributed via PyPI and conda-forge, so the usual installation process involves creating some sort of virtual environment and using your favorite package manager to fetch and extract the project and its dependencies in the desired location. To launch the Qt application, you type `napari` and you are greeted with this UI:
+As a Python project, it is distributed via [PyPI](https://pypi.org/project/napari/) and [conda-forge](https://github.com/conda-forge/napari-feedstock), so the usual installation process involves creating some sort of virtual environment and using your favorite package manager to fetch and extract the project and its dependencies in the desired location. To launch the Qt application, you type `napari` and you are greeted with this UI:
 
 <figure style={{ textAlign: 'center' }}>
   <img 
@@ -47,7 +47,7 @@ Surely we are not alone in this field, right? There must be a lot of tools avail
 
 ## A new installer generation pipeline
 
-When we started working on napari, they were already building graphical installers, using [BeeWare](https://beeware.org/)'s Briefcase. [Briefcase](https://briefcase.readthedocs.io/en/stable/) allows you to take your Python code and its dependencies, and bundle them in a OS-native installer, including iOS and Android! The dependencies are fetched from PyPI, except for the Python interpreter, which is obtained from their ["Python support" packages](https://github.com/beeware?q=Python+support&type=all).
+When we started working on napari, it was already publishing graphical installers, using [BeeWare](https://beeware.org/)'s Briefcase. [Briefcase](https://briefcase.readthedocs.io/en/stable/) allows you to take your Python code and its dependencies, and bundle them in a OS-native installer, including iOS and Android! The dependencies are fetched from PyPI, except for the Python interpreter, which is obtained from their ["Python support" packages](https://github.com/beeware?q=Python+support&type=all).
 
 After assessing the state of the art, we came up with one of the first Napari Advancement Proposals (NAPs), [NAP-2](https://napari.org/dev/naps/2-conda-based-packaging.html), where we discussed the rationale and expected outcomes of our work. In this NAP we proposed dropping PyPI as the source for our installers, in favor of conda-forge. Moving to [conda-forge](https://conda-forge.org/) based distribution had a series of instant advantages:
 
@@ -64,7 +64,7 @@ In practice, moving to conda-forge also forced us to move away from Briefcase, b
 
 ### A fresh breeze of air in `constructor`
 
-When we started this project, the `constructor` repository had not received much attention. However, it was actively used by very important Python distributions: Anaconda used it for [Miniconda](https://docs.anaconda.com/miniconda/) and [Anaconda Distribution](https://www.anaconda.com/download), and conda-forge built [Miniforge](https://conda-forge.org/download/) with it. There was a caveat though: the lack of activity in the repository forced its users to fork it to address blocking issues or adding necessary features.
+When we started this project, the `constructor` repository had not been really maintained for a while. However, it was actively used by very important Python distributions: Anaconda used it for [Miniconda](https://docs.anaconda.com/miniconda/) and [Anaconda Distribution](https://www.anaconda.com/download), and conda-forge built [Miniforge](https://conda-forge.org/download/) with it. There was a caveat though: the lack of activity in the repository forced its users to fork it to address blocking issues or adding necessary features.
 
 So we did the same. The "napari fork" experiment resulted in a very long list of bug fixes and new features:
 
@@ -117,7 +117,7 @@ Internally, `constructor` relies on single-binary executable of `conda` built wi
 
 This project did not have a home repository when we started, and its source was distributed separately in the feedstock repositories for both conda-forge and Anaconda. Over time, these sources had diverged. We tidied this up by creating a new repository at `conda/conda-standalone` which unified the two variants and provided an official place for its development.
 
-Having a home is important and thanks the repository has now seen more community contributions and improvements. A highlight is the ability to uninstall conda installations via `conda-standalone`.
+Having a home for a project like this is essential. Thanks to this, `conda-standalone` has now seen more community contributions and improvements. One such contribution is the ability to [uninstall conda installations via `conda-standalone`](https://github.com/conda/conda-standalone/pull/112).
 
 ## Extending napari via `napari-plugin-manager`
 
