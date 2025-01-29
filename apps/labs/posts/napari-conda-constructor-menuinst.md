@@ -50,11 +50,13 @@ Surely, we are not alone in this field, right? There must be a lot of tools avai
 
 When we started working on napari, it was already publishing graphical installers, using [BeeWare](https://beeware.org/)'s Briefcase. [Briefcase](https://briefcase.readthedocs.io/en/stable/) allows you to take your Python code and its dependencies, and bundle them in a OS-native installer, including iOS and Android! The dependencies are fetched from PyPI, except for the Python interpreter, which is obtained from their ["Python support" packages](https://github.com/beeware?q=Python+support&type=all).
 
-After assessing the state of the art, we came up with one of the first Napari Advancement Proposals (NAPs), [NAP-2](https://napari.org/dev/naps/2-conda-based-packaging.html), where we discussed the rationale and expected outcomes of our work. In this NAP we proposed dropping PyPI as the source for our installers, in favor of conda-forge. Moving to [conda-forge](https://conda-forge.org/) based distribution had a series of instant advantages:
+After assessing the state of the art, we concluded that Python packaging alone had some [foundational issues](https://pypackaging-native.github.io/#key-issues) that would prevent us from meeting our packaging needs when it came to fostering a robust plugin ecosystem. We came up with one of the first Napari Advancement Proposals (NAPs), [NAP-2](https://napari.org/dev/naps/2-conda-based-packaging.html), where we discussed the rationale and expected outcomes of our work.
 
-- Community governed repository of ABI cohesive libraries and interpreters.
+In NAP-2 we proposed dropping PyPI packages as the source for our installers, in favor of conda packages built on conda-forge. Moving to [conda-forge](https://conda-forge.org/) based distribution had a series of instant advantages:
+
+- Community-governed repository of ABI cohesive libraries and interpreters.
 - Qt support for Apple Silicon (which was not available in PyPI back then).
-- A review process to curate packaging metadata for maximum compatibility between plugins.
+- More accurate packaging metadata thanks to the [initial review process](https://conda-forge.org/docs/maintainer/understanding_conda_forge/staged_recipes/) and the [repodata patching](https://conda-forge.org/docs/maintainer/understanding_conda_forge/life_cycle/#post-publication-particularities) mechanisms.
 
 In practice, moving to conda-forge also forced us to move away from Briefcase, because it didn't support conda packaging. While briefly contemplating contributing such a feature to Briefcase, we decided to bet on tooling explicitly built for the conda ecosystem. This is the "constructor stack", which includes:
 
