@@ -148,7 +148,7 @@ repository. They perform the following actions:
 <div style={{textAlign: 'center'}}>
 
 <figure id="fig-1" style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
-  <img src="/posts/pep-517-build-system-popularity/fig1.png" width="402" height="374"
+  <img src="/posts/pep-517-build-system-popularity/fig1.svg"
     alt="Pie chart of build backend use. Setuptools is used by 78% of packages,
     poetry 8.4%, hatchling 6.5%, flit 3.8%. The other backends are lumped together
     to form 2.6%."
@@ -158,7 +158,7 @@ repository. They perform the following actions:
 </figure>
 
 <figure id="fig-2" style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
-  <img src="/posts/pep-517-build-system-popularity/fig2.png" width="417" height="374"
+  <img src="/posts/pep-517-build-system-popularity/fig2.svg"
     alt="Pie chart of setuptools backend use. 56% packages do not declare
     build-backend, 22% use setuptools.build_meta backend. Other backends
     represent less than 1%. All three pieces of the pie are of equal length
@@ -288,7 +288,7 @@ such as Hatchling.
 </div>
 
 <figure id="fig-3" style={{float: 'right', maxWidth: '372px', padding: '0 1em'}}>
-  <img src="/posts/pep-517-build-system-popularity/fig3.png" width="372" height="374"
+  <img src="/posts/pep-517-build-system-popularity/fig3.svg"
     alt="A Venn Diagram of setuptools configuration formats. It consists of
     three overlapping circles: one big circle representing setup.py use
     and two smaller circles representing setup.cfg and pyproject.toml.
