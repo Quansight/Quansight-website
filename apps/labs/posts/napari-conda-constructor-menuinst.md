@@ -33,7 +33,7 @@ As a Python project, it is distributed via [PyPI](https://pypi.org/project/napar
     alt="Screenshot of the graphical interface of the napari application, freshly launched on macOS."
     style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
   />
-  <figcaption>Figure: This is how napari looks like when you open it for the first time.</figcaption>
+  <figcaption>This is how napari looks like when you open it for the first time on macOS.</figcaption>
 </figure>
 
 We were tasked with creating an installation story targeting the users of the Qt application, so we had to take into account the following requirements:
