@@ -406,25 +406,67 @@ used by the `setup.py` script, but most often this is copied from
 [a historical mistake in setuptools documentation that listed `wheel`
 dependency unnecessarily](https://github.com/pypa/setuptools/commit/f7d30a9529378cf69054b5176249e5457aaf640a).
 
-<table id='table-6'>
-  <caption>Table 6. Versioning plugins (P = `pyproject.toml`, H = via hook)</caption>
-  <tr><th rowspan='2'>Package</th><th colspan='2' align='center'>hatchling</th><th colspan='2' align='center'>mesonpy</th><th colspan='2' align='center'>pdm</th><th colspan='2' align='center'>poetry</th><th colspan='2' align='center'>scikit-build-core</th><th colspan='2' align='center'>setuptools</th><th rowspan='2' style={{ textAlign: 'center', width: '3.2em'}}>Total</th></tr>
-  <tr><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th></tr>
-  <tr><td>`setuptools-scm`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>9</td><td align='right'>487</td><td align='right'>196</td><td align='right'>611</td></tr>
-  <tr style={{ background: '#eee' }}><td>`hatch-vcs`</td><td align='right'>116</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>116</td></tr>
-  <tr><td>`poetry-dynamic-versioning`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>30</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>30</td></tr>
-  <tr style={{ background: '#eee' }}><td>`versioneer`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>20</td><td align='right'>0</td><td align='right'>21</td></tr>
-  <tr><td>`setuptools-scm-git-archive`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>11</td><td align='right'>2</td><td align='right'>12</td></tr>
-  <tr style={{ background: '#eee' }}><td>`setuptools-git-versioning`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>10</td><td align='right'>1</td><td align='right'>11</td></tr>
-  <tr><td>`versioningit`</td><td align='right'>2</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>8</td><td align='right'>0</td><td align='right'>10</td></tr>
-  <tr style={{ background: '#eee' }}><td>`hatch-nodejs-version`</td><td align='right'>9</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>9</td></tr>
-  <tr><td>`incremental`</td><td align='right'>1</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>1</td><td align='right'>2</td></tr>
-  <tr style={{ background: '#eee' }}><td>`setuptools-git`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>2</td><td align='right'>2</td></tr>
-  <tr><td>`calver`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>1</td><td align='right'>1</td></tr>
-  <tr style={{ background: '#eee' }}><td>`git-versioner`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>1</td></tr>
-  <tr><td>`vcversioner`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>1</td></tr>
-  <tr style={{ background: '#eee' }}><td>`versioneer-518`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>1</td></tr>
+<div style={{textAlign: 'center'}}>
+<table id='table-6' style={{width: 'auto', margin: '0 1em', display: 'inline-block', verticalAlign: 'top'}}>
+  <caption>Table 6. Versioning plugins</caption>
+  <tr><th>Package</th><th style={{ textAlign: 'center', width: '3.2em'}}>Total</th></tr>
+  <tr><td>`setuptools-scm`</td><td align='right'>611</td></tr>
+  <tr style={{ background: '#eee' }}><td>`hatch-vcs`</td><td align='right'>116</td></tr>
+  <tr><td>`poetry-dynamic-versioning`</td><td align='right'>30</td></tr>
+  <tr style={{ background: '#eee' }}><td>`versioneer`</td><td align='right'>21</td></tr>
+  <tr><td>`setuptools-scm-git-archive`</td><td align='right'>12</td></tr>
+  <tr style={{ background: '#eee' }}><td>`setuptools-git-versioning`</td><td align='right'>11</td></tr>
+  <tr><td>`versioningit`</td><td align='right'>10</td></tr>
+  <tr style={{ background: '#eee' }}><td>`hatch-nodejs-version`</td><td align='right'>9</td></tr>
+  <tr><td>`incremental`</td><td align='right'>2</td></tr>
+  <tr style={{ background: '#eee' }}><td>`setuptools-git`</td><td align='right'>2</td></tr>
+  <tr><td>`calver`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#eee' }}><td>`git-versioner`</td><td align='right'>1</td></tr>
+  <tr><td>`vcversioner`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#eee' }}><td>`versioneer-518`</td><td align='right'>1</td></tr>
 </table>
+<table id='table-7' style={{width: 'auto', margin: '0 1em', display: 'inline-block', verticalAlign: 'top'}}>
+  <caption>Table 7. Dependencies related to extension building</caption>
+  <tr><th>Package</th><th style={{ textAlign: 'center', width: '3.2em'}}>Total</th></tr>
+  <tr><td>`cython`</td><td align='right'>178</td></tr>
+  <tr style={{ background: '#eee' }}><td>`pybind11`</td><td align='right'>45</td></tr>
+  <tr><td>`cffi`</td><td align='right'>32</td></tr>
+  <tr style={{ background: '#eee' }}><td>`cmake`</td><td align='right'>32</td></tr>
+  <tr><td>`setuptools-rust`</td><td align='right'>17</td></tr>
+  <tr style={{ background: '#eee' }}><td>`ninja`</td><td align='right'>16</td></tr>
+  <tr><td>`scikit-build`</td><td align='right'>12</td></tr>
+  <tr style={{ background: '#eee' }}><td>`nanobind`</td><td align='right'>5</td></tr>
+  <tr><td>`py-cpuinfo`</td><td align='right'>5</td></tr>
+  <tr style={{ background: '#eee' }}><td>`setuptools-dso`</td><td align='right'>3</td></tr>
+  <tr><td>`cppy`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#eee' }}><td>`hatch-cython`</td><td align='right'>1</td></tr>
+</table>
+<table id='table-8' style={{width: 'auto', margin: '0 1em', display: 'inline-block', verticalAlign: 'top'}}>
+  <caption>Table 8. Other build system plugins</caption>
+  <tr><th>Package</th><th style={{ textAlign: 'center', width: '3.2em'}}>Total</th></tr>
+  <tr><td>`pytest-runner`</td><td align='right'>82</td></tr>
+  <tr style={{ background: '#eee' }}><td>`pbr`</td><td align='right'>73</td></tr>
+  <tr><td>`hatch-fancy-pypi-readme`</td><td align='right'>32</td></tr>
+  <tr style={{ background: '#eee' }}><td>`hatch-jupyter-builder`</td><td align='right'>16</td></tr>
+  <tr><td>`hatch-requirements-txt`</td><td align='right'>11</td></tr>
+  <tr style={{ background: '#eee' }}><td>`jupyter-packaging`</td><td align='right'>8</td></tr>
+  <tr><td>`hatch-regex-commit`</td><td align='right'>4</td></tr>
+  <tr style={{ background: '#eee' }}><td>`poetry-plugin-tweak-dependencies-version`</td><td align='right'>3</td></tr>
+  <tr><td>`setupmeta`</td><td align='right'>3</td></tr>
+  <tr style={{ background: '#eee' }}><td>`poetry-plugin-drop-python-upper-constraint`</td><td align='right'>2</td></tr>
+  <tr><td>`setuptools-changelog-shortener`</td><td align='right'>2</td></tr>
+  <tr style={{ background: '#eee' }}><td>`setuptools-golang`</td><td align='right'>2</td></tr>
+  <tr><td>`changelog-chug`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#eee' }}><td>`hatch-docstring-description`</td><td align='right'>1</td></tr>
+  <tr><td>`pdm-build-locked`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#eee' }}><td>`setuptools-declarative-requirements`</td><td align='right'>1</td></tr>
+  <tr><td>`setuptools-download`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#eee' }}><td>`setuptools-lint`</td><td align='right'>1</td></tr>
+  <tr><td>`setuptools-markdown`</td><td align='right'>1</td></tr>
+  <tr style={{ background: '#eee' }}><td>`setuptools-pipfile`</td><td align='right'>1</td></tr>
+  <tr><td>`setuptools-twine`</td><td align='right'>1</td></tr>
+</table>
+</div>
 
 Finally, we can look at the popularity of different plugins
 for the hatchling, pdm, poetry and setuptools. Plugins obtaining the version
@@ -438,24 +480,6 @@ suggest.
 
 We can also note that `setuptools-scm-git-archive` plugin was still
 used in 12 packages, though `setuptools_scm >= 8` supersedes it.
-
-<table id='table-7'>
-  <caption>Table 7. Dependencies related to extension building (P = `pyproject.toml`, H = via hook)</caption>
-  <tr><th rowspan='2'>Package</th><th colspan='2' align='center'>hatchling</th><th colspan='2' align='center'>mesonpy</th><th colspan='2' align='center'>pdm</th><th colspan='2' align='center'>poetry</th><th colspan='2' align='center'>scikit-build-core</th><th colspan='2' align='center'>setuptools</th><th rowspan='2' style={{ textAlign: 'center', width: '3.2em'}}>Total</th></tr>
-  <tr><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th></tr>
-  <tr><td>`cython`</td><td align='right'>1</td><td align='right'>0</td><td align='right'>8</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>8</td><td align='right'>0</td><td align='right'>3</td><td align='right'>0</td><td align='right'>138</td><td align='right'>34</td><td align='right'>178</td></tr>
-  <tr style={{ background: '#eee' }}><td>`pybind11`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>3</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>11</td><td align='right'>0</td><td align='right'>27</td><td align='right'>5</td><td align='right'>45</td></tr>
-  <tr><td>`cffi`</td><td align='right'>2</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>15</td><td align='right'>13</td><td align='right'>32</td></tr>
-  <tr style={{ background: '#eee' }}><td>`cmake`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>31</td><td align='right'>1</td><td align='right'>32</td></tr>
-  <tr><td>`setuptools-rust`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>2</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>14</td><td align='right'>4</td><td align='right'>17</td></tr>
-  <tr style={{ background: '#eee' }}><td>`ninja`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>14</td><td align='right'>2</td><td align='right'>16</td></tr>
-  <tr><td>`scikit-build`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>12</td><td align='right'>1</td><td align='right'>12</td></tr>
-  <tr style={{ background: '#eee' }}><td>`nanobind`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>3</td><td align='right'>0</td><td align='right'>2</td><td align='right'>0</td><td align='right'>5</td></tr>
-  <tr><td>`py-cpuinfo`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>5</td><td align='right'>0</td><td align='right'>5</td></tr>
-  <tr style={{ background: '#eee' }}><td>`setuptools-dso`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>3</td><td align='right'>0</td><td align='right'>3</td></tr>
-  <tr><td>`cppy`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>1</td></tr>
-  <tr style={{ background: '#eee' }}><td>`hatch-cython`</td><td align='right'>1</td><td align='right'>1</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td></tr>
-</table>
 
 Plugins related to extension builds were the next most
 popular category. Cython was used by 178 packages. 45 packages used pybind11,
@@ -477,32 +501,6 @@ Note that the number of `cmake` dependencies is much higher than
 the number of `scikit-build` dependencies, indicating that many projects
 implemented their own CMake support rather than using the existing tools.
 
-<table id='table-8'>
-  <caption>Table 8. Other build system plugins (P = `pyproject.toml`, H = via hook)</caption>
-  <tr><th rowspan='2'>Package</th><th colspan='2' align='center'>hatchling</th><th colspan='2' align='center'>mesonpy</th><th colspan='2' align='center'>pdm</th><th colspan='2' align='center'>poetry</th><th colspan='2' align='center'>scikit-build-core</th><th colspan='2' align='center'>setuptools</th><th rowspan='2' style={{ textAlign: 'center', width: '3.2em'}}>Total</th></tr>
-  <tr><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th></tr>
-  <tr><td>`pytest-runner`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>2</td><td align='right'>80</td><td align='right'>82</td></tr>
-  <tr style={{ background: '#eee' }}><td>`pbr`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>71</td><td align='right'>73</td></tr>
-  <tr><td>`hatch-fancy-pypi-readme`</td><td align='right'>31</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>0</td><td align='right'>32</td></tr>
-  <tr style={{ background: '#eee' }}><td>`hatch-jupyter-builder`</td><td align='right'>1</td><td align='right'>15</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>16</td></tr>
-  <tr><td>`hatch-requirements-txt`</td><td align='right'>11</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>11</td></tr>
-  <tr style={{ background: '#eee' }}><td>`jupyter-packaging`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>6</td><td align='right'>0</td><td align='right'>8</td></tr>
-  <tr><td>`hatch-regex-commit`</td><td align='right'>4</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>4</td></tr>
-  <tr style={{ background: '#eee' }}><td>`poetry-plugin-tweak-dependencies-version`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>3</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>3</td></tr>
-  <tr><td>`setupmeta`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>3</td><td align='right'>3</td></tr>
-  <tr style={{ background: '#eee' }}><td>`poetry-plugin-drop-python-upper-constraint`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>2</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>2</td></tr>
-  <tr><td>`setuptools-changelog-shortener`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>2</td><td align='right'>0</td><td align='right'>2</td></tr>
-  <tr style={{ background: '#eee' }}><td>`setuptools-golang`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>2</td><td align='right'>2</td></tr>
-  <tr><td>`changelog-chug`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>1</td></tr>
-  <tr style={{ background: '#eee' }}><td>`hatch-docstring-description`</td><td align='right'>1</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td></tr>
-  <tr><td>`pdm-build-locked`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td></tr>
-  <tr style={{ background: '#eee' }}><td>`setuptools-declarative-requirements`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>1</td><td align='right'>1</td></tr>
-  <tr><td>`setuptools-download`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>1</td></tr>
-  <tr style={{ background: '#eee' }}><td>`setuptools-lint`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>1</td></tr>
-  <tr><td>`setuptools-markdown`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>1</td></tr>
-  <tr style={{ background: '#eee' }}><td>`setuptools-pipfile`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>1</td></tr>
-  <tr><td>`setuptools-twine`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>1</td></tr>
-</table>
 82 packages used `pytest-runner`, a plugin that provided a custom test
 command for setuptools. 71 packages used `pbr` with setuptools build
 backend, while as noted in table 1, two were using the `pbr` backend
