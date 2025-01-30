@@ -7,10 +7,10 @@ description: |
 category: [Packaging]
 featuredImage:
   src: /posts/czi-eoss-5-conda-forge/TBD.png
-  alt: 'TBD'
+  alt: Photo of a person hammering a red hot metal piece on an anvil.
 hero:
   imageSrc: /posts/czi-eoss-5-conda-forge/TBD.png
-  imageAlt: 'TBD'
+  imageAlt: Photo of a person hammering a red hot metal piece on an anvil.
 ---
 
 In late 2022, [CZI awarded us three EOSS grants](https://labs.quansight.org/blog/quansight-labs-awarded-three-czi-eoss-cycle5-grants). One of them was a two-year proposal under the name ["Transparent, open & sustainable infrastructure for conda-forge and bioconda"](https://chanzuckerberg.com/eoss/proposals/transparent-open-sustainable-infrastructure-for-conda-forge-and-bioconda/). The proposal, co-submitted by Quansight Labs and QuantStack, targeted three areas: maintaining and improving infrastructure, creating a new maintainer's dashboard, and implementing OCI-based mirroring for the packages. This work has now concluded and we would like to publish a summary of what we achieved!
@@ -279,3 +279,7 @@ conda-forge's infrastructure is a very complex, never-stopping build service, ma
 Over these two years we have learned a lot about it, though, and we have seen more and more contributors gathering up the courage to step in front of this seemingly untameable beast. We are incredibly grateful for Matthew R. Becker's ([@beckermr](https://github.com/beckermr)) patience in attending all of our questions, proposals and suggestions. Without his active participation none of the infrastructure work could have gone through, and this is testament of the low bus factor numbers that threaten many open source projects, communities and ecosystem. We'd like to believe that after our work in the documentation efforts, and the many conversations we've had in issues and pull request set a precedent for many more folks to give it a try and help with sustaining the delicate garden that is conda-forge.
 
 Our commitment with conda-forge does not end with this grant. We will stay involved in 2025 through our continuous participation in the community as contributors and core team members. There is still a lot to do! If you are interested to know more, find us in [Zulip](https://conda-forge.zulipchat.com/)!
+
+## Acknowledgements
+
+- The featured image is a photo by <a href="https://unsplash.com/@supergios?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Jonny Gios</a> on <a href="https://unsplash.com/photos/person-holding-black-metal-pipe-4AT3mZMuFuI?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>.
