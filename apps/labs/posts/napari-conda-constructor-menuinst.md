@@ -10,11 +10,17 @@ category:
   - Packaging
   - OSS Experience
 featuredImage:
-  src: TBD.png
-  alt: TBD
+  src: /posts/napari-conda-constructor-menuinst/napari-featured.png
+  alt: >- 
+    Collage of three, partially overlapping screenshots. The one in the back represents
+    how the PKG installer for napari looks like on macOS. The middle one is the Windows installer
+    for napari. The front screenshot is the napari UI on macOS, freshly opened.
 hero:
-  imageSrc: TBD.svg
-  imageAlt: TBD
+  imageSrc: /posts/napari-conda-constructor-menuinst/napari-featured.png
+  imageAlt: >- 
+    Collage of three, partially overlapping screenshots. The one in the back represents
+    how the PKG installer for napari looks like on macOS. The middle one is the Windows installer
+    for napari. The front screenshot is the napari UI on macOS, freshly opened.
 ---
 
 What do a visualization library and a package manager have in common?
