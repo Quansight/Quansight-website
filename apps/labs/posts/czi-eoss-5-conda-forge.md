@@ -6,10 +6,10 @@ description: |
   In 2022 we were awarded a CZI EOSS grant for conda-forge. The proposal, co-submitted by Quansight Labs and QuantStack, targeted three areas: maintaining and improving conda-forge's infrastructure, creating a new maintainer's dashboard, and implementing OCI-based mirroring for the packages. This work has now concluded and we would like to publish a summary of what we achieved!
 category: [Packaging]
 featuredImage:
-  src: /posts/czi-eoss-5-conda-forge/TBD.png
+  src: /posts/czi-eoss-5-conda-forge/anvil.jpg
   alt: Photo of a person hammering a red hot metal piece on an anvil.
 hero:
-  imageSrc: /posts/czi-eoss-5-conda-forge/TBD.png
+  imageSrc: /posts/czi-eoss-5-conda-forge/anvil.jpg
   imageAlt: Photo of a person hammering a red hot metal piece on an anvil.
 ---
 
