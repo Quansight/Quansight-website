@@ -384,12 +384,23 @@ The remaining packages were either failing due to incorrect metadata,
 use of removed setuptools API, code incompatible with Python 3.11
 or expecting being built from a git checkout.
 
-<table id='table-5'>
-  <caption>Table 5. Setuptools dependencies (P = `pyproject.toml`, H = via hook)</caption>
-  <tr><th rowspan='2'>Package</th><th colspan='2' align='center'>hatchling</th><th colspan='2' align='center'>mesonpy</th><th colspan='2' align='center'>pdm</th><th colspan='2' align='center'>poetry</th><th colspan='2' align='center'>scikit-build-core</th><th colspan='2' align='center'>setuptools</th><th rowspan='2' style={{ textAlign: 'center', width: '3.2em'}}>Total</th></tr>
-  <tr><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th><th style={{ textAlign: 'center', width: '3.2em'}}>P</th><th style={{ textAlign: 'center', width: '3.2em'}}>H</th></tr>
-  <tr><td>`setuptools`</td><td align='right'>4</td><td align='right'>2</td><td align='right'>1</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>24</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>1808</td><td align='right'>83</td><td align='right'>1890</td></tr>
-  <tr style={{ background: '#eee' }}><td>`wheel`</td><td align='right'>0</td><td align='right'>0</td><td align='right'>1</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>10</td><td align='right'>0</td><td align='right'>0</td><td align='right'>0</td><td align='right'>937</td><td align='right'>134</td><td align='right'>979</td></tr>
+<table id='table-5' style={{margin: 'auto', width: 'auto'}}>
+  <caption>Table 5. Setuptools and wheel dependencies</caption>
+  <tr><th rowspan='2'>Build backend</th><th rowspan='2'>Dependency</th><th align='center' colspan='2'>Package</th></tr>
+  <tr><th>setuptools</th><th>wheel</th></tr>
+  <tr><td rowspan='2'>hatchling</td><td>direct</td><td align='right'>4</td><td align='right'>0</td></tr>
+  <tr><td>via hook</td><td align='right'>4</td><td align='right'>0</td></tr>
+  <tr><td rowspan='2'>`mesonpy`</td><td>direct</td><td align='right'>1</td><td align='right'>1</td></tr>
+  <tr><td>via hook</td><td align='right'>1</td><td align='right'>1</td></tr>
+  <tr><td rowspan='2'>pdm</td><td>direct</td><td align='right'>0</td><td align='right'>0</td></tr>
+  <tr><td>via hook</td><td align='right'>0</td><td align='right'>0</td></tr>
+  <tr><td rowspan='2'>poetry</td><td>direct</td><td align='right'>24</td><td align='right'>10</td></tr>
+  <tr><td>via hook</td><td align='right'>24</td><td align='right'>10</td></tr>
+  <tr><td rowspan='2'>scikit-build-core</td><td>direct</td><td align='right'>1</td><td align='right'>0</td></tr>
+  <tr><td>via hook</td><td align='right'>1</td><td align='right'>0</td></tr>
+  <tr><td rowspan='2'>setuptools</td><td>direct</td><td align='right'>1808</td><td align='right'>937</td></tr>
+  <tr><td>via hook</td><td align='right'>1808</td><td align='right'>937</td></tr>
+  <tr><td colspan='2'>Total</td><td align='right'>1890</td><td align='right'>979</td></tr>
 </table>
 
 Tables 5 through 8 provides some interesting data.
