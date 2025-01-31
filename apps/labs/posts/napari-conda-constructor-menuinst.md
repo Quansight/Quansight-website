@@ -1,6 +1,6 @@
 ---
 title: 'From napari to the world: how we generalized the `conda/constructor` stack for distributing Python applications'
-published: 'January 5, 2025'
+published: 'February 3, 2025'
 authors:
   - jaime-rodriguez-guerra
 description: >-
