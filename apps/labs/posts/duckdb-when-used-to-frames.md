@@ -28,19 +28,19 @@ Not only are these all possible, they're easy as well. Let's learn how to implem
 Subtracting the mean, also known as "centering", is a common data science technique performed before fitting classical regression models. In pandas or Polars, it's trivial:
 
 ```python
-data = {'a': [1, 3, -1, 8]}
+data = {"a": [1, 3, -1, 8]}
 
 # pandas
 import pandas as pd
 
 df_pd = pd.DataFrame(data)
-df_pd['a_centered'] = df_pd['a'] - df_pd['a'].mean()
+df_pd["a_centered"] = df_pd["a"] - df_pd["a"].mean()
 
 # Polars
 import polars as pl
 
 df_pl = pl.DataFrame(data)
-df_pl.with_columns(a_centered = pl.col('a') - pl.col('a').mean())
+df_pl.with_columns(a_centered=pl.col("a") - pl.col("a").mean())
 ```
 ```
 shape: (4, 2)
@@ -60,12 +60,14 @@ If you naively try translating to SQL, however, you'll get an error:
 ```python
 import duckdb
 
-duckdb.sql("""
+duckdb.sql(
+    """
     SELECT
         *,
         a - MEAN(a) AS a_centered
     FROM df_pl
-""")
+    """
+)
 ```
 ```
 BinderException: Binder Error: column "a" must appear in the GROUP BY clause or must be part of an aggregate function.
@@ -74,12 +76,14 @@ Either add it to the GROUP BY list, or use "ANY_VALUE(a)" if the exact value of 
 SQL does not let us compare columns with aggregates. To do so, we need to use a [window function](https://en.wikipedia.org/wiki/Window_function_(SQL)). We're taking the mean of column `'a'` over the entire column, so we write:
 
 ```python
-duckdb.sql("""
+duckdb.sql(
+    """
     SELECT
         *,
         a - MEAN(a) OVER () AS a_centered
     FROM df_pl
-""")
+    """
+)
 ```
 
 ```
@@ -102,15 +106,15 @@ Say we have unevently spaced temporal data, such as:
 from datetime import datetime
 
 dates = [
-  datetime(2025, 1, 1),   # Wednesday
-  datetime(2025, 1, 7),   # Tuesday
-  datetime(2025, 1, 8),   # Wednesday
-  datetime(2025, 1, 9),   # Thursday
-  datetime(2025, 1, 16),  # Thursday
-  datetime(2025, 1, 17),  # Friday
+    datetime(2025, 1, 1),  # Wednesday
+    datetime(2025, 1, 7),  # Tuesday
+    datetime(2025, 1, 8),  # Wednesday
+    datetime(2025, 1, 9),  # Thursday
+    datetime(2025, 1, 16),  # Thursday
+    datetime(2025, 1, 17),  # Friday
 ]
 sales = [1, 5, 0, 4, 3, 6]
-data = {'date': dates, 'sales': sales}
+data = {"date": dates, "sales": sales}
 ```
 
 We need to find the average weekly sales, where a week is defined as Wednesday to Tuesday. In pandas we'd use `resample`, in Polars `group_by_dynamic`:
@@ -120,7 +124,7 @@ We need to find the average weekly sales, where a week is defined as Wednesday t
 import pandas as pd
 
 df_pd = pd.DataFrame(data)
-df_pd.resample('1W-Wed', on='date', closed='left', label='left')['sales'].mean()
+df_pd.resample("1W-Wed", on="date", closed="left", label="left")["sales"].mean()
 
 # Polars
 import polars as pl
@@ -155,14 +159,16 @@ In code:
 ```python
 import duckdb
 
-duckdb.sql("""
+duckdb.sql(
+    """
     SELECT 
         DATE_TRUNC('week', date - INTERVAL 2 DAYS) + INTERVAL 2 DAYS AS week_start,
         AVG(sales) AS sales
     FROM df_pl
     GROUP BY week_start
     ORDER BY week_start
-""")
+    """
+)
 ```
 ```
 ┌─────────────────────┬────────┐
@@ -185,15 +191,15 @@ If you work in finance, then rolling means are probably your bread and butter. F
 from datetime import datetime
 
 dates = [
-  datetime(2025, 1, 1),
-  datetime(2025, 1, 2),
-  datetime(2025, 1, 3),
-  datetime(2025, 1, 4),
-  datetime(2025, 1, 5),
-  datetime(2025, 1, 7),
+    datetime(2025, 1, 1),
+    datetime(2025, 1, 2),
+    datetime(2025, 1, 3),
+    datetime(2025, 1, 4),
+    datetime(2025, 1, 5),
+    datetime(2025, 1, 7),
 ]
-sales = [2., 4.6, 1.32, 1.11, 9, 8]
-data = {'date': dates, 'sales': sales}
+sales = [2.0, 4.6, 1.32, 1.11, 9, 8]
+data = {"date": dates, "sales": sales}
 ```
 
 you may want to smooth out `'sales'` by taking a rolling average over the last three data points. With dataframes, it's easy:
@@ -203,13 +209,13 @@ you may want to smooth out `'sales'` by taking a rolling average over the last t
 import pandas as pd
 
 df_pd = pd.DataFrame(data)
-df_pd['sales_smoothed'] = df_pd['sales'].rolling(3).mean()
+df_pd["sales_smoothed"] = df_pd["sales"].rolling(3).mean()
 
 # Polars
 import polars as pl
 
 df_pl = pl.DataFrame(data)
-df_pl.with_columns(sales_smoothed = pl.col('sales').rolling_mean(3))
+df_pl.with_columns(sales_smoothed=pl.col("sales").rolling_mean(3))
 ```
 ```
 shape: (6, 3)
@@ -232,12 +238,14 @@ We're relying on our data being sorted by `'date'`. In pandas / Polars, we often
 ```python
 import duckdb
 
-duckdb.sql("""
+duckdb.sql(
+    """
     SELECT
         *, 
         MEAN(sales) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS sales_smoothed
     FROM df_pl
-""")
+    """
+)
 ```
 ```
 ┌─────────────────────┬────────┬────────────────────┐
@@ -258,7 +266,8 @@ This gets us close to the pandas/Polars output, but it's not identical - notice 
 ```python
 import duckdb
 
-duckdb.sql("""
+duckdb.sql(
+    """
     SELECT
         *, 
         CASE WHEN (COUNT(sales) OVER w) >= 3 
@@ -267,7 +276,8 @@ duckdb.sql("""
              END AS sales_smoothed
     FROM df_pl
     WINDOW w AS (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
-""")
+    """
+)
 ```
 ```
 ┌─────────────────────┬────────┬────────────────────┐
