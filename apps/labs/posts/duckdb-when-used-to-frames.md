@@ -40,7 +40,20 @@ df_pd['a_centered'] = df_pd['a'] - df_pd['a'].mean()
 import polars as pl
 
 df_pl = pl.DataFrame(data)
-df_pl = df_pl.with_columns(a_centered = pl.col('a') - pl.col('a').mean())
+df_pl.with_columns(a_centered = pl.col('a') - pl.col('a').mean())
+```
+```
+shape: (4, 2)
+┌─────┬────────────┐
+│ a   ┆ a_centered │
+│ --- ┆ ---        │
+│ i64 ┆ f64        │
+╞═════╪════════════╡
+│ 1   ┆ -1.75      │
+│ 3   ┆ 0.25       │
+│ -1  ┆ -3.75      │
+│ 8   ┆ 5.25       │
+└─────┴────────────┘
 ```
 
 If you naively try translating to SQL, however, you'll get an error:
@@ -49,8 +62,8 @@ import duckdb
 
 duckdb.sql("""
     SELECT
-      *,
-      a - MEAN(a) AS a_centered
+        *,
+        a - MEAN(a) AS a_centered
     FROM df_pl
 """)
 ```
@@ -63,22 +76,22 @@ SQL does not let us compare columns with aggregates. To do so, we need to use a 
 ```python
 duckdb.sql("""
     SELECT
-      *,
-      a - MEAN(a) OVER () AS a_centered
+        *,
+        a - MEAN(a) OVER () AS a_centered
     FROM df_pl
 """)
 ```
 
 ```
-┌───────┬───────┬────────────┐
-│   a   │   b   │ a_centered │
-│ int32 │ int32 │   double   │
-├───────┼───────┼────────────┤
-│     1 │     4 │      -1.75 │
-│     3 │     2 │       0.25 │
-│    -1 │     3 │      -3.75 │
-│     8 │     4 │       5.25 │
-└───────┴───────┴────────────┘
+┌───────┬────────────┐
+│   a   │ a_centered │
+│ int64 │   double   │
+├───────┼────────────┤
+│     1 │      -1.75 │
+│     3 │       0.25 │
+│    -1 │      -3.75 │
+│     8 │       5.25 │
+└───────┴────────────┘
 ```
 
 ## Resampling: weekly average
@@ -113,7 +126,23 @@ df_pd.resample('1W-Wed', on='date', closed='left', label='left')['sales'].mean()
 import polars as pl
 
 df_pl = pl.DataFrame(data)
-df_pl.group_by_dynamic('date', every='1w', start_by='wednesday').agg(pl.col('sales').mean())
+(
+    df_pl.group_by_dynamic(
+        pl.col("date").alias("week_start"), every="1w", start_by="wednesday"
+    ).agg(pl.col("sales").mean())
+)
+```
+```
+shape: (3, 2)
+┌─────────────────────┬───────┐
+│ date                ┆ sales │
+│ ---                 ┆ ---   │
+│ datetime[μs]        ┆ f64   │
+╞═════════════════════╪═══════╡
+│ 2025-01-01 00:00:00 ┆ 3.0   │
+│ 2025-01-08 00:00:00 ┆ 2.0   │
+│ 2025-01-15 00:00:00 ┆ 4.5   │
+└─────────────────────┴───────┘
 ```
 
 Replicating this in DuckDB is not rocket science, but it does involve a little preprocessing step:
@@ -129,13 +158,24 @@ import duckdb
 duckdb.sql("""
     SELECT 
         DATE_TRUNC('week', date - INTERVAL 2 DAYS) + INTERVAL 2 DAYS AS week_start,
-        AVG(sales) AS avg_sales
+        AVG(sales) AS sales
     FROM df_pl
     GROUP BY week_start
+    ORDER BY week_start
 """)
 ```
+```
+┌─────────────────────┬────────┐
+│     week_start      │ sales  │
+│      timestamp      │ double │
+├─────────────────────┼────────┤
+│ 2025-01-01 00:00:00 │    3.0 │
+│ 2025-01-08 00:00:00 │    2.0 │
+│ 2025-01-15 00:00:00 │    4.5 │
+└─────────────────────┴────────┘
+```
 
-> **_NOTE:_** If you asked an LLM to translate the dataframe code above, it may suggest a similar SQL solution to the above but with an extra `ORDER BY` clause at the end. In general, we recommend only using `ORDER BY` as late as possible in your queries, and until that point, not making any assumptions about the physical ordering of your data. You'll see in the next section how to get around physical ordering assumptions.
+> **_NOTE:_** In general, we recommend only using `ORDER BY` as late as possible in your queries, and until that point, not making any assumptions about the physical ordering of your data. You'll see in the next section how to get around physical ordering assumptions when performing order-dependent operations.
 
 ## Rolling ~~and tumbling~~ statistics
 
@@ -171,6 +211,21 @@ import polars as pl
 df_pl = pl.DataFrame(data)
 df_pl.with_columns(sales_smoothed = pl.col('sales').rolling_mean(3))
 ```
+```
+shape: (6, 3)
+┌─────────────────────┬───────┬────────────────┐
+│ date                ┆ sales ┆ sales_smoothed │
+│ ---                 ┆ ---   ┆ ---            │
+│ datetime[μs]        ┆ f64   ┆ f64            │
+╞═════════════════════╪═══════╪════════════════╡
+│ 2025-01-01 00:00:00 ┆ 2.0   ┆ null           │
+│ 2025-01-02 00:00:00 ┆ 4.6   ┆ null           │
+│ 2025-01-03 00:00:00 ┆ 1.32  ┆ 2.64           │
+│ 2025-01-04 00:00:00 ┆ 1.11  ┆ 2.343333       │
+│ 2025-01-05 00:00:00 ┆ 9.0   ┆ 3.81           │
+│ 2025-01-07 00:00:00 ┆ 8.0   ┆ 6.036667       │
+└─────────────────────┴───────┴────────────────┘
+```
 
 We're relying on our data being sorted by `'date'`. In pandas / Polars, we often know that our data is ordered in a particular way, and that order is often preserved across operations, so calculating a rolling mean with ordering assumptions is fine. For SQL engines however, row order is typically undefined, although there are some limited cases where DuckDB promises to maintain order. The solution is to specify `'ORDER BY'` inside your window function:
 
@@ -184,8 +239,21 @@ duckdb.sql("""
     FROM df_pl
 """)
 ```
+```
+┌─────────────────────┬────────┬────────────────────┐
+│        date         │ sales  │   sales_smoothed   │
+│      timestamp      │ double │       double       │
+├─────────────────────┼────────┼────────────────────┤
+│ 2025-01-01 00:00:00 │    2.0 │                2.0 │
+│ 2025-01-02 00:00:00 │    4.6 │                3.3 │
+│ 2025-01-03 00:00:00 │   1.32 │               2.64 │
+│ 2025-01-04 00:00:00 │   1.11 │ 2.3433333333333333 │
+│ 2025-01-05 00:00:00 │    9.0 │               3.81 │
+│ 2025-01-07 00:00:00 │    8.0 │  6.036666666666666 │
+└─────────────────────┴────────┴────────────────────┘
+```
 
-This gets us close to the pandas/Polars output, but it's not identical. The dataframe solution only computes the mean when there's at least `window_size` (in this case, 3) observations per window, whereas the DuckDB output computes the mean for every window. We can remedy this by using a named window function and a case statement:
+This gets us close to the pandas/Polars output, but it's not identical - notice how the first two rows are null in the dataframe case, but non-null in the SQL case! This is because the dataframe solution only computes the mean when there's at least `window_size` (in this case, 3) observations per window, whereas the DuckDB output computes the mean for every window. We can remedy this by using a case statement (and also a named window function for readability):
 
 ```python
 import duckdb
@@ -200,6 +268,19 @@ duckdb.sql("""
     FROM df_pl
     WINDOW w AS (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
 """)
+```
+```
+┌─────────────────────┬────────┬────────────────────┐
+│        date         │ sales  │   sales_smoothed   │
+│      timestamp      │ double │       double       │
+├─────────────────────┼────────┼────────────────────┤
+│ 2025-01-01 00:00:00 │    2.0 │               NULL │
+│ 2025-01-02 00:00:00 │    4.6 │               NULL │
+│ 2025-01-03 00:00:00 │   1.32 │               2.64 │
+│ 2025-01-04 00:00:00 │   1.11 │ 2.3433333333333333 │
+│ 2025-01-05 00:00:00 │    9.0 │               3.81 │
+│ 2025-01-07 00:00:00 │    8.0 │  6.036666666666666 │
+└─────────────────────┴────────┴────────────────────┘
 ```
 
 Now it perfectly matches the pandas / Polars output exactly 😇!
