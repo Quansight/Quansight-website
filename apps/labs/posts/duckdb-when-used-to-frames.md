@@ -13,15 +13,15 @@ hero:
 
 ---
 
-# Using DuckDB when you're used to Polars or pandas
+# Mastering DuckDB when you're used to Polars or pandas
 
-You may have heard about DuckDB's impressive robustness and performance. Perhaps you wanted to try it out, too - BUT WAIT, you're a data scientist. You're used to pandas and/or Polars, not a SQL expert. You can use the `'JOIN'` and `'GROUP BY'` commands, but what do you use instead of your familiar dataframe commands, such as:
+You may have heard about DuckDB's impressive robustness and performance. Perhaps you want to try it out - BUT WAIT, you're a data scientist and are used to pandas and/or Polars, not SQL. You can use the `SELECT`, `JOIN` and `GROUP BY` commands, but not much more, and you may be wondering: is it even possible to use SQL to:
 
-- Centering a variable (i.e. subtracting its mean)?
-- Finding the average price per week?
-- Computing rolling statistics?
+- Center a variable (i.e. subtracting its mean)?
+- Find the average price per week?
+- Compute rolling statistics?
 
-Most DuckDB tutorials focus on SQL basics. Not this one. We'll focus on dataframe basics, but through a SQL lense.
+Not only are these all possible, they're easy as well. Let's learn how to implement dataframe fundamentals in SQL!
 
 ## Subtracting the mean
 
@@ -43,7 +43,7 @@ df_pl = pl.DataFrame(data)
 df_pl = df_pl.with_columns(a_centered = pl.col('a') - pl.col('a').mean())
 ```
 
-If you naively try translating this to SQL, however, you'll get an error:
+If you naively try translating to SQL, however, you'll get an error:
 ```python
 import duckdb
 
@@ -58,7 +58,7 @@ duckdb.sql("""
 BinderException: Binder Error: column "a" must appear in the GROUP BY clause or must be part of an aggregate function.
 Either add it to the GROUP BY list, or use "ANY_VALUE(a)" if the exact value of "a" is not important.
 ```
-SQL does not let us compare columns with aggregates like this. To do so, we need to use a [window function](https://en.wikipedia.org/wiki/Window_function_(SQL)). In this case, we're taking the mean of column `'a'` over the entire column, so we write:
+SQL does not let us compare columns with aggregates. To do so, we need to use a [window function](https://en.wikipedia.org/wiki/Window_function_(SQL)). We're taking the mean of column `'a'` over the entire column, so we write:
 
 ```python
 duckdb.sql("""
@@ -84,6 +84,7 @@ duckdb.sql("""
 ## Resampling: weekly average
 
 Say we have unevently spaced temporal data, such as:
+
 ```python
 from datetime import datetime
 
@@ -98,7 +99,9 @@ dates = [
 sales = [1, 5, 0, 4, 3, 6]
 data = {'date': dates, 'sales': sales}
 ```
+
 We need to find the average weekly sales, where a week is defined as Wednesday to Tuesday. In pandas we'd use `resample`, in Polars `group_by_dynamic`:
+
 ```python
 # pandas
 import pandas as pd
@@ -115,10 +118,11 @@ df_pl.group_by_dynamic('date', every='1w', start_by='wednesday').agg(pl.col('sal
 
 Replicating this in DuckDB is not rocket science, but it does involve a little preprocessing step:
 
-- We can use `DATE_TRUNC` to truncate each date to the Monday at the start of the Monday-Sunday week.
+- We use `DATE_TRUNC` to truncate each date to the Monday at the start of the Monday-Sunday week.
 - To get our week to start on Wednesday, we need to first subtract 2 days, then truncate, and then add 2 days back.
 
 In code:
+
 ```python
 import duckdb
 
@@ -135,7 +139,8 @@ duckdb.sql("""
 
 ## Rolling ~~and tumbling~~ statistics
 
-If you work in finance, then rolling mean is probably your bread and butter. For example, with data:
+If you work in finance, then rolling means are probably your bread and butter. For example, with data:
+
 ```python
 from datetime import datetime
 
@@ -150,7 +155,8 @@ dates = [
 sales = [2., 4.6, 1.32, 1.11, 9, 8]
 data = {'date': dates, 'sales': sales}
 ```
-you may want to smooth out `'sales'` by taking a rolling average over the last three data points. With dataframes, this is easy:
+
+you may want to smooth out `'sales'` by taking a rolling average over the last three data points. With dataframes, it's easy:
 
 ```python
 # pandas
@@ -166,7 +172,7 @@ df_pl = pl.DataFrame(data)
 df_pl.with_columns(sales_smoothed = pl.col('sales').rolling_mean(3))
 ```
 
-In these cases, we're relying on our data being sorted by `'date'`. In pandas / Polars, we often know that our data is ordered in a particular way, so calculating a rolling mean with that assumption is fine. For SQL engines, however, row order is typically undefined. There are some limited cases where DuckDB promises to maintain order, but what if you're not in one of those cases? You may be tempted to use `ORDER BY`, but we advised in the previous section to only uses that as late as possible. A better way is to specify `'ORDER BY'` inside your window function:
+We're relying on our data being sorted by `'date'`. In pandas / Polars, we often know that our data is ordered in a particular way, and that order is often preserved across operations, so calculating a rolling mean with ordering assumptions is fine. For SQL engines however, row order is typically undefined, although there are some limited cases where DuckDB promises to maintain order. The solution is to specify `'ORDER BY'` inside your window function:
 
 ```python
 import duckdb
@@ -174,11 +180,12 @@ import duckdb
 duckdb.sql("""
     SELECT
         *, 
-        MEAN(sales) OVER (ORDER BY date) AS sales_smoothed
+        MEAN(sales) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS sales_smoothed
     FROM df_pl
 """)
 ```
-This gets us close to the pandas/Polars output, but not quite. The dataframe solution only comutes the mean when there's at least `window_size` (in this case, 3) observations per window, whereas the DuckDB output computes the mean for every window. We can remedy this by using a named window function and a case statement:
+
+This gets us close to the pandas/Polars output, but it's not identical. The dataframe solution only computes the mean when there's at least `window_size` (in this case, 3) observations per window, whereas the DuckDB output computes the mean for every window. We can remedy this by using a named window function and a case statement:
 
 ```python
 import duckdb
@@ -197,7 +204,7 @@ duckdb.sql("""
 
 Now it perfectly matches the pandas / Polars output exactly 😇!
 
-## What if I don't like SQL?
+## What if you don't like SQL?
 
 First, consider what a SQL solution offers:
 
@@ -213,8 +220,10 @@ Nonetheless, if you really want to use DuckDB as an engine but prefer Python API
 - [Narwhals](https://github.com/narwhals-dev/narwhals): transpiles the Polars API to different backends. For DuckDB it uses DuckDB's Python Relational API, and so it also does not yet support window expressions.
 - [Ibis](https://ibis-project.org/): transpiles its own API to different backends.
 
+What's more, DuckDB allows you to write queries against in-memory pandas and Polars dataframes. Mixing tools and languages is totally legit, and you can probably get further by learning different tools and combining them appropriately than by swearing by a single tool and trying to do everything using just that.
+
 ## Conclusion
 
-We've learned how to translate some common dataframe operations to SQL so that we can port them over to DuckDB. We looked at centering, resampling, and rolling statistics. Porting to SQL / DuckDB may be desirable if you would like to use the DuckDB engine, if your client and/or team mates prefer SQL to dataframe APIs, or if you like to have a robust and mostly standardised solution which is unlikely to break in the future.
+We've learned how to translate some common dataframe operations to SQL so that we can port them over to DuckDB. We looked at centering, resampling, and rolling statistics. Porting to SQL / DuckDB may be desirable if you would like to use the DuckDB engine, if your client and/or team mates prefer SQL to dataframe APIs, or if you would like to have a robust and mostly standardised solution which is unlikely to break in the future.
 
 If you would like help implementing solutions with any of the tools covered in this post, or would like to sponsor efforts towards dataframe API unification, [we can help](https://quansight.com/about-us/#bookacallform)!
