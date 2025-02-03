@@ -195,7 +195,7 @@ duckdb.sql("""
 """)
 ```
 
-There, now it perfectly matches the pandas / Polars output exactly 😇!
+Now it perfectly matches the pandas / Polars output exactly 😇!
 
 ## What if I don't like SQL?
 
@@ -213,8 +213,8 @@ Nonetheless, if you really want to use DuckDB as an engine but prefer Python API
 - [Narwhals](https://github.com/narwhals-dev/narwhals): transpiles the Polars API to different backends. For DuckDB it uses DuckDB's Python Relational API, and so it also does not yet support window expressions.
 - [Ibis](https://ibis-project.org/): transpiles its own API to different backends.
 
-If you would like help implementing solutions with any of the above, or would like to sponsor efforts towards dataframe API unification, [we can help](https://quansight.com/about-us/#bookacallform)!
-
 ## Conclusion
 
 We've learned how to translate some common dataframe operations to SQL so that we can port them over to DuckDB. We looked at centering, resampling, and rolling statistics. Porting to SQL / DuckDB may be desirable if you would like to use the DuckDB engine, if your client and/or team mates prefer SQL to dataframe APIs, or if you like to have a robust and mostly standardised solution which is unlikely to break in the future.
+
+If you would like help implementing solutions with any of the tools covered in this post, or would like to sponsor efforts towards dataframe API unification, [we can help](https://quansight.com/about-us/#bookacallform)!
