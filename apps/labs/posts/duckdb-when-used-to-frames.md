@@ -1,5 +1,5 @@
 ---
-title: "Mastering DuckDB when you're used to Polars or pandas"
+title: "Mastering DuckDB when you're used to pandas or Polars"
 published: February 3, 2025
 authors: [marco-gorelli]
 description: "It's not as scary as you think"
@@ -13,7 +13,7 @@ hero:
 
 ---
 
-# Mastering DuckDB when you're used to Polars or pandas
+# Mastering DuckDB when you're used to pandas or Polars
 
 You may have heard about DuckDB's impressive robustness and performance. Perhaps you want to try it out - BUT WAIT, you're a data scientist and are used to pandas and/or Polars, not SQL. You can use the `SELECT`, `JOIN` and `GROUP BY` commands, but not much more, and you may be wondering: is it even possible to use SQL to:
 
