@@ -1,6 +1,6 @@
 ---
 title: "Mastering DuckDB when you're used to Polars or pandas"
-published: January 8, 2025
+published: February 3, 2025
 authors: [marco-gorelli]
 description: "It's not as scary as you think"
 category: [PyData ecosystem]
