@@ -5,14 +5,15 @@ authors: [marco-gorelli]
 description: "It's not as scary as you think"
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/narwhals-pycapsule/featured.jpg
-  alt: 'todo'
+  src: /posts/duckdb-when-used-to-frames/featured.jpg
+  alt: 'Photo by <a href="https://unsplash.com/@rthiemann?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Robert Thiemann</a> on <a href="https://unsplash.com/photos/brown-and-green-mallard-duck-on-water--ZSnI9gSX1Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>'
 hero:
-  imageSrc: /posts/narwhals-pycapsule/hero.jpg
-  imageAlt: 'todo'
+  imageSrc: /posts/duckdb-when-used-to-frames/hero.jpg
+  imageAlt: 'Photo by <a href="https://unsplash.com/@rthiemann?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Robert Thiemann</a> on <a href="https://unsplash.com/photos/brown-and-green-mallard-duck-on-water--ZSnI9gSX1Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>'
+
 ---
 
-# Mastering DuckDB when you're used to Polars or pandas
+# Using DuckDB when you're used to Polars or pandas
 
 You may have heard about DuckDB's impressive robustness and performance. Perhaps you wanted to try it out, too - BUT WAIT, you're a data scientist. You're used to pandas and/or Polars, not a SQL expert. You can use the `'JOIN'` and `'GROUP BY'` commands, but what do you use instead of your familiar dataframe commands, such as:
 
@@ -47,8 +48,10 @@ If you naively try translating this to SQL, however, you'll get an error:
 import duckdb
 
 duckdb.sql("""
-select *, a - mean(a) as a_centered
-from df_pl
+    SELECT
+      *,
+      a - MEAN(a) AS a_centered
+    FROM df_pl
 """)
 ```
 ```
@@ -59,8 +62,10 @@ SQL does not let us compare columns with aggregates like this. To do so, we need
 
 ```python
 duckdb.sql("""
-select *, a - mean(a) over () as a_centered
-from df_pl
+    SELECT
+      *,
+      a - MEAN(a) OVER () AS a_centered
+    FROM df_pl
 """)
 ```
 
@@ -118,13 +123,11 @@ In code:
 import duckdb
 
 duckdb.sql("""
-  SELECT 
-      DATE_TRUNC('week', date - interval 2 days) + interval 2 days AS week_start,
-      AVG(sales) AS avg_sales
-  FROM 
-      df_pl
-  GROUP BY 
-      week_start
+    SELECT 
+        DATE_TRUNC('week', date - INTERVAL 2 DAYS) + INTERVAL 2 DAYS AS week_start,
+        AVG(sales) AS avg_sales
+    FROM df_pl
+    GROUP BY week_start
 """)
 ```
 
@@ -169,8 +172,10 @@ In these cases, we're relying on our data being sorted by `'date'`. In pandas / 
 import duckdb
 
 duckdb.sql("""
-select *, mean(sales) over (order by date) as sales_smoothed
-from df_pl
+    SELECT
+        *, 
+        MEAN(sales) OVER (ORDER BY date) AS sales_smoothed
+    FROM df_pl
 """)
 ```
 This gets us close to the pandas/Polars output, but not quite. The dataframe solution only comutes the mean when there's at least `window_size` (in this case, 3) observations per window, whereas the DuckDB output computes the mean for every window. We can remedy this by using a named window function and a case statement:
@@ -179,28 +184,34 @@ This gets us close to the pandas/Polars output, but not quite. The dataframe sol
 import duckdb
 
 duckdb.sql("""
-SELECT *, 
-       CASE WHEN COUNT(sales) OVER w >= 3 
-            THEN MEAN(sales) OVER w 
-            ELSE NULL 
-       END AS sales_smoothed
-FROM df_pl
-WINDOW w AS (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
+    SELECT
+        *, 
+        CASE WHEN (COUNT(sales) OVER w) >= 3 
+             THEN MEAN(sales) OVER w 
+             ELSE NULL 
+             END AS sales_smoothed
+    FROM df_pl
+    WINDOW w AS (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)
 """)
 ```
 
-Now, it perfectly matches the pandas / Polars output 😇!
+There, now it perfectly matches the pandas / Polars output exactly 😇!
 
-## Can I execute DuckDB with a Python API?
+## What if I don't like SQL?
 
-If you don't enjoy writing long SQL strings but would like to use DuckDB as an engine, there are some other options available:
+First, consider what a SQL solution offers:
+
+- Stability: dataframe APIs tend to go through deprecation cycles to make API improvements. If you write a dataframe solution today, it's unlikely that it will still work 5 years from now. A SQL one, on the other hand, probably will.
+- Portability: SQL standards exist, and although implementation differences exist, migrating between SQL dialects is probably less painful than migrating between dataframe APIs.
+- Widespreadness: analysts, engineers, and data scientists across industries are all likely familiar with SQL. They may not all rank it as their favourite language, but they can probably all read it, especially with the help of an LLM.
+- Robustness: extensive SQL testing frameworks, such as [sqllogictest](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki), have already been developed, and so DuckDB can test against it to guard against buggy query results.
+
+Nonetheless, if you really want to use DuckDB as an engine but prefer Python APIs, some available options are:
 
 - [SQLFrame](https://github.com/eakmanrq/sqlframe): transpiles the PySpark API to different backends, including DuckDB.
-- [DuckDB's Python Relational API](https://duckdb.org/docs/api/python/relational_api.html): very strict and robust, though documentation is quite scant. In particular, window expressions are not yet supported, but are on the roadmap.
+- [DuckDB's Python Relational API](https://duckdb.org/docs/api/python/relational_api.html): very strict and robust, though documentation is quite scant. In particular, window expressions are not yet supportedl (but they are on the roadmap!).
 - [Narwhals](https://github.com/narwhals-dev/narwhals): transpiles the Polars API to different backends. For DuckDB it uses DuckDB's Python Relational API, and so it also does not yet support window expressions.
 - [Ibis](https://ibis-project.org/): transpiles its own API to different backends.
-
-Having said that, SQL is mostly standardised and widespread, and extensive testing frameworks exist for it. A SQL solution, if implemented correctly, is likely to be robust and to keep working long into the future.
 
 If you would like help implementing solutions with any of the above, or would like to sponsor efforts towards dataframe API unification, [we can help](https://quansight.com/about-us/#bookacallform)!
 
