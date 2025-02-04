@@ -58,7 +58,7 @@ While functional, this approach made the site difficult to maintain and led to m
 <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'flex-start' }}>
   <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-1.png" target="_blank">
-    <img 
+    <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-1.png"
       alt="Screenshot of the frontpage of the original conda-forge website. A forge emitting impact sparks is used as a dark background. A prominent large white text reading conda-forge sits below the official conda-forge logo, a black anvil. Some smaller text follows, also in white."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
@@ -66,10 +66,10 @@ While functional, this approach made the site difficult to maintain and led to m
     </a>
     <figcaption>Figure 1a: The old conda-forge.org frontpage.</figcaption>
   </figure>
-  
+
   <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-2.png" target="_blank">
-    <img 
+    <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-2.png"
       alt="Screenshot of the About section of the frontpage of the original conda-forge website. A white background presents some text in black introducing conda-forge to the newcomers."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
@@ -82,7 +82,7 @@ While functional, this approach made the site difficult to maintain and led to m
 <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'flex-start' }}>
   <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-3.png" target="_blank">
-    <img 
+    <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-3.png"
       alt="Screenshot of the Contributing section of the frontpage of the original conda-forge website. A flat background painted in red with white text and green hyperlinks."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
@@ -93,7 +93,7 @@ While functional, this approach made the site difficult to maintain and led to m
 
   <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-4.png" target="_blank">
-    <img 
+    <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-4.png"
       alt="Screenshot of how the old documentation site of conda-forge used to look like. Top navigation bar painted in black, with a grey sidebar on the left, and the main text on a white background. The headers are signaled with red background and white foreground."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
@@ -106,7 +106,7 @@ While functional, this approach made the site difficult to maintain and led to m
 <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'flex-start' }}>
   <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-5.png" target="_blank">
-    <img 
+    <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-5.png"
       alt="Screenshot of the previous status page design. A neon green header with white text informs of all services being operational, followed by a list of badges reporting the status of different infrastructure components."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
@@ -114,10 +114,10 @@ While functional, this approach made the site difficult to maintain and led to m
     </a>
     <figcaption>Figure 1e: The former Status page rendered directly on <code>conda-forge/status</code>.</figcaption>
   </figure>
-  
+
   <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-6.png" target="_blank">
-    <img 
+    <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-6.png"
       alt="Screenshot of the original Packages page in the conda-forge website, with a search bar that filters which packages are provided by which feedstocks. Text in neon green on white background."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
@@ -153,7 +153,7 @@ The website was officially launched on April 9th, 2024. The [announcement blogpo
 
 <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
   <a href="/posts/czi-eoss-5-conda-forge/conda-forge-new-1.png" target="_blank">
-  <img 
+  <img
     src="/posts/czi-eoss-5-conda-forge/conda-forge-new-1.png"
     alt="conda-forge.org revamped website Home page. A 3D anvil sits on the left side of the main section, with the text 'Community-led recipes, infrastructure and distributions for conda'. The bottom half of the image shows some statistics about conda-forge's scale and usage, like the monthly downloads or the number of projects and packages published."
     style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
@@ -166,7 +166,7 @@ The website was officially launched on April 9th, 2024. The [announcement blogpo
 
   <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-new-2.png" target="_blank">
-    <img 
+    <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-new-2.png"
       alt="conda-forge.org new status page, integrated into the same website as the front page, as evidenced by the top navigation bar. A sidebar on the left, with the main content occupying the rest of the canvas. Two columns inform of the status of different infrastructure components, followed by a table that reports the progress of some ongoing migrations in the organisation."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
@@ -174,10 +174,10 @@ The website was officially launched on April 9th, 2024. The [announcement blogpo
     </a>
     <figcaption>Figure 2b: The revamped Status page.</figcaption>
   </figure>
-  
+
   <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-new-3.png" target="_blank">
-    <img 
+    <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-new-3.png"
       alt="conda-forge.org documentation section of the new website. A sidebar on the left serves as a menu to navigate the content. The main area is occupied by the text 'The life cycle of a package'. Another sidebar sits on the right, reporting the sections found in the currently opened document."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
