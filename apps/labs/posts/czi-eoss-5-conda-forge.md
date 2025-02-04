@@ -13,13 +13,13 @@ hero:
   imageAlt: Photo of a person hammering a red hot metal piece on an anvil.
 ---
 
-In late 2022, [CZI awarded us three EOSS grants](https://labs.quansight.org/blog/quansight-labs-awarded-three-czi-eoss-cycle5-grants). One of them was a two-year proposal under the name ["Transparent, open & sustainable infrastructure for conda-forge and bioconda"](https://chanzuckerberg.com/eoss/proposals/transparent-open-sustainable-infrastructure-for-conda-forge-and-bioconda/). The proposal, co-submitted by Quansight Labs and QuantStack, targeted three areas: maintaining and improving infrastructure, creating a new maintainer's dashboard, and implementing OCI-based mirroring for the packages. This work has now concluded and we would like to publish a summary of what we achieved!
+In late 2022, [CZI awarded us three EOSS grants](https://labs.quansight.org/blog/quansight-labs-awarded-three-czi-eoss-cycle5-grants). One of them was a two-year proposal under the name ["Transparent, open & sustainable infrastructure for conda-forge and bioconda"](https://chanzuckerberg.com/eoss/proposals/transparent-open-sustainable-infrastructure-for-conda-forge-and-bioconda/). The proposal, co-submitted by Quansight Labs and QuantStack, had three main focus areas: maintaining and improving infrastructure, creating a new maintainer's dashboard, and implementing OCI-based mirroring for the packages. This work has now concluded, and we would like to publish a summary of what we have achieved!
 
 ## What are conda, conda-forge and bioconda?
 
 The conda ecosystem provides unified open source tools and specifications to build and distribute precompiled packages for software projects across different operating systems, architectures, and programming languages. Its unique position in data science, research, and scientific software engineering is a testament to its capabilities, particularly in scenarios where different programming languages and platforms are often used together to tackle complex multidisciplinary challenges.
 
-The conda ecosystem includes various community-driven projects, like the bioconda and conda-forge build farms. These are collective efforts maintain a increasingly large collection of conda recipes and automation infrastructure. Founded in 2015 in response to frustrations scientific software users consistently faced when attempting to install system package dependencies. While conda-forge is a general purpose channel, Bioconda extends conda-forge to cater the computational biology field needs, as explained in their [Nature publication](https://www.nature.com/articles/s41592-018-0046-7).
+The conda ecosystem includes various community-driven projects, like the Bioconda and conda-forge build farms. These are collective efforts to maintain an increasingly large collection of conda recipes and automation infrastructure. Founded in 2015 in response to scientific software users' frustrations when attempting to install system package dependencies. While conda-forge is a general-purpose channel, Bioconda extends conda-forge to cater to the computational biology field needs, as explained in their [Nature publication](https://www.nature.com/articles/s41592-018-0046-7).
 
 The emergence of these communities massively reduced the scientific packaging toil by building on transparency, automation, compatibility and open-source principles. As a result, they have grown exponentially, as has the number of artifacts hosted and downloaded: conda-forge alone serves 2M+ artifacts, downloaded 800M+ every month.
 
@@ -52,7 +52,8 @@ As we started working on this project, we realized there were many synergies fro
 
 ## Website and maintenance dashboard revamp
 
-The [conda-forge.org website](https://conda-forge.org) used to be built around its Sphinx documentation, with several add-ons coming in from different repositories that ended up being "mounted" on the main conda-forge.org deployment. This was difficult to maintain and there was little consistency in design, usability and contribution workflows.
+The [conda-forge.org website](https://conda-forge.org) used to be built around its Sphinx documentation, with several add-ons coming in from different repositories that ended up being "mounted" on the main conda-forge.org deployment.
+While functional, this approach made the site difficult to maintain and led to many inconsistencies in design, usability, and contribution workflows.
 
 <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', alignItems: 'flex-start' }}>
   <figure style={{ textAlign: 'center', flex: 1, margin: 0 }}>
@@ -130,7 +131,7 @@ One of those add-ons was the `/status` page, which consisted on a periodically r
 
 In parallel, we were trying to write some documentation for the infrastructure details we were discovering as part of our audit and research. After all, one of the problems we detected is that the existing documentation was too scarce and out of date. Maybe because the contribution workflow in the old conda-forge website was very clunky. Specially in comparison to what we had observed in other projects that were using [Docusaurus](https://docusaurus.io/). Our hunch was that if we smoothened the contribution frictions, maybe more folks would be inclined to help maintain the documentation.
 
-We decided to start a prototype Docusaurus website just to see how it felt to write for this platform, and... the writing experience was too good to ignore. Live reload just _works_ and it is instantaneous. Docusaurus would not only allow us to write a React app for the status page. It would also enable refactors in all those other Sphinx add-ons, like the blog or the announcements page and RSS feed. Instead of having many loosely coupled repositories, we could have _one_ website built from _one_ place...
+We decided to start a prototype website based on Docusaurus just to see how it felt to write for this platform, and... the writing experience was too good to ignore. Live reload just _works_ and it is instantaneous. Docusaurus would not only allow us to write a React app for the status page. It would also enable refactors in all those other Sphinx add-ons, like the blog or the announcements page and RSS feed. Instead of having many loosely coupled repositories, we could have _one_ website built from _one_ place...
 
 So we went for it!
 
@@ -138,9 +139,9 @@ We were lucky to have Asmit Malakannawar join us for a Google Summer of Code int
 
 Shortly after, Afshin Darian (QuantStack) started building the new status page ([`conda-forge.github.io#2090`](https://github.com/conda-forge/conda-forge.github.io/pull/2090)). We had decided to not rely on a Quetz instance because that would tie us to running and maintaining a server 24/7, with the associated costs. Instead, the new proposal presented a client-side dashboard built with components already offered by the Docusaurus framework. Since it uses React, it was deemed as a good compromise of complexity and long-term maintenance costs (specially for the conda-forge teams, who are not too familiar with the fast changing frontend development). After lots of feedback (118 comments!), the PR was finally merged in March 2024.
 
-As we were increasingly satisfied with the results, we [https://github.com/conda-forge/conda-forge.github.io/issues/1971](started consulting) the conda-forge community and submitted the final proposal for review and merge. However, we were still serving the documentation itself from Sphinx. It took a couple extra PRs to convert Sphinx's RST text to Docusaurus' Markdown and make it look great. Klaus Zimmermann (Quansight) also contributed some consolidated documentation taken from our infrastructure notes.
+As we were increasingly satisfied with the results, we [https://github.com/conda-forge/conda-forge.github.io/issues/1971](started consulting) the conda-forge community and submitted the final proposal for review and merge. However, we were still serving the documentation itself from Sphinx. It took a couple of extra PRs to convert Sphinx's RST text to Docusaurus' Markdown and make it look great. Klaus Zimmermann (Quansight) also contributed some consolidated documentation taken from our infrastructure notes.
 
-The website was officially launched on April 9th, 2024. The [announcement](https://conda-forge.org/news/2024/04/09/new-website) contains some more details if you are curious, but the main changes are:
+The website was officially launched on April 9th, 2024. The [announcement blogpost](https://conda-forge.org/news/2024/04/09/new-website) contains some more details if you are curious, but the main changes are:
 
 - Accessibility-aware theme with dark and light modes.
 - The React-based [`/status`](https://conda-forge.org/status) page monitors different parts of our infrastructure and services and reports their usage. It also informs of the progress of current and past migrations and version updates. If there's an incident, it syncs with the [`conda-forge/status`](https://github.com/conda-forge/status) issue tracker and report ongoing problems. All data is fetched live from different JSON endpoints so there's no cronjob regeneration needed.
@@ -154,7 +155,7 @@ The website was officially launched on April 9th, 2024. The [announcement](https
   <a href="/posts/czi-eoss-5-conda-forge/conda-forge-new-1.png" target="_blank">
   <img 
     src="/posts/czi-eoss-5-conda-forge/conda-forge-new-1.png"
-    alt="Screenshot of the frontpage of revamped conda-forge website. A 3D anvil sits on the left side of the main section, with hero text on the right side. Emphasis is given to the words 'recipes', 'infrastructure', 'distributions' and 'conda' using a teal-to-turquoise gradient. The rest of the text is in black. The bottom half of the screenshot shows some statistics about conda-forge's scale and usage, like the monthly downloads or the number of projects and packages published."
+    alt="conda-forge.org revamped website Home page. A 3D anvil sits on the left side of the main section, with the text 'Community-led recipes, infrastructure and distributions for conda'. The bottom half of the image shows some statistics about conda-forge's scale and usage, like the monthly downloads or the number of projects and packages published."
     style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
   />
   </a>
@@ -167,7 +168,7 @@ The website was officially launched on April 9th, 2024. The [announcement](https
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-new-2.png" target="_blank">
     <img 
       src="/posts/czi-eoss-5-conda-forge/conda-forge-new-2.png"
-      alt="Screenshot of the new status page, integrated in the same website as the frontpage, as evidence by the top navigation bar. A sidebar on the left, with main content occupying the rest of the canvas. Two columns inform of the status of different infrastructure components, followed by a table that reports the progress of some ongoing migrations in the organisation."
+      alt="conda-forge.org new status page, integrated into the same website as the front page, as evidenced by the top navigation bar. A sidebar on the left, with the main content occupying the rest of the canvas. Two columns inform of the status of different infrastructure components, followed by a table that reports the progress of some ongoing migrations in the organisation."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
@@ -178,7 +179,7 @@ The website was officially launched on April 9th, 2024. The [announcement](https
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-new-3.png" target="_blank">
     <img 
       src="/posts/czi-eoss-5-conda-forge/conda-forge-new-3.png"
-      alt="Screenshot of how the documentation section of the new website looks like. A sidebar on the left serves as menu to navigate the content. The main area is occupied by the text, with a header that reads 'The life cycle of a package'. Another sidebar awaits on the right, reporting the sections found in the currently opened document."
+      alt="conda-forge.org documentation section of the new website. A sidebar on the left serves as a menu to navigate the content. The main area is occupied by the text 'The life cycle of a package'. Another sidebar sits on the right, reporting the sections found in the currently opened document."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
@@ -198,17 +199,17 @@ After careful deliberation, it was decided that the CEP in its current form woul
 
 In the meantime, the OCI mirror is still functional as a backup. Users can browse the resulting containers via the [Github UI](https://github.com/orgs/channel-mirrors/packages) and its layered storage powers some infrastructure elements we built as part of the grant (more on this below).
 
-You can even use to solve and install some environments! As mentioned before, this works right away with mamba v2. You can use the `oci://` protocol in your channels to indicate so. More details on their [release announcement](https://mamba.readthedocs.io/en/latest/developer_zone/changes-2.0.html#mirrors-and-oci-registries).
+You can even use it to solve and install some environments! As mentioned before, this works right away with `mamba v2`. You can use the `oci://` protocol in your channels to indicate this. You can find more details on the [ mamba 2.0 release announcement](https://mamba.readthedocs.io/en/latest/developer_zone/changes-2.0.html#mirrors-and-oci-registries).
 
-If you are using `conda`, you can run a local copy of this OCI middleware layer we wrote: [`conda-oci-forwarder`](https://github.com/jaimergp/conda-oci-forwarder). It's a small FastAPI application that serves the regular conda channel HTTP API, but negotiates the necessary calls to forward the requests to GHCR's `channels-mirrors` in the backend. However it doesn't map conflicting characters well, so you have to be lucky that your included packages are not using any of those.
+If you are using `conda`, you can run a local copy of this OCI middleware layer we wrote: [`conda-oci-forwarder`](https://github.com/jaimergp/conda-oci-forwarder). It's a small FastAPI application that serves the regular conda channel HTTP API, but negotiates the necessary calls to forward the requests to GHCR's (GitHub Container Registry) `channels-mirrors` in the backend. However, it doesn't map conflicting characters well, so you have to be lucky that the packages you included do not use any of those.
 
 ## Infrastructure improvements
 
-10 years of organically grown infrastructure are plenty to go through several rounds of maintainers, institutional knowledge gaps and heaps of technical debt. This can happen in any resource-constrained open source project. conda-forge's set of constraints is even more particular.
+10 years of organically grown infrastructure are plenty to go through several rounds of maintainers, institutional knowledge gaps and heaps of technical debt. This can happen in any resource-constrained open source project. Though conda-forge's set of constraints differs from those of many other projects in the scientific computing and packaging and distribution ecosystems.
 
-conda-forge is not _just one more open-source project_. The main deliverable is not a tarball of code the maintainers release so it is consumed by authors and/or users. In that kind of project, the responsibilities of the maintainer are "just" attending their own development roadmap, fixing issues, fostering a community of contributors...
+conda-forge is not _just one more open-source project_. The main deliverable is not a tarball of code the maintainers release so it is consumed by authors and/or users. In that kind of project, the responsibilities of the maintainer are centered on the project and tending to its own development roadmap, fixing issues, fostering a community of contributors...
 
-In conda-forge, the main deliverable is _a service_. A _package building_ service supported by an ever-evolving infrastructure constructed around interchangeable free or ultra-low-cost resources. This service is expected to operate 24/7 so it needs to be as robust as possible, without incurring large maintenance costs, both in monetary and human resourcing terms. No one wants to be on call in case "a server dies" or be responsible for a large bill if a bad actor abused the CI. This set of constraints is very unique and limits what type of infrastructure changes can be done in a grant like this. If you were thinking of AWS this, Kubernetes this... wrong direction!
+In conda-forge, the main output is _a service_. Particularly, a _package building_ service supported by an ever-evolving infrastructure constructed around interchangeable free or ultra-low-cost resources. This service is expected to operate 24/7 so it needs to be as robust as possible, without incurring large maintenance costs, both in monetary and human resourcing terms. No one wants to be on call in case "a server dies" or be responsible for a large bill if a bad actor abused the CI. This set of constraints is very unique and limits what type of infrastructure changes can be done in a grant like this. If you were thinking of AWS this, Kubernetes this... wrong direction!
 
 ### Documenting the infrastructure
 
@@ -226,7 +227,7 @@ We also [formalized our security policy](https://github.com/conda-forge/conda-fo
 
 ### Package metadata discovery
 
-This inventory helped us discover several pieces that required our attention. One of them was the [`regro/libcfgraph` repository](https://github.com/regro/libcfgraph) which hosted 1M+ JSON payloads extracted from every artifact ever published in conda-forge. This repository was so massive that it was flagged by Github Support, who kindly asked us to shut it down; we hadn't even been able to clone it in Github Actions and had to resort to Circle CI which, for some reason, was able to fetch a shallow copy in... 20-30 minutes!
+This inventory helped us discover several pieces that required our attention. One of them was the [`regro/libcfgraph` repository](https://github.com/regro/libcfgraph) which hosted 1M+ JSON payloads extracted from every artifact ever published in conda-forge. This repository was so massive that it was flagged by GitHub Support, who kindly asked us to shut it down; we hadn't even been able to clone it in GitHub Actions and had to resort to Circle CI which, for some reason, was able to fetch a shallow copy in... 20-30 minutes!
 
 `libcfgraph`'s directory structure provided stable URLs to the metadata of every artifact (e.g. check this one for [conda 22.11.0](https://github.com/regro/libcfgraph/blob/master/artifacts/conda/conda-forge/linux-64/conda-22.11.0-py310hff52083_0.json)), which was really useful to debug recipe build failures related to missing or conflicting dependencies. If we had to shut it down, we needed a replacement!
 
@@ -252,9 +253,9 @@ Some examples of the former include having the `@conda-forge-admin` commands rea
 
 ### Microarchitecture-aware package builds
 
-conda-forge ships binary builds so users don't have to compile anything on their machines. It should Just Work (tm) upon extraction. To do so, compiled dependencies are built specifically for each platform and architecture (e.g. Linux running ARM or Windows running on x64). However, this also force us to use compilation flags that target the most common chips, leaving some optimization opportunites for more modern CPUs on the table.
+conda-forge ships binary builds, so users don't have to compile anything on their machines. It should Just Work (tm) upon extraction. Compiled dependencies are built specifically for each platform and architecture (e.g., Linux running ARM or Windows running on x64). However, this also forces us to use compilation flags that target the most common chips, leaving some optimization opportunities for more modern CPUs on the table.
 
-Isuru [contributed](https://github.com/archspec/archspec/pull/150) `archspec` support for Windows, which finally allowed conda-forge to ship [microarchitecture-optimized binaries](https://github.com/conda-forge/conda-forge.github.io/issues/1261) across all platforms. While we recommend trying other methods first, like runtime dispatching to different variants of the same library, this method can be useful for libraries that cannot implement it. Use it sparingly though, they can really explode your CI matrix!
+Isuru [contributed `archspec` support for Windows](https://github.com/archspec/archspec/pull/150), which finally allowed conda-forge to ship [microarchitecture-optimized binaries](https://github.com/conda-forge/conda-forge.github.io/issues/1261) across all platforms. While we recommend trying other methods first, like runtime dispatching to different variants of the same library, this method can be useful for libraries that cannot implement it. Use it sparingly, though; they can really explode your CI matrix!
 
 ### Unblocking migrations
 
@@ -270,7 +271,7 @@ Building consensus takes many forms and channels: community meetings, ecosystem 
 
 The conda-forge team meets every two Wednesdays to discuss a variety of topics. Notes are kept in [HackMD](https://hackmd.io/) documents that are then submitted as a PR to the `conda-forge/conda-forge.github.io`. This used to be a manual process, but we added a couple of [Github Actions workflows](https://github.com/Quansight-Labs/hackmd-meeting-notes-action) to automate the creation of a new HackMD document from a given template, open a PR and then, once done with the meeting, sync back by adding a label (see [example PR](https://github.com/conda-forge/conda-forge.github.io/pull/2423)). Works pretty well for both conda-forge and conda community!
 
-In addition to Github issues and PRs, the conda-forge community had a couple rooms in Gitter (which then became Matrix / Element rooms). After spending some years in this platform, we found that it was not providing a good enough story for us. We proposed moving to Zulip via CFEP 23, which was approved by the core team. We have been using that platform successfully for a few months now, and also submitted a similar proposal to the conda community (CEP 18), which was also approved. That means that both conda-forge and conda community are now using Zulip! Visit us at [conda-forge.zulipchat.com](https://conda-forge.zulipchat.com/) and [conda.zulipchat.com](https://conda.zulipchat.com), respectively.
+In addition to GitHub issues and PRs, the conda-forge community had a couple of rooms in Gitter (which then became Matrix / Element rooms). After spending some years on this platform, we found that it did not provide a good enough story for us. We proposed moving to Zulip via CFEP 23, which was approved by the core team. We have been using that platform successfully for a few months and submitted a similar proposal to the conda community (CEP 18), which was also approved. That means that both conda-forge and conda community are now using Zulip! Visit us at [conda-forge.zulipchat.com](https://conda-forge.zulipchat.com/) and [conda.zulipchat.com](https://conda.zulipchat.com), respectively.
 
 ## Conclusion
 
