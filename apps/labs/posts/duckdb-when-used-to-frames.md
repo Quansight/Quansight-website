@@ -86,7 +86,7 @@ duckdb.sql(
 BinderException: Binder Error: column "a" must appear in the GROUP BY clause or must be part of an aggregate function.
 Either add it to the GROUP BY list, or use "ANY_VALUE(a)" if the exact value of "a" is not important.
 ```
-SQL does not let us compare columns with aggregates. To do so, we need to use a [window function](https://en.wikipedia.org/wiki/Window_function_(SQL)). We're taking the mean of column `'a'` over the entire column, so we write:
+SQL does not let us compare columns with aggregates. To do so, we need to use a [window function](https://en.wikipedia.org/wiki/Window_function_(SQL)), which is a kind of function that produces a value for each row. We're taking the mean of column `'a'` over the entire column, so we write:
 
 ```python
 duckdb.sql(
@@ -162,10 +162,10 @@ shape: (3, 2)
 └─────────────────────┴───────┘
 ```
 
-Replicating this in DuckDB is not rocket science, but it does involve a little preprocessing step:
+Replicating this in DuckDB is not rocket science, but it does involve a preprocessing step:
 
-- We use `DATE_TRUNC` to truncate each date to the Monday at the start of the Monday-Sunday week.
-- To get our week to start on Wednesday, we need to first subtract 2 days, then truncate, and then add 2 days back.
+- We use `DATE_TRUNC('week', date)` to truncate each date to the Monday at the start of the Monday-Sunday week.
+- To get our week to start on Wednesday, we need to first subtract 2 days, then truncate, and then add 2 days back: `DATE_TRUNC('week', date - INTERVAL 2 DAYS) + INTERVAL 2 DAYS AS week_start`
 
 In code:
 
@@ -246,7 +246,7 @@ shape: (6, 3)
 └─────────────────────┴───────┴────────────────┘
 ```
 
-We're relying on our data being sorted by `'date'`. In pandas / Polars, we often know that our data is ordered in a particular way, and that order is often preserved across operations, so calculating a rolling mean with ordering assumptions is fine. For SQL engines however, row order is typically undefined, although there are some limited cases where DuckDB promises to maintain order. The solution is to specify `'ORDER BY'` inside your window function:
+We're relying on our data being sorted by `'date'`. In pandas / Polars, we often know that our data is ordered in a particular way, and that order is often preserved across operations, so calculating a rolling mean with ordering assumptions is fine. For SQL engines however, row order is typically undefined, although there are some limited cases where DuckDB promises to maintain order. The solution is to specify `'ORDER BY'` inside your window function - this tells the engine which column(s) to use to determine the order in which to compute the rolling mean:
 
 ```python
 import duckdb
@@ -313,7 +313,7 @@ Now it perfectly matches the pandas / Polars output exactly 😇!
 If you want to use DuckDB as an engine but prefer Python APIs, some available options are:
 
 - [SQLFrame](https://github.com/eakmanrq/sqlframe): transpiles the PySpark API to different backends, including DuckDB.
-- [DuckDB's Python Relational API](https://duckdb.org/docs/api/python/relational_api.html): very strict and robust, though documentation is quite scant. In particular, window expressions are not yet supportedl (but they are on the roadmap!).
+- [DuckDB's Python Relational API](https://duckdb.org/docs/api/python/relational_api.html): very strict and robust, though documentation is quite scant. In particular, window expressions are not yet supported (but they are on the roadmap!).
 - [Narwhals](https://github.com/narwhals-dev/narwhals): transpiles the Polars API to different backends. For DuckDB it uses DuckDB's Python Relational API, and so it also does not yet support window expressions.
 - [Ibis](https://ibis-project.org/): transpiles its own API to different backends.
 
@@ -321,6 +321,6 @@ What's more, DuckDB allows you to write queries against in-memory pandas and Pol
 
 ## Conclusion
 
-We've learned how to translate some common dataframe operations to SQL so that we can port them over to DuckDB. We looked at centering, resampling, and rolling statistics. Porting to SQL / DuckDB may be desirable if you would like to use the DuckDB engine, if your client and/or team mates prefer SQL to dataframe APIs, or if you would like to have a robust and mostly standardised solution which is unlikely to break in the future.
+We've learned how to translate some common dataframe operations to SQL so that we can port them over to DuckDB. We looked at centering, resampling, and rolling statistics. Porting to SQL / DuckDB may be desirable if you would like to use the DuckDB engine, if your client and/or team prefer SQL to dataframe APIs, or if you would like to have a robust and mostly standardised solution which is unlikely to break in the future.
 
 If you would like help implementing solutions with any of the tools covered in this post or would like to sponsor efforts toward dataframe API unification, [we can help](https://quansight.com/about-us/#bookacallform)!
