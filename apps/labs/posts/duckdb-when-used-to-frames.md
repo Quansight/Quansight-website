@@ -17,11 +17,24 @@ hero:
 
 You may have heard about DuckDB's impressive robustness and performance. Perhaps you want to try it out - BUT WAIT, you're a data scientist and are used to pandas and/or Polars, not SQL. You can use the `SELECT`, `JOIN` and `GROUP BY` commands, but not much more, and you may be wondering: is it even possible to use SQL to:
 
-- Center a variable (i.e. subtracting its mean)?
-- Find the average price per week?
+- Center a variable (i.e. subtract its mean)?
+- Resample by time?
 - Compute rolling statistics?
 
 Not only are these all possible, they're easy as well. Let's learn how to implement dataframe fundamentals in SQL!
+
+## But first - why?
+
+Why use DuckDB / SQL at all? Aren't dataframe APIs more readable and expressive anyway? Arguably, yes. Nonetheless, I think there are some very good reasons to implement a DuckDB SQL solution if you're able to:
+
+- Stability: dataframe APIs tend to go through deprecation cycles to make API improvements. If you write a dataframe solution today, it's unlikely that it will still work 5 years from now. A SQL one, on the other hand, probably will.
+- Portability: SQL standards exist, and although implementation differences exist, migrating between SQL dialects is probably less painful than migrating between dataframe APIs.
+- Widespreadness: analysts, engineers, and data scientists across industries are all likely familiar with SQL. They may not all rank it as their favourite language, but they can probably all read it, especially with the help of an LLM.
+- Robustness: extensive SQL testing frameworks, such as [sqllogictest](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki), have already been developed, and so DuckDB can test against it to guard against buggy query results.
+
+Furthermore, although classic SQL tends to have some annoying rules (such as "no comma after the last expression in SELECT!"), DuckDB has innovated on the syntax side with their [Friendly SQL](https://duckdb.org/docs/sql/dialect/friendly_sql.html).
+
+Let's now look at translating common dataframe tasks into SQL.
 
 ## Subtracting the mean
 
@@ -297,13 +310,6 @@ Now it perfectly matches the pandas / Polars output exactly 😇!
 
 ## What if you don't like SQL?
 
-First, consider what a SQL solution offers:
-
-- Stability: dataframe APIs tend to go through deprecation cycles to make API improvements. If you write a dataframe solution today, it's unlikely that it will still work 5 years from now. A SQL one, on the other hand, probably will.
-- Portability: SQL standards exist, and although implementation differences exist, migrating between SQL dialects is probably less painful than migrating between dataframe APIs.
-- Widespreadness: analysts, engineers, and data scientists across industries are all likely familiar with SQL. They may not all rank it as their favourite language, but they can probably all read it, especially with the help of an LLM.
-- Robustness: extensive SQL testing frameworks, such as [sqllogictest](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki), have already been developed, and so DuckDB can test against it to guard against buggy query results.
-
 Nonetheless, if you really want to use DuckDB as an engine but prefer Python APIs, some available options are:
 
 - [SQLFrame](https://github.com/eakmanrq/sqlframe): transpiles the PySpark API to different backends, including DuckDB.
@@ -311,7 +317,7 @@ Nonetheless, if you really want to use DuckDB as an engine but prefer Python API
 - [Narwhals](https://github.com/narwhals-dev/narwhals): transpiles the Polars API to different backends. For DuckDB it uses DuckDB's Python Relational API, and so it also does not yet support window expressions.
 - [Ibis](https://ibis-project.org/): transpiles its own API to different backends.
 
-What's more, DuckDB allows you to write queries against in-memory pandas and Polars dataframes. Mixing tools and languages is totally legit, and you can probably get further by learning different tools and combining them appropriately than by swearing by a single tool and trying to do everything using just that.
+What's more, DuckDB allows you to write queries against in-memory pandas and Polars dataframes. There's nothing wrong with mixing and matching tools - in fact, that'll probably take you further than swearing by a single tool and trying to do everything using just that.
 
 ## Conclusion
 
