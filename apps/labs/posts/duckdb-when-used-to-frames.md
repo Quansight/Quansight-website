@@ -21,7 +21,7 @@ You may have heard about DuckDB's impressive robustness and performance. Perhaps
 - Resample by time?
 - Compute rolling statistics?
 
-Not only are these all possible, they're easy as well. Let's learn how to implement dataframe fundamentals in SQL!
+Not only are these all possible, but they're also easy. Let's learn how to implement dataframe fundamentals in SQL!
 
 ## But first - why?
 
@@ -113,7 +113,7 @@ duckdb.sql(
 
 ## Resampling: weekly average
 
-Say we have unevently spaced temporal data, such as:
+Say we have unevenly spaced temporal data, such as:
 
 ```python
 from datetime import datetime
@@ -274,7 +274,7 @@ duckdb.sql(
 └─────────────────────┴────────┴────────────────────┘
 ```
 
-This gets us close to the pandas/Polars output, but it's not identical - notice how the first two rows are null in the dataframe case, but non-null in the SQL case! This is because the dataframe solution only computes the mean when there's at least `window_size` (in this case, 3) observations per window, whereas the DuckDB output computes the mean for every window. We can remedy this by using a case statement (and also a named window function for readability):
+This gets us close to the pandas/Polars output, but it's not identical - notice how the first two rows are null in the dataframe case, but non-null in the SQL case! This is because the dataframe solution only computes the mean when there are at least `window_size` (in this case, 3) observations per window, whereas the DuckDB output computes the mean for every window. We can remedy this by using a case statement (and also a named window function for readability):
 
 ```python
 import duckdb
@@ -310,7 +310,7 @@ Now it perfectly matches the pandas / Polars output exactly 😇!
 
 ## What if you don't like SQL?
 
-Nonetheless, if you really want to use DuckDB as an engine but prefer Python APIs, some available options are:
+Nonetheless, if you want to use DuckDB as an engine but prefer Python APIs, some available options are:
 
 - [SQLFrame](https://github.com/eakmanrq/sqlframe): transpiles the PySpark API to different backends, including DuckDB.
 - [DuckDB's Python Relational API](https://duckdb.org/docs/api/python/relational_api.html): very strict and robust, though documentation is quite scant. In particular, window expressions are not yet supportedl (but they are on the roadmap!).
@@ -323,4 +323,4 @@ What's more, DuckDB allows you to write queries against in-memory pandas and Pol
 
 We've learned how to translate some common dataframe operations to SQL so that we can port them over to DuckDB. We looked at centering, resampling, and rolling statistics. Porting to SQL / DuckDB may be desirable if you would like to use the DuckDB engine, if your client and/or team mates prefer SQL to dataframe APIs, or if you would like to have a robust and mostly standardised solution which is unlikely to break in the future.
 
-If you would like help implementing solutions with any of the tools covered in this post, or would like to sponsor efforts towards dataframe API unification, [we can help](https://quansight.com/about-us/#bookacallform)!
+If you would like help implementing solutions with any of the tools covered in this post or would like to sponsor efforts toward dataframe API unification, [we can help](https://quansight.com/about-us/#bookacallform)!
