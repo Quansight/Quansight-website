@@ -30,7 +30,7 @@ Why use DuckDB / SQL at all? Aren't dataframe APIs more readable and expressive 
 - Stability: dataframe APIs tend to go through deprecation cycles to make API improvements. If you write a dataframe solution today, it's unlikely that it will still work 5 years from now. A SQL one, on the other hand, probably will.
 - Portability: SQL standards exist, and although implementation differences exist, migrating between SQL dialects is probably less painful than migrating between dataframe APIs.
 - Widespreadness: analysts, engineers, and data scientists across industries are all likely familiar with SQL. They may not all rank it as their favourite language, but they can probably all read it, especially with the help of an LLM.
-- Robustness: extensive SQL testing frameworks, such as [sqllogictest](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki), have already been developed, and so DuckDB can test against it to guard against buggy query results.
+- Robustness: extensive SQL testing frameworks, such as [sqllogictest](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki), have already been developed, and so DuckDB can test against them to guard against buggy query results.
 
 Furthermore, although classic SQL tends to have some annoying rules (such as "no comma after the last expression in SELECT!"), DuckDB has innovated on the syntax side with their [Friendly SQL](https://duckdb.org/docs/sql/dialect/friendly_sql.html).
 
@@ -310,7 +310,7 @@ Now it perfectly matches the pandas / Polars output exactly 😇!
 
 ## What if you don't like SQL?
 
-Nonetheless, if you want to use DuckDB as an engine but prefer Python APIs, some available options are:
+If you want to use DuckDB as an engine but prefer Python APIs, some available options are:
 
 - [SQLFrame](https://github.com/eakmanrq/sqlframe): transpiles the PySpark API to different backends, including DuckDB.
 - [DuckDB's Python Relational API](https://duckdb.org/docs/api/python/relational_api.html): very strict and robust, though documentation is quite scant. In particular, window expressions are not yet supportedl (but they are on the roadmap!).
