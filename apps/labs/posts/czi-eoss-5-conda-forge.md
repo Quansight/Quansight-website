@@ -60,7 +60,7 @@ While functional, this approach made the site difficult to maintain and led to m
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-1.png" target="_blank">
     <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-1.png"
-      alt="Screenshot of the frontpage of the original conda-forge website. A forge emitting impact sparks is used as a dark background. A prominent large white text reading conda-forge sits below the official conda-forge logo, a black anvil. Some smaller text follows, also in white."
+      alt="The frontpage of the original conda-forge website. A forge emitting impact sparks is used as a dark background. A prominent large text reading conda-forge sits below the official conda-forge logo, a black anvil. A smaller description reads 'A community-led collection of recipes, build infrastructure and distributions for the conda package manager'."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
@@ -71,7 +71,7 @@ While functional, this approach made the site difficult to maintain and led to m
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-2.png" target="_blank">
     <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-2.png"
-      alt="Screenshot of the About section of the frontpage of the original conda-forge website. A white background presents some text in black introducing conda-forge to the newcomers."
+      alt="The About section in the frontpage of the original conda-forge website. It presents a paragraph introducing how conda-forge works, which is followed by some statistics like the amount of monthly and all-time downloads, how many packages are available, or the number of issues and PRs that were opened so far."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
@@ -84,7 +84,7 @@ While functional, this approach made the site difficult to maintain and led to m
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-3.png" target="_blank">
     <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-3.png"
-      alt="Screenshot of the Contributing section of the frontpage of the original conda-forge website. A flat background painted in red with white text and green hyperlinks."
+      alt="The Contributing section in the frontpage of the original conda-forge website. It contains information about how to report issues, update recipes or add new ones."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
@@ -95,7 +95,7 @@ While functional, this approach made the site difficult to maintain and led to m
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-4.png" target="_blank">
     <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-4.png"
-      alt="Screenshot of how the old documentation site of conda-forge used to look like. Top navigation bar painted in black, with a grey sidebar on the left, and the main text on a white background. The headers are signaled with red background and white foreground."
+      alt="Old documentation site of conda-forge. The navigation bar is placed at the top, with a sidebar on the left. The main text starts with the title 'conda-forge documentation' followed by a header 'What is conda-forge'."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
@@ -108,7 +108,7 @@ While functional, this approach made the site difficult to maintain and led to m
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-5.png" target="_blank">
     <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-5.png"
-      alt="Screenshot of the previous status page design. A neon green header with white text informs of all services being operational, followed by a list of badges reporting the status of different infrastructure components."
+      alt="The previous status page. A section 'Repos and Bots' contains a list of badges reporting the status of services like documentation building, the autotick bot CI or how long it has been since the last CDN sync cycle. The bottom part shows the beginning of the 'Current migrations' section."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
@@ -119,7 +119,7 @@ While functional, this approach made the site difficult to maintain and led to m
     <a href="/posts/czi-eoss-5-conda-forge/conda-forge-old-6.png" target="_blank">
     <img
       src="/posts/czi-eoss-5-conda-forge/conda-forge-old-6.png"
-      alt="Screenshot of the original Packages page in the conda-forge website, with a search bar that filters which packages are provided by which feedstocks. Text in neon green on white background."
+      alt="The original Packages page in the old conda-forge website, with a search bar that filters which packages are provided by which feedstocks. A list of feedstocks starting with 'tt' and 'tw' can be seen despite the search bar being empty."
       style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
     />
     </a>
@@ -139,7 +139,7 @@ We were lucky to have Asmit Malakannawar join us for a Google Summer of Code int
 
 Shortly after, Afshin Darian (QuantStack) started building the new status page ([`conda-forge.github.io#2090`](https://github.com/conda-forge/conda-forge.github.io/pull/2090)). We had decided to not rely on a Quetz instance because that would tie us to running and maintaining a server 24/7, with the associated costs. Instead, the new proposal presented a client-side dashboard built with components already offered by the Docusaurus framework. Since it uses React, it was deemed as a good compromise of complexity and long-term maintenance costs (specially for the conda-forge teams, who are not too familiar with the fast changing frontend development). After lots of feedback (118 comments!), the PR was finally merged in March 2024.
 
-As we were increasingly satisfied with the results, we [https://github.com/conda-forge/conda-forge.github.io/issues/1971](started consulting) the conda-forge community and submitted the final proposal for review and merge. However, we were still serving the documentation itself from Sphinx. It took a couple of extra PRs to convert Sphinx's RST text to Docusaurus' Markdown and make it look great. Klaus Zimmermann (Quansight) also contributed some consolidated documentation taken from our infrastructure notes.
+As we were increasingly satisfied with the results, we [started consulting](https://github.com/conda-forge/conda-forge.github.io/issues/1971) the conda-forge community and submitted the final proposal for review and merge. However, we were still serving the documentation itself from Sphinx. It took a couple of extra PRs to convert Sphinx's RST text to Docusaurus' Markdown and make it look great. Klaus Zimmermann (Quansight) also contributed some consolidated documentation taken from our infrastructure notes.
 
 The website was officially launched on April 9th, 2024. The [announcement blogpost](https://conda-forge.org/news/2024/04/09/new-website) contains some more details if you are curious, but the main changes are:
 
