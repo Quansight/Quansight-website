@@ -386,21 +386,14 @@ or expecting being built from a git checkout.
 
 <table id='table-5' style={{margin: 'auto', width: 'auto'}}>
   <caption>Table 5. Setuptools and wheel dependencies</caption>
-  <tr><th rowspan='2'>Build backend</th><th rowspan='2'>Dependency</th><th align='center' colspan='2'>Package</th></tr>
-  <tr><th>setuptools</th><th>wheel</th></tr>
-  <tr><td rowspan='2'>hatchling</td><td>direct</td><td align='right'>4</td><td align='right'>0</td></tr>
-  <tr><td>via hook</td><td align='right'>4</td><td align='right'>0</td></tr>
-  <tr><td rowspan='2'>`mesonpy`</td><td>direct</td><td align='right'>1</td><td align='right'>1</td></tr>
-  <tr><td>via hook</td><td align='right'>1</td><td align='right'>1</td></tr>
-  <tr><td rowspan='2'>pdm</td><td>direct</td><td align='right'>0</td><td align='right'>0</td></tr>
-  <tr><td>via hook</td><td align='right'>0</td><td align='right'>0</td></tr>
-  <tr><td rowspan='2'>poetry</td><td>direct</td><td align='right'>24</td><td align='right'>10</td></tr>
-  <tr><td>via hook</td><td align='right'>24</td><td align='right'>10</td></tr>
-  <tr><td rowspan='2'>scikit-build-core</td><td>direct</td><td align='right'>1</td><td align='right'>0</td></tr>
-  <tr><td>via hook</td><td align='right'>1</td><td align='right'>0</td></tr>
-  <tr><td rowspan='2'>setuptools</td><td>direct</td><td align='right'>1808</td><td align='right'>937</td></tr>
-  <tr><td>via hook</td><td align='right'>1808</td><td align='right'>937</td></tr>
-  <tr><td colspan='2'>Total</td><td align='right'>1890</td><td align='right'>979</td></tr>
+  <tr><th>Build backend</th><th>setuptools</th><th>wheel</th></tr>
+  <tr style={{ background: '#fef' }}><td>setuptools</td><td align='right'>1891</td><td align='right'>1071</td></tr>
+  <tr style={{ background: '#eff' }}><td>poetry</td><td align='right'>24</td><td align='right'>10</td></tr>
+  <tr style={{ background: '#ffe' }}><td>hatchling</td><td align='right'>6</td><td align='right'>0</td></tr>
+  <tr style={{ background: '#efe' }}><td>pdm</td><td align='right'>1</td><td align='right'>0</td></tr>
+  <tr style={{ background: '#fee' }}><td>scikit-build-core</td><td align='right'>1</td><td align='right'>0</td></tr>
+  <tr><td>`mesonpy`</td><td align='right'>1</td><td align='right'>1</td></tr>
+  <tr><td>Total</td><td align='right'>1890</td><td align='right'>979</td></tr>
 </table>
 
 Tables 5 through 8 provides some interesting data.
