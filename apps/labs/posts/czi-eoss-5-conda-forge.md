@@ -1,6 +1,6 @@
 ---
 title: 'Two years of contributions to conda-forge: work done during our CZI EOSS 5 grant'
-published: January 20, 2025
+published: February 10, 2025
 authors: [jaime-rodriguez-guerra]
 description: |
   In 2022 we were awarded a CZI EOSS grant for conda-forge. The proposal, co-submitted by Quansight Labs and QuantStack, targeted three areas: maintaining and improving conda-forge's infrastructure, creating a new maintainer's dashboard, and implementing OCI-based mirroring for the packages. This work has now concluded and we would like to publish a summary of what we achieved!
