@@ -32,7 +32,7 @@ and relatively simple. There are only two mandatory functions, and currently
 up to five optional — compared to 28 commands in setuptools (each with
 its own list of options).
 
-Unsurpringly, many new build systems were created. Some of them focused
+Unsurprisingly, many new build systems were created. Some of them focused
 on pure Python packages, others on integration with other build systems
 such as CMake, Meson or Cargo. It is clear that you can now choose
 between many new build systems. But how popular are they today? In this
