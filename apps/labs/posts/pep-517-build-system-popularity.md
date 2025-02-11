@@ -1,6 +1,6 @@
 ---
 title: 'PEP 517 build system popularity'
-published: January 24, 2025
+published: February 11, 2025
 authors: [michal-gorny]
 description: 'Analysis of PEP 517 build backends used in 8000 top PyPI packages'
 category: [Packaging]
