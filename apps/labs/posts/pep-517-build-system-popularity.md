@@ -268,22 +268,22 @@ such as Hatchling.
 <table id="table-3" style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <caption>Table 3. Counts for setuptools configuration format combinations</caption>
   <tr><th>Formats</th><th>Count</th></tr>
-  <tr><td>`setup.py`</td><td align='right'>3750</td></tr>
-  <tr><td>`setup.cfg` + `setup.py`</td><td align='right'>1104</td></tr>
-  <tr><td>`pyproject.toml`</td><td align='right'>541</td></tr>
-  <tr><td>`pyproject.toml` + `setup.py`</td><td align='right'>330</td></tr>
-  <tr><td>`setup.cfg`</td><td align='right'>87</td></tr>
-  <tr><td>`pyproject.toml` + `setup.cfg` + `setup.py`</td><td align='right'>17</td></tr>
-  <tr><td>`pyproject.toml` + `setup.cfg`</td><td align='right'>14</td></tr>
+  <tr style={{ background: '#fee' }}><td>`setup.py`</td><td align='right'>3750</td></tr>
+  <tr style={{ background: '#ffe' }}><td>`setup.cfg` + `setup.py`</td><td align='right'>1104</td></tr>
+  <tr style={{ background: '#eef' }}><td>`pyproject.toml`</td><td align='right'>541</td></tr>
+  <tr style={{ background: '#fef' }}><td>`pyproject.toml` + `setup.py`</td><td align='right'>330</td></tr>
+  <tr style={{ background: '#efe' }}><td>`setup.cfg`</td><td align='right'>87</td></tr>
+  <tr style={{ background: '#eee' }}><td>`pyproject.toml` + `setup.cfg` + `setup.py`</td><td align='right'>17</td></tr>
+  <tr style={{ background: '#eff' }}><td>`pyproject.toml` + `setup.cfg`</td><td align='right'>14</td></tr>
   <tr><td>(no configuration — broken distribution)</td><td align='right'>11</td></tr>
 </table>
 <table id="table-4" style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <caption>Table 4. Cumulative counts for every configuration format</caption>
   <tr><th>Format</th><th>Total</th></tr>
   <tr><td>(all packages)</td><td align='right'>5854</td></tr>
-  <tr><td>`setup.py`</td><td align='right'>5201</td></tr>
-  <tr><td>`setup.cfg`</td><td align='right'>1222</td></tr>
-  <tr><td>`pyproject.toml`</td><td align='right'>902</td></tr>
+  <tr style={{ background: '#fee' }}><td>`setup.py`</td><td align='right'>5201</td></tr>
+  <tr style={{ background: '#efe' }}><td>`setup.cfg`</td><td align='right'>1222</td></tr>
+  <tr style={{ background: '#eef' }}><td>`pyproject.toml`</td><td align='right'>902</td></tr>
 </table>
 
 </div>
