@@ -29,7 +29,7 @@ extra details.
 All of the code examples below can be compiled and run in [this GitHub
 repo](https://github.com/kurtamohler/pytorch-TensorIterator-examples).
 
-# Basics of TensorIterator and TensorIteratorConfig
+## Basics of TensorIterator and TensorIteratorConfig
 
 In order to create a `TensorIterator`, a `TensorIteratorConfig` must be created
 first. `TensorIteratorConfig` specifies the input and output tensors that will
@@ -43,7 +43,7 @@ In the following example, a tensor named `out` is configured as the output
 tensor and `a` and `b` are the input tensors. Calling `build` creates the
 `TensorIterator` object from the specified configuration.
 
-``` cpp
+```cpp
 at::TensorIteratorConfig iter_config;
 iter_config
   .add_output(out)
@@ -53,7 +53,7 @@ iter_config
 auto iter = iter_config.build();
 ```
 
-# Performing iterations
+## Performing iterations
 
 Iterations using `TensorIterator` can be classified as point-wise iterations or
 reduction iterations. This plays a fundamental role in how iterations using
@@ -65,7 +65,7 @@ Note that for CUDA, it is possible to parallelize along the reduction
 dimension, but synchronizations are needed to avoid race conditions.
 Parallelization with vectorized operations can also be implemented.
 
-## Iteration details
+### Iteration details
 
 The simplest iteration operation can be performed using the
 [`for_each`](https://github.com/pytorch/pytorch/blob/d9e6750759b78c68e7d98b80202c67bea7ba24ec/aten/src/ATen/TensorIterator.cpp#L677)
@@ -97,7 +97,7 @@ amount' of data to iterate over in order to gain a significant speedup using
 multi-threaded execution. If you want to explicitly specify that your operation
 _must_ run in serial, then use the `serial_for_each` loop.
 
-``` cpp
+```cpp
 at::TensorIteratorConfig iter_config;
 iter_config
   .add_output(out)
@@ -127,7 +127,7 @@ auto copy_loop = [](char** data, const int64_t* strides, int64_t n) {
 iter.for_each(copy_loop);
 ```
 
-### Using kernels for iterations
+#### Using kernels for iterations
 
 Frequently we want to create a kernel that applies a simple point-wise function
 onto entire tensors. `TensorIterator` provides various such generic kernels
@@ -141,7 +141,7 @@ addition of two tensors and stores the result in a third tensor. We can use the
 but you can use one of the `AT_DISPATCH_ALL_TYPES*` macros to support multiple
 data types.
 
-``` cpp
+```cpp
 at::TensorIteratorConfig iter_config;
 iter_config
   .add_output(c)
@@ -162,7 +162,7 @@ output tensor, as long as the inputs strictly broadcast over the output--that
 is, if the output's shape is equal to or greater than the input shape in all
 dimensions.
 
-### Setting tensor iteration dimensions
+#### Setting tensor iteration dimensions
 
 The value of the sizes and strides will determine which dimension of the tensor
 you will iterate over. `TensorIterator` performs optimizations to make sure
@@ -203,7 +203,7 @@ calculates the sum of all elements from the beginning of the vector up to and
 including each position in the input. A 2-D input is treated as a list of
 vectors, and the cumulative sum is calculated for each vector. Higher
 dimensional inputs follow the same logic--everything is just a list of 1-D
-vectors.  So to implement a cumulative sum, we must take into account two
+vectors. So to implement a cumulative sum, we must take into account two
 different strides: the stride between elements in a vector (`result_dim_stride`
 and `self_dim_stride` in the example below) and the stride between each vector
 (`strides[0]` and `strides[1]` in the example below).
@@ -259,7 +259,7 @@ auto loop = [&](char** data, const int64_t* strides, int64_t n) {
 iter.for_each(loop);
 ```
 
-### Helper functions
+#### Helper functions
 
 There are many helper functions within PyTorch that can simplify the creation
 and execution of a `TensorIterator`. We cannot cover all of them in this blog
@@ -325,7 +325,7 @@ auto sum_reduce_loop = [](char** data, const int64_t* strides, int64_t n) {
 iter.for_each(sum_reduce_loop);
 ```
 
-# Conclusion
+## Conclusion
 
 This post was a very short introduction to what `TensorIterator` is actually
 capable of. If you want to learn more about how it works and what goes into
