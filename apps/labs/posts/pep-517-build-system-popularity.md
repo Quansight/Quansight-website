@@ -101,13 +101,13 @@ repository. They perform the following actions:
   <tr style={{ background: '#eff' }}><td style={{ height: '4em' }}>poetry</td><td align='right'>625</td></tr>
   <tr style={{ background: '#ffe' }}><td style={{ height: '4em' }}>hatchling</td><td align='right'>480</td></tr>
   <tr style={{ background: '#eef' }}><td style={{ height: '4em' }}>flit</td><td align='right'>285</td></tr>
-  <tr><td style={{ height: '3em' }}>`maturin`</td><td align='right'>85</td></tr>
+  <tr><td style={{ height: '3em' }}>maturin</td><td align='right'>85</td></tr>
   <tr style={{ background: '#efe' }}><td style={{ height: '4em' }}>pdm</td><td align='right'>42</td></tr>
   <tr style={{ background: '#fee' }}><td style={{ height: '4em' }}>scikit-build-core</td><td align='right'>30</td></tr>
-  <tr><td style={{ height: '3em' }}>`mesonpy`</td><td align='right'>16</td></tr>
-  <tr><td style={{ height: '3em' }}>`whey`</td><td align='right'>4</td></tr>
+  <tr><td style={{ height: '3em' }}>meson-python</td><td align='right'>16</td></tr>
+  <tr><td style={{ height: '3em' }}>whey</td><td align='right'>4</td></tr>
   <tr><td style={{ height: '3em' }}>(custom)</td><td align='right'>3</td></tr>
-  <tr><td style={{ height: '3em' }}>`sphinx_theme_builder`</td><td align='right'>3</td></tr>
+  <tr><td style={{ height: '3em' }}>sphinx-theme-builder</td><td align='right'>3</td></tr>
   <tr><td style={{ height: '3em' }}>`sipbuild.api`</td><td align='right'>3</td></tr>
   <tr><td style={{ height: '3em' }}>`pbr.build`</td><td align='right'>2</td></tr>
   <tr><td style={{ height: '3em' }}>`jupyter_packaging.build_api`</td><td align='right'>2</td></tr>
@@ -177,8 +177,9 @@ running `setup.py` when no backend is declared.
 
 The three next top ranking build system families are Poetry (8.4% packages),
 Hatchling (6.5% packages) and Flit (3.8%). Build systems other than the four
-already mentioned amount for 2.6% of packages. They include both generic Python build
-systems (such as `pdm-backend`), as well as more specialized tools such as:
+already mentioned amount for 2.6% of packages. They include builds systems
+primarily focused on pure Python packages (such as `pdm-backend`), as well
+as tools specialized for packages with compiled code:
 
 - Maturin — used to build Rust packages (1.1%)
 
@@ -236,10 +237,10 @@ if sys.version_info < (3, 11):
     install_requires.append("exceptiongroup")
 ```
 
-With the above snippet, if a wheel is built with Python 3.10, it will
-install the `exceptiongroup` dependency on all Python versions. Conversely,
-a wheel built with Python 3.11 or newer will never install `exceptiongroup`,
-not even on Python 3.10 or older.
+With the above snippet, if a universal (`py3-*`) wheel was built using
+Python 3.10, it will require `exceptiongroup` on all Python versions.
+Conversely, such a wheel built with Python 3.11 or newer will never install
+`exceptiongroup`, not even on older Python versions.
 
 [Declarative configuration via
 `setup.cfg`](https://setuptools.pypa.io/en/latest/userguide/declarative_config.html)
@@ -300,7 +301,7 @@ such as Hatchling.
 </figure>
 
 `setup.py` still remains the most popular of the configuration formats.
-It is used by 89% of the analyzed packages, with 64% not using any other
+It is used by 89% of the analyzed setuptools-using packages, with 64% not using any other
 format. One out of five packages would declare the project
 metadata in `setup.cfg`, and around 15% in `pyproject.toml`.
 
@@ -392,7 +393,7 @@ or expecting being built from a git checkout.
   <tr style={{ background: '#ffe' }}><td>hatchling</td><td align='right'>6</td><td align='right'>0</td></tr>
   <tr style={{ background: '#efe' }}><td>pdm</td><td align='right'>1</td><td align='right'>0</td></tr>
   <tr style={{ background: '#fee' }}><td>scikit-build-core</td><td align='right'>1</td><td align='right'>0</td></tr>
-  <tr><td>`mesonpy`</td><td align='right'>1</td><td align='right'>1</td></tr>
+  <tr><td>meson-python</td><td align='right'>1</td><td align='right'>1</td></tr>
   <tr><td>Total</td><td align='right'>1890</td><td align='right'>979</td></tr>
 </table>
 
@@ -499,7 +500,7 @@ tools are not available. Some projects add these dependencies only
 if they cannot find the required tool. Since these tools were present
 on my system, the numbers here represent packages adding
 the dependencies unconditionally. This indicates that they will use
-a local copy instead of the system tools.
+a wheel-installed version instead of the system tools.
 
 Note that the number of `cmake` dependencies is much higher than
 the number of `scikit-build` dependencies, indicating that many projects
