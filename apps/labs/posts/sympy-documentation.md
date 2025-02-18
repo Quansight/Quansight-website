@@ -30,7 +30,7 @@ SymPy](https://oscarbenjamin.github.io/blog/czi/index.html), and to [improve
 its code generation
 capabilities](https://mechmotum.github.io/blog/czi-sympy-wrapup.html).
 
-# Documentation Survey
+## Documentation Survey
 
 To start the project, from November 29, 2021 to January 5, 2022 we ran a short
 survey on the SymPy community, to get a feel for SymPy's documentation needs.
@@ -82,7 +82,7 @@ writing new documentation guides.
 
 Click if you wish to read the [full survey results](https://www.sympy.org/sympy-docs-survey/2021-docs-survey.html).
 
-# Improved Sphinx Theme - Furo
+## Improved Sphinx Theme - Furo
 
 Prior to this project, the SymPy documentation used the "classic" Sphinx
 theme. This is the same theme that is used by the [official Python
@@ -130,7 +130,7 @@ modifying the [Pygments syntax highlighting
 styles](https://github.com/sympy/sympy/blob/master/doc/src/_pygments/styles.py)
 to have better color contrast.
 
-# Improved Organization - Diataxis
+## Improved Organization - Diataxis
 
 A related project was reorganizing the top-level organization of the
 documentation. The SymPy documentation main page used to just consist of a long
@@ -160,7 +160,7 @@ pages](https://docs.sympy.org/latest/reference/index.html) into eight
 sub-categories: Basics, Code Generation, Logic, Matrices, Number Theory,
 Physics, Utilities, and Topics.
 
-# Contribution Documentation
+## Contribution Documentation
 
 One of the most important things an open source project can do to attract new
 contributors is to have good contributor documentation. SymPy has historically
@@ -177,7 +177,7 @@ to be more inline with modern SymPy contribution practices, and to reduce the
 parts that only explain details on how to use Git and GitHub, which are now
 explained better in other sources on the internet.
 
-# Live Documentation Previews on Pull Requests
+## Live Documentation Previews on Pull Requests
 
 A live documentation preview build was added to the SymPy CI so that people
 can easily view how it looks as HTML. While this
@@ -195,12 +195,12 @@ and they will be shown a rendered page like:
 
 ![header on the page that says "This is a preview build from SymPy pull request #25512. It was built against a9765f6. If you aren't looking for a PR preview, go to the main SymPy documentation."](/posts/sympy-documentation/sympy-docs-preview-page.png)
 
-# New Top-level Documentation Guides
+## New Top-level Documentation Guides
 
 In addition to these organizational cleanups, the project involved writing new
 documentation on deprecation, custom functions, best practices, and a glossary.
 
-## New Deprecation Policy
+### New Deprecation Policy
 
 SymPy as a symbolic mathematics system is designed not just as an interactive
 piece of software, but also as a library, which can be used as a dependency in
@@ -260,7 +260,7 @@ to put in the deprecation message, including details on why each deprecation
 was made. The page also gives helpful
 information on [how to silence deprecation warnings](https://docs.sympy.org/dev/explanation/active-deprecations.html#silencing-sympy-deprecation-warnings).
 
-## Guide on Writing Custom Functions
+### Guide on Writing Custom Functions
 
 SymPy comes with hundreds of mathematical functions built-in. But it also
 comes with a standard functionality for users to define their own custom
@@ -298,7 +298,7 @@ SymPy itself. So this guide serves as both a guide to advanced end-users as
 well as a guide to SymPy developers looking to define or extend one of the
 functions that comes with SymPy.
 
-## Guide on SymPy Best Practices
+### Guide on SymPy Best Practices
 
 SymPy has many pitfalls, both for new users and advanced users. The new guide
 on [best practices](https://docs.sympy.org/dev/explanation/best-practices.html)
@@ -327,7 +327,7 @@ The best practices page outlines why one should [avoid string inputs](https://do
 as well as dozens of other best practices
 surrounding both basic and advanced usage of SymPy.
 
-## Glossary of SymPy Terminology
+### Glossary of SymPy Terminology
 
 As a technical library, SymPy makes use of many terms which have a specific
 meaning. If you are not already familiar with SymPy, you might not know what

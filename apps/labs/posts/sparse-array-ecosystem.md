@@ -12,8 +12,6 @@ hero:
   imageAlt: 'A mind-map of the main components of the sparse array ecosystem'
 ---
 
-# An overview of the Sparse Array Ecosystem for Python
-
 ## Why Sparse Arrays?
 
 ### Sparsity in nature

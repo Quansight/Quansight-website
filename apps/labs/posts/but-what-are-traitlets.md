@@ -19,11 +19,11 @@ hero:
 You have probably seen Traitlets in applications, you likely even use it. The package has nearly 5 million downloads
 on [conda-forge](https://anaconda.org/conda-forge/traitlets) alone.
 
-# But, what is Traitlets ?
+## But, what is Traitlets ?
 
 In this post we'll answer this question along with where Traitlets came from, its applications, and a bit of history.
 
-## `traitlets` 5.0
+### `traitlets` 5.0
 
 `traitlets` 5.0 has recently been released; 5 years after the earliest versions of
 `traitlets` 4.0. The latest and greatest 5.0 release brings
@@ -34,25 +34,25 @@ Traitlets is [a library](https://pypi.org/project/traitlets) that provides objec
 can expose individual configuration options in an intelligent way. They are used in almost all the Jupyter Projects.
 
 Traitlets began as a pure Python implementation of the Enthought [Traits](https://pypi.org/project/traits/) library.
-These libraries implement the object-oriented [trait pattern](https://en.wikipedia.org/wiki/Trait_(computer_programming)). Prior to 2015, `traitlets` was a part of the IPython (pre-jupyter) code base; then during ["The Big
+These libraries implement the object-oriented [trait pattern](<https://en.wikipedia.org/wiki/Trait_(computer_programming)>). Prior to 2015, `traitlets` was a part of the IPython (pre-jupyter) code base; then during ["The Big
 Split"](https://blog.jupyter.org/the-big-split-9d7b88a031a7) it was moved to their own reusable package.
 
-Both `traitlets` and `traits` addressed the challenge of using typed code in interactive Python [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop "read-eval-print-loop")s. They offer type checking, coercion and validation at run time.
+Both `traitlets` and `traits` addressed the challenge of using typed code in interactive Python [REPL](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop 'read-eval-print-loop')s. They offer type checking, coercion and validation at run time.
 
-### Traitlets for development
+#### Traitlets for development
 
 The general idea when developing with Traitlets is:
 
 1. The developer defines a class-level attribute,
 
 2. This class level attribute will automatically be converted into
-    *a property-like* element with *runtime type and value checking*, *configurability* and
-    *observable events and changes*.
+   _a property-like_ element with _runtime type and value checking_, _configurability_ and
+   _observable events and changes_.
 
 Traitlets minimizes boilerplate for Python applications. Traitlets maintains a uniform
 naming convention and helps your users configure their applications.
 
-## A Traitlets usage example
+### A Traitlets usage example
 
 We'll demonstrate the flexibility of Traitlets by configuring the `autocall`
 traitlet/option of IPython from the command line interface, configuration
@@ -87,7 +87,6 @@ either `0`,`1`, or `2`. Traitlets provides a number of utilities to decide
 whether assigning incorrect values should raise an exception; or coerce to one
 of the valid ones. Here a wrong assignment will fail:
 
-
 ```
 $ ipython --no-banner
 
@@ -101,7 +100,6 @@ In [3]: ip.autocall = 5
 TraitError: The 'autocall' trait of a TerminalInteractiveShell instance expected any of [0, 1, 2], not the int 5.
 ```
 
-
 While type – and value – checking at runtime is a nice feature, most of these
 options are usually user preferences. Traitlets provides a way to automatically
 create configuration files with help, as well as command line arguments
@@ -111,8 +109,7 @@ application on how to automatically generate configuration files, decide on
 the option name and document it. No need for the developer to spend time on
 deciding on a configuration parameter name.
 
-
-### A generated configuration file.
+#### A generated configuration file.
 
 On a brand new machine with IPython installed you will find the following in
 your default configuration file `~/.ipython/profile_default/ipython_config.py`,
@@ -171,7 +168,6 @@ to actually do the reformatting, the complete diff to add the options to the CLI
 configuration file, and [automatic generation](https://github.com/ipython/traitlets/blob/3293530b6943b9522ae570e7ca29b30709a43567/traitlets/config/sphinxdoc.py#L1-L33) of [the option documentation](https://ipython.readthedocs.io/en/7.18.0/config/options/terminal.html#configtrait-TerminalInteractiveShell.autoformatter) in Sphinx
 documentation is as follows:
 
-
 ```diff
 @IPython/terminal/interactiveshell.py:98
 Class TerminalInteractiveShell(InteractiveShell)
@@ -192,7 +188,7 @@ configuration options is decentralized and lives on the object being
 configured. And there is no differences between adding a configuration option
 in the configuration file or at the command line interface.
 
-# Configure what you do not yet know about
+## Configure what you do not yet know about
 
 In an application with few parameters and only a couple of plugins it might be
 relatively straightforward to provide options and CLI arguments; this becomes
@@ -241,10 +237,9 @@ Thus if you have an application or library with a number of plugins, and for
 which configurability can be thought of as tree-like similar to a class
 hierarchy, Traitlets can help you.
 
+## Other functionalities
 
-# Other functionalities
-
-## Observability
+### Observability
 
 Beyond the configurability part is observability; as we already had a great
 type system with hooks, and sometimes you may want to mutate configuration of
@@ -278,8 +273,7 @@ visualisations.
 This can be useful to glue together models, with parameters needing to be
 synchronized and models needing to react to changes.
 
-
-## Dynamic defaults
+### Dynamic defaults
 
 Traitlets supports [dynamic defaults](https://traitlets.readthedocs.io/en/stable/api.html#dynamic-default-values),
 i.e. your default values may depend on some context (OS, Python version).
@@ -287,8 +281,7 @@ i.e. your default values may depend on some context (OS, Python version).
 Configurations are by default Python scripts (but can be JSON), so user
 config files can be shared across machines and have dynamic values.
 
-
-## Context base configuration
+### Context base configuration
 
 Object configuration can also look at the creator of the object at instantiation
 time.
@@ -303,24 +296,24 @@ default values. This is for example used by [nbconvert](https://github.com/jupyt
 to decide which options to activate depending on whether you do `--to=pdf`,
 or `--to-html`
 
-## Flags and aliases
+### Flags and aliases
 
 Long flag names like `--InteractiveShell.debug=True` can be cumbersome to type.
 That is why traitlets provide aliases and flags, so that `ipython --debug` will
 set `debug=True` to enable logging on all classes supporting it while still
 allowing you to tweak the login level used on a per-class basis.
 
-# Limitations
+## Limitations
 
 Of course all this power doesn't come completely for free:
 
- - Your class and attribute names become part of your API
- - As configuration is loaded/read before any potential plugins are loaded, it is
-   impossible to definitively detect typos or invalid configuration options.
- - Traitlets relies heavily on metaclasses, so it can add a construction cost to
-   your objects and can be hard to debug.
+- Your class and attribute names become part of your API
+- As configuration is loaded/read before any potential plugins are loaded, it is
+  impossible to definitively detect typos or invalid configuration options.
+- Traitlets relies heavily on metaclasses, so it can add a construction cost to
+  your objects and can be hard to debug.
 
-# Conclusion
+## Conclusion
 
 This was a short introduction to Traitlets. I hope it made it a little clearer
 how the Jupyter configuration system works, and we are looking forward to see
@@ -334,18 +327,3 @@ If you want to learn more, see [this JupyterCon 2018
 talk](https://www.youtube.com/watch?v=_gYEVTaNuKU) and the [documentation](https://traitlets.readthedocs.io/).
 
 Try the new 5.x version and let us know if you have questions.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
