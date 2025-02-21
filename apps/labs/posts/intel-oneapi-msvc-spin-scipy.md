@@ -1,6 +1,6 @@
 ---
 title: 'Enhancing Developer Experience at SciPy - Intel oneAPI/MSVC Support and Migrating to spin'
-published: February 21, 2024
+published: February 21, 2025
 authors: [gagandeep-singh]
 description: 'Highlights the work done to improve developer experience at SciPy, specifically on supporting Intel oneAPI/MSVC and spin'
 category: [Developer workflows]
@@ -91,11 +91,11 @@ Here’s a quick comparison of the SciPy build experience with `dev.py` versus `
 
 **SciPy Build Experience with `dev.py`**
 
-<script src="https://asciinema.org/a/RrtqCRlxIaA6pNS6BQchJyUmN.js" id="asciicast-RrtqCRlxIaA6pNS6BQchJyUmN" async="true"></script>
+<script src="https://asciinema.org/a/fn1JP6ZNPpw6rKh8oAusk34Xr.js" id="asciicast-fn1JP6ZNPpw6rKh8oAusk34Xr" async="true"></script>
 
 **SciPy Build Experience with `spin`**
 
-<script src="https://asciinema.org/a/FJzWyQun71g796n5kFI1l6dxv.js" id="asciicast-FJzWyQun71g796n5kFI1l6dxv" async="true"></script>
+<script src="https://asciinema.org/a/TdMa1hSSy3MTPnFcYKHvP0pvm.js" id="asciicast-TdMa1hSSy3MTPnFcYKHvP0pvm" async="true"></script>
 
 As you can see there is no difference between the look and feel of `python dev.py build` and `spin build`. It works exactly the same. However, the issues which were there with `dev.py` are not observed with `spin`. Take a look at the following videos,
 
@@ -103,17 +103,17 @@ As you can see there is no difference between the look and feel of `python dev.p
 
 **With `dev.py`**
 
-<script src="https://asciinema.org/a/shvsE0PfbGMsviuthoKfIQlI6.js" id="asciicast-shvsE0PfbGMsviuthoKfIQlI6" async="true"></script>
+<script src="https://asciinema.org/a/jtTP2xty4popJ1GVL0PZQBsvz.js" id="asciicast-jtTP2xty4popJ1GVL0PZQBsvz" async="true"></script>
 
 **With `spin`**
 
-<script src="https://asciinema.org/a/wcwYTiPQzey2uYt1082w63Rgz.js" id="asciicast-wcwYTiPQzey2uYt1082w63Rgz" async="true"></script>
+<script src="https://asciinema.org/a/uOT0cp0WJSKnDZPmRqdm0vREC.js" id="asciicast-uOT0cp0WJSKnDZPmRqdm0vREC" async="true"></script>
 
 As you can see `spin` usage doesn't interfere with PDB's history. This issue was there with `dev.py`.
 
 **Using homebrew installed Python to build SciPy [[gh-18998]](https://github.com/scipy/scipy/issues/18998) - `dev.py` vs `spin`**
 
-<script src="https://asciinema.org/a/aZstdaf6B6nlkW9JFccT7z7Dr.js" id="asciicast-aZstdaf6B6nlkW9JFccT7z7Dr" async="true"></script>
+<script src="https://asciinema.org/a/zp8nTTvEwB8YFrrnZQeFiGC9r.js" id="asciicast-zp8nTTvEwB8YFrrnZQeFiGC9r" async="true"></script>
 
 The above video showcases how `spin` works fine with Homebrew installed Python 3.10. The build completes. However, `dev.py` fails because it is unable to resolve paths correctly.
 
