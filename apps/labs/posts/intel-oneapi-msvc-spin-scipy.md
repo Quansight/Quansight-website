@@ -1,6 +1,6 @@
 ---
 title: 'Enhancing Developer Experience at SciPy - Intel oneAPI/MSVC Support and Migrating to spin'
-published: December 19, 2024
+published: February 21, 2024
 authors: [gagandeep-singh]
 description: 'Highlights the work done to improve developer experience at SciPy, specifically on supporting Intel oneAPI/MSVC and spin'
 category: [Developer workflows]
@@ -12,62 +12,92 @@ hero:
   imageAlt: 'SciPy logo'
 ---
 
-In this blog post, we will be sharing the work we did to enhance developer experience at SciPy. We worked on two major things,
+In this blog post, we’ll discuss the improvements we made to enhance the developer experience at SciPy. Our work focused on two key areas:
 
 1. Intel oneAPI and MSVC Support in SciPy
-2. Moving away from `dev.py` and migrating to `spin`.
+2. Transitioning from `dev.py` to `spin`
 
-First, let me share the motivation behind these.
+First, let’s explore the motivation behind these updates.
 
-Intel offers a complete toolkit for high performance computing (HPC), numerical computing use cases. It goes by the name of [oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html). Since, SciPy caters to HPC and numerical computing use cases, so supporting building SciPy with Intel oneAPI is a natural requirement. Therefore we decided to work on this to enhance the experience of SciPy users who use Intel oneAPI as their toolkit. Since MSVC is the de-facto compiler for C/C++ on Windows, we also added CI jobs for testing SciPy compilation with MSVC.
+Intel provides a comprehensive toolkit for high-performance computing (HPC) and numerical computing use cases, known as [oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html). Given that SciPy is heavily used in HPC and numerical computing, supporting the ability to build SciPy with Intel oneAPI was a natural and important step. By doing so, we aim to improve the experience for SciPy users who rely on Intel oneAPI as their primary toolkit. Additionally, since MSVC is the de facto compiler for C/C++ on Windows, we added continuous integration (CI) jobs to test SciPy compilation with MSVC, further expanding the compatibility of SciPy across platforms.
 
-Now let's see why we decided to spin from `dev.py` to `spin` (pun inteded). `dev.py` (or `do.py` [[2]](https://labs.quansight.org/blog/the-evolution-of-the-scipy-developer-cli)) was a major improvement in development workflow, and came before `spin`. `spin` took its inspiration in large part from `dev.py`, and generalized its interface to work with more projects without customization as heavy as `dev.py` has for SciPy. Therefore all the improvements in `spin` will directly benefit SciPy and vice-versa. Also, familiarity for contributors coming from `numpy` is an added plus.
+Now, let’s talk about the transition from `dev.py` to `spin`. `dev.py` (also known as `do.py` [[1]](https://labs.quansight.org/blog/the-evolution-of-the-scipy-developer-cli)) was a significant step forward in improving the development workflow. However, `spin` builds on `dev.py`, taking inspiration from its design while generalizing the interface to work with a wider range of projects without the need for heavy customization. As a result, SciPy will directly benefit from the improvements made in `spin` and vice versa. Moreover, `spin` offers an additional benefit: contributors familiar with `numpy` will find it easier to navigate, thanks to the shared foundation and streamlined approach.
+
+Through these updates, we aim to provide a smoother and more flexible development experience for both current and new contributors to SciPy.
 
 #### Intel oneAPI Support in SciPy
 
-Intel offers oneAPI - a complete toolkit for HPC use cases. It provides, ICX (for C), ICPX (for C++), IFX (for Fortran) and MKL (Math Kernel Library for optimized math routines like BLAS, LAPACK, fast FFT, etc.) [[1]](https://en.wikipedia.org/wiki/Math_Kernel_Library). We targeted two operating systems, Windows and Linux. `CI: adding a Windows CI job with MSVC + MKL + Intel Fortran (ifx)` [[gh-20878](https://github.com/scipy/scipy/issues/20878)] was the starting point. Solving this issue meant, avoiding regressions with MSVC and Intel oneAPI in SciPy. This issue also links [gh-20728](https://github.com/scipy/scipy/issues/20728). The author of this issue is building SciPy with `icx`, `icpx`, `ifx` and using MKL for BLAS and LAPACK. So a complete usage of Intel oneAPI. In addition, failure to build scipy with msvc [[gh-20860]](https://github.com/scipy/scipy/issues/20860) is related to build failure of SciPy with MSVC. We started off by fixing these two.
+Intel offers oneAPI, a comprehensive toolkit designed for high-performance computing (HPC) applications. It includes essential components such as ICX (for C), ICPX (for C++), IFX (for Fortran), and MKL (Math Kernel Library), which provides optimized mathematical routines like BLAS, LAPACK, and fast FFTs [[1]](https://en.wikipedia.org/wiki/Math_Kernel_Library). For our efforts, we targeted both Windows and Linux operating systems.
 
-One major issue with MSVC is that its support for handling arrays on stack (with runtime sizes) is limited. Expressions like, `std::complex<double> cwrk[n];` fail to compile with MSVC unless `n` is a constant. So we did runtime allocation on heap (using `new`) and performed `delete` at the end to free memory. This is a manual approach of handling memory, however this is the only solution which works with MSVC. It was the only option that we went ahead with. On a side note, Clang due to LLVM backend doesn't have this limitation. After fixing this issue we added a CI job with MSVC + `ifx` + OpenBLAS combination. This helped in avoiding future regression with MSVC build of SciPy. It was also a first step towards supporting Intel oneAPI toolkit entirely.
+Our journey began with the task of adding a Windows CI job to support MSVC + MKL + Intel Fortran (ifx) [[gh-20878](https://github.com/scipy/scipy/issues/20878)]. This was critical to ensure that SciPy could compile correctly with Intel oneAPI and MSVC, preventing any regressions. This issue also references [gh-20728](https://github.com/scipy/scipy/issues/20728), where the author is building SciPy using ICX, ICPX, IFX, and MKL, leveraging the full Intel oneAPI toolkit. Additionally, the failure to build SciPy with MSVC [[gh-20860]](https://github.com/scipy/scipy/issues/20860) pointed to specific build challenges with MSVC. We began by addressing these two issues.
 
-Now coming on to the [`arpack`](https://github.com/opencollab/arpack-ng) issue. Fixing this issue required supporting building SciPy with Intel oneAPI. On Linux the [`arpack`](https://github.com/opencollab/arpack-ng) issue was already resolved. However, there were some other issues with `ifx`. For example, `test_equal_bounds` test in `scipy/optimize/tests/test_optimize.py` failed due to floating point issues with `ifx`. Also tolerances for other tests had to be increased (i.e., slight lesser accuracy/precision in order to make things with `ifx`). All of this was done in `BUG/CI: Compile and run tests with `ifx`+`MKL` on Linux` [[gh-21173]](https://github.com/scipy/scipy/pull/21173). I also added a CI job in this PR with `gcc` + `g++` +`ifx` + `MKL` combination. A second steps towards supporting Intel oneAPI with SciPy.
+One notable challenge with MSVC is its limited support for handling runtime-sized arrays on the stack. For example, expressions like `std::complex<double> cwrk[n];` fail to compile unless `n` is a constant. To work around this, we opted for dynamic memory allocation on the heap, using `new`, ensuring proper memory deallocation with `delete` at the end. While this approach is manual, it remains the only viable solution with MSVC. Interestingly, Clang (due to its LLVM backend) does not have this limitation, making it more flexible in this regard.
 
-The final checkpoint for Intel oneAPI was `CI: Test icx + icpx + ifx + MKL build of SciPy` [[gh-21254]](https://github.com/scipy/scipy/pull/21254). Here we replaced `gcc` with `icx` and `g++` with `icpx` and TADA, it worked on Linux. Regarding Windows, we are still at `MSVC` + `ifx` + `OpenBLAS` combination because of the [`arpack`](https://github.com/opencollab/arpack-ng) import error. We tried several ways to fix it but all resulted in a dead end. Therefore we had to stop because the effort didn't seem to be justified.
+Once we addressed this issue, we added a CI job to test SciPy's compilation with MSVC + IFX + OpenBLAS, which helped prevent future regressions in the MSVC build. This also marked an early step toward supporting Intel oneAPI within SciPy.
+
+The next major hurdle involved the [`arpack`](https://github.com/opencollab/arpack-ng) issue, which required full Intel oneAPI support to resolve. On Linux, the issue was already fixed. However, there were still some challenges when using IFX, such as the failure of the `test_equal_bounds` test in `scipy/optimize/tests/test_optimize.py` due to floating-point discrepancies with IFX. To address this, we increased tolerances for several tests to accommodate the slightly reduced accuracy/precision when using IFX. This was all handled in the PR, `BUG/CI: Compile and run tests with IFX + MKL on Linux` [[gh-21173]](https://github.com/scipy/scipy/pull/21173), where I also added a CI job to test the combination of `gcc` + `g++` + `ifx` + MKL on Linux, marking another important step toward full Intel oneAPI support for SciPy.
+
+The final milestone for Intel oneAPI support was the CI job for testing SciPy with `icx`, `icpx`, `ifx`, and MKL [[gh-21254]](https://github.com/scipy/scipy/pull/21254). In this step, we replaced `gcc` with `icx` and `g++` with `icpx`, and the build successfully passed on Linux. However, on Windows, we were unable to proceed further due to an unresolved import error with `arpack`. Despite several attempts to fix the issue, all solutions led to dead ends. As a result, we decided to pause the effort on Windows for now, as the work required did not seem to justify the outcome.
+
+Through these efforts, we’ve made significant strides in integrating Intel oneAPI with SciPy, ensuring better support for both Linux and Windows platforms. While there are still challenges ahead, the progress made provides a solid foundation for future development.
 
 #### Moving away from `dev.py` and migrating to `spin`
 
-Before diving into the details of this work, I would first share some information (for context) related to `meson`. Basically,`meson` builds a project in three steps,
+Before diving into the details of our work, it’s important to provide some context on **Meson**—the build system we’re using. Meson builds a project in three main steps:
 
-1. First step is that it calls `meson setup` which does configuration for building the project. If you are a CMake user then its just like calling, `cmake .` in a project.
-2. Second step involves calling `meson compile` which executes the compiler commands and creates libraries. Again if you are `cmake` + `make` user then its like calling, `make` or `make -j8`.
-3. Third step is finally calling, `meson install` which installs the libraries, source files (for python) in the installation directory.
+1. **Configuration**: The first step involves running `meson setup`, which configures the project for building. If you’re familiar with CMake, this is similar to calling `cmake .` in a project.
 
-Now it would be easy to understand our work below.
+2. **Compilation**: Next, we run `meson compile`, which executes the compiler commands and generates the necessary libraries. For users familiar with `make`, this step is equivalent to running `make` or `make -j8`.
 
-We decided to shift to `spin` because of the several issues reported in `dev.py`. For example, [doit interfering with command history of pdb] [[gh-16452]](https://github.com/scipy/scipy/issues/16452), usage of emojis giving issues in a Windows CI environment [[gh-18046]](https://github.com/scipy/scipy/issues/18046), and dev.py unable to resolve homebrew installed Python [[gh-18998]](https://github.com/scipy/scipy/issues/18998). A bunch of those are due to `doit` being a dependency of `dev.py`. One nice feature of `spin` is it has fewer dependencies. This means, fewer bugs because more dependencies means more points of failure. The tradeoff here is to compromise looks and feel of the output a little bit to avoid problems while developing SciPy.
+3. **Installation**: Finally, `meson install` installs the compiled libraries and source files (for Python) into the installation directory.
 
-One can ask this question, "Why not just update `dev.py` to fix the above issues? Why not just make `dev.py` lite weight instead of moving to a new third party tool?". Well, `spin` is being used by many scientific computing projects like, `numpy`, `scikit-image`, `solcore5`, `skmisc`, `PyFVS`, `sktree`, `dipy` and the list is still updating (refer, [[scientific-python/spin#62]](https://github.com/scientific-python/spin/issues/62)). Therefore, improvements made in `spin` will be automatically beneficial to SciPy. In addition, whatever limitations we find in `spin`, we will make improvements to it via Pull Requests. So, its a two way connection, SciPy benefiting from other projects (via `spin`) and other projects receiving enhancements from SciPy (via `spin`).
+With this context in place, let's dive into the specifics of the work we did.
 
-Let me share three signifcant examples to show case this two way connection I talked about,
+### Transition to `spin` from `dev.py`
 
-1. `spin` didn't have support for passing arguments to `meson compile` and `meson install` - `spin` used to pass all `meson` arguments (via `--` in `spin build` command) only to `meson setup` step. SciPy passes arguments to `meson install` as well (for example, `--tags` - see, [gh-20712](https://github.com/scipy/scipy/pull/20712)). So we needed a way to forward arguments from SciPy to `meson` via `spin`. I opened, a PR to accept CLI arguments for `meson compile` and `meson install` [[scientific-python/spin#256]](https://github.com/scientific-python/spin/pull/256) (merged now), we added two keyword arguments `meson_compile_args` and `meson_install_args` in `build` subcommand. These two are empty by default (for backwards compatibility). If specified then will go to their respective `meson` build steps. This is one example where `spin` was enhanced due to a requirement of SciPy.
+We decided to transition from `dev.py` to `spin` due to a series of issues reported with `dev.py`. For example:
 
-2. With `spin` we are able to use lesser code to implement the `dev.py` functionality - `spin` has `spin.util.extend_command` decorator. This helps in extending `spin` commands (like, `spin build`, `spin test`, etc) in the user project (in our case SciPy). The idea is to use this decorator in SciPy and implement checks needed for SciPy. Then call `spin`'s implementation to execute the common logic. This addition in `spin` reduced the code size by 44% (as compared to `dev.py`). This reduces the code surface area - meaning lesser bugs. This is one example where SciPy got benefitted due to an improvement in `spin`. Also, another good reason to shift to `spin`.
+- [doit interfering with the command history of pdb](https://github.com/scipy/scipy/issues/16452)
+- Emoji rendering issues in the Windows CI environment [[gh-18046](https://github.com/scipy/scipy/issues/18046)]
+- Inability of `dev.py` to resolve Homebrew-installed Python [[gh-18998](https://github.com/scipy/scipy/issues/18998)]
 
-3. Corrupt linker path of shared library on macOS due to specification `--destdir` in `meson install` step - We were facing this issue when we used `spin` to build SciPy (after implementing the prototype in [gh-21674](https://github.com/scipy/scipy/pull/21674)). When we did, `spin test`, then it was unable to load, `libsf_error_state.dylib` on macOS. One cause for this issue is that `spin` sets `/usr` or `C:\` as default value for `--prefix`. It also specifies `--destdir` in `meson` install step. `--destdir` is meant for packaging, as an actual staging area, while for spin the final install directory is `build-install` (by default), and therefore there is no intent to later put this package into /usr`or`C:\`. Hence we removed `--destdir` usage and set `--prefix` to installation directory. Here's the pull request, [scientific-python/spin#257](https://github.com/scientific-python/spin/pull/257) which fixes this issue.
+Many of these problems stem from `doit`, which is a dependency of `dev.py`. One of the advantages of `spin` is that it has fewer dependencies, which in turn means fewer points of failure. While this trade-off sacrifices some of the output’s polish, it greatly improves the reliability of the development process for SciPy.
 
-`DEV: use `spin` (prototype)` [[gh-21674]](https://github.com/scipy/scipy/pull/21674) is close to merging. We are waiting for [scientific-python/spin#257](https://github.com/scientific-python/spin/pull/257) to be merged. Once in, we are ready to start using `spin` in SciPy. The SciPy CI is using `spin` in the above PR. So our work is completely tested. Here's the current status of how `spin` usage looks like,
+### Why not just fix `dev.py`?
 
-**SciPy build experience with `spin` and `dev.py`**
+You might wonder, "Why not just update `dev.py` to fix these issues? Why switch to a new third-party tool like `spin`?"
 
-**With `dev.py`**
+One of the key reasons is that **`spin` is already widely used by other scientific computing projects** such as `numpy`, `scikit-image`, `solcore5`, `skmisc`, `PyFVS`, `sktree`, `dipy`, and many more (refer to [scientific-python/spin#62](https://github.com/scientific-python/spin/issues/62)). This means improvements made to `spin` will automatically benefit SciPy. Additionally, any limitations we encounter in `spin` will be addressed through Pull Requests, making it a two-way connection: SciPy benefits from other projects (via `spin`), and those projects benefit from improvements made by SciPy.
+
+Let me share three significant examples of this two-way connection,
+
+**Passing Arguments to `meson compile` and `meson install`**
+
+Initially, `spin` didn’t support passing arguments to `meson compile` or `meson install`. It only forwarded arguments to the `meson setup` step. Since SciPy requires passing certain arguments (like `--tags`) to `meson install` [[gh-20712](https://github.com/scipy/scipy/pull/20712)], we needed a way to forward those arguments through `spin`. I contributed a PR to `spin` to allow for CLI arguments to be passed to `meson compile` and `meson install` steps [[scientific-python/spin#256]](https://github.com/scientific-python/spin/pull/256), which was merged. This enhancement allows SciPy to seamlessly pass the necessary arguments, further improving its integration with `spin`.
+
+**Reducing Code Complexity**
+
+`spin` allowed us to simplify the implementation of `dev.py` functionality. It offers a decorator, `spin.util.extend_command`, which enables the extension of `spin` commands (e.g., `spin build`, `spin test`) within a user project (in our case, SciPy). By using this decorator, we implemented SciPy-specific checks while leveraging `spin`'s core functionality. As a result, the code size was reduced by 44% compared to `dev.py`. This reduction in code complexity means a smaller surface area for bugs — another strong reason for adopting `spin`.
+
+**Fixing a linker path issue on macOS**
+
+While building SciPy with `spin`, we encountered an issue on macOS where the linker path for shared libraries became corrupted due to the `--destdir` specification in the `meson install` step. This issue arose because `spin` sets `/usr` or `C:\` as the default value for `--prefix`, but it also used `--destdir` during installation. `--destdir` is typically used for packaging, not for final installations. To resolve this, we removed the `--destdir` usage and set the `--prefix` directly to the installation directory. The fix was submitted as a PR to `spin` [[scientific-python/spin#257]](https://github.com/scientific-python/spin/pull/257), ensuring smoother installation behavior for SciPy on macOS.
+
+### Current Status of `spin` in SciPy
+
+We are close to merging [DEV: use `spin` (prototype)] [[gh-21674](https://github.com/scipy/scipy/pull/21674)]. We’re waiting for the PR [scientific-python/spin#257](https://github.com/scientific-python/spin/pull/257) to be merged, after which we’ll be ready to fully integrate `spin` into SciPy. Our work has been fully tested in the SciPy CI system, ensuring its stability.
+
+Here’s a quick comparison of the SciPy build experience with `dev.py` versus `spin`:
+
+**SciPy Build Experience with `dev.py`**
 
 <script src="https://asciinema.org/a/RrtqCRlxIaA6pNS6BQchJyUmN.js" id="asciicast-RrtqCRlxIaA6pNS6BQchJyUmN" async="true"></script>
 
-**With `spin`**
+**SciPy Build Experience with `spin`**
 
 <script src="https://asciinema.org/a/FJzWyQun71g796n5kFI1l6dxv.js" id="asciicast-FJzWyQun71g796n5kFI1l6dxv" async="true"></script>
 
-As you can see there is no difference between look and feel of `python dev.py build` and `spin build`. It works exactly the same. However, the issues which were there with `dev.py` are not observed with `spin`. Take a look at the following videos,
+As you can see there is no difference between the look and feel of `python dev.py build` and `spin build`. It works exactly the same. However, the issues which were there with `dev.py` are not observed with `spin`. Take a look at the following videos,
 
 **`spin` keeps pdb command history intact while `dev.py` interferes with it [[gh-16452]](https://github.com/scipy/scipy/issues/16452)**
 
@@ -86,6 +116,8 @@ As you can see `spin` usage doesn't interfere with PDB's history. This issue was
 <script src="https://asciinema.org/a/aZstdaf6B6nlkW9JFccT7z7Dr.js" id="asciicast-aZstdaf6B6nlkW9JFccT7z7Dr" async="true"></script>
 
 The above video showcases how `spin` works fine with Homebrew installed Python 3.10. The build completes. However, `dev.py` fails because it is unable to resolve paths correctly.
+
+In summary, the move from `dev.py` to `spin` has brought notable improvements in code simplicity, build reliability, and alignment with other scientific computing projects. As `spin` continues to evolve, SciPy will benefit from its enhancements while also contributing to its development.
 
 #### Funding acknowledgements
 
