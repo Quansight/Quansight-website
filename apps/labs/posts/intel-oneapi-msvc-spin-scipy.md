@@ -131,9 +131,13 @@ Here’s a quick comparison of the SciPy build experience with `dev.py` versus `
 
 <script src="https://asciinema.org/a/fn1JP6ZNPpw6rKh8oAusk34Xr.js" id="asciicast-fn1JP6ZNPpw6rKh8oAusk34Xr" async="true"></script>
 
+This video shows building SciPy with `dev.py`.
+
 **SciPy Build Experience with `spin`**
 
 <script src="https://asciinema.org/a/TdMa1hSSy3MTPnFcYKHvP0pvm.js" id="asciicast-TdMa1hSSy3MTPnFcYKHvP0pvm" async="true"></script>
+
+This video shows building SciPy with `spin`.
 
 As you can see there is no difference between the look and feel of `python dev.py build` and `spin build`.
 It works exactly the same. However, the issues which were there with `dev.py` are not observed with `spin`.
@@ -145,9 +149,13 @@ Take a look at the following videos,
 
 <script src="https://asciinema.org/a/jtTP2xty4popJ1GVL0PZQBsvz.js" id="asciicast-jtTP2xty4popJ1GVL0PZQBsvz" async="true"></script>
 
+This video shows `dev.py` interfering with `pdb` command history.
+
 **With `spin`**
 
 <script src="https://asciinema.org/a/uOT0cp0WJSKnDZPmRqdm0vREC.js" id="asciicast-uOT0cp0WJSKnDZPmRqdm0vREC" async="true"></script>
+
+This video shows `spin` keeps `pdb` command history intact.
 
 As you can see `spin` usage doesn't interfere with PDB's history. This issue was there with `dev.py`.
 
@@ -155,7 +163,7 @@ As you can see `spin` usage doesn't interfere with PDB's history. This issue was
 
 <script src="https://asciinema.org/a/zp8nTTvEwB8YFrrnZQeFiGC9r.js" id="asciicast-zp8nTTvEwB8YFrrnZQeFiGC9r" async="true"></script>
 
-The above video showcases how `spin` works fine with Homebrew installed Python 3.10. The build completes.
+This video showcases how `spin` works fine with Homebrew installed Python 3.10. The build completes.
 However, `dev.py` fails because it is unable to resolve paths correctly.
 
 In summary, the move from `dev.py` to `spin` has brought notable improvements in code simplicity, build reliability, and alignment with other scientific computing projects.
