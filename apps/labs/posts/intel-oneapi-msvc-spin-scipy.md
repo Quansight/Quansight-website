@@ -35,12 +35,12 @@ Through these updates, we aim to provide a smoother and more flexible developmen
 #### Intel oneAPI Support in SciPy
 
 Intel offers oneAPI, a comprehensive toolkit designed for high-performance computing (HPC) applications.
-It includes essential components such as ICX (for C), ICPX (for C++), IFX (for Fortran), and MKL (Math Kernel Library), which provides optimized mathematical routines like BLAS, LAPACK, and fast FFTs [[1]](https://en.wikipedia.org/wiki/Math_Kernel_Library).
+It includes essential components such as `icx` (for C), `icpx` (for C++), `ifx` (for Fortran), and MKL (Math Kernel Library), which provides optimized mathematical routines like BLAS, LAPACK, and fast FFTs [[2]](https://en.wikipedia.org/wiki/Math_Kernel_Library).
 For our efforts, we targeted both Windows and Linux operating systems.
 
-Our journey began with the task of adding a Windows CI job to support MSVC + MKL + Intel Fortran (ifx) [[gh-20878](https://github.com/scipy/scipy/issues/20878)].
+Our journey began with the task of adding a Windows CI job to support MSVC + MKL + `ifx` [[gh-20878](https://github.com/scipy/scipy/issues/20878)].
 This was critical to ensure that SciPy could compile correctly with Intel oneAPI and MSVC, preventing any regressions.
-This issue also references [gh-20728](https://github.com/scipy/scipy/issues/20728), where the author is building SciPy using ICX, ICPX, IFX, and MKL, leveraging the full Intel oneAPI toolkit.
+This issue also references [gh-20728](https://github.com/scipy/scipy/issues/20728), where the author is building SciPy using `icx`, `icpx`, `ifx`, and MKL, leveraging the full Intel oneAPI toolkit.
 Additionally, the failure to build SciPy with MSVC [[gh-20860]](https://github.com/scipy/scipy/issues/20860) pointed to specific build challenges with MSVC.
 We began by addressing these two issues.
 
@@ -50,13 +50,13 @@ To work around this, we opted for dynamic memory allocation on the heap, using `
 While this approach is manual, it remains the only viable solution with MSVC.
 Interestingly, Clang (due to its LLVM backend) does not have this limitation, making it more flexible in this regard.
 
-Once we addressed this issue, we added a CI job to test SciPy's compilation with MSVC + IFX + OpenBLAS, which helped prevent future regressions in the MSVC build.
+Once we addressed this issue, we added a CI job to test SciPy's compilation with MSVC + `ifx` + OpenBLAS, which helped prevent future regressions in the MSVC build.
 This also marked an early step toward supporting Intel oneAPI within SciPy.
 
 The next major hurdle involved the [`arpack`](https://github.com/opencollab/arpack-ng) issue, which required full Intel oneAPI support to resolve.
-On Linux, the issue was already fixed. However, there were still some challenges when using IFX, such as the failure of the `test_equal_bounds` test in `scipy/optimize/tests/test_optimize.py` due to floating-point discrepancies with IFX.
-To address this, we increased tolerances for several tests to accommodate the slightly reduced accuracy/precision when using IFX.
-This was all handled in the PR, `BUG/CI: Compile and run tests with IFX + MKL on Linux` [[gh-21173]](https://github.com/scipy/scipy/pull/21173), where I also added a CI job to test the combination of `gcc` + `g++` + `ifx` + MKL on Linux, marking another important step toward full Intel oneAPI support for SciPy.
+On Linux, the issue was already fixed. However, there were still some challenges when using `ifx`, such as the failure of the `test_equal_bounds` test in `scipy/optimize/tests/test_optimize.py` due to floating-point discrepancies.
+To address this, we increased tolerances for several tests to accommodate the slightly reduced accuracy/precision when using `ifx`.
+This was all handled in the PR, `BUG/CI: Compile and run tests with ifx + MKL on Linux` [[gh-21173]](https://github.com/scipy/scipy/pull/21173), where I also added a CI job to test the combination of `gcc` + `g++` + `ifx` + MKL on Linux, marking another important step toward full Intel oneAPI support for SciPy.
 
 The final milestone for Intel oneAPI support was the CI job for testing SciPy with `icx`, `icpx`, `ifx`, and MKL [[gh-21254]](https://github.com/scipy/scipy/pull/21254).
 In this step, we replaced `gcc` with `icx` and `g++` with `icpx`, and the build successfully passed on Linux. However, on Windows, we were unable to proceed further due to an unresolved import error with `arpack`. Despite several attempts to fix the issue, all solutions led to dead ends. As a result, we decided to pause the effort on Windows for now, as the work required did not seem to justify the outcome.
@@ -121,7 +121,7 @@ The fix was submitted as a PR to `spin` [[scientific-python/spin#257]](https://g
 
 ### Current Status of `spin` in SciPy
 
-We are close to merging [DEV: use `spin` (prototype)] [[gh-21674](https://github.com/scipy/scipy/pull/21674)].
+We are close to merging `DEV: use spin (prototype)` [[gh-21674](https://github.com/scipy/scipy/pull/21674)].
 We’re waiting for the PR [scientific-python/spin#257](https://github.com/scientific-python/spin/pull/257) to be merged, after which we’ll be ready to fully integrate `spin` into SciPy.
 Our work has been fully tested in the SciPy CI system, ensuring its stability.
 
