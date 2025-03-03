@@ -12,7 +12,7 @@ hero:
   imageAlt: 'SciPy logo'
 ---
 
-In this blog post, we’ll discuss the improvements we made to enhance the developer experience at SciPy. Our work focused on two key areas:
+Over the past year, we worked on enhancing the development experience of SciPy. We focused on two key areas:
 
 1. Intel oneAPI and MSVC Support in SciPy
 2. Transitioning from `dev.py` to `spin`
@@ -20,12 +20,12 @@ In this blog post, we’ll discuss the improvements we made to enhance the devel
 First, let’s explore the motivation behind these updates.
 
 Intel provides a comprehensive toolkit for high-performance computing (HPC) and numerical computing use cases, known as [oneAPI](https://www.intel.com/content/www/us/en/developer/tools/oneapi/overview.html).
-Given that SciPy is heavily used in HPC and numerical computing, supporting the ability to build SciPy with Intel oneAPI was a natural and important step.
-By doing so, we aim to improve the experience for SciPy users who rely on Intel oneAPI as their primary toolkit.
+SciPy is heavily used in HPC and numerical computing.
+Adding support for SciPy builds with Intel oneAPI was a natural and important step to improve the experience for SciPy users who rely on Intel oneAPI as their primary toolkit.
 Additionally, since MSVC is the de facto compiler for C/C++ on Windows, we added continuous integration (CI) jobs to test SciPy compilation with MSVC, further expanding the compatibility of SciPy across platforms.
 
 Now, let’s talk about the transition from `dev.py` to `spin`.
-`dev.py` (also known as `do.py` [[1]](https://labs.quansight.org/blog/the-evolution-of-the-scipy-developer-cli)) was a significant step forward in improving the development workflow.
+`dev.py` (also known as `do.py`, learn more in [The evolution of the SciPy developer CLI](https://labs.quansight.org/blog/the-evolution-of-the-scipy-developer-cli)) was a significant step forward in improving the development workflow.
 However, `spin` builds on `dev.py`, taking inspiration from its design while generalizing the interface to work with a wider range of projects without the need for heavy customization.
 As a result, SciPy will directly benefit from the improvements made in `spin` and vice versa.
 Moreover, `spin` offers an additional benefit: contributors familiar with `numpy` will find it easier to navigate, thanks to the shared foundation and streamlined approach.
@@ -35,7 +35,7 @@ Through these updates, we aim to provide a smoother and more flexible developmen
 #### Intel oneAPI Support in SciPy
 
 Intel offers oneAPI, a comprehensive toolkit designed for high-performance computing (HPC) applications.
-It includes essential components such as `icx` (for C), `icpx` (for C++), `ifx` (for Fortran), and MKL (Math Kernel Library), which provides optimized mathematical routines like BLAS, LAPACK, and fast FFTs [[2]](https://en.wikipedia.org/wiki/Math_Kernel_Library).
+It includes essential components such as `icx` (for C), `icpx` (for C++), `ifx` (for Fortran), and [MKL (Math Kernel Library)](https://en.wikipedia.org/wiki/Math_Kernel_Library), which provides optimized mathematical routines like BLAS, LAPACK, and fast FFTs.
 For our efforts, we targeted both Windows and Linux operating systems.
 
 Our journey began with the task of adding a Windows CI job to support MSVC + MKL + `ifx` [[gh-20878](https://github.com/scipy/scipy/issues/20878)].
@@ -59,7 +59,9 @@ To address this, we increased tolerances for several tests to accommodate the sl
 This was all handled in the PR, `BUG/CI: Compile and run tests with ifx + MKL on Linux` [[gh-21173]](https://github.com/scipy/scipy/pull/21173), where I also added a CI job to test the combination of `gcc` + `g++` + `ifx` + MKL on Linux, marking another important step toward full Intel oneAPI support for SciPy.
 
 The final milestone for Intel oneAPI support was the CI job for testing SciPy with `icx`, `icpx`, `ifx`, and MKL [[gh-21254]](https://github.com/scipy/scipy/pull/21254).
-In this step, we replaced `gcc` with `icx` and `g++` with `icpx`, and the build successfully passed on Linux. However, on Windows, we were unable to proceed further due to an unresolved import error with `arpack`. Despite several attempts to fix the issue, all solutions led to dead ends. As a result, we decided to pause the effort on Windows for now, as the work required did not seem to justify the outcome.
+In this step, we replaced `gcc` with `icx` and `g++` with `icpx`, and the build successfully passed on Linux.
+
+However, on Windows, we were unable to proceed further due to an unresolved import error with `arpack`. Despite several attempts to fix the issue, all solutions led to dead ends. As it was turning into an unbounded amount of work, we decided to pause the effort on Windows and focus on on more scoped tasks.
 
 Through these efforts, we’ve made significant strides in integrating Intel oneAPI with SciPy, ensuring better support for both Linux and Windows platforms.
 While there are still challenges ahead, the progress made provides a solid foundation for future development.
@@ -86,13 +88,11 @@ Many of these problems stem from `doit`, which is a dependency of `dev.py`.
 One of the advantages of `spin` is that it has fewer dependencies, which in turn means fewer points of failure.
 While this trade-off sacrifices some of the output’s polish, it greatly improves the reliability of the development process for SciPy.
 
-**Why not just fix `dev.py`?**
-
 You might wonder, "Why not just update `dev.py` to fix these issues? Why switch to a new third-party tool like `spin`?"
 
 One of the key reasons is that **`spin` is already widely used by other scientific computing projects** such as `numpy`, `scikit-image`, `solcore5`, `skmisc`, `PyFVS`, `sktree`, `dipy`, and many more (refer to [scientific-python/spin#62](https://github.com/scientific-python/spin/issues/62)).
 This means improvements made to `spin` will automatically benefit SciPy.
-Additionally, any limitations we encounter in `spin` will be addressed through Pull Requests, making it a two-way connection: SciPy benefits from other projects (via `spin`), and those projects benefit from improvements made by SciPy.
+Additionally, any limitations we encounter in `spin` will be addressed through upstream contributions to the project, making it a two-way connection: SciPy benefits from other projects contributing to `spin`, and those projects benefit from improvements made by the SciPy team to `spin`.
 
 Let me share three significant examples of this two-way connection,
 
@@ -140,7 +140,7 @@ This video shows building SciPy with `dev.py`.
 This video shows building SciPy with `spin`.
 
 As you can see there is no difference between the look and feel of `python dev.py build` and `spin build`.
-It works exactly the same. However, the issues which were there with `dev.py` are not observed with `spin`.
+It works exactly the same. Moreover, the issues which were there with `dev.py` are not observed with `spin`.
 Take a look at the following videos,
 
 **`spin` keeps pdb command history intact while `dev.py` interferes with it [[gh-16452]](https://github.com/scipy/scipy/issues/16452)**
@@ -157,7 +157,7 @@ This video shows `dev.py` interfering with `pdb` command history.
 
 This video shows `spin` keeps `pdb` command history intact.
 
-As you can see `spin` usage doesn't interfere with PDB's history. This issue was there with `dev.py`.
+As you can see `spin` usage doesn't interfere with PDB's history, which was an issue with `dev.py`.
 
 **Using homebrew installed Python to build SciPy [[gh-18998]](https://github.com/scipy/scipy/issues/18998) - `dev.py` vs `spin`**
 
