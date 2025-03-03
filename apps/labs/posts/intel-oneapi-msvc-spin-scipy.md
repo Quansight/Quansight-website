@@ -53,7 +53,7 @@ Interestingly, Clang (due to its LLVM backend) does not have this limitation, ma
 Once we addressed this issue, we added a CI job to test SciPy's compilation with MSVC + `ifx` + OpenBLAS, which helped prevent future regressions in the MSVC build.
 This also marked an early step toward supporting Intel oneAPI within SciPy.
 
-The next major hurdle involved the [`arpack`](https://github.com/opencollab/arpack-ng) issue, which required full Intel oneAPI support to resolve.
+The next major hurdle involved the [`arpack`](https://github.com/opencollab/arpack-ng) issue (learn more in [gh-20728](https://github.com/scipy/scipy/issues/20728)), which required full Intel oneAPI support to resolve.
 On Linux, the issue was already fixed. However, there were still some challenges when using `ifx`, such as the failure of the `test_equal_bounds` test in `scipy/optimize/tests/test_optimize.py` due to floating-point discrepancies.
 To address this, we increased tolerances for several tests to accommodate the slightly reduced accuracy/precision when using `ifx`.
 This was all handled in the PR, `BUG/CI: Compile and run tests with ifx + MKL on Linux` [[gh-21173]](https://github.com/scipy/scipy/pull/21173), where I also added a CI job to test the combination of `gcc` + `g++` + `ifx` + MKL on Linux, marking another important step toward full Intel oneAPI support for SciPy.
