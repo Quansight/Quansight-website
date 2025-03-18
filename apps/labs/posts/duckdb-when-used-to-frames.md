@@ -1,5 +1,5 @@
 ---
-title: "Mastering DuckDB when you're used to pandas or Polars"
+title: "Mastering DuckDB when you're used to pandas or Polars: part 1"
 published: February 17, 2025
 authors: [marco-gorelli]
 description: "It's not as scary as you think"
@@ -13,7 +13,7 @@ hero:
 
 ---
 
-# Mastering DuckDB when you're used to pandas or Polars
+# Mastering DuckDB when you're used to pandas or Polars: part 1
 
 You may have heard about DuckDB's impressive robustness and performance. Perhaps you want to try it out - BUT WAIT, you're a data scientist and are used to pandas and/or Polars, not SQL. You can use the `SELECT`, `JOIN` and `GROUP BY` commands, but not much more, and you may be wondering: is it even possible to use SQL to:
 
@@ -322,5 +322,7 @@ What's more, DuckDB allows you to write queries against in-memory pandas and Pol
 ## Conclusion
 
 We've learned how to translate some common dataframe operations to SQL so that we can port them over to DuckDB. We looked at centering, resampling, and rolling statistics. Porting to SQL / DuckDB may be desirable if you would like to use the DuckDB engine, if your client and/or team prefer SQL to dataframe APIs, or if you would like to have a robust and mostly standardised solution which is unlikely to break in the future.
+
+Stay tuned for "part 2", in which we'll cover nested data types, filtering with window functions, and expression composability.
 
 If you would like help implementing solutions with any of the tools covered in this post or would like to sponsor efforts toward dataframe API unification, [we can help](https://quansight.com/about-us/#bookacallform)!
