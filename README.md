@@ -146,9 +146,8 @@ There are primarily two types of website changes, each with its process:
 - Content changes ([Storyblok](https://www.storyblok.com/home), our CMS - Content Management System)
 - Code changes (this GitHub repo)
 
-Note that Labs blog posts are a bit of an exception. Categorically they are
-content changes, but the content lives in the Git repo -- so technically they are
-code changes, and they follow the process for code changes.
+Note that Labs blog posts are an exception. See above: 
+[How to publish a new blog post 📝](#how-to-publish-a-new-blog-post-).
 
 This section will cover the process for each type of change.
 
