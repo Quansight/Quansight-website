@@ -42,7 +42,7 @@ The following graphic presents notable highlights from the report.
   </section>
 
   <section>
-    <h3>Our Projects</h3>
+    <h3>OSS Projects We Contribute To</h3>
     <p>We spent 44,547 hours contributing to 40+ open-source projects.</p>
     <p><strong>Projects include:</strong></p>
     <ul>
@@ -113,11 +113,11 @@ The following graphic presents notable highlights from the report.
       <li><strong>2021:</strong> Revenue - $2,930,000, Net Income - $53,000</li>
       <li><strong>2022:</strong> Revenue - $3,480,000, Net Income - -$71,000</li>
     </ul>
-    <p>In annual demographic surveys (2021-2024), 40% to 48% of respondents self-identified as belonging to a marginalized group in tech and open source.</p>
   </section>
 
   <section>
-    <h3>Demographics Survey Results</h3>
+    <h4>Demographics Survey Results</h4>
+    <p>In annual demographic surveys (2021-2024), 40% to 48% of respondents self-identified as belonging to a marginalized group in tech and open source.</p>
     <ul>
       <li><strong>2024:</strong> 15 not marginalized, 11 self-identified as marginalized, 2 preferred not to identify</li>
       <li><strong>2023:</strong> 12 not marginalized, 8 self-identified as marginalized, 3 preferred not to identify</li>
