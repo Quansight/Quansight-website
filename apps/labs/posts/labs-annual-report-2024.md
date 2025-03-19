@@ -110,13 +110,15 @@ The following graphic presents notable highlights from the report.
     <p>Our revenue grew very slightly to just over $4,200,000 USD, with a net income of $50,000 USD.</p>
     <p><strong>Revenue and income figures (2021-2024):</strong></p>
     <ul>
-      <li><strong>2021:</strong> Revenue - $2,930,000, Net Income - $53,000</li>
-      <li><strong>2022:</strong> Revenue - $3,480,000, Net Income - -$71,000</li>
+      <li><strong>2021:</strong> Revenue $2,930,000, Net Income $53,000</li>
+      <li><strong>2022:</strong> Revenue $3,480,000, Net Income -$71,000</li>
+      <li><strong>2023:</strong> Revenue $4,090,000, Net Income $12,000</li>
+      <li><strong>2024:</strong> Revenue $4,261,000, Net Income $50,000</li>
     </ul>
   </section>
 
   <section>
-    <h4>Demographics Survey Results</h4>
+    <h4>Demographic Survey Results</h4>
     <p>In annual demographic surveys (2021-2024), 40% to 48% of respondents self-identified as belonging to a marginalized group in tech and open source.</p>
     <ul>
       <li><strong>2024:</strong> 15 not marginalized, 11 self-identified as marginalized, 2 preferred not to identify</li>
