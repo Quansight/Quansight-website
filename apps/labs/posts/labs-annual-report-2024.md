@@ -1,15 +1,15 @@
 ---
-title: 'Quansight Labs Annual Report 2024: Building for Ecosystem-wide Impact and Sustainability'
+title: 'Quansight Labs Annual Report 2024: Year of focus and execution'
 authors: [pavithra-eswaramoorthy, tania-allard, irina-fumarel, ralf-gommers]
 published: March 19, 2025
 description: 'Presenting our 2024 annual report! Read about our open source project and community highlights, initiatives, and work culture.'
 category: [Community, PyData ecosystem]
 featuredImage:
   src: /posts/labs-annual-report-2024/featured.png
-  alt: ''
+  alt: 'A line-style illustration that depicts an urban street scene with people with disabilities. On the left, a person in a wheelchair is being assisted to cross the street. In the center, two people walk arm-in-arm in the crosswalk. On the right, a person with a cane and a guide dog walks along the sidewalk. The background shows a simplified city skyline with buildings, trees, a traffic light, and a bus stop sign. The image aims to depict accessibility and inclusion in urban environments.'
 hero:
-  imageSrc: /posts/labs-annual-report-2024/featured.png
-imageAlt: ''
+  imageSrc: /posts/labs-annual-report-2024/hero.png
+imageAlt: 'A line-style illustration that depicts an urban street scene with people with disabilities. On the left, a person in a wheelchair is being assisted to cross the street. In the center, two people walk arm-in-arm in the crosswalk. On the right, a person with a cane and a guide dog walks along the sidewalk. The background shows a simplified city skyline with buildings, trees, a traffic light, and a bus stop sign. The image aims to depict accessibility and inclusion in urban environments.'
 ---
 
 We’re pleased to share the Quansight Labs Annual Report 2024!
@@ -32,7 +32,7 @@ The following graphic presents notable highlights from the report.
     alt="At a Glance: Quansight Labs Annual Report 2024
     Section heading: Our Mission
     The mission of Quansight Labs is to sustain and grow community-driven open source projects and ecosystems, with a focus on the core of the PyData stack, as well as digital infrastructure and tools and digital infrastructure for data science, Machine Learning (ML), Artificial Intelligence (AI), and scientific computing.
-    Section heading: Our Projects
+    Section heading: OSS Projects We Contribute To
     We spent 44,547 hours contributing to 40+ open-source projects
     Logos for conda, Hypothesis, Numba, SciPy, JupyterLab, Napari, SymPy,  scikit-learn, Bokeh, IPython,  NumPy, PyO3, Narwhals, Flax, JAX, PyTorch, pandas, Nebari, PyData Sphinx Theme, conda-forge, Polars, OpenBLAS, conda-store, CuPy, Scientific Python, CPython, PyTorch Ignite, Project Jupyter, Pyodide, Consortium for Python Data API Standards, pydata/sparse, stdlib, NumFOCUS’ Diversity & Inclusion in Scientific Computing, Spyder, and the Python Software Foundation.
     Key initiatives over the past year include: Improving performance of free-threaded CPython; Interactivity and internationalization of documentation; Sustaining conda ecosystem for Python packaging; Accelerating sparse array computation; Wrap-up of a 3-year NASA ROSES grant (NumPy, pandas, SciPy, and scikit-learn); PyData Sphinx Theme accessibility audit and design system; DataFrame compatibility with Narwhals.
