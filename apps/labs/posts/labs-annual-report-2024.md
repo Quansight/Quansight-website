@@ -96,7 +96,7 @@ The following graphic presents notable highlights from the report.
 
   <section>
     <h3>Inaugural Labs Open Source Fund</h3>
-    <p>We launched a new Labs open source fund, where Labs members can participate in sponsoring a small grant to communities and projects they care about that align with the Labs’ mission.</p>
+    <p>Since the creation of Labs, we have continuously strived to refine our working model and drive new initiatives to support our efforts of building and sustaining open source projects and communities. This year was no different, as we launched our Quansight Labs OSS Fund. This annual fund will grant small sponsorships to open source projects that our ecosystem and communities rely on, all of which are nominated and selected by Labs staff members.</p>
     <p><strong>2024 awardees:</strong></p>
     <ul>
       <li>mkdocstrings</li>
