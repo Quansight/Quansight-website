@@ -19,7 +19,7 @@ As we settle into the new year, we’re taking a moment to reflect on 2024—a y
 Our annual report offers an in-depth look at our work over the past year, covering key initiatives, projects and community updates, financial insights, and team growth.
 
 <p align="center">
-  <a href="https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2024">
+  <a href="https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2024.pdf">
     <b>Click to read and download the full report</b>
   </a>
 </p>
