@@ -29,25 +29,113 @@ The following graphic presents notable highlights from the report.
 <p align="center">
   <img
     src="/posts/labs-annual-report-2024/infographic.png"
-    alt="At a Glance: Quansight Labs Annual Report 2024
-    Section heading: Our Mission
-    The mission of Quansight Labs is to sustain and grow community-driven open source projects and ecosystems, with a focus on the core of the PyData stack, as well as digital infrastructure and tools and digital infrastructure for data science, Machine Learning (ML), Artificial Intelligence (AI), and scientific computing.
-    Section heading: OSS Projects We Contribute To
-    We spent 44,547 hours contributing to 40+ open-source projects
-    Logos for conda, Hypothesis, Numba, SciPy, JupyterLab, Napari, SymPy,  scikit-learn, Bokeh, IPython,  NumPy, PyO3, Narwhals, Flax, JAX, PyTorch, pandas, Nebari, PyData Sphinx Theme, conda-forge, Polars, OpenBLAS, conda-store, CuPy, Scientific Python, CPython, PyTorch Ignite, Project Jupyter, Pyodide, Consortium for Python Data API Standards, pydata/sparse, stdlib, NumFOCUS’ Diversity & Inclusion in Scientific Computing, Spyder, and the Python Software Foundation.
-    Key initiatives over the past year include: Improving performance of free-threaded CPython; Interactivity and internationalization of documentation; Sustaining conda ecosystem for Python packaging; Accelerating sparse array computation; Wrap-up of a 3-year NASA ROSES grant (NumPy, pandas, SciPy, and scikit-learn); PyData Sphinx Theme accessibility audit and design system; DataFrame compatibility with Narwhals.
-    Section heading: Inaugural Labs Open Source Fund
-    We launched a new Labs open source fund, where Labs members can participate in sponsoring a small grant to communities and projects they care about that align with the Labs’ mission. 2024 awardees: mkdocstrings, codemirror, Maturin.
-    Section heading: Sustaining Labs
-    Our revenue grew very slightly to just over $4,200,000 USD, with a net income of $50,000 USD.
-    Vertical bar plot with year-by-year total revenue and income figures for Labs from 2021 to 2024. For 2021, revenue was 2,930,000 USD, and net income was 53,000 USD. For 2022, revenue was 3,480,000 USD, and net income was -71,000 USD.
-    In annual demographic surveys conducted between 2021 and 2024, 40% to 48% of our respondents self-identified as belonging to a marginalized group in tech and open source.
-    A plot showing self-identification as belonging to a marginalized group in tech and open source of demographics survey respondents. For 2024, 15 did not consider themselves to belong to a marginalized group, 11 self-identified as belonging to a marginalized group, and 2 preferred not to self-identify.  For 2023, 12 did not consider themselves to belong to a marginalized group, 8 self-identified as belonging to a marginalized group, and 3 preferred not to identify. For 2022, 15 did not consider themselves to belong to a marginalized group, 8 self-identified as belonging to a marginalized group, and 2 preferred not to identify. For 2021, 16 did not consider themselves to belong to a marginalized group, and 11 self-identified as belonging to a marginalized group.
-    Visit labs.quansight.org to learn more about us, and reach out to us at connect@quansight.com
-    Bluesky: https://bsky.app/profile/quansight.com
-    Twitter: @quansightai
-    LinkedIn: https://www.linkedin.com/company/quansight/"
-/>
+    alt=""
+  />
 </p>
+
+<div class="sr-only">
+  <h2>At a Glance: Quansight Labs Annual Report 2024</h2>
+
+  <section>
+    <h3>Our Mission</h3>
+    <p>The mission of Quansight Labs is to sustain and grow community-driven open source projects and ecosystems, with a focus on the core of the PyData stack, as well as digital infrastructure and tools for data science, Machine Learning (ML), Artificial Intelligence (AI), and scientific computing.</p>
+  </section>
+
+  <section>
+    <h3>Our Projects</h3>
+    <p>We spent 44,547 hours contributing to 40+ open-source projects.</p>
+    <p><strong>Projects include:</strong></p>
+    <ul>
+      <li>conda</li>
+      <li>Hypothesis</li>
+      <li>Numba</li>
+      <li>SciPy</li>
+      <li>JupyterLab</li>
+      <li>Napari</li>
+      <li>SymPy</li>
+      <li>scikit-learn</li>
+      <li>Bokeh</li>
+      <li>IPython</li>
+      <li>NumPy</li>
+      <li>PyO3</li>
+      <li>Narwhals</li>
+      <li>Flax</li>
+      <li>JAX</li>
+      <li>PyTorch</li>
+      <li>pandas</li>
+      <li>Nebari</li>
+      <li>PyData Sphinx Theme</li>
+      <li>conda-forge</li>
+      <li>Polars</li>
+      <li>OpenBLAS</li>
+      <li>conda-store</li>
+      <li>CuPy</li>
+      <li>Scientific Python</li>
+      <li>CPython</li>
+      <li>PyTorch Ignite</li>
+      <li>Project Jupyter</li>
+      <li>Pyodide</li>
+      <li>Consortium for Python Data API Standards</li>
+      <li>pydata/sparse</li>
+      <li>stdlib</li>
+      <li>NumFOCUS’ Diversity & Inclusion in Scientific Computing</li>
+      <li>Spyder</li>
+      <li>Python Software Foundation</li>
+    </ul>
+    <p><strong>Key initiatives:</strong></p>
+    <ul>
+      <li>Improving performance of free-threaded CPython</li>
+      <li>Interactivity and internationalization of documentation</li>
+      <li>Sustaining conda ecosystem for Python packaging</li>
+      <li>Accelerating sparse array computation</li>
+      <li>Wrap-up of a 3-year NASA ROSES grant (NumPy, pandas, SciPy, and scikit-learn)</li>
+      <li>PyData Sphinx Theme accessibility audit and design system</li>
+      <li>DataFrame compatibility with Narwhals</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Inaugural Labs Open Source Fund</h3>
+    <p>We launched a new Labs open source fund, where Labs members can participate in sponsoring a small grant to communities and projects they care about that align with the Labs’ mission.</p>
+    <p><strong>2024 awardees:</strong></p>
+    <ul>
+      <li>mkdocstrings</li>
+      <li>codemirror</li>
+      <li>Maturin</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Sustaining Labs</h3>
+    <p>Our revenue grew very slightly to just over $4,200,000 USD, with a net income of $50,000 USD.</p>
+    <p><strong>Revenue and income figures (2021-2024):</strong></p>
+    <ul>
+      <li><strong>2021:</strong> Revenue - $2,930,000, Net Income - $53,000</li>
+      <li><strong>2022:</strong> Revenue - $3,480,000, Net Income - -$71,000</li>
+    </ul>
+    <p>In annual demographic surveys (2021-2024), 40% to 48% of respondents self-identified as belonging to a marginalized group in tech and open source.</p>
+  </section>
+
+  <section>
+    <h3>Demographics Survey Results</h3>
+    <ul>
+      <li><strong>2024:</strong> 15 not marginalized, 11 self-identified as marginalized, 2 preferred not to identify</li>
+      <li><strong>2023:</strong> 12 not marginalized, 8 self-identified as marginalized, 3 preferred not to identify</li>
+      <li><strong>2022:</strong> 15 not marginalized, 8 self-identified as marginalized, 2 preferred not to identify</li>
+      <li><strong>2021:</strong> 16 not marginalized, 11 self-identified as marginalized</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Contact Us</h3>
+    <p>Visit <a href="https://labs.quansight.org">labs.quansight.org</a> to learn more about us, and reach out at <a href="mailto:connect@quansight.com">connect@quansight.com</a>.</p>
+    <p>Follow us:</p>
+    <ul>
+      <li><a href="https://bsky.app/profile/quansight.com">Bluesky</a></li>
+      <li><a href="https://twitter.com/quansightai">Twitter (@quansightai)</a></li>
+      <li><a href="https://www.linkedin.com/company/quansight/">LinkedIn</a></li>
+    </ul>
+  </section>
+</div>
 
 A huge thank you to all Labs members and collaborators for an amazing 2024! We’re excited for what’s ahead and look forward to seeing you in our community spaces this year!
