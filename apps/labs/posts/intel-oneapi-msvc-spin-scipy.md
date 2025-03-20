@@ -1,6 +1,6 @@
 ---
 title: 'Enhancing Developer Experience at SciPy - Intel oneAPI/MSVC Support and Migrating to spin'
-published: February 21, 2025
+published: March 20, 2025
 authors: [gagandeep-singh]
 description: 'Highlights the work done to improve developer experience at SciPy, specifically on supporting Intel oneAPI/MSVC and spin'
 category: [Developer workflows]
@@ -129,13 +129,13 @@ Here’s a quick comparison of the SciPy build experience with `dev.py` versus `
 
 **SciPy Build Experience with `dev.py`**
 
-<script src="https://asciinema.org/a/fn1JP6ZNPpw6rKh8oAusk34Xr.js" id="asciicast-fn1JP6ZNPpw6rKh8oAusk34Xr" async="true"></script>
+[![asciicast](https://asciinema.org/a/fn1JP6ZNPpw6rKh8oAusk34Xr.svg)](https://asciinema.org/a/fn1JP6ZNPpw6rKh8oAusk34Xr)
 
 This video shows building SciPy with `dev.py`.
 
 **SciPy Build Experience with `spin`**
 
-<script src="https://asciinema.org/a/TdMa1hSSy3MTPnFcYKHvP0pvm.js" id="asciicast-TdMa1hSSy3MTPnFcYKHvP0pvm" async="true"></script>
+[![asciicast](https://asciinema.org/a/TdMa1hSSy3MTPnFcYKHvP0pvm.svg)](https://asciinema.org/a/TdMa1hSSy3MTPnFcYKHvP0pvm)
 
 This video shows building SciPy with `spin`.
 
@@ -147,13 +147,13 @@ Take a look at the following videos,
 
 **With `dev.py`**
 
-<script src="https://asciinema.org/a/jtTP2xty4popJ1GVL0PZQBsvz.js" id="asciicast-jtTP2xty4popJ1GVL0PZQBsvz" async="true"></script>
+[![asciicast](https://asciinema.org/a/jtTP2xty4popJ1GVL0PZQBsvz.svg)](https://asciinema.org/a/jtTP2xty4popJ1GVL0PZQBsvz)
 
 This video shows `dev.py` interfering with `pdb` command history.
 
 **With `spin`**
 
-<script src="https://asciinema.org/a/uOT0cp0WJSKnDZPmRqdm0vREC.js" id="asciicast-uOT0cp0WJSKnDZPmRqdm0vREC" async="true"></script>
+[![asciicast](https://asciinema.org/a/uOT0cp0WJSKnDZPmRqdm0vREC.svg)](https://asciinema.org/a/uOT0cp0WJSKnDZPmRqdm0vREC)
 
 This video shows `spin` keeps `pdb` command history intact.
 
@@ -161,7 +161,7 @@ As you can see `spin` usage doesn't interfere with PDB's history, which was an i
 
 **Using homebrew installed Python to build SciPy [[gh-18998]](https://github.com/scipy/scipy/issues/18998) - `dev.py` vs `spin`**
 
-<script src="https://asciinema.org/a/zp8nTTvEwB8YFrrnZQeFiGC9r.js" id="asciicast-zp8nTTvEwB8YFrrnZQeFiGC9r" async="true"></script>
+[![asciicast](https://asciinema.org/a/zp8nTTvEwB8YFrrnZQeFiGC9r.svg)](https://asciinema.org/a/zp8nTTvEwB8YFrrnZQeFiGC9r)
 
 This video showcases how `spin` works fine with Homebrew installed Python 3.10. The build completes.
 However, `dev.py` fails because it is unable to resolve paths correctly.
