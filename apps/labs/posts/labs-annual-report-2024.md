@@ -33,7 +33,7 @@ The following graphic presents notable highlights from the report.
   />
 </p>
 
-<div class="sr-only">
+<div className="sr-only">
   <h2>At a Glance: Quansight Labs Annual Report 2024</h2>
 
   <section>
