@@ -45,7 +45,7 @@ The following graphic presents notable highlights from the report.
   />
 </p>
 
-<div class="sr-only">
+<div className="sr-only">
   <h2>At a Glance: Quansight Labs Annual Report 2024</h2>
 
   <section>
@@ -142,7 +142,7 @@ The following graphic presents notable highlights from the report.
 
   <section>
     <h3>Contact Us</h3>
-    <p>Visit <a href="https://labs.quansight.org">labs.quansight.org</a> to learn more about us, and reach out at <a href="mailto:connect@quansight.com">connect@quansight.com</a>.</p>
+    <p>Visit <a href="https://labs.quansight.org">labs.quansight.org</a> to learn more about us, and reach out at connect@quansight.com.</p>
     <p>Follow us:</p>
     <ul>
       <li><a href="https://bsky.app/profile/quansight.com">Bluesky</a></li>
