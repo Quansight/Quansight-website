@@ -27,9 +27,21 @@ Our annual report offers an in-depth look at our work over the past year, coveri
 The following graphic presents notable highlights from the report.
 
 <p align="center">
+  <map name="infographic">
+    {/* These image map links are aria-hidden because they are repeated in the sr-only div below */}
+    <area aria-hidden="true" shape="rect" coords="115,3028,235,3053" href="https://labs.quansight.com" target="_blank" />
+    <area aria-hidden="true" shape="rect" coords="521,3028,682,3053" href="mailto:connect@quansight.com" />
+    <area aria-hidden="true" shape="rect" coords="80,3078,362,3105" href="https://bsky.app/profile/quansight.com" target="_blank" />
+    <area aria-hidden="true" shape="rect" coords="80,3112,205,3137" href="https://x.com/quansightai" target="_blank" />
+    <area aria-hidden="true" shape="rect" coords="80,3147,410,3175" href="https://www.linkedin.com/company/quansight" target="_blank" />
+  </map>
   <img
     src="/posts/labs-annual-report-2024/infographic.png"
     alt=""
+    useMap="#infographic"
+    width="896"
+    height="3545"
+    style={{maxWidth: "896px"}}
   />
 </p>
 
