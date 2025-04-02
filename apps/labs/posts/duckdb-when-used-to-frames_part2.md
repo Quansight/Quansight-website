@@ -84,7 +84,7 @@ duckdb.sql(
 ```
 BinderException: Binder Error: WHERE clause cannot contain window functions!
 ```
-There's not much that we (nor DuckDB) can do about this: window functions get evaluated after filters, so this is (and has to be) an illegal operation. Fortunately, SQL also comes with a `'QUALIFY'` clause, which gets evaluated after window functions - using that, we can match the pandas/Polars output (barring row order, but it's best to never make assumptions about that when writing SQL).
+There's not much that we (nor DuckDB) can do about this: window functions get evaluated after filters, so this is (and has to be) an illegal operation. Fortunately, SQL also comes with a `'QUALIFY'` clause, which gets evaluated after window functions - using that, we can match the pandas/Polars output.
 
 ```python
 duckdb.sql(
@@ -276,7 +276,7 @@ Yes, we really did write a list comprehension in a SQL query. We've sailed so fa
 
 ## Is it "DuckDB or Polars", or "DuckDB and Polars"?
 
-Our advice is to learn both. It's hard to get away from SQL in any data position, so you either know it already or will have to learn it at some point anyway. The Polars API is coherent and consistent, so although there is an initial learning curve, things generally just work the way you expect them to once you're past it. One major Polars feature which is missing in DuckDB is eager execution: it's totally valid to do a large part of your processing in DuckDB / SQL, and then convert to Polars (`.pl()`) when you need interoperability with other tools and/or eager execution.
+My advice is to learn both. It's hard to get away from SQL in any data position, so you either know it already or will have to learn it at some point anyway. The Polars API is coherent and consistent, so although there is an initial learning curve, things generally just work the way you expect them to once you're past it. One major Polars feature which is missing in DuckDB is eager execution: it's totally valid to do a large part of your processing in DuckDB / SQL, and then convert to Polars (`.pl()`) when you need interoperability with other tools, for functionality which Polars offers but DuckDB doesn't, or if you want eager execution.
 
 Stay tuned for part 3, in which delve deeper into how to use the two tools together, what Polars offers on top of DuckDB, and how to write tools which support both.
 
