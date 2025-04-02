@@ -209,7 +209,7 @@ Say we've got a `List[Int64]` column, and would like to normalise each row. That
 - If a row contains values `[1, 4]`, the normalised version would contain `[0.2, 0.8]`.
 - If a row contains values `[2, 2, 4]`, the normalised version would contain `[0.25, 0.25, 0.5]`.
 
-In Polars, you can quite perform arithemetic on list columns quite liberally.
+In Polars, you can quite perform arithmetic on list columns quite liberally.
 
 ```python
 data = {"rainfall": [[1, 4, 3], [2, 8], None, [1, 5, 2, 8]]}
