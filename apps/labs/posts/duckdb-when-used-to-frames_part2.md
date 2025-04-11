@@ -6,10 +6,10 @@ description: "Yes, list comprehensions can belong in SQL (!)"
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/duckdb-when-used-to-frames-part2/featured.jpg
-  alt: 'Photo by <a href="https://unsplash.com/@keringedge?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Kerin Gedge</a> on <a href="https://unsplash.com/photos/brown-and-beige-duck-head-OpYWPmqg424?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>'
+  alt: 'A close up picture of two duckling heads'
 hero:
   imageSrc: /posts/duckdb-when-used-to-frames-part2/hero.jpg
-  imageAlt: 'Photo by <a href="https://unsplash.com/@keringedge?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Kerin Gedge</a> on <a href="https://unsplash.com/photos/brown-and-beige-duck-head-OpYWPmqg424?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>'
+  imageAlt: 'A close up picture of two ducking heads'
 
 ---
 
@@ -209,7 +209,7 @@ Say we've got a `List[Int64]` column, and would like to normalise each row. That
 - If a row contains values `[1, 4]`, the normalised version would contain `[0.2, 0.8]`.
 - If a row contains values `[2, 2, 4]`, the normalised version would contain `[0.25, 0.25, 0.5]`.
 
-In Polars, you can quite perform arithmetic on list columns quite liberally.
+In Polars, you can perform arithmetic on list columns quite liberally.
 
 ```python
 data = {"rainfall": [[1, 4, 3], [2, 8], None, [1, 5, 2, 8]]}
@@ -236,7 +236,7 @@ shape: (4, 2)
 └──────────────┴──────────────────────────────┘
 ```
 
-If we trying being as liberal in SQL, we'll get an error.
+If we try being as liberal in SQL, we'll get an error.
 
 ```python
 duckdb.sql(
@@ -272,7 +272,7 @@ duckdb.sql(
 └──────────────┴──────────────────────────────┘
 ```
 
-Yes, we really did write a list comprehension in a SQL query. We've sailed so far away from the SQL Standard that we can't even see it anymore, so admittedly this solution might not be the most portable. Am I'm absolutely OK with that, it felt great to write!
+Yes, we really did write a list comprehension in a SQL query. We've sailed so far away from the SQL Standard that we can't even see it anymore, so admittedly this solution might not be the most portable. And, I'm absolutely OK with that, it felt great to write!
 
 ## Is it "DuckDB or Polars", or "DuckDB and Polars"?
 
@@ -282,6 +282,6 @@ Stay tuned for part 3, in which delve deeper into how to use the two tools toget
 
 ## Conclusion
 
-We've continue our journey of translating simple dataframe operations to not-so-simple SQL ones. In doing so, we veered pretty far away from the SQL Standard, but stayed within the realms of what DuckDB is capable of. Porting dataframe code to SQL might be desirable if you would like to use the DuckDB engine or if you or your client prefer SQL to dataframe APIs.
+We continued our journey of translating simple dataframe operations to not-so-simple SQL ones. In doing so, we veered pretty far away from the SQL Standard, but stayed within the realms of what DuckDB is capable of. Porting dataframe code to SQL might be desirable if you would like to use the DuckDB engine or if you or your client prefer SQL to dataframe APIs.
 
 If you would like help implementing solutions with any of the tools covered in this post or would like to sponsor efforts toward dataframe API unification, [we can help](https://quansight.com/about-us/#bookacallform)!
