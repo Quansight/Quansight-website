@@ -6,10 +6,10 @@ description: "Yes, list comprehensions can belong in SQL (!)"
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/duckdb-when-used-to-frames-part2/featured.jpg
-  alt: 'A close up picture of two duckling heads'
+  alt: 'A close up picture of two duckling heads, photo Kerin Gedge'
 hero:
   imageSrc: /posts/duckdb-when-used-to-frames-part2/hero.jpg
-  imageAlt: 'A close up picture of two ducking heads'
+  imageAlt: 'A close up picture of two ducking heads, photo Kerin Gedge'
 
 ---
 
