@@ -121,9 +121,14 @@ The fix was submitted as a PR to `spin` [[scientific-python/spin#257]](https://g
 
 ### Current Status of `spin` in SciPy
 
-We are close to merging `DEV: use spin (prototype)` [[gh-21674](https://github.com/scipy/scipy/pull/21674)].
-We’re waiting for the PR [scientific-python/spin#257](https://github.com/scientific-python/spin/pull/257) to be merged, after which we’ll be ready to fully integrate `spin` into SciPy.
-Our work has been fully tested in the SciPy CI system, ensuring its stability.
+Here’s a polished version of your paragraph:
+
+---
+
+The `DEV: use spin` pull request [[gh-21674](https://github.com/scipy/scipy/pull/21674)] has been merged into SciPy.
+Our contributions have been fully tested through the SciPy CI system, confirming their stability.
+Currently, both `spin` and `dev.py` exist in the codebase, but the CI system now uses `spin` to build and test code changes in pull requests.
+Follow-up tasks related to this update are tracked in [[gh-22887](https://github.com/scipy/scipy/issues/22887)].
 
 Here’s a quick comparison of the SciPy build experience with `dev.py` versus `spin`:
 
