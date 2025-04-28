@@ -61,7 +61,8 @@ This was all handled in the PR, `BUG/CI: Compile and run tests with ifx + MKL on
 The final milestone for Intel oneAPI support was the CI job for testing SciPy with `icx`, `icpx`, `ifx`, and MKL [[gh-21254]](https://github.com/scipy/scipy/pull/21254).
 In this step, we replaced `gcc` with `icx` and `g++` with `icpx`, and the build successfully passed on Linux.
 
-However, on Windows, we were unable to proceed further due to an unresolved import error with `arpack`. Despite several attempts to fix the issue, all solutions led to dead ends. As it was turning into an unbounded amount of work, we decided to pause the effort on Windows and focus on on more scoped tasks.
+However, on Windows, we were unable to proceed further due to an unresolved import error with `arpack`.
+Despite several attempts to fix the issue, all solutions led to dead ends. As it was turning into an unbounded amount of work, we decided to pause the effort on Windows and focus on more scoped tasks.
 
 Through these efforts, we’ve made significant strides in integrating Intel oneAPI with SciPy, ensuring better support for both Linux and Windows platforms.
 While there are still challenges ahead, the progress made provides a solid foundation for future development.
@@ -94,7 +95,7 @@ One of the key reasons is that **`spin` is already widely used by other scientif
 This means improvements made to `spin` will automatically benefit SciPy.
 Additionally, any limitations we encounter in `spin` will be addressed through upstream contributions to the project, making it a two-way connection: SciPy benefits from other projects contributing to `spin`, and those projects benefit from improvements made by the SciPy team to `spin`.
 
-Let me share three significant examples of this two-way connection,
+Let me share four significant examples of this two-way connection,
 
 **Passing Arguments to `meson compile` and `meson install`**
 
@@ -119,11 +120,19 @@ This issue arose because `spin` sets `/usr` or `C:\` as the default value for `-
 To resolve this, we removed the `--destdir` usage and set the `--prefix` directly to the installation directory.
 The fix was submitted as a PR to `spin` [[scientific-python/spin#257]](https://github.com/scientific-python/spin/pull/257), ensuring smoother installation behavior for SciPy on macOS.
 
+**Supporting `--no-build` option in `spin test`**
+
+We encountered this issue during the final stages of our work.
+The `dev.py` script uses the `--no-build` flag in the [Prerelease deps & coverage report](https://github.com/scipy/scipy/blob/b31d8dadf2a43696d5183302b6f7d49e14f5cca9/.github/workflows/linux.yml#L362-L366) CI job.
+The purpose of this check is to ensure that NumPy 1.25.x remains ABI-compatible at runtime with SciPy built against the latest NumPy version.
+
+Previously, since `spin` did not support the `--no-build` flag, this critical check could not be performed.
+To address this, the `--no-build` option was added to `spin test` via [scientific-python/spin#272](https://github.com/scientific-python/spin/pull/272).
+We now leverage this new functionality (see [this snippet](https://github.com/scipy/scipy/blob/63f69604a63e1ed80d5c41f8540e1b5ef6ddb9d3/.github/workflows/linux.yml#L362-L366)).
+
+Another nice example of how SciPy's needs help improve `spin`.
+
 ### Current Status of `spin` in SciPy
-
-Here’s a polished version of your paragraph:
-
----
 
 The `DEV: use spin` pull request [[gh-21674](https://github.com/scipy/scipy/pull/21674)] has been merged into SciPy.
 Our contributions have been fully tested through the SciPy CI system, confirming their stability.
