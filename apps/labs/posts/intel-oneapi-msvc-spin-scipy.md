@@ -125,7 +125,6 @@ The fix was submitted as a PR to `spin` [[scientific-python/spin#257]](https://g
 We encountered this issue during the final stages of our work.
 The `dev.py` script uses the `--no-build` flag in the [Prerelease deps & coverage report](https://github.com/scipy/scipy/blob/b31d8dadf2a43696d5183302b6f7d49e14f5cca9/.github/workflows/linux.yml#L362-L366) CI job.
 The purpose of this check is to ensure that NumPy 1.25.x remains ABI-compatible at runtime with SciPy built against the latest NumPy version.
-
 Previously, since `spin` did not support the `--no-build` flag, this critical check could not be performed.
 To address this, the `--no-build` option was added to `spin test` via [scientific-python/spin#272](https://github.com/scientific-python/spin/pull/272).
 We now leverage this new functionality (see [this snippet](https://github.com/scipy/scipy/blob/63f69604a63e1ed80d5c41f8540e1b5ef6ddb9d3/.github/workflows/linux.yml#L362-L366)).
