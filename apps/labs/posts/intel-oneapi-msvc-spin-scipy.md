@@ -62,7 +62,7 @@ The final milestone for Intel oneAPI support was the CI job for testing SciPy wi
 In this step, we replaced `gcc` with `icx` and `g++` with `icpx`, and the build successfully passed on Linux.
 
 However, on Windows, we were unable to proceed further due to an unresolved import error with `arpack`.
-Despite several attempts to fix the issue, all solutions led to dead ends. As it was turning into an unbounded amount of work, we decided to pause the effort on Windows and focus on more scoped tasks.
+Despite several attempts to fix the issue, all solutions led to dead ends. As it was turning into an unbounded amount of work and the SciPy team is planning to rewrite ARPACK completely in a language other than FORTRAN, we decided to pause the effort on Windows and focus on more scoped tasks.
 
 Through these efforts, we’ve made significant strides in integrating Intel oneAPI with SciPy, ensuring better support for both Linux and Windows platforms.
 While there are still challenges ahead, the progress made provides a solid foundation for future development.
