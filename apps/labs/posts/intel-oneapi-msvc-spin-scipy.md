@@ -1,6 +1,6 @@
 ---
 title: 'Enhancing Developer Experience at SciPy - Intel oneAPI/MSVC Support and Migrating to spin'
-published: March 20, 2025
+published: May 2, 2025
 authors: [gagandeep-singh]
 description: 'Highlights the work done to improve developer experience at SciPy, specifically on supporting Intel oneAPI/MSVC and spin'
 category: [Developer workflows]
