@@ -20,7 +20,7 @@ This is the story of the first year of that effort and how our team at Quansight
 
 Support for free-threaded Python unlocks the full compute power of modern hardware with multicore CPUs and GPUs now commonplace. In the GIL-enabled build, making full use of parallel algorithms that exploit all available compute resources in Python requires workarounds and careful tuning. The Python `threading` module is often not used because the GIL prevents useful parallel scaling. Instead, many reach for `multiprocessing`, but spawning processes is expensive and communicating across processes often requires making expensive copies of data that would not be necessary in a multithreaded program where data is implicitly shared between threads.
 
-We need to work to add add support for free-threaded Python because it is not possible for packages that ship compiled code in their release distributions to "automatically" support the free-threaded build. Any package shipping native code (many Python packages do that) will need to be audited to ensure the package builds and either fix or document the safety guarantees provided by the package. Disabling the GIL required deep structural changes to the CPython interpreter. Fully supporting the free-threaded build in existing packages similarly requires fixing structural issues that until now were not big problems. Things like use of global state in the implementation of a C extension for convenience or for performance are no longer safe, since the GIL does not protect simultaneous access from Python to the global state, allowing undefined behavior via data races. While it is possible to trigger thread safety issues like this using the `threading` module, even with the GIL, most of the time the GIL prevented these issues from surfacing. The free-threaded build makes fixing these issues much more pressing.
+Having said that, it is not possible for packages that ship compiled code in their release distributions to support the free-threaded build out of the box. Any package shipping native code (many Python packages do that) will need to be audited to ensure the package builds and either fix or document the safety guarantees provided by the package. Disabling the GIL required deep structural changes to the CPython interpreter. Fully supporting the free-threaded build in existing packages similarly requires fixing structural issues that until now were not big problems. Things like use of global state in the implementation of a C extension for convenience or for performance are no longer safe, since the GIL does not protect simultaneous access from Python to the global state, allowing undefined behavior via data races. While it is possible to trigger thread safety issues like this using the `threading` module, even with the GIL, most of the time the GIL prevented these issues from surfacing. The free-threaded build makes fixing these issues much more pressing.
 
 ## Major accomplishments
 
@@ -39,13 +39,13 @@ CPython core developers on our team also contributed several major improvements 
   * Significant thread safety issues in `asyncio` have been fixed. Our benchmarks indicate substantially improved parallel scaling of code using asyncio with a thread pool runner as a function of thread count.
   * Thread safety overhaul in the `ctypes` module.
   * Substantial performance improvements for the free-threaded garbage collector.
-  * Helped implement and ship the deferred reference counting scheme used by the free-threaded interpreter in 3.14.
+  * Helped implement the deferred reference counting scheme used by the free-threaded interpreter in 3.14.
   * Implemented several specializations for the adaptive specializing interpreter and supported shipping optimizations that bring the single-threaded performance of free-threaded CPython 3.14 within spitting distance of the GIL-enabled build.
   * A huge number of smaller bugfixes and thread safety improvements.
 
 We've also written a [comprehensive guide](https://py-free-threading.github.io) for supporting free-threading in existing apps and packages gleaned from our experiences. Our hope is that the documentation we've written can be a valuable resource for the "long tail" of packakes that people will want to update to support free-threaded Python in the coming years.
 
-You can read more about this effort from the team at Meta on the [Meta engineering blog](https://engineering.fb.com/2025/05/05/developer-tools/enhancing-the-python-ecosystem-with-type-checking-and-free-threading/).
+You can also read more about this effort from the team at Meta on the [Meta engineering blog](https://engineering.fb.com/2025/05/05/developer-tools/enhancing-the-python-ecosystem-with-type-checking-and-free-threading/).
 
 ## What is the state of the free-threaded Python ecosystem?
 
