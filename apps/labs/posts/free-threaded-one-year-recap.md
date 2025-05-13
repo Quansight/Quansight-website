@@ -1,7 +1,7 @@
 ---
 title: 'The first year of free-threaded Python'
 authors: [nathan-goldbaum]
-published: May 12, 2025
+published: May 13, 2025
 description: 'A recap of the first year of work on enabling support for the free-threaded build of CPython in community packages.'
 category: [Community, PyData ecosystem]
 featuredImage:
@@ -44,7 +44,7 @@ were not big problems. Things like use of global state in the implementation of
 a C extension for convenience or for performance are no longer safe, since the
 GIL does not protect simultaneous access from Python to the global state,
 allowing undefined behavior via data races. While it is possible to trigger
-thread safety issues like this using the `threading` module, even with the GIL,
+thread safety issues like this using the `threading` module even with the GIL,
 most of the time the GIL prevented these issues from surfacing. The
 free-threaded build makes fixing these issues much more pressing.
 
@@ -58,7 +58,7 @@ projects, including:
     setup-python GitHub workflow, packaging, pip, and setuptools.
   * Bindings generators like Cython, pybind11, f2py, and PyO3.
   * Foundational packages in the PyData ecosystem like NumPy, SciPy, PyArrow,
-    matplotlib, Pandas, scikit-learn, and scikit-image.
+    Matplotlib, pandas, scikit-learn, and scikit-image.
   * Top dependencies by PyPI downloads like Pillow, PyYAML, yarl, multidict,
     and frozenlist.
 
@@ -89,7 +89,7 @@ that will ship in CPython 3.14:
 We've also written a [comprehensive guide](https://py-free-threading.github.io)
 for supporting free-threading in existing apps and packages gleaned from our
 experiences. Our hope is that the documentation we've written can be a valuable
-resource for the "long tail" of packakes that people will want to update to
+resource for the "long tail" of packages that people will want to update to
 support free-threaded Python in the coming years.
 
 You can also read more about this effort from the team at Meta on the
