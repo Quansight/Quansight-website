@@ -104,9 +104,10 @@ or only pure-Python dependencies would likely lead to build errors. Most of
 these issues were not due to fundamental problems but because of unsupported
 default options or minor assumptions broken on the free-threaded build.
 
-We have fixed all of these issues and today things are much better. With the
+Together with package maintainers and other contributors in the community,
+we have fixed all of these issues and today things are much better. With the
 release of Cython 3.1.0, which ships official support for the free-threaded
-build, we also have fixed one of the most significant source of build issues.
+build, we also helped fix one of the most significant source of build issues.
 
 We are currently working on packages that ship compiled code but still do not
 yet ship free-threaded wheels. You can track our progress using our manually
@@ -141,7 +142,7 @@ issues and writing the content of the free-threaded guide in the
 [free-threaded-compatibility](https://github.com/Quansight-Labs/free-threaded-compatibility)
 repository hosted on the Quansight-Labs GitHub org.
 
-We also launched a [community Discord](https://discord.gg/rqgHCDqdRr) to host
+We also helped launch a [community Discord](https://discord.gg/rqgHCDqdRr) to host
 discussions about supporting the free-threaded build. Come join us if you're
 interested in helping out!
 
