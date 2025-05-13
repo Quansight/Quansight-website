@@ -35,18 +35,20 @@ data is implicitly shared between threads.
 
 Having said that, it is not possible for packages that ship compiled code in
 their release distributions to support the free-threaded build out of the box.
-Any package shipping native code (many Python packages do that) will need to be
-audited to ensure the package builds and either fix or document the safety
-guarantees provided by the package. Disabling the GIL required deep structural
-changes to the CPython interpreter. Fully supporting the free-threaded build in
-existing packages similarly requires fixing structural issues that until now
-were not big problems. Things like use of global state in the implementation of
-a C extension for convenience or for performance are no longer safe, since the
-GIL does not protect simultaneous access from Python to the global state,
-allowing undefined behavior via data races. While it is possible to trigger
-thread safety issues like this using the `threading` module even with the GIL,
-most of the time the GIL prevented these issues from surfacing. The
-free-threaded build makes fixing these issues much more pressing.
+Any package shipping native code (many Python packages do that) need to be
+audited to ensure the package builds and does not suffer thread-safety issues
+that are impossible on the GIL-enabled build.
+
+Disabling the GIL required deep structural changes to the CPython
+interpreter. Fully supporting the free-threaded build in existing packages
+similarly requires fixing structural issues that until now were not big
+problems. Things like use of global state in the implementation of a C extension
+for convenience or for performance are no longer safe, since the GIL does not
+protect simultaneous access from Python to the global state, allowing undefined
+behavior via data races. While it is possible to trigger thread safety issues
+like this using the `threading` module even with the GIL, most of the time the
+GIL prevented these issues from surfacing. The free-threaded build makes fixing
+these issues much more pressing.
 
 ## Major accomplishments
 
@@ -55,7 +57,7 @@ enable support for free-threaded Python in a long list of packages and
 projects, including:
 
   * Packaging and project workflow tools like meson, meson-python, the
-    setup-python GitHub workflow, packaging, pip, and setuptools.
+    setup-python GitHub Actions workflow, packaging, pip, and setuptools.
   * Bindings generators like Cython, pybind11, f2py, and PyO3.
   * Foundational packages in the PyData ecosystem like NumPy, SciPy, PyArrow,
     Matplotlib, pandas, scikit-learn, and scikit-image.
@@ -75,7 +77,7 @@ that will ship in CPython 3.14:
     with a configuration option or runtime command-line flag.
   * Significant thread safety issues in `asyncio` have been fixed. Our
     benchmarks indicate substantially improved parallel scaling of code using
-    asyncio with a thread pool runner as a function of thread count.
+    asyncio with a thread pool runner.
   * Thread safety overhaul in the `ctypes` module.
   * Substantial performance improvements for the free-threaded garbage collector.
   * Helped implement the deferred reference counting scheme used by the
@@ -87,10 +89,10 @@ that will ship in CPython 3.14:
   * A huge number of smaller bugfixes and thread safety improvements.
 
 We've also written a [comprehensive guide](https://py-free-threading.github.io)
-for supporting free-threading in existing apps and packages gleaned from our
-experiences. Our hope is that the documentation we've written can be a valuable
-resource for the "long tail" of packages that people will want to update to
-support free-threaded Python in the coming years.
+for supporting free-threaded Python in existing apps and packages gleaned from
+our experiences. Our hope is that the documentation we've written can be a
+valuable resource for the "long tail" of packages that people will want to
+update to support free-threaded Python in the coming years.
 
 You can also read more about this effort from the team at Meta on the
 [Meta engineering blog](https://engineering.fb.com/2025/05/05/developer-tools/enhancing-the-python-ecosystem-with-type-checking-and-free-threading/).
@@ -105,9 +107,9 @@ these issues were not due to fundamental problems but because of unsupported
 default options or minor assumptions broken on the free-threaded build.
 
 Together with package maintainers and other contributors in the community,
-we have fixed all of these issues and today things are much better. With the
+we have fixed many of these issues and today things are much better. With the
 release of Cython 3.1.0, which ships official support for the free-threaded
-build, we also helped fix one of the most significant source of build issues.
+build, we also helped fix one of the most significant sources of build issues.
 
 We are currently working on packages that ship compiled code but still do not
 yet ship free-threaded wheels. You can track our progress using our manually
