@@ -5,16 +5,12 @@ and therefore, any new posts _must_ be added to this same folder.
 
 Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). The
 `posts` directory also contains a [`categories.json`
-file](./apps/labs/posts/categories.json) containing the posts categories.
+file](./apps/labs/posts/categories.json) containing the posts categories. For
+more details about `.mdx` please see <https://mdxjs.com/> and
+<https://github.com/hashicorp/next-mdx-remote>.
 
 The `categories.json` file is also used for displaying category filters on the
-`/blog` page so after adding a new category, it will also be visible on that
-page.
-
-For more details about `.mdx` please see:
-
-- <https://mdxjs.com/>
-- <https://github.com/hashicorp/next-mdx-remote>
+`/blog` page.
 
 - [How to publish a new blog post](#how-to-publish-a-new-blog-post)
   - [Step-by-step instructions 📝](#step-by-step-instructions-)
