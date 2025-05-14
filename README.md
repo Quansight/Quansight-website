@@ -21,4 +21,4 @@ cp apps/labs/.env.example apps/labs/.env
 npm run start:labs
 ```
 
-Then go to <http://localhost:4200/>.
+Go to <http://localhost:4200/>.
