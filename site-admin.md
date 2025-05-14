@@ -1,8 +1,6 @@
 # Site admin
 
-A contributors' guide for website changes that are _not_ blog posts.
-
-Are you looking to add a [blog post](how-to-publish-a-new-blog.md)?
+A contributors' guide for website changes that are **not** [blog posts](how-to-publish-a-new-blog.md).
 
 - [Site Admin](#quansight-website)
   - [Running the website locally 🖥](#running-the-website-locally-)
@@ -23,7 +21,7 @@ Are you looking to add a [blog post](how-to-publish-a-new-blog.md)?
   - [Adding new components 🧩](#adding-new-components-)
   - [Adding new queries 🗃](#adding-new-queries-)
   - [Adding new components for usage inside `.mdx` posts](#adding-new-components-for-usage-inside-mdx-posts)
-  - [Specifications for Hero images](#specifications-for-hero-images)
+  - [Specifications for Hero images in Storyblok](#specifications-for-hero-images-in-storyblok)
 
 ## Running the website locally 🖥
 
