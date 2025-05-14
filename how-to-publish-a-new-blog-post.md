@@ -5,12 +5,10 @@ and therefore, any new posts _must_ be added to this same folder.
 
 Every post is a `.md` or [`.mdx` file](https://mdxjs.com/docs/using-mdx/). The
 `posts` directory also contains a [`categories.json`
-file](./apps/labs/posts/categories.json) containing the posts categories. For
+file](./apps/labs/posts/categories.json) containing the posts categories, which
+are displayed as category filters on the labs.quansight.org/blog index page. For
 more details about `.mdx` please see <https://mdxjs.com/> and
 <https://github.com/hashicorp/next-mdx-remote>.
-
-The `categories.json` file is also used for displaying category filters on the
-`/blog` page.
 
 - [How to publish a new blog post](#how-to-publish-a-new-blog-post)
   - [Step-by-step instructions 📝](#step-by-step-instructions-)
