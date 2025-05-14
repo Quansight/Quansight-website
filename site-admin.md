@@ -29,20 +29,6 @@ Prerequisites:
 
 - [Node](https://nodejs.org/en/)
 
-### Short version (Labs site)
-
-Copy and paste the following commands:
-
-```sh
-git clone git@github.com:Quansight/Quansight-website.git
-cd Quansight-website
-npm install
-cp apps/labs/.env.example apps/labs/.env
-npm run start:labs
-```
-
-### Longer version
-
 To run the website locally on your machine, you must first clone this git repo,
 `cd` into the repo, then run `npm install`.
 
