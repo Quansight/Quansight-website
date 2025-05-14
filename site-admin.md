@@ -1,6 +1,6 @@
 # Site admin
 
-A contributors' guide for website changes that are **not** [blog posts](how-to-publish-a-new-blog.md).
+A contributors' guide for website changes that are **not** [blog posts](how-to-publish-a-new-blog-post.md).
 
 - [Site Admin](#quansight-website)
   - [Running the website locally 🖥](#running-the-website-locally-)
