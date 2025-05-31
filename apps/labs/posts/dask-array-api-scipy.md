@@ -1,7 +1,7 @@
 ---
 title: 'Supporting dask arrays in scipy via the Python Array API standard'
 authors: [thomas-li]
-published: February 2, 2025
+published: May 26, 2025
 description: 'Extending Array API Standard support in scipy to distributed arrays via dask.array'
 category: [Array API, PyData ecosystem]
 featuredImage:
@@ -41,8 +41,6 @@ capabilities for handling larger than RAM datasets, and distributed computing ca
 compute nodes.
 
 ## Supporting `dask.array` within scipy
-
-TODO: add a figure showing how array API support works in scipy
 
 Like many other array libraries (e.g. PyTorch), `dask.array` is not fully array API compatible out of the box.
 To work around these differences, scipy uses the [array-api-compat](https://github.com/data-apis/array-api-compat)
@@ -124,8 +122,6 @@ and remains an open question to be resolved.
 
 ### Current support
 
-TODO: finish filling out the notes in this table
-
 | Module              | Status | Notes                                                                                        |
 | ------------------- | ------ | -------------------------------------------------------------------------------------------- |
 | scipy.cluster       | 🚧     |                                                                                              |
@@ -156,9 +152,60 @@ modules is done by C routines (which requires a conversion to numpy that forces 
 In the next section, we will take a look more closely at how array API compatibility enables better performance with
 dask arrays within the `scipy.stats` module.
 
-## Case study: Out of core/Distributed computing in `scipy.stats` via dask
+## Example
 
-TODO!
+We'll now explore the lazy capabilities of dask in `scipy.stats` by doing some statistical tests
+on the NYC Taxi Dataset. In this basic analysis, let's do a t-test to
+check if fares for trips with multiple passengers differes from fares for trips with just 1 passenger.
+
+Our null and alternate hypotheses are thus:
+
+$H_0$: The average fare for trips with multiple passengers is the same as the average fare for trips with a single passenger.
+
+$H_a$: The average fare for trips with multiple passengers different from the average fare for trips with a single passenger.
+
+We'll perform this test at a significance level of $\alpha = 0.05$
+
+First, let's load in our data into a dask dataframe. We also set the
+environment variable `SCIPY_ARRAY_API=1` to opt in to scipy's array API capabilities.
+
+```python
+%env SCIPY_ARRAY_API=1
+
+import dask.dataframe as dd
+
+ddf = dd.read_parquet(
+    # Original data found here
+    #"https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2025-01.parquet",
+    "yellow_tripdata_2025-01.parquet",
+)
+ddf.head()
+```
+
+|     | VendorID | tpep_pickup_datetime | tpep_dropoff_datetime | passenger_count | trip_distance | RatecodeID | store_and_fwd_flag | PULocationID | DOLocationID | payment_type | fare_amount | extra | mta_tax | tip_amount | tolls_amount | improvement_surcharge | total_amount | congestion_surcharge | Airport_fee | cbd_congestion_fee |
+| --: | -------: | :------------------- | :-------------------- | --------------: | ------------: | ---------: | :----------------- | -----------: | -----------: | -----------: | ----------: | ----: | ------: | ---------: | -----------: | --------------------: | -----------: | -------------------: | ----------: | -----------------: |
+|   0 |        1 | 2025-01-01 00:18:38  | 2025-01-01 00:26:59   |               1 |           1.6 |          1 | N                  |          229 |          237 |            1 |          10 |   3.5 |     0.5 |          3 |            0 |                     1 |           18 |                  2.5 |           0 |                  0 |
+|   1 |        1 | 2025-01-01 00:32:40  | 2025-01-01 00:35:13   |               1 |           0.5 |          1 | N                  |          236 |          237 |            1 |         5.1 |   3.5 |     0.5 |       2.02 |            0 |                     1 |        12.12 |                  2.5 |           0 |                  0 |
+|   2 |        1 | 2025-01-01 00:44:04  | 2025-01-01 00:46:01   |               1 |           0.6 |          1 | N                  |          141 |          141 |            1 |         5.1 |   3.5 |     0.5 |          2 |            0 |                     1 |         12.1 |                  2.5 |           0 |                  0 |
+|   3 |        2 | 2025-01-01 00:14:27  | 2025-01-01 00:20:01   |               3 |          0.52 |          1 | N                  |          244 |          244 |            2 |         7.2 |     1 |     0.5 |          0 |            0 |                     1 |          9.7 |                    0 |           0 |                  0 |
+|   4 |        2 | 2025-01-01 00:21:34  | 2025-01-01 00:25:06   |               3 |          0.66 |          1 | N                  |          244 |          116 |            2 |         5.8 |     1 |     0.5 |          0 |            0 |                     1 |          8.3 |                    0 |           0 |                  0 |
+
+```python
+import scipy.stats as stats
+
+onepass_fares = ddf[ddf["passenger_count"] == 1.0]["fare_amount"].to_dask_array().compute_chunk_sizes()
+multpass_fares = ddf[ddf["passenger_count"] > 1.0]["fare_amount"].to_dask_array().compute_chunk_sizes()
+res = stats.ttest_ind(a=onepass_fares, b=multpass_fares, equal_var=False)
+print(f"T-statistic: {res.statistic.compute()}")
+print(f"P-value: {res.pvalue.compute()}")
+
+T-statistic: -5.5699390653688985
+P-value: 2.5485619336211492e-08
+```
+
+From this p-value, we can reject our null hypothesis that the average fare for trips with one passenger is the same as the average fare for trips with multiple passengers.
+
+While we weren't entirely able to avoid computation in the middle (dask still struggles with unknown shapes which we get through our boolean masking on the dataframe), we were able to entirely keep the computation in dask. This is a big improvement over the pre-Array API behavior where the input dask arrays would be cast to numpy arrays (forcing computation and storage of intermediate results in one worker which can lead to performance degredation and out-of-memory errors)
 
 ## Future Work
 
