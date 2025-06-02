@@ -37,7 +37,7 @@ export const FeaturedPosts: FC<TFeaturedPostsProps> = ({ posts }) => {
             <div className="px-[1.5rem] pt-[1.5rem] pb-[3rem]">
               <h4 className="text-[2.2rem] font-extrabold leading-[3.7rem] text-black">
                 <Link href={`/blog/${post.slug}`}>
-                  <a>{post.meta.title}</a>
+                  {post.meta.title}
                 </Link>
               </h4>
               <p className="font-sans text-[1.2rem] font-normal leading-[2.7rem]">
