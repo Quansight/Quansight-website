@@ -26,7 +26,7 @@ If you wish to follow the examples in the blog post, you will need to have the l
 $ pip install hypothesis
 ```
 
-# What is Property Based Testing?
+## What is Property Based Testing?
 
 Property based testing (PBT) is a technique where instead of testing individual test cases, you specify properties you wish to hold true for a range of inputs. These properties are then tested against automatically generated test data. PBT uses logical properties over generated test data to facilitate broad, robust testing that can expose edge cases not easily found via traditional test cases.
 
@@ -99,6 +99,6 @@ Hypothesis was able to find various bugs and code design flaws. Below I will hig
 - The [`resultant` function returning incorrect answers](https://github.com/sympy/sympy/issues/25406). While this bug ended up not needing to be resolved, it did reveal the utility in having Hypothesis check [consistency between implementations](https://github.com/sympy/sympy/issues/25406#issuecomment-1652243538) of the same function.
 - There were various issues with the lowest common multiple (LCM) function (notes in [issue #25624](https://github.com/sympy/sympy/issues/25624), [PR #25636](https://github.com/sympy/sympy/pull/25636), and [PR #25517](https://github.com/sympy/sympy/pull/25517#issuecomment-1714474991)), the biggest being when the LCM should make use of the integer implementation vs polynomial implementation (when the defined polynomial is essentially an integer).
 
-# Acknowledgements
+## Acknowledgements
 
 Thank you to my mentors [Aaron](https://github.com/asmeurer) and [Matthew](https://github.com/honno) for guidance during this project. Added thanks to [Melissa](https://github.com/melissawm) and the general internship program for their support.
