@@ -5,11 +5,11 @@ published: May 26, 2025
 description: 'Extending Array API Standard support in scipy to distributed arrays via dask.array'
 category: [Array API, PyData ecosystem]
 featuredImage:
-  src: /posts/hello-world-post/featured.png
-  alt: 'Excellent alt-text describing the featured image'
+  src: /posts/dask-array-api-scipy/scipy_logo_img_featured.png
+  alt: 'Scipy logo'
 hero:
-  imageSrc: /posts/hello-world-post/hero.jpeg
-  imageAlt: 'Excellent alt-text describing the hero image'
+  imageSrc: /posts/dask-array-api-scipy/scipy_logo_img_hero.png
+  imageAlt: 'Scipy logo'
 ---
 
 TLDR: As of scipy 1.16, users can now pass in `dask.array` arrays to most Array API compatible functions in scipy and
