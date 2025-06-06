@@ -12,8 +12,8 @@ hero:
   imageAlt: 'Scipy logo'
 ---
 
-TLDR: As of scipy 1.16, users can now pass in `dask.array` arrays to most Array API compatible functions in scipy and
-receive a lazy dask array back without forcing computation of the input array.
+In this post, I describe my journey getting SciPy to work with Dask arrays natively via the array API and the current
+limitations and future outlook.
 
 ## Introduction: A quick refresher of the Python Array API standard
 
@@ -179,16 +179,7 @@ ddf = dd.read_parquet(
     #"https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2025-01.parquet",
     "yellow_tripdata_2025-01.parquet",
 )
-ddf.head()
 ```
-
-|     | VendorID | tpep_pickup_datetime | tpep_dropoff_datetime | passenger_count | trip_distance | RatecodeID | store_and_fwd_flag | PULocationID | DOLocationID | payment_type | fare_amount | extra | mta_tax | tip_amount | tolls_amount | improvement_surcharge | total_amount | congestion_surcharge | Airport_fee | cbd_congestion_fee |
-| --: | -------: | :------------------- | :-------------------- | --------------: | ------------: | ---------: | :----------------- | -----------: | -----------: | -----------: | ----------: | ----: | ------: | ---------: | -----------: | --------------------: | -----------: | -------------------: | ----------: | -----------------: |
-|   0 |        1 | 2025-01-01 00:18:38  | 2025-01-01 00:26:59   |               1 |           1.6 |          1 | N                  |          229 |          237 |            1 |          10 |   3.5 |     0.5 |          3 |            0 |                     1 |           18 |                  2.5 |           0 |                  0 |
-|   1 |        1 | 2025-01-01 00:32:40  | 2025-01-01 00:35:13   |               1 |           0.5 |          1 | N                  |          236 |          237 |            1 |         5.1 |   3.5 |     0.5 |       2.02 |            0 |                     1 |        12.12 |                  2.5 |           0 |                  0 |
-|   2 |        1 | 2025-01-01 00:44:04  | 2025-01-01 00:46:01   |               1 |           0.6 |          1 | N                  |          141 |          141 |            1 |         5.1 |   3.5 |     0.5 |          2 |            0 |                     1 |         12.1 |                  2.5 |           0 |                  0 |
-|   3 |        2 | 2025-01-01 00:14:27  | 2025-01-01 00:20:01   |               3 |          0.52 |          1 | N                  |          244 |          244 |            2 |         7.2 |     1 |     0.5 |          0 |            0 |                     1 |          9.7 |                    0 |           0 |                  0 |
-|   4 |        2 | 2025-01-01 00:21:34  | 2025-01-01 00:25:06   |               3 |          0.66 |          1 | N                  |          244 |          116 |            2 |         5.8 |     1 |     0.5 |          0 |            0 |                     1 |          8.3 |                    0 |           0 |                  0 |
 
 ```python
 import scipy.stats as stats
