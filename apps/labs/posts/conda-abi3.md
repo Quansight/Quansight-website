@@ -9,6 +9,7 @@ featuredImage:
 hero:
   imageSrc: /posts/conda-abi3/forge.jpg
   imageAlt: 'A wheel with ABI3 text in the middle placed on top of an anvil being forged with a hammer'
+---
 
 See how Point72 teamed up with Quansight to fund support for ABI3 packages
 in the conda ecosystem. A few ABI3 packages are now available in conda-forge
