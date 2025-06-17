@@ -3,7 +3,7 @@ title: "Bridging Data Science Tools with PyTorch-Ignite's Code-Generator and Neb
 published: September 20, 2023
 authors: [aryan-gupta]
 description: 'A summary of my contributions to the Code-Generator project and PyTorch-Ignite ecosystem in the past few months as Quansight Labs intern and my learnings in the process.'
-category: [PyData ecosystem, Machine Learning, OSS Experience]
+category: [PyData ecosystem, Machine Learning, OSS Experience, Internship]
 featuredImage:
   src: /posts/code-generator-and-nebari/hero-feature-image.png
   alt: 'An illustration of Code-Generator app integration with Nebari and other ML based libraries.'
