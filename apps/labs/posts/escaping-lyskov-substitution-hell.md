@@ -1,19 +1,19 @@
 ---
-title: "Escaping Lyskov Substitution Contravariance Hell"
+title: "Escaping Contravariance Hell"
 published: June 17, 2025
 authors: [marco-gorelli]
 description: "Protocols, Generics, and TypeVars"
 category: [Developer workflows]
 featuredImage:
-  src: /posts/duckdb-when-used-to-frames/featured.jpg
-  alt: 'Photo by <a href="https://unsplash.com/@rthiemann?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Robert Thiemann</a> on <a href="https://unsplash.com/photos/brown-and-green-mallard-duck-on-water--ZSnI9gSX1Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>'
+  src: /posts/escaping-lyskov-substitution-hell/featured.jpg
+  alt: 'Picture which says "Escaping covariance hell", overlaid on Google Street View image of Hell, Norway'
 hero:
-  imageSrc: /posts/duckdb-when-used-to-frames/hero.jpg
-  imageAlt: 'Photo by <a href="https://unsplash.com/@rthiemann?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Robert Thiemann</a> on <a href="https://unsplash.com/photos/brown-and-green-mallard-duck-on-water--ZSnI9gSX1Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>'
+  imageSrc: /posts/escaping-lyskov-substitution-hell/hero.jpg
+  imageAlt: 'Picture which says "Escaping covariance hell", overlaid on Google Street View image of Hell, Norway'
 
 ---
 
-# Escaping Lyskov Substitution Contravariance Hell
+# Escaping Contravariance Hell
 
 Ever used a Python typechecker (like MyPy or PyRight) and got a frustrating error message like
 
@@ -22,23 +22,23 @@ main.py:22: error: Argument 1 of "[...]" is incompatible with supertype "[...]";
 main.py:22: note: This violates the Liskov substitution principle
 ```
 
-?
+Looking around for help, [you may have found an explanation](https://metaist.com/blog/2025/05/til-typevar.html) which involves something like "Callable is contravariant in its parameters". If you re-read it enough times, it may even start making sense to you.
 
-Let's learn about how to address it!
+But...what do we do about it? Let's learn about one situation in which this typing error occurs, and what a possible fix is!
 
 ## How it might happen
 
-Suppose you want to write some common utility functions for dealing with vegetables. You want to define:
+Suppose you want to write some common utility functions for dealing with vegetables, and define:
 
 - A `Vegetable` base class.
-- A `VegetablePeeler` base class, with a `peel` method.
+- A `VegetablePeeler` base class, with a `peel` method which accepts a `Vegetable` argument.
 
 A `VegetablePeeler` should be able to peel a `Vegetable` of the appropriate type. For example:
 
 - A `PotatoPeeler` can peel a `Potato`.
 - A `CarrotPeeler` can peel a `Carrot`.
 
-Very well then, you get started, and come up with:
+You get started, and come up with:
 
 ```python
 from typing import Protocol
@@ -66,12 +66,9 @@ main.py:13: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#i
 Found 1 error in 1 file (checked 1 source file)
 ```
 
-Hmmm... if `peel` expects a vegetable for the argument `vegetable`, and `Carrot` is a `Vegetable`, then why is MyPy complaining that I have an incompatible type? Let's provide an answer on two levels:
+Great, we've entered "contravariance hell": the type checker is telling us that our code is invalid because of contravariance, although intuitively we feel like our code _should_ be valid. Let's look at solutions.
 
-- The technical answer is that `Callable` is contravariant in the function arguments, and so `Callable[[Carrot], ...]` isn't assignable to `Callable[[Vegetable], ...]`.
-- A more intuitive answer is: a carrot peeler can only peel carrots, not necessarily arbitrary vegetables.
-
-## Hacky answer: use `Any`
+## Hacky answer (not recommended!): use `Any`
 
 Given that the assignment above isn't valid, you may think that you need to use `Any` in the `VegetablePeeler.peel` method, and then `CarrotPeeler` can use `Carrot`:
 
@@ -104,7 +101,7 @@ class CarrotPeeler(VegetablePeeler):
         return vegetable
 ```
 
-In this case...type checkers would not complain. The erroneous type might be caught somewhere else in the code, or by a runtime test. However, I prefer to get all the help I can from tools before running tests - given that a better solution exists, let's learn how to implement it!
+In this case...type checkers would not complain. The erroneous type might be caught somewhere else in the code, or by a runtime test. However, I prefer to get all the help I can from tools before running tests - and there is, in fact, a solution which appeases type checkers and provides us with helpful early feedback.
 
 ## Generic vegetable peelers
 
@@ -156,4 +153,4 @@ In order to allow `ArrowDataFrame.__getitem__` to accept `ArrowSeries` for `item
 
 ## Conclusion, and how to improve
 
-We've learned about how to address a common situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to stick `Any` everywhere. If you'd like to improve your understanding of static typing, I'd suggest playing around with the [MyPy playground](https://mypy-play.net/), creating minimal examples, and trying to break them. Sometimes you really do need to slap an `Any` on a variable, but by reducing the number of cases where that's necessary, you can sus out issues as quickly as possible without even needing to execute your code.
+We've learned about how to address a common situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types on various parameters. We then looked at how to resolve the typing issue using `Generic` and `TypeVar`. If you'd like to improve your understanding of static typing, I'd suggest playing around with the [MyPy playground](https://mypy-play.net/), creating minimal examples, and trying to break them. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with more helpful suggestion before you even run your code.
