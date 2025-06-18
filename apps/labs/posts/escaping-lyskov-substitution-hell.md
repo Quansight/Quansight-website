@@ -5,10 +5,10 @@ authors: [marco-gorelli]
 description: "Protocols, Generics, and TypeVars"
 category: [Developer workflows]
 featuredImage:
-  src: /posts/escaping-lyskov-substitution-hell/featured.jpg
+  src: /posts/escaping-lyskov-substitution-hell/featured.png
   alt: 'Picture which says "Escaping covariance hell", overlaid on Google Street View image of Hell, Norway'
 hero:
-  imageSrc: /posts/escaping-lyskov-substitution-hell/hero.jpg
+  imageSrc: /posts/escaping-lyskov-substitution-hell/hero.png
   imageAlt: 'Picture which says "Escaping covariance hell", overlaid on Google Street View image of Hell, Norway'
 
 ---
