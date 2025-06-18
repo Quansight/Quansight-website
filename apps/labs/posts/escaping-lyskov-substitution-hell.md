@@ -28,7 +28,7 @@ If you look or ask around for help, you'll likely end up with an explanation alo
 
 > `Callable` is contravariant in its parameters. Just because `A` is a subtype of `B` doesn't mean that `Callable[[A], ...]` is a subtype of `Callable[[B], ...]`.
 
-There's an [nice explanation of what this means in the mypy docs](https://mypy.readthedocs.io/en/latest/generics.html#variance-of-generic-types), which I encourage all readers to study. Today's post isn't about understanding contravariance though - it's about dealing with it.
+There's an [nice explanation of what this means in the mypy docs](https://mypy.readthedocs.io/en/latest/generics.html#variance-of-generic-types), which I encourage all readers to study. But today's post isn't about understanding contravariance - it's about dealing with it.
 
 We'll look at one situation when contravariance creates issues, and we'll learn about what to do about it. By the end, you'll no longer fear type checker error messages related to variance!
 
@@ -72,9 +72,11 @@ main.py:13: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#i
 Found 1 error in 1 file (checked 1 source file)
 ```
 
-Great, we've entered "contravariance hell": the type checker is telling us that our code is invalid because of contravariance, although intuitively we feel like our code _should_ be valid. Let's look at solutions.
+This is the contravariance issue mentioned earlier: just because `Carrot` is a subtype of `Vegetable` doesn't mean that `Callable[[Carrot], ...]` is a subtype of `Callable[[Vegetable], ...]`. We feel like our code is valid though - `CarrotPeeler` should be able to peel `Carrot`s.
 
-## Hacky answer (not recommended!): use `Any`
+Indeed, we've entered "contravariance hell": the type checker is telling us that our code is invalid because of contravariance, although intuitively we feel like our code _should_ be valid. Let's look at solutions.
+
+## Not-recommended solution: use `Any`
 
 Given that the assignment above isn't valid, you may think that you need to use `Any` in the `VegetablePeeler.peel` method, and then `CarrotPeeler` in the `Carrot.peel` method:
 
@@ -103,7 +105,7 @@ Any time you use `Any`, you're turning off the type checker for some portion of 
 
 ## Generic vegetable peelers
 
-The solution involves making `VegetablePeeler` generic. That is to say, we can't just implement a `VegetablePeeler`, we also need to declare which vegetable it's allowed to peel.
+The solution involves making `VegetablePeeler` generic. That is to say, we don't just implement a `VegetablePeeler`, we also declare which vegetable it can peel.
 
 ```py
 from typing import Generic, Protocol, TypeVar
@@ -132,11 +134,11 @@ Success: no issues found in 1 source file
 
 ## What's a real-world example where this is useful?
 
-A real-world example where this concept shows up is the library [Narwhals](github.com/narwhals-dev/narwhals). There, we find protocols `CompliantDataFrame` and `CompliantSeries` which are then implemented for different backends:
+A real-world example where this concept shows up is the library [Narwhals](github.com/narwhals-dev/narwhals). There, we find protocols `CompliantDataFrame` and `CompliantSeries` which are implemented for different backends:
 
 - For PyArrow, there's `ArrowDataFrame` and `ArrowSeries`.
 - For Polars, there's `PolarsDataFrame` and `PolarsSeries`.
-- ...
+- Similarly, for other backends.
 
 Now, `CompliantDataFrame` has some methods which accept `CompliantSeries` as parameters, such as:
 
@@ -147,8 +149,10 @@ class CompliantDataFrame:
         # [...]
 ```
 
-In order to allow `ArrowDataFrame.__getitem__` to accept `ArrowSeries` for `item`, and for `PolarsDataFrame.__getitem__` to accept `PolarsSeries` for `item`, `CompliantDataFrame` is defined to be generic in `CompliantSeriesT`, which is a `TypeVar` bound to `CompliantSeries`. Like this, type checkers are appeased, and some kinds of bugs can be found before even running your code!
+The library requires that `ArrowDataFrame.__getitem__` accepts `ArrowSeries` for `item`, and that `PolarsDataFrame.__getitem__` accepts `PolarsSeries` for `item`. To do this, `CompliantDataFrame` is made generic in `CompliantSeriesT`, which is a `TypeVar` bound to `CompliantSeries`. Like this, type checkers are appeased, and certain kinds of bugs can be sussed out before even running the code!
 
 ## Conclusion, and how to improve
 
-We've learned about how to address a common situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types on various parameters. We then looked at how to resolve the typing issue using `Generic` and `TypeVar`. If you'd like to improve your understanding of static typing, I'd suggest playing around with the [mypy playground](https://mypy-play.net/), creating minimal examples, and then trying to break them. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with helpful suggestion before you even run your code, and you'll leverage type checkers to their full potential.
+We've learned about how to address a common situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types all over the place. We then looked at how to resolve the issue using `Generic` and `TypeVar`. If you'd like to improve your understanding of static typing, I'd suggest playing around with the [mypy playground](https://mypy-play.net/), creating minimal examples, and then trying to break them. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with helpful suggestion before you even run your code, and you'll leverage type checkers to their full potential.
+
+If you'd like help with advanced static typing, [we can help](https://quansight.com/about-us/#bookacallform)!
