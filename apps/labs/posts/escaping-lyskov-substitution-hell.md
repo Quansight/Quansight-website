@@ -15,7 +15,7 @@ hero:
 
 # Escaping Contravariance Hell
 
-Ever used a Python typechecker (like MyPy or PyRight) and got a frustrating error message like
+Ever used a Python typechecker (like mypy or PyRight) and got a frustrating error message like
 
 ```console
 main.py:22: error: Argument 1 of "[...]" is incompatible with supertype "[...]"; supertype defines the argument type as "[...]"  [override]
@@ -28,7 +28,7 @@ If you look or ask around for help, you'll likely end up with an explanation alo
 
 > `Callable` is contravariant in its parameters. Just because `A` is a subtype of `B` doesn't mean that `Callable[[A], ...]` is a subtype of `Callable[[B], ...]`.
 
-There's an [nice explanation of what this means in the MyPy docs](https://mypy.readthedocs.io/en/latest/generics.html#variance-of-generic-types), which I encourage all readers to study. Today's post isn't about understanding contravariance though - it's about dealing with it.
+There's an [nice explanation of what this means in the mypy docs](https://mypy.readthedocs.io/en/latest/generics.html#variance-of-generic-types), which I encourage all readers to study. Today's post isn't about understanding contravariance though - it's about dealing with it.
 
 We'll look at one situation when contravariance creates issues, and we'll learn about what to do about it. By the end, you'll no longer fear type checker error messages related to variance!
 
@@ -63,7 +63,7 @@ class CarrotPeeler(VegetablePeeler):
         return vegetable
 ```
 
-Looks legit. Problem is, if we run MyPy on it, we get:
+Looks legit. Problem is, if we run mypy on it, we get:
 
 ```console
 main.py:13: error: Argument 1 of "peel" is incompatible with supertype "VegetablePeeler"; supertype defines the argument type as "Vegetable"  [override]
@@ -95,7 +95,7 @@ class CarrotPeeler(VegetablePeeler):
         return vegetable
 ```
 
-This is enough to appease MyPy and PyRight...
+This is enough to appease mypy and PyRight...
 
 🛑 ...but wait!
 
@@ -151,4 +151,4 @@ In order to allow `ArrowDataFrame.__getitem__` to accept `ArrowSeries` for `item
 
 ## Conclusion, and how to improve
 
-We've learned about how to address a common situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types on various parameters. We then looked at how to resolve the typing issue using `Generic` and `TypeVar`. If you'd like to improve your understanding of static typing, I'd suggest playing around with the [MyPy playground](https://mypy-play.net/), creating minimal examples, and then trying to break them. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with helpful suggestion before you even run your code, and you'll leverage type checkers to their full potential.
+We've learned about how to address a common situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types on various parameters. We then looked at how to resolve the typing issue using `Generic` and `TypeVar`. If you'd like to improve your understanding of static typing, I'd suggest playing around with the [mypy playground](https://mypy-play.net/), creating minimal examples, and then trying to break them. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with helpful suggestion before you even run your code, and you'll leverage type checkers to their full potential.
