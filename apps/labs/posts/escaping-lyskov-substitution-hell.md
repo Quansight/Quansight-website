@@ -22,18 +22,24 @@ main.py:22: error: Argument 1 of "[...]" is incompatible with supertype "[...]";
 main.py:22: note: This violates the Liskov substitution principle
 ```
 
-Looking around for help, [you may have found an explanation](https://metaist.com/blog/2025/05/til-typevar.html) which involves something like "Callable is contravariant in its parameters". If you re-read it enough times, it may even start making sense to you.
+?
 
-But...what do we do about it? Let's learn about one situation in which this typing error occurs, and what a possible fix is!
+If you look or ask around for help, you'll likely end up with an explanation along the lines of:
+
+> `Callable` is contravariant in its parameters. Just because `A` is a subtype of `B` doesn't mean that `Callable[[A], ...]` is a subtype of `Callable[[B], ...]`.
+
+There's an [nice explanation of what this means in the MyPy docs](https://mypy.readthedocs.io/en/latest/generics.html#variance-of-generic-types), which I encourage all readers to study. Today's post isn't about understanding contravariance though - it's about dealing with it.
+
+We'll look at one situation when contravariance creates issues, and we'll learn about what to do about it. By the end, you'll no longer fear type checker error messages related to variance!
 
 ## How it might happen
 
-Suppose you want to write some common utility functions for dealing with vegetables, and define:
+Suppose you write some common utility functions for dealing with vegetables, and define:
 
 - A `Vegetable` base class.
 - A `VegetablePeeler` base class, with a `peel` method which accepts a `Vegetable` argument.
 
-A `VegetablePeeler` should be able to peel a `Vegetable` of the appropriate type. For example:
+You'd like to let `VegetablePeeler` peel a `Vegetable` of the appropriate type. For example:
 
 - A `PotatoPeeler` can peel a `Potato`.
 - A `CarrotPeeler` can peel a `Carrot`.
@@ -70,7 +76,7 @@ Great, we've entered "contravariance hell": the type checker is telling us that 
 
 ## Hacky answer (not recommended!): use `Any`
 
-Given that the assignment above isn't valid, you may think that you need to use `Any` in the `VegetablePeeler.peel` method, and then `CarrotPeeler` can use `Carrot`:
+Given that the assignment above isn't valid, you may think that you need to use `Any` in the `VegetablePeeler.peel` method, and then `CarrotPeeler` in the `Carrot.peel` method:
 
 ```py
 from typing import Any, Protocol
@@ -89,19 +95,11 @@ class CarrotPeeler(VegetablePeeler):
         return vegetable
 ```
 
-This is enough to appease MyPy and PyRight.
+This is enough to appease MyPy and PyRight...
 
-But wait.
+🛑 ...but wait!
 
-Surely we can do better? What if we try defining a `PotatoPeeler` and accidentally give it a nonsense type for `vegetable`, such as:
-
-```py
-class CarrotPeeler(VegetablePeeler):
-    def peel(self, vegetable: int) -> Carrot:
-        return vegetable
-```
-
-In this case...type checkers would not complain. The erroneous type might be caught somewhere else in the code, or by a runtime test. However, I prefer to get all the help I can from tools before running tests - and there is, in fact, a solution which appeases type checkers and provides us with helpful early feedback.
+Any time you use `Any`, you're turning off the type checker for some portion of your code, and so type checking won't be effective as it could be. Surely there's a better solution?
 
 ## Generic vegetable peelers
 
@@ -134,13 +132,13 @@ Success: no issues found in 1 source file
 
 ## What's a real-world example where this is useful?
 
-A real-world example where this concept shows up is the library [Narwhals](github.com/narwhals-dev/narwhals). There, we define some protocols such as `CompliantDataFrame` and `CompliantSeries`, which can then be implemented by different backends:
+A real-world example where this concept shows up is the library [Narwhals](github.com/narwhals-dev/narwhals). There, we find protocols `CompliantDataFrame` and `CompliantSeries` which are then implemented for different backends:
 
-- For PyArrow, we implement `ArrowDataFrame` and `ArrowSeries`.
-- For Polars, we implement `PolarsDataFrame` and `PolarsSeries`.
+- For PyArrow, there's `ArrowDataFrame` and `ArrowSeries`.
+- For Polars, there's `PolarsDataFrame` and `PolarsSeries`.
 - ...
 
-Now, `CompliantDataFrame` has some methods which accept `CompliantSeries` as arguments, such as:
+Now, `CompliantDataFrame` has some methods which accept `CompliantSeries` as parameters, such as:
 
 ```py
 class CompliantDataFrame:
@@ -149,8 +147,8 @@ class CompliantDataFrame:
         # [...]
 ```
 
-In order to allow `ArrowDataFrame.__getitem__` to accept `ArrowSeries` for `item`, and for `PolarsDataFrame.__getitem__` to accept `PolarsSeries` for `item`, we make `CompliantDataFrame` generic in `CompliantSeriesT`, which is a `TypeVar` bound to `CompliantSeries`.
+In order to allow `ArrowDataFrame.__getitem__` to accept `ArrowSeries` for `item`, and for `PolarsDataFrame.__getitem__` to accept `PolarsSeries` for `item`, `CompliantDataFrame` is defined to be generic in `CompliantSeriesT`, which is a `TypeVar` bound to `CompliantSeries`. Like this, type checkers are appeased, and some kinds of bugs can be found before even running your code!
 
 ## Conclusion, and how to improve
 
-We've learned about how to address a common situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types on various parameters. We then looked at how to resolve the typing issue using `Generic` and `TypeVar`. If you'd like to improve your understanding of static typing, I'd suggest playing around with the [MyPy playground](https://mypy-play.net/), creating minimal examples, and trying to break them. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with more helpful suggestion before you even run your code.
+We've learned about how to address a common situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types on various parameters. We then looked at how to resolve the typing issue using `Generic` and `TypeVar`. If you'd like to improve your understanding of static typing, I'd suggest playing around with the [MyPy playground](https://mypy-play.net/), creating minimal examples, and then trying to break them. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with helpful suggestion before you even run your code, and you'll leverage type checkers to their full potential.
