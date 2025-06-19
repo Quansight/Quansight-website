@@ -22,9 +22,9 @@ main.py:22: error: Argument 1 of "[...]" is incompatible with supertype "[...]";
 main.py:22: note: This violates the Liskov substitution principle
 ```
 
-?
+and thought to yourself "hmmm, that makes absolutely no sense to me whatsoever"?
 
-Today, we'll learn about a situation in which this can arise, why contravariance is the underlying issue, and how to deal with it.
+Today, we'll learn about a situation in which this can arise, why something called "contravariance" is the underlying issue, and how to deal with it.
 
 ## Contra-what? What's contravariance?
 
@@ -207,5 +207,6 @@ Where should you go from here?
 
 - If you'd like to improve your understanding of static typing, I'd suggest playing around with the [mypy playground](https://mypy-play.net/), creating minimal examples, and then trying to break them.
 - If you want supercharged type-checking, I also recommend keeping an eye on [ty](https://github.com/astral-sh/ty) and [Pyrefly](https://github.com/facebook/pyrefly) - neither is production ready as of writing, but both look very promising!
+- We (at Quansight) are collaborating with Meta to improve static typing support across the Python ecosystem. If you have any requests, or would just like to stay up-to-date with the effort, you can follow [the thread on Discourse](https://discuss.python.org/t/call-for-suggestions-nominate-python-packages-for-typing-improvements/80186/12).
 
 If you'd like help with advanced static typing, or with other issues related to the Python scientific ecosystem [we can help](https://quansight.com/about-us/#bookacallform)!
