@@ -2,7 +2,7 @@
 title: "Escaping Contravariance Hell"
 published: June 17, 2025
 authors: [marco-gorelli]
-description: "Protocols, Generics, and TypeVars"
+description: "Protocols and TypeVars"
 category: [Developer workflows]
 featuredImage:
   src: /posts/escaping-lyskov-substitution-hell/featured.png
@@ -156,7 +156,7 @@ Any time you use `Any`, you're turning off the type checker for some portion of 
 For a better solution, we can make `VegetablePeeler` generic. When implementing a `VegetablePeeler`, we also have to declare which vegetable it is allowed to peel.
 
 ```py
-from typing import Generic, Protocol, TypeVar
+from typing import Protocol, TypeVar
 
 class Vegetable(Protocol): ...
 
@@ -201,7 +201,7 @@ Narwhals requires that `ArrowDataFrame.__getitem__` accepts `ArrowSeries` for `i
 
 ## Conclusion, and how to improve
 
-We've learned about how to address a situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types all over the place. We then looked at how to resolve the issue using `Generic` and `TypeVar`. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with helpful suggestion before you even run your code, and you'll leverage type checkers to their full potential.
+We've learned about how to address a situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types all over the place. We then looked at how to resolve the issue using `TypeVar`. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with helpful suggestion before you even run your code, and you'll leverage type checkers to their full potential.
 
 Where should you go from here?
 
