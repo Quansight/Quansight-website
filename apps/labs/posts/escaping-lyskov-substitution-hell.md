@@ -201,7 +201,7 @@ Narwhals requires that `ArrowDataFrame.__getitem__` accepts `ArrowSeries` for `i
 
 ## Conclusion, and how to improve
 
-We've learned about how to address a situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types all over the place. We then looked at how to resolve the issue using `Generic` and `TypeVar`. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with helpful suggestion before you even run your code, and you'll leverage type checkers to their full potential.
+We've learned about how to address a situation in which mysterious terms like "Liskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types all over the place. We then looked at how to resolve the issue using `Generic` and `TypeVar`. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with helpful suggestion before you even run your code, and you'll leverage type checkers to their full potential.
 
 Where should you go from here?
 
