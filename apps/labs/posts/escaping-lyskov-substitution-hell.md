@@ -59,6 +59,8 @@ from typing import Callable
 def carrot_func(vegetable: Carrot) -> None:
     return None
 
+# Note: `Callable[[Vegetable], None]` means: "a function which 
+# accepts an argument of type `Vegetable` and returns `None`.
 vegetable_func: Callable[[Vegetable], None] = carrot_func
 ```
 
@@ -69,14 +71,14 @@ main.py:13: error: Incompatible types in assignment (expression has type "Callab
 Found 1 error in 1 file (checked 1 source file)
 ```
 
-The reason we can't assign `Callable[[Carrot], None]` to `Callable[[Vegetable], None]` is that `Callable` is [contravariant](https://mypy.readthedocs.io/en/stable/generics.html#variance-of-generics) in its parameters: just because `A` is a subtype of `B` doesn't mean that `Callable[[A], ...]` is a subtype of `Callable[[B], ...]`. In fact, `Callable[[B], ...]` is a subtype of `Callable[[A], ...]`!
-
-Intuitively:
+Here's an intuitive explanation of why it fails:
 
 - If you want a vegetable and I give you a carrot, you'll be happy.
-- If you want a tool which works on all vegetables and I give you a tool which only works on carrots, you'll be disappointed. This is why mypy rejects the second example (with `vegetable_func`) but not the first (with just `vegetable`).
+- If you want a function which works on all vegetables and I give you a tool which only works on carrots, you'll be disappointed. This is why mypy rejects the second example (with `vegetable_func`) but not the first (with just `vegetable`).
 
-We'll look at one situation when this issue can arise, and we'll learn about what to do about it. By the end, you'll no longer fear type checker error messages related to variance!
+More technically, the reason we can't assign `Callable[[Carrot], None]` to `Callable[[Vegetable], None]` is that `Callable` is [contravariant](https://mypy.readthedocs.io/en/stable/generics.html#variance-of-generics) in its parameters: just because `A` is a subtype of `B` doesn't mean that `Callable[[A], ...]` is a subtype of `Callable[[B], ...]`. In fact, `Callable[[B], ...]` is a subtype of `Callable[[A], ...]`!
+
+But why does this matter? We'll now look at a situation where this issue can arise, and we'll learn about what to do about it. By the end, you'll no longer fear type checker error messages related to variance!
 
 ## How it might happen
 
@@ -115,8 +117,8 @@ This is the contravariance issue mentioned earlier: just because `Carrot` is a s
 
 I like to think of this as "contravariance hell":
 
-- The type checker complains because `Callable` is contravariant. OK, fair enough.
-- We know that we will only ever use `CarrotPeeler` to peel `Carrot`, we don't use it to peel arbitrary vegetables.
+- The type checker complains because `Callable` is contravariant. OK, fair enough, we're not going to argue with the theory.
+- At the same time, we know that we will only ever use `CarrotPeeler` to peel `Carrot`, we won't use it to peel arbitrary vegetables.
 
 We know that what we're doing is safe, so how can get the type checker to just leave us alone and stop complaining?
 
@@ -149,7 +151,7 @@ Any time you use `Any`, you're turning off the type checker for some portion of 
 
 ## Generic vegetable peelers
 
-The solution involves making `VegetablePeeler` generic. We don't just implement a `VegetablePeeler`, we also declare which vegetable it can peel.
+For a better solution, we can make `VegetablePeeler` generic. When implementing a `VegetablePeeler`, we also have to declare which vegetable it is allowed to peel.
 
 ```py
 from typing import Generic, Protocol, TypeVar
@@ -182,9 +184,9 @@ A real-world example where this concept shows up is the library [Narwhals](githu
 
 - For PyArrow, there's `ArrowDataFrame` and `ArrowSeries`.
 - For Polars, there's `PolarsDataFrame` and `PolarsSeries`.
-- Similarly, for other backends.
+- ...similar patterns exist for other dataframe backends like pandas, DuckDB, and more.
 
-Now, `CompliantDataFrame` has some methods which accept `CompliantSeries` as parameters, such as:
+The `CompliantDataFrame` protocol has some methods which accept `CompliantSeries` as parameters, such as:
 
 ```py
 class CompliantDataFrame:
@@ -193,12 +195,15 @@ class CompliantDataFrame:
         # [...]
 ```
 
-The library requires that `ArrowDataFrame.__getitem__` accepts `ArrowSeries` for `item`, and that `PolarsDataFrame.__getitem__` accepts `PolarsSeries` for `item`. To do this, `CompliantDataFrame` is made generic in `CompliantSeriesT`, which is a `TypeVar` bound to `CompliantSeries`. Like this, type checkers are appeased, and certain kinds of bugs can be sussed out before even running the code!
+Narwhals requires that `ArrowDataFrame.__getitem__` accepts `ArrowSeries` for `item`, and that `PolarsDataFrame.__getitem__` accepts `PolarsSeries` for `item`. To enforce this, `CompliantDataFrame` is defined as generic in `CompliantSeriesT`, which is a `TypeVar` bound to `CompliantSeries`. Like this, type checkers are appeased, and certain kinds of bugs can be sussed out before even running the code!
 
 ## Conclusion, and how to improve
 
-We've learned about how to address a common situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types all over the place. We then looked at how to resolve the issue using `Generic` and `TypeVar`. If you'd like to improve your understanding of static typing, I'd suggest playing around with the [mypy playground](https://mypy-play.net/), creating minimal examples, and then trying to break them. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with helpful suggestion before you even run your code, and you'll leverage type checkers to their full potential.
+We've learned about how to address a situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types all over the place. We then looked at how to resolve the issue using `Generic` and `TypeVar`. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with helpful suggestion before you even run your code, and you'll leverage type checkers to their full potential.
 
-If you want supercharged type-checking, we also recommend keeping an eye on [ty](https://github.com/astral-sh/ty) and [Pyrefly](https://github.com/facebook/pyrefly) - neither is production ready as of writing, but both look very promising!
+Where should you go from here?
 
-If you'd like help with advanced static typing, [we can help](https://quansight.com/about-us/#bookacallform)!
+- If you'd like to improve your understanding of static typing, I'd suggest playing around with the [mypy playground](https://mypy-play.net/), creating minimal examples, and then trying to break them.
+- If you want supercharged type-checking, we also recommend keeping an eye on [ty](https://github.com/astral-sh/ty) and [Pyrefly](https://github.com/facebook/pyrefly) - neither is production ready as of writing, but both look very promising!
+
+If you'd like help with advanced static typing, or with other issues related to the Python scientific ecosystem [we can help](https://quansight.com/about-us/#bookacallform)!
