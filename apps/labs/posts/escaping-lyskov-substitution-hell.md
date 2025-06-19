@@ -51,7 +51,7 @@ You should see something like:
 Success: no issues found in 1 source file
 ```
 
-However, if you write the following
+However, if you were to write the following
 
 ```py
 from typing import Callable
@@ -64,7 +64,7 @@ def carrot_func(vegetable: Carrot) -> None:
 vegetable_func: Callable[[Vegetable], None] = carrot_func
 ```
 
-Then mypy will complain!
+Then mypy would complain!
 
 ```console
 main.py:13: error: Incompatible types in assignment (expression has type "Callable[[Carrot], None]", variable has type "Callable[[Vegetable], None]")  [assignment]
@@ -74,11 +74,13 @@ Found 1 error in 1 file (checked 1 source file)
 Here's an intuitive explanation of why it fails:
 
 - If you want a vegetable and I give you a carrot, you'll be happy.
-- If you want a function which works on all vegetables and I give you a tool which only works on carrots, you'll be disappointed. This is why mypy rejects the second example (with `vegetable_func`) but not the first (with just `vegetable`).
+- If you want a function which works on all vegetables and I give you a tool which only works on carrots, you'll be disappointed.
+
+This is why mypy rejects the second example (with `vegetable_func`) but not the first (with just `vegetable`).
 
 More technically, the reason we can't assign `Callable[[Carrot], None]` to `Callable[[Vegetable], None]` is that `Callable` is [contravariant](https://mypy.readthedocs.io/en/stable/generics.html#variance-of-generics) in its parameters: just because `A` is a subtype of `B` doesn't mean that `Callable[[A], ...]` is a subtype of `Callable[[B], ...]`. In fact, `Callable[[B], ...]` is a subtype of `Callable[[A], ...]`!
 
-But why does this matter? We'll now look at a situation where this issue can arise, and we'll learn about what to do about it. By the end, you'll no longer fear type checker error messages related to variance!
+But why does this matter? We'll now look at a situation where this issue can arise, and we'll learn about what to do about it. By the end, you'll no longer fear type checker error messages related to variance.
 
 ## How it might happen
 
@@ -195,7 +197,7 @@ class CompliantDataFrame:
         # [...]
 ```
 
-Narwhals requires that `ArrowDataFrame.__getitem__` accepts `ArrowSeries` for `item`, and that `PolarsDataFrame.__getitem__` accepts `PolarsSeries` for `item`. To enforce this, `CompliantDataFrame` is defined as generic in `CompliantSeriesT`, which is a `TypeVar` bound to `CompliantSeries`. Like this, type checkers are appeased, and certain kinds of bugs can be sussed out before even running the code!
+Narwhals requires that `ArrowDataFrame.__getitem__` accepts `ArrowSeries` for `item`, and that `PolarsDataFrame.__getitem__` accepts `PolarsSeries` for `item`. To enforce this, `CompliantDataFrame` is defined as generic in `CompliantSeriesT`, which is a `TypeVar` bound to `CompliantSeries`. Like this, type checkers are appeased, and certain kinds of bugs can be sussed out before even running the code.
 
 ## Conclusion, and how to improve
 
@@ -204,6 +206,6 @@ We've learned about how to address a situation in which mysterious words like "L
 Where should you go from here?
 
 - If you'd like to improve your understanding of static typing, I'd suggest playing around with the [mypy playground](https://mypy-play.net/), creating minimal examples, and then trying to break them.
-- If you want supercharged type-checking, we also recommend keeping an eye on [ty](https://github.com/astral-sh/ty) and [Pyrefly](https://github.com/facebook/pyrefly) - neither is production ready as of writing, but both look very promising!
+- If you want supercharged type-checking, I also recommend keeping an eye on [ty](https://github.com/astral-sh/ty) and [Pyrefly](https://github.com/facebook/pyrefly) - neither is production ready as of writing, but both look very promising!
 
 If you'd like help with advanced static typing, or with other issues related to the Python scientific ecosystem [we can help](https://quansight.com/about-us/#bookacallform)!
