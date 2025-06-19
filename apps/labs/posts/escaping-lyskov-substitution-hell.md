@@ -15,7 +15,7 @@ hero:
 
 # Escaping Contravariance Hell
 
-Ever used a Python typechecker (like mypy or PyRight) and got a frustrating error message like
+Ever used a Python typechecker (like mypy or Pyright) and got a frustrating error message like
 
 ```console
 main.py:22: error: Argument 1 of "[...]" is incompatible with supertype "[...]"; supertype defines the argument type as "[...]"  [override]
@@ -24,27 +24,66 @@ main.py:22: note: This violates the Liskov substitution principle
 
 ?
 
-If you look or ask around for help, you'll likely end up with an explanation along the lines of:
+Today, we'll learn about a situation in which this can arise, why contravariance is the underlying issue, and how to deal with it.
 
-> `Callable` is contravariant in its parameters. Just because `A` is a subtype of `B` doesn't mean that `Callable[[A], ...]` is a subtype of `Callable[[B], ...]`.
+## Contra-what? What's contravariance?
 
-There's an [nice explanation of what this means in the mypy docs](https://mypy.readthedocs.io/en/latest/generics.html#variance-of-generic-types), which I encourage all readers to study. But today's post isn't about understanding contravariance - it's about dealing with it.
+We often learn better with examples than with highly accurate explanations, so let's make sense of covariance with an example. Let's define a `Vegetable` [protocol](https://typing.python.org/en/latest/spec/protocol.html), and a `Carrot` which inherits from it.
 
-We'll look at one situation when contravariance creates issues, and we'll learn about what to do about it. By the end, you'll no longer fear type checker error messages related to variance!
+```python
+from typing import Protocol
+
+class Vegetable(Protocol): ...
+
+class Carrot(Vegetable):
+    ...
+```
+
+Now, try adding the following lines of code and [running a type checker on it](https://mypy-play.net/?mypy=latest&python=3.12&gist=1f6c4c2433e7247a7003fb7312aeecda):
+
+```python
+vegetable: Vegetable = Carrot()
+```
+
+You should see something like:
+
+```python
+Success: no issues found in 1 source file
+```
+
+However, if you write the following
+
+```py
+from typing import Callable
+
+def carrot_func(vegetable: Carrot) -> None:
+    return None
+
+vegetable_func: Callable[[Vegetable], None] = carrot_func
+```
+
+Then mypy will complain!
+
+```console
+main.py:13: error: Incompatible types in assignment (expression has type "Callable[[Carrot], None]", variable has type "Callable[[Vegetable], None]")  [assignment]
+Found 1 error in 1 file (checked 1 source file)
+```
+
+The reason we can't assign `Callable[[Carrot], None]` to `Callable[[Vegetable], None]` is that `Callable` is [contravariant](https://mypy.readthedocs.io/en/stable/generics.html#variance-of-generics) in its parameters: just because `A` is a subtype of `B` doesn't mean that `Callable[[A], ...]` is a subtype of `Callable[[B], ...]`. In fact, `Callable[[B], ...]` is a subtype of `Callable[[A], ...]`!
+
+Intuitively:
+
+- If you want a vegetable and I give you a carrot, you'll be happy.
+- If you want a tool which works on all vegetables and I give you a tool which only works on carrots, you'll be disappointed. This is why mypy rejects the second example (with `vegetable_func`) but not the first (with just `vegetable`).
+
+We'll look at one situation when this issue can arise, and we'll learn about what to do about it. By the end, you'll no longer fear type checker error messages related to variance!
 
 ## How it might happen
 
-Suppose you write some common utility functions for dealing with vegetables, and define:
-
-- A `Vegetable` base class.
-- A `VegetablePeeler` base class, with a `peel` method which accepts a `Vegetable` argument.
-
-You'd like to let `VegetablePeeler` peel a `Vegetable` of the appropriate type. For example:
+In addition to `Vegetable`, let's also define a `VegetablePeeler` protocol, which has a `peel` method which accepts a `Vegetable` argument. We'd like to let `VegetablePeeler` peel a `Vegetable` of the appropriate type. For example:
 
 - A `PotatoPeeler` can peel a `Potato`.
 - A `CarrotPeeler` can peel a `Carrot`.
-
-You get started, and come up with:
 
 ```python
 from typing import Protocol
@@ -63,7 +102,7 @@ class CarrotPeeler(VegetablePeeler):
         return vegetable
 ```
 
-Looks legit. Problem is, if we run mypy on it, we get:
+If we [run mypy on it](https://mypy-play.net/?mypy=latest&python=3.12&gist=32a73fcca2b275b74e81e8cc21dd265b), we get:
 
 ```console
 main.py:13: error: Argument 1 of "peel" is incompatible with supertype "VegetablePeeler"; supertype defines the argument type as "Vegetable"  [override]
@@ -72,13 +111,18 @@ main.py:13: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#i
 Found 1 error in 1 file (checked 1 source file)
 ```
 
-This is the contravariance issue mentioned earlier: just because `Carrot` is a subtype of `Vegetable` doesn't mean that `Callable[[Carrot], ...]` is a subtype of `Callable[[Vegetable], ...]`. We feel like our code is valid though - `CarrotPeeler` should be able to peel `Carrot`s.
+This is the contravariance issue mentioned earlier: just because `Carrot` is a subtype of `Vegetable` doesn't mean that `Callable[[Carrot], ...]` is a subtype of `Callable[[Vegetable], ...]`.
 
-Indeed, we've entered "contravariance hell": the type checker is telling us that our code is invalid because of contravariance, although intuitively we feel like our code _should_ be valid. Let's look at solutions.
+I like to think of this as "contravariance hell":
+
+- The type checker complains because `Callable` is contravariant. OK, fair enough.
+- We know that we will only ever use `CarrotPeeler` to peel `Carrot`, we don't use it to peel arbitrary vegetables.
+
+We know that what we're doing is safe, so how can get the type checker to just leave us alone and stop complaining?
 
 ## Not-recommended solution: use `Any`
 
-Given that the assignment above isn't valid, you may think that you need to use `Any` in the `VegetablePeeler.peel` method, and then `CarrotPeeler` in the `Carrot.peel` method:
+Given that the assignment above isn't valid, you may be tempted to use `Any` in the `VegetablePeeler.peel` method, and then `CarrotPeeler` in the `Carrot.peel` method:
 
 ```py
 from typing import Any, Protocol
@@ -97,7 +141,7 @@ class CarrotPeeler(VegetablePeeler):
         return vegetable
 ```
 
-This is enough to appease mypy and PyRight...
+This is enough to appease mypy and Pyright...
 
 🛑 ...but wait!
 
@@ -105,7 +149,7 @@ Any time you use `Any`, you're turning off the type checker for some portion of 
 
 ## Generic vegetable peelers
 
-The solution involves making `VegetablePeeler` generic. That is to say, we don't just implement a `VegetablePeeler`, we also declare which vegetable it can peel.
+The solution involves making `VegetablePeeler` generic. We don't just implement a `VegetablePeeler`, we also declare which vegetable it can peel.
 
 ```py
 from typing import Generic, Protocol, TypeVar
@@ -154,5 +198,7 @@ The library requires that `ArrowDataFrame.__getitem__` accepts `ArrowSeries` for
 ## Conclusion, and how to improve
 
 We've learned about how to address a common situation in which mysterious words like "Lyskov Substitution" and "contravariance" make it feel like the only way to appease type checkers is to slap a bunch `Any` types all over the place. We then looked at how to resolve the issue using `Generic` and `TypeVar`. If you'd like to improve your understanding of static typing, I'd suggest playing around with the [mypy playground](https://mypy-play.net/), creating minimal examples, and then trying to break them. By reducing the number of cases where you need to use `Any`, your IDE (interactive development environment) will provide you with helpful suggestion before you even run your code, and you'll leverage type checkers to their full potential.
+
+If you want supercharged type-checking, we also recommend keeping an eye on [ty](https://github.com/astral-sh/ty) and [Pyrefly](https://github.com/facebook/pyrefly) - neither is production ready as of writing, but both look very promising!
 
 If you'd like help with advanced static typing, [we can help](https://quansight.com/about-us/#bookacallform)!
