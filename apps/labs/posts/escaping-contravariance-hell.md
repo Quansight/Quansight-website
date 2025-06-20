@@ -180,6 +180,27 @@ And voila, type-checkers are satisfied!
 Success: no issues found in 1 source file
 ```
 
+### But I don't want to write "TypeVar" or "contravariant" in my code!
+
+One thing I find truly beautiful about the Python language is how much it keeps improving between versions. In fact, if you're lucky enough to be on a Python3.12+ codebase, you can write the code above more succinctly and expressively as
+
+```python
+from typing import Protocol
+
+class Vegetable(Protocol): ...
+
+class VegetablePeeler[T: Vegetable](Protocol):
+    def peel(self, vegetable: T) -> T: ...
+
+class Carrot(Vegetable): ...
+
+class CarrotPeeler(VegetablePeeler[Carrot]):
+    def peel(self, vegetable: Carrot) -> Carrot:
+        return vegetable
+```
+
+thanks to [PEP 695](https://peps.python.org/pep-0695/#variance-inference)! I find it reminiscent of [Rust's where](https://doc.rust-lang.org/std/keyword.where.html) keyword, and that can only be a good thing.
+
 ## What's a real-world example where this is useful?
 
 A real-world example where this concept shows up is the library [Narwhals](github.com/narwhals-dev/narwhals). There, we find protocols `CompliantDataFrame` and `CompliantSeries` which are implemented for different backends:
