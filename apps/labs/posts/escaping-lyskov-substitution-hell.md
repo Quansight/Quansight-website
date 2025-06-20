@@ -74,7 +74,7 @@ Found 1 error in 1 file (checked 1 source file)
 Here's an intuitive explanation of why it fails:
 
 - If you want a vegetable and I give you a carrot, you'll be happy.
-- If you want a function which works on all vegetables and I give you a tool which only works on carrots, you'll be disappointed.
+- If you want a function which works on all vegetables and I give you a function which only works on carrots, you'll be disappointed.
 
 This is why mypy rejects the second example (with `vegetable_func`) but not the first (with just `vegetable`).
 
