@@ -1,6 +1,6 @@
 ---
 title: 'Scaling asyncio on Free-Threaded Python'
-authors: [Kumar Aditya]
+authors: [kumar-aditya]
 published: June 24, 2025
 description: 'A recap on the work done in Python 3.14 to enable asyncio to scale on the free-threaded build of CPython.'
 category: [Community]
@@ -53,7 +53,8 @@ Here are the key changes:
    Python 3.14 introduces a per-thread circular double linked list implementation for storing tasks. This allows each thread to maintain its own list of tasks and allows for lock free addition and removal of tasks. This is designed to be efficient, and thread-safe and scales well with the number of threads in free-threading
 
 2. **Per-thread current task**:
-   Python 3.14 stores the current task on the current thread state instead of a global dictionary. This allows for faster access to the current task without the need for a dictionary lookup. Each thread maintains its own current task, which is stored in the thread state structure.
+   Python 3.14 stores the current task on the current thread state instead of a global dictionary. This allows for faster access to the current task without the need for a dictionary lookup. Each thread maintains its own current task, which is stored in the thread state structure. This avoids contention on a global dictionary and allows multiple threads to
+   access thier current task without any locking or contention.
 
 These changes allow `asyncio` to scale linearly with the number of threads in free-threading,
 
