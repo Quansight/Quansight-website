@@ -1,6 +1,6 @@
 ---
 title: "Escaping Contravariance Hell"
-published: June 17, 2025
+published: July 3, 2025
 authors: [marco-gorelli]
 description: "Protocols and TypeVars"
 category: [Developer workflows]
