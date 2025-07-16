@@ -9,7 +9,7 @@ featuredImage:
   alt: 'A brown and a black coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/learning-from-accessibility-work/hero.png
-  imageAlt: 'A brown and a black coming towards each other to pass a business card with the logo of Quansight Labs'
+  imageAlt: 'A hand holding up a microphone'
 ---
 
 ## JupyterLab Accessibility Journey Part 7
