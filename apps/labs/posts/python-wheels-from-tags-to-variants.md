@@ -23,19 +23,14 @@ In order to robustly deploy these software on different platforms,
 you need to publish multiple binary packages, with the installers
 being able to select the one best fit the platform used.
 
-For a long time,
-<a rel="external"
-href="https://packaging.python.org/en/latest/specifications/binary-distribution-format/">Python
-Wheels</a> made do with a relatively simple mechanism
-of providing the needed variance: <a rel="external"
-href="https://packaging.python.org/en/latest/specifications/platform-compatibility-tags/">
-Platform Compatibility Tags</a>. Tags identified different Python implementation and versions,
+For a long time, [Python Wheels](https://packaging.python.org/en/latest/specifications/binary-distribution-format/)
+made do with a relatively simple mechanism
+of providing the needed variance: [Platform Compatibility Tags](https://packaging.python.org/en/latest/specifications/platform-compatibility-tags/).
+Tags identified different Python implementation and versions,
 operating systems, CPU architectures. Over time, they were extended
-to facilitate new use cases. To list a few: <a rel="external"
-href="https://peps.python.org/pep-0513/">PEP 513</a> added
-<code>manylinux</code> tags to standardize the dependency on GNU/Linux
-systems, <a rel="external"
-href="https://peps.python.org/pep-0656/">PEP 656</a> added
+to facilitate new use cases. To list a few: [PEP 513](https://peps.python.org/pep-0513/)
+added <code>manylinux</code> tags to standardize the dependency on GNU/Linux
+systems, [PEP 656](https://peps.python.org/pep-0656/) added
 <code>musllinux</code> tags to facilitate Linux systems with musl libc.
 
 However, not all new use cases could be handled effectively within
@@ -43,8 +38,10 @@ the framework of tags. The advent of GPU-backed computing made distinguishin
 different acceleration frameworks such as CUDA or ROCm important.
 As many distributions have set baselines for their binary packages
 to x86-64 v2, Python packages also started looking at the opportunity
-to express the same requirement. In fact, the <a rel="external" href="https://github.com/pypa/manylinux/issues/1585#issuecomment-3094469339">manylinux_2_34 images are blocked on x86-64 v2 becoming the default
-compiler target</a>. Numerical libraries support different
+to express the same requirement. In fact, the [manylinux_2_34 images are
+blocked on x86-64 v2 becoming the default compiler
+target](https://github.com/pypa/manylinux/issues/1585#issuecomment-3094469339).
+Numerical libraries support different
 BLAS/LAPACK, MPI, OpenMP providers — and wish to enable the users to choose
 the build using their desired provider.
 While technically tags could be bent to facilitate all these use cases,
@@ -54,7 +51,7 @@ tooling separately, making the adoption difficult.
 
 Facing these limitations, software vendors employed different solutions to work
 around the lack of appropriate mechanism. Eventually,
-as part of the <a rel="external" href="https://wheelnext.dev/">WheelNext</a>
+as part of the [WheelNext](https://wheelnext.dev/)
 initiative, we have started working on a more robust solution: Variant
 Wheels. In this blog post, I would like to tell the story behind
 the solution that emerged.
@@ -171,7 +168,7 @@ CUDA 12.8, ROCM 6.3, CPU). Below it provides an install command." />
 </figure>
 </div>
 
-If you enter [PyTorch's "Start Locally"](https://pytorch.org/get-started/locally/)
+If you enter [PyTorch's “Start Locally”](https://pytorch.org/get-started/locally/)
 document, you are welcomed with a interactive chooser. Once you select
 a specific build, operating system and compute platform, you are given
 a specific pip instruction. Most of these instructions include an `--index-url`
@@ -207,7 +204,7 @@ or 'experimental' with links, 'no' or 'n/a'." />
 </figure>
 </div>
 
-Let's look at another example. [JAX's "Supported Platforms" matrix](https://docs.jax.dev/en/latest/installation.html#supported-platforms) provides links to instructions for different installation options.
+Let's look at another example. [JAX's “Supported Platforms” matrix](https://docs.jax.dev/en/latest/installation.html#supported-platforms) provides links to instructions for different installation options.
 Most of them suggest installing the [jax package](https://pypi.org/project/jax/)
 with an extra, e.g.: `jax[cuda12]`. And indeed, JAX publishes support
 for different variants as plugins that can be pulled in automatically
@@ -247,7 +244,7 @@ do to get supported properties." />
 </figure>
 </div>
 
-While build backends (as defined by PEP 517) remain responsible for building wheels, and installers
+While build backends (as defined by [PEP 517]("https://peps.python.org/pep-0517/)) remain responsible for building wheels, and installers
 for selecting and installing wheels, they both defer variant-related tasks
 to external variant providers. These are regular Python packages that can
 be maintained and updated independently of the installers, and therefore
@@ -275,7 +272,7 @@ nvidia :: cuda_version_upper_bound :: 13
 x86_64 :: level :: v3
 x86_64 :: sha_ni :: on</pre>
 
-Yes, the syntax was~inspired by [trove classifiers](https://pypi.org/classifiers/)!
+Yes, the syntax was inspired by [trove classifiers](https://pypi.org/classifiers/)!
 Every property is a 3-element tuple consisting of the namespace (one per plugin
 used), feature name and value.
 
@@ -397,6 +394,82 @@ information can change across package versions, we should replace a single
 files, whose names match the initial parts of wheel names.
 
 ## The opt-in/opt-out debate, plugin installation and discovery
+
+Perhaps the hottest discussion point during the work on wheel variants
+was whether the architecture should be opt-in or opt-out. In other words,
+whether the users should be required to perform some explicit action before
+having a wheel variant installed, or whether the installer should take care
+of everything, including installing the plugins as needed and running them.
+
+The very first version of the proposal used a kind of opt-in mechanism.
+Variantlib, our reference implementation, discovered and used plugins
+from the environment where the package installer was run. In order to install a variant,
+the user had to manually install all the required plugins first. Therefore,
+having the plugin installed worked as a gating mechanism.
+
+Why would we want an opt-in solution? The most important reason is security.
+The variant plugin is a Python package that executes arbitrary code
+during dependency resolution, possibly with elevated privileges. In fact,
+[the rationale of PEP 427](https://peps.python.org/pep-0427/#rationale),
+the original specification of the wheel format, pointed out this very problem
+with installing from source distributions: <q>running arbitrary code to
+build-and-install</q>.
+
+Unfortunately, an opt-in solution like that poses a few problems. For a start,
+it is quite inconvenient to users. You have to realize that you need
+to do something special, you need to find the instructions and you need
+to install the plugins. And it won't always be obvious — you won't always
+be directly installing PyTorch or NumPy, but you will be getting them installed
+as an indirect dependency. You may not even realize they've gotten installed,
+let alone that you missed an important step required to get an optimized
+variant. Besides, it is easy to install an incompatible version, two conflicting
+plugins or even reach an unsolvable situation where two different packages you
+need to install have conflicting provider dependencies.
+
+At the same time, plugin discovery was done via [entry
+points](https://packaging.python.org/en/latest/specifications/entry-points/).
+They were quite convenient throughout the development and testing, since they
+enabled us to discover and query installed plugins without having to actually
+interact with any source trees or wheels. However, other found this implicit
+discovery opaque.
+
+The next step was therefore to switch to a more explicit, opt-out design.
+We have introduced provider information in the variant information pipeline,
+largely inspired by PEP 517, with a `requires` key specifying how to install
+the variant provider, and a `plugin-api` key specifying how to use it.
+Over time, we also added a `enable-if` key to support installing plugins
+only in specific environments (for example, the x86-64 plugin is only needed
+on x86-64 systems), and an `optional` key to make some plugins opt-in
+(for example, for variants used only in obscure configurations that should
+not be used by default). This also implied that the installer would now install
+plugins automatically, in isolated environments.
+
+With plugin installation and discovery taken care of, one problem remained:
+variant sorting. Let's take a closer look at it next.
+
+## Variant sorting
+
+Variant providers have two main purposes in aiding installers. Firstly, they
+are used to filter variants — tell which of the wheels are supported. Secondly,
+they are used to sort variants — tell which of the supported variants should
+be installed.
+
+In the simplest cases, sorting is easy. If you have a bunch of variants
+for different CPU baselines, you sort them from the highest to the lowest,
+and therefore install the most optimized variant available. If you have variants
+for different lower CUDA runtime bounds, you choose the one that is the highest
+— say, if you have CUDA 12.8, you'd rather take a `>=12.8,<13` wheel
+than a `>=12.6,<13` one, as it is more likely to benefit from newer API.
+And if you have two wheels built for the same CUDA version, but one of them
+also carries CPU optimizations, you'd take the latter.
+
+The problems start when you have two different wheels that cannot be trivially
+compared — say, a CUDA-optimized wheel and a CPU-optimized wheel. You may have
+a gut feeling that CUDA wins, but this is not a general rule. Things become
+even harder when you have to choose between a CUDA and a ROCm wheel (presumably
+having two GPUs).
+
+[TODO]
 
 ## The null variant
 
