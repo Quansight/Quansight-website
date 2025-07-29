@@ -25,7 +25,7 @@ that compiles a python extension. Reducing the build matrix to just one
 python version will reduce the burden on conda-forge CI, volunteer time
 of the maintainers and storage and bandwidth costs of the hosting services.
 
-First let us understand why the extensions are minor version specific usually.
+First let us understand why the extensions are usually minor version specific.
 Each Python minor version adds and removes symbols in the Python C API.
 If an extension uses a symbol (directly or indirectly via a macro) that is
 removed later on, the extension does not work outside of the minor
@@ -56,8 +56,8 @@ from the Python headers, the preprocessor macro `Py_LIMITED_API` needs to be set
 This ensures that symbols not marked as stable ABI are invisible.
 
 CPython also supports setting `Py_LIMITED_API` to a specific python version, so
-that building an ABI3 package for eg: on Python 3.11 that supports Python 3.9+
-is possible. For conda-build support we decided that we would build the package
+that it is possible, for example, to build an ABI3 package for Python 3.11 that supports
+Python 3.9+. For conda-build support we decided that we would build the package
 with the minimum version possible (i.e. 3.9 in the above example) since installing
 an older version is easy.
 
@@ -132,21 +132,22 @@ building ABI3 packages. For v0 recipes, a typical change to the
 A sample recipe can be found [here](ABI3_example). Note that
 this generates one package per platform typically, but when freethreading
 is enabled, it produces the ABI3 package and the Python 3.13 freethreading
-build. When python 3.14 freethreading build is supported we will
-produce 3 packges per platform and so on.
+build. When python 3.14 freethreading build is supported, we will
+produce 3 packages per platform and so on.
 
 Some packages use newer stable ABI symbols if the python version is
 recent enough (say 3.12), but provide a slower code path for older python
 version. In that case, we can create two variants, one that has a
 `python>=3.9,<3.12` constraint and one that has a `python>=3.12` constraint.
 
-Support for ABI3 packages was added to `rattler-build` by Wolf Vollprecht.
+Support for ABI3 packages was also added to `rattler-build` by Wolf Vollprecht.
 
 ## Summary
 
-It is now possible to build ABI3 packages on conda-forge and this makes it
-possible to support bleeding edge python versions faster and also reduces
-the burden on conda-forge CI systems and maintainers.
+Thanks to funding provided by Point72, it is now possible to build ABI3
+packages on conda-forge and this makes it possible to support bleeding
+edge python versions faster and also reduces the burden on conda-forge
+CI systems and maintainers.
 
 [C_API_Stability]: https://docs.Python.org/3/c-api/stable.html
 
