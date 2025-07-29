@@ -393,6 +393,12 @@ information can change across package versions, we should replace a single
 `variants.json` file with per-version `{distribution}-{version}-variants.json`
 files, whose names match the initial parts of wheel names.
 
+Another useful advantage of statically defining the variant mapping is that
+it enable more arbitrary variant labels — the identifiers found in wheel
+filenames. Since they no longer needed to be predictable from variant
+properties, we could permit custom labels, and just store them inside
+`variants.json` instead of the hash.
+
 ## The opt-in/opt-out debate, plugin installation and discovery
 
 Perhaps the hottest discussion point during the work on wheel variants
@@ -469,7 +475,115 @@ a gut feeling that CUDA wins, but this is not a general rule. Things become
 even harder when you have to choose between a CUDA and a ROCm wheel (presumably
 having two GPUs).
 
-[TODO]
+<div style={{ textAlign: "center" }}>
+<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+  <img src="/posts/python-wheels-from-tags-to-variants/sorted-property-examples.png"
+    width="761" height="313" alt="A diagram showing example sorted properties from two plugins:
+'nvidia' plugin with index 1 and 'x86_64' plugin with index 2.
+The nvidia plugin provides 'cuda_version_lower_bound' (index 1.1) whose subsequent values
+have indices 1.1.1, 1.1.2 and so on; and 'cuda_version_upper_bound' with indices growing to 1.2.n.
+The x86_64 plugin provides a 'level' property with index 2.1, whose values have indices 2.1.1,
+2.1.2 and 2.1.3. It also defines a instruction set properties with indices 2.2,
+2.3 and so on, with their only value 'on' having index '2.n.1'." />
+  <figcaption>Fig. Example sort order of properties</figcaption>
+</figure>
+</div>
+
+What we implemented is pretty much sorting on multiple layers. First,
+the supported values for every feature are sorted from the most preferred
+to the least preferred — so that a higher CUDA runtime version is considered
+better than a lower one, and a higher CPU architecture version likewise.
+Then, the features themselves are sorted within every namespace —
+e.g. indicating that a specific architecture version is more important
+than an individual feature, so you'd rather take an x86-64 v3 wheel with
+no additional instruction sets declared over one declaring AVX support
+but using x86-64 v2. As the next step, namespaces are ordered. This way,
+we reach the point where every property has a corresponding index in the general
+order: determined by its namespace, feature name and value ordering.
+
+Let's return to our initial example and add sort keys to it:
+
+<pre>(1.1.3) nvidia :: cuda_version_lower_bound :: 12.6
+(1.2.m) nvidia :: cuda_version_upper_bound :: 13
+(2.1.1) x86_64 :: level :: v3
+(2.3.1) x86_64 :: sha_ni :: on</pre>
+
+We sort variants according to the properties they have. While this may
+seem complex at first, it effectively follows a single rule: a variant having
+a more preferable property is better than one that does not have said property.
+And that's it!
+
+Let's say we have three properties, most preferred to least preferred:
+P<sub>1</sub>, P<sub>2</sub>, P<sub>3</sub>. A variant having [P<sub>3</sub>]
+is better than variant having no properties at all, since it has P<sub>3</sub>
+and the other does not. A variant [P<sub>2</sub>] is better than [P<sub>3</sub>],
+since it has P<sub>2</sub> and the other does not. And [P<sub>2</sub>, P<sub>3</sub>]
+is better than all of the above since it has both these properties, and they
+are missing at least one of them. And then [P<sub>1</sub>] is better than all
+of them, since they are missing the most preferred property — and so on,
+up to the variant having all possible properties.
+
+What does this imply in practice? Say, if the `nvidia` namespace is given higher
+priority than the `x86_64` namespace, then a `CUDA` variant will be preferred over
+an `x86-64 v3` variant, and a `CUDA + x86-64 v3` variant will preferred over a plain
+`CUDA` variant — provided both have matching CUDA properties. However,
+a `CUDA >=12.8` wheel will be preferred over a `CUDA >=12.6 + x86-64 v3` wheel;
+though such mismatched combinations are unlikely to be published in reality.
+
+## Where do sort keys come from
+
+We have covered sorting variants based on a specific namespace, feature name
+and value ordering. However, what we didn't cover is how these bits are ordered
+themselves. To skip a bit ahead, we settled on a layout that uses three layers
+of sorting configuration:
+
+1. Sorting defined by the provider plugin itself.
+
+2. Sorting defined by the package (in variant information).
+
+3. Sorting defined by the user.
+
+<div style={{ textAlign: "center" }}>
+<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+  <img src="/posts/python-wheels-from-tags-to-variants/sorting.png"
+    width="828" height="197" alt="A diagram showing variant property sort keys.
+It specifies three rows: namespaces, features and values, and three columns:
+provider plugin, package, user. Namespaces are shown to be ordered by the package
+and optionally reordered by the user. Both features and their values are shown
+to be ordered by the plugin, then optionally reordered by the package and the
+user. Finally, all three keys combine into a sort key." />
+  <figcaption>Fig. Example sort order of properties</figcaption>
+</figure>
+</div>
+
+Unsurprisingly, plugins provide the initial ordering of features and their
+values. After all, given that the plugin defines these lists in the first place,
+it is quite reasonable for it to order it as well, rather than expecting
+consumers to keep repeating that `12.8` > `12.7` > `12.6` > …, and updating that
+list whenever they are about to use a new property value.
+However, plugins are scoped to themselves and can only order feature names
+and values. They cannot provide namespace ordering — as that would effectively
+mean one plugin deciding how important another plugin is.
+
+This leaves us with two possibilities: either the package author or the user
+needs to define namespace ordering. Originally, we went with the latter idea —
+after all, the users know best whether they prefer CUDA or ROCm, or perhaps CPU
+optimization. However, this actually implied that the user had to jump through
+the hoops of configuring variant usage first, and once again things could not
+work out of the box. So we went with the next best thing: requiring package
+configuration to specify namespace ordering; after all, package authors
+are also in good position to tell which variants are the most beneficial.
+
+However, no reason to stop at namespace. After all, a specific package may
+want to point out, say, that their AES-NI variant is more beneficial than
+a fallback implemented using other instruction sets. Or reorder values — while
+I immediately can't think of a reason for that, let's have the option
+for symmetry anyway. So while the plugins specify the initial order of features
+and their values, packages are allowed to override it.
+
+On top of that, user configuration can be applied. After all, there is still
+a valid use case for the user to override the sort order defined by plugins
+and packages. And since it's no longer obligatory, having that is not a problem.
 
 ## The null variant
 
