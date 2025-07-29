@@ -587,4 +587,45 @@ and packages. And since it's no longer obligatory, having that is not a pr
 
 ## The null variant
 
+Let's consider that you are distributing a package with three CUDA variants,
+and a CPU variant. The published wheels are, in order of preference:
+
+<pre>torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu129.whl
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu128.whl
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu126.whl
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl        # CPU-only</pre>
+
+Such a setup provides for a graceful fallback. When you are using an older
+CUDA version, the top variants are filtered out and the lower variants are used.
+If you don't have a compatible CUDA runtime at all, the fallback CPU wheel
+is used. So far, so good.
+
+However, consider now a system with an older package manager that does not
+support variants. Independently of the presence of CUDA runtime, ll variant
+wheels are ignored there, and the CPU-only fallback is installed. However,
+this is not the most optimal solution. Prior to introducing variants,
+the published wheels featured both CUDA and CPU support (even if for a single
+CUDA version).
+
+This is where the null variant comes in. Consider the following instead:
+
+<pre>torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu129.whl
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu128.whl
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu126.whl
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-00000000.whl  # CPU-only
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl           # CUDA + CPU</pre>
+
+What we added here is a null variant, with label `00000000`. Since it has
+no properties, it is always supported — that is, as long as variants
+are supported in the first place. This lets us provide two different fallbacks:
+variant-enabled installers with no CUDA runtime will use the CPU-only null
+variant, whereas installers without variant support (and therefore unable
+to determine the CUDA runtime) will instead pick up the regular wheel, with both
+CUDA and CPU support.
+
+Does it really matter? Well, that depends on how you look at it. While wheel
+variant support remains early, backwards compatibility is going to be important.
+And providing a different fallback may mean the difference between a 175 MiB
+CPU-only wheel, and a 850 MiB CUDA wheel.
+
 ## Static and dynamic plugins
