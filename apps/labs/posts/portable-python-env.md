@@ -22,7 +22,7 @@ environment on the remote machine and recreate it on our local machine.
 While conda relieves the package dependency challenge, it can be hard to
 reproduce the exact same environment.
 
-# Creating a Portable Python Environment
+## Creating a Portable Python Environment
 
 This walkthrough will demonstrate a method to copy an exact environment on
 one machine and transfer it to a another machine. We'll start by collecting
