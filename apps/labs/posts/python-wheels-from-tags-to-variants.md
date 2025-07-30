@@ -233,7 +233,7 @@ This is how we reached an architecture based on plugins.
 <div style={{ textAlign: "center" }}>
 <figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <img src="/posts/python-wheels-from-tags-to-variants/variant-flow.png"
-    width="683" height="577" alt="A flow chart showing interaction between
+    width="683" height="486" alt="A flow chart showing interaction between
 wheel-related software and provider plugins. A build backend (such
 as flit_core, hatchling, meson-python…) produces a Wheel Variant, which is
 then consumed by a wheel installer (pip, uv, pdm…). Alongside them, variant
@@ -267,10 +267,12 @@ we expect variant providers to be developed largely independently, putting
 these features in namespaces makes it possible to organize them logically
 and avoid name collisions. Consider the following example:
 
-<pre>nvidia :: cuda_version_lower_bound :: 12.6
+```rust
+nvidia :: cuda_version_lower_bound :: 12.6
 nvidia :: cuda_version_upper_bound :: 13
 x86_64 :: level :: v3
-x86_64 :: sha_ni :: on</pre>
+x86_64 :: sha_ni :: on
+```
 
 Yes, the syntax was inspired by [trove classifiers](https://pypi.org/classifiers/)!
 Every property is a 3-element tuple consisting of the namespace (one per plugin
@@ -503,10 +505,12 @@ order: determined by its namespace, feature name and value ordering.
 
 Let's return to our initial example and add sort keys to it:
 
-<pre>(1.1.3) nvidia :: cuda_version_lower_bound :: 12.6
-(1.2.m) nvidia :: cuda_version_upper_bound :: 13
-(2.1.1) x86_64 :: level :: v3
-(2.3.1) x86_64 :: sha_ni :: on</pre>
+```rust
+nvidia :: cuda_version_lower_bound :: 12.6  // 1.1.3
+nvidia :: cuda_version_upper_bound :: 13    // 1.2.m
+x86_64 :: level :: v3                       // 2.1.1
+x86_64 :: sha_ni :: on                      // 2.3.1
+```
 
 We sort variants according to the properties they have. While this may
 seem complex at first, it effectively follows a single rule: a variant having
@@ -552,7 +556,7 @@ provider plugin, package, user. Namespaces are shown to be ordered by the packag
 and optionally reordered by the user. Both features and their values are shown
 to be ordered by the plugin, then optionally reordered by the package and the
 user. Finally, all three keys combine into a sort key." />
-  <figcaption>Fig. Example sort order of properties</figcaption>
+  <figcaption>Fig. Ordering and construction of a property sort key</figcaption>
 </figure>
 </div>
 
@@ -590,10 +594,12 @@ and packages. And since it's no longer obligatory, having that is not a pr
 Let's consider that you are distributing a package with three CUDA variants,
 and a CPU variant. The published wheels are, in order of preference:
 
-<pre>torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu129.whl
+```rust
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu129.whl
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu128.whl
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu126.whl
-torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl        # CPU-only</pre>
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl        // CPU-only
+```
 
 Such a setup provides for a graceful fallback. When you are using an older
 CUDA version, the top variants are filtered out and the lower variants are used.
@@ -609,11 +615,13 @@ CUDA version).
 
 This is where the null variant comes in. Consider the following instead:
 
-<pre>torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu129.whl
+```rust
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu129.whl
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu128.whl
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu126.whl
-torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-00000000.whl  # CPU-only
-torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl           # CUDA + CPU</pre>
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-00000000.whl  // CPU-only
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl           // CUDA + CPU
+```
 
 What we added here is a null variant, with label `00000000`. Since it has
 no properties, it is always supported — that is, as long as variants
@@ -625,7 +633,167 @@ CUDA and CPU support.
 
 Does it really matter? Well, that depends on how you look at it. While wheel
 variant support remains early, backwards compatibility is going to be important.
-And providing a different fallback may mean the difference between a 175 MiB
-CPU-only wheel, and a 850 MiB CUDA wheel.
+And providing a different fallback may mean the difference between installing
+a 175 MiB CPU-only wheel, and a 850 MiB CUDA wheel installed on a system
+without the CUDA runtime.
+
+## Multiple property values
+
+So far, we have discussed wheels that have a single value for every feature
+used. Say, a wheel that is optimized for a particular CPU architecture version,
+or has one CUDA version lower bound and one upper bound. The key point here
+is that for a variant to be compatible, all its features had to have a value
+compatible with the system in question. This logic is conjunctive — representing
+logical `AND`. You need to have a supported CPU, and a CUDA version that is
+not older than the lower bound, and a CUDA version (the same one) that is older
+than the upper bound.
+
+A interesting case for this logic are CPU instruction sets. Each
+instruction set is represented by a separate feature, with a single possible
+value of `on`. If the user's CPU supports a given instruction set, it supports
+said `on` value; if it doesn't, it has no compatible values. A wheel requiring
+said instruction set includes this property with the `on` value.
+And for the wheel to be compatible, all its features — in other words, all
+listed instruction sets — need to be supported.
+
+Now consider a converse example: you are building a CUDA-enabled package
+that supports half a dozen series of GPUs. You don't want to build a separate
+wheel for every GPU — that would be a lot of wheels with significant overlap.
+You want to build a single wheel and declare it compatible with multiple GPUs.
+Conjunctive logic can't work here — you need disjunction, an `OR`.
+
+Specifically for this use case, we introduced the ability to specify multiple
+values for the same feature — with the assumption that at least one value
+must be supported for the wheel to be compatible. Consider the following
+property list:
+
+```rust
+nvidia :: sm_arch :: 70_real
+nvidia :: sm_arch :: 75_real
+nvidia :: sm_arch :: 80_real
+nvidia :: sm_arch :: 86_real
+nvidia :: sm_arch :: 90_real
+nvidia :: sm_arch :: 100_real
+nvidia :: sm_arch :: 120_real
+nvidia :: sm_arch :: 120_virtual
+```
+
+It is equivalent to the following build parameter:
+
+```sh
+TORCH_CUDA_ARCH_LIST="7.0;7.5;8.0;8.6;9.0;10.0;12.0+PTX"
+```
+
+Note the reversal of semantics. Previously, the wheel did declare what
+it _required_, and the plugin would indicate what the system _provided_.
+Here, we are seeing the exact opposite: the wheel declares what it _supports_,
+and the plugin declares what support the system _requires_. Your system has
+some GPU and therefore _requires_ its support in the package. If said architecture
+is on the list of *supported* architectures, the wheel is considered compatible;
+if it is not, it is rejected.
+
+Of course, the specification is far from providing an exhaustive boolean logic
+that could support all possible use cases. For example, you can't express
+a wheel that provides _both_ CUDA and ROCm support, and that would be compatible
+with a system that has either CUDA or ROCm capability, but incompatible
+with a system without either. Nor can you express that your package has
+two algorithms using different sets of instruction sets, but requires at least
+one of them. However, our goal so far was to keep things simple whenever
+possible, and focus on the most likely use cases. And in the end, it is always
+possible (though not necessarily recommended) to create a dedicated provider
+plugin to cover the specific use case.
+
+So, at this point, different features are conjunctive (_all_ of them must
+be supported), but different values within a single feature are disjunctive
+(_at least one_ of them must be supported).
 
 ## Static and dynamic plugins
+
+So far we have been assuming that the lists of allowed features and their
+values are roughly fixed. A particular version of the `x86_64` plugin implements
+the properties for a certain range of architecture levels: say, `v4` and lower.
+We can't predict what `v5` will be like, and a new plugin version will need
+to be released to introduce its support. However, this is not a huge problem,
+as new architecture levels are introduced relatively rarely. This is what
+a static plugin is — one where the list of all valid property values
+is supposed to remain the same within a single version, and therefore the list
+ofsupported properties is independent of what packages are being installed.
+
+Now let's consider a different use case: we need to express a dependency
+on a runtime whose version changes frequently, and is not predictable.
+Said version could be `1.0.0`, `1.2.2`, `2.0.10`, `2.3.99`… We're facing
+two problems here. Firstly, the list of all valid values can be very long
+(to be precise, infinitely long). Secondly, we can't fully predict what
+the future versions will be.
+
+Let's start with the lower bound. If the system has version `1.2.2` installed,
+the plugin needs to be declare compatibility with wheels that have a lower bound
+no higher than that: `>=1.2.2`, `>=1.2.1`, `>=1.2.0`… but what is the highest
+value of `>=1.1.n` that we need to support? And what if sometimes upstream
+releases four-component versions, like `1.2.2.1`? With upper bound, things
+get even worse. Here we actually have to declare compatibility with versions
+higher than the current version: `<1.2.4`, `<1.2.5`… ad infinitum.
+
+<div style={{ textAlign: "center" }}>
+<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+  <img src="/posts/python-wheels-from-tags-to-variants/variant-flow-dynamic.png"
+    width="683" height="486" alt="A flow chart showing interaction between
+wheel-related software and dynamic provider plugins. A build backend (such
+as flit_core, hatchling, meson-python…) produces a Wheel Variant, which is
+then consumed by a wheel installer (pip, uv, pdm…). Alongside them, variant
+providers (CUDA, ROCm, x86_64, AArch64, BLAS / LAPACK, MPI, OpenMP…) are shown.
+Build backends communicate with them to validate variants, wheras installers
+do to verify whether the wheels are compatible." />
+  <figcaption>Fig. Interaction between wheel software and dynamic provider plugins</figcaption>
+</figure>
+</div>
+
+Dynamic plugins were supposed to address precisely this problem. The difference
+is that a dynamic plugin does not return a fixed list of all supported
+properties for a given machine, but rather directly determines which
+of the available wheel variants are compatible. This implies that there
+does not need to exist a fixed list of valid properties. Instead, the plugin
+can document a specific format for the property value, and process it
+algorithmically to determine its compatibility.
+
+Let's revisit the version problem. The thing is: we don't have to predict
+versions anymore! Instead, we document that the lower bound value
+and the upper bound value both are version strings. When building the wheel,
+the plugin verifies that valid version strings are passed. When installing
+wheels, it parses the values as version strings and compares them
+to the installed version. In fact, we can do even better: instead of separate
+lower and upper bounds, we can have a single property that is a version
+specifier, say, `>=1.2.2,<3,!=1.7.4,!=1.8.1`. This makes it both more flexible
+and more readable.
+
+So, dynamic plugins can do all that static plugins can do, and more.
+Why do we need two plugin classes then? Why can't we just call it a day,
+say that we've found a better design and go with it? The advantage
+of static plugins is that they are, well, static. Their behavior does not depend
+on the package being installed, they don't need to know what variants
+are available and therefore their results can be reused easily. You just run
+the plugin, snapshot the result and you can reuse it for any package you
+install.
+
+This becomes especially important when we get around to discuss security.
+As I've mentioned earlier, querying a variant plugin effectively means
+installing packages and executing their code immediately. One clear
+way to circumvent this is to use a frozen plugin output instead of running
+the plugin locally. Say, you could snapshot the output from another environment
+with a compatible setup, or even create one manually.
+
+However, this can only
+work if the output is either fixed or reasonably predictable. You can snapshot
+a limited length list of compatible CPU architecture versions, but you can't
+snapshot all possible version specifiers. With dynamic plugins, the best you
+can do is prepare the output for a predefined set of possible values (possibly
+grabbed from existing wheels) and recheck whenever you find new values.
+
+In fact, this problem is considered significant enough that the [nvidia provider
+plugin created for the demo](https://github.com/wheelnext/nvidia-variant-provider)
+was reverted to being a static plugin, with the possibility of creating
+a separate dynamic plugin if the need arises in the future. Even though it means
+that it effectively guesses future versions of CUDA runtime! Fortunately,
+they are reasonably predictable.
+
+## Summary, and the future
