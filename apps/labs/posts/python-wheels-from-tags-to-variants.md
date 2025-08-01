@@ -226,7 +226,7 @@ and for projects like PyTorch won't fit within PyPI's size limits.
 ## Plugins to the rescue!
 
 As I have already pointed out, the solutions putting variant selection entirely
-within the package manager weren't very flexible. They could really work only
+within the package manager weren't very flexible. They could really only work
 if the list of valid variants is largely fixed, or at least predictable.
 To sidestep this limitation, we need a more distributed architecture, one where
 each package can independently devise how to select between its variants.
