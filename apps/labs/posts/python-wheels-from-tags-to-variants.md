@@ -6,10 +6,10 @@ description: 'The story of how the Python Wheel Variants were developed'
 category: [Packaging]
 featuredImage:
   src: /posts/python-wheels-from-tags-to-variants/featured.jpeg
-  alt:
+  alt: A black steam train pulling a olive-colored carr in reverse. It has cool wheels with red spikes. Photograph by the author.
 hero:
   imageSrc: /posts/python-wheels-from-tags-to-variants/hero.jpeg
-  imageAlt:
+  imageAlt: A black steam train pulling a olive-colored carr in reverse. It has cool wheels with red spikes. Photograph by the author.
 ---
 
 # Python Wheels: from Tags to Variants
