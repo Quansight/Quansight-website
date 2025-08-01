@@ -37,9 +37,11 @@ However, not all new use cases could be handled effectively within
 the framework of tags. The advent of GPU-backed computing made distinguishing
 different acceleration frameworks such as CUDA or ROCm important.
 As many distributions have set baselines for their binary packages
-to x86-64 v2, Python packages also started looking at the opportunity
+to [x86-64-v2 microarchitecture
+level](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels),
+Python packages also started looking at the opportunity
 to express the same requirement. In fact, the [manylinux_2_34 images are
-blocked on x86-64 v2 becoming the default compiler
+blocked on x86-64-v2 becoming the default compiler
 target](https://github.com/pypa/manylinux/issues/1585#issuecomment-3094469339).
 Numerical libraries support different
 BLAS/LAPACK, MPI, OpenMP providers — and wish to enable the users to choose
@@ -50,11 +52,15 @@ to tags needs to be implemented in all installers and package-related
 tooling separately, making the adoption difficult.
 
 Facing these limitations, software vendors employed different solutions to work
-around the lack of an appropriate mechanism. Eventually,
-as part of the [WheelNext](https://wheelnext.dev/)
-initiative, we have started working on a more robust solution: Variant
-Wheels. In this blog post, I would like to tell the story behind
-the solution that emerged.
+around the lack of an appropriate mechanism. Eventually, the [WheelNext](https://wheelnext.dev/)
+took up the challenge to design a more robust solution. For the past 6 months we have
+been working hard on “wheel variants”, in callobration
+with [Astral](https://astral.sh/), [NVIDIA](https://www.nvidia.com/)
+and [PyTorch](https://pytorch.org/) release team. This worked resulted
+in today's [PyTorch 2.8 release](TODO) with experimental variant wheels,
+and a corresponding experimental [variant-capable release of uv package
+manager](TODO). The user-facing features you can try out today are described
+in TODO. The blog post tells the story of how they came into being.
 
 ## The limits of platform compatibility tags
 
@@ -91,20 +97,22 @@ conventions:
   in the version compatible with CPython 3.11 or newer (`cp311`).
   It is compatible with GNU/Linux systems with glibc 2.34 or newer,
   on x86-64 architecture (all that encoded in the `manylinux_2_34_x86_64`
-  platform tag). This is the primary wheel targeting most of the CPython
-  versions.
+  platform tag). This is the wheel that will be used on most of the CPython
+  versions on the given platform.
 
 - `pp311-pypy311_pp73-manylinux_2_34_x86_64` designates a wheel built
-  for PyPy 3.11 (`pp311`) versions using `pypy311_pp73` ABI on the same
-  platform. Wheels like these can be used for Python implementations that
-  do not support the stable ABI, such as PyPy or freethreading CPython
-  versions.
+  for PyPy 3.11 (`pp311`) versions using `pypy311_pp73` ABI on the same
+  platform. Wheels like these are targeting specific Python interpreter
+  versions. They are used when the stable ABI is not used. Since some
+  implementations, such as PyPy or the freethreading CPython builds,
+  do not support the stable ABI, these are the wheels providing support
+  for them.
 
 - `py3-none-any` designates a wheel compatible with any Python 3.x
   version, on any platform. It means a pure Python wheel, hence for pure Python
   packages this is the only wheel needed. It can also be provided for packages
   with optional extension modules,
- as a fallback when there is no other wheel compatible  with the user's system.
+  as a fallback when there is no other wheel compatible with the user's system.
 
 You can find some unorthodox uses too, such as:
 
@@ -137,9 +145,9 @@ and comparing the tags found in wheels to that list. For example,
 on a GNU/Linux system with Python 3.14 and glibc 2.41, this means almost 1300
 combinations. While this is not that much, once we start adding multiple
 additional suffixes, the number of possible combinations is going to explode.
-Of course, this isn't really a blocker — it is entirely possible to rewrite
-the logic to be more algorithmic and avoid generating all possible combinations.
-However doing that would be a significant change to the design of `packaging`.
+Of course, this isn't really a blocker — it is entirely possible to rewrite
+the logic to be more algorithmic and avoid generating all possible combinations.
+However, this is infeasible in practice.
 
 Second, tags are implemented entirely within the package manager. This implies
 that for every new set of tags, all package managers must implement them,
@@ -214,7 +222,9 @@ manual action from the user.
 
 Other variations of the same solution are possible. Rather than using plugins,
 one could publish different package variants using separate package names
-and use a metapackage with extras to select between them. Or simply ask the user
+and use a metapackage with extras to select between them.
+[TODO: look at CuPy]
+Or simply ask the user
 to install the correct package. However, this has the unfortunate side effect
 that once multiple different variants end up being installed, they may overwrite
 one another.
@@ -270,7 +280,6 @@ these features in namespaces makes it possible to organize them logically
 and avoid name collisions. Consider the following example.
 
 <figure>
-<figcaption>Listing 1. Example wheel variant properties</figcaption>
 
 ```rust
 nvidia :: cuda_version_lower_bound :: 12.6
@@ -279,6 +288,7 @@ x86_64 :: level :: v3
 x86_64 :: sha_ni :: on
 ```
 
+<figcaption>Listing 1. Example wheel variant properties</figcaption>
 </figure>
 
 Yes, the syntax was inspired by [trove classifiers](https://pypi.org/classifiers/)!
@@ -292,15 +302,15 @@ namespace) and one representing x86_64 CPU properties (`x86_64` namespace).
 <figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <img src="/posts/python-wheels-from-tags-to-variants/property-examples.png"
     width="761" height="313" alt="A diagram showing example properties from two plugins.
-The nvidia plugin provides 'cuda_version_lower_bound' with values of 12.8, 12.7, 12.6, 12.5, …
-and 'cuda_version_upper_bound' with values of …, 12.12, 12.11, 12.10, 12.9. The x86_64 plugin
+The 'nvidia' plugin provides 'cuda_version_lower_bound' with values of 12.8, 12.7, 12.6, 12.5, …
+and 'cuda_version_upper_bound' with values of …, 12.12, 12.11, 12.10, 12.9. The 'x86_64' plugin
 provides a level property with values of v3, v2 and v1, and a bunch of instruction set
 properties named 'aes', 'pclmuldqd', 'rdseed', 'sha_ni' — all of them having the value 'on'." />
   <figcaption>Fig. 5. Example supported properties reported by plugins</figcaption>
 </figure>
 </div>
 
-The CUDA plugin detects the local CUDA installation and determines which version
+The `nvidia` provider detects the local CUDA installation and determines which version
 is installed. Then, it transforms this version into set of compatible
 constraints that can be used to determine whether a given wheel variant
 can be installed — and if multiple variants fit, which one should be used.
@@ -310,7 +320,7 @@ is not higher than that are installable — but a wheel built specifically
 for CUDA 12.8 will be preferred. So we support wheels with a lower bound
 of 12.8, 12.7, 12.6, 12.5… And the upper bound is handled in a similar way.
 
-The x86_64 plugin detects the local CPU and determines what instruction sets
+The x86_64 provider detects the local CPU and determines what instruction sets
 it supports. Then it returns all supported x86_64 architecture levels,
 and all supported instruction sets. So if you have a CPU which supports x86-64-v3,
 it would return v3, v2 and v1 as compatible, plus a long list of supported
@@ -326,11 +336,11 @@ not a good fit to be included in the filename.
 
 Fetching all the wheels is not an option — as they can be quite large. Now,
 technically the Zip format allows for relatively optimal partial fetching,
-so we could just fetch the relatively small amount of data related to variant
+so we could just fetch the relatively small amount of data related to variant
 properties. Still, fetching data from a possibly large number of wheel
 variants could hardly be considered an optimal solution.
 
-Variant wheels do need unique filenames though, and at the same
+Variant wheels do need unique filenames though, and at the same
 time we wanted to avoid making them too long — as some existing wheel filenames
 are already reaching the length at which they are causing issues for less
 permissive systems.
@@ -400,13 +410,14 @@ being merged into a single `variants.json`.
 At this point, it is also worth noting that as we realized that the provider
 information can change across package versions, we should replace a single
 `variants.json` file with per-version `{distribution}-{version}-variants.json`
-files, whose names match the initial parts of wheel filenames.
+files, whose names match the initial parts of wheel filenames.
 
 Another useful advantage of statically defining the variant mapping is that
-it enables more arbitrary variant labels — the identifiers found in wheel
+it enables more arbitrary variant labels — the identifiers found in wheel
 filenames. Since they no longer needed to be predictable from variant
-properties, we could permit custom labels, and just store those inside
-`variants.json` instead of the hash.
+properties, we could permit custom labels, and just store those inside
+`variants.json` instead of the hash. For example, the wheel could be named
+`-cu126.whl` rather than `-3f0459a2.whl`.
 
 ## The opt-in/opt-out debate, plugin installation and discovery
 
@@ -444,15 +455,16 @@ need to install have conflicting provider dependencies.
 At the same time, plugin discovery was done via [entry
 points](https://packaging.python.org/en/latest/specifications/entry-points/).
 They were quite convenient throughout the development and testing, since they
-enabled us to discover and query installed plugins without having to actually
-interact with any source trees or wheels. However, others found this implicit
-discovery opaque.
+enabled variantlib to discover and query all the plugins installed
+in the development environment, without having to actually specify them
+in any way. However, it was pointed out that this a more explicit
+and self-contained model would be preferable.
 
 The next step was therefore to switch to a more explicit, opt-out design.
 We have introduced provider information in the variant information pipeline,
 largely inspired by PEP 517, with a `requires` key specifying how to install
 the variant provider, and a `plugin-api` key specifying how to use it.
-Over time, we also added an `enable-if` key to support installing plugins
+Over time, we also added an `enable-if` key to support installing plugins
 only in specific environments (for example, the x86-64 plugin is only needed
 on x86-64 systems), and an `optional` key to make some plugins opt-in
 (for example, for variants used only in obscure configurations that should
@@ -464,8 +476,8 @@ variant sorting. Let's take a closer look at it next.
 
 ## Variant sorting
 
-Variant providers have two main purposes in aiding installers. First, they
-are used to filter variants — tell which of the wheels are supported. Second,
+Variant providers have two main purposes in aiding installers. First, they
+are used to filter variants — tell which of the wheels are supported. Second,
 they are used to sort variants — rank the compatible variants from the most desirable
 to the least.
 
@@ -474,22 +486,22 @@ for different CPU baselines, you sort them from the highest to the lowest,
 and therefore install the most optimized variant available. If you have variants
 for different lower CUDA runtime bounds, you choose the one that is the highest
 — say, if you have CUDA 12.8, you'd rather take a `>=12.8,<13` wheel
-than a `>=12.6,<13` one, as it will likely have improved performance.
+than a `>=12.6,<13` one, as it will likely have improved performance.
 And if you have two wheels built for the same CUDA version, but one of them
 also carries CPU optimizations, you'd take the latter.
 
 The problems start when you have two different wheels that cannot be trivially
 compared — say, a CUDA-optimized wheel and a CPU-optimized wheel. You may have
 a gut feeling that CUDA wins, but this is not a general rule. Things become
-even harder when you have to choose between a CUDA and a ROCm wheel (say
-on a machine with an NVIDIA and an AMD GPU installed).
+even harder when you have to choose between a CUDA and a ROCm wheel (say,
+on a machine with both an NVIDIA and an AMD GPU installed).
 
 <div style={{ textAlign: "center" }}>
 <figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <img src="/posts/python-wheels-from-tags-to-variants/sorted-property-examples.png"
     width="761" height="313" alt="A diagram showing example sorted properties from two plugins:
 'nvidia' plugin with index 1 and 'x86_64' plugin with index 2.
-The nvidia plugin provides 'cuda_version_lower_bound' (index 1.1) whose subsequent values
+The 'nvidia' plugin provides 'cuda_version_lower_bound' (index 1.1) whose subsequent values
 have indices 1.1.1, 1.1.2 and so on; and 'cuda_version_upper_bound' with indices growing to 1.2.n.
 The x86_64 plugin provides a 'level' property with index 2.1, whose values have indices 2.1.1,
 2.1.2 and 2.1.3. It also defines a instruction set properties with indices 2.2,
@@ -506,14 +518,13 @@ Then, the features themselves are sorted within every namespace —
 e.g. indicating that a specific architecture version is more important
 than an individual feature, so you'd rather take an x86-64 v3 wheel with
 no additional instruction sets declared over one declaring AVX support
-but using x86-64 v2. As the next step, namespaces are ordered. This way,
+but using x86-64-v2. As the next step, namespaces are ordered. This way,
 we reach the point where every property has a corresponding index in the general
 order: determined by its namespace, feature name and value ordering.
 
 Let's return to our initial example and add sort keys to it.
 
 <figure>
-<figcaption>Listing 2. Example wheel variant properties with corresponding sort keys</figcaption>
 
 ```rust
 nvidia :: cuda_version_lower_bound :: 12.6  // 1.1.3
@@ -522,6 +533,7 @@ x86_64 :: level :: v3                       // 2.1.1
 x86_64 :: sha_ni :: on                      // 2.3.1
 ```
 
+<figcaption>Listing 2. Example wheel variant properties with corresponding sort keys</figcaption>
 </figure>
 
 We sort variants according to the properties they have. While this may
@@ -581,6 +593,8 @@ However, plugins are scoped to themselves and can only order feature names
 and values. They cannot provide namespace ordering — as that would effectively
 mean one plugin deciding how important another plugin is.
 
+[TODO: pyproject.toml snippet with priorities]
+
 This leaves us with two possibilities: either the package author or the user
 needs to define namespace ordering. Originally, we went with the latter idea —
 after all, the users know best whether they prefer CUDA or ROCm, or perhaps CPU
@@ -588,7 +602,7 @@ optimization. However, this actually implied that the user had to jump through
 the hoops of configuring variant usage first, and once again things could not
 work out of the box. So we went with the next best thing: requiring package
 configuration to specify namespace ordering; after all, package authors
-are also in good position to specify which variants are the most beneficial.
+are also in good position to specify which variants are the most beneficial.
 
 However, no reason to stop at namespace. After all, a specific package may
 want to point out, say, that their AES-NI variant is more beneficial than
@@ -607,7 +621,6 @@ Let's consider that you are distributing a package with three CUDA variants,
 and a CPU variant.
 
 <figure>
-<figcaption>Listing 3. Example wheel variant filenames, with a fallback regular wheel, in order of preference</figcaption>
 
 ```rust
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu129.whl
@@ -616,6 +629,7 @@ torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu126.whl
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl        // CPU-only
 ```
 
+<figcaption>Listing 3. Example wheel variant filenames, with a fallback regular wheel, in order of preference</figcaption>
 </figure>
 
 Such a setup provides for a graceful fallback. When you are using an older
@@ -623,17 +637,16 @@ CUDA version, the top variants are filtered out and the lower variants are 
 If you don't have a compatible CUDA runtime at all, the fallback CPU wheel
 is used. So far, so good.
 
-However, consider now a system with an older package manager that does not
-support variants. Independently of the presence of CUDA runtime, all variant
+However, consider a system with an older package manager that does not
+support variants. Independently of the presence of CUDA runtime, all variant
 wheels are ignored there, and the CPU-only fallback is installed. However,
 this is not the most optimal solution. Prior to introducing variants,
-the published wheels may have featured both CUDA and CPU support (even if for a single
+the published wheels may have featured both CUDA and CPU support (even if for a single
 CUDA version).
 
 This is where the null variant comes in. Consider the following instead.
 
 <figure>
-<figcaption>Listing 4. Example wheel variant filenames, with a null variant and a fallback regular wheel, in order of preference</figcaption>
 
 ```rust
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu129.whl
@@ -643,6 +656,7 @@ torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-00000000.whl  // CPU-only
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl           // CUDA 12.6 + CPU
 ```
 
+<figcaption>Listing 4. Example wheel variant filenames, with a null variant and a fallback regular wheel, in order of preference</figcaption>
 </figure>
 
 What we added here is a null variant, with label `00000000`. Since it has
@@ -670,7 +684,7 @@ logical `AND`. You need to have a supported CPU, and a CUDA version that is
 not older than the lower bound, and a CUDA version (the same one) that is older
 than the upper bound.
 
-An interesting case for this logic are CPU instruction sets. Each
+An interesting case for this logic are CPU instruction sets. Each
 instruction set is represented by a separate feature, with a single possible
 value of `on`. If the user's CPU supports a given instruction set, it supports
 said `on` value; if it doesn't, it has no compatible values. A wheel requiring
@@ -678,7 +692,7 @@ said instruction set includes this property with the `on` value.
 And for the wheel to be compatible, all its features — in other words, all
 listed instruction sets — need to be supported.
 
-Now consider the opposite case: e.g., you are building a CUDA-enabled package
+Now consider the opposite case: e.g., you are building a CUDA-enabled package
 that supports half a dozen series of GPUs. You don't want to build a separate
 wheel for every GPU — that would be a lot of wheels with significant overlap.
 You want to build a single wheel and declare it compatible with multiple GPUs.
@@ -690,7 +704,6 @@ must be supported for the wheel to be compatible. Consider the following
 property list.
 
 <figure>
-<figcaption>Listing 5. Example list of properties with multiple values for a single feature</figcaption>
 
 ```rust
 nvidia :: sm_arch :: 70_real
@@ -703,17 +716,18 @@ nvidia :: sm_arch :: 120_real
 nvidia :: sm_arch :: 120_virtual
 ```
 
+<figcaption>Listing 5. Example list of properties with multiple values for a single feature</figcaption>
 </figure>
 
-It is the set of variant values for `sm_arch` you'd get for the following build parameter when building PyTorch:
+It is the set of variant values for `sm_arch` you'd get for the following build parameter when building PyTorch:
 
 <figure>
-<figcaption>Listing 6. Setting target GPU architectures for a PyTorch build</figcaption>
 
 ```sh
 TORCH_CUDA_ARCH_LIST="7.0;7.5;8.0;8.6;9.0;10.0;12.0+PTX"
 ```
 
+<figcaption>Listing 6. Setting target GPU architectures for a PyTorch build</figcaption>
 </figure>
 
 Note the reversal of semantics. Previously, the wheel did declare what
@@ -749,19 +763,23 @@ to be released to introduce its support. However, this is not a huge proble
 as new architecture levels are introduced relatively rarely. This is what
 a static plugin is — one where the list of all valid property values
 is supposed to remain the same within a single version, and therefore the list
-of supported properties is independent of what packages are being installed.
+of supported properties is independent of what packages are being installed.
 
 Now let's consider a different use case: we need to express a dependency
 on a runtime whose version changes frequently, and is not predictable.
-Said version could be `1.0.0`, `1.2.2`, `2.0.10`, `2.3.99`… We're facing
-two problems here. First, the list of all valid values can be very long
-(to be precise, infinitely long). Second, we can't fully predict what
+Said version could be `1.0.0`, `1.2.2`, `2.0.10`, `2.3.99`… The runtime
+in question does not use semantic versioning or another version scheme clearly
+indicating compatibility, so we may need to declare arbitrary version ranges.
+We're facing
+two problems here. First, the list of all valid values can be very long
+(to be precise, infinitely long). Second, we can't fully predict what
 the future versions will be.
 
 Let's start with the lower bound. If the system has version `1.2.2` installed,
-the plugin needs to be declare compatibility with wheels that have a lower bound
-no higher than that: `>=1.2.2`, `>=1.2.1`, `>=1.2.0`… but what is the highest
-value of `>=1.1.n` that we need to support? And what if sometimes upstream
+the plugin needs to declare compatibility with wheels that have a lower bound
+no higher than that: `>=1.2.2`, `>=1.2.1`, `>=1.2.0`… but then we'd need to list
+all the possible `1.1.x` versions — and should be the highest value of `x`
+that we need to account for? And what if sometimes upstream
 releases four-component versions, like `1.2.2.1`? With upper bound, things
 get even worse. Here we actually have to declare compatibility with versions
 higher than the current version: `<1.2.4`, `<1.2.5`… ad infinitum.
@@ -774,8 +792,8 @@ wheel-related software and dynamic provider plugins. A build backend (such
 as flit_core, hatchling, meson-python…) produces a Wheel Variant, which is
 then consumed by a wheel installer (pip, uv, pdm…). Alongside them, variant
 providers (CUDA, ROCm, x86_64, AArch64, BLAS / LAPACK, MPI, OpenMP…) are shown.
-Build backends communicate with them to validate variants, wheras installers
-do to verify whether the wheels are compatible." />
+Build backends communicate with them to validate variants, whereas installers
+do that to verify whether the wheels are compatible." />
   <figcaption>Fig. 9. Interaction between wheel software and dynamic provider plugins</figcaption>
 </figure>
 </div>
@@ -807,7 +825,7 @@ are available and therefore their results can be reused easily. You just run
 the plugin, snapshot the result and you can reuse it for any package you
 install.
 
-This becomes especially important when we get around to discussing security.
+This becomes especially important when we get around to discussing security.
 As I've mentioned earlier, querying a variant plugin effectively means
 installing packages and executing their code immediately. One clear
 way to circumvent this is to use a frozen plugin output instead of running
@@ -864,7 +882,6 @@ in the `build-system.requires` section of `pyproject.toml` to specify which
 plugins needed to be installed. It looked somewhat like:
 
 <figure>
-<figcaption>Listing 7. Example `pyproject.toml` with variant provider plugins selected via environment markers</figcaption>
 
 ```toml
 [build-system]
@@ -876,6 +893,7 @@ requires = [
 ]
 ```
 
+<figcaption>Listing 7. Example `pyproject.toml` with variant provider plugins selected via environment markers</figcaption>
 </figure>
 
 These markers meant that when the variant wheel was built with a property
@@ -896,7 +914,6 @@ now could instead use them to apply dependencies conditionally to the selected
 variant.
 
 <figure>
-<figcaption>Listing 8. Example `pyproject.toml` dependency string with variant-based environment markers</figcaption>
 
 ```toml
 dependencies = [
@@ -919,6 +936,7 @@ dependencies = [
 ]
 ```
 
+<figcaption>Listing 8. Example `pyproject.toml` dependency string with variant-based environment markers</figcaption>
 </figure>
 
 There are three environment markers available for use: `variant_properties`
@@ -935,7 +953,7 @@ The discussion around environment markers surfaced more interesting problems.
 For a start, it was pointed out that there could be two different types
 of markers: markers matching the properties of the installed wheel (as outlined
 previously), and markers matching the current system state. For example,
-the latter could be used to install the CUDA plugin if CUDA is available without
+the latter could be used to install the `nvidia` plugin if CUDA is available without
 actually having to publish a separate CUDA variant of the main package (think
 JAX). However, this is a recent development and it has not been pursued yet.
 
@@ -1054,7 +1072,7 @@ the discussion, new use cases and new problems will emerge. This does
 not necessarily mean that we will have to go back to the proverbial drawing
 board. It is entirely possible that some of these properties can be solved
 within the existing framework, much like we managed to implement a good enough
-CUDA plugin without having to introduce a dynamic plugin, or that they will
+plugin for CUDA without having to introduce a dynamic plugin, or that they will
 turn out not to be worth the added complexity. It is also possible that
 some of the existing features will be removed.
 
