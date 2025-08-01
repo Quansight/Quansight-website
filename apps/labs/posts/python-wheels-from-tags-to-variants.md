@@ -900,10 +900,8 @@ These markers meant that when the variant wheel was built with a property
 in the listed namespace, the relevant provider plugin would be installed
 in the build environment, and therefore become available to the build backend.
 However, this solution did not last long. It was quite problematic to implement
-properly, since [pypa/build](https://pypi.org/project/build/) deferred evaluating
-environment markers to the installer, which implied that we would end up
-with quite a confusing interface — with environment markers in command-line
-arguments processed differently than these coming from packages being installed.
+given the limited interface between [pypa/build](https://pypi.org/project/build/)
+and the installers used by it.
 Besides, provider plugins were also needed to install variant wheels, so it made
 more sense to separate them, as described earlier.
 
@@ -962,7 +960,8 @@ potential conflicts. For example, since technically a wheel can have multiple
 values for a property, you could end up pulling in two or three versions
 of `nvidia-cuda-runtime` simultaneously. This particularly causes problems
 when creating universal lockfiles — since they need to account for all valid
-combinations of environment markers.
+combinations of environment markers. However, this is no different from extras,
+and therefore it should be possible to solve it in a similar way.
 
 ## Let's talk about security
 
@@ -988,14 +987,13 @@ one of its dependencies can be attacked in the same manner." />
 The issue can be particularly serious, considering that in some setups
 package installation is done with elevated privileges, in order to make
 them available to all users. This makes variant providers a tempting target
-for malicious actors. Three new kinds of supply chain attacks become possible:
+for malicious actors. Two new kinds of supply chain attacks become possible:
 
-1. Injecting malicious code into a new version of an existing variant provider.
+1. Injecting malicious code into a new version of an existing variant provider,
+   or it's (possibly indirect) dependency.
 
-2. Injecting malicious code into a new version of the variant provider's
-   (possibly indirect) dependency.
-
-3. Adding a new variant provider that itself is malicious.
+2. Adding a new variant provider to the package, with the variant provider
+   being malicious.
 
 There are many ways in which the risks can at least be partially mitigated.
 I have already mentioned the possibility of using frozen variant provider output
