@@ -2,7 +2,7 @@
 title: 'Python Wheels: from Tags to Variants'
 published: August 1, 2025
 authors: [michal-gorny]
-description: 'The story of how the Python Wheel Variants were developed'
+description: 'The story of how the Python Wheel Variants design was developed'
 category: [Packaging]
 featuredImage:
   src: /posts/python-wheels-from-tags-to-variants/featured.jpeg
@@ -46,11 +46,11 @@ BLAS/LAPACK, MPI, OpenMP providers — and wish to enable the users to choose
 the build using their desired provider.
 While technically tags could be bent to facilitate all these use cases,
 they would grow quite baroque. Perhaps most importantly, every change
-to tags need to be implemented in all installers and package-related
+to tags needs to be implemented in all installers and package-related
 tooling separately, making the adoption difficult.
 
 Facing these limitations, software vendors employed different solutions to work
-around the lack of appropriate mechanism. Eventually,
+around the lack of an appropriate mechanism. Eventually,
 as part of the [WheelNext](https://wheelnext.dev/)
 initiative, we have started working on a more robust solution: Variant
 Wheels. In this blog post, I would like to tell the story behind
@@ -60,14 +60,13 @@ the solution that emerged.
 
 Platform compatibility tags are pretty powerful and cover a surprisingly wide
 range of use cases, perhaps even beyond what they were initially meant
-to support. Each wheel features three Platform Tags:
+to support. Each wheel features three platform tags:
 
-- Python tag specifying the required Python implementation and version
+- A Python tag specifying the required Python implementation and version
 
-- ABI tag specifying the required Python implementation ABI (usually used with
-  extensions)
+- An ABI tag specifying the required Python implementation ABI for extension modules in the package
 
-- Platform tag specifying the compatible platform (usually operating system
+- A platform tag specifying the compatible platform (usually operating system
   and CPU architecture)
 
 <div style={{ textAlign: "center" }}>
@@ -80,7 +79,7 @@ tag list 'py3', 'py312', 'cp311', 'pp311', 'cp313'. The examples for the second
 tag list 'none', 'abi3', 'pypy311_pp73' and 'py313t'. The examples for the third
 tag list 'macosx_14_0_arm64', 'any', 'manylinux_2_34_x86_64', 'musllinux_1_2_aarch64'
 and 'win_amd64'." />
-  <figcaption>Fig. 1. Different tag combinations</figcaption>
+  <figcaption>Fig. 1. Different tag combinations one can encounter in practice</figcaption>
 </figure>
 </div>
 
@@ -96,15 +95,16 @@ conventions:
   versions.
 
 - `pp311-pypy311_pp73-manylinux_2_34_x86_64` designates a wheel built
-  for PyPy3.11 (`pp311`) versions using `pypy311_pp73` ABI on the same
+  for PyPy 3.11 (`pp311`) versions using `pypy311_pp73` ABI on the same
   platform. Wheels like these can be used for Python implementations that
   do not support the stable ABI, such as PyPy or freethreading CPython
   versions.
 
 - `py3-none-any` designates a wheel compatible with any Python 3.x
-  version, on any platform. It means a pure Python wheel, and it can
-  be provided as a fallback when there is no other wheel compatible
-  with the user's system.
+  version, on any platform. It means a pure Python wheel, hence for pure Python
+  packages this is the only wheel needed. It can also be provided for packages
+  with optional extension modules,
+ as a fallback when there is no other wheel compatible  with the user's system.
 
 You can find some unorthodox uses too, such as:
 
@@ -130,19 +130,20 @@ to existing platforms could be appended to them — say,
 `manylinux_2_28_x86_64_cuda129`, `manylinux_2_28_aarch64_openblas_openmpi`
 and so on. However, there are two major problems with that.
 
-Firstly, the existing [pip](https://pypi.org/project/pip/) code, based
+First, the existing [pip](https://pypi.org/project/pip/) code, based
 on the [packaging](https://pypi.org/project/packaging/) library, relies entirely
 on enumerating all tag combinations compatible with the specific system
 and comparing the tags found in wheels to that list. For example,
 on a GNU/Linux system with Python 3.14 and glibc 2.41, this means almost 1300
 combinations. While this is not that much, once we start adding multiple
 additional suffixes, the number of possible combinations is going to explode.
-Of course, this really isn't a blocker — it is entirely possible to rewrite
-the logic to be more algorithmic and avoid generating all possible combinations.
+Of course, this isn't really a blocker — it is entirely possible to rewrite
+the logic to be more algorithmic and avoid generating all possible combinations.
+However doing that would be a significant change to the design of `packaging`.
 
-Secondly, tags are implemented entirely within the package manager. This implies
+Second, tags are implemented entirely within the package manager. This implies
 that for every new set of tags, all package managers must implement them,
-and then the users must upgrade. And ideally, the tags should be defined in such
+and then their users must upgrade. And ideally, the tags should be defined in such
 a way so that the implementation will be able to determine the support
 for future tags. Otherwise, we're talking about having to update all the package
 managers every time a new CPU or GPU architecture version is defined, or a new
@@ -169,15 +170,15 @@ CUDA 12.8, ROCM 6.3, CPU). Below it provides an install command." />
 </div>
 
 If you enter [PyTorch's “Start Locally”](https://pytorch.org/get-started/locally/)
-document, you are welcomed with a interactive chooser. Once you select
+document, you are welcomed with an interactive chooser. Once you select
 a specific build, operating system and compute platform, you are given
 a specific pip instruction. Most of these instructions include an `--index-url`
 parameter — and that's the answer, different variants of PyTorch wheels
-are published on separate package indexes.
+are published on separate package indexes, rather than on PyPI.
 
 Surely, this isn't the most optimal solution. For a start, it requires manual
 action. In the first place, you need to realize that you can't just
-`pip install torch` and necessarily get what they expect. You need to find
+`pip install torch` and necessarily get what you expect. You need to find
 the instructions, and follow them. And if you wish your PyTorch installation
 to be correctly updated in the future, they also need to make sure to continue
 using the custom index.
@@ -219,13 +220,14 @@ that once multiple different variants end up being installed, they may overwrite
 one another.
 
 Or one can just publish a single package with all possible variants inside —
-except it may end up being huge.
+however that massively increases the wheel sizes, which is very much undesirable
+and for projects like PyTorch won't fit within PyPI's size limits.
 
 ## Plugins to the rescue!
 
 As I have already pointed out, the solutions putting variant selection entirely
 within the package manager weren't very flexible. They could really work only
-if either the list of valid variants was largely fixed or at least predictable.
+if the list of valid variants is largely fixed, or at least predictable.
 To sidestep this limitation, we need a more distributed architecture, one where
 each package can independently devise how to select between its variants.
 This is how we reached an architecture based on plugins.
@@ -248,7 +250,7 @@ While build backends (as defined by [PEP 517]("https://peps.python.org/pep-05
 for selecting and installing wheels, they both defer variant-related tasks
 to external variant providers. These are regular Python packages that can
 be maintained and updated independently of the installers, and therefore
-are able to deal with rapidly developing variant landscape better. Everyone
+are able to deal with the rapidly developing variant landscape better. Everyone
 can create their own provider, and every package can declare which providers
 they precisely need — and installers automatically pull them in as necessary.
 
@@ -310,10 +312,10 @@ of 12.8, 12.7, 12.6, 12.5… And the upper bound is handled in a similar way
 
 The x86_64 plugin detects the local CPU and determines what instruction sets
 it supports. Then it returns all supported x86_64 architecture levels,
-and all supported instruction sets. So if you were running a x86_64 v3 CPU,
+and all supported instruction sets. So if you have a CPU which supports x86-64-v3,
 it would return v3, v2 and v1 as compatible, plus a long list of supported
 instruction set flags that can be used to indicate specific requirements
-above the baseline implied by level.
+above the baseline implied by `level`.
 
 ## From exhaustive enumeration to JSON
 
@@ -324,11 +326,11 @@ not a good fit to be included in the filename.
 
 Fetching all the wheels is not an option — as they can be quite large. Now,
 technically the Zip format allows for relatively optimal partial fetching,
-so we could just fetch the relatively small amount of data related variant
+so we could just fetch the relatively small amount of data related to variant
 properties. Still, fetching data from a possibly large number of wheel
 variants could hardly be considered an optimal solution.
 
-At the same time, variant wheels do need unique filenames, and at the same
+Variant wheels do need unique filenames though, and at the same
 time we wanted to avoid making them too long — as some existing wheel filenames
 are already reaching the length at which they are causing issues for less
 permissive systems.
@@ -385,8 +387,8 @@ objects contains additional 'armv8.2' and 'armv9.0' keys from two other wheels."
 
 This is how we arrived at a three step pipeline: with developers putting
 the baseline variant information in `pyproject.toml`, this information being
-then copied to the wheel itself, along with the information about the wheel's
-variant, and eventually the information from all wheel variants being combined
+then copied to the wheel itself, along with the metadata specifying which variant
+this wheel is, and eventually the information from all wheel variants being combined
 into a single `variants.json`. Over time, we also realized we could make things
 simpler by aligning the structure along all three files. We started with
 a `pyproject.toml` file being transformed into a horrid form of Core Metadata
@@ -398,12 +400,12 @@ being merged into a single `variants.json`.
 At this point, it is also worth noting that as we realized that the provider
 information can change across package versions, we should replace a single
 `variants.json` file with per-version `{distribution}-{version}-variants.json`
-files, whose names match the initial parts of wheel names.
+files, whose names match the initial parts of wheel filenames.
 
 Another useful advantage of statically defining the variant mapping is that
-it enable more arbitrary variant labels — the identifiers found in wheel
+it enables more arbitrary variant labels — the identifiers found in wheel
 filenames. Since they no longer needed to be predictable from variant
-properties, we could permit custom labels, and just store them inside
+properties, we could permit custom labels, and just store those inside
 `variants.json` instead of the hash.
 
 ## The opt-in/opt-out debate, plugin installation and discovery
@@ -443,14 +445,14 @@ At the same time, plugin discovery was done via [entry
 points](https://packaging.python.org/en/latest/specifications/entry-points/).
 They were quite convenient throughout the development and testing, since they
 enabled us to discover and query installed plugins without having to actually
-interact with any source trees or wheels. However, other found this implicit
+interact with any source trees or wheels. However, others found this implicit
 discovery opaque.
 
 The next step was therefore to switch to a more explicit, opt-out design.
 We have introduced provider information in the variant information pipeline,
 largely inspired by PEP 517, with a `requires` key specifying how to install
 the variant provider, and a `plugin-api` key specifying how to use it.
-Over time, we also added a `enable-if` key to support installing plugins
+Over time, we also added an `enable-if` key to support installing plugins
 only in specific environments (for example, the x86-64 plugin is only needed
 on x86-64 systems), and an `optional` key to make some plugins opt-in
 (for example, for variants used only in obscure configurations that should
@@ -462,8 +464,8 @@ variant sorting. Let's take a closer look at it next.
 
 ## Variant sorting
 
-Variant providers have two main purposes in aiding installers. Firstly, they
-are used to filter variants — tell which of the wheels are supported. Secondly,
+Variant providers have two main purposes in aiding installers. First, they
+are used to filter variants — tell which of the wheels are supported. Second,
 they are used to sort variants — rank the compatible variants from the most desirable
 to the least.
 
@@ -472,15 +474,15 @@ for different CPU baselines, you sort them from the highest to the lowest,
 and therefore install the most optimized variant available. If you have variants
 for different lower CUDA runtime bounds, you choose the one that is the highest
 — say, if you have CUDA 12.8, you'd rather take a `>=12.8,<13` wheel
-than a `>=12.6,<13` one, as it is more likely to benefit from newer API.
+than a `>=12.6,<13` one, as it will likely have improved performance.
 And if you have two wheels built for the same CUDA version, but one of them
 also carries CPU optimizations, you'd take the latter.
 
 The problems start when you have two different wheels that cannot be trivially
 compared — say, a CUDA-optimized wheel and a CPU-optimized wheel. You may have
 a gut feeling that CUDA wins, but this is not a general rule. Things become
-even harder when you have to choose between a CUDA and a ROCm wheel (presumably
-having two GPUs).
+even harder when you have to choose between a CUDA and a ROCm wheel (say
+on a machine with an NVIDIA and an AMD GPU installed).
 
 <div style={{ textAlign: "center" }}>
 <figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
@@ -586,7 +588,7 @@ optimization. However, this actually implied that the user had to jump through
 the hoops of configuring variant usage first, and once again things could not
 work out of the box. So we went with the next best thing: requiring package
 configuration to specify namespace ordering; after all, package authors
-are also in good position to tell which variants are the most beneficial.
+are also in good position to specify which variants are the most beneficial.
 
 However, no reason to stop at namespace. After all, a specific package may
 want to point out, say, that their AES-NI variant is more beneficial than
@@ -622,10 +624,10 @@ If you don't have a compatible CUDA runtime at all, the fallback CPU wheel
 is used. So far, so good.
 
 However, consider now a system with an older package manager that does not
-support variants. Independently of the presence of CUDA runtime, ll variant
+support variants. Independently of the presence of CUDA runtime, all variant
 wheels are ignored there, and the CPU-only fallback is installed. However,
 this is not the most optimal solution. Prior to introducing variants,
-the published wheels featured both CUDA and CPU support (even if for a single
+the published wheels may have featured both CUDA and CPU support (even if for a single
 CUDA version).
 
 This is where the null variant comes in. Consider the following instead.
@@ -638,7 +640,7 @@ torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu129.whl
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu128.whl
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu126.whl
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-00000000.whl  // CPU-only
-torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl           // CUDA + CPU
+torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl           // CUDA 12.6 + CPU
 ```
 
 </figure>
@@ -668,7 +670,7 @@ logical `AND`. You need to have a supported CPU, and a CUDA version that is
 not older than the lower bound, and a CUDA version (the same one) that is older
 than the upper bound.
 
-A interesting case for this logic are CPU instruction sets. Each
+An interesting case for this logic are CPU instruction sets. Each
 instruction set is represented by a separate feature, with a single possible
 value of `on`. If the user's CPU supports a given instruction set, it supports
 said `on` value; if it doesn't, it has no compatible values. A wheel requiring
@@ -676,7 +678,7 @@ said instruction set includes this property with the `on` value.
 And for the wheel to be compatible, all its features — in other words, all
 listed instruction sets — need to be supported.
 
-Now consider a converse example: you are building a CUDA-enabled package
+Now consider the opposite case: e.g., you are building a CUDA-enabled package
 that supports half a dozen series of GPUs. You don't want to build a separate
 wheel for every GPU — that would be a lot of wheels with significant overlap.
 You want to build a single wheel and declare it compatible with multiple GPUs.
@@ -703,7 +705,7 @@ nvidia :: sm_arch :: 120_virtual
 
 </figure>
 
-It is equivalent to the following build parameter:
+It is the set of variant values for `sm_arch` you'd get for the following build parameter when building PyTorch:
 
 <figure>
 <figcaption>Listing 6. Setting target GPU architectures for a PyTorch build</figcaption>
@@ -747,13 +749,13 @@ to be released to introduce its support. However, this is not a huge proble
 as new architecture levels are introduced relatively rarely. This is what
 a static plugin is — one where the list of all valid property values
 is supposed to remain the same within a single version, and therefore the list
-ofsupported properties is independent of what packages are being installed.
+of supported properties is independent of what packages are being installed.
 
 Now let's consider a different use case: we need to express a dependency
 on a runtime whose version changes frequently, and is not predictable.
 Said version could be `1.0.0`, `1.2.2`, `2.0.10`, `2.3.99`… We're facing
-two problems here. Firstly, the list of all valid values can be very long
-(to be precise, infinitely long). Secondly, we can't fully predict what
+two problems here. First, the list of all valid values can be very long
+(to be precise, infinitely long). Second, we can't fully predict what
 the future versions will be.
 
 Let's start with the lower bound. If the system has version `1.2.2` installed,
@@ -805,7 +807,7 @@ are available and therefore their results can be reused easily. You just run
 the plugin, snapshot the result and you can reuse it for any package you
 install.
 
-This becomes especially important when we get around to discuss security.
+This becomes especially important when we get around to discussing security.
 As I've mentioned earlier, querying a variant plugin effectively means
 installing packages and executing their code immediately. One clear
 way to circumvent this is to use a frozen plugin output instead of running
