@@ -26,7 +26,7 @@ being able to select the one best fit the platform used.
 For a long time, [Python Wheels](https://packaging.python.org/en/latest/specifications/binary-distribution-format/)
 made do with a relatively simple mechanism
 of providing the needed variance: [Platform Compatibility Tags](https://packaging.python.org/en/latest/specifications/platform-compatibility-tags/).
-Tags identified different Python implementation and versions,
+Tags identified different Python implementations and versions,
 operating systems, CPU architectures. Over time, they were extended
 to facilitate new use cases. To list a few: [PEP 513](https://peps.python.org/pep-0513/)
 added <code>manylinux</code> tags to standardize the dependency on GNU/Linux
@@ -415,7 +415,7 @@ having a wheel variant installed, or whether the installer should take care
 of everything, including installing the plugins as needed and running them.
 
 The very first version of the proposal used a kind of opt-in mechanism.
-Variantlib, our reference implementation, discovered and used plugins
+[Variantlib](https://github.com/wheelnext/variantlib/), our reference implementation, discovered and used plugins
 from the environment where the package installer was run. In order to install a variant,
 the user had to manually install all the required plugins first. Therefore,
 having the plugin installed worked as a gating mechanism.
@@ -464,8 +464,8 @@ variant sorting. Let's take a closer look at it next.
 
 Variant providers have two main purposes in aiding installers. Firstly, they
 are used to filter variants — tell which of the wheels are supported. Secondly,
-they are used to sort variants — tell which of the supported variants should
-be installed.
+they are used to sort variants — rank the compatible variants from the most desirable
+to the least.
 
 In the simplest cases, sorting is easy. If you have a bunch of variants
 for different CPU baselines, you sort them from the highest to the lowest,
