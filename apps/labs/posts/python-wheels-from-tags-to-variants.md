@@ -842,7 +842,7 @@ def get_supported_configs(
 The only difference is that static plugins take `known_properties=None`,
 and return a fixed list, while dynamic plugins take the set of known property
 values from available wheels and use them to construct the return value.
-From implementation's point-of-view, both types of plugins are handled
+From the implementation's point-of-view, both types of plugins are handled
 by the same code path, with the same sorting algorithms, differing only
 on whether `known_properties` are passed or not.
 
@@ -882,7 +882,7 @@ These markers meant that when the variant wheel was built with a property
 in the listed namespace, the relevant provider plugin would be installed
 in the build environment, and therefore become available to the build backend.
 However, this solution did not last long. It was quite problematic to implement
-properly, since [build](https://pypi.org/project/build/) deferred evaluating
+properly, since [pypa/build](https://pypi.org/project/build/) deferred evaluating
 environment markers to the installer, which implied that we would end up
 with quite a confusing interface — with environment markers in command-line
 arguments processed differently than these coming from packages being installed.
@@ -939,7 +939,7 @@ the latter could be used to install the CUDA plugin if CUDA is available w
 actually having to publish a separate CUDA variant of the main package (think
 JAX). However, this is a recent development and it has not been pursued yet.
 
-It was also pointed out that technically these kind of dependencies can create
+It was also pointed out that technically these kind of dependency specifiers can create
 potential conflicts. For example, since technically a wheel can have multiple
 values for a property, you could end up pulling in two or three versions
 of `nvidia-cuda-runtime` simultaneously. This particularly causes problems
