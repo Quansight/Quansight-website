@@ -957,48 +957,51 @@ JAX). However, this is a recent development and it has not been pursued yet
 
 It was also pointed out that technically these kind of dependency specifiers can create
 potential conflicts. For example, since technically a wheel can have multiple
-values for a property, you could end up pulling in two or three versions
-of `nvidia-cuda-runtime` simultaneously. This particularly causes problems
-when creating universal lockfiles — since they need to account for all valid
-combinations of environment markers. However, this is no different from extras,
-and therefore it should be possible to solve it in a similar way.
+values for a property, the code in listing 8. could end up pulling in two or three versions
+of `nvidia-cuda-runtime` simultaneously. We are still working on some
+of the finer implications of that, such as how it affects the creation
+of universal lockfiles, that attempt to account for all valid environment
+marker combinations.
 
 ## Let's talk about security
 
-Probably the biggest problem posed by wheel variants are their security
-implications. Regular wheels are installable entirely without executing
-third-party code — there are no scripts involved. On the other hand,
-when installing variant wheels, one has to execute third-party code
-from provider plugins. This cannot be avoided without sacrificing
-the flexibility and user-friendliness.
+The most important part of the design that we're still working on is security.
+The installer, including all its (possibly vendored) dependencies, is sometimes
+found operating with elevated privileges, for example when it is used to install
+packages for all users, on a multi-user system. Variant provider plugins will
+be operating with the same level of privileges, and this has significant
+implications on how they are developed.
 
 <div style={{ textAlign: "center" }}>
 <figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
-  <img src="/posts/python-wheels-from-tags-to-variants/variant-risks.png"
-    width="697" height="373" alt="A diagram showing the three main attack
-vectors at the three additional components of variant wheel's supply chain.
-Firstly, the variant wheel can be attacked directly by adding a malicious provider.
-Secondly, a provider can be attacked by adding malicious code to it. Thirdly,
-one of its dependencies can be attacked in the same manner." />
-  <figcaption>Fig. 10. Variant wheel supply chain attack vectors</figcaption>
+  <img src="/posts/python-wheels-from-tags-to-variants/security-scopes.png"
+    width="906" height="458" alt="Change in scopes of privileges due to variant
+plugins. Prior to their support, only installer (and its dependencies) would be
+executed at package install (possibly with elevated privileges), and wheel
+contents would only be executed when the package/application is used.
+After the change, also variant plugin (and its dependencies) is executed
+at package install, which means executing contents of the downloaded wheels." />
+  <figcaption>Fig. 10. Scopes of privileges when executing code</figcaption>
 </figure>
 </div>
 
-The issue can be particularly serious, considering that in some setups
-package installation is done with elevated privileges, in order to make
-them available to all users. This makes variant providers a tempting target
-for malicious actors. Two new kinds of supply chain attacks become possible:
+There are two main risks being considered here. First, malicious code could
+be introduced into an existing variant provider or one of its dependencies;
+this is a similar risk to how such code could be introduced in the installer
+itself. Second, a new provider could be created that includes malicious code
+by design, and existing packages could start using it.
 
-1. Injecting malicious code into a new version of an existing variant provider,
-   or it's (possibly indirect) dependency.
+It can be noted that these risks are similar to Python package build backends,
+that are also downloaded dynamically during the install process and that execute
+arbitrary code throughout the build. However, this risk does not apply
+to installing from wheels, and can be mitigated in environment with higher
+security expectations by disabling source builds, e.g. via `pip install --only-binary :all:`.
 
-2. Adding a new variant provider to the package, with the variant provider
-   being malicious.
-
-There are many ways in which the risks can at least be partially mitigated.
+Similarly, there are multiple ways in which the risks from using variant wheels
+could be mitigated.
 I have already mentioned the possibility of using frozen variant provider output
 instead of running the plugin locally. However, this requires additional effort
-from the user and is most likely to be used in setups with high security
+from the user and will primarily  be used in setups with high security
 requirements.
 
 To avoid indirect supply chain attacks, variant providers could recursively pin
@@ -1021,6 +1024,12 @@ to old versions of packages. Unfortunately, the primary problem with such
 a solution is establishing such an authority, and ensuring that it remains
 reliable in the future. It also introduces a single failure point.
 
+Installers could execute provider plugin code in a sandboxed environment,
+with lowered privileges and limited system access. However, such restrictions
+will need to be carefully considered, in order to avoid restricting the plugin's
+functionality. For example, the `nvidia` plugin needs to be able to access
+the installed NVIDIA libraries and query the GPU.
+
 The more popular provider plugins can also be vendored or reimplemented
 by installers themselves, therefore avoiding reliance on third-party sources.
 However, it assumes that the installer maintainers have to keep track
@@ -1033,6 +1042,9 @@ confirmation before running a provider plugin for the first time
 (the trust-on-first-use paradigm), permit users to manually select variants
 or disable variant use entirely. For example, a user who does not have an NVIDIA
 GPU does not really need to query the respective plugin.
+
+We're confident that this will result in something that will be acceptable
+to the community after the design and its review are fully complete.
 
 ## The present, and the future
 
@@ -1076,8 +1088,8 @@ some of the existing features will be removed.
 
 There are open issues still. There's the question of how lockfiles are supposed
 to work with variants. There's the possible matter of dependencies on specific
-variants. But most importantly, wheel variants opened a Pandora's box
-of potential security issues that we need to find good mitigations for.
+variants. But most importantly, we are working hard to resolve all concerns
+regarding the security of variant provider plugins.
 Yet, variant wheels are a good solution to a problem that at least part
 of the Python community has been facing for many years, and we are looking
 forward to see them deployed.
