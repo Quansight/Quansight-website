@@ -16,49 +16,47 @@ hero:
 
 Many Python distributions are uniform across different Python versions
 and platforms. For these distributions, it is sufficient to publish
-a single binary package that can be installed everywhere. However, some
+a single wheel that can be installed everywhere. However, some
 packages are more complex than that — they include compiled Python
-extensions, binaries or even Python code that differs across systems.
+extensions or binaries.
 In order to robustly deploy these software on different platforms,
 you need to publish multiple binary packages, with the installers
 being able to select the one best fit the platform used.
 
 For a long time, [Python Wheels](https://packaging.python.org/en/latest/specifications/binary-distribution-format/)
-made do with a relatively simple mechanism
-of providing the needed variance: [Platform Compatibility Tags](https://packaging.python.org/en/latest/specifications/platform-compatibility-tags/).
-Tags identified different Python implementations and versions,
+made do with a relatively simple mechanism describing the needed variance:
+[Platform Compatibility Tags](https://packaging.python.org/en/latest/specifications/platform-compatibility-tags/).
+These tags identified different Python implementations and versions,
 operating systems, CPU architectures. Over time, they were extended
-to facilitate new use cases. To list a few: [PEP 513](https://peps.python.org/pep-0513/)
+to facilitate new use cases. To list a couple: [PEP 513](https://peps.python.org/pep-0513/)
 added <code>manylinux</code> tags to standardize the dependency on GNU/Linux
-systems, [PEP 656](https://peps.python.org/pep-0656/) added
+systems and [PEP 656](https://peps.python.org/pep-0656/) added
 <code>musllinux</code> tags to facilitate Linux systems with musl libc.
 
 However, not all new use cases could be handled effectively within
 the framework of tags. The advent of GPU-backed computing made distinguishing
 different acceleration frameworks such as CUDA or ROCm important.
-As many distributions have set baselines for their binary packages
+Similarly, as the compatibility with older CPUs became less desirable,
+many distributions have set baselines for their binary packages
 to [x86-64-v2 microarchitecture
 level](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels),
-Python packages also started looking at the opportunity
-to express the same requirement. In fact, the [manylinux_2_34 images are
-blocked on x86-64-v2 becoming the default compiler
-target](https://github.com/pypa/manylinux/issues/1585#issuecomment-3094469339).
-Numerical libraries support different
+and Python packages need to be able to express the same requirement.
+And then, numerical libraries support different
 BLAS/LAPACK, MPI, OpenMP providers — and wish to enable the users to choose
 the build using their desired provider.
-While technically tags could be bent to facilitate all these use cases,
-they would grow quite baroque. Perhaps most importantly, every change
+While technically tags could technically be bent to facilitate all these use cases,
+they would grow quite baroque, and, critically, every change
 to tags needs to be implemented in all installers and package-related
 tooling separately, making the adoption difficult.
 
-Facing these limitations, software vendors employed different solutions to work
+Facing these limitations, software vendors have employed different solutions to work
 around the lack of an appropriate mechanism. Eventually, the [WheelNext](https://wheelnext.dev/)
-took up the challenge to design a more robust solution. For the past 6 months we have
-been working hard on “wheel variants”, in callobration
+initiative took up the challenge to design a more robust solution. For the past 6 months we have
+been working hard on “wheel variants”, in collaboration
 with [Astral](https://astral.sh/), [NVIDIA](https://www.nvidia.com/)
-and [PyTorch](https://pytorch.org/) release team. This worked resulted
-in today's [PyTorch 2.8 release](TODO) with experimental variant wheels,
-and a corresponding experimental [variant-capable release of uv package
+and the [PyTorch](https://pytorch.org/) release team. This work culminated
+in today's [PyTorch 2.8 release](TODO) with experimental new wheels utilizing them,
+and a corresponding experimental [variant-capable release of the uv package
 manager](TODO). The user-facing features you can try out today are described
 in TODO. The blog post tells the story of how they came into being.
 
@@ -96,7 +94,7 @@ conventions:
 - `cp311-abi3-manylinux_2_34_x86_64` uses CPython's stable ABI (`abi3`),
   in the version compatible with CPython 3.11 or newer (`cp311`).
   It is compatible with GNU/Linux systems with glibc 2.34 or newer,
-  on x86-64 architecture (all that encoded in the `manylinux_2_34_x86_64`
+  on x86-64 architecture (all that is encoded in the `manylinux_2_34_x86_64`
   platform tag). This is the wheel that will be used on most of the CPython
   versions on the given platform.
 
@@ -139,31 +137,30 @@ to existing platforms could be appended to them — say,
 and so on. However, there are two major problems with that.
 
 First, the existing [pip](https://pypi.org/project/pip/) code, based
-on the [packaging](https://pypi.org/project/packaging/) library, relies entirely
+on the [packaging](https://pypi.org/project/packaging/) library, relies
 on enumerating all tag combinations compatible with the specific system
 and comparing the tags found in wheels to that list. For example,
 on a GNU/Linux system with Python 3.14 and glibc 2.41, this means almost 1300
 combinations. While this is not that much, once we start adding multiple
-additional suffixes, the number of possible combinations is going to explode.
-Of course, this isn't really a blocker — it is entirely possible to rewrite
-the logic to be more algorithmic and avoid generating all possible combinations.
-However, this is infeasible in practice.
+additional suffixes, the number of possible combinations explodes.
 
 Second, tags are implemented entirely within the package manager. This implies
-that for every new set of tags, all package managers must implement them,
+that for every new set of tags, all package managers must add support for them,
 and then their users must upgrade. And ideally, the tags should be defined in such
 a way so that the implementation will be able to determine the support
 for future tags. Otherwise, we're talking about having to update all the package
 managers every time a new CPU or GPU architecture version is defined, or a new
 CUDA version is released, and so on.
 
+While the first problem can be resolved by optimizing the algorithm, the second
+cannot.
 In other words, while tags serve their primarily purpose well, they don't scale.
 
 ## How did projects manage without new tags?
 
-Still, it's not like the problem cropped up overnight. Packages needed more
-variants for a while now, and managed somehow without new tags. So, how did they
-do that?
+It's not like this problem cropped up overnight. Packages have needed more
+variants than platform tags support for a while now, so how are they working
+around the problem?
 
 <div style={{ textAlign: "center" }}>
 <figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
@@ -180,7 +177,7 @@ CUDA 12.8, ROCM 6.3, CPU). Below it provides an install command." />
 If you enter [PyTorch's “Start Locally”](https://pytorch.org/get-started/locally/)
 document, you are welcomed with an interactive chooser. Once you select
 a specific build, operating system and compute platform, you are given
-a specific pip instruction. Most of these instructions include an `--index-url`
+a specific pip invocation. Most of these commands include an `--index-url`
 parameter — and that's the answer, different variants of PyTorch wheels
 are published on separate package indexes, rather than on PyPI.
 
