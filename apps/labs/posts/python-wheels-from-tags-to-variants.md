@@ -1121,3 +1121,13 @@ regarding the security of variant provider plugins.
 Yet, variant wheels are a good solution to a problem that at least part
 of the Python community has been facing for many years, and we are looking
 forward to see them deployed.
+
+## Acknowledgements
+
+Many people have been involved in the wheel variant design to date. I'd like to
+thank Jonathan Dekhtiar (NVIDIA), Konstantin Schütze (Astral), Charlie Marsh
+(Astral) and my colleague Ralf Gommers in particular. Thanks to Eli Urieges
+(Meta) and Andrew Talman (Meta) for supporting and preparing the PyTorch 2.8.0
+release with experimental support for wheel variants that is available today.
+
+Thanks to [Red Hat](https://www.redhat.com) for funding Quansight's contributions to the wheel variant design. Red Hat is [shipping accelerator-enabled Python packages](https://wheelnext.dev/summits/2025_03/assets/WheelNext%20Community%20Summit%20-%2006%20-%20Red%20Hat.pdf), like PyTorch, as wheels in a virtual environment as part of [RHEL AI](https://developers.redhat.com/products/rhel-ai/overview), and saw the importance of improving Python packaging for heterogeneous hardware, resulting in their support for the WheelNext initiative.
