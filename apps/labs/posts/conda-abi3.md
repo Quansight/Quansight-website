@@ -1,6 +1,7 @@
+---
 title: 'Support for ABI3 packages in conda!'
 authors: [isuru-fernando]
-published: June 16, 2025
+published: August 8, 2025
 description: 'See how Point72 teamed up with Quansight to fund support for ABI3 packages in the conda ecosystem.'
 category: [Packaging]
 featuredImage:
