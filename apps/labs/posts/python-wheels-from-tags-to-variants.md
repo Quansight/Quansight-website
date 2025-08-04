@@ -14,6 +14,17 @@ hero:
 
 # Python Wheels: from Tags to Variants
 
+For the past 6 months we have
+been working hard on “wheel variants”, in collaboration
+with [Astral](https://astral.sh/), [NVIDIA](https://www.nvidia.com/)
+and the [PyTorch](https://pytorch.org/) release team. This work culminated
+in today's [PyTorch 2.8 release](TODO) with experimental new wheels utilizing them,
+and a corresponding experimental [variant-capable release of the uv package
+manager](TODO). The user-facing features you can try out today are described
+in TODO. The blog post tells the story of how they came into being.
+
+## Introduction
+
 Many Python distributions are uniform across different Python versions
 and platforms. For these distributions, it is sufficient to publish
 a single wheel that can be installed everywhere. However, some
@@ -51,14 +62,7 @@ tooling separately, making the adoption difficult.
 
 Facing these limitations, software vendors have employed different solutions to work
 around the lack of an appropriate mechanism. Eventually, the [WheelNext](https://wheelnext.dev/)
-initiative took up the challenge to design a more robust solution. For the past 6 months we have
-been working hard on “wheel variants”, in collaboration
-with [Astral](https://astral.sh/), [NVIDIA](https://www.nvidia.com/)
-and the [PyTorch](https://pytorch.org/) release team. This work culminated
-in today's [PyTorch 2.8 release](TODO) with experimental new wheels utilizing them,
-and a corresponding experimental [variant-capable release of the uv package
-manager](TODO). The user-facing features you can try out today are described
-in TODO. The blog post tells the story of how they came into being.
+initiative took up the challenge to design a more robust solution.
 
 ## The limits of platform compatibility tags
 
