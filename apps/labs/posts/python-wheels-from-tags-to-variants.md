@@ -1035,6 +1035,8 @@ or vendor their dependencies. The latter option is especially interesting, si
 it can be easily enforced at installer level — by forcing provider plugins
 to be installed without dependencies. This way, we mitigate the risk of a new
 version of a compromised dependency being immediately deployed to end users.
+This should not be a major maintenance burden, given that expect most variant
+providers to be small and have few or no dependencies.
 
 Technically, attack surface could be further reduced by pinning variant
 providers to specific versions. However, this is unlikely to be a good idea,
