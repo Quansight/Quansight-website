@@ -587,7 +587,35 @@ However, plugins are scoped to themselves and can only order feature names
 and values. They cannot provide namespace ordering — as that would effectively
 mean one plugin deciding how important another plugin is.
 
-[TODO: pyproject.toml snippet with priorities]
+<figure>
+
+```toml
+[variant.default-priorities]
+# prefer aarch64 over x86_64
+namespace = ["aarch64", "x86_64"]
+# prefer variants using hardware AES optimizations over these for a newer CPU
+# architecture
+feature.aarch64 = ["aes"]
+feature.x86_64 = ["aes"]
+# prefer x86-64-v3 and then older (even if the CPU is newer)
+property.x86_64.level = ["v3", "v2", "v1"]
+
+[variant.providers.aarch64]
+# Using different package based on the Python version
+requires = ["provider-variant-aarch64 >=0.0.1,<1"]
+# use only on aarch64/arm machines
+enable-if = "platform_machine == 'aarch64' or 'arm' in platform_machine"
+plugin-api = "provider_variant_aarch64.plugin:AArch64Plugin"
+
+[variant.providers.x86_64]
+requires = ["provider-variant-x86-64 >=0.0.1,<1"]
+# use only on x86_64 machines
+enable-if = "platform_machine == 'x86_64' or platform_machine == 'AMD64'"
+plugin-api = "provider_variant_x86_64.plugin:X8664Plugin"`
+```
+
+<figcaption>Listing 3. Example `pyproject.toml` with sort order defined</figcaption>
+</figure>
 
 This leaves us with two possibilities: either the package author or the user
 needs to define namespace ordering. Originally, we went with the latter idea —
@@ -623,7 +651,7 @@ torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-cu126.whl
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl        // CPU-only
 ```
 
-<figcaption>Listing 3. Example wheel variant filenames, with a fallback regular wheel, in order of preference</figcaption>
+<figcaption>Listing 4. Example wheel variant filenames, with a fallback regular wheel, in order of preference</figcaption>
 </figure>
 
 Such a setup provides for a graceful fallback. When you are using an older
@@ -650,7 +678,7 @@ torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64-00000000.whl  // CPU-only
 torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl           // CUDA 12.6 + CPU
 ```
 
-<figcaption>Listing 4. Example wheel variant filenames, with a null variant and a fallback regular wheel, in order of preference</figcaption>
+<figcaption>Listing 5. Example wheel variant filenames, with a null variant and a fallback regular wheel, in order of preference</figcaption>
 </figure>
 
 What we added here is a null variant, with label `00000000`. Since it has
@@ -710,7 +738,7 @@ nvidia :: sm_arch :: 120_real
 nvidia :: sm_arch :: 120_virtual
 ```
 
-<figcaption>Listing 5. Example list of properties with multiple values for a single feature</figcaption>
+<figcaption>Listing 6. Example list of properties with multiple values for a single feature</figcaption>
 </figure>
 
 It is the set of variant values for `sm_arch` you'd get for the following build parameter when building PyTorch:
@@ -721,7 +749,7 @@ It is the set of variant values for `sm_arch` you'd get for the following bu
 TORCH_CUDA_ARCH_LIST="7.0;7.5;8.0;8.6;9.0;10.0;12.0+PTX"
 ```
 
-<figcaption>Listing 6. Setting target GPU architectures for a PyTorch build</figcaption>
+<figcaption>Listing 7. Setting target GPU architectures for a PyTorch build</figcaption>
 </figure>
 
 Note the reversal of semantics. Previously, the wheel did declare what
@@ -887,7 +915,7 @@ requires = [
 ]
 ```
 
-<figcaption>Listing 7. Example `pyproject.toml` with variant provider plugins selected via environment markers</figcaption>
+<figcaption>Listing 8. Example `pyproject.toml` with variant provider plugins selected via environment markers</figcaption>
 </figure>
 
 These markers meant that when the variant wheel was built with a property
@@ -928,7 +956,7 @@ dependencies = [
 ]
 ```
 
-<figcaption>Listing 8. Example `pyproject.toml` dependency string with variant-based environment markers</figcaption>
+<figcaption>Listing 9. Example `pyproject.toml` dependency string with variant-based environment markers</figcaption>
 </figure>
 
 There are three environment markers available for use: `variant_properties`
