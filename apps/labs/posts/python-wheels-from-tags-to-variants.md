@@ -1013,8 +1013,8 @@ this is a similar risk to how such code could be introduced in the installe
 itself. Second, a new provider could be created that includes malicious code
 by design, and existing packages could start using it.
 
-It can be noted that these risks are similar to Python package build backends,
-that are also downloaded dynamically during the install process and that execute
+It can be noted that these risks are similar to those for build backends,
+which are also downloaded dynamically during the install process and execute
 arbitrary code throughout the build. However, this risk does not apply
 to installing from wheels, and can be mitigated in environment with higher
 security expectations by disabling source builds, e.g. via `pip install --only-binary :all:`.
@@ -1044,7 +1044,7 @@ providers. Since such a registry can be updated independently of existing
 wheels, it can mitigate the risk of provider compromise without actually pinning
 to old versions of packages. Unfortunately, the primary problem with such
 a solution is establishing such an authority, and ensuring that it remains
-reliable in the future. It also introduces a single failure point.
+reliable in the future. It also introduces a single point of failure.
 
 Installers could execute provider plugin code in a sandboxed environment,
 with lowered privileges and limited system access. However, such restrictions
@@ -1058,7 +1058,7 @@ However, it assumes that the installer maintainers have to keep track
 of the plugin development, and users cannot benefit from bug fixes
 and improvements without updating the installer.
 
-Finally, there is always the possibility of providing a better control
+Finally, there is always the possibility of providing better control
 over variant use. For example, the installers could request an explicit
 confirmation before running a provider plugin for the first time
 (the trust-on-first-use paradigm), permit users to manually select variants
@@ -1073,13 +1073,13 @@ to the community after the design and its review are fully complete.
 In this post, I've attempted to comment on the road the variant wheel work
 has taken from the project's inception to the current pre-proto-PEP: [PEP ### -
 Wheel Variants](http://variant-proposal.wheelnext.dev/).
-Necessarily, it is neither final nor complete in all the detail, but I think
+Necessarily, this story is neither final nor covers all details, but I think
 it does some justice to the complexity of the problem space and the effort
 put into developing a good solution.
 
-Overall, we have been following [the philosophy of WheelNext
-project](https://wheelnext.dev/philosophy_and_design_space/), and focusing
-on providing a working solutions to real problems. I believe that this approach
+Overall, we have been following [the philosophy of the WheelNext
+initiative](https://wheelnext.dev/philosophy_and_design_space/), and focusing
+on providing a working solution to real-world problems. I believe that this approach
 worked well, and we arrived at a proposal that does not introduce more
 complexity than absolutely necessary to solve the problems we were facing,
 and attempts to use generic solutions. More than once, it turned out that
