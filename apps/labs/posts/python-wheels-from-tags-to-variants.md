@@ -510,7 +510,7 @@ to the least preferred — so that a higher CUDA runtime version is conside
 better than a lower one, and a higher CPU architecture version likewise.
 Then, the features themselves are sorted within every namespace —
 e.g. indicating that a specific architecture version is more important
-than an individual feature, so you'd rather take an x86-64 v3 wheel with
+than an individual feature, so you'd rather take an x86-64-v3 wheel with
 no additional instruction sets declared over one declaring AVX support
 but using x86-64-v2. As the next step, namespaces are ordered. This way,
 we reach the point where every property has a corresponding index in the general
@@ -547,9 +547,9 @@ up to the variant having all possible properties.
 
 What does this imply in practice? Say, if the `nvidia` namespace is given higher
 priority than the `x86_64` namespace, then a `CUDA` variant will be preferred over
-an `x86-64 v3` variant, and a `CUDA + x86-64 v3` variant will preferred over a plain
+an `x86-64-v3` variant, and a `CUDA + x86-64-v3` variant will preferred over a plain
 `CUDA` variant — provided both have matching CUDA properties. However,
-a `CUDA >=12.8` wheel will be preferred over a `CUDA >=12.6 + x86-64 v3` wheel;
+a `CUDA >=12.8` wheel will be preferred over a `CUDA >=12.6 + x86-64-v3` wheel;
 though such mismatched combinations are unlikely to be published in reality.
 
 ## Where do sort keys come from
