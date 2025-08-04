@@ -218,11 +218,8 @@ via dependencies. This avoids using additional indexes, but still requires
 manual action from the user.
 
 Other variations of the same solution are possible. Rather than using plugins,
-one could publish different package variants using separate package names
-and use a metapackage with extras to select between them.
-[TODO: look at CuPy]
-Or simply ask the user
-to install the correct package. However, this has the unfortunate side effect
+[CuPy uses different package names for the variants](https://docs.cupy.dev/en/stable/install.html#installing-cupy-from-pypi).
+However, this has the unfortunate side effect
 that once multiple different variants end up being installed, they may overwrite
 one another.
 
