@@ -712,31 +712,31 @@ without the CUDA runtime.
 
 ## Multiple property values
 
-So far, we have discussed wheels that have a single value for every feature
-used. Say, a wheel that is optimized for a particular CPU architecture version,
+So far, we have discussed wheels where every feature has a single value declared.
+Say, a wheel that is optimized for a particular CPU architecture version,
 or has one CUDA version lower bound and one upper bound. The key point here
 is that for a variant to be compatible, all its features had to have a value
-compatible with the system in question. This logic is conjunctive — representing
+compatible with the system in question. This logic is conjunctive, that is representing
 logical `AND`. You need to have a supported CPU, and a CUDA version that is
 not older than the lower bound, and a CUDA version (the same one) that is older
 than the upper bound.
 
-An interesting case for this logic are CPU instruction sets. Each
+CPU instruction sets are an interesting case. Each
 instruction set is represented by a separate feature, with a single possible
 value of `on`. If the user's CPU supports a given instruction set, it supports
-said `on` value; if it doesn't, it has no compatible values. A wheel requiring
+said `on` value; if it doesn't, the feature has no compatible values. A wheel requiring
 said instruction set includes this property with the `on` value.
-And for the wheel to be compatible, all its features — in other words, all
-listed instruction sets — need to be supported.
+And for the wheel to be compatible, all its features, that is all
+listed instruction sets, need to be supported.
 
 Now consider the opposite case: e.g., you are building a CUDA-enabled package
-that supports half a dozen series of GPUs. You don't want to build a separate
-wheel for every GPU — that would be a lot of wheels with significant overlap.
+that supports multiple GPU series. You don't want to build a separate
+wheel for every GPU; that would be a lot of wheels with significantly overlapping contents.
 You want to build a single wheel and declare it compatible with multiple GPUs.
-Conjunctive logic can't work here — you need disjunction, an `OR`.
+Conjunctive logic can't work here; you need disjunction, an `OR`.
 
 Specifically for this use case, we introduced the ability to specify multiple
-values for the same feature — with the assumption that at least one value
+values for the same feature, with the requirement that at least one value
 must be supported for the wheel to be compatible. Consider the following
 property list.
 
@@ -767,28 +767,28 @@ TORCH_CUDA_ARCH_LIST="7.0;7.5;8.0;8.6;9.0;10.0;12.0+PTX"
 <figcaption>Listing 7. Setting target GPU architectures for a PyTorch build</figcaption>
 </figure>
 
-Note the reversal of semantics. Previously, the wheel did declare what
-it _required_, and the plugin would indicate what the system _provided_.
-Here, we are seeing the exact opposite: the wheel declares what it _supports_,
-and the plugin declares what support the system _requires_. Your system has
-some GPU and therefore _requires_ its support in the package. If said architecture
-is on the list of *supported* architectures, the wheel is considered compatible;
-if it is not, it is rejected.
+Note the reversal of semantics. Previously, the wheel declared what
+it required, and the plugin would indicate what the system provided.
+Here, we are seeing the exact opposite: the wheel declares what it supports,
+and the plugin declares what support is required by the system. Your system has
+some GPU and therefore it must be supported by the package. If it is
+on the list of supported architectures, the wheel is considered compatible;
+if it is not, the wheel is rejected.
 
-Of course, the specification is far from providing an exhaustive boolean logic
+Of course, this is far from providing an exhaustive boolean logic
 that could support all possible use cases. For example, you can't express
-a wheel that provides _both_ CUDA and ROCm support, and that would be compatible
-with a system that has either CUDA or ROCm capability, but incompatible
-with a system without either. Nor can you express that your package has
-two algorithms using different sets of instruction sets, but requires at least
-one of them. However, our goal so far was to keep things simple whenever
-possible, and focus on the most likely use cases. And in the end, it is always
+that a wheel provides both CUDA and ROCm support, and that therefore is compatible
+with systems that have either CUDA or ROCm capability, but incompatible
+with systems without either. Nor can you express that your package uses
+two algorithms implemented using different combinations of instruction sets, but requires only
+one of them to be supported. However, our goal so far was to keep things simple whenever
+possible, and focus on the most probable use cases. And in the end, it is always
 possible (though not necessarily recommended) to create a dedicated provider
 plugin to cover the specific use case.
 
-So, at this point, different features are conjunctive (_all_ of them must
+So, at this point, different features are conjunctive (all of them must
 be supported), but different values within a single feature are disjunctive
-(_at least one_ of them must be supported).
+(at least one of them must be supported).
 
 ## Static and dynamic plugins
 
@@ -796,17 +796,17 @@ So far we have been assuming that the lists of allowed features and their
 values are roughly fixed. A particular version of the `x86_64` plugin implements
 the properties for a certain range of architecture levels: say, `v4` and lower.
 We can't predict what `v5` will be like, and a new plugin version will need
-to be released to introduce its support. However, this is not a huge problem,
-as new architecture levels are introduced relatively rarely. This is what
-a static plugin is — one where the list of all valid property values
+to be released to support it. However, this is not a significant issue,
+as new architecture levels are introduced relatively rarely. Such a provider
+is called a static plugin; one where the list of all valid property values
 is supposed to remain the same within a single version, and therefore the list
-of supported properties is independent of what packages are being installed.
+of supported properties is independent of which packages are being installed.
 
 Now let's consider a different use case: we need to express a dependency
 on a runtime whose version changes frequently, and is not predictable.
 Said version could be `1.0.0`, `1.2.2`, `2.0.10`, `2.3.99`… The runtime
-in question does not use semantic versioning or another version scheme clearly
-indicating compatibility, so we may need to declare arbitrary version ranges.
+in question does not use semantic versioning or another version scheme that clearly
+indicates compatibility, so we may need to declare arbitrary version ranges.
 We're facing
 two problems here. First, the list of all valid values can be very long
 (to be precise, infinitely long). Second, we can't fully predict what
@@ -814,8 +814,8 @@ the future versions will be.
 
 Let's start with the lower bound. If the system has version `1.2.2` installed,
 the plugin needs to declare compatibility with wheels that have a lower bound
-no higher than that: `>=1.2.2`, `>=1.2.1`, `>=1.2.0`… but then we'd need to list
-all the possible `1.1.x` versions — and should be the highest value of `x`
+no higher than that: `>=1.2.2`, `>=1.2.1`, `>=1.2.0`… but next, we'd need to list
+all the possible `1.1.x` versions, and should be the highest value of `x`
 that we need to account for? And what if sometimes upstream
 releases four-component versions, like `1.2.2.1`? With upper bound, things
 get even worse. Here we actually have to declare compatibility with versions
@@ -835,7 +835,7 @@ do that to verify whether the wheels are compatible." />
 </figure>
 </div>
 
-Dynamic plugins were supposed to address precisely this problem. The difference
+Dynamic plugins were designed to address precisely this problem. The difference
 is that a dynamic plugin does not return a fixed list of all supported
 properties for a given machine, but rather directly determines which
 of the available wheel variants are compatible. This implies that there
@@ -853,12 +853,12 @@ lower and upper bounds, we can have a single property that is a version
 specifier, say, `>​=1.2.2,<3,!​=1.7.4,!​=1.8.1`. This makes it both more flexible
 and more readable.
 
-So, dynamic plugins can do all that static plugins can do, and more.
+Dynamic plugins can do all that static plugins can do, and more.
 Why do we need two plugin classes then? Why can't we just call it a day,
-say that we've found a better design and go with it? The advantage
+say that we've found a better solution and go with it? The advantage
 of static plugins is that they are, well, static. Their behavior does not depend
 on the package being installed, they don't need to know what variants
-are available and therefore their results can be reused easily. You just run
+are available, and therefore their results can be cached and reused easily. You just run
 the plugin, snapshot the result and you can reuse it for any package you
 install.
 
@@ -879,7 +879,7 @@ grabbed from existing wheels) and recheck whenever you find new values.
 In fact, this problem is considered significant enough that the [nvidia provider
 plugin created for the demo](https://github.com/wheelnext/nvidia-variant-provider)
 was reverted to being a static plugin, with the possibility of creating
-a separate dynamic plugin if the need arises in the future. Even though it means
+a separate dynamic plugin if the need arises in the future, even though it means
 that it effectively guesses future versions of CUDA runtime! Fortunately,
 they are reasonably predictable.
 
@@ -896,10 +896,10 @@ def get_supported_configs(
 
 The only difference is that static plugins take `known_properties=None`,
 and return a fixed list, while dynamic plugins take the set of known property
-values from available wheels and use them to construct the return value.
-From the implementation's point-of-view, both types of plugins are handled
+values that is constructed from the available variants, and use them to construct the return value.
+From the implementation's point-of-view, both types of plugins are handled
 by the same code path, with the same sorting algorithms, differing only
-on whether `known_properties` are passed or not.
+in whether `known_properties` are passed or not.
 
 ## Variant-specific dependencies
 
