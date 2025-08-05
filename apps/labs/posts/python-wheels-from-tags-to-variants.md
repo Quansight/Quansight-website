@@ -21,7 +21,10 @@ and the [PyTorch](https://pytorch.org/) release team. This work culminated
 in today's [PyTorch 2.8 release](TODO) with experimental new wheels utilizing them,
 and a corresponding experimental [variant-capable release of the uv package
 manager](TODO). The user-facing features you can try out today are described
-in ["TODO" on NVIDIA Technical Blog](https://developer.nvidia.com/blog/streamline-cuda-accelerated-python-install-and-packaging-workflows-with-wheel-variants/). The blog post tells the story of how they came into being.
+in [“Wheel variants” by Astral blog](https://astral.sh/blog/wheel-variants),
+[“Streamline CUDA-accelerated Python install and packaging workflows with wheel variants” on NVIDIA Technical Blog](https://developer.nvidia.com/blog/streamline-cuda-accelerated-python-install-and-packaging-workflows-with-wheel-variants/),
+and [TODO on PyTorch Foundation blog](TODO).
+This blog post tells the story of how they came into being.
 
 ## Introduction
 
