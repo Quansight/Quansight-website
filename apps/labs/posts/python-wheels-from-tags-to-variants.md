@@ -22,7 +22,7 @@ in today's [PyTorch 2.8 release](TODO) with new wheels utilizing them,
 and a corresponding experimental [variant-capable release of the uv package
 manager](TODO). The user-facing features you can try out today are described
 in [“Wheel variants” by Astral blog](https://astral.sh/blog/wheel-variants),
-[“Streamline CUDA-accelerated Python install and packaging workflows with wheel variants” on NVIDIA Technical Blog](https://developer.nvidia.com/blog/streamline-cuda-accelerated-python-install-and-packaging-workflows-with-wheel-variants/),
+[“Streamline CUDA-Accelerated Python Install and Packaging Workflows with Wheel Variants” on NVIDIA Technical Blog](https://developer.nvidia.com/blog/streamline-cuda-accelerated-python-install-and-packaging-workflows-with-wheel-variants/),
 and [TODO on PyTorch Foundation blog](TODO).
 This blog post tells the story of how they came into being.
 
@@ -907,16 +907,16 @@ There are two dependency-related problems that could be relevant to variant
 support: expressing dependencies that are specific to a subset of variants,
 and requiring a specific variant (or a subset of variants) of another package.
 So far, we have deferred working on the latter problem, as we did not have a specific
-use case to focus the design on, and did not want to risk arriving at a complex
-solution that would not necessarily match what the users actually need.
+use case to focus the design on, and we did not want to arrive at a complex
+solution that would not necessarily match what the users actually needed.
 On the other hand, variant-specific dependencies had immediate use cases.
 
 The idea of variant-specific dependencies arrived into the project quite early.
 After all, building a variant wheel generally involves installing a provider
 plugin, if only to validate whether the requested properties are correct.
-And indeed, the very first attempt at that used environment markers
-in the `build-system.requires` section of `pyproject.toml` to specify which
-plugins needed to be installed. It looked somewhat like:
+And indeed, the very first attempt to do that used environment markers
+in the `build-system.requires` section of `pyproject.toml`, to specify which
+plugins needed to be installed. It looked somewhat like the following:
 
 <figure>
 
@@ -934,17 +934,17 @@ requires = [
 </figure>
 
 These markers meant that when the variant wheel was built with a property
-in the listed namespace, the relevant provider plugin would be installed
-in the build environment, and therefore become available to the build backend.
+in the listed namespace, the relevant provider plugin was installed
+in the build environment, and therefore became available to the build backend.
 However, this solution did not last long. It was quite problematic to implement
 given the limited interface between [pypa/build](https://pypi.org/project/build/)
 and the installers used by it.
-Besides, provider plugins were also needed to install variant wheels, so it made
-more sense to separate them, as described earlier.
+Besides, provider plugins also needed to be installed while installing variant wheels, so it made
+more sense to separate them, as described earlier in the post.
 
-Nevertheless, the syntax based on environment markers made sense, and so it made
+Nevertheless, the syntax based on environment markers made sense, and it eventually made
 its way into the actual package dependencies. A package that previously had
-to dynamically declare different dependency sets for every wheel variant
+to dynamically declare different dependency sets for every wheel variant,
 now could instead use them to apply dependencies conditionally to the selected
 variant.
 
@@ -974,7 +974,7 @@ dependencies = [
 <figcaption>Listing 9. Example `pyproject.toml` dependency string with variant-based environment markers</figcaption>
 </figure>
 
-There are three environment markers available for use: `variant_properties`
+There are three environment markers available: `variant_properties`
 corresponding to the set of the variant properties that the wheel was built for,
 `variant_features` combining them into enabled features (i.e. features that have
 at least one value), and `variant_namespaces` doing the same for namespaces.
@@ -992,7 +992,7 @@ the latter could be used to install the `nvidia` plugin if CUDA is availab
 actually having to publish a separate CUDA variant of the main package (think
 JAX). However, this is a recent development and it has not been pursued yet.
 
-It was also pointed out that technically these kind of dependency specifiers can create
+It was also pointed out that these kind of dependency specifiers can create
 potential conflicts. For example, since technically a wheel can have multiple
 values for a property, the code in listing 8. could end up pulling in two or three versions
 of `nvidia-cuda-runtime` simultaneously. We are still working on some
@@ -1029,7 +1029,7 @@ itself. Second, a new provider could be created that includes malicious code
 by design, and existing packages could start using it.
 
 It can be noted that these risks are similar to those for build backends,
-which are also downloaded dynamically during the install process and execute
+which are also downloaded dynamically during the install process and execute
 arbitrary code throughout the build. However, this risk does not apply
 to installing from wheels, and can be mitigated in environment with higher
 security expectations by disabling source builds, e.g. via `pip install --only-binary :all:`.
@@ -1038,40 +1038,40 @@ Similarly, there are multiple ways in which the risks from using variant whe
 could be mitigated.
 I have already mentioned the possibility of using frozen variant provider output
 instead of running the plugin locally. However, this requires additional effort
-from the user and will primarily  be used in setups with high security
+from the user and will primarily be used in setups with high security
 requirements.
 
 To avoid indirect supply chain attacks, variant providers could recursively pin
 or vendor their dependencies. The latter option is especially interesting, since
-it can be easily enforced at installer level — by forcing provider plugins
+it can be easily enforced at installer level, by forcing provider plugins
 to be installed without dependencies. This way, we mitigate the risk of a new
 version of a compromised dependency being immediately deployed to end users.
-This should not be a major maintenance burden, given that expect most variant
+This should not be a major maintenance burden, given that we expect most variant
 providers to be small and have few or no dependencies.
 
 Technically, attack surface could be further reduced by pinning variant
 providers to specific versions. However, this is unlikely to be a good idea,
 since it implies that the wheels for previous package versions would be forever
 pinned to old versions of plugin providers, making it impossible
-to automatically benefit from bug fixes and updates (say, new CPU could fail
+to benefit from bug fixes and updates (say, new CPU could fail
 to be recognized as compatible with an old variant).
 
 One interesting option is to maintain a central registry of vetted plugin
 providers. Since such a registry can be updated independently of existing
-wheels, it can mitigate the risk of provider compromise without actually pinning
+wheels, it can mitigate the risk of a provider being compromised without actually permanently pinning
 to old versions of packages. Unfortunately, the primary problem with such
-a solution is establishing such an authority, and ensuring that it remains
+a solution lies in establishing such an authority, and ensuring that it remains
 reliable in the future. It also introduces a single point of failure.
 
 Installers could execute provider plugin code in a sandboxed environment,
 with lowered privileges and limited system access. However, such restrictions
-will need to be carefully considered, in order to avoid restricting the plugin's
+will need to be carefully assessed, in order to avoid restricting the plugin's
 functionality. For example, the `nvidia` plugin needs to be able to access
 the installed NVIDIA libraries and query the GPU.
 
 The more popular provider plugins can also be vendored or reimplemented
 by installers themselves, therefore avoiding reliance on third-party sources.
-However, it assumes that the installer maintainers have to keep track
+However, it means that the installer maintainers will have to keep track
 of the plugin development, and users cannot benefit from bug fixes
 and improvements without updating the installer.
 
@@ -1079,7 +1079,7 @@ Finally, there is always the possibility of providing better control
 over variant use. For example, the installers could request an explicit
 confirmation before running a provider plugin for the first time
 (the trust-on-first-use paradigm), permit users to manually select variants
-or disable variant use entirely. For example, a user who does not have an NVIDIA
+or disable variant use entirely. After all, a user who does not use an NVIDIA
 GPU does not really need to query the respective plugin.
 
 We're confident that this will result in something that will be acceptable
@@ -1087,10 +1087,10 @@ to the community after the design and its review are fully complete.
 
 ## The present, and the future
 
-In this post, I've attempted to comment on the road the variant wheel work
-has taken from the project's inception to the current pre-proto-PEP: [PEP ### -
+In this post, I've attempted to comment on the road taken by the variant wheel work,
+from the project's inception to the current state of the pre-proto-PEP: [PEP ### -
 Wheel Variants](http://variant-proposal.wheelnext.dev/).
-Necessarily, this story is neither final nor covers all details, but I think
+Necessarily, this story is neither final nor covers all the details, but I think
 it does some justice to the complexity of the problem space and the effort
 put into developing a good solution.
 
@@ -1098,30 +1098,30 @@ Overall, we have been following [the philosophy of the WheelNext
 initiative](https://wheelnext.dev/philosophy_and_design_space/), and focusing
 on providing a working solution to real-world problems. I believe that this approach
 worked well, and we arrived at a proposal that does not introduce more
-complexity than absolutely necessary to solve the problems we were facing,
-and attempts to use generic solutions. More than once, it turned out that
-a single past decision either solved future problems that we did not originally
-anticipate, or made a solution possible with minimal changes to the design.
+complexity than absolutely necessary, to solve the problems we were facing,
+and attempts to use generic solutions whenever possible. More than once through the process, it turned out that
+a single past decision either provided a ready solution to the future problems that we did not originally
+anticipate, or made it possible with minimal changes to the design.
 
 We started with a simple conjunctive property framework, managed to easily
-handle flag-like properties with it and then extended it to handle multiple
-values disjunctively — solving the GPU target problem with minimal changes
+handle flag-like properties with it, and then extended it to handle multiple
+values disjunctively, therefore solving the GPU target problem with minimal changes
 to the specification. We introduced `variants.json` to solve an immediate
 scalability problem, yet it enabled us to easily introduce custom variant labels
 later on. We created a relatively simple and clean API, and were able
-to extend it to support dynamic plugins with minimal changes. And the sort
-algorithm originally devised for the original one-value-per-property variants,
-requires no changes when we introduced multi-value properties and the null
+to extend it to support dynamic plugins without changing much. And the sort
+algorithm that was originally devised for the one-value-per-property design,
+required no changes when we introduced multi-value properties and the null
 variant.
 
 Of course, the work is far from complete. We have solved a number of problems,
-we have arrived at a working prototype — but as more people start testing
-the prototype against their own packages, and as more people join
+we have arrived at a working prototype; but as more people start testing
+it against their own packages, and as more people join
 the discussion, new use cases and new problems will emerge. This does
 not necessarily mean that we will have to go back to the proverbial drawing
-board. It is entirely possible that some of these properties can be solved
-within the existing framework, much like we managed to implement a good enough
-plugin for CUDA without having to introduce a dynamic plugin, or that they will
+board. It is entirely possible that the existing framework will suffice for many
+of these issues, much like we eventually managed to implement a good enough
+plugin for CUDA without having to make it dynamic; or that they will
 turn out not to be worth the added complexity. It is also possible that
 some of the existing features will be removed.
 
@@ -1137,7 +1137,7 @@ forward to see them deployed.
 
 Many people have been involved in the wheel variant design to date. I'd like to
 thank Jonathan Dekhtiar (NVIDIA), Konstantin Schütze (Astral), Charlie Marsh
-(Astral) and my colleague Ralf Gommers in particular. Thanks to Eli Urieges
+(Astral) and my colleague Ralf Gommers, in particular. Thanks to Eli Urieges
 (Meta) and Andrew Talman (Meta) for supporting and preparing the PyTorch 2.8.0
 release with experimental support for wheel variants that is available today.
 
