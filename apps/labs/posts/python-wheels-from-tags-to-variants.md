@@ -21,7 +21,7 @@ and the [PyTorch](https://pytorch.org/) release team. This work culminated
 in today's [PyTorch 2.8 release](TODO) with experimental new wheels utilizing them,
 and a corresponding experimental [variant-capable release of the uv package
 manager](TODO). The user-facing features you can try out today are described
-in TODO. The blog post tells the story of how they came into being.
+in ["TODO" on NVIDIA Technical Blog](https://developer.nvidia.com/blog/streamline-cuda-accelerated-python-install-and-packaging-workflows-with-wheel-variants/). The blog post tells the story of how they came into being.
 
 ## Introduction
 
@@ -1131,4 +1131,4 @@ thank Jonathan Dekhtiar (NVIDIA), Konstantin Schütze (Astral), Charlie Marsh
 (Meta) and Andrew Talman (Meta) for supporting and preparing the PyTorch 2.8.0
 release with experimental support for wheel variants that is available today.
 
-Thanks to [Red Hat](https://www.redhat.com) for funding Quansight's contributions to the wheel variant design. Red Hat is [shipping accelerator-enabled Python packages](https://wheelnext.dev/summits/2025_03/assets/WheelNext%20Community%20Summit%20-%2006%20-%20Red%20Hat.pdf), like PyTorch, as wheels in a virtual environment as part of [RHEL AI](https://developers.redhat.com/products/rhel-ai/overview), and saw the importance of improving Python packaging for heterogeneous hardware, resulting in their support for the WheelNext initiative.
+Thanks to [Red Hat](https://www.redhat.com) for funding Quansight's contributions to the wheel variant design. Red Hat is [shipping accelerator-enabled Python packages](https://wheelnext.dev/summits/2025_03/assets/WheelNext%20Community%20Summit%20-%2006%20-%20Red%20Hat.pdf), like PyTorch, as wheels in a virtual environment as part of [Red Hat AI](https://www.redhat.com/en/products/ai), and saw the importance of improving Python packaging for heterogeneous hardware, resulting in their support for the WheelNext initiative.
