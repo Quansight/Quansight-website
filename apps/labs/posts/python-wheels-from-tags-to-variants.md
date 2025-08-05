@@ -313,8 +313,8 @@ is installed. Then, it transforms this version into set of compatible
 constraints that can be used to determine whether a given wheel variant
 can be installed — and if multiple variants fit, which one should be used.
 
-For example, if you have CUDA 12.8, then all wheels with lower bound that
-is not higher than that are installable — but a wheel built specifically
+For example, if you have CUDA 12.8, then all wheels that do not require a newer
+CUDA version are installable — but a wheel built specifically
 for CUDA 12.8 will be preferred. So we support wheels with a lower bound
 of 12.8, 12.7, 12.6, 12.5… And the upper bound is handled in a similar way.
 
@@ -336,7 +336,8 @@ Fetching all the wheels is not an option — as they can be quite large. Now
 technically the Zip format allows for relatively optimal partial fetching,
 so we could just fetch the relatively small amount of data related to variant
 properties. Still, fetching data from a possibly large number of wheel
-variants could hardly be considered an optimal solution.
+variants could hardly be considered an optimal solution, and not all indexes
+support HTTP range requests.
 
 Variant wheels do need unique filenames though, and at the same
 time we wanted to avoid making them too long — as some existing wheel filenames
