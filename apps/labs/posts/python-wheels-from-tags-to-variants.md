@@ -482,21 +482,21 @@ variant sorting. Let's take a closer look at it next.
 ## Variant sorting
 
 Variant providers have two main purposes in aiding installers. First, they
-are used to filter variants — tell which of the wheels are supported. Second,
-they are used to sort variants — rank the compatible variants from the most desirable
-to the least.
+are used to filter variants, that is tell which of the wheels are supported. Second,
+they are used to sort compatible variants, ranking them from the most
+to the least desirable.
 
 In the simplest cases, sorting is easy. If you have a bunch of variants
 for different CPU baselines, you sort them from the highest to the lowest,
 and therefore install the most optimized variant available. If you have variants
-for different lower CUDA runtime bounds, you choose the one that is the highest
-— say, if you have CUDA 12.8, you'd rather take a `>=12.8,<13` wheel
+for different lower CUDA runtime bounds, you choose the one that is the highest;
+say, if you have CUDA 12.8, you'd rather take a `>=12.8,<13` wheel
 than a `>=12.6,<13` one, as it will likely have improved performance.
 And if you have two wheels built for the same CUDA version, but one of them
 also carries CPU optimizations, you'd take the latter.
 
 The problems start when you have two different wheels that cannot be trivially
-compared — say, a CUDA-optimized wheel and a CPU-optimized wheel. You may have
+compared; say, a CUDA-optimized wheel and a CPU-optimized wheel. You may have
 a gut feeling that CUDA wins, but this is not a general rule. Things become
 even harder when you have to choose between a CUDA and a ROCm wheel (say,
 on a machine with both an NVIDIA and an AMD GPU installed).
@@ -517,15 +517,17 @@ The x86_64 plugin provides a 'level' property with index 2.1, whose values have 
 
 What we implemented is pretty much sorting on multiple layers. First,
 the supported values for every feature are sorted from the most preferred
-to the least preferred — so that a higher CUDA runtime version is considered
+to the least preferred, so that a higher CUDA runtime version is considered
 better than a lower one, and a higher CPU architecture version likewise.
-Then, the features themselves are sorted within every namespace —
+Then, the features themselves are sorted within every namespace;
 e.g. indicating that a specific architecture version is more important
 than an individual feature, so you'd rather take an x86-64-v3 wheel with
-no additional instruction sets declared over one declaring AVX support
-but using x86-64-v2. As the next step, namespaces are ordered. This way,
-we reach the point where every property has a corresponding index in the general
-order: determined by its namespace, feature name and value ordering.
+no additional instruction sets declared, over one declaring AVX support (which is already included in x86-64-v3)
+but using x86-64-v2 baseline. As a next step, namespaces are ordered,
+deciding whether CUDA, ROCm or perhaps CPU optimizations are more important.
+This way,
+we reach the point where every property has a corresponding sorting key,
+determined by its namespace, feature name and value ordering.
 
 Let's return to our initial example and add sort keys to it.
 
@@ -551,22 +553,23 @@ P<sub>1</sub>, P<sub>2</sub>, P<sub>3</sub>. A variant having [P<sub>3</sub>]
 is better than variant having no properties at all, since it has P<sub>3</sub>
 and the other does not. A variant [P<sub>2</sub>] is better than [P<sub>3</sub>],
 since it has P<sub>2</sub> and the other does not. And [P<sub>2</sub>, P<sub>3</sub>]
-is better than all of the above since it has both these properties, and they
+is better than all of the above since it has both these properties, and the others
 are missing at least one of them. And then [P<sub>1</sub>] is better than all
-of them, since they are missing the most preferred property — and so on,
-up to the variant having all possible properties.
+of them, since they are missing the most preferred property; and so on,
+up to the [P<sub>1</sub>, P<sub>2</sub>, P<sub>3</sub>] variant that has all the possible properties,
+and is therefore the most desirable.
 
 What does this imply in practice? Say, if the `nvidia` namespace is given higher
 priority than the `x86_64` namespace, then a `CUDA` variant will be preferred over
 an `x86-64-v3` variant, and a `CUDA + x86-64-v3` variant will preferred over a plain
-`CUDA` variant — provided both have matching CUDA properties. However,
-a `CUDA >=12.8` wheel will be preferred over a `CUDA >=12.6 + x86-64-v3` wheel;
-though such mismatched combinations are unlikely to be published in reality.
+`CUDA` variant, provided both have matching CUDA properties. However,
+a `CUDA >=12.8` wheel will be preferred over a `CUDA >=12.6 + x86-64-v3` wheel.
+However, we believe that such mismatched combinations are unlikely to be published in reality.
 
 ## Where do sort keys come from
 
-We have covered sorting variants based on a specific namespace, feature name
-and value ordering. However, what we didn't cover is how these bits are ordered
+I have explained how variants are sorted, using specific namespace, feature name
+and value ordering. However, what I didn't cover is how these bits are ordered
 themselves. To skip a bit ahead, we settled on a layout that uses three layers
 of sorting configuration:
 
@@ -591,12 +594,21 @@ user. Finally, all three keys combine into a sort key." />
 
 Unsurprisingly, plugins provide the initial ordering of features and their
 values. After all, given that the plugin defines these lists in the first place,
-it is quite reasonable for it to order it as well, rather than expecting
-consumers to keep repeating that `12.8` > `12.7` > `12.6` > …, and updating that
+it is quite reasonable for it to order them as well. Otherwise, the package
+maintainers would have to keep repeating that `12.8` > `12.7` > `12.6` > …, and updating this
 list whenever they are about to use a new property value.
 However, plugins are scoped to themselves and can only order feature names
-and values. They cannot provide namespace ordering — as that would effectively
+and values. They cannot provide namespace ordering, as that would effectively
 mean one plugin deciding how important another plugin is.
+
+This leaves us with two possibilities: either the package author or the user
+needs to define namespace ordering. Originally, we went with the latter idea;
+after all, the users know best whether they prefer CUDA or ROCm, or perhaps CPU
+optimization. However, this meant that the user had to jump through
+the hoops of configuring variant usage first, and once again things could not
+work out of the box. So we went with the next best thing possible: requiring package
+maintainers to specify namespace ordering in the variant configuration; after all, package authors
+are in good position to specify which variants are the most beneficial to their software.
 
 <figure>
 
@@ -628,19 +640,11 @@ plugin-api = "provider_variant_x86_64.plugin:X8664Plugin"`
 <figcaption>Listing 3. Example `pyproject.toml` with sort order defined</figcaption>
 </figure>
 
-This leaves us with two possibilities: either the package author or the user
-needs to define namespace ordering. Originally, we went with the latter idea —
-after all, the users know best whether they prefer CUDA or ROCm, or perhaps CPU
-optimization. However, this actually implied that the user had to jump through
-the hoops of configuring variant usage first, and once again things could not
-work out of the box. So we went with the next best thing: requiring package
-configuration to specify namespace ordering; after all, package authors
-are also in good position to specify which variants are the most beneficial.
-
 However, no reason to stop at namespace. After all, a specific package may
-want to point out, say, that their AES-NI variant is more beneficial than
-a fallback implemented using other instruction sets. Or reorder values — while
-I immediately can't think of a reason for that, let's have the option
+want to point out, say, that their AES-NI variant is more performant than
+a fallback implemented using the instruction sets provided by x86-64-v3.
+It might also be desirable reorder value; while
+I immediately can't think of a specific use case for that, let's have the option
 for symmetry anyway. So while the plugins specify the initial order of features
 and their values, packages are allowed to override it.
 
@@ -665,12 +669,12 @@ torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl        // CPU-only
 <figcaption>Listing 4. Example wheel variant filenames, with a fallback regular wheel, in order of preference</figcaption>
 </figure>
 
-Such a setup provides for a graceful fallback. When you are using an older
-CUDA version, the top variants are filtered out and the lower variants are used.
+Such a setup provides for a graceful fallback. Depending on your exact CUDA version,
+the top variants can be filtered out, and the lower variants will be used instead.
 If you don't have a compatible CUDA runtime at all, the fallback CPU wheel
 is used. So far, so good.
 
-However, consider a system with an older package manager that does not
+However, consider a system with an older package manager version that does not
 support variants. Independently of the presence of CUDA runtime, all variant
 wheels are ignored there, and the CPU-only fallback is installed. However,
 this is not the most optimal solution. Prior to introducing variants,
@@ -693,17 +697,17 @@ torch-2.8.0-cp313-cp313-manylinux_2_28_x86_64.whl           // CUDA 12.6 + CPU
 </figure>
 
 What we added here is a null variant, with label `00000000`. Since it has
-no properties, it is always supported — that is, as long as variants
-are supported in the first place. This lets us provide two different fallbacks:
-variant-enabled installers with no CUDA runtime will use the CPU-only null
+no properties, it is always supported; that is, as long as variants
+are supported in the first place. This enables us to provide two different fallbacks:
+variant-enabled installers with no compatible CUDA runtime will use the CPU-only null
 variant, whereas installers without variant support (and therefore unable
-to determine the CUDA runtime) will instead pick up the regular wheel, with both
-CUDA and CPU support.
+to determine the CUDA runtime version) will instead pick up the regular wheel, with both
+CUDA 12.6 and CPU support.
 
-Does it really matter? Well, that depends on how you look at it. While wheel
-variant support remains early, backwards compatibility is going to be important.
+Does it really matter? Well, that depends on how you look at it. Prior to wheel
+variant support being widely deployed, backwards compatibility is going to be important.
 And providing a different fallback may mean the difference between installing
-a 175 MiB CPU-only wheel, and a 850 MiB CUDA wheel installed on a system
+a 175 MiB CPU-only wheel, and a 850 MiB CUDA wheel, on a system
 without the CUDA runtime.
 
 ## Multiple property values
