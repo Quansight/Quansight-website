@@ -18,7 +18,7 @@ For the past 6 months we have
 been working hard on “wheel variants”, in collaboration
 with [Astral](https://astral.sh/), [NVIDIA](https://www.nvidia.com/)
 and the [PyTorch](https://pytorch.org/) release team. This work culminated
-in today's [PyTorch 2.8 release](TODO) with experimental new wheels utilizing them,
+in today's [PyTorch 2.8 release](TODO) with new wheels utilizing them,
 and a corresponding experimental [variant-capable release of the uv package
 manager](TODO). The user-facing features you can try out today are described
 in [“Wheel variants” by Astral blog](https://astral.sh/blog/wheel-variants),
@@ -31,23 +31,23 @@ This blog post tells the story of how they came into being.
 Many Python distributions are uniform across different Python versions
 and platforms. For these distributions, it is sufficient to publish
 a single wheel that can be installed everywhere. However, some
-packages are more complex than that — they include compiled Python
+packages are more complex than that; they include compiled Python
 extensions or binaries.
 In order to robustly deploy these software on different platforms,
-you need to publish multiple binary packages, with the installers
-being able to select the one best fit the platform used.
+you need to publish multiple binary packages, and the installers
+need to select the one that fits the platform used best.
 
-For a long time, [Python Wheels](https://packaging.python.org/en/latest/specifications/binary-distribution-format/)
-made do with a relatively simple mechanism describing the needed variance:
-[Platform Compatibility Tags](https://packaging.python.org/en/latest/specifications/platform-compatibility-tags/).
+For a long time, [Python wheels](https://packaging.python.org/en/latest/specifications/binary-distribution-format/)
+made do with a relatively simple mechanism to describe the needed variance:
+[Platform compatibility tags](https://packaging.python.org/en/latest/specifications/platform-compatibility-tags/).
 These tags identified different Python implementations and versions,
-operating systems, CPU architectures. Over time, they were extended
+operating systems, and CPU architectures. Over time, they were extended
 to facilitate new use cases. To list a couple: [PEP 513](https://peps.python.org/pep-0513/)
-added <code>manylinux</code> tags to standardize the dependency on GNU/Linux
-systems and [PEP 656](https://peps.python.org/pep-0656/) added
+added <code>manylinux</code> tags to standardize the core library dependencies on GNU/Linux
+systems, and [PEP 656](https://peps.python.org/pep-0656/) added
 <code>musllinux</code> tags to facilitate Linux systems with musl libc.
 
-However, not all new use cases could be handled effectively within
+However, not all new use cases can be handled effectively within
 the framework of tags. The advent of GPU-backed computing made distinguishing
 different acceleration frameworks such as CUDA or ROCm important.
 Similarly, as the compatibility with older CPUs became less desirable,
@@ -56,9 +56,9 @@ to [x86-64-v2 microarchitecture
 level](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels),
 and Python packages need to be able to express the same requirement.
 And then, numerical libraries support different
-BLAS/LAPACK, MPI, OpenMP providers — and wish to enable the users to choose
-the build using their desired provider.
-While technically tags could technically be bent to facilitate all these use cases,
+BLAS/LAPACK, MPI, OpenMP providers, and wish to enable the users to choose
+the build matching their desired provider.
+While tags could technically be bent to facilitate all these use cases,
 they would grow quite baroque, and, critically, every change
 to tags needs to be implemented in all installers and package-related
 tooling separately, making the adoption difficult.
@@ -117,21 +117,21 @@ conventions:
   version, on any platform. It means a pure Python wheel, hence for pure Python
   packages this is the only wheel needed. It can also be provided for packages
   with optional extension modules,
-  as a fallback when there is no other wheel compatible with the user's system.
+  as a fallback when no other wheel is compatible with the user's system.
 
 You can find some unorthodox uses too, such as:
 
 - A pure Python package including dedicated code for every Python
   version, for example using `py312-none-any` to designate a wheel
-  dedicated to Python 3.12 (or newer — though in this case newer Python
+  dedicated to Python 3.12 (or newer; though in this case newer Python
   versions have their own wheels).
 
-- A pure executable package (that does not link to the Python library),
+- A pure executable package (that does not use the Python API),
   for example using `py3-none-macosx_11_0_arm64` to designate a wheel
   compatible with any Python 3 implementation on a macOS 11.0+ system
   with ARM64 CPU.
 
-Tags clearly provide some degree of flexibility. The existing code can usually
+Tags clearly provide some degree of flexibility. The logic already present in installers can usually
 account for future Python versions, operating system versions, libc versions,
 and to some degree for new implementations, ABI changes, new architectures
 and so on. But can it manage entirely novel tags?
@@ -139,23 +139,23 @@ and so on. But can it manage entirely novel tags?
 Well, technically yes. Some use cases would fit well within the current platform
 tags. Say, we could replace the plain `manylinux_2_28_x86_64` tag with a more
 fine-grained `manylinux_2_28_x86_64_v3`. Properties that aren't exclusive
-to existing platforms could be appended to them — say,
+to existing platforms could be appended to them; say,
 `manylinux_2_28_x86_64_cuda129`, `manylinux_2_28_aarch64_openblas_openmpi`
 and so on. However, there are two major problems with that.
 
 First, the existing [pip](https://pypi.org/project/pip/) code, based
 on the [packaging](https://pypi.org/project/packaging/) library, relies
-on enumerating all tag combinations compatible with the specific system
+on enumerating all tag combinations compatible with the specific system,
 and comparing the tags found in wheels to that list. For example,
-on a GNU/Linux system with Python 3.14 and glibc 2.41, this means almost 1300
-combinations. While this is not that much, once we start adding multiple
+on a GNU/Linux system with Python 3.14 and glibc 2.41, it yields almost 1300
+combinations. While this number does not pose a problem yet, once we start adding multiple
 additional suffixes, the number of possible combinations explodes.
 
 Second, tags are implemented entirely within the package manager. This implies
 that for every new set of tags, all package managers must add support for them,
-and then their users must upgrade. And ideally, the tags should be defined in such
-a way so that the implementation will be able to determine the support
-for future tags. Otherwise, we're talking about having to update all the package
+and then their users must upgrade. And ideally, the tags would be defined in such
+a way that the implementation will be able to predict and support
+future tags. Otherwise, we're talking about having to update all the package
 managers every time a new CPU or GPU architecture version is defined, or a new
 CUDA version is released, and so on.
 
@@ -166,7 +166,7 @@ In other words, while tags serve their primarily purpose well, they don't scale
 ## How did projects manage without new tags?
 
 It's not like this problem cropped up overnight. Packages have needed more
-variants than platform tags support for a while now, so how are they working
+variants than platform tags supported for a while now, so how are they working
 around the problem?
 
 <div style={{ textAlign: "center" }}>
@@ -185,25 +185,24 @@ If you enter [PyTorch's “Start Locally”](https://pytorch.org/get-started/lo
 document, you are welcomed with an interactive chooser. Once you select
 a specific build, operating system and compute platform, you are given
 a specific pip invocation. Most of these commands include an `--index-url`
-parameter — and that's the answer, different variants of PyTorch wheels
+parameter, and that's the answer: different variants of PyTorch wheels
 are published on separate package indexes, rather than on PyPI.
 
-Surely, this isn't the most optimal solution. For a start, it requires manual
-action. In the first place, you need to realize that you can't just
-`pip install torch` and necessarily get what you expect. You need to find
-the instructions, and follow them. And if you wish your PyTorch installation
-to be correctly updated in the future, they also need to make sure to continue
+Surely, this isn't the most optimal solution. For a start, it requires additional effort from the user.
+In the first place, you need to realize that you can't just
+`pip install torch` and necessarily get what you expected. You need to find
+the instructions, and follow them. And for your PyTorch installation
+to be correctly updated in the future, you also need to continue
 using the custom index.
 
-And this assumes you are actually installing PyTorch directly. If PyTorch
-is only a dependency of something else, you may not even notice it being
+And this assumes you are actually installing PyTorch directly. If it is only a dependency of something else, you may not even notice that it is being
 installed!
 
 Furthermore, the more packages use similar approaches, the more custom indexes
 you end up using. And if different indexes start providing different versions
-of the same packages, the results can get pretty surprising. In fact, this lead
-to work on [PEP 766](https://peps.python.org/pep-0766/) that attempts
-to improve the security over using multiple indexes (currently in draft).
+of the same packages, the results can get pretty surprising. In fact, this led
+to the work on [PEP 766](https://peps.python.org/pep-0766/), in an attempt
+to improve security when using multiple indexes (currently in draft).
 
 <div style={{ textAlign: "center" }}>
 <figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
@@ -219,10 +218,10 @@ or 'experimental' with links, 'no' or 'n/a'." />
 
 Let's look at another example. [JAX's “Supported Platforms” matrix](https://docs.jax.dev/en/latest/installation.html#supported-platforms) provides links to instructions for different installation options.
 Most of them suggest installing the [jax package](https://pypi.org/project/jax/)
-with an extra, e.g.: `jax[cuda12]`. And indeed, JAX publishes support
-for different variants as plugins that can be pulled in automatically
+with an “extra” specified, e.g.: `jax[cuda12]`. And indeed, JAX provides support
+for different variants through plugins that can be pulled in automatically
 via dependencies. This avoids using additional indexes, but still requires
-manual action from the user.
+additional effort from the user.
 
 Other variations of the same solution are possible. Rather than using plugins,
 [CuPy uses different package names for the variants](https://docs.cupy.dev/en/stable/install.html#installing-cupy-from-pypi).
@@ -230,9 +229,9 @@ However, this has the unfortunate side effect
 that once multiple different variants end up being installed, they may overwrite
 one another.
 
-Or one can just publish a single package with all possible variants inside —
-however that massively increases the wheel sizes, which is very much undesirable
-and for projects like PyTorch won't fit within PyPI's size limits.
+Or one can just publish a single package with all possible variants inside,
+at the price of massively increasing the wheel sizes, which is highly undesirable,
+and for projects like PyTorch it is going to exceed PyPI's size limits.
 
 ## Plugins to the rescue!
 
