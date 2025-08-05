@@ -235,8 +235,8 @@ and for projects like PyTorch it is going to exceed PyPI's size limits.
 
 ## Plugins to the rescue!
 
-As I have already pointed out, the solutions putting variant selection entirely
-within the package manager weren't very flexible. They could really only work
+As I have already pointed out, the solutions that put variant selection entirely
+within the package manager areen't very flexible. They could only work
 if the list of valid variants is largely fixed, or at least predictable.
 To sidestep this limitation, we need a more distributed architecture, one where
 each package can independently devise how to select between its variants.
@@ -260,16 +260,16 @@ While build backends (as defined by [PEP 517]("https://peps.python.org/pep-05
 for selecting and installing wheels, they both defer variant-related tasks
 to external variant providers. These are regular Python packages that can
 be maintained and updated independently of the installers, and therefore
-are able to deal with the rapidly developing variant landscape better. Everyone
+are able to deal with the rapidly developing variant landscape better. Everyone
 can create their own provider, and every package can declare which providers
-they precisely need — and installers automatically pull them in as necessary.
+they precisely need; and installers automatically use them on demand.
 
-Now, this kind of flexibility also required a slightly different approach
+Now, this kind of flexibility requires a slightly different approach
 than tags. After all, a single variant can be described using a number
-of properties: CUDA or ROCm runtime version, compatible GPU architectures,
-compatible CPU architectures, required instruction sets, selected libraries.
+of properties, such as: CUDA or ROCm runtime version, compatible GPU architectures,
+compatible CPU architectures, required instruction sets, selected libraries, and so on.
 While some variants could be described using tag-style short strings, making
-them fully scalable required using more general property lists.
+them fully scalable requires using more general property lists.
 
 Expressing these properties in a key-value form seemed like a good idea.
 That is, rather than having a dozen property tags such as `cuda_lower_12_5`,
@@ -292,8 +292,7 @@ x86_64 :: sha_ni :: on
 </figure>
 
 Yes, the syntax was inspired by [trove classifiers](https://pypi.org/classifiers/)!
-Every property is a 3-element tuple consisting of the namespace (one per plugin
-used), feature name and value.
+Every property is a 3-element tuple consisting of the namespace (one for each plugin), feature name and value.
 
 Here, two providers are used: one representing CUDA installation (`nvidia`
 namespace) and one representing x86_64 CPU properties (`x86_64` namespace).
@@ -305,7 +304,7 @@ namespace) and one representing x86_64 CPU properties (`x86_64` namespace).
 The 'nvidia' plugin provides 'cuda_version_lower_bound' with values of 12.8, 12.7, 12.6, 12.5, …
 and 'cuda_version_upper_bound' with values of …, 12.12, 12.11, 12.10, 12.9. The 'x86_64' plugin
 provides a level property with values of v3, v2 and v1, and a bunch of instruction set
-properties named 'aes', 'pclmuldqd', 'rdseed', 'sha_ni' — all of them having the value 'on'." />
+properties named 'aes', 'pclmuldqd', 'rdseed', 'sha_ni'; all of them having the value 'on'." />
   <figcaption>Fig. 5. Example supported properties reported by plugins</figcaption>
 </figure>
 </div>
@@ -313,61 +312,64 @@ properties named 'aes', 'pclmuldqd', 'rdseed', 'sha_ni' — all of them having t
 The `nvidia` provider detects the local CUDA installation and determines which version
 is installed. Then, it transforms this version into set of compatible
 constraints that can be used to determine whether a given wheel variant
-can be installed — and if multiple variants fit, which one should be used.
+can be installed, and if multiple variants fit, which one should be used.
 
 For example, if you have CUDA 12.8, then all wheels that do not require a newer
-CUDA version are installable — but a wheel built specifically
+CUDA version are installable, but a wheel built specifically
 for CUDA 12.8 will be preferred. So we support wheels with a lower bound
-of 12.8, 12.7, 12.6, 12.5… And the upper bound is handled in a similar way.
+of `12.8`, `12.7`, `12.6`, `12.5`… The upper bound is handled in a similar way.
 
-The x86_64 provider detects the local CPU and determines what instruction sets
-it supports. Then it returns all supported x86_64 architecture levels,
-and all supported instruction sets. So if you have a CPU which supports x86-64-v3,
-it would return v3, v2 and v1 as compatible, plus a long list of supported
+The `x86_64` provider detects the local CPU, and determines which instruction sets
+are supported. Then it returns all compatible x86-64 architecture levels,
+and all supported instruction sets. So if you have a CPU supporting x86-64-v3,
+the plugin would return `v3`, `v2` and `v1` as compatible, plus a long list of supported
 instruction set flags that can be used to indicate specific requirements
 above the baseline implied by `level`.
 
 ## From exhaustive enumeration to JSON
 
 Much like with tags, the installer needs to know the wheel variant's properties
-in order to be able to choose a wheel to install. However, these properties
-can both be more numerous and more complex than tags — and therefore are
+to select a wheel to install. However, these properties
+can both be more numerous and more complex than tags, and therefore are
 not a good fit to be included in the filename.
 
-Fetching all the wheels is not an option — as they can be quite large. Now,
+Fetching all the wheels is not an option, as they can be quite large. Now,
 technically the Zip format allows for relatively optimal partial fetching,
 so we could just fetch the relatively small amount of data related to variant
 properties. Still, fetching data from a possibly large number of wheel
 variants could hardly be considered an optimal solution, and not all indexes
-support HTTP range requests.
+support HTTP range requests that are required for this.
 
 Variant wheels do need unique filenames though, and at the same
-time we wanted to avoid making them too long — as some existing wheel filenames
-are already reaching the length at which they are causing issues for less
-permissive systems.
+time we wanted to avoid making them too long. Some existing wheel filenames
+are long enough already to be causing issues for some users.
 
 Here, the inspiration came from [Conda's build strings](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#build-number-and-string).
-Much like Conda packages usually include a hash of build variables
+Much like Conda packages usually include a hash of build variables,
 in their build string, we have decided to use a hash of variant properties
 to uniquely identify variants.
 
-What was really useful here is that the hashing algorithm provided
-a reproducible mapping from properties to wheel filenames. The first demo
-implementation of variant wheels used this to be able to select variants
+An additional advantage of this solution is that the hashing algorithm provided
+a reproducible mapping from properties to wheel filenames. In the first demo
+implementation of variant wheels, we used this property to select variants
 without actually fetching their properties. Instead, the installer would query
-all plugins found installed for their supported properties, then enumerate
+all plugins found installed, for their supported properties, then enumerate
 all possible combinations, compute their hashes and match them against available
 variant wheels.
 
 Unfortunately, this solution had a number of disadvantages. Most importantly,
 with growing number of supported properties, the number of possible combinations
 grew exponentially. With more complex plugins, hash computation quickly
-became a bottleneck. On top of that, it assumed that the user needs to know
+became a bottleneck. For example, after modeling 20 trivial properties (for SIMD
+instruction sets), dependency resolution already slowed down by over 10 seconds
+on a consumer-grade system. Modeling 40 flags would exceed a billion
+possible combinations, and require tebibytes of memory for the hash table.
+On top of that, the approach assumed that the user needs to know
 which plugins to install first. So while it was an interesting idea, it did
 not scale well.
 
-Instead, we did the next best thing — added an explicit file with variant
-information that is published alongside variant wheels. And from this point,
+So we did the next best thing: added an explicit file with variant
+information that is published alongside variant wheels. And from this point onwards,
 a bunch of really interesting changes around the design started happening.
 
 If I may jump the chronology a bit at this point, one interesting fact was how
@@ -376,9 +378,9 @@ evolved, it was only natural that `variants.json` would contain not only
 a mapping of available variants to their properties, but also other information
 needed to use variants: how to install and load the plugins, and how to sort
 the properties. Some of this information was also needed to build wheel
-variants, and it only seemed natural that rather than expecting `variants.json`
-to be maintained separately, we'd include all these details in project's sources
-and pass them through while making `variants.json` entirely autogenerated.
+variants, so rather than expecting `variants.json`
+to be maintained separately, we included all these details in project's sources
+and passed them through the wheels, making it possible to generate `variants.json` automatically.
 
 <div style={{ textAlign: "center" }}>
 <figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
@@ -396,28 +398,30 @@ objects contains additional 'armv8.2' and 'armv9.0' keys from two other wheels."
 </figure>
 </div>
 
-This is how we arrived at a three step pipeline: with developers putting
-the baseline variant information in `pyproject.toml`, this information being
+We arrived at a three step pipeline: developers put
+the baseline variant information in `pyproject.toml`; it is
 then copied to the wheel itself, along with the metadata specifying which variant
-this wheel is, and eventually the information from all wheel variants being combined
-into a single `variants.json`. Over time, we also realized we could make things
-simpler by aligning the structure along all three files. We started with
-a `pyproject.toml` file being transformed into a horrid form of Core Metadata
-fields, and then again into `variants.json`. We ended with a `pyproject.toml`
-table that's converted 1:1 into a `variant.json` file inside the wheel (with
-variant properties added), and then `variant.json` files from different wheels
-being merged into a single `variants.json`.
+this wheel is; and eventually the information from all wheel variants are combined
+into a single `variants.json` file.
+
+Later, we also realized we could make things
+simpler by aligning the structure along all three files. Initially,
+`pyproject.toml` file used to be transformed into a horrid form of Core Metadata
+fields, and then again into `variants.json`. In the final design, the `pyproject.toml`
+table was converted 1:1 into a `variant.json` file inside the wheel (with
+variant properties added); and then `variant.json` files from different wheels
+were merged into a single `variants.json`.
 
 At this point, it is also worth noting that as we realized that the provider
-information can change across package versions, we should replace a single
+information can change across package versions, we needed to replace a single
 `variants.json` file with per-version `{distribution}-{version}-variants.json`
 files, whose names match the initial parts of wheel filenames.
 
-Another useful advantage of statically defining the variant mapping is that
-it enables more arbitrary variant labels — the identifiers found in wheel
+Another useful advantage of statically defining the variant mapping was that
+it enabled more arbitrary variant labels, i.e. the identifiers found in wheel
 filenames. Since they no longer needed to be predictable from variant
 properties, we could permit custom labels, and just store those inside
-`variants.json` instead of the hash. For example, the wheel could be named
+`variants.json` in place of the hash. For example, the wheel could be named
 `-cu126.whl` rather than `-3f0459a2.whl`.
 
 ## The opt-in/opt-out debate, plugin installation and discovery
@@ -426,12 +430,12 @@ Perhaps the hottest discussion point during the work on wheel variants
 was whether the architecture should be opt-in or opt-out. In other words,
 whether the users should be required to perform some explicit action before
 having a wheel variant installed, or whether the installer should take care
-of everything, including installing the plugins as needed and running them.
+of everything, including installing and running the plugins on demand.
 
 The very first version of the proposal used a kind of opt-in mechanism.
-[Variantlib](https://github.com/wheelnext/variantlib/), our reference implementation, discovered and used plugins
-from the environment where the package installer was run. In order to install a variant,
-the user had to manually install all the required plugins first. Therefore,
+[Variantlib](https://github.com/wheelnext/variantlib/), our reference implementation, discovered and used all plugins
+that were installed in the environment where the package installer was run. In order to install a variant,
+you had to manually install all the required plugins first. Therefore,
 having the plugin installed worked as a gating mechanism.
 
 Why would we want an opt-in solution? The most important reason is security.
@@ -445,34 +449,34 @@ build-and-install</q>.
 Unfortunately, an opt-in solution like that poses a few problems. For a start,
 it is quite inconvenient to users. You have to realize that you need
 to do something special, you need to find the instructions and you need
-to install the plugins. And it won't always be obvious — you won't always
+to install the plugins. And it won't always be obvious: as I've mentioned already, you won't always
 be directly installing PyTorch or NumPy, but you will be getting them installed
-as an indirect dependency. You may not even realize they've gotten installed,
+as an indirect dependency. You may not even realize that they were installed,
 let alone that you missed an important step required to get an optimized
-variant. Besides, it is easy to install an incompatible version, two conflicting
-plugins or even reach an unsolvable situation where two different packages you
-need to install have conflicting provider dependencies.
+variant. Besides, it made it easy to install an incompatible version of a plugin, two conflicting
+plugins, or even reach an unsolvable situation where two different packages
+have conflicting provider dependencies.
 
 At the same time, plugin discovery was done via [entry
 points](https://packaging.python.org/en/latest/specifications/entry-points/).
 They were quite convenient throughout the development and testing, since they
 enabled variantlib to discover and query all the plugins installed
 in the development environment, without having to actually specify them
-in any way. However, it was pointed out that this a more explicit
+in any way. However, it was pointed out that a more explicit
 and self-contained model would be preferable.
 
 The next step was therefore to switch to a more explicit, opt-out design.
-We have introduced provider information in the variant information pipeline,
+We added provider information to the variant information pipeline,
 largely inspired by PEP 517, with a `requires` key specifying how to install
 the variant provider, and a `plugin-api` key specifying how to use it.
 Over time, we also added an `enable-if` key to support installing plugins
-only in specific environments (for example, the x86-64 plugin is only needed
+only in specific environments (for example, the `x86_64` plugin is only needed
 on x86-64 systems), and an `optional` key to make some plugins opt-in
 (for example, for variants used only in obscure configurations that should
 not be used by default). This also implied that the installer would now install
-plugins automatically, in isolated environments.
+plugins automatically, using isolated environments.
 
-With plugin installation and discovery taken care of, one problem remained:
+With plugin installation and discovery taken care of, one major problem remains:
 variant sorting. Let's take a closer look at it next.
 
 ## Variant sorting
