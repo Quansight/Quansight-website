@@ -6,10 +6,10 @@ description: 'The story of how the Python Wheel Variants design was developed'
 category: [Packaging]
 featuredImage:
   src: /posts/python-wheels-from-tags-to-variants/featured.jpeg
-  alt: A black steam train pulling a olive-colored carr in reverse. It has cool wheels with red spikes. Photograph by the author.
+  alt: A black steam train pulling a olive-colored car in reverse. It has cool wheels with red spikes. Photograph by the author.
 hero:
   imageSrc: /posts/python-wheels-from-tags-to-variants/hero.jpeg
-  imageAlt: A black steam train pulling a olive-colored carr in reverse. It has cool wheels with red spikes. Photograph by the author.
+  imageAlt: A black steam train pulling a olive-colored car in reverse. It has cool wheels with red spikes. Photograph by the author.
 ---
 
 # Python Wheels: from Tags to Variants
@@ -18,12 +18,12 @@ For the past 6 months we have
 been working hard on “wheel variants”, in collaboration
 with [Astral](https://astral.sh/), [NVIDIA](https://www.nvidia.com/)
 and the [PyTorch](https://pytorch.org/) release team. This work culminated
-in today's [PyTorch 2.8 release](TODO) with new wheels utilizing them,
+in last week's [PyTorch 2.8 release](TODO) with new wheels supporting the variant design,
 and a corresponding experimental [variant-capable release of the uv package
 manager](TODO). The user-facing features you can try out today are described
-in [“Wheel variants” by Astral blog](https://astral.sh/blog/wheel-variants),
-[“Streamline CUDA-Accelerated Python Install and Packaging Workflows with Wheel Variants” on NVIDIA Technical Blog](https://developer.nvidia.com/blog/streamline-cuda-accelerated-python-install-and-packaging-workflows-with-wheel-variants/),
-and [TODO on PyTorch Foundation blog](TODO).
+in [“Wheel variants” on the Astral blog](https://astral.sh/blog/wheel-variants),
+in [“Streamline CUDA-Accelerated Python Install and Packaging Workflows with Wheel Variants” on the NVIDIA Technical Blog](https://developer.nvidia.com/blog/streamline-cuda-accelerated-python-install-and-packaging-workflows-with-wheel-variants/),
+and [“PyTorch Wheel Variants, the frontier of Python Packaging” on the PyTorch Foundation blog](TODO).
 This blog post tells the story of how they came into being.
 
 ## Introduction
