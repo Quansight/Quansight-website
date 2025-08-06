@@ -49,7 +49,7 @@ systems, and [PEP 656](https://peps.python.org/pep-0656/) added
 
 However, not all new use cases can be handled effectively within
 the framework of tags. The advent of GPU-backed computing made distinguishing
-different acceleration frameworks such as CUDA or ROCm important.
+different acceleration frameworks such as NVIDIA CUDA or AMD ROCm important.
 Similarly, as the compatibility with older CPUs became less desirable,
 many distributions have set baselines for their binary packages
 to [x86-64-v2 microarchitecture
