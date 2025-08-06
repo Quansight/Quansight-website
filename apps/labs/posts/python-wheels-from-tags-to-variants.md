@@ -21,9 +21,9 @@ and the [PyTorch](https://pytorch.org/) release team. This work culminated
 in last week's [PyTorch 2.8 release](TODO) with new wheels supporting the variant design,
 and a corresponding experimental [variant-capable release of the uv package
 manager](TODO). The user-facing features you can try out today are described
-in [“Wheel variants” on the Astral blog](https://astral.sh/blog/wheel-variants),
-in [“Streamline CUDA-Accelerated Python Install and Packaging Workflows with Wheel Variants” on the NVIDIA Technical Blog](https://developer.nvidia.com/blog/streamline-cuda-accelerated-python-install-and-packaging-workflows-with-wheel-variants/),
-and [“PyTorch Wheel Variants, the frontier of Python Packaging” on the PyTorch Foundation blog](TODO).
+in the [“Wheel variants” blog post on Astral](https://astral.sh/blog/wheel-variants),
+in the [“Streamline CUDA-Accelerated Python Install and Packaging Workflows with Wheel Variants” on the NVIDIA Technical Blog](https://developer.nvidia.com/blog/streamline-cuda-accelerated-python-install-and-packaging-workflows-with-wheel-variants/),
+and the [“PyTorch Wheel Variants, the frontier of Python Packaging” on the PyTorch Foundation blog](TODO).
 This blog post tells the story of how they came into being.
 
 ## Introduction
