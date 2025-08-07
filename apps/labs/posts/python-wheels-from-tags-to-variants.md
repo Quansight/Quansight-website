@@ -21,9 +21,12 @@ and the [PyTorch](https://pytorch.org/) release team. This work culminated
 in last week's [PyTorch 2.8 release](TODO) with new wheels supporting the variant design,
 and a corresponding experimental [variant-capable release of the uv package
 manager](TODO). The user-facing features you can try out today are described
-in the [“Wheel variants” blog post on Astral](https://astral.sh/blog/wheel-variants),
-in the [“Streamline CUDA-Accelerated Python Install and Packaging Workflows with Wheel Variants” on the NVIDIA Technical Blog](https://developer.nvidia.com/blog/streamline-cuda-accelerated-python-install-and-packaging-workflows-with-wheel-variants/),
-and the [“PyTorch Wheel Variants, the frontier of Python Packaging” on the PyTorch Foundation blog](TODO).
+in the blog posts from other participants:
+
+- [“Wheel variants” by Astral](https://astral.sh/blog/wheel-variants)
+- [“Streamline CUDA-Accelerated Python Install and Packaging Workflows with Wheel Variants” on the NVIDIA Technical Blog](https://developer.nvidia.com/blog/streamline-cuda-accelerated-python-install-and-packaging-workflows-with-wheel-variants/)
+- [“PyTorch Wheel Variants, the frontier of Python Packaging” on the PyTorch Foundation blog](TODO)
+
 This blog post tells the story of how they came into being.
 
 ## Introduction
@@ -48,16 +51,19 @@ systems, and [PEP 656](https://peps.python.org/pep-0656/) added
 <code>musllinux</code> tags to facilitate Linux systems with musl libc.
 
 However, not all new use cases can be handled effectively within
-the framework of tags. The advent of GPU-backed computing made distinguishing
-different acceleration frameworks such as NVIDIA CUDA or AMD ROCm important.
-Similarly, as the compatibility with older CPUs became less desirable,
-many distributions have set baselines for their binary packages
-to [x86-64-v2 microarchitecture
-level](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels),
-and Python packages need to be able to express the same requirement.
-And then, numerical libraries support different
-BLAS/LAPACK, MPI, OpenMP providers, and wish to enable the users to choose
-the build matching their desired provider.
+the framework of tags. To list a few:
+
+- The advent of GPU-backed computing made distinguishing
+  different acceleration frameworks such as NVIDIA CUDA or AMD ROCm important.
+- As the compatibility with older CPUs became less desirable,
+  many distributions have set baselines for their binary packages
+  to [x86-64-v2 microarchitecture
+  level](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels),
+  and Python packages need to be able to express the same requirement.
+- Numerical libraries support different
+  BLAS/LAPACK, MPI, OpenMP providers, and wish to enable the users to choose
+  the build matching their desired provider.
+
 While tags could technically be bent to facilitate all these use cases,
 they would grow quite baroque, and, critically, every change
 to tags needs to be implemented in all installers and package-related
@@ -74,9 +80,7 @@ range of use cases, perhaps even beyond what they were initially meant
 to support. Each wheel features three platform tags:
 
 - A Python tag specifying the required Python implementation and version
-
 - An ABI tag specifying the required Python implementation ABI for extension modules in the package
-
 - A platform tag specifying the compatible platform (usually operating system
   and CPU architecture)
 
@@ -574,9 +578,7 @@ themselves. To skip a bit ahead, we settled on a layout that uses three lay
 of sorting configuration:
 
 1. Sorting defined by the provider plugin itself.
-
 2. Sorting defined by the package (in variant information).
-
 3. Sorting defined by the user.
 
 <div style={{ textAlign: "center" }}>
