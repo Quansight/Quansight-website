@@ -17,12 +17,12 @@ understanding how others utilize their libraries. Having better data of
 when and how functions are being used has many benefits. Some of these
 are:
 
-  - better API design
-  - determining whether or not a feature can be deprecated or removed.
-  - more instructive tutorials
-  - understanding the adoption of new features
+- better API design
+- determining whether or not a feature can be deprecated or removed.
+- more instructive tutorials
+- understanding the adoption of new features
 
-# Python Namespace Inspection
+## Python Namespace Inspection
 
 We wrote a general tool
 [python-api-inspect](https://github.com/Quansight-Labs/python-api-inspect)
@@ -34,8 +34,7 @@ for [pandas](https://pandas.pydata.org/),
 [NumPy](https://www.numpy.org/), and
 [SciPy](https://www.scipy.org/). The previously mentioned work used
 regular expressions to search for method usage. The primary issue with
-this approach is that it cannot handle `import numpy.random as rand;
-rand.random(...)` unless additional regular expressions are
+this approach is that it cannot handle `import numpy.random as rand; rand.random(...)` unless additional regular expressions are
 constructed for each case and will result in false
 positives. Additionally,
 [BigQuery](https://cloud.google.com/bigquery/) is not a free resource.
@@ -125,7 +124,7 @@ depend on numpy. This would not be possible without the [libraries.io
 API](https://libraries.io/api). It is a remarkable project which
 deserves more attention.
 
-# Results
+## Results
 
 The table below summarizes the findings of namespace usage within all
 `*.py` files, all `*.py` in only test directories, all `*.py` files

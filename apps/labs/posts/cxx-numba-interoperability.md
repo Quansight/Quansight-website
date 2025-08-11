@@ -266,7 +266,7 @@ in foo(7)
 130
 ```
 
-# Summary
+## Summary
 
 In this post, we outlined a method of calling C++ library functions
 from Python with an emphasis on their usage from Numba compiled
@@ -275,12 +275,12 @@ functions with minimal overhead. While the provided tool
 with scalar inputs and return values, it can be easily extended to
 support other C++ features as well.
 
-# Acknowledgements
+## Acknowledgements
 
 I thank Breno Campos and Guilherme Leobas for discussions and for sharing
 their expertise on the [LLVM Project](https://www.llvm.org/).
 
-# Appendix: A list of Python/C/C++ connectivity tools
+## Appendix: A list of Python/C/C++ connectivity tools
 
 - [Boost.Python: C++ library with a IDL-like interface for binding C++ classes and functions to Python](https://www.boost.org/doc/libs/1_75_0/libs/python/doc/html/index.html)
 - [cffi: C Foreign Function Interface for Python](https://cffi.readthedocs.io/en/latest/)
