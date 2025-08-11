@@ -26,7 +26,7 @@ export const serializePost = async (
 
   if ((data as TPost['meta']).featuredImage.src.endsWith('.svg')) {
     throw Error(
-      `SVG not allowed for featured image. Convert to PNG or JPEG: ${data.featuredImage.src}`,
+      `SVG not allowed for featured image (not widely supported by social media sites). Convert to PNG or JPEG: ${data.featuredImage.src}`,
     );
   }
 
