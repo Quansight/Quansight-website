@@ -19,11 +19,11 @@ been working hard on “wheel variants”, in collaboration
 with [Astral](https://astral.sh/), [NVIDIA](https://www.nvidia.com/)
 and the [PyTorch](https://pytorch.org/) release team. This work culminated
 in last week's [PyTorch 2.8 release](https://pytorch.org/blog/pytorch-2-8/) with new wheels supporting the variant design,
-and a corresponding experimental [variant-capable release of the uv package
-manager](TODO). The user-facing features you can try out today are described
+and a corresponding experimental variant-capable release of the uv package
+manager. The user-facing features you can try out today are described
 in the blog posts from other participants:
 
-- [“Wheel variants” by Astral](https://astral.sh/blog/wheel-variants)
+- [“A variant-enabled build of uv” by Astral](https://astral.sh/blog/wheel-variants)
 - [“Streamline CUDA-Accelerated Python Install and Packaging Workflows with Wheel Variants” on the NVIDIA Technical Blog](https://developer.nvidia.com/blog/streamline-cuda-accelerated-python-install-and-packaging-workflows-with-wheel-variants/)
 - [“PyTorch Wheel Variants, the frontier of Python Packaging” on the PyTorch Foundation blog](https://pytorch.org/blog/pytorch-wheel-variants/)
 
