@@ -281,7 +281,7 @@ That is, rather than having a dozen property tags such as `cuda_lower_12_5`,
 feature name `cuda_version_lower_bound` and the version as a value. And since
 we expect variant providers to be developed largely independently, putting
 these features in namespaces makes it possible to organize them logically
-and avoid name collisions. Consider the following example.
+and avoid name collisions. Consider the example in listing 1.
 
 <figure>
 
@@ -757,8 +757,8 @@ Conjunctive logic can't work here; you need disjunction, an `OR`.
 
 Specifically for this use case, we introduced the ability to specify multiple
 values for the same feature, with the requirement that at least one value
-must be supported for the wheel to be compatible. Consider the following
-property list.
+must be supported for the wheel to be compatible. Consider the property list
+in listing 7.
 
 <figure>
 
@@ -776,7 +776,8 @@ nvidia :: sm_arch :: 120_virtual
 <figcaption>Listing 7. Example list of properties with multiple values for a single feature</figcaption>
 </figure>
 
-It is the set of variant values for `sm_arch` you'd get for the following build parameter when building PyTorch:
+It is the set of variant values for `sm_arch` you'd get when building PyTorch
+with the build parameter from listing 8.
 
 <figure>
 
@@ -936,7 +937,7 @@ After all, building a variant wheel generally involves installing a provider
 plugin, if only to validate whether the requested properties are correct.
 And indeed, the very first attempt to do that used environment markers
 in the `build-system.requires` section of `pyproject.toml`, to specify which
-plugins needed to be installed. It looked somewhat like the following:
+plugins needed to be installed. It looked somewhat like the snippet in listing 9.
 
 <figure>
 
