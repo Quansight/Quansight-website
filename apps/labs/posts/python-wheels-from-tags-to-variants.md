@@ -2,7 +2,7 @@
 title: 'Python Wheels: from Tags to Variants'
 published: August 13, 2025
 authors: [michal-gorny]
-description: 'The story of how the Python Wheel Variants design was developed'
+description: 'The story of how the Python Wheel Variant design was developed'
 category: [Packaging]
 featuredImage:
   src: /posts/python-wheels-from-tags-to-variants/featured.jpeg
