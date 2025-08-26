@@ -1,21 +1,21 @@
 ---
-title: "Expressions are coming for pandas!"
+title: "Expressions are coming to pandas!"
 published: 27 August, 2025
 authors: [marco-gorelli]
 description: "`pd.col` will soon be a real thing!"
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/pandas-expressions/featured.jpg
-  alt: 'panda climbing tree, with `pd.col` writing. Photo by Chester Ho on Unsplash'
+  alt: 'panda climbing tree, with `pd.col` text above. Photo by Chester Ho on Unsplash'
 hero:
   imageSrc: /posts/pandas-expressions/hero.jpg
-  imageAlt: 'panda climbing tree, with `pd.col` writing. Photo by Chester Ho on Unsplash'
+  imageAlt: 'panda climbing tree, with `pd.col` text above. Photo by Chester Ho on Unsplash'
 
 ---
 
 > "Express yourself (Ah, ah, ah yeah, ah yeah, ah yeah, ah yeah)" - _Dr. Dre_
 
-17 years ago, pandas came onto the scene and took the Python data science scene by storm. It provided data scientists with an efficient way to interact with tabular data and solve real problems. Over time, other frameworks have emerged, often inspired by pandas but making various innovations aimed at tackling pandas' limitations. Recently, we've come full-circle, and pandas has introduced a new syntax inspired by the newer wave of dataframe libraries. Let's learn about why, and how you can use it!
+17 years ago, pandas came onto the scene and took the Python data science scene by storm. It provided data scientists with an efficient way to interact with tabular data and solve real problems. Over time, other frameworks have emerged, taking inspiration from pandas whilst addressing some of its many limitations. Recently, we've come full-circle, and pandas has introduced a new syntax inspired by the newer wave of dataframe libraries. Let's learn about why, and how you can use it!
 
 ## How to assign a new column in pandas
 
@@ -48,7 +48,7 @@ The first option modifies the original object `df` in-place, and isn't suitable 
 
 I don't think the first point is appreciated enough, so before exploring `pd.col` more, let's elaborate on this `lambda` drawback.
 
-## `lambda` might not do what you think it does
+### `lambda` might not do what you think it does
 
 Say you have a dataframe
 
@@ -73,11 +73,7 @@ Try executing though - you'll be in for a big surprise!
 2  19  19  19
 ```
 
-Bet that's not what you were expecting! Time to learn how to do better.
-
-## Express yourself
-
-Let's rewrite the above using expressions:
+Let's now rewrite the above using the new `pd.col` syntax:
 
 ```python
 df.assign(
@@ -85,7 +81,7 @@ df.assign(
 )
 ```
 
-The output of `pd.col` is called an _expression_. You can think of it as a delayed column - it's only produces a result once it's evaluated inside a dataframe context. Note only does it provide us with a clean syntax, it also produces the output we were expecting!
+The output of `pd.col` is called an _expression_. You can think of it as a delayed column - it only produces a result once it's evaluated inside a dataframe context. Note only does it provide us with a clean syntax, it also produces the output we were expecting!
 
 ```python
     a   b   c
@@ -103,7 +99,7 @@ Out[7]: (col('a') + 10)
 
 Anecdotally, from my experience teaching Polars (a newer dataframe library which makes extensive use of expressions), people develop an intuition for this `col` syntax very quickly.
 
-## What else can `pd.col` do?
+## What can `pd.col` do?
 
 Series namespaces, such as [dt](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.dt.html) and [str](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html), are also supported. If you [register your own Series namespace](https://pandas.pydata.org/docs/reference/api/pandas.api.extensions.register_series_accessor.html), that'll also be supported. NumPy [ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html) can also take expressions are arguments:
 
@@ -124,30 +120,28 @@ df.assign(
 1  Kampala    25.0    KAMPALA    3.218876
 ```
 
-You can use `pd.col` anywhere in the pandas API where they accept callables from dataframes to series or scalars. One such place is `loc` - for example, to keep all rows where the value of column `'a'` is greater than `1`, you can do:
+You can use `pd.col` anywhere in the pandas API where they accept callables from dataframes to series or scalars. One such place is `loc` - for example, to keep all rows where the value of column `'temp_c'` is greater than `10`, you can do:
 
 ```python
-df = pd.DataFrame({'a': [1,2,3], 'b': [4,5,6], 'c': [7,8,9]})
-df.loc[pd.col('a')>1]
+df.loc[pd.col('temp_c')>10]
 ```
 
 ```console
-   a  b  c
-1  2  5  8
-2  3  6  9
+      city  temp_c
+1  Kampala    25.0
 ```
 
 ## Can we use `pd.all` too?
 
-If you're used to Polars, you might be wondering if it's possible to take things a step further by rewriting the above as just:
+If you're used to Polars, you might be wondering if it's possible to operate on multiple columns at the same time by writing something like:
 
 ```python
 df.assign(pd.all() + 10)
 ```
 
-Answer: not yet. Some extensive refactors would be needed in pandas for that to work. But, the introduction of `pd.col` at least opens the doors to it!
+The answer is: not yet. Some extensive refactors would be needed in pandas for that to work. But, the introduction of `pd.col` at least opens the doors to it!
 
-In the meantime, [Narwhals](https://github.com/narwhals-dev/narwhals) implements more complete support for expressions on top of pandas (as well as on top of DuckDB, PySpark, Dask, and other major libraries!):
+In the meantime, [Narwhals](https://github.com/narwhals-dev/narwhals) implements more complete support for expressions on top of pandas (as well as on top of DuckDB, PySpark, Dask, and other major libraries!) - in particular, multi-output expressions are supported:
 
 ```python
 import narwhals as nw
@@ -155,7 +149,7 @@ import narwhals as nw
 nw.from_native(df).with_columns(nw.all() + 10).to_native()
 ```
 
-[nw.all](https://narwhals-dev.github.io/narwhals/api-reference/narwhals/#narwhals.all), [selectors](https://narwhals-dev.github.io/narwhals/api-reference/selectors/), and [expressions for use in `group_by`](https://narwhals-dev.github.io/narwhals/api-reference/dataframe/#narwhals.dataframe.DataFrame.group_by) are all already supported there - if you enjoy Polars' expressive syntax and want to write code which supports other major dataframe libraries too, check it out, you may like what you find!
+If you enjoy the expressive `col` syntax and want to use it more broadly to write applications which can support all major dataframe libraries, check it out, you may like what you find!
 
 ## What's next?
 
