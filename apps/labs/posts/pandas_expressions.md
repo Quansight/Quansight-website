@@ -28,7 +28,7 @@ data = {'city': ['Sapporo', 'Kampala'], 'temp_c': [6.7, 25.]}
 df = pd.DataFrame(data)
 ```
 
-Let's look at how we can make a new column `'temp_f'` which converts `'temp_c'` to Farenheit.
+Let's look at how we can make a new column `'temp_f'` which converts `'temp_c'` to Fahrenheit.
 
 ```python
 # option 1
