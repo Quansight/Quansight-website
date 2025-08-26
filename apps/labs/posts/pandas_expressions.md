@@ -1,15 +1,15 @@
 ---
 title: "Expressions are coming for pandas!"
-published: 28 August, 2025
+published: 27 August, 2025
 authors: [marco-gorelli]
 description: "`pd.col` will soon be a real thing!"
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/duckdb-when-used-to-frames/featured.jpg
-  alt: 'todo'
+  src: /posts/pandas-expressions/featured.jpg
+  alt: 'panda climbing tree, with `pd.col` writing. Photo by Chester Ho on Unsplash'
 hero:
   imageSrc: /posts/duckdb-when-used-to-frames/hero.jpg
-  imageAlt: 'todo'
+  imageAlt: 'panda climbing tree, with `pd.col` writing. Photo by Chester Ho on Unsplash'
 
 ---
 
