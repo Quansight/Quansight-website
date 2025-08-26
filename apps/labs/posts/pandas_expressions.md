@@ -8,14 +8,14 @@ featuredImage:
   src: /posts/pandas-expressions/featured.jpg
   alt: 'panda climbing tree, with `pd.col` writing. Photo by Chester Ho on Unsplash'
 hero:
-  imageSrc: /posts/duckdb-when-used-to-frames/hero.jpg
+  imageSrc: /posts/pandas-expressions/hero.jpg
   imageAlt: 'panda climbing tree, with `pd.col` writing. Photo by Chester Ho on Unsplash'
 
 ---
 
-> "Express yourself", Dr. Dre
+> "Express yourself (Ah, ah, ah yeah, ah yeah, ah yeah, ah yeah)" - _Dr. Dre_
 
-The most widely used dataframe library out there is - by far - pandas. It's been around for over 15 years and, despite its limitations, it solves a lot of real problems for a lot of real problems. At the same time, we've seen newer libraries Polars emerge, and with them, a preference for a more expressive kind of syntax. Recently, pandas has made a step towards that new expressive syntax - let's learn about why, and how you can use it!
+17 years ago, pandas came onto the scene and took the Python data science scene by storm. It provided data scientists with an efficient way to interact with tabular data and solve real problems. Over time, other frameworks have emerged, often inspired by pandas but making various innovations aimed at tackling pandas' limitations. Recently, we've come full-circle, and pandas has introduced a new syntax inspired by the newer wave of dataframe libraries. Let's learn about why, and how you can use it!
 
 ## How to assign a new column in pandas
 
@@ -41,13 +41,12 @@ df = df.assign(temp_f = lambda x: x['temp_c'] * 9 + 32)
 df = df.assign(temp_f = pd.col('temp_c') * 9 + 32)
 ```
 
-The first option modifies the original object `df` in-place, and isn't suitable for method-chaining. Hence, method-chaining aficionados tend to prefer the second option, whilst acknowledging some of its drawbacks:
+The first option modifies the original object `df` in-place, and isn't suitable for method-chaining. The second option allows for method chaining, but requires using a lambda function. The third option is the new syntax coming in pandas 3.0. But why is it an improvement over the second option, what's so bad about lambda functions? There's a few reasons:
 
-- `lambda` functions aren't easy to explain to beginners (anyone with experience teaching Python and/or mentoring people will confirm).
-- `lambda` functions are opaque and non-introspectible. Try printing the function out on the console, and you'll see something incomprehensible like `<function <lambda> at 0x76b583037560>`. If you receive a lambda function from user input, you have no way to validate what's inside (unless you enjoy reverse-engineering byte-code, and even then, you won't be able to do it in general).
-- scoping rules make behaviour with lambdas hard to predict.
+- Scoping rules make their behaviour hard to predict (example below!).
+- They are opaque and non-introspectible. Try printing one out on the console, and you'll see something incomprehensible like `<function <lambda> at 0x76b583037560>`. If you receive a lambda function from user input, you have no way to validate what's inside (unless you enjoy reverse-engineering byte-code, and even then, you won't be able to do it in general).
 
-I don't think the last point is appreciated enough, so before exploring the third option more, let's elaborate on `lambda` drawbacks.
+I don't think the first point is appreciated enough, so before exploring `pd.col` more, let's elaborate on this `lambda` drawback.
 
 ## `lambda` might not do what you think it does
 
@@ -78,7 +77,7 @@ Bet that's not what you were expecting! Time to learn how to do better.
 
 ## Express yourself
 
-Let's rewrite the above using expressions. Note that the following syntax will only be available in pandas 3.0 which - at the time of writing - has not yet been released. But it gives you a glimpse into the future!
+Let's rewrite the above using expressions:
 
 ```python
 df.assign(
@@ -86,7 +85,7 @@ df.assign(
 )
 ```
 
-And now, you get the output you were expecting, with a much cleaner syntax!
+The output of `pd.col` is called an _expression_. You can think of it as a delayed column - it's only produces a result once it's evaluated inside a dataframe context. Note only does it provide us with a clean syntax, it also produces the output we were expecting!
 
 ```python
     a   b   c
@@ -102,7 +101,7 @@ In [7]: pd.col('a') + 10
 Out[7]: (col('a') + 10)
 ```
 
-Anecdotally, from my experience teaching Polars, people develop an intuition for this `col` syntax very quickly.
+Anecdotally, from my experience teaching Polars (a newer dataframe library which makes extensive use of expressions), people develop an intuition for this `col` syntax very quickly.
 
 ## What else can `pd.col` do?
 
