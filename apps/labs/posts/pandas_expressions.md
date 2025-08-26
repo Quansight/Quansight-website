@@ -35,13 +35,13 @@ Let's look at how we can make a new column `'temp_f'` which converts `'temp_c'` 
 df['temp_f'] = df['temp_c'] * 9 / 5 + 32
 
 # option 2
-df = df.assign(temp_f = lambda x: x['temp_c'] * 9 + 32)
+df = df.assign(temp_f = lambda x: x['temp_c'] * 9 / 5 + 32)
 
 # option 3 (coming in pandas 3.0!)
-df = df.assign(temp_f = pd.col('temp_c') * 9 + 32)
+df = df.assign(temp_f = pd.col('temp_c') * 9 / 5 + 32)
 ```
 
-The first option modifies the original object `df` in-place, and isn't suitable for method-chaining. The second option allows for method chaining, but requires using a lambda function. The third option is the new syntax coming in pandas 3.0. But why is it an improvement over the second option, what's so bad about lambda functions? There's a few reasons:
+The first option modifies the original object `df` in-place, and isn't suitable for method-chaining. The second option allows for method chaining, but requires using a lambda function. The third option uses the new syntax coming in pandas 3.0. But why is it an improvement over the second option, what's so bad about lambda functions? There's a few reasons:
 
 - Scoping rules make their behaviour hard to predict (example below!).
 - They are opaque and non-introspectible. Try printing one out on the console, and you'll see something incomprehensible like `<function <lambda> at 0x76b583037560>`. If you receive a lambda function from user input, you have no way to validate what's inside (unless you enjoy reverse-engineering byte-code, and even then, you won't be able to do it in general).
@@ -81,13 +81,13 @@ df.assign(
 )
 ```
 
-The output of `pd.col` is called an _expression_. You can think of it as a delayed column - it only produces a result once it's evaluated inside a dataframe context. Note only does it provide us with a clean syntax, it also produces the output we were expecting!
+The output of `pd.col` is called an _expression_. You can think of it as a delayed column - it only produces a result once it's evaluated inside a dataframe context. Not only does it provide us with a clean syntax, it also produces the output we were expecting!
 
 ```python
     a   b   c
-0  20  50  17
-1  30  60  18
-2  40  70  19
+0  11  12  13
+1  12  13  14
+2  13  14  15
 ```
 
 Furthermore, we no longer have to deal with opaque lambda functions. If you print the expression, you'll get readable output:
@@ -101,7 +101,7 @@ Anecdotally, from my experience teaching Polars (a newer dataframe library which
 
 ## What can `pd.col` do?
 
-Series namespaces, such as [dt](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.dt.html) and [str](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html), are also supported. If you [register your own Series namespace](https://pandas.pydata.org/docs/reference/api/pandas.api.extensions.register_series_accessor.html), that'll also be supported. NumPy [ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html) can also take expressions are arguments:
+Series namespaces, such as [dt](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.dt.html) and [str](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html), are also supported. If you [register your own Series namespace](https://pandas.pydata.org/docs/reference/api/pandas.api.extensions.register_series_accessor.html), that'll also be supported. NumPy [ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html) can also take expressions as arguments:
 
 ```python
 import numpy as np
