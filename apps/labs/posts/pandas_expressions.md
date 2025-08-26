@@ -24,10 +24,7 @@ Suppose you've got a dataframe of city temperatures and populations:
 ```python
 import pandas as pd
 
-data = {
-    'city': ['Sapporo', 'Kampala'],
-    'temp_c': [6.7],
-}
+data = {'city': ['Sapporo', 'Kampala'], 'temp_c': [6.7, 25.]}
 df = pd.DataFrame(data)
 ```
 
@@ -106,6 +103,40 @@ Out[7]: (col('a') + 10)
 ```
 
 Anecdotally, from my experience teaching Polars, people develop an intuition for this `col` syntax very quickly.
+
+## What else can `pd.col` do?
+
+Series namespaces, such as [dt](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.dt.html) and [str](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html), are also supported. If you [register your own Series namespace](https://pandas.pydata.org/docs/reference/api/pandas.api.extensions.register_series_accessor.html), that'll also be supported. NumPy [ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html) can also take expressions are arguments:
+
+```python
+import numpy as np
+import pandas as pd
+
+df = pd.DataFrame({'city': ['Sapporo', 'Kampala'], 'temp_c': [6.7, 25.]})
+df.assign(
+    city_upper = pd.col('city').str.upper(),
+    log_temp_c = np.log(pd.col('temp_c')),
+)
+```
+
+```console
+      city  temp_c city_upper  log_temp_c
+0  Sapporo     6.7    SAPPORO    1.902108
+1  Kampala    25.0    KAMPALA    3.218876
+```
+
+You can use `pd.col` anywhere in the pandas API where they accept callables from dataframes to series or scalars. One such place is `loc` - for example, to keep all rows where the value of column `'a'` is greater than `1`, you can do:
+
+```python
+df = pd.DataFrame({'a': [1,2,3], 'b': [4,5,6], 'c': [7,8,9]})
+df.loc[pd.col('a')>1]
+```
+
+```console
+   a  b  c
+1  2  5  8
+2  3  6  9
+```
 
 ## Can we use `pd.all` too?
 
