@@ -15,7 +15,7 @@ hero:
 
 > "Express yourself (Ah, ah, ah yeah, ah yeah, ah yeah, ah yeah)" - _Dr. Dre_
 
-17 years ago, pandas came onto the scene and took the Python data science scene by storm. It provided data scientists with an efficient way to interact with tabular data and solve real problems. Over time, other frameworks have emerged, taking inspiration from pandas whilst addressing some of its many limitations. Recently, we've come full-circle, and pandas has introduced a new syntax inspired by the newer wave of dataframe libraries. Let's learn about why, and how you can use it!
+17 years ago, pandas came onto the scene and took the Python data science scene by storm. It provided data scientists with an efficient way to interact with tabular data and solve real problems. Over time, other frameworks have emerged, taking inspiration from pandas whilst addressing [some of its many limitations](https://wesmckinney.com/blog/apache-arrow-pandas-internals/). Recently, we've come full-circle, and [pandas has introduced a new syntax](https://github.com/pandas-dev/pandas/pull/62103) inspired by the newer wave of dataframe libraries. Let's learn about why, and how you can use it!
 
 ## How to assign a new column in pandas
 
@@ -47,7 +47,7 @@ df = df.assign(temp_f = lambda x: x['temp_c'] * 9 / 5 + 32)
 df = df.assign(temp_f = pd.col('temp_c') * 9 / 5 + 32)
 ```
 
-The first option modifies the original object `df` in-place, and isn't suitable for method-chaining. The second option allows for method chaining, but requires using a lambda function. The third option uses the new syntax coming in pandas 3.0. But why is it an improvement over the second option, what's so bad about lambda functions? There's a few reasons:
+The first option modifies the original object `df` in-place, and isn't suitable for method-chaining. The second option allows for [method chaining](https://tomaugspurger.net/posts/method-chaining/), but requires using a lambda function. The third option uses the new syntax coming in pandas 3.0. But why is it an improvement over the second option, what's so bad about lambda functions? There's a few reasons:
 
 - Scoping rules make their behaviour hard to predict (example below!).
 - They are opaque and non-introspectible. Try printing one out on the console, and you'll see something incomprehensible like `<function <lambda> at 0x76b583037560>`. If you receive a lambda function from user input, you have no way to validate what's inside (unless you enjoy reverse-engineering byte-code, and even then, you won't be able to do it in general).
@@ -77,8 +77,6 @@ df.assign(
 )
 ```
 
-Try executing though - you'll be in for a big surprise!
-
 ```python
     a   b   c
 0  17  17  17
@@ -86,15 +84,13 @@ Try executing though - you'll be in for a big surprise!
 2  19  19  19
 ```
 
-Let's now rewrite the above using the new `pd.col` syntax:
+Hmmm, that output does not look like what what we were expecting! Let's now rewrite the above using the new `pd.col` syntax:
 
 ```python
 df.assign(
     **{col: pd.col(col) + 10 for col in df.columns}
 )
 ```
-
-The output of `pd.col` is called an _expression_. You can think of it as a delayed column - it only produces a result once it's evaluated inside a dataframe context. Not only does it provide us with a clean syntax, it also produces the output we were expecting!
 
 ```python
     a   b   c
@@ -103,9 +99,16 @@ The output of `pd.col` is called an _expression_. You can think of it as a delay
 2  13  14  15
 ```
 
+That's more like it!
+
+The output of `pd.col` is called an _expression_. You can think of it as a delayed column - it only produces a result once it's evaluated inside a dataframe context. Not only does it provide us with a clean syntax, it also produces the output we were expecting!
+
 Furthermore, we no longer have to deal with opaque lambda functions. If you print the expression, you'll get readable output:
 
 ```python
+In [6]: lambda x: x['a'] + 10
+Out[6]: <function __main__.<lambda>(x)>
+
 In [7]: pd.col('a') + 10
 Out[7]: (col('a') + 10)
 ```
@@ -114,7 +117,7 @@ Anecdotally, from my experience teaching Polars (a newer dataframe library which
 
 ## What can `pd.col` do?
 
-Series namespaces, such as [dt](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.dt.html) and [str](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html), are also supported. If you [register your own Series namespace](https://pandas.pydata.org/docs/reference/api/pandas.api.extensions.register_series_accessor.html), that'll also be supported. NumPy [ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html) can also take expressions as arguments:
+Series namespaces, such as [dt](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.dt.html) and [str](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html), are also supported. If you [register your own Series namespace](https://pandas.pydata.org/docs/reference/api/pandas.api.extensions.register_series_accessor.html), you'll be able to access that too. You can even pass expressions to NumPy [ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html)!
 
 ```python
 import numpy as np
@@ -147,7 +150,7 @@ df.loc[pd.col('temp_c')>10]
 The pre-expressions ways to do this would have been:
 
 - `df.loc[df['temp_c'] > 10]`
-- or, `df.loc[lambda x: x['temp_c']>10]`
+- `df.loc[lambda x: x['temp_c']>10]`
 
 ## Can we use `pd.all` too?
 
@@ -164,7 +167,11 @@ In the meantime, [Narwhals](https://github.com/narwhals-dev/narwhals) implements
 ```python
 import narwhals as nw
 
-nw.from_native(df).with_columns(nw.all() + 10).to_native()
+(
+    nw.from_native(df)
+    .with_columns(nw.all() + 10)
+    .to_native()
+)
 ```
 
 If you enjoy the expressive `col` syntax and want to use it more broadly to write applications which can support all major dataframe libraries, check it out, you may like what you find!
