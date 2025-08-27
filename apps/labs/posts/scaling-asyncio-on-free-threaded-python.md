@@ -113,7 +113,10 @@ Here are the key changes:
    This design allows for lock-free access to the current task and avoid reference counting
    and lock contention on the global dictionary.
 
-These changes allow `asyncio` to scale linearly with the number of threads in free-threading,
+Both of these changes allow `asyncio` to scale linearly with the number of threads in free-threading,
+and has significantly improved performance for both single-threaded and multi-threaded asyncio usage.
+The standard `pyperformance` benchmark suite shows a significant 10-20% improvement in performance
+while also reducing memory usage.
 
 # Benchmarks
 
