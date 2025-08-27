@@ -19,7 +19,7 @@ hero:
 
 ## How to assign a new column in pandas
 
-Suppose you've got a dataframe of city temperatures and populations:
+Suppose you've got a dataframe of city names and temperatures:
 
 ```python
 import pandas as pd
