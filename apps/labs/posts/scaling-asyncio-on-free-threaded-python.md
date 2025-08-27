@@ -12,7 +12,7 @@ hero:
   imageAlt: 'A logo for asyncio.'
 ---
 
-# Introduction
+## Introduction
 
 `asyncio` is a Python standard library for writing high performance concurrent code
 using the async/await syntax and provides high level API for managing event loops, coroutines,
@@ -24,7 +24,7 @@ are built on top of `asyncio`.
 In this blog post, we will explore the changes I made in the upcoming Python 3.14 release to
 enable `asyncio` to scale on the free-threaded build of CPython.
 
-# The GIL and asyncio: A Brief Recap
+## The GIL and asyncio: A Brief Recap
 
 Before diving into the details of scaling `asyncio` on the free-threaded
 build of CPython, it's important to understand what is Global Interpreter Lock (GIL)
@@ -46,7 +46,7 @@ The GIL also prevents execution of multiple event loops in parallel running
 in different threads. This limits the ability to scale `asyncio` applications
 across multiple CPU cores because of the limitations of the GIL.
 
-# Scaling `asyncio` on Free-Threaded Python
+## Scaling `asyncio` on Free-Threaded Python
 
 The free-threaded build of CPython removes the GIL, allowing multiple threads
 to execute in parallel. This opens up new possibilities for `asyncio` applications,
@@ -117,7 +117,7 @@ and has significantly improved performance for both single-threaded and multi-th
 The standard `pyperformance` benchmark suite shows a significant 10-20% improvement in performance
 while also reducing memory usage.
 
-# Benchmarks
+## Benchmarks
 
 To evaluate the performance of `asyncio` on the free-threaded build of CPython,
 I ran benchmarks comparing the performance of `asyncio` on the free-threaded build
