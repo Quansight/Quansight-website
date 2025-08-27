@@ -94,9 +94,9 @@ df.assign(
 
 ```python
     a   b   c
-0  11  12  13
-1  12  13  14
-2  13  14  15
+0  11  14  17
+1  12  15  18
+2  13  16  19
 ```
 
 That's more like it!
