@@ -47,10 +47,10 @@ df = df.assign(temp_f = lambda x: x['temp_c'] * 9 / 5 + 32)
 df = df.assign(temp_f = pd.col('temp_c') * 9 / 5 + 32)
 ```
 
-The first option modifies the original object `df` in-place, and isn't suitable for method-chaining. The second option allows for [method chaining](https://tomaugspurger.net/posts/method-chaining/), but requires using a lambda function. The third option uses the new syntax coming in pandas 3.0. But why is it an improvement over the second option, what's so bad about lambda functions? There's a few reasons:
+The first option modifies the original object `df` in-place, and isn't suitable for method-chaining. The second option allows for [method chaining](https://tomaugspurger.net/posts/method-chaining/), but requires using a lambda function. The third option uses the new syntax coming in pandas 3.0. But why is it an improvement over the second option, what's so bad about lambda functions? There are a few reasons:
 
-- Scoping rules make their behaviour hard to predict (example below!).
-- They are opaque and non-introspectible. Try printing one out on the console, and you'll see something incomprehensible like `<function <lambda> at 0x76b583037560>`. If you receive a lambda function from user input, you have no way to validate what's inside (unless you enjoy reverse-engineering byte-code, and even then, you won't be able to do it in general).
+- [Scoping rules](https://stackoverflow.com/a/938493/4451315) make their behaviour hard to predict (example below!).
+- They are opaque and non-introspectable. Try printing one out on the console, and you'll see something incomprehensible like `<function <lambda> at 0x76b583037560>`. If you receive a lambda function from user input, you have no way to validate what's inside (unless you enjoy reverse-engineering byte-code, and even then, you won't be able to do it in general).
 
 I don't think the first point is appreciated enough, so before exploring `pd.col` more, let's elaborate on this `lambda` drawback.
 
