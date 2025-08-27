@@ -28,6 +28,12 @@ data = {'city': ['Sapporo', 'Kampala'], 'temp_c': [6.7, 25.]}
 df = pd.DataFrame(data)
 ```
 
+```console
+      city  temp_c
+0  Sapporo     6.7
+1  Kampala    25.0
+```
+
 Let's look at how we can make a new column `'temp_f'` which converts `'temp_c'` to Fahrenheit.
 
 ```python
@@ -54,6 +60,13 @@ Say you have a dataframe
 
 ```python
 df = pd.DataFrame({'a': [1,2,3], 'b': [4,5,6], 'c': [7,8,9]})
+```
+
+```console
+   a  b  c
+0  1  4  7
+1  2  5  8
+2  3  6  9
 ```
 
 and you want to increase each column's value by `10`. Rather than writing out an operation for each column, you try to get clever and write a dictionary comprehension:
@@ -130,6 +143,11 @@ df.loc[pd.col('temp_c')>10]
       city  temp_c
 1  Kampala    25.0
 ```
+
+The pre-expressions ways to do this would have been:
+
+- `df.loc[df['temp_c'] > 10]`
+- or, `df.loc[lambda x: x['temp_c']>10]`
 
 ## Can we use `pd.all` too?
 
