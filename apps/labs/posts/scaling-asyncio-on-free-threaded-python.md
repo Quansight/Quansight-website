@@ -14,11 +14,11 @@ hero:
 
 # Introduction
 
-asyncio is a Python standard library for writing high performance concurrent code
+`asyncio` is a Python standard library for writing high performance concurrent code
 using the async/await syntax and provides high level API for managing event loops, coroutines,
 tasks, and performing asynchronous I/O operations. It is used as a foundation for Python asynchronous
 frameworks that provide high-performance network and web-servers, database connection libraries,
-distributed task queues, etc. Multiple libraries and frameworks, such as FastAPI and aiohttp,
+distributed task queues, etc. Multiple libraries and frameworks, such as `FastAPI` and `aiohttp`,
 are built on top of `asyncio`.
 
 In this blog post, we will explore the changes made in the upcoming Python 3.14 release to
@@ -105,9 +105,8 @@ Here are the key changes:
 
 2. **Per-thread current task**:
    Python 3.14 stores the current task on the current thread state instead of a global dictionary mapping
-   event loops to their current tasks.
-
-   By storing the current task on thread state, the overhead of accessing the current task is reduced,
+   event loops to their current tasks. By storing the current task on thread state,
+   the overhead of accessing the current task is reduced,
    and it allows for lock-free access to the current task and avoid dictionary lookup.
    It allows for faster switching between tasks which is a very frequent operation in asyncio.
 
