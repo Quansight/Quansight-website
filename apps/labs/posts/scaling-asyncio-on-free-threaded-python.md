@@ -21,7 +21,7 @@ frameworks that provide high-performance network and web-servers, database conne
 distributed task queues, etc. Multiple libraries and frameworks, such as `FastAPI` and `aiohttp`,
 are built on top of `asyncio`.
 
-In this blog post, we will explore the changes made in the upcoming Python 3.14 release to
+In this blog post, we will explore the changes I made in the upcoming Python 3.14 release to
 enable `asyncio` to scale on the free-threaded build of CPython.
 
 # The GIL and asyncio: A Brief Recap
@@ -58,19 +58,18 @@ to manage the event loop and tasks and was not thread-safe.
 
 Each thread running `asyncio` event loop primarily stores three key pieces of state:
 
-1. Current loop: When a thread starts running an `asyncio` event loop,
+1. **Current loop**: When a thread starts running an `asyncio` event loop,
   it sets its current loop to the instance of the event loop. This is done so that code
   can access the current loop via `asyncio.get_running_loop()` without it being passed around explicitly,
   and once the loop is stopped, the current loop state is reset.
 
-2. Tasks: When a task is created, it is added to the list of tasks for the current event loop.
+2. **Tasks**: When a task is created, it is added to the list of tasks for the current event loop.
    This allows each thread to manage its own tasks independently, and once a task is completed,
    it is removed from the list.
 
-3. Current task: When a task starts executing, it is set as the current task for the event loop.
+3. **Current task**: When a task starts executing, it is set as the current task for the event loop.
    This allows the event loop to keep track of which task is currently running, and once the task
    completes or suspends by awaiting on something, the current task state is reset.
-
 
 Up until now, `asyncio` was designed with the assumption of a single-threaded environment,
 and relied on the GIL to manage access to shared state. The current task state was stored in a
