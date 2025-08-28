@@ -118,6 +118,8 @@ Here are the key changes:
    This design allows for efficient, lock-free and thread-safe task management
    and scales well on the free-threaded interpreter.
 
+   This was implemented in https://github.com/python/cpython/pull/128869.
+
 2. **Per-thread current task**:
    Python 3.14 stores the current task on the current thread state instead of a
    global dictionary mapping event loops to their current tasks. By storing the
@@ -128,6 +130,8 @@ Here are the key changes:
 
    This design allows for lock-free access to the current task and avoids
    reference counting and lock contention on the global dictionary.
+
+   This was implemented in https://github.com/python/cpython/pull/129899.
 
 Both of these changes allow `asyncio` to scale linearly with the number of
 threads in free-threading, and has significantly improved performance for both
