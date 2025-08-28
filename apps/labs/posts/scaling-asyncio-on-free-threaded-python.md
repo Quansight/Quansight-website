@@ -1,7 +1,7 @@
 ---
 title: 'Scaling asyncio on Free-Threaded Python'
 authors: [kumar-aditya]
-published: June 24, 2025
+published: August 28, 2025
 description: 'A recap on the work done in Python 3.14 to enable asyncio to scale on the free-threaded build of CPython.'
 category: [Community]
 featuredImage:
@@ -143,7 +143,7 @@ build with the GIL-enabled build on a 12 core Windows machine:
   <figure style={{ textAlign: 'center' }}>
     <img
       src="/posts/scaling-asyncio-on-free-threaded-python/asyncio_tcp_benchmark.png"
-      alt="Bar chart comparing performance of asyncio TCP on GIL-enabled vs free-threading build."
+      alt="Comparing performance of asyncio TCP on GIL-enabled vs free-threading build."
       style={{position:'relative',left:'15%',width:'70%'}}
     />
   </figure>
@@ -154,7 +154,7 @@ build with the GIL-enabled build on a 12 core Windows machine:
   <figure style={{ textAlign: 'center' }}>
     <img
       src="/posts/scaling-asyncio-on-free-threaded-python/asyncio_web_scraping_benchmark.png"
-      alt="Bar chart comparing performance of Web Scraping using aiohttp on GIL-enabled vs free-threading build."
+      alt="Comparing performance of Web Scraping using aiohttp on GIL-enabled vs free-threading build."
       style={{position:'relative',left:'15%',width:'70%'}}
     />
   </figure>
