@@ -138,10 +138,23 @@ reducing memory usage.
 Here are the benchmark results comparing the performance of `asyncio` on the free-threaded
 build with the GIL-enabled build on a 12 core Windows machine:
 
+- **TCP Benchmark**: This benchmark measures raw TCP performance.
+
   <figure style={{ textAlign: 'center' }}>
     <img
       src="/posts/scaling-asyncio-on-free-threaded-python/asyncio_tcp_benchmark.png"
-      alt="Bar chart comparing performance of optimizations on asyncio TCP benchmark."
+      alt="Bar chart comparing performance of asyncio TCP on GIL-enabled vs free-threading build."
+      style={{position:'relative',left:'15%',width:'70%'}}
+    />
+  </figure>
+
+- **Web Scraping**: This benchmark measures the performance of using `aiohttp` with
+   [Web Scraping on asyncio](https://py-free-threading.github.io/examples/asyncio/).
+
+  <figure style={{ textAlign: 'center' }}>
+    <img
+      src="/posts/scaling-asyncio-on-free-threaded-python/asyncio_web_scraping_benchmark.png.png"
+      alt="Bar chart comparing performance of Web Scraping using aiohttp on GIL-enabled vs free-threading build."
       style={{position:'relative',left:'15%',width:'70%'}}
     />
   </figure>
