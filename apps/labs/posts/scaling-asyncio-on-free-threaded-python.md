@@ -104,9 +104,10 @@ Here are the key changes:
    Python 3.14 introduces a per-thread circular double linked list implementation
    for storing tasks instead of a global `WeakSet`. The linked list is per-thread,
    meaning that each thread maintains its own list of tasks and allows for
-   lock-free addition and removal of tasks. The use of weak references is
-   removed entirely which was slow and prone to contention, by instead making
-   tasks responsible for removing themselves from the list when they are done.
+   lock-free addition and removal of tasks. Weak references are slow and
+   and prone to contention. The new implementation removes the use of weak
+   references entirely and makes tasks responsible for removing themselves
+   from the list when they are done.
    This requires cooperation between task's deallocator and the executing
    threads to ensure that the task is removed from the list before it is freed,
    otherwise a thread could try accessing already freed task. By removing the
@@ -122,7 +123,7 @@ Here are the key changes:
    global dictionary mapping event loops to their current tasks. By storing the
    current task on the thread state, the overhead of accessing the current task is
    reduced, allowing for lock-free access to the current task while
-   avoiding dictionary lookup. This allows for faster switching between tasks -- a 
+   avoiding dictionary lookup. This allows for faster switching between tasks -- a
    very frequent operation in asyncio.
 
    This design allows for lock-free access to the current task and avoids
