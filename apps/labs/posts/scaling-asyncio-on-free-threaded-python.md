@@ -14,10 +14,11 @@ hero:
 
 ## Introduction
 
-`asyncio` is a Python standard library for writing high performance concurrent
-code using the async/await syntax and provides high level APIs for creating and
-managing event loops, coroutines, tasks, and performing asynchronous I/O
-operations. It is used as a foundation for Python asynchronous frameworks that
+The Python standard library provides the `asyncio` module to facilitate
+writing high-performance concurrent code. By leveraging async/await syntax,
+it provides a high level API for creating and managing event loops, coroutines,
+tasks, and performing asynchronous I/O operations.
+It is used as a foundation for Python asynchronous frameworks that
 provide high-performance network and web-servers, database connection
 libraries, distributed task queues, etc. Multiple libraries and frameworks, such
 as `FastAPI` and `aiohttp`, are built on top of `asyncio`.
@@ -47,7 +48,7 @@ across threads. Hence, even when tasks are offloaded, they still compete for the
 GIL for execution and limits parallelism.
 
 The GIL also prevents execution of multiple event loops in parallel running in
-different threads. This limits the ability to scale asyncio applications across
+different threads. This limits the ability to scale `asyncio` applications across
 multiple CPU cores because of the limitations of the GIL.
 
 ## Scaling `asyncio` on Free-Threaded Python
@@ -129,7 +130,7 @@ Here are the key changes:
 
 Both of these changes allow `asyncio` to scale linearly with the number of
 threads in free-threading, and has significantly improved performance for both
-single-threaded and multi-threaded asyncio usage. The standard `pyperformance`
+single-threaded and multi-threaded `asyncio` usage. The standard `pyperformance`
 benchmark suite shows a significant 10–20% improvement in performance while also
 reducing memory usage.
 
