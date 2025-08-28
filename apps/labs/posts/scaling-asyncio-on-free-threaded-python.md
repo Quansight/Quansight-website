@@ -45,11 +45,11 @@ operations efficiently. Since only one event loop can run per thread, CPU-bound
 tasks, which would otherwise block the event loop, are typically offloaded to
 separate threads. However, the GIL limits true parallel execution of Python code
 across threads. Hence, even when tasks are offloaded, they still compete for the
-GIL for execution and limits parallelism.
+GIL for execution. This lock contention limits parallelism and can tank performance for any CPU-bound workload.
 
 The GIL also prevents execution of multiple event loops in parallel running in
 different threads. This limits the ability to scale `asyncio` applications across
-multiple CPU cores because of the limitations of the GIL.
+multiple CPU cores.
 
 ## Scaling `asyncio` on Free-Threaded Python
 
@@ -57,8 +57,8 @@ The free-threaded build of CPython removes the GIL, allowing multiple threads to
 execute in parallel. This opens up new possibilities for `asyncio`
 applications, enabling them to scale across multiple CPU cores without the
 limitations imposed by the GIL. However, this means that `asyncio` needed to be
-adapted to work in a free-threaded environment as it previously relied on the
-GIL and global state to manage the event loop and tasks and was not thread-safe.
+adapted to work in a free-threaded environment, as it previously relied on the
+GIL and global state and was not thread-safe.
 
 Since each thread can only run one event loop, `asyncio` internally does
 book-keeping for each thread running an event loop and primarily stores three
@@ -102,7 +102,7 @@ Here are the key changes:
 
 1. **Per-thread linked list of tasks**:
    Python 3.14 introduces a per-thread circular double linked list implementation
-   for storing tasks instead of global `WeakSet`. The linked list is per-thread,
+   for storing tasks instead of a global `WeakSet`. The linked list is per-thread,
    meaning that each thread maintains its own list of tasks and allows for
    lock-free addition and removal of tasks. The use of weak references is
    removed entirely which was slow and prone to contention, by instead making
@@ -111,19 +111,19 @@ Here are the key changes:
    threads to ensure that the task is removed from the list before it is freed,
    otherwise a thread could try accessing already freed task. By removing the
    use of weak references, the overhead of reference counting is eliminated
-   entirely and addition/removal of task in the list now requires only updating
+   entirely and addition/removal of a task in the list now requires only updating
    the pointers in the linked list.
 
    This design allows for efficient, lock-free and thread-safe task management
-   and scales well with the number of threads in free-threading.
+   and scales well on the free-threaded interpreter.
 
 2. **Per-thread current task**:
    Python 3.14 stores the current task on the current thread state instead of a
    global dictionary mapping event loops to their current tasks. By storing the
-   current task on thread state, the overhead of accessing the current task is
-   reduced, and it allows for lock-free access to the current task while
-   avoiding dictionary lookup. It allows for faster switching between tasks
-   which is a very frequent operation in asyncio.
+   current task on the thread state, the overhead of accessing the current task is
+   reduced, allowing for lock-free access to the current task while
+   avoiding dictionary lookup. This allows for faster switching between tasks -- a 
+   very frequent operation in asyncio.
 
    This design allows for lock-free access to the current task and avoids
    reference counting and lock contention on the global dictionary.
@@ -131,7 +131,7 @@ Here are the key changes:
 Both of these changes allow `asyncio` to scale linearly with the number of
 threads in free-threading, and has significantly improved performance for both
 single-threaded and multi-threaded `asyncio` usage. The standard `pyperformance`
-benchmark suite shows a significant 10–20% improvement in performance while also
+benchmark suite shows a significant 10–20% improvement in single-threaded performance while also
 reducing memory usage.
 
 ## Benchmarks
