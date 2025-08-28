@@ -153,8 +153,17 @@ build with the GIL-enabled build on a 12 core Windows machine:
 
   <figure style={{ textAlign: 'center' }}>
     <img
-      src="/posts/scaling-asyncio-on-free-threaded-python/asyncio_web_scraping_benchmark.png.png"
+      src="/posts/scaling-asyncio-on-free-threaded-python/asyncio_web_scraping_benchmark.png"
       alt="Bar chart comparing performance of Web Scraping using aiohttp on GIL-enabled vs free-threading build."
       style={{position:'relative',left:'15%',width:'70%'}}
     />
   </figure>
+
+
+### Summary
+
+`asyncio` now has first-class support for free-threading and scales
+linearly with the number of threads, and can take advantage of multiple
+cores effectively. It is now possible to run multiple event loops in parallel,
+which unlocks new possibilities for high-performance multi-threaded `asyncio`
+applications such as web servers, data processing pipelines, and more.
