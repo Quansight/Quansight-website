@@ -140,7 +140,7 @@ build with the GIL-enabled build on a 12 core Windows machine:
 
   <figure style={{ textAlign: 'center' }}>
     <img
-      src="posts/scaling-asyncio-on-free-threaded-python/asyncio_tcp_benchmark.png"
+      src="/posts/scaling-asyncio-on-free-threaded-python/asyncio_tcp_benchmark.png"
       alt="Bar chart comparing performance of optimizations on asyncio TCP benchmark."
       style={{position:'relative',left:'15%',width:'70%'}}
     />
