@@ -121,12 +121,11 @@ Here are the key changes:
    This was implemented in https://github.com/python/cpython/pull/128869.
 
 2. **Per-thread current task**:
-   Python 3.14 stores the current task on the current thread state instead of a
-   global dictionary mapping event loops to their current tasks. By storing the
-   current task on the thread state, the overhead of accessing the current task is
-   reduced, allowing for lock-free access to the current task while
-   avoiding dictionary lookup. This allows for faster switching between tasks -- a
-   very frequent operation in asyncio.
+   Python 3.14 stores the current task in the thread state structure,
+   which is local to each thread. By storing the current task on the thread state,
+   the overhead of accessing the current task is reduced, allowing for lock-free
+   access to the current task while avoiding dictionary lookup.
+   This allows for faster switching between tasks -- a very frequent operation in asyncio.
 
    This design allows for lock-free access to the current task and avoids
    reference counting and lock contention on the global dictionary.
