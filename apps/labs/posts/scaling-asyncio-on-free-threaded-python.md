@@ -110,7 +110,7 @@ Here are the key changes:
    from the list when they are done.
    This requires cooperation between task's deallocator and the executing
    threads to ensure that the task is removed from the list before it is freed,
-   otherwise a thread could try accessing already freed task. By removing the
+   otherwise a thread could try accessing an already freed task. By removing the
    use of weak references, the overhead of reference counting is eliminated
    entirely and addition/removal of a task in the list now requires only updating
    the pointers in the linked list.
