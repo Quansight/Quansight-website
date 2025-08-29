@@ -108,7 +108,7 @@ Here are the key changes:
    and prone to contention. The new implementation removes the use of weak
    references entirely and makes tasks responsible for removing themselves
    from the list when they are done.
-   This requires cooperation between task's deallocator and the executing
+   This requires cooperation between the task's deallocator and the executing
    threads to ensure that the task is removed from the list before it is freed,
    otherwise a thread could try accessing an already freed task. By removing the
    use of weak references, the overhead of reference counting is eliminated
