@@ -95,7 +95,7 @@ In Python 3.14, I have implemented several changes to fix thread safety of
 CPython. It is now implemented using lock-free data structures and per-thread
 state, allowing for highly efficient task management and execution across
 multiple threads. In the general case of multiple event loops running in
-parallel, there is no lock contention and scales linearly with the number of
+parallel, there is no lock contention and performance scales linearly with the number of
 threads.
 
 Here are the key changes:
