@@ -153,6 +153,7 @@ build with the GIL-enabled build on a Windows machine with 6 physical CPU cores 
       alt="Comparing performance of asyncio TCP on GIL-enabled vs free-threading build."
       style={{position:'relative',left:'15%',width:'70%'}}
     />
+    <figcaption>Speed with a single worker is 276 MB/s, with 6 workers that scales to 532 MB/s with the default build and 1455 MB/s with the free-threaded build, and with 12 workers that is 698 MB/s and 1924 MB/s respectively.</figcaption>
   </figure>
 
 - **Web Scraping**: This benchmark measures the performance of using `aiohttp` with
@@ -164,6 +165,7 @@ build with the GIL-enabled build on a Windows machine with 6 physical CPU cores 
       alt="Comparing performance of Web Scraping using aiohttp on GIL-enabled vs free-threading build."
       style={{position:'relative',left:'15%',width:'70%'}}
     />
+  <figcaption>Speed with a single worker on default build is 12 stories/sec, with 12 workers that scales to 35 stories/sec, and with the free-threaded build it is 80 stories/sec.</figcaption>
   </figure>
 
 ### Summary
