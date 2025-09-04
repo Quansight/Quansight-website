@@ -29,11 +29,11 @@ In this blog post, we will explore the changes I made in the upcoming Python
 ## The GIL and asyncio: A brief recap
 
 Before diving into the details of scaling `asyncio` on the free-threaded build
-of CPython, it's important to understand what is Global Interpreter Lock (GIL)
+of CPython, it's important to understand what the Global Interpreter Lock (GIL) is
 and how it is a significant limitation for `asyncio` in the first place.
 
 The Global Interpreter Lock (GIL) is a global mutex that protects access to
-Python objects, preventing multiple threads from executing Python bytecodes at
+Python objects, preventing multiple threads from executing Python code at
 once. This means that even though you can have multiple threads in a Python
 program, only one thread can execute Python code at a time.
 
@@ -126,9 +126,6 @@ Here are the key changes:
    the overhead of accessing the current task is reduced, allowing for lock-free
    access to the current task while avoiding dictionary lookup.
    This allows for faster switching between tasks -- a very frequent operation in asyncio.
-
-   This design allows for lock-free access to the current task and avoids
-   reference counting and lock contention on the global dictionary.
 
    This was implemented in https://github.com/python/cpython/pull/129899.
 
