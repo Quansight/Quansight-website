@@ -135,7 +135,8 @@ single-threaded and multi-threaded `asyncio` usage. The standard `pyperformance`
 benchmark suite shows a significant 10–20% improvement in single-threaded performance while also
 reducing memory usage.
 
-For a deeper dive into the implementation, check out the internal docs for
+For a deeper dive into the implementation, check out the [internal docs for
+asyncio](https://github.com/python/cpython/blob/main/InternalDocs/asyncio.md).
 [asyncio](https://github.com/python/cpython/blob/main/InternalDocs/asyncio.md).
 
 
