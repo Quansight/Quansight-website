@@ -137,7 +137,6 @@ reducing memory usage.
 
 For a deeper dive into the implementation, check out the [internal docs for
 asyncio](https://github.com/python/cpython/blob/main/InternalDocs/asyncio.md).
-[asyncio](https://github.com/python/cpython/blob/main/InternalDocs/asyncio.md).
 
 
 ## Benchmarks
