@@ -1,7 +1,7 @@
 ---
 title: 'Scaling asyncio on Free-Threaded Python'
 authors: [kumar-aditya]
-published: August 28, 2025
+published: September 10, 2025
 description: 'A recap on the work done in Python 3.14 to enable asyncio to scale on the free-threaded build of CPython.'
 category: [Community]
 featuredImage:
