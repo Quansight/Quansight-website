@@ -17,7 +17,7 @@ hero:
 ## Introduction
 
 The upcoming Python 3.14 release is packed with exciting features and
-improvements. The first release candidate is now available. Regular Python
+improvements. A release candidate for 3.14 is now available. Regular Python
 users are encouraged to download and try it to ensure it is well tested before
 the final release. It contains significant improvements to the free-threaded
 version of Python, which allows Python to run without the Global Interpreter
@@ -100,11 +100,10 @@ suite](https://pyperformance.readthedocs.io/) of 3% and the most GC heavy
 benchmark of that suite got a 50% speedup.
 
 I implemented a version of this "mark-alive" pass for the free-threaded GC as
-well. See the [GitHub PR for
-details](https://github.com/python/cpython/pull/128808). For the pyperformance
-suite, it shows an overall speedup of 0.7% and a 35% speedup on the most GC
-heavy benchmark. Additional benchmark results will be shown later in this
-post.
+well. See the [GitHub PR](https://github.com/python/cpython/pull/128808) for
+details. For the pyperformance suite, it shows an overall speedup of 0.7% and a
+35% speedup on the most GC heavy benchmark. Additional benchmark results will
+be shown later in this post.
 
 ## Optimization 2: Using Software Pre-fetch
 
@@ -114,7 +113,7 @@ trip to main memory can take 100 nanoseconds—200 times slower. CPUs try to
 predict which memory you'll need next (hardware pre-fetching), but this fails
 with unpredictable memory access patterns, causing the CPU to stall.
 
-Inspired by a similar change in the [OCaml
+Inspired by [a similar change in the OCaml
 GC](https://github.com/ocaml/ocaml/pull/10195), we introduced software
 pre-fetching to the mark-alive phase of the free-threaded GC. If we know we're
 going to need an object's data soon, we can issue an instruction to the CPU to
@@ -129,15 +128,16 @@ latency.
 
 In order to tune the size of the pre-fetch buffer, I created an instrumented
 version of the GC that logged pre-fetch buffer operations along with object
-access timings. An example histogram produced by this is shown below. More
-details about the GC software pre-fetch are contained in the CPython
+access timings. An example histogram produced by this is shown below. For the
+distribution shown, the median pre-fetch window was 14. More details about the
+GC software pre-fetch are contained in the CPython
 [internal
 documentation](https://github.com/python/cpython/blob/main/InternalDocs/garbage_collector.md#software-prefetch-hinting).
 
   <figure style={{ textAlign: 'center' }}>
     <img 
       src="/posts/free-threaded-gc-3-14/prefetch-hist.png"
-      alt="Histogram chart showing pre-fetch window sizes."
+      alt="Histogram chart showing distribution of pre-fetch latency."
       style={{position:'relative',left:'15%',width:'70%'}}
     />
   </figure>
@@ -152,13 +152,13 @@ cache is 4 MB in size, it would hold about 130,000 objects if those objects are
 objects to ensure the working set of data for the GC does not fit into the L2
 cache.
 
-## Optimization 3: Smarter GC Triggers with Resident-Set-Size (RSS)
+## Optimization 3: Smarter GC Triggers Based on Process Size
 
 When should the garbage collector run? Traditionally, the Python GC is
 triggered after a certain number of new container objects have been allocated.
 For the free-threaded GC, this threshold is 2,000. This generally works quite
 well but it is a crude metric. Allocating 2,000 tiny list objects has a very
-different memory impact than allocating 2,000 large ones.
+different memory impact than allocating 2,000 huge ones.
 
 An obvious improvement to this would be to not just consider the number of new
 objects but also the amount of memory those new objects are using. That sounds
@@ -180,7 +180,7 @@ GC, which must perform a full collection each time it runs.
 
 This optimization work was initiated based on a bug report about the slower
 performance of the free-threaded build on a small benchmark program (see
-[GH-132917](https://github.com/python/cpython/issues/132917)). It turned out
+[cpython#132917](https://github.com/python/cpython/issues/132917)). It turned out
 that the program was triggering a lot of GC collections due to the accumulated
 allocation of many small list objects. For the free-threaded GC, it must do a
 full collection whenever triggered since it doesn't implement incremental
@@ -256,7 +256,7 @@ the base free-threaded GC). This will hopefully be fixed for the 3.15 release.
     />
   </figure>
 
-For the “gc_big” benchmark. the collection is being triggered manually and so
+For the “gc_big” benchmark, the collection is being triggered manually and so
 the “rss threshold” optimization has no effect. However the pre-fetch
 optimization shows more benefit here. That’s likely because the object graph
 created by this benchmark contains many large list objects and the pre-fetch
@@ -318,6 +318,6 @@ especially for programs creating many small objects. While software
 pre-fetching provides varying benefits depending on the hardware, it provides a
 measurable speedup when the working set of objects is large. Considering all
 these benchmarks, the overall speedup of the free-threaded GC collection is
-between 2x to 12x times faster than the 3.13 version. These advancements are
+between 2 and 12 times faster than the 3.13 version. These advancements are
 important steps toward unlocking the full performance potential of Python's
 free-threaded future.
