@@ -1,7 +1,7 @@
 ---
 title: "Unlocking Performance in Python's Free-Threaded Future: GC Optimizations"
 authors: [neil-schemenauer]
-published: Aug 30, 2025
+published: Sep 24, 2025
 description: 'A description of the performance optimizations made to the free-threaded garbage collector for Python 3.14.'
 category: [Community]
 featuredImage:
