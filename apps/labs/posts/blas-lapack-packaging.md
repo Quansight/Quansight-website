@@ -6,10 +6,10 @@ description: 'TODO'
 category: [Packaging]
 featuredImage:
   src: /posts/blas-lapack-packaging/featured.jpeg
-  alt:
+  alt: Edvard Munch's "The Scream", except that there's a bubble with LAPACK logo in it, suggesting that the person in question is screaming over LAPACK packaging.
 hero:
   imageSrc: /posts/blas-lapack-packaging/hero.jpeg
-  imageAlt:
+  imageAlt: Edvard Munch's "The Scream", except that there's a bubble with LAPACK logo in it, suggesting that the person in question is screaming over LAPACK packaging.
 ---
 
 # BLAS/LAPACK packaging
