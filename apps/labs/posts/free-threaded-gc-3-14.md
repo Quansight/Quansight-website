@@ -126,13 +126,10 @@ other end of the buffer and only then access the object's data. The buffer's
 size creates a time window that, when tuned correctly, hides the memory access
 latency.
 
-In order to tune the size of the pre-fetch buffer, I created an instrumented
-version of the GC that logged pre-fetch buffer operations along with object
-access timings. An example histogram produced by this is shown below. For the
-distribution shown, the median pre-fetch window was 14. More details about the
-GC software pre-fetch are contained in the CPython
-[internal
-documentation](https://github.com/python/cpython/blob/main/InternalDocs/garbage_collector.md#software-prefetch-hinting).
+In order to help tune the size of the pre-fetch buffer, I created an
+instrumented version of CPython that logged pre-fetch buffer operations along
+with object access timings (in units of GC mark operations). An example
+histogram produced by this is shown below.
 
   <figure style={{ textAlign: 'center' }}>
     <img 
@@ -141,6 +138,18 @@ documentation](https://github.com/python/cpython/blob/main/InternalDocs/garbage_
       style={{position:'relative',left:'15%',width:'70%'}}
     />
   </figure>
+
+For the distribution shown, the median pre-fetch window was 14. Based on the
+distribution and the median, a reasonable conclusion might be that the buffer
+size of 256 is too large. However, an additional complication is that when the
+pre-fetch buffer overflows, object pointers need to be pushed on a separate
+object pointer stack. Those stack operations are more costly compared to the
+buffer FIFO operations. So, it is a benefit to have the buffer large enough to
+mostly avoid using the object stack. Benchmarks were run with different
+pre-fetch buffer parameters and the best performing parameters were selected.
+More details about the GC software pre-fetch are contained in the CPython
+[internal
+documentation](https://github.com/python/cpython/blob/main/InternalDocs/garbage_collector.md#software-prefetch-hinting).
 
 This optimization is only a win if the working set of the objects is too large
 to fit entirely into the CPU’s cache. So, it is only enabled if the number of
