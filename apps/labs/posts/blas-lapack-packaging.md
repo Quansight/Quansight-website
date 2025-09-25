@@ -92,22 +92,23 @@ Sometimes invidual interfaces are optional or not implemented at all.
 In OpenBLAS builds, CBLAS, LAPACK and LAPACKE interfaces can
 be disabled, though it is discouraged for compatibility reasons. BLIS
 does not implement LAPACK at all, providing only BLAS and CBLAS
-interfaces (the latter being optional) that can be combined with Netlib
-LAPACK.
+interfaces (the latter being optional). It is usually combined
+with Netlib LAPACK; [libflame](https://github.com/flame/libflame)
+is being developed as a LAPACK counterpart to it, but it is
+not particularly popular at the time of writing.
 
 ## LP64 and ILP64 interfaces
 
 <div style={{ textAlign: "center" }}>
 <figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <img src="/posts/blas-lapack-packaging/lapack-lp64-ilp64.png"
-    width="702" height="121" alt="A diagram illustrating different
-    approaches to LP64 and ILP64 libraries. It is split into LP64 and
-    ILP64 parts. Netlib lapack library represented by lapack in the LP64
-    area, lapack (w/ ILP64) on the split line and lapack64 in the ILP64
-    area. OpenBLAS is represented by openblas in the LP64 area, and
-    openblas64 and openblas64_ in the ILP64 area. MKL i represented
-    by mkl_intel_lp64 on the dividing line, and mkl_intel_ilp64 in the
-    ILP64 area." />
+    width="746" height="173" alt="A diagram illustrating different
+    approaches to LP64 and ILP64 libraries. It is split into LP64,
+    ILP64 and 'both' parts. The Netlib lapack and openblas libraries
+    represent the pure LP64 libraries. The Netlib lapack (w/ ILP64)
+    and mkl_intel_lp64 libraries provide both LP64 and ILP64 interfaces.
+    The Netlib lapack64, openblas64, openblas64_ (with underscore)
+    and mkl_intel_ilp64 libraries provide only ILP64 interface." />
   <figcaption>Fig. 2. Different approaches to LP64 and ILP64 interfaces</figcaption>
 </figure>
 </div>
@@ -131,7 +132,7 @@ as `openblas64`; in other cases, the ILP64 library is installed in place
 of the LP64 library, or combined with it into a single library.
 Sometimes, the ILP64 routines are suffixed to make them distinct
 from LP64 routines, for example the ILP64 counterpart to `sgesv_`
-is called `sgesv_64_`; when using separate libraries, they often
+could be called `sgesv_64_`; when using separate libraries, they often
 use regular LP64 names. There could be separate headers for the ILP64
 interface, or a preprocessor directive such as `-DLAPACK_ILP64` may
 be used to switch the interfaces.
@@ -140,36 +141,41 @@ The CMake build system for Netlib LAPACK 3.12.1 supports two variants
 of ILP64 support: either the `-DBUILD_INDEX64` option can be used
 to build separate libraries such as `lapack64` without symbol suffixes,
 or the `-DBUILD_INDEX64_EXT_API` option can be used to include ILP64
-symbols with `64_` suffix in the LP64 library.
+symbols with a `64_` suffix in the LP64 library.
 
 The build system for OpenBLAS has quite a lot customization options
 that historically have been used to provide ILP64 support across
 distributions in inconsistent ways. Perhaps the best relic of this
 are Fedora packages that provide both a `openblas64` library that
 provides ILP64 symbols without suffixes, and a `openblas64_` (with
-an underscore) library, using prefixed symbols per the [recommended
+an underscore) library, that uses a `_64` suffix [recommended
 OpenBLAS upstream ILP64
 convention](https://www.openmathlib.org/OpenBLAS/docs/distributing/#ilp64-interface-builds).
 
 Intel MKL 2025.2 uses a hybrid convention. Its LP64 library and "Single
 Dynamic Library" both combine LP64 with suffixed ILP64 symbols, while
 its separate ILP64 library provides both unsuffixed and suffixed ILP64
-symbols.
+symbols. In both cases, a `64_` suffix is used.
+
+The way suffixes are added means that the symbols are the same
+for Fortran subroutines (for example, `dgemm_64_`), but not for the C
+routines (`cblas_dgemm_64` in Netlib BLAS and MKL, `cblas_dgemm64_`
+in OpenBLAS).
 
 ## Threading models
 
 <div style={{ textAlign: "center" }}>
 <figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <img src="/posts/blas-lapack-packaging/lapack-thread.png"
-    width="901" height="213" alt="A diagram illustrating different
-    approaches to threading. It is split into serial, multithreaded
+    width="889" height="199" alt="A diagram illustrating different
+    approaches to threading. It is split into serial, pthread / TBB
     and OpenMP parts. Conda-forge's OpenBLAS library may correspond
-    to either variant. Fedora features split serial openblas library,
-    multithreaded pthread-based openblasp library and OpenMP-based
-    openblaso library. Intel MKL features four libraries: serial
-    mkl_sequential, multithreaded TBB-based intel_tbb_thread,
+    to either variant, defaulting to pthread. Fedora features split
+    serial openblas library, pthread-based openblasp library
+    and OpenMP-based openblaso library. Intel MKL features four
+    libraries: serial mkl_sequential, TBB-based intel_tbb_thread,
     and two OpenMP-based libraries: mkl_gnu_thread and mkl_intel_thread.
-    All of these libraries are combined by the mkl_rt library." />
+    All of these libraries are multiplexed by the mkl_rt library." />
   <figcaption>Fig. 3. Different approaches to threading models</figcaption>
 </figure>
 </div>
@@ -178,9 +184,11 @@ As computationally intensive routines, BLAS and LAPACK libraries can
 often benefit from parallelization. The optimized implementations
 such as OpenBLAS, BLIS or MKL
 feature support for multiple threading models to take advantage of that.
-All these libraries come in serial (or "sequential"), threaded
-and OpenMP-enabled variants. MKL comes precompiled for GNU OpenMP
-and Intel OpenMP libraries.
+All these libraries come in at least three variants: a serial
+(or "sequential") variant that runs computations using a single thread,
+a variant using POSIX threads or TBB (in case of MKL), and a variant
+using OpenMP. MKL comes precompiled for GNU OpenMP and Intel OpenMP
+libraries.
 
 Again, the exact details differ across distributions. Some support
 installing only a single library for selected threading model,
@@ -191,7 +199,7 @@ a serial `openblas`, a threaded `openblasp` and an OpenMP-enabled
 permitting switching between different threading models (and LP64/ILP64
 interfaces) at runtime.
 
-## API compatibility
+## API and ABI compatibility
 
 BLAS / LAPACK is a living specification, with the interface defined
 by Netlib LAPACK releases. For example, LAPACK 3.12.0 introduced
@@ -201,13 +209,15 @@ Netlib LAPACK can be configured to build without deprecated symbols.
 The resulting differences can introduce incompatibilities between
 applications and different BLAS / LAPACK implementations.
 
-Besides additions and deprecations, API incompatibilities could also be
+Besides additions and deprecations, API and ABI incompatibilities could also be
 caused by disabling optional components (such as CBLAS or LAPACKE
-interfaces), and by using different suffixes (for example, while
-building the ILP64 interface). Perhaps the most extreme case of this
+interfaces), by using different suffixes (for example, while
+building the ILP64 interface), Fortran calling conventions (particularly
+affecting callbacks and complex numbers). Perhaps the most extreme case of this
 is Apple's Accelerate library, where modern LAPACK interfaces all use
-a custom `$NEWLAPACK` suffix, as noted in [Ralf Gommers's notes on Apple
-Accelerate](https://gist.github.com/rgommers/e10c7cf3ebd88883458544e535d7e54c#apple-accelerate).
+a custom `$NEWLAPACK` suffix. More information can be found in [Ralf Gommers's notes on Apple
+Accelerate](https://gist.github.com/rgommers/e10c7cf3ebd88883458544e535d7e54c#apple-accelerate)
+and [BLAS, LAPACK and OpenMP documentation from pypackaging-native](https://pypackaging-native.github.io/key-issues/native-dependencies/blas_openmp/).
 
 ## Alternative-based approaches to switching implementations
 
@@ -220,7 +230,7 @@ in Conda-forge packages, or by exposing the choice via USE flags in Gentoo
 
 However, such an approach is suboptimal, as it requires building the package
 separately against every supported provider, even if the package
-in question only uses API that is common to all of them. Therefore, such
+in question would be ABI-compatible with all of them. Therefore, such
 an approach is generally used only for packages that benefit
 from functions unique to a given implementation. For example,
 [conda-forge's PyTorch
@@ -321,15 +331,20 @@ the LP64 interface, the ILP64 interface or both. The ILP64 interface can
 use suffixed symbols; either separate headers or preprocessor
 definitions can be used to enable it. Accelerate uses suffixed symbols
 for the modern LAPACK interface in general. Many implementations feature
-sequential, multithreaded and OpenMP variants; these can be either
+sequential and multiple threaded variants; these can be either
 packaged interchangeably or installed simultaneously.
 
+Furthermore, different implementations can be ABI-compatible
+and therefore interchangeable, API-compatible without ABI compatibility,
+requiring rebuilding, or feature API incompatibilities requiring
+explicit code-level support. A dispatching library such as FlexiBLAS
+can be used to provide API and ABI compatibility.
+
 All these aspects may be further customized by distributions,
-and change over time. Furthermore, sometimes the base libraries
+and change over time. Sometimes the base libraries
 traditionally used by Netlib LAPACK are replaced by symbolic links
 or wrappers to facilitate switching between different implementations.
 A different provider library may be used at build time and at runtime.
-A dispatching library such as FlexiBLAS can be used.
 
 This system largely works for downstream packaging, but it is not
 necessarily easy for software authors to navigate in. If one aims to use
