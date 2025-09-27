@@ -219,6 +219,16 @@ a custom `$NEWLAPACK` suffix. More information can be found in [Ralf Gommers's
 Accelerate](https://gist.github.com/rgommers/e10c7cf3ebd88883458544e535d7e54c#apple-accelerate)
 and [BLAS, LAPACK and OpenMP documentation from pypackaging-native](https://pypackaging-native.github.io/key-issues/native-dependencies/blas_openmp/).
 
+If BLAS / LAPACK is used in a shared library, things become even more
+complex. When multiple binaries that link dynamically to different
+implementations are loaded into the same program, the program may end up
+using the routines from a different implementation than it was compiled
+against, or even mixing routines from different implementations (if they
+implement a different subset of functions). This is particularly
+problematic if this set includes both LP64 libraries and ILP64 libraries
+that do not use a symbol suffix, as the symbols from one of them will
+clobber the other.
+
 ## Alternative-based approaches to switching implementations
 
 Advanced users and distributions often find it desirable to be able
