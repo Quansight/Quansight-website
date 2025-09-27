@@ -17,41 +17,40 @@ hero:
 <abbr title="Basic Linear Algebra Subprograms">BLAS</abbr>
 and <abbr title="Linear Algebra Package">LAPACK</abbr> are the standard
 libraries for linear algebra. The original implementation, often called
-[Netlib LAPACK](https://netlib.org/lapack/)
-developed since the 1980s, nowadays serves primarily as the provider
+[Netlib LAPACK](https://netlib.org/lapack/),
+developed since the 1980s, nowadays serves primarily as the origin
 of the standard interface, the reference implementation and a conformance
-test suite. Users more commonly use optimized implementations of the same
-interfaces, ranging from generically optimized
-[OpenBLAS](http://www.openmathlib.org/OpenBLAS/)
+test suite. The end users usually use optimized implementations of the same
+interfaces. The choice ranges from generically tuned libraries such as [OpenBLAS](http://www.openmathlib.org/OpenBLAS/)
 and [BLIS](https://github.com/flame/blis),
-through libraries focused on specific hardware such as [Intel®
+through libraries focused on specific hardware such as [Intel®
 oneMKL](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl-download.html),
 [Arm Performance Libraries](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Libraries)
-or [Accelerate framework](https://developer.apple.com/documentation/accelerate) on macOS,
+or the [Accelerate framework](https://developer.apple.com/documentation/accelerate) on macOS,
 to [ATLAS](https://math-atlas.sourceforge.net/) that aims to automatically
 optimize for a specific system.
 
 The diversity of available libraries, developed in parallel with
-the standard interfaces, vendor-specific extensions, and further
+the standard interfaces, along with vendor-specific extensions and further
 downstream changes, adds quite a bit of complexity around using these
-libraries and packaging their consumers. This problem entangles
+libraries in software, and distributing such software afterwards. This problem entangles
 implementation authors, consumer software authors, build system
 maintainers and distribution maintainers. Software authors generally
-wish to distribute their packages built against a generally optimized
-BLAS/LAPACK implementation. Advanced users often want to be able to use
-a different implementation, more suited for their workflows.
+wish to distribute their packages built against a generically optimized
+BLAS/LAPACK implementation. Advanced users often wish to be able to use
+a different implementation, more suited to their particular needs.
 Distributions wish to be able to consistently build software against
 their system libraries, and ideally provide users the ability to switch
-between different implementations. And build systems then need
-to provide the scaffolding for all of that.
+between different implementations. Then, build systems need to provide
+the scaffolding for all of that.
 
 I have recently taken up the work to provide such a scaffolding
 for the [Meson](https://mesonbuild.com/) build system; to [add support
 for BLAS and LAPACK dependencies to Meson](https://github.com/mesonbuild/meson/pull/14773).
-While working on it, I had to learn more about BLAS/LAPACK packaging:
-not only how providers differ from one another, but also how their
-respective downstream packaging makes it different. In this blog post,
-I would like to organize and share what I have learned.
+While working on it, I had to learn a lot about BLAS/LAPACK packaging:
+not only how the different implementations differ from one another,
+but also what is changed by their respective downstream packaging.
+In this blog post, I would like to organize and share what I have learned.
 
 ## Interfaces and libraries
 
@@ -76,26 +75,27 @@ implementation features five libraries: `blas`, `cblas`, `lapack`,
 for linear algebra, such as vector and matrix arithmetic. The `lapack`
 library builds on these routines to provide higher-level functionality,
 for example solving systems of linear equations. Both of these
-libraries are written in Fortran programming language, and therefore
+libraries are written in the Fortran programming language, and therefore
 provide a programming interface specific to Fortran. The `cblas`
 and `lapacke` libraries provide C-style interfaces to these routines.
 Finally, `tmglib` is a library of routines used for testing, far less
 known and rarely used outside the project.
 
 Netlib LAPACK splits not only the actual libraries, but also the related
-development files (headers, pkg-config files), therefore encouraging
+development files (headers, `pkg-config` files), therefore encouraging
 distributions to split the relevant packages as well. Other
 implementations often combine all the provided interfaces into a single
 library, such as `openblas`.
 
 Sometimes invidual interfaces are optional or not implemented at all.
-In OpenBLAS builds, CBLAS, LAPACK and LAPACKE interfaces can
-be disabled, though it is discouraged for compatibility reasons. BLIS
-does not implement LAPACK at all, providing only BLAS and CBLAS
+In OpenBLAS builds, CBLAS, LAPACK and LAPACKE interfaces can
+be disabled, though doing that is discouraged to avoid introducing
+compatibility issues. BLIS
+does not implement LAPACK at all, while providing BLAS and CBLAS
 interfaces (the latter being optional). It is usually combined
 with Netlib LAPACK; [libflame](https://github.com/flame/libflame)
-is being developed as a LAPACK counterpart to it, but it is
-not particularly popular at the time of writing.
+is being developed as a LAPACK counterpart to BLIS, but it is
+not commonly used at the time of writing.
 
 ## LP64 and ILP64 interfaces
 
@@ -113,17 +113,15 @@ not particularly popular at the time of writing.
 </figure>
 </div>
 
-While BLAS and LAPACK libraries are primarily concerned with
-floating-point numbers, integer types are used for vector and matrix
-sizes and indices.
-
-Originally, 32-bit signed integers were used, even on 64-bit platforms,
-limiting the maximum array size to 2<sup>31</sup>−1 elements. This
+While the BLAS and LAPACK libraries are primarily concerned with
+floating-point numbers, integer types need to be used for vector and matrix
+sizes and indices. Originally, 32-bit signed integers were used, even on 64-bit platforms,
+limiting the maximum array size to 2<sup>31</sup>−1 elements. This
 interface is often called the <abbr title="long and pointerare are 64-bit">LP64</abbr>
-interface, or simply "32-bit BLAS". Modern packages also support
-building with 64-bit signed integers instead; this interface is called
-<abbr title="int, long and pointers are 64-bit">ILP64</abbr>, "64-bit
-BLAS", or "index64".
+interface, or simply “32-bit BLAS”. Modern packages provide support
+for building with 64-bit signed integers instead; this interface is called
+<abbr title="int, long and pointers are 64-bit">ILP64</abbr>, “64-bit
+BLAS”, or “index64”.
 
 The exact details on how these two interfaces are implemented varies
 from package to package, and from distribution to distribution. In some
@@ -131,36 +129,38 @@ cases, the ILP64 routines are installed as a separate library such
 as `openblas64`; in other cases, the ILP64 library is installed in place
 of the LP64 library, or combined with it into a single library.
 Sometimes, the ILP64 routines are suffixed to make them distinct
-from LP64 routines, for example the ILP64 counterpart to `sgesv_`
-could be called `sgesv_64_`; when using separate libraries, they often
-use regular LP64 names. There could be separate headers for the ILP64
+from LP64 routines; for example the ILP64 counterpart to `sgesv_`
+could be called `sgesv_64_`. There could be separate headers for the ILP64
 interface, or a preprocessor directive such as `-DLAPACK_ILP64` may
 be used to switch the interfaces.
 
 The CMake build system for Netlib LAPACK 3.12.1 supports two variants
 of ILP64 support: either the `-DBUILD_INDEX64` option can be used
-to build separate libraries such as `lapack64` without symbol suffixes,
+to build separate libraries (such as `lapack64`) without symbol suffixes,
 or the `-DBUILD_INDEX64_EXT_API` option can be used to include ILP64
-symbols with a `64_` suffix in the LP64 library.
+symbols in the LP64 library, with a `_64` suffix appended
+to the subroutine name.
 
-The build system for OpenBLAS has quite a lot customization options
-that historically have been used to provide ILP64 support across
-distributions in inconsistent ways. Perhaps the best relic of this
-are Fedora packages that provide both a `openblas64` library that
+The build system for OpenBLAS permits quite a lot customization,
+and this historically resulted in distributions providing ILP64
+support in inconsistent ways. Perhaps the best relic of this
+are the Fedora packages, as they provide both a `openblas64` library that
 provides ILP64 symbols without suffixes, and a `openblas64_` (with
-an underscore) library, that uses a `_64` suffix [recommended
+an underscore) library, that uses a `64_` suffix appended to the symbol
+name, as [recommended
 OpenBLAS upstream ILP64
 convention](https://www.openmathlib.org/OpenBLAS/docs/distributing/#ilp64-interface-builds).
 
-Intel MKL 2025.2 uses a hybrid convention. Its LP64 library and "Single
-Dynamic Library" both combine LP64 with suffixed ILP64 symbols, while
+Intel MKL 2025.2 uses a hybrid convention. Its LP64 library and its “Single
+Dynamic Library” (`mkl_rt`) both combine LP64 with suffixed ILP64 symbols, while
 its separate ILP64 library provides both unsuffixed and suffixed ILP64
-symbols. In both cases, a `64_` suffix is used.
+symbols. In both cases, a `_64` subroutine suffix is used, following
+the same convention as Netlib LAPACK.
 
-The way suffixes are added means that the symbols are the same
-for Fortran subroutines (for example, `dgemm_64_`), but not for the C
-routines (`cblas_dgemm_64` in Netlib BLAS and MKL, `cblas_dgemm64_`
-in OpenBLAS).
+The way that suffixes are added means that the symbols are the same
+for Fortran subroutines (for example, all three libraries provide `dgemm_64_`),
+but not for the C routines (there is a `cblas_dgemm_64` symbol in Netlib
+BLAS and MKL, and a `cblas_dgemm64_` symbol in OpenBLAS).
 
 ## Threading models
 
@@ -180,24 +180,23 @@ in OpenBLAS).
 </figure>
 </div>
 
-As computationally intensive routines, BLAS and LAPACK libraries can
+As providers of computationally intensive routines, the BLAS and LAPACK libraries can
 often benefit from parallelization. The optimized implementations
 such as OpenBLAS, BLIS or MKL
 feature support for multiple threading models to take advantage of that.
 All these libraries come in at least three variants: a serial
-(or "sequential") variant that runs computations using a single thread,
+(or “sequential”) variant that runs computations using a single thread,
 a variant using POSIX threads or TBB (in case of MKL), and a variant
-using OpenMP. MKL comes precompiled for GNU OpenMP and Intel OpenMP
+using OpenMP. MKL comes precompiled for the GNU OpenMP and the Intel OpenMP
 libraries.
 
 Again, the exact details differ across distributions. Some support
-installing only a single library for selected threading model,
+installing only a single library for the selected threading model,
 so `openblas` may either represent the serial, the POSIX threads or the OpenMP
-variant. Others install multiple variants; so on Fedora, there is
+variant. Others install multiple variants; on Fedora, there is
 a serial `openblas`, a threaded `openblasp` and an OpenMP-enabled
-`openblaso`. MKL goes even further, with its "Single Dynamic Library"
-permitting switching between different threading models (and LP64/ILP64
-interfaces) at runtime.
+`openblaso`. MKL goes even further, with its “Single Dynamic Library”
+permitting switching between different threading models at runtime.
 
 ## API and ABI compatibility
 
