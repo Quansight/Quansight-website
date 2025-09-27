@@ -291,9 +291,9 @@ to use `-reference` suffixes (for example, `lapack64-reference`).
 <figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
   <img src="/posts/blas-lapack-packaging/flexiblas.png"
     width="873" height="195" alt="A diagram illustrating using FlexiBLAS.
-    First, on Gentoo there are four symbolic links for blas, cblas,
+    First, on Gentoo there are four wrappers for blas, cblas,
     lapack and lapacke libraries. These all link to the FlexiBLAS
-    wrapper library. FlexiBLAS dispatches into the actual
+    multiplexing library. FlexiBLAS dispatches into the actual
     implementations, such as Netlib LAPACK, BLIS, OpenBLAS or MKL.
     It is noted that BLIS is combined with Netlib LAPACK implementation." />
   <figcaption>Fig. 4. The FlexiBLAS approach</figcaption>
@@ -322,8 +322,8 @@ overhead</q>.
 
 Again, there are some minor implementation differences between
 distributions. In Fedora, packages are built and linked directly
-to FlexiBLAS, while Gentoo is considering using a layer of symbolic
-links for backwards compatibility.
+to FlexiBLAS, while Gentoo is considering using a layer of wrappers
+for backwards compatibility.
 
 ## Summary
 
