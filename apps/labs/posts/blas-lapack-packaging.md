@@ -200,21 +200,21 @@ permitting switching between different threading models at runtime.
 
 ## API and ABI compatibility
 
-BLAS / LAPACK is a living specification, with the interface defined
+BLAS / LAPACK is a living specification, and its interface is defined
 by Netlib LAPACK releases. For example, LAPACK 3.12.0 introduced
-a `dgedmd_` function, that was added to OpenBLAS in 0.3.24. In addition
-to adding new interfaces, functions are also occasionally deprecated.
-Netlib LAPACK can be configured to build without deprecated symbols.
+a `dgedmd_` function, and its implementation was added to OpenBLAS in 0.3.24. In addition
+to new interfaces being added, functions are also occasionally deprecated.
+Netlib LAPACK can be configured not to include deprecated symbols.
 The resulting differences can introduce incompatibilities between
 applications and different BLAS / LAPACK implementations.
 
 Besides additions and deprecations, API and ABI incompatibilities could also be
-caused by disabling optional components (such as CBLAS or LAPACKE
-interfaces), by using different suffixes (for example, while
-building the ILP64 interface), Fortran calling conventions (particularly
-affecting callbacks and complex numbers). Perhaps the most extreme case of this
-is Apple's Accelerate library, where modern LAPACK interfaces all use
-a custom `$NEWLAPACK` suffix. More information can be found in [Ralf Gommers's notes on Apple
+caused by disabling optional components (such as the CBLAS or LAPACKE
+interfaces), by using different symbol suffixes (for example, while
+building the ILP64 interface) or Fortran calling conventions (this particularly
+affects callbacks and complex numbers). Perhaps the most extreme case of this
+issue is the Apple's Accelerate library, in which modern LAPACK interfaces all use
+a custom `$NEWLAPACK` suffix. More information on compatibility issues can be found in [Ralf Gommers's notes on Apple
 Accelerate](https://gist.github.com/rgommers/e10c7cf3ebd88883458544e535d7e54c#apple-accelerate)
 and [BLAS, LAPACK and OpenMP documentation from pypackaging-native](https://pypackaging-native.github.io/key-issues/native-dependencies/blas_openmp/).
 
@@ -224,46 +224,48 @@ implementations are loaded into the same program, the program may end up
 using the routines from a different implementation than it was compiled
 against, or even mixing routines from different implementations (if they
 implement a different subset of functions). This is particularly
-problematic if this set includes both LP64 libraries and ILP64 libraries
-that do not use a symbol suffix, as the symbols from one of them will
-clobber the other.
+problematic if both LP64 libraries and ILP64 libraries
+that do not use a symbol suffix are used simultaneously, as the symbols
+from one of them will clobber the symbols from the other and parts
+of the code may call the wrong functions.
 
 ## Alternative-based approaches to switching implementations
 
 Advanced users and distributions often find it desirable to be able
-to use different BLAS / LAPACK implementations for a given package.
+to choose between different BLAS / LAPACK implementations for a given package.
 The simplest approach to achieve that is to provide an option to select
 the library used to build the package. Such an option could be afterwards
-exposed to users, for example by publishing different variants
-in Conda-forge packages, or by exposing the choice via USE flags in Gentoo Linux.
+exposed to the users, for example by publishing different variants
+of Conda-forge packages, or by exposing the choice via USE flags in Gentoo Linux.
 
-However, such an approach is suboptimal, as it requires building the package
-separately against every supported provider, even if the package
-in question would be ABI-compatible with all of them. Therefore, such
-an approach is generally used only for packages that benefit
-from functions unique to a given implementation. For example,
+However, such an approach is suboptimal, as it requires that the package
+is built separately against every supported provider, even if it
+would be ABI-compatible with all of them. Therefore, such
+an approach is generally used only for packages that take advantage
+of vendor-specific extensions to a specific implementation. For example,
 [conda-forge's PyTorch
 packages](https://anaconda.org/conda-forge/pytorch/files) provide
-"generic" and "mkl" LAPACK variants, the former compatible with
+“generic” and “mkl” variants, the former compatible with
 any LAPACK implementation, the latter using additional MKL
 functionality.
 
-A better interchangeability can be achieved using a solution such
-as the packages from [Conda-forge's `blas` feedstock](https://github.com/conda-forge/blas-feedstock) (see: [Conda-forge's Knowledge Base: Switching BLAS implementation](https://conda-forge.org/docs/maintainer/knowledge_base/#switching-blas-implementation), Debian's alternatives system
-(see: [Debian: Handle different versions of BLAS and LAPACK, as of December 2022](https://wiki.debian.org/DebianScience/LinearAlgebraLibraries?action=recall&rev=38))
+A better interchangeability can be achieved through a solution such
+as the packages built from [Conda-forge's `blas` feedstock](https://github.com/conda-forge/blas-feedstock)
+(see: [Conda-forge's Knowledge Base: Switching BLAS implementation](https://conda-forge.org/docs/maintainer/knowledge_base/#switching-blas-implementation)),
+Debian's alternatives system (see: [Debian: Handle different versions of BLAS and LAPACK, as of December 2022](https://wiki.debian.org/DebianScience/LinearAlgebraLibraries?action=recall&rev=38))
 or Gentoo's historical eselect modules. These approaches replace the libraries
 originally provided by Netlib LAPACK with symbolic links or wrappers,
 referencing another implementation. For example, installing
-the `openblas` variant of `liblapack` creates a `liblapack.so.3`
+the `openblas` variant of the `liblapack` Conda-forge package creates a `liblapack.so.3`
 symbolic link to the OpenBLAS library.
 
-This approach makes it possible to avoid rebuilding other packages,
-limiting the effort needed to switch between providers to replacing
+This approach makes it possible to avoid rebuilding other packages
+while switching implementations; it is sufficient to replace
 the wrappers. Unfortunately, it is rather complex. In particular, one
 needs to ensure that the built packages link to the generic library
 names and use compatible API and ABI. This is usually
 achieved by building them against the reference implementation rather
-than the symlinks, which is not always trivially possible. Furthermore,
+than the symbolic links, which is not always trivially possible. Furthermore,
 resolving symbol name and other ABI differences requires creating
 complex wrappers, such as Conda-forge's wrapper libraries
 for Accelerate.
@@ -271,7 +273,7 @@ for Accelerate.
 [Gentoo's eselect-ldso system](https://wiki.gentoo.org/index.php?title=Blas-lapack-switch&oldid=1271681)
 is an elaboration on this scheme. Rather
 than symbolic links, the system library directory contains the reference
-Netlib libraries, and these libraries are used for package builds.
+Netlib libraries, and packages are built against these libraries.
 Wrappers for other implementations are installed into dedicated
 directories, and they can be activated by adding these directories
 into the dynamic linker search paths (using the `ld.so.conf` file
@@ -279,10 +281,11 @@ or the `LD_LIBRARY_PATH` environment variable).
 
 An interesting side effect of many of these approaches is that
 the reference library names are no longer guaranteed to refer
-to the Netlib LAPACK implementation. On Debian, the netlib libraries
-are installed into `blas` and `lapack` subdirectories of the library
+to the Netlib LAPACK implementation. On Debian, the Netlib libraries
+are installed into the `blas` and `lapack` subdirectories of the library
 directory. On the upcoming port of Gentoo to FlexiBLAS, they are renamed
-to use `-reference` suffixes (for example, `lapack64-reference`).
+to use a `-reference` suffix (for example, the `lapack64` library is renamed
+to `lapack64-reference`).
 
 ## One FlexiBLAS to rule them all
 
@@ -300,7 +303,7 @@ to use `-reference` suffixes (for example, `lapack64-reference`).
 </div>
 
 The limitations of alternative-based approaches, in particular
-concerning API and ABI compatibility, make it desirable to use a wrapper
+concerning API and ABI compatibility, make it desirable to use a multiplexing
 library to abstract over different implementations. One such a library
 is [FlexiBLAS](https://www.mpi-magdeburg.mpg.de/projects/flexiblas).
 It is already used in Fedora (see: [Fedora documentation: Linear Algebra
@@ -309,11 +312,11 @@ and it is being considered in Gentoo (see: [[gentoo-dev] Redoing
 BLAS/LAPACK in Gentoo, using
 FlexiBLAS](https://archives.gentoo.org/gentoo-dev/d7783d1b18c3daba15aa78f8c3a64c43bc4dc9b7.camel@gentoo.org/T/)).
 
-With this approach, packages aren't built against any particular BLAS /
-LAPACK implementation, but rather against the wrapper library
-and interface provided by FlexiBLAS. At runtime, FlexiBLAS dispatches
-these calls to the selected provider library or to a fallback
-implementation if the provider does not implement the requested
+With this approach, the individual packages aren't built against any particular BLAS /
+LAPACK implementation, but rather against the multiplexing library
+and the programming interface provided by FlexiBLAS. At runtime, FlexiBLAS dispatches
+the function calls to the provider library selected by the user at runtime, or to a fallback
+implementation if said provider does not implement the requested
 function. This makes it possible to even up the API and ABI differences
 between providers, while respecting the user preference as much
 as possible. According to upstream, this comes with <q>no notable
@@ -326,26 +329,26 @@ for backwards compatibility.
 
 ## Summary
 
-BLAS and LAPACK started as Fortran libraries, and evolved into standard
+BLAS and LAPACK started as Fortran libraries, and evolved into the standard
 interfaces for linear algebra, with multiple implementations conforming
-to them. However, their historical evolution along with downstream
+to them. However, their historical evolution combined with downstream
 customizations has resulted in quite a complex landscape of libraries
-and wrappers. Even when targeting a very specific provider, one needs
-to be aware of different build configurations and packaging differences.
+and wrappers. Even targeting a very specific provider requires
+awareness of build configuration and packaging differences.
 
-Netlib LAPACK distribution installs separate libraries, while other
+The Netlib LAPACK distribution installs separate libraries, while other
 implementations combine the interfaces into a single library. Individual
-interfaces are optional and can be disabled. The libraries can provide
+interfaces are optional and can be disabled. The libraries can provide
 the LP64 interface, the ILP64 interface or both. The ILP64 interface can
-use suffixed symbols; either separate headers or preprocessor
-definitions can be used to enable it. Accelerate uses suffixed symbols
+use different symbol suffixes (or none); either separate headers or preprocessor
+definitions can be used to use it. The Accelerate library uses suffixed symbols
 for the modern LAPACK interface in general. Many implementations feature
-sequential and multiple threaded variants; these can be either
+sequential and multiple multithreaded variants; these can be either
 packaged interchangeably or installed simultaneously.
 
-Furthermore, different implementations can be ABI-compatible
-and therefore interchangeable, API-compatible without ABI compatibility,
-requiring rebuilding, or feature API incompatibilities requiring
+Furthermore, the different implementations can be ABI-compatible with one another
+and therefore interchangeable; API-compatible without ABI compatibility,
+requiring rebuilding; or they can feature API incompatibilities that require
 explicit code-level support. A dispatching library such as FlexiBLAS
 can be used to provide API and ABI compatibility.
 
@@ -353,16 +356,17 @@ All these aspects may be further customized by distributions,
 and change over time. Sometimes the base libraries
 traditionally used by Netlib LAPACK are replaced by symbolic links
 or wrappers to facilitate switching between different implementations.
-A different provider library may be used at build time and at runtime.
+A different provider library may be used while building the package,
+and at its runtime.
 
 This system largely works for downstream packaging, but it is not
-necessarily easy for software authors to navigate in. If one aims to use
-a very specific BLAS / LAPACK implementation, one needs to account
-for all the variation in how it is packaged, using elaborate discovery
+necessarily easy for software authors to navigate in. A package aiming
+to use only a specific BLAS / LAPACK implementation needs to account
+for all the variation in how it is packaged, possibly using elaborate discovery
 methods: searching for the correct library, the correct headers,
 the correct symbol suffix. At the same time, it is often desirable
 to provide advanced users and distribution packagers with a choice
-of the implementation, extending this discovery to different providers
+of the implementation, which necessitates extending this discovery to the different providers
 and their variations. Build systems such as Meson are caught
 in the middle of this, often being in the best position to provide
-the routines needed for discovery.
+the abstraction needed for that.
