@@ -283,7 +283,7 @@ An interesting side effect of many of these approaches is that
 the reference library names are no longer guaranteed to refer
 to the Netlib LAPACK implementation. On Debian, the Netlib libraries
 are installed into the `blas` and `lapack` subdirectories of the library
-directory. On the upcoming port of Gentoo to FlexiBLAS, they are renamed
+directory. On the experimental port of Gentoo to FlexiBLAS, they are renamed
 to use a `-reference` suffix (for example, the `lapack64` library is renamed
 to `lapack64-reference`).
 
@@ -308,7 +308,7 @@ library to abstract over different implementations. One such a library
 is [FlexiBLAS](https://www.mpi-magdeburg.mpg.de/projects/flexiblas).
 It is already used in Fedora (see: [Fedora documentation: Linear Algebra
 Libraries](https://docs.fedoraproject.org/en-US/packaging-guidelines/BLAS_LAPACK/)),
-and it is being considered in Gentoo (see: [[gentoo-dev] Redoing
+and it is being tested in Gentoo (see: [[gentoo-dev] Redoing
 BLAS/LAPACK in Gentoo, using
 FlexiBLAS](https://archives.gentoo.org/gentoo-dev/d7783d1b18c3daba15aa78f8c3a64c43bc4dc9b7.camel@gentoo.org/T/)).
 
@@ -324,7 +324,7 @@ overhead</q>.
 
 Again, there are some minor implementation differences between
 distributions. In Fedora, packages are built and linked directly
-to FlexiBLAS, while Gentoo is considering using a layer of wrappers
+to FlexiBLAS, while Gentoo is experimenting with using a layer of wrappers
 for backwards compatibility.
 
 ## Summary
