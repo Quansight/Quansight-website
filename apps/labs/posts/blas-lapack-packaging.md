@@ -1,6 +1,6 @@
 ---
 title: 'BLAS/LAPACK packaging'
-published: September 16, 2025
+published: September 29, 2025
 authors: [michal-gorny]
 description: 'An overview of differences between BLAS / LAPACK implementations and their packaging.'
 category: [Packaging]
