@@ -3,12 +3,12 @@ title: Creating a daft plugin for the Narwhals library
 authors: [michèle-pettinato]
 published: October 20, 2025
 description: Lorem ipsum dolor sit amet
-category: [Community, OSS Experience]
+category: [Community, Internship, OSS Experience]
 featuredImage:
-  src: /posts/hello-world-post/featured.png
+  src: /posts/oss-internship-creating-narwhals-daft-plugin/featured.png
   alt: Hello world post featured image
 hero:
-  imageSrc: /posts/hello-world-post/hero.jpeg
+  imageSrc: /posts/oss-internship-creating-narwhals-daft-plugin/hero.jpeg
   imageAlt: Lorem ipsum dolor
 ---
 
