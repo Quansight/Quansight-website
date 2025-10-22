@@ -1,6 +1,6 @@
 ---
 title: 'BLAS/LAPACK packaging'
-published: September 29, 2025
+published: October 23, 2025
 authors: [michal-gorny]
 description: 'An overview of differences between BLAS / LAPACK implementations and their packaging.'
 category: [Packaging]
@@ -147,7 +147,7 @@ support in inconsistent ways. Perhaps the best relic of this
 are the Fedora packages, as they provide both a `openblas64` library that
 provides ILP64 symbols without suffixes, and a `openblas64_` (with
 an underscore) library, that uses a `64_` suffix appended to the symbol
-name, as [recommended
+name, as is the [recommended
 OpenBLAS upstream ILP64
 convention](https://www.openmathlib.org/OpenBLAS/docs/distributing/#ilp64-interface-builds).
 
@@ -169,7 +169,7 @@ BLAS and MKL, and a `cblas_dgemm64_` symbol in OpenBLAS).
   <img src="/posts/blas-lapack-packaging/lapack-thread.png"
     width="889" height="199" alt="A diagram illustrating different
     approaches to threading. It is split into serial, pthread / TBB
-    and OpenMP parts. Conda-forge's OpenBLAS library may correspond
+    and OpenMP parts. conda-forge's OpenBLAS library may correspond
     to either variant, defaulting to pthread. Fedora features split
     serial openblas library, pthread-based openblasp library
     and OpenMP-based openblaso library. Intel MKL features four
@@ -229,14 +229,14 @@ that do not use a symbol suffix are used simultaneously, as the symbols
 from one of them will clobber the symbols from the other and parts
 of the code may call the wrong functions.
 
-## Alternative-based approaches to switching implementations
+## Different approaches to swapping implementations
 
 Advanced users and distributions often find it desirable to be able
 to choose between different BLAS / LAPACK implementations for a given package.
 The simplest approach to achieve that is to provide an option to select
-the library used to build the package. Such an option could be afterwards
+the library used to build the package. Such an option could afterwards be
 exposed to the users, for example by publishing different variants
-of Conda-forge packages, or by exposing the choice via USE flags in Gentoo Linux.
+of conda-forge packages, or by exposing the choice via USE flags in Gentoo Linux.
 
 However, such an approach is suboptimal, as it requires that the package
 is built separately against every supported provider, even if it
@@ -249,14 +249,14 @@ packages](https://anaconda.org/conda-forge/pytorch/files) provide
 any LAPACK implementation, the latter using additional MKL
 functionality.
 
-A better interchangeability can be achieved through a solution such
-as the packages built from [Conda-forge's `blas` feedstock](https://github.com/conda-forge/blas-feedstock)
-(see: [Conda-forge's Knowledge Base: Switching BLAS implementation](https://conda-forge.org/docs/maintainer/knowledge_base/#switching-blas-implementation)),
+Better interchangeability can be achieved through a solution such
+as the packages built from [conda-forge's `blas` feedstock](https://github.com/conda-forge/blas-feedstock)
+(see: [conda-forge's Knowledge Base: Switching BLAS implementation](https://conda-forge.org/docs/maintainer/knowledge_base/#switching-blas-implementation)),
 Debian's alternatives system (see: [Debian: Handle different versions of BLAS and LAPACK, as of December 2022](https://wiki.debian.org/DebianScience/LinearAlgebraLibraries?action=recall&rev=38))
 or Gentoo's historical eselect modules. These approaches replace the libraries
 originally provided by Netlib LAPACK with symbolic links or wrappers,
 referencing another implementation. For example, installing
-the `openblas` variant of the `liblapack` Conda-forge package creates a `liblapack.so.3`
+the `openblas` variant of the `liblapack` conda-forge package creates a `liblapack.so.3`
 symbolic link to the OpenBLAS library.
 
 This approach makes it possible to avoid rebuilding other packages
@@ -267,7 +267,7 @@ names and use compatible API and ABI. This is usually
 achieved by building them against the reference implementation rather
 than the symbolic links, which is not always trivially possible. Furthermore,
 resolving symbol name and other ABI differences requires creating
-complex wrappers, such as Conda-forge's wrapper libraries
+complex wrappers, such as conda-forge's wrapper libraries
 for Accelerate.
 
 [Gentoo's eselect-ldso system](https://wiki.gentoo.org/index.php?title=Blas-lapack-switch&oldid=1271681)
@@ -287,7 +287,7 @@ directory. On the experimental port of Gentoo to FlexiBLAS, they are renamed
 to use a `-reference` suffix (for example, the `lapack64` library is renamed
 to `lapack64-reference`).
 
-## One FlexiBLAS to rule them all
+## One library to rule them all
 
 <div style={{ textAlign: "center" }}>
 <figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
@@ -298,29 +298,29 @@ to `lapack64-reference`).
     multiplexing library. FlexiBLAS dispatches into the actual
     implementations, such as Netlib LAPACK, BLIS, OpenBLAS or MKL.
     It is noted that BLIS is combined with Netlib LAPACK implementation." />
-  <figcaption>Fig. 4. The FlexiBLAS approach</figcaption>
+  <figcaption>Fig. 4. The multiplexing approach on FlexiBLAS example</figcaption>
 </figure>
 </div>
 
 The limitations of alternative-based approaches, in particular
 concerning API and ABI compatibility, make it desirable to use a multiplexing
-library to abstract over different implementations. One such a library
-is [FlexiBLAS](https://www.mpi-magdeburg.mpg.de/projects/flexiblas).
-It is already used in Fedora (see: [Fedora documentation: Linear Algebra
+library to abstract over different implementations. One example of such a library
+is [FlexiBLAS](https://www.mpi-magdeburg.mpg.de/projects/flexiblas),
+currently used by Fedora (see: [Fedora documentation: Linear AlVgebra
 Libraries](https://docs.fedoraproject.org/en-US/packaging-guidelines/BLAS_LAPACK/)),
-and it is being tested in Gentoo (see: [[gentoo-dev] Redoing
-BLAS/LAPACK in Gentoo, using
+and experimentally in Gentoo (see: [[gentoo-dev] Redoing BLAS/LAPACK in Gentoo, using
 FlexiBLAS](https://archives.gentoo.org/gentoo-dev/d7783d1b18c3daba15aa78f8c3a64c43bc4dc9b7.camel@gentoo.org/T/)).
+Another example is [libblastrampoline](https://github.com/JuliaLinearAlgebra/libblastrampoline),
+used by the Julia programming language.
 
-With this approach, the individual packages aren't built against any particular BLAS /
-LAPACK implementation, but rather against the multiplexing library
-and the programming interface provided by FlexiBLAS. At runtime, FlexiBLAS dispatches
+With multiplexing approach, the individual packages aren't built against any particular BLAS /
+LAPACK implementation, but rather against a multiplexing library,
+and usually against the programming interface provided by it. At runtime, the multiplexer dispatches
 the function calls to the provider library selected by the user at runtime, or to a fallback
 implementation if said provider does not implement the requested
 function. This makes it possible to even up the API and ABI differences
 between providers, while respecting the user preference as much
-as possible. According to upstream, this comes with <q>no notable
-overhead</q>.
+as possible.
 
 Again, there are some minor implementation differences between
 distributions. In Fedora, packages are built and linked directly
