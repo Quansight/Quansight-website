@@ -41,14 +41,14 @@ tensors in the C++ codebase are extremely commonplace. This post is aimed at
 someone who wants to contribute to PyTorch, and you should at least be familiar
 with some of the basic terminologies of the PyTorch codebase that can be found
 in Edward Yang's excellent [blog post](http://blog.ezyang.com/2019/05/pytorch-internals)
-on PyTorch internals.  Although `TensorIterator` can be used for both CPUs and
+on PyTorch internals. Although `TensorIterator` can be used for both CPUs and
 accelerators, this post has been written keeping in mind usage on the CPU.
 Although there can be some dissimilarities between the two, the overall
 concepts are the same.
 
-# History of TensorIterator
+## History of TensorIterator
 
-## TH iterators
+### TH iterators
 
 TensorIterator was devised to simplify the implementation of PyTorch's tensor
 operations over the `TH` implementation. `TH` uses preprocessor macros to write
@@ -57,7 +57,7 @@ consider this simple `TH` loop for computing the product of all the numbers in
 a particular dimension (find the code
 [here](https://github.com/pytorch/pytorch/blob/master/aten/src/TH/generic/THTensorMoreMath.cpp#L350)):
 
-``` C
+```C
 TH_TENSOR_DIM_APPLY2(scalar_t, t, scalar_t, r_, dimension,
     accreal prod = 1;
     int64_t i;
@@ -88,7 +88,7 @@ Internally, the `TH_TENSOR_DIM_APPLY2` macro is expanded for generating various 
 depending on the type of the tensor that needs to be iterated over. The implementation of
 `TH_TENSOR_DIM_APPLY2` can be found [here](https://github.com/pytorch/pytorch/blob/master/aten/src/TH/THTensorDimApply.h#L138).
 
-## Limitations of TH iterators
+### Limitations of TH iterators
 
 Apart from the obvious complication that arises due to maintaining a codebase that is so dependent
 on such insanely complex macro expansions, TH iterators have some fundamental shortcomings. For
@@ -102,7 +102,7 @@ These limitations led to the creation of `TensorIterator`, which is used by the
 `ATen` tensor implementation for overcoming some of the shortcomings of the previous `TH`
 iterators.
 
-# Basics of TensorIterator
+## Basics of TensorIterator
 
 A `TensorIterator` can be created using the default constructor. You must then add the tensors
 that you want as inputs or outputs. A good example can be found from the `TensorIterator::binary_op()`
@@ -110,7 +110,7 @@ that you want as inputs or outputs. A good example can be found from the `Tensor
 allows you to create `TensorIterator` objects for performing point-wise binary operations
 between two tensors. The important parts look like so:
 
-``` cpp
+```cpp
 auto iter = TensorIterator();
 
 iter.add_output(out);
@@ -119,11 +119,12 @@ iter.add_input(b);
 
 iter.build();
 ```
+
 As you can see, you add a tensor called `out` as the output tensors and `a` and `b` as the
 input tensors. Calling `build` is then mandatory for creating the object and letting
 the class perform other optimizations like collapsing dimensions.
 
-# Performing iterations
+## Performing iterations
 
 Broadly, iterations using `TensorIterator` can be classified as point-wise iterations
 or reduction iterations. This plays a fundamental role in how iterations using `TensorIterator`
@@ -132,7 +133,7 @@ and grain size while reduction operations have to be either parallelized along d
 that you're not iterating over or by performing bisect and reduce operations along the
 dimension being iterated. Parallelization can also happen using vectorized operations.
 
-## Iteration details
+### Iteration details
 
 The simplest iteration operation can be performed using the
 [`for_each`](https://github.com/pytorch/pytorch/blob/master/aten/src/ATen/native/TensorIterator.cpp#L525)
@@ -143,7 +144,7 @@ of a single dimension whereas the latter can do so over two dimensions. The simp
 way of using `for_each` is to pass it a lambda of type `loop_t` (or `loop2d_t`).
 A code snippet using it this way would look like so:
 
-``` cpp
+```cpp
 auto iter = TensorIterator();
 iter.add_output(out);
 iter.add_input(a);
@@ -167,6 +168,7 @@ auto loop = [&](char **data, const int64_t* strides, int64_t n) {
 
 iter.for_each(loop);
 ```
+
 In the above example, the `char** data` gives a pointer to the data within the
 tensor in the same order that you specify when you build the iterator. Note
 that in order to make the implementation agnostic of any particular data type, you
@@ -183,7 +185,7 @@ that is determined as the 'right amount' of data to iterate over in order to gai
 speedup using multi-threaded execution. If you want to explicitly specify that your
 operation _must_ run in serial, then use the `serial_for_each` loop.
 
-### Using kernels for iterations
+#### Using kernels for iterations
 
 Frequently we want to create a kernel that applies a simple point-wise function onto entire tensors.
 `TensorIterator`
@@ -195,7 +197,8 @@ For example, say we want to build a function that performs the point-wise additi
 of two tensors and stores the result in a third tensor, we can use the `cpu_kernel`
 function. Note that in this example we assume a tensor of `float` but you can
 use the `AT_DISPATCH_ALL_TYPES_AND2` macro.
-``` cpp
+
+```cpp
 TensorIterator iter;
 iter.add_input(a_tensor);
 iter.add_input(b_tensor);
@@ -205,10 +208,11 @@ cpu_kernel(iter, [] (float a, float b) -> float {
   return a + b;
 });
 ```
+
 Writing the kernel in this way ensures that the value returned by the lambda passed to
 `cpu_kernel` will populate the corresponding place in the target output tensor.
 
-### Setting tensor iteration dimensions
+#### Setting tensor iteration dimensions
 
 The value of the sizes and strides will determine which dimension of the tensor you will iterate over.
 `TensorIterator` performs optimizations to make sure that at least
@@ -240,7 +244,7 @@ the code for the [kernel](https://github.com/pytorch/pytorch/blob/master/aten/sr
 
 The important bits of this function are like so:
 
-``` cpp
+```cpp
 auto self_sizes = ensure_nonempty_vec(self.sizes().vec());
 self_sizes[dim] = 1;
 
@@ -254,6 +258,7 @@ iter.add_output(result_restrided);
 iter.add_input(self_restrided);
 iter.build();
 ```
+
 You can see that we first change the size of the tensors to `1` on the
 reduction dimension so that the dimension collapsing logic inside
 `TensorIterator#build` will know which dimension to skip.
@@ -263,7 +268,7 @@ then use the restrided tensors for building the `TensorIterator`. You can
 set any size for inputs/outputs, then `TensorIterator` with check whether it
 can come up with a common broadcasted size
 
-# Conclusion
+## Conclusion
 
 This post was a very short introduction to what `TensorIterator` is actually
 capable of. If you want to learn more about how it works and what goes into
