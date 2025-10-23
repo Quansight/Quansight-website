@@ -32,7 +32,8 @@ Narwhals is a complex, strongly typed library. It makes extensive use of Protoco
 
 How could I start to contribute at this level of sophistication? How could I find my way in?
 
-[TODO: INSERT PICTURE OF SAGRADA FAMILIA]
+![A view looking up at the ceiling of the Sagrada Familia in Barcelona](/posts/oss-internship-creating-narwhals-daft-plugin/sagrada_familia.jpg)
+Image: Vater_fotografo / CC BY-SA 2.0.
 
 ### First interlude: a word on creation by community
 
@@ -45,8 +46,6 @@ Luckily, Narwhals has an active community, and one group in particular was pivot
 > "you don't have to submit the perfect solution. Only very experienced contributors can submit a pretty polished version. Make a start, a suggestion, and you'll see the community run with it"
 
 This was pretty liberating for me, and it's something I'd like to share with readers. Open source projects held a certain air of impenetrability; it seemed that only contributions of a very high standard would be helpful. I don't know how other communities are, but with Narwhals I found this not to be the case. In fact I realised even just asking questions is valuable, because it forces everyone to revise their understanding. At the study group, I found that a couple of my contributions that I thought were elementary actually managed to bring everyone’s understanding forward. Hearing this from experienced members made me feel on top of the mountain!
-
-[INSERT FOOTBALL PRACTICE PIC?]
 
 As I was able to find my footing in the project, I saw work progressed as a kind of [scaffolded process](https://en.wikipedia.org/wiki/Lev_Vygotsky#Scaffolding). Not just my contributions, but most decisions and ideas would be developed through communal working. Whilst I'd say Marco is very much the central, co-ordinating node, there is bi- and multi-directional traffic with other contributors. This very loosely organised structure nevertheless works as a well-oiled machine - probably why they're able to progress so quickly!
 
@@ -162,11 +161,11 @@ We decided to initially implement the bare minimum, as this would show how a plu
 ├── README.md
 ```
 
-**This blogpost will concentrate on how narwhals-daft connects to the Narwhals library and what parts every future plugin developer will need to implement**, for greater technical detail on the plugin & how it works within Narwhals, see [here: TODO LINK, not sure if i'll get my website up in time, otherwise just link to md file in github repo]
+**This blogpost will concentrate on how narwhals-daft connects to the Narwhals library and what parts every future plugin developer will need to implement**, for greater technical detail on the plugin & how it works within Narwhals, see [here](https://github.com/ym-pett/blogposts_etc/blob/main/Implementing%20a%20plugin%20for%20the%20Narwhals%20library_%20into%20the%20fray.md) (currently work in progress).
 
 ### 1. The top-level `pyproject.toml`
 
-We can see that we have a top-level `pyproject.toml` file with an `entry point` defined. This part is crucial for every plugin. See section 3[TODO: INSERT LINK TO SECTION] on how to adapt this to the particular library of your plugin.
+We can see that we have a top-level `pyproject.toml` file with an `entry point` defined. This part is crucial for every plugin. (See below on how to adapt this to the particular library of your plugin.)
 
 ```
 ...
@@ -180,11 +179,9 @@ narwhals-daft = 'narwhals_daft'
 
 Apart from the `.toml` file, this is where the connection to the Narwhals library happens. The file contains two functions, `__narwhals_namespace__` and `is_native` as well as a constant `NATIVE_PACKAGE` which gives the name of the package we're making a plugin for.
 
-The `__narwhals_namespace__` acts as the entry point to the library. Given the version of Narwhals, it returns a `DaftNamespace`, which can be wrapped around a non-narwhals dataframe (referred to as "native object" in the Narwhals terminology). The `DaftNamespace` makes a `from_native` function available, which allows the native object to be read into a compliant object. In Narwhals compliant objects [TODO explain COMPLIANT LAYER]
+The `__narwhals_namespace__` acts as the entry point to the library. Given the version of Narwhals, it returns a `DaftNamespace`, which can be wrapped around a non-narwhals dataframe (referred to as "native object" in the Narwhals terminology). The `DaftNamespace` makes a `from_native` function available, which allows the native object to be read into a compliant object, on which typical Narwhals operations can be carried out whilst still retaining the original data and data structure(3).
 
-on which typical Narwhals operations can be carried out whilst still retaining the original data and data structure.
-
-The `is_native` function simply checks if we are dealing with a daft dataframe. Note it is only at this point that we import the daft library, rather than when loading the plugin (see section [TODO INSERT SECTION]for further discussion of this aspect).
+The `is_native` function simply checks if we are dealing with a daft dataframe. Note it is only at this point that we import the daft library, rather than when loading the plugin (see "Issues we've considered" below for further discussion of this aspect).
 
 ```python
 from __future__ import annotations
@@ -216,7 +213,7 @@ We can see that in order for these functions to work, we'll need to implement at
 
 But hang on, how did you know that those were needed? It's in the Protocols! Basically, if a plugin author implements all the methods from the `Compliant*` classes, then Narwhals will know how to glue everything together. And now we can see that tying this description to `daft` is too specific: what we've had to do is adapt the more abstract compliant classes `CompliantLazyFrame`, `Expression` & `Namespace`.
 
-One last code extract to convince you, I'll show you some relevant lines for `DaftNamespace`:
+For a couple of code extract to convince you, I'll show you some relevant lines for `DaftNamespace`:
 
 ```python
 ...
@@ -240,6 +237,8 @@ class DaftExpr(LazyExpr["DaftLazyFrame", "Expression"]):
 
 This way we can enforce compatibility with Narwhals, even though our daft library may be a very different beast.
 
+Finally, I hear you whisper: "but how do you _write_ it... I mean how do you know what to use to translate from one to the other?". I'll tell you, and I realised this toe-curlingly late: it's [Polars](https://pola.rs/). It's essentially Polars syntax (or a subset of it). So get good at Narwhals, and you'll you get Polars for free. Nice.
+
 ## In summary, what users need implement to create their own plugin:
 
 1.  The entry point in the .toml file: the section name `[project.entry-points.'narwhals.plugins']` must be part of every plugin & will be the same for all plugins. Whereas the next line will need to be adapted to the name of the particular library the plugin is made for, namely:
@@ -252,15 +251,13 @@ This way we can enforce compatibility with Narwhals, even though our daft librar
     - `from_native`
     - the constant `NATIVE_PACKAGE` with the name of the package.
 
-3.  the 3 compliant classes: `CompliantLazyFrame`, `Expression` & `Namespace`; in our daft-specific use case, we have `DaftLazyFrame`,`DaftExpr` & `DaftNamespace`, other plugin developers, say for fictitious `grizzlies` library would then have `GrizzliesLazyFrame`,`GrizzliesExpr` & `GrizzliesNamespace`.(3)
-
-==================
+3.  the 3 compliant classes: `CompliantLazyFrame`, `Expression` & `Namespace`; in our daft-specific use case, we have `DaftLazyFrame`,`DaftExpr` & `DaftNamespace`, other plugin developers, say for fictitious `grizzlies` library would then have `GrizzliesLazyFrame`,`GrizzliesExpr` & `GrizzliesNamespace`(4).
 
 ## Issues we've considered when creating this solution
 
 ## Finding the most lightweight approach to importing the framework of the plugin
 
-Within the plugin, it was important to find a way of detecting whether the framework the plugin is written for is present, without going through the slow step of loading the framework itself. This is so that we can avoid importing `daft` if the user is not actually using a daft dataframe. for example, if a user has installed the (not-yet-existent) plugins `narwhals-xarray`, `narwhals-daft`, `narwhals-grizzlies`, then it should be possible to detect which plugin to use for a given user input without having to import all of `xarray`, `daft`, and `grizzlies`. If you recall the structure of the top-level `__init__.py` file (see 2.2.2), we are indeed only importing daft once we're checking a dataframe.
+Within the plugin, it was important to find a way of detecting whether the framework the plugin is written for is present, without going through the slow step of loading the framework itself. This is so that we can avoid importing `daft` if the user is not actually using a daft dataframe. for example, if a user has installed the (not-yet-existent) plugins `narwhals-xarray`, `narwhals-daft`, `narwhals-grizzlies`, then it should be possible to detect which plugin to use for a given user input without having to import all of `xarray`, `daft`, and `grizzlies`. If you recall the structure of the top-level `__init__.py` file, we are indeed only importing daft once we're checking a dataframe.
 
 ## Ensuring backwards-compatibility
 
@@ -293,7 +290,11 @@ We may need to deviate from them if strictly necessary, but we hope that this wi
 > - Only use the public methods from the compliant protocols.
 > - Don't rely on anything starting with an underscore
 
-[TODO COMPLIANT LAYER, LINKING SECTIONS, EXPLAIN IT'S JUST POLARS, NICE END TO BLOGPOST]
+## What next?
+
+I've treasured my time working on this project and at Quansight. Am I done? I barely feel I've scratched the surface. I think working on this project & the interactions with the Narwhals community (you're stars - you know who you are!) have opened so many new areas I'm yet to explore. Writing this blogpost and lookin over concepts and notes from our learning group, I realise just how far I've come. A bit like with the plugin development, I'm not sure what's next, as it will develop organically through the code I work on and people I meet. One thing's for sure, I'd like to hang out with you all on the Arctic for a bit longer.
+
+As well as the community, I'd of course like to thank my mentor Marco Gorelli, Melissa Weber Mendonça who co-ordinated the internship programme with unfailing good humour and benevolent attention, my fabulous fellow interns and the folks at Quansight who have shared their insights with me over a coffee break - may our paths cross again soon!
 
 ---
 
@@ -301,4 +302,6 @@ We may need to deviate from them if strictly necessary, but we hope that this wi
 
 (2) A tutorial on Protocols is beyond the scope for this piece, but see [Python Protocols: Leveraging Structural Subtyping](https://realpython.com/python-protocol/) for a friendly introduction; additionally, this discussion helped me untangle abstract base classes from Protocols and helped clarify things for me: [Abstract Base Classes and Protocols: What Are They? When To Use Them?? Lets Find Out!](https://jellis18.github.io/post/2022-01-11-abc-vs-protocol/)
 
-(3) In truth there are a couple more classes that need to be implemented for access to the whole breadth of methods available in Narwhals, but that's the subject of a different post. For a minimal architecture, this achieves functionality.
+(3) Yes, you've guessed it, this is achieved by clever nesting of objects and protocols.
+
+(4) In truth there are a couple more classes that need to be implemented for access to the whole breadth of methods available in Narwhals, but that's the subject of a different post. For a minimal architecture, this achieves functionality.
