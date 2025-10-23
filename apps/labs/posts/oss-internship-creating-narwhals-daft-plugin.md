@@ -2,19 +2,17 @@
 title: Creating a daft plugin for the Narwhals library
 authors: [michele-pettinato]
 published: October 20, 2025
-description: Lorem ipsum dolor sit amet
+description: 'On doing an open source internship & how we created a plugin for daft'
 category: [PyData ecosystem, Community, Internship, OSS Experience]
 featuredImage:
-  src: /posts/oss-internship-creating-narwhals-daft-plugin/featured.png
-  alt: Hello world post featured image
+  src: /posts/oss-internship-creating-narwhals-daft-plugin/team.jpg
+  alt: 'a team of children at sports practice doing a pre-match huddle'
 hero:
-  imageSrc: /posts/oss-internship-creating-narwhals-daft-plugin/hero.jpeg
-  imageAlt: Lorem ipsum dolor
+  imageSrc: /posts/oss-internship-creating-narwhals-daft-plugin/team.jpg
+  imageAlt: 'a team of children at sports practice doing a pre-match huddle'
 ---
 
 # My Quansight Open Source Internship 2025: creating a Plugin for the Narwhals library
-
-[hero pic of antique stonemasons working]
 
 Have you ever watched a craftsperson at work, and found yourself mesmerised by their skilled actions and precise movements? It seems I'm not the only one, as legions of videos on the theme prove: "watch X pull Noodles seemingly in mid-air", "marvel at the steady progression of the stonemason", "get dizzy while watching the spindle transform a whole bag of wool" - you get the idea. Why are these videos so popular? I think it's because we are a fundamentally collaborative species, and something in us recognises mastery and is attracted to it, sometimes pushing us to try to acquire it. Now, substantiating that broad claim with evidence would not be the topic of a separate blogpost, but its own research program. But keep it in mind, as the idea does underpin what follows.
 
