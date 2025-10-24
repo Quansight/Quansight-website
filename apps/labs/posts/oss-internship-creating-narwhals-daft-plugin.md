@@ -41,7 +41,7 @@ The hill seemed pretty steep, and I thought I would have to study all the framew
 
 #### Narwhals study group to the rescue
 
-Luckily, Narwhals has an active community, and one group in particular was pivotal for me: the study group(1). This is a loose community of interested people with varying levels of experience, and every week we get together to discuss what we're working on, ask questions, solve things as a group. I was nervous before joining the first one, but it's completely informal. The amazing thing is that it works: although there isn't a set learning path, people bring questions and you always come away having learned something. At one of our first meetings, one of the members showed me the way forwards:
+Luckily, Narwhals has an active community, and one group in particular was pivotal for me: the study group(1). This is a loose community of interested people with varying levels of experience, and every week we get together to discuss what we're working on, ask questions, solve things as a group. I was nervous before joining the first one, but it's completely informal. The amazing thing is that it works: although there isn't a set learning path, people bring questions and you always come away having learned something. At one of our first meetings, Stelios showed me the way forward:
 
 > "you don't have to submit the perfect solution. Only very experienced contributors can submit a pretty polished version. Make a start, a suggestion, and you'll see the community run with it"
 
