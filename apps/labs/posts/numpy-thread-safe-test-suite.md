@@ -312,7 +312,7 @@ def test_with_file_two(file_fixture):
 
 ### 4. Misc Fixes
 
-Outside of these three major changes, there were a few other thread-unsafe bugs that I was able to fix. I'll note some here:
+Outside of these three major changes, there were a few other thread safety bugs that I was able to fix. I'll note some here:
 
 - There were some usages of `@pytest.mark.parametrize` that led to data races. We concluded that the test threads were trying to modify the parameterized values at the same time. Kinda weird, but it was easily fixed with `.copy()` (a classic solution to all sorts of mutation errors that I happen to be a fan of, thank you Lysandros for this suggestion).
 
