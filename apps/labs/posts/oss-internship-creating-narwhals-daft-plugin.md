@@ -289,6 +289,7 @@ We may need to deviate from them if strictly necessary, but we hope that this wi
 
 > - Only use the public methods from the compliant protocols.
 > - Don't rely on anything starting with an underscore
+>   (5)
 
 ## What next?
 
@@ -305,3 +306,5 @@ As well as the community, I'd of course like to thank my mentor Marco Gorelli, M
 (3) Yes, you've guessed it, this is achieved by clever nesting of objects and protocols.
 
 (4) In truth there are a couple more classes that need to be implemented for access to the whole breadth of methods available in Narwhals, but that's the subject of a different post. For a minimal architecture, this achieves functionality.
+
+(5) To the eagle-eyed reader who has spotted that although we advise plugin developers "Don't rely on anything starting with an underscore", we seem to contradict this with the code examples of the Protocol imports for `DaftNamespace` and `DaftExpr`, where we in fact import from `narwhals._compliant`. Flouting our own conventions already? Fear not, there is a refactor planned in Narwhals so that they'll be imported from `narwhals.compliant` in future.
