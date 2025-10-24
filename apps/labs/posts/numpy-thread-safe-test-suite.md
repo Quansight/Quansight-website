@@ -58,7 +58,7 @@ Of course, you don't just have to read up on articles, you can give it a try you
 
 With free-threaded Python getting more support, it's a good idea to ensure your code can handle running on multiple threads. One way of doing this is to run the test suite under multiple threads. The test suite already attempts to test the codebase, so if we run the tests in multiple threads, we could see if the codebase plays nice with threads.
 
-**\*Note**: This approach, while straightforward, will only find a subset of possible issues. If you really want to make sure your codebase can handle multithreading, you may want to do more explicit multithreaded testing. However, this approach can catch a lot of real-world issues in codebases like NumPy that were written with strong assumptions about the GIL in mind.\*
+_**Note:** This approach, while straightforward, will only find a subset of possible issues. If you really want to make sure your codebase can handle multithreading, you may want to do more explicit multithreaded testing. However, this approach can catch a lot of real-world issues in codebases like NumPy that were written with strong assumptions about the GIL in mind._
 
 This project was my first major foray into open-source development, so when I saw I would be working with NumPy, I honestly was a little intimidated! NumPy is such a fundamental and widely used library, and I came into this not knowing a lot about how to contribute to something like that! Of course, I had no reason to feel nervous. The NumPy community is wonderful, and I enjoyed my time working with them, lurking around the community meetings, and learning what I could.
 
@@ -74,7 +74,7 @@ pytest-run-parallel is useful for multi-threading stress testing, exposing threa
 
 > How pytest-run-parallel handles running tests. Tests are run one-by-one in separate thread pools. Basically, a test is run many times in parallel with itself.
 
-**\*Note**: This is distinct from tools like [pytest-xdist](https://pytest-xdist.readthedocs.io/en/stable/). pytest-run-parallel does not speed up the testing time by running all test in the same thread pool. The plugin typically increases testing duration since it runs each test multiple times.\*
+_**Note:** This is distinct from tools like [pytest-xdist](https://pytest-xdist.readthedocs.io/en/stable/). pytest-run-parallel does not speed up the testing time by running all test in the same thread pool. The plugin typically increases testing duration since it runs each test multiple times._
 
 ---
 
@@ -90,7 +90,7 @@ My PC runs under Windows, and while it does have its merits (I do enjoy gaming f
 
 At the start of my internship, the Python version my mentor suggested I use for the project, 3.14t, was still in development. I had trouble installing it, so my mentor introduced me to [pyenv](https://github.com/pyenv/pyenv), a Python version manager for macOS and Linux. I hadn't used pyenv before, instead preferring to use conda, but it was an elegant solution to the problem of managing and installing multiple versions of Python! To install the development version of 3.14t, all it took was running the command `pyenv install 3.14t-dev`.
 
-**\*Note**: Sometimes I used the "normal" GIL-enabled build of 3.14 instead. When I did that, I had to also make sure the environment variables `PYTHON_CONTEXT_AWARE_WARNINGS` and `PYTHON_THREAD_INHERIT_CONTEXT` were set to true. These ensure warnings and context play nicely with threads. They are set to true on free-threaded builds, and false otherwise. The "What's New" entries in the Python 3.14 release notes describe these variables more in-depth [here](https://docs.python.org/3/whatsnew/3.14.html#concurrent-safe-warnings-control) and [here](https://docs.python.org/3/whatsnew/3.14.html#free-threaded-mode-improvements).\*
+_**Note:** Sometimes I used the "normal" GIL-enabled build of 3.14 instead. When I did that, I had to also make sure the environment variables `PYTHON_CONTEXT_AWARE_WARNINGS` and `PYTHON_THREAD_INHERIT_CONTEXT` were set to true. These ensure warnings and context play nicely with threads. They are set to true on free-threaded builds, and false otherwise. The "What's New" entries in the Python 3.14 release notes describe these variables more in-depth [here](https://docs.python.org/3/whatsnew/3.14.html#concurrent-safe-warnings-control) and [here](https://docs.python.org/3/whatsnew/3.14.html#free-threaded-mode-improvements)._
 
 #### 3. Create NumPy fork and clone it to my machine
 
@@ -110,11 +110,11 @@ And finally, the last step is to get pytest-run-parallel. I prefer to use virtua
 
 With everything put together, I could finally start testing the NumPy test suite, running `spin test -- --parallel-threads=auto`. "spin test" is how NumPy runs its test suite when built under spin. "--parallel-threads=auto" is a command line option from pytest-run-parallel which activates the plugin, telling it to run each test under the specified number of threads. You can use a specific number of threads or use the keyword `auto`. This looks at the number of available CPU cores and determines the number of threads for you (for me, it was 24).
 
-**\*Note:** If you encounter projects that use spin, like NumPy, putting `--` after the initial spin command will let you pass more options to the underlying command. For example, `spin test -- -sv` will pass `-sv` to the underlying pytest command!\*
+_**Note:** If you encounter projects that use spin, like NumPy, putting `--` after the initial spin command will let you pass more options to the underlying command. For example, `spin test -- -sv` will pass `-sv` to the underlying pytest command!_
 
 Alright, if everything in the test suite was "thread-safe" (aka can run under multiple threads at the same time), then everything should run fine, with no test failures whatsoever! As you might be able to tell, since my project was to improve the thread safety of the test suite, this was not the case at first.
 
-**\*Note:** If you're following along and tried to run NumPy's test suite yourself under pytest-run-parallel just now, you won't run into any failures. I suppose this is a spoiler, but I was able to fix all this! Continue reading to find out how I did this.\*
+_**Note:** If you're following along and tried to run NumPy's test suite yourself under pytest-run-parallel just now, you won't run into any failures. I suppose this is a spoiler, but I was able to fix all this! Continue reading to find out how I did this._
 
 ### Test Failures
 
@@ -179,7 +179,7 @@ class TestClass:
 
 Nothing wrong with old code if it still works of course! Unfortunately, this feature is currently incompatible with pytest-run-parallel and how it handles running tests under multiple threads. Depending on scope, these xunit methods run before (setup) and after (teardown) each test. Even if you don't define a teardown method, pytest has implicit default teardown implementation that it calls. This removes variables that were defined during the setup. When running tests under pytest-run-parallel, this teardown is called before all the threads in a thread pool can finish running the current test. Any test that tries to access the removed variables will fail with an `AttributeError`.
 
-**\*Note**: Overall, pytest isn't very thread-safe, and so a large part of the project was figuring out what to do with thread-safety issues concerning the usage of these setup methods and thread-unsafe fixtures. However, work is currently being done to improve pytest's thread-safety, as detailed in [this issue](https://github.com/pytest-dev/pytest/issues/13768) on pytest's repo.\*
+_**Note:** Overall, pytest isn't very thread-safe, and so a large part of the project was figuring out what to do with thread-safety issues concerning the usage of these setup methods and thread-unsafe fixtures. However, work is currently being done to improve pytest's thread-safety, as detailed in [this issue](https://github.com/pytest-dev/pytest/issues/13768) on pytest's repo._
 
 #### Solution
 
@@ -200,7 +200,7 @@ class TestClass:
 
 With this solution, we can simply create and call our own "setup methods", with variables no longer getting deleted too early. Each thread of each test would also then get its own "copy" of the data, meaning they could modify the values to their heart's content (which was another issue, with threads trying to mutate the same data). It was a fairly simple change all things considered, but it took up a large chunk of time in the internship due to how prevalent setup methods were in the test suite.
 
-**\*Note**: Utilizing custom pytest fixtures was another option, however they have their own thread safety issues since they are only created _once_ per test. Thread pools will share data returned by fixtures and potentially create thread-safety issues if tests try mutating the shared fixture data.\*
+_**Note:** Utilizing custom pytest fixtures was another option, however they have their own thread safety issues since they are only created *once* per test. Thread pools will share data returned by fixtures and potentially create thread-safety issues if tests try mutating the shared fixture data._
 
 #### Problem with the Solution
 
@@ -208,7 +208,7 @@ While the pros of this solution aligned with the goals of my project, there were
 
 However, the largest issue was that it introduced _stricter testing guidelines_. Overall, making sure the test suite is thread safe will introduce some limitations when it comes to writing tests, but this was perhaps the most noteworthy. This would limit the usage of xunit setup, teardown, and pytest fixtures, and instead encourage a somewhat more unorthodox method of utilizing normal methods to set up variables. This spawned some concern and conversation on the best way of handling this, especially since xunit setup took up such large parts of the test suite. This encouraged me to [post to the NumPy mailing list](https://mail.python.org/archives/list/numpy-discussion@python.org/thread/ZWRN6TJXXE4UZQJ3QLPL7VT26WHRQVWL/) to elicit some feedback (though we probably should've done this earlier on in the project, whoops!). In the end, members of the community agreed with my approach of replacing xunit setup with explicit methods, so we'll just have to be more careful with how we set up test values from now on.
 
-**\*Note**: This may not be a problem forever. If pytest and pytest-run-parallel figure out a way of getting thread-safe setup working, the changes I made could be reverted with some git magic.\*
+_**Note:** This may not be a problem forever. If pytest and pytest-run-parallel figure out a way of getting thread-safe setup working, the changes I made could be reverted with some git magic._
 
 ### 2. Random Number Generation
 
@@ -261,7 +261,7 @@ def test_rng():
 
 Another somewhat simple solution to a problem that affected large parts of the test suite. Nice!
 
-**\*Note**: Another option was using [NumPy Generators](https://numpy.org/doc/stable/reference/random/generator.html), a newer approach to creating local RNG instances. However, when it comes to test suites, RandomState should be preferred. RandomState's RNG stream will likely never change, whereas Generators may change as they get improved. It also helped that RandomState shares the same RNG as `np.random`, so I didn't need to worry about modifying any of the expected results!\*
+_**Note:** Another option was using [NumPy Generators](https://numpy.org/doc/stable/reference/random/generator.html), a newer approach to creating local RNG instances. However, when it comes to test suites, RandomState should be preferred. RandomState's RNG stream will likely never change, whereas Generators may change as they get improved. It also helped that RandomState shares the same RNG as `np.random`, so I didn't need to worry about modifying any of the expected results!_
 
 ### 3. Temporary Files
 
@@ -290,7 +290,7 @@ Here we break the mold a little bit. Instead of messing with NumPy a bunch, how 
 
 Okay, how do we actually do this? This took a lot of brainstorming, but eventually Nathan, Lysandros, and I settled on directly patching into the `tmp_path` fixture and creating a subdirectory for each thread. Each thread's "version" of the `tmp_path` would then be set to whatever subdirectory was assigned to them. These are the sort of hacky solutions I live for, and it keeps things fairly simple! Each thread, when they try and access the `tmp_path` fixture, would get a modified version with a subdirectory where they can mess around with their files as much as they want.
 
-**\*Note**: I made a few more changes to pytest-run-parallel over the course of my internship. With this similar patching approach, I added some more fixtures that changed between threads, such as the `thread_index` fixture that returned the current thread's index. I also made `tmpdir` thread-safe in a similar way to `tmp_path`.\*
+_**Note:** I made a few more changes to pytest-run-parallel over the course of my internship. With this similar patching approach, I added some more fixtures that changed between threads, such as the `thread_index` fixture that returned the current thread's index. I also made `tmpdir` thread-safe in a similar way to `tmp_path`._
 
 #### Problem with the Solution
 
@@ -368,7 +368,7 @@ After some trial and error, Nathan found a good spot in the macOS CI runs. Perfe
 
 [In the PR where I added this CI job](https://github.com/numpy/numpy/pull/30005), I also added a new option to `spin test`. Throughout this internship, if I wanted to do a test run under pytest-run-parallel, I would need to type out `spin test -- --parallel-threads=auto`. I definitely got a feel for it after all these months, but let's try to make things easier for ourselves. Now, you can instead use `spin test -p auto` to get a parallel run going in NumPy!
 
-**\*Note**: During this PR, we also ran into some more thread-safety issues with Hypothesis that were fixed with the latest version. And so, mirroring my very first PR, I went back and bumped the Hypothesis version again. What a poetic way of wrapping up the project!\*
+_**Note:** During this PR, we also ran into some more thread-safety issues with Hypothesis that were fixed with the latest version. And so, mirroring my very first PR, I went back and bumped the Hypothesis version again. What a poetic way of wrapping up the project!_
 
 ---
 
