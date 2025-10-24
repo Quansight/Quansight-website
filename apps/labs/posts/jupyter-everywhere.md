@@ -1,7 +1,7 @@
 ---
 title: 'Jupyter Everywhere: empowering interactive computing for K-12 education' # not final
 published: November 01, 2025
-authors: [agriya-khetarpal] # ?[agriya-khetarpal, peyton-murray, michał-krassowski] how to add multiple authors?
+authors: [agriya-khetarpal] # ?[agriya-khetarpal, peyton-murray, michał-krassowski] how to add multiple authors as peyton and mike are at OpenTeams now?
 description: 'The story of how Jupyter Everywhere is transforming K-12 education through interactive computing'
 # "Jupyter" used to be a category for older blogs; it no longer is. "Interactive computing" could
 # subsume it as well, if not "Jupyter". ig "Developer workflows" is not quite right... so for now:
