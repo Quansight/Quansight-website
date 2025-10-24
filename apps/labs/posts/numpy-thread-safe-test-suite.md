@@ -1,18 +1,18 @@
 ---
-title: Exploring & Improving the Thread Safety of NumPy's Test Suite
-description: WIP
-published: October 23, 2025
+title: "Exploring & Improving the Thread Safety of NumPy's Test Suite"
+description: "With the release of free-threaded builds of Python, it's more important than ever to ensure Python code is thread-safe. Here I detail my journey making the NumPy test suite thread-safe over the course of my internship."
+published: October 24, 2025
 authors: [britney-whittington]
 category: [Developer workflows, OSS Experience, Internship]
 featuredImage:
-  src: /posts/numpy-thread-safe-test-suite/feature.png
-  alt: 'An illustration of a brown and white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
+  src: /posts/numpy-thread-safe-test-suite/free-threaded-numpy.png
+  alt: 'The NumPy logo over a backdrop of a spider web. Hornet from Hollow Knight: Silksong is sitting on the NumPy logo. In the web are four phrase: Free-threaded Python, pytest-run-parallel, pytest test suite, and OS practices.'
 hero:
-  imageSrc: /posts/numpy-thread-safe-test-suite/hero.webp
-  imageAlt: 'The NumPy logo'
+  imageSrc: /posts/numpy-thread-safe-test-suite/free-threaded-numpy.png
+  imageAlt: 'The NumPy logo over a backdrop of a spider web. Hornet from Hollow Knight: Silksong is sitting on the NumPy logo. In the web are four phrase: Free-threaded Python, pytest-run-parallel, pytest test suite, and OS practices.'
 ---
 
-Hello! My name is Britney Whittington, and I had the honor of being part of Quansight's 2025 cohort of interns. For the past three months, I worked with [Nathan Goldbaum](https://github.com/ngoldbaum) and [Lysandros Nikolaou](https://github.com/lysnikolaou) to improve the thread safety of NumPy's test suite. This project involved working with various parts of NumPy and other libraries, and taught me a lot about OSS practices.
+Hello! My name is Britney Whittington, and I had the honor of interning at Quansight for the past three months. During this time, I worked with [Nathan Goldbaum](https://github.com/ngoldbaum) and [Lysandros Nikolaou](https://github.com/lysnikolaou) to improve the thread safety of NumPy's test suite. This project involved working with various parts of NumPy and other libraries and taught me a lot about OSS practices.
 
 With the release of free-threaded builds of Python, it's more important than ever to ensure Python code is thread-safe. This blog post details my journey improving the thread safety of NumPy's test suite. If you ever decide to tackle making your own code and test suite more thread-safe, hopefully my experience is helpful! So, feel free to kick back as I describe how I messed with NumPy's test suite, from my first one-line commit to updating the CI jobs.
 
@@ -72,7 +72,7 @@ pytest-run-parallel is useful for multi-threading stress testing, exposing threa
 
 ![How pytest-run-parallel handles running tests. Tests run one-by-one in a thread pool.](/posts/numpy-thread-safe-test-suite/pytest-run-parallel-diagram.png)
 
-> How pytest-run-parallel handles running tests. Tests are run one-by-one in separate thread pool. Basically, a test is run many times in parallel with itself.
+> How pytest-run-parallel handles running tests. Tests are run one-by-one in separate thread pools. Basically, a test is run many times in parallel with itself.
 
 **\*Note**: This is distinct from tools like [pytest-xdist](https://pytest-xdist.readthedocs.io/en/stable/). pytest-run-parallel does not speed up the testing time by running all test in the same thread pool. The plugin typically increases testing duration since it runs each test multiple times.\*
 
@@ -84,11 +84,11 @@ With this last tool, we can finally get started with the project! But before I c
 
 #### 1. Set up WSL
 
-My PC runs under Windows, and while it does have its merits (I do enjoy gaming from time to time), it often make some parts of software development difficult, especially when it comes to building C code (which NumPy makes use of). To make things easier on me and Nathan (who was using macOS), we decided I should use the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) (or WSL). Thankfully I had some experience with this and already had it installed! Installing WSL is generally as easy as putting `wsl --install` in the terminal of a machine running Windows 10/11.
+My PC runs under Windows, and while it does have its merits (I do enjoy gaming from time to time), it often makes some parts of software development difficult, especially when it comes to building C code (which NumPy makes use of). To make things easier on me and Nathan (who was using macOS), we decided I should use the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) (or WSL). Thankfully I had some experience with this and already had it installed! Installing WSL is generally as easy as putting `wsl --install` in the terminal of a machine running Windows 10/11.
 
 #### 2. Download free-threaded Python
 
-At the start of my internship, the Python version my mentor suggested I use for the project, 3.14t, was still in development. I had trouble installing it, so my mentor introduced me to [pyenv](https://github.com/pyenv/pyenv), a Python version manager for macOS and Linux. I hadn't used pyenv before, instead preferring to use conda, but it was a elegant solution to the problem of managing and installing multiple versions of Python! To install the development version of 3.14t, all it took was running the command `pyenv install 3.14t-dev`.
+At the start of my internship, the Python version my mentor suggested I use for the project, 3.14t, was still in development. I had trouble installing it, so my mentor introduced me to [pyenv](https://github.com/pyenv/pyenv), a Python version manager for macOS and Linux. I hadn't used pyenv before, instead preferring to use conda, but it was an elegant solution to the problem of managing and installing multiple versions of Python! To install the development version of 3.14t, all it took was running the command `pyenv install 3.14t-dev`.
 
 **\*Note**: Sometimes I used the "normal" GIL-enabled build of 3.14 instead. When I did that, I had to also make sure the environment variables `PYTHON_CONTEXT_AWARE_WARNINGS` and `PYTHON_THREAD_INHERIT_CONTEXT` were set to true. These ensure warnings and context play nicely with threads. They are set to true on free-threaded builds, and false otherwise. The "What's New" entries in the Python 3.14 release notes describe these variables more in-depth [here](https://docs.python.org/3/whatsnew/3.14.html#concurrent-safe-warnings-control) and [here](https://docs.python.org/3/whatsnew/3.14.html#free-threaded-mode-improvements).\*
 
@@ -374,6 +374,6 @@ After some trial and error, Nathan found a good spot in the macOS CI runs. Perfe
 
 ## Part Six: Conclusion
 
-And that was my journey throughout this internship! It was a very rewarding experience, being able to work with such a large and historic codebase and learn how to contribute to it. I learned so much about the ins-and-outs of pytest, how Python works with multithreading, and all sorts of intricacies with git and open-source development. But perhaps the most noteworthy thing this internship gave me was the confidence to contribute to and interact with open-source communities. I definitely want to keep going after this and continue to contribute to open-source projects!
+And that was my journey throughout this internship! It was a very rewarding experience, being able to work with such a large and historic codebase and learn how to contribute to it. I learned so much about the ins-and-outs of pytest, how Python works with multithreading, and all sorts of intricacies with git and open-source development. But perhaps the most noteworthy thing this internship gave me was the confidence to contribute to and interact with open-source communities. Going forward, I hope to continue contributing to open-source projects!
 
 I want to thank my mentors and the folks who helped me out throughout the project and took the time to look at my PRs. I also want to thank Melissa for coordinating the internship and making sure we all knew what we were doing, and the other interns for being a wonderful bunch of folks to talk to! And finally, many thanks to Quansight for giving me the opportunity to learn and grow as an open-source developer.
