@@ -6,7 +6,7 @@ authors: [britney-whittington]
 category: [Developer workflows, OSS Experience, Internship]
 featuredImage:
   src: /posts/numpy-thread-safe-test-suite/free-threaded-numpy.png
-  alt: 'The NumPy logo over a backdrop of a spider web. Hornet from Hollow Knight: Silksong is sitting on the NumPy logo. In the web are four phrase: Free-threaded Python, pytest-run-parallel, pytest test suite, and OS practices.'
+  alt: 'The NumPy logo over a backdrop of a spider web. In the web are four phrase: Free-threaded Python, pytest-run-parallel, pytest test suite, and OS practices.'
 hero:
   imageSrc: /posts/numpy-thread-safe-test-suite/free-threaded-numpy.png
   imageAlt: 'The NumPy logo over a backdrop of a spider web. Hornet from Hollow Knight: Silksong is sitting on the NumPy logo. In the web are four phrase: Free-threaded Python, pytest-run-parallel, pytest test suite, and OS practices.'
