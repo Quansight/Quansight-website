@@ -251,7 +251,7 @@ Finally, I hear you whisper: "but how do you _write_ it... I mean how do you kno
     - `from_native`
     - the constant `NATIVE_PACKAGE` with the name of the package.
 
-3.  the 3 compliant classes: `CompliantLazyFrame`, `Expression` & `Namespace`; in our daft-specific use case, we have `DaftLazyFrame`,`DaftExpr` & `DaftNamespace`, other plugin developers, say for fictitious `grizzlies` library would then have `GrizzliesLazyFrame`,`GrizzliesExpr` & `GrizzliesNamespace`(4).
+3.  The 3 compliant classes: `CompliantLazyFrame`, `Expression` & `Namespace`; in our daft-specific use case, we have `DaftLazyFrame`,`DaftExpr` & `DaftNamespace`, other plugin developers, say for fictitious `grizzlies` library would then have `GrizzliesLazyFrame`,`GrizzliesExpr` & `GrizzliesNamespace`(4).
 
 ## Issues we've considered when creating this solution
 
