@@ -57,7 +57,7 @@ If Narwhals already serves so many frameworks, why might we need a plugin? Let's
 
 By writing a Narwhals plugin instead, you'll still be able to achieve the same thing, with zero required changes in either Plotly nor Narwhals.
 
-But what do we mean by 'pass your dataframe natively'? Using daft in a simple example, you can see here that we're able to manipulate a daft dataframe from within Narwhals and perform computations on it. We're able to do this because we've written a plugin, [narwhals-daft](https://github.com/MarcoGorelli/narwhals-daft), for the [daft library](https://docs.daft.ai/en/stable/).
+But what do we mean by 'pass your dataframe natively'? Using [the daft library](https://docs.daft.ai/en/stable/) in a simple example, you can see here that we're able to manipulate a daft dataframe from within Narwhals and perform computations on it. We're able to do this because we've written a plugin for daft called [narwhals-daft](https://github.com/MarcoGorelli/narwhals-daft).
 
 ```python
 import daft
