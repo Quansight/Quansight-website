@@ -16,7 +16,7 @@ hero:
 
 Have you ever watched a craftsperson at work, and found yourself mesmerised by their skilled actions and precise movements? It seems I'm not the only one, as legions of videos on the theme prove: "watch X pull Noodles seemingly in mid-air", "marvel at the steady progression of the stonemason", "get dizzy while watching the spindle transform a whole bag of wool" - you get the idea. Why are these videos so popular? I think it's because we are a fundamentally collaborative species, and something in us recognises mastery and is attracted to it, sometimes pushing us to try to acquire it. Now, substantiating that broad claim with evidence would not be the topic of a separate blogpost, but its own research program. But keep it in mind, as the idea does underpin what follows.
 
-So how does someone mid-career find herself wanting to join an open source internship? Previous to my life in tech, I'd actually started out in Speech Science - no, not quite the ASR (automatic speech recognition) stuff, though we used some of it - the research behind e.g. hearing aid development or Speech and Language Therapy. Because of this, I'd always been interested in community efforts for science & sustainable code development.
+So how does someone mid-career find herself wanting to join an open source internship? Previous to my life in tech, I'd actually started out in Speech Science - no, not quite the ASR ([automatic speech recognition](https://en.wikipedia.org/wiki/Speech_recognition)) stuff, though we used some of it - the research behind e.g. hearing aid development or Speech and Language Therapy. Because of this, I'd always been interested in community efforts for science & sustainable code development.
 
 I couldn't have wished for a better place to land. Quansight was a welcoming, open place and my fellow interns were delightful people with fascinating backgrounds. Most of all, I was in safe hands with my mentor Marco Gorelli, who patiently guided me even though I felt like I was trying to do calligraphy while wearing boxing gloves a lot of the time.
 
@@ -28,7 +28,7 @@ Did you know that you can pass both a pandas dataframe or a PySpark dataframe to
 
 Well, [Narwhals](https://narwhals-dev.github.io/narwhals/) is the magical fairy dust that makes this possible (or should I say "underwater unicorn magic" in Narwhals parlance?). The magic is basically a Python translation layer that takes any number of dataframe types (the library landing page lists all of them - many!) and allows you to perform framework-agnostic operations on them while preserving the data structure and types.
 
-Narwhals is a complex, strongly typed library. It makes extensive use of Protocols (more on that in a bit) to do clever things such as allowing operations to work on a range of inputs. In this highly nested library, classes wrap other classes to make the translation between frameworks possible.
+Narwhals is a complex, strongly typed library. It makes extensive use of "Protocols" (more on that in a bit) to do clever things such as allowing operations to work on a range of inputs. In this highly nested library, classes wrap other classes to make the translation between frameworks possible.
 
 How could I start to contribute at this level of sophistication? How could I find my way in?
 
@@ -302,6 +302,8 @@ I've treasured my time working on this project and at Quansight. Am I done? I ba
 As well as the community, I'd of course like to thank my mentor Marco Gorelli, Melissa Weber Mendonça who co-ordinated the internship programme with unfailing good humour and benevolent attention, my fabulous fellow interns and the folks at Quansight who have shared their insights with me over a coffee break - may our paths cross again soon!
 
 ---
+
+Hero Image: "soccer practice" by woodleywonderworks / CC BY-SA 2.0.
 
 (1) See [here](https://github.com/narwhals-dev/narwhals/blob/main/CONTRIBUTING.md) for details of the community discord and meetings calendar, come join us!
 
