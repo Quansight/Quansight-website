@@ -181,7 +181,7 @@ Apart from the `.toml` file, this is where the connection to the Narwhals librar
 
 The `__narwhals_namespace__` acts as the entry point to the library. Given the version of Narwhals, it returns a `DaftNamespace`, which can be wrapped around a non-narwhals dataframe (referred to as "native object" in the Narwhals terminology). The `DaftNamespace` makes a `from_native` function available, which allows the native object to be read into a compliant object, on which typical Narwhals operations can be carried out whilst still retaining the original data and data structure(3).
 
-The `is_native` function simply checks if we are dealing with a daft dataframe. Note it is only at this point that we import the daft library, rather than when loading the plugin (see "Issues we've considered" below for further discussion of this aspect).
+The `is_native` function simply checks if we are dealing with a daft dataframe. Note it is only at this point that we import the daft library, rather than when loading the plugin (see [](#issues-we-ve-considered) below for further discussion of this aspect).
 
 ```python
 from __future__ import annotations
