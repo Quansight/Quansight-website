@@ -297,7 +297,7 @@ We may need to deviate from them if strictly necessary, but we hope that this wi
 
 ## What next?
 
-I've treasured my time working on this project and at Quansight. Am I done? I barely feel I've scratched the surface. I think working on this project & the interactions with the Narwhals community (you're stars - you know who you are!) have opened so many new areas I'm yet to explore. Writing this blogpost and lookin over concepts and notes from our learning group, I realise just how far I've come. A bit like with the plugin development, I'm not sure what's next, as it will develop organically through the code I work on and people I meet. One thing's for sure, I'd like to hang out with you all on the Arctic for a bit longer.
+I've treasured my time working on this project and at Quansight. Am I done? I barely feel I've scratched the surface. I think working on this project and the interactions with the Narwhals community (you're stars - you know who you are!) have opened so many new areas I'm yet to explore. Writing this blogpost and looking over concepts and notes from our learning group, I realise just how far I've come. A bit like with the plugin development, I'm not sure what's next, as it will develop organically through the code I work on and people I meet. One thing's for sure, I'd like to hang out with you all on the Arctic for a bit longer.
 
 As well as the community, I'd of course like to thank my mentor Marco Gorelli, Melissa Weber Mendonça who co-ordinated the internship programme with unfailing good humour and benevolent attention, my fabulous fellow interns and the folks at Quansight who have shared their insights with me over a coffee break - may our paths cross again soon!
 
