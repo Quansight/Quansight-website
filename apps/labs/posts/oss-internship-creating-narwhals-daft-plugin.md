@@ -41,7 +41,9 @@ The hill seemed pretty steep, and I thought I would have to study all the framew
 
 #### Narwhals study group to the rescue
 
-Luckily, Narwhals has an active community, and one group in particular was pivotal for me: the study group(1). This is a loose community of interested people with varying levels of experience, and every week we get together to discuss what we're working on, ask questions, solve things as a group. I was nervous before joining the first one, but it's completely informal. The amazing thing is that it works: although there isn't a set learning path, people bring questions and you always come away having learned something. At one of our first meetings, Stelios showed me the way forward:
+Luckily, Narwhals has an active community, and one group in particular was pivotal for me: the study group[^1]. This is a loose community of interested people with varying levels of experience, and every week we get together to discuss what we're working on, ask questions, solve things as a group. I was nervous before joining the first one, but it's completely informal. The amazing thing is that it works: although there isn't a set learning path, people bring questions and you always come away having learned something. At one of our first meetings, Stelios showed me the way forward:
+
+[^1]: See [here](https://github.com/narwhals-dev/narwhals/blob/main/CONTRIBUTING.md) for details of the community discord and meetings calendar, come join us!
 
 > "you don't have to submit the perfect solution. Only very experienced contributors can submit a pretty polished version. Make a start, a suggestion, and you'll see the community run with it"
 
@@ -108,8 +110,6 @@ These figure prominently in Narwhals, but what's a Protocol in Python? I read do
 Protocols are like the architectural drawing of a building. You can't do anything concrete with it, e.g you can't live in one, but without it, you don't know how to build your building and you'll have a shaky tower. They're underspecified for details of implementation (e.g. no description of bricks), but they specify the important stuff to do with structure (e.g. size of walls & number of building floors) and most importantly, they'll make sure that the different things you build will fit together.
 
 If you think of Narwhal’s capacity to work with multiple types of dataframe libraries, you can see why this would be very handy indeed: using Protocols, you can make sure that any class with the same methods and properties can be used in different contexts and inputs[^2].
-
-... (rest of the contents)
 
 [^2]: A tutorial on Protocols is beyond the scope for this piece, but see [Python Protocols: Leveraging Structural Subtyping](https://realpython.com/python-protocol/) for a friendly introduction; additionally, this discussion helped me untangle abstract base classes from Protocols and helped clarify things for me: [Abstract Base Classes and Protocols: What Are They? When To Use Them?? Lets Find Out!](https://jellis18.github.io/post/2022-01-11-abc-vs-protocol/)
 
@@ -183,7 +183,9 @@ narwhals-daft = 'narwhals_daft'
 
 Apart from the `.toml` file, this is where the connection to the Narwhals library happens. The file contains two functions, `__narwhals_namespace__` and `is_native` as well as a constant `NATIVE_PACKAGE` which gives the name of the package we're making a plugin for.
 
-The `__narwhals_namespace__` acts as the entry point to the library. Given the version of Narwhals, it returns a `DaftNamespace`, which can be wrapped around a non-narwhals dataframe (referred to as "native object" in the Narwhals terminology). The `DaftNamespace` makes a `from_native` function available, which allows the native object to be read into a compliant object, on which typical Narwhals operations can be carried out whilst still retaining the original data and data structure(3).
+The `__narwhals_namespace__` acts as the entry point to the library. Given the version of Narwhals, it returns a `DaftNamespace`, which can be wrapped around a non-narwhals dataframe (referred to as "native object" in the Narwhals terminology). The `DaftNamespace` makes a `from_native` function available, which allows the native object to be read into a compliant object, on which typical Narwhals operations can be carried out whilst still retaining the original data and data structure[^3].
+
+[^3]: Yes, you've guessed it, this is achieved by clever nesting of objects and protocols.
 
 The `is_native` function simply checks if we are dealing with a daft dataframe. Note it is only at this point that we import the daft library, rather than when loading the plugin (see [](#issues-we-ve-considered) below for further discussion of this aspect).
 
@@ -255,7 +257,9 @@ Finally, I hear you whisper: "but how do you _write_ it... I mean how do you kno
     - `from_native`
     - the constant `NATIVE_PACKAGE` with the name of the package.
 
-3.  The 3 compliant classes: `CompliantLazyFrame`, `Expression` & `Namespace`; in our daft-specific use case, we have `DaftLazyFrame`,`DaftExpr` & `DaftNamespace`, other plugin developers, say for fictitious `grizzlies` library would then have `GrizzliesLazyFrame`,`GrizzliesExpr` & `GrizzliesNamespace`(4).
+3.  The 3 compliant classes: `CompliantLazyFrame`, `Expression` & `Namespace`; in our daft-specific use case, we have `DaftLazyFrame`, `DaftExpr` & `DaftNamespace`, other plugin developers, say for fictitious `grizzlies` library would then have `GrizzliesLazyFrame`, `GrizzliesExpr` & `GrizzliesNamespace`[^4].
+
+[^4]: In truth there are a couple more classes that need to be implemented for access to the whole breadth of methods available in Narwhals, but that's the subject of a different post. For a minimal architecture, this achieves functionality.
 
 ## Issues we've considered when creating this solution
 
@@ -292,8 +296,9 @@ We may need to deviate from them if strictly necessary, but we hope that this wi
 **The advice to plugin authors to avoid breakage with new Narwhals methods is therefore:**
 
 > - Only use the public methods from the compliant protocols.
-> - Don't rely on anything starting with an underscore
->   (5)
+> - Don't rely on anything starting with an underscore[^5]
+
+[^5]: The eagle-eyed reader may have spotted that although we advise plugin developers "Don't rely on anything starting with an underscore", we seem to contradict this with the code examples of the Protocol imports for `DaftNamespace` and `DaftExpr`, where we in fact import from `narwhals._compliant`. Flouting our own conventions already? Fear not, there is a refactor planned in Narwhals so that they'll be imported from `narwhals.compliant` in future.
 
 ## What next?
 
@@ -304,13 +309,3 @@ As well as the community, I'd of course like to thank my mentor Marco Gorelli, M
 ---
 
 Hero Image: "soccer practice" by woodleywonderworks / CC BY-SA 2.0.
-
-(1) See [here](https://github.com/narwhals-dev/narwhals/blob/main/CONTRIBUTING.md) for details of the community discord and meetings calendar, come join us!
-
-(2) A tutorial on Protocols is beyond the scope for this piece, but see [Python Protocols: Leveraging Structural Subtyping](https://realpython.com/python-protocol/) for a friendly introduction; additionally, this discussion helped me untangle abstract base classes from Protocols and helped clarify things for me: [Abstract Base Classes and Protocols: What Are They? When To Use Them?? Lets Find Out!](https://jellis18.github.io/post/2022-01-11-abc-vs-protocol/)
-
-(3) Yes, you've guessed it, this is achieved by clever nesting of objects and protocols.
-
-(4) In truth there are a couple more classes that need to be implemented for access to the whole breadth of methods available in Narwhals, but that's the subject of a different post. For a minimal architecture, this achieves functionality.
-
-(5) To the eagle-eyed reader who has spotted that although we advise plugin developers "Don't rely on anything starting with an underscore", we seem to contradict this with the code examples of the Protocol imports for `DaftNamespace` and `DaftExpr`, where we in fact import from `narwhals._compliant`. Flouting our own conventions already? Fear not, there is a refactor planned in Narwhals so that they'll be imported from `narwhals.compliant` in future.
