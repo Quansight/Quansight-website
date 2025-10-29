@@ -142,7 +142,7 @@ The Files widget is accessible via a sidebar tab, allowing users to easily switc
 
 #### The quest for being able to render uploaded files within the notebook interface
 
-However, as seamlessly as we expected it to work, we ran into a quirk: when uploading specific file types, such as images in PNG or JPEG format, the files would not render correctly when accessed in Markdown cells within the notebook. After some investigation, we discovered that this was due to the way JupyterLite handled MIME types for specific file formats. To address this, we implemented custom logic to set the correct MIME types when uploading and accessing these files, ensuring they rendered correctly in the notebook interface.
+While the files could now be uploaded and accessed from the code cells, we ran into a quirk: uploaded images would not render correctly when embedded in Markdown cells within the notebook. We found that JupyterLite does not actually serve the user-uploaded files from local storage. After discussing the problem with other JupyterLite maintainers, we confirmed that there are two ways to solve it: serve the files from a Web Worker thread, or base64-encode the image contents during rendering (as we initially proposed). Due to compatibility concerns with Web Workers, we settled on a base64-encoding approach.
 
 To `base64` encode images in Markdown cells, we needed to selectively inject our custom logic into the rendering pipeline. The base64-encoded images can be provided to the browser using the `data:` scheme which defines a ["data URL"](https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data).
 Serendipitously, JupyterLab already had a concept of an URL resolver for renders, specified by the [`RenderMimeRegistry.IResolver`][IResolver] interface – we only needed a way to swap the default [`RenderMimeRegistry.UrlResolver`][UrlResolver] implementation for our own in order to provide data URLs for user-uploaded images in JupyterLite.
@@ -152,8 +152,6 @@ To that end, [we replaced the usage of the hard-coded UrlResolver component in J
 [UrlResolver]: https://jupyterlab.readthedocs.io/en/stable/api/classes/rendermime.RenderMimeRegistry.UrlResolver.html
 [PR17784]: https://github.com/jupyterlab/jupyterlab/pull/17784
 [PR1707]: https://github.com/jupyterlite/jupyterlite/pull/1707
-
-Once we were able to allow swapping the URL resolver with our own in JupyterLab, and the JupyterLab version that JupyterLite is based on was updated to support this, this was ported to JupyterLite pretty easily – the `resolveUrl` function for JupyterLite was updated to base64-encode the data for popular image file formats, allowing them to be rendered correctly within the notebook interface.
 
 <!-- mention the PRs that addressed these issues upstream in the above paragraphs -->
 
