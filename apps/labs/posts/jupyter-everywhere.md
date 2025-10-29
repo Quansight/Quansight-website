@@ -111,9 +111,13 @@ Since downloading notebooks is only half the story, you might ask – how does o
 Remember that Jupyter Everywhere does not have user accounts or a backend database to store user data and notebooks grouped by accounts. The frontend runs in what is termed the "Simple Interface", or more technically, the "single-document mode" of JupyterLab, which we customise heavily by disabling and reimplementing Jupyter extensions to provide a more user-friendly experience. This means there is no visible file browser or file management interface in Jupyter Everywhere, to avoid unnecessary complexity.
 <!-- link to simple interface docs in jupyter -->
 
-Hence, users need to upload notebooks manually to a JupyterLite instance before the Jupyter Everywhere session is instantiated. The main entry point for this is the Jupyter Everywhere landing page, where we've added an "Upload a Notebook" button that lets users select a local IPyNB file from their computer and upload it to the JupyterLite file system.
+Hence, users need to upload notebooks manually to a JupyterLite instance before the Jupyter Everywhere session is instantiated. This introduces some challenges, as the main entry point for Jupyter Everywhere is a landing page that does not have access to the JupyterLite in-browser file system, since JupyterLite is not yet running at that point, and no internal plugins are loaded. JupyterLite only starts up once the user is redirected to the JupyterLite application URL, which resides one level deeper, i.e. `/lab/` relative to the landing page.
 
-Here is a quick walkthrough of how it works behind the scenes.
+This means that not only do we need to provide a way for users to upload notebooks to JupyterLite before it starts up, but we also need to ensure that the uploaded notebooks are available in the user's Jupyter Everywhere session.
+
+We achieved this by adding an "Upload a Notebook" button that lets users select a local IPyNB file from their computer and upload it to the JupyterLite file system.
+
+Here is a quick walkthrough of how it works behind the scenes:
 <!-- add pictures -->
 
 When the user clicks the "Upload a Notebook" button, a file input dialog is opened, allowing the user to select a local IPyNB file from their computer. Once the file is selected and uploaded, we use the Web Storage API, to store the contents of the uploaded notebook in `localStorage` without interacting with the sharing service or requiring the user's explicit consent.
