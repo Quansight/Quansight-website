@@ -281,7 +281,7 @@ There is currently a debate about how to fix this, with one proposal suggesting 
 
 Narwhals has a strong policy of [backwards compatibility](https://narwhals-dev.github.io/narwhals/backcompat/), mainly enforced through the use of a `stable` namespace. However, that promise does not extend to its internal Compliant protocols.
 
-Given that plugin authors use the Compliant Protocols, we need to ensure that these protocols are stable enough that users' plugins don't break with every minor Narwhals release.
+Given that plugin authors use the Compliant Protocols, Narwhals maintainers are currently considering a policy which would ensure that these protocols have the necessary stability to prevent users' plugins from breaking with every minor Narwhals release:
 
 **Here are some guidelines which we (Narwhals developers) aim to follow, to minimise the potential disruption on plugins authors.**
 
