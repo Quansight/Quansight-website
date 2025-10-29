@@ -176,7 +176,7 @@ For the Pyodide kernel, we implemented a Jupyter Everywhere plugin that calls `p
 
 Popularised by platforms such as [Observable](https://observablehq.com/), Google Colaboratory, Kaggle Notebooks, and Deepnote, "Run" buttons next to code cells are a common feature in modern interactive computing environments. These buttons provide a convenient way for users to execute individual code cells with a single click, without needing to navigate to the toolbar or use keyboard shortcuts.
 
-However, Jupyter does not provide this functionality out of the box. <!-- link to nine-year-old issue -->. 
+Unfortunately, however, Jupyter does not provide this functionality out of the box. This is a long-standing feature request in the Jupyter community, with various discussions on how to implement it effectively and in a manner that aligns with Jupyter's design principles, user experience, and accessibility standards: https://github.com/jupyterlab/jupyterlab/issues/2109
 
 <!-- describe our solution here and what it does in two paragraphs, and link to the PR -->
 
