@@ -1,5 +1,5 @@
 ---
-title: 'Jupyter Everywhere: empowering interactive computing for K-12 education' # not final
+title: 'Jupyter Everywhere: empowering interactive computing for high school students'
 published: November 01, 2025
 authors: [agriya-khetarpal]
 description: 'The story of how Jupyter Everywhere is transforming K-12 education through interactive computing'
