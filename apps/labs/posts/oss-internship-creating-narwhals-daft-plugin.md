@@ -107,7 +107,11 @@ These figure prominently in Narwhals, but what's a Protocol in Python? I read do
 
 Protocols are like the architectural drawing of a building. You can't do anything concrete with it, e.g you can't live in one, but without it, you don't know how to build your building and you'll have a shaky tower. They're underspecified for details of implementation (e.g. no description of bricks), but they specify the important stuff to do with structure (e.g. size of walls & number of building floors) and most importantly, they'll make sure that the different things you build will fit together.
 
-If you think of Narwhal’s capacity to work with multiple types of dataframe libraries, you can see why this would be very handy indeed: using Protocols, you can make sure that any class with the same methods and properties can be used in different contexts and inputs(2).
+If you think of Narwhal’s capacity to work with multiple types of dataframe libraries, you can see why this would be very handy indeed: using Protocols, you can make sure that any class with the same methods and properties can be used in different contexts and inputs[^2].
+
+... (rest of the contents)
+
+[^2]: A tutorial on Protocols is beyond the scope for this piece, but see [Python Protocols: Leveraging Structural Subtyping](https://realpython.com/python-protocol/) for a friendly introduction; additionally, this discussion helped me untangle abstract base classes from Protocols and helped clarify things for me: [Abstract Base Classes and Protocols: What Are They? When To Use Them?? Lets Find Out!](https://jellis18.github.io/post/2022-01-11-abc-vs-protocol/)
 
 A toy example below shows how, because we have a Protocol for dataframes `FancyDataframeProtocol` which dictates the method greater than (Dunder `__gt__`) can take any type, we can have a function in a dataframe class that can return the max for both integers and strings.
 
