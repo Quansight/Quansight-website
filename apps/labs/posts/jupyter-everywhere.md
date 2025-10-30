@@ -127,7 +127,7 @@ We then redirect the user away from the Jupyter Everywhere landing page and to t
 
 #### The Files widget
 
-When working with Jupyter notebooks, especially in data science and education contexts, access to tabular data files CSV/TSV and image files, whether local or remote, is taken for granted. In a traditional Jupyter environment, these files can be easily uploaded to the server's file system and accessed within the notebook.
+When working with Jupyter notebooks, especially in data science and education contexts, it is easy to take access to tabular data files (CSV/TSV) and image files, whether local or remote, for granted. In a traditional Jupyter environment, these files can be conveniently uploaded to the server's file system and accessed within the notebook.
 
 Jupyter Everywhere's design called for a simplified interface, with the default file browser available in JupyterLite replaced by a dedicated Files tab. We implemented it in another plugin, extending Jupyter's `MainAreaWidget`. This widget provides an "add new" button that allows users to upload data files from their local computer into the JupyterLite in-browser file system. Once uploaded, the files are accessible from within the notebook, allowing users to read and manipulate data as needed.
 
