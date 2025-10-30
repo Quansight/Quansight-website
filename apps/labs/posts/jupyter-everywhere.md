@@ -101,7 +101,7 @@ However, we wanted to go a step further and allow users to download notebooks in
 
 Thus, we went forward with a custom approach for this, based on [in-progress work in the JupyterLite community](https://github.com/jupyterlite/jupyterlite/pull/1625) to add PDF export functionality using an in-browser PDF generation library called `jsPDF`.
 
-`jsPDF` is a JavaScript library that allows generating PDF documents directly in the browser, without server-side processing. We integrated `jsPDF` into Jupyter Everywhere via a custom download button that converts the current notebook to a PDF and triggers its download. However, this functionality is still a work in progress. There is work to be done: improving the fidelity of the generated PDFs, especially for complex notebooks with rich visualisations, widgets, and typeset LaTeX content.
+[`jsPDF`](https://github.com/parallax/jsPDF) is a JavaScript library that allows generating PDF documents directly in the browser, without server-side processing. We integrated `jsPDF` into Jupyter Everywhere via a custom download button that converts the current notebook to a PDF and triggers its download. However, this functionality is still a work in progress. There is work to be done: improving the fidelity of the generated PDFs, especially for complex notebooks with rich visualisations, widgets, and typeset LaTeX content.
 
 #### Uploading notebooks to Jupyter Everywhere
 
