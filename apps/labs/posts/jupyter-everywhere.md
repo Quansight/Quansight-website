@@ -213,10 +213,11 @@ We lay down our gratitude to the following individuals and organisations for the
 
 - Jupyter ecosystem developers and maintainers
 - JupyterLite developers and maintainers
-- Educators and students who provided feedback during development, courtesy Skew The Script
+- Educators and students who provided feedback after the initial development phase, courtesy Skew The Script
 - Gates Foundation https://www.gatesfoundation.org/about/committed-grants/2024/03/inv-067942 for their grant award to Skew The Script to support the development of Jupyter Everywhere
 - The Scientific Python ecosystem
 - The core developers and maintainers of Pyodide (how do I do this without sounding snobbish, as I am a Pyodide maintainer myself?)
+- Skew The Script for the funding they provided for this initiative, and their vision for it, their collaboration, and feedback throughout the development cycle
 - CourseKata for their design and development of the sharing service, and infrastructure support for hosting Jupyter Everywhere on AWS
 - The QuantStack team for their work on JupyterLite, the Xeus project, xeus-r https://blog.jupyter.org/r-in-the-browser-announcing-our-webassembly-distribution-9450e9539ed5
 
