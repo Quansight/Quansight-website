@@ -154,7 +154,7 @@ This has domino effects in IPython 8.0 as we were going to great length to
 support top level async which is since 3.8 native to Python. Many simplification
 leading do even more down the line up to complete method and class suppressions.
 
-# Don't be cheap on `DeprecationWarning`s
+## Don't be cheap on `DeprecationWarning`s
 
 Warnings in general are much more powerful and complex than at first look. Once
 you understand them well they are an extremely powerful features. When use

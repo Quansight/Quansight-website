@@ -14,7 +14,7 @@ hero:
 
 To the readers, I am Aryan Gupta(@[guptaaryan16](https://github.com/guptaaryan16/)), an EE Junior at IIT Roorkee, and this summer, I had a chance to work on PyTorch-Ignite’s Code-Generator project, a tailor-made web application to help machine learning researchers and enthusiasts and also keeping in mind the growing Kaggle community.
 
-# The project itself
+## The project itself
 
 Let’s see the project itself. [Code-Generator](https://code-generator.pytorch-ignite.ai/) is a [Vue.js](https://vuejs.org/) application that streamlines the process of working on machine learning tasks. The app generates preconfigured code templates for tasks like vision classification, text classification, and other common themes in ML competitions.
 
@@ -24,7 +24,7 @@ This app was created with the great efforts of members of the PyTorch-Ignite com
 
 ![The Code-Generator App](/posts/code-generator-and-nebari/app.png)
 
-# The issues I worked on
+## The issues I worked on
 
 My tasks were primarily to work on features that could improve the reproducibility-related features of the templates. Also, I had to contribute to new features and libraries which can be best for experiments' configuration management. My contributions to the project were mainly three-fold, and are detailed below.
 
@@ -113,7 +113,7 @@ But it can be challenging to manage, and we also need to ensure we satisfy the `
 
 Some of the related PRs can be found here: [#283](https://github.com/pytorch-ignite/code-generator/pull/283) [#288](https://github.com/pytorch-ignite/code-generator/pull/288)
 
-# The way forward for the project
+## The way forward for the project
 
 The Code-Generator project seems to be moving forward at a great pace and is expected to have many more additions in the future. Starting and maintaining a new project is challenging in open source and can have a very high risk/reward ratio. Still, good communities try their best to make and maintain projects that can be helpful for the maximum number of people and reduce the friction for new people entering the community. Here are some of the issues I suggest and may work on in the future.
 
@@ -131,7 +131,7 @@ We will add more templates and feature options in the future to the project. Tem
 
 P.S. If you feel excited about the project, please feel free to suggest more changes and contribute to the project.
 
-# Some lessons I learnt along the way
+## Some lessons I learnt along the way
 
 This internship experience increased my confidence in maintaining an open-source codebase and understanding how to test functions and debug changes. It also helped me understand the value of real-life design decisions and CI and how they can significantly influence the project for the good or the bad. Some of the best practices I learned in the open-source projects are listed below.
 
@@ -144,7 +144,7 @@ When we try to write new code or change the existing files, we often try to do i
 While making a pull request(PR) seems very exciting on a project, you should know what and how much you want to accomplish in one pull request. Sometimes, we can make too many functional changes in one pull request, making testing and removing all the bugs difficult. This issue was evident in my time as an intern as some of my PRs were terribly formatted, and this led to me completely rebasing them and making 4-5 more PRs to the main project to remove many bugs in those changes. This was painful for me and my mentor, but I thank him for helping me with great suggestions and reviews.
 Also, this experience increased my learning and helped me improve the quality of my pull requests. So don’t be afraid to make mistakes; learn from them and make your way in this incredible world of OSS!
 
-# Acknowledgements
+## Acknowledgements
 
 In this section, I would like to thank my mentor, @[vfdev-5](https://github.com/vfdev-5), and other members of the PyTorch-Ignite community for helping me in this internship. Also, I would like to thank the people at [Quansight-Labs](https://quansight.com/) for providing me with such a great opportunity, especially @[rgommers](https://github.com/rgommers), @[trallard](https://github.com/trallard), @[melissawm](https://github.com/melissawm), and others for their invaluable guidance and time during this internship.
 
