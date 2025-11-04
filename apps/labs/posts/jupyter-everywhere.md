@@ -93,6 +93,14 @@ This was trickier to implement than we initially thought. At that time, JupyterL
 
 {/* A section on the problem of non-persistence in Jupyter Everywhere due to no user accounts + how we addressed it */}
 
+Now that we are well-versed with view-only notebooks, let's explore how they function under the hood.
+
+When a user opens a view-only notebook link, Jupyter Everywhere parses the URL to extract the notebook's unique identifier. It then sends a request to the sharing service API to fetch the notebook contents associated with that identifier. The sharing service verifies the request and returns the notebook data in JSON format.
+
+We then create a new notebook widget using a factory that produces read-only, immutable notebooks, i.e., notebooks with the `editable` property set to `false` for all cells. This widget is then populated with the notebook contents retrieved from the sharing service. Since no kernel is associated with the notebook tracker, the notebook is rendered in a read-only state, preventing any modifications or code execution.
+
+The kernel selection dropdown in the notebook toolbar is disabled, as no kernel is available for executing code cells. The user can still navigate through the notebook, view outputs, and interact with any visualisations or widgets embedded in the notebook, but modifying the notebook's contents is only possible by creating a copy of the notebook in their own Jupyter Everywhere session.
+
 #### Notebook downloads
 
 Another method for sharing notebooks is to export them from Jupyter Everywhere. This is facilitated by the built-in JupyterLite functionality to download notebooks in IPyNB format, which required adding a button to the notebook panel toolbar.
