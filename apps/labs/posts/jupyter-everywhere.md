@@ -166,6 +166,8 @@ For instance, Pyodide provides a built-in `pyodide.http` module that allows user
 
 {/* add some small parts about using pyodide.http, pyodide-http module for monkeypatching urllib, urllib3 and requests */}
 
+{/* add permalink to pyodide-http module repo and patch_all function */}
+
 For xeus-r and R, networking support was added in later versions.
 {/* should we describe what changed in a sentence? */}
 
@@ -177,7 +179,11 @@ Popularised by platforms such as [Observable](https://observablehq.com/), Google
 
 Unfortunately, however, Jupyter does not provide this functionality out of the box. This is a long-standing feature request in the Jupyter community, with various discussions on how to implement it effectively and in a manner that aligns with Jupyter's design principles, user experience, and accessibility standards: https://github.com/jupyterlab/jupyterlab/issues/2109
 
-{/* describe our solution here and what it does in two paragraphs, and link to the PR */}
+Building on prior art that has explored this feature in PRs X and Y (TODO link them), we implemented a plugin that adds "Run" buttons next to each code cell in the notebook interface. This involves creating a factory that produces a button widget in the input area of each code cell. The button is styled as an orange circular button with a white "play" icon. It is positioned to the left of the code cell input area.
+
+When the user clicks the "Run" button, it triggers the execution of the corresponding code cell, just like using the "Run" command from the toolbar or keyboard shortcuts, through the `notebook:run-cell` command in JupyterLab's command registry.
+
+{/* add link to our PR, add a screenshot of it where it shows up on code and markdown cells, and not on raw cells */}
 
 ### The dance of URL parameters
 
