@@ -179,6 +179,20 @@ Unfortunately, however, Jupyter does not provide this functionality out of the b
 
 {/* describe our solution here and what it does in two paragraphs, and link to the PR */}
 
+### The dance of URL parameters
+
+We use URL parameters extensively in Jupyter Everywhere to extend the plugins and customise the user experience based on the context in which the application is launched. For instance, we use URL parameters to specify which notebook to open upon startup, whether to launch in view-only mode, and other configuration options that affect the behaviour of the application.
+
+URL parameters are query strings appended to the URL after a question mark (`?`), consisting of key-value pairs separated by ampersands (`&`). They provide a method for passing information to web applications in a stateless manner, allowing for dynamic configuration without the need for server-side state management.
+
+Here is a description of some of the key URL parameters used in Jupyter Everywhere. We use these parameters to control various aspects of the application's behaviour and user experience, as described below:
+
+- `notebook`: Specifies the UUID of the notebook to open upon startup by calling the sharing service API. This parameter displays view-only notebooks if loaded, as the sharing service does not possess a token to authenticate the user.
+ At the same time, we append this URL parameter as soon as the notebook is shared, so that users can share the URL directly if they wish to.
+- `uploaded-notebook`: Specifies the UUID of a notebook that has been uploaded via the "Upload a Notebook" button on the landing page. This parameter allows users to upload a local IPyNB file from their computer and have it opened automatically in Jupyter Everywhere upon startup. This URL parameter is removed immediately after the notebook is read from `localStorage` and written to the JupyterLite in-browser file system.
+- `kernel`: Specifies the kernel to use for executing code cells in the notebook. This parameter allows users to select between `python` (Python/Pyodide) and `r` (xeus-r/R) kernels, and the default is `python`, so if the parameter is omitted, the Pyodide kernel is used. This URL parameter is also appended to the URL when the user selects a different kernel from the kernel selection dropdown in the notebook toolbar, and is immediately removed as it is strictly an implementation detail. For uploaded notebooks, we utilise the notebook's metadata to determine the kernel to use, and pass that information via this URL parameter during startup.
+- `tab`: Specifies which sidebar tab to open upon startup. This parameter allows users to choose between the "Files" (`files`) tab and the "Notebook" tab, with the default being the "Notebook" tab. This URL parameter is also appended to the URL when the user switches between the sidebar tabs, allowing for deep linking to specific tabs within the application. We also use this parameter to provide a `404` tab, which redirects to a custom "Not found" page if the specified resource does not exist.
+
 ## A call to action for educators and institutions
 
 {/* A message to the world, unsure what I'd like to add here... */}
