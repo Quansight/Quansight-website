@@ -18,7 +18,7 @@ hero:
 # The Jupyter Everywhere story: empowering interactive computing for K-12 education
 {/* the title is tentative and not final */}
 
-Hi! I am Agriya Khetarpal, a software engineer at Quansight PBC. In this blog post, I will share the story of how we built [Jupyter Everywhere](https://jupytereverywhere.org/), a notebooks-based end-to-end application for high school (K-12) students in the U.S.A., in collaboration with [Skew The Script](https://skewthescript.org/) and [CourseKata](https://coursekata.com/).
+Hi! I am Agriya Khetarpal, a software engineer at Quansight. In this blog post, I will share the story of how we built [Jupyter Everywhere](https://jupytereverywhere.org/), a notebooks-based end-to-end application for high school (K-12) students in the U.S.A., in collaboration with [Skew The Script](https://skewthescript.org/) and [CourseKata](https://coursekata.com/).
 
 Jupyter Everywhere aims to make interactive computing accessible to students and educators, regardless of their technical background or resources. We stand on the shoulders of giants, leveraging the power of [JupyterLite](https://jupyterlite.readthedocs.io/en/latest/) and [WebAssembly (WASM)](https://webassembly.org/) – technologies that enable running Jupyter notebooks entirely in a web browser. In particular, we harness [Pyodide](https://pyodide.org/en/stable/), a WASM-based distribution of Python with a rich scientific stack; and [Xeus-R](https://blog.jupyter.org/r-in-the-browser-announcing-our-webassembly-distribution-9450e9539ed5), a WASM-based R kernel for Jupyter notebooks; to execute data science and statistical computing code in a browser without provisioning any server-side dependencies or deployments.
 
