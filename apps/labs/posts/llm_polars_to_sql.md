@@ -49,11 +49,9 @@ We'll ask a prompt which touches on several aspects of translating Polars syntax
 
 ### Expected results
 
-We're looking for SQL queries which produce the following output.
+We're looking for SQL queries which produce the following output (the exact order in the output may vary, but the values are expected to match):
 
 ```python=
-# Note: the exact order in the output may vary,
-# but the values should be these ones:
 shape: (4, 1)
 ┌───────┐
 │ price │
@@ -108,8 +106,6 @@ SELECT
 FROM df;
 ```
 
-Note that the fact that `n_unique` counts null values has been explicitly mentioned in Polars' documentation since January 2025.
-
 For the final one, Polars preserves null values and only ranks the non-null ones, so we're looking for a solution like:
 
 ```sql
@@ -122,6 +118,8 @@ SELECT
 FROM df;
 ```
 
+Do you think the LLMs will be able to do it?
+
 ## Meet the LLMs
 
 For this task, we'll compare three free models:
@@ -130,23 +128,23 @@ For this task, we'll compare three free models:
 - DeepSeek V3.1 (open source, MIT license). We'll run this one on [OpenRouter](https://openrouter.ai/).
 - Qwen3 Coder 480B A35B (open source, Apache 2.0 license), by Alibaba. We'll also run this one on OpenRouter.
 
-The first one is the one that everyone knows. It's unfortunate that for many, it's also where their awareness of LLMs ends. Many people are unware of open source alternatives - let's change that!
+The first one is the one that everyone knows. It's unfortunate that for many, it's also where their awareness of LLMs ends. Many people don't even know that alternatives exist - let's change that!
 
-## Putting LLMs to the test!
+## Putting LLMs to the test
 
 Here's a summary of the LLMs' results, as of December 26, 2025:
 
 ### Task 1
 
-- ChatGPT: correct!
+- GPT: correct!
 - Deepseek: correct!
 - Qwen: correct!
 
-Nothing much to say here, the SQL they produce is valid and correct.
+OK, this one was too easy for them. Let's move on to the harder ones.
 
 ### Task 2
 
-- ChatGPT: incorrect!
+- GPT: incorrect!
 - Deepseek: incorrect!
 - Qwen: incorrect!
 
@@ -158,11 +156,11 @@ SELECT
 FROM df;
 ```
 
-The reason it's wrong is that it discards null values, whereas Polars includes them.
+The reason it's wrong is that it discards null values, whereas Polars includes them. Blindly trusting the LLMs' translation without checking it could lead to production failures or incorrect business decisions!
 
 ### Task 3
 
-- ChatGPT: correct!
+- GPT: correct!
 - Deepseek: incorrect!
 - Qwen: incorrect!
 
@@ -174,7 +172,7 @@ SELECT DENSE_RANK() OVER (ORDER BY price) FROM df;
 
 The reason it's incorrect is that it ranks the null values last, whereas Polars preserves null values and only ranks non-null elements.
 
-ChatGPT actually gets this one right, and outputs:
+GPT actually gets this one right, and outputs:
 
 ```sql
 SELECT
@@ -189,7 +187,7 @@ Note the extra logic to preserve null values which was missing from the other tw
 
 ### Can better prompting fix the results?
 
-There's definitely a pattern to the LLM failures: they generate code which _looks_ plausible. The only issue is that, on inspection, details such as null value handling are not always taken care of. Can we fix this by reminding the LLMs of how Polars handles them?
+There's definitely a pattern to the LLM failures: they generate code which _looks_ plausible. The only issue is that, on inspection, details such as null value handling are not always taken care of. Can we fix this by reminding the LLMs of the details of Polars' behaviour?
 
 The answer is...yes! Indeed, by appending
 
@@ -203,12 +201,7 @@ There exist a variety of AI models which, although open source, are not free, an
 
 ## Non-AI solution: Narwhals
 
-With the AI solution, we consistently found that:
-
-- Just asking the question directly resulted in subtly wrong translations.
-- By including extra details in the prompt, they were able to do the translation correctly.
-
-It's actually possible to translate the above queries from Polars to SQL without any possibility for LLM hallucination, and that is by using [Narwhals](https://github.com/narwhals-dev/narwhals):
+LLMs are highly susceptible to hallucinations, and their output should never be trusted blindly. If we want a more robust and predictable solution, we can turn our attention to an open source tool called [Narwhals](https://github.com/narwhals-dev/narwhals). Here's what a Narwhals solution looks like to the second task above (the one that all LLMs got wrong):
 
 ```py
 import polars as pl
@@ -233,9 +226,9 @@ SELECT
 FROM ColumnDataCollection - [1 Chunks, 4 Rows]
 ```
 
-and that's our correct SQL translation - no need to manual prompt engineering! Same for the other tasks. This approach is safe, well-tested, and free from hallucinations. The downside is that it is only limited to what's in the [Narwhals API](https://narwhals-dev.github.io/narwhals/api-reference/), while LLMs can at least attempt to translate more complex and niche queries.
+and that's a correct SQL translation - no need to manual prompt engineering! This approach is safe, well-tested, and free from hallucinations. The downside is that it is only limited to what's in the [Narwhals API](https://narwhals-dev.github.io/narwhals/api-reference/), while LLMs can at least attempt to translate more complex and niche queries.
 
-If you would like to help fund the future of dataframe-agnostic workflows or would like help with bespoke solutions, you can [contact Quansight Labs](connect@quansight.com).
+If you would like to help fund the future of dataframe-agnostic workflows or would like help with bespoke Narwhals solutions, you can [contact Quansight Labs](connect@quansight.com).
 
 ## Conclusion
 
