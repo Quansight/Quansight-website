@@ -5,10 +5,10 @@ authors: [marco-gorelli]
 description: "Be very careful!"
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/llm-polars-to-sql/featured.jpg
+  src: /posts/llm_polars_to_sql/featured.jpg
   alt: 'Image of "Google Translate" which looks like it is translating Polars code to SQL'
 hero:
-  imageSrc: /posts/llm-polars-to-sql/hero.jpg
+  imageSrc: /posts/llm_polars_to_sql/hero.jpg
   imageAlt: 'Image of "Google Translate" which looks like it is translating Polars code to SQL'
 
 ---
@@ -166,7 +166,7 @@ The reason it's wrong is that it discards null values, whereas Polars includes t
 - Deepseek: incorrect!
 - Qwen: incorrect!
 
-The latter two ma
+The latter two make the same mistake and output something like:
 
 ```sql
 SELECT DENSE_RANK() OVER (ORDER BY price) FROM df;
@@ -189,7 +189,9 @@ Note the extra logic to preserve null values which was missing from the other tw
 
 ### Can better prompting fix the results?
 
-Indeed, by appending
+There's definitely a pattern to the LLM failures: they generate code which _looks_ plausible. The only issue is that, on inspection, details such as null value handling are not always taken care of. Can we fix this by reminding the LLMs of how Polars handles them?
+
+The answer is...yes! Indeed, by appending
 
 > Remember that Polars counts null values in n_unique and preserves null values in rank.
 
