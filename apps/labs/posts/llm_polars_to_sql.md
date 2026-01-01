@@ -57,17 +57,17 @@ SELECT
 FROM df;
 ```
 
-For the second one, `COUNT(DISTINCT vendor)` gets us close, but the key detail to notice is that Polars includes null values by default in `n_unique` whereas `COUNT(DISTINCT ...)` doesn't. Therefore, some extra post-processing is needed - one way to do this is with a `CASE-WHEN` expression:
+For the second one, `COUNT(DISTINCT price)` gets us close, but the key detail to notice is that Polars includes null values by default in `n_unique` whereas `COUNT(DISTINCT ...)` doesn't. Therefore, some extra post-processing is needed - one way to do this is with a `CASE-WHEN` expression:
 
 ```sql
 SELECT 
-    COUNT(DISTINCT vendor) 
+    COUNT(DISTINCT price) 
     + MAX(
         CASE 
-            WHEN vendor IS NULL THEN 1 
+            WHEN price IS NULL THEN 1 
             ELSE 0 
         END
-      ) AS vendor
+      ) AS price
 FROM df;
 ```
 
@@ -162,7 +162,9 @@ to our prompt, we find that all 3 models give correct results to all tasks! So, 
 
 ## Non-AI solution: Narwhals
 
-LLMs are highly susceptible to hallucinations, and their output should never be trusted blindly. If we want a more robust and predictable solution, we can turn our attention to an open source tool called [Narwhals](https://github.com/narwhals-dev/narwhals). Here's what a Narwhals solution looks like to the second task above (the one that all LLMs got wrong):
+LLMs are highly susceptible to hallucinations, and their output should never be trusted blindly. If we want a more robust and predictable solution, we can turn our attention to an open source tool called [Narwhals](https://github.com/narwhals-dev/narwhals). Narwhals is a lightweight compatibility layer between dataframe libraries - in particular, it supports DuckDB, so we can use that to generate SQL.
+
+Here's what a Narwhals solution looks like to the second task above (the one that all LLMs got wrong):
 
 ```py
 import polars as pl
@@ -173,7 +175,7 @@ df = pl.DataFrame(data)
 
 print(
     nw.from_native(df).lazy('duckdb')
-    .select(nw.col('vendor').n_unique())
+    .select(nw.col('price').n_unique())
     .to_native().sql_query()
 )
 ```
@@ -182,8 +184,8 @@ The top line of the output shows
 
 ```sql
 SELECT
-  (count(DISTINCT vendor)
-   + max(CASE  WHEN ((vendor IS NULL)) THEN (1) ELSE 0 END)) AS vendor
+  (count(DISTINCT price)
+   + max(CASE  WHEN ((price IS NULL)) THEN (1) ELSE 0 END)) AS price
 FROM ColumnDataCollection - [1 Chunks, 4 Rows]
 ```
 
@@ -199,4 +201,4 @@ We've look at how to translate Polars code to SQL, and compared different soluti
 - Open source AI models
 - Narwhals
 
-We found that AI models may get things subtely wrong but can be corrected with better prompt engineering. Finally, we found that Narwhals can make a correct translation without requiring prompt engineering, but that this approach is limited to what's already implemented in the Narwhals API. If you plan on using LLMs to translate APIs, make sure include as many details as possible about the source API's behaviour, and always make sure to test the result before using it for anything serious.
+We found that AI models may get things subtely wrong but can be corrected with better prompt engineering. Finally, we found that Narwhals makes correct translations without requiring prompt engineering, but that this approach is limited to what's already implemented in the Narwhals API. If you plan on using LLMs to translate Polars to SQL, we suggest first trying Narwhals in order to avoid LLM hallucinations, and only trying LLMs if the Narwhals API is not sufficient for your task - in which case, make sure to include as many details as possible regarding expected behaviours so that the models have the highest chance of getting their translations right.
