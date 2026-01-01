@@ -13,7 +13,7 @@ hero:
 
 ---
 
-[Structured Query Language](https://en.wikipedia.org/wiki/SQL), also known as SQL, is probably the most common way for engineers to interact with data. Every data service out there seems to have a SQL interface. SQL is often regarded as a must-have skill for data scientists, and even more so for data engineers. SQL is portable, widespread, mostly standardised, and powerful.
+[Structured Query Language](https://en.wikipedia.org/wiki/SQL), also known as SQL, is probably the most common way for engineers to interact with data. Every data service out there seems to have a SQL interface. It's often regarded as a must-have skill for data scientists, and even more so for data engineers. It's portable, widespread, mostly standardised, and powerful.
 
 In spite of SQL's strengths, data scientists often prefer using tools known as "dataframes" (such as [pandas](https://github.com/pandas-dev/pandas) and [Polars](https://github.com/pola-rs/polars)) to perform data analyses. This is both because of how rich the ecosystem for dataframe tools is, but also because dataframes allow them to express data analysis tasks in a way that often feels more natural than it does in SQL.
 
@@ -49,41 +49,6 @@ We'll ask a prompt which touches on several aspects of translating Polars syntax
 
 ### Expected results
 
-We're looking for SQL queries which produce the following output (the exact order in the output may vary, but the values are expected to match):
-
-```python=
-shape: (4, 1)
-┌───────┐
-│ price │
-│ ---   │
-│ f64   │
-╞═══════╡
-│ -2.0  │
-│ 1.0   │
-│ null  │
-│ 1.0   │
-└───────┘
-shape: (1, 1)
-┌───────┐
-│ price │
-│ ---   │
-│ u32   │
-╞═══════╡
-│ 3     │
-└───────┘
-shape: (4, 1)
-┌───────┐
-│ price │
-│ ---   │
-│ f64   │
-╞═══════╡
-│ 1.0   │
-│ 2.5   │
-│ null  │
-│ 2.5   │
-└───────┘
-```
-
 Let's look at examples of what correct translations may look like. The first one requires us to compare an aggregation (`AVG(price)`) with a column (`price`), which we can do by broadcasting the aggregation using `OVER ()`:
 
 ```sql
@@ -118,7 +83,7 @@ SELECT
 FROM df;
 ```
 
-Do you think the LLMs will be able to do it?
+These are examples of models answers. How close to them do you think the LLMs will get?
 
 ## Meet the LLMs
 
@@ -128,7 +93,7 @@ For this task, we'll compare three free models:
 - DeepSeek V3.1 (open source, MIT license). We'll run this one on [OpenRouter](https://openrouter.ai/).
 - Qwen3 Coder 480B A35B (open source, Apache 2.0 license), by Alibaba. We'll also run this one on OpenRouter.
 
-The first one is the one that everyone knows. It's unfortunate that for many, it's also where their awareness of LLMs ends. Many people don't even know that alternatives exist - let's change that!
+The first one is the one that everyone knows. It's unfortunate that for many, it's also where their awareness of LLMs ends. Many people don't even know that open source alternatives exist - let's change that!
 
 ## Putting LLMs to the test
 
@@ -172,7 +137,7 @@ SELECT DENSE_RANK() OVER (ORDER BY price) FROM df;
 
 The reason it's incorrect is that it ranks the null values last, whereas Polars preserves null values and only ranks non-null elements.
 
-GPT actually gets this one right, and outputs:
+GPT gets this one right, and outputs:
 
 ```sql
 SELECT
@@ -187,17 +152,13 @@ Note the extra logic to preserve null values which was missing from the other tw
 
 ### Can better prompting fix the results?
 
-There's definitely a pattern to the LLM failures: they generate code which _looks_ plausible. The only issue is that, on inspection, details such as null value handling are not always taken care of. Can we fix this by reminding the LLMs of the details of Polars' behaviour?
+There's definitely a pattern to the LLM failures: they generate code which _looks_ plausible. The only issue is that, on inspection, details such as null value handling are not always taken care of. Can we fix this by reminding the LLMs about the details of Polars' behaviour?
 
 The answer is...yes! Indeed, by appending
 
 > Remember that Polars counts null values in n_unique and preserves null values in rank.
 
 to our prompt, we find that all 3 models give correct results to all tasks! So, it is possible to use these models to translate Polars to SQL, but it requires some care and domain knowledge to ensure the translations are correct.
-
-## What about non-free open source AI solutions?
-
-There exist a variety of AI models which, although open source, are not free, and require some setup to get running. One of the easiest ways to do that is with [Nebari](https://openteams.com/nebari/). Please [book a discovery call](https://openteams.com/contact-us/) to learn how you can use Nebari and open source AI to build modern solutions which you can completely own!
 
 ## Non-AI solution: Narwhals
 
