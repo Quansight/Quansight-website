@@ -1,6 +1,6 @@
 ---
 title: "Can LLMs translate Polars code to SQL?"
-published: ??, January 2026
+published: 21, January 2026
 authors: [marco-gorelli]
 description: "Be very careful!"
 category: [PyData ecosystem]
