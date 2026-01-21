@@ -39,9 +39,9 @@ We'll ask a prompt which touches on several aspects of translating Polars syntax
 > can you translate this Polars code to SQL
 > 
 > ```py
-> print(df.select(pl.col('price') - pl.col('price').mean()))
-> print(df.select(pl.col('price').n_unique()))
-> print(df.select(pl.col('price').rank('dense')))
+> print(df.select(pl.col('price') - pl.col('price').mean())) # Task 1
+> print(df.select(pl.col('price').n_unique()))               # Task 2
+> print(df.select(pl.col('price').rank('dense')))            # Task 3
 > ```
 >
 > ?
@@ -191,11 +191,11 @@ FROM ColumnDataCollection - [1 Chunks, 4 Rows]
 
 and that's a correct SQL translation - no need to manual prompt engineering! This approach is safe, well-tested, and free from hallucinations. The downside is that it is only limited to what's in the [Narwhals API](https://narwhals-dev.github.io/narwhals/api-reference/), while LLMs can at least attempt to translate more complex and niche queries.
 
-If you would like to help fund the future of dataframe-agnostic workflows or would like help with bespoke Narwhals solutions, you can [contact Quansight Labs](connect@quansight.com).
+If you would like to help fund the future of dataframe-agnostic workflows or would like help with bespoke Narwhals solutions, you can [contact Quansight](mailto:connect@quansight.com).
 
 ## Conclusion
 
-We've look at how to translate Polars code to SQL, and compared different solutions:
+We looked at how to translate Polars code to SQL, and compared different solutions:
 
 - Proprietary AI models
 - Open source AI models
