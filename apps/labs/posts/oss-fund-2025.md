@@ -22,19 +22,19 @@ direct, unrestricted financial support to critical open-source dependencies.
 
 The four recipients of this year's Quansight OSS Fund are:
 
-- **[coverage.py](https://github.com/coveragepy/coveragepy) ($6,000).**
+- [coverage.py](https://github.com/coveragepy/coveragepy) ($6,000).
   *Code coverage measurement for Python. Coverage.py measures code coverage,
   typically during test execution. It uses the code analysis tools and tracing
   hooks provided in the Python standard library to determine which lines are
   executable, and which have been executed.*
-- **[Sphinx](https://www.sphinx-doc.org)** ($6,000).
+- [Sphinx](https://www.sphinx-doc.org) ($6,000).
   *Sphinx makes it easy to create intelligent and beautiful documentation.*
-- **[pkgconf](https://github.com/pkgconf/pkgconf)** ($3,500).
+- [pkgconf](https://github.com/pkgconf/pkgconf) ($3,500).
   *`pkgconf` is a program which helps to configure compiler and linker flags for
   development libraries. It is a superset of the functionality provided by
   pkg-config from freedesktop.org, but does not provide bug-compatibility with
   the original pkg-config.*
-- **[LIEF](https://lief.re/)** ($3,500).
+- [LIEF](https://lief.re/) ($3,500).
   *Library to Instrument Executable Formats (LIEF) aims at providing a cross
   platform library to parse, modify and abstract ELF, PE and MachO formats.*
 
