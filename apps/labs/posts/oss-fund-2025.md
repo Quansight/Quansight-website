@@ -22,21 +22,21 @@ direct, unrestricted financial support to critical open-source dependencies.
 
 The four recipients of this year's Quansight OSS Fund are:
 
-- [coverage.py](https://github.com/coveragepy/coveragepy) ($6,000). *Code
-  coverage measurement for Python. Coverage.py measures code coverage, typically
-  during test execution. It uses the code analysis tools and tracing hooks
-  provided in the Python standard library to determine which lines are
+- **[coverage.py](https://github.com/coveragepy/coveragepy) ($6,000).**
+  *Code coverage measurement for Python. Coverage.py measures code coverage,
+  typically during test execution. It uses the code analysis tools and tracing
+  hooks provided in the Python standard library to determine which lines are
   executable, and which have been executed.*
-- [Sphinx](https://www.sphinx-doc.org) ($6,000). *Sphinx makes it easy to create
-  intelligent and beautiful documentation.*
-- [pkgconf](https://github.com/pkgconf/pkgconf) ($3,500). *`pkgconf` is a
-  program which helps to configure compiler and linker flags for development
-  libraries. It is a superset of the functionality provided by pkg-config from
-  freedesktop.org, but does not provide bug-compatibility with the original
-  pkg-config.*
-- [LIEF](https://lief.re/) ($3,500). *Library to Instrument Executable Formats
-  (LIEF) aims at providing a cross platform library to parse, modify and
-  abstract ELF, PE and MachO formats.*
+- **[Sphinx](https://www.sphinx-doc.org)** ($6,000).
+  *Sphinx makes it easy to create intelligent and beautiful documentation.*
+- **[pkgconf](https://github.com/pkgconf/pkgconf)** ($3,500).
+  *`pkgconf` is a program which helps to configure compiler and linker flags for
+  development libraries. It is a superset of the functionality provided by
+  pkg-config from freedesktop.org, but does not provide bug-compatibility with
+  the original pkg-config.*
+- **[LIEF](https://lief.re/)** ($3,500).
+  *Library to Instrument Executable Formats (LIEF) aims at providing a cross
+  platform library to parse, modify and abstract ELF, PE and MachO formats.*
 
 We deeply appreciate these projects and their maintainers, and hope that our
 donations help keep these projects healthy and their maintainers engaged and
@@ -119,7 +119,7 @@ you see opportunities to collaborate, and keep doing the amazing work you do!
 
 --- 
 
-## Quansight OSS Fund grant recipients
+### Quansight OSS Fund grant recipients
 
 - Dec 2024: [CodeMirror](https://codemirror.net/), [mkdocstrings](https://mkdocstrings.github.io/), [Maturin](https://www.maturin.rs/)
 - Dec 2025: [coverage.py](https://github.com/coveragepy/coveragepy), [Sphinx](https://www.sphinx-doc.org), [pkgconf](https://github.com/pkgconf/pkgconf), [LIEF](https://lief.re/)
