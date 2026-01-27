@@ -94,33 +94,25 @@ def myfunc_be2(): # Note that it has exactly the same signature
 ```
 
 <CH.Code className="labs-blog-cell-in-out">
-
-```python in
+```python [In]
 with ua.set_backend(be1):
     print(myfunc())
 ```
-
 ---
-
-```txt out
+```txt [Out]
 Potato
 ```
-
 </CH.Code>
 
 <CH.Code className="labs-blog-cell-in-out">
-
-```python in
+```python [In]
 with ua.set_backend(be2):
     print(myfunc())
 ```
-
 ---
-
-```text out
+```text [Out]
 Strawberry
 ```
-
 </CH.Code>
 
 As we can clearly see: We have already provided a way to do (1) and (2)
@@ -135,17 +127,13 @@ ua.register_backend(be2)
 ```
 
 <CH.Code className="labs-blog-cell-in-out">
-
-```python in
+```python [In]
 print(myfunc())
 ```
-
 ---
-
-```text out
+```text [Out]
 Potato
 ```
-
 </CH.Code>
 
 As we see, we get only the first backend's answer. In general, it's
@@ -177,18 +165,14 @@ ua.register_backend(be2)
 ```
 
 <CH.Code className="labs-blog-cell-in-out">
-
-```python in
+```python [In]
 with ua.set_backend(be1):
     print(myfunc())
 ```
-
 ---
-
-```txt out
+```txt [Out]
 Strawberry
 ```
-
 </CH.Code>
 
 Wait\... What? Didn't we just set the first `Backend`? Ahh, but, you
@@ -198,15 +182,12 @@ The same would happen if you simply didn't register one. To force a
 be explained in just a moment.
 
 <CH.Code className="labs-blog-cell-in-out">
-
-```python in
+```python [In]
 with ua.set_backend(be1, only=True):
     print(myfunc())
 ```
-
 ---
-
-```txt out
+```txt [Out]
 ---------------------------------------------------------------------------
 BackendNotImplementedError                Traceback (most recent call last)
 <ipython-input-8-ec856cf7c88b> in <module>
@@ -222,7 +203,6 @@ BackendNotImplementedError                Traceback (most recent call last)
 
 BackendNotImplementedError: No selected backends had an implementation for this method.
 ```
-
 </CH.Code>
 
 Now we are told that no backends had an implementation for this function
@@ -276,42 +256,31 @@ be2.register_implementation(None, gen_impl2)
 ```
 
 <CH.Code className="labs-blog-cell-in-out">
-
-```python in
+```python [In]
 myfunc('1') # This calls the second implementation
 ```
-
 ---
-
-```txt out
+```txt [Out]
 '1'
 ```
-
 </CH.Code>
 
 <CH.Code className="labs-blog-cell-in-out">
-
-```python in
+```python [In]
 myfunc(1) # This calls the first implementation
 ```
-
 ---
-
-```txt out
+```txt [Out]
 1
 ```
-
 </CH.Code>
 
 <CH.Code className="labs-blog-cell-in-out">
-
-```python in
+```python [In]
 myfunc(1.0) # This fails
 ```
-
 ---
-
-```txt out
+```txt [Out]
     ---------------------------------------------------------------------------
     BackendNotImplementedError                Traceback (most recent call last)
     <ipython-input-13-8431c1275db5> in <module>
@@ -326,12 +295,10 @@ myfunc(1.0) # This fails
 
     BackendNotImplementedError: No selected backends had an implementation for this method.
 ```
-
 </CH.Code>
 
 <CH.Code className="labs-blog-cell-in-out">
-
-```python in
+```python [In]
 # But works if we do this:
 
 with ua.set_backend(be1, coerce=True):
@@ -340,14 +307,11 @@ with ua.set_backend(be1, coerce=True):
 with ua.set_backend(be2, coerce=True):
     print(type(myfunc(1.0)))
 ```
-
 ---
-
-```txt out
+```txt [Out]
 <class 'int'>
 <class 'str'>
 ```
-
 </CH.Code>
 
 This may seem like too much work, but remember that it's broken down
@@ -372,21 +336,17 @@ right values from it.
 `uarray`. You can use them as follows:
 
 <CH.Code className="labs-blog-cell-in-out">
-
-```python in
+```python [In]
 import unumpy as np # Note the changed import statement
 from unumpy.xnd_backend import XndBackend
 
 with ua.set_backend(XndBackend):
     print(type(np.arange(0, 100, 1)))
 ```
-
 ---
-
-```txt out
+```txt [Out]
 <class 'xnd.array'>
 ```
-
 </CH.Code>
 
 And, as you can see, we get back an Xnd array when using a NumPy-like
