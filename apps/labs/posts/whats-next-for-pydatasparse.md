@@ -2,10 +2,10 @@
 title: 'Planned architectural work for PyData/Sparse'
 published: March 11, 2020
 description: 'An update about recent research activities and upcoming changes'
-author: hameer-abbasi
+authors: [hameer-abbasi]
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/whats-next-for-pydatasparse/blog_feature_var1.svg
+  src: /posts/whats-next-for-pydatasparse/blog_feature_var1.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/whats-next-for-pydatasparse/blog_hero_var1.svg

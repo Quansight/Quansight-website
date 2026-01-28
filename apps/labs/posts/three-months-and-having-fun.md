@@ -1,7 +1,7 @@
 ---
 title: 'Quansight Labs: what I learned in my first 3 months'
 published: July 21, 2020
-author: matti-picus
+authors: [matti-picus]
 description: 'I joined Quansight at the beginning of April, splitting my time between
 PyTorch (as part of a larger Quansight team) and contributing to Quansight Labs
 supported community-driven projects in the Python scientific and data science
@@ -10,7 +10,7 @@ projects, and the atmosphere are an all around win-win for me and (I hope) for
 the projects to which I contribute.'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/three-months-and-having-fun/blog_feature_org.svg
+  src: /posts/three-months-and-having-fun/blog_feature_org.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/three-months-and-having-fun/blog_hero_var1.svg

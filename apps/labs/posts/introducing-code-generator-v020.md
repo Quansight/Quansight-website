@@ -1,11 +1,11 @@
 ---
 title: "Introducing PyTorch-Ignite's Code Generator v0.2.0"
 published: July 16, 2021
-author: victor-fomin
+authors: [victor-fomin]
 description: 'PyTorch-Ignite is a practical solution, a high-level library from the PyTorch ecosystem for training neural networks. It is designed to simplify workflow development while maintaining maximum control, flexibility, and reproducibility. PyTorch-Ignite feels like a natural extension to PyTorch.'
 category: [Machine Learning]
 featuredImage:
-  src: /posts/introducing-code-generator-v020/blog_feature_var2.svg
+  src: /posts/introducing-code-generator-v020/blog_feature_var2.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/introducing-code-generator-v020/blog_hero_var1.svg
