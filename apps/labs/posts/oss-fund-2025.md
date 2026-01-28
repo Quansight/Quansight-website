@@ -1,15 +1,15 @@
 ---
-title: "Supporting the Foundations: Announcing the 2025 Quansight OSS Fund Recipients"
+title: 'Supporting the Foundations: Announcing the 2025 Quansight OSS Fund Recipients'
 published: January 26, 2026
 authors: [ralf-gommers]
 description: 'Announcement of our second yearly OSS Fund and its awardees'
 category: [Community, Funding]
 featuredImage:
-  src: TODO
-  alt: TODO
+  src: /posts/oss-fund-2025/hero-featured-image.png
+  alt: Line illustration of a small marsh ecosystem with plants and a bird flying over.
 hero:
-  imageSrc: TODO
-  imageAlt: TODO
+  imageSrc: /posts/oss-fund-2025/hero-featured-image.png
+  imageAlt: Line illustration of a small marsh ecosystem with plants and a bird flying over.
 ---
 
 Making community-driven open source projects thrive is at the core of what we do
@@ -23,20 +23,20 @@ direct, unrestricted financial support to critical open-source dependencies.
 The four recipients of this year's Quansight OSS Fund are:
 
 - [coverage.py](https://github.com/coveragepy/coveragepy) ($6,000).
-  *Code coverage measurement for Python. Coverage.py measures code coverage,
+  _Code coverage measurement for Python. Coverage.py measures code coverage,
   typically during test execution. It uses the code analysis tools and tracing
   hooks provided in the Python standard library to determine which lines are
-  executable, and which have been executed.*
+  executable, and which have been executed._
 - [Sphinx](https://www.sphinx-doc.org) ($6,000).
-  *Sphinx makes it easy to create intelligent and beautiful documentation.*
+  _Sphinx makes it easy to create intelligent and beautiful documentation._
 - [pkgconf](https://github.com/pkgconf/pkgconf) ($3,500).
-  *`pkgconf` is a program which helps to configure compiler and linker flags for
+  _`pkgconf` is a program which helps to configure compiler and linker flags for
   development libraries. It is a superset of the functionality provided by
   pkg-config from freedesktop.org, but does not provide bug-compatibility with
-  the original pkg-config.*
+  the original pkg-config._
 - [LIEF](https://lief.re/) ($3,500).
-  *Library to Instrument Executable Formats (LIEF) aims at providing a cross
-  platform library to parse, modify and abstract ELF, PE and MachO formats.*
+  _Library to Instrument Executable Formats (LIEF) aims at providing a cross
+  platform library to parse, modify and abstract ELF, PE and MachO formats._
 
 We deeply appreciate these projects and their maintainers, and hope that our
 donations help keep these projects healthy and their maintainers engaged and
@@ -61,7 +61,6 @@ run Quansight, as a valuable addition to other forms of sponsorships (e.g., for
 nonprofits and conferences) and to building bridges with more maintainers to
 jointly apply for funding or collaborate on existing funded projects.
 
-
 ## Funds usage
 
 The funds are unrestricted, which we know from personal experience can be quite
@@ -84,7 +83,6 @@ And Romain Thomas, LIEF maintainer, shared:
 
 > I plan to use this funding to improve our internal CI by adding a new
 > Windows ARM64 runner and an additional Linux runner.
-
 
 ## How we select recipients
 
@@ -115,7 +113,6 @@ comic](https://xkcd.com/2347/)) and we wanted to make sure they weren't excluded
 from consideration - hence we loosened our "must have a CoC" requirement a
 little.
 
-
 ## Inspired to Contribute?
 
 We hope this initiative inspires other companies who benefit from open source to
@@ -126,8 +123,7 @@ or [reach out about our services](https://quansight.com/consulting/). If you're
 a maintainer of a critical OSS project, we encourage you to reach out to us if
 you see opportunities to collaborate, and keep doing the amazing work you do!
 
-
---- 
+---
 
 ### Quansight OSS Fund grant recipients
 
