@@ -1,11 +1,11 @@
 ---
 title: "Highlights of the Ibis 1.3 release"
-author: ivan-ogasawara
+authors: [ivan-ogasawara]
 published: May 2, 2020
 description: 'Ibis 1.3 was just released, after 8 months of development work, with 104 new commits from 16 unique contributors. In this blog post we will discuss some important features in this new version!'
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/ibis-1.3-release/blog_feature_var2.svg
+  src: /images/blog_feature_var2.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/ibis-1.3-release/blog_hero_var2.svg
@@ -39,7 +39,7 @@ This blog post is divided into different sections:
 -   Geospatial support
 -   Python versions support
 
-``` python
+```python
 import ibis
 import pandas as pd
 ```
@@ -56,9 +56,10 @@ supported by `cudf`).
 `IPC` is used to provide shared data support between processes.
 OmniSciDB uses Apache Arrow to provide IPC support.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 con_omni = ibis.omniscidb.connect(
-    host='localhost', 
+    host='localhost',
     port='6274',
     user='admin',
     password='HyperInteractive',
@@ -68,37 +69,25 @@ con_omni = ibis.omniscidb.connect(
 )
 con_omni.list_tables()
 ```
-
-    ['diamonds', 'batting', 'awards_players', 'functional_alltypes', 'geo']
+---
+```txt [Out]
+['diamonds', 'batting', 'awards_players', 'functional_alltypes', 'geo']
+```
+</CH.Code>
 
 Also you can now specify `ipc` or `gpu_device` directly to the `execute`
 method:
 
-``` python
+```python
 t = con_omni.table('functional_alltypes')
 expr = t[['id', 'bool_col']].head(5)
 df = expr.execute(ipc=False, gpu_device=None)
 df
 ```
 
-```{=html}
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<table className="table-horizontal-scroll" border="1">
   <thead>
-    <tr style="text-align: right;">
+    <tr>
       <th></th>
       <th>id</th>
       <th>bool_col</th>
@@ -132,20 +121,20 @@ df
     </tr>
   </tbody>
 </table>
-</div>
-```
 
 As you can imagine, the result of `df` is a `pandas.DataFrame`
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 type(df)
 ```
-
-    pandas.core.frame.DataFrame
+---
+```txt [Out]
+pandas.core.frame.DataFrame
+```
+</CH.Code>
 
 But if you are using `gpu_device` the result would be a `cudf` :)
-
-`<small>`{=html}
 
 > Note: when `IPC=True` is used, the code needs to be executed on the
 > same machine where the database is running
@@ -172,7 +161,7 @@ documentation section.
 Some of the highlighted features for the `PostgreSQL` backend are new
 data types included, such as: `JSON`, `JSONB` and `UUID`.
 
-``` python
+```python
 from uuid import uuid4 
 uuid_value = ibis.literal(uuid4(), type='uuid')
 uuid_value == ibis.literal(uuid4(), type='uuid')
@@ -180,7 +169,7 @@ uuid_value == ibis.literal(uuid4(), type='uuid')
 
 ![A graph showing the relationship between Equals, Left and Right.](/posts/ibis-1.3-release/6a98cb83ec33da5b0824391dc456c3cf654cbd89.png)
 
-``` python
+```python
 import json
 json_value = ibis.literal(json.dumps({"id": 1}), type='json')
 json_value
@@ -188,7 +177,7 @@ json_value
 
 ![Literal pointing at json.](/posts/ibis-1.3-release/29d7d60365fe2da629b5103143e73bfea0b6f39f.png)
 
-``` python
+```python
 jsonb_value = ibis.literal(json.dumps({"id": 1}).encode('utf8'), type='jsonb')
 jsonb_value
 ```
@@ -220,7 +209,7 @@ This new version also includes support for a new backend: **PySpark**!
 Let's do the first steps with this new backend starting with a Spark
 session creation.
 
-``` python
+```python
 import os
 
 import pyspark
@@ -236,7 +225,8 @@ con_pyspark = ibis.pyspark.connect(session=spark_session)
 We can use `spark` or `pandas` for reading from `CSV` file. In this
 example, we will use `pandas`.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 data_directory = Path(
     os.path.join(
         os.path.dirname(ibis.__path__[0]),
@@ -248,35 +238,39 @@ data_directory = Path(
 pd_df_alltypes = pd.read_csv(data_directory / 'functional_alltypes.csv')
 pd_df_alltypes.info()
 ```
-
-    <class 'pandas.core.frame.DataFrame'>
-    RangeIndex: 7300 entries, 0 to 7299
-    Data columns (total 15 columns):
-     #   Column           Non-Null Count  Dtype  
-    ---  ------           --------------  -----  
-     0   index            7300 non-null   int64  
-     1   Unnamed: 0       7300 non-null   int64  
-     2   id               7300 non-null   int64  
-     3   bool_col         7300 non-null   int64  
-     4   tinyint_col      7300 non-null   int64  
-     5   smallint_col     7300 non-null   int64  
-     6   int_col          7300 non-null   int64  
-     7   bigint_col       7300 non-null   int64  
-     8   float_col        7300 non-null   float64
-     9   double_col       7300 non-null   float64
-     10  date_string_col  7300 non-null   object 
-     11  string_col       7300 non-null   int64  
-     12  timestamp_col    7300 non-null   object 
-     13  year             7300 non-null   int64  
-     14  month            7300 non-null   int64  
-    dtypes: float64(2), int64(11), object(2)
-    memory usage: 855.6+ KB
+---
+```txt [Out]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 7300 entries, 0 to 7299
+Data columns (total 15 columns):
+ #   Column           Non-Null Count  Dtype
+---  ------           --------------  -----
+ 0   index            7300 non-null   int64
+ 1   Unnamed: 0       7300 non-null   int64
+ 2   id               7300 non-null   int64
+ 3   bool_col         7300 non-null   int64
+ 4   tinyint_col      7300 non-null   int64
+ 5   smallint_col     7300 non-null   int64
+ 6   int_col          7300 non-null   int64
+ 7   bigint_col       7300 non-null   int64
+ 8   float_col        7300 non-null   float64
+ 9   double_col       7300 non-null   float64
+ 10  date_string_col  7300 non-null   object
+ 11  string_col       7300 non-null   int64
+ 12  timestamp_col    7300 non-null   object
+ 13  year             7300 non-null   int64
+ 14  month            7300 non-null   int64
+dtypes: float64(2), int64(11), object(2)
+memory usage: 855.6+ KB
+```
+</CH.Code>
 
 Now, we can create a Spark DataFrame and we will create a temporary view
 from this data frame. Also we should enforce the desired types for each
 column.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 def pyspark_cast(df, col_types):
     for col, dtype in col_types.items():
         df = df.withColumn(col, df[col].cast(dtype))
@@ -308,12 +302,15 @@ ps_df_alltypes = pyspark_cast(
 ps_df_alltypes.createOrReplaceTempView('functional_alltypes')
 con_pyspark.list_tables()
 ```
-
-    ['functional_alltypes']
+---
+```txt [Out]
+['functional_alltypes']
+```
+</CH.Code>
 
 Check if all columns were created with the desired data type:
 
-``` python
+```python
 t = con_pyspark.table('functional_alltypes')
 t
 ```
@@ -324,50 +321,43 @@ Different than a `SQL` backend, that returns a `SQL` statement, the
 returned `object` from the PySpark `compile` method is a PySpark
 `DataFrame`:
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 expr = t.head()
 expr_comp = expr.compile()
 type(expr_comp)
 ```
+---
+```txt [Out]
+pyspark.sql.dataframe.DataFrame
+```
+</CH.Code>
 
-    pyspark.sql.dataframe.DataFrame
-
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 expr_comp
 ```
-
-    DataFrame[index: int, Unnamed: 0: int, id: int, bool_col: boolean, tinyint_col: tinyint, smallint_col: smallint, int_col: int, bigint_col: bigint, float_col: float, double_col: double, date_string_col: string, string_col: string, timestamp_col: timestamp, year: int, month: int]
+---
+```txt [Out]
+DataFrame[index: int, Unnamed: 0: int, id: int, bool_col: boolean, tinyint_col: tinyint, smallint_col: smallint, int_col: int, bigint_col: bigint, float_col: float, double_col: double, date_string_col: string, string_col: string, timestamp_col: timestamp, year: int, month: int]
+```
+</CH.Code>
 
 To convert the compiled expression to a Pandas `DataFrame`, you can use
 the `toPandas` method. The result should be the same as that returned by
 the `execute` method.
 
-``` python
+```python
 assert all(expr.execute() == expr_comp.toPandas())
 ```
 
-``` python
+```python
 expr.execute()
 ```
 
-```{=html}
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<table className="table-horizontal-scroll" border="1">
   <thead>
-    <tr style="text-align: right;">
+    <tr>
       <th></th>
       <th>index</th>
       <th>Unnamed: 0</th>
@@ -479,13 +469,11 @@ expr.execute()
     </tr>
   </tbody>
 </table>
-</div>
-```
 
 To finish this section, we can play a little bit with some aggregation
 operations.
 
-``` python
+```python
 expr = t
 expr = expr.groupby('string_col').aggregate(
     int_col_mean=t.int_col.mean(),
@@ -495,24 +483,9 @@ expr = expr.groupby('string_col').aggregate(
 expr.execute()
 ```
 
-```{=html}
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<table className="table-horizontal-scroll" border="1">
   <thead>
-    <tr style="text-align: right;">
+    <tr>
       <th></th>
       <th>string_col</th>
       <th>int_col_count</th>
@@ -593,8 +566,6 @@ expr.execute()
     </tr>
   </tbody>
 </table>
-</div>
-```
 
 Check out the PySpark Ibis backend [API
 documentation](https://docs.ibis-project.org/api.html#pyspark-client-experimental)
@@ -609,7 +580,8 @@ backends that support geospatial features.
 In this section we will check some geospatial features using the
 `PostgreSQL` backend.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 con_psql = ibis.postgres.connect(
     host='localhost',
     port=5432,
@@ -619,22 +591,25 @@ con_psql = ibis.postgres.connect(
 )
 con_psql.list_tables()
 ```
-
-    ['array_types',
-     'awards_players',
-     'batting',
-     'diamonds',
-     'films',
-     'functional_alltypes',
-     'geo',
-     'geography_columns',
-     'geometry_columns',
-     'intervals',
-     'not_supported_intervals',
-     'raster_columns',
-     'raster_overviews',
-     'spatial_ref_sys',
-     'tzone']
+---
+```txt [Out]
+['array_types',
+ 'awards_players',
+ 'batting',
+ 'diamonds',
+ 'films',
+ 'functional_alltypes',
+ 'geo',
+ 'geography_columns',
+ 'geometry_columns',
+ 'intervals',
+ 'not_supported_intervals',
+ 'raster_columns',
+ 'raster_overviews',
+ 'spatial_ref_sys',
+ 'tzone']
+```
+</CH.Code>
 
 Two important features are that it support `shape` objects (input) and
 `geopandas` dataframe (output)!
@@ -642,7 +617,7 @@ Two important features are that it support `shape` objects (input) and
 So, let's import `shapely` to create a simple `shape` point and
 polygon.
 
-``` python
+```python
 import shapely
 
 shp_point = shapely.geometry.Point((20, 10))
@@ -651,7 +626,7 @@ shp_point
 
 ![A green dot.](/posts/ibis-1.3-release/fba0adc684226342999e42956c4bb303dedd9595.svg)
 
-``` python
+```python
 shp_polygon_1 = shapely.geometry.Polygon([(20, 10), (40, 30), (40, 20), (20, 10)])
 shp_polygon_1
 ```
@@ -661,30 +636,15 @@ shp_polygon_1
 Now, let's create a Ibis table expression to manipulate a \"geo\"
 table:
 
-``` python
+```python
 t_geo = con_psql.table('geo')
 df_geo = t_geo.execute()
 df_geo
 ```
 
-```{=html}
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<table className="table-horizontal-scroll" border="1">
   <thead>
-    <tr style="text-align: right;">
+    <tr>
       <th></th>
       <th>id</th>
       <th>geo_point</th>
@@ -736,20 +696,22 @@ df_geo
     </tr>
   </tbody>
 </table>
-</div>
-```
 
 And the type of `df_geo` is \... a `geopandas` dataframe!
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 type(df_geo)
 ```
-
-    geopandas.geodataframe.GeoDataFrame
+---
+```txt [Out]
+geopandas.geodataframe.GeoDataFrame
+```
+</CH.Code>
 
 So you can take the advantage of GeoPandas features too!
 
-``` python
+```python
 df_geo.set_geometry('geo_multipolygon').head(1).plot();
 ```
 
@@ -758,31 +720,16 @@ df_geo.set_geometry('geo_multipolygon').head(1).plot();
 Now, let's check if there are any `geo_multipolygon`'s that contain
 the `shape` point we just created.
 
-``` python
+```python
 t_geo[
-    t_geo.geo_multipolygon, 
+    t_geo.geo_multipolygon,
     t_geo['geo_multipolygon'].contains(shp_point).name('contains_point_1')
 ].execute()
 ```
 
-```{=html}
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<table className="table-horizontal-scroll" border="1">
   <thead>
-    <tr style="text-align: right;">
+    <tr>
       <th></th>
       <th>geo_multipolygon</th>
       <th>contains_point_1</th>
@@ -816,8 +763,6 @@ t_geo[
     </tr>
   </tbody>
 </table>
-</div>
-```
 
 So, as expected, just the first two `multipolygon`s contain a `point`
 with coordinates `(20, 10)`.
@@ -849,7 +794,7 @@ Or from conda-forge:
     conda install ibis-framework=1.3.0 -c conda-forge
 
 Check out some interesting tutorials to help you to start on Ibis:
-<https://docs.ibis-project.org/tutorial.html>. If you are coming from
+https://docs.ibis-project.org/tutorial.html. If you are coming from
 the SQL world, maybe [Ibis for SQL
 Programmers](https://docs.ibis-project.org/sql.html) documentation
 section will be helpful. Have fun!
