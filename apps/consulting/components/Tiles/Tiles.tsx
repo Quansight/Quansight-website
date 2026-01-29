@@ -28,7 +28,7 @@ export const Tiles: FC<TTilesProps> = ({ tiles, tileVariant }) => {
       {areValidSectionTiles(slicedTiles?.sectionTop) && (
         <ul className="grid grid-cols-1 gap-[4.2rem] sm:grid-cols-2 sm:gap-x-[2.4rem] sm:gap-y-[3.6rem] lg:grid-cols-3">
           {slicedTiles.sectionTop.map((tile) => (
-            <Tile {...tile} key={tile.uuid} tileVariant={tileVariant} />
+            <Tile {...tile} key={tile.key} tileVariant={tileVariant} />
           ))}
         </ul>
       )}
@@ -36,7 +36,7 @@ export const Tiles: FC<TTilesProps> = ({ tiles, tileVariant }) => {
       {areValidSectionTiles(slicedTiles?.sectionBottom) && (
         <ul className="grid grid-cols-1 gap-[4.2rem] sm:grid-cols-2 sm:gap-x-[2.4rem] sm:gap-y-[3.6rem] lg:grid-cols-3">
           {slicedTiles.sectionBottom.map((tile) => (
-            <Tile {...tile} key={tile.uuid} tileVariant={tileVariant} />
+            <Tile {...tile} key={tile.key} tileVariant={tileVariant} />
           ))}
         </ul>
       )}
