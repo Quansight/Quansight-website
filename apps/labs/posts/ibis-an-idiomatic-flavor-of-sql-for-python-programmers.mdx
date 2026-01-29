@@ -1,6 +1,6 @@
 ---
 title: 'Ibis: an idiomatic flavor of SQL for Python programmers'
-author: tony-fast
+authors: [tony-fast]
 published: June 26, 2020
 description: 'Ibis is an alternative approach using databases that relies on Python rather than SQL experience. This post focuses on writing SQL expressions in Python and how to compose queries visually using Ibis.'
 category: [PyData ecosystem]
@@ -75,12 +75,10 @@ This [baseball
 database](http://www.seanlahman.com/baseball-archive/statistics/) has 29
 distinct tables; we can see by running the following code:
 
-```python
-tables = client.list_tables()
-print(f'This database has {len(tables)} tables.')
-```
-
-    This database has 29 tables.
+<CH.Code className="labs-blog-cell-in-out">
+  ```python [In] tables = client.list_tables() print(f'This database has{' '}
+  {len(tables)} tables.') ``` --- ```txt [Out] This database has 29 tables. ```
+</CH.Code>
 
 ## Selecting and visualizing tables
 
@@ -109,12 +107,12 @@ data. The data itself is inert wherever it's actually located---in this
 case, within the SQLite database. We can verify this by examining their
 types or by using assertions like this:
 
-```python
-print(f'The object appearances has type {type(appearances).__name__}.')
-assert isinstance(halloffame, ibis.expr.types.TableExpr), 'Wrong type for halloffame'
-```
-
-    The object appearances has type TableExpr.
+<CH.Code className="labs-blog-cell-in-out">
+  ```python [In] print(f'The object appearances has type{' '}
+  {type(appearances).__name__}.') assert isinstance(halloffame,
+  ibis.expr.types.TableExpr), 'Wrong type for halloffame' ``` --- ```txt [Out]
+  The object appearances has type TableExpr. ```
+</CH.Code>
 
 We can examine the contents of these Ibis table expressions using the
 [`TableExpr.limit`](https://docs.ibis-project.org/docs/generated/ibis.expr.api.TableExpr.limit.html)
@@ -123,12 +121,11 @@ method](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html)
 That is, we can define an object `sample` that represents a sub-table
 comprising the first few rows of the `halloffame` table:
 
-```python
-sample = halloffame.head()
-print(f'The object sample is of type {type(sample).__name__}')
-```
-
-    The object sample is of type TableExpr
+<CH.Code className="labs-blog-cell-in-out">
+  ```python [In] sample = halloffame.head() print(f'The object sample is of type{' '}
+  {type(sample).__name__}') ``` --- ```txt [Out] The object sample is of type
+  TableExpr ```
+</CH.Code>
 
 Remember, the object `sample` is a `TableExpr` object representing some
 SQL query to extracts a sub-table from a larger table. We can view the
@@ -137,11 +134,12 @@ actual SQL query corresponding to `sample` by compiling it with the
 method](https://docs.ibis-project.org/docs/generated/ibis.expr.api.Expr.compile.html)
 and converting the result to a string:
 
-```python
-str(sample.compile())
-```
-
-    'SELECT t0."ID", t0."playerID", t0.yearid, t0."votedBy", t0.ballots, t0.needed, t0.votes, t0.inducted, t0.category, t0.needed_note \nFROM base.halloffame AS t0\n LIMIT ? OFFSET ?'
+<CH.Code className="labs-blog-cell-in-out">
+  ```python [In] str(sample.compile()) ``` --- ```txt [Out] 'SELECT t0."ID",
+  t0."playerID", t0.yearid, t0."votedBy", t0.ballots, t0.needed, t0.votes,
+  t0.inducted, t0.category, t0.needed_note \nFROM base.halloffame AS t0\n LIMIT
+  ? OFFSET ?' ```
+</CH.Code>
 
 Another useful feature of Ibis is its ability to represent an SQL query
 as a [DAG (Directed Acyclic
@@ -171,32 +169,16 @@ expression sample is a
 `DataFrame`](https://pandas.pydata.org/docs/reference/frame.html)
 object.
 
-```python
-result = sample.execute()
-print(f'The type of result is {type(result).__name__}')
-result    # Leading 5 rows of halloffame table)
-```
+<CH.Code className="labs-blog-cell-in-out">
+  ```python [In] result = sample.execute() print(f'The type of result is{' '}
+  {type(result).__name__}') result # Leading 5 rows of halloffame table) ``` ---
+  ```txt [Out] The type of result is DataFrame ```
+</CH.Code>
 
-    The type of result is DataFrame
-
-```html
 <div>
-  <style scoped>
-    .dataframe tbody tr th:only-of-type {
-      vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-      vertical-align: top;
-    }
-
-    .dataframe thead th {
-      text-align: right;
-    }
-  </style>
-  <table border="1" class="dataframe">
+  <table className="table-horizontal-scroll" border="1">
     <thead>
-      <tr style="text-align: right;">
+      <tr>
         <th></th>
         <th>ID</th>
         <th>playerID</th>
@@ -279,7 +261,6 @@ result    # Leading 5 rows of halloffame table)
     </tbody>
   </table>
 </div>
-```
 
 A similar extraction of the leading five rows from the `appearances`
 table (in one line) gives the following table with 23 columns:
@@ -288,24 +269,10 @@ table (in one line) gives the following table with 23 columns:
 appearances.head().execute()  # Leading 5 rows of appearances table)
 ```
 
-```html
 <div>
-  <style scoped>
-    .dataframe tbody tr th:only-of-type {
-      vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-      vertical-align: top;
-    }
-
-    .dataframe thead th {
-      text-align: right;
-    }
-  </style>
-  <table border="1" class="dataframe">
+  <table className="table-horizontal-scroll" border="1">
     <thead>
-      <tr style="text-align: right;">
+      <tr>
         <th></th>
         <th>ID</th>
         <th>yearID</th>
@@ -455,7 +422,6 @@ appearances.head().execute()  # Leading 5 rows of appearances table)
   </table>
   <p>5 rows × 23 columns</p>
 </div>
-```
 
 ## Filtering and selecting data
 
@@ -472,24 +438,10 @@ expression.
 halloffame.category.value_counts().execute()
 ```
 
-```html
 <div>
-  <style scoped>
-    .dataframe tbody tr th:only-of-type {
-      vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-      vertical-align: top;
-    }
-
-    .dataframe thead th {
-      text-align: right;
-    }
-  </style>
-  <table border="1" class="dataframe">
+  <table className="table-horizontal-scroll" border="1">
     <thead>
-      <tr style="text-align: right;">
+      <tr>
         <th></th>
         <th>category</th>
         <th>count</th>
@@ -519,7 +471,6 @@ halloffame.category.value_counts().execute()
     </tbody>
   </table>
 </div>
-```
 
 There are four different types of entries in this column, most of which
 are `Player`s. To illustrate filtering and selection, we'll create a
@@ -538,24 +489,10 @@ players = halloffame[condition]
 players.execute() # take a look at this table
 ```
 
-```html
 <div>
-  <style scoped>
-    .dataframe tbody tr th:only-of-type {
-      vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-      vertical-align: top;
-    }
-
-    .dataframe thead th {
-      text-align: right;
-    }
-  </style>
-  <table border="1" class="dataframe">
+  <table className="table-horizontal-scroll" border="1">
     <thead>
-      <tr style="text-align: right;">
+      <tr>
         <th></th>
         <th>ID</th>
         <th>playerID</th>
@@ -717,7 +654,6 @@ players.execute() # take a look at this table
   </table>
   <p>4066 rows × 10 columns</p>
 </div>
-```
 
 ## Joining Ibis tables
 
@@ -761,16 +697,12 @@ view](https://en.wikipedia.org/wiki/Materialized_view) (that would be
 required to build new expressions). Without a materialized view, Ibis
 raises an exception (as demonstrated here).
 
-```python
-try:
-    unmaterialized.distinct()
-except Exception as e:
-    print('Unable to execute "unmaterialized.distinct()"')
-    print(repr(e))
-```
-
-    Unable to execute "unmaterialized.distinct()"
-    IbisError('Table operation is not yet materialized')
+<CH.Code className="labs-blog-cell-in-out">
+  ```python [In] try: unmaterialized.distinct() except Exception as e:
+  print('Unable to execute "unmaterialized.distinct()"') print(repr(e)) ``` ---
+  ```txt [Out] Unable to execute "unmaterialized.distinct()" IbisError('Table
+  operation is not yet materialized') ```
+</CH.Code>
 
 The [`distinct`
 method](https://docs.ibis-project.org/docs/generated/ibis.expr.api.TableExpr.distinct.html#ibis.expr.api.TableExpr.distinct)
@@ -793,24 +725,10 @@ rows of our joined data (notice the result has 31 columns).
 join.head().execute()
 ```
 
-```html
 <div>
-  <style scoped>
-    .dataframe tbody tr th:only-of-type {
-      vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-      vertical-align: top;
-    }
-
-    .dataframe thead th {
-      text-align: right;
-    }
-  </style>
-  <table border="1" class="dataframe">
+  <table className="table-horizontal-scroll" border="1">
     <thead>
-      <tr style="text-align: right;">
+      <tr>
         <th></th>
         <th>ID</th>
         <th>playerID</th>
@@ -960,34 +878,23 @@ join.head().execute()
   </table>
   <p>5 rows × 31 columns</p>
 </div>
-```
 
 Ibis supports other join strategies as methods of the class `TableExpr`.
 The following list comprehension shows us what they are.
 
-```python
-[method_name for method_name in dir(players) if 'join' in method_name]
-```
-
-    ['anti_join',
-     'any_inner_join',
-     'any_left_join',
-     'asof_join',
-     'cross_join',
-     'inner_join',
-     'join',
-     'left_join',
-     'outer_join',
-     'semi_join']
+<CH.Code className="labs-blog-cell-in-out">
+  ```python [In] [method_name for method_name in dir(players) if 'join' in
+  method_name] ``` --- ```txt [Out] ['anti_join', 'any_inner_join',
+  'any_left_join', 'asof_join', 'cross_join', 'inner_join', 'join', 'left_join',
+  'outer_join', 'semi_join'] ```
+</CH.Code>
 
 ## Executing an expression
 
 We'll now expand the expression `join` as a Pandas DataFrame object.
 We'll use this DataFrame to answer the following question:
 
-```html
 <center>How many pitchers have been inducted into the hall of fame?</center>
-```
 
 Some of the \"hitters\" have also been \"pitchers\", so we'll need to
 filter out rows corresponding to those appearances from the table
@@ -1021,37 +928,20 @@ df = grouped_pitchers.execute().set_index('inducted yearID'.split())
 df
 ```
 
-```html
 <div>
-  <style scoped>
-    .dataframe tbody tr th:only-of-type {
-      vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-      vertical-align: top;
-    }
-
-    .dataframe thead th {
-      text-align: right;
-    }
-  </style>
-  <table border="1" class="dataframe">
+  <table className="table-horizontal-scroll" border="1">
     <thead>
-      <tr style="text-align: right;">
-        <th></th>
-        <th></th>
-        <th>count</th>
-      </tr>
       <tr>
         <th>inducted</th>
         <th>yearID</th>
-        <th></th>
+        <th>count</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th rowspan="5" valign="top">N</th>
+        <th rowSpan="5" valign="top">
+          N
+        </th>
         <th>1936</th>
         <td>105</td>
       </tr>
@@ -1077,7 +967,9 @@ df
         <td>...</td>
       </tr>
       <tr>
-        <th rowspan="5" valign="top">Y</th>
+        <th rowSpan="5" valign="top">
+          Y
+        </th>
         <th>2014</th>
         <td>3</td>
       </tr>
@@ -1101,7 +993,6 @@ df
   </table>
   <p>150 rows × 1 columns</p>
 </div>
-```
 
 The dataframe `df` has counts of the number of pitchers who were
 (`inducted` index `'Y'`) and were not (`inducted` index `'N'`) inducted
@@ -1116,30 +1007,12 @@ count_inducted_pitchers = df.loc['Y'].fillna(0).rename({'count':'Inducted pitche
 count_inducted_pitchers
 ```
 
-```html
 <div>
-  <style scoped>
-    .dataframe tbody tr th:only-of-type {
-      vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-      vertical-align: top;
-    }
-
-    .dataframe thead th {
-      text-align: right;
-    }
-  </style>
-  <table border="1" class="dataframe">
+  <table className="table-horizontal-scroll" border="1">
     <thead>
-      <tr style="text-align: right;">
-        <th></th>
-        <th>count</th>
-      </tr>
       <tr>
         <th>yearID</th>
-        <th></th>
+        <th>count</th>
       </tr>
     </thead>
     <tbody>
@@ -1191,7 +1064,6 @@ count_inducted_pitchers
   </table>
   <p>76 rows × 1 columns</p>
 </div>
-```
 
 The Pandas `DataFrame` & `Series` classes have a convenient plotting
 interface. We'll use a dictionary `options` to specify keyword
