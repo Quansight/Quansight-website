@@ -49,3 +49,9 @@
 .ch-editor-frame > .ch-frame-title-bar:first-child > .ch-editor-tab {
   border-radius: 0 6px 0 0;
 }
+
+/* Scrollable table container */
+table.table-horizontal-scroll {
+  overflow-x: auto;
+  display: block;
+}
