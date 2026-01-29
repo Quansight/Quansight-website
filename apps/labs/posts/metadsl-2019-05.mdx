@@ -1,11 +1,11 @@
 ---
 title: "`metadsl`: A Framework for Domain Specific Languages in Python"
-author: saul-shanabrook
+authors: [saul-shanabrook]
 published: May 31, 2019
 description: 'metadsl is meant to be a place to come together to build a framework for DSLs in Python. It provides a way to seperate the user experience from the the specific of execution, to enable consistency and flexibility for users. In this post, I will go through an example of creating a very basic DSL.'
 category: [Beyond PyData]
 featuredImage:
-  src: /posts/metadsl/blog_feature_org.svg
+  src: /posts/metadsl/blog_feature_org.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/metadsl/blog_hero_org.svg
@@ -107,20 +107,25 @@ class Expression:
 
 We can create an expression that adds the two variables `"a"` and `"b"`:
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 a = Expression(from_str, ("a",))
 b = Expression(from_str, ("b",))
 
 Expression(add, (a, b))
 ```
-
-    add(from_str('a'), from_str('b'))
+---
+```txt [Out]
+add(from_str('a'), from_str('b'))
+```
+</CH.Code>
 
 It would be more natural to be able to call the functions themselves to
 build up expressions. So let\'s rewrite the functions so they return
 expressions:
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 def from_str(s):
     return Expression(from_str, (s,))
 
@@ -129,8 +134,11 @@ def add(a, b):
 
 add(from_str("a"), from_str("b"))
 ```
-
-    add(from_str('a'), from_str('b'))
+---
+```txt [Out]
+add(from_str('a'), from_str('b'))
+```
+</CH.Code>
 
 You might notice that we are actually repeating ourselves a bit here. In
 each function, we repeat the function name and the argument names.
@@ -184,24 +192,32 @@ def from_str(s):
 We now have a concise way of defining operations that has a Pythonic
 API:
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 mult(from_str("a"), from_str("b"))
 ```
-
-    mult(from_str('a'), from_str('b'))
+---
+```txt [Out]
+mult(from_str('a'), from_str('b'))
+```
+</CH.Code>
 
 ## Adding Typing
 
 Now we can build up these expressions naturally, but there are some
 expressions that should not be allowed, for example:
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 some_bool = equal(from_str("a"), from_str("b"))
 
 mult(some_bool, some_bool)
 ```
-
-    mult(equal(from_str('a'), from_str('b')), equal(from_str('a'), from_str('b')))
+---
+```txt [Out]
+mult(equal(from_str('a'), from_str('b')), equal(from_str('a'), from_str('b')))
+```
+</CH.Code>
 
 We don\'t want to allow multiplying booleans in our language, only
 numbers. So this brings us to *types*. Types gives us an explicit and
@@ -272,11 +288,15 @@ class Number(Expression):
         ...
 ```
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 (Number.from_int(10) + Number.from_str("A")) == Number.from_int(10)
 ```
-
-    Number.__eq__(Number.from_int(10), Number.__add__(Number.from_int(10), Number.from_str('A')))
+---
+```txt [Out]
+Number.__eq__(Number.from_int(10), Number.__add__(Number.from_int(10), Number.from_str('A')))
+```
+</CH.Code>
 
 ## Next Steps
 
