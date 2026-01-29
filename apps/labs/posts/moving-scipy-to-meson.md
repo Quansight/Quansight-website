@@ -1,7 +1,7 @@
 ---
 title: 'Moving SciPy to the Meson build system'
 published: July 25, 2021
-author: ralf-gommers
+authors: [ralf-gommers]
 description: 'SciPy now builds with Meson on Linux, and the full test suite passes!
 This is a pretty exciting milestone, and good news for SciPy maintainers and
 contributors - they can look forward to much faster builds and a more

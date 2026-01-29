@@ -1,11 +1,11 @@
 ---
 title: 'Welcoming Tania Allard as Quansight Labs co-director'
 published: January 04, 2021
-author: ralf-gommers
+authors: [ralf-gommers]
 description: "Today I'm incredibly excited to welcome Tania Allard to Quansight as Co-Director of Quansight Labs. Tania is a well-known and prolific PyData community member. In the past few years she has been involved as a conference organizer (JupyterCon, SciPy, PyJamas, PyCon UK, PyCon LatAm, JuliaCon and more), as a community builder (PyLadies, NumFOCUS, RForwards), as a contributor to Matplotlib and Jupyter, and as a regular speaker and mentor. She also brings relevant experience in both industry and academia - she joins us from Microsoft where she was a senior developer advocate, and has a PhD in computational modelling."
 category: [Community]
 featuredImage:
-  src: /posts/welcome-tania-allard-as-labs-codirector/blog_feature_var1.svg
+  src: /posts/welcome-tania-allard-as-labs-codirector/blog_feature_var1.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/welcome-tania-allard-as-labs-codirector/blog_hero_var1.svg

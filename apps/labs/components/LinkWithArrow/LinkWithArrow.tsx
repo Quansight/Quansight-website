@@ -10,8 +10,8 @@ export const LinkWithArrow: FC<LinkWithArrowProps> = ({
   ...restProps
 }) => {
   return (
-    <Link {...restProps}>
-      <a className="text-[1.4rem] font-normal leading-[2.7rem]">
+    <Link {...restProps} className="text-[1.4rem] font-normal leading-[2.7rem]">
+      <>
         <span className="mr-[1rem]">
           <Image
             src="/arrow-left.svg"
@@ -22,7 +22,7 @@ export const LinkWithArrow: FC<LinkWithArrowProps> = ({
           />
         </span>
         {children}
-      </a>
+      </>
     </Link>
   );
 };

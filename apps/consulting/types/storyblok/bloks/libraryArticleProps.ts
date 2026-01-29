@@ -1,10 +1,11 @@
-import { PageItem, FooterItem, HeaderItem } from '../../../api/types/basic';
+import { FooterItem, HeaderItem } from '../../../api/types/basic';
+import { TPost } from './blogPost';
 import { TTiles } from './libraryProps';
 
 export type TLibraryArticleProps = {
-  data: PageItem;
+  post: TPost;
   header: HeaderItem;
   footer: FooterItem;
-  moreArticles: TTiles;
+  featuredPosts: TTiles;
   preview: boolean;
 };

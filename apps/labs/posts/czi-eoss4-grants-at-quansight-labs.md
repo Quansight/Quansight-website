@@ -1,11 +1,11 @@
 ---
 title: 'CZI EOSS4 Grants at Quansight Labs'
 published: August 31, 2021
-author: ralf-gommers
+authors: [ralf-gommers]
 description: 'We are thrilled to announce that the team at Quansight Labs has been awarded five EOSS Cycle 4 grants to work on several projects within the PyData ecosystem. This post will introduce the successful grantees and their objectives for these two-year long grants.'
 category: [Access-centered, Developer workflows, Funding, OSS Experience, PyData Ecosystem]
 featuredImage:
-  src: /posts/czi-eoss4-grants-at-quansight-labs/blog_feature_org.svg
+  src: /posts/czi-eoss4-grants-at-quansight-labs/blog_feature_org.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/czi-eoss4-grants-at-quansight-labs/blog_hero_org.svg
