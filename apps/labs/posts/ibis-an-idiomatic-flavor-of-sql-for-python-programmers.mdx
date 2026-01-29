@@ -76,8 +76,14 @@ database](http://www.seanlahman.com/baseball-archive/statistics/) has 29
 distinct tables; we can see by running the following code:
 
 <CH.Code className="labs-blog-cell-in-out">
-  ```python [In] tables = client.list_tables() print(f'This database has{' '}
-  {len(tables)} tables.') ``` --- ```txt [Out] This database has 29 tables. ```
+```python [In]
+tables = client.list_tables()
+print(f'This database has {len(tables)} tables.')
+```
+---
+```txt [Out]
+This database has 29 tables.
+```
 </CH.Code>
 
 ## Selecting and visualizing tables
@@ -108,10 +114,14 @@ case, within the SQLite database. We can verify this by examining their
 types or by using assertions like this:
 
 <CH.Code className="labs-blog-cell-in-out">
-  ```python [In] print(f'The object appearances has type{' '}
-  {type(appearances).__name__}.') assert isinstance(halloffame,
-  ibis.expr.types.TableExpr), 'Wrong type for halloffame' ``` --- ```txt [Out]
-  The object appearances has type TableExpr. ```
+```python [In]
+print(f'The object appearances has type {type(appearances).__name__}.')
+assert isinstance(halloffame, ibis.expr.types.TableExpr), 'Wrong type for halloffame'
+```
+---
+```txt [Out]
+The object appearances has type TableExpr.
+```
 </CH.Code>
 
 We can examine the contents of these Ibis table expressions using the
@@ -122,9 +132,14 @@ That is, we can define an object `sample` that represents a sub-table
 comprising the first few rows of the `halloffame` table:
 
 <CH.Code className="labs-blog-cell-in-out">
-  ```python [In] sample = halloffame.head() print(f'The object sample is of type{' '}
-  {type(sample).__name__}') ``` --- ```txt [Out] The object sample is of type
-  TableExpr ```
+```python [In]
+sample = halloffame.head()
+print(f'The object sample is of type {type(sample).__name__}')
+```
+---
+```txt [Out]
+The object sample is of type TableExpr
+```
 </CH.Code>
 
 Remember, the object `sample` is a `TableExpr` object representing some
@@ -135,10 +150,13 @@ method](https://docs.ibis-project.org/docs/generated/ibis.expr.api.Expr.compile.
 and converting the result to a string:
 
 <CH.Code className="labs-blog-cell-in-out">
-  ```python [In] str(sample.compile()) ``` --- ```txt [Out] 'SELECT t0."ID",
-  t0."playerID", t0.yearid, t0."votedBy", t0.ballots, t0.needed, t0.votes,
-  t0.inducted, t0.category, t0.needed_note \nFROM base.halloffame AS t0\n LIMIT
-  ? OFFSET ?' ```
+```python [In]
+str(sample.compile())
+```
+---
+```txt [Out]
+'SELECT t0."ID", t0."playerID", t0.yearid, t0."votedBy", t0.ballots, t0.needed, t0.votes, t0.inducted, t0.category, t0.needed_note \nFROM base.halloffame AS t0\n LIMIT ? OFFSET ?'
+```
 </CH.Code>
 
 Another useful feature of Ibis is its ability to represent an SQL query
@@ -170,9 +188,15 @@ expression sample is a
 object.
 
 <CH.Code className="labs-blog-cell-in-out">
-  ```python [In] result = sample.execute() print(f'The type of result is{' '}
-  {type(result).__name__}') result # Leading 5 rows of halloffame table) ``` ---
-  ```txt [Out] The type of result is DataFrame ```
+```python [In]
+result = sample.execute()
+print(f'The type of result is {type(result).__name__}')
+result    # Leading 5 rows of halloffame table)
+```
+---
+```txt [Out]
+The type of result is DataFrame
+```
 </CH.Code>
 
 <div>
@@ -698,10 +722,18 @@ required to build new expressions). Without a materialized view, Ibis
 raises an exception (as demonstrated here).
 
 <CH.Code className="labs-blog-cell-in-out">
-  ```python [In] try: unmaterialized.distinct() except Exception as e:
-  print('Unable to execute "unmaterialized.distinct()"') print(repr(e)) ``` ---
-  ```txt [Out] Unable to execute "unmaterialized.distinct()" IbisError('Table
-  operation is not yet materialized') ```
+```python [In]
+try:
+    unmaterialized.distinct()
+except Exception as e:
+    print('Unable to execute "unmaterialized.distinct()"')
+    print(repr(e))
+```
+---
+```txt [Out]
+Unable to execute "unmaterialized.distinct()"
+IbisError('Table operation is not yet materialized')
+```
 </CH.Code>
 
 The [`distinct`
@@ -883,10 +915,22 @@ Ibis supports other join strategies as methods of the class `TableExpr`.
 The following list comprehension shows us what they are.
 
 <CH.Code className="labs-blog-cell-in-out">
-  ```python [In] [method_name for method_name in dir(players) if 'join' in
-  method_name] ``` --- ```txt [Out] ['anti_join', 'any_inner_join',
-  'any_left_join', 'asof_join', 'cross_join', 'inner_join', 'join', 'left_join',
-  'outer_join', 'semi_join'] ```
+```python [In]
+[method_name for method_name in dir(players) if 'join' in method_name]
+```
+---
+```txt [Out]
+['anti_join',
+ 'any_inner_join',
+ 'any_left_join',
+ 'asof_join',
+ 'cross_join',
+ 'inner_join',
+ 'join',
+ 'left_join',
+ 'outer_join',
+ 'semi_join']
+```
 </CH.Code>
 
 ## Executing an expression
@@ -939,9 +983,7 @@ df
     </thead>
     <tbody>
       <tr>
-        <th rowSpan="5" valign="top">
-          N
-        </th>
+        <th rowSpan="5" valign="top">N</th>
         <th>1936</th>
         <td>105</td>
       </tr>
@@ -967,9 +1009,7 @@ df
         <td>...</td>
       </tr>
       <tr>
-        <th rowSpan="5" valign="top">
-          Y
-        </th>
+        <th rowSpan="5" valign="top">Y</th>
         <th>2014</th>
         <td>3</td>
       </tr>
