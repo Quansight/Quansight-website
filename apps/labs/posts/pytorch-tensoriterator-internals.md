@@ -1,7 +1,7 @@
 ---
 title: 'PyTorch TensorIterator Internals'
 published: April 13, 2020
-author: sameer-deshmukh
+authors: [sameer-deshmukh]
 description: 'This post is a deep dive into how TensorIterator works, and is an essential part of learning to contribute to the PyTorch codebase since iterations over tensors in the C++ codebase are extremely commonplace. This post is aimed at someone who wants to contribute to PyTorch'
 category: [Machine Learning]
 featuredImage:

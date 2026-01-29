@@ -18,7 +18,6 @@ export type Scalars = {
   Int: number;
   Float: number;
   BlockScalar: any;
-  /** An ISO 8601-encoded datetime */
   ISO8601DateTime: any;
   JsonScalar: any;
 };
@@ -318,10 +317,12 @@ export type PageComponent = {
   body: Maybe<Scalars['BlockScalar']>;
   component: Maybe<Scalars['String']>;
   description: Maybe<Scalars['String']>;
+  keywords: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
 };
 
 export type PageFilterQuery = {
+  keywords: InputMaybe<FilterQueryOperations>;
   title: InputMaybe<FilterQueryOperations>;
 };
 

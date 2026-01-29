@@ -6,7 +6,13 @@ import { useRouter } from 'next/router';
 import ReactPaginate, { ReactPaginateProps } from 'react-paginate';
 
 import { DomainVariant } from '@quansight/shared/types';
-import { Footer, Header, Layout, SEO } from '@quansight/shared/ui-components';
+import {
+  Footer,
+  Header,
+  Layout,
+  SEO,
+  SocialCard,
+} from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
 import {
@@ -140,6 +146,11 @@ const BlogListPage: FC<BlogListPageProps> = ({
         description={data.content.description}
         variant={DomainVariant.Labs}
       />
+      <SocialCard
+        title={data.content.title}
+        description={data.content.description}
+        variant={DomainVariant.Labs}
+      />
       {isPageType(data?.content?.component) && (
         <Page data={data} preview={preview}>
           {(blok: TRawBlok) => <BlokProvider blok={blok} />}
@@ -212,9 +223,7 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
   const { items } = await getAllPosts(preview);
   const data = await getPage({ slug: 'blog', relations: '' }, preview);
 
-  
-  /* TODO: RSS build is broken and needs fixing */
-  // await generateRSS(items);
+  await generateRSS(items);
 
   return {
     props: {

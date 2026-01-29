@@ -15,3 +15,7 @@
 # Brian as default reviewer for changes to LLC Storyblok content
 # Kate/others to be manually added as appropriate
 /apps/consulting/CHANGELOG.md   @bskinn
+
+# Brian as default reviewer for Consulting blogs and assets
+/apps/consulting/posts          @bskinn
+/apps/consulting/public/posts   @bskinn
