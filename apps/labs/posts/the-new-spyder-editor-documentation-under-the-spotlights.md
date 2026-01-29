@@ -3,7 +3,7 @@ title: 'The new Spyder Editor documentation under the spotlights!'
 published: November 15, 2022
 authors: [hanan-younes]
 description: 'In this blogpost, I share my experience as a Google Season of Docs 2022 technical writer working on updating the Editor user documentation.'
-category: [Community, OSS Experience]
+category: [Community, OSS Experience, Documentation]
 featuredImage:
   src: /posts/the-new-spyder-editor-documentation-under-the-spotlights/blog_feature_var3.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'

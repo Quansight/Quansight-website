@@ -3,7 +3,7 @@ title: 'Introduction to Design in Open Source'
 published: November 18, 2020
 authors: [isabela-presedo-floyd]
 description: "This blog post is a conversation between two contributors, sharing their observations, experiences, and their hope for a stronger collaboration between design and development in open source."
-category: [Developer workflows, OSS Experience]
+category: [Developer workflows, OSS Experience, Design]
 featuredImage:
   src: /posts/design_in_open_source/blog_feature_var2.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
