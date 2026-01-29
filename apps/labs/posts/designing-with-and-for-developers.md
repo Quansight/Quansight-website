@@ -1,11 +1,11 @@
 ---
 title: 'Designing with and for developers'
 published: August 05, 2020
-author: isabela-presedo-floyd
+authors: [isabela-presedo-floyd]
 description: "Open source is notorious for lack of design presence, enough so that my search to prove this fact has turned up nearly nothing. Once I learned I shouldn’t expect that everyone on my team knows what they want from the design process, here’s what helped me move forward and collaborate with developers successfully."
 category: [OSS Experience]
 featuredImage:
-  src: /posts/designing-with-and-for-developers/blog_feature_var1.svg
+  src: /posts/designing-with-and-for-developers/blog_feature_var1.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/designing-with-and-for-developers/blog_hero_var1.svg

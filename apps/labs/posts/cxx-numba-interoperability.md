@@ -1,11 +1,11 @@
 ---
 title: 'An efficient method of calling C++ functions from numba using clang++/ctypes/rbc'
 published: October 19, 2021
-author: pearu-peterson
+authors: [pearu-peterson]
 description: 'An exploration of a method to call C++ libarary function from Numba compiled functions, i.e. python function that are decorated with "numba.jit(nopython=True)"'
 category: [Beyond PyData, PyData ecosystem]
 featuredImage:
-  src: /posts/cxx-numba-interoperability/blog_feature_var2.svg
+  src: /posts/cxx-numba-interoperability/blog_feature_var2.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/cxx-numba-interoperability/blog_hero_var2.svg
@@ -147,7 +147,7 @@ optional arguments:
 Next, let us consider the following C++ header and source file that we
 will use as a model of a C++ library:
 
-```c++
+```cpp
 /* File: foo.hpp */
 #include <iostream>
 int foo(int a);
@@ -202,7 +202,7 @@ Notice that the generated [cxx2py_libfoo.cpp](/posts/cxx-numba-interoperability/
 contains light-weight C functions for returning the addresses of C++
 functions:
 
-```c++
+```cpp
 #include <memory>
 #include <cstdint>
 #include "foo.hpp"

@@ -1,11 +1,11 @@
 ---
 title: 'Low-code contributions through GitHub'
 published: September 28, 2021
-author: isabela-presedo-floyd
+authors: [isabela-presedo-floyd]
 description: "Low-code contribution workshops offer a way for folks to join a project's contributors list without the technical overhead. In this blog we present a workshop format that relies solely on the GitHub web interface."
 category: [Access-centered, Community, OSS Experience]
 featuredImage:
-  src: /posts/low-code-workshop/blog_feature_org.svg
+  src: /posts/low-code-workshop/blog_feature_org.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/low-code-workshop/blog_hero_var2.svg

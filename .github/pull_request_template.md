@@ -10,6 +10,7 @@ Thank you for submitting a blog post! We want to make sure content produced for 
 
 ## Non-text contents
 
+- [ ] Blog post featured image is in PNG or JPEG format, **not** SVG.
 - [ ] All content is represented as text (for example, images need alt text and videos need captions or descriptive transcripts).
 - [ ] If there are emojis, there are not more than three in a row.
 - [ ] Don't use [flashing gifs or videos](https://www.w3.org/TR/UNDERSTANDING-WCAG20/seizure-does-not-violate.html).

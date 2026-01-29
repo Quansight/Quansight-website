@@ -1,11 +1,11 @@
 ---
 title: 'Spyder 4.0 takes a big step closer with the release of Beta 2!'
 published: May 21, 2019
-author: gonzalo-pena-castellanos
+authors: [gonzalo-pena-castellanos]
 description: 'This is the first of a series of blog posts we will be writing to showcase updates on the development of Spyder, new planned features and news on the road to Spyder 4.0 and beyond.'
 category: [IDEs]
 featuredImage:
-  src: /posts/release-spyder-4beta2/blog_feature_var1.svg
+  src: /posts/release-spyder-4beta2/blog_feature_var1.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/release-spyder-4beta2/blog_hero_var1.svg
