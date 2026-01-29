@@ -1,6 +1,6 @@
 ---
 title: 'Supporting the Foundations: Announcing the 2025 Quansight OSS Fund Recipients'
-published: January 26, 2026
+published: January 29, 2026
 authors: [ralf-gommers]
 description: 'Announcement of our second yearly OSS Fund and its awardees'
 category: [Community, Funding]
@@ -67,22 +67,17 @@ The funds are unrestricted, which we know from personal experience can be quite
 valuable. Unlike grants, consulting contracts, and most other sources of income,
 the money can be spent on any purpose and without needing to be spent on a
 timeline. We are delighted to see recipients share how they plan to use the
-funds of course. Ariadne Conill, pkgconf maintainer, said:
+funds of course. Romain Thomas, LIEF maintainer, shared:
 
-> These funds will be very helpful for getting the remaining SBOM work over
-> the line.
+> I plan to use this funding to improve our internal CI by adding a new
+> Windows ARM64 runner and an additional Linux runner.
 
-Ned Batchelder, coverage.py maintainer, writes on his sponsorship profile:
+And Ned Batchelder, coverage.py maintainer, writes on his sponsorship profile:
 
 > I do a few different things in the Python world: I maintain a few software
 > projects, notably coverage.py, the Python coverage testing tool. [...]
 > Sponsorship money will enable and encourage me to keep doing all those
 > things.
-
-And Romain Thomas, LIEF maintainer, shared:
-
-> I plan to use this funding to improve our internal CI by adding a new
-> Windows ARM64 runner and an additional Linux runner.
 
 ## How we select recipients
 
