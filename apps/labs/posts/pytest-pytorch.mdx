@@ -1,22 +1,20 @@
 ---
 title: "Working with pytest on PyTorch"
-author: philip-meier
+authors: [philip-meier]
 published: Jun 23, 2021
 description: 'PyTorch has an extensive test suite with a lot of configuration options and auto-generated tests. Internally, PyTorch uses a TestCase class that is derived from unittest.TestCase. In the first part of the post we are going to explore how the auto-generation of tests works in the PyTorch test suite and how they are collected by pytest.'
 category: [Machine Learning, Developer Workflows]
 featuredImage:
-  src: /posts/pytest-pytorch/blog_feature_var2.svg
+  src: /images/blog_feature_var2.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/pytest-pytorch/blog_hero_org.svg
   imageAlt: 'An illustration of a white hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 ---
 
-```{=ipynb}
 <details>
 <summary>Prerequisites</summary>
 <p>
-```
 
 To run the code in this post yourself, make sure you have
 [`torch`](https://pypi.org/project/torch/),
@@ -25,7 +23,9 @@ introduced
 [`pytest-pytorch`](https://github.com/Quansight/pytest-pytorch)
 installed.
 
-    pip install torch 'ipytest>0.9' pytest-pytorch
+```bash
+pip install torch 'ipytest>0.9' pytest-pytorch
+```
 
 Before we start testing, we need to configure
 [`ipytest`](https://github.com/chmp/ipytest). We use the
@@ -34,7 +34,7 @@ as base and add some [`pytest` CLI
 flags](https://docs.pytest.org/en/stable/reference.html#command-line-flags)
 in order to get a concise output.
 
-``` python
+```python
 import ipytest
 
 ipytest.autoconfig(defopts=False)
@@ -58,10 +58,8 @@ def disable_pytest_pytorch(collect_only=False):
 disable_pytest_pytorch()
 ```
 
-```{=ipynb}
 </p>
 </details>
-```
 
 If you work on [PyTorch](https://pytorch.org) and like
 [`pytest`](https://pytest.org) you may have noticed that you cannot run
@@ -69,7 +67,8 @@ some tests in the test suite using the default
 [`pytest`](https://pytest.org) double colon syntax
 `{MODULE}::TestFoo::test_bar`.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest[clean] {MODULE}::TestFoo::test_bar
 
 from torch.testing._internal.common_utils import TestCase
@@ -79,14 +78,17 @@ class TestFoo(TestCase):
     def test_bar(self, device):
         assert False, "Don't worry, this is supposed to happen!"
 
-    
+
 instantiate_device_type_tests(TestFoo, globals(), only_for=["cpu"])
 ```
+---
+```txt [Out]
+1 warning in 0.01s
 
-    1 warning in 0.01s
-
-    ERROR: not found: /home/user/tmp35zsok9u.py::TestFoo::test_bar
-    (no name '/home/user/tmp35zsok9u.py::TestFoo::test_bar' in any of [<Module tmp35zsok9u.py>])
+ERROR: not found: /home/user/tmp35zsok9u.py::TestFoo::test_bar
+(no name '/home/user/tmp35zsok9u.py::TestFoo::test_bar' in any of [<Module tmp35zsok9u.py>])
+```
+</CH.Code>
 
 If the absence of this very basic [`pytest`](https://pytest.org) feature
 has ever been the source of frustration for you, you don\'t need to
@@ -94,40 +96,48 @@ worry anymore. By installing the
 [`pytest-pytorch`](https://github.com/Quansight/pytest-pytorch) plugin
 with
 
-    pip install pytest-pytorch
+```bash
+pip install pytest-pytorch
+```
 
 or
 
-    conda install -c conda-forge pytest-pytorch
+```bash
+conda install -c conda-forge pytest-pytorch
+```
 
 you get the default [`pytest`](https://pytest.org) experience back even
 if your workflow involves running tests from within your IDE!
 
-``` python
+```python
 enable_pytest_pytorch()
 ```
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest {MODULE}::TestFoo::test_bar
-                
+
 pass
 ```
+---
+```txt [Out]
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________________________ TestFooCPU.test_bar_cpu ____________________________
 
-    F                                                                        [100%]
-    =================================== FAILURES ===================================
-    ___________________________ TestFooCPU.test_bar_cpu ____________________________
+self = <__main__.TestFooCPU testMethod=test_bar_cpu>, device = 'cpu'
 
-    self = <__main__.TestFooCPU testMethod=test_bar_cpu>, device = 'cpu'
+    def test_bar(self, device):
+>       assert False, "Don't worry, this is supposed to happen!"
+E       AssertionError: Don't worry, this is supposed to happen!
+E       assert False
 
-        def test_bar(self, device):
-    >       assert False, "Don't worry, this is supposed to happen!"
-    E       AssertionError: Don't worry, this is supposed to happen!
-    E       assert False
-
-    <ipython-input-2-f22a5e9e7b30>:7: AssertionError
-    =========================== short test summary info ============================
-    FAILED tmpt8c1r46_.py::TestFooCPU::test_bar_cpu - AssertionError: Don't worry...
-    1 failed, 1 warning in 0.17s
+<ipython-input-2-f22a5e9e7b30>:7: AssertionError
+=========================== short test summary info ============================
+FAILED tmpt8c1r46_.py::TestFooCPU::test_bar_cpu - AssertionError: Don't worry...
+1 failed, 1 warning in 0.17s
+```
+</CH.Code>
 
 As you can see, with
 [`pytest-pytorch`](https://github.com/Quansight/pytest-pytorch) enabled,
@@ -152,11 +162,12 @@ test suite and how they are collected by [`pytest`](https://pytest.org).
 In its default definition [PyTorch](https://pytorch.org)\'s `TestCase`
 behaves exactly like its base class with regards to test collection.
 
-``` python
+```python
 disable_pytest_pytorch(collect_only=True)
 ```
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest[clean] {MODULE}
 
 from torch.testing._internal.common_utils import TestCase
@@ -168,11 +179,14 @@ class TestFoo(TestCase):
     def test_baz(self):
         pass
 ```
+---
+```txt [Out]
+tmpy90fpw2t.py::TestFoo::test_bar
+tmpy90fpw2t.py::TestFoo::test_baz
 
-    tmpy90fpw2t.py::TestFoo::test_bar
-    tmpy90fpw2t.py::TestFoo::test_baz
-
-    2 tests collected in 0.04s
+2 tests collected in 0.04s
+```
+</CH.Code>
 
 ### Device parametrization
 
@@ -184,7 +198,8 @@ writing the same test for multiple `device`\'s, the possible devices are
 used as parameters for the test. In [PyTorch](https://pytorch.org) this
 is done with the `instantiate_device_type_tests` function.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest[clean] {MODULE}
 
 from torch.testing._internal.common_utils import TestCase
@@ -197,16 +212,19 @@ class TestFoo(TestCase):
     def test_baz(self, device):
         pass
 
-    
+
 instantiate_device_type_tests(TestFoo, globals(), only_for=["cpu", "cuda"])
 ```
+---
+```txt [Out]
+tmpyt_bxm9e.py::TestFooCPU::test_bar_cpu
+tmpyt_bxm9e.py::TestFooCPU::test_baz_cpu
+tmpyt_bxm9e.py::TestFooCUDA::test_bar_cuda
+tmpyt_bxm9e.py::TestFooCUDA::test_baz_cuda
 
-    tmpyt_bxm9e.py::TestFooCPU::test_bar_cpu
-    tmpyt_bxm9e.py::TestFooCPU::test_baz_cpu
-    tmpyt_bxm9e.py::TestFooCUDA::test_bar_cuda
-    tmpyt_bxm9e.py::TestFooCUDA::test_baz_cuda
-
-    4 tests collected in 0.01s
+4 tests collected in 0.01s
+```
+</CH.Code>
 
 As the name implies, `instantiate_device_type_tests` uses the passed
 test case as template to instantiate new test cases from it for the
@@ -242,7 +260,8 @@ Note that we can only use the `@dtypes` decorator if templating is
 enabled, which means that we have to use
 `instantiate_device_type_tests`.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest[clean] {MODULE}
 
 import torch
@@ -260,11 +279,14 @@ class TestFoo(TestCase):
 
 instantiate_device_type_tests(TestFoo, globals(), only_for="cpu")
 ```
+---
+```txt [Out]
+tmpttnibud4.py::TestFooCPU::test_bar_cpu_float32
+tmpttnibud4.py::TestFooCPU::test_bar_cpu_int32
 
-    tmpttnibud4.py::TestFooCPU::test_bar_cpu_float32
-    tmpttnibud4.py::TestFooCPU::test_bar_cpu_int32
-
-    2 tests collected in 0.01s
+2 tests collected in 0.01s
+```
+</CH.Code>
 
 Similar to the device parametrization, the `dtype` name is postfixed to
 the name of the test function after the `device` (`test_bar` ⟶
@@ -293,7 +315,8 @@ operators. Again, note that we can only use the `@ops` decorator if
 templating is enabled, which means that we have to use
 `instantiate_device_type_tests`.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest[clean] {MODULE}
 
 import torch
@@ -307,7 +330,7 @@ from torch.testing._internal.common_methods_invocations import OpInfo
 from torch.testing._internal.common_utils import TestCase
 
 op_db = [
-    OpInfo("add", dtypesIfCPU=_dispatch_dtypes([torch.int32])), 
+    OpInfo("add", dtypesIfCPU=_dispatch_dtypes([torch.int32])),
     OpInfo("sub", dtypesIfCPU=_dispatch_dtypes([torch.float32])),
 ]
 
@@ -318,11 +341,14 @@ class TestFoo(TestCase):
 
 instantiate_device_type_tests(TestFoo, globals(), only_for="cpu")
 ```
+---
+```txt [Out]
+tmpe119_vdl.py::TestFooCPU::test_bar_add_cpu_int32
+tmpe119_vdl.py::TestFooCPU::test_bar_sub_cpu_float32
 
-    tmpe119_vdl.py::TestFooCPU::test_bar_add_cpu_int32
-    tmpe119_vdl.py::TestFooCPU::test_bar_sub_cpu_float32
-
-    2 tests collected in 0.04s
+2 tests collected in 0.04s
+```
+</CH.Code>
 
 In contrast to the `dtype`, the `op` name is placed before the `device`
 identifier in the name of a test function (`test_bar` ⟶
@@ -339,7 +365,8 @@ all the gory details, which makes it seem easier than it is. Still, it
 might be a good mental analogy for someone coming from a
 [`pytest`](https://pytest.org) background.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest[clean] {MODULE}
 
 import pytest
@@ -353,11 +380,14 @@ class TestFoo:
     def test_bar(self, device, dtype, op):
         pass
 ```
+---
+```txt [Out]
+tmp8_w7dn68.py::TestFoo::test_bar[add-float32-cpu]
+tmp8_w7dn68.py::TestFoo::test_bar[sub-float32-cpu]
 
-    tmp8_w7dn68.py::TestFoo::test_bar[add-float32-cpu]
-    tmp8_w7dn68.py::TestFoo::test_bar[sub-float32-cpu]
-
-    2 tests collected in 0.00s
+2 tests collected in 0.00s
+```
+</CH.Code>
 
 So far we looked at the test generation in the
 [PyTorch](https://pytorch.org) test suite and how the tests are
@@ -373,7 +403,8 @@ As we observed above, [`pytest`](https://pytest.org)\'s default double
 colon `::` notation, does not work on tests instantiated by
 [PyTorch](https://pytorch.org)\'s test suite.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest[clean] {MODULE}::TestFoo::test_bar
 
 from torch.testing._internal.common_utils import TestCase
@@ -382,32 +413,39 @@ from torch.testing._internal.common_device_type import instantiate_device_type_t
 class TestFoo(TestCase):
     def test_bar(self, device):
         pass
-    
+
     def test_baz(self, device):
         pass
 
-    
+
 instantiate_device_type_tests(TestFoo, globals(), only_for=["cpu"])
 ```
+---
+```txt [Out]
+no tests collected in 0.01s
 
-    no tests collected in 0.01s
-
-    ERROR: not found: /home/user/tmpg1b9f42o.py::TestFoo::test_bar
-    (no name '/home/user/tmpg1b9f42o.py::TestFoo::test_bar' in any of [<Module tmpg1b9f42o.py>])
+ERROR: not found: /home/user/tmpg1b9f42o.py::TestFoo::test_bar
+(no name '/home/user/tmpg1b9f42o.py::TestFoo::test_bar' in any of [<Module tmpg1b9f42o.py>])
+```
+</CH.Code>
 
 Equipped with the knowledge we gathered about the instantiation, it is
 easy to see why this is happening.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest {MODULE}
 
 pass
 ```
+---
+```txt [Out]
+tmpo9kwbe9q.py::TestFooCPU::test_bar_cpu
+tmpo9kwbe9q.py::TestFooCPU::test_baz_cpu
 
-    tmpo9kwbe9q.py::TestFooCPU::test_bar_cpu
-    tmpo9kwbe9q.py::TestFooCPU::test_baz_cpu
-
-    2 tests collected in 0.01s
+2 tests collected in 0.01s
+```
+</CH.Code>
 
 [`pytest`](https://pytest.org) searches for the test case `TestFoo` with
 the test function `test_bar`, but can\'t find them, because
@@ -415,15 +453,19 @@ the test function `test_bar`, but can\'t find them, because
 `test_bar_cpu`. However, the test is selectable by its new, instantiated
 name `{MODULE}::TestFooCPU::test_bar_cpu`
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest {MODULE}::TestFooCPU::test_bar_cpu
-                
+
 pass
 ```
+---
+```txt [Out]
+tmp_i0_ha5r.py::TestFooCPU::test_bar_cpu
 
-    tmp_i0_ha5r.py::TestFooCPU::test_bar_cpu
-
-    1 test collected in 0.04s
+1 test collected in 0.04s
+```
+</CH.Code>
 
 From a convenience standpoint this is not optimal, because we need to
 remember the naming scheme. Furthermore, we can only select a specific
@@ -433,15 +475,19 @@ rely on the [`pytest` `-k`
 flag](https://docs.pytest.org/en/stable/reference.html#command-line-flags)
 to do a pattern matching.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest {MODULE} -k "TestFoo and test_bar"
-                
+
 pass
 ```
+---
+```txt [Out]
+tmp633i_bea.py::TestFooCPU::test_bar_cpu
 
-    tmp633i_bea.py::TestFooCPU::test_bar_cpu
-
-    1/2 tests collected (1 deselected) in 0.01s
+1/2 tests collected (1 deselected) in 0.01s
+```
+</CH.Code>
 
 In contrast to the default [`pytest`](https://pytest.org) practice we
 need to include the names of the test case and test function in the
@@ -451,7 +497,8 @@ test functions use names that build on top of each other. Since the
 selection pattern does not support regular expression matching, it can
 get verbose and confusing.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest[clean] {MODULE} -k "TestFoo and not TestFooBar and test_spam and not test_spam_ham"
 
 from torch.testing._internal.common_utils import TestCase
@@ -460,24 +507,27 @@ from torch.testing._internal.common_device_type import instantiate_device_type_t
 class TestFoo(TestCase):
     def test_spam(self, device):
         pass
-    
+
     def test_spam_ham(self, device):
         pass
 
-    
+
 instantiate_device_type_tests(TestFoo, globals(), only_for="cpu")
-    
-    
+
+
 class TestFooBar(TestCase):
     def test_spam(self, device):
         pass
 
 instantiate_device_type_tests(TestFooBar, globals(), only_for="cpu")
 ```
+---
+```txt [Out]
+tmpzoevi0fu.py::TestFooCPU::test_spam_cpu
 
-    tmpzoevi0fu.py::TestFooCPU::test_spam_cpu
-
-    1/3 tests collected (2 deselected) in 0.01s
+1/3 tests collected (2 deselected) in 0.01s
+```
+</CH.Code>
 
 ### [`pytest-pytorch`](https://github.com/Quansight/pytest-pytorch)
 
@@ -488,25 +538,30 @@ its installation and without any configuration, we get the default
 complicated naming situations we can simply select a test with the
 double colon notation `{MODULE}::TestFoo::test_spam`
 
-``` python
+```python
 enable_pytest_pytorch(collect_only=True)
 ```
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest {MODULE}::TestFoo::test_spam
-                
+
 pass
 ```
+---
+```txt [Out]
+tmpalkh4ddp.py::TestFooCPU::test_spam_cpu
 
-    tmpalkh4ddp.py::TestFooCPU::test_spam_cpu
-
-    1 test collected in 0.05s
+1 test collected in 0.05s
+```
+</CH.Code>
 
 Of course we can still use the [`pytest` `-k`
 flag](https://docs.pytest.org/en/stable/reference.html#command-line-flags)
 to select a specific parametrization.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %%run_pytest[clean] {MODULE}::TestFoo::test_bar -k "cuda"
 
 from torch.testing._internal.common_utils import TestCase
@@ -516,13 +571,16 @@ class TestFoo(TestCase):
     def test_bar(self, device):
         pass
 
-    
+
 instantiate_device_type_tests(TestFoo, globals(), only_for=["cpu", "cuda"])
 ```
+---
+```txt [Out]
+tmp6av_zpy3.py::TestFooCUDA::test_bar_cuda
 
-    tmp6av_zpy3.py::TestFooCUDA::test_bar_cuda
-
-    1/2 tests collected (1 deselected) in 0.02s
+1/2 tests collected (1 deselected) in 0.02s
+```
+</CH.Code>
 
 Handwaving over details
 [`pytest-pytorch`](https://github.com/Quansight/pytest-pytorch) achieves
