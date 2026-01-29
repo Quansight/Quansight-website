@@ -55,3 +55,9 @@ table.table-horizontal-scroll {
   overflow-x: auto;
   display: block;
 }
+
+/* Vertically align all cells to middle */
+table.table-horizontal-scroll td,
+table.table-horizontal-scroll tbody th {
+  vertical-align: middle;
+}
