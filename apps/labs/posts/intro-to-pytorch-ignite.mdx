@@ -1,6 +1,6 @@
 ---
-title: "PyTorch-Ignite: training and evaluating neural networks flexibly and transparently"
-author: victor-fomin
+title: 'PyTorch-Ignite: training and evaluating neural networks flexibly and transparently'
+authors: [victor-fomin]
 published: September 10, 2020
 description: 'This blog post intends to give a brief but illustrative overview of what PyTorch-Ignite can offer for Deep Learning enthusiasts, professionals and researchers. Throughout this tutorial, we will introduce the basic concepts of PyTorch-Ignite with the training and evaluation of a MNIST classifier as a beginner application case.'
 category: [Machine Learning]
@@ -21,8 +21,10 @@ PyTorch-Ignite with the training and evaluation of a MNIST classifier as
 a beginner application case. We also assume that the reader is familiar
 with PyTorch.
 
-`<a href="https://colab.research.google.com/drive/1gFIPXmUX73HWlLSxFvvYEweQBD_OPx1t">``<img style="float: left;" src="https://colab.research.google.com/assets/colab-badge.svg"/>`
-This tutorial can be also executed in Google Colab. `</a>`
+This tutorial can be also executed in Google Colab.
+<a href="https://colab.research.google.com/drive/1gFIPXmUX73HWlLSxFvvYEweQBD_OPx1t">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" />
+</a>
 
 ## Content
 
@@ -50,7 +52,8 @@ This tutorial can be also executed in Google Colab. `</a>`
 - [Projects using PyTorch-Ignite](#projects-using-pytorch-ignite)
 - [Project news](#project-news)
 
-# PyTorch-Ignite: What and Why ?
+
+# PyTorch-Ignite: What and Why?
 
 PyTorch-Ignite is a high-level library to help with training and
 evaluating neural networks in PyTorch flexibly and transparently.
@@ -82,56 +85,37 @@ events during the run.
 
 In summary, PyTorch-Ignite is
 
--   Extremely simple engine and event system = Training loop abstraction
--   Out-of-the-box metrics to easily evaluate models
--   Built-in handlers to compose training pipelines, save artifacts and
-    log parameters and metrics
+- Extremely simple engine and event system = Training loop abstraction
+- Out-of-the-box metrics to easily evaluate models
+- Built-in handlers to compose training pipelines, save artifacts and
+  log parameters and metrics
 
 Additional benefits of using PyTorch-Ignite are
 
--   Less code than pure PyTorch while ensuring maximum control and
-    simplicity
--   More modular code
+- Less code than pure PyTorch while ensuring maximum control and
+  simplicity
+- More modular code
 
-```
 <table>
-<tr>
-
-<th>
-PyTorch-Ignite
-</th>
-
-<th>
-</th>    
-
-<th>
-</th>    
-
-<th>
-</th>    
-    
-<th>
-</th>    
-
-<th>
-</th>    
-
-<th>
-</th>    
-
-<th>
-</th>    
-
-    
-<th>
-Pure PyTorch
-</th>
-        
-</tr>
-        
+  <tr>
+    <th>PyTorch-Ignite</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>Pure PyTorch</th>
+  </tr>
 </table>
-```
-`<a href="https://raw.githubusercontent.com/pytorch/ignite/master/assets/ignite_vs_bare_pytorch.png">``<img width=800  src="https://raw.githubusercontent.com/pytorch/ignite/master/assets/ignite_vs_bare_pytorch.png"/>``</a>`
+
+<a href="https://raw.githubusercontent.com/pytorch/ignite/master/assets/ignite_vs_bare_pytorch.png">
+  <img
+    width="800"
+    src="https://raw.githubusercontent.com/pytorch/ignite/master/assets/ignite_vs_bare_pytorch.png"
+  />
+</a>
 
 ### About the design of PyTorch-Ignite
 
@@ -141,13 +125,13 @@ components allowing advanced customization.
 
 The design of the library is guided by:
 
--   Anticipating new software or use-cases to come in in the future
-    without centralizing everything in a single class.
--   Avoiding configurations with a ton of parameters that are
-    complicated to manage and maintain.
--   Providing tools targeted to maximizing cohesion and minimizing
-    coupling.
--   Keeping it simple.
+- Anticipating new software or use-cases to come in in the future
+  without centralizing everything in a single class.
+- Avoiding configurations with a ton of parameters that are
+  complicated to manage and maintain.
+- Providing tools targeted to maximizing cohesion and minimizing
+  coupling.
+- Keeping it simple.
 
 # Quick-start example
 
@@ -159,23 +143,27 @@ behind PyTorch-Ignite.
 For additional information and details about the API, please, refer to
 the project\'s [documentation](https://pytorch.org/ignite/).
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 !pip install pytorch-ignite
 ```
-
-    Collecting pytorch-ignite
-    ent already satisfied: torch<2,>=1.3 in /usr/local/lib/python3.6/dist-packages (from pytorch-ignite) (1.6.0+cu101)
-    Requirement already satisfied: future in /usr/local/lib/python3.6/dist-packages (from torch<2,>=1.3->pytorch-ignite) (0.16.0)
-    Requirement already satisfied: numpy in /usr/local/lib/python3.6/dist-packages (from torch<2,>=1.3->pytorch-ignite) (1.18.5)
-    Installing collected packages: pytorch-ignite
-    Successfully installed pytorch-ignite-0.4.1
+---
+```txt [Out]
+Collecting pytorch-ignite
+ent already satisfied: torch<2,>=1.3 in /usr/local/lib/python3.6/dist-packages (from pytorch-ignite) (1.6.0+cu101)
+Requirement already satisfied: future in /usr/local/lib/python3.6/dist-packages (from torch<2,>=1.3->pytorch-ignite) (0.16.0)
+Requirement already satisfied: numpy in /usr/local/lib/python3.6/dist-packages (from torch<2,>=1.3->pytorch-ignite) (1.18.5)
+Installing collected packages: pytorch-ignite
+Successfully installed pytorch-ignite-0.4.1
+```
+</CH.Code>
 
 ## Common PyTorch code
 
 First, we define our model, training and validation datasets, optimizer
 and loss function:
 
-``` python
+```python
 import os
 import torch
 import torch.nn as nn
@@ -228,7 +216,6 @@ criterion = nn.NLLLoss()
 optimizer = SGD(model.parameters(), lr=0.01, momentum=0.8)
 ```
 
-::: {.cell .markdown colab_type="text" id="eqFTLx9SJOTz"}
 The above code is pure PyTorch and is typically user-defined and is
 required for any pipeline.
 
@@ -243,8 +230,7 @@ abstraction that loops over the provided data, executes a processing
 function and returns a result. The only argument needed to construct the
 trainer is a `train_step` function.
 
-::: {.cell .code colab="{}" colab_type="code" id="NQQcEADrI_-A"}
-``` python
+```python
 from ignite.engine import Engine
 
 def train_step(engine, batch):
@@ -275,8 +261,7 @@ variables from the engine.
 Similarly, model evaluation can be done with an engine that runs a
 single time over the validation dataset and computes metrics.
 
-::: {.cell .code colab="{}" colab_type="code" id="QMhejYd5o7Sn"}
-``` python
+```python
 def validation_step(engine, batch):
     model.eval()
     with torch.no_grad():
@@ -310,18 +295,20 @@ that are triggered during the run. When an event is triggered, attached
 handlers (named functions, lambdas, class functions) are executed. Here
 is a schema for when built-in events are triggered by default:
 
-    fire_event(Events.STARTED)
-    while epoch < max_epochs:
-        fire_event(Events.EPOCH_STARTED)
-        # run once on data
-        for batch in data:
-            fire_event(Events.ITERATION_STARTED)
+```python
+fire_event(Events.STARTED)
+while epoch < max_epochs:
+    fire_event(Events.EPOCH_STARTED)
+    # run once on data
+    for batch in data:
+        fire_event(Events.ITERATION_STARTED)
 
-            output = process_function(batch)
+        output = process_function(batch)
 
-            fire_event(Events.ITERATION_COMPLETED)
-        fire_event(Events.EPOCH_COMPLETED)
-    fire_event(Events.COMPLETED)
+        fire_event(Events.ITERATION_COMPLETED)
+    fire_event(Events.EPOCH_COMPLETED)
+fire_event(Events.COMPLETED)
+```
 
 Note that each engine (i.e. `trainer` and `evaluator`) has its own event
 system which allows to define its own engine\'s process logic.
@@ -329,7 +316,7 @@ system which allows to define its own engine\'s process logic.
 Using `Events` and handlers, it is possible to completely customize the
 engine\'s runs in a very intuitive way:
 
-``` python
+```python
 from ignite.engine import Events
 
 # Show a message when the training begins
@@ -337,9 +324,9 @@ from ignite.engine import Events
 def start_message():
     print("Start training!")
 
-# Handler can be want you want, here a lambda ! 
+# Handler can be want you want, here a lambda !
 trainer.add_event_handler(
-    Events.COMPLETED, 
+    Events.COMPLETED,
     lambda _: print("Training completed!")
 )
 
@@ -370,7 +357,7 @@ Metrics are another nice example of what the handlers for PyTorch-Ignite
 are and how to use them. In our example, we use the built-in metrics
 `Accuracy` and `Loss`.
 
-``` python
+```python
 from ignite.metrics import Accuracy, Loss
 
 # Accuracy and loss metrics are defined
@@ -386,7 +373,7 @@ for name, metric in val_metrics.items():
 
 PyTorch-Ignite metrics can be elegantly combined with each other.
 
-``` python
+```python
 from ignite.metrics import Precision, Recall
 
 # Build F1 score
@@ -404,7 +391,7 @@ available for the creation of a supervised `Engine` as above. Thus,
 let\'s define another evaluator applied to the training dataset in this
 way.
 
-``` python
+```python
 from ignite.engine import create_supervised_evaluator
 
 # Define another evaluator with default validation function and attach metrics
@@ -432,13 +419,13 @@ very helpful to have a display of the results that shows those metrics.
 Using the customization potential of the engine\'s system, we can add
 simple handlers for this logging purpose:
 
-``` python
+```python
 @evaluator.on(Events.COMPLETED)
 def log_validation_results():
     metrics = evaluator.state.metrics
     print("Validation Results - Epoch: {}  Avg accuracy: {:.2f} Avg loss: {:.2f} Avg F1: {:.2f}"
           .format(trainer.state.epoch, metrics["accuracy"], metrics["loss"], metrics["f1"]))
-    
+
 @train_evaluator.on(Events.COMPLETED)
 def log_train_results():
     metrics = train_evaluator.state.metrics
@@ -452,197 +439,185 @@ will run a single epoch over the validation datasets.
 
 Let\'s see how to add some others helpful features to our application.
 
--   PyTorch-Ignite provides a
-    [`ProgressBar`](https://pytorch.org/ignite/contrib/handlers.html#tqdm-logger)
-    handler to show an engine\'s progression.
+- PyTorch-Ignite provides a
+  [`ProgressBar`](https://pytorch.org/ignite/contrib/handlers.html#tqdm-logger)
+  handler to show an engine\'s progression.
 
-``` python
-from ignite.contrib.handlers import ProgressBar
+    ```python
+    from ignite.contrib.handlers import ProgressBar
 
-ProgressBar().attach(trainer, output_transform=lambda x: {'batch loss': x})
-```
+    ProgressBar().attach(trainer, output_transform=lambda x: {'batch loss': x})
+    ```
 
--   [`ModelCheckpoint`](https://pytorch.org/ignite/handlers.html#ignite.handlers.ModelCheckpoint)
-    handler can be used to periodically save objects which have an
-    attribute `state_dict`.
+- [`ModelCheckpoint`](https://pytorch.org/ignite/handlers.html#ignite.handlers.ModelCheckpoint)
+  handler can be used to periodically save objects which have an
+  attribute `state_dict`.
 
-``` python
-from ignite.handlers import ModelCheckpoint, global_step_from_engine
+    ```python
+    from ignite.handlers import ModelCheckpoint, global_step_from_engine
 
-# Score function to select relevant metric, here f1
-def score_function(engine):
-    return engine.state.metrics["f1"]
+    # Score function to select relevant metric, here f1
+    def score_function(engine):
+        return engine.state.metrics["f1"]
 
-# Checkpoint to store n_saved best models wrt score function
-model_checkpoint = ModelCheckpoint(
-    "quick-start-mnist-output",
-    n_saved=2,
-    filename_prefix="best",
-    score_function=score_function,
-    score_name="f1",
-    global_step_transform=global_step_from_engine(trainer),
-)
-  
-# Save the model (if relevant) every epoch completed of evaluator
-evaluator.add_event_handler(Events.COMPLETED, model_checkpoint, {"model": model});
-```
-
--   PyTorch-Ignite provides wrappers to modern tools to track
-    experiments. For example,
-    [`TensorBoardLogger`](https://pytorch.org/ignite/contrib/handlers.html#ignite.contrib.handlers.tensorboard_logger.TensorboardLogger)
-    handler allows to log metric results, model\'s and optimizer\'s
-    parameters, gradients, and more during the training and validation
-    for TensorBoard.
-
-``` python
-from ignite.contrib.handlers import TensorboardLogger
-
-# Define a Tensorboard logger
-tb_logger = TensorboardLogger(log_dir="quick-start-mnist-output")
-
-# Attach handler to plot trainer's loss every 100 iterations
-tb_logger.attach_output_handler(
-    trainer,
-    event_name=Events.ITERATION_COMPLETED(every=100),
-    tag="training",
-    output_transform=lambda loss: {"batchloss": loss},
-)
-
-# Attach handler to dump evaluator's metrics every epoch completed
-for tag, evaluator in [("training", train_evaluator), ("validation", evaluator)]:
-    tb_logger.attach_output_handler(
-        evaluator,
-        event_name=Events.EPOCH_COMPLETED,
-        tag=tag,
-        metric_names="all",
+    # Checkpoint to store n_saved best models wrt score function
+    model_checkpoint = ModelCheckpoint(
+        "quick-start-mnist-output",
+        n_saved=2,
+        filename_prefix="best",
+        score_function=score_function,
+        score_name="f1",
         global_step_transform=global_step_from_engine(trainer),
     )
-```
 
-It is possible to extend the use of the TensorBoard logger very simply
-by integrating user-defined functions. For example, here is how to
-display images and predictions during training:
+    # Save the model (if relevant) every epoch completed of evaluator
+    evaluator.add_event_handler(Events.COMPLETED, model_checkpoint, {"model": model});
+    ```
 
-``` python
-import matplotlib.pyplot as plt
+- PyTorch-Ignite provides wrappers to modern tools to track
+  experiments. For example,
+  [`TensorBoardLogger`](https://pytorch.org/ignite/contrib/handlers.html#ignite.contrib.handlers.tensorboard_logger.TensorboardLogger)
+  handler allows to log metric results, model\'s and optimizer\'s
+  parameters, gradients, and more during the training and validation
+  for TensorBoard.
 
-# Store predictions and scores using matplotlib
-def predictions_gt_images_handler(engine, logger, *args, **kwargs):
-    x, _ = engine.state.batch
-    y_pred, y = engine.state.output
-    # y_pred is log softmax value
-    num_x = num_y = 8
-    le = num_x * num_y
-    probs, preds = torch.max(torch.exp(y_pred[:le]), dim=1)
-    fig = plt.figure(figsize=(20, 20))
-    for idx in range(le):
-        ax = fig.add_subplot(num_x, num_y, idx + 1, xticks=[], yticks=[])
-        ax.imshow(x[idx].squeeze(), cmap="Greys")
-        ax.set_title("{0} {1:.1f}% (label: {2})".format(
-            preds[idx],
-            probs[idx] * 100.0,
-            y[idx]),
-            color=("green" if preds[idx] == y[idx] else "red")
+    ```python
+    from ignite.contrib.handlers import TensorboardLogger
+
+    # Define a Tensorboard logger
+    tb_logger = TensorboardLogger(log_dir="quick-start-mnist-output")
+
+    # Attach handler to plot trainer's loss every 100 iterations
+    tb_logger.attach_output_handler(
+        trainer,
+        event_name=Events.ITERATION_COMPLETED(every=100),
+        tag="training",
+        output_transform=lambda loss: {"batchloss": loss},
+    )
+
+    # Attach handler to dump evaluator's metrics every epoch completed
+    for tag, evaluator in [("training", train_evaluator), ("validation", evaluator)]:
+        tb_logger.attach_output_handler(
+            evaluator,
+            event_name=Events.EPOCH_COMPLETED,
+            tag=tag,
+            metric_names="all",
+            global_step_transform=global_step_from_engine(trainer),
         )
-    logger.writer.add_figure('predictions vs actuals', figure=fig, global_step=trainer.state.epoch)
+    ```
 
-# Attach custom function to evaluator at first iteration
-tb_logger.attach(
-    evaluator,
-    log_handler=predictions_gt_images_handler,
-    event_name=Events.ITERATION_COMPLETED(once=1),
-);
-```
+    It is possible to extend the use of the TensorBoard logger very simply
+    by integrating user-defined functions. For example, here is how to
+    display images and predictions during training:
+
+    ```python
+    import matplotlib.pyplot as plt
+
+    # Store predictions and scores using matplotlib
+    def predictions_gt_images_handler(engine, logger, *args, **kwargs):
+        x, _ = engine.state.batch
+        y_pred, y = engine.state.output
+        # y_pred is log softmax value
+        num_x = num_y = 8
+        le = num_x * num_y
+        probs, preds = torch.max(torch.exp(y_pred[:le]), dim=1)
+        fig = plt.figure(figsize=(20, 20))
+        for idx in range(le):
+            ax = fig.add_subplot(num_x, num_y, idx + 1, xticks=[], yticks=[])
+            ax.imshow(x[idx].squeeze(), cmap="Greys")
+            ax.set_title("{0} {1:.1f}% (label: {2})".format(
+                preds[idx],
+                probs[idx] * 100.0,
+                y[idx]),
+                color=("green" if preds[idx] == y[idx] else "red")
+            )
+        logger.writer.add_figure('predictions vs actuals', figure=fig, global_step=trainer.state.epoch)
+
+    # Attach custom function to evaluator at first iteration
+    tb_logger.attach(
+        evaluator,
+        log_handler=predictions_gt_images_handler,
+        event_name=Events.ITERATION_COMPLETED(once=1),
+    )
+    ```
 
 All that is left to do now is to run the `trainer` on data from
 `train_loader` for a number of epochs.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 trainer.run(train_loader, max_epochs=5)
 
 # Once everything is done, let's close the logger
+
 tb_logger.close()
 ```
-
-    Start training!
-
-``` json
-{"model_id":"9cf4a3960d9c4c31a775cf19c00fddd2","version_major":2,"version_minor":0}
+---
+```txt [Out]
+Start training!
+Validation Results - Epoch: 1  Avg accuracy: 0.94 Avg loss: 0.20 Avg F1: 0.94
+  Training Results - Epoch: 1  Avg accuracy: 0.94 Avg loss: 0.21
+Validation Results - Epoch: 2  Avg accuracy: 0.96 Avg loss: 0.12 Avg F1: 0.96
+  Training Results - Epoch: 2  Avg accuracy: 0.96 Avg loss: 0.13
+Validation Results - Epoch: 3  Avg accuracy: 0.97 Avg loss: 0.10 Avg F1: 0.97
+  Training Results - Epoch: 3  Avg accuracy: 0.97 Avg loss: 0.10
+Validation Results - Epoch: 4  Avg accuracy: 0.98 Avg loss: 0.07 Avg F1: 0.98
+  Training Results - Epoch: 4  Avg accuracy: 0.97 Avg loss: 0.09
+Validation Results - Epoch: 5  Avg accuracy: 0.98 Avg loss: 0.07 Avg F1: 0.98
+  Training Results - Epoch: 5  Avg accuracy: 0.98 Avg loss: 0.08
+Training completed!
 ```
-
-    Validation Results - Epoch: 1  Avg accuracy: 0.94 Avg loss: 0.20 Avg F1: 0.94
-      Training Results - Epoch: 1  Avg accuracy: 0.94 Avg loss: 0.21
-
-``` json
-{"model_id":"435204a5d8294b9faf37e86a2a2c6106","version_major":2,"version_minor":0}
-```
-
-    Validation Results - Epoch: 2  Avg accuracy: 0.96 Avg loss: 0.12 Avg F1: 0.96
-      Training Results - Epoch: 2  Avg accuracy: 0.96 Avg loss: 0.13
-
-``` json
-{"model_id":"2bf732207a604791b52f75e2c7acde77","version_major":2,"version_minor":0}
-```
-
-    Validation Results - Epoch: 3  Avg accuracy: 0.97 Avg loss: 0.10 Avg F1: 0.97
-      Training Results - Epoch: 3  Avg accuracy: 0.97 Avg loss: 0.10
-
-``` json
-{"model_id":"a4ee6eaef1b34de3a18a48008b0f574b","version_major":2,"version_minor":0}
-```
-
-    Validation Results - Epoch: 4  Avg accuracy: 0.98 Avg loss: 0.07 Avg F1: 0.98
-      Training Results - Epoch: 4  Avg accuracy: 0.97 Avg loss: 0.09
-
-``` json
-{"model_id":"4be1c90dbd704ebfb5291fdd2ca25ca9","version_major":2,"version_minor":0}
-```
-
-    Validation Results - Epoch: 5  Avg accuracy: 0.98 Avg loss: 0.07 Avg F1: 0.98
-      Training Results - Epoch: 5  Avg accuracy: 0.98 Avg loss: 0.08
-    Training completed!
+</CH.Code>
 
 We can inspect results using `tensorboard`. We can observe two tabs
 \"Scalars\" and \"Images\".
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 %load_ext tensorboard
 
 %tensorboard --logdir=.
 ```
-
-    <IPython.core.display.Javascript object>
-
+---
+```txt [Out]
+<IPython.core.display.Javascript object>
 ```
+</CH.Code>
+
 <div>
-    
-<a href="/images/pytorch-ignite/mnist-tb-scalars.png">
-<img style="float: left" width="50%" src="/images/pytorch-ignite/mnist-tb-scalars.png"/>
-</a>
-
-<a href="/images/pytorch-ignite/mnist-tb-images.png">
-<img style="float: right" width="50%" src="/images/pytorch-ignite/mnist-tb-images.png"/>
-</a>
-    
+  <a href="/images/pytorch-ignite/mnist-tb-scalars.png">
+    <img
+      style={{ float: 'left' }}
+      width="50%"
+      src="/images/pytorch-ignite/mnist-tb-scalars.png"
+    />
+  </a>
+  <a href="/images/pytorch-ignite/mnist-tb-images.png">
+    <img
+      style={{ float: 'right' }}
+      width="50%"
+      src="/images/pytorch-ignite/mnist-tb-images.png"
+    />
+  </a>
 </div>
-```
+
 
 ## 5 takeaways
 
--   Almost any training logic can be coded as a `train_step` method and
-    a trainer built using this method.
+- Almost any training logic can be coded as a `train_step` method and
+  a trainer built using this method.
 
--   The essence of the library is the **`Engine`** class that loops a
-    given number of times over a dataset and executes a processing
-    function.
+- The essence of the library is the **`Engine`** class that loops a
+  given number of times over a dataset and executes a processing
+  function.
 
--   A highly customizable **event system** simplifies interaction with
-    the engine on each step of the run.
+- A highly customizable **event system** simplifies interaction with
+  the engine on each step of the run.
 
--   PyTorch-Ignite provides a set of built-in handlers and metrics for
-    common tasks.
+- PyTorch-Ignite provides a set of built-in handlers and metrics for
+  common tasks.
 
--   PyTorch-Ignite is easy to extend.
+- PyTorch-Ignite is easy to extend.
 
 # Advanced features
 
@@ -658,9 +633,9 @@ We have seen throughout the quick-start example that events and handlers
 are perfect to execute any number of functions whenever you wish. In
 addition to that we provide several ways to extend it even more by
 
--   Built-in events filtering
--   Stacking events to share the action
--   Adding custom events to go beyond built-in standard events
+- Built-in events filtering
+- Stacking events to share the action
+- Adding custom events to go beyond built-in standard events
 
 Let\'s look at these features in more detail.
 
@@ -669,7 +644,7 @@ Let\'s look at these features in more detail.
 Users can simply filter out events to skip triggering the handler.
 Let\'s create a dummy trainer:
 
-``` python
+```python
 from ignite.engine import Engine, Events
 
 trainer = Engine(lambda e, batch: None)
@@ -679,7 +654,8 @@ Let\'s consider a use-case where we would like to train a model and
 periodically run its validation on several development datasets, e.g.
 `devset1` and `devset2`:
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 # We run the validation on devset1 every 5 epochs
 @trainer.on(Events.EPOCH_COMPLETED(every=5))
 def run_validation1():
@@ -695,29 +671,33 @@ def run_validation2():
 train_data = [0, 1, 2, 3, 4]
 trainer.run(train_data, max_epochs=50);
 ```
-
-    Epoch 5: Validation on devset 1
-    Epoch 10: Validation on devset 1
-    Epoch 10: Validation on devset 2
-    Epoch 15: Validation on devset 1
-    Epoch 20: Validation on devset 1
-    Epoch 20: Validation on devset 2
-    Epoch 25: Validation on devset 1
-    Epoch 30: Validation on devset 1
-    Epoch 30: Validation on devset 2
-    Epoch 35: Validation on devset 1
-    Epoch 40: Validation on devset 1
-    Epoch 40: Validation on devset 2
-    Epoch 45: Validation on devset 1
-    Epoch 50: Validation on devset 1
-    Epoch 50: Validation on devset 2
+---
+```txt [Out]
+Epoch 5: Validation on devset 1
+Epoch 10: Validation on devset 1
+Epoch 10: Validation on devset 2
+Epoch 15: Validation on devset 1
+Epoch 20: Validation on devset 1
+Epoch 20: Validation on devset 2
+Epoch 25: Validation on devset 1
+Epoch 30: Validation on devset 1
+Epoch 30: Validation on devset 2
+Epoch 35: Validation on devset 1
+Epoch 40: Validation on devset 1
+Epoch 40: Validation on devset 2
+Epoch 45: Validation on devset 1
+Epoch 50: Validation on devset 1
+Epoch 50: Validation on devset 2
+```
+</CH.Code>
 
 Let\'s now consider another situation where we would like to make a
 single change once we reach a certain epoch or iteration. For example,
 let\'s change the training dataset on the 5-th epoch from low resolution
 images to high resolution images:
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 def train_step(e, batch):
     print("Epoch {} - {} : batch={}".format(e.state.epoch, e.state.iteration, batch))
 
@@ -734,44 +714,48 @@ def change_train_dataset():
 
 trainer.run(small_res_data, max_epochs=10);
 ```
-
-    Epoch 1 - 1 : batch=0
-    Epoch 1 - 2 : batch=1
-    Epoch 1 - 3 : batch=2
-    Epoch 2 - 4 : batch=0
-    Epoch 2 - 5 : batch=1
-    Epoch 2 - 6 : batch=2
-    Epoch 3 - 7 : batch=0
-    Epoch 3 - 8 : batch=1
-    Epoch 3 - 9 : batch=2
-    Epoch 4 - 10 : batch=0
-    Epoch 4 - 11 : batch=1
-    Epoch 4 - 12 : batch=2
-    Epoch 5: Change training dataset
-    Epoch 5 - 13 : batch=10
-    Epoch 5 - 14 : batch=11
-    Epoch 5 - 15 : batch=12
-    Epoch 6 - 16 : batch=10
-    Epoch 6 - 17 : batch=11
-    Epoch 6 - 18 : batch=12
-    Epoch 7 - 19 : batch=10
-    Epoch 7 - 20 : batch=11
-    Epoch 7 - 21 : batch=12
-    Epoch 8 - 22 : batch=10
-    Epoch 8 - 23 : batch=11
-    Epoch 8 - 24 : batch=12
-    Epoch 9 - 25 : batch=10
-    Epoch 9 - 26 : batch=11
-    Epoch 9 - 27 : batch=12
-    Epoch 10 - 28 : batch=10
-    Epoch 10 - 29 : batch=11
-    Epoch 10 - 30 : batch=12
+---
+```txt [Out]
+Epoch 1 - 1 : batch=0
+Epoch 1 - 2 : batch=1
+Epoch 1 - 3 : batch=2
+Epoch 2 - 4 : batch=0
+Epoch 2 - 5 : batch=1
+Epoch 2 - 6 : batch=2
+Epoch 3 - 7 : batch=0
+Epoch 3 - 8 : batch=1
+Epoch 3 - 9 : batch=2
+Epoch 4 - 10 : batch=0
+Epoch 4 - 11 : batch=1
+Epoch 4 - 12 : batch=2
+Epoch 5: Change training dataset
+Epoch 5 - 13 : batch=10
+Epoch 5 - 14 : batch=11
+Epoch 5 - 15 : batch=12
+Epoch 6 - 16 : batch=10
+Epoch 6 - 17 : batch=11
+Epoch 6 - 18 : batch=12
+Epoch 7 - 19 : batch=10
+Epoch 7 - 20 : batch=11
+Epoch 7 - 21 : batch=12
+Epoch 8 - 22 : batch=10
+Epoch 8 - 23 : batch=11
+Epoch 8 - 24 : batch=12
+Epoch 9 - 25 : batch=10
+Epoch 9 - 26 : batch=11
+Epoch 9 - 27 : batch=12
+Epoch 10 - 28 : batch=10
+Epoch 10 - 29 : batch=11
+Epoch 10 - 30 : batch=12
+```
+</CH.Code>
 
 Let\'s now consider another situation where we would like to trigger a
 handler with completely custom logic. For example, we would like to dump
 model gradients if the training loss satisfies a certain condition:
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 # Let's predefine for simplicity training losses
 train_losses = [2.0, 1.9, 1.7, 1.5, 1.6, 1.2, 0.9, 0.8, 1.0, 0.8, 0.7, 0.4, 0.2, 0.1, 0.1, 0.01]
 
@@ -791,13 +775,16 @@ def dump_model_grads():
 train_data = [0, ]
 trainer.run(train_data, max_epochs=len(train_losses));
 ```
-
-    7 - loss=0.9: dump model grads
-    8 - loss=0.8: dump model grads
-    10 - loss=0.8: dump model grads
-    11 - loss=0.7: dump model grads
-    12 - loss=0.4: dump model grads
-    13 - loss=0.2: dump model grads
+---
+```txt [Out]
+7 - loss=0.9: dump model grads
+8 - loss=0.8: dump model grads
+10 - loss=0.8: dump model grads
+11 - loss=0.7: dump model grads
+12 - loss=0.4: dump model grads
+13 - loss=0.2: dump model grads
+```
+</CH.Code>
 
 ### Stack events to share the action
 
@@ -805,7 +792,8 @@ A user can trigger the same handler on events of differen types. For
 example, let\'s run a handler for model\'s validation every 3 epochs and
 when the training is completed:
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 trainer = Engine(lambda e, batch: None)
 
 @trainer.on(Events.EPOCH_COMPLETED(every=3) | Events.COMPLETED)
@@ -816,14 +804,18 @@ def run_validation():
 train_data = [0, 1, 2, 3, 4]
 trainer.run(train_data, max_epochs=20);
 ```
+---
+```txt [Out]
+Epoch 3 - event=epoch_completed: Validation
+Epoch 6 - event=epoch_completed: Validation
+Epoch 9 - event=epoch_completed: Validation
+Epoch 12 - event=epoch_completed: Validation
+Epoch 15 - event=epoch_completed: Validation
+Epoch 18 - event=epoch_completed: Validation
+Epoch 20 - event=completed: Validation
+```
 
-    Epoch 3 - event=epoch_completed: Validation
-    Epoch 6 - event=epoch_completed: Validation
-    Epoch 9 - event=epoch_completed: Validation
-    Epoch 12 - event=epoch_completed: Validation
-    Epoch 15 - event=epoch_completed: Validation
-    Epoch 18 - event=epoch_completed: Validation
-    Epoch 20 - event=completed: Validation
+</CH.Code>
 
 ### Add custom events
 
@@ -832,7 +824,8 @@ For example, let\'s define new events related to backward and optimizer
 step calls. This can help us to attach specific handlers on these events
 in a configurable manner.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 from ignite.engine import EventEnum
 
 class BackpropEvents(EventEnum):
@@ -848,7 +841,7 @@ def update(engine, batch):
     engine.fire_event(BackpropEvents.BACKWARD_COMPLETED)
     # optimizer.step()
     engine.fire_event(BackpropEvents.OPTIM_STEP_COMPLETED)
-    # ...    
+    # ...
 
 trainer = Engine(update)
 trainer.register_events(*BackpropEvents)
@@ -866,27 +859,30 @@ trainer.add_event_handler(BackpropEvents.BACKWARD_COMPLETED, function_after_back
 train_data = [0, 1, 2, 3, 4]
 trainer.run(train_data, max_epochs=2);
 ```
-
-    1 - before backprop
-    1 - after backprop
-    2 - before backprop
-    2 - after backprop
-    3 - before backprop
-    3 - after backprop
-    4 - before backprop
-    4 - after backprop
-    5 - before backprop
-    5 - after backprop
-    6 - before backprop
-    6 - after backprop
-    7 - before backprop
-    7 - after backprop
-    8 - before backprop
-    8 - after backprop
-    9 - before backprop
-    9 - after backprop
-    10 - before backprop
-    10 - after backprop
+---
+```txt [Out]
+1 - before backprop
+1 - after backprop
+2 - before backprop
+2 - after backprop
+3 - before backprop
+3 - after backprop
+4 - before backprop
+4 - after backprop
+5 - before backprop
+5 - after backprop
+6 - before backprop
+6 - after backprop
+7 - before backprop
+7 - after backprop
+8 - before backprop
+8 - after backprop
+9 - before backprop
+9 - after backprop
+10 - before backprop
+10 - after backprop
+```
+</CH.Code>
 
 ## Out-of-the-box metrics
 
@@ -896,16 +892,16 @@ these metrics provide a way to compute various quantities of interest in
 an online fashion without having to store the entire output history of a
 model.
 
--   For classification : `Precision`, `Recall`, `Accuracy`,
-    `ConfusionMatrix` and more!
--   For segmentation : `DiceCoefficient`, `IoU`, `mIOU` and more!
--   \~20 regression metrics, e.g. MSE, MAE, MedianAbsoluteError, etc
--   Metrics that store the entire output history per epoch
-    -   Possible to use with `scikit-learn` metrics, e.g. `EpochMetric`,
-        `AveragePrecision`, `ROC_AUC`, etc
--   Easily composable to assemble a custom metric
--   Easily extendable to [create custom
-    metrics](https://pytorch.org/ignite/metrics.html#how-to-create-a-custom-metric)
+- For classification : `Precision`, `Recall`, `Accuracy`,
+  `ConfusionMatrix` and more!
+- For segmentation : `DiceCoefficient`, `IoU`, `mIOU` and more!
+- \~20 regression metrics, e.g. MSE, MAE, MedianAbsoluteError, etc
+- Metrics that store the entire output history per epoch
+  - Possible to use with `scikit-learn` metrics, e.g. `EpochMetric`,
+    `AveragePrecision`, `ROC_AUC`, etc
+- Easily composable to assemble a custom metric
+- Easily extendable to [create custom
+  metrics](https://pytorch.org/ignite/metrics.html#how-to-create-a-custom-metric)
 
 Complete lists of metrics provided by PyTorch-Ignite can be found
 [here](https://pytorch.org/ignite/metrics.html#complete-list-of-metrics)
@@ -915,8 +911,8 @@ for `ignite.contrib.metrics`.
 
 Two kinds of public APIs are provided:
 
--   metric is attached to `Engine`
--   metric\'s `reset, update, compute` methods
+- metric is attached to `Engine`
+- metric\'s `reset, update, compute` methods
 
 ### More on the `reset, update, compute` public API
 
@@ -925,7 +921,8 @@ metric. The idea behind this API is that we accumulate internally
 certain counters on each `update` call. The metric\'s value is computed
 on each `compute` call and counters are reset on each `reset` call.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 import torch
 from ignite.metrics import Accuracy
 
@@ -937,7 +934,7 @@ acc.reset()
 y_target = torch.tensor([0, 1, 2, 1,])
 # y_pred is logits computed by the model
 y_pred = torch.tensor([
-    [10.0, 0.1, -1.0],  # correct 
+    [10.0, 0.1, -1.0],  # correct
     [2.0, -1.0, -2.0],  # incorrect
     [1.0, -1.0, 4.0],   # correct
     [0.0, 5.0, -1.0],   # correct
@@ -948,21 +945,27 @@ acc.update((y_pred, y_target))
 print("After 1st update, accuracy=", acc.compute())
 
 y_target = torch.tensor([1, 2, 0, 2])
+
 # y_pred is logits computed by the model
+
 y_pred = torch.tensor([
-    [2.0, 1.0, -1.0],   # incorrect
-    [0.0, 1.0, -2.0],   # incorrect
-    [2.6, 1.0, -4.0],   # correct
-    [1.0, -3.0, 2.0],   # correct
+[2.0, 1.0, -1.0], # incorrect
+[0.0, 1.0, -2.0], # incorrect
+[2.6, 1.0, -4.0], # correct
+[1.0, -3.0, 2.0], # correct
 ])
 acc.update((y_pred, y_target))
 
 # Compute accuracy on 8 samples
 print("After 2nd update, accuracy=", acc.compute())
 ```
+---
+```txt [Out]
+After 1st update, accuracy= 0.75
+After 2nd update, accuracy= 0.625
+```
 
-    After 1st update, accuracy= 0.75
-    After 2nd update, accuracy= 0.625
+</CH.Code>
 
 ### Composable metrics
 
@@ -971,12 +974,13 @@ arithmetic operations or PyTorch methods. For example, an error metric
 defined as `100 * (1.0 - accuracy)` can be coded in a straightforward
 manner:
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 import torch
 from ignite.metrics import Accuracy
 
 acc = Accuracy()
-error = 100.0 * (1.0 - acc) 
+error = 100.0 * (1.0 - acc)
 
 # Start accumulation
 acc.reset()
@@ -984,10 +988,10 @@ acc.reset()
 y_target = torch.tensor([0, 1, 2, 1,])
 # y_pred is logits computed by the model
 y_pred = torch.tensor([
-    [10.0, 0.1, -1.0],  # correct 
-    [2.0, -1.0, -2.0],  # incorrect
-    [1.0, -1.0, 4.0],   # correct
-    [0.0, 5.0, -1.0],   # correct
+[10.0, 0.1, -1.0], # correct
+[2.0, -1.0, -2.0], # incorrect
+[1.0, -1.0, 4.0], # correct
+[0.0, 5.0, -1.0], # correct
 ])
 acc.update((y_pred, y_target))
 
@@ -1007,9 +1011,12 @@ acc.update((y_pred, y_target))
 # Compute err on 8 samples
 print("After 2nd update, error=", error.compute())
 ```
-
-    After 1st update, error= 25.0
-    After 2nd update, error= 37.5
+---
+```txt [Out]
+After 1st update, error= 25.0
+After 2nd update, error= 37.5
+```
+</CH.Code>
 
 In case a custom metric can not be expressed as arithmetic operations of
 base metrics, please follow [this
@@ -1021,15 +1028,15 @@ to implement the custom metric.
 PyTorch-Ignite provides various commonly used handlers to simplify
 application code:
 
--   Common training handlers: `Checkpoint`, `EarlyStopping`, `Timer`,
-    `TerminateOnNan`
--   Optimizer\'s parameter scheduling (learning rate, momentum, etc.)
-    -   concatenate schedulers, add warm-up, cyclical scheduling,
-        piecewise-linear scheduling, and more! See
-        [examples](https://pytorch.org/ignite/contrib/handlers.html#more-on-parameter-scheduling).
--   Time profiling
--   Logging to experiment tracking systems:
-    -   Tensorboard, Visdom, MLflow, Polyaxon, Neptune, Trains, etc.
+- Common training handlers: `Checkpoint`, `EarlyStopping`, `Timer`,
+  `TerminateOnNan`
+- Optimizer\'s parameter scheduling (learning rate, momentum, etc.)
+  - concatenate schedulers, add warm-up, cyclical scheduling,
+    piecewise-linear scheduling, and more! See
+    [examples](https://pytorch.org/ignite/contrib/handlers.html#more-on-parameter-scheduling).
+- Time profiling
+- Logging to experiment tracking systems:
+  - Tensorboard, Visdom, MLflow, Polyaxon, Neptune, Trains, etc.
 
 Complete lists of handlers provided by PyTorch-Ignite can be found
 [here](https://pytorch.org/ignite/handlers.html#complete-list-of-handlers)
@@ -1037,7 +1044,7 @@ for `ignite.handlers` and
 [here](https://pytorch.org/ignite/contrib/handlers.html#ignite-contrib-handlers)
 for `ignite.contrib.handlers`.
 
-### Common training handlers 
+### Common training handlers
 
 With the out-of-the-box
 [`Checkpoint`](https://pytorch.org/ignite/handlers.html#ignite.handlers.Checkpoint)
@@ -1055,7 +1062,7 @@ methods](https://pytorch.org/ignite/contrib/engines.html#module-ignite.contrib.e
 
 Let\'s consider an example of using helper methods.
 
-``` python
+```python
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -1115,29 +1122,29 @@ trainer.run(train_data, max_epochs=5)
 tb_logger.close()
 ```
 
-``` json
-{"model_id":"ef6ae183108243b8b758fe7f4f05fe79","version_major":2,"version_minor":0}
-```
-
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 !ls -all "checkpoints"
 !ls -all "best_models"
 !ls -all "tb_logs"
 ```
-
-    total 12
-    drwxr-xr-x 2 root root 4096 Aug 31 11:27 .
-    drwxr-xr-x 1 root root 4096 Aug 31 11:27 ..
-    -rw------- 1 root root 1657 Aug 31 11:27 training_checkpoint_50.pt
-    total 16
-    drwxr-xr-x 2 root root 4096 Aug 31 11:27  .
-    drwxr-xr-x 1 root root 4096 Aug 31 11:27  ..
-    -rw------- 1 root root 1145 Aug 31 11:27 'best_model_2_val_accuracy=0.3000.pt'
-    -rw------- 1 root root 1145 Aug 31 11:27 'best_model_3_val_accuracy=0.3000.pt'
-    total 12
-    drwxr-xr-x 2 root root 4096 Aug 31 11:27 .
-    drwxr-xr-x 1 root root 4096 Aug 31 11:27 ..
-    -rw-r--r-- 1 root root  325 Aug 31 11:27 events.out.tfevents.1598873224.3aa7adc24d3d.115.1
+---
+```txt [Out]
+total 12
+drwxr-xr-x 2 root root 4096 Aug 31 11:27 .
+drwxr-xr-x 1 root root 4096 Aug 31 11:27 ..
+-rw------- 1 root root 1657 Aug 31 11:27 training_checkpoint_50.pt
+total 16
+drwxr-xr-x 2 root root 4096 Aug 31 11:27  .
+drwxr-xr-x 1 root root 4096 Aug 31 11:27  ..
+-rw------- 1 root root 1145 Aug 31 11:27 'best_model_2_val_accuracy=0.3000.pt'
+-rw------- 1 root root 1145 Aug 31 11:27 'best_model_3_val_accuracy=0.3000.pt'
+total 12
+drwxr-xr-x 2 root root 4096 Aug 31 11:27 .
+drwxr-xr-x 1 root root 4096 Aug 31 11:27 ..
+-rw-r--r-- 1 root root  325 Aug 31 11:27 events.out.tfevents.1598873224.3aa7adc24d3d.115.1
+```
+</CH.Code>
 
 In the above code, the `common.setup_common_training_handlers` method
 adds `TerminateOnNan`, adds a handler to use `lr_scheduler` (expressed
@@ -1173,36 +1180,40 @@ To make distributed configuration setup easier, the
 [`Parallel`](https://pytorch.org/ignite/distributed.html#ignite.distributed.launcher.Parallel)
 context manager has been introduced:
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 code = """
 import ignite.distributed as idist
 
-def training(local_rank, config, **kwargs):
+def training(local_rank, config, \*\*kwargs):
     print(idist.get_rank(), ': run with config:', config, '- backend=', idist.backend())
     # do the training ...
-  
-backend = 'gloo' # or "xla-tpu" or None
-dist_configs = {'nproc_per_node': 2}  # or dist_configs = {...}
+
+backend = 'gloo'  # or "xla-tpu" or None
+dist_configs = {'nproc_per_node': 2} # or dist_configs = {...}
 config = {'c': 12345}
 
 if __name__ == '__main__':
-
     with idist.Parallel(backend=backend, **dist_configs) as parallel:
         parallel.run(training, config, a=1, b=2)
 """
+
 !echo "{code}" > main.py
 !python main.py
 ```
-
-    2020-08-31 11:27:07,128 ignite.distributed.launcher.Parallel INFO: Initialized distributed launcher with backend: 'gloo'
-    2020-08-31 11:27:07,128 ignite.distributed.launcher.Parallel INFO: - Parameters to spawn processes: 
-    	nproc_per_node: 2
-    	nnodes: 1
-    	node_rank: 0
-    2020-08-31 11:27:07,128 ignite.distributed.launcher.Parallel INFO: Spawn function '<function training at 0x7f32b8ac9d08>' in 2 processes
-    0 : run with config: {'c': 12345} - backend= gloo
-    1 : run with config: {'c': 12345} - backend= gloo
-    2020-08-31 11:27:09,959 ignite.distributed.launcher.Parallel INFO: End of run
+---
+```txt [Out]
+2020-08-31 11:27:07,128 ignite.distributed.launcher.Parallel INFO: Initialized distributed launcher with backend: 'gloo'
+2020-08-31 11:27:07,128 ignite.distributed.launcher.Parallel INFO: - Parameters to spawn processes:
+	nproc_per_node: 2
+	nnodes: 1
+	node_rank: 0
+2020-08-31 11:27:07,128 ignite.distributed.launcher.Parallel INFO: Spawn function '<function training at 0x7f32b8ac9d08>' in 2 processes
+0 : run with config: {'c': 12345} - backend= gloo
+1 : run with config: {'c': 12345} - backend= gloo
+2020-08-31 11:27:09,959 ignite.distributed.launcher.Parallel INFO: End of run
+```
+</CH.Code>
 
 The above code with a single modification can run on a GPU, single-node
 multiple GPUs, single or multiple TPUs etc. It can be executed with the
@@ -1214,7 +1225,7 @@ In addition, methods like `auto_model()`, `auto_optim()` and
 `auto_dataloader()` help to adapt in a transparent way the provided
 model, optimizer and data loaders to an existing configuration:
 
-``` python
+```python
 # main.py
 
 import ignite.distributed as idist
@@ -1273,41 +1284,41 @@ only to pass through this quick-start example and [library
 
 In addition, PyTorch-Ignite also provides several tutorials:
 
--   [Text Classification using Convolutional Neural
-    Networks](https://github.com/pytorch/ignite/blob/master/examples/notebooks/TextCNN.ipynb)
--   [Variational Auto
-    Encoders](https://github.com/pytorch/ignite/blob/master/examples/notebooks/VAE.ipynb)
--   [Convolutional Neural Networks for Classifying Fashion-MNIST
-    Dataset](https://github.com/pytorch/ignite/blob/master/examples/notebooks/FashionMNIST.ipynb)
--   [Training Cycle-GAN on Horses to Zebras with
-    Nvidia/Apex](https://github.com/pytorch/ignite/blob/master/examples/notebooks/CycleGAN_with_nvidia_apex.ipynb)
--   [Another training Cycle-GAN on Horses to Zebras with Native Torch
-    CUDA
-    AMP](https://github.com/pytorch/ignite/blob/master/examples/notebooks/CycleGAN_with_torch_cuda_amp.ipynb)
--   [Finetuning EfficientNet-B0 on
-    CIFAR100](https://github.com/pytorch/ignite/blob/master/examples/notebooks/EfficientNet_Cifar100_finetuning.ipynb)
--   [Hyperparameters tuning with
-    Ax](https://github.com/pytorch/ignite/blob/master/examples/notebooks/Cifar10_Ax_hyperparam_tuning.ipynb)
--   [Basic example of LR finder on
-    MNIST](https://github.com/pytorch/ignite/blob/master/examples/notebooks/FastaiLRFinder_MNIST.ipynb)
--   [Benchmark mixed precision training on Cifar100: torch.cuda.amp vs
-    nvidia/apex](https://github.com/pytorch/ignite/blob/master/examples/notebooks/Cifar100_bench_amp.ipynb)
--   [MNIST training on a single
-    TPU](https://github.com/pytorch/ignite/blob/master/examples/notebooks/MNIST_on_TPU.ipynb)
--   [CIFAR10 Training on multiple
-    TPUs](https://github.com/pytorch/ignite/tree/master/examples/contrib/cifar10)
+- [Text Classification using Convolutional Neural
+  Networks](https://github.com/pytorch/ignite/blob/master/examples/notebooks/TextCNN.ipynb)
+- [Variational Auto
+  Encoders](https://github.com/pytorch/ignite/blob/master/examples/notebooks/VAE.ipynb)
+- [Convolutional Neural Networks for Classifying Fashion-MNIST
+  Dataset](https://github.com/pytorch/ignite/blob/master/examples/notebooks/FashionMNIST.ipynb)
+- [Training Cycle-GAN on Horses to Zebras with
+  Nvidia/Apex](https://github.com/pytorch/ignite/blob/master/examples/notebooks/CycleGAN_with_nvidia_apex.ipynb)
+- [Another training Cycle-GAN on Horses to Zebras with Native Torch
+  CUDA
+  AMP](https://github.com/pytorch/ignite/blob/master/examples/notebooks/CycleGAN_with_torch_cuda_amp.ipynb)
+- [Finetuning EfficientNet-B0 on
+  CIFAR100](https://github.com/pytorch/ignite/blob/master/examples/notebooks/EfficientNet_Cifar100_finetuning.ipynb)
+- [Hyperparameters tuning with
+  Ax](https://github.com/pytorch/ignite/blob/master/examples/notebooks/Cifar10_Ax_hyperparam_tuning.ipynb)
+- [Basic example of LR finder on
+  MNIST](https://github.com/pytorch/ignite/blob/master/examples/notebooks/FastaiLRFinder_MNIST.ipynb)
+- [Benchmark mixed precision training on Cifar100: torch.cuda.amp vs
+  nvidia/apex](https://github.com/pytorch/ignite/blob/master/examples/notebooks/Cifar100_bench_amp.ipynb)
+- [MNIST training on a single
+  TPU](https://github.com/pytorch/ignite/blob/master/examples/notebooks/MNIST_on_TPU.ipynb)
+- [CIFAR10 Training on multiple
+  TPUs](https://github.com/pytorch/ignite/tree/master/examples/contrib/cifar10)
 
 and examples:
 
--   [cifar10](https://github.com/pytorch/ignite/tree/master/examples/contrib/cifar10)
-    (single/multi-GPU, DDP, AMP, TPUs)
--   [basic
-    RL](https://github.com/pytorch/ignite/tree/master/examples/reinforcement_learning)
--   [reproducible baselines for vision
-    tasks](https://github.com/pytorch/ignite/tree/master/examples/references):
-    -   classification on ImageNet (single/multi-GPU, DDP, AMP)
-    -   semantic segmentation on Pascal VOC2012 (single/multi-GPU, DDP,
-        AMP)
+- [cifar10](https://github.com/pytorch/ignite/tree/master/examples/contrib/cifar10)
+  (single/multi-GPU, DDP, AMP, TPUs)
+- [basic
+  RL](https://github.com/pytorch/ignite/tree/master/examples/reinforcement_learning)
+- [reproducible baselines for vision
+  tasks](https://github.com/pytorch/ignite/tree/master/examples/references):
+  - classification on ImageNet (single/multi-GPU, DDP, AMP)
+  - semantic segmentation on Pascal VOC2012 (single/multi-GPU, DDP,
+    AMP)
 
 The package can be installed with pip or conda. More info and guides can
 be found [here](https://github.com/pytorch/ignite#installation).
@@ -1316,7 +1327,7 @@ be found [here](https://github.com/pytorch/ignite#installation).
 
 Instead of a conclusion, we will wrap up with some current project news:
 
-------------------------------------------------------------------------
+---
 
 🎊🚄 [Trains Ignite server](https://app.ignite.trains.allegro.ai) is
 open to everyone to browse our reproducible experiment logs, compare
@@ -1325,14 +1336,12 @@ server](https://github.com/allegroai/trains) and associated
 infrastructure. Many thanks to the folks at [Allegro
 AI](https://allegro.ai/) who are making this possible!
 
-------------------------------------------------------------------------
+---
 
-```
-<!--div align="center">
-<img width=150 src="https://numfocus.org/wp-content/uploads/2018/01/optNumFocus_LRG.png" />
-<img width=175 src="https://labs.quansight.org/images/QuansightLabs_logo_V2.png" />
-</div-->
-```
+<div align="center">
+  <img width="150" src="https://numfocus.org/wp-content/uploads/2018/01/optNumFocus_LRG.png" />
+  <img width="150" src="https://labs.quansight.org/images/QuansightLabs_logo_V2.png" />
+</div>
 🎉🎊 Since June 2020, PyTorch-Ignite has joined [NumFOCUS as an
 affiliated
 project](https://numfocus.org/sponsored-projects/affiliated-projects) as
@@ -1340,71 +1349,86 @@ well as [Quansight Labs](https://labs.quansight.org/projects/). We
 believe that it will be a new step in our project's development, and in
 promoting open practices in research and industry.
 
-------------------------------------------------------------------------
+---
 
-`<img style="float: left;" width=20 src="https://hacktoberfest.digitalocean.com/h-light.svg" />`
-🎉 [Hacktoberfest 2020](https://hacktoberfest.digitalocean.com/) is the
-open-source coding festival for everyone to attend in October and
-PyTorch-Ignite is also preparing for it. Please, check out [our
-announcement](https://github.com/pytorch/ignite/issues/1257).
+<div align="center">
+  <img
+    width="150"
+    src="https://hacktoberfest.com/_next/static/media/opengraph.6e804091.png"
+  />
+</div>
+🎉 [Hacktoberfest 2020](https://hacktoberfest.digitalocean.com/) is the open-source
+coding festival for everyone to attend in October and PyTorch-Ignite is also preparing
+for it. Please, check out [our announcement](https://github.com/pytorch/ignite/issues/1257).
 
-------------------------------------------------------------------------
+---
 
-```
-<!--div align="center">
-    
-<a href="https://www.mentored-sprints.dev/">
-<img width=320 src="https://the-turing-way.netlify.app/_images/community.jpg" />
-</a>
-
-</div-->
-```
-🎉
-`<img style="float: left;" width=20 src="https://global.pydata.org/assets/images/pydata.png"/>`
+<div align="center">
+  <a href="https://www.mentored-sprints.dev/">
+    <img width="150" src="https://raw.githubusercontent.com/pycon-mentored-sprints/mentored-sprints.dev/9cb1d6f62c85ac0444e0b603c5eb68f50256e994/images/logo/MS_altlogo_blue.svg" />
+  </a>
+  <img width="150" src="https://static1.squarespace.com/static/684af041a9d73e06a56323f5/t/684af055a9d73e06a56327bf/1693516643425/PyDataGlobal-two-globes-horizontal1200x600.png?format=1500w"/>
+</div>
+🎉 
 We are pleased to announce that we will run a mentored sprint session to
 contribute to PyTorch-Ignite at PyData Global 2020. We are looking
 forward to seeing you in November at this event!
 
-------------------------------------------------------------------------
+---
 
-```
-<!--div align="center">
-
-<img width=200 src="https://raw.githubusercontent.com/pytorch/ignite/master/assets/ignite_logo.svg" />
-
-</div-->
-```
-. \| 📈💻 The project is currently maintained by a team of volunteers
+<div align="center">
+    <img
+      width="150"
+      src="https://raw.githubusercontent.com/pytorch/ignite/9294aaed1bf12fec8bf55185c1322a57bf8246b3/assets/logo/ignite_logo.svg"
+    />
+</div>
+📈💻 The project is currently maintained by a team of volunteers
 and we are looking for motivated contributors to help us to move the
 project forward. Please see the [contribution
 guidelines](https://github.com/pytorch/ignite/blob/master/CONTRIBUTING.md)
 for more information if this sounds interesting to you.
 
-------------------------------------------------------------------------
+---
 
-`<img style="float: left;" width=20 src="https://github.githubassets.com/images/icons/emoji/octocat.png"/>`
-Check out the project on [GitHub](https://github.com/pytorch/ignite) and
-follow us on [Twitter](https://twitter.com/pytorch_ignite). For any
-questions, support or issues, please [reach out to
-us](https://github.com/pytorch/ignite#communication). For all other
-questions and inquiries, please send an email to
-[contact@pytorch-ignite.ai](contact@pytorch-ignite.ai)
+<div align="center">
+  <img
+    width="150"
+    src="https://cameronmcefee.com/img/work/the-octocat/original.jpg"
+  />
+</div>
+Check out the project on [GitHub](https://github.com/pytorch/ignite) and follow us
+on [Twitter](https://twitter.com/pytorch_ignite). For any questions, support or issues,
+please [reach out to us](https://github.com/pytorch/ignite#communication). For all
+other questions and inquiries, please send an email to [contact@pytorch-ignite.ai](contact@pytorch-ignite.ai)
 
-::: {.cell .markdown}
+---
 
-------------------------------------------------------------------------
+<div align="center">
+  <a href="https://labs.quansight.org/">
+    <img
+      width="150"
+      src="/images/QuansightLabs_logo_V2.png"
+    />
+  </a>
+</div>
 
-::: {.cell .markdown colab="{}" colab_type="code" id="Pae3a0-qLeBI"}
-`<a href="https://labs.quansight.org/">``<img style="float: left;" width=175 src="/images/QuansightLabs_logo_V2.png"/>``</a>`
 Quansight Labs is a public-benefit division of
 [Quansight](https://www.quansight.com/) created to provide a home for a
 "PyData Core Team" who create and maintain open-source technology around
 all aspects of scientific and data science workflows. PyTorch-Ignite
-being part of Labs benefits from Labs\' community, supports
-PyTorch-Ignite\'s sustainability, and accelerates development of the
+being part of Labs benefits from Labs' community, supports
+PyTorch-Ignite's sustainability, and accelerates development of the
 project that users rely on.
 
-`<a href="https://www.ifpenergiesnouvelles.com/">``<img style="float: left;" pad=5 width=170 src="https://www.ifpenergiesnouvelles.com/sites/ifpen.fr/files/logo_ifpen_2.jpg"/>``</a>`
+<div align="center">
+  <a href="https://www.ifpenergiesnouvelles.com/">
+    <img
+      width="150"
+      src="https://www.ifpenergiesnouvelles.com/sites/ifpen.fr/files/logo_ifpen_2.jpg"
+    />
+  </a>
+</div>
+
 IFP Energies nouvelles (IFPEN) is a major research and training player
 in the fields of energy, transport and the environment. Deep Learning
 approaches are currently carried out through different projects from
@@ -1412,7 +1436,3 @@ high performance data analytics to numerical simulation and natural
 language processing. Contributing to PyTorch-Ignite is a way for IFPEN
 to develop and maintain its software skills and best practices at the
 highest technical level.
-
-::: {.cell .code}
-``` python
-```
