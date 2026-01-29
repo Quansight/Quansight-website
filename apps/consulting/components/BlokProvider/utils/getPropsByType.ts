@@ -1,5 +1,4 @@
 import { TRawBlok } from '../../../types/storyblok/bloks/rawBlok';
-import { getBlogArticleProps } from '../mappers/getBlogArticleProps';
 import { getBoardListProps } from '../mappers/getBoardListProps';
 import { getBoardProps } from '../mappers/getBoardProps';
 import { getCenteredIntroProps } from '../mappers/getCenteredIntroProps';
@@ -19,13 +18,11 @@ import { getTeamProps } from '../mappers/getTeamProps';
 import { getTeaserProps } from '../mappers/getTeaserProps';
 import { getTestimonialProps } from '../mappers/getTestimonialProps';
 import { getTextArticleProps } from '../mappers/getTextArticleProps';
+import { getVideoProps } from '../mappers/getVideoProps';
 import { ComponentType, TBlokComponentProps } from '../types';
 
 export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
   switch (blok.component) {
-    case ComponentType.BlogArticle: {
-      return getBlogArticleProps(blok);
-    }
     case ComponentType.Board: {
       return getBoardProps(blok);
     }
@@ -82,6 +79,9 @@ export const getPropsByType = (blok: TRawBlok): TBlokComponentProps => {
     }
     case ComponentType.TextArticle: {
       return getTextArticleProps(blok);
+    }
+    case ComponentType.Video: {
+      return getVideoProps(blok);
     }
     default:
       return null;

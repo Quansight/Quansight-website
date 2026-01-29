@@ -1,9 +1,9 @@
 ---
 title: 'Rethinking Jupyter Interactive Documentation'
 published: May 07, 2021
-author: matthias-bussonnier
+authors: [matthias-bussonnier]
 description: 'Today I want to look into a topic that has not evolved much since, and I believe could use an upgrade. Accessing interactive Documentation when in a Jupyter session, and what it could become. At the end I"ll link to my current prototype if you are adventurous.'
-category: [Developer workflows, OSS Experience]
+category: [Developer workflows, OSS Experience, Documentation]
 featuredImage:
   src: /posts/rethinking-jupyter-documentation/feature.png
   alt: 'A side-by-side comparison of the current documentation of Jupyter with REPL vs NumPy"s documentation as a website.'
@@ -148,7 +148,7 @@ the above screenshot).
 I'm working on a number of other features, in particular:
 
  - rendering of narrative docs – for which I have a prototype,
- - automatic indexing of all the figures and plots –  working but slow right now,
+ - automatic indexing of all the figures and plots –  working but slow right now,
  - proper cross-library referencing and indexing without the need for intersphinx.
    For example, it is possible from the `numpy.linspace` page to see all pages that
    reference it, or use `numpy.linspace` in their example section
@@ -161,7 +161,7 @@ deprecated directives, and custom color/syntax highlighting) - though I haven't 
 working on these. I do have some ideas on how this could be used to provide
 translations as well.
 
-Right now, is it not as fast and efficient as I would like to – though it's faster
+Right now, is it not as fast and efficient as I would like to – though it's faster
 than running Sphinx on the fly – but requires some ahead of time processing. And it
 crashes in many places; it can render most of the documentation of SciPy, NumPy,
 xarray, IPython and scikit-image.

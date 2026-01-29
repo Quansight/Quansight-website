@@ -1,9 +1,9 @@
 ---
 title: 'Develop a JupyterLab Winter Theme'
 published: December 22, 2020
-author: isabela-presedo-floyd
+authors: [isabela-presedo-floyd]
 description: 'In the following blog post, we will show you step-by-step how you can develop a custom theme for JupyterLab, distribute it, and take the example of the jupyterlab-theme-winter theme we release today to celebrate the end of 2020.'
-category: [PyData ecosystem]
+category: [PyData ecosystem, Design]
 featuredImage:
   src: /posts/jupyterlab-winter-theme/feature.png
   alt: 'The JupyterLab interface updated with a colorful blue theme that includes blue snowflakes.'

@@ -1,6 +1,6 @@
 ---
 title: This is another hello world post!
-author: carlos-cordoba
+authors: [carlos-cordoba]
 published: October 13, 2022
 description: Lorem ipsum dolor sit amet
 category: [Machine Learning, Array API]

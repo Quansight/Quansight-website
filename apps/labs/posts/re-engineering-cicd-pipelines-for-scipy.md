@@ -1,9 +1,9 @@
 ---
 title: 'Re-Engineering CI/CD pipelines for SciPy'
 published: October 11, 2021
-author: harsh-mishra
+authors: [harsh-mishra]
 description: 'In this blog post I talk about the projects and my work during my internship at Quansight Labs. My efforts were geared towards re-engineering CI/CD pipelines for SciPy to make them more efficient to use with GitHub Actions.'
-category: [Developer workflows]
+category: [Developer workflows, Internship]
 featuredImage:
   src: /posts/re-engineering-cicd-pipelines-for-scipy/feature.png
   alt: 'The picture displays a logo of Quansight Labs on the left and a logo of SciPy on the right. It signifies the primary purpose of the project at Quansight Labs to re-engineer the GitHub Actions CI for the SciPy and lay down the further scope for developing an entire CI matrix for build, test and release.'
@@ -113,7 +113,7 @@ GitHub Actions allows us to perform macOS builds quite generously, and creating 
 
 ## Automating CI benchmarking on GitHub Actions
 
-This task was heavily influenced by the work done by [Jaime Rodríguez-Guerra](https://github.com/jaimergp) on [Scikit-Image](https://github.com/scikit-image/scikit-image)  [PR #5424](https://github.com/scikit-image/scikit-image/pull/5424). We wanted the benchmarks to be run automatically on specific Pull Requests with apt labels or during releases. It, however had a few problems that we wanted to address before moving forward:
+This task was heavily influenced by the work done by [Jaime Rodríguez-Guerra](https://github.com/jaimergp) on [Scikit-Image](https://github.com/scikit-image/scikit-image) [PR #5424](https://github.com/scikit-image/scikit-image/pull/5424). We wanted the benchmarks to be run automatically on specific Pull Requests with apt labels or during releases. It, however had a few problems that we wanted to address before moving forward:
 
 - Benchmarking requires to happen on specific hardware under specific conditions, which is difficult to reproduce.
 
@@ -157,7 +157,6 @@ We also implemented a sampling strategy to match the versions of Python and NumP
 ## Miscellaneous
 
 In addition, I also worked on the upstream SciPy project on some of the minor issues. [PR #14993](https://github.com/scipy/scipy/pull/14493) updates all the Issue markdown templates to utilize the new YAML-based GitHub issue forms. The feedback received after the previous pull request was incorporated on [PR #14669](https://github.com/scipy/scipy/pull/14669).
-
 
 ## Challenges faced
 
