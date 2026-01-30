@@ -1,0 +1,187 @@
+---
+title: "Expressions are coming to pandas!"
+published: 27 August, 2025
+authors: [marco-gorelli]
+description: "`pd.col` will soon be a real thing!"
+category: [PyData ecosystem]
+featuredImage:
+  src: /posts/pandas-expressions/featured.jpg
+  alt: 'panda climbing tree, with `pd.col` text above. Photo by Chester Ho on Unsplash'
+hero:
+  imageSrc: /posts/pandas-expressions/hero.jpg
+  imageAlt: 'panda climbing tree, with `pd.col` text above. Photo by Chester Ho on Unsplash'
+
+---
+
+> "Express yourself (Ah, ah, ah yeah, ah yeah, ah yeah, ah yeah)" - _Dr. Dre_
+
+17 years ago, pandas came onto the scene and took the Python data science scene by storm. It provided data scientists with an efficient way to interact with tabular data and solve real problems. Over time, other frameworks have emerged, taking inspiration from pandas whilst addressing [some of its many limitations](https://wesmckinney.com/blog/apache-arrow-pandas-internals/). Recently, we've come full-circle, and [pandas has introduced a new syntax](https://github.com/pandas-dev/pandas/pull/62103) inspired by the newer wave of dataframe libraries. Let's learn about why, and how you can use it!
+
+## How to assign a new column in pandas
+
+Suppose you've got a dataframe of city names and temperatures:
+
+```python
+import pandas as pd
+
+data = {'city': ['Sapporo', 'Kampala'], 'temp_c': [6.7, 25.]}
+df = pd.DataFrame(data)
+```
+
+```console
+      city  temp_c
+0  Sapporo     6.7
+1  Kampala    25.0
+```
+
+Let's look at how we can make a new column `'temp_f'` which converts `'temp_c'` to Fahrenheit.
+
+```python
+# option 1
+df['temp_f'] = df['temp_c'] * 9 / 5 + 32
+
+# option 2
+df = df.assign(temp_f = lambda x: x['temp_c'] * 9 / 5 + 32)
+
+# option 3 (coming in pandas 3.0!)
+df = df.assign(temp_f = pd.col('temp_c') * 9 / 5 + 32)
+```
+
+The first option modifies the original object `df` in-place, and isn't suitable for method-chaining. The second option allows for [method chaining](https://tomaugspurger.net/posts/method-chaining/), but requires using a lambda function. The third option uses the new syntax coming in pandas 3.0. But why is it an improvement over the second option, what's so bad about lambda functions? There are a few reasons:
+
+- [Scoping rules](https://stackoverflow.com/a/938493/4451315) make their behaviour hard to predict (example below!).
+- They are opaque and non-introspectable. Try printing one out on the console, and you'll see something incomprehensible like `<function <lambda> at 0x76b583037560>`. If you receive a lambda function from user input, you have no way to validate what's inside (unless you enjoy reverse-engineering byte-code, and even then, you won't be able to do it in general).
+
+I don't think the first point is appreciated enough, so before exploring `pd.col` more, let's elaborate on this `lambda` drawback.
+
+### `lambda` might not do what you think it does
+
+Say you have a dataframe
+
+```python
+df = pd.DataFrame({'a': [1,2,3], 'b': [4,5,6], 'c': [7,8,9]})
+```
+
+```console
+   a  b  c
+0  1  4  7
+1  2  5  8
+2  3  6  9
+```
+
+and you want to increase each column's value by `10`. Rather than writing out an operation for each column, you try to get clever and write a dictionary comprehension:
+
+```python
+df.assign(
+    **{col: lambda x: x[col] + 10 for col in df.columns}
+)
+```
+
+```python
+    a   b   c
+0  17  17  17
+1  18  18  18
+2  19  19  19
+```
+
+Hmmm, that output does not look like what what we were expecting! Let's now rewrite the above using the new `pd.col` syntax:
+
+```python
+df.assign(
+    **{col: pd.col(col) + 10 for col in df.columns}
+)
+```
+
+```python
+    a   b   c
+0  11  14  17
+1  12  15  18
+2  13  16  19
+```
+
+That's more like it!
+
+The output of `pd.col` is called an _expression_. You can think of it as a delayed column - it only produces a result once it's evaluated inside a dataframe context. Not only does it provide us with a clean syntax, it also produces the output we were expecting!
+
+Furthermore, we no longer have to deal with opaque lambda functions. If you print the expression, you'll get readable output:
+
+```python
+In [6]: lambda x: x['a'] + 10
+Out[6]: <function __main__.<lambda>(x)>
+
+In [7]: pd.col('a') + 10
+Out[7]: (col('a') + 10)
+```
+
+Anecdotally, from my experience teaching Polars (a newer dataframe library which makes extensive use of expressions), people develop an intuition for this `col` syntax very quickly.
+
+## What can `pd.col` do?
+
+Series namespaces, such as [dt](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.dt.html) and [str](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.html), are also supported. If you [register your own Series namespace](https://pandas.pydata.org/docs/reference/api/pandas.api.extensions.register_series_accessor.html), you'll be able to access that too. You can even pass expressions to NumPy [ufuncs](https://numpy.org/doc/stable/reference/ufuncs.html)!
+
+```python
+import numpy as np
+import pandas as pd
+
+df = pd.DataFrame({'city': ['Sapporo', 'Kampala'], 'temp_c': [6.7, 25.]})
+df.assign(
+    city_upper = pd.col('city').str.upper(),
+    log_temp_c = np.log(pd.col('temp_c')),
+)
+```
+
+```console
+      city  temp_c city_upper  log_temp_c
+0  Sapporo     6.7    SAPPORO    1.902108
+1  Kampala    25.0    KAMPALA    3.218876
+```
+
+You can use `pd.col` anywhere in the pandas API where they accept callables from dataframes to series or scalars. One such place is `loc` - for example, to keep all rows where the value of column `'temp_c'` is greater than `10`, you can do:
+
+```python
+df.loc[pd.col('temp_c')>10]
+```
+
+```console
+      city  temp_c
+1  Kampala    25.0
+```
+
+The pre-expressions ways to do this would have been:
+
+- `df.loc[df['temp_c'] > 10]`
+- `df.loc[lambda x: x['temp_c']>10]`
+
+## Can we use `pd.all` too?
+
+If you're used to Polars, you might be wondering if it's possible to operate on multiple columns at the same time by writing something like:
+
+```python
+df.assign(pd.all() + 10)
+```
+
+The answer is: not yet. Some extensive refactors would be needed in pandas for that to work. But, the introduction of `pd.col` at least opens the doors to it!
+
+In the meantime, [Narwhals](https://github.com/narwhals-dev/narwhals) implements more complete support for expressions on top of pandas (as well as on top of DuckDB, PySpark, Dask, and other major libraries!) - in particular, multi-output expressions are supported:
+
+```python
+import narwhals as nw
+
+(
+    nw.from_native(df)
+    .with_columns(nw.all() + 10)
+    .to_native()
+)
+```
+
+If you enjoy the expressive `col` syntax and want to use it more broadly to write applications which can support all major dataframe libraries, check it out, you may like what you find!
+
+## What's next?
+
+We've looked at how pandas 3.0 will come with a new feature (`pd.col`) which allows you to use expressions to write readable code which avoids the many pitfalls of `lambda`s. This is a newly-introduced feature in pandas, and future work may include:
+
+- Serialising and deserialising expressions.
+- Accepting expressions in `groupby`.
+- Multi-output expressions, such as `pd.all` or selectors.
+
+If you would like help implementing solutions with any of the tools covered in this post or would like to sponsor efforts toward dataframe API unification, [we can help](https://quansight.com/about-us/#bookacallform)!

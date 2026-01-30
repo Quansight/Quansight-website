@@ -7,6 +7,7 @@ import {
   TStatuteProps,
   TTeaserProps,
   THeroProps,
+  TVideoProps,
 } from '@quansight/shared/ui-components';
 
 import { TPageHeadingProps } from '../PageHeading/types';
@@ -22,6 +23,7 @@ export enum ComponentType {
   Teaser = 'teaser',
   Hero = 'hero',
   Statute = 'statute',
+  Video = 'video',
 }
 
 type TBlokComponentPropsMap = {
@@ -34,6 +36,7 @@ type TBlokComponentPropsMap = {
   [ComponentType.Teaser]: TTeaserProps;
   [ComponentType.Hero]: THeroProps;
   [ComponentType.Statute]: TStatuteProps;
+  [ComponentType.Video]: TVideoProps;
 };
 
 export type TBlokComponentProps = TypeValuesUnion<TBlokComponentPropsMap>;

@@ -1,11 +1,11 @@
 ---
 title: "Quansight presence at SciPy'19"
 published: July 15, 2019
-author: ralf-gommers
+authors: [ralf-gommers]
 description: "This post is just a quick update to summarize Quansight's presence and contributions, as well as some of the more interesting things I noticed."
-category: [Community, PyData Ecosystem]
+category: [Community, PyData ecosystem]
 featuredImage:
-  src: /posts/quansight-at-scipy2019/blog_feature_org.svg
+  src: /posts/quansight-at-scipy2019/blog_feature_org.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/quansight-at-scipy2019/blog_hero_var2.svg

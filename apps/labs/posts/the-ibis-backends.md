@@ -1,11 +1,11 @@
 ---
 title: 'Querying multiple backends with Ibis'
 published: November 13, 2020
-author: tony-fast
+authors: [tony-fast]
 description: "We'll highlight the ability of Ibis to generically prescribe query expressions across different data storage systems."
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/the-ibis-backends/blog_feature_var2.svg
+  src: /posts/the-ibis-backends/blog_feature_var2.png
   alt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
 hero:
   imageSrc: /posts/the-ibis-backends/blog_hero_var1.svg
