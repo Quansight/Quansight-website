@@ -1,6 +1,6 @@
 ---
 title: "Ibis: Python data analysis productivity framework"
-author: ivan-ogasawara
+authors: [ivan-ogasawara]
 published: July 9, 2019
 description: 'During the last months OmniSci and Quansight were working together to add a backend to Ibis for OmniSciDB (formerly MapD Core)The implementation of this new backend also resulted in the creation of new expressions/operators on Ibis core, such as GeoSpatial data types and operations, trigonometric operations and Ssome statistcal operations.'
 category: [PyData ecosystem]
@@ -66,21 +66,25 @@ new expressions/operators on Ibis core, such as:
 
 First, let's connect to a *OmniSciDB* and play with this new features!
 
-``` python
+```python
 # install the dependencies if you need!
 # !conda install -y ibis-framework=1.1.0 pyarrow pymapd vega geopandas geoalchemy2 shapely matplotlib --force-reinstall
 ```
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 import ibis
 from matplotlib import pyplot as plt
 
 print('ibis:', ibis.__version__)
 ```
+---
+```txt [Out]
+ibis: 1.2.0+7.g3afa8b0d
+```
+</CH.Code>
 
-    ibis: 1.2.0+7.g3afa8b0d
-
-``` python
+```python
 # metis.mapd.com is used in some OmniSci docs
 # but maybe you want to install your own OmniSciDB instance
 # you can take a look into installation section at 
@@ -110,46 +114,53 @@ so let's use a workaround for that! It should be implemented into
 `omniscidb` backend soon! (see:
 [gist-code](https://gist.githubusercontent.com/xmnlab/587dd1bde44850f3117a1087ed3f0f28/raw/0750400db90cf97319a91aa514648c31ad4ace45/omniscidb_geopandas_output.py))
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 gist_url = 'https://gist.githubusercontent.com/xmnlab/587dd1bde44850f3117a1087ed3f0f28/raw/0750400db90cf97319a91aa514648c31ad4ace45/omniscidb_geopandas_output.py'
 !wget {gist_url} -O omniscidb_geopandas_output.py
 ```
+---
+```txt [Out]
+--2019-07-05 11:31:57--  https://gist.githubusercontent.com/xmnlab/587dd1bde44850f3117a1087ed3f0f28/raw/0750400db90cf97319a91aa514648c31ad4ace45/omniscidb_geopandas_output.py
+Resolviendo gist.githubusercontent.com (gist.githubusercontent.com)... 151.101.48.133
+Conectando con gist.githubusercontent.com (gist.githubusercontent.com)[151.101.48.133]:443... conectado.
+Petición HTTP enviada, esperando respuesta... 200 OK
+Longitud: 1874 (1,8K) [text/plain]
+Guardando como: "omniscidb_geopandas_output.py"
 
-    --2019-07-05 11:31:57--  [https://gist.githubusercontent.com/xmnlab/587dd1bde44850f3117a1087ed3f0f28/raw/0750400
-    db90cf97319a91aa514648c31ad4ace45/omniscidb_geopandas_output.py](https://gist.githubusercontent.com/xmnlab/587dd1bde44850f3117a1087ed3f0f28/raw/0750400db90cf97319a91aa514648c31ad4ace45/omniscidb_geopandas_output.py)
-    Resolviendo gist.githubusercontent.com (gist.githubusercontent.com)... 151.101.48.133
-    Conectando con gist.githubusercontent.com (gist.githubusercontent.com)[151.101.48.133]:443... conectado.
-    Petición HTTP enviada, esperando respuesta... 200 OK
-    Longitud: 1874 (1,8K) [text/plain]
-    Guardando como: “omniscidb_geopandas_output.py”
+omniscidb_geopandas 100%[===================>]   1,83K  --.-KB/s    en 0s
 
-    omniscidb_geopandas 100%[===================>]   1,83K  --.-KB/s    en 0s      
+2019-07-05 11:31:57 (70,1 MB/s) - "omniscidb_geopandas_output.py" guardado [1874/1874]
+```
+</CH.Code>
 
-    2019-07-05 11:31:57 (70,1 MB/s) - “omniscidb_geopandas_output.py” guardado [1874/1874]
-
-``` python
+```python
 # workaround to use geopandas output
 from omniscidb_geopandas_output import enable_geopandas_output 
 enable_geopandas_output(omniscidb_cli)
 ```
 
-``` python
+```python
 t = omniscidb_cli.table('zipcodes_2017')
 display(t)
 ```
 
 ![A DatabaseTable with its data types](/posts/ibis-python-data-analysis-productivity-framework/a0a51ad71e1a32140f3e47e71145e6a67d061750.png)
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 print('# rows:', t.count().execute())
 ```
-
-    # rows: 33144
+---
+```txt [Out]
+# rows: 33144
+```
+</CH.Code>
 
 This table has \~33k rows. For this example, let's use just the first
 1k rows.
 
-``` python
+```python
 expr = t[t.omnisci_geo].head(1000)
 df = expr.execute()
 ```
@@ -160,20 +171,24 @@ first 1000 rows, Ibis will prepare a SQL statement to get just the first
 
 This is what Ibis will request to the database:
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 print(expr.compile())
 ```
-
-    SELECT "omnisci_geo"
-    FROM zipcodes_2017
-    LIMIT 1000
+---
+```sql [Out]
+SELECT "omnisci_geo"
+FROM zipcodes_2017
+LIMIT 1000
+```
+</CH.Code>
 
 Of course geospatial data reading as text wouldn't be useful, so let's
 plot the result!
 
 **Remember: we are using geopandas here!**
 
-``` python
+```python
 # let's add some custom style :)
 style_kwds = {
     'linewidth': 2,
@@ -196,7 +211,7 @@ operations: `acos`, `asin`, `atan`, `atan2`, `cos`, `cot`, `sin`, `tan`.
 Let's check an example using a `sin` operation over `rowid` from
 `zipcodes_2017`.
 
-``` python
+```python
 # if you want to use a SQL statement try`sql` method!
 t = omniscidb_cli.sql('select rowid from zipcodes_2017')
 
@@ -216,15 +231,19 @@ such as: `Correlation (corr)`, `Standard Deviation (stddev)`,
 Let's check a pretty simple example: if there is any correlation in
 this dataset between `per capita income` and `education`.
 
-``` python
+<CH.Code className="labs-blog-cell-in-out">
+```python [In]
 t = omniscidb_cli.table('demo_vote_clean')
 # remove some conflictives fields: 'TYPE', 'NAME', 'COUNTY' field
 fields = [name for name in t.schema().names if name not in ('TYPE', 'NAME', 'COUNTY')]
 t = t[fields].distinct()
 t.PerCapitaIncome.corr(t.Education).execute()
 ```
-
-    0.7212061029308654
+---
+```txt [Out]
+0.7212061029308654
+```
+</CH.Code>
 
 The result `~0.72` means that `Per Capita Income` and `Education` has a
 positive correlation in this dataset.
