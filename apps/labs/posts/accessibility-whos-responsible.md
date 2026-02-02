@@ -1,7 +1,7 @@
 ---
 title: "Accessibility: Who's Responsible?"
 published: March 25, 2021
-author: isabela-presedo-floyd
+authors: [isabela-presedo-floyd]
 description: "For the past few months, I've been part of a group of people in the JupyterLab community who've committed to start chipping away at the many accessibility failings of JupyterLab. I find this work is critical, fascinating, and a learning experience for everyone involved. So I'm going to document my personal experience and lessons I've learned in a series of blog posts. Welcome!"
 category: [Access-centered, OSS Experience]
 featuredImage:
@@ -23,20 +23,20 @@ posts. Welcome!
 Because this is the first of a series, I want to make sure we start with a good foundation.
 Let me answer some questions you might be having.
 
-**Q:** Who are you?
+**Q:** Who are you? <br />
 **A:** I'm Isabela, a UX/UI designer at [Quansight Labs](https://labs.quansight.org/), who
 cares about accessibility and is fortunate to work somewhere where that is a respected concern.
 I also spend time in the Jupyter ecosystem—especially around JupyterLab —though that is not the
 only open-source community you can find me in. I like to collect gargoyles, my hair is pink,
 and I love the sunflower emoji :sunflower:. It's nice to meet you!
 
-**Q:** What is the Jupyter ecosystem and JupyterLab?
+**Q:** What is the Jupyter ecosystem and JupyterLab? <br />
 **A:** [Project Jupyter](https://jupyter.org/) is an organization that produces open-source software
 and open standards. The Jupyter ecosystem is a term used to describe projects that are directly a
 part of or support Project Jupyter. JupyterLab is one of its primary projects and a staple for
 the day-to-day work of many students, professionals, researchers, and more.
 
-**Q:** What is accessibility?
+**Q:** What is accessibility? <br />
 **A:** Accessibility is a term used to describe the practice of creating things in a way that
 makes them usable for people with disabilities. I’m going to be talking mostly about web accessibility
 since JupyterLab is a web app. If you're asking why you should care about accessibility, please
@@ -45,7 +45,7 @@ take a moment to read [why it matters](https://www.w3.org/WAI/fundamentals/acces
 have consequences, from people not being able to get information they need to being unable to
 pursue whole careers that rigidly require the use of inaccessible software (such as JupyterLab).
 
-**Q:** Who is responsible for making things accessible?
+**Q:** Who is responsible for making things accessible? <br />
 **A:** I'm so glad you asked! Let's dive into that...
 
 ### How did we get here?
@@ -132,7 +132,7 @@ the four experience types in JupyterLab that we must address to be truly accessi
 ---
 
 _This is part of a series of blogs around making JupyterLab more accessible. You can read the
-[whole series here](/categories/jlaba11y)._
+[whole series here](https://labs.quansight.org/blog?category=Access-centered&page=1)._
 
 _Interested in getting involved? Join our community via the JupyterLab accessibility meetings
 listed every other week on the [Jupyter community calendar](https://jupyter.readthedocs.io/en/latest/community/content-community.html#jupyter-community-meetings)._
