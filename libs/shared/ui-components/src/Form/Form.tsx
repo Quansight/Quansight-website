@@ -1,9 +1,14 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 
-import { sendFormData, FormValues } from '@quansight/shared/utils';
+import {
+  sendFormData,
+  FormValues,
+  TrackingParams,
+  FormAndTrackingValues,
+} from '@quansight/shared/utils';
 import { BOOK_A_CALL_FORM_ID } from '@quansight/shared/utils';
 
 import { Button } from '../Button/Button';
@@ -13,8 +18,8 @@ import { FormError } from './FormError';
 import { FormHeader } from './FormHeader';
 import { FormImage } from './FormImage';
 import { FormSuccess } from './FormSuccess';
-import { FormStates, TFormProps } from './types';
-import { getFormHeader } from './utils';
+import { FormStates, TFormProps, FormSessionStorageKeys } from './types';
+import { getFormHeader, getTrackingParams } from './utils';
 
 export const backgroundStyles = `
   before:absolute before:top-0 before:left-0 before:z-0 before:w-full before:h-full before:bg-gray-50
@@ -27,15 +32,38 @@ export const Form: FC<TFormProps> = (props) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isValid },
   } = useForm<FormValues>({ mode: 'onChange' });
+
+  // Check session storage for form prepopulate values.
+  useEffect(
+    () => {
+      // Other pages on the website can prepopulate the form message field by
+      // setting a session storage value before the form loads.
+      const message = sessionStorage.getItem(FormSessionStorageKeys.Message);
+      if (message) {
+        sessionStorage.removeItem(FormSessionStorageKeys.Message);
+        setValue('message', message);
+      }
+    },
+    // eslint-disable-next-line
+    [], // Run effect only once, when the component mounts
+  );
 
   const checkErrors = (): void => {
     if (!isValid) setFormStatus(FormStates.Errors);
   };
 
   const onSubmit = handleSubmit((formValues): void => {
-    sendFormData(hookUrl, formValues)
+    const trackingParams: TrackingParams = getTrackingParams();
+    const combinedValues: FormAndTrackingValues = {
+      ...formValues,
+      ...trackingParams,
+      form_url: window.location.toString(),
+    };
+
+    sendFormData(hookUrl, combinedValues)
       .then(() => setFormStatus(FormStates.Success))
       .catch(() => setFormStatus(FormStates.Failure));
   });

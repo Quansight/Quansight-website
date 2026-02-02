@@ -7,6 +7,10 @@ export enum FormStates {
   Default = 'default',
 }
 
+export enum FormSessionStorageKeys {
+  Message = '#bookacallform [name=message]',
+}
+
 export type TFormHeaderProps = {
   title: string;
 };

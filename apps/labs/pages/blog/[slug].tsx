@@ -12,14 +12,15 @@ import {
   HeroVariant,
   Layout,
   SEO,
+  SocialCard,
 } from '@quansight/shared/ui-components';
 
 import { FooterItem, HeaderItem } from '../../api/types/basic';
 import { getFooter } from '../../api/utils/getFooter';
 import { getHeader } from '../../api/utils/getHeader';
 import { LinkWithArrow } from '../../components/LinkWithArrow/LinkWithArrow';
-import { FeaturedPosts } from '../../components/Post/FeaturedPosts/FeaturedPosts';
-import { PostMetaSection } from '../../components/Post/PostMetaSection/PostMetaSection';
+import { FeaturedPosts } from '../../components/Posts/FeaturedPosts/FeaturedPosts';
+import { PostMetaSection } from '../../components/Posts/PostMetaSection/PostMetaSection';
 import { getPost } from '../../services/api/posts/getPost';
 import { getPostsByCategory } from '../../services/api/posts/getPostsByCategory';
 import { blogAllowedComponents } from '../../services/blogAllowedComponents';
@@ -61,6 +62,15 @@ export const BlogPost: FC<TBlogPostProps> = ({
         description={post.meta.description}
         variant={DomainVariant.Labs}
       />
+      <SocialCard
+        title={post.meta.title}
+        description={post.meta.description}
+        variant={DomainVariant.Labs}
+        twitterLargeImage={true}
+        twitterImage={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${post.meta.featuredImage.src}`}
+        ogImage={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}${post.meta.featuredImage.src}`}
+        alt={post.meta.featuredImage.alt}
+      />
       {post.meta.hero && (
         <Hero
           {...post.meta.hero}
@@ -81,7 +91,7 @@ export const BlogPost: FC<TBlogPostProps> = ({
         <div className="mt-[1.8rem]">
           <PostMetaSection {...post.meta} />
 
-          <div className="w-full max-w-none prose-a:underline-offset-2 prose hover:prose-a:text-violet focus:prose-a:text-violet">
+          <div className="w-full max-w-none prose-code:text-[.95em] prose-code:font-normal prose-a:underline-offset-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-transparent prose-code:border-none prose hover:prose-a:text-violet focus:prose-a:text-violet prose-code:text-violet-code prose-code:font-code">
             <MDXRemote {...post.content} components={blogAllowedComponents} />
           </div>
         </div>

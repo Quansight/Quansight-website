@@ -6,6 +6,7 @@ import {
   Statute,
   Team,
   Teaser,
+  Video,
 } from '@quansight/shared/ui-components';
 
 import { PageHeading } from '../PageHeading/PageHeading';
@@ -22,4 +23,5 @@ export const componentsMap = {
   [ComponentType.Teaser]: Teaser,
   [ComponentType.Hero]: Hero,
   [ComponentType.Statute]: Statute,
+  [ComponentType.Video]: Video,
 };

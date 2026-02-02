@@ -1,1 +1,21 @@
-* @galdranorn @mstoczkowski @kherma
+# Gabriel as default owner
+*   @gabalafou
+
+# Pavithra as reviewer for Markdown examples
+/examples   @pavithraes
+
+# Pavithra, Tania & Ralf as default reviewers for Labs blogs and assets
+/apps/labs/posts          @pavithraes  @trallard  @rgommers
+/apps/labs/public/posts   @pavithraes  @trallard  @rgommers
+
+# Pavithra as default reviewer for changes to Labs Storyblok content
+# Tania/Ralf/others to be manually added as appropriate
+/apps/labs/CHANGELOG.md   @pavithraes
+
+# Brian as default reviewer for changes to LLC Storyblok content
+# Kate/others to be manually added as appropriate
+/apps/consulting/CHANGELOG.md   @bskinn
+
+# Brian as default reviewer for Consulting blogs and assets
+/apps/consulting/posts          @bskinn
+/apps/consulting/public/posts   @bskinn
