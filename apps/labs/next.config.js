@@ -28,6 +28,29 @@ const nextConfig = {
           },
         ],
       },
+      {
+        // Next.js serves any file in the public folder whose type it does not
+        // recognize with the following HTTP header:
+        //
+        //   Content-Type: application/octet-stream
+        //
+        // The following rule catches some plain text file types that we link
+        // to, and supplies the text/plain MIME type in the Content-Type header
+        // so that end users can open and view the file directly in their
+        // browser rather than having to first download and save the file.
+        //
+        // In the following path matcher string only the stuff in parens is
+        // treated as a regular expression. The period outside the parens is a
+        // literal period. Per the docs:
+        // https://nextjs.org/docs/api-reference/next.config.js/headers#regex-path-matching
+        source: '/:path*.(py|cpp)',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'text/plain',
+          },
+        ],
+      },
     ];
   },
   async redirects() {
@@ -43,6 +66,13 @@ const nextConfig = {
     // The conventions of this return value are described in the Next.js docs:
     // https://nextjs.org/docs/api-reference/next.config.js/rewrites
     return {
+      beforeFiles: [
+        {
+          source:
+            '/annual-reports/quansight-labs-annual-report-:year(\\d{4}).pdf',
+          destination: '/api/annual-report.pdf?year=:year',
+        },
+      ],
       afterFiles: [
         // These rewrites are checked after pages/public files are checked but
         // before dynamic routes.

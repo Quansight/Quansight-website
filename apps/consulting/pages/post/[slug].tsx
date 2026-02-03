@@ -1,37 +1,37 @@
 import { FC } from 'react';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { MDXRemote } from 'next-mdx-remote';
 
 import { ISlugParams, DomainVariant } from '@quansight/shared/types';
-import { Layout, SEO, Footer, Header } from '@quansight/shared/ui-components';
-import { isPageType } from '@quansight/shared/utils';
+import {
+  Layout,
+  SEO,
+  Footer,
+  Header,
+  Hero,
+  HeroVariant,
+  SocialCard,
+} from '@quansight/shared/ui-components';
 
 import { getFooter } from '../../api/utils/getFooter';
 import { getHeader } from '../../api/utils/getHeader';
-import { getLibraryLinkItems } from '../../api/utils/getLibraryLinkItems';
-import { getLinks } from '../../api/utils/getLinks';
-import { getPage } from '../../api/utils/getPage';
-import { getPageItems } from '../../api/utils/getPageItems';
+import { BlogHeader } from '../../components/BlogArticle/BlogHeader/BlogHeader';
 import { BlogMoreArticles } from '../../components/BlogArticle/BlogMoreArticles/BlogMoreArticles';
-import { LIBRARY_AUTHOR_RELATION } from '../../components/BlogArticle/constants';
-import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
-import { Page } from '../../components/Page/Page';
+import { blogAllowedComponents } from '../../services/posts/blogAllowedComponents';
+import { POST_SLUG_DEFAULT_PREFIX } from '../../services/posts/constants';
+import { getAllPostFileNames } from '../../services/posts/getLibraryPosts/getAllPostFileNames';
+import { getPost } from '../../services/posts/getLibraryPosts/getPost';
+import { getPostsByCategory } from '../../services/posts/getLibraryTiles/utils/getPostsByCategory';
 import { TLibraryArticleProps } from '../../types/storyblok/bloks/libraryArticleProps';
-import { TRawBlok } from '../../types/storyblok/bloks/rawBlok';
-import { ARTICLES_DIRECTORY_SLUG } from '../../utils/getArticlesPaths/constants';
-import { getArticlesPaths } from '../../utils/getArticlesPaths/getArticlesPaths';
-import { getLibraryTiles } from '../../utils/getLibraryTiles/getLibraryTiles';
-import { getSameCategoryTiles } from '../../utils/getSameCategoryTiles/getSameCategoryTiles';
 
 const Article: FC<TLibraryArticleProps> = ({
-  data,
+  post,
   header,
   footer,
+  featuredPosts,
   preview,
-  moreArticles,
 }) => {
-  const { content } = data;
-
   return (
     <Layout
       footer={<Footer {...footer.content} />}
@@ -44,70 +44,82 @@ const Article: FC<TLibraryArticleProps> = ({
       }
     >
       <SEO
-        title={content.title}
-        description={content.description}
+        title={post.meta.title}
+        description={post.meta.description}
         variant={DomainVariant.Quansight}
       />
-      {isPageType(data?.content?.component) && (
-        <Page data={data} preview={preview} relations={LIBRARY_AUTHOR_RELATION}>
-          {(blok: TRawBlok) => <BlokProvider blok={blok} />}
-        </Page>
+      <SocialCard
+        title={post.meta.title}
+        description={post.meta.description}
+        variant={DomainVariant.Quansight}
+      />
+
+      {post.meta.hero && (
+        <Hero
+          {...post.meta.hero}
+          variant={HeroVariant.Small}
+          backgroundColor="transparent"
+          objectFit="cover"
+        />
       )}
-      {moreArticles && <BlogMoreArticles tiles={moreArticles} />}
+      <article className="px-[2rem] mx-auto sm:px-[6rem] lg:px-[10rem] xl:px-[25rem] max-w-layout">
+        <BlogHeader
+          postTitle={post.meta.title}
+          publishedDate={post.meta.published}
+          author={post.meta.author}
+        />
+        <div className="prose-code:px-0 prose-pre:px-0 prose-img:mx-auto prose-figcaption:mt-[2rem] mb-[5rem] min-w-full prose-code:text-[.95em] text-[1.8rem]  prose-code:font-normal leading-[2.7rem] text-black prose-a:underline-offset-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-transparent prose-pre:bg-transparent prose-code:rounded-lg prose-code:border-none prose sm:prose-figcaption:mt-0 focus:prose-a:text-violet hover:prose-a:text-violet prose-code:text-violet-code prose-code:font-code">
+          <MDXRemote {...post.content} components={blogAllowedComponents} />
+        </div>
+      </article>
+      {Boolean(featuredPosts.length) && (
+        <BlogMoreArticles featuredPosts={featuredPosts} />
+      )}
     </Layout>
   );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const links = await getLinks();
+  try {
+    const postsFileNames = getAllPostFileNames();
 
-  return {
-    paths: getArticlesPaths(links),
-    fallback: false,
-  };
+    return {
+      paths: postsFileNames.map(
+        (filename) =>
+          `/${POST_SLUG_DEFAULT_PREFIX}/${filename.replace(/\.(md|mdx)$/, '')}`,
+      ),
+      fallback: false,
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      paths: [],
+      fallback: false,
+    };
+  }
 };
 
 export const getStaticProps: GetStaticProps<
   TLibraryArticleProps,
   ISlugParams
 > = async ({ params: { slug }, preview = false }) => {
-  const data = await getPage(
-    {
-      slug: `${ARTICLES_DIRECTORY_SLUG}${slug}`,
-      relations: LIBRARY_AUTHOR_RELATION,
-    },
-    preview,
-  );
-  const footer = await getFooter(preview);
+  const post = await getPost(slug, preview);
   const header = await getHeader(preview);
-  const libraryLinks = await getLibraryLinkItems(preview);
-  const blogArticles = await getPageItems(
-    {
-      relations: LIBRARY_AUTHOR_RELATION,
-      prefix: ARTICLES_DIRECTORY_SLUG,
-    },
+  const footer = await getFooter(preview);
+  const featuredPosts = await getPostsByCategory(
+    post.meta.category,
+    post.slug,
+    2,
     preview,
   );
-  const libraryTiles = getLibraryTiles({
-    blogArticles,
-    libraryLinks,
-  });
-
-  const currentPostCategories = data.content.body.find(
-    (item) => item.category,
-  ).category;
-  const currentPostID = data.uuid;
 
   return {
     props: {
-      data,
+      post,
       header,
       footer,
-      moreArticles: getSameCategoryTiles(
-        libraryTiles,
-        currentPostCategories,
-        currentPostID,
-      ),
+      featuredPosts,
       preview,
     },
   };

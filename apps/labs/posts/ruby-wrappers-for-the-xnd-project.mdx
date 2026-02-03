@@ -1,0 +1,448 @@
+---
+title: 'Ruby wrappers for the XND project'
+published: September 15, 2019
+authors: [sameer-deshmukh]
+description: 'This post is a rather long and detailed introduction to the XND ruby wrapper. There will also be some details on the implementation of the wrapper and how it differs from the Python wrapper (which existed before the Ruby wrapper).'
+category: [Developer workflows, PyData ecosystem]
+featuredImage:
+  src: /posts/ruby-wrappers-for-the-xnd-project/blog_feature_var1.png
+  alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
+hero:
+  imageSrc: /posts/ruby-wrappers-for-the-xnd-project/blog_hero_var1.svg
+  imageAlt: 'An illustration of a brown hand holding up a microphone, with some graphical elements highlighting the top of the microphone.'
+---
+
+{/* markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again */}
+
+**Table of Contents**
+
+- [Introduction](#introduction)
+- [Ndtypes](#ndtypes)
+  - [Usage](#usage)
+    - [Basic initialization](#basic-initialization)
+    - [Concrete Vs. Abstract Types](#concrete-vs-abstract-types)
+    - [Typedefs](#typedefs)
+    - [Usage via The C API](#usage-via-the-c-api)
+  - [Implementation](#implementation)
+- [Xnd](#xnd)
+  - [Basic Usage](#basic-usage)
+    - [Data Type Support](#data-type-support)
+    - [Missing Values](#missing-values)
+    - [Usage via The C API](#usage-via-the-c-api-1)
+  - [Implementation](#implementation-1)
+- [Gumath](#gumath)
+  - [Usage](#usage-1)
+    - [Usage via The C API](#usage-via-the-c-api-2)
+  - [Implementation](#implementation-2)
+  - [Automatic Kernel Generation](#automatic-kernel-generation)
+- [Conclusion and Future Work](#conclusion-and-future-work)
+
+{/* markdown-toc end */}
+
+<br />
+<br />
+
+# Introduction
+
+Lack of stable and reliable scientific computing software has been a persistent problem
+for the Ruby community, making it hard for enthusiastic Ruby developers to use Ruby in
+everything from their web applications to their data analysis projects. One of the most important
+components of any successful scientific software stack is a well maintained and flexible
+array computation library that can act as a fast and simple way of storing in-memory data
+and interfacing it with various fast and battle-tested libraries like LAPACK and BLAS.
+
+Various projects have attempted to make such libraries in the past (and some are still thriving
+and maintained). Some of the notable ones are [numo](https://github.com/ruby-numo), [nmatrix](https://github.com/SciRuby/nmatrix), and more recently, [numruby](https://github.com/SciRuby/numruby).
+These projects attempt to provide a simple Ruby-like API for creating and manipulating arrays
+of various types. All of them are able to easily interface with libraries like ATLAS, FFTW
+and LAPACK.
+
+However, all of the above projects fall short in two major aspects:
+
+- Lack of extensibility to adapt to modern use cases (read Machine Learning).
+- Lack of a critical mass of developers to maintain a robust and fast array library.
+
+The first problem is mainly due to the fact that they do not support very robust type systems.
+The available data types are limited and are hard to extend to more complex uses. Modern use cases like
+Machine Learning require a more robust type system (i.e. defining array shapes of arbitrary dimension on multiple devices), as has been demonstrated by the tensor
+implementations of various frameworks like Tensorflow and PyTorch.
+
+The second problem is due to the fact that all of the aforementioned projects are community
+efforts that are maintained part-time by developers simply out of a sense of purpose and
+passion. Sustaining such complex projects for extended periods of time without expectation
+of any support is simply unfeasible even for the most driven engineers.
+
+This is where the XND project comes in. The [XND project](https://xnd.io/) is a project for
+building a common library that is able to meet the needs of the various data analysis and
+machine learning frameworks that have had to build their own array objects and programming
+languages. It is built with the premise of extending arrays with new types and various
+device types (CPUs, GPUs etc.) without loss of performance and ease of use.
+
+The XND project as a whole is a product of three C libraries : ndtypes, xnd and gumath. They
+have been made such that they can work as standalone C libraries that can be interfaced
+with any language binding (currently supporting Ruby and Python). Ndtypes is used for defining
+the shape of data within memory, XND is a data container that holds that data and gumath provides
+a multiple dispatch mechanism for performing computations on data held in XND containers. We will
+elaborate on each of these in the post below.
+
+The XND project presents the perfect answer to Ruby's lack of a mature array computation ecosystem.
+It is highly extensible, allows defining data types in almost any combination with a simple and
+intuitive interface, is built with performance in mind and is backed by a team consisting of
+experts who have vast experience in this domain for the Python scientific computing stack.
+
+The biggest backer of XND as of now is Quansight, and I as a part-time engineer am responsible
+for maintaining the Ruby wrapper for XND. This post is a rather long and detailed introduction
+to the XND ruby wrapper. There will also be some
+details on the implementation of the wrapper and how it differs from the Python wrapper (which
+existed before the Ruby wrapper). Read on for further details.
+
+All the source code can be found in the [xnd-ruby](https://github.com/xnd-project/xnd-ruby) repo.
+
+# Ndtypes
+
+Ndtypes is the library that is used for defining the shape of data.
+
+Run `gem install ndtypes --pre` for easily installing ndtypes onto your machine. It has
+been tested with Ruby 2.4.1 so far. The `gem install` will download the C sources and compile
+them by itself.
+
+## Usage
+
+### Basic initialization
+
+The ndtypes Ruby wrapper provides a simple interface to the ndtypes C library for creating
+complex data shapes with extreme simplicity. For example, for creating an array of 10 `int64`
+digits, all we need to do is create an instance of the `NDT` class:
+
+```ruby
+t = NDT.new "10 * int64"
+```
+
+Not only can you create arrays, but also very complex types, for example a nested record (xnd
+terminology for a Ruby `Hash`) with the values as arrays of type `float32` of size 25 each:
+
+```ruby
+t = NDT.new "{x: 25 * float32, y: {a: 25 * float64, 25 * float64}}"
+```
+
+### Concrete Vs. Abstract Types
+
+Ndtypes distinguishes types depending on whether they are abstract or concrete. Abstract types
+can have symbolic values like dimension or type variables and are used for type checking. Concrete
+types additionally have full memory layout information like alignment and data size.
+
+Some operations can be only performed on abstract types.
+
+### Typedefs
+
+One can also define typedefs using the `NDT#typedef` function and then use them in place of
+the original type. Here's an example of using typedefs to define a graph type:
+
+```ruby
+NDT.typedef "node", "int32"
+NDT.typedef "cost", "int32"
+NDT.typedef "graph", "var * var * (node, cost)"
+```
+
+### Usage via The C API
+
+Most of the C API functions of ndtypes deal with creating `NDT` Ruby objects or obtaining
+internal struct data of an `NDT` Ruby object. The complete specification can be found
+in the [ruby_ndtypes.h](https://github.com/xnd-project/xnd-ruby/blob/master/ndtypes/ext/ruby_ndtypes/ruby_ndtypes.h) file. This is the file you should include if you want to use the
+C API in any of your libraries.
+
+## Implementation
+
+The Ruby wrapper is a wrapper over the libndtypes library. The `NDT` Ruby object is a wrapper
+over a C struct of type `NdtObject` that has the following definition:
+
+```c
+typedef struct NdtObject {
+  const ndt_t *ndt;                   /* type */
+} NdtObject;
+```
+
+This simple struct stores a pointer to a struct of type `const ndt_t *` that is provided
+by libndtypes for representing an ndtype. The `const ndt_t` structs are allocated by
+various libndtypes functions like `ndt_from_string()` or `ndt_alloc()`.
+
+Internally libndtypes uses a reference counting mechanism for keeping track of `ndt_t` allocations
+that need to be destroyed. The reference count can be incremented using `ndt_incref()` or
+decremented using `ndt_decref()`. Once the refcount reaches the `0` the object is automatically
+destroyed by libndtypes. Of course, `ndt_t` structs allocated via calls to functions like
+`ndt_alloc()` already come with a refcount of 1.
+
+# Xnd
+
+XND is the main storage library of the project. It uses types defined by ndtypes for defining
+the shape of data and allows users to read and write data into buffers that are of the shape
+of the data passed to it by ndtypes. It is responsible for maintaining the memory consistency
+of data and has provisions for various operations such as slicing, copying and interfacing
+data with 3rd party libraries like Apache Arrow. It also serves as a memory buffer for the
+functions that are defined within gumath (explained later in this post).
+
+Similar to the ndtypes wrapper, the xnd Ruby wrapper can be installed with a call to
+`gem install xnd --pre`.
+
+## Basic Usage
+
+The xnd Ruby wrapper is extremely simple to use and provides a single class `XND` for the
+user that interfaces with libxnd. In the simplest case, one can create an XND object as follows:
+
+```ruby
+x = XND.new [1,2,3,4]
+# => #<XND:47340720296980>
+#	 type= 4 * int64
+#	 value= [1, 2, 3, 4]
+```
+
+Since we have not specified the data type, it will be inferred as `int64` since we are supplying
+an array composed entirely of integers. This can be seen using the `XND#dtype` function, which
+will return the `NDT` object that holds the type of this `XND` object:
+
+```ruby
+x.dtype
+# => #<NDTypes:47340721833280>
+#	int64
+```
+
+While `XND#dtype` gives the general type of the object, a more precise description of the data
+type (including shape etc.) can be obtained using the `type` method:
+
+```ruby
+x.type
+# => #<NDTypes:47340721846240>
+#  4 * int64
+```
+
+The value within the `XND` object can be obtained as a Ruby Array (or Hash if it is a NDT record)
+using the `XND#value` method:
+
+```ruby
+x.value
+# => [1, 2, 3, 4]
+```
+
+We can also perform operations for checking equality between `XND` objects using the `==` or `!=` operators:
+
+```ruby
+a = XND.new [1,2,3,4]
+x == a
+# => true
+```
+
+A nice thing about `XND` is that it returns copy-free 'views' of data when you perform a slicing
+operation. So say we define a 2D tensor `tensor_2d` like this:
+
+```ruby
+tensor_2d = XND.new(
+  [
+    [1,2,3,4,5],
+    [1,2,3,4,5],
+    [1,2,3,4,5],
+    [1,2,3,4,5],
+    [1,2,3,4,5]
+  ]
+)
+tensor_2d.inspect
+# => #<XND:47340720946720>
+#	 type= 5 * 5 * int64
+#	 value= [[1, 2, 3, 4, 5], [1, 2, 3, 4, 5], [1, 2, 3, 4, 5], [1, 2, 3, 4, 5], [1, 2, 3, 4, 5]]
+```
+
+We can obtain a slice (say the 2nd column) of the tensor using Ruby Range. Note that using `INF` is a shorthand for specifying the entire axis (usually denoted as `0..-1`):
+
+```ruby
+vector_view = tensor_2d[INF, 2]
+# => #<XND:47340720380980>
+#	 type= 5 * int64
+#	 value= [3, 3, 3, 3, 3]
+```
+
+When using slices, `XND` will always return a 'view' of the original `XND` object. Changes
+made to this slice will reflect on the original XND object as well:
+
+```ruby
+vector_view[2] = 666
+tensor_2d.inspect
+# => #<XND:47340720946720>
+#	 type= 5 * 5 * int64
+#	 value= [[1, 2, 3, 4, 5], [1, 2, 3, 4, 5], [1, 2, 666, 4, 5], [1, 2, 3, 4, 5], [1, 2, 3, 4, 5]]
+```
+
+However, the `type` of the view and the original object differ as they should:
+
+```ruby
+vector_view.type
+# => #<NDTypes:47340720381100>
+#	5 * int64
+tensor_2d.type
+# => #<NDTypes:47340720939360>
+#	5 * 5 * int64
+```
+
+If you want a separate storage space for the view (i.e. do not want changes to the view
+to reflect on the parent object), you should use the `XND#dup` method and make a copy. You
+can also allocate a data container without storing any data into it using the `XND.empty`
+method as can be seen in the following examples.
+
+### Data Type Support
+
+As a result of the flexibility provided by the ndtypes type definition interface, xnd is able
+to provide type support for far more flexible data shapes than simply for arrays with fixed
+dimensions. For example, you can use records for storing Ruby Hashes and performing operations
+on them:
+
+```ruby
+require 'xnd'
+
+x = XND.empty "{x: complex64, y: bytes, z: string}"
+v = { 'x' => 1+20i, 'y' => "abc".b, 'z' => "any" }
+x['x'] = v['x']
+x['y'] = v['y']
+x['z'] = v['z']
+x
+# => #<XND:47340721378580>
+#	 type= {x : complex64, y : bytes, z : string}
+#	 value= {"x"=>(1.0+20.0i), "y"=>"abc", "z"=>"any"}
+```
+
+### Missing Values
+
+XND also supports optional data (represented by `nil`). It can be created as follows:
+
+```ruby
+x = XND.empty "2 * 4 * ?float64"
+v = [[10.0, nil, 2.0, 100.12], [nil, nil, 6.0, 7.0]]
+x[INF] = v # assign full slice
+# => [[10.0, nil, 2.0, 100.12], [nil, nil, 6.0, 7.0]]
+```
+
+### Usage via The C API
+
+The primary function of the XND Ruby C API is for creating and querying XND Ruby objects.
+The full API can be found in the [ruby_xnd.h](https://github.com/xnd-project/xnd-ruby/blob/master/xnd/ext/ruby_xnd/ruby_xnd.h) file.
+
+## Implementation
+
+The implementation of the Ruby wrapper differs from the Python wrapper largely due to nature
+of the garbage collection algorithms employed by both these languages: Ruby uses a mark-and-sweep
+GC while Python uses a reference counted GC. Therefore, Ruby objects created within the C extension
+have to somehow be kept 'alive' such that the GC does not deallocate them thinking that they
+have gone out of scope and are no longer useful.
+
+For this purpose we utilize a 'GC guard' structure (inspired by the implementation of
+[@mrkn](https://github.com/mrkn/)'s [matplotlib.rb](https://github.com/mrkn/matplotlib.rb) gem). The GC guard is basically a global Ruby Hash that has the
+Ruby object created within the C extension as a key and something random as a value. We
+use a Hash because it provides lookups in `O(1)` time and we don't care about the value
+because we only want to save the object in some kind of a global store so that Ruby is
+aware of its presence (in case of NDT we use `true` for the value). XND uses three different
+GC guards for various internal objects, which can be found in the [gc_guard.h](https://github.com/xnd-project/xnd-ruby/blob/master/xnd/ext/ruby_xnd/gc_guard.h) file.
+
+# Gumath
+
+While ndtypes and xnd allow us to define types and memory storage, gumath allows us to actually
+do something with them. The basic idea behind gumath is that it is a library that allows defining
+functions for various data types stored within an `XND` object and allows the user to transparently
+call them using a high level interface that uses multiple dispatch for calling the relevant function
+on the appropriate type. The Ruby interface is a wrapper over the `libgumath` C library.
+
+Some functions (known as kernels) come bundled with libgumath and others can be written fairly
+easily. Similar to the xnd and ndtypes wrappers, the gumath Ruby wrapper can be installed with a call to `gem install gumath --pre`.
+
+## Usage
+
+The `Gumath` class is a top level namespace for various modules that serve as namespaces for
+functions that come rolled in with the libgumath C library. These modules will keep expanding
+as more interfaces are added to libgumath. The `Gumath::Functions` module contains various
+such functions that are provided by libgumath by default.
+
+`Gumath` functions accept `XND` objects as arguments and output `XND` objects with the result
+of the function. An example of a simple element-wise multiply kernel is the following:
+
+```ruby
+require 'xnd'
+require 'gumath'
+
+x = XND.new [2,3,4,5,6,7,8,9], dtype: "float64"
+y = XND.new [1,2,3,4,5,6,7,8], dtype: "float64"
+z = Gumath::Functions.multiply x, y
+# => #<XND:47340721458320>
+#	 type= 8 * float64
+#	 value= [2.0, 6.0, 12.0, 20.0, 30.0, 42.0, 56.0, 72.0]
+```
+
+### Usage via The C API
+
+Since the main purpose of the gumath C API is to allow adding kernels to a Ruby module,
+it provides a single function of the prototype:
+
+```c
+int rb_gumath_add_functions(VALUE module, const gm_tbl_t *tbl);
+```
+
+The `module` parameter is a Ruby object, and `tbl` is a function table of gumath kernels.
+
+## Implementation
+
+Compared to xnd and ndtypes, the gumath Ruby wrapper is much simpler
+since its primary function is to take functions from libgumath and add them as module
+functions to Ruby modules.
+
+When the library is initially loaded using a call to `require`, the relevant libgumath kernels
+provided by default are loaded into the Ruby interpreter by interfacing each kernel with a
+Ruby object. Further details on the working of the method dispatch within Ruby can be found
+in the [CONTRIBUTING](https://github.com/xnd-project/xnd-ruby/blob/master/gumath/CONTRIBUTING.md) file.
+
+The most important part of the C implementation is the `GufuncObject` class which is a Ruby
+class defined within the C API that helps interface with a single gumath function. This class
+is basically a wrapper over a C struct `GufuncObject` that can be found in the [gufunc_object.h](https://github.com/xnd-project/xnd-ruby/blob/master/gumath/ext/ruby_gumath/gufunc_object.h)
+file.
+
+The struct has the following definition:
+
+```c
+typedef struct {
+  const gm_tbl_t *table;          /* kernel table */
+  char *name;                     /* function name */
+  uint32_t flags;                 /* memory target */
+  VALUE identity;                 /* identity element */
+} GufuncObject;
+```
+
+The `table` pointer is the pointer to the definition of the function within libgumath that
+holds information about the function that is used by `gm_apply` for making the actual call to
+the function with the data. `name` is a string holding the name of the function. `flags`
+signify whether the function is a CPU function or a CUDA function (or for that matter any
+other device that might be added in the future). `identity` is a Ruby object used for identifying
+this function. It is initially set to `nil`.
+
+## Automatic Kernel Generation
+
+Writing kernels can be painstaking if you're not familiar with the various functionalities
+that libgumath provides for this purpose. Therefore we also provide a kernel generator
+called [xndtools](https://xnd.readthedocs.io/en/latest/xndtools/index.html#kernel-generator) that allows writing gumath kernels by simply providing the function
+that needs to wrapped. However, this functionality has not yet been tested for Ruby.
+
+# Conclusion and Future Work
+
+The current state of the Ruby XND wrappers makes them suitable for the XND libraries via Ruby,
+but what would be truly exciting would be have a more Ruby-like API that conforms to accepted
+Ruby idioms and creates a truly intuitive XND Ruby interface, rather than simply a one-on-one
+mapping of functions.
+
+In the future we also plan to integrate XND with various Ruby libraries like rubyplot and daru
+and expand the uses of XND even further. For example, operators like multiplication in other
+scientific languages like MATLAB simply work with operator overloading by using the `*` operator
+between objects. Similarly overriding operators on `XND` and calling the underlying gumath
+kernel is a work in progress.
+
+Similarly, have a 'Ruby-like' API that allows better method chaining in the sense of Rails or
+rspec should free up the programmer of having to 'think' of the interfaces and make
+array computations much more intuitive for programmers. These changes will of course be implemented
+after XND reaches a critical base of users who are willing to provide feedback and try out
+new interfaces. We plan to integrate XND into [rubyplot](https://github.com/sciruby/rubyplot) to achieve this goal of more usage.
+
+The C API for the wrapper is also quite limiting as of now, and it would be quite a pain
+for another Ruby gem to use XND via the C API. Therefore, improving the C API is also
+something that we will be seriously looking into in the future.

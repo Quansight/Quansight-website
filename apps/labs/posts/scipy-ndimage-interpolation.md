@@ -1,7 +1,7 @@
 ---
 title: "Making SciPy's Image Interpolation Consistent and Well Documented"
 published: January 22, 2021
-author: gregory-lee
+authors: [gregory-lee]
 description: "In this blog post we will focus specifically on recent improvements that have been made to SciPy's interpolation functions. A recent NumFOCUS small development grant awarded to the SciPy developers allowed a dedicated effort to fix existing bugs in boundary handling and improve the documentation of the behavior of these modes."
 category: [PyData Ecosystem]
 featuredImage:

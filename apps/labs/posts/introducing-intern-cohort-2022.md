@@ -1,11 +1,11 @@
 ---
 title: 'Introducing the 2022 Interns Cohort'
-author: noa-tamir
+authors: [noa-tamir]
 published: August 7, 2022
 description: 'Quansight Labs is delighted to welcome its second cohort of 6 interns, who will work on a variety of open source projects and tasks'
-category: [Community, OSS Experience, PyData ecosystem]
+category: [Community, OSS Experience, PyData ecosystem, Internship]
 featuredImage:
-  src: /posts/introducing-intern-cohort-2022/feature.svg
+  src: /posts/introducing-intern-cohort-2022/feature.png
   alt: 'An illustration of a black hand and a white one coming towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/introducing-intern-cohort-2022/hero_intern_cohort.svg
@@ -15,8 +15,9 @@ hero:
 We recently had the great pleasure of welcoming our second cohort of interns at Labs! The goal of our internship program is to provide them the opportunity to connect with open source communities and leaders, and grow professionally while developing solutions for the larger scientific open source ecosystem. Without further ado, allow us to introduce this wonderful new team and their projects!
 
 [Asmi Jafar](https://www.github.com/asmijafar20), based in Aligarh, India, is a final year student of masters in Computer Applications at Aligarh Muslim University (AMU). Asmi is profoundly influenced by technology and the various ways it can be used to express art. She is interested in contributing to open source projects to gain skills, and learning new things. Asmi has previously contributed to a variety of projects in the Moja Global community while completing her Outreachy internship. In her spare time, she loves to read good books, paint, and dance. Here's a quote she chose to share from one of her favorite works, The Last Lecture, by Jeffrey Zaslow and Randy Pausch:
+
 > The Brick walls are there for a reason, they are not there to keep us out. The brick walls are there to give us a chance to show how badly we want something.
-Asmi is mentored by [Amit Kumar](https://github.com/aktech), [Eskild Eriksen](https://github.com/iameskild), and [Vinicius D. Cerutti](https://github.com/viniciusdc) as she contributes to [nebari](https://www.nebari.dev/).
+> Asmi is mentored by [Amit Kumar](https://github.com/aktech), [Eskild Eriksen](https://github.com/iameskild), and [Vinicius D. Cerutti](https://github.com/viniciusdc) as she contributes to [nebari](https://www.nebari.dev/).
 
 [Dennis Chukwunta](http://www.github.com/th3nn3ss), based in Imo State, Nigeria, is a computer science student at Imo state university, in his final year of studies. Dennis enjoys reading and playing old video games, and he secretly wishes he could solve all the world's problems with a computer. At Labs, Dennis is working on standardization improvements in [pandas](https://pandas.pydata.org/) with his mentors [Aaron Meurer](https://github.com/asmeurer) and [Noa Tamir](https://github.com/noatamir).
 
