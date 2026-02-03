@@ -6,14 +6,16 @@ description: |
   A quick update on Spyder 2022 roadmap and proposals being worked on.
 category: [IDEs]
 featuredImage:
-  src: /posts/spyder-roadmap-proposals-2022/spyder_logo.svg
-  alt: 'Spyder IDE logo with the word "spyder" under it. The logo is composed
-    by a red spider web and a black letter "S".'
+  src: /posts/spyder-roadmap-proposals-2022/spyder_logo.png
+  alt: >
+    Spyder IDE logo with the word "spyder" under it. The logo is composed
+    by a red spider web and a black letter "S".
 hero:
   imageSrc: /posts/spyder-roadmap-proposals-2022/spyder_banner.png
-  imageAlt: 'Spyder IDE logo as part of the word "Spyder" to the left. On the
+  imageAlt: >
+    Spyder IDE logo as part of the word "Spyder" to the left. On the
     right, the Spyder IDE text description: "The Scientific Python Development
-    Environment".'
+    Environment".
 ---
 
 For the last couple of months the Spyder team has been working on defining a
