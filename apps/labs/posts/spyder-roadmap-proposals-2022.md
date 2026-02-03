@@ -1,7 +1,7 @@
 ---
 title: 'Spyder 2022 roadmap and new grants work'
 published: November 8, 2022
-author: daniel-althviz
+authors: [daniel-althviz]
 description: |
   A quick update on Spyder 2022 roadmap and proposals being worked on.
 category: [IDEs]
@@ -13,7 +13,7 @@ hero:
   imageAlt: 'Spyder IDE logo as part of the word "Spyder" to the left. On the right, the Spyder IDE text description: "The Scientific Python Development Environment".'
 ---
 
-For the last couple of months the Spyder team has been working on defining a roadmap and submitting grant proposals. Now we are pleased to announce that we have a roadmap and we got two proposals accepted! 
+For the last couple of months the Spyder team has been working on defining a roadmap and submitting grant proposals. Now we are pleased to announce that we have a roadmap and we got two proposals accepted!
 
 ## The roadmap
 
