@@ -1,6 +1,6 @@
 ---
 title: 'NASA ROSES E7 Grant: Reinforcing the Fondations of Scientific Python'
-author: matti-picus
+authors: [matti-picus]
 published: Aug 10, 2022
 description: 'Announcing a 3-year program to improve NumPy, SciPy, pandas, and scikit-learn'
 category: [Funding]
@@ -11,7 +11,8 @@ featuredImage:
     projects, to applications.'
 hero:
   imageSrc: /posts/nasa-rose-grant-2020/scientific_python_ecosystem.png
-  imageAlt: 'River of scientific python projects, flowing from Python and Numpy, to
+  imageAlt:
+    'River of scientific python projects, flowing from Python and Numpy, to
     Foundational projects, to technique-specific projects, to domain-specific
     projects, to applications.'
 ---
