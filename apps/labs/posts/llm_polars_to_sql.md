@@ -6,10 +6,10 @@ description: "Be very careful!"
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/llm_polars_to_sql/featured.png
-  alt: 'Image of "Google Translate" which looks like it is translating Polars code to SQL'
+  alt: 'Illustration of two polar bears sitting back to back with laptops and writing code'
 hero:
   imageSrc: /posts/llm_polars_to_sql/hero.png
-  imageAlt: 'Image of "Google Translate" which looks like it is translating Polars code to SQL'
+  imageAlt: 'Illustration of two polar bears sitting back to back with laptops and writing code'
 
 ---
 
