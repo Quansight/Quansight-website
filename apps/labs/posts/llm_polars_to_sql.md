@@ -5,10 +5,10 @@ authors: [marco-gorelli]
 description: "Be very careful!"
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/llm_polars_to_sql/featured.jpg
+  src: /posts/llm_polars_to_sql/featured.png
   alt: 'Image of "Google Translate" which looks like it is translating Polars code to SQL'
 hero:
-  imageSrc: /posts/llm_polars_to_sql/hero.jpg
+  imageSrc: /posts/llm_polars_to_sql/hero.png
   imageAlt: 'Image of "Google Translate" which looks like it is translating Polars code to SQL'
 
 ---
