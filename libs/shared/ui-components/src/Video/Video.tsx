@@ -8,15 +8,21 @@ import { createMarkup } from '@quansight/shared/utils';
 import { VideoThumbnail } from './VideoThumbnail';
 import { TVideoProps } from './types';
 
-const playerOptions = {
-  autoPlay: 0,
-  disablekb: 1,
-  showinfo: 1,
-  volume: 0,
-  muted: 0,
-  pip: 1,
-  controls: 2,
-  enablejsapi: 1,
+const youtubeConfig = {
+  autoplay: 1 as const,
+  disablekb: 1 as const,
+  enablejsapi: 1 as const,
+  controls: 1 as const,
+};
+
+const vimeoConfig = {
+  autoplay: true,
+  volume: false,
+  muted: false,
+  keyboard: false,
+  pip: true,
+  controls: true,
+  title: true,
 };
 
 const videoSizeStyles: Record<TVideoProps['size'], string> = {
@@ -66,8 +72,8 @@ export const Video = ({
   }
 
   const playerConfig = {
-    vimeo: { playerOptions },
-    youtube: { playerVars: playerOptions },
+    vimeo: vimeoConfig,
+    youtube: youtubeConfig,
   };
 
   const styles = {
@@ -109,7 +115,7 @@ export const Video = ({
             width="100%"
             height="100%"
             className="absolute top-0 left-0"
-            url={url}
+            src={url}
             playing={playing}
             config={playerConfig}
           />
