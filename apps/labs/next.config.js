@@ -107,10 +107,6 @@ const nextConfig = {
           source: '/archive',
           destination: 'https://quansight-labs.netlify.app/archive',
         },
-        {
-          source: '/:path*',
-          destination: 'https://quansight-labs.netlify.app/:path*/',
-        },
       ],
     };
   },
