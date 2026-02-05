@@ -92,26 +92,6 @@ const nextConfig = {
           destination: 'https://plausible.io/api/event',
         },
       ],
-      fallback: [
-        // These rewrites are checked after both pages/public files and dynamic
-        // routes are checked.
-        {
-          source: '/:file(.+\\..+)',
-          destination: 'https://quansight-labs.netlify.app/:file',
-        },
-        {
-          // Why is /archive an anomaly on Netlify site?
-          // On Netlify, /2022 redirects to /2022/
-          // But then on same Netlify site, /archive/ redirects to /archive
-          // WTF.
-          source: '/archive',
-          destination: 'https://quansight-labs.netlify.app/archive',
-        },
-        {
-          source: '/:path*',
-          destination: 'https://quansight-labs.netlify.app/:path*/',
-        },
-      ],
     };
   },
 };
