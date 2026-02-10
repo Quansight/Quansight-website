@@ -72,6 +72,11 @@ funds of course. Romain Thomas, LIEF maintainer, shared:
 > I plan to use this funding to improve our internal CI by adding a new
 > Windows ARM64 runner and an additional Linux runner.
 
+Ariadne Conill, pkgconf maintainer, said:
+
+> These funds will be very helpful for getting the remaining SBOM work over the
+> line.
+
 And Ned Batchelder, coverage.py maintainer, writes on his sponsorship profile:
 
 > I do a few different things in the Python world: I maintain a few software
