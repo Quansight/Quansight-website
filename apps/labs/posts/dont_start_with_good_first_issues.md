@@ -1,0 +1,62 @@
+---
+title: "Stop browsing \"good first issues\" - do this instead"
+published: 11, February 2026
+authors: [marco-gorelli]
+description: "Before becoming a contributor, become a user"
+category: [PyData ecosystem]
+featuredImage:
+  src: /posts/good-first-issues/featured.jpg
+  alt: 'Image of "good first issue" label crossed out'
+hero:
+  imageSrc: /posts/good-first-issues/hero.jpg
+  imageAlt: 'Image of "good first issue" label crossed out'
+
+---
+
+There are many reasons to contribute to open source, and any one of them may have picqued your interest in giving it a go. You hear about the "good first issue" label on GitHub, and start following some trackers which flag issues labelled with it. Indeed, "start with 'good first issues'" has been standard open source advice for years. And I'm here to argue against it: there's a better way to start contributing to open source which will be both rewarding and far easier.
+
+## What's wrong with browsing for "good first issue"s?
+
+First off, let's consider issues labelled "good first issue" in projects you're not familiar with. They will likely either be trivial typo fixes, bugs which look simple to fix, or documentation. Let's consider these in turn:
+
+- Trivial typo fixes: not only will someone else likely have already opened a pull request by the time you finished reading the issue, but this won't be a very valuable learning experience for you anyway.
+- Bug fixes. Either it'll be trivial - in which case, see the bullet point above - or you likely won't even be able to understand what the issue is describing and won't have any intrinsic motivation to spend time trying to fix it.
+- Good documentation - contrary to some people's belief - is very hard to write. Tackle documentation issue only once you've already used (and struggled with!) a tool.
+
+So instead, let's consider "good first issue"s in projects you are familiar with, and you at least know what they do. If you find a non-trivial issue labelled "good first issue" in such a project, then I'm fairly confident that at least one of the following will be true:
+
+- It'll affect an aspect of the project you're not familiar with.
+- You'll read the issue description and you'll ask yourself "why should anyone care about this?".
+- You'll have no idea how to even start tackling the issue, calling into question the "good first issue" label.
+
+If may, therefore, look like getting started with open source is a hopeless endeavor and that you may as well give up. Don't! I'm here to tell you want to do instead.
+
+## How find actually find issues
+
+Don't. That's right - don't find problems to solve. Instead, let the problems find you!
+
+If you focus on building projects and completing tasks, then inevitably, problems to solve will appear by themselves. Some examples are:
+
+- The documentation for a tool you're using is out-of-date or inaccurate.
+- You get an unclear error message which doesn't tell you what to do and is unrelated to what you did.
+- A parameter which you pass down appears to be ignored.
+- Some feature you need is missing.
+- ...
+
+And voila, there you go! When you run into one of the situations above, you've found your good first issue. What you encountered is something that other users will likely also encounter. It's something you already understand and care about. Try addressing it! If you don't manage and don't get anywhere, then no big deal, you likely learned something new along the way anyway. But if you manage, then it'll likely be your entrypoint to being an open source contributor! Even just writing a good bug report is a valuable way of contributing, see [Joseph Barbier's post on this topic](https://barbierjoseph.com/blog/open-source-starts-with-a-good-issue/).
+
+As you fix the problems which you encounter, you'll gradually build both familiarity with the project and develop a positive reputation within the community. It won't be long until you're able to successfully fix other people's problems too!
+
+## Even better - write your own project (but don't force it)
+
+At some point, you'll find yourself thinking "wouldn't it be nice if there existed a tool which did this particular thing...wait, how has nobody created it yet?". In that moment, seize the opportunity: solve the problem, and publish it online as an open source project. You'll learn a tonne about testing, packaging, and maintenance by doing. And if people starting contributing, you'll also learn about community management and leadership.
+
+There are some caveats I must make though:
+
+- Could your project be monetizable? I'm not an open-source absolutist, and I think closed-source software has its place. If you think project isn't something that others could easily build for themselves and that people would be willing to pay actual money for, then open-sourcing it isn't necessarily the right idea.
+- If you're under full-time employment, check your contract and speak with your manager about whether you're allowed to publish an open source package. Some employment contracts include clauses such as "any invention of yours made whilst employed, even outside of working hours, belongs to the company".
+- If your project becomes popular, then user requests can become tiring at times. Give yourself permission to not be perfect, and reminder yourself that you have no obligation towards strangers on the internet.
+
+## Conclusion
+
+Next time you use a tool and encounter a cryptic error message, outdated or missing documentation, or bug, take a moment and pause. Turn that frustration into motivation. You may indeed have found your path towards becoming an open source contributor.
