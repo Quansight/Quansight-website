@@ -5,10 +5,10 @@ authors: [marco-gorelli]
 description: "Before becoming a contributor, become a user"
 category: [PyData ecosystem]
 featuredImage:
-  src: /posts/good-first-issues/featured.jpg
+  src: /posts/good-first-issues/featured.png
   alt: 'Image of "good first issue" label crossed out'
 hero:
-  imageSrc: /posts/good-first-issues/hero.jpg
+  imageSrc: /posts/good-first-issues/hero.png
   imageAlt: 'Image of "good first issue" label crossed out'
 
 ---
