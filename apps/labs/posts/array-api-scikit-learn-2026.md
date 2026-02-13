@@ -108,7 +108,7 @@ The following benchmark shows the use of the `MaxAbsScaler` transformed followed
 
 The figure below shows the performance speed up on CuPy, Torch CPU and Torch GPU relative to NumPy.
 
-![Benchmarking of MaxAbsScaler/Ridge pipeline](/posts/array-api-scikit-learn-2026/scikit-learn_timings.svg "Benchmarking of MaxAbsScaler/Ridge pipeline")
+![Benchmarking of MaxAbsScaler/Ridge pipeline](/posts/array-api-scikit-learn-2026/scikit-learn_timings.png "Benchmarking of MaxAbsScaler/Ridge pipeline")
 
 *Performance speedup relative to NumPy across different backends.*
 
