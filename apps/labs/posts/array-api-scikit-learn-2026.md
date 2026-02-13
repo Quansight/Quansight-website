@@ -5,11 +5,11 @@ published: Februar ??, 2026
 description: 'In this blog post, we provide an update on Array API adoption in scikit-learn.'
 category: [Array API, GPU]
 featuredImage:
-  src: /posts/array-api-scikit-learn-2026/featured.png
-  alt: ''
+  src: /posts/array-api-scikit-learn-2026/array-api-scikit-learn-2026-featured.png
+  alt: 'The Data APIs logo next to the scikit-learn logo.'
 hero:
-  imageSrc: /posts/array-api-scikit-learn-2026/hero.jpeg
-  imageAlt: ''
+  imageSrc: /posts/array-api-scikit-learn-2026/array-api-scikit-learn-2026-hero.png
+  imageAlt: 'The Data APIs logo next to the scikit-learn logo.'
 ---
 
 The [Consortium for Python Data API Standards](https://data-apis.org/) developed the [Python array API standard](https://data-apis.org/array-api/) to define a consistent interface for array libraries, specifing core operations, data types, and behaviours. This enables 'array-consuming' libraries (such as scikit-learn) to easily write array-agnostic code that can be run on any array API compliant backend. Adopting array API support in scikit-learn means that users can take advantage of array library features, such as hardware acceleration, most notably via GPUs. Indeed, GPU support in scikit-learn has been of interest for a long time - 11 years ago, we added an entry to our FAQ page explaining that we had no plans to add GPU support in the near future due to the software dependencies and platform specific issues it would introduce. By relying on the Array API standard, however, these concerns can now be avoided.
@@ -36,7 +36,7 @@ Beyond these libraries, scikit-learn also tests against `array-api-strict`, a re
 
 The full list of metrics and estimators that now support array API can be found in our [Array API support](https://scikit-learn.org/dev/modules/array_api.html#) documentation page. The majority of high impact metrics have now been converted to be array API compatible. Many transformers are also now supported, notably `LabelBinarizer` which is widely used internally and simplifies other conversions.
 
-Conversion of estimators is much more complicated as it often involves benchmarking different variations of code or consensus gathering on implementation choices. It generally requires many months of work by several maintainers. Nonetheless, support for `GaussianNB`, `GaussianMixture`, `Ridge` (and family; `RidgeCV`, `RidgeClassifier`, `RidgeClassifierCV`), `Nystroem` and `PCA` has been added. Work on `LogisticRegression` is well underway (follow at [PR #32644](https://github.com/scikit-learn/scikit-learn/pull/32644)) and will hopefully be included in the next release. Early work on `GaussianProcessRegressor` is also underway.
+Conversion of estimators is much more complicated as it often involves benchmarking different variations of code or consensus gathering on implementation choices. It generally requires many months of work by several maintainers. Nonetheless, support for `LogisticRegression`, `GaussianNB`, `GaussianMixture`, `Ridge` (and family; `RidgeCV`, `RidgeClassifier`, `RidgeClassifierCV`), `Nystroem` and `PCA` has been added. Work on `GaussianProcessRegressor` is also underway (follow at [PR #33096](https://github.com/scikit-learn/scikit-learn/pull/33096)).
 
 ### Handling mixed array namespaces and devices
 
@@ -86,11 +86,11 @@ Many performance-critical parts of scikit-learn are written using compiled code 
 
 Metrics and estimators, with compiled code, handle this in one of two ways: convert arrays to NumPy first or maintain two parallel branches of code, one for NumPy (compiled) and one for other array types (array API compatible). When performance is less critical or array API conversion provides no gains (e.g., `confusion_matrix`), we convert to NumPy. When performance gains are significant, we accept the maintenance burden of dual code paths (e.g., `LogisticRegression`).
 
-### Differences in NumPy API and the array API standard
+### Unspecified behaviour in the standard
 
-The array API standard can differ from NumPy by name or behaviour. Name differences (e.g., concat vs concatenate) existed in older NumPy versions but have since been addressed. Behavioural differences, while harder to handle, are resolvable. The standard was designed to be complete such that if an array operation can be performed on accelerator hardware, the standard provides a way to express it.
+The array API standard intentionally leaves some function behaviors unspecified, permitting implementation differences across array libraries. For example, the order of unique elements is not specified for the `unique_*` functions and as of NumPy version 2.3, some `unique_*` functions no longer return sorted values. This will require code amendments in cases where sorted output was relied upon.
 
-Handling of behavioural differences can also depend on the array libraries supported. For example, NaN handling is left unspecified in the standard for the functions `unique_values` and `sort`, thus can vary. However, all array libraries currently supported by scikit-learn follow NumPy's NaN semantics, eliminating the need for special handling beyond comprehensive testing when adding support for new array libraries.
+Similarly, NaN handing is also unspecified for `sort` though in this case, all array libraries currently supported by scikit-learn follow NumPy's NaN semantics, placing NaNs at the end. This consistency eliminates the need for special handling code, though comprehensive testing remains essential when adding support for new array libraries.
 
 ### Device transfer
 
