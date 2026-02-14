@@ -1,8 +1,8 @@
 ---
-title: 'Update on Array API adoption in scikit-learn'
+title: 'Update on array API adoption in scikit-learn'
 authors: [lucy-liu]
 published: February 28, 2026
-description: 'In this blog post, we provide an update on Array API adoption in scikit-learn.'
+description: 'In this blog post, we provide an update on array API adoption in scikit-learn.'
 category: [Array API, GPU]
 featuredImage:
   src: /posts/array-api-scikit-learn-2026/array-api-scikit-learn-2026-featured.png
@@ -16,14 +16,17 @@ The [Consortium for Python Data API Standards](https://data-apis.org/)
 developed the [Python array API standard](https://data-apis.org/array-api/)
 to define a consistent interface for array libraries, specifing core
 operations, data types, and behaviours. This enables 'array-consuming'
-libraries (such as scikit-learn) to easily write array-agnostic code that can
-be run on any array API compliant backend. Adopting array API support in
-scikit-learn means that users can take advantage of array library features,
-such as hardware acceleration, most notably via GPUs. Indeed, GPU support in
-scikit-learn has been of interest for a long time - 11 years ago, we added an
-entry to our FAQ page explaining that we had no plans to add GPU support in
-the near future due to the software dependencies and platform specific issues
-it would introduce. By relying on the Array API standard, however, these
+libraries (such as scikit-learn) to write array-agnostic code that can
+be run on any array API compliant backend. Adopting array API support in scikit-learn
+means that users can pass arrays from any array API compliant library to
+functions that have been converted to be array-agnostic. This is useful because it
+allows users to take advantage of array library features, such as hardware
+acceleration, most notably via GPUs.
+
+Indeed, GPU support in scikit-learn has been of interest for a long time - 11 years
+ago, we added an entry to our FAQ page explaining that we had no plans to add GPU
+support in the near future due to the software dependencies and platform specific
+issues it would introduce. By relying on the array API standard, however, these
 concerns can now be avoided.
 
 In this blog post I will provide an update to the array API adoption work in
@@ -65,10 +68,11 @@ updates.
 Beyond these libraries, scikit-learn also tests against `array-api-strict`, a
 reference implementation that strictly adheres to the array API specification.
 The purpose of `array-api-strict` is to help automate compliance checks for
-consuming libraries such as scikit-learn and SciPy. Array libraries that
-conform to the standard and pass the `array-api-tests` suite should be
-accepted by scikit-learn and SciPy, without any additional modifications from
-maintainers.
+consuming libraries and to enable development and development and testing of array
+API functionality without the need for GPU or other specialized hardware.
+Array libraries that conform to the standard and pass the `array-api-tests` suite
+should be accepted by scikit-learn and SciPy, without any additional modifications
+from maintainers.
 
 ### Estimators and metrics with array API support
 
@@ -118,6 +122,8 @@ to torch CUDA tensors, then passed to the array API-compatible
 `RidgeClassifier` for GPU-accelerated computation:
 
 ```python
+from functools import partial
+
 from sklearn.linear_model import RidgeClassifier
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import FunctionTransformer, TargetEncoder
@@ -126,9 +132,7 @@ pipeline = make_pipeline(
     # Encode string categories with average target values
     TargetEncoder(),
     # Convert feature array `X` to Torch CUDA device
-    FunctionTransformer(
-        func=lambda X: torch.tensor(X).to("float32").to("cuda")
-    ),
+    FunctionTransformer(partial(torch.asarray, dtype="float32", device="cuda"))
     RidgeClassifier(solver="svd"),
 )
 ```
@@ -147,14 +151,14 @@ details.
 
 ## Challenges
 
-The challenges of Array API adoption remain largely unchanged from when this
+The challenges of array API adoption remain largely unchanged from when this
 work began. These are also common to other array-consuming libraries, with a
 notable addition; the need to handle array movement between namespaces and
 devices to support mixed array type inputs.
 
 ### Array API Standard is a subset of NumPy's API
 
-The Array API standard only includes widely-used functions implemented across
+The array API standard only includes widely-used functions implemented across
 most array libraries, meaning many NumPy functions are absent. When such a
 function is encountered while adding array API support, we have the following
 options:
@@ -188,8 +192,10 @@ convert arrays to NumPy first or maintain two parallel branches of code, one
 for NumPy (compiled) and one for other array types (array API compatible).
 When performance is less critical or array API conversion provides no gains
 (e.g., `confusion_matrix`), we convert to NumPy. When performance gains are
-significant, we accept the maintenance burden of dual code paths (e.g.,
-`LogisticRegression`).
+significant, we accept the maintenance burden of dual code paths. This was the case
+`LogisticRegression` and the extensive process required for making such implementation
+decisions can be seem in the
+[PR](https://github.com/scikit-learn/scikit-learn/pull/32644).
 
 ### Unspecified behaviour in the standard
 
@@ -233,11 +239,11 @@ applications.
 Beyond the technical considerations, there were also user interface
 considerations. How should we inform users that these conversions, which incur
 memory and performance cost, are occurring? We decided against warnings, which
-risk being ignored or becoming a nuisance, and instead clearly document this
-behaviour. Further, we need to determine how to gracefully handle
-device-specific data type limitations, specifically MPS does not support
-float64. This requires downcasting which must be clearly communicated to
-users.
+risk being ignored or becoming a nuisance, and to instead clearly document this
+behaviour. Additionally, different devices have different data type limitations,
+for instance Apple MPS only supports float32. How best to handle these differences
+when performing conversions while ensuring users are informed of precision
+impacts is an ongoing consideration.
 
 ## A quick benchmark
 
@@ -289,6 +295,7 @@ Before removing experimental status, we would like to:
   functionalities
 * improved documentation, including adding an example to our gallery
 * decide on the minimal dependency versions required
+* get real world user feedback
 
 Alongside these infrastructure and framework improvements, we look forward to
 adding support for more estimators. These improvements will deliver
