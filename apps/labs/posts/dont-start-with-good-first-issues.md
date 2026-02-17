@@ -48,7 +48,7 @@ As you fix the problems which you encounter, you'll gradually build both familia
 
 ## Even better - write your own project (but don't force it)
 
-At some point, you'll find yourself thinking "wouldn't it be nice if there existed a tool which did this particular thing...wait, how has nobody created it yet?". In that moment, seize the opportunity: solve the problem, and publish it online as an open source project. You'll learn a tonne about testing, packaging, and maintenance by doing. And if people start contributing, you'll also learn about community management and leadership.
+At some point, you'll find yourself thinking "wouldn't it be nice if there existed a tool which did this particular thing...wait, how has nobody created it yet?". In that moment, seize the opportunity: solve the problem, and publish it online as an open source project. You'll learn a tonne about testing, packaging, and maintenance by doing so. And if people start contributing, you'll also learn about community management and leadership.
 
 There are some caveats I must make, though:
 
