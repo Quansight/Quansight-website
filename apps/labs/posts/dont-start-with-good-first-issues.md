@@ -18,7 +18,7 @@ There are many reasons to contribute to open source, and any one of them may hav
 
 First off, let's consider issues labelled "good first issue" in projects you're not familiar with. They will likely either be trivial typo fixes, bugs which look simple to fix, or documentation. Let's consider these in turn:
 
-- Trivial typo fixes: not only will someone else likely have already opened a pull request by the time you finished reading the issue, but this won't be a very valuable learning experience for you anyway.
+- Trivial typo fixes: not only will someone else already have opened a pull request by the time you finished reading the issue, but this won't be a very valuable learning experience for you anyway.
 - Bug fixes. Either it'll be trivial - in which case, see the bullet point above - or you likely won't even be able to understand what the issue is describing and won't have any intrinsic motivation to spend time trying to fix it.
 - Good documentation - contrary to some people's belief - is very hard to write. Tackle documentation issue only once you've already used (and struggled with!) a tool.
 
@@ -42,7 +42,7 @@ If you focus on building projects and completing tasks, then inevitably, problem
 - Some feature you need is missing.
 - ...
 
-And voilà, there you go! When you run into one of the situations above, you've found your good first issue. What you encountered is something that other users will likely also encounter. It's something you already understand and care about. Try addressing it! If you don't manage and don't get anywhere, then no big deal, you likely learned something new along the way anyway. But if you manage, then it'll likely be your entry point to being an open source contributor! Even just writing a good bug report is a valuable way of contributing, see [Joseph Barbier's post on this topic](https://barbierjoseph.com/blog/open-source-starts-with-a-good-issue/).
+And voilà, there you go! When you run into one of the situations above, you've found your good first issue. What you encountered is something that other users will also encounter. It's something you already understand and care about. Try addressing it! If you don't manage and don't get anywhere, then no big deal, you learned something new along the way anyway. But if you manage, then it might end up being your entry point to being an open source contributor! Even just writing a good bug report is a valuable way of contributing, see [Joseph Barbier's post on this topic](https://barbierjoseph.com/blog/open-source-starts-with-a-good-issue/).
 
 As you fix the problems which you encounter, you'll gradually build both familiarity with the project and develop a positive reputation within the community. It won't be long until you're able to successfully fix other people's problems too!
 
@@ -58,7 +58,7 @@ There are some caveats I must make, though:
 
 ## Responses to possible objections
 
-I'd like to respond to some likely objections from readers.
+I'd like to respond to some possible objections from readers.
 
 > "Fixing a typo can still be useful because it teaches you the contribution process / git workflow and teaches you to build the project locally".
 
