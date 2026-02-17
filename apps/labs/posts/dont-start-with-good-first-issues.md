@@ -28,9 +28,9 @@ So instead, let's consider "good first issue"s in projects you are familiar with
 - You'll read the issue description and you'll ask yourself "why should anyone care about this?".
 - You'll have no idea how to even start tackling the issue, calling into question the "good first issue" label.
 
-If may, therefore, look like getting started with open source is a hopeless endeavor and that you may as well give up. Don't! I'm here to tell you want to do instead.
+If may, therefore, look like getting started with open source is a hopeless endeavor and that you may as well give up. Don't! I'm here to tell you what to do instead.
 
-## How to find actually find issues
+## How to actually find issues
 
 Don't. That's right - don't find problems to solve. Instead, let the problems find you!
 
