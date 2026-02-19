@@ -22,6 +22,8 @@ First off, let's consider issues labelled "good first issue" in projects you're 
 - Bug fixes. Either it'll be trivial - in which case, see the bullet point above - or you likely won't even be able to understand what the issue is describing and won't have any intrinsic motivation to spend time trying to fix it.
 - Good documentation - contrary to some people's belief - is very hard to write. Tackle documentation issue only once you've already used (and struggled with!) a tool.
 
+In addition to the above, solving issues requires real work, both from contributors who do the work and from the maintainers who review it. Ideally, it should be rewarding to both parties. If you contribute to a project you already use and are familiar with, you will get more out of it.
+
 So instead, let's consider "good first issue"s in projects you are familiar with, and you at least know what they do. If you find a non-trivial issue labelled "good first issue" in such a project, then I'm fairly confident that at least one of the following will be true:
 
 - It'll affect an aspect of the project you're not familiar with.
@@ -42,9 +44,11 @@ If you focus on building projects and completing tasks, then inevitably, problem
 - Some feature you need is missing.
 - ...
 
-And voilà, there you go! When you run into one of the situations above, you've found your good first issue. What you encountered is something that other users will also encounter. It's something you already understand and care about. Try addressing it! If you don't manage and don't get anywhere, then no big deal, you learned something new along the way anyway. But if you manage, then it might end up being your entry point to being an open source contributor! Even just writing a good bug report is a valuable way of contributing, see [Joseph Barbier's post on this topic](https://barbierjoseph.com/blog/open-source-starts-with-a-good-issue/).
+And voilà, there you go! When you run into one of the situations above, you've found your good first issue. What you encountered is something that other users will also encounter. It's something you already understand and care about. Try addressing it! Just make sure to search the issue tracker and the open pull requests log to check it's not already been worked on.
 
-As you fix the problems which you encounter, you'll gradually build both familiarity with the project and develop a positive reputation within the community. It won't be long until you're able to successfully fix other people's problems too!
+If you don't manage to solve the issue you found, then no big deal, you will have learned something new along the way. But if you manage, then it might end up being your entry point to being an open source contributor! Even just writing a good bug report is a valuable way of contributing, see [Joseph Barbier's post on this topic](https://barbierjoseph.com/blog/open-source-starts-with-a-good-issue/).
+
+As you fix the problems which you encounter, you'll gradually build both familiarity with the project and develop a positive reputation within the community. It won't be long until you're able to successfully fix other people's problems too! You may even want to lend a hand at reviewing other contributors' work, which will increase your level of trust in the community and will give you more appreciation for the actual amount of work that goes on behind the scenes.
 
 ## Even better - write your own project (but don't force it)
 
@@ -84,3 +88,5 @@ The story I've heard from several maintainers is that the label tends to attract
 ## Conclusion
 
 Next time you use a tool and encounter a cryptic error message, outdated or missing documentation, or bug, take a moment and pause. Turn that frustration into motivation. You may indeed have found your path towards becoming an open source contributor.
+
+Many thanks to the following people for their reviews, suggestions, and fruitful discussions: Joseph Barbier, Jérémie du Boisberranger, Ralf Gommers, Lucy Liu, and Maren Westermann.
