@@ -20,25 +20,26 @@ First off, let's consider issues labelled "good first issue" in projects you're 
 
 - Trivial typo fixes: not only will someone else already have opened a pull request by the time you finished reading the issue, but this won't be a very valuable learning experience for you anyway.
 - Bug fixes. Either it'll be trivial - in which case, see the bullet point above - or you likely won't even be able to understand what the issue is describing and won't have any intrinsic motivation to spend time trying to fix it.
-- Good documentation - contrary to some people's belief - is very hard to write. Tackle documentation issue only once you've already used (and struggled with!) a tool.
+- Good documentation - contrary to some people's belief - is very hard to write. Tackle documentation issues only once you've already used (and struggled with!) a tool.
 
 In addition to the above, solving issues requires real work, both from contributors who do the work and from the maintainers who review it. Ideally, it should be rewarding to both parties. If you contribute to a project you already use and are familiar with, you will get more out of it.
 
-So instead, let's consider "good first issue"s in projects you are familiar with, and you at least know what they do. If you find a non-trivial issue labelled "good first issue" in such a project, then I'm fairly confident that at least one of the following will be true:
+So instead, let's consider "good first issues" in projects you are familiar with, and you at least know what they do. If you find a non-trivial issue labelled "good first issue" in such a project, then I'm fairly confident that at least one of the following will be true:
 
 - It'll affect an aspect of the project you're not familiar with.
 - You'll read the issue description and you'll ask yourself "why should anyone care about this?".
 - You'll have no idea how to even start tackling the issue, calling into question the "good first issue" label.
+- You'll feel overwhelmed and think your skills are not sufficient for contributing to open source.
 
-If may, therefore, look like getting started with open source is a hopeless endeavor and that you may as well give up. Don't! I'm here to tell you want to do instead.
+It may, therefore, look like getting started with open source is a hopeless endeavor and that you may as well give up. Don't! I'm here to tell you what to do instead.
 
-## How to find actually find issues
+## How to actually find issues
 
 Don't. That's right - don't find problems to solve. Instead, let the problems find you!
 
 If you focus on building projects and completing tasks, then inevitably, problems to solve will appear by themselves. Some examples are:
 
-- The documentation for a tool you're using is out-of-date or inaccurate.
+- The documentation for a tool you're using is missing, out-of-date or inaccurate.
 - You get an unclear error message which doesn't tell you what to do and is unrelated to what you did.
 - A parameter which you pass down appears to be ignored.
 - Some feature you need is missing.
