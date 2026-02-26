@@ -68,7 +68,7 @@ updates.
 Beyond these libraries, scikit-learn also tests against `array-api-strict`, a
 reference implementation that strictly adheres to the array API specification.
 The purpose of `array-api-strict` is to help automate compliance checks for
-consuming libraries and to enable development and development and testing of array
+consuming libraries and to enable development and testing of array
 API functionality without the need for GPU or other specialized hardware.
 Array libraries that conform to the standard and pass the `array-api-tests` suite
 should be accepted by scikit-learn and SciPy, without any additional modifications
@@ -139,7 +139,8 @@ pipeline = make_pipeline(
 
 Work on adding mixed array type inputs for metrics and estimators is underway
 and expected to progress quickly. This work includes developing a robust
-testing framework, including for pipelines using mixed array types.
+testing framework, including for pipelines using mixed array types (follow
+[PR #32755](https://github.com/scikit-learn/scikit-learn/pull/32755) for details).
 
 Finally, we have also revived our work to support the ability to fit and
 predict on different namespaces/devices. This allows users to train models on
@@ -166,7 +167,7 @@ options:
 * add the function to `array-api-extra` - this allows other array-consuming
   libraries to benefit and allows sharing of maintenance burden, but is only
   relevant for more widely used functions
-* add your own implementation in scikit-learn - these functions live in
+* add our own implementation in scikit-learn - these functions live in
   `sklearn/utils/_array_api.py`
 * check if SciPy implements an array API compatible version of the function
 
@@ -192,10 +193,10 @@ convert arrays to NumPy first or maintain two parallel branches of code, one
 for NumPy (compiled) and one for other array types (array API compatible).
 When performance is less critical or array API conversion provides no gains
 (e.g., `confusion_matrix`), we convert to NumPy. When performance gains are
-significant, we accept the maintenance burden of dual code paths. This was the case
+significant, we accept the maintenance burden of dual code paths. This was the case for
 `LogisticRegression` and the extensive process required for making such implementation
-decisions can be seem in the
-[PR](https://github.com/scikit-learn/scikit-learn/pull/32644).
+decisions can be seen in the
+[PR #32644](https://github.com/scikit-learn/scikit-learn/pull/32644).
 
 ### Unspecified behaviour in the standard
 
