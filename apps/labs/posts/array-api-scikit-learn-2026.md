@@ -29,8 +29,8 @@ support in the near future due to the software dependencies and platform specifi
 issues it would introduce. By relying on the array API standard, however, these
 concerns can now be avoided.
 
-In this blog post I will provide an update to the array API adoption work in
-scikit-learn, since it's initial introduction in version 1.3, two years ago.
+In this blog post, I will provide an update to the array API adoption work in
+scikit-learn, since it's initial introduction in version 1.3 two years ago.
 Thomas Fan's [blog post](https://labs.quansight.org/blog/array-api-support-scikit-learn)
 provides details on the status when array API support was initially added.
 
@@ -51,15 +51,15 @@ libraries time to adopt the standard slowly. `array-api-extra` provides array
 functions not included in the standard but deemed useful for array-consuming
 libraries.
 
-We chose to vendor these now much more mature libraries, to avoid the
+We chose to vendor these now much more mature libraries in order to avoid the
 complexity of conditionally handling optional dependencies throughout the
-codebase. This approach also follows precedent, as also SciPy vendors these
+codebase. This approach also follows precedent, as SciPy also vendors these
 packages.
 
 ### Array libraries supported
 
 Scikit-learn currently supports CuPy ndarrays, PyTorch tensors (testing
-against all devices; 'cpu', 'cuda', 'mps' and 'xpu') and NumPy arrays. JAX
+against all devices: 'cpu', 'cuda', 'mps' and 'xpu') and NumPy arrays. JAX
 support is also on the horizon. The main focus of this work is addressing
 in-place mutations in the codebase. Follow
 [PR #29647](https://github.com/scikit-learn/scikit-learn/pull/29647) for
@@ -88,7 +88,7 @@ Conversion of estimators is much more complicated as it often involves
 benchmarking different variations of code or consensus gathering on
 implementation choices. It generally requires many months of work by several
 maintainers. Nonetheless, support for `LogisticRegression`, `GaussianNB`,
-`GaussianMixture`, `Ridge` (and family; `RidgeCV`, `RidgeClassifier`,
+`GaussianMixture`, `Ridge` (and family: `RidgeCV`, `RidgeClassifier`,
 `RidgeClassifierCV`), `Nystroem` and `PCA` has been added. Work on
 `GaussianProcessRegressor` is also underway (follow at
 [PR #33096](https://github.com/scikit-learn/scikit-learn/pull/33096)).
@@ -154,7 +154,7 @@ details.
 
 The challenges of array API adoption remain largely unchanged from when this
 work began. These are also common to other array-consuming libraries, with a
-notable addition; the need to handle array movement between namespaces and
+notable addition: the need to handle array movement between namespaces and
 devices to support mixed array type inputs.
 
 ### Array API Standard is a subset of NumPy's API
@@ -174,12 +174,12 @@ options:
 The `quantile` function illustrates this decision-making process. `quantile`
 is not included in the standard as it is not widely used (outside of
 scikit-learn) and while it is implemented in most array libraries, the
-quantile methods supported and API vary. Currently, scikit-learn maintains its
+set of quantile methods supported and their APIs vary. Currently, scikit-learn maintains its
 own array API compatible version that supports both weights and NaNs, but due
 to the maintenance burden we decided to investigate alternatives. SciPy has an
-array API compatible implementation but it did not support weights. We thus
-investigated adding `quantile` to `array-api-extra`, however during this
-effort SciPy decided to add weight support. Thus we ultimately decided to
+array API compatible implementation, but it did not support weights. We thus
+investigated adding `quantile` to `array-api-extra`; however, during this
+effort, SciPy decided to add weight support. Thus, we ultimately decided to
 transition to the SciPy implementation once our minimum SciPy version allows.
 
 ### Compiled code
@@ -207,7 +207,7 @@ functions and as of NumPy version 2.3, some `unique_*` functions no longer
 return sorted values. This will require code amendments in cases where sorted
 output was relied upon.
 
-Similarly, NaN handing is also unspecified for `sort` though in this case, all
+Similarly, NaN handing is also unspecified for `sort`; however, in this case, all
 array libraries currently supported by scikit-learn follow NumPy's NaN
 semantics, placing NaNs at the end. This consistency eliminates the need for
 special handling code, though comprehensive testing remains essential when
@@ -227,7 +227,7 @@ us with an easy way to implement these transfers, there were limitations.
 Cross-device transfer capability was only introduced in DLPack v1, released in
 September 2024. This meant that only the latest PyTorch and CuPy versions have
 support for DLPack v1. Moreover, not all array libraries have adopted support
-yet. We therefore implemented a 'manual' fallback though this requires
+yet. We therefore implemented a 'manual' fallback; however, this requires
 conversion via NumPy when the transfer involves two non-NumPy arrays.
 Additionally, there are no DLPack tests in
 [array-api-tests](https://github.com/data-apis/array-api-tests), a testing
@@ -241,8 +241,8 @@ Beyond the technical considerations, there were also user interface
 considerations. How should we inform users that these conversions, which incur
 memory and performance cost, are occurring? We decided against warnings, which
 risk being ignored or becoming a nuisance, and to instead clearly document this
-behaviour. Additionally, different devices have different data type limitations,
-for instance Apple MPS only supports float32. How best to handle these differences
+behaviour. Additionally, different devices have different data type limitations;
+for example, Apple MPS only supports float32. How best to handle these differences
 when performing conversions while ensuring users are informed of precision
 impacts is an ongoing consideration.
 
