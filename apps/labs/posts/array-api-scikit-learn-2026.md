@@ -1,11 +1,11 @@
 ---
 title: 'Update on array API adoption in scikit-learn'
 authors: [lucy-liu]
-published: February 28, 2026
+published: March 4, 2026
 description: 'In this blog post, we provide an update on array API adoption in scikit-learn.'
 category: [Array API, GPU]
 featuredImage:
-  src: /posts/array-api-scikit-learn-2026/array-api-scikit-learn-2026-featured.png
+  src: /posts/array-api-scikit-learn-2026/array-api-scikit-learn-2026-feature.png
   alt: 'The Data APIs logo next to the scikit-learn logo.'
 hero:
   imageSrc: /posts/array-api-scikit-learn-2026/array-api-scikit-learn-2026-hero.png
