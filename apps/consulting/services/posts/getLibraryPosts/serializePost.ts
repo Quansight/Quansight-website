@@ -23,6 +23,7 @@ export const serializePost = async (
   const { data, content } = matter(fileContent);
   const result = await serialize(content, {
     scope: data,
+    blockJS: false,
     mdxOptions: {
       remarkPlugins: [
         [remarkCodeHike, { autoImport: false, theme }],
