@@ -71,10 +71,12 @@ This transition affects packages that depend on compiled Rust, C, C++, or
 Fortran code and ship compiled binaries to PyPI. This is because the
 free-threaded build forces compiled code to carefully consider thread
 safety. The free-threaded build does not have a global lock that is held while
-executing code in extensions. While thread-unsafe extensions have always been
-possible, code that was perhaps questionable but definitely safe before is now
-definitely unsafe, and it is necessary to update extensions to support
-free-threaded Python.
+executing code in extensions. Many latent thread safety issues in extensions
+are masked by limited use of multithreaded parallelism in the ecosystem and
+the low probability of a GIL thread switch happening in such a way as to trigger
+thread safety issues. In the free-threaded build, multithreaded parallelism is
+much more likely to be used and unlucky thread switches are no longer necessary
+to trigger latent races.
 
 An example of code like this is a C extension that stores a cache that gets
 initialized at runtime. Many extensions do this, and assume it is safe to store
@@ -87,7 +89,7 @@ until the cache is filled.
 
 This is just one thread-unsafe pattern we've found in native extensions. We've
 also documented several other patterns that we've come across and accompanying
-suggested fixes. Additionally, we've published a porting guide focusing
+suggested fixes. Additionally, we've published a porting guide focusing on
 [patterns to make native code
 thread-safe](https://py-free-threading.github.io/porting-extensions/).
 
@@ -98,7 +100,7 @@ PyO3, this is already taken care of for you. Additionally with PyO3, you can
 rely on the safety guarantees of the Rust programming language to write code
 that cannot lead to data races by construction.
 
-## Where things stand now.
+## Where things stand now
 
 When we first started this work, there were many, _many_ rough edges to working
 with the free-threaded build. There are certainly still problems that need to be
@@ -121,14 +123,16 @@ from users.
 
 ## Our work in 2026 so far
 
-Recently in NumPy, I've been working with CPython core developer [Kumar
+Recently in NumPy, I've been working with CPython Core Developer [Kumar
 Aditya](https://github.com/kumaraditya303) to improve the scaling of NumPy
 "universal function" (ufunc) operations. After a [report from a user on
 StackOverflow](https://stackoverflow.com/q/79851420/1382869), we identified and
 fixed several scaling issues in NumPy and in CPython. In the end, we expect
 multithreaded ufunc performance to be substantially improved in Python 3.15 and
-NumPy 2.5, due out later this year. Stay tuned for a blog post from Kumar with
-more details about this optimization process.
+NumPy 2.5, due out later this year. See [the NumPy
+issue](https://github.com/numpy/numpy/issues/30494) about this topic for more
+detail about this work and stay tuned for a blog post from Kumar with more
+details about this optimization process.
 
 Another team member, CPython core developer [Neil
 Schemenauer](https://github.com/nascheme), has been focusing on [free-threaded
@@ -148,13 +152,17 @@ will require updating CPython's [Stable
 ABI](https://docs.python.org/3.15/c-api/stable.html#stable-application-binary-interface)
 to support the different ABI on the free-threaded build. Work is actively
 underway towards this in CPython, led by CPython core developer and PSF
-developer-in-residence [Petr Viktorin](https://github.com/encukou). I am
-supporting Petr by enabling [end-to-end
+developer-in-residence [Petr Viktorin](https://github.com/encukou). Gentoo
+Developer [Michał Górny](https://github.com/mgorny/) and I are supporting Petr
+by enabling automated [end-to-end
 tests](https://github.com/Quansight-Labs/stable-abi-testing) of the new stable
 ABI. Work is actively underway in [across the
 ecosystem](https://github.com/Quansight-Labs/free-threaded-compatibility/issues/310)
 to enable extension authors to streamline their release process and ease support
-for new platforms.
+for new platforms. Kumar Aditya is also working on [enabling support for the
+free-threaded stable ABI in NumPy](https://github.com/numpy/numpy/issues/30704),
+so that projects that depend on the NumPy C API can ship wheels using the new
+ABI tag.
 
 ## How you can help
 
@@ -170,15 +178,15 @@ environment. This will prevent the GIL from being enabled and runtime. It may
 also lead to crashes or inconsistent results if you spawn threads and trigger
 some sort of issue, but in my experience, it is more likely that things will
 "just work" unless you are intentionally doing something unsafe to break a
-package. Workflows with no mutation of shared data structures will often work
-"out of the box".
+package. Multithreaded workflows with no mutation of shared data structures will
+often work "out of the box".
 
 If you discover problems in your testing, you can let the developers of packages
 you depend on know that you would like them to support the free-threaded build
-and give examples of real-world use cases that might benefit. Reports where
-multithreaded parallelism is slower than multiprocessing or where multithreaded
-workflows lead to crashes or data corruption are always interesting to dive into
-and resolve.
+and give examples of real-world use cases that might benefit. Reports with
+instructions how to trigger data corruptions, crashes, or set up situations
+where multithreaded parallelism is slower than multiprocessing are particularly
+useful.
 
 Although some work to support the free-threaded build involves touching C, C++,
 or Rust code, pure Python programming skills are all you need for many
