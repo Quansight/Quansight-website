@@ -1,6 +1,6 @@
 ---
 title: 'Stop browsing "good first issues" - do this instead'
-published: 11, February 2026
+published: March 5, 2026
 authors: [marco-gorelli]
 description: 'Before becoming a contributor, become a user'
 category: [PyData ecosystem]
