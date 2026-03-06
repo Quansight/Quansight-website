@@ -184,7 +184,7 @@ often work "out of the box".
 If you discover problems in your testing, you can let the developers of packages
 you depend on know that you would like them to support the free-threaded build
 and give examples of real-world use cases that might benefit. Reports with
-instructions how to trigger data corruptions, crashes, or set up situations
+instructions how to trigger data corruption, crashes, or set up situations
 where multithreaded parallelism is slower than multiprocessing are particularly
 useful.
 
