@@ -123,7 +123,7 @@ from users.
 
 ## Our work in 2026 so far
 
-Recently in NumPy, I've been working with CPython Core Developer [Kumar
+Recently in NumPy, I've been working with CPython core developer [Kumar
 Aditya](https://github.com/kumaraditya303) to improve the scaling of NumPy
 "universal function" (ufunc) operations. After a [report from a user on
 StackOverflow](https://stackoverflow.com/q/79851420/1382869), we identified and
