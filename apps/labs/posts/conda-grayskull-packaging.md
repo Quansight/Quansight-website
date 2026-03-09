@@ -1,9 +1,9 @@
 ---
 title: 'Conda and Grayskull, the Masters of Software Packaging'
 published: January 19, 2022
-author: mahe-iram-khan
+authors: [mahe-iram-khan]
 description: 'Grayskull is an automatic conda recipe generator, with a focus on conda-forge.'
-category: [Packaging]
+category: [Packaging, Internship]
 featuredImage:
   src: /posts/conda-grayskull-packaging/package_name_feature.png
   alt: "A flow diagram of a 'package name' being fed into a gray colored skull which represents the tool Grayskull and being converted into a curled up piece of paper which represents a recipe."

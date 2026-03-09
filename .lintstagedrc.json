@@ -1,7 +1,7 @@
 {
   "*.{js,json,css,scss,md,ts,tsx,html,graphql}": [
     "nx format:write --uncommitted",
-    "nx affected:lint --base=develop --fix=true"
+    "nx affected:lint --base=main --fix=true"
   ],
-  ".css": ["nx affected:stylelint --base=develop --fix=true"]
+  ".css": ["nx affected:stylelint --base=main --fix=true"]
 }

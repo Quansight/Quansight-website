@@ -1,11 +1,11 @@
 ---
 title: 'Labs update and May highlights'
 published: June 12 , 2019
-author: ralf-gommers
+authors: [ralf-gommers]
 description: "Time flies when you're having fun. Here is an update of some of the highlights of my second month at Quansight Labs."
 category: [Funding, PyData ecosystem]
 featuredImage:
-  src: /posts/the-ibis-backends/blog_feature_var2.svg
+  src: /posts/the-ibis-backends/blog_feature_var2.png
   alt: 'An illustration of a brown and a white hand coming towards each other to pass a business card with the logo of Quansight Labs.'
 hero:
   imageSrc: /posts/the-ibis-backends/blog_hero_var1.svg
@@ -45,7 +45,7 @@ It was also a pleasure meeting many people I have interacted with before or
 knew only by name, from core Python and Cython developers like Matthias Klose,
 Mariatta Wijaya, Stefan Behnel and Christian Heimes, to scientific Python
 maintainers like Antony Lee (Matplotlib), Marc Garcia (Pandas) and Brigitta
-Sipocz (AstroPy).  The next day I took advantage of the opportunity to visit
+Sipocz (AstroPy). The next day I took advantage of the opportunity to visit
 [Maintainerati](https://maintainerati.org/) (highly recommended!) to exchange
 ideas and experiences with a completely different set of maintainers, from
 communities as diverse as Node/Javascript, Kubernetes and Debian.

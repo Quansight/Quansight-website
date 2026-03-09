@@ -16,6 +16,7 @@
 *.launch
 .settings/
 *.sublime-workspace
+.vscode/
 
 # IDE - VSCode
 .vscode/*
@@ -44,3 +45,9 @@ Thumbs.db
 .eslintcache
 .env
 .history
+
+#rss.xml file
+rss.xml
+
+.next/
+.nx/

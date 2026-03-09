@@ -1,7 +1,7 @@
 ---
 title: 'Creating the ultimate terminal experience in Spyder 4 with Spyder-Terminal'
 published: February 14, 2020
-author: stephannie-jimenez
+authors: [stephannie-jimenez]
 description: 'The Spyder-Terminal project is revitalized! The new 0.3.0 version adds numerous features that improves the user experience, and enhances compatibility with the latest Spyder 4 release, in part thanks to the improvements made in the xterm.js project.'
 category: [IDEs]
 featuredImage:

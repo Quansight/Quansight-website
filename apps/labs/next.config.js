@@ -68,11 +68,9 @@ const nextConfig = {
     return {
       beforeFiles: [
         {
-          // In the future, this rewrite can be generalized by doing something like
-          // source: '/annual-reports/quansight-labs-annual-report-:year.pdf'
-          // destination: '/api/annual-report.pdf?year=:year'
-          source: '/annual-reports/quansight-labs-annual-report-2022.pdf',
-          destination: '/api/annual-report.pdf',
+          source:
+            '/annual-reports/quansight-labs-annual-report-:year(\\d{4}).pdf',
+          destination: '/api/annual-report.pdf?year=:year',
         },
       ],
       afterFiles: [
@@ -92,26 +90,6 @@ const nextConfig = {
         {
           source: '/p7e/api/event',
           destination: 'https://plausible.io/api/event',
-        },
-      ],
-      fallback: [
-        // These rewrites are checked after both pages/public files and dynamic
-        // routes are checked.
-        {
-          source: '/:file(.+\\..+)',
-          destination: 'https://quansight-labs.netlify.app/:file',
-        },
-        {
-          // Why is /archive an anomaly on Netlify site?
-          // On Netlify, /2022 redirects to /2022/
-          // But then on same Netlify site, /archive/ redirects to /archive
-          // WTF.
-          source: '/archive',
-          destination: 'https://quansight-labs.netlify.app/archive',
-        },
-        {
-          source: '/:path*',
-          destination: 'https://quansight-labs.netlify.app/:path*/',
         },
       ],
     };

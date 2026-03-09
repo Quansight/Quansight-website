@@ -3,7 +3,13 @@ import React, { FC } from 'react';
 import { GetStaticProps } from 'next';
 
 import { ISlugParams, DomainVariant } from '@quansight/shared/types';
-import { Layout, SEO, Footer, Header } from '@quansight/shared/ui-components';
+import {
+  Layout,
+  SEO,
+  Footer,
+  Header,
+  SocialCard,
+} from '@quansight/shared/ui-components';
 import { isPageType } from '@quansight/shared/utils';
 
 import { PageComponent, PageItem } from '../../api/types/basic';
@@ -33,6 +39,11 @@ export const Team: FC<TContainerProps> = ({
     }
   >
     <SEO
+      title={data.content.title}
+      description={data.content.description}
+      variant={DomainVariant.Labs}
+    />
+    <SocialCard
       title={data.content.title}
       description={data.content.description}
       variant={DomainVariant.Labs}

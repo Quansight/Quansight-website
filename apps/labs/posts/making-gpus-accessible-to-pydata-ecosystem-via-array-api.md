@@ -3,10 +3,10 @@ title: 'Making GPUs accessible to the PyData Ecosystem via the Array API Standar
 published: March 31, 2022
 description: 'How we can use the Python Array API Standard with the fundamental libraries in the PyData ecosystem along with CuPy for
 making GPUs accessible to the users of these libraries'
-author: amit-kumar
+authors: [amit-kumar]
 category: [Array API, Machine Learning]
 featuredImage:
-  src: /posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/blog_feature.svg
+  src: /posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/blog_feature.png
   alt: 'A brown and a black comgin towards each other to pass a business card with the logo of Quansight Labs'
 hero:
   imageSrc: /posts/making-gpus-accessible-to-pydata-ecosystem-via-array-api/blog_hero.svg
@@ -388,7 +388,7 @@ don't match (e.g., `concat` in the standard instead of `np.concatenate`).
 
 Here is an example of a naming inconsistency between NumPy and the Array API standard:
 
-```ipython
+```py
 
 In [1]: import numpy as np
 In [2]: import numpy.array_api as npx
@@ -404,7 +404,7 @@ Out[4]: <function numpy.array_api._manipulation_functions.concat...>
 
 And here is an example of a behavioral inconsistency for an indexing operation:
 
-```ipython
+```py
 In [1]: import numpy as np
 In [2]: import numpy.array_api as npx
 

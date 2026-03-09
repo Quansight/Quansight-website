@@ -11,7 +11,13 @@ import 'swiper/css/navigation';
 
 import { ISlugParams, DomainVariant } from '@quansight/shared/types';
 import { FormSessionStorageKeys } from '@quansight/shared/ui-components';
-import { Layout, SEO, Footer, Header } from '@quansight/shared/ui-components';
+import {
+  Layout,
+  SEO,
+  Footer,
+  Header,
+  SocialCard,
+} from '@quansight/shared/ui-components';
 
 import { PageItem } from '../api/types/basic';
 import { getFooter } from '../api/utils/getFooter';
@@ -55,6 +61,11 @@ export const NebariServicesPage: FC<TContainerProps> = ({
     }
   >
     <SEO
+      title="Nebari Services"
+      description="Nebari is designed to be deployed and managed without DevOps expertise. However, if you need support, we offer flexible service options. Learn about Nebari."
+      variant={DomainVariant.Quansight}
+    />
+    <SocialCard
       title="Nebari Services"
       description="Nebari is designed to be deployed and managed without DevOps expertise. However, if you need support, we offer flexible service options. Learn about Nebari."
       variant={DomainVariant.Quansight}

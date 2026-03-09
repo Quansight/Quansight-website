@@ -11,7 +11,7 @@ export type TTeamMemberImage = {
 };
 
 export const TeamMemberImage: FC<TTeamMemberImage> = ({ image, shape }) => (
-  <div className="flex relative mb-[0.5rem] md:mb-[1rem]">
+  <div className="inline-flex relative mb-[0.5rem] md:mb-[1rem]">
     <Picture
       className="brightness-110 grayscale"
       imageSrc={image.filename}
