@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link, { LinkProps } from 'next/link';
 
-export type LinkWithArrowProps = LinkProps;
+export type LinkWithArrowProps = PropsWithChildren<LinkProps>;
 
 export const LinkWithArrow: FC<LinkWithArrowProps> = ({
   children,
@@ -12,7 +12,7 @@ export const LinkWithArrow: FC<LinkWithArrowProps> = ({
   return (
     <Link {...restProps} className="text-[1.4rem] font-normal leading-[2.7rem]">
       <>
-        <span className="mr-[1rem]">
+        <span className="mr-4">
           <Image
             src="/arrow-left.svg"
             alt="Left arrow"

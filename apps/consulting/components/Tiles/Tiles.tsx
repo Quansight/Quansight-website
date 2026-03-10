@@ -1,27 +1,18 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useMemo } from 'react';
 
+import { Tile } from './Tile';
+import { TTilesProps } from './types';
+import { areValidSectionTiles } from './utils/areValidSectionTiles';
 import { divideLibraryTiles } from '../../utils/divideLibraryTiles/divideLibraryTiles';
 import { Newsletter } from '../Newsletter/Newsletter';
-import { Tile } from './Tile';
-import { TTilesProps, TSlicedTiles } from './types';
-import { areValidSectionTiles } from './utils/areValidSectionTiles';
 
 export const Tiles: FC<TTilesProps> = ({ tiles, tileVariant }) => {
-  const [slicedTiles, setSlicedTiles] = useState<TSlicedTiles>({
-    sectionTop: [],
-    sectionBottom: [],
-  });
-
-  useEffect(() => {
-    const slicedTiles = divideLibraryTiles(tiles);
-
-    setSlicedTiles(slicedTiles);
-  }, [tiles]);
+  const slicedTiles = useMemo(() => divideLibraryTiles(tiles), [tiles]);
 
   return (
     <section>
       {tiles.length === 0 && (
-        <p className="text-[2.2rem] font-extrabold text-center text-black">
+        <p className="text-center text-[2.2rem] font-extrabold text-black">
           We don&apos;t have any posts yet. Please check back later.
         </p>
       )}

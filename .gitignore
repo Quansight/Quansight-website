@@ -51,3 +51,6 @@ rss.xml
 
 .next/
 .nx/
+
+# Next.js
+.next
