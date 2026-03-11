@@ -32,11 +32,11 @@ import { filterPosts } from '../../services/posts/filterPosts';
 import { generateRSS } from '../../services/posts/generateRSS';
 import { getPostsByPage } from '../../services/posts/getPostsByPage';
 import { TContainerProps } from '../../types/containerProps';
-import { TPost } from '../../types/storyblok/bloks/posts';
+import { TPostSummary } from '../../types/storyblok/bloks/posts';
 import { TRawBlok } from '../../types/storyblok/bloks/rawBlock';
 
 export type BlogListPageProps = TContainerProps & {
-  posts: TPost[];
+  posts: TPostSummary[];
   footer: FooterItem;
   header: HeaderItem;
   categoryList: string[];
@@ -58,8 +58,8 @@ const BlogListPage: FC<BlogListPageProps> = ({
   >();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pages, setPages] = useState<number>();
-  const [filteredItems, setFilteredItems] = useState<TPost[]>([]);
-  const [itemsToShow, setItemsToShow] = useState<TPost[]>([]);
+  const [filteredItems, setFilteredItems] = useState<TPostSummary[]>([]);
+  const [itemsToShow, setItemsToShow] = useState<TPostSummary[]>([]);
   const pageElementClassName =
     'text-[1.4rem] font-normal text-black leading-[2.7rem] font-sans hover:underline';
   const pageLinkClassName = 'p-[0.8rem]';
@@ -225,13 +225,15 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
 
   await generateRSS(items);
 
+  const posts = items.map(({ slug, meta }) => ({ slug, meta }));
+
   return {
     props: {
       header,
       data,
       footer,
       categoryList: categories,
-      posts: items,
+      posts,
       preview,
     },
   };
