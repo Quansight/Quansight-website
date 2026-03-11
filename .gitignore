@@ -49,5 +49,7 @@ Thumbs.db
 #rss.xml file
 rss.xml
 
+# next.js files
 .next/
 .nx/
+next-env.d.ts
