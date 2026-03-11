@@ -25,7 +25,7 @@ wheel? Why does this milestone matter?
 The first question is a little easier: 360 is an arbitrary choice. The reason we
 care is it's used by a very nice
 [tracker](https://hugovk.github.io/free-threaded-wheels) CPython core developer
-[Hugo von Kemenade](https://github.com/hugovk) set up last year.
+[Hugo van Kemenade](https://github.com/hugovk) set up last year.
 
 These sorts of automatically generated tracking pages serve as a community
 dashboard and temperature gauge. It tells us how compatible the ecosystem is and
@@ -174,7 +174,7 @@ free-threaded build, now is a good time to look at enabling that support.
 If you do not know low-level programming languages, you can still help out by
 testing packages. If packages in your dependency tree re-enable the GIL, run
 Python with `python -Xgil=0` or with `PYTHON_GIL=0` set in your shell
-environment. This will prevent the GIL from being enabled and runtime. It may
+environment. This will prevent the GIL from being enabled at runtime. It may
 also lead to crashes or inconsistent results if you spawn threads and trigger
 some sort of issue, but in my experience, it is more likely that things will
 "just work" unless you are intentionally doing something unsafe to break a
