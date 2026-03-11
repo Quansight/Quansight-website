@@ -79,7 +79,7 @@ from matplotlib import pyplot as plt
 print('ibis:', ibis.__version__)
 ```
 ---
-```txt [Out]
+```text [Out]
 ibis: 1.2.0+7.g3afa8b0d
 ```
 </CH.Code>
@@ -120,7 +120,7 @@ gist_url = 'https://gist.githubusercontent.com/xmnlab/587dd1bde44850f3117a1087ed
 !wget {gist_url} -O omniscidb_geopandas_output.py
 ```
 ---
-```txt [Out]
+```text [Out]
 --2019-07-05 11:31:57--  https://gist.githubusercontent.com/xmnlab/587dd1bde44850f3117a1087ed3f0f28/raw/0750400db90cf97319a91aa514648c31ad4ace45/omniscidb_geopandas_output.py
 Resolviendo gist.githubusercontent.com (gist.githubusercontent.com)... 151.101.48.133
 Conectando con gist.githubusercontent.com (gist.githubusercontent.com)[151.101.48.133]:443... conectado.
@@ -152,7 +152,7 @@ display(t)
 print('# rows:', t.count().execute())
 ```
 ---
-```txt [Out]
+```text [Out]
 # rows: 33144
 ```
 </CH.Code>
@@ -240,7 +240,7 @@ t = t[fields].distinct()
 t.PerCapitaIncome.corr(t.Education).execute()
 ```
 ---
-```txt [Out]
+```text [Out]
 0.7212061029308654
 ```
 </CH.Code>

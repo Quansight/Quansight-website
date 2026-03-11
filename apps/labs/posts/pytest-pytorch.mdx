@@ -82,7 +82,7 @@ class TestFoo(TestCase):
 instantiate_device_type_tests(TestFoo, globals(), only_for=["cpu"])
 ```
 ---
-```txt [Out]
+```text [Out]
 1 warning in 0.01s
 
 ERROR: not found: /home/user/tmp35zsok9u.py::TestFoo::test_bar
@@ -120,7 +120,7 @@ enable_pytest_pytorch()
 pass
 ```
 ---
-```txt [Out]
+```text [Out]
 F                                                                        [100%]
 =================================== FAILURES ===================================
 ___________________________ TestFooCPU.test_bar_cpu ____________________________
@@ -180,7 +180,7 @@ class TestFoo(TestCase):
         pass
 ```
 ---
-```txt [Out]
+```text [Out]
 tmpy90fpw2t.py::TestFoo::test_bar
 tmpy90fpw2t.py::TestFoo::test_baz
 
@@ -216,7 +216,7 @@ class TestFoo(TestCase):
 instantiate_device_type_tests(TestFoo, globals(), only_for=["cpu", "cuda"])
 ```
 ---
-```txt [Out]
+```text [Out]
 tmpyt_bxm9e.py::TestFooCPU::test_bar_cpu
 tmpyt_bxm9e.py::TestFooCPU::test_baz_cpu
 tmpyt_bxm9e.py::TestFooCUDA::test_bar_cuda
@@ -280,7 +280,7 @@ class TestFoo(TestCase):
 instantiate_device_type_tests(TestFoo, globals(), only_for="cpu")
 ```
 ---
-```txt [Out]
+```text [Out]
 tmpttnibud4.py::TestFooCPU::test_bar_cpu_float32
 tmpttnibud4.py::TestFooCPU::test_bar_cpu_int32
 
@@ -342,7 +342,7 @@ class TestFoo(TestCase):
 instantiate_device_type_tests(TestFoo, globals(), only_for="cpu")
 ```
 ---
-```txt [Out]
+```text [Out]
 tmpe119_vdl.py::TestFooCPU::test_bar_add_cpu_int32
 tmpe119_vdl.py::TestFooCPU::test_bar_sub_cpu_float32
 
@@ -381,7 +381,7 @@ class TestFoo:
         pass
 ```
 ---
-```txt [Out]
+```text [Out]
 tmp8_w7dn68.py::TestFoo::test_bar[add-float32-cpu]
 tmp8_w7dn68.py::TestFoo::test_bar[sub-float32-cpu]
 
@@ -421,7 +421,7 @@ class TestFoo(TestCase):
 instantiate_device_type_tests(TestFoo, globals(), only_for=["cpu"])
 ```
 ---
-```txt [Out]
+```text [Out]
 no tests collected in 0.01s
 
 ERROR: not found: /home/user/tmpg1b9f42o.py::TestFoo::test_bar
@@ -439,7 +439,7 @@ easy to see why this is happening.
 pass
 ```
 ---
-```txt [Out]
+```text [Out]
 tmpo9kwbe9q.py::TestFooCPU::test_bar_cpu
 tmpo9kwbe9q.py::TestFooCPU::test_baz_cpu
 
@@ -460,7 +460,7 @@ name `{MODULE}::TestFooCPU::test_bar_cpu`
 pass
 ```
 ---
-```txt [Out]
+```text [Out]
 tmp_i0_ha5r.py::TestFooCPU::test_bar_cpu
 
 1 test collected in 0.04s
@@ -482,7 +482,7 @@ to do a pattern matching.
 pass
 ```
 ---
-```txt [Out]
+```text [Out]
 tmp633i_bea.py::TestFooCPU::test_bar_cpu
 
 1/2 tests collected (1 deselected) in 0.01s
@@ -522,7 +522,7 @@ class TestFooBar(TestCase):
 instantiate_device_type_tests(TestFooBar, globals(), only_for="cpu")
 ```
 ---
-```txt [Out]
+```text [Out]
 tmpzoevi0fu.py::TestFooCPU::test_spam_cpu
 
 1/3 tests collected (2 deselected) in 0.01s
@@ -549,7 +549,7 @@ enable_pytest_pytorch(collect_only=True)
 pass
 ```
 ---
-```txt [Out]
+```text [Out]
 tmpalkh4ddp.py::TestFooCPU::test_spam_cpu
 
 1 test collected in 0.05s
@@ -575,7 +575,7 @@ class TestFoo(TestCase):
 instantiate_device_type_tests(TestFoo, globals(), only_for=["cpu", "cuda"])
 ```
 ---
-```txt [Out]
+```text [Out]
 tmp6av_zpy3.py::TestFooCUDA::test_bar_cuda
 
 1/2 tests collected (1 deselected) in 0.02s

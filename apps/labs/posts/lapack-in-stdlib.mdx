@@ -340,7 +340,8 @@ Developers writing F77 programs did so using a fixed form layout inherited from 
 
 Fortran 90 introduced the free form layout which removed column and line length restrictions and settled on `!` as the comment character. The following code snippet shows the reference implementation for the LAPACK routine [`dlacpy`](https://www.netlib.org/lapack/explore-html/da/dcf/dlacpy_8f_source.html):
 
-```fortran
+{/* Fortran is not supported */ }
+```text
       SUBROUTINE dlacpy( UPLO, M, N, A, LDA, B, LDB )
 *
 *  -- LAPACK auxiliary routine --
@@ -397,7 +398,8 @@ Fortran 90 introduced the free form layout which removed column and line length 
 
 The next code snippet shows the same routine, but implemented using the free form layout introduced in Fortran 90.
 
-```fortran
+{/* Fortran is not supported */}
+```text
 subroutine dlacpy( uplo, M, N, A, LDA, B, LDB )
   implicit none
   ! ..
@@ -447,7 +449,8 @@ As may be observed, by removing column restrictions and moving away from the F77
 
 Another common practice in LAPACK routines is the use of labeled control structures. For example, consider the following code snippet in which the label `10` must match a corresponding `CONTINUE`.
 
-```fortran
+{/* Fortran is not supported */}
+```text
       DO 10 I = 1, 10
           PRINT *, I
    10 CONTINUE
@@ -846,7 +849,8 @@ Enough with the challenges! What did a final product look like?!
 
 Let's come full circle and bring this back to `dlaswp`, a LAPACK routine for performing a series of row interchanges on an input matrix according to a list of pivot indices. The following code snippet shows the reference LAPACK [Fortran implementation](https://www.netlib.org/lapack/explore-html/d7/d6b/dlaswp_8f_source.html).
 
-```fortran
+{/* Fortran is not supported */}
+```text
 SUBROUTINE dlaswp( N, A, LDA, K1, K2, IPIV, INCX )
 *
 *  -- LAPACK auxiliary routine --

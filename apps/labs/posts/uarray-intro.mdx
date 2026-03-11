@@ -99,7 +99,7 @@ with ua.set_backend(be1):
     print(myfunc())
 ```
 ---
-```txt [Out]
+```text [Out]
 Potato
 ```
 </CH.Code>
@@ -170,7 +170,7 @@ with ua.set_backend(be1):
     print(myfunc())
 ```
 ---
-```txt [Out]
+```text [Out]
 Strawberry
 ```
 </CH.Code>
@@ -187,7 +187,7 @@ with ua.set_backend(be1, only=True):
     print(myfunc())
 ```
 ---
-```txt [Out]
+```text [Out]
 ---------------------------------------------------------------------------
 BackendNotImplementedError                Traceback (most recent call last)
 <ipython-input-8-ec856cf7c88b> in <module>
@@ -260,7 +260,7 @@ be2.register_implementation(None, gen_impl2)
 myfunc('1') # This calls the second implementation
 ```
 ---
-```txt [Out]
+```text [Out]
 '1'
 ```
 </CH.Code>
@@ -270,7 +270,7 @@ myfunc('1') # This calls the second implementation
 myfunc(1) # This calls the first implementation
 ```
 ---
-```txt [Out]
+```text [Out]
 1
 ```
 </CH.Code>
@@ -280,7 +280,7 @@ myfunc(1) # This calls the first implementation
 myfunc(1.0) # This fails
 ```
 ---
-```txt [Out]
+```text [Out]
     ---------------------------------------------------------------------------
     BackendNotImplementedError                Traceback (most recent call last)
     <ipython-input-13-8431c1275db5> in <module>
@@ -308,7 +308,7 @@ with ua.set_backend(be2, coerce=True):
     print(type(myfunc(1.0)))
 ```
 ---
-```txt [Out]
+```text [Out]
 <class 'int'>
 <class 'str'>
 ```
@@ -344,7 +344,7 @@ with ua.set_backend(XndBackend):
     print(type(np.arange(0, 100, 1)))
 ```
 ---
-```txt [Out]
+```text [Out]
 <class 'xnd.array'>
 ```
 </CH.Code>

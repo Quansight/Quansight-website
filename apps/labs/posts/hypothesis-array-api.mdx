@@ -133,7 +133,7 @@ def test_cumulative_sums():
 ipytest.run()
 ```
 ---
-```txt [Out]
+```text [Out]
 .                                                                        [100%]
 1 passed in 0.02s
 ```
@@ -219,7 +219,7 @@ for _ in range(10):
 print("...")
 ```
 ---
-```txt [Out]
+```text [Out]
 Array([239, 211, 226, 129,  31,  13,  80, 235, 254, 163], dtype=uint8)
 Array([164, 175, 254, 111,  63, 241,  64, 201, 173, 117], dtype=uint8)
 Array([106, 149, 210, 230,  58,  37,  66, 153, 203, 181], dtype=uint8)
@@ -251,7 +251,7 @@ Time to run it!
 ipytest.run("-k positive_arrays_have_incrementing_sums", "--hypothesis-seed=3")
 ```
 ---
-```txt [Out]
+```text [Out]
 F                                                                        [100%]
 =================================== FAILURES ===================================
 _________________ test_positive_arrays_have_incrementing_sums __________________
@@ -323,7 +323,7 @@ def cumulative_sums(x):
 ipytest.run("-k positive_arrays_have_incrementing_sums")
 ```
 ---
-```txt [Out]
+```text [Out]
 .                                                                        [100%]
 1 passed, 1 deselected in 0.18s
 ```
@@ -376,7 +376,7 @@ def test_positive_arrays_have_incrementing_sums(x):
 ipytest.run("-k positive_arrays_have_incrementing_sums", "--hypothesis-seed=3")
 ```
 ---
-```txt [Out]
+```text [Out]
 F                                                                        [100%]
 =================================== FAILURES ===================================
 _________________ test_positive_arrays_have_incrementing_sums __________________
@@ -488,7 +488,7 @@ def cumulative_sums(x):
 ipytest.run("-k positive_arrays_have_incrementing_sums", "--hypothesis-seed=3")
 ```
 ---
-```txt [Out]
+```text [Out]
 F                                                                        [100%]
 =================================== FAILURES ===================================
 _________________ test_positive_arrays_have_incrementing_sums __________________
@@ -605,7 +605,7 @@ def test_error_on_overflow():
 ipytest.run()
 ```
 ---
-```txt [Out]
+```text [Out]
 ...                                                                      [100%]
 3 passed in 0.27s
 ```

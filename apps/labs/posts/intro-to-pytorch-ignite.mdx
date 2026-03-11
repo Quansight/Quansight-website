@@ -148,7 +148,7 @@ the project\'s [documentation](https://pytorch.org/ignite/).
 !pip install pytorch-ignite
 ```
 ---
-```txt [Out]
+```text [Out]
 Collecting pytorch-ignite
 ent already satisfied: torch<2,>=1.3 in /usr/local/lib/python3.6/dist-packages (from pytorch-ignite) (1.6.0+cu101)
 Requirement already satisfied: future in /usr/local/lib/python3.6/dist-packages (from torch<2,>=1.3->pytorch-ignite) (0.16.0)
@@ -553,7 +553,7 @@ trainer.run(train_loader, max_epochs=5)
 tb_logger.close()
 ```
 ---
-```txt [Out]
+```text [Out]
 Start training!
 Validation Results - Epoch: 1  Avg accuracy: 0.94 Avg loss: 0.20 Avg F1: 0.94
   Training Results - Epoch: 1  Avg accuracy: 0.94 Avg loss: 0.21
@@ -579,7 +579,7 @@ We can inspect results using `tensorboard`. We can observe two tabs
 %tensorboard --logdir=.
 ```
 ---
-```txt [Out]
+```text [Out]
 <IPython.core.display.Javascript object>
 ```
 </CH.Code>
@@ -672,7 +672,7 @@ train_data = [0, 1, 2, 3, 4]
 trainer.run(train_data, max_epochs=50);
 ```
 ---
-```txt [Out]
+```text [Out]
 Epoch 5: Validation on devset 1
 Epoch 10: Validation on devset 1
 Epoch 10: Validation on devset 2
@@ -715,7 +715,7 @@ def change_train_dataset():
 trainer.run(small_res_data, max_epochs=10);
 ```
 ---
-```txt [Out]
+```text [Out]
 Epoch 1 - 1 : batch=0
 Epoch 1 - 2 : batch=1
 Epoch 1 - 3 : batch=2
@@ -776,7 +776,7 @@ train_data = [0, ]
 trainer.run(train_data, max_epochs=len(train_losses));
 ```
 ---
-```txt [Out]
+```text [Out]
 7 - loss=0.9: dump model grads
 8 - loss=0.8: dump model grads
 10 - loss=0.8: dump model grads
@@ -805,7 +805,7 @@ train_data = [0, 1, 2, 3, 4]
 trainer.run(train_data, max_epochs=20);
 ```
 ---
-```txt [Out]
+```text [Out]
 Epoch 3 - event=epoch_completed: Validation
 Epoch 6 - event=epoch_completed: Validation
 Epoch 9 - event=epoch_completed: Validation
@@ -860,7 +860,7 @@ train_data = [0, 1, 2, 3, 4]
 trainer.run(train_data, max_epochs=2);
 ```
 ---
-```txt [Out]
+```text [Out]
 1 - before backprop
 1 - after backprop
 2 - before backprop
@@ -960,7 +960,7 @@ acc.update((y_pred, y_target))
 print("After 2nd update, accuracy=", acc.compute())
 ```
 ---
-```txt [Out]
+```text [Out]
 After 1st update, accuracy= 0.75
 After 2nd update, accuracy= 0.625
 ```
@@ -1012,7 +1012,7 @@ acc.update((y_pred, y_target))
 print("After 2nd update, error=", error.compute())
 ```
 ---
-```txt [Out]
+```text [Out]
 After 1st update, error= 25.0
 After 2nd update, error= 37.5
 ```
@@ -1129,7 +1129,7 @@ tb_logger.close()
 !ls -all "tb_logs"
 ```
 ---
-```txt [Out]
+```text [Out]
 total 12
 drwxr-xr-x 2 root root 4096 Aug 31 11:27 .
 drwxr-xr-x 1 root root 4096 Aug 31 11:27 ..
@@ -1202,7 +1202,7 @@ if __name__ == '__main__':
 !python main.py
 ```
 ---
-```txt [Out]
+```text [Out]
 2020-08-31 11:27:07,128 ignite.distributed.launcher.Parallel INFO: Initialized distributed launcher with backend: 'gloo'
 2020-08-31 11:27:07,128 ignite.distributed.launcher.Parallel INFO: - Parameters to spawn processes:
 	nproc_per_node: 2
