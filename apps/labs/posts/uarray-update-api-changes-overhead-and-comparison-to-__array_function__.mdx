@@ -123,7 +123,7 @@ later. Let's try calling this multimethod.
 my_multimethod(1, 2)
 ```
 ---
-```txt [Out]
+```text [Out]
 (1, 2)
 ```
 </CH.Code>
@@ -165,7 +165,7 @@ with ua.set_backend(Backend):
     print(my_multimethod(1, 2))
 ```
 ---
-```txt [Out]
+```text [Out]
 ('<lambda>', (1, 2), {})
 ```
 </CH.Code>
@@ -201,7 +201,7 @@ default implementation, let's call this multimethod.
 my_multimethod_with_dispatch(1, 2)
 ```
 ---
-```txt [Out]
+```text [Out]
 ---------------------------------------------------------------------------
 BackendNotImplementedError                Traceback (most recent call last)
 <ipython-input-8-14d7909bfa3d> in <module>
@@ -267,7 +267,7 @@ with ua.set_backend(DispatchBackendInt), ua.set_backend(DispatchBackendFloat):
     print(my_multimethod_with_dispatch("1", 2))
 ```
 ---
-```txt [Out]
+```text [Out]
 ('int', '<lambda>', (1, 2), {})
 ('float', '<lambda>', (1.0, 2), {})
 
@@ -340,7 +340,7 @@ with ua.set_backend(DispatchBackendInt, coerce=True):
     print(my_multimethod_with_dispatch("1", 2))
 ```
 ---
-```txt [Out]
+```text [Out]
 ('int', '<lambda>', (1,), {'b': 2})
 ```
 </CH.Code>
@@ -398,7 +398,7 @@ with ua.set_backend(DispatchBackendCustom), ua.set_backend(DispatchBackendInt):
     print(my_multimethod_with_dispatch(CustomNumber(1), 2))
 ```
 ---
-```txt [Out]
+```text [Out]
 ('Custom', 'int', '<lambda>', (1,), {'b': 2})
 ```
 </CH.Code>
@@ -569,7 +569,7 @@ Since we have set NumPy to be a global backend, it will always work.
 ones((3, 4))
 ```
 ---
-```txt [Out]
+```text [Out]
 array([[1., 1., 1., 1.],
        [1., 1., 1., 1.],
        [1., 1., 1., 1.]])
@@ -613,7 +613,7 @@ with ua.set_backend(DaskBackend):
     print(ones((3, 4)))
 ```
 ---
-```txt [Out]
+```text [Out]
 dask.array<ones, shape=(3, 4), dtype=float64, chunksize=(3, 4)>
 ```
 </CH.Code>
@@ -688,7 +688,7 @@ with ua.set_backend(XarrayBackend):
     print(ones({'t': 3, 'x': 5}))
 ```
 ---
-```txt [Out]
+```text [Out]
 <xarray.DataArray (t: 3, x: 5)>
 array([[1., 1., 1., 1., 1.],
        [1., 1., 1., 1., 1.],
@@ -707,7 +707,7 @@ with ua.set_backend(DaskBackend), ua.set_backend(XarrayBackend):
     print(ones({'t': 3, 'x': 5}))
 ```
 ---
-```txt [Out]
+```text [Out]
 <xarray.DataArray 'ones-c74937aa1cf5a1e9c9dd0ca4c337fd2c' (t: 3, x: 5)>
 dask.array<shape=(3, 5), dtype=float64, chunksize=(3, 5)>
 Dimensions without coordinates: t, x

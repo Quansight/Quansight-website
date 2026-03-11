@@ -81,7 +81,7 @@ tables = client.list_tables()
 print(f'This database has {len(tables)} tables.')
 ```
 ---
-```txt [Out]
+```text [Out]
 This database has 29 tables.
 ```
 </CH.Code>
@@ -91,7 +91,7 @@ This database has 29 tables.
 Displaying the list `tables`, gives the names of all the tables which
 include, among others, tables with identifiers
 
-```{python}
+```python
 [...'appearances'...'halloffame', 'homegames', 'leagues', 'managers',...]
 ```
 
@@ -119,7 +119,7 @@ print(f'The object appearances has type {type(appearances).__name__}.')
 assert isinstance(halloffame, ibis.expr.types.TableExpr), 'Wrong type for halloffame'
 ```
 ---
-```txt [Out]
+```text [Out]
 The object appearances has type TableExpr.
 ```
 </CH.Code>
@@ -137,7 +137,7 @@ sample = halloffame.head()
 print(f'The object sample is of type {type(sample).__name__}')
 ```
 ---
-```txt [Out]
+```text [Out]
 The object sample is of type TableExpr
 ```
 </CH.Code>
@@ -154,7 +154,7 @@ and converting the result to a string:
 str(sample.compile())
 ```
 ---
-```txt [Out]
+```text [Out]
 'SELECT t0."ID", t0."playerID", t0.yearid, t0."votedBy", t0.ballots, t0.needed, t0.votes, t0.inducted, t0.category, t0.needed_note \nFROM base.halloffame AS t0\n LIMIT ? OFFSET ?'
 ```
 </CH.Code>
@@ -194,7 +194,7 @@ print(f'The type of result is {type(result).__name__}')
 result    # Leading 5 rows of halloffame table)
 ```
 ---
-```txt [Out]
+```text [Out]
 The type of result is DataFrame
 ```
 </CH.Code>
@@ -730,7 +730,7 @@ except Exception as e:
     print(repr(e))
 ```
 ---
-```txt [Out]
+```text [Out]
 Unable to execute "unmaterialized.distinct()"
 IbisError('Table operation is not yet materialized')
 ```
@@ -919,7 +919,7 @@ The following list comprehension shows us what they are.
 [method_name for method_name in dir(players) if 'join' in method_name]
 ```
 ---
-```txt [Out]
+```text [Out]
 ['anti_join',
  'any_inner_join',
  'any_left_join',
