@@ -1,7 +1,7 @@
 ---
 title: 'Halfway on the path to community support for free-threaded Python'
+published: March 11, 2025
 authors: [nathan-goldbaum]
-published: March 4, 2025
 description: 'Marking the halfway point on community support in popular packages for free-threaded Python'
 category: [Community, PyData ecosystem]
 featuredImage:
