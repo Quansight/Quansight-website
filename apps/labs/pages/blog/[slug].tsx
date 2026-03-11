@@ -25,13 +25,13 @@ import { getPost } from '../../services/api/posts/getPost';
 import { getPostsByCategory } from '../../services/api/posts/getPostsByCategory';
 import { blogAllowedComponents } from '../../services/blogAllowedComponents';
 import { getAllPostFileNames } from '../../services/posts/getAllPostFileNames';
-import { TPost } from '../../types/storyblok/bloks/posts';
+import { TPost, TPostSummary } from '../../types/storyblok/bloks/posts';
 
 export type TBlogPostProps = {
   post: TPost | null;
   footer?: FooterItem;
   header?: HeaderItem;
-  featuredPosts?: TPost[];
+  featuredPosts?: TPostSummary[];
   preview: boolean;
 };
 
@@ -133,12 +133,13 @@ export const getStaticProps: GetStaticProps<
   const post = await getPost(slug, preview);
   const header = await getHeader(preview);
   const footer = await getFooter(preview);
-  const featuredPosts = await getPostsByCategory(
+  const featuredPostsFull = await getPostsByCategory(
     post.meta.category,
     post.slug,
     2,
     preview,
   );
+  const featuredPosts = featuredPostsFull.map(({ slug, meta }) => ({ slug, meta }));
 
   return {
     props: {
