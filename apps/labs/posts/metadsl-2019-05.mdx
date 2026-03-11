@@ -115,7 +115,7 @@ b = Expression(from_str, ("b",))
 Expression(add, (a, b))
 ```
 ---
-```txt [Out]
+```text [Out]
 add(from_str('a'), from_str('b'))
 ```
 </CH.Code>
@@ -135,7 +135,7 @@ def add(a, b):
 add(from_str("a"), from_str("b"))
 ```
 ---
-```txt [Out]
+```text [Out]
 add(from_str('a'), from_str('b'))
 ```
 </CH.Code>
@@ -197,7 +197,7 @@ API:
 mult(from_str("a"), from_str("b"))
 ```
 ---
-```txt [Out]
+```text [Out]
 mult(from_str('a'), from_str('b'))
 ```
 </CH.Code>
@@ -214,7 +214,7 @@ some_bool = equal(from_str("a"), from_str("b"))
 mult(some_bool, some_bool)
 ```
 ---
-```txt [Out]
+```text [Out]
 mult(equal(from_str('a'), from_str('b')), equal(from_str('a'), from_str('b')))
 ```
 </CH.Code>
@@ -293,7 +293,7 @@ class Number(Expression):
 (Number.from_int(10) + Number.from_str("A")) == Number.from_int(10)
 ```
 ---
-```txt [Out]
+```text [Out]
 Number.__eq__(Number.from_int(10), Number.__add__(Number.from_int(10), Number.from_str('A')))
 ```
 </CH.Code>

@@ -70,7 +70,7 @@ con_omni = ibis.omniscidb.connect(
 con_omni.list_tables()
 ```
 ---
-```txt [Out]
+```text [Out]
 ['diamonds', 'batting', 'awards_players', 'functional_alltypes', 'geo']
 ```
 </CH.Code>
@@ -129,7 +129,7 @@ As you can imagine, the result of `df` is a `pandas.DataFrame`
 type(df)
 ```
 ---
-```txt [Out]
+```text [Out]
 pandas.core.frame.DataFrame
 ```
 </CH.Code>
@@ -239,7 +239,7 @@ pd_df_alltypes = pd.read_csv(data_directory / 'functional_alltypes.csv')
 pd_df_alltypes.info()
 ```
 ---
-```txt [Out]
+```text [Out]
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 7300 entries, 0 to 7299
 Data columns (total 15 columns):
@@ -303,7 +303,7 @@ ps_df_alltypes.createOrReplaceTempView('functional_alltypes')
 con_pyspark.list_tables()
 ```
 ---
-```txt [Out]
+```text [Out]
 ['functional_alltypes']
 ```
 </CH.Code>
@@ -328,7 +328,7 @@ expr_comp = expr.compile()
 type(expr_comp)
 ```
 ---
-```txt [Out]
+```text [Out]
 pyspark.sql.dataframe.DataFrame
 ```
 </CH.Code>
@@ -338,7 +338,7 @@ pyspark.sql.dataframe.DataFrame
 expr_comp
 ```
 ---
-```txt [Out]
+```text [Out]
 DataFrame[index: int, Unnamed: 0: int, id: int, bool_col: boolean, tinyint_col: tinyint, smallint_col: smallint, int_col: int, bigint_col: bigint, float_col: float, double_col: double, date_string_col: string, string_col: string, timestamp_col: timestamp, year: int, month: int]
 ```
 </CH.Code>
@@ -592,7 +592,7 @@ con_psql = ibis.postgres.connect(
 con_psql.list_tables()
 ```
 ---
-```txt [Out]
+```text [Out]
 ['array_types',
  'awards_players',
  'batting',
@@ -704,7 +704,7 @@ And the type of `df_geo` is \... a `geopandas` dataframe!
 type(df_geo)
 ```
 ---
-```txt [Out]
+```text [Out]
 geopandas.geodataframe.GeoDataFrame
 ```
 </CH.Code>

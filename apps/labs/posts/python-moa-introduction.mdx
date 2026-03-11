@@ -136,7 +136,7 @@ single core, optimal parallel, optimal gpu, optimal low memory, etc.
 print(expression.compile(use_numba=True, include_conditions=False))
 ```
 ---
-```txt [Out]
+```text [Out]
 @numba.jit
 def f(A, B):
     n = A.shape[0]
@@ -189,7 +189,7 @@ python.
 f(A=A, B=B)
 ```
 ---
-```txt [Out]
+```text [Out]
 2.14 µs ± 6.76 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 ```
 </CH.Code>
@@ -206,7 +206,7 @@ of the problems that MOA hopes to solve.
 (A + B).T.sum(axis=0)[0]
 ```
 ---
-```txt [Out]
+```text [Out]
 2.74 ms ± 29.2 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 ```
 </CH.Code>
@@ -222,7 +222,7 @@ way around.
 (A[0] + B[0]).T.sum(axis=0)
 ```
 ---
-```txt [Out]
+```text [Out]
 6.67 µs ± 91.2 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 ```
 </CH.Code>
