@@ -11,6 +11,9 @@ System requirements:
 
 - [Node.js](https://nodejs.org)
 
+Note that the site is currently incompatible with Node 25, so use
+node 24. On homebrew you can install it with `brew install node@24`.
+
 Copy and paste the following commands:
 
 ```sh
