@@ -4,9 +4,9 @@ import * as path from 'path';
 import { Feed } from 'feed';
 
 import { RSS_DIRECTORY_PATH } from '../../services/api/posts/constants';
-import { TPost } from '../../types/storyblok/bloks/posts';
+import { TPostSummary } from '../../types/storyblok/bloks/posts';
 
-export const generateRSS = async (posts: TPost[]): Promise<void> => {
+export const generateRSS = async (posts: TPostSummary[]): Promise<void> => {
   const siteUrl = process.env.DOMAIN;
   const rssPath = path.join(process.cwd(), RSS_DIRECTORY_PATH);
   const currentDate = new Date();
