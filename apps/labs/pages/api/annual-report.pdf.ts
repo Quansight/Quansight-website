@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server';
 
 export const config = {
-  runtime: 'experimental-edge',
+  runtime: 'edge',
 };
 
 export default async function handler(req: NextRequest) {
@@ -11,7 +11,7 @@ export default async function handler(req: NextRequest) {
     method: 'POST',
     headers: {
       'User-Agent': req.headers.get('user-agent'),
-      'X-Forwarded-For': req.ip,
+      'X-Forwarded-For': req.headers.get('x-forwarded-for'),
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({

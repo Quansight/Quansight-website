@@ -9,17 +9,24 @@ export type TPageProps = {
   children: (blok: unknown) => ReactNode;
 };
 
-// @ts-expect-error
+// storyblok-react types lack React 18 children support
+const StoryblokEditable = SbEditable as unknown as FC<{
+  content: TBlok;
+  children: ReactNode;
+}>;
+
 export const Page: FC<TPageProps> = ({ data, children }) => {
   if (!data?.content?.body) {
     return null;
   }
 
-  return data.content.body.map((blok: TBlok) => {
-    return (
-      <SbEditable content={blok} key={blok._uid}>
-        {children(blok)}
-      </SbEditable>
-    );
-  });
+  return (
+    <>
+      {data.content.body.map((blok: TBlok) => (
+        <StoryblokEditable content={blok} key={blok._uid}>
+          {children(blok)}
+        </StoryblokEditable>
+      ))}
+    </>
+  );
 };

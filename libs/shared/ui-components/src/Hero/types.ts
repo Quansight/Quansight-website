@@ -1,4 +1,4 @@
-import { ImageProps } from 'next/image';
+import { ImageProps } from 'next/legacy/image';
 
 export enum HeroVariant {
   Small = 'small',

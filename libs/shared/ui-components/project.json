@@ -1,22 +1,19 @@
 {
-  "root": "libs/shared/ui-components",
+  "name": "ui-components",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/ui-components/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/shared/ui-components/**/*.{ts,tsx,js,jsx}"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/ui-components"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/ui-components"],
       "options": {
-        "jestConfig": "libs/shared/ui-components/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "libs/shared/ui-components/jest.config.ts"
       }
     }
   }

@@ -1,22 +1,19 @@
 {
-  "root": "libs/shared/storyblok-sdk",
+  "name": "storyblok-sdk",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/storyblok-sdk/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/shared/storyblok-sdk/**/*.{ts,tsx,js,jsx}"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/storyblok-sdk"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/storyblok-sdk"],
       "options": {
-        "jestConfig": "libs/shared/storyblok-sdk/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "libs/shared/storyblok-sdk/jest.config.ts"
       }
     }
   }

@@ -1,22 +1,25 @@
 {
-  "root": "apps/consulting",
+  "name": "consulting",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/consulting",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/next:build",
+      "executor": "@nx/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/consulting",
         "outputPath": "dist/apps/consulting"
       },
       "configurations": {
-        "production": {}
+        "production": {},
+        "development": {
+          "outputPath": "apps/consulting"
+        }
       }
     },
     "serve": {
-      "executor": "@nrwl/next:server",
+      "executor": "@nx/next:server",
       "options": {
         "buildTarget": "consulting:build",
         "dev": true,
@@ -27,25 +30,29 @@
         "production": {
           "buildTarget": "consulting:build:production",
           "dev": false
+        },
+        "development": {
+          "buildTarget": "consulting:build:development",
+          "dev": true
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "export": {
-      "executor": "@nrwl/next:export",
+      "executor": "@nx/next:export",
       "options": {
         "buildTarget": "consulting:build:production"
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/consulting"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/consulting"],
       "options": {
-        "jestConfig": "apps/consulting/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "apps/consulting/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/consulting/**/*.{ts,tsx,js,jsx}"]

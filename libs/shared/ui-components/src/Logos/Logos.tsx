@@ -36,20 +36,17 @@ export const Logos: FC<TLogosProps> = ({
           {title}
         </h2>
       )}
-
       <LogosGrid grid={grid} />
-
       {isLink && (
-        <Link href={linkUrl}>
-          <a
-            className={clsx(
-              'mt-[3rem] text-[1.6rem] font-bold leading-[2.1rem] underline',
-              colorVariant === LogosColors.White && 'text-white',
-              colorVariant === LogosColors.Black && 'text-violet',
-            )}
-          >
-            {linkTitle}
-          </a>
+        <Link
+          href={linkUrl}
+          className={clsx(
+            'mt-[3rem] text-[1.6rem] font-bold leading-[2.1rem] underline',
+            colorVariant === LogosColors.White && 'text-white',
+            colorVariant === LogosColors.Black && 'text-violet',
+          )}
+        >
+          {linkTitle}
         </Link>
       )}
     </section>

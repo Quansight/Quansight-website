@@ -12,8 +12,8 @@ export const LibraryLink: FC<TLibraryLinkProps> = ({
 }) => {
   if (link.linkType === LinkTarget.Internal) {
     return (
-      <Link href={link.linkUrl}>
-        <a tabIndex={tabIndex}>{children}</a>
+      <Link href={link.linkUrl} tabIndex={tabIndex}>
+        {children}
       </Link>
     );
   }
