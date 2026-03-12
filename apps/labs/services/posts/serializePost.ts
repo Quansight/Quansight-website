@@ -14,38 +14,16 @@ import { TeamQuery } from '../../api';
 import { TPost, TPostAuthor } from '../../types/storyblok/bloks/posts';
 import { getFileContent } from '../api/posts/getFileContent';
 
-export const serializePost = async (
-  fileName: string,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const serializePostMeta = (
+  data: Record<string, any>,
   authors: Array<ArrayElementType<TeamQuery['PersonItems']['items']>> = [],
-): Promise<{
-  content: MDXRemoteSerializeResult<Record<string, unknown>>;
-  meta: TPost['meta'];
-}> => {
-  const fileContent = getFileContent(fileName);
-  const { data, content } = matter(fileContent);
-
+): TPost['meta'] => {
   if ((data as TPost['meta']).featuredImage.src.endsWith('.svg')) {
     throw Error(
       `SVG not allowed for featured image (not widely supported by social media sites). Convert to PNG or JPEG: ${data.featuredImage.src}`,
     );
   }
-
-  const result = await serialize(content, {
-    scope: data,
-    blockJS: false,
-    mdxOptions: {
-      remarkPlugins: [
-        [remarkCodeHike, { autoImport: false, theme }],
-        remarkGfm,
-        remarkMath,
-      ],
-      rehypePlugins: [
-        [slug, { enableCustomId: true, removeAccents: true }],
-        rehypeKatex,
-      ],
-      useDynamicImport: true,
-    },
-  });
 
   if (!data.authors || data.authors.length == 0) {
     throw Error('You did not provide any author slug(s)');
@@ -62,10 +40,48 @@ export const serializePost = async (
       nickName: foundAuthor.content.githubNick,
     };
   });
-  const meta: TPost['meta'] = {
+
+  return {
     ...(data as TPost['meta']),
     authors: postAuthors,
   };
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const serializePostContent = async (
+  data: Record<string, any>,
+  content: string,
+): Promise<MDXRemoteSerializeResult<Record<string, unknown>>> => {
+  return serialize(content, {
+    scope: data,
+    blockJS: false,
+    mdxOptions: {
+      remarkPlugins: [
+        [remarkCodeHike, { autoImport: false, theme }],
+        remarkGfm,
+        remarkMath,
+      ],
+      rehypePlugins: [
+        [slug, { enableCustomId: true, removeAccents: true }],
+        rehypeKatex,
+      ],
+      useDynamicImport: true,
+    },
+  });
+};
+
+export const serializePost = async (
+  fileName: string,
+  authors: Array<ArrayElementType<TeamQuery['PersonItems']['items']>> = [],
+): Promise<{
+  content: MDXRemoteSerializeResult<Record<string, unknown>>;
+  meta: TPost['meta'];
+}> => {
+  const fileContent = getFileContent(fileName);
+  const { data, content } = matter(fileContent);
+
+  const meta = serializePostMeta(data, authors);
+  const result = await serializePostContent(data, content);
 
   return {
     content: result,
