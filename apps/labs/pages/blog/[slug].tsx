@@ -133,13 +133,12 @@ export const getStaticProps: GetStaticProps<
   const post = await getPost(slug, preview);
   const header = await getHeader(preview);
   const footer = await getFooter(preview);
-  const featuredPostsFull = await getPostsByCategory(
+  const featuredPosts = await getPostsByCategory(
     post.meta.category,
     post.slug,
     2,
     preview,
   );
-  const featuredPosts = featuredPostsFull.map(({ slug, meta }) => ({ slug, meta }));
 
   return {
     props: {
