@@ -6,10 +6,10 @@ description: 'How we built Jupyter Everywhere, a JupyterLite-based application t
 category: ['Jupyter']
 featuredImage:
   src: /posts/the-jupyter-everywhere-story/hero.webp
-  alt: 'The JupyterLite logo plus a school building equals the Jupyter Everywhere octopus logo, overlaid on "The Country School" (1871) by Winslow Homer.'
+  alt: 'The JupyterLite logo plus a school building equals the Jupyter Everywhere octopus logo, overlaid on "The Country School" (1871) by Winslow Homer, a classical painting of a 19th-century classroom.'
 hero:
   imageSrc: /posts/the-jupyter-everywhere-story/hero.webp
-  imageAlt: 'The JupyterLite logo plus a school building equals the Jupyter Everywhere octopus logo, overlaid on a classical painting of a 19th-century classroom.'
+  imageAlt: 'The JupyterLite logo plus a school building equals the Jupyter Everywhere octopus logo, overlaid on "The Country School" (1871) by Winslow Homer, a classical painting of a 19th-century classroom.'
 ---
 
 # The Jupyter Everywhere story: empowering interactive computing for K-12 education
