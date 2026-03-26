@@ -20,6 +20,12 @@ Jupyter Everywhere aims to make interactive computing accessible to students and
 
 I'll discuss the challenges we faced, the features we implemented, and the lessons we learned while developing Jupyter Everywhere. I hope that this post will inspire educators, developers, and institutions to explore the potential of interactive computing in education, and to contribute to the open source ecosystems that make it all possible and worthwhile.
 
+Jupyter Everywhere was highlighted in the following keynote at [JupyterCon 2025](https://www.jupytercon.com/) in San Diego, California, the U.S.A, in November 2025. The talk was delivered by our collaborators at Skew The Script, and the recording is available on YouTube:
+
+<div style={{ display: 'flex', justifyContent: 'center' }}>
+  <iframe width="100%" height="630" src="https://www.youtube-nocookie.com/embed/hFe0k1JKQlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 ## Introduction
 
 Jupyter notebooks have, for a long time, revolutionised the way we teach and learn programming, data science, and computational thinking. Their interactive nature allows users to experiment with code, visualise data, and document their thought processes in a single, top-down document format. However, the practice of setting up and maintaining Jupyter environments has proven daunting for educators, especially in K-12 settings where resources and technical expertise are often limited and not well-suited to such endeavours.
