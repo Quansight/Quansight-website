@@ -1,6 +1,6 @@
-import { TPost } from '../../types/storyblok/bloks/posts';
+import { TPostSummary } from '../../types/storyblok/bloks/posts';
 
-export const filterPosts = (posts: TPost[], category: string): TPost[] => {
+export const filterPosts = (posts: TPostSummary[], category: string): TPostSummary[] => {
   return posts.filter((post) => {
     if (!category) {
       return true;

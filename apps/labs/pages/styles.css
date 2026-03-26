@@ -11,3 +11,53 @@
 .navbar-open {
   @apply h-screen overflow-y-hidden;
 }
+
+/*
+  Hide the top-left buttons in the Code Hike block.
+  See: https://codehike.org/docs/ch-code#panels
+*/
+.labs-blog-cell-in-out .ch-frame-buttons {
+  display: none;
+}
+
+/* Make the title bar only span the width of its content, not full width */
+.labs-blog-cell-in-out .ch-frame-title-bar {
+  width: fit-content;
+}
+
+/* Remove background from the editor frame to make title bar white */
+.labs-blog-cell-in-out .ch-editor-frame {
+  background: transparent;
+}
+
+/* Remove last flex element so that it doesn't make the title bar wider */
+.labs-blog-cell-in-out .ch-frame-title-bar > div:last-child {
+  display: none;
+}
+
+/* Remove box shadow from white title bar */
+.labs-blog-cell-in-out.ch-codegroup {
+  box-shadow: none;
+}
+
+/* Make editor frame's borders round */
+.ch-editor-frame > * {
+  border-radius: 0 6px 6px 0;
+}
+
+/* Make first tab's border round */
+.ch-editor-frame > .ch-frame-title-bar:first-child > .ch-editor-tab {
+  border-radius: 0 6px 0 0;
+}
+
+/* Scrollable table container */
+table.table-horizontal-scroll {
+  overflow-x: auto;
+  display: block;
+}
+
+/* Vertically align all cells to middle */
+table.table-horizontal-scroll td,
+table.table-horizontal-scroll tbody th {
+  vertical-align: middle;
+}

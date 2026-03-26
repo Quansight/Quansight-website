@@ -5,10 +5,10 @@ import Link from 'next/link';
 import { Picture } from '@quansight/shared/ui-components';
 
 import { authorsToString } from '../../../services/posts/authorsToString';
-import { TPost } from '../../../types/storyblok/bloks/posts';
+import { TPostSummary } from '../../../types/storyblok/bloks/posts';
 
 export type TFeaturedPostsProps = {
-  posts: TPost[];
+  posts: TPostSummary[];
 };
 
 export const FeaturedPosts: FC<TFeaturedPostsProps> = ({ posts }) => {

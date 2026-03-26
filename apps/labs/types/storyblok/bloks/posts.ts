@@ -37,9 +37,12 @@ export type TPostMeta = {
     | Pick<THeroProps, 'imageMobile' | 'imageTablet' | 'imageDesktop'>;
 };
 
-export type TPost = {
+export type TPostSummary = {
   meta: TPostMeta;
   slug: string;
+};
+
+export type TPost = TPostSummary & {
   content: MDXRemoteSerializeResult;
 };
 

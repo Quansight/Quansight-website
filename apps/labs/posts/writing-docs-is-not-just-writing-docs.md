@@ -3,7 +3,7 @@ title: 'Writing docs is not just writing docs'
 published: July 07, 2020
 authors: [juanita-gomez]
 description: 'At first, I didn’t actually understand how important docs are for software, especially for open source projects. However, during all this time I’ve learned how documentation has a huge impact on the open-source community and I’ve been thankful to have been able to do this. But, from the beginning, I asked myself “why am I the ‘right person’ for this?”'
-category: [Developer workflows, OSS Experience]
+category: [Developer workflows, OSS Experience, Documentation]
 featuredImage:
   src: /posts/writing-docs-is-not-just-writing-docs/blog_feature_var1.png
   alt: 'An illustration of a brown and a dark brown hand coming towards each other to pass a business card with the logo of Quansight Labs.'
