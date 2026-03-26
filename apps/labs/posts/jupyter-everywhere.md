@@ -357,21 +357,21 @@ We lay down our gratitude to the following individuals and organisations for the
 
 While writing this post, I felt piqued by the idea of authoring a poem about Jupyter Everywhere, as a way to capture the essence of the project and its upcoming impact on educators and students. Here is an acrostic poem, written in the form of an ornate neo-Romantic tech ode, that I wrote!
 
-_Jewelled in lilac, pink, and purple, the Octopus takes the stage tonight,_<br></br>
-_Unfurling all her arms beneath the amber footlights, a jubilant sight._<br></br>
-_Pyodide; bard of the browser, weaves its Python world with flair,_<br></br>
-_Yonder, xeus-r lifts R and ggplot2 upon the wind – a beautiful computing pair._<br></br>
-_The audience leans forward. WebAssembly lifts the curtain free,_<br></br>
-_Every school rendered a wond'rous theatre, and every student yearns to see,_<br></br>
-_Run buttons glowing like stage lanterns, beckoning each curious hand._<br></br>
+Jewelled in lilac, pink, and purple, the Octopus takes the stage tonight,<br></br>
+Unfurling all her arms beneath the amber footlights, a jubilant sight.<br></br>
+Pyodide; bard of the browser, weaves its Python world with flair,<br></br>
+Yonder, xeus-r lifts R and ggplot2 upon the wind – a beautiful computing pair.<br></br>
+The audience leans forward. WebAssembly lifts the curtain free,<br></br>
+Every school rendered a wond'rous theatre, and every student yearns to see,<br></br>
+Run buttons glowing like stage lanterns, beckoning each curious hand.<br></br>
 
-_Every student, every teacher, in scholarship; swept together in the evening's fervour,_<br></br>
-_Vibrant notebooks flowing freely – needing nothing from a web server,_<br></br>
-_Even unto those of little means: the infinite is theirs to share!_<br></br>
-_Readable ocean creature links cast sharing in limelight, a mnemonic to declare._<br></br>
-_Yesteryear's complexity retreats. The browser is enough tonight_<br></br>
-_We stand upon the shoulders of JupyterLite, a foundation bold,_<br></br>
-_How far it has come: from a humble prototype to fanfare, a story to be told,_<br></br>
-_Every notebook is a tableau she has yearned to write,_<br></br>
-_Radiant the kernel runs, a lighthouse shining out to sea,_<br></br>
-_Everywhere she renders — her outputs luminous and free; for you, and you, and me._<br></br>
+Every student, every teacher, in scholarship; swept together in the evening's fervour,<br></br>
+Vibrant notebooks flowing freely – needing nothing from a web server,<br></br>
+Even unto those of little means: the infinite is theirs to share!<br></br>
+Readable ocean creature links cast sharing in limelight, a mnemonic to declare.<br></br>
+Yesteryear's complexity retreats. The browser is enough tonight<br></br>
+We stand upon the shoulders of JupyterLite, a foundation bold,<br></br>
+How far it has come: from a humble prototype to fanfare, a story to be told,<br></br>
+Every notebook is a tableau she has yearned to write,<br></br>
+Radiant the kernel runs, a lighthouse shining out to sea,<br></br>
+Everywhere she renders — her outputs luminous and free; for you, and you, and me.<br></br>
