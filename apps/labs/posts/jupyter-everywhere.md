@@ -1,22 +1,18 @@
 ---
 title: 'Jupyter Everywhere: empowering interactive computing for high school students'
-published: November 01, 2025
+published: 30 March, 2026
 authors: [agriya-khetarpal]
-description: 'The story of how Jupyter Everywhere is transforming K-12 education through interactive computing'
-# "Jupyter" used to be a category for older blogs; it no longer is. "Interactive computing" could
-# subsume it as well, if not "Jupyter". ig "Developer workflows" is not quite right... so for now:
-category: ["OSS Experience"]
+description: 'How we built Jupyter Everywhere, a JupyterLite-based application that runs Python and R notebooks entirely in the browser for high school students and educators, without requiring any servers, accounts, or installation.'
+category: ['Jupyter']
 featuredImage:
-  src: /posts/jupyter-everywhere/placeholder.png
-  alt: placeholder
+  src: /posts/the-jupyter-everywhere-story/hero.webp
+  alt: 'The JupyterLite logo plus a school building equals the Jupyter Everywhere octopus logo, overlaid on "The Country School" (1871) by Winslow Homer.'
 hero:
-  # JE octopus logo here
-  imageSrc: placeholder
-  imageAlt: placeholder
+  imageSrc: /posts/the-jupyter-everywhere-story/hero.webp
+  imageAlt: 'The JupyterLite logo plus a school building equals the Jupyter Everywhere octopus logo, overlaid on a classical painting of a 19th-century classroom.'
 ---
 
 # The Jupyter Everywhere story: empowering interactive computing for K-12 education
-{/* the title is tentative and not final */}
 
 Hi! I am Agriya Khetarpal, a software engineer at Quansight. In this blog post, I will share the story of how we built [Jupyter Everywhere](https://jupytereverywhere.org/), a notebooks-based end-to-end application for high school (K-12) students in the U.S.A., in collaboration with [Skew The Script](https://skewthescript.org/) and [CourseKata](https://coursekata.com/).
 
@@ -32,11 +28,18 @@ Jupyter notebooks have, for a long time, revolutionised the way we teach and lea
 
 Jupyter provides two traditional user interfaces: Jupyter Notebook and JupyterLab, each with its own strengths and weaknesses. Jupyter Notebook offers a straightforward interface, making it ideal for beginners and quick prototyping. On the other hand, JupyterLab provides a more powerful and flexible environment, catering to advanced users who require features such as multi-document editing, integrated terminals, and plugin extensibility.
 
-However, both interfaces are designed with a certain level of technical proficiency in mind, especially for newcomers to programming and interactive computing. Myriad features and options can overwhelm many a novice, leading to confusion and frustration. For K-12 educators and students who may not have prior experience with Jupyter or programming in general, the learning curve associated with these interfaces is steeper than anticipated in an educational setting.
+However, both interfaces are designed with a certain level of technical proficiency in mind, especially for newcomers to programming and interactive computing. Myriad features and options can overwhelm many a novice, leading to confusion and frustration. For K-12 educators and students who may not have prior experience with Jupyter or programming in general, the learning curve associated with these interfaces is often steeper than anticipated in an educational setting.
 
-{/* image of Jupyter user interface with a 75 degree diagonal slash through half of it, with the right half representing a graphic indicating complicated clockwork and gears? my idea is to show how Jupyter's UI can be compared to a pictorial representation of multiple knobs and switches */}
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/the-jupyter-everywhere-story/jupyter-clockwork.webp"
+    alt="A composite image contrasting the JupyterLab interface showing a Lorenz attractor notebook with an intricate clockwork mechanism, illustrating the complexity underlying Jupyter's user interface."
+    style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+  />
+  <figcaption>The complexity of Jupyter's interface, juxtaposed with the intricate clockwork of the <a href="https://torreorologio.visitmuve.it/">Torre dell'Orologio</a> in Venice. Even a platform that may seem simple to an acquainted user can feel overwhelming for a student or a newcomer.</figcaption>
+</figure>
 
-This is what drives Jupyter Everywhere's philosophy: to provide a simplified, user-friendly interface that abstracts away the complexities of Jupyter, while retaining its core functionalities with sensible defaults and features akin to an integrated development environment tailored for educational use cases. For example, the Scratch programming language, designed for children, provides a visual programming interface that simplifies coding concepts, making them more accessible to young learners. Similarly, Skew The Script has strived to create an intuitive interface that feels playful (think: an octopus mascot) yet powerful enough to run anything a student might throw at it. We have brought this to life by customising JupyterLite. Read on to find out how!
+This is what drives Jupyter Everywhere's philosophy: to provide a simplified, user-friendly interface that abstracts away the complexities of Jupyter, while retaining its core functionalities with sensible defaults and features akin to an integrated development environment tailored for educational use cases. For example, the Scratch programming language, designed for children, provides a visual programming interface that simplifies coding concepts, making them more accessible to young learners. Similarly, Skew The Script has strived to create an intuitive interface that feels playful (think: an octopus mascot!) yet powerful enough to run anything a student might throw at it. We have brought this to life by customising JupyterLite. Read on to find out how!
 
 ## Administrative and technical challenges in K-12 settings and high school districts
 
@@ -45,32 +48,30 @@ One of the primary challenges in high school districts is the varying levels of 
 Setting up and maintaining a JupyterHub deployment requires dedicated resources for server management, user authentication, storage allocation, and ongoing maintenance – investments that are more readily available at the university level. For K-12 contexts, these operational requirements can be challenging to sustain, especially when balancing budgets across multiple competing priorities. Additionally, ensuring that every student has consistent access to the necessary software and libraries becomes more complex when managing server-based deployments, particularly when students are assigned a standard set of hardware. They must be configured identically across a district. Lastly, the flexibility and power of JupyterHub to manage one's own server infrastructure is a double-edged sword that is not always necessary or desirable in K-12 settings, where teaching and learning are emphasised.
 
 We identify four key challenges that Jupyter Everywhere aims to address specifically for K-12 environments:
+
 - Ensuring accessibility and ease of use for students and educators with varying levels of technical expertise.
-- Simplifying the setup and maintenance of Jupyter environments, reducing burdens on school IT staffing.
+- Simplifying the setup and maintenance of Jupyter environments, reducing the burden on school IT staffing.
 - Prioritising security and privacy, especially when dealing with minors in educational settings, ensuring compliance with regulations such as the COPPA (Children's Online Privacy Protection Act), FERPA (Family Educational Rights and Privacy Act), and the SOPIPA (Student Online Personal Information Protection Act of the state of California). This includes safeguarding student data and ensuring secure access to educational resources.
-- The lack of a database to store user data and notebooks grouped by accounts, such as by OAuth providers like Google or Microsoft. This limitation can be circumvented by using alternative methods for sharing and distributing notebooks, which we discuss later in this post.
+- The lack of a database to store user data, and notebooks grouped by accounts, such as by OAuth providers like Google or Microsoft. This limitation can be circumvented by using alternative methods for sharing and distributing notebooks, which we discuss later in this post.
 
 ## The story of Jupyter Everywhere
 
-Here, we start by describing our journey building the application from the ground up – from a no-frills prototype to a full-fledged JupyterLite extension.
-
-{/* architecture diagram here */}
+Here, I'll be describing our journey of building the application from the ground up, from a no-frills prototype to a full-fledged JupyterLite extension.
 
 ### Customising JupyterLite, and key features of Jupyter Everywhere
 
-Jupyter Everywhere, as we mentioned earlier, is built on top of JupyterLite. JupyterLite is a distribution of JupyterLab that replaces Jupyter's server-side components with standards for in-browser communication with language kernels either in JavaScript or compiled to WebAssembly (WASM), shims for server-side Jupyter APIs, and in-browser file systems for storing user content and settings.
+Jupyter Everywhere, as I mentioned earlier, is built on top of JupyterLite. JupyterLite is a distribution of JupyterLab that replaces Jupyter's server-side components with standards for in-browser communication with programming language kernels either in JavaScript or compiled to WebAssembly (WASM), shims for server-side Jupyter APIs, and in-browser file systems for storing user content and settings.
 
-Initially, we started developing the application as a JupyterLab extension to prototype the functionality we wanted to build first: interacting with the file system and downloading notebooks in various formats. This enabled the quick creation of the proof of concept, without the need to recompile JupyterLite during the initial iterations. Once we had a clearer idea of the UI and user workflows that needed to be implemented, we switched to a JupyterLite application.
+Initially, we started developing the application as a JupyterLab extension, to prototype the functionality we wanted to build first: interacting with the file system and downloading notebooks in various formats. This enabled the quick creation of the proof of concept, without the need to recompile JupyterLite during initial iterations. Once we had a clearer idea of the UI and user workflows that needed to be implemented, we switched to a JupyterLite application.
 
 ### Facilitating notebook sharing and distribution
 
 Jupyter Everywhere aims to simplify the sharing and distribution of notebooks among students and educators. Given the lack of a backend database to store user data and notebooks grouped by accounts, we had to devise alternative methods for notebook sharing. To this end, our collaborators at CourseKata developed a sharing service that supports authentication via JWT (JSON Web Tokens). This sharing service provides API endpoints for authenticating and refreshing tokens, as well as uploading notebooks to a server. The server is connected to the Jupyter Everywhere frontend via a REST API. The notebook contents are stored in an AWS S3 bucket, with appropriate security measures to ensure that only authenticated users can upload and access notebooks. The database is a managed PostgreSQL instance that stores notebooks as `.ipynb` files, with sharing-related metadata embedded as JSON fields in the notebook's "metadata" field.
 
 The sharing service provides two key features:
-- Uploading notebooks to a server for storage and sharing
-- Generating sharing IDs based on a hash of the current session and the notebook state, and readable IDs as a mnemonic for sharing purposes via a database of aquatic animal names and adjectives to make it more fun and engaging for students.
 
-{/* Add diagram from Adam's architecture-overview.md on Slack showing how the sharing service works with Jupyter Everywhere */}
+- Uploading notebooks to a server for storage and sharing
+- Generating sharing IDs based on a hash of the current session and the notebook state, and readable IDs as a mnemonic for sharing purposes via a database of animal names and adjectives, making the process of sharing more fun and engaging for students.
 
 #### Sharing notebooks via view-only links
 
@@ -80,8 +81,14 @@ Initially, this was implemented using a dialog that generated a password-protect
 
 Later in the development process, we decided it would be more user-friendly to generate friendlier URLs for sharing, rather than the default UUID-based URLs that are not easy to remember or share verbally, which the sharing service initially generated. To achieve this, the sharing service implemented a system that produces human-readable IDs from combinations of aquatic animal names and adjectives, creating memorable, engaging URLs for sharing notebooks. This approach not only enhances the user experience but also adds a fun element to the sharing process, making it more appealing for students and educators alike. We integrated the sharing service's response to use these "readable IDs" in the interface by default.
 
-{/* add image of share dialog opened by clicking the "Share" button */}
-{/* alt text: The share dialog in Jupyter Everywhere, opened by clicking the "Share" button in the toolbar, allowing users to generate view-only links for sharing their notebooks, and a "Copy link!" button to copy the generated link to the user's clipboard. */}
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/the-jupyter-everywhere-story/shareable-link.webp"
+    alt="The share dialog in Jupyter Everywhere displaying a generated shareable link with a human-readable ID 'inspirational-adorable-fly' and a 'Copy Link!' button."
+    style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+  />
+  <figcaption>The share dialog with a human-readable notebook link generated from aquatic animal names and adjectives.</figcaption>
+</figure>
 
 There is some nuance to this: the view-only links are generated by hashing the notebook contents and session information, meaning that if the notebook is modified, the "Share" button needs to be interacted with again, or the user needs to wait until the next Jupyter auto-save occurs – which has a cadence of thirty seconds by default. This means that the shared link always points to the latest _saved_ version of the notebook, i.e., a snapshot of it. Users need to be aware that they may need to re-share the link if they make changes to the notebook after sharing it, or ask the recipient(s) to refresh the page to see the latest snapshot.
 
@@ -91,9 +98,7 @@ When a user opens a shared notebook link, they are presented with a read-only vi
 
 This was trickier to implement than we initially thought. At that time, JupyterLab did not expose a command for opening a notebook without a kernel attached. Fortunately, Jupyter is a swiss-army knife of extensibility, and we were able to override JupyterLab's default behaviour to allow opening a notebook in read-only mode without a kernel. This involved creating a custom notebook factory that would create a read-only notebook widget, and overriding the default kernel selection behaviour to prevent the user from selecting a kernel for the read-only notebook – by not instantiating a kernel at all.
 
-{/* A section on the problem of non-persistence in Jupyter Everywhere due to no user accounts + how we addressed it */}
-
-Now that we are well-versed with view-only notebooks, let's explore how they function under the hood.
+Now that we are well-versed with what view-only notebooks are, let's explore how they function under the hood.
 
 When a user opens a view-only notebook link, Jupyter Everywhere parses the URL to extract the notebook's unique identifier. It then sends a request to the sharing service API to fetch the notebook contents associated with that identifier. The sharing service verifies the request and returns the notebook data in JSON format.
 
@@ -107,29 +112,52 @@ Another method for sharing notebooks is to export them from Jupyter Everywhere. 
 
 However, we wanted to go a step further and allow users to download notebooks in PDF format as well. This is currently not supported out of the box in JupyterLite. JupyterLab relies on server-side components to generate PDFs from notebooks using `nbconvert` and LaTeX, creating high-quality PDFs suitable for printing and sharing. However, since Jupyter Everywhere runs entirely in the browser without any server-side components, this approach is not feasible.
 
-Thus, we went forward with a custom approach for this, based on [in-progress work in the JupyterLite community](https://github.com/jupyterlite/jupyterlite/pull/1625) to add PDF export functionality using an in-browser PDF generation library called `jsPDF`.
+Thus, we went forward with a custom approach for this, based on [work implemented in the JupyterLite community](https://github.com/jupyterlite/jupyterlite/pull/1625), to add PDF export functionality using an in-browser PDF generation library called `jsPDF`.
 
-[`jsPDF`](https://github.com/parallax/jsPDF) is a JavaScript library that allows generating PDF documents directly in the browser, without server-side processing. We integrated `jsPDF` into Jupyter Everywhere via a custom download button that converts the current notebook to a PDF and triggers its download. However, this functionality is still a work in progress. There is work to be done: improving the fidelity of the generated PDFs, especially for complex notebooks with rich visualisations, widgets, and typeset LaTeX content.
+[`jsPDF`](https://github.com/parallax/jsPDF) is a JavaScript library that allows generating PDF documents directly in the browser, without server-side processing. We integrated `jsPDF` into Jupyter Everywhere via a custom download button that converts the current notebook to a PDF and triggers its download. However, this functionality is still a work in progress. There is work to be done in improving the fidelity of the generated PDFs, especially for complex notebooks with rich visualisations, widgets, and typeset LaTeX content.
 
 #### Uploading notebooks to Jupyter Everywhere
 
-Since downloading notebooks is only half the story, you might ask – how does one upload notebooks that might have been created elsewhere (whether in Jupyter Notebook, JupyterLab, or another JupyterLite instance, or Jupyter Everywhere itself), into Jupyter Everywhere?
+Since downloading notebooks is only half the story, you might ask – how does one upload notebooks that might have been created elsewhere (whether in Jupyter Notebook, JupyterLab, Visual Studio Code, another JupyterLite instance, or Jupyter Everywhere itself), into Jupyter Everywhere?
 
-Remember that Jupyter Everywhere does not have user accounts or a backend database to store user data and notebooks grouped by accounts. The frontend runs in what is termed the "Simple Interface", or more technically, the "single-document mode" of JupyterLab, which we customise heavily by disabling and reimplementing Jupyter extensions to provide a more user-friendly experience. This means there is no visible file browser or file management interface in Jupyter Everywhere, to avoid unnecessary complexity.
-{/* link to simple interface docs in jupyter */}
+Remember that Jupyter Everywhere does not have user accounts or a backend database to store user data and notebooks grouped by accounts. The frontend runs in what is termed [the "Simple Interface", or more technically, the "single-document mode" of JupyterLab](https://jupyterlab.readthedocs.io/en/stable/user/interface.html#tabs-and-simple-interface-mode), which we customise heavily by disabling and reimplementing Jupyter extensions to provide a more user-friendly experience. This means there is no visible file browser or file management interface in Jupyter Everywhere, to avoid unnecessary complexity.
 
-Hence, users must manually notebooks to a JupyterLite instance before the Jupyter Everywhere session is instantiated. This introduces some challenges, as the main entry point for Jupyter Everywhere is a landing page that does not have access to the JupyterLite in-browser file system, since JupyterLite is not yet running at that point, and no internal plugins are loaded. JupyterLite only starts up once the user is redirected to the JupyterLite application URL, which resides one level deeper, i.e., `/lab/` relative to the landing page.
+Hence, users must manually upload notebooks to a JupyterLite instance before the Jupyter Everywhere session is instantiated. This introduces some challenges, as the main entry point for Jupyter Everywhere is a landing page that does not have access to the JupyterLite in-browser file system, since JupyterLite is not yet running at that point, and no internal plugins are loaded. JupyterLite only starts up once the user is redirected to the JupyterLite application URL, which resides one level deeper, i.e., `/lab/` relative to the landing page.
 
-This means that not only do we need to provide a way for users to upload notebooks to JupyterLite before it starts up, but we also need to ensure that the uploaded notebooks are available in the user's Jupyter Everywhere session.
-
-We achieved this by adding an "Upload a Notebook" button that lets users select a local IPyNB file from their computer and upload it to the JupyterLite file system.
+This means that not only do we need to provide a way for users to upload notebooks to JupyterLite before it starts up, but we also need to ensure that the uploaded notebooks are available in the user's Jupyter Everywhere session. We achieved this by adding an "Upload a Notebook" button that lets users select a local IPyNB file from their computer and upload it to the JupyterLite file system.
 
 Here is a quick walkthrough of how it works behind the scenes:
-{/* add pictures */}
+
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/the-jupyter-everywhere-story/jupyter-everywhere-landing-page.webp"
+    alt="The Jupyter Everywhere landing page with 'Welcome to Jupyter Everywhere Beta' heading, buttons to create a Python or R notebook, and an 'Upload a Notebook' link at the bottom."
+    style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+  />
+  <figcaption>The Jupyter Everywhere landing page, with options to create a Python or R notebook, or upload an existing one.</figcaption>
+</figure>
 
 When the user clicks the "Upload a Notebook" button, a file input dialog opens, allowing the user to select a local IPyNB file from their computer. Once the file is selected and uploaded, we use the Web Storage API, to store the contents of the uploaded notebook in `localStorage` without interacting with the sharing service or requiring the user's explicit consent.
 
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/the-jupyter-everywhere-story/uploading-a-notebook-file.webp"
+    alt="A macOS file picker dialog opened from the Jupyter Everywhere landing page, with a notebook file 'my_notebook.ipynb' selected for upload."
+    style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+  />
+  <figcaption>Selecting a local notebook file to upload to Jupyter Everywhere via the system file picker.</figcaption>
+</figure>
+
 We then redirect the user away from the Jupyter Everywhere landing page and to the JupyterLite application URL, appending a query parameter to the UUID of the uploaded notebook. This query parameter is then parsed by Jupyter Everywhere upon startup. The notebook is read from `localStorage` and written to the JupyterLite in-browser file system, allowing the user to open and interact with the uploaded notebook as if it were created in Jupyter Everywhere itself. The notebook is then removed from `localStorage` to free up space, and no race conditions occur because the notebook is read only once during startup.
+
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/the-jupyter-everywhere-story/notebook-view.webp"
+    alt="The Jupyter Everywhere notebook interface showing an executed 'hello world' code cell with its output, an orange run button next to an empty code cell, and toolbar buttons for Code, Text, Share, and Download."
+    style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+  />
+  <figcaption>The uploaded notebook, now open in Jupyter Everywhere with a simplified toolbar and per-cell run buttons.</figcaption>
+</figure>
 
 ### Working with data files
 
@@ -139,11 +167,27 @@ When working with Jupyter notebooks, especially in data science and education co
 
 Jupyter Everywhere's design called for a simplified interface, with the default file browser available in JupyterLite replaced by a dedicated Files tab. We implemented it in another plugin, extending Jupyter's `MainAreaWidget`. This widget provides an "add new" button that allows users to upload data files from their local computer into the JupyterLite in-browser file system. Once uploaded, the files are accessible from within the notebook, allowing users to read and manipulate data as needed.
 
-{/* various screenshots for files widget functionality sprinkled in between */}
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/the-jupyter-everywhere-story/files.webp"
+    alt="The Files widget in Jupyter Everywhere showing uploaded files displayed as tiles in a grid: an 'add new' button, flower.png, iris.csv, solar_flares.tsv, and octopus.webp, with a warning banner about ephemeral storage at the bottom."
+    style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+  />
+  <figcaption>The Files widget displaying uploaded data files as tiles, with a warning about ephemeral storage at the bottom.</figcaption>
+</figure>
 
 The files are displayed in a grid, akin to a file browser on phones and desktop computers, with each file shown as a tile containing a placeholder and its associated filename.
 
 After starting with bare-bones functionality, we added the ability to delete the uploaded files and to download them back to local computers. Another requirement that arose was the ability to rename files, as users might want to organise their data files more effectively. The design that we settled on was adding an "ellipsis" menu to each file tile, allowing users to perform actions such as renaming, deleting, and downloading files via a context menu that expands when clicked.
+
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/the-jupyter-everywhere-story/files-menuitems.webp"
+    alt="The Files widget with an expanded context menu on a file tile, showing options to Rename, Download, and Delete the file."
+    style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+  />
+  <figcaption>The ellipsis context menu on a file tile, with options to rename, download, or delete the file.</figcaption>
+</figure>
 
 The Files widget is accessible via a sidebar tab, allowing users to easily switch between their notebook and the Files widget. This design choice ensures that users can manage and visualise their data files without cluttering the main notebook interface, with the files stored in the same in-browser file system as the notebooks themselves. It uses JupyterLite's `ContentsManager` API, which abstracts away file system operations regardless of the underlying storage mechanism.
 
@@ -152,46 +196,42 @@ The Files widget is accessible via a sidebar tab, allowing users to easily switc
 While the files could now be uploaded and accessed from the code cells, we ran into a quirk: uploaded images would not render correctly when embedded in Markdown cells within the notebook. We found that JupyterLite does not actually serve the user-uploaded files from local storage. After discussing the problem with other JupyterLite maintainers, we confirmed that there are two ways to solve it: serving the files from a Web Worker thread, or base64-encoding the image contents during rendering (as we initially proposed). Due to compatibility concerns with Web Workers, we settled on a base64-encoding approach.
 
 To `base64` encode images in Markdown cells, we needed to selectively inject our custom logic into the rendering pipeline. The base64-encoded images can be provided to the browser using the `data:` scheme, which defines a ["data URL"](https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data).
-Serendipitously, JupyterLab already had a concept of an URL resolver for renders, specified by the [`RenderMimeRegistry.IResolver`][IResolver] interface – we only needed a way to swap the default [`RenderMimeRegistry.UrlResolver`][UrlResolver] implementation for our to provide data URLs for user-uploaded images in JupyterLite.
-To that end, [we replaced the usage of the hard-coded UrlResolver component in JupyterLab][PR17784] with a dependency on a new plugin that would create (manufacture) URL resolvers. Such a refactor allowed us to [swap the URL resolver implementation in JupyterLite][PR1707] for one that resolved the local links to user-uploaded images to data URLs, enabling the rendering of files from the in-browser file system.
+Serendipitously, JupyterLab already had a concept of an URL resolver for renders, specified by the [`RenderMimeRegistry.IResolver`][iresolver] interface – we only needed a way to swap the default [`RenderMimeRegistry.UrlResolver`][urlresolver] implementation for our to provide data URLs for user-uploaded images in JupyterLite.
+To that end, [we replaced the usage of the hard-coded UrlResolver component in JupyterLab][pr17784] with a dependency on a new plugin that would create (manufacture) URL resolvers. Such a refactor allowed us to [swap the URL resolver implementation in JupyterLite][pr1707] for one that resolved the local links to user-uploaded images to data URLs, enabling the rendering of files from the in-browser file system.
 
-[IResolver]: https://jupyterlab.readthedocs.io/en/stable/api/interfaces/rendermime.IRenderMime.IResolver.html
-[UrlResolver]: https://jupyterlab.readthedocs.io/en/stable/api/classes/rendermime.RenderMimeRegistry.UrlResolver.html
-[PR17784]: https://github.com/jupyterlab/jupyterlab/pull/17784
-[PR1707]: https://github.com/jupyterlite/jupyterlite/pull/1707
-
-{/* mention the PRs that addressed these issues upstream in the above paragraphs */}
+[iresolver]: https://jupyterlab.readthedocs.io/en/stable/api/interfaces/rendermime.IRenderMime.IResolver.html
+[urlresolver]: https://jupyterlab.readthedocs.io/en/stable/api/classes/rendermime.RenderMimeRegistry.UrlResolver.html
+[pr17784]: https://github.com/jupyterlab/jupyterlab/pull/17784
+[pr1707]: https://github.com/jupyterlite/jupyterlite/pull/1707
 
 #### Working with remote files within the notebook interface
 
 Another common use case when working with Jupyter notebooks is accessing remote files, such as datasets hosted on public servers or cloud storage services. In a traditional Jupyter environment, users can easily download remote files using networking libraries like `requests` or `urllib`, or more advanced asynchronous counterparts like `aiohttp`, and then read them into their notebooks.
 
-However, notebooks in JupyterLite rely on Pyodide and xeus-r to provide programmatic interfaces akin to those of Python and R, respectively. There are a few differences between these in-browser runtime environments and traditional Jupyter kernels running on a server.
+However, notebooks in JupyterLite rely on Pyodide and xeus-r to provide programmatic interfaces similar to those of Python and R, respectively. There are a few differences between these in-browser runtime environments and traditional Jupyter kernels running on a server. For instance, Pyodide provides a built-in `pyodide.http` module that allows users to fetch remote files using the browser's native `fetch` API, which is asynchronous and non-blocking. This means that users can download remote files and read them into their notebooks without blocking the main thread of execution.
 
-{/* discuss difference very briefly between Pyodide networking and Python networking here, link to Pyodide docs */}
+For the Pyodide kernel, we implemented a plugin that calls `pyodide_http.patch_all()` silently when the kernel first starts up. For students and educators, this means they can use familiar public APIs from scientific Python and data analysis libraries, such as the `pandas.read_csv()` function, to read remote CSV files directly into their notebooks without needing to know the underlying implementation details.
 
-For instance, Pyodide provides a built-in `pyodide.http` module that allows users to fetch remote files using the browser's native `fetch` API, which is asynchronous and non-blocking. This means that users can download remote files and read them into their notebooks without blocking the main thread of execution.
-
-{/* add some small parts about using pyodide.http, pyodide-http module for monkeypatching urllib, urllib3 and requests */}
-
-{/* add permalink to pyodide-http module repo and patch_all function */}
-
-For xeus-r and R, networking support was added in later versions.
-{/* should we describe what changed in a sentence? */}
-
-For the Pyodide kernel, we implemented a Jupyter Everywhere plugin that calls `pyodide_http.patch_all()` silently when the kernel first starts up. For students and educators, this means they can use familiar public APIs from scientific Python and data analysis libraries, such as the `pandas.read_csv()` function, to read remote CSV files directly into their notebooks without needing to know the underlying implementation details.
+For xeus-r and R, networking support was added in later versions, which we upgraded to in Jupyter Everywhere.
 
 ### Run buttons next to code cells
 
-Popularised by platforms such as [Observable](https://observablehq.com/), Google Colaboratory, Kaggle Notebooks, and Deepnote, "Run" buttons next to code cells are a common feature in modern interactive computing environments. These buttons provide a convenient way for users to execute individual code cells with a single click, without needing to navigate to the toolbar or use keyboard shortcuts.
+Popularised by platforms such as [Observable](https://observablehq.com/), Google Colaboratory, Kaggle Notebooks, and Deepnote, "Run" buttons (▶️) next to code cells are a common feature in modern interactive computing environments. These buttons provide a convenient way for users to execute individual code cells with a single click, without needing to navigate to the toolbar or use keyboard shortcuts.
 
-Unfortunately, however, Jupyter does not provide this functionality out of the box. This is a long-standing feature request in the Jupyter community, with various discussions on how to implement it effectively and in a manner that aligns with Jupyter's design principles, user experience, and accessibility standards: https://github.com/jupyterlab/jupyterlab/issues/2109.
+Unfortunately, however, Jupyter does not provide this functionality out of the box. This is a long-standing feature request in the Jupyter community, with various discussions on how to implement it effectively and in a manner that aligns with Jupyter's design principles, user experience, and accessibility standards: [jupyterlab/jupyterlab#2109](https://github.com/jupyterlab/jupyterlab/issues/2109).
 
-Building on prior art that has explored this feature in PRs X and Y (TODO link them), we implemented a plugin that adds "Run" buttons next to each code cell in the notebook interface. This involves creating a factory that produces a button widget in the input area of each code cell. The button is styled as an orange circular button with a white "play" icon. It is positioned to the left of the code cell input area.
+Building on prior art for exploring this feature in the following PRs: [jupyterlab/jupyterlab#16602](https://github.com/jupyterlab/jupyterlab/pull/16602) and [jupyterlab/jupyterlab#17775](https://github.com/jupyterlab/jupyterlab/pull/17775), we implemented a plugin that adds customised "Run" buttons next to each code cell in the notebook interface. This involved creating a factory that produces a button widget in the input area of each code cell. The button is styled as an orange circular button with a white "play" icon. It is positioned to the left of the code cell input area.
 
 When the user clicks the "Run" button, it triggers the execution of the corresponding code cell, just like using the "Run" command from the toolbar or keyboard shortcuts, through the `notebook:run-cell` command in JupyterLab's command registry.
 
-{/* add link to our PR, add a screenshot of it where it shows up on code and markdown cells, and not on raw cells */}
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/the-jupyter-everywhere-story/run-button.webp"
+    alt="The Jupyter Everywhere notebook interface showing orange circular run buttons positioned to the left of each code cell, with a Markdown cell and a raw cell demonstrating that run buttons only appear next to code and Markdown cells."
+    style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+  />
+  <figcaption>Orange per-cell run buttons appear next to code cells and Markdown cells, but not next to raw cells.</figcaption>
+</figure>
 
 ### The dance of URL parameters
 
@@ -202,22 +242,29 @@ URL parameters are query strings appended to the URL after a question mark (`?`)
 Here is a description of some of the key URL parameters used in Jupyter Everywhere. We use these parameters to control various aspects of the application's behaviour and user experience, as described below:
 
 - `notebook`: Specifies the UUID of the notebook to open upon startup by calling the sharing service API. This parameter displays view-only notebooks if loaded, as the sharing service does not possess a token to authenticate the user.
- At the same time, we append this URL parameter as soon as the notebook is shared, so that users can share the URL directly if they wish to.
-- `uploaded-notebook`: Specifies the UUID of a notebook that has been uploaded via the "Upload a Notebook" button on the landing page. This parameter allows users to upload a local IPyNB file from their computer and have it opened automatically in Jupyter Everywhere upon startup. This URL parameter is removed immediately after the notebook is read from `localStorage` and written to the JupyterLite in-browser file system.
+  At the same time, we append this URL parameter as soon as the notebook is shared, so that users can share the URL directly if they wish to.
+- `uploaded-notebook`: Specifies the UUID of a notebook that has been uploaded via the "Upload a Notebook" button on the landing page, as we described earlier. This parameter allows users to upload a local IPyNB file from their computer and have it opened automatically in Jupyter Everywhere upon startup. This URL parameter is removed immediately after the notebook is read from `localStorage` and written to the JupyterLite in-browser file system.
 - `kernel`: Specifies the kernel to use for executing code cells in the notebook. This parameter allows users to select between `python` (Python/Pyodide) and `r` (xeus-r/R) kernels. The default is `python`, so if the parameter is omitted, the Pyodide kernel is used. This URL parameter is also appended to the URL when the user selects a different kernel from the kernel selection dropdown in the notebook toolbar, and is immediately removed as it is strictly an implementation detail. For uploaded notebooks, we utilise the notebook's metadata to determine the kernel to use, and pass that information via this URL parameter during startup.
 - `tab`: Specifies which sidebar tab to open upon startup. This parameter allows users to choose between the "Files" (`files`) tab and the "Notebook" tab, with the default being the "Notebook" tab. This URL parameter is also appended to the URL when the user switches between the sidebar tabs. We also use this parameter to provide a `404` tab, which redirects to a custom "Not found" page if the specified resource does not exist.
 
 ### User experience (UX) and data safety utilities
 
-User experience is built into the core philosophy and technical design of Jupyter Everywhere. As discussed, our target audience is high school students, many of whom may be new to programming and interactive computing. This led us having to prioritise creating an intuitive and user-friendly interface that minimises cognitive load and maximises engagement, while emphasising aspects during the development cycle that enhance usability and accessibility. This is reflected in how we handle data safety and loss prevention, given that Jupyter Everywhere operates without user accounts or persistent storage. Read on to find out how we improvised such features in cool ways!
+User experience is built into the core philosophy and technical design of Jupyter Everywhere. As discussed, our target audience is high school students, many of whom may be new to programming and interactive computing. This led us having to prioritise creating an intuitive and user-friendly interface that minimises cognitive load and maximises engagement, while emphasising aspects during the development cycle that enhance usability and accessibility. This is reflected in how we handle data safety and loss prevention, given that Jupyter Everywhere operates without user accounts or persistent storage. Read on to find out how we improvised such features in cool and pragmatic ways!
 
 #### Leave confirmation dialogs
 
-Jupyter Everywhere uses the [`memoryStorageDriver](https://jupyterlite.readthedocs.io/en/stable/howto/configure/storage.html#local-storage-drivers) by default, which stores user data in the browser's memory in an ephemeral manner. This means that when the user closes the browser tab or window, all their data can be lost. To mitigate this risk, we iterated on the user experience on various occasions to add various utilities that help students avoid inadvertently losing their work, as we decided not to use an account-based system for storing user data and notebooks.
+Jupyter Everywhere uses the [`memoryStorageDriver`](https://jupyterlite.readthedocs.io/en/stable/howto/configure/storage.html#local-storage-drivers) by default, which stores user data in the browser's memory in an ephemeral manner. This means that when the user closes the browser tab or window, all their data will be lost. To mitigate this risk, we iterated on the user experience on various occasions to add various utilities that help students avoid inadvertently losing their work, as we had decided not to use an account-based system for storing user data and notebooks.
 
-The first of these is a confirmation dialog that appears when the user attempts to close the browser tab or window while there are unsaved changes in the notebook. This dialog prompts the user to confirm their intention to leave the page, giving them a chance to save their work before exiting.
+The first of these is a confirmation dialog that appears when the user attempts to close the browser tab or window while there are unsaved changes in the notebook. This dialog prompts the user to confirm their intention to leave the page, giving them a chance to save their work before exiting. If the user confirms that they want to save and leave, they are redirected to the share dialog, where they can receive a generated shareable link for their notebook and copy it for later access. If they choose to leave and not save, they are redirected to the landing page, where they can start a new notebook or upload an existing one.
 
-{/* screenshot of the leave confirmation dialog */}
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/the-jupyter-everywhere-story/save-notebook-dialog.webp"
+    alt="A confirmation dialog asking 'Would you like to save the link to your notebook before navigating away?' with 'Don't save and leave' and 'Save and leave' buttons, and a note explaining that the link is needed to edit work later."
+    style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+  />
+  <figcaption>The leave confirmation dialog, prompting users to save their notebook link before navigating away.</figcaption>
+</figure>
 
 #### Auto-save and continuous backup, and keeping the notebook URL parameter up to date
 
@@ -227,7 +274,7 @@ Here, we append the `notebook` URL parameter to the URL whenever the notebook is
 
 #### Toast notifications for save reminders and kernel switches
 
-JupyterLab provides a built-in notification system that allows extensions to display messages to users in a non-intrusive manner in the bottom-right corner. After many discussions on the topic, we have carefully utilised this functionality to keep users informed of the state of their notebooks. We display a toast notification for "save reminders". That is, when the user makes changes to the notebook and has not yet copied the sharing link, we remind them to save their work by clicking the "Share" button and copying the link. This notification appears on "dirty" events, i.e., when the notebook has unsaved changes, and disappears once the user clicks the "Share" button. The timing and frequency of these notifications have been carefully calibrated to avoid overwhelming the user while still providing timely reminders. We use a five-minute interval between such notifications, which we found to be a good balance between being helpful and not intrusive.
+JupyterLab provides a built-in notification system that allows extensions to display messages to users in a non-intrusive manner in the bottom-right corner. After many discussions on the topic, we have carefully utilised this functionality to keep users informed of the state of their notebooks. We display a toast notification for "save reminders". That is, when the user makes changes to the notebook and has not yet copied the sharing link, we remind them to save their work by clicking the "Share" button and doing so. This notification appears on "dirty" events, i.e., when the notebook has unsaved changes, and disappears once the user clicks the "Share" button. The timing and frequency of these notifications have been carefully calibrated to avoid overwhelming the user while still providing reminders that are timely enough. We use a five-minute interval between such notifications, which we found to be a good balance between being helpful and not intrusive.
 
 Similarly, we display toast notifications when the user switches kernels. For instance, if the user switches from the Pyodide kernel to the xeus-r kernel, we display a notification informing them that the kernel has been switched and that they may need to rerun the notebook for the changes to take effect. Jupyter uses non-reactive kernels, and hence does not automatically rerun the notebook when the kernel is switched, as this could lead to unexpected behaviour and data loss. Students are not aware of such nuances, especially when working with notebooks for the first time. Therefore, we found it essential to inform them about this behaviour such that they can appropriately start writing code in a different programming language and note that the previous code cells will not have been executed in the changed kernel, and that they may need to rerun the notebook from the start to ensure that all dependencies and variables are correctly defined in the changed kernel, including different outputs and visualisations.
 
@@ -235,59 +282,90 @@ Similarly, we display toast notifications when the user switches kernels. For in
 
 Browsers nowadays provide a built-in mechanism to warn users when they attempt to close a tab or window while there are unsaved changes in a form or input field. However, this mechanism does not cover all scenarios, especially when dealing with custom widgets and components within web applications. It has to be implemented manually using a [`beforeunload`](https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event) event listener.
 
-Notably, we found that users might upload files to the Files widget without having any unsaved changes in the notebook itself. In such cases, the built-in browser mechanism would not trigger a warning when the user attempts to close the tab or window, potentially leading to data loss if the user forgets to download their uploaded files before exiting. We addressed this by connecting a `beforeunload` event listener to the Files widget's internal state, which tracks whether there is at least one uploaded file present. If so, the event listener now prompts the user with the browser's default message when they attempt to close the tab or window, thus serving as a reminder to ensure that they have fulfilled any necessary actions, such as downloading their uploaded files, before exiting.
+Notably, we found that users might upload files to the Files widget without having any unsaved changes in the notebook itself. In such cases, the built-in browser mechanism would not trigger a warning when the user attempts to close the tab or window, potentially leading to data loss if the user forgets to download their uploaded files before exiting, as the files are saved to the same ephemeral in-memory storage that the notebook is saved to.
+
+We addressed this by connecting a `beforeunload` event listener to the Files widget's internal state, which tracks whether there is at least one uploaded file present. If so, the event listener now prompts the user with the browser's default message when they attempt to close the tab or window, thus serving as a reminder to ensure that they have fulfilled any necessary actions, such as downloading their uploaded files, before exiting.
+
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/the-jupyter-everywhere-story/leave-alert-from-browser.webp"
+    alt="The Jupyter Everywhere Files widget with uploaded files visible in the background, overlaid by a browser 'Leave site?' confirmation dialog warning that changes may not be saved, with Cancel and OK buttons."
+    style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
+  />
+  <figcaption>The browser's native "Leave site?" warning, triggered when uploaded files are present in the Files widget.</figcaption>
+</figure>
 
 ## A call to action for educators and institutions
 
-{/* A message to the world, unsure what I'd like to add here... */}
+In conclusion, we believe Jupyter Everywhere is a powerful tool that can enhance the data science and statistics learning experience for students and educators alike. By providing an accessible and user-friendly platform for interactive computing, it can help foster creativity, critical thinking, and collaboration in the classroom. We encourage educators and institutions to explore Jupyter Everywhere as a resource for teaching and learning, and to provide feedback on how it can be improved to better meet their needs.
+
+It also serves as a testament to the extensibility and adaptability of the Jupyter ecosystem, demonstrating how it can be customised and extended to meet the specific needs of different user groups and contexts. By leveraging the power of JupyterLite and WebAssembly, we have created a unique concoction that brings the benefits of Jupyter to a wider audience, particularly in K-12 education settings.
 
 ## What we learned from developing and deploying Jupyter Everywhere
 
-1. Test early, and test well.
-{/* describe mocking saga and the infrastructure/deployments we used? */}
-{/* describe bug here with sharing a view-only notebook not working because it was not skipping calling the sharing service, which we did not recognise because we were using mocks */}
-{/* anything else? */}
+### Test early, and test well
 
-2. User experience is paramount. Ask educators and students for feedback and iterate on the design based on their needs. Jupyter is fundamentally a tool for learning, but even it would be rendered useless if it were too difficult for students or educators to use. Given that we deal with high school students, we have to be especially careful to ensure the user experience is as intuitive as possible and aligns with what someone with little to no programming experience, let alone literate programming experience, would expect from a web application.
+During the development of Jupyter Everywhere, we relied on mocked API responses for the sharing service to enable faster iterations and local development. While this allowed us to move quickly, it also masked bugs. For example, one of them went unnoticed for some time: when sharing a shared, view-only notebook via its link, the application was not skipping the call to the sharing service API for authentication – a call that would always fail for unauthenticated view-only users. This was because our mocks happily returned successful responses, regardless of the authentication state, by the nature of being mocks. They can create a false sense of confidence when they paper over real-world failure modes!
 
-3. Do not be afraid to pivot. We initially started with a set approach to building Jupyter Everywhere. Still, we were carefully discerning of our inner instincts and the feedback we received from our collaborators, and were not afraid to change our approach when necessary. This flexibility enabled us to adapt to changing requirements and deliver a product that truly met our users' needs.
-{/* add point-wise description about toast notifications, leave confirmation dialog, file tiles, sharing functionality, view-only notebooks, kernel and notebook URL parameters, separate URL for files widget, and all the things we did that were out of the scope of work */}
+### User experience is paramount
+
+When developing applications as "digital public goods" for educators and students, it is important to gather feedback and iterate on the design based on their needs. Jupyter is fundamentally a tool for learning, but even it would be rendered useless if it were too difficult for students or educators to use. Given that we deal with high school students, we have to be especially careful to ensure the user experience is as intuitive as possible and aligns with what someone with little to no programming experience, let alone literate programming experience, would expect from a web application.
+
+### Do not be afraid to pivot!
+
+We initially started with a set approach to building Jupyter Everywhere. Still, we were carefully discerning of our inner instincts and the feedback we received from our collaborators, and were not afraid to ask about changing our approach when necessary. This flexibility enabled us to adapt to changing requirements and deliver a product that truly met our users' needs.
+
+---
+
+As a summary:
+
+- we implemented toast notifications to provide students with reminders about saving their work and feedback on switching kernels, and added a leave confirmation dialog to prevent accidental data loss, which is especially frustrating for students who may not be accustomed to saving their work frequently.
+- we added a Files widget to allow students to upload and manage data files within their Jupyter Everywhere sessions
+- we implemented sharing functionality that allows students to share their notebooks with others via unique links, enabling collaboration and feedback without the need for accounts or server-side storage.
+- we added support for view-only notebooks, allowing students to share their work in a read-only format, which is ideal for showcasing their work without the risk of unintended or malicious modifications, or to share their work with instructors to grade it and receive feedback from.
+- we created a separate URL for the Files widget, enabling direct access to file management features without having to navigate through the main notebook inferface first.
+- we added various out-of-scope features that enhanced the overall user experience, such as improved error handling, accessibility enhancements, and performance optimisations.
 
 ## Some achievements and future directions
 
-Having a fully functional Jupyter environment that runs entirely in the browser is already a significant achievement. However, there is always room for improvement and expansion for future directions. Potential areas for future development could include:
+Having a fully functional Jupyter environment that runs entirely in the browser, and being able to extend it in this manner, is already a significant achievement for us. However, there is always room for improvement and expansion for future directions. Potential areas for future development for us could include:
 
-{/* Gotta describe the following: */}
-- Per-cell stop buttons and full support for interrupting code execution for in-browser kernels
-- Real-time collaboration in JupyterLite
-- Improvements to the sharing service
-- Improving PDF export functionality in JupyterLite using in-browser PDF generation libraries via JavaScript/WASM
+- Per-cell "Stop" (⏹️) buttons and full support for interrupting code execution for in-browser kernels: this requires support for full kernel interrupts. This would allow users to stop the execution of a code cell if it is taking too long or if they realise they made a mistake, without having to wait for the entire notebook to become unresponsive. The complexities of the implementation come from the fact that JupyterLite kernels are unlike traditional Jupyter kernels in that they run in the browser and are not connected to a server. This means that we need to implement a mechanism that can signal the kernel to stop executing code without relying on server-side interrupts, which are commonly used in traditional Jupyter environments.
+- Real-time collaboration in JupyterLite: enabling multiple users to work on the same notebook simultaneously, with changes reflected in real-time across all users' sessions. This would involve implementing a synchronisation mechanism to keep notebooks in sync across different browser instances, through y-CRDTs (Conflict-free Replicated Data Types). It is to be noted that [previous versions of JupyterLite did include such collaboration functionality, but do not work now](https://jupyterlite.readthedocs.io/en/stable/howto/configure/rtc.html#the-current-state-of-real-time-collaboration-in-jupyterlite).
+- Improving PDF export functionality in JupyterLite using in-browser PDF generation libraries via JavaScript/WASM: this would involve enhancing the fidelity of the generated PDFs, especially for complex notebooks with rich visualisations, widgets, and typeset LaTeX content. This could be achieved by exploring more advanced PDF generation libraries or implementing custom rendering logic to better capture the nuances of notebook outputs in the generated PDFs.
 
 ## Acknowledgements
 
-I, the author, am incredibly grateful to have had this opportunity to work on Jupyter Everywhere. It is one of the most exciting end user applications of JupyterLite and WebAssembly that I have had the pleasure of contributing to, and considering that this was my first avenue into the world of Jupyter and programming in TypeScript, JavaScript, and React, I am pretty proud of what we have achieved as a team and how much I learned along the way, thanks to [Michał Krassowski](https://github.com/krassowski) and [Peyton Murray](https://github.com/peytondmurray) for their mentorship and guidance throughout the project. It feels fantastic to see how far Jupyter has come, and I believe there is no better way for me to contribute to its growth than by building applications that align with my personal values of enhancing accessibility and driving education through technology.
+I am incredibly grateful to have had this opportunity to work on Jupyter Everywhere. It is one of the most exciting end user applications of JupyterLite and WebAssembly that I have had the pleasure of contributing to. Considering that this was my first avenue into the world of Jupyter and programming in TypeScript, JavaScript, and React, I am pretty proud of what we have achieved as a team and how much I learned along the way, thanks to [Michał Krassowski](https://github.com/krassowski) and [Peyton Murray](https://github.com/peytondmurray) for their mentorship and guidance throughout the project. It feels fantastic to see how far Jupyter has come, and I believe there is no better way for me to contribute to its growth than by building digital public goods that align with my values of enhancing accessibility and driving education through technology!
 
 We lay down our gratitude to the following individuals and organisations for their invaluable contributions to the development and success of Jupyter Everywhere:
 
-- Jupyter ecosystem developers and maintainers
-- JupyterLite developers and maintainers
+- [Skew The Script](https://skewthescript.org/), for the funding they provided for this initiative, their vision for it, our scope of collaboration, and feedback throughout the development cycle
+- [CourseKata](https://coursekata.org/) for their design and development of the sharing service, and infrastructure support for hosting Jupyter Everywhere on AWS
 - Educators and students who provided feedback after the initial development phase, courtesy Skew The Script
-- Gates Foundation https://www.gatesfoundation.org/about/committed-grants/2024/03/inv-067942 for their grant award to Skew The Script to support the development of Jupyter Everywhere
-- The Scientific Python ecosystem
-- The core developers and maintainers of Pyodide (how do I do this without sounding snobbish, as I am a Pyodide maintainer myself?)
-- Skew The Script for the funding they provided for this initiative, and their vision for it, their collaboration, and feedback throughout the development cycle
-- CourseKata for their design and development of the sharing service, and infrastructure support for hosting Jupyter Everywhere on AWS
-- The QuantStack team for their work on JupyterLite, the Xeus project, xeus-r https://blog.jupyter.org/r-in-the-browser-announcing-our-webassembly-distribution-9450e9539ed5
+- [Gates Foundation](https://www.gatesfoundation.org/about/committed-grants/2024/03/inv-067942) for their grant award to Skew The Script to support the development of Jupyter Everywhere
+- [The QuantStack team, for their work on JupyterLite, the Xeus project, and bringing R to the browser](https://blog.jupyter.org/r-in-the-browser-announcing-our-webassembly-distribution-9450e9539ed5)
+- The core developers and maintainers of the [Jupyter](https://jupyter.org/), [JupyterLite](https://jupyterlite.readthedocs.io/en/stable/), [Scientific Python](https://scientific-python.org/), and the [Pyodide](https://pyodide.org) ecosystems
 
-{/* individuals here? */}
+## Envoi
 
-## References
+While writing this post, I felt piqued by the idea of authoring a poem about Jupyter Everywhere, as a way to capture the essence of the project and its upcoming impact on educators and students. Here is an acrostic poem, written in the form of an ornate neo-Romantic tech ode, that I wrote!
 
-[1] JupyterLite: https://jupyterlite.readthedocs.io/en/latest/
+_Jewelled in lilac, pink, and purple, the Octopus takes the stage tonight,_<br></br>
+_Unfurling all her arms beneath the amber footlights, a jubilant sight._<br></br>
+_Pyodide; bard of the browser, weaves its Python world with flair,_<br></br>
+_Yonder, xeus-r lifts R and ggplot2 upon the wind – a beautiful computing pair._<br></br>
+_The audience leans forward. WebAssembly lifts the curtain free,_<br></br>
+_Every school rendered a wond'rous theatre, and every student yearns to see,_<br></br>
+_Run buttons glowing like stage lanterns, beckoning each curious hand._<br></br>
 
-[2] Pyodide: https://pyodide.org/en/stable/
-
-{/* unsure of the inclusion of the following */}
-{/* [3] Skew The Script: https://skewthescript.org/ */}
-{/* [4] CourseKata: https://coursekata.com/ */}
-{/* and any more references as needed */}
+_Every student, every teacher, in scholarship; swept together in the evening's fervour,_<br></br>
+_Vibrant notebooks flowing freely – needing nothing from a web server,_<br></br>
+_Even unto those of little means: the infinite is theirs to share!_<br></br>
+_Readable ocean creature links cast sharing in limelight, a mnemonic to declare._<br></br>
+_Yesteryear's complexity retreats. The browser is enough tonight_<br></br>
+_We stand upon the shoulders of JupyterLite, a foundation bold,_<br></br>
+_How far it has come: from a humble prototype to fanfare, a story to be told,_<br></br>
+_Every notebook is a tableau she has yearned to write,_<br></br>
+_Radiant the kernel runs, a lighthouse shining out to sea,_<br></br>
+_Everywhere she renders — her outputs luminous and free; for you, and you, and me._<br></br>
