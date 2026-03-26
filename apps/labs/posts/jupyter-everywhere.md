@@ -1,5 +1,5 @@
 ---
-title: 'Jupyter Everywhere: empowering interactive computing for high school students'
+title: 'The Jupyter Everywhere story: empowering interactive computing for K-12 education'
 published: 30 March, 2026
 authors: [agriya-khetarpal]
 description: 'How we built Jupyter Everywhere, a JupyterLite-based application that runs Python and R notebooks entirely in the browser for high school students and educators, without requiring any servers, accounts, or installation.'
