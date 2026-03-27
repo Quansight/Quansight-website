@@ -60,9 +60,7 @@ We identify four key challenges that Jupyter Everywhere aims to address specific
 - Prioritising security and privacy, especially when dealing with minors in educational settings, ensuring compliance with regulations such as the COPPA (Children's Online Privacy Protection Act), FERPA (Family Educational Rights and Privacy Act), and the SOPIPA (Student Online Personal Information Protection Act of the state of California). This includes safeguarding student data and ensuring secure access to educational resources.
 - The lack of a database to store user data, and notebooks grouped by accounts, such as by OAuth providers like Google or Microsoft. This limitation can be circumvented by using alternative methods for sharing and distributing notebooks, which we discuss later in this post.
 
-## The story of Jupyter Everywhere
-
-Here, I'll be describing our journey of building the application from the ground up, from a no-frills prototype to a full-fledged JupyterLite extension.
+## The story of Jupyter Everywhere: from a no-frills prototype to a full-fledged extension
 
 ### Customising JupyterLite, and key features of Jupyter Everywhere
 
