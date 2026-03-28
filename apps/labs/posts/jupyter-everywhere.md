@@ -88,7 +88,7 @@ Later in the development process, we decided it would be more user-friendly to g
 <figure style={{ textAlign: 'center' }}>
   <img
     src="/posts/the-jupyter-everywhere-story/shareable-link.webp"
-    alt="The share dialog in Jupyter Everywhere displaying a generated shareable link with a human-readable ID 'inspirational-adorable-fly' and a 'Copy Link!' button."
+    alt="The share dialog in Jupyter Everywhere displaying a generated shareable link with a human-readable ID 'careful-adorable-barracuda' and a 'Copy Link!' button."
     style={{ display: 'inline-block', maxWidth: '100%', height: 'auto' }}
   />
   <figcaption>The share dialog with a human-readable notebook link generated from aquatic animal names and adjectives.</figcaption>
