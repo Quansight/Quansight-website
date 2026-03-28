@@ -18,13 +18,13 @@ Hi! I am Agriya Khetarpal, a software engineer at Quansight. In this blog post, 
 
 Jupyter Everywhere aims to make interactive computing accessible to students and educators, regardless of their technical background or resources. We stand on the shoulders of giants, leveraging the power of [JupyterLite](https://jupyterlite.readthedocs.io/en/latest/) and [WebAssembly (WASM)](https://webassembly.org/) – technologies that enable running Jupyter notebooks entirely in a web browser. In particular, we harness [Pyodide](https://pyodide.org/en/stable/), a WASM-based distribution of Python with a rich scientific stack; and [xeus-r](https://blog.jupyter.org/r-in-the-browser-announcing-our-webassembly-distribution-9450e9539ed5), a WASM-based R kernel for Jupyter notebooks; to execute data science and statistical computing code in a browser without provisioning any server-side dependencies or deployments.
 
-I'll discuss the challenges we faced, the features we implemented, and the lessons we learned while developing Jupyter Everywhere. I hope that this post will inspire educators, developers, and institutions to explore the potential of interactive computing in education, and to contribute to the open source ecosystems that make it all possible and worthwhile.
-
-Jupyter Everywhere was highlighted in the following keynote at [JupyterCon 2025](https://www.jupytercon.com/) in San Diego, California, the U.S.A, in November 2025. The talk was delivered by our collaborators at Skew The Script, and the recording is available on YouTube:
+Jupyter Everywhere was highlighted in the following keynote at [JupyterCon 2025](https://www.jupytercon.com/) in San Diego, California, the U.S.A, in November 2025. The talk was delivered by our collaborators, Ivonne Martinez and Dashiell Young-Saver at Skew The Script, and the recording is available on YouTube:
 
 <div style={{ display: 'flex', justifyContent: 'center' }}>
   <iframe width="100%" height="630" src="https://www.youtube-nocookie.com/embed/hFe0k1JKQlk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
+
+I'll discuss the challenges we faced, a technical deep-dive of the features we implemented, and the lessons we learned while developing Jupyter Everywhere. I hope that this post will inspire educators, developers, and institutions to explore the potential of interactive computing in education, and to contribute to the open source ecosystems that make it all possible and worthwhile.
 
 ## Introduction
 
