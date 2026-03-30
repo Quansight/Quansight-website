@@ -3,7 +3,7 @@ title: 'A year of Jupyter community calls'
 published: December 10, 2021
 authors: [tony-fast]
 description: "A lot of us showed up for the code, but hung around for the community. We'll continue this post talking about the monthly Jupyter community calls, and how they help all jovyans, Project Jupyter's pet name for their developers and users, stay connected."
-category: [Community]
+category: [Community, Jupyter]
 featuredImage:
   src: /posts/jupyter-community-calls/feature.png
   alt: "Table laying out each month's community calls in 2021, with links to each call's video."

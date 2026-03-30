@@ -4,7 +4,7 @@ authors: [isabela-presedo-floyd]
 published: June 06, 2022
 description: 'A non-exhaustive but totally honest checklist
 for accessibility review'
-category: [Access-centered, OSS Experience]
+category: [Access-centered, OSS Experience, Jupyter]
 featuredImage:
   src: /posts/thoughts-on-reviewing-for-accessibility/jlabaccess4_featured.png
   alt: 'Illustration of checkboxes with ticks and checkmarks'

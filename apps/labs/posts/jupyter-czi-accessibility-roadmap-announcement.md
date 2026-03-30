@@ -3,7 +3,7 @@ title: 'Jupyter accessibility efforts have a roadmap!'
 published: February 28, 2022
 authors: [isabela-presedo-floyd]
 description: 'The Chan Zuckerberg Initiative has funded efforts to make the Jupyter ecosystem, starting with JupyterLab, more accessible. As a part of these increased efforts, the team will be providing a periodically updated list of what is currently being worked on and what is coming soon.'
-category: [Access-centered]
+category: [Access-centered, Jupyter]
 featuredImage:
   src: /posts/jupyter-czi-accessibility-roadmap-announcement/roadmap_feature.png
   alt: 'Screenshot of the Jupyter Accessibility Roadmap page. It is a list outlining the primary goals the team aims to achieve in two years. A link to the full roadmap can be found in the blog post.'

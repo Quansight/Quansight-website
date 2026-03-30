@@ -3,7 +3,7 @@ title: 'There are lots of accessibility resources'
 authors: [isabela-presedo-floyd]
 published: June 06, 2025
 description: 'Complications of having all these resources and methods to manage them.'
-category: [Access-centered, OSS Experience]
+category: [Access-centered, OSS Experience, Jupyter]
 featuredImage:
   src: /posts/there-are-lots-of-accessibility-resources/featured.png
   alt: 'An illustrated pile of articles covered with question marks, one is stamped with an accessibility symbol and another question mark.'
