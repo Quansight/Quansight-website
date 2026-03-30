@@ -3,7 +3,7 @@ title: 'Making pygments accessible'
 authors: [stephannie-jimenez]
 published: November 15, 2022
 description: 'accessible-pygments hosts curated WCAG-compliant themes for all your syntax highlighting needs.'
-category: [Access-centered]
+category: [Access-centered, Jupyter]
 featuredImage:
   src: /posts/lets-make-pygments-accessible/featured_themes.png
   alt: 'A display of different accessible syntax highlighting themes being applied to the same example code.'
