@@ -3,7 +3,7 @@ title: "Accessibility: Who's Responsible?"
 published: March 25, 2021
 authors: [isabela-presedo-floyd]
 description: "For the past few months, I've been part of a group of people in the JupyterLab community who've committed to start chipping away at the many accessibility failings of JupyterLab. I find this work is critical, fascinating, and a learning experience for everyone involved. So I'm going to document my personal experience and lessons I've learned in a series of blog posts. Welcome!"
-category: [Access-centered, OSS Experience]
+category: [Access-centered, OSS Experience, Jupyter]
 featuredImage:
   src: /posts/accessibility-whos-responsible/jlabaccess1.png
   alt: 'Fingers and question marks pointing in every direction'

@@ -5,7 +5,7 @@ authors: [matthias-bussonnier]
 description: 'This is a companion post from the Official release of IPython
 8.0. We hope it will help you apply best practices, and have an easier time
 maintaining your projects, or helping other.'
-category: [Community, Developer workflows]
+category: [Community, Developer workflows, Jupyter]
 featuredImage:
   src: /posts/ipython-8.0-lessons-learned-maintaining-software/ipython-8.0-feature.png
   alt: 'Code snippets showing why always using stacklevel is important in ipython-8.0. Full code snipppets are in the blog post.'

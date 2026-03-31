@@ -3,7 +3,7 @@ title: SciPy 2022 Accessibility Awareness Programs
 authors: [tony-fast]
 published: July 13, 2022
 description: "Announcing the SciPy 2022 Accessibility Awareness Efforts"
-category: [Access-centered]
+category: [Access-centered, Jupyter]
 featuredImage:
  src: /posts/ally-scavenger-hunt-post-hero-image.png
  alt: 'Three screenshots from the digital version of How to Write Alt Text for Scientific Diagrams and Visualization.'

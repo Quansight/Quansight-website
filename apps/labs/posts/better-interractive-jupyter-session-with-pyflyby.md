@@ -5,7 +5,7 @@ authors: [aaron-meurer]
 description: 'In this blogpost we present pyflyby, a
 project and an extension to IPython and JupyterLab, that, among many
 things, automatically inserts imports and tidies Python files and notebooks.'
-category: [Developer workflows]
+category: [Developer workflows, Jupyter]
 featuredImage:
   src: /posts/better-interractive-jupyter-session-with-pyflyby/feature.png
   alt: 'A demonstration of Pyflyby"s py function.'

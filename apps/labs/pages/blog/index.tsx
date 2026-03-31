@@ -26,7 +26,7 @@ import { BlokProvider } from '../../components/BlokProvider/BlokProvider';
 import { Page } from '../../components/Page/Page';
 import { CategoryList } from '../../components/Posts/CategoryList/CategoryList';
 import { PostListItem } from '../../components/Posts/PostListItem/PostListItem';
-import { getAllPosts } from '../../services/api/posts/getAllPosts';
+import { getAllPostsMeta } from '../../services/api/posts/getAllPostsMeta';
 import { getCategories } from '../../services/api/posts/getCategories';
 import { filterPosts } from '../../services/posts/filterPosts';
 import { generateRSS } from '../../services/posts/generateRSS';
@@ -220,12 +220,10 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
   const footer = await getFooter(preview);
   const header = await getHeader(preview);
   const categories = await getCategories();
-  const { items } = await getAllPosts(preview);
+  const posts = await getAllPostsMeta(preview);
   const data = await getPage({ slug: 'blog', relations: '' }, preview);
 
-  await generateRSS(items);
-
-  const posts = items.map(({ slug, meta }) => ({ slug, meta }));
+  await generateRSS(posts);
 
   return {
     props: {

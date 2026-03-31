@@ -4,7 +4,7 @@ published: January 24, 2024
 authors: [isabela-presedo-floyd]
 description: 'What are those words on the bottom of your video screen and where do they come from?
 Captioning’s normalization in the past several decades may seem like it would render those questions moot, but understanding more about captions means making more informed decisions about when, how, and why we make sure information is accessible.'
-category: [Access-centered, OSS Experience]
+category: [Access-centered, OSS Experience, Jupyter]
 featuredImage:
   src: /posts/captioning-a-newcomers-guide/blog_feature_1.png
   alt: 'An exclamation point and the word captions over a background pattern made of the lower contrast words captions, subtitles, and transcripts.'
