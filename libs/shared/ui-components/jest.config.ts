@@ -2,7 +2,6 @@
 export default {
   displayName: 'shared-ui-components',
   preset: '../../../jest.preset.js',
-  globals: {},
   transform: {
     '^.+\\.[tj]sx?$': [
       'ts-jest',
