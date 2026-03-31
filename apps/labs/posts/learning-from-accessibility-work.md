@@ -3,7 +3,7 @@ title: 'Learning from accessibility work'
 authors: [isabela-presedo-floyd]
 published: July 30, 2025
 description: 'Years of accessibility work around Jupyter and thoughts on how to survive it in your own projects.'
-category: [Access-centered, OSS Experience]
+category: [Access-centered, OSS Experience, Jupyter]
 featuredImage:
   src: /posts/learning-from-accessibility-work/blog_feature.png
   alt: 'A brown and a black coming towards each other to pass a business card with the logo of Quansight Labs'
