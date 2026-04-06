@@ -47,7 +47,7 @@
         "prettier"
       ],
       "rules": {
-        "@typescript-eslint/ban-ts-comment": ["off"],
+        "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/ban-ts-ignore": ["off"],
         "@typescript-eslint/ban-types": [
           "error",
@@ -60,8 +60,8 @@
             }
           }
         ],
-        "@typescript-eslint/explicit-function-return-type": ["off"],
-        "@typescript-eslint/indent": ["off"],
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/indent": "off",
         "@typescript-eslint/naming-convention": [
           "error",
           {
