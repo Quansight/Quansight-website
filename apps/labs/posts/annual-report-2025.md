@@ -68,6 +68,6 @@ We are committed to building a diverse and inclusive organization. We run a volu
 
 Check out the 38-page, richly illustrated report for more details and the full stories: <a href="https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2025.pdf">Quansight Annual Report 2025</a>
 
-You can learn more about our consulting services at <a href="quansight.com">quansight.com</a>, and reach us at <a href="mailto:connect@quansight.com">connect@quansight.com</a>.
+You can learn more about our consulting services at <a href="https://quansight.com">quansight.com</a>, and reach us at <a href="mailto:connect@quansight.com">connect@quansight.com</a>.
 
 Thank you for being a part of our community!
