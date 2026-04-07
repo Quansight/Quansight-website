@@ -37,10 +37,14 @@ export default async function handler(req: NextRequest) {
       return fetch(
         'https://a.storyblok.com/f/152463/x/72fafda3df/quansight-labs-annual-report-2023.pdf',
       );
-    case '2024': // falls through to default
-    default:
+    case '2024':
       return fetch(
         'https://a.storyblok.com/f/152463/x/704327720f/labs-annual-report-2024.pdf',
+      );
+    case '2025': // falls through to default
+    default:
+      return fetch(
+        'https://a.storyblok.com/f/152463/x/bc160c8285/annual-report-2025.pdf',
       );
   }
 }
