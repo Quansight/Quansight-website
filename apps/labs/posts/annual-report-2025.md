@@ -14,14 +14,14 @@ hero:
 
 **We’re excited to present the ✨ Quansight Annual Report 2025 ✨**
 
-We had an eventful year!
-We completed our transition from Quansight Labs into Quansight PBC, formalizing our commitment to the open source community, and continued sustaining several projects across the scientific Python and broader ecosystem.
+It’s been a remarkable year!
+We finalized our transition from Quansight Labs to Quansight PBC, formalizing our commitment to the open source community, while continuing to support and sustain projects across the scientific Python ecosystem and beyond.
 
-In this report, we present key projects and initiatives, and describe the organizational structure and business model that underpins our work. We also share the values and principles that guide us in fostering healthy collaboration in open source and forging mission-aligned consulting partnerships.
+In this report, we present key projects and initiatives, and describe the organizational structure and business model that underpins our work. We also share the values and principles that guide us in fostering healthy collaboration in open source and building mission-aligned consulting partnerships.
 
 <b>🔖 Read the full report: <a href="https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2025.pdf" target="_blank">Quansight Annual Report 2025</a></b>
 
-Let’s look at some highlights below.
+Let’s look at some highlights from the report.
 
 ## Our Projects and Initiatives
 
@@ -66,7 +66,7 @@ We are committed to building a diverse and inclusive organization. We run a volu
     <img src="/posts/annual-report-2025/team-marginalized-group.png" width="80%" alt="Stacked horizontal bar plot for self-identification as belonging to a marginalized group in tech and open source of demographics survey respondents. For 2025, 13 did not consider themselves to belong to a marginalized group, 7 self-identified as belonging to a marginalized group, and 4 preferred not to self-identify. For 2024, 15 did not consider themselves to belong to a marginalized group, 11 self-identified as belonging to a marginalized group, and 2 preferred not to self-identify.  For 2023, 12 did not consider themselves to belong to a marginalized group, 8 self-identified as belonging to a marginalized group, and 3 preferred not to identify. For 2022, 15 did not consider themselves to belong to a marginalized group, eight self-identified as belonging to a marginalized group, and two preferred not to identify. For 2021, 16 did not consider themselves to belong to a marginalized group, and 11 self-identified as belonging to a marginalized group." />
 </p>
 
-Check out the 38-page, richly illustrated report for more details and the full stories: <a href="https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2025.pdf">Quansight Annual Report 2025</a>
+Check out the 38-page, richly illustrated report for more details and full stories: <a href="https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2025.pdf">Quansight Annual Report 2025</a>
 
 You can learn more about our consulting services at <a href="https://quansight.com">quansight.com</a>, and reach us at <a href="mailto:connect@quansight.com">connect@quansight.com</a>.
 
