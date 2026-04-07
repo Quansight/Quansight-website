@@ -14,8 +14,8 @@ import { TeamQuery } from '../../api';
 import { TPost, TPostAuthor } from '../../types/storyblok/bloks/posts';
 import { getFileContent } from '../api/posts/getFileContent';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const serializePostMeta = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: Record<string, any>,
   authors: Array<ArrayElementType<TeamQuery['PersonItems']['items']>> = [],
 ): TPost['meta'] => {
@@ -47,8 +47,8 @@ export const serializePostMeta = (
   };
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const serializePostContent = async (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: Record<string, any>,
   content: string,
 ): Promise<MDXRemoteSerializeResult<Record<string, unknown>>> => {
