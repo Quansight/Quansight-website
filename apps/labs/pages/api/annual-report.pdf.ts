@@ -44,7 +44,7 @@ export default async function handler(req: NextRequest) {
     case '2025': // falls through to default
     default:
       return fetch(
-        'https://a.storyblok.com/f/152463/x/704327720f/labs-annual-report-2024.pdf', // TODO: Update link
+        'https://a.storyblok.com/f/152463/x/bc160c8285/annual-report-2025.pdf',
       );
   }
 }
