@@ -57,7 +57,7 @@ The full report can be found in the _"A quick benchmark"_ section here:
 [Update on array API adoption in scikit-learn
 ](https://labs.quansight.org/blog/array-api-scikit-learn-2026)
 
-All `scikit-learn` models supporting the array API standard are listed in the documentation:
+All `scikit-learn` models supporting the array API standard are listed in the documentation:  
 [Support for Array API-compatible inputs](https://scikit-learn.org/stable/modules/array_api.html#support-for-array-api-compatible-inputs)
 
 ## SciPy
