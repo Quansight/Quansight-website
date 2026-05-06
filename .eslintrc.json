@@ -47,7 +47,7 @@
         "prettier"
       ],
       "rules": {
-        "@typescript-eslint/ban-ts-comment": ["off"],
+        "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/ban-ts-ignore": ["off"],
         "@typescript-eslint/ban-types": [
           "error",
@@ -60,8 +60,8 @@
             }
           }
         ],
-        "@typescript-eslint/explicit-function-return-type": ["off"],
-        "@typescript-eslint/indent": ["off"],
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/indent": "off",
         "@typescript-eslint/naming-convention": [
           "error",
           {
@@ -72,8 +72,8 @@
         "@typescript-eslint/no-shadow": "off",
         "@typescript-eslint/no-use-before-define": "off",
         "@typescript-eslint/prefer-interface": ["off"],
-        "@typescript-eslint/no-explicit-any": ["error"],
-        "@typescript-eslint/explicit-module-boundary-types": ["off"],
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/default-param-last": ["off"],
         "no-multiple-empty-lines": "error",
         "import/order": [
