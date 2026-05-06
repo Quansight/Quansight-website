@@ -6,3 +6,6 @@ node_modules
 .github
 .husky
 .editorconfig
+
+/.nx/cache
+/.nx/workspace-data

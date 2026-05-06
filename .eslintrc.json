@@ -1,7 +1,7 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "plugins": ["@nx"],
   "parserOptions": {
     "ecmaVersion": 8,
     "sourceType": "module",
@@ -22,7 +22,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@nx/enforce-module-boundaries": [
           "error",
           {
             "enforceBuildableLibDependency": true,
@@ -89,7 +89,9 @@
             "pathGroups": [
               {
                 "pattern": "react",
-                "patternOptions": { "matchBase": true },
+                "patternOptions": {
+                  "matchBase": true
+                },
                 "group": "external",
                 "position": "before"
               }
@@ -105,7 +107,7 @@
     },
     {
       "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
+      "extends": ["plugin:@nx/javascript"],
       "rules": {}
     },
     {
