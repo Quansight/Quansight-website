@@ -1,9 +1,8 @@
-import { ImageProps } from 'next/legacy/image';
-
 import { TImage, TBlok } from '@quansight/shared/types';
 import {
   HeroVariant,
   HeroBackgroundVariant,
+  TObjectFit,
 } from '@quansight/shared/ui-components';
 
 import { ComponentType } from '../../../components/BlokProvider/types';
@@ -14,12 +13,12 @@ export type THeroRawData = {
   variant: HeroVariant;
   subTitle?: string;
   component: ComponentType.Hero;
-  objectFit?: ImageProps['objectFit'];
+  objectFit?: TObjectFit;
   backgroundColor?: HeroBackgroundVariant;
   imageMobile?: TImage;
-  objectFitMobile?: ImageProps['objectFit'];
+  objectFitMobile?: TObjectFit;
   imageTablet?: TImage;
-  objectFitTablet?: ImageProps['objectFit'];
+  objectFitTablet?: TObjectFit;
   imageDesktop?: TImage;
-  objectFitDesktop?: ImageProps['objectFit'];
+  objectFitDesktop?: TObjectFit;
 } & TBlok;

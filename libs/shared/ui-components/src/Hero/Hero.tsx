@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import clsx from 'clsx';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 
 import { HeroResponsiveImages } from './HeroResponsiveImages';
 import { THeroProps, HeroVariant, HeroBackgroundVariant } from './types';
@@ -52,10 +52,12 @@ export const Hero: FC<THeroProps> = ({
         ) : imageSrc ? (
           <Image
             src={imageSrc}
-            alt={imageAlt}
-            layout="fill"
-            objectFit={objectFit || 'cover'}
-            objectPosition="center"
+            alt={imageAlt || ''}
+            fill
+            style={{
+              objectFit: objectFit || 'cover',
+              objectPosition: 'center',
+            }}
           />
         ) : null}
         {title && (
