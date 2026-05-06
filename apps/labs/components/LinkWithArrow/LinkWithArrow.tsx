@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren } from 'react';
 
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import Link, { LinkProps } from 'next/link';
 
 export type LinkWithArrowProps = PropsWithChildren<LinkProps>;

@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 
 import { useDeviceSize, DeviceSizeVariant } from '@quansight/shared/utils';
 
@@ -17,9 +17,11 @@ export const HeroResponsiveImages = ({
         <Image
           src={imageMobile.imageSrc}
           alt={imageMobile.imageAlt}
-          layout="fill"
-          objectFit={imageMobile.objectFit || 'cover'}
-          objectPosition="center"
+          fill
+          style={{
+            objectFit: imageMobile.objectFit || 'cover',
+            objectPosition: 'center',
+          }}
         />
       )}
       {(deviceSize === DeviceSizeVariant.Tablet ||
@@ -27,18 +29,22 @@ export const HeroResponsiveImages = ({
         <Image
           src={imageTablet.imageSrc}
           alt={imageTablet.imageAlt}
-          layout="fill"
-          objectFit={imageTablet.objectFit || 'cover'}
-          objectPosition="center"
+          fill
+          style={{
+            objectFit: imageTablet.objectFit || 'cover',
+            objectPosition: 'center',
+          }}
         />
       )}
       {deviceSize === DeviceSizeVariant.Desktop && (
         <Image
           src={imageDesktop.imageSrc}
           alt={imageDesktop.imageAlt}
-          layout="fill"
-          objectFit={imageDesktop.objectFit || 'cover'}
-          objectPosition="center"
+          fill
+          style={{
+            objectFit: imageDesktop.objectFit || 'cover',
+            objectPosition: 'center',
+          }}
         />
       )}
     </>
