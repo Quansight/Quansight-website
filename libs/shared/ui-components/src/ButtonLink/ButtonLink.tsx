@@ -34,7 +34,7 @@ export const ButtonLink: FC<TButtonLinkProps> = ({
           'inline-block ml-4 w-0 h-0 border-y-8 border-l-8 border-y-transparent border-y-solid border-l-solid',
           color === ButtonColor.Pink && 'border-l-pink',
           color === ButtonColor.Violet && 'border-l-violet',
-          color === ButtonColor.White && 'bordel-l-white',
+          color === ButtonColor.White && 'border-l-white',
         )}
       />
     )}
