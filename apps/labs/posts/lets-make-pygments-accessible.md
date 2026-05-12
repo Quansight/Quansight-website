@@ -1,6 +1,6 @@
 ---
 title: 'Making pygments accessible'
-authors: [stephannie-jimenez]
+authors: [stephannie-jimenez, isabela-presedo-floyd]
 published: November 15, 2022
 description: 'accessible-pygments hosts curated WCAG-compliant themes for all your syntax highlighting needs.'
 category: [Access-centered, Jupyter]
@@ -11,8 +11,6 @@ hero:
   imageSrc: /posts/lets-make-pygments-accessible/hero_themes.png
   imageAlt: 'A display of different accessible syntax highlighting themes being applied to the same example code.'
 ---
-
-Additional authors: Isabela Presedo-Floyd
 
 Themes… everyone has their personal preferences when it comes to colors and fonts. Because let’s face it, we all have spent some time trying to change or create our own theme for our operating system, terminals, and IDEs. But what happens when preferences create inaccessible tools? And how do you fix it?
 

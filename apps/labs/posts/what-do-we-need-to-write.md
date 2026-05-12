@@ -1,7 +1,7 @@
 ---
 title: 'Why is writing blog posts hard?'
 published: April 10, 2022
-authors: [isabela-presedo-floyd]
+authors: [isabela-presedo-floyd, tania-allard, melissa-mendonca, rohit-goswami, tony-fast, dillon-roach, dharhas-pothina, eric-kelly]
 description: 'In our weekly show and tell we got real about "why can writing blog 
 posts be so hard?" and collaboratively wrote up this blog post about what we learned 
 from the discussion.'
@@ -13,9 +13,6 @@ hero:
   imageSrc: /posts/what-do-we-need-to-write/blog_hero_var2.svg
   imageAlt: 'An illustration of a black hand holding up a microphone, with some graphical elements highlighting the top of the microphone'
 ---
-
-Additional authors: Tania Allard, Melissa Mendonça, Rohit Goswami, Tony Fast, Dillon Roach, 
-Dharhas Pothina, Eric Kelly.
 
 We write code. We write issues. We write documentation. We write notes to 
 ourselves, messages to each other, and guidelines to unite teams across 
