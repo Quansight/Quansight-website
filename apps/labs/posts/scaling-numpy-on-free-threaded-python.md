@@ -40,8 +40,8 @@ The reproducer is small and representative of ufunc heavy workloads: each
 worker takes an array, applies a handful of `np.sin` and `np.cos` calls in a
 loop, and reduces the result. There is no shared mutable state between
 workers, so in principle this should scale linearly with the number of cores.
-In practice, multi-threading was up to 2x _slower_ than multi-processing on the
-same machine.
+In practice, multi-threading was up to 2x _slower_ than multi-processing
+on the same machine.
 
 The free-threaded build removes the GIL, but removing the GIL is not enough on
 its own. Profiling the reproducer revealed several hidden bottlenecks in NumPy
@@ -72,8 +72,9 @@ however even though it was not enabled, it still acquired a global lock
 on every allocation and deallocation.
 
 I fixed this in CPython by avoiding locking when `tracemalloc` is disabled
-by using atomic operations to check whether it is enabled before acquiring the lock.
-This was implemented in [python/cpython#143065](https://github.com/python/cpython/pull/143065).
+by using atomic operations to check whether it is enabled before acquiring
+the lock. This was implemented in
+[python/cpython#143065](https://github.com/python/cpython/pull/143065).
 
 ### 2. Lock contention in the ufunc dispatch cache
 
@@ -83,10 +84,12 @@ cache was previously protected by a `std::shared_mutex` (a reader-writer lock).
 Even though, it was a reader-writer lock, it still didn't scale well.
 
 I fixed this by implementing a lock-free hashtable for the dispatch cache,
-which allows for lock-free reads. The fast-path for cache hit is now just a few atomic
-read operations which scales well across threads. This was implemented in
-[numpy/numpy#30593](https://github.com/numpy/numpy/pull/30593), you can read more about
-the lock-free design in [npy_hashtable.c](https://github.com/numpy/numpy/blob/main/numpy/_core/src/common/npy_hashtable.c).
+which allows for lock-free reads. The fast-path for cache hit is now just
+a few atomic read operations which scales well across threads. This was
+implemented in
+[numpy/numpy#30593](https://github.com/numpy/numpy/pull/30593), you can
+read more about the lock-free design in
+[npy_hashtable.c](https://github.com/numpy/numpy/blob/main/numpy/_core/src/common/npy_hashtable.c).
 
 ### 4. Reference count contention on global `PyCapsule` objects
 
@@ -94,24 +97,29 @@ NumPy stores the default memory handler in a global `PyCapsule` object.
 On the GIL build, an extra `Py_INCREF`/`Py_DECREF` on these capsule objects
 is essentially free. On the free-threaded build, every increment and
 decrement of such objects requires atomic operations on the reference count,
-and with many threads all contending on the same global capsules, this became a severe
-scaling bottleneck.
+and with many threads all contending on the same global capsules, this
+became a severe scaling bottleneck.
 
-I fixed this by making the global default memory handler immortal, meaning that it is never
-freed and no reference counting operations are performed on them at all.
-There was no public C API to mark an object as immortal, so I added `PyUnstable_SetImmortal` in CPython.
-This was implemented in [python/cpython#144543](https://github.com/python/cpython/pull/144543)
+I fixed this by making the global default memory handler immortal,
+meaning that it is never freed and no reference counting operations are
+performed on them at all. There was no public C API to mark an object as
+immortal, so I added `PyUnstable_SetImmortal` in CPython. This was
+implemented in
+[python/cpython#144543](https://github.com/python/cpython/pull/144543)
 and [numpy/numpy#30826](https://github.com/numpy/numpy/pull/30826)
 
 ### 5. Module attribute lookup contention
 
-NumPy uses module level `__getattr__` to resolve ufuncs such as `np.sin` and `np.cos` to their actual implementations. In CPython, the module attribute lookup bytecode specialization was not enabled for
-modules which defined `__getattr__` which causes the attribute lookup to follow the slow-path
-of acquiring the import lock and performing the lookup.
+NumPy uses module level `__getattr__` to resolve ufuncs such as `np.sin`
+and `np.cos` to their actual implementations. In CPython, the module
+attribute lookup bytecode specialization was not enabled for modules
+which defined `__getattr__` which causes the attribute lookup to follow
+the slow-path of acquiring the import lock and performing the lookup.
 
 I fixed this upstream in CPython
 ([python/cpython#143470](https://github.com/python/cpython/pull/143470))
-by enabling bytecode specialization for module attribute lookups even when `__getattr__` is defined.
+by enabling bytecode specialization for module attribute lookups even
+when `__getattr__` is defined.
 
 ### 6. Memory allocator contention
 
@@ -122,12 +130,13 @@ locking inside the system allocator implementation particularly on macOS.
 
 The fix was twofold:
 
-- In CPython, I changed the raw allocator APIs to use mimalloc as the underlying
-  memory allocator on the free-threaded build. This was implemented in
-  [python/cpython#144916](https://github.com/python/cpython/pull/144916).
+- In CPython, I changed the raw allocator APIs to use mimalloc as the
+  underlying memory allocator on the free-threaded build. This was implemented
+  in [python/cpython#144916](https://github.com/python/cpython/pull/144916).
 
-- In NumPy, I changed the array allocation APIs to use the raw allocator instead
-  system allocator. This was implemented in [numpy/numpy#30846](https://github.com/numpy/numpy/pull/30846).
+- In NumPy, I changed the array allocation APIs to use the raw allocator
+  instead system allocator. This was implemented in
+  [numpy/numpy#30846](https://github.com/numpy/numpy/pull/30846).
 
 ## Results
 
