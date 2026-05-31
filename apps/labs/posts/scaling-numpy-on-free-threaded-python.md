@@ -91,7 +91,9 @@ implemented in
 read more about the lock-free design in
 [npy_hashtable.c](https://github.com/numpy/numpy/blob/main/numpy/_core/src/common/npy_hashtable.c).
 
-### 4. Reference count contention on global `PyCapsule` objects
+TODO: describe lock-free implementation in more detail and add a diagram.
+
+### 3. Reference count contention on global `PyCapsule` objects
 
 NumPy stores the default memory handler in a global `PyCapsule` object.
 On the GIL build, an extra `Py_INCREF`/`Py_DECREF` on these capsule objects
@@ -108,7 +110,7 @@ implemented in
 [python/cpython#144543](https://github.com/python/cpython/pull/144543)
 and [numpy/numpy#30826](https://github.com/numpy/numpy/pull/30826)
 
-### 5. Module attribute lookup contention
+### 4. Module attribute lookup contention
 
 NumPy uses module level `__getattr__` to resolve ufuncs such as `np.sin`
 and `np.cos` to their actual implementations. In CPython, the module
@@ -121,7 +123,7 @@ I fixed this upstream in CPython
 by enabling bytecode specialization for module attribute lookups even
 when `__getattr__` is defined.
 
-### 6. Memory allocator contention
+### 5. Memory allocator contention
 
 After all of the above, the only remaining contention in the flame graph was
 inside `malloc` itself. The free-threaded workload was allocating memory
@@ -138,6 +140,41 @@ The fix was twofold:
   instead system allocator. This was implemented in
   [numpy/numpy#30846](https://github.com/numpy/numpy/pull/30846).
 
-## Results
+## Benchmarks
 
-TODO Add benchmark results and summarise.
+Here are the benchmark results comparing the performance of the
+multi-threaded reproducer on the free-threaded build before and after all of
+the above fixes on a 32 core linux machine:
+
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/scaling-numpy-on-free-threaded-python/so_benchmark.png"
+    alt="Benchmark result."
+    style={{position:'relative'}}
+  />
+  <figcaption>
+    The red line represents the performance before the fixes, the green line
+    represents the performance after the fixes and the black line represents
+    the performance of the multi-process version.
+  </figcaption>
+</figure>
+
+Before the fixes, the multi-threaded scaled well upto 18 threads, but after
+that because of the bottlenecks described above, the performance degraded
+significantly and became much slower than the multi-process version. After
+the fixes, the multi-threaded version scales well across all 32 cores and is
+significantly faster than the multi-process version.
+
+## Summary
+
+NumPy now scales well on the free-threaded build of CPython after several
+bottlenecks in both NumPy and CPython were fixed. The changes I implemented in
+CPython to fix the bottlenecks in `tracemalloc`, the memory allocator, and
+module attribute lookups will also benefit other libraries and workloads on
+the free-threaded build beyond just NumPy. During this project work, I laid
+the foundational work like adding the C-API for making objects immortal and
+changing the raw allocator to use mimalloc which will enable more libraries to
+easily fix similar bottlenecks in their own code and scale well on the
+free-threaded build. This was a lot of work and required coordinated changes
+across both NumPy and CPython, but it is very exciting to see NumPy workloads
+scale efficiently on the free-threaded build now.
