@@ -41,7 +41,7 @@
     "rehype-slug-custom-id": "^2.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "shiki": "^0.10.1",
+    "shiki": "^4.2.0",
     "storyblok-js-client": "^5.14.4",
     "storyblok-react": "^0.1.2",
     "swiper": "^8.4.7",
