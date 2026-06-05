@@ -50,7 +50,7 @@ scaling issues on the free-threaded build. These scaling bottlenecks fall
 primarily into three categories:
 
 1. Lock contention.
-2. Refcount contention on shared global objects.
+2. Reference count contention on shared global objects.
 3. Contention in the memory allocator.
 
 <figure style={{ textAlign: 'center' }}>
@@ -66,14 +66,15 @@ primarily into three categories:
 
 ### 1. Lock contention in `tracemalloc`
 
-The first bottleneck that surfaced was in `tracemalloc` of CPython.
-`tracemalloc` is a memory tracking tool which is disabled by default,
-however even though it was not enabled, it still acquired a global lock
-on every allocation and deallocation.
+The first bottleneck that surfaced was in CPython's `tracemalloc` module.
+`tracemalloc` is a memory tracking tool which is disabled by default.
+However even though it was not enabled, it still acquired a global lock
+on every allocation and deallocation to check whether `tracemalloc` had been
+enabled at runtime.
 
-I fixed this in CPython by avoiding locking when `tracemalloc` is disabled
-by using atomic operations to check whether it is enabled before acquiring
-the lock. This was implemented in
+I fixed this in CPython by avoiding locking when `tracemalloc` is disabled.
+Now, CPython uses atomic operations to check whether `tracemalloc` is
+enabled, providing a lock-free fast path. This was implemented in
 [python/cpython#143065](https://github.com/python/cpython/pull/143065).
 
 ### 2. Lock contention in the ufunc dispatch cache
@@ -166,7 +167,7 @@ The fix was twofold:
   in [python/cpython#144916](https://github.com/python/cpython/pull/144916).
 
 - In NumPy, I changed the array allocation APIs to use the raw allocator
-  instead system allocator. This was implemented in
+  instead of the system allocator. This was implemented in
   [numpy/numpy#30846](https://github.com/numpy/numpy/pull/30846).
 
 ## Benchmarks
@@ -188,7 +189,7 @@ the above fixes on a 32 core linux machine:
   </figcaption>
 </figure>
 
-Before the fixes, the multi-threaded scaled well upto 18 threads, but after
+Before the fixes, the multi-threaded case scaled well up to 18 threads, but after
 that because of the bottlenecks described above, the performance degraded
 significantly and became much slower than the multi-process version. After
 the fixes, the multi-threaded version scales well across all 32 cores and is
@@ -196,7 +197,7 @@ significantly faster than the multi-process version.
 
 ## Summary
 
-NumPy now scales well on the free-threaded build of CPython after several
+NumPy ufuncs now scale well on the free-threaded build of CPython after several
 bottlenecks in both NumPy and CPython were fixed. The changes I implemented in
 CPython to fix the bottlenecks in `tracemalloc`, the memory allocator, and
 module attribute lookups will also benefit other libraries and workloads on
