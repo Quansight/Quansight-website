@@ -83,15 +83,44 @@ cache that maps a tuple of input types to a concrete loop implementation. The
 cache was previously protected by a `std::shared_mutex` (a reader-writer lock).
 Even though, it was a reader-writer lock, it still didn't scale well.
 
-I fixed this by implementing a lock-free hashtable for the dispatch cache,
-which allows for lock-free reads. The fast-path for cache hit is now just
-a few atomic read operations which scales well across threads. This was
-implemented in
-[numpy/numpy#30593](https://github.com/numpy/numpy/pull/30593), you can
-read more about the lock-free design in
-[npy_hashtable.c](https://github.com/numpy/numpy/blob/main/numpy/_core/src/common/npy_hashtable.c).
+To fix this, the new design takes advantage of two properties of the dispatch
+cache: it is read-heavy, and its entries are immutable — once an entry is
+inserted, it is never modified or removed. This means readers never have to
+guard against an entry changing underneath them, so reads can be made
+completely lock-free. It is now implemented as a lock-free concurrent hash
+map with no locking required the read path at all, and only a single lock on
+the write path for rare cache misses that require insertions.
 
-TODO: describe lock-free implementation in more detail and add a diagram.
+The cache is implemented by `PyArrayIdentityHash`, which holds an atomic
+pointer to the buckets that store the actual entries. To look up an entry, a
+thread atomically loads the buckets pointer, indexes into it using the hash of
+the input types, and atomically loads the key stored there. If the key matches
+the input types, the corresponding loop is returned. So, looking up an entry
+is just a sequence of atomic loads with no locking at all and scales well even
+many threads are reading from the cache.
+
+Insertions are rare and only happen on a cache miss. A writer acquires the
+cache's mutex so that only one thread can modify the cache at a time, then
+publishes the new entry into the buckets atomically, so concurrent readers
+can read the updated entry without data races. This design allows the dispatch
+cache to scale well with many threads while being thread safe.
+This was implemented in
+[numpy/numpy#30593](https://github.com/numpy/numpy/pull/30593).
+
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/scaling-numpy-on-free-threaded-python/hashtable.png"
+    alt="Diagram of the lock-free dispatch cache. "
+    style={{position:'relative'}}
+  />
+  <figcaption>
+    The lock-free dispatch cache. Readers follow the atomic pointer to the
+    current buckets table and look up entries without taking a lock. After the
+    table is resized, the old table is kept alive (linked through a prev chain)
+    until deallocation, so readers still using it — like Reader C — can finish
+    safely. Only writers acquire the mutex.
+  </figcaption>
+</figure>
 
 ### 3. Reference count contention on global `PyCapsule` objects
 
