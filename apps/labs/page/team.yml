@@ -1,0 +1,16 @@
+# Generated from Storyblok export. Edit freely.
+slug: team
+blocks:
+- type: hero
+  image: /images/page-assets/labs-team-hero.svg
+  imageAlt: Three hands with diffrent skin tones are bringing together cards with diffrent shapes and
+    colors to spell the word Labs, using letters from 3 diffrent alphabets
+  title: ''
+  subTitle: ''
+  variant: medium
+  objectFit: contain
+- type: team
+  role: team
+  header: Labs Team
+  variant: all
+  imagesShape: square

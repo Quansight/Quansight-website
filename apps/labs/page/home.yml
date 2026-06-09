@@ -1,0 +1,79 @@
+# Generated from Storyblok export. Edit freely.
+slug: home
+blocks:
+- type: hero
+  image: /images/page-assets/labs-home-hero.svg
+  imageAlt: An illustration of a brown hand holding up a globe
+  title: ''
+  subTitle: ''
+  variant: medium
+  objectFit: cover
+- type: column-article
+  header: Quansight
+  image: /images/page-assets/labs-illustration-1-wideform.svg
+  imageAlt: An illustration of a white person in a wheelchair holding a laptop with a data visualisation,
+    and black person standing next to them waving ,and holding a tablet with a bar chart.
+  leftColumn: Quansight is an organization dedicated to making open source software accessible, sustainable,
+    and community-driven. We achieve this by fostering healthy partnerships between enterprise customers
+    and open source projects and communities they rely on.
+  rightColumn: We are a team of developers, community leads, designers, and writers. Together we create,
+    contribute to, and maintain open source technology for research and data science workflows. We help
+    our customers to safely and effectively build technTology on open source to drive their own innovation,
+    while ensuring their involvement strengthens the project's community and long-term health.
+  final: |-
+    Formerly, we were Quansight Labs, the public benefit division of Quansight LLC. In 2025, Quansight Labs evolved into Quansight, Public Benefit Corporation.
+
+    [Learn about our consulting services: Visit quansight.com](https://quansight.com/)
+- type: teaser
+  title: Quansight Annual Report 2025
+  text: We spent 46,000+ hours contributing to 35+ open source projects including NumPy, SciPy, CPython,
+    conda-forge, Jupyter, and more. Read how we're living up to our mission of sustaining and growing
+    community-driven open source projects and communities.
+  color: green
+  image: /images/page-assets/annual-report-2025-mockup.png
+  imageAlt: ''
+  link: https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2025.pdf
+  buttonText: Read the Report
+- type: column-article
+  header: ''
+  image: /images/page-assets/labs-illustration-3-longform.svg
+  imageAlt: An illustration of a standing person with a turban.
+  leftColumn: |-
+    ## Vision
+
+    A world where open source is universally accessible, sustainable, and a thriving engine for global innovation and discovery.
+  rightColumn: |-
+    ## Mission
+
+    Our mission is to forge resilient partnerships between all types of organizations and open source communities. We aim to deliver engineering expertise and high-value solutions to our customers while practicing sustainable stewardship to ensure the open source ecosystems we all depend on are healthy, resilient, and accessible.
+  final: |-
+    ## Model
+
+    We created and continue to refine an innovative hybrid employment model. We give open source maintainers a significant amount of time to work on community-driven open source projects, while also spending part of their time on consulting work. Benefits of this model include learning opportunities for our team, bringing back concrete needs and ideas to open source projects, and the flexibility to scale up our contributions to the open source projects we support quickly when we receive direct financial support for them.
+
+    We recognize that successful software projects require many skills and activities beyond software development: community building, technical writing, graphical design, UI/UX design, marketing, fundraising, and more. Most community-driven open source projects lack these skills. We employ writers, designers, community managers, and others with an interest in open source with the aim of growing the diversity of skills present in open source communities, and making projects more healthy and mature.
+- type: logos
+  title: Some open source projects we contribute to
+  colorVariant: black
+  linkUrl: ''
+  linkTitle: ''
+  grid:
+  - src: /images/page-assets/python-logo.svg
+    alt: ''
+  - src: /images/page-assets/numpy-logo.svg
+    alt: ''
+  - src: /images/page-assets/conda-forge-logo.png
+    alt: ''
+  - src: /images/page-assets/std-lib-logo.svg
+    alt: ''
+  - src: /images/page-assets/dataapis-logo.svg
+    alt: ''
+- type: teaser
+  title: The Quansight Quarterly Newsletter
+  text: Get the latest news and updates from our team and the open source projects we work on.
+  color: violet
+  image: /images/page-assets/labs-illustarion-2.svg
+  imageAlt: An illustration of a standing person holding a beaker and waving their hand. There are several
+    larger beakers, with other colors and shapes, in the background.
+  link: https://quansight.com/subscribe-to-the-quansight-quarterly/
+  buttonText: Subscribe

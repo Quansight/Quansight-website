@@ -1,0 +1,452 @@
+# Generated from Storyblok export. Edit freely.
+slug: projects
+blocks:
+- type: hero
+  image: /images/page-assets/labs-projects-hero.svg
+  imageAlt: An illustration of hands with diffrent skin tones coming together to nurture a plant.
+  title: ''
+  subTitle: ''
+  variant: medium
+  objectFit: contain
+- type: page-heading
+  title: Our Supported Projects
+  description: Projects we are actively working on, and the key contributions made by current and past
+    Labs team members. Contributors are listed in alphabetical order of first names.
+- type: projects
+  items:
+  - title: NumPy
+    image: /images/page-assets/numpy-icon.svg
+    imageAlt: NumPy logo
+    link: https://github.com/numpy/numpy
+    linkText: Go to the project’s page
+    shortDescription: The Array API means other projects can adopt the NumPy API. For example, NumPy doesn’t
+      offer GPU support, but other projects do. The new Array API we are collaboratively introducing,
+      allows users to use the NumPy API, with a middle layer — the new Array API, and then any other backend
+      you might like.
+    longDescription: |-
+      ### Contributions to the Project
+
+      - Pearu Peterson, has done significant contributions to NumPy and the scientific Python ecosystem over the last two decades.
+      - Matti Picus has worked on several performance improvements for NumPy, such as implementing a [configurable allocator](https://numpy.org/devdocs/reference/c-api/data_memory.html) for NumPy, reviewing and documenting work on the implementation of SIMD optimizations, and reviewing and merging the recent DType refactoring ([NEP 42](https://numpy.org/neps/nep-0042-new-dtypes.html)). Matti also works on CI maintenance, integrating new OpenBLAS versions, and pushing the move to cibuildwheel.
+      - Ralf Gommers has acted as a release manager for NumPy in the past, and is now focusing on code reviews, governance, fundraising (e.g., Tidelift connection and support for other [grants](https://labs.quansight.org/blog/2019/11/numpy-openblas-czi-grant/) and funding opportunities) as well as general project management. Ralf is also the chair of the [Consortium for Python Data API Standards](https://data-apis.org/).
+      - Melissa Weber Mendonça has helped support work on [f2py and documentation](https://labs.quansight.org/blog/2020/11/a-second-czi-grant-for-numpy-and-openblas/) and is now focusing on community and general maintenance. Melissa is also leading a joint-project with Matplotlib, SciPy and Pandas to advance an [inclusive Culture in the Scientific Python Ecosystem](https://chanzuckerberg.com/eoss/proposals/advancing-an-inclusive-culture-in-the-scientific-python-ecosystem/).
+      - Rohit Goswami works on f2py and documentation, including the effort to bring modern Fortran features to f2py.
+      - Aaron Meurer works on the implementation of [the Array API](https://numpy.org/neps/nep-0047-array-api-standard.html), and has also collaborated on adding hypothesis testing capabilities to NumPy.
+      - Gagandeep Singh has worked on several performance improvements such as vectorizing the QR decomposition and adding control over copy modes in array creation (related to the Array API standards implementation).
+      - Hameer Abbasi has done work related to interoperability, including implementing the DLPack Array API protocols for ndarray.
+      - Mars Lee has done frontend design and accessibility work for our home page and documentation, and is also working on the NumPy user survey.
+      - Matthew Barber has worked on implementing [hypothesis testing support](https://labs.quansight.org/blog/2021/10/hypothesis-array-api/) for NumPy and the Array API.
+
+      ### Quansight Contributors
+
+      - [Aaron Meurer](https://github.com/asmeurer)
+      - [Gagandeep Singh](https://github.com/czgdp1807)
+      - [Hameer Abbasi](https://github.com/hameerabbasi), alumni
+      - [Mars Lee](https://github.com/MarsBarLee)
+      - [Matthew Barber](https://github.com/Honno), previous intern and now developer
+      - [Matti Picus](https://github.com/mattip), member of the NumPy steering council and general maintainer
+      - [Melissa Weber Mendonça](https://github.com/melissawm), member of the NumPy steering council and general maintainer, leading the documentation team
+      - [Pearu Peterson](https://github.com/pearu), author and maintainer of f2py
+      - [Ralf Gommers](https://github.com/rgommers), a member of the NumPy steering council and general maintainer
+      - [Rohit Goswami](https://github.com/HaoZeke)
+      - [Travis Oliphant](https://github.com/teoliphant), author of NumPy and emeritus maintainer
+  - title: conda-forge
+    image: /images/page-assets/conda-forge-icon.svg
+    imageAlt: conda-forge logo
+    link: https://github.com/conda-forge
+    linkText: Go to the project’s page
+    shortDescription: Working on conda-forge is like gardening. Gardens need constant care. If you don’t
+      keep the maintenance work on a garden, it starts to grow wildly and becomes less pretty, eventually
+      some plants might wither. Similarly, with conda-forge, we provide support for API/ABI compatibility,
+      supporting volunteers, reviewing new submissions for packages, and so on.
+    longDescription: |-
+      ### Contributions to the Project
+
+      - Mahe Iram Khan [shared her contributions to Grayskull](https://labs.quansight.org/blog/2022/01/conda-grayskull-packaging/), the automatic conda-forge recipe generator
+      - Quansight silver-sponsored Packaging-Con (organized by core members of conda-forge)
+      - Quansight supports conda-forge with developer time (Jaime Rodríguez-Guerra contributes 4h a week)
+      - Quansight supports conda-forge with CI infrastructure (ongoing GPU server deployment)
+      - Quansight is an officially recognized ["Service Provider"](https://conda-forge.org/docs/contracting/00_intro.html)
+
+      ### Quansight Contributors
+
+      - [Anthony Scopatz](https://www.github.com/scopatz) core member and one of the main pillars of the organization for a number of years
+      - [Dharhas Pothina](https://www.github.com/dharhas) community member since inception, led efforts to improve geospatial packaging
+      - [Gonzalo Peña-Castellanos](https://www.github.com/goanpeca) staged-recipes reviewer since 2021
+      - [Jaime Rodríguez-Guerra](https://www.github.com/jaimergp) core member since August, 2021
+      - [Mahe Iram Khan](https://www.github.com/ForgottenProgramme) her 2021 internship contributed to Grayskull
+      - [Matti Picus](https://www.github.com/mattip) pypy help team member
+      - [Vinicius D. Cerutti](https://www.github.com/viniciusdc) core member since March, 2021 bots team
+
+      ### Quansighters maintaining 20 or more feedstocks:
+
+      [Aaron Meurer](https://www.github.com/asmeurer), [Anthony Scopatz](https://www.github.com/scopatz), [Carlos Cordoba](https://www.github.com/ccordoba12), [Edgar Andrés Margffoy Tuay](https://www.github.com/andfoy), [Gonzalo Peña-Castellanos](https://www.github.com/goanpeca), [Gregory Lee](https://www.github.com/grlee77), [Ivan Ogasawara](https://www.github.com/xmnlab), [Jaime Rodríguez-Guerra](https://www.github.com/jaimergp)
+
+      ### Quansighters maintaining 1-20 feedstocks:
+
+      [Andrew Fulton](https://www.github.com/andrewfulton9), [Anirrudh Krishnan](https://www.github.com/anirrudh), [Amit Kumar](https://www.github.com/aktech), [Christopher Ostrouchov](https://www.github.com/costrouc), [Dan Lester](https://www.github.com/danlester), [Daniel Althviz Moré](https://www.github.com/dalthviz), [Dharhas Pothina](https://www.github.com/dharhas), [Dillon Roach](https://www.github.com/dillonroach), [Eskild Eriksen](https://www.github.com/iameskild), [Filipe Laíns](https://www.github.com/FFY00), [Guilherme Leobas](https://www.github.com/guilhermeleobas), [Ilan Schnell](https://www.github.com/ilanschnell), [Ivan Yashchuk](https://www.github.com/IvanYashchuk), [Marc Garcia](https://www.github.com/datapythonista)[Matthias Bussonnier](https://www.github.com/Carreau), [Matti Picus](https://www.github.com/mattip), [Melissa Weber Mendonça](https://www.github.com/melissawm), [Pamphile Roy](https://www.github.com/tupui), [Pearu Peterson](https://www.github.com/pearu)[Philip Meier](https://www.github.com/pmeier), [Ralf Gommers](https://www.github.com/www.github.com/rgommers), [Stephannie Jimenez Gacha](https://www.github.com/steff456), [Vinicius D. Cerutti](https://www.github.com/viniciusdc)
+  - title: SciPy
+    image: /images/page-assets/scipy-icon.svg
+    imageAlt: SciPy Logo
+    link: https://github.com/scipy/scipy
+    linkText: Go to the project’s page
+    shortDescription: SciPy has been at the forefront of Quansight’s work. Five Quansighters are maintainers
+      and seven others are contributors supporting the project.
+    longDescription: |-
+      ### Contributions to the Project
+
+      - [Ensure public API of SciPy is well-defined, clean up everything else](https://github.com/scipy/scipy/issues/14360)
+      - Ivan Yashchuk is the project lead for the [standard API project](https://labs.quansight.org/blog/2021/11/pydata-extensibility-vision), which aims to generalize SciPy for other array types
+      - [Advancing an inclusive culture in the scientific Python ecosystem](https://figshare.com/articles/online_resource/Advancing_an_inclusive_culture_in_the_scientific_Python_ecosystem/16548063): A joint grant with NumPy, Matplotlib and Pandas that is leading to community and newcomers meetings, & soon much more
+      - Greg Lee made significant improvements to scipy.ndimage - the most prominent one is [making extension modes consistent across ndimage](https://labs.quansight.org/blog/2021/01/scipy-ndimage-interpolation/) - and he is the main maintainer of this module.
+      - Peter Bell: maintains `scipy.fft` and implemented [a new framework for distance metrics in ](https://github.com/scipy/scipy/pull/13907)`scipy.spatial.distance`
+      - Pamphile Roy, who joined Quansight in January 2022, is a general SciPy maintainer, and the author/maintainer of `scipy.stats.qmc`.
+      - Ralf Gommers is a general SciPy maintainer. He takes care of a lot of code reviews, governance, fundraising (e.g., Tidelift connection), is the NumFOCUS representative (for finances), etc. He has been leading the work on [moving SciPy to the Meson build system](https://labs.quansight.org/blog/2021/07/moving-scipy-to-meson/) and (with others) working on [interoperability with other array libraries](https://labs.quansight.org/blog/2021/11/pydata-extensibility-vision/).
+      - Tirth Patel did some maintenance and added new features for scipy.stats on the side while interning at Quansight (though his main focus lies elsewhere)
+      - Gagandeep Singh moved C code away from deprecated NumPy APIs. He also implemented new algorithms during the past year: [Dinic's algorithm for maximum flow](https://github.com/scipy/scipy/pull/14358) and [DIRECT solver for ](https://github.com/scipy/scipy/pull/14300)`scipy.optimize`
+      - Tania Allard implemented [Gitpod support for SciPy](http://scipy.github.io/devdocs/dev/contributor/quickstart_gitpod.html)
+      - Matti Picus helps with PyPy and wheel build issues
+      - Melissa Mendonca is organizing the SciPy community meetings
+      - Anirudh Dagar worked on an experimental project [to accept PyTorch tensors in SciPy code](https://labs.quansight.org/blog/2021/10/array-libraries-interoperability/). He also contributed to some maintenance work on the project.
+      - Harsh Mishra worked on [CI improvements and Meson support](https://labs.quansight.org/blog/2021/10/re-engineering-cicd-pipelines-for-scipy/)
+
+      ### Quansight Contributors
+
+      - [Anirudh Dagar](https://github.com/AnirudhDagar), former intern at Quansight
+      - [Evgeni Burovski](https://github.com/ev-br), maintainer
+      - [Gagandeep Singh](https://github.com/czgdp1807)
+      - [Gregory Lee](https://github.com/grlee77), maintainer
+      - [Harsh Mishra](https://github.com/HarshCasper), intern at Quansight
+      - [Ivan Yashchuk](https://github.com/IvanYashchuk)
+      - [Matti Picus](https://github.com/mattip)
+      - [Melissa Weber Mendonça](https://github.com/melissawm)
+      - [Pamphile Roy](https://github.com/tupui), maintainer
+      - [Peter Bell](https://github.com/peterbell10), maintainer
+      - [Ralf Gommers](https://github.com/rgommers), maintainer
+      - [Tania Allard](https://github.com/trallard)
+      - [Tirth Patel](https://github.com/tirthasheshpatel/), maintainer, intern at Quansight
+  - title: scikit-learn
+    image: /images/page-assets/scikit-learn-symbol.svg
+    imageAlt: scikit-learn Logo
+    link: https://github.com/scikit-learn/scikit-learn
+    linkText: Go to the project’s page
+    shortDescription: 'Backlog reducing is useful for several reasons. From the maintainer''s side: it
+      helps maintainers maintain, focus on bigger items, and reduces their cognitive load. From the community''s
+      side: a lot of scikit-learn''s backlog consist of features and bug fixes that the community has
+      been waiting for. Doing triage and backlog reduction is essential and valuable work.'
+    longDescription: |-
+      ### Contributions to the Project
+
+      - Thomas led the development of [the feature name API](https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_1_0_0.html#feature-names-support) in version 1.0 and introduced the API to all transformers in version 1.1. The feature name API paves the way for more integration with Pandas in scikit-learn.
+      - Thomas pushes for advancements in encoding categorical data, such as native support for missing values in encoders and infrequent category support in the one-hot-encoder.
+      - Thomas's effort supports scikit-learn's contributors, which means reviewing changes and giving feedback.
+      - Impactful PR's Thomas has reviewed:
+      - With Meekail joining the team, the team [is starting to merge or close more PRs than open them](https://thomasjpfan.github.io/sklearn-repo-status/).
+
+      ### Quansight Contributors
+
+      - [Meekail Zain](https://www.github.com/micky774), since January 2022
+      - [Thomas J. Fan](https://www.github.com/thomasjpfan), since May 2021
+  - title: JupyterLab
+    image: /images/page-assets/jupyterlab-icon.svg
+    imageAlt: JupyterLab logo
+    link: https://github.com/jupyterlab/jupyterlab
+    linkText: Go to the project’s page
+    shortDescription: Our Quansight Jovyans are leading the Jupyter accessibility meetings. It is the
+      longest commitment the project had to accessibility, and the largest number of people gathered to
+      collaborate on this topic so far. The work has encouraged more accessibility reviews in the contributing
+      process.
+    longDescription: |-
+      ### Contributions to the Project
+
+      - Internationalization support and translation of the infrastructure and certain language contributions.
+      - We were part of the team that initiated and supports [JupyterLab performance testing](https://github.com/jupyterlab/benchmarks) and related performance-focused changes in the main repository, especially for long notebooks.
+      - The addition of side-by-side notebook rendering.
+      - We took part in a collaborative effort to set up [JupyterLab real time collaboration](https://blog.jupyter.org/how-we-made-jupyter-notebooks-collaborative-with-yjs-b8dff6a9d8af).
+      - Some contributions to [jupyterlab-git](https://github.com/jupyterlab/jupyterlab-git).
+      - Matthias is a member of the Jupyter security team, which handles [security vulnerability reports and fixes](https://blog.jupyter.org/cve-2021-32797-and-cve-2021-32798-remote-code-execution-in-jupyterlab-and-jupyter-notebook-a70fae0d3239).
+      - [Monthly community calls](https://labs.quansight.org/blog/2021/10/jupyter-community-calls/).
+      - [Weekly triage meetings](https://docs.jupyter.org/en/latest/community/content-community.html#jupyter-community-meetings).
+      - [Fortnightly JupyterLab accessibility meetings](https://github.com/jupyter/accessibility/tree/master/docs/community/meeting-minutes/jupyterlab-accessibility-meetings).
+      - [Jupyter accessibility workshops](https://www.youtube.com/playlist?list=PLUrHeD2K9CmkoRVi5tgQdTxJrh6G_IPRD).
+      - The above mentioned community and accessibility work is supported by [2 CZI EOSS grants](https://blog.jupyter.org/czi-awards-three-eoss-grants-to-jupyter-community-members-6aef43bd9468), awarded to Jupyter and [Quansight](https://labs.quansight.org/blog/2021/08/czi-eoss4-grants-at-quansight-labs/), and administered by Quansight employees:
+
+      ### Quansight Contributors
+
+      - [Andrew Fulton](https://www.github.com/andrewfulton9)
+      - [Athan Reines](https://github.com/kgryte)
+      - [Eric Charles](https://github.com/echarles)
+      - [Gabriel Fouasnon](https://github.com/gabalafou)
+      - [Gonzalo Peña-Castellanos](https://www.github.com/goanpeca)
+      - [Isabela Presedo-Floyd](https://github.com/isabela-pf)
+      - [Jessica Xu](https://github.com/jess-x)
+      - [Matthias Bussonnier](https://www.github.com/Carreau)
+      - [Saul Shanabrook](https://github.com/saulshanabrook)
+      - [Tania Allard](https://github.com/trallard)
+      - [Tony Fast](https://github.com/tonyfast)
+  - title: conda
+    image: /images/page-assets/conda-symbol.svg
+    imageAlt: Conda Logo
+    link: https://github.com/conda/conda
+    linkText: Go to the project’s page
+    shortDescription: We brought conda and mamba together for the community by integrating the mamba solver
+      into the conda project. Providing much needed community needs, namely, faster solving times and
+      reduced memory consumption. This is especially true for environments so complex that conda wasn't
+      able to handle them anymore.
+    longDescription: |-
+      ### Contributions to the Project
+
+      - Several Quansight employees contributed to the foundation of the Conda community (parallel but inspired by conda-forge).
+      - Quansight was contracted to lead the integrations of the `mamba` solver into `conda`.
+      - Anaconda chose Quansight to explore and implement a prototype architecture for the `conda` plugins system.
+      - Additional tooling that Quansight employees have created or contributed to:
+
+      ### Quansight Contributors
+
+      - [Anthony Scopatz](https://www.github.com/scopatz) core member and one of the main pillars of the organization for a number of years
+      - [Chris Ostrouchov](https://github.com/costrouc) maintains `conda-store`, a tool for building, managing and serving conda environments
+      - [Dharhas Pothina](https://www.github.com/dharhas) community member since inception, led efforts to improve geospatial packaging
+      - [Filipe Laíns](https://www.github.com/FFY00) designed the architecture for the `conda` plugin system
+      - [Gonzalo Peña-Castellanos](https://github.com/goanpeca), community member since its inception, authored Anaconda Navigator and `conda-incubator/setup-miniconda`, used daily by thousands of projects to deploy `conda` in their Github Actions CI pipelines
+      - [Ilan Schnell](https://github.com/ilanschnell) was one of the authors of `conda`, `conda-build`, `constructor` and other tools in the ecosystem in the early days of Anaconda
+      - [Jaime Rodríguez-Guerra](https://www.github.com/jaimergp) authored the `mamba` integrations for `conda` and modernized the `constructor` stack
+  - title: napari
+    image: /images/page-assets/napari-symbol.png
+    imageAlt: Napari Logo
+    link: https://github.com/napari/napari
+    linkText: Go to the project's page
+    shortDescription: In 2021, we added the preferences dialog to the UI, giving users a place to select
+      their preferences and persist them across napari sessions. Since then we have continued to add selections
+      to this dialog over the past year, and it’s been great to see the response and appreciation from
+      the napari users community!
+    longDescription: |-
+      ### Contributions to the Project
+
+      - Gonzalo
+      - Isabella
+      - Jaime
+      - Matthias
+      - Melissa
+      - Pam
+      - Tania
+
+      ### Quansight Contributors
+
+      - [Gonzalo Peña-Castellanos](https://www.github.com/goanpeca), Bundle Working Group
+      - [Isabela Presedo-Floyd](https://github.com/isabela-pf)
+      - [Jaime Rodríguez-Guerra](https://github.com/jaimergp), Bundle Working Group
+      - [Lucy Liu](https://github.com/lucyleeow), Visualization and Community Working Group
+      - [Matthias Bussonnier](https://github.com/carreau), Plugin Working Group
+      - [Melissa Weber Mendonça](https://github.com/melissawm), Documentation Working Group
+      - [Pam Wadhwa](https://github.com/ppwadhwa), Plugin working group & ABRF workflow tasks
+      - [Tania Allard](https://github.com/trallard)
+  - title: Numba
+    image: /images/page-assets/numba-icon.svg
+    imageAlt: Numba Logo
+    link: https://github.com/numba/numba
+    linkText: Go to the project’s page
+    shortDescription: Sometimes a small contribution is extremely meaningful to our users. Aaron's Bounds
+      check was a really good addition! It makes it easier to debug your code, and helps users to avoid
+      segmentation faults (segfaults).
+    longDescription: |-
+      ### Contributions to the Project
+
+      - Guilherme Leobas
+      - Pearu
+      - Aaron
+      - James Bourbeau
+
+      ### Quansight Contributors
+
+      - [Aaron Meurer](https://www.github.com/asmeurer)
+      - [Gagandeep Singh](https://github.com/czgdp1807)
+      - [Guilherme Leobas](https://www.github.com/guilhermeleobas)
+      - [James Bourbeau](https://www.github.com/jrbourbeau)
+      - [Pearu Peterson](https://www.github.com/pearu)
+  - title: Spyder IDE
+    image: /images/page-assets/spyder-symbol.svg
+    imageAlt: Spyder Logo
+    link: https://github.com/spyder-ide/spyder
+    linkText: Go to the project’s page
+    shortDescription: Developing the Spyder IDE is a never-ending but incredibly rewarding job, that has
+      led Spyder to become a widely used IDE for scientific programming and data science with Python.
+      Quansight Labs is proud to continuously sustain Spyder’s development, virtually since its inception.
+    longDescription: |-
+      ### Contributions to the Project
+
+      - Daniel
+      - Edgar
+      - Stephannie
+      - Isabela
+      - Carlos
+      - Gonzalo
+      - Juanita
+      - Everyone
+
+      ### Quansight Contributors
+
+      - [Carlos Cordoba](https://www.github.com/ccordoba12), Maintainer
+      - [Daniel Althviz](https://www.github.com/dalthviz), Maintainer
+      - [Edgar Margffoy](https://www.github.com/andfoy), Senior software developer
+      - [Gonzalo Peña-Castellanos](https://www.github.com/goanpeca), Former software developer
+      - [Isabela Presedo-Floyd](https://www.github.com/isabela-pf), Graphical and UX designer
+      - [Juanita Gomez](https://www.github.com/juanis2112), Former docs maintainer
+      - [Stephannie Jimenez](https://www.github.com/steff456), Software developer/Docs maintainer
+  - title: SymPy
+    image: /images/page-assets/sympy-icon.svg
+    imageAlt: SymPy Logo
+    link: https://github.com/sympy/sympy
+    linkText: Go to the project’s page
+    shortDescription: SymPy is quite large with over 1,000 public functions and methods, but the documentation
+      for parts of SymPy is often lacking. Particularly lacking are high-level user guides and tutorials.
+      Aaron's work is writing new documentation, with a focus on these high-level things.
+    longDescription: |-
+      ### Contributions to the Project
+
+      - Aaron has done general maintance up to 2021
+      - Since September 2021, Aaron is improving SymPy's documentation [supported by CZI EOSS cycle 4 grant](https://groups.google.com/g/sympy/c/vYsavewGj1w/m/CQKTSznPAgAJ), with [community guidance](https://www.sympy.org/sympy-docs-survey/2021-docs-survey.html).
+
+      ### Quansight Contributors
+
+      - [Aaron Meurer](https://github.com/asmeurer)
+  - title: stdlib
+    image: /images/page-assets/stdlib-symbol.svg
+    imageAlt: stdlib Logo
+    link: https://github.com/stdlib-js/stdlib
+    linkText: Go to the project's page
+    shortDescription: A fundamental tenet of stdlib is decomposability. Every bit of functionality needs
+      to be independently consumable and composable. Accordingly, one of our big initiatives has been
+      the atomization of stdlib, which has really driven adoption of the project by meeting web developers
+      where they are based on their needs and existing workflows and has allowed us to more fully embrace
+      the web platform as a whole.
+    longDescription: |-
+      ### Contributions to the Project
+
+      - Updated website with improved accessibility and support for search and offline access.
+      - Complex number support in ndarray functions.
+      - Cache oblivious loop generation for ndarray unary functions.
+      - Library decomposition into atomized packages.
+      - GitHub workflow automation and orchestration for managing >3000 organization repositories.
+      - [Quansight Open Source Directions (November, 2019)](https://www.youtube.com/watch?v=SYbp_dr8WWo)
+
+      ### Quansight Contributors
+
+      - [Athan Reines](https://github.com/kgryte)
+  - title: Cython
+    image: /images/page-assets/cython-symbol.svg
+    imageAlt: Cython Logo
+    link: https://github.com/cython/cython
+    linkText: Go to the project's page
+    shortDescription: Quansight Labs views the Cython project as critical infrastructure, and is working
+      to support it more generously.
+    longDescription: |-
+      ### Contributions to the Project
+
+      [Cython](https://cython.readthedocs.io/en/stable/index.html) is a core infrastructure project used by many other projects. As such, it is hard to garner attention since it is hidden away underneath more visible projects.
+
+      - Ralf has contributed to raising the profile of the project and helped write grant proposals for direct funding.
+
+      As a mature project, much of the work is in upgrading for changed and new compilers and platforms, new Python versions, and new Python features.
+
+      - Matti has been pushing to get [HPy](https://hpyproject.org/) support into Cython, which is a new way to interface C to Python. He has also helped to maintain and improve CI and documentation builds, and to enable [PyPy](https://pypy.org/) support for Cython.
+
+      ### Quansight Contributors
+
+      - [Ralf Gommers](https://github.com/rgommers)
+      - [Matti Picus](https://github.com/mattip)
+  - title: scikit-image
+    image: /images/page-assets/scikit-image-symbol.png
+    imageAlt: scikit-image Logo
+    link: https://github.com/scikit-image/scikit-image
+    linkText: Go to the project's page
+    shortDescription: The cross-project expertise at Quansight has facilitated a collaboration with SciPy
+      and scikit-learn maintainers on consistent user experience for handling array backends. A few exciting
+      things are work-in-progress, the Array API and array dispatching for example, which will enable
+      running scikit-image on GPUs, or use Dask for large data.
+    longDescription: |-
+      ### Contributions to the Project
+
+      - John Lee and Vinicius Cerutti worked on [automating the wheel release process](https://github.com/scikit-image/scikit-image/pull/5397). It has been in use for v0.18.3, and all v0.19.x releases, making the release process less painful and encouraging more frequent point releases. Greg later updated these workflows to include Python 3.10 and to also build wheels for Apple's new M1 processors.
+      - Jaime Rodríguez-Guerra implemented [the ability to run a benchmark comparison between a PR and the main branch](https://labs.quansight.org/blog/2021/08/github-actions-benchmarks/).
+      - Tania Allard was involved in project management and coordination with the DevOps team (John, Vinicius and Jaime).
+      - Greg Lee has been spending 50% of his time on the project during 2021-2022, and his highlights are:
+
+      ### Quansight Contributors
+
+      - [Greg Lee](https://www.github.com/grlee77), core member
+      - [Jaime Rodríguez-Guerra](https://github.com/jaimergp)
+      - [John Lee](https://github.com/leej3)
+      - [Tania Allard](https://github.com/trallard)
+      - [Vinicius Cerutti](https://github.com/viniciusdc)
+  - title: HoloViz
+    image: /images/page-assets/holoviz-icon.svg
+    imageAlt: HoloViz Logo
+    link: https://github.com/holoviz/holoviz
+    linkText: Go to the project’s page
+    shortDescription: Quansight has a long history of working closely with the HoloViz development team.
+      We have been active with several of their libraries, both as users and contributors and we look
+      forward to working with them again. Their communities are welcoming and engaging, and we were proud
+      to be a part of that. It’s a big part of why we recommend Holoviz tools and teach people to use
+      these libraries.
+    longDescription: |-
+      ### Contributions to the Project
+
+      - Kim and Pam joined the triage team to reduce backlog, 2020-2021.
+      - Kim and Pam attended weekly developers meetings, 2020-2021.
+      - Tony added [the ibis backend to holoviews](https://github.com/holoviz/holoviews/pull/4517).
+      - Pam added [a datashader option to the hvplot scattermatrix](https://github.com/holoviz/hvplot/pull/495).
+      - Active contributors and community member of Holoviews, Geoviews, Panel, and Param. Openning issues on Github, Questions on Discourse, and teaching people how to use these libraries, e.g. this blog by Pam on [how to build a Panel pipeline](https://www.quansight.com/post/building-a-panel-pipeline).
+
+      ### Quansight Contributors
+
+      - [Kim Pevey](https://github.com/kcpevey)
+      - [Pam Wadhwa](https://github.com/ppwadhwa)
+      - [Tony Fast](https://github.com/tonyfast)
+  - title: Elegy
+    image: /images/page-assets/elegy-symbol.svg
+    imageAlt: Elegy Logo
+    link: https://github.com/poets-ai/elegy
+    linkText: Go to project's page
+    shortDescription: Support for distributed training was added, which users can leverage via a single
+      line of code, and we are striving to provide a more flexible low-level API that can be particularly
+      useful for researchers.
+    longDescription: |-
+      ### Contributions to the Project
+
+      - Cristian refactored Elegy to use Treex and implemented distributed training using JAX's pmap.
+
+      ### Quansight Contributors
+
+      [Cristian Garcia](https://github.com/cgarciae)
+  - title: ndindex
+    image: /images/page-assets/ndindex-icon.svg
+    imageAlt: ndindex Logo
+    link: https://github.com/Quansight-Labs/ndindex
+    linkText: Go to the project’s page
+    shortDescription: ndindex includes a hypothesis testing suite to ensure testing and correctness.  We're
+      particularly proud of making correctness such a high priority for ndindex, and we hope our users
+      appriciate this as well.
+    longDescription: |-
+      ### Contributions to the Project
+
+      - ndindex was created by Aaron while at Quansight.
+      - ndindex includes [a hypothesis testing suite](https://quansight-labs.github.io/ndindex/#testing-and-correctness) to ensure testing and correctness.
+      - Anthony Scopatz and Melissa Mendonca also made a few small contributions that benefited the project.
+
+      ### Quansight Contributors
+
+      - [Aaron Meurer](https://github.com/asmeurer)
+  - title: Zarr
+    image: /images/page-assets/zarr-icon.svg
+    imageAlt: Zarr logo
+    link: https://github.com/zarr-developers/zarr-python
+    linkText: Go to the project’s page
+    shortDescription: Zarr has implementations across several programming languages and is used in multiple
+      research fields. With so many stakeholders, there is still an ongoing conversation about version
+      3 of the Zarr spec. Despite the possibility of future revisions, we have implemented the current
+      draft Zarr v3 spec for Zarr-Python in order to advance community discussions, and to begin testing
+      with downstream Python projects such as Dask, Xarray and Napari.
+    longDescription: |-
+      - Matthias Bussonier and Greg Lee worked on implementation of the [Zarr version 3 specification in zarr-python](https://zarr-specs.readthedocs.io/en/core-protocol-v3.0-dev/protocol/core/v3.0.html).
+      - Matthias Bussonier was involved in a number of other general maintenance PRs. He also updated the CI tests in some of downstream projects like Napari, Xarray, and Dask so that their test suites runs against a development branch of Zarr. This will help Zarr-Python avoid potentially breaking these projects when adding new features.
+      - Greg Lee made a number of [improvements to the zarr_implementations repository](https://github.com/zarr-developers/zarr_implementations/) which runs tests on implementations of the Zarr spec from multiple programming languages. For example, there are Python, C++, Java, Rust, and Javascript implementations of the Zarr spec. This repository now runs basic tests such as writing a simple Zarr array with each library and then reading it back in with a different library. This already helped resolve some bugs across projects. Test cases were updated to add testing of version 3 spec where implemented and to test with both flat and nested file storage formats.

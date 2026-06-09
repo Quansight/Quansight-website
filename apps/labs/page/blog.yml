@@ -1,0 +1,10 @@
+# Generated from Storyblok export. Edit freely.
+slug: blog
+blocks:
+- type: hero
+  image: null
+  imageAlt: ''
+  title: ''
+  subTitle: ''
+  variant: medium
+  objectFit: cover

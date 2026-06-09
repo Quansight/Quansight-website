@@ -1,0 +1,15 @@
+# Generated from Storyblok export. Edit freely.
+slug: terms-and-conditions
+blocks:
+- type: hero
+  image: /images/page-assets/hero-placeholder.webp
+  imageAlt: hero placeholder
+  title: ''
+  subTitle: ''
+  variant: small
+  objectFit: cover
+- type: statute
+  title: Terms and Conditions for Labs
+  sections:
+  - title: Introduction
+    text: Sampel description
