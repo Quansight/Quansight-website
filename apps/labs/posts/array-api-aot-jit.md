@@ -22,7 +22,7 @@ A prime example in scientific computing and data science is NumPy,
 which provides the array abstraction, and performs internal looping over the array
 data in C. 
 
-Historically, NumPy is geared towards a single-core CPU execution. The surge of popularity
+Historically, NumPy is geared towards a single-core CPU execution. The surge in popularity
 of hardware accelerators, such as GPUs, gave rise to multiple array libraries--CuPy, PyTorch, JAX and others--which
 encapsulate the compute power of accelerators
 (which NumPy itself does not harness) within the NumPy-like array interface. 
@@ -30,23 +30,23 @@ encapsulate the compute power of accelerators
 Recent efforts of making general purpose libraries--SciPy and scikit-learn--use
 alternative array providers via the [Array API](https://data-apis.org/array-api/latest/) demonstrated
 significant [performance improvements](https://labs.quansight.org/blog/array-api-meta-blogpost).
-For end users, speedups of an order or
-magnitude or more come "for free", from simply feeding correct arrays types to familiar
+For end users, speedups of an order of
+magnitude or more come "for free", from simply feeding correct arrays types to, for example, familiar
 scikit-learn estimators.
 For library developers, the work is to replace NumPy calls with their
 [Array API analogs](https://data-apis.org/array-api/draft/tutorial_basic.html).
 This way, all low-level details of CUDA programming are
-fully contained at the array library level (CuPy, PyTorch) and do not leak to either
-high-level library (SciPy, scikit-learn) or the end user.
+fully contained at the array library level (e.g., CuPy, PyTorch) and do not leak to either
+high-level library (e.g., SciPy, scikit-learn) or the end user.
 
 This approach works extremely well for computational pipelines implemented as vectorized python
-operations on arrays. This is not the full story however: Significant parts of user
+operations on arrays. This is not the full story however; significant parts of user
 libraries contain specialized compiled extensions for operations which are still too slow
-in pure python plus vectorized array manipulations, or are too awkward to implement in
-pure python. How to deal with these kinds of situations is a big open question is: the
+in pure python and vectorized array manipulations, or are too awkward to implement in
+pure python. How to deal with these kinds of situations is a big open question: the
 existing body of C extensions is naturally CPU-only, and one cannot expect that
 scikit-learn maintains both CPU and CUDA C kernels. Simply porting all C code
-to CUDA is also out of question: there is user demand for all of single- and
+to CUDA is also out of question: there is user demand across single- and
 multi-core CPU compute, CUDA, and other types of hardware accelerators, such as
 ROCm or TPU---and the hardware landscape itself changes rapidly.
 
@@ -79,7 +79,7 @@ to the second section).
 <a name="details"></a>
 
 We consider the [`RBFInterpolator` object](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.RBFInterpolator.html) from `scipy.interpolate`. Note that we deliberately benchmark
-the behavior of a real production object, as (implemented in SciPy version 1.17)[https://github.com/scipy/scipy/blob/v1.17.0/scipy/interpolate/_rbfinterp.py#L62-L540], not a toy example.
+the behavior of a real production object, as [implemented in SciPy version 1.17](https://github.com/scipy/scipy/blob/v1.17.0/scipy/interpolate/_rbfinterp.py#L62-L540), not a toy example.
 
 In this section, we start with a brief outline of the mathematics that `RBFInterpolator`
 implements, then discuss the baseline implementation and its Array API compatible
@@ -221,7 +221,7 @@ evaluate_jax = jax.jit(evaluate_xp, static_argnames=["xp"])
 
 Both `torch.compile` and `jax.jit` are _tracing_ compilers: they analyze the types of
 variables in the running program, and replace python operations on these variables
-with their efficient low-level analogs. This way they manage to convert to machine code
+with their efficient low-level analogs. This way they manage to convert to machine code,
 our backend-generic `evaluate_xp` function which uses the runtime-defined `xp` argument.
 
 The very fact that invoking this kind of highly non-trivial machinery fits in a single
@@ -254,7 +254,7 @@ scripts and results are available [in this repository](https://github.com/ev-br/
 
 ## Benchmarks on a CPU
 
-While `numpy` execution is single-threaded even on a multi-core machine,`torch` and `jax`
+While `numpy` execution is single-threaded even on a multi-core machine, `torch` and `jax`
 internally use multiple cores by default. Therefore, we run benchmarks twice:
 once on a consumer-grade laptop with 4-core Intel i5 processor, and then on a beefy 32-core
 AMD Ryzen Threadripper 3970X system.
@@ -277,8 +277,8 @@ In the JIT mode however (right-hand panel), Jax and PyTorch are 3-5 times faster
 the AOT `pythran`-compiled implementation.
 The origin of the speedup relative to `pythran` is not very clear; a potential factor is that both
 Jax and PyTorch are multi-threaded by default, while `pythran`-compiled code is single-threaded.
-(in principle, `pythran` can generate OpenMP parallel loops, but it is switched off
-in the SciPy build system).
+In principle, `pythran` can generate OpenMP parallel loops, but it is switched off
+in the SciPy build system.
 
 Surprisingly, `numba` fares much worse than `jax.jit` or `torch.compile`, and is about
 three times slower than the AOT-compiled pythran version --- even though we explicitly
@@ -297,7 +297,7 @@ In the eager mode, Jax seems to parallelize a little better than other backends:
 faster than the (single-threaded!) AOT-compiled `numpy`/`pythran` code, while PyTorch is about 2x-3x slower.
 So just throwing more CPU cores does not make things much faster by itself.
 
-In the JIT mode however, we get massive speed-ups: `jax` performs about 15 times better, with `torch` trailing with a speedup of about 10x.
+In the JIT mode however, we get massive speed-ups: `jax` performs about 15 times better, with `torch` trailing at a speedup of about 10x.
 
 `numba` is seen to improve with increased CPU count, and on 32 CPU cores performs within 30% of the (single-threaded) AOT version.
 
@@ -307,7 +307,7 @@ In the JIT mode however, we get massive speed-ups: `jax` performs about 15 times
 Since parallelization shows to play a non-trivial role, we also perform an apples-to-apples benchmark run, where
 we force a single-threaded execution for all backends (in fact, forcing single threading
 is [not entirely straightforward](#single_core_stanza)). Below we display the *slowdown* of a single-core
-execution versus a default on 32 cores.
+execution versus default parallelization on 32 cores.
 
 
 ![Benchmark results for a single-core vs 32-core execution](/posts/array-api-aot-jit/single_core_bench.png) 
@@ -334,7 +334,7 @@ libraries. On machine with a GeForce RTX 2060 accelerator we obtain the followin
 ![Benchmark results on a CUDA GPU](/posts/array-api-aot-jit/gpu_bench.png) 
 
 Overall, performance benefits from using CUDA device are massive.
-In the JIT mode, PyTorch delivers up to 40x speed-up relative to the baseline `numpy`/`pythran` AOT on CPU, while Jax delivers up to 20x. (Curiously, Jax wins on multicore CPUs, while PyTorch seems to utilize a CUDA device better).
+In the JIT mode, PyTorch delivers up to 40x speed-up relative to the baseline `numpy`/`pythran` AOT on CPU, while Jax delivers up to 20x. Curiously, Jax wins on multicore CPUs, while PyTorch seems to utilize a CUDA device better.
 
 The difference between eager and jit modes is not as pronounced on CUDA as it is on a multicore CPU
 (with `torch`: on CPU, jitting changes the speedup from 1.6x to 16x, while on CUDA eager it gives 25x, and invoking JIT
@@ -361,7 +361,7 @@ There is no single best JIT technology: performance characteristics of `jax.jit`
 - `torch.compile` hardcodes the number of threads at compile time, and uses a cached value which it stores somewhere on the file system. As a result, jit-compiled code may or may not react to attempts to control threading at runtime.
   See [this pytorch issue](https://github.com/pytorch/pytorch/issues/160812) for details.
 
-- <a name="numba"></a> Out of three JIT technologies we considered, `numba` is the most established, and I expected it to be the most mature. Alas, it turned out to be underwhelming on multiple counts. First of all, it required quite a bit more effort to get working. Attempting to compile a "vectorized" implementation runs into unexpected gaps in functionality (for instance, `np.prod(..., axis=-1)` does compile, and [a related feature request](https://github.com/numba/numba/issues/1269) has been open since 2015.) In effect, `numba` requires to rewrite code in a fairly specific, low-level "loopy" coding style. Second, controlling parallelism requires source code changes, too, and it is very easy to run into massive oversubscription. And even after rewriting the sources in the numba way, the performance is still trailing the performance of other JIT compilers by a large margin. While I absolutely am not claiming to be a numba expert, and it is full well possible that further code tweaks unlock stellar performance, in this experiment I did not manage to. 
+- <a name="numba"></a> Out of the three JIT technologies we considered, `numba` is the most established, and I expected it to be the most mature. Alas, it turned out to be underwhelming on multiple counts. First of all, it required quite a bit more effort to get working. Attempting to compile a "vectorized" implementation runs into unexpected gaps in functionality (for instance, `np.prod(..., axis=-1)` does compile, and [a related feature request](https://github.com/numba/numba/issues/1269) has been open since 2015.) In effect, `numba` requires to rewrite code in a fairly specific, low-level "loopy" coding style. Second, controlling parallelism requires source code changes, too, and it is very easy to run into massive oversubscription. And even after rewriting the sources in the numba way, the performance is still trailing the performance of other JIT compilers by a large margin. While I absolutely am not claiming to be a numba expert, and it is full well possible that further code tweaks unlock stellar performance, in this experiment I did not manage to. 
 
 - While `numba` nudges a developer towards using explicit loops, other JIT compilers rather strongly favor the alternative,
 "vectorized" code style. `jax.jit` frowns on conditionals, branching and data-dependent control flow in general; `torch.compile` by design fully unrolls all explicit loops. For vectorized code however, both `jax.jit` and `torch.compile` do generate efficient native code, and eliminate temporaries from constructions like [`evaluate_xp`](#generic) which are memory-bound in eager mode. 
@@ -388,7 +388,7 @@ However even though a stellar performance improvement is not guaranteed, the eff
 JIT versus developing more traditional compiled CUDA kernels, and it is hard to not recommend at least trying out the Array API + JIT based approach (potentially, as a time-boxed experiment).
 
 From a library maintainer perspective, using mixed JIT/AOT implementation poses several open questions.
-First of all, what is the public interface for JITting, especially for stateful objects like scikit-learn estimators?
+First of all, what is the public interface for JIT-ing, especially for stateful objects like scikit-learn estimators?
 In this experiment, we were reaching into private implementation details of the `RBFInterpolator` object, which works for one-off experimentation, but is not something a library can recommend for its general user base. 
 At the time of writing, there is no universally-agreed upon answer, and the discussions are ongoing ([here is one example](https://github.com/data-apis/array-api-extra/issues/523)).
 
