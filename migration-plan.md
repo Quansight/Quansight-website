@@ -192,21 +192,25 @@ branch give us side-by-side comparison with production; no parallel
 directory needed.
 
 1. ~~**Branch off** the extraction branch: `git checkout -b astro-migration`~~ — **done.**
-2. **Scaffold Astro inside `apps/labs/`**: install Astro deps, add
-   `astro.config.mjs`, set up `src/` structure. Tear out Next.js
-   (`next.config.*`, the `pages/` or `app/` router dir, `next-env.d.ts`).
-3. **Wire Astro Content Collections** to read the content we've already
-   extracted: `apps/labs/people/*.md`, `apps/labs/page/*.yml`,
-   `apps/labs/data/*.{yml,json}`. Define schemas in `src/content/config.ts`
-   so frontmatter is typed.
-4. **Port React block components** from `apps/labs/components/`. Most stay
-   as React components. Presentational blocks (`Hero`, `Logos`, `Team`,
-   `Teaser`, `Statute`, `PageHeading`, `ColumnArticle`, `Projects`) render
-   to plain HTML at build time. `Form` and `Video` hydrate as islands only
-   where present (currently nowhere).
-
-   Components land in `src/components/`. Key changes vs. the original
-   `libs/shared/ui-components/` + `apps/labs/components/` sources:
+2. ~~**Scaffold Astro inside `apps/labs/`**~~ — **done.**
+   - `apps/labs/package.json` — standalone Astro package (no Nx); run from this dir
+   - `astro.config.mjs` — React + MDX integrations, `remark-math` + `rehype-katex` for blog posts
+   - `tailwind.config.cjs`, `postcss.config.cjs` — CJS-safe copies; originals removed
+   - `tsconfig.json` — extends `astro/tsconfigs/strict`
+   - `src/styles/global.css` — Tailwind directives + custom classes
+   - `src/layouts/BaseLayout.astro` — Google Fonts, KaTeX CSS, `text-[62.5%]` on `<html>`
+   - Dynamic blog post route injected via `astro.config.mjs` `injectRoute` (pattern
+     `/blog/[post]` → `src/templates/BlogPost.astro`) to avoid brackets in filenames.
+   - Dev workflow: `docker run --rm -it -v "$PWD":/app -w /app/apps/labs -p 4321:4321 --user node node:22-alpine sh` then `npm install && npm run dev -- --host 0.0.0.0`
+3. ~~**Wire Astro Content Collections**~~ — **done.**
+   - `src/content.config.ts` uses Astro 5 Content Layer API (`glob` loader).
+   - `people` collection → `./people/*.md` (106 records, typed schema)
+   - `pages` collection → `./page/*.yml` (6 pages, loose block schema with `.passthrough()`)
+   - `posts` collection → `./posts/*.{md,mdx}` (162 posts; `hero` field is `z.record` to
+     accommodate both simple `imageSrc/imageAlt` and responsive `imageDesktop/Mobile/Tablet` variants)
+   - All content stays at its current path — no files moved.
+4. ~~**Port React block components**~~ — **done.** `src/components/`
+   All 10 block types ported. Key changes vs. original sources:
 
    | Change | Affects |
    |---|---|
@@ -219,15 +223,35 @@ directory needed.
    | People list injected from Content Collections | `Team` — Astro page fetches people, filters by role, passes array in |
    | `HeroResponsiveImages` dropped | No page YAML uses responsive-image hero variant |
    | `@quansight/shared/*` monorepo imports removed | All — components are self-contained in `src/components/` |
-5. **Port the design system** — CSS / Tailwind config / tokens / fonts —
-   from the existing app.
-6. **Build routes**: `/`, `/team`, `/blog`, `/blog/[slug]`, `/projects`,
-   `/privacy-policy`, `/terms-and-conditions`. Blog post pipeline reads
-   from existing `apps/labs/post/`.
+   | `ProjectsItem` uses `client:load` | Only interactive component — accordion toggle |
+   | `CH.Code` stubbed in `src/components/Blog/CodeHike.tsx` | 10 posts use Code Hike; stub renders nothing; upgrade to Code Hike v1 + Astro integration deferred |
+
+   `src/components/BlockRenderer.astro` dispatches each page block to the right component.
+5. ~~**Port the design system**~~ — **done.**
+   - Google Fonts (Inter, Mukta, Fira Code) and KaTeX CSS loaded in `BaseLayout.astro`
+   - `html { font-size: 62.5% }` (`text-[62.5%]`) set on `<html>` — all components use rem units based on this
+   - Tailwind theme (colors, fonts, spacing) in `tailwind.config.cjs` — unchanged from original
+6. ~~**Build routes**~~ — **done.** 168 pages build clean.
+   - `src/pages/index.astro` → `/`
+   - `src/pages/team.astro` → `/team`
+   - `src/pages/projects.astro` → `/projects`
+   - `src/pages/privacy-policy.astro` → `/privacy-policy`
+   - `src/pages/terms-and-conditions.astro` → `/terms-and-conditions`
+   - `src/pages/blog/index.astro` → `/blog` (lists all posts, sorted by date; no pagination yet)
+   - `src/templates/BlogPost.astro` → `/blog/<post>` (injected route, no brackets in filename)
+   - Blog authors resolved from `people` collection by slug at build time.
+   - Math rendering: `remark-math` + `rehype-katex`; KaTeX CSS already in layout.
+   - Blog pagination, category filtering, featured-post layout, and RSS feed added.
+     - `src/components/Blog/BlogList.tsx` — React island; 9 posts/page, category buttons, prev/next pagination
+     - `src/pages/rss.xml.ts` — static RSS 2.0 endpoint (no extra deps; raw XML)
 7. **Deploy to a Vercel preview** (automatic per branch push), visual-diff
    against production.
-8. **Remove the Storyblok integration entirely** in the same branch:
-   queries, codegen, env vars, preview middleware, Vercel webhook.
+8. **Remove the Storyblok/Next.js/Nx integration** in the same branch:
+   `apps/labs/pages/`, `apps/labs/api/`, `apps/labs/services/`, `apps/labs/types/`,
+   `apps/labs/middleware.ts`, `apps/labs/next.config.js`, `apps/labs/next-env.d.ts`,
+   `apps/labs/jest.config.ts`, `apps/labs/project.json`, `apps/labs/index.d.ts`,
+   `apps/labs/components/` (old BlokProvider etc.), `libs/`, root `package.json` Nx deps,
+   `codegen-labs.yml`, `.env` Storyblok tokens, Storyblok webhook in Vercel.
 9. **Merge to main**, monitor production, decommission Storyblok
    subscription after a 2–4 week grace period.
 
@@ -240,10 +264,18 @@ in `@astrojs/vercel` at that point. Trivial change.
 the port to Astro's default 4321:
 
 ```bash
-docker run --rm -it -v "$PWD":/app -w /app -p 4321:4321 \
+DOCKER_API_VERSION=1.42 docker run --rm -it -v "$PWD":/app -w /app/apps/labs -p 4321:4321 \
   --user node node:22-alpine sh
-# inside container, from apps/labs:
+# inside container:
 npm install && npm run dev -- --host 0.0.0.0
+```
+
+**Docker build check** (verify the site compiles cleanly; run as root so Vite
+can write `dist/`):
+
+```bash
+DOCKER_API_VERSION=1.42 docker run --rm -v "$PWD":/app -w /app/apps/labs \
+  node:22-alpine sh -c "npm run build 2>&1"
 ```
 
 ---

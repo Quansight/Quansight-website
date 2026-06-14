@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { Picture } from '../Picture';
 import { ColumnArticleHeader } from './ColumnArticleHeader';
-import { md } from '../../utils/markdown';
+import { mdColumn } from '../../utils/markdown';
 
 type ColumnArticleProps = {
   header?: string;
@@ -15,13 +15,13 @@ type ColumnArticleProps = {
   final?: string;
 };
 
-const ColumnSection: FC<{ content?: string }> = ({ content }) => {
+const ColumnSection: FC<{ content?: string; headingLevelModifier: number }> = ({
+  content,
+  headingLevelModifier,
+}) => {
   if (!content) return null;
   return (
-    <div
-      className="my-[3rem] text-[1.6rem] leading-[2.7rem] text-black prose max-w-none"
-      dangerouslySetInnerHTML={md(content)}
-    />
+    <div dangerouslySetInnerHTML={mdColumn(content, headingLevelModifier)} />
   );
 };
 
@@ -34,6 +34,7 @@ export const ColumnArticle: FC<ColumnArticleProps> = ({
   final,
 }) => {
   const columnClass = 'box-border md:w-[47%]';
+  const headingLevelModifier = header ? 1 : 0;
 
   return (
     <article className="py-[8rem] px-[2.2rem] mx-auto sm:px-[4.3rem] xl:px-[18rem] max-w-layout">
@@ -44,13 +45,13 @@ export const ColumnArticle: FC<ColumnArticleProps> = ({
       )}
       <div className="flex flex-wrap justify-between">
         <section className={clsx(columnClass, 'order-1')}>
-          <ColumnSection content={leftColumn} />
+          <ColumnSection content={leftColumn} headingLevelModifier={headingLevelModifier} />
         </section>
         <section className={clsx(columnClass, 'order-4 md:order-2')}>
-          <ColumnSection content={rightColumn} />
+          <ColumnSection content={rightColumn} headingLevelModifier={headingLevelModifier} />
         </section>
         <section className={clsx(columnClass, 'order-3')}>
-          <ColumnSection content={final} />
+          <ColumnSection content={final} headingLevelModifier={headingLevelModifier} />
         </section>
         <section
           className={clsx(

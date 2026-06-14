@@ -1,0 +1,97 @@
+---
+import { getCollection, render } from 'astro:content';
+
+import { CH } from '../components/Blog/CodeHike';
+import { Hero } from '../components/Hero';
+import { Picture } from '../components/Picture';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { post: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const allPeople = await getCollection('people');
+const peopleBySlug = Object.fromEntries(
+  allPeople.map((e) => [e.id, e.data]),
+);
+
+const authors = post.data.authors.map((s) => {
+  const p = peopleBySlug[s];
+  return {
+    slug: s,
+    fullName: p ? `${p.firstName} ${p.lastName}` : s,
+    nickName: p?.githubNick ?? s,
+    image: p?.image ?? null,
+    imageAlt: p?.imageAlt ?? s,
+  };
+});
+---
+
+<BaseLayout
+  title={`${post.data.title} — Quansight Labs`}
+  description={post.data.description}
+>
+  {post.data.hero?.imageSrc && (
+    <Hero
+      image={post.data.hero.imageSrc as string}
+      imageAlt={(post.data.hero.imageAlt as string) ?? ''}
+      variant="medium"
+      objectFit="cover"
+    />
+  )}
+
+  <article class="pt-[7.5rem] pb-[11.4rem] mx-auto w-[95%] max-w-[100.17rem] md:w-[85%] xl:w-[70%]">
+    <a
+      href="/blog"
+      class="inline-flex items-center gap-2 text-[1.4rem] font-bold text-violet underline mb-[1.8rem]"
+    >
+      ← Back to blog
+    </a>
+
+    <h1 class="mb-[5rem] text-[4.8rem] font-extrabold leading-[5.3rem] font-heading text-violet">
+      {post.data.title}
+    </h1>
+    <p class="pb-[3rem] text-[1.4rem] leading-[2.7rem] text-black">
+      Published {post.data.published}
+    </p>
+
+    <div class="mb-[5rem] grid grid-cols-1 gap-4 gap-y-6 sm:grid-cols-2 md:grid-cols-3">
+      {authors.map((author) => (
+        <div>
+          <div class="flex items-center">
+            <div class="overflow-hidden mr-[0.8rem] w-[54px] h-[54px] rounded-[50%]">
+              {author.image && (
+                <img
+                  src={author.image}
+                  alt={author.nickName}
+                  width="54"
+                  height="54"
+                  style="object-fit:cover;aspect-ratio:54/54;"
+                />
+              )}
+            </div>
+            <div>
+              <p class="text-[1.4rem] font-normal leading-[2.7rem] text-black text-sans">
+                {author.nickName}
+              </p>
+              <p class="text-[1.9rem] font-bold leading-[2.7rem] text-black text-sans">
+                {author.fullName}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="w-full max-w-none prose prose-code:text-[.95em] prose-code:font-normal prose-a:underline-offset-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-transparent prose-code:border-none hover:prose-a:text-violet focus:prose-a:text-violet prose-code:text-violet-code prose-code:font-code">
+      <Content components={{ CH, Picture }} />
+    </div>
+  </article>
+</BaseLayout>

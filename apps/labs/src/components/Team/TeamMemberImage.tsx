@@ -20,7 +20,10 @@ export const TeamMemberImage: FC<TeamMemberImageProps> = ({
       width={200}
       height={shape === 'square' ? 200 : 280}
       className="brightness-110 grayscale"
-      style={{ objectFit: 'cover' }}
+      style={{
+        objectFit: 'cover',
+        aspectRatio: `200 / ${shape === 'square' ? 200 : 280}`,
+      }}
     />
     <span className="absolute top-0 left-0 w-full h-full opacity-25 z-2 bg-violet" />
   </div>

@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 
 interface Props {
   title?: string;
@@ -29,6 +31,10 @@ const { title = 'Quansight Labs', description = '' } = Astro.props;
     />
   </head>
   <body>
-    <slot />
+    <SiteHeader />
+    <main id="maincontent">
+      <slot />
+    </main>
+    <SiteFooter />
   </body>
 </html>

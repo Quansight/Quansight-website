@@ -5,8 +5,14 @@ import clsx from 'clsx';
 type HeroVariant = 'small' | 'medium' | 'large' | 'large-overlapping' | 'medium-overlapping';
 
 type HeroProps = {
-  image: string;
+  image?: string;
   imageAlt: string;
+  imageDesktop?: string;
+  imageTablet?: string;
+  imageMobile?: string;
+  objectFitDesktop?: 'cover' | 'contain';
+  objectFitTablet?: 'cover' | 'contain';
+  objectFitMobile?: 'cover' | 'contain';
   title?: string;
   subTitle?: string;
   variant: HeroVariant;
@@ -16,11 +22,19 @@ type HeroProps = {
 export const Hero: FC<HeroProps> = ({
   image,
   imageAlt,
+  imageDesktop,
+  imageTablet,
+  imageMobile,
+  objectFitDesktop,
+  objectFitTablet,
+  objectFitMobile,
   title,
   subTitle,
   variant,
   objectFit = 'cover',
 }) => {
+  const isResponsive = imageDesktop || imageTablet || imageMobile;
+  const responsiveFit = objectFitDesktop ?? objectFitTablet ?? objectFitMobile ?? 'contain';
   const isLarge = variant === 'large' || variant === 'large-overlapping';
   const isMedium = variant === 'medium' || variant === 'medium-overlapping';
   const isSmall = variant === 'small';
@@ -37,7 +51,28 @@ export const Hero: FC<HeroProps> = ({
       )}
     >
       <div className="relative mx-auto h-full max-w-layout">
-        {image && (
+        {isResponsive ? (
+          <picture style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
+            {imageDesktop && (
+              <source media="(min-width: 1024px)" srcSet={imageDesktop} />
+            )}
+            {imageTablet && (
+              <source media="(min-width: 768px)" srcSet={imageTablet} />
+            )}
+            {(imageMobile || imageDesktop || imageTablet) && (
+              <img
+                src={imageMobile ?? imageTablet ?? imageDesktop}
+                alt={imageAlt}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: responsiveFit,
+                  objectPosition: 'center',
+                }}
+              />
+            )}
+          </picture>
+        ) : image ? (
           <img
             src={image}
             alt={imageAlt}
@@ -50,7 +85,7 @@ export const Hero: FC<HeroProps> = ({
               objectPosition: 'center',
             }}
           />
-        )}
+        ) : null}
         {title && (
           <div
             className={clsx(

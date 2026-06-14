@@ -1,10 +1,18 @@
 # Generated from Storyblok export. Edit freely.
 slug: blog
+title: Posts, articles and tutorials
+description: The Labs team shares their news, updates, and knowledge
 blocks:
 - type: hero
-  image: null
-  imageAlt: ''
+  image: /images/page-assets/blog-hero-desktop.svg
+  imageAlt: An illustration of a white hand holding up a microphone.
+  imageDesktop: /images/page-assets/blog-hero-desktop.svg
+  imageTablet: /images/page-assets/blog-hero-tablet.svg
+  imageMobile: /images/page-assets/blog-hero-mobile.svg
   title: ''
   subTitle: ''
   variant: medium
   objectFit: cover
+  objectFitDesktop: contain
+  objectFitTablet: contain
+  objectFitMobile: contain

@@ -1,0 +1,14 @@
+---
+import { getEntry } from 'astro:content';
+
+import BlockRenderer from '../components/BlockRenderer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const page = await getEntry('pages', 'projects');
+---
+
+<BaseLayout title="Projects — Quansight Labs">
+  {page?.data.blocks.map((block) => (
+    <BlockRenderer block={block} />
+  ))}
+</BaseLayout>

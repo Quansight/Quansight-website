@@ -1,0 +1,52 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+
+import BlockRenderer from '../../components/BlockRenderer.astro';
+import { BlogList } from '../../components/Blog/BlogList';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import categories from '../../../posts/categories.json';
+
+const page = await getEntry('pages', 'blog');
+const allPosts = await getCollection('posts');
+const allPeople = await getCollection('people');
+
+const peopleBySlug = Object.fromEntries(
+  allPeople.map((e) => [e.id, e.data]),
+);
+
+const posts = allPosts
+  .filter((p) => p.data.published)
+  .sort((a, b) => new Date(b.data.published).getTime() - new Date(a.data.published).getTime())
+  .map((post) => ({
+    id: post.id,
+    title: post.data.title,
+    published: post.data.published,
+    authors: post.data.authors
+      .map((s) => {
+        const p = peopleBySlug[s];
+        return p ? `${p.firstName} ${p.lastName}` : s;
+      })
+      .join(', '),
+    featuredImage: post.data.featuredImage,
+    categories: post.data.category,
+  }));
+---
+
+<BaseLayout
+  title="Blog — Quansight Labs"
+  description={page?.data.description}
+>
+  {page?.data.blocks.map((block) => (
+    <BlockRenderer block={block} />
+  ))}
+
+  <div class="pt-[3rem] mx-auto w-[95%] max-w-[83rem] md:w-[85%] xl:w-[70%]">
+    {page?.data.title && (
+      <h2 class="text-[2.4rem] font-extrabold leading-[4.9rem] text-violet font-heading">
+        {page.data.title}
+      </h2>
+    )}
+  </div>
+
+  <BlogList posts={posts} categories={categories} client:load />
+</BaseLayout>
