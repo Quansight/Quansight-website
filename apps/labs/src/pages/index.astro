@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const people = await getCollection('people');
+const pages = await getCollection('pages');
+---
+
+<BaseLayout title="Quansight Labs">
+  <main class="p-8">
+    <h1 class="text-3xl font-heading text-violet mb-4">Quansight Labs</h1>
+    <p class="text-gray-100">
+      Astro scaffold in progress — {people.length} people and {pages.length} pages loaded.
+    </p>
+  </main>
+</BaseLayout>
