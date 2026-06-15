@@ -1,13 +1,24 @@
-In this project we are using the [Nx build system](https://nx.dev/getting-started/intro)
+# Architecture
 
-/apps/ - folder to keep source code of [applications](https://nx.dev/structure/applications-and-libraries#applications-and-libraries)
+`apps/labs/` — Quansight Labs site (Astro, static output)
 
-/apps/consulting - source code of Quansight Consulting application
-/apps/labs - source code of Quansight LCC application
+- `src/` — Astro pages, layouts, components, templates
+- `posts/` — blog post markdown files
+- `people/` — team member markdown files
+- `page/` — page content YAML files (home, blog, team, projects, …)
+- `data/` — site-wide data: `header.yml`, `footer.yml`, `projects.json`, `person-roles.json`
+- `public/` — static assets (images, icons, fonts)
+- `astro.config.mjs` — Astro config (React + MDX integrations, injected blog route)
+- `tailwind.config.cjs` — Tailwind theme (colors, fonts, spacing)
 
-/libs/ - [shared libraries](https://nx.dev/structure/grouping-libraries#sharing-libraries) used by the above applications
-/tools - [workspace generators](https://nx.dev/generators/workspace-generators#workspace-generators)
+`apps/consulting/` — Quansight Consulting site (Next.js)
 
-/.vscode - Workspace settings as well as debugging and task configurations are stored at the root in a .vscode folder.
-/.husky - Husky is a JavaScript package that allows you to run some code during various parts of your git workflow.
-/.github - directory houses workflows, issue templates, pull request templates, funding information, and some other files specific to that project.
+`storyblok-extraction-scripts/` — one-time scripts used to export content from Storyblok into this repo
+
+`examples/` — sample blog post templates for new contributors
+
+`.husky/` — pre-commit hook: runs `lint-staged` (Prettier on staged files)
+
+`.github/` — Dependabot config and issue templates
+
+`vercel.json` — overrides Vercel build to use `apps/labs/` as root
