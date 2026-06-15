@@ -4,16 +4,17 @@
 
 ## Executive Summary
 
-*Write last. Working draft:*
+_Write last. Working draft:_
 
 > Over the past 12 months, the Quansight Labs site has received 35 content
 > edits — roughly 90% of them roster changes (staff joining or leaving).
 > Pages and site chrome received 4 edits combined. We propose moving all
 > content into the git repository, replacing the Storyblok + GraphQL codegen
-> + Nx + Next.js stack with **Astro** consuming file-based content, and
-> consolidating site ownership in the engineering team. Estimated effort:
-> 2–4 focused engineering days. Ongoing maintenance burden for editors is
-> comparable to today, with content edits flowing through PRs.
+>
+> - Nx + Next.js stack with **Astro** consuming file-based content, and
+>   consolidating site ownership in the engineering team. Estimated effort:
+>   2–4 focused engineering days. Ongoing maintenance burden for editors is
+>   comparable to today, with content edits flowing through PRs.
 
 ## Strategic Context
 
@@ -34,8 +35,8 @@ it gets folded in afterward as part of the unification work.
   - **7** `page` records
   - **1** `header` singleton
   - **1** `footer` singleton
-- **2 datasources** — *TODO: list slugs and what they hold*
-- **2 content folders** — *TODO: confirm structure (likely `team/` and pages tree)*
+- **2 datasources** — _TODO: list slugs and what they hold_
+- **2 content folders** — _TODO: confirm structure (likely `team/` and pages tree)_
 - **254 assets** — images and uploads referenced from content
 - **38 block schemas defined** — only 10 are user-facing top-level types
   (the `ComponentType` enum); the remaining 28 are sub-blocks and config
@@ -52,12 +53,12 @@ stays after migration — only the data source changes.
 
 ### 1.3 How Storyblok has actually been used (past 12 months)
 
-| Surface | Edits in past 12 months |
-|---|---:|
-| Person records | ~31 |
-| Pages (`team`, `home` — same session, 2026-04-30) | 2 |
-| Header + footer (both, Dec 2025) | 2 |
-| **Total** | **~35** |
+| Surface                                           | Edits in past 12 months |
+| ------------------------------------------------- | ----------------------: |
+| Person records                                    |                     ~31 |
+| Pages (`team`, `home` — same session, 2026-04-30) |                       2 |
+| Header + footer (both, Dec 2025)                  |                       2 |
+| **Total**                                         |                 **~35** |
 
 - ~80 of 115 stories untouched in past year
 - Initial build phase: Jun 2022 – Oct 2023 (~60 edits, including a 34-edit
@@ -69,24 +70,24 @@ for a list of 106 people, with rare touch-ups to otherwise-static pages.
 
 ### 1.4 Active users
 
-*TODO: from Storyblok admin → Settings → Users, list each of the 5 users
-with role and last-login date. Identify who is genuinely active.*
+_TODO: from Storyblok admin → Settings → Users, list each of the 5 users
+with role and last-login date. Identify who is genuinely active._
 
 ### 1.5 Extraction approach
 
 Scripted one-time export from Storyblok CDN API to the repo:
 
-| Storyblok content | Target in repo | Format |
-|---|---|---|
-| 106 person records | `content/people/<slug>.md` | Markdown + YAML frontmatter |
-| 7 pages | `content/pages/<slug>.mdx` | MDX composing block components |
-| Header singleton | `data/header.yml` | YAML |
-| Footer singleton | `data/footer.yml` | YAML |
-| 2 datasources | `data/<slug>.json` | JSON |
-| 254 assets | `public/img/...` (or CDN — TBD) | Files in repo |
+| Storyblok content  | Target in repo                  | Format                         |
+| ------------------ | ------------------------------- | ------------------------------ |
+| 106 person records | `content/people/<slug>.md`      | Markdown + YAML frontmatter    |
+| 7 pages            | `content/pages/<slug>.mdx`      | MDX composing block components |
+| Header singleton   | `data/header.yml`               | YAML                           |
+| Footer singleton   | `data/footer.yml`               | YAML                           |
+| 2 datasources      | `data/<slug>.json`              | JSON                           |
+| 254 assets         | `public/img/...` (or CDN — TBD) | Files in repo                  |
 
-*TODO: write the `jq` transforms for each content type. Write the asset-
-download + URL-rewrite script.*
+_TODO: write the `jq` transforms for each content type. Write the asset-
+download + URL-rewrite script._
 
 ### 1.6 Verification after extraction
 
@@ -101,25 +102,25 @@ Migration surfaced several silently broken references in Storyblok content.
 These were hard to detect while Storyblok was the source of truth; they're
 trivially caught by CI lints once content lives in the repo.
 
-| Issue | Where | Fix applied | Future prevention |
-|---|---|---|---|
-| `Napari` referenced as project name; canonical form is `napari` (case mismatch) | One person record's `projects` field | Normalized to `napari` | CI lint: every project name in a person file must exist in `data/projects.json` |
-| Footer logo asset missing — Storyblok CDN returns HTTP 403 (S3 object deleted) | `labs-logo-footer.png` referenced in footer config | Substituted `srcTablet` variant (same 226×62 dimensions) | CI lint: every asset path in YAML/MDX must exist on disk |
-| Schema typo: `logoMogile` field duplicates `logoMobile` | Footer logo block in Storyblok schema | Field dropped from migrated YAML | N/A — typo existed only in Storyblok's schema |
-| Email link href missing `mailto:` prefix | Footer contact `connect@quansight.com` | Normalized to `mailto:...` during extraction | CI lint: links with `kind: email` must have `mailto:` href |
-| Project link missing `https://` protocol | conda-forge projectLink: `github.com/conda-forge` | Auto-prepended `https://` during extraction | CI lint: external URLs must have a scheme |
-| Placeholder content never replaced | `terms-and-conditions` page, "Introduction" section: `"Sampel description"` (also typo: *Sampel*) | Migrated as-is; flagged for human review | Content owner to author real terms; spell-check in CI |
-| Placeholder alt text never replaced | Home page hero image: `alt="hero placeholder"` | Migrated as-is; flagged for human review | Manual cleanup pass before launch |
-| Editor noise in rich text | `column-article` blocks contained `textStyle` color marks set to default black | Stripped during extraction | N/A — won't be reintroduced in file-based content |
-| Empty/unused page exists | `test` page has empty body | Excluded from migration | N/A — won't be created by file convention |
-| Large unoptimized images | Several team photos (~620KB each) and project logos (napari 826×1066, conda-forge 825×450, scikit-image 867×468) | Migrated as-is | Post-migration: run images through `oxipng`/`mozjpeg` — projected 60–80% size reduction |
-| Typo: "diffrent" (should be "different") | At least 4 alt-text fields on hero illustrations | Migrated as-is | Spell-check on YAML/MDX content in CI |
-| Typo: "technTology" (should be "technology") | Home page `column-article` rightColumn | Migrated as-is | Spell-check on YAML/MDX content in CI |
-| Typo in asset filename: `labs-illustarion-2.svg` | Home page newsletter teaser image | Migrated with original filename | Optional: rename file + update references; minor |
-| Empty `alt` text on named decorative images | All 5 logo grid items on the home page; teaser images | Migrated as-is | A11y review: either supply meaningful alt or mark explicitly decorative (`alt=""` + `role="presentation"`) |
-| Link mark wraps entire sentence rather than the call-to-action phrase | Home page "Learn about our consulting services: Visit quansight.com" — whole sentence is the link | Migrated as-is (preserves source intent) | Editorial review: probably only "Visit quansight.com" should be the link |
+| Issue                                                                           | Where                                                                                                            | Fix applied                                              | Future prevention                                                                                          |
+| ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `Napari` referenced as project name; canonical form is `napari` (case mismatch) | One person record's `projects` field                                                                             | Normalized to `napari`                                   | CI lint: every project name in a person file must exist in `data/projects.json`                            |
+| Footer logo asset missing — Storyblok CDN returns HTTP 403 (S3 object deleted)  | `labs-logo-footer.png` referenced in footer config                                                               | Substituted `srcTablet` variant (same 226×62 dimensions) | CI lint: every asset path in YAML/MDX must exist on disk                                                   |
+| Schema typo: `logoMogile` field duplicates `logoMobile`                         | Footer logo block in Storyblok schema                                                                            | Field dropped from migrated YAML                         | N/A — typo existed only in Storyblok's schema                                                              |
+| Email link href missing `mailto:` prefix                                        | Footer contact `connect@quansight.com`                                                                           | Normalized to `mailto:...` during extraction             | CI lint: links with `kind: email` must have `mailto:` href                                                 |
+| Project link missing `https://` protocol                                        | conda-forge projectLink: `github.com/conda-forge`                                                                | Auto-prepended `https://` during extraction              | CI lint: external URLs must have a scheme                                                                  |
+| Placeholder content never replaced                                              | `terms-and-conditions` page, "Introduction" section: `"Sampel description"` (also typo: _Sampel_)                | Migrated as-is; flagged for human review                 | Content owner to author real terms; spell-check in CI                                                      |
+| Placeholder alt text never replaced                                             | Home page hero image: `alt="hero placeholder"`                                                                   | Migrated as-is; flagged for human review                 | Manual cleanup pass before launch                                                                          |
+| Editor noise in rich text                                                       | `column-article` blocks contained `textStyle` color marks set to default black                                   | Stripped during extraction                               | N/A — won't be reintroduced in file-based content                                                          |
+| Empty/unused page exists                                                        | `test` page has empty body                                                                                       | Excluded from migration                                  | N/A — won't be created by file convention                                                                  |
+| Large unoptimized images                                                        | Several team photos (~620KB each) and project logos (napari 826×1066, conda-forge 825×450, scikit-image 867×468) | Migrated as-is                                           | Post-migration: run images through `oxipng`/`mozjpeg` — projected 60–80% size reduction                    |
+| Typo: "diffrent" (should be "different")                                        | At least 4 alt-text fields on hero illustrations                                                                 | Migrated as-is                                           | Spell-check on YAML/MDX content in CI                                                                      |
+| Typo: "technTology" (should be "technology")                                    | Home page `column-article` rightColumn                                                                           | Migrated as-is                                           | Spell-check on YAML/MDX content in CI                                                                      |
+| Typo in asset filename: `labs-illustarion-2.svg`                                | Home page newsletter teaser image                                                                                | Migrated with original filename                          | Optional: rename file + update references; minor                                                           |
+| Empty `alt` text on named decorative images                                     | All 5 logo grid items on the home page; teaser images                                                            | Migrated as-is                                           | A11y review: either supply meaningful alt or mark explicitly decorative (`alt=""` + `role="presentation"`) |
+| Link mark wraps entire sentence rather than the call-to-action phrase           | Home page "Learn about our consulting services: Visit quansight.com" — whole sentence is the link                | Migrated as-is (preserves source intent)                 | Editorial review: probably only "Visit quansight.com" should be the link                                   |
 
-*More issues likely to surface as we extract the pages.*
+_More issues likely to surface as we extract the pages._
 
 ---
 
@@ -176,6 +177,14 @@ Acknowledged trade-offs:
 - Storyblok webhook in Vercel
 - Nx infrastructure (if moving to single-app project)
 - Tokens from `.env`; the `.env` file shrinks dramatically
+- **ESLint** removed from the Labs pre-commit hook (was run via Nx;
+  `apps/labs/` has no standalone ESLint config). Pre-commit now runs
+  Prettier only. Notable loss: `eslint-plugin-jsx-a11y` no longer catches
+  accessibility issues (missing alt text, unlabelled buttons, bad ARIA) on
+  commit. Consider adding `@astrojs/eslint` to `apps/labs/` as a follow-up.
+  Note: `apps/consulting/` previously shared the same Nx-driven pre-commit
+  hook; it now also gets Prettier-only, which is a regression for that app
+  too — its ESLint config still exists but is no longer enforced on commit.
 
 ### 2.4 What stays
 
@@ -212,21 +221,22 @@ directory needed.
 4. ~~**Port React block components**~~ — **done.** `src/components/`
    All 10 block types ported. Key changes vs. original sources:
 
-   | Change | Affects |
-   |---|---|
-   | `next/image` → native `<img>` | `Hero`, `Picture`, and everything using `Picture` (`LogosGrid`, `TeamMemberImage`, `Teaser`, `ColumnArticle`, `ProjectLogo`) |
-   | `next/link` → `<a>` | `Logos`, `TeamMemberGithub`, `ButtonLink` |
-   | Storyblok rich-text AST → markdown `string` | `ColumnArticle` columns, `StatuteSection.text`, `ProjectSummary`, `ProjectDescription` — rendered with `marked` |
-   | `TImage {filename, alt}` → `image: string` + `imageAlt: string` | `TeamMemberImage` |
-   | `projects: {name}[]` → `projects: string[]` | `TeamMemberProjects` |
-   | Logo grid `{imageSrc, imageAlt}` → `{src, alt}` | `LogosGrid` — matches extracted YAML field names |
-   | People list injected from Content Collections | `Team` — Astro page fetches people, filters by role, passes array in |
-   | `HeroResponsiveImages` dropped | No page YAML uses responsive-image hero variant |
-   | `@quansight/shared/*` monorepo imports removed | All — components are self-contained in `src/components/` |
-   | `ProjectsItem` uses `client:load` | Only interactive component — accordion toggle |
-   | `CH.Code` stubbed in `src/components/Blog/CodeHike.tsx` | 10 posts use Code Hike; stub renders nothing; upgrade to Code Hike v1 + Astro integration deferred |
+   | Change                                                          | Affects                                                                                                                      |
+   | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+   | `next/image` → native `<img>`                                   | `Hero`, `Picture`, and everything using `Picture` (`LogosGrid`, `TeamMemberImage`, `Teaser`, `ColumnArticle`, `ProjectLogo`) |
+   | `next/link` → `<a>`                                             | `Logos`, `TeamMemberGithub`, `ButtonLink`                                                                                    |
+   | Storyblok rich-text AST → markdown `string`                     | `ColumnArticle` columns, `StatuteSection.text`, `ProjectSummary`, `ProjectDescription` — rendered with `marked`              |
+   | `TImage {filename, alt}` → `image: string` + `imageAlt: string` | `TeamMemberImage`                                                                                                            |
+   | `projects: {name}[]` → `projects: string[]`                     | `TeamMemberProjects`                                                                                                         |
+   | Logo grid `{imageSrc, imageAlt}` → `{src, alt}`                 | `LogosGrid` — matches extracted YAML field names                                                                             |
+   | People list injected from Content Collections                   | `Team` — Astro page fetches people, filters by role, passes array in                                                         |
+   | `HeroResponsiveImages` dropped                                  | No page YAML uses responsive-image hero variant                                                                              |
+   | `@quansight/shared/*` monorepo imports removed                  | All — components are self-contained in `src/components/`                                                                     |
+   | `ProjectsItem` uses `client:load`                               | Only interactive component — accordion toggle                                                                                |
+   | `CH.Code` stubbed in `src/components/Blog/CodeHike.tsx`         | 10 posts use Code Hike; stub renders nothing; upgrade to Code Hike v1 + Astro integration deferred                           |
 
    `src/components/BlockRenderer.astro` dispatches each page block to the right component.
+
 5. ~~**Port the design system**~~ — **done.**
    - Google Fonts (Inter, Mukta, Fira Code) and KaTeX CSS loaded in `BaseLayout.astro`
    - `html { font-size: 62.5% }` (`text-[62.5%]`) set on `<html>` — all components use rem units based on this
@@ -286,7 +296,7 @@ DOCKER_API_VERSION=1.42 docker run --rm -v "$PWD":/app -w /app/apps/labs \
 
 ### 3.1 Adding or editing a person
 
-*TODO: detailed workflow. Sketch:*
+_TODO: detailed workflow. Sketch:_
 
 - Create or edit `content/people/<slug>.md`
 - Frontmatter: `full_name`, `short_name`, `role`, `photo`, `links`, etc.
@@ -295,7 +305,7 @@ DOCKER_API_VERSION=1.42 docker run --rm -v "$PWD":/app -w /app/apps/labs \
 
 ### 3.2 Adding or editing a page
 
-*TODO: detailed workflow. Sketch:*
+_TODO: detailed workflow. Sketch:_
 
 - Edit the relevant `content/pages/<slug>.mdx`
 - Compose existing block components inline:
@@ -305,7 +315,7 @@ DOCKER_API_VERSION=1.42 docker run --rm -v "$PWD":/app -w /app/apps/labs \
 
 ### 3.3 Editing header / footer
 
-*TODO: detailed workflow. Sketch:*
+_TODO: detailed workflow. Sketch:_
 
 - Edit `data/header.yml` or `data/footer.yml`
 - Schema documented inline in the file as comments
