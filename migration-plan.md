@@ -234,9 +234,11 @@ directory needed.
 6. ~~**Build routes**~~ — **done.** 168 pages build clean.
    - `src/pages/index.astro` → `/`
    - `src/pages/team.astro` → `/team`
-   - `src/pages/projects.astro` → `/projects`
-   - `src/pages/privacy-policy.astro` → `/privacy-policy`
-   - `src/pages/terms-and-conditions.astro` → `/terms-and-conditions`
+   - `src/pages/projects.astro` → `/projects` (exists on production but has no
+     inbound internal links — not in nav, not linked from any page content)
+   - `/privacy-policy` and `/terms-and-conditions` — pages were created from
+     extracted YAML but removed: both 404 on production and are not linked
+     from the nav. The `.yml` source files are kept in `page/` for reference.
    - `src/pages/blog/index.astro` → `/blog` (lists all posts, sorted by date; no pagination yet)
    - `src/templates/BlogPost.astro` → `/blog/<post>` (injected route, no brackets in filename)
    - Blog authors resolved from `people` collection by slug at build time.
