@@ -5,7 +5,7 @@
 - `src/` — Astro pages, layouts, components, templates
 - `posts/` — blog post markdown files
 - `people/` — team member markdown files
-- `page/` — page content YAML files (home, blog, team, projects, …)
+- `pages/` — page content YAML files (home, blog, team, projects, …)
 - `data/` — site-wide data: `header.yml`, `footer.yml`, `projects.json`, `person-roles.json`
 - `public/` — static assets (images, icons, fonts)
 - `astro.config.mjs` — Astro config (React + MDX integrations, injected blog route)

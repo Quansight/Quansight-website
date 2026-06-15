@@ -16,7 +16,7 @@ const people = defineCollection({
 });
 
 const pages = defineCollection({
-  loader: glob({ pattern: '**/*.yml', base: './page' }),
+  loader: glob({ pattern: '**/*.yml', base: './pages' }),
   schema: z.object({
     slug: z.string(),
     title: z.string().optional(),
@@ -33,9 +33,7 @@ const posts = defineCollection({
     authors: z.array(z.string()).default([]),
     description: z.string().optional(),
     category: z.array(z.string()).default([]),
-    featuredImage: z
-      .object({ src: z.string(), alt: z.string() })
-      .optional(),
+    featuredImage: z.object({ src: z.string(), alt: z.string() }).optional(),
     hero: z.record(z.unknown()).optional(),
   }),
 });

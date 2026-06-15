@@ -1,10 +1,10 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 
-import BlockRenderer from '../../components/BlockRenderer.astro';
-import { BlogList } from '../../components/Blog/BlogList';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import categories from '../../../posts/categories.json';
+import BlockRenderer from '../components/BlockRenderer.astro';
+import { BlogList } from '../components/Blog/BlogList';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import categories from '../../posts/categories.json';
 
 const page = await getEntry('pages', 'blog');
 const allPosts = await getCollection('posts');

@@ -16,7 +16,7 @@ future maintenance).
 | Datasources          | `apps/labs/data/{person-roles,projects}.json` |
 | Header               | `apps/labs/data/header.yml`                   |
 | Footer               | `apps/labs/data/footer.yml`                   |
-| Pages                | `apps/labs/page/*.yml`                        |
+| Pages                | `apps/labs/pages/*.yml`                       |
 | Page and site assets | `apps/labs/public/images/`                    |
 
 ## Scripts

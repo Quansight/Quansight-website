@@ -71,7 +71,7 @@ pull request to `main`.
 | What to change                            | Where                                                                                                    |
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | Team member                               | `apps/labs/people/<slug>.md`                                                                             |
-| Page content (home, blog, team, projects) | `apps/labs/page/<slug>.yml`                                                                              |
+| Page content (home, blog, team, projects) | `apps/labs/pages/<slug>.yml`                                                                             |
 | Header navigation                         | `apps/labs/data/header.yml`                                                                              |
 | Footer                                    | `apps/labs/data/footer.yml`                                                                              |
 | Projects list                             | `apps/labs/data/projects.json`                                                                           |
@@ -103,7 +103,7 @@ Vercel sends deployment notifications to [#website-vercel-bot-log][slack-channel
 
 ## Adding new pages
 
-1. Create a content YAML file at `apps/labs/page/<slug>.yml` with the page
+1. Create a content YAML file at `apps/labs/pages/<slug>.yml` with the page
    blocks.
 2. Create an Astro page at `apps/labs/src/pages/<slug>.astro` that reads from
    the `pages` content collection and passes blocks to `BlockRenderer`.
