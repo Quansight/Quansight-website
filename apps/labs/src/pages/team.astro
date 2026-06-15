@@ -11,7 +11,7 @@ const teamPeople = allPeople
   .filter((p) => p.role === 'team');
 ---
 
-<BaseLayout title="Team — Quansight Labs">
+<BaseLayout title="Team | Labs">
   {page?.data.blocks.map((block) => (
     <BlockRenderer block={block} people={teamPeople} />
   ))}

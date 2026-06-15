@@ -10,6 +10,8 @@
 - `public/` — static assets (images, icons, fonts)
 - `astro.config.mjs` — Astro config (React + MDX integrations, injected blog route)
 - `tailwind.config.cjs` — Tailwind theme (colors, fonts, spacing)
+- `postcss.config.cjs` — PostCSS config (required by Tailwind)
+- `tsconfig.json` — TypeScript config for the Astro app
 
 `apps/consulting/` — Quansight Consulting site (Next.js)
 
