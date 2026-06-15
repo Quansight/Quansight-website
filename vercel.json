@@ -1,0 +1,6 @@
+{
+  "framework": null,
+  "installCommand": "cd apps/labs && npm install",
+  "buildCommand": "cd apps/labs && npm run build",
+  "outputDirectory": "apps/labs/dist"
+}
