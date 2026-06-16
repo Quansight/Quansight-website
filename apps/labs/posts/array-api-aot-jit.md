@@ -14,7 +14,7 @@ hero:
 
 
 
-Python is known for being both easy and fast to develop in, and its slow execution
+Python is known for both being easy and fast to develop in, and its slow execution
 speeds. For several decades, the answer to "python is slow" has been
 to write a C extension, so that computationally intensive parts of an application
 proceed at C speeds. 
@@ -209,7 +209,7 @@ With `pytorch`, the incantation reads
 evaluate_dynamo = torch.compile(fullgraph=True, dynamic=True)(evaluate_xp)
 ```
 
-Here the `fullgraph=True` argument is to make sure that the compiled code does not
+Here the `fullgraph=True` argument is to make sure that the jit-compiled code does not
 call back into the Python runtime, and `dynamic=True` argument ensures that we compile
 a single kernel for all input sizes (instead of recompiling a new kernel for each array size).
 
@@ -227,9 +227,11 @@ our backend-generic `evaluate_xp` function which uses the runtime-defined `xp` a
 The very fact that invoking this kind of highly non-trivial machinery fits in a single
 line of python code feels like a minor miracle. 
 
-With `numba`, we need to work a little more. First of all, Numba special-cases NumPy at
-the source code level, and is unable to work out that the `xp` argument is `numpy` at runtime
-(or at least I did not manage to explain it to Numba). 
+With `numba`, we need to work a little more. First of all, Numba is not a tracing compiler;
+it special-cases NumPy at the source code level, and our approach of adding the `xp`
+argument which only resolves to `numpy` at runtime breaks down.
+Second, Numba is having difficulties compiling "vectorized" constructions, and effectively
+forces writing explicit loops.
 
 We therefore had to `numba.njit` a "non-vectorized" version, `evaluate_np` above.
 Running a little ahead of ourselves, we also had to explicitly use `numba.prange` in
@@ -275,9 +277,9 @@ perform roughly in the same ballpark as eager `jax`/`pytorch`.
 
 In the JIT mode however (right-hand panel), Jax and PyTorch are 3-5 times faster than
 the AOT `pythran`-compiled implementation.
-The origin of the speedup relative to `pythran` is not very clear; a potential factor is that both
-Jax and PyTorch are multi-threaded by default, while `pythran`-compiled code is single-threaded.
-In principle, `pythran` can generate OpenMP parallel loops, but it is switched off
+The origin of the speedup relative to `pythran` is not very clear; a potential contributing
+factor is that both Jax and PyTorch are multi-threaded by default, while `pythran`-compiled
+code is single-threaded. In principle, `pythran` can generate OpenMP parallel loops, but it is switched off
 in the SciPy build system.
 
 Surprisingly, `numba` fares much worse than `jax.jit` or `torch.compile`, and is about
