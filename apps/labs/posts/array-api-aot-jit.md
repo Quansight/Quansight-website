@@ -149,7 +149,7 @@ During the build stage, the `pythran` compiler uses these special comments to tr
 ## Array API "generic" implementation
 <a name="generic"></a>
 
-To generalize `RBFInterpolator` across Array API compatible backends, we use the [recommended pattern](https://data-apis.org/array-api/draft/migration_guide.html#array-consumers): we deduce the array namespace from the input arguments using the `array_namespace` function from the `array_api_compat` package, and fetch routines from this namespace instead of the `numpy` namespace. 
+To generalize `RBFInterpolator` across Array API compatible backends, we use the [recommended pattern](https://data-apis.org/array-api/draft/migration_guide.html#array-consumers): we deduce the array namespace from the input arguments using the `array_namespace` function from the `array_api_compat` package and fetch routines from this namespace instead of the `numpy` namespace. 
 Since looping over array elements in alternative array backends is at least as slow as it is in `numpy`, we use a "vectorized" version of the `evaluate_np` routine above:
 
 
@@ -165,7 +165,7 @@ def evaluate_xp(x, Y, coeffs, xp):
 
 ```
 
-Note an additional `xp` argument, which stands for an Array API compatible namespace, and we use `xp.where`, `xp.log` and `xp.linalg.vector_norm` functions. The overall structure of the `RBFInterpolator` class is essentially as follows:
+Note an additional `xp` argument, which stands for an Array API compatible namespace, and we use `xp.where`, `xp.log`, and `xp.linalg.vector_norm` functions. The overall structure of the `RBFInterpolator` class is essentially as follows:
 
 ```
 from array_api_compat import array_namespace
@@ -194,8 +194,8 @@ PyTorch tensors throughout.
 ## JIT compilation
 
 First and foremost, we note that there is no single best JIT technology. JIT-ing is
-backend-specific: for pytorch we use `torch.dynamo`, for `jax` we use `jax.jit`, and
-for numpy we use `numba`. 
+backend-specific: for PyTorch, we use `torch.dynamo`; for JAX, we use `jax.jit`; and
+for NumPy, we use `numba`. 
 
 For the JIT strategy in this exercise, we use the simplest approach: we keep the
 "generic" Array API implementation of the `RBFInterpolator` class, and only replace the
