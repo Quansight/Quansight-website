@@ -323,7 +323,7 @@ The exact cause remains a mystery; there is some adversarial interaction between
 
 Discounting the OpenBLAS / pythran conspiracy, all backends perform 2-5 times
 slower when run on a single core. The important observation is that in all cases, the slowdown
-is less than 32, the number of cores for the "default" run. Therefore, if the raw performance is the only concern, embarrassing parallelism wins by a large margin: splitting the work across a `multiprocessing` pool of 32 processes, where each process is 5 times slower, still gives a 32/5=6.4-fold speedup budget! Whether this is practical for a particular application is of course strongly application dependent.
+is less than 32, the number of cores for the "default" run. Therefore, if the raw performance is the only concern, parallelism wins by a large margin: splitting the work across a `multiprocessing` pool of 32 processes, where each process is 5 times slower, still gives a 32/5=6.4-fold speedup budget! Whether this is practical for a particular application is of course strongly application dependent.
 
 
 ## Benchmarks on CUDA
