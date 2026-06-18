@@ -135,7 +135,7 @@ def evaluate_np(x, Y, coeffs):
 Here `kernel_func` is the RBF basis function $f(r)$, and `coeffs` are coefficients, $C_i$, pre-computed during the *fit* stage.
 Since we typically evaluate the interpolant at multiple vectors $x$, we always stack them into a 2-D array `x`.
 
-Consider evaluating an interpolant on a 50x50 grid in two dimensions. The `x` array than has the shape `(2500, 2)`, and looping over this large arrays in pure Python is too slow to be practical. Therefore, `RBFInterpolator` in fact compiles the loop into C using the [`pythran`](https://pythran.readthedocs.io/en/latest/) ahead-of-time (AOT) compiler. In practice, this amounts to adding special comments to the Python source and invoking the `pythran` compiler on the annotated source file:
+Consider evaluating an interpolant on a 50x50 grid in two dimensions. The `x` array than has the shape `(2500, 2)`, and looping over this large of an array in pure Python is too slow to be practical. Therefore, `RBFInterpolator` in fact compiles the loop into C using the [`pythran`](https://pythran.readthedocs.io/en/latest/) ahead-of-time (AOT) compiler. In practice, this amounts to adding special comments to the Python source and invoking the `pythran` compiler on the annotated source file:
 
 ```
 # pythran export evaluate_pythran(float64[:, :], float64[:, :], float64[:])
@@ -143,7 +143,7 @@ def evaluate_pythran(x, Y, coeffs):
     # ... as before in `evaluate_np`
 ```
 
-During the build stage, the `pythran` compiler uses these special comments to transpile the annotated Python functions into C++, and then builds them into a Python-importable extension module. As a result, looping over arrays proceeds at C speeds.
+During the build stage, the `pythran` compiler uses these special comments to transpile the annotated Python functions into C++ and then builds them into a Python-importable extension module. As a result, looping over arrays proceeds at C speeds.
 
 
 ## Array API "generic" implementation
