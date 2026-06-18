@@ -198,9 +198,9 @@ backend-specific: for PyTorch, we use `torch.dynamo`; for JAX, we use `jax.jit`;
 for NumPy, we use `numba`. 
 
 For the JIT strategy in this exercise, we use the simplest approach: we keep the
-"generic" Array API implementation of the `RBFInterpolator` class, and only replace the
-`evaluate_xp` function with its jit-compiled version. We stress that this is not the
-final end user API: currently, SciPy provides no public interface for jitting, and here
+"generic" Array API implementation of the `RBFInterpolator` class and only replace the
+`evaluate_xp` function with its JIT-compiled version. We stress that this is not the
+final end user API. Currently, SciPy provides no public interface for jitting, and here
 we reach into private implementation details of a SciPy object.
 
 With `pytorch`, the incantation reads
@@ -209,31 +209,31 @@ With `pytorch`, the incantation reads
 evaluate_dynamo = torch.compile(fullgraph=True, dynamic=True)(evaluate_xp)
 ```
 
-Here the `fullgraph=True` argument is to make sure that the jit-compiled code does not
+Here, the `fullgraph=True` argument is to make sure that the JIT-compiled code does not
 call back into the Python runtime, and `dynamic=True` argument ensures that we compile
-a single kernel for all input sizes (instead of recompiling a new kernel for each array size).
+a single kernel for all input sizes instead of recompiling a new kernel for each array size.
 
-With `jax`, we need to tell it that `xp` argument is special:
+With `jax`, we need to tell it that the `xp` argument is special:
 
 ```
 evaluate_jax = jax.jit(evaluate_xp, static_argnames=["xp"])
 ```
 
 Both `torch.compile` and `jax.jit` are _tracing_ compilers: they analyze the types of
-variables in the running program, and replace Python operations on these variables
-with their efficient low-level analogs. This way they manage to convert to machine code,
+variables in the running program and replace Python operations on these variables
+with their efficient low-level analogs. This way, they manage to convert to machine code
 our backend-generic `evaluate_xp` function which uses the runtime-defined `xp` argument.
 
 The very fact that invoking this kind of highly non-trivial machinery fits in a single
 line of Python code feels like a minor miracle. 
 
-With `numba`, we need to work a little more. First of all, Numba is not a tracing compiler;
+With `numba`, we need a little more work. First of all, Numba is not a tracing compiler;
 it special-cases NumPy at the source code level, and our approach of adding the `xp`
 argument which only resolves to `numpy` at runtime breaks down.
-Second, Numba is having difficulties compiling "vectorized" constructions, and effectively
+Second, Numba currently has difficulties compiling "vectorized" constructions and effectively
 forces writing explicit loops.
 
-We therefore had to `numba.njit` a "non-vectorized" version, `evaluate_np` above.
+We therefore had to `numba.njit` a "non-vectorized" version (see `evaluate_np` above).
 Running a little ahead of ourselves, we also had to explicitly use `numba.prange` in
 the loops for performance reasons. Overall, `numba` turned out to be both the least
 performant and the most capricious of the JIT variants we consider here. The [JIT section
