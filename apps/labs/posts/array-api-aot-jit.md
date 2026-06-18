@@ -19,25 +19,25 @@ speeds. For several decades, the answer to "python is slow" has been
 to write a C extension, so that computationally intensive parts of an application
 proceed at C speeds. 
 A prime example in scientific computing and data science is NumPy,
-which provides the array abstraction, and performs internal looping over the array
+which provides an array abstraction, and performs internal looping over the array
 data in C. 
 
-Historically, NumPy is geared towards a single-core CPU execution. The surge in popularity
-of hardware accelerators, such as GPUs, gave rise to multiple array libraries--CuPy, PyTorch, JAX and others--which
+Historically, NumPy is geared toward single-core CPU execution. The surge in popularity
+of hardware accelerators, such as GPUs, has given rise to multiple array libraries--CuPy, PyTorch, JAX and others--which
 encapsulate the compute power of accelerators
-(which NumPy itself does not harness) within the NumPy-like array interface. 
+(which NumPy itself does not harness) within a NumPy-like array interface. 
 
-Recent efforts of making general purpose libraries--SciPy and scikit-learn--use
+Recent efforts of making general purpose libraries, such as SciPy and scikit-learn, use
 alternative array providers via the [Array API](https://data-apis.org/array-api/latest/) demonstrated
 significant [performance improvements](https://labs.quansight.org/blog/array-api-meta-blogpost).
 For end users, speedups of an order of
-magnitude or more come "for free", from simply feeding correct arrays types to, for example, familiar
+magnitude or more come "for free" by simply feeding correct arrays types to, for example, familiar
 scikit-learn estimators.
 For library developers, the work is to replace NumPy calls with their
 [Array API analogs](https://data-apis.org/array-api/draft/tutorial_basic.html).
 This way, all low-level details of CUDA programming are
 fully contained at the array library level (e.g., CuPy, PyTorch) and do not leak to either
-high-level library (e.g., SciPy, scikit-learn) or the end user.
+the higher-level library (e.g., SciPy, scikit-learn) or the end user.
 
 This approach works extremely well for computational pipelines implemented as vectorized python
 operations on arrays. This is not the full story however; significant parts of user
