@@ -244,13 +244,13 @@ below](#numba) gives more details.
 <a name="benchmarks"></a>
 
 To measure performance across backends and devices, we use an example from the
-[`RBFInterpolator` documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.RBFInterpolator.html), and perform evaluations with arrays of size
+[`RBFInterpolator` documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.RBFInterpolator.html) and perform evaluations with arrays of size
 `N x N` with `N` ranging from 50 to 1000, using `torch`, `jax`, `numpy` as array backends,
 in both *eager* and *jit* modes ("numpy jit" is `numba`). 
 The computational complexity of a single run is approximately quadratic with the
 problem size `N`.
 
-In the eager mode, we ran benchmarks against SciPy version 1.17.0; the JIT modes are
+In eager mode, we ran benchmarks against SciPy version 1.17.0; the JIT modes are
 from this [SciPy pull request](https://github.com/scipy/scipy/pull/23447). The benchmarking
 scripts and results are available [in this repository](https://github.com/ev-br/bench_playground/).
 
