@@ -61,7 +61,7 @@ than AOT technologies. In this work, we report on using `torch.compile`, `jax.ji
 Depending on hardware and software tech stack, we find non-trivial performance differentials,
 with speedups of more than an order of magnitude to significant slow-downs.
 
-Before going into details, a note is in order. What we report on is a work in progress, in
+Before going into details, a note is in order. What we report on is a work in progress and happening within the context of
 a rapidly evolving field. While we expect specific details to age poorly, the main conclusions
 are that (i) using just-in-time compilation in conjunction with Array API compatible backends
 is a viable alternative to tried-and-tested ahead-of-time compiled C extensions, and
