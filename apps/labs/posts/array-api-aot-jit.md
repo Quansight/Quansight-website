@@ -2,7 +2,7 @@
 title: 'Array API adoption: what to do with compiled code'
 authors: [evgeni-burovski]
 published: June 3, 2026
-description: 'In this blog post, we discuss ways of dealing with compiled code in the Array API land.'
+description: 'In this blog post, we discuss ways of dealing with compiled code when adopting the Array API.'
 category: [Array API, GPU]
 featuredImage:
   src: posts/array-api-aot-jit/array-api-aot-jit.png
