@@ -243,8 +243,8 @@ below](#numba) gives more details.
 # Benchmark results
 <a name="benchmarks"></a>
 
-To measure performance across backends and devices, we use an example from the
-[`RBFInterpolator` documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.RBFInterpolator.html) and perform evaluations with arrays of size
+To measure performance across backends and devices, we used an example from the
+[`RBFInterpolator` documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.RBFInterpolator.html) and performed evaluations with arrays of size
 `N x N` with `N` ranging from 50 to 1000, using `torch`, `jax`, `numpy` as array backends,
 in both *eager* and *jit* modes ("numpy jit" is `numba`). 
 The computational complexity of a single run is approximately quadratic with the
@@ -257,7 +257,7 @@ scripts and results are available [in this repository](https://github.com/ev-br/
 ## Benchmarks on a CPU
 
 While `numpy` execution is single-threaded even on a multi-core machine, `torch` and `jax`
-internally use multiple cores by default. Therefore, we run benchmarks twice:
+internally use multiple cores by default. Therefore, we ran benchmarks twice:
 once on a consumer-grade laptop with 4-core Intel i5 processor and then on a beefy 32-core
 AMD Ryzen Threadripper 3970X system.
 
@@ -308,92 +308,92 @@ In JIT mode, however, we get massive speed-ups: `jax` performs about 15 times be
 
 Since parallelization seems to play a non-trivial role, we also performed an apples-to-apples benchmark run where
 we forced single-threaded execution for all backends (in fact, forcing single threading
-is [not entirely straightforward](#single_core_stanza)). Below, we display the *slowdown* of a single-core
+is [not entirely straightforward](#single_core_stanza)). Below, we display the *slowdown* of single-core
 execution versus default parallelization on 32 cores.
 
 
-![Benchmark results for a single-core vs 32-core execution](/posts/array-api-aot-jit/single_core_bench.png) 
+![Benchmark results for single-core vs 32-core execution](/posts/array-api-aot-jit/single_core_bench.png) 
 
-The first bizarre observation is that NumPy eager execution gets twice faster with the
-`OPENBLAS_NUM_THREADS=1` environment variable---despite the fact that both with and
+The first bizarre observation is that NumPy eager execution becomes 2x faster with the
+`OPENBLAS_NUM_THREADS=1` environment variable despite the fact that, both with and
 without it, we verified with the process monitor that the execution only uses a single core. 
 The exact cause remains a mystery; there is some adversarial interaction between OpenBLAS
 (which is the SciPy's default linear algebra library) and `pythran`-compiled code.
 [This SciPy issue](https://github.com/scipy/scipy/issues/23732) has further details.
 
 Discounting the OpenBLAS / pythran conspiracy, all backends perform 2-5 times
-slower when run on a single core. The important observation is that in all cases, the slowdown
-is less than 32, the number of cores for the "default" run. Therefore, if the raw performance is the only concern, parallelism wins by a large margin: splitting the work across a `multiprocessing` pool of 32 processes, where each process is 5 times slower, still gives a 32/5=6.4-fold speedup budget! Whether this is practical for a particular application is of course strongly application dependent.
+slower when run on a single core. The important observation is that, in all cases, the slowdown
+is less than 32, the number of cores for the "default" run. Therefore, if raw performance is the only concern, parallelism wins by a large margin: splitting the work across a `multiprocessing` pool of 32 processes, where each process is 5 times slower, still gives a 32/5=6.4-fold speedup budget! Whether this is practical for a particular application is of course strongly application-dependent.
 
 
 ## Benchmarks on CUDA
 
 One of the salient points of the Array API compatible code is the ease of using CUDA GPUs.
-We run the same benchmark with no code changes on a GPU with `jax`, `torch` and `cupy`
-libraries. On machine with a GeForce RTX 2060 accelerator we obtain the following results:
+We ran the same benchmark with no code changes on a GPU with `jax`, `torch`, and `cupy`
+libraries. On a machine with a GeForce RTX 2060 accelerator, we obtain the following results:
 
 
 ![Benchmark results on a CUDA GPU](/posts/array-api-aot-jit/gpu_bench.png) 
 
 Overall, performance benefits from using CUDA device are massive.
-In the JIT mode, PyTorch delivers up to 40x speed-up relative to the baseline `numpy`/`pythran` AOT on CPU, while Jax delivers up to 20x. Curiously, Jax wins on multicore CPUs, while PyTorch seems to utilize a CUDA device better.
+In JIT mode, PyTorch delivers up to 40x speed-up relative to the baseline `numpy`/`pythran` AOT on CPU, while JAX delivers up to 20x. Curiously, JAX wins on multicore CPUs, while PyTorch seems to utilize a CUDA device better.
 
-The difference between eager and jit modes is not as pronounced on CUDA as it is on a multicore CPU
-(with `torch`: on CPU, jitting changes the speedup from 1.6x to 16x, while on CUDA eager it gives 25x, and invoking JIT
+The difference between eager and JIT modes is not as pronounced on CUDA as it is on a multicore CPU
+(with `torch`: on CPU, jitting changes the speedup from 1.6x to 16x; while on CUDA, eager it gives 25x, and invoking JIT
 further improves it by "just" 60% to a total of 40x.)
 
-Performance profiles for running on CUDA are problem size dependent, especially with Jax eager. This in itself is not very surprising:
-it is expected that only large enough workloads benefit from using GPUs, and the problem sizes in this study are rather small, actually.
+Performance profiles for running on CUDA are problem size dependent, especially with JAX eager. This in itself is not very surprising.
+It is expected that only large enough workloads benefit from using GPUs, and the problem sizes in this study are actually rather small.
 
-We also note that CuPy "only" delivers a speedup of about 3x relative to numpy, which is modest in comparison to Jax or PyTorch. Also note that in this study, we only used CuPy in the eager mode and did not use any CuPy jit capabilities (and therefore the CuPy results are identical on the two panels of the plot). We also did not attempt using `numba.cuda` which
-is a different, lower-level interface for CUDA programming from python.
+We also note that CuPy "only" delivers a speedup of about 3x relative to NumPy, which is modest in comparison to JAX or PyTorch. Also note that, in this study, we only used CuPy in eager mode and did not use any CuPy JIT capabilities (and therefore the CuPy results are identical on the two panels of the plot). We also did not attempt using `numba.cuda` which
+is a different, lower-level interface for CUDA programming from Python.
 
 
 ## JIT caveats
 
-Using JIT compilation in conjunction with the Array API looks to be a viable route towards multicore and GPU performance, especially for us mere mortals who are not ready to commit to maintaining dedicated CUDA kernels. 
+Using JIT compilation in conjunction with the Array API looks to be a viable route toward multicore and GPU performance, especially for us mere mortals who are not ready to commit to maintaining dedicated CUDA kernels. 
 
 There is no single best JIT technology: performance characteristics of `jax.jit` and `torch.compile` strongly depend on details, and both technologies have rough edges. The field is rapidly evolving though, and the issues we faced in this exercise may or may not be relevant in a year from the time of writing:
 
 - <a name="single_core_stanza"></a> It is surprisingly awkward to control the threading behavior across backends, especially in the JIT context. To force a single-core execution, 
   we had to (i) force the LAPACK library to make linear algebra single-threaded, and (ii) switch off the internal thread
-  management in the jit-compiled code. Depending on the backend and/or the linear algebra library, we needed at least some
+  management in the JIT-compiled code. Depending on the backend and/or the linear algebra library, we needed at least some
   parts of the following incantation: `$ OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMBA_NUM_THREADS=1 OPENMP_NUM_THREADS=1 XLA_FLAGS=" --xla_force_host_platform_device_count=1 --xla_cpu_multi_thread_eigen=false intra_op_parallelism_threads=1"  taskset -c 0 python ...`.
 
-- `torch.compile` hardcodes the number of threads at compile time, and uses a cached value which it stores somewhere on the file system. As a result, jit-compiled code may or may not react to attempts to control threading at runtime.
+- `torch.compile` hardcodes the number of threads at compile time and uses a cached value which it stores somewhere on the file system. As a result, JIT-compiled code may or may not react to attempts to control threading at runtime.
   See [this pytorch issue](https://github.com/pytorch/pytorch/issues/160812) for details.
 
-- <a name="numba"></a> Out of the three JIT technologies we considered, `numba` is the most established, and I expected it to be the most mature. Alas, it turned out to be underwhelming on multiple counts. First of all, it required quite a bit more effort to get working. Attempting to compile a "vectorized" implementation runs into unexpected gaps in functionality (for instance, `np.prod(..., axis=-1)` does compile, and [a related feature request](https://github.com/numba/numba/issues/1269) has been open since 2015.) In effect, `numba` requires to rewrite code in a fairly specific, low-level "loopy" coding style. Second, controlling parallelism requires source code changes, too, and it is very easy to run into massive oversubscription. And even after rewriting the sources in the numba way, the performance is still trailing the performance of other JIT compilers by a large margin. While I absolutely am not claiming to be a numba expert, and it is full well possible that further code tweaks unlock stellar performance, in this experiment I did not manage to. 
+- <a name="numba"></a> Out of the three JIT technologies we considered, Numba is the most established, and I expected it to be the most mature. Alas, it turned out to be underwhelming on multiple counts. First of all, it required quite a bit more effort to get working. Attempting to compile a "vectorized" implementation runs into unexpected gaps in functionality (for instance, `np.prod(..., axis=-1)` does not compile, and [a related feature request](https://github.com/numba/numba/issues/1269) has been open since 2015.) In effect, Numba requires rewriting code in a fairly specific, low-level "loopy" coding style. Second, controlling parallelism also requires source code changes, and it is very easy to run into massive oversubscription. And even after rewriting the sources in the Numba way, performance is still trailing the performance of other JIT compilers by a large margin. While I absolutely am not claiming to be a Numba expert and it is possible that further code tweaks could unlock stellar performance, at least in this experiment, I did not manage to. 
 
-- While `numba` nudges a developer towards using explicit loops, other JIT compilers rather strongly favor the alternative,
-"vectorized" code style. `jax.jit` frowns on conditionals, branching and data-dependent control flow in general; `torch.compile` by design fully unrolls all explicit loops. For vectorized code however, both `jax.jit` and `torch.compile` do generate efficient native code, and eliminate temporaries from constructions like [`evaluate_xp`](#generic) which are memory-bound in eager mode. 
+- While `numba` nudges a developer toward using explicit loops, other JIT compilers rather strongly favor the alternative,
+"vectorized" code style. `jax.jit` frowns on conditionals, branching, and data-dependent control flow in general; `torch.compile` by design fully unrolls all explicit loops. For vectorized code, however, both `jax.jit` and `torch.compile` generate efficient native code and eliminate temporaries from constructions like [`evaluate_xp`](#generic) which are memory-bound in eager mode. 
 
 
-All in all, despite all the rough edges of all the current JIT tech, they are nothing but small hiccups compared to
+All-in-all, despite all the rough edges of all the current JIT tech, they are nothing but small hiccups compared to
 the complexity of dealing with manually written CUDA C kernels.
 
 
 # Conclusions and outlook
 
 Adopting Array API compatibility for library components written in terms of NumPy-like primitives has been previously
-shown to deliver significant performance improvements from seamlessly using CUDA devices---without writing
+shown to deliver significant performance improvements from seamlessly using CUDA devices without writing
 a single line of CUDA C code!
 In this work, we expand on the previous work and consider routines which rely on dedicated compiled kernels. Our
-approach was to add an additional "generic backend": an Array API compatible pure-python reimplementation of the functionality of the compiled C kernel. These kinds of "generic" backends are amendable to just-in-time compilation,
+approach was to add an additional "generic backend": an Array API compatible pure-Python reimplementation of the functionality of the compiled C kernel. These kinds of "generic" backends are amendable to just-in-time compilation,
 which we showed to deliver performance benefits of up to an order of magnitude or more.
 
 With the current state of JIT technologies, performance strongly depends on details and may require some tinkering
-and fine-tuning. The eventual performance characteristics depend on the problem, on the available hardware, and
-the software stack: a choice of the array library dictates the choice of the JIT technology. (And if anything,
-the ease of moving between different array libraries is one of the high points of the whole Array API movement).
-However even though a stellar performance improvement is not guaranteed, the effort/reward ratio very strongly favors
-JIT versus developing more traditional compiled CUDA kernels, and it is hard to not recommend at least trying out the Array API + JIT based approach (potentially, as a time-boxed experiment).
+and fine-tuning. The eventual performance characteristics depend on the problem, on the available hardware, and on
+the software stack: the choice of the array library dictates the choice of the JIT technology. (If anything,
+the ease of moving between different array libraries is one of the high points of the whole Array API movement.)
+However, even though a stellar performance improvement is not guaranteed, the effort/reward ratio very strongly favors
+JIT versus developing more traditional compiled CUDA kernels, and it is hard not to recommend at least trying out the Array API + JIT based approach (potentially, as a time-boxed experiment).
 
 From a library maintainer perspective, using mixed JIT/AOT implementation poses several open questions.
 First of all, what is the public interface for JIT-ing, especially for stateful objects like scikit-learn estimators?
 In this experiment, we were reaching into private implementation details of the `RBFInterpolator` object, which works for one-off experimentation, but is not something a library can recommend for its general user base. 
 At the time of writing, there is no universally-agreed upon answer, and the discussions are ongoing ([here is one example](https://github.com/data-apis/array-api-extra/issues/523)).
 
-One other concern for library developers is that duplicate backends obviously add to the maintenance load: there is more code to maintain, backends need to be kept in sync, and adding new features is more complicated. Ultimately, the decision on the performance / maintainability balance will continue to need to be done on a case-by-case basis. Devising ways to reduce duplication however is worth experimenting across the community.
+One other concern for library developers is that duplicate backends obviously add to the maintenance load: there is more code to maintain, backends need to be kept in sync, and adding new features is more complicated. Ultimately, the decision on the performance / maintainability balance will continue to need to be done on a case-by-case basis. Devising ways to reduce duplication is, however, worth experimenting across the community.
 
 
