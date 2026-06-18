@@ -40,7 +40,7 @@ fully contained at the array library level (e.g., CuPy, PyTorch) and do not leak
 the higher-level library (e.g., SciPy, scikit-learn) or the end user.
 
 This approach works extremely well for computational pipelines implemented as vectorized python
-operations on arrays. This is not the full story however; significant parts of user
+operations on arrays. This is not the full story, however; significant parts of user
 libraries contain specialized compiled extensions for operations which are still too slow
 in pure python and vectorized array manipulations, or are too awkward to implement in
 pure python. How to deal with these kinds of situations is a big open question: the
@@ -48,16 +48,16 @@ existing body of C extensions is naturally CPU-only, and one cannot expect that
 scikit-learn maintains both CPU and CUDA C kernels. Simply porting all C code
 to CUDA is also out of question: there is user demand across single- and
 multi-core CPU compute, CUDA, and other types of hardware accelerators, such as
-ROCm or TPU---and the hardware landscape itself changes rapidly.
+ROCm or TPU--and the hardware landscape itself changes rapidly.
 
-In this work, we report on an experiment, where we take a SciPy object,
+In this work, we report on an experiment where we take a SciPy object,
 [`RBFInterpolator`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.RBFInterpolator.html) from `scipy.interpolate`, which is backed by
 a dedicated C extension, extend it to support multicore CPUs and CUDA GPUs via Array API,
 and evaluate it for performance and maintainability across several array backends and compute types.
 We also consider an additional dimension: in addition to the classic ahead-of-time
 compilation (AOT) in C, we compare with generating kernels on the fly via just-in-time
-compilation (JIT). Note that JIT technologies are backend-specific, and are much less mature
-than AOT technologies. In this work, we report on using `torch.compile`, `jax.jit` and `numba`.
+compilation (JIT). Note that JIT technologies are backend-specific and are much less mature
+than AOT technologies. In this work, we report on using `torch.compile`, `jax.jit`, and `numba`.
 Depending on hardware and software tech stack, we find non-trivial performance differentials,
 with speedups of more than an order of magnitude to significant slow-downs.
 
