@@ -19,7 +19,7 @@ speeds. For several decades, the answer to "Python is slow" has been
 to write a C extension, so that computationally intensive parts of an application
 proceed at C speeds. 
 A prime example in scientific computing and data science is NumPy,
-which provides an array abstraction in Python, and performs internal looping over the array
+which provides an array abstraction in Python and performs internal looping over the array
 data in C. 
 
 Historically, NumPy is geared toward single-core CPU execution. The surge in popularity
@@ -90,19 +90,19 @@ specific for different array libraries.
 ## Background: Radial basis functions
 
 Glossing over the details, the mathematical contents behind `scipy.interpolate.RBFInterpolator`
-is as follows. Given a collection of $m$ vectors, $X_i$, in an N-dimensional space, and $m$ scalar "values", $D_i$, we want to construct a function $F(x)$, which accepts N-dimensional vectors, and takes the given values $D_i$ at $X_i$.
+is as follows. Given a collection of $m$ vectors, $X_i$, in an N-dimensional space, and $m$ scalar "values", $D_i$, we want to construct a function $F(x)$ which accepts N-dimensional vectors and takes the given values $D_i$ at $X_i$.
 
-We take this function --- an RBF interpolant --- as a linear combination of _kernel functions_, centered at $X_i$:
+We take this function--an RBF interpolant--as a linear combination of _kernel functions_, centered at $X_i$:
 
 $$
 F(x) = \sum_{i=1}^m C_i f(|x - X_i|)
 $$
 
-where $f(\cdot)$ is the scalar *kernel function*, and $|x - X_i|$ is the norm of the N-dimensional vector $x - X_i$. The coefficients, $C_i$, are defined by the inputs $X_i$ and $D_i$.
+where $f(\cdot)$ is the scalar *kernel function* and $|x - X_i|$ is the norm of the N-dimensional vector $x - X_i$. The coefficients, $C_i$, are defined by the inputs $X_i$ and $D_i$.
 
-The process thus involves two steps: we first *fit* the input data, $X_i$ and $D_i$, to find the coefficients, $C_i$; we then *predict* the value of the interpolant at the new vector $x$. The latter is forming the array of the kernel functions centered at $X_i$, and multiplying it by the array of coefficients. 
+The process thus involves two steps: we first *fit* the input data, $X_i$ and $D_i$, to find the coefficients, $C_i$; we then *predict* the value of the interpolant at the new vector $x$. The latter is performed by taking the array of the kernel functions centered at $X_i$ and multiplying it by the array of coefficients. 
 
-Typically we fit the data once, and evaluate the resulting $F(x)$ multiple times for varying inputs $x$. Thus evaluations are performance-critical, and we focus on evaluations in what follows.
+Typically, we fit the data once and evaluate the resulting $F(x)$ multiple times for varying inputs $x$. Thus, evaluations are performance-critical, and we focus on evaluations in what follows.
 
 
 ## Baseline implementation
