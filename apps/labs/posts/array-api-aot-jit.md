@@ -15,11 +15,11 @@ hero:
 
 
 Python is known for both being easy and fast to develop in, and its slow execution
-speeds. For several decades, the answer to "python is slow" has been
+speeds. For several decades, the answer to "Python is slow" has been
 to write a C extension, so that computationally intensive parts of an application
 proceed at C speeds. 
 A prime example in scientific computing and data science is NumPy,
-which provides an array abstraction, and performs internal looping over the array
+which provides an array abstraction in Python, and performs internal looping over the array
 data in C. 
 
 Historically, NumPy is geared toward single-core CPU execution. The surge in popularity
@@ -39,11 +39,11 @@ This way, all low-level details of CUDA programming are
 fully contained at the array library level (e.g., CuPy, PyTorch) and do not leak to either
 the higher-level library (e.g., SciPy, scikit-learn) or the end user.
 
-This approach works extremely well for computational pipelines implemented as vectorized python
+This approach works extremely well for computational pipelines implemented as vectorized Python
 operations on arrays. This is not the full story, however; significant parts of user
 libraries contain specialized compiled extensions for operations which are still too slow
-in pure python and vectorized array manipulations, or are too awkward to implement in
-pure python. How to deal with these kinds of situations is a big open question: the
+in pure Python and vectorized array manipulations, or are too awkward to implement in
+pure Python. How to deal with these kinds of situations is a big open question: the
 existing body of C extensions is naturally CPU-only, and one cannot expect that
 scikit-learn maintains both CPU and CUDA C kernels. Simply porting all C code
 to CUDA is also out of question: there is user demand across single- and
@@ -83,7 +83,7 @@ the behavior of a real production object, as [implemented in SciPy version 1.17]
 
 In this section, we start with a brief outline of the mathematics that `RBFInterpolator`
 implements, then discuss the baseline implementation and its Array API compatible
-generalization. We then move on to describing our approach to jit compilation, which is
+generalization. We then move on to describing our approach to JIT compilation, which is
 specific for different array libraries.
 
 
@@ -135,7 +135,7 @@ def evaluate_np(x, Y, coeffs):
 Here `kernel_func` is the RBF basis function $f(r)$, and `coeffs` are coefficients, $C_i$, pre-computed during the *fit* stage.
 Since we typically evaluate the interpolant at multiple vectors $x$, we always stack them into a 2-D array `x`.
 
-Consider evaluating an interpolant on a 50x50 grid in two dimensions. The `x` array than has the shape `(2500, 2)`, and looping over this large arrays in pure python is too slow to be practical. Therefore, `RBFInterpolator` in fact compiles the loop into C using the [`pythran`](https://pythran.readthedocs.io/en/latest/) ahead-of-time (AOT) compiler. In practice, this amounts to adding special comments to the python source and invoking the `pythran` compiler on the annotated source file:
+Consider evaluating an interpolant on a 50x50 grid in two dimensions. The `x` array than has the shape `(2500, 2)`, and looping over this large arrays in pure Python is too slow to be practical. Therefore, `RBFInterpolator` in fact compiles the loop into C using the [`pythran`](https://pythran.readthedocs.io/en/latest/) ahead-of-time (AOT) compiler. In practice, this amounts to adding special comments to the Python source and invoking the `pythran` compiler on the annotated source file:
 
 ```
 # pythran export evaluate_pythran(float64[:, :], float64[:, :], float64[:])
@@ -143,7 +143,7 @@ def evaluate_pythran(x, Y, coeffs):
     # ... as before in `evaluate_np`
 ```
 
-During the build stage, the `pythran` compiler uses these special comments to transpile the annotated python functions into C++, and then builds them into a python-importable extension module. As a result, looping over arrays proceeds at C speeds.
+During the build stage, the `pythran` compiler uses these special comments to transpile the annotated Python functions into C++, and then builds them into a Python-importable extension module. As a result, looping over arrays proceeds at C speeds.
 
 
 ## Array API "generic" implementation
@@ -220,12 +220,12 @@ evaluate_jax = jax.jit(evaluate_xp, static_argnames=["xp"])
 ```
 
 Both `torch.compile` and `jax.jit` are _tracing_ compilers: they analyze the types of
-variables in the running program, and replace python operations on these variables
+variables in the running program, and replace Python operations on these variables
 with their efficient low-level analogs. This way they manage to convert to machine code,
 our backend-generic `evaluate_xp` function which uses the runtime-defined `xp` argument.
 
 The very fact that invoking this kind of highly non-trivial machinery fits in a single
-line of python code feels like a minor miracle. 
+line of Python code feels like a minor miracle. 
 
 With `numba`, we need to work a little more. First of all, Numba is not a tracing compiler;
 it special-cases NumPy at the source code level, and our approach of adding the `xp`
