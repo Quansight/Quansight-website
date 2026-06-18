@@ -258,7 +258,7 @@ scripts and results are available [in this repository](https://github.com/ev-br/
 
 While `numpy` execution is single-threaded even on a multi-core machine, `torch` and `jax`
 internally use multiple cores by default. Therefore, we run benchmarks twice:
-once on a consumer-grade laptop with 4-core Intel i5 processor, and then on a beefy 32-core
+once on a consumer-grade laptop with 4-core Intel i5 processor and then on a beefy 32-core
 AMD Ryzen Threadripper 3970X system.
 
 ### Benchmarks on a laptop, CPU
@@ -268,47 +268,47 @@ on a 4-core Intel i5 CPU laptop
 
 ![Benchmark results on 4-core CPU](/posts/array-api-aot-jit/cpu_bench.png)
 
-We see that in the eager mode (left-hand panel), Jax and PyTorch evaluations are 2-5 times
+We see that, in the eager mode (left-hand panel), JAX and PyTorch evaluations are 2-5 times
 slower than the AOT-compiled pythran code. In itself, it is not surprising that they
-are slower; if anything it is surprising that the slowdown is "only" by a factor of 2-5!
+are slower; if anything, it is surprising that the slowdown is "only" by a factor of 2-5!
 We did not benchmark an uncompiled pure NumPy implementation: the "loopy" version is
 expected to have abysmal performance, and a vectorized implementation is expected to
 perform roughly in the same ballpark as eager `jax`/`pytorch`.
 
-In the JIT mode however (right-hand panel), Jax and PyTorch are 3-5 times faster than
+In the JIT mode (right-hand panel), however, JAX and PyTorch are 3-5 times faster than
 the AOT `pythran`-compiled implementation.
 The origin of the speedup relative to `pythran` is not very clear; a potential contributing
-factor is that both Jax and PyTorch are multi-threaded by default, while `pythran`-compiled
+factor is that both JAX and PyTorch are multi-threaded by default, while `pythran`-compiled
 code is single-threaded. In principle, `pythran` can generate OpenMP parallel loops, but it is switched off
 in the SciPy build system.
 
-Surprisingly, `numba` fares much worse than `jax.jit` or `torch.compile`, and is about
-three times slower than the AOT-compiled pythran version --- even though we explicitly
+Surprisingly, `numba` fares much worse than `jax.jit` or `torch.compile` and is about
+three times slower than the AOT-compiled pythran version, even though we explicitly
 OpenMP parallelized the loops with `numba.prange`.
 
 
 ### Benchmarks on a multicore machine, CPU
 
-To assess the effect of parallelizing the workload on a multicore machine, we rerun the same benchmark on a
-32-core AMD Ryzen Threadripper 3970X system. We use the default parallelization settings, so that
-`pytorch`, `jax` and `numba` use all available cores.
+To assess the effect of parallelizing the workload on a multicore machine, we reran the same benchmark on a
+32-core AMD Ryzen Threadripper 3970X system. We used the default parallelization settings, so that
+`pytorch`, `jax`, and `numba` used all available cores.
 
 ![Benchmark results on a 32-core CPU](/posts/array-api-aot-jit/cpu_bench_server.png) 
 
-In the eager mode, Jax seems to parallelize a little better than other backends: when using all 32 cores, Jax is nearly 2x
+In eager mode, JAX seems to parallelize a little better than other backends: when using all 32 cores, JAX is nearly 2x
 faster than the (single-threaded!) AOT-compiled `numpy`/`pythran` code, while PyTorch is about 2x-3x slower.
 So just throwing more CPU cores does not make things much faster by itself.
 
-In the JIT mode however, we get massive speed-ups: `jax` performs about 15 times better, with `torch` trailing at a speedup of about 10x.
+In JIT mode, however, we get massive speed-ups: `jax` performs about 15 times better, with `torch` trailing at a speedup of about 10x.
 
-`numba` is seen to improve with increased CPU count, and on 32 CPU cores performs within 30% of the (single-threaded) AOT version.
+`numba` is seen to improve with increased CPU count, and, on 32 CPU cores, performs within 30% of the (single-threaded) AOT version (i.e., 0.7-1.3x faster, depending on the problem size).
 
 
-### Force a single-threaded execution
+### Forced single-threaded execution
 
-Since parallelization shows to play a non-trivial role, we also perform an apples-to-apples benchmark run, where
-we force a single-threaded execution for all backends (in fact, forcing single threading
-is [not entirely straightforward](#single_core_stanza)). Below we display the *slowdown* of a single-core
+Since parallelization seems to play a non-trivial role, we also performed an apples-to-apples benchmark run where
+we forced single-threaded execution for all backends (in fact, forcing single threading
+is [not entirely straightforward](#single_core_stanza)). Below, we display the *slowdown* of a single-core
 execution versus default parallelization on 32 cores.
 
 
