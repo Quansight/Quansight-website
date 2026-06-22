@@ -26,7 +26,7 @@ more details about `.mdx` please see <https://mdxjs.com/>.
    post to `apps/labs/public/posts/<post-slug>/`. The feature image is used for
    sharing on social media and in the blog index. The hero image is the big
    banner above the blog post.
-4. Add a new `.md|.mdx` file inside the `app/labs/posts` directory (careful:
+4. Add a new `.md|.mdx` file inside the `apps/labs/posts` directory (careful:
    this is not the same directory as the images). Make sure to
    read the [Structure of the blog post section](#structure-of-the-blog-post) in
    this file to ensure that the post is properly structured.

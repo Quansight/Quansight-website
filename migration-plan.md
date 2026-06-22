@@ -1,6 +1,10 @@
 # Migration Plan: Storyblok → File-Based Content
 
-> **Status:** Draft scaffolding. Sections marked **TODO** to be filled in.
+> **Status:** Historical. The migration is complete; this document is kept as a
+> record of what was done and why. It is no longer maintained. For how to run
+> and edit the site today, see [site-admin.md](site-admin.md) and
+> [ARCHITECTURE.md](ARCHITECTURE.md). Remaining **TODO** markers below were never
+> filled in and are left as-is.
 
 ## Executive Summary
 
@@ -294,28 +298,7 @@ DOCKER_API_VERSION=1.42 docker run --rm -v "$PWD":/app -w /app/apps/labs \
 
 ## Part 3 — Maintenance Going Forward
 
-### 3.1 Adding or editing a person
-
-_TODO: detailed workflow. Sketch:_
-
-- Create or edit `content/people/<slug>.md`
-- Frontmatter: `full_name`, `short_name`, `role`, `photo`, `links`, etc.
-- Drop photo in `public/img/people/<slug>.<ext>`
-- Open PR, merge → site deploys via existing Vercel pipeline
-
-### 3.2 Adding or editing a page
-
-_TODO: detailed workflow. Sketch:_
-
-- Edit the relevant `content/pages/<slug>.mdx`
-- Compose existing block components inline:
-  `<Hero ... />`, `<Team people={...} />`, `<Logos ... />`, etc.
-- Preview via local dev server
-- Open PR, merge
-
-### 3.3 Editing header / footer
-
-_TODO: detailed workflow. Sketch:_
-
-- Edit `data/header.yml` or `data/footer.yml`
-- Schema documented inline in the file as comments
+Maintenance workflows now live in [site-admin.md](site-admin.md): adding or
+editing a person, adding or editing a page, editing the header/footer, the
+projects list, and code changes (new block components). Blog posts are covered in
+[how-to-publish-a-new-blog-post.md](how-to-publish-a-new-blog-post.md).

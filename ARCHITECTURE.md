@@ -3,6 +3,7 @@
 `apps/labs/` — Quansight Labs site (Astro, static output)
 
 - `src/` — Astro pages, layouts, components, templates
+  - `src/content.config.ts` — content collections: `people`, `pages`, `posts`, `singletons` (header/footer)
 - `posts/` — blog post markdown files
 - `people/` — team member markdown files
 - `pages/` — page content YAML files (home, blog, team, projects, …)
@@ -21,6 +22,6 @@
 
 `.husky/` — pre-commit hook: runs `lint-staged` (Prettier on staged files)
 
-`.github/` — Dependabot config and issue templates
+`.github/` — Dependabot config, issue/PR templates, CODEOWNERS
 
 `vercel.json` — overrides Vercel build to use `apps/labs/` as root
