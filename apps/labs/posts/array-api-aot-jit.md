@@ -109,7 +109,7 @@ Typically, we fit the data once and evaluate the resulting $F(x)$ multiple times
 
 Glossing over non-essential details, the core evaluation routine of `RBFInterpolator` is conceptually equivalent to a direct translation of the mathematical formula for the RBF evaluation:
 
-```
+```python
 import numpy as np
 
 def kernel_func(r):
@@ -137,7 +137,7 @@ Since we typically evaluate the interpolant at multiple vectors $x$, we always s
 
 Consider evaluating an interpolant on a 50x50 grid in two dimensions. The `x` array than has the shape `(2500, 2)`, and looping over this large of an array in pure Python is too slow to be practical. Therefore, `RBFInterpolator` in fact compiles the loop into C using the [`pythran`](https://pythran.readthedocs.io/en/latest/) ahead-of-time (AOT) compiler. In practice, this amounts to adding special comments to the Python source and invoking the `pythran` compiler on the annotated source file:
 
-```
+```python
 # pythran export evaluate_pythran(float64[:, :], float64[:, :], float64[:])
 def evaluate_pythran(x, Y, coeffs):
     # ... as before in `evaluate_np`
@@ -153,7 +153,7 @@ To generalize `RBFInterpolator` across Array API compatible backends, we use the
 Since looping over array elements in alternative array backends is at least as slow as it is in `numpy`, we use a "vectorized" version of the `evaluate_np` routine above:
 
 
-```
+```python
 def kernel_func(r, xp):
     return xp.where(r == 0, 0, r**2 * xp.log(r))
 
@@ -162,12 +162,11 @@ def evaluate_xp(x, Y, coeffs, xp):
     r = xp.linalg.vector_norm(x[:, None, :] - Y[None, :, :], axis=-1)
     vec = kernel_func(r, xp)
     return vec @ coeffs
-
 ```
 
 Note an additional `xp` argument, which stands for an Array API compatible namespace, and we use `xp.where`, `xp.log`, and `xp.linalg.vector_norm` functions. The overall structure of the `RBFInterpolator` class is essentially as follows:
 
-```
+```python
 from array_api_compat import array_namespace
 
 class RBFInterpolator:
@@ -205,7 +204,7 @@ we reach into private implementation details of a SciPy object.
 
 With `pytorch`, the incantation reads
 
-```
+```python
 evaluate_dynamo = torch.compile(fullgraph=True, dynamic=True)(evaluate_xp)
 ```
 
@@ -215,7 +214,7 @@ a single kernel for all input sizes instead of recompiling a new kernel for each
 
 With `jax`, we need to tell it that the `xp` argument is special:
 
-```
+```python
 evaluate_jax = jax.jit(evaluate_xp, static_argnames=["xp"])
 ```
 
