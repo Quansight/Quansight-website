@@ -244,8 +244,8 @@ below](#numba) gives more details.
 
 To measure performance across backends and devices, we used an example from the
 [`RBFInterpolator` documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.RBFInterpolator.html) and performed evaluations with arrays of size
-`N x N` with `N` ranging from 50 to 1000, using `torch`, `jax`, `numpy` as array backends,
-in both *eager* and *jit* modes ("numpy jit" is `numba`). 
+`N x N` with `N` ranging from 50 to 1000, using `torch`, `jax`, `cupy` and `numpy` as array backends,
+in both *eager* and *jit* modes ("numpy jit" is `numba`, and `cupy` is eager-only).
 The computational complexity of a single run is approximately quadratic with the
 problem size `N`.
 
