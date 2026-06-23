@@ -1,7 +1,7 @@
 ---
 title: 'Array API adoption: what to do with compiled code'
 authors: [evgeni-burovski]
-published: June 3, 2026
+published: June 23, 2026
 description: 'In this blog post, we discuss ways of dealing with compiled code when adopting the Array API.'
 category: [Array API, GPU]
 featuredImage:
@@ -193,7 +193,7 @@ PyTorch tensors throughout.
 ## JIT compilation
 
 First and foremost, we note that there is no single best JIT technology. JIT-ing is
-backend-specific: for PyTorch, we use `torch.dynamo`; for JAX, we use `jax.jit`; and
+backend-specific: for PyTorch, we use `torch.compile`; for JAX, we use `jax.jit`; and
 for NumPy, we use `numba`. 
 
 For the JIT strategy in this exercise, we use the simplest approach: we keep the
@@ -202,7 +202,7 @@ For the JIT strategy in this exercise, we use the simplest approach: we keep the
 final end user API. Currently, SciPy provides no public interface for jitting, and here
 we reach into private implementation details of a SciPy object.
 
-With `pytorch`, the incantation reads
+With PyTorch, the incantation reads
 
 ```python
 evaluate_dynamo = torch.compile(fullgraph=True, dynamic=True)(evaluate_xp)
@@ -272,7 +272,7 @@ slower than the AOT-compiled pythran code. In itself, it is not surprising that 
 are slower; if anything, it is surprising that the slowdown is "only" by a factor of 2-5!
 We did not benchmark an uncompiled pure NumPy implementation: the "loopy" version is
 expected to have abysmal performance, and a vectorized implementation is expected to
-perform roughly in the same ballpark as eager `jax`/`pytorch`.
+perform roughly in the same ballpark as eager `jax`/`torch`.
 
 In the JIT mode (right-hand panel), however, JAX and PyTorch are 3-5 times faster than
 the AOT `pythran`-compiled implementation.
@@ -283,14 +283,14 @@ in the SciPy build system.
 
 Surprisingly, `numba` fares much worse than `jax.jit` or `torch.compile` and is about
 three times slower than the AOT-compiled pythran version, even though we explicitly
-OpenMP parallelized the loops with `numba.prange`.
+parallelized the loops with `numba.prange` (which uses OpenMP under the hood).
 
 
 ### Benchmarks on a multicore machine, CPU
 
 To assess the effect of parallelizing the workload on a multicore machine, we reran the same benchmark on a
 32-core AMD Ryzen Threadripper 3970X system. We used the default parallelization settings, so that
-`pytorch`, `jax`, and `numba` used all available cores.
+`torch`, `jax`, and `numba` used all available cores.
 
 ![Benchmark results on a 32-core CPU](/posts/array-api-aot-jit/cpu_bench_server.png) 
 
