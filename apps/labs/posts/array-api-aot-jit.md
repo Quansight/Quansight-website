@@ -12,7 +12,7 @@ hero:
   imageAlt: 'Data APIs logo next to logos of NumPy, CuPy, PyTorch and JAX'
 ---
 
-
+*Updated 27 June 2026: Benchmarks on CUDA section updated for CuPy*
 
 Python is known for both being easy and fast to develop in, and its slow execution
 speeds. For several decades, the answer to "Python is slow" has been
@@ -346,6 +346,12 @@ It is expected that only large enough workloads benefit from using GPUs, and the
 
 We also note that CuPy "only" delivers a speedup of about 3x relative to NumPy, which is modest in comparison to JAX or PyTorch. Also note that, in this study, we only used CuPy in eager mode and did not use any CuPy JIT capabilities (and therefore the CuPy results are identical on the two panels of the plot). We also did not attempt using `numba.cuda` which
 is a different, lower-level interface for CUDA programming from Python.
+
+*UPDATED 27 June 2026.* After this post was published, a private communication with CuPy developers helped to improve the CuPy benchmark performance. Two small changes make CuPy performance comparable with that of PyTorch and JAX:
+- in code, `xp.square(r)` is 3-5 times faster than `r**2`;
+- set the environment variable `CUPY_ACCELERATORS=""`; This significantly improves performance of computing the norms of length-2 vectors (at an expernse of slowing down other reductions over larger arrays, thus this may have detrimental effects in other workloads).
+
+We benchmarked these changes with CuPy versions 13.6 and 14.0.1; Future CuPy versions might include the corresponding performance optimizations automatically---always benchmark your specific application!
 
 
 ## JIT caveats
