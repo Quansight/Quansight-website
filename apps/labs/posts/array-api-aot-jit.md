@@ -328,12 +328,12 @@ is less than 32, the number of cores for the "default" run. Therefore, if raw pe
 
 ## Benchmarks on CUDA
 
-*UPDATED 28 June 2026. After this post was published, a private communication with CuPy developers helped to improve the CuPy benchmark performance. Two small changes make CuPy performance comparable with that of PyTorch and JAX (see below):
-- in code, `xp.square(r)` is 3-5 times faster than `r**2`;
-- set the environment variable `CUPY_ACCELERATORS=""`; This significantly improves performance of computing the norms of length-2 vectors (at an expense of slowing down other reductions over larger arrays, thus this may have detrimental effects in other workloads).*
+*UPDATED 28 June 2026. After this post was published, a private communication with CuPy developers helped to improve the CuPy benchmark performance. Two small changes make CuPy performance comparable with that of PyTorch and JAX (see below):*
+- *in code, `xp.square(r)` is 3-5 times faster than `r**2`;*
+- *set the environment variable `CUPY_ACCELERATORS=""`; This significantly improves performance of computing the norms of length-2 vectors (at an expense of slowing down other reductions over larger arrays, thus this may have detrimental effects in other workloads).*
 
 *Since the first change affects all backends, we rerun the full set of benchmarks, and the rest of this section reflects the updated results (Note that there also were other, unrelated, changes to the several dependencies).
-We benchmarked these changes with CuPy version 14.0.1; Future CuPy versions might include the corresponding performance optimizations automatically---always benchmark your specific application!*
+We benchmarked these changes with CuPy version 14.0.1; A future CuPy version is expected to incldude the corresponding performance optimizations automatically---always benchmark your specific application with up-to-date dependencies!*
 
 
 One of the salient points of the Array API compatible code is the ease of using CUDA GPUs.
