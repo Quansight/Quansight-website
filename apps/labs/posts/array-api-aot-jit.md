@@ -346,7 +346,7 @@ libraries. On a machine with a GeForce RTX 2060 accelerator, we obtain the follo
 Overall, performance benefits from using CUDA device are massive.
 In JIT mode, PyTorch delivers up to 30x speed-up relative to the baseline `numpy`/`pythran` AOT on CPU, while JAX delivers up to 20x. Curiously, JAX wins on multicore CPUs, while PyTorch seems to utilize a CUDA device better.
 
-The difference between eager and JIT modes is not as pronounced on CUDA as it is on a multicore CPU (e.g. with `torch`: on CPU, jitting gives an order of magbitude boost; while on CUDA the difference between PyTorch eager and PyTorch jit is "just" a additional factor of 1.5x).
+The difference between eager and JIT modes is not as pronounced on CUDA as it is on a multicore CPU (e.g. with `torch`: on CPU, jitting gives an order of magnitude boost, while on CUDA the difference between PyTorch eager and PyTorch jit is "just" a additional factor of 1.5x).
 
 Performance profiles for running on CUDA are problem size dependent, and, as expected, larger workloads benefit more from being run on on GPUs.
 
