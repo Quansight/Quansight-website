@@ -12,7 +12,8 @@ hero:
   imageAlt: 'Data APIs logo next to logos of NumPy, CuPy, PyTorch and JAX'
 ---
 
-
+*Updated 28 June 2026: Benchmarks on CUDA section updated following feedback from CuPy
+developers.*
 
 Python is known for both being easy and fast to develop in, and its slow execution
 speeds. For several decades, the answer to "Python is slow" has been
@@ -327,25 +328,31 @@ is less than 32, the number of cores for the "default" run. Therefore, if raw pe
 
 ## Benchmarks on CUDA
 
+*UPDATED 28 June 2026. After this post was published, a private communication with CuPy developers helped to improve the CuPy benchmark performance. Two small changes make CuPy performance comparable with that of PyTorch and JAX (see below):*
+- *in code, `xp.square(r)` is 3-5 times faster than `r**2`;*
+- *set the environment variable `CUPY_ACCELERATORS=""`; This significantly improves performance of computing the norms of length-2 vectors (at an expense of slowing down other reductions over larger arrays, thus this may have detrimental effects in other workloads).*
+
+*Since the first change affects all backends, we rerun the full set of benchmarks, and the rest of this section reflects the updated results (Note that there also were other, unrelated, changes to the several dependencies).
+We benchmarked these changes with CuPy version 14.0.1; A future CuPy version is expected to incldude the corresponding performance optimizations automatically---always benchmark your specific application with up-to-date dependencies!*
+
+
 One of the salient points of the Array API compatible code is the ease of using CUDA GPUs.
 We ran the same benchmark with no code changes on a GPU with `jax`, `torch`, and `cupy`
 libraries. On a machine with a GeForce RTX 2060 accelerator, we obtain the following results:
 
 
-![Benchmark results on a CUDA GPU](/posts/array-api-aot-jit/gpu_bench.png) 
+![Benchmark results on a CUDA GPU](/posts/array-api-aot-jit/gpu_bench_2.png) 
 
 Overall, performance benefits from using CUDA device are massive.
-In JIT mode, PyTorch delivers up to 40x speed-up relative to the baseline `numpy`/`pythran` AOT on CPU, while JAX delivers up to 20x. Curiously, JAX wins on multicore CPUs, while PyTorch seems to utilize a CUDA device better.
+In JIT mode, PyTorch delivers up to 30x speed-up relative to the baseline `numpy`/`pythran` AOT on CPU, while JAX delivers up to 20x. Curiously, JAX wins on multicore CPUs, while PyTorch seems to utilize a CUDA device better.
 
-The difference between eager and JIT modes is not as pronounced on CUDA as it is on a multicore CPU
-(with `torch`: on CPU, jitting changes the speedup from 1.6x to 16x; while on CUDA, eager it gives 25x, and invoking JIT
-further improves it by "just" 60% to a total of 40x.)
+The difference between eager and JIT modes is not as pronounced on CUDA as it is on a multicore CPU (e.g. with `torch`: on CPU, jitting gives an order of magnitude boost, while on CUDA the difference between PyTorch eager and PyTorch jit is "just" a additional factor of 1.5x).
 
-Performance profiles for running on CUDA are problem size dependent, especially with JAX eager. This in itself is not very surprising.
-It is expected that only large enough workloads benefit from using GPUs, and the problem sizes in this study are actually rather small.
+Performance profiles for running on CUDA are problem size dependent, and, as expected, larger workloads benefit more from being run on on GPUs.
 
-We also note that CuPy "only" delivers a speedup of about 3x relative to NumPy, which is modest in comparison to JAX or PyTorch. Also note that, in this study, we only used CuPy in eager mode and did not use any CuPy JIT capabilities (and therefore the CuPy results are identical on the two panels of the plot). We also did not attempt using `numba.cuda` which
-is a different, lower-level interface for CUDA programming from Python.
+Performance characteristics of CuPy are worth noting: the updated version (with a dedicated ufunc for elementwise squaring and disabling internal acceleration) performs on par with PyTorch eager. Without these updates, CuPy performance was significantly worse than either JAX or PyTorch.
+
+Also note that, in this study, we only used CuPy in eager mode and did not use any CuPy JIT capabilities (and therefore the CuPy results are identical on the two panels of the plot). We also did not attempt using `numba.cuda` which is a different, lower-level interface for CUDA programming from Python.
 
 
 ## JIT caveats
