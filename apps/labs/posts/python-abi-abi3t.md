@@ -25,7 +25,8 @@ I also hope you'll learn some useful information about how Python projects that 
 By the end, you should be able to look at any wheel filename and know which Python interpreters it will install on — and why.
 
 It's true that you can happily write Python for years without hitting any of the issues discussed in this post, so you may object to the title advertising this material as what _every_ Python developer should know.
-The moment you ship a package — or debug why a wheel won't install or an import or Python function call segfaults — these details start to matter, and even a single-file script puts you closer to distributing code than you might think.
+The moment you ship a package, debug why a wheel won't install, or understand why an import or Python function call segfaults — these details start to matter.
+Even writing and maintainting a single-file script puts you closer to distributing code than you might think.
 An alternate title for this post could be "What I Wish Someone Taught Me About the CPython ABI".
 
 ## The CPython C API and the Python ABI
@@ -117,13 +118,13 @@ The platform ABI governs details of how exactly machine code executes on each ar
 A platform ABI determines things like the exact way machine code needs to pass arguments to a function.
 For example, on the [`x86_64`](https://wiki.osdev.org/System_V_ABI#x86-64) architecture, only the first six non-floating-point arguments of a function are passed via registers, the remaining arguments are passed via the stack.
 Normally, developers do not need to worry about details like this: compilers automatically generate machine code appropriate for whatever platform ABI a developer wants to target.
-However, it _is_ important to know that the underlying platform — the combination of operation system and CPU architecture — has its own unique ABI, and that code compiled for one platform ABI is completely unusable on another platform ABI.
+However, it _is_ important to know that the underlying platform — the combination of operating system and CPU architecture — has its own unique ABI, and that code compiled for one platform ABI is completely unusable on another platform ABI.
 This fact determines much of the design of the [binary wheel distribution format](https://packaging.python.org/en/latest/specifications/binary-distribution-format/), which we'll discuss in more detail below.
 
 The biggest consequence is that each platform and CPU architecture, each with its own distinct platform ABI, requires its own unique builds.
 This is one reason projects like `NumPy` distribute [so many binary wheels](https://pypi.org/project/numpy/2.5.0/#files) with each release: projects need to build binaries for each platform ABI they want to support.
 
-I am glossing over details a little bit here: things like the system libc library implementation (musl vs glibc on Linux) or the compiler implementation (MSVC vs mingw-64 on Windows) can also impact the ABI.
+I am glossing over details a little bit here: things like the system libc library implementation (musl vs glibc on Linux) or the compiler implementation (MSVC vs mingw-w64 on Windows) can also impact the ABI.
 In many contexts, this complexity is parameterized with a so-called ["target triple"](https://mcyoung.xyz/2025/04/14/target-triples/) like `aarch64-apple-darwin`.
 Each distinct target triple corresponds to a distinct set of ABI conventions that a compiler toolchain must support to generate valid binaries.
 
@@ -165,10 +166,12 @@ The third, fourth, and fifth pieces — the [compatibility tags](https://packagi
 The "python" tag indicates either the exact version supported by the wheel or the minimum supported version.
 Whether or not the version indicates a minimum or an exact version depends on the next ABI tag.
 The `py3` tag used by `pycparser` indicates that this is usable by _any_ Python 3 interpreter running _any_ Python version, not necessarily just CPython.
-The `cp` in the `cp311` and `cp314` tags indicate that the `cryptography` and `cffi` wheels are only usable with CPython.
+The full `py3-none-any` triple implies the wheel is compatible with any Python 3 version and any platform: it includes only pure-Python code and no compiled extensions.
+The `cp` in the `cp311` and `cp314` tags indicates that the `cryptography` and `cffi` wheels are only usable with CPython.
 Other Python implementations will need a different wheel.
 
-The `cp311-abi3` and `cp314-cp314` tags encode which of CPython's several ABIs a wheel targets; the rest of this post explains what that means, but to get there we need to understand the structure of the CPython C API.
+The `cp311-abi3` and `cp314-cp314` tags imply that these wheels contain compiled extensions.
+The tags encode which of CPython's several ABIs a wheel targets; the rest of this post explains what that means, but to get there we need to understand the structure of the CPython C API.
 
 ## The Layers of the CPython C API
 
@@ -215,7 +218,7 @@ It _is_ part of the Python ABI, though, so it inherits the ABI's stability guara
 
 ### Unstable C API
 
-Moving inward, the next layer is the first _documented_ functionality in the CPython C API, the [the unstable C API](https://docs.python.org/3/c-api/stable.html#unstable-c-api).
+Moving inward, the next layer is the first _documented_ layer in the CPython C API, the [unstable C API](https://docs.python.org/3/c-api/stable.html#unstable-c-api).
 There is an extra layer here because not everything that's documented is stable.
 If a serious defect is discovered in an unstable C API item it may be radically changed or removed entirely in a CPython minor release.
 
@@ -228,9 +231,9 @@ The unstable API is most useful for projects or organizations who can follow dev
 The next innermost layer is the Python version-specific C API and includes all items that follow the CPython C API [stability policy](https://docs.python.org/3/c-api/stable.html#c-api-stability), as first laid out in [PEP 387](https://peps.python.org/pep-0387/) back in 2009.
 While public symbols in the CPython C API can be removed following a deprecation period or to fix a serious defect, this only happens after a period of public discussion and consideration of the community impact.
 Critically, CPython has a policy not to add or remove items in the version-specific API from the first beta release of a Python minor version onward.
-For example, this year Python 3.15.0rc1 cames out in August and that release will freeze the Python 3.15 version-specific C API.
-All subsequent release candidates and official releases share the same set of API items, including function signatures and struct layouts, with no changes allowed until the next Python minor release.
-This allows projects to release binaries targeting a specific Python version and be assured it will continue to work for future bugfixes releases of that version.
+For example, this year Python 3.15.0b1 came out in May and that release froze the Python 3.15 version-specific C API.
+All subsequent beta, release candidates, and official releases share the same set of API items, including function signatures and struct layouts, with no changes allowed until the next Python minor release.
+This allows projects to release binaries targeting a specific Python version and be assured it will continue to work for future bugfix releases of that version.
 
 ### Limited C API
 
@@ -251,7 +254,7 @@ However, a binary wheel targeting the Python 3.9 limited API built from the same
 There is a big "but" in the above claim that targeting the limited API allows supporting _any_ Python version newer than Python 3.10.
 It turns out that this guarantee depends critically on structs that have long been exposed in the CPython ABI and how free-threaded Python wants to change the layout of these structs.
 
-## CPython C ABI stability and binary wheel builds
+## CPython C ABI Stability and Binary Wheel Builds
 
 There are two levels of ABI stability provided by CPython:
 
@@ -416,17 +419,16 @@ Instead, the responsibility for serializing operations using atomic instructions
 While atomics are lower overhead than a single global lock they are still higher overhead than an integer addition or subtraction, particularly for objects that are shared between multiple CPU threads.
 Remember: sharing objects between CPU threads is the entire point of this exercise.
 
+### The Free-Threaded ABI: `cp3XYt`
+
 The fix that ultimately stuck was developed by [Sam Gross](https://github.com/colesbury) and others working on the Python runtime team at Meta.
 The key insight that led to scalable free-threaded Python was to give up on requiring that all threads agree on the exact reference count for all objects at all times.
 Instead, split the counts between references that are from other objects "owned" by the same thread and references from objects on other threads.
 Local references can use cheap integer addition and subtraction and shared references can be deferred until a point when the interpreter can synchronize state between threads.
 
-Atomic operations alone are not enough to ensure evaluating Python bytecode is thread-safe.
 There must also be a way to ensure accessing or mutating an object's state happens reliably.
 Rather than use a _global_ lock, the solution Sam and collaborators settled on was to use many fine-grained locks.
 In fact, one lock per Python object.
-
-### The Free-Threaded ABI: `cp3XYt`
 
 To make that a little more concrete: on Python 3.15, the `PyObject` struct is defined like this on the free-threaded build of CPython:
 
@@ -441,7 +443,7 @@ struct PyObject {
 }
 ```
 
-You can see how the fields in the struct correspond to the two design decisions I introduced above: shared and local refcounts (`ob_ref_local` and `ob_ref_shared`), an "owning" thread ID to identify when objects are local (`ob_tid`), and per-object lock (`ob_mutex`).
+You can see how the fields in the struct correspond to the two design decisions I introduced above: shared and local refcounts (`ob_ref_local` and `ob_ref_shared`), an "owning" thread ID to identify when objects are local (`ob_tid`), and a per-object lock (`ob_mutex`).
 
 `Py_INCREF` is correspondingly more complicated [on the free-threaded build](https://github.com/python/cpython/blob/6920036f287480f7d39d6a4005803aeac27aff3f/Include/refcount.h#L272-L284): for a thread-owned object the hot path is still a single non-atomic increment of `ob_ref_local`, but objects shared across threads fall back to an atomic update of `ob_ref_shared`.
 The details aren't essential — what matters is that a once-trivial integer increment now has to account for the new layout.
@@ -450,10 +452,9 @@ The distinct `PyObject` layout on the free-threaded build corresponds to a disti
 The ABI tags in wheels reflect this by appending a `t` to the version in the CPython version-specific ABI tag.
 So, free-threaded Python 3.14 corresponds to the `cp314t` ABI tag.
 Python 3.13 also shipped a `cp313t` ABI, but that was considered experimental.
-Every Python release from Python 3.14 onward officially supports *two* version-specific ABIs, `cp3XY` and `CP3XYt`.
-That also means all ecosystem projects that ship version-specific wheels must ship *two* wheels per Python version for 3.14 and newer.
+Every Python release from Python 3.14 onward officially supports *two* version-specific ABIs, `cp3XY` and `cp3XYt`.
+That also means all ecosystem projects that wish to match CPython's officially supported releases must ship *two* version-specific wheels per Python version for 3.14 and newer.
 
-That necessitated a new ABI tag for the free-threaded interpreter.
 To make that concrete, let's try installing `cryptography` using free-threaded Python 3.14:
 
 ```bash
@@ -482,7 +483,7 @@ It turns out that there is no equivalent to `abi3` for Python 3.14, so `cryptogr
 So this was the design trade-off: enable multithreaded parallelism but increase the complexity of the interpreter and force extensions to explicitly support this new ABI with a new layout for `PyObject`.
 You can read [PEP 703](https://peps.python.org/pep-0703/) and [PEP 779](https://peps.python.org/pep-0779/) for detailed discussions of why it's worth it for CPython to choose complexity over simplicity in this case.
 
-Please also refer to [Victor Stinner's post](https://vstinner.github.io/free-threading-reference-counting.html) on reference counting in free-threaded Python as well as the [summary of Thomas Wouters' 2026 PyCon talk on LWN](https://lwn.net/SubscriberLink/1078367/eaa511915870fdb2/) for much more detailed discussions of this topic.
+Please also refer to [The Community-Curated Free-Threaded Python Guide](https://py-free-threading.github.io), [Victor Stinner's post](https://vstinner.github.io/free-threading-reference-counting.html) on reference counting in free-threaded Python, and the [summary of Thomas Wouters' 2026 PyCon talk on LWN](https://lwn.net/SubscriberLink/1078367/eaa511915870fdb2/) for much more detailed discussions of this topic.
 
 ## A New Stable ABI for Python 3.15
 
@@ -550,7 +551,7 @@ This pattern only works if the layout of e.g.
 However, if `PyObject` is opaque, then `PyDictObject` must also be opaque, and it's no longer possible to define C subtypes by simply defining a struct with a `base` member.
 Instead, you need to use [a new API specifically for this case](https://peps.python.org/pep-0697/), added in Python 3.12.
 
-During the Python 3.15 development cycle, a few more spots that needed updating:
+During the Python 3.15 development cycle, a few more spots needed updating:
 
 - [A new C API](https://peps.python.org/pep-0793/) for defining modules that avoids `PyModuleDef`, a type that extends `PyObject`.
 - [Making `PyObject` opaque and defining a new stable ABI](https://peps.python.org/pep-0803/)
@@ -608,9 +609,9 @@ This is summarized in the table below.
 In the future, when Python 3.15 becomes your minimum supported Python version, you can go back to shipping one wheel per release.
 Temporarily building three wheels per release does add some ecosystem-wide cost with the reward of being able to adopt free-threaded Python.
 
-Currently, `abi3t` support in build tools and bindings generators is mixed at time of writing in June 2026, as Python 3.15 is still in a pre-release stage.
+As of July 2026, `abi3t` support in build tools and bindings generators is mixed, as Python 3.15 is still in a pre-release stage.
 As the Python 3.15 final release approaches, expect to see build backend and binding generator support improve.
-[PyO3](https://pyo3.rs/v0.29.0/features.html#abi3t) and [Maturin](https://www.maturin.rs/bindings.html?highlight=abi3t#py_limited_apiabi3) fully support Python 3.15, so most Rust extensions should be ready for testing.
+[PyO3](https://pyo3.rs/v0.29.0/features.html#abi3t) and [Maturin](https://www.maturin.rs/bindings.html?highlight=abi3t#py_limited_apiabi3) fully support Python 3.15 and `abi3t`, so most Rust extensions should be ready for testing.
 [Scikit-build-core](https://scikit-build-core.readthedocs.io/en/latest/configuration/index.html#customizing-the-output-wheel) also supports abi3t.
 Cython supports abi3t via [an experimental branch](https://github.com/cython/cython/issues/7399).
 Setuptools support will be added once [PR #5193](https://github.com/pypa/setuptools/pull/5193) is merged and appears in a release.
