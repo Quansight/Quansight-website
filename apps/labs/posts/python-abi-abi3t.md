@@ -24,8 +24,11 @@ In this post I hope to answer all these questions and build up your intuition ab
 I also hope you'll learn some useful information about how Python projects that include native extensions are distributed, what the ABI compatibility tags that show up in wheel filenames mean, and how projects can choose to target different Python ABIs depending on the tradeoffs they want to make.
 By the end, you should be able to look at any wheel filename and know which Python interpreters it will install on — and why.
 
-It's true that you can happily write Python for years without hitting any of the issues discussed in this post, so you may object to the title advertising this material as what _every_ Python developer should know.
-The moment you ship a package, debug why a wheel won't install, or need to understand why an import or Python function call segfaults — these details start to matter.
+You'll also learn about how the Python C API and ABI have evolved in recent years and how the new [free-threaded](https://py-free-threading.github.iio) interpreter fits into this story.
+I'll also share how Python 3.15 will ship a new ABI that will fix the issues introduced by the free-threaded build.
+
+It's true that you can happily write Python for years without needing to understand any of the content of this post, so you may object to the title advertising this material as what _every_ Python developer should know.
+However, the moment you ship a package, debug why a wheel won't install, or need to understand why an import or Python function call segfaults — these details start to matter.
 Even writing and maintaining a single-file script puts you closer to distributing code than you might think.
 An alternate title for this post could be "What I Wish Someone Taught Me About the CPython ABI".
 
