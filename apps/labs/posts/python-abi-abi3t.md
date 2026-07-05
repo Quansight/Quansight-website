@@ -164,7 +164,7 @@ Let's pay particular attention to the filenames of the wheel files, because most
  <figure style={{ textAlign: 'center' }}>
    <img
      src="/posts/python-abi-abi3t/wheel-filename-anatomy.png"
-     alt="A diagram illustrating the structure of a wheel filename. There are six pieces of information as part of each wheel file: the name of the distribution, the distribution's version, the Python version tag, the abi tag, and the platform tag, and the wheel filename extension."
+     alt="A diagram illustrating the structure of a wheel filename. There are six pieces of information as part of each wheel file: the name of the distribution, the distribution's version, the Python version tag, the abi tag, the platform tag, and the wheel filename extension."
      style={{position:'relative',left:'0%',width:'100%'}}
    />
  </figure>
@@ -229,7 +229,7 @@ For example, [\_PyDict_GetItem_KnownHash itself was removed in Python 3.13.0a1](
 
 Moving inward, the next layer is the first _documented_ layer in the CPython C API, the [unstable C API](https://docs.python.org/3/c-api/stable.html#unstable-c-api).
 There is an extra layer here because not everything that's documented is stable.
-Unstable API items may be changed or removed in any CPython minor release, without a deprecation period, although they are guaranteed to remain stable within a CPython minor release (say for 3.14.0, 3.14.1, and so on).
+Unstable API items may be changed or removed in any CPython minor release, without a deprecation period, although they are guaranteed to remain stable within a CPython minor release series (say for 3.14.0, 3.14.1, and so on).
 
 These items serve a real purpose, but the CPython developers are not ready to commit to long-term support.
 Usually this is because unstable API items rely on or expose interpreter implementation details and it's not yet clear if the resulting behavior should be enshrined in the "official" C API.
@@ -461,7 +461,7 @@ struct PyObject {
 
 You can see how the fields in the struct correspond to the two design decisions I introduced above: shared and local refcounts (`ob_ref_shared` and `ob_ref_local`), an "owning" thread ID to identify when objects are local (`ob_tid`), and a per-object lock (`ob_mutex`).
 
-Notice that ob_type is still here, but it moved: on the GIL-enabled build it sits at byte offset 8 on 64-bit builds, right after the reference count.
+Notice that `ob_type` is still here, but it moved: on the GIL-enabled build it sits at byte offset 8 on 64-bit builds, right after the reference count.
 On the free-threaded build it comes after all the new bookkeeping fields.
 An extension compiled against the old layout would look for the type pointer at
 offset 8 and read unrelated data in the `ob_flags`, `ob_mutex`, `ob_gc_bits`, and `ob_ref_local` fields.
@@ -524,7 +524,7 @@ The stable ABI allows projects to build one wheel per architecture per release o
 With the stable ABI, there is no need to keep up with annual CPython releases to support each new Python version: new Python versions are supported with no effort on the part of the project.
 
 Of course, as we saw above, the free-threaded build is fundamentally incompatible with the `abi3` stable ABI: the layout of `PyObject` is different.
-When the steering council [accepted PEP 779](https://peps.python.org/pep-0779/) — the PEP that made the free-threaded build an officially supported part of Python 3.14 — it stated that it "expects that Stable ABI for free-threading should be prepared and defined for Python 3.15."
+When the Steering Council [accepted PEP 779](https://peps.python.org/pep-0779/) — the PEP that made the free-threaded build an officially supported part of Python 3.14 — it stated that it "expects that Stable ABI for free-threading should be prepared and defined for Python 3.15."
 To fix this problem, the Python Steering Council asked Python Deputy Developer-in-Residence [Petr Viktorin](https://github.com/encukou) to design and integrate a new stable ABI for the free-threaded build in time for Python 3.15.
 This process culminated in writing [PEP 803](https://peps.python.org/pep-0803/).
 
@@ -578,7 +578,7 @@ Instead, you need to use [a new API specifically for this case](https://peps.pyt
 During the Python 3.15 development cycle, a few more spots needed updating:
 
 - [A new C API](https://peps.python.org/pep-0793/) for defining modules that avoids `PyModuleDef`, a type that extends `PyObject`.
-- [Making `PyObject` opaque and defining a new stable ABI](https://peps.python.org/pep-0803/)
+- [Making `PyObject` opaque and defining a new stable ABI](https://peps.python.org/pep-0803/).
 
 I had the privilege of helping get PEP 803 accepted and am a co-author.
 [My primary contribution](https://peps.python.org/pep-0803/#ecosystem-maintainers-want-decreased-maintenance-burden) was to find examples of ecosystem projects asking for the ability to ship one wheel for both interpreter builds.
@@ -594,7 +594,7 @@ Since the free-threaded build has no GIL, `abi3t` extensions can't rely on it fo
 
 The free-threaded Stable ABI, `abi3t`, gives extension maintainers a path to one artifact per platform for Python 3.15 and newer.
 Older non-free-threaded versions can still be covered by `abi3`.
-If you maintain a project that currently ships `abi3` wheels, we suggest building two more wheels: a version-specific free-threaded Python 3.14 wheel and a `cp315-abi3.abi3t` to target both builds on Python 3.15 and newer.
+If you maintain a project that currently ships `abi3` wheels, we suggest building two more wheels: a version-specific free-threaded Python 3.14 wheel and a `cp315-abi3.abi3t` wheel to target both builds on Python 3.15 and newer.
 This is summarized in the table below.
 
 <div className="overflow-x-auto">
@@ -644,7 +644,7 @@ As the Python 3.15 final release approaches, expect to see build backend and bin
 Cython supports abi3t via [an experimental branch](https://github.com/cython/cython/issues/7399).
 Setuptools support will be added once [PR #5193](https://github.com/pypa/setuptools/pull/5193) is merged and appears in a release.
 Meson-python support has [been merged](https://github.com/mesonbuild/meson-python/pull/856) and will appear in the next release.
-Installing an abi3t wheel should be fully supported across all installers, including both `pip` 26.1 or newer (via [packaging 26.1](https://github.com/pypa/packaging/releases/tag/26.1) and [`uv` 0.11.3](https://github.com/astral-sh/uv/releases/tag/0.11.3) or newer.
+Installing an abi3t wheel should be fully supported across all installers, including both `pip` 26.1 or newer (via [packaging 26.1](https://github.com/pypa/packaging/releases/tag/26.1)) and [`uv` 0.11.3](https://github.com/astral-sh/uv/releases/tag/0.11.3) or newer.
 
 ## Key Takeaways
 
