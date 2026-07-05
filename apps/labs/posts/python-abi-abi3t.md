@@ -120,7 +120,7 @@ When talking about a concrete Python extension module that targets a particular 
 The platform ABI governs details of how exactly machine code executes on each architecture: how a compiler translates calling a C function like [`PyDict_GetItemRef`](https://docs.python.org/3/c-api/dict.html#c.PyDict_GetItemRef) into a concrete set of machine code that sets CPU registers and other platform-specific details per the specification of whatever platform the code ultimately runs on.
 
 A platform ABI determines things like the exact way machine code needs to pass arguments to a function.
-For example, on the [System V ABI](https://wiki.osdev.org/System_V_ABI) used by Linux and MacOS on the [`x86_64`](https://wiki.osdev.org/System_V_ABI#x86-64) architecture, only the first six non-floating-point arguments of a function are passed via registers, the remaining arguments are passed via the stack.
+For example, on the [System V ABI](https://wiki.osdev.org/System_V_ABI) used by Linux and macOS on the [`x86_64`](https://wiki.osdev.org/System_V_ABI#x86-64) architecture, only the first six non-floating-point arguments of a function are passed via registers, the remaining arguments are passed via the stack.
 The [Windows x64 calling convention](https://learn.microsoft.com/en-us/cpp/build/x64-calling-convention) on the same CPU passes only the first four arguments in registers.
 
 Normally, developers do not need to worry about details like this: compilers automatically generate machine code appropriate for whatever platform ABI a developer wants to target.
@@ -223,7 +223,7 @@ This optimization is useful sometimes in the interpreter, so it's defined.
 It's not a documented primitive, so there are no guarantees about it being available in a future version of the C API.
 It is an exported symbol in the ABI of the releases that ship it, but that buys you nothing across versions: the docs warn that underscore-prefixed names ["are private API that can change without notice even in patch releases"](https://docs.python.org/3/c-api/stable.html#c-api-stability).
 In practice, it is difficult for CPython to make changes like that.
-For example, [\_PyDict_GetItem_KnownHash itself was removed in Python 3.13.0a1](https://github.com/python/cpython/pull/10715) and [restored an alpha later](https://github.com/python/cpython/pull/112115) because the removal broke several popular projects.
+For example, [\_PyDict_GetItem_KnownHash itself was removed in Python 3.13.0a1](https://github.com/python/cpython/pull/107145) and [restored an alpha later](https://github.com/python/cpython/pull/112115) because the removal broke several popular projects.
 
 ### Unstable C API
 
@@ -280,7 +280,7 @@ Each enables a different kind of build for distributors of extension modules:
 
 ### Version-Specific ABI: `cp3XY`
 
-By policy, the ABI corresponding the version-specific C API is frozen at the first release candidate for a Python minor version.
+By policy, the ABI corresponding to the version-specific C API is frozen at the first release candidate for a Python minor version.
 The guarantee that the Python version-specific C API does not change within a Python minor release series corresponds to a stability policy for the CPython version-specific ABI.
 In practice, it means that extension modules and binary wheels built using Python 3.15.0rc1 can be imported using any subsequent version of Python 3.15, even years into the future.
 
@@ -409,7 +409,7 @@ That is why there have been [several efforts over the years](https://dabeaz.blog
 Over the past few years, one of these approaches seems to have stuck.
 It looks like a free-threaded Python, one with no global interpreter lock and no limit to multithreaded concurrency in pure Python code, is the future of CPython.
 
-If you're interested in learning more about how Quansight has contributed to the effort to support free-threaded Python, I've chronicled it on this blog from the [first experimental release](https://labs.quansight.org/blog/free-threaded-python-rollout) in Python 3.13, the ["stable" release](https://labs.quansight.org/blog/free-threaded-one-year-recap) for Python 3.14, and [crossing the 50% mark](https://labs.quansight.org/blog/free-threaded-python-halfway) on support in popular ecosystem packages that ship compiled extensions needing explicit free-threaded support.
+If you're interested in learning more about how Quansight has contributed to the effort to support free-threaded Python, I've chronicled it on this blog from the [first experimental release](https://labs.quansight.org/blog/free-threaded-python-rollout) in Python 3.13, through the ["stable" release](https://labs.quansight.org/blog/free-threaded-one-year-recap) for Python 3.14, to [crossing the 50% mark](https://labs.quansight.org/blog/free-threaded-python-halfway) on support in popular ecosystem packages that ship compiled extensions needing explicit free-threaded support.
 
 ### The `PyObject` Struct and Free-Threaded Python
 
@@ -456,15 +456,16 @@ struct PyObject {
     uint32_t ob_ref_local;     // local reference count
     Py_ssize_t ob_ref_shared;  // shared (atomic) reference count
     PyTypeObject *ob_type;
-}
+};
 ```
 
 You can see how the fields in the struct correspond to the two design decisions I introduced above: shared and local refcounts (`ob_ref_shared` and `ob_ref_local`), an "owning" thread ID to identify when objects are local (`ob_tid`), and a per-object lock (`ob_mutex`).
 
 Notice that ob_type is still here, but it moved: on the GIL-enabled build it sits at byte offset 8 on 64-bit builds, right after the reference count.
 On the free-threaded build it comes after all the new bookkeeping fields.
-An extension compiled against the old layout would look for the type pointer at offset 8 and read unrelated data in the `ob_flags`, `ob_mutex`, and `ob_gc_bits` fields.
-At best, this will lead to a crash.
+An extension compiled against the old layout would look for the type pointer at
+offset 8 and read unrelated data in the `ob_flags`, `ob_mutex`, `ob_gc_bits`, and `ob_ref_local` fields.
+At best, this will lead to a crash; at worst, it will trigger silent memory corruption.
 That is the essence of the ABI incompatibility introduced by the free-threaded build.
 
 `Py_INCREF` is correspondingly more complicated [on the free-threaded build](https://github.com/python/cpython/blob/6920036f287480f7d39d6a4005803aeac27aff3f/Include/refcount.h#L272-L284): for a thread-owned object the hot path is still a single non-atomic increment of `ob_ref_local`, but objects shared across threads fall back to an atomic update of `ob_ref_shared`.
@@ -505,7 +506,7 @@ It turns out that there is no equivalent to `abi3` for the free-threaded build o
 So this was the design trade-off: enable multithreaded parallelism but increase the complexity of the interpreter and force extensions to explicitly support this new ABI with a new layout for `PyObject`.
 You can read [PEP 703](https://peps.python.org/pep-0703/) and [PEP 779](https://peps.python.org/pep-0779/) for detailed discussions of why it's worth it for CPython to choose complexity over simplicity in this case.
 
-Please also refer to [The Community-Curated Free-Threaded Python Guide](https://py-free-threading.github.io), [Victor Stinner's post](https://vstinner.github.io/free-threading-reference-counting.html) on reference counting in free-threaded Python, and the [summary of Thomas Wouters' 2026 PyCon talk on LWN](https://lwn.net/SubscriberLink/1078367/eaa511915870fdb2) for much more detailed discussions of this topic.
+Please also refer to [The Community-Curated Free-Threaded Python Guide](https://py-free-threading.github.io), [Victor Stinner's post](https://vstinner.github.io/free-threading-reference-counting.html) on reference counting in free-threaded Python, and the [summary of Thomas Wouters' 2026 PyCon talk on LWN](https://lwn.net/Articles/1078367/) for much more detailed discussions of this topic.
 
 ## A New Stable ABI for Python 3.15
 
@@ -524,8 +525,8 @@ With the stable ABI, there is no need to keep up with annual CPython releases to
 
 Of course, as we saw above, the free-threaded build is fundamentally incompatible with the `abi3` stable ABI: the layout of `PyObject` is different.
 When the steering council [accepted PEP 779](https://peps.python.org/pep-0779/) — the PEP that made the free-threaded build an officially supported part of Python 3.14 — it stated that it "expects that Stable ABI for free-threading should be prepared and defined for Python 3.15."
-To fix this problem, the Python Steering Council asked Python Developer-in-Residence [Petr Viktorin](https://github.com/encukou) to design and integrate a new stable ABI for the free-threaded build in time for Python 3.15.
-This process culminated in writing [PEP 803](https://peps.python.org/pep-0803/), which I got to chip in at the end as a co-author.
+To fix this problem, the Python Steering Council asked Python Deputy Developer-in-Residence [Petr Viktorin](https://github.com/encukou) to design and integrate a new stable ABI for the free-threaded build in time for Python 3.15.
+This process culminated in writing [PEP 803](https://peps.python.org/pep-0803/).
 
 ### The Free-Threaded Stable ABI: `abi3t`
 
@@ -549,8 +550,8 @@ This means that the precise details of how reference counts are stored can chang
 Functions can account for the different `PyObject` layouts that are possible in their implementation, without exposing any internal implementation details in the public C API.
 
 Victor Stinner describes this effort at a high level in [a 2021 blog post](https://vstinner.github.io/c-api-opaque-structures.html).
-Just to go into one example: back then `Py_INCREF` was historically defined as a macro (and later a static inline function) that directly accessed `PyObject` internals.
-A function version, [`Py_IncRef`](https://docs.python.org/3/c-api/refcounting.html#c.Py_IncRef), has actually existed since Python 2.4; Python 3.10 added a stricter private variant, _Py_IncRef, and when you target the limited API for Python 3.12 or newer, [Py_INCREF is implemented as a call to that function](https://github.com/python/cpython/blob/3.13/Include/refcount.h) instead of using direct struct access.
+Just to go into one example: back then `Py_INCREF` was defined as a macro (and later a static inline function) that directly accessed `PyObject` internals.
+A function version, [`Py_IncRef`](https://docs.python.org/3/c-api/refcounting.html#c.Py_IncRef), has actually existed since Python 2.4; Python 3.10 added a stricter private variant, `_Py_IncRef`, and when you target the limited API for Python 3.12 or newer, [`Py_INCREF` is implemented as a call to that function](https://github.com/python/cpython/blob/3.13/Include/refcount.h) instead of using direct struct access.
 Going through a function call may add overhead compared with a macro that accesses a struct member directly, but it also lets CPython hide implementation details.
 
 The next pernicious issue was around how extensions want to extend Python types like `dict`, `list`, or `set`.
@@ -584,8 +585,8 @@ I had the privilege of helping get PEP 803 accepted and am a co-author.
 
 With all these pieces, it became possible to define a C extension implementing Python functions, modules, and types without relying on the layout of `PyObject`.
 
-You select an `abi3t` build in a C or C++ extension by simultaneously defining the new `Py_TARGET_ABI3T` macro, which is analogous to the old `Py_LIMITED_API` macro.
-Defining `Py_TARGET_ABI3T` to a Python version hex code is equivalent to defining `Py_LIMITED_API` to the same version, along with the `Py_GIL_DISABLED` macros.
+You select an `abi3t` build in a C or C++ extension by defining the new `Py_TARGET_ABI3T` macro, which is analogous to the old `Py_LIMITED_API` macro.
+Defining `Py_TARGET_ABI3T` to a Python version hex code is equivalent to defining `Py_LIMITED_API` to the same version, along with the `Py_GIL_DISABLED` macro.
 Because the extension doesn't depend on the layout of `PyObject`, it is compatible with _both_ interpreter builds — and any future build that changes that layout again.
 Since the free-threaded build has no GIL, `abi3t` extensions can't rely on it for thread safety — they must be written to be thread-safe.
 
@@ -639,11 +640,11 @@ Temporarily building three wheels per release does add some ecosystem-wide cost 
 As of July 2026, `abi3t` support in build tools and bindings generators is mixed, as Python 3.15 is still in a pre-release stage.
 As the Python 3.15 final release approaches, expect to see build backend and binding generator support improve.
 [PyO3](https://pyo3.rs/v0.29.0/features.html#abi3t) and [Maturin](https://www.maturin.rs/bindings.html?highlight=abi3t#py_limited_apiabi3) fully support Python 3.15 and `abi3t`, so most Rust extensions should be ready for testing.
-[Scikit-build-core](https://scikit-build-core.readthedocs.io/en/latest/configuration/index.html#customizing-the-output-wheel) will support abi3t along in its upcoming 1.0 release.
+[Scikit-build-core](https://scikit-build-core.readthedocs.io/en/latest/configuration/index.html#customizing-the-output-wheel) will support abi3t in its upcoming 1.0 release.
 Cython supports abi3t via [an experimental branch](https://github.com/cython/cython/issues/7399).
 Setuptools support will be added once [PR #5193](https://github.com/pypa/setuptools/pull/5193) is merged and appears in a release.
 Meson-python support has [been merged](https://github.com/mesonbuild/meson-python/pull/856) and will appear in the next release.
-Installing an abi3t wheel should be fully supported across all installers, including both `pip` 26.1 or newer (via [packaging 26.1](https://packaging.pypa.io/en/stable/changelog.html#id2) and [`uv` 0.11.3](https://github.com/astral-sh/uv/releases/tag/0.11.3) or newer.
+Installing an abi3t wheel should be fully supported across all installers, including both `pip` 26.1 or newer (via [packaging 26.1](https://github.com/pypa/packaging/releases/tag/26.1) and [`uv` 0.11.3](https://github.com/astral-sh/uv/releases/tag/0.11.3) or newer.
 
 ## Key Takeaways
 
