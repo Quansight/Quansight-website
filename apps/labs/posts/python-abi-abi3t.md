@@ -640,7 +640,8 @@ Temporarily building three wheels per release does add some ecosystem-wide cost 
 As of July 2026, `abi3t` support in build tools and bindings generators is mixed, as Python 3.15 is still in a pre-release stage.
 As the Python 3.15 final release approaches, expect to see build backend and binding generator support improve.
 [PyO3](https://pyo3.rs/v0.29.0/features.html#abi3t) and [Maturin](https://www.maturin.rs/bindings.html?highlight=abi3t#py_limited_apiabi3) fully support Python 3.15 and `abi3t`, so most Rust extensions should be ready for testing.
-[Scikit-build-core](https://scikit-build-core.readthedocs.io/en/latest/configuration/index.html#customizing-the-output-wheel) will support abi3t in its upcoming 1.0 release.
+[Scikit-build-core](https://scikit-build-core.readthedocs.io/en/latest/configuration/index.html#customizing-the-output-wheel)
+added support for abi3t builds in its recent v1.0 release.
 Cython supports abi3t via [an experimental branch](https://github.com/cython/cython/issues/7399).
 Setuptools support will be added once [PR #5193](https://github.com/pypa/setuptools/pull/5193) is merged and appears in a release.
 Meson-python support has [been merged](https://github.com/mesonbuild/meson-python/pull/856) and will appear in the next release.
