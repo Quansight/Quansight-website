@@ -6,10 +6,10 @@ description: 'An introduction to the concept of the Application Binary Interface
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/python-abi-abi3t/cpython_api_layers_listing.png
-  alt: 'Five nested ellipses illustrating the layering of the Python C API. The outermost ellipse is gray and labeled "Internal API". The next enclosed ellipse is red and is labeled "Private API". The next enclosed ellipse is yellow and is labeled "Unstable API". The next enclosed ellipse is blue and labeled "Version-specific API". The next enclosed ellipse is green and is labeled "Limited API".'
+  alt: 'Five nested ellipses illustrating the layering of the Python C API. The outermost ellipse is gray and labeled "Internal API". The next enclosed ellipse is red and is labeled "Private API". The next enclosed ellipse is pink and is labeled "Unstable API". The next enclosed ellipse is violet and labeled "Version-specific API". The next enclosed ellipse is green and is labeled "Limited API".'
 hero:
   imageSrc: /posts/python-abi-abi3t/cpython_api_layers_hero.png
-  imageAlt: 'Five nested ellipses illustrating the layering of the Python C API. The outermost ellipse is gray and labeled "Internal API". The next enclosed ellipse is red and is labeled "Private API". The next enclosed ellipse is yellow and is labeled "Unstable API". The next enclosed ellipse is blue and labeled "Version-specific API". The next enclosed ellipse is green and is labeled "Limited API".'
+  imageAlt: 'Five nested ellipses illustrating the layering of the Python C API. The outermost ellipse is gray and labeled "Internal API". The next enclosed ellipse is red and is labeled "Private API". The next enclosed ellipse is pink and is labeled "Unstable API". The next enclosed ellipse is violet and labeled "Version-specific API". The next enclosed ellipse is green and is labeled "Limited API".'
 ---
 
 # What Every Python Developer Should Know About the CPython ABI
@@ -44,7 +44,7 @@ The CPython interpreter handles this transparently.
  <figure style={{ textAlign: 'center' }}>
    <img
      src="/posts/python-abi-abi3t/cpython_runtime_diagram.png"
-     alt="A cartoon showing a Python script with NumPy code calling into a cloud representing the CPython interpreter runtime which in turn calls into a NumPy C extension."
+     alt="A cartoon showing a terminal running Python code that calls NumPy, with an arrow into a box representing the CPython interpreter runtime, which in turn calls back and forth into a box of compiled functions implemented in C, C++, or Rust."
      style={{position:'relative'}}
    />
  </figure>
@@ -82,7 +82,7 @@ The diagram below illustrates the distinction between the CPython C API and the 
  <figure style={{ textAlign: 'center' }}>
    <img
      src="/posts/python-abi-abi3t/api_vs_abi.png"
-     alt='A two-panel hand-drawn diagram contrasting the API and the ABI. The left panel, in violet and marked with a small C-source-file icon, is titled "API — Application Programming Interface" and lists three things the API covers, each with a code example: function signatures (PyObject *PyDict_GetItemRef(…)); macros, typedefs, and inline functions (Py_INCREF(op)); and the header you compile against (#include "Python.h"). The right panel, in blue and marked with a small computer-chip icon, is titled "ABI — Application Binary Interface" and lists three things the ABI covers: exported symbol names (PyDict_GetItemRef); struct sizes and field offsets, illustrated by a memory-layout diagram of PyObject as two 8-byte fields — ob_refcnt at byte offset 0 and ob_type at offset 8, 16 bytes total; and platform-specific details, illustrated by a matrix of operating systems (rows: Windows, macOS, and Linux) against CPU architectures (columns: x86-64, arm64, and ppc64le), with a green dot marking each supported build — x86-64 and arm64 for all three operating systems, and ppc64le for Linux only.'
+     alt='A two-panel hand-drawn diagram contrasting the API and the ABI. The left panel, in violet and marked with a small C-source-file icon, is titled "API — Application Programming Interface" and lists three things the API covers, each with a code example: function signatures (PyObject *PyDict_GetItemRef(…)); macros, typedefs, and inline functions (Py_INCREF(op)); and the header you compile against (#include "Python.h"). The right panel, in green and marked with a small computer-chip icon, is titled "ABI — Application Binary Interface" and lists three things the ABI covers: exported symbol names (PyDict_GetItemRef, Py_IncRef); struct sizes and field offsets, illustrated by a memory-layout diagram of PyObject as two 8-byte fields — ob_refcnt at byte offset 0 and ob_type at offset 8, 16 bytes total; and platform-specific details, illustrated by a matrix of operating systems (rows: Windows, macOS, and Linux) against CPU architectures (columns: x86-64, arm64, and ppc64le), with a green dot marking each supported build — x86-64 and arm64 for all three operating systems, and ppc64le for Linux only.'
      style={{position:'relative'}}
    />
  </figure>
@@ -193,7 +193,7 @@ This is managed by breaking up the "full" C API surface used by the interpreter 
  <figure style={{ textAlign: 'center' }}>
    <img
      src="/posts/python-abi-abi3t/cpython_api_layers.png"
-     alt='Five nested ellipses illustrating the layering of the Python C API. The outermost ellipse is gray and labeled "Internal API, exposed only if `Py_BUILD_CORE` is defined". The next enclosed ellipse is red and outlined with a dashed line defined in the legend to mean "Usable with `#include "Python.h"`". The red ellipse is labeled "Private API `_Py*` prefix". The next enclosed ellipse is yellow and is labeled "Unstable API `PyUnstable_*` prefix". The next enclosed ellipse is blue and labeled "Version-specific API". The next enclosed ellipse is green with a dark shaded outline the legend defines to mean "Usable if `Py_LIMITED_API` is defined" and is labeled "Limited API".'
+     alt='Five nested ellipses illustrating the layering of the Python C API. The outermost ellipse is gray and labeled "Internal API, exposed only if `Py_BUILD_CORE` is defined". The next enclosed ellipse is red and outlined with a dashed line defined in the legend to mean "Usable with `#include "Python.h"`". The red ellipse is labeled "Private API `_Py*` prefix". The next enclosed ellipse is pink and is labeled "Unstable API `PyUnstable_*` prefix". The next enclosed ellipse is violet and labeled "Version-specific API". The next enclosed ellipse is green with a dark shaded outline the legend defines to mean "Usable if `Py_LIMITED_API` is defined" and is labeled "Limited API".'
      style={{position:'relative'}}
    />
  </figure>
