@@ -111,6 +111,21 @@ completely lock-free. It is now implemented as a lock-free concurrent hash
 map with no locking required on the read path at all, and only a single lock on
 the write path for rare cache misses that require insertions.
 
+<figure style={{ textAlign: 'center' }}>
+  <img
+    src="/posts/scaling-numpy-on-free-threaded-python/hashtable.png"
+    alt="Diagram of the lock-free dispatch cache. "
+    style={{position:'relative'}}
+  />
+  <figcaption>
+    The lock-free dispatch cache. Readers follow the atomic pointer to the
+    current buckets table and look up entries without taking a lock. After the
+    table is resized, the old table is kept alive (linked through a prev
+    chain) until deallocation, so readers still using it — like Reader C — can
+    finish safely. Only writers acquire the mutex.
+  </figcaption>
+</figure>
+
 The cache is implemented by `PyArrayIdentityHash`, which holds an atomic
 pointer to the buckets that store the actual entries. To look up an entry, a
 thread atomically loads the buckets pointer, indexes into it using the hash of
@@ -130,21 +145,6 @@ without worrying about it being freed while they are reading from it. This
 design allows the dispatch cache to scale well with many threads while being
 thread-safe. This was implemented in
 [numpy/numpy#30593](https://github.com/numpy/numpy/pull/30593).
-
-<figure style={{ textAlign: 'center' }}>
-  <img
-    src="/posts/scaling-numpy-on-free-threaded-python/hashtable.png"
-    alt="Diagram of the lock-free dispatch cache. "
-    style={{position:'relative'}}
-  />
-  <figcaption>
-    The lock-free dispatch cache. Readers follow the atomic pointer to the
-    current buckets table and look up entries without taking a lock. After the
-    table is resized, the old table is kept alive (linked through a prev
-    chain) until deallocation, so readers still using it — like Reader C — can
-    finish safely. Only writers acquire the mutex.
-  </figcaption>
-</figure>
 
 ### 3. Reference count contention on global `PyCapsule` objects
 
@@ -182,12 +182,11 @@ was implemented in
 and [numpy/numpy#30826](https://github.com/numpy/numpy/pull/30826). The API is
 public from Python 3.15 onwards, but NumPy can already use it on Python 3.14
 through the [pythoncapi-compat](https://github.com/python/pythoncapi-compat)
-headers, which implement it using the private C APIs that back the public
-function in 3.15.
+headers, which implement it using the private C APIs available in 3.14.
 
 ### 4. Module attribute lookup contention
 
-When you write `np.sin`, that is literally an attribute access on the `numpy`
+When you write `np.sin`, that is an attribute access on the `numpy`
 module object — Python looks up the `sin` attribute on the module.
 NumPy uses module level `__getattr__` to resolve ufuncs such as `np.sin` and
 `np.cos` to their actual implementations. In CPython, the module attribute
@@ -213,9 +212,9 @@ CPython exposes its own low-level ["raw" memory allocator
 routines](https://docs.python.org/3/c-api/memory.html) such as
 `PyMem_RawMalloc` and `PyMem_RawFree`. However, those routines were also
 calling the system allocator. The free-threaded build of CPython already uses
-[mimalloc](https://github.com/microsoft/mimalloc), which is highly optimized
-for multi-threaded workloads, to allocate Python objects, but NumPy was not
-using it because it was calling the system allocator directly.
+[mimalloc](https://github.com/microsoft/mimalloc) to allocate Python objects.
+mimalloc is highly optimized for multi-threaded workloads. NumPy, however, was
+not using it because it was calling the system allocator directly.
 
 The fix was twofold:
 
@@ -231,9 +230,12 @@ The fix was twofold:
 
 ## Benchmarks
 
-Here are the benchmark results comparing the performance of the
-multi-threaded reproducer on the free-threaded build before and after all of
-the above fixes on a 32 core linux machine:
+The benchmark is the same reproducer from the StackOverflow question that
+started this investigation: each worker applies a handful of `np.sin` and
+`np.cos` calls to its own array in a loop and reduces the result, with no
+shared mutable state between workers. Here are the benchmark results comparing
+the performance of the multi-threaded reproducer on the free-threaded build
+before and after all of the above fixes on a 32 core linux machine:
 
 <figure style={{ textAlign: 'center' }}>
   <img
