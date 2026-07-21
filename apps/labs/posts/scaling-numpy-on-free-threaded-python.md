@@ -1,9 +1,9 @@
 ---
 title: 'Scaling NumPy on Free-Threaded Python'
 authors: [kumar-aditya]
-published: May 26, 2026
+published: July 29, 2026
 description: 'A recap on the work done in NumPy and CPython to make multi-threaded NumPy workloads scale on the free-threaded build of CPython.'
-category: [Community]
+category: [PyData ecosystem]
 featuredImage:
   src: /posts/scaling-numpy-on-free-threaded-python/logo.png
   alt: 'A logo for NumPy.'
@@ -23,7 +23,7 @@ using threads.
 
 In this blog post, I will walk through the work I did over the last few months
 in both NumPy and CPython to eliminate the multi-threaded scaling bottlenecks
-that were preventing NumPy from scaling on Free-Threaded Python.
+that were preventing NumPy from scaling on free-threaded Python.
 Special thanks to Nathan Goldbaum for his help on the NumPy side of things
 throughout this work.
 
@@ -38,16 +38,26 @@ free-threaded build of CPython. This was tracked as
 
 The reproducer is small and representative of ufunc-heavy workloads: each
 worker takes an array, applies a handful of `np.sin` and `np.cos` calls in a
-loop, and reduces the result. There is no shared mutable state between
-workers, so in principle this should scale linearly with the number of cores.
-In practice, multi-threading was up to 2x _slower_ than multi-processing
-on the same machine.
+loop, and reduces the result. This is the kernel each worker runs:
+
+```python
+def kernel(x, n_loop):
+    return sum((np.sin(np.cos(np.sin(np.cos(x + i)))).sum()
+        for i in range(n_loop)))
+```
+
+Each worker runs this kernel over its own chunk of arrays, using either
+`ThreadPoolExecutor` or `ProcessPoolExecutor`. There is no shared mutable
+state between workers, so in principle this should scale linearly with the
+number of cores. In practice, multi-threading was up to 2x _slower_ than
+multi-processing on the same machine.
 
 The free-threaded build removes the GIL, but removing the GIL is not enough on
-its own. Profiling the reproducer revealed several hidden bottlenecks in NumPy
-and CPython that were masked by the GIL on the regular build but became severe
-scaling issues on the free-threaded build. These scaling bottlenecks fall
-primarily into three categories:
+its own. Profiling the reproducer with
+[samply](https://github.com/mstange/samply) revealed several hidden
+bottlenecks in NumPy and CPython that were masked by the GIL on the regular
+build but became severe scaling issues on the free-threaded build. These
+scaling bottlenecks fall primarily into three categories:
 
 1. Lock contention.
 2. Reference count contention on shared global objects.
@@ -56,10 +66,15 @@ primarily into three categories:
 <figure style={{ textAlign: 'center' }}>
   <img
     src="/posts/scaling-numpy-on-free-threaded-python/before.png"
-    alt="Flame graph of the reproducer before any fixes."
+    alt="Annotated flame graph of the reproducer before any fixes, showing
+    reference counting contention, memory allocation contention, and lock
+    contention on the ufunc dispatch cache."
     style={{position:'relative'}}
   />
-  <figcaption>Flame graph of the reproducer before any fixes.</figcaption>
+  <figcaption>
+    Flame graph of the reproducer before any fixes, annotated with the main
+    scaling bottlenecks.
+  </figcaption>
 </figure>
 
 ## The bottlenecks and the fixes
@@ -77,8 +92,8 @@ Now, CPython uses atomic operations to check whether `tracemalloc` is
 enabled, providing a lock-free fast path. This was implemented in
 [python/cpython#143065](https://github.com/python/cpython/pull/143065).
 
-This kind of bottleneck is easy to introduce and hard to spot. However, this is
-a common pattern where a flag needs to be checked before performing some
+This kind of bottleneck is easy to introduce and hard to spot. It is also a
+common pattern: a flag needs to be checked before performing some
 operation. While adding a lock is easy and fixes the thread-safety issue, it
 can cause severe scaling bottlenecks if the flag is checked frequently in a hot
 path. In such cases, it is better to use atomic operations to check the flag
@@ -93,7 +108,7 @@ universal functions). The key thing to know here is that a ufunc is defined in
 terms of its input types: NumPy implements a different loop for each
 combination of types. For example, the implementation of `np.add` differs
 depending on whether the operands are integers or floats, since one needs a
-loop based on integer addition and the other on floating point addition. NumPy
+loop based on integer addition and the other on floating-point addition. NumPy
 therefore has a dispatch system that determines the correct loop to call given
 a tuple of input data types.
 
@@ -114,15 +129,17 @@ the write path for rare cache misses that require insertions.
 <figure style={{ textAlign: 'center' }}>
   <img
     src="/posts/scaling-numpy-on-free-threaded-python/hashtable.png"
-    alt="Diagram of the lock-free dispatch cache. "
+    alt="Diagram of the lock-free dispatch cache, showing readers following an
+    atomic pointer to the current buckets table and an old table kept alive
+    through a prev chain."
     style={{position:'relative'}}
   />
   <figcaption>
     The lock-free dispatch cache. Readers follow the atomic pointer to the
     current buckets table and look up entries without taking a lock. After the
     table is resized, the old table is kept alive (linked through a prev
-    chain) until deallocation, so readers still using it — like Reader C — can
-    finish safely. Only writers acquire the mutex.
+    chain) until the cache itself is deallocated, so readers still using it —
+    like Reader C — can finish safely. Only writers acquire the mutex.
   </figcaption>
 </figure>
 
@@ -140,8 +157,9 @@ publishes the new entry into the buckets atomically, so concurrent readers can
 read the updated entry without data races. If the cache needs to be resized,
 the writer creates a new buckets table, rehashes all entries into it, and
 atomically updates the pointer to the new table. The old table is kept alive
-until deallocation, so readers that are still using it can finish safely
-without worrying about it being freed while they are reading from it. This
+until the cache itself is deallocated, so readers that are still using it can
+finish safely without worrying about it being freed while they are reading
+from it. This
 design allows the dispatch cache to scale well with many threads while being
 thread-safe. This was implemented in
 [numpy/numpy#30593](https://github.com/numpy/numpy/pull/30593).
@@ -188,10 +206,10 @@ headers, which implement it using the private C APIs available in 3.14.
 
 When you write `np.sin`, that is an attribute access on the `numpy`
 module object — Python looks up the `sin` attribute on the module.
-NumPy uses module level `__getattr__` to resolve ufuncs such as `np.sin` and
+NumPy uses module-level `__getattr__` to resolve ufuncs such as `np.sin` and
 `np.cos` to their actual implementations. In CPython, the module attribute
 lookup bytecode specialization was not enabled for modules that defined
-`__getattr__`, which causes the attribute lookup to follow the slow path of
+`__getattr__`, which caused the attribute lookup to follow the slow path of
 acquiring the import lock and performing the lookup.
 
 I fixed this upstream in CPython
@@ -240,21 +258,27 @@ before and after all of the above fixes on a 32 core linux machine:
 <figure style={{ textAlign: 'center' }}>
   <img
     src="/posts/scaling-numpy-on-free-threaded-python/so_benchmark.png"
-    alt="Benchmark result."
+    alt="Line chart of time versus number of workers. Before the fixes,
+    multi-threading improves until around 18 workers and then degrades sharply
+    to about 44 seconds at 32 workers. After the fixes, multi-threading keeps
+    improving down to about 1.5 seconds at 32 workers, while multi-processing
+    takes about 6 seconds."
     style={{position:'relative'}}
   />
   <figcaption>
-    The red line represents the performance before the fixes, the green line
-    represents the performance after the fixes and the black line represents
-    the performance of the multi-process version.
+    Time taken by the reproducer as the number of workers grows, comparing
+    multi-threading before the fixes, multi-threading after the fixes, and
+    multi-processing.
   </figcaption>
 </figure>
 
 Before the fixes, the multi-threaded case scaled well up to 18 threads, but
 after that, because of the bottlenecks described above, the performance
-degraded significantly and became much slower than the multi-process version.
-After the fixes, the multi-threaded version scales well across all 32 cores and
-is significantly faster than the multi-process version.
+degraded sharply: at 32 workers it took around 44 seconds, about 7x slower
+than the multi-process version. After the fixes, the multi-threaded version
+scales well across all 32 cores. The same workload now takes about 1.5
+seconds — roughly 30x faster than before the fixes and about 4x faster than
+the multi-process version, which takes around 6 seconds.
 
 ## Summary
 
@@ -262,7 +286,7 @@ NumPy ufuncs now scale well on the free-threaded build of CPython after several
 bottlenecks in both NumPy and CPython were fixed. The changes I implemented in
 CPython to fix the bottlenecks in `tracemalloc`, the memory allocator, and
 module attribute lookups will also benefit other libraries and workloads on
-the free-threaded build beyond just NumPy. During this project work, I did the
+the free-threaded build beyond just NumPy. During this project, I also did
 foundational work, such as adding the C API for making objects immortal and
 changing the raw allocator to use mimalloc, which will enable more libraries to
 easily fix similar bottlenecks in their own code and scale well on the
