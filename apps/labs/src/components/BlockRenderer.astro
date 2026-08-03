@@ -3,7 +3,6 @@ import { ColumnArticle } from './ColumnArticle/ColumnArticle';
 import { Hero } from './Hero';
 import { Logos } from './Logos/Logos';
 import { PageHeading } from './PageHeading';
-import { Projects } from './Projects/Projects';
 import { Statute } from './Statute/Statute';
 import { Team, type TeamPerson } from './Team/Team';
 import { Teaser } from './Teaser';
@@ -88,12 +87,5 @@ const { block, people = [] } = Astro.props;
     variant={(block.variant as 'all' | 'spotlight') ?? 'all'}
     imagesShape={(block.imagesShape as 'square' | 'rectangle') ?? 'square'}
     people={people}
-  />
-)}
-
-{block.type === 'projects' && (
-  <Projects
-    client:load
-    items={block.items as Parameters<typeof Projects>[0]['items']}
   />
 )}

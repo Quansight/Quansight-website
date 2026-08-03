@@ -6,8 +6,8 @@
   - `src/content.config.ts` — content collections: `people`, `pages`, `posts`, `singletons` (header/footer)
 - `posts/` — blog post markdown files
 - `people/` — team member markdown files
-- `pages/` — page content YAML files (home, blog, team, projects, …)
-- `data/` — site-wide data: `header.yml`, `footer.yml`, `projects.json`, `person-roles.json`
+- `pages/` — page content YAML files (home, blog, team, …)
+- `data/` — site-wide data: `header.yml`, `footer.yml`, `person-roles.json`
 - `public/` — static assets (images, icons, fonts)
 - `astro.config.mjs` — Astro config (React + MDX integrations, injected blog route)
 - `tailwind.config.cjs` — Tailwind theme (colors, fonts, spacing)
