@@ -20,17 +20,21 @@ export const mdColumn = (
 ): { __html: string } => {
   const renderer = new Renderer();
 
-  renderer.heading = ({ text: t, depth }) => {
+  renderer.heading = ({ tokens, depth }) => {
     const level = depth + headingLevelModifier;
     const sizeClass =
       level >= 3
         ? `${HEADING_COMMON} ${HEADING_SMALL}`
         : `${HEADING_COMMON} ${HEADING_BIG}`;
-    return `<h${depth} class="${sizeClass}">${t}</h${depth}>`;
+    return `<h${depth} class="${sizeClass}">${renderer.parser.parseInline(
+      tokens,
+    )}</h${depth}>`;
   };
 
-  renderer.paragraph = ({ text: t }) =>
-    `<p class="my-[3rem] text-[1.6rem] leading-[2.7rem] text-black">${t}</p>`;
+  renderer.paragraph = ({ tokens }) =>
+    `<p class="my-[3rem] text-[1.6rem] leading-[2.7rem] text-black">${renderer.parser.parseInline(
+      tokens,
+    )}</p>`;
 
   return { __html: marked.parse(text, { renderer }) as string };
 };
