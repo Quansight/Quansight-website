@@ -1,0 +1,91 @@
+---
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('singletons', 'footer');
+const { logo, contact, navigation, socialMedia, copyright } = entry!.data as {
+  logo: { src: string; srcMobile: string; srcTablet: string; srcDesktop: string; alt: string };
+  contact: { title: string; lines: { text: string; href?: string; kind?: string }[] };
+  navigation: { title: string; links: { text: string; href: string }[] };
+  socialMedia: { title: string; links: { text: string; href: string; icon: string; iconAlt: string }[] };
+  copyright: string;
+};
+---
+
+<footer class="flex justify-center items-center text-black bg-white xl:text-[#efefef] xl:bg-black">
+  <div class="px-9 pt-24 pb-20 w-full sm:px-16 sm:pb-5 xl:px-52 xl:pt-[6.2rem] xl:pb-[3.7rem] max-w-layout">
+    <section class="grid grid-cols-2 gap-[3.2rem] sm:gap-24 lg:grid-cols-4 lg:gap-[3rem] xl:gap-[8rem]">
+
+      {/* logo column — desktop uses white logo (dark bg), tablet/mobile uses dark logo (white bg) */}
+      <div class="relative top-0 w-[23.9rem] h-[6.455rem] sm:w-[22.6rem] sm:h-[6.104rem]">
+        <picture style="position:absolute;inset:0;width:100%;height:100%">
+          <source media="(min-width: 1280px)" srcset={logo.srcDesktop} />
+          <img
+            src={logo.srcTablet}
+            alt={logo.alt}
+            style="width:100%;height:100%;object-fit:contain"
+          />
+        </picture>
+      </div>
+
+      {/* contact column */}
+      <div class="flex flex-col col-span-2 sm:col-span-1">
+        <h2 class="order-2 mb-4 text-[1.6rem] font-bold leading-[3rem] border-black sm:order-1 sm:pb-[1.3rem] sm:border-b-[0.5px] xl:border-white">
+          {contact.title}
+        </h2>
+        <div class="order-3 text-[1.4rem] leading-[3.3rem] sm:order-2">
+          {contact.lines.map((line) => (
+            <p>
+              {line.href ? (
+                <a href={line.href} class="hover:underline">{line.text}</a>
+              ) : (
+                line.text
+              )}
+            </p>
+          ))}
+        </div>
+      </div>
+
+      {/* navigation column */}
+      <div class="mb-8">
+        <h2 class="pb-[1.3rem] mb-4 text-[1.6rem] font-bold leading-[3rem] border-b-[0.5px] border-black xl:border-white">
+          {navigation.title}
+        </h2>
+        <ul class="flex flex-col">
+          {navigation.links.map((link) => (
+            <li class="pb-5 text-[1.4rem] font-normal leading-[2.3rem]">
+              <a href={link.href} class="hover:underline">{link.text}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* social media column */}
+      <div class="col-span-2 sm:col-span-1">
+        <h2 class="hidden pb-[1.3rem] mb-8 text-[1.6rem] font-bold leading-[3rem] border-b-[0.5px] border-black sm:block xl:border-white">
+          {socialMedia.title}
+        </h2>
+        <ul class="flex flex-wrap gap-12 lg:gap-8 xl:gap-12">
+          {socialMedia.links.map((link) => (
+            <li>
+              <a href={link.href} target="_blank" rel="noreferrer" class="block relative w-10 h-10">
+                <span class="sr-only">{link.text}</span>
+                <img
+                  src={link.icon}
+                  alt={link.iconAlt}
+                  aria-hidden="true"
+                  class="brightness-0 xl:brightness-100 w-full h-full object-contain"
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </section>
+
+    {/* copyright */}
+    <section class="pt-8 mt-[3.7rem] border-t-[0.5px] border-black sm:mt-[8.5rem] xl:border-white">
+      <p class="text-[1.2rem] leading-[2.4rem]">{copyright}</p>
+    </section>
+  </div>
+</footer>

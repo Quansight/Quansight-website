@@ -1,0 +1,15 @@
+# Generated from Storyblok export. Edit freely.
+slug: privacy-policy
+blocks:
+- type: hero
+  image: /images/page-assets/hero-placeholder.webp
+  imageAlt: hero placeholder
+  title: ''
+  subTitle: ''
+  variant: small
+  objectFit: cover
+- type: statute
+  title: Privacy Policy for Labs
+  sections:
+  - title: Privacy Policy for Labs
+    text: Sample Description

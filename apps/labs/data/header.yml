@@ -1,0 +1,16 @@
+# Generated from Storyblok export. Edit freely.
+
+logo:
+  src: "/images/logos/labs-logo-header.svg"
+  alt: "Quansight Labs Logo"
+
+navigation:
+  - text: "Home"
+    href: "/"
+  - text: "Blog"
+    href: "/blog"
+  - text: "Team"
+    href: "/team"
+
+skipLinksText: "skip to main content"
+bookACallLinkText: ""

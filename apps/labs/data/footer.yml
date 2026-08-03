@@ -1,0 +1,39 @@
+# Generated from Storyblok export. Edit freely.
+
+copyright: "@2022 Quansight Inc. All rights reserved."
+
+logo:
+  src: "/images/logos/labs-logo-footer-tablet.png"
+  srcMobile: "/images/logos/labs-logo-footer-mobile.png"
+  srcTablet: "/images/logos/labs-logo-footer-tablet.png"
+  srcDesktop: "/images/logos/labs-logo-footer-desktop.png"
+  alt: "Labs footer logo"
+
+contact:
+  title: "Our Address"
+  lines:
+    - text: "connect@quansight.com"
+      href: "mailto:connect@quansight.com"
+      kind: "email"
+    - text: "8656 W. Hwy 71, Bldg F200"
+    - text: "Austin, Texas 78735"
+
+navigation:
+  title: "Look Around"
+  links:
+    - text: "Blog"
+      href: "/blog"
+    - text: "Team"
+      href: "/team"
+
+socialMedia:
+  title: "Say Hello"
+  links:
+    - text: "Go to Quansight's Github"
+      href: "https://github.com/Quansight-Labs"
+      icon: "/images/icons/github.svg"
+      iconAlt: "Github"
+    - text: "Go to Quansight's Twitter"
+      href: "https://twitter.com/Quansightai"
+      icon: "/images/icons/twitter.svg"
+      iconAlt: "twitter"

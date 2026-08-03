@@ -1,0 +1,31 @@
+{
+  "name": "labs",
+  "type": "module",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/react": "^4.0.0",
+    "astro": "^5.0.0",
+    "autoprefixer": "^10.4.20",
+    "clsx": "^2.1.1",
+    "marked": "^15.0.0",
+    "rehype-katex": "^7.0.0",
+    "remark-math": "^6.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sharp": "^0.33.5",
+    "tailwindcss": "^3.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,49 @@
+---
+import { getEntry } from 'astro:content';
+import { SiteHeaderMobile } from './SiteHeaderMobile';
+
+const entry = await getEntry('singletons', 'header');
+const { logo, navigation, skipLinksText } = entry!.data as {
+  logo: { src: string; alt: string };
+  navigation: { text: string; href: string }[];
+  skipLinksText: string;
+};
+---
+
+<header class="fixed inset-x-0 top-0 z-20 bg-black text-[#efefef] sm:absolute">
+  <div class="mx-auto max-w-layout">
+    {/* skip to content link */}
+    <div class="absolute inset-x-0 top-0 z-50 py-[2rem] max-w-full text-[1.6rem] font-extrabold text-center text-white bg-black transition-transform duration-300 ease-in-out -translate-y-full focus-within:translate-y-0">
+      <a href="#maincontent" class="pb-2 border-b-2">{skipLinksText}</a>
+    </div>
+
+    {/* desktop nav */}
+    <div class="hidden gap-[4.7rem] justify-between items-center sm:flex sm:px-[3.4rem] lg:gap-[13.7rem] xl:gap-[15.1rem] xl:px-[11.5rem]">
+      <a href="/" aria-label="Go to home page" class="relative shrink-0 w-[27.3rem] h-[7.373rem] lg:w-[33.5rem] lg:h-[9.49rem]">
+        <img
+          src={logo.src}
+          alt={logo.alt}
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain"
+        />
+      </a>
+      <nav class="flex flex-wrap gap-x-[3rem] gap-y-[1.5rem] items-center w-full xl:gap-[2.7rem] xl:justify-end justify-end">
+        {navigation.map((item) => (
+          <a
+            href={item.href}
+            class="text-[1.7rem] font-extrabold leading-[2.825rem] capitalize font-heading hover:text-green transition-colors ease-in-out"
+          >
+            {item.text}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    {/* mobile nav (React island) */}
+    <SiteHeaderMobile
+      logoSrc={logo.src}
+      logoAlt={logo.alt}
+      navigation={navigation}
+      client:load
+    />
+  </div>
+</header>

@@ -1,0 +1,91 @@
+---
+import { ColumnArticle } from './ColumnArticle/ColumnArticle';
+import { Hero } from './Hero';
+import { Logos } from './Logos/Logos';
+import { PageHeading } from './PageHeading';
+import { Statute } from './Statute/Statute';
+import { Team, type TeamPerson } from './Team/Team';
+import { Teaser } from './Teaser';
+
+interface Props {
+  block: Record<string, unknown> & { type: string };
+  people?: TeamPerson[];
+}
+
+const { block, people = [] } = Astro.props;
+---
+
+{block.type === 'hero' && (
+  <Hero
+    image={block.image as string | undefined}
+    imageAlt={(block.imageAlt as string) ?? ''}
+    imageDesktop={block.imageDesktop as string | undefined}
+    imageTablet={block.imageTablet as string | undefined}
+    imageMobile={block.imageMobile as string | undefined}
+    objectFitDesktop={block.objectFitDesktop as 'cover' | 'contain' | undefined}
+    objectFitTablet={block.objectFitTablet as 'cover' | 'contain' | undefined}
+    objectFitMobile={block.objectFitMobile as 'cover' | 'contain' | undefined}
+    title={block.title as string | undefined}
+    subTitle={block.subTitle as string | undefined}
+    variant={(block.variant as 'small' | 'medium' | 'large') ?? 'medium'}
+    objectFit={(block.objectFit as 'cover' | 'contain') ?? 'cover'}
+  />
+)}
+
+{block.type === 'column-article' && (
+  <ColumnArticle
+    header={block.header as string | undefined}
+    image={block.image as string}
+    imageAlt={(block.imageAlt as string) ?? ''}
+    leftColumn={block.leftColumn as string | undefined}
+    rightColumn={block.rightColumn as string | undefined}
+    final={block.final as string | undefined}
+  />
+)}
+
+{block.type === 'logos' && (
+  <Logos
+    colorVariant={(block.colorVariant as 'black' | 'white') ?? 'black'}
+    title={block.title as string | undefined}
+    linkTitle={block.linkTitle as string | undefined}
+    linkUrl={block.linkUrl as string | undefined}
+    grid={(block.grid as { src: string; alt: string }[]) ?? []}
+  />
+)}
+
+{block.type === 'teaser' && (
+  <Teaser
+    color={(block.color as 'green' | 'violet' | 'pink') ?? 'violet'}
+    title={block.title as string}
+    text={block.text as string}
+    image={block.image as string}
+    imageAlt={(block.imageAlt as string) ?? ''}
+    link={block.link as string}
+    buttonText={block.buttonText as string}
+  />
+)}
+
+{block.type === 'page-heading' && (
+  <PageHeading
+    title={block.title as string}
+    description={block.description as string | undefined}
+  />
+)}
+
+{block.type === 'statute' && (
+  <Statute
+    title={block.title as string}
+    sections={
+      (block.sections as { title: string; text: string }[]) ?? []
+    }
+  />
+)}
+
+{block.type === 'team' && (
+  <Team
+    header={(block.header as string) ?? ''}
+    variant={(block.variant as 'all' | 'spotlight') ?? 'all'}
+    imagesShape={(block.imagesShape as 'square' | 'rectangle') ?? 'square'}
+    people={people}
+  />
+)}

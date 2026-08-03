@@ -1,0 +1,21 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+
+import BlockRenderer from '../components/BlockRenderer.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const page = await getEntry('pages', 'home');
+const allPeople = await getCollection('people');
+const teamPeople = allPeople
+  .map((e) => e.data)
+  .filter((p) => p.role === 'team');
+---
+
+<BaseLayout
+  title="Quansight Labs"
+  description="Open source, sustainable, and community-driven."
+>
+  {page?.data.blocks.map((block) => (
+    <BlockRenderer block={block} people={teamPeople} />
+  ))}
+</BaseLayout>

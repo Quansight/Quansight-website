@@ -1,7 +1,3 @@
 {
-  "*.{js,json,css,scss,md,ts,tsx,html,graphql}": [
-    "nx format:write --uncommitted",
-    "nx affected:lint --base=main --fix=true"
-  ],
-  ".css": ["nx affected:stylelint --base=main --fix=true"]
+  "*.{js,json,css,scss,md,ts,tsx,html}": ["prettier --write"]
 }
