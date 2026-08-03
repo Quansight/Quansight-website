@@ -59,15 +59,15 @@ blocks:
   linkTitle: ''
   grid:
   - src: /images/page-assets/python-logo.svg
-    alt: ''
+    alt: 'Python logo'
   - src: /images/page-assets/numpy-logo.svg
-    alt: ''
+    alt: 'NumPy logo'
   - src: /images/page-assets/conda-forge-logo.png
-    alt: ''
+    alt: ''conda-forge logo
   - src: /images/page-assets/std-lib-logo.svg
-    alt: ''
+    alt: 'stdlib.js logo'
   - src: /images/page-assets/dataapis-logo.svg
-    alt: ''
+    alt: 'Data APIs logo'
 - type: teaser
   title: The Quansight Quarterly Newsletter
   text: Get the latest news and updates from our team and the open source projects we work on.
