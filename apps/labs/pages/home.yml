@@ -63,7 +63,7 @@ blocks:
   - src: /images/page-assets/numpy-logo.svg
     alt: 'NumPy logo'
   - src: /images/page-assets/conda-forge-logo.png
-    alt: ''conda-forge logo
+    alt: 'conda-forge logo'
   - src: /images/page-assets/std-lib-logo.svg
     alt: 'stdlib.js logo'
   - src: /images/page-assets/dataapis-logo.svg
