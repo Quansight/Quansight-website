@@ -204,7 +204,7 @@ The main width and depth sweeps used RoPE. I also reran the four-layer width swe
 While evaluating results I noticed the tokenizer was built from `ascii_letters + digits + punctuation + " "` — 99 tokens including specials, on a task needing 66. A third of the output layer was spent on classes that were never correct answers. I fixed it to alphanumerics only and reran everything, the comparison appears in the Results section. I think comparing results of the old and new runs would be intresting.
 
 <p align="center">
-  <img src="/posts/exploring-small-transformers-with-tranite-on-string-reversal/jarvis.png" width="300" alt="A cat eating cheese">
+  <img src="/posts/exploring-small-transformers-with-tranite-on-string-reversal/jarvis.png" width="300" alt="jarvis meme">
 </p>
 
 ## Evaluation Metrics
