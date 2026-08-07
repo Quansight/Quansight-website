@@ -22,14 +22,20 @@ It scaffolds a complete training project — model, data pipeline, trainer, conf
 
 We wanted example use cases, so I picked something simple: string reversal. Given `abcdef`, a decoder-only Transformer has to produce `fedcba`.
 
-The main experiment was varying model depth and width to see what mattered.
+The main question was:
 
-- Width the hidden size `d_model`, is how much room each token's representation has.
-- Depth is how many decoder blocks stack.
+> Can a fixed-size Transformer, with a fixed number of layers and hidden size, be trained to reverse strings perfectly as the sequence length continues to increase?
 
-The stack itself hasn't changed much since [GPT-2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf) made the decoder-only design standard; recent families like [Llama 3](https://arxiv.org/abs/2407.21783), [Gemma 2](https://arxiv.org/abs/2408.00118) and [Qwen 2.5](https://arxiv.org/abs/2412.15115) add refinements RMSNorm, grouped-query attention, rotary embeddings on top of the same alternating attention and feed-forward blocks.
+This is hard to answer for strings of arbitrary length, so we made the question more practical: for each fixed model configuration, how does the model perform as the string length increases? At what point does its exact-match accuracy start degrading, and when does it completely fail under the same training procedure and compute budget?
 
-Short answer: increasing embedding width gave the most promising results but take that with a grain of salt!
+The main experiment varied model depth and width to see what mattered:
+
+- Width, represented by the hidden size `d_model`, is how much room each token's representation has.
+- Depth is the number of stacked decoder blocks.
+
+The stack itself hasn't changed much since [GPT-2](https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf) made the decoder-only design standard. Recent families like [Llama 3](https://arxiv.org/abs/2407.21783), [Gemma 2](https://arxiv.org/abs/2408.00118), and [Qwen 2.5](https://arxiv.org/abs/2412.15115) add refinements such as RMSNorm, grouped-query attention, and rotary embeddings on top of the same alternating attention and feed-forward blocks.
+
+Short answer: every fixed-size model we tested eventually reached a length where it could no longer achieve perfect exact-match accuracy within the experimental budget. We noticed that increasing width pushed the failure boundary farther than increasing depth, but the experiments were an emotional ride, so take that with a grain of salt!
 
 ## The String Reversal Task
 
@@ -201,7 +207,7 @@ The main width and depth sweeps used RoPE. I also reran the four-layer width swe
 
 ### A small vocabulary detour
 
-While evaluating results I noticed the tokenizer was built from `ascii_letters + digits + punctuation + " "` — 99 tokens including specials, on a task needing 66. A third of the output layer was spent on classes that were never correct answers. I fixed it to alphanumerics only and reran everything, the comparison appears in the Results section. I think comparing results of the old and new runs would be intresting.
+While evaluating results I noticed the tokenizer was built from `ascii_letters + digits + punctuation + " "` — 99 tokens including specials, on a task needing 66. A third of the output layer was spent on classes that were never correct answers. I fixed it to alphanumerics only and reran everything, the comparison appears in the Results section.
 
 <p align="center">
   <img src="/posts/exploring-small-transformers-with-tranite-on-string-reversal/jarvis.png" width="300" alt="jarvis meme">
@@ -310,11 +316,13 @@ I also built a hand-written attention demo using a reversal specific modificatio
 
 ## Conclusion
 
-What started as a small example for Trainite turned into a useful stress test for small Transformers. String reversal looks trivial, but the models developed sharp failure boundaries as the sequences became longer.
+This experiment started with a simple question: can a fixed-size Transformer learn to reverse strings perfectly as they get longer? In our setup, every model eventually reached a length where it could no longer achieve perfect exact-match accuracy.
 
-Increasing width produced the clearest improvement, while adding depth was much less predictable. Near the failure boundary, results often depended on the random seed, and the positional-encoding experiment showed that model size was not the only architectural choice that mattered. The gap between token accuracy and exact match was another useful reminder that getting most tokens right is not the same as solving the task.
+Increasing width pushed that boundary farther than increasing depth, while positional encoding and random seed also affected where models started to fail. The gap between token accuracy and exact match was especially revealing: getting most characters right is not the same as reliably learning the full reversal procedure.
 
-These experiments are too small to establish a general rule about Transformer scaling: the models were not parameter-matched, each length was trained separately, and only three seeds were used. Still, they served their purpose. Trainite gave me a complete project that I could freely modify, from the tokenizer and evaluation loop to the scheduler and attention inspection, without rebuilding the training infrastructure each time.
+This does not prove that Transformers cannot reverse strings of arbitrary length. We trained each length separately, tested only a few model configurations and seeds, and gave every run a limited compute budget. What it does show is that a fixed model can look successful on shorter sequences while still hitting a clear limit as the task grows.
+
+That is why simple algorithm-like tasks are useful: they make it easier to see where a model stops being reliable and how architectural choices move that boundary.
 
 <p align="center">
   <img src="/posts/exploring-small-transformers-with-tranite-on-string-reversal/we-are-so-back.jpg" width="300" alt="A celebratory we-are-so-back meme">
