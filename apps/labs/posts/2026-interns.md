@@ -82,7 +82,7 @@ and sailing.
 ## Aadya Chinubhai
 
 <div style={{display: 'flex', alignItems: 'center'}}>
-<img alt="Aadya looking at the camera." src="/posts/2026-interns/AadyaChinubhai.jpg" width="220px" style={{padding: '10px 20px'}}/>
+<img alt="Aadya looking at the camera." src="/posts/2026-interns/AadyaChinubhai.jpeg" width="220px" style={{padding: '10px 20px'}}/>
 
 [Aadya](https://github.com/aadya940) joins us from California by way of India and is working on approximating data with
 splines, mentored by Gagandeep Singh and Evgeni Burovski. This project runs from June to September.
@@ -123,7 +123,7 @@ performance, benchmarking, interoperability, packaging and general maintenance s
 ## Pratham Hole
 
 <div style={{display: 'flex', alignItems: 'center'}}>
-<img alt="Pratham looking at the camera." src="/posts/2026-interns/PrathamHole.png" width="220px" style={{padding: '10px 20px'}}/>
+<img alt="Pratham looking at the camera." src="/posts/2026-interns/PrathamHole.jpg" width="220px" style={{padding: '10px 20px'}}/>
 
 [Pratham](https://github.com/prathamhole14) also joins us from India for a July to October project mentored by Matti
 Picus. He is working toward two connected goals: porting NumPy toward CPython's Limited C API, and moving NumPy closer
