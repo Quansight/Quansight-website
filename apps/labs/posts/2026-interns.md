@@ -15,7 +15,7 @@ hero:
 The Quansight summer internship program is back for another year. We are excited to introduce our six interns for 2026,
 and to follow them on their journeys.
 
-Every year, Quansight runs this [internship program]() to give new open source talent a chance to grow. Interns work side by side with Quansight mentors, learning how open source projects work, how to make impactful contributions, and how to best collaborate with the scientific Python ecosystem.
+Every year, Quansight runs this internship program to give new open source talent a chance to grow. Interns work side by side with Quansight mentors, learning how open source projects work, how to make impactful contributions, and how to best collaborate with the scientific Python ecosystem.
 
 Here is a look at this year's cohort and their projects.
 
@@ -148,7 +148,7 @@ unwind, and is always on the lookout for good food.
 
 This year, the program has a bit more flexibility than usual. Some interns started earlier, and some later, depending on
 what worked for each person. Projects run for about three months, and at the end, each intern writes a blog post about
-their work and their experience. [These posts](https://labs.quansight.org/categories/internship/) are some of our
+their work and their experience. [These posts](https://labs.quansight.org/blog) are some of our
 favorite reads each year, and are a good opportunity for interns to present their projects to a wider audience.
 
 In the following weeks, you can expect to read more in this series of blog posts.
