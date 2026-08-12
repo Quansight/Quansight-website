@@ -1,6 +1,6 @@
 ---
 title: 'Introducing the 2026 Quansight Internship Program Cohort'
-published: August 7, 2026
+published: August 12, 2026
 authors: [melissa-mendonca]
 description: 'Meet the interns joining us for our annual internship program.'
 category: [Internship, OSS Experience]
