@@ -1,6 +1,6 @@
 ---
 title: 'Introducing the 2026 Quansight Internship Program Cohort'
-published: August 7, 2026
+published: August 12, 2026
 authors: [melissa-mendonca]
 description: 'Meet the interns joining us for our annual internship program.'
 category: [Internship, OSS Experience]
@@ -53,7 +53,7 @@ and converting NumPy operations into gufuncs to add more features and for perfor
 Iason is a PhD student at Rice University, conducting research in high-energy physics as a member of the
 [CMS experiment](https://cms.cern) at the
 [Large Hadron Collider at CERN](https://home.cern/science/accelerators/large-hadron-collider/), focusing on Higgs boson
-decays into two photons. He's passionate about scientific computing and open-source tools that enable reproducible and
+decays into two photons. He's passionate about scientific computing and open source tools that enable reproducible and
 efficient research. He has maintained several tools of the [Scikit-HEP](https://scikit-hep.org/) stack like
 [Awkward Array](https://awkward-array.org/doc/main/) and [Coffea](https://coffea-hep.readthedocs.io/en/latest/) and is a
 contributor to many packages across the stack. Outside of work, he enjoys watching movies, gaming, and travelling.
@@ -74,7 +74,7 @@ universities. The goals include handwritten kernels to show the feasibility of t
 and benchmarking against existing backends.
 
 Yu Sheng got his first break contributing to open source by joining the Finch team. He would like to contribute to more
-open-source repositories in the future and make changes that matter.
+open source repositories in the future and make changes that matter.
 
 Outside of work, Yu Sheng has a big interest in swimming, including open-water swimming. He also enjoys playing tennis
 and sailing.
