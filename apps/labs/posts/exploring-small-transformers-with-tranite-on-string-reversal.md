@@ -1,7 +1,7 @@
 ---
 title: 'Exploring Small Transformers With Trainite On String Reversal'
 authors: [aaishwarya-mishra]
-published: August 5, 2026
+published: August 14, 2026
 description: 'An internship experiment using Trainite to explore how width, depth, vocabulary, and positional encoding affect small Transformers learning string reversal.'
 category: [Machine Learning, Internship, OSS Experience]
 featuredImage:
