@@ -303,8 +303,6 @@ There is one major problem with this scheme: `abi3` as it was originally defined
 
 Until the advent of the free-threaded interpreter, projects had a choice of supporting a build matrix like the following:
 
-<style dangerouslySetInnerHTML={{ __html: ".abi-grid{border-collapse:collapse}.abi-grid th,.abi-grid td{border:1px solid #374151;padding:8px 16px}" }} />
-
 <div className="overflow-x-auto">
   <table className="abi-grid mx-auto w-auto min-w-[42rem]">
     <thead>
