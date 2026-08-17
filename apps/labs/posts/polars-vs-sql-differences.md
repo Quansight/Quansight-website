@@ -16,9 +16,9 @@ You've seen the "Polars vs _SQL engine du jour_" posts, and may be tired of them
 
 ## Mental models
 
-In Polars, dataframes are best thought of as collections of columns, each of which has a unique name and has elements of a homogeneous type, and which are all of the same length. There's no special tie between the columns - as we will see later, this allows for column independence. Row order is defined, but as we will also see later, Polars doesn't always promise to preserve it!
+In Polars, dataframes are best thought of as collections of columns, each of which has a unique name. Within each column, all elements must be of a homogeneous type, and are all columns must be of the same length. There's no special tie between the columns - as we will see later, this allows for column independence. Row order is defined, but as we will also see later, Polars doesn't always promise to preserve it!
 
-SQL is a programming language used to interact with databases which follow the relational model. In the relational model, a table is an unordered bag of rows, each of which is atomic (meaning that it can't be split up). Row order isn't defined, rows may be sorted in a certain manner before being displayed.
+SQL is a programming language used to interact with databases which follow the relational model. In the relational model, a table is an unordered bag of rows, each of which is atomic (meaning that it can't be split up). Row order isn't defined, although rows may be sorted in a certain manner before being displayed.
 
 ## Row order
 
@@ -67,7 +67,7 @@ shape: (3, 3)
 └───────┴───────┴────────┘
 ```
 
-Note, however, that Polars displays them in the original order, whereas DuckDB rearranges the result's rows.
+Note, however, that Polars displays them in the original order, whereas DuckDB rearranges the result's rows. If you were hoping to rely on row order being preserved for subsequent operations, then you'll have a bad time.
 
 ## Column independence
 
@@ -99,11 +99,11 @@ shape: (2, 2)
 └───────────────┴────────────┘
 ```
 
-My personal opinion is that, if you want to write maximally safe Polars, then you're best off avoiding expressions which change length (e.g. `Expr.drop_nulls`) or which change order (e.g. `Expr.sort`). Instead, use the dataframe equivalents (`DataFrame.drop_nulls` and `DataFrame.sort` respectively), or specify `ignore_nulls` and `order_by` arguments when available.
+My personal opinion is that, if you want to write maximally safe Polars, then you're best off avoiding expressions which change length (e.g. `Expr.drop_nulls`) or which change order (e.g. `Expr.sort`). Instead, use the dataframe equivalents (`DataFrame.drop_nulls` and `DataFrame.sort` respectively) so that all rows get truncated or rearranged together, or specify `ignore_nulls` and `order_by` arguments when available.
 
 ## Literals
 
-The interpretation of literals, such as `pl.lit(1)`, differs a bit between Polars and SQL. In Polars, `lit(1)` means "a single row with the value of 1", whereas in SQL it would mean "repeat the value 1 for every row in this table". We can see an example of the consequence of this difference in the following example.
+The interpretation of literals, such as `pl.lit(1)`, differs between Polars and SQL. In Polars, `lit(1)` means "a single row with the value of 1", whereas in SQL it means "repeat the value 1 for every row in this table". We can see an example of the consequence of this difference in the following example.
 
 ```py
 >>> df
@@ -140,11 +140,11 @@ shape: (1, 1)
 There are some other differences I'd like to touch on here, which are either quite minor or which I've written about previously.
 
 - Null sorting. If you sort a table in SQL, then nulls come last by default. In Polars, they come first. This is configurable (`nulls_first=True` / `nulls_first=False`), just be aware that the defaults differ if you're porting code.
-- The sum of zero elements is `NULL` in SQL and `0` in Polars. My personal feeling is that Polars is more mathematically correct here (zero is the addition identity), even though in practice I may prefer to get a null value in such cases so it's clearer that there are no valid values as opposed to values which happened to sum to zero. It's a difference that's easy to work around, you just need to be aware of it.
+- The sum of zero elements is `NULL` in SQL and `0` in Polars. My personal feeling is that Polars is more mathematically correct here (zero is the addition identity), although in practice I think I'd find the SQL behaviour more useful (e.g. "did I get `0` because my sensor is broken and didn't take any readings, or because it took readings which summed `0`?"). It's a difference that's easy to work around, you just need to be aware of it.
 - Broadcasting. Polars follows NumPy-style broadcast, whereby if you apply a binary expression with inputs of length `N` and `1`, then the latter one gets broadcasted to be of length `N`. I find this useful for scientific applications, where operations such as subtracting the mean ("centering") are common. See [Mastering DuckDB when you're used to pandas or Polars](https://labs.quansight.org/blog/duckdb-when-used-to-frames) for how to work around this in SQL.
 
 ## Conclusion
 
-We've looked at some differences between Polars and SQL, how your mental model for them needs to change, and how to workaround some differences. By appreciating their differences, you've learned how to write code which generalises well and how to migrate between them. You also saw some examples of how things can go wrong if you ignore the differences between them.
+We've looked at some differences between Polars and SQL, how your mental model for them needs to change, and how to workaround some differences. By appreciating their differences, you've learned how to write code which generalises well and how to migrate between them. You also saw some examples of how things can go wrong if you ignore these differences.
 
 If you would like help leveraging open source tools like these in your organisation, [we can help](https://quansight.com/about-us/#bookacallform)!
