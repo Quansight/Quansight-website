@@ -1,6 +1,6 @@
 ---
 title: 'The Polars vs SQL differences nobody is talking about'
-published: August 15, 2026
+published: August 17, 2026
 authors: [marco-gorelli]
 description: "We're all tired of performance comparisons - let's talk about something else"
 category: [PyData ecosystem]
@@ -12,7 +12,7 @@ hero:
   imageAlt: 'Image of "Spot the difference" comparing Polars and SQL'
 ---
 
-You've seen the "Polars vs <SQL engine du jour>" posts, and may be tired of them. Don't worry, that's not what this post is going to be about. We'll talk about some Polars vs SQL differences which aren't getting talked about enough, and what you can do about them. By learning these differences, you'll be able to seamlessly migrate between them and write code that generalises well.
+You've seen the "Polars vs _SQL engine du jour_" posts, and may be tired of them. Don't worry, that's not what this post is going to be about. We'll talk about some Polars vs SQL differences which aren't getting talked about enough, and what you can do about them. By learning these differences, you'll be able to seamlessly migrate between them and write code that generalises well.
 
 ## Mental models
 
