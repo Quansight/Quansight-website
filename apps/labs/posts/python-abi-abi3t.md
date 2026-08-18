@@ -303,8 +303,6 @@ There is one major problem with this scheme: `abi3` as it was originally defined
 
 Until the advent of the free-threaded interpreter, projects had a choice of supporting a build matrix like the following:
 
-<style dangerouslySetInnerHTML={{ __html: ".abi-grid{border-collapse:collapse}.abi-grid th,.abi-grid td{border:1px solid #374151;padding:8px 16px}" }} />
-
 <div className="overflow-x-auto">
   <table className="abi-grid mx-auto w-auto min-w-[42rem]">
     <thead>
@@ -322,14 +320,17 @@ Until the advent of the free-threaded interpreter, projects had a choice of supp
       </tr>
       <tr>
         <td>3.10</td>
+        <td>&mdash;</td>
         <td><code>cp310</code></td>
       </tr>
       <tr>
         <td>3.11</td>
+        <td>&mdash;</td>
         <td><code>cp311</code></td>
       </tr>
       <tr>
         <td>3.12</td>
+        <td>&mdash;</td>
         <td><code>cp312</code></td>
       </tr>
     </tbody>
@@ -615,20 +616,27 @@ This is summarized in the table below.
       <tr>
         <td>3.13</td>
         <td>&mdash;</td>
+        <td>&mdash;</td>
       </tr>
       <tr>
         <td>3.14</td>
+        <td>&mdash;</td>
         <td><code>cp314t</code></td>
       </tr>
       <tr>
         <td>3.15</td>
         <td colSpan={2} rowSpan={3} className="align-middle text-center"><code>cp315-abi3.abi3t</code></td>
+        <td>&mdash;</td>
       </tr>
       <tr>
         <td>3.16</td>
+        <td>&mdash;</td>
+        <td>&mdash;</td>
       </tr>
       <tr>
         <td>3.17 and later</td>
+        <td>&mdash;</td>
+        <td>&mdash;</td>
       </tr>
     </tbody>
   </table>
