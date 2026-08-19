@@ -1,6 +1,6 @@
 ---
 title: 'The Polars vs SQL differences nobody is talking about'
-published: August 17, 2026
+published: August 19, 2026
 authors: [marco-gorelli]
 description: "We're all tired of performance comparisons - let's talk about something else"
 category: [PyData ecosystem]
