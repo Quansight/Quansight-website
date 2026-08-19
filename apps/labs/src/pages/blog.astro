@@ -1,35 +1,14 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
 
 import BlockRenderer from '../components/BlockRenderer.astro';
 import { BlogList } from '../components/Blog/BlogList';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import categories from '../../posts/categories.json';
+import { getPublishedPosts } from '../utils/posts';
 
 const page = await getEntry('pages', 'blog');
-const allPosts = await getCollection('posts');
-const allPeople = await getCollection('people');
-
-const peopleBySlug = Object.fromEntries(
-  allPeople.map((e) => [e.id, e.data]),
-);
-
-const posts = allPosts
-  .filter((p) => p.data.published)
-  .sort((a, b) => new Date(b.data.published).getTime() - new Date(a.data.published).getTime())
-  .map((post) => ({
-    id: post.id,
-    title: post.data.title,
-    published: post.data.published,
-    authors: post.data.authors
-      .map((s) => {
-        const p = peopleBySlug[s];
-        return p ? `${p.firstName} ${p.lastName}` : s;
-      })
-      .join(', '),
-    featuredImage: post.data.featuredImage,
-    categories: post.data.category,
-  }));
+const posts = await getPublishedPosts();
 ---
 
 <BaseLayout

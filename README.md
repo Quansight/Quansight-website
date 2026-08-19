@@ -26,7 +26,7 @@ Optionally, use a docker to avoid some of the worst npm supply chain attacks
 ```sh
 git clone git@github.com:Quansight/Quansight-website.git
 cd Quansight-website
-docker run --rm -it -v "$PWD":/app -w /app/apps/labs -p 4321:4321 --user node node:22-alpine sh
+docker run --rm -it -v "$PWD":/app -w /app/apps/labs -p 4321:4321 node:22-alpine sh
 npm install
 npm run dev -- --host 0.0.0.0
 ```

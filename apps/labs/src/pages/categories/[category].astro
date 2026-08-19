@@ -1,0 +1,38 @@
+---
+import { getEntry } from 'astro:content';
+
+import BlockRenderer from '../../components/BlockRenderer.astro';
+import { BlogList } from '../../components/Blog/BlogList';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import categories from '../../../posts/categories.json';
+import { slugifyCategory } from '../../utils/categories';
+import { getPublishedPosts } from '../../utils/posts';
+
+export function getStaticPaths() {
+  return categories.map((category) => ({
+    params: { category: slugifyCategory(category) },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+const page = await getEntry('pages', 'blog');
+const posts = await getPublishedPosts();
+---
+
+<BaseLayout
+  title={`${category} | Blog | Labs`}
+  description={page?.data.description}
+>
+  {page?.data.blocks.map((block) => (
+    <BlockRenderer block={block} />
+  ))}
+
+  <div class="pt-[3rem] mx-auto w-[95%] max-w-[83rem] md:w-[85%] xl:w-[70%]">
+    <h2 class="text-[2.4rem] font-extrabold leading-[4.9rem] text-violet font-heading">
+      {category}
+    </h2>
+  </div>
+
+  <BlogList posts={posts} categories={categories} initialCategory={category} client:load />
+</BaseLayout>
