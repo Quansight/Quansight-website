@@ -37,6 +37,7 @@ const authors = post.data.authors.map((s) => {
 <BaseLayout
   title={`${post.data.title} | Quansight Labs`}
   description={post.data.description}
+  image={post.data.featuredImage?.src}
 >
   {post.data.hero?.imageSrc && (
     <Hero

@@ -6,9 +6,20 @@ import SiteFooter from '../components/SiteFooter.astro';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
-const { title = 'Quansight Labs', description = '' } = Astro.props;
+const {
+  title = 'Quansight Labs',
+  description = '',
+  image = '/images/logos/labs-logo-footer-desktop.png',
+} = Astro.props;
+
+const siteUrl = (
+  Astro.site?.toString() ?? 'https://labs.quansight.org'
+).replace(/\/$/, '');
+const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
+const imageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
 ---
 
 <!doctype html>
@@ -18,6 +29,18 @@ const { title = 'Quansight Labs', description = '' } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
     <link rel="icon" href="/favicon.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700;800&family=Mukta:wght@400;500;700;800&family=Fira+Code:wght@500&display=swap"
