@@ -1,0 +1,46 @@
+# Nav structure scraped from the live quansight.com (WordPress) header DOM.
+# Logo is a stopgap (grayscale mark, not the real brand logo) -- swap out
+# apps/consulting/public/nebari-services/quansight-logo.svg for a real
+# header logo asset when available.
+
+logo:
+  src: "/nebari-services/quansight-logo.svg"
+  alt: "Quansight Logo"
+
+navigation:
+  - text: "Consulting"
+    href: "/consulting"
+    children:
+      - text: "Consulting Overview"
+        href: "/consulting"
+      - text: "Algorithms, AI & Machine Learning"
+        href: "/algorithms-ai-machine-learning"
+      - text: "AI Engineering"
+        href: "/ai-engineering"
+      - text: "Packaging and Distribution"
+        href: "/packaging-and-distribution"
+      - text: "Jupyter Technologies"
+        href: "/jupyter-technologies"
+      - text: "Visualization & Dashboards"
+        href: "/visualization-dashboards"
+      - text: "Open Source Services"
+        href: "/open-source-services"
+      - text: "Training"
+        href: "/training"
+      - text: "Supply Chain Security"
+        href: "/supply-chain-security"
+      - text: "Technical Writing"
+        href: "/technical-writing"
+  - text: "Blog"
+    href: "/blog"
+  - text: "About Us"
+    href: "/about-us"
+    children:
+      - text: "Our Story"
+        href: "/about-us"
+      - text: "Careers"
+        href: "/careers"
+  - text: "Contact Us"
+    href: "/contact-us"
+
+skipLinksText: "skip to main content"

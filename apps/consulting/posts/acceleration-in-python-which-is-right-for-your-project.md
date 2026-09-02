@@ -1,7 +1,7 @@
 ---
 title: 'Acceleration in Python: Which Is Right for Your Project?'
 published: August 17, 2021
-author: dale-tovar
+authors: [dale-tovar]
 description: >
   Fast computation in Python relies on compiled code. Under the hoods of popular scientific computing libraries like NumPy, SciPy, and PyTorch are algorithms and data structures implemented in compiled languages. By using multiple languages, the aforementioned libraries and many others are able to run interactively in Python, but with the benefits of fast compiled code, facilitating real-time data analysis and manipulation. While this combination is highly desirable, reaping the benefits of both interactivity and speed, there are many ways to achieve this combination and the ways that developers have gone about this task have changed over the years. In this post, I'll highlight three main ways that open-source developers have approached writing performant Python libraries.
 category: [Scalable Computing, Open Source Software, PyData Ecosystem]
@@ -12,8 +12,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 Quansight recently assisted the University of Oxford on the [sgkit][sgkit repo]
 library, a new genetics toolkit. Sgkit is based on the

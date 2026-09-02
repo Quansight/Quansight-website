@@ -51,7 +51,7 @@ DOCKER_API_VERSION=1.42 docker run --rm -v "$PWD":/app -w /app/apps/labs \
   - `data/` — `header.yml`, `footer.yml`, `projects.json`, `person-roles.json`
   - `public/` — static assets (images under `public/images/`, icons, fonts)
   - `src/` — Astro pages, layouts, templates, components
-- `apps/consulting/` — Quansight Consulting site (Next.js, separate deployment)
+- `apps/consulting/` — migration target for quansight.com (an Astro app mirroring `apps/labs`, not yet deployed live — see `quansight.com-migration.md`)
 - All content is file-based; there is no CMS. Changes flow through pull requests.
 
 Content is wired into Astro by `apps/labs/src/content.config.ts`, which defines

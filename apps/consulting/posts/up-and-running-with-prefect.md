@@ -1,7 +1,7 @@
 ---
 title: 'Up and Running With Prefect'
 published: August 31, 2021
-author: peyton-murray
+authors: [peyton-murray]
 description: 'There are many types of computations that can be broken down into subtasks. Some of these tasks may be resource-intensive or long-running, and may fail at any time for multiple reasons. Being able to define tasks, chain them together, and monitor execution is a nontrivial part of any modern computational pipeline. However, most researchers, data scientists, and software engineers want to focus on solving big-picture questions without worrying about these kinds of bookkeeping details. In the past decade or so, several task management libraries have attempted to make task tracking easy for the programmer, with Apache Airflow and Luigi being some of the most well known. Here, we will focus on a recent addition, Prefect.'
 category: [Infrastructure & HPC, Training]
 featuredImage:
@@ -11,8 +11,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 _Note: This post discusses the 1.x version of Prefect, and not the newer 2.x
 series._

@@ -1,7 +1,7 @@
 ---
 title: 'Review: `torch.func` Contribution'
 published: September 22, 2023
-author: kshiteej-kalambarkar
+authors: [kshiteej-kalambarkar]
 description: '`torch.func` (previously known as `functorch`) is a PyTorch module
 designed to offer JAX-like transforms. Within this module, various higher-order
 functions, such as `grad`, `vmap`, and `vjp` are made accessible. These
@@ -11,8 +11,6 @@ their ability to compose with one another. Thanks to this, the process of
 calculating per-sample gradients becomes the straightforward application of
 `vmap(grad(model))`.'
 ---
-
-<base target="_blank" />
 
 `torch.func` (previously known as `functorch`) is a PyTorch module designed to
 offer JAX-like transforms. Within this module, various higher-order

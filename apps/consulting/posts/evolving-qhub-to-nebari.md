@@ -1,7 +1,7 @@
 ---
 title: 'Evolving QHub to Nebari: Your Open Source Data Science Platform 🪴'
 published: December 21, 2022
-author: pavithra-eswaramoorthy
+authors: [pavithra-eswaramoorthy]
 description: >
   We’re excited to announce a new chapter for Nebari, formerly known as QHub, as it evolves into an independent, community-led project, with a fresh new look!
 category: [Jupyter, Open Source Software, Scalable Computing]
@@ -16,8 +16,6 @@ hero:
 **Co-authors:** Tania Allard, Brian Skinn, Dharhas Pothina
 
 ---
-
-<base target="_blank" />
 
 We’re excited to announce a new chapter for Nebari, formerly known as QHub, as
 it evolves into an independent, community-led project, with a fresh new look!
