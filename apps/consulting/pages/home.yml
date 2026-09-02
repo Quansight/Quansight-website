@@ -1,0 +1,12 @@
+# Minimal placeholder home page. Full marketing-page content migration
+# (24 live WP pages) is a separate, not-yet-started piece of work -- see
+# quansight.com-migration.md's "## Pages" section. This stub exists only
+# to make the app buildable/servable end-to-end for the blog migration.
+
+slug: home
+title: Quansight
+description: Open source, sustainable, and community-driven AI and data science consulting.
+blocks:
+  - type: page-heading
+    title: Quansight
+    description: Open source, sustainable, and community-driven AI and data science consulting. Full homepage content migration from quansight.com is in progress.

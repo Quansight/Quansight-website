@@ -1,7 +1,7 @@
 ---
 title: 'Announcing QHub'
 published: October 14, 2020
-author: dharhas
+authors: [dharhas-pothina]
 description: 'Today, we are announcing the release of QHub, a new open source project from Quansight that enables teams to build and maintain a cost-effective and scalable compute/data science platform in the cloud or on-premises. QHub can be deployed with minimal in-house DevOps experience.'
 category:
   [
@@ -18,8 +18,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 **Editor's Note:** Since the launch of QHub in 2020, we have evolved it into a
 community-led open source project called Nebari. See our <a

@@ -1,7 +1,7 @@
 ---
 title: 'A Year in Review: Quansight’s Contributions to PyTorch in 2021'
 published: April 13, 2022
-author: ralf
+authors: [ralf-gommers]
 description: 'PyTorch is a very popular open source deep learning framework, primarily developed by Meta AI. If you are making deep learning models, chances are you are using PyTorch. Not only is Quansight a major contributor to the development of PyTorch, but we also use it in applied data science consulting projects as our go-to framework for building deep learning models.  '
 category: [Artificial Intelligence]
 featuredImage:
@@ -11,8 +11,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 This post was co-written between Mario Lezcano & Ralf Gommers.
 

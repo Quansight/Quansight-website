@@ -1,7 +1,7 @@
 ---
 title: 'Will Python Be #1 Forever?'
 published: June 1, 2020
-author: troy-bailey
+authors: [troy-bailey]
 description: >
   Based on the data collected by http://pypl.github.io/, over the last 5 years, PHP and Java declined in popularity while Python's popularity rose. Sometime in 2018, Python became the most popular language. But Python probably won't be #1 forever. If history is any indication, no language can maintain the premier position in language popularity indefinitely. I'm sure there were many who believed that Java would never be replaced as #1.
 category: [Open Source Software, PyData Ecosystem]
@@ -12,8 +12,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 Based on the data collected by [PYPL][pypl page] and shown in the chart below,
 over the last 5 years, PHP and Java declined in popularity while Python's

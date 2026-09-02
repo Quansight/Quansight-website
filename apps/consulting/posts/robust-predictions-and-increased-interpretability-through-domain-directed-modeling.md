@@ -1,7 +1,7 @@
 ---
 title: 'Robust Predictions And Increased Interpretability Through Domain-Directed Modeling'
 published: August 24, 2022
-author: rob-zinkov
+authors: [rob-zinkov]
 description: 'Machine learning has significant strengths, especially when large amounts of clean, consistent data are available, and it’s providing dramatic benefits across diverse fields. There are numerous areas where machine learning is not necessarily the optimal tool, though, especially where data is lacking or of poor quality, or where visibility into the model’s internal decision-making processes is critical. In these situations, modeling techniques that make use of the processes underlying the data, informed by domain-specific expertise, are often able to outperform machine learning methods. Such ‘domain-directed’ methods are a great addition to your toolbox—they can be effective when machine learning fails or reaches its limits, and they often provide superior predictive performance in addition to improved model interpretability.'
 category: [Artificial Intelligence, PyData Ecosystem]
 featuredImage:
@@ -11,8 +11,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 **Co-Authors:** Brian Skinn, Eric Kelly
 
