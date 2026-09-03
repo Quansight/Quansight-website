@@ -12,7 +12,12 @@ interface Props {
 const {
   title = 'Quansight Labs',
   description = '',
-  image = '/images/logos/labs-logo-footer-desktop.png',
+  // Social cards need an opaque image at roughly 1.91:1 and at least
+  // 300x157 (Twitter's summary_large_image minimum). The footer logo is
+  // 239x66 and 91% transparent white artwork meant for the dark footer, so
+  // platforms either flattened it onto white -- invisible -- or declined to
+  // render a card image at all.
+  image = '/images/blog_feature_var2.png',
 } = Astro.props;
 
 const siteUrl = (
