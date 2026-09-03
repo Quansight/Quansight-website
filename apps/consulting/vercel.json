@@ -1,0 +1,42 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./",
+  "redirects": [
+    {
+      "source": "/post/:slug",
+      "destination": "/blog/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-environment-management",
+      "destination": "/packaging-and-distribution",
+      "permanent": true
+    },
+    {
+      "source": "/packaging-environment-management-copy",
+      "destination": "/packaging-and-distribution",
+      "permanent": true
+    },
+    {
+      "source": "/pytorch-support-1",
+      "destination": "/pytorch-services",
+      "permanent": true
+    },
+    {
+      "source": "/pytorch-support-2",
+      "destination": "/pytorch-services",
+      "permanent": true
+    },
+    {
+      "source": "/open-source-software",
+      "destination": "/open-source-services",
+      "permanent": true
+    },
+    {
+      "source": "/about-us-plausible-goal-test",
+      "destination": "/about-us",
+      "permanent": true
+    }
+  ]
+}
