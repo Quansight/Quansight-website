@@ -1,16 +1,15 @@
-# Footer structure scraped from the live quansight.com (WordPress) footer DOM
-# (3 link columns + social icons + legal row). Simplified to a single
-# navigation list here (styling not important for this pass, per the plan);
-# the real site splits these into 2 separate columns.
+# Footer structure scraped from the live quansight.com (WordPress) footer
+# DOM (2 link columns + contact + social icons + legal row). Logo is the
+# real one, fetched live -- same white mark+wordmark used everywhere on
+# the live site (only one logo file is referenced anywhere, at various
+# responsive sizes, not different colors -- the footer is the brand
+# gradient at every breakpoint, not just desktop).
 
 logo:
-  src: "/nebari-services/quansight-logo.svg"
-  srcMobile: "/nebari-services/quansight-logo.svg"
-  srcTablet: "/nebari-services/quansight-logo.svg"
-  srcDesktop: "/nebari-services/quansight-logo.svg"
+  src: "/images/logos/quansight-logo-white.webp"
   alt: "Quansight logo"
 
-copyright: "© 2026 Quansight Inc. All rights reserved."
+copyright: "© 2018-2026 Quansight PBC All rights reserved."
 
 contact:
   title: "Contact Us"
@@ -21,37 +20,39 @@ contact:
     - text: "8656 W. Hwy 71, Bldg F200"
     - text: "Austin, Texas 78735"
 
-navigation:
-  title: "Quick Links"
-  links:
-    - text: "Consulting"
-      href: "/consulting"
-    - text: "Training"
-      href: "/training"
-    - text: "Blog"
-      href: "/blog"
-    - text: "Careers"
-      href: "/careers"
-    - text: "About Us"
-      href: "/about-us"
-    - text: "Subscribe to the Quansight Quarterly"
-      href: "/subscribe-to-the-quansight-quarterly"
-    - text: "Visualization & Dashboards"
-      href: "/visualization-dashboards"
-    - text: "Algorithms, AI, & Machine Learning"
-      href: "/algorithms-ai-machine-learning"
-    - text: "Packaging & Distribution"
-      href: "/packaging-and-distribution"
-    - text: "Jupyter Technologies"
-      href: "/jupyter-technologies"
-    - text: "Open Source Services"
-      href: "/open-source-services"
-    - text: "Technical Writing"
-      href: "/technical-writing"
-    - text: "Supply Chain Security"
-      href: "/supply-chain-security"
-    - text: "AI Engineering"
-      href: "/ai-engineering"
+navigationGroups:
+  - title: "Home"
+    links:
+      - text: "Consulting"
+        href: "/consulting"
+      - text: "Training"
+        href: "/training"
+      - text: "Blog"
+        href: "/blog"
+      - text: "Careers"
+        href: "/careers"
+      - text: "About Us"
+        href: "/about-us"
+      - text: "Newsletter"
+        href: "/subscribe-to-the-quansight-quarterly"
+  - title: "Consulting"
+    links:
+      - text: "Visualization & Dashboards"
+        href: "/visualization-dashboards"
+      - text: "Algorithms, AI, & Machine Learning"
+        href: "/algorithms-ai-machine-learning"
+      - text: "Packaging & Distribution"
+        href: "/packaging-and-distribution"
+      - text: "Jupyter Technologies"
+        href: "/jupyter-technologies"
+      - text: "Open Source Services"
+        href: "/open-source-services"
+      - text: "Technical Writing"
+        href: "/technical-writing"
+      - text: "Supply Chain Security"
+        href: "/supply-chain-security"
+      - text: "AI Engineering"
+        href: "/ai-engineering"
 
 legal:
   - text: "What Is Open Source?"

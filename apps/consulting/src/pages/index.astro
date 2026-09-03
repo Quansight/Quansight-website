@@ -1,8 +1,8 @@
 ---
 import { getEntry } from 'astro:content';
 
-import BlockRenderer from '../components/BlockRenderer.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageBlocks from '../components/PageBlocks.astro';
 
 const page = await getEntry('pages', 'home');
 ---
@@ -11,7 +11,5 @@ const page = await getEntry('pages', 'home');
   title="Quansight"
   description="Open source, sustainable, and community-driven AI and data science consulting."
 >
-  {page?.data.blocks.map((block) => (
-    <BlockRenderer block={block} />
-  ))}
+  <PageBlocks blocks={page?.data.blocks ?? []} />
 </BaseLayout>

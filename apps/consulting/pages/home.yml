@@ -2,11 +2,24 @@
 # (24 live WP pages) is a separate, not-yet-started piece of work -- see
 # quansight.com-migration.md's "## Pages" section. This stub exists only
 # to make the app buildable/servable end-to-end for the blog migration.
+#
+# hero image + gradient are the real ones from the live homepage (fetched
+# via convert-pages-consulting.py's fetch_hero_background(), which reads
+# Elementor's per-page CSS live since neither the REST API nor the
+# monolith scrape captures it) -- just the page-heading text/blocks below
+# it are still a placeholder.
 
 slug: home
 title: Quansight
 description: Open source, sustainable, and community-driven AI and data science consulting.
 blocks:
+  - type: hero
+    image: /page-assets/home/Homepage-scaled.jpg
+    imageAlt: ''
+    variant: small
+    gradientFrom: '#452391'
+    gradientTo: '#963895'
+    overlayOpacity: 0.26
   - type: page-heading
     title: Quansight
     description: Open source, sustainable, and community-driven AI and data science consulting. Full homepage content migration from quansight.com is in progress.

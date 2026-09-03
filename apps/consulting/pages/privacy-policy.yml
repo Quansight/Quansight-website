@@ -1,0 +1,149 @@
+slug: privacy-policy
+title: "Privacy Policy"
+description: "Privacy Policy Quansight’s Privacy Policy This Policy was last updated: November 2023 This privacy policy will explain how Quansight, LLC (“We,” “Our,” “Us”) uses the Personally Identifiable Information (“Personal Information”) collected from You, the user, when You use Quansight.com (Our “Website”), any of Our services that rely upon or connect through Our Website, or Our […]"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/privacy-policy/Hero-Background-1.png"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Privacy Policy"
+- type: text
+  html: "<p>Quansight’s Privacy Policy</p>"
+- type: text
+  html: "<p>This Policy was last updated: November 2023</p>"
+- type: text
+  html: "<p>This privacy policy will explain how Quansight, LLC (“We,” “Our,” “Us”) uses the Personally Identifiable Information (“Personal Information”) collected from You, the user, when You use Quansight.com (Our “Website”), any of Our services that rely upon or connect through Our Website, or Our online user portal (collectively referred to as “Services”). This policy is independent of any third-party services which may integrate with Our Services, or to any third-party products or services which may be accessible through Our Website. A list of those tools is attached to the end of this policy.</p><p>Please read this policy carefully to understand Our policies and practices regarding your information and how we will treat it. If you do not agree with Our policies and practices, Your choice is not to use Our Services. By accessing or using Our Website and/or Our Services, you agree to this privacy policy. </p>"
+- type: columns
+  columns:
+    - - type: text
+        html: "<p>Data Collection</p>"
+      - type: text
+        html: "<p>\n\t\t\t\t\t\t\t\t\tWhat information do We collect?\t\t\t\t\t\t\t\t</p>"
+    - - type: text
+        html: "<p>General</p>"
+      - type: text
+        html: "<p><strong>Information You provide to Us.</strong> Portions of our Website request that You provide us with Personal Information in order to use or learn more about Our Services. This information is collected through online forms, content submissions, registration processes, customer service interactions, or other user engagements with Our Services.</p>"
+    - - type: text
+        html: "<p>Specific</p>"
+      - type: text
+        html: "<p><strong>Contact Data.</strong> The contact data We collect is information necessary for Us to contact You, or to register You as a user of Our Services. This information includes Your full name, address, city, state, zip code, phone number, email address, and third-party communication identifiers (Github, Slack, Twitter, Facebook, etc.).</p><p><strong>Financial Data.</strong> We only collect financial data from people that purchase directly on our website. The financial data We collect is information necessary to complete a financial transaction such as credit card information or bank account information.</p><p><strong>Other voluntarily provided information.</strong> We are open to receiving user feedback about Our Services and will collect comments and other communications You provide for that purpose.</p>"
+    - - type: text
+        html: "<p>General</p>"
+      - type: text
+        html: "<p><strong>Information collected automatically.</strong> By interacting with Our Services You generate data which We automatically record and collect. Personal Information collected in this manner includes:</p>"
+    - - type: text
+        html: "<p>Specific</p>"
+      - type: text
+        html: "<p><strong>Traffic and Log Data.</strong> IP address, browser type, Internet Service Provider information, operating system, referral pages, pages of our Services that You visit, the time and date of Your visit, the time spent on those pages, and other statistics.</p><p><strong>Cookies.</strong> Cookies are files with a small amount of data that is commonly used as an anonymous unique identifier. These are sent to Your browser from the website that You visit and are stored on Your computer’s hard drive. Our website may use these “cookies” to collect information and to improve our Services.</p><p><strong>Third-party Services.</strong> We may use third-party services, such as those listed here, to collect information about how often You use Our Services, how You use Our Services (e.g. what pages You visit on Our website), and how You are directed to Our Services (e.g. if You clicked a link on an external website that referred You to Our Website). Third party vendors, including Google, use cookies to serve ads based on a user’s prior visits to the Website or other websites.</p>"
+    - - type: text
+        html: "<p><a href=\"https://plausible.io/\" rel=\"noopener\" target=\"_blank\">Plausible</a>: Plausible Analytics is an open source web analytics tool. We use this tool in an effort to reduce corporate surveillance by making a useful and privacy-friendly website analytics tool that doesn’t come from the adtech world.</p><p>Articles on this Website may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website. These websites may collect data about You, use cookies, embed additional third-party tracking, and monitor Your interaction with that embedded content, including tracking your interaction with the embedded content if You have an account and are logged in to that website.</p><p><a href=\"https://wordpress.org/plugins/litespeed-cache/\" rel=\"noopener\" target=\"_blank\">Lightspeed Caching WordPress Plugin</a>: This site utilizes caching in order to facilitate a faster response time and better user experience. Caching potentially stores a duplicate copy of every web page that is on display on this site. All cache files are temporary, and are never accessed by any third party, except as necessary to obtain technical support from the cache plugin vendor. Cache files expire on a schedule set by the site administrator, but may easily be purged by the admin before their natural expiration, if necessary. We may use QUIC.cloud services to process &amp; cache your data temporarily. Please see <a href=\"https://quic.cloud/privacy-policy/\" rel=\"noopener\" target=\"_blank\">https://quic.cloud/privacy-policy/</a> for more details.</p><p>For information on how to opt-out of some third-party vendors’ uses of cookies for personalized advertising please visit: <a href=\"https://www.aboutads.info/choices\" rel=\"noopener\" target=\"_blank\">https://www.aboutads.info/choices</a>.</p>"
+    - - type: text
+        html: "<p>Data Use</p>"
+      - type: text
+        html: "<p>How do We use the information We collect?</p>"
+- type: text
+  html: "<p>General</p>"
+- type: text
+  html: "<p><strong>To perform, support, and improve our services and to offer, support, and improve our products.</strong> We use the information We collect to provide Our Services to You and others, to improve Our Services and products, and to facilitate transactions with Our partners and affiliates which are integral to Our ability to provide Our Services and Our Products.</p>"
+- type: text
+  html: "<p>Specific</p>"
+- type: text
+  html: "<p><strong>Contact Data.</strong> We use the contact information We collect to communicate with You in order to provide support for Our Services or to inform You of changes, advances, and additions to the Services We offer.</p><p><strong>Other voluntarily provided information.</strong> When You provide feedback to Us, or otherwise submit personal information to Us, We collect and use this Personal Information pursuant to its legitimate interest in better understanding our community of users and in furtherance of the particular program or activity to which You provided feedback or other input.</p><p><strong>Information collected automatically.</strong> We analyze the information We collect automatically to determine how You use our Website and Our Services in order to improve how We deliver and execute Our Services</p>"
+- type: text
+  html: "<p>Data Sharing</p>"
+- type: text
+  html: "<p>How do We share the information We collect?</p>"
+- type: text
+  html: "<p>General</p>"
+- type: text
+  html: "<p>Our Services rely on a certain amount of interconnection with other services and We share information We collect from You when necessary for the operation of our Services. We will also share Your information collected through our Services if You have consented to the sharing of Your Personal Information by registering as a user, or providing consent in another manner.</p>"
+- type: text
+  html: "<p>Specific</p>"
+- type: text
+  html: "<p><strong>Order Processing.</strong> We need to use Personal Information provided by You to process Your payment through third-party merchant account services, to inform You of our existing or any changes to our products and services, to support or respond to any inquiries You have about our products and services, and to provide You with Our products and Services.</p><p><strong>Affiliates.</strong> We share Personal Information with business affiliates in order to provide Services to You when such information is necessary for the affiliate to properly assist Us in the operation, maintenance, improvement, or expansion of Our Services.</p><p><strong>Third Party Service Providers.</strong> We share Personal Information with Our contractors and service providers in order to provide Services to You when such information is necessary for the third-party to properly assist Us.</p><p><strong>Required by Law.</strong> We may disclose Personal Information We collect from You to respond to a request by a government agency when such disclosure is necessary to protect our rights, the safety of others, or to comply with an investigation into illegal activity.</p><p><strong>Change in Control; Bankruptcy.</strong> In the case of a merger, sale, or other change in control We will<br/>share Your information when necessary to facilitate the transaction. In the case of Bankruptcy, We<br/>might not be able to retain complete control over the handling of Your Personal Information. If such an event were to occur it is possible that Your Personal Information might be considered a company asset and sold or otherwise transferred to a third party. If change in control were to occur as the result of a Bankruptcy, We will notify You by email and/or a reasonably prominent notice on Our website and make reasonable efforts to inform You of any choices You might have over how Your Personal Information is treated.</p><p><strong>By Other Consent.</strong> If You provide us with consent to share Your Personal Information outside the scope of this Policy, We will do so according to the terms of Your consent.</p>"
+- type: text
+  html: "<p>Data Storage</p>"
+- type: text
+  html: "<p>How do We store the information We collect?</p>"
+- type: text
+  html: "<p>General</p>"
+- type: text
+  html: "<p>We strive to keep Your Personal Information secure and to retain it only as long as needed.</p>"
+- type: text
+  html: "<p>Specific</p>"
+- type: text
+  html: "<p><strong>Retention.</strong> We store the information We collect for as long as needed to provide You with Our Services, and/or to comply with Our legal obligations and resolve any disputes which may arise.</p><p><strong>Data Caching.</strong> This Website utilizes caching in order to facilitate a faster response time and better user experience. Caching potentially stores a duplicate copy of every web page that is on display on this site. All cache files are temporary, and are never accessed by any third party, except as necessary to obtain technical support from the cache plugin vendor. Cache files expire on a schedule set by the Website administrator, but may easily be purged by the admin before their natural expiration, if necessary. We may use QUIC.cloud services to process &amp; cache your data temporarily. Please see <a href=\"https://quic.cloud/privacy-policy/\" rel=\"noopener\" target=\"_blank\">https://quic.cloud/privacy-policy/</a> for more details.</p><p><strong>Security.</strong> We value Your trust in providing us Your Personal Information and strive to use commercially acceptable means of protecting it. We have implemented reasonable physical, technical, and organizational security measures for personal information that We process against accidental or unlawful destruction, or accidental loss, alteration, unauthorized disclosure or access, in compliance with applicable law. Unfortunately, no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and We cannot guarantee its absolute security. ACCORDINGLY, WE DISCLAIM LIABILITY FOR THE THEFT, LOSS, AND/OR UNAUTHORIZED INTERCEPTION OF YOUR DATA THROUGH THE USE OF OUR WEBSITE AND/OR OUR SERVICES. BY USING OUR SERVICES, YOU ACKNOWLEDGE THAT YOU UNDERSTAND AND ASSUME THESE RISKS.</p><p>If a data breach occurs, We will post a reasonably prominent notice on our website and comply with all other applicable data privacy requirements including, when required, personal notice to You if You have provided and We have maintained an email address for You. If You suspect that Your privacy has been breached through the use of Our Website and/or Our Services, please contact us IMMEDIATELY at: <a href=\"mailto:connect+privacy@quansight.com\" rel=\"noopener\" target=\"_blank\">connect+privacy@quansight.com</a>.</p><p><strong>Location.</strong> Our Services are currently hosted in the United States, but some of Your personal information may be located on servers outside of the United States. This may change from time to time.</p>"
+- type: text
+  html: "<p>Data Access &amp; Modification</p>"
+- type: text
+  html: "<p>How can You access or change any Personal Information We collect from You?</p>"
+- type: text
+  html: "<p>General</p>"
+- type: text
+  html: "<p>If You live in an area which has enacted laws and regulations regarding the collection of Personal Information, such as the EU General Data Protection Regulation (GDPR) or the California Consumer Privacy Act (CCPA), You may be entitled to access and/or transfer to a third party any personal information that We hold and/or to have inaccurate data corrected or removed to the extent We still maintain it. In certain circumstances, You also may have the right to object to, or restrict, for legitimate reasons, the processing or transfer of Personal Information.</p>"
+- type: text
+  html: "<p>Specific</p>"
+- type: text
+  html: "<p><strong>The right to know and access.</strong> In certain areas, You have the right to know what Personal Information is being collected from You and to request a copy of the Personal Information We have collected from You.</p><p><strong>The right to correction.</strong> In certain areas, You have the right to request that We correct Personal Information We have collected from You which You believe is inaccurate or incomplete.</p><p><strong>The right to deletion.</strong> In certain areas and under certain conditions, You have the right to request that We delete Personal Information We have collected from You.</p><p><strong>The right to restrict processing.</strong> In certain areas and under certain conditions, You have the right to request that We restrict the processing of Your Personal Information.</p><p><strong>The right to object to processing.</strong> In certain areas and under certain conditions, You have the right to object to Us processing Your Personal Information.</p><p><strong>The right to portability.</strong> In certain areas and under certain conditions, You have the right to request that We transfer Personal Information We have collected from You to another organization, or directly to You.</p><p><strong>The right to opt-out of the sale or sharing of Personal Information.</strong> In certain areas and under certain conditions, You have the right to opt-out of Your Personal Information being collected and sold or shared.</p><p><strong>The right to non-discrimination.</strong> We will not and, in certain areas and under certain conditions, cannot discriminate against You because You have exercised any of the above rights available to You.</p><p>Please note that even if You live outside an area governed by the GDPR, CCPA, or similar regulation, You may still have rights with regard to the privacy of Your Personal Information. You may even have rights which exceed those established by the GDPR or CCPA. Interest in privacy regulation is developing rapidly in many areas and the rights mentioned within this policy are not meant to be exhaustive.</p><p>If You believe you possess and wish to exercise any of these rights, please contact <a href=\"mailto:connect+privacy@quansight.com\" rel=\"noopener\" target=\"_blank\">connect+privacy@quansight.com</a> and explain Your request. Even if You live outside an area which has codified user data rights, We may be able to assist You. You also have the right to go directly to a relevant supervisory or legal authority, but We encourage You to contact Us so that We may resolve Your concerns directly as best We can.</p>"
+- type: text
+  html: "<p>Children</p>"
+- type: text
+  html: "<p>Children’s Privacy</p>"
+- type: text
+  html: "<p>Our Services do not address anyone under the age of 16. We do not knowingly collect personal identifiable information from children under 16. In the case We discover that a child under 16 has provided us with Personal Information, We delete this information from our servers. If You are a parent or guardian and You are aware that Your child has provided us with Personal Information, please contact us at <a href=\"mailto:connect+privacy@quansight.com\" rel=\"noopener\" target=\"_blank\">connect+privacy@quansight.com</a> so that We will be able to take any necessary actions.</p>"
+- type: text
+  html: "<p>Changes</p>"
+- type: text
+  html: "<p>Changes to This Privacy Policy</p>"
+- type: text
+  html: "<p>We may update our Privacy Policy from time to time. Thus, We encourage You to periodically review this Privacy Policy to stay informed about how We are protecting, using, processing and transferring the Personal Information We collect. We will notify You of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.</p>"
+- type: text
+  html: "<p>Quansight Cookie Notice</p>"
+- type: text
+  html: "<p>\n\t\t\t\t\t\t\t\t\tThis Policy was last updated: November 2023\t\t\t\t\t\t\t\t</p>"
+- type: text
+  html: "<p>We use several different types of cookies to help Us understand how You use Our Services and to help Us provide better and more personalized Services to You. Cookies are files with a small amount of data that are sent to Your browser from a website that You visit and are stored on Your computer’s hard drive.</p><p>Below is a list of some of the cookies We, or third-parties which We rely upon, use to provide Services to You. Not all cookies function in the same manner, or are stored for the same length, and, where possible those details are provided below:</p>"
+- type: table
+  headers:
+    - "Name"
+    - "Domain"
+    - "Purpose"
+    - "Expiration Period"
+    - "Originating Party"
+  rows:
+    - ["zc_content", "www.quansight.com", "Used to store whether user has consented to cookie placement", "1 Year", "Quansight"]
+- type: text
+  html: "<p>Third-Party Tools</p>"
+- type: text
+  html: "<p>Some content and/or applications on the Website may be provided through integration with third parties and use of their tools and/or services. We do not control these third parties. Third-party tools and services are subject to their own respective privacy policies and they may collect additional information about You when You use their services integrated into Our Website and Services. Please review any corresponding privacy policies to the tools and services listed below, as We disclaim any responsibility for their information collection practices.</p><p>We use the following tools as part of the platform for delivering the Website to you. Each of these tools may have its own privacy policy. We use WordPress as the core platform for creating and delivering the Website. We use Plausible Analytics to collect privacy-preserving statistics on visitors to the Website. All other tools mentioned here are plugins to the WordPress platform.</p>"
+- type: text
+  html: "<p style=\"text-align: center;\">Tools</p>"
+- type: table
+  headers:
+    - "Tool"
+    - "Publisher"
+    - "Purpose"
+    - "Reference"
+  rows:
+    - ["WordPress", "(open source)", "Core publishing platform", "https://wordpress.org/about/"]
+    - ["Plausible Analytics", "Plausible Insights OÜ", "Website traffic analytics", "https://plausible.io/about (analytics tool) and https://wordpress.org/plugins/plausible-analytics/ (WordPress plugin)"]
+- type: text
+  html: "<p style=\"text-align: center;\">WordPress Plugins</p>"
+- type: table
+  headers:
+    - "WordPress Plugin"
+    - "Publisher"
+    - "Purpose"
+    - "Reference"
+  rows:
+    - ["Converter for Media", "(open source)", "Image conversion & optimization", "https://wordpress.org/plugins/webp-converter-for-media/"]
+    - ["Elementor & Elementor Pro", "Elementor.com", "Page design toolkit", "https://wordpress.org/plugins/elementor/"]
+    - ["Essential Addons for Elementor", "WPDeveloper", "Widgets add-on pack for Elementor", "https://wordpress.org/plugins/essential-addons-for-elementor-lite/"]
+    - ["LiteSpeed Cache", "LiteSpeed Technologies", "Multi-functional site performance optimization", "https://wordpress.org/plugins/litespeed-cache/"]
+    - ["Public Post Preview", "(open source)", "Previewing draft blog posts without requiring WordPress login", "https://wordpress.org/plugins/public-post-preview/"]
+    - ["SmartCrawl Pro", "WPMU DEV", "SEO page features, SEO page/site analysis", "https://wpmudev.com/project/smartcrawl-wordpress-seo/"]
+    - ["SVG Support", "(open source)", "Media Library SVG support and advanced SVG styling features", "https://wordpress.org/plugins/svg-support/"]
+    - ["WP Mail SMTP", "(open source)", "Authenticated SMTP email support", "https://wordpress.org/plugins/wp-mail-smtp/"]

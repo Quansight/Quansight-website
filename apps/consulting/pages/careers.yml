@@ -1,0 +1,80 @@
+slug: careers
+title: "Careers"
+description: "Join Our Team Our Passion for Finding & Keeping Top Talent Quansight is an open source consulting firm that operates on a fully remote basis with team members spread across the globe. We cast a wide net to cover many locations, lifestyles, and backgrounds. You’ll never be just an employee. You’ll always be you, with […]"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/careers/Hero-Background-13.png"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Join Our Team"
+- type: heading
+  text: "Our Passion for Finding & Keeping Top Talent"
+  level: 4
+  sizePx: 40
+  color: "#452392"
+- type: columns
+  columns:
+    - - type: text
+        html: "<p>Quansight is an open source consulting firm that operates on a fully remote basis with team members spread across the globe. We cast a wide net to cover many locations, lifestyles, and backgrounds.</p><p>You’ll never be just an employee. You’ll always be you, with all your talent and potential and the opportunity to support our global community.</p><p>Skills and experience are good indicators of a person’s ability but we believe that attitude and drive are the key determinants of success. Given those, the rest will follow. We are looking for people who know how to learn, collaborate, and take action. We have positions within the growing ranks of Quansight and we’re always on the hunt for top talent. </p><p>Whether you are looking for your first position or you are a seasoned professional ready to advance the state of the art, Quansight has the roles, mentors, and peers to help you realize your career goals.</p>"
+    - - type: image
+        src: "/page-assets/careers/our-passion-for-developing-talent-1.svg"
+        alt: ""
+        width: 800
+        height: 645
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/careers/perks-and-benefits-1.svg"
+        alt: ""
+        width: 800
+        height: 563
+    - - type: text
+        html: "<h1><b>Perks &amp; Benefits</b></h1><ul><li>Fully Distributed Working Environment</li><li>30 Days of Vacation/Holiday Leave Annually (inclusive of national holidays)</li><li>10 Days of Sick Leave Annually</li><li>$2,000 Hardware &amp; Home Office Budget</li><li>$250/year Personal Development Budget</li><li>Generous Paid Parental Leave</li><li>In Person Company Retreats / Virtual Gatherings</li><li>Conference Budget</li></ul>"
+- type: columns
+  columns:
+    - - type: text
+        html: "<h1><b>Approach to Hiring</b></h1><p>It is our purpose to deliver a great candidate experience for everyone applying for a position at Quansight. We embrace diversity and invite applications from individuals of all backgrounds, as well as make use of different recruitment channels to attract the best talent to our organization. If you have a disability, please let us know if there is anything we can do to make your interview process better, we’re happy to accommodate.\t\t\t\t\t\t\t\t</p>"
+    - - type: image
+        src: "/page-assets/careers/our-approach-to-hiring-1.svg"
+        alt: ""
+        width: 800
+        height: 702
+- type: heading
+  text: "Camp Quansight 2025: Monte Real, Portugal"
+  level: 4
+  sizePx: 40
+  color: "#452392"
+- type: text
+  html: "<p dir=\"auto\" style=\"text-align: left;\">Camp Quansight is our annual company retreat! This year, our team met in Portugal for a week of collaboration, reflection, and inspiration.</p><p dir=\"auto\" style=\"text-align: left;\">As part of our ongoing commitment to fostering innovation and community within open source, Camp Quansight provides space to connect across teams, align on our shared vision, and celebrate the people who make our mission possible.</p><p dir=\"auto\" style=\"text-align: left;\">This year’s retreat featured a balance of strategic discussions, team-building activities, and moments to explore Portugal’s rich culture, from surfing in Nazaré to touring the historic Batalha Monastery.</p><p dir=\"auto\" style=\"text-align: left;\">Watch the video for highlights from this unforgettable week and a glimpse into what makes Quansight’s culture and purpose so unique!</p>"
+- type: video
+  url: "https://youtu.be/ItsP5l9M-Os?si=ypyocx2gzhWhC2vR"
+- type: heading
+  text: "Open Roles at Quansight"
+  level: 4
+  sizePx: 40
+  color: "#452392"
+- type: html
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Subscribe for Updates & News"
+              level: 2
+              sizePx: 30
+              color: "#FFFFFF"
+            - type: form
+              note: "Mailing List Signup"
+        columnBackgrounds:
+          - "#452392"
+    - - type: columns
+        columns:
+          - - type: call-to-action
+        columnBackgrounds:
+          - "#452392"
+  columnBackgrounds:
+    - "#452392"
+    - null

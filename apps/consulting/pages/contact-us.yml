@@ -1,0 +1,58 @@
+slug: contact-us
+title: "Contact Us"
+description: "Contact Us Get in Touch For all inquiries about our services, projects, and business, contact us at: connect@quansight.com Subscribe for Updates & News"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/contact-us/Blog-Post-Background.png"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Contact Us"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Get in Touch"
+              level: 4
+              sizePx: 55
+              color: "#452392"
+            - type: text
+              html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\" style=\"\">connect@quansight.com</a><br/><br/></p>"
+        columnBackgrounds:
+          - "#FAFAFF"
+    - - type: columns
+        columns:
+          - - type: image
+              src: "/page-assets/contact-us/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+        columnBackgrounds:
+          - "#FAFAFF"
+  columnBackgrounds:
+    - "#FAFAFF"
+    - "#FAFAFF"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Subscribe for Updates & News"
+              level: 2
+              sizePx: 30
+              color: "#FFFFFF"
+            - type: form
+              note: "Mailing List Signup"
+        columnBackgrounds:
+          - "#452392"
+    - - type: columns
+        columns:
+          - - type: call-to-action
+        columnBackgrounds:
+          - "#452392"
+  columnBackgrounds:
+    - "#452392"
+    - null

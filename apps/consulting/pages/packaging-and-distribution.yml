@@ -1,0 +1,208 @@
+slug: packaging-and-distribution
+title: "Packaging & Distribution"
+description: "Packaging & Distribution Package, distribute, and implement your code with ease Seamlessly deploy and maintain open source software in well-managed environments Modern software moves fast, but production environments demand stability, reproducibility, and long-term support. Teams often prototype quickly, only to encounter failures when research code reaches production due to fragile builds, inconsistent environments, or unmanaged […]"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/packaging-and-distribution/GettyImages-1282541605.jpg"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Packaging & Distribution"
+- type: heading
+  text: "Package, distribute, and implement your code with ease"
+  level: 2
+  sizePx: 22
+  color: "#FFFFFF"
+- type: heading
+  text: "Seamlessly deploy and maintain open source software in well-managed environments"
+  level: 2
+  sizePx: 40
+  color: "#452392"
+- type: text
+  html: "<p data-end=\"2371\" data-start=\"2083\">Modern software moves fast, but production environments demand stability, reproducibility, and long-term support. Teams often prototype quickly, only to encounter failures when research code reaches production due to fragile builds, inconsistent environments, or unmanaged dependencies.</p><p data-end=\"2651\" data-start=\"2378\">Quansight helps organizations package, distribute, and maintain Python and native software so it works reliably across platforms, architectures, and deployment contexts, combining deep technical expertise with active leadership in the open source ecosystems you depend on.</p>"
+- type: heading
+  text: "What We Do"
+  level: 2
+  sizePx: 40
+  color: "#452391"
+- type: text
+  html: "<p>We partner with engineering, research, and platform teams to design robust, maintainable packaging and build systems across the Python and scientific computing stack.</p>"
+- type: columns
+  columns:
+    - - type: icon-box-grid
+        items:
+          - title: "> Build and distribute Python and native code"
+            description: "C/C++, Rust, and more, for multiple operating systems and architectures, including x86 and ARM"
+    - - type: icon-box-grid
+        items:
+          - title: "> Package software for PyPI and conda"
+            description: "Using modern and legacy build backends such as autotools, CMake, and Meson"
+    - - type: icon-box-grid
+        items:
+          - title: "> Design and maintain long-lived build pipelines"
+            description: "Ensuring packaging metadata and infrastructure evolve safely over time"
+- type: columns
+  columns:
+    - - type: icon-box-grid
+        items:
+          - title: "> Integrate supply chain security best practices"
+            description: "Reducing dependency risk and protect against tampering"
+    - - type: icon-box-grid
+        items:
+          - title: "> Evaluate and migrate package management strategies"
+            description: "Including transitions to emerging tools (e.g., uv, pixi)"
+    - - type: icon-box-grid
+        items:
+          - title: "> Collaborate with upstream package manager maintainers"
+            description: "Assessing new features, resolve bugs, and improve day-to-day workflows"
+- type: icon-box-grid
+  items:
+    - title: "> Prepare and submit enhancement proposals"
+      description: "PEPs and equivalent governance processes when ecosystem-level changes are required"
+- type: heading
+  text: "Quansight for Packaging & Environment Management"
+  level: 2
+  sizePx: 40
+  color: "#452391"
+- type: text
+  html: "<p>At Quansight, our open source experts and decision-makers include steering committee members and maintainers of core projects. Additionally, we created conda-store, an open source tool focused on collaborative data science environments.</p>"
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/packaging-and-distribution/conda-logo.png"
+        alt: ""
+        width: 600
+        height: 600
+      - type: icon-box-grid
+        items:
+          - title: "Conda"
+            description: "We have Steering Council Members & Contributors on our team. Conda provides package, dependency, and environment management for any language."
+    - - type: image
+        src: "/page-assets/packaging-and-distribution/Conda-Forge-logo.png"
+        alt: "Conda-forge logo"
+        width: 600
+        height: 600
+      - type: icon-box-grid
+        items:
+          - title: "Conda-Forge"
+            description: "We employ Core Team Members and Contributors. Conda-forge is a community-led collection of recipes, build infrastructure, and distributions for the conda package manager."
+    - - type: image
+        src: "/page-assets/packaging-and-distribution/Python-logo-notext.svg-768x843.png"
+        alt: "Python logo"
+        width: 768
+        height: 843
+      - type: icon-box-grid
+        items:
+          - title: "pypackaging-native"
+            description: "Quansight is the creator of this resource, which addresses the unique challenges of packaging Python projects and provides key insights and references."
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/packaging-and-distribution/Meson-Python-logo.png"
+        alt: "meson python logo"
+        width: 600
+        height: 600
+      - type: icon-box-grid
+        items:
+          - title: "Meson-Python"
+            description: "As maintainers, we leverage the Meson build system to offer robust build backends for Python packages. Our team members successfully transitioned several key projects to use this system."
+    - - type: image
+        src: "/page-assets/packaging-and-distribution/python-packeging-logo.png"
+        alt: "python packaging logo"
+        width: 238
+        height: 212
+      - type: icon-box-grid
+        items:
+          - title: "Python Packaging"
+            description: "We help maintain critical packages under the Python Packaging Authority (PyPA), contribute to the authorship of Python Enhancement Proposals (PEPs), and actively drive the evolution of Python packaging standards."
+- type: columns
+  columns:
+    - - type: icon
+        svg: "<svg id=\"Layer_1\" viewbox=\"0 0 28 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><style>.cls-1{fill:#a43a8f;stroke-width:0px;}</style></defs><path class=\"cls-1\" d=\"m9.73,1.84c.56-.07.49-.91-.14-.84C4.27,1.84,0,5.28,0,11.37c0,4.27,2.66,7.63,6.93,7.63,3.29,0,5.25-2.17,5.25-4.83s-1.61-4.2-4.55-5.04c-2.73-.7-4.76-.77-4.76-2.8,0-2.17,3.01-3.92,6.86-4.48Zm14.98,0c.63-.07.49-.91-.14-.84-5.32.84-9.59,4.2-9.59,10.22,0,4.34,2.66,7.77,6.93,7.77,3.36,0,5.25-2.17,5.25-4.83s-1.61-4.2-4.55-5.04c-2.73-.7-4.76-.77-4.76-2.8,0-2.17,3.01-3.92,6.86-4.48Z\"></path></svg>"
+      - type: text
+        html: "<p>“<a href=\"https://point72.com/cubist/\" rel=\"noopener\" target=\"_blank\">Point72 and Cubist</a> are committed to open source and to sponsoring organizations such as PyData and the Python Software Foundation. We are excited about the opportunities our partnership with Quansight may provide to solve packaging problems strategically and sustainably both for our own research teams and for conda-forge users generally.”</p>"
+  columnBackgrounds:
+    - "#EBEBEB"
+- type: heading
+  text: "Proactive Reproducibility — Same Data, Same Code, Same Results"
+  level: 2
+  sizePx: 40
+  color: "#A43A8F"
+- type: text
+  html: "<p>Reproducibility cannot be an afterthought. Achieving it requires clearly defined research and production environments that remain adaptable across various contexts. This proactive integration into the development process addresses challenges such as rapidly evolving libraries and complex workflows.</p><p>By setting clear objectives and identifying potential risks, we help practitioners create robust systems that enhance the reliability and credibility of their work.</p>"
+- type: heading
+  text: "Common Barriers to Reproducibility:"
+  level: 4
+  sizePx: 47
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: icon-box-grid
+              items:
+                - title: "Diverse Environments"
+                  description: "Practitioners often work in varied environments, making it difficult to ensure consistent results across different setups"
+        columnBackgrounds:
+          - "#A43A8F"
+    - - type: columns
+        columns:
+          - - type: icon-box-grid
+              items:
+                - title: "Library Changes"
+                  description: "Rapid library evolution can introduce breaking changes that compromise reproducibility."
+        columnBackgrounds:
+          - "#452392"
+    - - type: columns
+        columns:
+          - - type: icon-box-grid
+              items:
+                - title: "Lack of Control"
+                  description: "IT departments may enforce strict control over environments, conflicting with the flexibility needed by data scientists."
+        columnBackgrounds:
+          - "#452392"
+    - - type: columns
+        columns:
+          - - type: icon-box-grid
+              items:
+                - title: "Complex Workflows"
+                  description: "Existing workflows often do not support reproducibility, making it challenging to replicate results or share work."
+        columnBackgrounds:
+          - "#A43A8F"
+  columnBackgrounds:
+    - "#A43A8F"
+    - "#452392"
+    - "#452392"
+    - "#A43A8F"
+- type: button
+  url: "https://quansight.com/about-us/#bookacallform"
+  text: "Contact Us"
+  isFull: false
+  isBordered: false
+  isTriangle: true
+  align: "center"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Get in Touch"
+              level: 2
+              sizePx: 40
+              color: "#452392"
+            - type: text
+              html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? We’d love to hear from you.\t\t\t\t\t\t\t\t</p>"
+            - type: button
+              url: "https://quansight.com/about-us/#bookacallform"
+              text: "Contact Us"
+              isFull: false
+              isBordered: false
+              isTriangle: true
+          - - type: image
+              src: "/page-assets/packaging-and-distribution/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+  columnBackgrounds:
+    - "#F3F5F8"

@@ -1,10 +1,10 @@
 # Nav structure scraped from the live quansight.com (WordPress) header DOM.
-# Logo is a stopgap (grayscale mark, not the real brand logo) -- swap out
-# apps/consulting/public/nebari-services/quansight-logo.svg for a real
-# header logo asset when available.
+# Logo is the real one, fetched live from
+# https://quansight.com/wp-content/uploads/2023/06/quansight-logo-no-tagline.webp
+# (white mark + wordmark, meant for the dark header background).
 
 logo:
-  src: "/nebari-services/quansight-logo.svg"
+  src: "/images/logos/quansight-logo-white.webp"
   alt: "Quansight Logo"
 
 navigation:

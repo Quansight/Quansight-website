@@ -1,0 +1,29 @@
+---
+import BlockRenderer from './BlockRenderer.astro';
+
+type Block = Record<string, unknown> & { type: string };
+
+interface Props {
+  blocks: Block[];
+}
+
+const { blocks } = Astro.props;
+
+// Hero renders full-bleed (it's overlaid by the header, matching the live
+// site -- see SiteHeader.astro). Everything else needs real horizontal
+// margin: each block component's own `max-w-layout mx-auto` only caps a
+// *maximum* width (144rem), it doesn't add padding on ordinary screens.
+// This wraps everything after the hero in the same left/right margin as
+// the header's nav, so body content lines up with it.
+const [first, ...rest] = blocks;
+const isHeroFirst = first?.type === 'hero';
+const heroBlock = isHeroFirst ? first : null;
+const contentBlocks = isHeroFirst ? rest : blocks;
+---
+
+{heroBlock && <BlockRenderer block={heroBlock} />}
+<div class="px-[2rem] sm:px-[3.4rem] xl:px-[11.5rem]">
+  {contentBlocks.map((block) => (
+    <BlockRenderer block={block} />
+  ))}
+</div>

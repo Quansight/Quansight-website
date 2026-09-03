@@ -1,0 +1,140 @@
+slug: jupyter-technologies
+title: "Jupyter Technologies"
+description: "Jupyter Technologies Build your development environment with the people who help maintain and build Jupyter, JupyterLab, and JupyterHub. Jupyter: Enabling Interactive and Collaborative Computing Project Jupyter is an open source software and standards project that develops popular tools such as Jupyter Notebook, JupyterLab, and JupyterHub for interactive and collaborative computing across dozens of programming languages. […]"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/jupyter-technologies/shutterstock_1675260034B-1200x900-1.jpg"
+  imageAlt: ""
+  overlayOpacity: 0.49
+  title: "Jupyter Technologies"
+- type: heading
+  text: "Build your development environment with the people who help maintain and build Jupyter, JupyterLab, and JupyterHub."
+  level: 2
+  sizePx: 22
+  color: "#FFFFFF"
+- type: image
+  src: "/page-assets/jupyter-technologies/Jupyter_logo-1.svg"
+  alt: ""
+  width: 44
+  height: 51
+- type: heading
+  text: "Jupyter: Enabling Interactive and Collaborative Computing"
+  level: 2
+  sizePx: 40
+  color: "#452392"
+- type: text
+  html: "<p>Project Jupyter is an open source software and standards project that develops popular tools such as Jupyter Notebook, JupyterLab, and JupyterHub for interactive and collaborative computing across dozens of programming languages. Jupyter has become a cornerstone of modern data science, scientific computing, and technical education by providing a web-based interactive development environment for data cleaning, analysis, visualization, and reproducible computational narratives. </p><p>Quansight and <a href=\"https://labs.quansight.org/\">Quansight Labs</a>, the public-benefit division of Quansight, and home to several Jupyter <a href=\"https://labs.quansight.org/team\">contributors</a>, are driven by a passion for open source technologies, including a deep focus on the Jupyter ecosystem. Both teams include <a href=\"https://jupyter.org/about\">Jupyter</a> maintainers, distinguished contributors, and members of the software steering council.</p>"
+- type: heading
+  text: "Jupyter Consulting Services: How We Support Clients"
+  level: 3
+  sizePx: 40
+  color: "#452392"
+- type: icon-box-grid
+  items:
+    - title: "JupyterHub Deployment and Configuration"
+      description: "- Secure installation, setup, and integration of JupyterHub with your existing infrastructure"
+      divider: True
+    - title: "JupyterLab Extension Development"
+      description: "- Build custom JupyterLab extensions\n- Offer expertise for navigating the evolving JupyterLab extension system"
+      divider: True
+    - title: "Jupyter Integration and Embedding"
+      description: "- Integrate Jupyter notebooks or components into applications and platforms\n- Customize Jupyter for specific uses within larger systems"
+      divider: True
+    - title: "Tool Integration and Compatibility"
+      description: "- Ensure third-party tools, libraries, and frameworks work well in JupyterLab\n- Resolve compatibility issues for smooth integration"
+      divider: True
+- type: heading
+  text: "New Jupyter Extensions"
+  level: 2
+  sizePx: 40
+  color: "#452392"
+- type: icon-box-grid
+  items:
+    - description: "We recently developed three new extensions for the Jupyter Ecosystem:"
+- type: columns
+  columns:
+    - - type: heading
+        text: "01."
+        level: 2
+        sizePx: 42
+        color: "#452392"
+      - type: text
+        html: "<p><a href=\"https://jhub-apps.nebari.dev/\">JupyterHub Apps Launcher</a>, a user-friendly launcher for JupyterHub with dashboard deployment and sharing features\t\t\t\t\t\t\t\t</p>"
+    - - type: heading
+        text: "02."
+        level: 2
+        sizePx: 42
+        color: "#452392"
+      - type: text
+        html: "<p><a href=\"https://github.com/nebari-dev/jupyterlab-launchpad/\" rel=\"noopener\" target=\"_blank\">JupyterLab Launchpad</a>, a new JupyterLab launcher with better support for environment (kernel) selection\t\t\t\t\t\t\t\t</p>"
+    - - type: heading
+        text: "03."
+        level: 2
+        sizePx: 42
+        color: "#452392"
+      - type: text
+        html: "<p><a href=\"https://github.com/nebari-dev/jupyterlab-gallery/\" rel=\"noopener\" target=\"_blank\">JupyterLab Gallery</a>, for presenting and accessing examples from remote repositories\t\t\t\t\t\t\t\t</p>"
+  columnBackgrounds:
+    - "#FFFFFF"
+    - "#FFFFFF"
+    - "#FFFFFF"
+- type: icon-box-grid
+  items:
+    - description: "Install them on your platform, or work with us to create new extensions for your specific needs."
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "JupyterLite & Interactive Documentation"
+              level: 2
+              sizePx: 40
+              color: "#452392"
+            - type: text
+              html: "<p><a href=\"https://jupyter.org/try-jupyter/lab/index.html\">The JupyterLite</a> project for running Jupyter in browsers is a major focus area for Quansight Labs.</p>"
+          - - type: text
+              html: "<p>Our team members are leading the effort to add interactivity and executable code blocks to documentation websites across the Scientific Python ecosystem using JupyterLite. This involves contributing to JupyterLite and developing extensions.</p>"
+            - type: text
+              html: "<p>We can help you add executable components to your websites and applications.</p>"
+  columnBackgrounds:
+    - "#F3F5F8"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Jupyter Accessibility"
+        level: 2
+        sizePx: 40
+        color: "#452392"
+      - type: text
+        html: "<p>Despite numbering over one billion individuals worldwide, people with disabilities are frequently overlooked when designing and developing technology solutions. Many open source tools have been developed without properly considering essential accessibility features from the start, unintentionally excluding users with disabilities.</p>"
+    - - type: text
+        html: "<p>Several Quansight <a href=\"https://labs.quansight.org/team\">Labs members</a> lead and contribute to the <a href=\"https://jupyter-accessibility.readthedocs.io/en/latest/\">Jupyter Accessibility project</a>. For about five years, team members have focused on making Jupyter tools more accessible and raising awareness about accessibility.</p>"
+      - type: text
+        html: "<p>For some highlights, check out the <a href=\"https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2024.pdf\">Quansight Labs 2024 Annual Report</a>.</p>"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Get in Touch"
+              level: 2
+              sizePx: 40
+              color: "#452392"
+            - type: text
+              html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? We’d love to hear from you.\t\t\t\t\t\t\t\t</p>"
+            - type: button
+              url: "https://quansight.com/about-us/#bookacallform"
+              text: "Contact Us"
+              isFull: false
+              isBordered: false
+              isTriangle: true
+          - - type: image
+              src: "/page-assets/jupyter-technologies/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+  columnBackgrounds:
+    - "#F3F5F8"

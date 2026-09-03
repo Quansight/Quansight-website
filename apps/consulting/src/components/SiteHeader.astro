@@ -12,7 +12,15 @@ const { logo, navigation, skipLinksText } = entry!.data as {
 };
 ---
 
-<header class="fixed inset-x-0 top-0 z-20 bg-black text-[#efefef] sm:absolute">
+<header class="fixed inset-x-0 top-0 z-20 bg-black text-white sm:absolute sm:bg-transparent">
+  {/* Matches the live site: transparent at desktop, overlaid directly on
+      the hero banner's own gradient (no separate header color/seam) --
+      mobile keeps a solid bg since SiteHeaderMobile's bar stays fixed
+      while scrolling, unlike the desktop nav which scrolls away with the
+      hero once you pass it (not pinned/sticky). Every page must start
+      with a `hero` block for this to not cover content with nothing
+      behind it -- see fetch_hero_background()'s fallback in
+      convert-pages-consulting.py for pages with no real hero image. */}
   <div class="mx-auto max-w-layout">
     {/* skip to content link */}
     <div class="absolute inset-x-0 top-0 z-50 py-[2rem] max-w-full text-[1.6rem] font-extrabold text-center text-white bg-black transition-transform duration-300 ease-in-out -translate-y-full focus-within:translate-y-0">
