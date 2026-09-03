@@ -344,7 +344,7 @@ This journey is not one we at Quansight did alone. We received the support and h
 - [NumFOCUS](https://numfocus.org/) for funding the opt-in CI services integrations at conda-forge through their Small Development Grant program.
 - The [conda-forge](https://conda-forge.org/) core team, with honorable mentions to Matthew Becker, Filipe Fernandes, and John Kirkham, for their continuous attention and availability for brainstorming possible solutions to this problem.
 - The conda-forge community, as a whole, for their patience while we went through this adventure together.
-- The many [Quansight](https://quansight.com/) employees who participated in this project, especially the contributions of Amit, Isuru, Vini, and Chris, as well as Dharhas, for providing leadership.
+- The many [Quansight](/) employees who participated in this project, especially the contributions of Amit, Isuru, Vini, and Chris, as well as Dharhas, for providing leadership.
 
 ## “Wait, I have questions!”
 

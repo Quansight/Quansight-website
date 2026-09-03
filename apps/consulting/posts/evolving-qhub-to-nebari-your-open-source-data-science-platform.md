@@ -6,7 +6,7 @@ description: >
   We’re excited to announce a new chapter for Nebari, formerly known as QHub, as it evolves into an independent, community-led project, with a fresh new look!
 category: [Jupyter, Open Source Software, Scalable Computing]
 featuredImage:
-  src: /posts/evolving-qhub-to-nebari/5-nebari-logo.png
+  src: /posts/evolving-qhub-to-nebari-your-open-source-data-science-platform/5-nebari-logo.png
   alt: 'Nebari logo'
 hero:
   imageSrc: /posts/hero-paris.webp
@@ -29,7 +29,7 @@ In this blog post, we share Nebari’s journey, what this milestone involves, an
 why it is important to us.
 
 <img
-src="/posts/evolving-qhub-to-nebari/1-nebari-banner.svg"
+src="/posts/evolving-qhub-to-nebari-your-open-source-data-science-platform/1-nebari-banner.svg"
 width="750px"
 alt="Nebari logo mark with the tagline: Your open source data science platform. Built for scale, designed for collaboration."
 />
@@ -48,7 +48,7 @@ including Dask for scalability, reproducible environments, and features for
 sharing dashboards, so that your team can use it out-of-the-box.
 
 <img
-src="/posts/evolving-qhub-to-nebari/2-nebari-cloud-architecture.svg"
+src="/posts/evolving-qhub-to-nebari-your-open-source-data-science-platform/2-nebari-cloud-architecture.svg"
 width="975px"
 alt="Nebari overview sequence showing deploying from nebari-config.yaml file, to the automatic setup of JupyterHub and cloud resources, to the live Nebari instance open to &quot;Server Options&quot;. The setup shows several cloud providers (AWS, GCP, Azure, or Digital Ocean) managed with a Docker container registry. We deploy JupyterHub with Dask and conda-store on these cloud resources using Kubernetes. The whole system is managed by Terraform."
 />
@@ -102,7 +102,7 @@ contributors to get involved in all aspects of the project. Our policy documents
 encourage contributing back to upstream libraries whenever possible, reinforcing
 our commitment to the open source community.
 
-![A browser window showing Nebari documentation's "Community" page open to the "How to contribute" section. It highlights the different ways to contribute including code maintenance, community coordination, website design, UI/UX, technical documentation, and much more!](/posts/evolving-qhub-to-nebari/3-nebari-how-to-contribute.png)
+![A browser window showing Nebari documentation's "Community" page open to the "How to contribute" section. It highlights the different ways to contribute including code maintenance, community coordination, website design, UI/UX, technical documentation, and much more!](/posts/evolving-qhub-to-nebari-your-open-source-data-science-platform/3-nebari-how-to-contribute.png)
 
 We’re grateful for the opportunity to learn from other open source software
 (OSS) communities and their governance policies to create a strong foundation
@@ -147,7 +147,7 @@ some early concept ideas for the new logo, all of which try to bridge the ideas
 of Bonsai and clouds (a nod to cloud computing):
 
 <img
-src="/posts/evolving-qhub-to-nebari/4-nebari-concept-composite.jpg"
+src="/posts/evolving-qhub-to-nebari-your-open-source-data-science-platform/4-nebari-concept-composite.jpg"
 width="900px"
 alt="(Upper Left) Hand-drawn tree trunk(s) in the clouds, along with a concept for Nebari's logo where the base of N creates a root structure underneath it. (Upper Right) Concept for Nebari's logo. The word &quot;NEBARI&quot;  has a tree over it. the tree has lots of branches and leaves, and some with clouds behind it. Below the word, we see the tree's root structure. (Bottom) Different ideas for the font styles. Nebari is written by hand in block letters, types of cursives, and many more ways."
 />
@@ -156,7 +156,7 @@ The amazing [Irina Fumarel][irina website] took these ideas and created the
 current Nebari logo:
 
 <img
-src="/posts/evolving-qhub-to-nebari\5-nebari-logo-tbcrop.png"
+src="/posts/evolving-qhub-to-nebari-your-open-source-data-science-platform/5-nebari-logo-tbcrop.png"
 width="750px"
 alt="Nebari logo. The symbol shows purple trunk and branches, with green capsule-shaped leaves, and a yellow circle at the top."
 />
@@ -169,7 +169,7 @@ will soon add the design guidelines and a broader color palette!
 
 ## How Far We Have Come, and What’s Next
 
-Nebari has come a long way since its <a href="/post/announcing-qhub"
+Nebari has come a long way since its <a href="/blog/announcing-qhub"
 target="_self">official launch in 2020</a>! It currently supports all major
 cloud providers: Amazon Web Services (AWS), Google Cloud Provider (GCP), Azure,
 and Digital Ocean; as well as local HPC clusters.
@@ -192,7 +192,7 @@ and added new ones like Visual Studio Code and Grafana monitoring for
 convenience.
 
 <img
-src="/posts/evolving-qhub-to-nebari/6-nebari-help.png"
+src="/posts/evolving-qhub-to-nebari-your-open-source-data-science-platform/6-nebari-help.png"
 width="850px"
 alt="Nebari's CLI showing the output of nebari --help command. The options, commands, and additional commands are displayed distinctly in separate boxes, with accessible colors to differentiate the command from their descriptions."
 />
@@ -212,7 +212,7 @@ Nebari over the years, continued support from the Quansight team, and feedback
 from the broader open source community. We are immensely grateful to you!
 
 <img
-src="/posts/evolving-qhub-to-nebari/7-nebari-contributor-graph.png"
+src="/posts/evolving-qhub-to-nebari-your-open-source-data-science-platform/7-nebari-contributor-graph.png"
 width="875px"
 alt="GitHub contributor commit history for Nebari. It shows a steady flow of commits from March 2020 till November 2022. The activity in the first half of this period is bursty, while the second half is lower but more consistent."
 />
@@ -247,4 +247,4 @@ url="https://nebari.dev?utm_campaign=post-evolving-qhub-to-nebari&utm_medium=web
 [nebari typer cli post]: https://labs.quansight.org/blog/nebari-typer-cli
 [pamphile github profile]: https://github.com/tupui
 [qhub-hpc repo]: https://github.com/Quansight/qhub-hpc
-[quansight about us]: https://quansight.com/about-us
+[quansight about us]: /about-us

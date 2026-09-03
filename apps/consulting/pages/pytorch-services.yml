@@ -63,7 +63,7 @@ blocks:
 - type: columns
   columns:
     - - type: button
-        url: "https://quansight.com/post/a-year-in-review-quansights-contributions-to-pytorch-in-2023-early-2024/"
+        url: "/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2023-early-2024"
         text: "Read the post"
         isFull: false
         isBordered: false
@@ -94,7 +94,7 @@ blocks:
       - type: call-to-action
         note: "2023 & 2024"
     - - type: button
-        url: "https://quansight.com/post/a-year-in-review-quansights-contributions-to-pytorch-in-2022/"
+        url: "/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2022"
         text: "Read the post"
         isFull: false
         isBordered: false
@@ -149,7 +149,7 @@ blocks:
         items:
           - "Vision datasets & transforms 1.0"
       - type: button
-        url: "https://quansight.com/post/a-year-in-review-quansights-contributions-to-pytorch-in-2021/"
+        url: "/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2021"
         text: "Read the post"
         isFull: false
         isBordered: false
@@ -209,7 +209,7 @@ blocks:
 - type: toggle
   items:
     - title: "What sort of services do you offer around Large Language Models (LLMs)?"
-      content: "<p><span style=\"font-weight: 400;\">Thanks to our expertise in LLMs, AI/ML, cloud infrastructure, and the broader scientific, visualization, and data platform Python stack, we can support you at any stage in building an LLM strategy—from getting started to refining what’s in place. See our <span style=\"text-decoration: underline; color: #a43a8f;\"><a href=\"https://quansight.com/llm-services/\" style=\"color: #a43a8f; text-decoration: underline;\">LLM Services page</a></span> to learn more. </span></p>"
+      content: "<p><span style=\"font-weight: 400;\">Thanks to our expertise in LLMs, AI/ML, cloud infrastructure, and the broader scientific, visualization, and data platform Python stack, we can support you at any stage in building an LLM strategy—from getting started to refining what’s in place. See our <span style=\"text-decoration: underline; color: #a43a8f;\"><a href=\"/llm-services\" style=\"color: #a43a8f; text-decoration: underline;\">LLM Services page</a></span> to learn more. </span></p>"
 - type: toggle
   items:
     - title: "What is a PyTorch Masterclass?"

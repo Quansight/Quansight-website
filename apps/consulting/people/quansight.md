@@ -3,6 +3,6 @@ firstName: 'Quansight'
 lastName: ''
 role: 'author'
 displayName: 'firstName'
-image: '/nebari-services/quansight-logo.svg'
+image: '/images/people/quansight.png'
 imageAlt: 'Quansight logo'
 ---

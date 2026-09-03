@@ -28,6 +28,6 @@ Check out the video below to watch the whole thing!
 
 If you’re looking to upskill your team, get in touch. We offer a wide variety of intermediate and advanced courses across the PyData stack, and can build a customized offering to meet your specific requirements.
 
-[Explore PyData Training Lineup](https://quansight.com/training)
+[Explore PyData Training Lineup](/training)
 
 Connect with Dhavide Aruliah on [LinkedIn](https://www.linkedin.com/in/dhavide/).

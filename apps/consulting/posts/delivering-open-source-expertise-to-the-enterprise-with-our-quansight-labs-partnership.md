@@ -75,8 +75,8 @@ We intimately understand the architectures, performance optimization strategies,
 
 For example:
 
-- Quansight has the largest team of PyTorch maintainers outside of Meta and we continue to partner with Meta and the larger community to enhance PyTorch. This includes [enhancements to the torch.func module of the PyTorch codebase for last year’s PyTorch 2.0 release](https://quansight.com/post/pytorch-2-0-quansights-contributions-to-torch-func/).
-- Quansight and the University of Southern California joined forces last year to [make Pandas available for use in the paleogeosciences](https://quansight.com/post/pandas-and-the-geosciences-a-4-5-billion-year-story/) by implementing a community-requested feature dating back to 2014.
+- Quansight has the largest team of PyTorch maintainers outside of Meta and we continue to partner with Meta and the larger community to enhance PyTorch. This includes [enhancements to the torch.func module of the PyTorch codebase for last year’s PyTorch 2.0 release](/blog/pytorch-2-0-quansights-contributions-to-torch-func).
+- Quansight and the University of Southern California joined forces last year to [make Pandas available for use in the paleogeosciences](/blog/pandas-and-the-geosciences-a-4-5-billion-year-story) by implementing a community-requested feature dating back to 2014.
 - After seeing certain problems surface time and again on client projects, Quansight’s engineers created three open source projects, two of which are now community-led, to serve both the community and our clients:
   - [Nebari](https://www.nebari.dev/), a customizable and open source, enterprise data science and MLOps platform.
   - [conda-store](https://conda.store/), an open source tool created to better manage data science environments for teams.
@@ -88,7 +88,7 @@ This ability to turn open source knowledge into competitive solutions is a key d
 
 Quansight’s expertise across the Python data stack as seen in
 
-[Generative AI: Made Possible by a Mountain of Open Source](https://quansight.com/post/generative-ai-made-possible-by-a-mountain-of-open-source/).
+[Generative AI: Made Possible by a Mountain of Open Source](/blog/generative-ai-made-possible-by-a-mountain-of-open-source).
 
 ![Three mountain peaks at the top show generative AI for text, images, and audio. The diagram descends down to show the mountain layers and bedrock to illustrate the open source projects below.](/posts/delivering-open-source-expertise-to-the-enterprise-with-our-quansight-labs-partnership/Generative-AI-Diagram-scaled.jpg)
 
@@ -98,4 +98,4 @@ If you’re looking to leverage the power of open source for your business, or y
 
 And be sure to check out the [Quansight Labs Annual Report 2023](https://labs.quansight.org/blog/labs-annual-report-2023) for an overview of Labs’ mission and impact.
 
-[Get in Touch](https://quansight.com/llm-services/#bookacallform)
+[Get in Touch](/llm-services#bookacallform)

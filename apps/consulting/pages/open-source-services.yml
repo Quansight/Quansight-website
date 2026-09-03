@@ -96,7 +96,7 @@ blocks:
 - type: text
   html: "<p>Many companies rely heavily on open source software but don’t have the full picture regarding the true business value, costs, principles, and community involvement required to ensure its long-term viability. At Quansight, we’ll guide you through assessing your current stack and help you develop a strategy to invest in and give back to the critical projects your business relies upon.</p><p>By actively engaging with and supporting these vital open source communities, you’ll reduce risks, gain a voice within the community, and get visibility into project direction and roadmaps for your core dependencies. This strategic approach ensures a competitive edge and drives innovation and growth by aligning your efforts with the advancements happening within the ecosystem.</p><p>In collaboration with our strategic partner, <a href=\"https://www.openteams.com/\">OpenTeams</a>, Quansight’s Open Source Services will help you drive innovation and ensure sustainability within open source. Our combined expertise enables us to foster meaningful connections within the community, ensuring you stay closely aligned with the projects that make up your tech stack.</p>"
 - type: button
-  url: "https://quansight.com/about-us/#bookacallform"
+  url: "/about-us#bookacallform"
   text: "Contact Us"
   isFull: false
   isBordered: false
@@ -361,7 +361,7 @@ blocks:
       - type: text
         html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? Email us at connect@quansight.com to learn how Quansight can help.\t\t\t\t\t\t\t\t</p>"
       - type: button
-        url: "https://quansight.com/about-us/#bookacallform"
+        url: "/about-us#bookacallform"
         text: "Contact Us"
         isFull: false
         isBordered: false

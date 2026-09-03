@@ -125,7 +125,7 @@ of this strategy. One of my favorites is the
 
 For sparse tensors, which contain mostly zeros, there are many ways to
 efficiently store and manipulate them. See my previous <a
-href="/post/leveraging-sparsity-for-efficient-data-manipulation-the-gcxs-sparse-array-format"
+href="/blog/leveraging-sparsity-for-efficient-data-manipulation-the-gcxs-sparse-array-format"
 target="_self">post on sparsity</a> for more details. (Editor's note: This post
 is pending migration.) There are formats like [COO][coo], [DOK][dok],
 [CSF][csf], among numerous others including many that are unique to matrices. A

@@ -188,7 +188,7 @@ This project is now part of the conda incubator, so it’s something we built an
 
 ## How Do You Get Access to conda-store?
 
-The software’s website is [conda.store](https://conda.store/) and it is also on [GitHub](https://github.com/conda-incubator/conda-store). If you need additional help, Quansight consults around conda-store; we can help you set it up and add features as needed. [Find out more here](https://quansight.com/).
+The software’s website is [conda.store](https://conda.store/) and it is also on [GitHub](https://github.com/conda-incubator/conda-store). If you need additional help, Quansight consults around conda-store; we can help you set it up and add features as needed. [Find out more here](/).
 
 ![Thank you slide with Quansight logo, and a conda store logo. Link to conda store and email address dharhas@quansight.com](/posts/streamlined-environment-lifecycle-management-for-data-science-workflows-with-conda-store/Picture16.png)
 

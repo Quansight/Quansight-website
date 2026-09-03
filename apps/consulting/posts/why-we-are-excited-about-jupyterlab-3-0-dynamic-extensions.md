@@ -179,10 +179,10 @@ development team. Those of us at [Quansight][quansight site] would really like
 to thank the team for all their hard work and thoughtfulness.
 
 Want more Jupyter? Read about Quansight's new project, QHub, in our
-<a href="/post/announcing-qhub" target="_self">announcement blog post</a>.
+<a href="/blog/announcing-qhub" target="_self">announcement blog post</a>.
 
 [jupyterlab docs]: https://jupyterlab.readthedocs.io/
-[quansight site]: https://quansight.com
+[quansight site]: /
 [quirkshop video]: https://youtu.be/k8yKcPPO0Gs
 [dask]: https://docs.dask.org/
 [holoviz]: https://holoviz.org/

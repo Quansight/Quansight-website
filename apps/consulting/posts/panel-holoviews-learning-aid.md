@@ -295,7 +295,7 @@ layout.show()  # You won't be able to view this from binder, but will be able to
 Now that you have a simple app to start from, keep going and build your own!
 
 If you liked this article, check out this Panel article on <a
-href="/post/working-across-panel-and-ipywidgets-ecosystems"
+href="/blog/working-across-panel-and-ipywidgets-ecosystems"
 target="_self">Working Across Panel and ipywidgets Ecosystems</a>!
 
 [demo binder]: https://mybinder.org/v2/gh/Quansight/panel-learning-aid/master?filepath=learning_aid.ipynb

@@ -16,7 +16,7 @@ hero:
 
 _Turn AI Research & Concepts Into Reliable Enterprise Solution._
 
-Artificial Intelligence (AI) is reshaping industries worldwide, driving innovation and pioneering new possibilities. The journey from AI research to practical, enterprise-ready solutions can be challenging, and this is where [Quansight’s AI Engineering](https://quansight.com/ai-engineering/) consulting services come into play. With our deep expertise in open source scientific computing, we help organizations bridge the gap between AI concepts and real-world applications, making sure that your AI initiatives deliver tangible business value.
+Artificial Intelligence (AI) is reshaping industries worldwide, driving innovation and pioneering new possibilities. The journey from AI research to practical, enterprise-ready solutions can be challenging, and this is where [Quansight’s AI Engineering](/ai-engineering) consulting services come into play. With our deep expertise in open source scientific computing, we help organizations bridge the gap between AI concepts and real-world applications, making sure that your AI initiatives deliver tangible business value.
 
 ## Understanding AI Engineering
 
@@ -65,4 +65,4 @@ We understand the complexities of utilizing existing infrastructure while mitiga
 
 We have helped turn AI visions into practical solutions for our clients. For instance, Nebari has enabled Earth Science Information Partners (ESIP) to manage deployments without the need for a dedicated DevOps engineer. Government Geoscience users have found conda-store invaluable for maintaining research workflows. Additionally, an investment firm’s legal department has benefitted from Ragna in making its data sources more legible and discoverable.
 
-Quansight’s [AI Engineering consulting services](https://quansight.com/ai-engineering/) are designed to help you navigate the complexities of AI transformation. By leveraging our deep expertise in open source scientific computing and sustainable software practices, we make sure that your AI initiatives deliver real business value. Visit our AI Engineering page today to discover how we can help you turn your AI vision into reality.
+Quansight’s [AI Engineering consulting services](/ai-engineering) are designed to help you navigate the complexities of AI transformation. By leveraging our deep expertise in open source scientific computing and sustainable software practices, we make sure that your AI initiatives deliver real business value. Visit our AI Engineering page today to discover how we can help you turn your AI vision into reality.

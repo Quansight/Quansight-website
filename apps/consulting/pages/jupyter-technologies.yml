@@ -126,7 +126,7 @@ blocks:
             - type: text
               html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? We’d love to hear from you.\t\t\t\t\t\t\t\t</p>"
             - type: button
-              url: "https://quansight.com/about-us/#bookacallform"
+              url: "/about-us#bookacallform"
               text: "Contact Us"
               isFull: false
               isBordered: false

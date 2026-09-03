@@ -3,6 +3,6 @@ firstName: 'Pamela'
 lastName: 'Wadhwa'
 role: 'author'
 displayName: 'full'
-image: '/nebari-services/quansight-logo.svg'
+image: '/images/people/pamela-wadhwa.webp'
 imageAlt: 'Pamela Wadhwa'
 ---

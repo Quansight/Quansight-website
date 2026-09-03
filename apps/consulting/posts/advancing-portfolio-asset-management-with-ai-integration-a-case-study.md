@@ -55,7 +55,7 @@ If you’re in finance and wondering how to take the next step with AI, this sto
 
 ## Curious to Learn More?
 
-[[Download the full case study here](https://quansight.com/wp-content/uploads/2025/04/Advancing-Portfolio-Asset-Management-with-AI-Integration-A-Case-Study.pdf)]
+[[Download the full case study here](/files/Advancing-Portfolio-Asset-Management-with-AI-Integration-A-Case-Study.pdf)]
 
 See what it looks like when AI is more than a trend, and becomes part of the fabric of a financial institution.
 

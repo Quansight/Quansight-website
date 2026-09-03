@@ -49,4 +49,4 @@ On Nebari platforms, there are often hundreds of environments created by differe
 
 The development of these extensions was funded by the [CDAO JATIC initiative](https://cdao.pages.jatic.net/public/) and completed in collaboration with [Metrostar](https://www.metrostar.com/).
 
-_For those exploring the evolving ecosystem of JupyterLab extensions, this companion piece offers a deeper look at JHub Apps—a modern interface layer for JupyterHub that simplifies application deployment and access to shared infrastructure. [Read the full article to see how JHub Apps advances the usability and shareability of JupyterHub deployments](https://quansight.com/post/jhub-apps-jupyterhub-launcher-with-app-deployment/)_
+_For those exploring the evolving ecosystem of JupyterLab extensions, this companion piece offers a deeper look at JHub Apps—a modern interface layer for JupyterHub that simplifies application deployment and access to shared infrastructure. [Read the full article to see how JHub Apps advances the usability and shareability of JupyterHub deployments](/blog/jhub-apps-jupyterhub-launcher-with-app-deployment)_

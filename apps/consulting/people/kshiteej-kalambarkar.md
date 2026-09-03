@@ -3,6 +3,6 @@ firstName: 'Kshiteej'
 lastName: 'Kalambarkar'
 role: 'author'
 displayName: 'full'
-image: '/nebari-services/quansight-logo.svg'
+image: '/images/people/kshiteej-kalambarkar.jpg'
 imageAlt: 'Kshiteej Kalambarkar'
 ---

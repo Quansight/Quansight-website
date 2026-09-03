@@ -56,4 +56,4 @@ A newer JupyterLab extension, [jupyterlab-jhub-apps](https://github.com/nebari-d
 
 The development of JHub Apps Launcher was funded by the [CDAO JATIC initiative](https://cdao.pages.jatic.net/public/), and completed in collaboration with [Metrostar](https://www.metrostar.com/).
 
-**Although these tools were designed for Nebari, you can use them with any JupyterHub deployment**. Check out the project [README](https://github.com/nebari-dev/jhub-apps#jupyterhub-apps-launcher) to get started. If you’d like to deploy Nebari for your data science team, [reach out to us](https://quansight.com/nebari-services/)!
+**Although these tools were designed for Nebari, you can use them with any JupyterHub deployment**. Check out the project [README](https://github.com/nebari-dev/jhub-apps#jupyterhub-apps-launcher) to get started. If you’d like to deploy Nebari for your data science team, [reach out to us](/nebari-services)!

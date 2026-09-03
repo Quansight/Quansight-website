@@ -235,7 +235,7 @@ As the ecosystem grows, the tools we use are becoming more powerful and adaptabl
 
 The tools we’ve explored—pandas, Polars, and DuckDB—represent the cutting-edge of DataFrame libraries, but even the best tools are only as effective as how you use them. Are you confident you’re getting the most out of your current workflows? Could exploring these tools unlock new efficiencies or capabilities for your projects?
 
-What’s the biggest problem you’re facing with your data workflows today? If you’re ready to move past limits, I’d love to hear from you. Whether you’re navigating the challenges of integrating these tools, tackling datasets that push your current systems to the edge, or simply wondering which tool is right for your next big project, let’s talk. Drop me a message or [reach out to the Quansight team](https://quansight.com/about-us/#bookacallform).
+What’s the biggest problem you’re facing with your data workflows today? If you’re ready to move past limits, I’d love to hear from you. Whether you’re navigating the challenges of integrating these tools, tackling datasets that push your current systems to the edge, or simply wondering which tool is right for your next big project, let’s talk. Drop me a message or [reach out to the Quansight team](/about-us#bookacallform).
 
 Together, we can explore how to optimize your approach, streamline your analysis, and take your work to the next level.
 

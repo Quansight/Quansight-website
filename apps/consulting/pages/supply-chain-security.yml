@@ -25,7 +25,7 @@ blocks:
 - type: text
   html: "<p style=\"text-align: center;\"><span style=\"font-weight: 400;\">Not seeing your exact need? Quansight can partner with you to design a </span><b>customized supply chain security strategy</b><span style=\"font-weight: 400;\"> tailored to your organization’s challenges and ecosystem.</span></p>"
 - type: button
-  url: "https://quansight.com/about-us/#bookacallform"
+  url: "/about-us#bookacallform"
   text: "Contact Us"
   isFull: false
   isBordered: false
@@ -42,7 +42,7 @@ blocks:
             - type: text
               html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? We’d love to hear from you.\t\t\t\t\t\t\t\t</p>"
             - type: button
-              url: "https://quansight.com/about-us/#bookacallform"
+              url: "/about-us#bookacallform"
               text: "Contact Us"
               isFull: false
               isBordered: false

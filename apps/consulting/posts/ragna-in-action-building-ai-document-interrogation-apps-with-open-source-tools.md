@@ -18,7 +18,7 @@ _A look at recent presentations on AI, RAG, and Ragna by Quansight’s staff._
 >
 > — Dharhas Pothina, Quansight CTO
 
-Welcome to an exploration of [Ragna](https://ragna.chat/en/stable/), an open source framework tool developed at [Quansight](https://quansight.com/) for the experimentation and deployment of retrieval-augmented generation-based AI applications.
+Welcome to an exploration of [Ragna](https://ragna.chat/en/stable/), an open source framework tool developed at [Quansight](/) for the experimentation and deployment of retrieval-augmented generation-based AI applications.
 
 As machine learning continues to evolve, the need for accurate, contextually aware, and reliable information retrieval has increased. While powerful, traditional large language models (LLMs) may be limited by their training on static datasets, often resulting in outdated or irrelevant responses. Ragna addresses this challenge by integrating real-time data retrieval with generative AI capabilities, providing a flexible, open source framework for building applications.
 
@@ -40,7 +40,7 @@ By advocating for open source solutions and collaborative development, Quansight
 
 Retrieval-Augmented Generation, or RAG, represents a significant advancement in the capabilities of large language models (LLMs). At its core, RAG is a method that combines the strengths of retrieval-based systems with generative models to enhance the accuracy of AI-generated responses. LLMs, such as GPT-3 and GPT-4, are trained on massive but static datasets, which means their knowledge is limited to the information available up to the point of their training. This fixed nature often results in outdated or contextually incorrect answers when these models are queried about recent or specific information.
 
-**Want to understand RAG? Read more about it here: **[Unveiling Ragna: An Open Source RAG-based AI Orchestration Framework Designed to Scale From Research to Production by Dharhas Pothina](https://quansight.com/post/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production/)\*\*\*\*
+**Want to understand RAG? Read more about it here: **[Unveiling Ragna: An Open Source RAG-based AI Orchestration Framework Designed to Scale From Research to Production by Dharhas Pothina](/blog/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production)\*\*\*\*
 
 RAG addresses this limitation by introducing a two-step process: Retrieval and Generation.
 
@@ -105,7 +105,7 @@ Philip repeated his demonstration in April at PyCon DE, and Quansight’s Pavith
 
 –[PyCon US](https://us.pycon.org/2024/schedule/presentation/103/) [(VIDEO)](https://youtu.be/5siI6flge6g?si=oYmS91Gq_A-VmIVP)
 
-**Read more: Launching Ragna:** [The Open Source RAG-based AI Orchestration Framework – an Interview with Philip Meier](https://quansight.com/post/interview-launching-ragna-the-open-source-rag-based-ai-orchestration-framework/)
+**Read more: Launching Ragna:** [The Open Source RAG-based AI Orchestration Framework – an Interview with Philip Meier](/blog/interview-launching-ragna-the-open-source-rag-based-ai-orchestration-framework)
 
 ## Quansight's Continued Expertise in This Space
 
