@@ -1,0 +1,240 @@
+slug: infrastructure-scaling-acceleration
+title: "Infrastructure, Scaling, & Acceleration"
+description: "Infrastructure, Scaling, & Acceleration Scale your compute and data warehousing cost-effectively and reliably with top of the line open source tooling. In order to run"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/infrastructure-scaling-acceleration/Hero-Background-16.png"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Infrastructure, Scaling, & Acceleration"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Scale your compute and data warehousing cost-effectively and reliably with top of the line open source tooling."
+        level: 4
+        sizePx: 40
+        color: "#452392"
+    - - type: text
+        html: "<p>\n\t\t\t\t\t\t\t\t\tIn order to run computations, especially at scale, you need to have the right compute infrastructure to handle them. Quansight’s technical team has deep expertise with both on-prem and in-cloud compute infrastructure, and also with the big data and scientific tooling to make optimal use of that infrastructure. We’ll build the systems you need and train your team to use them effectively and efficiently.\t\t\t\t\t\t\t\t</p>"
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-08-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "On-Prem Server Provisioning"
+            description: "We know physical hardware as well as software and the cloud. If you want an on-premise compute solution, we will get it implemented for you."
+    - - type: image
+        src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-09-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Cloud Cost & Capacity Optimization"
+            description: "We have the expertise to fine-tune your cloud configuration to ensure you have the resources you need at a minimum of cost."
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-10-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Customized Collaboration Platforms"
+            description: "Large-scale, distributed scientific collaboration is extremely challenging to implement. Our QHub platform makes it easy."
+    - - type: image
+        src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-11-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Cloud Compute Configuration & Management"
+            description: "Cloud compute infrastructure is complicated and challenging for newcomers. Quansight will establish your cloud capacity and train your engineers to manage it."
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Infrastructure, Scaling, & Acceleration"
+              level: 3
+              sizePx: 50
+              color: "#ffffff"
+            - type: text
+              html: "<p>Well-designed, scalable compute and storage plus optimized, accelerated code is the lifeblood of modern big data analytics</p>"
+            - type: button
+              url: "#bookacallform"
+              text: "I'm interested"
+              isFull: false
+              isBordered: false
+              isTriangle: true
+        columnBackgrounds:
+          - "#452392"
+    - - type: image
+        src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-28-1.svg"
+        alt: ""
+        width: 768
+        height: 1
+  columnBackgrounds:
+    - "#452392"
+    - null
+- type: heading
+  text: "Some of the Open Source Projects We Use for  Data Engineering & MLOps"
+  level: 4
+  sizePx: 28
+  color: "#000000"
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/infrastructure-scaling-acceleration/the-open-source-projects-we-use-for-infrastructure-scaling-acceleration-01-1-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/infrastructure-scaling-acceleration/trusted-by-open-source-maintainers-and-contributors-07-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/infrastructure-scaling-acceleration/the-open-source-projects-we-use-for-infrastructure-scaling-acceleration-02-1024x440.webp"
+        alt: "Image of the Ray logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/infrastructure-scaling-acceleration/the-open-source-projects-we-use-for-infrastructure-scaling-acceleration-04-1024x440.webp"
+        alt: "Image of the Kubernetes logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/infrastructure-scaling-acceleration/the-open-source-projects-we-use-for-infrastructure-scaling-acceleration-03-1024x440.webp"
+        alt: "Imge of the Terraform logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/infrastructure-scaling-acceleration/trusted-by-open-source-maintainers-and-contributors-03-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "A word from Quansight clients..."
+              level: 3
+              sizePx: 50
+              color: "#ffffff"
+            - type: text
+              html: "<p>“Quansight was amazing to work with. They helped us select and implement an open source technology stack that enabled us to cost-effectively process terabytes of data per day. Not only that, but they automated the deployment process, untethering us from specific cloud vendors, and enabling us to shop for competitive rates.” — Brian Larsen, Director of Technical Product, Datum</p>"
+        columnBackgrounds:
+          - "#452392"
+    - - type: image
+        src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-25-2.svg"
+        alt: ""
+        width: 200
+        height: 200
+  columnBackgrounds:
+    - "#452392"
+    - null
+- type: heading
+  text: "Explore Additional Consulting Areas"
+  level: 4
+  sizePx: 50
+  color: "#452392"
+- type: columns
+  columns:
+    - - type: image-box-grid
+        items:
+          - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-2-100x100.png"
+            imageAlt: ""
+      - type: button
+        url: "https://quansight.com/data-engineering-mlops/"
+        text: "Learn More"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+    - - type: image-box-grid
+        items:
+          - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-6-100x100.png"
+            imageAlt: ""
+      - type: button
+        url: "https://quansight.com/visualization-dashboards/"
+        text: "Learn More"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+    - - type: image-box-grid
+        items:
+          - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-4-100x100.png"
+            imageAlt: ""
+      - type: button
+        url: "https://quansight.com/algorithms-ai-machine-learning/"
+        text: "Learn More"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+- type: columns
+  columns:
+    - - type: image-box-grid
+        items:
+          - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-3-100x100.png"
+            imageAlt: ""
+      - type: button
+        url: "https://quansight.com/open-source-integration/"
+        text: "Learn More"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+    - - type: image-box-grid
+        items:
+          - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-5-100x100.png"
+            imageAlt: ""
+      - type: button
+        url: "https://quansight.com/packaging-environment-management/"
+        text: "Learn More"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+    - - type: image-box-grid
+        items:
+          - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-7-100x100.png"
+            imageAlt: ""
+      - type: button
+        url: "https://quansight.com/jupyter-technologies/"
+        text: "Learn More"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Ready to use data more effectively across your organization?"
+              level: 4
+              sizePx: 55
+              color: "#452392"
+            - type: form
+              note: "Consulting Overview Contact Form"
+        columnBackgrounds:
+          - "#FAFAFF"
+    - - type: columns
+        columns:
+          - - type: image
+              src: "/page-assets/infrastructure-scaling-acceleration/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+        columnBackgrounds:
+          - "#FAFAFF"
+  columnBackgrounds:
+    - "#FAFAFF"
+    - "#FAFAFF"

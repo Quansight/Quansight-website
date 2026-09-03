@@ -1,0 +1,183 @@
+slug: visualization-dashboards
+title: "Visualization & Dashboards"
+description: "Visualization & Dashboards Turn your data into insights, and your insights into discovery tools. Visually exploring data through interactive plots helps you connect more closely"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/visualization-dashboards/Hero-Background-19.png"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Visualization & Dashboards"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Turn your data into insights, and your insights into discovery tools."
+        level: 4
+        sizePx: 40
+        color: "#452392"
+    - - type: text
+        html: "<p>Visually exploring data through interactive plots helps you connect more closely to your data, quickly identify patterns and insights, and meaningfully share those insights with others. Quansight’s visualization team is skilled in transforming your data analysis into a compelling story through the use of dashboards. We can build dashboards to illustrate interactive results of analytics to executives, or dashboards to help data scientists and engineers process and analyze data through a common workflow.</p>"
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/visualization-dashboards/icons-llc-12-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Visual Exploration"
+            description: "Empower your researchers or data scientists to better explore datasets and review their results with custom visualizations."
+    - - type: image
+        src: "/page-assets/visualization-dashboards/icons-llc-13-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Dashboarding"
+            description: "Communicate the story behind your data regardless of technical prowess, and help your engineers perform routine analysis."
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/visualization-dashboards/icons-llc-14-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Interactive Visualizations"
+            description: "Pan, zoom, click, explore; interactive visualizations improve understanding and build a deeper understanding of data."
+    - - type: image
+        src: "/page-assets/visualization-dashboards/icons-llc-15-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Monitoring Systems"
+            description: "Track critical components of your manufacturing line or MLOps pipeline, or the latest weather data, market data, or other key data streams."
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Visualization & Dashboards"
+              level: 3
+              sizePx: 50
+              color: "#ffffff"
+            - type: text
+              html: "<p>A good visualization and dashboard turn data into insights, and insights into understanding.</p>"
+            - type: button
+              url: "#bookacallform"
+              text: "I'm interested"
+              isFull: false
+              isBordered: false
+              isTriangle: true
+        columnBackgrounds:
+          - "#452392"
+    - - type: image
+        src: "/page-assets/visualization-dashboards/icons-llc-28-1.svg"
+        alt: ""
+        width: 768
+        height: 1
+  columnBackgrounds:
+    - "#452392"
+    - null
+- type: heading
+  text: "The Open Source Projects We Use for Visualization  and Dashboards"
+  level: 4
+  sizePx: 28
+  color: "#000000"
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/visualization-dashboards/the-open-source-projects-we-use-for-visualization-and-dashboards-01-1024x440.webp"
+        alt: "Image of the Panel logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/visualization-dashboards/the-open-source-projects-we-use-for-visualization-and-dashboards-02-1024x440.webp"
+        alt: "Image of the HoloViews logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/visualization-dashboards/the-open-source-projects-we-use-for-visualization-and-dashboards-05-1024x440.webp"
+        alt: "Image of the Dash logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/visualization-dashboards/the-open-source-projects-we-use-for-visualization-and-dashboards-04-1024x440.webp"
+        alt: "Image of the Streamlit logo"
+        width: 800
+        height: 344
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/visualization-dashboards/the-open-source-projects-we-use-for-visualization-and-dashboards-03-1024x440.webp"
+        alt: "Image of the voilá logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/visualization-dashboards/the-open-source-projects-we-use-for-visualization-and-dashboards-06-1024x440.webp"
+        alt: "Image of the Bokeh logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/visualization-dashboards/the-open-source-projects-we-use-for-visualization-and-dashboards-07-1024x440.webp"
+        alt: "Image of the matplotlib logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/visualization-dashboards/the-open-source-projects-we-use-for-visualization-and-dashboards-08-1024x440.webp"
+        alt: "Image of the Jupyter logo"
+        width: 800
+        height: 344
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "A word from Quansight clients..."
+              level: 3
+              sizePx: 50
+              color: "#ffffff"
+            - type: text
+              html: "<p>“We’ve all learned a lot working with Quansight. They’ve always been professional and a helping hand, even in tough times like during the COVID-19 pandemic.” — Dr. Hugues-Yanis Amanieu, Production Engineering, Leclanche</p>"
+        columnBackgrounds:
+          - "#452392"
+    - - type: image
+        src: "/page-assets/visualization-dashboards/icons-llc-25-2.svg"
+        alt: ""
+        width: 200
+        height: 200
+  columnBackgrounds:
+    - "#452392"
+    - null
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Ready to get better data insights with visualization and dashboards?"
+              level: 4
+              sizePx: 55
+              color: "#452392"
+            - type: text
+              html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\">connect@quansight.com</a><br/><br/></p>"
+        columnBackgrounds:
+          - "#FAFAFF"
+    - - type: columns
+        columns:
+          - - type: image
+              src: "/page-assets/visualization-dashboards/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+        columnBackgrounds:
+          - "#FAFAFF"
+  columnBackgrounds:
+    - "#FAFAFF"
+    - "#FAFAFF"

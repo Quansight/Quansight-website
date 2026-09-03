@@ -1,12 +1,70 @@
 ---
+import BlockRenderer from './BlockRenderer.astro';
+import { ButtonLink } from './ButtonLink';
+import { DataTable } from './DataTable';
 import { Hero } from './Hero';
+import { Icon } from './Icon';
+import { IconBoxGrid } from './IconBoxGrid';
+import { IconList } from './IconList';
+import { ImageBoxGrid } from './ImageBoxGrid';
 import { PageHeading } from './PageHeading';
+import { Placeholder } from './Placeholder';
+import { SocialIcons } from './SocialIcons';
+import { Toggle } from './Toggle';
+import { Video } from './Video';
+
+type Block = Record<string, unknown> & { type: string };
 
 interface Props {
-  block: Record<string, unknown> & { type: string };
+  block: Block;
 }
 
 const { block } = Astro.props;
+
+const PLACEHOLDER_TYPES = new Set([
+  'call-to-action',
+  'form',
+  'price-table',
+  'image-carousel',
+  'testimonial-carousel',
+]);
+
+// Computed here, not inline in the template below -- Astro's template
+// parser can misread TS generics like `Record<string, unknown>[][]` as
+// JSX/HTML tags (the `<` is ambiguous), which breaks the build.
+const columns = block.type === 'columns' ? (block.columns as Block[][]) : [];
+const columnBackgrounds = block.type === 'columns' ? ((block.columnBackgrounds as (string | null)[] | undefined) ?? []) : [];
+// A `columns` block isn't always 2-wide (e.g. a 5-across row of project
+// logos, one per Elementor column). Tailwind needs static class names
+// (no dynamic grid-cols-${n}), hence the explicit map.
+const COLUMNS_GRID_CLASS = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 md:grid-cols-2',
+  3: 'grid-cols-1 sm:grid-cols-3',
+  4: 'grid-cols-2 sm:grid-cols-4',
+  5: 'grid-cols-2 sm:grid-cols-5',
+};
+const columnsGridClass = COLUMNS_GRID_CLASS[columns.length] ?? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4';
+// A `columns` block with just one "column" is really a whole section that
+// carries its own background (see extract_column_background's docstring
+// in convert-pages-consulting.py) -- on the live site that background
+// spans the full viewport width, not just the page's normal content
+// column, so it needs the breakout treatment below instead of the
+// per-column grid rendering used for an actual side-by-side row.
+const soleBackground = columns.length === 1 ? columnBackgrounds[0] : undefined;
+const isFullBleedPanel = !!soleBackground && soleBackground.toUpperCase() !== '#FFFFFF';
+
+// Elementor columns get a background color from a range of live-site
+// values (near-white panels included, e.g. #FAFAFF/#FFFFFF) -- only a
+// genuinely dark one needs its text flipped to white to stay readable.
+function isDarkBackground(hex: string): boolean {
+  const clean = hex.replace('#', '');
+  const r = parseInt(clean.slice(0, 2), 16);
+  const g = parseInt(clean.slice(2, 4), 16);
+  const b = parseInt(clean.slice(4, 6), 16);
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance < 0.5;
+}
 ---
 
 {block.type === 'hero' && (
@@ -23,7 +81,50 @@ const { block } = Astro.props;
     subTitle={block.subTitle as string | undefined}
     variant={(block.variant as 'small' | 'medium' | 'large') ?? 'medium'}
     objectFit={(block.objectFit as 'cover' | 'contain') ?? 'cover'}
+    gradientFrom={block.gradientFrom as string | undefined}
+    gradientTo={block.gradientTo as string | undefined}
+    overlayOpacity={block.overlayOpacity as number | undefined}
   />
+)}
+
+{block.type === 'columns' && isFullBleedPanel && (
+  <div class="relative left-1/2 right-1/2 w-screen -mx-[50vw]" style={`background-color:${soleBackground}`}>
+    <div
+      class={`flex flex-col justify-center max-w-layout mx-auto p-[4%] max-[765px]:pt-[14%] max-[765px]:pb-[14%] max-[765px]:pl-[8%] max-[765px]:pr-[8%] ${
+        isDarkBackground(soleBackground as string) ? '[&_.text-violet]:!text-white [&_.text-black]:!text-white' : ''
+      }`}
+    >
+      {columns[0].map((childBlock) => (
+        <BlockRenderer block={childBlock} />
+      ))}
+    </div>
+  </div>
+)}
+
+{block.type === 'columns' && !isFullBleedPanel && (
+  <div class={`grid ${columnsGridClass} gap-[3rem] max-w-layout mx-auto w-full`}>
+    {columns.map((column, i) => {
+      const rawBackground = columnBackgrounds[i];
+      // Plain white is indistinguishable from the page's own background --
+      // Elementor still writes it as a "configured" background, but
+      // treating it as a real panel adds padding/whitespace with nothing
+      // visible to justify it.
+      const backgroundColor = rawBackground && rawBackground.toUpperCase() !== '#FFFFFF' ? rawBackground : undefined;
+      const needsLightText = backgroundColor && isDarkBackground(backgroundColor);
+      return (
+        <div
+          class={`flex flex-col gap-[1.5rem] h-full ${backgroundColor ? 'p-[3rem] lg:p-[6rem]' : ''} ${
+            needsLightText ? '[&_.text-violet]:!text-white [&_.text-black]:!text-white' : ''
+          }`}
+          style={backgroundColor ? `background-color:${backgroundColor}` : undefined}
+        >
+          {column.map((childBlock) => (
+            <BlockRenderer block={childBlock} />
+          ))}
+        </div>
+      );
+    })}
+  </div>
 )}
 
 {block.type === 'page-heading' && (
@@ -31,4 +132,145 @@ const { block } = Astro.props;
     title={block.title as string}
     description={block.description as string | undefined}
   />
+)}
+
+{block.type === 'heading' && (() => {
+  const level = Math.max(2, Math.min(6, (block.level as number) ?? 2));
+  const Tag = `h${level}` as 'h2';
+  // WP/Elementor sizes headings per-widget via its own generated CSS, with
+  // no correlation to semantic h1-h6 level -- convert-pages-consulting.py
+  // live-fetches that CSS and records the real size as `sizePx` per
+  // heading. This scale is only the fallback for when that isn't set.
+  const SIZE_BY_LEVEL = {
+    2: 'text-[3.6rem] leading-[4.2rem]',
+    3: 'text-[3rem] leading-[3.6rem]',
+    4: 'text-[2.4rem] leading-[3rem]',
+    5: 'text-[2rem] leading-[2.6rem]',
+    6: 'text-[1.8rem] leading-[2.4rem]',
+  };
+  const sizePx = block.sizePx as number | undefined;
+  // WP/Elementor colors headings per-widget too -- most default to the
+  // site's violet, but some are explicitly set to another brand color
+  // (e.g. pink, to match a nearby accent). Known brand hexes map to their
+  // existing Tailwind token so they stay consistent with the rest of the
+  // site; an unrecognized hex falls back to an inline color instead of
+  // guessing which token it was meant to be.
+  const color = block.color as string | undefined;
+  const COLOR_CLASS = {
+    '#452391': 'text-violet',
+    '#452392': 'text-violet',
+    '#452393': 'text-violet',
+    '#FFFFFF': 'text-white',
+    '#A43A8F': 'text-pink',
+    '#000000': 'text-black',
+  };
+  const colorClass = COLOR_CLASS[(color ?? '').toUpperCase()] ?? (color ? '' : 'text-violet');
+  // the 62.5%-root trick makes 1rem == 10px sitewide -- see BaseLayout.astro
+  const styleParts = [
+    sizePx ? `font-size:${sizePx / 10}rem;line-height:1.2` : '',
+    !colorClass && color ? `color:${color}` : '',
+  ].filter(Boolean);
+  const style = styleParts.length ? styleParts.join(';') : undefined;
+  return (
+    <div class="max-w-layout mx-auto w-full">
+      <Tag
+        class={`my-[2rem] font-extrabold font-heading ${colorClass} ${sizePx ? '' : SIZE_BY_LEVEL[level]}`}
+        style={style}
+      >
+        {block.text as string}
+      </Tag>
+    </div>
+  );
+})()}
+
+{block.type === 'text' && (
+  <div
+    class="max-w-layout mx-auto w-full text-[1.6rem] leading-[2.7rem] text-black [&_a]:text-violet [&_a]:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem]"
+    set:html={block.html as string}
+  />
+)}
+
+{block.type === 'image' && (
+  <img
+    src={block.src as string}
+    alt={(block.alt as string) ?? ''}
+    width={block.width as number | undefined}
+    height={block.height as number | undefined}
+    class="max-w-full h-auto mx-auto"
+  />
+)}
+
+{block.type === 'button' && (
+  <div
+    class={
+      block.align === 'center' ? 'flex justify-center' :
+      block.align === 'right' ? 'flex justify-end' :
+      undefined
+    }
+  >
+    <ButtonLink
+      url={block.url as string}
+      text={block.text as string}
+      color={(block.color as 'violet' | 'white' | 'pink') ?? 'violet'}
+      isFull={(block.isFull as boolean) ?? true}
+      isBordered={block.isBordered as boolean | undefined}
+      isTriangle={block.isTriangle as boolean | undefined}
+    />
+  </div>
+)}
+
+{block.type === 'icon' && (
+  <Icon svg={block.svg as string} />
+)}
+
+{block.type === 'icon-box-grid' && (
+  <IconBoxGrid
+    items={
+      (block.items as { title?: string; description?: string; icon?: string; divider?: boolean }[]) ?? []
+    }
+  />
+)}
+
+{block.type === 'icon-list' && (
+  <IconList items={(block.items as string[]) ?? []} />
+)}
+
+{block.type === 'image-box-grid' && (
+  <ImageBoxGrid
+    items={
+      (block.items as {
+        image: string;
+        imageAlt: string;
+        description?: string;
+        layout?: 'column' | 'row' | 'row-reverse';
+      }[]) ?? []
+    }
+  />
+)}
+
+{block.type === 'social-icons' && (
+  <SocialIcons
+    links={
+      (block.links as { text: string; href: string; icon: string; iconAlt: string }[]) ?? []
+    }
+  />
+)}
+
+{block.type === 'video' && (
+  <Video url={block.url as string} />
+)}
+
+{block.type === 'toggle' && (
+  <Toggle items={(block.items as { title: string; content: string }[]) ?? []} />
+)}
+
+{block.type === 'table' && (
+  <DataTable
+    headers={(block.headers as string[]) ?? []}
+    rows={(block.rows as string[][]) ?? []}
+  />
+)}
+
+{PLACEHOLDER_TYPES.has(block.type) && (
+  <Placeholder widget={block.type} note={block.note as string | undefined} />
 )}

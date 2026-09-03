@@ -1,0 +1,56 @@
+slug: supply-chain-security
+title: "Supply Chain Security"
+description: "Supply Chain Security Produce and consume open source software that you can trust. Quansight provides expert advice and know-how in all areas of packaging and runtime provisioning, including the increasingly important aspects of supply chain security. Whether you are interested in enhancing the security of existing open source ecosystems and tools or developing new tooling […]"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/supply-chain-security/Hero-Background-6.jpg"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Supply Chain Security"
+- type: heading
+  text: "Produce and consume open source software that you can trust."
+  level: 2
+  sizePx: 22
+  color: "#FFFFFF"
+- type: text
+  html: "<p><span style=\"font-weight: 400;\">Quansight provides expert advice and know-how in all areas of packaging and runtime provisioning, including the increasingly important aspects of supply chain security. Whether you are interested in enhancing the security of existing open source ecosystems and tools or developing new tooling and packages, we have the expertise, skills, processes, and tools to help you secure your supply chain.<br/><br/></span></p><p><span style=\"color: #442391;\"><strong>Our Supply Chain Security Services</strong></span></p><p><span style=\"font-weight: 400;\">We have a proven track record of helping our clients assess, evaluate and improve their pipelines to adhere to best practices in supply chain security. When done well, achieving a robust, secure, reproducible runtime does not have to be restrictive or burdensome.</span></p><p><span style=\"font-weight: 400;\">Whatever you need to secure your supply chain, we can help with:<br/></span></p><ul>\n<li aria-level=\"1\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Security audit and assessments:</span>\n<ul>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Audit the provisioning pipelines of your runtime contexts.</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Review your software publication pipelines: overprovisioned permissions, secret management, authentication approaches.</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Create and provide SBOMs for the software elements in use.</span></li>\n<li><span style=\"font-weight: 400;\">Enumerate all the dependencies involved in your runtime environment, and their provenance.</span></li>\n<li><span style=\"font-weight: 400;\"><span style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Scan for vulnerabilities in your dependency tree.</span></span></span>\n<p></p>\n</li>\n</ul>\n</li>\n<li aria-level=\"1\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Vulnerability remediation and secure development practices:</span>\n<ul>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Implement best practices for supply chain security, from package management to build and distribution.</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Introduce reproducible and secure workflows using lockfiles adapted to your needs.</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Redesigning and refactoring code to address security vulnerabilities.</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Creating and maintaining airgapped environments, private repositories, and commercial provider integrations.</span></span>\n<p></p>\n</li>\n</ul>\n</li>\n</ul><ul>\n<li aria-level=\"1\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Compliance: Working towards conformance with standards and regulations like the US Executive Order 14028 and the EU’s Cyber Resilience Act.</span></li>\n</ul><p><span style=\"font-weight: 400;\"><span style=\"font-weight: 400;\"> </span></span></p><ul>\n<li aria-level=\"1\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Training: Best practices workshops around supply chain security for your teams and processes.</span></li>\n</ul>"
+- type: heading
+  text: "Custom Solutions"
+  level: 2
+  sizePx: 40
+  color: "#452392"
+- type: text
+  html: "<p style=\"text-align: center;\"><span style=\"font-weight: 400;\">Not seeing your exact need? Quansight can partner with you to design a </span><b>customized supply chain security strategy</b><span style=\"font-weight: 400;\"> tailored to your organization’s challenges and ecosystem.</span></p>"
+- type: button
+  url: "https://quansight.com/about-us/#bookacallform"
+  text: "Contact Us"
+  isFull: false
+  isBordered: false
+  isTriangle: true
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Get in Touch"
+              level: 2
+              sizePx: 40
+              color: "#452392"
+            - type: text
+              html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? We’d love to hear from you.\t\t\t\t\t\t\t\t</p>"
+            - type: button
+              url: "https://quansight.com/about-us/#bookacallform"
+              text: "Contact Us"
+              isFull: false
+              isBordered: false
+              isTriangle: true
+          - - type: image
+              src: "/page-assets/supply-chain-security/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+  columnBackgrounds:
+    - "#F3F5F8"

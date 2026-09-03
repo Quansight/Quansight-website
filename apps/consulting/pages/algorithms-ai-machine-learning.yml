@@ -1,0 +1,182 @@
+slug: algorithms-ai-machine-learning
+title: "Algorithms, AI, & Machine Learning"
+description: "Algorithms, AI, & Machine Learning Build and deploy custom algorithms and predictive models. Whether you need help building a data science program from scratch or"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/algorithms-ai-machine-learning/Hero-Background-6.png"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Algorithms, AI, & Machine Learning"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Build and deploy custom   algorithms and predictive  models."
+        level: 4
+        sizePx: 40
+        color: "#452392"
+    - - type: text
+        html: "<p>Whether you need help building a data science program from scratch or assistance with a particular problem, Quansight has experts in machine learning and other statistical modeling fields who can build high-quality solutions to tackle your company’s most unique and challenging problems. Our team includes contributors and maintainers of numerous data science tools—including NumPy, PyTorch, and scikit-learn—giving us unparalleled knowledge for building robust, efficient, and fast algorithms.</p>"
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/icons-llc-22-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Time Series Forecasting"
+            description: "Predict future values in finance, medicine, weather, and more. Anticipate failures of systems or machines and take action."
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/icons-llc-23-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Probabilistic Programming"
+            description: "Develop interpretable models guided by subject matter expertise. Harness uncertainty from model predictions for more confident decision-making."
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/icons-llc-25-3.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Reinforcement Learning"
+            description: "Build models to automate processes and optimize policies across many domains. Create autonomous control of vehicles, aircrafts, and robots."
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Algorithms, AI, & Machine Learning"
+              level: 3
+              sizePx: 50
+              color: "#ffffff"
+            - type: text
+              html: "<p>\n\t\t\t\t\t\t\t\t\tAll the data in the world can only provide you useful insights if you have the expertise and tools to analyze and model it.\t\t\t\t\t\t\t\t</p>"
+            - type: button
+              url: "#bookacallform"
+              text: "I'm interested"
+              isFull: false
+              isBordered: false
+              isTriangle: true
+        columnBackgrounds:
+          - "#452392"
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/icons-llc-28-1.svg"
+        alt: ""
+        width: 768
+        height: 1
+  columnBackgrounds:
+    - "#452392"
+    - null
+- type: heading
+  text: "Some of the Open Source Projects We Use for  Algorithms, AI, & Machine Learning"
+  level: 4
+  sizePx: 28
+  color: "#000000"
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/the-open-source-projects-we-use-for-algorithms-ai-machine-learning-01-1024x440.webp"
+        alt: "Image of the PyMC logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/the-open-source-projects-we-use-for-algorithms-ai-machine-learning-02-1024x440.webp"
+        alt: "Image of the statsmodel logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/trusted-by-open-source-maintainers-and-contributors-07-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/trusted-by-open-source-maintainers-and-contributors-02-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/trusted-by-open-source-maintainers-and-contributors-04-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/the-open-source-projects-we-use-for-infrastructure-scaling-acceleration-01-1-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/trusted-by-open-source-maintainers-and-contributors-06-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/the-open-source-projects-we-use-for-jupyter-jupyterhub-04-1024x440.webp"
+        alt: "Image of the Jupyter Lab logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/trusted-by-open-source-maintainers-and-contributors-05-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/the-open-source-projects-we-use-for-algorithms-ai-machine-learning-04-1024x440.webp"
+        alt: "Image of the SciPy logo"
+        width: 800
+        height: 344
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "A word from Quansight clients..."
+              level: 3
+              sizePx: 50
+              color: "#ffffff"
+            - type: text
+              html: "<p>“It became immediately apparent at how knowledgeable the workforce is at Quansight. They are leaders in their field of AI, machine learning, and reinforcement learning, and take pride in their work. Their vast knowledge paired with their responsiveness and dedication made working with them a smart choice and pleasurable experience.” — Current Client, US Army DEVCOM</p>"
+        columnBackgrounds:
+          - "#452392"
+    - - type: image
+        src: "/page-assets/algorithms-ai-machine-learning/icons-llc-25-2.svg"
+        alt: ""
+        width: 200
+        height: 200
+  columnBackgrounds:
+    - "#452392"
+    - null
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Ready to take your data to the next level?"
+              level: 4
+              sizePx: 55
+              color: "#452392"
+            - type: text
+              html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\">connect@quansight.com</a></p>"
+        columnBackgrounds:
+          - "#FAFAFF"
+    - - type: columns
+        columns:
+          - - type: image
+              src: "/page-assets/algorithms-ai-machine-learning/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+        columnBackgrounds:
+          - "#FAFAFF"
+  columnBackgrounds:
+    - "#FAFAFF"
+    - "#FAFAFF"

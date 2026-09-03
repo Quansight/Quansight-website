@@ -1,0 +1,214 @@
+slug: getting-started-with-ai
+title: "Getting Started With AI"
+description: "Getting Started With AI From proof of concept to a comprehensive AI transformation, Quansight offers unmatched expert support for every stage of the AI journey. Get in Touch Are you ready to accelerate your AI capabilities and explore how the latest technologies can be incorporated into your business? Are you already using AI but not […]"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/getting-started-with-ai/Getting-Started-With-AI-03.jpg"
+  imageAlt: ""
+  overlayOpacity: 0.32
+  title: "Getting Started With AI"
+- type: text
+  html: "<p><span style=\"font-weight: 400;\">From proof of concept to a comprehensive AI transformation, Quansight offers unmatched expert support for every stage of the AI journey.</span></p>"
+- type: button
+  url: "https://quansight.com/about-us/#bookacallform"
+  text: "Get in Touch"
+  isFull: false
+  isBordered: false
+  isTriangle: true
+  align: "center"
+- type: text
+  html: "<p>\n\t\t\t\t\t\t\t\t\tAre you ready to accelerate your AI capabilities and explore how the latest technologies can be incorporated into your business? Are you already using AI but not convinced you’re reaping all of its benefits?\n\t\t\t\t\t\t\t\t</p>"
+- type: text
+  html: "<p>\n\t\t\t\t\t\t\t\t\tAs artificial intelligence continues to shape our world, organizations are eager to understand and utilize its growing potential. However, translating groundbreaking research and technical prototypes into AI solutions that deliver tangible business value remains a considerable challenge.\t\t\t\t\t\t\t\t</p>"
+- type: heading
+  text: "If you are interested in:"
+  level: 2
+  sizePx: 40
+  color: "#963895"
+- type: columns
+  columns:
+    - - type: icon-box-grid
+        items:
+          - description: "Training specialized large language models (LLMs) on internal datasets"
+            icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
+    - - type: icon-box-grid
+        items:
+          - description: "Exploring advanced LLMs but don’t want to hand over sensitive data"
+            icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
+    - - type: icon-box-grid
+        items:
+          - description: "Employing use cases of Generative AI to improve business practices"
+            icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
+- type: columns
+  columns:
+    - - type: icon-box-grid
+        items:
+          - description: "Leveraging low code/no code techniques to provide non-technical staff new capabilities"
+            icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
+    - - type: icon-box-grid
+        items:
+          - description: "Building strategies and tooling for moving R&D efforts into production"
+            icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
+- type: heading
+  text: "Then you’re in the right place"
+  level: 3
+  sizePx: 40
+  color: "#963895"
+- type: text
+  html: "<p>AI is <a href=\"https://quansight.com/post/generative-ai-made-possible-by-a-mountain-of-open-source/\" rel=\"noopener\" target=\"_blank\">built on a foundation of extensive open source innovation</a>. With Quansight’s deep roots in these foundations of scientific computing, we’re uniquely positioned to navigate the complexities of bringing sophisticated AI models from concept to deployment. Our <a href=\"https://quansight.com/ai-engineering/\">AI engineering</a> solutions offer the necessary infrastructure, sustainable practices, and integration expertise to turn theoretical advancements into impactful, scalable systems across your organization.</p>"
+- type: text
+  html: "<p>Whether you’re considering a limited proof of concept (POC) or ready for a full-scale AI transformation, Quansight has the engineers and expertise to make it happen. <strong>With us, you can expect</strong>:</p>"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Total Control and Customization"
+        level: 3
+        sizePx: 22
+        color: "#963895"
+      - type: text
+        html: "<p>Expect full control over your AI deployment. <a href=\"https://www.nebari.dev/\">Nebari</a>, a Quansight-incubated open source project, with expert support, illustrates what is possible. Choose your infrastructure, customize pipelines, and ensure data privacy.</p>"
+    - - type: heading
+        text: "Privacy-Focused AI Innovation"
+        level: 3
+        sizePx: 22
+        color: "#963895"
+      - type: text
+        html: "<p>Streamline your AI strategy with open source experts. You can keep your data secure on your systems while leveraging state-of-the-art models like Llama 3.1 (or Mistral)—all without relying on third-party vendors.</p>"
+    - - type: heading
+        text: "Comprehensive AI Solutions"
+        level: 3
+        sizePx: 22
+        color: "#963895"
+      - type: text
+        html: "<p>\n\t\t\t\t\t\t\t\t\tBuild a complete AI ecosystem alongside Quansight experts with flexible infrastructure like Nebari and expert DevOps support. \n\t\t\t\t\t\t\t\t</p>"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Scalable Infrastructure"
+        level: 3
+        sizePx: 22
+        color: "#963895"
+      - type: text
+        html: "<p><span style=\"font-weight: 400;\">Utilize Quansight-incubated open source projects—Nebari and Nebari-Slurm—to optimize resource management, seamlessly integrate with JupyterHub, and unlock the full potential of your AI workloads. This flexible infrastructure empowers you to switch between cloud providers or utilize on-premises hardware with ease.</span></p>"
+    - - type: heading
+        text: "AI Lifecycle Management"
+        level: 3
+        sizePx: 22
+        color: "#963895"
+      - type: text
+        html: "<p>\n\t\t\t\t\t\t\t\t\tControl every stage of the AI lifecycle. From data preparation and model pre-training to post-training optimization and deployment, our DevOps support ensures smooth, efficient operations. Build, train, and deploy AI models using your systems or we can deploy Nebari and Nebari-Slurm for your benefit.\t\t\t\t\t\t\t\t</p>"
+    - - type: heading
+        text: "Open Source Advantage"
+        level: 3
+        sizePx: 22
+        color: "#963895"
+      - type: text
+        html: "<p>\n\t\t\t\t\t\t\t\t\tWith our long-standing position and reputation within the community, we bridge the gap between businesses and the open source community. By aligning our community expertise with your business needs, we’ll develop an AI transformation strategy unique to you. \n\t\t\t\t\t\t\t\t</p>"
+- type: heading
+  text: "Supporting AI Excellence"
+  level: 2
+  sizePx: 40
+  color: "#452392"
+- type: text
+  html: "<p>\n\t\t\t\t\t\t\t\t\tQuansight-incubated open source projects:\t\t\t\t\t\t\t\t</p>"
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/getting-started-with-ai/Ragna-Logo-Horizontal-Lockup-1024x301.png"
+        alt: ""
+        width: 800
+        height: 235
+      - type: icon-box-grid
+        items:
+          - description: "Ragna is an open source RAG-based AI orchestration framework designed to scale from research to production."
+    - - type: image
+        src: "/page-assets/getting-started-with-ai/Nebari-Logo-Horizontal-Lockup-1024x301.png"
+        alt: "Nebari logo with black font and a colorful tree."
+        width: 800
+        height: 235
+      - type: icon-box-grid
+        items:
+          - description: "Now community-led, Nebari is a customizable, open source enterprise data science and MLOps platform."
+    - - type: image
+        src: "/page-assets/getting-started-with-ai/conda-store-Logo-Horizontal-Lockup-1024x301.png"
+        alt: ""
+        width: 800
+        height: 235
+      - type: icon-box-grid
+        items:
+          - description: "conda-store is an open source tool created to better manage data science environments for teams."
+- type: image
+  src: "/page-assets/getting-started-with-ai/Jupyter-logo.png"
+  alt: "Jupyter logo"
+  width: 1024
+  height: 1024
+- type: heading
+  text: "Jupyter AI Expertise"
+  level: 2
+  sizePx: 40
+  color: "#452392"
+- type: text
+  html: "<p><span style=\"font-weight: 400;\">Quansight’s expertise extends to <a href=\"https://github.com/jupyterlab/jupyter-ai\" rel=\"noopener\" target=\"_blank\">Jupyter AI</a> which brings generative AI directly to <a href=\"https://quansight.com/jupyter-technologies/\">Jupyter</a> notebooks. With regular contributors to Jupyter AI on our team, we’re equipped to help your organization adopt and leverage its powerful capabilities. It integrates seamlessly with popular LLMs like those from AI21, OpenAI, Anthropic, and others, while ensuring full control over your data privacy. </span></p>"
+- type: heading
+  text: "Meet Some of Our Experts"
+  level: 2
+  sizePx: 40
+- type: text
+  html: "<p>Our technical staff are also contributors and maintainers of core PyData projects, including NumPy, PyTorch, SciPy, Jupyter, Nebari, Napari, Dask, conda, and Numba.​ </p>"
+- type: text
+  html: "<p><a href=\"https://labs.quansight.org/team\" rel=\"noopener\" target=\"_blank\">Check out the Quansight Labs Team page to learn more.</a></p>"
+- type: text
+  html: "<p><strong>Travis Oliphant</strong>, NumPy, SciPy, and Numba Creator<br/><strong>Tania Allard</strong>, JLab Accessibility project creator, PSF board vice chair, Jupyter Distinguished Contributor<br/><strong>Dharhas Pothina</strong>, Nebari &amp; Conda Store Creator, Holoviz Steering Committee<br/><strong>Ralf Gommers</strong>, SciPy/NumPy Maintainer, Array API Standard Creator, pypackaging-native Author<br/><strong>Pearu Peterson</strong>, SciPy Creator &amp; f2py Author<br/><strong>Andrew James</strong>, PyTorch Core Developer, torch.sparse Author<br/><strong>Isuru Fernando</strong>, Conda-forge Maintainer &amp; Member of Steering Committee<br/><strong>Victor Fomin</strong>, PyTorch Core Developer, PyTorch Ignite Project Lead<br/><strong>Nathan Goldbaum</strong>, Senior NumPy developer<br/><strong>Jaime Rodríguez-Guerra</strong>, Conda-forge Maintainer &amp; Steering Committee Member</p>"
+- type: heading
+  text: "Quansight Engagement Models"
+  level: 2
+  sizePx: 40
+  color: "#452392"
+- type: text
+  html: "<p>\n\t\t\t\t\t\t\t\t\tWe offer three tailored engagement models designed to meet you where you are in your AI journey:\t\t\t\t\t\t\t\t</p>"
+- type: columns
+  columns:
+    - - type: price-table
+        note: "AI Proof of Concept"
+      - type: text
+        html: "<p>This engagement is ideal for companies just beginning to explore AI. It focuses on setting up a proof of concept, allowing you to experiment with AI tools on a small scale and providing initial insights for future AI projects.<br/><br/></p>"
+    - - type: price-table
+        note: "AI Starter Project"
+      - type: text
+        html: "<p>For businesses ready to dive deeper, this tier explores specific AI use cases aligned with your business objectives. It includes training AI models on your internal data, developing prototype low-code/no-code interfaces, and providing strategic recommendations for scaling AI initiatives.</p>"
+    - - type: price-table
+        note: "AI Transformation Project"
+      - type: text
+        html: "<p>\n\t\t\t\t\t\t\t\t\tDesigned for businesses ready to integrate AI into their core operations, this comprehensive package focuses on building or enhancing your robust R&amp;D platform, developing intelligent AI-workflows or embedding AI capability into your applications, and setting the foundation for ongoing AI transformation.\n\t\t\t\t\t\t\t\t</p>"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: heading
+                    text: "Get in Touch"
+                    level: 4
+                    sizePx: 55
+                    color: "#452392"
+                  - type: form
+                    note: "Consulting Overview Contact Form"
+              columnBackgrounds:
+                - "#FAFAFF"
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/getting-started-with-ai/Quansight-contact-02-02-02-1-1.svg"
+                    alt: ""
+                    width: 1122
+                    height: 889
+              columnBackgrounds:
+                - "#FAFAFF"
+        columnBackgrounds:
+          - "#FAFAFF"
+          - "#FAFAFF"
+  columnBackgrounds:
+    - "#FAFAFF"

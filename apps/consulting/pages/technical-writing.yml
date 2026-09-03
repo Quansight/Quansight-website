@@ -1,0 +1,54 @@
+slug: technical-writing
+title: "Technical Writing"
+description: "Technical Writing Create documentation that developers love to read, and teams love to maintain. Quansight’s expert technical writers, developer relations, and developer experience engineers partner with your engineering and product teams to develop a targeted documentation strategy, high-quality content, and maintainable infrastructure. With experience working on dozens of documentation projects including open source software documentation […]"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/technical-writing/Hero-Background-6.jpg"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Technical Writing"
+- type: heading
+  text: "Create documentation that developers love to read, and teams love to maintain."
+  level: 2
+  sizePx: 22
+  color: "#FFFFFF"
+- type: text
+  html: "<p><span style=\"font-weight: 400;\">Quansight’s expert technical writers, developer relations, and developer experience engineers partner with your engineering and product teams to develop a targeted documentation strategy, high-quality content, and maintainable infrastructure. With experience working on dozens of documentation projects including open source software documentation for NumPy, SciPy, Jupyter, and conda-forge, our services follow the highest tried-and-tested standards for software documentation.</span></p>"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Structured, scalable documentation strategies that ensure accuracy, usability, and long-term maintainability."
+        level: 2
+        sizePx: 35
+        color: "#A43A8F"
+  columnBackgrounds:
+    - "#F3F5F8"
+- type: text
+  html: "<ul>\n<li aria-level=\"1\" style=\"font-weight: 400;\"><strong>Technical</strong><b> content development</b>\n<ul>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Authoring user guides, developer guides, reference and architecture documentation, interactive tutorials and examples, as well as open source community and governance documentation.</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Ensuring clarity, consistency, accessibility, and accuracy across all the documentation resources.</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\"><span style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Structuring documentation for readability with concise pages, adequate cross-references, and intuitive navigation paths.</span></span></span></li>\n</ul>\n</li>\n<li aria-level=\"1\" style=\"\"><b style=\"\">Documentation infrastructure setup</b>\n<ul style=\"\">\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Selecting and setting up a documentation software framework and hosting medium that suits your team’s skillset and workflows.</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Implementing docs-as-code practices with continuous integration and deployment (CI/CD), versioning, and documentation previews.</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Including tests for checking spelling, language, and links, and executing embedded code snippets.</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Auto-generating API references, and optional support for interactive (i.e., executable) documentation, and translations for broader reach.</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\"><span style=\"font-weight: 400;\"><span style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Ensuring maintainability at every stage and documenting the infrastructure setup.</span></span></span></span></li><li aria-level=\"2\" style=\"\">Integrating AI-powered search and configurations for agentic access to documentation.</li>\n</ul>\n</li>\n<li aria-level=\"1\" style=\"font-weight: 400;\"><b><b>Documentation site and content audit</b></b>\n<ul>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Reviewing the information architecture, scalability, and maintainability of your content and infrastructure.</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Delivering a concrete assessment along with a proposal for improvements.</span></span></li>\n</ul>\n</li>\n<li aria-level=\"1\" style=\"font-weight: 400;\"><b>Themes and plugins</b>\n<ul>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Designing and developing custom themes for the documentation website that align with your brand</span></li>\n<li aria-level=\"2\" style=\"font-weight: 400;\"><span style=\"font-weight: 400;\"><span style=\"font-weight: 400;\"><span style=\"font-weight: 400;\">Developing software-specific plugins, for example to render plots or outputs within the documentation.</span></span></span></li>\n</ul>\n</li>\n<li><strong>Strategy and training</strong>\n<ul>\n<li><span style=\"font-weight: 400;\">Working with your team on a strategy and workflows that enables regular updates and organic growth of your documentation.</span></li>\n</ul>\n</li>\n</ul>"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Get in Touch"
+              level: 2
+              sizePx: 40
+              color: "#452392"
+            - type: text
+              html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? We’d love to hear from you.\t\t\t\t\t\t\t\t</p>"
+            - type: button
+              url: "https://quansight.com/about-us/#bookacallform"
+              text: "Contact Us"
+              isFull: false
+              isBordered: false
+              isTriangle: true
+          - - type: image
+              src: "/page-assets/technical-writing/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+  columnBackgrounds:
+    - "#F3F5F8"
