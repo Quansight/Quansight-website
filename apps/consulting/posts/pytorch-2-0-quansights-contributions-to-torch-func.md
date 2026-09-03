@@ -14,13 +14,13 @@ hero:
 
 _See our recent enhancements to the `torch.func` module of the PyTorch codebase_
 
-Over the years, we’ve had the privilege of collaborating closely with the Meta team to contribute features to PyTorch, including a significant number of features added in PyTorch 2.0—see our [2022 PyTorch contributions blog post](https://quansight.com/post/a-year-in-review-quansights-contributions-to-pytorch-in-2022/).
+Over the years, we’ve had the privilege of collaborating closely with the Meta team to contribute features to PyTorch, including a significant number of features added in PyTorch 2.0—see our [2022 PyTorch contributions blog post](/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2022).
 
 In this post, we’ll go into deeper technical detail on some of our contributions to a specific portion of the PyTorch codebase, the `torch.func` module. As with all of our work on PyTorch, everything described here was a collaboration between Quansight and Meta.
 
 `torch.func` (previously known as `functorch`) is a PyTorch module designed to offer [JAX](https://jax.readthedocs.io/en/latest/index.html)-like transforms. Within this module, various higher-order functions, such as `grad`, `vmap`, and `vjp` are made accessible. These transforms help users to easily compute gradients for the parameters of their model or write batch-size agnostic code. The beauty of these transformations lies in their ability to compose with one another. Thanks to this composability, the process of calculating per-sample gradients becomes a straightforward nested function call: `vmap(grad(model))`.
 
-**Note**: We offer PyTorch support as part of our consulting services offerings, so if you’re working with PyTorch and could use some assistance, please take a look at our [PyTorch Services page](https://quansight.com/pytorch-services/).
+**Note**: We offer PyTorch support as part of our consulting services offerings, so if you’re working with PyTorch and could use some assistance, please take a look at our [PyTorch Services page](/pytorch-services).
 
 Now let’s dive in.
 
@@ -220,6 +220,6 @@ Looking ahead, our roadmap aims to extend the support for all transforms with mi
 
 This project was yet another instance of the tight collaboration between Quansight and Meta within PyTorch. In particular, we would like to thank Richard Zou and Horace He, the `torch.func` creators, for all the design discussions and guidance throughout these years.
 
-As we noted above, in addition to working directly on PyTorch, Quansight also offers support services to assist you with your use of PyTorch. Check out our [PyTorch Support page](https://quansight.com/pytorch-services/) or reach out to us for more information.
+As we noted above, in addition to working directly on PyTorch, Quansight also offers support services to assist you with your use of PyTorch. Check out our [PyTorch Support page](/pytorch-services) or reach out to us for more information.
 
-[Contact Us](https://quansight.com/pytorch-services/#bookacallform)
+[Contact Us](/pytorch-services#bookacallform)

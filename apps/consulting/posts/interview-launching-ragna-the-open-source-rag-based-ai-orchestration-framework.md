@@ -16,7 +16,7 @@ Join us in a chat with Philip Meier, one of the core Ragna developers, as we del
 
 ![Image of Philip Meier, a core developer of Ragna](/posts/interview-launching-ragna-the-open-source-rag-based-ai-orchestration-framework/Philip-Meier-final-qf2ozx2vd0g1f7o2ab0snux69yo3odhjokimf69dgc.png)
 
-Quansight [recently announced](https://quansight.com/post/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production/) the release of [Ragna](https://ragna.chat/en/stable/), a new open source project that allows organizations to explore the power of Retrieval-Augmented Generation (RAG) based AI tools.
+Quansight [recently announced](/blog/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production) the release of [Ragna](https://ragna.chat/en/stable/), a new open source project that allows organizations to explore the power of Retrieval-Augmented Generation (RAG) based AI tools.
 
 With an easy-to-use API for experimenting and built-in tools for crafting production-ready applications, Ragna can easily streamline the integration of [Large Language Models (LLMs)](https://en.wikipedia.org/wiki/Large_language_model) into your workflow.
 
@@ -56,11 +56,11 @@ Yeah, so that’s a crazy story. So, as I mentioned earlier, this year I started
 
 After the project ended, I spoke with a few colleagues in a group chat and said, “There’s no real business logic here; it’s all about orchestrating. Why isn’t there something like this in the ecosystem?”
 
-They suggested I pitch it to Dharhas [Pothina], Quansight’s [CTO](https://quansight.com/about-us/), but due to scheduling, I wasn’t able to meet with him for over a week…but I was hooked on the idea and I started working on it outside of my regular work hours.
+They suggested I pitch it to Dharhas [Pothina], Quansight’s [CTO](/about-us), but due to scheduling, I wasn’t able to meet with him for over a week…but I was hooked on the idea and I started working on it outside of my regular work hours.
 
 By the time I finally talked to Dharhas, I had a substantial part of what I wanted to achieve already done. Looking back, I realize it was just a small piece of what Ragna has become.
 
-I pitched the idea to Dharhas, and he liked it, but he said, “We need to get Travis [Oliphant], Quansight’s [CEO,](https://quansight.com/about-us/) on board so we can authorize budget.” He told me to prepare some slides to explain the vision of Ragna.
+I pitched the idea to Dharhas, and he liked it, but he said, “We need to get Travis [Oliphant], Quansight’s [CEO,](/about-us) on board so we can authorize budget.” He told me to prepare some slides to explain the vision of Ragna.
 
 I went to bed that night feeling pretty good about the whole thing. I’d put in some work and now it had potential.
 
@@ -135,6 +135,6 @@ We’d love to hear your [thoughts and feedback](https://github.com/Quansight/ra
 
 ## Exploring Generative AI? We Can Help.
 
-If you’re using or just getting started with generative AI and need help building and deploying capabilities across your organization, Quansight can help. See our [LLM Services](https://quansight.com/llm-services/) for more information or get in touch with the button below.
+If you’re using or just getting started with generative AI and need help building and deploying capabilities across your organization, Quansight can help. See our [LLM Services](/llm-services) for more information or get in touch with the button below.
 
-[Contact Us](https://quansight.com/llm-services/#bookacallform)
+[Contact Us](/llm-services#bookacallform)

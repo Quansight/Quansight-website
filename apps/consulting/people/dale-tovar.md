@@ -3,6 +3,6 @@ firstName: 'Dale'
 lastName: 'Tovar'
 role: 'author'
 displayName: 'full'
-image: '/nebari-services/quansight-logo.svg'
+image: '/images/people/dale-tovar.webp'
 imageAlt: 'Dale Tovar'
 ---

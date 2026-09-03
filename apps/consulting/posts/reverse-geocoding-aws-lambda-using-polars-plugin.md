@@ -111,6 +111,6 @@ That’s the power of lazy execution and Rust. If you, too, would like custom Ru
 
 ## What We Can Do for You
 
-By leveraging both open source datasets and open source tools, as well as our in-house expertise, we were able to save our client time and money on their geocoding and reverse-geocoding needs. We made the infeasible feasible. If you’d like customized solutions tailored to your business needs, delivered by open source experts, please [get in contact with Quansight](https://quansight.com/open-source-services/) today.
+By leveraging both open source datasets and open source tools, as well as our in-house expertise, we were able to save our client time and money on their geocoding and reverse-geocoding needs. We made the infeasible feasible. If you’d like customized solutions tailored to your business needs, delivered by open source experts, please [get in contact with Quansight](/open-source-services) today.
 
 Contact us today: [connect@quansight.com](mailto:connect@quansight.com)

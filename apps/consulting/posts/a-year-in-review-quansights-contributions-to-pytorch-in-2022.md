@@ -103,7 +103,7 @@ computations without having to change one file in your project!
 ### SciPy And scikit-learn With PyTorch as Their Backend: Python Array API
 
 In 2021-22, Quansight’s team did <a
-href="/post/a-year-in-review-quansight-s-contributions-to-pytorch-in-2021#python-array-api-and-numpy-compatibility"
+href="/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2021#python-array-api-and-numpy-compatibility"
 target="_self">a fair amount of work</a> to implement the [Python Array
 API][array api 2022.12] within PyTorch. For 2023, we are taking this one step
 further.
@@ -187,7 +187,7 @@ features now available in this shiny new PyTorch module.
 ### Complex Half: `torch.complex32`
 
 Once you have complex numbers, <a
-href="/post/a-year-in-review-quansight-s-contributions-to-pytorch-in-2021#complex-numbers"
+href="/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2021#complex-numbers"
 target="_self">as we helped deliver in 2021</a>, and accelerators, the next
 thing you want is complex numbers in half precision. The issue, as always, is
 that PyTorch has **thousands** of operations. Each of them implemented in CPU
@@ -260,7 +260,7 @@ forward.
 
 In a project the size of PyTorch, keeping build times reasonable is paramount.
 <a
-href="/post/a-year-in-review-quansight-s-contributions-to-pytorch-in-2021#build-time-improvements"
+href="/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2021#build-time-improvements"
 target="_self">Last year</a>, Quansight engineers helped reduce the average
 fresh build time from 20 minutes to five minutes. This year, we continued
 working on recompilations. A huge number of compilation sources are generated at

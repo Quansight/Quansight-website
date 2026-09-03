@@ -21,7 +21,7 @@ hero:
 
 **Editor's Note:** Since the launch of QHub in 2020, we have evolved it into a
 community-led open source project called Nebari. See our <a
-href="/post/evolving-qhub-to-nebari" target="_self">blog post on Nebari</a> and
+href="/blog/evolving-qhub-to-nebari-your-open-source-data-science-platform" target="_self">blog post on Nebari</a> and
 visit [nebari.dev][nebari.dev top ed note] for more information.
 
 ---
@@ -299,11 +299,11 @@ on top of QHub or JupyterHub in your organization, please reach out to Quansight
 for a free consultation by sending an email to connect@quansight.com.
 
 If you liked this article, check out our new blog post about <a
-href="/post/why-we-are-excited-about-jupyterlab-3-0-dynamic-extensions"
+href="/blog/why-we-are-excited-about-jupyterlab-3-0-dynamic-extensions"
 target="_self">JupyterLab 3.0 dynamic extensions</a>.
 
 **Update:** As we noted above, QHub is now Nebari. See the <a
-href="/post/evolving-qhub-to-nebari" target="_self">more recent post on
+href="/blog/evolving-qhub-to-nebari-your-open-source-data-science-platform" target="_self">more recent post on
 Nebari</a> and [nebari.dev][nebari.dev bot ed note] for more.
 
 [conda-docker repo]: https://github.com/conda-incubator/conda-docker

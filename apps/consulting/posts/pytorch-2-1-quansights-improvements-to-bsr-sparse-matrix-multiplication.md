@@ -14,11 +14,11 @@ hero:
 
 Check out our recent work implementing accelerated block sparse row multiplication kernels.
 
-Since 2019 we’ve collaborated with Meta’s PyTorch team and we’re honored to have made direct contributions to a project underlying so many of the generative AI tools emerging daily. See our [2021](https://quansight.com/post/a-year-in-review-quansights-contributions-to-pytorch-in-2021/) and [2022](https://quansight.com/post/a-year-in-review-quansights-contributions-to-pytorch-in-2022/) PyTorch contributions blog posts for more information on our past work.
+Since 2019 we’ve collaborated with Meta’s PyTorch team and we’re honored to have made direct contributions to a project underlying so many of the generative AI tools emerging daily. See our [2021](/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2021) and [2022](/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2022) PyTorch contributions blog posts for more information on our past work.
 
 In this post, we’ll describe some new kernels that Quansight engineers have implemented for block sparse row matrix multiplication involving specific combinations of sparse and dense arguments. These implementations, available in PyTorch 2.1, offer a significant performance improvement over those available in previous versions of PyTorch. We demonstrate these improvements here via some benchmarking results.
 
-**Note:** We offer PyTorch support as part of our consulting services offerings, so if you’re working with PyTorch and could use some assistance, please take a look at our [PyTorch Services page](https://quansight.com/pytorch-services/).
+**Note:** We offer PyTorch support as part of our consulting services offerings, so if you’re working with PyTorch and could use some assistance, please take a look at our [PyTorch Services page](/pytorch-services).
 
 Now let’s get to the details.
 
@@ -150,6 +150,6 @@ We have made some serious improvements to the usability of key features for BSR,
 
 This work would not have been possible without the close collaboration between Quansight and Meta within the PyTorch project. We thank Christian Puhrsch, Alban Desmaison, and Driss Guessous for their advice and feedback during research and implementation, and their continued support moving forward.
 
-As we noted above, in addition to contributing directly to PyTorch, Quansight also provides support services to assist clients with their use of PyTorch. Check out our [PyTorch Support page](https://quansight.com/pytorch-services/) or reach out to us for more information.
+As we noted above, in addition to contributing directly to PyTorch, Quansight also provides support services to assist clients with their use of PyTorch. Check out our [PyTorch Support page](/pytorch-services) or reach out to us for more information.
 
-[Contact Us](https://quansight.com/pytorch-services/#bookacallform)
+[Contact Us](/pytorch-services#bookacallform)

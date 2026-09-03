@@ -3,6 +3,6 @@ firstName: 'Troy'
 lastName: 'Bailey'
 role: 'author'
 displayName: 'full'
-image: '/nebari-services/quansight-logo.svg'
+image: '/images/people/troy-bailey.webp'
 imageAlt: 'Troy Bailey'
 ---

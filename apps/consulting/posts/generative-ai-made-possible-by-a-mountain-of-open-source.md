@@ -68,4 +68,4 @@ If you’re looking for expertise on any level of the OSS mountain range that bu
 
 Or, if you’re interested in talking further about open source sustainability, we want to hear from you, too! We will point you to additional information and resources to help you connect your company sustainably with open source communities.
 
-[Get in Touch](https://quansight.com/about-us/#bookacallform)
+[Get in Touch](/about-us#bookacallform)

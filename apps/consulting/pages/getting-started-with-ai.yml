@@ -13,7 +13,7 @@ blocks:
 - type: text
   html: "<p><span style=\"font-weight: 400;\">From proof of concept to a comprehensive AI transformation, Quansight offers unmatched expert support for every stage of the AI journey.</span></p>"
 - type: button
-  url: "https://quansight.com/about-us/#bookacallform"
+  url: "/about-us#bookacallform"
   text: "Get in Touch"
   isFull: false
   isBordered: false
@@ -58,7 +58,7 @@ blocks:
   sizePx: 40
   color: "#963895"
 - type: text
-  html: "<p>AI is <a href=\"https://quansight.com/post/generative-ai-made-possible-by-a-mountain-of-open-source/\" rel=\"noopener\" target=\"_blank\">built on a foundation of extensive open source innovation</a>. With Quansight’s deep roots in these foundations of scientific computing, we’re uniquely positioned to navigate the complexities of bringing sophisticated AI models from concept to deployment. Our <a href=\"https://quansight.com/ai-engineering/\">AI engineering</a> solutions offer the necessary infrastructure, sustainable practices, and integration expertise to turn theoretical advancements into impactful, scalable systems across your organization.</p>"
+  html: "<p>AI is <a href=\"/blog/generative-ai-made-possible-by-a-mountain-of-open-source\" rel=\"noopener\" target=\"_blank\">built on a foundation of extensive open source innovation</a>. With Quansight’s deep roots in these foundations of scientific computing, we’re uniquely positioned to navigate the complexities of bringing sophisticated AI models from concept to deployment. Our <a href=\"/ai-engineering\">AI engineering</a> solutions offer the necessary infrastructure, sustainable practices, and integration expertise to turn theoretical advancements into impactful, scalable systems across your organization.</p>"
 - type: text
   html: "<p>Whether you’re considering a limited proof of concept (POC) or ready for a full-scale AI transformation, Quansight has the engineers and expertise to make it happen. <strong>With us, you can expect</strong>:</p>"
 - type: columns
@@ -151,7 +151,7 @@ blocks:
   sizePx: 40
   color: "#452392"
 - type: text
-  html: "<p><span style=\"font-weight: 400;\">Quansight’s expertise extends to <a href=\"https://github.com/jupyterlab/jupyter-ai\" rel=\"noopener\" target=\"_blank\">Jupyter AI</a> which brings generative AI directly to <a href=\"https://quansight.com/jupyter-technologies/\">Jupyter</a> notebooks. With regular contributors to Jupyter AI on our team, we’re equipped to help your organization adopt and leverage its powerful capabilities. It integrates seamlessly with popular LLMs like those from AI21, OpenAI, Anthropic, and others, while ensuring full control over your data privacy. </span></p>"
+  html: "<p><span style=\"font-weight: 400;\">Quansight’s expertise extends to <a href=\"https://github.com/jupyterlab/jupyter-ai\" rel=\"noopener\" target=\"_blank\">Jupyter AI</a> which brings generative AI directly to <a href=\"/jupyter-technologies\">Jupyter</a> notebooks. With regular contributors to Jupyter AI on our team, we’re equipped to help your organization adopt and leverage its powerful capabilities. It integrates seamlessly with popular LLMs like those from AI21, OpenAI, Anthropic, and others, while ensuring full control over your data privacy. </span></p>"
 - type: heading
   text: "Meet Some of Our Experts"
   level: 2

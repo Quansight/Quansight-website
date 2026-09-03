@@ -3,6 +3,6 @@ firstName: 'Andrew'
 lastName: 'James'
 role: 'author'
 displayName: 'full'
-image: '/nebari-services/quansight-logo.svg'
+image: '/images/people/andrew-james.jpg'
 imageAlt: 'Andrew James'
 ---

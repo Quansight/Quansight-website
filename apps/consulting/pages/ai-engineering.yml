@@ -21,7 +21,7 @@ blocks:
   sizePx: 40
   color: "#452392"
 - type: text
-  html: "<p>As the power of artificial intelligence permeates our lives, organizations are looking for innovative ways to leverage the power of new and evolving breakthroughs. Bridging the gap between pioneering research and operationally useful AI solutions that drive real business value remains a significant hurdle.</p><p>At the foundation of AI is a <a href=\"https://quansight.com/post/generative-ai-made-possible-by-a-mountain-of-open-source/\">mountain of open source innovation</a>. With our roots in open source scientific computing, Quansight understands the complexities of transitioning advanced AI models from conceptual innovations into production-ready, scalable systems. Our AI engineering solutions provide the robust infrastructure, sustainable software practices, and integration capabilities to transform theory into real-world impact across your organization.</p>"
+  html: "<p>As the power of artificial intelligence permeates our lives, organizations are looking for innovative ways to leverage the power of new and evolving breakthroughs. Bridging the gap between pioneering research and operationally useful AI solutions that drive real business value remains a significant hurdle.</p><p>At the foundation of AI is a <a href=\"/blog/generative-ai-made-possible-by-a-mountain-of-open-source\">mountain of open source innovation</a>. With our roots in open source scientific computing, Quansight understands the complexities of transitioning advanced AI models from conceptual innovations into production-ready, scalable systems. Our AI engineering solutions provide the robust infrastructure, sustainable software practices, and integration capabilities to transform theory into real-world impact across your organization.</p>"
 - type: columns
   columns:
     - - type: image-box-grid
@@ -113,7 +113,7 @@ blocks:
             - type: text
               html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? We’d love to hear from you.\t\t\t\t\t\t\t\t</p>"
             - type: button
-              url: "https://quansight.com/about-us/#bookacallform"
+              url: "/about-us#bookacallform"
               text: "Contact Us"
               isFull: false
               isBordered: false

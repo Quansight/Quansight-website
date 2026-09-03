@@ -389,4 +389,4 @@ To review the overall project, we first looked into using GPUs to solve this pro
 
 If you have questions about this post or would like to learn more about ways Quansight can help you work through a similar scenario at your organization, complete a contact form and we’ll be in touch.
 
-[Contact Us](https://quansight.com/about-us#bookacallform)
+[Contact Us](/about-us#bookacallform)

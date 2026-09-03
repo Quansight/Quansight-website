@@ -147,7 +147,7 @@ blocks:
           - image: "/page-assets/open-source-integration/Quansight-consulting-services-02.svg"
             imageAlt: ""
       - type: button
-        url: "https://quansight.com/infrastructure-scaling-acceleration/"
+        url: "/infrastructure-scaling-acceleration"
         text: "Learn More"
         isFull: false
         isBordered: false
@@ -157,7 +157,7 @@ blocks:
           - image: "/page-assets/open-source-integration/Quansight-consulting-services-03.svg"
             imageAlt: ""
       - type: button
-        url: "https://quansight.com/visualization-dashboards/"
+        url: "/visualization-dashboards"
         text: "Learn More"
         isFull: false
         isBordered: false
@@ -167,7 +167,7 @@ blocks:
           - image: "/page-assets/open-source-integration/Quansight-consulting-services-05.svg"
             imageAlt: ""
       - type: button
-        url: "https://quansight.com/algorithms-ai-machine-learning/"
+        url: "/algorithms-ai-machine-learning"
         text: "Learn More"
         isFull: false
         isBordered: false
@@ -179,7 +179,7 @@ blocks:
           - image: "/page-assets/open-source-integration/Quansight-consulting-services-01.svg"
             imageAlt: ""
       - type: button
-        url: "https://quansight.com/data-engineering-mlops/"
+        url: "/data-engineering-mlops"
         text: "Learn More"
         isFull: false
         isBordered: false
@@ -189,7 +189,7 @@ blocks:
           - image: "/page-assets/open-source-integration/Quansight-consulting-services-06.svg"
             imageAlt: ""
       - type: button
-        url: "https://quansight.com/packaging-environment-management/"
+        url: "/packaging-and-distribution"
         text: "Learn More"
         isFull: false
         isBordered: false
@@ -199,7 +199,7 @@ blocks:
           - image: "/page-assets/open-source-integration/Quansight-consulting-services-07.svg"
             imageAlt: ""
       - type: button
-        url: "https://quansight.com/jupyter-technologies/"
+        url: "/jupyter-technologies"
         text: "Learn More"
         isFull: false
         isBordered: false

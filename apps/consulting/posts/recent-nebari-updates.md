@@ -20,7 +20,7 @@ We’re excited to unveil the latest updates to Nebari, meticulously designed to
 
 Whether you’ve been a long-time user or are revisiting the platform, these advancements represent a significant leap forward. With these updates, Nebari continues to evolve as a robust, open source solution tailored to meet the demands of modern data science teams and enterprises alike.
 
-_New to Nebari? [Here’s a quick overview](https://quansight.com/post/a-quick-overview-of-nebari/)_
+_New to Nebari? [Here’s a quick overview](/blog/a-quick-overview-of-nebari)_
 
 ## Smarter Scaling, Lower Costs
 

@@ -38,4 +38,4 @@ The AI Consulting division is being acquired by OpenTeams, a partner organizatio
 
 This transition strengthens our ability to support the open source tools and communities driving global innovation. Whether you’re a new or existing partner, contributor, or user of open-source software, we invite you to be part of our journey.
 
-Explore our latest impact report: [Quansight Labs annual report (2024)](https://quansight.com/labs-report)
+Explore our latest impact report: [Quansight Labs annual report (2024)](/labs-report)

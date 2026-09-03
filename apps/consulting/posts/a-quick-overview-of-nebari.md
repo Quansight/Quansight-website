@@ -42,7 +42,7 @@ Let’s say we want to try new software—we want to try [Polars](https://pola.r
 
 ## Manage Data Science Libraries with Environments
 
-In Nebari, [environment management is central to the platform](https://quansight.com/post/streamlined-environment-lifecycle-management-for-data-science-workflows-with-conda-store/). We have a comprehensive system supporting all the different applications used within the platform.
+In Nebari, [environment management is central to the platform](/blog/streamlined-environment-lifecycle-management-for-data-science-workflows-with-conda-store). We have a comprehensive system supporting all the different applications used within the platform.
 
 Here, within our software environment management system, we call [conda-store](https://conda.store/), we have a personal namespace with some existing environments, like a machine learning environment that includes packages like [scikit-learn](https://scikit-learn.org/) and [pandas](https://pandas.pydata.org/), but let’s say we want to create a new environment. This new environment is an environment to test out Polars. First, we’ll add Polars package and a plotting library ([hvPlot](https://hvplot.holoviz.org/)). We can also select which channel this library comes from ([conda-forge](https://conda-forge.org/)), and then we’ll hit create. This will take a few seconds to download and set up.
 

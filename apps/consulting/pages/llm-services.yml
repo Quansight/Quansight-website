@@ -118,7 +118,7 @@ blocks:
   sizePx: 47
   color: "#452392"
 - type: text
-  html: "<p>We recently released Ragna, an open source RAG-based AI orchestration framework designed to scale from research to production. Ragna allows individuals and organizations to explore the power of Retrieval-Augmented Generation (RAG) based AI tools. <a href=\"https://quansight.com/post/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production/\">Learn more. &gt;&gt;</a></p>"
+  html: "<p>We recently released Ragna, an open source RAG-based AI orchestration framework designed to scale from research to production. Ragna allows individuals and organizations to explore the power of Retrieval-Augmented Generation (RAG) based AI tools. <a href=\"/blog/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production\">Learn more. &gt;&gt;</a></p>"
 - type: heading
   text: "Who We Are:"
   level: 2

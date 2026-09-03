@@ -3,6 +3,6 @@ firstName: 'Fatma'
 lastName: 'Tarlaci'
 role: 'author'
 displayName: 'full'
-image: '/nebari-services/quansight-logo.svg'
+image: '/images/people/fatma-tarlaci.webp'
 imageAlt: 'Fatma Tarlaci'
 ---

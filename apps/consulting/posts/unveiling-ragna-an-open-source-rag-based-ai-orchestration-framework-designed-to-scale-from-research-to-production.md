@@ -100,8 +100,8 @@ Ragna is an early-stage open source project that has a long way to go. We’d lo
 
 ## Exploring Generative AI? We Can Help.
 
-If you need someone to help you explore generative AI, build and deploy capabilities across your organization, Quansight can help. See our [LLM Services](https://quansight.com/llm-services/) for more information or get in touch with the button below.
+If you need someone to help you explore generative AI, build and deploy capabilities across your organization, Quansight can help. See our [LLM Services](/llm-services) for more information or get in touch with the button below.
 
 Thanks for reading! ⛵
 
-[Contact Us](https://quansight.com/llm-services/#bookacallform)
+[Contact Us](/llm-services#bookacallform)

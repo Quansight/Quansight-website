@@ -13,9 +13,9 @@ hero:
 ---
 
 Over a number of recent posts, we have given some examples of <a
-href="/post/quick-dashboarding-with-panel" target="_self">how to build
+href="/blog/quick-dashboarding-with-panel" target="_self">how to build
 dashboards</a> using [Panel][panel site] and <a
-href="/post/working-across-panel-and-ipywidgets-ecosystems" target="_self">how
+href="/blog/working-across-panel-and-ipywidgets-ecosystems" target="_self">how
 to integrate widgets from Panel and ipywidgets</a> into the same Panel app.
 These have all been _one-stage_ examples, but you can actually use Panel to
 build a [_pipeline_ of stages][panel user guide: pipelines] with information
