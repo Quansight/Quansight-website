@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { Icon } from './Icon';
 import { colorToken } from '../utils/colorTokens';
+import { sizeToken } from '../utils/fontSizeTokens';
 
 type IconBoxProps = {
   title?: string;
@@ -44,21 +45,22 @@ export const IconBox: FC<IconBoxProps> = ({
     )}
     {description &&
       (() => {
-        const token = colorToken(descriptionColor);
+        const colorTok = colorToken(descriptionColor);
+        // WP's real description size varies per widget (16-21px sitewide)
+        // -- "xs" (the sitewide paragraph-text size) is only the fallback
+        // for when that wasn't extracted, not a small caption-text default.
+        const sizeTok = sizeToken(descriptionSizePx) ?? 'xs';
         return (
-          // WP's real description size varies per widget (16-21px sitewide)
-          // -- 1.6rem (the sitewide paragraph-text size) is only the
-          // fallback for when that wasn't extracted, not a small
-          // caption-text default.
           <p
-            className={`leading-[1.5] ${
-              token ? `text-${token}` : descriptionColor ? '' : 'text-black'
+            className={`leading-[1.5] text-${sizeTok} ${
+              colorTok
+                ? `text-${colorTok}`
+                : descriptionColor
+                ? ''
+                : 'text-black'
             }`}
             style={{
-              fontSize: descriptionSizePx
-                ? `${descriptionSizePx / 10}rem`
-                : '1.6rem',
-              color: token ? undefined : descriptionColor,
+              color: colorTok ? undefined : descriptionColor,
             }}
           >
             {description}

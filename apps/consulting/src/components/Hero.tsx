@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 
 import clsx from 'clsx';
+import { sizeToken } from '../utils/fontSizeTokens';
 
 type HeroVariant =
   | 'small'
@@ -70,6 +71,8 @@ export const Hero: FC<HeroProps> = ({
   const isLarge = variant === 'large' || variant === 'large-overlapping';
   const isMedium = variant === 'medium' || variant === 'medium-overlapping';
   const isSmall = variant === 'small';
+  const titleSizeToken = sizeToken(titleSizePx);
+  const subTitleSizeToken = sizeToken(subTitleSizePx);
 
   return (
     <div
@@ -190,14 +193,20 @@ export const Hero: FC<HeroProps> = ({
             <h1
               className={clsx(
                 'font-extrabold leading-[6rem] text-white font-heading',
+                // Real per-page title size (e.g. packaging-and-distribution
+                // is 70px, not the 50px sitewide-typical default) snapped
+                // to the site's real font-size scale -- see
+                // src/utils/fontSizeTokens.ts.
+                titleSizeToken ? `text-${titleSizeToken}` : '',
                 isLarge
-                  ? 'mb-[1.5rem] text-[4rem] md:mb-[4rem] md:text-[5rem]'
-                  : 'text-[5rem] text-center',
+                  ? `mb-[1.5rem] ${
+                      titleSizeToken ? '' : 'text-[4rem] md:text-[5rem]'
+                    } md:mb-[4rem]`
+                  : `text-center ${titleSizeToken ? '' : 'text-[5rem]'}`,
               )}
-              style={{
-                ...(titleSizePx ? { fontSize: `${titleSizePx / 10}rem` } : {}),
-                ...(titleFontWeight ? { fontWeight: titleFontWeight } : {}),
-              }}
+              style={
+                titleFontWeight ? { fontWeight: titleFontWeight } : undefined
+              }
             >
               {title}
             </h1>
@@ -205,19 +214,22 @@ export const Hero: FC<HeroProps> = ({
               <div
                 className={clsx(
                   isLarge
-                    ? 'text-[3rem] md:text-[4rem] font-extrabold leading-[4.8rem] text-white font-heading'
+                    ? `font-extrabold leading-[4.8rem] text-white font-heading ${
+                        subTitleSizeToken
+                          ? `text-${subTitleSizeToken}`
+                          : 'text-[3rem] md:text-[4rem]'
+                      }`
                     : // No max-width cap: WP's real subtitle widget has none
                       // either, and one narrower than the title's own
                       // max-w-layout wrapper wraps it into extra, needlessly
                       // short lines.
-                      'mt-[1.5rem] text-[1.8rem] sm:text-[2.2rem] leading-[1.4] text-white',
+                      `mt-[1.5rem] leading-[1.4] text-white ${
+                        subTitleSizeToken
+                          ? `text-${subTitleSizeToken}`
+                          : 'text-sm sm:text-base'
+                      }`,
                   (isMedium || isSmall) && 'text-center',
                 )}
-                style={
-                  subTitleSizePx
-                    ? { fontSize: `${subTitleSizePx / 10}rem` }
-                    : undefined
-                }
               >
                 {subTitle}
               </div>
