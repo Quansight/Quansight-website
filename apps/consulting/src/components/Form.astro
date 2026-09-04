@@ -1,0 +1,117 @@
+---
+// Rebuilds the WordPress/Elementor forms: same fields, placeholders,
+// select options and submit labels as the live site.
+//
+// Where they POST is the one thing the scrape can't tell us. On WP these
+// submit to admin-ajax.php, and Elementor holds the Mailchimp audience id
+// and API key server-side, so neither appears in the markup. Both actions
+// below are therefore placeholders to fill in:
+//
+//   * MAILCHIMP_ACTION -- the newsletter signup. Take it from Mailchimp's
+//     embedded-form snippet (Audience > Signup forms > Embedded form); it
+//     looks like https://<dc>.list-manage.com/subscribe/post?u=<user id>&id=<audience id>.
+//     Mailchimp requires the input to be named EMAIL, which is why the
+//     converter renames it from WP's form_fields[email]. Mailchimp's embed
+//     also includes a honeypot input named b_<user id>_<audience id>; add
+//     it alongside the real endpoint, since its name is account-specific.
+//
+//   * CONTACT_ACTION -- the services enquiry form, which on WP emailed the
+//     team rather than going to Mailchimp. It needs its own destination
+//     (a form service or a serverless handler), not the audience above.
+//
+// Until they're set, both submit to "#" and the form is marked
+// aria-disabled so a visitor can't believe a submission was delivered.
+const MAILCHIMP_ACTION = '';
+const CONTACT_ACTION = '';
+
+type Field = {
+  name: string;
+  kind: 'input' | 'textarea' | 'select';
+  type?: string;
+  required?: boolean;
+  placeholder?: string;
+  label?: string;
+  rows?: number;
+  options?: string[];
+};
+
+interface Props {
+  name: string;
+  fields: Field[];
+  submit: string;
+  audience?: 'mailchimp' | 'contact';
+  submitIcon?: boolean;
+}
+
+const { name, fields, submit, audience = 'contact', submitIcon } = Astro.props;
+
+const action = audience === 'mailchimp' ? MAILCHIMP_ACTION : CONTACT_ACTION;
+const isConfigured = action !== '';
+// Mailchimp's embedded form posts cross-origin and opens its own hosted
+// confirmation page, hence the new tab; the contact handler posts normally.
+const target = isConfigured && audience === 'mailchimp' ? '_blank' : undefined;
+
+const FIELD_CLASS =
+  'w-full px-[1.6rem] py-[1.2rem] text-[1.6rem] leading-[2.4rem] text-black bg-white border border-gray-300 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-violet';
+---
+
+<form
+  class="flex flex-col gap-[1.6rem] w-full max-w-[52rem]"
+  name={name}
+  aria-label={name}
+  method="post"
+  action={isConfigured ? action : '#'}
+  target={target}
+  aria-disabled={isConfigured ? undefined : 'true'}
+>
+  {fields.map((field) => (
+    <div class="flex flex-col gap-[0.6rem]">
+      {field.label && (
+        <label class="text-[1.4rem] font-bold leading-[2rem]" for={`field-${field.name}`}>
+          {field.label}
+        </label>
+      )}
+      {field.kind === 'textarea' ? (
+        <textarea
+          id={`field-${field.name}`}
+          name={field.name}
+          rows={field.rows ?? 4}
+          required={field.required}
+          placeholder={field.placeholder}
+          class={FIELD_CLASS}
+        />
+      ) : field.kind === 'select' ? (
+        <select id={`field-${field.name}`} name={field.name} required={field.required} class={FIELD_CLASS}>
+          <option value="">Select</option>
+          {(field.options ?? []).map((option) => (
+            <option value={option}>{option}</option>
+          ))}
+        </select>
+      ) : (
+        <input
+          id={`field-${field.name}`}
+          name={field.name}
+          type={field.type ?? 'text'}
+          required={field.required}
+          placeholder={field.placeholder}
+          class={FIELD_CLASS}
+        />
+      )}
+    </div>
+  ))}
+
+  <button
+    type="submit"
+    disabled={!isConfigured}
+    class="flex gap-[0.8rem] justify-center items-center px-[3rem] py-[1.2rem] w-fit text-[1.6rem] font-bold leading-[2.4rem] text-white bg-pink disabled:opacity-60 disabled:cursor-not-allowed"
+  >
+    {submit}
+    {submitIcon && <span aria-hidden="true">➤</span>}
+  </button>
+
+  {!isConfigured && (
+    <p class="text-[1.3rem] leading-[2rem] opacity-80">
+      Not yet connected — see Form.astro for the endpoint to fill in.
+    </p>
+  )}
+</form>

@@ -14,6 +14,10 @@ blocks:
         level: 4
     - - type: text
         html: "<p>Making the move into open source requires deep expertise in a complex ecosystem. We combine open source and commercial components to create a low maintenance and sustainable solution that’s tailor-made for your business needs and objectives. How? In addition to our depth of expertise, we employ maintainers and contributors to critical open source software projects. We’ll handle the complexity of integrating your internal systems with the powerful open source tooling so you can focus your efforts back on your organization.</p>"
+  columnWidths:
+    - 50
+    - 50
+  gapPx: 0
 - type: columns
   columns:
     - - type: image
@@ -43,6 +47,11 @@ blocks:
         items:
           - title: "Standardize & Automate"
             description: "We customize a standard set of connectors that can be easily implemented, and re-utilized throughout your systems, into an automated solution for continuous data pass through."
+  columnWidths:
+    - 33
+    - 33
+    - 33
+  gapPx: 20
 - type: columns
   columns:
     - - type: image
@@ -72,6 +81,11 @@ blocks:
         items:
           - title: "Ongoing OSS Support"
             description: "Access open source support to resolve support tickets, overcome tricky integrations, and find answers to community roadmap questions with our partner OpenTeams."
+  columnWidths:
+    - 33
+    - 33
+    - 33
+  gapPx: 20
 - type: columns
   columns:
     - - type: heading
@@ -90,6 +104,10 @@ blocks:
         alt: ""
         width: 768
         height: 1
+  columnWidths:
+    - 50
+    - 50
+  gapPx: 0
 - type: heading
   text: "Some of the Open Source Projects We Use for  Data Engineering & MLOps"
   level: 4
@@ -125,6 +143,14 @@ blocks:
         alt: ""
         width: 800
         height: 344
+  columnWidths:
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+  gapPx: 0
 - type: columns
   columns:
     - - type: heading
@@ -137,6 +163,10 @@ blocks:
         alt: ""
         width: 200
         height: 200
+  columnWidths:
+    - 50
+    - 50
+  gapPx: 0
 - type: heading
   text: "Explore Additional Consulting Areas"
   level: 4
@@ -172,6 +202,11 @@ blocks:
         isFull: false
         isBordered: false
         isTriangle: true
+  columnWidths:
+    - 33
+    - 33
+    - 33
+  gapPx: 0
 - type: columns
   columns:
     - - type: image-box-grid
@@ -204,15 +239,54 @@ blocks:
         isFull: false
         isBordered: false
         isTriangle: true
+  columnWidths:
+    - 33
+    - 33
+    - 33
+  gapPx: 0
 - type: columns
   columns:
     - - type: heading
         text: "Ready to manage your unique data with ease?"
         level: 4
       - type: form
-        note: "Consulting Overview Contact Form"
+        name: "Consulting Overview Contact Form"
+        fields:
+          - name: "form_fields[name]"
+            kind: "input"
+            type: "text"
+            required: true
+            placeholder: "Name"
+          - name: "form_fields[email]"
+            kind: "input"
+            type: "email"
+            required: true
+            placeholder: "Email"
+          - name: "form_fields[company]"
+            kind: "input"
+            type: "text"
+            required: true
+            placeholder: "Company name"
+          - name: "form_fields[services]"
+            kind: "select"
+            type: "text"
+            required: true
+            label: "Services you’re interested in"
+            options: ["Al, Data & ML Engineering", "Infrastructure, Scaling & Acceleration", "Algorithms, AI & Machine Learning", "Packaging & Environment Management", "Jupyter Technologies", "Open Source Services", "PyTorch", "Nebari", "conda-store", "Ragna/RAG", "Large Language Models (LLMS)", "Training", "Other"]
+          - name: "form_fields[how]"
+            kind: "select"
+            type: "text"
+            required: true
+            label: "How did you hear about us?"
+            options: ["Online search", "Social media", "Digital Ad", "Referral", "Conference/event", "Blog/online article", "Other"]
+        submit: "Send message"
+        audience: "contact"
     - - type: image
         src: "/page-assets/open-source-integration/Quansight-contact-02-02-02-1-1.svg"
         alt: ""
         width: 1122
         height: 889
+  columnWidths:
+    - 50
+    - 50
+  gapPx: 0

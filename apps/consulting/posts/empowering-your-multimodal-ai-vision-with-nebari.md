@@ -117,3 +117,9 @@ Returning to the owl and the tree, I wondered how Molmo might deal with syntheti
 In the end, experimenting with these cutting-edge, open, vision language models was not just interesting, from a tech standpoint, but downright fun. Especially when I could sidestep the usual setup hassles thanks to [Nebari](https://www.nebari.dev/). I was expecting the latest models to perform well but was still surprised by just how good they are at this point. If you’re interested in exploring the latest open models without the overhead of setting up complicated configurations and infrastructure, I’d recommend giving Nebari a try. The project is open source, so you can deploy it on your own and choose the hardware you want to run it on. We’re happy to help with an initial deployment and configuration. It made my short adventure painless and might just be the solution you’ve been looking for.
 
 As a simple demo for these models, I’ve put together an open repo [HERE](https://github.com/Quansight/genai-demo-audio-vlm) that includes a Conda environment, instructions, and a basic chat interface. For the smallest model load, you’ll need a CUDA/NVIDIA GPU with at least 16GB VRAM, up to 50+GB for Aria. If you really want to go large, you can download the Molmo-72B model and update the folder path in the app from the 7B version—it’ll work just fine.
+
+## More Articles From our Library
+
+- [A Quick Overview of Nebari](/blog/a-quick-overview-of-nebari)
+- [Getting Started With AI](/getting-started-with-ai)
+- [Nebari: An Infrastructure Engineering Perspective](/blog/nebari-an-infrastructure-engineering-perspective)

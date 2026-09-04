@@ -32,7 +32,12 @@ const { title = 'Quansight', description = '' } = Astro.props;
   </head>
   <body>
     <SiteHeader />
-    <main id="maincontent">
+    {/* Full-bleed section backgrounds break out of the content padding with
+        a 100vw width, and 100vw counts the vertical scrollbar -- without
+        this the page picks up a few px of horizontal scroll. `clip` rather
+        than `hidden` so it doesn't become a scroll container (which would
+        break any sticky descendant). */}
+    <main id="maincontent" class="overflow-x-clip">
       <slot />
     </main>
     <SiteFooter />

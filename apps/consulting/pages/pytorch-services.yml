@@ -10,24 +10,36 @@ blocks:
   imageAlt: ""
   overlayOpacity: 0.1
   title: "Unlock the Power of AI/ML including Generative AI and LLMs Using PyTorch"
-- type: button
-  url: "#bookacallform"
-  text: "Get in Touch"
-  isFull: false
-  isBordered: false
-  isTriangle: true
-  align: "center"
-- type: heading
-  text: "Trusted by Meta's Core Development Team \nSince 2019"
-  level: 4
-  sizePx: 47
-  color: "#452392"
-- type: text
-  html: "<p>PyTorch is one of the leading open source machine learning frameworks for building and training AI models. Developed primarily by Meta, it has become the hub of innovation within deep learning.</p><p>At Quansight, we offer personalized support to help you build and optimize a PyTorch-based AI/ML system. Whether you’re looking to create a new system or optimize an existing one, our team can help.</p><p> </p>"
+  titleSizePx: 60
+  titleFontWeight: 700
+  ctaText: "Get in Touch"
+  ctaUrl: "#bookacallform"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Trusted by Meta's Core Development Team \nSince 2019"
+        level: 4
+        sizePx: 47
+        fontWeight: 800
+        color: "#452392"
+        align: "center"
+        paddingBottom: "20px"
+      - type: text
+        html: "<p>PyTorch is one of the leading open source machine learning frameworks for building and training AI models. Developed primarily by Meta, it has become the hub of innovation within deep learning.</p><p>At Quansight, we offer personalized support to help you build and optimize a PyTorch-based AI/ML system. Whether you’re looking to create a new system or optimize an existing one, our team can help.</p><p> </p>"
+        sizePx: 16
+        color: "#161515"
+  paddingTop: "4%"
+  paddingRight: "5%"
+  paddingBottom: "1%"
+  paddingLeft: "5%"
 - type: columns
   columns:
     - - type: text
         html: "<p>\n\t\t\t\t\t\t\t\t\tQuansight’s PyTorch Support Offerings Include:\t\t\t\t\t\t\t\t</p>"
+        sizePx: 47
+        fontWeight: 800
+        color: "#452392"
+        paddingBottom: "20px"
     - - type: image-box-grid
         items:
           - image: "/page-assets/pytorch-services/PyTorch_page-hero-02.svg"
@@ -39,35 +51,50 @@ blocks:
           - image: "/page-assets/pytorch-services/PyTorch_page-hero-04.svg"
             imageAlt: ""
             description: "Access customized PyTorch training on topics like natural language processing, computer vision, and code acceleration."
+  gapPx: 90
 - type: heading
   text: "Access Open Source Experts to \nBuild Your AI Strategy"
   level: 4
   sizePx: 47
+  fontWeight: 800
   color: "#452392"
+  align: "center"
 - type: columns
   columns:
     - - type: text
         html: "<ul><li><strong>Travis Oliphant</strong>, NumPy, SciPy, and Numba Creator<br/><b></b></li><li><b>Tania Allard</b><span style=\"font-weight: 400;\">,</span><span style=\"font-weight: 400;\"> PSF board vice chair, Jupyter Distinguished Contributor, conda steering council member</span></li><li><strong>Dharhas Pothina</strong>, Nebari &amp; Conda Store Creator, Holoviz Steering Committee<br/><b></b></li><li><b>Ralf Gommers</b><span style=\"font-weight: 400;\">, SciPy/NumPy Maintainer, Array API Standard Creator<br/></span></li><li><strong>Jaime Rodríguez-Guerra</strong>, Conda-forge Maintainer &amp; Steering Committee Member</li><li><strong>Pearu Peterson</strong>, SciPy Creator &amp; f2py Author</li><li><strong>Andrew James</strong>, PyTorch Core Developer, torch.sparse Author<br/><b></b></li><li><strong>Melissa Weber Mendonça</strong>, NumPy/SciPy/napari maintainer &amp; Senior Developer</li><li><strong>Victor Fomin</strong>, PyTorch Core Developer, PyTorch Ignite Project Lead<br/><b></b></li><li><b>Nathan Goldbaum</b><span style=\"font-weight: 400;\">, </span><span style=\"font-weight: 400;\">NumPy Steering Council</span></li><li><b>Isuru Fernando</b><span style=\"font-weight: 400;\">,</span><span style=\"font-weight: 400;\"> Conda-forge Maintainer &amp; Member of Steering Committee</span></li></ul>"
+        sizePx: 16
+        color: "#161515"
     - - type: image
         src: "/page-assets/pytorch-services/Meet-Some-of-Our-Experts-3.png"
         alt: ""
         width: 1350
         height: 935
+  columnWidths:
+    - 100.0
+    - 100.0
+  gapPx: 0
 - type: heading
   text: "Quansight’s Contributions to PyTorch"
   level: 4
   sizePx: 47
+  fontWeight: 800
   color: "#452392"
+  align: "center"
 - type: text
   html: "<p>For a closer look at the work we’ve done for PyTorch in recent years, take a look at our annual blog posts highlighting contributions and enhancements to PyTorch.</p>"
+  sizePx: 16
+  color: "#161515"
 - type: columns
   columns:
     - - type: button
         url: "/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2023-early-2024"
         text: "Read the post"
-        isFull: false
+        isFull: true
         isBordered: false
         isTriangle: true
+        backgroundColor: "#452392"
+        textColor: "#FFFFFF"
         align: "center"
       - type: icon-list
         items:
@@ -86,19 +113,33 @@ blocks:
           - "AOTAutograd optimizations & decompositions"
       - type: text
         html: "<p><strong>Contributions include:</strong></p>"
+        sizePx: 17
+        color: "#161515"
+        paddingLeft: "20px"
       - type: image
         src: "/page-assets/pytorch-services/PyTorch_logo_black.svg"
         alt: "Image of the PyTorch logo"
         width: 200
         height: 50
-      - type: call-to-action
-        note: "2023 & 2024"
+      - type: heading
+        text: "2023 & 2024"
+        level: 3
+        sizePx: 44
+        fontWeight: 700
+        color: "#A43A8F"
+        align: "center"
+        paddingTop: "20px"
+        paddingRight: "20px"
+        paddingBottom: "20px"
+        paddingLeft: "20px"
     - - type: button
         url: "/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2022"
         text: "Read the post"
-        isFull: false
+        isFull: true
         isBordered: false
         isTriangle: true
+        backgroundColor: "#A43A8F"
+        textColor: "#FFFFFF"
         align: "center"
       - type: icon-list
         items:
@@ -117,15 +158,36 @@ blocks:
           - "NumPy support in torch.compile"
       - type: text
         html: "<p><strong>Contributions include:</strong></p>"
+        sizePx: 17
+        color: "#161515"
+        paddingLeft: "20px"
       - type: image
         src: "/page-assets/pytorch-services/PyTorch_logo_black.svg"
         alt: "Image of the PyTorch logo"
         width: 200
         height: 50
-      - type: call-to-action
-        note: "2022"
-    - - type: call-to-action
-        note: "2021"
+      - type: heading
+        text: "2022"
+        level: 3
+        sizePx: 44
+        fontWeight: 700
+        color: "#452392"
+        align: "center"
+        paddingTop: "20px"
+        paddingRight: "20px"
+        paddingBottom: "20px"
+        paddingLeft: "20px"
+    - - type: heading
+        text: "2021"
+        level: 3
+        sizePx: 44
+        fontWeight: 700
+        color: "#A43A8F"
+        align: "center"
+        paddingTop: "20px"
+        paddingRight: "20px"
+        paddingBottom: "20px"
+        paddingLeft: "20px"
       - type: image
         src: "/page-assets/pytorch-services/PyTorch_logo_black.svg"
         alt: "Image of the PyTorch logo"
@@ -133,6 +195,9 @@ blocks:
         height: 50
       - type: text
         html: "<p><strong>Contributions include:</strong></p>"
+        sizePx: 17
+        color: "#161515"
+        paddingLeft: "20px"
       - type: icon-list
         items:
           - "Python Array API & NumPy Compatibility"
@@ -151,80 +216,159 @@ blocks:
       - type: button
         url: "/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2021"
         text: "Read the post"
-        isFull: false
+        isFull: true
         isBordered: false
         isTriangle: true
+        backgroundColor: "#452392"
+        textColor: "#FFFFFF"
         align: "center"
   columnBackgrounds:
     - "#FFFFFF"
     - "#FFFFFF"
     - "#FFFFFF"
+  columnWidths:
+    - 100.0
+    - 100.0
+    - 100.0
+  gapPx: 90
 - type: heading
   text: "PyTorch Support Service Packages"
   level: 2
   sizePx: 47
+  fontWeight: 800
   color: "#452392"
+  align: "center"
+  paddingBottom: "35px"
 - type: columns
   columns:
     - - type: heading
         text: "Team Support"
         level: 4
         sizePx: 16
+        fontWeight: 400
         color: "#FFFFFF"
+        align: "center"
+        paddingTop: "20px"
+        paddingRight: "10px"
+        paddingBottom: "20px"
+        paddingLeft: "10px"
       - type: price-table
+        heading: ""
+        price: "50k"
+        period: "Per Year"
+        features:
+          - "$25k retainer for project work"
+          - "5 monthly support tickets"
+          - "Support via GitHub issues"
+          - "2 monthly office hours"
+          - "2 business-day SLA"
+        buttonText: "Get in Touch"
+        buttonUrl: "#bookacallform"
+        priceBackground: "#FAFAFA"
     - - type: heading
         text: "Enterprise Support"
         level: 4
         sizePx: 16
+        fontWeight: 400
         color: "#FFFFFF"
+        align: "center"
+        paddingTop: "20px"
+        paddingRight: "10px"
+        paddingBottom: "20px"
+        paddingLeft: "10px"
       - type: price-table
+        heading: ""
+        price: "200k"
+        period: "Per Year"
+        features:
+          - "$100k retainer for project work"
+          - "20 monthly support tickets"
+          - "Support via dedicated Slack channel"
+          - "Assigned PyTorch rep PyTorch"
+          - "PyTorch Masterclasses"
+          - "Monthly office hours"
+          - "2 business-day SLA"
+        buttonText: "Get In Touch"
+        buttonUrl: "#bookacallform"
+        priceBackground: "#FAFAFA"
     - - type: heading
         text: "Custom Support"
         level: 4
         sizePx: 16
+        fontWeight: 400
         color: "#FFFFFF"
+        align: "center"
+        paddingTop: "20px"
+        paddingRight: "10px"
+        paddingBottom: "20px"
+        paddingLeft: "10px"
       - type: price-table
-        note: "Starting at"
+        heading: "Starting at"
+        price: "50k"
+        period: "Per Year"
+        features:
+          - "PyTorch customization"
+          - "PyTorch training"
+          - "Proprietary solutions around PyTorch"
+          - "Masterclasses"
+          - "Monthly office hours"
+        buttonText: "Get In Touch"
+        buttonUrl: "#bookacallform"
+        priceBackground: "#FAFAFA"
   columnBackgrounds:
     - "#FFFFFF"
     - "#FFFFFF"
     - "#FFFFFF"
-- type: heading
-  text: "Frequently Asked Questions"
-  level: 4
-  sizePx: 47
-  color: "#452392"
-- type: toggle
-  items:
-    - title: "Our company is new to PyTorch, can Quansight still help me?"
-      content: "<p><span style=\"font-weight: 400;\">Yes! We are well versed in assisting companies at any stage along the PyTorch journey, including those who are just getting started.</span></p>"
-- type: toggle
-  items:
-    - title: "We have a number of PyTorch engineers on staff and have a good system going but need expert help from time to time. Is that something Quansight can offer?"
-      content: "<p><span style=\"font-weight: 400;\">Absolutely. Our experts have built many of the internal PyTorch systems and have insight that can help even the most advanced users get more out of their systems. </span></p>"
-- type: toggle
-  items:
-    - title: "What do the monthly office hours entail?"
-      content: "<p><span style=\"font-weight: 400;\">Your team will have a time window with exclusive access to an expert. You can use this time to learn about PyTorch, get advice on how to design your systems, or discuss anything else you like. </span></p>"
-- type: toggle
-  items:
-    - title: "What sort of services do you offer around Large Language Models (LLMs)?"
-      content: "<p><span style=\"font-weight: 400;\">Thanks to our expertise in LLMs, AI/ML, cloud infrastructure, and the broader scientific, visualization, and data platform Python stack, we can support you at any stage in building an LLM strategy—from getting started to refining what’s in place. See our <span style=\"text-decoration: underline; color: #a43a8f;\"><a href=\"/llm-services\" style=\"color: #a43a8f; text-decoration: underline;\">LLM Services page</a></span> to learn more. </span></p>"
-- type: toggle
-  items:
-    - title: "What is a PyTorch Masterclass?"
-      content: "<p><span style=\"font-weight: 400;\">The best way to get started from scratch is to learn from the people who built the platform! Learn the various components of PyTorch and domain libraries from the maintainers who are working on them every day. </span></p>"
-- type: toggle
-  items:
-    - title: "Are the support tickets via GitHub?"
-      content: "<p><span style=\"font-weight: 400;\">We can easily adapt to whatever systems you are comfortable with. We can use GitHub issues on the PyTorch repository, private issues on your own ticketing system, or any other medium to track support tickets.  </span></p>"
+  columnWidths:
+    - 100.0
+    - 100.0
+    - 100.0
+  gapPx: 36
+- type: columns
+  columns:
+    - - type: heading
+        text: "Frequently Asked Questions"
+        level: 4
+        sizePx: 47
+        fontWeight: 800
+        color: "#452392"
+        align: "center"
+      - type: toggle
+        items:
+          - title: "Our company is new to PyTorch, can Quansight still help me?"
+            content: "<p><span style=\"font-weight: 400;\">Yes! We are well versed in assisting companies at any stage along the PyTorch journey, including those who are just getting started.</span></p>"
+      - type: toggle
+        items:
+          - title: "We have a number of PyTorch engineers on staff and have a good system going but need expert help from time to time. Is that something Quansight can offer?"
+            content: "<p><span style=\"font-weight: 400;\">Absolutely. Our experts have built many of the internal PyTorch systems and have insight that can help even the most advanced users get more out of their systems. </span></p>"
+      - type: toggle
+        items:
+          - title: "What do the monthly office hours entail?"
+            content: "<p><span style=\"font-weight: 400;\">Your team will have a time window with exclusive access to an expert. You can use this time to learn about PyTorch, get advice on how to design your systems, or discuss anything else you like. </span></p>"
+      - type: toggle
+        items:
+          - title: "What sort of services do you offer around Large Language Models (LLMs)?"
+            content: "<p><span style=\"font-weight: 400;\">Thanks to our expertise in LLMs, AI/ML, cloud infrastructure, and the broader scientific, visualization, and data platform Python stack, we can support you at any stage in building an LLM strategy—from getting started to refining what’s in place. See our <span style=\"text-decoration: underline; color: #a43a8f;\"><a href=\"/llm-services\" style=\"color: #a43a8f; text-decoration: underline;\">LLM Services page</a></span> to learn more. </span></p>"
+      - type: toggle
+        items:
+          - title: "What is a PyTorch Masterclass?"
+            content: "<p><span style=\"font-weight: 400;\">The best way to get started from scratch is to learn from the people who built the platform! Learn the various components of PyTorch and domain libraries from the maintainers who are working on them every day. </span></p>"
+      - type: toggle
+        items:
+          - title: "Are the support tickets via GitHub?"
+            content: "<p><span style=\"font-weight: 400;\">We can easily adapt to whatever systems you are comfortable with. We can use GitHub issues on the PyTorch repository, private issues on your own ticketing system, or any other medium to track support tickets.  </span></p>"
+  paddingBottom: "100px"
 - type: heading
   text: "About Quansight"
   level: 2
   sizePx: 47
+  fontWeight: 800
   color: "#452392"
+  align: "center"
 - type: text
   html: "<p><span style=\"font-weight: 400;\">Quansight is a data, science, and engineering firm that specializes in solving complex, data-related problems by leveraging the open source software at the foundation of machine learning and artificial intelligence. </span></p><p> </p><p><span style=\"font-weight: 400;\">Our knowledge in scientific Python and its ecosystem of libraries and tools allows us to offer bespoke solutions that derive true value from data. We empower clients with critical business insights and actionable knowledge while strengthening the open source projects modern technologies depend on.</span></p>"
+  sizePx: 16
+  color: "#000000"
 - type: columns
   columns:
     - - type: columns
@@ -233,20 +377,58 @@ blocks:
               text: "Get in Touch"
               level: 4
               sizePx: 55
+              fontWeight: 900
               color: "#452392"
+              paddingBottom: "50px"
             - type: form
-              note: "Consulting Overview Contact Form"
-        columnBackgrounds:
-          - "#FAFAFF"
-    - - type: columns
-        columns:
+              name: "Consulting Overview Contact Form"
+              fields:
+                - name: "form_fields[name]"
+                  kind: "input"
+                  type: "text"
+                  required: true
+                  placeholder: "Name"
+                - name: "form_fields[email]"
+                  kind: "input"
+                  type: "email"
+                  required: true
+                  placeholder: "Email"
+                - name: "form_fields[company]"
+                  kind: "input"
+                  type: "text"
+                  required: true
+                  placeholder: "Company name"
+                - name: "form_fields[services]"
+                  kind: "select"
+                  type: "text"
+                  required: true
+                  label: "Services you’re interested in"
+                  options: ["Al, Data & ML Engineering", "Infrastructure, Scaling & Acceleration", "Algorithms, AI & Machine Learning", "Packaging & Environment Management", "Jupyter Technologies", "Open Source Services", "PyTorch", "Nebari", "conda-store", "Ragna/RAG", "Large Language Models (LLMS)", "Training", "Other"]
+                - name: "form_fields[how]"
+                  kind: "select"
+                  type: "text"
+                  required: true
+                  label: "How did you hear about us?"
+                  options: ["Online search", "Social media", "Digital Ad", "Referral", "Conference/event", "Blog/online article", "Other"]
+              submit: "Send message"
+              audience: "contact"
           - - type: image
               src: "/page-assets/pytorch-services/Quansight-contact-02-02-02-1-1.svg"
               alt: ""
               width: 1122
               height: 889
+              widthPercent: 100
         columnBackgrounds:
           - "#FAFAFF"
-  columnBackgrounds:
-    - "#FAFAFF"
-    - "#FAFAFF"
+          - "#FAFAFF"
+        columnWidths:
+          - 54.915
+          - 45.045
+        columnPaddings:
+          - top: "50px"
+            right: "50px"
+            bottom: "50px"
+            left: "50px"
+
+        gapPx: 0
+  paddingBottom: "100px"

@@ -66,3 +66,10 @@ We understand the complexities of utilizing existing infrastructure while mitiga
 We have helped turn AI visions into practical solutions for our clients. For instance, Nebari has enabled Earth Science Information Partners (ESIP) to manage deployments without the need for a dedicated DevOps engineer. Government Geoscience users have found conda-store invaluable for maintaining research workflows. Additionally, an investment firm’s legal department has benefitted from Ragna in making its data sources more legible and discoverable.
 
 Quansight’s [AI Engineering consulting services](/ai-engineering) are designed to help you navigate the complexities of AI transformation. By leveraging our deep expertise in open source scientific computing and sustainable software practices, we make sure that your AI initiatives deliver real business value. Visit our AI Engineering page today to discover how we can help you turn your AI vision into reality.
+
+## More Articles From our Library
+
+- [Getting Started With AI](/getting-started-with-ai)
+- [Ragna in Action: Building AI Document Interrogation Apps with Open Source Tools](/blog/ragna-in-action-building-ai-document-interrogation-apps-with-open-source-tools)
+- [Streamlined Environment Lifecycle Management for Data Science Workflows with conda-store](/blog/streamlined-environment-lifecycle-management-for-data-science-workflows-with-conda-store)
+- [Evolving QHub to Nebari: Your Open Source Data Science Platform](/blog/evolving-qhub-to-nebari-your-open-source-data-science-platform)
