@@ -28,6 +28,7 @@ const COLOR_TOKENS: Record<string, string> = {
   '#A0A0A0': 'gray-500',
   '#FAFAFF': 'lightgray',
   '#F3F5F8': 'lightgray',
+  '#FAFAFA': 'lightgray',
   '#EBEBEB': 'gray-400',
   '#99C941': 'green',
 };

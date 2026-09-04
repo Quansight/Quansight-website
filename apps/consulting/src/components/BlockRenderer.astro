@@ -15,6 +15,7 @@ import { SocialIcons } from './SocialIcons';
 import { Toggle } from './Toggle';
 import { Video } from './Video';
 import { colorToken } from '../utils/colorTokens';
+import { sizeToken } from '../utils/fontSizeTokens';
 
 type Block = Record<string, unknown> & { type: string };
 
@@ -235,6 +236,11 @@ function isDarkBackground(hex: string): boolean {
     6: 'text-[1.8rem] leading-[2.4rem]',
   };
   const sizePx = block.sizePx as number | undefined;
+  // WP/Elementor's per-widget size is an arbitrary literal px value --
+  // sizeToken snaps it to the nearest step of the site's real 8-step
+  // scale (see tailwind.config.cjs), same idea as colorToken below.
+  const fontSizeToken = sizeToken(sizePx);
+  const sizeClass = fontSizeToken ? `text-${fontSizeToken} leading-[1.2]` : '';
   // WP/Elementor colors headings per-widget too -- most default to the
   // site's violet, but some are explicitly set to another brand color
   // (e.g. pink, to match a nearby accent). colorToken merges the handful
@@ -249,9 +255,7 @@ function isDarkBackground(hex: string): boolean {
   // wasn't found, not a safe sitewide default (700 is the single most
   // common real value, not 800).
   const fontWeight = block.fontWeight as number | undefined;
-  // the 62.5%-root trick makes 1rem == 10px sitewide -- see BaseLayout.astro
   const styleParts = [
-    sizePx ? `font-size:${sizePx / 10}rem;line-height:1.2` : '',
     fontWeight ? `font-weight:${fontWeight}` : '',
     !colorClass && color ? `color:${color}` : '',
   ].filter(Boolean);
@@ -282,7 +286,7 @@ function isDarkBackground(hex: string): boolean {
   return (
     <div class="max-w-layout mx-auto w-full" style={widgetPaddingStyle || undefined}>
       <Tag
-        class={`font-extrabold font-heading ${colorClass} ${alignClass} ${sizePx ? '' : SIZE_BY_LEVEL[level]}`}
+        class={`font-extrabold font-heading ${colorClass} ${alignClass} ${sizeClass || SIZE_BY_LEVEL[level]}`}
         style={style}
       >
         {block.text as string}
@@ -297,12 +301,12 @@ function isDarkBackground(hex: string): boolean {
   // paragraph emphasized at 21px/600 vs the sitewide default 18px/400).
   // The 62.5%-root trick makes 1rem == 10px sitewide -- see BaseLayout.astro.
   const sizePx = block.sizePx as number | undefined;
+  const fontSizeToken = sizeToken(sizePx);
   const fontWeight = block.fontWeight as number | undefined;
   const color = block.color as string | undefined;
   const token = colorToken(color);
   const colorClass = token ? `text-${token}` : color ? '' : 'text-black';
   const styleParts = [
-    sizePx ? `font-size:${sizePx / 10}rem` : '',
     fontWeight ? `font-weight:${fontWeight}` : '',
     !token && color ? `color:${color}` : '',
     // See the heading block above for why this applies directly here
@@ -315,7 +319,7 @@ function isDarkBackground(hex: string): boolean {
   return (
     <div
       class={`max-w-layout mx-auto w-full leading-[2.7rem] [&_a]:text-violet [&_a]:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem] ${
-        sizePx ? '' : 'text-[1.6rem]'
+        fontSizeToken ? `text-${fontSizeToken}` : 'text-xs'
       } ${colorClass}`}
       style={styleParts.length ? styleParts.join(';') : undefined}
       set:html={block.html as string}

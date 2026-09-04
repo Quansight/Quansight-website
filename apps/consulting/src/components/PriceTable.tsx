@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 
 import { ButtonLink } from './ButtonLink';
+import { colorToken } from '../utils/colorTokens';
 
 type PriceTableProps = {
   heading?: string;
@@ -32,54 +33,53 @@ export const PriceTable: FC<PriceTableProps> = ({
   buttonText,
   buttonUrl,
   priceBackground,
-}) => (
-  <div className="flex flex-col w-full max-w-layout mx-auto">
-    {heading && (
-      <div className="px-[2rem] py-[2.4rem] text-center bg-violet">
-        <h3 className="text-[2.2rem] font-medium leading-[1.3] text-white font-heading">
-          {heading}
-        </h3>
-        {subheading && (
-          <p className="mt-[0.5rem] text-[1.6rem] text-white">{subheading}</p>
+}) => {
+  const bgToken = colorToken(priceBackground) ?? 'lightgray';
+  return (
+    <div className="flex flex-col w-full max-w-layout mx-auto">
+      {heading && (
+        <div className="px-[2rem] py-[2.4rem] text-center bg-violet">
+          <h3 className="text-[2.2rem] font-medium leading-[1.3] text-white font-heading">
+            {heading}
+          </h3>
+          {subheading && (
+            <p className="mt-[0.5rem] text-[1.6rem] text-white">{subheading}</p>
+          )}
+        </div>
+      )}
+      <div className={`px-[2rem] py-[3rem] text-center bg-${bgToken}`}>
+        <span className="text-[2.4rem] font-bold text-violet">
+          {currency}
+          {price}
+        </span>
+        {period && (
+          <span className="ml-[0.8rem] text-[1.6rem] italic font-semibold text-pink">
+            {period}
+          </span>
         )}
       </div>
-    )}
-    <div
-      className="px-[2rem] py-[3rem] text-center"
-      style={{ backgroundColor: priceBackground ?? '#FAFAFF' }}
-    >
-      <span className="text-[2.4rem] font-bold text-violet">
-        {currency}
-        {price}
-      </span>
-      {period && (
-        <span className="ml-[0.8rem] text-[1.6rem] italic font-semibold text-pink">
-          {period}
-        </span>
+      {features && features.length > 0 && (
+        <ul
+          className={`flex flex-col gap-[2rem] px-[2rem] py-[3rem] text-left bg-${bgToken}`}
+        >
+          {features.map((feature, i) => (
+            <li
+              key={i}
+              className="flex gap-[1rem] items-start text-[1.4rem] leading-[1.5] text-black"
+            >
+              <span aria-hidden="true" className="mt-[0.2rem] text-violet">
+                ✓
+              </span>
+              {feature}
+            </li>
+          ))}
+        </ul>
+      )}
+      {buttonText && buttonUrl && (
+        <div className="flex justify-center py-[2rem]">
+          <ButtonLink url={buttonUrl} text={buttonText} color="violet" isFull />
+        </div>
       )}
     </div>
-    {features && features.length > 0 && (
-      <ul
-        className="flex flex-col gap-[2rem] px-[2rem] py-[3rem] text-left"
-        style={{ backgroundColor: priceBackground ?? '#FAFAFF' }}
-      >
-        {features.map((feature, i) => (
-          <li
-            key={i}
-            className="flex gap-[1rem] items-start text-[1.4rem] leading-[1.5] text-black"
-          >
-            <span aria-hidden="true" className="mt-[0.2rem] text-violet">
-              ✓
-            </span>
-            {feature}
-          </li>
-        ))}
-      </ul>
-    )}
-    {buttonText && buttonUrl && (
-      <div className="flex justify-center py-[2rem]">
-        <ButtonLink url={buttonUrl} text={buttonText} color="violet" isFull />
-      </div>
-    )}
-  </div>
-);
+  );
+};
