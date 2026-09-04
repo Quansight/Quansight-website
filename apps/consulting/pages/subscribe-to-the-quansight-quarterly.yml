@@ -14,15 +14,28 @@ blocks:
               text: "Subscribe to\nThe Quansight Quarterly"
               level: 2
               sizePx: 60
+              fontWeight: 600
               color: "#FFFFFF"
             - type: text
               html: "<p><span style=\"font-weight: 400;\">Latest news and updates from our team and the open source projects we work on.</span></p>"
+              sizePx: 22
+              color: "#FFFFFF"
           - - type: form
-              note: "New Form"
+              name: "New Form"
+              fields:
+                - name: "EMAIL"
+                  kind: "input"
+                  type: "email"
+                  required: true
+                  placeholder: "Your Email"
+                  label: "Your Email"
+              submit: "Subscribe >"
+              audience: "mailchimp"
           - - type: heading
               text: "Follow us"
               level: 3
               sizePx: 18
+              fontWeight: 600
               color: "#FFFFFF"
             - type: social-icons
               links:
@@ -54,8 +67,13 @@ blocks:
                   href: "https://www.facebook.com/quansight/"
                   icon: "/images/icons/facebook.svg"
                   iconAlt: "Facebook"
+        gapPx: 40
     - - type: image
         src: "/page-assets/subscribe-to-the-quansight-quarterly/Newsletter-page-image.png"
         alt: ""
         width: 800
         height: 799
+  columnWidths:
+    - 60.0
+    - 60.0
+  gapPx: 0

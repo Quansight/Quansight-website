@@ -84,20 +84,23 @@ export function SiteHeaderMobile({
         </button>
       </div>
 
-      {/* overlay nav */}
+      {/* overlay nav -- real site's equivalent (.elementor-nav-menu--dropdown,
+          confirmed via post-255.css, the header template's own CSS) is a
+          white dropdown panel with violet text throughout (top-level items
+          included, not white-on-dark), not a black full-screen overlay. */}
       <nav
         id="mobile-menu"
-        className={`fixed inset-0 z-30 pt-[8rem] w-screen h-screen bg-black text-white overflow-y-auto transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-0 z-30 pt-[8rem] w-screen h-screen bg-white text-violet overflow-y-auto transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <ul className="flex flex-col justify-start items-center px-[2rem] pt-[1.8rem]">
           {navigation.map((item) => (
-            <li key={item.href} className="w-full border-b border-b-white">
+            <li key={item.href} className="w-full">
               <a
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="block py-[1.6rem] px-[2rem] w-full text-[1.7rem] font-extrabold leading-[2.825rem] capitalize font-heading"
+                className="block py-[1.6rem] px-[2rem] w-full text-[1.4rem] font-medium leading-[2rem] capitalize"
               >
                 {item.text}
               </a>
@@ -108,7 +111,7 @@ export function SiteHeaderMobile({
                       <a
                         href={child.href}
                         onClick={() => setIsOpen(false)}
-                        className="block py-[0.8rem] px-[3.6rem] w-full text-[1.4rem] font-semibold"
+                        className="block py-[0.8rem] px-[3.6rem] w-full text-[1.4rem] font-medium text-violet"
                       >
                         {child.text}
                       </a>

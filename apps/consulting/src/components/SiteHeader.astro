@@ -12,24 +12,31 @@ const { logo, navigation, skipLinksText } = entry!.data as {
 };
 ---
 
-<header class="fixed inset-x-0 top-0 z-20 bg-black text-white sm:absolute sm:bg-transparent">
-  {/* Matches the live site: transparent at desktop, overlaid directly on
-      the hero banner's own gradient (no separate header color/seam) --
-      mobile keeps a solid bg since SiteHeaderMobile's bar stays fixed
-      while scrolling, unlike the desktop nav which scrolls away with the
-      hero once you pass it (not pinned/sticky). Every page must start
-      with a `hero` block for this to not cover content with nothing
-      behind it -- see fetch_hero_background()'s fallback in
-      convert-pages-consulting.py for pages with no real hero image. */}
+<header class="fixed inset-x-0 top-0 z-20 bg-black text-white sm:relative sm:z-auto sm:bg-[#331A6C]">
+  {/* The live header is its OWN in-flow section before the hero (min-
+      height 50px, its own violet background) -- it pushes the hero down,
+      it does NOT overlay it transparently (confirmed via the header's own
+      CSS: no position:fixed/absolute anywhere, a real background-color).
+      The background isn't flat #452392: a full-bleed, solid-black overlay
+      image sits over it at 26% opacity (confirmed by sampling the actual
+      image -- it's uniformly RGB(1,1,1), no visible pattern at that
+      opacity, so reproducing it as an image would look identical to just
+      pre-blending the color), darkening it to #331A6C. Mobile keeps this
+      fixed/solid, matching SiteHeaderMobile's own
+      always-fixed bar. */}
   <div class="mx-auto max-w-layout">
     {/* skip to content link */}
     <div class="absolute inset-x-0 top-0 z-50 py-[2rem] max-w-full text-[1.6rem] font-extrabold text-center text-white bg-black transition-transform duration-300 ease-in-out -translate-y-full focus-within:translate-y-0">
       <a href="#maincontent" class="pb-2 border-b-2">{skipLinksText}</a>
     </div>
 
-    {/* desktop nav */}
-    <div class="hidden gap-[4.7rem] justify-between items-center sm:flex sm:px-[3.4rem] lg:gap-[13.7rem] xl:gap-[15.1rem] xl:px-[11.5rem]">
-      <a href="/" aria-label="Go to home page" class="relative shrink-0 w-[27.3rem] h-[7.373rem] lg:w-[33.5rem] lg:h-[9.49rem]">
+    {/* desktop nav -- real per-section padding is 0 beyond the boxed
+        1140px width (max-w-layout already provides that), and the logo's
+        own column is a narrow ~17.6% of it, not half -- both previously
+        guessed too generously, which read as the logo sitting further
+        right/larger than the live site. */}
+    <div class="hidden gap-[4.7rem] justify-between items-center sm:flex">
+      <a href="/" aria-label="Go to home page" class="relative shrink-0 w-[18rem] h-[8.7rem] lg:w-[20rem] lg:h-[9.66rem]">
         <img
           src={logo.src}
           alt={logo.alt}
@@ -41,17 +48,17 @@ const { logo, navigation, skipLinksText } = entry!.data as {
           <div class="relative group">
             <a
               href={item.href}
-              class="text-[1.7rem] font-extrabold leading-[2.825rem] capitalize font-heading hover:text-green transition-colors ease-in-out"
+              class="px-[2rem] text-[1.6rem] font-semibold leading-[2rem] capitalize hover:text-green transition-colors ease-in-out"
             >
               {item.text}
             </a>
             {item.children && (
-              <ul class="hidden group-hover:block group-focus-within:block absolute left-0 top-full min-w-[24rem] bg-black py-2 z-30">
+              <ul class="hidden group-hover:block group-focus-within:block absolute left-0 top-full min-w-[24rem] bg-white py-2 z-30">
                 {item.children.map((child) => (
                   <li>
                     <a
                       href={child.href}
-                      class="block px-4 py-2 text-[1.4rem] font-semibold whitespace-nowrap hover:text-green transition-colors ease-in-out"
+                      class="block px-4 py-2 text-[1.4rem] font-medium text-violet whitespace-nowrap hover:text-green transition-colors ease-in-out"
                     >
                       {child.text}
                     </a>

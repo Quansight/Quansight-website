@@ -61,3 +61,23 @@ table.table-horizontal-scroll td,
 table.table-horizontal-scroll tbody th {
   vertical-align: middle;
 }
+
+/*
+  A `columns` block with real per-column widths (see BlockRenderer.astro):
+  classic-model Elementor columns are a FIXED width (elementor-col-33 etc),
+  not "100% / column count" -- a row can have fewer populated columns than
+  its own design calls for, and rendering that as an even split stretches
+  them to fill the row instead of leaving real blank space and lining up
+  with a fuller row above/below it. The widths vary per row, so they come
+  in via the --col-widths custom property (inline style) rather than a
+  Tailwind utility class, which needs a statically-known value at build
+  time. Stacks on mobile like every other `columns` block.
+*/
+.col-widths {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .col-widths {
+    grid-template-columns: var(--col-widths, 1fr);
+  }
+}

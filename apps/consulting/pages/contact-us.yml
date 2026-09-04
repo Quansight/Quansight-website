@@ -10,31 +10,40 @@ blocks:
   imageAlt: ""
   overlayOpacity: 0.26
   title: "Contact Us"
+  titleSizePx: 70
+  titleFontWeight: 700
 - type: columns
   columns:
-    - - type: columns
-        columns:
-          - - type: heading
-              text: "Get in Touch"
-              level: 4
-              sizePx: 55
-              color: "#452392"
-            - type: text
-              html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\" style=\"\">connect@quansight.com</a><br/><br/></p>"
-        columnBackgrounds:
-          - "#FAFAFF"
-    - - type: columns
-        columns:
-          - - type: image
-              src: "/page-assets/contact-us/Quansight-contact-02-02-02-1-1.svg"
-              alt: ""
-              width: 1122
-              height: 889
-        columnBackgrounds:
-          - "#FAFAFF"
+    - - type: heading
+        text: "Get in Touch"
+        level: 4
+        sizePx: 55
+        fontWeight: 900
+        color: "#452392"
+        paddingBottom: "50px"
+      - type: text
+        html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\" style=\"\">connect@quansight.com</a><br/><br/></p>"
+        sizePx: 16
+        color: "#000000"
+    - - type: image
+        src: "/page-assets/contact-us/Quansight-contact-02-02-02-1-1.svg"
+        alt: ""
+        width: 1122
+        height: 889
+        widthPercent: 100
   columnBackgrounds:
     - "#FAFAFF"
     - "#FAFAFF"
+  columnWidths:
+    - 54.915
+    - 45.045
+  columnPaddings:
+    - top: "50px"
+      right: "50px"
+      bottom: "50px"
+      left: "50px"
+
+  gapPx: 0
 - type: columns
   columns:
     - - type: columns
@@ -43,16 +52,39 @@ blocks:
               text: "Subscribe for Updates & News"
               level: 2
               sizePx: 30
+              fontWeight: 600
               color: "#FFFFFF"
             - type: form
-              note: "Mailing List Signup"
+              name: "Mailing List Signup"
+              fields:
+                - name: "EMAIL"
+                  kind: "input"
+                  type: "email"
+                  required: true
+                  placeholder: "Email"
+                  label: "Email"
+              submit: "Submit"
+              audience: "mailchimp"
+              submitIcon: true
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/contact-us/subscribe.svg"
+                    alt: ""
+                    width: 455
+                    height: 181
+              columnBackgrounds:
+                - "#452392"
+              paddingRight: "5%"
         columnBackgrounds:
           - "#452392"
-    - - type: columns
-        columns:
-          - - type: call-to-action
-        columnBackgrounds:
-          - "#452392"
-  columnBackgrounds:
-    - "#452392"
-    - null
+          - null
+        columnWidths:
+          - 100.0
+          - 100.0
+        columnPaddings:
+          - left: "15%"
+
+        gapPx: 0
+        marginBottom: "5%"
+  marginBottom: "5%"

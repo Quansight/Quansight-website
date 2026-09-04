@@ -6,7 +6,11 @@ type IconBoxGridProps = {
     title?: string;
     description?: string;
     icon?: string;
+    iconColor?: string;
+    descriptionSizePx?: number;
+    descriptionColor?: string;
     divider?: boolean;
+    align?: 'center' | 'start';
   }[];
 };
 
@@ -44,7 +48,11 @@ export const IconBoxGrid: FC<IconBoxGridProps> = ({ items }) => {
           title={item.title}
           description={item.description}
           icon={item.icon}
+          iconColor={item.iconColor}
+          descriptionSizePx={item.descriptionSizePx}
+          descriptionColor={item.descriptionColor}
           divider={item.divider}
+          align={item.align}
         />
       ))}
     </div>
