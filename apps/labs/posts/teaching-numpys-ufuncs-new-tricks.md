@@ -1,7 +1,7 @@
 ---
 title: "Teaching NumPy's ufuncs new tricks"
 authors: [iason-krommydas]
-published: August 26, 2026
+published: September 6, 2026
 description: 'A recap of my Quansight internship working on NumPy internals: multi-output reductions and np.minmax, segmented reductions, and new gufuncs.'
 category: [PyData ecosystem, Internship]
 featuredImage:
