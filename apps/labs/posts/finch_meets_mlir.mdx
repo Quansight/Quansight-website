@@ -112,8 +112,8 @@ This code compiles because we used `arith.index_cast` to type-cast `%1` with flo
 
 MLIR expresses values in the form of SSA (Static Single Assignment), where **every value is assigned once and remains immutable**. Chained operations were prevalent in Finch Assembly IR. Here is a snippet of it:
 
-```text
-#i#41__pos: int64 = add(0, mul(#_A_3#38_stride_0, #i#41))
+```python
+i_41__pos: int64 = add(0, mul(A_3_38_stride_0, i_41))
 ```
 
 In MLIR, we would have to introduce a unique SSA for every operation and constant, which would look like this:
@@ -230,9 +230,9 @@ You could try to follow it yourself, every new SSA is made by calling freshen wh
 
 In the original Finch Assembly IR, the if statement does not have an else call. As seen here:
 
-```text
-if lt(load(slot(#_A_9#4_lvl_lvl_idx_slot, np_buf_t(int64)), q), 0):
-    q: finch.int64 = scansearch(slot(#_A_9#4_lvl_lvl_idx_slot, np_buf_t(int64)), 0, q, sub(q_stop, 1))
+```python
+if lt(load(slot(A_9_4_lvl_lvl_idx_slot, np_buf_t(int64)), q), 0):
+    q: finch.int64 = scansearch(slot(A_9_4_lvl_lvl_idx_slot, np_buf_t(int64)), 0, q, sub(q_stop, 1))
 ```
 
 However, we see the existence of the else block in the MLIR code. The reasoning behind this addition was that we track the value reassignment in the body block before the execution of the lowering. The body block compares its dictionary with the main block to track the values that have been mutated or reassigned to determine whether the else block is written. Only in some unique cases, like rewriting a buffer and making a new value within the if statement, the else block would not be emitted.
