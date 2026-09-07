@@ -112,7 +112,7 @@ This code compiles because we used `arith.index_cast` to type-cast `%1` with flo
 
 MLIR expresses values in the form of SSA (Static Single Assignment), where **every value is assigned once and remains immutable**. Chained operations were prevalent in Finch Assembly IR. Here is a snippet of it:
 
-```mlir
+```text
 #i#41__pos: int64 = add(0, mul(#_A_3#38_stride_0, #i#41))
 ```
 
@@ -208,17 +208,17 @@ In our lowering, we used three constructs from the `csf` dialect: `scf.if`, `scf
 In the example below, we see the usage of the `scf.if` from the sparse matmul kernel. There are many parts of the code that stick out. First of all, the condition of the branch is defined outside of the if statement. Only the condition's SSA is passed into the if statement parameter.
 
 ```mlir
-# If Condition
+// If Condition
 %v_82 = memref.load %v_16[%v_73] : memref<?xindex>
 %v_83 = arith.cmpi slt, %v_82, %v_27 : index
 
-# If Statement with return SSA
+// If Statement with return SSA
 %v_86 = scf.if %v_83 -> (index) {
 %v_84 = arith.subi %v_75, %v_29 : index
 %v_85 = func.call @scansearch(%v_16, %v_27, %v_73, %v_84) : (memref<?xindex>, index, index, index) -> index
 scf.yield %v_85 : index
 
-# Else Statement
+// Else Statement
 } else {
 scf.yield %v_73 : index
 }
@@ -230,7 +230,7 @@ You could try to follow it yourself, every new SSA is made by calling freshen wh
 
 In the original Finch Assembly IR, the if statement does not have an else call. As seen here:
 
-```mlir
+```text
 if lt(load(slot(#_A_9#4_lvl_lvl_idx_slot, np_buf_t(int64)), q), 0):
     q: finch.int64 = scansearch(slot(#_A_9#4_lvl_lvl_idx_slot, np_buf_t(int64)), 0, q, sub(q_stop, 1))
 ```
@@ -261,7 +261,7 @@ The MLIR for loop resembles a for loop we would typically see in C or Python. Th
 Lowering the Finch Assembly IR while loops to MLIR while loops was by far the toughest task in this internship. I was expecting a simple while loop that imitates the while loop you see in Python, but it looks wildly different from my expectations. This is an example of how the while loop is used in our sparse matrix multiplication kernel:
 
 ```mlir
-# While Parameter
+// While Parameter
 %v_130:3 = scf.while (%v_55 = %v_27, %v_56 = %v_54, %v_57 = %v_49) : (index, index, index) -> (index, index, index) {
 
     # Condition Block
@@ -270,7 +270,7 @@ Lowering the Finch Assembly IR while loops to MLIR while loops was by far the to
     %v_60 = arith.cmpi slt, %v_57, %v_59 : index
     scf.condition(%v_60) %v_55, %v_56, %v_57 : index, index, index
 
-# While Block
+// While Block
 } do {
 ^bb_2(%v_55: index, %v_56: index, %v_57: index):
     ...
@@ -325,52 +325,50 @@ The while loop in MLIR is separated into three distinct regions: while parameter
 During our lowering process, there were some operations that were not directly lowered into Finch Assembly IR, but instead emitted as calls to auxiliary functions provided by the backend. One of these operations was scansearch. The scansearch function originates from the [Finch](https://dl.acm.org/doi/pdf/10.1145/3720473) paper, and was described as Finch's gallop protocol. The function allows a sparse iterator to jump forward through a sorted coordinate array instead of scanning every coordinate. This function was needed by the Sparse General Matrix-Matrix Multiplication (SpGEMM) and Sampled Dense-Dense Matrix Multiplication (SDDMM) kernels to match the sparse coordinates. In the MLIR backend, we opted to hard-code the function to support MLIR's index type or `np.intp`. Below is the scansearch function lowered to MLIR code:
 
 ```mlir
-SCANSEARCH = """
-  func.func @scansearch(
-    %arr: memref<?xindex>, %x: index, %lo: index, %hi: index
-  ) -> index attributes {llvm.emit_c_interface} {
-    %1 = arith.constant 1 : index
-    %g:2 = scf.while (%d = %1, %p = %lo) : (index, index) -> (index, index) {
-      %plt = arith.cmpi slt, %p, %hi : index
-      %cond = scf.if %plt -> (i1) {
-        %ap = memref.load %arr[%p] : memref<?xindex>
-        %al = arith.cmpi slt, %ap, %x : index
-        scf.yield %al : i1
-      } else {
-        %f = arith.constant false
-        scf.yield %f : i1
-      }
-      scf.condition(%cond) %d, %p : index, index
-    } do {
-    ^bb0(%d: index, %p: index):
-      %d2 = arith.shli %d, %1 : index
-      %p2 = arith.addi %p, %d2 : index
-      scf.yield %d2, %p2 : index, index
+func.func @scansearch(
+  %arr: memref<?xindex>, %x: index, %lo: index, %hi: index
+) -> index attributes {llvm.emit_c_interface} {
+  %1 = arith.constant 1 : index
+  %g:2 = scf.while (%d = %1, %p = %lo) : (index, index) -> (index, index) {
+    %plt = arith.cmpi slt, %p, %hi : index
+    %cond = scf.if %plt -> (i1) {
+      %ap = memref.load %arr[%p] : memref<?xindex>
+      %al = arith.cmpi slt, %ap, %x : index
+      scf.yield %al : i1
+    } else {
+      %f = arith.constant false
+      scf.yield %f : i1
     }
-    %lo1 = arith.subi %g#1, %g#0 : index
-    %minp = arith.minsi %g#1, %hi : index
-    %hi1 = arith.addi %minp, %1 : index
-    %b:2 = scf.while (%l = %lo1, %h = %hi1) : (index, index) -> (index, index) {
-      %hm1 = arith.subi %h, %1 : index
-      %go = arith.cmpi slt, %l, %hm1 : index
-      scf.condition(%go) %l, %h : index, index
-    } do {
-    ^bb0(%l: index, %h: index):
-      %diff = arith.subi %h, %l : index
-      %half = arith.shrsi %diff, %1 : index
-      %m = arith.addi %l, %half : index
-      %am = memref.load %arr[%m] : memref<?xindex>
-      %al = arith.cmpi slt, %am, %x : index
-      %l2, %h2 = scf.if %al -> (index, index) {
-        scf.yield %m, %h : index, index
-      } else {
-        scf.yield %l, %m : index, index
-      }
-      scf.yield %l2, %h2 : index, index
-    }
-    return %b#1 : index
+    scf.condition(%cond) %d, %p : index, index
+  } do {
+  ^bb0(%d: index, %p: index):
+    %d2 = arith.shli %d, %1 : index
+    %p2 = arith.addi %p, %d2 : index
+    scf.yield %d2, %p2 : index, index
   }
-"""
+  %lo1 = arith.subi %g#1, %g#0 : index
+  %minp = arith.minsi %g#1, %hi : index
+  %hi1 = arith.addi %minp, %1 : index
+  %b:2 = scf.while (%l = %lo1, %h = %hi1) : (index, index) -> (index, index) {
+    %hm1 = arith.subi %h, %1 : index
+    %go = arith.cmpi slt, %l, %hm1 : index
+    scf.condition(%go) %l, %h : index, index
+  } do {
+  ^bb0(%l: index, %h: index):
+    %diff = arith.subi %h, %l : index
+    %half = arith.shrsi %diff, %1 : index
+    %m = arith.addi %l, %half : index
+    %am = memref.load %arr[%m] : memref<?xindex>
+    %al = arith.cmpi slt, %am, %x : index
+    %l2, %h2 = scf.if %al -> (index, index) {
+      scf.yield %m, %h : index, index
+    } else {
+      scf.yield %l, %m : index, index
+    }
+    scf.yield %l2, %h2 : index, index
+  }
+  return %b#1 : index
+}
 ```
 
 Currently, scansearch does not support index buffers with other data types, such as `i32`. Therefore, the integer buffers of matrices created with `scipy.sparse.random` must be cast to `np.intp` before they can be compiled. This error occurs when a matrix with `i32` index buffers is compiled as part of a SpGEMM kernel:
