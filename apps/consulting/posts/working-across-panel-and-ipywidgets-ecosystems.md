@@ -1,7 +1,7 @@
 ---
 title: 'Working Across Panel and ipywidgets Ecosystems'
 published: December 18, 2020
-author: pamela-wadhwa
+authors: [pamela-wadhwa]
 description: 'This notebook is designed to help you learn how to make apps in Panel in about 15 minutes. Screenshots of cell outputs are included for convenience below, but it is strongly recommended that you use the interactive Binder version (takes 1-2 minutes to load) or by cloning the repo and running locally.'
 category: [Training, Data Visualization, Jupyter]
 featuredImage:
@@ -11,8 +11,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 _This post is adapted from a notebook designed to help you learn how to make
 apps in Panel in about 15 minutes. Screenshots of cell outputs are included for

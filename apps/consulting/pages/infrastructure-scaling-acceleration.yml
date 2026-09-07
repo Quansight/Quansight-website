@@ -1,0 +1,457 @@
+slug: infrastructure-scaling-acceleration
+title: "Infrastructure, Scaling, & Acceleration"
+description: "Infrastructure, Scaling, & Acceleration Scale your compute and data warehousing cost-effectively and reliably with top of the line open source tooling. In order to run"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/infrastructure-scaling-acceleration/Hero-Background-16.png"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Infrastructure, Scaling, & Acceleration"
+  titleSizePx: 70
+  titleFontWeight: 700
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: heading
+                    text: "Scale your compute and data warehousing cost-effectively and reliably with top of the line open source tooling."
+                    level: 4
+                    sizePx: 40
+                    fontWeight: 900
+                    color: "#452392"
+                    paddingRight: "30px"
+                - - type: text
+                    html: "<p>\n\t\t\t\t\t\t\t\t\tIn order to run computations, especially at scale, you need to have the right compute infrastructure to handle them. Quansight’s technical team has deep expertise with both on-prem and in-cloud compute infrastructure, and also with the big data and scientific tooling to make optimal use of that infrastructure. We’ll build the systems you need and train your team to use them effectively and efficiently.\t\t\t\t\t\t\t\t</p>"
+                    sizePx: 16
+                    color: "#000000"
+                    paddingRight: "50px"
+              columnWidths:
+                - 54.638
+                - 45.262
+              columnPaddings:
+
+                - top: "35px"
+              gapPx: 0
+        paddingTop: "25px"
+  paddingTop: "70px"
+  paddingBottom: "20px"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-08-1.svg"
+                    alt: ""
+                    width: 100
+                    height: 100
+                  - type: icon-box-grid
+                    items:
+                      - title: "On-Prem Server Provisioning"
+                        description: "We know physical hardware as well as software and the cloud. If you want an on-premise compute solution, we will get it implemented for you."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+                - - type: image
+                    src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-09-1.svg"
+                    alt: ""
+                    width: 100
+                    height: 100
+                  - type: icon-box-grid
+                    items:
+                      - title: "Cloud Cost & Capacity Optimization"
+                        description: "We have the expertise to fine-tune your cloud configuration to ensure you have the resources you need at a minimum of cost."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+                - right: "20px"
+                  left: "20px"
+                - right: "20px"
+                  left: "20px"
+              gapPx: 20
+        paddingTop: "60px"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-10-1.svg"
+                    alt: ""
+                    width: 100
+                    height: 100
+                  - type: icon-box-grid
+                    items:
+                      - title: "Customized Collaboration Platforms"
+                        description: "Large-scale, distributed scientific collaboration is extremely challenging to implement. Our QHub platform makes it easy."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+                - - type: image
+                    src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-11-1.svg"
+                    alt: ""
+                    width: 100
+                    height: 100
+                  - type: icon-box-grid
+                    items:
+                      - title: "Cloud Compute Configuration & Management"
+                        description: "Cloud compute infrastructure is complicated and challenging for newcomers. Quansight will establish your cloud capacity and train your engineers to manage it."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+                - right: "20px"
+                  left: "20px"
+                - right: "20px"
+                  left: "20px"
+              gapPx: 20
+        paddingTop: "60px"
+  paddingBottom: "100px"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Infrastructure, Scaling, & Acceleration"
+              level: 3
+              sizePx: 50
+              fontWeight: 900
+              color: "#ffffff"
+            - type: text
+              html: "<p>Well-designed, scalable compute and storage plus optimized, accelerated code is the lifeblood of modern big data analytics</p>"
+              sizePx: 16
+              color: "#FFFFFF"
+            - type: button
+              url: "#bookacallform"
+              text: "I'm interested"
+              isFull: true
+              isBordered: true
+              isTriangle: true
+              backgroundColor: "#452392"
+              textColor: "#FFFFFF"
+              borderColor: "#FFFFFF"
+          - - type: image
+              src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-28-1.svg"
+              alt: ""
+              width: 768
+              height: 1
+              widthPercent: 100
+        columnBackgrounds:
+          - "#452392"
+          - null
+        columnWidths:
+          - 67.707
+          - 32.255
+        columnPaddings:
+          - top: "100px"
+            right: "250px"
+            bottom: "100px"
+            left: "100px"
+
+        gapPx: 0
+  paddingBottom: "100px"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Some of the Open Source Projects We Use for  Data Engineering & MLOps"
+        level: 4
+        sizePx: 28
+        fontWeight: 900
+        color: "#000000"
+        align: "center"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/infrastructure-scaling-acceleration/the-open-source-projects-we-use-for-infrastructure-scaling-acceleration-01-1-1024x440.webp"
+                    alt: ""
+                    width: 800
+                    height: 344
+                    widthPercent: 100
+                - - type: image
+                    src: "/page-assets/infrastructure-scaling-acceleration/trusted-by-open-source-maintainers-and-contributors-07-1024x440.webp"
+                    alt: ""
+                    width: 800
+                    height: 344
+                    widthPercent: 100
+                - - type: image
+                    src: "/page-assets/infrastructure-scaling-acceleration/the-open-source-projects-we-use-for-infrastructure-scaling-acceleration-02-1024x440.webp"
+                    alt: "Image of the Ray logo"
+                    width: 800
+                    height: 344
+                    widthPercent: 100
+                - - type: image
+                    src: "/page-assets/infrastructure-scaling-acceleration/the-open-source-projects-we-use-for-infrastructure-scaling-acceleration-04-1024x440.webp"
+                    alt: "Image of the Kubernetes logo"
+                    width: 800
+                    height: 344
+                    widthPercent: 100
+                - - type: image
+                    src: "/page-assets/infrastructure-scaling-acceleration/the-open-source-projects-we-use-for-infrastructure-scaling-acceleration-03-1024x440.webp"
+                    alt: "Imge of the Terraform logo"
+                    width: 800
+                    height: 344
+                    widthPercent: 100
+                - - type: image
+                    src: "/page-assets/infrastructure-scaling-acceleration/trusted-by-open-source-maintainers-and-contributors-03-1024x440.webp"
+                    alt: ""
+                    width: 800
+                    height: 344
+                    widthPercent: 100
+              columnWidths:
+                - 16
+                - 16
+                - 16
+                - 16
+                - 16
+                - 16
+              gapPx: 0
+        paddingTop: "25px"
+  paddingBottom: "100px"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "A word from Quansight clients..."
+              level: 3
+              sizePx: 50
+              fontWeight: 900
+              color: "#ffffff"
+            - type: text
+              html: "<p>“Quansight was amazing to work with. They helped us select and implement an open source technology stack that enabled us to cost-effectively process terabytes of data per day. Not only that, but they automated the deployment process, untethering us from specific cloud vendors, and enabling us to shop for competitive rates.” — Brian Larsen, Director of Technical Product, Datum</p>"
+              sizePx: 16
+              color: "#FFFFFF"
+          - - type: image
+              src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-25-2.svg"
+              alt: ""
+              width: 200
+              height: 200
+        columnBackgrounds:
+          - "#452392"
+          - null
+        columnWidths:
+          - 67.707
+          - 32.255
+        columnPaddings:
+          - top: "100px"
+            right: "250px"
+            bottom: "100px"
+            left: "100px"
+
+        gapPx: 0
+  paddingBottom: "100px"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Explore Additional Consulting Areas"
+        level: 4
+        sizePx: 50
+        fontWeight: 900
+        color: "#452392"
+        align: "center"
+        paddingBottom: "30px"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image-box-grid
+                    items:
+                      - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-2-100x100.png"
+                        imageAlt: ""
+                  - type: button
+                    url: "/data-engineering-mlops"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                - - type: image-box-grid
+                    items:
+                      - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-6-100x100.png"
+                        imageAlt: ""
+                  - type: button
+                    url: "/visualization-dashboards"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                - - type: image-box-grid
+                    items:
+                      - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-4-100x100.png"
+                        imageAlt: ""
+                  - type: button
+                    url: "/algorithms-ai-machine-learning"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+              columnWidths:
+                - 33
+                - 33
+                - 33
+              columnMargins:
+                - right: "5px"
+                  left: "5px"
+                - right: "5px"
+                  left: "5px"
+                - right: "5px"
+                  left: "5px"
+              columnPaddings:
+                - top: "35px"
+                  right: "35px"
+                  bottom: "35px"
+                  left: "35px"
+                - top: "35px"
+                  right: "35px"
+                  bottom: "35px"
+                  left: "35px"
+                - top: "35px"
+                  right: "35px"
+                  bottom: "35px"
+                  left: "35px"
+              gapPx: 0
+        paddingTop: "20px"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image-box-grid
+                    items:
+                      - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-3-100x100.png"
+                        imageAlt: ""
+                  - type: button
+                    url: "/open-source-integration"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                - - type: image-box-grid
+                    items:
+                      - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-5-100x100.png"
+                        imageAlt: ""
+                  - type: button
+                    url: "/packaging-and-distribution"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                - - type: image-box-grid
+                    items:
+                      - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-7-100x100.png"
+                        imageAlt: ""
+                  - type: button
+                    url: "/jupyter-technologies"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+              columnWidths:
+                - 33
+                - 33
+                - 33
+              columnMargins:
+                - right: "5px"
+                  left: "5px"
+                - right: "5px"
+                  left: "5px"
+                - right: "5px"
+                  left: "5px"
+              columnPaddings:
+                - top: "35px"
+                  right: "35px"
+                  bottom: "35px"
+                  left: "35px"
+                - top: "35px"
+                  right: "35px"
+                  bottom: "35px"
+                  left: "35px"
+                - top: "35px"
+                  right: "35px"
+                  bottom: "35px"
+                  left: "35px"
+              gapPx: 0
+        paddingTop: "20px"
+  paddingBottom: "100px"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Ready to use data more effectively across your organization?"
+              level: 4
+              sizePx: 55
+              fontWeight: 900
+              color: "#452392"
+              paddingBottom: "50px"
+            - type: form
+              name: "Consulting Overview Contact Form"
+              fields:
+                - name: "form_fields[name]"
+                  kind: "input"
+                  type: "text"
+                  required: true
+                  placeholder: "Name"
+                - name: "form_fields[email]"
+                  kind: "input"
+                  type: "email"
+                  required: true
+                  placeholder: "Email"
+                - name: "form_fields[company]"
+                  kind: "input"
+                  type: "text"
+                  required: true
+                  placeholder: "Company name"
+                - name: "form_fields[services]"
+                  kind: "select"
+                  type: "text"
+                  required: true
+                  label: "Services you’re interested in"
+                  options: ["Al, Data & ML Engineering", "Infrastructure, Scaling & Acceleration", "Algorithms, AI & Machine Learning", "Packaging & Environment Management", "Jupyter Technologies", "Open Source Services", "PyTorch", "Nebari", "conda-store", "Ragna/RAG", "Large Language Models (LLMS)", "Training", "Other"]
+                - name: "form_fields[how]"
+                  kind: "select"
+                  type: "text"
+                  required: true
+                  label: "How did you hear about us?"
+                  options: ["Online search", "Social media", "Digital Ad", "Referral", "Conference/event", "Blog/online article", "Other"]
+              submit: "Send message"
+              audience: "contact"
+          - - type: image
+              src: "/page-assets/infrastructure-scaling-acceleration/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+              widthPercent: 100
+        columnBackgrounds:
+          - "#FAFAFF"
+          - "#FAFAFF"
+        columnWidths:
+          - 54.915
+          - 45.045
+        columnPaddings:
+          - top: "50px"
+            right: "50px"
+            bottom: "50px"
+            left: "50px"
+
+        gapPx: 0
+  paddingTop: "100px"
+  paddingBottom: "100px"

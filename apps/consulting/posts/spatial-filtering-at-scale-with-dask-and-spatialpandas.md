@@ -1,7 +1,7 @@
 ---
 title: 'Spatial Filtering at Scale With Dask and Spatialpandas'
 published: October 7, 2020
-author: adam-lewis
+authors: [adam-lewis]
 description: >
   Imagine having a dataset of over 50 TB of compressed geospatial point data stored in flat files, and you want to efficiently filter data in a few ZIP codes for further processing. You can't even open a dataset that large on a single machine using tools like pandas, so what is the best way to accomplish the filtering? This is exactly the problem one of our clients recently faced.
 category: [Scalable Computing, PyData Ecosystem]
@@ -12,8 +12,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 Imagine having a dataset of over 50 TB of compressed geospatial point data
 stored in flat files, and you want to efficiently filter data in a few ZIP codes

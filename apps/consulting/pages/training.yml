@@ -1,0 +1,340 @@
+slug: training
+title: "Training"
+description: "Training & Related Services Advanced PyData Courses Basic Python courses are easy to come by but when you want to dig deep, the options are"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/training/Hero-Background-4.png"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Training & Related Services"
+  titleSizePx: 70
+  titleFontWeight: 700
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Advanced PyData Courses"
+              level: 2
+              sizePx: 37
+              fontWeight: 800
+              color: "#000000"
+            - type: heading
+              text: "Basic Python courses are easy to come by but when you want to dig deep, the options are few. Building off decades of experience training professionals in academic and industry contexts, Quansight delivers expert custom training on data science, scientific computing, high-performance computing, machine learning, and other essential topics."
+              level: 2
+              sizePx: 20
+              fontWeight: 700
+              color: "#000000"
+            - type: button
+              url: "#bookacallform"
+              text: "Learn About PyData Courses"
+              isFull: true
+              isBordered: false
+              isTriangle: true
+              backgroundColor: "#452392"
+              textColor: "#FFFFFF"
+          - - type: heading
+              text: "Corporate Curriculum Development"
+              level: 2
+              sizePx: 37
+              fontWeight: 800
+              color: "#FFFFFF"
+            - type: heading
+              text: "If standardized courses aren’t the best option for you, Quansight will design custom courseware—computational notebooks, white papers, videos, and more—for efficiently onboarding your team at scale. We’ll break down your technology stack into tailored learning solutions suitable for your unique needs."
+              level: 2
+              sizePx: 20
+              fontWeight: 700
+              color: "#FFFFFF"
+            - type: button
+              url: "#bookacallform"
+              text: "Learn About Curriculum Development"
+              isFull: true
+              isBordered: false
+              isTriangle: true
+              backgroundColor: "#452392"
+              textColor: "#FFFFFF"
+        columnBackgrounds:
+          - "#99C941"
+          - "#A43A8F"
+        columnWidths:
+          - 50
+          - 50
+        columnPaddings:
+          - top: "60px"
+            right: "30px"
+            bottom: "60px"
+            left: "30px"
+          - right: "30px"
+            left: "30px"
+        gapPx: 0
+  paddingBottom: "80px"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/training/polars_logo_icon_248809-100x100.png"
+                    alt: "A transparent, black and white Polars logo"
+                    width: 100
+                    height: 100
+                  - type: icon-box-grid
+                    items:
+                      - title: "Polars"
+                        description: "Polars is a Rust-written DataFrame library that enables high-speed data processing. This training offers hands-on experience in optimizing data analysis through intuitive APIs, parallel processing, and handling large datasets efficiently, which is ideal for professionals eager to master advanced data science techniques."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+                - - type: image
+                    src: "/page-assets/training/dask-150x150.webp"
+                    alt: "Image of the Dask logo"
+                    width: 100
+                    height: 100
+                  - type: icon-box-grid
+                    items:
+                      - title: "Dask"
+                        description: "Introduces Dask for scaling data analysis in Python. This workshop comprises initial explorations of the technical limits of NumPy and Pandas, the fundamentals of parallel computing in Python, using Dask arrays and dataframes in practice, and introduces machine learning with Dask."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+                - right: "20px"
+                  left: "20px"
+                - right: "20px"
+                  left: "20px"
+              gapPx: 20
+        paddingTop: "60px"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/training/RAPIDS-logo-purple-300x110.png"
+                    alt: "Image of the Rapids logo"
+                    width: 200
+                    height: 73
+                  - type: icon-box-grid
+                    items:
+                      - title: "RAPIDS"
+                        description: "Introduces the open source Python RAPIDS libraries for accelerating computation with GPUs (graphics processing units). Participants practice using the RAPIDS libraries for common ETL and machine learning workloads without having to program with low-level languages (e.g., C/C++)."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+                - - type: image
+                    src: "/page-assets/training/logo-300x136.png"
+                    alt: "Image of the Open CV logo"
+                    width: 200
+                    height: 91
+                  - type: icon-box-grid
+                    items:
+                      - title: "Computer Vision"
+                        description: "Prepares practitioners to tackle the automated analysis and interpretation of images with practical computer vision systems. This includes the rudiments of computer vision theory and methods (e.g., feature extraction, object recognition, registration, segmentation)."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+                - right: "20px"
+                  left: "20px"
+                - right: "20px"
+                  left: "20px"
+              gapPx: 20
+        paddingTop: "60px"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/training/xarray-logo-square-150x150.webp"
+                    alt: "Image of the xarray logo"
+                    width: 100
+                    height: 100
+                  - type: icon-box-grid
+                    items:
+                      - title: "Xarray"
+                        description: "Introduces participants to the Xarray project for manipulating multi-channel data (e.g., as it occurs commonly in geosciences, etc.). Participants practice using Xarray for data analysis extending techniques from Pandas and NumPy to high-dimensional labeled arrays."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+                - - type: image
+                    src: "/page-assets/training/dask-150x150.webp"
+                    alt: "Image of the Dask logo"
+                    width: 100
+                    height: 100
+                  - type: icon-box-grid
+                    items:
+                      - title: "Dask-ML"
+                        description: "Introduces participants to Dask-ML for scaling standard Python machine learning tools (e.g., scikit-learn, XGBoost). Participants apply various pre-built models on moderate-to-large datasets to learn best practices for parallel and out-of-core machine learning."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+                - right: "20px"
+                  left: "20px"
+                - right: "20px"
+                  left: "20px"
+              gapPx: 20
+        paddingTop: "60px"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/training/pytorch-logo-150x150.webp"
+                    alt: "Image of the PyTorch logo"
+                    width: 100
+                    height: 100
+                  - type: icon-box-grid
+                    items:
+                      - title: "Deep Learning"
+                        description: "Introduces participants to the foundations of deep learning. Participants practice constructing neural networks of various levels of complexity to connect the core ideas to their realization in practical applications (e.g., image processing, natural language processing)."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+                - - type: image
+                    src: "/page-assets/training/holoviz-150x150.webp"
+                    alt: "Image of the HoloViz logo"
+                    width: 100
+                    height: 100
+                  - type: icon-box-grid
+                    items:
+                      - title: "Visualization"
+                        description: "Builds techniques for web-based data exploration and interactive-app development in Python using open source Holoviz libraries (e.g., HoloViews, HvPlot, Datashader, and Panel). These tools enable constructing rich, high-performance, scalable, flexible, and deployable visualizations easily."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+                - right: "20px"
+                  left: "20px"
+                - right: "20px"
+                  left: "20px"
+              gapPx: 20
+        paddingTop: "60px"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/training/numba-favicon-150x150.webp"
+                    alt: "Image of the Numba logo"
+                    width: 100
+                    height: 100
+                  - type: icon-box-grid
+                    items:
+                      - title: "Numba"
+                        description: "Introduces participants to Numba, a tool for Just-in-Time compilation of Python code. Participants practice profiling sample application codes and accelerating them with Numba."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+                - - type: image
+                    src: "/page-assets/training/intake-150x150.webp"
+                    alt: ""
+                    width: 100
+                    height: 100
+                  - type: icon-box-grid
+                    items:
+                      - title: "Intake"
+                        description: "Overviews Intake, a lightweight package for finding, investigating, loading, and disseminating data. Participants will learn the fundamentals of using Intake to deploy data as would be required in applied industrial settings under various constraints (e.g., hardware, security)."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+                - right: "20px"
+                  left: "20px"
+                - right: "20px"
+                  left: "20px"
+              gapPx: 20
+        paddingTop: "60px"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/training/pangeo_simple_logo.svg"
+                    alt: "Image of the Pangeo logo"
+                    width: 200
+                    height: 200
+                  - type: icon-box-grid
+                    items:
+                      - title: "Pangeo"
+                        description: "Introduces Pangeo as a community platform for Big Data geoscience. Participants will experiment with large geophysical datasets and tools like Dask & Xarray to familiarize themselves with the Pangeo stack."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+                - - type: image
+                    src: "/page-assets/training/python-logo-master-v3-TM-flattened-300x101.png"
+                    alt: "Image of the Python logo"
+                    width: 200
+                    height: 67
+                  - type: icon-box-grid
+                    items:
+                      - title: "Advanced Python"
+                        description: "Provides a deep-dive into internal features of the Python programming language as related to asynchronous computation, concurrency, efficiency, functional programming, and object-oriented design."
+                        align: "start"
+                        descriptionSizePx: 16
+                        descriptionColor: "#000000"
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+                - right: "20px"
+                  left: "20px"
+                - right: "20px"
+                  left: "20px"
+              gapPx: 20
+        paddingTop: "60px"
+  paddingBottom: "50px"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Ready to level up your PyData training?"
+              level: 4
+              sizePx: 55
+              fontWeight: 900
+              color: "#452392"
+              paddingBottom: "50px"
+            - type: text
+              html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\">connect@quansight.com</a></p>"
+              sizePx: 16
+              color: "#000000"
+          - - type: image
+              src: "/page-assets/training/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+              widthPercent: 100
+        columnBackgrounds:
+          - "#FAFAFF"
+          - "#FAFAFF"
+        columnWidths:
+          - 54.915
+          - 45.045
+        columnPaddings:
+          - top: "50px"
+            right: "50px"
+            bottom: "50px"
+            left: "50px"
+
+        gapPx: 0
+  paddingTop: "100px"
+  paddingBottom: "100px"

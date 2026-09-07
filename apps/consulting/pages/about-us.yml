@@ -1,0 +1,347 @@
+slug: about-us
+title: "Our Story"
+description: "About Us Building a Sustainable Open Source Economy for Creating Value with Data Our services connect organizations and individuals who participate in the development and use of open source tools that turn data into valuable insights. Our Story Quansight was founded by Travis Oliphant, a well-known leader in the Python Data community. Travis has authored […]"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/about-us/Hero-Background-14.png"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "About Us"
+  titleSizePx: 70
+  titleFontWeight: 700
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Building a Sustainable Open Source Economy for Creating Value with Data"
+              level: 2
+              sizePx: 32
+              fontWeight: 800
+              color: "#000000"
+          - - type: heading
+              text: "Our services connect organizations and individuals who participate in the development and use of open source tools that turn data into valuable insights."
+              level: 2
+              sizePx: 20
+              fontWeight: 700
+              color: "#FFFFFF"
+        columnBackgrounds:
+          - "#99C941"
+          - "#A43A8F"
+        columnWidths:
+          - 50
+          - 50
+        columnPaddings:
+          - top: "60px"
+            right: "30px"
+            bottom: "60px"
+            left: "30px"
+          - right: "30px"
+            left: "30px"
+        gapPx: 0
+  paddingBottom: "80px"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Our Story"
+        level: 4
+        sizePx: 47
+        fontWeight: 800
+        color: "#452392"
+        align: "center"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: text
+                    html: "<p>Quansight was founded by Travis Oliphant, a well-known leader in the Python Data community. Travis has authored or led the creation of industry cornerstones such as NumPy, SciPy, Numba, and Conda, and helped establish NumFOCUS and the PyData conference series. He founded Anaconda and established the industry-standard platform for data science and machine learning. With Quansight, Travis has leveraged decades of relationships in the open source community to assemble some of the top talent in the industry.</p>"
+                    sizePx: 16
+                    color: "#000000"
+                    paddingRight: "50px"
+                - - type: image
+                    src: "/page-assets/about-us/our-leadership-in-pydata-1.svg"
+                    alt: ""
+                    width: 800
+                    height: 430
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+
+                - top: "35px"
+              gapPx: 0
+        paddingTop: "25px"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/about-us/about-us_-world-map-1.svg"
+                    alt: ""
+                    width: 800
+                    height: 602
+                - - type: text
+                    html: "<p>More than half of our full-time technical staff are active contributors to open source data projects. Many of them have leadership roles in those communities. Quansight is one of the largest contributors to the PyTorch project. One result of Quansight seeking to employ industry experts is that we are very diverse geographically. Another result is that we are diverse with staff in many continents, countries, cultures, and creeds. The Quansight team is dedicated to helping organizations succeed with open source software. It’s our passion.</p>"
+                    sizePx: 16
+                    color: "#000000"
+                    paddingLeft: "50px"
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+                - top: "35px"
+
+              gapPx: 0
+        paddingTop: "25px"
+  paddingBottom: "40px"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Leadership Team"
+        level: 4
+        sizePx: 55
+        fontWeight: 900
+        color: "#452392"
+  paddingTop: "50px"
+  paddingBottom: "50px"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/about-us/Group-353.png"
+                  imageAlt: ""
+                  description: "Founder, BOD"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/about-us/Group-356.png"
+                  imageAlt: ""
+                  description: "CEO, TECHNOLOGY"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/about-us/Group-369.png"
+                  imageAlt: "Photo of Tania Allard"
+                  description: "CEO, IMPACT"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/about-us/Group-359.png"
+                  imageAlt: ""
+                  description: "COO"
+        columnWidths:
+          - 25
+          - 25
+          - 25
+          - 25
+        columnPaddings:
+          - top: "10%"
+            right: "10%"
+            bottom: "10%"
+            left: "10%"
+          - top: "10%"
+            right: "10%"
+            bottom: "10%"
+            left: "10%"
+          - top: "10%"
+            right: "10%"
+            bottom: "10%"
+            left: "10%"
+          - top: "10%"
+            right: "10%"
+            bottom: "10%"
+            left: "10%"
+        gapPx: 0
+  paddingBottom: "30px"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Subscribe for Updates & News"
+              level: 2
+              sizePx: 30
+              fontWeight: 600
+              color: "#FFFFFF"
+            - type: form
+              name: "Mailing List Signup"
+              fields:
+                - name: "EMAIL"
+                  kind: "input"
+                  type: "email"
+                  required: true
+                  placeholder: "Email"
+                  label: "Email"
+              submit: "Submit"
+              audience: "mailchimp"
+              submitIcon: true
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/about-us/subscribe.svg"
+                    alt: ""
+                    width: 455
+                    height: 181
+              columnBackgrounds:
+                - "#452392"
+              paddingRight: "5%"
+        columnBackgrounds:
+          - "#452392"
+          - null
+        columnWidths:
+          - 100.0
+          - 100.0
+        columnPaddings:
+          - left: "15%"
+
+        gapPx: 0
+        marginBottom: "5%"
+  marginBottom: "5%"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Our Values"
+        level: 4
+        sizePx: 47
+        fontWeight: 900
+        color: "#ffffff"
+        align: "center"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/about-us/Transparency-100x100.png"
+                    alt: ""
+                    width: 100
+                    height: 100
+                  - type: heading
+                    text: "TRANSPARENT"
+                    level: 6
+                    sizePx: 25
+                    fontWeight: 900
+                    color: "#ffffff"
+                    align: "center"
+                  - type: text
+                    html: "<p><span style=\"font-weight: 400;\">We strive for open and transparent principles across the board, from how we contribute to open source projects to how we manage our company. We believe that transparency builds trust, fosters accountability, and creates a stronger foundation for collaboration.</span></p>"
+                    sizePx: 16
+                    fontWeight: 600
+                    color: "#FFFFFF"
+                - - type: image
+                    src: "/page-assets/about-us/Empathy-100x100.png"
+                    alt: ""
+                    width: 100
+                    height: 100
+                  - type: heading
+                    text: "EMPATHETIC"
+                    level: 6
+                    sizePx: 25
+                    fontWeight: 900
+                    color: "#ffffff"
+                    align: "center"
+                  - type: text
+                    html: "<p><span style=\"font-weight: 400;\">We start by seeking to understand. We listen actively to our colleagues, our community, and our users, considering their perspectives and contexts in all our decisions.</span></p>"
+                    sizePx: 16
+                    fontWeight: 600
+                    color: "#FFFFFF"
+                - - type: image
+                    src: "/page-assets/about-us/Inclusive-100x100.png"
+                    alt: ""
+                    width: 100
+                    height: 100
+                  - type: heading
+                    text: "INCLUSIVE"
+                    level: 6
+                    sizePx: 25
+                    fontWeight: 900
+                    color: "#ffffff"
+                    align: "center"
+                  - type: text
+                    html: "<p><span style=\"font-weight: 400;\">We actively seek and welcome diverse perspectives. We believe that innovation flourishes in an environment where people from all backgrounds feel they belong and are empowered to contribute to their fullest potential.</span></p>"
+                    sizePx: 16
+                    fontWeight: 600
+                    color: "#FFFFFF"
+                - - type: image
+                    src: "/page-assets/about-us/Accountability-100x100.png"
+                    alt: ""
+                    width: 100
+                    height: 100
+                  - type: heading
+                    text: "ACCOUNTABLE"
+                    level: 6
+                    sizePx: 25
+                    fontWeight: 900
+                    color: "#ffffff"
+                    align: "center"
+                  - type: text
+                    html: "<p><span style=\"font-weight: 400;\">We trust our team members to make decisions and take ownership. We give people the autonomy to do their best work and hold ourselves accountable for the outcomes.</span></p>"
+                    sizePx: 16
+                    fontWeight: 600
+                    color: "#FFFFFF"
+              columnWidths:
+                - 25
+                - 25.0
+                - 24.978
+                - 25
+              columnPaddings:
+                - top: "50px"
+                  right: "50px"
+                  bottom: "70px"
+                  left: "50px"
+                - top: "50px"
+                  right: "50px"
+                  bottom: "50px"
+                  left: "50px"
+                - top: "50px"
+                  right: "50px"
+                  bottom: "50px"
+                  left: "50px"
+                - top: "50px"
+                  right: "50px"
+                  bottom: "50px"
+                  left: "50px"
+              gapPx: 0
+        paddingTop: "40px"
+  columnBackgrounds:
+    - "#452393"
+  paddingTop: "50px"
+  paddingBottom: "50px"
+  fullBleed: true
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Get in Touch"
+              level: 4
+              sizePx: 55
+              fontWeight: 900
+              color: "#452392"
+              paddingBottom: "50px"
+            - type: text
+              html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\" style=\"\">connect@quansight.com</a><br/><br/></p>"
+              sizePx: 16
+              color: "#000000"
+          - - type: image
+              src: "/page-assets/about-us/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+              widthPercent: 100
+        columnBackgrounds:
+          - "#FAFAFF"
+          - "#FAFAFF"
+        columnWidths:
+          - 54.915
+          - 45.045
+        columnPaddings:
+          - top: "50px"
+            right: "50px"
+            bottom: "50px"
+            left: "50px"
+
+        gapPx: 0
+  paddingTop: "100px"
+  paddingBottom: "100px"

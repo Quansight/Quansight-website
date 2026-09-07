@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageBlocks from '../components/PageBlocks.astro';
+
+// Generic catch-all for every WP-migrated marketing page. `home` and `blog`
+// have their own dedicated routes (they need extra logic beyond a plain
+// block list), so they're excluded here to avoid a route collision.
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages
+    .filter((p) => p.data.slug !== 'home' && p.data.slug !== 'blog')
+    .map((p) => ({
+      params: { slug: p.data.slug },
+      props: { page: p },
+    }));
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout
+  title={`${page.data.title ?? 'Quansight'} | Quansight`}
+  description={page.data.description}
+>
+  <PageBlocks blocks={page.data.blocks} />
+</BaseLayout>

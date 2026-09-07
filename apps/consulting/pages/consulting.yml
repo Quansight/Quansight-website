@@ -1,0 +1,182 @@
+slug: consulting
+title: "Consulting Overview"
+description: "Consulting Services What Will You Do With Some Expert Assistance? Quansight provides the additional people and expertise needed to deploy new technology, solve complex problems,"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/consulting/Hero-Background-11.png"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Consulting Services"
+  titleSizePx: 70
+  titleFontWeight: 700
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: heading
+                    text: "What Will You Do With Some Expert Assistance?"
+                    level: 4
+                    sizePx: 40
+                    fontWeight: 900
+                    color: "#452392"
+                    paddingRight: "30px"
+                  - type: text
+                    html: "<p>Quansight provides the additional people and expertise needed to deploy new technology, solve complex problems, or optimize what you have in place so it runs faster and uses less memory. We regularly help data engineering, DevOps, data science, MLOps, and analytics teams improve their performance with the services listed below. We’ll give your team a transformative boost with some of the top talent in the industry. Don’t see the area where your team needs some expert help? Connect with us and we’ll design a custom engagement tailored to your team’s needs.</p>"
+                    sizePx: 16
+                    color: "#000000"
+                    paddingRight: "50px"
+                - - type: image
+                    src: "/page-assets/consulting/people-1.svg"
+                    alt: ""
+                    width: 505
+                    height: 254
+                    widthPercent: 100
+              columnWidths:
+                - 54.638
+                - 45.262
+              gapPx: 0
+        paddingTop: "25px"
+  paddingTop: "70px"
+  paddingBottom: "20px"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: icon-box-grid
+              items:
+                - title: "Visualization & Dashboards"
+                  description: "With our deep knowledge of the open source ecosystem, we handle the complexity of integrating your internal systems with the powerful open source tooling available for different domains."
+                  align: "start"
+                  descriptionSizePx: 16
+                  descriptionColor: "#000000"
+            - type: button
+              url: "/visualization-dashboards"
+              text: "Learn More"
+              isFull: false
+              isBordered: false
+              isTriangle: true
+              textColor: "#452391"
+          - - type: icon-box-grid
+              items:
+                - title: "Algorithms, AI & Machine Learning"
+                  description: "Our expertise with the core packages that form the AI/ML space, including NumPy, PyTorch, and scikit-learn, enables us to build custom algorithms and powerful AI/ML models for you. We optimize your processes for efficient compute and GPU-enabled compute."
+                  align: "start"
+                  descriptionSizePx: 16
+                  descriptionColor: "#000000"
+            - type: button
+              url: "/algorithms-ai-machine-learning"
+              text: "Learn More"
+              isFull: false
+              isBordered: false
+              isTriangle: true
+              textColor: "#452391"
+        columnWidths:
+          - 50
+          - 50
+        columnPaddings:
+          - right: "5%"
+          - right: "5%"
+        gapPx: 20
+  paddingTop: "10px"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: icon-box-grid
+              items:
+                - title: "Packaging & Environment Management"
+                  description: "With our proficiency in the PyPI and Conda ecosystems, we can help you package your code for distribution and implementation across your organization, and also help you with tooling and infrastructure to manage compliance, security, and reproducibility."
+                  align: "start"
+                  descriptionSizePx: 16
+                  descriptionColor: "#000000"
+            - type: button
+              url: "/packaging-and-distribution"
+              text: "Learn More"
+              isFull: false
+              isBordered: false
+              isTriangle: true
+              textColor: "#452391"
+          - - type: icon-box-grid
+              items:
+                - title: "Jupyter Technologies"
+                  description: "Whether you're just getting started with Jupyter notebooks, ready to migrate from classic notebooks to JupyterLab, or an experienced Jupyter user needing customized extensions or plugins, Quansight will empower your team in every corner of the Jupyter ecosystem."
+                  align: "start"
+                  descriptionSizePx: 16
+                  descriptionColor: "#000000"
+            - type: button
+              url: "/jupyter-technologies"
+              text: "Learn More"
+              isFull: false
+              isBordered: false
+              isTriangle: true
+              textColor: "#452391"
+        columnWidths:
+          - 50
+          - 50
+        columnPaddings:
+          - right: "5%"
+          - right: "5%"
+        gapPx: 20
+  paddingTop: "10px"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: button
+                    url: "#bookacallform"
+                    text: "Inquire About Our Services"
+                    isFull: true
+                    isBordered: false
+                    isTriangle: true
+                    backgroundColor: "#452392"
+                    textColor: "#FFFFFF"
+                    align: "center"
+              paddingTop: "45px"
+              paddingRight: "45px"
+              paddingBottom: "45px"
+              paddingLeft: "45px"
+        paddingTop: "5px"
+  paddingTop: "10px"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Let's Put the PyData Ecosystem to Work for You"
+              level: 4
+              sizePx: 55
+              fontWeight: 900
+              color: "#452392"
+              paddingBottom: "50px"
+            - type: text
+              html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\">connect@quansight.com</a><br/><br/></p>"
+              sizePx: 16
+              color: "#000000"
+          - - type: image
+              src: "/page-assets/consulting/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+              widthPercent: 100
+        columnBackgrounds:
+          - "#FAFAFF"
+          - "#FAFAFF"
+        columnWidths:
+          - 54.915
+          - 45.045
+        columnPaddings:
+          - top: "50px"
+            right: "50px"
+            bottom: "50px"
+            left: "50px"
+
+        gapPx: 0
+  paddingTop: "100px"
+  paddingBottom: "100px"

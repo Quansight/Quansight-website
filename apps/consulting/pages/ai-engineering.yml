@@ -1,0 +1,194 @@
+slug: ai-engineering
+title: "AI Engineering"
+description: "AI Engineering Turn AI Research & Concepts Into Reliable Enterprise Solutions Your AI Transformation: From Breakthrough to Business Value As the power of artificial intelligence permeates our lives, organizations are looking for innovative ways to leverage the power of new and evolving breakthroughs. Bridging the gap between pioneering research and operationally useful AI solutions that […]"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/ai-engineering/Hero-Background-6.jpg"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "AI Engineering"
+  titleSizePx: 70
+  titleFontWeight: 700
+  subTitle: "Turn AI Research & Concepts Into Reliable Enterprise Solutions"
+  subTitleSizePx: 22
+- type: heading
+  text: "Your AI Transformation: From Breakthrough to Business Value"
+  level: 2
+  sizePx: 40
+  fontWeight: 700
+  color: "#452392"
+  align: "center"
+  paddingRight: "5%"
+  paddingBottom: "4%"
+  paddingLeft: "5%"
+- type: text
+  html: "<p>As the power of artificial intelligence permeates our lives, organizations are looking for innovative ways to leverage the power of new and evolving breakthroughs. Bridging the gap between pioneering research and operationally useful AI solutions that drive real business value remains a significant hurdle.</p><p>At the foundation of AI is a <a href=\"/blog/generative-ai-made-possible-by-a-mountain-of-open-source\">mountain of open source innovation</a>. With our roots in open source scientific computing, Quansight understands the complexities of transitioning advanced AI models from conceptual innovations into production-ready, scalable systems. Our AI engineering solutions provide the robust infrastructure, sustainable software practices, and integration capabilities to transform theory into real-world impact across your organization.</p>"
+  sizePx: 18
+  color: "#000000"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/ai-engineering/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Establish Sustainable AI Software Foundations"
+                  layout: "row"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/ai-engineering/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Rapidly Deliver Production-Grade AI Capabilities"
+                  layout: "row"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/ai-engineering/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Tailor infrastructure for Compute-Intensive Inference or Training Workloads"
+                  layout: "row"
+        columnBackgrounds:
+          - "#FFFFFF"
+          - "#FFFFFF"
+          - "#FFFFFF"
+        columnWidths:
+          - 33.0
+          - 33.0
+          - 33.0
+        gapPx: 48
+  marginBottom: "1%"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/ai-engineering/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Responsibly use the latest Innovations both Open Source and Proprietary"
+                  layout: "row"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/ai-engineering/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Bridge the AI Innovation-Execution Divide"
+                  layout: "row"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/ai-engineering/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Utilize existing infrastructure and mitigate AI Engineering Risks"
+                  layout: "row"
+        columnBackgrounds:
+          - "#FFFFFF"
+          - "#FFFFFF"
+          - "#FFFFFF"
+        columnWidths:
+          - 33.0
+          - 33.0
+          - 33.0
+        gapPx: 48
+  marginBottom: "1%"
+- type: columns
+  columns:
+    - - type: text
+        html: "<p>Whether you need environments tailored for generative AI pre-training, optimization, distillation or fine-tuning; orchestration of multi-model and/or agent AI workflows; or seamless deployment of optimized inference engines including RAG, Quansight has the experience to make AI’s potential a reality. We can help you bring the “magic” you see in public demos into your infrastructure, on your data, without sacrificing security or privacy.</p><p>We guide companies through the AI transformation, distilling research into reliable, integrated, and governed AI applications that will truly support your mission and transformation.</p>"
+        sizePx: 18
+        color: "#000000"
+  marginTop: "2%"
+  marginBottom: "2%"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Discover engineering best practices, tools, and processes required to take AI research and transform it into enterprise-grade solutions that power real-world applications."
+        level: 2
+        sizePx: 35
+        fontWeight: 700
+        color: "#A43A8F"
+        align: "center"
+  columnBackgrounds:
+    - "#F3F5F8"
+  fullBleed: true
+- type: columns
+  columns:
+    - - type: heading
+        text: "Getting Started: Building Your AI Foundation With Quansight"
+        level: 3
+        sizePx: 40
+        fontWeight: 700
+        color: "#452392"
+        align: "center"
+        paddingRight: "5%"
+        paddingBottom: "4%"
+        paddingLeft: "5%"
+      - type: icon-box-grid
+        items:
+          - description: "The upfront effort to create a solid packaging and environment foundation will pay off immensely in maintainability and avoiding technical debt down the line."
+            align: "start"
+            descriptionSizePx: 18
+          - title: "1. AI Environment Management"
+            description: "- Robust, reproducible environments using proper package managers (conda, Nix, etc)\n- Pre-configured for AI workflows like model fine-tuning and optimized inference\n- Sustainable foundations to avoid Python packaging issues"
+            align: "start"
+            divider: true
+            descriptionSizePx: 18
+            descriptionColor: "#252525"
+          - title: "2.  AI Workflow Orchestration"
+            description: "- Tooling for multi-model orchestration and task decomposition\n- Integration with knowledge sources and external tools\n- Long-term memory management for AI agents"
+            align: "start"
+            divider: true
+            descriptionSizePx: 18
+            descriptionColor: "#252525"
+          - title: "3.  Research to Production"
+            description: "- Reproducibility, scalability, performance optimization\n- Hardening research code for production operations\n- AI/ML model deployment, monitoring, governance"
+            align: "start"
+            divider: true
+            descriptionSizePx: 18
+            descriptionColor: "#252525"
+          - title: "4.  Open Source AI Solutions"
+            description: "- Leverage open source for cost-effective, flexible AI\n- Expertise in open AI frameworks and tools\n- Commercial support and services around open source"
+            align: "start"
+            divider: true
+            descriptionSizePx: 18
+            descriptionColor: "#252525"
+  marginTop: "4%"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Get in Touch"
+              level: 2
+              sizePx: 40
+              fontWeight: 700
+              color: "#452392"
+            - type: text
+              html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? We’d love to hear from you.\t\t\t\t\t\t\t\t</p>"
+              sizePx: 16
+              color: "#252525"
+            - type: button
+              url: "/about-us#bookacallform"
+              text: "Contact Us"
+              isFull: true
+              isBordered: true
+              isTriangle: true
+              backgroundColor: "#452392"
+              textColor: "#FFFFFF"
+              borderColor: "#FFFFFF"
+          - - type: image
+              src: "/page-assets/ai-engineering/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+              widthPercent: 100
+        columnWidths:
+          - 100.0
+          - 53.978
+        gapPx: 0
+        marginTop: "4%"
+  columnBackgrounds:
+    - "#F3F5F8"
+  marginTop: "4%"
+  fullBleed: true

@@ -1,7 +1,7 @@
 ---
 title: 'Dash, Voila, Panel, & Streamlit—Our Thoughts on the Big Four Dashboarding Tools'
 published: April 19, 2022
-author: dharhas
+authors: [dharhas-pothina]
 description: 'At Quansight, we use the top four Python dashboarding tools and clients often ask which one we recommend. Here’s our breakdown of each and why you might choose one over another.'
 category: [Data Visualization]
 featuredImage:
@@ -11,8 +11,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 At Quansight, we use the top four Python dashboarding tools and clients often
 ask which one we recommend. Here’s our breakdown of each and why you might

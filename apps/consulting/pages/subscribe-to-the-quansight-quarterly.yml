@@ -1,0 +1,79 @@
+slug: subscribe-to-the-quansight-quarterly
+title: "Subscribe to The Quansight Quarterly"
+description: "a semi-frequent newsletter diving deep into the heart of scientific Python and AI."
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Subscribe to\nThe Quansight Quarterly"
+              level: 2
+              sizePx: 60
+              fontWeight: 600
+              color: "#FFFFFF"
+            - type: text
+              html: "<p><span style=\"font-weight: 400;\">Latest news and updates from our team and the open source projects we work on.</span></p>"
+              sizePx: 22
+              color: "#FFFFFF"
+          - - type: form
+              name: "New Form"
+              fields:
+                - name: "EMAIL"
+                  kind: "input"
+                  type: "email"
+                  required: true
+                  placeholder: "Your Email"
+                  label: "Your Email"
+              submit: "Subscribe >"
+              audience: "mailchimp"
+          - - type: heading
+              text: "Follow us"
+              level: 3
+              sizePx: 18
+              fontWeight: 600
+              color: "#FFFFFF"
+            - type: social-icons
+              links:
+                - text: "Linkedin-in"
+                  href: "https://www.linkedin.com/company/quansight/"
+                  icon: "/images/icons/linkedin.svg"
+                  iconAlt: "Linkedin-in"
+                - text: "Github"
+                  href: "https://github.com/quansight"
+                  icon: "/images/icons/github.svg"
+                  iconAlt: "Github"
+                - text: "Youtube"
+                  href: "https://www.youtube.com/channel/UChdlbCpQ_Wep04V9o0sGLWQ"
+                  icon: "/images/icons/youtube.svg"
+                  iconAlt: "Youtube"
+                - text: "Medium"
+                  href: "https://medium.com/quansight"
+                  icon: "/images/icons/medium.svg"
+                  iconAlt: "Medium"
+                - text: "X-twitter"
+                  href: "https://twitter.com/quansightai?lang=en"
+                  icon: "/images/icons/x.svg"
+                  iconAlt: "X-twitter"
+                - text: "Instagram"
+                  href: "https://www.instagram.com/quansightai/?g=5"
+                  icon: "/images/icons/instagram.svg"
+                  iconAlt: "Instagram"
+                - text: "Facebook"
+                  href: "https://www.facebook.com/quansight/"
+                  icon: "/images/icons/facebook.svg"
+                  iconAlt: "Facebook"
+        gapPx: 40
+    - - type: image
+        src: "/page-assets/subscribe-to-the-quansight-quarterly/Newsletter-page-image.png"
+        alt: ""
+        width: 800
+        height: 799
+  columnWidths:
+    - 60.0
+    - 60.0
+  gapPx: 0

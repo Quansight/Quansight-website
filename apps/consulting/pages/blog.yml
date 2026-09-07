@@ -1,0 +1,14 @@
+slug: blog
+title: Blog
+description: News, updates, case studies, and technical deep-dives from Quansight.
+blocks:
+  - type: hero
+    image: /page-assets/blog/Hero-Background-12.png
+    imageAlt: ''
+    variant: small
+    gradientFrom: '#452391'
+    gradientTo: '#963895'
+    overlayOpacity: 0.26
+  - type: page-heading
+    title: Blog
+    description: News, updates, case studies, and technical deep-dives from Quansight.

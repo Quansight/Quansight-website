@@ -1,0 +1,292 @@
+slug: open-source-integration
+title: "Open Source Integration"
+description: "Open Source Integration Find enterprise-level support to get open source implemented and adopted, once and for all. Making the move into open source requires deep"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  title: "Open Source Integration"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Find enterprise-level support to get open source implemented and adopted, once and for all."
+        level: 4
+    - - type: text
+        html: "<p>Making the move into open source requires deep expertise in a complex ecosystem. We combine open source and commercial components to create a low maintenance and sustainable solution that’s tailor-made for your business needs and objectives. How? In addition to our depth of expertise, we employ maintainers and contributors to critical open source software projects. We’ll handle the complexity of integrating your internal systems with the powerful open source tooling so you can focus your efforts back on your organization.</p>"
+  columnWidths:
+    - 50
+    - 50
+  gapPx: 0
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/open-source-integration/icons-llc-16-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Analyze"
+            description: "We’ll meet with the appropriate stakeholders to assess your environment, use cases, timing, and costs.Then align on the optimal integration technologies, strategies, and solutions."
+    - - type: image
+        src: "/page-assets/open-source-integration/icons-llc-17-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Extract & Optimize"
+            description: "We facilitate the ideal integrations by extracting and optimizing your data and the most critical pieces of your environment and systems to easily integrate with the right connectors."
+    - - type: image
+        src: "/page-assets/open-source-integration/icons-llc-18-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Standardize & Automate"
+            description: "We customize a standard set of connectors that can be easily implemented, and re-utilized throughout your systems, into an automated solution for continuous data pass through."
+  columnWidths:
+    - 33
+    - 33
+    - 33
+  gapPx: 20
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/open-source-integration/icons-llc-19-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Transition"
+            description: "Our experts coach, train, and transfer knowledge to your teams as they become accustomed to the new integrations"
+    - - type: image
+        src: "/page-assets/open-source-integration/icons-llc-20-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Support & Maintenance"
+            description: "Our team of experts will verify each integration point while facilitating and executing any troubleshooting and fixes needed throughout the implementation."
+    - - type: image
+        src: "/page-assets/open-source-integration/icons-llc-21-1.svg"
+        alt: ""
+        width: 100
+        height: 100
+      - type: icon-box-grid
+        items:
+          - title: "Ongoing OSS Support"
+            description: "Access open source support to resolve support tickets, overcome tricky integrations, and find answers to community roadmap questions with our partner OpenTeams."
+  columnWidths:
+    - 33
+    - 33
+    - 33
+  gapPx: 20
+- type: columns
+  columns:
+    - - type: heading
+        text: "Open Source Integration"
+        level: 3
+      - type: text
+        html: "<p>\n\t\t\t\t\t\t\t\t\tQuansight will walk you through an open source integration plan that’s custom-designed to meet the needs of your business.\t\t\t\t\t\t\t\t</p>"
+      - type: button
+        url: "#bookacallform"
+        text: "I'm interested"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+    - - type: image
+        src: "/page-assets/open-source-integration/icons-llc-28-1.svg"
+        alt: ""
+        width: 768
+        height: 1
+  columnWidths:
+    - 50
+    - 50
+  gapPx: 0
+- type: heading
+  text: "Some of the Open Source Projects We Use for  Data Engineering & MLOps"
+  level: 4
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/open-source-integration/the-open-source-projects-we-use-for-visualization-and-dashboards-08-1024x440.webp"
+        alt: "Image of the Jupyter logo"
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/open-source-integration/trusted-by-open-source-maintainers-and-contributors-03-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/open-source-integration/trusted-by-open-source-maintainers-and-contributors-07-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/open-source-integration/trusted-by-open-source-maintainers-and-contributors-02-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/open-source-integration/trusted-by-open-source-maintainers-and-contributors-04-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+    - - type: image
+        src: "/page-assets/open-source-integration/trusted-by-open-source-maintainers-and-contributors-05-1024x440.webp"
+        alt: ""
+        width: 800
+        height: 344
+  columnWidths:
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
+  gapPx: 0
+- type: columns
+  columns:
+    - - type: heading
+        text: "A word from Quansight clients..."
+        level: 3
+      - type: text
+        html: "<p>“We engaged Quansight with some Jupyter, Python team development, data visualization skills in hand. Quansight helped us refine these skills by offering guidance in establishing our best practices, but more important to our long term analytical success, they helped us build a strategy around the use and deployment of these tools.” — US-Based Systematic Hedge Fund &amp; Commodity Trading Advisor</p>"
+    - - type: image
+        src: "/page-assets/open-source-integration/icons-llc-25-2.svg"
+        alt: ""
+        width: 200
+        height: 200
+  columnWidths:
+    - 50
+    - 50
+  gapPx: 0
+- type: heading
+  text: "Explore Additional Consulting Areas"
+  level: 4
+- type: columns
+  columns:
+    - - type: image-box-grid
+        items:
+          - image: "/page-assets/open-source-integration/Quansight-consulting-services-02.svg"
+            imageAlt: ""
+      - type: button
+        url: "/infrastructure-scaling-acceleration"
+        text: "Learn More"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+    - - type: image-box-grid
+        items:
+          - image: "/page-assets/open-source-integration/Quansight-consulting-services-03.svg"
+            imageAlt: ""
+      - type: button
+        url: "/visualization-dashboards"
+        text: "Learn More"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+    - - type: image-box-grid
+        items:
+          - image: "/page-assets/open-source-integration/Quansight-consulting-services-05.svg"
+            imageAlt: ""
+      - type: button
+        url: "/algorithms-ai-machine-learning"
+        text: "Learn More"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+  columnWidths:
+    - 33
+    - 33
+    - 33
+  gapPx: 0
+- type: columns
+  columns:
+    - - type: image-box-grid
+        items:
+          - image: "/page-assets/open-source-integration/Quansight-consulting-services-01.svg"
+            imageAlt: ""
+      - type: button
+        url: "/data-engineering-mlops"
+        text: "Learn More"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+    - - type: image-box-grid
+        items:
+          - image: "/page-assets/open-source-integration/Quansight-consulting-services-06.svg"
+            imageAlt: ""
+      - type: button
+        url: "/packaging-and-distribution"
+        text: "Learn More"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+    - - type: image-box-grid
+        items:
+          - image: "/page-assets/open-source-integration/Quansight-consulting-services-07.svg"
+            imageAlt: ""
+      - type: button
+        url: "/jupyter-technologies"
+        text: "Learn More"
+        isFull: false
+        isBordered: false
+        isTriangle: true
+  columnWidths:
+    - 33
+    - 33
+    - 33
+  gapPx: 0
+- type: columns
+  columns:
+    - - type: heading
+        text: "Ready to manage your unique data with ease?"
+        level: 4
+      - type: form
+        name: "Consulting Overview Contact Form"
+        fields:
+          - name: "form_fields[name]"
+            kind: "input"
+            type: "text"
+            required: true
+            placeholder: "Name"
+          - name: "form_fields[email]"
+            kind: "input"
+            type: "email"
+            required: true
+            placeholder: "Email"
+          - name: "form_fields[company]"
+            kind: "input"
+            type: "text"
+            required: true
+            placeholder: "Company name"
+          - name: "form_fields[services]"
+            kind: "select"
+            type: "text"
+            required: true
+            label: "Services you’re interested in"
+            options: ["Al, Data & ML Engineering", "Infrastructure, Scaling & Acceleration", "Algorithms, AI & Machine Learning", "Packaging & Environment Management", "Jupyter Technologies", "Open Source Services", "PyTorch", "Nebari", "conda-store", "Ragna/RAG", "Large Language Models (LLMS)", "Training", "Other"]
+          - name: "form_fields[how]"
+            kind: "select"
+            type: "text"
+            required: true
+            label: "How did you hear about us?"
+            options: ["Online search", "Social media", "Digital Ad", "Referral", "Conference/event", "Blog/online article", "Other"]
+        submit: "Send message"
+        audience: "contact"
+    - - type: image
+        src: "/page-assets/open-source-integration/Quansight-contact-02-02-02-1-1.svg"
+        alt: ""
+        width: 1122
+        height: 889
+  columnWidths:
+    - 50
+    - 50
+  gapPx: 0

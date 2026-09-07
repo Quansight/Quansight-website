@@ -1,7 +1,7 @@
 ---
 title: 'Building a Panel Pipeline'
 published: May 14, 2021
-author: pamela-wadhwa
+authors: [pamela-wadhwa]
 description: 'Over a number of recent posts, we have given some examples of how to build dashboards using Panel and how to integrate widgets from Panel and ipywidgets into the same Panel app. These have all been one-stage examples, but you can actually use Panel to build a pipeline of stages with information carried over from one stage to the next. You can think of these stages as different pages on a website.'
 category: [Data Visualization, Jupyter, Training]
 featuredImage:
@@ -12,12 +12,10 @@ hero:
   imageAlt: 'Data visualization of Paris city'
 ---
 
-<base target="_blank" />
-
 Over a number of recent posts, we have given some examples of <a
-href="/post/quick-dashboarding-with-panel" target="_self">how to build
+href="/blog/quick-dashboarding-with-panel" target="_self">how to build
 dashboards</a> using [Panel][panel site] and <a
-href="/post/working-across-panel-and-ipywidgets-ecosystems" target="_self">how
+href="/blog/working-across-panel-and-ipywidgets-ecosystems" target="_self">how
 to integrate widgets from Panel and ipywidgets</a> into the same Panel app.
 These have all been _one-stage_ examples, but you can actually use Panel to
 build a [_pipeline_ of stages][panel user guide: pipelines] with information
