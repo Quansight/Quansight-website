@@ -1,5 +1,7 @@
 import { useState, useMemo } from 'react';
 
+import { slugifyCategory } from '../../utils/categories';
+
 export type PostSummary = {
   id: string;
   title: string;
@@ -14,11 +16,15 @@ const POSTS_PER_PAGE = 9;
 export function BlogList({
   posts,
   categories,
+  initialCategory,
 }: {
   posts: PostSummary[];
   categories: string[];
+  initialCategory?: string;
 }) {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(
+    initialCategory ?? null,
+  );
   const [currentPage, setCurrentPage] = useState(1);
 
   const filtered = useMemo(() => {
@@ -32,9 +38,19 @@ export function BlogList({
     currentPage * POSTS_PER_PAGE,
   );
 
-  const handleCategoryClick = (cat: string) => {
-    setSelectedCategory(cat === selectedCategory ? null : cat);
+  const handleCategoryClick = (
+    cat: string,
+    event: React.MouseEvent<HTMLAnchorElement>,
+  ) => {
+    event.preventDefault();
+    const next = cat === selectedCategory ? null : cat;
+    setSelectedCategory(next);
     setCurrentPage(1);
+    history.pushState(
+      null,
+      '',
+      next ? `/categories/${slugifyCategory(next)}` : '/blog',
+    );
   };
 
   const featured = pageItems[0];
@@ -44,9 +60,10 @@ export function BlogList({
     <div className="pb-[12.2rem] mx-auto w-[95%] max-w-[83rem] md:w-[85%] xl:w-[70%]">
       <div className="mb-[3.5rem] flex flex-wrap">
         {categories.map((cat) => (
-          <button
+          <a
             key={cat}
-            onClick={() => handleCategoryClick(cat)}
+            href={`/categories/${slugifyCategory(cat)}`}
+            onClick={(event) => handleCategoryClick(cat, event)}
             className={`py-[0.7rem] px-[0.8rem] last:mr-0 text-[1.1rem] font-normal leading-[2.7rem] whitespace-nowrap ${
               selectedCategory === cat
                 ? 'bg-violet text-white'
@@ -54,7 +71,7 @@ export function BlogList({
             }`}
           >
             {cat}
-          </button>
+          </a>
         ))}
       </div>
 
@@ -66,7 +83,10 @@ export function BlogList({
 
       <div className="flex flex-wrap">
         {rest.map((post) => (
-          <div key={post.id} className="odd:mr-[2%] mb-[3.7rem] w-full md:w-[49%]">
+          <div
+            key={post.id}
+            className="odd:mr-[2%] mb-[3.7rem] w-full md:w-[49%]"
+          >
             <PostCard post={post} variant="vertical" />
           </div>
         ))}
