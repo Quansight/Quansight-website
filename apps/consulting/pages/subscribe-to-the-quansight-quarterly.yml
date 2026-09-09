@@ -30,7 +30,6 @@ blocks:
                   placeholder: "Your Email"
                   label: "Your Email"
               submit: "Subscribe >"
-              audience: "mailchimp"
           - - type: heading
               text: "Follow us"
               level: 3

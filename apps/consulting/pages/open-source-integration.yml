@@ -249,38 +249,8 @@ blocks:
     - - type: heading
         text: "Ready to manage your unique data with ease?"
         level: 4
-      - type: form
-        name: "Consulting Overview Contact Form"
-        fields:
-          - name: "form_fields[name]"
-            kind: "input"
-            type: "text"
-            required: true
-            placeholder: "Name"
-          - name: "form_fields[email]"
-            kind: "input"
-            type: "email"
-            required: true
-            placeholder: "Email"
-          - name: "form_fields[company]"
-            kind: "input"
-            type: "text"
-            required: true
-            placeholder: "Company name"
-          - name: "form_fields[services]"
-            kind: "select"
-            type: "text"
-            required: true
-            label: "Services you’re interested in"
-            options: ["Al, Data & ML Engineering", "Infrastructure, Scaling & Acceleration", "Algorithms, AI & Machine Learning", "Packaging & Environment Management", "Jupyter Technologies", "Open Source Services", "PyTorch", "Nebari", "conda-store", "Ragna/RAG", "Large Language Models (LLMS)", "Training", "Other"]
-          - name: "form_fields[how]"
-            kind: "select"
-            type: "text"
-            required: true
-            label: "How did you hear about us?"
-            options: ["Online search", "Social media", "Digital Ad", "Referral", "Conference/event", "Blog/online article", "Other"]
-        submit: "Send message"
-        audience: "contact"
+      - type: text
+        html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\">connect@quansight.com</a></p>"
     - - type: image
         src: "/page-assets/open-source-integration/Quansight-contact-02-02-02-1-1.svg"
         alt: ""
