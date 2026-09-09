@@ -2,21 +2,22 @@
 
 Guide for site changes that are **not** [blog posts](how-to-publish-a-new-blog-post.md).
 
-- [Running the website locally](#running-the-website-locally)
-- [Orientation](#orientation)
-- [Deployment](#deployment)
-- [Content changes](#content-changes)
-  - [Adding or editing a team member](#adding-or-editing-a-team-member)
-  - [Adding or editing a page](#adding-or-editing-a-page)
-  - [Editing the header or footer](#editing-the-header-or-footer)
-  - [Editing the projects list](#editing-the-projects-list)
-- [Code changes](#code-changes)
-  - [Adding a new block component](#adding-a-new-block-component)
-  - [Hero images](#hero-images)
-- [Integrations](#integrations)
-  - [GitHub](#github)
-  - [Vercel](#vercel)
-  - [Slack](#slack)
+- [Site admin](#site-admin)
+  - [Running the website locally](#running-the-website-locally)
+  - [Orientation](#orientation)
+  - [Deployment](#deployment)
+  - [Content changes](#content-changes)
+    - [Adding or editing a team member](#adding-or-editing-a-team-member)
+    - [Adding or editing a page](#adding-or-editing-a-page)
+    - [Editing the header or footer](#editing-the-header-or-footer)
+    - [Editing the projects list](#editing-the-projects-list)
+  - [Code changes](#code-changes)
+    - [Adding a new block component](#adding-a-new-block-component)
+    - [Hero images](#hero-images)
+  - [Integrations](#integrations)
+    - [GitHub](#github)
+    - [Vercel](#vercel)
+    - [Slack](#slack)
 
 ## Running the website locally
 
@@ -215,9 +216,11 @@ URL on every pull request and deploys to production when commits land on `main`.
 
 ### Vercel
 
-The Labs site corresponds to the `quansight-labs` project in Vercel. Build
-configuration is in `vercel.json` at the repo root — it points Vercel at
-`apps/labs/` and runs `npm run build` there.
+The Labs site corresponds to the `quansight-labs` project in Vercel.
+The deployment configuration is set directly in the Vercel dashboard:
+
+- `apps/labs` is the root directory for the project, deployment will be skipped
+  when there are no changes to the root directory.
 
 ### Slack
 
