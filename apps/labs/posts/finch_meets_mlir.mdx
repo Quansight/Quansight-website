@@ -33,6 +33,8 @@ Coming into this project, I had no clue what MLIR was. I had to dig through all 
 
 The versatility of MLIR is extensive, allowing programs to extend to GPU and even specialized hardware such as Intel Xe GPUs, and each dialects are easily utilised with easy, and composable features.
 
+Currently, finch-tensor supports only CPU execution. The MLIR backend would extend finch-tensor’s support to GPU and SIMD architectures. This added versatility would attract more developers and researchers. In addition, MLIR would help finch-tensor meet the demands of modern computational workloads. Researchers could execute machine-learning kernels across different hardware architectures without manually rewriting them for each target.
+
 <figure>
   <img
     src="/posts/finch-meets-mlir/Finch%20pipeline.png"
@@ -134,7 +136,7 @@ In MLIR, we would have to introduce a unique SSA for every operation and constan
 ## Buffer Handling
 
 <p align="center">
-  <img src="/posts/finch-meets-mlir/iceberg.png" width="300" alt="tip of the iceberg meme" />
+  <img src="/posts/finch-meets-mlir/iceberg.png" width="300" alt="Tip of the iceberg meme, showing the Arith dialect above water and storage mapping, ABI lowering, data layout, memory model, memory ownership, alignment compatibility, and dynamic memory management all under water, ordered from shallowest to deepest." />
 </p>
 
 Operation handling was just the tip of the iceberg; buffer management gets even more technical and complicated. It requires an in-depth compiler theory knowledge: ABI lowering, memory management and memory ownership. Passing buffers from one IR to another language requires complicated serializing and deserializing logic to pass buffers' metadata (i.e. strides and shapes) otherwise the target language would not be able to extract any metadata from the struct passed into the kernel.
