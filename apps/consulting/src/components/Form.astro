@@ -1,20 +1,13 @@
 ---
-// Rebuilds the WordPress/Elementor forms: same fields, placeholders,
-// select options and submit labels as the live site.
+// Rebuilds the WordPress/Elementor newsletter signup form: same fields,
+// placeholders and submit label as the live site.
 //
-// The newsletter signup (audience="mailchimp") posts to /api/subscribe, a
-// Vercel serverless function (see apps/consulting/api/subscribe.js) that
-// calls the Mailchimp Marketing API server-side with an API key -- the key
-// can't live in this component since it's rendered into static, public
-// markup. That function needs MAILCHIMP_API_KEY and MAILCHIMP_AUDIENCE_ID
-// set in the Vercel project's environment variables.
-//
-// CONTACT_ACTION is the services enquiry form, which on WP emailed the team
-// rather than going to Mailchimp. It needs its own destination (a form
-// service or a serverless handler), not the audience above. Until it's set,
-// that form submits to "#" and is marked aria-disabled so a visitor can't
-// believe a submission was delivered.
-const CONTACT_ACTION = '';
+// Posts to /api/subscribe, a Vercel serverless function (see
+// apps/consulting/api/subscribe.js) that calls the Mailchimp Marketing API
+// server-side with an API key -- the key can't live in this component since
+// it's rendered into static, public markup. That function needs
+// MAILCHIMP_API_KEY and MAILCHIMP_AUDIENCE_ID set in the Vercel project's
+// environment variables.
 
 type Field = {
   name: string;
@@ -31,14 +24,10 @@ interface Props {
   name: string;
   fields: Field[];
   submit: string;
-  audience?: 'mailchimp' | 'contact';
   submitIcon?: boolean;
 }
 
-const { name, fields, submit, audience = 'contact', submitIcon } = Astro.props;
-
-const action = audience === 'mailchimp' ? '/api/subscribe' : CONTACT_ACTION;
-const isConfigured = audience === 'mailchimp' || action !== '';
+const { name, fields, submit, submitIcon } = Astro.props;
 
 const FIELD_CLASS =
   'w-full px-[1.6rem] py-[1.2rem] text-[1.6rem] leading-[2.4rem] text-black bg-white border border-gray-300 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-violet';
@@ -49,9 +38,8 @@ const FIELD_CLASS =
   name={name}
   aria-label={name}
   method="post"
-  action={isConfigured ? action : '#'}
-  aria-disabled={isConfigured ? undefined : 'true'}
-  data-audience={audience}
+  action="/api/subscribe"
+  data-mailchimp-form
 >
   {fields.map((field) => (
     <div class="flex flex-col gap-[0.6rem]">
@@ -91,71 +79,60 @@ const FIELD_CLASS =
 
   <button
     type="submit"
-    disabled={!isConfigured}
     class="flex gap-[0.8rem] justify-center items-center px-[3rem] py-[1.2rem] w-fit text-[1.6rem] font-bold leading-[2.4rem] text-white bg-pink disabled:opacity-60 disabled:cursor-not-allowed"
   >
     {submit}
     {submitIcon && <span aria-hidden="true">➤</span>}
   </button>
 
-  {!isConfigured && (
-    <p class="text-[1.3rem] leading-[2rem] opacity-80">
-      Not yet connected — see Form.astro for the endpoint to fill in.
-    </p>
-  )}
-
-  {audience === 'mailchimp' && (
-    <p data-form-status hidden class="text-[1.3rem] leading-[2rem] data-[state=error]:text-red-600 data-[state=success]:text-green-700" />
-  )}
+  <p data-form-status hidden class="text-[1.3rem] leading-[2rem] data-[state=error]:text-red-600 data-[state=success]:text-green-700" />
 </form>
 
-{audience === 'mailchimp' && (
-  <script>
-    // Progressive enhancement: intercept the submit and show an inline
-    // result instead of a full-page navigation to the JSON response.
-    // Without JS the form still posts to /api/subscribe and the function
-    // runs, it just leaves the visitor on a blank JSON page.
-    document.querySelectorAll<HTMLFormElement>('form[data-audience="mailchimp"]').forEach((form) => {
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+<script>
+  // Progressive enhancement: intercept the submit and show an inline
+  // result instead of a full-page navigation to the JSON response.
+  // Without JS the form still posts to /api/subscribe and the function
+  // runs, it just leaves the visitor on a blank JSON page.
+  document.querySelectorAll<HTMLFormElement>('form[data-mailchimp-form]').forEach((form) => {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
 
-        const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-        const status = form.querySelector<HTMLParagraphElement>('[data-form-status]');
-        const originalLabel = button?.textContent ?? '';
+      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      const status = form.querySelector<HTMLParagraphElement>('[data-form-status]');
+      const originalLabel = button?.textContent ?? '';
+      if (button) {
+        button.disabled = true;
+        button.textContent = 'Submitting…';
+      }
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        });
+        const data = await response.json();
+
+        if (status) {
+          status.hidden = false;
+          status.dataset.state = response.ok ? 'success' : 'error';
+          status.textContent = response.ok
+            ? 'Thanks for subscribing!'
+            : data.error || 'Something went wrong. Please try again.';
+        }
+        if (response.ok) form.reset();
+      } catch {
+        if (status) {
+          status.hidden = false;
+          status.dataset.state = 'error';
+          status.textContent = 'Something went wrong. Please try again.';
+        }
+      } finally {
         if (button) {
-          button.disabled = true;
-          button.textContent = 'Submitting…';
+          button.disabled = false;
+          button.textContent = originalLabel;
         }
-
-        try {
-          const response = await fetch(form.action, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify(Object.fromEntries(new FormData(form))),
-          });
-          const data = await response.json();
-
-          if (status) {
-            status.hidden = false;
-            status.dataset.state = response.ok ? 'success' : 'error';
-            status.textContent = response.ok
-              ? 'Thanks for subscribing!'
-              : data.error || 'Something went wrong. Please try again.';
-          }
-          if (response.ok) form.reset();
-        } catch {
-          if (status) {
-            status.hidden = false;
-            status.dataset.state = 'error';
-            status.textContent = 'Something went wrong. Please try again.';
-          }
-        } finally {
-          if (button) {
-            button.disabled = false;
-            button.textContent = originalLabel;
-          }
-        }
-      });
+      }
     });
-  </script>
-)}
+  });
+</script>

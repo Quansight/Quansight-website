@@ -37,7 +37,6 @@ blocks:
                 placeholder: "Your Email"
                 label: "Your Email"
             submit: "Subscribe >"
-            audience: "mailchimp"
           - type: columns
             columns:
               - - type: heading
