@@ -64,7 +64,6 @@ blocks:
                   placeholder: "Email"
                   label: "Email"
               submit: "Submit"
-              audience: "mailchimp"
               submitIcon: true
           - - type: columns
               columns:
