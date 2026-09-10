@@ -197,7 +197,7 @@ blocks:
               sizePx: 18
               color: "#000000"
             - type: text
-              html: "<p>For some highlights, check out the <a href=\"https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2024.pdf\">Quansight Labs 2024 Annual Report</a>.</p>"
+              html: "<p>For some highlights, check out the <a href=\"https://labs.quansight.org/blog/annual-report-2025\">Quansight Labs 2025 Annual Report</a>.</p>"
               sizePx: 18
               color: "#000000"
         columnWidths:

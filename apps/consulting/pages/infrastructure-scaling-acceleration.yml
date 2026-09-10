@@ -270,17 +270,6 @@ blocks:
               columns:
                 - - type: image-box-grid
                     items:
-                      - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-2-100x100.png"
-                        imageAlt: ""
-                  - type: button
-                    url: "/data-engineering-mlops"
-                    text: "Learn More"
-                    isFull: false
-                    isBordered: false
-                    isTriangle: true
-                    textColor: "#452391"
-                - - type: image-box-grid
-                    items:
                       - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-6-100x100.png"
                         imageAlt: ""
                   - type: button
@@ -296,6 +285,17 @@ blocks:
                         imageAlt: ""
                   - type: button
                     url: "/algorithms-ai-machine-learning"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                - - type: image-box-grid
+                    items:
+                      - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-3-100x100.png"
+                        imageAlt: ""
+                  - type: button
+                    url: "/open-source-services"
                     text: "Learn More"
                     isFull: false
                     isBordered: false
@@ -333,17 +333,6 @@ blocks:
               columns:
                 - - type: image-box-grid
                     items:
-                      - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-3-100x100.png"
-                        imageAlt: ""
-                  - type: button
-                    url: "/open-source-integration"
-                    text: "Learn More"
-                    isFull: false
-                    isBordered: false
-                    isTriangle: true
-                    textColor: "#452391"
-                - - type: image-box-grid
-                    items:
                       - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-5-100x100.png"
                         imageAlt: ""
                   - type: button
@@ -367,19 +356,12 @@ blocks:
               columnWidths:
                 - 33
                 - 33
-                - 33
               columnMargins:
                 - right: "5px"
                   left: "5px"
                 - right: "5px"
                   left: "5px"
-                - right: "5px"
-                  left: "5px"
               columnPaddings:
-                - top: "35px"
-                  right: "35px"
-                  bottom: "35px"
-                  left: "35px"
                 - top: "35px"
                   right: "35px"
                   bottom: "35px"
