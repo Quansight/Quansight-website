@@ -34,6 +34,11 @@
       "permanent": true
     },
     {
+      "source": "/open-source-integration",
+      "destination": "/open-source-services",
+      "permanent": true
+    },
+    {
       "source": "/about-us-plausible-goal-test",
       "destination": "/about-us",
       "permanent": true

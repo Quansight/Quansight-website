@@ -123,11 +123,14 @@ of this strategy. One of my favorites is the
 
 ### TACO
 
+<!-- A "See my previous post on sparsity" sentence was dropped here: it linked
+to the unmigrated WP post
+/blog/leveraging-sparsity-for-efficient-data-manipulation-the-gcxs-sparse-array-format.
+Restore it if we ever cross-link that post (e.g. if it lands on
+labs.quansight.org). -->
+
 For sparse tensors, which contain mostly zeros, there are many ways to
-efficiently store and manipulate them. See my previous <a
-href="/blog/leveraging-sparsity-for-efficient-data-manipulation-the-gcxs-sparse-array-format"
-target="_self">post on sparsity</a> for more details. (Editor's note: This post
-is pending migration.) There are formats like [COO][coo], [DOK][dok],
+efficiently store and manipulate them. There are formats like [COO][coo], [DOK][dok],
 [CSF][csf], among numerous others including many that are unique to matrices. A
 cost of having many different formats is that developers have to write
 customized algorithms for performing operations like elementwise addition and
