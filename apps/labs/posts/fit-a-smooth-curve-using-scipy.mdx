@@ -33,7 +33,7 @@ A lot of things around us we take for granted are Smooth Curves, for example,
 
 </div>
 
-- <i> Gradient Maps: These are special type of smooth paths where the input is luminosity (instead of time) and the output is in color space </i>
+- <i> Gradient Maps: These are a special type of smooth paths where the input is luminosity (instead of time) and the output is in color space </i>
 
 <div align="center">
 
@@ -51,8 +51,7 @@ y = \sin(x)
 $$
 
 But mathematically you can differentiate $y = \sin(x)$ an infinite number of times and still get a continuous curve. More importantly, if the
-derivatives were discontinuous, the path would have sharp edges and applications like the roller coaster ride wouldn't be suitable. But smooth is under-
-rated, mostly we're always given examples of motion for mathematical smoothness but it plays a huge role in aesthetics. There was a popular
+derivatives were discontinuous, the path would have sharp edges and applications like the roller coaster ride wouldn't be suitable. But smooth is underrated, mostly we're always given examples of motion for mathematical smoothness but it plays a huge role in aesthetics. There was a popular
 artist, M.C. Escher, who built a career out of smoothness, here is some of his artwork:
 
 <div align="center">
@@ -71,16 +70,12 @@ So hopefully, I convinced you smooth curves are interesting.
 
 ## But, how do you fit a smooth curve?
 
-Notice, the term "fit". Say you made a bunch of measurements, at each input <i>xi</i> you recorded a value <i>yi</i>, and the recordings carry some
-noise. We want a smooth curve that follows these data points <i>(xi, yi)</i> without chasing the noise. We can fit one by minimizing this objective function:
+Notice, the term "fit". Say you made a bunch of measurements, at each input $x_i$ you recorded a value $y_i$, and the recordings carry some
+noise. We want a smooth curve that follows these data points $(x_i, y_i)$ without chasing the noise. We can fit one by minimizing this objective function:
 
-<div align="center">
-
-
-<img width="792" alt="The objective J equals the sum of squared residuals plus lambda times the integral of the squared second derivative" src="/posts/fit-a-smooth-curve-using-scipy/objective-function.png" />
-
-
-</div>
+$$
+J[f] = \sum_{i=1}^{n} \big( y_i - f(x_i) \big)^2 \; + \; \lambda \int_{x_1}^{x_n} \big( f''(u) \big)^2 \, du
+$$
 
 Here, $f(x)$ is the fitted curve, $f''$ is the second derivative of the same curve which measures how curvy or jumpy the curve
 is. Hence, the first term in $J$ is how closely the curve fits the data, the second term is how jumpy/curvy the curve is and
@@ -92,10 +87,9 @@ When you optimise $J$ over the space of all smooth functions, you get a Spline. 
 
 ## Splines
 
-Splines are piecewise cubic polynomials. The domain of each piece is bounded by a pair of real numbers, let's call the sorted list of these
-real numbers $t$. These are called the knots, and the simplest way to think about them is, knots are the places where you allow the curve to bend.
-
-It is a special type of piecewise polynomial function made by joining individual cubic (third-degree) polynomials together smoothly between a set of data points or knots. Instead of fitting a single, high-degree polynomial across an entire data set, which can cause wild oscillations known as Runge's phenomenon, splines use lower-degree cubic polynomials on smaller subintervals while maintaining continuous transitions from one piece to the next.
+Splines are a special type of piecewise polynomials. Instead of fitting a single, high-degree polynomial across an entire data set, 
+which can cause wild oscillations known as [Runge's phenomenon](https://en.wikipedia.org/wiki/Runge%27s_phenomenon),
+splines use lower-degree cubic polynomials on smaller subintervals while maintaining continuous transitions from one piece to the next.
 We're only assuming the cases that work on a <i>two-dimensional</i> plane for now.
 
 <div align="center">
@@ -108,7 +102,9 @@ We're only assuming the cases that work on a <i>two-dimensional</i> plane for no
 
 <p align="center"><i><small>Same 13 points in both panels.</small></i></p>
 
-So you can fit a smooth curve through a bunch of points using a spline and use $\lambda$ to control the amount of smoothing. With $\lambda = 0$, the curve may freely interpolate the points, with $\lambda = \infty$ you get a straight line. Using this concept, you can start your artwork. Note that an image is just a bunch of horizontal or vertical lines stacked in order. So you can fit splines with separate $\lambda$'s and create images with focus on one particular object. Here is an example,
+So you can fit a smooth curve through a bunch of points using a spline and use $\lambda$ to control the amount of smoothing. With $\lambda = 0$, the curve may freely interpolate the points, with $\lambda = \infty$ you get a straight line.
+Using this concept, you can start your artwork. Note that an image is just a bunch of horizontal or vertical lines stacked in order. So you can fit splines with separate $\lambda$'s and create images with focus on one particular object. 
+Here is an example:
 
 <div align="center">
 
@@ -118,7 +114,7 @@ So you can fit a smooth curve through a bunch of points using a spline and use $
 
 </div>
 
-Or you can use Splines, as a paintbrush, here's another example:
+Or you can use Splines as a paintbrush. Here's another example:
 
 <div align="center">
 
@@ -128,27 +124,38 @@ Or you can use Splines, as a paintbrush, here's another example:
 
 </div>
 
-These have been built using <b>scipy.interpolate.make_smoothing_spline</b> function provided by the SciPy project which I had the pleasure to work on as an Intern (Summer, 2026) at Quansight Labs under [Evgeni Burovski](https://github.com/ev-br) and [Gagandeep Singh](https://github.com/czgdp1807). Huge Shoutout to them!
+So how do we use splines as a paintbrush? A painter usually drags the brush along the outline of an object and not across it, so the first step is to compute, at every spot in the photo, which direction the outlines run. Then we pick a random spot, move a tiny step in that direction, check the direction again, take another step, and so on for a few steps. 
+The direction changes slightly at every step, so the path we get is a little shaky. So we fit a smoothing spline on these points to get a smooth curve through them, and we draw this curve as one thick stroke in the color the photo has at that spot. We repeat this from 9000 random spots, and all the strokes together form the full picture.
+Nothing here blurs or filters the photo, we are just repainting it stroke by stroke, and each stroke is a fitted spline.
+
+These have been built using the [scipy.interpolate.make_smoothing_spline](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.make_smoothing_spline.html) function provided by the SciPy project which I had the pleasure to work on as an Intern (Summer, 2026) at Quansight Labs under [Evgeni Burovski](https://github.com/ev-br) and [Gagandeep Singh](https://github.com/czgdp1807). Huge shoutout to them!
 
 ## SciPy
 
-The SciPy library provides a number of routines to work with different kinds of splines. The spline we discussed is provided by [scipy.interpolate.make_smoothing_spline](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.make_smoothing_spline.html), it takes in the $x$, $y$ and $\lambda$ values and returns $f$, the fitted spline. But wait, what about the domain of the pieces of the piecewise cubic spline, which we named $t$, where's that?
+The SciPy library provides a number of routines to work with different kinds of splines. The spline we discussed is provided by `scipy.interpolate.make_smoothing_spline`, it takes in the $x$, $y$ and $\lambda$ values and returns $f$, the fitted spline. But wait, where does one piece of the piecewise cubic end and the next one begin? These joining positions are called the <i>knots</i>, we collect them in a sorted list and call it $t$. The simplest way to think about them is, knots are the places where you allow the curve to bend. So where does $t$ come from?
 
-It was internally assumed that $t$, the knots, are always equal to $x$, the data sites, so it was not in the API. This is a popular choice since there is a classical theorem that when you set $t$ = $x$ you always get the curve that best minimizes the objective function we discussed earlier.
+It was internally assumed that the knots are always placed at $x$, the data sites, so $t$ was not in the API. This is a popular choice since there is a classical theorem that when you place the knots at the data sites you always get the curve that best minimizes the objective function we discussed earlier.
 
 But there is a tradeoff hiding in that choice. Internally, SciPy builds matrices to solve this, and the size of the system depends on the number of pieces in the piecewise function. With $t$ = $x$ the number of pieces grows with the data. For `1,000,000` datapoints, the size of the matrix is `1,000,000 x 1,000,000`. Hence, some people may want to pass a smaller $t$ to `make_smoothing_spline` to get a slightly worse curve but much faster. This was not available in SciPy yet, I worked through the summer to add it.
 
-On the good side, these matrices are often banded (<i>Because Piecewise, Only a few diagonals are non-zero </i>). The design matrix $X$ (defined below) has at most `k + 1` non-zeros per row, where `k` is the degree of each piece, and the matrix we solve, $X^\top W X + \lambda\,\Omega$ (also defined below), is banded too, with `2k + 1` diagonals. Here, since $k$ is just $3$, the number of non-zero elements is $(k + 1) * (num. datapoints)$, in this case it's $4,000,000$.
+On the good side, these matrices are often banded (<i>only a few diagonals are non-zero </i>). The design matrix $X$ (defined below) has at most `k + 1` non-zeros per row, where `k` is the degree of each piece, and the matrix we solve, $X^\top W X + \lambda\,\Omega$ (also defined below), is banded too, with `2k + 1` diagonals. Here, since $k$ is just $3$, the number of non-zero elements is $(k + 1) * (num. datapoints)$, in this case it's $4,000,000$.
 
-By the way, the matrix I'm talking about is called the "design matrix", It is built from the values of the basis elements at the data points. We solve the equation $y = X * c$ in the least squares sense (that is the $\lambda = 0$ limit of our objective), where $c$ are some coefficients that scale or squish the influence of some columns of the design matrix. And since each basis element is non-zero over only a few pieces, the fewer the knots, the smaller the dimension of $X$. Expanding it further, the closed-form solution to our minimization problem is given by this matrix equation:
+By the way, the matrix I'm talking about is called the "design matrix". It is built from the values of the basis elements at the data points. We solve the equation $y = X * c$ in the least squares sense (that is the $\lambda = 0$ limit of our objective), where $c$ are some coefficients that scale or squish the influence of some columns of the design matrix. And, since each basis element is non-zero over only a few pieces, the fewer the knots, the smaller the dimension of $X$. Expanding it further, the closed-form solution to our minimization problem is given by this matrix equation:
 
 $$
 (X^\top W X + \lambda\,\Omega)\,\boldsymbol{c} \;=\; X^\top W \boldsymbol{y},
 $$
 
-Here, $W$ is a diagonal matrix of optional per-point weights, the identity matrix if you don't pass any, and the new $\Omega$ is just the matrix form of the integral of the squared second derivative we saw earlier. <br /> Now we have two options, either differentiate and integrate numerically every time to compute $\Omega$ or derive a general matrix form of $\Omega$ which circumvents this procedure, and once you have matrices with nice properties you can apply optimizations on them, inspect them etc. <br /> So what is the matrix form and how to compute it? <br /> That was about half of my internship. Deriving $\Omega$ using papers and books going back to the 1980's. Other implementations like the R programming language's libraries are GPL licensed, so we deliberately did not look at their source code (only used their numerical output as a black-box check). Apart from that, most of MATLAB, Octave, Julia etc. don't support user defined knot vectors either.
+Here, $W$ is a diagonal matrix of optional per-point weights, the identity matrix if you don't pass any, and the new $\Omega$ is just the matrix form of the integral of the squared second derivative we saw earlier. 
 
-SciPy did use matrices but they assume the $t$ = $x$ thing and hence, their matrices are more specialized than what the general case needs. The complete derivation is available in [my companion write-up](https://github.com/aadya940/scipy-bspline-testing/blob/main/B_Splines_with_arbitary_knots-gcv.pdf). Also, when $t$ = $x$ the design matrix was a square matrix, now it is not, so we can't apply some shortcuts we applied earlier. Furthermore, the fitted curve depends on the value of $\lambda$, so what is a good value of $\lambda$? The classic procedure is leave-one-out cross validation, drop one point, fit on the rest, check how well the fit predicts the dropped point, and repeat this for every point and every candidate $\lambda$. Accurate, but costly, you refit $n$ times per candidate. Generalized Cross Validation (GCV) is a shortcut that estimates the same score from a single fit. So previously in SciPy you could pass $\lambda$ = None and SciPy would automatically find the appropriate one using GCV. This algorithm assumes the $t$ = $x$ as well, so I went on to derive the general case for that as well.
+Now we have two options, either differentiate and integrate numerically every time to compute $\Omega$ or derive a general matrix form of $\Omega$ which circumvents this procedure, and once you have matrices with nice properties you can apply optimizations on them, inspect them etc.
+
+So what is the matrix form and how to compute it? 
+
+That was about half of my internship. Deriving $\Omega$ using papers and books going back to the 1980's. Other implementations like the R programming language's libraries are GPL licensed, so we deliberately did not look at their source code (only used their numerical output as a black-box check). 
+Apart from that, most of MATLAB, Octave, Julia etc. don't support user defined knot vectors either.
+
+SciPy did use matrices but they assume the $t$ = $x$ thing and hence, their matrices are more specialized than what the general case needs. The complete derivation is available in [my companion write-up](https://github.com/aadya940/scipy-bspline-testing/blob/main/B_Splines_with_arbitary_knots-gcv.pdf). Also, when $t$ = $x$ the design matrix was a square matrix, now it is not, so we can't apply some shortcuts we applied earlier. Furthermore, the fitted curve depends on the value of $\lambda$, so what is a good value of $\lambda$? The classic procedure is leave-one-out cross validation, drop one point, fit on the rest, check how well the fit predicts the dropped point, and repeat this for every point and every candidate $\lambda$. Accurate, but costly, you refit $n$ times per candidate. Generalized Cross Validation (GCV) is a shortcut that estimates the same score from a single fit. So previously in SciPy you could pass $\lambda$ = None and SciPy would automatically find the appropriate one using GCV. This algorithm assumed $t$ = $x$ too, so I went on to derive the general case for that as well.
 
 I spent some parts of the Internship on Optimizations. A few examples:
 - Whenever a matrix is a special type of matrix called a [Hermitian matrix](https://en.wikipedia.org/wiki/Hermitian_matrix) (symmetric, in our real-valued case) and positive definite, you can use SciPy's `solveh_banded` solver which is several times faster than the general `solve_banded` solver.
