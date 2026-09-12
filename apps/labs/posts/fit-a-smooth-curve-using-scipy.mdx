@@ -1,0 +1,368 @@
+---
+title: 'How to fit a Smooth Curve? Using SciPy'
+authors: [aadya-chinubhai]
+published: September 11, 2026
+description: 'How smoothing splines work in SciPy and how you can now pass your own knots to make_smoothing_spline.'
+category: [PyData ecosystem, Internship]
+featuredImage:
+  src: /posts/fit-a-smooth-curve-using-scipy/featured.png
+  alt: 'The SciPy logo snake drawn as a spline track with its control points, on a white background'
+hero:
+  imageSrc: /posts/fit-a-smooth-curve-using-scipy/hero.png
+  imageAlt: 'The SciPy logo snake drawn as a spline track with its control points, on a white background'
+---
+
+A lot of things around us we take for granted are Smooth Curves, for example,
+- <i> This roller coaster is a smooth path </i>
+
+<div align="center">
+
+
+<img width="497" alt="A 3D roller coaster track winding as a single smooth path" src="/posts/fit-a-smooth-curve-using-scipy/rollercoaster.png" />
+
+
+</div>
+
+- <i> Your browser has paths defined for the beautiful fonts it renders such as </i>
+
+<div align="center">
+
+
+<img width="497" alt="Letter glyphs rendered from smooth outline paths" src="/posts/fit-a-smooth-curve-using-scipy/font-paths.png" />
+
+
+</div>
+
+- <i> Gradient Maps: These are a special type of smooth paths where the input is luminosity (instead of time) and the output is in color space </i>
+
+<div align="center">
+
+
+<img width="497" alt="A gradient map, a smooth path from dark to bright colors" src="/posts/fit-a-smooth-curve-using-scipy/gradient-map.png" />
+
+
+</div>
+
+These are smooth because their derivatives are continuous. The smoother the curve, the higher the order up to which its derivatives stay continuous.
+For example, we know intuitively that this is smooth:
+
+$$
+y = \sin(x)
+$$
+
+But mathematically you can differentiate $y = \sin(x)$ an infinite number of times and still get a continuous curve. More importantly, if the
+derivatives were discontinuous, the path would have sharp edges and applications like the roller coaster ride wouldn't be suitable. But smooth is underrated, mostly we're always given examples of motion for mathematical smoothness but it plays a huge role in aesthetics. There was a popular
+artist, M.C. Escher, who built a career out of smoothness, here is some of his artwork:
+
+<div align="center">
+
+
+<img width="497" alt="M.C. Escher, Hand with Reflecting Sphere, a hand holding a mirrored sphere reflecting the artist and his room" src="/posts/fit-a-smooth-curve-using-scipy/escher-artwork.png" />
+
+
+<img width="497" alt="M.C. Escher, Print Gallery, a gallery scene that curls smoothly into itself" src="/posts/fit-a-smooth-curve-using-scipy/escher-print-gallery.png" />
+
+
+</div>
+
+The mathematics of this was in fact later worked out in [this paper](https://pub.math.leidenuniv.nl/~smitbde/papers/2003-de_smit-lenstra-escher.pdf).
+So hopefully, I convinced you smooth curves are interesting.
+
+## But, how do you fit a smooth curve?
+
+Notice, the term "fit". Say you made a bunch of measurements, at each input $x_i$ you recorded a value $y_i$, and the recordings carry some
+noise. We want a smooth curve that follows these data points $(x_i, y_i)$ without chasing the noise. We can fit one by minimizing this objective function:
+
+$$
+J[f] = \sum_{i=1}^{n} \big( y_i - f(x_i) \big)^2 \; + \; \lambda \int_{x_1}^{x_n} \big( f''(u) \big)^2 \, du
+$$
+
+Here, $f(x)$ is the fitted curve, $f''$ is the second derivative of the same curve which measures how curvy or jumpy the curve
+is. Hence, the first term in $J$ is how closely the curve fits the data, the second term is how jumpy/curvy the curve is and
+$\lambda$ controls the amount of penalty to apply for bending.
+
+When you optimise $J$ over the space of all smooth functions, you get a Spline. For a more detailed derivation, consult the companion write-up 
+[I wrote during the internship](https://github.com/aadya940/scipy-bspline-testing/blob/main/B_Splines_with_arbitary_knots-gcv.pdf).
+
+
+## Splines
+
+Splines are a special type of piecewise polynomials. Instead of fitting a single, high-degree polynomial across an entire data set, 
+which can cause wild oscillations known as [Runge's phenomenon](https://en.wikipedia.org/wiki/Runge%27s_phenomenon),
+splines use lower-degree cubic polynomials on smaller subintervals while maintaining continuous transitions from one piece to the next.
+We're only assuming the cases that work on a <i>two-dimensional</i> plane for now.
+
+<div align="center">
+
+
+<img width="900" alt="Left: a single degree-12 polynomial through 13 points oscillates wildly near the edges. Right: a cubic spline through the same points stays calm, drawn in a pencil sketch style." src="/posts/fit-a-smooth-curve-using-scipy/piecewise-vs-polynomial.png" />
+
+
+</div>
+
+<p align="center"><i><small>Same 13 points in both panels.</small></i></p>
+
+So you can fit a smooth curve through a bunch of points using a spline and use $\lambda$ to control the amount of smoothing. With $\lambda = 0$, the curve may freely interpolate the points, with $\lambda = \infty$ you get a straight line.
+Using this concept, you can start your artwork. Note that an image is just a bunch of horizontal or vertical lines stacked in order. So you can fit splines with separate $\lambda$'s and create images with focus on one particular object. 
+Here is an example:
+
+<div align="center">
+
+
+<img width="700" alt="Artwork of a building and sky drawn entirely with smoothing splines fitted line by line" src="/posts/fit-a-smooth-curve-using-scipy/spline-art-1.png" />
+
+
+</div>
+
+Or you can use Splines as a paintbrush. Here's another example:
+
+<div align="center">
+
+
+<img width="700" alt="Artwork drawn using splines as paintbrush strokes" src="/posts/fit-a-smooth-curve-using-scipy/spline-art-2.png" />
+
+
+</div>
+
+So how do we use splines as a paintbrush? A painter usually drags the brush along the outline of an object and not across it, so the first step is to compute, at every spot in the photo, which direction the outlines run. Then we pick a random spot, move a tiny step in that direction, check the direction again, take another step, and so on for a few steps. 
+The direction changes slightly at every step, so the path we get is a little shaky. So we fit a smoothing spline on these points to get a smooth curve through them, and we draw this curve as one thick stroke in the color the photo has at that spot. We repeat this from 9000 random spots, and all the strokes together form the full picture.
+Nothing here blurs or filters the photo, we are just repainting it stroke by stroke, and each stroke is a fitted spline.
+
+These have been built using the [scipy.interpolate.make_smoothing_spline](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.make_smoothing_spline.html) function provided by the SciPy project which I had the pleasure to work on as an Intern (Summer, 2026) at Quansight Labs under [Evgeni Burovski](https://github.com/ev-br) and [Gagandeep Singh](https://github.com/czgdp1807). Huge shoutout to them!
+
+## SciPy
+
+The SciPy library provides a number of routines to work with different kinds of splines. The spline we discussed is provided by `scipy.interpolate.make_smoothing_spline`, it takes in the $x$, $y$ and $\lambda$ values and returns $f$, the fitted spline. But wait, where does one piece of the piecewise cubic end and the next one begin? These joining positions are called the <i>knots</i>, we collect them in a sorted list and call it $t$. The simplest way to think about them is, knots are the places where you allow the curve to bend. So where does $t$ come from?
+
+It was internally assumed that the knots are always placed at $x$, the data sites, so $t$ was not in the API. This is a popular choice since there is a classical theorem that when you place the knots at the data sites you always get the curve that best minimizes the objective function we discussed earlier.
+
+But there is a tradeoff hiding in that choice. Internally, SciPy builds matrices to solve this, and the size of the system depends on the number of pieces in the piecewise function. With $t$ = $x$ the number of pieces grows with the data. For `1,000,000` datapoints, the size of the matrix is `1,000,000 x 1,000,000`. Hence, some people may want to pass a smaller $t$ to `make_smoothing_spline` to get a slightly worse curve but much faster. This was not available in SciPy yet, I worked through the summer to add it.
+
+On the good side, these matrices are often banded (<i>only a few diagonals are non-zero </i>). The design matrix $X$ (defined below) has at most `k + 1` non-zeros per row, where `k` is the degree of each piece, and the matrix we solve, $X^\top W X + \lambda\,\Omega$ (also defined below), is banded too, with `2k + 1` diagonals. Here, since $k$ is just $3$, the number of non-zero elements is $(k + 1) * (num. datapoints)$, in this case it's $4,000,000$.
+
+By the way, the matrix I'm talking about is called the "design matrix". It is built from the values of the basis elements at the data points. We solve the equation $y = X * c$ in the least squares sense (that is the $\lambda = 0$ limit of our objective), where $c$ are some coefficients that scale or squish the influence of some columns of the design matrix. And, since each basis element is non-zero over only a few pieces, the fewer the knots, the smaller the dimension of $X$. Expanding it further, the closed-form solution to our minimization problem is given by this matrix equation:
+
+$$
+(X^\top W X + \lambda\,\Omega)\,\boldsymbol{c} \;=\; X^\top W \boldsymbol{y},
+$$
+
+Here, $W$ is a diagonal matrix of optional per-point weights, the identity matrix if you don't pass any, and the new $\Omega$ is just the matrix form of the integral of the squared second derivative we saw earlier. 
+
+Now we have two options, either differentiate and integrate numerically every time to compute $\Omega$ or derive a general matrix form of $\Omega$ which circumvents this procedure, and once you have matrices with nice properties you can apply optimizations on them, inspect them etc.
+
+So what is the matrix form and how to compute it? 
+
+That was about half of my internship. Deriving $\Omega$ using papers and books going back to the 1980's. Other implementations like the R programming language's libraries are GPL licensed, so we deliberately did not look at their source code (only used their numerical output as a black-box check). 
+Apart from that, most of MATLAB, Octave, Julia etc. don't support user defined knot vectors either.
+
+SciPy did use matrices but they assume the $t$ = $x$ thing and hence, their matrices are more specialized than what the general case needs. The complete derivation is available in [my companion write-up](https://github.com/aadya940/scipy-bspline-testing/blob/main/B_Splines_with_arbitary_knots-gcv.pdf). Also, when $t$ = $x$ the design matrix was a square matrix, now it is not, so we can't apply some shortcuts we applied earlier. Furthermore, the fitted curve depends on the value of $\lambda$, so what is a good value of $\lambda$? The classic procedure is leave-one-out cross validation, drop one point, fit on the rest, check how well the fit predicts the dropped point, and repeat this for every point and every candidate $\lambda$. Accurate, but costly, you refit $n$ times per candidate. Generalized Cross Validation (GCV) is a shortcut that estimates the same score from a single fit. So previously in SciPy you could pass $\lambda$ = None and SciPy would automatically find the appropriate one using GCV. This algorithm assumed $t$ = $x$ too, so I went on to derive the general case for that as well.
+
+I spent some parts of the Internship on Optimizations. A few examples:
+- Whenever a matrix is a special type of matrix called a [Hermitian matrix](https://en.wikipedia.org/wiki/Hermitian_matrix) (symmetric, in our real-valued case) and positive definite, you can use SciPy's `solveh_banded` solver which is several times faster than the general `solve_banded` solver.
+- Whenever you have a banded matrix (<i> which is nearly always in this case </i>), use SciPy's [diags_array](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.diags_array.html) for optimized routines.
+- The [LAPACK](https://www.netlib.org/lapack/) FORTRAN library, which SciPy provides Python interfaces to, has several banded linear algebra routines.
+
+I also derived in the paper mentioned above, the relation between the [condition number](https://en.wikipedia.org/wiki/Condition_number) and the smoothing parameter $\lambda$, this helps us understand the domains where the algorithm is numerically stable, where it is not, where it is unsolvable and why. We went through several code reviews during these parts.
+
+## What do users get now?
+A new Keyword Argument:
+
+```python
+from scipy.interpolate import make_smoothing_spline
+
+# before: knots are fixed at the data sites
+spl = make_smoothing_spline(x, y, lam=lam)
+
+# now: bring your own knots
+spl = make_smoothing_spline(x, y, lam=lam, t=my_knots)
+
+# or let GCV pick lambda on your knots, that works too
+spl = make_smoothing_spline(x, y, t=my_knots)
+```
+
+What this buys you:
+- <b> The solve is sized by your knots, not your data. </b> Remember the `1,000,000 x 1,000,000` matrix from before? Pass 100 knots and the system is roughly `100 x 100` (banded, on top of that), no matter how many points you have. The data only enters through small products like $X^T y$.
+- <b> You decide where the curve bends. </b> Since knots are the bending points, you can place more of them in the regions where the signal has features and fewer in the flat regions. All the artwork in this post was made this way.
+- <b> It is faster even in the old case. </b> The new path solves its system with `solveh_banded`, which exploits symmetry, instead of the more general `solve_banded`. In our benchmarks this alone made it about 2x faster than the old `t = x` path on the same problem.
+-  $\lambda$ <b>= None still works. </b> The GCV search was re-derived for arbitrary knots, so automatic smoothing is not a $t = x$ exclusive anymore.
+- <b> Nothing changes if you don't opt in. </b> Leave $t$ out and you get exactly the old behavior. In fact the test suite demands it: with knots at the data and the same $\lambda$, the new path reproduces the old one to about `1e-12`, and the penalty matrix $\Omega$ is computed in closed form, no quadrature error to budget for.
+
+The feature lives in [scipy/scipy#25862](https://github.com/scipy/scipy/pull/25862) and the GCV follow-up is in review in [scipy/scipy#26141](https://github.com/scipy/scipy/pull/26141), so it makes its way to a SciPy release near you soon.
+
+### Tutorial 1: Lots of points, few knots
+Let's fit 200,000 noisy samples of a smooth signal using just 12 interior knots:
+
+```python
+>>> import numpy as np
+>>> from scipy.interpolate import make_smoothing_spline
+>>> rng = np.random.default_rng(42)
+>>> x = np.sort(rng.uniform(0, 1, 200_000))
+>>> y = 0.4 + 0.3*np.sin(5.1*x) + 0.2*np.sin(13.7*x + 0.8) \
+...  + rng.normal(0, 0.25, x.size)
+>>>
+>>> inner = np.linspace(0, 1, 14)[1:-1]    # 12 interior knots
+>>> t = np.concatenate([[x[0]]*4, inner, [x[-1]]*4])   # clamped boundary knots
+>>> spl = make_smoothing_spline(x, y, lam=1e-7, t=t)
+```
+
+<div align="center">
+
+
+<img width="1590" alt="200,000 noisy points with a smooth fitted curve using 12 interior knots" src="/posts/fit-a-smooth-curve-using-scipy/tutorial-1-many-points-few-knots.png" />
+
+
+</div>
+
+The noise here has amplitude `0.25` and the fitted curve is within `0.007` of the
+true signal. Now recall the matrix sizes from earlier. With `t = x` this would be a
+`200,000 x 200,000` system. With 12 interior knots it is `16 x 16`, and banded. The
+data only enters through small products like $X^T y$, so even if you add more
+points, the system to solve stays the same size.
+
+### Tutorial 2: Put the knots where the data bends
+Since knots decide where the curve can flex, where you place them matters. Here is
+a signal which is mostly quiet except a sharp bump at `x = 0.7`. We fit it twice,
+both times with exactly 8 interior knots:
+
+```python
+>>> rng = np.random.default_rng(42)
+>>> x = np.sort(rng.uniform(0, 1, 400))
+>>> y = 0.3 + 0.25*x + 0.45*np.exp(-((x - 0.7)/0.045)**2) \
+...  + rng.normal(0, 0.05, x.size)
+>>>
+>>> def clamp(inner):                      # boundary knots, multiplicity 4
+...     return np.concatenate([[x[0]]*4, inner, [x[-1]]*4])
+>>>
+>>> t_uniform = clamp(np.linspace(x[0], x[-1], 10)[1:-1])
+>>> t_placed  = clamp(np.array([0.25, 0.5, 0.62, 0.66, 0.70, 0.74, 0.78, 0.9]))
+>>>
+>>> spl_u = make_smoothing_spline(x, y, lam=1e-9, t=t_uniform)
+>>> spl_p = make_smoothing_spline(x, y, lam=1e-9, t=t_placed)
+```
+
+<div align="center">
+
+
+<img width="1590" alt="Two fits of a bumpy signal, uniform knots oversmooth the bump, knots placed around the bump recover it, knot positions shown as tick marks" src="/posts/fit-a-smooth-curve-using-scipy/tutorial-2-knot-placement.png" />
+
+
+</div>
+
+The data here is generated as function + noise, and the ground truth is just the function, without the noise. The RMSE is the root mean squared error between the fitted curve $f$ and 
+the ground truth $g$,
+
+$$
+\text{RMSE} = \sqrt{\frac{1}{n} \sum_i \big(f(x_i) - g(x_i)\big)^2}
+$$
+
+so intuitively, it is the typical distance between the curve we fit and the curve we were trying to recover. The reference value to compare against is the noise level, the noise added to the data has standard deviation `0.05`. Same data, same $\lambda$, same number of coefficients, same everything, only the placement differs. The uniform knots oversmooth the bump and wiggle around in the quiet region, giving RMSE `0.053`, the fit misses the truth by about as much as the noise itself, so it recovered nothing beyond the data. The placed knots are clustered around the bump, so the bump comes out clean and the rest stays calm, giving RMSE `0.013`, four times below the noise level, so the fit genuinely recovers the underlying function. The small tick marks in the plots show where the knots are.
+
+By the way, if you don't want to hand-pick the knots, NumPy gives you an easier option:
+
+```python
+>>> t = clamp(np.quantile(x, np.linspace(0, 1, 10)[1:-1], method="nearest"))
+```
+
+This places the knots at the quantiles of your data, so they end up dense wherever your data points are dense and sparse where they are sparse. The `method="nearest"` part makes every knot
+exactly on one of your data sites, which guarantees each knot interval actually contains data, so the fit is always well posed.
+
+### Tutorial 3: Don't pick lambda at all
+If picking knots by hand felt like work, picking $\lambda$ is worse, nobody has
+intuition for its units. So leave it out and GCV picks it for you, now on your
+knots too:
+
+```python
+>>> spl = make_smoothing_spline(x, y, t=t)    # no lam
+```
+
+<div align="center">
+
+
+<img width="1590" alt="The GCV criterion versus the dimensionless smoothing parameter with a clear minimum, and the resulting fit" src="/posts/fit-a-smooth-curve-using-scipy/tutorial-3-gcv.png" />
+
+
+</div>
+
+On the left is what happens internally. GCV asks, for each candidate $\lambda$,
+how well would the fit predict each point if that point were left out, and picks
+the minimum. Note the x-axis, it's $\log_{10}(\lambda / r)$, not $\log_{10}(\lambda)$.
+That ratio $r$ is what makes the search work in any unit system. $\lambda$ has units,
+so if you rescale $x$, the right $\lambda$ changes too. You can check this: I fit
+the same measurements with $x$ in metres and in kilometres, and GCV chose
+`2.40e-03` and `2.40e-12`, a factor of $10^9$ apart, exactly the $(10^3)^3$ the
+units demand, and the two fitted curves are the same curve. The search is over
+the dimensionless variable, so the fixed window works for everyone. This also
+addresses a long-standing SciPy issue where the old search failed on data
+with large or small $x$ scales.
+
+## Beyond the main feature
+
+The knots work was the centerpiece, but a few other things happened around it:
+- Add `clamp_values` keyword argument in `make_lsq_spline`. `clamp_values` is a 2-tuple (ci, cf) where
+  `ci` is the y-coordinate of the start of the spline and `cf` is the y-coordinate of the end of the spline.
+  This is useful when you know where your spline should start and end. For example,
+
+```python
+>>> import numpy as np
+>>> import matplotlib.pyplot as plt
+>>> from scipy.interpolate import make_lsq_spline
+>>> 
+>>> rng = np.random.default_rng(12345)
+>>> x = np.linspace(0, 10, 80)
+>>> y = np.sin(x) + 0.3 * rng.normal(size=len(x))
+>>>
+>>> k = 3
+>>> interior = np.linspace(1.5, 8.5, 6)
+>>> t = np.r_[[x[0]] * (k + 1), interior, [x[-1]] * (k + 1)]
+>>>
+>>> spl_free = make_lsq_spline(x, y, t, k)
+>>> spl_clamped = make_lsq_spline(x, y, t, k, clamp_values=(0.0, 0.0))
+```
+
+<i>Here is the spline it generates: </i>
+
+
+<img width="880" alt="A free least squares spline and a clamped one whose endpoints are pinned to zero, shown with stars" src="/posts/fit-a-smooth-curve-using-scipy/clamp-values.png" />
+
+
+The main implementation task was to solve a smaller system. A spline fitting problem has $m$ basis functions, where $m$ = len($t$) $- 4$, and each 
+basis function gets one coefficient, so we solve for a coefficient vector $c$ of length $m$. Now, at a clamped boundary only the first basis function is nonzero, 
+with $B_0(x[0]) = 1$, so the spline evaluated at the first point is simply $c_0$. The constraint spl($x[0]$) $= c$<i>i</i> therefore fixes $c_0 = c$<i>i</i> directly, and likewise 
+$c_{m-1} = c$<i>f</i> at the other end. So the clamp values feature effectively has to solve for only $m - 2$ coefficients, the two boundary ones are known before the solve even starts.
+
+Here is the PR: [scipy/scipy#25570](https://github.com/scipy/scipy/pull/25570)
+
+- Tutorial for `scipy.interpolate.make_smoothing_spline`
+
+Here is the PR: [scipy/scipy#26168](https://github.com/scipy/scipy/pull/26168)
+
+## Future Work
+
+SciPy still needs work on some features users may want, and I'm planning to work on them after the Quansight Internship. Here are a few likely candidates:
+
+- P-spline penalties, a cheaper discrete alternative to the exact integral penalty
+- Higher order derivative penalties, penalize the third derivative instead of the second when you care about smooth curvature itself
+- A `solver=` option, letting users pick the linear algebra backend for the fitting problem
+- Wrapping LAPACK's `dpbcon` in `scipy.linalg`, which gives a cheap condition number estimate from the Cholesky factor we already compute
+
+## About Me
+
+I'm Aadya Chinubhai, currently a final year student at Santa Clara University in the Bay Area pursuing
+Computer Science. SciPy was the first open source project I contributed to (at least, tried to) a 
+couple of years back. Before getting back to SciPy for an internship at Quansight, I took part in 
+Google Summer of Code 2024, and later went on to become a maintainer of the NumFOCUS affiliated
+[aeon-toolkit](https://github.com/aeon-toolkit/aeon), a library for time series machine learning,
+where I work on the deep learning module. I've also interned at a YCombinator backed startup in the
+AI infra space, done some research on graph analytics for cyber security applications, and much more. 
+Coming back to SciPy completes a full circle. What matters most to me is that the advice the maintainers
+gave me on the SciPy GitHub during my first PR years ago stayed with me. And here I am, looking forward to
+giving back to the next wave of new contributors (with fewer hallucinations than an LLM).
+
+## References and image credits
+
+- Roller coaster spline illustration: [USC CSCI 420 Assignment 2](https://viterbi-web.usc.edu/~jbarbic/cs420-s17/assignments/assign2/assign2.html), course material by Jernej Barbič.
+- M.C. Escher, *Hand with Reflecting Sphere* (1935) and *Print Gallery* (1956). All M.C. Escher works © The M.C. Escher Company B.V., the Netherlands. All rights reserved. [www.mcescher.com](https://www.mcescher.com). Reproduced here for commentary on the mathematics of the works.
+- B. de Smit and H. W. Lenstra Jr., ["The Mathematical Structure of Escher's Print Gallery"](https://pub.math.leidenuniv.nl/~smitbde/papers/2003-de_smit-lenstra-escher.pdf), *Notices of the AMS*, 50(4), 2003.
+- *Hand with Reflecting Sphere* image via [The Guardian](https://www.theguardian.com/artanddesign/2015/jun/20/the-impossible-world-of-mc-escher).
+- All other figures by the author.
+
