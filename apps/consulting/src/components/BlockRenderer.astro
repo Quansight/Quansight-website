@@ -1,0 +1,477 @@
+---
+import BlockRenderer from './BlockRenderer.astro';
+import { ButtonLink } from './ButtonLink';
+import { DataTable } from './DataTable';
+import Form from './Form.astro';
+import { Hero } from './Hero';
+import { Icon } from './Icon';
+import { IconBoxGrid } from './IconBoxGrid';
+import { IconList } from './IconList';
+import { ImageBoxGrid } from './ImageBoxGrid';
+import { PageHeading } from './PageHeading';
+import { Placeholder } from './Placeholder';
+import { PriceTable } from './PriceTable';
+import { SocialIcons } from './SocialIcons';
+import { Toggle } from './Toggle';
+import { Video } from './Video';
+import { colorToken } from '../utils/colorTokens';
+import { sizeToken } from '../utils/fontSizeTokens';
+
+type Block = Record<string, unknown> & { type: string };
+
+interface Props {
+  block: Block;
+}
+
+const { block } = Astro.props;
+
+const PLACEHOLDER_TYPES = new Set([
+  'call-to-action',
+  'image-carousel',
+  'testimonial-carousel',
+]);
+
+// Computed here, not inline in the template below -- Astro's template
+// parser can misread TS generics like `Record<string, unknown>[][]` as
+// JSX/HTML tags (the `<` is ambiguous), which breaks the build.
+const columns = block.type === 'columns' ? (block.columns as Block[][]) : [];
+const columnBackgrounds = block.type === 'columns' ? ((block.columnBackgrounds as (string | null)[] | undefined) ?? []) : [];
+// A `columns` block isn't always 2-wide (e.g. a 5-across row of project
+// logos, one per Elementor column). Tailwind needs static class names
+// (no dynamic grid-cols-${n}), hence the explicit map.
+const COLUMNS_GRID_CLASS = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 md:grid-cols-2',
+  3: 'grid-cols-1 sm:grid-cols-3',
+  4: 'grid-cols-2 sm:grid-cols-4',
+  5: 'grid-cols-2 sm:grid-cols-5',
+};
+const columnsGridClass = COLUMNS_GRID_CLASS[columns.length] ?? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4';
+// Real per-column widths (classic-model `elementor-col-NN`, a fixed
+// percentage) -- when present, overrides the even-split class above via
+// the `.col-widths` rule in global.css, so a row with fewer populated
+// columns than its own design calls for (e.g. 2 elementor-col-33 columns
+// instead of 2 elementor-col-50 ones) sits left-aligned with real blank
+// space after it, instead of stretching to fill the row.
+const columnWidths = block.type === 'columns' ? (block.columnWidths as number[] | undefined) : undefined;
+// Some rows space their columns not via a shared gap but via each column's
+// own left/right margin (percentages resolved against that column's own
+// width, e.g. getting-started-with-ai's Ragna/Nebari/conda-store logos row)
+// -- see extract_column_margin. Applied per-cell below, not here, since it
+// varies per column rather than per row.
+const columnMargins = block.type === 'columns' ? ((block.columnMargins as ({ left?: string; right?: string } | undefined)[] | undefined) ?? []) : [];
+// A colored column's own padding varies a lot (confirmed: visualization-
+// dashboards' violet column is really 100px/250px/100px/100px, nothing
+// like the generic p-[3rem] lg:p-[6rem] fallback below) -- real values
+// win per-cell when present, same idea as columnMargins above.
+const columnPaddings = block.type === 'columns' ? ((block.columnPaddings as (Record<string, string> | undefined)[] | undefined) ?? []) : [];
+// A page-level section carrying its own background spans the whole
+// viewport on the live site, so it breaks out of the page's content
+// padding below. The converter marks only those (`fullBleed`); a nested
+// column's background is boxed to its column and must NOT break out --
+// e.g. careers' half-width Subscribe panel.
+// Elementor sets the gap between a row's columns per row, and most of
+// this site's rows set it to zero -- that's what lets two adjacent
+// colored columns read as a single panel instead of two boxes with a
+// seam. Falls back to the previous fixed gap when the row didn't say.
+const gapPx = block.type === 'columns' ? (block.gapPx as number | undefined) : undefined;
+// A section's own vertical margin/padding is sometimes the only thing
+// separating it from its neighbors -- without it, e.g. careers' Subscribe
+// panel runs into the footer, or getting-started-with-ai's intro
+// paragraphs sit flush against the hero with none of the real gap the
+// live site has (that section has no background at all, just its own
+// padding -- see extract_row_padding). Passed through as authored (some
+// margins are deliberately negative).
+// Elementor's own box model splits a "boxed" section in two: the SECTION
+// itself is full viewport width and carries this padding, while a nested
+// `.elementor-container` is independently centered and capped at 1140px.
+// On any normal desktop width the section is far wider than 1140px + this
+// padding, so the padding has no visible effect at all -- it only bites
+// once the viewport narrows below roughly max-w-layout / (1 - padding%).
+// Applying it on the SAME element as `max-w-layout` (as a naive port would)
+// double-shrinks the content on every screen size instead, which is why
+// this needs its own full-width wrapper below rather than folding into
+// rowStyle.
+const paddingStyle = [
+  block.paddingTop ? `padding-top:${block.paddingTop}` : '',
+  block.paddingBottom ? `padding-bottom:${block.paddingBottom}` : '',
+  block.paddingLeft ? `padding-left:${block.paddingLeft}` : '',
+  block.paddingRight ? `padding-right:${block.paddingRight}` : '',
+].filter(Boolean).join(';');
+const rowStyle = [
+  gapPx === undefined ? '' : `gap:${gapPx}px`,
+  block.marginTop ? `margin-top:${block.marginTop}` : '',
+  block.marginBottom ? `margin-bottom:${block.marginBottom}` : '',
+  columnWidths ? `--col-widths:${columnWidths.map((w) => `${w}%`).join(' ')}` : '',
+].filter(Boolean).join(';');
+const soleBackground = columns.length === 1 ? columnBackgrounds[0] : undefined;
+const isFullBleedPanel =
+  block.fullBleed === true && !!soleBackground && soleBackground.toUpperCase() !== '#FFFFFF';
+
+// Elementor columns get a background color from a range of live-site
+// values (near-white panels included, e.g. #FAFAFF/#FFFFFF) -- only a
+// genuinely dark one needs its text flipped to white to stay readable.
+function isDarkBackground(hex: string): boolean {
+  const clean = hex.replace('#', '');
+  const r = parseInt(clean.slice(0, 2), 16);
+  const g = parseInt(clean.slice(2, 4), 16);
+  const b = parseInt(clean.slice(4, 6), 16);
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance < 0.5;
+}
+---
+
+{block.type === 'hero' && (
+  <Hero
+    image={block.image as string | undefined}
+    imageAlt={(block.imageAlt as string) ?? ''}
+    imageDesktop={block.imageDesktop as string | undefined}
+    imageTablet={block.imageTablet as string | undefined}
+    imageMobile={block.imageMobile as string | undefined}
+    objectFitDesktop={block.objectFitDesktop as 'cover' | 'contain' | undefined}
+    objectFitTablet={block.objectFitTablet as 'cover' | 'contain' | undefined}
+    objectFitMobile={block.objectFitMobile as 'cover' | 'contain' | undefined}
+    title={block.title as string | undefined}
+    titleSizePx={block.titleSizePx as number | undefined}
+    titleFontWeight={block.titleFontWeight as number | undefined}
+    subTitle={block.subTitle as string | undefined}
+    subTitleSizePx={block.subTitleSizePx as number | undefined}
+    ctaText={block.ctaText as string | undefined}
+    ctaUrl={block.ctaUrl as string | undefined}
+    variant={(block.variant as 'small' | 'medium' | 'large') ?? 'medium'}
+    objectFit={(block.objectFit as 'cover' | 'contain') ?? 'cover'}
+    gradientFrom={block.gradientFrom as string | undefined}
+    gradientTo={block.gradientTo as string | undefined}
+    overlayOpacity={block.overlayOpacity as number | undefined}
+  />
+)}
+
+{block.type === 'columns' && isFullBleedPanel && (() => {
+  const bgToken = colorToken(soleBackground);
+  return (
+  <div
+    class={`relative left-1/2 right-1/2 w-screen -mx-[50vw] ${bgToken ? `bg-${bgToken}` : ''}`}
+    style={`${bgToken ? '' : `background-color:${soleBackground};`}${rowStyle ? rowStyle + ';' : ''}${paddingStyle}`}
+  >
+    <div
+      class={`flex flex-col justify-center gap-[2rem] max-w-layout mx-auto p-[4%] max-[765px]:pt-[14%] max-[765px]:pb-[14%] max-[765px]:pl-[8%] max-[765px]:pr-[8%] ${
+        isDarkBackground(soleBackground as string) ? '[&_.text-violet]:!text-white [&_.text-black]:!text-white' : ''
+      }`}
+    >
+      {columns[0].map((childBlock) => (
+        <BlockRenderer block={childBlock} />
+      ))}
+    </div>
+  </div>
+  );
+})()}
+
+{block.type === 'columns' && !isFullBleedPanel && (
+  <div style={paddingStyle || undefined}>
+  <div
+    class={`grid ${columnWidths ? 'grid-cols-1 col-widths' : columnsGridClass} max-w-layout mx-auto w-full ${gapPx === undefined ? 'gap-[3rem]' : ''} ${
+      // A colored row nested inside another row's cell is content-height by
+      // default, so its panel stops short of its neighbour's and leaves a
+      // step in what should be one rectangle (careers' Subscribe box).
+      columnBackgrounds.some(Boolean) ? 'h-full' : ''
+    }`}
+    style={rowStyle || undefined}
+  >
+    {columns.map((column, i) => {
+      const rawBackground = columnBackgrounds[i];
+      // Plain white is indistinguishable from the page's own background --
+      // Elementor still writes it as a "configured" background, but
+      // treating it as a real panel adds padding/whitespace with nothing
+      // visible to justify it.
+      const backgroundColor = rawBackground && rawBackground.toUpperCase() !== '#FFFFFF' ? rawBackground : undefined;
+      const needsLightText = backgroundColor && isDarkBackground(backgroundColor);
+      const bgToken = colorToken(backgroundColor);
+      const columnMargin = columnMargins[i];
+      const columnPadding = columnPaddings[i];
+      const cellStyle = [
+        !bgToken && backgroundColor ? `background-color:${backgroundColor}` : '',
+        columnMargin?.left ? `margin-left:${columnMargin.left}` : '',
+        columnMargin?.right ? `margin-right:${columnMargin.right}` : '',
+        columnPadding?.top ? `padding-top:${columnPadding.top}` : '',
+        columnPadding?.right ? `padding-right:${columnPadding.right}` : '',
+        columnPadding?.bottom ? `padding-bottom:${columnPadding.bottom}` : '',
+        columnPadding?.left ? `padding-left:${columnPadding.left}` : '',
+      ].filter(Boolean).join(';');
+      return (
+        <div
+          class={`flex flex-col gap-[2rem] h-full ${bgToken ? `bg-${bgToken}` : ''} ${backgroundColor && !columnPadding ? 'p-[3rem] lg:p-[6rem]' : ''} ${
+            needsLightText ? '[&_.text-violet]:!text-white [&_.text-black]:!text-white' : ''
+          }`}
+          style={cellStyle || undefined}
+        >
+          {column.map((childBlock) => (
+            <BlockRenderer block={childBlock} />
+          ))}
+        </div>
+      );
+    })}
+  </div>
+  </div>
+)}
+
+{block.type === 'page-heading' && (
+  <PageHeading
+    title={block.title as string}
+    description={block.description as string | undefined}
+  />
+)}
+
+{block.type === 'heading' && (() => {
+  const level = Math.max(2, Math.min(6, (block.level as number) ?? 2));
+  const Tag = `h${level}` as 'h2';
+  // WP/Elementor sizes headings per-widget via its own generated CSS, with
+  // no correlation to semantic h1-h6 level -- convert-pages-consulting.py
+  // live-fetches that CSS and records the real size as `sizePx` per
+  // heading. This scale is only the fallback for when that isn't set.
+  const SIZE_BY_LEVEL = {
+    2: 'text-[3.6rem] leading-[4.2rem]',
+    3: 'text-[3rem] leading-[3.6rem]',
+    4: 'text-[2.4rem] leading-[3rem]',
+    5: 'text-[2rem] leading-[2.6rem]',
+    6: 'text-[1.8rem] leading-[2.4rem]',
+  };
+  const sizePx = block.sizePx as number | undefined;
+  // WP/Elementor's per-widget size is an arbitrary literal px value --
+  // sizeToken snaps it to the nearest step of the site's real 8-step
+  // scale (see tailwind.config.cjs), same idea as colorToken below.
+  const fontSizeToken = sizeToken(sizePx);
+  const sizeClass = fontSizeToken ? `text-${fontSizeToken} leading-[1.2]` : '';
+  // WP/Elementor colors headings per-widget too -- most default to the
+  // site's violet, but some are explicitly set to another brand color
+  // (e.g. pink, to match a nearby accent). colorToken merges the handful
+  // of near-identical hexes Elementor exports for the "same" color into
+  // one shared Tailwind class; an unrecognized hex falls back to an
+  // inline color instead of guessing which token it was meant to be.
+  const color = block.color as string | undefined;
+  const token = colorToken(color);
+  const colorClass = token ? `text-${token}` : color ? '' : 'text-violet';
+  // Real per-widget weight varies a lot (400-900 all confirmed in use) --
+  // `font-extrabold` below is only the fallback for headings where this
+  // wasn't found, not a safe sitewide default (700 is the single most
+  // common real value, not 800).
+  const fontWeight = block.fontWeight as number | undefined;
+  const styleParts = [
+    fontWeight ? `font-weight:${fontWeight}` : '',
+    !colorClass && color ? `color:${color}` : '',
+  ].filter(Boolean);
+  const style = styleParts.length ? styleParts.join(';') : undefined;
+  // Elementor sets alignment per heading widget too, and most of the
+  // site's headings are centered -- without this they all read flush left.
+  const ALIGN_CLASS = { center: 'text-center', right: 'text-right', end: 'text-right' };
+  const alignClass = ALIGN_CLASS[block.align as string] ?? '';
+  // No vertical margin here -- every context this renders in (PageBlocks,
+  // a columns cell, a full-bleed panel) now spaces its children with its
+  // own `gap`, matching Elementor's real sitewide widget-to-widget
+  // spacing; a self-margin here would double up with that gap instead of
+  // collapsing with it (flex/grid gaps don't collapse with child margins).
+  // A heading widget can carry its own padding independent of its column
+  // (confirmed widespread, 173 non-zero cases sitewide) -- e.g. packaging-
+  // and-distribution's "Seamlessly deploy..." heading has 5%/5% left/right
+  // padding narrowing it to 1026px inside an already-1140px column.
+  // Applied on this same div, which is already capped by max-w-layout --
+  // unlike a `columns` row's own padding, a widget's padding percentage
+  // resolves against its already-bounded parent, not the viewport, so no
+  // separate full-width wrapper is needed here.
+  const widgetPaddingStyle = [
+    block.paddingTop ? `padding-top:${block.paddingTop}` : '',
+    block.paddingBottom ? `padding-bottom:${block.paddingBottom}` : '',
+    block.paddingLeft ? `padding-left:${block.paddingLeft}` : '',
+    block.paddingRight ? `padding-right:${block.paddingRight}` : '',
+  ].filter(Boolean).join(';');
+  return (
+    <div class="max-w-layout mx-auto w-full" style={widgetPaddingStyle || undefined}>
+      <Tag
+        class={`font-extrabold font-heading ${colorClass} ${alignClass} ${sizeClass || SIZE_BY_LEVEL[level]}`}
+        style={style}
+      >
+        {block.text as string}
+      </Tag>
+    </div>
+  );
+})()}
+
+{block.type === 'text' && (() => {
+  // WP/Elementor sizes and weights text-editor widgets per-widget too, not
+  // just headings -- confirmed varying a lot sitewide (e.g. an intro
+  // paragraph emphasized at 21px/600 vs the sitewide default 18px/400).
+  // The 62.5%-root trick makes 1rem == 10px sitewide -- see BaseLayout.astro.
+  const sizePx = block.sizePx as number | undefined;
+  const fontSizeToken = sizeToken(sizePx);
+  const fontWeight = block.fontWeight as number | undefined;
+  const color = block.color as string | undefined;
+  const token = colorToken(color);
+  const colorClass = token ? `text-${token}` : color ? '' : 'text-black';
+  const styleParts = [
+    fontWeight ? `font-weight:${fontWeight}` : '',
+    !token && color ? `color:${color}` : '',
+    // See the heading block above for why this applies directly here
+    // rather than needing a separate full-width wrapper.
+    block.paddingTop ? `padding-top:${block.paddingTop}` : '',
+    block.paddingBottom ? `padding-bottom:${block.paddingBottom}` : '',
+    block.paddingLeft ? `padding-left:${block.paddingLeft}` : '',
+    block.paddingRight ? `padding-right:${block.paddingRight}` : '',
+  ].filter(Boolean);
+  return (
+    <div
+      class={`max-w-layout mx-auto w-full leading-[2.7rem] [&_a]:text-violet [&_a]:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem] ${
+        fontSizeToken ? `text-${fontSizeToken}` : 'text-xs'
+      } ${colorClass}`}
+      style={styleParts.length ? styleParts.join(';') : undefined}
+      set:html={block.html as string}
+    />
+  );
+})()}
+
+{block.type === 'image' && (() => {
+  // Rare, but real (confirmed once sitewide, getting-started-with-ai's
+  // "Jupyter AI Expertise" section): Elementor can style an image widget
+  // as a faint decorative watermark -- scaled down, low opacity, pulled
+  // under the following content with a negative bottom margin -- rather
+  // than an ordinary full-opacity inline image.
+  const widthPercent = block.widthPercent as number | undefined;
+  const opacity = block.opacity as number | undefined;
+  const marginBottom = block.marginBottom as string | undefined;
+  const styleParts = [
+    widthPercent ? `width:${widthPercent}%` : '',
+    opacity !== undefined ? `opacity:${opacity}` : '',
+    marginBottom ? `margin-bottom:${marginBottom}` : '',
+  ].filter(Boolean);
+  return (
+    <img
+      src={block.src as string}
+      alt={(block.alt as string) ?? ''}
+      width={block.width as number | undefined}
+      height={block.height as number | undefined}
+      class="max-w-full h-auto mx-auto"
+      style={styleParts.length ? styleParts.join(';') : undefined}
+    />
+  );
+})()}
+
+{block.type === 'button' && (
+  <div
+    class={
+      block.align === 'center' ? 'flex justify-center' :
+      block.align === 'right' ? 'flex justify-end' :
+      undefined
+    }
+  >
+    <ButtonLink
+      url={block.url as string}
+      text={block.text as string}
+      color={(block.color as 'violet' | 'white' | 'pink') ?? 'violet'}
+      isFull={(block.isFull as boolean) ?? true}
+      isBordered={block.isBordered as boolean | undefined}
+      isTriangle={block.isTriangle as boolean | undefined}
+      backgroundColor={block.backgroundColor as string | undefined}
+      borderColor={block.borderColor as string | undefined}
+      textColor={block.textColor as string | undefined}
+    />
+  </div>
+)}
+
+{block.type === 'icon' && (
+  <Icon svg={block.svg as string} />
+)}
+
+{block.type === 'divider' && (() => {
+  const token = colorToken(block.color as string);
+  return (
+    <hr
+      class={`my-[2rem] border-t ${token ? `border-${token}` : ''}`}
+      style={`width:${(block.widthPercent as number) ?? 100}%${token ? '' : `;border-color:${block.color as string}`}`}
+    />
+  );
+})()}
+
+{block.type === 'price-table' && (
+  <PriceTable
+    heading={block.heading as string | undefined}
+    subheading={block.subheading as string | undefined}
+    currency={block.currency as string | undefined}
+    price={block.price as string}
+    period={block.period as string | undefined}
+    features={block.features as string[] | undefined}
+    buttonText={block.buttonText as string | undefined}
+    buttonUrl={block.buttonUrl as string | undefined}
+    priceBackground={block.priceBackground as string | undefined}
+  />
+)}
+
+{block.type === 'icon-box-grid' && (
+  <IconBoxGrid
+    items={
+      (block.items as {
+        title?: string;
+        description?: string;
+        icon?: string;
+        iconColor?: string;
+        descriptionSizePx?: number;
+        descriptionColor?: string;
+        divider?: boolean;
+        align?: 'center' | 'start';
+      }[]) ?? []
+    }
+  />
+)}
+
+{block.type === 'icon-list' && (
+  <IconList items={(block.items as string[]) ?? []} />
+)}
+
+{block.type === 'image-box-grid' && (
+  <ImageBoxGrid
+    items={
+      (block.items as {
+        image: string;
+        imageAlt: string;
+        description?: string;
+        layout?: 'column' | 'row' | 'row-reverse';
+      }[]) ?? []
+    }
+  />
+)}
+
+{block.type === 'social-icons' && (
+  <SocialIcons
+    links={
+      (block.links as { text: string; href: string; icon: string; iconAlt: string }[]) ?? []
+    }
+  />
+)}
+
+{block.type === 'video' && (
+  <Video url={block.url as string} />
+)}
+
+{block.type === 'toggle' && (
+  <Toggle items={(block.items as { title: string; content: string }[]) ?? []} />
+)}
+
+{block.type === 'table' && (
+  <DataTable
+    headers={(block.headers as string[]) ?? []}
+    rows={(block.rows as string[][]) ?? []}
+  />
+)}
+
+{block.type === 'form' && (
+  <div class="max-w-layout mx-auto w-full">
+    <Form
+      name={block.name as string}
+      fields={block.fields as any[]}
+      submit={block.submit as string}
+      audience={block.audience as 'mailchimp' | 'contact' | undefined}
+      submitIcon={block.submitIcon as boolean | undefined}
+    />
+  </div>
+)}
+
+{PLACEHOLDER_TYPES.has(block.type) && (
+  <Placeholder widget={block.type} note={block.note as string | undefined} />
+)}

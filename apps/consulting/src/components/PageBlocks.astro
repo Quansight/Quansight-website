@@ -1,0 +1,39 @@
+---
+import BlockRenderer from './BlockRenderer.astro';
+
+type Block = Record<string, unknown> & { type: string };
+
+interface Props {
+  blocks: Block[];
+}
+
+const { blocks } = Astro.props;
+
+// Hero renders full-bleed, since its own background spans edge to edge on
+// the live site regardless of the header (which is a separate, in-flow
+// section before it -- see SiteHeader.astro). Everything else gets a
+// small mobile-only horizontal inset: at desktop, real per-section
+// padding is 0 beyond the page's boxed 1140px width, which each block's
+// own `max-w-layout mx-auto` already provides -- extra padding here on
+// top of that (previously meant to align with the header's own padding,
+// which turned out to not exist) just narrowed content below its real
+// width.
+const [first, ...rest] = blocks;
+const isHeroFirst = first?.type === 'hero';
+const heroBlock = isHeroFirst ? first : null;
+const contentBlocks = isHeroFirst ? rest : blocks;
+---
+
+{heroBlock && <BlockRenderer block={heroBlock} />}
+{/* gap-[2rem]: Elementor's own sitewide default spacing between widgets
+    is 20px (confirmed via the live site's own --widgets-spacing custom
+    property) -- most blocks carry no per-widget margin override at all,
+    relying on that default, so a flex `gap` here (rather than each block
+    managing its own margin, which doesn't collapse consistently and left
+    some pairs of blocks touching with no gap at all) is what actually
+    reproduces it. */}
+<div class="flex flex-col gap-[2rem] px-[2rem]">
+  {contentBlocks.map((block) => (
+    <BlockRenderer block={block} />
+  ))}
+</div>

@@ -54,7 +54,10 @@ rss.xml
 .nx/
 next-env.d.ts
 
-# astro (apps/labs standalone)
+# astro (apps/labs, apps/consulting standalone)
 apps/labs/dist/
 apps/labs/node_modules/
 apps/labs/.astro/
+apps/consulting/dist/
+apps/consulting/node_modules/
+apps/consulting/.astro/

@@ -1,7 +1,7 @@
 ---
 title: 'Why We Are Excited About JupyterLab 3.0 Dynamic Extensions!'
 published: October 19, 2020
-author: tony-fast
+authors: [tony-fast]
 description: >
   At Quansight, we’ve been hosting a series of live streams that feature our talented open source developers talking about the software they contribute to and the communities around them. During a recent quirkshop our incredible JupyterLab developers got together to discuss the upcoming major version changes to JupyterLab. We discussed the toil that core developers are investing to improve the experience of JupyterLab not only for developers but for users as well.
 category: [Jupyter, Open Source Software]
@@ -12,8 +12,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 **Co-authors:** Gonzalo Peña-Castellanos, Eric Charles, Eric Kelly
 
@@ -181,10 +179,10 @@ development team. Those of us at [Quansight][quansight site] would really like
 to thank the team for all their hard work and thoughtfulness.
 
 Want more Jupyter? Read about Quansight's new project, QHub, in our
-<a href="/post/announcing-qhub" target="_self">announcement blog post</a>.
+<a href="/blog/announcing-qhub" target="_self">announcement blog post</a>.
 
 [jupyterlab docs]: https://jupyterlab.readthedocs.io/
-[quansight site]: https://quansight.com
+[quansight site]: /
 [quirkshop video]: https://youtu.be/k8yKcPPO0Gs
 [dask]: https://docs.dask.org/
 [holoviz]: https://holoviz.org/

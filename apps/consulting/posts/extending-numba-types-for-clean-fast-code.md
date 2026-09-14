@@ -1,7 +1,7 @@
 ---
 title: 'Extending Numba Types for Clean, Fast Code'
 published: November 13, 2020
-author: dale-tovar
+authors: [dale-tovar]
 description: >
   The scientific Python ecosystem relies on compiled code for fast execution. While it is still common to see C++ and C code contributed to the internals of Python libraries, much of the new compiled code written today uses a Python library like Cython or Numba to speed up Python code. Both of these libraries center around working with NumPy arrays, although both, with a little work, can be extended to work with custom data structures. As there are a number of blog posts comparing Cython and Numba, I'd like to draw attention to the extension capabilities of Numba and how it can be used to make clean, readable code. Numba's extensibility has been beautifully demonstrated by the Awkward Array library, which copies the NumPy array interface and can be used inside of jitted functions.
 category: [Optimization, Training]
@@ -12,8 +12,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 The scientific Python ecosystem relies on compiled code for fast execution.
 While it is still common to see C++ and C code contributed to the internals of

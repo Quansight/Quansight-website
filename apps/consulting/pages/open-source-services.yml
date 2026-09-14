@@ -1,0 +1,490 @@
+slug: open-source-services
+title: "Open Source Services"
+description: "Open Source Services Future-Proof Your Tech Stack & Drive Business Innovation The Open Source Advantage: Strategy, Governance, Success with Quansight More than 90% of technology is built using open source software, and with the rise of artificial intelligence (AI) and large language models (LLMs), these dependencies are only growing. Establishing a robust open source strategy […]"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/open-source-services/Hero-Background-21.png"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Open Source Services"
+  titleSizePx: 70
+  titleFontWeight: 700
+  subTitle: "Future-Proof Your Tech Stack & Drive Business Innovation"
+  subTitleSizePx: 22
+- type: heading
+  text: "The Open Source Advantage: Strategy, Governance, Success with Quansight"
+  level: 2
+  sizePx: 40
+  fontWeight: 700
+  color: "#452392"
+  align: "center"
+  paddingBottom: "4%"
+- type: text
+  html: "<p>More than 90% of technology is built using open source software, and with the rise of artificial intelligence (AI) and large language models (LLMs), these dependencies are only growing. Establishing a robust open source strategy is essential for modern organizations looking to build a long-term plan for sustainability and innovation. However, organizational leaders often need help knowing where to start.</p><p>At Quansight, we bridge the gap between businesses and the open source community by leveraging our long-standing position and reputation within the community to facilitate trust-building. By aligning our community expertise with your business goals and needs, we’ll develop an open source strategy that works for you.</p>"
+  sizePx: 18
+  color: "#000000"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/open-source-services/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Build relationships with the communities that develop your critical dependencies"
+                  layout: "row"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/open-source-services/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Increase efficiency through open standards and tested code"
+                  layout: "row"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/open-source-services/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Reduce code maintenance costs"
+                  layout: "row"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/open-source-services/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Drive innovation and stay competitive"
+                  layout: "row"
+        columnBackgrounds:
+          - "#FFFFFF"
+          - "#FFFFFF"
+          - "#FFFFFF"
+          - "#FFFFFF"
+        columnWidths:
+          - 33.0
+          - 33.0
+          - 33.0
+          - 33.0
+        gapPx: 48
+  marginBottom: "2%"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/open-source-services/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Attract and retain top technical talent"
+                  layout: "row"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/open-source-services/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Reduce vendor lock-in"
+                  layout: "row"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/open-source-services/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Enhance cybersecurity"
+                  layout: "row"
+          - - type: image-box-grid
+              items:
+                - image: "/page-assets/open-source-services/Quansight-arrows-01.svg"
+                  imageAlt: "Image of an arrow pointing right over a violet square."
+                  description: "Increase business agility"
+                  layout: "row"
+        columnBackgrounds:
+          - "#FFFFFF"
+          - "#FFFFFF"
+          - "#FFFFFF"
+          - "#FFFFFF"
+        columnWidths:
+          - 33.0
+          - 33.0
+          - 33.0
+          - 33.0
+        gapPx: 48
+  marginBottom: "5%"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Using open source software as the foundation, we deliver tailor-made solutions that strengthen the community and enhance the technologies the world already depends on."
+        level: 2
+        sizePx: 35
+        fontWeight: 700
+        color: "#A43A8F"
+        align: "center"
+  columnBackgrounds:
+    - "#F3F5F8"
+  fullBleed: true
+- type: text
+  html: "<p>Many companies rely heavily on open source software but don’t have the full picture regarding the true business value, costs, principles, and community involvement required to ensure its long-term viability. At Quansight, we’ll guide you through assessing your current stack and help you develop a strategy to invest in and give back to the critical projects your business relies upon.</p><p>By actively engaging with and supporting these vital open source communities, you’ll reduce risks, gain a voice within the community, and get visibility into project direction and roadmaps for your core dependencies. This strategic approach ensures a competitive edge and drives innovation and growth by aligning your efforts with the advancements happening within the ecosystem.</p><p>In collaboration with our strategic partner, <a href=\"https://www.openteams.com/\">OpenTeams</a>, Quansight’s Open Source Services will help you drive innovation and ensure sustainability within open source. Our combined expertise enables us to foster meaningful connections within the community, ensuring you stay closely aligned with the projects that make up your tech stack.</p>"
+  sizePx: 18
+  color: "#000000"
+  paddingBottom: "2%"
+- type: button
+  url: "/about-us#bookacallform"
+  text: "Contact Us"
+  isFull: true
+  isBordered: true
+  isTriangle: true
+  backgroundColor: "#452392"
+  textColor: "#FFFFFF"
+  borderColor: "#452392"
+  align: "center"
+- type: heading
+  text: "Meet Some of Our Experts"
+  level: 2
+  sizePx: 40
+  fontWeight: 700
+  color: "#452392"
+  align: "center"
+  paddingBottom: "4%"
+- type: text
+  html: "<p>Our technical staff are also contributors and maintainers of core PyData projects, including NumPy, PyTorch, SciPy, Jupyter, Nebari, Napari, Matplotlib, scikit-learn, Dask, conda, and Numba.​</p><p>Check out the <a href=\"https://labs.quansight.org/team\">Quansight Labs Team</a> page to learn more.</p>"
+  sizePx: 18
+  color: "#000000"
+- type: text
+  html: "<ul>\n<li><b><b>Tania Allard – </b></b>PSF Board Vice Chair, Jupyter Distinguished Contributor, conda Steering Council</li>\n<li><b><b>Ralf Gommers – </b></b>SciPy/NumPy Maintainer, Array API Standard and Pypackaging-native Creator</li>\n<li><b><b>Travis Oliphant – </b></b>NumPy, SciPy &amp; Numba Creator</li>\n<li><b><b>Athan Reines – </b></b>stdlib Core Developer, Consortium for Python Data API Member</li>\n<li><b><b>Marco Gorelli – </b></b>Polars/Pandas Maintainer, Creator of Narwhals</li>\n<li><b><b>Jaime Rodríguez-Guerra – </b></b>conda-forge Maintainer &amp; Core Team Member, conda Steering Council</li>\n<li><b><b>Melissa Weber Mendonça – </b></b>NumPy Steering Council</li>\n<li><b><b>Nathan Goldbaum – </b></b>NumPy, SciPy, Napari Maintainer, Senior Developer</li>\n<li><b><b>Matti Picus – </b></b>NumPy, PyPy, Manylinux Maintainer</li>\n<li><b><b>Neil Schemenauer – </b></b>CPython Core Developer, Author of CPython’s Garbage Collector</li>\n</ul>"
+  sizePx: 18
+  color: "#000000"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Getting Started—What Quansight Can Do for You"
+        level: 2
+        sizePx: 40
+        fontWeight: 700
+        color: "#452392"
+        align: "center"
+        paddingBottom: "4%"
+  marginTop: "4%"
+- type: columns
+  columns:
+    - - type: icon-list
+        items:
+          - "OSS development and release processes"
+    - - type: icon-list
+        items:
+          - "Partner coordination and consortium design"
+    - - type: icon-list
+        items:
+          - "Open source project support and program management"
+  columnWidths:
+    - 50.0
+    - 50.0
+    - 50.0
+  gapPx: 100
+- type: columns
+  columns:
+    - - type: icon-list
+        items:
+          - "Develop sustainable policies and processes  for OSS use, compliance, development, and participation"
+    - - type: icon-list
+        items:
+          - "Customized OSS training and upskilling"
+    - - type: icon-list
+        items:
+          - "Measuring and evaluatingopen source programs and initiatives"
+  columnWidths:
+    - 50.0
+    - 50.0
+    - 50.0
+  gapPx: 100
+- type: columns
+  columns:
+    - - type: icon-list
+        items:
+          - "Project management  and roadmap development"
+    - - type: icon-list
+        items:
+          - "OSS developer advocacy, developer experience, and community management"
+    - - type: icon-list
+        items:
+          - "Licensing and compliance"
+  columnWidths:
+    - 50.0
+    - 50.0
+    - 50.0
+  gapPx: 100
+- type: columns
+  columns:
+    - - type: icon-list
+        items:
+          - "Software audit   across your organization"
+    - - type: icon-list
+        items:
+          - "Best practices to reduce risk and respond to emerging threats"
+    - - type: icon-list
+        items:
+          - "Fix security vulnerabilities in open source software"
+  columnWidths:
+    - 50.0
+    - 50.0
+    - 50.0
+  gapPx: 100
+- type: columns
+  columns:
+    - - type: icon-list
+        items:
+          - "Assessment and integration of Software Bill of Materials (SBOM)   from upstream suppliers"
+    - - type: icon-list
+        items:
+          - "Generate SBOM and license compliance reports,  documentation, and other related artifacts"
+    - - type: icon-list
+        items:
+          - "And more —ask us about custom engagements"
+  columnWidths:
+    - 50.0
+    - 50.0
+    - 50.0
+  gapPx: 100
+- type: heading
+  text: "OSS Projects We Contribute To"
+  level: 2
+  sizePx: 40
+  fontWeight: 700
+  color: "#452392"
+  align: "center"
+  paddingBottom: "4%"
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/open-source-services/All-logos-01-100x100.png"
+        alt: "Image of the conda logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-02-1-100x100.png"
+        alt: "Image of the Hypothesis logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-35-1-100x100.png"
+        alt: "Image of a Numba logo."
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-03-1-100x100.png"
+        alt: "Image of a Scipy logo."
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-05-100x100.png"
+        alt: "Image of the Jupyter Lab logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-06-1-100x100.png"
+        alt: "Image of a Napari logo."
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-04-1-100x100.png"
+        alt: "Image of a SymPy logo."
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-07-100x100.png"
+        alt: "Image of the scikit-learn logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-08-100x100.png"
+        alt: "Image of the Bokeh logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-09-100x100.png"
+        alt: "Image of the IPython logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-10-100x100.png"
+        alt: "Image of the NumPy logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-11-100x100.png"
+        alt: "Image of the Panel logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-12-100x100.png"
+        alt: "Image of the CPython logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-13-1-100x100.png"
+        alt: "Image of a Flax logo."
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-14-1-100x100.png"
+        alt: "Image of a JAX logo."
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-15-100x100.png"
+        alt: "Image of the PyTorch logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-16-100x100.png"
+        alt: "Image of the pandas logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-17-100x100.png"
+        alt: "Image of the Nebari logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-18-100x100.png"
+        alt: "Image of the conda-store logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-19-100x100.png"
+        alt: "Image of the CuPy logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-20-100x100.png"
+        alt: "Image of a Papyri logo."
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-21-2-100x100.png"
+        alt: "Image of a PyData Sphinx logo."
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-22-100x100.png"
+        alt: "Image of the conda-forge logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-23-100x100.png"
+        alt: "Image of the Polars logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-24-100x100.png"
+        alt: "Image of the OpenBLAS logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/Python-100x100.png"
+        alt: "Image of the Python logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-26-100x100.png"
+        alt: "Image of the PyTorch Ignite logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-27-100x100.png"
+        alt: "Image of the spyder logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-28-100x100.png"
+        alt: "Image of the Jupyter logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-29-100x100.png"
+        alt: "Image of the Matplotlib logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-38-100x100.png"
+        alt: "Image of a DataApis logo."
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-31-1-100x100.png"
+        alt: "Image of a Meson logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-32-100x100.png"
+        alt: "Image of the stdlib logo"
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-33-100x100.png"
+        alt: "Image of the DISC logo."
+        width: 100
+        height: 100
+      - type: image
+        src: "/page-assets/open-source-services/All-logos-34-100x100.png"
+        alt: "Image of the Python Software Foundation logo"
+        width: 100
+        height: 100
+  paddingBottom: "2%"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Get in Touch"
+        level: 2
+        sizePx: 40
+        fontWeight: 700
+        color: "#FFFFFF"
+        paddingBottom: "4%"
+      - type: text
+        html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? Email us at connect@quansight.com to learn how Quansight can help.\t\t\t\t\t\t\t\t</p>"
+        sizePx: 18
+        color: "#FFFFFF"
+        paddingRight: "5%"
+        paddingBottom: "5%"
+      - type: button
+        url: "/about-us#bookacallform"
+        text: "Contact Us"
+        isFull: true
+        isBordered: true
+        isTriangle: true
+        backgroundColor: "#FFFFFF"
+        textColor: "#452392"
+        borderColor: "#FFFFFF"
+    - - type: image
+        src: "/page-assets/open-source-services/Quansight-contact-02-02-02.svg"
+        alt: "Image displaying three speech bubbles in bright green, purple and violet. There is also a white and bright green rocket and a violet envelope with the @ symbol."
+        width: 1122
+        height: 889
+        widthPercent: 85
+  columnWidths:
+    - 100.0
+    - 100.0
+  gapPx: 0
+- type: columns
+  columns:
+    - - type: heading
+        text: "FAQ"
+        level: 2
+        sizePx: 40
+        fontWeight: 700
+        color: "#452392"
+        paddingBottom: "4%"
+      - type: toggle
+        items:
+          - title: "I already have a strategy that needs to be properly assessed, can you help?"
+            content: "<p><span style=\"font-weight: 400;\">Yes, absolutely. At Quansight, we specialize in helping organizations assess and refine their open source strategies. Our experts will thoroughly evaluate what’s in place, identify areas for improvement, and provide tailored recommendations to ensure they align with industry best practices, the community, and your specific goals.</span></p>"
+          - title: "Can Quansight help my organization understand the business value and potential risks associated with open source adoption?"
+            content: "<p><span style=\"font-weight: 400;\">Definitely. We understand that adopting open source technologies comes with both opportunities and potential risks. Our team will work closely with you to help your organization fully comprehend the business value that open source can provide and identify and mitigate any associated risks or compliance issues. </span></p>"
+          - title: "What types of support does Quansight provide for navigating licensing and compliance issues?"
+            content: "<p><span style=\"font-weight: 400;\">Licensing and compliance are critical aspects of open source adoption. Quansight offers comprehensive support in this area, including license analysis, policy development, and training to ensure your organization complies with various open source licenses.</span></p>"
+          - title: "How does Quansight facilitate collaboration and trust-building within open source communities?"
+            content: "<p><span style=\"font-weight: 400;\">Quansight has a long-standing reputation and deep connections within many open source communities. We leverage this position to facilitate collaboration and trust-building between your organization and these communities. Our team can guide you through the process of contributing to open source projects, fostering relationships with key stakeholders, and establishing your organization as a trusted and valued member of the community.</span></p>"
+          - title: "Can Quansight help my organization identify and prioritize critical dependencies?"
+            content: "<p><span style=\"font-weight: 400;\">Yes. Identifying and prioritizing critical open source dependencies is a crucial part of our services. We’ll thoroughly assess your technology stack, pinpoint the most critical dependencies, and help you develop strategies to manage and mitigate associated risks. This includes exploring alternative solutions, contributing to projects, or implementing contingency plans.</span></p>"
+          - title: "What steps does Quansight take to ensure our open source strategy aligns with our organization's long-term goals and objectives?"
+            content: "<p><span style=\"font-weight: 400;\">We take a holistic approach to developing open source strategies. We start by gaining a deep understanding of your organization’s long-term goals, objectives, and unique needs. From there, we work closely with your team to craft a tailored strategy that not only leverages the power of open source but also directly supports and aligns with your broader organizational objectives.</span></p>"
+          - title: "How does Quansight assist in measuring the effectiveness and impact of our open source initiatives?"
+            content: "<p><span style=\"font-weight: 400;\">Measuring the success of your open source initiatives is crucial for continuous improvement and demonstrating value to stakeholders. Quansight can help you establish key performance indicators (KPIs) and metrics tailored to your goals. We’ll then provide guidance on tracking and analyzing these metrics, enabling you to quantify the impact of your initiatives and make data-driven decisions moving forward.</span></p>"
+          - title: "What resources and training programs does Quansight offer to support our team in becoming more proficient in open source development and management?"
+            content: "<p><span style=\"font-weight: 400;\"> Quansight provides a range of resources and training programs to help your team develop the necessary skills for efficient open source development and management. This includes hands-on workshops, online courses, mentorship programs, and access to our extensive knowledge base. Our goal is to empower your team with the expertise needed to successfully navigate the open source landscape and maximize the value it provides.</span></p>"
+  marginTop: "4%"

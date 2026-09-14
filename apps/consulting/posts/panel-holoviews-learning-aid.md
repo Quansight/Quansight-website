@@ -1,7 +1,7 @@
 ---
 title: 'Panel/Holoviews Learning Aid'
 published: December 14, 2020
-author: adam-lewis
+authors: [adam-lewis]
 description: 'This notebook is designed to help you learn how to make apps in Panel in about 15 minutes. Screenshots of cell outputs are included for convenience below, but it is strongly recommended that you use the interactive Binder version (takes 1-2 minutes to load) or by cloning the repo and running locally.'
 category: [Training, Data Visualization, Jupyter]
 featuredImage:
@@ -11,8 +11,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 _This blog post is adapted from a notebook designed to help you learn how to
 make apps in panel in about 15 minutes. Screenshots of cell outputs are included
@@ -297,7 +295,7 @@ layout.show()  # You won't be able to view this from binder, but will be able to
 Now that you have a simple app to start from, keep going and build your own!
 
 If you liked this article, check out this Panel article on <a
-href="/post/working-across-panel-and-ipywidgets-ecosystems"
+href="/blog/working-across-panel-and-ipywidgets-ecosystems"
 target="_self">Working Across Panel and ipywidgets Ecosystems</a>!
 
 [demo binder]: https://mybinder.org/v2/gh/Quansight/panel-learning-aid/master?filepath=learning_aid.ipynb

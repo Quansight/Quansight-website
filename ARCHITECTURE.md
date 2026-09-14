@@ -1,6 +1,10 @@
 # Architecture
 
-`apps/labs/` — Quansight Labs site (Astro, static output)
+`apps/labs/` and `apps/consulting/` are both Astro apps (static output)
+with the identical structure below — `apps/consulting` was rebuilt to
+mirror `apps/labs` (see `quansight.com-migration.md`), replacing an
+earlier, broken Next.js + Storyblok attempt. Each is a standalone npm
+project (own `package.json`, install/build run from inside the app dir).
 
 - `src/` — Astro pages, layouts, components, templates
   - `src/content.config.ts` — content collections: `people`, `pages`, `posts`, `singletons` (header/footer)
@@ -14,9 +18,12 @@
 - `postcss.config.cjs` — PostCSS config (required by Tailwind)
 - `tsconfig.json` — TypeScript config for the Astro app
 
-`apps/consulting/` — Quansight Consulting site (Next.js)
+`apps/labs/` — Quansight Labs site, labs.quansight.org, live.
 
-`storyblok-extraction-scripts/` — one-time scripts used to export content from Storyblok into this repo
+`apps/consulting/` — migration target for quansight.com (currently
+WordPress, entirely outside this repo). Blog posts are migrated; the 24
+live WordPress marketing pages and the widget/block components they need
+are not yet — not deployed as the live site.
 
 `examples/` — sample blog post templates for new contributors
 
@@ -24,4 +31,5 @@
 
 `.github/` — Dependabot config, issue/PR templates, CODEOWNERS
 
-`vercel.json` — overrides Vercel build to use `apps/labs/` as root
+`vercel.json` — overrides Vercel build to use `apps/labs/` as root (no
+deploy target wired up yet for `apps/consulting`)

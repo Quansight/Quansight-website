@@ -1,42 +1,16 @@
 [
-  {
-    "name": "Data Visualization",
-    "value": "data-visualization"
-  },
-  {
-    "name": "Open Source Software",
-    "value": "open-source-software"
-  },
-  {
-    "name": "Training",
-    "value": "training"
-  },
-  {
-    "name": "PyData Ecosystem",
-    "value": "pydata-ecosystem"
-  },
-  {
-    "name": "Artificial Intelligence",
-    "value": "artificial-intelligence"
-  },
-  {
-    "name": "Optimization",
-    "value": "optimization"
-  },
-  {
-    "name": "Jupyter",
-    "value": "jupyter"
-  },
-  {
-    "name": "Scalable Computing",
-    "value": "scalable-computing"
-  },
-  {
-    "name": "Infrastructure & HPC",
-    "value": "Infrastructure-hpc"
-  },
-  {
-    "name": "Data Engineering",
-    "value": "data-engineering"
-  }
+  "Data Visualization",
+  "Open Source Software",
+  "Training",
+  "PyData Ecosystem",
+  "Artificial Intelligence",
+  "Optimization",
+  "Jupyter",
+  "Scalable Computing",
+  "Infrastructure & HPC",
+  "Data Engineering",
+  "Case Studies",
+  "Company News",
+  "Numerical Computing",
+  "Packaging"
 ]

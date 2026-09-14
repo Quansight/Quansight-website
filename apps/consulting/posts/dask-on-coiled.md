@@ -1,7 +1,7 @@
 ---
 title: 'Dask on Coiled'
 published: August 5, 2021
-author: amit-kumar
+authors: [amit-kumar]
 description: 'In this blog post, we will talk about a case study of utilizing Dask to speed up a particular computation, and we will scale it with the help of Coiled.'
 category: [Scalable Computing, Training]
 featuredImage:
@@ -11,8 +11,6 @@ hero:
   imageSrc: /posts/hero-paris.webp
   imageAlt: 'Data visualization of Paris city'
 ---
-
-<base target="_blank" />
 
 In this blog post, we will talk about a case study of utilizing [Dask][dask] to speed up
 a particular computation, and we will scale it with the help of [Coiled][coiled].

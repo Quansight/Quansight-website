@@ -1,0 +1,92 @@
+slug: open-source
+title: "What is Open Source?"
+description: "Open Source Software Over the last 30 years, the open source software movement has grown from the ideas of a few influential programmers to become the way that the majority of software is developed today. A simple description of open source software is computer software that is released under a license that allows use, study, […]"
+blocks:
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  image: "/page-assets/open-source/Hero-Background-1.jpg"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Open Source Software"
+  titleSizePx: 70
+  titleFontWeight: 700
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: text
+                    html: "<p>Over the last 30 years, the open source software movement has grown from the ideas of a few influential programmers to become the way that the majority of software is developed today. A simple description of open source software is computer software that is released under a license that allows use, study, modification, and distribution of the original software and its source code by anyone for any purpose. The reality gets a little more complicated with differing license models, but generally that’s it. Developers write software and let others use, modify, and distribute it as they like.</p>"
+                    sizePx: 16
+                    color: "#000000"
+                    paddingRight: "50px"
+                - - type: image
+                    src: "/page-assets/open-source/map-location.svg"
+                    alt: ""
+                    width: 768
+                    height: 460
+                    widthPercent: 81
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+
+                - top: "35px"
+              gapPx: 0
+        paddingTop: "25px"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: image
+                    src: "/page-assets/open-source/open-source-man.svg"
+                    alt: ""
+                    width: 768
+                    height: 1636
+                    widthPercent: 74
+                - - type: text
+                    html: "<p>Some open source software takes the form of a focused set of functions, like numerical calculations or methods for creating charts from data, which can be used by other developers to create new software. These libraries can be thought of as reusable components for building new software. Other open source software projects are fully self-contained applications like web-servers, databases, photo editors, etc. There are millions of open source libraries now and nearly every piece of commercial software has its open source equivalent.</p><p>Open source software is managed as “projects” that are focused on creating a particular piece of software that is distributed as a “library” or application. Some projects are staffed by volunteers who are collectively referred to as the “community” for that project. The developers working on a project are called “contributors” to the project. We call this model, Community-driven open-source software [CDOSS]. Sometimes a project is driven by a company that has a need for the software but does not feel it needs exclusive access to the software. In that case some of the developers working on the project are paid employees of that company. Typically other interested developers are allowed to contribute to the effort on a voluntary basis. We call this model company-backed open source software [CBOSS].</p>"
+                    sizePx: 16
+                    color: "#000000"
+                    paddingLeft: "50px"
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+                - top: "35px"
+
+              gapPx: 0
+        paddingTop: "25px"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: text
+                    html: "<p>Open source software is licensed free of charge. Which is pretty amazing. And which begs the question: why do these individuals and companies pour billions of dollars worth of development into software and then give it away for free? There are many different reasons. Some volunteers find it rewarding to create great software, period. They seek the freedom to create what they are passionate about. Some want to see their software used by as many people as possible and don’t think it should be used to profit a single organization. Some companies don’t need to have exclusive access to the software they create and want to establish an industry standard or believe that the result will be better if many developers contribute their talents. And there are many more reasons.</p>"
+                    sizePx: 16
+                    color: "#000000"
+                    paddingRight: "50px"
+                - - type: image
+                    src: "/page-assets/open-source/thinking-boy.svg"
+                    alt: ""
+                    width: 768
+                    height: 686
+                    widthPercent: 75
+              columnWidths:
+                - 50
+                - 50
+              columnPaddings:
+
+                - top: "35px"
+              gapPx: 0
+        paddingTop: "25px"
+  paddingTop: "100px"
+  paddingBottom: "100px"
+- type: text
+  html: "<p><b>At Quansight, we are passionate about the open source software movement and all the great software that has resulted. We see the benefit of the different models for creating open source software and applaud the many different reasons for creating it. We believe that open source is the future of software and are committed to helping create a robust, sustainable open source software economy.</b></p>"
+  sizePx: 16
+  color: "#000000"
+  paddingRight: "50px"
