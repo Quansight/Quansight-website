@@ -8,7 +8,7 @@ featuredImage:
   src: /posts/fit-a-smooth-curve-using-scipy/featured.png
   alt: 'The SciPy logo snake drawn as a spline track with its control points, on a white background'
 hero:
-  imageSrc: /posts/fit-a-smooth-curve-using-scipy/hero.png
+  imageSrc: /posts/fit-a-smooth-curve-using-scipy/featured.png
   imageAlt: 'The SciPy logo snake drawn as a spline track with its control points, on a white background'
 ---
 
@@ -81,7 +81,7 @@ Here, $f(x)$ is the fitted curve, $f''$ is the second derivative of the same cur
 is. Hence, the first term in $J$ is how closely the curve fits the data, the second term is how jumpy/curvy the curve is and
 $\lambda$ controls the amount of penalty to apply for bending.
 
-When you optimise $J$ over the space of all smooth functions, you get a Spline. For a more detailed derivation, consult the companion write-up 
+When you optimize $J$ over the space of all smooth functions, you get a Spline. For a more detailed derivation, consult the companion write-up 
 [I wrote during the internship](https://github.com/aadya940/scipy-bspline-testing/blob/main/B_Splines_with_arbitary_knots-gcv.pdf).
 
 
@@ -158,7 +158,7 @@ Apart from that, most of MATLAB, Octave, Julia etc. don't support user defined k
 SciPy did use matrices but they assume the $t$ = $x$ thing and hence, their matrices are more specialized than what the general case needs. The complete derivation is available in [my companion write-up](https://github.com/aadya940/scipy-bspline-testing/blob/main/B_Splines_with_arbitary_knots-gcv.pdf). Also, when $t$ = $x$ the design matrix was a square matrix, now it is not, so we can't apply some shortcuts we applied earlier. Furthermore, the fitted curve depends on the value of $\lambda$, so what is a good value of $\lambda$? The classic procedure is leave-one-out cross validation, drop one point, fit on the rest, check how well the fit predicts the dropped point, and repeat this for every point and every candidate $\lambda$. Accurate, but costly, you refit $n$ times per candidate. Generalized Cross Validation (GCV) is a shortcut that estimates the same score from a single fit. So previously in SciPy you could pass $\lambda$ = None and SciPy would automatically find the appropriate one using GCV. This algorithm assumed $t$ = $x$ too, so I went on to derive the general case for that as well.
 
 I spent some parts of the Internship on Optimizations. A few examples:
-- Whenever a matrix is a special type of matrix called a [Hermitian matrix](https://en.wikipedia.org/wiki/Hermitian_matrix) (symmetric, in our real-valued case) and positive definite, you can use SciPy's `solveh_banded` solver which is several times faster than the general `solve_banded` solver.
+- Whenever a matrix is a special type of matrix called a [Hermitian matrix](https://en.wikipedia.org/wiki/Hermitian_matrix) (symmetric, in our real-valued case) and positive definite, you can use SciPy's `solveh_banded` solver instead of the general `solve_banded` solver. It uses a Cholesky factorization, which does about half the flops of LU and skips pivoting, so it is more than or equal to 2x faster.
 - Whenever you have a banded matrix (<i> which is nearly always in this case </i>), use SciPy's [diags_array](https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.diags_array.html) for optimized routines.
 - The [LAPACK](https://www.netlib.org/lapack/) FORTRAN library, which SciPy provides Python interfaces to, has several banded linear algebra routines.
 
@@ -183,9 +183,9 @@ spl = make_smoothing_spline(x, y, t=my_knots)
 What this buys you:
 - <b> The solve is sized by your knots, not your data. </b> Remember the `1,000,000 x 1,000,000` matrix from before? Pass 100 knots and the system is roughly `100 x 100` (banded, on top of that), no matter how many points you have. The data only enters through small products like $X^T y$.
 - <b> You decide where the curve bends. </b> Since knots are the bending points, you can place more of them in the regions where the signal has features and fewer in the flat regions. All the artwork in this post was made this way.
-- <b> It is faster even in the old case. </b> The new path solves its system with `solveh_banded`, which exploits symmetry, instead of the more general `solve_banded`. In our benchmarks this alone made it about 2x faster than the old `t = x` path on the same problem.
+- <b> It is faster even in the old case. </b> The new path solves its system with `solveh_banded`, which exploits symmetry, instead of the more general `solve_banded`. Cholesky does about half the flops of LU, so this alone makes it more than or equal to 2x faster than the old `t = x` path on the same problem.
 -  $\lambda$ <b>= None still works. </b> The GCV search was re-derived for arbitrary knots, so automatic smoothing is not a $t = x$ exclusive anymore.
-- <b> Nothing changes if you don't opt in. </b> Leave $t$ out and you get exactly the old behavior. In fact the test suite demands it: with knots at the data and the same $\lambda$, the new path reproduces the old one to about `1e-12`, and the penalty matrix $\Omega$ is computed in closed form, no quadrature error to budget for.
+- <b> Nothing changes if you don't opt in. </b> Leave $t$ out and you get exactly the old behavior. In fact the test suite demands it: with knots at the data and the same $\lambda$, the new path reproduces the old one to about `1e-12` at moderate $\lambda$ (the tolerance scales with $\lambda$, as conditioning does), and the penalty matrix $\Omega$ is computed in closed form, no quadrature error to budget for.
 
 The feature lives in [scipy/scipy#25862](https://github.com/scipy/scipy/pull/25862) and the GCV follow-up is in review in [scipy/scipy#26141](https://github.com/scipy/scipy/pull/26141), so it makes its way to a SciPy release near you soon.
 
@@ -327,8 +327,8 @@ The knots work was the centerpiece, but a few other things happened around it:
 
 The main implementation task was to solve a smaller system. A spline fitting problem has $m$ basis functions, where $m$ = len($t$) $- 4$, and each 
 basis function gets one coefficient, so we solve for a coefficient vector $c$ of length $m$. Now, at a clamped boundary only the first basis function is nonzero, 
-with $B_0(x[0]) = 1$, so the spline evaluated at the first point is simply $c_0$. The constraint spl($x[0]$) $= c$<i>i</i> therefore fixes $c_0 = c$<i>i</i> directly, and likewise 
-$c_{m-1} = c$<i>f</i> at the other end. So the clamp values feature effectively has to solve for only $m - 2$ coefficients, the two boundary ones are known before the solve even starts.
+with $B_0(x[0]) = 1$, so the spline evaluated at the first point is simply $c_0$. The constraint spl($x[0]$) $= c_i$ therefore fixes $c_0 = c_i$ directly, and likewise 
+$c_{m-1} = c_f$ at the other end. So the clamp values feature effectively has to solve for only $m - 2$ coefficients, the two boundary ones are known before the solve even starts.
 
 Here is the PR: [scipy/scipy#25570](https://github.com/scipy/scipy/pull/25570)
 
