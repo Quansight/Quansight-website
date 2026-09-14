@@ -496,8 +496,8 @@ blocks:
           - "Purpose"
           - "Reference"
         rows:
-          - ["WordPress", "(open source)", "Core publishing platform", "https://wordpress.org/about/"]
-          - ["Plausible Analytics", "Plausible Insights OÜ", "Website traffic analytics", "https://plausible.io/about (analytics tool) and https://wordpress.org/plugins/plausible-analytics/ (WordPress plugin)"]
+          - ["WordPress", "(open source)", "Core publishing platform", "<a href=\"https://wordpress.org/about/\">https://wordpress.org/about/</a>"]
+          - ["Plausible Analytics", "Plausible Insights OÜ", "Website traffic analytics", "<a href=\"https://plausible.io/about\">https://plausible.io/about</a> (analytics tool) and <a href=\"https://wordpress.org/plugins/plausible-analytics/\">https://wordpress.org/plugins/plausible-analytics/</a> (WordPress plugin)"]
       - type: text
         html: "<p style=\"text-align: center;\">WordPress Plugins</p>"
         fontWeight: 800
@@ -509,13 +509,14 @@ blocks:
           - "Purpose"
           - "Reference"
         rows:
-          - ["Converter for Media", "(open source)", "Image conversion & optimization", "https://wordpress.org/plugins/webp-converter-for-media/"]
-          - ["Elementor & Elementor Pro", "Elementor.com", "Page design toolkit", "https://wordpress.org/plugins/elementor/"]
-          - ["Essential Addons for Elementor", "WPDeveloper", "Widgets add-on pack for Elementor", "https://wordpress.org/plugins/essential-addons-for-elementor-lite/"]
-          - ["LiteSpeed Cache", "LiteSpeed Technologies", "Multi-functional site performance optimization", "https://wordpress.org/plugins/litespeed-cache/"]
-          - ["Public Post Preview", "(open source)", "Previewing draft blog posts without requiring WordPress login", "https://wordpress.org/plugins/public-post-preview/"]
-          - ["SmartCrawl Pro", "WPMU DEV", "SEO page features, SEO page/site analysis", "https://wpmudev.com/project/smartcrawl-wordpress-seo/"]
-          - ["SVG Support", "(open source)", "Media Library SVG support and advanced SVG styling features", "https://wordpress.org/plugins/svg-support/"]
-          - ["WP Mail SMTP", "(open source)", "Authenticated SMTP email support", "https://wordpress.org/plugins/wp-mail-smtp/"]
+          - ["Converter for Media", "(open source)", "Image conversion &amp; optimization", "<a href=\"https://wordpress.org/plugins/webp-converter-for-media/\">https://wordpress.org/plugins/webp-converter-for-media/</a>"]
+          - ["Elementor &amp; Elementor Pro", "Elementor.com", "Page design toolkit", "<a href=\"https://wordpress.org/plugins/elementor/\">https://wordpress.org/plugins/elementor/</a>"]
+          - ["Essential Addons for Elementor", "WPDeveloper", "Widgets add-on pack for Elementor", "<a href=\"https://wordpress.org/plugins/essential-addons-for-elementor-lite/\">https://wordpress.org/plugins/essential-addons-for-elementor-lite/</a>"]
+          - ["LiteSpeed Cache", "LiteSpeed Technologies", "Multi-functional site performance optimization", "<a href=\"https://wordpress.org/plugins/litespeed-cache/\">https://wordpress.org/plugins/litespeed-cache/</a>"]
+          - ["Public Post Preview", "(open source)", "Previewing draft blog posts without requiring WordPress login", "<a href=\"https://wordpress.org/plugins/public-post-preview/\">https://wordpress.org/plugins/public-post-preview/</a>"]
+          - ["SmartCrawl Pro", "WPMU DEV", "SEO page features, SEO page/site analysis", "<a href=\"https://wpmudev.com/project/smartcrawl-wordpress-seo/\">https://wpmudev.com/project/smartcrawl-wordpress-seo/</a>"]
+          - ["SVG Support", "(open source)", "Media Library SVG support and advanced SVG styling features", "<a href=\"https://wordpress.org/plugins/svg-support/\">https://wordpress.org/plugins/svg-support/</a>"]
+          - ["WP Mail SMTP", "(open source)", "Authenticated SMTP email support", "<a href=\"https://wordpress.org/plugins/wp-mail-smtp/\">https://wordpress.org/plugins/wp-mail-smtp/</a>"]
   paddingTop: "100px"
   paddingBottom: "100px"
+
