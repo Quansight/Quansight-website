@@ -7,6 +7,26 @@ import PageBlocks from '../components/PageBlocks.astro';
 import categories from '../../posts/categories.json';
 
 const page = await getEntry('pages', 'blog');
+
+// The converted WP page marks where its posts widgets sat with `posts`
+// blocks (nested inside a `columns` row). Live has two: 3 posts, then the
+// subscribe panel, then the rest. BlogList is one component, so the
+// whole list renders at the first marker's top-level row and the other
+// marker's row is dropped.
+type Block = Record<string, unknown> & { type: string };
+const containsPosts = (block: Block): boolean =>
+  block.type === 'posts' ||
+  ((block.columns as Block[][] | undefined) ?? []).some((column) =>
+    column.some(containsPosts),
+  );
+const allBlocks = (page?.data.blocks ?? []) as Block[];
+const firstPostsIndex = allBlocks.findIndex(containsPosts);
+const blocksBefore =
+  firstPostsIndex === -1 ? allBlocks : allBlocks.slice(0, firstPostsIndex);
+const blocksAfter =
+  firstPostsIndex === -1
+    ? []
+    : allBlocks.slice(firstPostsIndex + 1).filter((b) => !containsPosts(b));
 const allPosts = await getCollection('posts');
 const allPeople = await getCollection('people');
 
@@ -33,18 +53,14 @@ const posts = allPosts
 ---
 
 <BaseLayout
-  title="Blog | Quansight"
+  title={page?.data.seoTitle ?? 'Blog | Quansight'}
   description={page?.data.description}
 >
-  <PageBlocks blocks={page?.data.blocks ?? []} />
+  <PageBlocks blocks={blocksBefore} />
 
-  <div class="pt-[3rem] mx-auto w-[95%] max-w-[83rem] md:w-[85%] xl:w-[70%]">
-    {page?.data.title && (
-      <h2 class="text-[2.4rem] font-extrabold leading-[4.9rem] text-violet font-heading">
-        {page.data.title}
-      </h2>
-    )}
+  <div class="pt-[3rem]">
+    <BlogList posts={posts} categories={categories} client:load />
   </div>
 
-  <BlogList posts={posts} categories={categories} client:load />
+  {blocksAfter.length > 0 && <PageBlocks blocks={blocksAfter} />}
 </BaseLayout>

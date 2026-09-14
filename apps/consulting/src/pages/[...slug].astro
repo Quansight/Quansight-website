@@ -21,7 +21,7 @@ const { page } = Astro.props;
 ---
 
 <BaseLayout
-  title={`${page.data.title ?? 'Quansight'} | Quansight`}
+  title={page.data.seoTitle ?? `${page.data.title ?? 'Quansight'} | Quansight`}
   description={page.data.description}
 >
   <PageBlocks blocks={page.data.blocks} />

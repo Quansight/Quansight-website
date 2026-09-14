@@ -8,8 +8,8 @@ const page = await getEntry('pages', 'home');
 ---
 
 <BaseLayout
-  title="Quansight"
-  description="Open source, sustainable, and community-driven AI and data science consulting."
+  title={page?.data.seoTitle ?? 'Quansight'}
+  description={page?.data.description}
 >
   <PageBlocks blocks={page?.data.blocks ?? []} />
 </BaseLayout>

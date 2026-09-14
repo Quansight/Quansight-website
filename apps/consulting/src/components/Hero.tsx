@@ -40,6 +40,14 @@ type HeroProps = {
   gradientFrom?: string;
   gradientTo?: string;
   overlayOpacity?: number;
+  // The live section's own min-height (a vh value) and bottom padding --
+  // see extract_hero_box in the converter. Overrides the variant's
+  // min-h class when set.
+  minHeight?: string;
+  paddingBottom?: string;
+  // A full-width live hero section: title/subtitle span the viewport
+  // (minus the column's 40px padding) instead of the boxed 1140px.
+  contentFullWidth?: boolean;
 };
 
 export const Hero: FC<HeroProps> = ({
@@ -63,6 +71,9 @@ export const Hero: FC<HeroProps> = ({
   gradientFrom,
   gradientTo,
   overlayOpacity,
+  minHeight,
+  paddingBottom,
+  contentFullWidth,
 }) => {
   const hasGradient = gradientFrom && gradientTo;
   const isResponsive = imageDesktop || imageTablet || imageMobile;
@@ -100,13 +111,15 @@ export const Hero: FC<HeroProps> = ({
         variant === 'large-overlapping' && 'mb-[-31rem] md:mb-[-39rem]',
         variant === 'medium-overlapping' && 'mb-[-10rem] md:mb-[-20rem]',
       )}
-      style={
-        hasGradient
+      style={{
+        ...(hasGradient
           ? {
               background: `linear-gradient(180deg, ${gradientFrom} 0%, ${gradientTo} 100%)`,
             }
-          : undefined
-      }
+          : {}),
+        ...(minHeight ? { minHeight } : {}),
+        ...(paddingBottom ? { paddingBottom } : {}),
+      }}
     >
       {/* The background image spans the full section edge to edge, like
           the live site -- only the title/subtitle below are constrained
@@ -170,7 +183,9 @@ export const Hero: FC<HeroProps> = ({
       ) : null}
       <div
         className={clsx(
-          'relative mx-auto max-w-layout',
+          contentFullWidth
+            ? 'relative mx-auto w-full px-[4rem]'
+            : 'relative mx-auto max-w-layout',
           // isLarge's content is absolutely positioned at a specific
           // offset (below), which needs this wrapper's box to be the
           // *sized* positioning context -- h-full only resolves against a
@@ -192,7 +207,9 @@ export const Hero: FC<HeroProps> = ({
           >
             <h1
               className={clsx(
-                'font-extrabold leading-[6rem] text-white font-heading',
+                // Live hero titles are line-height 1em at every size
+                // seen (70px and 90px confirmed via style-diff).
+                'font-extrabold leading-[1] text-white font-heading',
                 // Real per-page title size (e.g. packaging-and-distribution
                 // is 70px, not the 50px sitewide-typical default) snapped
                 // to the site's real font-size scale -- see

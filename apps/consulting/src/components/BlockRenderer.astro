@@ -8,10 +8,12 @@ import { Icon } from './Icon';
 import { IconBoxGrid } from './IconBoxGrid';
 import { IconList } from './IconList';
 import { ImageBoxGrid } from './ImageBoxGrid';
+import { ImageCarousel } from './ImageCarousel';
 import { PageHeading } from './PageHeading';
 import { Placeholder } from './Placeholder';
 import { PriceTable } from './PriceTable';
 import { SocialIcons } from './SocialIcons';
+import { TestimonialCarousel } from './TestimonialCarousel';
 import { Toggle } from './Toggle';
 import { Video } from './Video';
 import { colorToken } from '../utils/colorTokens';
@@ -25,11 +27,7 @@ interface Props {
 
 const { block } = Astro.props;
 
-const PLACEHOLDER_TYPES = new Set([
-  'call-to-action',
-  'image-carousel',
-  'testimonial-carousel',
-]);
+const PLACEHOLDER_TYPES = new Set(['call-to-action']);
 
 // Computed here, not inline in the template below -- Astro's template
 // parser can misread TS generics like `Record<string, unknown>[][]` as
@@ -75,6 +73,17 @@ const columnPaddings = block.type === 'columns' ? ((block.columnPaddings as (Rec
 // colored columns read as a single panel instead of two boxes with a
 // seam. Falls back to the previous fixed gap when the row didn't say.
 const gapPx = block.type === 'columns' ? (block.gapPx as number | undefined) : undefined;
+// Vertical gap between a column's stacked blocks, when the source
+// container set one (see extract_column_row_gap); else the 2rem default.
+const rowGapPx = block.type === 'columns' ? (block.rowGapPx as number | undefined) : undefined;
+// A section's own content max-width where it overrides the sitewide
+// 1140px (home uses 1000-1314px) -- see extract_row_max_width. Inline, so
+// it wins over the max-w-layout class on the same element.
+const maxWidthPx = block.type === 'columns' ? (block.maxWidthPx as number | undefined) : undefined;
+const maxWidthStyle = maxWidthPx ? `max-width:${maxWidthPx}px` : '';
+// Explicit section padding (even all-zero) replaces the generic panel
+// padding guessed below for a colored full-bleed panel.
+const hasExplicitPadding = !!(block.paddingTop || block.paddingBottom || block.paddingLeft || block.paddingRight);
 // A section's own vertical margin/padding is sometimes the only thing
 // separating it from its neighbors -- without it, e.g. careers' Subscribe
 // panel runs into the footer, or getting-started-with-ai's intro
@@ -98,6 +107,10 @@ const paddingStyle = [
   block.paddingLeft ? `padding-left:${block.paddingLeft}` : '',
   block.paddingRight ? `padding-right:${block.paddingRight}` : '',
 ].filter(Boolean).join(';');
+// A row pulled up over its predecessor by a negative top margin (home's
+// "Trusted By" card over the hero) has to be positioned, or the hero
+// (itself `relative`) paints over it regardless of DOM order.
+const overlapsPrevious = typeof block.marginTop === 'string' && block.marginTop.startsWith('-');
 const rowStyle = [
   gapPx === undefined ? '' : `gap:${gapPx}px`,
   block.marginTop ? `margin-top:${block.marginTop}` : '',
@@ -143,6 +156,9 @@ function isDarkBackground(hex: string): boolean {
     gradientFrom={block.gradientFrom as string | undefined}
     gradientTo={block.gradientTo as string | undefined}
     overlayOpacity={block.overlayOpacity as number | undefined}
+    minHeight={block.minHeight as string | undefined}
+    paddingBottom={block.paddingBottom as string | undefined}
+    contentFullWidth={block.contentFullWidth as boolean | undefined}
   />
 )}
 
@@ -154,9 +170,12 @@ function isDarkBackground(hex: string): boolean {
     style={`${bgToken ? '' : `background-color:${soleBackground};`}${rowStyle ? rowStyle + ';' : ''}${paddingStyle}`}
   >
     <div
-      class={`flex flex-col justify-center gap-[2rem] max-w-layout mx-auto p-[4%] max-[765px]:pt-[14%] max-[765px]:pb-[14%] max-[765px]:pl-[8%] max-[765px]:pr-[8%] ${
+      class={`flex flex-col justify-center gap-[2rem] max-w-layout mx-auto ${
+        hasExplicitPadding ? '' : 'p-[4%] max-[765px]:pt-[14%] max-[765px]:pb-[14%] max-[765px]:pl-[8%] max-[765px]:pr-[8%]'
+      } ${
         isDarkBackground(soleBackground as string) ? '[&_.text-violet]:!text-white [&_.text-black]:!text-white' : ''
       }`}
+      style={[rowGapPx === undefined ? '' : `gap:${rowGapPx}px`, maxWidthStyle].filter(Boolean).join(';') || undefined}
     >
       {columns[0].map((childBlock) => (
         <BlockRenderer block={childBlock} />
@@ -169,13 +188,13 @@ function isDarkBackground(hex: string): boolean {
 {block.type === 'columns' && !isFullBleedPanel && (
   <div style={paddingStyle || undefined}>
   <div
-    class={`grid ${columnWidths ? 'grid-cols-1 col-widths' : columnsGridClass} max-w-layout mx-auto w-full ${gapPx === undefined ? 'gap-[3rem]' : ''} ${
+    class={`grid ${columnWidths ? 'grid-cols-1 col-widths' : columnsGridClass} max-w-layout mx-auto w-full ${gapPx === undefined ? 'gap-[3rem]' : ''} ${overlapsPrevious ? 'relative' : ''} ${
       // A colored row nested inside another row's cell is content-height by
       // default, so its panel stops short of its neighbour's and leaves a
       // step in what should be one rectangle (careers' Subscribe box).
       columnBackgrounds.some(Boolean) ? 'h-full' : ''
     }`}
-    style={rowStyle || undefined}
+    style={[rowStyle, maxWidthStyle].filter(Boolean).join(';') || undefined}
   >
     {columns.map((column, i) => {
       const rawBackground = columnBackgrounds[i];
@@ -190,6 +209,7 @@ function isDarkBackground(hex: string): boolean {
       const columnPadding = columnPaddings[i];
       const cellStyle = [
         !bgToken && backgroundColor ? `background-color:${backgroundColor}` : '',
+        rowGapPx === undefined ? '' : `gap:${rowGapPx}px`,
         columnMargin?.left ? `margin-left:${columnMargin.left}` : '',
         columnMargin?.right ? `margin-right:${columnMargin.right}` : '',
         columnPadding?.top ? `padding-top:${columnPadding.top}` : '',
@@ -255,9 +275,12 @@ function isDarkBackground(hex: string): boolean {
   // wasn't found, not a safe sitewide default (700 is the single most
   // common real value, not 800).
   const fontWeight = block.fontWeight as number | undefined;
+  // Per-widget line-height (see extract_heading_line_height); inline, so
+  // it wins over the leading-[1.2] fallback class.
   const styleParts = [
     fontWeight ? `font-weight:${fontWeight}` : '',
     !colorClass && color ? `color:${color}` : '',
+    block.lineHeight ? `line-height:${block.lineHeight}` : '',
   ].filter(Boolean);
   const style = styleParts.length ? styleParts.join(';') : undefined;
   // Elementor sets alignment per heading widget too, and most of the
@@ -277,14 +300,23 @@ function isDarkBackground(hex: string): boolean {
   // unlike a `columns` row's own padding, a widget's padding percentage
   // resolves against its already-bounded parent, not the viewport, so no
   // separate full-width wrapper is needed here.
+  // Widget-level background/shadow/width -- see extract_widget_box in the
+  // converter; only home's "Trusted By" card uses them.
   const widgetPaddingStyle = [
     block.paddingTop ? `padding-top:${block.paddingTop}` : '',
     block.paddingBottom ? `padding-bottom:${block.paddingBottom}` : '',
     block.paddingLeft ? `padding-left:${block.paddingLeft}` : '',
     block.paddingRight ? `padding-right:${block.paddingRight}` : '',
+    block.background ? `background-color:${block.background}` : '',
+    block.boxShadow ? `box-shadow:${block.boxShadow}` : '',
+    block.widthPercent ? `width:${block.widthPercent}%` : '',
+    block.marginTop ? `margin-top:${block.marginTop}` : '',
+    block.marginBottom ? `margin-bottom:${block.marginBottom}` : '',
   ].filter(Boolean).join(';');
+  // A boxed heading paints above a following boxed sibling that pulls up
+  // over it (live gives it z-index:1): home's "Trusted By" over its logos.
   return (
-    <div class="max-w-layout mx-auto w-full" style={widgetPaddingStyle || undefined}>
+    <div class={`max-w-layout mx-auto w-full ${block.background ? 'relative z-[1]' : ''}`} style={widgetPaddingStyle || undefined}>
       <Tag
         class={`font-extrabold font-heading ${colorClass} ${alignClass} ${sizeClass || SIZE_BY_LEVEL[level]}`}
         style={style}
@@ -309,18 +341,24 @@ function isDarkBackground(hex: string): boolean {
   const styleParts = [
     fontWeight ? `font-weight:${fontWeight}` : '',
     !token && color ? `color:${color}` : '',
+    block.lineHeight ? `line-height:${block.lineHeight}` : '',
     // See the heading block above for why this applies directly here
     // rather than needing a separate full-width wrapper.
     block.paddingTop ? `padding-top:${block.paddingTop}` : '',
     block.paddingBottom ? `padding-bottom:${block.paddingBottom}` : '',
     block.paddingLeft ? `padding-left:${block.paddingLeft}` : '',
     block.paddingRight ? `padding-right:${block.paddingRight}` : '',
+    block.background ? `background-color:${block.background}` : '',
+    block.boxShadow ? `box-shadow:${block.boxShadow}` : '',
+    block.widthPercent ? `width:${block.widthPercent}%` : '',
+    block.marginTop ? `margin-top:${block.marginTop}` : '',
+    block.marginBottom ? `margin-bottom:${block.marginBottom}` : '',
   ].filter(Boolean);
   return (
     <div
-      class={`max-w-layout mx-auto w-full leading-[2.7rem] [&_a]:text-violet [&_a]:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem] ${
+      class={`max-w-layout mx-auto w-full leading-[1.5] [&_a]:text-violet [&_a]:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem] ${
         fontSizeToken ? `text-${fontSizeToken}` : 'text-xs'
-      } ${colorClass}`}
+      } ${colorClass} ${block.fontFamily === 'heading' ? 'font-heading' : ''}`}
       style={styleParts.length ? styleParts.join(';') : undefined}
       set:html={block.html as string}
     />
@@ -432,6 +470,37 @@ function isDarkBackground(hex: string): boolean {
         imageAlt: string;
         description?: string;
         layout?: 'column' | 'row' | 'row-reverse';
+      }[]) ?? []
+    }
+  />
+)}
+
+{block.type === 'image-carousel' && (
+  <ImageCarousel
+    images={(block.images as { src: string; alt: string }[]) ?? []}
+    style={{
+      paddingTop: block.paddingTop as string | undefined,
+      paddingBottom: block.paddingBottom as string | undefined,
+      paddingLeft: block.paddingLeft as string | undefined,
+      paddingRight: block.paddingRight as string | undefined,
+      backgroundColor: block.background as string | undefined,
+      boxShadow: block.boxShadow as string | undefined,
+      width: block.widthPercent ? `${block.widthPercent}%` : undefined,
+      marginTop: block.marginTop as string | undefined,
+      marginBottom: block.marginBottom as string | undefined,
+    }}
+  />
+)}
+
+{block.type === 'testimonial-carousel' && (
+  <TestimonialCarousel
+    items={
+      (block.items as {
+        text: string;
+        name: string;
+        title: string;
+        image?: string;
+        imageAlt?: string;
       }[]) ?? []
     }
   />

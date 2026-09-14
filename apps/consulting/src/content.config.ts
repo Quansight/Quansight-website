@@ -20,6 +20,9 @@ const pages = defineCollection({
   schema: z.object({
     slug: z.string(),
     title: z.string().optional(),
+    // Yoast's per-page <title> from the live site, when the converter
+    // could fetch it; the routes fall back to `<title> | Quansight`.
+    seoTitle: z.string().optional(),
     description: z.string().optional(),
     blocks: z.array(z.object({ type: z.string() }).passthrough()),
   }),
