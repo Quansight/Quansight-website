@@ -1,5 +1,7 @@
 ---
 import BlockRenderer from './BlockRenderer.astro';
+import { BlogList } from './Blog/BlogList';
+import { getPostSummaries } from '../utils/postSummaries';
 import { ButtonLink } from './ButtonLink';
 import { DataTable } from './DataTable';
 import Form from './Form.astro';
@@ -26,6 +28,11 @@ interface Props {
 }
 
 const { block } = Astro.props;
+
+// The blog index's post grid: WP's posts widget converts to a `posts`
+// block with offset/count (live: 3 newest, then a subscribe panel, then
+// the next 9 with Load More). The list comes from the posts collection.
+const allPosts = block.type === 'posts' ? await getPostSummaries() : [];
 
 const PLACEHOLDER_TYPES = new Set(['call-to-action']);
 
@@ -328,6 +335,9 @@ function isDarkBackground(hex: string): boolean {
 })()}
 
 {block.type === 'text' && (() => {
+  // Links inside text widgets are the kit's secondary color (magenta),
+  // not underlined, on every live page checked (blog, about-us,
+  // getting-started-with-ai).
   // WP/Elementor sizes and weights text-editor widgets per-widget too, not
   // just headings -- confirmed varying a lot sitewide (e.g. an intro
   // paragraph emphasized at 21px/600 vs the sitewide default 18px/400).
@@ -356,9 +366,13 @@ function isDarkBackground(hex: string): boolean {
   ].filter(Boolean);
   return (
     <div
-      class={`max-w-layout mx-auto w-full leading-[1.5] [&_a]:text-violet [&_a]:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem] ${
-        fontSizeToken ? `text-${fontSizeToken}` : 'text-xs'
-      } ${colorClass} ${block.fontFamily === 'heading' ? 'font-heading' : ''}`}
+      class={`max-w-layout mx-auto w-full leading-[1.5] [&_a]:text-magenta [&_a]:hover:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem] ${
+        // 18px is the live site's kit default for unsized text widgets
+        // (confirmed on blog's "Looking for the latest posts?" line).
+        fontSizeToken ? `text-${fontSizeToken}` : 'text-sm'
+      } ${colorClass} ${block.fontFamily === 'heading' ? 'font-heading' : ''} ${
+        block.align === 'center' ? 'text-center' : block.align === 'right' ? 'text-right' : ''
+      }`}
       style={styleParts.length ? styleParts.join(';') : undefined}
       set:html={block.html as string}
     />
@@ -472,6 +486,15 @@ function isDarkBackground(hex: string): boolean {
         layout?: 'column' | 'row' | 'row-reverse';
       }[]) ?? []
     }
+  />
+)}
+
+{block.type === 'posts' && (
+  <BlogList
+    posts={allPosts.slice((block.offset as number) ?? 0)}
+    pageSize={(block.count as number) ?? 9}
+    loadMore={(block.loadMore as boolean) ?? false}
+    client:load
   />
 )}
 
