@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 
 import clsx from 'clsx';
 import { sizeToken } from '../utils/fontSizeTokens';
@@ -48,6 +48,9 @@ type HeroProps = {
   // A full-width live hero section: title/subtitle span the viewport
   // (minus the column's 40px padding) instead of the boxed 1140px.
   contentFullWidth?: boolean;
+  // Extra hero-section content (converted blocks) rendered over the
+  // gradient below the title/subtitle/CTA -- see convert_one.
+  children?: ReactNode;
 };
 
 export const Hero: FC<HeroProps> = ({
@@ -74,6 +77,7 @@ export const Hero: FC<HeroProps> = ({
   minHeight,
   paddingBottom,
   contentFullWidth,
+  children,
 }) => {
   const hasGradient = gradientFrom && gradientTo;
   const isResponsive = imageDesktop || imageTablet || imageMobile;
@@ -273,6 +277,7 @@ export const Hero: FC<HeroProps> = ({
             )}
           </div>
         )}
+        {children}
       </div>
     </div>
   );

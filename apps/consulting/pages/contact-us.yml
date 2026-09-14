@@ -1,11 +1,14 @@
 slug: contact-us
 title: "Contact Us"
-description: "Contact Us Get in Touch For all inquiries about our services, projects, and business, contact us at: connect@quansight.com Subscribe for Updates & News"
+seoTitle: "Our Story I About Us I Quansight Consulting"
+description: "Connecting organizations and individuals who participate in the development and use of open source tools that turn data into valuable insights."
 blocks:
 - type: hero
   variant: "small"
   gradientFrom: "#452391"
   gradientTo: "#963895"
+  minHeight: "280px"
+  paddingBottom: "-40"
   image: "/page-assets/contact-us/Blog-Post-Background.png"
   imageAlt: ""
   overlayOpacity: 0.26
@@ -14,36 +17,45 @@ blocks:
   titleFontWeight: 700
 - type: columns
   columns:
-    - - type: heading
-        text: "Get in Touch"
-        level: 4
-        sizePx: 55
-        fontWeight: 900
-        color: "#452392"
-        paddingBottom: "50px"
-      - type: text
-        html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\" style=\"\">connect@quansight.com</a><br/><br/></p>"
-        sizePx: 16
-        color: "#000000"
-    - - type: image
-        src: "/page-assets/contact-us/Quansight-contact-02-02-02-1-1.svg"
-        alt: ""
-        width: 1122
-        height: 889
-        widthPercent: 100
-  columnBackgrounds:
-    - "#FAFAFF"
-    - "#FAFAFF"
-  columnWidths:
-    - 54.915
-    - 45.045
-  columnPaddings:
-    - top: "50px"
-      right: "50px"
-      bottom: "50px"
-      left: "50px"
-
-  gapPx: 0
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Get in Touch"
+              level: 4
+              sizePx: 55
+              fontWeight: 900
+              color: "#452392"
+              paddingBottom: "50px"
+            - type: text
+              html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\" style=\"\">connect@quansight.com</a><br/><br/></p>"
+              sizePx: 16
+              color: "#000000"
+              lineHeight: "2em"
+              widthPercent: 90
+          - - type: image
+              src: "/page-assets/contact-us/Quansight-contact-02-02-02-1-1.svg"
+              alt: ""
+              width: 1122
+              height: 889
+              widthPercent: 100
+        columnBackgrounds:
+          - "#FAFAFF"
+          - "#FAFAFF"
+        columnWidths:
+          - 54.915
+          - 45.045
+        columnPaddings:
+          - top: "50px"
+            right: "50px"
+            bottom: "50px"
+            left: "50px"
+          - top: "0px"
+            right: "0px"
+            bottom: "0px"
+            left: "0px"
+        maxWidthPx: 1200
+        gapPx: 0
+  maxWidthPx: 1200
 - type: columns
   columns:
     - - type: columns
@@ -54,6 +66,7 @@ blocks:
               sizePx: 30
               fontWeight: 600
               color: "#FFFFFF"
+              lineHeight: "1em"
             - type: form
               name: "Mailing List Signup"
               fields:
@@ -80,11 +93,15 @@ blocks:
           - "#452392"
           - null
         columnWidths:
-          - 100.0
-          - 100.0
+          - 50
+          - 50
         columnPaddings:
-          - left: "15%"
-
+          - top: "0%"
+            right: "0%"
+            bottom: "0%"
+            left: "15%"
+          - null
+        maxWidthPx: 1600
         gapPx: 0
         marginBottom: "5%"
-  marginBottom: "5%"
+  maxWidthPx: 1600

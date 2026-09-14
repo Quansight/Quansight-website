@@ -1,11 +1,13 @@
 slug: ai-engineering
 title: "AI Engineering"
-description: "AI Engineering Turn AI Research & Concepts Into Reliable Enterprise Solutions Your AI Transformation: From Breakthrough to Business Value As the power of artificial intelligence permeates our lives, organizations are looking for innovative ways to leverage the power of new and evolving breakthroughs. Bridging the gap between pioneering research and operationally useful AI solutions that […]"
+seoTitle: "AI Engineering | Quansight Consulting"
+description: "Quansight delivers sustainable AI engineering: scalable environments, workflow orchestration, and open source expertise for enterprise AI."
 blocks:
 - type: hero
   variant: "small"
   gradientFrom: "#452391"
   gradientTo: "#963895"
+  minHeight: "60vh"
   image: "/page-assets/ai-engineering/Hero-Background-6.jpg"
   imageAlt: ""
   overlayOpacity: 0.26
@@ -14,20 +16,28 @@ blocks:
   titleFontWeight: 700
   subTitle: "Turn AI Research & Concepts Into Reliable Enterprise Solutions"
   subTitleSizePx: 22
-- type: heading
-  text: "Your AI Transformation: From Breakthrough to Business Value"
-  level: 2
-  sizePx: 40
-  fontWeight: 700
-  color: "#452392"
-  align: "center"
-  paddingRight: "5%"
-  paddingBottom: "4%"
-  paddingLeft: "5%"
-- type: text
-  html: "<p>As the power of artificial intelligence permeates our lives, organizations are looking for innovative ways to leverage the power of new and evolving breakthroughs. Bridging the gap between pioneering research and operationally useful AI solutions that drive real business value remains a significant hurdle.</p><p>At the foundation of AI is a <a href=\"/blog/generative-ai-made-possible-by-a-mountain-of-open-source\">mountain of open source innovation</a>. With our roots in open source scientific computing, Quansight understands the complexities of transitioning advanced AI models from conceptual innovations into production-ready, scalable systems. Our AI engineering solutions provide the robust infrastructure, sustainable software practices, and integration capabilities to transform theory into real-world impact across your organization.</p>"
-  sizePx: 18
-  color: "#000000"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Your AI Transformation: From Breakthrough to Business Value"
+        level: 2
+        sizePx: 40
+        fontWeight: 700
+        color: "#452392"
+        align: "center"
+        lineHeight: "51px"
+        paddingRight: "5%"
+        paddingBottom: "4%"
+        paddingLeft: "5%"
+      - type: text
+        html: "<p>As the power of artificial intelligence permeates our lives, organizations are looking for innovative ways to leverage the power of new and evolving breakthroughs. Bridging the gap between pioneering research and operationally useful AI solutions that drive real business value remains a significant hurdle.</p><p>At the foundation of AI is a <a href=\"/blog/generative-ai-made-possible-by-a-mountain-of-open-source\">mountain of open source innovation</a>. With our roots in open source scientific computing, Quansight understands the complexities of transitioning advanced AI models from conceptual innovations into production-ready, scalable systems. Our AI engineering solutions provide the robust infrastructure, sustainable software practices, and integration capabilities to transform theory into real-world impact across your organization.</p>"
+        sizePx: 18
+        color: "#000000"
+  paddingTop: "4%"
+  paddingRight: "4%"
+  paddingLeft: "4%"
+  rowGapPx: 143
+  maxWidthPx: 1140
 - type: columns
   columns:
     - - type: columns
@@ -58,8 +68,25 @@ blocks:
           - 33.0
           - 33.0
           - 33.0
+        columnPaddings:
+          - top: "3%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+          - top: "3%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+          - top: "3%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
         gapPx: 48
   marginBottom: "1%"
+  paddingRight: "4%"
+  paddingLeft: "4%"
+  rowGapPx: 0
+  maxWidthPx: 1140
 - type: columns
   columns:
     - - type: columns
@@ -90,8 +117,25 @@ blocks:
           - 33.0
           - 33.0
           - 33.0
+        columnPaddings:
+          - top: "3%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+          - top: "3%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+          - top: "3%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
         gapPx: 48
   marginBottom: "1%"
+  paddingRight: "4%"
+  paddingLeft: "4%"
+  rowGapPx: 0
+  maxWidthPx: 1140
 - type: columns
   columns:
     - - type: text
@@ -109,8 +153,13 @@ blocks:
         fontWeight: 700
         color: "#A43A8F"
         align: "center"
+        lineHeight: "47px"
   columnBackgrounds:
     - "#F3F5F8"
+  paddingTop: "4%"
+  paddingBottom: "4%"
+  rowGapPx: 36
+  maxWidthPx: 1140
   fullBleed: true
 - type: columns
   columns:
@@ -121,6 +170,7 @@ blocks:
         fontWeight: 700
         color: "#452392"
         align: "center"
+        lineHeight: "51px"
         paddingRight: "5%"
         paddingBottom: "4%"
         paddingLeft: "5%"
@@ -154,6 +204,7 @@ blocks:
             descriptionSizePx: 18
             descriptionColor: "#252525"
   marginTop: "4%"
+  maxWidthPx: 1140
 - type: columns
   columns:
     - - type: columns
@@ -164,10 +215,12 @@ blocks:
               sizePx: 40
               fontWeight: 700
               color: "#452392"
+              lineHeight: "51px"
             - type: text
               html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? We’d love to hear from you.\t\t\t\t\t\t\t\t</p>"
               sizePx: 16
               color: "#252525"
+              lineHeight: "1.5em"
             - type: button
               url: "/about-us#bookacallform"
               text: "Contact Us"
@@ -182,13 +235,15 @@ blocks:
               alt: ""
               width: 1122
               height: 889
-              widthPercent: 100
-        columnWidths:
-          - 100.0
-          - 53.978
+        columnPaddings:
+          - top: "6%"
+          - top: "6%"
+        maxWidthPx: 1140
         gapPx: 0
         marginTop: "4%"
   columnBackgrounds:
     - "#F3F5F8"
-  marginTop: "4%"
+  paddingRight: "3%"
+  paddingLeft: "3%"
+  maxWidthPx: 1140
   fullBleed: true

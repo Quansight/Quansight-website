@@ -1,11 +1,13 @@
 slug: getting-started-with-ai
 title: "Getting Started With AI"
-description: "Getting Started With AI From proof of concept to a comprehensive AI transformation, Quansight offers unmatched expert support for every stage of the AI journey. Get in Touch Are you ready to accelerate your AI capabilities and explore how the latest technologies can be incorporated into your business? Are you already using AI but not […]"
+seoTitle: "Getting Started With AI | Quansight Consulting"
+description: "Getting Started With AI From proof of concept to a comprehensive AI transformation, Quansight offers unmatched expert support for every stage of the AI jour ..."
 blocks:
 - type: hero
   variant: "small"
   gradientFrom: "#452391"
   gradientTo: "#963895"
+  minHeight: "60vh"
   image: "/page-assets/getting-started-with-ai/Getting-Started-With-AI-03.jpg"
   imageAlt: ""
   overlayOpacity: 0.32
@@ -41,65 +43,60 @@ blocks:
         fontWeight: 700
         color: "#963895"
         align: "center"
+        lineHeight: "51px"
       - type: columns
         columns:
-          - - type: columns
-              columns:
-                - - type: icon-box-grid
-                    items:
-                      - description: "Training specialized large language models (LLMs) on internal datasets"
-                        icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
-                        iconColor: "#963895"
-                        descriptionSizePx: 18
-                - - type: icon-box-grid
-                    items:
-                      - description: "Exploring advanced LLMs but don’t want to hand over sensitive data"
-                        icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
-                        iconColor: "#963895"
-                        descriptionSizePx: 18
-                - - type: icon-box-grid
-                    items:
-                      - description: "Employing use cases of Generative AI to improve business practices"
-                        icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
-                        iconColor: "#963895"
-                        descriptionSizePx: 18
-              columnWidths:
-                - 33
-                - 33
-                - 33
-              columnMargins:
-                - right: "35%"
-                - right: "17.5%"
-                  left: "17.5%"
-                - left: "35%"
-              gapPx: 0
-              marginTop: "5%"
+          - - type: icon-box-grid
+              items:
+                - description: "Training specialized large language models (LLMs) on internal datasets"
+                  icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
+                  iconColor: "#963895"
+                  descriptionSizePx: 18
+          - - type: icon-box-grid
+              items:
+                - description: "Exploring advanced LLMs but don’t want to hand over sensitive data"
+                  icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
+                  iconColor: "#963895"
+                  descriptionSizePx: 18
+          - - type: icon-box-grid
+              items:
+                - description: "Employing use cases of Generative AI to improve business practices"
+                  icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
+                  iconColor: "#963895"
+                  descriptionSizePx: 18
+        columnWidths:
+          - 33
+          - 33
+          - 33
+        columnMargins:
+          - right: "35%"
+          - right: "17.5%"
+            left: "17.5%"
+          - left: "35%"
+        gapPx: 0
         marginTop: "5%"
       - type: columns
         columns:
-          - - type: columns
-              columns:
-                - - type: icon-box-grid
-                    items:
-                      - description: "Leveraging low code/no code techniques to provide non-technical staff new capabilities"
-                        icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
-                        iconColor: "#963895"
-                        descriptionSizePx: 18
-                - - type: icon-box-grid
-                    items:
-                      - description: "Building strategies and tooling for moving R&D efforts into production"
-                        icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
-                        iconColor: "#963895"
-                        descriptionSizePx: 18
-              columnWidths:
-                - 33
-                - 33
-              columnMargins:
-                - right: "35%"
-                - right: "17.5%"
-                  left: "17.5%"
-              gapPx: 0
-              marginTop: "5%"
+          - - type: icon-box-grid
+              items:
+                - description: "Leveraging low code/no code techniques to provide non-technical staff new capabilities"
+                  icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
+                  iconColor: "#963895"
+                  descriptionSizePx: 18
+          - - type: icon-box-grid
+              items:
+                - description: "Building strategies and tooling for moving R&D efforts into production"
+                  icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
+                  iconColor: "#963895"
+                  descriptionSizePx: 18
+        columnWidths:
+          - 33
+          - 33
+        columnMargins:
+          - right: "35%"
+          - right: "17.5%"
+            left: "17.5%"
+        gapPx: 0
         marginTop: "5%"
       - type: columns
         columns:
@@ -110,6 +107,7 @@ blocks:
               fontWeight: 700
               color: "#963895"
               align: "center"
+              lineHeight: "51px"
         marginTop: "5%"
   paddingRight: "10%"
   paddingLeft: "10%"
@@ -140,6 +138,7 @@ blocks:
                     sizePx: 22
                     fontWeight: 700
                     color: "#963895"
+                    lineHeight: "26px"
                   - type: text
                     html: "<p>Expect full control over your AI deployment. <a href=\"https://www.nebari.dev/\">Nebari</a>, a Quansight-incubated open source project, with expert support, illustrates what is possible. Choose your infrastructure, customize pipelines, and ensure data privacy.</p>"
                     sizePx: 18
@@ -158,6 +157,7 @@ blocks:
                     sizePx: 22
                     fontWeight: 700
                     color: "#963895"
+                    lineHeight: "26px"
                   - type: text
                     html: "<p>Streamline your AI strategy with open source experts. You can keep your data secure on your systems while leveraging state-of-the-art models like Llama 3.1 (or Mistral)—all without relying on third-party vendors.</p>"
                     sizePx: 18
@@ -176,6 +176,7 @@ blocks:
                     sizePx: 22
                     fontWeight: 700
                     color: "#963895"
+                    lineHeight: "26px"
                   - type: text
                     html: "<p>\n\t\t\t\t\t\t\t\t\tBuild a complete AI ecosystem alongside Quansight experts with flexible infrastructure like Nebari and expert DevOps support. \n\t\t\t\t\t\t\t\t</p>"
                     sizePx: 18
@@ -205,6 +206,7 @@ blocks:
                     sizePx: 22
                     fontWeight: 700
                     color: "#963895"
+                    lineHeight: "26px"
                   - type: text
                     html: "<p><span style=\"font-weight: 400;\">Utilize Quansight-incubated open source projects—Nebari and Nebari-Slurm—to optimize resource management, seamlessly integrate with JupyterHub, and unlock the full potential of your AI workloads. This flexible infrastructure empowers you to switch between cloud providers or utilize on-premises hardware with ease.</span></p>"
                     sizePx: 18
@@ -223,6 +225,7 @@ blocks:
                     sizePx: 22
                     fontWeight: 700
                     color: "#963895"
+                    lineHeight: "26px"
                   - type: text
                     html: "<p>\n\t\t\t\t\t\t\t\t\tControl every stage of the AI lifecycle. From data preparation and model pre-training to post-training optimization and deployment, our DevOps support ensures smooth, efficient operations. Build, train, and deploy AI models using your systems or we can deploy Nebari and Nebari-Slurm for your benefit.\t\t\t\t\t\t\t\t</p>"
                     sizePx: 18
@@ -241,6 +244,7 @@ blocks:
                     sizePx: 22
                     fontWeight: 700
                     color: "#963895"
+                    lineHeight: "26px"
                   - type: text
                     html: "<p>\n\t\t\t\t\t\t\t\t\tWith our long-standing position and reputation within the community, we bridge the gap between businesses and the open source community. By aligning our community expertise with your business needs, we’ll develop an AI transformation strategy unique to you. \n\t\t\t\t\t\t\t\t</p>"
                     sizePx: 18
@@ -267,9 +271,11 @@ blocks:
         fontWeight: 700
         color: "#452392"
         align: "center"
+        lineHeight: "51px"
       - type: text
         html: "<p>\n\t\t\t\t\t\t\t\t\tQuansight-incubated open source projects:\t\t\t\t\t\t\t\t</p>"
         sizePx: 18
+        align: "center"
       - type: columns
         columns:
           - - type: columns
@@ -315,7 +321,6 @@ blocks:
                 - left: "35%"
               gapPx: 0
               marginTop: "50px"
-        marginTop: "50px"
         paddingBottom: "10%"
   paddingRight: "10%"
   paddingLeft: "10%"
@@ -336,6 +341,7 @@ blocks:
         fontWeight: 700
         color: "#452392"
         align: "center"
+        lineHeight: "51px"
       - type: text
         html: "<p><span style=\"font-weight: 400;\">Quansight’s expertise extends to <a href=\"https://github.com/jupyterlab/jupyter-ai\" rel=\"noopener\" target=\"_blank\">Jupyter AI</a> which brings generative AI directly to <a href=\"/jupyter-technologies\">Jupyter</a> notebooks. With regular contributors to Jupyter AI on our team, we’re equipped to help your organization adopt and leverage its powerful capabilities. It integrates seamlessly with popular LLMs like those from AI21, OpenAI, Anthropic, and others, while ensuring full control over your data privacy. </span></p>"
         sizePx: 18
@@ -383,9 +389,11 @@ blocks:
         fontWeight: 700
         color: "#452392"
         align: "center"
+        lineHeight: "51px"
       - type: text
         html: "<p>\n\t\t\t\t\t\t\t\t\tWe offer three tailored engagement models designed to meet you where you are in your AI journey:\t\t\t\t\t\t\t\t</p>"
         sizePx: 18
+        align: "center"
   marginTop: "5%"
   paddingRight: "10%"
   paddingBottom: "2%"
@@ -513,12 +521,15 @@ blocks:
           - top: "5%"
             right: "5%"
             bottom: "5%"
-
+            left: "0%"
+          - top: "0px"
+            right: "0px"
+            bottom: "0px"
+            left: "0px"
         gapPx: 0
         marginTop: "4%"
   columnBackgrounds:
     - "#FAFAFF"
-  marginTop: "4%"
   paddingRight: "10%"
   paddingBottom: "5%"
   paddingLeft: "10%"

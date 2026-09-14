@@ -1,11 +1,13 @@
 slug: algorithms-ai-machine-learning
 title: "Algorithms, AI, & Machine Learning"
-description: "Algorithms, AI, & Machine Learning Build and deploy custom algorithms and predictive models. Whether you need help building a data science program from scratch or"
+seoTitle: "AI, Machine Learning & Predictive Modeling Experts"
+description: "Quansight builds custom algorithms, AI, and ML models, expert solutions in forecasting, reinforcement learning, and probabilistic programming."
 blocks:
 - type: hero
   variant: "small"
   gradientFrom: "#452391"
   gradientTo: "#963895"
+  minHeight: "60vh"
   image: "/page-assets/algorithms-ai-machine-learning/Hero-Background-6.png"
   imageAlt: ""
   overlayOpacity: 0.26
@@ -24,20 +26,21 @@ blocks:
                     sizePx: 40
                     fontWeight: 900
                     color: "#452392"
+                    lineHeight: "1.1em"
                     paddingRight: "30px"
                 - - type: text
                     html: "<p>Whether you need help building a data science program from scratch or assistance with a particular problem, Quansight has experts in machine learning and other statistical modeling fields who can build high-quality solutions to tackle your company’s most unique and challenging problems. Our team includes contributors and maintainers of numerous data science tools—including NumPy, PyTorch, and scikit-learn—giving us unparalleled knowledge for building robust, efficient, and fast algorithms.</p>"
                     sizePx: 16
                     color: "#000000"
+                    lineHeight: "1.7em"
                     paddingRight: "50px"
               columnWidths:
                 - 54.638
                 - 45.262
-              columnPaddings:
-
-                - top: "35px"
+              maxWidthPx: 1311
               gapPx: 0
         paddingTop: "25px"
+        maxWidthPx: 1311
   paddingTop: "70px"
   paddingBottom: "20px"
 - type: columns
@@ -93,10 +96,13 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
   paddingTop: "60px"
   paddingBottom: "100px"
+  maxWidthPx: 1200
 - type: columns
   columns:
     - - type: columns
@@ -107,10 +113,12 @@ blocks:
               sizePx: 50
               fontWeight: 900
               color: "#ffffff"
+              lineHeight: "1.2em"
             - type: text
               html: "<p>\n\t\t\t\t\t\t\t\t\tAll the data in the world can only provide you useful insights if you have the expertise and tools to analyze and model it.\t\t\t\t\t\t\t\t</p>"
               sizePx: 16
               color: "#FFFFFF"
+              lineHeight: "1.8em"
             - type: button
               url: "#bookacallform"
               text: "I'm interested"
@@ -125,7 +133,6 @@ blocks:
               alt: ""
               width: 768
               height: 1
-              widthPercent: 100
         columnBackgrounds:
           - "#452392"
           - null
@@ -137,9 +144,11 @@ blocks:
             right: "250px"
             bottom: "100px"
             left: "100px"
-
+          - null
+        maxWidthPx: 1500
         gapPx: 0
   paddingBottom: "100px"
+  maxWidthPx: 1500
 - type: columns
   columns:
     - - type: heading
@@ -149,6 +158,7 @@ blocks:
         fontWeight: 900
         color: "#000000"
         align: "center"
+        lineHeight: "40px"
       - type: columns
         columns:
           - - type: columns
@@ -189,8 +199,10 @@ blocks:
                 - 20
                 - 20
                 - 20
+              maxWidthPx: 1200
               gapPx: 0
         paddingTop: "25px"
+        maxWidthPx: 1200
       - type: columns
         columns:
           - - type: columns
@@ -231,9 +243,12 @@ blocks:
                 - 20
                 - 20
                 - 20
+              maxWidthPx: 1200
               gapPx: 0
         paddingTop: "45px"
+        maxWidthPx: 1200
   paddingBottom: "100px"
+  maxWidthPx: 1200
 - type: columns
   columns:
     - - type: columns
@@ -244,10 +259,12 @@ blocks:
               sizePx: 50
               fontWeight: 900
               color: "#ffffff"
+              lineHeight: "1.2em"
             - type: text
               html: "<p>“It became immediately apparent at how knowledgeable the workforce is at Quansight. They are leaders in their field of AI, machine learning, and reinforcement learning, and take pride in their work. Their vast knowledge paired with their responsiveness and dedication made working with them a smart choice and pleasurable experience.” — Current Client, US Army DEVCOM</p>"
               sizePx: 16
               color: "#FFFFFF"
+              lineHeight: "1.8em"
           - - type: image
               src: "/page-assets/algorithms-ai-machine-learning/icons-llc-25-2.svg"
               alt: ""
@@ -264,9 +281,11 @@ blocks:
             right: "250px"
             bottom: "100px"
             left: "100px"
-
+          - null
+        maxWidthPx: 1500
         gapPx: 0
   paddingBottom: "100px"
+  maxWidthPx: 1500
 - type: columns
   columns:
     - - type: columns
@@ -282,6 +301,8 @@ blocks:
               html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\">connect@quansight.com</a></p>"
               sizePx: 16
               color: "#000000"
+              lineHeight: "2em"
+              widthPercent: 90
           - - type: image
               src: "/page-assets/algorithms-ai-machine-learning/Quansight-contact-02-02-02-1-1.svg"
               alt: ""
@@ -299,7 +320,12 @@ blocks:
             right: "50px"
             bottom: "50px"
             left: "50px"
-
+          - top: "0px"
+            right: "0px"
+            bottom: "0px"
+            left: "0px"
+        maxWidthPx: 1200
         gapPx: 0
   paddingTop: "100px"
   paddingBottom: "100px"
+  maxWidthPx: 1200

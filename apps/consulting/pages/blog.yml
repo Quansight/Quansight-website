@@ -90,7 +90,7 @@ blocks:
       right: "0%"
       bottom: "0%"
       left: "15%"
-
+    - null
   gapPx: 0
   marginBottom: "5%"
 - type: columns
@@ -102,4 +102,3 @@ blocks:
   paddingTop: "50px"
   paddingBottom: "100px"
   maxWidthPx: 1117
-

@@ -1,11 +1,13 @@
 slug: packaging-and-distribution
 title: "Packaging & Distribution"
-description: "Packaging & Distribution Package, distribute, and implement your code with ease Seamlessly deploy and maintain open source software in well-managed environments Modern software moves fast, but production environments demand stability, reproducibility, and long-term support. Teams often prototype quickly, only to encounter failures when research code reaches production due to fragile builds, inconsistent environments, or unmanaged […]"
+seoTitle: "Packaging & Distribution | Python Environment Experts"
+description: "Quansight ensures reliable packaging and distribution with conda, conda-forge, and PyPA expertise. Scalable, reproducible environments for Python."
 blocks:
 - type: hero
   variant: "small"
   gradientFrom: "#452391"
   gradientTo: "#963895"
+  minHeight: "60vh"
   image: "/page-assets/packaging-and-distribution/GettyImages-1282541605.jpg"
   imageAlt: ""
   overlayOpacity: 0.26
@@ -14,20 +16,28 @@ blocks:
   titleFontWeight: 700
   subTitle: "Package, distribute, and implement your code with ease"
   subTitleSizePx: 22
-- type: heading
-  text: "Seamlessly deploy and maintain open source software in well-managed environments"
-  level: 2
-  sizePx: 40
-  fontWeight: 700
-  color: "#452392"
-  align: "center"
-  paddingRight: "5%"
-  paddingBottom: "4%"
-  paddingLeft: "5%"
-- type: text
-  html: "<p data-end=\"2371\" data-start=\"2083\">Modern software moves fast, but production environments demand stability, reproducibility, and long-term support. Teams often prototype quickly, only to encounter failures when research code reaches production due to fragile builds, inconsistent environments, or unmanaged dependencies.</p><p data-end=\"2651\" data-start=\"2378\">Quansight helps organizations package, distribute, and maintain Python and native software so it works reliably across platforms, architectures, and deployment contexts, combining deep technical expertise with active leadership in the open source ecosystems you depend on.</p>"
-  sizePx: 18
-  color: "#000000"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Seamlessly deploy and maintain open source software in well-managed environments"
+        level: 2
+        sizePx: 40
+        fontWeight: 700
+        color: "#452392"
+        align: "center"
+        lineHeight: "51px"
+        paddingRight: "5%"
+        paddingBottom: "4%"
+        paddingLeft: "5%"
+      - type: text
+        html: "<p data-end=\"2371\" data-start=\"2083\">Modern software moves fast, but production environments demand stability, reproducibility, and long-term support. Teams often prototype quickly, only to encounter failures when research code reaches production due to fragile builds, inconsistent environments, or unmanaged dependencies.</p><p data-end=\"2651\" data-start=\"2378\">Quansight helps organizations package, distribute, and maintain Python and native software so it works reliably across platforms, architectures, and deployment contexts, combining deep technical expertise with active leadership in the open source ecosystems you depend on.</p>"
+        sizePx: 18
+        color: "#000000"
+  paddingTop: "4%"
+  paddingRight: "4%"
+  paddingLeft: "4%"
+  rowGapPx: 143
+  maxWidthPx: 1140
 - type: columns
   columns:
     - - type: heading
@@ -37,6 +47,7 @@ blocks:
         fontWeight: 700
         color: "#452391"
         align: "center"
+        lineHeight: "51px"
         paddingRight: "5%"
         paddingBottom: "4%"
         paddingLeft: "5%"
@@ -45,6 +56,8 @@ blocks:
         sizePx: 18
         color: "#000000"
   marginTop: "4%"
+  rowGapPx: 143
+  maxWidthPx: 1140
 - type: columns
   columns:
     - - type: columns
@@ -81,8 +94,10 @@ blocks:
             left: "20px"
           - right: "20px"
             left: "20px"
+        maxWidthPx: 1200
         gapPx: 20
   paddingTop: "60px"
+  maxWidthPx: 1200
 - type: columns
   columns:
     - - type: columns
@@ -119,8 +134,10 @@ blocks:
             left: "20px"
           - right: "20px"
             left: "20px"
+        maxWidthPx: 1200
         gapPx: 20
   paddingTop: "60px"
+  maxWidthPx: 1200
 - type: columns
   columns:
     - - type: icon-box-grid
@@ -131,6 +148,7 @@ blocks:
             descriptionSizePx: 16
             descriptionColor: "#000000"
   paddingTop: "60px"
+  maxWidthPx: 1200
 - type: columns
   columns:
     - - type: heading
@@ -140,6 +158,7 @@ blocks:
         fontWeight: 700
         color: "#452391"
         align: "center"
+        lineHeight: "51px"
         paddingRight: "5%"
         paddingBottom: "4%"
         paddingLeft: "5%"
@@ -148,6 +167,8 @@ blocks:
         sizePx: 18
         color: "#000000"
   marginTop: "4%"
+  rowGapPx: 143
+  maxWidthPx: 1140
 - type: columns
   columns:
     - - type: columns
@@ -201,7 +222,6 @@ blocks:
                 - left: "35%"
               gapPx: 0
               marginTop: "50px"
-        marginTop: "50px"
         paddingTop: "2%"
         paddingRight: "2%"
         paddingBottom: "2%"
@@ -256,8 +276,10 @@ blocks:
         sizePx: 18
         fontWeight: 500
         color: "#000000"
+        align: "center"
   columnBackgrounds:
     - "#EBEBEB"
+  maxWidthPx: 1140
   fullBleed: true
 - type: columns
   columns:
@@ -268,6 +290,7 @@ blocks:
         fontWeight: 700
         color: "#A43A8F"
         align: "center"
+        lineHeight: "51px"
         paddingRight: "5%"
         paddingBottom: "4%"
         paddingLeft: "5%"
@@ -276,6 +299,8 @@ blocks:
         sizePx: 18
         color: "#000000"
   marginTop: "4%"
+  rowGapPx: 143
+  maxWidthPx: 1140
 - type: columns
   columns:
     - - type: heading
@@ -284,60 +309,82 @@ blocks:
         sizePx: 47
         fontWeight: 800
         align: "center"
+        lineHeight: "1.3em"
   marginTop: "4%"
+  maxWidthPx: 1200
 - type: columns
   columns:
-    - - type: divider
-        color: "#FFFFFF"
-        widthPercent: 0
-      - type: icon-box-grid
-        items:
-          - title: "Diverse Environments"
-            description: "Practitioners often work in varied environments, making it difficult to ensure consistent results across different setups"
-            align: "start"
-            descriptionSizePx: 16
-            descriptionColor: "#FFFFFF"
-    - - type: divider
-        color: "#FFFFFF"
-        widthPercent: 0
-      - type: icon-box-grid
-        items:
-          - title: "Library Changes"
-            description: "Rapid library evolution can introduce breaking changes that compromise reproducibility."
-            align: "start"
-            descriptionSizePx: 16
-            descriptionColor: "#FFFFFF"
-    - - type: divider
-        color: "#FFFFFF"
-        widthPercent: 0
-      - type: icon-box-grid
-        items:
-          - title: "Lack of Control"
-            description: "IT departments may enforce strict control over environments, conflicting with the flexibility needed by data scientists."
-            align: "start"
-            descriptionSizePx: 16
-            descriptionColor: "#FFFFFF"
-    - - type: divider
-        color: "#FFFFFF"
-        widthPercent: 0
-      - type: icon-box-grid
-        items:
-          - title: "Complex Workflows"
-            description: "Existing workflows often do not support reproducibility, making it challenging to replicate results or share work."
-            align: "start"
-            descriptionSizePx: 16
-            descriptionColor: "#FFFFFF"
-  columnBackgrounds:
-    - "#A43A8F"
-    - "#452392"
-    - "#452392"
-    - "#A43A8F"
-  columnWidths:
-    - 30.0
-    - 30.0
-    - 30.0
-    - 30.0
-  gapPx: 50
+    - - type: columns
+        columns:
+          - - type: divider
+              color: "#FFFFFF"
+              widthPercent: 0
+            - type: icon-box-grid
+              items:
+                - title: "Diverse Environments"
+                  description: "Practitioners often work in varied environments, making it difficult to ensure consistent results across different setups"
+                  align: "start"
+                  descriptionSizePx: 16
+                  descriptionColor: "#FFFFFF"
+          - - type: divider
+              color: "#FFFFFF"
+              widthPercent: 0
+            - type: icon-box-grid
+              items:
+                - title: "Library Changes"
+                  description: "Rapid library evolution can introduce breaking changes that compromise reproducibility."
+                  align: "start"
+                  descriptionSizePx: 16
+                  descriptionColor: "#FFFFFF"
+          - - type: divider
+              color: "#FFFFFF"
+              widthPercent: 0
+            - type: icon-box-grid
+              items:
+                - title: "Lack of Control"
+                  description: "IT departments may enforce strict control over environments, conflicting with the flexibility needed by data scientists."
+                  align: "start"
+                  descriptionSizePx: 16
+                  descriptionColor: "#FFFFFF"
+          - - type: divider
+              color: "#FFFFFF"
+              widthPercent: 0
+            - type: icon-box-grid
+              items:
+                - title: "Complex Workflows"
+                  description: "Existing workflows often do not support reproducibility, making it challenging to replicate results or share work."
+                  align: "start"
+                  descriptionSizePx: 16
+                  descriptionColor: "#FFFFFF"
+        columnBackgrounds:
+          - "#A43A8F"
+          - "#452392"
+          - "#452392"
+          - "#A43A8F"
+        columnPaddings:
+          - top: "0%"
+            right: "2%"
+            bottom: "0%"
+            left: "2%"
+          - top: "0%"
+            right: "2%"
+            bottom: "0%"
+            left: "2%"
+          - top: "0%"
+            right: "2%"
+            bottom: "0%"
+            left: "2%"
+          - top: "0%"
+            right: "2%"
+            bottom: "0%"
+            left: "2%"
+        maxWidthPx: 1423
+        gapPx: 50
+  paddingTop: "4%"
+  paddingRight: "5%"
+  paddingBottom: "3%"
+  paddingLeft: "5%"
+  maxWidthPx: 1423
 - type: button
   url: "/about-us#bookacallform"
   text: "Contact Us"
@@ -358,10 +405,12 @@ blocks:
               sizePx: 40
               fontWeight: 700
               color: "#452392"
+              lineHeight: "51px"
             - type: text
               html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? We’d love to hear from you.\t\t\t\t\t\t\t\t</p>"
               sizePx: 16
               color: "#252525"
+              lineHeight: "1.5em"
             - type: button
               url: "/about-us#bookacallform"
               text: "Contact Us"
@@ -376,13 +425,15 @@ blocks:
               alt: ""
               width: 1122
               height: 889
-              widthPercent: 100
-        columnWidths:
-          - 100.0
-          - 53.978
+        columnPaddings:
+          - top: "6%"
+          - top: "6%"
+        maxWidthPx: 1140
         gapPx: 0
         marginTop: "4%"
   columnBackgrounds:
     - "#F3F5F8"
-  marginTop: "4%"
+  paddingRight: "3%"
+  paddingLeft: "3%"
+  maxWidthPx: 1140
   fullBleed: true

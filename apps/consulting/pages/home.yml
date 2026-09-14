@@ -103,7 +103,7 @@ blocks:
           - 43.947
         columnPaddings:
           - right: "9%"
-
+          - null
         gapPx: 0
         marginTop: "2%"
         marginBottom: "3%"
@@ -489,7 +489,6 @@ blocks:
       right: "0%"
       bottom: "0%"
       left: "15%"
-
+    - null
   gapPx: 0
   marginBottom: "5%"
-

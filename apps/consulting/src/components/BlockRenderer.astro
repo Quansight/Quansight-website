@@ -58,7 +58,10 @@ const columnsGridClass = COLUMNS_GRID_CLASS[columns.length] ?? 'grid-cols-2 sm:g
 // columns than its own design calls for (e.g. 2 elementor-col-33 columns
 // instead of 2 elementor-col-50 ones) sits left-aligned with real blank
 // space after it, instead of stretching to fill the row.
-const columnWidths = block.type === 'columns' ? (block.columnWidths as number[] | undefined) : undefined;
+// Entries are percentages, or CSS lengths for a fixed-width widget in a
+// row container (privacy-policy's 7rem-wide labels), or `1fr` for the
+// rest of such a row -- see extract_container_child_widths.
+const columnWidths = block.type === 'columns' ? (block.columnWidths as (number | string)[] | undefined) : undefined;
 // Some rows space their columns not via a shared gap but via each column's
 // own left/right margin (percentages resolved against that column's own
 // width, e.g. getting-started-with-ai's Ragna/Nebari/conda-store logos row)
@@ -122,7 +125,7 @@ const rowStyle = [
   gapPx === undefined ? '' : `gap:${gapPx}px`,
   block.marginTop ? `margin-top:${block.marginTop}` : '',
   block.marginBottom ? `margin-bottom:${block.marginBottom}` : '',
-  columnWidths ? `--col-widths:${columnWidths.map((w) => `${w}%`).join(' ')}` : '',
+  columnWidths ? `--col-widths:${columnWidths.map((w) => (typeof w === 'number' ? `${w}%` : w)).join(' ')}` : '',
 ].filter(Boolean).join(';');
 const soleBackground = columns.length === 1 ? columnBackgrounds[0] : undefined;
 const isFullBleedPanel =
@@ -166,7 +169,11 @@ function isDarkBackground(hex: string): boolean {
     minHeight={block.minHeight as string | undefined}
     paddingBottom={block.paddingBottom as string | undefined}
     contentFullWidth={block.contentFullWidth as boolean | undefined}
-  />
+  >
+    {((block.blocks as Block[] | undefined) ?? []).map((childBlock) => (
+      <BlockRenderer block={childBlock} />
+    ))}
+  </Hero>
 )}
 
 {block.type === 'columns' && isFullBleedPanel && (() => {

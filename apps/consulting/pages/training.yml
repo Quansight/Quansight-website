@@ -1,11 +1,13 @@
 slug: training
 title: "Training"
-description: "Training & Related Services Advanced PyData Courses Basic Python courses are easy to come by but when you want to dig deep, the options are"
+seoTitle: "Advanced PyData and Python Training I Quansight Consulting"
+description: "Quansight delivers advanced PyData and Python training, custom corporate curriculum, and hands-on workshops in ML, HPC, visualization, and more."
 blocks:
 - type: hero
   variant: "small"
   gradientFrom: "#452391"
   gradientTo: "#963895"
+  minHeight: "60vh"
   image: "/page-assets/training/Hero-Background-4.png"
   imageAlt: ""
   overlayOpacity: 0.26
@@ -28,6 +30,7 @@ blocks:
               sizePx: 20
               fontWeight: 700
               color: "#000000"
+              lineHeight: "31px"
             - type: button
               url: "#bookacallform"
               text: "Learn About PyData Courses"
@@ -48,6 +51,7 @@ blocks:
               sizePx: 20
               fontWeight: 700
               color: "#FFFFFF"
+              lineHeight: "31px"
             - type: button
               url: "#bookacallform"
               text: "Learn About Curriculum Development"
@@ -67,10 +71,14 @@ blocks:
             right: "30px"
             bottom: "60px"
             left: "30px"
-          - right: "30px"
+          - top: "0px"
+            right: "30px"
+            bottom: "0px"
             left: "30px"
+        maxWidthPx: 1000
         gapPx: 0
   paddingBottom: "80px"
+  maxWidthPx: 1000
 - type: columns
   columns:
     - - type: columns
@@ -109,8 +117,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
       - type: columns
         columns:
           - - type: columns
@@ -147,8 +157,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
       - type: columns
         columns:
           - - type: columns
@@ -185,8 +197,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
       - type: columns
         columns:
           - - type: columns
@@ -223,8 +237,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
       - type: columns
         columns:
           - - type: columns
@@ -261,8 +277,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
       - type: columns
         columns:
           - - type: columns
@@ -299,8 +317,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
   paddingBottom: "50px"
 - type: columns
   columns:
@@ -317,6 +337,8 @@ blocks:
               html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\">connect@quansight.com</a></p>"
               sizePx: 16
               color: "#000000"
+              lineHeight: "2em"
+              widthPercent: 90
           - - type: image
               src: "/page-assets/training/Quansight-contact-02-02-02-1-1.svg"
               alt: ""
@@ -334,7 +356,12 @@ blocks:
             right: "50px"
             bottom: "50px"
             left: "50px"
-
+          - top: "0px"
+            right: "0px"
+            bottom: "0px"
+            left: "0px"
+        maxWidthPx: 1200
         gapPx: 0
   paddingTop: "100px"
   paddingBottom: "100px"
+  maxWidthPx: 1200

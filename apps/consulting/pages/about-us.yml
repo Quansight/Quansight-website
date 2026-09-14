@@ -1,11 +1,13 @@
 slug: about-us
 title: "Our Story"
-description: "About Us Building a Sustainable Open Source Economy for Creating Value with Data Our services connect organizations and individuals who participate in the development and use of open source tools that turn data into valuable insights. Our Story Quansight was founded by Travis Oliphant, a well-known leader in the Python Data community. Travis has authored […]"
+seoTitle: "Our Story I About Us I Quansight Consulting"
+description: "Connecting organizations and individuals who participate in the development and use of open source tools that turn data into valuable insights."
 blocks:
 - type: hero
   variant: "small"
   gradientFrom: "#452391"
   gradientTo: "#963895"
+  minHeight: "60vh"
   image: "/page-assets/about-us/Hero-Background-14.png"
   imageAlt: ""
   overlayOpacity: 0.26
@@ -28,6 +30,7 @@ blocks:
               sizePx: 20
               fontWeight: 700
               color: "#FFFFFF"
+              lineHeight: "31px"
         columnBackgrounds:
           - "#99C941"
           - "#A43A8F"
@@ -39,10 +42,14 @@ blocks:
             right: "30px"
             bottom: "60px"
             left: "30px"
-          - right: "30px"
+          - top: "0px"
+            right: "30px"
+            bottom: "0px"
             left: "30px"
+        maxWidthPx: 1000
         gapPx: 0
   paddingBottom: "80px"
+  maxWidthPx: 1000
 - type: columns
   columns:
     - - type: heading
@@ -52,6 +59,7 @@ blocks:
         fontWeight: 800
         color: "#452392"
         align: "center"
+        lineHeight: "1.3em"
       - type: columns
         columns:
           - - type: columns
@@ -60,6 +68,7 @@ blocks:
                     html: "<p>Quansight was founded by Travis Oliphant, a well-known leader in the Python Data community. Travis has authored or led the creation of industry cornerstones such as NumPy, SciPy, Numba, and Conda, and helped establish NumFOCUS and the PyData conference series. He founded Anaconda and established the industry-standard platform for data science and machine learning. With Quansight, Travis has leveraged decades of relationships in the open source community to assemble some of the top talent in the industry.</p>"
                     sizePx: 16
                     color: "#000000"
+                    lineHeight: "2em"
                     paddingRight: "50px"
                 - - type: image
                     src: "/page-assets/about-us/our-leadership-in-pydata-1.svg"
@@ -69,9 +78,6 @@ blocks:
               columnWidths:
                 - 50
                 - 50
-              columnPaddings:
-
-                - top: "35px"
               gapPx: 0
         paddingTop: "25px"
       - type: columns
@@ -87,16 +93,15 @@ blocks:
                     html: "<p>More than half of our full-time technical staff are active contributors to open source data projects. Many of them have leadership roles in those communities. Quansight is one of the largest contributors to the PyTorch project. One result of Quansight seeking to employ industry experts is that we are very diverse geographically. Another result is that we are diverse with staff in many continents, countries, cultures, and creeds. The Quansight team is dedicated to helping organizations succeed with open source software. It’s our passion.</p>"
                     sizePx: 16
                     color: "#000000"
+                    lineHeight: "2em"
                     paddingLeft: "50px"
               columnWidths:
                 - 50
                 - 50
-              columnPaddings:
-                - top: "35px"
-
               gapPx: 0
         paddingTop: "25px"
   paddingBottom: "40px"
+  maxWidthPx: 1000
 - type: columns
   columns:
     - - type: heading
@@ -107,6 +112,7 @@ blocks:
         color: "#452392"
   paddingTop: "50px"
   paddingBottom: "50px"
+  maxWidthPx: 1000
 - type: columns
   columns:
     - - type: columns
@@ -157,47 +163,48 @@ blocks:
   paddingBottom: "30px"
 - type: columns
   columns:
+    - - type: heading
+        text: "Subscribe for Updates & News"
+        level: 2
+        sizePx: 30
+        fontWeight: 600
+        color: "#FFFFFF"
+        lineHeight: "1em"
+      - type: form
+        name: "Mailing List Signup"
+        fields:
+          - name: "EMAIL"
+            kind: "input"
+            type: "email"
+            required: true
+            placeholder: "Email"
+            label: "Email"
+        submit: "Submit"
+        audience: "mailchimp"
+        submitIcon: true
     - - type: columns
         columns:
-          - - type: heading
-              text: "Subscribe for Updates & News"
-              level: 2
-              sizePx: 30
-              fontWeight: 600
-              color: "#FFFFFF"
-            - type: form
-              name: "Mailing List Signup"
-              fields:
-                - name: "EMAIL"
-                  kind: "input"
-                  type: "email"
-                  required: true
-                  placeholder: "Email"
-                  label: "Email"
-              submit: "Submit"
-              audience: "mailchimp"
-              submitIcon: true
-          - - type: columns
-              columns:
-                - - type: image
-                    src: "/page-assets/about-us/subscribe.svg"
-                    alt: ""
-                    width: 455
-                    height: 181
-              columnBackgrounds:
-                - "#452392"
-              paddingRight: "5%"
+          - - type: image
+              src: "/page-assets/about-us/subscribe.svg"
+              alt: ""
+              width: 455
+              height: 181
         columnBackgrounds:
           - "#452392"
-          - null
-        columnWidths:
-          - 100.0
-          - 100.0
-        columnPaddings:
-          - left: "15%"
-
-        gapPx: 0
-        marginBottom: "5%"
+        paddingRight: "5%"
+  columnBackgrounds:
+    - "#452392"
+    - null
+  columnWidths:
+    - 50
+    - 50
+  columnPaddings:
+    - top: "0%"
+      right: "0%"
+      bottom: "0%"
+      left: "15%"
+    - null
+  gapPx: 0
   marginBottom: "5%"
 - type: columns
   columns:
@@ -208,6 +215,7 @@ blocks:
         fontWeight: 900
         color: "#ffffff"
         align: "center"
+        lineHeight: "1.2em"
       - type: columns
         columns:
           - - type: columns
@@ -229,6 +237,7 @@ blocks:
                     sizePx: 16
                     fontWeight: 600
                     color: "#FFFFFF"
+                    align: "center"
                 - - type: image
                     src: "/page-assets/about-us/Empathy-100x100.png"
                     alt: ""
@@ -246,6 +255,7 @@ blocks:
                     sizePx: 16
                     fontWeight: 600
                     color: "#FFFFFF"
+                    align: "center"
                 - - type: image
                     src: "/page-assets/about-us/Inclusive-100x100.png"
                     alt: ""
@@ -263,6 +273,7 @@ blocks:
                     sizePx: 16
                     fontWeight: 600
                     color: "#FFFFFF"
+                    align: "center"
                 - - type: image
                     src: "/page-assets/about-us/Accountability-100x100.png"
                     alt: ""
@@ -280,6 +291,7 @@ blocks:
                     sizePx: 16
                     fontWeight: 600
                     color: "#FFFFFF"
+                    align: "center"
               columnWidths:
                 - 25
                 - 25.0
@@ -302,8 +314,10 @@ blocks:
                   right: "50px"
                   bottom: "50px"
                   left: "50px"
+              maxWidthPx: 1200
               gapPx: 0
         paddingTop: "40px"
+        maxWidthPx: 1200
   columnBackgrounds:
     - "#452393"
   paddingTop: "50px"
@@ -324,6 +338,8 @@ blocks:
               html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\" style=\"\">connect@quansight.com</a><br/><br/></p>"
               sizePx: 16
               color: "#000000"
+              lineHeight: "2em"
+              widthPercent: 90
           - - type: image
               src: "/page-assets/about-us/Quansight-contact-02-02-02-1-1.svg"
               alt: ""
@@ -341,7 +357,12 @@ blocks:
             right: "50px"
             bottom: "50px"
             left: "50px"
-
+          - top: "0px"
+            right: "0px"
+            bottom: "0px"
+            left: "0px"
+        maxWidthPx: 1200
         gapPx: 0
   paddingTop: "100px"
   paddingBottom: "100px"
+  maxWidthPx: 1200

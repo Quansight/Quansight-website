@@ -1,11 +1,13 @@
 slug: terms-and-conditions
 title: "Terms and Conditions"
-description: "Terms & Conditions Introduction These Website Standard Terms and Conditions written on this webpage shall manage your use of our website, Quansight.com accessible at https://www.quansight.com. These Terms will be applied fully and affect to your use of this Website. By using this Website, you agreed to accept all terms and conditions written in here. You must […]"
+seoTitle: "Terms and Conditions | Quansight Consulting"
+description: "Terms & Conditions IntroductionThese Website Standard Terms and Conditions written on this webpage shall manage your use of our website, Quansight.com a ..."
 blocks:
 - type: hero
   variant: "small"
   gradientFrom: "#452391"
   gradientTo: "#963895"
+  minHeight: "60vh"
   image: "/page-assets/terms-and-conditions/Hero-Background-11.jpg"
   imageAlt: ""
   overlayOpacity: 0.26
