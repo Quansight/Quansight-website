@@ -4,17 +4,18 @@ published: June 26, 2023
 authors: [quansight]
 description: 'How Quansight and the University of Southern California joined forces to make Pandas available for use in the paleogeosciences by implementing a community-requested feature dating back to 2014.'
 category: [PyData Ecosystem]
+tags: ['Pandas', 'Pandas and the Geosciences']
 featuredImage:
   src: /posts/pandas-and-the-geosciences-a-4-5-billion-year-story/Pandas-And-The-Geosciences.jpg
   alt: 'Pandas and the Geosciences: A 4.5 Billion Year Story'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Pandas and the Geosciences: A 4.5 Billion Year Story'
+banner:
+  - src: /posts/pandas-and-the-geosciences-a-4-5-billion-year-story/Pandas-logo-200x81.png
+    alt: 'Image of the pandas logo'
+  - src: /posts/pandas-and-the-geosciences-a-4-5-billion-year-story/USC-logo-200x113.png
+    alt: 'Image of the USC logo'
+  - src: /posts/pandas-and-the-geosciences-a-4-5-billion-year-story/Quansight-logo-cropped.svg
+    alt: 'Image of the Quansight logo'
 ---
-
-![Image of the USC logo](/posts/pandas-and-the-geosciences-a-4-5-billion-year-story/USC-logo-200x113.png)
-
-![Image of the Quansight logo](/posts/pandas-and-the-geosciences-a-4-5-billion-year-story/Quansight-logo-cropped.svg)
 
 # **How Quansight and the University of Southern California joined forces to make Pandas available for use in the paleogeosciences by implementing a community-requested feature dating back to 2014.**
 

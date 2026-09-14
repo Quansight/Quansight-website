@@ -4,12 +4,13 @@ published: August 14, 2023
 authors: [quansight]
 description: 'Dhavide Aruliah, Quansight’s Director of Education, discusses his experience teaching and training with Jupyter in academia and business at JupyterCon 2023.'
 category: [Jupyter, Training]
+tags: ['Jupyter']
 featuredImage:
   src: /posts/10-years-of-teaching-with-jupyter-reflections-from-industry-academia/10-Years-of-Teaching-with-Jupyter.jpg
   alt: '10 Years of Teaching with Jupyter: Reflections from Industry & Academia'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: '10 Years of Teaching with Jupyter: Reflections from Industry & Academia'
+banner:
+  - src: /posts/10-years-of-teaching-with-jupyter-reflections-from-industry-academia/Jupyter-Con-Logo.svg
+    alt: 'Image of the JupyterCon logo'
 ---
 
 Check out Dhavide Aruliah, Quansight’s Director of Education, on stage at JupyterCon 2023 discussing his experience teaching and training with Jupyter in academia and business.
@@ -28,6 +29,6 @@ Check out the video below to watch the whole thing!
 
 If you’re looking to upskill your team, get in touch. We offer a wide variety of intermediate and advanced courses across the PyData stack, and can build a customized offering to meet your specific requirements.
 
-[Explore PyData Training Lineup](/training)
+<p class="post-button post-button--center"><a href="/training">Explore PyData Training Lineup <svg viewBox="-5 -5 20 20" width="20" height="20" aria-hidden="true"><polygon points="2,2 8,5 2,8" fill="currentColor" /></svg></a></p>
 
 Connect with Dhavide Aruliah on [LinkedIn](https://www.linkedin.com/in/dhavide/).

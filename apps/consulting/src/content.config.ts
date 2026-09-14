@@ -36,8 +36,15 @@ const posts = defineCollection({
     authors: z.array(z.string()).default([]),
     description: z.string().optional(),
     category: z.array(z.string()).default([]),
+    // WP post tags -- what live's "More articles from our Library" is
+    // keyed on (posts sharing a tag); see BlogPost.astro.
+    tags: z.array(z.string()).default([]),
     featuredImage: z.object({ src: z.string(), alt: z.string() }).optional(),
     hero: z.record(z.unknown()).optional(),
+    // Converted posts: the live post's band above the title -- a row of
+    // logos, or [] for the plain gradient band. Hand-authored posts use
+    // `hero` instead.
+    banner: z.array(z.object({ src: z.string(), alt: z.string() })).optional(),
   }),
 });
 

@@ -4,12 +4,13 @@ published: May 10, 2024
 authors: [quansight]
 description: "The recent revision of the array API standard marks another major milestone in the collective effort to achieve array interoperability across the Python data ecosystem. \nA recent post by Quansight Lab’s Athan Reines on the Data APIs blog shares updates on the consortium’s progress and plans for the future."
 category: [PyData Ecosystem]
+tags: ['API', 'Consortium for Python Data API Standards', 'Python Data API']
 featuredImage:
   src: /posts/gaining-traction-the-consortium-for-python-data-api-standards-releases-its-2023-api-specification/The-Consortium-For-Python-Data-API-Standards-Releases-Its-2023-API-Specification-01.svg
   alt: 'Image of an illustration depicting the Consortium for Python Data API Standards, featuring abstract green characters representing collaboration on data access standards within the Python ecosystem.'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Gaining Traction: The Consortium for Python Data API Standards Releases Its 2023 API Specification'
+banner:
+  - src: /posts/gaining-traction-the-consortium-for-python-data-api-standards-releases-its-2023-api-specification/DataAPIs-name-under-symbol-V2-01.svg
+    alt: 'Image of the DataAPIs logo'
 ---
 
 _The revision of the array API standard is now ready for adoption by conforming array libraries._
@@ -24,7 +25,7 @@ The Consortium for Python **[Data API Standards](https://data-apis.org/)** is a 
 
 By agreeing on standard ways to work with data, the Consortium aims to make it easier for developers to use multiple libraries together without running into compatibility issues. This helps improve collaboration and efficiency in the Python data ecosystem.
 
-![Image of an illustration depicting the Consortium for Python Data API Standards, featuring abstract green characters representing collaboration on data access standards within the Python ecosystem.](/posts/gaining-traction-the-consortium-for-python-data-api-standards-releases-its-2023-api-specification/The-Consortium-For-Python-Data-API-Standards-Releases-Its-2023-API-Specification-01.svg)
+<p class="post-image"><img src="/posts/gaining-traction-the-consortium-for-python-data-api-standards-releases-its-2023-api-specification/The-Consortium-For-Python-Data-API-Standards-Releases-Its-2023-API-Specification-01.svg" alt="Image of an illustration depicting the Consortium for Python Data API Standards, featuring abstract green characters representing collaboration on data access standards within the Python ecosystem." style="width:67%" loading="lazy" /></p>
 
 > The 2023 release of the array API specification standardizes several key APIs necessary for facilitating adoption among array-consuming libraries and should help accelerate array interoperability within the Scientific Python Ecosystem.
 >

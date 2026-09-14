@@ -4,12 +4,13 @@ published: April 19, 2024
 authors: [quansight]
 description: 'Hear from Quansight’s Kim Pevey on empowering data science teams with collaboration and efficiency. Nebari is emerging as a significant'
 category: ['Infrastructure & HPC']
+tags: ['End-User Perspective Nebari', 'Nebari']
 featuredImage:
   src: /posts/nebari-the-end-user-perspective/Kim-Pevey-Thumbnail-01-1.png
   alt: "The image shows a photo of Kim Pevey, and the Nebari and Quansight's logo."
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Nebari: The End-User Perspective'
+banner:
+  - src: /posts/nebari-the-end-user-perspective/Nebari-Logo-White-Bg.svg
+    alt: 'Image of the Nebari logo'
 ---
 
 Hear from Quansight’s Kim Pevey on empowering data science teams with collaboration and efficiency.

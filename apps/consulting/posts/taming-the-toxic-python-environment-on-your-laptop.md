@@ -4,12 +4,13 @@ published: June 7, 2024
 authors: [dharhas-pothina]
 description: 'Local Reproducible Open Source Environments with conda-store Are you tired of running into problems every time you install a new'
 category: [Packaging]
+tags: ['Python', 'Python Environment', 'Taming the Toxic Python Environment']
 featuredImage:
   src: /posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-Thumb1.png
   alt: 'Taming the Toxic Python Environment on your Laptop'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Taming the Toxic Python Environment on your Laptop'
+banner:
+  - src: /posts/taming-the-toxic-python-environment-on-your-laptop/Conda-Store-Logo-Name-02.svg
+    alt: 'Image of the conda-store logo'
 ---
 
 _Local Reproducible Open Source Environments with conda-store_
@@ -31,13 +32,13 @@ Have you ever written Python code that runs fine on your machine, then handed it
 
 Today, we are benefactors of a massive community of libraries, which sounds great at first, but it’s the problem. When I started using Python in 2008, NumPy was the big thing. Now, NumPy is way down in the substructure—the basement, below the data science foundation.
 
-![](/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-2b-929x1024.png)
+<p class="post-image"><img src="/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-2b-929x1024.png" alt="" style="width:61%" loading="lazy" /></p>
 
 I’ve met many people who don’t even know NumPy exists. They work in pandas, Polars, statsmodels, Biopython, Astropy, or something else near the top. They don’t even know that NumPy is a thing. Open source is a huge ecosystem, and it’s built collaboratively around the world by thousands of people doing cool stuff. Backward compatibility, however, is not even an afterthought—often, it isn’t even a thought!
 
 Do you remember Sun Microsystems? We used to be able to take a binary from Solaris 1 and plop it into Solaris 8, and it would just work. You go from Panda’s 1.5 to 1.53, and maybe your stuff is okay, but use 2.0, and it ‘breaks.’ Backward compatibility is not a thing with Python (and there’s a reason for that). The cool new stuff coming out is amazing, but it has an issue.
 
-![](/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-3b.png)
+<p class="post-image"><img src="/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-3b.png" alt="" style="width:67%" loading="lazy" /></p>
 
 ## Building a Better Ecosystem
 
@@ -51,7 +52,7 @@ Python is a glue language that sticks to other languages. Because of this, we do
 
 Python is the bane of Enterprise IT. Software engineers want flexibility, the latest version of pandas and Polars, and the next version of PyTorch, which allows us to run our NumPy code on a GPU. We want that flexibility. We want to be able to do all that and more!
 
-![](/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-5a.png)
+<p class="post-image"><img src="/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-5a.png" alt="" style="width:67%" loading="lazy" /></p>
 
 The flip side is that reproducibility becomes a problem. Here is typically what I’ve seen most people say/do:
 
@@ -65,7 +66,7 @@ We tend to agglomerate, or aggregate, these environments over time, which become
 
 We fixed this, right? We have containers in every IT department in the world.
 
-![](/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-6a.png)
+<p class="post-image"><img src="/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-6a.png" alt="" style="width:72%" loading="lazy" /></p>
 
 Do you know how to write a Docker file? Did you enjoy learning how to write a Docker file, or would you be fine if you had never known such a thing existed? Yes, every IT Department, everywhere, insists, “Just write a Docker file,” but that’s only part of the solution.
 
@@ -75,7 +76,7 @@ They’re more likely to get the response of, “Okay. Fill out a change order. 
 
 But then you’re saying, “Okay. Now, I need the next four versions…” Containers aren’t the solution.
 
-![](/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-7a.png)
+<p class="post-image"><img src="/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-7a.png" alt="" style="width:75%" loading="lazy" /></p>
 
 ## Containers Give You Reproducibility; They Don't Give You Flexibility.
 
@@ -83,7 +84,7 @@ Have you ever started analyzing a new data set, and only after starting your pro
 
 A couple of years ago, we analyzed traffic data for a client, such as how many people turn left at this intersection and other similar data. There’s a pandas extension that lets you identify routes. We didn’t know we needed that, but we needed to get it installed quickly and deployed. Most organizations need help transitioning this issue between wanting flexibility and reproducibility. Until now, you typically had to pick one or the other.
 
-![](/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-8b.png)
+<p class="post-image"><img src="/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-8b.png" alt="" style="width:49%" loading="lazy" /></p>
 
 ## The Core Three Best Practices
 
@@ -93,7 +94,7 @@ Once you have an environment specification, install your environment and create 
 
 Now, you have an environment and suddenly realize you’re using pandas, but all your data is in Parque. To fix this, you install PyArrow, go back, put it in your environment specification, and make a new environment. That is the safest way to recreate environments. Of course, there are more best practices. If you do some of these things, you can have reasonable reproducibility, but doing this consistently and remembering to do it all the time has required extra steps.
 
-![](/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-9b.png)
+<p class="post-image"><img src="/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-9b.png" alt="" style="width:64%" loading="lazy" /></p>
 
 ## Enter conda-store
 
@@ -101,7 +102,7 @@ Now, where are you going to put the lock-files? Are you going to store them some
 
 We’ve taken some of the existing best practices for the conda ecosystem. We’re going from, “You tell us what you want, and we will make sure we follow all the best practices under the hood and give you an environment that’s reproducible, that you can transfer other people, etc.” All that, and an interactive graphical user interface.
 
-![](/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-10b.png)
+<p class="post-image"><img src="/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-10b.png" alt="" style="width:85%" loading="lazy" /></p>
 
 ## An Intuitive GUI
 
@@ -129,7 +130,7 @@ Full disclosure: I have a habit of breaking environments. However, with conda-st
 
 In my demo, I demonstrated this with an active environment containing Torchvision, PyTorch, and pandas. If I want to return to a version without pandas, I can click edit, change the environment version, and create a new active environment. Conda-store allows me to effortlessly switch between versions of my environment from three or six months ago without the hassle of reinstalling from an outdated YAML file that might not work.
 
-![](/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-11a.png)
+<p class="post-image"><img src="/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-11a.png" alt="" style="width:68%" loading="lazy" /></p>
 
 ## Final Thoughts
 
@@ -139,4 +140,4 @@ Having dealt with packaging and environments for years, I believe we shouldn’t
 
 This project is now part of the conda incubator, so it’s something we built and submitted, and it’s on its way to becoming an official part of conda through the incubator program. We would love for you to use it, provide feedback, and help us develop it further. Quansight is a consulting company. If you are annoyed about how your organization or group deals with environments, we’re here to help with packaging and building systems like this.
 
-![](/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-12b.png)
+<p class="post-image"><img src="/posts/taming-the-toxic-python-environment-on-your-laptop/Taming-Toxic-Python-Dharhas-Pothina-PyData-NYC-2023-12b.png" alt="" style="width:70%" loading="lazy" /></p>

@@ -4,12 +4,17 @@ published: July 12, 2024
 authors: [marco-gorelli]
 description: 'Geocoding is the practice of taking in an address and assigning a latitude-longitude coordinate to it. Doing so for millions of rows can be an expensive and slow process, as it typically relies on paid API services. Learn how we saved our client time and money by leveraging open source tools and datasets for their geocoding needs.'
 category: [PyData Ecosystem, Data Engineering]
+tags:
+  [
+    'AWS Lambda',
+    'Polars Plugins',
+    'Reverse-Geocoding',
+    'Reverse-Geocoding in AWS Lambda',
+  ]
 featuredImage:
   src: /posts/reverse-geocoding-aws-lambda-using-polars-plugin/Reverse-Geocoding-AWS-Lambda-Save-Time-Money-Using-Polars-Plugins-Thumbnail-Marco-Gorelli-Quansight-Labs-Open-Source-scaled.jpg
   alt: 'A watercolor illustration of a polar bear plugging an electric plug into a wall socket, symbolizing the connection and power of using Polars for geocoding and reverse-geocoding tasks.'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Reverse-Geocoding in AWS Lambda: Save Time and Money Using Polars Plugins'
+banner: []
 ---
 
 ## Reverse-Geocoding in AWS Lambda: Save Time and Money Using Polars Plugins
@@ -114,3 +119,5 @@ That’s the power of lazy execution and Rust. If you, too, would like custom Ru
 By leveraging both open source datasets and open source tools, as well as our in-house expertise, we were able to save our client time and money on their geocoding and reverse-geocoding needs. We made the infeasible feasible. If you’d like customized solutions tailored to your business needs, delivered by open source experts, please [get in contact with Quansight](/open-source-services) today.
 
 Contact us today: [connect@quansight.com](mailto:connect@quansight.com)
+
+![A square watercolor illustration of a polar bear plugging an electric plug into a wall socket, symbolizing the connection and power of using Polars for geocoding and reverse-geocoding tasks.](/posts/reverse-geocoding-aws-lambda-using-polars-plugin/Reverse-Geocoding-AWS-Lambda-Save-Time-Money-Using-Polars-Plugins-Square-Marco-Gorelli-Quansight-Labs-Open-Source-1536x1536.jpg)

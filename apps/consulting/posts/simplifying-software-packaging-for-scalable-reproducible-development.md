@@ -4,19 +4,20 @@ published: November 1, 2024
 authors: [quansight]
 description: 'From development to production, Quansight ensures stability and scalability across environments.'
 category: [Packaging]
+tags: ['Reproducible Development', 'Scalable', 'Software Packaging']
 featuredImage:
   src: /posts/simplifying-software-packaging-for-scalable-reproducible-development/Packaging-Environment-Management-Hero-Website-2.png
   alt: 'Simplifying Software Packaging for Scalable, Reproducible Development'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Simplifying Software Packaging for Scalable, Reproducible Development'
+banner:
+  - src: /posts/simplifying-software-packaging-for-scalable-reproducible-development/Pandas_logo.svg-1024x414.png
+    alt: ''
+  - src: /posts/simplifying-software-packaging-for-scalable-reproducible-development/dask_logo_icon_169300.png
+    alt: ''
+  - src: /posts/simplifying-software-packaging-for-scalable-reproducible-development/polars-logo-Photoroom.png
+    alt: ''
+  - src: /posts/simplifying-software-packaging-for-scalable-reproducible-development/logo.svg
+    alt: ''
 ---
-
-![](/posts/simplifying-software-packaging-for-scalable-reproducible-development/dask_logo_icon_169300.png)
-
-![](/posts/simplifying-software-packaging-for-scalable-reproducible-development/polars-logo-Photoroom.png)
-
-![](/posts/simplifying-software-packaging-for-scalable-reproducible-development/logo.svg)
 
 _From development to production, Quansight ensures stability and scalability across environments._
 
@@ -44,29 +45,17 @@ In the context of a global collaborative data science project aimed at developin
 
 Quansight stands out due to our direct involvement in shaping the tools and standards of the Python and conda communities:
 
-![](/posts/simplifying-software-packaging-for-scalable-reproducible-development/conda-logo.png)
+<div class="post-icon-boxes">
+  <div class="post-icon-box"><img src="/posts/simplifying-software-packaging-for-scalable-reproducible-development/conda-logo.png" alt="" loading="lazy" /><h3>Conda</h3><p>More than just a package manager, <code>conda</code> offers comprehensive environment management, allowing for language-agnostic dependency resolution. We employ members with commit rights as well as members in the Steering Council of the conda community.</p></div>
+  <div class="post-icon-box"><img src="/posts/simplifying-software-packaging-for-scalable-reproducible-development/Conda-Forge-logo.png" alt="Conda-forge logo" loading="lazy" /><h3>Conda-Forge</h3><p>As core contributors, Quansight team members enhance this community-led effort, which provides recipes and infrastructure for conda packages, ensuring high-quality, community-vetted software.</p></div>
+  <div class="post-icon-box"><img src="/posts/simplifying-software-packaging-for-scalable-reproducible-development/Python-logo-notext.svg-933x1024.png" alt="Python logo" loading="lazy" /><h3>pypackaging-native</h3><p>This resource, born out of Quansight's efforts, collects and discusses Python packaging's unique challenges, offering insights and best practices.</p></div>
+</div>
 
-{/_ TODO: manual conversion needed: widget=icon-box.default _/}
-
-![Conda-forge logo](/posts/simplifying-software-packaging-for-scalable-reproducible-development/Conda-Forge-logo.png)
-
-{/_ TODO: manual conversion needed: widget=icon-box.default _/}
-
-![Python logo](/posts/simplifying-software-packaging-for-scalable-reproducible-development/Python-logo-notext.svg-933x1024.png)
-
-{/_ TODO: manual conversion needed: widget=icon-box.default _/}
-
-![meson python logo](/posts/simplifying-software-packaging-for-scalable-reproducible-development/Meson-Python-logo.png)
-
-{/_ TODO: manual conversion needed: widget=icon-box.default _/}
-
-![python packaging logo](/posts/simplifying-software-packaging-for-scalable-reproducible-development/python-packeging-logo.png)
-
-{/_ TODO: manual conversion needed: widget=icon-box.default _/}
-
-![conda store logo](/posts/simplifying-software-packaging-for-scalable-reproducible-development/conda-store-logo.png)
-
-{/_ TODO: manual conversion needed: widget=icon-box.default _/}
+<div class="post-icon-boxes">
+  <div class="post-icon-box"><img src="/posts/simplifying-software-packaging-for-scalable-reproducible-development/Meson-Python-logo.png" alt="meson python logo" loading="lazy" /><h3>Meson-Python</h3><p>Utilizing the Meson build system, Quansight has transformed how key Python packages like Numpy and Scipy are built, improving performance and compatibility.</p></div>
+  <div class="post-icon-box"><img src="/posts/simplifying-software-packaging-for-scalable-reproducible-development/python-packeging-logo.png" alt="python packaging logo" loading="lazy" /><h3>Python Packaging Authority (PyPA)</h3><p>Quansight's involvement in maintaining critical packages and contributing to PEPs ensures they are at the forefront of Python packaging evolution.</p></div>
+  <div class="post-icon-box"><img src="/posts/simplifying-software-packaging-for-scalable-reproducible-development/conda-store-logo.png" alt="conda store logo" loading="lazy" /><h3>Conda-store</h3><p>An innovative open source tool from Quansight for managing data science environments collaboratively, enhancing reproducibility and teamwork.</p></div>
+</div>
 
 ## The Core of Reliable Development
 
@@ -74,57 +63,31 @@ Proactive reproducibility in software development isn’t a luxury but a necessi
 
 ## Library Changes
 
-**Challenge**
-
-- Breaking Changes: As libraries evolve, new versions often introduce changes that are not backward compatible. This can lead to software failures when an application depends on features or behaviors that have been altered or deprecated.
-- Dependency Hell: When multiple libraries depend on different versions of the same sub-library, conflicts arise, making it difficult to maintain a stable environment.
-
-**Quansight’s Approach**
-
-- Semantic Versioning Enforcement: Advocating for and implementing semantic versioning (semver) where major changes are clearly signaled, allowing for predictable updates.
-- Dependency Resolution Tools: Utilizing tools like conda to manage dependencies at the environment level, ensuring that all dependencies are compatible.
-- Continuous Integration/Continuous Deployment (CI/CD): Implementing CI/CD pipelines that test against multiple library versions to catch compatibility issues early.
-- Deprecation Strategies: Working with library maintainers to introduce deprecation warnings long before removal, giving ample time for adaptation.
+<div class="post-columns" style="--columns:2">
+  <div class="post-column"><p class="post-column__label"><strong>Challenge</strong></p><ul> <li>Breaking Changes: As libraries evolve, new versions often introduce changes that are not backward compatible. This can lead to software failures when an application depends on features or behaviors that have been altered or deprecated.</li> <li>Dependency Hell: When multiple libraries depend on different versions of the same sub-library, conflicts arise, making it difficult to maintain a stable environment.</li> </ul></div>
+  <div class="post-column"><p class="post-column__label"><strong>Quansight’s Approach</strong></p><ul> <li>Semantic Versioning Enforcement: Advocating for and implementing semantic versioning (semver) where major changes are clearly signaled, allowing for predictable updates.</li> <li>Dependency Resolution Tools: Utilizing tools like conda to manage dependencies at the environment level, ensuring that all dependencies are compatible.</li> <li>Continuous Integration/Continuous Deployment (CI/CD): Implementing CI/CD pipelines that test against multiple library versions to catch compatibility issues early.</li> <li>Deprecation Strategies: Working with library maintainers to introduce deprecation warnings long before removal, giving ample time for adaptation.</li> </ul></div>
+</div>
 
 ## Environment Diversity
 
-**Challenge**
-
-- Inconsistent Environments: Developers might work on macOS, Windows, or various Linux distributions, each with its own set of system libraries and configurations.
-- Scalability Issues: What works on a local machine might fail in a cloud environment due to different scaling, networking, or resource availability.
-
-**Quansight’s Approach**
-
-- Containerization: Using Docker or similar technologies to create consistent environments across different platforms.
-- Environment Management Tools: Leveraging conda environments to replicate exact software stacks across different systems, ensuring that dependencies are isolated and consistent.
-- Cloud-Agnostic Solutions: Designing solutions that are cloud-agnostic or easily adaptable to different cloud providers through abstraction layers or configuration-driven deployments.
+<div class="post-columns" style="--columns:2">
+  <div class="post-column"><p class="post-column__label"><strong>Challenge</strong></p><ul> <li>Inconsistent Environments: Developers might work on macOS, Windows, or various Linux distributions, each with its own set of system libraries and configurations.</li> <li>Scalability Issues: What works on a local machine might fail in a cloud environment due to different scaling, networking, or resource availability.</li> </ul></div>
+  <div class="post-column"><p class="post-column__label"><strong>Quansight’s Approach</strong></p><ul> <li>Containerization: Using Docker or similar technologies to create consistent environments across different platforms.</li> <li>Environment Management Tools: Leveraging conda environments to replicate exact software stacks across different systems, ensuring that dependencies are isolated and consistent.</li> <li>Cloud-Agnostic Solutions: Designing solutions that are cloud-agnostic or easily adaptable to different cloud providers through abstraction layers or configuration-driven deployments.</li> </ul></div>
+</div>
 
 ## IT Constraints
 
-**Challenge**
-
-- Security Policies: IT might enforce strict security policies that limit software installation or require all software to be vetted, which can slow down development.
-- Resource Allocation: Limited access to certain resources or hardware due to centralized control can hinder experimentation and development speed.
-
-**Quansight’s Approach**
-
-- Negotiated Access: Collaborating with IT to create developer-friendly policies that don’t compromise security, like sandbox environments for testing.
-- Modular Software Design: Developing software in modules that can be individually vetted and approved, reducing the IT overhead for each update.
-- Automated Compliance Checks: Implementing tools that automatically check for compliance with IT policies before deployment, streamlining the approval process.2
+<div class="post-columns" style="--columns:2">
+  <div class="post-column"><p class="post-column__label"><strong>Challenge</strong></p><ul> <li>Security Policies: IT might enforce strict security policies that limit software installation or require all software to be vetted, which can slow down development.</li> <li>Resource Allocation: Limited access to certain resources or hardware due to centralized control can hinder experimentation and development speed.</li> </ul></div>
+  <div class="post-column"><p class="post-column__label"><strong>Quansight’s Approach</strong></p><ul> <li>Negotiated Access: Collaborating with IT to create developer-friendly policies that don’t compromise security, like sandbox environments for testing.</li> <li>Modular Software Design: Developing software in modules that can be individually vetted and approved, reducing the IT overhead for each update.</li> <li>Automated Compliance Checks: Implementing tools that automatically check for compliance with IT policies before deployment, streamlining the approval process.2</li> </ul></div>
+</div>
 
 ## Workflow Complexity
 
-**Challenge**
-
-- Reproducibility: Complex workflows involving multiple steps, data sources, and computational processes make it hard to reproduce results exactly.
-- Version Control: This is not just for code but for data, configurations, and environments, which add layers of complexity.
-
-**Quansight’s Approach**
-
-- Workflow Management Systems: Implementing systems like Airflow or custom solutions for orchestrating complex workflows, ensuring each step is reproducible.
-- Environment as Code: Treating environment setup as code (Infrastructure as Code, Environment as Code) where environments are version-controlled, allowing for exact replication.
-- Data Versioning: Using tools like DVC (Data Version Control) alongside Git to manage different versions of datasets alongside code changes.
-- Documentation and Automation: Ensuring that every step of the workflow is well-documented and, where possible, automated to reduce human error and increase reproducibility.
+<div class="post-columns" style="--columns:2">
+  <div class="post-column"><p class="post-column__label"><strong>Challenge</strong></p><ul> <li>Reproducibility: Complex workflows involving multiple steps, data sources, and computational processes make it hard to reproduce results exactly.</li> <li>Version Control: This is not just for code but for data, configurations, and environments, which add layers of complexity.</li> </ul></div>
+  <div class="post-column"><p class="post-column__label"><strong>Quansight’s Approach</strong></p><ul> <li>Workflow Management Systems: Implementing systems like Airflow or custom solutions for orchestrating complex workflows, ensuring each step is reproducible.</li> <li>Environment as Code: Treating environment setup as code (Infrastructure as Code, Environment as Code) where environments are version-controlled, allowing for exact replication.</li> <li>Data Versioning: Using tools like DVC (Data Version Control) alongside Git to manage different versions of datasets alongside code changes.</li> <li>Documentation and Automation: Ensuring that every step of the workflow is well-documented and, where possible, automated to reduce human error and increase reproducibility.</li> </ul></div>
+</div>
 
 By addressing these challenges with strategic, technology-driven solutions, Quansight not only mitigates the immediate issues but also sets up a framework for sustainable development practices that can adapt to future changes in technology and business requirements.
 

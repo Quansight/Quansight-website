@@ -4,6 +4,7 @@ published: October 27, 2020
 authors: [dillon-roach]
 description: 'In this post, we show you how to construct a quick dashboard using Panel & Python without ever leaving the comfort of your Jupyter notebook.'
 category: [Data Visualization, Jupyter, Training]
+tags: ['dashboarding', 'Dashboarding With Panel']
 featuredImage:
   src: /posts/quick-dashboarding-with-panel/panellogo4x3.png
   alt: 'Panel logo'

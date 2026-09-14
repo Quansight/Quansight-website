@@ -4,15 +4,16 @@ published: July 24, 2024
 authors: [isuru-fernando]
 description: 'Geocoding is the practice of taking in an address and assigning a latitude-longitude coordinate to it. Doing so for millions of rows can be an expensive and slow process, as it typically relies on paid API services. Learn how we saved our client time and money by leveraging open source tools and datasets for their geocoding needs.'
 category: [Packaging]
+tags: ['GDAL', 'Lightweight Versions of GDAL and PDAL', 'PDAL']
 featuredImage:
   src: /posts/introducing-lightweight-versions-of-gdal-and-pdal/Introducing-Lightweight-Versions-of-GDAL-and-PDAL.png
   alt: 'Introducing Lightweight Versions of GDAL and PDAL'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Introducing Lightweight Versions of GDAL and PDAL'
+banner:
+  - src: /posts/introducing-lightweight-versions-of-gdal-and-pdal/Quansight-logo-cropped.svg
+    alt: 'Image of the Quansight logo'
+  - src: /posts/introducing-lightweight-versions-of-gdal-and-pdal/hobu-logo-2C.png
+    alt: ''
 ---
-
-![](/posts/introducing-lightweight-versions-of-gdal-and-pdal/hobu-logo-2C.png)
 
 _See how [Hobu](https://www.google.com/url?q=https://hobu.co/&sa=D&source=docs&ust=1721828383133768&usg=AOvVaw1y2fLe1mmVu83PXMG8fVgv) teamed with Quansight to fund the transition to a deferred plugin system in both GDAL and PDAL. The new architecture was implemented in GDAL 3.9.1 and PDAL 2.7.2._
 

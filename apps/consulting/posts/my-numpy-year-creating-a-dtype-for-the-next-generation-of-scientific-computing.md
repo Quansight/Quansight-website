@@ -4,15 +4,22 @@ published: October 18, 2024
 authors: [nathan-goldbaum]
 description: 'First, I’ll start with a brief history of strings in NumPy to explain how strings worked before NumPy 2.0 and why it was a little bit broken.'
 category: [Numerical Computing]
+tags:
+  [
+    'Creating a DType for the Next Generation of Scientific Computing',
+    'DTypes',
+    'NumPy',
+    'Scientific Computing',
+  ]
 featuredImage:
   src: /posts/my-numpy-year-creating-a-dtype-for-the-next-generation-of-scientific-computing/My_Numpy_Year.png
   alt: 'My NumPy Year: Creating a DType for the Next Generation of Scientific Computing'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'My NumPy Year: Creating a DType for the Next Generation of Scientific Computing'
+banner:
+  - src: /posts/my-numpy-year-creating-a-dtype-for-the-next-generation-of-scientific-computing/numpy-1.png
+    alt: ''
+  - src: /posts/my-numpy-year-creating-a-dtype-for-the-next-generation-of-scientific-computing/Pandas_logo.svg.png
+    alt: ''
 ---
-
-![](/posts/my-numpy-year-creating-a-dtype-for-the-next-generation-of-scientific-computing/Pandas_logo.svg.png)
 
 _From no CPython C API experience to shipping a new DType in NumPy 2.0._
 

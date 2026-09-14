@@ -4,12 +4,17 @@ published: August 30, 2024
 authors: [quansight]
 description: 'Artificial Intelligence (AI) is reshaping industries worldwide, driving innovation and pioneering new possibilities. The journey from AI research to practical, enterprise-ready solutions can be challenging, and this is where Quansight’s AI Engineering consulting services come into play. With our deep expertise in open source scientific computing'
 category: [Artificial Intelligence]
+tags:
+  [
+    'AI',
+    'Building AI Document Interrogation Apps with Open Source Tools',
+    'Open Source',
+    'Ragna',
+  ]
 featuredImage:
   src: /posts/make-your-ai-vision-a-reality-with-quansights-ai-engineering-consulting/AI-engineering.jpg
   alt: 'Make Your AI Vision a Reality with Quansight’s AI Engineering Consulting'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Make Your AI Vision a Reality with Quansight’s AI Engineering Consulting'
+banner: []
 ---
 
 ## AI Engineering
@@ -22,17 +27,19 @@ Artificial Intelligence (AI) is reshaping industries worldwide, driving innovati
 
 AI engineering is the process of transforming AI research into reliable and scalable solutions that can be integrated into a business’s operations. While AI research produces innovative models and algorithms, turning these into production-ready inferences requires reliable infrastructure, software best practices, and careful orchestration. Many organizations struggle with this transition, facing challenges such as scalability, reproducibility, and performance optimization.
 
+<p class="post-image"><img src="/posts/make-your-ai-vision-a-reality-with-quansights-ai-engineering-consulting/1.jpg" alt="aWe have helped turn AI visions into practical solutions for our clients" style="width:46%" loading="lazy" /></p>
+
 ## Quansight’s Approach to AI Engineering
 
 At Quansight, we leverage our experience in open source programming to address these challenges. Our engineering solutions provide the necessary infrastructure and integration capabilities to convert theoretical AI models into practical, operational tools. We emphasize the use of sustainable software platforms, making sure that your AI applications are maintainable and scalable in the long run.
 
 ## Core Services Offered by Quansight
 
-Establishing Sustainable AI Software Foundations: Creating maintainable and scalable AI software is necessary for long-term success. We help you build solid foundations that avoid technical debt and ensure smooth operations.
-
-Tailoring Infrastructure for Compute-Intensive Inference or Training Workloads: Whether your needs involve generative AI pre-training, optimization, or fine-tuning, we customize environments to handle compute-intensive workloads efficiently.
-
-Tailoring Infrastructure for Compute-Intensive Inference or Training Workloads: Whether your needs involve generative AI pre-training, optimization, or fine-tuning, we customize environments to handle compute-intensive workloads efficiently.
+<div class="post-columns" style="--columns:3">
+  <div class="post-column"><p>Establishing Sustainable AI Software Foundations: Creating maintainable and scalable AI software is necessary for long-term success. We help you build solid foundations that avoid technical debt and ensure smooth operations.</p></div>
+  <div class="post-column"><p>Tailoring Infrastructure for Compute-Intensive Inference or Training Workloads: Whether your needs involve generative AI pre-training, optimization, or fine-tuning, we customize environments to handle compute-intensive workloads efficiently.</p></div>
+  <div class="post-column"><p>Tailoring Infrastructure for Compute-Intensive Inference or Training Workloads: Whether your needs involve generative AI pre-training, optimization, or fine-tuning, we customize environments to handle compute-intensive workloads efficiently.</p></div>
+</div>
 
 ## Bridging the AI Innovation-Execution Divide
 
@@ -47,19 +54,13 @@ We understand the complexities of utilizing existing infrastructure while mitiga
 
 ## Core Services Offered by Quansight
 
-![](/posts/make-your-ai-vision-a-reality-with-quansights-ai-engineering-consulting/Ragna-Logo-Horizontal-Lockup-1024x301.png)
+<div class="post-icon-boxes post-icon-boxes--center">
+  <div class="post-icon-box"><img src="/posts/make-your-ai-vision-a-reality-with-quansights-ai-engineering-consulting/Ragna-Logo-Horizontal-Lockup-1024x301.png" alt="" loading="lazy" /><p>Ragna is an open source RAG-based AI orchestration framework designed to scale from research to production.</p></div>
+  <div class="post-icon-box"><img src="/posts/make-your-ai-vision-a-reality-with-quansights-ai-engineering-consulting/Nebari-Logo-Horizontal-Lockup-1024x301.png" alt="Nebari logo with black font and a colorful tree." loading="lazy" /><p>Now community-led, Nebari is a customizable, open source enterprise data science and MLOps platform.</p></div>
+  <div class="post-icon-box"><img src="/posts/make-your-ai-vision-a-reality-with-quansights-ai-engineering-consulting/conda-store-Logo-Horizontal-Lockup-1024x301.png" alt="" loading="lazy" /><p>conda-store is an open source tool created to better manage data science environments for teams.</p></div>
+</div>
 
-{/_ TODO: manual conversion needed: widget=icon-box.default _/}
-
-![Nebari logo with black font and a colorful tree.](/posts/make-your-ai-vision-a-reality-with-quansights-ai-engineering-consulting/Nebari-Logo-Horizontal-Lockup-1024x301.png)
-
-{/_ TODO: manual conversion needed: widget=icon-box.default _/}
-
-![](/posts/make-your-ai-vision-a-reality-with-quansights-ai-engineering-consulting/conda-store-Logo-Horizontal-Lockup-1024x301.png)
-
-{/_ TODO: manual conversion needed: widget=icon-box.default _/}
-
-![We have helped turn AI visions into practical solutions for our clients](/posts/make-your-ai-vision-a-reality-with-quansights-ai-engineering-consulting/2.jpg)
+<p class="post-image"><img src="/posts/make-your-ai-vision-a-reality-with-quansights-ai-engineering-consulting/2.jpg" alt="We have helped turn AI visions into practical solutions for our clients" style="width:46%" loading="lazy" /></p>
 
 ## Success Stories
 

@@ -4,17 +4,18 @@ published: December 13, 2024
 authors: [dharhas-pothina]
 description: 'Exploring Pandas, Polars, DuckDB, and Beyond'
 category: [PyData Ecosystem]
+tags: ['DataFrame Libraries', 'Innovation']
 featuredImage:
   src: /posts/how-many-dataframe-libraries-do-you-need-to-change-a-lightbulb/1-1.png
   alt: 'How Many DataFrame Libraries Do You Need To Change a Lightbulb?'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'How Many DataFrame Libraries Do You Need To Change a Lightbulb?'
+banner:
+  - src: /posts/how-many-dataframe-libraries-do-you-need-to-change-a-lightbulb/polars-logo-Photoroom.png
+    alt: ''
+  - src: /posts/how-many-dataframe-libraries-do-you-need-to-change-a-lightbulb/Pandas_logo.svg.png
+    alt: ''
+  - src: /posts/how-many-dataframe-libraries-do-you-need-to-change-a-lightbulb/DuckDB_Image-removebg-preview.png
+    alt: ''
 ---
-
-![](/posts/how-many-dataframe-libraries-do-you-need-to-change-a-lightbulb/Pandas_logo.svg.png)
-
-![](/posts/how-many-dataframe-libraries-do-you-need-to-change-a-lightbulb/DuckDB_Image-removebg-preview.png)
 
 _﻿﻿ Exploring Pandas, Polars, DuckDB, and Beyond_
 

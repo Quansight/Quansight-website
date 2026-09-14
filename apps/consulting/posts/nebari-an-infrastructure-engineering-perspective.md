@@ -4,12 +4,11 @@ published: May 3, 2024
 authors: [quansight]
 description: 'Hear from Quansight’s Senior Infrastructure Engineer, Chuck McAndrew, on how Nebari has transformed the landscape for deploying data science operations.'
 category: ['Infrastructure & HPC']
+tags: ['Infrastructure Engineering with Nebari', 'Nebari']
 featuredImage:
   src: /posts/nebari-an-infrastructure-engineering-perspective/Nebari-An-Infrastructure-Engineering-Perspective.png
   alt: 'A stylized image of a lone bonsai tree growing on a wireframe platform'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Nebari: An Infrastructure Engineering Perspective'
+banner: []
 ---
 
 Hear from **Quansight’s Senior Infrastructure Engineer, Chuck McAndrew**, on how Nebari has transformed the landscape for deploying data science operations.
@@ -42,6 +41,8 @@ Integrating these elements into Nebari addressed common challenges in deploying 
 **Chuck McAndrew:** _“Nebari allows deploying to multiple public clouds. It can run on Amazon (AWS), Azure, or Google Cloud (GCP). It does this by leveraging [Kubernetes](https://kubernetes.io/) to orchestrate containerized workloads. If your goal is to do data science, you should be able to focus on that rather than learning how to run Kubernetes._
 
 _“Nebari came about because our clients wanted JupyterHub running and shareable, reproducible Python environments so that distributed data science teams didn’t have different environments. They discovered everyone had these environments running on their laptop, and there were just all these inconsistencies. So, these clients wanted a central place for their team to work.”_
+
+![Image of an abstract technological landscape with a glowing digital tree surrounded by circuit board patterns and illuminated nodes.](/posts/nebari-an-infrastructure-engineering-perspective/2024.5.3_Chuck_McAndrew_Nebari_Infrastructure2a-1536x516.png)
 
 ## From Traditional Models to Modern Infrastructure
 

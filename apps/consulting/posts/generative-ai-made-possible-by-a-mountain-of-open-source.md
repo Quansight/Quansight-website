@@ -4,12 +4,11 @@ published: October 9, 2023
 authors: [quansight]
 description: 'Many of today’s emerging generative AI products and tools would not be possible without a vast array of open source tools and open source communities upon which generative AI is built.'
 category: [Artificial Intelligence, Open Source Software]
+tags: ['AI', 'Generative AI made possible by Open source']
 featuredImage:
   src: /posts/generative-ai-made-possible-by-a-mountain-of-open-source/Generative-AI.jpg
   alt: 'Generative AI: Made Possible by a Mountain of Open Source'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Generative AI: Made Possible by a Mountain of Open Source'
+banner: []
 ---
 
 ChatGPT, Claude, Bard, WatsonX and many other products and tools would not be possible without a vast array of open source tools and open source communities upon which generative AI is built.
@@ -29,6 +28,8 @@ In this post, we have two goals: the first is to emphasize the immense open sour
 This diagram illustrates the myriad of open source technologies underlying modern generative AI. As we explore the various levels in the diagram, we want to make clear that we’re not suggesting the tools on each level are _directly dependent_ on all of the tools at lower levels. Instead, we are calling out how the tools, models, and products at each level are dependent on _some_ projects in the categories of each layer beneath it, even if they’re not dependent on the _specific_ projects we mention.
 
 In particular, since Quansight is a scientific Python consultancy, we’ve focused heavily on Python tools and libraries often used together for AI/ML applications, and we’ve marked in the diagram the projects that we maintain or have significant expertise with. But, the ecosystem of open source underlying generative AI is much broader than we can possibly show in one diagram.
+
+![Three mountain peaks at the top show generative AI for text, images, and audio. The diagram descends down to show the mountain layers and bedrock to illustrate the open source projects below.](/posts/generative-ai-made-possible-by-a-mountain-of-open-source/Generative-AI-Diagram-2-scaled-qdh9qvhq9dt2oam415ozqpirx95zcqyfo2a5w50ffo.jpg)
 
 **Starting from the bottom row of the diagram and moving upward:**
 
@@ -68,4 +69,4 @@ If you’re looking for expertise on any level of the OSS mountain range that bu
 
 Or, if you’re interested in talking further about open source sustainability, we want to hear from you, too! We will point you to additional information and resources to help you connect your company sustainably with open source communities.
 
-[Get in Touch](/about-us#bookacallform)
+<p class="post-button post-button--center"><a href="/about-us#bookacallform">Get in Touch <svg viewBox="-5 -5 20 20" width="20" height="20" aria-hidden="true"><polygon points="2,2 8,5 2,8" fill="currentColor" /></svg></a></p>

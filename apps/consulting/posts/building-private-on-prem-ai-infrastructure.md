@@ -4,15 +4,16 @@ published: October 25, 2024
 authors: [quansight]
 description: 'There are many reasons to keep your AI infrastructure on-prem. These range from cost concerns (GPUs in the cloud get expensive fast) to organizational policies to data privacy and regulatory concerns'
 category: [Artificial Intelligence, 'Infrastructure & HPC']
+tags: ['AI', 'AI infrastructure', 'Innovation']
 featuredImage:
   src: /posts/building-private-on-prem-ai-infrastructure/Nebari-slurm-logo-2.png
   alt: 'Building Private On-Prem AI Infrastructure'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Building Private On-Prem AI Infrastructure'
+banner:
+  - src: /posts/building-private-on-prem-ai-infrastructure/Nebari_slurm-logo3-200x93.png
+    alt: ''
+  - src: /posts/building-private-on-prem-ai-infrastructure/Nebari-Logo-White-Bg.svg
+    alt: 'Image of the Nebari logo'
 ---
-
-![Image of the Nebari logo](/posts/building-private-on-prem-ai-infrastructure/Nebari-Logo-White-Bg.svg)
 
 _Leverage Nebari-Slurm to simplify deployment and management_
 

@@ -11,6 +11,7 @@ category:
     PyData Ecosystem,
     Scalable Computing,
   ]
+tags: ['Qhub']
 featuredImage:
   src: /posts/announcing-qhub/qhub-img-1.png
   alt: ''

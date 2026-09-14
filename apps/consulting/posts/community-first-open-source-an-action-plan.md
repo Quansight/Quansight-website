@@ -4,12 +4,11 @@ published: June 21, 2024
 authors: [dharhas-pothina]
 description: 'Quansight CTO Dharhas Pothina is here to discuss an action plan for achieving community-driven open source. What is Community-first Open'
 category: [Open Source Software]
+tags: ['Community-First Open Source', 'Open Source']
 featuredImage:
   src: /posts/community-first-open-source-an-action-plan/Community-First-OS-Dharhas-Thumbnail.png
   alt: 'Community-First Open Source: An Action Plan!'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Community-First Open Source: An Action Plan!'
+banner: []
 ---
 
 _Quansight CTO Dharhas Pothina is here to discuss an action plan for achieving community-driven open source._
@@ -23,6 +22,8 @@ Most open source software (OSS) projects our readers work on are community-first
 **Company-backed open source** is created or maintained primarily by a single entity or sometimes a small handful of entities. An excellent example of this is [TensorFlow](https://www.tensorflow.org/), which is built and maintained by Google. Although it is open source, Google drives its direction. Nothing is inherently wrong with that, and there are some advantages to being company-backed open source. For example, you have fast iteration cycles because your decision-making process is quick. You don’t have to find consensus, and you can readily get institutional support, dedicate funds, and resources.
 
 **Community-driven open source** is guided, developed, and governed by a community of developers. JupyterLab, NumPy, and similar projects are community-driven. Community-driven open source has many advantages, but it also has disadvantages; it’s just a different flavor of open source.
+
+![An image showing a hierarchy or progression of community roles, presented in a simple diagram format. From left to right, it lists: 1. Enthusiasts 2. Users 3. Advocates 4. Contributors 5. Maintainers & Sustainers The roles are connected by right-pointing chevron symbols, suggesting a progression or increasing level of involvement from left to right. The chevrons connecting the first three roles are yellow, while the one connecting the last two is light purple.](/posts/community-first-open-source-an-action-plan/Community-First-OS-Dharhas-1.png)
 
 ## Who’s who in the Zoo?
 
@@ -172,7 +173,7 @@ Those habits get built over time, so expect this to be a process. Expect this to
 
 Transitioning to a community-driven open source model requires a clear vision, defined values, and a solid governance structure. By sharing our roadmap, we hope that others can navigate this transition successfully. While challenging, the long-term benefits for the community and the project outweigh the effort.
 
-![Thank You! Guiding User Journeys principles Core values Vision board Project management foundations License and CoC Message and brand Repository management Communication channels Governance Enable contributions Roadmap and releases Contributor & maintainer guidelines.](/posts/community-first-open-source-an-action-plan/Community-First-OS-Dharhas-7.png)
+<p class="post-image"><img src="/posts/community-first-open-source-an-action-plan/Community-First-OS-Dharhas-7.png" alt="Thank You! Guiding User Journeys principles Core values Vision board Project management foundations License and CoC Message and brand Repository management Communication channels Governance Enable contributions Roadmap and releases Contributor &amp; maintainer guidelines." style="width:90%" loading="lazy" /></p>
 
 ## Acknowledgements:
 

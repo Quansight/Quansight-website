@@ -4,12 +4,13 @@ published: October 5, 2023
 authors: [kshiteej-kalambarkar]
 description: 'This post discusses the technical details of some recent collaborative Quansight/Meta contributions to the torch.func submodule of PyTorch.'
 category: [Artificial Intelligence]
+tags: ['PyTorch 2.0', 'Quansight', "Quansight's Contributions to torch.func"]
 featuredImage:
   src: /posts/pytorch-2-0-quansights-contributions-to-torch-func/PyTorch-2.0.jpg
   alt: 'PyTorch 2.0: Quansight’s Contributions to torch.func'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'PyTorch 2.0: Quansight’s Contributions to torch.func'
+banner:
+  - src: /posts/pytorch-2-0-quansights-contributions-to-torch-func/Pytorch-logo.svg
+    alt: 'Image of the PyTorch logo'
 ---
 
 _See our recent enhancements to the `torch.func` module of the PyTorch codebase_
@@ -222,4 +223,4 @@ This project was yet another instance of the tight collaboration between Quansig
 
 As we noted above, in addition to working directly on PyTorch, Quansight also offers support services to assist you with your use of PyTorch. Check out our [PyTorch Support page](/pytorch-services) or reach out to us for more information.
 
-[Contact Us](/pytorch-services#bookacallform)
+<p class="post-button post-button--center"><a href="/pytorch-services#bookacallform">Contact Us <svg viewBox="-5 -5 20 20" width="20" height="20" aria-hidden="true"><polygon points="2,2 8,5 2,8" fill="currentColor" /></svg></a></p>

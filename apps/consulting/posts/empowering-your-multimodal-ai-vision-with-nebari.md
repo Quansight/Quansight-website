@@ -4,12 +4,13 @@ published: December 20, 2024
 authors: [dillon-roach]
 description: 'As someone who loves to tinker with the latest open models,  I know the joy and hassle of getting from The Release Post to the first working inference call.'
 category: [Artificial Intelligence, 'Infrastructure & HPC']
+tags: ['AI', 'Innovation', 'Multimodal AI Vision', 'Nebari']
 featuredImage:
   src: /posts/empowering-your-multimodal-ai-vision-with-nebari/2024.12-Empowering-Your-Multimodal-AI-Vision-With-Nebari-Dillon-Roach-Quansight-Consulting-Thumbnail.jpg
   alt: 'Empowering Your Multimodal AI Vision With Nebari'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Empowering Your Multimodal AI Vision With Nebari'
+banner:
+  - src: /posts/empowering-your-multimodal-ai-vision-with-nebari/Nebari-Logo-White-Bg.svg
+    alt: 'Image of the Nebari logo'
 ---
 
 As someone who loves to tinker with the latest open models, I know the joy and hassle of getting from The Release Post to the first working inference call. As the scale and complexity of these tools grow, finding a flexible, cost-efficient environment to run them becomes critical. Even more so if you’re in charge of bringing these tools to the rest of your organization. So, when I recently read about two excellent new vision language models, I knew our company’s Nebari instance would be a great way to try them out.

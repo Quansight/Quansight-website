@@ -4,12 +4,13 @@ published: November 8, 2023
 authors: [quansight]
 description: 'Join us in a chat with Philip Meier, one of the core developers of Ragna, as we delve into its roots and development journey.'
 category: [Artificial Intelligence]
+tags: ['Open Source RAG-based AI Orchestration Framework', 'Ragna']
 featuredImage:
   src: /posts/interview-launching-ragna-the-open-source-rag-based-ai-orchestration-framework/Interview-Launching-Ragna.jpg
   alt: 'Interview: Launching Ragna, the Open Source RAG-based AI Orchestration Framework'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Interview: Launching Ragna, the Open Source RAG-based AI Orchestration Framework'
+banner:
+  - src: /posts/interview-launching-ragna-the-open-source-rag-based-ai-orchestration-framework/Ragna-Logo-Name-03.svg
+    alt: 'Image of the Ragna logo'
 ---
 
 Join us in a chat with Philip Meier, one of the core Ragna developers, as we delve into its roots and development journey.
@@ -137,4 +138,4 @@ We’d love to hear your [thoughts and feedback](https://github.com/Quansight/ra
 
 If you’re using or just getting started with generative AI and need help building and deploying capabilities across your organization, Quansight can help. See our [LLM Services](/llm-services) for more information or get in touch with the button below.
 
-[Contact Us](/llm-services#bookacallform)
+<p class="post-button post-button--center"><a href="/llm-services#bookacallform">Contact Us <svg viewBox="-5 -5 20 20" width="20" height="20" aria-hidden="true"><polygon points="2,2 8,5 2,8" fill="currentColor" /></svg></a></p>

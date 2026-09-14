@@ -4,31 +4,32 @@ published: August 2, 2023
 authors: [andrew-fulton]
 description: 'In this post, we walk you through how Quansight helped a banking client through the process of scaling Python DataFrame calculations in a real-life scenario.'
 category: [Case Studies]
+tags: ['Python', 'Scaling Python']
 featuredImage:
   src: /posts/scaling-python-banking-edition/Scaling-Python.jpg
   alt: 'Scaling Python: The Banking Edition'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Scaling Python: The Banking Edition'
+banner:
+  - src: /posts/scaling-python-banking-edition/Heavy.ai-logo.svg
+    alt: 'Image of the HEAVY.AI logo'
+  - src: /posts/scaling-python-banking-edition/Argo.svg
+    alt: 'Image of the Argo logo'
+  - src: /posts/scaling-python-banking-edition/Pytorch-logo.svg
+    alt: 'Image of the PyTorch logo'
+  - src: /posts/scaling-python-banking-edition/TensorFlow-logo.svg
+    alt: 'Image of the TensorFlow logo'
+  - src: /posts/scaling-python-banking-edition/Numba-logo.svg
+    alt: 'Image of the Numba logo'
+  - src: /posts/scaling-python-banking-edition/Prefect-logo.svg
+    alt: 'Image of the Prefect logo'
+  - src: /posts/scaling-python-banking-edition/Rapids-logo.svg
+    alt: 'Image of the Rapids logo'
+  - src: /posts/scaling-python-banking-edition/Blazing-SQL-logo.svg
+    alt: 'Image of the BlazingSQL logo'
+  - src: /posts/scaling-python-banking-edition/Dask-logo-color.svg
+    alt: 'Image of the Dask logo'
+  - src: /posts/scaling-python-banking-edition/cuDF-logo.svg
+    alt: 'Image of cuDF (RAPIDS) logo including the phrase "The dataframe library for GPU data science"'
 ---
-
-![Image of the Argo logo](/posts/scaling-python-banking-edition/Argo.svg)
-
-![Image of the PyTorch logo](/posts/scaling-python-banking-edition/Pytorch-logo.svg)
-
-![Image of the TensorFlow logo](/posts/scaling-python-banking-edition/TensorFlow-logo.svg)
-
-![Image of the Numba logo](/posts/scaling-python-banking-edition/Numba-logo.svg)
-
-![Image of the Prefect logo](/posts/scaling-python-banking-edition/Prefect-logo.svg)
-
-![Image of the Rapids logo](/posts/scaling-python-banking-edition/Rapids-logo.svg)
-
-![Image of the BlazingSQL logo](/posts/scaling-python-banking-edition/Blazing-SQL-logo.svg)
-
-![Image of the Dask logo](/posts/scaling-python-banking-edition/Dask-logo-color.svg)
-
-![Image of cuDF (RAPIDS) logo including the phrase "The dataframe library for GPU data science"](/posts/scaling-python-banking-edition/cuDF-logo.svg)
 
 _This post is based off of a talk given at PyData NYC 2022. You can watch the talk here: [Scaling Python: Bank Edition](https://www.youtube.com/watch?v=tbqgsM6iGng)._
 
@@ -389,4 +390,4 @@ To review the overall project, we first looked into using GPUs to solve this pro
 
 If you have questions about this post or would like to learn more about ways Quansight can help you work through a similar scenario at your organization, complete a contact form and we’ll be in touch.
 
-[Contact Us](/about-us#bookacallform)
+<p class="post-button post-button--center"><a href="/about-us#bookacallform">Contact Us <svg viewBox="-5 -5 20 20" width="20" height="20" aria-hidden="true"><polygon points="2,2 8,5 2,8" fill="currentColor" /></svg></a></p>

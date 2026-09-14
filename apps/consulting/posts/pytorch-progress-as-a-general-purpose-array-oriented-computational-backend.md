@@ -4,12 +4,13 @@ published: May 31, 2024
 authors: [quansight]
 description: 'This post was created from Travis Oliphant’s keynote at PyTorch Conference 2023. The full recording is linked below. In recent'
 category: [Artificial Intelligence]
+tags: ['General-Purpose Array-Oriented Computational Backend', 'PyTorch']
 featuredImage:
   src: /posts/pytorch-progress-as-a-general-purpose-array-oriented-computational-backend/Travis-Oliphant_-PyTorch-Conference-Keynote-fix.png
   alt: 'PyTorch Progress as a General-Purpose Array-Oriented Computational Backend'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'PyTorch Progress as a General-Purpose Array-Oriented Computational Backend'
+banner:
+  - src: /posts/pytorch-progress-as-a-general-purpose-array-oriented-computational-backend/Hero-Illustration-transparent.svg
+    alt: ''
 ---
 
 _This post was created from Travis Oliphant’s keynote at PyTorch Conference 2023. The full recording is linked below._

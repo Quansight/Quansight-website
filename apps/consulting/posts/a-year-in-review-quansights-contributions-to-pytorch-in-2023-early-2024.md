@@ -4,12 +4,19 @@ published: September 11, 2024
 authors: [andrew-james]
 description: '2023 will be remembered as the year when AI and LLMs took the world by storm. PyTorch took center stage during this revolution due to the rise of torch.compile. The combination of having a fully flexible eager execution model, paired with a compiler with a rather flexible tracer that is able to understand complex Python programs semantically, has certainly been one of the core components fueling these advances.'
 category: [Artificial Intelligence]
+tags:
+  [
+    'AI',
+    'Building AI Document Interrogation Apps with Open Source Tools',
+    'Open Source',
+    'Ragna',
+  ]
 featuredImage:
   src: /posts/a-year-in-review-quansights-contributions-to-pytorch-in-2023-early-2024/1_VSQ0XEywxSgZBwW05GsZtw.png
   alt: 'PyTorch logo'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'A Year in Review: Quansight’s Contributions to PyTorch in 2023 (& Early 2024)'
+banner:
+  - src: /posts/a-year-in-review-quansights-contributions-to-pytorch-in-2023-early-2024/Pytorch-logo.svg
+    alt: 'Image of the PyTorch logo'
 ---
 
 2023 will be remembered as the year when AI and LLMs took the world by storm. PyTorch took center stage during this revolution due to the rise of `torch.compile`. The combination of having a fully flexible eager execution model, paired with a compiler with a rather flexible tracer that is able to understand complex Python programs semantically, has certainly been one of the core components fueling these advances.

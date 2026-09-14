@@ -4,12 +4,13 @@ published: October 6, 2023
 authors: [andrew-james]
 description: 'This post presents Quansight work implementing new block sparse row (BSR) kernels for sparse matrix multiplication in PyTorch 2.1.'
 category: [Artificial Intelligence]
+tags: ['BSR Sparse Matrix Multiplication', 'PyTorch 2.1', 'Quansight']
 featuredImage:
   src: /posts/pytorch-2-1-quansights-improvements-to-bsr-sparse-matrix-multiplication/PyTorch-2.1.jpg
   alt: 'PyTorch 2.1: Quansight’s Improvements to BSR Sparse Matrix Multiplication'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'PyTorch 2.1: Quansight’s Improvements to BSR Sparse Matrix Multiplication'
+banner:
+  - src: /posts/pytorch-2-1-quansights-improvements-to-bsr-sparse-matrix-multiplication/Pytorch-logo.svg
+    alt: 'Image of the PyTorch logo'
 ---
 
 Check out our recent work implementing accelerated block sparse row multiplication kernels.
@@ -152,4 +153,4 @@ This work would not have been possible without the close collaboration between Q
 
 As we noted above, in addition to contributing directly to PyTorch, Quansight also provides support services to assist clients with their use of PyTorch. Check out our [PyTorch Support page](/pytorch-services) or reach out to us for more information.
 
-[Contact Us](/pytorch-services#bookacallform)
+<p class="post-button post-button--center"><a href="/pytorch-services#bookacallform">Contact Us <svg viewBox="-5 -5 20 20" width="20" height="20" aria-hidden="true"><polygon points="2,2 8,5 2,8" fill="currentColor" /></svg></a></p>

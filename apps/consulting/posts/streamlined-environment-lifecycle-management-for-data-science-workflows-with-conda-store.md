@@ -4,12 +4,17 @@ published: April 11, 2024
 authors: [dharhas-pothina]
 description: '“You will not be able to succeed as a company unless you leverage open source effectively.” Dharhas Pothina, Quansight CTO'
 category: [Packaging]
+tags:
+  [
+    'Conda-store',
+    'Environment Lifecycle Management for Data Science Workflows with conda-store',
+  ]
 featuredImage:
   src: /posts/streamlined-environment-lifecycle-management-for-data-science-workflows-with-conda-store/dharhas_pothina_conda_store.jpg
   alt: 'The image shows a photo of Dharhas Pothina, and the conda-store logo.'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Streamlined Environment Lifecycle Management for Data Science Workflows with conda-store'
+banner:
+  - src: /posts/streamlined-environment-lifecycle-management-for-data-science-workflows-with-conda-store/Conda-Store-Logo-Name-02.svg
+    alt: 'Image of the conda-store logo'
 ---
 
 > You will not be able to succeed as a company unless you leverage open source effectively.

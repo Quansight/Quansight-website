@@ -5,6 +5,7 @@ authors: [tony-fast]
 description: >
   At Quansight, we’ve been hosting a series of live streams that feature our talented open source developers talking about the software they contribute to and the communities around them. During a recent quirkshop our incredible JupyterLab developers got together to discuss the upcoming major version changes to JupyterLab. We discussed the toil that core developers are investing to improve the experience of JupyterLab not only for developers but for users as well.
 category: [Jupyter, Open Source Software]
+tags: ['JupyterLab 3.0']
 featuredImage:
   src: /posts/why-we-are-excited-about-jupyterlab-3-0-dynamic-extensions/lab_logo_tng.png
   alt: 'JupyterLab logo'

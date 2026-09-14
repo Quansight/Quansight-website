@@ -4,9 +4,10 @@ published: April 25, 2025
 authors: [quansight]
 description: 'How Quansight Collaborated with Leading Financial Institutions to Enhance Analytical Performance Through AI'
 category: [Case Studies, Artificial Intelligence]
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Advancing Portfolio Asset Management with AI Integration | A Case Study'
+tags: ['AI', 'Analytical Performance', 'Innovation']
+banner:
+  - src: /posts/advancing-portfolio-asset-management-with-ai-integration-a-case-study/LLMs-Services-05.svg
+    alt: ''
 ---
 
 In finance, milliseconds can impact millions of dollars. The institutions that thrive in this high-paced environment are those that know how to quickly turn data into action. For institutions managing vast portfolios, the integration of AI has shifted from a future ambition to an operational necessity. Yet, for many, the path from aspiration to execution remains unclear.

@@ -4,15 +4,16 @@ published: November 29, 2024
 authors: [quansight]
 description: 'A Conversation with Ralf Gommers Exploring Governance, Growth, and Open Source Insights'
 category: [Numerical Computing]
+tags: ['Innovation', 'NumPy', 'Open Source Expertise', 'Open Source Software']
 featuredImage:
   src: /posts/lessons-learned-from-numpys-journey/Ralf-Gommers.png
   alt: "A snowy mountain landscape with a clear blue sky in the background. The text 'Lessons Learned from NumPy's Journey with Ralf Gommers' is prominently displayed, and an image of Ralf Gommers smiling is placed in the foreground."
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Lessons Learned from NumPy’s Journey'
+banner:
+  - src: /posts/lessons-learned-from-numpys-journey/numpy-1.png
+    alt: ''
+  - src: /posts/lessons-learned-from-numpys-journey/QuansightLabs_logo_V2.png
+    alt: ''
 ---
-
-![](/posts/lessons-learned-from-numpys-journey/QuansightLabs_logo_V2.png)
 
 _A Conversation with Ralf Gommers Exploring Governance, Growth, and Open Source Insights_
 

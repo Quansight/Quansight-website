@@ -4,6 +4,7 @@ published: December 18, 2020
 authors: [pamela-wadhwa]
 description: 'This notebook is designed to help you learn how to make apps in Panel in about 15 minutes. Screenshots of cell outputs are included for convenience below, but it is strongly recommended that you use the interactive Binder version (takes 1-2 minutes to load) or by cloning the repo and running locally.'
 category: [Training, Data Visualization, Jupyter]
+tags: ['ipywidgets', 'Panel and ipywidgets Ecosystems']
 featuredImage:
   src: /posts/working-across-panel-and-ipywidgets-ecosystems/panellogo4x3.png
   alt: 'Panel logo'

@@ -4,12 +4,13 @@ published: January 10, 2025
 authors: [quansight]
 description: 'New features, enhanced security, cost efficiency — read all about it.'
 category: ['Infrastructure & HPC']
+tags: ['AI', 'Innovation', 'Multimodal AI Vision', 'Nebari']
 featuredImage:
   src: /posts/recent-nebari-updates/Nebari_Featured_Image.png
   alt: 'Recent Nebari Updates'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Recent Nebari Updates'
+banner:
+  - src: /posts/recent-nebari-updates/Nebari-Logo-White-Bg.svg
+    alt: 'Image of the Nebari logo'
 ---
 
 _New features, enhanced security, cost efficiency — read all about it._

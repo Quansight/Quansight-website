@@ -4,6 +4,13 @@ published: April 19, 2022
 authors: [dharhas-pothina]
 description: 'At Quansight, we use the top four Python dashboarding tools and clients often ask which one we recommend. Here’s our breakdown of each and why you might choose one over another.'
 category: [Data Visualization]
+tags:
+  [
+    'dashboarding',
+    'interactive_data_visualization',
+    'Python_dashboarding_tools',
+    'visualization',
+  ]
 featuredImage:
   src: /posts/dash-voila-panel-streamlit-our-thoughts-on-the-big-four-dashboarding-tools/big-four-img-3.png
   alt: 'A mind map/network map of numerous open source projects. napari, vispy, glumpy, pylet, GR Framework, mayavi, galry, visvis clustered around OpenGL, in sage green. pythreejs, bqplot, bokeh, toyplot, plotly, cufflinks, lighting, ipyvolume, ipyleaflet clustered aroud javascript in orange. d3po, vincent, vega, vega-lite, altair, mpld3 clustered around d3js in salmon. hvplot, pandas, yt, glueviz, seaborn, plotnine, ggpy, scikit-plot, yellowbrick, networkx, basemap, cartopy, geoviews clustered around matplotlib in light blue. vaex and datashader in dark blue. graphviz and graph-tool in aquamarine, connected to networkx. holoviews and panel in orange, connected to bokeh, datashader, matplotlib. pygal, chaco and pyqtgraph standing alone, in gray. vispy connected to javascript. javascript connected to d3js'

@@ -4,12 +4,13 @@ published: March 28, 2025
 authors: [dillon-roach]
 description: 'Generative AI is everywhere, and if one thing’s clear by now, it’s this: These models aren’t going away any time soon. Sorting marketing hype from actual technology can lead to disillusionment and skepticism. These aren’t ‘magic thinking machines’… And yet, they are still incredibly useful when used well. So, what are some essential things to keep in mind when you’re dealing with this evolving technology? Let’s break it down.'
 category: [Artificial Intelligence]
+tags: ['AI', 'GenAI', 'Innovation', 'LLM']
 featuredImage:
   src: /posts/genai-things-you-need-to-know-that-your-parents-didnt-teach-you/GenAI-Things-You-Need-to-Know-That-Your-Parents-Didnt-Teach-You-3.png
   alt: 'GenAI: Things You Need to Know (That Your Parents Didn’t Teach You)'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'GenAI: Things You Need to Know (That Your Parents Didn’t Teach You)'
+banner:
+  - src: /posts/genai-things-you-need-to-know-that-your-parents-didnt-teach-you/llms-08.svg
+    alt: ''
 ---
 
 Generative AI is everywhere, and if one thing’s clear by now, it’s this: These models aren’t going away any time soon. Sorting marketing hype from actual technology can lead to disillusionment and skepticism. These aren’t ‘magic thinking machines’… And yet, they are still incredibly useful when used well. So, what are some essential things to keep in mind when you’re dealing with this evolving technology? Let’s break it down.

@@ -4,12 +4,13 @@ published: April 18, 2025
 authors: [dillon-roach]
 description: 'Building an Open-Source Framework Without the Internet'
 category: [Artificial Intelligence]
+tags: ['LLM', 'Local Deep Research', 'Open Source Frameworks']
 featuredImage:
   src: /posts/anatomy-of-a-local-pdf-deep-research-pipeline/Anatomy-of-a-Local-PDF-Deep-Research-Pipeline-2.png
   alt: 'Anatomy of a Local PDF ‘Deep Research’ Pipeline'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Anatomy of a Local PDF ‘Deep Research’ Pipeline'
+banner:
+  - src: /posts/anatomy-of-a-local-pdf-deep-research-pipeline/LLMs-Services-05.svg
+    alt: ''
 ---
 
 ## Local Deep Research, No Internet Required

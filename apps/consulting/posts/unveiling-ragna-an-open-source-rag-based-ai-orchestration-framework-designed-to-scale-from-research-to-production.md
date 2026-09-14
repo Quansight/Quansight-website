@@ -4,12 +4,13 @@ published: October 31, 2023
 authors: [dharhas-pothina]
 description: 'Announcing Ragna, a new open source project from Quansight designed to allow organizations to explore the power of Retrieval-Augmented Generation (RAG) based AI tools.'
 category: [Artificial Intelligence]
+tags: ['Open Source RAG-based AI Orchestration Framework', 'Ragna']
 featuredImage:
   src: /posts/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production/Unveiling-Ragna.jpg
   alt: 'Unveiling Ragna: An Open Source RAG-based AI Orchestration Framework Designed to Scale From Research to Production'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Unveiling Ragna: An Open Source RAG-based AI Orchestration Framework Designed to Scale From Research to Production'
+banner:
+  - src: /posts/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production/Ragna-Logo-Name-03.svg
+    alt: 'Image of the Ragna logo'
 ---
 
 ![Image of the Ragna logo](/posts/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production/Ragna-logo-1000x500px-qeor71cpw39xlo1x886bdkcazk03vytxhmpyd5epiw.jpg)
@@ -104,4 +105,4 @@ If you need someone to help you explore generative AI, build and deploy capabili
 
 Thanks for reading! ⛵
 
-[Contact Us](/llm-services#bookacallform)
+<p class="post-button post-button--center"><a href="/llm-services#bookacallform">Contact Us <svg viewBox="-5 -5 20 20" width="20" height="20" aria-hidden="true"><polygon points="2,2 8,5 2,8" fill="currentColor" /></svg></a></p>

@@ -4,12 +4,19 @@ published: August 22, 2024
 authors: [quansight]
 description: 'A look at recent presentations on AI, RAG, and Ragna by Quansight’s staff. “For playing around, Generative AI is definitely'
 category: [Artificial Intelligence]
+tags:
+  [
+    'AI',
+    'Building AI Document Interrogation Apps with Open Source Tools',
+    'Open Source',
+    'Ragna',
+  ]
 featuredImage:
   src: /posts/ragna-in-action-building-ai-document-interrogation-apps-with-open-source-tools/Ragna_in_Action.png
   alt: 'The image shows the logo for Ragna. It features a stylized Viking ship with a dragon figurehead and three round shields along the side. The sail is depicted as a reddish-orange sheet of paper with white lines representing text. Below the ship, the word "RAGNA" is written in a modern, bold font. This logo symbolizes Ragna’s role in navigating and harnessing the power of data and AI technology, much like a Viking ship exploring and conquering new territories. The words, Ragna In Action appear below.'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Ragna in Action: Building AI Document Interrogation Apps with Open Source Tools'
+banner:
+  - src: /posts/ragna-in-action-building-ai-document-interrogation-apps-with-open-source-tools/Ragna-Logo-Name-03.svg
+    alt: 'Image of the Ragna logo'
 ---
 
 _A look at recent presentations on AI, RAG, and Ragna by Quansight’s staff._
