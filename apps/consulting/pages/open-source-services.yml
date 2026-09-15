@@ -86,6 +86,11 @@ blocks:
             right: "0%"
             bottom: "0%"
             left: "0%"
+        columnBoxes:
+          - borderRadius: "12px 12px 12px 12px"
+          - borderRadius: "12px 12px 12px 12px"
+          - borderRadius: "12px 12px 12px 12px"
+          - borderRadius: "12px 12px 12px 12px"
         gapPx: 48
   marginBottom: "2%"
   paddingRight: "4%"
@@ -142,6 +147,11 @@ blocks:
             right: "0%"
             bottom: "0%"
             left: "0%"
+        columnBoxes:
+          - borderRadius: "12px 12px 12px 12px"
+          - borderRadius: "12px 12px 12px 12px"
+          - borderRadius: "12px 12px 12px 12px"
+          - borderRadius: "12px 12px 12px 12px"
         gapPx: 48
   marginBottom: "5%"
   paddingRight: "4%"
@@ -181,6 +191,12 @@ blocks:
         backgroundColor: "#452392"
         textColor: "#FFFFFF"
         borderColor: "#452392"
+        borderWidthPx: 2.0
+        fontSizePx: 18
+        fontWeight: 600
+        textTransform: "capitalize"
+        padding: "25px 50px 25px 50px"
+        lineHeight: "14px"
         align: "center"
   paddingTop: "4%"
   rowGapPx: 143
@@ -240,13 +256,25 @@ blocks:
         columns:
           - - type: icon-list
               items:
-                - "OSS development and release processes"
+                - text: "<strong>OSS development</strong> and release processes"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
           - - type: icon-list
               items:
-                - "Partner coordination and consortium design"
+                - text: "<strong>Partner coordination</strong> and consortium design"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
           - - type: icon-list
               items:
-                - "Open source project support and program management"
+                - text: "<strong>Open source project support</strong> and program management"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
         maxWidthPx: 1140
         gapPx: 100
   paddingTop: "1%"
@@ -260,13 +288,25 @@ blocks:
         columns:
           - - type: icon-list
               items:
-                - "Develop sustainable policies and processes  for OSS use, compliance, development, and participation"
+                - text: "<strong>Develop sustainable policies and processes </strong> for OSS use, compliance, development, and participation"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
           - - type: icon-list
               items:
-                - "Customized OSS training and upskilling"
+                - text: "<strong>Customized OSS training</strong> and upskilling"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
           - - type: icon-list
               items:
-                - "Measuring and evaluatingopen source programs and initiatives"
+                - text: "<strong>Measuring and evaluating</strong>open source programs and initiatives"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
         maxWidthPx: 1140
         gapPx: 100
   paddingTop: "1%"
@@ -280,13 +320,25 @@ blocks:
         columns:
           - - type: icon-list
               items:
-                - "Project management  and roadmap development"
+                - text: "<strong>Project management </strong> and roadmap development"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
           - - type: icon-list
               items:
-                - "OSS developer advocacy, developer experience, and community management"
+                - text: "<strong>OSS developer advocacy,</strong> developer experience, and community management"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
           - - type: icon-list
               items:
-                - "Licensing and compliance"
+                - text: "<strong>Licensing</strong> and compliance"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
         maxWidthPx: 1140
         gapPx: 100
   paddingTop: "1%"
@@ -300,13 +352,25 @@ blocks:
         columns:
           - - type: icon-list
               items:
-                - "Software audit   across your organization"
+                - text: "<strong>Software audit </strong> across your organization"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
           - - type: icon-list
               items:
-                - "Best practices to reduce risk and respond to emerging threats"
+                - text: "<strong>Best practices to reduce risk</strong> and respond to emerging threats"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
           - - type: icon-list
               items:
-                - "Fix security vulnerabilities in open source software"
+                - text: "<strong>Fix security vulnerabilities</strong> in open source software"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
         maxWidthPx: 1140
         gapPx: 100
   paddingTop: "1%"
@@ -320,13 +384,25 @@ blocks:
         columns:
           - - type: icon-list
               items:
-                - "Assessment and integration of Software Bill of Materials (SBOM)   from upstream suppliers"
+                - text: "<strong>Assessment and integration of Software Bill of Materials (SBOM) </strong> from upstream suppliers"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
           - - type: icon-list
               items:
-                - "Generate SBOM and license compliance reports,  documentation, and other related artifacts"
+                - text: "<strong>Generate SBOM and license compliance reports, </strong>documentation, and other related artifacts"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
           - - type: icon-list
               items:
-                - "And more —ask us about custom engagements"
+                - text: "<strong>And more</strong> —ask us about custom engagements"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-square-full\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M512 512H0V0h512v512z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 16
+              textColor: "#000000"
         maxWidthPx: 1140
         gapPx: 100
   paddingTop: "1%"
@@ -567,6 +643,12 @@ blocks:
               backgroundColor: "#FFFFFF"
               textColor: "#452392"
               borderColor: "#FFFFFF"
+              borderWidthPx: 2.0
+              fontSizePx: 18
+              fontWeight: 600
+              textTransform: "capitalize"
+              padding: "25px 50px 25px 50px"
+              lineHeight: "14px"
         paddingRight: "4%"
         paddingLeft: "4%"
         maxWidthPx: 574
@@ -576,10 +658,16 @@ blocks:
         width: 1122
         height: 889
         widthPercent: 85
+        heightPx: 500
+        objectFit: "fill"
+        borderRadius: "18px 0px 0px 18px"
   columnPaddings:
     - top: "5%"
     - top: "2%"
       left: "1%"
+  columnBoxes:
+    - null
+    - borderRadius: "18px 0px 0px 18px"
   gapPx: 0
 - type: columns
   columns:

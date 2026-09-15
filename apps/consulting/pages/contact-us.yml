@@ -38,6 +38,7 @@ blocks:
               width: 1122
               height: 889
               widthPercent: 100
+              heightPx: 500
         columnBackgrounds:
           - "#FAFAFF"
           - "#FAFAFF"
@@ -67,6 +68,7 @@ blocks:
               fontWeight: 600
               color: "#FFFFFF"
               lineHeight: "1em"
+              letterSpacing: "0.5px"
             - type: form
               name: "Mailing List Signup"
               fields:

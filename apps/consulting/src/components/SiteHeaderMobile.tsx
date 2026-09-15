@@ -100,7 +100,7 @@ export function SiteHeaderMobile({
               <a
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="block py-[1.6rem] px-[2rem] w-full text-[1.4rem] font-medium leading-[2rem] capitalize"
+                className="block py-[1.6rem] px-[2rem] w-full text-[1.4rem] font-medium leading-[2rem]"
               >
                 {item.text}
               </a>

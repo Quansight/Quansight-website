@@ -91,6 +91,16 @@ const rowGapPx = block.type === 'columns' ? (block.rowGapPx as number | undefine
 // it wins over the max-w-layout class on the same element.
 const maxWidthPx = block.type === 'columns' ? (block.maxWidthPx as number | undefined) : undefined;
 const maxWidthStyle = maxWidthPx ? `max-width:${maxWidthPx}px` : '';
+// A flex container's own rounded corners / border / min-height (see
+// extract_container_box): per column, and the row's own minimum height.
+type ColumnBox = { borderRadius?: string; borderWidth?: string; borderColor?: string; minHeight?: string };
+const columnBoxes = block.type === 'columns' ? ((block.columnBoxes as (ColumnBox | undefined)[] | undefined) ?? []) : [];
+const boxStyle = (box?: ColumnBox) => [
+  box?.borderRadius ? `border-radius:${box.borderRadius}` : '',
+  box?.borderWidth ? `border-style:solid;border-width:${box.borderWidth};border-color:${box.borderColor}` : '',
+  box?.minHeight ? `min-height:${box.minHeight}` : '',
+].filter(Boolean).join(';');
+const minHeightStyle = block.minHeight ? `min-height:${block.minHeight}` : '';
 // Explicit section padding (even all-zero) replaces the generic panel
 // padding guessed below for a colored full-bleed panel.
 const hasExplicitPadding = !!(block.paddingTop || block.paddingBottom || block.paddingLeft || block.paddingRight);
@@ -201,7 +211,7 @@ function isDarkBackground(hex: string): boolean {
       } ${
         isDarkBackground(soleBackground as string) ? '[&_.text-violet]:!text-white [&_.text-black]:!text-white' : ''
       }`}
-      style={[rowGapPx === undefined ? '' : `gap:${rowGapPx}px`, maxWidthStyle].filter(Boolean).join(';') || undefined}
+      style={[rowGapPx === undefined ? '' : `gap:${rowGapPx}px`, maxWidthStyle, boxStyle(columnBoxes[0]), minHeightStyle].filter(Boolean).join(';') || undefined}
     >
       {columns[0].map((childBlock) => (
         <BlockRenderer block={childBlock} />
@@ -220,7 +230,7 @@ function isDarkBackground(hex: string): boolean {
       // step in what should be one rectangle (careers' Subscribe box).
       columnBackgrounds.some(Boolean) ? 'h-full' : ''
     }`}
-    style={[rowStyle, maxWidthStyle, uniformBackground && !uniformToken ? `background-color:${uniformBackground}` : ''].filter(Boolean).join(';') || undefined}
+    style={[rowStyle, maxWidthStyle, minHeightStyle, uniformBackground && !uniformToken ? `background-color:${uniformBackground}` : ''].filter(Boolean).join(';') || undefined}
   >
     {columns.map((column, i) => {
       const rawBackground = columnBackgrounds[i];
@@ -244,6 +254,9 @@ function isDarkBackground(hex: string): boolean {
         columnPadding?.right ? `padding-right:${columnPadding.right}` : '',
         columnPadding?.bottom ? `padding-bottom:${columnPadding.bottom}` : '',
         columnPadding?.left ? `padding-left:${columnPadding.left}` : '',
+        boxStyle(columnBoxes[i]),
+        // A rounded column clips its own background to the corners.
+        columnBoxes[i]?.borderRadius ? 'overflow:hidden' : '',
       ].filter(Boolean).join(';');
       return (
         <div
@@ -309,6 +322,9 @@ function isDarkBackground(hex: string): boolean {
     fontWeight ? `font-weight:${fontWeight}` : '',
     !colorClass && color ? `color:${color}` : '',
     block.lineHeight ? `line-height:${block.lineHeight}` : '',
+    block.letterSpacing ? `letter-spacing:${block.letterSpacing}` : '',
+    block.textTransform ? `text-transform:${block.textTransform}` : '',
+    block.fontStyle ? `font-style:${block.fontStyle}` : '',
   ].filter(Boolean);
   const style = styleParts.length ? styleParts.join(';') : undefined;
   // Elementor sets alignment per heading widget too, and most of the
@@ -386,8 +402,12 @@ function isDarkBackground(hex: string): boolean {
     block.widthPercent ? `width:${block.widthPercent}%` : '',
     block.marginTop ? `margin-top:${block.marginTop}` : '',
     block.marginBottom ? `margin-bottom:${block.marginBottom}` : '',
-    block.border ? `border:${block.border}` : '',
+    block.borderWidth ? `border-style:solid;border-width:${block.borderWidth};border-color:${block.borderColor}` : '',
+    block.borderRadius ? `border-radius:${block.borderRadius}` : '',
     block.hoverScale ? `--hover-scale:${block.hoverScale}` : '',
+    block.letterSpacing ? `letter-spacing:${block.letterSpacing}` : '',
+    block.textTransform ? `text-transform:${block.textTransform}` : '',
+    block.fontStyle ? `font-style:${block.fontStyle}` : '',
   ].filter(Boolean);
   return (
     <div
@@ -413,10 +433,15 @@ function isDarkBackground(hex: string): boolean {
   const widthPercent = block.widthPercent as number | undefined;
   const opacity = block.opacity as number | undefined;
   const marginBottom = block.marginBottom as string | undefined;
+  // A fixed box height with object-fit (13 images sitewide) and rounded
+  // corners -- see convert_image.
   const styleParts = [
     widthPercent ? `width:${widthPercent}%` : '',
     opacity !== undefined ? `opacity:${opacity}` : '',
     marginBottom ? `margin-bottom:${marginBottom}` : '',
+    block.heightPx ? `height:${block.heightPx}px` : '',
+    block.objectFit ? `object-fit:${block.objectFit}` : '',
+    block.borderRadius ? `border-radius:${block.borderRadius}` : '',
   ].filter(Boolean);
   return (
     <img
@@ -424,7 +449,7 @@ function isDarkBackground(hex: string): boolean {
       alt={(block.alt as string) ?? ''}
       width={block.width as number | undefined}
       height={block.height as number | undefined}
-      class="max-w-full h-auto mx-auto"
+      class={`max-w-full mx-auto ${block.heightPx ? '' : 'h-auto'}`}
       style={styleParts.length ? styleParts.join(';') : undefined}
     />
   );
@@ -448,12 +473,20 @@ function isDarkBackground(hex: string): boolean {
       backgroundColor={block.backgroundColor as string | undefined}
       borderColor={block.borderColor as string | undefined}
       textColor={block.textColor as string | undefined}
+      borderWidthPx={block.borderWidthPx as number | undefined}
+      fontSizePx={block.fontSizePx as number | undefined}
+      fontWeight={block.fontWeight as number | undefined}
+      textTransform={block.textTransform as string | undefined}
+      letterSpacing={block.letterSpacing as string | undefined}
+      padding={block.padding as string | undefined}
+      borderRadius={block.borderRadius as string | undefined}
+      lineHeight={block.lineHeight as string | undefined}
     />
   </div>
 )}
 
 {block.type === 'icon' && (
-  <Icon svg={block.svg as string} />
+  <Icon svg={block.svg as string} size={(block.sizePx as number | undefined) ?? 32} color={block.color as string | undefined} />
 )}
 
 {block.type === 'divider' && (() => {
@@ -477,6 +510,9 @@ function isDarkBackground(hex: string): boolean {
     buttonText={block.buttonText as string | undefined}
     buttonUrl={block.buttonUrl as string | undefined}
     priceBackground={block.priceBackground as string | undefined}
+    headerBackground={block.headerBackground as string | undefined}
+    headingColor={block.headingColor as string | undefined}
+    headingItalic={block.headingItalic as boolean | undefined}
   />
 )}
 
@@ -498,7 +534,13 @@ function isDarkBackground(hex: string): boolean {
 )}
 
 {block.type === 'icon-list' && (
-  <IconList items={(block.items as string[]) ?? []} />
+  <IconList
+    items={(block.items as ({ text: string; icon?: string } | string)[]) ?? []}
+    iconColor={block.iconColor as string | undefined}
+    iconSizePx={block.iconSizePx as number | undefined}
+    textColor={block.textColor as string | undefined}
+    textSizePx={block.textSizePx as number | undefined}
+  />
 )}
 
 {block.type === 'image-box-grid' && (

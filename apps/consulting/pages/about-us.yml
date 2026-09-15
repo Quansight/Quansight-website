@@ -170,6 +170,7 @@ blocks:
         fontWeight: 600
         color: "#FFFFFF"
         lineHeight: "1em"
+        letterSpacing: "0.5px"
       - type: form
         name: "Mailing List Signup"
         fields:
@@ -315,6 +316,15 @@ blocks:
                   bottom: "50px"
                   left: "50px"
               maxWidthPx: 1200
+              columnBoxes:
+                - borderWidth: "0px 1px 0px 0px"
+                  borderColor: "#FFFFFF"
+                - borderWidth: "0px 1px 0px 0px"
+                  borderColor: "#FFFFFF"
+                - borderWidth: "0px 1px 0px 0px"
+                  borderColor: "#FFFFFF"
+                - borderWidth: "0px 00px 0px 0px"
+                  borderColor: "#FFFFFF"
               gapPx: 0
         paddingTop: "40px"
         maxWidthPx: 1200
@@ -346,6 +356,7 @@ blocks:
               width: 1122
               height: 889
               widthPercent: 100
+              heightPx: 500
         columnBackgrounds:
           - "#FAFAFF"
           - "#FAFAFF"

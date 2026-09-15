@@ -514,6 +514,7 @@ blocks:
               width: 1122
               height: 889
               widthPercent: 100
+              heightPx: 500
         columnBackgrounds:
           - "#FAFAFF"
           - "#FAFAFF"

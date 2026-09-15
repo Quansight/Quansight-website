@@ -33,7 +33,11 @@ blocks:
               width: 200
               height: 200
         maxWidthPx: 1300
+        minHeight: "30vh"
         gapPx: 30
+  columnBoxes:
+    - minHeight: "30vh"
+  minHeight: "30vh"
   paddingTop: "7%"
   paddingRight: "10%"
   paddingBottom: "4%"
@@ -91,7 +95,14 @@ blocks:
             bottom: "0%"
             left: "2%"
         maxWidthPx: 1400
+        columnBoxes:
+          - minHeight: "300px"
+          - minHeight: "300px"
+        minHeight: "0vh"
         gapPx: 50
+  columnBoxes:
+    - minHeight: "0vh"
+  minHeight: "0vh"
   paddingTop: "4%"
   paddingBottom: "4%"
   maxWidthPx: 1400
@@ -147,7 +158,14 @@ blocks:
             bottom: "0%"
             left: "2%"
         maxWidthPx: 1400
+        columnBoxes:
+          - minHeight: "300px"
+          - minHeight: "300px"
+        minHeight: "0vh"
         gapPx: 50
+  columnBoxes:
+    - minHeight: "0vh"
+  minHeight: "0vh"
   paddingTop: "4%"
   paddingBottom: "4%"
   maxWidthPx: 1400
@@ -194,7 +212,11 @@ blocks:
             left: "5%"
           - null
         maxWidthPx: 1400
+        minHeight: "0vh"
         gapPx: 0
+  columnBoxes:
+    - minHeight: "0vh"
+  minHeight: "0vh"
   maxWidthPx: 1400
 - type: columns
   columns:
@@ -227,7 +249,11 @@ blocks:
             left: "5%"
           - null
         maxWidthPx: 1400
+        minHeight: "0vh"
         gapPx: 0
+  columnBoxes:
+    - minHeight: "0vh"
+  minHeight: "0vh"
   marginTop: "02%"
   maxWidthPx: 1400
 - type: columns
@@ -327,6 +353,7 @@ blocks:
               width: 1122
               height: 889
               widthPercent: 100
+              heightPx: 500
         columnBackgrounds:
           - "#FAFAFF"
           - "#FAFAFF"

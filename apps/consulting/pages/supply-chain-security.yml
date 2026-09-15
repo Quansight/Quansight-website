@@ -53,8 +53,18 @@ blocks:
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
               borderColor: "#FFFFFF"
+              borderWidthPx: 2.0
+              fontSizePx: 18
+              fontWeight: 600
+              textTransform: "capitalize"
+              padding: "25px 50px 25px 50px"
+              lineHeight: "14px"
         paddingTop: "6%"
         rowGapPx: 20
+  columnBoxes:
+    - borderRadius: "2px 2px 2px 2px"
+      minHeight: "41vh"
+  minHeight: "41vh"
   marginTop: "4%"
   paddingRight: "3%"
   paddingLeft: "3%"
@@ -84,6 +94,12 @@ blocks:
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
               borderColor: "#FFFFFF"
+              borderWidthPx: 2.0
+              fontSizePx: 18
+              fontWeight: 600
+              textTransform: "capitalize"
+              padding: "25px 50px 25px 50px"
+              lineHeight: "14px"
           - - type: image
               src: "/page-assets/supply-chain-security/Quansight-contact-02-02-02-1-1.svg"
               alt: ""

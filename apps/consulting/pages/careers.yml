@@ -144,6 +144,7 @@ blocks:
         fontWeight: 600
         color: "#FFFFFF"
         lineHeight: "1em"
+        letterSpacing: "0.5px"
       - type: form
         name: "Mailing List Signup"
         fields:

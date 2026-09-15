@@ -20,6 +20,16 @@ type ButtonLinkProps = {
   backgroundColor?: string;
   borderColor?: string;
   textColor?: string;
+  // The widget's own typography and box, when its CSS sets them (see
+  // extract_button_style); each overrides the class default below.
+  borderWidthPx?: number;
+  fontSizePx?: number;
+  fontWeight?: number;
+  textTransform?: string;
+  letterSpacing?: string;
+  padding?: string;
+  borderRadius?: string;
+  lineHeight?: string;
 };
 
 export const ButtonLink: FC<ButtonLinkProps> = ({
@@ -32,6 +42,14 @@ export const ButtonLink: FC<ButtonLinkProps> = ({
   backgroundColor,
   borderColor,
   textColor,
+  borderWidthPx,
+  fontSizePx,
+  fontWeight,
+  textTransform,
+  letterSpacing,
+  padding,
+  borderRadius,
+  lineHeight,
 }) => {
   // Real extracted hexes merge onto the site's actual small palette
   // (colorToken) so this renders shared `bg-violet`/`border-white`-style
@@ -64,6 +82,15 @@ export const ButtonLink: FC<ButtonLinkProps> = ({
         backgroundColor: bgToken ? undefined : backgroundColor,
         borderColor: borderToken ? undefined : borderColor,
         color: textToken ? undefined : textColor,
+        borderWidth:
+          isBordered && borderWidthPx ? `${borderWidthPx}px` : undefined,
+        fontSize: fontSizePx ? `${fontSizePx}px` : undefined,
+        fontWeight,
+        textTransform: textTransform as never,
+        letterSpacing,
+        padding,
+        borderRadius,
+        lineHeight,
       }}
     >
       {text}

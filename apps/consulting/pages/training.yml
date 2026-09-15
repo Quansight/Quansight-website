@@ -39,6 +39,9 @@ blocks:
               isTriangle: true
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
+              fontSizePx: 16
+              fontWeight: 700
+              padding: "25px 45px 25px 45px"
           - - type: heading
               text: "Corporate Curriculum Development"
               level: 2
@@ -60,6 +63,9 @@ blocks:
               isTriangle: true
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
+              fontSizePx: 16
+              fontWeight: 700
+              padding: "25px 45px 25px 45px"
         columnBackgrounds:
           - "#99C941"
           - "#A43A8F"
@@ -345,6 +351,7 @@ blocks:
               width: 1122
               height: 889
               widthPercent: 100
+              heightPx: 500
         columnBackgrounds:
           - "#FAFAFF"
           - "#FAFAFF"

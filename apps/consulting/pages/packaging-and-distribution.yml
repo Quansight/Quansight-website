@@ -291,12 +291,14 @@ blocks:
   columns:
     - - type: icon
         svg: "<svg id=\"Layer_1\" viewbox=\"0 0 28 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><style>.cls-1{fill:#a43a8f;stroke-width:0px;}</style></defs><path class=\"cls-1\" d=\"m9.73,1.84c.56-.07.49-.91-.14-.84C4.27,1.84,0,5.28,0,11.37c0,4.27,2.66,7.63,6.93,7.63,3.29,0,5.25-2.17,5.25-4.83s-1.61-4.2-4.55-5.04c-2.73-.7-4.76-.77-4.76-2.8,0-2.17,3.01-3.92,6.86-4.48Zm14.98,0c.63-.07.49-.91-.14-.84-5.32.84-9.59,4.2-9.59,10.22,0,4.34,2.66,7.77,6.93,7.77,3.36,0,5.25-2.17,5.25-4.83s-1.61-4.2-4.55-5.04c-2.73-.7-4.76-.77-4.76-2.8,0-2.17,3.01-3.92,6.86-4.48Z\"></path></svg>"
+        sizePx: 70
       - type: text
         html: "<p>“<a href=\"https://point72.com/cubist/\" rel=\"noopener\" target=\"_blank\">Point72 and Cubist</a> are committed to open source and to sponsoring organizations such as PyData and the Python Software Foundation. We are excited about the opportunities our partnership with Quansight may provide to solve packaging problems strategically and sustainably both for our own research teams and for conda-forge users generally.”</p>"
         sizePx: 18
         fontWeight: 500
         color: "#000000"
         align: "center"
+        fontStyle: "italic"
   columnBackgrounds:
     - "#EBEBEB"
   maxWidthPx: 1140
@@ -399,7 +401,16 @@ blocks:
             bottom: "0%"
             left: "2%"
         maxWidthPx: 1423
+        columnBoxes:
+          - minHeight: "380px"
+          - minHeight: "380px"
+          - minHeight: "380px"
+          - minHeight: "380px"
+        minHeight: "167px"
         gapPx: 50
+  columnBoxes:
+    - minHeight: "167px"
+  minHeight: "167px"
   paddingTop: "4%"
   paddingRight: "5%"
   paddingBottom: "3%"
@@ -414,6 +425,12 @@ blocks:
   backgroundColor: "#A43A8F"
   textColor: "#FFFFFF"
   borderColor: "#FFFFFF"
+  borderWidthPx: 2.0
+  fontSizePx: 18
+  fontWeight: 600
+  textTransform: "capitalize"
+  padding: "25px 50px 25px 50px"
+  lineHeight: "14px"
   align: "center"
 - type: columns
   columns:
@@ -440,6 +457,12 @@ blocks:
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
               borderColor: "#FFFFFF"
+              borderWidthPx: 2.0
+              fontSizePx: 18
+              fontWeight: 600
+              textTransform: "capitalize"
+              padding: "25px 50px 25px 50px"
+              lineHeight: "14px"
           - - type: image
               src: "/page-assets/packaging-and-distribution/Quansight-contact-02-02-02-1-1.svg"
               alt: ""

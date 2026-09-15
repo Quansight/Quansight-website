@@ -66,6 +66,9 @@ blocks:
               isBordered: false
               isTriangle: true
               textColor: "#452391"
+              fontSizePx: 18
+              fontWeight: 700
+              padding: "40px 0px 40px 0px"
           - - type: icon-box-grid
               items:
                 - title: "Algorithms, AI & Machine Learning"
@@ -80,6 +83,9 @@ blocks:
               isBordered: false
               isTriangle: true
               textColor: "#452391"
+              fontSizePx: 18
+              fontWeight: 700
+              padding: "40px 0px 40px 0px"
         columnWidths:
           - 50
           - 50
@@ -106,6 +112,9 @@ blocks:
               isBordered: false
               isTriangle: true
               textColor: "#452391"
+              fontSizePx: 18
+              fontWeight: 700
+              padding: "40px 0px 40px 0px"
           - - type: icon-box-grid
               items:
                 - title: "Jupyter Technologies"
@@ -120,6 +129,9 @@ blocks:
               isBordered: false
               isTriangle: true
               textColor: "#452391"
+              fontSizePx: 18
+              fontWeight: 700
+              padding: "40px 0px 40px 0px"
         columnWidths:
           - 50
           - 50
@@ -142,6 +154,9 @@ blocks:
                     isTriangle: true
                     backgroundColor: "#452392"
                     textColor: "#FFFFFF"
+                    fontSizePx: 16
+                    fontWeight: 700
+                    padding: "25px 44px 23px 45px"
                     align: "center"
               paddingTop: "45px"
               paddingRight: "45px"
@@ -172,6 +187,7 @@ blocks:
               width: 1122
               height: 889
               widthPercent: 100
+              heightPx: 500
         columnBackgrounds:
           - "#FAFAFF"
           - "#FAFAFF"

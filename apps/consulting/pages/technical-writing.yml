@@ -72,6 +72,12 @@ blocks:
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
               borderColor: "#FFFFFF"
+              borderWidthPx: 2.0
+              fontSizePx: 18
+              fontWeight: 600
+              textTransform: "capitalize"
+              padding: "25px 50px 25px 50px"
+              lineHeight: "14px"
           - - type: image
               src: "/page-assets/technical-writing/Quansight-contact-02-02-02-1-1.svg"
               alt: ""

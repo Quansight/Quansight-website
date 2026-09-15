@@ -81,6 +81,10 @@ blocks:
             right: "0%"
             bottom: "0%"
             left: "0%"
+        columnBoxes:
+          - borderRadius: "12px 12px 12px 12px"
+          - borderRadius: "12px 12px 12px 12px"
+          - borderRadius: "12px 12px 12px 12px"
         gapPx: 48
   marginBottom: "1%"
   paddingRight: "4%"
@@ -130,6 +134,10 @@ blocks:
             right: "0%"
             bottom: "0%"
             left: "0%"
+        columnBoxes:
+          - borderRadius: "12px 12px 12px 12px"
+          - borderRadius: "12px 12px 12px 12px"
+          - borderRadius: "12px 12px 12px 12px"
         gapPx: 48
   marginBottom: "1%"
   paddingRight: "4%"
@@ -230,6 +238,12 @@ blocks:
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
               borderColor: "#FFFFFF"
+              borderWidthPx: 2.0
+              fontSizePx: 18
+              fontWeight: 600
+              textTransform: "capitalize"
+              padding: "25px 50px 25px 50px"
+              lineHeight: "14px"
           - - type: image
               src: "/page-assets/ai-engineering/Quansight-contact-02-02-02-1-1.svg"
               alt: ""

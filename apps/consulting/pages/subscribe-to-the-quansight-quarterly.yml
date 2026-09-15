@@ -19,11 +19,13 @@ blocks:
                   fontWeight: 600
                   color: "#FFFFFF"
                   lineHeight: "1.1em"
+                  letterSpacing: "0.3px"
                 - type: text
                   html: "<p><span style=\"font-weight: 400;\">Latest news and updates from our team and the open source projects we work on.</span></p>"
                   sizePx: 22
                   color: "#FFFFFF"
                   lineHeight: "1.5em"
+                  letterSpacing: "-0.8px"
             rowGapPx: 35
           - type: form
             name: "New Form"
@@ -45,6 +47,7 @@ blocks:
                   fontWeight: 600
                   color: "#FFFFFF"
                   lineHeight: "1.1em"
+                  textTransform: "capitalize"
                 - type: social-icons
                   links:
                     - text: "Linkedin-in"

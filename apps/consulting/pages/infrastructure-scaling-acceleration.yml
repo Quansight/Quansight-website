@@ -152,6 +152,10 @@ blocks:
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
               borderColor: "#FFFFFF"
+              borderWidthPx: 2.0
+              fontSizePx: 16
+              fontWeight: 700
+              padding: "25px 45px 25px 45px"
           - - type: image
               src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-28-1.svg"
               alt: ""
@@ -299,6 +303,9 @@ blocks:
                     isBordered: false
                     isTriangle: true
                     textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    padding: "40px 0px 40px 0px"
                 - - type: image-box-grid
                     items:
                       - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-4-100x100.png"
@@ -310,6 +317,9 @@ blocks:
                     isBordered: false
                     isTriangle: true
                     textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    padding: "40px 0px 40px 0px"
               columnWidths:
                 - 33
                 - 33
@@ -344,6 +354,9 @@ blocks:
                     isBordered: false
                     isTriangle: true
                     textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    padding: "40px 0px 40px 0px"
                 - - type: image-box-grid
                     items:
                       - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-5-100x100.png"
@@ -355,6 +368,9 @@ blocks:
                     isBordered: false
                     isTriangle: true
                     textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    padding: "40px 0px 40px 0px"
                 - - type: image-box-grid
                     items:
                       - image: "/page-assets/infrastructure-scaling-acceleration/Simplified-Icons_Artboard-7-100x100.png"
@@ -366,6 +382,9 @@ blocks:
                     isBordered: false
                     isTriangle: true
                     textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    padding: "40px 0px 40px 0px"
               columnWidths:
                 - 33
                 - 33
@@ -442,6 +461,7 @@ blocks:
               width: 1122
               height: 889
               widthPercent: 100
+              heightPx: 500
         columnBackgrounds:
           - "#FAFAFF"
           - "#FAFAFF"

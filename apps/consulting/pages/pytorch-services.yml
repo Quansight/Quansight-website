@@ -134,22 +134,46 @@ blocks:
               isTriangle: true
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
+              fontSizePx: 16
+              fontWeight: 600
+              letterSpacing: "0.2px"
+              padding: "25px 45px 25px 45px"
               align: "center"
             - type: icon-list
               items:
-                - "NumPy, TorchVision & torch.func support in torch.compile"
+                - text: "NumPy, TorchVision &amp; torch.func support in torch.compile"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: icon-list
               items:
-                - "Specialized GPU kernels for Block and semi-structured sparse layouts."
+                - text: "Specialized GPU kernels for Block and semi-structured sparse layouts."
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: icon-list
               items:
-                - "Triton enhancements for GPU reductions & mixed-dtype matrix multiply"
+                - text: "Triton enhancements for GPU reductions &amp; mixed-dtype matrix multiply"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: icon-list
               items:
-                - "Inductor improvements for indirect indexing & Welford reductions"
+                - text: "Inductor improvements for indirect indexing &amp; Welford reductions"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: icon-list
               items:
-                - "AOTAutograd optimizations & decompositions"
+                - text: "AOTAutograd optimizations &amp; decompositions"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: text
               html: "<p><strong>Contributions include:</strong></p>"
               sizePx: 17
@@ -168,6 +192,7 @@ blocks:
               color: "#A43A8F"
               align: "center"
               lineHeight: "1em"
+              letterSpacing: "-1px"
               paddingTop: "20px"
               paddingRight: "20px"
               paddingBottom: "20px"
@@ -180,22 +205,46 @@ blocks:
               isTriangle: true
               backgroundColor: "#A43A8F"
               textColor: "#FFFFFF"
+              fontSizePx: 16
+              fontWeight: 600
+              letterSpacing: "0.2px"
+              padding: "25px 45px 25px 45px"
               align: "center"
             - type: icon-list
               items:
-                - "Vision transforms 2.0"
+                - text: "Vision transforms 2.0"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: icon-list
               items:
-                - "torch.sparse, torch.func, torch.signal.windows, torch.complex32"
+                - text: "torch.sparse, torch.func, torch.signal.windows, torch.complex32"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: icon-list
               items:
-                - "PrimTorch, inductor and dynamic shapes improvements"
+                - text: "PrimTorch, inductor and dynamic shapes improvements"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: icon-list
               items:
-                - "PyTorch as backend for SciPy and scikit-learn"
+                - text: "PyTorch as backend for SciPy and scikit-learn"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: icon-list
               items:
-                - "NumPy support in torch.compile"
+                - text: "NumPy support in torch.compile"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: text
               html: "<p><strong>Contributions include:</strong></p>"
               sizePx: 17
@@ -214,6 +263,7 @@ blocks:
               color: "#452392"
               align: "center"
               lineHeight: "1em"
+              letterSpacing: "-1px"
               paddingTop: "20px"
               paddingRight: "20px"
               paddingBottom: "20px"
@@ -226,6 +276,7 @@ blocks:
               color: "#A43A8F"
               align: "center"
               lineHeight: "1em"
+              letterSpacing: "-1px"
               paddingTop: "20px"
               paddingRight: "20px"
               paddingBottom: "20px"
@@ -242,19 +293,39 @@ blocks:
               paddingLeft: "20px"
             - type: icon-list
               items:
-                - "Python Array API & NumPy Compatibility"
+                - text: "Python Array API &amp; NumPy Compatibility"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: icon-list
               items:
-                - "torch.linalg, torch.special, torch.fft, torch.testing, torch.sparse"
+                - text: "torch.linalg, torch.special, torch.fft, torch.testing, torch.sparse"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: icon-list
               items:
-                - "Forward AD, complex numbers, and functorch coverage"
+                - text: "Forward AD, complex numbers, and functorch coverage"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: icon-list
               items:
-                - "Build time improvements"
+                - text: "Build time improvements"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: icon-list
               items:
-                - "Vision datasets & transforms 1.0"
+                - text: "Vision datasets &amp; transforms 1.0"
+                  icon: "<svg aria-hidden=\"true\" class=\"e-font-icon-svg e-fas-check\" viewbox=\"0 0 512 512\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z\"></path></svg>"
+              iconColor: "#452392"
+              iconSizePx: 14
+              textColor: "#161515"
             - type: button
               url: "/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2021"
               text: "Read the post"
@@ -263,6 +334,10 @@ blocks:
               isTriangle: true
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
+              fontSizePx: 16
+              fontWeight: 600
+              letterSpacing: "0.2px"
+              padding: "25px 45px 25px 45px"
               align: "center"
         columnBackgrounds:
           - "#FFFFFF"
@@ -286,6 +361,13 @@ blocks:
             bottom: "0%"
             left: "0%"
         maxWidthPx: 1140
+        columnBoxes:
+          - borderWidth: "1px 1px 1px 1px"
+            borderColor: "#ECECEC"
+          - borderWidth: "1px 1px 1px 1px"
+            borderColor: "#ECECEC"
+          - borderWidth: "1px 1px 1px 1px"
+            borderColor: "#ECECEC"
         gapPx: 90
   paddingRight: "5%"
   paddingBottom: "2%"
@@ -398,6 +480,9 @@ blocks:
               buttonText: "Get In Touch"
               buttonUrl: "#bookacallform"
               priceBackground: "#FAFAFA"
+              headerBackground: "#FAFAFA"
+              headingColor: "#000000"
+              headingItalic: true
         columnBackgrounds:
           - "#FFFFFF"
           - "#FFFFFF"
@@ -535,6 +620,7 @@ blocks:
               width: 1122
               height: 889
               widthPercent: 100
+              heightPx: 500
         columnBackgrounds:
           - "#FAFAFF"
           - "#FAFAFF"

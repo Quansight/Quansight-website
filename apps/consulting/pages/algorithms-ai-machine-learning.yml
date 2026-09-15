@@ -128,6 +128,10 @@ blocks:
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
               borderColor: "#FFFFFF"
+              borderWidthPx: 2.0
+              fontSizePx: 16
+              fontWeight: 700
+              padding: "25px 45px 25px 45px"
           - - type: image
               src: "/page-assets/algorithms-ai-machine-learning/icons-llc-28-1.svg"
               alt: ""
@@ -309,6 +313,7 @@ blocks:
               width: 1122
               height: 889
               widthPercent: 100
+              heightPx: 500
         columnBackgrounds:
           - "#FAFAFF"
           - "#FAFAFF"
