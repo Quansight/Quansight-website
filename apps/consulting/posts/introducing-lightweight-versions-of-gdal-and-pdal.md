@@ -97,100 +97,23 @@ Currently only the python bindings `gdal` depend on `libgdal-core` and in the fu
 
 We looked at the install times for `libgdal` vs `libgdal-core` on Github actions and `libgdal-core` was faster. We also noticed that `libboost-headers` was being pulled by `libkml` which is only needed for development. We split the `libkml` conda package into `libkml` and `libkml-devel` so that end users are not going to end up with the `libboost-headers` which has thousands of header files.
 
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**OS**
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**libgdal without KML split**
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**libgdal with KML split**
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**libgdal-core**
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-Windows
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-3m 8s
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-1m 6s
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-43s
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-Linux
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-28s
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-21s
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-16s
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-macOS
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-27s
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-22s
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-15s
-
+<div class="post-grid" style="--columns:4">
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 2px;border-color:#452392"><p><strong>OS</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong>libgdal without KML split</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong> libgdal with KML split</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 2px 1px 1px;border-color:#452392"><p><strong>libgdal-core</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>Windows</p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p><span style="font-weight: 400;">3m 8s</span></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p><span style="font-weight: 400;">1m 6s</span></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p><span style="font-weight: 400;"> 43s </span></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p><span style="font-weight: 400;">Linux </span></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>28s</p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>21s</p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>16s</p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 2px;border-color:#452392"><p><span style="font-weight: 400;">macOS</span></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 2px 2px 2px;border-color:#452392"><p>27s</p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 2px 2px 2px;border-color:#452392"><p>22s</p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 2px 1px;border-color:#452392"><p>15s</p></div>
 </div>
 
 Note that the timings are from a quick testing on Github actions and not formal benchmarking.

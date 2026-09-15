@@ -63,6 +63,8 @@ blocks:
         rowGapPx: 20
   columnBoxes:
     - borderRadius: "2px 2px 2px 2px"
+      borderWidth: "3px"
+      borderColor: "#252525"
       minHeight: "41vh"
   minHeight: "41vh"
   marginTop: "4%"

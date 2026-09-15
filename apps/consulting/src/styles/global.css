@@ -300,6 +300,24 @@ table.table-horizontal-scroll tbody th {
   }
 }
 
+/* Cell-by-cell tables inside blog posts: an Elementor grid container of
+   bordered text widgets (see convert_grid_container in the posts
+   converter). Live's cells are 44px tall: the 27px line plus the
+   paragraph's bottom margin, no padding. */
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns, 4), 1fr);
+  margin: 0 0 1.44rem;
+}
+.post-body .post-grid__cell p {
+  margin: 0 0 1.5rem;
+}
+@media (max-width: 639px) {
+  .post-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Blog post body typography, from the live single-post template's
    computed styles: Inter 18px/27 near-black text, Inter 30px/700 violet
    headings, 16px list items, pink links and inline code, and a centered

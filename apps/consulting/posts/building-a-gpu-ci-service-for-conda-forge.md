@@ -114,148 +114,31 @@ Once you have your base OpenStack instance, you need to create some “flavors�
 
 **CPU runners:**
 
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**Name**
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**vCPUs**
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**RAM**
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**Disk**
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-ci_medium
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-4
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-8GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-60GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-ci_large
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-4
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-12GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-60GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-ci_xlarge
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-4
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-32GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-60GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-ci_2xlarge
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-8
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-32GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-60GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-ci_4xlarge
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-8
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-64GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-60GB
-
+<div class="post-grid" style="--columns:4">
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 2px;border-color:#452392"><p><strong>Name</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong>vCPUs</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong>RAM</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 2px 1px 1px;border-color:#452392"><p><strong>Disk</strong></p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>ci_medium</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>4</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>8GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>ci_large</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>4</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>12GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>ci_xlarge</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>4</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>32GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>ci_2xlarge</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>8</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>32GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 2px;border-color:#452392"><p>ci_4xlarge</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 1px;border-color:#452392">8</div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 1px;border-color:#452392"><p>64GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 2px 1px;border-color:#452392"><p>60GB</p></div>
 </div>
 
 <div class="post-text" style="font-weight:500">
@@ -264,214 +147,42 @@ ci_4xlarge
 
 </div>
 
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**Name**
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**vCPUs**
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**RAM**
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**Disk**
-
-</div>
-
-<div class="post-text" style="font-weight:500;color:#0c0c0c">
-
-**GPUs**
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-gpu_tiny
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-4
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-2GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-20GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-1x NVIDIA® Tesla V100
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-gpu_medium
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-4
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-8GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-50GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-1x NVIDIA® Tesla V100
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-gpu_large
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-4
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-12GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-60GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-1x NVIDIA® Tesla V100
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-gpu_xlarge
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-8
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-16GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-60GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-1x NVIDIA® Tesla V100
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-gpu_2xlarge
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-8
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-32GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-60GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-1x NVIDIA® Tesla V100
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-gpu_4xlarge
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-8
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-64GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-60GB
-
-</div>
-
-<div class="post-text" style="color:#0c0c0c">
-
-1x NVIDIA® Tesla V100
-
+<div class="post-grid" style="--columns:5">
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 2px;border-color:#452392"><p><strong>Name</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong>vCPUs</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong>RAM</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong>Disk</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 2px 1px 1px;border-color:#452392"><p><strong>GPUs</strong></p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>gpu_tiny</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392">4</div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>2GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>20GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>1x NVIDIA® Tesla V100</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>gpu_medium</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>4</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>8GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>50GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>1x NVIDIA® Tesla V100</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>gpu_large</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>4</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>12GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>1x NVIDIA® Tesla V100</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>gpu_xlarge</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392">8</div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>16GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>1x NVIDIA® Tesla V100</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>gpu_2xlarge</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>8</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>32GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>1x NVIDIA® Tesla V100</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 2px;border-color:#452392"><p>gpu_4xlarge</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 1px;border-color:#452392"><p>8</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 1px;border-color:#452392"><p>64GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 2px 1px;border-color:#452392"><p>1x NVIDIA® Tesla V100</p></div>
 </div>
 
 That should be enough to provide 12 concurrent runners at best or four at worst. These kinds of runners wouldn’t only allow folks to test their packages with GPUs but also enable larger projects like PyTorch or Tensorflow, whose build processes usually take longer than the 6h offered by Azure, to be built on public CI.
