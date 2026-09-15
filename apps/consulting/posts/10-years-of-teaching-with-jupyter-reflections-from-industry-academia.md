@@ -4,15 +4,22 @@ published: August 14, 2023
 authors: [quansight]
 description: 'Dhavide Aruliah, Quansight’s Director of Education, discusses his experience teaching and training with Jupyter in academia and business at JupyterCon 2023.'
 category: [Jupyter, Training]
+tags: ['Jupyter']
 featuredImage:
   src: /posts/10-years-of-teaching-with-jupyter-reflections-from-industry-academia/10-Years-of-Teaching-with-Jupyter.jpg
   alt: '10 Years of Teaching with Jupyter: Reflections from Industry & Academia'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: '10 Years of Teaching with Jupyter: Reflections from Industry & Academia'
+banner:
+  - src: /posts/10-years-of-teaching-with-jupyter-reflections-from-industry-academia/Jupyter-Con-Logo.svg
+    alt: 'Image of the JupyterCon logo'
 ---
 
+<div class="post-text" style="font-size:22px;line-height:1.5;color:#0c0c0c">
+
 Check out Dhavide Aruliah, Quansight’s Director of Education, on stage at JupyterCon 2023 discussing his experience teaching and training with Jupyter in academia and business.
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 [JupyterCon](https://www.jupytercon.com/) is an annual industry event for data scientists, business analysts, researchers, educators, developers, and core project maintainers working within the Jupyter ecosystem. Quansight’s Dhavide Aruliah recently [presented at JupyterCon 2023](https://cfp.jupytercon.com/2023/talk/ZQBNTV/) in Paris, France.
 
@@ -24,10 +31,20 @@ Drawing from a decade of experience in academia, software bootcamps, and trainin
 
 Check out the video below to watch the whole thing!
 
+</div>
+
 [Watch the video](https://www.youtube.com/watch?v=42TcgRau92I&list=PL_1BH3ug7n1Ih_Yy2TmM7MZ2zogSLZvzE&index=26)
+
+<div class="post-text" style="color:#0c0c0c">
 
 If you’re looking to upskill your team, get in touch. We offer a wide variety of intermediate and advanced courses across the PyData stack, and can build a customized offering to meet your specific requirements.
 
-[Explore PyData Training Lineup](/training)
+</div>
+
+<p class="post-button post-button--center"><a href="/training">Explore PyData Training Lineup <svg viewBox="-5 -5 20 20" width="20" height="20" aria-hidden="true"><polygon points="2,2 8,5 2,8" fill="currentColor" /></svg></a></p>
+
+<div class="post-text" style="color:#0c0c0c">
 
 Connect with Dhavide Aruliah on [LinkedIn](https://www.linkedin.com/in/dhavide/).
+
+</div>

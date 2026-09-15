@@ -81,3 +81,441 @@ table.table-horizontal-scroll tbody th {
     grid-template-columns: var(--col-widths, 1fr);
   }
 }
+
+/* Logo grids inside blog posts (WP image-gallery / image-carousel widgets,
+   see convert_logo_grid in the posts converter): N equal columns, 50px
+   apart, thumbnails at --size, matching the live gallery's 82px tiles. */
+.post-gallery {
+  display: grid;
+  grid-template-columns: repeat(var(--columns, 7), 1fr);
+  gap: 5rem;
+  justify-items: center;
+  align-items: center;
+  max-width: 92.8rem;
+  margin: 2rem auto;
+}
+.post-gallery img {
+  width: var(--size, 8.2rem);
+  height: var(--size, 8.2rem);
+  object-fit: contain;
+}
+@media (max-width: 639px) {
+  .post-gallery {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Buttons inside blog posts (WP button widgets, see convert_button in the
+   posts converter): Elementor's pink button as computed on live -- Inter
+   20px/500, 25px/45px padding, square, white triangle icon on the right. */
+.post-button {
+  text-align: center;
+}
+.post-button--left {
+  text-align: left;
+}
+.post-button--right {
+  text-align: right;
+}
+.post-button a {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.3rem;
+  padding: 2.5rem 4.5rem;
+  background-color: #a43a8f;
+  color: #fff;
+  font-family: Inter, sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+}
+.post-button a:hover {
+  background-color: #452392;
+}
+
+/* Bottom of every blog post, as on live (BlogPost.astro): a "Share the
+   Post:" row of three 22px violet icons 22px apart, then "More articles
+   from our Library" over a 4-column card grid (238px columns, 55px gap,
+   Mukta 25px/600 violet titles, a bordered author/date row). */
+.post-share {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding-bottom: 5.7rem;
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-weight: 500;
+  color: #191919;
+}
+.post-share__icons {
+  display: flex;
+  gap: 2.2rem;
+}
+.post-share__icons a {
+  display: block;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+.post-share__icons a:hover {
+  opacity: 0.7;
+}
+.post-related {
+  padding: 5rem 0 15rem;
+}
+.post-related h2 {
+  margin: 0 0 10rem;
+  text-align: center;
+  font-family: Mukta, sans-serif;
+  font-size: 4rem;
+  line-height: 4.8rem;
+  font-weight: 900;
+  color: #452392;
+}
+.post-related__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 5.5rem;
+  row-gap: 10rem;
+}
+@media (max-width: 1023px) {
+  .post-related__grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 7.1rem;
+  }
+}
+@media (max-width: 639px) {
+  .post-related__grid {
+    grid-template-columns: 1fr;
+    row-gap: 3rem;
+  }
+}
+.post-related__card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 3px;
+}
+.post-related__thumb {
+  position: relative;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+}
+.post-related__thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.post-related__title {
+  margin: 2.4rem 0 0.8rem;
+  flex-grow: 1;
+  font-family: Mukta, sans-serif;
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: 600;
+  color: #452392;
+}
+.post-related__meta {
+  padding: 1rem 0;
+  border-top: 1px solid #d3d3d3;
+  font-size: 1.4rem;
+  line-height: 1.3;
+  color: #191919;
+}
+.post-related__meta span + span::before {
+  content: '\2022';
+  margin: 0 1rem;
+}
+
+/* Icon-box rows inside blog posts (WP icon-box widgets, see
+   convert_icon_boxes in the posts converter): three per row, each box
+   65% of its column as on live, Mukta 24px violet titles, 18px text. */
+.post-icon-boxes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2rem;
+  row-gap: 4rem;
+  margin: 2rem 0;
+}
+.post-icon-boxes--center {
+  text-align: center;
+  justify-items: center;
+}
+.post-icon-box {
+  max-width: 65%;
+}
+.post-icon-box img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1.6rem;
+}
+.post-icon-boxes--center .post-icon-box img {
+  margin-left: auto;
+  margin-right: auto;
+}
+.post-icon-box h3 {
+  margin: 0.8rem 0 1.6rem;
+  font-family: Mukta, sans-serif;
+  font-size: 2.4rem;
+  line-height: 1.1;
+  font-weight: 700;
+  color: #452392;
+}
+.post-icon-box p {
+  margin: 0;
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  color: #252525;
+}
+@media (max-width: 639px) {
+  .post-icon-boxes {
+    grid-template-columns: 1fr;
+  }
+  .post-icon-box {
+    max-width: none;
+  }
+}
+
+/* Side-by-side text columns inside blog posts (WP sections with 2+ text
+   columns, see convert_text_column_section in the posts converter). */
+.post-columns {
+  display: grid;
+  grid-template-columns: repeat(var(--columns, 2), 1fr);
+  gap: 2rem;
+  margin: 1rem 0;
+}
+.post-column {
+  padding: 1rem;
+}
+.post-column__label {
+  text-align: center;
+}
+@media (max-width: 639px) {
+  .post-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cell-by-cell tables inside blog posts: an Elementor grid container of
+   bordered text widgets (see convert_grid_container in the posts
+   converter). Live's cells are 44px tall: the 27px line plus the
+   paragraph's bottom margin, no padding. */
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--columns, 4), 1fr);
+  margin: 0 0 1.44rem;
+}
+.post-body .post-grid__cell p {
+  margin: 0 0 1.5rem;
+}
+@media (max-width: 639px) {
+  .post-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Blog post body typography, from the live single-post template's
+   computed styles: Inter 18px/27 near-black text, Inter 30px/700 violet
+   headings, 16px list items, pink links and inline code, and a centered
+   pink blockquote under a large quote mark. Layered over Tailwind's
+   `prose` (kept for code blocks and tables). */
+.post-body p {
+  margin: 0 0 1.44rem;
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-weight: var(--post-text-weight, 400);
+  color: var(--post-text-color, #191919);
+}
+/* A widget's own size/weight/color (see text_style in the posts
+   converter) applies to everything inside its wrapper: the wrapper
+   carries the body defaults, its inline style overrides them. */
+.post-body .post-text {
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-weight: var(--post-text-weight, 400);
+  color: var(--post-text-color, #191919);
+}
+.post-body .post-text p,
+.post-body .post-text li {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+.post-body .post-text {
+  margin-bottom: 1.44rem;
+}
+.post-body .post-heading {
+  margin: 3.4rem 0 2rem;
+}
+.post-body h2,
+.post-body h3 {
+  margin: 3.4rem 0 2rem;
+  font-family: Inter, sans-serif;
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 700;
+  color: #452392;
+}
+.post-body h3 {
+  font-size: 2.4rem;
+  line-height: 2.6rem;
+}
+.post-body ul,
+.post-body ol {
+  margin: 0 0 1.44rem 2.56rem;
+  padding-left: 4rem;
+}
+.post-body li {
+  margin: 0 0 1.28rem;
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-weight: var(--post-text-weight, 400);
+  color: var(--post-text-color, #191919);
+}
+.post-body li p {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+.post-body strong {
+  font-weight: 700;
+  color: #191919;
+}
+.post-body a {
+  color: #a43a8f;
+  font-weight: 400;
+  text-decoration: underline;
+}
+.post-body :not(pre) > code {
+  font-family: monospace, monospace;
+  font-size: 1.8rem;
+  color: #a43a8f;
+  background: none;
+}
+.post-body blockquote {
+  margin: 3rem 0;
+  padding: 0;
+  border: 0;
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  color: #963895;
+}
+.post-body blockquote::before {
+  content: '\201C';
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 9rem;
+  line-height: 7rem;
+  color: #963895;
+}
+.post-body blockquote p {
+  color: #963895;
+}
+.post-body blockquote p::before,
+.post-body blockquote p::after {
+  content: none;
+}
+
+/* The band above a converted blog post's title (BlogPost.astro), as on
+   live: 300px, white, the post's logos centered in a row (each up to
+   265px wide), or a violet-to-magenta gradient when there are none. */
+.post-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 30rem;
+  padding: 2rem;
+  background: #fff;
+}
+/* Live draws the site's dotted texture (blog-bg-01.svg, 60% opacity)
+   behind the logos. */
+.post-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/posts/blog-bg-01.svg') 50% 100% / cover no-repeat;
+  opacity: 0.6;
+}
+.post-banner--gradient {
+  background: linear-gradient(180deg, #452391 0%, #963895 100%);
+}
+.post-banner--gradient::before {
+  content: none;
+}
+.post-banner__row {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 112rem;
+  margin: 0 auto;
+}
+.post-banner__row:has(> :only-child) {
+  justify-content: center;
+}
+.post-banner img {
+  max-width: 26.5rem;
+  max-height: 11rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+@media (max-width: 639px) {
+  .post-banner {
+    flex-wrap: wrap;
+    min-height: 20rem;
+  }
+  .post-banner img {
+    max-width: 40%;
+  }
+}
+
+/* An inline post image the WP widget sizes to a percentage of the
+   column (see convert_image_widget): centered, as Elementor's image
+   widget is by default. */
+.post-body .post-image {
+  text-align: center;
+}
+.post-body .post-image img {
+  display: inline-block;
+  height: auto;
+  margin: 0;
+}
+
+/* Headings and paragraphs inside a page text block (WP text-editor
+   widgets that carry their own h2/h3, e.g. terms-and-conditions and
+   privacy-policy), at live's kit defaults: Inter, 22px/600 #252525 for
+   h3, paragraphs spaced 14.4px. */
+.block-text h2,
+.block-text h3,
+.block-text h4 {
+  margin: 2rem 0 1rem;
+  font-family: Inter, sans-serif;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #252525;
+}
+.block-text h2 {
+  font-size: 2.6rem;
+}
+.block-text p + p {
+  margin-top: 1.44rem;
+}
+
+/* Elementor's hover transform on a widget (home's "Read the Report"
+   button shrinks to 90%); see extract_widget_box. */
+.hover-scale {
+  transition: transform 300ms ease;
+}
+.hover-scale:hover {
+  transform: scale(var(--hover-scale, 0.9));
+}

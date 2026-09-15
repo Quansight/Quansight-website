@@ -16,6 +16,11 @@ type PriceTableProps = {
   // sitewide (near-white #FAFAFA on one page's cards, unset/default on
   // another's) rather than being a single fixed sitewide value.
   priceBackground?: string;
+  // Header panel color and heading color/italic when the widget's CSS
+  // sets them (see convert_price_table); violet/white otherwise.
+  headerBackground?: string;
+  headingColor?: string;
+  headingItalic?: boolean;
 };
 
 // Elementor's price-table widget shows up in two real shapes sitewide: a
@@ -33,17 +38,39 @@ export const PriceTable: FC<PriceTableProps> = ({
   buttonText,
   buttonUrl,
   priceBackground,
+  headerBackground,
+  headingColor,
+  headingItalic,
 }) => {
   const bgToken = colorToken(priceBackground) ?? 'lightgray';
   return (
     <div className="flex flex-col w-full max-w-layout mx-auto">
       {heading && (
-        <div className="px-[2rem] py-[2.4rem] text-center bg-violet">
-          <h3 className="text-[2.2rem] font-medium leading-[1.3] text-white font-heading">
+        <div
+          className={`px-[2rem] py-[2.4rem] text-center ${
+            headerBackground ? '' : 'bg-violet'
+          }`}
+          style={{
+            backgroundColor: headerBackground,
+            color: headingColor,
+            fontStyle: headingItalic ? 'italic' : undefined,
+          }}
+        >
+          <h3
+            className={`text-[2.2rem] font-medium leading-[1.3] font-heading ${
+              headingColor ? '' : 'text-white'
+            }`}
+          >
             {heading}
           </h3>
           {subheading && (
-            <p className="mt-[0.5rem] text-[1.6rem] text-white">{subheading}</p>
+            <p
+              className={`mt-[0.5rem] text-[1.6rem] ${
+                headingColor ? '' : 'text-white'
+              }`}
+            >
+              {subheading}
+            </p>
           )}
         </div>
       )}

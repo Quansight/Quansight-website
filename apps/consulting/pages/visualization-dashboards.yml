@@ -1,11 +1,13 @@
 slug: visualization-dashboards
 title: "Visualization & Dashboards"
-description: "Visualization & Dashboards Turn your data into insights, and your insights into discovery tools. Visually exploring data through interactive plots helps you connect more closely"
+seoTitle: "Visualization & Dashboards | Data Insights Experts"
+description: "Quansight builds interactive dashboards and visualizations that transform data into insights, helping teams explore, analyze, and share results."
 blocks:
 - type: hero
   variant: "small"
   gradientFrom: "#452391"
   gradientTo: "#963895"
+  minHeight: "60vh"
   image: "/page-assets/visualization-dashboards/Hero-Background-19.png"
   imageAlt: ""
   overlayOpacity: 0.26
@@ -24,20 +26,21 @@ blocks:
                     sizePx: 40
                     fontWeight: 900
                     color: "#452392"
+                    lineHeight: "1.1em"
                     paddingRight: "30px"
                 - - type: text
                     html: "<p>Visually exploring data through interactive plots helps you connect more closely to your data, quickly identify patterns and insights, and meaningfully share those insights with others. Quansight’s visualization team is skilled in transforming your data analysis into a compelling story through the use of dashboards. We can build dashboards to illustrate interactive results of analytics to executives, or dashboards to help data scientists and engineers process and analyze data through a common workflow.</p>"
                     sizePx: 16
                     color: "#000000"
+                    lineHeight: "1.7em"
                     paddingRight: "50px"
               columnWidths:
                 - 54.638
                 - 45.262
-              columnPaddings:
-
-                - top: "35px"
+              maxWidthPx: 1311
               gapPx: 0
         paddingTop: "25px"
+        maxWidthPx: 1311
   paddingTop: "70px"
   paddingBottom: "20px"
 - type: columns
@@ -58,6 +61,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/visualization-dashboards/icons-llc-13-1.svg"
                     alt: ""
@@ -70,6 +74,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -78,8 +83,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
   paddingBottom: "50px"
 - type: columns
   columns:
@@ -97,6 +104,7 @@ blocks:
                   align: "start"
                   descriptionSizePx: 16
                   descriptionColor: "#000000"
+                  descriptionLineHeight: "1.8em"
           - - type: image
               src: "/page-assets/visualization-dashboards/icons-llc-15-1.svg"
               alt: ""
@@ -109,6 +117,7 @@ blocks:
                   align: "start"
                   descriptionSizePx: 16
                   descriptionColor: "#000000"
+                  descriptionLineHeight: "1.8em"
         columnWidths:
           - 50
           - 50
@@ -117,8 +126,10 @@ blocks:
             left: "20px"
           - right: "20px"
             left: "20px"
+        maxWidthPx: 1200
         gapPx: 20
   paddingTop: "60px"
+  maxWidthPx: 1200
 - type: columns
   columns:
     - - type: columns
@@ -129,10 +140,12 @@ blocks:
               sizePx: 50
               fontWeight: 900
               color: "#ffffff"
+              lineHeight: "1.2em"
             - type: text
               html: "<p>A good visualization and dashboard turn data into insights, and insights into understanding.</p>"
               sizePx: 16
               color: "#FFFFFF"
+              lineHeight: "1.8em"
             - type: button
               url: "#bookacallform"
               text: "I'm interested"
@@ -142,12 +155,15 @@ blocks:
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
               borderColor: "#FFFFFF"
+              borderWidthPx: 2.0
+              fontSizePx: 16
+              fontWeight: 700
+              padding: "25px 45px 25px 45px"
           - - type: image
               src: "/page-assets/visualization-dashboards/icons-llc-28-1.svg"
               alt: ""
               width: 768
               height: 1
-              widthPercent: 100
         columnBackgrounds:
           - "#452392"
           - null
@@ -159,9 +175,11 @@ blocks:
             right: "250px"
             bottom: "100px"
             left: "100px"
-
+          - null
+        maxWidthPx: 1500
         gapPx: 0
   paddingBottom: "100px"
+  maxWidthPx: 1500
 - type: columns
   columns:
     - - type: heading
@@ -171,6 +189,7 @@ blocks:
         fontWeight: 900
         color: "#000000"
         align: "center"
+        lineHeight: "40px"
       - type: columns
         columns:
           - - type: columns
@@ -260,6 +279,7 @@ blocks:
               gapPx: 0
         paddingTop: "30px"
   paddingBottom: "100px"
+  maxWidthPx: 1200
 - type: columns
   columns:
     - - type: columns
@@ -270,10 +290,12 @@ blocks:
               sizePx: 50
               fontWeight: 900
               color: "#ffffff"
+              lineHeight: "1.2em"
             - type: text
               html: "<p>“We’ve all learned a lot working with Quansight. They’ve always been professional and a helping hand, even in tough times like during the COVID-19 pandemic.” — Dr. Hugues-Yanis Amanieu, Production Engineering, Leclanche</p>"
               sizePx: 16
               color: "#FFFFFF"
+              lineHeight: "1.8em"
           - - type: image
               src: "/page-assets/visualization-dashboards/icons-llc-25-2.svg"
               alt: ""
@@ -290,9 +312,11 @@ blocks:
             right: "250px"
             bottom: "100px"
             left: "100px"
-
+          - null
+        maxWidthPx: 1500
         gapPx: 0
   paddingBottom: "100px"
+  maxWidthPx: 1500
 - type: columns
   columns:
     - - type: columns
@@ -308,12 +332,15 @@ blocks:
               html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\">connect@quansight.com</a><br/><br/></p>"
               sizePx: 16
               color: "#000000"
+              lineHeight: "2em"
+              widthPercent: 90
           - - type: image
               src: "/page-assets/visualization-dashboards/Quansight-contact-02-02-02-1-1.svg"
               alt: ""
               width: 1122
               height: 889
               widthPercent: 100
+              heightPx: 500
         columnBackgrounds:
           - "#FAFAFF"
           - "#FAFAFF"
@@ -325,7 +352,12 @@ blocks:
             right: "50px"
             bottom: "50px"
             left: "50px"
-
+          - top: "0px"
+            right: "0px"
+            bottom: "0px"
+            left: "0px"
+        maxWidthPx: 1200
         gapPx: 0
   paddingTop: "100px"
   paddingBottom: "100px"
+  maxWidthPx: 1200

@@ -1,5 +1,7 @@
 ---
 import BlockRenderer from './BlockRenderer.astro';
+import { BlogList } from './Blog/BlogList';
+import { getPostSummaries } from '../utils/postSummaries';
 import { ButtonLink } from './ButtonLink';
 import { DataTable } from './DataTable';
 import Form from './Form.astro';
@@ -8,10 +10,12 @@ import { Icon } from './Icon';
 import { IconBoxGrid } from './IconBoxGrid';
 import { IconList } from './IconList';
 import { ImageBoxGrid } from './ImageBoxGrid';
+import { ImageCarousel } from './ImageCarousel';
 import { PageHeading } from './PageHeading';
 import { Placeholder } from './Placeholder';
 import { PriceTable } from './PriceTable';
 import { SocialIcons } from './SocialIcons';
+import { TestimonialCarousel } from './TestimonialCarousel';
 import { Toggle } from './Toggle';
 import { Video } from './Video';
 import { colorToken } from '../utils/colorTokens';
@@ -25,11 +29,12 @@ interface Props {
 
 const { block } = Astro.props;
 
-const PLACEHOLDER_TYPES = new Set([
-  'call-to-action',
-  'image-carousel',
-  'testimonial-carousel',
-]);
+// The blog index's post grid: WP's posts widget converts to a `posts`
+// block with offset/count (live: 3 newest, then a subscribe panel, then
+// the next 9 with Load More). The list comes from the posts collection.
+const allPosts = block.type === 'posts' ? await getPostSummaries() : [];
+
+const PLACEHOLDER_TYPES = new Set(['call-to-action']);
 
 // Computed here, not inline in the template below -- Astro's template
 // parser can misread TS generics like `Record<string, unknown>[][]` as
@@ -53,7 +58,10 @@ const columnsGridClass = COLUMNS_GRID_CLASS[columns.length] ?? 'grid-cols-2 sm:g
 // columns than its own design calls for (e.g. 2 elementor-col-33 columns
 // instead of 2 elementor-col-50 ones) sits left-aligned with real blank
 // space after it, instead of stretching to fill the row.
-const columnWidths = block.type === 'columns' ? (block.columnWidths as number[] | undefined) : undefined;
+// Entries are percentages, or CSS lengths for a fixed-width widget in a
+// row container (privacy-policy's 7rem-wide labels), or `1fr` for the
+// rest of such a row -- see extract_container_child_widths.
+const columnWidths = block.type === 'columns' ? (block.columnWidths as (number | string)[] | undefined) : undefined;
 // Some rows space their columns not via a shared gap but via each column's
 // own left/right margin (percentages resolved against that column's own
 // width, e.g. getting-started-with-ai's Ragna/Nebari/conda-store logos row)
@@ -75,6 +83,28 @@ const columnPaddings = block.type === 'columns' ? ((block.columnPaddings as (Rec
 // colored columns read as a single panel instead of two boxes with a
 // seam. Falls back to the previous fixed gap when the row didn't say.
 const gapPx = block.type === 'columns' ? (block.gapPx as number | undefined) : undefined;
+// Vertical gap between a column's stacked blocks, when the source
+// container set one (see extract_column_row_gap); else the 2rem default.
+const rowGapPx = block.type === 'columns' ? (block.rowGapPx as number | undefined) : undefined;
+// A section's own content max-width where it overrides the sitewide
+// 1140px (home uses 1000-1314px) -- see extract_row_max_width. Inline, so
+// it wins over the max-w-layout class on the same element.
+const maxWidthPx = block.type === 'columns' ? (block.maxWidthPx as number | undefined) : undefined;
+const maxWidthStyle = maxWidthPx ? `max-width:${maxWidthPx}px` : '';
+// A flex container's own rounded corners / border / min-height (see
+// extract_container_box): per column, and the row's own minimum height.
+type ColumnBox = { borderRadius?: string; borderWidth?: string; borderColor?: string; minHeight?: string; boxShadow?: string };
+const columnBoxes = block.type === 'columns' ? ((block.columnBoxes as (ColumnBox | undefined)[] | undefined) ?? []) : [];
+const boxStyle = (box?: ColumnBox) => [
+  box?.borderRadius ? `border-radius:${box.borderRadius}` : '',
+  box?.borderWidth ? `border-style:solid;border-width:${box.borderWidth};border-color:${box.borderColor}` : '',
+  box?.minHeight ? `min-height:${box.minHeight}` : '',
+  box?.boxShadow ? `box-shadow:${box.boxShadow}` : '',
+].filter(Boolean).join(';');
+const minHeightStyle = block.minHeight ? `min-height:${block.minHeight}` : '';
+// Explicit section padding (even all-zero) replaces the generic panel
+// padding guessed below for a colored full-bleed panel.
+const hasExplicitPadding = !!(block.paddingTop || block.paddingBottom || block.paddingLeft || block.paddingRight);
 // A section's own vertical margin/padding is sometimes the only thing
 // separating it from its neighbors -- without it, e.g. careers' Subscribe
 // panel runs into the footer, or getting-started-with-ai's intro
@@ -98,13 +128,29 @@ const paddingStyle = [
   block.paddingLeft ? `padding-left:${block.paddingLeft}` : '',
   block.paddingRight ? `padding-right:${block.paddingRight}` : '',
 ].filter(Boolean).join(';');
+// A row pulled up over its predecessor by a negative top margin (home's
+// "Trusted By" card over the hero) has to be positioned, or the hero
+// (itself `relative`) paints over it regardless of DOM order.
+const overlapsPrevious = typeof block.marginTop === 'string' && block.marginTop.startsWith('-');
+// PageBlocks separates top-level blocks by 2rem (Elementor's widget
+// spacing), but live sections abut -- a section that pulls itself over
+// the previous one with a negative margin has to absorb that gap too.
+const marginTop = overlapsPrevious ? `calc(${block.marginTop} - 2rem)` : (block.marginTop as string | undefined);
 const rowStyle = [
   gapPx === undefined ? '' : `gap:${gapPx}px`,
-  block.marginTop ? `margin-top:${block.marginTop}` : '',
+  marginTop ? `margin-top:${marginTop}` : '',
   block.marginBottom ? `margin-bottom:${block.marginBottom}` : '',
-  columnWidths ? `--col-widths:${columnWidths.map((w) => `${w}%`).join(' ')}` : '',
+  columnWidths ? `--col-widths:${columnWidths.map((w) => (typeof w === 'number' ? `${w}%` : w)).join(' ')}` : '',
 ].filter(Boolean).join(';');
 const soleBackground = columns.length === 1 ? columnBackgrounds[0] : undefined;
+// Every column the same color: one continuous panel, painted on the row.
+// Elementor's column gap is padding inside each column, under the
+// column's own background, so live shows no seams -- our grid gap would.
+const uniformBackground =
+  columns.length > 1 && columnBackgrounds.length === columns.length && columnBackgrounds.every((b) => b && b === columnBackgrounds[0])
+    ? columnBackgrounds[0]
+    : undefined;
+const uniformToken = colorToken(uniformBackground);
 const isFullBleedPanel =
   block.fullBleed === true && !!soleBackground && soleBackground.toUpperCase() !== '#FFFFFF';
 
@@ -143,7 +189,14 @@ function isDarkBackground(hex: string): boolean {
     gradientFrom={block.gradientFrom as string | undefined}
     gradientTo={block.gradientTo as string | undefined}
     overlayOpacity={block.overlayOpacity as number | undefined}
-  />
+    minHeight={block.minHeight as string | undefined}
+    paddingBottom={block.paddingBottom as string | undefined}
+    contentFullWidth={block.contentFullWidth as boolean | undefined}
+  >
+    {((block.blocks as Block[] | undefined) ?? []).map((childBlock) => (
+      <BlockRenderer block={childBlock} />
+    ))}
+  </Hero>
 )}
 
 {block.type === 'columns' && isFullBleedPanel && (() => {
@@ -154,9 +207,12 @@ function isDarkBackground(hex: string): boolean {
     style={`${bgToken ? '' : `background-color:${soleBackground};`}${rowStyle ? rowStyle + ';' : ''}${paddingStyle}`}
   >
     <div
-      class={`flex flex-col justify-center gap-[2rem] max-w-layout mx-auto p-[4%] max-[765px]:pt-[14%] max-[765px]:pb-[14%] max-[765px]:pl-[8%] max-[765px]:pr-[8%] ${
+      class={`flex flex-col justify-center gap-[2rem] max-w-layout mx-auto ${
+        hasExplicitPadding ? '' : 'p-[4%] max-[765px]:pt-[14%] max-[765px]:pb-[14%] max-[765px]:pl-[8%] max-[765px]:pr-[8%]'
+      } ${
         isDarkBackground(soleBackground as string) ? '[&_.text-violet]:!text-white [&_.text-black]:!text-white' : ''
       }`}
+      style={[rowGapPx === undefined ? '' : `gap:${rowGapPx}px`, maxWidthStyle, boxStyle(columnBoxes[0]), minHeightStyle].filter(Boolean).join(';') || undefined}
     >
       {columns[0].map((childBlock) => (
         <BlockRenderer block={childBlock} />
@@ -169,13 +225,13 @@ function isDarkBackground(hex: string): boolean {
 {block.type === 'columns' && !isFullBleedPanel && (
   <div style={paddingStyle || undefined}>
   <div
-    class={`grid ${columnWidths ? 'grid-cols-1 col-widths' : columnsGridClass} max-w-layout mx-auto w-full ${gapPx === undefined ? 'gap-[3rem]' : ''} ${
+    class={`grid ${columnWidths ? 'grid-cols-1 col-widths' : columnsGridClass} max-w-layout mx-auto w-full ${gapPx === undefined ? 'gap-[3rem]' : ''} ${overlapsPrevious ? 'relative' : ''} ${uniformToken ? `bg-${uniformToken}` : ''} ${
       // A colored row nested inside another row's cell is content-height by
       // default, so its panel stops short of its neighbour's and leaves a
       // step in what should be one rectangle (careers' Subscribe box).
       columnBackgrounds.some(Boolean) ? 'h-full' : ''
     }`}
-    style={rowStyle || undefined}
+    style={[rowStyle, maxWidthStyle, minHeightStyle, uniformBackground && !uniformToken ? `background-color:${uniformBackground}` : ''].filter(Boolean).join(';') || undefined}
   >
     {columns.map((column, i) => {
       const rawBackground = columnBackgrounds[i];
@@ -185,17 +241,23 @@ function isDarkBackground(hex: string): boolean {
       // visible to justify it.
       const backgroundColor = rawBackground && rawBackground.toUpperCase() !== '#FFFFFF' ? rawBackground : undefined;
       const needsLightText = backgroundColor && isDarkBackground(backgroundColor);
-      const bgToken = colorToken(backgroundColor);
+      // With a uniform row background the cell paints nothing itself but
+      // keeps its light-text/padding treatment.
+      const bgToken = uniformBackground ? undefined : colorToken(backgroundColor);
       const columnMargin = columnMargins[i];
       const columnPadding = columnPaddings[i];
       const cellStyle = [
-        !bgToken && backgroundColor ? `background-color:${backgroundColor}` : '',
+        !bgToken && backgroundColor && !uniformBackground ? `background-color:${backgroundColor}` : '',
+        rowGapPx === undefined ? '' : `gap:${rowGapPx}px`,
         columnMargin?.left ? `margin-left:${columnMargin.left}` : '',
         columnMargin?.right ? `margin-right:${columnMargin.right}` : '',
         columnPadding?.top ? `padding-top:${columnPadding.top}` : '',
         columnPadding?.right ? `padding-right:${columnPadding.right}` : '',
         columnPadding?.bottom ? `padding-bottom:${columnPadding.bottom}` : '',
         columnPadding?.left ? `padding-left:${columnPadding.left}` : '',
+        boxStyle(columnBoxes[i]),
+        // A rounded column clips its own background to the corners.
+        columnBoxes[i]?.borderRadius ? 'overflow:hidden' : '',
       ].filter(Boolean).join(';');
       return (
         <div
@@ -255,9 +317,15 @@ function isDarkBackground(hex: string): boolean {
   // wasn't found, not a safe sitewide default (700 is the single most
   // common real value, not 800).
   const fontWeight = block.fontWeight as number | undefined;
+  // Per-widget line-height (see extract_heading_line_height); inline, so
+  // it wins over the leading-[1.2] fallback class.
   const styleParts = [
     fontWeight ? `font-weight:${fontWeight}` : '',
     !colorClass && color ? `color:${color}` : '',
+    block.lineHeight ? `line-height:${block.lineHeight}` : '',
+    block.letterSpacing ? `letter-spacing:${block.letterSpacing}` : '',
+    block.textTransform ? `text-transform:${block.textTransform}` : '',
+    block.fontStyle ? `font-style:${block.fontStyle}` : '',
   ].filter(Boolean);
   const style = styleParts.length ? styleParts.join(';') : undefined;
   // Elementor sets alignment per heading widget too, and most of the
@@ -277,14 +345,23 @@ function isDarkBackground(hex: string): boolean {
   // unlike a `columns` row's own padding, a widget's padding percentage
   // resolves against its already-bounded parent, not the viewport, so no
   // separate full-width wrapper is needed here.
+  // Widget-level background/shadow/width -- see extract_widget_box in the
+  // converter; only home's "Trusted By" card uses them.
   const widgetPaddingStyle = [
     block.paddingTop ? `padding-top:${block.paddingTop}` : '',
     block.paddingBottom ? `padding-bottom:${block.paddingBottom}` : '',
     block.paddingLeft ? `padding-left:${block.paddingLeft}` : '',
     block.paddingRight ? `padding-right:${block.paddingRight}` : '',
+    block.background ? `background-color:${block.background}` : '',
+    block.boxShadow ? `box-shadow:${block.boxShadow}` : '',
+    block.widthPercent ? `width:${block.widthPercent}%` : '',
+    block.marginTop ? `margin-top:${block.marginTop}` : '',
+    block.marginBottom ? `margin-bottom:${block.marginBottom}` : '',
   ].filter(Boolean).join(';');
+  // A boxed heading paints above a following boxed sibling that pulls up
+  // over it (live gives it z-index:1): home's "Trusted By" over its logos.
   return (
-    <div class="max-w-layout mx-auto w-full" style={widgetPaddingStyle || undefined}>
+    <div class={`max-w-layout mx-auto w-full ${block.background ? 'relative z-[1]' : ''}`} style={widgetPaddingStyle || undefined}>
       <Tag
         class={`font-extrabold font-heading ${colorClass} ${alignClass} ${sizeClass || SIZE_BY_LEVEL[level]}`}
         style={style}
@@ -296,6 +373,9 @@ function isDarkBackground(hex: string): boolean {
 })()}
 
 {block.type === 'text' && (() => {
+  // Links inside text widgets are the kit's secondary color (magenta),
+  // not underlined, on every live page checked (blog, about-us,
+  // getting-started-with-ai).
   // WP/Elementor sizes and weights text-editor widgets per-widget too, not
   // just headings -- confirmed varying a lot sitewide (e.g. an intro
   // paragraph emphasized at 21px/600 vs the sitewide default 18px/400).
@@ -305,22 +385,40 @@ function isDarkBackground(hex: string): boolean {
   const fontWeight = block.fontWeight as number | undefined;
   const color = block.color as string | undefined;
   const token = colorToken(color);
-  const colorClass = token ? `text-${token}` : color ? '' : 'text-black';
+  // Live's kit default for uncolored text widgets is #252525 (confirmed
+  // on terms-and-conditions and privacy-policy), not pure black.
+  const colorClass = token ? `text-${token}` : color ? '' : 'text-[#252525]';
   const styleParts = [
     fontWeight ? `font-weight:${fontWeight}` : '',
     !token && color ? `color:${color}` : '',
+    block.lineHeight ? `line-height:${block.lineHeight}` : '',
     // See the heading block above for why this applies directly here
     // rather than needing a separate full-width wrapper.
     block.paddingTop ? `padding-top:${block.paddingTop}` : '',
     block.paddingBottom ? `padding-bottom:${block.paddingBottom}` : '',
     block.paddingLeft ? `padding-left:${block.paddingLeft}` : '',
     block.paddingRight ? `padding-right:${block.paddingRight}` : '',
+    block.background ? `background-color:${block.background}` : '',
+    block.boxShadow ? `box-shadow:${block.boxShadow}` : '',
+    block.widthPercent ? `width:${block.widthPercent}%` : '',
+    block.marginTop ? `margin-top:${block.marginTop}` : '',
+    block.marginBottom ? `margin-bottom:${block.marginBottom}` : '',
+    block.borderWidth ? `border-style:solid;border-width:${block.borderWidth};border-color:${block.borderColor}` : '',
+    block.borderRadius ? `border-radius:${block.borderRadius}` : '',
+    block.hoverScale ? `--hover-scale:${block.hoverScale}` : '',
+    block.letterSpacing ? `letter-spacing:${block.letterSpacing}` : '',
+    block.textTransform ? `text-transform:${block.textTransform}` : '',
+    block.fontStyle ? `font-style:${block.fontStyle}` : '',
   ].filter(Boolean);
   return (
     <div
-      class={`max-w-layout mx-auto w-full leading-[2.7rem] [&_a]:text-violet [&_a]:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem] ${
-        fontSizeToken ? `text-${fontSizeToken}` : 'text-xs'
-      } ${colorClass}`}
+      class={`block-text ${block.hoverScale ? 'hover-scale' : ''} max-w-layout mx-auto w-full leading-[1.5] [&_a]:text-magenta [&_a]:hover:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem] ${
+        // 18px is the live site's kit default for unsized text widgets
+        // (confirmed on blog's "Looking for the latest posts?" line).
+        fontSizeToken ? `text-${fontSizeToken}` : 'text-sm'
+      } ${colorClass} ${block.fontFamily === 'heading' ? 'font-heading' : ''} ${
+        block.align === 'center' ? 'text-center' : block.align === 'right' ? 'text-right' : ''
+      }`}
       style={styleParts.length ? styleParts.join(';') : undefined}
       set:html={block.html as string}
     />
@@ -336,10 +434,15 @@ function isDarkBackground(hex: string): boolean {
   const widthPercent = block.widthPercent as number | undefined;
   const opacity = block.opacity as number | undefined;
   const marginBottom = block.marginBottom as string | undefined;
+  // A fixed box height with object-fit (13 images sitewide) and rounded
+  // corners -- see convert_image.
   const styleParts = [
     widthPercent ? `width:${widthPercent}%` : '',
     opacity !== undefined ? `opacity:${opacity}` : '',
     marginBottom ? `margin-bottom:${marginBottom}` : '',
+    block.heightPx ? `height:${block.heightPx}px` : '',
+    block.objectFit ? `object-fit:${block.objectFit}` : '',
+    block.borderRadius ? `border-radius:${block.borderRadius}` : '',
   ].filter(Boolean);
   return (
     <img
@@ -347,7 +450,7 @@ function isDarkBackground(hex: string): boolean {
       alt={(block.alt as string) ?? ''}
       width={block.width as number | undefined}
       height={block.height as number | undefined}
-      class="max-w-full h-auto mx-auto"
+      class={`max-w-full mx-auto ${block.heightPx ? '' : 'h-auto'}`}
       style={styleParts.length ? styleParts.join(';') : undefined}
     />
   );
@@ -371,12 +474,20 @@ function isDarkBackground(hex: string): boolean {
       backgroundColor={block.backgroundColor as string | undefined}
       borderColor={block.borderColor as string | undefined}
       textColor={block.textColor as string | undefined}
+      borderWidthPx={block.borderWidthPx as number | undefined}
+      fontSizePx={block.fontSizePx as number | undefined}
+      fontWeight={block.fontWeight as number | undefined}
+      textTransform={block.textTransform as string | undefined}
+      letterSpacing={block.letterSpacing as string | undefined}
+      padding={block.padding as string | undefined}
+      borderRadius={block.borderRadius as string | undefined}
+      lineHeight={block.lineHeight as string | undefined}
     />
   </div>
 )}
 
 {block.type === 'icon' && (
-  <Icon svg={block.svg as string} />
+  <Icon svg={block.svg as string} size={(block.sizePx as number | undefined) ?? 32} color={block.color as string | undefined} />
 )}
 
 {block.type === 'divider' && (() => {
@@ -400,6 +511,9 @@ function isDarkBackground(hex: string): boolean {
     buttonText={block.buttonText as string | undefined}
     buttonUrl={block.buttonUrl as string | undefined}
     priceBackground={block.priceBackground as string | undefined}
+    headerBackground={block.headerBackground as string | undefined}
+    headingColor={block.headingColor as string | undefined}
+    headingItalic={block.headingItalic as boolean | undefined}
   />
 )}
 
@@ -421,7 +535,13 @@ function isDarkBackground(hex: string): boolean {
 )}
 
 {block.type === 'icon-list' && (
-  <IconList items={(block.items as string[]) ?? []} />
+  <IconList
+    items={(block.items as ({ text: string; icon?: string } | string)[]) ?? []}
+    iconColor={block.iconColor as string | undefined}
+    iconSizePx={block.iconSizePx as number | undefined}
+    textColor={block.textColor as string | undefined}
+    textSizePx={block.textSizePx as number | undefined}
+  />
 )}
 
 {block.type === 'image-box-grid' && (
@@ -434,6 +554,48 @@ function isDarkBackground(hex: string): boolean {
         layout?: 'column' | 'row' | 'row-reverse';
       }[]) ?? []
     }
+  />
+)}
+
+{block.type === 'posts' && (
+  <BlogList
+    posts={allPosts.slice((block.offset as number) ?? 0)}
+    pageSize={(block.count as number) ?? 9}
+    loadMore={(block.loadMore as boolean) ?? false}
+    client:load
+  />
+)}
+
+{block.type === 'image-carousel' && (
+  <ImageCarousel
+    images={(block.images as { src: string; alt: string }[]) ?? []}
+    style={{
+      paddingTop: block.paddingTop as string | undefined,
+      paddingBottom: block.paddingBottom as string | undefined,
+      paddingLeft: block.paddingLeft as string | undefined,
+      paddingRight: block.paddingRight as string | undefined,
+      backgroundColor: block.background as string | undefined,
+      boxShadow: block.boxShadow as string | undefined,
+      width: block.widthPercent ? `${block.widthPercent}%` : undefined,
+      marginTop: block.marginTop as string | undefined,
+      marginBottom: block.marginBottom as string | undefined,
+    }}
+    client:load
+  />
+)}
+
+{block.type === 'testimonial-carousel' && (
+  <TestimonialCarousel
+    items={
+      (block.items as {
+        text: string;
+        name: string;
+        title: string;
+        image?: string;
+        imageAlt?: string;
+      }[]) ?? []
+    }
+    client:load
   />
 )}
 

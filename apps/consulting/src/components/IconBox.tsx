@@ -10,6 +10,7 @@ type IconBoxProps = {
   iconColor?: string;
   descriptionSizePx?: number;
   descriptionColor?: string;
+  descriptionLineHeight?: string;
   divider?: boolean;
   // Elementor's own default for this widget is centered (confirmed via
   // its base CSS, .elementor-icon-box-wrapper{text-align:center}) --
@@ -25,6 +26,7 @@ export const IconBox: FC<IconBoxProps> = ({
   iconColor,
   descriptionSizePx,
   descriptionColor,
+  descriptionLineHeight,
   divider,
   align = 'center',
 }) => (
@@ -61,6 +63,7 @@ export const IconBox: FC<IconBoxProps> = ({
             }`}
             style={{
               color: colorTok ? undefined : descriptionColor,
+              lineHeight: descriptionLineHeight,
             }}
           >
             {description}

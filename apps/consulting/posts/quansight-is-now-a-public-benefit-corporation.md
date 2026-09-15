@@ -4,12 +4,13 @@ published: May 30, 2025
 authors: [quansight]
 description: 'We have officially transitioned from a Limited Liability Company (LLC) to a Public Benefit Corporation (PBC)'
 category: [Company News]
+tags: ['Open source ecosystem', 'Public Benefit Corperation', 'Quansight']
 featuredImage:
   src: /posts/quansight-is-now-a-public-benefit-corporation/Quansight-Is-Now-a-Public-Benefit-Corporation.png
   alt: 'Quansight Is Now a Public Benefit Corporation'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Quansight Is Now a Public Benefit Corporation'
+banner:
+  - src: /posts/quansight-is-now-a-public-benefit-corporation/quansight.svg
+    alt: ''
 ---
 
 We’re very excited to share a major milestone in Quansight’s journey: We have officially transitioned from a Limited Liability Company (LLC) to a Public Benefit Corporation (PBC). This change reflects and strengthens our commitment to ensuring that community-driven open source projects and their communities are sustainable now and for the long term.

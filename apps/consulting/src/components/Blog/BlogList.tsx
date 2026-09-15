@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 export type PostSummary = {
   id: string;
@@ -6,105 +6,42 @@ export type PostSummary = {
   published: string;
   authors: string;
   featuredImage?: { src: string; alt: string };
-  categories: string[];
 };
 
-const POSTS_PER_PAGE = 9;
-
+// The blog index's post grid, matching the live WordPress "posts" widget
+// (Elementor cards skin, 3 columns, 26px/100px gaps): thumbnail on top at
+// a 100:55 ratio, then title / "Read More" / a bordered author+date row.
+// `pageSize` posts show at once; with `loadMore`, a button reveals the
+// next `pageSize` each click (live loads them via AJAX the same way).
 export function BlogList({
   posts,
-  categories,
+  pageSize,
+  loadMore = false,
 }: {
   posts: PostSummary[];
-  categories: string[];
+  pageSize: number;
+  loadMore?: boolean;
 }) {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const filtered = useMemo(() => {
-    if (!selectedCategory) return posts;
-    return posts.filter((p) => p.categories.includes(selectedCategory));
-  }, [posts, selectedCategory]);
-
-  const pageCount = Math.ceil(filtered.length / POSTS_PER_PAGE);
-  const pageItems = filtered.slice(
-    (currentPage - 1) * POSTS_PER_PAGE,
-    currentPage * POSTS_PER_PAGE,
-  );
-
-  const handleCategoryClick = (cat: string) => {
-    setSelectedCategory(cat === selectedCategory ? null : cat);
-    setCurrentPage(1);
-  };
-
-  const featured = pageItems[0];
-  const rest = pageItems.slice(1);
+  const [shown, setShown] = useState(pageSize);
+  const visible = posts.slice(0, shown);
 
   return (
-    <div className="pb-[12.2rem] mx-auto w-[95%] max-w-[83rem] md:w-[85%] xl:w-[70%]">
-      <div className="mb-[3.5rem] flex flex-wrap">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => handleCategoryClick(cat)}
-            className={`py-[0.7rem] px-[0.8rem] last:mr-0 text-[1.1rem] font-normal leading-[2.7rem] whitespace-nowrap ${
-              selectedCategory === cat
-                ? 'bg-violet text-white'
-                : '!text-black !bg-white'
-            }`}
-          >
-            {cat}
-          </button>
+    <div className="mx-auto w-full">
+      <div
+        className="grid grid-cols-1 md:grid-cols-3 gap-x-[2.6rem] gap-y-[10rem]"
+        role="list"
+      >
+        {visible.map((post) => (
+          <PostCard key={post.id} post={post} />
         ))}
       </div>
-
-      {featured && (
-        <div className="mb-[4.2rem]">
-          <PostCard post={featured} variant="horizontal" />
-        </div>
-      )}
-
-      <div className="flex flex-wrap">
-        {rest.map((post) => (
-          <div
-            key={post.id}
-            className="odd:mr-[2%] mb-[3.7rem] w-full md:w-[49%]"
-          >
-            <PostCard post={post} variant="vertical" />
-          </div>
-        ))}
-      </div>
-
-      {pageCount > 1 && (
-        <div className="flex justify-center mt-[3rem]">
+      {loadMore && shown < posts.length && (
+        <div className="text-center mt-[5rem]">
           <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((p) => p - 1)}
-            aria-label="Previous page"
-            className="p-[0.8rem] text-[1.4rem] font-normal text-black leading-[2.7rem] hover:underline disabled:opacity-40"
+            onClick={() => setShown((n) => n + pageSize)}
+            className="inline-block bg-violet text-white font-bold text-[1.6rem] leading-[1.2] px-[4.5rem] py-[2.5rem] hover:bg-pink"
           >
-            {'< Previous'}
-          </button>
-          {Array.from({ length: pageCount }, (_, i) => i + 1).map((page) => (
-            <button
-              key={page}
-              onClick={() => setCurrentPage(page)}
-              aria-label={`Page ${page}`}
-              aria-current={page === currentPage ? 'page' : undefined}
-              className={`p-[0.8rem] text-[1.4rem] leading-[2.7rem] hover:underline ${
-                page === currentPage ? 'font-bold' : 'font-normal text-black'
-              }`}
-            >
-              {page}
-            </button>
-          ))}
-          <button
-            disabled={currentPage === pageCount}
-            onClick={() => setCurrentPage((p) => p + 1)}
-            aria-label="Next page"
-            className="p-[0.8rem] text-[1.4rem] font-normal text-black leading-[2.7rem] hover:underline disabled:opacity-40"
-          >
-            {'Next >'}
+            Load More
           </button>
         </div>
       )}
@@ -112,60 +49,44 @@ export function BlogList({
   );
 }
 
-function PostCard({
-  post,
-  variant,
-}: {
-  post: PostSummary;
-  variant: 'horizontal' | 'vertical';
-}) {
-  const isHorizontal = variant === 'horizontal';
+function PostCard({ post }: { post: PostSummary }) {
+  const href = `/blog/${post.id}`;
   return (
-    <div
-      className={`flex border border-gray-300 border-solid h-[400px] ${
-        isHorizontal ? 'flex-row' : 'flex-col'
-      }`}
-    >
+    <article className="flex flex-col bg-white" role="listitem">
       {post.featuredImage && (
-        <div
-          className={`relative overflow-hidden ${
-            isHorizontal ? 'w-1/2 h-full' : 'w-full h-[20rem]'
-          }`}
-        >
-          <img
-            src={post.featuredImage.src}
-            alt={post.featuredImage.alt}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-          />
-        </div>
+        <a href={href} tabIndex={-1} className="block w-full">
+          <div className="relative w-full" style={{ paddingBottom: '55%' }}>
+            <img
+              src={post.featuredImage.src}
+              alt={post.featuredImage.alt}
+              loading="lazy"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+            />
+          </div>
+        </a>
       )}
-      <div
-        className={`px-[0.7rem] pb-[3rem] ${
-          isHorizontal
-            ? 'pr-[4rem] pl-[2rem] w-1/2 flex flex-col justify-center'
-            : ''
-        }`}
-      >
-        <h3
-          className={`text-[2.4rem] font-extrabold leading-[3rem] text-violet font-heading ${
-            isHorizontal ? 'my-[2rem]' : 'mt-[1rem] mb-[1rem]'
-          }`}
+      <div className="px-[2.7rem] mt-[2.4rem] mb-[2rem] grow">
+        <h4 className="text-[2.2rem] font-bold leading-[2.9rem] tracking-[-0.04rem] capitalize text-black mb-[1.5rem]">
+          <a href={href}>{post.title}</a>
+        </h4>
+        <a
+          href={href}
+          aria-label={`Read more about ${post.title}`}
+          className="inline-block text-[1.4rem] font-bold text-black underline mb-[2rem]"
         >
-          <a href={`/blog/${post.id}`}>{post.title}</a>
-        </h3>
-        <p className="text-[1.2rem] font-normal leading-[2.7rem] text-black">
-          By {post.authors}
-        </p>
-        <p className="text-[1.2rem] font-normal leading-[2.7rem] text-black">
-          {post.published}
-        </p>
+          Read More
+        </a>
       </div>
-    </div>
+      <div className="border-t border-[#eaeaea] px-[2.7rem] py-[1rem] text-[1.2rem] text-[#161616] flex gap-[1.5rem]">
+        <span>{post.authors}</span>
+        <span>{post.published}</span>
+      </div>
+    </article>
   );
 }

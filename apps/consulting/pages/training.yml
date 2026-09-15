@@ -1,11 +1,13 @@
 slug: training
 title: "Training"
-description: "Training & Related Services Advanced PyData Courses Basic Python courses are easy to come by but when you want to dig deep, the options are"
+seoTitle: "Advanced PyData and Python Training I Quansight Consulting"
+description: "Quansight delivers advanced PyData and Python training, custom corporate curriculum, and hands-on workshops in ML, HPC, visualization, and more."
 blocks:
 - type: hero
   variant: "small"
   gradientFrom: "#452391"
   gradientTo: "#963895"
+  minHeight: "60vh"
   image: "/page-assets/training/Hero-Background-4.png"
   imageAlt: ""
   overlayOpacity: 0.26
@@ -28,6 +30,7 @@ blocks:
               sizePx: 20
               fontWeight: 700
               color: "#000000"
+              lineHeight: "31px"
             - type: button
               url: "#bookacallform"
               text: "Learn About PyData Courses"
@@ -36,6 +39,9 @@ blocks:
               isTriangle: true
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
+              fontSizePx: 16
+              fontWeight: 700
+              padding: "25px 45px 25px 45px"
           - - type: heading
               text: "Corporate Curriculum Development"
               level: 2
@@ -48,6 +54,7 @@ blocks:
               sizePx: 20
               fontWeight: 700
               color: "#FFFFFF"
+              lineHeight: "31px"
             - type: button
               url: "#bookacallform"
               text: "Learn About Curriculum Development"
@@ -56,6 +63,9 @@ blocks:
               isTriangle: true
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
+              fontSizePx: 16
+              fontWeight: 700
+              padding: "25px 45px 25px 45px"
         columnBackgrounds:
           - "#99C941"
           - "#A43A8F"
@@ -67,10 +77,14 @@ blocks:
             right: "30px"
             bottom: "60px"
             left: "30px"
-          - right: "30px"
+          - top: "0px"
+            right: "30px"
+            bottom: "0px"
             left: "30px"
+        maxWidthPx: 1000
         gapPx: 0
   paddingBottom: "80px"
+  maxWidthPx: 1000
 - type: columns
   columns:
     - - type: columns
@@ -89,6 +103,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/training/dask-150x150.webp"
                     alt: "Image of the Dask logo"
@@ -101,6 +116,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -109,8 +125,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
       - type: columns
         columns:
           - - type: columns
@@ -127,6 +145,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/training/logo-300x136.png"
                     alt: "Image of the Open CV logo"
@@ -139,6 +158,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -147,8 +167,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
       - type: columns
         columns:
           - - type: columns
@@ -165,6 +187,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/training/dask-150x150.webp"
                     alt: "Image of the Dask logo"
@@ -177,6 +200,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -185,8 +209,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
       - type: columns
         columns:
           - - type: columns
@@ -203,6 +229,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/training/holoviz-150x150.webp"
                     alt: "Image of the HoloViz logo"
@@ -215,6 +242,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -223,8 +251,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
       - type: columns
         columns:
           - - type: columns
@@ -241,6 +271,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/training/intake-150x150.webp"
                     alt: ""
@@ -253,6 +284,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -261,8 +293,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
       - type: columns
         columns:
           - - type: columns
@@ -279,6 +313,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/training/python-logo-master-v3-TM-flattened-300x101.png"
                     alt: "Image of the Python logo"
@@ -291,6 +326,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -299,8 +335,10 @@ blocks:
                   left: "20px"
                 - right: "20px"
                   left: "20px"
+              maxWidthPx: 1200
               gapPx: 20
         paddingTop: "60px"
+        maxWidthPx: 1200
   paddingBottom: "50px"
 - type: columns
   columns:
@@ -317,12 +355,15 @@ blocks:
               html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\">connect@quansight.com</a></p>"
               sizePx: 16
               color: "#000000"
+              lineHeight: "2em"
+              widthPercent: 90
           - - type: image
               src: "/page-assets/training/Quansight-contact-02-02-02-1-1.svg"
               alt: ""
               width: 1122
               height: 889
               widthPercent: 100
+              heightPx: 500
         columnBackgrounds:
           - "#FAFAFF"
           - "#FAFAFF"
@@ -334,7 +375,12 @@ blocks:
             right: "50px"
             bottom: "50px"
             left: "50px"
-
+          - top: "0px"
+            right: "0px"
+            bottom: "0px"
+            left: "0px"
+        maxWidthPx: 1200
         gapPx: 0
   paddingTop: "100px"
   paddingBottom: "100px"
+  maxWidthPx: 1200

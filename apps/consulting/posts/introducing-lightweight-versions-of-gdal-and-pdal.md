@@ -4,17 +4,22 @@ published: July 24, 2024
 authors: [isuru-fernando]
 description: 'Geocoding is the practice of taking in an address and assigning a latitude-longitude coordinate to it. Doing so for millions of rows can be an expensive and slow process, as it typically relies on paid API services. Learn how we saved our client time and money by leveraging open source tools and datasets for their geocoding needs.'
 category: [Packaging]
+tags: ['GDAL', 'Lightweight Versions of GDAL and PDAL', 'PDAL']
 featuredImage:
   src: /posts/introducing-lightweight-versions-of-gdal-and-pdal/Introducing-Lightweight-Versions-of-GDAL-and-PDAL.png
   alt: 'Introducing Lightweight Versions of GDAL and PDAL'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Introducing Lightweight Versions of GDAL and PDAL'
+banner:
+  - src: /posts/introducing-lightweight-versions-of-gdal-and-pdal/Quansight-logo-cropped.svg
+    alt: 'Image of the Quansight logo'
+  - src: /posts/introducing-lightweight-versions-of-gdal-and-pdal/hobu-logo-2C.png
+    alt: ''
 ---
 
-![](/posts/introducing-lightweight-versions-of-gdal-and-pdal/hobu-logo-2C.png)
+<div class="post-text" style="font-weight:500;color:#000000">
 
 _See how [Hobu](https://www.google.com/url?q=https://hobu.co/&sa=D&source=docs&ust=1721828383133768&usg=AOvVaw1y2fLe1mmVu83PXMG8fVgv) teamed with Quansight to fund the transition to a deferred plugin system in both GDAL and PDAL. The new architecture was implemented in GDAL 3.9.1 and PDAL 2.7.2._
+
+</div>
 
 The evolution of geospatial data processing has taken a significant step forward with the introduction of lightweight versions of the Geospatial Data Abstraction Library (GDAL) and the Point Data Abstraction Library (PDAL). This new architecture addresses the long-standing issue of dependency bloat, significantly improving solve times, download speeds, and overall package manageability for users. This post delves into the history, technical implementation, and benefits of this transition.
 
@@ -36,7 +41,11 @@ For example, instead of HDF5 being a dependency of `libgdal.(dylib/so/dll)` , th
 
 This allows us to package the plugins as separate conda packages and therefore the core library can remain small while enabling full functionality of GDAL through these plugins. A nice feature of RFC 96 is that the core libgdal library will output a customizable error message when a plugin fails to load. For example when the hdf5 plugin is in a separate package called libgdal-hdf5, we can introduce an error message that says
 
+<div class="post-text" style="font-weight:500">
+
 You may install it with ‘conda install -c conda-forge libgdal-hdf5’.
+
+</div>
 
 This concept was first used for `libarrow/libparquet` dependency since it is a large dependency and especially because gdal supports four different major versions on conda-forge. By separating this dependency, only the plugin needs to be built for the four different arrow/parquet versions as opposed to the core libgdal library being built for the four different versions. The conda package for the plugin was called `libgdal-arrow-parquet` and depended on the core library conda package `libgdal` which included the rest of the plugins.
 
@@ -44,7 +53,11 @@ This concept was first used for `libarrow/libparquet` dependency since it is a l
 
 In order to generalize the above strategy to more plugins, we are now introducing a `libgdal-core` conda package and more plugins as conda packages with all plugins (except arrow/parquet) being installable with `libgdal` . We also made the python bindings depend on `libgdal-core` instead of `libgdal` so that users can select the plugins that they need.
 
+<div class="post-text" style="font-weight:500">
+
 gdal conda packages
+
+</div>
 
 – `libgdal-core` – core C++ library  
 – `libgdal` – core C++ library and all plugins  
@@ -84,37 +97,24 @@ Currently only the python bindings `gdal` depend on `libgdal-core` and in the fu
 
 We looked at the install times for `libgdal` vs `libgdal-core` on Github actions and `libgdal-core` was faster. We also noticed that `libboost-headers` was being pulled by `libkml` which is only needed for development. We split the `libkml` conda package into `libkml` and `libkml-devel` so that end users are not going to end up with the `libboost-headers` which has thousands of header files.
 
-**OS**
-
-**libgdal without KML split**
-
-**libgdal with KML split**
-
-**libgdal-core**
-
-Windows
-
-3m 8s
-
-1m 6s
-
-43s
-
-Linux
-
-28s
-
-21s
-
-16s
-
-macOS
-
-27s
-
-22s
-
-15s
+<div class="post-grid" style="--columns:4">
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 2px;border-color:#452392"><p><strong>OS</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong>libgdal without KML split</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong> libgdal with KML split</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 2px 1px 1px;border-color:#452392"><p><strong>libgdal-core</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>Windows</p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p><span style="font-weight: 400;">3m 8s</span></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p><span style="font-weight: 400;">1m 6s</span></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p><span style="font-weight: 400;"> 43s </span></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p><span style="font-weight: 400;">Linux </span></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>28s</p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>21s</p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>16s</p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 2px;border-color:#452392"><p><span style="font-weight: 400;">macOS</span></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 2px 2px 2px;border-color:#452392"><p>27s</p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 2px 2px 2px;border-color:#452392"><p>22s</p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 2px 1px;border-color:#452392"><p>15s</p></div>
+</div>
 
 Note that the timings are from a quick testing on Github actions and not formal benchmarking.
 
@@ -147,3 +147,5 @@ The shift to a deferred plugin system in GDAL and PDAL is a pivotal moment in ge
 ## Acknowledgements
 
 This work was funded by [Hobu, Inc](https://hobu.co/) in collaboration with Quansight, Inc.
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>

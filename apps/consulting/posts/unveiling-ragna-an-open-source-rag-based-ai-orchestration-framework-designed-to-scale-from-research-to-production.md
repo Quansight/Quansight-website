@@ -4,15 +4,18 @@ published: October 31, 2023
 authors: [dharhas-pothina]
 description: 'Announcing Ragna, a new open source project from Quansight designed to allow organizations to explore the power of Retrieval-Augmented Generation (RAG) based AI tools.'
 category: [Artificial Intelligence]
+tags: ['Open Source RAG-based AI Orchestration Framework', 'Ragna']
 featuredImage:
   src: /posts/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production/Unveiling-Ragna.jpg
   alt: 'Unveiling Ragna: An Open Source RAG-based AI Orchestration Framework Designed to Scale From Research to Production'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Unveiling Ragna: An Open Source RAG-based AI Orchestration Framework Designed to Scale From Research to Production'
+banner:
+  - src: /posts/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production/Ragna-Logo-Name-03.svg
+    alt: 'Image of the Ragna logo'
 ---
 
 ![Image of the Ragna logo](/posts/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production/Ragna-logo-1000x500px-qeor71cpw39xlo1x886bdkcazk03vytxhmpyd5epiw.jpg)
+
+<div class="post-text" style="color:#000000">
 
 Today, we are announcing the release of Ragna, a new open source project from Quansight designed to allow organizations to explore the power of Retrieval-Augmented Generation (RAG) based AI tools. Ragna provides an intuitive API for quick experimentation and built-in tools for creating production-ready applications allowing you to quickly leverage Large Language Models (LLMs) for your work.
 
@@ -26,19 +29,35 @@ Ragna currently ships with pre-built extensions for OpenAI, MosaicML, Anthropic,
 
 In this post, we explain what Retrieval-Augmented Generation is, how it can enable AI assistants to produce more accurate answers to queries, and why yet another tool was needed to make this happen.
 
+</div>
+
 {/_ TODO: manual conversion needed: widget=video.default (self-hosted video) _/}
+
+<div class="post-text" style="color:#0c0c0c">
 
 Get started at [ragna.chat](https://ragna.chat/)!
 
+</div>
+
 ## All About RAGs
+
+<div class="post-text" style="font-size:20px;line-height:1.5;color:#0c0c0c">
 
 Over the last year, Quansight has been helping clients explore the exciting and rapidly evolving world of generative AI, and one idea that has consistently excited people is the prospect of employing an AI assistant to inquire about extensive in-house document collections. The notion of being able to tap into the wealth of knowledge contained within these documents without the arduous task of reading each one is compelling.
 
 However, foundational LLMs are trained on massive _but static_ datasets, and they do not have access to the information contained within your collection of documents. Questions you ask will either be unanswerable or be answered with a [_hallucination_](<https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)>). We need a mechanism to augment the LLMs with the new information from the documents.
 
+</div>
+
 ![Screenshot of OpenAI's ChatGPT (GPT-3.5). Query: "What is the Ragna Framework?" Response: "As of my last knowledge update in January 2022, I am not aware of any widely known or established framework or technology called the Ragna Framework". ChatGPT continues to elaborate on potential reasons for unawareness.](/posts/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production/chatgpt-what-is-ragna-framework.png)
 
+<div class="post-text" style="color:#0c0c0c">
+
 _ChatGPT has no idea what our new Ragna Framework is._
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 There are two primary methods for supplying a LLM with fresh data. The first approach involves presenting the data alongside a specific question and directing the LLM to exclusively focus on the provided data. This method falls under the category of _prompt engineering_. The second technique involves _fine-tuning_ or adjusting the LLM’s parameters through additional training on the new data. Both of these approaches come with their respective challenges. Incorporating data into the prompt is constrained by the limited space available for text in the prompt (approximately 3,000 words for ChatGPT 3.5), making it suitable only for very small datasets. Fine-tuning demands a substantial volume of data, necessitates the use of expensive GPUs, and still carries the risk of producing hallucinations due to the substantial “weight” of the considerably larger original training dataset.
 
@@ -54,7 +73,11 @@ To understand how this works, let’s define some terminology:
 
 **Similarity Search** – is the process of comparing a query vector (representing a question or query) with vectors stored in the vector database to find the most similar documents or passages. Various mathematical measures, such as cosine similarity or Euclidean distance, are used to assess similarity.
 
+</div>
+
 ![RAG](/posts/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production/RAG-qeoi6yk0m2kml5u7t8lpnrxxfrquhgcvtd5m1tswkm.png)
+
+<div class="post-text" style="color:#0c0c0c">
 
 The diagram illustrates a series of steps that lead from a query to an answer, as outlined below:
 
@@ -65,7 +88,11 @@ The diagram illustrates a series of steps that lead from a query to an answer, a
 - Dispatch the prompt to the LLM to generate a response.
 - Return the response and also the list of the text passages from which the answer was derived, allowing for accuracy verification.
 
+</div>
+
 ## So, Why a New Tool? Aren’t There Plenty Already Out There?
+
+<div class="post-text" style="color:#0c0c0c">
 
 We did not set out to build a new tool; rather, our primary focus was on developing AI capabilities for our clients. However, as we assisted them in navigating the AI landscape, it became evident that a significant gap existed in the ecosystem.
 
@@ -82,11 +109,17 @@ As Quansight accumulated experience in developing RAG applications for diverse c
 
 Ragna was conceived to bridge this gap in the ecosystem, serving as a fully open source framework for constructing RAG-based AI applications that seamlessly scale from research and prototyping to production.
 
+</div>
+
 ![Code editors (JupyterLab) can interface with Ragna's Python API, and web UIs and third-party integrations (Slack) can interface with the REST API which wraps around the Python API. The APIs use task queues and workers to connect to asssistants (LLMs) like OpenAI's GPT and Source Storages (Vector databases) like Chroma. The APIs also have access to a SQL database and object storage to track the user session.](/posts/unveiling-ragna-an-open-source-rag-based-ai-orchestration-framework-designed-to-scale-from-research-to-production/ragna-architecture-qeoic0wqnsa4axasb9m1ogxpc0jhclpcgqt59y8plu.png)
 
 ## Get Started: ragna.chat
 
+<div class="post-text" style="color:#0c0c0c">
+
 You can install and try out Ragna for yourself in under 10 minutes, and check out the documentation at [ragna.chat](https://ragna.chat/en/latest/) to learn more.
+
+</div>
 
 ```bash
 pip install 'ragna[all]'  # Install ragna with all extensions
@@ -96,12 +129,20 @@ ragna init  # Initialize configuration
 ragna ui  # Launch the web app
 ```
 
+<div class="post-text" style="color:#0c0c0c">
+
 Ragna is an early-stage open source project that has a long way to go. We’d love to hear your [thoughts and feedback](https://github.com/Quansight/ragna/discussions), and [welcome all contributions](https://github.com/Quansight/ragna/issues) to help improve Ragna.
 
+</div>
+
 ## Exploring Generative AI? We Can Help.
+
+<div class="post-text" style="color:#0c0c0c">
 
 If you need someone to help you explore generative AI, build and deploy capabilities across your organization, Quansight can help. See our [LLM Services](/llm-services) for more information or get in touch with the button below.
 
 Thanks for reading! ⛵
 
-[Contact Us](/llm-services#bookacallform)
+</div>
+
+<p class="post-button post-button--center"><a href="/llm-services#bookacallform">Contact Us <svg viewBox="-5 -5 20 20" width="20" height="20" aria-hidden="true"><polygon points="2,2 8,5 2,8" fill="currentColor" /></svg></a></p>

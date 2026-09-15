@@ -4,21 +4,32 @@ published: July 12, 2024
 authors: [marco-gorelli]
 description: 'Geocoding is the practice of taking in an address and assigning a latitude-longitude coordinate to it. Doing so for millions of rows can be an expensive and slow process, as it typically relies on paid API services. Learn how we saved our client time and money by leveraging open source tools and datasets for their geocoding needs.'
 category: [PyData Ecosystem, Data Engineering]
+tags:
+  [
+    'AWS Lambda',
+    'Polars Plugins',
+    'Reverse-Geocoding',
+    'Reverse-Geocoding in AWS Lambda',
+  ]
 featuredImage:
   src: /posts/reverse-geocoding-aws-lambda-using-polars-plugin/Reverse-Geocoding-AWS-Lambda-Save-Time-Money-Using-Polars-Plugins-Thumbnail-Marco-Gorelli-Quansight-Labs-Open-Source-scaled.jpg
   alt: 'A watercolor illustration of a polar bear plugging an electric plug into a wall socket, symbolizing the connection and power of using Polars for geocoding and reverse-geocoding tasks.'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Reverse-Geocoding in AWS Lambda: Save Time and Money Using Polars Plugins'
+banner: []
 ---
 
-## Reverse-Geocoding in AWS Lambda: Save Time and Money Using Polars Plugins
+<h2 class="post-heading" style="font-size:40px;line-height:1;font-weight:900;font-family:Mukta, sans-serif">Reverse-Geocoding in AWS Lambda: Save Time and Money Using Polars Plugins</h2>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
 
 Geocoding is the practice of taking in an address and assigning a latitude-longitude coordinate to it. Doing so for millions of rows can be an expensive and slow process, as it typically relies on paid API services. Learn how we saved our client time and money by leveraging open source tools and datasets for their geocoding needs.
 
 Our solution reduced their geocoding process from hours to minutes and their reverse geocoding process from unfeasibly expensive and slow to fast and cheap.
 
+</div>
+
 ## What Is Geocoding and Reverse-Geocoding?
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
 
 Geocoding answers questions such as:  
 _Given the address: “17600 seneca spgs college station tx 77845”, what’s its latitude-longitude coordinate?_
@@ -44,7 +55,11 @@ The solution we delivered them, on the other hand, was lightweight, cheap, and f
 
 We’re here to share our findings and give an overview of how we did it.
 
+</div>
+
 ## Open-Source Geocoding: Single-Node Solution
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
 
 Suppose we’re starting with a batch of addresses and need to geocode them. The gist of the solution we delivered is as follows:
 
@@ -57,11 +72,19 @@ Suppose we’re starting with a batch of addresses and need to geocode them. The
 
 Whilst conceptually simple, we encountered several hurdles when implementing it. We’ll now tell how we overcame them.
 
+</div>
+
 ## First Hurdle: Inconsistent Road Names
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
 
 Road names vary between providers. For example, “Seneca Springs” might also appear as “Seneca Spgs.” We used the [libpostal](https://github.com/openvenues/libpostal)’s `expand\_address` function, as well as some hand-crafted logic, to generate multiple variants of each address (in both the input and the lookup dataset), thus increasing the chances of finding matches.
 
+</div>
+
 ## Second Hurdle: Missing Zip Code and/or City
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
 
 The OpenAddresses data contained all the information we needed, except that the zip code was missing for some rows. For such rows, we would do the following:
 
@@ -72,13 +95,21 @@ The OpenAddresses data contained all the information we needed, except that the 
 
 The last option used a Polars plugin we developed specially for the client (who kindly allowed us to open source it). Using that plugin, it’s possible to do approximate reverse geocoding of millions of rows in just seconds.
 
+</div>
+
 ## Third Hurdle: Going Out-Of-Memory
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
 
 The amount of data we collected was several gigabytes—much more than our single-node 16GB RAM machine could handle. This is why our client was previously using a cluster to process it. However, we found this to be unnecessary because Polars’ lazy execution made it very easy for us not to have to load all the data at once.
 
 By leveraging [Polars’ lazy execution and query](https://docs.pola.rs/user-guide/lazy/optimizations/) optimization, we were able to carry out the entire process on a single-node machine! The overall impact was enormous: the geocoding process went from taking hours to less than 10 minutes. This was fast and reliable enough that the client was able to discontinue a paid API service that was costing them ~$30,000 per year!
 
+</div>
+
 ## Open-Source Reverse-Geocoding: AWS Lambda Is All You Need?
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
 
 Thus far, we’ve talked about geocoding. What about the reverse process, reverse-geocoding? This is where the success story becomes even bigger: not only did our solution run on a single node, but it could also run on AWS Lambda, where memory, time, and package size are very constrained!
 
@@ -109,8 +140,18 @@ Not only did it all fit comfortably into the AWS Lambda 250MB package size limit
 
 That’s the power of lazy execution and Rust. If you, too, would like custom Rust and/or Python solutions that can be easily and cheaply deployed for your use case, please contact Quansight Consulting.
 
+</div>
+
 ## What We Can Do for You
+
+<div class="post-text" style="color:#0c0c0c">
 
 By leveraging both open source datasets and open source tools, as well as our in-house expertise, we were able to save our client time and money on their geocoding and reverse-geocoding needs. We made the infeasible feasible. If you’d like customized solutions tailored to your business needs, delivered by open source experts, please [get in contact with Quansight](/open-source-services) today.
 
 Contact us today: [connect@quansight.com](mailto:connect@quansight.com)
+
+</div>
+
+![A square watercolor illustration of a polar bear plugging an electric plug into a wall socket, symbolizing the connection and power of using Polars for geocoding and reverse-geocoding tasks.](/posts/reverse-geocoding-aws-lambda-using-polars-plugin/Reverse-Geocoding-AWS-Lambda-Save-Time-Money-Using-Polars-Plugins-Square-Marco-Gorelli-Quansight-Labs-Open-Source-1536x1536.jpg)
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>

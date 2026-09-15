@@ -1,11 +1,13 @@
 slug: consulting
 title: "Consulting Overview"
-description: "Consulting Services What Will You Do With Some Expert Assistance? Quansight provides the additional people and expertise needed to deploy new technology, solve complex problems,"
+seoTitle: "Consulting Services | AI, Data & Open Source Experts"
+description: "Quansight offers consulting in AI, data engineering, visualization, and open source integration. Boost performance with top industry experts."
 blocks:
 - type: hero
   variant: "small"
   gradientFrom: "#452391"
   gradientTo: "#963895"
+  minHeight: "60vh"
   image: "/page-assets/consulting/Hero-Background-11.png"
   imageAlt: ""
   overlayOpacity: 0.26
@@ -24,23 +26,26 @@ blocks:
                     sizePx: 40
                     fontWeight: 900
                     color: "#452392"
+                    lineHeight: "1.1em"
                     paddingRight: "30px"
                   - type: text
                     html: "<p>Quansight provides the additional people and expertise needed to deploy new technology, solve complex problems, or optimize what you have in place so it runs faster and uses less memory. We regularly help data engineering, DevOps, data science, MLOps, and analytics teams improve their performance with the services listed below. We’ll give your team a transformative boost with some of the top talent in the industry. Don’t see the area where your team needs some expert help? Connect with us and we’ll design a custom engagement tailored to your team’s needs.</p>"
                     sizePx: 16
                     color: "#000000"
+                    lineHeight: "1.7em"
                     paddingRight: "50px"
                 - - type: image
                     src: "/page-assets/consulting/people-1.svg"
                     alt: ""
                     width: 505
                     height: 254
-                    widthPercent: 100
               columnWidths:
                 - 54.638
                 - 45.262
+              maxWidthPx: 1311
               gapPx: 0
         paddingTop: "25px"
+        maxWidthPx: 1311
   paddingTop: "70px"
   paddingBottom: "20px"
 - type: columns
@@ -54,6 +59,7 @@ blocks:
                   align: "start"
                   descriptionSizePx: 16
                   descriptionColor: "#000000"
+                  descriptionLineHeight: "1.7em"
             - type: button
               url: "/visualization-dashboards"
               text: "Learn More"
@@ -61,6 +67,9 @@ blocks:
               isBordered: false
               isTriangle: true
               textColor: "#452391"
+              fontSizePx: 18
+              fontWeight: 700
+              padding: "40px 0px 40px 0px"
           - - type: icon-box-grid
               items:
                 - title: "Algorithms, AI & Machine Learning"
@@ -68,6 +77,7 @@ blocks:
                   align: "start"
                   descriptionSizePx: 16
                   descriptionColor: "#000000"
+                  descriptionLineHeight: "1.7em"
             - type: button
               url: "/algorithms-ai-machine-learning"
               text: "Learn More"
@@ -75,6 +85,9 @@ blocks:
               isBordered: false
               isTriangle: true
               textColor: "#452391"
+              fontSizePx: 18
+              fontWeight: 700
+              padding: "40px 0px 40px 0px"
         columnWidths:
           - 50
           - 50
@@ -94,6 +107,7 @@ blocks:
                   align: "start"
                   descriptionSizePx: 16
                   descriptionColor: "#000000"
+                  descriptionLineHeight: "1.7em"
             - type: button
               url: "/packaging-and-distribution"
               text: "Learn More"
@@ -101,6 +115,9 @@ blocks:
               isBordered: false
               isTriangle: true
               textColor: "#452391"
+              fontSizePx: 18
+              fontWeight: 700
+              padding: "40px 0px 40px 0px"
           - - type: icon-box-grid
               items:
                 - title: "Jupyter Technologies"
@@ -108,6 +125,7 @@ blocks:
                   align: "start"
                   descriptionSizePx: 16
                   descriptionColor: "#000000"
+                  descriptionLineHeight: "1.7em"
             - type: button
               url: "/jupyter-technologies"
               text: "Learn More"
@@ -115,6 +133,9 @@ blocks:
               isBordered: false
               isTriangle: true
               textColor: "#452391"
+              fontSizePx: 18
+              fontWeight: 700
+              padding: "40px 0px 40px 0px"
         columnWidths:
           - 50
           - 50
@@ -137,6 +158,9 @@ blocks:
                     isTriangle: true
                     backgroundColor: "#452392"
                     textColor: "#FFFFFF"
+                    fontSizePx: 16
+                    fontWeight: 700
+                    padding: "25px 44px 23px 45px"
                     align: "center"
               paddingTop: "45px"
               paddingRight: "45px"
@@ -159,12 +183,15 @@ blocks:
               html: "<p>For all inquiries about our services, projects, and business, contact us at: <a href=\"mailto:connect@quansight.com\">connect@quansight.com</a><br/><br/></p>"
               sizePx: 16
               color: "#000000"
+              lineHeight: "2em"
+              widthPercent: 90
           - - type: image
               src: "/page-assets/consulting/Quansight-contact-02-02-02-1-1.svg"
               alt: ""
               width: 1122
               height: 889
               widthPercent: 100
+              heightPx: 500
         columnBackgrounds:
           - "#FAFAFF"
           - "#FAFAFF"
@@ -176,7 +203,12 @@ blocks:
             right: "50px"
             bottom: "50px"
             left: "50px"
-
+          - top: "0px"
+            right: "0px"
+            bottom: "0px"
+            left: "0px"
+        maxWidthPx: 1200
         gapPx: 0
   paddingTop: "100px"
   paddingBottom: "100px"
+  maxWidthPx: 1200

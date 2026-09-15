@@ -5,6 +5,10 @@ authors: [pavithra-eswaramoorthy]
 description: >
   We’re excited to announce a new chapter for Nebari, formerly known as QHub, as it evolves into an independent, community-led project, with a fresh new look!
 category: [Jupyter, Open Source Software, Scalable Computing]
+tags: ['Nebari', 'Open Source Data Science Platform', 'Qhub']
+textStyle:
+  weight: 500
+  color: '#000000'
 featuredImage:
   src: /posts/evolving-qhub-to-nebari-your-open-source-data-science-platform/5-nebari-logo.png
   alt: 'Nebari logo'

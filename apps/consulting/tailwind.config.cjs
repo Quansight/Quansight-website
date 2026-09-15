@@ -15,7 +15,7 @@ module.exports = {
     },
     // Same reasoning, for the font-size scale below picked at runtime via
     // src/utils/fontSizeTokens.ts's `text-${token}`.
-    { pattern: /^text-(xs|sm|base|lg|xl|2xl|3xl|4xl)$/ },
+    { pattern: /^text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl)$/ },
   ],
   theme: {
     extend: {
@@ -38,6 +38,7 @@ module.exports = {
         '2xl': '4.7rem',
         '3xl': '5.5rem',
         '4xl': '7rem',
+        '5xl': '9rem', // home's hero title only
       },
       colors: {
         // Real per-page Elementor CSS exports the "same" design color as

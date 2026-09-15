@@ -1,25 +1,553 @@
-# Minimal placeholder home page. Full marketing-page content migration
-# (24 live WP pages) is a separate, not-yet-started piece of work -- see
-# quansight.com-migration.md's "## Pages" section. This stub exists only
-# to make the app buildable/servable end-to-end for the blog migration.
-#
-# hero image + gradient are the real ones from the live homepage (fetched
-# via convert-pages-consulting.py's fetch_hero_background(), which reads
-# Elementor's per-page CSS live since neither the REST API nor the
-# monolith scrape captures it) -- just the page-heading text/blocks below
-# it are still a placeholder.
-
 slug: home
-title: Quansight
-description: Open source, sustainable, and community-driven AI and data science consulting.
+title: "Home"
+seoTitle: "Quansight | Open Source Consulting & Data Science Experts"
+description: "Quansight connects organizations with open source through consulting, training, and AI/ML expertise—solving data challenges and sustaining Python."
 blocks:
-  - type: hero
-    image: /page-assets/home/Homepage-scaled.jpg
-    imageAlt: ''
-    variant: small
-    gradientFrom: '#452391'
-    gradientTo: '#963895'
-    overlayOpacity: 0.26
-  - type: page-heading
-    title: Quansight
-    description: Open source, sustainable, and community-driven AI and data science consulting. Full homepage content migration from quansight.com is in progress.
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  contentFullWidth: true
+  minHeight: "64vh"
+  paddingBottom: "50px"
+  image: "/page-assets/home/Homepage-scaled.jpg"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Solving Critical Data Challenges.\nSustaining open source."
+  titleSizePx: 90
+  titleFontWeight: 700
+  subTitle: "We deliver engineering expertise and high-value solutions for organizations, while ensuring the open source ecosystems we all depend on are healthy and resilient."
+  subTitleSizePx: 22
+  ctaText: "Get in Touch"
+  ctaUrl: "/about-us#bookacallform"
+- type: columns
+  columns:
+    - - type: heading
+        text: "Trusted By"
+        level: 2
+        sizePx: 25
+        fontWeight: 700
+        color: "#452391"
+        align: "center"
+        lineHeight: "0.6em"
+        paddingTop: "30px"
+        paddingRight: "50px"
+        paddingBottom: "5px"
+        paddingLeft: "50px"
+        background: "#FFFFFF"
+        widthPercent: 70
+        marginTop: "5%"
+      - type: image-carousel
+        images:
+          - src: "/page-assets/home/TDK.svg"
+            alt: "Image of the TDK logo"
+          - src: "/page-assets/home/nvidia-2.svg"
+            alt: "Image of the nvidia logo"
+          - src: "/page-assets/home/Meta.svg"
+            alt: "Image of the Meta logo"
+          - src: "/page-assets/home/Anaconda.svg"
+            alt: "Image of the Anaconda logo"
+          - src: "/page-assets/home/1.png"
+            alt: "Sovereign Tech Agency"
+          - src: "/page-assets/home/2.png"
+            alt: "USGS"
+          - src: "/page-assets/home/3.png"
+            alt: "G Research"
+          - src: "/page-assets/home/4.png"
+            alt: "4"
+        paddingTop: "50px"
+        paddingRight: "50px"
+        paddingBottom: "50px"
+        paddingLeft: "50px"
+        background: "#FFFFFF"
+        boxShadow: "0px 9px 10px -1px rgba(0, 0, 0, 0.24)"
+        widthPercent: 70
+        marginTop: "-1%"
+  marginTop: "-12%"
+  paddingTop: "4%"
+  paddingRight: "8%"
+  paddingBottom: "4%"
+  paddingLeft: "8%"
+  rowGapPx: 5
+  maxWidthPx: 1600
+- type: columns
+  columns:
+    - - type: heading
+        text: "We help organizations build on open source  and strengthen it."
+        level: 4
+        sizePx: 47
+        fontWeight: 800
+        color: "#452392"
+        align: "center"
+        lineHeight: "1.3em"
+  marginBottom: "4%"
+  maxWidthPx: 1000
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: text
+              html: "<p data-end=\"683\" data-start=\"494\">Organizations rely on open source software to innovate, but many struggle to engage sustainably with the communities behind the projects they depend on. Quansight exists to bridge that gap.</p><p data-end=\"1098\" data-start=\"685\">Our team of software developers, community leaders, technical writers, and designers actively maintain and contribute to more than 40 open source projects, including <strong data-end=\"914\" data-start=\"851\">CPython, NumPy, Jupyter, conda-forge, Polars, and stdlib.js</strong>. We partner with engineering, product, and research teams to solve complex technical challenges, accelerate development, reduce risk, and unlock new value across the PyData ecosystem.</p><p data-end=\"1403\" data-start=\"1100\">At the same time, we ensure that this work strengthens the health, resilience, and long-term sustainability of the open source projects and communities our customers rely on. We believe commercial success and community sustainability should reinforce each other — and we help organizations achieve both.</p>"
+              sizePx: 16
+              color: "#000000"
+              lineHeight: "2em"
+              paddingRight: "50px"
+          - - type: image
+              src: "/page-assets/home/perks-and-benefits-1.svg"
+              alt: ""
+              width: 501
+              height: 352
+              widthPercent: 100
+              heightPx: 500
+        columnWidths:
+          - 56.053
+          - 43.947
+        columnPaddings:
+          - right: "9%"
+          - null
+        gapPx: 0
+  marginTop: "2%"
+  marginBottom: "3%"
+  paddingLeft: "3%"
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Quansight Annual Report 2025: Sustained Progress and Organizational Evolution"
+              level: 3
+              sizePx: 50
+              fontWeight: 900
+              color: "#ffffff"
+              lineHeight: "1.2em"
+            - type: text
+              html: "<p>Our team spent over 46,00 hours contributing to 35+ open source projects including NumPy, SciPy, and CPython. In our 4th Annual Report, read how our team is driving innovation and sustainability in the Python ecosystem and beyond.</p>"
+              sizePx: 16
+              color: "#FFFFFF"
+              lineHeight: "2em"
+              widthPercent: 90
+          - - type: image
+              src: "/page-assets/home/annual-report-2025-mockup.png"
+              alt: "Annual Report 2025 with an illustrative cover page showing a night landscape with mountains and a water body."
+              width: 1213
+              height: 893
+              widthPercent: 100
+              heightPx: 440
+              objectFit: "contain"
+        columnBackgrounds:
+          - "#452392"
+          - "#452392"
+        columnWidths:
+          - 55.0
+          - 44.962
+        columnPaddings:
+          - top: "0%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+          - top: "0px"
+            right: "0px"
+            bottom: "0px"
+            left: "0px"
+        maxWidthPx: 1151
+        gapPx: 20
+  columnBackgrounds:
+    - "#452392"
+  marginTop: "5%"
+  paddingTop: "50px"
+  maxWidthPx: 1151
+  fullBleed: true
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: text
+              html: "<p><strong><a href=\"https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2025.pdf\" style=\"color: #ffffff;\"> 👉 Read the Report</a></strong></p>"
+              sizePx: 16
+              fontWeight: 700
+              color: "#FFFFFF"
+              lineHeight: "2.7em"
+              align: "center"
+              paddingTop: "2%"
+              paddingBottom: "2%"
+              widthPercent: 100
+              borderWidth: "1px 1px 1px 1px"
+              borderColor: "#FFFFFF"
+              hoverScale: 0.9
+          - []
+          - []
+        columnBackgrounds:
+          - "#452392"
+          - "#452392"
+          - "#452392"
+        columnWidths:
+          - 25.0
+          - 25.0
+          - 49.664
+        columnPaddings:
+          - top: "0%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+          - top: "0%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+          - top: "0%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+        maxWidthPx: 1151
+        gapPx: 20
+  columnBackgrounds:
+    - "#452392"
+  marginTop: "-1%"
+  paddingBottom: "50px"
+  maxWidthPx: 1151
+  fullBleed: true
+- type: columns
+  columns:
+    - - type: heading
+        text: "Client Testimonials"
+        level: 4
+        sizePx: 50
+        fontWeight: 900
+        color: "#452392"
+        align: "center"
+        lineHeight: "1.2em"
+      - type: testimonial-carousel
+        items:
+          - text: "“A colleague from the Pangeo community opened up the sky for us when they recommended Quansight do the hard work of updating Pandas so it could allow non-nanosecond time resolution, which is crucial to our field (paleoclimatology). We were pleasantly surprised when the reviews of our proposal to the National Science Foundation expressed great support for this collaboration, which helped get the project funded.”  , USC"
+            name: "Julien Emile-Geay"
+            title: "Professor of Climate Science, USC"
+            image: "/page-assets/home/USC-2.png"
+            imageAlt: "Julien Emile-Geay"
+          - text: "\"Quansight was amazing to work with. They helped us select and implement an open source technology stack that enabled us to cost-effectively process terabytes of data per day. Not only that, but they automated the deployment process, untethering us from specific cloud vendors, and enabling us to shop for competitive rates.\""
+            name: "Brian Larsen"
+            title: "Director of Technical Product, Datum"
+            image: "/page-assets/home/Datum.png"
+            imageAlt: "Brian Larsen"
+          - text: "\"We engaged Quansight with some Jupyter, Python team development, data visualization skills in hand. Quansight helped us refine these skills by offering guidance in establishing our best practices, but more important to our long term analytical success, they helped us build a strategy around the use and deployment of these tools.\""
+            name: "Executive"
+            title: "US-Based Systematic Hedge Fund & Commodity Trading Advisor"
+            image: "/page-assets/home/Avatar.png"
+            imageAlt: "Executive"
+  paddingTop: "50px"
+  paddingBottom: "50px"
+  maxWidthPx: 1231
+- type: columns
+  columns:
+    - - type: heading
+        text: "Why Organizations Choose Quansight"
+        level: 4
+        sizePx: 50
+        fontWeight: 900
+        color: "#452392"
+        align: "center"
+        lineHeight: "1.2em"
+        paddingTop: "6px"
+        paddingRight: "6px"
+        paddingBottom: "6px"
+        paddingLeft: "6px"
+      - type: columns
+        columns:
+          - - type: text
+              html: "<h2 style=\"text-align: left;\"><b>1. Deep Technical Expertise</b></h2><p>Our team includes maintainers, core contributors, and long-time practitioners across the PyData and broader open source ecosystem. This deep OSS experience means we don’t just build solutions, we follow established development, packaging, and security best practices from the start, reducing risk and ensuring long-term maintainability.</p>"
+              sizePx: 15
+              paddingRight: "4px"
+              borderWidth: "0px 2px 0px 0px"
+              borderColor: "#CFC8DF"
+          - - type: text
+              html: "<h2 style=\"text-align: left;\"><b>2. A Complete Consulting Model</b></h2><p><span style=\"font-weight: 400;\">Our consulting approach considers the full context of how software is built, used, and sustained, spanning user experience (UX), developer experience (DevEx), documentation, accessibility, and community impact. Especially in our open source services, we design solutions that are usable, adoptable, and aligned with real-world workflows.</span></p>"
+              sizePx: 15
+              paddingRight: "7px"
+              borderWidth: "0px 2px 0px 0px"
+              borderColor: "#CFC8DF"
+              borderRadius: "0px 2px 0px 0px"
+          - - type: text
+              html: "<h2 style=\"text-align: left;\"><b>3. Ecosystem Impact</b></h2><p><span style=\"font-weight: 400;\">We actively contribute upstream to open source projects when it makes sense, strengthening the tools and ecosystems our clients rely on. Beyond direct contributions, we reinvest our success into the community through our open source internship program, OSS funding initiatives, and sustained project maintenance, helping ensure long-term ecosystem health.</span></p>"
+              sizePx: 15
+              paddingRight: "2px"
+        columnPaddings:
+          - right: "4px"
+          - right: "7px"
+          - right: "2px"
+  columnBackgrounds:
+    - "#EFEFEF"
+  paddingTop: "50px"
+  paddingBottom: "50px"
+  maxWidthPx: 1231
+  fullBleed: true
+- type: columns
+  columns:
+    - - type: heading
+        text: "Quansight's Expertise"
+        level: 4
+        sizePx: 50
+        fontWeight: 900
+        color: "#452392"
+        align: "center"
+        lineHeight: "1.2em"
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: text
+                    html: "<p><strong>AI Engineering</strong></p>"
+                    sizePx: 22
+                    fontWeight: 900
+                    color: "#000000"
+                    fontFamily: "heading"
+                    align: "center"
+                  - type: button
+                    url: "/ai-engineering"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    align: "center"
+                - - type: text
+                    html: "<p>Jupyter Technologies</p>"
+                    sizePx: 22
+                    fontWeight: 900
+                    color: "#000000"
+                    fontFamily: "heading"
+                    align: "center"
+                  - type: button
+                    url: "/jupyter-technologies"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    align: "center"
+                - - type: text
+                    html: "<p>Visualizations &amp; Dashboards</p>"
+                    sizePx: 22
+                    fontWeight: 900
+                    color: "#000000"
+                    lineHeight: "34px"
+                    fontFamily: "heading"
+                    align: "center"
+                  - type: button
+                    url: "/visualization-dashboards"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    align: "center"
+              columnWidths:
+                - 33
+                - 33
+                - 33
+              columnPaddings:
+                - top: "45px"
+                  bottom: "45px"
+                - top: "45px"
+                  bottom: "45px"
+                - top: "45px"
+                  bottom: "45px"
+              maxWidthPx: 1314
+              gapPx: 20
+        marginBottom: "-12px"
+        maxWidthPx: 1314
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: text
+                    html: "<p>Open Source Services</p>"
+                    sizePx: 22
+                    fontWeight: 900
+                    color: "#000000"
+                    lineHeight: "34px"
+                    fontFamily: "heading"
+                    align: "center"
+                  - type: button
+                    url: "/open-source-services"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    align: "center"
+                - - type: text
+                    html: "<p>Algorithms, AI, Machine Learning</p>"
+                    sizePx: 22
+                    fontWeight: 900
+                    color: "#000000"
+                    lineHeight: "30px"
+                    fontFamily: "heading"
+                    align: "center"
+                  - type: button
+                    url: "/algorithms-ai-machine-learning"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    align: "center"
+                - - type: text
+                    html: "<p>Packaging &amp; Environment Management</p>"
+                    sizePx: 22
+                    fontWeight: 900
+                    color: "#000000"
+                    lineHeight: "30px"
+                    fontFamily: "heading"
+                    align: "center"
+                  - type: button
+                    url: "/packaging-and-distribution"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    align: "center"
+              columnWidths:
+                - 33
+                - 33
+                - 33
+              columnPaddings:
+                - top: "45px"
+                  bottom: "45px"
+                - top: "45px"
+                  bottom: "45px"
+                - top: "45px"
+                  bottom: "45px"
+              maxWidthPx: 1200
+              gapPx: 20
+        marginBottom: "-12px"
+        maxWidthPx: 1200
+      - type: columns
+        columns:
+          - - type: columns
+              columns:
+                - - type: text
+                    html: "<p>Supply Chain Security</p>"
+                    sizePx: 22
+                    fontWeight: 900
+                    color: "#000000"
+                    lineHeight: "34px"
+                    fontFamily: "heading"
+                    align: "center"
+                  - type: button
+                    url: "/supply-chain-security"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    align: "center"
+                - - type: text
+                    html: "<p>Technical Writing</p>"
+                    sizePx: 22
+                    fontWeight: 900
+                    color: "#000000"
+                    lineHeight: "30px"
+                    fontFamily: "heading"
+                    align: "center"
+                  - type: button
+                    url: "/technical-writing"
+                    text: "Learn More"
+                    isFull: false
+                    isBordered: false
+                    isTriangle: true
+                    textColor: "#452391"
+                    fontSizePx: 18
+                    fontWeight: 700
+                    align: "center"
+                - - type: button
+                    url: "/consulting"
+                    text: "Learn About Our Consulting Areas"
+                    isFull: true
+                    isBordered: false
+                    isTriangle: true
+                    backgroundColor: "#452392"
+                    textColor: "#FFFFFF"
+                    fontSizePx: 16
+                    fontWeight: 700
+                    padding: "25px 30px 25px 30px"
+                    lineHeight: "23px"
+                    align: "center"
+              columnWidths:
+                - 33
+                - 33
+                - 33
+              columnPaddings:
+                - top: "45px"
+                  bottom: "45px"
+                - top: "45px"
+                  bottom: "45px"
+                - top: "45px"
+                  right: "45px"
+                  bottom: "45px"
+                  left: "45px"
+              maxWidthPx: 1200
+              gapPx: 20
+        marginBottom: "-12px"
+        maxWidthPx: 1200
+  paddingTop: "50px"
+  paddingBottom: "120px"
+  maxWidthPx: 1200
+- type: columns
+  columns:
+    - - type: heading
+        text: "Subscribe for Updates & News"
+        level: 2
+        sizePx: 30
+        fontWeight: 600
+        color: "#FFFFFF"
+        lineHeight: "1em"
+        letterSpacing: "0.5px"
+      - type: form
+        name: "Mailing List Signup"
+        fields:
+          - name: "EMAIL"
+            kind: "input"
+            type: "email"
+            required: true
+            placeholder: "Email"
+            label: "Email"
+        submit: "Submit"
+        audience: "mailchimp"
+        submitIcon: true
+    - - type: columns
+        columns:
+          - - type: image
+              src: "/page-assets/home/subscribe.svg"
+              alt: ""
+              width: 455
+              height: 181
+        columnBackgrounds:
+          - "#452392"
+        paddingRight: "5%"
+  columnBackgrounds:
+    - "#452392"
+    - null
+  columnWidths:
+    - 50
+    - 50
+  columnPaddings:
+    - top: "0%"
+      right: "0%"
+      bottom: "0%"
+      left: "15%"
+    - null
+  gapPx: 0
+  marginBottom: "5%"

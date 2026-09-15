@@ -4,12 +4,19 @@ published: April 11, 2025
 authors: [quansight]
 description: 'We’re excited to share two JupyterLab extensions developed by our team'
 category: [Jupyter]
+tags:
+  [
+    'Innovation',
+    'Jupyter Gallery',
+    'JupyterHub Launchpad',
+    'JupyterLab extensions',
+  ]
 featuredImage:
   src: /posts/new-jupyterlab-extensions-launchpad-and-gallery/GenAI-Things-You-Need-to-Know-That-Your-Parents-Didnt-Teach-You-1.png
   alt: 'Slide with Quansight and JupyterLab logos. Text: "New JupyterLab Extensions: Launchpad and Gallery". Purple dotted background, Quansight Staff badge.'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'New JupyterLab Extensions: Launchpad and Gallery'
+banner:
+  - src: /posts/new-jupyterlab-extensions-launchpad-and-gallery/Jupyterlab-logo-Photoroom.png
+    alt: ''
 ---
 
 We’re excited to share two JupyterLab extensions developed by our team:

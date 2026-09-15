@@ -4,15 +4,20 @@ published: May 3, 2024
 authors: [quansight]
 description: 'Hear from Quansight’s Senior Infrastructure Engineer, Chuck McAndrew, on how Nebari has transformed the landscape for deploying data science operations.'
 category: ['Infrastructure & HPC']
+tags: ['Infrastructure Engineering with Nebari', 'Nebari']
 featuredImage:
   src: /posts/nebari-an-infrastructure-engineering-perspective/Nebari-An-Infrastructure-Engineering-Perspective.png
   alt: 'A stylized image of a lone bonsai tree growing on a wireframe platform'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Nebari: An Infrastructure Engineering Perspective'
+banner: []
 ---
 
+<div class="post-text" style="font-weight:500">
+
 Hear from **Quansight’s Senior Infrastructure Engineer, Chuck McAndrew**, on how Nebari has transformed the landscape for deploying data science operations.
+
+</div>
+
+<div class="post-text" style="font-weight:500">
 
 In a recent conversation with Quansight’s Chuck McAndrew, we explore [Nebari’s](https://www.nebari.dev/) capabilities, underlying technologies, and impact on reducing operational complexities, thus democratizing data science for various organizational scales. From its humble beginnings running JupyterHub distributions to supporting an organization’s desire to leverage the latest in open source software for artificial intelligence (AI) with private data, Nebari has consistently raised the bar in advancing data science.
 
@@ -20,7 +25,11 @@ In a recent conversation with Quansight’s Chuck McAndrew, we explore [Nebari�
 
 **Chuck McAndrew:** _“The perspective I’m going to give you is from someone with a background in infrastructure engineering, who has been a System Administrator (SysAdmin) and has a history of running stuff in production. When I first learned about Nebari, my reaction was, ‘Wow! I wish I would have known about this ten years ago!’”_
 
+</div>
+
 ## Understanding Nebari’s Unique Value
+
+<div class="post-text" style="font-weight:500">
 
 Nebari stands out as an opinionated distribution of JupyterHub, designed to streamline the deployment process and enhance collaborative efforts within data science teams. At its core, Nebari facilitates the collaborative use of JupyterLab notebooks. It also integrates critical features, such as conda-store for reproducible Python environments and a Jupyter scheduler for managing periodic data workflows.
 
@@ -28,7 +37,11 @@ Nebari stands out as an opinionated distribution of JupyterHub, designed to stre
 
 **Chuck McAndrew:** _”Essentially, Nebari takes a lot of open source components and packages them together to give teams everything they need to get started. Many organizations have data science needs but lack the experience to build their own data science platforms. There are a lot of excellent open source tools out there, but deploying them in a way where they all work together smoothly takes considerable engineering investment. Nebari’s unique value proposition is that it lets teams focus on data science, not the operations workload of running these services.”_
 
-## Key Features and Functionalities
+</div>
+
+<h2 class="post-heading" style="font-size:20px;line-height:1">Key Features and Functionalities</h2>
+
+<div class="post-text" style="font-weight:500">
 
 Integrating these elements into Nebari addressed common challenges in deploying data science tools, emphasizing ease of use and operational efficiency:
 
@@ -43,7 +56,13 @@ Integrating these elements into Nebari addressed common challenges in deploying 
 
 _“Nebari came about because our clients wanted JupyterHub running and shareable, reproducible Python environments so that distributed data science teams didn’t have different environments. They discovered everyone had these environments running on their laptop, and there were just all these inconsistencies. So, these clients wanted a central place for their team to work.”_
 
+</div>
+
+![Image of an abstract technological landscape with a glowing digital tree surrounded by circuit board patterns and illuminated nodes.](/posts/nebari-an-infrastructure-engineering-perspective/2024.5.3_Chuck_McAndrew_Nebari_Infrastructure2a-1536x516.png)
+
 ## From Traditional Models to Modern Infrastructure
+
+<div class="post-text" style="font-weight:500">
 
 The shift from physical servers and virtual machines to Kubernetes represents a significant evolution in system administration. Kubernetes introduces a dynamically managed resource model, making operations more resilient and responsive to changes in load.
 
@@ -53,7 +72,11 @@ The shift from physical servers and virtual machines to Kubernetes represents a 
 
 _“Later, we got to virtual machines (VM), which was far better. VMs allowed more efficient use of resources, more dynamic provisioning, and templates for repeatable configurations. However, this was still an imperative way of working. Your automation said what commands to run in what order. The power of Kubernetes is a switch to a declarative model. We write configurations that tell Kubernetes what we want running, and it figures out how to make sure that happens.”_
 
-## Traditional vs. Modern Deployment
+</div>
+
+<h2 class="post-heading" style="font-size:20px;line-height:1">Traditional vs. Modern Deployment</h2>
+
+<div class="post-text" style="font-weight:500">
 
 - Imperative/Physical and Virtual Servers: Manual setups and longer lead times when scaling.
 - Declarative/Kubernetes and Containerization: Automated scaling and recovery, reducing dependency on manual intervention.
@@ -66,7 +89,11 @@ This transition highlights a move from a high-maintenance “Pets Model” to a 
 
 _“What’s also valuable to us is that this is now an industry standard. Azure, GCP, and AWS have all implemented Kubernetes as a managed service. There are also distributions of Kubernetes you can run in your data center, allowing us to deploy Nebari wherever our customers want it. If we can set up a Kubernetes cluster or use an existing one, we can deploy Nebari.”_
 
+</div>
+
 ## The Role of Infrastructure-as-Code in Modern Deployments
+
+<div class="post-text" style="font-weight:500">
 
 Infrastructure-as-Code (IaC) has become a cornerstone of modern infrastructure management, allowing teams to automate and reproduce settings precisely. Nebari utilizes [Terraform](https://www.terraform.io/), a popular IaC tool, to ensure that infrastructure deployment is reproducible and auditable.
 
@@ -74,7 +101,11 @@ Infrastructure-as-Code (IaC) has become a cornerstone of modern infrastructure m
 
 **Chuck McAndrew:** _“Cloud providers provision infrastructure by using application programming interfaces (APIs), which means you can write code to provision resources using these APIs. Terraform is one of the most common IaC languages and has providers for all the major public clouds. That means you can have a clear, deterministic infrastructure. When you want to change that infrastructure, you have all the software development best practices, like Version Control, Auditability, and Enhanced Security. If you mess something up, you can revert that change.”_
 
-## Advantages of Infrastructure-as-Code
+</div>
+
+<h2 class="post-heading" style="font-size:20px;line-height:1">Advantages of Infrastructure-as-Code</h2>
+
+<div class="post-text" style="font-weight:500">
 
 - Version Control: Facilitates tracking changes and rolling back if necessary.
 - Auditability: Ensures transparency, enabling teams to track who made changes and when.
@@ -88,7 +119,11 @@ By embedding IaC principles, Nebari simplifies complex processes, enabling teams
 
 **Chuck McAndrew:** _“Nebari started by taking JupyterHub deployments and adding IaC around them. As someone who has worked on the operation side, I find it very challenging when the steps are manual. It’s easy for people to make mistakes; we’re inherently bad at doing the same thing repeatedly. Computers are good at doing the same thing over and over, and that’s why we write code. The computer will do that same thing all day without making mistakes, getting bored, or skipping steps.”_
 
+</div>
+
 ## Nebari’s Impact on Data Science Accessibility
+
+<div class="post-text" style="font-weight:500">
 
 One of Nebari’s most significant contributions is its ability to lower the entry barriers to data science. By abstracting the complexities of infrastructure setup, Nebari allows teams with varying technical expertise to deploy and manage data science environments efficiently.
 
@@ -98,11 +133,15 @@ One of Nebari’s most significant contributions is its ability to lower the ent
 
 _“We didn’t know what environment our clients would want to run stuff in. We have clients who run in AWS, Azure, and GCP, as well as those who run it in their own Kubernetes deployments. Kubernetes gives us the ability to support all of those scenarios. By supporting all of those deployment models we’re lowering the barrier to entry for data science. We’re allowing people to start from where they are. If they’ve got a great Ops team that thoroughly understands Kubernetes, they can take Nebari and deploy it on their existing infrastructure. No problem. If they have people who know nothing about Kubernetes, that’s okay, too. Nebari can give them a turn-key environment in the public cloud. Nebari is a command-line interface (CLI) tool that wraps around everything. When you write a configuration file and ask Nebari to deploy it, it will generate all that IaC for you.”_
 
+</div>
+
 ![Image of a lone tree growing on a digitized wave structure amidst a hazy background.](/posts/nebari-an-infrastructure-engineering-perspective/2024.5.3_Chuck_McAndrew_Nebari_Infrastructure3a-1536x516.png)
 
 ## Broadening the Data Science Landscape
 
-## Guided Deployment Processes
+<h2 class="post-heading" style="font-size:20px;line-height:1">Guided Deployment Processes</h2>
+
+<div class="post-text" style="font-weight:500">
 
 Support for multiple clouds helps teams deploy on the cloud platform of their choice or even on-premises. This approach simplifies the operational aspect of data science projects and ensures that teams can leverage their existing infrastructure without extensive retraining or recruitment. However, that’s just the beginning.
 
@@ -114,7 +153,11 @@ _“It will tell you, ‘If you want to deploy to AWS, here are the credentials 
 
 _“Someone who has no idea what Kubernetes is can still create and deploy a Kubernetes cluster on a public cloud and give themselves somewhere to work. That is another value proposition that Nebari offers. As someone with an Ops background, that is exciting because it’s following all these best practices, but it’s not requiring that knowledge of the users.”_
 
-## Extensibility and Flexibility in Deployment
+</div>
+
+<h2 class="post-heading" style="font-size:20px;line-height:1">Extensibility and Flexibility in Deployment</h2>
+
+<div class="post-text" style="font-weight:500">
 
 The Nebari CLI offers a user-friendly interface that guides users through the configuration and deployment process. This out-of-the-box feature is helpful as your projects begin to scale.
 
@@ -122,7 +165,11 @@ The Nebari CLI offers a user-friendly interface that guides users through the co
 
 **Chuck McAndrew:** _“It is highly extensible, so you don’t have the problem of, ‘Well, this works for a basic use case, but once we get more advanced, it doesn’t work.’ It’s very configurable and extensible right out of the box; it gives you something that works and lets people focus more on their business instead of spending time setting up infrastructure for the data science.”_
 
-## Opinionated Systems and Streamlined Decision-Making
+</div>
+
+<h2 class="post-heading" style="font-size:20px;line-height:1">Opinionated Systems and Streamlined Decision-Making</h2>
+
+<div class="post-text" style="font-weight:500">
 
 Nebari employs an opinionated approach to its system configuration, intentionally simplifying decisions for the end-user by pre-selecting settings and configurations likely to meet most teams’ broad needs. This design philosophy significantly reduces the complexity and time typically required to set up environments, enabling teams to focus more on their core data science tasks rather than on infrastructure management. By providing a robust default setup, Nebari effectively streamlines the initial deployment process while offering flexibility to adjust and fine-tune the system.
 
@@ -132,7 +179,11 @@ Nebari employs an opinionated approach to its system configuration, intentionall
 
 _“That can be very overwhelming when you’re starting, especially if you don’t have a lot of domain knowledge. An opinionated distribution makes some of those choices. They might say, ‘We know we will be running on Kubernetes. We know we’re going to be running on this or that cloud. We know we’re going to have these resources available. So given that, here is the best setup for most people under most circumstances.’”_
 
-## Baked in Best Practices
+</div>
+
+<h2 class="post-heading" style="font-size:20px;line-height:1">Baked in Best Practices</h2>
+
+<div class="post-text" style="font-weight:500">
 
 Nebari offers extensive extensibility to cater to specialized needs. This flexibility is crucial for teams requiring integration with other tools or modifying existing workflows. For example, Nebari ships with [Argo Workflows](https://argoproj.github.io/workflows/) but allows teams to integrate other workflow engines if they better suit the project requirements. This adaptability ensures that Nebari can serve as a comprehensive platform for various data science applications, supporting a wide array of organizational needs without locking users into a rigid framework.
 
@@ -142,7 +193,11 @@ Nebari offers extensive extensibility to cater to specialized needs. This flexib
 
 _“Right now, clients can add Airflow, but it would be in addition to Argo because we use Argo for some of the more core features. It may be better to move those core features into a Kubernetes native rather than an extension and allow a swappable workflow engine. I think, in general, that’s kind of the philosophy that we like best, give people some defaults that work well, but allow them to override those defaults when they have a special use case.”_
 
-## Reducing Environment Drift and Enhancing Development Cycles
+</div>
+
+<h2 class="post-heading" style="font-size:20px;line-height:1">Reducing Environment Drift and Enhancing Development Cycles</h2>
+
+<div class="post-text" style="font-weight:500">
 
 Nebari significantly helps maintain consistency across different deployment environments.
 
@@ -154,22 +209,42 @@ Environment drift often leads to issues when deploying applications to productio
 
 _“It also has a lot of advantages for the development cycle when you’re working with multiple environments. One big problem, traditionally, has been environments drifting in their configuration. You deploy something to your test environment, and everything runs perfectly. Then, you need to deploy it to production, and everything breaks. Why? It’s because you had different environments. At some point, someone changed the configuration in this environment because they needed to and forgot to update prod. That doesn’t happen with infrastructure-as-code because both environments are built off the same code.”_
 
+</div>
+
 ![Image of a colorful Nebari logo on a black background, with the text "Your open source data science platform. Built for scale, designed for collaboration."](/posts/nebari-an-infrastructure-engineering-perspective/Nebari-1-1536x865.png)
 
 ## A Robust, Scalable, and User-Friendly Platform
 
+<div class="post-text" style="font-weight:500">
+
 Nebari represents a significant advancement in how data science teams deploy and manage their infrastructure. By integrating cutting-edge technologies like Kubernetes and embracing the principles of Infrastructure-as-Code, Nebari offers a robust, scalable, and user-friendly platform that caters to the needs of modern data science operations.
 
-## Get Started
+</div>
+
+<h2 class="post-heading" style="font-size:20px;line-height:1">Get Started</h2>
+
+<div class="post-text" style="font-weight:500">
 
 Not only does Nebari simplify the operational workload, but it also empowers teams to focus on the unique value propositions of their data science endeavors. With Nebari, the field of data science has become more accessible, allowing more organizations to harness the power of data-driven decision-making.
 
 If your organization wants to enhance its data science capabilities without expensive operational overhead, consider turning to Nebari. Contact Quansight today to discover how Nebari can improve your data science and help you leverage the full potential of your data science investments.
 
-## About Quansight
+</div>
+
+<h2 class="post-heading" style="font-size:20px;line-height:1">About Quansight</h2>
+
+<div class="post-text" style="font-weight:500">
 
 Quansight provides data science solutions and supports open source software projects like Nebari. With deep roots in the Python, data science, and machine learning communities, Quansight employs a team of expert data scientists, software engineers, and developers who work closely with clients to solve complex data challenges and drive innovation by leveraging the latest open source technologies. Quansight is dedicated to advancing the open source data science ecosystem and actively contributes to projects like Jupyter, NumPy, Pandas, and Dask. Quansight’s expertise includes building custom data platforms, developing AI/ML models, optimizing data pipelines, and delivering actionable insights to clients across various industries through training and implementation.
 
+</div>
+
+<div class="post-text" style="font-weight:500">
+
 Ready to learn more? **We want to hear from you.**
 
+</div>
+
 {/_ TODO: manual conversion needed: widget=form.default _/}
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>

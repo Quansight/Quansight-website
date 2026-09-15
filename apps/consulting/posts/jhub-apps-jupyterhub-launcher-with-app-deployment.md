@@ -4,15 +4,16 @@ published: March 7, 2025
 authors: [quansight]
 description: 'We’re excited to present JHub Apps, a new launcher for JupyterHub that supports the deployment and sharing of web applications and dashboards.'
 category: [Jupyter, 'Infrastructure & HPC']
+tags: ['Innovation', 'JHub Apps', 'Jupyter-notebook', 'JupyterHub Launcher']
 featuredImage:
   src: /posts/jhub-apps-jupyterhub-launcher-with-app-deployment/JHub-preview-image.png
   alt: 'JHub Apps: JupyterHub Launcher With App Deployment'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'JHub Apps: JupyterHub Launcher With App Deployment'
+banner:
+  - src: /posts/jhub-apps-jupyterhub-launcher-with-app-deployment/Nebari-Logo-White-Bg.svg
+    alt: 'Image of the Nebari logo'
+  - src: /posts/jhub-apps-jupyterhub-launcher-with-app-deployment/JupyterHub-logo.svg
+    alt: 'Image of the Jupyterhub logo'
 ---
-
-![Image of the Jupyterhub logo](/posts/jhub-apps-jupyterhub-launcher-with-app-deployment/JupyterHub-logo.svg)
 
 We’re excited to present **JHub Apps, a new launcher for JupyterHub that supports the deployment and sharing of web applications and dashboards**. In this update, we’ll discuss the key problems it solves and the motivation for developing it as a new open source library.
 
@@ -56,4 +57,4 @@ A newer JupyterLab extension, [jupyterlab-jhub-apps](https://github.com/nebari-d
 
 The development of JHub Apps Launcher was funded by the [CDAO JATIC initiative](https://cdao.pages.jatic.net/public/), and completed in collaboration with [Metrostar](https://www.metrostar.com/).
 
-**Although these tools were designed for Nebari, you can use them with any JupyterHub deployment**. Check out the project [README](https://github.com/nebari-dev/jhub-apps#jupyterhub-apps-launcher) to get started. If you’d like to deploy Nebari for your data science team, [reach out to us](/contact-us)!
+**Although these tools were designed for Nebari, you can use them with any JupyterHub deployment**. Check out the project [README](https://github.com/nebari-dev/jhub-apps#jupyterhub-apps-launcher) to get started. If you’d like to deploy Nebari for your data science team, [reach out to us](/nebari-services)!

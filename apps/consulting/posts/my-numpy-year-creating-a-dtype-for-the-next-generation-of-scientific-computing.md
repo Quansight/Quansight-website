@@ -4,17 +4,28 @@ published: October 18, 2024
 authors: [nathan-goldbaum]
 description: 'First, I’ll start with a brief history of strings in NumPy to explain how strings worked before NumPy 2.0 and why it was a little bit broken.'
 category: [Numerical Computing]
+tags:
+  [
+    'Creating a DType for the Next Generation of Scientific Computing',
+    'DTypes',
+    'NumPy',
+    'Scientific Computing',
+  ]
 featuredImage:
   src: /posts/my-numpy-year-creating-a-dtype-for-the-next-generation-of-scientific-computing/My_Numpy_Year.png
   alt: 'My NumPy Year: Creating a DType for the Next Generation of Scientific Computing'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'My NumPy Year: Creating a DType for the Next Generation of Scientific Computing'
+banner:
+  - src: /posts/my-numpy-year-creating-a-dtype-for-the-next-generation-of-scientific-computing/numpy-1.png
+    alt: ''
+  - src: /posts/my-numpy-year-creating-a-dtype-for-the-next-generation-of-scientific-computing/Pandas_logo.svg.png
+    alt: ''
 ---
 
-![](/posts/my-numpy-year-creating-a-dtype-for-the-next-generation-of-scientific-computing/Pandas_logo.svg.png)
+<div class="post-text" style="font-weight:500;color:#000000">
 
 _From no CPython C API experience to shipping a new DType in NumPy 2.0._
+
+</div>
 
 This project was a mix of challenges and learning as I navigated the CPython C API and worked closely with the NumPy community. I want to share a behind-the-scenes look at my work on introducing a new string DType in NumPy 2.0, mostly drawn from [a recent talk I gave at SciPy](https://www.youtube.com/watch?v=cUhP0OCSWsk). In this post, I’ll walk you through the technical process, key design decisions, and the ups and downs I faced. Plus, you’ll find tips on tackling mental blocks and insights into becoming a maintainer.
 
@@ -30,7 +41,7 @@ By the end, I hope you’re going to have the answers to these questions:
 
 First, I’ll start with a brief history of strings in NumPy to explain how strings worked before NumPy 2.0 and why it was a little bit broken.
 
-### String Arrays in Python 2
+<h3 class="post-heading" style="font-size:30px;line-height:1">String Arrays in Python 2</h3>
 
 Let’s go back to Python 2.7 and look at how strings worked in NumPy before the Python 3 Unicode revolution. I actually compiled Python 2 in 2024 to make this post. It doesn’t build on my ARM Mac, but it does compile on Ubuntu 22.04. Python 2 `"strings"` were what we now call byte strings in Python 3 – arrays of arbitrary bytes with no attached encoding. NumPy string arrays had similar behavior.
 
@@ -63,7 +74,7 @@ Python 2 also had this Unicode type, where you could create an array with the co
 
 ![Diagram showing the memory layout of a NumPy string array using UTF-32 encoding. It displays two elements: 'arr[0]' contains the characters 'h', 'e', 'l', 'l', 'o', and 'arr[1]' contains the characters 'w', 'o', 'r', 'l', 'd'. Each character is represented with a prefix 'u' indicating Unicode representation. A detailed inset illustrates the UTF-32 encoding for the character 'h', represented as 'u'h'' with its corresponding byte sequence 'b'h\x00\x00\x00'.](/posts/my-numpy-year-creating-a-dtype-for-the-next-generation-of-scientific-computing/image2.png)
 
-### String Arrays in Python 3
+<h3 class="post-heading" style="font-size:30px;line-height:1">String Arrays in Python 3</h3>
 
 ```python
 >>> arr = np.array(['hello', 'world'])
@@ -86,7 +97,7 @@ To make matters worse, string operations were slow, too. In a [blog post that a 
 
 Before, it was written in C as a Python for-loop over the elements of the array. For each element of the array, it would create a scalar, call the string operation on that scalar, and then stuff the results into the result array. As you can imagine, that’s pretty slow. But by rewriting it to loop over the array buffer without accessing each item as a scalar, you can make it anywhere from 500 times faster for small two-element arrays or two to five times faster for longer strings
 
-### Object Arrays
+<h3 class="post-heading" style="font-size:30px;line-height:1">Object Arrays</h3>
 
 Another thing people have done, and what they’ve defaulted to because of these issues with Unicode strings in NumPy, is to use object arrays.
 
@@ -289,3 +300,5 @@ Like the short string optimization, Marten van Kerkwijk helped me immensely both
 I hope you’ve taken away that big projects are hard but absolutely doable. Scientific Python projects are very welcoming. My experience with NumPy—where I received a lot of help and advice—is not unusual. NumPy 2.0 brings a lot of exciting features, including the variable-width string DType that I worked on, which is the result of lots of hard work.
 
 If you’ve made it this far, thank you for sticking with me through this journey! I hope this gives you a better sense of what goes into building something new in NumPy and how, with the right support and determination, big projects can come to life. We’re just getting started. If you have questions about any of the changes or how they might fit into your projects, don’t hesitate to reach out. Whether you’re curious about DTypes, interested in contributing, or just want to chat, I’d love to hear from you!
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>
