@@ -61,6 +61,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-09-1.svg"
                     alt: ""
@@ -73,6 +74,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -101,6 +103,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/infrastructure-scaling-acceleration/icons-llc-11-1.svg"
                     alt: ""
@@ -113,6 +116,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -337,6 +341,9 @@ blocks:
                   right: "35px"
                   bottom: "35px"
                   left: "35px"
+              columnBoxes:
+                - boxShadow: "0px 0px 25px 0px rgba(0,0,0,0.09)"
+                - boxShadow: "0px 0px 25px 0px rgba(0,0,0,0.09)"
               gapPx: 0
         paddingTop: "20px"
       - type: columns
@@ -409,6 +416,10 @@ blocks:
                   right: "35px"
                   bottom: "35px"
                   left: "35px"
+              columnBoxes:
+                - boxShadow: "0px 0px 25px 0px rgba(0,0,0,0.09)"
+                - boxShadow: "0px 0px 25px 0px rgba(0,0,0,0.09)"
+                - boxShadow: "0px 0px 25px 0px rgba(0,0,0,0.09)"
               gapPx: 0
         paddingTop: "20px"
   paddingBottom: "100px"

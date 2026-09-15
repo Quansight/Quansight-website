@@ -56,7 +56,7 @@ const socialRows = [socialMedia.links.slice(0, 4), socialMedia.links.slice(4)];
         <div class="mb-[2rem] text-[1.4rem] font-medium leading-[1.9rem]">
           {contact.lines.map((line) => (
             <p>
-              {line.href ? <a href={line.href} class="hover:underline">{line.text}</a> : line.text}
+              {line.href ? <a href={line.href} class="font-normal hover:underline">{line.text}</a> : line.text}
             </p>
           ))}
         </div>

@@ -93,12 +93,13 @@ const maxWidthPx = block.type === 'columns' ? (block.maxWidthPx as number | unde
 const maxWidthStyle = maxWidthPx ? `max-width:${maxWidthPx}px` : '';
 // A flex container's own rounded corners / border / min-height (see
 // extract_container_box): per column, and the row's own minimum height.
-type ColumnBox = { borderRadius?: string; borderWidth?: string; borderColor?: string; minHeight?: string };
+type ColumnBox = { borderRadius?: string; borderWidth?: string; borderColor?: string; minHeight?: string; boxShadow?: string };
 const columnBoxes = block.type === 'columns' ? ((block.columnBoxes as (ColumnBox | undefined)[] | undefined) ?? []) : [];
 const boxStyle = (box?: ColumnBox) => [
   box?.borderRadius ? `border-radius:${box.borderRadius}` : '',
   box?.borderWidth ? `border-style:solid;border-width:${box.borderWidth};border-color:${box.borderColor}` : '',
   box?.minHeight ? `min-height:${box.minHeight}` : '',
+  box?.boxShadow ? `box-shadow:${box.boxShadow}` : '',
 ].filter(Boolean).join(';');
 const minHeightStyle = block.minHeight ? `min-height:${block.minHeight}` : '';
 // Explicit section padding (even all-zero) replaces the generic panel

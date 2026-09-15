@@ -193,24 +193,28 @@ blocks:
             divider: true
             descriptionSizePx: 18
             descriptionColor: "#252525"
+            descriptionLineHeight: "1.5em"
           - title: "2.  AI Workflow Orchestration"
             description: "- Tooling for multi-model orchestration and task decomposition\n- Integration with knowledge sources and external tools\n- Long-term memory management for AI agents"
             align: "start"
             divider: true
             descriptionSizePx: 18
             descriptionColor: "#252525"
+            descriptionLineHeight: "1.5em"
           - title: "3.  Research to Production"
             description: "- Reproducibility, scalability, performance optimization\n- Hardening research code for production operations\n- AI/ML model deployment, monitoring, governance"
             align: "start"
             divider: true
             descriptionSizePx: 18
             descriptionColor: "#252525"
+            descriptionLineHeight: "1.5em"
           - title: "4.  Open Source AI Solutions"
             description: "- Leverage open source for cost-effective, flexible AI\n- Expertise in open AI frameworks and tools\n- Commercial support and services around open source"
             align: "start"
             divider: true
             descriptionSizePx: 18
             descriptionColor: "#252525"
+            descriptionLineHeight: "1.5em"
   marginTop: "4%"
   maxWidthPx: 1140
 - type: columns

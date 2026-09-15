@@ -61,6 +61,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/algorithms-ai-machine-learning/icons-llc-23-1.svg"
                     alt: ""
@@ -73,6 +74,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/algorithms-ai-machine-learning/icons-llc-25-3.svg"
                     alt: ""
@@ -85,6 +87,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 33
                 - 33

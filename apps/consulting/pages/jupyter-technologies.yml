@@ -71,24 +71,28 @@ blocks:
             divider: true
             descriptionSizePx: 18
             descriptionColor: "#252525"
+            descriptionLineHeight: "1.5em"
           - title: "JupyterLab Extension Development"
             description: "- Build custom JupyterLab extensions\n- Offer expertise for navigating the evolving JupyterLab extension system"
             align: "start"
             divider: true
             descriptionSizePx: 18
             descriptionColor: "#252525"
+            descriptionLineHeight: "1.5em"
           - title: "Jupyter Integration and Embedding"
             description: "- Integrate Jupyter notebooks or components into applications and platforms\n- Customize Jupyter for specific uses within larger systems"
             align: "start"
             divider: true
             descriptionSizePx: 18
             descriptionColor: "#252525"
+            descriptionLineHeight: "1.5em"
           - title: "Tool Integration and Compatibility"
             description: "- Ensure third-party tools, libraries, and frameworks work well in JupyterLab\n- Resolve compatibility issues for smooth integration"
             align: "start"
             divider: true
             descriptionSizePx: 18
             descriptionColor: "#252525"
+            descriptionLineHeight: "1.5em"
   marginTop: "4%"
   maxWidthPx: 1140
 - type: columns

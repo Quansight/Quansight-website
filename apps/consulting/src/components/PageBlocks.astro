@@ -32,7 +32,10 @@ const contentBlocks = isHeroFirst ? rest : blocks;
     managing its own margin, which doesn't collapse consistently and left
     some pairs of blocks touching with no gap at all) is what actually
     reproduces it. */}
-<div class="flex flex-col gap-[2rem] px-[2rem]">
+{/* The side padding is for narrow screens only: live's boxed sections have
+    none, so a row wider than 1140px (the service pages' 1500px intro) fills
+    a desktop viewport edge to edge. */}
+<div class="flex flex-col gap-[2rem] px-[2rem] xl:px-0">
   {contentBlocks.map((block) => (
     <BlockRenderer block={block} />
   ))}

@@ -103,6 +103,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/training/dask-150x150.webp"
                     alt: "Image of the Dask logo"
@@ -115,6 +116,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -143,6 +145,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/training/logo-300x136.png"
                     alt: "Image of the Open CV logo"
@@ -155,6 +158,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -183,6 +187,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/training/dask-150x150.webp"
                     alt: "Image of the Dask logo"
@@ -195,6 +200,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -223,6 +229,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/training/holoviz-150x150.webp"
                     alt: "Image of the HoloViz logo"
@@ -235,6 +242,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -263,6 +271,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/training/intake-150x150.webp"
                     alt: ""
@@ -275,6 +284,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50
@@ -303,6 +313,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
                 - - type: image
                     src: "/page-assets/training/python-logo-master-v3-TM-flattened-300x101.png"
                     alt: "Image of the Python logo"
@@ -315,6 +326,7 @@ blocks:
                         align: "start"
                         descriptionSizePx: 16
                         descriptionColor: "#000000"
+                        descriptionLineHeight: "1.8em"
               columnWidths:
                 - 50
                 - 50

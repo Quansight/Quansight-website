@@ -10,6 +10,10 @@ const { logo, navigation, skipLinksText } = entry!.data as {
   navigation: NavItem[];
   skipLinksText: string;
 };
+// Live colors the current page's dropdown entry magenta (WP's
+// current-menu-item).
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isCurrent = (href: string) => href.replace(/\/+$/, '') === currentPath;
 ---
 
 <header class="fixed inset-x-0 top-0 z-20 bg-black text-white sm:relative sm:z-auto sm:bg-[#331A6C]">
@@ -71,7 +75,8 @@ const { logo, navigation, skipLinksText } = entry!.data as {
                     <li>
                       <a
                         href={child.href}
-                        class="block p-[1rem] text-[1.4rem] font-medium leading-[2rem] text-violet whitespace-nowrap hover:text-green transition-colors ease-in-out"
+                        class={`block p-[1rem] text-[1.4rem] font-medium leading-[2rem] ${isCurrent(child.href) ? 'text-pink' : 'text-violet'} whitespace-nowrap hover:text-green transition-colors ease-in-out`}
+                        aria-current={isCurrent(child.href) ? 'page' : undefined}
                       >
                         {child.text}
                       </a>
@@ -90,6 +95,7 @@ const { logo, navigation, skipLinksText } = entry!.data as {
       logoSrc={logo.src}
       logoAlt={logo.alt}
       navigation={navigation}
+      currentPath={currentPath}
       client:load
     />
   </div>
