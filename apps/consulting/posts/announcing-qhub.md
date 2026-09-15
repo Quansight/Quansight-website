@@ -12,6 +12,9 @@ category:
     Scalable Computing,
   ]
 tags: ['Qhub']
+textStyle:
+  weight: 400
+  color: '#000000'
 featuredImage:
   src: /posts/announcing-qhub/qhub-img-1.png
   alt: ''

@@ -16,7 +16,11 @@ featuredImage:
 banner: []
 ---
 
+<div class="post-text" style="font-weight:500;color:#000000">
+
 _The GPU you want is not necessarily the one you need (and the tools that can help you work that out)._
+
+</div>
 
 > You may be able to spin up a GPU server easily (some companies do this), but they may make you do all your work on that GPU server. This makes no sense because when you're coding, 90% of the time, you're thinking about the problem, writing the problem, and graphing the solution - why would you want a GPU running while you're doing all that? You only want the GPU running to do the GPU stuff. The rest of the time, you can use a smaller CPU instance.
 >
@@ -109,3 +113,5 @@ Ultimately, while cloud resources offer flexibility for experimentation, long-te
 Dharhas Pothina is the CTO of Quansight, a company dedicated to open source Python development. Quansight employs many core developers of critical tools such as PyTorch, NumPy, and SciPy, which form the foundation of AI and machine learning (ML) technologies.
 
 At Quansight, AI/ML Engineering consulting is a key benefit we offer to help companies navigate the evolving landscape of AI technology. By leveraging our expertise, we provide actionable insights into how businesses can maximize their AI capabilities.
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>

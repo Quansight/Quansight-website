@@ -98,7 +98,7 @@ const related = allPosts
   ) : null}
 
   {/* Live's post content column is 1097px wide at 1440px (76%). */}
-  <article class="pt-[7.5rem] pb-[11.4rem] mx-auto w-[95%] max-w-[109.7rem] md:w-[85%] xl:w-[76%]">
+  <article class="pt-[7.5rem] pb-[11.4rem] mx-auto w-[95%] max-w-[109.7rem] md:w-[85%] xl:w-[76.2%]">
     <a
       href="/blog"
       class="inline-flex items-center gap-2 text-[1.4rem] font-bold text-violet underline mb-[1.8rem]"
@@ -142,7 +142,12 @@ const related = allPosts
       ))}
     </div>
 
-    <div class="post-body w-full max-w-none prose prose-code:text-[.95em] prose-code:font-normal prose-a:underline-offset-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-transparent prose-code:border-none hover:prose-a:text-violet focus:prose-a:text-violet prose-code:text-violet-code prose-code:font-code">
+    <div
+      style={post.data.textStyle ? [
+        post.data.textStyle.weight ? `--post-text-weight:${post.data.textStyle.weight}` : '',
+        post.data.textStyle.color ? `--post-text-color:${post.data.textStyle.color}` : '',
+      ].filter(Boolean).join(';') : undefined}
+      class="post-body w-full max-w-none prose prose-code:text-[.95em] prose-code:font-normal prose-a:underline-offset-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-transparent prose-code:border-none hover:prose-a:text-violet focus:prose-a:text-violet prose-code:text-violet-code prose-code:font-code">
       <Content components={{ CH, Picture }} />
     </div>
   </article>

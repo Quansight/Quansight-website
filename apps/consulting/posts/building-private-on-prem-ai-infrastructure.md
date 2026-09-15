@@ -15,7 +15,11 @@ banner:
     alt: 'Image of the Nebari logo'
 ---
 
+<div class="post-text" style="font-weight:500;color:#000000">
+
 _Leverage Nebari-Slurm to simplify deployment and management_
+
+</div>
 
 There are many reasons to keep your AI infrastructure on-premises. These range from cost concerns (GPUs in the cloud get expensive fast) to organizational policies to data privacy and regulatory concerns. Once you have made this choice and have a set of machines (or VMs) available, you will have the arduous task of configuring them into a platform that is both usable and maintainable. Many of the modern infrastructure management tools are cloud-first and are also based on Kubernetes (K8s). K8s is a very powerful orchestration framework but requires a knowledgeable team and a fair amount of effort to set up and maintain on-prem. If you already have K8s set up on your in-house infrastructure, go check out our main [Nebari page](https://www.nebari.dev/). For the rest of you, read on as we talk about how
 
@@ -30,7 +34,7 @@ Nebari makes it easy to set up and scale a data science environment without the 
 - [Nebari Documentation on GitHub](https://github.com/nebari-dev/nebari-docs)
 - [Nebari Website](https://www.nebari.dev/)
 
-### What Is Slurm?
+<h3 class="post-heading" style="font-size:30px;line-height:1">What Is Slurm?</h3>
 
 Slurm, short for Simple Linux Utility for Resource Management, is a powerful open source job scheduling system widely used in high-performance computing (HPC) environments. It manages and allocates computational resources on clusters, ensuring that tasks (or jobs) are efficiently distributed across multiple nodes. By handling resource allocation, job queuing, and execution, Slurm maximizes the utilization of computing power in a scalable and flexible manner
 
@@ -38,7 +42,7 @@ The system is designed to accommodate everything from small clusters to some of 
 
 Overall, Slurm’s versatility, robust performance, and open source nature make it a go-to tool for managing resources in large-scale computing environments. Its role in AI engineering is becoming increasingly critical as it supports the efficient development and deployment of models in a scalable, reproducible manner.
 
-### What Is Nebari-Slurm?
+<h3 class="post-heading" style="font-size:30px;line-height:1">What Is Nebari-Slurm?</h3>
 
 Nebari-Slurm is an alternative deployment of Nebari designed specifically for organizations seeking to run data science infrastructure on-premises without the complexity of Kubernetes. Managing Kubernetes clusters internally can be a difficult task, often requiring specialized knowledge and a dedicated team to maintain the system. Nebari-Slurm simplifies this process by allowing organizations to deploy a JupyterHub-based system on a set of empty Linux machines—no Kubernetes expertise required
 
@@ -46,7 +50,7 @@ For companies or institutions that are familiar with managing Linux servers but 
 
 Nebari-Slurm is especially beneficial for those operating entirely on-premises, where cloud-based Kubernetes services like AWS or GCP are not feasible. It serves as a lightweight alternative for organizations that want control over their internal systems while maintaining access to Nebari’s tools and capabilities.
 
-### Who Needs Nebari-Slurm?
+<h3 class="post-heading" style="font-size:30px;line-height:1">Who Needs Nebari-Slurm?</h3>
 
 Slurm vs. Kubernetes: Slurm is a workload manager that allows for the effective use of a finite number of machines by managing job scheduling and resource allocation. This is especially valuable in environments where infrastructure is fixed—such as on-premises setups with five or ten machines. Slurm queues users when demand exceeds available resources, assigning machine slices to each user based on availability
 
@@ -124,3 +128,5 @@ Nebari-Slurm helps organizations simplify deployment, enhance resource managemen
 If you’re looking for a streamlined, high-performance computing solution that keeps your operations on-prem, Nebari-Slurm might be the right fit. To get started, head over to the [Nebari-Slurm page](https://deploy-preview-535--nebari-docs.netlify.app/nebari-slurm/overview) for a detailed, step-by-step installation guide. Once installed, you can customize Nebari-Slurm to fit your team’s specific needs, from user account setup to resource allocation, and run test jobs to ensure everything is functioning smoothly.
 
 If you want expert guidance or need to adapt Nebari-Slurm for a unique environment, Quansight is available to provide tailored consultation services. With its blend of security, cost-efficiency, and simplicity, Nebari-Slurm offers 90% of the features of Nebari without the complexity of Kubernetes—perfect for organizations that want to retain full control over their data and infrastructure. For more information, [check out the GitHub repo](https://github.com/nebari-dev/nebari-slurm) or contact Quansight for assistance.
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>

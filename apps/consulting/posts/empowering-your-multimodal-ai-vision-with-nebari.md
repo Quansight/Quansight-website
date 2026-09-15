@@ -119,7 +119,7 @@ In the end, experimenting with these cutting-edge, open, vision language models 
 
 As a simple demo for these models, I’ve put together an open repo [HERE](https://github.com/Quansight/genai-demo-audio-vlm) that includes a Conda environment, instructions, and a basic chat interface. For the smallest model load, you’ll need a CUDA/NVIDIA GPU with at least 16GB VRAM, up to 50+GB for Aria. If you really want to go large, you can download the Molmo-72B model and update the folder path in the app from the 7B version—it’ll work just fine.
 
-## More Articles From our Library
+<h2 class="post-heading" style="font-size:40px;line-height:1;font-weight:900;font-family:Mukta, sans-serif">More Articles From our Library</h2>
 
 - [A Quick Overview of Nebari](/blog/a-quick-overview-of-nebari)
 - [Getting Started With AI](/getting-started-with-ai)

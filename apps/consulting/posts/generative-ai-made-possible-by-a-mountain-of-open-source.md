@@ -11,9 +11,15 @@ featuredImage:
 banner: []
 ---
 
+<div class="post-text" style="font-size:22px;line-height:1.5;color:#0c0c0c">
+
 ChatGPT, Claude, Bard, WatsonX and many other products and tools would not be possible without a vast array of open source tools and open source communities upon which generative AI is built.
 
-## Introduction
+</div>
+
+<h2 class="post-heading" style="font-weight:600;color:#000000">Introduction</h2>
+
+<div class="post-text" style="color:#000000">
 
 Last year, the successes of generative AI in image, audio, and language production revolutionized the way people perceive technology and its capabilities. This came into broad focus as OpenAI’s ChatGPT hit the mainstream. From Google’s internal “code red” as the company analyzed a potential threat to how people search the internet to other large tech companies scrambling to release AI models of their own—the response was unprecedented and for many, unexpected.
 
@@ -23,13 +29,21 @@ And while the famous names like ChatGPT, Claude, Bard, and WatsonX are those tha
 
 In this post, we have two goals: the first is to emphasize the immense open source foundations of generative AI. The second is to highlight Quansight’s depth of expertise both in AI/ML tools and generative AI technologies in particular, and in the open source scientific computing space in general. To do this, we created the diagram below.
 
-## The Diagram: Generative AI Is Built on Open Source
+</div>
+
+<h2 class="post-heading" style="font-weight:600;color:#000000">The Diagram: Generative AI Is Built on Open Source</h2>
+
+<div class="post-text" style="color:#000000">
 
 This diagram illustrates the myriad of open source technologies underlying modern generative AI. As we explore the various levels in the diagram, we want to make clear that we’re not suggesting the tools on each level are _directly dependent_ on all of the tools at lower levels. Instead, we are calling out how the tools, models, and products at each level are dependent on _some_ projects in the categories of each layer beneath it, even if they’re not dependent on the _specific_ projects we mention.
 
 In particular, since Quansight is a scientific Python consultancy, we’ve focused heavily on Python tools and libraries often used together for AI/ML applications, and we’ve marked in the diagram the projects that we maintain or have significant expertise with. But, the ecosystem of open source underlying generative AI is much broader than we can possibly show in one diagram.
 
+</div>
+
 ![Three mountain peaks at the top show generative AI for text, images, and audio. The diagram descends down to show the mountain layers and bedrock to illustrate the open source projects below.](/posts/generative-ai-made-possible-by-a-mountain-of-open-source/Generative-AI-Diagram-2-scaled-qdh9qvhq9dt2oam415ozqpirx95zcqyfo2a5w50ffo.jpg)
+
+<div class="post-text" style="color:#000000">
 
 **Starting from the bottom row of the diagram and moving upward:**
 
@@ -40,7 +54,11 @@ In particular, since Quansight is a scientific Python consultancy, we’ve focus
 - **Foundation Models**: The next layer of the stack contains the large foundation models themselves; examples include GPT and Llama-2 for text, DALL-E-3 and Stable Diffusion for images, and AudioCraft and Voicebox for audio. We’re also starting to see ‘hybrid’ models able to process and generate mixed content. This layer represents the union of data and code: the various models often use similar architectures, but their phenomenal properties are more a product of the massive datasets used to train them.
 - **Commercial Applications**: These are the ‘luxury hotels’ that the public is generally aware of—the tools that can do the amazing things that we’ve come to expect from generative AI. Very few of the tools on this level are open source; they’re nearly always commercial, paid products—but, again, they couldn’t exist without the mountain of freely-available open source projects they sit atop.
 
-## Quansight's Expertise Across the Stack
+</div>
+
+<h2 class="post-heading" style="font-weight:600;color:#00080c">Quansight&#x27;s Expertise Across the Stack</h2>
+
+<div class="post-text" style="color:#000000">
 
 We proudly stand at the forefront of expertise across the Python Generative AI stack. Our involvement extends to key projects, such as maintaining NumPy and SciPy, being PyTorch maintainers, and having expertise with foundation models. We encompass a broad spectrum, from using and enhancing models to managing data, building MLOps pipelines, and optimizing infrastructure.
 
@@ -55,7 +73,11 @@ Key elements of our expertise at each level of the diagram are:
 - **Foundation Models**: We’ve spent a great deal of time working with and keeping up to speed on a variety of foundation models, mostly large language models (LLMs) in the text-processing space.
 - **Commercial Applications**: A core subset of Quansight’s business offerings is focused on helping our clients build and host their own generative AI tools based on best-in-class foundation models, affording them increased customizability, significantly reduced costs, and dramatically improved data privacy. These in-house solutions also insulate our clients from unpredictable licensing, pricing, or other changes made by third-party vendors.
 
-## Our Philosophy on OSS Sustainability
+</div>
+
+<h2 class="post-heading" style="font-weight:600;color:#000c11">Our Philosophy on OSS Sustainability</h2>
+
+<div class="post-text" style="color:#000000">
 
 Here at Quansight, we believe open source is not just the foundation of generative AI but is the very bedrock of essentially all modern software and technology—underpinning everything from the internet to smartphones and beyond. We believe this so strongly, in fact, that we wrote a book—[Open Source For Dummies](https://www.openteams.com/open-source-for-dummies/)—on open source and its importance in the modern world.
 
@@ -63,10 +85,16 @@ However, achieving sustainability in open source is a challenge that necessitate
 
 Quansight and Quansight Labs are at the forefront of addressing these challenges and driving sustainability within the open source ecosystem. In fact, open source sustainability is the key reason why we created Quansight Labs: linking our paid consulting work to support for maintainers of key projects on this generative AI mountain. We’re in the company of many teams working to build sustainable open source models, including our sister company [OpenTeams](https://openteams.com) and others like [NumFOCUS](https://numfocus.org), [Tidelift](https://tidelift.com), [Anaconda](https://anaconda.com), the [Apache Foundation](https://apache.org), and the [Linux Foundation](https://linuxfoundation.org). Working toward open source sustainability is a critical element of who we are.
 
-## Conclusion
+</div>
+
+<h2 class="post-heading" style="font-weight:600;color:#00070a">Conclusion</h2>
+
+<div class="post-text" style="color:#000000">
 
 If you’re looking for expertise on any level of the OSS mountain range that builds up to generative AI on the peaks, reach out and start leveraging the power of open source generative AI in your business.
 
 Or, if you’re interested in talking further about open source sustainability, we want to hear from you, too! We will point you to additional information and resources to help you connect your company sustainably with open source communities.
+
+</div>
 
 <p class="post-button post-button--center"><a href="/about-us#bookacallform">Get in Touch <svg viewBox="-5 -5 20 20" width="20" height="20" aria-hidden="true"><polygon points="2,2 8,5 2,8" fill="currentColor" /></svg></a></p>

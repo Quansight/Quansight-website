@@ -15,7 +15,11 @@ banner:
     alt: 'Jupyter logo'
 ---
 
+<div class="post-text" style="font-weight:500;color:#000000">
+
 _Install JupyterHub on Azure in 30 Minutes With Nebari._
+
+</div>
 
 This content is adapted from a talk I delivered at [Microsoft’s Azure Developers Python Day 2024](https://youtu.be/gr14-750yB0) on December 5th. At Quansight, our mission is to support the Python open source ecosystem by collaborating with and hiring the maintainers and contributors behind widely used tools like Jupyter, NumPy, and pandas. In this article, I demonstrate how easy it is to install your own AI platform on Azure using open source tools.
 
@@ -81,23 +85,23 @@ Nebari is built entirely from open source components and frameworks. Technically
 In our experience, we typically see 2-3 main groups who use Nebari the most. First, smaller organizations that lack cloud or Kubernetes expertise can install, use, and maintain Nebari without much trouble. Second, larger enterprises with robust Kubernetes teams but less familiarity with Python tooling or data science tools also benefit from using it. Additionally, we’ve seen a lot of universities adopt it, mainly for teaching.
 
 <div class="post-columns" style="--columns:2">
-  <div class="post-column"><p class="post-column__label"><strong>Who</strong></p></div>
-  <div class="post-column"><p class="post-column__label"><strong>Why</strong></p></div>
+  <div class="post-column"><div class="post-text" style="font-size:16px;line-height:1.5;color:#0c0c0c"><p class="post-column__label"><strong>Who</strong></p></div></div>
+  <div class="post-column"><div class="post-text" style="font-size:16px;line-height:1.5;color:#0c0c0c"><p class="post-column__label"><strong>Why</strong></p></div></div>
 </div>
 
 <div class="post-columns" style="--columns:2">
-  <div class="post-column"><p class="post-column__label"><strong>Smaller Organizations…</strong></p></div>
-  <div class="post-column"><p>…Who lack cloud or Kubernetes expertise but can install, use, and maintain Nebari easily.</p></div>
+  <div class="post-column"><div class="post-text" style="font-size:16px;line-height:1.5;color:#0c0c0c"><p class="post-column__label"><strong>Smaller Organizations…</strong></p></div></div>
+  <div class="post-column"><div class="post-text" style="font-size:16px;line-height:1.5;color:#0c0c0c"><p>…Who lack cloud or Kubernetes expertise but can install, use, and maintain Nebari easily.</p></div></div>
 </div>
 
 <div class="post-columns" style="--columns:2">
-  <div class="post-column"><p class="post-column__label"><strong>Larger Enterprises…</strong></p></div>
-  <div class="post-column"><p><span style="font-weight: 400;">…Who have robust Kubernetes teams but are less familiar with Python or data science tools.</span></p></div>
+  <div class="post-column"><div class="post-text" style="font-size:16px;line-height:1.5;color:#0c0c0c"><p class="post-column__label"><strong>Larger Enterprises…</strong></p></div></div>
+  <div class="post-column"><div class="post-text" style="font-size:16px;line-height:1.5;color:#0c0c0c"><p><span style="font-weight: 400;">…Who have robust Kubernetes teams but are less familiar with Python or data science tools.</span></p></div></div>
 </div>
 
 <div class="post-columns" style="--columns:2">
-  <div class="post-column"><p class="post-column__label"><strong>Universities…</strong></p></div>
-  <div class="post-column"><p>…Who use Nebari mainly for teaching purposes, providing a collaborative platform for students and educators.</p></div>
+  <div class="post-column"><div class="post-text" style="font-size:16px;line-height:1.5;color:#0c0c0c"><p class="post-column__label"><strong>Universities…</strong></p></div></div>
+  <div class="post-column"><div class="post-text" style="font-size:16px;line-height:1.5;color:#0c0c0c"><p>…Who use Nebari mainly for teaching purposes, providing a collaborative platform for students and educators.</p></div></div>
 </div>
 
 ## See a Live Demo

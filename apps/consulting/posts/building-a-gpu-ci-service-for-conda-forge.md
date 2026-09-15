@@ -18,7 +18,11 @@ banner:
     alt: ''
 ---
 
+<div class="post-text" style="font-weight:500;color:#000000">
+
 _How Quansight, MetroStar, an anonymous donor, and the conda-forge community came together to close one of conda-forge’s [oldest open issues](https://github.com/conda-forge/conda-forge.github.io/issues/63), dating back to 2016._
+
+</div>
 
 Python has become the cornerstone of modern AI and data science. In theory, there are thousands of scientific and numerical libraries written in Python that can be mixed and matched to solve complex problems. In practice, installing and using a set of Python libraries together can become quite complex.
 
@@ -110,125 +114,365 @@ Once you have your base OpenStack instance, you need to create some “flavors�
 
 **CPU runners:**
 
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 **Name**
+
+</div>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
 
 **vCPUs**
 
+</div>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 **RAM**
 
+</div>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 **Disk**
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 ci_medium
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 4
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 8GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 60GB
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 ci_large
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 4
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 12GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 60GB
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 ci_xlarge
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 4
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 32GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 60GB
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 ci_2xlarge
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 8
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 32GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 60GB
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 ci_4xlarge
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 8
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 64GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 60GB
+
+</div>
+
+<div class="post-text" style="font-weight:500">
 
 **GPU runners:**
 
+</div>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 **Name**
+
+</div>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
 
 **vCPUs**
 
+</div>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 **RAM**
+
+</div>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
 
 **Disk**
 
+</div>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 **GPUs**
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 gpu_tiny
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 4
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 2GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 20GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 1x NVIDIA® Tesla V100
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 gpu_medium
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 4
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 8GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 50GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 1x NVIDIA® Tesla V100
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 gpu_large
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 4
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 12GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 60GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 1x NVIDIA® Tesla V100
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 gpu_xlarge
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 8
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 16GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 60GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 1x NVIDIA® Tesla V100
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 gpu_2xlarge
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 8
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 32GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 60GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 1x NVIDIA® Tesla V100
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 gpu_4xlarge
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 8
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 64GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 60GB
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 1x NVIDIA® Tesla V100
+
+</div>
 
 That should be enough to provide 12 concurrent runners at best or four at worst. These kinds of runners wouldn’t only allow folks to test their packages with GPUs but also enable larger projects like PyTorch or Tensorflow, whose build processes usually take longer than the 6h offered by Azure, to be built on public CI.
 
@@ -388,3 +632,5 @@ Assuming Cirun is already enabled and correctly configured in your repository:
 - [MTU problems with Docker](https://mlohr.com/docker-mtu/)
 - [Traefik](https://traefik.io/traefik/)
 - [DiskImage-builder](https://github.com/openstack/diskimage-builder)
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>

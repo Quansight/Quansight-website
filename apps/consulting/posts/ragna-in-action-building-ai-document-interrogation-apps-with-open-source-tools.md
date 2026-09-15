@@ -19,7 +19,11 @@ banner:
     alt: 'Image of the Ragna logo'
 ---
 
+<div class="post-text" style="font-weight:500;color:#000000">
+
 _A look at recent presentations on AI, RAG, and Ragna by Quansight’s staff._
+
+</div>
 
 > For playing around, Generative AI is definitely cool. For asking serious questions about documents, which you're going to base your business on, I think you still need to do your research and work out how to put some guard rails on it.
 >
@@ -112,7 +116,11 @@ Philip repeated his demonstration in April at PyCon DE, and Quansight’s Pavith
 
 –[PyCon US](https://us.pycon.org/2024/schedule/presentation/103/) [(VIDEO)](https://youtu.be/5siI6flge6g?si=oYmS91Gq_A-VmIVP)
 
+<div class="post-text" style="font-weight:500">
+
 **Read more: Launching Ragna:** [The Open Source RAG-based AI Orchestration Framework – an Interview with Philip Meier](/blog/interview-launching-ragna-the-open-source-rag-based-ai-orchestration-framework)
+
+</div>
 
 ## Quansight's Continued Expertise in This Space
 
@@ -154,3 +162,5 @@ Visit the [Ragna.chat](https://ragna.chat/en/stable/) to get started today.
 Let’s work together to advance the field of AI, fostering a community that values transparency and responsible innovation. Ragna’s success depends on the collective efforts of its users and contributors, and we are excited to see how this collaboration will drive the next wave of AI advancements.
 
 ![The image shows the logo for Ragna. It features a stylized Viking ship with a dragon figurehead and three round shields along the side. The sail is depicted as a reddish-orange sheet of paper with white lines representing text. Below the ship, the word "RAGNA" is written in a modern, bold font. This logo symbolizes Ragna’s role in navigating and harnessing the power of data and AI technology, much like a Viking ship exploring and conquering new territories.](/posts/ragna-in-action-building-ai-document-interrogation-apps-with-open-source-tools/Ragna-logo-lockup-vertical-01.svg)
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>

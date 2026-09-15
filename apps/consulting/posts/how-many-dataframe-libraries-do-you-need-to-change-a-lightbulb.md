@@ -17,7 +17,11 @@ banner:
     alt: ''
 ---
 
+<div class="post-text" style="font-weight:500;color:#000000">
+
 _﻿﻿ Exploring Pandas, Polars, DuckDB, and Beyond_
+
+</div>
 
 This article, developed from a [2024 PyData NYC presentation](https://www.youtube.com/watch?v=cgWHPTx0wjw&list=PLGVZCDnMOq0ohEIZ-_wM2W_xqSVjyA3dC&index=45) of the same title, written with help from [Marco Gorelli](https://github.com/marcogorelli), explores the strengths and limitations of these DataFrame library tools, their compatibility with existing workflows, and how they can be integrated into modern data pipelines. We’ll also discuss [Narwhals](https://narwhals-dev.github.io/narwhals/), a lightweight library designed by Marco to bridge compatibility between pandas, Polars, and more.
 
@@ -116,32 +120,58 @@ Unlike traditional databases, DuckDB is an in-process system, meaning it doesn�
 
 ## Key Features of DuckDB
 
+<div class="post-text" style="color:#0c0c0c">
+
 **SQL-Based Querying**
 
 - DuckDB fully embraces SQL, making it an excellent choice for users familiar with writing complex queries. For example, tasks like joins, aggregations, and groupings can be executed quickly and efficiently.
 - Unique features like the “group by all” functionality highlight DuckDB’s innovative approach to SQL, offering capabilities not found in traditional systems.
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 **Handling Large Datasets**
 
 - With its ability to stream data through memory, DuckDB can handle datasets far larger than what pandas or Polars can manage on a typical machine. This makes it an ideal choice for users working on laptops or workstations without access to high-memory environments.
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 **Interoperability**
 
 - DuckDB integrates seamlessly with pandas and Polars, allowing you to preprocess data in SQL and then switch to Python-based tools for further analysis. This makes it a versatile tool in multi-step workflows.
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 **Simplified Setup**
 
 - DuckDB’s in-process design eliminates the need for external servers or complex configurations. It’s as easy to use as importing a library in Python and running a query.
 
+</div>
+
 ## DuckDB in Modern Workflows
+
+<div class="post-text" style="color:#0c0c0c">
 
 In enterprise and analytics-heavy environments, DuckDB has proven to be a game-changer. Combining SQL’s stability with high performance can empower users to handle datasets 10x to 100x larger than traditional tools, all without needing specialized hardware. Furthermore, DuckDB’s ability to stream data efficiently and work with modern tools like pandas and Polars makes it a valuable addition to any data professional’s toolkit.
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 For those exploring large datasets, SQL-based analytics, or LLM-driven automation (where SQL’s stable syntax excels), DuckDB offers a robust, scalable solution that bridges the gap between traditional databases and modern data analysis tools.
+
+</div>
 
 ![](/posts/how-many-dataframe-libraries-do-you-need-to-change-a-lightbulb/comparison-table1a.png)
 
 ## When to Use DuckDB
+
+<div class="post-text" style="color:#0c0c0c">
 
 **DuckDB excels in:**
 
@@ -149,42 +179,86 @@ For those exploring large datasets, SQL-based analytics, or LLM-driven automatio
 - Preprocessing or querying large datasets before transitioning to pandas or Polars for deeper analysis.
 - Workflows where ease of setup and efficient resource usage are priorities.
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 However, DuckDB’s SQL-first approach can feel limiting for users who prefer Python-based tools. Its Python API is functional but not as well-documented or intuitive as pandas or Polars. Additionally, some operations, like window functions or cumulative sums, require explicit ordering clauses (`` `ORDER BY` ``) due to [limited guarantees of row ordering](https://duckdb.org/docs/sql/dialect/order_preservation.html) in query results.
+
+</div>
 
 ## Practicality: Comparing DuckDB and Polars
 
+<div class="post-text" style="color:#0c0c0c">
+
 When it comes to performance, both DuckDB and Polars offer unique strengths that make them stand out from traditional tools like pandas. However, their design philosophies and execution models cater to different needs, making them complementary rather than direct competitors.
+
+</div>
 
 ## Performance at Scale
 
+<div class="post-text" style="color:#0c0c0c">
+
 **DuckDB truly shines at larger scales, thanks to its efficient streaming engine**. It excels in handling massive datasets, such as those in the range of 1 TB to 10 TB. Benchmarks, [like those conducted by Coiled](https://docs.coiled.io/blog/tpch.html), show DuckDB’s impressive performance across industry-standard TPC-H queries. While few users regularly work with datasets this large, it’s common to encounter data in the 50–500 GB range—and both DuckDB and Polars handle these workloads effectively.
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 **Polars, on the other hand, delivers exceptional performance for smaller to medium-sized datasets**. Its ability to execute operations lazily or eagerly provides users with flexibility depending on their workflow needs. Polars also stands out in tasks like window operations, where its optimized memory handling and sorting capabilities give it an edge.
 
+</div>
+
 ## Execution Models: Lazy vs. Eager
+
+<div class="post-text" style="color:#0c0c0c">
 
 A key difference between these tools lies in their execution models:
 
 - **DuckDB operates exclusively in lazy mode, meaning it optimizes all operations before execution**. While this ensures efficiency, it can slow down experimentation, as users can’t view intermediate results until all queries are finalized. This limitation often leads users to preprocess data in DuckDB and then transition to pandas or Polars for further analysis.
 - **Polars, by contrast, supports both lazy and eager execution, allowing users to experiment and refine their workflows interactively**. This flexibility makes it particularly attractive for iterative development and smaller analyses.
 
+</div>
+
 ## Working with Larger-Than-Memory Datasets
+
+<div class="post-text" style="color:#0c0c0c">
 
 **Both tools handle datasets larger than your machine’s memory by streaming data through memory** rather than loading it all at once. For example, decompressing a 50 GB Parquet file might expand to 150–200 GB in RAM—well beyond the limits of most laptops. DuckDB and Polars efficiently process these datasets without crashing, making them invaluable for data professionals without access to clusters. Note that Polars’ streaming engine is still experimental, but a full-rewrite is underway.
 
+</div>
+
 ## SQL vs. Python: A Question of Preference
+
+<div class="post-text" style="color:#0c0c0c">
 
 DuckDB is SQL-centric, making it ideal for those comfortable writing complex SQL queries. Its SQL grammar is stable, well-documented, and hasn’t changed significantly over time. This stability makes DuckDB particularly appealing for workflows involving automation or large language models (LLMs), which excel at generating SQL compared to Python code for pandas or Polars.
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 Polars, meanwhile, is designed for Python-first workflows, introducing a modern syntax that is more expressive and Pythonic than pandas. While there is a learning curve for new users, Polars’ approach to expressions often simplifies complex workflows, offering a clean and efficient alternative to pandas.
+
+</div>
 
 ## Combining Tools for Maximum Effect
 
+<div class="post-text" style="color:#0c0c0c">
+
 In many workflows, these tools complement rather than replace each other. For example, you might use DuckDB for initial data extraction and processing, then transition to Polars or pandas for detailed analysis and visualization. Both DuckDB and Polars allow for seamless integration, enabling smooth transitions between tools.
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 By experimenting with these tools on real-world projects, you can discover their strengths and limitations, ensuring you’re prepared for any data challenge. There’s space for all three tools—pandas, Polars, and DuckDB—to coexist, depending on your needs. The growing diversity of DataFrame tools has introduced exciting possibilities for data professionals. Pandas, Polars, and DuckDB each bring unique strengths to the table, but they aren’t mutually exclusive. Instead, they complement one another, enabling seamless transitions and interoperability across workflows.
 
+</div>
+
 ## Embracing a Growing Ecosystem
+
+<div class="post-text" style="color:#0c0c0c">
 
 These advancements aren’t about replacing pandas but complementing it. By combining tools, data professionals can build workflows that leverage the unique strengths of each. For example:
 
@@ -192,13 +266,21 @@ These advancements aren’t about replacing pandas but complementing it. By comb
 - Transition to Polars for performance-intensive analysis with flexible syntax.
 - Continue leveraging pandas for its stability and ecosystem of domain-specific libraries.
 
+</div>
+
 ![](/posts/how-many-dataframe-libraries-do-you-need-to-change-a-lightbulb/Dataframes-image.png)
 
 ## Expanding the DataFrame Ecosystem
 
+<div class="post-text" style="color:#0c0c0c">
+
 The DataFrame ecosystem has evolved significantly in recent years, with tools like Polars and DuckDB offering fresh perspectives on performance, scalability, and usability. While pandas remains the most widely used tool, these newcomers provide exciting alternatives that address common limitations in traditional workflows.
 
+</div>
+
 ## Interoperability: The Road Ahead
+
+<div class="post-text" style="color:#0c0c0c">
 
 Thanks to ongoing collaboration in the data science community, these tools are becoming increasingly interoperable. For example, you can:
 
@@ -208,7 +290,11 @@ Thanks to ongoing collaboration in the data science community, these tools are b
 
 This interoperability ensures that data professionals can choose the best tool for each stage of their workflow without being locked into a single solution.
 
+</div>
+
 ## Strengths and Improvements Across the Ecosystem
+
+<div class="post-text" style="color:#0c0c0c">
 
 Polars has gained traction for its speed and flexibility, offering advanced features like lazy execution and multi-threading. One of its early challenges—compatibility with upstream and downstream libraries—is steadily improving.
 
@@ -216,15 +302,23 @@ DuckDB is revolutionizing how we think about analytical workflows. Its ability t
 
 For library maintainers, tools like Narwhals are pushing the boundaries of compatibility. Narwhals provides a lightweight, dependency-free way to integrate support for multiple DataFrame libraries, enabling seamless transitions between pandas, Polars, DuckDB, and others. For instance, Altair’s ability to work with Polars is powered by Narwhals under the hood. While not an end-user tool, Narwhals is a valuable asset for developers creating tools that need to operate across multiple libraries.
 
+</div>
+
 ## Transforming the Data Science Landscape
+
+<div class="post-text" style="color:#0c0c0c">
 
 The availability of these new tools is essential for many data professionals. Previously, handling large datasets can require specialized hardware or clusters. With DuckDB and Polars, datasets that once crashed machines can now be processed efficiently on laptops. Polars’ recent CUDA integration adds GPU acceleration to the mix, promising even greater performance for computationally intensive tasks.
 
 This ability to integrate tools seamlessly ensures that users can adapt their workflows as their needs evolve.
 
+</div>
+
 ![A pair of glasses with computer code reflected in the lenses, symbolizing a forward-thinking and focused approach to advancing DataFrame workflows and exploring modern tools like pandas, Polars, and DuckDB. The image evokes innovation, clarity, and a vision for the future of data analysis.](/posts/how-many-dataframe-libraries-do-you-need-to-change-a-lightbulb/Lenses-image.png)
 
 ## Looking Ahead: Taking Your DataFrame Work to the Next Level
+
+<div class="post-text" style="color:#0c0c0c">
 
 For those starting new projects, now is the perfect time to explore these tools. Try Polars or DuckDB for smaller analyses, or incorporate them into larger workflows to see how they perform in real-world scenarios. Each tool brings unique capabilities to the table, and the investment in learning them can pay off significantly.
 
@@ -232,7 +326,11 @@ Pandas is still awesome—it’s everywhere, and this is not about criticizing p
 
 As the ecosystem grows, the tools we use are becoming more powerful and adaptable, enabling us to solve bigger problems with fewer constraints. By experimenting, learning, and integrating these tools into your workflows, you’re not just keeping up with the evolution of data science—you’re helping to shape its future. If you’re a tool builder looking to support multiple libraries, consider using Narwhals.
 
+</div>
+
 ## Next Steps
+
+<div class="post-text" style="color:#0c0c0c">
 
 The tools we’ve explored—pandas, Polars, and DuckDB—represent the cutting-edge of DataFrame libraries, but even the best tools are only as effective as how you use them. Are you confident you’re getting the most out of your current workflows? Could exploring these tools unlock new efficiencies or capabilities for your projects?
 
@@ -240,10 +338,16 @@ What’s the biggest problem you’re facing with your data workflows today? If 
 
 Together, we can explore how to optimize your approach, streamline your analysis, and take your work to the next level.
 
+</div>
+
 ## Additional Viewing/Listening
+
+<div class="post-text" style="color:#0c0c0c">
 
 - Polars and Time Series: <https://youtu.be/qz-zAHBz6Ks?si=ioUnFS0Z_r7qb36s>
 - Understanding Polars Expressions when you’re used to pandas: <https://youtu.be/BgnPgssga90?si=fKvXz2j8FUG4WaQX>
 - How you can write a Polars plugin (tutorial): <https://youtu.be/j2N_YD5vbOs?si=WQYbJrEy4KAgV1qr>
 - Polars and time zones: <https://youtu.be/Qr0PnDox5MM?si=RBLHNODcrjohdHuA>
 - Ahoy, Narwhals are bridging the data science APIs <https://youtu.be/FSH7BZ0tuE0>
+
+</div>

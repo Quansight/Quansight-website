@@ -34,7 +34,7 @@ blocks:
               align: "center"
               paddingRight: "50px"
             - type: text
-              html: "<p style=\"text-align: center;\">Looking for the latest posts? Visit the <a class=\"decorated-link\" data-end=\"471\" data-start=\"447\" href=\"https://labs.quansight.org/blog\" rel=\"noopener\">Quansight Labs Blog</a> for new insights and updates.</p>"
+              html: "<p style=\"text-align: center;\">Looking for the latest posts? Visit the <a data-end=\"471\" data-start=\"447\" href=\"https://labs.quansight.org/blog\" rel=\"noopener\">Quansight Labs Blog</a> for new insights and updates.</p>"
         paddingTop: "25px"
         maxWidthPx: 1311
   paddingTop: "50px"

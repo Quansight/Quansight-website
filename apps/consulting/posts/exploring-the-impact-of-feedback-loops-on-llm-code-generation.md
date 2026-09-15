@@ -5,6 +5,9 @@ authors: [chris-ostrouchov]
 description: 'As an experiment we wanted to add a feedback loop into LLM generated code via type annotations, docstrings, automated tests, and user feedback. We developed a simple package "pseudoscode" which uses the OpenAI API for generating code.'
 category: ['Artificial Intelligence']
 tags: ['Impact of Feedback Loops on LLM Code Generation', 'LLM']
+textStyle:
+  weight: 500
+  color: '#000000'
 featuredImage:
   src: '/posts/exploring-the-impact-of-feedback-loops-on-llm-code-generation/pseudocode-screenshot.png'
   alt: 'A screenshot of the pseudocode program running'

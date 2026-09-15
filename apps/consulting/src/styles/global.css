@@ -309,7 +309,30 @@ table.table-horizontal-scroll tbody th {
   margin: 0 0 1.44rem;
   font-size: 1.8rem;
   line-height: 2.7rem;
-  color: #0c0c0c;
+  font-weight: var(--post-text-weight, 400);
+  color: var(--post-text-color, #191919);
+}
+/* A widget's own size/weight/color (see text_style in the posts
+   converter) applies to everything inside its wrapper: the wrapper
+   carries the body defaults, its inline style overrides them. */
+.post-body .post-text {
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-weight: var(--post-text-weight, 400);
+  color: var(--post-text-color, #191919);
+}
+.post-body .post-text p,
+.post-body .post-text li {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+.post-body .post-text {
+  margin-bottom: 1.44rem;
+}
+.post-body .post-heading {
+  margin: 3.4rem 0 2rem;
 }
 .post-body h2,
 .post-body h3 {
@@ -331,9 +354,10 @@ table.table-horizontal-scroll tbody th {
 }
 .post-body li {
   margin: 0 0 1.28rem;
-  font-size: 1.6rem;
-  line-height: 2.4rem;
-  color: #0c0c0c;
+  font-size: 1.8rem;
+  line-height: 2.7rem;
+  font-weight: var(--post-text-weight, 400);
+  color: var(--post-text-color, #191919);
 }
 .post-body li p {
   margin: 0;
@@ -346,6 +370,7 @@ table.table-horizontal-scroll tbody th {
 }
 .post-body a {
   color: #a43a8f;
+  font-weight: 400;
   text-decoration: underline;
 }
 .post-body :not(pre) > code {
@@ -445,4 +470,25 @@ table.table-horizontal-scroll tbody th {
   display: inline-block;
   height: auto;
   margin: 0;
+}
+
+/* Headings and paragraphs inside a page text block (WP text-editor
+   widgets that carry their own h2/h3, e.g. terms-and-conditions and
+   privacy-policy), at live's kit defaults: Inter, 22px/600 #252525 for
+   h3, paragraphs spaced 14.4px. */
+.block-text h2,
+.block-text h3,
+.block-text h4 {
+  margin: 2rem 0 1rem;
+  font-family: Inter, sans-serif;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #252525;
+}
+.block-text h2 {
+  font-size: 2.6rem;
+}
+.block-text p + p {
+  margin-top: 1.44rem;
 }

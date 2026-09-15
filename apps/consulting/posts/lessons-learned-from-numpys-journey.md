@@ -15,7 +15,11 @@ banner:
     alt: ''
 ---
 
+<div class="post-text" style="font-weight:500;color:#000000">
+
 _A Conversation with Ralf Gommers Exploring Governance, Growth, and Open Source Insights_
+
+</div>
 
 In this insightful interview, Ralf Gommers, co-director of [Quansight Labs](https://labs.quansight.org/) and a key contributor to [NumPy](https://numpy.org/), discusses the importance of sustainability in open source projects. He highlights the balance between [community-driven efforts and corporate support](/blog/community-first-open-source-an-action-plan) while addressing the environmental impact of software. By encouraging better practices, he sees an opportunity to make software more sustainable. Ralf also highlights the need for universities to teach essential software skills and foster collaboration within open source communities, empowering the next generation of developers.
 

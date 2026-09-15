@@ -354,7 +354,9 @@ function isDarkBackground(hex: string): boolean {
   const fontWeight = block.fontWeight as number | undefined;
   const color = block.color as string | undefined;
   const token = colorToken(color);
-  const colorClass = token ? `text-${token}` : color ? '' : 'text-black';
+  // Live's kit default for uncolored text widgets is #252525 (confirmed
+  // on terms-and-conditions and privacy-policy), not pure black.
+  const colorClass = token ? `text-${token}` : color ? '' : 'text-[#252525]';
   const styleParts = [
     fontWeight ? `font-weight:${fontWeight}` : '',
     !token && color ? `color:${color}` : '',
@@ -373,7 +375,7 @@ function isDarkBackground(hex: string): boolean {
   ].filter(Boolean);
   return (
     <div
-      class={`max-w-layout mx-auto w-full leading-[1.5] [&_a]:text-magenta [&_a]:hover:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem] ${
+      class={`block-text max-w-layout mx-auto w-full leading-[1.5] [&_a]:text-magenta [&_a]:hover:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem] ${
         // 18px is the live site's kit default for unsized text widgets
         // (confirmed on blog's "Looking for the latest posts?" line).
         fontSizeToken ? `text-${fontSizeToken}` : 'text-sm'

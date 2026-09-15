@@ -17,7 +17,13 @@ banner:
     alt: 'Image of the Quansight logo'
 ---
 
+<div class="post-text" style="font-weight:500;color:#000000">
+
 # **How Quansight and the University of Southern California joined forces to make Pandas available for use in the paleogeosciences by implementing a community-requested feature dating back to 2014.**
+
+</div>
+
+<div class="post-text" style="font-weight:500;color:#000000">
 
 When it comes to time series analysis, Pandas is pervasive in the PyData ecosystem. One of its core features is the ability to work with time series data, and it provides powerful tools including resampling, rolling window calculations, time-based grouping, time shifting, and more.
 
@@ -66,3 +72,5 @@ _One would have had to wait an astronomical number of nanoseconds for us to comp
 To learn about this project in greater technical detail, [check out the Medium blog post by Kim Pevey, Quansight’s lead engineer](https://medium.com/cyberpaleo/pandas-and-the-geosciences-a-4-5-billion-year-story-66af9f565a4b).
 
 To speak to an expert at Quansight about consulting work for your business or for an academic proposal, reach out to: [connect@quansight.com](mailto:connect@quansight.com).
+
+</div>

@@ -5,6 +5,9 @@ authors: [amit-kumar]
 description: 'In this blog post, we will talk about a case study of utilizing Dask to speed up a particular computation, and we will scale it with the help of Coiled.'
 category: [Scalable Computing, Training]
 tags: ['Dask', 'Dask on Coiled']
+textStyle:
+  weight: 500
+  color: '#000000'
 featuredImage:
   src: /posts/dask-on-coiled/daskoncoiled-1.png
   alt: 'Dask and Coiled logos'

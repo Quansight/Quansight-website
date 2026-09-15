@@ -519,4 +519,3 @@ blocks:
           - ["WP Mail SMTP", "(open source)", "Authenticated SMTP email support", "<a href=\"https://wordpress.org/plugins/wp-mail-smtp/\">https://wordpress.org/plugins/wp-mail-smtp/</a>"]
   paddingTop: "100px"
   paddingBottom: "100px"
-

@@ -143,8 +143,14 @@ The other part of the story comes from the great team of PyTorch and TorchVision
 
 ## Footnotes
 
+<div class="post-text" style="color:#0c0c0c">
+
 1. In this post, we are going to talk a fair bit about torch.compile. If you have never heard about it, consider reading [the following tutorial](https://pytorch.org/docs/main/torch.compiler_get_started.html) first. [↩︎](#1)
 2. Much of this work is bleeding edge and rapidly evolving, and unfortunately, the internals of AOTAutograd have not yet been thoroughly documented… yet! [↩︎](#2)
 3. The introduction of the [blog post](/blog/pytorch-2-1-quansights-improvements-to-bsr-sparse-matrix-multiplication) goes into some detail on the different types of sparsity implemented in PyTorch. [↩︎](#3)
 4. PyTorch Maintainer Ed Yang discusses this concept at length in this [excellent episode](https://pytorch-dev-podcast.simplecast.com/episodes/pyobject-preservation-q6sE1n7z) of the PyTorch Dev Podcast. [↩︎](#4)
 5. Check out Quansight contributions to PyTorch in [2022](/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2022) and [2021](/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2021) if you missed them. [↩︎](#5)
+
+</div>
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>

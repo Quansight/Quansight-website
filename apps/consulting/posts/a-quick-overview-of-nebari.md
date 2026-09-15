@@ -13,7 +13,11 @@ banner:
     alt: 'Image of the Nebari logo'
 ---
 
+<div class="post-text" style="font-weight:500;color:#000000">
+
 _A collaboration-minded AI platform for data and science._
+
+</div>
 
 ## What Is Nebari?
 

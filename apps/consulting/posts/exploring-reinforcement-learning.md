@@ -5,6 +5,9 @@ authors: [dillon-roach]
 description: 'Reinforcement learning, a type of machine learning, can tackle a wide range of complex issues. Some of the applications include autonomous driving, robotics, trading strategies, healthcare treatment policy, warehouse management, strategic game theory, and many others. The list goes on long enough that one might be tempted to see the technology as magic. If you have big challenges in need of novel solutions, then this post is for you.'
 category: [Artificial Intelligence]
 tags: ['Reinforcement Learning']
+textStyle:
+  weight: 500
+  color: '#000000'
 featuredImage:
   src: /posts/exploring-reinforcement-learning/reinf_learn_preview.webp
   alt: ''

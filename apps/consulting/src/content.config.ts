@@ -45,6 +45,12 @@ const posts = defineCollection({
     // logos, or [] for the plain gradient band. Hand-authored posts use
     // `hero` instead.
     banner: z.array(z.object({ src: z.string(), alt: z.string() })).optional(),
+    // Hand-authored posts: the live post's dominant body text weight and
+    // color (backfilled by add-post-text-style.py from the WP CSS); the
+    // converted posts carry per-widget styles inline instead.
+    textStyle: z
+      .object({ weight: z.number().optional(), color: z.string().optional() })
+      .optional(),
   }),
 });
 

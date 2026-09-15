@@ -17,13 +17,23 @@ banner:
 
 <p class="post-image"><img src="/posts/delivering-open-source-expertise-to-the-enterprise-with-our-quansight-labs-partnership/Mockup_9.png" alt="Image of a Quansight Labs Annual Report 2023 mockup." style="width:50%" loading="lazy" /></p>
 
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 In the recently released [Quansight Labs Annual Report 2023,](https://labs.quansight.org/blog/labs-annual-report-2023) the Labs team did a deep dive into their progress including detailing their contributions to the open source ecosystem. Last year alone, they committed 38,000+ hours to 35+ open source projects, including NumPy, Pandas, SciPy, Matplotlib, scikit-learn, PyTorch, and JupyterLab. Their contributions also extended beyond core libraries, reaching into areas such as high-performance computing, visualization, Python packaging, and infrastructure tools.
 
 Quansight Labs’ expertise, hard work, and dedication are a large piece of the puzzle for Quansight consulting and our unique ability to build best-of-class client-solutions on a foundation of strong open source projects.
 
+</div>
+
 ## Quansight, Quansight Labs & Quansight Initiate—What’s the Difference?
 
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 _Three approaches to a common goal: A thriving open source ecosystem that helps organizations make better data-derived decisions._
+
+</div>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
 
 Quansight’s mission is to create insights from quantitative data to enable better decisions on a foundation of sustainable open source. We have three “arms” that work toward this end with their own separate goals and leadership: Quansight Initiate, Quansight Labs, and Quansight (Consulting).
 
@@ -33,7 +43,13 @@ Quansight Labs is a break-even, open source R&D lab that focuses on creating a c
 
 Quansight Labs is a foundation on which Quansight (Consulting) supports our clients to build their own software and systems that help their particular business and sustain their own vision of the future. Quansight can help anyone using the SciPy and PyData ecosystem to solve a problem, but we have done a lot of work helping companies build best-of-breed data-, ML-, and AI- engineering and operation solutions. Our customers benefit significantly from our experienced and educated team of architects, senior developers, and domain experts. Our open source experience and tight connection with Labs also makes us the perfect partner to help build our client’s open source strategy or systems.
 
+</div>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 _Some of the open source projects we maintain and contribute to._
+
+</div>
 
 <div class="post-gallery" style="--columns:7;--size:8.2rem">
   <img src="/posts/delivering-open-source-expertise-to-the-enterprise-with-our-quansight-labs-partnership/All-logos-01-100x100.png" alt="Image of the conda logo" width="100" height="100" loading="lazy" />
@@ -87,6 +103,8 @@ _Some of the open source projects we maintain and contribute to._
 
 ## From the Report: Quansight Labs Project Highlights 2023
 
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 The mission of Quansight Labs is to sustain and grow community-driven open source projects and ecosystems, focusing on the core of the PyData stack and tools and digital infrastructure for data science, scientific computing, Machine Learning (ML), and Artificial Intelligence (AI). Millions of people worldwide use open source software and infrastructure every day.
 
 To see the complete list of project highlights, read the [Quansight Labs Annual Report 2023](https://labs.quansight.org/blog/labs-annual-report-2023). At a high level here’s some of what the Labs team accomplished last year:
@@ -100,7 +118,13 @@ To see the complete list of project highlights, read the [Quansight Labs Annual 
 - NumPy’s Python API setup was completely refactored with a single location for all public API symbols, and an adequately hidden private API.
 - Thanks to ongoing funding from the [Chan Zuckerberg Initiative (CZI) and the Space Telescope Science Institute (STScI)](https://jupyter-accessibility.readthedocs.io/en/latest/funding/index.html), the Jupyter Accessibility project, which includes several Labs members, continued to raise awareness around accessibility and to make Jupyter tools more accessible.
 
+</div>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 _Quansight and Quansight Labs’ leadership positions in open source._
+
+</div>
 
 <div class="post-gallery" style="--columns:6;--size:10rem">
   <img src="/posts/delivering-open-source-expertise-to-the-enterprise-with-our-quansight-labs-partnership/All-logos-34-100x100.png" alt="Image of the Python Software Foundation logo" width="100" height="100" loading="lazy" />
@@ -115,7 +139,13 @@ _Quansight and Quansight Labs’ leadership positions in open source._
 
 ## Quansight Translates Open Source Expertise Into Client Value
 
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 _Together we’re advancing the open source software underlying over 90% of today’s critical technology._
+
+</div>
+
+<div class="post-text" style="font-weight:500;color:#000000">
 
 Quansight’s desire to sustain and advance open source software (as illustrated by our sponsorship of Quansight Labs) directly reinforces our ability to deliver transformative data solutions to clients across industries. The first-hand knowledge our team gains by contributing to very core libraries like NumPy, Pandas, Jupyter, and PyTorch provides an unparalleled level of expertise for our clients.
 
@@ -134,11 +164,19 @@ Quansight’s open source expertise has empowered similar innovative implementat
 
 This ability to turn open source knowledge into competitive solutions is a key differentiator for Quansight as an enterprise service provider. We don’t just utilize open source tools, we intimately steer their development.
 
+</div>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
+
 Quansight’s expertise across the Python data stack as seen in
 
 [Generative AI: Made Possible by a Mountain of Open Source](/blog/generative-ai-made-possible-by-a-mountain-of-open-source).
 
+</div>
+
 <p class="post-image"><img src="/posts/delivering-open-source-expertise-to-the-enterprise-with-our-quansight-labs-partnership/Generative-AI-Diagram-scaled.jpg" alt="Three mountain peaks at the top show generative AI for text, images, and audio. The diagram descends down to show the mountain layers and bedrock to illustrate the open source projects below." style="width:89%" loading="lazy" /></p>
+
+<div class="post-text" style="font-weight:500;color:#0c0c0c">
 
 Open source contributions lead to better software, enabling more robust solutions for clients, whose needs then drive further innovation in open source. Quansight Labs plays a pivotal role in advancing Quansight’s overarching mission to drive business success with open source solutions.
 
@@ -146,4 +184,8 @@ If you’re looking to leverage the power of open source for your business, or y
 
 And be sure to check out the [Quansight Labs Annual Report 2023](https://labs.quansight.org/blog/labs-annual-report-2023) for an overview of Labs’ mission and impact.
 
+</div>
+
 <p class="post-button post-button--center"><a href="/llm-services#bookacallform">Get in Touch <svg viewBox="-5 -5 20 20" width="20" height="20" aria-hidden="true"><polygon points="2,2 8,5 2,8" fill="currentColor" /></svg></a></p>
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>

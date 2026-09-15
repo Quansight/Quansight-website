@@ -31,6 +31,8 @@ banner:
     alt: 'Image of cuDF (RAPIDS) logo including the phrase "The dataframe library for GPU data science"'
 ---
 
+<div class="post-text" style="color:#000000">
+
 _This post is based off of a talk given at PyData NYC 2022. You can watch the talk here: [Scaling Python: Bank Edition](https://www.youtube.com/watch?v=tbqgsM6iGng)._
 
 Often scaling a distributed computation is easy… that is, until it isn’t. There are currently several tools that will get you off the ground quickly, but when the size of your data increases and you are required to scale further, the complexity needed for a solution often increases considerably, beyond what these tools are able to handle. At this point, algorithm- and infrastructure-dependent requirements will likely preclude experimentation and problem solving. While new tools are continuously emerging that promise straightforward hyper-scaling, in most situations there are at least a few confounding details that have to be ironed out manually.
@@ -41,9 +43,17 @@ In this post, we walk you through how Quansight helped a banking client through 
 
 For this project, we were tasked with deploying a large scale data processing pipeline for running valuation adjustment models using open source tools from the PyData ecosystem. We were given 140,000 simulation files, each around 140 MB, totaling about 20 TB. The data was stored in flat Parquet files with columns `path`, `Date`, and `value`. Each file contained 50,000 simulations, where the path for each simulation spanned the same set of 120 non-sequential dates into the future (resulting in 6 million rows of data per file).Each file belonged to a particular file group, with the size of each group ranging from two to 18,000 files. Our goal was to sum the `value` entries in all of the files within each file group over each unique (`path`, `Date`) combination. We needed to do this very quickly to allow generation of results in as close to real time as possible. To complicate the problem, we had to be able to accomplish this while accounting for potentially limited compute resources.
 
+</div>
+
 ![Three dataframes stacked on top of each other. Each dataframe has index named path with values ranging from 0-49,999. Each has two columns. The first is named Date. The second column is labeled value. The dataframes are labeled File 1, File 2, ..., File N. to the right of the stacked dataframes is an arrow with the text sum inside of it. To the right of the arrow is another dataframe representing the sum of the three dataframes by path and date.](/posts/scaling-python-banking-edition/introduction-img-1.png)
 
+<div class="post-text" style="color:#0c0c0c">
+
 _Schematic of the required summation across multiple input files._
+
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
 
 ## Considering GPUs
 
@@ -59,7 +69,11 @@ GPU architecture lends itself to a pattern that many of these tools rely on, whi
 
 A calculation like the multi-source summation we need to do here is carried out in multiple steps. First, metadata is used to determine the maximum threads per block and blocks per grid. Then, the input data is loaded into GPU memory using this information and the computation is run using one of the above tools. Finally, the data is extracted back to the memory environment of the host. For more background on techniques for memory swapping between main RAM and GPU-RAM, see this [NVIDIA blog post](https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc).
 
+</div>
+
 ![Flow diagram of the pyGPU-CUDA algorithm.](/posts/scaling-python-banking-edition/pygpu-cuda-algorithm.png)
+
+<div class="post-text" style="color:#0c0c0c">
 
 Unfortunately, we discovered that the process of copying the data back and forth between the host’s memory and the GPU memory turned out to be expensive enough to negate a lot of the benefits we saw in the speedup of the computation itself by using GPUs. On top of that, the increased cost of GPU-available cloud instances made the usage of GPUs infeasible for this project. With that in mind, we decided to forego specialized computation hardware and focus on good, old distributed CPU architecture for our computation.
 
@@ -70,6 +84,8 @@ With our decision made to use a distributed CPU architecture, we started looking
 ### Group-by
 
 We thought that the DataFrame approach made sense due to the ease of implementation: take a list of Parquet files and pass that list to the [Dask DataFrame](https://docs.dask.org/en/stable/dataframe.html) [`read_parquet()` function](https://docs.dask.org/en/stable/generated/dask.dataframe.read_parquet.html). We would then run the `groupby()` method on the loaded DataFrame and take the sum of the resulting group-by object. Below is an example of this code and an image of the Dask dashboard after successfully running the code sample. You can see that the work has run without error across 2 workers, each of which was allocated with 2 threads.
+
+</div>
 
 ```python
 def build_graph(paths):
@@ -87,9 +103,13 @@ fut.result().info()
 
 ![Screenshot of the Dask dashboard view resulting after execution of the demo code for the Dask group-by approach.](/posts/scaling-python-banking-edition/dd-groupby-dask-dashboard-q9zstctghgjevcqo3g0tt9iw41qkt2ho4fu2gxyj4q.png)
 
+<div class="post-text" style="color:#0c0c0c">
+
 However, as we noted in the description of the problem, we couldn’t confidently know ahead of time the total amount of resources available within the cluster being used for any given calculation. What happens if our DataFrame ends up being larger than the capacity of the cluster assigned to process it?
 
 As it turns out, we ran into exactly this issue with some of our larger aggregations. We were finding that when we submitted jobs, workers would be forced to pause or restart when the memory thresholds for the cluster were reached, in some cases causing the job to fail completely. The below code shows an example of this happening with a two-worker Dask cluster, where each worker has 4 GB of memory. We get a ‘killed worker’ error when trying to aggregate ten 6,000,000-row files.
+
+</div>
 
 ```python
 >>> graph = build_graph(paths_10)
@@ -118,9 +138,15 @@ File ~/.conda/envs/bank/lib/python3.8/site-packages/distributed/client.py:283, i
 KilledWorker: ("('dataframe-groupby-sum-chunk-d4e753da53a3eff842bab7cbba152105-e7aebcddb75c44615a5bb2eb1e6f9433', 82)", <WorkerState 'tcp://127.0.0.1:42571', name: 1, status: closed, memory: 0, processing: 39>)
 ```
 
+<div class="post-text" style="color:#0c0c0c">
+
 Likewise, the left pane of the Dask dashboard screenshot below shows new workers getting started after previous workers are killed. If this had run as desired, we would expect the task stream diagram to have four rows, one for each thread on each worker. Instead, we see several rows, showing new workers starting and trying to run the remaining jobs before failing. The graph in the right-hand pane shows the Dask graph for this task, demonstrating how the various summation groups are aggregated together over the course of the computation.
 
+</div>
+
 ![Screenshot of the Dask dashboard resulting from a calculating exceeding cluster resources. The left pane shows workers starting, then failing and being killed, and new workers being spawned. The right pane shows a Dask graph of the clustered summation approach taken to the calculation.](/posts/scaling-python-banking-edition/dd-larger-than-cluster-dask.png)
+
+<div class="post-text" style="color:#0c0c0c">
 
 (Author’s Note: In this example, I am using an older version of Dask. This problem of workers running out of resources and being killed is becoming less of an issue as improvements to the Dask scheduler are released. In particular, I am not able to reproduce this error on the same aggregation calculation if I use a more recent version of Dask than the one available at the time we were executing this project.)
 
@@ -133,6 +159,8 @@ The chunking strategy we took was as follows. For a given set of files, if the t
 In cases where there were not enough files to meet the threshold, we would follow the standard `read_parquet()`, `groupby()`, and `sum()` strategy described above, without any intermediate subset calculations and aggregations. This allowed us to streamline any calculations that we were confident would fit comfortably in any cluster that might be assigned to them.
 
 The code and schematic below illustrate this chunked calculate-and-aggregate strategy for a representative large dataset.
+
+</div>
 
 ```python
 %%time
@@ -163,7 +191,11 @@ fut.result().info()
 
 ![](/posts/scaling-python-banking-edition/dd-chunking-dask-graph.png)
 
+<div class="post-text" style="color:#0c0c0c">
+
 With this strategy, we were able process our largest aggregation sets when run singly, which represented a significant step forward. However, there were _many_ aggregations to do and we wanted to run them as quickly as possible. This is where we started seeing the next set of problems. The strategy laid out so far allowed us to complete any of our aggregations on an individual basis. But when submitting thousands of aggregations at a time, where sometimes the entire job was larger than the cluster itself, we again ran into a variation of our original problem: workers were frequently running out of memory and either pausing or, worse, getting killed. This caused a lot of work to be wasted when we had to restart calculations, and sometimes led to runs erroring out completely and being unable to finish, as shown below:
+
+</div>
 
 ```python
 >>> [len(group) for group in small_path_groups]
@@ -190,6 +222,8 @@ With this strategy, we were able process our largest aggregation sets when run s
 DoneAndNotDoneFutures(done={<Future: error, key: finalize-e92147f1de33377e5d699b9a433833ce>, <Future: error, key: finalize-84b8df9a83cf66156a75066a2ac1e76d>, <Future: finished, type: pandas.core.frame.DataFrame, key: finalize-ab97ef0c5f1a508ff7794c880dc52904>, <Future: error, type: pandas.core.frame.DataFrame, key: finalize-fa12a3d29b570a5c9fde46ad4bb4b54e>, <Future: error, key: finalize-27d9405ba12f958c13d758e631561dc1>, <Future: error, key: finalize-62c1aac7865d455c15c608feb900b359>, <Future: finished, type: pandas.core.frame.DataFrame, key: finalize-0736bf3a3c1b701cf111a7602b94688f>, <Future: finished, type: pandas.core.frame.DataFrame, key: finalize-e7a25f8b5dec897b1324baeb1058e0ae>, <Future: error, key: finalize-04ea3d501751890ece2130a20efc5dba>, <Future: error, key: finalize-d7140f09799374ca916b3cbb28816323>, <Future: error, key: finalize-89541c92fdaf68ded72329388778eadf>, <Future: error, key: finalize-0dde02417f66f47d1f389e64ee5fb966>}, not_done=set())
 ```
 
+<div class="post-text" style="color:#0c0c0c">
+
 ### Throttling Dask Graph Submission
 
 To combat this, we decided to throttle how much work we were going to give the scheduler at a time. To do this we employed a thread-pool executor to submit the jobs, where we spun up a fixed number of worker threads to handle the calculation workloads. This would allow us to submit many jobs at once to the calculation system, but still limit how much work was getting released to the Dask scheduler. When it reached the front of the line, each scheduled job would get a thread worker from the pool, run to completion, and then release the thread back to the pool, after which the thread-pool would grab the next job and schedule it.
@@ -209,6 +243,8 @@ So, instead of lowering the number of thread-workers in our thread-pool, we star
 7. Release the thread-lock to allow other workers to continue their work.
 
 The code below illustrates the concept behind this approach:
+
+</div>
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
@@ -258,9 +294,15 @@ def submit_via_threadpool(graphs):
     return result
 ```
 
+<div class="post-text" style="color:#0c0c0c">
+
 The Dask dashboard screenshot below demonstrates this strategy successfully working. We can see how different tasks are running both in parallel and consecutively as resources become available. Some begin immediately, while others wait for other calculations to finish and free their resources. This happens until all work is complete.
 
+</div>
+
 ![Screenshot of Dask dashboard showing execution patterns of computational tasks using the throttled-submission approach, where some calculations start immediately and others await release of the resources needed for them to successfully complete.](/posts/scaling-python-banking-edition/throttling.png)
+
+<div class="post-text" style="color:#0c0c0c">
 
 This strategy was starting to get us closer to a complete solution, though we still needed better performance. While we now had the ability to increase the thread-pool worker count for better cluster utilization, it was still taking a problematically long time to create the execution graphs in the first place, and we still didn’t have completely reliable calculations with our larger aggregations—computation of the execution graphs themselves would sometimes consume a problematically large amount of memory.
 
@@ -268,11 +310,17 @@ So, with that in mind we created a second thread-pool executor. This thread-pool
 
 With this strategy, we could reliably complete large batches of jobs, and we could do so while utilizing the cluster fairly efficiently. However there were still downsides. We were finding that tuning the thread-pool executors was tedious. It took work to figure out a suitable number of threads for each thread-pool, along with the appropriate durations for sleep calls and thread-locking. It also wasn’t a one-size-fits-all strategy, as different workloads needed different settings. All of this made for a complex setup which was far from ideal. Furthermore, the data shuffling and group-by operations continued to be undesirably expensive across a large cluster.
 
+</div>
+
+<div class="post-text" style="color:#0c0c0c">
+
 ## DataFrame Summation
 
 At this point, we started feeling like we were reaching the limits of our multi-threaded group-by strategy. It was becoming clear that our code was too complex and not very efficient. We realized that the more we continued down this path, the more technical debt we were going to accrue and the harder the project would be to manage. So we began to think of other ways we could aggregate the data.
 
 In the course of this process, we realized that pandas (not Dask) DataFrames actually sum together quite nicely: pandas ensures that the index and columns match on the sums, so you won’t end up adding the wrong numbers together. Pandas sums are also considerably faster than group-by operations. As another bonus, moving out of Dask DataFrames would allow us to utilize multi-indexing, which helps cut down on the memory footprint of the DataFrames. We found that on our dataset, summing suitably re-indexed DataFrames was about three times faster than running a group-by operation on the equivalent concatenated DataFrame:
+
+</div>
 
 ```python
 >>> %timeit concated_list_of_dfs.groupby(['path', 'Date']).sum()
@@ -281,13 +329,19 @@ In the course of this process, we realized that pandas (not Dask) DataFrames act
 639 ms ± 15.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 ```
 
+<div class="post-text" style="color:#0c0c0c">
+
 While these performance improvements were promising, we were passing a lot of data between workers causing the jobs to generally run slower, and adding extra burden to the scheduler in managing where work was. We wanted to streamline these data management aspects, and also wanted our architecture to exploit any parallelization opportunities among the different aggregation groups. Ideally, we wanted to run an aggregation group on a single worker whenever feasible, to cut down on network traffic on the cluster. With that in mind we started looking at a cluster-of-clusters approach.
 
 ## Cluster-of-Clusters
 
 We based our cluster-of-clusters implementation off of a [keynote at the 2021 Dask Summit](https://summit.dask.org/schedule/presentation/61/keynote-clusters-of-clusters-using-dask-distributed-to-scale-enterprise-machine-learning-systems/). With this setup, you have a normal Dask distributed cluster with a scheduler and a set of workers. Instead of passing your work directly to the scheduler as normal, though, you pass delayed objects that instruct the worker to start a local cluster and also to build a specific Dask graph to be passed to that local cluster. Submitting work in this way gives the benefit of being able to encapsulate a work unit in order to reduce the overall network communication needed to manage that work unit.
 
+</div>
+
 ![Graph illustrating how one Kubernetes node delegates work to child Kubernetes nodes, each of which then creates its own Dask cluster to run the work assigned to it.](/posts/scaling-python-banking-edition/cluster-of-clusters-q9zwd0abkuclpe9vi0z2z4ckq45iom614hklfmt6h4.png)
+
+<div class="post-text" style="color:#0c0c0c">
 
 _(K8s = Kubernetes)_
 
@@ -298,6 +352,8 @@ However, at this point we were still using thread-pools to manage the aggregatio
 At this point, we started looking more seriously into [Dask Bag](https://docs.dask.org/en/stable/bag.html). Dask Bag is typically used for processing text or JSON files, so it’s probably not the first thing people think of when they need to work with DataFrames. One of the big advantages of Dask Bag, though, is that it follows the [map-reduce model](https://en.wikipedia.org/wiki/MapReduce): it allows us to take a more hands-off approach to managing the calculations because we can trust that it will reduce our data on each individual worker as much as possible before moving data between workers to finish the aggregations. When the Dask Bag object is submitted, Dask will send batches of files as defined by `partition_size` to the workers. The workers will then apply the mappings and the aggregation to each batch. Finally, the workers will re-partition and apply the mappings and aggregation across the newly formed batches until the dataset is fully aggregated. This helps to minimize the amount of data traveling between workers. It also let us take advantage of summing DataFrames instead of running group-by aggregations on them.
 
 The code sample and dashboard screenshot below illustrate this approach. The screenshot shows the graph representation of several aggregation tasks that have been submitted to a Dask cluster. We can see the multiple levels of aggregation that each task goes through for each Dask Bag partition until all partitions are aggregated together. This demonstrates the map-reduce model in action.
+
+</div>
 
 ```python
 def load_dataframe(data):
@@ -328,11 +384,15 @@ def build_task_graph(filepaths):
 
 ![Dask dashboard screenshot showing the map-reduce model used by Dask Bag to calculate aggregated sums from a large number of input DataFrames.](/posts/scaling-python-banking-edition/dask-bag.png)
 
+<div class="post-text" style="color:#0c0c0c">
+
 In the image above is the graph representation of several aggregation tasks that have been submitted to a Dask cluster. We can see the multiple levels of aggregation that each task goes through for each bag partition until all partitions are aggregated together. This demonstrates the map reduce model in action.
 
 On top of Dask Bag, we also started utilizing a tool called ‘[resource annotations](https://distributed.dask.org/en/stable/resources.html)‘. These allowed us to take a much more hands-off approach to the scheduler. Instead of manually managing how much work we are submitting at a time, we can submit it all and let the scheduler do the heavy lifting of resource management. This automatically insures that the workers will not get work that exceeds the resources that they have available.
 
 To use resource annotations, first you need to define the relevant resource limits when you set up your cluster:
+
+</div>
 
 ```python
 with dask.config.set({'distributed.worker.resources.MEMORY': 2000}):
@@ -340,7 +400,11 @@ with dask.config.set({'distributed.worker.resources.MEMORY': 2000}):
 client = Client(cluster)
 ```
 
+<div class="post-text" style="color:#0c0c0c">
+
 As you can see in the above example, I used the context manager `dask.config.set` to set the `MEMORY` resources of each worker to 2000, meant to represent megabytes. However, the resource name and the value can be set arbitrarily. For example, I could have set the resource to be `WIDGET` instead of `MEMORY`, and it would work the same as long as your naming is consistent between your cluster configuration and your annotations. Likewise the value can be defined in terms of any convenient units as long as you are consistent. Next, we annotate our Dask Bag objects:
+
+</div>
 
 ```python
 import dask.bag as db
@@ -352,6 +416,8 @@ with dask.annotate(resources={'MEMORY': 200*part_size}):
     summed_df = dfs.sum()
 ```
 
+<div class="post-text" style="color:#0c0c0c">
+
 In the above code, I have annotated the Dask objects with the maximum amount of memory I expect them to need. Now, when I run this code, the scheduler knows not to send off a new task to a worker until the necessary resources are available on that worker. This capability was really valuable because it allowed us to use the scheduler to its full potential, instead of having to carefully manage how much work was on the cluster. The scheduler was able to handle all of the resource allocation and scheduling itself, since it knew _a priori_ what the needed resources for a task would be.
 
 ## Orchestration & Productionization
@@ -362,7 +428,11 @@ With the computational machinery defined, we then needed a tool to orchestrate a
 
 We initially thought that [Prefect](https://www.prefect.io/opensource/v2/?utm_medium=search&utm_campaign=Prefect_Brand&utm_keyword=Prefect&gclid=Cj0KCQjw27mhBhC9ARIsAIFsETGvItXRJnnoK6ExbnvuvOUvjbIfpvl_aE_T_Du-iSNpux7tVesCl8caAjPuEALw_wcB) would be a good fit for us. Prefect is a Python-native package, which was a bonus. Also, tasks in Prefect are just Python functions wrapped in a workflow definition with some flow control logic. It includes a server that can be used to run flows in response to triggers and schedulers and to manage logging, and it provides a visualization dashboard. It also integrates nicely with Dask, allowing execution of tasks on a Dask cluster with only a few edits to the code. The following is an example of a branched Prefect workflow diagram:
 
+</div>
+
 ![Prefect workflow diagram showing two branches from an initial node depending on a True/False condition, with two actions following the boolean check.](/posts/scaling-python-banking-edition/prefect-flow-q9zxlywf3haammdgzvq019ehzdfakca2y6idwc4dc8.png)
+
+<div class="post-text" style="color:#0c0c0c">
 
 Unfortunately, we found that when running our workflow from within Prefect, we were overloading the Dask scheduler, in large part because each Prefect task was creating a separate client and connecting to the Dask cluster. The scheduler can only handle a certain number open connections, and thus we were running into errors due to having too many file descriptors open on the scheduler node. Likewise, the large number of connections was slowing down communication between the scheduler and the workers, to the extent that Dask workers would sometimes time out while waiting from a response from the scheduler.
 
@@ -378,7 +448,11 @@ We were still able to use Dask Bag to control resource usage within a workflow p
 
 The following image is a schematic representing the key elements of the final computation topology we used for the project, based on Argo Workflows and Dask Bag. It illustrates both single-pod clusters for small jobs, managed by Dask Bag, and multiple-pod clusters for large jobs, orchestrated by Argo Workflows.
 
+</div>
+
 ![argo-workflow](/posts/scaling-python-banking-edition/argo-workflow-q9zxv5rmj395q2fld9u17fexer07iqdv6toyvygx0m.png)
+
+<div class="post-text" style="color:#0c0c0c">
 
 _(k8s = Kubernetes)_
 
@@ -389,5 +463,7 @@ Our banking client is currently using this cluster-of-clusters solution built on
 To review the overall project, we first looked into using GPUs to solve this problem, but found that after accounting for data transfer it didn’t give us an appreciable speedup in this particular use case. We also experimented with Dask in various configurations to accomplish the large scale aggregation we needed, eventually settling on an approach using Dask Bag with resource annotations. To satisfy our orchestration needs, we first investigated use of the open source Prefect Server backend, but found that it would require quite a bit of effort to scale to the extent needed for our problem. We then evaluated Argo Workflows, which enabled us to achieve our goal of deploying an open source, large-scale data processing pipeline for running valuation adjustment models using tools from the PyData ecosystem.
 
 If you have questions about this post or would like to learn more about ways Quansight can help you work through a similar scenario at your organization, complete a contact form and we’ll be in touch.
+
+</div>
 
 <p class="post-button post-button--center"><a href="/about-us#bookacallform">Contact Us <svg viewBox="-5 -5 20 20" width="20" height="20" aria-hidden="true"><polygon points="2,2 8,5 2,8" fill="currentColor" /></svg></a></p>

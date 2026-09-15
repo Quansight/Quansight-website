@@ -11,6 +11,9 @@ tags:
     'Spatial Filtering at Scale With Dask and Spatialpandas',
     'Spatialpandas',
   ]
+textStyle:
+  weight: 500
+  color: '#000000'
 featuredImage:
   src: /posts/spatial-filtering-at-scale-with-dask-and-spatialpandas/spacialpandas-img-1.png
   alt: ''

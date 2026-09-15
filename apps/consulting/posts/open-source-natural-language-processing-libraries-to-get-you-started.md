@@ -10,6 +10,9 @@ tags:
     'Open Source',
     'Open Source Natural Language Processing Libraries',
   ]
+textStyle:
+  weight: 500
+  color: '#000000'
 featuredImage:
   src: /posts/open-source-natural-language-processing-libraries-to-get-you-started/nlp-img-1.png
   alt: ''

@@ -100,7 +100,11 @@ Some fun facts:
 
 ![A scatter plot titled "ARC-AGI-1 Semi-Private Eval" displays the performance (score percentage) of different AI models on a task, plotted against the cost per task. Several data points represent models with varying costs and scores, with GPT-4.5 highlighted as a low-cost, relatively high-scoring option. Reference points for human performance (STEM GRAD, AVG. MTURKER) and Kaggle SOTA are also shown, indicating areas for improvement. The x-axis is logarithmic, showing costs of $0.10, $1, and $10. The y-axis shows scores from 0% to 100%.](/posts/genai-things-you-need-to-know-that-your-parents-didnt-teach-you/GenAI6.png)
 
+<div class="post-text" style="color:#0c0c0c">
+
 [Click to see source on X](https://x.com/arcprize/status/1895206472004591637)
+
+</div>
 
 ## Agentic Workflows: LLMs Need More Than Just Text
 
@@ -110,7 +114,11 @@ LLMs can generate a lot of interesting content on their own, but they work best 
 
 ![A grouped bar chart compares the performance scores of various language models (LLMs) and CodeAgents (solid bars) against vanilla LLMs (hashed bars) on three benchmarks: GAIA, MATH, and SimpleQA. The y-axis represents the score, and the x-axis lists the models. CodeAgents generally outperform their vanilla LLM counterparts, particularly on MATH and SimpleQA. The legend differentiates between the benchmarks.](/posts/genai-things-you-need-to-know-that-your-parents-didnt-teach-you/GenAI7.png)
 
+<div class="post-text" style="color:#0c0c0c">
+
 [Source on Huggingface](https://huggingface.co/blog/open-deep-research)
+
+</div>
 
 ## LLMs Are Not Like Code (But Also, They Kind of Are)
 

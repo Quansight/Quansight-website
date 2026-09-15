@@ -5,6 +5,9 @@ authors: [adam-lewis]
 description: 'This notebook is designed to help you learn how to make apps in Panel in about 15 minutes. Screenshots of cell outputs are included for convenience below, but it is strongly recommended that you use the interactive Binder version (takes 1-2 minutes to load) or by cloning the repo and running locally.'
 category: [Training, Data Visualization, Jupyter]
 tags: ['Holoviews Learning Aid']
+textStyle:
+  weight: 500
+  color: '#000000'
 featuredImage:
   src: /posts/panel-holoviews-learning-aid/panelholoviewsblog.png
   alt: ''
