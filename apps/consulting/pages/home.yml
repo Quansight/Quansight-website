@@ -105,8 +105,8 @@ blocks:
           - right: "9%"
           - null
         gapPx: 0
-        marginTop: "2%"
-        marginBottom: "3%"
+  marginTop: "2%"
+  marginBottom: "3%"
   paddingLeft: "3%"
 - type: columns
   columns:
@@ -148,24 +148,53 @@ blocks:
             left: "0px"
         maxWidthPx: 1151
         gapPx: 20
-        marginTop: "5%"
   columnBackgrounds:
     - "#452392"
+  marginTop: "5%"
   paddingTop: "50px"
   maxWidthPx: 1151
   fullBleed: true
 - type: columns
   columns:
-    - - type: text
-        html: "<p><strong><a href=\"https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2025.pdf\" style=\"color: #ffffff;\"> 👉 Read the Report</a></strong></p>"
-        sizePx: 16
-        fontWeight: 700
-        color: "#FFFFFF"
-        lineHeight: "2.7em"
-        align: "center"
-        paddingTop: "2%"
-        paddingBottom: "2%"
-        widthPercent: 100
+    - - type: columns
+        columns:
+          - - type: text
+              html: "<p><strong><a href=\"https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2025.pdf\" style=\"color: #ffffff;\"> 👉 Read the Report</a></strong></p>"
+              sizePx: 16
+              fontWeight: 700
+              color: "#FFFFFF"
+              lineHeight: "2.7em"
+              align: "center"
+              paddingTop: "2%"
+              paddingBottom: "2%"
+              widthPercent: 100
+              border: "1px solid #FFFFFF"
+              hoverScale: 0.9
+          - []
+          - []
+        columnBackgrounds:
+          - "#452392"
+          - "#452392"
+          - "#452392"
+        columnWidths:
+          - 25.0
+          - 25.0
+          - 49.664
+        columnPaddings:
+          - top: "0%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+          - top: "0%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+          - top: "0%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+        maxWidthPx: 1151
+        gapPx: 20
   columnBackgrounds:
     - "#452392"
   marginTop: "-1%"
@@ -222,10 +251,12 @@ blocks:
               html: "<h2 style=\"text-align: left;\"><b>1. Deep Technical Expertise</b></h2><p>Our team includes maintainers, core contributors, and long-time practitioners across the PyData and broader open source ecosystem. This deep OSS experience means we don’t just build solutions, we follow established development, packaging, and security best practices from the start, reducing risk and ensuring long-term maintainability.</p>"
               sizePx: 15
               paddingRight: "4px"
+              border: "0px solid #CFC8DF"
           - - type: text
               html: "<h2 style=\"text-align: left;\"><b>2. A Complete Consulting Model</b></h2><p><span style=\"font-weight: 400;\">Our consulting approach considers the full context of how software is built, used, and sustained, spanning user experience (UX), developer experience (DevEx), documentation, accessibility, and community impact. Especially in our open source services, we design solutions that are usable, adoptable, and aligned with real-world workflows.</span></p>"
               sizePx: 15
               paddingRight: "7px"
+              border: "0px solid #CFC8DF"
           - - type: text
               html: "<h2 style=\"text-align: left;\"><b>3. Ecosystem Impact</b></h2><p><span style=\"font-weight: 400;\">We actively contribute upstream to open source projects when it makes sense, strengthening the tools and ecosystems our clients rely on. Beyond direct contributions, we reinvest our success into the community through our open source internship program, OSS funding initiatives, and sustained project maintenance, helping ensure long-term ecosystem health.</span></p>"
               sizePx: 15
@@ -313,7 +344,7 @@ blocks:
                   bottom: "45px"
               maxWidthPx: 1314
               gapPx: 20
-              marginBottom: "-12px"
+        marginBottom: "-12px"
         maxWidthPx: 1314
       - type: columns
         columns:
@@ -380,7 +411,7 @@ blocks:
                   bottom: "45px"
               maxWidthPx: 1200
               gapPx: 20
-              marginBottom: "-12px"
+        marginBottom: "-12px"
         maxWidthPx: 1200
       - type: columns
         columns:
@@ -442,7 +473,7 @@ blocks:
                   left: "45px"
               maxWidthPx: 1200
               gapPx: 20
-              marginBottom: "-12px"
+        marginBottom: "-12px"
         maxWidthPx: 1200
   paddingTop: "50px"
   paddingBottom: "120px"
@@ -492,3 +523,4 @@ blocks:
     - null
   gapPx: 0
   marginBottom: "5%"
+

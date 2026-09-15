@@ -121,13 +121,25 @@ const paddingStyle = [
 // "Trusted By" card over the hero) has to be positioned, or the hero
 // (itself `relative`) paints over it regardless of DOM order.
 const overlapsPrevious = typeof block.marginTop === 'string' && block.marginTop.startsWith('-');
+// PageBlocks separates top-level blocks by 2rem (Elementor's widget
+// spacing), but live sections abut -- a section that pulls itself over
+// the previous one with a negative margin has to absorb that gap too.
+const marginTop = overlapsPrevious ? `calc(${block.marginTop} - 2rem)` : (block.marginTop as string | undefined);
 const rowStyle = [
   gapPx === undefined ? '' : `gap:${gapPx}px`,
-  block.marginTop ? `margin-top:${block.marginTop}` : '',
+  marginTop ? `margin-top:${marginTop}` : '',
   block.marginBottom ? `margin-bottom:${block.marginBottom}` : '',
   columnWidths ? `--col-widths:${columnWidths.map((w) => (typeof w === 'number' ? `${w}%` : w)).join(' ')}` : '',
 ].filter(Boolean).join(';');
 const soleBackground = columns.length === 1 ? columnBackgrounds[0] : undefined;
+// Every column the same color: one continuous panel, painted on the row.
+// Elementor's column gap is padding inside each column, under the
+// column's own background, so live shows no seams -- our grid gap would.
+const uniformBackground =
+  columns.length > 1 && columnBackgrounds.length === columns.length && columnBackgrounds.every((b) => b && b === columnBackgrounds[0])
+    ? columnBackgrounds[0]
+    : undefined;
+const uniformToken = colorToken(uniformBackground);
 const isFullBleedPanel =
   block.fullBleed === true && !!soleBackground && soleBackground.toUpperCase() !== '#FFFFFF';
 
@@ -202,13 +214,13 @@ function isDarkBackground(hex: string): boolean {
 {block.type === 'columns' && !isFullBleedPanel && (
   <div style={paddingStyle || undefined}>
   <div
-    class={`grid ${columnWidths ? 'grid-cols-1 col-widths' : columnsGridClass} max-w-layout mx-auto w-full ${gapPx === undefined ? 'gap-[3rem]' : ''} ${overlapsPrevious ? 'relative' : ''} ${
+    class={`grid ${columnWidths ? 'grid-cols-1 col-widths' : columnsGridClass} max-w-layout mx-auto w-full ${gapPx === undefined ? 'gap-[3rem]' : ''} ${overlapsPrevious ? 'relative' : ''} ${uniformToken ? `bg-${uniformToken}` : ''} ${
       // A colored row nested inside another row's cell is content-height by
       // default, so its panel stops short of its neighbour's and leaves a
       // step in what should be one rectangle (careers' Subscribe box).
       columnBackgrounds.some(Boolean) ? 'h-full' : ''
     }`}
-    style={[rowStyle, maxWidthStyle].filter(Boolean).join(';') || undefined}
+    style={[rowStyle, maxWidthStyle, uniformBackground && !uniformToken ? `background-color:${uniformBackground}` : ''].filter(Boolean).join(';') || undefined}
   >
     {columns.map((column, i) => {
       const rawBackground = columnBackgrounds[i];
@@ -218,11 +230,13 @@ function isDarkBackground(hex: string): boolean {
       // visible to justify it.
       const backgroundColor = rawBackground && rawBackground.toUpperCase() !== '#FFFFFF' ? rawBackground : undefined;
       const needsLightText = backgroundColor && isDarkBackground(backgroundColor);
-      const bgToken = colorToken(backgroundColor);
+      // With a uniform row background the cell paints nothing itself but
+      // keeps its light-text/padding treatment.
+      const bgToken = uniformBackground ? undefined : colorToken(backgroundColor);
       const columnMargin = columnMargins[i];
       const columnPadding = columnPaddings[i];
       const cellStyle = [
-        !bgToken && backgroundColor ? `background-color:${backgroundColor}` : '',
+        !bgToken && backgroundColor && !uniformBackground ? `background-color:${backgroundColor}` : '',
         rowGapPx === undefined ? '' : `gap:${rowGapPx}px`,
         columnMargin?.left ? `margin-left:${columnMargin.left}` : '',
         columnMargin?.right ? `margin-right:${columnMargin.right}` : '',
@@ -372,10 +386,12 @@ function isDarkBackground(hex: string): boolean {
     block.widthPercent ? `width:${block.widthPercent}%` : '',
     block.marginTop ? `margin-top:${block.marginTop}` : '',
     block.marginBottom ? `margin-bottom:${block.marginBottom}` : '',
+    block.border ? `border:${block.border}` : '',
+    block.hoverScale ? `--hover-scale:${block.hoverScale}` : '',
   ].filter(Boolean);
   return (
     <div
-      class={`block-text max-w-layout mx-auto w-full leading-[1.5] [&_a]:text-magenta [&_a]:hover:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem] ${
+      class={`block-text ${block.hoverScale ? 'hover-scale' : ''} max-w-layout mx-auto w-full leading-[1.5] [&_a]:text-magenta [&_a]:hover:underline [&_ul]:list-disc [&_ul]:pl-[2rem] [&_ol]:list-decimal [&_ol]:pl-[2rem] ${
         // 18px is the live site's kit default for unsized text widgets
         // (confirmed on blog's "Looking for the latest posts?" line).
         fontSizeToken ? `text-${fontSizeToken}` : 'text-sm'

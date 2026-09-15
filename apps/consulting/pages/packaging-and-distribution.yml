@@ -140,13 +140,30 @@ blocks:
   maxWidthPx: 1200
 - type: columns
   columns:
-    - - type: icon-box-grid
-        items:
-          - title: "> Prepare and submit enhancement proposals"
-            description: "PEPs and equivalent governance processes when ecosystem-level changes are required"
-            align: "start"
-            descriptionSizePx: 16
-            descriptionColor: "#000000"
+    - - type: columns
+        columns:
+          - - type: icon-box-grid
+              items:
+                - title: "> Prepare and submit enhancement proposals"
+                  description: "PEPs and equivalent governance processes when ecosystem-level changes are required"
+                  align: "start"
+                  descriptionSizePx: 16
+                  descriptionColor: "#000000"
+          - []
+          - []
+        columnWidths:
+          - 33
+          - 33
+          - 33
+        columnPaddings:
+          - right: "20px"
+            left: "20px"
+          - right: "20px"
+            left: "20px"
+          - right: "20px"
+            left: "20px"
+        maxWidthPx: 1200
+        gapPx: 20
   paddingTop: "60px"
   maxWidthPx: 1200
 - type: columns
@@ -221,7 +238,7 @@ blocks:
                   left: "17.5%"
                 - left: "35%"
               gapPx: 0
-              marginTop: "50px"
+        marginTop: "50px"
         paddingTop: "2%"
         paddingRight: "2%"
         paddingBottom: "2%"
@@ -254,13 +271,16 @@ blocks:
                         description: "We help maintain critical packages under the Python Packaging Authority (PyPA), contribute to the authorship of Python Enhancement Proposals (PEPs), and actively drive the evolution of Python packaging standards."
                         align: "start"
                         descriptionSizePx: 18
+                - []
               columnWidths:
+                - 33
                 - 33
                 - 33
               columnMargins:
                 - right: "35%"
                 - right: "17.5%"
                   left: "17.5%"
+                - left: "35%"
               gapPx: 0
         paddingTop: "2%"
         paddingRight: "2%"
@@ -430,9 +450,9 @@ blocks:
           - top: "6%"
         maxWidthPx: 1140
         gapPx: 0
-        marginTop: "4%"
   columnBackgrounds:
     - "#F3F5F8"
+  marginTop: "4%"
   paddingRight: "3%"
   paddingLeft: "3%"
   maxWidthPx: 1140

@@ -228,7 +228,7 @@ blocks:
           - null
         maxWidthPx: 1400
         gapPx: 0
-        marginTop: "02%"
+  marginTop: "02%"
   maxWidthPx: 1400
 - type: columns
   columns:

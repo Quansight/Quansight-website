@@ -103,5 +103,5 @@ blocks:
           - null
         maxWidthPx: 1600
         gapPx: 0
-        marginBottom: "5%"
+  marginBottom: "5%"
   maxWidthPx: 1600

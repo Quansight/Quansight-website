@@ -89,13 +89,16 @@ blocks:
                   icon: "<svg data-name=\"Layer 1\" height=\"36\" id=\"a82296f9-49fe-4d64-92ec-c29123e5675c\" viewbox=\"0 0 38 36\" width=\"38\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"11.169 14.671 9.324 16.585 18.497 25.188 38 4 36.022 2.222 18.36 21.416 11.169 14.671\"></polygon><path d=\"M32.8069,15.4148A6.9733,6.9733,0,0,1,33.1875,18,15.1875,15.1875,0,1,1,18,2.8125c3.88,0,6,1.1875,9.1041,3.2751L29,4c-4-3-6.5244-4-11-4A18,18,0,0,0,5.2721,30.7279,18,18,0,0,0,36,18a11.6842,11.6842,0,0,0-1-5Z\"></path></svg>"
                   iconColor: "#963895"
                   descriptionSizePx: 18
+          - []
         columnWidths:
+          - 33
           - 33
           - 33
         columnMargins:
           - right: "35%"
           - right: "17.5%"
             left: "17.5%"
+          - left: "35%"
         gapPx: 0
         marginTop: "5%"
       - type: columns
@@ -320,7 +323,7 @@ blocks:
                   left: "17.5%"
                 - left: "35%"
               gapPx: 0
-              marginTop: "50px"
+        marginTop: "50px"
         paddingBottom: "10%"
   paddingRight: "10%"
   paddingLeft: "10%"
@@ -527,9 +530,9 @@ blocks:
             bottom: "0px"
             left: "0px"
         gapPx: 0
-        marginTop: "4%"
   columnBackgrounds:
     - "#FAFAFF"
+  marginTop: "4%"
   paddingRight: "10%"
   paddingBottom: "5%"
   paddingLeft: "10%"

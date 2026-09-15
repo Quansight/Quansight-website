@@ -492,3 +492,12 @@ table.table-horizontal-scroll tbody th {
 .block-text p + p {
   margin-top: 1.44rem;
 }
+
+/* Elementor's hover transform on a widget (home's "Read the Report"
+   button shrinks to 90%); see extract_widget_box. */
+.hover-scale {
+  transition: transform 300ms ease;
+}
+.hover-scale:hover {
+  transform: scale(var(--hover-scale, 0.9));
+}

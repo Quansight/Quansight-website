@@ -82,9 +82,9 @@ blocks:
           - top: "6%"
         maxWidthPx: 1140
         gapPx: 0
-        marginTop: "4%"
   columnBackgrounds:
     - "#F3F5F8"
+  marginTop: "4%"
   paddingRight: "3%"
   paddingLeft: "3%"
   maxWidthPx: 1140

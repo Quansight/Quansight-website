@@ -620,7 +620,7 @@ blocks:
             bottom: "28px"
         maxWidthPx: 1140
         gapPx: 0
-        marginTop: "4%"
+  marginTop: "4%"
   paddingRight: "4%"
   paddingBottom: "7%"
   paddingLeft: "4%"

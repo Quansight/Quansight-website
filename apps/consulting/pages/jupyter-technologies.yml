@@ -218,10 +218,10 @@ blocks:
           - null
         maxWidthPx: 1140
         gapPx: 20
-        marginTop: "5%"
-        marginBottom: "5%"
   columnBackgrounds:
     - "#F3F5F8"
+  marginTop: "5%"
+  marginBottom: "5%"
   paddingTop: "2%"
   paddingRight: "4%"
   paddingBottom: "2%"
@@ -261,8 +261,8 @@ blocks:
           - null
         maxWidthPx: 1140
         gapPx: 20
-        marginTop: "5%"
-        marginBottom: "5%"
+  marginTop: "5%"
+  marginBottom: "5%"
   paddingRight: "4%"
   paddingLeft: "4%"
   maxWidthPx: 1140
@@ -301,9 +301,9 @@ blocks:
           - top: "6%"
         maxWidthPx: 1140
         gapPx: 0
-        marginTop: "4%"
   columnBackgrounds:
     - "#F3F5F8"
+  marginTop: "4%"
   paddingRight: "3%"
   paddingLeft: "3%"
   maxWidthPx: 1140
