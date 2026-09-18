@@ -31,16 +31,15 @@ export default defineConfig({
   site,
   output: 'static',
   markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
     shikiConfig: {
       langs: [{ ...mlirGrammar, name: 'mlir' }],
     },
   },
   integrations: [
     react(),
-    mdx({
-      remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex],
-    }),
+    mdx(),
     {
       name: 'blog-post-route',
       hooks: {
