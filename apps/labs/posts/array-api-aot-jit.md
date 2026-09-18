@@ -5,10 +5,10 @@ published: June 23, 2026
 description: 'In this blog post, we discuss ways of dealing with compiled code when adopting the Array API.'
 category: [Array API, GPU]
 featuredImage:
-  src: posts/array-api-aot-jit/array-api-aot-jit.png
+  src: /posts/array-api-aot-jit/array-api-aot-jit.png
   alt: 'Data APIs logo next to logos of NumPy, CuPy, PyTorch and JAX'
 hero:
-  imageSrc: posts/array-api-aot-jit/array-api-aot-jit.png
+  imageSrc: /posts/array-api-aot-jit/array-api-aot-jit.png
   imageAlt: 'Data APIs logo next to logos of NumPy, CuPy, PyTorch and JAX'
 ---
 
