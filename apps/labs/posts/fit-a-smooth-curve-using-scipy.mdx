@@ -351,7 +351,7 @@ SciPy still needs work on some features users may want, and I'm planning to work
 
 - P-spline penalties, a popular alternative to smoothing splines that uses a cheaper discrete penalty ([Eilers and Marx have a nice three-pager on why](https://psplines.bitbucket.io/Support/WhyPsplines.pdf))
 - Generalize to higher-order splines and penalties (so far `make_smoothing_spline` only constructs a cubic spline with the second-derivative penalty)
-- A `solver=` option, letting users pick the linear algebra backend for the fitting problem
+- A `solver=` option, letting users pick the minimizer used in the GCV search
 - Estimate the condition number and warn the user when the problem is ill-conditioned, using LAPACK's `pbcon` (I wrapped it in [scipy/scipy#26187](https://github.com/scipy/scipy/pull/26187))
 
 ## About Me
