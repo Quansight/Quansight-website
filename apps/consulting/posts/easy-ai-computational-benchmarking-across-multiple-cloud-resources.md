@@ -4,15 +4,23 @@ published: September 20, 2024
 authors: [quansight]
 description: 'Determining the most efficient cloud hardware for training, evaluating, or deploying a deep learning model can be time-consuming, and if the model runs on poorly chosen resources, the cost can be high. Historically, benchmarking AI model computational performance required sophisticated infrastructure or expensive SAAS products, which are often out of reach for teams without dedicated DevOps expertise or deep pockets.'
 category: [Artificial Intelligence, Scalable Computing]
+tags:
+  [
+    'AI',
+    'Cloud Resources',
+    'Computational Benchmarking Across Multiple Cloud Resources',
+  ]
 featuredImage:
   src: /posts/easy-ai-computational-benchmarking-across-multiple-cloud-resources/thumbnail.png
   alt: 'Title card comprising a black background with the words, Easy AI Computational Benchmarking Across Multiple Cloud Resources in white. Hints of color are sprinkled about accenting the Nebari logo in the far lower right corner hinting at branding. The authors name, Dharhas Pothina, is seen below the title.'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Easy AI Computational Benchmarking Across Multiple Cloud Resources'
+banner: []
 ---
 
+<div class="post-text" style="font-weight:500;color:#000000">
+
 _The GPU you want is not necessarily the one you need (and the tools that can help you work that out)._
+
+</div>
 
 > You may be able to spin up a GPU server easily (some companies do this), but they may make you do all your work on that GPU server. This makes no sense because when you're coding, 90% of the time, you're thinking about the problem, writing the problem, and graphing the solution - why would you want a GPU running while you're doing all that? You only want the GPU running to do the GPU stuff. The rest of the time, you can use a smaller CPU instance.
 >
@@ -36,6 +44,8 @@ We will walk through a typical workflow, from initial experimentation in [Jupyte
 
 To begin, let’s consider training a computer vision model. We can use [PyTorch-Ignite](https://pytorch-ignite.ai/) for this, a higher-level library to PyTorch that’s designed for modularity and extensibility. Learn more in [PyTorch-Ignite: training and evaluating neural networks flexibly and transparently](https://labs.quansight.org/blog/2020/09/pytorch-ignite). To quickly generate training scripts, you can use [PyTorch-Ignite’s Code-Generator](https://code-generator.pytorch-ignite.ai/), a tool to create template scripts for common deep learning workflows.
 
+<p class="post-image"><img src="/posts/easy-ai-computational-benchmarking-across-multiple-cloud-resources/ignite_vs_bare_pytorch.png" alt="The image compares the implementation of a machine learning model training loop using PyTorch Ignite on the left and PyTorch on the right. The PyTorch Ignite code snippet illustrates a simplified and high-level approach. On the right, the PyTorch implementation demonstrates a more detailed, low-level approach, manually defining the training loop, validation function, and checkpoint saving mechanism. The comparison highlights the more concise and structured code provided by PyTorch Ignite for the same tasks." style="width:61%" loading="lazy" /></p>
+
 **_PyTorch Ignite(left) & PyTorch(right)_**
 
 > PyTorch Ignite is nice because if you look at the amount of code you need for a regular neural network model in PyTorch, and then compare it to Pytorch Ignite, you can see it gives you a shorter code, yet it’s still deep enough that you can do reasonable things.
@@ -46,7 +56,7 @@ You can then leverage [Nebari](https://www.nebari.dev/), an open source data sci
 
 Nebari is an opinionated distribution of JupyterHub. It provides a powerful environment management system with [conda-store](https://conda.store/), and integrates essential tools like [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), [VS Code](https://code.visualstudio.com/), [Dask](https://www.dask.org/), and more. Nebari simplifies the deployment setup process by providing pre-written [Terraform](https://www.terraform.io/) scripts for various cloud platforms. With minimal configuration, you can deploy a cloud platform in about 30 minutes.
 
-![](/posts/easy-ai-computational-benchmarking-across-multiple-cloud-resources/Nebari-environment-setup.png)
+<p class="post-image"><img src="/posts/easy-ai-computational-benchmarking-across-multiple-cloud-resources/Nebari-environment-setup.png" alt="" style="width:61%" loading="lazy" /></p>
 
 ## Monitoring and Analyzing GPU Usage
 
@@ -58,7 +68,7 @@ You can compare performance and cost-effectiveness by experimenting with differe
 >
 > — Dharhas Pothina, Quansight CTO
 
-![](/posts/easy-ai-computational-benchmarking-across-multiple-cloud-resources/Nebari-setup-1.png)
+<p class="post-image"><img src="/posts/easy-ai-computational-benchmarking-across-multiple-cloud-resources/Nebari-setup-1.png" alt="" style="width:61%" loading="lazy" /></p>
 
 ## Tools for Enhanced Profiling and Efficiency
 
@@ -66,11 +76,11 @@ In addition to the tools mentioned, [Tensorboard](https://www.tensorflow.org/ten
 
 For instance, you might find surprising results when comparing the performance of different GPUs. In one scenario, the T4 GPU **(BLUE)** showed significantly better throughput (i.e., images/second) than the K80 **(PINK)**, despite initial assumptions that the K80 would perform better. Interestingly, the T4 was also less expensive than the K80 on Google Cloud. This example highlights the importance of empirical testing rather than relying on preconceived notions about hardware performance.
 
-![](/posts/easy-ai-computational-benchmarking-across-multiple-cloud-resources/TensorBoard-interface.png)
+<p class="post-image"><img src="/posts/easy-ai-computational-benchmarking-across-multiple-cloud-resources/TensorBoard-interface.png" alt="" style="width:61%" loading="lazy" /></p>
 
 Monitoring tools like Prometheus and Grafana that built-in to Nebari can also provide some valuable information about the utilization and effectiveness of different hardware resource.
 
-![The image shows two Grafana dashboards monitoring Kubernetes compute resources. Each dashboard displays CPU usage and memory usage for a specific node in Nebari. The graphs illustrate the resource utilization over time, providing insights into the performance and load on the nodes.](/posts/easy-ai-computational-benchmarking-across-multiple-cloud-resources/Grafana-dashboards.png)
+<p class="post-image"><img src="/posts/easy-ai-computational-benchmarking-across-multiple-cloud-resources/Grafana-dashboards.png" alt="The image shows two Grafana dashboards monitoring Kubernetes compute resources. Each dashboard displays CPU usage and memory usage for a specific node in Nebari. The graphs illustrate the resource utilization over time, providing insights into the performance and load on the nodes." style="width:61%" loading="lazy" /></p>
 
 ## Optimizing GPU and Cloud Resource Usage
 
@@ -103,3 +113,5 @@ Ultimately, while cloud resources offer flexibility for experimentation, long-te
 Dharhas Pothina is the CTO of Quansight, a company dedicated to open source Python development. Quansight employs many core developers of critical tools such as PyTorch, NumPy, and SciPy, which form the foundation of AI and machine learning (ML) technologies.
 
 At Quansight, AI/ML Engineering consulting is a key benefit we offer to help companies navigate the evolving landscape of AI technology. By leveraging our expertise, we provide actionable insights into how businesses can maximize their AI capabilities.
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>

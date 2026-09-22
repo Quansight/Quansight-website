@@ -4,36 +4,45 @@ import { getEntry } from 'astro:content';
 const entry = await getEntry('singletons', 'footer');
 const { logo, contact, navigationGroups, socialMedia, legal, copyright } = entry!.data as {
   logo: { src: string; alt: string };
-  contact: { title: string; lines: { text: string; href?: string; kind?: string }[] };
+  contact: {
+    title: string;
+    lines: { text: string; href?: string; kind?: string }[];
+    button?: { text: string; href: string };
+  };
   navigationGroups: { title: string; links: { text: string; href: string }[] }[];
   socialMedia: { title: string; links: { text: string; href: string; icon: string; iconAlt: string }[] };
   legal?: { text: string; href: string }[];
   copyright: string;
 };
+
+// Live's social icons sit in two rows of four (two Elementor widgets).
+const socialRows = [socialMedia.links.slice(0, 4), socialMedia.links.slice(4)];
 ---
 
-<footer class="flex justify-center items-center text-white bg-gradient-to-b from-violet to-magenta">
-  <div class="px-9 pt-24 pb-20 w-full sm:px-16 sm:pb-5 xl:px-52 xl:pt-[6.2rem] xl:pb-[3.7rem] max-w-layout">
-    <section class="grid grid-cols-2 gap-[3.2rem] sm:gap-24 lg:grid-cols-5 lg:gap-[3rem] xl:gap-[6rem]">
+{/* Layout and metrics from the live footer's computed styles (1440px
+    viewport): three stacked Elementor sections on a 1200px content box --
+    a solid-violet logo row, a violet-to-pink gradient body with three
+    columns (33% / 33% / 22%, the last padded 58px on the left), and a
+    solid-pink legal strip. Column headings are Inter 17px/700 with a
+    30%-wide 1px rule under them; links are 14px/500 on a 26px pitch. */}
+<footer class="text-white">
+  <section class="bg-violet pt-[2.9rem]">
+    <div class="mx-auto max-w-[120rem] px-[2rem] xl:px-0">
+      <a href="/" aria-label="Go to home page" class="inline-block w-[25.2rem] h-[9.8rem]">
+        <img src={logo.src} alt={logo.alt} class="w-full h-full object-contain object-left" />
+      </a>
+    </div>
+  </section>
 
-      {/* logo column */}
-      <div class="col-span-2 lg:col-span-1 relative top-0 w-[23.9rem] h-[6.455rem] sm:w-[22.6rem] sm:h-[6.104rem]">
-        <img
-          src={logo.src}
-          alt={logo.alt}
-          style="width:100%;height:100%;object-fit:contain;object-position:left"
-        />
-      </div>
-
-      {/* navigation columns */}
-      {navigationGroups.map((group) => (
-        <div class="mb-8">
-          <h2 class="pb-[1.3rem] mb-4 text-[1.6rem] font-bold leading-[3rem] border-b-[0.5px] border-white">
-            {group.title}
-          </h2>
-          <ul class="flex flex-col">
+  <section class="bg-gradient-to-b from-violet to-pink pt-[2.9rem] pb-[5.8rem]">
+    <div class="mx-auto max-w-[120rem] px-[2rem] xl:px-0 grid grid-cols-1 gap-[4rem] sm:grid-cols-2 lg:grid-cols-[33%_33%_22%] lg:gap-0">
+      {navigationGroups.map((group, i) => (
+        <div class={i === 0 ? 'lg:pl-[0.8rem]' : ''}>
+          <h2 class="mb-[2rem] text-[1.7rem] font-bold leading-[1.7rem]">{group.title}</h2>
+          <div class="mb-[2rem] py-[0.2rem]"><span class="block w-[30%] border-t border-white" /></div>
+          <ul>
             {group.links.map((link) => (
-              <li class="pb-5 text-[1.4rem] font-normal leading-[2.3rem]">
+              <li class="text-[1.4rem] font-medium leading-[2.1rem] pb-[0.25rem] mt-[0.25rem] first:mt-0">
                 <a href={link.href} class="hover:underline">{link.text}</a>
               </li>
             ))}
@@ -41,60 +50,59 @@ const { logo, contact, navigationGroups, socialMedia, legal, copyright } = entry
         </div>
       ))}
 
-      {/* contact column */}
-      <div class="flex flex-col col-span-2 sm:col-span-1">
-        <h2 class="mb-4 text-[1.6rem] font-bold leading-[3rem] pb-[1.3rem] border-b-[0.5px] border-white">
-          {contact.title}
-        </h2>
-        <div class="text-[1.4rem] leading-[3.3rem]">
+      <div class="lg:pl-[5.8rem]">
+        <h2 class="mb-[2rem] text-[1.7rem] font-bold leading-[1.7rem]">{contact.title}</h2>
+        <div class="mb-[2rem] py-[0.2rem]"><span class="block w-[30%] border-t border-white" /></div>
+        <div class="mb-[2rem] text-[1.4rem] font-medium leading-[1.9rem]">
           {contact.lines.map((line) => (
             <p>
-              {line.href ? (
-                <a href={line.href} class="hover:underline">{line.text}</a>
-              ) : (
-                line.text
-              )}
+              {line.href ? <a href={line.href} class="font-normal hover:underline">{line.text}</a> : line.text}
             </p>
           ))}
         </div>
-      </div>
-
-      {/* social media column */}
-      <div class="col-span-2 sm:col-span-1">
-        <h2 class="pb-[1.3rem] mb-8 text-[1.6rem] font-bold leading-[3rem] border-b-[0.5px] border-white">
-          {socialMedia.title}
-        </h2>
-        <ul class="flex flex-wrap gap-12 lg:gap-8 xl:gap-12">
-          {socialMedia.links.map((link) => (
-            <li>
-              <a href={link.href} target="_blank" rel="noreferrer" class="block relative w-10 h-10">
-                <span class="sr-only">{link.text}</span>
-                <img
-                  src={link.icon}
-                  alt={link.iconAlt}
-                  aria-hidden="true"
-                  class="w-full h-full object-contain"
-                />
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-    </section>
-
-    {/* legal row */}
-    {legal && legal.length > 0 && (
-      <section class="flex flex-wrap gap-6 pt-8 mt-[3.7rem] border-t-[0.5px] border-white sm:mt-[8.5rem]">
-        {legal.map((link) => (
-          <a href={link.href} class="text-[1.2rem] leading-[2.4rem] hover:underline">{link.text}</a>
+        {contact.button && (
+          <div class="mb-[2rem]">
+            <a
+              href={contact.button.href}
+              class="inline-block px-[2.5rem] py-[1rem] text-[1.4rem] font-bold leading-[1.4rem] rounded-full border border-white hover:bg-white hover:text-violet transition-colors"
+            >
+              {contact.button.text}
+            </a>
+          </div>
+        )}
+        <div class="h-[1.4rem] mb-[2rem]" aria-hidden="true" />
+        <h2 class="mb-[2rem] text-[1.6rem] font-bold leading-[1.6rem]">{socialMedia.title}</h2>
+        <div class="mb-[2rem] py-[0.2rem]"><span class="block w-[30%] border-t border-white" /></div>
+        {socialRows.map((row) => (
+          <ul class="flex mb-[2rem] last:mb-0">
+            {row.map((link) => (
+              <li>
+                <a href={link.href} target="_blank" rel="noreferrer" class="flex items-center justify-center w-[3.2rem] h-[3.2rem] rounded-full hover:bg-white/20">
+                  <span class="sr-only">{link.text}</span>
+                  <img src={link.icon} alt={link.iconAlt} aria-hidden="true" class="w-[2rem] h-[2rem]" />
+                </a>
+              </li>
+            ))}
+          </ul>
         ))}
-      </section>
-    )}
+      </div>
+    </div>
+  </section>
 
-    {/* copyright */}
-    <section class="pt-8">
-      <p class="text-[1.2rem] leading-[2.4rem]">{copyright}</p>
-    </section>
-  </div>
+  <section class="bg-pink pb-[2.9rem]">
+    <div class="mx-auto max-w-[120rem] px-[2rem] xl:px-[1rem] flex flex-wrap items-start gap-y-[1rem] text-[1.2rem] leading-[1.8rem] pt-[1rem]">
+      {legal && legal[0] && (
+        <a href={legal[0].href} class="w-[14.2rem] hover:underline">{legal[0].text}</a>
+      )}
+      {legal && legal[1] && (
+        <a href={legal[1].href} class="w-[14.2rem] text-center hover:underline">{legal[1].text}</a>
+      )}
+      <div class="grow px-[1rem]">
+        {legal && legal.slice(2).map((link) => (
+          <a href={link.href} class="hover:underline">{link.text}</a>
+        ))}
+      </div>
+      <p class="w-full sm:w-[34.4rem] px-[1rem]">{copyright}</p>
+    </div>
+  </section>
 </footer>

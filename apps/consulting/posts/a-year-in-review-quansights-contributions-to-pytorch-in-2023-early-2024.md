@@ -4,12 +4,19 @@ published: September 11, 2024
 authors: [andrew-james]
 description: '2023 will be remembered as the year when AI and LLMs took the world by storm. PyTorch took center stage during this revolution due to the rise of torch.compile. The combination of having a fully flexible eager execution model, paired with a compiler with a rather flexible tracer that is able to understand complex Python programs semantically, has certainly been one of the core components fueling these advances.'
 category: [Artificial Intelligence]
+tags:
+  [
+    'AI',
+    'Building AI Document Interrogation Apps with Open Source Tools',
+    'Open Source',
+    'Ragna',
+  ]
 featuredImage:
   src: /posts/a-year-in-review-quansights-contributions-to-pytorch-in-2023-early-2024/1_VSQ0XEywxSgZBwW05GsZtw.png
   alt: 'PyTorch logo'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'A Year in Review: Quansight’s Contributions to PyTorch in 2023 (& Early 2024)'
+banner:
+  - src: /posts/a-year-in-review-quansights-contributions-to-pytorch-in-2023-early-2024/Pytorch-logo.svg
+    alt: 'Image of the PyTorch logo'
 ---
 
 2023 will be remembered as the year when AI and LLMs took the world by storm. PyTorch took center stage during this revolution due to the rise of `torch.compile`. The combination of having a fully flexible eager execution model, paired with a compiler with a rather flexible tracer that is able to understand complex Python programs semantically, has certainly been one of the core components fueling these advances.
@@ -136,8 +143,14 @@ The other part of the story comes from the great team of PyTorch and TorchVision
 
 ## Footnotes
 
+<div class="post-text" style="color:#0c0c0c">
+
 1. In this post, we are going to talk a fair bit about torch.compile. If you have never heard about it, consider reading [the following tutorial](https://pytorch.org/docs/main/torch.compiler_get_started.html) first. [↩︎](#1)
 2. Much of this work is bleeding edge and rapidly evolving, and unfortunately, the internals of AOTAutograd have not yet been thoroughly documented… yet! [↩︎](#2)
 3. The introduction of the [blog post](/blog/pytorch-2-1-quansights-improvements-to-bsr-sparse-matrix-multiplication) goes into some detail on the different types of sparsity implemented in PyTorch. [↩︎](#3)
 4. PyTorch Maintainer Ed Yang discusses this concept at length in this [excellent episode](https://pytorch-dev-podcast.simplecast.com/episodes/pyobject-preservation-q6sE1n7z) of the PyTorch Dev Podcast. [↩︎](#4)
 5. Check out Quansight contributions to PyTorch in [2022](/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2022) and [2021](/blog/a-year-in-review-quansights-contributions-to-pytorch-in-2021) if you missed them. [↩︎](#5)
+
+</div>
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>

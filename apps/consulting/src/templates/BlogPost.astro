@@ -32,22 +32,73 @@ const authors = post.data.authors.map((s) => {
     imageAlt: p?.imageAlt ?? s,
   };
 });
+
+// Live ends every post with a share row and, when there are any, up to
+// four "More articles from our Library": posts sharing a WP tag with this
+// one (Elementor's related-posts query; live shuffles them per load).
+// Ranked by the rarity of the shared tags (1/n² per tag shared, n = posts
+// carrying it), then newest -- broad tags like "AI" and "Innovation" are
+// on a dozen posts each, and live's picks for a Nebari post are the other
+// Nebari posts, not every AI-tagged one. Live's exact query isn't
+// recoverable from the dump; this reproduces its visible picks.
+const postUrl = new URL(`/blog/${post.id}`, Astro.site).href;
+const shareLinks = [
+  { name: 'facebook', label: 'Share on Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}` },
+  { name: 'twitter', label: 'Share on X', href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(post.data.title)}` },
+  { name: 'linkedin', label: 'Share on LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}` },
+];
+const allPosts = (await getCollection('posts'))
+  .filter((p) => p.id !== post.id && p.data.published)
+  .sort((a, b) => new Date(b.data.published).getTime() - new Date(a.data.published).getTime());
+const tagCount = new Map<string, number>();
+for (const p of allPosts) for (const t of p.data.tags) tagCount.set(t, (tagCount.get(t) ?? 0) + 1);
+const affinity = (p: (typeof allPosts)[number]) =>
+  p.data.tags
+    .filter((t) => post.data.tags.includes(t))
+    .reduce((sum, t) => sum + 1 / (tagCount.get(t) ?? 1) ** 2, 0);
+const related = allPosts
+  .filter((p) => affinity(p) > 0)
+  .sort((a, b) => affinity(b) - affinity(a))
+  .slice(0, 4)
+  .map((p) => ({
+    id: p.id,
+    title: p.data.title,
+    published: p.data.published,
+    author: p.data.authors
+      .map((s) => { const person = peopleBySlug[s]; return person ? `${person.firstName} ${person.lastName}` : s; })
+      .join(', '),
+    featuredImage: p.data.featuredImage,
+  }));
 ---
 
 <BaseLayout
   title={`${post.data.title} | Quansight`}
   description={post.data.description}
 >
-  {post.data.hero?.imageSrc && (
+  {/* Live's band above the title (300px): the post's logo row on white,
+      or a violet-to-magenta gradient when the post has no logos. Posts
+      without `banner` (the hand-authored ones) keep their hero image. */}
+  {post.data.banner ? (
+    <div class={`post-banner ${post.data.banner.length === 0 ? 'post-banner--gradient' : ''}`}>
+      {post.data.banner.length > 0 && (
+        <div class="post-banner__row">
+          {post.data.banner.map((logo) => (
+            <img src={logo.src} alt={logo.alt} />
+          ))}
+        </div>
+      )}
+    </div>
+  ) : post.data.hero?.imageSrc ? (
     <Hero
       image={post.data.hero.imageSrc as string}
       imageAlt={(post.data.hero.imageAlt as string) ?? ''}
       variant="medium"
       objectFit="cover"
     />
-  )}
+  ) : null}
 
-  <article class="pt-[7.5rem] pb-[11.4rem] mx-auto w-[95%] max-w-[100.17rem] md:w-[85%] xl:w-[70%]">
+  {/* Live's post content column is 1097px wide at 1440px (76%). */}
+  <article class="pt-[7.5rem] pb-[11.4rem] mx-auto w-[95%] max-w-[109.7rem] md:w-[85%] xl:w-[76.2%]">
     <a
       href="/blog"
       class="inline-flex items-center gap-2 text-[1.4rem] font-bold text-violet underline mb-[1.8rem]"
@@ -55,33 +106,34 @@ const authors = post.data.authors.map((s) => {
       ← Back to blog
     </a>
 
-    <h1 class="mb-[5rem] text-[4.8rem] font-extrabold leading-[5.3rem] font-heading text-violet">
+    {/* Live's single-post header: the date (18px), the title (Mukta
+        40px/900 violet), then the author box (60px avatar, 16px bold
+        name). The shared hero above stands in for live's per-post
+        banner band. */}
+    <p class="mb-[2rem] text-[1.8rem] leading-[2.4rem] text-[#252525]">
+      {post.data.published}
+    </p>
+    <h1 class="mb-[4rem] text-[4rem] leading-[4.8rem] font-black font-heading text-violet">
       {post.data.title}
     </h1>
-    <p class="pb-[3rem] text-[1.4rem] leading-[2.7rem] text-black">
-      Published {post.data.published}
-    </p>
 
     <div class="mb-[5rem] grid grid-cols-1 gap-4 gap-y-6 sm:grid-cols-2 md:grid-cols-3">
       {authors.map((author) => (
         <div>
           <div class="flex items-center">
-            <div class="overflow-hidden mr-[0.8rem] w-[54px] h-[54px] rounded-[50%]">
+            <div class="overflow-hidden mr-[2rem] w-[60px] h-[60px] rounded-[50%]">
               {author.image && (
                 <img
                   src={author.image}
                   alt={author.nickName}
-                  width="54"
-                  height="54"
-                  style="object-fit:cover;aspect-ratio:54/54;"
+                  width="60"
+                  height="60"
+                  style="object-fit:cover;aspect-ratio:1;"
                 />
               )}
             </div>
             <div>
-              <p class="text-[1.4rem] font-normal leading-[2.7rem] text-black text-sans">
-                {author.nickName}
-              </p>
-              <p class="text-[1.9rem] font-bold leading-[2.7rem] text-black text-sans">
+              <p class="text-[1.6rem] font-bold leading-[1.9rem] text-[#0c0c0c]">
                 {author.fullName}
               </p>
             </div>
@@ -90,8 +142,48 @@ const authors = post.data.authors.map((s) => {
       ))}
     </div>
 
-    <div class="w-full max-w-none prose prose-code:text-[.95em] prose-code:font-normal prose-a:underline-offset-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-transparent prose-code:border-none hover:prose-a:text-violet focus:prose-a:text-violet prose-code:text-violet-code prose-code:font-code">
+    <div
+      style={post.data.textStyle ? [
+        post.data.textStyle.weight ? `--post-text-weight:${post.data.textStyle.weight}` : '',
+        post.data.textStyle.color ? `--post-text-color:${post.data.textStyle.color}` : '',
+      ].filter(Boolean).join(';') : undefined}
+      class="post-body w-full max-w-none prose prose-code:text-[.95em] prose-code:font-normal prose-a:underline-offset-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-transparent prose-code:border-none hover:prose-a:text-violet focus:prose-a:text-violet prose-code:text-violet-code prose-code:font-code">
       <Content components={{ CH, Picture }} />
     </div>
   </article>
+
+  <div class="mx-auto w-[95%] max-w-[111.7rem]">
+    <section class="post-share">
+      <span>Share the Post:</span>
+      <div class="post-share__icons">
+        {shareLinks.map((link) => (
+          <a href={link.href} target="_blank" rel="noreferrer noopener" aria-label={link.label}>
+            <img src={`/images/icons/share-${link.name}.svg`} alt="" aria-hidden="true" width="22" height="22" />
+          </a>
+        ))}
+      </div>
+    </section>
+
+    {related.length > 0 && (
+      <section class="post-related">
+        <h2>More articles from our Library</h2>
+        <div class="post-related__grid" role="list">
+          {related.map((p) => (
+            <article class="post-related__card" role="listitem">
+              {p.featuredImage && (
+                <a href={`/blog/${p.id}`} tabindex="-1" class="post-related__thumb">
+                  <img src={p.featuredImage.src} alt={p.featuredImage.alt} loading="lazy" />
+                </a>
+              )}
+              <h3 class="post-related__title"><a href={`/blog/${p.id}`}>{p.title}</a></h3>
+              <div class="post-related__meta">
+                <span>{p.author}</span>
+                <span>{p.published}</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
 </BaseLayout>

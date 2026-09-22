@@ -1,11 +1,13 @@
 slug: jupyter-technologies
 title: "Jupyter Technologies"
-description: "Jupyter Technologies Build your development environment with the people who help maintain and build Jupyter, JupyterLab, and JupyterHub. Jupyter: Enabling Interactive and Collaborative Computing Project Jupyter is an open source software and standards project that develops popular tools such as Jupyter Notebook, JupyterLab, and JupyterHub for interactive and collaborative computing across dozens of programming languages. […]"
+seoTitle: "Jupyter Technologies | JupyterHub & JupyterLab Consulting"
+description: "Quansight offers Jupyter consulting, from secure JupyterHub deployment to custom JupyterLab extensions, integration, and accessibility support."
 blocks:
 - type: hero
   variant: "small"
   gradientFrom: "#452391"
   gradientTo: "#963895"
+  minHeight: "60vh"
   image: "/page-assets/jupyter-technologies/shutterstock_1675260034B-1200x900-1.jpg"
   imageAlt: ""
   overlayOpacity: 0.49
@@ -14,26 +16,40 @@ blocks:
   titleFontWeight: 700
   subTitle: "Build your development environment with the people who help maintain and build Jupyter, JupyterLab, and JupyterHub."
   subTitleSizePx: 22
-- type: image
-  src: "/page-assets/jupyter-technologies/Jupyter_logo-1.svg"
-  alt: ""
-  width: 44
-  height: 51
-  widthPercent: 11
-- type: heading
-  text: "Jupyter: Enabling Interactive and Collaborative Computing"
-  level: 2
-  sizePx: 40
-  fontWeight: 700
-  color: "#452392"
-  align: "center"
-  paddingRight: "5%"
-  paddingBottom: "4%"
-  paddingLeft: "5%"
-- type: text
-  html: "<p>Project Jupyter is an open source software and standards project that develops popular tools such as Jupyter Notebook, JupyterLab, and JupyterHub for interactive and collaborative computing across dozens of programming languages. Jupyter has become a cornerstone of modern data science, scientific computing, and technical education by providing a web-based interactive development environment for data cleaning, analysis, visualization, and reproducible computational narratives. </p><p>Quansight and <a href=\"https://labs.quansight.org/\">Quansight Labs</a>, the public-benefit division of Quansight, and home to several Jupyter <a href=\"https://labs.quansight.org/team\">contributors</a>, are driven by a passion for open source technologies, including a deep focus on the Jupyter ecosystem. Both teams include <a href=\"https://jupyter.org/about\">Jupyter</a> maintainers, distinguished contributors, and members of the software steering council.</p>"
-  sizePx: 18
-  color: "#000000"
+- type: columns
+  columns:
+    - - type: image
+        src: "/page-assets/jupyter-technologies/Jupyter_logo-1.svg"
+        alt: ""
+        width: 44
+        height: 51
+        widthPercent: 11
+  paddingTop: "4%"
+  paddingRight: "4%"
+  paddingLeft: "4%"
+  rowGapPx: 143
+  maxWidthPx: 1140
+- type: columns
+  columns:
+    - - type: heading
+        text: "Jupyter: Enabling Interactive and Collaborative Computing"
+        level: 2
+        sizePx: 40
+        fontWeight: 700
+        color: "#452392"
+        align: "center"
+        lineHeight: "51px"
+        paddingRight: "5%"
+        paddingBottom: "4%"
+        paddingLeft: "5%"
+      - type: text
+        html: "<p>Project Jupyter is an open source software and standards project that develops popular tools such as Jupyter Notebook, JupyterLab, and JupyterHub for interactive and collaborative computing across dozens of programming languages. Jupyter has become a cornerstone of modern data science, scientific computing, and technical education by providing a web-based interactive development environment for data cleaning, analysis, visualization, and reproducible computational narratives. </p><p>Quansight and <a href=\"https://labs.quansight.org/\">Quansight Labs</a>, the public-benefit division of Quansight, and home to several Jupyter <a href=\"https://labs.quansight.org/team\">contributors</a>, are driven by a passion for open source technologies, including a deep focus on the Jupyter ecosystem. Both teams include <a href=\"https://jupyter.org/about\">Jupyter</a> maintainers, distinguished contributors, and members of the software steering council.</p>"
+        sizePx: 18
+        color: "#000000"
+  paddingRight: "4%"
+  paddingLeft: "4%"
+  rowGapPx: 143
+  maxWidthPx: 1140
 - type: columns
   columns:
     - - type: heading
@@ -43,6 +59,7 @@ blocks:
         fontWeight: 700
         color: "#452392"
         align: "center"
+        lineHeight: "51px"
         paddingRight: "5%"
         paddingBottom: "4%"
         paddingLeft: "5%"
@@ -54,86 +71,128 @@ blocks:
             divider: true
             descriptionSizePx: 18
             descriptionColor: "#252525"
+            descriptionLineHeight: "1.5em"
           - title: "JupyterLab Extension Development"
             description: "- Build custom JupyterLab extensions\n- Offer expertise for navigating the evolving JupyterLab extension system"
             align: "start"
             divider: true
             descriptionSizePx: 18
             descriptionColor: "#252525"
+            descriptionLineHeight: "1.5em"
           - title: "Jupyter Integration and Embedding"
             description: "- Integrate Jupyter notebooks or components into applications and platforms\n- Customize Jupyter for specific uses within larger systems"
             align: "start"
             divider: true
             descriptionSizePx: 18
             descriptionColor: "#252525"
+            descriptionLineHeight: "1.5em"
           - title: "Tool Integration and Compatibility"
             description: "- Ensure third-party tools, libraries, and frameworks work well in JupyterLab\n- Resolve compatibility issues for smooth integration"
             align: "start"
             divider: true
             descriptionSizePx: 18
             descriptionColor: "#252525"
+            descriptionLineHeight: "1.5em"
   marginTop: "4%"
-- type: heading
-  text: "New Jupyter Extensions"
-  level: 2
-  sizePx: 40
-  fontWeight: 700
-  color: "#452392"
-  align: "center"
-  paddingRight: "5%"
-  paddingBottom: "4%"
-  paddingLeft: "5%"
-- type: icon-box-grid
-  items:
-    - description: "We recently developed three new extensions for the Jupyter Ecosystem:"
-      align: "start"
-      descriptionSizePx: 18
+  maxWidthPx: 1140
 - type: columns
   columns:
     - - type: heading
-        text: "01."
+        text: "New Jupyter Extensions"
         level: 2
-        sizePx: 42
-        fontWeight: 600
+        sizePx: 40
+        fontWeight: 700
         color: "#452392"
-      - type: text
-        html: "<p><a href=\"https://jhub-apps.nebari.dev/\">JupyterHub Apps Launcher</a>, a user-friendly launcher for JupyterHub with dashboard deployment and sharing features\t\t\t\t\t\t\t\t</p>"
-        sizePx: 18
-        color: "#000000"
-    - - type: heading
-        text: "02."
-        level: 2
-        sizePx: 42
-        fontWeight: 600
-        color: "#452392"
-      - type: text
-        html: "<p><a href=\"https://github.com/nebari-dev/jupyterlab-launchpad/\" rel=\"noopener\" target=\"_blank\">JupyterLab Launchpad</a>, a new JupyterLab launcher with better support for environment (kernel) selection\t\t\t\t\t\t\t\t</p>"
-        sizePx: 18
-        color: "#000000"
-    - - type: heading
-        text: "03."
-        level: 2
-        sizePx: 42
-        fontWeight: 600
-        color: "#452392"
-      - type: text
-        html: "<p><a href=\"https://github.com/nebari-dev/jupyterlab-gallery/\" rel=\"noopener\" target=\"_blank\">JupyterLab Gallery</a>, for presenting and accessing examples from remote repositories\t\t\t\t\t\t\t\t</p>"
-        sizePx: 18
-        color: "#000000"
-  columnBackgrounds:
-    - "#FFFFFF"
-    - "#FFFFFF"
-    - "#FFFFFF"
-  columnWidths:
-    - 33.0
-    - 33.0
-    - 33.0
-  gapPx: 48
-- type: icon-box-grid
-  items:
-    - description: "Install them on your platform, or work with us to create new extensions for your specific needs."
-      align: "start"
-      descriptionSizePx: 18
+        align: "center"
+        lineHeight: "51px"
+        paddingRight: "5%"
+        paddingBottom: "4%"
+        paddingLeft: "5%"
+      - type: icon-box-grid
+        items:
+          - description: "We recently developed three new extensions for the Jupyter Ecosystem:"
+            align: "start"
+            descriptionSizePx: 18
+  paddingTop: "4%"
+  paddingRight: "4%"
+  paddingLeft: "4%"
+  rowGapPx: 143
+  maxWidthPx: 1140
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "01."
+              level: 2
+              sizePx: 42
+              fontWeight: 600
+              color: "#452392"
+            - type: text
+              html: "<p><a href=\"https://jhub-apps.nebari.dev/\">JupyterHub Apps Launcher</a>, a user-friendly launcher for JupyterHub with dashboard deployment and sharing features\t\t\t\t\t\t\t\t</p>"
+              sizePx: 18
+              color: "#000000"
+          - - type: heading
+              text: "02."
+              level: 2
+              sizePx: 42
+              fontWeight: 600
+              color: "#452392"
+            - type: text
+              html: "<p><a href=\"https://github.com/nebari-dev/jupyterlab-launchpad/\" rel=\"noopener\" target=\"_blank\">JupyterLab Launchpad</a>, a new JupyterLab launcher with better support for environment (kernel) selection\t\t\t\t\t\t\t\t</p>"
+              sizePx: 18
+              color: "#000000"
+          - - type: heading
+              text: "03."
+              level: 2
+              sizePx: 42
+              fontWeight: 600
+              color: "#452392"
+            - type: text
+              html: "<p><a href=\"https://github.com/nebari-dev/jupyterlab-gallery/\" rel=\"noopener\" target=\"_blank\">JupyterLab Gallery</a>, for presenting and accessing examples from remote repositories\t\t\t\t\t\t\t\t</p>"
+              sizePx: 18
+              color: "#000000"
+        columnBackgrounds:
+          - "#FFFFFF"
+          - "#FFFFFF"
+          - "#FFFFFF"
+        columnWidths:
+          - 33.0
+          - 33.0
+          - 33.0
+        columnPaddings:
+          - top: "0%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+          - top: "0%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+          - top: "0%"
+            right: "0%"
+            bottom: "0%"
+            left: "0%"
+        columnBoxes:
+          - borderRadius: "12px 12px 12px 12px"
+          - borderRadius: "12px 12px 12px 12px"
+          - borderRadius: "12px 12px 12px 12px"
+        gapPx: 48
+  paddingRight: "4%"
+  paddingLeft: "4%"
+  rowGapPx: 0
+  maxWidthPx: 1140
+- type: columns
+  columns:
+    - - type: icon-box-grid
+        items:
+          - description: "Install them on your platform, or work with us to create new extensions for your specific needs."
+            align: "start"
+            descriptionSizePx: 18
+  paddingRight: "4%"
+  paddingLeft: "4%"
+  rowGapPx: 143
+  maxWidthPx: 1140
 - type: columns
   columns:
     - - type: columns
@@ -144,6 +203,7 @@ blocks:
               sizePx: 40
               fontWeight: 700
               color: "#452392"
+              lineHeight: "51px"
               paddingRight: "5%"
               paddingBottom: "4%"
             - type: text
@@ -159,14 +219,13 @@ blocks:
               sizePx: 18
               color: "#000000"
         columnWidths:
-          - 100.0
-          - 100.0
+          - 50
+          - 50
         columnPaddings:
           - right: "10%"
-
+          - null
+        maxWidthPx: 1140
         gapPx: 20
-        marginTop: "5%"
-        marginBottom: "5%"
   columnBackgrounds:
     - "#F3F5F8"
   marginTop: "5%"
@@ -175,6 +234,7 @@ blocks:
   paddingRight: "4%"
   paddingBottom: "2%"
   paddingLeft: "4%"
+  maxWidthPx: 1140
   fullBleed: true
 - type: columns
   columns:
@@ -186,6 +246,7 @@ blocks:
               sizePx: 40
               fontWeight: 700
               color: "#452392"
+              lineHeight: "51px"
               paddingRight: "5%"
               paddingBottom: "4%"
             - type: text
@@ -197,22 +258,22 @@ blocks:
               sizePx: 18
               color: "#000000"
             - type: text
-              html: "<p>For some highlights, check out the <a href=\"https://labs.quansight.org/blog/annual-report-2025\">Quansight Labs 2025 Annual Report</a>.</p>"
+              html: "<p>For some highlights, check out the <a href=\"https://labs.quansight.org/annual-reports/quansight-labs-annual-report-2024.pdf\">Quansight Labs 2024 Annual Report</a>.</p>"
               sizePx: 18
               color: "#000000"
         columnWidths:
-          - 100.0
-          - 100.0
+          - 50
+          - 50
         columnPaddings:
           - right: "10%"
-
+          - null
+        maxWidthPx: 1140
         gapPx: 20
-        marginTop: "5%"
-        marginBottom: "5%"
   marginTop: "5%"
   marginBottom: "5%"
   paddingRight: "4%"
   paddingLeft: "4%"
+  maxWidthPx: 1140
 - type: columns
   columns:
     - - type: columns
@@ -223,10 +284,12 @@ blocks:
               sizePx: 40
               fontWeight: 700
               color: "#452392"
+              lineHeight: "51px"
             - type: text
               html: "<p>\n\t\t\t\t\t\t\t\t\tReady to take the next step in your open source journey? We’d love to hear from you.\t\t\t\t\t\t\t\t</p>"
               sizePx: 16
               color: "#252525"
+              lineHeight: "1.5em"
             - type: button
               url: "/about-us#bookacallform"
               text: "Contact Us"
@@ -236,18 +299,26 @@ blocks:
               backgroundColor: "#452392"
               textColor: "#FFFFFF"
               borderColor: "#FFFFFF"
+              borderWidthPx: 2.0
+              fontSizePx: 18
+              fontWeight: 600
+              textTransform: "capitalize"
+              padding: "25px 50px 25px 50px"
+              lineHeight: "14px"
           - - type: image
               src: "/page-assets/jupyter-technologies/Quansight-contact-02-02-02-1-1.svg"
               alt: ""
               width: 1122
               height: 889
-              widthPercent: 100
-        columnWidths:
-          - 100.0
-          - 53.978
+        columnPaddings:
+          - top: "6%"
+          - top: "6%"
+        maxWidthPx: 1140
         gapPx: 0
-        marginTop: "4%"
   columnBackgrounds:
     - "#F3F5F8"
   marginTop: "4%"
+  paddingRight: "3%"
+  paddingLeft: "3%"
+  maxWidthPx: 1140
   fullBleed: true

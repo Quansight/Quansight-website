@@ -4,19 +4,25 @@ published: August 2, 2024
 authors: [jaime-rodriguez-guerra]
 description: "The recent revision of the array API standard marks another major milestone in the collective effort to achieve array interoperability across the Python data ecosystem. \nA recent post by Quansight Lab’s Athan Reines on the Data APIs blog shares updates on the consortium’s progress and plans for the future."
 category: ['Infrastructure & HPC', Packaging]
+tags:
+  ['Building a GPU CI Service for conda-forge', 'Conda-forge', 'GPU CI Service']
 featuredImage:
   src: /posts/building-a-gpu-ci-service-for-conda-forge/2024.8-building-a-gpu-ci-service-for-conda-forge-metrostar-quansight-thumb.png
   alt: 'Logos of MetroStar Systems, conda-forge, and Quansight, representing their collaboration.'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Building a GPU CI Service for conda-forge'
+banner:
+  - src: /posts/building-a-gpu-ci-service-for-conda-forge/conda-forge.svg
+    alt: 'Image of the conda-forge logo'
+  - src: /posts/building-a-gpu-ci-service-for-conda-forge/Quansight-logo-cropped.svg
+    alt: 'Image of the Quansight logo'
+  - src: /posts/building-a-gpu-ci-service-for-conda-forge/MetroStar-logo.svg
+    alt: ''
 ---
 
-![Image of the Quansight logo](/posts/building-a-gpu-ci-service-for-conda-forge/Quansight-logo-cropped.svg)
-
-![](/posts/building-a-gpu-ci-service-for-conda-forge/MetroStar-logo.svg)
+<div class="post-text" style="font-weight:500;color:#000000">
 
 _How Quansight, MetroStar, an anonymous donor, and the conda-forge community came together to close one of conda-forge’s [oldest open issues](https://github.com/conda-forge/conda-forge.github.io/issues/63), dating back to 2016._
+
+</div>
 
 Python has become the cornerstone of modern AI and data science. In theory, there are thousands of scientific and numerical libraries written in Python that can be mixed and matched to solve complex problems. In practice, installing and using a set of Python libraries together can become quite complex.
 
@@ -30,7 +36,7 @@ A key enabler of this entire system is free continuous integration (CI) compute 
 
 ## How Conda-Forge Works
 
-![Flowchart depicting the process in conda-forge from a new commit to package installation. The steps include: 1) New commit added to conda-forge repository on GitHub, 2) CI pipeline runs conda-build, 3) Package gets uploaded to Anaconda.org, and 4) User runs conda install.](/posts/building-a-gpu-ci-service-for-conda-forge/conda-forge-simple-500.png)
+<p class="post-image"><img src="/posts/building-a-gpu-ci-service-for-conda-forge/conda-forge-simple-500.png" alt="Flowchart depicting the process in conda-forge from a new commit to package installation. The steps include: 1) New commit added to conda-forge repository on GitHub, 2) CI pipeline runs conda-build, 3) Package gets uploaded to Anaconda.org, and 4) User runs conda install." style="width:70%" loading="lazy" /></p>
 
 While conda-forge benefits from this largely automated build farm where maintainers can package their projects via CI pipelines, some projects still need to resort to the manual labor of volunteers. These projects can be divided into two groups:
 
@@ -92,7 +98,7 @@ Eventually, we decided to change data centers and partnered with MetroStar. We h
 >
 > — Filipe Pires Alvarenga Fernandes (@ocefpaf), conda-forge core team member
 
-![View of Quansight's server setup at MetroStar's data center, showing multiple server racks and equipment](/posts/building-a-gpu-ci-service-for-conda-forge/datacenter.png)
+<p class="post-image"><img src="/posts/building-a-gpu-ci-service-for-conda-forge/datacenter.png" alt="View of Quansight&#x27;s server setup at MetroStar&#x27;s data center, showing multiple server racks and equipment" style="width:84%" loading="lazy" /></p>
 
 ## Step 3: Configure the server
 
@@ -108,125 +114,76 @@ Once you have your base OpenStack instance, you need to create some “flavors�
 
 **CPU runners:**
 
-**Name**
+<div class="post-grid" style="--columns:4">
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 2px;border-color:#452392"><p><strong>Name</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong>vCPUs</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong>RAM</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 2px 1px 1px;border-color:#452392"><p><strong>Disk</strong></p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>ci_medium</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>4</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>8GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>ci_large</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>4</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>12GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>ci_xlarge</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>4</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>32GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>ci_2xlarge</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>8</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>32GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 2px;border-color:#452392"><p>ci_4xlarge</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 1px;border-color:#452392">8</div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 1px;border-color:#452392"><p>64GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 2px 1px;border-color:#452392"><p>60GB</p></div>
+</div>
 
-**vCPUs**
-
-**RAM**
-
-**Disk**
-
-ci_medium
-
-4
-
-8GB
-
-60GB
-
-ci_large
-
-4
-
-12GB
-
-60GB
-
-ci_xlarge
-
-4
-
-32GB
-
-60GB
-
-ci_2xlarge
-
-8
-
-32GB
-
-60GB
-
-ci_4xlarge
-
-8
-
-64GB
-
-60GB
+<div class="post-text" style="font-weight:500">
 
 **GPU runners:**
 
-**Name**
+</div>
 
-**vCPUs**
-
-**RAM**
-
-**Disk**
-
-**GPUs**
-
-gpu_tiny
-
-4
-
-2GB
-
-20GB
-
-1x NVIDIA® Tesla V100
-
-gpu_medium
-
-4
-
-8GB
-
-50GB
-
-1x NVIDIA® Tesla V100
-
-gpu_large
-
-4
-
-12GB
-
-60GB
-
-1x NVIDIA® Tesla V100
-
-gpu_xlarge
-
-8
-
-16GB
-
-60GB
-
-1x NVIDIA® Tesla V100
-
-gpu_2xlarge
-
-8
-
-32GB
-
-60GB
-
-1x NVIDIA® Tesla V100
-
-gpu_4xlarge
-
-8
-
-64GB
-
-60GB
-
-1x NVIDIA® Tesla V100
+<div class="post-grid" style="--columns:5">
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 2px;border-color:#452392"><p><strong>Name</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong>vCPUs</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong>RAM</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 1px 1px 1px;border-color:#452392"><p><strong>Disk</strong></p></div>
+  <div class="post-text post-grid__cell" style="font-weight:500;color:#0c0c0c;text-align:center;border-style:solid;border-width:2px 2px 1px 1px;border-color:#452392"><p><strong>GPUs</strong></p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>gpu_tiny</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392">4</div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>2GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>20GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>1x NVIDIA® Tesla V100</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>gpu_medium</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>4</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>8GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>50GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>1x NVIDIA® Tesla V100</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>gpu_large</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>4</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>12GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>1x NVIDIA® Tesla V100</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>gpu_xlarge</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392">8</div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>16GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>1x NVIDIA® Tesla V100</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 2px;border-color:#452392"><p>gpu_2xlarge</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>8</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>32GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 1px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 1px 1px;border-color:#452392"><p>1x NVIDIA® Tesla V100</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 2px;border-color:#452392"><p>gpu_4xlarge</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 1px;border-color:#452392"><p>8</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 1px;border-color:#452392"><p>64GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 1px 2px 1px;border-color:#452392"><p>60GB</p></div>
+  <div class="post-text post-grid__cell" style="color:#0c0c0c;text-align:center;border-style:solid;border-width:1px 2px 2px 1px;border-color:#452392"><p>1x NVIDIA® Tesla V100</p></div>
+</div>
 
 That should be enough to provide 12 concurrent runners at best or four at worst. These kinds of runners wouldn’t only allow folks to test their packages with GPUs but also enable larger projects like PyTorch or Tensorflow, whose build processes usually take longer than the 6h offered by Azure, to be built on public CI.
 
@@ -241,7 +198,7 @@ The CPU images can be built on regular CI and uploaded to OpenStack. However, si
 
 Before we configured the OpenStack VMs as Github Actions runners, we needed to ensure that the OpenStack API is reachable from the public internet. MetroStar premises are behind a VPN, so we had to devise a reverse proxy to handle the requests. The reverse proxy uses [Traefik](https://traefik.io/traefik/) and is hosted on an e2-small instance on Google Cloud Platform. This is depicted in the figure below.
 
-![Diagram showing the setup to expose the runners to the public Internet. The flow includes: Public Internet connecting to ci.quansight.dev, which uses Traefik on a Google Cloud e2-small instance. This instance has a whitelisted IP on the VPN, which connects to the GPU server on MetroStar's VPN.](/posts/building-a-gpu-ci-service-for-conda-forge/proxy-of-proxy.svg)
+<p class="post-image"><img src="/posts/building-a-gpu-ci-service-for-conda-forge/proxy-of-proxy.svg" alt="Diagram showing the setup to expose the runners to the public Internet. The flow includes: Public Internet connecting to ci.quansight.dev, which uses Traefik on a Google Cloud e2-small instance. This instance has a whitelisted IP on the VPN, which connects to the GPU server on MetroStar&#x27;s VPN." style="width:91%" loading="lazy" /></p>
 
 The VPN network also impacted how the VM image is preconfigured. We needed to adjust the MTU network configuration so that both the OS and Docker use the same value as imposed by the VPN. Otherwise, the Docker container would not have access to the internet.
 
@@ -257,7 +214,7 @@ Wonderful, isn’t it? We just need to configure Cirun to connect to our OpenSta
 
 We thought adding OpenStack integration was all we needed, but soon enough, we realized how wrong we were. OpenStack is a full-fledged open source cloud framework, and with that comes the complexity of a cloud provider, which we should deploy and maintain. This is very different from conventional clouds like AWS and GCP, where everything just works magically; instead, we are responsible for everything: virtual machines, networking, storage, authentication…There are a million things that can go wrong, like running out of disk space, all the GPUs being taken, API not accessible, etc. It took us quite a while to figure out all (or most) of the failure cases to be able to implement specialized error handling and retry mechanisms based on those on top of what Cirun already provides.
 
-![Diagram illustrating the workflow of Cirun integrating with GitHub and GPU servers. The process includes creating a workflow on GitHub, which triggers a runner VM creation request to the GPU server via Cirun. The runner VM is created in OpenStack, executes the workflow, and then the VM is destroyed upon completion. The workflow status is then sent back to GitHub.](/posts/building-a-gpu-ci-service-for-conda-forge/cirun-github.svg)
+<p class="post-image"><img src="/posts/building-a-gpu-ci-service-for-conda-forge/cirun-github.svg" alt="Diagram illustrating the workflow of Cirun integrating with GitHub and GPU servers. The process includes creating a workflow on GitHub, which triggers a runner VM creation request to the GPU server via Cirun. The runner VM is created in OpenStack, executes the workflow, and then the VM is destroyed upon completion. The workflow status is then sent back to GitHub." style="width:87%" loading="lazy" /></p>
 
 ## Step 6: Prepare conda-forge for the Cirun runners
 
@@ -265,7 +222,7 @@ Once the OpenStack integrations were deployed to Cirun, we could start debugging
 
 Getting these PRs to pass involved adjusting the GitHub Actions workflows provided by conda-smithy to be compatible with the self-hosted runners provided by Cirun (see [#1703](https://github.com/conda-forge/conda-smithy/pull/1703), [#1794](https://github.com/conda-forge/conda-smithy/pull/1794), [#1795](https://github.com/conda-forge/conda-smithy/pull/1795), [#1809](https://github.com/conda-forge/conda-smithy/pull/1809), [#1812](https://github.com/conda-forge/conda-smithy/pull/1812)). It also revealed the MTU problems discussed above and the GPU passthrough issues you’ll read about below.
 
-![A small tablet or display screen sits on a wooden surface, showing the interface for an "OpenGPU Server" with status bars indicating it's operational. On either side of the screen are two small figurines of armored guards. The scene is set against the background of a wall with decorative molding, giving it a home-like setting.](/posts/building-a-gpu-ci-service-for-conda-forge/amits-desk-scaled.jpg)
+<p class="post-image"><img src="/posts/building-a-gpu-ci-service-for-conda-forge/amits-desk-scaled.jpg" alt="A small tablet or display screen sits on a wooden surface, showing the interface for an &quot;OpenGPU Server&quot; with status bars indicating it&#x27;s operational. On either side of the screen are two small figurines of armored guards. The scene is set against the background of a wall with decorative molding, giving it a home-like setting." style="width:61%" loading="lazy" /></p>
 
 ## Step 7: Debug GPU passthrough
 
@@ -277,7 +234,7 @@ To be able to create virtual machines that have exclusive access to the hardware
 
 When you enable IOMMU on the host machine, all the devices connected to the host get added to various groups, also known as IOMMU groups. In an ideal world, all the devices will have their own separate group, but in practice, this isn’t the case. This is due to the PCIe architecture:
 
-![A hierarchical diagram showing the structure of computer memory. At the top are "CPU" and "Memory" boxes, connected to "Root Memory". From "Root Memory", two branches extend: one to "PCIe Endpoint" (labeled "IOMMU Group 32"), and another to a "Switch". The "Switch" further connects to two "PCIe Endpoint" boxes (labeled "IOMMU Group 19"). This diagram represents the memory and PCIe architecture of a computer system.](/posts/building-a-gpu-ci-service-for-conda-forge/PCIe.svg)
+<p class="post-image"><img src="/posts/building-a-gpu-ci-service-for-conda-forge/PCIe.svg" alt="A hierarchical diagram showing the structure of computer memory. At the top are &quot;CPU&quot; and &quot;Memory&quot; boxes, connected to &quot;Root Memory&quot;. From &quot;Root Memory&quot;, two branches extend: one to &quot;PCIe Endpoint&quot; (labeled &quot;IOMMU Group 32&quot;), and another to a &quot;Switch&quot;. The &quot;Switch&quot; further connects to two &quot;PCIe Endpoint&quot; boxes (labeled &quot;IOMMU Group 19&quot;). This diagram represents the memory and PCIe architecture of a computer system." style="width:48%" loading="lazy" /></p>
 
 You can see in the figure above that two PCIe devices connected to a switch would have the same IOMMU group. Below is some sample code to get IOMMU groups for each NVIDIA® GPU.
 
@@ -386,3 +343,5 @@ Assuming Cirun is already enabled and correctly configured in your repository:
 - [MTU problems with Docker](https://mlohr.com/docker-mtu/)
 - [Traefik](https://traefik.io/traefik/)
 - [DiskImage-builder](https://github.com/openstack/diskimage-builder)
+
+<p class="post-heading" style="font-size:18px;font-weight:500;color:#191919">Share the Post:</p>

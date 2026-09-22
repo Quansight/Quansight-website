@@ -1,5 +1,6 @@
 # Footer structure scraped from the live quansight.com (WordPress) footer
-# DOM (2 link columns + contact + social icons + legal row). Logo is the
+# DOM (logo row; 2 link columns + a contact column that also holds the
+# social icons; a legal row on its own pink strip). Logo is the
 # real one, fetched live -- same white mark+wordmark used everywhere on
 # the live site (only one logo file is referenced anywhere, at various
 # responsive sizes, not different colors -- the footer is the brand
@@ -17,8 +18,12 @@ contact:
     - text: "connect@quansight.com"
       href: "mailto:connect@quansight.com"
       kind: "email"
-    - text: "8656 W. Hwy 71, Bldg F200"
+    - text: "8656 W. Hwy 71,"
+    - text: "Bldg F200"
     - text: "Austin, Texas 78735"
+  button:
+    text: "Talk With Us"
+    href: "/about-us#bookacallform"
 
 navigationGroups:
   - title: "Home"

@@ -5,6 +5,8 @@ import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 
 export default defineConfig({
+  // Absolute URLs (share links on posts) resolve against this.
+  site: 'https://quansight.com',
   output: 'static',
   integrations: [
     react(),

@@ -16,6 +16,7 @@ const FONT_SIZE_SCALE: [string, number][] = [
   ['2xl', 47],
   ['3xl', 55],
   ['4xl', 70],
+  ['5xl', 90],
 ];
 
 /** Returns the Tailwind fontSize-suffix (e.g. "lg") whose real px value is

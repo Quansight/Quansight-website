@@ -20,6 +20,9 @@ const pages = defineCollection({
   schema: z.object({
     slug: z.string(),
     title: z.string().optional(),
+    // Yoast's per-page <title> from the live site, when the converter
+    // could fetch it; the routes fall back to `<title> | Quansight`.
+    seoTitle: z.string().optional(),
     description: z.string().optional(),
     blocks: z.array(z.object({ type: z.string() }).passthrough()),
   }),
@@ -33,8 +36,21 @@ const posts = defineCollection({
     authors: z.array(z.string()).default([]),
     description: z.string().optional(),
     category: z.array(z.string()).default([]),
+    // WP post tags -- what live's "More articles from our Library" is
+    // keyed on (posts sharing a tag); see BlogPost.astro.
+    tags: z.array(z.string()).default([]),
     featuredImage: z.object({ src: z.string(), alt: z.string() }).optional(),
     hero: z.record(z.unknown()).optional(),
+    // Converted posts: the live post's band above the title -- a row of
+    // logos, or [] for the plain gradient band. Hand-authored posts use
+    // `hero` instead.
+    banner: z.array(z.object({ src: z.string(), alt: z.string() })).optional(),
+    // Hand-authored posts: the live post's dominant body text weight and
+    // color (backfilled by add-post-text-style.py from the WP CSS); the
+    // converted posts carry per-widget styles inline instead.
+    textStyle: z
+      .object({ weight: z.number().optional(), color: z.string().optional() })
+      .optional(),
   }),
 });
 

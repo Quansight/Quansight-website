@@ -4,15 +4,20 @@ published: November 8, 2024
 authors: [dharhas-pothina]
 description: 'A Collaboration-minded AI Platform for Data and Science.'
 category: ['Infrastructure & HPC']
+tags: ['AI', 'AI infrastructure', 'Innovation']
 featuredImage:
   src: /posts/a-quick-overview-of-nebari/Nebari-Youtube-Thumbnail.png
   alt: 'A Quick Overview of Nebari'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'A Quick Overview of Nebari'
+banner:
+  - src: /posts/a-quick-overview-of-nebari/Nebari-Logo-White-Bg.svg
+    alt: 'Image of the Nebari logo'
 ---
 
+<div class="post-text" style="font-weight:500;color:#000000">
+
 _A collaboration-minded AI platform for data and science._
+
+</div>
 
 ## What Is Nebari?
 

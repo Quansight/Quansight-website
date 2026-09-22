@@ -6,10 +6,12 @@ export function SiteHeaderMobile({
   logoSrc,
   logoAlt,
   navigation,
+  currentPath,
 }: {
   logoSrc: string;
   logoAlt: string;
   navigation: NavItem[];
+  currentPath?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const container = useRef<HTMLDivElement>(null);
@@ -100,7 +102,7 @@ export function SiteHeaderMobile({
               <a
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="block py-[1.6rem] px-[2rem] w-full text-[1.4rem] font-medium leading-[2rem] capitalize"
+                className="block py-[1.6rem] px-[2rem] w-full text-[1.4rem] font-medium leading-[2rem]"
               >
                 {item.text}
               </a>
@@ -111,7 +113,16 @@ export function SiteHeaderMobile({
                       <a
                         href={child.href}
                         onClick={() => setIsOpen(false)}
-                        className="block py-[0.8rem] px-[3.6rem] w-full text-[1.4rem] font-medium text-violet"
+                        aria-current={
+                          child.href.replace(/\/+$/, '') === currentPath
+                            ? 'page'
+                            : undefined
+                        }
+                        className={`block py-[0.8rem] px-[3.6rem] w-full text-[1.4rem] font-medium leading-[2rem] ${
+                          child.href.replace(/\/+$/, '') === currentPath
+                            ? 'text-pink'
+                            : 'text-violet'
+                        }`}
                       >
                         {child.text}
                       </a>

@@ -4,15 +4,20 @@ published: January 10, 2025
 authors: [quansight]
 description: 'New features, enhanced security, cost efficiency — read all about it.'
 category: ['Infrastructure & HPC']
+tags: ['AI', 'Innovation', 'Multimodal AI Vision', 'Nebari']
 featuredImage:
   src: /posts/recent-nebari-updates/Nebari_Featured_Image.png
   alt: 'Recent Nebari Updates'
-hero:
-  imageSrc: /posts/hero-paris.webp
-  imageAlt: 'Recent Nebari Updates'
+banner:
+  - src: /posts/recent-nebari-updates/Nebari-Logo-White-Bg.svg
+    alt: 'Image of the Nebari logo'
 ---
 
+<div class="post-text" style="font-weight:500;color:#000000">
+
 _New features, enhanced security, cost efficiency — read all about it._
+
+</div>
 
 Nebari is an open source platform that facilitates collaboration and streamlines data science operations. It offers a comprehensive environment for deploying data science tools and managing workflows, enabling teams to work together more effectively. Built to address the complexities of modern data-driven projects, Nebari empowers organizations with the tools they need to succeed in a collaborative, scalable, and secure environment.
 

@@ -1,14 +1,105 @@
 slug: blog
-title: Blog
-description: News, updates, case studies, and technical deep-dives from Quansight.
+title: "Blog"
+seoTitle: "Quansight Blog | Open Source, AI & Data Science Insights"
+description: "Stay current with the Quansight Blog. AI trends, data science, open source updates, and expert perspectives from the PyData ecosystem."
 blocks:
-  - type: hero
-    image: /page-assets/blog/Hero-Background-12.png
-    imageAlt: ''
-    variant: small
-    gradientFrom: '#452391'
-    gradientTo: '#963895'
-    overlayOpacity: 0.26
-  - type: page-heading
-    title: Blog
-    description: News, updates, case studies, and technical deep-dives from Quansight.
+- type: hero
+  variant: "small"
+  gradientFrom: "#452391"
+  gradientTo: "#963895"
+  minHeight: "60vh"
+  image: "/page-assets/blog/Hero-Background-12.png"
+  imageAlt: ""
+  overlayOpacity: 0.26
+  title: "Quansight's Blog"
+  titleSizePx: 70
+  titleFontWeight: 700
+- type: columns
+  columns:
+    - - type: columns
+        columns:
+          - - type: heading
+              text: "Industry insights, community news, and more"
+              level: 4
+              sizePx: 42
+              fontWeight: 900
+              color: "#452392"
+              align: "center"
+              lineHeight: "1.1em"
+            - type: text
+              html: "<p>Stay up on the latest from Quansight.</p>"
+              sizePx: 22
+              color: "#000000"
+              lineHeight: "1.7em"
+              align: "center"
+              paddingRight: "50px"
+            - type: text
+              html: "<p style=\"text-align: center;\">Looking for the latest posts? Visit the <a data-end=\"471\" data-start=\"447\" href=\"https://labs.quansight.org/blog\" rel=\"noopener\">Quansight Labs Blog</a> for new insights and updates.</p>"
+        paddingTop: "25px"
+        maxWidthPx: 1311
+  paddingTop: "50px"
+  paddingBottom: "50px"
+  maxWidthPx: 1239
+- type: columns
+  columns:
+    - - type: posts
+        offset: 0
+        count: 3
+  paddingTop: "50px"
+  paddingBottom: "100px"
+  maxWidthPx: 1117
+- type: columns
+  columns:
+    - - type: heading
+        text: "Subscribe for Updates & News"
+        level: 2
+        sizePx: 30
+        fontWeight: 600
+        color: "#FFFFFF"
+        lineHeight: "1em"
+        letterSpacing: "0.5px"
+      - type: form
+        name: "Mailing List Signup"
+        fields:
+          - name: "EMAIL"
+            kind: "input"
+            type: "email"
+            required: true
+            placeholder: "Email"
+            label: "Email"
+        submit: "Submit"
+        audience: "mailchimp"
+        submitIcon: true
+    - - type: columns
+        columns:
+          - - type: image
+              src: "/page-assets/blog/subscribe.svg"
+              alt: ""
+              width: 455
+              height: 181
+        columnBackgrounds:
+          - "#452392"
+        paddingRight: "5%"
+  columnBackgrounds:
+    - "#452392"
+    - null
+  columnWidths:
+    - 50
+    - 50
+  columnPaddings:
+    - top: "0%"
+      right: "0%"
+      bottom: "0%"
+      left: "15%"
+    - null
+  gapPx: 0
+  marginBottom: "5%"
+- type: columns
+  columns:
+    - - type: posts
+        offset: 3
+        count: 9
+        loadMore: true
+  paddingTop: "50px"
+  paddingBottom: "100px"
+  maxWidthPx: 1117
