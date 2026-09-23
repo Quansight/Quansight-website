@@ -12,9 +12,11 @@ hero:
   imageAlt: 'The NumPy logo above a diagram of two stacked layers on a dark grid. The top layer looks like a circuit board and is labelled Limited API and Stable ABI, abi3. The layer under it is labelled CPython and is split into 3.13, 3.14 and 3.15. A caption reads Porting NumPy to the Limited API.'
 ---
 
+_**Note:** if you've ever wondered why Python libraries like NumPy are so fast, how Python and C work together under the hood, or what buzzwords like the GIL, free-threading, multiprocessing and subinterpreters actually mean, this post is made for you. There are a few C snippets along the way, but the text explains each one, so you can follow along even if you don't write C._
+
 Hey all, welcome to the blog! If you're reading this (and no, it's not too late), you're either a friend I personally begged to read it or a fellow geek. Both are my kind of people, so welcome!
 
-Here's the deal: I yap, you listen, and I sneak in pop culture references and puns along the way. That's on purpose. You've been warned. In return, you'll learn a lot. Even if you're a Python geek, you'll probably still pick up something new, especially if you maintain a C extension.
+Here's the deal: I yap, you listen, and I sneak in pop culture references (starting with the title) and puns along the way. That's on purpose. You've been warned. In return, you'll learn a lot. Even if you're a Python geek, you'll probably still pick up something new, especially if you maintain a C extension.
 
 I spent the last three wonderful months working on NumPy as a Quansight intern, under the mentorship of Matti Picus, Nathan Goldbaum and Kumar Aditya. I actually started contributing before the internship began, mostly in masked arrays (`numpy.ma`), which I'd been using in SunPy. Not everyone cares about masked arrays, but I did, so I fixed a few things.
 
@@ -52,7 +54,7 @@ So every NumPy release needs a separate binary wheel for every OS, every CPU arc
 
 ![A grid of every wheel in the NumPy 2.5.3 release. Rows are platforms: four macOS builds (arm64 for macOS 14.0+ and 11.0+, x86-64 for 14.0+ and 10.13+), four Linux builds (x86-64 and arm64, each for glibc and musl) and three Windows builds (x86-64, arm64 and 32-bit x86). Columns are Python 3.12, 3.13, 3.14 and 3.15, plus free-threaded 3.14t and 3.15t. Every cell has a wheel except Intel Mac 3.14t, for 65 wheels in total. A note says that from 3.14 on the Intel Mac floor is macOS 10.15+, and that macOS 14.0+ wheels use Apple's Accelerate while older macOS wheels bundle OpenBLAS.](/posts/limited_api_numpy/numpy_2_5_3_wheel_matrix_65.png)
 
-The full C API is the great power. The build matrix is the great responsibility. Uncle Ben would have understood.
+The full C API is the great power. The build matrix is the great responsibility. (Sorry, Uncle Ben.)
 
 ## So what is the Limited API?
 
@@ -76,7 +78,7 @@ The first rule of Limited API Club: you do not touch CPython's internals. The se
 
 ### 1. Hasta la vista, static types
 
-NumPy defines a lot of Python types in C. Traditionally these are static types: a giant `PyTypeObject` struct filled in field by field at compile time and shared by the whole process. "Why are you the way you are, `PyTypeObject`?!" (CPython's Toby.) The Limited API hides that struct's layout, so static types are out. Instead, you describe the type with a spec and let CPython build it at runtime as a heap type (simplified example):
+NumPy defines a lot of Python types in C. Traditionally these are static types: a giant `PyTypeObject` struct filled in field by field at compile time and shared by the whole process. "Why are you the way that you are, `PyTypeObject`?!" (CPython's Toby.) The Limited API hides that struct's layout, so static types are out. Instead, you describe the type with a spec and let CPython build it at runtime as a heap type (simplified example):
 
 ```c
 /* Before: a static type, laid out field by field */
@@ -175,7 +177,7 @@ spin build -- -Dpython.allow_limited_api=true
 pip install . -Csetup-args=-Dpython.allow_limited_api=true
 ```
 
-NumPy's CI does the same in its debug job and runs the test suite on the result, so nobody can quietly sneak a banned macro back in. It shall not pass.
+NumPy's CI does the same in its debug job and runs the test suite on the result, so nobody can quietly sneak a banned macro back in. You shall not pass.
 
 <!-- ### What about speed?
 
@@ -310,7 +312,7 @@ if __name__ == "__main__":
         print(list(pool.map(work, range(4))))
 ```
 
-Python 3.14 already ships `InterpreterPoolExecutor`, which has the same interface. Once NumPy supports subinterpreters, switching is just swapping the executor. THIS IS THE WAY:
+Python 3.14 already ships `InterpreterPoolExecutor`, which has the same interface. Once NumPy supports subinterpreters, switching is just swapping the executor. The Mandalorian would approve. This is the way:
 
 ```python
 from concurrent.futures import InterpreterPoolExecutor
