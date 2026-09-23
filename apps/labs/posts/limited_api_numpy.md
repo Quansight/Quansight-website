@@ -48,7 +48,9 @@ CPython also provides the glue that sticks C to Python: the C API. It's a giant 
 
 Here's the problem. For years, NumPy and packages like it have used everything the C API offers, with no boundaries whatsoever. That includes macros that read straight out of CPython's internal structs at fixed memory offsets. Those internals are allowed to change between Python versions, so a binary built for Python 3.13 only works on 3.13.
 
-So every NumPy release needs a separate binary wheel for every OS, every CPU architecture and every Python version, and free-threaded builds count separately too. NumPy 2.5.3, for example, ships 65 wheels on PyPI for Python 3.12 to 3.15. And when a brand-new Python comes out, older NumPy releases simply have no wheels for it. The maintainers tell me this is painful. I don't package and ship NumPy myself, so I'll take their word for it, but it sounds like the kind of thing that gives you gray hair.
+So every NumPy release needs a separate binary wheel for every OS, every CPU architecture and every Python version, and free-threaded builds count separately too. NumPy 2.5.3, for example, ships 65 wheels on PyPI for Python 3.12 to 3.15. Gotta build 'em all. And when a brand-new Python comes out, older NumPy releases simply have no wheels for it. The maintainers tell me this is painful. I don't package and ship NumPy myself, so I'll take their word for it, but it sounds like the kind of thing that gives you gray hair.
+
+![A grid of every wheel in the NumPy 2.5.3 release. Rows are platforms: four macOS builds (arm64 for macOS 14.0+ and 11.0+, x86-64 for 14.0+ and 10.13+), four Linux builds (x86-64 and arm64, each for glibc and musl) and three Windows builds (x86-64, arm64 and 32-bit x86). Columns are Python 3.12, 3.13, 3.14 and 3.15, plus free-threaded 3.14t and 3.15t. Every cell has a wheel except Intel Mac 3.14t, for 65 wheels in total. A note says that from 3.14 on the Intel Mac floor is macOS 10.15+, and that macOS 14.0+ wheels use Apple's Accelerate while older macOS wheels bundle OpenBLAS.](/posts/limited_api_numpy/numpy_2_5_3_wheel_matrix_65.png)
 
 The full C API is the great power. The build matrix is the great responsibility. Uncle Ben would have understood.
 
@@ -58,19 +60,23 @@ The Limited API is a subset of the C API that CPython promises to keep stable. O
 
 If your extension sticks to the Limited API, you pick a minimum Python version, say 3.13, and compile once. In C, that's `#define Py_LIMITED_API 0x030D0000` before including `Python.h`. In practice your build tool usually handles it: in Meson, you add `limited_api: '3.13'` to an extension module and Meson defines it for you (more on that below). The resulting wheel works on 3.13 and every version after it. These are called `abi3` wheels because they target CPython's Stable ABI (Application Binary Interface). The Limited API is the promise for your source code, and the Stable ABI is the same promise for your compiled binary.
 
-So instead of one wheel per OS × architecture × Python version, you get one wheel per OS × architecture. Python 3.16 drops? Your old wheel just works.
+So instead of one wheel per OS × architecture × Python version, you get one wheel to rule them all (per OS and architecture, anyway). Python 3.16 drops? Your old wheel just works.
 
 One asterisk: `abi3` doesn't cover free-threaded builds. Python 3.15 adds a separate flavor for them, `abi3t` ([PEP 803](https://peps.python.org/pep-0803/)). It's stricter: `PyObject` itself becomes opaque, so defining modules and most classes needs new APIs.
 
 ![Two diagrams compared. Top, full C API: the same C source needs a separate build for Python 3.13, 3.14 and 3.15, each working only on its own version, and Python 3.16 needs a new build. Bottom, Limited API: the same C source makes one abi3 build targeting 3.13 and up, which works on Python 3.13, 3.14, 3.15 and 3.16. A note says this is per OS and CPU architecture, and that free-threaded builds are not covered by abi3.](/posts/limited_api_numpy/full_vs_limited_api_wheels.png)
 
+If NumPy shipped `abi3` wheels (it doesn't yet, more on that later) and had dropped Python 3.12, the 65 wheels from earlier would shrink to 32. The free-threaded columns stay exactly the same:
+
+![The same grid if NumPy shipped abi3 wheels. The four regular Python columns collapse into one column, 3.13+ (abi3), with one wheel per platform, while the free-threaded 3.14t and 3.15t columns stay the same. The total drops from 65 to 32. A note says one abi3 wheel per platform covers 3.13, 3.14, 3.15 and future versions, assuming 3.12 has aged out, and that free-threaded builds still need their own wheels.](/posts/limited_api_numpy/numpy_limited_api_wheel_matrix_32.png)
+
 ## How do you make NumPy Limited API compatible?
 
-The first rule of the Limited API: you do not touch CPython's internals. The second rule: you couldn't if you tried. Define `Py_LIMITED_API` and the struct layouts vanish from the headers, so `PyTypeObject` becomes an incomplete type and reaching for a field is a compile error, not a code review comment. If you follow CPython's docs, the work comes down to two big changes.
+The first rule of Limited API Club: you do not touch CPython's internals. The second rule of Limited API Club: you couldn't if you tried. Define `Py_LIMITED_API` and the struct layouts vanish from the headers, so `PyTypeObject` becomes an incomplete type and reaching for a field is a compile error, not a code review comment. These aren't the fields you're looking for. If you follow CPython's docs, the work comes down to two big changes.
 
 ### 1. Hasta la vista, static types
 
-NumPy defines a lot of Python types in C. Traditionally these are static types: a giant `PyTypeObject` struct filled in field by field at compile time and shared by the whole process. Why are you the way you are, `PyTypeObject`? The Limited API hides that struct's layout, so static types are out. Instead, you describe the type with a spec and let CPython build it at runtime as a heap type (simplified example):
+NumPy defines a lot of Python types in C. Traditionally these are static types: a giant `PyTypeObject` struct filled in field by field at compile time and shared by the whole process. "Why are you the way you are, `PyTypeObject`?!" (CPython's Toby.) The Limited API hides that struct's layout, so static types are out. Instead, you describe the type with a spec and let CPython build it at runtime as a heap type (simplified example):
 
 ```c
 /* Before: a static type, laid out field by field */
@@ -169,7 +175,7 @@ spin build -- -Dpython.allow_limited_api=true
 pip install . -Csetup-args=-Dpython.allow_limited_api=true
 ```
 
-NumPy's CI does the same in its debug job and runs the test suite on the result, so nobody can quietly sneak a banned macro back in.
+NumPy's CI does the same in its debug job and runs the test suite on the result, so nobody can quietly sneak a banned macro back in. It shall not pass.
 
 <!-- ### What about speed?
 
@@ -285,7 +291,7 @@ What has landed so far:
 - **Per-module state:** `lapack_lite` in [PR #31928](https://github.com/numpy/numpy/pull/31928) and `_multiarray_umath` in [PR #31992](https://github.com/numpy/numpy/pull/31992). That second one parks the state behind a transitional global, and follow-up PRs are replacing those reads with real per-module lookups so the global can go.
 - **Heap types:** the first batch of four self-contained types landed in [PR #32502](https://github.com/numpy/numpy/pull/32502): `flagsobj`, `busdaycalendar`, `_array_converter` and the array function dispatcher. A second batch, with the two array method types and two internal iterators, is in review in [PR #32552](https://github.com/numpy/numpy/pull/32552). What's left after that is the scary half: the other iterators (`flatiter`, `broadcast` and `nditer`), about 35 scalar types, `PyUFunc_Type`, and then `PyArray_Type`, `PyArrayDescr_Type` and `PyArrayDTypeMeta_Type`.
 
-For NumPy to load in interpreters with their own GIL, which is what `concurrent.interpreters` creates, that flag has to become `Py_MOD_PER_INTERPRETER_GIL_SUPPORTED`. That can only happen once every module is isolated and no shared global state is left. That day is not close. But it gets closer one PR at a time, and the Limited API work and the subinterpreter work are pushing the same rock up the same hill.
+For NumPy to load in interpreters with their own GIL, which is what `concurrent.interpreters` creates, that flag has to become `Py_MOD_PER_INTERPRETER_GIL_SUPPORTED`. That can only happen once every module is isolated and no shared global state is left. That's still a long way off, but every PR gets it a little closer, and the Limited API work and the subinterpreter work are pushing the same rock up the same hill.
 
 ### What changes when it's done
 
@@ -304,7 +310,7 @@ if __name__ == "__main__":
         print(list(pool.map(work, range(4))))
 ```
 
-Python 3.14 already ships `InterpreterPoolExecutor`, which works the same way. Once NumPy supports subinterpreters, switching is just swapping the executor:
+Python 3.14 already ships `InterpreterPoolExecutor`, which has the same interface. Once NumPy supports subinterpreters, switching is just swapping the executor. THIS IS THE WAY:
 
 ```python
 from concurrent.futures import InterpreterPoolExecutor
