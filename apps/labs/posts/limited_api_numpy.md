@@ -6,10 +6,10 @@ description: 'A recap of my Quansight internship porting NumPy extension modules
 category: [PyData ecosystem, Packaging, Internship]
 featuredImage:
   src: /posts/limited_api_numpy/hero.png
-  alt: 'The NumPy logo above a diagram of two stacked layers on a dark grid. The top layer looks like a circuit board and is labelled Limited API and stable ABI, abi3. The layer under it is labelled CPython and is split into 3.13, 3.14 and 3.15. A caption reads Porting NumPy to the Limited API.'
+  alt: 'The NumPy logo above a diagram of two stacked layers on a dark grid. The top layer looks like a circuit board and is labelled Limited API and Stable ABI, abi3. The layer under it is labelled CPython and is split into 3.13, 3.14 and 3.15. A caption reads Porting NumPy to the Limited API.'
 hero:
   imageSrc: /posts/limited_api_numpy/hero.png
-  imageAlt: 'The NumPy logo above a diagram of two stacked layers on a dark grid. The top layer looks like a circuit board and is labelled Limited API and stable ABI, abi3. The layer under it is labelled CPython and is split into 3.13, 3.14 and 3.15. A caption reads Porting NumPy to the Limited API.'
+  imageAlt: 'The NumPy logo above a diagram of two stacked layers on a dark grid. The top layer looks like a circuit board and is labelled Limited API and Stable ABI, abi3. The layer under it is labelled CPython and is split into 3.13, 3.14 and 3.15. A caption reads Porting NumPy to the Limited API.'
 ---
 
 Hey all, welcome to the blog! If you're reading this (and no, it's not too late), you're either a friend I personally begged to read it or a fellow geek. Both are my kind of people, so welcome!
@@ -34,7 +34,7 @@ result = arr * 2
 
 you make one Python call, and NumPy runs a tight loop in compiled C over the whole block. No bouncer, no ID checks.
 
-And there's more muscle under the hood. Modern CPUs support SIMD (Single Instruction, Multiple Data), which lets one instruction work on several numbers at once. Buy one, get several free. NumPy has hand-tuned SIMD code for lots of common operations. For matrix multiplication and other linear algebra, NumPy hands the work off to BLAS libraries like OpenBLAS. People have been optimizing BLAS for decades. When it's time to enter the Matrix, NumPy calls the One.
+And there's more muscle under the hood. Modern CPUs support SIMD (Single Instruction, Multiple Data), which lets one instruction work on several numbers at once. Buy one, get several free. NumPy has hand-tuned SIMD code for lots of common operations. For matrix multiplication and other linear algebra, NumPy hands the work off to BLAS and LAPACK libraries like OpenBLAS. People have been optimizing BLAS for decades. When it's time to enter the Matrix, NumPy calls the One.
 
 So NumPy is basically a mullet: business in the front (Python), party in the back (C).
 
@@ -99,7 +99,7 @@ static PyType_Spec foo_spec = {
 PyObject *foo_type = PyType_FromModuleAndSpec(module, &foo_spec, NULL);
 ```
 
-[CPython's guide](https://docs.python.org/3/howto/isolating-extensions.html) walks through converting static types to heap types.
+[CPython's guide to isolating extension modules](https://docs.python.org/3/howto/isolating-extensions.html) walks through converting static types to heap types.
 
 ### 2. Leave the macro, take the function call
 
@@ -122,16 +122,16 @@ The same goes for friends like `PyList_GET_ITEM` and `PyTuple_GET_SIZE`, and for
 
 The function versions are a tiny bit slower. In most of NumPy that's noise, because the hot loops run over raw memory without touching the C API at all. But it's why benchmarks matter for this project.
 
-A couple of bonus gotchas for my fellow C extension folks. First, once you set `Py_LIMITED_API` to 3.11 or higher, `Python.h` stops including `<stdio.h>`, `<stdlib.h>`, `<string.h>` and `<errno.h>` for you, so add them yourself. Second, instances of a heap type hold a reference to their type, so your `tp_dealloc` has to `Py_DECREF` the type after freeing the object.
+A couple of bonus gotchas for my fellow C extension folks. First, once you set `Py_LIMITED_API` to 3.11 or higher, `Python.h` stops including `<stdio.h>`, `<stdlib.h>`, `<string.h>` and `<errno.h>` for you, and from 3.13 it also drops `<ctype.h>` and `<unistd.h>`, so include what you use yourself. Second, instances of a heap type hold a reference to their type, so your `tp_dealloc` has to `Py_DECREF` the type after freeing the object.
 
 ## Where things stand
 
 Ported and merged so far:
 
-- **`numpy.random`**: `_bounded_integers`, `_common`, `bit_generator`, `_mt19937`, `_philox`, `_pcg64`, `_sfc64`, `_generator`, `mtrand`
-- **`numpy.fft`**: `_pocketfft_umath`
-- **`numpy.linalg`**: `lapack_lite`, `_umath_linalg`
-- **`numpy._core` test modules**: `_rational_tests`, `_umath_tests`, `_struct_ufunc_tests`, `_operand_flag_tests`, `_reduction_loop_tests`, `_multiarray_tests`, `_simd`
+- **`numpy.random`:** `_bounded_integers`, `_common`, `bit_generator`, `_mt19937`, `_philox`, `_pcg64`, `_sfc64`, `_generator`, `mtrand`
+- **`numpy.fft`:** `_pocketfft_umath`
+- **`numpy.linalg`:** `lapack_lite`, `_umath_linalg`
+- **`numpy._core` test modules:** `_rational_tests`, `_umath_tests`, `_struct_ufunc_tests`, `_operand_flag_tests`, `_reduction_loop_tests`, `_multiarray_tests`, `_simd`
 
 That leaves the final boss: `multiarray` itself (`_multiarray_umath`), the core module that basically is NumPy. Wish me luck. I'm going in. (Don't say it, Michael.)
 
@@ -169,7 +169,7 @@ spin build -- -Dpython.allow_limited_api=true
 pip install . -Csetup-args=-Dpython.allow_limited_api=true
 ```
 
-NumPy's CI does the same in its debug job and runs the whole test suite on the result, so nobody can quietly sneak a banned macro back in.
+NumPy's CI does the same in its debug job and runs the test suite on the result, so nobody can quietly sneak a banned macro back in.
 
 <!-- ### What about speed?
 
@@ -181,7 +181,7 @@ Trading macros for function calls sounds scary for a library that lives and dies
 
 First, the question everyone asks: will NumPy ship `abi3` wheels? Not yet. Being able to build with the Limited API is step one. Actually shipping `abi3` wheels is a separate call for the maintainers, and there's plenty to weigh.
 
-All of NumPy has to build first, and `multiarray` is the final boss for a reason. Then there's speed. Function calls cost a little more than macros, and NumPy doesn't shrug off slowdowns, so benchmarks get the final say. Also, `abi3` only gets rid of the per-Python-version wheels. You still need one wheel per OS and architecture. Free-threaded builds are their own saga. They'd need `abi3t`, where opaque `PyObject`s can't be embedded inside other structs, and that hits NumPy's array object directly.
+All of NumPy has to build first, and `multiarray` is the final boss for a reason. Then there's speed. Function calls cost a little more than macros, and NumPy doesn't shrug off slowdowns, so benchmarks get the final say. Also, `abi3` only gets rid of the per-Python-version wheels. You still need one wheel per OS and architecture. Free-threaded builds are their own saga. They'd need `abi3t`, where an extension's own structs can no longer start with a `PyObject`, and NumPy's array object does exactly that.
 
 ### I maintain a package like SciPy. What happens to me?
 
@@ -207,7 +207,7 @@ And a couple of bigger-picture wins:
 
 ## The side quest bigger than the main quest: subinterpreters
 
-My internship was supposed to be about the Limited API. Then I got to heap types, and heap types turned out to be the front door to a completely different feature: subinterpreters. So I ended up working on both, and there's now a [tracking issue](https://github.com/numpy/numpy/issues/32451) for the subinterpreter half.
+My internship was supposed to be about the Limited API. Then I got to heap types, and heap types turned out to be the front door to a completely different feature: subinterpreters. So I ended up working on both, and there's now a [NumPy tracking issue for subinterpreter support](https://github.com/numpy/numpy/issues/32451).
 
 ### Wait, what's a subinterpreter?
 
@@ -247,12 +247,12 @@ Here's the overlap. The Limited API needs heap types because `PyTypeObject`'s la
 
 CPython's [Isolating Extension Modules](https://docs.python.org/3/howto/isolating-extensions.html) guide is the checklist. For NumPy it comes down to three things:
 
-1. **Multi-phase initialization ([PEP 489](https://peps.python.org/pep-0489/)).** With old-style (single-phase) init, the module is set up once and CPython copies its contents into any other interpreter that imports it, so they end up sharing state. Multi-phase init lets every interpreter build its own fresh module object. This is [#29021](https://github.com/numpy/numpy/issues/29021), an effort Adam Turner started before I arrived.
-2. **Per-module state.** Lots of C extensions keep their data in global C variables: caches, references to Python objects, module-level settings. That's one Netflix account for the whole extended family, and someone is definitely ruining your recommendations. Each module object needs its own private struct instead, reached through `PyModule_GetState()`. Tracked in [#31930](https://github.com/numpy/numpy/issues/31930).
+1. **Multi-phase initialization ([PEP 489](https://peps.python.org/pep-0489/)).** With old-style (single-phase) init, the module is set up once and CPython copies its contents into any other interpreter that imports it, so they end up sharing state. Multi-phase init lets every interpreter build its own fresh module object. This is [issue #29021](https://github.com/numpy/numpy/issues/29021), an effort Adam Turner started before I arrived.
+2. **Per-module state.** Lots of C extensions keep their data in global C variables: caches, references to Python objects, module-level settings. That's one Netflix account for the whole extended family, and someone is definitely ruining your recommendations. Each module object needs its own private struct instead, reached through `PyModule_GetState()`. Tracked in [issue #31930](https://github.com/numpy/numpy/issues/31930).
 
    ![Two panels compared. Top, before: two interpreters that both import numpy point to one shared block of C globals holding caches, cached objects and settings. Bottom, after: each interpreter has its own module state, reached through PyModule_GetState. A caption says each module object carries its own private struct.](/posts/limited_api_numpy/global_vs_per_module_state.png)
 
-3. **Heap types.** The same conversion the Limited API wants, for the reason above. Tracked in [#32747](https://github.com/numpy/numpy/issues/32747).
+3. **Heap types.** The same conversion the Limited API wants, for the reason above. Tracked in [issue #32747](https://github.com/numpy/numpy/issues/32747).
 
 ### Where it stands today
 
@@ -282,10 +282,10 @@ Original error was: module numpy._core._multiarray_umath does not support loadin
 What has landed so far:
 
 - **Multi-phase init:** `_multiarray_umath` now starts up through a `Py_mod_exec` slot.
-- **Per-module state:** `lapack_lite` in [#31928](https://github.com/numpy/numpy/pull/31928) and `_multiarray_umath` in [#31992](https://github.com/numpy/numpy/pull/31992). That second one parks the state behind a transitional global, and follow-up PRs are replacing those reads with real per-module lookups so the global can go.
-- **Heap types:** the first batch of four self-contained types landed in [#32502](https://github.com/numpy/numpy/pull/32502): `flagsobj`, `busdaycalendar`, `_array_converter` and the array function dispatcher. A second batch is in review in [#32552](https://github.com/numpy/numpy/pull/32552). What's left is the scary half: the iterators, about 35 scalar types, `PyUFunc_Type`, and then `PyArray_Type`, `PyArrayDescr_Type` and `PyArrayDTypeMeta_Type`.
+- **Per-module state:** `lapack_lite` in [PR #31928](https://github.com/numpy/numpy/pull/31928) and `_multiarray_umath` in [PR #31992](https://github.com/numpy/numpy/pull/31992). That second one parks the state behind a transitional global, and follow-up PRs are replacing those reads with real per-module lookups so the global can go.
+- **Heap types:** the first batch of four self-contained types landed in [PR #32502](https://github.com/numpy/numpy/pull/32502): `flagsobj`, `busdaycalendar`, `_array_converter` and the array function dispatcher. A second batch, with the two array method types and two internal iterators, is in review in [PR #32552](https://github.com/numpy/numpy/pull/32552). What's left after that is the scary half: the other iterators (`flatiter`, `broadcast` and `nditer`), about 35 scalar types, `PyUFunc_Type`, and then `PyArray_Type`, `PyArrayDescr_Type` and `PyArrayDTypeMeta_Type`.
 
-That flag only changes to `Py_MOD_PER_INTERPRETER_GIL_SUPPORTED`, the value that lets NumPy load in interpreters with their own GIL, when every module is isolated and no shared global state is left. That day is not close. But it gets closer one PR at a time, and the Limited API work and the subinterpreter work are pushing the same rock up the same hill.
+For NumPy to load in interpreters with their own GIL, which is what `concurrent.interpreters` creates, that flag has to become `Py_MOD_PER_INTERPRETER_GIL_SUPPORTED`. That can only happen once every module is isolated and no shared global state is left. That day is not close. But it gets closer one PR at a time, and the Limited API work and the subinterpreter work are pushing the same rock up the same hill.
 
 ### What changes when it's done
 
