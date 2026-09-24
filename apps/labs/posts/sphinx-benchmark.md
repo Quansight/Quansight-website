@@ -18,20 +18,19 @@ Hi! I'm Aditi Juneja ([@Schefflera-Arboricola](https://github.com/Schefflera-Arb
 
 This post covers how to use the sphinx-benchmark extension, what it measures, and a little bit about the development process and my internship experience, what's still missing, and what's next! So, hopefully there's something for everyone :)
 
-
 ## A little demo: sphinx-benchmark
 
-1. Install it from [PyPI](https://pypi.org/project/sphinx-benchmark/) (`pip install sphinx-benchmark`). 
-2. Add it to your `conf.py`, ideally first in the list so it starts timing as early as possible (`extensions = ["sphinx_benchmark", ...]`). 
-3. Then build your docs as usual. When the build finishes, you get a `sphinx_benchmarks_<date>-<time>_<commit>.json` file in your docs directory (i.e. where the `conf.py` file lives). 
-4. Run `sphinx-benchmark run html`, and a full HTML benchmark report in `./sphinx_benchmark_report/` will be created! 
+1. Install it from [PyPI](https://pypi.org/project/sphinx-benchmark/) (`pip install sphinx-benchmark`).
+2. Add it to your `conf.py`, ideally first in the list so it starts timing as early as possible (`extensions = ["sphinx_benchmark", ...]`).
+3. Then build your docs as usual. When the build finishes, you get a `sphinx_benchmarks_<date>-<time>_<commit>.json` file in your docs directory (i.e. where the `conf.py` file lives).
+4. Run `sphinx-benchmark run html`, and a full HTML benchmark report in `./sphinx_benchmark_report/` will be created!
 5. Open `./sphinx_benchmark_report/index.html` and explore!
 
 To make sense of the data in the benchmarking report you mainly need two Sphinx ideas, and that's about all the Sphinx internals this post needs, I think. (Side note: you can also try putting all the generated benchmarking output files into your AI model and letting it do all the work and point out possible optimisations.)
 
 ## Events, handlers and gaps
 
-As Sphinx builds your docs, it announces what it's doing at fixed points: "the config is loaded", "this page has been read", "this page is about to be written", and so on. These announcements/notifications are called [events](https://www.sphinx-doc.org/en/master/extdev/event_callbacks.html). Extensions and themes plug into the build by registering functions, called handlers, that Sphinx runs whenever a particular event fires. If you've used hooks or callbacks anywhere else, it's the same idea. 
+As Sphinx builds your docs, it announces what it's doing at fixed points: "the config is loaded", "this page has been read", "this page is about to be written", and so on. These announcements/notifications are called [events](https://www.sphinx-doc.org/en/master/extdev/event_callbacks.html). Extensions and themes plug into the build by registering functions, called handlers, that Sphinx runs whenever a particular event fires. If you've used hooks or callbacks anywhere else, it's the same idea.
 
 Example: below, the `_fix_canonical_url` handler will be run every time the `html-page-context` event gets fired during the docs build:
 
@@ -98,7 +97,6 @@ The terminal tables are handy, but it's recommended to start with the HTML repor
 - an events and handlers page, where you can click any event or handler to see every single call record and its call tree and a function-wise breakdown table
 - a gaps page with the same information for every pair of events
 
-
 <div style={{display: 'flex', justifyContent: 'space-between'}}>
   <figure style={{width: '48%', margin: 0}}>
     <img src="/posts/sphinx-benchmark/2_events_n_handlers_page.png" alt="Events and handlers page of the report. For the autodoc-process-docstring event (15.01 seconds own time, 4.22% of the build, 4251 emissions), a table lists its handlers: mangle_docstrings from the numpydoc extension took 14.29 seconds over 4251 calls, and _process_autodoc_docstrings from jupyterlite_sphinx took 0.35 seconds, plus 0.36 seconds of unaccounted overhead. Below it, the builder-inited event table shows process_generate_options from sphinx.ext.autosummary taking 11.04 seconds in a single call." width="100%"/>
@@ -120,7 +118,6 @@ The terminal tables are handy, but it's recommended to start with the HTML repor
   </figure>
 </div>
 
-
 - a whole-build page with a call tree of the entire build, coloured by whether the build was inside a handler, inside an event, or in a gap; and a function-wise breakdown table for the entire build.
 
 <figure>
@@ -139,7 +136,7 @@ For more, please read [this guide](https://github.com/Schefflera-Arboricola/sphi
 
 - The extension forces a serial build: The extension records everything in the main process, so Sphinx falls back to a serial build even if you pass `-j auto`, and the extension warns you about it. So, your total build time will probably be longer than a parallel build.
 - It measures wall-clock time: Network calls, caches and background processes all count. In two NumPy builds a day apart, the intersphinx extension took 1.9 seconds in one and 110 seconds in the other, just fetching inventories from other projects' docs over the network. Run it more than once before concluding anything. For this particular case of intersphinx, you can cache the `objects.inv` file.
-- Sampling needs the GIL: On free-threaded Python the sampler switches itself off. Run with `PYTHON_GIL=1` to get call trees. 
+- Sampling needs the GIL: On free-threaded Python the sampler switches itself off. Run with `PYTHON_GIL=1` to get call trees.
 
 The [limitations section of the README](https://github.com/Schefflera-Arboricola/sphinx-benchmark#limitationspain-points) lists some more "not-so-serious" things that are good to know before you dive into this!
 
@@ -207,6 +204,5 @@ If your project has docs built with Sphinx, consider trying this sphinx-benchmar
 ## "Thank you"s!
 
 A big thank you to my mentors, Melissa and Agriya. This project started out open-ended, and a lot of what I learned came from their guidance, insights and support at every step of the way :) Thanks also to Stuart Mumford, Kayce Basques and everyone else who tried the extension and shared their results and feedback, and to the Quansight team for all the support and this opportunity :)
-
 
 Thank you for reading till the end :)
