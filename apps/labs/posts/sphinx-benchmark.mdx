@@ -39,7 +39,7 @@ app.connect("html-page-context", _fix_canonical_url)
 ```
 
 <figure>
-  <img src="/posts/sphinx-benchmark/sphinx-core-events-flow.png" alt="Flowchart from the Sphinx documentation of the order in which Sphinx's core events fire. Initialisation emits config-inited and builder-inited. Reading each added or changed document emits env-purge-doc, source-read, include-read, object-description-transform and doctree-read, followed by env-updated, env-get-updated and env-check-consistency. Writing emits write-started, then for each page doctree-resolved and html-page-context, with missing-reference and warn-missing-reference fired while resolving cross-references. The build ends with html-collect-pages and build-finished." />
+  <img style={{marginLeft: 'auto', marginRight: 'auto'}} src="/posts/sphinx-benchmark/sphinx-core-events-flow.png" alt="Flowchart from the Sphinx documentation of the order in which Sphinx's core events fire. Initialisation emits config-inited and builder-inited. Reading each added or changed document emits env-purge-doc, source-read, include-read, object-description-transform and doctree-read, followed by env-updated, env-get-updated and env-check-consistency. Writing emits write-started, then for each page doctree-resolved and html-page-context, with missing-reference and warn-missing-reference fired while resolving cross-references. The build ends with html-collect-pages and build-finished." />
   <figcaption style={{textAlign: "center"}}>Sphinx's core events, shown as blue boxes, and when they fire during a build (source: <a href="https://www.sphinx-doc.org/en/master/extdev/event_callbacks.html#core-events-overview">Sphinx documentation on core events</a>).</figcaption>
 </figure>
 
@@ -58,10 +58,10 @@ Knowing that a handler takes 45% of your build time or that two minutes disappea
 A background [daemon thread](https://docs.python.org/3/library/threading.html#threading.Thread.daemon) wakes up every millisecond (you can configure this sampling interval; 1 ms by default) and takes a snapshot of which function the docs build thread is running and which functions called it, and the whole function stack at that point in time (using [`sys._current_frames`](https://docs.python.org/3/library/sys.html#sys._current_frames)).
 
 <figure>
-  <p align="center">
+  <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '4%'}}>
     <img src="/posts/sphinx-benchmark/Eadweard_Muybridge-Sallie_Gardner_1878.png" alt="Eadweard Muybridge's 1878 photograph series The Horse in Motion: twelve numbered sepia frames in a three by four grid, each showing the silhouette of a jockey riding the horse Sallie Gardner at a different point of a single gallop stride across a track marked with vertical reference lines. The last frame shows the horse standing still." width="40%"/>
     <img src="/posts/sphinx-benchmark/Horse_in_Motion_Sallie_Gardner_animation.gif" alt="Looping animation made from Muybridge's Horse in Motion photographs: the separate still frames played in sequence show the horse and rider galloping continuously." width="40%"/>
-  </p>
+  </div>
   <figcaption style={{textAlign: "center"}}>Muybridge's "The Horse in Motion" (1878): the still frames on the left, and the same frames played as an animation on the right. (Source: <a href="https://en.wikipedia.org/wiki/The_Horse_in_Motion">Wikipedia</a>)</figcaption>
 </figure>
 
@@ -90,7 +90,7 @@ The terminal tables are handy, but it's recommended to start with the HTML repor
 - an overview page with the build information and a pie chart of which events and gaps take up the build (it's also the featured image for this blog post!)
 
 <figure>
-  <img src="/posts/sphinx-benchmark/1_overview_page.png" alt="Overview page of the sphinx-benchmark HTML report for a NumPy 2.6.dev0 docs build. A warning banner says sphinx-benchmark forces a serial build. Under the heading &quot;Where the build time went&quot;, three totals read 355.870 seconds wall clock, 56.104 seconds inside events (15.77%) and 299.765 seconds outside any event (84.23%). A pie chart with a legend lists the largest slices: the gap html-page-context to doctree-resolved at 121.9 seconds (34.25%), the gap autodoc-process-docstring to object-description-transform at 51.1 seconds (14.35%), the gap doctree-resolved to html-page-context at 40.9 seconds (11.51%), followed by smaller events and gaps, and everything else under 1% each at 7.67%." />
+  <img style={{marginLeft: 'auto', marginRight: 'auto'}} src="/posts/sphinx-benchmark/1_overview_page.png" alt="Overview page of the sphinx-benchmark HTML report for a NumPy 2.6.dev0 docs build. A warning banner says sphinx-benchmark forces a serial build. Under the heading &quot;Where the build time went&quot;, three totals read 355.870 seconds wall clock, 56.104 seconds inside events (15.77%) and 299.765 seconds outside any event (84.23%). A pie chart with a legend lists the largest slices: the gap html-page-context to doctree-resolved at 121.9 seconds (34.25%), the gap autodoc-process-docstring to object-description-transform at 51.1 seconds (14.35%), the gap doctree-resolved to html-page-context at 40.9 seconds (11.51%), followed by smaller events and gaps, and everything else under 1% each at 7.67%." />
   <figcaption style={{textAlign: "center"}}>The overview page for a NumPy docs build.</figcaption>
 </figure>
 
@@ -121,7 +121,7 @@ The terminal tables are handy, but it's recommended to start with the HTML repor
 - a whole-build page with a call tree of the entire build, coloured by whether the build was inside a handler, inside an event, or in a gap; and a function-wise breakdown table for the entire build.
 
 <figure>
-  <video controls aria-label="Screen recording of the Whole build page of the sphinx-benchmark HTML report for a NumPy docs build. The call tree starts at main and build_main at 99.6% of the build, and the view pans across it. Hovering a light-blue handler box, EventManager.emit, shows a tooltip with its file path and 9.777 seconds total time. Most of the tree is pink, meaning time spent in gaps between events, such as Builder.write_documents at 190 seconds or 53.5% of the build. The recording ends on the Function-wise breakdown tab, a table led by _last_modified_time from sphinx.util.osutil at 40.4 seconds, 11.35% of the build.">
+  <video style={{marginLeft: 'auto', marginRight: 'auto'}} controls aria-label="Screen recording of the Whole build page of the sphinx-benchmark HTML report for a NumPy docs build. The call tree starts at main and build_main at 99.6% of the build, and the view pans across it. Hovering a light-blue handler box, EventManager.emit, shows a tooltip with its file path and 9.777 seconds total time. Most of the tree is pink, meaning time spent in gaps between events, such as Builder.write_documents at 190 seconds or 53.5% of the build. The recording ends on the Function-wise breakdown tab, a table led by _last_modified_time from sphinx.util.osutil at 40.4 seconds, 11.35% of the build.">
     <source
       src="/posts/sphinx-benchmark/6_whole_build_page.mp4"
       type="video/mp4"
@@ -143,7 +143,7 @@ The [limitations section of the README](https://github.com/Schefflera-Arboricola
 ## First win: SunPy's docs build, 40% shorter build (1.67x or 67% faster)
 
 <figure>
-  <img src="/posts/sphinx-benchmark/sunpy_theme_optimisation_PR_ss.png" alt="Screenshot of the merged pydata-sphinx-theme pull request 2477, &quot;Add a configuration option for which templates to skip empty checks&quot;, opened by Cadair. The description says they used the sphinx-benchmark tool to see how long sunpy's documentation took to build with the sunpy-sphinx-theme, and pastes the benchmark output: a build time of 317 seconds, with the html-page-context event taking 208.28 seconds of own time (65.70% of the build) over 701 emissions, and its handlers update_and_remove_templates and set_secondary_sidebar_items from pydata_sphinx_theme." />
+  <img style={{marginLeft: 'auto', marginRight: 'auto'}} src="/posts/sphinx-benchmark/sunpy_theme_optimisation_PR_ss.png" alt="Screenshot of the merged pydata-sphinx-theme pull request 2477, &quot;Add a configuration option for which templates to skip empty checks&quot;, opened by Cadair. The description says they used the sphinx-benchmark tool to see how long sunpy's documentation took to build with the sunpy-sphinx-theme, and pastes the benchmark output: a build time of 317 seconds, with the html-page-context event taking 208.28 seconds of own time (65.70% of the build) over 701 emissions, and its handlers update_and_remove_templates and set_secondary_sidebar_items from pydata_sphinx_theme." />
   <figcaption style={{textAlign: "center"}}>Source: <a href="https://github.com/pydata/pydata-sphinx-theme/pull/2477">https://github.com/pydata/pydata-sphinx-theme/pull/2477</a></figcaption>
 </figure>
 
@@ -166,7 +166,7 @@ We went through the following versions:
 1. **Phases from log messages.** Sphinx's build is often described in phases (see the diagram below), so my first proof of concept added timestamps to Sphinx's log messages and matched them to phases. It broke quickly: extensions that log very little, or run quietly, left big blind spots, and matching messages to phases was fragile.
 
 <figure>
-  <img src="/posts/sphinx-benchmark/build_phases.png" alt="Diagram of five boxes connected by arrows from left to right: Initialization, Reading, Consistency checks, Resolving, Writing." />
+  <img style={{marginLeft: 'auto', marginRight: 'auto'}} src="/posts/sphinx-benchmark/build_phases.png" alt="Diagram of five boxes connected by arrows from left to right: Initialization, Reading, Consistency checks, Resolving, Writing." />
   <figcaption style={{textAlign: "center"}}>The phases of a Sphinx build. Source: <a href="https://www.sphinx-doc.org/en/master/extdev/index.html">https://www.sphinx-doc.org/en/master/extdev/index.html</a></figcaption>
 </figure>
 
