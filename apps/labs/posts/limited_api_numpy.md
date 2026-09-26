@@ -48,7 +48,7 @@ CPython also provides the glue that sticks C to Python: the C API. It's a giant 
 
 ![Flow diagram. NumPy's C code, which does the heavy lifting, goes into a C compiler. CPython's C API (functions, macros, structs) also feeds into the compiler. The compiler builds an extension module, a .so or .pyd file, which Python then loads with import numpy.](/posts/limited_api_numpy/c_extension_build_flow.png)
 
-Here's the problem. For years, NumPy and packages like it have used everything the C API offers, with no boundaries whatsoever. That includes macros that read straight out of CPython's internal structs at fixed memory offsets. Those internals are allowed to change between Python versions, so a binary built for Python 3.13 only works on 3.13.
+Here's the problem. For years, NumPy and packages like it have used everything the C API offers, with no boundaries whatsoever. NumPy runs on the full C API the way House runs on Vicodin: it kills the pain, it gets results, and every October, when CPython ships a new version, the withdrawal starts over. That includes macros that read straight out of CPython's internal structs at fixed memory offsets. Those internals are allowed to change between Python versions, so a binary built for Python 3.13 only works on 3.13.
 
 So every NumPy release needs a separate binary wheel for every OS, every CPU architecture and every Python version, and free-threaded builds count separately too. NumPy 2.5.3, for example, ships 65 wheels on PyPI for Python 3.12 to 3.15. Gotta build 'em all. And when a brand-new Python comes out, older NumPy releases simply have no wheels for it. The maintainers tell me this is painful. I don't package and ship NumPy myself, so I'll take their word for it, but it sounds like the kind of thing that gives you gray hair.
 
@@ -107,11 +107,13 @@ static PyType_Spec foo_spec = {
 PyObject *foo_type = PyType_FromModuleAndSpec(module, &foo_spec, NULL);
 ```
 
+There's an honesty upgrade in here too. A static type is baked into the binary and never really goes away, so its reference count is decoration. A heap type is an ordinary object: the count tracks who is actually using it, and when the last user lets go, the type is freed. A static type's refcount will tell you anything you want to hear. _♪ Heaps don't lie ♪_
+
 [CPython's guide to isolating extension modules](https://docs.python.org/3/howto/isolating-extensions.html) walks through converting static types to heap types.
 
 ### 2. Leave the macro, take the function call
 
-Lots of handy C API macros aren't in the Limited API because they read struct fields directly.
+Lots of handy C API macros aren't in the Limited API because they read struct fields directly. Each one has a spot, the way Sheldon has a spot: a fixed offset it goes back to every single time. The Limited API takes the spot away, because CPython wants to be free to rearrange the furniture between releases.
 
 Can we have `PyTuple_GET_ITEM`? We have `PyTuple_GET_ITEM` at home. `PyTuple_GET_ITEM` at home:
 
@@ -126,11 +128,13 @@ if (item == NULL) {
 }
 ```
 
-The same goes for friends like `PyList_GET_ITEM` and `PyTuple_GET_SIZE`, and for reaching into type fields like `Py_TYPE(obj)->tp_name`. Each gets swapped for a Limited-API-approved equivalent. For type fields, that means functions like `PyType_GetSlot()` and `PyType_GetName()`.
+The same goes for friends like `PyList_GET_ITEM` and `PyTuple_GET_SIZE`, and for reaching into type fields like `Py_TYPE(obj)->tp_name`. Each gets swapped for a Limited-API-approved equivalent. For type fields, that means functions like `PyType_GetSlot()` and `PyType_GetName()`. Say my name. Under the Limited API you can't read it off the struct, so you have to ask the type itself: `PyType_GetName()`.
+
+By the end of a port, you and the macros are done. _♪ Now you're just a macro that I used to know ♪_
 
 The function versions are a tiny bit slower. In most of NumPy that's noise, because the hot loops run over raw memory without touching the C API at all. But it's why benchmarks matter for this project.
 
-A couple of bonus gotchas for my fellow C extension folks. First, once you set `Py_LIMITED_API` to 3.11 or higher, `Python.h` stops including `<stdio.h>`, `<stdlib.h>`, `<string.h>` and `<errno.h>` for you, and from 3.13 it also drops `<ctype.h>` and `<unistd.h>`, so include what you use yourself. Second, instances of a heap type hold a reference to their type, so your `tp_dealloc` has to `Py_DECREF` the type after freeing the object.
+A couple of bonus gotchas for my fellow C extension folks. First, once you set `Py_LIMITED_API` to 3.11 or higher, `Python.h` stops including `<stdio.h>`, `<stdlib.h>`, `<string.h>` and `<errno.h>` for you, and from 3.13 it also drops `<ctype.h>` and `<unistd.h>`, so include what you use yourself. Second, instances of a heap type hold a reference to their type, so your `tp_dealloc` has to `Py_DECREF` the type after freeing the object. Forget that one and you get a leak that looks like a dozen other problems first. It's never lupus. It's always a reference count.
 
 ## Where things stand
 
@@ -145,7 +149,7 @@ That leaves the final boss: `multiarray` itself (`_multiarray_umath`), the core 
 
 ### Plot twist: it's off by default
 
-Here's the part that surprises people. Even with all those modules ported, a normal NumPy build still uses the full C API. The Limited API build is opt-in, and NumPy's top-level `meson.build` switches it off:
+Here's the part that surprises people. Those ported modules would be running on the Limited API right now, if it weren't for one meddling build option. A normal NumPy build still uses the full C API. The Limited API build is opt-in, and NumPy's top-level `meson.build` switches it off:
 
 ```
 project(
@@ -241,8 +245,8 @@ Python gives you three ways to put more than one CPU core to work, and each one 
 
 **Subinterpreters** keep the isolation and drop the process. They start faster than processes, they live in one address space, and each one has its own GIL, so they really do run at the same time. Data still doesn't flow freely. Most objects get copied with `pickle` when they cross over, simple immutable ones like `int`, `str` and `bytes` cross cheaply, and `memoryview` is one of the few things that actually shares memory between interpreters. Shared nothing by default, like multiprocessing, but a lot cheaper.
 
-**Free-threading** ([PEP 703](https://peps.python.org/pep-0703/)) takes the other road and removes the GIL, so ordinary threads in one interpreter run in parallel with real shared memory and no copying at all. For array work, where the whole point is one big block of memory you'd rather not duplicate, that's usually the faster answer. Python 3.14 made it officially supported ([PEP 779](https://peps.python.org/pep-0779/)), but it's still a separate build, not the default. And no GIL means no free lunch: you do your own locking. NumPy already supports it, which is not at all the same as saying every array operation is thread safe.
-
+**Free-threading** ([PEP 703](https://peps.python.org/pep-0703/)) takes the other road and removes the GIL, so ordinary threads in one interpreter run in parallel with real shared memory and no copying at all. For array work, where the whole point is one big block of memory you'd rather not duplicate, that's usually the faster answer. Python 3.14 made it officially supported ([PEP 779](https://peps.python.org/pep-0779/)), but it's still a separate build, not the default. And no GIL means no free lunch: you do your own locking, because when you play the game of threads, you win or you deadlock. NumPy already supports it, which is not at all the same as saying every array operation is thread safe.
+NumPy runs on the full C API the way House runs on Vicodin: it works, it works fast, and nobody wants to talk about the dependency.
 So, roughly: free-threading when you want speed on shared data, subinterpreters when you want isolation without paying for processes, multiprocessing when you want isolation and don't mind the bill. Today NumPy works on the free-threaded build, but it's still marked "not supported" for subinterpreters. The rest of this post is about changing that.
 
 ### How the Limited API walked me into it
@@ -256,7 +260,7 @@ Here's the overlap. The Limited API needs heap types because `PyTypeObject`'s la
 CPython's [Isolating Extension Modules](https://docs.python.org/3/howto/isolating-extensions.html) guide is the checklist. For NumPy it comes down to three things:
 
 1. **Multi-phase initialization ([PEP 489](https://peps.python.org/pep-0489/)).** With old-style (single-phase) init, the module is set up once and CPython copies its contents into any other interpreter that imports it, so they end up sharing state. Multi-phase init lets every interpreter build its own fresh module object. This is [issue #29021](https://github.com/numpy/numpy/issues/29021), an effort Adam Turner started before I arrived.
-2. **Per-module state.** Lots of C extensions keep their data in global C variables: caches, references to Python objects, module-level settings. That's one Netflix account for the whole extended family, and someone is definitely ruining your recommendations. Each module object needs its own private struct instead, reached through `PyModule_GetState()`. Tracked in [issue #31930](https://github.com/numpy/numpy/issues/31930).
+2. **Per-module state.** Lots of C extensions keep their data in global C variables: caches, references to Python objects, module-level settings. That's one Netflix account for the whole extended family, and someone is definitely ruining your recommendations. Phil's-osophy: if it's everybody's variable, it's nobody's variable. Each module object needs its own private struct instead, reached through `PyModule_GetState()`. Tracked in [issue #31930](https://github.com/numpy/numpy/issues/31930).
 
    ![Two panels compared. Top, before: two interpreters that both import numpy point to one shared block of C globals holding caches, cached objects and settings. Bottom, after: each interpreter has its own module state, reached through PyModule_GetState. A caption says each module object carries its own private struct.](/posts/limited_api_numpy/global_vs_per_module_state.png)
 
@@ -312,14 +316,21 @@ if __name__ == "__main__":
         print(list(pool.map(work, range(4))))
 ```
 
-Python 3.14 already ships `InterpreterPoolExecutor`, which has the same interface. Once NumPy supports subinterpreters, switching is just swapping the executor. The Mandalorian would approve. This is the way:
+Python 3.14 already ships `InterpreterPoolExecutor`, which has the same interface. Once NumPy supports subinterpreters, you swap the executor and move the import inside the worker, because every interpreter loads its own modules. The Mandalorian would approve. This is the way:
 
 ```python
 from concurrent.futures import InterpreterPoolExecutor
-...
+
+def work(seed):
+    import numpy as np  # each interpreter imports its own numpy
+    rng = np.random.default_rng(seed)
+    return float(rng.standard_normal(1_000_000).std())
+
+if __name__ == "__main__":
     with InterpreterPoolExecutor(max_workers=4) as pool:
+        print(list(pool.map(work, range(4))))
 ```
 
 Same code, same results, but the four workers are interpreters inside one process instead of four separate Python processes, so they start faster and use less memory. Data still gets copied when it crosses between interpreters, though, so for sharing one big array, free-threading is still the better tool. Today, the interpreter version fails as soon as a worker tries to import NumPy.
 
-That's all from me for now. Huge thanks to Matti, Nathan and Kumar for the mentorship. If you maintain a C extension and want to go on the same diet, [CPython's C API stability docs](https://docs.python.org/3/c-api/stable.html) are the place to start. And to my friends who read this far out of pure loyalty: I owe you a coffee.
+That's all from me for now. Huge thanks to Matti, Nathan and Kumar for the mentorship. If you maintain a C extension and want to go on the same diet, [CPython's C API stability docs](https://docs.python.org/3/c-api/stable.html) are the place to start. And to my friends who read this far out of pure loyalty: coffee and fries are on me, all you have to do is ask.
