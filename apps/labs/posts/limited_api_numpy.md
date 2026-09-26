@@ -18,7 +18,7 @@ Hey all, welcome to the blog! If you're reading this (and no, it's not too late)
 
 Here's the deal: I yap, you listen, and I sneak in pop culture references (starting with the title) and puns along the way. That's on purpose. You've been warned. In return, you'll learn a lot. Even if you're a Python geek, you'll probably still pick up something new, especially if you maintain a C extension.
 
-I spent the last three wonderful months working on NumPy as a Quansight intern, under the mentorship of Matti Picus, Nathan Goldbaum and Kumar Aditya. I actually started contributing before the internship began, mostly in masked arrays (`numpy.ma`), which I'd been using in SunPy. Not everyone cares about masked arrays, but I did, so I fixed a few things.
+I spent the last three wonderful months working on NumPy as a Quansight intern, under the mentorship of Matti Picus, Nathan Goldbaum and Kumar Aditya. I actually started contributing before the internship began, mostly in masked arrays (`numpy.ma`), which I'd been using in SunPy. The `ma` officially stands for masked array. I choose to believe it stands for Mandalorian. Not everyone cares about masked arrays, but I did, so I fixed a few things.
 
 My internship project was all about the Limited API. So what is this Limited API thing?
 
@@ -137,6 +137,10 @@ The function versions are a tiny bit slower. In most of NumPy that's noise, beca
 A couple of bonus gotchas for my fellow C extension folks. First, once you set `Py_LIMITED_API` to 3.11 or higher, `Python.h` stops including `<stdio.h>`, `<stdlib.h>`, `<string.h>` and `<errno.h>` for you, and from 3.13 it also drops `<ctype.h>` and `<unistd.h>`, so include what you use yourself. Second, instances of a heap type hold a reference to their type, so your `tp_dealloc` has to `Py_DECREF` the type after freeing the object. Forget that one and you get a leak that looks like a dozen other problems first. It's never lupus. It's always a reference count.
 
 ## Where things stand
+
+When I started, none of NumPy was built with the Limited API. The support that existed pointed outward: NumPy's headers already let _your_ extension define `Py_LIMITED_API` and still use NumPy's C API, with tests that build one in C and Cython.
+
+The first PR added the plumbing, `python.allow_limited_api` plus the per-module `limited_api:` switch, and ported `_pocketfft_umath` with it. After that, module by module, easiest first: the nine Cython modules in `numpy.random` took three lines, while `_multiarray_umath` was always going to be last, because everything else leans on it. The ground rule from the [tracking issue](https://github.com/numpy/numpy/issues/31913): stay internal, no change to performance, usability or NumPy's own C API.
 
 Ported and merged so far:
 
@@ -259,8 +263,8 @@ Here's the overlap. The Limited API needs heap types because `PyTypeObject`'s la
 
 CPython's [Isolating Extension Modules](https://docs.python.org/3/howto/isolating-extensions.html) guide is the checklist. For NumPy it comes down to three things:
 
-1. **Multi-phase initialization ([PEP 489](https://peps.python.org/pep-0489/)).** With old-style (single-phase) init, the module is set up once and CPython copies its contents into any other interpreter that imports it, so they end up sharing state. Multi-phase init lets every interpreter build its own fresh module object. This is [issue #29021](https://github.com/numpy/numpy/issues/29021), an effort Adam Turner started before I arrived.
-2. **Per-module state.** Lots of C extensions keep their data in global C variables: caches, references to Python objects, module-level settings. That's one Netflix account for the whole extended family, and someone is definitely ruining your recommendations. Phil's-osophy: if it's everybody's variable, it's nobody's variable. Each module object needs its own private struct instead, reached through `PyModule_GetState()`. Tracked in [issue #31930](https://github.com/numpy/numpy/issues/31930).
+1. **Multi-phase initialization ([PEP 489](https://peps.python.org/pep-0489/)).** With old-style (single-phase) init, the module is set up once and CPython copies its contents into any other interpreter that imports it, so they end up sharing state. Multi-phase init lets every interpreter build its own fresh module object. Adam Turner had already converted the main modules before I arrived, as part of [issue #29021](https://github.com/numpy/numpy/issues/29021).
+2. **Per-module state.** Lots of C extensions keep their data in global C variables: caches, references to Python objects, module-level settings. That's one Netflix account for the whole extended family, and someone is definitely ruining your recommendations. Phil's-osophy: if it's everybody's variable, it's nobody's variable. Each module object needs its own private struct instead, reached through `PyModule_GetState()`. Nathan's free-threading work in 2.1 had already cleared out a lot of those globals or made them thread-local, which gave this a head start. Tracked in [issue #31930](https://github.com/numpy/numpy/issues/31930).
 
    ![Two panels compared. Top, before: two interpreters that both import numpy point to one shared block of C globals holding caches, cached objects and settings. Bottom, after: each interpreter has its own module state, reached through PyModule_GetState. A caption says each module object carries its own private struct.](/posts/limited_api_numpy/global_vs_per_module_state.png)
 
