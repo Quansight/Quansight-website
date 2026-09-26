@@ -87,7 +87,7 @@ so the fit approaches a straight line. If you know ridge regression, this is the
 penalty term.
 
 When you optimize $J$ over the space of all smooth functions, you get a Spline. For a more detailed derivation, consult the companion write-up 
-[I wrote during the internship](https://github.com/aadya940/scipy-bspline-testing/blob/main/B_Splines_with_arbitary_knots-gcv.pdf).
+[I wrote during the internship](https://doi.org/10.5281/zenodo.22983807).
 
 
 ## Splines
@@ -161,7 +161,7 @@ Here, $W$ is a diagonal matrix of optional per-point weights, the identity matri
 
 The most common choice is cubic splines, piecewise polynomials of degree $k = 3$, and that is what `make_smoothing_spline` builds. The matrices above are banded (<i>only a few diagonals are non-zero</i>). The design matrix $X$ has at most `k + 1` non-zeros per row, and the matrix we solve, $X^\top W X + \lambda\,\Omega$, is banded too, with `2k + 1` diagonals. So for `1,000,000` datapoints the number of non-zero elements is $(k + 1) * (num. datapoints)$, which is $4,000,000$, not $10^{12}$.
 
-To construct the $\Omega$ matrix, we have two options, either differentiate and integrate numerically every time, or derive a general matrix form of $\Omega$ once, which circumvents the whole procedure. We went with the second. Deriving $\Omega$ using papers and books going back to the 1980's was about half of my internship, the complete derivation is available in [my companion write-up](https://github.com/aadya940/scipy-bspline-testing/blob/main/B_Splines_with_arbitary_knots-gcv.pdf). We validated the result against R's `fda` package as a black-box oracle, the two match to thirteen decimal places.
+To construct the $\Omega$ matrix, we have two options, either differentiate and integrate numerically every time, or derive a general matrix form of $\Omega$ once, which circumvents the whole procedure. We went with the second. Deriving $\Omega$ using papers and books going back to the 1980's was about half of my internship, the complete derivation is available in [my companion write-up](https://doi.org/10.5281/zenodo.22983807). We validated the result against R's `fda` package as a black-box oracle, the two match to thirteen decimal places.
 
 What about other ecosystems? R's libraries do have the general penalty, but they are GPL licensed, so we deliberately did not look at their source code, only compared against their numerical output. Most of MATLAB, Octave, Julia etc. don't support user defined knot vectors at all.
 
