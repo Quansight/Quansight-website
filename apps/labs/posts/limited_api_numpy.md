@@ -337,4 +337,6 @@ if __name__ == "__main__":
 
 Same code, same results, but the four workers are interpreters inside one process instead of four separate Python processes, so they start faster and use less memory. Data still gets copied when it crosses between interpreters, though, so for sharing one big array, free-threading is still the better tool. Today, the interpreter version fails as soon as a worker tries to import NumPy.
 
+If you want to follow along, both efforts have tracking issues you can subscribe to: [#31913](https://github.com/numpy/numpy/issues/31913) for the Limited API adoption, which keeps a table of every module and where it stands, and [#32451](https://github.com/numpy/numpy/issues/32451) for subinterpreter support, which links out to the sub-issues for multi-phase init, per-module state and heap types.
+
 That's all from me for now. Huge thanks to Matti, Nathan and Kumar for the mentorship. If you maintain a C extension and want to go on the same diet, [CPython's C API stability docs](https://docs.python.org/3/c-api/stable.html) are the place to start. And to my friends who read this far out of pure loyalty: coffee and fries are on me, all you have to do is ask.
