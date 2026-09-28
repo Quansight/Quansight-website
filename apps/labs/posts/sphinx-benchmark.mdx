@@ -83,6 +83,8 @@ Roughly 44% of that gap is Sphinx checking the modification times and checksums 
 
 Keep in mind that these numbers are estimates derived from the collected samples, not exact measurements taken with `perf_counter()`. Sampling also adds a little overhead to the build process-- but you can play around with different values of the `sphinx_benchmark_sampling_interval` config to minimise that for your project's docs builds. Also, if you only want the event, handler and gap timings, set `disable_sampling = True` in your `conf.py`.
 
+If your docs build successfully on Python 3.15, it is recommended to set `disable_sampling = True` and use the newly added [Tachyon](https://docs.python.org/3.15/library/profiling.sampling.html) for sampling; the extension's README explains [how to use it](https://github.com/Schefflera-Arboricola/sphinx-benchmark#sampling-with-python-315-tachyon).
+
 ## The HTML report
 
 The terminal tables are handy, but it's recommended to start with the HTML report. It has:
@@ -189,9 +191,9 @@ Personal note: One more thing I learned. Asking for help has always been hard fo
 
 [sphinx-benchmark 0.2.0](https://pypi.org/project/sphinx-benchmark/) is out, but it's still in the early stages of development, so expect bugs (and please report them!) and changes without any deprecation cycles. The big open to-dos are:
 
+- Sampling with Tachyon: Python 3.15 adds [Tachyon](https://docs.python.org/3.15/library/profiling.sampling.html), a sampling profiler in the standard library (`profiling.sampling`). It samples the build from a separate process instead of from a thread inside it, so it adds much less overhead and also works on free-threaded Python ([#31](https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/31)). It also comes with flame graphs, heatmaps and a timeline view. The plan is to use Tachyon for sphinx-benchmark's sampling ([#41](https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/41)).
 - Parallel builds: Supporting `-j` means collecting timings from worker processes and keeping sampling correct alongside them ([#4](https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/4)).
 - Benchmark different Scientific Python projects and based on those benchmarks implement some optimisations in some high-impact projects i.e. projects that are widely used like pydata-sphinx-theme or Sphinx itself.
-- Free-threaded Python support for sampling ([#31](https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/31)).
 - Improve the sphinx-benchmark CLI ([#6](https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues/6)).
 - And many more open issues: https://github.com/Schefflera-Arboricola/sphinx-benchmark/issues
 
