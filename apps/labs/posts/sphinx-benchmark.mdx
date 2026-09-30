@@ -49,7 +49,14 @@ That alone answers a lot. In Matplotlib's build, a single handler, Sphinx-Galler
 
 Then there's the part that surprised all of us: the **gaps**. Events are checkpoints, not phases, and a lot of work happens between two checkpoints with no event around it: parsing source files, resolving cross-references, writing HTML. sphinx-benchmark measures a gap as the time from one event ending to the next one starting, and groups gaps by the pair of events on either side. So `html-page-context -> doctree-resolved` on the gaps.html page means "the time between finishing one page's HTML context and starting to resolve the next page", added up over 2290 occurrences for the NumPy docs build (i.e. 121.89 seconds and 34.25% of total build time).
 
-How much of a build sits in gaps? About half for Matplotlib and NetworkX, 84% for NumPy, and over 90% for pandas. So how do you benchmark these gaps? And if a single handler like `generate_gallery_rst` takes up 40-50% of the build time then how do you further profile and benchmark that? The next section answers all this!
+Putting it all together, here's a (very) simplified picture of a docs build in terms of events, handlers and gaps:
+
+<figure>
+  <img style={{marginLeft: 'auto', marginRight: 'auto'}} src="/posts/sphinx-benchmark/simplified_view_of_a_build.png" alt="Diagram of a Sphinx build as a left-to-right timeline. Three boxes labelled Event emission A, B and C sit in a row, separated by Gap 1 (between A and B) and Gap 2 (between B and C). Under each event emission, three handlers run one after another, connected by arrows: Handler A1, A2 and A3 under event A, B1 to B3 under event B, and C1 to C3 under event C. Sphinx is still working under the gaps." />
+  <figcaption style={{textAlign: "center"}}>A simplified view of a build: each event emission runs its handlers one after another, and a gap is the time between one event finishing and the next one starting.</figcaption>
+</figure>
+
+But, how much of a build sits in gaps? About half for Matplotlib and NetworkX, 84% for NumPy, and over 90% for pandas. So how do you benchmark these gaps? And if a single handler like `generate_gallery_rst` takes up 40-50% of the build time then how do you further profile and benchmark that? The next section answers all this!
 
 ## Looking more closely with sampling
 
