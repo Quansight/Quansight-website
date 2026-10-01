@@ -1,7 +1,7 @@
 ---
 title: 'Introducing sphinx-benchmark: Why are my Sphinx docs builds taking so long?!'
 authors: [aditi-juneja]
-published: September 24, 2026
+published: October 01, 2026
 description: 'Introducing sphinx-benchmark: a Sphinx extension that breaks a documentation build down by event, handler, gap, function and call trees, so you can see which extension, theme, or part of the Sphinx build is slowing your docs down.'
 category: [Developer workflows, Documentation, Internship, OSS Experience]
 featuredImage:
@@ -14,7 +14,7 @@ hero:
 
 If you maintain a Scientific Python project, your documentation is probably built with [Sphinx](https://www.sphinx-doc.org/). NumPy, SciPy, Matplotlib, pandas, CPython and many others use it, and on a big project a full docs build takes anywhere from a few minutes to sometimes hours. That build runs on every pull request, every commit-- and across the ecosystem, all those repeated minutes of CI add up to real compute and energy. On [Sphinx's PyPI stats](https://pypistats.org/packages/sphinx) you can see that Sphinx gets installed more than 4 million times per week and most of those installations happen via CI docs runs. Yet when someone asks "why are my Sphinx docs builds taking so long?", at best, they get an educated guess. Until recently, there was no benchmarking suite or profiling setup, so most performance discussions relied on these educated guesses. But before anyone could make builds faster, we needed a tool that could replace this guessing.
 
-Hi! I'm Aditi Juneja ([@Schefflera-Arboricola](https://github.com/Schefflera-Arboricola)), and I (mentored by [Melissa Weber Mendonça](https://github.com/melissawm) and [Agriya Khetarpal](https://github.com/agriyakhetarpal)) spent the last few months turning that educated guess into a concrete benchmarking report. The final result is [sphinx-benchmark](https://github.com/Schefflera-Arboricola/sphinx-benchmark), a Sphinx extension that tells you where the time in a docs build goes: which function, in which extension or theme or module. Spoiler alert: a few weeks after its first release, [@Cadair](https://github.com/Cadair) and [@Yann-P](https://github.com/Yann-P) used it to find where their docs builds were spending most of the time, which led to a theme fix that took the Astropy docs build from 769 to 245 seconds, i.e. ~3x faster!
+Hi! I'm Aditi Juneja ([@Schefflera-Arboricola](https://github.com/Schefflera-Arboricola)), and I (mentored by [Melissa Weber Mendonça](https://github.com/melissawm) and [Agriya Khetarpal](https://github.com/agriyakhetarpal)) spent the last few months turning that educated guess into a concrete benchmarking report. The final result is [sphinx-benchmark](https://github.com/Schefflera-Arboricola/sphinx-benchmark), a Sphinx extension that tells you where the time in a docs build goes: which function, in which extension or theme or module. Spoiler alert: a few weeks after its first release, [Stuart Mumford](https://github.com/Cadair) and [Yann Pellegrini](https://github.com/Yann-P) used it to find where their docs builds were spending most of the time, which led to a theme fix that took the Astropy docs build from 769 to 245 seconds, i.e. ~3x faster!
 
 This post covers how to use the sphinx-benchmark extension, what it measures, and a little bit about the development process and my internship experience, what's still missing, and what's next! So, hopefully there's something for everyone :)
 
@@ -56,13 +56,13 @@ Putting it all together, here's a (very) simplified picture of a docs build in t
   <figcaption style={{textAlign: "center"}}>A simplified view of a build: each event emission runs its handlers one after another, and a gap is the time between one event finishing and the next one starting.</figcaption>
 </figure>
 
-But, how much of a build sits in gaps? About half for Matplotlib and NetworkX, 84% for NumPy, and over 90% for pandas. So how do you benchmark these gaps? And if a single handler like `generate_gallery_rst` takes up 40-50% of the build time then how do you further profile and benchmark that? The next section answers all this!
+But, how much of a build sits in gaps? About half for Matplotlib and NetworkX, 84% for NumPy, and over 90% for pandas. So how do you benchmark these gaps? And if a single handler like `generate_gallery_rst` takes up 40-50% of the build time, then how do you further profile and benchmark that? The next section answers all this!
 
 ## Looking more closely with sampling
 
 Knowing that a handler takes 45% of your build time or that two minutes disappear between two events is useful, but it doesn't tell you what to fix/optimise. For that, sphinx-benchmark samples the entire build.
 
-A background [daemon thread](https://docs.python.org/3/library/threading.html#threading.Thread.daemon) wakes up every millisecond (you can configure this sampling interval; 1 ms by default) and takes a snapshot of which function the docs build thread is running and which functions called it, and the whole function stack at that point in time (using [`sys._current_frames`](https://docs.python.org/3/library/sys.html#sys._current_frames)).
+A background [daemon thread](https://docs.python.org/3/library/threading.html#threading.Thread.daemon) wakes up every millisecond (you can configure this sampling interval) and takes a snapshot of which function the docs build thread is running and which functions called it, and the whole function stack at that point in time (using [`sys._current_frames`](https://docs.python.org/3/library/sys.html#sys._current_frames)).
 
 <figure>
   <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '4%'}}>
