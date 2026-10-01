@@ -60,7 +60,7 @@ The full C API is the great power. The build matrix is the great responsibility.
 
 The Limited API is a subset of the C API that CPython promises to keep stable. Or, in the immortal words of Kevin from The Office: why use a lot of API when few API do trick?
 
-If your extension sticks to the Limited API, you pick a minimum Python version, say 3.13, and compile once. In C, that's `#define Py_LIMITED_API 0x030D0000` before including `Python.h`. In practice your build tool usually handles it: in Meson, you add `limited_api: '3.13'` to an extension module and Meson defines it for you (more on that below). The resulting wheel works on 3.13 and every version after it. These are called `abi3` wheels because they target CPython's Stable ABI (Application Binary Interface). The Limited API is the promise for your source code, and the Stable ABI is the same promise for your compiled binary.
+If your extension sticks to the Limited API, you pick a minimum Python version, say 3.13, and compile once. In C, that's `#define Py_LIMITED_API 0x030D0000` before including `Python.h`. In practice your build tool usually handles it: in Meson, you add `limited_api: '3.13'` to an extension module and Meson defines it for you (more on that below). The resulting wheel works on 3.13 and every version after it. These are called `abi3` wheels because they target CPython's Stable ABI (Application Binary Interface). The Limited API is the promise for your source code, and the Stable ABI is the same promise for your compiled binary. If the API vs. ABI difference still feels fuzzy, one of my mentors, Nathan Goldbaum, explains it really well in his EuroPython talk [What every Python developer should know about the CPython ABI](https://www.youtube.com/watch?v=An8lO29SxXE&t=140s).
 
 So instead of one wheel per OS × architecture × Python version, you get one wheel to rule them all (per OS and architecture, anyway). Python 3.16 drops? Your old wheel just works.
 
@@ -251,6 +251,9 @@ Python gives you three ways to put more than one CPU core to work, and each one 
 
 **Free-threading** ([PEP 703](https://peps.python.org/pep-0703/)) takes the other road and removes the GIL, so ordinary threads in one interpreter run in parallel with real shared memory and no copying at all. For array work, where the whole point is one big block of memory you'd rather not duplicate, that's usually the faster answer. Python 3.14 made it officially supported ([PEP 779](https://peps.python.org/pep-0779/)), but it's still a separate build, not the default. And no GIL means no free lunch: you do your own locking, because when you play the game of threads, you win or you deadlock. NumPy already supports it, which is not at all the same as saying every array operation is thread safe.
 NumPy runs on the full C API the way House runs on Vicodin: it works, it works fast, and nobody wants to talk about the dependency.
+
+If you'd rather watch than read, Samet Yaslan's EuroPython talk [Python in Parallel: Sub-Interpreters vs. NoGIL vs. Multiprocessing](https://www.youtube.com/watch?v=HdTtJKevxfQ&t=265s) puts all three side by side.
+
 So, roughly: free-threading when you want speed on shared data, subinterpreters when you want isolation without paying for processes, multiprocessing when you want isolation and don't mind the bill. Today NumPy works on the free-threaded build, but it's still marked "not supported" for subinterpreters. The rest of this post is about changing that.
 
 ### How the Limited API walked me into it
