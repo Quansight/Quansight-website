@@ -1,7 +1,7 @@
 ---
 title: 'The things you own end up owning you'
 authors: [pratham-hole]
-published: September 30, 2026
+published: October 1, 2026
 description: 'A recap of my Quansight internship porting NumPy extension modules to the Limited API: heap types, swapping macros for function calls, and the side quest it started, getting NumPy ready for subinterpreters.'
 category: [PyData ecosystem, Packaging, Internship]
 featuredImage:
@@ -339,4 +339,10 @@ Same code, same results, but the four workers are interpreters inside one proces
 
 If you want to follow along, both efforts have tracking issues you can subscribe to: [#31913](https://github.com/numpy/numpy/issues/31913) for the Limited API adoption, which keeps a table of every module and where it stands, and [#32451](https://github.com/numpy/numpy/issues/32451) for subinterpreter support, which links out to the sub-issues for multi-phase init, per-module state and heap types.
 
-That's all from me for now. Huge thanks to Matti, Nathan and Kumar for the mentorship. If you maintain a C extension and want to go on the same diet, [CPython's C API stability docs](https://docs.python.org/3/c-api/stable.html) are the place to start. And to my friends who read this far out of pure loyalty: coffee and fries are on me, all you have to do is ask.
+## That's all, folks
+
+If you maintain a C extension and want to put it on the same diet, [CPython's C API stability docs](https://docs.python.org/3/c-api/stable.html) are the place to start.
+
+You might be wondering how I knew all of this. Truth is, when I started the internship, I didn't know most of it. I had plenty of "what are these folks even talking about?" moments. Each time, I looked the thing up and went down the rabbit hole until it clicked. Call it curiosity-driven development. I think it matters more than ever now that AI tools are this good, because it is easy to get things done without ever understanding them.
+
+So a huge thank you to my mentors, Matti, Nathan and Kumar, for giving me the room to slow down and actually understand things, instead of just getting them done with AI. Also, a big shoutout to Melissa for keeping our weekly syncs fun. And to my friends who read this far out of pure loyalty: coffee and fries are on me, all you have to do is ask.
