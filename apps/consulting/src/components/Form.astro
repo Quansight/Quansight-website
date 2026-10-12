@@ -11,13 +11,10 @@
 
 type Field = {
   name: string;
-  kind: 'input' | 'textarea' | 'select';
   type?: string;
   required?: boolean;
   placeholder?: string;
   label?: string;
-  rows?: number;
-  options?: string[];
 };
 
 interface Props {
@@ -48,32 +45,14 @@ const FIELD_CLASS =
           {field.label}
         </label>
       )}
-      {field.kind === 'textarea' ? (
-        <textarea
-          id={`field-${field.name}`}
-          name={field.name}
-          rows={field.rows ?? 4}
-          required={field.required}
-          placeholder={field.placeholder}
-          class={FIELD_CLASS}
-        />
-      ) : field.kind === 'select' ? (
-        <select id={`field-${field.name}`} name={field.name} required={field.required} class={FIELD_CLASS}>
-          <option value="">Select</option>
-          {(field.options ?? []).map((option) => (
-            <option value={option}>{option}</option>
-          ))}
-        </select>
-      ) : (
-        <input
-          id={`field-${field.name}`}
-          name={field.name}
-          type={field.type ?? 'text'}
-          required={field.required}
-          placeholder={field.placeholder}
-          class={FIELD_CLASS}
-        />
-      )}
+      <input
+        id={`field-${field.name}`}
+        name={field.name}
+        type={field.type ?? 'text'}
+        required={field.required}
+        placeholder={field.placeholder}
+        class={FIELD_CLASS}
+      />
     </div>
   ))}
 
@@ -100,7 +79,7 @@ const FIELD_CLASS =
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-        button.disabled = true;
+      button.disabled = true;
 
       let ok = false;
       let message = 'Something went wrong. Please try again.';
@@ -115,11 +94,11 @@ const FIELD_CLASS =
         // Network failure or a non-JSON response: keep the generic message.
       }
 
-          status.hidden = false;
+      status.hidden = false;
       status.dataset.state = ok ? 'success' : 'error';
       status.textContent = message;
       if (ok) form.reset();
-          button.disabled = false;
+      button.disabled = false;
     });
   });
 </script>

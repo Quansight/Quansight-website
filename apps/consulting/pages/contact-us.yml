@@ -73,7 +73,6 @@ blocks:
               name: "Mailing List Signup"
               fields:
                 - name: "EMAIL"
-                  kind: "input"
                   type: "email"
                   required: true
                   placeholder: "Email"
