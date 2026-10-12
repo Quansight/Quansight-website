@@ -94,45 +94,32 @@ const FIELD_CLASS =
   // Without JS the form still posts to /api/subscribe and the function
   // runs, it just leaves the visitor on a blank JSON page.
   document.querySelectorAll<HTMLFormElement>('form[data-mailchimp-form]').forEach((form) => {
+    // Both elements are rendered by this component, so they always exist.
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const status = form.querySelector<HTMLParagraphElement>('[data-form-status]')!;
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-
-      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-      const status = form.querySelector<HTMLParagraphElement>('[data-form-status]');
-      const originalLabel = button?.textContent ?? '';
-      if (button) {
         button.disabled = true;
-        button.textContent = 'Submitting…';
-      }
 
+      let ok = false;
+      let message = 'Something went wrong. Please try again.';
       try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(form))),
-        });
+        // URL-encoded, same as the no-JS post (Vercel doesn't parse multipart bodies).
+        const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
+        const response = await fetch(form.action, { method: 'POST', body });
         const data = await response.json();
-
-        if (status) {
-          status.hidden = false;
-          status.dataset.state = response.ok ? 'success' : 'error';
-          status.textContent = response.ok
-            ? 'Thanks for subscribing!'
-            : data.error || 'Something went wrong. Please try again.';
-        }
-        if (response.ok) form.reset();
+        ok = response.ok;
+        message = ok ? 'Thanks for subscribing!' : data.error || message;
       } catch {
-        if (status) {
-          status.hidden = false;
-          status.dataset.state = 'error';
-          status.textContent = 'Something went wrong. Please try again.';
-        }
-      } finally {
-        if (button) {
-          button.disabled = false;
-          button.textContent = originalLabel;
-        }
+        // Network failure or a non-JSON response: keep the generic message.
       }
+
+          status.hidden = false;
+      status.dataset.state = ok ? 'success' : 'error';
+      status.textContent = message;
+      if (ok) form.reset();
+          button.disabled = false;
     });
   });
 </script>
