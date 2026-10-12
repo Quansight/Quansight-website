@@ -149,13 +149,10 @@ blocks:
         name: "Mailing List Signup"
         fields:
           - name: "EMAIL"
-            kind: "input"
             type: "email"
             required: true
             placeholder: "Email"
-            label: "Email"
         submit: "Submit"
-        audience: "mailchimp"
         submitIcon: true
     - - type: columns
         columns:
@@ -166,7 +163,6 @@ blocks:
               height: 181
         columnBackgrounds:
           - "#452392"
-        paddingRight: "5%"
   columnBackgrounds:
     - "#452392"
     - null
@@ -174,10 +170,10 @@ blocks:
     - 50
     - 50
   columnPaddings:
-    - top: "0%"
-      right: "0%"
-      bottom: "0%"
-      left: "15%"
+    - top: "8%"
+      right: "8%"
+      bottom: "8%"
+      left: "8%"
     - null
   gapPx: 0
   marginBottom: "5%"

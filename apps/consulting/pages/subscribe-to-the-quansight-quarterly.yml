@@ -31,13 +31,10 @@ blocks:
             name: "New Form"
             fields:
               - name: "EMAIL"
-                kind: "input"
                 type: "email"
                 required: true
                 placeholder: "Your Email"
-                label: "Your Email"
             submit: "Subscribe >"
-            audience: "mailchimp"
           - type: columns
             columns:
               - - type: heading
