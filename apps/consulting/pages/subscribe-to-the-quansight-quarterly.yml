@@ -34,7 +34,6 @@ blocks:
                 type: "email"
                 required: true
                 placeholder: "Your Email"
-                label: "Your Email"
             submit: "Subscribe >"
           - type: columns
             columns:

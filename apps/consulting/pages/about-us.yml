@@ -178,7 +178,6 @@ blocks:
             type: "email"
             required: true
             placeholder: "Email"
-            label: "Email"
         submit: "Submit"
         submitIcon: true
     - - type: columns

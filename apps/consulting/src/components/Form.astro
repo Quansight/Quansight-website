@@ -14,7 +14,6 @@ type Field = {
   type?: string;
   required?: boolean;
   placeholder?: string;
-  label?: string;
 };
 
 interface Props {
@@ -39,21 +38,15 @@ const FIELD_CLASS =
   data-mailchimp-form
 >
   {fields.map((field) => (
-    <div class="flex flex-col gap-[0.6rem]">
-      {field.label && (
-        <label class="text-[1.4rem] font-bold leading-[2rem]" for={`field-${field.name}`}>
-          {field.label}
-        </label>
-      )}
-      <input
-        id={`field-${field.name}`}
-        name={field.name}
-        type={field.type ?? 'text'}
-        required={field.required}
-        placeholder={field.placeholder}
-        class={FIELD_CLASS}
-      />
-    </div>
+    <input
+      id={`field-${field.name}`}
+      name={field.name}
+      type={field.type ?? 'text'}
+      required={field.required}
+      placeholder={field.placeholder}
+      aria-label={field.placeholder}
+      class={FIELD_CLASS}
+    />
   ))}
 
   <button
