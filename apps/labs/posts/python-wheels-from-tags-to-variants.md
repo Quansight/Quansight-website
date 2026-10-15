@@ -84,8 +84,8 @@ to support. Each wheel features three platform tags:
 - A platform tag specifying the compatible platform (usually operating system
   and CPU architecture)
 
-<div style={{ textAlign: "center" }}>
-<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<div style="text-align: center">
+<figure style="width: auto; margin: 0 2em; display: inline-block; vertical-align: top">
   <img src="/posts/python-wheels-from-tags-to-variants/tag-combo.png"
     width="648" height="108" alt="A visualization of a wheel filename with
 interchangeable tags. The filename consists of 'example-1.2.3', followed
@@ -173,8 +173,8 @@ It's not like this problem cropped up overnight. Packages have needed more
 variants than platform tags supported for a while now, so how are they working
 around the problem?
 
-<div style={{ textAlign: "center" }}>
-<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<div style="text-align: center">
+<figure style="width: auto; margin: 0 2em; display: inline-block; vertical-align: top">
   <img src="/posts/python-wheels-from-tags-to-variants/pytorch.png"
     width="907" height="286" alt="A grid-based chooser for PyTorch versions.
 Individual rows provide the choice of PyTorch Build (stable or nightly),
@@ -208,8 +208,8 @@ of the same packages, the results can get pretty surprising. In fact, this l
 to the work on [PEP 766](https://peps.python.org/pep-0766/), in an attempt
 to improve security when using multiple indexes (currently in draft).
 
-<div style={{ textAlign: "center" }}>
-<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<div style="text-align: center">
+<figure style="width: auto; margin: 0 2em; display: inline-block; vertical-align: top">
   <img src="/posts/python-wheels-from-tags-to-variants/jax.png"
     width="790" height="342" alt="A table listing supported JAX versions.
 The rows are CPU, NVIDIA GPU, Google Cloud TPU, AMD GPU, Apple GPU
@@ -246,8 +246,8 @@ To sidestep this limitation, we need a more distributed architecture, one wher
 each package can independently devise how to select between its variants.
 This is how we reached an architecture based on plugins.
 
-<div style={{ textAlign: "center" }}>
-<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<div style="text-align: center">
+<figure style="width: auto; margin: 0 2em; display: inline-block; vertical-align: top">
   <img src="/posts/python-wheels-from-tags-to-variants/variant-flow.png"
     width="683" height="486" alt="A flow chart showing interaction between
 wheel-related software and provider plugins. A build backend (such
@@ -301,8 +301,8 @@ Every property is a 3-element tuple consisting of the namespace (one for eac
 Here, two providers are used: one representing CUDA installation (`nvidia`
 namespace) and one representing x86_64 CPU properties (`x86_64` namespace).
 
-<div style={{ textAlign: "center" }}>
-<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<div style="text-align: center">
+<figure style="width: auto; margin: 0 2em; display: inline-block; vertical-align: top">
   <img src="/posts/python-wheels-from-tags-to-variants/property-examples.png"
     width="761" height="313" alt="A diagram showing example properties from two plugins.
 The 'nvidia' plugin provides 'cuda_version_lower_bound' with values of 12.8, 12.7, 12.6, 12.5, …
@@ -386,8 +386,8 @@ variants, so rather than expecting `variants.json`
 to be maintained separately, we included all these details in project's sources
 and passed them through the wheels, making it possible to generate `variants.json` automatically.
 
-<div style={{ textAlign: "center" }}>
-<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<div style="text-align: center">
+<figure style="width: auto; margin: 0 2em; display: inline-block; vertical-align: top">
   <img src="/posts/python-wheels-from-tags-to-variants/variant-info-transit.png"
     width="881" height="417" alt="A diagram showing transit of variant
 information from pyproject.toml through a wheel to variants.json. pyproject.toml
@@ -518,8 +518,8 @@ a gut feeling that CUDA wins, but this is not a general rule. Things become
 even harder when you have to choose between a CUDA and a ROCm wheel (say,
 on a machine with both an NVIDIA and an AMD GPU installed).
 
-<div style={{ textAlign: "center" }}>
-<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<div style="text-align: center">
+<figure style="width: auto; margin: 0 2em; display: inline-block; vertical-align: top">
   <img src="/posts/python-wheels-from-tags-to-variants/sorted-property-examples.png"
     width="761" height="313" alt="A diagram showing example sorted properties from two plugins:
 'nvidia' plugin with index 1 and 'x86_64' plugin with index 2.
@@ -594,8 +594,8 @@ of sorting configuration:
 2. Sorting defined by the package (in variant information).
 3. Sorting defined by the user.
 
-<div style={{ textAlign: "center" }}>
-<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<div style="text-align: center">
+<figure style="width: auto; margin: 0 2em; display: inline-block; vertical-align: top">
   <img src="/posts/python-wheels-from-tags-to-variants/sorting.png"
     width="828" height="197" alt="A diagram showing variant property sort keys.
 It specifies three rows: namespaces, features and values, and three columns:
@@ -842,8 +842,8 @@ releases four-component versions, like `1.2.2.1`? With upper bound, things
 get even worse. Here we actually have to declare compatibility with versions
 higher than the current version: `<1.2.4`, `<1.2.5`… ad infinitum.
 
-<div style={{ textAlign: "center" }}>
-<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<div style="text-align: center">
+<figure style="width: auto; margin: 0 2em; display: inline-block; vertical-align: top">
   <img src="/posts/python-wheels-from-tags-to-variants/variant-flow-dynamic.png"
     width="683" height="486" alt="A flow chart showing interaction between
 wheel-related software and dynamic provider plugins. A build backend (such
@@ -1030,8 +1030,8 @@ packages for all users, on a multi-user system. Variant provider plugins will
 be operating with the same level of privileges, and this has significant
 implications on how they are developed.
 
-<div style={{ textAlign: "center" }}>
-<figure style={{width: 'auto', margin: '0 2em', display: 'inline-block', verticalAlign: 'top'}}>
+<div style="text-align: center">
+<figure style="width: auto; margin: 0 2em; display: inline-block; vertical-align: top">
   <img src="/posts/python-wheels-from-tags-to-variants/security-scopes.png"
     width="906" height="458" alt="Change in scopes of privileges due to variant
 plugins. Prior to their support, only installer (and its dependencies) would be
