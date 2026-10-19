@@ -1110,7 +1110,7 @@ to the community after the design and its review are fully complete.
 
 In this post, I've attempted to comment on the road taken by the variant wheel work,
 from the project's inception to the current state of the pre-proto-PEP: [PEP ### -
-Wheel Variants](http://variant-proposal.wheelnext.dev/).
+Wheel Variants](https://github.com/wheelnext/wheelnext/blob/a058c17c01856f439bee85c96ce498d24045afb8/docs/proposals/pepxxx_wheel_variant_support.md).
 Necessarily, this story is neither final nor covers all the details, but I think
 it does some justice to the complexity of the problem space and the effort
 put into developing a good solution.
