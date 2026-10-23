@@ -151,6 +151,31 @@ Finally, the `builtin` key was added to indicate a built-in provider.
 
 It's worth noting that in the latest design, the provider type is effectively defined by the presence of one of the mutually exclusive keys: `requires`, `static-properties`, `builtin` or `build-requires` (the last one only allowed in `pyproject.toml`).
 
+## Metadata consistency
+
+Variant metadata is exposed both inside each individual wheel, and in aggregated form in an index-level metadata file.
+The latter file does not provide for per-wheel metadata, but rather requires that a single combination of values can satisfy all variant wheels built for a single project version.
+
+The original specification recommended enforcing that both `default-priorities` and `providers` are exactly the same across all wheels.
+While this assumption holds when all the wheels are built from a single `pyproject.toml`, it has been pointed out that it is needlessly limiting and it could cause issues if one builds additional kinds of variants later or wants to add variants built separately.
+PEP 817 relaxed this requirement to permit "careful merging […], as long as no conflicting information is introduced, and the resolution results within a subset of variants do not change".
+PEP 825 (and then PEP 850) went ever further, explicitly specifying consistency requirements for individual metadata keys, and providing an algorithm for merging them.
+
+Variant wheels therefore permit building new variants for the same version, as long as their labels remain unique, and adding new providers, provided that they are added to the end of `default-priorities.namespace` list.
+The crucial requirement is that each new set of wheels must build upon the previous namespace list; otherwise, it would be impossible to merge them in a reproducible way.
+
+## Variant ordering
+
+The specification provides not only for determining whether a particular variant can be installed, but also for selecting the most appropriate among the compatible wheels.
+The algorithm provided for that remained mostly unchanged since the initial draft, although it has been rewritten multiple times in an effort to make it easier to comprehend.
+PEP 825 is a culmination of that effort, combining a high-level overview, an example, a detailed algorithm and a pseudocode implementation.
+
+Still, a few changes to the algorithm were made in PEP 825:
+
+- `default-priorities.feature` and `default-priorities.property` were removed, making the feature and value ordering entirely provider-defined
+- only the best compatible value for every feature is now used to order variants, rather than all compatible values
+- for the pathological case when two variants evaluate to the same sorting key, a fallback ordering on variant label was added
+
 ## Environment markers
 
 The original specification introduced three environment markers that enabled making project dependencies conditional to the variant installed: `variant_properties`, `variant_features` and `variant_namespaces`.
@@ -166,9 +191,25 @@ example-sm110-kernels; "nvidia :: sm_arch :: 110_real" in variant_properties
 ...
 ```
 
+## Dynamic plugins are gone
+
+
+
+## Namespaces are no longer fixed
+
+Up to PEP 817, the namespace used was fixed in every variant plugin.
+If you used the NVIDIA provider plugin, you had to use `nvidia` namespace for its properties.
+The x86-64 CPU plugin used `x86_64`, and so on.
+Conversely, you couldn't use two different providers specifying the same namespace in a single project version.
+The "ABI Dependency Provider" also used a reserved namespace.
+
+PEP 850 relaxed that and made namespace a project-side identifier.
+Plugins can still declare a recommended namespace identifier in their entry point, but it exists only for convenience in automatically updating `pyproject.toml`.
+The project maintainers can use any namespace for any provider as they see fit, and the `providers` metadata is used to map it into an actual provider.
+
+We also clarified that tools vendoring or reimplementing providers must match them on Python package names rather than namespaces used.
 
 ## TODO: changes to discuss
 
-- 825: algorithm changes; repeat removed feature/value, change to multi-value, fallbacks
 - 850: removed dynamic plugins
 
