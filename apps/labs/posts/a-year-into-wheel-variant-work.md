@@ -193,7 +193,24 @@ example-sm110-kernels; "nvidia :: sm_arch :: 110_real" in variant_properties
 
 ## Dynamic plugins are gone
 
+The original design used two types of plugins: "static" and "dynamic".
+In this context, "static" meant that the plugin queried the system and returned a fixed list of supported properties with no knowledge of the wheels being processed.
+"Dynamic" plugins on the other hand acted directly on the list of properties obtained from the available wheels.
 
+The NVIDIA provider was the original use case for dynamic plugins.
+We wanted variant wheels to be able to express minimum and maximum CUDA versions supported.
+However, the plugin couldn't reliably generate a list of all possible future CUDA versions.
+Instead, the installer would pass the minimum and maximum versions specified in the wheels, and the plugin would indicate whether the requirements are met or not.
+
+However, such a design was quite problematic.
+Most importantly, you couldn't easily replace the plugin with static metadata.
+If you wanted to generate such a replacement data automatically, you needed to specify all the properties that need to be covered.
+If one package required CUDA 12.8 and another CUDA 12.9, you'd need to explicitly cover both versions, and update your static metadata whenever you find a package with a property you didn't test for.
+For comparison, with "static" plugins you just had to query all the interesting plugins once and store their output; the resulting metadata would be compatible with all the packages using the plugin in the near future.
+
+In the end, we have decided it's not worth it and removed "dynamic" plugins prior to PEP 817.
+Formerly "static" plugins became the only kind of plugins defined, and eventually "static" became the term associated with truly static metadata.
+The NVIDIA provider was rewritten to output a reasonably wide range of compatible minimum and maximum versions around the installed version, and will be updated whenever that range is no longer sufficient for the CUDA versions in use.
 
 ## Namespaces are no longer fixed
 
@@ -209,7 +226,21 @@ The project maintainers can use any namespace for any provider as they see f
 
 We also clarified that tools vendoring or reimplementing providers must match them on Python package names rather than namespaces used.
 
-## TODO: changes to discuss
+## Plugin API changes
 
-- 850: removed dynamic plugins
+All the changes also meant that the plugin API changed significantly.
+
+Originally, the API defined two properties: `namespace` specifying the plugin's namespace, and `dynamic` specifying whether the plugin is "dynamic" or "static".
+As PEP 817 removed the concept of dynamic plugins, it removed the `dynamic` property.
+However, it introduced build-time plugins (called "AoT plugins" at the time), and consequently `is_aot_plugin` property.
+PEP 850 removed fixed namespaces, and therefore the `namespace` property.
+It also deferred build-time functionality into a subsequent PEP, removing `is_aot_plugin`.
+The current plan is to reintroduce it as `all_properties_compatible`.
+Yes, all the changes can feel a bit vertiginous, but if you look at the final specification, the API is probably cleaner than before.
+
+The API also used to define two methods: `get_supported_configs()` that returned a list of properties compatible with the system, and `validate_property()` used to verify whether a particular property is valid to build a wheel with.
+The first one had a quasi-optional `known_properties` argument that was used in dynamic plugins to pass the properties found in installable wheels.
+PEP 817 removed this argument, and reversed the property validation logic; `validate_property()` was replaced by `get_all_configs()`, returning all valid properties for a given plugin.
+The new approach was symmetric with `get_supported_configs()` and more efficient.
+This part of the API did not change further, beyond being split between PEP 850 and the PEP following it for the build-time part.
 
