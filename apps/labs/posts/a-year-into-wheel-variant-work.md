@@ -93,7 +93,7 @@ While some use cases still require such an approach, we have realized that many
 <div style="text-align: center">
 <figure style="width: auto; margin: 0 2em; display: inline-block; verticalAlign: top">
   <img src="/posts/a-year-into-wheel-variant-work/provider-types.png"
-    width="541" height="258" alt="TODO" />
+    width="650" height="348" alt="TODO" />
   <figcaption>Fig. 2. Different provider types</figcaption>
 </figure>
 </div>
@@ -122,7 +122,7 @@ It manifests inside the project's `pyproject.toml` file, as a JSON file inside
 <div style="text-align: center">
 <figure style="width: auto; margin: 0 2em; display: inline-block; verticalAlign: top">
   <img src="/posts/a-year-into-wheel-variant-work/format-evo.png"
-    width="541" height="258" alt="TODO" />
+    width="534" height="556" alt="TODO" />
   <figcaption>Fig. 3. The evolution of variant metadata</figcaption>
 </figure>
 </div>
@@ -229,6 +229,14 @@ We also clarified that tools vendoring or reimplementing providers must match t
 ## Plugin API changes
 
 All the changes also meant that the plugin API changed significantly.
+
+<div style="text-align: center">
+<figure style="width: auto; margin: 0 2em; display: inline-block; verticalAlign: top">
+  <img src="/posts/a-year-into-wheel-variant-work/plugin-api.png"
+    width="641" height="195" alt="TODO" />
+  <figcaption>Fig. 4. The evolution of plugin API</figcaption>
+</figure>
+</div>
 
 Originally, the API defined two properties: `namespace` specifying the plugin's namespace, and `dynamic` specifying whether the plugin is "dynamic" or "static".
 As PEP 817 removed the concept of dynamic plugins, it removed the `dynamic` property.
