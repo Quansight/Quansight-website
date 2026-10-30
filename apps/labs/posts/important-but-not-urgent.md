@@ -45,8 +45,8 @@ That's what Ralf Gommers told me. Once I tried it, I excitedly told others about
 First off, I've got [Claude for open source](https://claude.com/contact-sales/claude-for-oss). Next, I have [Docker](https://www.docker.com/) installed on my (Windows) machine, but I do development using the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install). Finally, I have a [setup-docker](https://gist.github.com/MarcoGorelli/9950d3f3762768e15f77f53a86f3abde) skill saved at `~/.claude/skills/setup-docker/SKILL.md`. With all that in place, here are the steps I take when addressing some open source issues. Let's say for example that I'm working on [Narwhals](https://github.com/narwhals-dev/narwhals):
 
 1. In GitHub, make a fine-grained token with access to my fork of the Narwhals repository. I give it read-only access to: issues, discussions, contents, actions, metadata, and pull requests.
-2. I save the token in `~/.config/claude-docker/narwhals-dev.env` as `GH_TOKEN=<token goes here>`.
-3. Inside my clone of a repo, run `claude` and then `/setup_docker`.
+2. I save the token in `~/.config/claude-docker/<folder name>.env` as `GH_TOKEN=<token goes here>`.
+3. Inside the repo, run `claude` and then `/setup-docker`.
 4. Once that's run, quit Claude, and run it again with `./run_docker.sh claude --dangerously-skip-permissions`. This allows me to tell it something like "fix issues #45, #47, and #48" without having to approve commands all the time whilst limiting the blast radius.
 
 Note that like this, Claude can still edit my files, but it can't commit or rewrite history.
@@ -57,7 +57,7 @@ Perhaps. Some have argued that this makes it harder for new contributors to get 
 
 Rather than looking for issues to fix, my general recommendation is to build things and solve problems. Along the way, you'll almost certainly encounter gaps in existing tools (in which case, perhaps try reporting them, and seeing if you can fix them?), or missing tools (in which case, perhaps you can try building them?). The one thing I need to emphasise is that, if you're contributing to someone else's project, it's essential you understand and take full responsibility for all the code you submit. If you're using an agent to write the code, that's fine, just make sure that you also spend however long it takes interrogating the agent about every line of code it has changed until you fully understand every last detail. Furthermore, any written discussion should be written by you and you alone.
 
-## Why are "important but not urgent" issues so important anyway?
+## Why are "important but not urgent" issues so valuable?
 
 It's issues like these that ensure your long-term health and success. Increasing your test coverage, for example, doesn't have any user-facing effects today, but it may well prevent user-facing regressions tomorrow. The principle doesnt just apply to code: exercise can hardly be considered urgent for most us, yet managing to fit it in to our schedules makes it much more likely that we will be healthy later on.
 
