@@ -2,13 +2,13 @@
 title: 'Important but not urgent issues in the age of AI'
 published: November 2, 2026
 authors: [marco-gorelli]
-description: "Let's get things done"
-category: [??]
+description: "Let's get things done: how AI agents make it easier to address important but not urgent issues"
+category: [OSS Experience, Developer workflows]
 featuredImage:
-  src: /posts/import-but-not-urgent/featured.png
+  src: /posts/important-but-not-urgent/featured.png
   alt: 'The Eisenhower matrix, with the "important and not urgent" quadrant circled in red'
 hero:
-  imageSrc: /posts/import-but-not-urgent/hero.png
+  imageSrc: /posts/important-but-not-urgent/hero.png
   imageAlt: 'The Eisenhower matrix, with the "important and not urgent" quadrant circled in red'
 ---
 
@@ -42,7 +42,7 @@ Lately, however, things have been changing. It's relatively easy to point an AI 
 
 That's what Ralf Gommers told me. Once I tried it, I excitedly told others about it, only to realise that this is what nearly everyone was already doing. Turns out I was the one not keeping up with the times. Nonetheless, I think there are still people in the same boat, so I'll share my setup anyway in case it's useful to anyone (or, as will more likely be the case, in case anyone offers suggestions for improvement).
 
-First off, I've got [Claude for open source](https://claude.com/contact-sales/claude-for-oss). Next, I have [Docker](https://www.docker.com/) installed on my (Windows) machine, but I do development using the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install). Finally, I have a [/setup_docker](https://gist.github.com/MarcoGorelli/9950d3f3762768e15f77f53a86f3abde) saved at `~/.claude/skills/setup-docker/SKILL.md`. With all that in place, here are the steps I take when addressing some open source issues. Let's say for example that I'm working on [Narwhals](https://github.com/narwhals-dev/narwhals):
+First off, I've got [Claude for open source](https://claude.com/contact-sales/claude-for-oss). Next, I have [Docker](https://www.docker.com/) installed on my (Windows) machine, but I do development using the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install). Finally, I have a [setup-docker](https://gist.github.com/MarcoGorelli/9950d3f3762768e15f77f53a86f3abde) skill saved at `~/.claude/skills/setup-docker/SKILL.md`. With all that in place, here are the steps I take when addressing some open source issues. Let's say for example that I'm working on [Narwhals](https://github.com/narwhals-dev/narwhals):
 
 1. In GitHub, make a fine-grained token with access to my fork of the Narwhals repository. I give it read-only access to: issues, discussions, contents, actions, metadata, and pull requests.
 2. I save the token in `~/.config/claude-docker/narwhals-dev.env` as `GH_TOKEN=<token goes here>`.
@@ -56,6 +56,10 @@ Note that like this, Claude can still edit my files, but it can't commit or rewr
 Perhaps. Some have argued that this makes it harder for new contributors to get into open source. There may be some truth here, although I've argued in the past that good first issues aren't a good way into open source anyway (see [stop browsing good first issues](https://labs.quansight.org/blog/dont-start-with-good-first-issues)).
 
 Rather than looking for issues to fix, my general recommendation is to build things and solve problems. Along the way, you'll almost certainly encounter gaps in existing tools (in which case, perhaps try reporting them, and seeing if you can fix them?), or missing tools (in which case, perhaps you can try building them?). The one thing I need to emphasise is that, if you're contributing to someone else's project, it's essential you understand and take full responsibility for all the code you submit. If you're using an agent to write the code, that's fine, just make sure that you also spend however long it takes interrogating the agent about every line of code it has changed until you fully understand every last detail. Furthermore, any written discussion should be written by you and you alone.
+
+## Why are "important but not urgent" issues so important anyway?
+
+It's issues like these that ensure your long-term health and success. Increasing your test coverage, for example, doesn't have any user-facing effects today, but it may well prevent user-facing regressions tomorrow. The principle doesnt just apply to code: exercise can hardly be considered urgent for most us, yet managing to fit it in to our schedules makes it much more likely that we will be healthy later on.
 
 ## Conclusion
 
