@@ -252,3 +252,70 @@ PEP 817 removed this argument, and reversed the property validation logic; `v
 The new approach was symmetric with `get_supported_configs()` and more efficient.
 This part of the API did not change further, beyond being split between PEP 850 and the PEP following it for the build-time part.
 
+## Build backends
+
+The recommended build backend interface evolved as well.
+PEP 817 did not recommend a specific interface, beyond requiring that variant wheels must not be produced unless explicitly enabled and that variant metadata can be expressed in `pyproject.toml`.
+Our demonstration code required passing variant properties and variant label explicitly.
+For example, a NumPy x86-64-v4 MKL wheel was produced via calling:
+
+```bash
+python -m build -w \
+  -Cvariant=x86_64::level::v4 \
+  -Cvariant=blas_lapack::provider::mkl \
+  -Cvariant-label=x8664v4_mkl
+```
+
+whereas a null variant would be produced via:
+
+```bash
+python -m build -w -Cnull-variant
+```
+
+The current specification draft instead defines a complete recommended interface.
+All available variants are expected to be defined in `pyproject.toml`, using the `variant.variants` table following the same semantics as in built wheels.
+Rather than passing properties explicitly, one passes the variant label and the backends picks the metadata from that table.
+As a result, the two commands above are replaced by, respectively:
+
+```bash
+python -m build -w -Cvariant-label=x8664v4_mkl
+python -m build -w -Cvariant-label=null
+```
+
+## The security aspect
+
+Unsurprisingly, the most controversial part of the whole proposal was the idea that providers would be external Python packages that could be installed and executed automatically.
+We have anticipated this, and we highlighted the problem in the PEP, as well as a few suggested options to mitigate the issues.
+We wanted to get more feedback before proposing something more specific, but unfortunately the lack of definite solution caused the discussion to quickly derail.
+
+In the subsequent iterations, we have managed to keep gathering feedback and improving the security story.
+We realized that "opt-out" is not an acceptable default, and instead focused on an "opt-in" approach with specific provisions for enabling the most popular plugins by default.
+To keep things truly secure, we had to combine two goals: preventing completely arbitrary packages from being installed and executed as part of wheel installation, but also preventing the proposal from introducing security fatigue.
+We reasoned: if we force users to opt-in to the providers needed to install commonly used packages, the users will eventually blanket enable all providers to avoid the hassle.
+This would be the worst possible outcome.
+
+We also learned that we mustn't defer deciding which plugins can be used by default to the tool maintainers entirely, or rely on a consensus being established implicitly.
+Instead, we need to establish a central authority that will maintain the repository of vetted plugins, as well as clear requirements that these plugins must meet.
+This is important enough topic that it will be covered by a separate PEP, built upon the consensus from the [security of wheel variants discussion](https://discuss.python.org/t/security-of-wheel-variants/109569).
+
+## Getting feedback
+
+We aren't going to be the first to point out that PEP reviews are hard.
+Konstantin Schütze who is working with us on wheel variants, already wrote a post about [Friction in the Python Packaging Standards Process](https://blog.schuetze.link/friction-in-packaging-peps/).
+I can share a very similar impression.
+
+Our early threads on discuss.python.org attracted a lot of attention, and quickly grew beyond manageable size.
+This is partially our fault for making the initial proposal too broad.
+Once more people started replying and commenting on different aspects of the proposal, it became increasingly hard to follow the individual subthreads and find consensus.
+The threads reached the point when any new participant would need to spend significant time following the existing discussion; in some cases this lead to potentially interested parties not taking part.
+In fact, multiple developers from packaging-related projects have explicitly indicated that they are unable to follow DPO discussions, which required us to request their feedback separately.
+
+While we received much constructive feedback, we have also seen many comments that were disruptive.
+We have seen people who kept repeating the same points, without being mindful that repetitive comments make it harder for others to participate.
+We have seen people posting claims about what the PEP proposed that simply weren't true, and others quickly taking the bait without actually verifying them.
+All these contributed to confusion and frustration, and made it much harder to gather consensus.
+
+However, things improved over time.
+Splitting the PEPs made it easier to comprehend the proposal and to gather focused feedback, and therefore to improve it.
+New people joined the effort and started actively contributing.
+Over time, we even learned that scikit-build-core included a preview support for our work.
