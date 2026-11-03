@@ -16,7 +16,7 @@ We all get our important and urgent tasks done because, by definition, we have n
 
 ## The Eisenhower matrix
 
-If the intro paragraph sounded familiar to you, it may be because you've already encountered the concept of the _Eisenhower Matrix_. The idea (based on a remark by Eisenhower, popularised by Stephen Covey) is to subdivide your tasks by importance and urgency.
+If the intro paragraph sounded familiar to you, it may be because you've already encountered the concept of the _Eisenhower Matrix_. The idea (based on a remark by Eisenhower, popularised by Stephen Covey) is to subdivide your tasks by importance and urgency:
 
 1. Important and urgent. For example, your tool silently does the wrong thing.
 2. Important and not urgent. For example, your test suite doesn't cover certain kinds of test data.
