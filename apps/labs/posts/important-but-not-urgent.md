@@ -1,6 +1,6 @@
 ---
 title: 'Important but not urgent issues in the age of AI'
-published: November 2, 2026
+published: November 4, 2026
 authors: [marco-gorelli]
 description: "Let's get things done: how AI agents make it easier to address important but not urgent issues"
 category: [OSS Experience, Developer workflows]
@@ -16,14 +16,14 @@ We all get our important and urgent tasks done because, by definition, we have n
 
 ## The Eisenhower matrix
 
-If the intro paragraph sounded familiar to you, it may be because you've already encountered the concept of the _Eisenhower Matrix_. The idea (based on a formulation by Eisenhower popularised by Stephen Covey) is to subdivide your tasks by importance and urgency and then to act accordingly:
+If the intro paragraph sounded familiar to you, it may be because you've already encountered the concept of the _Eisenhower Matrix_. The idea (based on a remark by Eisenhower popularised by Stephen Covey) is to subdivide your tasks by importance and urgency and then to act accordingly:
 
-1. Important and urgent: do.
-2. Important and not urgent: schedule.
-3. Not important and urgent: delegate (at least, according to the original matrix...).
-4. Not important and not urgent: delete.
+1. Important and urgent.
+2. Important and not urgent.
+3. Not important and urgent.
+4. Not important and not urgent.
 
-I've never understood the third item on the list, but never mind, that's not what this article is about. Let's address the second one: important but not urgent tasks. And let's be honest, none of us spend enough time on them. We're either doing the important and urgent ones (because, no choice) or the unimportant and not urgent ones (because they're kind of easy and they give us the illusion of productivity).
+Let's address the second one: important but not urgent tasks. And let's be honest, none of us spend enough time on them. We're either doing the important and urgent ones (because, no choice) or the unimportant and not urgent ones (because they're kind of easy and they give us the illusion of productivity).
 
 Here are some examples of open source issues belonging to each category:
 
@@ -34,7 +34,11 @@ Here are some examples of open source issues belonging to each category:
 
 I'm fairly confident that most of us have spent more time than we're proud of addressing issues in the fourth category, and haven't given enough attention to those in the second one.
 
-Lately, however, things have been changing. It's relatively easy to point an AI agent at a few of these GitHub issues and get it to fix them while you do other work. Fixing these important but not urgent issues is no longer a matter of "if I do this, I need to de-prioritise more impactful work" because agents can do them for you while you do other work. All you need to do is check the result (if this is open source code you're dealing with and you have actual users, I can't stress enough the importance of this last step!).
+Lately, however, things have been changing. It's relatively easy to point an AI agent at a few of these GitHub issues and get it to fix them while you do other work. Fixing these important but not urgent issues is no longer a matter of "if I do this, I need to de-prioritise more impactful work". All you need to do is check the result before you merge (if this is open source code you're dealing with and you have actual users, I can't stress enough the importance of this last step!).
+
+## Why are "important but not urgent" issues so valuable?
+
+These issues are important because of the impact they have on your project's long-term health. Increasing your test coverage, for example, doesn't have any user-facing effects today, but it may well prevent user-facing regressions two years from now when current maintainers have moved on. The principle doesn't just apply to code: physical exercise can hardly be considered urgent for most of us, yet managing to fit it in to our schedules makes it much more likely that we will age healthily.
 
 ## The only useful agentic programming tip I ever received
 
@@ -49,17 +53,13 @@ First off, I've got [Claude for open source](https://claude.com/contact-sales/cl
 3. Inside the repo, run `claude` and then `/setup-docker`.
 4. Once that's run, quit Claude, and run it again with `./run_docker.sh claude --dangerously-skip-permissions`. This allows me to tell it something like "fix issues #45, #47, and #48" without having to approve commands all the time whilst limiting the blast radius.
 
-Note that like this, Claude can still edit my files, but it can't commit or rewrite history.
+Note that like this, Claude can still edit my files, but it can't commit or rewrite history because .git is mounted read-only inside the container.
 
 ## Is this the end of good first issues?
 
 Perhaps. Some have argued that this makes it harder for new contributors to get into open source. There may be some truth here, but I've argued in the past that good first issues aren't a good way into open source anyway (see [stop browsing good first issues](https://labs.quansight.org/blog/dont-start-with-good-first-issues)).
 
 Rather than looking for issues to fix, my general recommendation is to build things and solve problems. Along the way, you'll almost certainly encounter gaps in existing tools (in which case, perhaps try reporting them, and seeing if you can fix them?), or missing tools (in which case, perhaps you can try building them?). The one thing I need to emphasise is that, if you're contributing to someone else's project, it's essential you understand and take full responsibility for all the code you submit. If you're using an agent to write the code, that's fine, just make sure that you also spend however long it takes interrogating the agent about every line of code it has changed until you fully understand every last detail. Furthermore, any written discussion should be written by you and you alone.
-
-## Why are "important but not urgent" issues so valuable?
-
-These issue are important because of the impact they have on your project's long-term health. Increasing your test coverage, for example, doesn't have any user-facing effects today, but it may well prevent user-facing regressions two years from now when current maintainers have moved on. The principle doesn't just apply to code: physical exercise can hardly be considered urgent for most of us, yet managing to fit it in to our schedules makes it much more likely that we will age healthily.
 
 ## Conclusion
 
