@@ -318,4 +318,27 @@ All these contributed to confusion and frustration, and made it much harder t
 However, things improved over time.
 Splitting the PEPs made it easier to comprehend the proposal and to gather focused feedback, and therefore to improve it.
 New people joined the effort and started actively contributing.
-Over time, we even learned that scikit-build-core included a preview support for our work.
+Over time, even projects outside the WheelNext organization, such as scikit-build-core, started including preview support for wheel variants.
+
+## What comes next?
+
+[PEP 825](https://peps.python.org/pep-0825/) has been provisionally accepted.
+[PEP 850](https://peps.python.org/pep-0850/) is currently under discussion.
+We have the building PEP initially drafted already as well, and ready to send once PEP 850 settles.
+We are also starting the work on the fourth PEP, which can be discussed in parallel with the building PEP.
+
+This looks like a lot, especially if you consider how much time it took from the initial PEP 817 draft to the provisional acceptance of PEP 825.
+However, we have good reasons to believe that things will move faster from here on.
+The foundations are in place, and the complete design was improved based on the feedback received so far.
+We have significantly more experience in writing PEPs now, and hopefully the new ones will require fewer iterations.
+The Python Packaging Council took their seats, and hopefully will eliminate the bottleneck in specification reviews.
+
+Our goal is to have the complete specification approved and deployed in 2027.
+
+## Acknowledgements
+
+Many people have been involved in the wheel variant work.
+I would like to thank for all their work: the contributions to the specification and implementations, feedback, support and the encouragement.
+Getting where we are took a lot of effort and persistence.
+
+Thanks to [Red Hat](https://www.redhat.com) for funding Quansight's contributions to the wheel variant design. Red Hat is [shipping accelerator-enabled Python packages](https://wheelnext.dev/summits/2025_03/assets/WheelNext%20Community%20Summit%20-%2006%20-%20Red%20Hat.pdf), like PyTorch, as wheels in a virtual environment as part of [Red Hat AI](https://www.redhat.com/en/products/ai), and saw the importance of improving Python packaging for heterogeneous hardware, resulting in their support for the WheelNext initiative.
