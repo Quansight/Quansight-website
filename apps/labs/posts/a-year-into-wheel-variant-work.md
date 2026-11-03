@@ -129,7 +129,7 @@ It manifests inside the project's `pyproject.toml` file, as a JSON file inside
 
 Originally, the metadata used three top-level keys: `default-priorities` with project-level ordering data, `providers` describing the used provider plugins, and `variants` that was present only in JSON files and listed available variants.
 In PEP 817, `$schema` was added to the JSON files that enabled versioning the metadata; PEP 825 made it use semantic versioning, and provided the rules for changing the metadata format.
-The current specification draft extends both `$schema` and `variants` to `pyproject.toml` as well, making the format entirely symmetric.
+The current specification draft extends `variants` to `pyproject.toml` as well, making the format more symmetric.
 
 `default-priorities` used to specify the ordering information for namespaces, features and individual properties.
 The first one was necessary, as only the project could determine what's more important to it.
