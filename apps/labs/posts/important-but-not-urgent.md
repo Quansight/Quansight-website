@@ -16,29 +16,20 @@ We all get our important and urgent tasks done because, by definition, we have n
 
 ## The Eisenhower matrix
 
-If the intro paragraph sounded familiar to you, it may be because you've already encountered the concept of the _Eisenhower Matrix_. The idea (based on a remark by Eisenhower popularised by Stephen Covey) is to subdivide your tasks by importance and urgency and then to act accordingly:
+If the intro paragraph sounded familiar to you, it may be because you've already encountered the concept of the _Eisenhower Matrix_. The idea (based on a remark by Eisenhower, popularised by Stephen Covey) is to subdivide your tasks by importance and urgency.
 
-1. Important and urgent.
-2. Important and not urgent.
-3. Not important and urgent.
-4. Not important and not urgent.
+1. Important and urgent. For example, your tool silently does the wrong thing.
+2. Important and not urgent. For example, your test suite doesn't cover certain kinds of test data.
+3. Not important and urgent. For example, your code raises in a place where it shouldn't. Some users have noticed this and, although a workaround exists, they're demanding that this be fixed.
+4. Not important and not urgent. For example, you want to rewrite `.format` calls to f-strings in your Python code.
 
-Let's address the second one: important but not urgent tasks. And let's be honest, none of us spend enough time on them. We're either doing the important and urgent ones (because, no choice) or the unimportant and not urgent ones (because they're kind of easy and they give us the illusion of productivity).
-
-Here are some examples of open source issues belonging to each category:
-
-1. Your tool silently does the wrong thing.
-2. Your test suite doesn't cover certain kinds of test data.
-3. Your code raises in a place where it shouldn't. Some users have noticed this and, although a workaround exists, they're demanding that this be fixed.
-4. You want to rewrite `.format` statements to f-strings in your Python code.
-
-I'm fairly confident that most of us have spent more time than we're proud of addressing issues in the fourth category, and haven't given enough attention to those in the second one.
+Let's focus in on the second category: important but not urgent tasks. And let's be honest, none of us spend enough time on them. We're either doing the important and urgent ones (because, no choice) or the unimportant and not urgent ones (because they're kind of easy and they give us the illusion of productivity).
 
 Lately, however, things have been changing. It's relatively easy to point an AI agent at a few of these GitHub issues and get it to fix them while you do other work. Fixing these important but not urgent issues is no longer a matter of "if I do this, I need to de-prioritise more impactful work". All you need to do is check the result before you merge (if this is open source code you're dealing with and you have actual users, I can't stress enough the importance of this last step!).
 
 ## Why are "important but not urgent" issues so valuable?
 
-These issues are important because of the impact they have on your project's long-term health. Increasing your test coverage, for example, doesn't have any user-facing effects today, but it may well prevent user-facing regressions two years from now when current maintainers have moved on. The principle doesn't just apply to code: physical exercise can hardly be considered urgent for most of us, yet managing to fit it in to our schedules makes it much more likely that we will age healthily.
+These issues are important because of the impact they have on your project's long-term health. Increasing your test coverage, for example, doesn't have any user-facing effects today, but it may well prevent user-facing regressions two years from now when current maintainers have moved on. The principle doesn't just apply to code: physical exercise can hardly be considered urgent for most of us, yet managing to fit it into our schedules makes it much more likely that we will age healthily.
 
 ## The only useful agentic programming tip I ever received
 
@@ -53,7 +44,7 @@ First off, I've got [Claude for open source](https://claude.com/contact-sales/cl
 3. Inside the repo, run `claude` and then `/setup-docker`.
 4. Once that's run, quit Claude, and run it again with `./run_docker.sh claude --dangerously-skip-permissions`. This allows me to tell it something like "fix issues #45, #47, and #48" without having to approve commands all the time whilst limiting the blast radius.
 
-Note that like this, Claude can still edit my files, but it can't commit or rewrite history because .git is mounted read-only inside the container.
+Note that like this, Claude can still edit my files, but it can't commit or rewrite history because `.git` is mounted read-only inside the container.
 
 ## Is this the end of good first issues?
 
