@@ -224,21 +224,22 @@ The NVIDIA provider was rewritten to output a reasonably wide range of compa
 
 ## Namespaces are no longer fixed
 
-Up to PEP 817, the namespace used was fixed in every variant plugin.
-If you used the NVIDIA provider plugin, you had to use `nvidia` namespace for its properties.
+Up to PEP 817, every variant plugin specified the namespace used by its properties.
+If you used the NVIDIA provider plugin, you had to use `nvidia` namespace.
 The x86-64 CPU plugin used `x86_64`, and so on.
-Conversely, you couldn't use two different providers specifying the same namespace in a single project version.
+Conversely, you couldn't use two different providers in a single project version if they used the same namespace.
 The "ABI Dependency Provider" also used a reserved namespace.
 
-PEP 850 relaxed that and made namespace a project-side identifier.
-Plugins can still declare a recommended namespace identifier in their entry point, but it exists only for convenience in automatically updating `pyproject.toml`.
-The project maintainers can use any namespace for any provider as they see fit, and the `providers` metadata is used to map it into an actual provider.
+PEP 850 relaxed this.
+The namespace became solely a project-side identifier.
+Plugins can still declare a recommended namespace identifier via their entry point, but it exists only for convenience and doesn't need to match the namespace actually used.
+The project maintainers can use any namespace for any provider as they see fit, and the `providers` metadata maps it into an actual provider.
 
-We also clarified that tools vendoring or reimplementing providers must match them on Python package names rather than namespaces used.
+We also clarified that tools vendoring or reimplementing providers must recognize them by the Python package names rather than the namespaces.
 
 ## Plugin API changes
 
-All the changes also meant that the plugin API changed significantly.
+All the provider changes also meant that the plugin API fluctuated.
 
 <div style="text-align: center">
 <figure style="width: auto; margin: 0 2em; display: inline-block; verticalAlign: top">
@@ -248,16 +249,16 @@ All the changes also meant that the plugin API changed significantly.
 </figure>
 </div>
 
-Originally, the API defined two properties: `namespace` specifying the plugin's namespace, and `dynamic` specifying whether the plugin is "dynamic" or "static".
-As PEP 817 removed the concept of dynamic plugins, it removed the `dynamic` property.
-However, it introduced build-time plugins (called "AoT plugins" at the time), and consequently `is_aot_plugin` property.
+Originally, the API defined two properties: `namespace` specifying the plugin's namespace, and `dynamic` specifying whether the plugin was "dynamic" or "static".
+PEP 817 removed the concept of dynamic plugins, and the `dynamic` property along with it.
+However, it introduced build-time plugins (called "AoT plugins" at the time), and consequently the `is_aot_plugin` property.
 PEP 850 removed fixed namespaces, and therefore the `namespace` property.
 It also deferred build-time functionality into a subsequent PEP, removing `is_aot_plugin`.
 The current plan is to reintroduce it as `all_properties_compatible`.
 Yes, all the changes can feel a bit vertiginous, but if you look at the final specification, the API is probably cleaner than before.
 
 The API also used to define two methods: `get_supported_configs()` that returned a list of properties compatible with the system, and `validate_property()` used to verify whether a particular property is valid to build a wheel with.
-The first one had a quasi-optional `known_properties` argument that was used in dynamic plugins to pass the properties found in installable wheels.
+The first one had a quasi-optional `known_properties` argument that accepted an union of all the properties found in available wheels.
 PEP 817 removed this argument, and reversed the property validation logic; `validate_property()` was replaced by `get_all_configs()`, returning all valid properties for a given plugin.
 The new approach was symmetric with `get_supported_configs()` and more efficient.
 This part of the API did not change further, beyond being split between PEP 850 and the PEP following it for the build-time part.
@@ -283,9 +284,9 @@ python -m build -w -Cnull-variant
 ```
 
 The current specification draft instead defines a complete recommended interface.
-All available variants are expected to be defined in `pyproject.toml`, using the `variant.variants` table following the same semantics as in built wheels.
-Rather than passing properties explicitly, one passes the variant label and the backends picks the metadata from that table.
-As a result, the two commands above are replaced by, respectively:
+All available variants are expected to be defined in `pyproject.toml`, using the `variant.variants` table with the same semantics as in built wheels.
+Rather than passing properties explicitly, one passes the variant label and the backend picks the metadata from that table.
+As a result, the two commands above are simplified to, respectively:
 
 ```bash
 python -m build -w -Cvariant-label=x8664v4_mkl
@@ -295,7 +296,7 @@ python -m build -w -Cvariant-label=null
 ## The security aspect
 
 Unsurprisingly, the most controversial part of the whole proposal was the idea that providers would be external Python packages that could be installed and executed automatically.
-We have anticipated this, and we highlighted the problem in the PEP, as well as a few suggested options to mitigate the issues.
+We have anticipated this being a problem, we highlighted it in the PEP, and listed a few suggested options to mitigate the issues.
 We wanted to get more feedback before proposing something more specific, but unfortunately the lack of definite solution caused the discussion to quickly derail.
 
 In the subsequent iterations, we have managed to keep gathering feedback and improving the security story.
@@ -317,16 +318,16 @@ I can share a very similar impression.
 Our early threads on discuss.python.org attracted a lot of attention, and quickly grew beyond manageable size.
 This is partially our fault for making the initial proposal too broad.
 Once more people started replying and commenting on different aspects of the proposal, it became increasingly hard to follow the individual subthreads and find consensus.
-The threads reached the point when any new participant would need to spend significant time following the existing discussion; in some cases this lead to potentially interested parties not taking part.
+We reached the point when any new participant would need to spend significant time following the existing discussion; in some cases this lead to potentially interested parties not taking part.
 In fact, multiple developers from packaging-related projects have explicitly indicated that they are unable to follow DPO discussions, which required us to request their feedback separately.
 
 While we received much constructive feedback, we have also seen many comments that were disruptive.
-We have seen people who kept repeating the same points, without being mindful that repetitive comments make it harder for others to participate.
+We have seen people who kept repeating the same points, without being mindful that repetitive comments don't add anything and make it harder for others to participate.
 We have seen people posting claims about what the PEP proposed that simply weren't true, and others quickly taking the bait without actually verifying them.
 All these contributed to confusion and frustration, and made it much harder to gather consensus.
 
 However, things improved over time.
-Splitting the PEPs made it easier to comprehend the proposal and to gather focused feedback, and therefore to improve it.
+Splitting the PEPs made it easier to comprehend the proposal and to gather focused feedback, and therefore to improve the specification.
 New people joined the effort and started actively contributing.
 Over time, even projects outside the WheelNext organization, such as scikit-build-core, started including preview support for wheel variants.
 
