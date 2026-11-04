@@ -14,37 +14,38 @@ hero:
 
 # A year into wheel variant work
 
-Over a year ago, we have [announced a working prototype of wheel variant](/blog/python-wheels-from-tags-to-variants).
+Over a year ago, we have [announced a working prototype of wheel variants](/blog/python-wheels-from-tags-to-variants).
 It was a major milestone that marked the transition from the initial experimentation stage into specification work.
-The proto-PEP developed back then eventually became [PEP 817](https://peps.python.org/pep-0817/), originally including a lengthy specification part.
-However, the subsequent discussion made us realize that the design itself is far too complex to be carried in a single PEP, and the specification part was moved into a series of documents starting with [PEP 825](https://peps.python.org/pep-0825/), while PEP 817 became a kind of high-level guide to the overall design.
+The proto-PEP developed back then became the first iteration of [PEP 817](https://peps.python.org/pep-0817/), one that included a lengthy specification part.
+However, the subsequent discussion made us realize that the design itself is far too complex to be carried out in a single PEP, and we moved and split the specification part a series of documents starting with [PEP 825](https://peps.python.org/pep-0825/).
+PEP 817 then became a kind of high-level guide to the overall design.
 
-Split wasn't the only change happening.
-Between further experimentation and the discussion involved, the specification itself changed a lot as well.
-Our aim was always to create a solution that will stand the test of time; find the right balance between complexity and user expectations.
-The work is still far from complete and the upcoming PEPs are subject to change, but I believe that we made major progress, and things are looking better than before.
+The split wasn't the only thing happening.
+Between further experimentation work and the discussion, the specification itself changed a lot as well.
+From the very beginning, our aim was to create a solution that will stand the test of time; find the right balance between complexity and flexibility.
+The work is still far from complete and the design can still change, but I believe that we have made major progress, and things are looking better than ever.
 I would like to take this opportunity to explore how the design changed since we announced it first.
 
 ## One PEP, many PEPs
 
 Originally we wanted to pursue wheel variants as a single PEP.
 The decision made sense at the time: it was a complete tested design.
-You needed all the bits to see how they fit together, and you had to implement it whole to get the desired user experience.
+You needed all the bits to see how they fit together, and without all of them, you wouldn't be able to achieve the desired user experience.
 The problem is that when you try to cover everything at once: metadata, providers, plugin API, installing, building and so on, the specification becomes very long and hard to process.
 You lose the ability to see the forest for the trees.
-We tried to resolve this by replacing the original rationale section (which was hard to digest, given you had to keep cross-referencing it to the specification) with a combined overview-rationale, but that did not help much.
-Besides, at this point even we were finding it difficult to apply updates to the specification.
+We tried to resolve this by replacing the original rationale section (which had to be kept cross-referenced to the specification) with a combined overview-rationale, but that did not help much.
+Besides, at this point even we were finding it difficult to update the specification, given that any change created a cluster of inconsistencies.
 
 So split was clearly the way forward.
 But how should we have split it?
 Smaller parts are easier to debate on their own merit, but they need to be linked to the high-level design somehow.
-Variant namespaces start truly making sense if you consider providers as governed independently.
-We also needed to consider the risk that changes to the individual parts of the specification will require revisiting earlier PEPs.
+Variant namespaces start truly making sense if you consider providers as independently governed.
+We also needed to consider the risk that changes to the individual parts of the specification may require revisiting earlier PEPs.
 
 We decided to make the first cut where providers started.
-They were easily the most controversial part of the design, and attracted most of the discussion, making it hard to get feedback on the more fundamental aspects such as the metadata format.
-While the architecture cannot work without providers, it is entirely possible to treat them as a "black box"; specify where they fit into the design, and define an interface that a subsequent PEP will have to provide.
-An additional advantage of this split is that a good foundation is universal: the provider model can change substantially, and still fit into it.
+They were easily the most controversial part of the design, and attracted most of the discussion, which in turn made it hard to get feedback on the more fundamental aspects such as the metadata format.
+While the architecture cannot work without providers, it is entirely possible to treat them as a "black box"; specify where they fit into the design, and define an interface that a subsequent PEP has to provide.
+An additional advantage of this direction is that a good foundation is universal: the provider model can change substantially, and still fit into it.
 
 A logical place for the next cut was to split wheel building from consumption.
 The providers PEP was limited to all the aspects needed to install wheels, leaving the bits specific to build backends out.
@@ -61,19 +62,19 @@ Finally, given the complexity of providers, we decided to further split the 
 
 We therefore settled on four PEPs so far:
 
-1. Package Format ([PEP 825](https://peps.python.org/pep-0825/)): focused on changes to the wheel format and initial set of variant metadata.
+1. Package Format ([PEP 825](https://peps.python.org/pep-0825/)): focused on changes to the wheel format and the initial set of variant metadata.
 2. Providers ([PEP 850](https://peps.python.org/pep-0850/)): extending the Package Format PEP with providers used to determine which variant properties are supported, defining the plugin API.
 3. Building: extending the Providers PEP with build backend support, `pyproject.toml` format for variant metadata, build-time bits of the plugin API.
-4. UX, maintainability, security and governance: covering the introduction strategy and maintenance of å community maintained repository of trusted variant providers.
+4. UX, maintainability, security and governance: covering the introduction strategy and maintenance of a community maintained repository of trusted variant providers.
 
-Some aspects of the proposition could fit into different PEPs.
+Some aspects of the proposition could have fit into different PEPs.
 For example, the wheel selection algorithm could either be placed in the Package Format PEP, where it would operate on the data provided by the "black box" providers, in the Providers PEP, or even in a PEP of its own.
 Our decision to include it in the first PEP was mostly prompted by the desire to keep the Providers PEP maximally focused.
 
 At the time of writing, the Package Format part is provisionally accepted, and the Providers part is entering the discussion phase.
 While the foundations remained the same, the specification already changed a lot.
 The current design is detailed in the published PEPs 825 and 850, and presented in more general terms in the updated [PEP 817](https://peps.python.org/pep-0817/).
-In the remainder of the post, I'd like to explore the differences from the [original specification published along the previous blog post](https://github.com/wheelnext/wheelnext/blob/a058c17c01856f439bee85c96ce498d24045afb8/docs/proposals/pepxxx_wheel_variant_support.md).
+In the remainder of the post, I'd like to explore the differences from the [original specification discussed in the previous blog post](https://github.com/wheelnext/wheelnext/blob/a058c17c01856f439bee85c96ce498d24045afb8/docs/proposals/pepxxx_wheel_variant_support.md).
 
 ## Variant labels
 
