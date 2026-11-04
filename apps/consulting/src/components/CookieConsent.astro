@@ -1,0 +1,97 @@
+---
+// Cookie consent banner (vanilla-cookieconsent v3). Plausible is cookieless
+// and loads regardless; anything that sets cookies goes in the "analytics"
+// category and must not run until the visitor accepts it. To gate a script
+// tag, give it type="text/plain" (so the browser skips it) and
+// data-category="analytics"; the library swaps in a live copy once consent
+// is given. See the Reo tag in layouts/BaseLayout.astro. (Don't write
+// literal script tags in this comment -- Astro parses them even here.)
+//
+// Bump `revision` whenever the categories or the policy change; that
+// discards stored consent and shows the banner again.
+---
+
+<script>
+  import 'vanilla-cookieconsent/dist/cookieconsent.css';
+  import * as CookieConsent from 'vanilla-cookieconsent';
+
+  const PRIVACY_POLICY_URL = '/privacy-policy';
+  const privacyLink = `<a href="${PRIVACY_POLICY_URL}">Privacy Policy</a>`;
+
+  CookieConsent.run({
+    revision: 1,
+    guiOptions: {
+      consentModal: { layout: 'box', position: 'bottom left' },
+      preferencesModal: { layout: 'box' },
+    },
+    categories: {
+      necessary: { enabled: true, readOnly: true },
+      analytics: {},
+    },
+    // Gated scripts can't be unloaded once running, so reload to drop them
+    // when a visitor withdraws consent.
+    onChange: ({ changedCategories }) => {
+      if (
+        changedCategories.includes('analytics') &&
+        !CookieConsent.acceptedCategory('analytics')
+      ) {
+        window.location.reload();
+      }
+    },
+    language: {
+      default: 'en',
+      translations: {
+        en: {
+          consentModal: {
+            title: 'We use cookies',
+            description:
+              'We use cookies to understand how developers and organizations find and use our site. Analytics cookies are only set if you accept them.',
+            acceptAllBtn: 'Accept all',
+            acceptNecessaryBtn: 'Reject all',
+            showPreferencesBtn: 'Manage preferences',
+            footer: privacyLink,
+          },
+          preferencesModal: {
+            title: 'Cookie preferences',
+            acceptAllBtn: 'Accept all',
+            acceptNecessaryBtn: 'Reject all',
+            savePreferencesBtn: 'Save preferences',
+            closeIconLabel: 'Close',
+            sections: [
+              {
+                title: 'Strictly necessary',
+                description:
+                  'Required for the site to work, such as remembering your cookie choice. These cannot be turned off.',
+                linkedCategory: 'necessary',
+              },
+              {
+                title: 'Analytics',
+                description:
+                  'Help us understand which organizations visit our site and what they are interested in.',
+                linkedCategory: 'analytics',
+              },
+              {
+                title: 'More information',
+                description: `See our ${privacyLink} for details.`,
+              },
+            ],
+          },
+        },
+      },
+    },
+  });
+</script>
+
+<style is:global>
+  /* `html` outranks the library's own `#cc-main` defaults regardless of
+     which stylesheet loads first. */
+  html #cc-main {
+    --cc-font-family: 'Inter', sans-serif;
+    --cc-link-color: theme('colors.violet');
+    --cc-btn-primary-bg: theme('colors.violet');
+    --cc-btn-primary-border-color: theme('colors.violet');
+    --cc-btn-primary-hover-bg: theme('colors.pink');
+    --cc-btn-primary-hover-border-color: theme('colors.pink');
+    --cc-toggle-on-bg: theme('colors.violet');
+  }
+</style>
