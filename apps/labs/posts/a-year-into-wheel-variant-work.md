@@ -60,14 +60,15 @@ Finally, given the complexity of providers, we decided to further split the 
 </figure>
 </div>
 
-We therefore settled on four PEPs so far:
+We therefore settled on five PEPs so far:
 
-1. Package Format ([PEP 825](https://peps.python.org/pep-0825/)): focused on changes to the wheel format and the initial set of variant metadata.
-2. Providers ([PEP 850](https://peps.python.org/pep-0850/)): extending the Package Format PEP with providers used to determine which variant properties are supported, defining the plugin API.
-3. Building: extending the Providers PEP with build backend support, `pyproject.toml` format for variant metadata, build-time bits of the plugin API.
-4. UX, maintainability, security and governance: covering the introduction strategy and maintenance of a community maintained repository of trusted variant providers.
+1. [PEP 817](https://peps.python.org/pep-0817/) as the umbrella PEP.
+2. Package Format ([PEP 825](https://peps.python.org/pep-0825/)): focused on changes to the wheel format and the initial set of variant metadata.
+3. Providers ([PEP 850](https://peps.python.org/pep-0850/)): extending the Package Format PEP with providers used to determine which variant properties are supported, defining the plugin API.
+4. Building: extending the Providers PEP with build backend support, `pyproject.toml` format for variant metadata, build-time bits of the plugin API.
+5. UX, maintainability, security and governance: covering the introduction strategy and maintenance of a community maintained repository of trusted variant providers.
 
-Some aspects of the proposition could have fit into different PEPs.
+Some aspects of the design could have fit into different PEPs.
 For example, the wheel selection algorithm could either be placed in the Package Format PEP, where it would operate on the data provided by the "black box" providers, in the Providers PEP, or even in a PEP of its own.
 Our decision to include it in the first PEP was mostly prompted by the desire to keep the Providers PEP maximally focused.
 
@@ -93,7 +94,7 @@ The current high-level design suggests defining all valid labels in `pyproject
 
 Providers are the core of variant wheels: they are used to determine which properties are compatible with the user's system, and therefore which variant wheel will be installed.
 The original specification was based entirely on plugins that were queried at install time.
-While some use cases still require such an approach, we have realized that many can be solved with static metadata.
+While some use cases, hardware detection on the target machine in particular, still require such an approach, we have realized that many can be solved with static metadata.
 
 <!-- todo: add background to text to fix black bg -->
 
@@ -166,7 +167,7 @@ To avoid growing the amount of exchanged metadata excessively while installing v
 This implied that the individual wheels carry consistent metadata – one that can be correctly and predictably combined for the index.
 
 The original specification recommended enforcing that both `default-priorities` and `providers` are exactly the same across all wheels.
-While this assumption holds when all the wheels are built from a single `pyproject.toml`, it has been pointed out that it is needlessly limiting and it could cause issues if one builds additional kinds of variants later or wants to combine variants built separately.
+While this assumption holds when all the wheels are built from a single `pyproject.toml`, it has been pointed out that it is needlessly limiting and it could cause issues if one builds additional kinds of variants later or wants to combine variants built separately (common for deep learning libraries which support multiple types of accelerator hardware).
 PEP 817 relaxed this requirement to permit "careful merging […], as long as no conflicting information is introduced, and the resolution results within a subset of variants do not change".
 PEP 825 (and then PEP 850) went ever further, explicitly specifying consistency requirements for individual metadata keys, and providing an algorithm for merging them.
 
@@ -221,6 +222,7 @@ For comparison, with "static" plugins you just have to query all the interesti
 In the end, we decided that "dynamic" plugins are not worth the complexity introduced, and removed them prior to PEP 817.
 Formerly "static" plugins became the only kind of plugins defined, and eventually "static" became the term associated with truly static metadata.
 The NVIDIA provider was rewritten to output a reasonably wide range of compatible minimum and maximum versions around the installed version, and will be updated whenever that range is no longer sufficient for the CUDA versions in use.
+This is similar to how macOS versions are treated by the `packaging` library, and should work fine in practice.
 
 ## Namespaces are no longer fixed
 
@@ -234,6 +236,7 @@ PEP 850 relaxed this.
 The namespace became solely a project-side identifier.
 Plugins can still declare a recommended namespace identifier via their entry point, but it exists only for convenience and doesn't need to match the namespace actually used.
 The project maintainers can use any namespace for any provider as they see fit, and the `providers` metadata maps it into an actual provider.
+This eliminates an unnecessary constraint and eliminates the risk of two plugins incidentally choosing the same namespace.
 
 We also clarified that tools vendoring or reimplementing providers must recognize them by the Python package names rather than the namespaces.
 
@@ -250,12 +253,12 @@ All the provider changes also meant that the plugin API fluctuated.
 </div>
 
 Originally, the API defined two properties: `namespace` specifying the plugin's namespace, and `dynamic` specifying whether the plugin was "dynamic" or "static".
-PEP 817 removed the concept of dynamic plugins, and the `dynamic` property along with it.
+PEP 817 removed the concept of dynamic plugins, and a boolean `dynamic` property along with it.
 However, it introduced build-time plugins (called "AoT plugins" at the time), and consequently the `is_aot_plugin` property.
 PEP 850 removed fixed namespaces, and therefore the `namespace` property.
 It also deferred build-time functionality into a subsequent PEP, removing `is_aot_plugin`.
-The current plan is to reintroduce it as `all_properties_compatible`.
-Yes, all the changes can feel a bit vertiginous, but if you look at the final specification, the API is probably cleaner than before.
+The current plan is to reintroduce it as a boolean `all_properties_compatible`.
+Yes, all the changes can feel a bit hard to keep up with, but if you look at the final specification, the API is cleaner than before.
 
 The API also used to define two methods: `get_supported_configs()` that returned a list of properties compatible with the system, and `validate_property()` used to verify whether a particular property is valid to build a wheel with.
 The first one had a quasi-optional `known_properties` argument that accepted an union of all the properties found in available wheels.
@@ -274,7 +277,7 @@ For example, a NumPy x86-64-v4 MKL wheel was produced via calling:
 python -m build -w \
   -Cvariant=x86_64::level::v4 \
   -Cvariant=blas_lapack::provider::mkl \
-  -Cvariant-label=x8664v4_mkl
+  -Cvariant-label=x86_64_v4_mkl
 ```
 
 whereas a null variant would be produced via:
@@ -289,7 +292,7 @@ Rather than passing properties explicitly, one passes the variant label and th
 As a result, the two commands above are simplified to, respectively:
 
 ```bash
-python -m build -w -Cvariant-label=x8664v4_mkl
+python -m build -w -Cvariant-label=x86_64_v4_mkl
 python -m build -w -Cvariant-label=null
 ```
 
@@ -316,9 +319,8 @@ Konstantin Schütze who is working with us on wheel variants, already wrote a 
 I can share a very similar impression.
 
 Our early threads on discuss.python.org attracted a lot of attention, and quickly grew beyond manageable size.
-This is partially our fault for making the initial proposal too broad.
 Once more people started replying and commenting on different aspects of the proposal, it became increasingly hard to follow the individual subthreads and find consensus.
-We reached the point when any new participant would need to spend significant time following the existing discussion; in some cases this lead to potentially interested parties not taking part.
+We reached the point when any new participant would need to spend significant time rereading the existing discussion; in some cases this lead to potentially interested parties not taking part.
 In fact, a number of packaging tool maintainers have explicitly said that they are unable to follow DPO discussions, which required us to request their feedback separately.
 
 While we received much constructive feedback, we have also seen many comments that were disruptive.
@@ -328,8 +330,7 @@ All these contributed to confusion and frustration, and made it much harder t
 
 However, things improved over time.
 Splitting the PEPs made it easier to comprehend the proposal and to gather focused feedback, and therefore to improve the specification.
-New people joined the effort and started actively contributing.
-Over time, even projects outside the WheelNext organization, such as scikit-build-core, started including preview support for wheel variants.
+New people joined the effort and started actively contributing, both through the WheelNext organization and independently.
 
 ## What comes next?
 
