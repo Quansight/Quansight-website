@@ -12,12 +12,12 @@ hero:
   imageAlt: ""
 ---
 
-# A year into wheel variant work
+# A year into Wheel Variants work
 
-Over a year ago, we have [announced a working prototype of wheel variants](/blog/python-wheels-from-tags-to-variants).
+Over a year ago, we [announced a working prototype of wheel variants](/blog/python-wheels-from-tags-to-variants).
 It was a major milestone that marked the transition from the initial experimentation stage into specification work.
 The proto-PEP developed back then became the first iteration of [PEP 817](https://peps.python.org/pep-0817/), one that included a lengthy specification part.
-However, the subsequent discussion made us realize that the design itself is far too complex to be carried out in a single PEP, and we moved and split the specification part a series of documents starting with [PEP 825](https://peps.python.org/pep-0825/).
+However, the subsequent discussion made us realize that the design itself is far too complex to be contained in a single PEP, and we moved and split the specification part a series of documents starting with [PEP 825](https://peps.python.org/pep-0825/).
 PEP 817 then became a kind of high-level guide to the overall design.
 
 The split wasn't the only thing happening.
@@ -31,19 +31,19 @@ I would like to take this opportunity to explore how the design changed sinc
 Originally we wanted to pursue wheel variants as a single PEP.
 The decision made sense at the time: it was a complete tested design.
 You needed all the bits to see how they fit together, and without all of them, you wouldn't be able to achieve the desired user experience.
-The problem is that when you try to cover everything at once: metadata, providers, plugin API, installing, building and so on, the specification becomes very long and hard to process.
+The problem is that when you try to cover everything at once - metadata, providers, plugin API, installing, building, and so on -  the specification becomes very long and hard to process.
 You lose the ability to see the forest for the trees.
 We tried to resolve this by replacing the original rationale section (which had to be kept cross-referenced to the specification) with a combined overview-rationale, but that did not help much.
 Besides, at this point even we were finding it difficult to update the specification, given that any change created a cluster of inconsistencies.
 
-So split was clearly the way forward.
+So splitting up the PEP was clearly the way forward.
 But how should we have split it?
 Smaller parts are easier to debate on their own merit, but they need to be linked to the high-level design somehow.
 Variant namespaces start truly making sense if you consider providers as independently governed.
 We also needed to consider the risk that changes to the individual parts of the specification may require revisiting earlier PEPs.
 
 We decided to make the first cut where providers started.
-They were easily the most controversial part of the design, and attracted most of the discussion, which in turn made it hard to get feedback on the more fundamental aspects such as the metadata format.
+They were easily the most controversial part of the design, and attracted most of the discussion, which in turn made it hard to get feedback on more fundamental aspects such as the metadata format.
 While the architecture cannot work without providers, it is entirely possible to treat them as a "black box"; specify where they fit into the design, and define an interface that a subsequent PEP has to provide.
 An additional advantage of this direction is that a good foundation is universal: the provider model can change substantially, and still fit into it.
 
@@ -56,7 +56,7 @@ Finally, given the complexity of providers, we decided to further split the 
 <figure style="width: auto; margin: 0 2em; display: inline-block; verticalAlign: top">
   <img src="/posts/a-year-into-wheel-variant-work/peps.png"
     width="541" height="258" alt="TODO" />
-  <figcaption>Fig. 1. The structure of PEPs</figcaption>
+  <figcaption>Fig. 1. The structure of Wheel Variants PEPs</figcaption>
 </figure>
 </div>
 
@@ -82,7 +82,7 @@ Let's start with the variant label, the unique identifier added to the filena
 The early drafts of the specification used a variant hash instead, created from a serialized form of the wheel's variant properties.
 Later, an explicit human-written label of up to 8 characters was permitted as a more readable alternative to that.
 
-By the time of the [initial PEP 817 draft](https://github.com/wheelnext/peps/blob/f81a8256fc4372ad1f166afa359a7f5f768ea144/peps/pep-0817.rst), variant hash was no longer part of the specification. 
+By the time of the [initial PEP 817 draft](https://github.com/wheelnext/peps/blob/f81a8256fc4372ad1f166afa359a7f5f768ea144/peps/pep-0817.rst), the variant hash was no longer part of the specification. 
 We had kept it as the default label in the implementation (since such a hash still constituted a valid label), though.
 The null variant no longer used `00000000` but a shorter `null` label.
 
@@ -113,14 +113,14 @@ All such variant properties are always supported, so the user can install a v
 
 The two approaches can also be combined: a plugin can be queried at build time, and used to fill the static compatibility data in the built wheel.
 The plugin provides a single location for defining properties, so they can be used consistently across different packages.
-However, since it is only used at build time, it does not introduce any install-time overhead or security risk.
+However, since it is only used at build time, it does not introduce any overhead or code that needs to be trusted at install time.
 
 We have also introduced an "ABI Dependency Provider" as a special case.
 It is a provider that can be used to create variants built against different dependency versions.
 For example, extensions built against a specific PyTorch version require the same version at runtime.
 Normally, this means that a single package version supports only one PyTorch version.
 By introducing these "ABI variants", this version can now easily support multiple PyTorch versions and the installer can select a wheel matching your PyTorch installation.
-However, the implementation of such a provider must be quite complex, as it needs to be integrated with the dependency resolver; we therefore made it optional and defined it as a special case rather than trying to bend the plugin interface to make it work.
+However, the implementation of such a provider is inherently complex, as it needs to be integrated with the dependency resolver; we therefore made it optional and defined it as a special case rather than trying to bend the plugin interface to make it work.
 PEP 850 generalized this special case into a class of "built-in" providers, of which this provider is the only defined example so far.
 
 ## Variant metadata
@@ -162,7 +162,7 @@ It's worth noting that in the latest design, the provider type is effectively
 
 ## Metadata consistency
 
-To avoid growing the amount of exchanged metadata excessively while installing variant wheels, we decided that the index-level metadata file will not provide separate information for every variant wheel, but rather the metadata will be shared between all variants for a single package version.
+To avoid growing the amount of exchanged metadata excessively while installing variant wheels, we decided that the index-level metadata file will not provide separate information for every variant wheel, but rather that metadata will be shared between all variants for a single package version.
 This implied that the individual wheels carry consistent metadata – one that can be correctly and predictably combined for the index.
 
 The original specification recommended enforcing that both `default-priorities` and `providers` are exactly the same across all wheels.
@@ -193,7 +193,7 @@ We were also discussing the possibility of adding a marker that specifically 
 
 PEP 825 changed the behavior of `variant_properties` slightly.
 Previously, the marker matched against all properties that the wheel was built with; now it matches against the subset of properties that are compatible with the system.
-For example, you can now built a wheel supporting multiple GPUs and introduce dependencies that will be installed only when one of them is actually present (previously, the markers for all GPUs supported by the wheel would match):
+For example, you can now build a wheel supporting multiple GPUs and introduce dependencies that will be installed only when one of them is actually present (previously, the markers for all GPUs supported by the wheel would match):
 
 ```
 example-sm120-kernels; "nvidia :: sm_arch :: 120_real" in variant_properties
@@ -225,7 +225,7 @@ The NVIDIA provider was rewritten to output a reasonably wide range of compa
 ## Namespaces are no longer fixed
 
 Up to PEP 817, every variant plugin specified the namespace used by its properties.
-If you used the NVIDIA provider plugin, you had to use `nvidia` namespace.
+If you used the NVIDIA provider plugin, you had to use the `nvidia` namespace.
 The x86-64 CPU plugin used `x86_64`, and so on.
 Conversely, you couldn't use two different providers in a single project version if they used the same namespace.
 The "ABI Dependency Provider" also used a reserved namespace.
@@ -260,7 +260,7 @@ Yes, all the changes can feel a bit vertiginous, but if you look at the fin
 The API also used to define two methods: `get_supported_configs()` that returned a list of properties compatible with the system, and `validate_property()` used to verify whether a particular property is valid to build a wheel with.
 The first one had a quasi-optional `known_properties` argument that accepted an union of all the properties found in available wheels.
 PEP 817 removed this argument, and reversed the property validation logic; `validate_property()` was replaced by `get_all_configs()`, returning all valid properties for a given plugin.
-The new approach was symmetric with `get_supported_configs()` and more efficient.
+The new approach is symmetric with `get_supported_configs()` and more efficient.
 This part of the API did not change further, beyond being split between PEP 850 and the PEP following it for the build-time part.
 
 ## Build backends
@@ -296,18 +296,18 @@ python -m build -w -Cvariant-label=null
 ## The security aspect
 
 Unsurprisingly, the most controversial part of the whole proposal was the idea that providers would be external Python packages that could be installed and executed automatically.
-We have anticipated this being a problem, we highlighted it in the PEP, and listed a few suggested options to mitigate the issues.
+We had anticipated this being a problem, we highlighted it in the PEP as needing to be solved, and listed a few suggested options to mitigate the issues.
 We wanted to get more feedback before proposing something more specific, but unfortunately the lack of definite solution caused the discussion to quickly derail.
 
-In the subsequent iterations, we have managed to keep gathering feedback and improving the security story.
+In the subsequent iterations, we managed to keep gathering feedback and to keep improving the security story.
 We realized that "opt-out" is not an acceptable default, and instead focused on an "opt-in" approach with specific provisions for enabling the most popular plugins by default.
-To keep things truly secure, we had to combine two goals: preventing completely arbitrary packages from being installed and executed as part of wheel installation, but also preventing the proposal from introducing security fatigue.
+To keep things truly secure, we had to combine two goals: preventing completely arbitrary packages from being installed and executed as part of wheel installation, while also preventing the proposal from introducing security fatigue.
 We reasoned: if we force users to opt-in to the providers needed to install commonly used packages, the users will eventually blanket enable all providers to avoid the hassle.
 This would be the worst possible outcome.
 
 We also learned that we mustn't defer deciding which plugins can be used by default to the tool maintainers entirely, or rely on a consensus being established implicitly.
 Instead, we need to establish a central authority that will maintain the repository of vetted plugins, as well as clear requirements that these plugins must meet.
-This is important enough topic that it will be covered by a separate PEP, built upon the consensus from the [security of wheel variants discussion](https://discuss.python.org/t/security-of-wheel-variants/109569).
+This is an important enough topic that it will be covered by a separate PEP, built upon the consensus from the [security of wheel variants discussion](https://discuss.python.org/t/security-of-wheel-variants/109569).
 
 ## Getting feedback
 
@@ -319,7 +319,7 @@ Our early threads on discuss.python.org attracted a lot of attention, and qu
 This is partially our fault for making the initial proposal too broad.
 Once more people started replying and commenting on different aspects of the proposal, it became increasingly hard to follow the individual subthreads and find consensus.
 We reached the point when any new participant would need to spend significant time following the existing discussion; in some cases this lead to potentially interested parties not taking part.
-In fact, multiple developers from packaging-related projects have explicitly indicated that they are unable to follow DPO discussions, which required us to request their feedback separately.
+In fact, a number of packaging tool maintainers have explicitly said that they are unable to follow DPO discussions, which required us to request their feedback separately.
 
 While we received much constructive feedback, we have also seen many comments that were disruptive.
 We have seen people who kept repeating the same points, without being mindful that repetitive comments don't add anything and make it harder for others to participate.
@@ -348,8 +348,8 @@ Our goal is to have the complete specification approved and deployed in 2027.
 
 ## Acknowledgements
 
-Many people have been involved in the wheel variant work.
-I would like to thank for all their work: the contributions to the specification and implementations, feedback, support and the encouragement.
+Many people have been involved in the Wheel Variants work.
+I would like to thank them for all their work: the contributions to the specification and implementations, their feedback, support and encouragement.
 Getting where we are took a lot of effort and persistence.
 
-Thanks to [Red Hat](https://www.redhat.com) for funding Quansight's contributions to the wheel variant design. Red Hat is [shipping accelerator-enabled Python packages](https://wheelnext.dev/summits/2025_03/assets/WheelNext%20Community%20Summit%20-%2006%20-%20Red%20Hat.pdf), like PyTorch, as wheels in a virtual environment as part of [Red Hat AI](https://www.redhat.com/en/products/ai), and saw the importance of improving Python packaging for heterogeneous hardware, resulting in their support for the WheelNext initiative.
+Thanks to [Red Hat](https://www.redhat.com) for funding Quansight's contributions to the Wheel Variants design. Red Hat is [shipping accelerator-enabled Python packages](https://wheelnext.dev/summits/2025_03/assets/WheelNext%20Community%20Summit%20-%2006%20-%20Red%20Hat.pdf), like PyTorch, as wheels in a virtual environment as part of [Red Hat AI](https://www.redhat.com/en/products/ai), and saw the importance of improving Python packaging for heterogeneous hardware, resulting in their support for the WheelNext initiative.
