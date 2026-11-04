@@ -79,17 +79,23 @@ In the remainder of the post, I'd like to explore the differences from the�
 ## Variant labels
 
 Let's start with the variant label, the unique identifier added to the filename.
-The early drafts of the specification actually used a variant hash, generated from a serialized form of the wheel's variant properties.
-Later, an explicit human-written label of up to 8 characters was permitted as a more readable alternative to that.
-By the time of the [initial PEP 817 draft](https://github.com/wheelnext/peps/blob/f81a8256fc4372ad1f166afa359a7f5f768ea144/peps/pep-0817.rst), variant hash was no longer part of the specification, but rather an implementation detail (since such a hash still constituted a valid label); the null variant no longer used `00000000` but a shorter `null` label.
+The early drafts of the specification used a variant hash instead, created from a serialized form of the wheel's variant properties.
+Later, an explicit human-written label of up to 8 characters was permitted as a more readable alternative to that.
+
+By the time of the [initial PEP 817 draft](https://github.com/wheelnext/peps/blob/f81a8256fc4372ad1f166afa359a7f5f768ea144/peps/pep-0817.rst), variant hash was no longer part of the specification. 
+We had kept it as the default label in the implementation (since such a hash still constituted a valid label), though.
+The null variant no longer used `00000000` but a shorter `null` label.
+
 PEP 825 removed the arbitrary length limitation, leaving the decision about filename length up to the package maintainers.
-Finally, the current high-level design suggests defining all valid labels in `pyproject.toml`, rendering variant hashes entirely obsolete.
+The current high-level design suggests defining all valid labels in `pyproject.toml`, rendering variant hashes entirely obsolete.
 
 ## Intermission: Providers
 
-Providers are the core of variant wheels: they are used to determine which properties are compatible with one's system, and therefore which variant wheel will be installed.
+Providers are the core of variant wheels: they are used to determine which properties are compatible with the user's system, and therefore which variant wheel will be installed.
 The original specification was based entirely on plugins that were queried at install time.
 While some use cases still require such an approach, we have realized that many can be solved with static metadata.
+
+<!-- todo: add background to text to fix black bg -->
 
 <div style="text-align: center">
 <figure style="width: auto; margin: 0 2em; display: inline-block; verticalAlign: top">
@@ -100,25 +106,27 @@ While some use cases still require such an approach, we have realized that many
 </div>
 
 PEP 817 therefore introduced a different kind of providers: ones using static compatibility data embedded inside the wheel.
-In this case, this metadata takes over the role of the plugin, eliminating the need to install a package and run third-party code.
+This metadata takes over the role of the plugin, eliminating the need to install a package and run third-party code.
 For example, NumPy can be built against different BLAS/LAPACK libraries.
 The specific library used is a property entirely internal to the wheel.
-All variant properties defined this way are always supported, so the user can install a variant built against any library, looking only at the available variants rather than querying anything else about the system.
+All such variant properties are always supported, so the user can install a variant built against any library, without obtaining any additional system information.
 
 The two approaches can also be combined: a plugin can be queried at build time, and used to fill the static compatibility data in the built wheel.
-The plugin serves as a single point where properties are defined, so they are used consistently across packages.
-However, it is only used at build time, so it does not introduce any install-time overhead.
+The plugin provides a single location for defining properties, so they can be used consistently across different packages.
+However, since it is only used at build time, it does not introduce any install-time overhead or security risk.
 
 We have also introduced an "ABI Dependency Provider" as a special case.
 It is a provider that can be used to create variants built against different dependency versions.
-For example, binary compatibility requires that extensions built against a specific PyTorch version depend on the same version; by introducing per-version variants, a single package version can now easily support multiple PyTorch versions and the installer can select a wheel to match.
-However, such a provider is quite complex to implement, as it needs to be integrated with the dependency resolver; we therefore made it optional and defined as a special case rather than tried to bend the plugin interface to make it work.
+For example, extensions built against a specific PyTorch version require the same version at runtime.
+Normally, this means that a single package version supports only one PyTorch version.
+By introducing these "ABI variants", this version can now easily support multiple PyTorch versions and the installer can select a wheel matching your PyTorch installation.
+However, the implementation of such a provider must be quite complex, as it needs to be integrated with the dependency resolver; we therefore made it optional and defined it as a special case rather than trying to bend the plugin interface to make it work.
 PEP 850 generalized this special case into a class of "built-in" providers, of which this provider is the only defined example so far.
 
 ## Variant metadata
 
 Variant metadata carries the mapping from labels to variant properties, the provider information and variant property ordering.
-It manifests inside the project's `pyproject.toml` file, as a JSON file inside the built wheel and as aggregated metadata on the index.
+It can be found inside the project's `pyproject.toml` file, in a dedicated JSON file inside the built wheel, and as an aggregated metadata file on the index.
 
 <div style="text-align: center">
 <figure style="width: auto; margin: 0 2em; display: inline-block; verticalAlign: top">
@@ -128,29 +136,29 @@ It manifests inside the project's `pyproject.toml` file, as a JSON file inside
 </figure>
 </div>
 
-Originally, the metadata used three top-level keys: `default-priorities` with project-level ordering data, `providers` describing the used provider plugins, and `variants` that was present only in JSON files and listed available variants.
-In PEP 817, `$schema` was added to the JSON files that enabled versioning the metadata; PEP 825 made it use semantic versioning, and provided the rules for changing the metadata format.
+Originally, the metadata used three top-level keys: `default-priorities` with project-level ordering data, `providers` describing the used provider plugins, and `variants` that listed available variants (only in JSON).
+In PEP 817, `$schema` was added to the JSON files for versioning the metadata; PEP 825 specified the use of semantic versioning, and provided the rules for changing the metadata format.
 The current specification draft extends `variants` to `pyproject.toml` as well, making the format more symmetric.
 
 `default-priorities` used to specify the ordering information for namespaces, features and individual properties.
 The first one was necessary, as only the project could determine what's more important to it.
 The other two enabled overriding priorities coming from the providers themselves, and were added for completeness.
-PEP 825 removed them, as they were adding unnecessary complexity and we have not found a good use case justifying it.
+They were removed in PEP 825, as they were adding unnecessary complexity and we have not found a good use case justifying it.
 
 Along with providers, the `providers` dictionary underwent a major transformation.
 Each provider used to be described using up to four keys: `requires` specifying the packages providing the plugin, `plugin-api` providing an override for its entry point, `enable-if` allowing plugins to be skipped based on environment markers, and `optional` to introduce opt-in plugins.
-PEP 817 introduced a top-level `static-properties` key for providers based on static compatibility information, with mapping of namespaces to property sets.
-It also added an `install-time` key to the provider dictionary; if set to `false`, the plugin would be queried when building the wheel, and `static-properties` will be added to the resulting wheel.
+PEP 817 introduced a top-level `static-properties` key for providers based on static compatibility information. 
+It also added an `install-time` key to the provider dictionary; if set to `false` while `requires` was specified, the plugin would be queried when building the wheel, and `static-properties` will be added to the resulting wheel.
 Since dictionaries in TOML and JSON could not reliably convey dictionary key order, `default-priorities.feature` had to be used to specify the ordering of static features.
 
 All the provider metadata was out of scope for PEP 825; PEP 850 changed it signficantly.
-For a start, `enable-if` is gone entirely; we have realized that it is entirely redundant to skipping the plugins that weren't used to build a wheel for your platform.
+For a start, `enable-if` is gone entirely; we have realized that it is entirely redundant and we can skip the plugins that weren't used to build a wheel for your platform instead.
 `static-properties` was moved inside the provider information dictionary, removing unnecessary duplication of namespace keys, and made mutually exclusive with `requires`.
 Once `default-priorities.feature` was removed from PEP 825, `feature-order` was added to the provider information to complement static property definitions.
 `install-time` was removed as well; instead, `requires` is assumed to always imply an install-time plugin, and the current high-level draft uses a `build-requires` key in `pyproject.toml` (mutually exclusive with the other key) to facilitate build-time plugin querying.
 Finally, the `builtin` key was added to indicate a built-in provider.
 
-It's worth noting that in the latest design, the provider type is effectively defined by the presence of one of the mutually exclusive keys: `requires`, `static-properties`, `builtin` or `build-requires` (the last one only allowed in `pyproject.toml`).
+It's worth noting that in the latest design, the provider type is effectively defined by the presence of one of four the mutually exclusive keys: `requires`, `static-properties`, `builtin` or `build-requires` (the last one only allowed in `pyproject.toml`).
 
 ## Metadata consistency
 
