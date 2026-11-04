@@ -162,37 +162,38 @@ It's worth noting that in the latest design, the provider type is effectively
 
 ## Metadata consistency
 
-Variant metadata is exposed both inside each individual wheel, and in aggregated form in an index-level metadata file.
-The latter file does not provide for per-wheel metadata, but rather requires that a single combination of values can satisfy all variant wheels built for a single project version.
+To avoid growing the amount of exchanged metadata excessively while installing variant wheels, we decided that the index-level metadata file will not provide separate information for every variant wheel, but rather the metadata will be shared between all variants for a single package version.
+This implied that the individual wheels carry consistent metadata – one that can be correctly and predictably combined for the index.
 
 The original specification recommended enforcing that both `default-priorities` and `providers` are exactly the same across all wheels.
-While this assumption holds when all the wheels are built from a single `pyproject.toml`, it has been pointed out that it is needlessly limiting and it could cause issues if one builds additional kinds of variants later or wants to add variants built separately.
+While this assumption holds when all the wheels are built from a single `pyproject.toml`, it has been pointed out that it is needlessly limiting and it could cause issues if one builds additional kinds of variants later or wants to combine variants built separately.
 PEP 817 relaxed this requirement to permit "careful merging […], as long as no conflicting information is introduced, and the resolution results within a subset of variants do not change".
 PEP 825 (and then PEP 850) went ever further, explicitly specifying consistency requirements for individual metadata keys, and providing an algorithm for merging them.
 
-Variant wheels therefore permit building new variants for the same version, as long as their labels remain unique, and adding new providers, provided that they are added to the end of `default-priorities.namespace` list.
-The crucial requirement is that each new set of wheels must build upon the previous namespace list; otherwise, it would be impossible to merge them in a reproducible way.
+The current specification permits building new variants for the same version, as long as their labels remain unique, and adding new providers, as long as that they are added to the end of `default-priorities.namespace` list.
+The crucial requirement is that each new set of wheels must build upon the previous list; otherwise, it would be impossible to merge them in a reproducible way.
 
 ## Variant ordering
 
-The specification provides not only for determining whether a particular variant can be installed, but also for selecting the most appropriate among the compatible wheels.
-The algorithm provided for that remained mostly unchanged since the initial draft, although it has been rewritten multiple times in an effort to make it easier to comprehend.
-PEP 825 is a culmination of that effort, combining a high-level overview, an example, a detailed algorithm and a pseudocode implementation.
+It is not only necessary to determine whether a particular variant can be installed, but also to select the most appropriate among the compatible wheels.
+The ordering and selection algorithm remained mostly unchanged since the initial draft, although it has been rewritten multiple times in an effort to make it easier to comprehend.
+PEP 825 features a culmination of that effort, one that combines a high-level overview, an example, a detailed algorithm and a pseudocode implementation.
 
 Still, a few changes to the algorithm were made in PEP 825:
 
-- `default-priorities.feature` and `default-priorities.property` were removed, making the feature and value ordering entirely provider-defined
+- `default-priorities.feature` and `default-priorities.property` are gone, the feature and value ordering is now defined solely by the provider
 - only the best compatible value for every feature is now used to order variants, rather than all compatible values
-- for the pathological case when two variants evaluate to the same sorting key, a fallback ordering on variant label was added
+- for the pathological case when two variants evaluate to the same sorting key, the wheels are ordered lexically by their label
 
 ## Environment markers
 
-The original specification introduced three environment markers that enabled making project dependencies conditional to the variant installed: `variant_properties`, `variant_features` and `variant_namespaces`.
+The original specification introduced three environment markers: `variant_properties`, `variant_features` and `variant_namespaces`.
+They made it possible to define dependencies specific to a variant while keeping the dependency list invariant across different wheels.
 We were also discussing the possibility of adding a marker that specifically matched against the variant label, and in PEP 817 we eventually added it as `variant_label`.
 
 PEP 825 changed the behavior of `variant_properties` slightly.
 Previously, the marker matched against all properties that the wheel was built with; now it matches against the subset of properties that are compatible with the system.
-For example, if you provide a variant wheel supporting multiple GPUs, you can now introduce dependencies that will be used only when the user has the specified GPU installed (previously, the markers for all GPUs supported by the wheel would match):
+For example, you can now built a wheel supporting multiple GPUs and introduce dependencies that will be installed only when one of them is actually present (previously, the markers for all GPUs supported by the wheel would match):
 
 ```
 example-sm120-kernels; "nvidia :: sm_arch :: 120_real" in variant_properties
@@ -209,15 +210,15 @@ In this context, "static" meant that the plugin queried the system and retur
 The NVIDIA provider was the original use case for dynamic plugins.
 We wanted variant wheels to be able to express minimum and maximum CUDA versions supported.
 However, the plugin couldn't reliably generate a list of all possible future CUDA versions.
-Instead, the installer would pass the minimum and maximum versions specified in the wheels, and the plugin would indicate whether the requirements are met or not.
+Instead, it would receive the bounds specified in the variant metadata of the wheels, and indicate whether the requirements are met or not.
 
-However, such a design was quite problematic.
+However, such a design was problematic.
 Most importantly, you couldn't easily replace the plugin with static metadata.
-If you wanted to generate such a replacement data automatically, you needed to specify all the properties that need to be covered.
-If one package required CUDA 12.8 and another CUDA 12.9, you'd need to explicitly cover both versions, and update your static metadata whenever you find a package with a property you didn't test for.
-For comparison, with "static" plugins you just had to query all the interesting plugins once and store their output; the resulting metadata would be compatible with all the packages using the plugin in the near future.
+After all, you would need to know all the possible values up front, so we were back to square one.
+If one package required CUDA 12.8 and another CUDA 12.9, you'd need to explicitly cover both versions, and update your static metadata whenever you find a package with a property you didn't cover before.
+For comparison, with "static" plugins you just have to query all the interesting plugins once and store their output; the resulting metadata would be compatible with all the packages using these plugins, at least until a future version introduced new properties.
 
-In the end, we have decided it's not worth it and removed "dynamic" plugins prior to PEP 817.
+In the end, we decided that "dynamic" plugins are not worth the complexity introduced, and removed them prior to PEP 817.
 Formerly "static" plugins became the only kind of plugins defined, and eventually "static" became the term associated with truly static metadata.
 The NVIDIA provider was rewritten to output a reasonably wide range of compatible minimum and maximum versions around the installed version, and will be updated whenever that range is no longer sufficient for the CUDA versions in use.
 
