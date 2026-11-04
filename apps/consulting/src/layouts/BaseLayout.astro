@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
   title?: string;
@@ -35,6 +36,10 @@ const { title = 'Quansight', description = '' } = Astro.props;
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
       plausible.init()
     </script>
+    <!-- Reo.dev: inert until the visitor accepts analytics cookies (see CookieConsent.astro) -->
+    <script type="text/plain" data-category="analytics">
+      !function(){var e,t,n;e="f48a9187d3d4182",t=function(){Reo.init({clientID:"f48a9187d3d4182", enableThirdPartyTracking: true})},(n=document.createElement("script")).src="https://static.reo.dev/"+e+"/reo.js",n.defer=!0,n.onload=t,document.head.appendChild(n)}();
+    </script>
   </head>
   <body>
     <SiteHeader />
@@ -47,5 +52,6 @@ const { title = 'Quansight', description = '' } = Astro.props;
       <slot />
     </main>
     <SiteFooter />
+    <CookieConsent />
   </body>
 </html>
