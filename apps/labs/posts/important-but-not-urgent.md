@@ -25,7 +25,7 @@ If the intro paragraph sounded familiar to you, it may be because you've already
 
 Let's focus in on the second category: important but not urgent tasks. And let's be honest, none of us spend enough time on them. We're either doing the important and urgent ones (because, no choice) or the unimportant and not urgent ones (because they're kind of easy and they give us the illusion of productivity).
 
-Lately, however, things have been changing. It's relatively easy to point an AI agent at a few of these GitHub issues and get it to fix them while you do other work. Fixing these important but not urgent issues is no longer a matter of "if I do this, I need to de-prioritise more impactful work". It still takes time to review the agents' code (and if it's open source code you're dealing with and you have actual users, please don't skip this step!), but the barrier to getting them done is considerably lower than it used to be.
+Lately, however, things have been changing. It's relatively easy to point an AI agent at a few of these GitHub issues and get it to fix them while you do other work. Fixing these important but not urgent issues is no longer a matter of "if I do this, I need to de-prioritise more urgent work". It still takes time to review the agents' code (and if it's open source code you're dealing with and you have actual users, please don't skip this step!), but the barrier to getting them done is considerably lower than it used to be.
 
 ## Why are "important but not urgent" issues so valuable?
 
