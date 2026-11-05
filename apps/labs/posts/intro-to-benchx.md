@@ -51,7 +51,6 @@ bx bench . --adapter=asv --filter Sort.time_argsort
 
 To compare your branch against `main`:
 
-<!-- TODO: fix the gitignore bug in benchx_issues.md before publishing -->
 ```console
 # This example assumes a pure-Python project with a flat layout.
 git worktree add ../myproject-main origin/main
