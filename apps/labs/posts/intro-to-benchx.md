@@ -6,10 +6,10 @@ description: 'Why does the world need yet another benchmarking tool?'
 category: [PyData ecosystem, Developer workflows]
 featuredImage:
   src: /posts/introducing-benchx/featured.png
-  alt: 'TODO'
+  alt: 'Terminal output of bx bench suite.py bench_sorted bench_join: a table listing each benchmark case with its median, mean ± standard deviation, min .. max, sample count (60) and status (success).'
 hero:
   imageSrc: /posts/introducing-benchx/hero.png
-  imageAlt: 'TODO'
+  imageAlt: 'Terminal output of bx bench suite.py bench_sorted bench_join: a table listing each benchmark case with its median, mean ± standard deviation, min .. max, sample count (60) and status (success).'
 ---
 
 > "Will this have any performance impacts?"
@@ -32,7 +32,7 @@ Benchx is a collection of components. You can use any one component individually
 
 ## Try it!
 
-Benchx is currently in pre-alpha stage, so don't take this example as set in stone; it may well change. But to give you an idea, here's an example of how you can run it. The project is not yet available on PyPI, so for now you'll need to clone the repo and install it from there:
+Benchx is currently in beta stage, so don't take this example as set in stone; it may well change. But to give you an idea, here's an example of how you can run it. The project is not yet available on PyPI, so for now you'll need to clone the repo and install it from there:
 
 ```console
 git clone https://github.com/benchx-dev/benchx
@@ -59,6 +59,12 @@ bx compare ../myproject-main . --adapter pyperf --profile revisions --suite suit
 
 It will handle interleaving for you, and will record details such as OS, Python version, source revisions, benchmark revisions, and whether any local work is uncommitted.
 
+## Can't I just use asv?
+
+Sure, if your primary use case is to compare revisions across CI runs and you're happy to let asv do your environment management for you. However, a lot of benchmarking doesn't look like that. For example, you may be midway through a refactor and wonder whether it'll make something faster. Rather than working around asv's environment management, you'd typically just use `%%timeit` and paste the numbers in a PR.
+
+Benchx is designed so that it never builds anything. Environment building is up to you. Hand benchx the environments, and it'll run them whilst keeping track of environment details for you. Instead of ad-hoc `%%timeit` commands in notebooks, use `bx bench`. It's just as quick, but the results carry with them a record of how they were produced.
+
 ## Getting involved
 
-Benchx is currently in pre-alpha and is just getting started. If you'd like to get involved, the most useful way to contribute would probably be by submitting a user story, following [the template on our site](https://benchx-dev.github.io/benchx/user_stories/TEMPLATE/). For anything else, our [issues and discussions on GitHub](https://github.com/benchx-dev/benchx) are open; feel free to reach out!
+Benchx is currently in beta and only got started about three months ago, in a collaboration between Quansight Labs and Arrow. If you'd like to get involved, the most useful way to contribute would probably be by submitting a user story, following [the template on our site](https://benchx-dev.github.io/benchx/user_stories/TEMPLATE/). For anything else, our [issues and discussions on GitHub](https://github.com/benchx-dev/benchx) are open; feel free to reach out!
