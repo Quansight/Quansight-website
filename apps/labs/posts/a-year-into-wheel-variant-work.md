@@ -130,7 +130,7 @@ It can be found inside the project's `pyproject.toml` file, in a dedicated JSO
 <div style="text-align: center">
 <figure style="width: auto; margin: 0 2em; display: inline-block; verticalAlign: top">
   <img src="/posts/a-year-into-wheel-variant-work/format-evo.png"
-    width="534" height="556" alt="TODO" />
+    width="608" height="556" alt="A side-by-side comparison of the three versions of variant metadata: pre-PEP, original PEP 817 and PEP 825/850. The first row is empty in the pre-PEP version, and contains $schema (JSON only) in the two newer versions. The second row contains the default-priorities block. In the pre-PEP and PEP 817 version, it contains three keys: namespace, feature and property. In the PEP 825 version, the two latter keys are gone and only namespace remains. The third row contains the providers block, keyed on namespace. The pre-PEP version features requires, plugin-api, optional and enable-if keys. The original PEP 817 version adds install-time key. It also adds a static-properties block below. The PEP 850 version removes enable-if, replaces install-time with build-requires (TOML only), moves static-properties into the providers block and adds feature-order. Finally, the last row contains variants; in the pre-PEP and original PEP 817 version, it's JSON only, but it's present in all formats per PEP 825/850." />
   <figcaption>Fig. 3. The evolution of variant metadata</figcaption>
 </figure>
 </div>
