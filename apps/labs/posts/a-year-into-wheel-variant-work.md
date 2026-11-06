@@ -96,12 +96,10 @@ Providers are the core of variant wheels: they are used to determine which pro
 The original specification was based entirely on plugins that were queried at install time.
 While some use cases, hardware detection on the target machine in particular, still require such an approach, we have realized that many can be solved with static metadata.
 
-<!-- todo: add background to text to fix black bg -->
-
 <div style="text-align: center">
 <figure style="width: auto; margin: 0 2em; display: inline-block; verticalAlign: top">
   <img src="/posts/a-year-into-wheel-variant-work/provider-types.png"
-    width="650" height="348" alt="TODO" />
+    width="650" height="348" alt="Side-by-side comparison of three provider types. First, the original plugin approach is shown, where plugin is used both at build time to validate properties, and at install time to check system compatibility. Then, build-time plugins approach: a plugin at build time to validate and fill static-properties, but at install time the wheel has compatibility info in static-properties. Finally, the static property approach defines static-properties in pyproject.toml for build time use, and again the wheel has compatibility info in static-properties at install time." />
   <figcaption>Fig. 2. Different provider types</figcaption>
 </figure>
 </div>
