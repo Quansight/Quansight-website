@@ -337,6 +337,10 @@ New people joined the effort and started actively contributing, both through t
 We have the building PEP initially drafted already as well, and ready to send once PEP 850 settles.
 We are also starting the work on the fourth PEP, which can be discussed in parallel with the building PEP.
 
+`variantlib`, the demo bundle of provider plugins, build backends and example projects were already updated for the latest iteration of the specification.
+`scikit-build-core` and `uv` are updating their preview features for wheel variant support.
+We are also working on populating our test index with the updated wheels.
+
 This looks like a lot, especially if you consider how much time it took from the initial PEP 817 draft to the provisional acceptance of PEP 825.
 However, we have good reasons to believe that things will move faster from here on.
 The foundations are in place, and the complete design was improved based on the feedback received so far.
