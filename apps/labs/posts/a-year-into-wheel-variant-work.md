@@ -55,7 +55,7 @@ Finally, given the complexity of providers, we decided to further split the 
 <div style="text-align: center">
 <figure style="width: auto; margin: 0 2em; display: inline-block; verticalAlign: top">
   <img src="/posts/a-year-into-wheel-variant-work/peps.png"
-    width="541" height="258" alt="TODO" />
+    width="491" height="258" alt="A diagram describing the PEP structure. To the left, PEP 817 (now umbrella) is shown, at full height. To the right, there is a wide Package Format block on the bottom. Above it and to the left, an arrow points at Providers block, and further upwards into Building block. To the right of Providers and Building blocks two arrows combine and point into UX, maintenance, security, governance block." />
   <figcaption>Fig. 1. The structure of Wheel Variants PEPs</figcaption>
 </figure>
 </div>
