@@ -245,7 +245,7 @@ All the provider changes also meant that the plugin API fluctuated.
 <div style="text-align: center">
 <figure style="width: auto; margin: 0 2em; display: inline-block; verticalAlign: top">
   <img src="/posts/a-year-into-wheel-variant-work/plugin-api.png"
-    width="641" height="195" alt="TODO" />
+    width="641" height="195" alt="A side-by-side comparison of the plugin API in the pre-PEP, original PEP 817 and PEP 850 + building version. The first row contains namespace attribute that is present in the two first versions, but removed in the PEP 850 version. The second row features the dynamic attribute that is only present in the pre-PEP version. The third row is missing in the pre-PEP version; in original PEP 817 version it contains is_aot_plugin, which is then replaced by all_properties_compatible. The fourth row contains get_supported_configs function across all versions, with an optional parameter in the pre-PEP version. The final row contains validate_config in the pre-PEP version, which is replaced by get_all_configs in the two later versions." />
   <figcaption>Fig. 4. The evolution of plugin API</figcaption>
 </figure>
 </div>
