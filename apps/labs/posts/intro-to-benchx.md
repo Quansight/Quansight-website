@@ -32,13 +32,10 @@ Benchx is a collection of components. You can use any one component individually
 
 ## Try it!
 
-Benchx is currently in beta stage, so don't take this example as set in stone; it may well change. But to give you an idea, here's an example of how you can run it. The project is not yet available on PyPI, so for now you'll need to clone the repo and install it from there:
+Benchx is currently in beta stage, so don't take this example as set in stone; it may well change. But to give you an idea, here's an example of how you can run it. First, install [benchx from PyPI](https://pypi.org/project/benchx/) (it requires Python 3.11+), along with pyperf, which the examples below use to time benchmarks:
 
 ```console
-git clone https://github.com/benchx-dev/benchx
-cd benchx
-uv venv && source .venv/bin/activate
-uv pip install -e prototype pyperf
+pip install benchx pyperf
 ```
 
 To just run a single benchmark locally:
