@@ -1,15 +1,15 @@
 ---
 title: 'A year into wheel variant work'
-published: October 14, 2026
+published: November 16, 2026
 authors: [michal-gorny]
-description: 'TODO'
+description: 'An update to the Wheel Variant work, covering the changes from the previous post and future outlooks'
 category: [Packaging]
 featuredImage:
-  src: ""
-  alt: ""
+  src: /posts/a-year-into-wheel-variant-work/hero.jpeg
+  alt: A short red-white trapezoid-shaped railbus from the 1990s. Photograph by the author.
 hero:
-  imageSrc: ""
-  imageAlt: ""
+  imageSrc: /posts/a-year-into-wheel-variant-work/hero.jpeg
+  imageAlt: A short red-white trapezoid-shaped railbus from the 1990s. Photograph by the author.
 ---
 
 # A year into Wheel Variants work
