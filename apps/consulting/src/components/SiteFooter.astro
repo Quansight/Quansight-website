@@ -101,6 +101,9 @@ const socialRows = [socialMedia.links.slice(0, 4), socialMedia.links.slice(4)];
         {legal && legal.slice(2).map((link) => (
           <a href={link.href} class="hover:underline">{link.text}</a>
         ))}
+        <button type="button" data-cc="show-preferencesModal" class="ml-[2rem] hover:underline">
+          Cookie settings
+        </button>
       </div>
       <p class="w-full sm:w-[34.4rem] px-[1rem]">{copyright}</p>
     </div>
