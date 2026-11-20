@@ -30,6 +30,8 @@ By exploring those stories, we realised that these open source projects have nee
 
 Benchx is a collection of components. You can use any one component individually, integrating it with your existing system, or multiple components together. The components we have are: runner, harness adapters (for asv, Google Benchmark, and pyperf), result store, comparator, and local workbench CLI. Benchx is strict about units, comparisons, and history, so you should always know what's being measured and compared.
 
+![Diagram of the benchx components. The bx workbench CLI sends work orders to the runner: bx bench sends one, and bx compare sends one per side per round, alternating between the sides, then asks the comparator to compare the results. The runner drives harness adapters (pyperf, Google Benchmark, and asv suites) and produces results in a shared result schema. These are ingested into the result store (store.parquet), which the comparator reads to decide whether each change is bigger than the noise, giving verdicts such as improved, regressed, no change detected, or indeterminate.](/posts/introducing-benchx/components.svg)
+
 ## Try it!
 
 Benchx is currently in beta stage, so don't take this example as set in stone; it may well change. But to give you an idea, here's an example of how you can run it. First, install [benchx from PyPI](https://pypi.org/project/benchx/) (it requires Python 3.11+), along with pyperf, which the examples below use to time benchmarks:
