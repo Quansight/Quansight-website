@@ -1,6 +1,6 @@
 ---
 title: 'Bringing v1 recipes to conda-build'
-published: November 12, 2026
+published: November 23, 2026
 authors: [jakov-smolic, jaime-rodriguez-guerra]
 description: "conda-build can now build v1 recipes, bringing a standardized, schema-validated recipe format to a familiar UX."
 category: [Packaging]
