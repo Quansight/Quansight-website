@@ -1,6 +1,6 @@
 ---
 title: 'Introducing benchx'
-published: November 11, 2026
+published: November 20, 2026
 authors: [marco-gorelli]
 description: 'Why does the world need yet another benchmarking tool?'
 category: [PyData ecosystem, Developer workflows]
@@ -28,7 +28,7 @@ By exploring those stories, we realised that these open source projects have nee
 
 ## What's benchx?
 
-Benchx is a collection of components. You can use any one component individually, integrating it with your existing system, or multiple components together. The components we have are: runner, harness adapters (for asv, Google Benchmark, and pyperf), result store, comparator, and local workbench CLI. Benchx is strict about units, comparisons, and history, so you should always know what's being measured and compared.
+Benchx is a collection of components. You can use any one component individually, integrating it with your existing system, or multiple components together. The components we have are: runner, harness adapters (for asv, Google Benchmark, and pyperf), result store, comparator, and local workbench CLI. Benchx is strict about units, comparisons, and history, so you should always know what's being measured and compared. You can think of it as treating benchmarking like a physical experiment: your benchmarks are the lab protocol, and benchx brings the tooling to run it.
 
 ![Diagram of the benchx components. The bx workbench CLI sends work orders to the runner: bx bench sends one, and bx compare sends one per side per round, alternating between the sides, then asks the comparator to compare the results. The runner drives harness adapters (pyperf, Google Benchmark, and asv suites) and produces results in a shared result schema. These are ingested into the result store (store.parquet), which the comparator reads to decide whether each change is bigger than the noise, giving verdicts such as improved, regressed, no change detected, or indeterminate.](/posts/introducing-benchx/components.svg)
 
@@ -66,4 +66,4 @@ Benchx is designed so that it never builds anything. Environment building is up 
 
 ## Getting involved
 
-Benchx is currently in beta and only got started about three months ago, in a collaboration between Quansight Labs and Arrow. If you'd like to get involved, the most useful way to contribute would probably be by submitting a user story, following [the template on our site](https://benchx-dev.github.io/benchx/user_stories/TEMPLATE/). For anything else, our [issues and discussions on GitHub](https://github.com/benchx-dev/benchx) are open; feel free to reach out!
+Benchx is currently in beta and only got started about three months ago, in a collaboration between Quansight Labs and [Arctos Alliance](https://arctosalliance.org/). It's fully open source, and contributions from outside are very welcome. If you'd like to get involved, the most useful way to contribute would probably be by submitting a user story, following [the template on our site](https://benchx-dev.github.io/benchx/user_stories/TEMPLATE/). If something you need is missing, send us a pull request. For anything else, our [issues and discussions on GitHub](https://github.com/benchx-dev/benchx) are open; feel free to reach out!
