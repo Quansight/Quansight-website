@@ -56,7 +56,9 @@ git worktree add ../myproject-main origin/main
 bx compare ../myproject-main . --adapter pyperf --profile revisions --suite suite.py --rounds 5
 ```
 
-It will handle interleaving for you, and will record details such as OS, Python version, source revisions, benchmark revisions, and whether any local work is uncommitted.
+Benchx will then compare the revisions, alternating between them, and will report on the differences.
+
+But wait, why alternate? The reason is that otherwise, external factors (such as thermal throttling) may affect one revision more than the other. By alternating, and by comparing round by round, we can see whether one side is meaningfully faster or slower than the other. Along the way, we also record details such as OS, Python version, source revisions, benchmark revisions, and whether any local work is uncommitted.
 
 ## Can't I just use asv?
 
