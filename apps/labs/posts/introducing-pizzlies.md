@@ -58,25 +58,13 @@ All numbers below were measured with Python 3.13 on Linux x86-64 (AMD Ryzen AI 9
 
 This is how much space each library takes up once installed, including its required dependencies:
 
-| Library                                        | Installed size |
-| ---------------------------------------------- | -------------: |
-| Pizzlies                                       | 2.4 MB         |
-| DuckDB                                         | 70 MB          |
-| pandas (+ NumPy, python-dateutil, tzdata)      | 97 MB          |
-| PyArrow                                        | 171 MB         |
-| Polars (+ polars-runtime-32)                   | 183 MB         |
+![Bar chart of installed size: Pizzlies (with Narwhals) 2.4 MB, DuckDB 70 MB, pandas (with NumPy, python-dateutil and tzdata) 97 MB, PyArrow 171 MB, Polars (with polars-runtime-32) 183 MB](/posts/introducing-pizzlies/installed-size.svg)
 
 ## Wheel size
 
 The wheel is what you download when you `pip install`, so it's what you pay for in network transfer and installation time:
 
-| Library                        | Wheel size |
-| ------------------------------ | ---------: |
-| Pizzlies                       | 0.6 MB     |
-| DuckDB                         | 25 MB      |
-| pandas (+ NumPy)               | 28 MB      |
-| Polars (+ polars-runtime-32)   | 55 MB      |
-| PyArrow                        | 55 MB      |
+![Bar chart of wheel size: Pizzlies (with Narwhals) 0.6 MB, DuckDB 25 MB, pandas (with NumPy) 28 MB, Polars (with polars-runtime-32) 55 MB, PyArrow 55 MB](/posts/introducing-pizzlies/wheel-size.svg)
 
 The compiled libraries' wheels are platform-specific (the numbers above are for manylinux x86-64), whereas Pizzlies and Narwhals ship a single `py3-none-any` wheel which works everywhere.
 
@@ -84,56 +72,17 @@ The compiled libraries' wheels are platform-specific (the numbers above are for 
 
 Each number is the median of 100 imports, each in a fresh interpreter:
 
-| Library  | Import time |
-| -------- | ----------: |
-| Pizzlies | 40 ms       |
-| DuckDB   | 81 ms       |
-| Polars   | 131 ms      |
-| PyArrow  | 142 ms      |
-| pandas   | 347 ms      |
+![Bar chart of import time: Pizzlies 40 ms, DuckDB 81 ms, Polars 131 ms, PyArrow 142 ms, pandas 347 ms](/posts/introducing-pizzlies/import-time.svg)
 
 ## Speed: TPC-H queries
 
 The TPC-H benchmarks have, for some reason, become the reference benchmark comparison for dataframes. They are somewhat one-dimensional, as they don't fully capture the kind of work that data scientists often perform (for example, where do window functions even appear in the TPC-H queries? They're nowhere to be found). Nonetheless, they do give us an idea of how performant (or not!) Pizzlies is.
 
-We ran the [Narwhals TPC-H queries](https://github.com/narwhals-dev/narwhals/tree/main/tpch) at scale factor 0.1, where the largest table (`lineitem`) has about 600,000 rows. Each library ran the exact same Narwhals code. We loaded all tables into memory before starting the clock, so file reading isn't included, and we checked every result against the reference answers. Pizzlies got all 22 queries right.
+We ran the [Narwhals TPC-H queries](https://github.com/narwhals-dev/narwhals/tree/main/tpch) at scale factor 0.1, where the largest table (`lineitem`) has about 600,000 rows. Each library ran the exact same Narwhals code. We loaded all tables into memory before starting the clock, so file reading isn't included, and we checked every result against the reference answers. Each timing is the median of 5 runs (3 for Pizzlies), and Pizzlies got all 22 queries right.
 
-| Library  | Total, all 22 queries | Geometric mean per query |
-| -------- | --------------------: | -----------------------: |
-| Polars   | 0.53 s                | 0.020 s                  |
-| DuckDB   | 0.78 s                | 0.031 s                  |
-| pandas   | 3.6 s                 | 0.096 s                  |
-| PyArrow  | 11.2 s                | 0.21 s                   |
-| Pizzlies | 15.1 s                | 0.41 s                   |
+![Bar chart of total time for all 22 TPC-H queries: Polars 0.53 s, DuckDB 0.78 s, pandas 3.6 s, PyArrow 11.2 s, Pizzlies 15.1 s](/posts/introducing-pizzlies/tpch.svg)
 
 Pizzlies is the slowest, which is unsurprising. However, every single query still finishes in under 1.4 seconds. If you're only analysing a few hundred thousand rows of data in a cloud function, that may well be fast enough, and you'll have saved up to 180MB of dependencies.
-
-Per-query timings (in seconds, median of 5 runs for the compiled libraries and of 3 runs for Pizzlies):
-
-| Query | Polars | DuckDB | pandas | PyArrow | Pizzlies |
-| ----- | -----: | -----: | -----: | ------: | -------: |
-| q1    | 0.013  | 0.022  | 0.142  | 0.070   | 1.383    |
-| q2    | 0.035  | 0.037  | 0.042  | 0.236   | 0.066    |
-| q3    | 0.021  | 0.028  | 0.101  | 0.579   | 0.523    |
-| q4    | 0.013  | 0.034  | 0.075  | 0.238   | 1.246    |
-| q5    | 0.028  | 0.040  | 0.450  | 0.660   | 0.669    |
-| q6    | 0.003  | 0.007  | 0.024  | 0.008   | 0.987    |
-| q7    | 0.059  | 0.090  | 0.190  | 0.762   | 0.201    |
-| q8    | 0.041  | 0.070  | 0.624  | 2.529   | 1.208    |
-| q9    | 0.036  | 0.051  | 0.484  | 1.825   | 1.112    |
-| q10   | 0.031  | 0.039  | 0.332  | 0.756   | 1.369    |
-| q11   | 0.027  | 0.021  | 0.028  | 0.047   | 0.035    |
-| q12   | 0.015  | 0.026  | 0.122  | 0.412   | 0.729    |
-| q13   | 0.017  | 0.034  | 0.081  | 0.134   | 0.363    |
-| q14   | 0.010  | 0.013  | 0.095  | 0.117   | 1.004    |
-| q15   | 0.013  | 0.022  | 0.027  | 0.013   | 0.816    |
-| q16   | 0.020  | 0.031  | 0.060  | 0.065   | 0.108    |
-| q17   | 0.012  | 0.026  | 0.032  | 0.494   | 0.048    |
-| q18   | 0.032  | 0.033  | 0.058  | 0.312   | 0.262    |
-| q19   | 0.011  | 0.022  | 0.247  | 0.899   | 0.404    |
-| q20   | 0.028  | 0.035  | 0.061  | 0.066   | 1.308    |
-| q21   | 0.048  | 0.072  | 0.264  | 0.928   | 1.241    |
-| q22   | 0.018  | 0.026  | 0.015  | 0.012   | 0.033    |
 
 One caveat: Pizzlies can't read Parquet, so for these benchmarks we read the files with PyArrow and converted them with `pz.from_arrow`. That conversion isn't free: turning the 600,000-row `lineitem` table into Python lists takes about 4.5 seconds, which is more than any single query.
 
