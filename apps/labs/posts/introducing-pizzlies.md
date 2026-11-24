@@ -6,10 +6,10 @@ description: "Extremely lightweight, no dependencies, no compiled code, and Pola
 category: [PyData ecosystem]
 featuredImage:
   src: /posts/introducing-pizzlies/featured.jpg
-  alt: 'Watercolour illustration of a brown-and-white pizzly bear soaring through a blue sky with outstretched paws'
+  alt: 'Watercolour illustration of a brown-and-white pizzly bear soaring through a blue sky over an Arctic landscape, while a polar bear cub watches from the ice below'
 hero:
   imageSrc: /posts/introducing-pizzlies/hero.jpg
-  imageAlt: 'Watercolour illustration of a brown-and-white pizzly bear soaring through a blue sky with outstretched paws'
+  imageAlt: 'Watercolour illustration of a brown-and-white pizzly bear soaring through a blue sky over an Arctic landscape, while a polar bear cub watches from the ice below'
 ---
 
 <!-- TODO: intro paragraph. What Pizzlies is in one or two sentences, who it's for, and why you might care. -->
@@ -140,8 +140,6 @@ One caveat: Pizzlies can't read Parquet, so for these benchmarks we read the fil
 ## Why "Pizzlies"?
 
 The Pizzly is a hybrid between grizzly bears and polar bears. It looks a bit like a polar bear, but is lighter. It also sounds kind of funny, which can only be a good thing.
-
-![A pizzly bear flies through the sky over an Arctic landscape, while a polar bear cub watches from the ice below](/posts/introducing-pizzlies/pizzly-and-polar-bear.jpg)
 
 ## Acknowledgements
 
