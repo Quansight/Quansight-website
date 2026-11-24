@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" width="880" height="400" role="img" aria-labelledby="t d" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
   <title id="t">benchx components</title>
-  <desc id="d">The bx workbench CLI sends work orders to the runner: bx bench sends one, and bx compare sends one per side per round, alternating between the sides, then asks the comparator to compare the results. The runner drives harness adapters (pyperf, Google Benchmark, and asv-format suites timed with pyperf) and emits result documents in the shared result schema. Results are ingested into the result store, which the comparator reads to decide whether each change is bigger than the noise, giving verdicts such as improved, regressed, no change detected, or indeterminate.</desc>
+  <desc id="d">The bx workbench CLI sends work orders to the runner: bx bench sends one, and bx compare sends one per side per round, alternating between the sides, then asks the comparator to compare the results. The runner drives harness adapters (pyperf, Google Benchmark, and asv-format suites timed with pyperf) and emits result documents in the shared result schema. Results are ingested into the result store (store.jsonl by default, or store.parquet), which the comparator reads to decide whether each change is bigger than the noise, giving verdicts such as improved, regressed, no change detected, or indeterminate.</desc>
   <defs>
     <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" overflow="visible">
       <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
@@ -37,7 +37,8 @@
   <!-- Store -->
   <rect x="470" y="150" width="160" height="80" rx="10" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
   <text x="550" y="180" text-anchor="middle" font-size="16" font-weight="600" fill="#0f172a">Result store</text>
-  <text x="550" y="202" text-anchor="middle" font-size="12" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">store.parquet</text>
+  <text x="550" y="200" text-anchor="middle" font-size="12" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">store.jsonl</text>
+  <text x="550" y="216" text-anchor="middle" font-size="12" fill="#475569" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">or store.parquet</text>
 
   <!-- Comparator -->
   <rect x="680" y="150" width="160" height="80" rx="10" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
