@@ -1,6 +1,6 @@
 ---
 title: 'Introducing benchx'
-published: November 20, 2026
+published: November 26, 2026
 authors: [marco-gorelli]
 description: 'Why does the world need yet another benchmarking tool?'
 category: [PyData ecosystem, Developer workflows]
