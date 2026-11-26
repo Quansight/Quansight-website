@@ -15,12 +15,13 @@
     "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
     "marked": "^15.0.0",
-    "rehype-katex": "^7.0.0",
-    "remark-math": "^6.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "rehype-katex": "^7.0.0",
+    "remark-math": "^6.0.0",
     "sharp": "^0.33.5",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.3",
+    "vanilla-cookieconsent": "^3.3.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",
